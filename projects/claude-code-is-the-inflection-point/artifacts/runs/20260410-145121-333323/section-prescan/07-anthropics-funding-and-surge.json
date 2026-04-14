@@ -1,0 +1,74 @@
+{
+  "section_id": "07-anthropics-funding-and-surge",
+  "new_terms": [
+    {
+      "term": "GPT-5.2 High",
+      "suggested_translation": "GPT-5.2 High",
+      "context": "GPT-5.2 High has been benchmark-maxxing for a year and held pole position",
+      "confidence": 1.0
+    },
+    {
+      "term": "SWE-bench",
+      "suggested_translation": "SWE-bench",
+      "context": "The SWE-bench verified result is effectively the same",
+      "confidence": 1.0
+    },
+    {
+      "term": "MMLU-pro",
+      "suggested_translation": "MMLU-pro",
+      "context": "with GPT-5.2 high MMLU-pro and AIME 2025 in favor of 5.2",
+      "confidence": 1.0
+    },
+    {
+      "term": "AIME 2025",
+      "suggested_translation": "AIME 2025",
+      "context": "with GPT-5.2 high MMLU-pro and AIME 2025 in favor of 5.2",
+      "confidence": 1.0
+    },
+    {
+      "term": "tasks-to-tokens",
+      "suggested_translation": "任务-token比",
+      "context": "the efficiency curve of tasks-to-tokens tells a different story",
+      "confidence": 0.9
+    },
+    {
+      "term": "Sonnet 5",
+      "suggested_translation": "Sonnet 5",
+      "context": "The new Sonnet 5 is allegedly coming in at a much smaller model size",
+      "confidence": 1.0
+    },
+    {
+      "term": "chain-of-thought",
+      "suggested_translation": "思维链",
+      "context": "having an extremely long chain-of-thought token context to achieve tasks",
+      "confidence": 1.0
+    },
+    {
+      "term": "pretrain",
+      "suggested_translation": "预训练模型",
+      "context": "A new pretrain is a prerequisite, as higher scale seems to improve longer context tasks.",
+      "confidence": 0.95
+    },
+    {
+      "term": "NPM",
+      "suggested_translation": "NPM",
+      "context": "SemiAnalysis Tokenomics Team, NPM",
+      "confidence": 1.0
+    },
+    {
+      "term": "Gemini",
+      "suggested_translation": "Gemini",
+      "context": "Gemini leading consumer adoption with image models",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "benchmark-maxxing": "唯基准至上 / 卷基准",
+    "token efficiency": "token效率",
+    "long-horizon task": "长周期任务",
+    "context window": "上下文窗口",
+    "coding agents": "编程智能体"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T15:13:26.012751"
+}

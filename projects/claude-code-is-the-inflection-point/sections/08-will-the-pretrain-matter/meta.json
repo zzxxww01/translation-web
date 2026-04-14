@@ -1,0 +1,1689 @@
+{
+  "section_id": "08-will-the-pretrain-matter",
+  "title": "Will the Pretrain Matter?",
+  "title_translation": "预训练还重要吗？",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "A more interesting question to ask is: does pretraining even matter anymore? Using the TCP/IP analogy for agents, having better packets on TCP/IP might not matter as much as having better coordinated features. Kimi 2.5 is an example. The most interesting information from that release isn’t state-of-the-art benchmark performance but rather the agent orchestration.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0132",
+      "parent_block_index": 132,
+      "parent_block_type": "p",
+      "parent_block_markdown": "A more interesting question to ask is: does pretraining even matter anymore? Using the TCP/IP analogy for agents, having better packets on TCP/IP might not matter as much as having better coordinated features. Kimi 2.5 is an example. The most interesting information from that release isn’t state-of-the-art benchmark performance but rather the agent orchestration.",
+      "parent_block_plain_text": "A more interesting question to ask is: does pretraining even matter anymore? Using the TCP/IP analogy for agents, having better packets on TCP/IP might not matter as much as having better coordinated features. Kimi 2.5 is an example. The most interesting information from that release isn’t state-of-the-art benchmark performance but rather the agent orchestration.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 365,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "一个更有趣的问题是：预训练本身还重要吗？如果将智能体比作 TCP/IP 协议，那么优化协议中的数据包（packets），其重要性可能远不如优化协同功能。Kimi 2.5 就是一个例证。该版本发布中最引人注目的信息，并非其顶尖的基准测试性能，而是其智能体编排能力。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.441689",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Every incremental model this year is going to heavily focus more on agent orchestration as well as performance, akin to reasoning did last year. And as Anthropic has moved passed benchmarks, comparing just model to model performance doesn’t make sense anymore, it will be about what agents can achieve together. OpenAI might have been caught flat-footed and missed the strategic inflection. Just as Anthropic and Gemini didn’t fully understand or push the RL and chain-of-thought inflection initially, it now seems like Anthropic is currently in the lead of agentic inflection.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0133",
+      "parent_block_index": 133,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Every incremental model this year is going to heavily focus more on agent orchestration as well as performance, akin to reasoning did last year. And as Anthropic has moved passed benchmarks, comparing just model to model performance doesn’t make sense anymore, it will be about what agents can achieve together. OpenAI might have been caught flat-footed and missed the strategic inflection. Just as Anthropic and Gemini didn’t fully understand or push the RL and chain-of-thought inflection initially, it now seems like Anthropic is currently in the lead of agentic inflection.",
+      "parent_block_plain_text": "Every incremental model this year is going to heavily focus more on agent orchestration as well as performance, akin to reasoning did last year. And as Anthropic has moved passed benchmarks, comparing just model to model performance doesn’t make sense anymore, it will be about what agents can achieve together. OpenAI might have been caught flat-footed and missed the strategic inflection. Just as Anthropic and Gemini didn’t fully understand or push the RL and chain-of-thought inflection initially, it now seems like Anthropic is currently in the lead of agentic inflection.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 577,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "今年发布的每一个增量模型，都将更侧重于智能体编排及性能，这与去年业界对推理能力的追逐如出一辙。随着 Anthropic 超越了单纯的基准测试，仅仅比较模型间的性能已无意义，未来的关键在于智能体协同能达成何种成就。OpenAI 可能因此被打了个措手不及，错失了这一战略拐点。正如 Anthropic 和 Gemini 最初未能完全理解或推动 RL 和思维链的变革一样，现在看来，Anthropic 正引领着智能体化的拐点。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.441758",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Kimi 2.5 from Moonshot AI is a perfect showcase of the models to come. Kimi focused exclusively on the orchestration layer. Kimi 2.5 open-sourced everything in their release except for their agent orchestration layer. PARL or Parallel Agent Reinforcement Learning is a sign of what is to come. Using agents leads to better than Opus 4.5 performance according to in-house benchmarks. Sonnet 5 for example is clearly oriented towards agent swarms akin to how PARL works at Kimi 2.5.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0134",
+      "parent_block_index": 134,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Kimi 2.5 from Moonshot AI is a perfect showcase of the models to come. Kimi focused exclusively on the orchestration layer. Kimi 2.5 open-sourced everything in their release except for their agent orchestration layer. PARL or Parallel Agent Reinforcement Learning is a sign of what is to come. Using agents leads to better than Opus 4.5 performance according to in-house benchmarks. Sonnet 5 for example is clearly oriented towards agent swarms akin to how PARL works at Kimi 2.5.",
+      "parent_block_plain_text": "Kimi 2.5 from Moonshot AI is a perfect showcase of the models to come. Kimi focused exclusively on the orchestration layer. Kimi 2.5 open-sourced everything in their release except for their agent orchestration layer. PARL or Parallel Agent Reinforcement Learning is a sign of what is to come. Using agents leads to better than Opus 4.5 performance according to in-house benchmarks. Sonnet 5 for example is clearly oriented towards agent swarms akin to how PARL works at Kimi 2.5.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 480,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "月之暗面 (Moonshot AI) 的 Kimi 2.5 完美展示了未来模型的形态。Kimi 将全部精力集中在编排层上。在 Kimi 2.5 的发布中，除了智能体编排层，其他所有部分都已开源。其并行智能体强化学习 (PARL) 技术预示了未来的发展方向。根据内部基准测试，通过运用智能体，Kimi 的性能表现已超越 Opus 4.5。例如，Sonnet 5 的设计显然也面向智能体集群，其工作方式与 Kimi 2.5 的 PARL 技术颇为相似。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.441789",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Kimi 2.5’s new orchestration engine (closed source)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0135",
+      "parent_block_index": 135,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Kimi 2.5’s new orchestration engine (closed source)",
+      "parent_block_plain_text": "Kimi 2.5’s new orchestration engine (closed source)",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 51,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Kimi 2.5 全新的编排引擎（未开源）",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.441818",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!fOEe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffce483cf-4a0a-4291-b937-6650a5ed848c_1191x646.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!fOEe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffce483cf-4a0a-4291-b937-6650a5ed848c_1191x646.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0136",
+      "parent_block_index": 136,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!fOEe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffce483cf-4a0a-4291-b937-6650a5ed848c_1191x646.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!fOEe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffce483cf-4a0a-4291-b937-6650a5ed848c_1191x646.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!fOEe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffce483cf-4a0a-4291-b937-6650a5ed848c_1191x646.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!fOEe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffce483cf-4a0a-4291-b937-6650a5ed848c_1191x646.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.441842",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!fOEe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffce483cf-4a0a-4291-b937-6650a5ed848c_1191x646.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: Kimi paper",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Kimi paper",
+          "start": 8,
+          "end": 18,
+          "href": "https://www.kimi.com/blog/kimi-k2-5.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0137",
+      "parent_block_index": 137,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Kimi paper](https://www.kimi.com/blog/kimi-k2-5.html)",
+      "parent_block_plain_text": "Source: Kimi paper",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Kimi paper",
+          "start": 8,
+          "end": 18,
+          "href": "https://www.kimi.com/blog/kimi-k2-5.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 18,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Kimi 论文",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627013",
+          "tokenized_text": "来源：[[[LINK_1|Kimi 论文]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "资料来源：Kimi 论文",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.441951",
+          "tokenized_text": "资料来源：[[[LINK_1|Kimi 论文]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Kimi 论文",
+      "confirmed_tokenized": "来源：[[[LINK_1|Kimi 论文]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!psG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2260d62d-0cce-4be8-9cb6-e50fdf9dae6f_1183x627.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!psG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2260d62d-0cce-4be8-9cb6-e50fdf9dae6f_1183x627.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0138",
+      "parent_block_index": 138,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!psG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2260d62d-0cce-4be8-9cb6-e50fdf9dae6f_1183x627.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!psG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2260d62d-0cce-4be8-9cb6-e50fdf9dae6f_1183x627.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!psG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2260d62d-0cce-4be8-9cb6-e50fdf9dae6f_1183x627.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!psG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2260d62d-0cce-4be8-9cb6-e50fdf9dae6f_1183x627.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.441979",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!psG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2260d62d-0cce-4be8-9cb6-e50fdf9dae6f_1183x627.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "source: Kimi 2.5",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "source: Kimi 2.5",
+          "start": 0,
+          "end": 16,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0139",
+      "parent_block_index": 139,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*source: Kimi 2.5*",
+      "parent_block_plain_text": "source: Kimi 2.5",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "source: Kimi 2.5",
+          "start": 0,
+          "end": 16,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 16,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Kimi 2.5",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627025",
+          "tokenized_text": "[[[EM_1|来源：Kimi 2.5]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "资料来源：Kimi 2.5",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442057",
+          "tokenized_text": "[[[EM_1|资料来源：Kimi 2.5]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Kimi 2.5",
+      "confirmed_tokenized": "[[[EM_1|来源：Kimi 2.5]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Agent orchestration is the new CoT. Broad parallelization of agents will be the next capability akin to how having longer chain of thought tokens leads to better results. Soon there will be entire armies of agents spawned to complete a task at scale!",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0140",
+      "parent_block_index": 140,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Agent orchestration is the new CoT. Broad parallelization of agents will be the next capability akin to how having longer chain of thought tokens leads to better results. Soon there will be entire armies of agents spawned to complete a task at scale!",
+      "parent_block_plain_text": "Agent orchestration is the new CoT. Broad parallelization of agents will be the next capability akin to how having longer chain of thought tokens leads to better results. Soon there will be entire armies of agents spawned to complete a task at scale!",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 250,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "智能体编排就是新的 CoT。智能体（指能够自主规划并执行复杂任务的 AI）的大规模并行化将成为下一代核心能力，其作用逻辑与更长的思维链 Token 带来更优结果如出一辙。很快，系统将大规模生成成群结队的智能体大军，以完成各项任务！",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442082",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!kH7c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67c9c93f-d03a-4dd6-8d5a-30b0c61bb846_1191x688.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kH7c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67c9c93f-d03a-4dd6-8d5a-30b0c61bb846_1191x688.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0141",
+      "parent_block_index": 141,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!kH7c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67c9c93f-d03a-4dd6-8d5a-30b0c61bb846_1191x688.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!kH7c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67c9c93f-d03a-4dd6-8d5a-30b0c61bb846_1191x688.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kH7c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67c9c93f-d03a-4dd6-8d5a-30b0c61bb846_1191x688.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!kH7c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67c9c93f-d03a-4dd6-8d5a-30b0c61bb846_1191x688.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442105",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!kH7c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67c9c93f-d03a-4dd6-8d5a-30b0c61bb846_1191x688.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "source: Kimi 2.5",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "source: Kimi 2.5",
+          "start": 0,
+          "end": 16,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0142",
+      "parent_block_index": 142,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*source: Kimi 2.5*",
+      "parent_block_plain_text": "source: Kimi 2.5",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "source: Kimi 2.5",
+          "start": 0,
+          "end": 16,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 16,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Kimi 2.5",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627037",
+          "tokenized_text": "[[[EM_1|来源：Kimi 2.5]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "资料来源：Kimi 2.5",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442168",
+          "tokenized_text": "[[[EM_1|资料来源：Kimi 2.5]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Kimi 2.5",
+      "confirmed_tokenized": "[[[EM_1|来源：Kimi 2.5]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "This seems as ripe of a frontier as the initial o1 performance gains, but for the first time it’s not OpenAI in the lead.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0143",
+      "parent_block_index": 143,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This seems as ripe of a frontier as the initial o1 performance gains, but for the first time it’s not OpenAI in the lead.",
+      "parent_block_plain_text": "This seems as ripe of a frontier as the initial o1 performance gains, but for the first time it’s not OpenAI in the lead.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 121,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一前沿阵地潜力巨大，堪比最初 o1 模型实现的性能飞跃。但这是第一次，领跑者不再是 OpenAI。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442198",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "But before the excitement of limitless agent scaling, there is an issue that will be where competition actually is this year. Anthropic in recent research found that “across all tasks and models, the longer models spend reasoning and taking actions, the more incoherent they become. This holds whether we measure reasoning tokens, agent actions, or optimizer steps.”",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "recent research",
+          "start": 139,
+          "end": 154,
+          "href": "https://alignment.anthropic.com/2026/hot-mess-of-ai/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "strong",
+          "text": "across all tasks and models, the longer models spend reasoning and taking actions, the more incoherent they become. This holds whether we measure reasoning tokens, agent actions, or optimizer steps",
+          "start": 167,
+          "end": 364,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0144",
+      "parent_block_index": 144,
+      "parent_block_type": "p",
+      "parent_block_markdown": "But before the excitement of limitless agent scaling, there is an issue that will be where competition actually is this year. Anthropic in [recent research](https://alignment.anthropic.com/2026/hot-mess-of-ai/) found that “**across all tasks and models, the longer models spend reasoning and taking actions, the more incoherent they become. This holds whether we measure reasoning tokens, agent actions, or optimizer steps**.”",
+      "parent_block_plain_text": "But before the excitement of limitless agent scaling, there is an issue that will be where competition actually is this year. Anthropic in recent research found that “across all tasks and models, the longer models spend reasoning and taking actions, the more incoherent they become. This holds whether we measure reasoning tokens, agent actions, or optimizer steps.”",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "recent research",
+          "start": 139,
+          "end": 154,
+          "href": "https://alignment.anthropic.com/2026/hot-mess-of-ai/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "strong",
+          "text": "across all tasks and models, the longer models spend reasoning and taking actions, the more incoherent they become. This holds whether we measure reasoning tokens, agent actions, or optimizer steps",
+          "start": 167,
+          "end": 364,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 366,
+      "expected_tokens": [
+        "LINK_1",
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，在为智能体无限扩展感到兴奋之前，有一个问题必将成为今年真正的竞争焦点。Anthropic 在近期研究中发现：“在所有任务和模型中，模型花费在推理和执行动作上的时间越长，其表现就越语无伦次。无论我们衡量的是推理 Token、智能体动作还是优化器步数，这一结论都成立。”",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442308",
+          "tokenized_text": "然而，在为智能体无限扩展感到兴奋之前，有一个问题必将成为今年真正的竞争焦点。Anthropic 在[[[LINK_1|近期研究]]]中发现：“[[[STRONG_1|在所有任务和模型中，模型花费在推理和执行动作上的时间越长，其表现就越语无伦次。无论我们衡量的是推理 Token、智能体动作还是优化器步数，这一结论都成立]]]。”",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Power users of the models report the same, and the author mostly agrees that longer context windows devolve into incoherence.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Power users of the models report the same",
+          "start": 0,
+          "end": 41,
+          "href": "https://x.com/NathanFlurry/status/2014876907247149251",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0145",
+      "parent_block_index": 145,
+      "parent_block_type": "p",
+      "parent_block_markdown": "[Power users of the models report the same](https://x.com/NathanFlurry/status/2014876907247149251), and the author mostly agrees that longer context windows devolve into incoherence.",
+      "parent_block_plain_text": "Power users of the models report the same, and the author mostly agrees that longer context windows devolve into incoherence.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Power users of the models report the same",
+          "start": 0,
+          "end": 41,
+          "href": "https://x.com/NathanFlurry/status/2014876907247149251",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 125,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "模型的重度用户也反馈了同样的情况，本文作者也基本认同这一观点：更长的上下文窗口最终会退化为语无伦次的输出。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442380",
+          "tokenized_text": "[[[LINK_1|模型的重度用户也反馈了同样的情况]]]，本文作者也基本认同这一观点：更长的上下文窗口最终会退化为语无伦次的输出。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "https://substackcdn.com/image/fetch/$s_!YQxQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbc120a1-eddc-42f4-b5ef-100791815e28_997x633.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YQxQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbc120a1-eddc-42f4-b5ef-100791815e28_997x633.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0146",
+      "parent_block_index": 146,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!YQxQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbc120a1-eddc-42f4-b5ef-100791815e28_997x633.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!YQxQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbc120a1-eddc-42f4-b5ef-100791815e28_997x633.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YQxQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbc120a1-eddc-42f4-b5ef-100791815e28_997x633.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!YQxQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbc120a1-eddc-42f4-b5ef-100791815e28_997x633.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442411",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!YQxQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbc120a1-eddc-42f4-b5ef-100791815e28_997x633.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Source: Anthropic",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0147",
+      "parent_block_index": 147,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Anthropic",
+      "parent_block_plain_text": "Source: Anthropic",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 17,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Anthropic",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627049",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "资料来源：Anthropic",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442434",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Anthropic",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "This frames the advantage that Anthropic’s token efficiency has, and why we think that task in the minimum amount of tokens is going to be one of the primary benchmarks of quality. The more coherence in a single context window, the more agents can be scaled up, etc. Token efficiency at the model level is likely going to tip off who is actually at the lead.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0148",
+      "parent_block_index": 148,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This frames the advantage that Anthropic’s token efficiency has, and why we think that task in the minimum amount of tokens is going to be one of the primary benchmarks of quality. The more coherence in a single context window, the more agents can be scaled up, etc. Token efficiency at the model level is likely going to tip off who is actually at the lead.",
+      "parent_block_plain_text": "This frames the advantage that Anthropic’s token efficiency has, and why we think that task in the minimum amount of tokens is going to be one of the primary benchmarks of quality. The more coherence in a single context window, the more agents can be scaled up, etc. Token efficiency at the model level is likely going to tip off who is actually at the lead.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 358,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这凸显了 Anthropic 在 token 效率方面的优势。这也解释了为什么我们认为，用最少的 token 完成任务将成为核心的质量基准之一。单一上下文窗口内的连贯性越强，智能体（指能够自主规划并执行复杂任务的 AI）的扩展空间就越大。模型层面的 token 效率很可能将揭示谁才是真正的领跑者。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442460",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "But amid the new rise in Claude Code, Anthropic is limited by FLOPs and MWs, not in terms of capability, and this new non-consumer driven explosion in demand is the key inflection point to watch for 2026. With accelerating users comes accelerating compute demands, and we think that Anthropics coming $350 billion dollar valuation is going to fund their expansion into the GW game in a big way. Below is our representation of the catchup in power that Anthropic is pushing.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0149",
+      "parent_block_index": 149,
+      "parent_block_type": "p",
+      "parent_block_markdown": "But amid the new rise in Claude Code, Anthropic is limited by FLOPs and MWs, not in terms of capability, and this new non-consumer driven explosion in demand is the key inflection point to watch for 2026. With accelerating users comes accelerating compute demands, and we think that Anthropics coming $350 billion dollar valuation is going to fund their expansion into the GW game in a big way. Below is our representation of the catchup in power that Anthropic is pushing.",
+      "parent_block_plain_text": "But amid the new rise in Claude Code, Anthropic is limited by FLOPs and MWs, not in terms of capability, and this new non-consumer driven explosion in demand is the key inflection point to watch for 2026. With accelerating users comes accelerating compute demands, and we think that Anthropics coming $350 billion dollar valuation is going to fund their expansion into the GW game in a big way. Below is our representation of the catchup in power that Anthropic is pushing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 473,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，在 Claude Code 强势崛起之际，制约 Anthropic 的是 FLOPS 和电力（MW），而非模型能力。这种非消费者驱动的新一轮需求爆发，是 2026 年值得关注的关键拐点。用户增长加速必然带来计算需求飙升。我们认为，Anthropic 即将达成的 3500 亿美元估值，将为其大规模进军吉瓦（GW）级电力博弈提供充裕资金。下图展示了 Anthropic 正在推进的电力追赶态势。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442485",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0150",
+      "parent_block_index": 150,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442507",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)",
+          "start": 0,
+          "end": 83,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0151",
+      "parent_block_index": 151,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)*",
+      "parent_block_plain_text": "source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)",
+          "start": 0,
+          "end": 83,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 83,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626859",
+          "tokenized_text": "[[[EM_1|来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "资料来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)（译注：指作者专用的 AI 公司经济分析模型，而非加密货币领域的代币经济学）",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442580",
+          "tokenized_text": "[[[EM_1|资料来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)（译注：指作者专用的 AI 公司经济分析模型，而非加密货币领域的代币经济学）]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)",
+      "confirmed_tokenized": "[[[EM_1|来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "This is how Anthropic wins. But it’s OpenAI’s turn to show the world that they can pre-train a new model and potentially take the pole position again. The race seems more open than it was last year, and we are excited to see the pace of change continue.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0152",
+      "parent_block_index": 152,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This is how Anthropic wins. But it’s OpenAI’s turn to show the world that they can pre-train a new model and potentially take the pole position again. The race seems more open than it was last year, and we are excited to see the pace of change continue.",
+      "parent_block_plain_text": "This is how Anthropic wins. But it’s OpenAI’s turn to show the world that they can pre-train a new model and potentially take the pole position again. The race seems more open than it was last year, and we are excited to see the pace of change continue.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 253,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Anthropic 正是凭此制胜。但现在轮到 OpenAI 向世界证明，他们能够预训练出新模型，并有望重夺领跑地位。这场竞赛似乎比去年更具悬念，我们对持续变革的步伐感到兴奋。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442606",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "On a parting note, we are going to share some of the information work we’ve been doing at SemiAnalysis with our new Claude Code overlords. Seeing really is believing, and we believe we are in a new era of time when the marginal cost of creating software as well as processing information has gone to zero. Things will change at an accelerated rate from here.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0153",
+      "parent_block_index": 153,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On a parting note, we are going to share some of the information work we’ve been doing at SemiAnalysis with our new Claude Code overlords. Seeing really is believing, and we believe we are in a new era of time when the marginal cost of creating software as well as processing information has gone to zero. Things will change at an accelerated rate from here.",
+      "parent_block_plain_text": "On a parting note, we are going to share some of the information work we’ve been doing at SemiAnalysis with our new Claude Code overlords. Seeing really is believing, and we believe we are in a new era of time when the marginal cost of creating software as well as processing information has gone to zero. Things will change at an accelerated rate from here.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 358,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在文章最后，我们将分享 SemiAnalysis 团队与我们的新晋霸主 Claude Code 共同完成的一些信息处理工作。眼见为实。我们笃定自己正处于一个全新时代：在这个时代，创建软件和处理信息的边际成本已降至零。从此刻起，事物变革的速度将不断加快。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:36:37.442633",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.565,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "翻译指南明确要求在核心概念“智能体”首次使用时提供括号释义。然而，译文未在首现处（第 0 段）加注，反而将释义放在了第 8 段，并在第 16 段再次重复加注。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

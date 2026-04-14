@@ -1,0 +1,1356 @@
+{
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "title_translation": null,
+      "paragraph_count": 4,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Prices are doubling again, Supercycle is bigger, and could last longer than you think"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By Dylan Patel, Ray Wang, Myron Xie, and 2 others"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Feb 06, 2026 · Paid"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Prices of memory are going crazy. SemiAnalysis has been calling this out for over a year since late 2024. The scariest thing is that we aren't even close to the"
+        }
+      ]
+    },
+    {
+      "section_id": "01-the-inevitability-of-memory-cy",
+      "title": "The Inevitability of Memory Cycles: A History of Booms and Busts",
+      "title_translation": null,
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Since its commercial introduction in the 1970s, DRAM has benefited from the two scaling laws that defined the semiconductor industry: Moore’s Law and Dennard sc"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For much of the industry’s history, DRAM density scaled faster than logic, doubling roughly every 18 months instead of 24 months and driving dramatic cost reduc"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For more details on the industry and DRAM basics, check out our technical deep dive:"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Memory Wall: Past, Present, and Future of DRAM - Dylan Patel, Jeff Koch, and 3 others · September 3, 2024"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Yet DRAM scaling has slowed significantly over the past few decades, and density gains over time have shrunk. Over the past decade, DRAM density has increased b"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Bitlines and sense amplifiers, once secondary concerns, are now dominant constraints. Every incremental shrink reduces signal margin, increases variability, and"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!CvGg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Micron"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "An easy way to understand the technical challenge in DRAM scaling is to think of a DRAM cell as a tiny bucket that holds electricity instead of water. Each buck"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This is a problem. When the system tries to read the data, it has to detect this very faint electrical signal and distinguish it from noise. The wires that conn"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Lw1D!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Together, these constraints explain why DRAM density has stagnated and why DRAM scaling has slowed down significantly over the years. The collapse of DRAM scali"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As density gains slow, cost per bit reductions have slowed down. DRAM pricing is now more dependent on capacity additions and cyclical supply-demand dynamics ra"
+        }
+      ]
+    },
+    {
+      "section_id": "02-memory-cycle-part-ii-key-feat",
+      "title": "Memory Cycle Part II: Key Features of a Cycle",
+      "title_translation": null,
+      "paragraph_count": 48,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The memory industry has been defined by commoditization, which comes with cyclicality. This outcome reflects a combination of industry-wide competitive behavior"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At its core, memory’s cyclicality is driven by timing mismatches between demand changes and corresponding supply responses. Aside from the buffer of short-term "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Memory manufacturing, much like logic, is among the most capital-intensive industries in the world. Building leading-edge DRAM and NAND fabs requires multi-bill"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!7rCY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "These heavy capital investments mean that suppliers need to operate with high utilization rates to generate cash profits to earn a payback. However, utilization"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Still, because the majority of the cost is already sunk, the fab is built and equipment purchased, suppliers are better off running wafers so long as they can s"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Memory supply can be expanded by migrating to more advanced process nodes with yield improvements, which increases bit supply without requiring new “greenfield”"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The impact of node migration, however, is dynamic over time. When a new node is first introduced, initial yields are typically lower, limiting effective output "
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another thing is that node transitions do not halt simply because demand weakens. Consequently, bit supply growth can remain robust well into downturns. This ex"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In a downturn, the impact of pricing declines can be existential for memory suppliers. By the time pricing rolls over, manufacturers have already committed and "
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The risks inherent in “memory economics” are high. A highly commoditized product with elastic demand versus a capex-heavy, long-timeline, inelastic supply produ"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "During the Windows PC supercycle of the early to mid-1990s, there were approximately 20 meaningful DRAM suppliers. Elevated demand and strong pricing attracted "
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!hXg_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "From a demand perspective, memory consumption is not always linear or predictable. During mature phases of existing product cycles, demand growth can be relativ"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There have been several of these product cycle inflections over the past few decades. New computing platforms like the PC, the smartphone, cloud computing, and "
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "However, such inflection-driven upcycles have not been sustainable in the long run. Prior memory supercycles have tended to peak and roll into downcycles within"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!TIHQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "From a financial market perspective, participants are forward-looking. Investors anticipate shifts in the supply–demand balance and pricing well before supplier"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There are a few especially interesting examples, worth revisiting in the context of the current memory supercycle: the 1993 Windows PC supercycle, the cloud and"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "During the 1993 memory supercycle, the DRAM industry entered a strong upcycle driven by the rapid adoption of Windows PCs and the broad implementation of graphi"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!KY1M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On the supply side, the industry was emerging from a prolonged downturn in the late 1980s because of intensified competition, declining margins, and a significa"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!H3iI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis estimates"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Unsurprisingly, this set the stage for a downturn. Japanese incumbents and then-emerging Korean players responded with aggressive capacity expansion—bringing ne"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rapid yield improvements further amplified supply, driving a sharp increase in bits per wafer. By 1995–1996, the market gradually flipped from shortage to overs"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qAAO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Integrated Circuit Engineering, SemiAnalysis"
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 2010 memory supercycle started in roughly the 2nd half of 2009, driven by two simultaneous demand inflections: (1) the smartphone rapid adoption globally, l"
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On top of this, smartphone demand growth was a near-vertical volume step-up. Global smartphonec by broader Android price-tier penetration and iPhone scaling. On"
+        },
+        {
+          "id": "p034",
+          "index": 34,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!5i8t!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p035",
+          "index": 35,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis estimates"
+        },
+        {
+          "id": "p036",
+          "index": 36,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Similar to prior cycles, the sudden demand surge combined with constrained supply drove a meaningful increase in DRAM pricing. What differentiated the 2010 cycl"
+        },
+        {
+          "id": "p037",
+          "index": 37,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Moreover, DRAM pricing in this cycle peaked earlier and rolled over more quickly than in previous upcycles. Pricing momentum proved difficult to sustain even wi"
+        },
+        {
+          "id": "p038",
+          "index": 38,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another key development of this cycle was the rapid standardization of mobile DRAM which further accelerated commoditization. LPDDR2 was standardized by JEDEC i"
+        },
+        {
+          "id": "p039",
+          "index": 39,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 2017–2018 memory supercycle is still a fresh memory for many in the industry and is oft-cited as a good analogue for today’s supercycle. On the demand side,"
+        },
+        {
+          "id": "p040",
+          "index": 40,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This pricing environment translated directly into record financial performance, peaking in 2H18. Memory suppliers generated unprecedented levels of free cash fl"
+        },
+        {
+          "id": "p041",
+          "index": 41,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Yet, as with the prior cycles, the fundamental cyclical dynamics of the industry prevailed. A few familiar factors developed in late 2018 and 2019: (1) supply g"
+        },
+        {
+          "id": "p042",
+          "index": 42,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The most recent DRAM upcycle was catalyzed during the COVID-era “chip crisis,” an unprecedented synchronization of demand shock and supply disruption. Global lo"
+        },
+        {
+          "id": "p043",
+          "index": 43,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Beyond surging end-demand, purchasing behavior amplified the cycle, especially from the enterprise side. OEMs, hyperscalers, and channel partners were taking a "
+        },
+        {
+          "id": "p044",
+          "index": 44,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "From the DRAM suppliers’ perspective, it became increasingly difficult to distinguish true end-demand from panic ordering. The result was a rapid drawdown of in"
+        },
+        {
+          "id": "p045",
+          "index": 45,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On the supply side, the industry was structurally constrained. During the pandemic, suppliers faced additional friction from labor shortages, logistics disrupti"
+        },
+        {
+          "id": "p046",
+          "index": 46,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Capex decisions during this period were therefore cautious and selective. Rather than aggressive greenfield expansion, memory suppliers prioritized node migrati"
+        },
+        {
+          "id": "p047",
+          "index": 47,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Crucially, this cycle reset industry behavior and expectations. Memory suppliers emerged with a stronger appreciation for disciplined capex, tighter inventory m"
+        }
+      ]
+    },
+    {
+      "section_id": "03-ai-driven-memory-supercycle-b",
+      "title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve",
+      "title_translation": null,
+      "paragraph_count": 56,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For those who have lived through multiple memory cycles, the central question when it comes to this supercycle is the same: when will this cycle peak? It is nat"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Currently, the DRAM industry is operating in a deeply supply-constrained environment, and based on our Memory Industry Model, we believe the supply–demand imbal"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Below, we share:"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Our forecast for DRAM and HBM supply/demand mismatch from our Memory Industry Model, through 2027"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "HBM4 qualification: how is each supplier doing, market share % for Rubin"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "DRAM wafer- and bit-capacity data with HBM broken out"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Upgrades forecast: trends in wafer capacity by node with fab-by-fab details"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "DRAM pricing forecast out through 2027"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Last, we discuss the factors and timing for the end of the cycle"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As a bonus, we’ve also included DRAM EUV layer trends and WFE capex forecasts"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "…7% below demand in 2026. Within this, the HBM shortfall is expected to widen from ~5% this year to ~6% in 2026, and further to ~9% in 2027."
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Importantly, commodity DRAM is also forecast to remain structurally tight, with an estimated ~7% supply deficit persisting through both 2026 and 2027. At this d"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!6F4h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This magnitude of shortage is rare in the modern history of the memory industry, both in terms of its severity and its duration. Even during the 2017–2018 memor"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In our view, three key and interrelated drivers underpin this ongoing supercycle and are likely to sustain the supply shortfall through 2027 and potentially 202"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!lsKv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "First is the accelerating HBM/DRAM demand and HBM’s rapidly expanding capacity. The surge in compute demand is translating into a sharp increase in memory requi"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Beginning around 2023, we have observed a clear and steadily accelerating trend in HBM demand, accompanied by increasingly aggressive responses from memory supp"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!-f7p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "And the capacity expansion in HBM is far from complete. We believe additional capacity expansion is already underway, with HBM wafer capacity reaching approxima"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But what’s important here is not just the significant capacity expansion in HBM, but also a meaningful trade-off between HBM and commodity DRAM wafer allocation"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The impact of materially expanding HBM capacity is unambiguous. When we examine HBM’s wafer intensity within overall DRAM production, we find that HBM wafer cap"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "One may ask why memory makers are moving so aggressively to expand HBM capacity. We believe the rationale is twofold. First, HBM is increasingly viewed as a str"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Second, HBM’s complex front-end and back-end manufacturing requirements enable greater product differentiation relative to commodity DRAM. Performance character"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Yet, such a significant expansion of HBM capacity carries meaningful cost and strategic challenges. As memory manufacturers increasingly allocate both existing "
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The first-order impact requires little explanation: reallocating wafer capacity to HBM directly reduces the number of wafers available for commodity DRAM produc"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!WeYd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "HBM uses larger die sizes as each HBM stack consists of multiple large DRAM dies optimized for bandwidth rather than density. HBM’s larger die size is due to th"
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "HBM also requires TSV and a series of incremental process steps—including wafer thinning and backside processing—that do not exist in standard DRAM manufacturin"
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!rRPm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p034",
+          "index": 34,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: Applied Materials"
+        },
+        {
+          "id": "p035",
+          "index": 35,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Stacking and advanced packaging (primary bonding) yields also meaningfully impact HBM output. Even when individual DRAM die yields are high, the compounded yiel"
+        },
+        {
+          "id": "p036",
+          "index": 36,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!8I-r!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p037",
+          "index": 37,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SK Hynix"
+        },
+        {
+          "id": "p038",
+          "index": 38,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We think what distinguishes this cycle is that the product transition driving demand - HBM - is far more manufacturing-intensive, effectively introducing a form"
+        },
+        {
+          "id": "p039",
+          "index": 39,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "NVIDIA, for example, the transition from Blackwell to Blackwell Ultra and Rubin increases HBM capacity by ~50%, with Rubin Ultra driving a further ~4× jump in s"
+        },
+        {
+          "id": "p040",
+          "index": 40,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We estimate that HBM demand alone will account for more than 10% of total DRAM demand by the end of 2027, layered on top of the already substantial server DRAM "
+        },
+        {
+          "id": "p041",
+          "index": 41,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Deks!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p042",
+          "index": 42,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p043",
+          "index": 43,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The HBM–DRAM conundrum becomes even more complex when factoring in market reactions to the worsening DRAM shortage driven by HBM capacity reallocation. As commo"
+        },
+        {
+          "id": "p044",
+          "index": 44,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We view this as a significant and crucial challenge for memory suppliers. Given the combination of an attractive margin outlook and superior bit output from man"
+        },
+        {
+          "id": "p045",
+          "index": 45,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "One major contributor to the current shortage that we have not yet discussed in depth is limited cleanroom availability. Following the memory upcycle during the"
+        },
+        {
+          "id": "p046",
+          "index": 46,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As we track DRAM capacity additions across all major suppliers, we estimate that virtually all incremental wafer capacity in 2026 will be concentrated in just t"
+        },
+        {
+          "id": "p047",
+          "index": 47,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung’s P4 Phase 4 is likely to come online later this year, following the fully equipped Phase 1 and 3. Although Phase 2 of P4 was initially scheduled to com"
+        },
+        {
+          "id": "p048",
+          "index": 48,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SK hynix’s Yongin Phase 1 is not expected to bring its cleanroom online until February 2027, with only limited wafer output beginning in 3Q27 due to time for eq"
+        },
+        {
+          "id": "p049",
+          "index": 49,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Even Micron’s recently acquired P5 Tongluo fab from PSMC is unlikely to contribute meaningful wafer output until 2H27. At full utilization, the site offers a ma"
+        },
+        {
+          "id": "p050",
+          "index": 50,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "With these constraints in mind, the central question is how the industry can meaningfully expand bit supply. We currently forecast ~21% bit growth this year and"
+        },
+        {
+          "id": "p051",
+          "index": 51,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Accordingly, we expect the combined 1b and 1c capacity across the three major memory suppliers to increase by approximately 80% from year-end 4Q25 through 4Q27."
+        },
+        {
+          "id": "p052",
+          "index": 52,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!X-sw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p053",
+          "index": 53,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p054",
+          "index": 54,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This is a storyline we have mentioned and seen in previous DRAM upcycles, where the memory suppliers are leveraging node migration for more bit output to fulfil"
+        },
+        {
+          "id": "p055",
+          "index": 55,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Yet one should note that DRAM node migration introduces meaningful execution friction. New tool sets must be installed, process windows re-optimized, and yields"
+        }
+      ]
+    },
+    {
+      "section_id": "04-supercycle-could-be-a-double-e",
+      "title": "Supercycle Could be a Double-Edged Sword",
+      "title_translation": null,
+      "paragraph_count": 13,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Unsurprisingly, the first dynamic to emerge in a memory supercycle is an accelerating price uptrend across DRAM products, consistent with patterns observed in p"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As we believe the structural shortage is unlikely to improve and the supply environment is set to worsen, DRAM pricing could increase by another ~2× on a 4Q25 v"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!M-HO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Memory price increases are clearly beneficial for memory manufacturers, they come at the expense of customers and the broader end markets. Rising memory content"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s latest earnings commentary confirmed this and suggested that the larger impact from memory will begin in 2H26, despite more favorable positioning in 1H2"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In contrast, Tier-1.5 and Tier-2 mobile OEMs—particularly Chinese vendors—face significantly greater margin stress given limited ability to pass through higher "
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A similar dynamic is emerging in PCs, where OEMs have already implemented selective price increases and are considering specification downgrades in mid- and low"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As a result, we remain cautious—and in some cases bearish—on select names across this ecosystem. Given the potential impact on demand elasticity, it will be cri"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Beyond mobile, PCs, and other consumer electronics, we believe it is also important to consider the impact of “memoryflation” on AI servers and ODMs as the indu"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For further details, please refer to our AI TCO Model and Core Research, where we provide a detailed BoM breakdown and analysis of memory’s impact on AI server "
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!h9Ft!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis Core Research, AI Cloud TCO Model, and Memory Model"
+        }
+      ]
+    },
+    {
+      "section_id": "05-hbm4-competition-and-hbm3e-pri",
+      "title": "HBM4 Competition and HBM3E Pricing",
+      "title_translation": null,
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Unlike commodity DRAM, HBM typically provides suppliers with greater visibility and long-term volume commitments, but it also limits the ability to raise prices"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The pricing impact is evident, but in reality, it has proven far more significant than many expected. The rapid escalation in commodity DRAM pricing is now infl"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Back in early 4Q25, market consensus shifted toward a roughly 15–20% ASP decline for HBM3E 12-hi in 2026. This will not be the case in our view, which we noted "
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "It’s also important to address the HBM4 qualification progress: based on our supply-chain checks, the latest HBM4 engineering samples from memory suppliers rema"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At a more granular level, Samsung’s HBM4 front-end (1c) appears competitive on both performance and power efficiency, in some cases consuming less power than SK"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "That said, even as Samsung narrows the performance gap in HBM4, SK Hynix’s proven track record and reliability continue to position it as the dominant HBM suppl"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As we move into 2Q this year, we expect to gain improved visibility into the HBM4 competitive landscape. Memory suppliers should continue to enhance HBM4 qualit"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We believe the technical complexity of HBM4 could pressure supplier margins due to a more difficult yield learning curve and slow the pace of the product mix tr"
+        }
+      ]
+    },
+    {
+      "section_id": "06-how-the-cycle-will-evolve",
+      "title": "How the Cycle Will Evolve",
+      "title_translation": null,
+      "paragraph_count": 19,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "History suggests that even the largest memory supercycles do not last indefinitely, and we believe this cycle will be no exception. That said, as we have previo"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "More fab pull-ins and capacity expansion: We expect additional fab schedule pull-ins across all three major memory suppliers as capacity expansion plans acceler"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Significant node migration: As previously outlined, we believe the industry will undergo large-scale node migration to 1b and 1c over the next two years, which "
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Ongoing HBM acceleration and sustained pressure on commodity: We believe memory suppliers will continue to prioritize HBM as their top strategic focus, given it"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A unifying theme across these three developments - fab pull-ins, accelerated node migration, and increased HBM prioritization - is rising demand for WFE. To ena"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We expect this dynamic to increasingly extend into the memory ecosystem, benefiting both front-end and back-end equipment suppliers. In fact, just this week, AS"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "All 3 leading memory producers are increasing EUV layer counts in newer processes. This is necessary for scaling in general, and helps with HBM performance as i"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!bxgD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis WFE Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There are a few clear areas where EUV can replace DUV multipatterning, most in the congested region where access transistors (the devices that allow read and wr"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Next the bitline, wordline, gate, and active area cuts are good candidates for EUV. Narrow lines are relatively easy to produce with DUV multipatterning (pitch "
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We wrote more about this 6F2 architecture, how it scales, and what will break first as it continues to scale in future nodes as part of our VLSI 2025 recap."
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!M1y7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Storage node contact (denoted BC for buried contact), bitline cut (the narrow gap between bitline ends), and bitline contact (denoted DC here) are the first lay"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "DRAM EUV intensity will increase substantially in the short term, as chipmakers are rushing to convert as much capacity as they can to the latest, EUV-heavy, pr"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Want complete details on the WFE supercycle? Model subscribers had them long before this report: [https://semianalysis.com/wafer-fab-model/](https://semianalysi"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!78Ir!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Source: SemiAnalysis WFE Model - Sales@SemiAnalysis.com"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "DRAM WFE capex will increase by roughly 26%, 34%, and 20% for Samsung, SK hynix, and Micron, respectively, in 2026. These increases are driven by aggressive HBM"
+        }
+      ]
+    }
+  ]
+}

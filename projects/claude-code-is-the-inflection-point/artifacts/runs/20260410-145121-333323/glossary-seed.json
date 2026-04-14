@@ -1,0 +1,155 @@
+{
+  "added": 25,
+  "terms": [
+    {
+      "original": "Claude Code",
+      "translation": "Claude Code",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Anthropic",
+      "translation": "Anthropic",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Tokenomics Model",
+      "translation": "Tokenomics模型",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ARR",
+      "translation": "ARR (年度经常性收入)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "TCP/IP",
+      "translation": "TCP/IP",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Agent",
+      "translation": "智能体",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "vibe coding",
+      "translation": "vibe coding (直觉编程/意念编程)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "agentic",
+      "translation": "智能体化 / 代理化",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "CLI",
+      "translation": "CLI (命令行界面)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Opus 4.5",
+      "translation": "Opus 4.5",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Cowork",
+      "translation": "Cowork",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "MCP",
+      "translation": "MCP",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "METR",
+      "translation": "METR",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Task Horizon",
+      "translation": "任务跨度",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "SaaS",
+      "translation": "SaaS",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Salesforce",
+      "translation": "Salesforce",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "seat-based software",
+      "translation": "按席位授权软件",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Azure",
+      "translation": "Azure",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Copilot",
+      "translation": "Copilot",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "OpenAI",
+      "translation": "OpenAI",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "terminal value",
+      "translation": "终值",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "token efficiency",
+      "translation": "token效率",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "long-horizon task",
+      "translation": "长周期任务",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "agent orchestration",
+      "translation": "智能体编排",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PARL",
+      "translation": "并行智能体强化学习 (Parallel Agent Reinforcement Learning)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    }
+  ]
+}

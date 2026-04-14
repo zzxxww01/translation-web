@@ -1,0 +1,52 @@
+{
+  "section_id": "20-the-next-decade-2025-2035-fa",
+  "new_terms": [
+    {
+      "term": "H100/H200/B100",
+      "suggested_translation": "H100/H200/B100",
+      "context": "NVIDIA’s H100/H200/B100 chips sell for $25,000-40,000 each",
+      "confidence": 1.0
+    },
+    {
+      "term": "A18 Pro",
+      "suggested_translation": "A18 Pro",
+      "context": "Apple’s A18 Pro sells in iPhones for $1,099-1,199",
+      "confidence": 1.0
+    },
+    {
+      "term": "revenue per wafer",
+      "suggested_translation": "单片晶圆营收",
+      "context": "NVIDIA’s revenue per wafer: potentially 3-5x higher than Apple’s",
+      "confidence": 0.95
+    },
+    {
+      "term": "anchor customer",
+      "suggested_translation": "锚定客户",
+      "context": "TSMC has historically prioritized Apple as the anchor customer for new nodes.",
+      "confidence": 0.95
+    },
+    {
+      "term": "guaranteed allocation",
+      "suggested_translation": "保底产能分配",
+      "context": "Apple gets guaranteed allocation (contractual commitments from the lock-in era).",
+      "confidence": 0.9
+    },
+    {
+      "term": "lock-in era",
+      "suggested_translation": "深度绑定时代",
+      "context": "contractual commitments from the lock-in era",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "tsmc": "台积电",
+    "n2": "N2",
+    "leading-edge": "先进制程",
+    "nvidia": "英伟达",
+    "asp": "ASP",
+    "ai accelerator": "AI加速器",
+    "broadcom": "博通"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T22:03:23.853823"
+}

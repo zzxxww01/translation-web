@@ -1,5 +1,5 @@
 {
-  "version": 29,
+  "version": 30,
   "terms": [
     {
       "original": "TSMC",
@@ -565,8 +565,8 @@
     },
     {
       "original": "token",
-      "translation": "token",
-      "strategy": "preserve",
+      "translation": "词元",
+      "strategy": "preserve_annotate",
       "note": "不翻译，保留原文",
       "tags": [
         "ai"
@@ -575,7 +575,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570483"
+      "updated_at": "2026-04-10T23:02:23.690524"
     },
     {
       "original": "context window",

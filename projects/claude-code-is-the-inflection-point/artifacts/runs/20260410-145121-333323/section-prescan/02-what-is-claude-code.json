@@ -1,0 +1,64 @@
+{
+  "section_id": "02-what-is-claude-code",
+  "new_terms": [
+    {
+      "term": "terminal-native",
+      "suggested_translation": "终端原生",
+      "context": "Claude Code is a terminal-native AI agent",
+      "confidence": 0.95
+    },
+    {
+      "term": "Cursor",
+      "suggested_translation": "Cursor",
+      "context": "not focused on IDE or a chatbot sidebar like Cursor",
+      "confidence": 1.0
+    },
+    {
+      "term": "Claude Computer",
+      "suggested_translation": "Claude Computer",
+      "context": "think of Claude Code only as focused on Code, but rather as Claude Computer",
+      "confidence": 0.95
+    },
+    {
+      "term": "IDE",
+      "suggested_translation": "IDE (集成开发环境)",
+      "context": "not focused on IDE or a chatbot sidebar",
+      "confidence": 1.0
+    },
+    {
+      "term": "SWE",
+      "suggested_translation": "软件工程师 (SWE)",
+      "context": "Disturbing for those of us who identify as SWEs",
+      "confidence": 0.95
+    },
+    {
+      "term": "InferenceMAX",
+      "suggested_translation": "InferenceMAX",
+      "context": "maintain a live dashboard for InferenceMAX",
+      "confidence": 1.0
+    },
+    {
+      "term": "spot market prices",
+      "suggested_translation": "现货市场价格",
+      "context": "build forecasts in near-real time as spot market prices explode",
+      "confidence": 0.95
+    },
+    {
+      "term": "DSL",
+      "suggested_translation": "DSL (数字用户线路)",
+      "context": "akin to how fast your dial-up is compared to DSL",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "claude code": "Claude Code",
+    "vibe coding": "vibe coding",
+    "agent": "智能体",
+    "bom": "物料清单",
+    "opus 4.5": "Opus 4.5",
+    "agentic": "智能体化",
+    "long-horizon task": "长周期任务 (text uses 'long horizon tasks')"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T15:11:21.511805"
+}

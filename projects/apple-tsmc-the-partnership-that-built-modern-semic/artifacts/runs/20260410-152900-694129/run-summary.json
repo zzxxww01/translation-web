@@ -1,0 +1,78 @@
+{
+  "project_id": "apple-tsmc-the-partnership-that-built-modern-semic",
+  "status": "incomplete",
+  "total_sections": 23,
+  "translated_sections": 18,
+  "total_paragraphs": 376,
+  "translated_paragraphs": 343,
+  "error_count": 7,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "Apple Silicon",
+      "existing": "",
+      "new": "苹果自研芯片",
+      "existing_note": "苹果自研芯片品牌",
+      "new_note": "Total Apple Silicon Revenue: $23.5B (2025)",
+      "section_id": "02-key-numbers",
+      "timestamp": "2026-04-10T15:35:25.882268"
+    },
+    {
+      "type": "term_conflict",
+      "term": "Blackwell",
+      "existing": "",
+      "new": "Blackwell",
+      "existing_note": "英伟达的显卡",
+      "new_note": "By 2Q26, AI ecosystem N3 demand (led by NVIDIA’s Blackwell successors) exceeds Apple’s N3 demand by nearly 3x.",
+      "section_id": "13-ai-overtakes-apple-at-the-lead",
+      "timestamp": "2026-04-10T16:26:02.883932"
+    },
+    {
+      "error": "Failed to translate section 18-why-apple-will-not-build-fabs: Server disconnected without sending a response.",
+      "timestamp": "2026-04-10T17:26:32.626515",
+      "section": "18-why-apple-will-not-build-fabs"
+    },
+    {
+      "error": "Failed to translate section 19-apple-as-industrial-kingmaker: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-10T17:26:42.695197",
+      "section": "19-apple-as-industrial-kingmaker"
+    },
+    {
+      "error": "Failed to translate section 20-the-next-decade-2025-2035-fa: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-10T17:26:52.746905",
+      "section": "20-the-next-decade-2025-2035-fa"
+    },
+    {
+      "error": "Failed to translate section 21-the-arizona-question: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-10T17:26:59.129373",
+      "section": "21-the-arizona-question"
+    },
+    {
+      "error": "Failed to translate section 22-the-node-optimization-shift: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-10T17:27:05.417565",
+      "section": "22-the-node-optimization-shift"
+    }
+  ],
+  "started_at": "2026-04-10T15:29:00.694036",
+  "finished_at": "2026-04-10T17:27:05.681368",
+  "run_id": "20260410-152900-694129",
+  "artifacts_path": "projects\\apple-tsmc-the-partnership-that-built-modern-semic\\artifacts\\runs\\20260410-152900-694129",
+  "export": {
+    "generated_at": "2026-04-10T17:27:05.512886",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\apple-tsmc-the-partnership-that-built-modern-semic\\苹果-台积电：缔造现代半导体的合作伙伴关系_zh.md",
+      "generated": true,
+      "bytes": 92792
+    }
+  },
+  "api_calls": 115,
+  "elapsed_seconds": 7085.0,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

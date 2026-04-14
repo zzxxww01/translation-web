@@ -1,0 +1,1060 @@
+{
+  "article_theme": "The AI industry's paradigm shift from pre-training data aggregation to Reinforcement Learning (RL) scaling, which is driving massive demand for specialized RL environments, expert data foundries, and multi-agent architectures.",
+  "structure_summary": "The article opens by introducing the shift toward RL and the resulting gap left by Scale AI. It then dives technically into how RL environments (specifically coding) are built. The narrative transitions to the business side—data foundries, procurement patterns, and 'RL as a service'. Finally, it explores the application of RL in scientific domains (biology) and concludes with a forward-looking perspective on multi-agent architectures.",
+  "style": {
+    "tone": "Authoritative, analytical, technically dense, and strategically minded.",
+    "target_audience": "AI researchers, ML engineers, tech investors, and industry strategists.",
+    "translation_voice": "Professional tech-business analyst. The Chinese should be concise, objective, and use precise industry jargon without sounding purely academic. Maintain the punchy, insider tone typical of SemiAnalysis."
+  },
+  "guidelines": [
+    "Preserve Semantic Density: Do not over-explain technical terms in the main text; rely on the terminology list. Readers are assumed to be industry insiders.",
+    "Sentence Restructuring: SemiAnalysis often uses long, clause-heavy sentences (e.g., explaining the test patch process). Break these down into shorter, logical Chinese sequences (e.g., using '首先...其次...最后...' or semicolons) to ensure natural paragraph flow.",
+    "Domain Consistency: Pay strict attention to RL terminology. 'Rollouts' must be translated as '轨迹推演', 'Sparse rewards' as '稀疏奖励', and 'Mid-training' as '中期训练'. Do not use general software or business translations for these.",
+    "Company Names: Keep all AI startup and lab names in English (e.g., Scale AI, Windsurf, Cursor, Anthropic, Qwen, Surge).",
+    "Tone Match: Emulate the 'insider analyst' voice. Use sharp, professional business-tech phrasing (e.g., '采购模式' for buying patterns, '防御性姿态' for defensive posturing).",
+    "Title Translation: Ensure all elements of the original title are translated without dropping keywords. 'Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data' -> '扩展强化学习：环境、奖励劫持、智能体与数据扩展'."
+  ],
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "Heading: During a Gold Rush, Sell Shovels.",
+      "issue": "Classic business metaphor that needs natural phrasing in Chinese.",
+      "suggestion": "Translate as '淘金热中卖铲子'. The meaning is universally understood in Chinese tech/business circles."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: Why RL for Biology Can be Challenging",
+      "issue": "The word 'rollouts' in RL means executing a policy to gather trajectory data, not launching a product.",
+      "suggestion": "Translate as '轨迹推演' or '长序列推演' and add a brief translator note if necessary to distinguish from software rollouts."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: So You Want to Make a Coding Environment?",
+      "issue": "Long procedural sentence detailing the PR test patch process ('A task is considered valid only if...').",
+      "suggestion": "Break into a bulleted or logically sequenced Chinese sentence (e.g., '一个任务只有满足以下条件才算有效：首先...；其次...；最后...')."
+    },
+    {
+      "type": "accuracy",
+      "location": "Heading: Sorry, your agent is not allowed",
+      "issue": "Casual, slightly sarcastic tone reflecting platform API blocking.",
+      "suggestion": "Maintain the conversational tone: '抱歉，您的智能体被禁了' or '对不起，此地禁止智能体入内'."
+    }
+  ],
+  "terminology": [
+    {
+      "term": "RL (Reinforcement Learning)",
+      "translation": "强化学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard industry term."
+    },
+    {
+      "term": "Data Foundries",
+      "translation": "数据代工厂",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Translating as '代工厂' accurately captures the 'foundry' metaphor (like TSMC) in the tech supply chain context."
+    },
+    {
+      "term": "Computer use environments",
+      "translation": "计算机操作环境",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard translation for Anthropics' and others' 'computer use' paradigm."
+    },
+    {
+      "term": "Mid-Training",
+      "translation": "中期训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "An emerging industry term, needs to be consistently translated as 中期训练 as defined by the authors."
+    },
+    {
+      "term": "Rollouts",
+      "translation": "轨迹推演",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Cross-domain pitfall: Must not be translated as '产品发布' (product rollouts). In RL, it refers to generating trajectories."
+    },
+    {
+      "term": "Sparse rewards",
+      "translation": "稀疏奖励",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard RL terminology."
+    },
+    {
+      "term": "Wet Lab",
+      "translation": "湿实验室",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard biology term distinguishing physical biological labs from computational 'dry labs'."
+    },
+    {
+      "term": "Execution-based verification",
+      "translation": "基于执行的验证",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Accurate technical description of the coding environment workflow."
+    },
+    {
+      "term": "Reward Hacking",
+      "translation": "奖励劫持",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Common AI safety term, '奖励劫持' or '奖励作弊' is widely understood."
+    },
+    {
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "translation": "词元",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RL",
+      "translation": "RL (强化学习)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "post-training",
+      "translation": "后训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "pre-training",
+      "translation": "预训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GDPval",
+      "translation": "GDPval",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Computer Use Agents",
+      "translation": "计算机使用智能体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Meta",
+      "translation": "Meta",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "evaluations",
+      "translation": "评估",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Scale AI",
+      "translation": "Scale AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "MCP",
+      "translation": "MCP",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "AWS",
+      "translation": "AWS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "UI",
+      "translation": "UI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "UI gyms",
+      "translation": "UI训练场",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "API",
+      "translation": "API",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RL environments",
+      "translation": "强化学习环境",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PR",
+      "translation": "PR (Pull Request/拉取请求)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "rollout",
+      "translation": "推演 / 采样轨迹",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ARR",
+      "translation": "ARR (年度经常性收入)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Data Foundry",
+      "translation": "数据代工厂",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "rubric",
+      "translation": "评分标准",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ML",
+      "translation": "机器学习 (ML)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IMO",
+      "translation": "IMO (国际数学奥林匹克)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "OpenAI",
+      "translation": "OpenAI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RFT",
+      "translation": "强化微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Trainium",
+      "translation": "Trainium",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Strategic Deployment",
+      "translation": "战略部署",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "YC",
+      "translation": "YC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "closed loop",
+      "translation": "闭环",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "AlphaEvolve",
+      "translation": "AlphaEvolve",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ARC-AGI",
+      "translation": "ARC-AGI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "orchestrator",
+      "translation": "编排器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SG Lang",
+      "translation": "SGLang",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Anthropic",
+      "translation": "Anthropic",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RL as a Service",
+      "translation": "RL即服务",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "xAI",
+      "translation": "xAI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Utility Evals",
+      "translation": "实用性评估",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "observation",
+      "translation": "观察值",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "tool call",
+      "translation": "工具调用",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Qwen",
+      "translation": "通义千问",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "reward signals",
+      "translation": "奖励信号",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ChatGPT Agent",
+      "translation": "ChatGPT智能体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Medra",
+      "translation": "Medra",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "straggler rollouts",
+      "translation": "掉队推演",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ]
+}

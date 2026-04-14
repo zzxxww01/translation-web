@@ -1,0 +1,131 @@
+{
+  "added": 21,
+  "terms": [
+    {
+      "original": "Fab 18",
+      "translation": "Fab 18",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Node Economics",
+      "translation": "节点经济学",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "thermal envelope",
+      "translation": "散热包络",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Foxconn",
+      "translation": "富士康",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "platform shift",
+      "translation": "平台转换",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "S-series",
+      "translation": "S系列",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "18A",
+      "translation": "18A",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "N3E",
+      "translation": "N3E",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "mature node",
+      "translation": "成熟制程",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PMIC",
+      "translation": "PMIC (电源管理芯片)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "AP6",
+      "translation": "AP6 (先进封装厂)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "TSMC Arizona",
+      "translation": "台积电亚利桑那州工厂",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "SLC",
+      "translation": "系统级缓存",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Strix Halo",
+      "translation": "Strix Halo",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "node transition",
+      "translation": "制程转换",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "1.4nm",
+      "translation": "1.4纳米",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "silicon content",
+      "translation": "硅含量",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "device base",
+      "translation": "设备基数",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "custom silicon",
+      "translation": "定制芯片",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "startup capacity",
+      "translation": "初始产能",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Fab 21",
+      "translation": "Fab 21",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    }
+  ]
+}

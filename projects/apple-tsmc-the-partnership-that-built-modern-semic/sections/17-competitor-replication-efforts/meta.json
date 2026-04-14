@@ -1,0 +1,143 @@
+{
+  "section_id": "17-competitor-replication-efforts",
+  "title": "Competitor Replication Efforts",
+  "title_translation": "竞争对手的效仿尝试",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Huawei, Samsung, Xiaomi, ZTE, Google and others tried to replicate Apple’s success in vertical integration but failed to put together a coherent strategy. Huawei seemed like a challenger but got cut off at TSMC due to export controls. Huawei is nearly sufficient and has invested in much wider areas than Apple, including deep into supply chain layers such as lithography, fabs and memory. But its success is slowed by China’s limited capacity in advanced nodes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0351",
+      "parent_block_index": 351,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Huawei, Samsung, Xiaomi, ZTE, Google and others tried to replicate Apple’s success in vertical integration but failed to put together a coherent strategy. Huawei seemed like a challenger but got cut off at TSMC due to export controls. Huawei is nearly sufficient and has invested in much wider areas than Apple, including deep into supply chain layers such as lithography, fabs and memory. But its success is slowed by China’s limited capacity in advanced nodes.",
+      "parent_block_plain_text": "Huawei, Samsung, Xiaomi, ZTE, Google and others tried to replicate Apple’s success in vertical integration but failed to put together a coherent strategy. Huawei seemed like a challenger but got cut off at TSMC due to export controls. Huawei is nearly sufficient and has invested in much wider areas than Apple, including deep into supply chain layers such as lithography, fabs and memory. But its success is slowed by China’s limited capacity in advanced nodes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 462,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "华为、三星、小米、中兴、谷歌等厂商曾试图复刻苹果在垂直整合上的成功，但均未能形成连贯的战略。华为曾看似是有力的挑战者，却因出口管制而在台积电处遭遇断供。华为目前已接近自给自足，且其投资版图远比苹果广阔，已深入光刻机、晶圆厂与存储器等供应链深层。然而，中国在先进制程节点上的产能受限，拖慢了其迈向成功的步伐。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:26:04.887893",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "formatting",
+            "description": "中英文之间缺少空格，“A系列”应为“A 系列”。同时，为避免部分读者产生脱节感，可考虑补全为“苹果的 A 系列战略”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Samsung with its Exynos apps processors and modems nearly replicated the A-series strategy but due to capacity and yield limitations still depends on external chip companies such as Qualcomm.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0352",
+      "parent_block_index": 352,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Samsung with its Exynos apps processors and modems nearly replicated the A-series strategy but due to capacity and yield limitations still depends on external chip companies such as Qualcomm.",
+      "parent_block_plain_text": "Samsung with its Exynos apps processors and modems nearly replicated the A-series strategy but due to capacity and yield limitations still depends on external chip companies such as Qualcomm.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 191,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星凭借其 Exynos 应用处理器与基带，几乎复刻了 A系列战略，但受限于产能与良率，依然依赖高通等外部芯片企业。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:26:04.887936",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.5,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "formatting",
+            "description": "中英文之间缺少空格，“A系列”应为“A 系列”。同时，为避免部分读者产生脱节感，可考虑补全为“苹果的 A 系列战略”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

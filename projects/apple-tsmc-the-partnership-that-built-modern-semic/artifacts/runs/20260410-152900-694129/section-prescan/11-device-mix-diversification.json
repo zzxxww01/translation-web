@@ -1,0 +1,52 @@
+{
+  "section_id": "11-device-mix-diversification",
+  "new_terms": [
+    {
+      "term": "unit shipments",
+      "suggested_translation": "出货量",
+      "context": "The decoupling between unit shipments and silicon value tells the real story...",
+      "confidence": 0.95
+    },
+    {
+      "term": "silicon value",
+      "suggested_translation": "芯片价值",
+      "context": "The decoupling between unit shipments and silicon value...",
+      "confidence": 0.9
+    },
+    {
+      "term": "foundry economics",
+      "suggested_translation": "晶圆代工经济学",
+      "context": "...tells the real story of Apple’s foundry economics.",
+      "confidence": 0.95
+    },
+    {
+      "term": "silicon content intensity",
+      "suggested_translation": "硅含量强度",
+      "context": "The Apple-TSMC story shifted from units to silicon content intensity per unit.",
+      "confidence": 0.9
+    },
+    {
+      "term": "mature node",
+      "suggested_translation": "成熟制程",
+      "context": "The “Other” category, which includes mature node chips...",
+      "confidence": 0.95
+    },
+    {
+      "term": "revenue volatility",
+      "suggested_translation": "营收波动",
+      "context": "...reducing revenue volatility tied to iPhone cycles.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "a-series": "A系列",
+    "m-series": "M系列",
+    "soc": "SoC",
+    "tsmc": "台积电",
+    "die": "裸片",
+    "node": "制程节点",
+    "wafer": "晶圆"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:23:05.576261"
+}

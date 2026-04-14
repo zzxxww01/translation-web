@@ -1,0 +1,144 @@
+{
+  "items": [
+    {
+      "source": "By AJ Kourabi and Dylan Patel",
+      "translation": "作者：AJ Kourabi、Dylan Patel",
+      "tokenized_translation": "作者：[[[LINK_1|AJ Kourabi]]]、[[[LINK_2|Dylan Patel]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Jan 06, 2026 · Paid",
+      "translation": "2026 年 1 月 6 日 · 付费文章",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: A public talk by Karina Nguyen, SemiAnalysis",
+      "translation": "来源：Karina Nguyen 的公开演讲，SemiAnalysis",
+      "tokenized_translation": "来源：[[[LINK_1|Karina Nguyen 的公开演讲]]]，SemiAnalysis",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: ARC-AGI Leaderboard at the time of Jeremy’s submission.",
+      "translation": "来源：Jeremy 提交时的 ARC-AGI 排行榜。",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Aboda.ai, SemiAnalysis",
+      "translation": "来源：Aboda.ai，SemiAnalysis",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: AlphaEvolve, Google",
+      "translation": "来源：AlphaEvolve，Google",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Anthropic",
+      "translation": "来源：Anthropic",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Badertdinov, Golubev et al.",
+      "translation": "来源：Badertdinov, Golubev 等人",
+      "tokenized_translation": "来源：[[[LINK_1|Badertdinov, Golubev 等人]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Meta",
+      "translation": "来源：Meta",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: Novo Nordisk",
+      "translation": "来源：Novo Nordisk",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Nvidia, TogetherAI, SemiAnalysis",
+      "translation": "来源：英伟达（NVIDIA），TogetherAI，SemiAnalysis",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: OpenAI",
+      "translation": "来源：OpenAI",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: OpenAI. SemiAnalysis data point is reflective of the speed and cost improvements gained through being a SemiAnalysis customer.",
+      "translation": "来源：OpenAI。SemiAnalysis 数据点反映了成为 SemiAnalysis 客户所获得的速度和成本提升。",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Piché et al, 2025",
+      "translation": "来源：Piché 等人，2025",
+      "tokenized_translation": "来源：[[[LINK_1|Piché 等人]]]，2025",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Sacra, SemiAnalysis.",
+      "translation": "来源：Sacra，SemiAnalysis。",
+      "tokenized_translation": "来源：[[[LINK_1|Sacra]]]，SemiAnalysis。",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: SemiAnalysis",
+      "translation": "来源：SemiAnalysis",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: Wei et al.",
+      "translation": "来源：Wei 等人",
+      "tokenized_translation": "来源：[[[LINK_1|Wei 等人]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Works In Progress",
+      "translation": "来源：Works In Progress",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: xAI",
+      "translation": "来源：xAI",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Worker Automation, RL as a Service, Anthropic's next big bet, GDPval and Utility Evals, Computer Use Agents, LLMs in Biology, Mid-Training, Lab Procurement Patterns, Platform Politics and Access",
+      "translation": "劳动力自动化、强化学习即服务、Anthropic 的下一个重大押注、GDPval 与效用评估、计算机使用智能体、生物学领域的 LLM、中期训练、实验室采购模式、平台政治与访问权限",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    }
+  ]
+}

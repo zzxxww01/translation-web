@@ -1,0 +1,15 @@
+{
+  "project_id": "apple-tsmc-the-partnership-that-built-modern-semic",
+  "generated_at": "2026-04-10T22:09:26.174546",
+  "issue_count": 1,
+  "issues": [
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "08-apple-wafer-demand",
+      "paragraph_id": "p019",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "N2 标志着台积电在节点发布初期的客户结构发生了结构性转变。我们预计，2026 年苹果将再次以高份额占据 N2 的主导地位，但这仅代表 <50% of N2 demand. Qualcomm (Snapdragon 8 Elite 2), AMD (Venice and MI450x), MediaTek (Dimen"
+    }
+  ]
+}

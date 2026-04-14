@@ -1,0 +1,1051 @@
+{
+  "project_id": "claude-code-is-the-inflection-point",
+  "project_title": "Claude Code is the Inflection Point",
+  "review_required": true,
+  "generated_at": "2026-04-10T14:51:21.246761",
+  "total_candidates": 25,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "Claude Code",
+          "suggested_translation": "Claude Code",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 35,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-claude-code-and-the-agentic-fu",
+              "section_title": "Claude Code and the Agentic Future"
+            },
+            {
+              "section_id": "02-what-is-claude-code",
+              "section_title": "What is Claude Code?"
+            },
+            {
+              "section_id": "03-beyond-coding-the-beachhead",
+              "section_title": "Beyond Coding: The Beachhead, not the Destination"
+            },
+            {
+              "section_id": "04-the-price-of-intelligence-is-c",
+              "section_title": "The Price of Intelligence is Collapsing"
+            },
+            {
+              "section_id": "05-competitive-landscape-microso",
+              "section_title": "Competitive Landscape (Microsoft’s Conundrum)"
+            },
+            {
+              "section_id": "06-caught-between-two-businesses",
+              "section_title": "Caught Between Two Businesses"
+            }
+          ],
+          "contexts": [
+            "Anthropic's AI coding product",
+            "Claude Code also is also a demonstration of the reverse",
+            "Claude Code is a terminal-native AI agent..."
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.706
+            },
+            {
+              "original": "cloud computing",
+              "translation": "云计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.538
+            },
+            {
+              "original": "net income",
+              "translation": "净收入",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "Anthropic",
+          "suggested_translation": "Anthropic",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 12,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "06-caught-between-two-businesses",
+              "section_title": "Caught Between Two Businesses"
+            }
+          ],
+          "contexts": [
+            "AI research lab and company",
+            "AI startup competing with OpenAI, creator of Claude."
+          ],
+          "similar_terms": [
+            {
+              "original": "throughput",
+              "translation": "吞吐量",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.526
+            },
+            {
+              "original": "HPC",
+              "translation": "HPC",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高性能计算 (High Performance Computing)",
+              "similarity": 0.5
+            },
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Tokenomics Model",
+          "suggested_translation": "Tokenomics模型",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-claude-code-and-the-agentic-fu",
+              "section_title": "Claude Code and the Agentic Future"
+            }
+          ],
+          "contexts": [
+            "SemiAnalysis proprietary economic model",
+            "Source: SemiAnalysis Tokenomics Model"
+          ],
+          "similar_terms": [
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.476
+            },
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "ARR",
+          "suggested_translation": "ARR (年度经常性收入)",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "Annual Recurring Revenue, financial metric used to compare Anthropic and OpenAI"
+          ],
+          "similar_terms": [
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "wafer",
+              "translation": "晶圆",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "01-claude-code-and-the-agentic-fu",
+      "section_title": "Claude Code and the Agentic Future",
+      "candidates": [
+        {
+          "term": "TCP/IP",
+          "suggested_translation": "TCP/IP",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "01-claude-code-and-the-agentic-fu",
+          "related_sections": [
+            {
+              "section_id": "01-claude-code-and-the-agentic-fu",
+              "section_title": "Claude Code and the Agentic Future"
+            }
+          ],
+          "contexts": [
+            "akin to Web 1.0 with TCP/IP connecting users to static websites"
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            },
+            {
+              "original": "etching",
+              "translation": "蚀刻",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            },
+            {
+              "original": "RF chip",
+              "translation": "射频芯片",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Radio Frequency",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "Agent",
+          "suggested_translation": "智能体",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-claude-code-and-the-agentic-fu",
+          "related_sections": [
+            {
+              "section_id": "01-claude-code-and-the-agentic-fu",
+              "section_title": "Claude Code and the Agentic Future"
+            },
+            {
+              "section_id": "05-competitive-landscape-microso",
+              "section_title": "Competitive Landscape (Microsoft’s Conundrum)"
+            }
+          ],
+          "contexts": [
+            "Agents will be the primary method of how organic intelligence (humans) interact with artificial intelligence",
+            "if an agent is just going to query data on leads on your behalf"
+          ],
+          "similar_terms": [
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "02-what-is-claude-code",
+      "section_title": "What is Claude Code?",
+      "candidates": [
+        {
+          "term": "vibe coding",
+          "suggested_translation": "vibe coding (直觉编程/意念编程)",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "02-what-is-claude-code",
+          "related_sections": [
+            {
+              "section_id": "02-what-is-claude-code",
+              "section_title": "What is Claude Code?"
+            }
+          ],
+          "contexts": [
+            "Your favorite engineers are vibe coding... Andrej Karpathy, who coined the term vibe coding 1 year ago"
+          ],
+          "similar_terms": [
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.56
+            },
+            {
+              "original": "etching",
+              "translation": "蚀刻",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.556
+            },
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "agentic",
+          "suggested_translation": "智能体化 / 代理化",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-what-is-claude-code",
+          "related_sections": [
+            {
+              "section_id": "02-what-is-claude-code",
+              "section_title": "What is Claude Code?"
+            },
+            {
+              "section_id": "06-caught-between-two-businesses",
+              "section_title": "Caught Between Two Businesses"
+            }
+          ],
+          "contexts": [
+            "what is important in linear benchmarking might not matter at all for agentic long horizon tasks.",
+            "Refers to AI systems acting as autonomous agents (e.g., 'agentic adoption')."
+          ],
+          "similar_terms": [
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "self-attention",
+              "translation": "自注意力机制",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "CLI",
+          "suggested_translation": "CLI (命令行界面)",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-what-is-claude-code",
+          "related_sections": [
+            {
+              "section_id": "02-what-is-claude-code",
+              "section_title": "What is Claude Code?"
+            }
+          ],
+          "contexts": [
+            "Claude Code is a CLI (command line interface) tool..."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Opus 4.5",
+          "suggested_translation": "Opus 4.5",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-what-is-claude-code",
+          "related_sections": [
+            {
+              "section_id": "02-what-is-claude-code",
+              "section_title": "What is Claude Code?"
+            }
+          ],
+          "contexts": [
+            "Opus 4.5 is the engine that makes this all possible"
+          ],
+          "similar_terms": [
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.5
+            },
+            {
+              "original": "FLOPS",
+              "translation": "FLOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒浮点运算次数",
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-beyond-coding-the-beachhead",
+      "section_title": "Beyond Coding: The Beachhead, not the Destination",
+      "candidates": [
+        {
+          "term": "Cowork",
+          "suggested_translation": "Cowork",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "03-beyond-coding-the-beachhead",
+          "related_sections": [
+            {
+              "section_id": "03-beyond-coding-the-beachhead",
+              "section_title": "Beyond Coding: The Beachhead, not the Destination"
+            }
+          ],
+          "contexts": [
+            "Anthropic's general computing agent product."
+          ],
+          "similar_terms": [
+            {
+              "original": "CoWoS",
+              "translation": "CoWoS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Chip on Wafer on Substrate",
+              "similarity": 0.727
+            }
+          ]
+        },
+        {
+          "term": "MCP",
+          "suggested_translation": "MCP",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-beyond-coding-the-beachhead",
+          "related_sections": [
+            {
+              "section_id": "03-beyond-coding-the-beachhead",
+              "section_title": "Beyond Coding: The Beachhead, not the Destination"
+            },
+            {
+              "section_id": "04-the-price-of-intelligence-is-c",
+              "section_title": "The Price of Intelligence is Collapsing"
+            }
+          ],
+          "contexts": [
+            "Model Context Protocol, part of the Claude Agent architecture.",
+            "Agents themselves do not rely on human oriented workflows, and MCP integrations make integration much easier."
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.667
+            },
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "METR",
+          "suggested_translation": "METR",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-beyond-coding-the-beachhead",
+          "related_sections": [
+            {
+              "section_id": "03-beyond-coding-the-beachhead",
+              "section_title": "Beyond Coding: The Beachhead, not the Destination"
+            }
+          ],
+          "contexts": [
+            "Organization providing data on autonomous task horizons."
+          ],
+          "similar_terms": [
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.615
+            },
+            {
+              "original": "market share",
+              "translation": "市场份额",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "MediaTek",
+              "translation": "联发科",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Task Horizon",
+          "suggested_translation": "任务跨度",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-beyond-coding-the-beachhead",
+          "related_sections": [
+            {
+              "section_id": "03-beyond-coding-the-beachhead",
+              "section_title": "Beyond Coding: The Beachhead, not the Destination"
+            }
+          ],
+          "contexts": [
+            "The duration an autonomous agent can work before failing its task."
+          ],
+          "similar_terms": [
+            {
+              "original": "SK Hynix",
+              "translation": "SK海力士",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "virtualization",
+              "translation": "虚拟化",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-the-price-of-intelligence-is-c",
+      "section_title": "The Price of Intelligence is Collapsing",
+      "candidates": [
+        {
+          "term": "SaaS",
+          "suggested_translation": "SaaS",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "04-the-price-of-intelligence-is-c",
+          "related_sections": [
+            {
+              "section_id": "04-the-price-of-intelligence-is-c",
+              "section_title": "The Price of Intelligence is Collapsing"
+            }
+          ],
+          "contexts": [
+            "SaaS itself is just crystalized information processing of workflows into code."
+          ],
+          "similar_terms": [
+            {
+              "original": "Samsung",
+              "translation": "三星",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.545
+            },
+            {
+              "original": "SemiAnalysis",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "05-competitive-landscape-microso",
+      "section_title": "Competitive Landscape (Microsoft’s Conundrum)",
+      "candidates": [
+        {
+          "term": "Salesforce",
+          "suggested_translation": "Salesforce",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-competitive-landscape-microso",
+          "related_sections": [
+            {
+              "section_id": "05-competitive-landscape-microso",
+              "section_title": "Competitive Landscape (Microsoft’s Conundrum)"
+            }
+          ],
+          "contexts": [
+            "Why does a company need to standardize Salesforce"
+          ],
+          "similar_terms": [
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "transformer",
+              "translation": "Transformer",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "一种深度学习模型架构",
+              "similarity": 0.571
+            },
+            {
+              "original": "fabless",
+              "translation": "无晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "无晶圆厂设计公司",
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "seat-based software",
+          "suggested_translation": "按席位授权软件",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-competitive-landscape-microso",
+          "related_sections": [
+            {
+              "section_id": "05-competitive-landscape-microso",
+              "section_title": "Competitive Landscape (Microsoft’s Conundrum)"
+            }
+          ],
+          "contexts": [
+            "The cost collapse is destroying the seat-based software model."
+          ],
+          "similar_terms": [
+            {
+              "original": "market share",
+              "translation": "市场份额",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.452
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "06-caught-between-two-businesses",
+      "section_title": "Caught Between Two Businesses",
+      "candidates": [
+        {
+          "term": "Azure",
+          "suggested_translation": "Azure",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "06-caught-between-two-businesses",
+          "related_sections": [
+            {
+              "section_id": "06-caught-between-two-businesses",
+              "section_title": "Caught Between Two Businesses"
+            }
+          ],
+          "contexts": [
+            "Microsoft's cloud computing platform, mentioned as a key driver of revenue and terminal value."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Copilot",
+          "suggested_translation": "Copilot",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "06-caught-between-two-businesses",
+          "related_sections": [
+            {
+              "section_id": "06-caught-between-two-businesses",
+              "section_title": "Caught Between Two Businesses"
+            }
+          ],
+          "contexts": [
+            "Microsoft's AI assistant suite (e.g., M365 Copilot, GitHub Copilot, Office Copilot)."
+          ],
+          "similar_terms": [
+            {
+              "original": "IoT",
+              "translation": "IoT",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "物联网 (Internet of Things)",
+              "similarity": 0.6
+            },
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            },
+            {
+              "original": "CoWoS",
+              "translation": "CoWoS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Chip on Wafer on Substrate",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "OpenAI",
+          "suggested_translation": "OpenAI",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "06-caught-between-two-businesses",
+          "related_sections": [
+            {
+              "section_id": "06-caught-between-two-businesses",
+              "section_title": "Caught Between Two Businesses"
+            }
+          ],
+          "contexts": [
+            "AI research organization and Microsoft's core partner."
+          ],
+          "similar_terms": [
+            {
+              "original": "opex",
+              "translation": "运营支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Operating Expense",
+              "similarity": 0.6
+            },
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.545
+            },
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "terminal value",
+          "suggested_translation": "终值",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-caught-between-two-businesses",
+          "related_sections": [
+            {
+              "section_id": "06-caught-between-two-businesses",
+              "section_title": "Caught Between Two Businesses"
+            }
+          ],
+          "contexts": [
+            "Finance term referring to the present value of all future cash flows beyond the projection period."
+          ],
+          "similar_terms": [
+            {
+              "original": "SemiAnalysis",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "07-anthropics-funding-and-surge",
+      "section_title": "Anthropic’s Funding and Surge: Why is Anthropic Winning?",
+      "candidates": [
+        {
+          "term": "token efficiency",
+          "suggested_translation": "token效率",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "07-anthropics-funding-and-surge",
+          "related_sections": [
+            {
+              "section_id": "07-anthropics-funding-and-surge",
+              "section_title": "Anthropic’s Funding and Surge: Why is Anthropic Winning?"
+            }
+          ],
+          "contexts": [
+            "The answer is token efficiency. Opus 4.5 achieves dramatically better token efficiency than GPT-5.2 High"
+          ],
+          "similar_terms": [
+            {
+              "original": "efficiency",
+              "translation": "效率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.769
+            },
+            {
+              "original": "token",
+              "translation": "token",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "不翻译，保留原文",
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "long-horizon task",
+          "suggested_translation": "长周期任务",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "07-anthropics-funding-and-surge",
+          "related_sections": [
+            {
+              "section_id": "07-anthropics-funding-and-surge",
+              "section_title": "Anthropic’s Funding and Surge: Why is Anthropic Winning?"
+            }
+          ],
+          "contexts": [
+            "...this matters enormously for long-horizon task achievement."
+          ],
+          "similar_terms": [
+            {
+              "original": "anchor tenant",
+              "translation": "锚定客户",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "核心大客户",
+              "similarity": 0.467
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "08-will-the-pretrain-matter",
+      "section_title": "Will the Pretrain Matter?",
+      "candidates": [
+        {
+          "term": "agent orchestration",
+          "suggested_translation": "智能体编排",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "08-will-the-pretrain-matter",
+          "related_sections": [
+            {
+              "section_id": "08-will-the-pretrain-matter",
+              "section_title": "Will the Pretrain Matter?"
+            }
+          ],
+          "contexts": [
+            "Every incremental model this year is going to heavily focus more on agent orchestration"
+          ],
+          "similar_terms": [
+            {
+              "original": "deposition",
+              "translation": "沉积",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.483
+            },
+            {
+              "original": "etching",
+              "translation": "蚀刻",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "PARL",
+          "suggested_translation": "并行智能体强化学习 (Parallel Agent Reinforcement Learning)",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "08-will-the-pretrain-matter",
+          "related_sections": [
+            {
+              "section_id": "08-will-the-pretrain-matter",
+              "section_title": "Will the Pretrain Matter?"
+            }
+          ],
+          "contexts": [
+            "PARL or Parallel Agent Reinforcement Learning is a sign of what is to come."
+          ],
+          "similar_terms": [
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.545
+            },
+            {
+              "original": "RLHF",
+              "translation": "RLHF",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "基于人类反馈的强化学习",
+              "similarity": 0.5
+            },
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

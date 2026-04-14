@@ -1,0 +1,62 @@
+{
+  "section_id": "02-what-is-claude-code",
+  "new_terms": [
+    {
+      "term": "terminal-native",
+      "suggested_translation": "终端原生",
+      "context": "Claude Code is a terminal-native AI agent",
+      "confidence": 0.95
+    },
+    {
+      "term": "IDE",
+      "suggested_translation": "IDE (集成开发环境)",
+      "context": "not focused on IDE or a chatbot sidebar like Cursor",
+      "confidence": 0.95
+    },
+    {
+      "term": "CLI",
+      "suggested_translation": "CLI (命令行界面)",
+      "context": "Claude Code is a CLI (command line interface) tool",
+      "confidence": 0.95
+    },
+    {
+      "term": "Cursor",
+      "suggested_translation": "Cursor",
+      "context": "not focused on IDE or a chatbot sidebar like Cursor",
+      "confidence": 1.0
+    },
+    {
+      "term": "SWEs",
+      "suggested_translation": "软件工程师 (SWE)",
+      "context": "Disturbing for those of us who identify as SWEs",
+      "confidence": 0.9
+    },
+    {
+      "term": "InferenceMAX",
+      "suggested_translation": "InferenceMAX",
+      "context": "maintain a live dashboard for InferenceMAX",
+      "confidence": 1.0
+    },
+    {
+      "term": "DSL",
+      "suggested_translation": "DSL (数字用户线路)",
+      "context": "akin to how fast your dial-up is compared to DSL",
+      "confidence": 0.95
+    },
+    {
+      "term": "Opus 4.5",
+      "suggested_translation": "Opus 4.5",
+      "context": "Pretty much 100% of our code is written by Claude Code + Opus 4.5",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "claude code": "Claude Code",
+    "vibe coding": "氛围感编程",
+    "agent": "智能体",
+    "bom": "物料清单",
+    "agentic": "智能体化"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T12:05:08.124434"
+}

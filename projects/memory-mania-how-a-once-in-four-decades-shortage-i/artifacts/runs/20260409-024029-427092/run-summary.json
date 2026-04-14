@@ -1,0 +1,43 @@
+{
+  "project_id": "memory-mania-how-a-once-in-four-decades-shortage-i",
+  "status": "completed",
+  "total_sections": 7,
+  "translated_sections": 7,
+  "total_paragraphs": 162,
+  "translated_paragraphs": 162,
+  "error_count": 1,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "SemiAnalysis",
+      "existing": "",
+      "new": "SemiAnalysis",
+      "existing_note": "",
+      "new_note": "SemiAnalysis has been calling this out for over a year since late 2024.",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-09T02:42:50.919786"
+    }
+  ],
+  "started_at": "2026-04-09T02:40:29.427077",
+  "finished_at": "2026-04-09T03:13:48.687983",
+  "run_id": "20260409-024029-427092",
+  "artifacts_path": "projects\\memory-mania-how-a-once-in-four-decades-shortage-i\\artifacts\\runs\\20260409-024029-427092",
+  "export": {
+    "generated_at": "2026-04-09T03:13:48.631180",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\memory-mania-how-a-once-in-four-decades-shortage-i\\存储狂热：四十年一遇的短缺如何助推存储繁荣_zh.md",
+      "generated": true,
+      "bytes": 55438
+    }
+  },
+  "api_calls": 61,
+  "elapsed_seconds": 1999.3,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

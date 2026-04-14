@@ -1,0 +1,43 @@
+{
+  "section_id": "01-outsourcing-and-the-ghost-of-s",
+  "new_terms": [
+    {
+      "term": "data contractors",
+      "suggested_translation": "数据承包商",
+      "context": "Scale AI was one of the largest data contractors for the labs",
+      "confidence": 0.9
+    },
+    {
+      "term": "Meta Superintelligence",
+      "suggested_translation": "Meta超级智能团队",
+      "context": "Some from Scale’s team joined Meta’s Superintelligence group",
+      "confidence": 0.9
+    },
+    {
+      "term": "Surge",
+      "suggested_translation": "Surge",
+      "context": "shifting in the direction of other data providers like Surge",
+      "confidence": 0.95
+    },
+    {
+      "term": "SemiAnalysis",
+      "suggested_translation": "SemiAnalysis",
+      "context": "Source: Sacra, SemiAnalysis.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Sacra",
+      "suggested_translation": "Sacra",
+      "context": "Source: Sacra, SemiAnalysis.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "scale ai": "Scale AI",
+    "meta": "Meta",
+    "evaluations": "评估",
+    "revenue": "营收"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-11T13:23:11.923143"
+}

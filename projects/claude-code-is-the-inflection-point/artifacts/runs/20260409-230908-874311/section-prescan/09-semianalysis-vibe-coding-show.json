@@ -1,0 +1,78 @@
+{
+  "section_id": "09-semianalysis-vibe-coding-show",
+  "new_terms": [
+    {
+      "term": "Entegris",
+      "suggested_translation": "英特格",
+      "context": "comparing the gross margin of TSMC to margins to Entegris",
+      "confidence": 0.95
+    },
+    {
+      "term": "pro-forma adjustments",
+      "suggested_translation": "备考调整",
+      "context": "The gross margins include the pro-forma adjustments for the acquisition.",
+      "confidence": 0.95
+    },
+    {
+      "term": "token efficiency",
+      "suggested_translation": "token 效率",
+      "context": "Here’s a CLI bench comparing token efficiency.",
+      "confidence": 0.9
+    },
+    {
+      "term": "CLI",
+      "suggested_translation": "CLI",
+      "context": "Here’s a CLI bench comparing token efficiency.",
+      "confidence": 1.0
+    },
+    {
+      "term": "ISO/OSL",
+      "suggested_translation": "ISO/OSL",
+      "context": "latency test of APIs to compare ISO/OSL",
+      "confidence": 0.9
+    },
+    {
+      "term": "OSI",
+      "suggested_translation": "OSI",
+      "context": "The OSI, IBM SNA, Novell IPX/SPX, and other protocols were all in contention.",
+      "confidence": 1.0
+    },
+    {
+      "term": "SNA",
+      "suggested_translation": "SNA",
+      "context": "IBM SNA, Novell IPX/SPX, and other protocols",
+      "confidence": 1.0
+    },
+    {
+      "term": "IPX/SPX",
+      "suggested_translation": "IPX/SPX",
+      "context": "Novell IPX/SPX, and other protocols",
+      "confidence": 1.0
+    },
+    {
+      "term": "FINRA",
+      "suggested_translation": "FINRA",
+      "context": "The Company is not a member of the FINRA or the SIPC",
+      "confidence": 1.0
+    },
+    {
+      "term": "SIPC",
+      "suggested_translation": "SIPC",
+      "context": "The Company is not a member of the FINRA or the SIPC",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "latency": "延迟",
+    "Claude Code": "Claude Code",
+    "vibe coding": "氛围感编程",
+    "token": "token",
+    "gross margin": "毛利率",
+    "TSMC": "台积电",
+    "TCP/IP": "TCP/IP",
+    "agentic": "智能体化",
+    "information work": "信息工作"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T00:37:03.422999"
+}

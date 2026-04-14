@@ -1,0 +1,32 @@
+{
+  "section_id": "05-geographic-concentration-risk",
+  "new_terms": [
+    {
+      "term": "TSMC Arizona",
+      "suggested_translation": "台积电亚利桑那州工厂",
+      "context": "Refers to TSMC's fab located in Arizona, USA.",
+      "confidence": 0.95
+    },
+    {
+      "term": "token diversification",
+      "suggested_translation": "象征性的多元化",
+      "context": "Crucial distinction: 'token' here means 'symbolic' or 'minimal', not an LLM token. Must not be translated using the existing glossary term 'token'.",
+      "confidence": 0.99
+    },
+    {
+      "term": "ramp rates",
+      "suggested_translation": "产能爬坡速度",
+      "context": "Derived from the existing term 'ramp' (产能爬坡), referring to the speed at which production scales up.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "leading-edge": "先进制程",
+    "a-series": "A系列",
+    "m-series": "M系列",
+    "tsmc": "台积电",
+    "ramp": "产能爬坡"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:05:19.886250"
+}

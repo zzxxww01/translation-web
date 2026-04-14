@@ -1,0 +1,59 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "RL as a Service",
+      "suggested_translation": "强化学习即服务",
+      "context": "Worker Automation, RL as a Service, Anthropic's next big bet",
+      "confidence": 0.95
+    },
+    {
+      "term": "Utility Evals",
+      "suggested_translation": "实用性评估",
+      "context": "GDPval and Utility Evals",
+      "confidence": 0.9
+    },
+    {
+      "term": "Windsurf",
+      "suggested_translation": "Windsurf",
+      "context": "gives companies like Windsurf and Cursor the ability to post-train their own competitive models",
+      "confidence": 0.95
+    },
+    {
+      "term": "Cursor",
+      "suggested_translation": "Cursor",
+      "context": "gives companies like Windsurf and Cursor the ability to post-train their own competitive models",
+      "confidence": 0.95
+    },
+    {
+      "term": "win rate",
+      "suggested_translation": "胜率",
+      "context": "This win rate, if equal, would then mean that a model’s performance is then in parity with a human expert.",
+      "confidence": 0.95
+    },
+    {
+      "term": "autonomous AI researchers",
+      "suggested_translation": "自主AI研究员",
+      "context": "OpenAI, for their part, target having autonomous AI researchers by a March of 2028.",
+      "confidence": 0.9
+    },
+    {
+      "term": "GPT",
+      "suggested_translation": "GPT",
+      "context": "The company has used the same base model, GPT-4o, for all their recent flagship models",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "rl": "RL",
+    "gdpval": "GDPval",
+    "computer use agents": "计算机使用智能体",
+    "mid-training": "中期训练",
+    "pre-training": "预训练",
+    "post-training": "后训练",
+    "openai": "OpenAI",
+    "computer use environments": "计算机操作环境"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T22:53:13.143882"
+}

@@ -1,7 +1,7 @@
 {
   "section_id": "05-hbm4-competition-and-hbm3e-pri",
   "title": "HBM4 Competition and HBM3E Pricing",
-  "title_translation": null,
+  "title_translation": "HBM4竞争与HBM3E定价",
   "paragraphs": [
     {
       "id": "p000",
@@ -42,19 +42,77 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "与标准型 DRAM 不同，HBM 通常能为供应商提供更高的订单可见度与长期销量承诺，但也限制了年内提价的能力。在下行周期或温和上行周期中，这种模式极具优势，能支撑更稳定的盈利与利润率。然而，在如此量级的超级周期中，与价格能迅速“价值重估”的标准型 DRAM 相比，HBM 反而会限制上行空间。这种不对称性正是我们在维持看好SK海力士的同时、转而看多三星的核心逻辑，Core Research 的订阅用户在我们 11 月的报告中已获悉此观点。在该报告中，我们着重指出三星在标准型 DRAM 领域的业务敞口显著高于同行。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:10:54.471467",
+          "tokenized_text": "与标准型 DRAM 不同，HBM 通常能为供应商提供更高的订单可见度与长期销量承诺，但也限制了年内提价的能力。在下行周期或温和上行周期中，这种模式极具优势，能支撑更稳定的盈利与利润率。然而，在如此量级的超级周期中，与价格能迅速“价值重估”的标准型 DRAM 相比，HBM 反而会限制上行空间。这种不对称性正是我们在维持看好SK海力士的同时、转而看多三星的核心逻辑，[[[LINK_1|Core Research]]] 的订阅用户在我们 11 月的报告中已获悉此观点。在该报告中，我们着重指出三星在标准型 DRAM 领域的业务敞口显著高于同行。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": false,
+        "applied_terms": [
+          "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+          "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+          "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+          "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+          "key_points": [
+            "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+            "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+            "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+          ],
+          "translation_notes": [
+            "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+            "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "翻译指南明确要求将 'Commodity DRAM' 译为 '标准型 DRAM'，以更符合中国半导体行业的标准术语。但译文在第0段和第1段中多次使用了 '大宗DRAM'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将其处理为 '三星的 HBM4 前道工艺 1c节点'，名词堆叠略显生硬。'1c' 是对前道工艺节点的具体说明，建议使用括号或调整语序以提升流畅度。"
+          },
+          {
+            "type": "format",
+            "description": "译文中 '向客户 提示 过此风险' 的 '提示' 两侧出现了不必要的空格。"
+          },
+          {
+            "type": "format",
+            "description": "中文汉字与英文/数字之间缺少必要的空格，如第1、2段的 '12层HBM3E'，第4、5段的 'SK海力士'，以及第5段的 'R200级'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -81,12 +139,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "定价层面的影响显而易见，但实际上，其影响程度已远超市场预期。大宗 DRAM 价格的快速攀升，目前正直接影响今年 12 层 HBM3E 乃至 HBM4 的定价谈判。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:10:54.471513",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": false,
+        "applied_terms": [
+          "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+          "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+          "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+          "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+          "key_points": [
+            "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+            "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+            "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+          ],
+          "translation_notes": [
+            "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+            "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "翻译指南明确要求将 'Commodity DRAM' 译为 '标准型 DRAM'，以更符合中国半导体行业的标准术语。但译文在第0段和第1段中多次使用了 '大宗DRAM'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将其处理为 '三星的 HBM4 前道工艺 1c节点'，名词堆叠略显生硬。'1c' 是对前道工艺节点的具体说明，建议使用括号或调整语序以提升流畅度。"
+          },
+          {
+            "type": "format",
+            "description": "译文中 '向客户 提示 过此风险' 的 '提示' 两侧出现了不必要的空格。"
+          },
+          {
+            "type": "format",
+            "description": "中文汉字与英文/数字之间缺少必要的空格，如第1、2段的 '12层HBM3E'，第4、5段的 'SK海力士'，以及第5段的 'R200级'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -113,12 +229,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "早在 2025 年第四季度初，市场共识曾倾向于 2026 年 12层HBM3E 的平均售价 (ASP) 将出现约 15% 至 20% 的下滑。我们认为实际情况并非如此，上个月我们也已向机构客户明确了这一点。鉴于当前的定价环境、超预期的 HBM3E 产品占比、与 H200 需求挂钩的潜在增量订单，以及今年晚些时候 HBM4 产能爬坡引发的 HBM3E 供应收紧，预计 2026 年 12层HBM3E 价格持平是更为合理的假设。对三星而言，其 2025 年的 HBM3E 定价低于SK海力士与美光；在 12层HBM3E 性能改善与年内出货量攀升的双重驱动下，三星今年完全有望实现 10% 至 15% 的提价。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:10:54.471536",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": false,
+        "applied_terms": [
+          "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+          "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+          "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+          "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+          "key_points": [
+            "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+            "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+            "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+          ],
+          "translation_notes": [
+            "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+            "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "翻译指南明确要求将 'Commodity DRAM' 译为 '标准型 DRAM'，以更符合中国半导体行业的标准术语。但译文在第0段和第1段中多次使用了 '大宗DRAM'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将其处理为 '三星的 HBM4 前道工艺 1c节点'，名词堆叠略显生硬。'1c' 是对前道工艺节点的具体说明，建议使用括号或调整语序以提升流畅度。"
+          },
+          {
+            "type": "format",
+            "description": "译文中 '向客户 提示 过此风险' 的 '提示' 两侧出现了不必要的空格。"
+          },
+          {
+            "type": "format",
+            "description": "中文汉字与英文/数字之间缺少必要的空格，如第1、2段的 '12层HBM3E'，第4、5段的 'SK海力士'，以及第5段的 'R200级'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -179,19 +353,77 @@
         "LINK_1",
         "LINK_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "探讨 HBM4 的验证进度同样至关重要：根据我们的供应链调研，各大存储供应商最新交付的 HBM4 工程样品，在引脚速率方面仍未达到目标规格。我们在 1 月初更新 Accelerator & HBM model 时，已向客户提示过此风险。目前三星与SK海力士的样品运行速率约为 10 Gbps，而美光的 HBM4 样品引脚速率远不及此，这必将拖累其 HBM4 的市场份额与产能爬坡时间表。这一差距凸显了 HBM4 技术复杂性的剧增，也意味着存储供应商在产能爬坡期间遭遇瓶颈的概率大增。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:10:54.471638",
+          "tokenized_text": "探讨 HBM4 的验证进度同样至关重要：根据我们的供应链调研，各大存储供应商最新交付的 HBM4 工程样品，在引脚速率方面仍未达到目标规格。我们在 1 月初更新 [[[LINK_2|Accelerator & HBM model]]] 时，已向客户[[[LINK_1|提示]]]过此风险。目前三星与SK海力士的样品运行速率约为 10 Gbps，而美光的 HBM4 样品引脚速率远不及此，这必将拖累其 HBM4 的市场份额与产能爬坡时间表。这一差距凸显了 HBM4 技术复杂性的剧增，也意味着存储供应商在产能爬坡期间遭遇瓶颈的概率大增。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": false,
+        "applied_terms": [
+          "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+          "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+          "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+          "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+          "key_points": [
+            "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+            "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+            "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+          ],
+          "translation_notes": [
+            "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+            "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "翻译指南明确要求将 'Commodity DRAM' 译为 '标准型 DRAM'，以更符合中国半导体行业的标准术语。但译文在第0段和第1段中多次使用了 '大宗DRAM'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将其处理为 '三星的 HBM4 前道工艺 1c节点'，名词堆叠略显生硬。'1c' 是对前道工艺节点的具体说明，建议使用括号或调整语序以提升流畅度。"
+          },
+          {
+            "type": "format",
+            "description": "译文中 '向客户 提示 过此风险' 的 '提示' 两侧出现了不必要的空格。"
+          },
+          {
+            "type": "format",
+            "description": "中文汉字与英文/数字之间缺少必要的空格，如第1、2段的 '12层HBM3E'，第4、5段的 'SK海力士'，以及第5段的 'R200级'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -218,12 +450,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "从更微观的层面来看，三星的 HBM4 前道工艺（1c 节点）在性能与能效上均具备竞争力，部分场景下的功耗甚至低于SK海力士。然而，SK海力士在信号完整性上持续保持优势，其更低的抖动印证了在封装层面的卓越执行力。至于美光，尽管管理层对 HBM4 信心满满，但鉴于其迟迟无法达到英伟达要求的引脚速率，我们对其执行力仍持怀疑态度。具体而言，我们认为 HBM4 的竞争极可能演变为由韩国存储双雄主导的格局，尤其是在争夺 HBM4 最大终端客户英伟达的订单时。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:10:54.471662",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": false,
+        "applied_terms": [
+          "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+          "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+          "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+          "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+          "key_points": [
+            "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+            "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+            "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+          ],
+          "translation_notes": [
+            "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+            "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "翻译指南明确要求将 'Commodity DRAM' 译为 '标准型 DRAM'，以更符合中国半导体行业的标准术语。但译文在第0段和第1段中多次使用了 '大宗DRAM'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将其处理为 '三星的 HBM4 前道工艺 1c节点'，名词堆叠略显生硬。'1c' 是对前道工艺节点的具体说明，建议使用括号或调整语序以提升流畅度。"
+          },
+          {
+            "type": "format",
+            "description": "译文中 '向客户 提示 过此风险' 的 '提示' 两侧出现了不必要的空格。"
+          },
+          {
+            "type": "format",
+            "description": "中文汉字与英文/数字之间缺少必要的空格，如第1、2段的 '12层HBM3E'，第4、5段的 'SK海力士'，以及第5段的 'R200级'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -250,12 +540,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "尽管如此，即便三星正在缩小 HBM4 的性能差距，SK海力士凭借备受认可的历史业绩与可靠性，依然稳居 Rubin 核心 HBM 供应商的宝座。因此，针对 R200级 HBM 供应，我们预计SK海力士将斩获约 60% 的份额，三星紧随其后占据约 30%，而美光在 Rubin 上市的首个 12 个月内将颗粒无收。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:10:54.471682",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": false,
+        "applied_terms": [
+          "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+          "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+          "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+          "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+          "key_points": [
+            "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+            "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+            "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+          ],
+          "translation_notes": [
+            "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+            "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "翻译指南明确要求将 'Commodity DRAM' 译为 '标准型 DRAM'，以更符合中国半导体行业的标准术语。但译文在第0段和第1段中多次使用了 '大宗DRAM'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将其处理为 '三星的 HBM4 前道工艺 1c节点'，名词堆叠略显生硬。'1c' 是对前道工艺节点的具体说明，建议使用括号或调整语序以提升流畅度。"
+          },
+          {
+            "type": "format",
+            "description": "译文中 '向客户 提示 过此风险' 的 '提示' 两侧出现了不必要的空格。"
+          },
+          {
+            "type": "format",
+            "description": "中文汉字与英文/数字之间缺少必要的空格，如第1、2段的 '12层HBM3E'，第4、5段的 'SK海力士'，以及第5段的 'R200级'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -282,12 +630,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "步入今年二季度，我们预计将进一步看清 HBM4 的竞争格局。随着行业从 HBM3E 向 HBM4 世代交替，各大存储供应商必将持续提升 HBM4 的质量与良率，并积极推进量产准备工作。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:10:54.471703",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": false,
+        "applied_terms": [
+          "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+          "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+          "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+          "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+          "key_points": [
+            "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+            "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+            "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+          ],
+          "translation_notes": [
+            "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+            "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "翻译指南明确要求将 'Commodity DRAM' 译为 '标准型 DRAM'，以更符合中国半导体行业的标准术语。但译文在第0段和第1段中多次使用了 '大宗DRAM'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将其处理为 '三星的 HBM4 前道工艺 1c节点'，名词堆叠略显生硬。'1c' 是对前道工艺节点的具体说明，建议使用括号或调整语序以提升流畅度。"
+          },
+          {
+            "type": "format",
+            "description": "译文中 '向客户 提示 过此风险' 的 '提示' 两侧出现了不必要的空格。"
+          },
+          {
+            "type": "format",
+            "description": "中文汉字与英文/数字之间缺少必要的空格，如第1、2段的 '12层HBM3E'，第4、5段的 'SK海力士'，以及第5段的 'R200级'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -314,12 +720,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "我们认为，HBM4 的技术复杂性将带来更为陡峭的良率爬坡曲线，这不仅会挤压供应商的利润率，还将拖慢产品组合转换的步伐，使其落后于先前的预期。因此，到 2026 年，HBM3E 在整体 HBM 产品矩阵中占据的比重，大概率将高于部分机构的初期预测。我们预计，向 HBM4 实质性的世代交替将在 2026 年下半年到来。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:10:54.471721",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.975,
+        "is_excellent": false,
+        "applied_terms": [
+          "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+          "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+          "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+          "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+          "key_points": [
+            "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+            "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+            "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+          ],
+          "translation_notes": [
+            "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+            "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "翻译指南明确要求将 'Commodity DRAM' 译为 '标准型 DRAM'，以更符合中国半导体行业的标准术语。但译文在第0段和第1段中多次使用了 '大宗DRAM'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将其处理为 '三星的 HBM4 前道工艺 1c节点'，名词堆叠略显生硬。'1c' 是对前道工艺节点的具体说明，建议使用括号或调整语序以提升流畅度。"
+          },
+          {
+            "type": "format",
+            "description": "译文中 '向客户 提示 过此风险' 的 '提示' 两侧出现了不必要的空格。"
+          },
+          {
+            "type": "format",
+            "description": "中文汉字与英文/数字之间缺少必要的空格，如第1、2段的 '12层HBM3E'，第4、5段的 'SK海力士'，以及第5段的 'R200级'。"
+          }
+        ]
+      },
       "history": []
     }
   ]

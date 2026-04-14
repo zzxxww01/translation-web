@@ -1,0 +1,55 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "Claude Code",
+      "suggested_translation": "Claude Code",
+      "context": "Anthropic's AI coding agent driving commits and revenue",
+      "confidence": 1.0
+    },
+    {
+      "term": "ARR",
+      "suggested_translation": "年度经常性收入 (ARR)",
+      "context": "forecast ARR growth and compare Anthropic to OpenAI",
+      "confidence": 1.0
+    },
+    {
+      "term": "Trainium2/3",
+      "suggested_translation": "Trainium2/3",
+      "context": "AWS associated AI accelerator supply chains",
+      "confidence": 1.0
+    },
+    {
+      "term": "Coreweave",
+      "suggested_translation": "CoreWeave",
+      "context": "Coreweave Q3’2025 earnings preview",
+      "confidence": 1.0
+    },
+    {
+      "term": "compute",
+      "suggested_translation": "算力",
+      "context": "Anthropic’s growth will be constrained by compute",
+      "confidence": 0.95
+    },
+    {
+      "term": "AWS",
+      "suggested_translation": "AWS",
+      "context": "cloud partners AWS, Google Cloud, Azure",
+      "confidence": 1.0
+    },
+    {
+      "term": "Datacenter Industry Model",
+      "suggested_translation": "数据中心行业模型",
+      "context": "SemiAnalysis proprietary building-by-building tracker",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "capex": "capex / CapEx",
+    "tokenomics": "Tokenomics model",
+    "dram": "DRAM",
+    "nand flash": "NAND"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T11:49:27.241855"
+}

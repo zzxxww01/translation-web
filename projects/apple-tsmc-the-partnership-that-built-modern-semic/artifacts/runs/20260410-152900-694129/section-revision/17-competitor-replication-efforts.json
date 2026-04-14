@@ -1,0 +1,20 @@
+{
+  "section_id": "17-competitor-replication-efforts",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.5,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.5,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 10.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "华为、三星、小米、中兴、谷歌等厂商曾试图复刻苹果在垂直整合上的成功，但均未能形成连贯的战略。华为曾看似是有力的挑战者，却因出口管制而在台积电处遭遇断供。华为目前已接近自给自足，且其投资版图远比苹果广阔，已深入光刻机、晶圆厂与存储器等供应链深层。然而，中国在先进制程节点上的产能受限，拖慢了其迈向成功的步伐。",
+    "三星凭借其 Exynos 应用处理器与基带，几乎复刻了 A系列战略，但受限于产能与良率，依然依赖高通等外部芯片企业。"
+  ]
+}

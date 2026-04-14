@@ -1,0 +1,1369 @@
+{
+  "theme": "The AI industry's paradigm shift from pre-training data aggregation to Reinforcement Learning (RL) scaling, which is driving massive demand for specialized RL environments, expert data foundries, and multi-agent architectures.",
+  "key_arguments": [
+    "The bottleneck in AI scaling has shifted from basic text data to high-fidelity Reinforcement Learning (RL) environments, creating a 'gold rush' for specialized environment platforms, particularly in coding.",
+    "Traditional data labeling giants like Scale AI are being replaced by highly specialized 'data foundries' and expert contractors capable of providing complex, domain-specific data.",
+    "LLM adoption is currently augmenting rather than replacing human experts, giving rise to an 'RL as a service' market for enterprise customization.",
+    "Applying RL to scientific domains like biology (wet labs) presents unique challenges, primarily sparse rewards caused by long experiment timelines and long rollouts.",
+    "The next frontier of AI capability scaling lies in multi-agent architectures, where different models cooperate to solve complex, long-horizon problems."
+  ],
+  "structure_summary": "The article opens by introducing the shift toward RL and the resulting gap left by Scale AI. It then dives technically into how RL environments (specifically coding) are built. The narrative transitions to the business side—data foundries, procurement patterns, and 'RL as a service'. Finally, it explores the application of RL in scientific domains (biology) and concludes with a forward-looking perspective on multi-agent architectures.",
+  "terminology": [
+    {
+      "term": "RL (Reinforcement Learning)",
+      "context_meaning": "A machine learning training method based on rewarding desired behaviors, central to the article's scaling thesis.",
+      "translation": "强化学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard industry term."
+    },
+    {
+      "term": "Data Foundries",
+      "context_meaning": "Companies that produce highly specialized, expert-level data for AI training, analogous to semiconductor foundries.",
+      "translation": "数据代工厂",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Translating as '代工厂' accurately captures the 'foundry' metaphor (like TSMC) in the tech supply chain context."
+    },
+    {
+      "term": "Computer use environments",
+      "context_meaning": "Simulated or real operating system environments where AI agents learn to interact with computers like humans.",
+      "translation": "计算机操作环境",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard translation for Anthropics' and others' 'computer use' paradigm."
+    },
+    {
+      "term": "Mid-Training",
+      "context_meaning": "Continued pre-training (next token prediction) used to extend cutoff dates or improve domain knowledge before RL.",
+      "translation": "中期训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "An emerging industry term, needs to be consistently translated as 中期训练 as defined by the authors."
+    },
+    {
+      "term": "Rollouts",
+      "context_meaning": "In RL, the process of generating a sequence of states and actions (trajectories) by running a policy in an environment.",
+      "translation": "轨迹推演",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Cross-domain pitfall: Must not be translated as '产品发布' (product rollouts). In RL, it refers to generating trajectories."
+    },
+    {
+      "term": "Sparse rewards",
+      "context_meaning": "A challenge in RL where the feedback/reward is only given after a long sequence of actions.",
+      "translation": "稀疏奖励",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard RL terminology."
+    },
+    {
+      "term": "Wet Lab",
+      "context_meaning": "Laboratories where chemicals, drugs, or other biological matter are handled in liquid solutions.",
+      "translation": "湿实验室",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard biology term distinguishing physical biological labs from computational 'dry labs'."
+    },
+    {
+      "term": "Execution-based verification",
+      "context_meaning": "Validating AI-generated code by actually running it against test suites rather than just reading it.",
+      "translation": "基于执行的验证",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Accurate technical description of the coding environment workflow."
+    },
+    {
+      "term": "Reward Hacking",
+      "context_meaning": "When an AI system finds a loophole to get high rewards without actually completing the intended task.",
+      "translation": "奖励劫持",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "Common AI safety term, '奖励劫持' or '奖励作弊' is widely understood."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "词元",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "英伟达架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RL",
+      "context_meaning": "scaling RL is the critical path to unlocking further AI capabilities",
+      "translation": "RL (强化学习)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "post-training",
+      "context_meaning": "driven by post-training and scaling up RL compute alone",
+      "translation": "后训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "pre-training",
+      "context_meaning": "Pre-training continues to see further optimizations",
+      "translation": "预训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GDPval",
+      "context_meaning": "OpenAI created an eval called GDPval. This eval covers 1000+ tasks",
+      "translation": "GDPval",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Computer Use Agents",
+      "context_meaning": "Computer Use Agents, LLMs in Biology, Mid-Training",
+      "translation": "计算机使用智能体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Meta",
+      "context_meaning": "Tech company that absorbed Scale AI",
+      "translation": "Meta",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "evaluations",
+      "context_meaning": "In the context of AI model safety and performance testing",
+      "translation": "评估",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Scale AI",
+      "context_meaning": "AI data contractor company",
+      "translation": "Scale AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "MCP",
+      "context_meaning": "an MCP server that sits on top and exposes tool definitions",
+      "translation": "MCP",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "AWS",
+      "context_meaning": "AWS terminals",
+      "translation": "AWS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "UI",
+      "context_meaning": "replicate the UI of sites",
+      "translation": "UI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "UI gyms",
+      "context_meaning": "These “UI gyms” often cost about $20,000 per website",
+      "translation": "UI训练场",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "API",
+      "context_meaning": "an API endpoint to a browser",
+      "translation": "API",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RL environments",
+      "context_meaning": "sell RL environments",
+      "translation": "强化学习环境",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PR",
+      "context_meaning": "containing 30k repos and 450k PRs with permissive licenses",
+      "translation": "PR (Pull Request/拉取请求)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "rollout",
+      "context_meaning": "the more difficult the task the more rollouts are needed during training",
+      "translation": "推演 / 采样轨迹",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ARR",
+      "context_meaning": "revenue we believe is closer to $1B ARR",
+      "translation": "ARR (年度经常性收入)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Data Foundry",
+      "context_meaning": "Chinese VC firms are actively trying to stand up Chinese data foundry competitors",
+      "translation": "数据代工厂",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "rubric",
+      "context_meaning": "producers of a significant amount of grading rubrics",
+      "translation": "评分标准",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ML",
+      "context_meaning": "particularly ML related environments and tasks.",
+      "translation": "机器学习 (ML)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IMO",
+      "context_meaning": "The model which won IMO Gold, a version of GPT-5.1 Codex Max...",
+      "translation": "IMO (国际数学奥林匹克)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "OpenAI",
+      "context_meaning": "An interesting datapoint against this hypothesis can be found in OpenAI’s GDPval paper.",
+      "translation": "OpenAI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RFT",
+      "context_meaning": "OpenAI recently spinning up a “Reinforcement Fine Tuning” (RFT) service.",
+      "translation": "强化微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Trainium",
+      "context_meaning": "Anthropic is bringing on large volumes of Trainium",
+      "translation": "Trainium",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Strategic Deployment",
+      "context_meaning": "done through the “Strategic Deployment” team",
+      "translation": "战略部署",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "YC",
+      "context_meaning": "smaller YC startups like RunRL",
+      "translation": "YC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "closed loop",
+      "context_meaning": "operating in a closed loop: proposing protocol modifications",
+      "translation": "闭环",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "AlphaEvolve",
+      "context_meaning": "The first example that went mainstream of such a system was Google’s AlphaEvolve",
+      "translation": "AlphaEvolve",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ARC-AGI",
+      "context_meaning": "researcher Jeremy Brennan leveraged a multi-agent architecture built on top of Grok 4 to get a record on ARC-AGI.",
+      "translation": "ARC-AGI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "orchestrator",
+      "context_meaning": "an orchestrator calls other models recursively throughout a task.",
+      "translation": "编排器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SG Lang",
+      "context_meaning": "production grade SG Lang Kernels",
+      "translation": "SGLang",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Anthropic",
+      "context_meaning": "Anthropic's next big bet",
+      "translation": "Anthropic",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RL as a Service",
+      "context_meaning": "Worker Automation, RL as a Service, Anthropic's next big bet",
+      "translation": "RL即服务",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "xAI",
+      "context_meaning": "Anthropic, xAI, and especially Google all derived significant gains",
+      "translation": "xAI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Utility Evals",
+      "context_meaning": "GDPval and Utility Evals",
+      "translation": "实用性评估",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "observation",
+      "context_meaning": "translates it into an action on the underlying software and returns the resulting observation.",
+      "translation": "观察值",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "tool call",
+      "context_meaning": "When an agent issues a tool call like click(x,y) or type(text)",
+      "translation": "工具调用",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Qwen",
+      "context_meaning": "Qwen is currently spending around 5% of their pre-training compute on post-training.",
+      "translation": "通义千问",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "reward signals",
+      "context_meaning": "Contractors design tasks, write expected solutions, specify reward signals",
+      "translation": "奖励信号",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ChatGPT Agent",
+      "context_meaning": "ChatGPT Agent sees heavy use of UI Gyms.",
+      "translation": "ChatGPT智能体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Medra",
+      "context_meaning": "This is where we see a role for companies like Medra, who aims to supply large amounts of biological data to the labs.",
+      "translation": "Medra",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "straggler rollouts",
+      "context_meaning": "weights are exchanged and straggler rollouts continue with stale KV Caches.",
+      "translation": "掉队推演",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Authoritative, analytical, technically dense, and strategically minded.",
+    "target_audience": "AI researchers, ML engineers, tech investors, and industry strategists.",
+    "translation_voice": "Professional tech-business analyst. The Chinese should be concise, objective, and use precise industry jargon without sounding purely academic. Maintain the punchy, insider tone typical of SemiAnalysis."
+  },
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "Heading: During a Gold Rush, Sell Shovels.",
+      "issue": "Classic business metaphor that needs natural phrasing in Chinese.",
+      "suggestion": "Translate as '淘金热中卖铲子'. The meaning is universally understood in Chinese tech/business circles."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: Why RL for Biology Can be Challenging",
+      "issue": "The word 'rollouts' in RL means executing a policy to gather trajectory data, not launching a product.",
+      "suggestion": "Translate as '轨迹推演' or '长序列推演' and add a brief translator note if necessary to distinguish from software rollouts."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: So You Want to Make a Coding Environment?",
+      "issue": "Long procedural sentence detailing the PR test patch process ('A task is considered valid only if...').",
+      "suggestion": "Break into a bulleted or logically sequenced Chinese sentence (e.g., '一个任务只有满足以下条件才算有效：首先...；其次...；最后...')."
+    },
+    {
+      "type": "accuracy",
+      "location": "Heading: Sorry, your agent is not allowed",
+      "issue": "Casual, slightly sarcastic tone reflecting platform API blocking.",
+      "suggestion": "Maintain the conversational tone: '抱歉，您的智能体被禁了' or '对不起，此地禁止智能体入内'."
+    }
+  ],
+  "guidelines": [
+    "Preserve Semantic Density: Do not over-explain technical terms in the main text; rely on the terminology list. Readers are assumed to be industry insiders.",
+    "Sentence Restructuring: SemiAnalysis often uses long, clause-heavy sentences (e.g., explaining the test patch process). Break these down into shorter, logical Chinese sequences (e.g., using '首先...其次...最后...' or semicolons) to ensure natural paragraph flow.",
+    "Domain Consistency: Pay strict attention to RL terminology. 'Rollouts' must be translated as '轨迹推演', 'Sparse rewards' as '稀疏奖励', and 'Mid-training' as '中期训练'. Do not use general software or business translations for these.",
+    "Company Names: Keep all AI startup and lab names in English (e.g., Scale AI, Windsurf, Cursor, Anthropic, Qwen, Surge).",
+    "Tone Match: Emulate the 'insider analyst' voice. Use sharp, professional business-tech phrasing (e.g., '采购模式' for buying patterns, '防御性姿态' for defensive posturing).",
+    "Title Translation: Ensure all elements of the original title are translated without dropping keywords. 'Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data' -> '扩展强化学习：环境、奖励劫持、智能体与数据扩展'."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+      "relation_to_previous": "N/A (Opening section).",
+      "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+      "key_points": [
+        "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+        "High-signal user data curation allows smaller companies to compete with major labs.",
+        "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+      ],
+      "translation_notes": [
+        "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+        "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+        "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+      ]
+    },
+    "01-outsourcing-and-the-ghost-of-s": {
+      "role_in_article": "Provides historical market context and identifies the catalyst for the current industry landscape: the vacuum left by Scale AI.",
+      "relation_to_previous": "Answers why outsourcing is a focal point by examining the historical dominator of the AI data contracting market.",
+      "relation_to_next": "Ends with a direct question about who is filling the gap left by Scale AI, teeing up the introduction of new startups selling 'shovels'.",
+      "key_points": [
+        "Scale AI historically dominated lab data contracting with massive revenues.",
+        "Meta's acquisition of Scale AI caused other labs to pull back to protect their proprietary data demands.",
+        "A massive market gap emerged for high-quality RL data providers."
+      ],
+      "translation_notes": [
+        "Translate 'The Ghost of Scale AI' non-literally to capture its lingering influence or the vacuum it left behind (e.g., Scale AI 的幽灵/余波).",
+        "Use industry-standard terms for 'evaluations' (模型评测) and 'data contractors' (数据承包商)."
+      ]
+    },
+    "02-during-a-gold-rush-sell-shove": {
+      "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+      "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+      "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+      "key_points": [
+        "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+        "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+        "Coding environments represent the peak of current market demand."
+      ],
+      "translation_notes": [
+        "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+        "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+        "Translate 'high fidelity' as '高保真' in the context of task simulation."
+      ]
+    },
+    "03-so-you-want-to-make-a-coding-e": {
+      "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+      "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+      "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+      "key_points": [
+        "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+        "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+        "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+      ],
+      "translation_notes": [
+        "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+        "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+        "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+      ]
+    },
+    "04-data-foundries-and-expert-cont": {
+      "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+      "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+      "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+      "key_points": [
+        "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+        "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+        "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+      ],
+      "translation_notes": [
+        "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+        "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+        "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+      ]
+    },
+    "05-buying-patterns-across-labs": {
+      "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+      "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+      "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+      "key_points": [
+        "Different labs have distinct strategies and buying patterns for expert data.",
+        "Examples of high-end capabilities include IMO-winning models.",
+        "Raises skepticism about whether merely stacking environments is the true path to AGI."
+      ],
+      "translation_notes": [
+        "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+        "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+      ]
+    },
+    "06-llm-based-automation-is-not-a": {
+      "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+      "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+      "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+      "key_points": [
+        "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+        "Real-world complexities, such as in radiology, prevent straightforward automation.",
+        "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+      ],
+      "translation_notes": [
+        "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+        "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+      ]
+    },
+    "07-sorry-your-agent-is-not-allow": {
+      "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+      "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+      "relation_to_next": "N/A (Conclusion of the provided structure).",
+      "key_points": [
+        "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+        "Access requires complex backend negotiations and platform politics.",
+        "Deals may be contingent on leveraging cloud and hardware resources."
+      ],
+      "translation_notes": [
+        "Ensure 'Agent' is consistently translated as '智能体'.",
+        "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+        "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+      ]
+    },
+    "08-rl-as-a-service": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "09-rl-for-science": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "10-rl-meets-the-wet-lab": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "11-why-rl-for-biology-can-be-chal": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "12-multi-agent-architectures-gpt": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 13,
+  "paragraph_count": 179,
+  "word_count": 6457
+}

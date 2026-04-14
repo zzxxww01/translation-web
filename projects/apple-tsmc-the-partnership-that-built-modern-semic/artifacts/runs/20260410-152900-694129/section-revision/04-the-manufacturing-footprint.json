@@ -1,0 +1,27 @@
+{
+  "section_id": "04-the-manufacturing-footprint",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.1,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.0,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "绘制苹果与台积电生态版图：芯片诞生之地",
+    "要理解双方的合作关系，必须先厘清芯片制造的物理分布。台积电的超大型晶圆厂（GigaFab）网络分布广泛，各厂专攻特定的制程节点与封装技术，每年为苹果量产逾十亿颗芯片。苹果的供应链深度扎根于台湾西部走廊，但出于地缘政治避险考量，目前正被迫向美国亚利桑那州进行成本高昂的产能扩张。",
+    "https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png",
+    "关键后段工序：先进封装",
+    "在先进封装领域，苹果与英伟达的需求分化最为剧烈。苹果依赖集成扇出型层叠封装 (InFO-PoP)。该技术将 DRAM 直接堆叠在系统级芯片 (SoC) 上方，以最大限度降低 iPhone 厚度。这项技术是苹果当年决定弃用三星的关键，它不仅让手机更轻薄，还提升了散热性能。相比之下，英伟达则依赖CoWoS技术。该技术将 HBM 与 GPU 并排平铺于硅中介层上，以榨取最大带宽。",
+    "https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png",
+    "目前，苹果与英伟达尚未在同一条封装产线上短兵相接。苹果独占 AP3 厂（先进封装厂）的 InFO 产能，而英伟达则在争夺 AP5 和 AP6 厂的 CoWoS 产能。然而，随着苹果转向采用系统级整合芯片（SoIC）和 WMCM 技术的 M5/M6 Ultra 芯片，双方必将在 AP6 和 AP7 厂争夺相同的先进 3D 封装资源。这种技术路线的趋同，为未来的产能分配埋下了隐患。",
+    "位于台南的 Fab 18 是台积电先进制程的旗舰工厂，本质上堪称“苹果专属晶圆厂”。A19 Pro、A18 Pro、M3、M4 以及 M5 芯片，均产自 Fab 18 的 3 纳米产线。这种将产能高度集中于台湾南部的布局，正是苹果供应链中不可忽视的地缘政治隐患。",
+    "https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png"
+  ]
+}

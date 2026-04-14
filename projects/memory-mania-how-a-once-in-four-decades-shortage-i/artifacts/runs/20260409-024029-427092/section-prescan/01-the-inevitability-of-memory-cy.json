@@ -1,0 +1,58 @@
+{
+  "section_id": "01-the-inevitability-of-memory-cy",
+  "new_terms": [
+    {
+      "term": "Moore's Law",
+      "suggested_translation": "摩尔定律",
+      "context": "DRAM has benefited from the two scaling laws that defined the semiconductor industry: Moore’s Law and Dennard scaling.",
+      "confidence": 1.0
+    },
+    {
+      "term": "access transistor",
+      "suggested_translation": "存取晶体管",
+      "context": "The 1T1C DRAM cell, with one access transistor and one storage capacitor, scaled for decades.",
+      "confidence": 0.95
+    },
+    {
+      "term": "storage capacitor",
+      "suggested_translation": "存储电容",
+      "context": "The 1T1C DRAM cell, with one access transistor and one storage capacitor, scaled for decades.",
+      "confidence": 0.95
+    },
+    {
+      "term": "aspect ratio",
+      "suggested_translation": "深宽比",
+      "context": "Capacitors are now extreme three-dimensional structures with aspect ratios approaching 100:1",
+      "confidence": 0.95
+    },
+    {
+      "term": "sense amplifier",
+      "suggested_translation": "读出放大器",
+      "context": "Bitlines and sense amplifiers, once secondary concerns, are now dominant constraints.",
+      "confidence": 0.95
+    },
+    {
+      "term": "signal margin",
+      "suggested_translation": "信号裕度",
+      "context": "Every incremental shrink reduces signal margin, increases variability, and raises cost.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Memory Wall",
+      "suggested_translation": "内存墙",
+      "context": "The Memory Wall: Past, Present, and Future of DRAM",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "dram": "DRAM",
+    "dennard scaling": "登纳德缩放定律",
+    "1t1c dram cell": "1T1C DRAM 存储单元",
+    "cost per bit": "每比特成本",
+    "micron": "美光",
+    "semianalysis": "SemiAnalysis",
+    "memory model": "存储模型"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-09T02:47:14.811858"
+}

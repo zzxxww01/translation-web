@@ -1,0 +1,291 @@
+{
+  "section_id": "15-packaging-economics",
+  "section_title": "Packaging Economics",
+  "section_title_translation": "封装经济学",
+  "section_position": "16/23",
+  "article_theme": "The decade-long, symbiotic partnership between Apple and TSMC is undergoing a structural shift as AI, driven by NVIDIA, overtakes Apple in leading-edge capacity demand, fundamentally altering foundry power dynamics, node optimization, and semiconductor capital expenditures.",
+  "structure_summary": "The article begins with a historical retrospective of the Apple-TSMC alliance (the 'Anchor Tenant' era), transitions into quantitative analysis of wafer demand, packaging economics, and margin savings, and then pivots to the current disruption caused by AI/NVIDIA. It concludes with strategic forecasts for 2025-2035, analyzing geographic risks (Taiwan/Arizona) and the technical tug-of-war over future node optimization (A16 vs A14).",
+  "target_audience": "Semiconductor industry professionals, financial analysts, tech investors, and hardcore tech enthusiasts.",
+  "translation_voice": "Professional financial and semiconductor industry analyst voice. Precise, data-driven, yet engaging and readable with crisp logic.",
+  "previous_section_title": "How Apple Subsidizes TSMC",
+  "next_section_title": "Apple Gross Margin Savings from In-House Chips",
+  "section_role": "待分析",
+  "translation_notes": [],
+  "key_points": [],
+  "guidelines": [
+    "1. Disambiguate Node vs. Chip names: Pay extreme attention to 'A16' and 'A14'. When referring to TSMC's Angstrom-era nodes, explicitly translate as '台积电A16节点' to prevent confusion with Apple's A-series silicon.",
+    "2. Master Cross-Domain Terminology: This article heavily mixes semiconductor manufacturing (yield, KGD, GAA, backside power) with corporate finance (ROIC, capex, COGS, gross margin). Ensure strict adherence to standard Chinese terminology for both domains without mixing registers.",
+    "3. Restructure for Chinese Flow: Long, data-heavy English sentences comparing Apple and NVIDIA's wafer consumption should be broken into parallel, punchy Chinese clauses. Avoid overly long modifier chains (e.g., 'The ongoing transition away from Qualcomm...').",
+    "4. Preserve Financial Analogies: Terms like 'anchor tenant' (基石客户) and 'balance sheet as a service' are core to the author's thesis. Translate them directly but smoothly, as they highlight the economic realities of the foundry business.",
+    "5. Calibrate Intensity: Maintain the dramatic but professional tone in phrases like 'ruthless' (冷酷无情/极其坚决), 'elephant in the room' (不可忽视的隐患), and 'industrial kingmaker' (产业造王者). Do not flatten these into boring academic prose.",
+    "6. Data Formatting: Ensure all CAGR percentages, billions (B) to 十亿/百亿 conversions, and wafer counts (K) are localized accurately (e.g., $98B = 980亿美元, 130k = 13万片)."
+  ],
+  "article_challenges": [
+    {
+      "location": "Section 10 & 23: 'A16 is Nvidia’s node. A14 is Apple’s comeback.'",
+      "issue": "Readers and translators may confuse 'A16/A14' here with Apple's iPhone chips (A16 Bionic, A14 Bionic). In this context, A16 and A14 refer to TSMC's Angstrom-era process nodes (1.6nm and 1.4nm).",
+      "suggestion": "Explicitly add a translator note or inline clarification: '这里的A16指台积电的1.6纳米埃米级节点，而非苹果处理器' (A16 here refers to TSMC's 1.6nm node, not Apple's processor).",
+      "type": "accuracy"
+    },
+    {
+      "location": "Section 6: 'Apple’s Taiwan concentration is the elephant in the room.'",
+      "issue": "Literal translation of 'elephant in the room' can feel clunky in a hardcore tech/finance piece.",
+      "suggestion": "Translate as '不可忽视的隐患' (the hidden danger that cannot be ignored) or '显而易见却避而不谈的风险' to maintain professional tone.",
+      "type": "accuracy"
+    },
+    {
+      "location": "Section 19: 'Using TSMC’s balance sheet as a service...'",
+      "issue": "This is a brilliant financial framing (BaaS applied to balance sheets) that could be lost if translated too literally or too academically.",
+      "suggestion": "Translate as '将台积电的资产负债表作为一种服务（BaaS）来使用' to preserve the clever SaaS analogy.",
+      "type": "accuracy"
+    },
+    {
+      "location": "Section 10 & 11: 'concave' vs 'convex' growth curves",
+      "issue": "Mathematical terms applied to product adoption and wafer demand forecasting. Needs to make sense in a business context.",
+      "suggestion": "Translate 'concave' as '凹型增长（增速递减）' and 'convex' as '凸型增长（增速递增/前置爆发）' to ensure the financial/business meaning is immediately clear to Chinese readers.",
+      "type": "accuracy"
+    }
+  ],
+  "terminology": [
+    {
+      "original": "Anchor Tenant",
+      "term": "Anchor Tenant",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "note": "A primary customer whose massive, guaranteed demand justifies and de-risks a supplier's huge capital investment (borrowed from commercial real estate).",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "InFO-PoP (Integrated Fan-Out Package-on-Package)",
+      "term": "InFO-PoP (Integrated Fan-Out Package-on-Package)",
+      "translation": "集成扇出型层叠封装 (InFO-PoP)",
+      "strategy": "first_annotate",
+      "note": "TSMC's advanced packaging technology that stacks DRAM directly on the SoC, heavily used by Apple for mobile thickness reduction.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "CoWoS (Chip-on-Wafer-on-Substrate)",
+      "term": "CoWoS (Chip-on-Wafer-on-Substrate)",
+      "translation": "CoWoS封装",
+      "strategy": "preserve",
+      "note": "TSMC's 2.5D packaging technology used to place HBM side-by-side with GPUs, driven by NVIDIA.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Known Good Die (KGD)",
+      "term": "Known Good Die (KGD)",
+      "translation": "已知良好裸片",
+      "strategy": "translate",
+      "note": "Bare dies that have been fully tested and are known to be defect-free before packaging, impacting yield economics.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Yield learning curve",
+      "term": "Yield learning curve",
+      "translation": "良率学习曲线",
+      "strategy": "translate",
+      "note": "The process and timeline of improving manufacturing defect rates on a new semiconductor node.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Backside power delivery",
+      "term": "Backside power delivery",
+      "translation": "背面供电",
+      "strategy": "translate",
+      "note": "A new transistor architecture technique moving power routing to the back of the wafer to optimize power and signal routing.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Gate-all-around transistors (GAA)",
+      "term": "Gate-all-around transistors (GAA)",
+      "translation": "环绕栅极晶体管 (GAA)",
+      "strategy": "first_annotate",
+      "note": "The next-generation transistor architecture replacing FinFET, offering better electrostatic control.",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "ROIC (Return on Invested Capital)",
+      "term": "ROIC (Return on Invested Capital)",
+      "translation": "投入资本回报率 (ROIC)",
+      "strategy": "translate",
+      "note": "Financial metric showing how efficiently a company uses its capital to generate profits.",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "TSMC",
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Apple Silicon",
+      "term": "Apple Silicon",
+      "translation": "苹果自研芯片",
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "NVIDIA",
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "AMD",
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "Intel",
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Qualcomm",
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "MediaTek",
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Samsung",
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "SK Hynix",
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "Micron",
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence_note": true
+    },
+    {
+      "original": "foundry",
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "wafer",
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "fab",
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "node",
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV",
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "EUV lithography",
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "DUV",
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "first_occurrence_note": false
+    },
+    {
+      "original": "photolithography",
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "etching",
+      "term": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "deposition",
+      "term": "deposition",
+      "translation": "沉积",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence_note": false
+    },
+    {
+      "original": "CMP",
+      "term": "CMP",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "note": "Chemical Mechanical Planarization",
+      "first_occurrence_note": true
+    },
+    {
+      "original": "SoC",
+      "term": "SoC",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "note": "系统级芯片 (System on Chip)",
+      "first_occurrence_note": true
+    }
+  ]
+}

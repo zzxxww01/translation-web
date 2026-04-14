@@ -1,0 +1,68 @@
+{
+  "section_id": "01-anchor-tenant",
+  "new_terms": [
+    {
+      "term": "Super Power Rail",
+      "suggested_translation": "超级电源轨",
+      "context": "TSMC’s trade name for its backside power delivery variant for HPC.",
+      "confidence": 0.95
+    },
+    {
+      "term": "bleeding-edge capacity",
+      "suggested_translation": "尖端制程产能",
+      "context": "Refers to the absolute newest and most advanced semiconductor manufacturing capacity, distinct from general leading-edge.",
+      "confidence": 0.9
+    },
+    {
+      "term": "in-house silicon",
+      "suggested_translation": "自研芯片",
+      "context": "Refers to Apple's transition to designing its own chips (like Mac silicon) instead of using Intel.",
+      "confidence": 0.95
+    },
+    {
+      "term": "wafer mix",
+      "suggested_translation": "晶圆组合",
+      "context": "The proportion or breakdown of different types of wafers demanded by a company (e.g., iPhone's share of Apple's wafer mix).",
+      "confidence": 0.9
+    },
+    {
+      "term": "capacity allocation",
+      "suggested_translation": "产能分配",
+      "context": "How a foundry divides its manufacturing capacity among different customers or nodes.",
+      "confidence": 0.95
+    },
+    {
+      "term": "wafer shipments",
+      "suggested_translation": "晶圆出货量",
+      "context": "The total volume of processed wafers delivered by a foundry.",
+      "confidence": 0.95
+    },
+    {
+      "term": "A4",
+      "suggested_translation": "A4",
+      "context": "Apple's early generation A-series chip.",
+      "confidence": 1.0
+    },
+    {
+      "term": "A18",
+      "suggested_translation": "A18",
+      "context": "Apple's latest generation A-series chip.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "anchor tenant": "锚定客户",
+    "capex": "资本支出",
+    "purchase obligations": "采购承诺",
+    "platform shift": "平台转换",
+    "backside power delivery": "背面供电",
+    "gate-all-around transistors": "环绕栅极晶体管",
+    "thermal envelopes": "散热包络",
+    "gross margins": "毛利率",
+    "gm": "毛利率",
+    "ai accelerator": "AI加速器",
+    "leading-edge": "先进制程"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:37:36.739710"
+}

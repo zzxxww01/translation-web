@@ -1,0 +1,51 @@
+{
+  "section_id": "02-key-numbers",
+  "new_terms": [
+    {
+      "term": "Apple Silicon",
+      "suggested_translation": "苹果自研芯片",
+      "context": "Total Apple Silicon Revenue: $23.5B (2025)",
+      "confidence": 0.95
+    },
+    {
+      "term": "Platform Shift",
+      "suggested_translation": "平台转移",
+      "context": "Platform Shift at TSMC: Smartphone Revenue % vs HPC Revenue %",
+      "confidence": 0.9
+    },
+    {
+      "term": "Manufacturing Purchase Obligations",
+      "suggested_translation": "制造采购承诺",
+      "context": "Apple’s Supply Chain Leverage: Manufacturing Purchase Obligations",
+      "confidence": 0.95
+    },
+    {
+      "term": "Annual Chip Savings",
+      "suggested_translation": "年度芯片节省成本",
+      "context": "Annual Chip Savings: $7B+ (Intel $5B + Qualcomm $1.2B + Broadcom $700M + custom IP $500M+)",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "a-series": "A系列",
+    "m-series": "M系列",
+    "s-series": "S系列",
+    "tsmc": "台积电",
+    "revenue": "营收",
+    "r&d": "研发",
+    "capex": "资本支出",
+    "gross margin": "毛利率",
+    "cowos": "CoWoS",
+    "info": "InFO",
+    "advanced packaging": "先进封装",
+    "purchase obligations": "采购承诺",
+    "fab 18": "Fab 18",
+    "intel": "英特尔",
+    "qualcomm": "高通",
+    "broadcom": "博通",
+    "ip": "IP / 知识产权",
+    "hpc": "HPC"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T15:35:25.882292"
+}

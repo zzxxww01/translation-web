@@ -1,0 +1,30 @@
+{
+  "section_id": "20-the-next-decade-2025-2035-fa",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 8,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "We estimate AI accelerator wafers will overtake Apple at TSMC and will outgrow. While Apple will also participate in AI accelerator, it will come under pressure from NVIDIA, Broadcom and others for capacity.",
+        "description": "中英文之间缺少必要的空格（盘古之白），如“AI加速器”。",
+        "why_it_matters": "在专业的科技与金融分析长文中，严格遵守中英文混排规范（在中文与英文/数字之间增加空格）能显著提升文本的排版质感与阅读体验。",
+        "suggestion": "将两处“AI加速器”修改为“AI 加速器”。"
+      },
+      {
+        "paragraph_index": 8,
+        "issue_type": "accuracy",
+        "severity": "low",
+        "original_text": "We estimate AI accelerator wafers will overtake Apple at TSMC and will outgrow.",
+        "description": "原文的“will outgrow”不仅指自身增长，更隐含了与前文主语的比较（outgrow Apple，即增速超过苹果）。译文“呈现更强劲的增长势头”略微弱化了这种直接的对比感。",
+        "why_it_matters": "在分析师语境中，“反超（总量）”和“增速超越（斜率）”是两个独立的强力判断，点明比较对象能让产业趋势的论断更加犀利。",
+        "suggestion": "可微调为：“……晶圆消耗量将反超苹果，且增速也将超越苹果。”或“……并将在增速上彻底甩开苹果。”"
+      }
+    ]
+  }
+}

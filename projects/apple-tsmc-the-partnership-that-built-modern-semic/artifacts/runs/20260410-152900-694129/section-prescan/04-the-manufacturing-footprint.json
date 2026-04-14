@@ -1,0 +1,44 @@
+{
+  "section_id": "04-the-manufacturing-footprint",
+  "new_terms": [
+    {
+      "term": "GigaFab",
+      "suggested_translation": "超大晶圆厂",
+      "context": "TSMC’s dispersed network of GigaFabs, each specializing in specific nodes...",
+      "confidence": 0.95
+    },
+    {
+      "term": "silicon interposer",
+      "suggested_translation": "硅中介层",
+      "context": "places HBM side-by-side with the GPU on a silicon interposer for maximum bandwidth.",
+      "confidence": 0.95
+    },
+    {
+      "term": "SoIC",
+      "suggested_translation": "系统级整合芯片 (SoIC)",
+      "context": "M5/M6 Ultra chips utilizing SoIC (System on Integrated Chips) and WMCM...",
+      "confidence": 0.95
+    },
+    {
+      "term": "WMCM",
+      "suggested_translation": "WMCM",
+      "context": "utilizing SoIC (System on Integrated Chips) and WMCM...",
+      "confidence": 0.9
+    },
+    {
+      "term": "AP3",
+      "suggested_translation": "AP3厂 (先进封装厂)",
+      "context": "Apple dominates AP3 (InFO), while NVIDIA fights for AP5/AP6 (CoWoS).",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "advanced packaging": "先进封装",
+    "fab 18": "Fab 18",
+    "leading-edge": "先进制程",
+    "cowos": "CoWoS",
+    "info": "InFO"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:03:07.426544"
+}

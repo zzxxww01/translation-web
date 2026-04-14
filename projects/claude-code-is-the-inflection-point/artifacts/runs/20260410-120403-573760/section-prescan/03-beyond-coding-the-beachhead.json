@@ -1,0 +1,70 @@
+{
+  "section_id": "03-beyond-coding-the-beachhead",
+  "new_terms": [
+    {
+      "term": "Cowork",
+      "suggested_translation": "Cowork",
+      "context": "Anthropic's new desktop agent product, 'Claude Code for general computing'",
+      "confidence": 0.99
+    },
+    {
+      "term": "Total Addressable Market (TAM)",
+      "suggested_translation": "总潜在市场 (TAM)",
+      "context": "Financial/business term referring to the revenue opportunity available for a product",
+      "confidence": 0.95
+    },
+    {
+      "term": "Task Horizon",
+      "suggested_translation": "任务跨度",
+      "context": "How long an autonomous agent can work before failing its task",
+      "confidence": 0.9
+    },
+    {
+      "term": "METR",
+      "suggested_translation": "METR",
+      "context": "Organization evaluating AI models (Machine Evaluation for Technical Research)",
+      "confidence": 0.95
+    },
+    {
+      "term": "MCP",
+      "suggested_translation": "MCP",
+      "context": "Model Context Protocol, an open standard introduced by Anthropic",
+      "confidence": 0.95
+    },
+    {
+      "term": "SDK",
+      "suggested_translation": "SDK",
+      "context": "Software Development Kit (e.g., Claude Agent SDK)",
+      "confidence": 0.99
+    },
+    {
+      "term": "UI",
+      "suggested_translation": "UI",
+      "context": "User Interface",
+      "confidence": 0.99
+    },
+    {
+      "term": "ILO",
+      "suggested_translation": "ILO (国际劳工组织)",
+      "context": "International Labour Organization",
+      "confidence": 0.95
+    },
+    {
+      "term": "Co-Packaged Optics",
+      "suggested_translation": "共封装光学",
+      "context": "Hardware term referenced from a previous SemiAnalysis article",
+      "confidence": 0.99
+    }
+  ],
+  "term_usages": {
+    "agentic": "智能体化",
+    "claude code": "Claude Code",
+    "information work": "信息工作",
+    "agent": "智能体",
+    "llm": "LLM",
+    "api": "API",
+    "semianalysis": "SemiAnalysis"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T12:05:30.214783"
+}

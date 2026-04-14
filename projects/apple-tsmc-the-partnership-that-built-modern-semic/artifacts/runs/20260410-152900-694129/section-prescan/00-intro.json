@@ -1,0 +1,56 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "Node Economics",
+      "suggested_translation": "节点经济学",
+      "context": "Wafer Demand Model, Node Economics, and the shifting power dynamics...",
+      "confidence": 0.95
+    },
+    {
+      "term": "Morris Chang",
+      "suggested_translation": "张忠谋",
+      "context": "Morris Chang committed to building 20nm capacity with uncertain economics...",
+      "confidence": 1.0
+    },
+    {
+      "term": "A8",
+      "suggested_translation": "A8",
+      "context": "Apple’s A8 chip launched in 2014, and TSMC never looked back.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Fab 18",
+      "suggested_translation": "Fab 18",
+      "context": "...map Apple’s manufacturing footprint across Fab 18 and advanced packaging facilities...",
+      "confidence": 0.95
+    },
+    {
+      "term": "Intel 18A",
+      "suggested_translation": "英特尔18A",
+      "context": "...assess the strategic questions facing both companies as Intel 18A and Samsung re-engagement become viable alternatives.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Foundry Industry Model",
+      "suggested_translation": "晶圆代工行业模型",
+      "context": "All of this is quantified with specifics from our proprietary Foundry Industry Model...",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "wafer demand model": "晶圆需求模型",
+    "tsmc": "台积电",
+    "yield learning curve": "良率学习曲线",
+    "foundry": "晶圆代工厂",
+    "idm": "IDM",
+    "fab": "晶圆厂",
+    "capex": "资本支出",
+    "vertical integration": "垂直整合",
+    "advanced packaging": "先进封装",
+    "samsung": "三星",
+    "leading-edge": "先进制程"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T15:31:34.599230"
+}

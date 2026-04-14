@@ -1,0 +1,50 @@
+{
+  "section_id": "04-supercycle-could-be-a-double-e",
+  "new_terms": [
+    {
+      "term": "QoQ",
+      "suggested_translation": "环比",
+      "context": "We model 1Q26 QoQ contract price increases of 70% for DDR5",
+      "confidence": 0.95
+    },
+    {
+      "term": "YoY",
+      "suggested_translation": "同比",
+      "context": "this implies extraordinary YoY price increases of 638% for DDR5",
+      "confidence": 0.95
+    },
+    {
+      "term": "ODM",
+      "suggested_translation": "ODM",
+      "context": "downstream earnings pressure for chipmakers and ODMs with high exposure to PC and mobile volumes",
+      "confidence": 0.95
+    },
+    {
+      "term": "memoryflation",
+      "suggested_translation": "存储通胀",
+      "context": "consider the impact of “memoryflation” on AI servers and ODMs",
+      "confidence": 0.9
+    },
+    {
+      "term": "Tier-1",
+      "suggested_translation": "Tier-1 (或一线)",
+      "context": "Tier-1 players such as Apple are structurally better positioned",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "dram": "DRAM",
+    "ddr5": "DDR5",
+    "lpddr5": "LPDDR5",
+    "gb": "GB",
+    "bom": "BoM",
+    "oem": "OEM",
+    "asp": "ASP",
+    "pc": "PC",
+    "ai": "AI",
+    "tco": "TCO",
+    "core research": "Core Research"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-09T03:04:19.817200"
+}

@@ -1,0 +1,480 @@
+{
+  "section_id": "01-claude-code-and-the-agentic-fu",
+  "title": "Claude Code and the Agentic Future",
+  "title_translation": "Claude Code 与智能体未来",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Agents will be the primary method of how organic intelligence (humans) interact with artificial intelligence (AI). But Claude Code also is also a demonstration of the reverse: showing how agents interact with humans.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Agents will be the primary method of how organic intelligence (humans) interact with artificial intelligence (AI). But Claude Code also is also a demonstration of the reverse: showing how agents interact with humans.",
+      "parent_block_plain_text": "Agents will be the primary method of how organic intelligence (humans) interact with artificial intelligence (AI). But Claude Code also is also a demonstration of the reverse: showing how agents interact with humans.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 216,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "智能体（指能够自主规划并执行复杂任务的 AI）必将成为有机智能（人类）与 AI 交互的核心路径。但 Claude Code 同样演示了这一过程的镜像反转：即智能体如何反向与人类交互。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:09:43.188599",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+          "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+          "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the central concept of 'agentic AI' and frames it as the next major paradigm in human-computer interaction. It uses historical context (GPT-3, Stable Diffusion, ChatGPT) to position Claude Code not as an incremental improvement, but as a fundamental breakthrough in organizing AI capabilities.",
+          "relation_to_previous": "Directly follows the intro's promise to 'dig deeper into Claude Code' by first explaining the 'agentic' paradigm that makes it so significant.",
+          "relation_to_next": "It establishes the conceptual importance of Claude Code as a 'breakthrough in the agentic layer' without detailing what the product actually is. This creates a need for the next section to provide a concrete product definition.",
+          "key_points": [
+            "'Agents' will be the primary way humans interact with AI.",
+            "Claude Code is a breakthrough in the 'agentic layer,' which organizes model outputs into complex, goal-oriented actions.",
+            "This breakthrough is presented as a historical milestone on par with GPT-3 (proving scale) or ChatGPT (proving demand)."
+          ],
+          "translation_notes": [
+            "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+            "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+            "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "We believe the future of AI will be about the orchestration of tokens, not just selling tokens at base cost. With history as a guide, we view the OpenAI ChatGPT API as the call and response of tokens, akin to Web 1.0 with TCP/IP connecting users to static websites hosted on the Internet. While TCP/IP is a foundational technology, this communication protocol became just the means to the end of enabling the Internet during Web 2.0, and the shift to dynamic web pages. Today, the internet uses TCP/IP packets to organize much larger sets of information than a static website. The protocol matters, but it was the applications built on top of this protocol that created trillions in value.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We believe the future of AI will be about the orchestration of tokens, not just selling tokens at base cost. With history as a guide, we view the OpenAI ChatGPT API as the call and response of tokens, akin to Web 1.0 with TCP/IP connecting users to static websites hosted on the Internet. While TCP/IP is a foundational technology, this communication protocol became just the means to the end of enabling the Internet during Web 2.0, and the shift to dynamic web pages. Today, the internet uses TCP/IP packets to organize much larger sets of information than a static website. The protocol matters, but it was the applications built on top of this protocol that created trillions in value.",
+      "parent_block_plain_text": "We believe the future of AI will be about the orchestration of tokens, not just selling tokens at base cost. With history as a guide, we view the OpenAI ChatGPT API as the call and response of tokens, akin to Web 1.0 with TCP/IP connecting users to static websites hosted on the Internet. While TCP/IP is a foundational technology, this communication protocol became just the means to the end of enabling the Internet during Web 2.0, and the shift to dynamic web pages. Today, the internet uses TCP/IP packets to organize much larger sets of information than a static website. The protocol matters, but it was the applications built on top of this protocol that created trillions in value.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 689,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们笃定，AI 的未来在于 token 编排，而非仅仅按基础成本售卖 token。以史为鉴，我们将 OpenAI 的 ChatGPT API 视为 token 的调用与响应。这犹如 Web 1.0 时代，TCP/IP 协议将用户与互联网上的静态网站相连。尽管 TCP/IP 是底层基石，但在 Web 2.0 时代，这一通信协议已退居幕后，成为支撑互联网运转与动态网页转型的基础手段。如今，互联网利用 TCP/IP 数据包编排的信息量，已远超当年的静态网站。底层协议固然重要，但真正创造数万亿美元商业价值的，是构建于协议之上的繁荣应用。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:09:43.188784",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+          "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+          "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the central concept of 'agentic AI' and frames it as the next major paradigm in human-computer interaction. It uses historical context (GPT-3, Stable Diffusion, ChatGPT) to position Claude Code not as an incremental improvement, but as a fundamental breakthrough in organizing AI capabilities.",
+          "relation_to_previous": "Directly follows the intro's promise to 'dig deeper into Claude Code' by first explaining the 'agentic' paradigm that makes it so significant.",
+          "relation_to_next": "It establishes the conceptual importance of Claude Code as a 'breakthrough in the agentic layer' without detailing what the product actually is. This creates a need for the next section to provide a concrete product definition.",
+          "key_points": [
+            "'Agents' will be the primary way humans interact with AI.",
+            "Claude Code is a breakthrough in the 'agentic layer,' which organizes model outputs into complex, goal-oriented actions.",
+            "This breakthrough is presented as a historical milestone on par with GPT-3 (proving scale) or ChatGPT (proving demand)."
+          ],
+          "translation_notes": [
+            "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+            "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+            "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "This is why SemiAnalysis believes we are yet again at another critical moment in AI. One that matches, if not exceeds the ChatGPT moment in early 2023",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This is why SemiAnalysis believes we are yet again at another critical moment in AI. One that matches, if not exceeds the ChatGPT moment in early 2023",
+      "parent_block_plain_text": "This is why SemiAnalysis believes we are yet again at another critical moment in AI. One that matches, if not exceeds the ChatGPT moment in early 2023",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 150,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "正因如此，SemiAnalysis 认为我们再次站在了 AI 发展的历史性十字路口。这一时刻的意义即便不超越，也绝对足以媲美 2023 年初的 ChatGPT 时刻。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:09:43.188812",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+          "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+          "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the central concept of 'agentic AI' and frames it as the next major paradigm in human-computer interaction. It uses historical context (GPT-3, Stable Diffusion, ChatGPT) to position Claude Code not as an incremental improvement, but as a fundamental breakthrough in organizing AI capabilities.",
+          "relation_to_previous": "Directly follows the intro's promise to 'dig deeper into Claude Code' by first explaining the 'agentic' paradigm that makes it so significant.",
+          "relation_to_next": "It establishes the conceptual importance of Claude Code as a 'breakthrough in the agentic layer' without detailing what the product actually is. This creates a need for the next section to provide a concrete product definition.",
+          "key_points": [
+            "'Agents' will be the primary way humans interact with AI.",
+            "Claude Code is a breakthrough in the 'agentic layer,' which organizes model outputs into complex, goal-oriented actions.",
+            "This breakthrough is presented as a historical milestone on par with GPT-3 (proving scale) or ChatGPT (proving demand)."
+          ],
+          "translation_notes": [
+            "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+            "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+            "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!vndH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc1640e14-9bd1-4646-8592-097fcfcd5c4d_3180x1779.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vndH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc1640e14-9bd1-4646-8592-097fcfcd5c4d_3180x1779.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0021",
+      "parent_block_index": 21,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!vndH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc1640e14-9bd1-4646-8592-097fcfcd5c4d_3180x1779.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!vndH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc1640e14-9bd1-4646-8592-097fcfcd5c4d_3180x1779.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vndH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc1640e14-9bd1-4646-8592-097fcfcd5c4d_3180x1779.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!vndH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc1640e14-9bd1-4646-8592-097fcfcd5c4d_3180x1779.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:09:43.188825",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!vndH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc1640e14-9bd1-4646-8592-097fcfcd5c4d_3180x1779.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+          "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+          "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the central concept of 'agentic AI' and frames it as the next major paradigm in human-computer interaction. It uses historical context (GPT-3, Stable Diffusion, ChatGPT) to position Claude Code not as an incremental improvement, but as a fundamental breakthrough in organizing AI capabilities.",
+          "relation_to_previous": "Directly follows the intro's promise to 'dig deeper into Claude Code' by first explaining the 'agentic' paradigm that makes it so significant.",
+          "relation_to_next": "It establishes the conceptual importance of Claude Code as a 'breakthrough in the agentic layer' without detailing what the product actually is. This creates a need for the next section to provide a concrete product definition.",
+          "key_points": [
+            "'Agents' will be the primary way humans interact with AI.",
+            "Claude Code is a breakthrough in the 'agentic layer,' which organizes model outputs into complex, goal-oriented actions.",
+            "This breakthrough is presented as a historical milestone on par with GPT-3 (proving scale) or ChatGPT (proving demand)."
+          ],
+          "translation_notes": [
+            "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+            "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+            "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: SemiAnalysis Tokenomics Model, Generated by Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Model,",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Tokenomics Model,](https://semianalysis.com/tokenomics-model/) Generated by Claude Code",
+      "parent_block_plain_text": "Source: SemiAnalysis Tokenomics Model, Generated by Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Model,",
+          "start": 8,
+          "end": 38,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 63,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Tokenomics 模型，由 Claude Code 生成",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626873",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis Tokenomics 模型，]]]由 Claude Code 生成",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis Tokenomics 模型（译注：指作者独创的 AI 公司经济分析模型，非加密货币代币经济学），由 Claude Code 生成",
+          "model": "pro",
+          "created_at": "2026-04-10T00:09:43.188900",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis Tokenomics 模型（译注：指作者独创的 AI 公司经济分析模型，非加密货币代币经济学），]]]由 Claude Code 生成",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Tokenomics 模型，由 Claude Code 生成",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis Tokenomics 模型，]]]由 Claude Code 生成",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+          "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+          "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the central concept of 'agentic AI' and frames it as the next major paradigm in human-computer interaction. It uses historical context (GPT-3, Stable Diffusion, ChatGPT) to position Claude Code not as an incremental improvement, but as a fundamental breakthrough in organizing AI capabilities.",
+          "relation_to_previous": "Directly follows the intro's promise to 'dig deeper into Claude Code' by first explaining the 'agentic' paradigm that makes it so significant.",
+          "relation_to_next": "It establishes the conceptual importance of Claude Code as a 'breakthrough in the agentic layer' without detailing what the product actually is. This creates a need for the next section to provide a concrete product definition.",
+          "key_points": [
+            "'Agents' will be the primary way humans interact with AI.",
+            "Claude Code is a breakthrough in the 'agentic layer,' which organizes model outputs into complex, goal-oriented actions.",
+            "This breakthrough is presented as a historical milestone on par with GPT-3 (proving scale) or ChatGPT (proving demand)."
+          ],
+          "translation_notes": [
+            "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+            "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+            "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Each moment expanded what AI could do. GPT-3 proved scale worked. Stable diffusion showed AI could make images. ChatGPT proved demand for intelligence. DeepSeek proved that it could be done on a smaller scale, and o1 showed that you could scale models to even better performance. The viral moments of Studio Ghibli are just adoption points, while Claude Code is a new breakthrough in the agentic layer of organizing model outputs into something more.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0023",
+      "parent_block_index": 23,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each moment expanded what AI could do. GPT-3 proved scale worked. Stable diffusion showed AI could make images. ChatGPT proved demand for intelligence. DeepSeek proved that it could be done on a smaller scale, and o1 showed that you could scale models to even better performance. The viral moments of Studio Ghibli are just adoption points, while Claude Code is a new breakthrough in the agentic layer of organizing model outputs into something more.",
+      "parent_block_plain_text": "Each moment expanded what AI could do. GPT-3 proved scale worked. Stable diffusion showed AI could make images. ChatGPT proved demand for intelligence. DeepSeek proved that it could be done on a smaller scale, and o1 showed that you could scale models to even better performance. The viral moments of Studio Ghibli are just adoption points, while Claude Code is a new breakthrough in the agentic layer of organizing model outputs into something more.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 450,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每一个历史节点都在拓宽 AI 的能力边界：\n- GPT-3 验证了规模法则行之有效。\n- Stable Diffusion 展现了 AI 的图像生成能力。\n- ChatGPT 证实了市场对智能的庞大需求。\n- DeepSeek 证明了小参数规模同样大有可为。\n- o1 表明持续扩展模型能够带来更卓越的性能。\n\n吉卜力画风（译注：指 AI 生成吉卜力风格图像）爆红全网的现象级时刻仅仅是技术的普及节点，但 Claude Code 截然不同——它是智能体层的根本性突破，能够将模型输出编排为更高阶的形态。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:09:43.188916",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+          "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+          "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Defines the central concept of 'agentic AI' and frames it as the next major paradigm in human-computer interaction. It uses historical context (GPT-3, Stable Diffusion, ChatGPT) to position Claude Code not as an incremental improvement, but as a fundamental breakthrough in organizing AI capabilities.",
+          "relation_to_previous": "Directly follows the intro's promise to 'dig deeper into Claude Code' by first explaining the 'agentic' paradigm that makes it so significant.",
+          "relation_to_next": "It establishes the conceptual importance of Claude Code as a 'breakthrough in the agentic layer' without detailing what the product actually is. This creates a need for the next section to provide a concrete product definition.",
+          "key_points": [
+            "'Agents' will be the primary way humans interact with AI.",
+            "Claude Code is a breakthrough in the 'agentic layer,' which organizes model outputs into complex, goal-oriented actions.",
+            "This breakthrough is presented as a historical milestone on par with GPT-3 (proving scale) or ChatGPT (proving demand)."
+          ],
+          "translation_notes": [
+            "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+            "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+            "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        }
+      },
+      "history": []
+    }
+  ]
+}

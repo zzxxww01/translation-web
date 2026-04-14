@@ -1,0 +1,59 @@
+{
+  "section_id": "08-apple-wafer-demand",
+  "new_terms": [
+    {
+      "term": "N7",
+      "suggested_translation": "N7",
+      "context": "Between 2018 and 2019, total wafer demand went sideways even as N7 entered production.",
+      "confidence": 1.0
+    },
+    {
+      "term": "node revenue",
+      "suggested_translation": "节点营收",
+      "context": "On 20nm in 2014, Apple drove 77% of node revenue at peak.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Snapdragon 8 Elite 2",
+      "suggested_translation": "骁龙8至尊版2代",
+      "context": "Qualcomm (Snapdragon 8 Elite 2), AMD (Venice and MI450x)... will follow.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Dimensity 9600",
+      "suggested_translation": "天玑9600",
+      "context": "MediaTek (Dimensity 9600), Broadcom (ASIC), and Intel (Nova Lake) will follow.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Nova Lake",
+      "suggested_translation": "Nova Lake",
+      "context": "Intel (Nova Lake) will follow.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Venice",
+      "suggested_translation": "Venice",
+      "context": "AMD (Venice and MI450x)",
+      "confidence": 1.0
+    },
+    {
+      "term": "MI450x",
+      "suggested_translation": "MI450x",
+      "context": "AMD (Venice and MI450x)",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "cagr": "复合年增长率",
+    "node transition": "制程转换",
+    "yield learning curve": "良率学习曲线",
+    "leading-edge capacity": "先进制程产能",
+    "capacity allocation": "产能分配",
+    "ai accelerator": "AI加速器",
+    "hyperscaler": "超大规模云服务商",
+    "asic": "ASIC (专用集成电路)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:43:19.483891"
+}

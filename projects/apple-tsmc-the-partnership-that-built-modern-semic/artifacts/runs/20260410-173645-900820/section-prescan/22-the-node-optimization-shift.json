@@ -1,0 +1,74 @@
+{
+  "section_id": "22-the-node-optimization-shift",
+  "new_terms": [
+    {
+      "term": "power budgets",
+      "suggested_translation": "功耗预算",
+      "context": "optimized for data center power budgets",
+      "confidence": 0.95
+    },
+    {
+      "term": "power efficiency curves",
+      "suggested_translation": "能效曲线",
+      "context": "Power efficiency curves favor consumer devices again.",
+      "confidence": 0.95
+    },
+    {
+      "term": "node roadmap",
+      "suggested_translation": "节点路线图",
+      "context": "The node roadmap disagrees.",
+      "confidence": 0.95
+    },
+    {
+      "term": "mega datacenters",
+      "suggested_translation": "超大型数据中心",
+      "context": "connecting with AI mega datacenters",
+      "confidence": 0.9
+    },
+    {
+      "term": "scale-across networking",
+      "suggested_translation": "跨集群扩展网络",
+      "context": "exciting developments in scale-across networking",
+      "confidence": 0.85
+    },
+    {
+      "term": "A19",
+      "suggested_translation": "A19",
+      "context": "Apple will adopt A16 for the A19/M5 generation",
+      "confidence": 1.0
+    },
+    {
+      "term": "M5",
+      "suggested_translation": "M5",
+      "context": "Apple will adopt A16 for the A19/M5 generation",
+      "confidence": 1.0
+    },
+    {
+      "term": "A21 Pro",
+      "suggested_translation": "A21 Pro",
+      "context": "A21 Pro and M7 in 2029-2030",
+      "confidence": 1.0
+    },
+    {
+      "term": "M7",
+      "suggested_translation": "M7",
+      "context": "A21 Pro and M7 in 2029-2030",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "hpc": "HPC",
+    "backside power delivery": "背面供电",
+    "gate-all-around transistors": "环绕栅极晶体管",
+    "thermal envelope": "散热包络",
+    "node share": "节点份额",
+    "product cadence": "产品发布节奏",
+    "1.4nm": "1.4纳米",
+    "n2": "N2",
+    "a16": "A16",
+    "a14": "A14",
+    "n3": "N3"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T22:07:13.217052"
+}

@@ -1,0 +1,39 @@
+{
+  "section_id": "03-the-five-phases-of-apple-tsmc",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.5,
+    "accuracy_score": 9.0,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 25,
+        "issue_type": "accuracy|terminology",
+        "severity": "medium",
+        "original_text": "It had to share a 14nm slot with Samsung in 2015 with the latter getting >60% share.",
+        "description": "原文的 'share a 14nm slot' 是一种宽泛的说法（指代同一代际的代工位置），但台积电当时为苹果代工 A9 芯片实际使用的是 16nm 工艺，三星使用的是 14nm 工艺。译文直译为“瓜分 14 纳米订单”会给半导体专业读者造成“台积电当时也生产了 14nm 芯片”的技术误解。",
+        "why_it_matters": "对于硬核科技和半导体分析文章，制程节点的对应关系必须极其精准，避免引发专业读者的质疑。",
+        "suggestion": "建议改为“在同代节点上不得不与三星的 14 纳米工艺瓜分订单”或“在 14/16 纳米代际上不得不与三星瓜分订单”。"
+      },
+      {
+        "paragraph_index": 30,
+        "issue_type": "terminology|readability",
+        "severity": "low",
+        "original_text": "The iPhone brought 22-25% of total revenue and filled 70%+ of 3nm capacity.",
+        "description": "“filled... capacity” 在制造业和代工语境下指“填满/占据/消化产能”，译文使用“填补”不够准确。“填补”通常指弥补空缺或亏空（如填补空白、填补亏损），在此处搭配略显生硬。",
+        "why_it_matters": "符合产业分析师的惯用语感能提升文章的专业度与流畅性。",
+        "suggestion": "将“填补了超过 70% 的 3 纳米产能”改为“占据了超过 70% 的 3 纳米产能”或“包揽了超过 70% 的 3 纳米产能”。"
+      },
+      {
+        "paragraph_index": 29,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "M-series and A-series chips",
+        "description": "中英文排版规范细节：译文“M系列和 A系列”中，“M”与“系列”之间没有空格，而“A”与前面的“和”之间有空格，排版不够统一。",
+        "why_it_matters": "保持全文字符间距规范的一致性是高质量出版物的基本要求。",
+        "suggestion": "统一中英文之间的空格规范，改为“M 系列和 A 系列芯片”或“M系列和A系列芯片”。"
+      }
+    ]
+  }
+}

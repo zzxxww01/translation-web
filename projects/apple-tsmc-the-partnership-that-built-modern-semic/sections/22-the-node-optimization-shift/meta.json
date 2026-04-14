@@ -1,0 +1,615 @@
+{
+  "section_id": "22-the-node-optimization-shift",
+  "title": "The Node Optimization Shift",
+  "title_translation": "制程节点优化的转变",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "TSMC’s A16 (N2) is architected for HPC workloads. Backside power delivery, gate-all-around transistors, and thermal envelopes are optimized for data center power budgets. Nvidia benefits disproportionately. Apple will adopt A16 for the A19/M5 generation, but the node’s design tradeoffs favor Nvidia’s use case over Apple’s. This is why Apple’s share drops to <50% on N2.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0389",
+      "parent_block_index": 389,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TSMC’s A16 (N2) is architected for HPC workloads. Backside power delivery, gate-all-around transistors, and thermal envelopes are optimized for data center power budgets. Nvidia benefits disproportionately. Apple will adopt A16 for the A19/M5 generation, but the node’s design tradeoffs favor Nvidia’s use case over Apple’s. This is why Apple’s share drops to <50% on N2.",
+      "parent_block_plain_text": "TSMC’s A16 (N2) is architected for HPC workloads. Backside power delivery, gate-all-around transistors, and thermal envelopes are optimized for data center power budgets. Nvidia benefits disproportionately. Apple will adopt A16 for the A19/M5 generation, but the node’s design tradeoffs favor Nvidia’s use case over Apple’s. This is why Apple’s share drops to <50% on N2.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 371,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电 A16（N2）节点专为 HPC 工作负载而设计。背面供电、环绕栅极晶体管以及散热设计均针对数据中心的功耗预算进行了优化。英伟达从中获益尤丰。苹果将在 A19/M5 代芯片上采用 A16 节点，但该节点的设计权衡更偏向英伟达的应用场景，而非苹果。这正是苹果在 N2 节点上的份额跌破 50% 的原因。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:09:25.729075",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.959999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文直接使用了“A16”和“A14”，未严格遵循翻译指南中关于“explicitly translate as '台积电A16节点'”的要求。在苹果和台积电的上下文中，脱离“节点”二字单独出现 A16 和 A14，极易与苹果的 A 系列手机芯片（A16 Bionic、A14 Bionic）混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "原文的“AI mega datacenters”在此处是借代用法，指代的是这些数据中心背后的运营方（如超大规模云厂商），直接译为“与数据中心交流”在中文搭配上略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "A14 (1.4nm) rebalances the equation. TSMC is designing A14 for both mobile and HPC from the start. Power efficiency curves favor consumer devices again. Our model shows Apple reclaims 67% node share on A14, its highest since N3. The timing aligns with Apple’s product cadence: A21 Pro and M7 in 2029-2030.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0390",
+      "parent_block_index": 390,
+      "parent_block_type": "p",
+      "parent_block_markdown": "A14 (1.4nm) rebalances the equation. TSMC is designing A14 for both mobile and HPC from the start. Power efficiency curves favor consumer devices again. Our model shows Apple reclaims 67% node share on A14, its highest since N3. The timing aligns with Apple’s product cadence: A21 Pro and M7 in 2029-2030.",
+      "parent_block_plain_text": "A14 (1.4nm) rebalances the equation. TSMC is designing A14 for both mobile and HPC from the start. Power efficiency curves favor consumer devices again. Our model shows Apple reclaims 67% node share on A14, its highest since N3. The timing aligns with Apple’s product cadence: A21 Pro and M7 in 2029-2030.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 305,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "A14（1.4纳米）节点重新平衡了这一格局。台积电从一开始就将 A14 定位于同时满足移动端和 HPC 需求。能效曲线再次向消费级设备倾斜。我们的模型显示，苹果将在 A14 上收复 67% 的节点份额，创下自 N3 以来的新高。这一时间点与苹果的产品发布节奏完美契合：即 2029 至 2030 年推出的 A21 Pro 与 M7。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:09:25.729113",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.959999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文直接使用了“A16”和“A14”，未严格遵循翻译指南中关于“explicitly translate as '台积电A16节点'”的要求。在苹果和台积电的上下文中，脱离“节点”二字单独出现 A16 和 A14，极易与苹果的 A 系列手机芯片（A16 Bionic、A14 Bionic）混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "原文的“AI mega datacenters”在此处是借代用法，指代的是这些数据中心背后的运营方（如超大规模云厂商），直接译为“与数据中心交流”在中文搭配上略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Markets read Apple’s declining N2 share as permanent loss. The node roadmap disagrees. While Nvidia wins A16, Apple reclaims A14 at a high share.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0391",
+      "parent_block_index": 391,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Markets read Apple’s declining N2 share as permanent loss. The node roadmap disagrees. While Nvidia wins A16, Apple reclaims A14 at a high share.",
+      "parent_block_plain_text": "Markets read Apple’s declining N2 share as permanent loss. The node roadmap disagrees. While Nvidia wins A16, Apple reclaims A14 at a high share.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 145,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "市场将苹果 N2 份额的下滑解读为永久性流失。但节点路线图给出了不同的答案。虽然英伟达赢下了 A16，但苹果将以极高的份额收复 A14。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:09:25.729127",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.959999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文直接使用了“A16”和“A14”，未严格遵循翻译指南中关于“explicitly translate as '台积电A16节点'”的要求。在苹果和台积电的上下文中，脱离“节点”二字单独出现 A16 和 A14，极易与苹果的 A 系列手机芯片（A16 Bionic、A14 Bionic）混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "原文的“AI mega datacenters”在此处是借代用法，指代的是这些数据中心背后的运营方（如超大规模云厂商），直接译为“与数据中心交流”在中文搭配上略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Meet with us at [PTC’26](https://www.ptc.org/ptc26/)!",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Meet with us at [PTC’26](https://www.ptc.org/ptc26/)!",
+          "start": 0,
+          "end": 53,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0392",
+      "parent_block_index": 392,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Meet with us at [PTC’26](https://www.ptc.org/ptc26/)!**",
+      "parent_block_plain_text": "Meet with us at [PTC’26](https://www.ptc.org/ptc26/)!",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Meet with us at [PTC’26](https://www.ptc.org/ptc26/)!",
+          "start": 0,
+          "end": 53,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 53,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "相约 [PTC’26](https://www.ptc.org/ptc26/)！",
+          "model": "pro",
+          "created_at": "2026-04-10T22:09:25.729221",
+          "tokenized_text": "[[[STRONG_1|相约 [PTC’26](https://www.ptc.org/ptc26/)！]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.959999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文直接使用了“A16”和“A14”，未严格遵循翻译指南中关于“explicitly translate as '台积电A16节点'”的要求。在苹果和台积电的上下文中，脱离“节点”二字单独出现 A16 和 A14，极易与苹果的 A 系列手机芯片（A16 Bionic、A14 Bionic）混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "原文的“AI mega datacenters”在此处是借代用法，指代的是这些数据中心背后的运营方（如超大规模云厂商），直接译为“与数据中心交流”在中文搭配上略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "As this year's PTC media partner, Dylan Patel, Daniel Nishball, and Jeremie Eliahou Ontiveros are looking forward to connecting with AI mega datacenters and the movers and shakers in the industry.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Dylan Patel",
+          "start": 34,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Daniel Nishball",
+          "start": 47,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "Jeremie Eliahou Ontiveros",
+          "start": 68,
+          "end": 93,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        }
+      ],
+      "parent_block_id": "b0393",
+      "parent_block_index": 393,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As this year's PTC media partner, **Dylan Patel**, **Daniel Nishball**, and **Jeremie Eliahou Ontiveros** are looking forward to connecting with AI mega datacenters and the movers and shakers in the industry.",
+      "parent_block_plain_text": "As this year's PTC media partner, Dylan Patel, Daniel Nishball, and Jeremie Eliahou Ontiveros are looking forward to connecting with AI mega datacenters and the movers and shakers in the industry.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Dylan Patel",
+          "start": 34,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Daniel Nishball",
+          "start": 47,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "Jeremie Eliahou Ontiveros",
+          "start": 68,
+          "end": 93,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 196,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2",
+        "STRONG_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "作为今年 PTC 的媒体合作伙伴，Dylan Patel、Daniel Nishball 与 Jeremie Eliahou Ontiveros 期待与 AI 超大型数据中心以及行业风云人物深入交流。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:09:25.729325",
+          "tokenized_text": "作为今年 PTC 的媒体合作伙伴，[[[STRONG_1|Dylan Patel]]]、[[[STRONG_2|Daniel Nishball]]] 与 [[[STRONG_3|Jeremie Eliahou Ontiveros]]] 期待与 AI 超大型数据中心以及行业风云人物深入交流。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.959999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文直接使用了“A16”和“A14”，未严格遵循翻译指南中关于“explicitly translate as '台积电A16节点'”的要求。在苹果和台积电的上下文中，脱离“节点”二字单独出现 A16 和 A14，极易与苹果的 A 系列手机芯片（A16 Bionic、A14 Bionic）混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "原文的“AI mega datacenters”在此处是借代用法，指代的是这些数据中心背后的运营方（如超大规模云厂商），直接译为“与数据中心交流”在中文搭配上略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "We will also be spending time with telecom companies and equipment vendors to dive deep into exciting developments in scale-across networking.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0394",
+      "parent_block_index": 394,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We will also be spending time with telecom companies and equipment vendors to dive deep into exciting developments in scale-across networking.",
+      "parent_block_plain_text": "We will also be spending time with telecom companies and equipment vendors to dive deep into exciting developments in scale-across networking.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 142,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们也将与电信公司及设备供应商展开交流，深入探讨跨集群扩展网络领域令人振奋的新进展。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:09:25.729346",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.959999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文直接使用了“A16”和“A14”，未严格遵循翻译指南中关于“explicitly translate as '台积电A16节点'”的要求。在苹果和台积电的上下文中，脱离“节点”二字单独出现 A16 和 A14，极易与苹果的 A 系列手机芯片（A16 Bionic、A14 Bionic）混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "原文的“AI mega datacenters”在此处是借代用法，指代的是这些数据中心背后的运营方（如超大规模云厂商），直接译为“与数据中心交流”在中文搭配上略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Join us at our Happy Hour hosted on Sunday January 18! We'd love to connect with you.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Join us at our Happy Hour",
+          "start": 0,
+          "end": 25,
+          "href": "https://luma.com/SAxATatPTC",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0395",
+      "parent_block_index": 395,
+      "parent_block_type": "p",
+      "parent_block_markdown": "[Join us at our Happy Hour](https://luma.com/SAxATatPTC) hosted on Sunday January 18! We'd love to connect with you.",
+      "parent_block_plain_text": "Join us at our Happy Hour hosted on Sunday January 18! We'd love to connect with you.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Join us at our Happy Hour",
+          "start": 0,
+          "end": 25,
+          "href": "https://luma.com/SAxATatPTC",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 85,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "欢迎参加我们的欢乐时光活动，活动将于 1 月 18 日（周日）举办！我们非常期待与您交流。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:09:25.729384",
+          "tokenized_text": "[[[LINK_1|欢迎参加我们的欢乐时光活动]]]，活动将于 1 月 18 日（周日）举办！我们非常期待与您交流。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.959999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文直接使用了“A16”和“A14”，未严格遵循翻译指南中关于“explicitly translate as '台积电A16节点'”的要求。在苹果和台积电的上下文中，脱离“节点”二字单独出现 A16 和 A14，极易与苹果的 A 系列手机芯片（A16 Bionic、A14 Bionic）混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "原文的“AI mega datacenters”在此处是借代用法，指代的是这些数据中心背后的运营方（如超大规模云厂商），直接译为“与数据中心交流”在中文搭配上略显生硬。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

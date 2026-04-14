@@ -1,0 +1,39 @@
+{
+  "section_id": "05-competitive-landscape-microso",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "annotation",
+        "severity": "high",
+        "original_text": "Why does a company need to standardize Salesforce if an agent is just going to query data on leads on your behalf?",
+        "description": "译文遗漏了 Translation Guidelines 中明确要求的关于“智能体（agent）”首现时的括号注释。",
+        "why_it_matters": "未严格遵循翻译规则，且对于部分商业读者而言，补充智能体的精确定义（即能够自主规划并执行复杂任务的 AI）有助于强化本文“范式转移”的核心论点。",
+        "suggestion": "如果智能体（指能够自主规划并执行复杂任务的 AI）能直接代你查询潜在客户数据，企业为何还要统一部署 Salesforce？"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "Salesforce is a form and workflow wrapper...",
+        "description": "将软件语境下的 'wrapper' 译为“包装器”虽然语义正确，但略带翻译腔。在 IT 和软件架构语境中，通常译为“封装”或“外壳”。",
+        "why_it_matters": "采用更地道的行业黑话（Jargon）能进一步提升“资深行业分析师”的专业声线与文本的硬核感。",
+        "suggestion": "Salesforce 本质上只是一个表单与工作流的封装外壳，而 AI 完全可以将这些表单与工作流直接构建为底层数据库……"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "structure",
+        "severity": "low",
+        "original_text": "Every bit of UX or preference is at risk.",
+        "description": "译文“UX (用户体验)”使用了半角括号及前置空格，不符合中文排版规范。",
+        "why_it_matters": "在高质量的长文发布中，中英文混排的标点符号规范（全角/半角）直接影响阅读体验和专业度。",
+        "suggestion": "任何细枝末节的 UX（用户体验）或操作偏好都已岌岌可危。"
+      }
+    ]
+  }
+}

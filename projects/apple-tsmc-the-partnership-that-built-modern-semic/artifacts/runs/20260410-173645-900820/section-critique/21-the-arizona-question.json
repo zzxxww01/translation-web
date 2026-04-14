@@ -1,0 +1,30 @@
+{
+  "section_id": "21-the-arizona-question",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.0,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "accuracy|data",
+        "severity": "high",
+        "original_text": "Arizona wafer costs run 2.4x higher than Taiwan’s Fab 18. Labor is 3x more expensive.",
+        "description": "中文语境中，“高出 2.4 倍”通常在数学上意味着 1+2.4=3.4 倍，这会夸大原文的成本差距。结合第3段的“At 2.4x the cost”可知，这里的 2.4x 和 3x 指的是成本的绝对倍数，而非增量倍数。应统一改为“是……的 X 倍”。",
+        "why_it_matters": "在严谨的财务和半导体产业分析中，成本倍数的误译会导致读者对晶圆厂经济模型的误判，且与后文数据产生矛盾。",
+        "suggestion": "改为：“亚利桑那州的晶圆成本是台湾地区 Fab 18 的 2.4 倍。劳动力成本是其 3 倍。”"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability|annotation",
+        "severity": "low",
+        "original_text": "By the time Arizona receives N2, Taiwan will be running A14 or beyond.",
+        "description": "译者遵照了提示中的建议添加了括注，但“（这里的 A14 指台积电的 1.4 纳米节点，而非苹果处理器）”作为句内插入语略显冗长，打断了行文的专业节奏。按照 Guideline 1，可以直接将节点名称显性化，既消除歧义又保持简洁。",
+        "why_it_matters": "过长的解释性括注会削弱分析师声线的干练感与信息密度。",
+        "suggestion": "改为：“当亚利桑那州工厂终于等来 N2 时，台湾地区早已量产台积电 A14（1.4纳米）甚至更先进制程。”"
+      }
+    ]
+  }
+}

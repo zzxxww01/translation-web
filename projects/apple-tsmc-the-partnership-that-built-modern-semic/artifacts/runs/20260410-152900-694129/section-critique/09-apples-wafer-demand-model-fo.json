@@ -1,0 +1,57 @@
+{
+  "section_id": "09-apples-wafer-demand-model-fo",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.0,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 23,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "TSMC Share Recovery",
+        "description": "译文“台积电份额回升”存在歧义，容易被误解为“台积电的市场份额回升”。根据下文“Apple’s share of total TSMC revenue will likely recover”，这里指的是苹果在台积电总营收中所占的份额回升。",
+        "why_it_matters": "直接影响标题的准确性，可能导致读者对主语产生误解，违背了分析师精准的表达要求。",
+        "suggestion": "修改为“苹果在台积电的份额回升”或“台积电营收占比回升”。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "AI accelerator demand from hyperscalers has structurally shifted the customer mix.",
+        "description": "“已让客户结构发生了结构性转变”中的“让……发生了”略显口语化，且“发生”与“结构性转变”搭配稍显冗长。",
+        "why_it_matters": "在专业的半导体和金融分析文章中，应尽量保持句式精炼有力，避免翻译腔。",
+        "suggestion": "修改为“已使客户结构发生结构性转变”或更简洁的“已从结构上重塑了客户组合”。"
+      },
+      {
+        "paragraph_index": 12,
+        "issue_type": "formatting",
+        "severity": "low",
+        "original_text": "N-series and C-series",
+        "description": "“N系列”、“C系列”、“AI加速器”等词汇中，英文字母/缩写与中文字符之间缺少标准的中英文字符间距（半角空格）。该问题在第2、4、7、14、15、16段中多次出现。",
+        "why_it_matters": "违反了中文排版规范（CJK-Latin spacing），影响专业研报的视觉呈现与阅读体验。",
+        "suggestion": "统一补充空格，如“N 系列”、“C 系列”、“AI 加速器”。"
+      },
+      {
+        "paragraph_index": 16,
+        "issue_type": "conciseness",
+        "severity": "low",
+        "original_text": "Neither existed in 2024.",
+        "description": "译文“还尚未问世”存在轻微的语义重复，“还”和“尚未”在表达“未发生”时功能重叠。",
+        "why_it_matters": "精简用词能提升句子的干脆度，更符合分析师的行文风格。",
+        "suggestion": "删去“还”，修改为“尚未问世”或“均未问世”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "30-40k wspm",
+        "description": "“每月晶圆投片量（wspm）”翻译正确但略显生硬，wspm (wafers starts per month) 在半导体行业中文里有更标准的惯用表述。",
+        "why_it_matters": "使用行业标准术语能增强文章的专业度，降低业内人士的阅读迟滞感。",
+        "suggestion": "修改为“晶圆月投片量（wspm）”或直接使用“月产能（wspm）”。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,407 @@
+{
+  "section_id": "11-device-mix-diversification",
+  "title": "Device Mix & Diversification",
+  "title_translation": "产品组合与多元化",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Unit Decoupling",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0255",
+      "parent_block_index": 255,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Unit Decoupling",
+      "parent_block_plain_text": "Unit Decoupling",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 15,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "出货量脱钩",
+          "model": "pro",
+          "created_at": "2026-04-10T16:24:01.736795",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.129999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文“2020 to 2030”结合过去时“grew”明显为笔误，大概率应为“2023”。译文直接照译为“2030 年”会导致事实逻辑上的时间冲突。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（A系列、M系列）。"
+          },
+          {
+            "type": "readability",
+            "description": "“解释了，为何”中间的逗号打断了语流。"
+          },
+          {
+            "type": "conciseness",
+            "description": "“已实现显著的多元化”使用了“实现……的……”这种抽象名词外壳，有轻微翻译腔。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The decoupling between unit shipments and silicon value tells the real story of Apple’s foundry economics. A-series unit growth has essentially flatlined since 2017, yet A-series wafer value has nearly tripled over the same period. Each iPhone now generates roughly 3x the foundry revenue it did seven years ago, driven by larger dies, more expensive nodes, and expanding silicon content beyond just the main SoC. M-series shows the same pattern in compressed form: units grew 72x from 2020 to 2030, but value grew 222x. Apple is shipping exponentially more silicon per device. This decoupling explains why Apple’s absolute TSMC spend continues rising even as iPhone unit growth stalls and Mac volumes remain modest. The Apple-TSMC story shifted from units to silicon content intensity per unit.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0256",
+      "parent_block_index": 256,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The decoupling between unit shipments and silicon value tells the real story of Apple’s foundry economics. A-series unit growth has essentially flatlined since 2017, yet A-series wafer value has nearly tripled over the same period. Each iPhone now generates roughly 3x the foundry revenue it did seven years ago, driven by larger dies, more expensive nodes, and expanding silicon content beyond just the main SoC. M-series shows the same pattern in compressed form: units grew 72x from 2020 to 2030, but value grew 222x. Apple is shipping exponentially more silicon per device. This decoupling explains why Apple’s absolute TSMC spend continues rising even as iPhone unit growth stalls and Mac volumes remain modest. The Apple-TSMC story shifted from units to silicon content intensity per unit.",
+      "parent_block_plain_text": "The decoupling between unit shipments and silicon value tells the real story of Apple’s foundry economics. A-series unit growth has essentially flatlined since 2017, yet A-series wafer value has nearly tripled over the same period. Each iPhone now generates roughly 3x the foundry revenue it did seven years ago, driven by larger dies, more expensive nodes, and expanding silicon content beyond just the main SoC. M-series shows the same pattern in compressed form: units grew 72x from 2020 to 2030, but value grew 222x. Apple is shipping exponentially more silicon per device. This decoupling explains why Apple’s absolute TSMC spend continues rising even as iPhone unit growth stalls and Mac volumes remain modest. The Apple-TSMC story shifted from units to silicon content intensity per unit.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 795,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "出货量与芯片价值的脱钩，揭示了苹果晶圆代工经济学的真实面貌。自 2017 年以来，A系列出货量增长已基本停滞，但同期 A系列晶圆价值却增至近三倍。在更大尺寸的裸片、更昂贵的制程节点，以及主 SoC 之外不断扩张的硅含量的多重驱动下，如今每部 iPhone 创造的代工厂营收大约是七年前的三倍。M系列在更短的时间内展现了相同的规律：从 2020 年到 2030 年，其出货量增长 72 倍，价值却暴增 222 倍。苹果单台设备的硅含量正呈指数级飙升。这种脱钩现象解释了，为何在 iPhone 出货量增长停滞、Mac 销量保持平稳的情况下，苹果在台积电的绝对支出仍在持续攀升。苹果与台积电的合作主线，已从单纯的出货量，转向单台设备的硅含量强度。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:24:01.736845",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.129999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文“2020 to 2030”结合过去时“grew”明显为笔误，大概率应为“2023”。译文直接照译为“2030 年”会导致事实逻辑上的时间冲突。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（A系列、M系列）。"
+          },
+          {
+            "type": "readability",
+            "description": "“解释了，为何”中间的逗号打断了语流。"
+          },
+          {
+            "type": "conciseness",
+            "description": "“已实现显著的多元化”使用了“实现……的……”这种抽象名词外壳，有轻微翻译腔。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Diversification beyond iPhone",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0257",
+      "parent_block_index": 257,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Diversification beyond iPhone",
+      "parent_block_plain_text": "Diversification beyond iPhone",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 29,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "iPhone 之外的多元化",
+          "model": "pro",
+          "created_at": "2026-04-10T16:24:01.736882",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.129999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文“2020 to 2030”结合过去时“grew”明显为笔误，大概率应为“2023”。译文直接照译为“2030 年”会导致事实逻辑上的时间冲突。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（A系列、M系列）。"
+          },
+          {
+            "type": "readability",
+            "description": "“解释了，为何”中间的逗号打断了语流。"
+          },
+          {
+            "type": "conciseness",
+            "description": "“已实现显著的多元化”使用了“实现……的……”这种抽象名词外壳，有轻微翻译腔。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Apple’s wafer demand at TSMC has diversified meaningfully since 2018. iPhone accounted for 74% of Apple’s monthly wafer consumption that year. By 2025, that share dropped to 57%. Mac silicon, nonexistent before M1, now represents 12% of the mix. The “Other” category, which includes mature node chips, doubled its share from 7% to 14%. iPhone remains the anchor, but Mac, wearables, and custom chips have become meaningful contributors. TSMC now serves five Apple product lines at scale, reducing revenue volatility tied to iPhone cycles.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0258",
+      "parent_block_index": 258,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Apple’s wafer demand at TSMC has diversified meaningfully since 2018. iPhone accounted for 74% of Apple’s monthly wafer consumption that year. By 2025, that share dropped to 57%. Mac silicon, nonexistent before M1, now represents 12% of the mix. The “Other” category, which includes mature node chips, doubled its share from 7% to 14%. iPhone remains the anchor, but Mac, wearables, and custom chips have become meaningful contributors. TSMC now serves five Apple product lines at scale, reducing revenue volatility tied to iPhone cycles.",
+      "parent_block_plain_text": "Apple’s wafer demand at TSMC has diversified meaningfully since 2018. iPhone accounted for 74% of Apple’s monthly wafer consumption that year. By 2025, that share dropped to 57%. Mac silicon, nonexistent before M1, now represents 12% of the mix. The “Other” category, which includes mature node chips, doubled its share from 7% to 14%. iPhone remains the anchor, but Mac, wearables, and custom chips have become meaningful contributors. TSMC now serves five Apple product lines at scale, reducing revenue volatility tied to iPhone cycles.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 538,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "自 2018 年以来，苹果在台积电的晶圆需求已实现显著的多元化。当年，iPhone 占苹果每月晶圆消耗量的 74%。到 2025 年，这一比例降至 57%。在 M1 之前根本不存在的 Mac 芯片，如今在整体份额中占比达 12%。包含成熟制程芯片的“其他”类别，其份额从 7% 翻倍至 14%。iPhone 依然是基石，但 Mac、可穿戴设备以及定制芯片已成为重要的贡献者。台积电如今大规模服务于苹果的五大产品线，有效降低了与 iPhone 周期绑定的营收波动。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:24:01.736906",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.129999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文“2020 to 2030”结合过去时“grew”明显为笔误，大概率应为“2023”。译文直接照译为“2030 年”会导致事实逻辑上的时间冲突。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（A系列、M系列）。"
+          },
+          {
+            "type": "readability",
+            "description": "“解释了，为何”中间的逗号打断了语流。"
+          },
+          {
+            "type": "conciseness",
+            "description": "“已实现显著的多元化”使用了“实现……的……”这种抽象名词外壳，有轻微翻译腔。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff254d202-3236-484f-984d-364e66b22bf3_2602x1562.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff254d202-3236-484f-984d-364e66b22bf3_2602x1562.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0259",
+      "parent_block_index": 259,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff254d202-3236-484f-984d-364e66b22bf3_2602x1562.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff254d202-3236-484f-984d-364e66b22bf3_2602x1562.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff254d202-3236-484f-984d-364e66b22bf3_2602x1562.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff254d202-3236-484f-984d-364e66b22bf3_2602x1562.png",
+          "model": "pro",
+          "created_at": "2026-04-10T16:24:01.736929",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff254d202-3236-484f-984d-364e66b22bf3_2602x1562.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.129999999999999,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "data",
+            "description": "原文“2020 to 2030”结合过去时“grew”明显为笔误，大概率应为“2023”。译文直接照译为“2030 年”会导致事实逻辑上的时间冲突。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（A系列、M系列）。"
+          },
+          {
+            "type": "readability",
+            "description": "“解释了，为何”中间的逗号打断了语流。"
+          },
+          {
+            "type": "conciseness",
+            "description": "“已实现显著的多元化”使用了“实现……的……”这种抽象名词外壳，有轻微翻译腔。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

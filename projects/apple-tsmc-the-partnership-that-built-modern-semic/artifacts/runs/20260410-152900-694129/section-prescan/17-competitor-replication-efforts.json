@@ -1,0 +1,46 @@
+{
+  "section_id": "17-competitor-replication-efforts",
+  "new_terms": [
+    {
+      "term": "export controls",
+      "suggested_translation": "出口管制",
+      "context": "got cut off at TSMC due to export controls",
+      "confidence": 1.0
+    },
+    {
+      "term": "Exynos",
+      "suggested_translation": "Exynos",
+      "context": "Samsung with its Exynos apps processors",
+      "confidence": 1.0
+    },
+    {
+      "term": "ZTE",
+      "suggested_translation": "中兴",
+      "context": "Huawei, Samsung, Xiaomi, ZTE, Google and others",
+      "confidence": 1.0
+    },
+    {
+      "term": "modems",
+      "suggested_translation": "基带",
+      "context": "Samsung with its Exynos apps processors and modems",
+      "confidence": 0.95
+    },
+    {
+      "term": "advanced nodes",
+      "suggested_translation": "先进制程节点",
+      "context": "China’s limited capacity in advanced nodes",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "vertical integration": "垂直整合",
+    "tsmc": "台积电",
+    "samsung": "三星",
+    "qualcomm": "高通",
+    "a-series": "A系列",
+    "fab": "晶圆厂",
+    "yield": "良率"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:25:34.000507"
+}

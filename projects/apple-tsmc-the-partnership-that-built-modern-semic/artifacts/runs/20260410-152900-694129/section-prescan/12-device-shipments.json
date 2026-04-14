@@ -1,0 +1,38 @@
+{
+  "section_id": "12-device-shipments",
+  "new_terms": [
+    {
+      "term": "datacenter silicon",
+      "suggested_translation": "数据中心芯片",
+      "context": "signals Apple’s datacenter silicon ambitions",
+      "confidence": 0.95
+    },
+    {
+      "term": "low-single-digit growth",
+      "suggested_translation": "低个位数增长",
+      "context": "The forecast through 2030 shows low-single-digit growth",
+      "confidence": 0.95
+    },
+    {
+      "term": "rounding error",
+      "suggested_translation": "零头 (指微乎其微的数量)",
+      "context": "Vision Pro shipments through 2030 remain a rounding error relative to the 600M+ device base",
+      "confidence": 0.9
+    },
+    {
+      "term": "incremental device growth",
+      "suggested_translation": "增量设备增长",
+      "context": "contributes almost nothing to incremental device growth",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "silicon intensity": "硅含量",
+    "spatial computing": "空间计算",
+    "C-series": "C系列",
+    "Vision Pro": "Vision Pro",
+    "Baltra": "Baltra"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:24:20.687091"
+}

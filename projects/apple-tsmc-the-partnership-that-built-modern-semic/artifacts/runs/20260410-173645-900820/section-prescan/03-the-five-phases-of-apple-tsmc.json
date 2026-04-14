@@ -1,0 +1,124 @@
+{
+  "section_id": "03-the-five-phases-of-apple-tsmc",
+  "new_terms": [
+    {
+      "term": "merchant silicon",
+      "suggested_translation": "商用芯片",
+      "context": "performance-per-watt leadership that merchant silicon couldn’t deliver",
+      "confidence": 0.95
+    },
+    {
+      "term": "performance-per-watt",
+      "suggested_translation": "每瓦性能",
+      "context": "enabled meaningful performance-per-watt advantages",
+      "confidence": 0.95
+    },
+    {
+      "term": "GlobalFoundries",
+      "suggested_translation": "格芯",
+      "context": "considering GlobalFoundries and even building its own fabs",
+      "confidence": 0.95
+    },
+    {
+      "term": "IDM 2.0",
+      "suggested_translation": "IDM 2.0",
+      "context": "remains Intel’s biggest hurdle in its IDM 2.0 pivot today",
+      "confidence": 0.9
+    },
+    {
+      "term": "Night Hawk",
+      "suggested_translation": "夜鹰团队",
+      "context": "The “Night Hawk” team at TSMC worked 24/7 to solve yield issues",
+      "confidence": 0.9
+    },
+    {
+      "term": "requalification",
+      "suggested_translation": "重新认证",
+      "context": "estimated at $2-5 billion in redesign and requalification alone",
+      "confidence": 0.9
+    },
+    {
+      "term": "n-1 node",
+      "suggested_translation": "n-1制程节点",
+      "context": "they are still on n-1 node largely",
+      "confidence": 0.9
+    },
+    {
+      "term": "CoWoS-L",
+      "suggested_translation": "CoWoS-L",
+      "context": "chasing packaging density (CoWoS-L for NVIDIA)",
+      "confidence": 0.95
+    },
+    {
+      "term": "Project Azalea",
+      "suggested_translation": "Azalea项目",
+      "context": "Apple explored alternatives to Samsung via “Project Azalea”",
+      "confidence": 0.9
+    },
+    {
+      "term": "Panther Lake",
+      "suggested_translation": "Panther Lake",
+      "context": "Intel processor codename used as a baseline for 18A-P yield estimates.",
+      "confidence": 0.95
+    },
+    {
+      "term": "14A",
+      "suggested_translation": "14A",
+      "context": "Intel's future process node mentioned as potential optionality for Apple.",
+      "confidence": 0.95
+    },
+    {
+      "term": "PowerVia",
+      "suggested_translation": "PowerVia",
+      "context": "Intel's specific brand name for its backside power delivery technology.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Intel16",
+      "suggested_translation": "Intel 16",
+      "context": "Intel's mature process node manufactured in its Ireland fab.",
+      "confidence": 0.95
+    },
+    {
+      "term": "DTV",
+      "suggested_translation": "DTV (数字电视)",
+      "context": "Digital TV, mentioned as a target application for the Intel16 mature node.",
+      "confidence": 0.9
+    },
+    {
+      "term": "display drivers",
+      "suggested_translation": "显示驱动芯片",
+      "context": "Lower-risk silicon components that Apple could potentially source from Intel.",
+      "confidence": 0.95
+    },
+    {
+      "term": "base M-series",
+      "suggested_translation": "基础款M系列",
+      "context": "The standard, non-Pro/Max versions of Apple's Mac processors.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Peripheral chips",
+      "suggested_translation": "外围芯片",
+      "context": "Non-core chips that are candidates for foundry diversification.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "anchor tenant": "锚定客户",
+    "capex": "资本支出",
+    "gross margin": "毛利率",
+    "moore’s law": "摩尔定律",
+    "18a-p": "18A-P",
+    "m-series": "M系列",
+    "asp": "ASP",
+    "n3": "N3",
+    "backside power delivery": "背面供电",
+    "a-series": "A系列",
+    "pmic": "PMIC",
+    "lsi": "LSI",
+    "foundry": "晶圆代工厂"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:41:24.216664"
+}

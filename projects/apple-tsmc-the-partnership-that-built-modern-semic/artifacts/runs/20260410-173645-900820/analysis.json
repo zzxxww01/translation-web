@@ -1,0 +1,1670 @@
+{
+  "theme": "The decade-long, symbiotic partnership between Apple and TSMC is undergoing a structural shift as AI, driven by NVIDIA, overtakes Apple in leading-edge capacity demand, fundamentally altering foundry power dynamics, node optimization, and semiconductor capital expenditures.",
+  "key_arguments": [
+    "Apple acted as TSMC's sole 'anchor tenant' for over a decade, pre-funding bleeding-edge nodes and de-risking massive capital expenditures through guaranteed volume.",
+    "Apple's ruthless vertical integration and custom silicon strategy (coupled with advanced packaging like InFO) yielded billions in margin savings and unparalleled product differentiation.",
+    "The rise of AI has inverted the foundry hierarchy: NVIDIA and the AI ecosystem now consume more leading-edge wafers (N5, N3) and advanced packaging (CoWoS) than Apple.",
+    "Building proprietary fabs makes zero financial sense for Apple due to negative ROIC; Apple effectively uses TSMC's balance sheet as a service.",
+    "Future TSMC node designs reflect this power shift: N2/A16 is optimized for HPC/NVIDIA's thermal envelopes, while A14 (1.4nm) will rebalance toward mobile efficiency for Apple's comeback."
+  ],
+  "structure_summary": "The article begins with a historical retrospective of the Apple-TSMC alliance (the 'Anchor Tenant' era), transitions into quantitative analysis of wafer demand, packaging economics, and margin savings, and then pivots to the current disruption caused by AI/NVIDIA. It concludes with strategic forecasts for 2025-2035, analyzing geographic risks (Taiwan/Arizona) and the technical tug-of-war over future node optimization (A16 vs A14).",
+  "terminology": [
+    {
+      "term": "Anchor Tenant",
+      "context_meaning": "A primary customer whose massive, guaranteed demand justifies and de-risks a supplier's huge capital investment (borrowed from commercial real estate).",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Standard business translation that conveys the foundational, risk-absorbing nature of Apple's role for TSMC."
+    },
+    {
+      "term": "InFO-PoP (Integrated Fan-Out Package-on-Package)",
+      "context_meaning": "TSMC's advanced packaging technology that stacks DRAM directly on the SoC, heavily used by Apple for mobile thickness reduction.",
+      "translation": "集成扇出型层叠封装 (InFO-PoP)",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Critical advanced packaging term. Needs English acronym preservation as it is the industry standard."
+    },
+    {
+      "term": "CoWoS (Chip-on-Wafer-on-Substrate)",
+      "context_meaning": "TSMC's 2.5D packaging technology used to place HBM side-by-side with GPUs, driven by NVIDIA.",
+      "translation": "CoWoS封装",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "Industry standard term; translating the full name is unnecessary, but a brief note on its HBM/GPU context helps contrast with InFO."
+    },
+    {
+      "term": "Known Good Die (KGD)",
+      "context_meaning": "Bare dies that have been fully tested and are known to be defect-free before packaging, impacting yield economics.",
+      "translation": "已知良好裸片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Crucial for understanding the dynamic risk-sharing pricing model between Apple and TSMC."
+    },
+    {
+      "term": "Yield learning curve",
+      "context_meaning": "The process and timeline of improving manufacturing defect rates on a new semiconductor node.",
+      "translation": "良率学习曲线",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard semiconductor manufacturing terminology."
+    },
+    {
+      "term": "Backside power delivery",
+      "context_meaning": "A new transistor architecture technique moving power routing to the back of the wafer to optimize power and signal routing.",
+      "translation": "背面供电",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Key technical differentiator for TSMC's A16 node."
+    },
+    {
+      "term": "Gate-all-around transistors (GAA)",
+      "context_meaning": "The next-generation transistor architecture replacing FinFET, offering better electrostatic control.",
+      "translation": "环绕栅极晶体管 (GAA)",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Core semiconductor architecture term."
+    },
+    {
+      "term": "ROIC (Return on Invested Capital)",
+      "context_meaning": "Financial metric showing how efficiently a company uses its capital to generate profits.",
+      "translation": "投入资本回报率 (ROIC)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Essential corporate finance metric explaining why Apple avoids building physical fabs."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "英伟达架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "vertical integration",
+      "context_meaning": "We analyze why competitors have failed to replicate this vertical integration",
+      "translation": "垂直整合",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Wafer Demand Model",
+      "context_meaning": "All of this is quantified with specifics from our proprietary Foundry Industry Model and Apple Wafer Demand Model.",
+      "translation": "晶圆需求模型",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Broadcom",
+      "context_meaning": "Annual chip savings exceed $7B across Intel, Qualcomm, and Broadcom displacement.",
+      "translation": "博通",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ASML",
+      "context_meaning": "building a supply chain empire that spans Foxconn, ASML, and dozens of precision manufacturers.",
+      "translation": "ASML",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "gate-all-around transistors",
+      "context_meaning": "Backside power delivery, gate-all-around transistors, and thermal envelopes are optimized for HPC",
+      "translation": "环绕栅极晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GM",
+      "context_meaning": "Mac GM expanded from 28.5% to 39.5% after ditching Intel",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "purchase obligations",
+      "context_meaning": "Apple’s manufacturing purchase obligations scaled from $8.7B in 2010 to $71B in 2022.",
+      "translation": "采购承诺",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Advanced Packaging",
+      "context_meaning": "TSMC Advanced Packaging as % of Revenue",
+      "translation": "先进封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ASP",
+      "context_meaning": "imply $630M in foundry revenue for Intel at an $18k ASP",
+      "translation": "平均售价 (ASP)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "18A-P",
+      "context_meaning": "Intel’s 18A-P process (shipping late 2026)",
+      "translation": "18A-P",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CIS",
+      "context_meaning": "manufacture advanced CMOS Image Sensors (CIS)",
+      "translation": "CMOS图像传感器 (CIS)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "hyperscalers",
+      "context_meaning": "...driven by NVIDIA, AMD, and hyperscalers, outgrows.",
+      "translation": "超大规模云厂商",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Moore’s Law",
+      "context_meaning": "Hsinchu and Cupertino worked as a single team to relentlessly advance Moore’s Law.",
+      "translation": "摩尔定律",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "AP",
+      "context_meaning": "Apple fielded its first custom smartphone applications processor (AP), the A4...",
+      "translation": "应用处理器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LSI",
+      "context_meaning": "Apple’s Reengagement with Samsung LSI/Foundry",
+      "translation": "LSI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "A-series",
+      "context_meaning": "leading-edge A-series and M-series chip",
+      "translation": "A系列",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "M-series",
+      "context_meaning": "leading-edge A-series and M-series chip",
+      "translation": "M系列",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "leading-edge",
+      "context_meaning": "every leading-edge A-series and M-series chip",
+      "translation": "先进制程",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IP",
+      "context_meaning": "Apple notified Imagination they would stop using their IP within 15-24 months.",
+      "translation": "IP / 知识产权",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PDK",
+      "context_meaning": "Apple co-defines the Process Design Kit (PDK) with TSMC.",
+      "translation": "工艺设计套件",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Secure Enclave",
+      "context_meaning": "AuthenTec’s architecture enabled the Secure Enclave, the hardware security subsystem...",
+      "translation": "安全隔区",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DTCO",
+      "context_meaning": "DTCO: Design-Technology Co-Optimization",
+      "translation": "设计-工艺协同优化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Neural Engine",
+      "context_meaning": "The Neural Engine has seen the most exponential growth, jumping from 0.6 TOPS in A11 to 35 TOPS in A17/A18",
+      "translation": "神经网络引擎",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Unified Memory Architecture",
+      "context_meaning": "Apple Silicon uses Unified Memory Architecture: the GPU reads the exact same memory address as the CPU.",
+      "translation": "统一内存架构",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CAGR",
+      "context_meaning": "translating to an 11% CAGR",
+      "translation": "复合年增长率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "hyperscaler",
+      "context_meaning": "NVIDIA, AMD, and hyperscaler ASICs grew faster",
+      "translation": "超大规模云服务商",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "leading-edge capacity",
+      "context_meaning": "AI accelerator customers absorbing leading-edge capacity.",
+      "translation": "先进制程产能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ASIC",
+      "context_meaning": "hyperscaler ASICs grew faster than Apple",
+      "translation": "ASIC (专用集成电路)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "spatial computing",
+      "context_meaning": "Vision Pro and spatial computing fit this profile",
+      "translation": "空间计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "wspm",
+      "context_meaning": "expanded N3 capacity by 30-40k wspm",
+      "translation": "每月晶圆投片量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Y/Y",
+      "context_meaning": "Y/Y Apple Spend",
+      "translation": "同比",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "C-series",
+      "context_meaning": "Two new chip families (N-series and C-series) launch in 2025.",
+      "translation": "C系列",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "N-series",
+      "context_meaning": "By 2030, A-series is 29%, M-series is 16%, N-series plus C-series is 15%.",
+      "translation": "N系列",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "concentration risk",
+      "context_meaning": "In 2014, A-series represented 92% of Apple’s wafer demand, representing a concentration risk.",
+      "translation": "集中度风险",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Baltra",
+      "context_meaning": "Apple’s datacenter silicon ambitions (Baltra) are more than rumors.",
+      "translation": "Baltra",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "silicon intensity",
+      "context_meaning": "Its contribution is silicon intensity, primarily.",
+      "translation": "硅含量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "N3",
+      "context_meaning": "Apple ramped N3 first, taking 92% of node capacity in 2023...",
+      "translation": "N3",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "AI accelerator",
+      "context_meaning": "AI accelerators followed with overwhelming force.",
+      "translation": "AI加速器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "N5",
+      "context_meaning": "On N5, Apple’s quarterly wafer demand consistently exceeded the combined demand...",
+      "translation": "N5",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "die",
+      "context_meaning": "reflecting larger dies, more advanced nodes, and increasing silicon content...",
+      "translation": "裸片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield learning",
+      "context_meaning": "Apple funded yield learning, absorbed startup capacity...",
+      "translation": "良率学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "binning",
+      "context_meaning": "Binning as Yield Optimization... A defective M3 Max die with a broken GPU core doesn’t go in the trash; it becomes a binned M3 Pro",
+      "translation": "芯片分级",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ramp",
+      "context_meaning": "yields can be as low as 55% during the initial ramp.",
+      "translation": "产能爬坡",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Known Good Die",
+      "context_meaning": "Apple negotiates to pay only for Known Good Dies (KGD) during the initial ramp.",
+      "translation": "已知良好裸片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "KGD",
+      "context_meaning": "Apple negotiates to pay only for Known Good Dies (KGD) during the initial ramp.",
+      "translation": "KGD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NRE",
+      "context_meaning": "Break-even is 14 million units against a $1 billion NRE investment.",
+      "translation": "一次性工程费用 (NRE)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "COGS",
+      "context_meaning": "The M-series chips cost Apple an estimated $77 per unit in COGS",
+      "translation": "销货成本 (COGS)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capital expenditure",
+      "context_meaning": "Apple’s demand has catalyzed hundreds of billions in capital expenditure across the semiconductor ecosystem.",
+      "translation": "资本支出",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market cap",
+      "context_meaning": "ASML’s market cap grew from approximately €15B in 2010 to €380B+ in 2024",
+      "translation": "市值",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "N2",
+      "context_meaning": "TSMC’s N2 node (2025-2026) marks a structural shift.",
+      "translation": "N2",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "A14",
+      "context_meaning": "A14 (1.4nm) rebalances the equation.",
+      "translation": "A14",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "A16",
+      "context_meaning": "TSMC’s A16 (N2) is architected for HPC workloads.",
+      "translation": "A16",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PTC",
+      "context_meaning": "Meet with us at PTC’26!",
+      "translation": "PTC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Fab 18",
+      "context_meaning": "map Apple’s manufacturing footprint across Fab 18",
+      "translation": "Fab 18",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Node Economics",
+      "context_meaning": "Wafer Demand Model, Node Economics, and the shifting power dynamics",
+      "translation": "节点经济学",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "thermal envelope",
+      "context_meaning": "Optimized for HPC and smartphones will skip this node.",
+      "translation": "散热包络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Foxconn",
+      "context_meaning": "building a supply chain empire that spans Foxconn, ASML...",
+      "translation": "富士康",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "platform shift",
+      "context_meaning": "The platform shift has already happened. HPC revenue at TSMC grew...",
+      "translation": "平台转换",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "S-series",
+      "context_meaning": "forecasts silicon demand across chip families (A-series, M-series, S-series...)",
+      "translation": "S系列",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "18A",
+      "context_meaning": "Intel’s current 18A yields are lower than TSMC’s N3",
+      "translation": "18A",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "N3E",
+      "context_meaning": "Apple buys leading-edge logic wafers (N3, N3E)",
+      "translation": "N3E",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "mature node",
+      "context_meaning": "the Intel16 mature node in its Ireland fab",
+      "translation": "成熟制程",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PMIC",
+      "context_meaning": "Where diversification makes sense: PMICs, Display Drivers",
+      "translation": "PMIC (电源管理芯片)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "AP6",
+      "context_meaning": "while NVIDIA fights for AP5/AP6 (CoWoS)",
+      "translation": "AP6 (先进封装厂)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TSMC Arizona",
+      "context_meaning": "TSMC Arizona provides token diversification",
+      "translation": "台积电亚利桑那州工厂",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SLC",
+      "context_meaning": "System-Level Cache (SLC) before DRAM. The SLC allows CPU, GPU, and Neural Engine to share data",
+      "translation": "系统级缓存",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Strix Halo",
+      "context_meaning": "AMD’s Strix Halo matches on size but CPU cores cannot access it.",
+      "translation": "Strix Halo",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "node transition",
+      "context_meaning": "Every jump aligns with a major node transition.",
+      "translation": "制程转换",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "1.4nm",
+      "context_meaning": "1.4nm enters in 2029 at 307K wafers and explodes to 808K by 2030.",
+      "translation": "1.4纳米",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "silicon content",
+      "context_meaning": "expanding silicon content beyond just the main SoC",
+      "translation": "硅含量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "device base",
+      "context_meaning": "The device base is massive but mature.",
+      "translation": "设备基数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "custom silicon",
+      "context_meaning": "hyperscaler custom silicon",
+      "translation": "定制芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "startup capacity",
+      "context_meaning": "absorbing startup capacity on every new node",
+      "translation": "初始产能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Fab 21",
+      "context_meaning": "Apple is already producing chips at Fab 21.",
+      "translation": "Fab 21",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Analytical, financially astute, authoritative, and objective, with occasional dramatic flair to emphasize scale and power shifts.",
+    "target_audience": "Semiconductor industry professionals, financial analysts, tech investors, and hardcore tech enthusiasts.",
+    "translation_voice": "Professional financial and semiconductor industry analyst voice. Precise, data-driven, yet engaging and readable with crisp logic."
+  },
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "Section 10 & 23: 'A16 is Nvidia’s node. A14 is Apple’s comeback.'",
+      "issue": "Readers and translators may confuse 'A16/A14' here with Apple's iPhone chips (A16 Bionic, A14 Bionic). In this context, A16 and A14 refer to TSMC's Angstrom-era process nodes (1.6nm and 1.4nm).",
+      "suggestion": "Explicitly add a translator note or inline clarification: '这里的A16指台积电的1.6纳米埃米级节点，而非苹果处理器' (A16 here refers to TSMC's 1.6nm node, not Apple's processor)."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section 6: 'Apple’s Taiwan concentration is the elephant in the room.'",
+      "issue": "Literal translation of 'elephant in the room' can feel clunky in a hardcore tech/finance piece.",
+      "suggestion": "Translate as '不可忽视的隐患' (the hidden danger that cannot be ignored) or '显而易见却避而不谈的风险' to maintain professional tone."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section 19: 'Using TSMC’s balance sheet as a service...'",
+      "issue": "This is a brilliant financial framing (BaaS applied to balance sheets) that could be lost if translated too literally or too academically.",
+      "suggestion": "Translate as '将台积电的资产负债表作为一种服务（BaaS）来使用' to preserve the clever SaaS analogy."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section 10 & 11: 'concave' vs 'convex' growth curves",
+      "issue": "Mathematical terms applied to product adoption and wafer demand forecasting. Needs to make sense in a business context.",
+      "suggestion": "Translate 'concave' as '凹型增长（增速递减）' and 'convex' as '凸型增长（增速递增/前置爆发）' to ensure the financial/business meaning is immediately clear to Chinese readers."
+    }
+  ],
+  "guidelines": [
+    "1. Disambiguate Node vs. Chip names: Pay extreme attention to 'A16' and 'A14'. When referring to TSMC's Angstrom-era nodes, explicitly translate as '台积电A16节点' to prevent confusion with Apple's A-series silicon.",
+    "2. Master Cross-Domain Terminology: This article heavily mixes semiconductor manufacturing (yield, KGD, GAA, backside power) with corporate finance (ROIC, capex, COGS, gross margin). Ensure strict adherence to standard Chinese terminology for both domains without mixing registers.",
+    "3. Restructure for Chinese Flow: Long, data-heavy English sentences comparing Apple and NVIDIA's wafer consumption should be broken into parallel, punchy Chinese clauses. Avoid overly long modifier chains (e.g., 'The ongoing transition away from Qualcomm...').",
+    "4. Preserve Financial Analogies: Terms like 'anchor tenant' (基石客户) and 'balance sheet as a service' are core to the author's thesis. Translate them directly but smoothly, as they highlight the economic realities of the foundry business.",
+    "5. Calibrate Intensity: Maintain the dramatic but professional tone in phrases like 'ruthless' (冷酷无情/极其坚决), 'elephant in the room' (不可忽视的隐患), and 'industrial kingmaker' (产业造王者). Do not flatten these into boring academic prose.",
+    "6. Data Formatting: Ensure all CAGR percentages, billions (B) to 十亿/百亿 conversions, and wafer counts (K) are localized accurately (e.g., $98B = 980亿美元, 130k = 13万片)."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Establishes the core thesis of the article, framing the Apple-TSMC relationship as a historically foundational alliance that is now being structurally disrupted by NVIDIA and the AI boom.",
+      "relation_to_previous": "None. This is the opening section.",
+      "relation_to_next": "Transitions from a high-level overview of the shifting power dynamics to specific, quantifiable financial evidence of Apple's historical impact on TSMC in the 'Anchor Tenant' section.",
+      "key_points": [
+        "The foundry landscape is experiencing a power shift from mobile-driven (Apple) to AI-driven (NVIDIA) demand.",
+        "Apple's silicon empire was built via deep vertical integration, 8,000+ engineers, and 15 design centers, making it highly defensible.",
+        "Alternative foundries like Intel 18A and Samsung are emerging as viable options, raising strategic questions for the future."
+      ],
+      "translation_notes": [
+        "Ensure 'Anchor Tenant' is translated consistently as a foundational business concept (e.g., 锚定客户 or 基石客户).",
+        "Differentiate 'bleeding-edge' (often implying higher risk/cost, e.g., 尖端/流血前沿产能) from standard 'leading-edge' (先进制程).",
+        "Maintain a highly analytical, authoritative tone suitable for hardcore tech and finance readers."
+      ]
+    },
+    "01-anchor-tenant": {
+      "role_in_article": "Quantifies Apple's role as the financial de-risker for TSMC's massive capital expenditures and details the gross margin expansion Apple achieved through this silicon internalization.",
+      "relation_to_previous": "Substantiates the introductory claims of a 'symbiotic partnership' with hard financial data regarding capex and purchase obligations.",
+      "relation_to_next": "Sets up the pure quantitative dashboard in 'Key Numbers' by introducing high-level financial and wafer mix metrics.",
+      "key_points": [
+        "Apple single-handedly de-risked TSMC's $98B capex deployment (2019-2022) by pre-funding capacity.",
+        "In-house silicon transition drove massive gross margin expansion for Apple (Mac +11%, iPhone +5%).",
+        "Displacing external vendors (Intel, Qualcomm, Broadcom) yields over $7B in annual chip savings for Apple."
+      ],
+      "translation_notes": [
+        "Translate 'de-risk investment' accurately in a financial context (e.g., 降低投资风险 / 为巨额投资兜底).",
+        "Translate 'wafer mix' as 晶圆需求结构 or 晶圆产品组合.",
+        "Ensure 'Gross Margins (GM)' and 'percentage point expansion' are translated strictly using standard financial terminology (毛利率, 百分点扩张)."
+      ]
+    },
+    "02-key-numbers": {
+      "role_in_article": "Acts as a data dashboard, isolating the raw metrics on wafer demand and advanced packaging revenue to ground the narrative in undeniable facts.",
+      "relation_to_previous": "Distills the broad financial narrative of the 'Anchor Tenant' section into specific, digestible data points.",
+      "relation_to_next": "Provides the numerical baseline necessary to understand the scale of the historical timeline detailed in the subsequent 'Five Phases' section.",
+      "key_points": [
+        "TSMC's advanced packaging revenue share is scaling rapidly (from 6-7% in 2018 to projected 10%+ in 2025)."
+      ],
+      "translation_notes": [
+        "Keep formatting clean and use standard industry abbreviations.",
+        "Translate 'Advanced Packaging as % of Revenue' precisely (先进封装占总营收比重)."
+      ]
+    },
+    "03-the-five-phases-of-apple-tsmc": {
+      "role_in_article": "Chronologically maps the evolution of the alliance to highlight the immense switching costs and lock-in effects that prevent Apple from easily moving to competitors.",
+      "relation_to_previous": "Explains the historical timeline of *how* the massive wafer demand and financial metrics from the previous sections were achieved.",
+      "relation_to_next": "The concept of historical lock-in naturally introduces the physical and technical lock-in discussed in 'The Manufacturing Footprint'.",
+      "key_points": [
+        "Apple's product cadence is deeply synchronized with TSMC's node roadmap.",
+        "Switching to Intel or Samsung carries a severe 2-3 year penalty of inferior products due to yield learning curves.",
+        "The annual iPhone holiday refresh cycle relies entirely on this synchronized execution."
+      ],
+      "translation_notes": [
+        "Translate 'yield learning' as 良率爬坡 or 良率学习曲线.",
+        "Translate 'product cadence' as 产品发布节奏 or 产品迭代步调.",
+        "Ensure the translation captures the severity of 'switching costs' (转换成本) implied by the 2-3 year penalty."
+      ]
+    },
+    "04-the-manufacturing-footprint": {
+      "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+      "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+      "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+      "key_points": [
+        "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+        "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+        "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+      ],
+      "translation_notes": [
+        "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+        "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+      ]
+    },
+    "05-geographic-concentration-risk": {
+      "role_in_article": "Assesses the geopolitical vulnerability of the Apple-TSMC alliance and evaluates the efficacy of mitigation efforts like the Arizona fab.",
+      "relation_to_previous": "Takes the localized manufacturing footprint established in the previous section and evaluates it on a global, geopolitical scale.",
+      "relation_to_next": "Contrasts Apple's lack of control over geographic manufacturing risks with its absolute control over silicon IP, setting up the 'Transformational Chip Acquisitions' section.",
+      "key_points": [
+        "Apple has extreme geographic concentration risk, with nearly all leading-edge production located 100 miles from mainland China.",
+        "TSMC Arizona currently represents 'token diversification' (<5% capacity).",
+        "A shift to 10-15% capacity in Arizona by 2028 would be the true indicator of Apple's geopolitical anxiety."
+      ],
+      "translation_notes": [
+        "Translate 'elephant in the room' idiomatically (e.g., 显而易见却被刻意回避的重大隐患 or 房间里的大象).",
+        "Translate 'token diversification' accurately to reflect its superficial nature (e.g., 象征性的多元化 or 点缀式的风险分散).",
+        "Maintain a neutral, objective tone regarding geopolitical risks."
+      ]
+    },
+    "06-apples-five-transformational": {
+      "role_in_article": "Details Apple's aggressive M&A strategy to internalize silicon design, culminating in a 'virtual IDM' relationship with TSMC that dictates process design.",
+      "relation_to_previous": "Pivots from external manufacturing risks to internal design control, showing how Apple mitigates risk by owning the underlying IP.",
+      "relation_to_next": "Establishes Apple's deep integration at the PDK level, setting up the final technical outlook on future node optimizations in the concluding section.",
+      "key_points": [
+        "Apple's philosophy is to ruthlessly control 'primary technologies' across all critical subsystems (Audio, Security, Wireless, UWB).",
+        "The $1B Intel modem acquisition was a pivotal step toward full in-house connectivity silicon.",
+        "Apple and TSMC operate as a 'virtual IDM', with TSMC dedicating hundreds of engineers to customize the Process Design Kit (PDK) specifically for Apple."
+      ],
+      "translation_notes": [
+        "Translate 'virtual IDM' as 虚拟IDM or 虚拟垂直整合制造模式.",
+        "Translate 'Process Design Kit (PDK)' as 工艺设计套件 (PDK).",
+        "Capture the intensity of 'ruthless' in a business context (e.g., 极其冷酷/极致的掌控欲)."
+      ]
+    },
+    "07-silicon-performance-evolution": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "08-apple-wafer-demand": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "09-apples-wafer-demand-model-fo": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "10-chip-series-analysis": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "11-device-mix-diversification": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "12-device-shipments": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "13-ai-overtakes-apple-at-the-lead": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "14-how-apple-subsidizes-tsmc": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "15-packaging-economics": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "16-apple-gross-margin-savings-fro": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "17-competitor-replication-efforts": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "18-why-apple-will-not-build-fabs": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "19-apple-as-industrial-kingmaker": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "20-the-next-decade-2025-2035-fa": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "21-the-arizona-question": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "22-the-node-optimization-shift": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 23,
+  "paragraph_count": 376,
+  "word_count": 10731
+}

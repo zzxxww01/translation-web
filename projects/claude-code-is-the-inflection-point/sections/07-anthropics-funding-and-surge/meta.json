@@ -1,0 +1,1916 @@
+{
+  "section_id": "07-anthropics-funding-and-surge",
+  "title": "Anthropic’s Funding and Surge: Why is Anthropic Winning?",
+  "title_translation": "Anthropic 的融资与崛起：为什么赢的是 Anthropic？",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "One of the most interesting questions in this debate: GPT-5.2 High has been benchmark-maxxing for a year and held pole position for the past two years since ChatGPT’s rise. The SWE-bench verified result is effectively the same, with GPT-5.2 high MMLU-pro and AIME 2025 in favor of 5.2, yet everyone is obsessed with Opus. So why is Claude Code dominating?",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0110",
+      "parent_block_index": 110,
+      "parent_block_type": "p",
+      "parent_block_markdown": "One of the most interesting questions in this debate: GPT-5.2 High has been benchmark-maxxing for a year and held pole position for the past two years since ChatGPT’s rise. The SWE-bench verified result is effectively the same, with GPT-5.2 high MMLU-pro and AIME 2025 in favor of 5.2, yet everyone is obsessed with Opus. So why is Claude Code dominating?",
+      "parent_block_plain_text": "One of the most interesting questions in this debate: GPT-5.2 High has been benchmark-maxxing for a year and held pole position for the past two years since ChatGPT’s rise. The SWE-bench verified result is effectively the same, with GPT-5.2 high MMLU-pro and AIME 2025 in favor of 5.2, yet everyone is obsessed with Opus. So why is Claude Code dominating?",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 355,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这场争论中最引人深思的问题之一在于：过去一年里，GPT-5.2 High 一直在狂卷基准测试（Benchmark-maxxing，即极度追求跑分数据），并在自 ChatGPT 崛起以来的两年间稳居霸主地位。两者的 SWE-bench 验证结果基本持平，GPT-5.2 在 MMLU-pro 和 AIME 2025 上的得分甚至更高，但所有人却都对 Opus 趋之若鹜。那么，为什么 Claude Code 能够占据统治地位？",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.826421",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!Emov!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0a2d6df3-68a8-4a9b-bb3d-5cab6dbb3db1_1430x1486.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Emov!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0a2d6df3-68a8-4a9b-bb3d-5cab6dbb3db1_1430x1486.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0111",
+      "parent_block_index": 111,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Emov!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0a2d6df3-68a8-4a9b-bb3d-5cab6dbb3db1_1430x1486.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Emov!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0a2d6df3-68a8-4a9b-bb3d-5cab6dbb3db1_1430x1486.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Emov!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0a2d6df3-68a8-4a9b-bb3d-5cab6dbb3db1_1430x1486.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Emov!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0a2d6df3-68a8-4a9b-bb3d-5cab6dbb3db1_1430x1486.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.826592",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Emov!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0a2d6df3-68a8-4a9b-bb3d-5cab6dbb3db1_1430x1486.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis Tokenomics Team, Artificial Analysis, Chatbot Arena generated by Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Team",
+          "start": 8,
+          "end": 36,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0112",
+      "parent_block_index": 112,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Tokenomics Team](https://semianalysis.com/tokenomics-model/), Artificial Analysis, Chatbot Arena generated by Claude Code",
+      "parent_block_plain_text": "Source: SemiAnalysis Tokenomics Team, Artificial Analysis, Chatbot Arena generated by Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Team",
+          "start": 8,
+          "end": 36,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 97,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Tokenomics 团队，Artificial Analysis，Chatbot Arena，由 Claude Code 生成",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626952",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis Tokenomics 团队]]]，Artificial Analysis，Chatbot Arena，由 Claude Code 生成",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis Tokenomics 模型团队、Artificial Analysis，由 Claude Code 生成的 Chatbot Arena 数据",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.826758",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis Tokenomics 模型团队]]]、Artificial Analysis，由 Claude Code 生成的 Chatbot Arena 数据",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Tokenomics 团队，Artificial Analysis，Chatbot Arena，由 Claude Code 生成",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis Tokenomics 团队]]]，Artificial Analysis，Chatbot Arena，由 Claude Code 生成",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The answer is token efficiency. Opus 4.5 achieves dramatically better token efficiency than GPT-5.2 High, and this matters enormously for long-horizon task achievement.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0113",
+      "parent_block_index": 113,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The answer is token efficiency. Opus 4.5 achieves dramatically better token efficiency than GPT-5.2 High, and this matters enormously for long-horizon task achievement.",
+      "parent_block_plain_text": "The answer is token efficiency. Opus 4.5 achieves dramatically better token efficiency than GPT-5.2 High, and this matters enormously for long-horizon task achievement.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 168,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "答案在于 Token 效率。Opus 4.5 的 Token 效率远超 GPT-5.2 High，这对完成长周期任务至关重要。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.826803",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!huRl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff13013ab-dc6a-4355-9261-68aa478cf6ea_2025x1453.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!huRl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff13013ab-dc6a-4355-9261-68aa478cf6ea_2025x1453.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0114",
+      "parent_block_index": 114,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!huRl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff13013ab-dc6a-4355-9261-68aa478cf6ea_2025x1453.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!huRl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff13013ab-dc6a-4355-9261-68aa478cf6ea_2025x1453.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!huRl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff13013ab-dc6a-4355-9261-68aa478cf6ea_2025x1453.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!huRl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff13013ab-dc6a-4355-9261-68aa478cf6ea_2025x1453.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.826840",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!huRl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff13013ab-dc6a-4355-9261-68aa478cf6ea_2025x1453.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: Artificial Analysis, SemiAnalysis Tokenomics Team, Generated by Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Team",
+          "start": 29,
+          "end": 57,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0115",
+      "parent_block_index": 115,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Artificial Analysis, [SemiAnalysis Tokenomics Team](https://semianalysis.com/tokenomics-model/), Generated by Claude Code",
+      "parent_block_plain_text": "Source: Artificial Analysis, SemiAnalysis Tokenomics Team, Generated by Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Team",
+          "start": 29,
+          "end": 57,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 83,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Artificial Analysis，SemiAnalysis Tokenomics 团队，由 Claude Code 生成",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626965",
+          "tokenized_text": "来源：Artificial Analysis，[[[LINK_1|SemiAnalysis Tokenomics 团队]]]，由 Claude Code 生成",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Artificial Analysis、SemiAnalysis Tokenomics 模型团队，由 Claude Code 生成",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.826938",
+          "tokenized_text": "来源：Artificial Analysis、[[[LINK_1|SemiAnalysis Tokenomics 模型团队]]]，由 Claude Code 生成",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Artificial Analysis，SemiAnalysis Tokenomics 团队，由 Claude Code 生成",
+      "confirmed_tokenized": "来源：Artificial Analysis，[[[LINK_1|SemiAnalysis Tokenomics 团队]]]，由 Claude Code 生成",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Long-horizon performance is fundamentally about compounding signal over multiple steps across context windows. Even though ChatGPT has a much larger context window, the efficiency curve of tasks-to-tokens tells a different story. Benchmark-maxxed ChatGPT may score higher on evals, but it takes an order of magnitude more tokens to accomplish tasks, which effectively ruins any long-horizon planning.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0116",
+      "parent_block_index": 116,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Long-horizon performance is fundamentally about compounding signal over multiple steps across context windows. Even though ChatGPT has a much larger context window, the efficiency curve of tasks-to-tokens tells a different story. Benchmark-maxxed ChatGPT may score higher on evals, but it takes an order of magnitude more tokens to accomplish tasks, which effectively ruins any long-horizon planning.",
+      "parent_block_plain_text": "Long-horizon performance is fundamentally about compounding signal over multiple steps across context windows. Even though ChatGPT has a much larger context window, the efficiency curve of tasks-to-tokens tells a different story. Benchmark-maxxed ChatGPT may score higher on evals, but it takes an order of magnitude more tokens to accomplish tasks, which effectively ruins any long-horizon planning.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 400,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "长周期性能的本质，是在跨越多个上下文窗口的多步操作中持续叠加有效信号。尽管 ChatGPT 拥有大得多的上下文窗口，但“任务-token”效率曲线却揭示了截然不同的真相。唯基准至上 / 卷基准的 ChatGPT 或许在评估中得分更高，但完成实际任务所需的 token 数量却高出一个数量级，这直接摧毁了任何长周期规划的可行性。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.826977",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "We think this is a deliberate choice Anthropic has made for some time. It’s not about spamming the most tokens (which creates some signal alongside a lot of noise) but about having the cleanest signal-to-noise ratio. This really matters over multi-context-window planning, where any compounding error leads to long-horizon task failure.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0117",
+      "parent_block_index": 117,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We think this is a deliberate choice Anthropic has made for some time. It’s not about spamming the most tokens (which creates some signal alongside a lot of noise) but about having the cleanest signal-to-noise ratio. This really matters over multi-context-window planning, where any compounding error leads to long-horizon task failure.",
+      "parent_block_plain_text": "We think this is a deliberate choice Anthropic has made for some time. It’s not about spamming the most tokens (which creates some signal alongside a lot of noise) but about having the cleanest signal-to-noise ratio. This really matters over multi-context-window planning, where any compounding error leads to long-horizon task failure.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 336,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们认为，这是 Anthropic 筹谋已久的战略选择。关键不在于堆砌海量 token（这会在产生部分有效信号的同时引入大量噪声），而在追求极致纯净的信噪比。在跨上下文窗口的规划中，这一点至关重要，因为任何误差的不断累积都会导致长周期任务彻底失败。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827012",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!Y25K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7b2dbfa-6b85-4d08-b665-1fdeaebe9b95_2105x1299.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Y25K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7b2dbfa-6b85-4d08-b665-1fdeaebe9b95_2105x1299.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0118",
+      "parent_block_index": 118,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Y25K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7b2dbfa-6b85-4d08-b665-1fdeaebe9b95_2105x1299.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Y25K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7b2dbfa-6b85-4d08-b665-1fdeaebe9b95_2105x1299.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Y25K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7b2dbfa-6b85-4d08-b665-1fdeaebe9b95_2105x1299.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Y25K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7b2dbfa-6b85-4d08-b665-1fdeaebe9b95_2105x1299.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827046",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Y25K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7b2dbfa-6b85-4d08-b665-1fdeaebe9b95_2105x1299.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: SemiAnalysis Tokenomics Team, generated by Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Team",
+          "start": 8,
+          "end": 36,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0119",
+      "parent_block_index": 119,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [SemiAnalysis Tokenomics Team](https://semianalysis.com/tokenomics-model/), generated by Claude Code",
+      "parent_block_plain_text": "Source: SemiAnalysis Tokenomics Team, generated by Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Team",
+          "start": 8,
+          "end": 36,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 62,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Tokenomics 团队，由 Claude Code 生成",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626977",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis Tokenomics 团队]]]，由 Claude Code 生成",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis Tokenomics 模型团队，由 Claude Code 生成",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827134",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis Tokenomics 模型团队]]]，由 Claude Code 生成",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Tokenomics 团队，由 Claude Code 生成",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis Tokenomics 团队]]]，由 Claude Code 生成",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "If you need 90% performance on a single context window, compounded over X steps, even small error rates guarantee failure at the end.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0120",
+      "parent_block_index": 120,
+      "parent_block_type": "p",
+      "parent_block_markdown": "If you need 90% performance on a single context window, compounded over X steps, even small error rates guarantee failure at the end.",
+      "parent_block_plain_text": "If you need 90% performance on a single context window, compounded over X steps, even small error rates guarantee failure at the end.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 133,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如果单次上下文窗口需要达到 90% 的成功率，在跨越 X 个步骤进行连乘叠加后，哪怕单步错误率极小，也注定会导致最终任务失败。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827168",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!W7M1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da088ff-4352-4681-9baa-df566ac3dbee_787x443.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!W7M1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da088ff-4352-4681-9baa-df566ac3dbee_787x443.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0121",
+      "parent_block_index": 121,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!W7M1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da088ff-4352-4681-9baa-df566ac3dbee_787x443.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!W7M1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da088ff-4352-4681-9baa-df566ac3dbee_787x443.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!W7M1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da088ff-4352-4681-9baa-df566ac3dbee_787x443.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!W7M1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da088ff-4352-4681-9baa-df566ac3dbee_787x443.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827201",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!W7M1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da088ff-4352-4681-9baa-df566ac3dbee_787x443.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Source: Weka",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0122",
+      "parent_block_index": 122,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Weka",
+      "parent_block_plain_text": "Source: Weka",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 12,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Weka",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626989",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Weka",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827233",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Weka",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Anthropic clearly values token efficiency. The new Sonnet 5 is allegedly coming in at a much smaller model size with a larger context window at similar performance to Opus 4.5. This effectively pushes the absolute max of the efficient token curve while expanding the context window. The capability difference in realized performance for coding agents will be ginormous. This is the gap Anthropic has over OpenAI.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0123",
+      "parent_block_index": 123,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Anthropic clearly values token efficiency. The new Sonnet 5 is allegedly coming in at a much smaller model size with a larger context window at similar performance to Opus 4.5. This effectively pushes the absolute max of the efficient token curve while expanding the context window. The capability difference in realized performance for coding agents will be ginormous. This is the gap Anthropic has over OpenAI.",
+      "parent_block_plain_text": "Anthropic clearly values token efficiency. The new Sonnet 5 is allegedly coming in at a much smaller model size with a larger context window at similar performance to Opus 4.5. This effectively pushes the absolute max of the efficient token curve while expanding the context window. The capability difference in realized performance for coding agents will be ginormous. This is the gap Anthropic has over OpenAI.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 412,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Anthropic 显然极度重视 Token效率。据传，全新的 Sonnet 5 模型体积大幅缩小，上下文窗口更大，且性能与 Opus 4.5 旗鼓相当。这在扩大上下文窗口的同时，有效推高了高效 token 曲线的绝对上限。对于编程智能体（指能够自主规划并执行复杂任务的 AI）而言，其实际性能的差异将是天壤之别。这正是 Anthropic 领先于 OpenAI 的身位优势。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827265",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "OpenAI will respond. They must. A new pretrain is a prerequisite, as higher scale seems to improve longer context tasks. What made OpenAI’s models so powerful last year was having an extremely long chain-of-thought token context to achieve tasks. But over multi-context-window problems, this goes from a boon to a crutch because it compounds noise. The fix is straightforward: a new pretrain. We expect one in the next few months, but until then, Anthropic leads. The real adoption of OpenAI’s codex is much lower than first blush.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0124",
+      "parent_block_index": 124,
+      "parent_block_type": "p",
+      "parent_block_markdown": "OpenAI will respond. They must. A new pretrain is a prerequisite, as higher scale seems to improve longer context tasks. What made OpenAI’s models so powerful last year was having an extremely long chain-of-thought token context to achieve tasks. But over multi-context-window problems, this goes from a boon to a crutch because it compounds noise. The fix is straightforward: a new pretrain. We expect one in the next few months, but until then, Anthropic leads. The real adoption of OpenAI’s codex is much lower than first blush.",
+      "parent_block_plain_text": "OpenAI will respond. They must. A new pretrain is a prerequisite, as higher scale seems to improve longer context tasks. What made OpenAI’s models so powerful last year was having an extremely long chain-of-thought token context to achieve tasks. But over multi-context-window problems, this goes from a boon to a crutch because it compounds noise. The fix is straightforward: a new pretrain. We expect one in the next few months, but until then, Anthropic leads. The real adoption of OpenAI’s codex is much lower than first blush.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 531,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "OpenAI 必将反击，也必须反击。全新的预训练是先决条件，因为更大规模似乎能改善长上下文任务的表现。去年 OpenAI 模型之所以如此强大，全凭极长的思维链 token 上下文来完成任务。然而，在处理跨越多个上下文窗口的问题时，这种优势却沦为累赘，因为它会不断叠加噪声。破局之法很直接：重新进行预训练。我们预计未来几个月内会有新动作，但在此之前，Anthropic 依然稳占鳌头。OpenAI 代码生成模型的实际采用率，远比乍看之下要低得多。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827295",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!rsVn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb4401-1aee-4794-9742-058453165cb3_2009x1260.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!rsVn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb4401-1aee-4794-9742-058453165cb3_2009x1260.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0125",
+      "parent_block_index": 125,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!rsVn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb4401-1aee-4794-9742-058453165cb3_2009x1260.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!rsVn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb4401-1aee-4794-9742-058453165cb3_2009x1260.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!rsVn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb4401-1aee-4794-9742-058453165cb3_2009x1260.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!rsVn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb4401-1aee-4794-9742-058453165cb3_2009x1260.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827327",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!rsVn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb4401-1aee-4794-9742-058453165cb3_2009x1260.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "SemiAnalysis Tokenomics Team, NPM",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SemiAnalysis Tokenomics Team, NPM",
+          "start": 0,
+          "end": 33,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0126",
+      "parent_block_index": 126,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SemiAnalysis Tokenomics Team, NPM*",
+      "parent_block_plain_text": "SemiAnalysis Tokenomics Team, NPM",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SemiAnalysis Tokenomics Team, NPM",
+          "start": 0,
+          "end": 33,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 33,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SemiAnalysis Tokenomics 团队，NPM",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827458",
+          "tokenized_text": "[[[EM_1|SemiAnalysis Tokenomics 团队，NPM]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "While VSCode is a lot stronger, but given that Github has “millions” of developers, install usage on VSCode often is not a perfect representation of usage.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0127",
+      "parent_block_index": 127,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While VSCode is a lot stronger, but given that Github has “millions” of developers, install usage on VSCode often is not a perfect representation of usage.",
+      "parent_block_plain_text": "While VSCode is a lot stronger, but given that Github has “millions” of developers, install usage on VSCode often is not a perfect representation of usage.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 155,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管 VSCode 上的数据表现要亮眼得多，但考虑到 GitHub 坐拥“数百万”开发者，单看 VSCode 的安装量往往无法精准反映其实际使用情况。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827521",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "https://substackcdn.com/image/fetch/$s_!fQeQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d00375f-d5c5-46ea-a6ed-1b5b49bec853_1050x522.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!fQeQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d00375f-d5c5-46ea-a6ed-1b5b49bec853_1050x522.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0128",
+      "parent_block_index": 128,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!fQeQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d00375f-d5c5-46ea-a6ed-1b5b49bec853_1050x522.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!fQeQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d00375f-d5c5-46ea-a6ed-1b5b49bec853_1050x522.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!fQeQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d00375f-d5c5-46ea-a6ed-1b5b49bec853_1050x522.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!fQeQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d00375f-d5c5-46ea-a6ed-1b5b49bec853_1050x522.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827574",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!fQeQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d00375f-d5c5-46ea-a6ed-1b5b49bec853_1050x522.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "Source: Bloomberry.com",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Bloomberry.com",
+          "start": 8,
+          "end": 22,
+          "href": "https://bloomberry.com/coding-tools.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0129",
+      "parent_block_index": 129,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Bloomberry.com](https://bloomberry.com/coding-tools.html)",
+      "parent_block_plain_text": "Source: Bloomberry.com",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Bloomberry.com",
+          "start": 8,
+          "end": 22,
+          "href": "https://bloomberry.com/coding-tools.html",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 22,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Bloomberry.com",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627001",
+          "tokenized_text": "来源：[[[LINK_1|Bloomberry.com]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Bloomberry.com",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827684",
+          "tokenized_text": "来源：[[[LINK_1|Bloomberry.com]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Bloomberry.com",
+      "confirmed_tokenized": "来源：[[[LINK_1|Bloomberry.com]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "The one-player race of 2025 looks much closer to a three-player race in 2026: Gemini leading consumer adoption with image models where ChatGPT once dominated, and Anthropic leading enterprise adoption and agents.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0130",
+      "parent_block_index": 130,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The one-player race of 2025 looks much closer to a three-player race in 2026: Gemini leading consumer adoption with image models where ChatGPT once dominated, and Anthropic leading enterprise adoption and agents.",
+      "parent_block_plain_text": "The one-player race of 2025 looks much closer to a three-player race in 2026: Gemini leading consumer adoption with image models where ChatGPT once dominated, and Anthropic leading enterprise adoption and agents.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 212,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2025 年一家独大的竞争格局，到 2026 年看起来更像是一场三足鼎立的角逐：Gemini 凭借图像模型，在 ChatGPT 曾经称霸的 C 端市场领跑；而 Anthropic 则在 B 端落地与智能体领域拔得头筹。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:09:48.827739",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.2,
+          "accuracy": 9.1
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中保留了翻译过程中的备选项（“唯基准至上 / 卷基准”），未做最终定夺，这在正式发布的文章中会严重影响阅读体验。此问题同样出现在第 6 段。"
+          },
+          {
+            "type": "readability",
+            "description": "中文字符与英文字母之间缺少必要的空格（“Token效率”）。此外，全文对于“token”一词的大小写处理不统一（第3、13段首字母大写，第6、14段全小写）。"
+          },
+          {
+            "type": "accuracy",
+            "description": "此处的“performance”在语境中指的是单步任务的“成功率”或“准确率”。译为“需要达到 90% 的性能”略显生硬，未能准确传达概率连乘导致长线任务失败的数学逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "结合前文 NPM 的配图，此处的“VSCode is a lot stronger”指的是 VSCode 插件的安装数据表现要比 NPM 强得多，而不是指 VSCode 这个软件本身“势头强劲”。"
+          },
+          {
+            "type": "annotation",
+            "description": "对“智能体”的括号解释“（指能够自主规划并执行复杂任务的 AI）”在第 13 段已经出现过。此处再次加注违反了“仅在首次出现时提供简短解释”的指南要求。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

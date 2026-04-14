@@ -1,0 +1,1150 @@
+{
+  "theme": "The current AI-driven memory supercycle is structurally larger and longer than past cycles due to the massive wafer capacity drain of HBM production, significant node migration friction, and skyrocketing prices, creating distinct strategic advantages for top-tier suppliers while squeezing downstream margins.",
+  "key_arguments": [
+    "DRAM scaling has slowed, shifting the industry's pricing power from technology-driven cost reductions to cyclical supply-demand dynamics and capacity additions.",
+    "The transition to HBM structurally reduces commodity DRAM supply, as HBM wafers yield significantly lower bit output (widening to a 4x gap with HBM4).",
+    "Node migrations (e.g., to 1b and 1c) and EUV adoption introduce execution friction, temporarily depressing effective capacity and yields across the industry.",
+    "Surging DRAM prices will severely squeeze margins for Tier-1.5 and Tier-2 mobile OEMs, potentially forcing specification downgrades and dampening the 2026 mobile shipment outlook.",
+    "HBM4 competition is consolidating into a two-player race between SK Hynix and Samsung, with Micron lagging due to execution challenges in meeting Nvidia's pin speed requirements.",
+    "Heavy Wafer Fab Equipment (WFE) capex is required for HBM expansion and EUV adoption, which will likely extend the current supercycle through 2027 before volatility hits."
+  ],
+  "structure_summary": "The article opens with a dramatic hook about skyrocketing memory prices, then establishes the historical context of DRAM scaling and cyclicality. It pivots to the core thesis: the AI-driven supercycle is unique because HBM production and node migration friction structurally constrain supply. The narrative then explores the downstream impact (margin pressure on mobile OEMs) and the upstream competitive landscape (SK Hynix vs. Samsung in HBM4). It concludes with a forecast of the cycle's timeline and the necessary WFE/EUV investments through 2027.",
+  "terminology": [
+    {
+      "term": "Commodity DRAM",
+      "context_meaning": "Standard, mass-produced DRAM as opposed to specialized, custom-packaged memory like HBM.",
+      "translation": "大宗DRAM",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "In Chinese semiconductor parlance, '标准型 DRAM' or '通用型 DRAM' is preferred over the literal '大宗商品 DRAM'."
+    },
+    {
+      "term": "Dennard scaling",
+      "context_meaning": "A scaling law stating that as transistors get smaller, their power density stays constant.",
+      "translation": "登纳德缩放定律",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard industry translation."
+    },
+    {
+      "term": "1T1C DRAM cell",
+      "context_meaning": "A memory cell architecture consisting of one access transistor and one storage capacitor.",
+      "translation": "1T1C DRAM 存储单元",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Annotate as '单晶体管单电容（1T1C）' on first occurrence for clarity."
+    },
+    {
+      "term": "WFE capex",
+      "context_meaning": "Capital expenditure on Wafer Fab Equipment.",
+      "translation": "晶圆制造设备（WFE）资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "WFE is a critical acronym in semiconductor finance; expanding it helps non-specialist readers."
+    },
+    {
+      "term": "Bit output",
+      "context_meaning": "The total storage capacity produced, measured in bits, rather than the number of physical wafers.",
+      "translation": "比特产出",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard industry term for measuring memory production volume."
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "Nvidia's next-generation GPU architecture succeeding Blackwell.",
+      "translation": "Rubin",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "Annotate as 'NVIDIA 下一代 Rubin 架构' to provide context for readers who may only know Hopper/Blackwell."
+    },
+    {
+      "term": "DUV multipatterning",
+      "context_meaning": "Using Deep Ultraviolet lithography multiple times to create features smaller than the single-exposure limit.",
+      "translation": "DUV 多重曝光",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard lithography terminology."
+    },
+    {
+      "term": "Buried contact (BC)",
+      "context_meaning": "A contact structure in DRAM connecting the access transistor source to the storage capacitor.",
+      "translation": "埋入式接触（BC）",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "Highly specific DRAM structural term; requires both Chinese translation and English acronym preservation."
+    },
+    {
+      "term": "Bitline cut",
+      "context_meaning": "The narrow gap patterned between the ends of bitlines in DRAM arrays.",
+      "translation": "位线切割",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Technical fabrication term."
+    },
+    {
+      "term": "Jitter",
+      "context_meaning": "Deviation from true periodicity of a presumed periodic signal, affecting signal integrity.",
+      "translation": "抖动",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "Standard electrical engineering term."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Supercycle",
+      "context_meaning": "Prices are doubling again, Supercycle is bigger, and could last longer than you think",
+      "translation": "超级周期",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cost per bit",
+      "context_meaning": "Shrinking transistors reduced cost per bit... sustain cost-per-bit declines",
+      "translation": "每比特成本",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "upcycle",
+      "context_meaning": "DRAM pricing in this cycle peaked earlier and rolled over more quickly than in previous upcycles.",
+      "translation": "上行周期",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bit supply",
+      "context_meaning": "increases bit supply without requiring new “greenfield” wafer capacity additions.",
+      "translation": "位元供应",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ASP",
+      "context_meaning": "Server DRAM also enjoys higher ASP and margins compared to PC and mobile",
+      "translation": "平均售价 (ASP)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LPDDR",
+      "context_meaning": "the rapid rise of LPDDR within the overall DRAM mix as mobile demand scaled.",
+      "translation": "LPDDR",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "greenfield",
+      "context_meaning": "without requiring new “greenfield” wafer capacity additions.",
+      "translation": "新建（绿地）",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "hyperscaler",
+      "context_meaning": "the early hyperscaler buildout wave (e.g., Google, Amazon, Facebook).",
+      "translation": "超大规模云服务商",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "OEM",
+      "context_meaning": "OEMs, hyperscalers, and channel partners were taking a defensive posture",
+      "translation": "OEM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scale-out",
+      "context_meaning": "Server DRAM intensity increased due to virtualization and scale-out services.",
+      "translation": "横向扩展",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "WFE",
+      "context_meaning": "DRAM EUV layer trends and WFE capex forecasts",
+      "translation": "WFE (晶圆制造设备)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cleanroom",
+      "context_meaning": "memory suppliers are now constrained by insufficient cleanroom capacity",
+      "translation": "洁净室",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "node migration",
+      "context_meaning": "the primary driver of this growth will be accelerated node migration to 1b and 1c",
+      "translation": "节点演进",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "12-Hi",
+      "context_meaning": "in the case of HBM3E 12-Hi",
+      "translation": "12层堆叠",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DDR",
+      "context_meaning": "DDR in general-purpose servers",
+      "translation": "DDR",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PSMC",
+      "context_meaning": "Even Micron’s recently acquired P5 Tongluo fab from PSMC is unlikely to contribute meaningful wafer output",
+      "translation": "力积电",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Core Research",
+      "context_meaning": "highlighted this last week on our institutional platform, Core Research.",
+      "translation": "Core Research",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DDR5",
+      "context_meaning": "DDR5 and LPDDR5 pricing have surged over the past year.",
+      "translation": "DDR5",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LPDDR5",
+      "context_meaning": "DDR5 and LPDDR5 pricing have surged over the past year.",
+      "translation": "LPDDR5",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM3E 12-hi",
+      "context_meaning": "pricing negotiations for HBM3E 12-hi and, likely, HBM4 this year.",
+      "translation": "12层HBM3E",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ASML",
+      "context_meaning": "confirmed by ASML and LRCX’s management",
+      "translation": "阿斯麦 (ASML)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "multipatterning",
+      "context_meaning": "where EUV can replace DUV multipatterning",
+      "translation": "多重曝光",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Authoritative, highly analytical, financially astute, and technically hardcore. It carries a confident, slightly dramatic edge typical of premium paid analyst research.",
+    "target_audience": "Institutional investors, semiconductor industry professionals, supply chain managers, and hardware engineers.",
+    "translation_voice": "资深半导体与金融双栖分析师。用词冷峻、精准，兼具金融市场的敏锐感与底层技术的硬核感，不避讳使用专业术语。"
+  },
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "Section: Supercycle Could be a Double-Edged Sword",
+      "issue": "'Upside' and 're-rate' are financial terms mixed into a hardware context.",
+      "suggestion": "Translate 'upside' as '上行空间' and 're-rate' as '价值重估' or '价格重塑', ensuring the financial market implications are preserved."
+    },
+    {
+      "type": "accuracy",
+      "location": "Introduction",
+      "issue": "The opening uses dramatic phrasing ('Prices of memory are going crazy', 'The scariest thing is...').",
+      "suggestion": "Do not flatten into academic prose. Use strong Chinese equivalents like '内存价格正陷入狂热' and '最令人胆寒的是...' to match the intensity."
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: How the Cycle Will Evolve",
+      "issue": "Long, dense sentences explaining the physical location of EUV adoption ('most in the congested region where access transistors... meet the memory storage capacitors').",
+      "suggestion": "Break down into shorter clauses in Chinese: '主要集中在存取晶体管（用于读写存储单元）与存储电容（用于存储代表 0 或 1 的电荷）交汇的密集区域。'"
+    },
+    {
+      "type": "accuracy",
+      "location": "Section: HBM4 Competition and HBM3E Pricing",
+      "issue": "'1c' and '1b' refer to DRAM process nodes (1-gamma, 1-beta), not generic numbers.",
+      "suggestion": "Translate as '1c 节点' and '1b 节点' to clarify they are semiconductor manufacturing nodes."
+    }
+  ],
+  "guidelines": [
+    "Maintain the aggressive, highly confident analyst tone, especially in the introduction and market forecasts. Do not dilute dramatic phrasing like 'going crazy' or 'double-edged sword'.",
+    "Accurately translate semiconductor manufacturing and lithography terms. Rely on the terminology list for structural terms like 'access transistor', 'storage capacitor', and 'buried contact'.",
+    "Handle cross-domain terminology carefully: distinguish between financial terms (margin, capex, upside, re-rate) and hardware terms (bit output, signal integrity, jitter). Use standard financial equivalents for the former.",
+    "For long, complex sentences explaining technical mechanisms (e.g., EUV replacing DUV in congested regions), restructure them into shorter, logically sequenced Chinese clauses to ensure native paragraph flow. Avoid massive modifier pile-ups before the noun.",
+    "Translate 'Commodity DRAM' as '标准型 DRAM' rather than '大宗商品 DRAM' to better fit the Chinese semiconductor industry's standard lexicon.",
+    "Ensure GPU architecture names (Rubin) and memory generations (HBM3E 12-Hi, HBM4) are capitalized correctly and annotated on first occurrence if they represent a paradigm shift in the context.",
+    "When discussing supply and demand dynamics, clearly distinguish between 'wafer capacity' (晶圆产能 - physical wafers) and 'bit output' (比特产出 - actual storage volume), as the discrepancy between these two is a core argument of the article."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Serves as a dramatic hook and establishes the authoritative, predictive credibility of the author/publication.",
+      "relation_to_previous": "N/A - Opening section.",
+      "relation_to_next": "Teases the foundational 'background' that will be explored in the subsequent section.",
+      "key_points": [
+        "Memory prices are doubling and are nowhere near their peak.",
+        "The current supercycle is significantly larger and longer than anticipated.",
+        "The publication's granular fab-by-fab modeling provides superior forecasting accuracy for revenue, pricing, and margin."
+      ],
+      "translation_notes": [
+        "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+        "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+      ]
+    },
+    "01-the-inevitability-of-memory-cy": {
+      "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+      "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+      "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+      "key_points": [
+        "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+        "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+        "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+      ],
+      "translation_notes": [
+        "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+        "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+      ]
+    },
+    "02-memory-cycle-part-ii-key-feat": {
+      "role_in_article": "Explains the economic and behavioral mechanics of memory cycles, highlighting how recent industry trauma led to the structurally tight supply of the current era.",
+      "relation_to_previous": "Shifts focus from the physical/technical constraints of DRAM scaling to its economic and behavioral consequences (commoditization).",
+      "relation_to_next": "Lays the 'structurally tighter supply' baseline, which the AI/HBM factors will dramatically exacerbate in the core thesis section.",
+      "key_points": [
+        "Memory cyclicality is driven by commoditization, competitive behavior, and lapses in capital discipline.",
+        "The previous cycle reset industry expectations, forcing memory suppliers to prioritize disciplined capex and high-margin products over pure bit growth.",
+        "Customers now recognize supply chain fragility, laying the foundation for a structurally tighter supply."
+      ],
+      "translation_notes": [
+        "Business terminology requires precision: 'commoditization' (大宗商品化/通用化), 'capital discipline' (资本纪律), 'pure bit growth' (纯比特增长/单纯追求容量增长).",
+        "Ensure 'structurally tighter supply' (结构性供应趋紧) is emphasized as a core recurring theme."
+      ]
+    },
+    "03-ai-driven-memory-supercycle-b": {
+      "role_in_article": "Delivers the core thesis: explaining exactly why the AI-driven supercycle is unique, larger, and longer due to specific structural manufacturing constraints.",
+      "relation_to_previous": "Builds on the baseline of tight supply by introducing the unique, exacerbating variables of the AI era (HBM wafer drain).",
+      "relation_to_next": "Establishes the massive upstream supply constraints that inevitably cause the downstream price shocks detailed in the following section.",
+      "key_points": [
+        "First-order impact: Reallocating wafers to HBM directly starves commodity DRAM production.",
+        "Second-order impact: HBM production suffers a massive bit output penalty, yielding 3x to 4x fewer bits per wafer than commodity DRAM.",
+        "Node migration introduces execution friction, with new tool sets and process window re-optimization causing temporary yield and capacity declines."
+      ],
+      "translation_notes": [
+        "Maintain a strict distinction between 'wafer capacity' (晶圆产能) and 'bit output' (比特产出).",
+        "Manufacturing terms must sound native: 'execution friction' (执行摩擦/落地阻力), 'process windows' (工艺窗口), 'yields deteriorate' (良率下降/爬坡期良率折损)."
+      ]
+    },
+    "04-supercycle-could-be-a-double-e": {
+      "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+      "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+      "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+      "key_points": [
+        "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+        "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+        "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+      ],
+      "translation_notes": [
+        "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+        "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+      ]
+    },
+    "05-hbm4-competition-and-hbm3e-pri": {
+      "role_in_article": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+      "relation_to_previous": "Shifts perspective from downstream buyers back to upstream suppliers, showing how the price explosion affects supplier strategy differently depending on their product mix.",
+      "relation_to_next": "N/A - Concluding section of the provided text, setting up final investment/WFE forecasts.",
+      "key_points": [
+        "HBM's long-term volume commitments provide stability but cap intra-year price upside compared to rapidly re-rating commodity DRAM.",
+        "Samsung's HBM4 front-end (1c) shows competitive advantages in power efficiency.",
+        "SK Hynix maintains technological superiority in signal integrity and packaging (lower jitter)."
+      ],
+      "translation_notes": [
+        "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+        "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+      ]
+    },
+    "06-how-the-cycle-will-evolve": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 7,
+  "paragraph_count": 162,
+  "word_count": 7520
+}

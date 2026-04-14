@@ -1,0 +1,34 @@
+{
+  "section_id": "10-chip-series-analysis",
+  "new_terms": [
+    {
+      "term": "silicon portfolio",
+      "suggested_translation": "芯片产品组合",
+      "context": "Apple has evolved from a one-product silicon company to a diversified silicon portfolio.",
+      "confidence": 0.95
+    },
+    {
+      "term": "incremental wafer demand",
+      "suggested_translation": "增量晶圆需求",
+      "context": "account for roughly a third of Apple’s incremental wafer demand through 2030.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Portfolio Diversification",
+      "suggested_translation": "产品组合多元化",
+      "context": "Header referring to the diversification of Apple's chip families (A-series, M-series, etc.).",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "A-series": "A系列",
+    "M-series": "M系列",
+    "N-series": "N系列",
+    "C-series": "C系列",
+    "CAGR": "复合年增长率",
+    "concentration risk": "集中度风险",
+    "PMICs": "电源管理芯片 (PMIC)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:21:24.439732"
+}

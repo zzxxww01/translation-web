@@ -1,0 +1,665 @@
+{
+  "section_id": "04-the-price-of-intelligence-is-c",
+  "title": "The Price of Intelligence is Collapsing",
+  "title_translation": "智能成本正在暴跌",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Now software engineering has and always will be the gold standard information work. But as the quality has finally crossed over a critical threshold, the relationship between coders and their tools have flipped. Coders are effectively just harnessing a black box tool to achieve outcomes, and that was all possible because not only the quality but the cost of the intelligence of tokens has fallen an amazing amount. One developer with Claude Code can now do what took a team a month.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Now software engineering has and always will be the gold standard information work. But as the quality has finally crossed over a critical threshold, the relationship between coders and their tools have flipped. Coders are effectively just harnessing a black box tool to achieve outcomes, and that was all possible because not only the quality but the cost of the intelligence of tokens has fallen an amazing amount. One developer with Claude Code can now do what took a team a month.",
+      "parent_block_plain_text": "Now software engineering has and always will be the gold standard information work. But as the quality has finally crossed over a critical threshold, the relationship between coders and their tools have flipped. Coders are effectively just harnessing a black box tool to achieve outcomes, and that was all possible because not only the quality but the cost of the intelligence of tokens has fallen an amazing amount. One developer with Claude Code can now do what took a team a month.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 484,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "软件工程过去是、未来也必将是信息工作的黄金标准。然而，随着模型质量终于跨越临界点，程序员与工具的从属关系已然反转。如今，程序员本质上只是在驾驭一个黑盒工具来交付结果。这一局面的出现，不仅得益于模型质量的跃升，更因为 token 智能的成本已呈断崖式下跌。现在，单凭一名借助 Claude Code 的开发者，就能完成过去一个团队耗时一个月的任务。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:58:13.560207",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+          "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+          "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the core economic driver of the disruption: the massive deflation in the cost of AI-generated intelligence (tokens). It argues that once quality crosses a certain threshold, this cost collapse makes the automation of information work an economic inevitability. It uses the Accenture deal as a real-world proof point.",
+          "relation_to_previous": "Answers the 'why' behind the previous section's claim that the information economy is at risk. The mechanism is economic: the core input, 'intelligence,' is becoming dramatically cheaper.",
+          "relation_to_next": "It concludes by identifying Microsoft as the company most threatened by this trend, as its business model is built on tools for human information workers. This serves as a direct transition into the competitive analysis.",
+          "key_points": [
+            "The cost of AI-generated intelligence is collapsing, which is fundamentally changing the economics of information work.",
+            "This deflation will 'reprice' the margins of any company reliant on repeatable human-driven information processing.",
+            "Major enterprises (via partners like Accenture) are already beginning to deploy this technology at scale.",
+            "Microsoft's business model is uniquely vulnerable to this shift."
+          ],
+          "translation_notes": [
+            "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+            "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+            "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文中的“fully loaded”在人力资源和财务语境中指“包含基本工资、各项福利、税费及管理费用在内的综合用工成本”。译文“全员负担成本”系望文生义，容易被读者误解为“全体员工共同负担的成本”。"
+          },
+          {
+            "type": "readability",
+            "description": "“at the margins”在商业和经济学语境中通常指“在边际上”或“逐渐地/从边缘开始”。译文“在边缘地带”略显直译，带有物理空间位置的意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The cost of Claude Pro or ChatGPT is $20 dollars a month, while a Max subscription is $200 dollars respectively. The median US knowledge worker costs ~350-500 dollars a day fully loaded. An agent that handles even a fraction of their workflow a day at ~6-7 dollars is a 10-30x ROI not including improvement in intelligence.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The cost of Claude Pro or ChatGPT is $20 dollars a month, while a Max subscription is $200 dollars respectively. The median US knowledge worker costs ~350-500 dollars a day fully loaded. An agent that handles even a fraction of their workflow a day at ~6-7 dollars is a 10-30x ROI not including improvement in intelligence.",
+      "parent_block_plain_text": "The cost of Claude Pro or ChatGPT is $20 dollars a month, while a Max subscription is $200 dollars respectively. The median US knowledge worker costs ~350-500 dollars a day fully loaded. An agent that handles even a fraction of their workflow a day at ~6-7 dollars is a 10-30x ROI not including improvement in intelligence.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 323,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Claude Pro 或 ChatGPT 的订阅成本仅为每月 20 美元，高级 (Max) 订阅也只需 200 美元。相比之下，美国知识工作者的综合用工成本中位数高达每天 350 至 500 美元。如果一个智能体（指能够自主规划并执行复杂任务的 AI）每天能以 6 至 7 美元的成本处理哪怕一小部分工作流，就能创造 10 至 30 倍的投资回报率 (ROI)——这甚至还未将智能水平跃升带来的额外红利计算在内。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:58:13.561222",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+          "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+          "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the core economic driver of the disruption: the massive deflation in the cost of AI-generated intelligence (tokens). It argues that once quality crosses a certain threshold, this cost collapse makes the automation of information work an economic inevitability. It uses the Accenture deal as a real-world proof point.",
+          "relation_to_previous": "Answers the 'why' behind the previous section's claim that the information economy is at risk. The mechanism is economic: the core input, 'intelligence,' is becoming dramatically cheaper.",
+          "relation_to_next": "It concludes by identifying Microsoft as the company most threatened by this trend, as its business model is built on tools for human information workers. This serves as a direct transition into the competitive analysis.",
+          "key_points": [
+            "The cost of AI-generated intelligence is collapsing, which is fundamentally changing the economics of information work.",
+            "This deflation will 'reprice' the margins of any company reliant on repeatable human-driven information processing.",
+            "Major enterprises (via partners like Accenture) are already beginning to deploy this technology at scale.",
+            "Microsoft's business model is uniquely vulnerable to this shift."
+          ],
+          "translation_notes": [
+            "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+            "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+            "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文中的“fully loaded”在人力资源和财务语境中指“包含基本工资、各项福利、税费及管理费用在内的综合用工成本”。译文“全员负担成本”系望文生义，容易被读者误解为“全体员工共同负担的成本”。"
+          },
+          {
+            "type": "readability",
+            "description": "“at the margins”在商业和经济学语境中通常指“在边际上”或“逐渐地/从边缘开始”。译文“在边缘地带”略显直译，带有物理空间位置的意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Enterprise is Already Starting to Move",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Enterprise is Already Starting to Move",
+          "start": 0,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Enterprise is Already Starting to Move**",
+      "parent_block_plain_text": "Enterprise is Already Starting to Move",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Enterprise is Already Starting to Move",
+          "start": 0,
+          "end": 38,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 38,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "企业已经开始行动",
+          "model": "pro",
+          "created_at": "2026-04-10T11:58:13.561538",
+          "tokenized_text": "[[[STRONG_1|企业已经开始行动]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+          "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+          "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the core economic driver of the disruption: the massive deflation in the cost of AI-generated intelligence (tokens). It argues that once quality crosses a certain threshold, this cost collapse makes the automation of information work an economic inevitability. It uses the Accenture deal as a real-world proof point.",
+          "relation_to_previous": "Answers the 'why' behind the previous section's claim that the information economy is at risk. The mechanism is economic: the core input, 'intelligence,' is becoming dramatically cheaper.",
+          "relation_to_next": "It concludes by identifying Microsoft as the company most threatened by this trend, as its business model is built on tools for human information workers. This serves as a direct transition into the competitive analysis.",
+          "key_points": [
+            "The cost of AI-generated intelligence is collapsing, which is fundamentally changing the economics of information work.",
+            "This deflation will 'reprice' the margins of any company reliant on repeatable human-driven information processing.",
+            "Major enterprises (via partners like Accenture) are already beginning to deploy this technology at scale.",
+            "Microsoft's business model is uniquely vulnerable to this shift."
+          ],
+          "translation_notes": [
+            "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+            "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+            "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文中的“fully loaded”在人力资源和财务语境中指“包含基本工资、各项福利、税费及管理费用在内的综合用工成本”。译文“全员负担成本”系望文生义，容易被读者误解为“全体员工共同负担的成本”。"
+          },
+          {
+            "type": "readability",
+            "description": "“at the margins”在商业和经济学语境中通常指“在边际上”或“逐渐地/从边缘开始”。译文“在边缘地带”略显直译，带有物理空间位置的意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The massive deflationary cost of intelligence is going to reprice every information company’s margin for repeatable work. Accenture just signed a deal to train 30,000 professionals on Claude, the largest Claude Code deployment to date. Accenture will focus on financial services, life sciences, healthcare, and the public sector. Those are all huge untapped markets for information automation. OpenAI just announced Frontier focused on enterprise adoption.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Accenture just signed a deal to train 30,000 professionals on Claude",
+          "start": 122,
+          "end": 190,
+          "href": "https://newsroom.accenture.com/news/2025/accenture-and-anthropic-launch-multi-year-partnership-to-drive-enterprise-ai-innovation-and-value-across-industries",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "OpenAI just announced Frontier",
+          "start": 394,
+          "end": 424,
+          "href": "https://openai.com/index/introducing-openai-frontier/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The massive deflationary cost of intelligence is going to reprice every information company’s margin for repeatable work. [Accenture just signed a deal to train 30,000 professionals on Claude](https://newsroom.accenture.com/news/2025/accenture-and-anthropic-launch-multi-year-partnership-to-drive-enterprise-ai-innovation-and-value-across-industries), the largest Claude Code deployment to date. Accenture will focus on financial services, life sciences, healthcare, and the public sector. Those are all huge untapped markets for information automation. [OpenAI just announced Frontier](https://openai.com/index/introducing-openai-frontier/) focused on enterprise adoption.",
+      "parent_block_plain_text": "The massive deflationary cost of intelligence is going to reprice every information company’s margin for repeatable work. Accenture just signed a deal to train 30,000 professionals on Claude, the largest Claude Code deployment to date. Accenture will focus on financial services, life sciences, healthcare, and the public sector. Those are all huge untapped markets for information automation. OpenAI just announced Frontier focused on enterprise adoption.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Accenture just signed a deal to train 30,000 professionals on Claude",
+          "start": 122,
+          "end": 190,
+          "href": "https://newsroom.accenture.com/news/2025/accenture-and-anthropic-launch-multi-year-partnership-to-drive-enterprise-ai-innovation-and-value-across-industries",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "OpenAI just announced Frontier",
+          "start": 394,
+          "end": 424,
+          "href": "https://openai.com/index/introducing-openai-frontier/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 456,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "智能成本的大规模通缩，必将重塑所有信息公司在重复性工作上的利润空间。埃森哲刚刚签署协议，将对 3 万名专业人员进行 Claude 培训，创下迄今为止最大规模的 Claude Code 部署纪录。埃森哲将战略重心锁定在金融服务、生命科学、医疗保健以及公共部门，这些均是信息自动化领域亟待开发的庞大蓝海。与此同时，OpenAI 刚刚发布了专注于企业级落地的 Frontier。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:58:13.561845",
+          "tokenized_text": "智能成本的大规模通缩，必将重塑所有信息公司在重复性工作上的利润空间。[[[LINK_1|埃森哲刚刚签署协议，将对 3 万名专业人员进行 Claude 培训]]]，创下迄今为止最大规模的 Claude Code 部署纪录。埃森哲将战略重心锁定在金融服务、生命科学、医疗保健以及公共部门，这些均是信息自动化领域亟待开发的庞大蓝海。与此同时，[[[LINK_2|OpenAI 刚刚发布了专注于企业级落地的 Frontier]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+          "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+          "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the core economic driver of the disruption: the massive deflation in the cost of AI-generated intelligence (tokens). It argues that once quality crosses a certain threshold, this cost collapse makes the automation of information work an economic inevitability. It uses the Accenture deal as a real-world proof point.",
+          "relation_to_previous": "Answers the 'why' behind the previous section's claim that the information economy is at risk. The mechanism is economic: the core input, 'intelligence,' is becoming dramatically cheaper.",
+          "relation_to_next": "It concludes by identifying Microsoft as the company most threatened by this trend, as its business model is built on tools for human information workers. This serves as a direct transition into the competitive analysis.",
+          "key_points": [
+            "The cost of AI-generated intelligence is collapsing, which is fundamentally changing the economics of information work.",
+            "This deflation will 'reprice' the margins of any company reliant on repeatable human-driven information processing.",
+            "Major enterprises (via partners like Accenture) are already beginning to deploy this technology at scale.",
+            "Microsoft's business model is uniquely vulnerable to this shift."
+          ],
+          "translation_notes": [
+            "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+            "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+            "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文中的“fully loaded”在人力资源和财务语境中指“包含基本工资、各项福利、税费及管理费用在内的综合用工成本”。译文“全员负担成本”系望文生义，容易被读者误解为“全体员工共同负担的成本”。"
+          },
+          {
+            "type": "readability",
+            "description": "“at the margins”在商业和经济学语境中通常指“在边际上”或“逐渐地/从边缘开始”。译文“在边缘地带”略显直译，带有物理空间位置的意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Enterprise software has easily been the first casualty of the great cost decline of intelligence. SaaS itself is just crystalized information processing of workflows into code. The three moats of SaaS, switching costs of data (data is trapped), workflow lock-in (learning the UI), and integration complexity (how Slack works with Jira) have all been partially eroded at the margins. The 75% gross margin of SaaS looks like a huge opportunity, as agents migrate data between systems with lessened migration costs, Agents themselves do not rely on human oriented workflows, and MCP integrations make integration much easier. Every aspect of SaaS is cheapening, and the margins have become the first opportunity of AI.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Enterprise software has easily been the first casualty of the great cost decline of intelligence. SaaS itself is just crystalized information processing of workflows into code. The three moats of SaaS, switching costs of data (data is trapped), workflow lock-in (learning the UI), and integration complexity (how Slack works with Jira) have all been partially eroded at the margins. The 75% gross margin of SaaS looks like a huge opportunity, as agents migrate data between systems with lessened migration costs, Agents themselves do not rely on human oriented workflows, and MCP integrations make integration much easier. Every aspect of SaaS is cheapening, and the margins have become the first opportunity of AI.",
+      "parent_block_plain_text": "Enterprise software has easily been the first casualty of the great cost decline of intelligence. SaaS itself is just crystalized information processing of workflows into code. The three moats of SaaS, switching costs of data (data is trapped), workflow lock-in (learning the UI), and integration complexity (how Slack works with Jira) have all been partially eroded at the margins. The 75% gross margin of SaaS looks like a huge opportunity, as agents migrate data between systems with lessened migration costs, Agents themselves do not rely on human oriented workflows, and MCP integrations make integration much easier. Every aspect of SaaS is cheapening, and the margins have become the first opportunity of AI.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 715,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "企业软件无疑已成为这场智能成本大跌的首个牺牲品。SaaS (软件即服务) 的本质，仅仅是将工作流的信息处理过程固化为代码。SaaS 赖以生存的三大护城河——数据切换成本（数据孤岛效应）、工作流锁定（用户对 UI 的学习成本），以及集成复杂度（例如 Slack 与 Jira 的协同）——均已从边缘开始逐渐瓦解。SaaS 高达 75% 的毛利率如今看来更像是一块巨大的肥肉：智能体能够在系统间低成本迁移数据，其自身运行完全不依赖面向人类的工作流，而 MCP (模型上下文协议) 的出现更是让系统集成易如反掌。SaaS 的各个环节都在迅速贬值，其丰厚的利润空间已然成为 AI 攻城略地的首个突破口。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:58:13.561913",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+          "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+          "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the core economic driver of the disruption: the massive deflation in the cost of AI-generated intelligence (tokens). It argues that once quality crosses a certain threshold, this cost collapse makes the automation of information work an economic inevitability. It uses the Accenture deal as a real-world proof point.",
+          "relation_to_previous": "Answers the 'why' behind the previous section's claim that the information economy is at risk. The mechanism is economic: the core input, 'intelligence,' is becoming dramatically cheaper.",
+          "relation_to_next": "It concludes by identifying Microsoft as the company most threatened by this trend, as its business model is built on tools for human information workers. This serves as a direct transition into the competitive analysis.",
+          "key_points": [
+            "The cost of AI-generated intelligence is collapsing, which is fundamentally changing the economics of information work.",
+            "This deflation will 'reprice' the margins of any company reliant on repeatable human-driven information processing.",
+            "Major enterprises (via partners like Accenture) are already beginning to deploy this technology at scale.",
+            "Microsoft's business model is uniquely vulnerable to this shift."
+          ],
+          "translation_notes": [
+            "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+            "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+            "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文中的“fully loaded”在人力资源和财务语境中指“包含基本工资、各项福利、税费及管理费用在内的综合用工成本”。译文“全员负担成本”系望文生义，容易被读者误解为“全体员工共同负担的成本”。"
+          },
+          {
+            "type": "readability",
+            "description": "“at the margins”在商业和经济学语境中通常指“在边际上”或“逐渐地/从边缘开始”。译文“在边缘地带”略显直译，带有物理空间位置的意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "A simplistic example is an agent can now query a Postgres database directly on your behalf, generate a chart, and email it to a stakeholder. That was effectively the cost of a SaaS workflow like CRM, and it doesn’t need to train humans on UI changes or update software. It just “works”. BI/analytics (agents querying databases) data entry, ITSM (L1/L2 tickets triage) and back-office reconciliation is already in the process of automation! These are knocking on some of the doors of the most sacred moats in software already.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "p",
+      "parent_block_markdown": "A simplistic example is an agent can now query a Postgres database directly on your behalf, generate a chart, and email it to a stakeholder. That was effectively the cost of a SaaS workflow like CRM, and it doesn’t need to train humans on UI changes or update software. It just “works”. BI/analytics (agents querying databases) data entry, ITSM (L1/L2 tickets triage) and back-office reconciliation is already in the process of automation! These are knocking on some of the doors of the most sacred moats in software already.",
+      "parent_block_plain_text": "A simplistic example is an agent can now query a Postgres database directly on your behalf, generate a chart, and email it to a stakeholder. That was effectively the cost of a SaaS workflow like CRM, and it doesn’t need to train humans on UI changes or update software. It just “works”. BI/analytics (agents querying databases) data entry, ITSM (L1/L2 tickets triage) and back-office reconciliation is already in the process of automation! These are knocking on some of the doors of the most sacred moats in software already.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 525,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "举个最直白的例子：智能体现在可以直接代你查询 Postgres 数据库、生成图表，并将其邮件发送给利益相关方。这在过去本质上就是购买 CRM (客户关系管理) 等 SaaS 工作流所要付出的成本；而现在，你既不需要为了 UI 变更去培训员工，也不需要费心更新软件。它就是“开箱即用”。BI (商业智能) 与数据分析（智能体查询数据库）、数据录入、ITSM (IT服务管理)（L1/L2 工单分发）以及后台对账，这些环节已经全面步入自动化进程！它们正强势叩响软件行业最坚不可摧的护城河大门。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:58:13.561957",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+          "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+          "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the core economic driver of the disruption: the massive deflation in the cost of AI-generated intelligence (tokens). It argues that once quality crosses a certain threshold, this cost collapse makes the automation of information work an economic inevitability. It uses the Accenture deal as a real-world proof point.",
+          "relation_to_previous": "Answers the 'why' behind the previous section's claim that the information economy is at risk. The mechanism is economic: the core input, 'intelligence,' is becoming dramatically cheaper.",
+          "relation_to_next": "It concludes by identifying Microsoft as the company most threatened by this trend, as its business model is built on tools for human information workers. This serves as a direct transition into the competitive analysis.",
+          "key_points": [
+            "The cost of AI-generated intelligence is collapsing, which is fundamentally changing the economics of information work.",
+            "This deflation will 'reprice' the margins of any company reliant on repeatable human-driven information processing.",
+            "Major enterprises (via partners like Accenture) are already beginning to deploy this technology at scale.",
+            "Microsoft's business model is uniquely vulnerable to this shift."
+          ],
+          "translation_notes": [
+            "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+            "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+            "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文中的“fully loaded”在人力资源和财务语境中指“包含基本工资、各项福利、税费及管理费用在内的综合用工成本”。译文“全员负担成本”系望文生义，容易被读者误解为“全体员工共同负担的成本”。"
+          },
+          {
+            "type": "readability",
+            "description": "“at the margins”在商业和经济学语境中通常指“在边际上”或“逐渐地/从边缘开始”。译文“在边缘地带”略显直译，带有物理空间位置的意味。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "In our view, anything that has a human click buttons, gather information, reformat it into another medium (email, chart, excel, presentation) is a huge risk. LLMs thrive at this kind of data interchange exclusively, effortlessly changing text into audio, English into Chinese, and words into images. And this in our view has a huge threat to one of the biggest companies in the world: Microsoft.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In our view, anything that has a human click buttons, gather information, reformat it into another medium (email, chart, excel, presentation) is a huge risk. LLMs thrive at this kind of data interchange exclusively, effortlessly changing text into audio, English into Chinese, and words into images. And this in our view has a huge threat to one of the biggest companies in the world: Microsoft.",
+      "parent_block_plain_text": "In our view, anything that has a human click buttons, gather information, reformat it into another medium (email, chart, excel, presentation) is a huge risk. LLMs thrive at this kind of data interchange exclusively, effortlessly changing text into audio, English into Chinese, and words into images. And this in our view has a huge threat to one of the biggest companies in the world: Microsoft.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 395,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们认为，任何依赖人工点击按钮的操作，或是收集信息并将其重组为其他媒介（如邮件、图表、Excel、PPT）的工作，都正面临被淘汰的巨大风险。大语言模型 (LLM) 天生就是处理此类数据转换的绝佳好手，能够毫不费力地将文本转为音频、将英文译为中文、将文字生成图像。在我们看来，这必将对全球最大的公司之一构成巨大威胁：微软。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:58:13.562045",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+          "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+          "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explains the core economic driver of the disruption: the massive deflation in the cost of AI-generated intelligence (tokens). It argues that once quality crosses a certain threshold, this cost collapse makes the automation of information work an economic inevitability. It uses the Accenture deal as a real-world proof point.",
+          "relation_to_previous": "Answers the 'why' behind the previous section's claim that the information economy is at risk. The mechanism is economic: the core input, 'intelligence,' is becoming dramatically cheaper.",
+          "relation_to_next": "It concludes by identifying Microsoft as the company most threatened by this trend, as its business model is built on tools for human information workers. This serves as a direct transition into the competitive analysis.",
+          "key_points": [
+            "The cost of AI-generated intelligence is collapsing, which is fundamentally changing the economics of information work.",
+            "This deflation will 'reprice' the margins of any company reliant on repeatable human-driven information processing.",
+            "Major enterprises (via partners like Accenture) are already beginning to deploy this technology at scale.",
+            "Microsoft's business model is uniquely vulnerable to this shift."
+          ],
+          "translation_notes": [
+            "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+            "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+            "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "原文中的“fully loaded”在人力资源和财务语境中指“包含基本工资、各项福利、税费及管理费用在内的综合用工成本”。译文“全员负担成本”系望文生义，容易被读者误解为“全体员工共同负担的成本”。"
+          },
+          {
+            "type": "readability",
+            "description": "“at the margins”在商业和经济学语境中通常指“在边际上”或“逐渐地/从边缘开始”。译文“在边缘地带”略显直译，带有物理空间位置的意味。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "section_id": "08-apple-wafer-demand",
+  "reflection": {
+    "overall_score": 7.5,
+    "readability_score": 7.0,
+    "accuracy_score": 7.5,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 19,
+        "issue_type": "accuracy|readability",
+        "severity": "critical",
+        "original_text": "We estimate Apple will once again the table with high share in N2 in 2026, but that represents <50% of N2 demand. Qualcomm (Snapdragon 8 Elite 2), AMD (Venice and MI450x), MediaTek (Dimensity 9600), Broadcom (ASIC), and Intel (Nova Lake) will follow. This is unprecedented. Previous leading-edge nodes were mobile-heavy, with Apple capturing >90% at peak.",
+        "description": "译文中出现了大段未翻译的英文原文（从'<50% of N2 demand...'一直到'...capturing >90%'），属于严重的漏译和格式检查失误。",
+        "why_it_matters": "大段英文直接暴露在中文稿件中显得极不专业，直接破坏了读者的阅读连贯性，属于致命错误。",
+        "suggestion": "建议修改为：“我们预计，2026 年苹果将再次以较高份额占据 N2 节点的主导地位，但这仅占 N2 总需求的不到 50%。高通（骁龙 8 Elite 2）、AMD（Venice 和 MI450x）、联发科（天玑 9600）、博通（ASIC）以及英特尔（Nova Lake）将紧随其后。这是史无前例的。以往的先进制程节点高度依赖移动端，苹果在巅峰期的份额甚至超过 90%。”"
+      },
+      {
+        "paragraph_index": 17,
+        "issue_type": "accuracy|terminology",
+        "severity": "medium",
+        "original_text": "the underlying growth rate drops from 11% to closer to 8%. That single year, driven by N5 ramp plus COVID-fuelled Apple Silicon demand, inflates the topline number.",
+        "description": "“underlying growth rate”译为“潜在增长率”易与宏观经济学中的“potential growth rate”混淆；此外，“topline number”此处指代前文段落 1 提到的“11%复合年增长率”这一总体数据，译为“整体营收数据”无中生有了“营收”概念（原文通篇讨论的是晶圆需求量 wafer demand）。",
+        "why_it_matters": "误用财务术语会导致专业读者产生理解偏差，且引入“营收”一词改变了原文讨论的核心主体。",
+        "suggestion": "将“潜在增长率”改为“实际底层增长率”或“真实增长率”；将“整体营收数据”改为“整体增长数据”或“这一表层数据”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "tone",
+        "severity": "low",
+        "original_text": "Between 2018 and 2019, total wafer demand went sideways even as N7 entered production.",
+        "description": "“went sideways”在金融或商业图表中意为“持平、没有明显增长或下降”。译为“横盘震荡”多了一层“上下波动（震荡）”的含义。",
+        "why_it_matters": "“震荡”夸大了原意，偏离了原文强调的需求停滞不前、保持平稳的语境。",
+        "suggestion": "建议将“横盘震荡”改为“横盘整理”或“停滞不前”。"
+      }
+    ]
+  }
+}

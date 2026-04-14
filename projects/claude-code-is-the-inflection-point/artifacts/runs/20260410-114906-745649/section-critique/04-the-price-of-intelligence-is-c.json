@@ -1,0 +1,30 @@
+{
+  "section_id": "04-the-price-of-intelligence-is-c",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.5,
+    "accuracy_score": 8.5,
+    "conciseness_score": 9.0,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "accuracy|terminology",
+        "severity": "high",
+        "original_text": "The median US knowledge worker costs ~350-500 dollars a day fully loaded.",
+        "description": "原文中的“fully loaded”在人力资源和财务语境中指“包含基本工资、各项福利、税费及管理费用在内的综合用工成本”。译文“全员负担成本”系望文生义，容易被读者误解为“全体员工共同负担的成本”。",
+        "why_it_matters": "破坏了财务分析的准确性和专业性，不符合目标读者（金融和科技领域专业人士）对行业术语的认知习惯。",
+        "suggestion": "将“全员负担成本”修改为“综合用工成本”或“完全成本”。"
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "have all been partially eroded at the margins.",
+        "description": "“at the margins”在商业和经济学语境中通常指“在边际上”或“逐渐地/从边缘开始”。译文“在边缘地带”略显直译，带有物理空间位置的意味。",
+        "why_it_matters": "虽然不影响核心理解，但优化表达能进一步提升分析报告的专业度和中文表述的自然度。",
+        "suggestion": "建议改为“正从边缘开始逐渐瓦解”或“正在被逐步侵蚀”。"
+      }
+    ]
+  }
+}

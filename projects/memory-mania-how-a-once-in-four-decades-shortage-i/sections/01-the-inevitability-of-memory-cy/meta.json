@@ -1,7 +1,7 @@
 {
   "section_id": "01-the-inevitability-of-memory-cy",
   "title": "The Inevitability of Memory Cycles: A History of Booms and Busts",
-  "title_translation": null,
+  "title_translation": "存储周期的必然性：繁荣与萧条的历史",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "自 20 世纪 70 年代投入商业化应用以来，DRAM 一直受益于定义半导体行业的两大缩放定律：摩尔定律与登纳德缩放定律。包含一个存取晶体管和一个存储电容的 1T1C DRAM 存储单元（1T1C DRAM cell），在过去几十年里持续微缩。晶体管微缩降低了每比特成本，而精妙的电容工程设计则保留了充足电荷，确保了信号完整性。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890457",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +109,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在行业发展的大部分时间里，DRAM 密度的微缩速度远超逻辑芯片，大约每 18 个月（而非 24 个月）翻一番，推动成本大幅下降。作为高度商品化的产品，制造商必须持续压低每比特成本，才能维持竞争力。无法在成本上竞争的供应商陷入恶性循环：销量低迷导致现金流枯竭，无力投资下一代节点；这又反过来导致其在每比特成本上进一步落后。众多 DRAM 生产商因此沦为牺牲品并走向破产，行业历经整合，最终演变为如今仅剩几家巨头鼎立的格局。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890536",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +191,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "若想深入了解行业细节与 DRAM 基础知识，请参阅我们的硬核技术长文：",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890574",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -138,19 +288,69 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "内存墙：DRAM 的过去、现在与未来 - 作者：Dylan Patel、Jeff Koch 及另外 3 人 · 2024 年 9 月 3 日",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890713",
+          "tokenized_text": "[[[LINK_1|内存墙：DRAM 的过去、现在与未来]]] - 作者：Dylan Patel、Jeff Koch 及另外 3 人 · 2024 年 9 月 3 日",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -177,12 +377,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "然而，过去几十年间 DRAM 的微缩步伐已显著放缓，密度随时间提升的幅度也在不断萎缩。过去十年里，DRAM 密度总共仅提升了约 2 倍；而在行业微缩的巅峰时期，每十年的提升幅度高达约 100 倍。如今，电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1，内部仅存储数万个电子。相比之下，当你触碰金属门把手时产生的微弱静电冲击，就可能涉及数十亿个电子的转移。仅仅一粒灰尘上携带的静电电荷，就可能是现代 DRAM 存储单元所存电荷的 10000 倍。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890753",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -209,12 +459,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "位线与读出放大器曾经只是次要问题，如今却成了核心瓶颈。每一次增量微缩都会压缩信号裕度、加剧变异性，并推高成本。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890785",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -241,12 +541,62 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!CvGg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda0878c8-fd9f-4bef-8ffc-109915c2a982_1001x558.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890816",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!CvGg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fda0878c8-fd9f-4bef-8ffc-109915c2a982_1001x558.jpeg",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -273,12 +623,69 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：美光",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.955990",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：美光",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890847",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：美光",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -305,12 +712,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "要理解 DRAM 微缩面临的技术挑战，不妨将 DRAM 存储单元想象成一个装电而非装水的小桶。每个小桶通过留存微量电荷来存储一比特数据。多年来，工程师不断缩小这些小桶的体积，以便在单块芯片上塞入更多内存。这在初期成效显著。然而时至今日，这些小桶不仅变得极高，而且又高又窄，简直就像一根根直立的极细吸管。受制于物理尺寸，如今每个小桶所能容纳的电子数量已寥寥无几。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890878",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -337,12 +794,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "问题随之而来。当系统尝试读取数据时，必须捕捉这种极其微弱的电信号，并将其与背景噪声区分开来。连接这些存储单元的导线（即“位线”）以及负责读取信号的微型传感器（即“读出放大器”）如今已成为核心瓶颈。由于信号过于微弱，哪怕是制造工艺或温度出现极小波动，都可能引发数据错误。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890909",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -369,12 +876,62 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Lw1D!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9f2fca5-03aa-4d33-96d8-cdace84b33b3_1379x684.png",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.890940",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!Lw1D!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc9f2fca5-03aa-4d33-96d8-cdace84b33b3_1379x684.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -435,19 +992,76 @@
         "LINK_1",
         "LINK_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis内存模型 - Sales@SemiAnalysis.com",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.956005",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis内存模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 存储模型 - Sales@SemiAnalysis.com",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.891063",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis 存储模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis内存模型 - Sales@SemiAnalysis.com",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis内存模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -474,12 +1088,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "种种物理限制叠加，解释了为何 DRAM 密度陷入停滞，以及为何其微缩步伐在过去数年间大幅放缓。DRAM 微缩进程的崩塌，正对成本控制、底层架构乃至整个行业的竞争格局产生深远影响。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.891097",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -506,12 +1170,62 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "随着密度增长放缓，每比特成本的下降速度也随之放缓。过去，技术驱动的成本下降曾是一股强大的通缩力量；而如今，DRAM 的定价逻辑已发生根本转变，愈发取决于新增产能与周期性的供需博弈。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:48:52.891127",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.35,
+        "is_excellent": true,
+        "applied_terms": [
+          "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+          "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+          "relation_to_previous": "Fulfills the promise made at the end of the intro to provide 'background' before diving into current market dynamics.",
+          "relation_to_next": "Establishes the physical limitations (slowing density gains) that directly cause the market behaviors and capital indiscipline discussed next.",
+          "key_points": [
+            "DRAM historically scaled via Moore's Law and Dennard scaling using the 1T1C cell structure.",
+            "As density gains hit physical limits, the traditional deflationary force of technology-driven cost-per-bit reduction has slowed.",
+            "DRAM pricing is now dictated primarily by capacity additions and cyclical supply-demand dynamics."
+          ],
+          "translation_notes": [
+            "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+            "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 'commoditized product' 译为 '高度商品化的产品'。根据翻译指南，半导体语境下的 'Commodity'（如 Commodity DRAM）应译为 '标准型' 或 '大宗'，以符合行业标准术语。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文为 '电容已演变为极端的极高深宽比三维结构，深宽比逼近 100:1'。译者在此处超译了 '极高深宽比'，与后文的 '深宽比逼近 100:1' 产生了语义重复，且原文仅为 'extreme three-dimensional structures'。"
+          }
+        ]
+      },
       "history": []
     }
   ]

@@ -1,0 +1,63 @@
+{
+  "project_id": "claude-code-is-the-inflection-point",
+  "status": "incomplete",
+  "total_sections": 10,
+  "translated_sections": 4,
+  "total_paragraphs": 170,
+  "translated_paragraphs": 89,
+  "error_count": 6,
+  "errors": [
+    {
+      "error": "Failed to translate section 00-intro: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+      "timestamp": "2026-04-10T02:16:53.106077",
+      "section": "00-intro"
+    },
+    {
+      "error": "Failed to translate section 02-what-is-claude-code: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+      "timestamp": "2026-04-10T02:17:31.013679",
+      "section": "02-what-is-claude-code"
+    },
+    {
+      "error": "Failed to translate section 04-the-price-of-intelligence-is-c: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+      "timestamp": "2026-04-10T02:18:08.732314",
+      "section": "04-the-price-of-intelligence-is-c"
+    },
+    {
+      "error": "Failed to translate section 05-competitive-landscape-microso: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+      "timestamp": "2026-04-10T02:18:33.863350",
+      "section": "05-competitive-landscape-microso"
+    },
+    {
+      "error": "Failed to translate section 07-anthropics-funding-and-surge: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+      "timestamp": "2026-04-10T02:19:11.381725",
+      "section": "07-anthropics-funding-and-surge"
+    },
+    {
+      "error": "Failed to translate section 09-semianalysis-vibe-coding-show: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)')))",
+      "timestamp": "2026-04-10T02:19:50.767780",
+      "section": "09-semianalysis-vibe-coding-show"
+    }
+  ],
+  "started_at": "2026-04-10T02:16:27.640531",
+  "finished_at": "2026-04-10T02:19:50.878130",
+  "run_id": "20260410-021627-641209",
+  "artifacts_path": "projects\\claude-code-is-the-inflection-point\\artifacts\\runs\\20260410-021627-641209",
+  "export": {
+    "generated_at": "2026-04-10T02:19:50.780611",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\claude-code-is-the-inflection-point\\Claude Code 是转折点_zh.md",
+      "generated": true,
+      "bytes": 42805
+    }
+  },
+  "api_calls": 0,
+  "elapsed_seconds": 203.3,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

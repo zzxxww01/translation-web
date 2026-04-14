@@ -1,0 +1,59 @@
+{
+  "section_id": "06-caught-between-two-businesses",
+  "new_terms": [
+    {
+      "term": "earnings call",
+      "suggested_translation": "财报电话会议",
+      "context": "their recent earnings call they decided to pull back strategically",
+      "confidence": 1.0
+    },
+    {
+      "term": "KPI",
+      "suggested_translation": "KPI (关键绩效指标)",
+      "context": "the KPI would have been over 40",
+      "confidence": 1.0
+    },
+    {
+      "term": "first-party apps",
+      "suggested_translation": "第一方应用",
+      "context": "accelerating pace of M365 Copilot as well as GitHub pilot or first-party apps",
+      "confidence": 0.95
+    },
+    {
+      "term": "terminal value",
+      "suggested_translation": "终值",
+      "context": "most of terminal value comes from Azure revenue growth",
+      "confidence": 0.95
+    },
+    {
+      "term": "M365 Copilot",
+      "suggested_translation": "M365 Copilot",
+      "context": "accelerating pace of M365 Copilot",
+      "confidence": 1.0
+    },
+    {
+      "term": "GitHub Copilot",
+      "suggested_translation": "GitHub Copilot",
+      "context": "GitHub copilot and Office Copilot had a year headstart",
+      "confidence": 1.0
+    },
+    {
+      "term": "O365",
+      "suggested_translation": "O365",
+      "context": "terminal value of the O365 suite of products is going to plummet",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "revenue": "营收",
+    "foundry": "晶圆代工厂",
+    "gpu": "GPU",
+    "r&d": "研发",
+    "office 365": "Office 365",
+    "claude code": "Claude Code",
+    "agentic": "智能体化",
+    "token": "token"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T11:59:50.198334"
+}

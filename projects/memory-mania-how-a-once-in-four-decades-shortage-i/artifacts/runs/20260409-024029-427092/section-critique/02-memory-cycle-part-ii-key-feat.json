@@ -1,0 +1,48 @@
+{
+  "section_id": "02-memory-cycle-part-ii-key-feat",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.2,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 6,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "Where demand is weaker than bit supply, prices go down as you’d expect.",
+        "description": "术语翻译不一致。本文中对“bit”的翻译在“比特”与“位元”之间反复横跳（如同一段落出现“比特售价”与“位元供应”，以及第7、8、9、46段均使用了“位元”）。此外，系统提示已明确要求将“pure bit growth”译为“纯比特增长/单纯追求容量增长”，术语表也规定了“Bit output → 比特产出”。",
+        "why_it_matters": "核心行业术语的前后不一致会破坏文章的专业感，且违背了预设的术语表指令。",
+        "suggestion": "全文统一将“位元”修改为“比特”。例如此处改为：“当需求不及比特供应时”。同时修改第7、8、9、46段的相关表述，以及第47段中的“单纯追求位元增长”改为“单纯追求比特增长”。"
+      },
+      {
+        "paragraph_index": 31,
+        "issue_type": "accuracy",
+        "severity": "medium",
+        "original_text": "Source: Integrated Circuit Engineering, SemiAnalysis",
+        "description": "将知名半导体市场研究机构“Integrated Circuit Engineering (ICE)”直译为了“集成电路（integrated circuit）工程公司”。",
+        "why_it_matters": "对于专有名词（特别是机构名），机械直译会显得非常外行，降低了金融/半导体分析师声线的专业可信度。",
+        "suggestion": "保留英文原名即可：“来源：Integrated Circuit Engineering, SemiAnalysis”。"
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "This increases bit supply without requiring new “greenfield” wafer capacity additions.",
+        "description": "“greenfield”在半导体与制造业语境中指“全新厂址建设/绿地项目”，译文处理为“新建（绿地）”略显生硬，带有翻译腔。",
+        "why_it_matters": "括号加注的方式打断了阅读节奏，且“新建（绿地）晶圆产能”在中文行业语境中不够自然。",
+        "suggestion": "建议改为：“这种方式无需新建晶圆厂（即绿地项目）即可直接提升比特供应”或“无需投建全新的‘绿地’晶圆产能”。同理可优化第46段的“新建（绿地）扩张”。"
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "For example, Samsung’s leading-edge 1c DRAM process node...",
+        "description": "中英文之间缺少必要的空格（如“1c节点”、“1a节点”）。",
+        "why_it_matters": "不符合中文排版规范（CJK-Latin spacing），影响阅读体验。",
+        "suggestion": "在英文字母/数字与中文字符之间增加空格，改为“1c 节点”、“1a 节点”。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "section_id": "13-ai-overtakes-apple-at-the-lead",
+  "new_terms": [
+    {
+      "term": "Blackwell",
+      "suggested_translation": "Blackwell",
+      "context": "AI ecosystem N3 demand (led by NVIDIA’s Blackwell successors) exceeds Apple’s N3 demand by nearly 3x.",
+      "confidence": 1.0
+    },
+    {
+      "term": "anchor platform",
+      "suggested_translation": "锚定平台",
+      "context": "For most of TSMC’s history, smartphones were the anchor platform.",
+      "confidence": 0.9
+    },
+    {
+      "term": "server-class silicon",
+      "suggested_translation": "服务器级芯片",
+      "context": "Rumors of Baltra, Apple’s server-class silicon for internal AI infrastructure, point to a potential expansion into HPC territory.",
+      "confidence": 0.9
+    },
+    {
+      "term": "node share",
+      "suggested_translation": "节点份额",
+      "context": "The 1.4nm ramp in 2029 shows Apple reclaiming 67% node share",
+      "confidence": 0.9
+    },
+    {
+      "term": "premium tier",
+      "suggested_translation": "高端机型",
+      "context": "Android companies’ increased emphasis on premium tier.",
+      "confidence": 0.9
+    },
+    {
+      "term": "16nm",
+      "suggested_translation": "16nm",
+      "context": "Apple alone took >50% of 20nm, 16nm, N5, and of N3 at each node’s respective peak.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "tsmc": "台积电",
+    "nvidia": "英伟达",
+    "amd": "AMD",
+    "anchor tenant": "锚定客户",
+    "yield learning": "良率学习",
+    "startup capacity": "初始产能",
+    "hpc": "HPC",
+    "cagr": "复合年增长率",
+    "soc": "SoC",
+    "custom silicon": "定制芯片",
+    "baltra": "Baltra",
+    "n5": "N5",
+    "n3": "N3",
+    "1.4nm": "1.4纳米",
+    "20nm": "20nm",
+    "leading-edge": "先进制程"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:45:12.532152"
+}

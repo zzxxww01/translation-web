@@ -1,0 +1,9 @@
+[Arizona wafer costs run 2.4x higher than Taiwan’s Fab 18](https://newsletter.semianalysis.com/p/tsmc-overseas-fabs-a-success). Labor is 3x more expensive. Foundation construction costs 4x as much. Raw materials run 2x. Utilities are the only win: water costs half as much, electricity 50% cheaper. These savings are dwarfed by the labor and construction delta.
+
+Apple is already producing chips at Fab 21. TSMC lists Apple, AMD, Qualcomm, and NVIDIA as Phase 1 customers. Apple’s mobile SoCs, around 100mm² die size, are among the early production volume. Yields reportedly exceeded Taiwan by four percentage points at the same ramp stage, though the product mix skews toward smaller dies rather than Nvidia’s 800mm² GPUs. The fab reached 15K wafers per month in 2Q25 and is ramping toward 24K wspm.
+
+The node lag matters more than cost. Taiwan’s “N-2 principle” requires overseas fabs to trail domestic production by at least two generations. If TSMC is developing 1.2nm or 1.4nm in Taiwan, only 1.6nm can go abroad. Process technologies at 14nm and below are classified as critical technologies, covering equipment and materials. TSMC’s 10,000+ R&D engineers remain in Hsinchu. The “mother fab” for each new node must be in Taiwan. By the time Arizona receives N2, Taiwan will be running A14 or beyond. Fab 21 represents less than 15% of TSMC’s total N5/N3 capacity. Arizona hedges Taiwan risk. It does not eliminate Taiwan dependency.
+
+Apple can absorb higher costs as a hedge against Taiwan risk. But Apple won’t shift majority production to Arizona unless forced. At 2.4x the cost of Taiwan wafers, the economics don’t justify it absent geopolitical catastrophe.
+
+Currently 5% of leading-edge production is from Arizona. If this rises to 10-15% by 2028, it signals Apple is genuinely worried about Taiwan. If it stays at 5%, Arizona is pure insurance policy.

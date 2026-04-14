@@ -1,0 +1,42 @@
+{
+  "section_id": "10-chip-series-analysis",
+  "new_terms": [
+    {
+      "term": "incremental wafer demand",
+      "suggested_translation": "新增晶圆需求",
+      "context": "account for roughly a third of Apple’s incremental wafer demand through 2030",
+      "confidence": 0.9
+    },
+    {
+      "term": "diversified silicon portfolio",
+      "suggested_translation": "多元化芯片产品组合",
+      "context": "Apple has evolved from a one-product silicon company to a diversified silicon portfolio.",
+      "confidence": 0.9
+    },
+    {
+      "term": "unit volumes",
+      "suggested_translation": "出货量",
+      "context": "iPhone unit volumes have matured.",
+      "confidence": 0.85
+    },
+    {
+      "term": "AI-centric Macs",
+      "suggested_translation": "主打AI的Mac",
+      "context": "perhaps through new categories like AI-centric Macs",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "a-series": "A系列",
+    "m-series": "M系列",
+    "cagr": "复合年增长率",
+    "die": "裸片",
+    "node": "制程节点",
+    "concentration risk": "集中度风险",
+    "n-series": "N系列",
+    "c-series": "C系列",
+    "pmic": "PMIC"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:44:05.864907"
+}

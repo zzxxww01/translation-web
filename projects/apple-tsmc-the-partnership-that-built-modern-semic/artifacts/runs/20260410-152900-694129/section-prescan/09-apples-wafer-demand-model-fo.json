@@ -1,0 +1,50 @@
+{
+  "section_id": "09-apples-wafer-demand-model-fo",
+  "new_terms": [
+    {
+      "term": "attach rates",
+      "suggested_translation": "搭载率",
+      "context": "scales with device attach rates rather than representing a new growth vector",
+      "confidence": 0.9
+    },
+    {
+      "term": "A14 SPR",
+      "suggested_translation": "A14 SPR",
+      "context": "the HPC-focused A14 SPR coming after the mobile-oriented A14 base process",
+      "confidence": 0.95
+    },
+    {
+      "term": "base process",
+      "suggested_translation": "基础工艺",
+      "context": "coming after the mobile-oriented A14 base process",
+      "confidence": 0.9
+    },
+    {
+      "term": "Vision Pro",
+      "suggested_translation": "Vision Pro",
+      "context": "Vision Pro and spatial computing fit this profile.",
+      "confidence": 1.0
+    },
+    {
+      "term": "1.4nm",
+      "suggested_translation": "1.4nm",
+      "context": "1.4nm enters in 2029 at 307K wafers and explodes to 808K by 2030.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "n2": "N2",
+    "n3": "N3",
+    "n5": "N5",
+    "asp": "ASP",
+    "wspm": "wspm",
+    "hpc": "HPC",
+    "backside power delivery": "背面供电",
+    "gate-all-around transistors": "环绕栅极晶体管",
+    "thermal envelope": "散热包络",
+    "c-series": "C-series",
+    "n-series": "N-series"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:17:16.821148"
+}

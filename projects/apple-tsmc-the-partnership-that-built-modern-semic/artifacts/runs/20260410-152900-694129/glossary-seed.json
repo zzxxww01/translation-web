@@ -1,0 +1,341 @@
+{
+  "added": 56,
+  "terms": [
+    {
+      "original": "vertical integration",
+      "translation": "垂直整合",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Wafer Demand Model",
+      "translation": "晶圆需求模型",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "yield learning curve",
+      "translation": "良率学习曲线",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Broadcom",
+      "translation": "博通",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ASML",
+      "translation": "ASML",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "backside power delivery",
+      "translation": "背面供电",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "gate-all-around transistors",
+      "translation": "环绕栅极晶体管",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "GM",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "purchase obligations",
+      "translation": "采购承诺",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Advanced Packaging",
+      "translation": "先进封装",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ASP",
+      "translation": "平均售价 (ASP)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "18A-P",
+      "translation": "18A-P",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "CIS",
+      "translation": "CMOS图像传感器 (CIS)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "hyperscalers",
+      "translation": "超大规模云厂商",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Moore’s Law",
+      "translation": "摩尔定律",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "AP",
+      "translation": "应用处理器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "LSI",
+      "translation": "LSI",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "A-series",
+      "translation": "A系列",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "M-series",
+      "translation": "M系列",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "leading-edge",
+      "translation": "先进制程",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "IP",
+      "translation": "IP / 知识产权",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PDK",
+      "translation": "工艺设计套件",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Secure Enclave",
+      "translation": "安全隔区",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "DTCO",
+      "translation": "设计-工艺协同优化",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Neural Engine",
+      "translation": "神经网络引擎",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Unified Memory Architecture",
+      "translation": "统一内存架构",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "CAGR",
+      "translation": "复合年增长率",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "hyperscaler",
+      "translation": "超大规模云服务商",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "leading-edge capacity",
+      "translation": "先进制程产能",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ASIC",
+      "translation": "ASIC (专用集成电路)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "spatial computing",
+      "translation": "空间计算",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "wspm",
+      "translation": "每月晶圆投片量",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Y/Y",
+      "translation": "同比",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "C-series",
+      "translation": "C系列",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "N-series",
+      "translation": "N系列",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "concentration risk",
+      "translation": "集中度风险",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Baltra",
+      "translation": "Baltra",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "silicon intensity",
+      "translation": "硅含量",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "N3",
+      "translation": "N3",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "AI accelerator",
+      "translation": "AI加速器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "N5",
+      "translation": "N5",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "die",
+      "translation": "裸片",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "yield learning",
+      "translation": "良率学习",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "binning",
+      "translation": "芯片分级",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ramp",
+      "translation": "产能爬坡",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Known Good Die (KGD)",
+      "translation": "已知良好裸片",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Known Good Die",
+      "translation": "已知良好裸片",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "KGD",
+      "translation": "KGD",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "NRE",
+      "translation": "一次性工程费用 (NRE)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "COGS",
+      "translation": "销货成本 (COGS)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "capital expenditure",
+      "translation": "资本支出",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "market cap",
+      "translation": "市值",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "N2",
+      "translation": "N2",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "A14",
+      "translation": "A14",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "A16",
+      "translation": "A16",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PTC",
+      "translation": "PTC",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    }
+  ]
+}

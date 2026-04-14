@@ -1,0 +1,36 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "SemiAnalysis",
+      "suggested_translation": "SemiAnalysis",
+      "context": "SemiAnalysis has been calling this out for over a year since late 2024.",
+      "confidence": 1.0
+    },
+    {
+      "term": "end market demand",
+      "suggested_translation": "终端市场需求",
+      "context": "detailed end market demand by memory type",
+      "confidence": 0.95
+    },
+    {
+      "term": "memory model",
+      "suggested_translation": "存储模型",
+      "context": "This has all been detailed in the SemiAnalysis memory model",
+      "confidence": 0.9
+    },
+    {
+      "term": "margin",
+      "suggested_translation": "利润率",
+      "context": "forecast memory revenue, pricing, and margin better than anyone else",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "supercycle": "超级周期",
+    "fab": "晶圆厂",
+    "revenue": "营收"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-09T02:42:50.919824"
+}

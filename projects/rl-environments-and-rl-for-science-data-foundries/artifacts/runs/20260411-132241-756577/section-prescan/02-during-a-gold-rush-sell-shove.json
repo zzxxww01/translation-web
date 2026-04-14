@@ -1,0 +1,58 @@
+{
+  "section_id": "02-during-a-gold-rush-sell-shove",
+  "new_terms": [
+    {
+      "term": "RL Scaling Boom",
+      "suggested_translation": "强化学习扩展热潮",
+      "context": "In an RL Scaling Boom, sell RL environments.",
+      "confidence": 0.9
+    },
+    {
+      "term": "multi-turn",
+      "suggested_translation": "多轮交互",
+      "context": "This enables interactions to be more multi-turn as opposed to a single shot",
+      "confidence": 0.95
+    },
+    {
+      "term": "single shot",
+      "suggested_translation": "单次交互",
+      "context": "interactions to be more multi-turn as opposed to a single shot",
+      "confidence": 0.95
+    },
+    {
+      "term": "HUD",
+      "suggested_translation": "HUD",
+      "context": "HUD for example has tooling that allows for the wrapping any given software",
+      "confidence": 0.9
+    },
+    {
+      "term": "dockerized container",
+      "suggested_translation": "Docker化容器",
+      "context": "wrapping any given software... in a dockerized container",
+      "confidence": 0.95
+    },
+    {
+      "term": "telemetry",
+      "suggested_translation": "遥测",
+      "context": "Every tool call and observation is captured via telemetry",
+      "confidence": 0.95
+    },
+    {
+      "term": "Environments Hub",
+      "suggested_translation": "Environments Hub",
+      "context": "fostering the Environments Hub, which aims to be a one stop shop for RL environments.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl environments": "强化学习环境",
+    "ui gyms": "UI训练场",
+    "mid-training": "中期训练",
+    "mcp": "MCP",
+    "tool call": "工具调用",
+    "observation": "观察值",
+    "reward signals": "奖励信号"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-11T13:38:59.559915"
+}

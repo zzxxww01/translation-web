@@ -1,0 +1,63 @@
+{
+  "section_id": "08-will-the-pretrain-matter",
+  "new_terms": [
+    {
+      "term": "Moonshot AI",
+      "suggested_translation": "月之暗面",
+      "context": "Kimi 2.5 from Moonshot AI is a perfect showcase of the models to come.",
+      "confidence": 0.99
+    },
+    {
+      "term": "Parallel Agent Reinforcement Learning (PARL)",
+      "suggested_translation": "并行智能体强化学习",
+      "context": "PARL or Parallel Agent Reinforcement Learning is a sign of what is to come.",
+      "confidence": 0.95
+    },
+    {
+      "term": "agent orchestration",
+      "suggested_translation": "智能体编排",
+      "context": "Every incremental model this year is going to heavily focus more on agent orchestration as well as performance.",
+      "confidence": 0.95
+    },
+    {
+      "term": "agent swarms",
+      "suggested_translation": "智能体群",
+      "context": "Sonnet 5 for example is clearly oriented towards agent swarms akin to how PARL works at Kimi 2.5.",
+      "confidence": 0.9
+    },
+    {
+      "term": "RL",
+      "suggested_translation": "强化学习 (RL)",
+      "context": "Anthropic and Gemini didn’t fully understand or push the RL and chain-of-thought inflection initially",
+      "confidence": 0.95
+    },
+    {
+      "term": "CoT",
+      "suggested_translation": "思维链 (CoT)",
+      "context": "Agent orchestration is the new CoT.",
+      "confidence": 0.95
+    },
+    {
+      "term": "MWs",
+      "suggested_translation": "兆瓦 (MW)",
+      "context": "Anthropic is limited by FLOPs and MWs, not in terms of capability",
+      "confidence": 0.95
+    },
+    {
+      "term": "GW",
+      "suggested_translation": "吉瓦 (GW)",
+      "context": "going to fund their expansion into the GW game in a big way.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "agent": "智能体",
+    "orchestration layer": "编排层",
+    "chain-of-thought": "思维链",
+    "token efficiency": "Token效率",
+    "flops": "FLOPS",
+    "information work": "信息工作"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T12:10:12.703157"
+}

@@ -1,0 +1,3 @@
+Huawei, Samsung, Xiaomi, ZTE, Google and others tried to replicate Apple’s success in vertical integration but failed to put together a coherent strategy. Huawei seemed like a challenger but got cut off at TSMC due to export controls. Huawei is nearly sufficient and has invested in much wider areas than Apple, including deep into supply chain layers such as lithography, fabs and memory. But its success is slowed by China’s limited capacity in advanced nodes.
+
+Samsung with its Exynos apps processors and modems nearly replicated the A-series strategy but due to capacity and yield limitations still depends on external chip companies such as Qualcomm.

@@ -1,0 +1,30 @@
+{
+  "section_id": "14-how-apple-subsidizes-tsmc",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 7,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Apple utilizes its M-series product stack to maximize yield.",
+        "description": "中英文之间缺少必要的空格（CJK-Latin spacing）。原文中的“M系列”、“A系列”在多处（段落7、8、9、19）均未与中文字符隔开，略微影响排版规范。",
+        "why_it_matters": "保持中英文字符间的合理间距有助于提升文章的专业度和阅读体验，特别是在科技/金融类长文中。",
+        "suggestion": "将全文中的“M系列”、“A系列”统一修改为“M 系列”、“A 系列”。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "A standard wafer pricing model ($20,000/wafer) would be ruinous for Apple if nearly half the chips on each wafer are defective.",
+        "description": "数字“20,000”直接照搬了英文的千位分隔符格式，在中文语境下阅读不够直观。",
+        "why_it_matters": "中文读者更习惯以“万”或“亿”为单位阅读大额数字，进行本土化转换能进一步提升阅读流畅度。",
+        "suggestion": "将“20,000 美元”改为“2 万美元”。"
+      }
+    ]
+  }
+}

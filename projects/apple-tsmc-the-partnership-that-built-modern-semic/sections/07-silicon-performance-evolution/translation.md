@@ -1,0 +1,63 @@
+### A系列与M系列的持续进击
+
+这种制造领域的统治力，造就了苹果过去十年间如复利般累积的性能领先优势。凭借率先迈向下一代制程节点的能力，苹果得以在相同的散热包络内容纳更多晶体管，在每瓦性能上持续压制 x86 生态系统。
+
+晶体管数量呈线性增长，但每瓦性能才是核心指标。在 A18/M4 世代向 N3E 节点的过渡中，苹果优先考量成本与良率，而非纯粹的晶体管密度微缩（相比 N3B），因此与前几代相比，其晶体管数量的增幅相对温和。神经网络引擎则经历了最惊人的指数级爆发，算力从 A11 的 0.6 TOPS 一路狂飙至 A17/A18 的 35 TOPS。这印证了苹果早在“AI PC”炒作周期爆发的数年前，就已将战略重心全面转向端侧 AI。
+
+https://substackcdn.com/image/fetch/$s_!jU4H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5db79be6-7c20-4af5-bf20-073e6fcdbd56_3234x2067.png
+
+https://substackcdn.com/image/fetch/$s_!IUPy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F176c3a2f-dde5-4573-a923-db0b5925c877_3270x1031.png
+
+https://substackcdn.com/image/fetch/$s_!Ci1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02d45a1f-87c8-4119-91a9-bedde9bd8070_3322x1110.png
+
+自 2013 年以来，苹果始终比竞争对手提前 12 到 24 个月率先推出业界首创功能。
+
+### 苹果自研芯片的技术优势
+
+苹果的性能领先优势源于十年前在架构路线上的押注。当英特尔和高通竞相追逐 5GHz 以上的高主频时，苹果却另辟蹊径，追求“宽架构、低主频”，在较低频率下实现每个时钟周期执行更多指令。
+
+### 前端架构：解码宽度走向均势
+
+早在 2020 年，苹果就在 A14 和 M1 芯片上引入了 8宽解码，领先竞争对手整整四年。但到 2025 年，竞争对手已然追平了这一差距。
+
+https://substackcdn.com/image/fetch/$s_!00WK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F488a6e86-3660-419e-933b-dcd1883c81f4_1612x846.png
+
+解码宽度已不再是苹果的护城河。如今的优势已转移至缓存层级、垂直整合以及极致高效的微型能效核。
+
+### 缓存层级：苹果依然领先的阵地
+
+苹果的设计理念是：配备超大高速的 L1 缓存、大容量共享的 L2 缓存，并在 DRAM 之前设置系统级缓存 (SLC)。SLC 使得 CPU、GPU 和神经网络引擎能够直接共享数据，无需调用缓慢的系统内存。
+
+https://substackcdn.com/image/fetch/$s_!GAx7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8af7977b-b9e9-42a2-b60b-6bf8b9bad677_2000x985.png
+
+苹果的 SLC 容量优势比竞品大 3 到 4 倍，且支持 CPU 与 GPU 完全共享。AMD 的 Strix Halo 在容量上与之相当，但 CPU 核心无法访问该缓存。
+
+https://substackcdn.com/image/fetch/$s_!zTFs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb09390ab-b7c5-4d9c-97e6-dc7718a72be5_1610x674.png
+
+苹果与高通的 Oryon 在 L1 缓存容量、延迟和缓存层级上不相上下，毕竟最初的 Nuvia 设计团队大多是从苹果挖角而来的。英特尔的 L0/L1.5 层级结构则增加了延迟。
+
+### 统一内存架构
+
+传统 PC 架构为 CPU 和 GPU 配备独立的内存池，需要进行数据复制。苹果自研芯片采用统一内存架构：GPU 读取的内存地址与 CPU 完全一致。
+
+这消除了对 AI 负载至关重要的“复制惩罚”。一个 20GB 的 LLM 只需加载一次，神经网络引擎与 GPU 即可同时访问。高通移动芯片虽使用共享的 LPDDR5X，但缺乏苹果的细粒度一致性。AMD Strix Halo 的 MALL (内存附加末级缓存) 则仅供 GPU 使用。
+
+### 垂直整合
+
+苹果的效率优势源于其掌控了那些看似不起眼的芯片：定制的电源管理 IC 和存储控制器实现了毫秒级的动态电压和频率调节 (DVFS)。芯片支持快速休眠，能在高功耗下完成突发任务，并比 x86 竞品更快地降至接近零功耗的空闲状态。
+
+iPhone 17 Pro 的均热板与 A19 Pro 的散热包络系协同设计而成。苹果精准掌握其持续功耗预算（5-7W），并据此定制芯片。相比之下，高通必须兼顾三星、小米和一加等不同终端，针对最恶劣的散热工况进行设计。
+
+2024 至 2025 年的行业变局：
+
+1. 解码能力追平：英特尔、AMD 和高通均在 2024 年实现 8 宽解码架构。
+2. 引入 SLC：高通新增 8MB SLC；英特尔新增 8MB 内存侧缓存。
+3. L1 缓存追平：高通 Oryon 核心配备与苹果同等的 320KB L1 缓存，且延迟相近。
+4. 跑分逼近：安卓阵营的基准测试成绩正不断逼近 iPhone。
+5. 深度定制：小米自研 XRing 芯片在设计、功耗和软件层面实现了深度的垂直整合。
+
+苹果的现存优势包括：更大的 SLC（32MB 对比 8-10MB）、实现 CPU 与 GPU 完全一致性的真正统一内存，以及赋能散热协同设计的垂直整合。尽管差距不断缩小，苹果依然稳坐效率王座。
+
+接下来我们将深入剖析具体细节：苹果在台积电的晶圆需求与经济账，涵盖我们对台积电 A14 节点（译注：指台积电 1.4 纳米节点，而非苹果处理器）直至本年代末的预测。我们将量化苹果的 N2 需求，并分析其如何影响旧制程节点需求——令人意外的是，苹果对部分旧节点的需求不降反升。文中将展示按芯片划分的详细需求数据，揭示苹果试图打破 iPhone 单一依赖所带来的转变。正如前文所述，英伟达的需求正在先进制程节点上挤压苹果的份额，我们也将用具体数据来量化这一 HPC 爆发态势。
+
+此外还有更多硬核内容：封装经济账、台积电的非苹果业务版图、苹果自研替换博通基带的进展、竞品效仿苹果垂直整合的动作、台积电之外向下游供应链的涓滴效应，以及台积电与苹果合作关系的未来走向。

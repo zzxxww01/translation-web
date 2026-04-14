@@ -1,0 +1,48 @@
+{
+  "section_id": "11-device-mix-diversification",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 8.8,
+    "accuracy_score": 9.0,
+    "conciseness_score": 8.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "data",
+        "severity": "medium",
+        "original_text": "units grew 72x from 2020 to 2030",
+        "description": "原文“2020 to 2030”结合过去时“grew”明显为笔误，大概率应为“2023”。译文直接照译为“2030 年”会导致事实逻辑上的时间冲突。",
+        "why_it_matters": "不加处理会令硬核读者感到困惑，损害文章的数据严谨性与专业度。",
+        "suggestion": "建议直接修正为“2023 年”，或保留原文并添加译者注：“注：原文为 2030 年，结合上下文时态疑为 2023 年之笔误”。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "A-series ... M-series",
+        "description": "中英文之间缺少必要的空格（A系列、M系列）。",
+        "why_it_matters": "违反 CJK-Latin 排版规范，影响阅读体验。",
+        "suggestion": "改为“A 系列”和“M 系列”。"
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "This decoupling explains why...",
+        "description": "“解释了，为何”中间的逗号打断了语流。",
+        "why_it_matters": "破坏了句子的连贯性，略显生硬。",
+        "suggestion": "删去逗号，改为“这种脱钩现象解释了为何在……”"
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "conciseness",
+        "severity": "low",
+        "original_text": "Apple’s wafer demand at TSMC has diversified meaningfully since 2018.",
+        "description": "“已实现显著的多元化”使用了“实现……的……”这种抽象名词外壳，有轻微翻译腔。",
+        "why_it_matters": "不够精炼，中文表达可以更紧凑有力。",
+        "suggestion": "简化为“已显著多元化”。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "section_id": "02-during-a-gold-rush-sell-shove",
+  "new_terms": [
+    {
+      "term": "HUD",
+      "suggested_translation": "HUD",
+      "context": "HUD for example has tooling that allows for the wrapping any given software...",
+      "confidence": 0.95
+    },
+    {
+      "term": "tool call",
+      "suggested_translation": "工具调用",
+      "context": "When an agent issues a tool call like click(x,y) or type(text)...",
+      "confidence": 0.95
+    },
+    {
+      "term": "telemetry",
+      "suggested_translation": "遥测",
+      "context": "Every tool call and observation is captured via telemetry...",
+      "confidence": 0.95
+    },
+    {
+      "term": "dockerized container",
+      "suggested_translation": "Docker化容器",
+      "context": "wrapping any given software... in a dockerized container",
+      "confidence": 0.9
+    },
+    {
+      "term": "multi-turn",
+      "suggested_translation": "多轮",
+      "context": "This enables interactions to be more multi-turn as opposed to a single shot...",
+      "confidence": 0.95
+    },
+    {
+      "term": "single shot",
+      "suggested_translation": "单次",
+      "context": "as opposed to a single shot, for example pinging the model halfway...",
+      "confidence": 0.9
+    },
+    {
+      "term": "reward signal",
+      "suggested_translation": "奖励信号",
+      "context": "success criteria that return a reward signal.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Environments Hub",
+      "suggested_translation": "Environments Hub",
+      "context": "fostering the Environments Hub, which aims to be a one stop shop for RL environments.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl environments": "强化学习环境",
+    "ui gyms": "UI训练场",
+    "mid-training": "中期训练",
+    "mcp": "MCP"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T23:03:12.236951"
+}

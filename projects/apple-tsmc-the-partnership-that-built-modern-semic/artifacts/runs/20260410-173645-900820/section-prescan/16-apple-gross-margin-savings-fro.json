@@ -1,0 +1,71 @@
+{
+  "section_id": "16-apple-gross-margin-savings-fro",
+  "new_terms": [
+    {
+      "term": "silicon thesis",
+      "suggested_translation": "自研芯片逻辑",
+      "context": "The Mac gross margin story is the clearest proof of Apple’s silicon thesis.",
+      "confidence": 0.9
+    },
+    {
+      "term": "clock speed regression",
+      "suggested_translation": "主频倒退",
+      "context": "constrained by Intel’s $150+ processor ASPs and a roadmap that delivered clock speed regression instead of progress.",
+      "confidence": 0.9
+    },
+    {
+      "term": "yield loss",
+      "suggested_translation": "良率损失",
+      "context": "The M-series chips cost Apple an estimated $77 per unit in COGS (N3 wafers, packaging, yield loss)",
+      "confidence": 0.95
+    },
+    {
+      "term": "mask sets",
+      "suggested_translation": "光罩套件",
+      "context": "Apple spent $6B (including the $1B Intel modem acquisition, 2,200 engineers, mask sets, and qualification costs) to get here.",
+      "confidence": 0.95
+    },
+    {
+      "term": "qualification costs",
+      "suggested_translation": "认证成本",
+      "context": "Apple spent $6B (including the $1B Intel modem acquisition, 2,200 engineers, mask sets, and qualification costs) to get here.",
+      "confidence": 0.9
+    },
+    {
+      "term": "break-even volume",
+      "suggested_translation": "盈亏平衡销量",
+      "context": "Break-even volume is 1.3B units, roughly 5 years of iPhone production.",
+      "confidence": 0.95
+    },
+    {
+      "term": "N1 chip",
+      "suggested_translation": "N1芯片",
+      "context": "The N1 chip, Apple’s first in-house Wi-Fi 7 solution, replaces Broadcom’s $11 combo chip",
+      "confidence": 0.95
+    },
+    {
+      "term": "OEM",
+      "suggested_translation": "原始设备制造商 (OEM)",
+      "context": "Android OEMs still pay Qualcomm and MediaTek for chips Apple now makes itself.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "gross margin": "毛利率",
+    "cogs": "销货成本 (COGS)",
+    "nre": "一次性工程费用 (NRE)",
+    "asp": "平均售价 (ASP)",
+    "m-series": "M系列",
+    "a-series": "A系列",
+    "c-series": "C系列",
+    "n-series": "N系列",
+    "c1 modem": "C1基带",
+    "broadcom": "博通",
+    "qualcomm": "高通",
+    "intel": "英特尔",
+    "tsmc": "台积电",
+    "mediatek": "联发科"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T22:00:10.248400"
+}

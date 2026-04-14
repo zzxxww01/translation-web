@@ -1,0 +1,56 @@
+{
+  "section_id": "01-claude-code-and-the-agentic-fu",
+  "new_terms": [
+    {
+      "term": "organic intelligence",
+      "suggested_translation": "有机智能",
+      "context": "A term used to contrast with artificial intelligence, referring to human intelligence. As in 'how organic intelligence (humans) interact with artificial intelligence (AI)'.",
+      "confidence": 0.95
+    },
+    {
+      "term": "orchestration of tokens",
+      "suggested_translation": "token 编排",
+      "context": "The core concept that the future of AI is not just generating tokens, but organizing them into complex outputs. As in 'the future of AI will be about the orchestration of tokens'.",
+      "confidence": 0.9
+    },
+    {
+      "term": "call and response of tokens",
+      "suggested_translation": "token 的调用与响应",
+      "context": "A metaphor for the basic interaction model of early APIs like the ChatGPT API, compared to Web 1.0. As in 'the OpenAI ChatGPT API as the call and response of tokens'.",
+      "confidence": 0.85
+    },
+    {
+      "term": "agentic layer",
+      "suggested_translation": "智能体层",
+      "context": "Refers to the layer of AI systems responsible for organizing model outputs into more complex, agent-like behaviors. As in 'a new breakthrough in the agentic layer'.",
+      "confidence": 0.9
+    },
+    {
+      "term": "ChatGPT moment",
+      "suggested_translation": "ChatGPT 时刻",
+      "context": "A recurring phrase referring to the period in late 2022 / early 2023 when ChatGPT's release caused a massive shift in public and industry perception of AI.",
+      "confidence": 0.95
+    },
+    {
+      "term": "TCP/IP",
+      "suggested_translation": "TCP/IP",
+      "context": "Abbreviation for Transmission Control Protocol/Internet Protocol, the foundational communication protocol of the Internet. Flagged as a new abbreviation.",
+      "confidence": 1.0
+    },
+    {
+      "term": "DeepSeek",
+      "suggested_translation": "DeepSeek",
+      "context": "A specific AI model or company mentioned as an example of achieving high performance on a smaller scale.",
+      "confidence": 1.0
+    },
+    {
+      "term": "GPT-3",
+      "suggested_translation": "GPT-3",
+      "context": "A specific large language model from OpenAI, cited as the moment that 'proved scale worked'.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T00:08:05.901181"
+}

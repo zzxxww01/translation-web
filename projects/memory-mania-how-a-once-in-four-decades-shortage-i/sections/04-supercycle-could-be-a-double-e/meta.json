@@ -1,7 +1,7 @@
 {
   "section_id": "04-supercycle-could-be-a-double-e",
   "title": "Supercycle Could be a Double-Edged Sword",
-  "title_translation": null,
+  "title_translation": "超级周期或为双刃剑",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "不出所料，存储超级周期中率先显现的动向，便是各类 DRAM 产品价格加速上扬，这与过往周期的规律如出一辙。例如，过去一年间 DDR5 与 LPDDR5 价格一路狂飙。我们在模型中预测，2026 年第一季度 DDR5 与 LPDDR5 的合约价将分别环比大涨 70% 与 35%，推动两者价格在该季度末分别触及约 14 美元/吉字节 (GB) 与 11.5 美元/GB。相较于 2025 年第一季度，这意味着 DDR5 与 LPDDR5 将分别实现 638% 与 369% 的惊人同比涨幅。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.720924",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +117,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "鉴于我们笃定结构性短缺难以缓解，且供应环境势必进一步恶化，从 2025 年第四季度到 2026 年第四季度，DRAM 价格可能再涨约两倍。这种格局对头部存储供应商极为有利，但对其他玩家而言却未必是福音。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.720971",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +207,70 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!M-HO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff863035e-5d8c-4655-97cf-b4222b9eba04_1094x616.png",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721019",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!M-HO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff863035e-5d8c-4655-97cf-b4222b9eba04_1094x616.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -157,19 +331,84 @@
         "LINK_1",
         "LINK_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis内存模型 - Sales@SemiAnalysis.com",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.956143",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis内存模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 存储模型 - Sales@SemiAnalysis.com",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721080",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis 存储模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis内存模型 - Sales@SemiAnalysis.com",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis内存模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -196,12 +435,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "存储涨价固然让存储制造商获益匪浅，但这却是以牺牲客户及更广泛的终端市场为代价的。随着存储在 BoM 中的占比不断攀升，手机与 PC OEM 正面临普遍的利润率挤压，其受冲击程度因企业规模、定价权与产品组合而异。得益于卓越的采购话语权与强劲的 iPhone 17 需求，苹果等 Tier-1 玩家在结构上占据更有利的位置。我们测算，苹果面临的存储涨幅约为 15%，而行业整体涨幅则高达约 20%；然而，即便是苹果也难以独善其身。高昂的存储成本势必将持续拖累其 2026 年的利润率，且迄今为止，鲜有证据表明其 ASP 的提升足以完全抵消这一压力。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721106",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -228,12 +525,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "苹果在最新财报电话会上的表态印证了这一点，并暗示存储成本带来的更大冲击将在 2026 年下半年显现，尽管其在 2026 年上半年仍处于相对有利的地位。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721117",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -260,12 +615,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "相比之下，1.5 线和二线手机 OEM（尤其是中国厂商）转嫁高昂成本的能力有限，正面临严峻得多的利润率压力。这已促使厂商进行选择性涨价并可能采取减配措施，尤其是在入门级与中端机型上；若存储价格进一步攀升，这些机型的毛利率恐将大幅收缩。高端机型减配的可能性较小，但若高价位持续，最终也难逃涨价命运。伴随这波涨价潮，我们认为应下调 2026 年的手机出货量预期，且供应链各环节的企业已显露出清晰的疲软信号。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721133",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -292,12 +705,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "PC 市场也正呈现类似动向。自 2025 年第四季度起，OEM 已实施选择性涨价，并正酝酿对中低端产品进行减配。除了存储成本飙升带来的压力，PC OEM 还面临处理器涨价的双重夹击。这种“双重涨价”实质性放大了多重风险：ASP 膨胀、需求弹性减弱、2026 年出货量下滑，以及高度依赖 PC 与手机出货量的芯片制造商和 ODM 面临来自下游的盈利压力。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721142",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -324,12 +795,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "因此，我们对该生态系统中的部分标的保持谨慎——在某些情况下甚至看跌。鉴于其对需求弹性的潜在影响，密切关注 PC 与手机的出货趋势至关重要。两者合计约占 DRAM 终端总需求的 30%，任何实质性的销量下滑都可能拖累整体终端市场需求。尽管如此，考虑到服务器在 DRAM 终端市场中的比重日益增加，且服务器 DRAM 需求正在加速，我们认为这足以抵消消费级 DRAM 需求的疲软。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721175",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -356,12 +885,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "除了手机、PC 及其他消费电子产品，我们认为同样必须考量“存储通胀”对 AI 服务器及 ODM 的影响，因为整个行业必将逐渐感受到内存与存储价格飙升带来的实质性冲击。上周，我们已在机构平台 Core Research 上强调了这一点。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721186",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -422,19 +1009,77 @@
         "LINK_1",
         "LINK_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "如需了解更多细节，请参阅我们的 AI TCO（总拥有成本）模型与 Core Research。在这些报告中，我们提供了详细的物料清单拆解，并深入分析了存储对 AI 服务器经济效益的影响。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721229",
+          "tokenized_text": "如需了解更多细节，请参阅我们的 [[[LINK_1|AI TCO（总拥有成本）模型]]]与 [[[LINK_2|Core Research]]]。在这些报告中，我们提供了详细的物料清单拆解，并深入分析了存储对 AI 服务器经济效益的影响。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -461,12 +1106,70 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!h9Ft!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5806b684-cf4c-47f2-980e-77f9a0f42515_1638x1152.png",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721244",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!h9Ft!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5806b684-cf4c-47f2-980e-77f9a0f42515_1638x1152.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -546,19 +1249,84 @@
         "LINK_2",
         "LINK_3"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Core Research, AI Cloud TCO Model, and Memory 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.956220",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Core Research]]], [[[LINK_2|AI Cloud TCO Model]]], and [[[LINK_3|Memory 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis Core Research、AI 云 TCO 模型与存储模型",
+          "model": "pro",
+          "created_at": "2026-04-09T03:07:46.721284",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Core Research]]]、[[[LINK_2|AI 云 TCO 模型]]]与[[[LINK_3|存储模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Core Research, AI Cloud TCO Model, and Memory 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Core Research]]], [[[LINK_2|AI Cloud TCO Model]]], and [[[LINK_3|Memory 模型]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.799999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+          "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+          "relation_to_previous": "Translates the upstream supply constraints and bit output drops into real-world market impacts (skyrocketing contract prices).",
+          "relation_to_next": "Contrasts downstream commodity price explosions with upstream HBM contract dynamics, pivoting focus back to memory supplier strategies.",
+          "key_points": [
+            "DDR5 and LPDDR5 contract prices are experiencing extraordinary QoQ and YoY surges.",
+            "Tier-1.5 and Tier-2 mobile OEMs (especially Chinese vendors) face severe margin stress due to their inability to pass through higher costs.",
+            "This margin squeeze is forcing selective price increases and potential specification downgrades in entry- and mid-range devices."
+          ],
+          "translation_notes": [
+            "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+            "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "翻译过度渲染了原文的情感色彩。原文“compress sharply”意为“大幅收缩”或“严重承压”，而“断崖式下跌”过于夸张，不符合分析师冷峻精准的声线。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“面临下游盈利承压”表意模糊，容易被误解为“下游企业自身面临盈利压力”。原文“downstream earnings pressure for chipmakers and ODMs”是指这些中上游企业因为下游需求疲软而面临盈利压力。"
+          },
+          {
+            "type": "annotation",
+            "description": "目标读者为资深半导体与金融分析师，对“PC”、“Tier-1”等术语非常熟悉，过度加注（如“个人电脑 (PC)”、“(或一线)”）显得冗余，打断阅读节奏。同理，段落 0 中的“吉字节 (GB)”也属过度加注。"
+          },
+          {
+            "type": "structure",
+            "description": "中英文之间缺乏空格（CJK-Latin spacing 规范）。"
+          }
+        ]
+      },
       "history": []
     }
   ]

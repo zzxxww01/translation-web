@@ -1,0 +1,56 @@
+{
+  "section_id": "05-competitive-landscape-microso",
+  "new_terms": [
+    {
+      "term": "Office 365",
+      "suggested_translation": "Office 365",
+      "context": "Microsoft’s seat-based Office 365",
+      "confidence": 1.0
+    },
+    {
+      "term": "UX",
+      "suggested_translation": "UX (用户体验)",
+      "context": "Every bit of UX or preference is at risk.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Tableau",
+      "suggested_translation": "Tableau",
+      "context": "Tableau as a concept is outdated",
+      "confidence": 1.0
+    },
+    {
+      "term": "Figma",
+      "suggested_translation": "Figma",
+      "context": "Figma (wireframes for humans) are at risk.",
+      "confidence": 1.0
+    },
+    {
+      "term": "wireframes",
+      "suggested_translation": "线框图",
+      "context": "Figma (wireframes for humans) are at risk.",
+      "confidence": 1.0
+    },
+    {
+      "term": "form and workflow wrapper",
+      "suggested_translation": "表单与工作流包装器",
+      "context": "Salesforce is a form and workflow wrapper",
+      "confidence": 0.9
+    },
+    {
+      "term": "scaffolded",
+      "suggested_translation": "搭建框架 / 生成脚手架",
+      "context": "the form and workflow can likely be scaffolded by AI into a database",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "seat-based software model": "按席位付费的软件模式",
+    "claude code": "Claude Code",
+    "semianalysis": "SemiAnalysis",
+    "salesforce": "Salesforce",
+    "agent": "智能体"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T15:12:33.583499"
+}

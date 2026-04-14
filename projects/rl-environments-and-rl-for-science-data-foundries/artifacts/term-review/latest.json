@@ -1,0 +1,258 @@
+{
+  "project_id": "rl-environments-and-rl-for-science-data-foundries",
+  "project_title": "RL Environments and RL for Science: Data Foundries and Multi-Agent Architectures",
+  "review_required": true,
+  "generated_at": "2026-04-11T15:15:05.814049",
+  "total_candidates": 7,
+  "sections": [
+    {
+      "section_id": "01-outsourcing-and-the-ghost-of-s",
+      "section_title": "Outsourcing and The Ghost of Scale AI",
+      "candidates": [
+        {
+          "term": "Surge",
+          "suggested_translation": "Surge",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "01-outsourcing-and-the-ghost-of-s",
+          "related_sections": [
+            {
+              "section_id": "01-outsourcing-and-the-ghost-of-s",
+              "section_title": "Outsourcing and The Ghost of Scale AI"
+            },
+            {
+              "section_id": "04-data-foundries-and-expert-cont",
+              "section_title": "Data Foundries and Expert Contractors"
+            }
+          ],
+          "contexts": [
+            "other data providers like Surge",
+            "Surge is the more established and larger player, with revenue we believe is closer to $1B ARR."
+          ],
+          "similar_terms": [
+            {
+              "original": "Samsung",
+              "translation": "三星",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "05-buying-patterns-across-labs",
+      "section_title": "Buying patterns across labs",
+      "candidates": [
+        {
+          "term": "Google DeepMind",
+          "suggested_translation": "Google DeepMind",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-buying-patterns-across-labs",
+          "related_sections": [
+            {
+              "section_id": "05-buying-patterns-across-labs",
+              "section_title": "Buying patterns across labs"
+            }
+          ],
+          "contexts": [
+            "Google DeepMind’s procurement is rather decentralized."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "human data team",
+          "suggested_translation": "人工数据团队",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-buying-patterns-across-labs",
+          "related_sections": [
+            {
+              "section_id": "05-buying-patterns-across-labs",
+              "section_title": "Buying patterns across labs"
+            }
+          ],
+          "contexts": [
+            "To reduce reliance on third parties like Surge, Mercor, and Handshake, OpenAI is building an in-house human data team."
+          ],
+          "similar_terms": [
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.538
+            },
+            {
+              "original": "utilization rate",
+              "translation": "利用率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.452
+            }
+          ]
+        },
+        {
+          "term": "PM",
+          "suggested_translation": "产品经理",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "05-buying-patterns-across-labs",
+          "related_sections": [
+            {
+              "section_id": "05-buying-patterns-across-labs",
+              "section_title": "Buying patterns across labs"
+            }
+          ],
+          "contexts": [
+            "More importantly, their legions of PMs have deep visibility into how hundreds of millions of users actually interact with these products"
+          ],
+          "similar_terms": [
+            {
+              "original": "ML",
+              "translation": "机器学习 (ML)",
+              "strategy": "translate",
+              "scope": "project",
+              "note": "particularly ML related environments and tasks.",
+              "similarity": 0.5
+            },
+            {
+              "original": "PR",
+              "translation": "PR (Pull Request/拉取请求)",
+              "strategy": "translate",
+              "scope": "project",
+              "note": "containing 30k repos and 450k PRs with permissive licenses",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "08-rl-as-a-service",
+      "section_title": "RL as a service",
+      "candidates": [
+        {
+          "term": "Adaptive ML",
+          "suggested_translation": "Adaptive ML",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "08-rl-as-a-service",
+          "related_sections": [
+            {
+              "section_id": "08-rl-as-a-service",
+              "section_title": "RL as a service"
+            }
+          ],
+          "contexts": [
+            "The space is comprised of smaller YC startups... but also ones started by experienced researchers like Applied Compute and Adaptive ML."
+          ],
+          "similar_terms": [
+            {
+              "original": "ML",
+              "translation": "机器学习 (ML)",
+              "strategy": "translate",
+              "scope": "project",
+              "note": "particularly ML related environments and tasks.",
+              "similarity": 0.308
+            }
+          ]
+        },
+        {
+          "term": "Applied Compute",
+          "suggested_translation": "Applied Compute",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "08-rl-as-a-service",
+          "related_sections": [
+            {
+              "section_id": "08-rl-as-a-service",
+              "section_title": "RL as a service"
+            }
+          ],
+          "contexts": [
+            "The space is comprised of smaller YC startups... but also ones started by experienced researchers like Applied Compute and Adaptive ML."
+          ],
+          "similar_terms": [
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.621
+            },
+            {
+              "original": "cloud computing",
+              "translation": "云计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.6
+            },
+            {
+              "original": "Apple Silicon",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "苹果自研芯片品牌",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "12-multi-agent-architectures-gpt",
+      "section_title": "Multi agent architectures: GPT-5.2 Pro, Gemini Deep Think, Grok Heavy, Claude",
+      "candidates": [
+        {
+          "term": "Gemini Deep Think",
+          "suggested_translation": "Gemini Deep Think",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "12-multi-agent-architectures-gpt",
+          "related_sections": [
+            {
+              "section_id": "12-multi-agent-architectures-gpt",
+              "section_title": "Multi agent architectures: GPT-5.2 Pro, Gemini Deep Think, Grok Heavy, Claude"
+            }
+          ],
+          "contexts": [
+            "At a high level, this is how Grok 4 Heavy, Gemini Deep Think, and GTP5-Pro work."
+          ],
+          "similar_terms": [
+            {
+              "original": "deep learning",
+              "translation": "深度学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.467
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

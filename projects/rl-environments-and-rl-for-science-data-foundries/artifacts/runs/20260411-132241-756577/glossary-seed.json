@@ -1,0 +1,71 @@
+{
+  "added": 11,
+  "terms": [
+    {
+      "original": "Anthropic",
+      "translation": "Anthropic",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "RL as a Service",
+      "translation": "RL即服务",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "xAI",
+      "translation": "xAI",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Utility Evals",
+      "translation": "实用性评估",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "observation",
+      "translation": "观察值",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "tool call",
+      "translation": "工具调用",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Qwen",
+      "translation": "通义千问",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "reward signals",
+      "translation": "奖励信号",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ChatGPT Agent",
+      "translation": "ChatGPT智能体",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Medra",
+      "translation": "Medra",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "straggler rollouts",
+      "translation": "掉队推演",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    }
+  ]
+}

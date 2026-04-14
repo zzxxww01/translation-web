@@ -1,0 +1,67 @@
+{
+  "section_id": "09-apples-wafer-demand-model-fo",
+  "new_terms": [
+    {
+      "term": "attach rate",
+      "suggested_translation": "搭载率",
+      "context": "scales with device attach rates rather than representing a new growth vector",
+      "confidence": 0.9
+    },
+    {
+      "term": "foundry spend",
+      "suggested_translation": "晶圆代工支出",
+      "context": "Apple’s annual foundry spend at TSMC grew from $2.3 billion",
+      "confidence": 0.9
+    },
+    {
+      "term": "SPR",
+      "suggested_translation": "SPR (超级电源轨)",
+      "context": "with the HPC-focused A14 SPR coming after the mobile-oriented A14 base process",
+      "confidence": 0.95
+    },
+    {
+      "term": "node gap",
+      "suggested_translation": "节点空窗期",
+      "context": "the N5-to-N3 transition caused a temporary node gap",
+      "confidence": 0.9
+    },
+    {
+      "term": "product cadence",
+      "suggested_translation": "产品发布节奏",
+      "context": "The timing aligns with Apple’s product cadence: A23 Pro and M8 in 2029-2030.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Vision Pro",
+      "suggested_translation": "Vision Pro",
+      "context": "Vision Pro and spatial computing fit this profile.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "n2": "N2",
+    "n3": "N3",
+    "n5": "N5",
+    "ai accelerator": "AI加速器",
+    "hyperscalers": "超大规模云厂商",
+    "wspm": "每月晶圆投片量",
+    "asp": "平均售价 (ASP)",
+    "c-series": "C系列",
+    "n-series": "N系列",
+    "rf chip": "射频芯片",
+    "1.4nm": "1.4纳米",
+    "neural engine": "神经网络引擎",
+    "spatial computing": "空间计算",
+    "y/y": "同比",
+    "a14": "A14",
+    "a16": "A16",
+    "hpc": "HPC",
+    "backside power delivery": "背面供电",
+    "gate-all-around transistors": "环绕栅极晶体管",
+    "thermal envelope": "散热包络",
+    "tsmc": "台积电",
+    "nvidia": "英伟达"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:43:45.668729"
+}

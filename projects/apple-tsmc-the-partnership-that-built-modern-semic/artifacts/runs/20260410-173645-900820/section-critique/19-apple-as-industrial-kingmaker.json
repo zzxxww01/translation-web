@@ -1,0 +1,21 @@
+{
+  "section_id": "19-apple-as-industrial-kingmaker",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "annotation",
+        "severity": "low",
+        "original_text": "Apple’s leading-edge chip requirements drive TSMC’s demand for EUV lithography.",
+        "description": "译文将“EUV lithography”译为“EUV 光刻（EUV lithography）”，存在过度加注的问题。“EUV”本身已是英文缩写，且“光刻”完美对应了“lithography”，此处再用括号补充原英文词组显得冗余。",
+        "why_it_matters": "违反了“避免对常见术语过度加注”的排查原则，括号内的英文打断了中文阅读的流畅感，降低了文本的简洁度。",
+        "suggestion": "删去括号内的英文，直接译为“EUV 光刻”或“EUV 光刻技术/光刻机”即可。"
+      }
+    ]
+  }
+}

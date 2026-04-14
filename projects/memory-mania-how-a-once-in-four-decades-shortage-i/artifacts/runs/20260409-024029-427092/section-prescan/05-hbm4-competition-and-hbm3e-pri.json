@@ -1,0 +1,67 @@
+{
+  "section_id": "05-hbm4-competition-and-hbm3e-pri",
+  "new_terms": [
+    {
+      "term": "re-rate",
+      "suggested_translation": "重新定价",
+      "context": "pricing can 're-rate' much more rapidly",
+      "confidence": 0.9
+    },
+    {
+      "term": "H200",
+      "suggested_translation": "H200",
+      "context": "incremental orders tied to H200 demand",
+      "confidence": 1.0
+    },
+    {
+      "term": "engineering samples",
+      "suggested_translation": "工程样品",
+      "context": "the latest HBM4 engineering samples from memory suppliers",
+      "confidence": 1.0
+    },
+    {
+      "term": "pin speed",
+      "suggested_translation": "引脚速率",
+      "context": "below target specifications in terms of pin speed",
+      "confidence": 0.95
+    },
+    {
+      "term": "signal integrity",
+      "suggested_translation": "信号完整性",
+      "context": "Hynix continues to demonstrate an advantage in signal integrity",
+      "confidence": 1.0
+    },
+    {
+      "term": "R200-class",
+      "suggested_translation": "R200级",
+      "context": "Accordingly, for R200-class HBM supply",
+      "confidence": 0.9
+    },
+    {
+      "term": "product mix transition",
+      "suggested_translation": "产品组合转换",
+      "context": "slow the pace of the product mix transition relative to prior expectations",
+      "confidence": 0.9
+    },
+    {
+      "term": "crossover",
+      "suggested_translation": "世代交替",
+      "context": "the meaningful crossover to HBM4 should happen in 2H26",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "commodity dram": "大宗DRAM",
+    "downcycle": "下行周期",
+    "upcycle": "上行周期",
+    "supercycle": "超级周期",
+    "hbm3e 12-hi": "12层HBM3E",
+    "asp": "平均售价 (ASP)",
+    "jitter": "抖动",
+    "rubin": "Rubin",
+    "yield-learning curve": "良率学习曲线",
+    "margin": "利润率"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-09T03:08:05.569591"
+}

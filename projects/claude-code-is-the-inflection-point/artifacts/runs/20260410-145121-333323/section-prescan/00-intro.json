@@ -1,0 +1,53 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "AWS",
+      "suggested_translation": "AWS",
+      "context": "cloud partners AWS, Google Cloud, Azure",
+      "confidence": 1.0
+    },
+    {
+      "term": "Trainium2/3",
+      "suggested_translation": "Trainium2/3",
+      "context": "associated supply chains such as Trainium2/3, TPUs and GPUs",
+      "confidence": 1.0
+    },
+    {
+      "term": "Coreweave",
+      "suggested_translation": "CoreWeave",
+      "context": "most notably in our Coreweave Q3’2025 earnings preview",
+      "confidence": 1.0
+    },
+    {
+      "term": "Datacenter Industry Model",
+      "suggested_translation": "数据中心行业模型",
+      "context": "Refer to our Datacenter Industry Model for a building-by-building tracker",
+      "confidence": 0.9
+    },
+    {
+      "term": "linear TV",
+      "suggested_translation": "线性电视",
+      "context": "described software like linear TV during the rise of the internet",
+      "confidence": 0.95
+    },
+    {
+      "term": "guidance miss",
+      "suggested_translation": "指引不及预期",
+      "context": "where we explicitly called out a large CapEx guidance miss",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "claude code": "Claude Code",
+    "agent": "智能体",
+    "capex": "资本支出",
+    "arr": "ARR",
+    "nand flash": "NAND",
+    "tokenomics model": "Tokenomics模型",
+    "anthropic": "Anthropic",
+    "openai": "OpenAI"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T14:51:48.924409"
+}

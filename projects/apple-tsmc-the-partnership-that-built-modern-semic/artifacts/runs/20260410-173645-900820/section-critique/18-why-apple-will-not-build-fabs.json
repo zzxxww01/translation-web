@@ -1,0 +1,39 @@
+{
+  "section_id": "18-why-apple-will-not-build-fabs",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 3,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "For Apple, the return on invested capital (ROIC) of building a fab is negative.",
+        "description": "术语与词汇表不一致。词汇表明确规定“ROIC (Return on Invested Capital)”应统一译为“投入资本回报率 (ROIC)”，而译文使用了“投资资本回报率”。",
+        "why_it_matters": "破坏了硬核财务分析文章中核心术语的全局一致性，且“投入资本回报率”在企业财务建模语境中更为标准。",
+        "suggestion": "将“投资资本回报率（ROIC）”修改为“投入资本回报率（ROIC）”。"
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "TSMC deploys 70,000+ process engineers, whereas Apple would need to build this workforce from scratch.",
+        "description": "“deploys”译为“部署了”在搭配“工程师”时带有轻微的翻译腔。中文语境中，“部署”多用于军队、服务器或战略计划，修饰人员时略显生硬。",
+        "why_it_matters": "优化动词搭配可以提升中文表达的地道性，使行文更符合商业分析师的自然语感。",
+        "suggestion": "建议改为“投入了”、“配备了”或“集结了”（“集结”能更好地呼应后文的“大军”一词）。"
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "...allows Apple to maintain 35-40% corporate operating margins.",
+        "description": "“corporate operating margins”译为“公司营业利润率”略显直白，在财务语境中，corporate 通常用来与具体的部门/业务线（division/segment）作区分。",
+        "why_it_matters": "补充“整体”二字能更精准地传达该指标代表的是苹果公司集团层面的利润率表现。",
+        "suggestion": "建议修改为“公司整体营业利润率”。"
+      }
+    ]
+  }
+}

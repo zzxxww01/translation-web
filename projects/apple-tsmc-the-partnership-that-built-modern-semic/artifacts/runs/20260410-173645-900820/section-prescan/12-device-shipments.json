@@ -1,0 +1,34 @@
+{
+  "section_id": "12-device-shipments",
+  "new_terms": [
+    {
+      "term": "Wearables",
+      "suggested_translation": "可穿戴设备",
+      "context": "Wearables carried growth, then stalled.",
+      "confidence": 1.0
+    },
+    {
+      "term": "AirPods",
+      "suggested_translation": "AirPods",
+      "context": "AirPods was the fastest-ramping product in Apple’s history",
+      "confidence": 1.0
+    },
+    {
+      "term": "datacenter silicon",
+      "suggested_translation": "数据中心芯片",
+      "context": "signals Apple’s datacenter silicon ambitions (Baltra) are more than rumors.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "device base": "设备基数",
+    "unit volumes": "出货量",
+    "vision pro": "Vision Pro",
+    "silicon intensity": "硅含量",
+    "c-series": "C系列",
+    "spatial computing": "空间计算",
+    "baltra": "Baltra"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:44:40.419265"
+}

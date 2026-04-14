@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "source": "By Sravan Kundojjala, Gerald Wong, Dylan Patel, and Jeff Koch",
+      "translation": "作者：Sravan Kundojjala、Gerald Wong、Dylan Patel、Jeff Koch",
+      "tokenized_translation": "作者：[[[LINK_1|Sravan Kundojjala]]]、[[[LINK_2|Gerald Wong]]]、[[[LINK_3|Dylan Patel]]]、[[[LINK_4|Jeff Koch]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Jan 08, 2026 · Paid",
+      "translation": "2026 年 1 月 8 日 · 付费文章",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Wafer Demand Model, Node Economics, and the shifting power dynamics as AI reshapes the foundry landscape",
+      "translation": "晶圆需求模型、制程节点经济学，以及随着AI重塑晶圆代工厂格局而转变的权力动态",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    }
+  ]
+}

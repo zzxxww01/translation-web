@@ -1,0 +1,149 @@
+{
+  "added": 24,
+  "terms": [
+    {
+      "original": "Supercycle",
+      "translation": "超级周期",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "cost per bit",
+      "translation": "每比特成本",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "upcycle",
+      "translation": "上行周期",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "bit supply",
+      "translation": "位元供应",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ASP",
+      "translation": "平均售价 (ASP)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "LPDDR",
+      "translation": "LPDDR",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "greenfield",
+      "translation": "新建（绿地）",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "hyperscaler",
+      "translation": "超大规模云服务商",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "OEM",
+      "translation": "OEM",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "scale-out",
+      "translation": "横向扩展",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "commodity DRAM",
+      "translation": "大宗DRAM",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "bit output",
+      "translation": "比特产出",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "WFE",
+      "translation": "WFE (晶圆制造设备)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "cleanroom",
+      "translation": "洁净室",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "node migration",
+      "translation": "节点演进",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "12-Hi",
+      "translation": "12层堆叠",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "DDR",
+      "translation": "DDR",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PSMC",
+      "translation": "力积电",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Core Research",
+      "translation": "Core Research",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "DDR5",
+      "translation": "DDR5",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "LPDDR5",
+      "translation": "LPDDR5",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "HBM3E 12-hi",
+      "translation": "12层HBM3E",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ASML",
+      "translation": "阿斯麦 (ASML)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "multipatterning",
+      "translation": "多重曝光",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    }
+  ]
+}

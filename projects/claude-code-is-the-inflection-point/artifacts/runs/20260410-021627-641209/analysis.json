@@ -1,0 +1,1017 @@
+{
+  "theme": "Anthropic's Claude Code represents a paradigm shift towards 'agentic' AI, which is poised to disrupt not only the software development industry but the entire information work economy, fundamentally challenging the business models of incumbents like Microsoft and OpenAI.",
+  "key_arguments": [
+    "Anthropic, powered by its agentic AI tool Claude Code, is now outpacing OpenAI in revenue growth, with its expansion limited only by compute availability.",
+    "Claude Code is not merely a coding assistant but a true 'agent' capable of understanding, planning, and executing complex, multi-step tasks, offering a glimpse into the future of human-AI interaction.",
+    "Software development is just the 'beachhead'; the true target for agentic AI is the $15 trillion information work economy, as most knowledge work follows a READ-THINK-WRITE-VERIFY pattern that agents can automate.",
+    "The collapsing cost of AI intelligence is accelerating this disruption, threatening the 'seat-based' software model exemplified by Microsoft Office 365.",
+    "Microsoft faces a strategic conundrum: its Azure cloud profits from renting GPUs to AI challengers like Anthropic, who are simultaneously building products that will dismantle its lucrative Office software empire.",
+    "Anthropic is winning not on raw benchmark scores but on superior 'agentic' capabilities, as the orchestration of AI actions over long tasks becomes more critical than single-prompt performance."
+  ],
+  "structure_summary": "The article follows a classic analyst report structure. It opens with a bold thesis (Anthropic overtaking OpenAI) and introduces the core technology (Claude Code). It then expands the scope to explain the broader market implications (disruption of information work), analyzes the competitive dynamics (Microsoft's dilemma), dissects the reasons for the shift ('why Anthropic is winning'), and concludes with a 'show and tell' section to provide concrete examples. The flow is designed to build a convincing, evidence-backed argument from a specific product to a macro-level industry transformation.",
+  "terminology": [
+    {
+      "term": "Agentic",
+      "context_meaning": "Describes an AI system's capability to autonomously understand goals, create multi-step plans, and execute them by interacting with its environment (e.g., a computer's file system, terminal). It's more than just responding to a prompt.",
+      "translation": "智能体化",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "This is the core concept of the article. 「智能体化」 (zhì néng tǐ huà) or the noun 「智能体」 (Agent) accurately captures the sense of an autonomous, goal-oriented entity. A first-use note explaining it as an AI that can plan and execute tasks is crucial for reader comprehension."
+    },
+    {
+      "term": "Claude Code",
+      "context_meaning": "The name of Anthropic's terminal-native AI agent product, which is the central subject of the article.",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "Product names should be preserved in English to maintain brand recognition and searchability."
+    },
+    {
+      "term": "Beachhead",
+      "context_meaning": "A strategic foothold in a market (coding) from which to expand into a larger market (all information work). A military metaphor applied to business strategy.",
+      "translation": "抢滩阵地",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "「抢滩阵地」 (qiǎng tān zhèn dì) is the standard and vivid Chinese equivalent for this business metaphor, perfectly conveying the idea of establishing an initial, hard-won position for a larger invasion."
+    },
+    {
+      "term": "Information work / Information worker",
+      "context_meaning": "Refers to jobs primarily involving the creation, processing, and distribution of information, as opposed to manual labor. The target market for agentic AI disruption.",
+      "translation": "信息工作 / 信息工作者",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "This is a standard economic term. 「信息工作」 (xìn xī gōng zuò) is the direct and correct translation."
+    },
+    {
+      "term": "Seat-based software model",
+      "context_meaning": "A business model where software is sold on a per-user subscription basis (e.g., Microsoft Office 365).",
+      "translation": "按席位付费的软件模式",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "「按席位付费」 (àn xí wèi fù fèi) is the industry-standard term for 'per-seat licensing' in China. It's clear and precise."
+    },
+    {
+      "term": "Vibe coding",
+      "context_meaning": "An informal term for coding based on intuition and high-level direction, often by giving instructions to an AI, rather than writing every line of code manually.",
+      "translation": "氛围感编程",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "This is insider jargon. A literal translation like 「氛围感编程」 (fēn wéi gǎn biān chéng) captures the 'vibe' part. A brief annotation on first use explaining it as intuitive, high-level, AI-assisted coding is necessary."
+    },
+    {
+      "term": "Benchmark-maxxing",
+      "context_meaning": "Slang for the practice of optimizing an AI model obsessively to achieve the highest possible scores on standardized benchmarks, sometimes at the expense of real-world utility.",
+      "translation": "唯基准至上 / 卷基准",
+      "strategy": "translate",
+      "first_occurrence_note": true,
+      "rationale": "This is niche slang. 「唯基准至上」(wéi jī zhǔn zhì shàng) is a more formal translation capturing 'benchmark-supremacy'. 「卷基准」(juǎn jī zhǔn) is a more colloquial and vivid option using the popular term '卷' (to relentlessly compete). The choice depends on the desired tone, but a first-use annotation is vital."
+    },
+    {
+      "term": "Orchestration layer",
+      "context_meaning": "The software or system responsible for coordinating multiple AI agents or model components to perform a complex task.",
+      "translation": "编排层",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "「编排」 (biān pái) is the standard technical term for 'orchestration' in software and cloud computing contexts, as in container orchestration."
+    },
+    {
+      "term": "Tokenomics",
+      "context_meaning": "The name of the author's proprietary economic model for analyzing AI companies. It is NOT related to cryptocurrency/blockchain.",
+      "translation": "Tokenomics 模型",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "This is a proper noun for the author's model. Preserving it and adding a note is critical to prevent confusion with the well-known blockchain term '代币经济学'."
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "node",
+      "context_meaning": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip on Wafer on Substrate",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "英伟达架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "Assertive, forward-looking, and analytical, with an 'insider' feel. The tone is confident and makes bold predictions, often using strong, dramatic language and financial/business jargon.",
+    "target_audience": "Technically-savvy professionals, investors, and analysts in the AI, cloud computing, and finance sectors.",
+    "translation_voice": "The Chinese voice should be sharp, authoritative, and professional (资深行业分析师的口吻). It must retain the original's confidence and forward-looking perspective. Use precise, industry-standard terminology, but also be able to handle informal jargon and metaphors vividly. The voice should project expertise and deep industry insight, not dry academic neutrality."
+  },
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "Caught Between Two Businesses",
+      "issue": "The phrase 'renting GPUs to the barbarians who will ruin their castle' is a strong, dramatic metaphor.",
+      "suggestion": "Translate this metaphor faithfully to preserve the dramatic and critical tone. For example, 「将 GPU 租给那些将要摧毁自家城堡的野蛮人」. Flattening this to 'renting to competitors' would lose the article's sharp analytical edge."
+    },
+    {
+      "type": "accuracy",
+      "location": "Introduction",
+      "issue": "The sentence 'While you blinked, AI consumed all of software development' is a deliberate hyperbole to create a sense of urgency and rapid change.",
+      "suggestion": "The translation should capture this dramatic effect. A phrase like 「就在你眨眼之间，人工智能已经吞噬了整个软件开发行业」 maintains the intended impact."
+    },
+    {
+      "type": "accuracy",
+      "location": "Will the Pretrain Matter?",
+      "issue": "The 'TCP/IP analogy for agents' compares the foundational role of agents to the internet's core protocol.",
+      "suggestion": "This analogy is likely understood by the target audience. Translate it directly, e.g., 「将智能体比作 TCP/IP 协议」, as the concept will resonate with tech professionals."
+    },
+    {
+      "type": "accuracy",
+      "location": "Introduction",
+      "issue": "The term 'Tokenomics' is used as the name of the author's financial model, which is a significant departure from its common meaning in the blockchain/crypto space ('代币经济学').",
+      "suggestion": "Preserve the term in English ('Tokenomics 模型') and add a translator's note on its first appearance to clarify that it refers to the author's proprietary analysis model for AI companies, not cryptocurrency economics. This is crucial to prevent misunderstanding."
+    },
+    {
+      "type": "accuracy",
+      "location": "Throughout the article",
+      "issue": "The source text uses many short, punchy paragraphs, along with links, timestamps, and image source attributions that break the narrative flow.",
+      "suggestion": "For the main body text, the translator should consider combining very short, related sentences or paragraphs into a single, more fluid Chinese paragraph to improve readability. The metadata (timestamps, links) should be handled consistently, perhaps formatted distinctly or omitted if they are not essential to the argument, based on the final publication style."
+    }
+  ],
+  "guidelines": [
+    "Translate the core concept 'agentic' consistently as '智能体化' and 'agent' as '智能体'. On first use, provide a brief parenthetical explanation, e.g., 「智能体（指能够自主规划并执行复杂任务的 AI）」.",
+    "Preserve the author's assertive and predictive tone. Use strong, definitive phrasing such as 「我们认为」、「注定会」、「正面临一个根本性的困境」 instead of weaker, more passive language.",
+    "Maintain all proper nouns in English, including company names (Anthropic, OpenAI), product names (Claude Code, Office 365), and model names (Opus 4.5, GPT-5.2), to ensure alignment with industry conventions.",
+    "For financial acronyms like ARR and CapEx, provide the full Chinese translation followed by the English acronym in parentheses on first mention, e.g., 「年度经常性收入 (ARR)」 and 「资本支出 (CapEx)」.",
+    "Adapt sentence structure for natural Chinese flow. Combine short, staccato English sentences into smoother, logically connected Chinese sentences. Conversely, break down long English sentences with multiple subordinate clauses into shorter, clearer sentences in Chinese.",
+    "Handle informal jargon like 'vibe coding' and 'benchmark-maxxing' by providing a creative translation paired with a brief, non-intrusive explanation on first use to ensure the meaning is clear without sacrificing the insider tone.",
+    "Faithfully reproduce the meaning and intensity of metaphors ('beachhead', 'barbarians at the castle'). Avoid literal translations that sound awkward in Chinese; instead, find equivalent powerful expressions that convey the same strategic or dramatic intent."
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+      "relation_to_previous": "N/A. This is the opening section.",
+      "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+      "key_points": [
+        "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+        "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+        "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+      ],
+      "translation_notes": [
+        "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+        "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+        "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+      ]
+    },
+    "01-claude-code-and-the-agentic-fu": {
+      "role_in_article": "Defines the central concept of 'agentic AI' and frames it as the next major paradigm in human-computer interaction. It uses historical context (GPT-3, Stable Diffusion, ChatGPT) to position Claude Code not as an incremental improvement, but as a fundamental breakthrough in organizing AI capabilities.",
+      "relation_to_previous": "Directly follows the intro's promise to 'dig deeper into Claude Code' by first explaining the 'agentic' paradigm that makes it so significant.",
+      "relation_to_next": "It establishes the conceptual importance of Claude Code as a 'breakthrough in the agentic layer' without detailing what the product actually is. This creates a need for the next section to provide a concrete product definition.",
+      "key_points": [
+        "'Agents' will be the primary way humans interact with AI.",
+        "Claude Code is a breakthrough in the 'agentic layer,' which organizes model outputs into complex, goal-oriented actions.",
+        "This breakthrough is presented as a historical milestone on par with GPT-3 (proving scale) or ChatGPT (proving demand)."
+      ],
+      "translation_notes": [
+        "The term 'Agentic' (智能体) is the core technical concept of the article. Its translation must be precise and used consistently throughout. '智能体' is the standard and appropriate term.",
+        "The contrast between ephemeral 'viral moments' (like the Studio Ghibli images) and a fundamental 'breakthrough' (Claude Code) must be clearly preserved to maintain the argument's structure.",
+        "The list of AI milestones creates a narrative of progress; the translation should maintain this sense of historical evolution culminating in the present moment."
+      ]
+    },
+    "02-what-is-claude-code": {
+      "role_in_article": "Provides a concrete definition of the product. It moves from the abstract concept of 'agentic AI' to the specifics of Claude Code as a terminal-native CLI tool that can read an environment, plan, and execute multi-step tasks. It differentiates it from competitors and introduces its potential beyond coding.",
+      "relation_to_previous": "Answers the question raised by the previous section ('What is this breakthrough technology, actually?') by providing a technical and functional description of Claude Code.",
+      "relation_to_next": "It concludes by stating that traditional benchmarks don't capture the power of the underlying model (Opus 4.5) for 'agentic long horizon tasks.' This pivots the focus from *what it is* to *what it can do*, setting up the next section's discussion on its broader impact beyond coding.",
+      "key_points": [
+        "Claude Code is a command-line interface (CLI) tool, not just an IDE plugin, giving it deep system access.",
+        "It operates by planning and iteratively executing multi-step tasks within the user's computing environment.",
+        "Its potential is far greater than coding, suggesting a future as a general-purpose 'Claude Computer'.",
+        "Its true capability lies in 'agentic long horizon tasks,' which linear benchmarks fail to measure."
+      ],
+      "translation_notes": [
+        "Technical terms like 'terminal-native', 'CLI', and 'IDE' should use standard Chinese industry translations (终端原生, 命令行界面, 集成开发环境) to ensure clarity for a technical audience.",
+        "The conceptual leap from 'Claude Code' to 'Claude Computer' is a key part of the argument and should be translated to preserve this sense of expanding scope (e.g., '克劳德计算机').",
+        "The phrase 'agentic long horizon tasks' (智能体长时程任务) is a key technical descriptor and requires a precise, consistent translation."
+      ]
+    },
+    "03-beyond-coding-the-beachhead": {
+      "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+      "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+      "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+      "key_points": [
+        "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+        "The true market is the $15 trillion economy of over 1 billion information workers.",
+        "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+      ],
+      "translation_notes": [
+        "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+        "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+        "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+      ]
+    },
+    "04-the-price-of-intelligence-is-c": {
+      "role_in_article": "Explains the core economic driver of the disruption: the massive deflation in the cost of AI-generated intelligence (tokens). It argues that once quality crosses a certain threshold, this cost collapse makes the automation of information work an economic inevitability. It uses the Accenture deal as a real-world proof point.",
+      "relation_to_previous": "Answers the 'why' behind the previous section's claim that the information economy is at risk. The mechanism is economic: the core input, 'intelligence,' is becoming dramatically cheaper.",
+      "relation_to_next": "It concludes by identifying Microsoft as the company most threatened by this trend, as its business model is built on tools for human information workers. This serves as a direct transition into the competitive analysis.",
+      "key_points": [
+        "The cost of AI-generated intelligence is collapsing, which is fundamentally changing the economics of information work.",
+        "This deflation will 'reprice' the margins of any company reliant on repeatable human-driven information processing.",
+        "Major enterprises (via partners like Accenture) are already beginning to deploy this technology at scale.",
+        "Microsoft's business model is uniquely vulnerable to this shift."
+      ],
+      "translation_notes": [
+        "The title 'The Price of Intelligence is Collapsing' (智能的价格正在崩溃) is a strong thesis statement; the translation must be equally powerful and declarative.",
+        "The financial concept of 'repricing a company's margin' (重塑公司的利润空间) must be translated with business accuracy.",
+        "The colloquial phrase 'human click buttons' should be translated into a natural-sounding equivalent for 'manual, repetitive computer tasks' (例如: 人工点击按钮的操作 or 依赖人工的点击操作) rather than a stiff, literal translation."
+      ]
+    },
+    "05-competitive-landscape-microso": {
+      "role_in_article": "Zooms in on the competitive implications of the agentic AI shift, focusing on Microsoft as the primary incumbent at risk. The section argues that the entire 'seat-based software model' is being made obsolete by agents that can directly interact with data, bypassing the human-centric interfaces of tools like Office, Salesforce, Tableau, and Figma.",
+      "relation_to_previous": "This section directly elaborates on the previous section's closing statement that Microsoft is under threat. It explains precisely *why* Microsoft's business model is vulnerable.",
+      "relation_to_next": "By defining the nature of the threat to Microsoft's business model, it sets the stage for the next section, 'Caught Between Two Businesses,' which will likely analyze the strategic dilemma and internal conflict this threat creates for Microsoft.",
+      "key_points": [
+        "The agentic AI paradigm directly threatens the 'seat-based software model' that underpins much of the enterprise software industry.",
+        "Microsoft's Office 365 is the archetypal example of a business at risk.",
+        "Any software that acts as a 'form and workflow wrapper' over a database is vulnerable because AI agents can access the underlying data and logic directly, making the human-facing UX redundant."
+      ],
+      "translation_notes": [
+        "'Seat-based software model' (按席位/账户收费的软件模式) is a core business term that needs a clear and consistent translation.",
+        "'Conundrum' (困境) in the title indicates a complex, difficult-to-solve problem, not just simple competition. The tone of the translation should reflect this strategic depth.",
+        "The technical description 'form and workflow wrapper' (表单和工作流的封装/包装器) should be translated to capture the idea of a superficial software layer that can be bypassed by AI."
+      ]
+    },
+    "06-caught-between-two-businesses": {
+      "role_in_article": "Analyzes Microsoft's strategic dilemma, likely framing it as a classic 'innovator's dilemma.' Microsoft is torn between defending its highly profitable legacy business (seat-based software) and fully embracing the disruptive agentic AI paradigm that, while it is a leader in, would ultimately cannibalize its core revenue streams.",
+      "relation_to_previous": "Follows the description of the threat to Microsoft by explaining *why it is so difficult for them to respond effectively*. It shifts from an external threat analysis to an internal strategic conflict.",
+      "relation_to_next": "As the final analytical section, it likely serves to reinforce the article's main thesis by demonstrating the profound and difficult challenges the new paradigm poses even for the most powerful incumbents, thereby highlighting the disruptive potential of Anthropic's approach.",
+      "key_points": [
+        "Microsoft is in a strategic conflict, caught between its legacy business model and the new AI paradigm.",
+        "This situation mirrors the classic 'innovator's dilemma,' where a company's existing success inhibits its ability to adapt to disruptive innovation.",
+        "The author's admission of a previous incorrect forecast adds nuance and credibility to the current analysis."
+      ],
+      "translation_notes": [
+        "The title 'Caught Between Two Businesses' (陷入两种业务的夹缝中 or 两种业务之间的困境) must convey the feeling of being trapped and conflicted.",
+        "The reference to a past incorrect prediction ('we recently (wrongly) called...') should be translated carefully to preserve the author's tone of analytical humility, which builds reader trust.",
+        "The translator should be aware of the business concept of the 'innovator's dilemma' (创新者的窘境), as the section's argument heavily relies on this framework, even if not explicitly named."
+      ]
+    },
+    "07-anthropics-funding-and-surge": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "08-will-the-pretrain-matter": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "09-semianalysis-vibe-coding-show": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 10,
+  "paragraph_count": 170,
+  "word_count": 5462
+}

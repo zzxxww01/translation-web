@@ -1,0 +1,203 @@
+{
+  "added": 33,
+  "terms": [
+    {
+      "original": "RL",
+      "translation": "RL (强化学习)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "post-training",
+      "translation": "后训练",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "pre-training",
+      "translation": "预训练",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "GDPval",
+      "translation": "GDPval",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Computer Use Agents",
+      "translation": "计算机使用智能体",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Meta",
+      "translation": "Meta",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "evaluations",
+      "translation": "评估",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Scale AI",
+      "translation": "Scale AI",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "mid-training",
+      "translation": "中期训练",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "MCP",
+      "translation": "MCP",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "AWS",
+      "translation": "AWS",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "UI",
+      "translation": "UI",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "UI gyms",
+      "translation": "UI训练场",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "API",
+      "translation": "API",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "RL environments",
+      "translation": "强化学习环境",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PR",
+      "translation": "PR (Pull Request/拉取请求)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "rollout",
+      "translation": "推演 / 采样轨迹",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ARR",
+      "translation": "ARR (年度经常性收入)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Data Foundry",
+      "translation": "数据代工厂",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "rubric",
+      "translation": "评分标准",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ML",
+      "translation": "机器学习 (ML)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "IMO",
+      "translation": "IMO (国际数学奥林匹克)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "OpenAI",
+      "translation": "OpenAI",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "RFT",
+      "translation": "强化微调",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Trainium",
+      "translation": "Trainium",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Strategic Deployment",
+      "translation": "战略部署",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "YC",
+      "translation": "YC",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "closed loop",
+      "translation": "闭环",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Wet Lab",
+      "translation": "湿实验室",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "AlphaEvolve",
+      "translation": "AlphaEvolve",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ARC-AGI",
+      "translation": "ARC-AGI",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "orchestrator",
+      "translation": "编排器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "SG Lang",
+      "translation": "SGLang",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    }
+  ]
+}

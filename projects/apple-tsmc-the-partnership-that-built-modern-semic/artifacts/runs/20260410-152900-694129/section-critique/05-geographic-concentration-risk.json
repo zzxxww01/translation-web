@@ -1,0 +1,21 @@
+{
+  "section_id": "05-geographic-concentration-risk",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.8,
+    "conciseness_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "A-series and M-series chip",
+        "description": "中英文之间缺少标准空格（CJK-Latin spacing 规范）。译文中的“A系列”与“M系列”英文字母与中文字符紧贴在一起。",
+        "why_it_matters": "保持严格的中英文排版规范，能够提升专业研报的视觉整洁度与阅读体验。",
+        "suggestion": "在英文字母与中文字符之间增加空格，改为“A 系列与 M 系列芯片”。"
+      }
+    ]
+  }
+}

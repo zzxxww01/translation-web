@@ -244,9 +244,12 @@ class GeminiProvider(LLMProvider):
         override = os.getenv("GEMINI_USE_REST")
         if override is not None:
             return override.strip().lower() in {"1", "true", "yes", "y"}
-        # In the current Windows + Clash Verge environment, proxied REST calls
-        # are the only path that succeeds consistently across flash/pro/preview.
-        return self.proxy_config is not None
+        # Default to the SDK path even when a proxy is configured.
+        # Recent longform failures came from the proxied REST transport
+        # (`requests` -> Clash Verge -> Gemini REST) terminating TLS reads
+        # with SSLEOFError. Keep REST available via GEMINI_USE_REST=true for
+        # targeted debugging, but do not force it just because a proxy exists.
+        return False
 
     def _create_client(self, genai_module: ModuleType, api_key: str):
         try:

@@ -1,0 +1,58 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "Claude Code",
+      "suggested_translation": "Claude Code",
+      "context": "The name of Anthropic's AI-powered code generation product, central to this article.",
+      "confidence": 1.0
+    },
+    {
+      "term": "AI Agents",
+      "suggested_translation": "AI 智能体",
+      "context": "A key concept described as the future of how AI will function. The existing term 'agentic' (智能体化) is the adjectival form.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Anthropic",
+      "suggested_translation": "Anthropic",
+      "context": "The name of the AI lab that created Claude. A key entity in the article.",
+      "confidence": 1.0
+    },
+    {
+      "term": "OpenAI",
+      "suggested_translation": "OpenAI",
+      "context": "The name of the main competitor to Anthropic mentioned in the article.",
+      "confidence": 1.0
+    },
+    {
+      "term": "ARR",
+      "suggested_translation": "年度经常性收入 (ARR)",
+      "context": "Abbreviation for Annual Recurring Revenue, a key financial metric used to compare Anthropic and OpenAI's growth.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Trainium",
+      "suggested_translation": "Trainium",
+      "context": "The name of AWS's custom AI accelerator chip (mentioned as Trainium2/3).",
+      "confidence": 0.9
+    },
+    {
+      "term": "Coreweave",
+      "suggested_translation": "Coreweave",
+      "context": "Name of a cloud provider specializing in GPU infrastructure, mentioned in relation to OpenAI's data center delays.",
+      "confidence": 0.9
+    },
+    {
+      "term": "AWS",
+      "suggested_translation": "AWS",
+      "context": "Abbreviation for Amazon Web Services, mentioned as a key cloud partner.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "NAND": "NAND"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-09T23:16:10.049891"
+}

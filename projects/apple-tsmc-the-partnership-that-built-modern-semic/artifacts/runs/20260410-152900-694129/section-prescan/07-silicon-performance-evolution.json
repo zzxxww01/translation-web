@@ -1,0 +1,63 @@
+{
+  "section_id": "07-silicon-performance-evolution",
+  "new_terms": [
+    {
+      "term": "System-Level Cache (SLC)",
+      "suggested_translation": "系统级缓存 (SLC)",
+      "context": "massive fast L1, large shared L2, and a System-Level Cache (SLC) before DRAM.",
+      "confidence": 0.95
+    },
+    {
+      "term": "MALL",
+      "suggested_translation": "MALL (内存附加末级缓存)",
+      "context": "AMD Strix Halo’s MALL is GPU-only.",
+      "confidence": 0.9
+    },
+    {
+      "term": "8-wide decode",
+      "suggested_translation": "8宽解码",
+      "context": "Apple introduced 8-wide decode with A14/M1 in 2020",
+      "confidence": 0.95
+    },
+    {
+      "term": "E-cores",
+      "suggested_translation": "能效核",
+      "context": "extremely efficient smaller E-cores.",
+      "confidence": 0.95
+    },
+    {
+      "term": "fine-grained coherency",
+      "suggested_translation": "细粒度一致性",
+      "context": "Qualcomm mobile chips use shared LPDDR5X but lack Apple’s fine-grained coherency.",
+      "confidence": 0.9
+    },
+    {
+      "term": "dynamic voltage and frequency scaling",
+      "suggested_translation": "动态电压和频率调节 (DVFS)",
+      "context": "enable millisecond-level dynamic voltage and frequency scaling.",
+      "confidence": 0.95
+    },
+    {
+      "term": "races to sleep",
+      "suggested_translation": "快速休眠",
+      "context": "The chip races to sleep, completing bursts at high power and dropping to near-zero idle",
+      "confidence": 0.9
+    },
+    {
+      "term": "vapor chamber",
+      "suggested_translation": "均热板",
+      "context": "The iPhone 17 Pro’s vapor chamber was co-designed with A19 Pro’s thermal envelope.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "A-Series": "A系列",
+    "M-Series": "M系列",
+    "Neural Engine": "神经网络引擎",
+    "Unified Memory Architecture": "统一内存架构",
+    "vertical integration": "垂直整合",
+    "thermal envelope": "散热包络"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:09:41.122175"
+}

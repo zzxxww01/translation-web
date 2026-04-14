@@ -1,0 +1,1734 @@
+{
+  "section_id": "03-beyond-coding-the-beachhead",
+  "title": "Beyond Coding: The Beachhead, not the Destination",
+  "title_translation": "超越编程：是滩头阵地，而非终点",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Coding was once the most valuable work of all, with programmers in hot demand during the 2020 era of software engineering. Coding is now a beachhead in terms of the disruption that agentic information processing has, and the larger 15 trillion-dollar information work economy is now at risk. There are 1b+ information workers, or roughly 1/3rd of the global 3.6 billion workforce per ILO.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0070",
+      "parent_block_index": 70,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Coding was once the most valuable work of all, with programmers in hot demand during the 2020 era of software engineering. Coding is now a beachhead in terms of the disruption that agentic information processing has, and the larger 15 trillion-dollar information work economy is now at risk. There are 1b+ information workers, or roughly 1/3rd of the global 3.6 billion workforce per ILO.",
+      "parent_block_plain_text": "Coding was once the most valuable work of all, with programmers in hot demand during the 2020 era of software engineering. Coding is now a beachhead in terms of the disruption that agentic information processing has, and the larger 15 trillion-dollar information work economy is now at risk. There are 1b+ information workers, or roughly 1/3rd of the global 3.6 billion workforce per ILO.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 388,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "编程曾是最具价值的工作，在 2020 年代的软件工程热潮中，程序员可谓炙手可热。如今，面对智能体化信息处理掀起的颠覆狂潮，编程仅仅是一个抢滩阵地，规模高达 15 万亿美元的庞大信息工作经济已然岌岌可危。根据国际劳工组织（ILO）的数据，全球 36 亿劳动力中，信息工作者超过 10 亿，占比约达三分之一。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.709887",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Every single workflow in the information work category is often similar and shares a workflow that Claude Code proves works for software. READ (ingest unstructured information), THINK (apply domain knowledge), WRITE (produce structured output) and then VERIFY (check against standards). This is large swathes of most information workers (including research!) and if Agents can eat software, what labor pool can they not touch?",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0071",
+      "parent_block_index": 71,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Every single workflow in the information work category is often similar and shares a workflow that Claude Code proves works for software. READ (ingest unstructured information), THINK (apply domain knowledge), WRITE (produce structured output) and then VERIFY (check against standards). This is large swathes of most information workers (including research!) and if Agents can eat software, what labor pool can they not touch?",
+      "parent_block_plain_text": "Every single workflow in the information work category is often similar and shares a workflow that Claude Code proves works for software. READ (ingest unstructured information), THINK (apply domain knowledge), WRITE (produce structured output) and then VERIFY (check against standards). This is large swathes of most information workers (including research!) and if Agents can eat software, what labor pool can they not touch?",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 426,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "信息工作领域的各项工作流往往高度相似，均遵循一套已被 Claude Code 在软件领域验证行之有效的工作流：阅读（摄取非结构化信息）、思考（运用领域知识）、输出（生成结构化结果），最后验证（对照标准核查）。这构成了绝大多数信息工作者（甚至包括研究人员！）的核心工作内容。如果智能体（指能够自主规划并执行复杂任务的 AI）能够吞噬软件行业，还有哪个劳动力市场能独善其身？",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.709951",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Our view is quite a few, and with the rise of Claude Code (and Cowork) the total addressable market of agents is much larger than just LLMs. Niche markets like customer support and software development will start to address the larger financial services, legal, consulting, and other industries. This is the core focus of the SemiAnalysis Tokenomics Model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Model",
+          "start": 326,
+          "end": 355,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0072",
+      "parent_block_index": 72,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Our view is quite a few, and with the rise of Claude Code (and Cowork) the total addressable market of agents is much larger than just LLMs. Niche markets like customer support and software development will start to address the larger financial services, legal, consulting, and other industries. This is the core focus of the [SemiAnalysis Tokenomics Model](https://semianalysis.com/tokenomics-model/).",
+      "parent_block_plain_text": "Our view is quite a few, and with the rise of Claude Code (and Cowork) the total addressable market of agents is much larger than just LLMs. Niche markets like customer support and software development will start to address the larger financial services, legal, consulting, and other industries. This is the core focus of the SemiAnalysis Tokenomics Model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Model",
+          "start": 326,
+          "end": 355,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 356,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们认为，智能体必将席卷众多领域。随着 Claude Code（以及 Cowork）的强势崛起，智能体的总潜在市场（TAM）远超单纯的大语言模型（LLM）。客户支持和软件开发等垂直领域仅仅是起点，智能体必将大举进军金融服务、法律、咨询等更为庞大的行业。这正是 SemiAnalysis Tokenomics 模型（译注：此处指作者为 AI 公司建立的专属财务分析模型，而非加密货币领域的代币经济学）的核心关注点。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710033",
+          "tokenized_text": "我们认为，智能体必将席卷众多领域。随着 Claude Code（以及 Cowork）的强势崛起，智能体的总潜在市场（TAM）远超单纯的大语言模型（LLM）。客户支持和软件开发等垂直领域仅仅是起点，智能体必将大举进军金融服务、法律、咨询等更为庞大的行业。这正是 [[[LINK_1|SemiAnalysis Tokenomics 模型]]]（译注：此处指作者为 AI 公司建立的专属财务分析模型，而非加密货币领域的代币经济学）的核心关注点。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!UO8Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F322aa44f-6be7-4182-9a2a-d8845c6a81c5_1430x818.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!UO8Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F322aa44f-6be7-4182-9a2a-d8845c6a81c5_1430x818.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0073",
+      "parent_block_index": 73,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!UO8Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F322aa44f-6be7-4182-9a2a-d8845c6a81c5_1430x818.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!UO8Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F322aa44f-6be7-4182-9a2a-d8845c6a81c5_1430x818.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!UO8Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F322aa44f-6be7-4182-9a2a-d8845c6a81c5_1430x818.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!UO8Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F322aa44f-6be7-4182-9a2a-d8845c6a81c5_1430x818.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710050",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!UO8Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F322aa44f-6be7-4182-9a2a-d8845c6a81c5_1430x818.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Source: McKinsey, Mordor Intelligence, Grand View Research, Precedence Research. Generated by Claude Code.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0074",
+      "parent_block_index": 74,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: McKinsey, Mordor Intelligence, Grand View Research, Precedence Research. Generated by Claude Code.",
+      "parent_block_plain_text": "Source: McKinsey, Mordor Intelligence, Grand View Research, Precedence Research. Generated by Claude Code.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 106,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：McKinsey，Mordor Intelligence，Grand View Research，Precedence Research。由 Claude Code 生成。",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626914",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：麦肯锡（McKinsey）、Mordor Intelligence、Grand View Research、Precedence Research。由 Claude Code 生成。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710064",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：McKinsey，Mordor Intelligence，Grand View Research，Precedence Research。由 Claude Code 生成。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Given the “killer use case” in coding, and the clear generalizability of Claude Code / Cowork, this justifies a completely different calculus. Automating most call and response and information fetching is likely doable, and this opens the absolute dollars possible. The goal of the tokenomics model is to track additional killer use cases and TAM as Agentic AI expands into all facets of business.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "goal of the tokenomics model",
+          "start": 270,
+          "end": 298,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0075",
+      "parent_block_index": 75,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Given the “killer use case” in coding, and the clear generalizability of Claude Code / Cowork, this justifies a completely different calculus. Automating most call and response and information fetching is likely doable, and this opens the absolute dollars possible. The [goal of the tokenomics model](https://semianalysis.com/tokenomics-model/) is to track additional killer use cases and TAM as Agentic AI expands into all facets of business.",
+      "parent_block_plain_text": "Given the “killer use case” in coding, and the clear generalizability of Claude Code / Cowork, this justifies a completely different calculus. Automating most call and response and information fetching is likely doable, and this opens the absolute dollars possible. The goal of the tokenomics model is to track additional killer use cases and TAM as Agentic AI expands into all facets of business.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "goal of the tokenomics model",
+          "start": 270,
+          "end": 298,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 397,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "鉴于编程领域已跑出“杀手级用例”，且 Claude Code 与 Cowork 展现出清晰的通用性，我们必须采用一套截然不同的估值逻辑。将绝大多数问答交互和信息检索实现自动化已具备可行性，这将彻底打开商业变现的绝对天花板。随着智能体化 AI 全面渗透商业的各个角落，Tokenomics 模型的核心目标便是持续追踪不断涌现的杀手级用例及其总潜在市场（TAM）。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710110",
+          "tokenized_text": "鉴于编程领域已跑出“杀手级用例”，且 Claude Code 与 Cowork 展现出清晰的通用性，我们必须采用一套截然不同的估值逻辑。将绝大多数问答交互和信息检索实现自动化已具备可行性，这将彻底打开商业变现的绝对天花板。随着智能体化 AI 全面渗透商业的各个角落，[[[LINK_1|Tokenomics 模型的核心目标]]]便是持续追踪不断涌现的杀手级用例及其总潜在市场（TAM）。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Adoption Constraints: Task Horizon",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0076",
+      "parent_block_index": 76,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Adoption Constraints: Task Horizon",
+      "parent_block_plain_text": "Adoption Constraints: Task Horizon",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 34,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "落地瓶颈：任务视界",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710124",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "What really makes larger parts of the pie available for disruption is longer task horizon. How long can an agent work before it fails its task? METR data shows autonomous task horizons doubling every 4-7 months (accelerating to ~4 months in 2024-2025)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0077",
+      "parent_block_index": 77,
+      "parent_block_type": "p",
+      "parent_block_markdown": "What really makes larger parts of the pie available for disruption is longer task horizon. How long can an agent work before it fails its task? METR data shows autonomous task horizons doubling every 4-7 months (accelerating to ~4 months in 2024-2025)",
+      "parent_block_plain_text": "What really makes larger parts of the pie available for disruption is longer task horizon. How long can an agent work before it fails its task? METR data shows autonomous task horizons doubling every 4-7 months (accelerating to ~4 months in 2024-2025)",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 251,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "真正能让这块庞大蛋糕被全面颠覆的关键，在于更长的任务视界——即智能体在任务失败前，究竟能持续自主工作多久？METR 数据显示，自主任务视界每 4 到 7 个月就会翻一番（在 2024 至 2025 年间，这一翻倍周期将加速缩短至 4 个月左右）。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710137",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!v-bP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa27e004c-72b7-4058-a24e-f1c6c6c9266f_1430x880.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!v-bP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa27e004c-72b7-4058-a24e-f1c6c6c9266f_1430x880.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0078",
+      "parent_block_index": 78,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!v-bP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa27e004c-72b7-4058-a24e-f1c6c6c9266f_1430x880.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!v-bP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa27e004c-72b7-4058-a24e-f1c6c6c9266f_1430x880.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!v-bP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa27e004c-72b7-4058-a24e-f1c6c6c9266f_1430x880.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!v-bP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa27e004c-72b7-4058-a24e-f1c6c6c9266f_1430x880.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710149",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!v-bP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa27e004c-72b7-4058-a24e-f1c6c6c9266f_1430x880.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Source: METR, SemiAnalysis Tokenomics Team",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Team",
+          "start": 14,
+          "end": 42,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0079",
+      "parent_block_index": 79,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: METR, [SemiAnalysis Tokenomics Team](https://semianalysis.com/tokenomics-model/)",
+      "parent_block_plain_text": "Source: METR, SemiAnalysis Tokenomics Team",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SemiAnalysis Tokenomics Team",
+          "start": 14,
+          "end": 42,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 42,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：METR，SemiAnalysis Tokenomics 团队",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626926",
+          "tokenized_text": "来源：METR，[[[LINK_1|SemiAnalysis Tokenomics 团队]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：METR，SemiAnalysis Tokenomics 模型团队",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710181",
+          "tokenized_text": "来源：METR，[[[LINK_1|SemiAnalysis Tokenomics 模型团队]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：METR，SemiAnalysis Tokenomics 团队",
+      "confirmed_tokenized": "来源：METR，[[[LINK_1|SemiAnalysis Tokenomics 团队]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Each doubling unlocks more of the total pie. At 30 minutes you can auto-complete code snippets, at 4.8 hours you can refactor a module. Multi-day tasks you can automate an entire audit. And it’s clear Anthropic sees this too.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0080",
+      "parent_block_index": 80,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each doubling unlocks more of the total pie. At 30 minutes you can auto-complete code snippets, at 4.8 hours you can refactor a module. Multi-day tasks you can automate an entire audit. And it’s clear Anthropic sees this too.",
+      "parent_block_plain_text": "Each doubling unlocks more of the total pie. At 30 minutes you can auto-complete code snippets, at 4.8 hours you can refactor a module. Multi-day tasks you can automate an entire audit. And it’s clear Anthropic sees this too.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 225,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "任务视界每翻一倍，就能解锁更大份额的蛋糕。在 30 分钟的任务视界下，你可以自动补全代码片段；达到 4.8 小时，你就能重构一个模块。对于长达数日的任务，你甚至可以实现整个审计流程的自动化。显然，Anthropic 也看到了这一点。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710192",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "On January 12, 2026, Anthropic launched Cowork—”Claude Code for general computing.” Four engineers built it in 10 days. Most of the code was written by Claude Code itself. Same architecture: Claude Agent SDK, MCP, sub-agents. It creates spreadsheets from receipts, organizes files by content, and drafts reports from scattered notes. It’s Claude Code minus the terminal, plus a desktop.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0081",
+      "parent_block_index": 81,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On January 12, 2026, Anthropic launched Cowork—”Claude Code for general computing.” Four engineers built it in 10 days. Most of the code was written by Claude Code itself. Same architecture: Claude Agent SDK, MCP, sub-agents. It creates spreadsheets from receipts, organizes files by content, and drafts reports from scattered notes. It’s Claude Code minus the terminal, plus a desktop.",
+      "parent_block_plain_text": "On January 12, 2026, Anthropic launched Cowork—”Claude Code for general computing.” Four engineers built it in 10 days. Most of the code was written by Claude Code itself. Same architecture: Claude Agent SDK, MCP, sub-agents. It creates spreadsheets from receipts, organizes files by content, and drafts reports from scattered notes. It’s Claude Code minus the terminal, plus a desktop.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 386,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2026 年 1 月 12 日，Anthropic 推出了 Cowork——“面向通用计算的 Claude Code”。4 名工程师仅用 10 天便完成了开发，其中绝大多数代码由 Claude Code 自主编写。它沿用了相同的架构：Claude 智能体 SDK、MCP 以及子智能体。它能根据收据生成电子表格，按内容对文件进行分类，并从零散笔记中起草报告。简而言之，它就是去掉了终端界面、加上了桌面环境的 Claude Code。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710205",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!9b5Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff50e715d-28e1-4397-9514-ece12ddd3632_1049x664.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!9b5Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff50e715d-28e1-4397-9514-ece12ddd3632_1049x664.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0082",
+      "parent_block_index": 82,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!9b5Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff50e715d-28e1-4397-9514-ece12ddd3632_1049x664.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!9b5Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff50e715d-28e1-4397-9514-ece12ddd3632_1049x664.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!9b5Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff50e715d-28e1-4397-9514-ece12ddd3632_1049x664.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!9b5Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff50e715d-28e1-4397-9514-ece12ddd3632_1049x664.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710217",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!9b5Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff50e715d-28e1-4397-9514-ece12ddd3632_1049x664.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "https://substackcdn.com/image/fetch/$s_!3fbT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d386d33-e530-49fd-9619-a8d72cbbc10d_1049x655.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3fbT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d386d33-e530-49fd-9619-a8d72cbbc10d_1049x655.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!3fbT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d386d33-e530-49fd-9619-a8d72cbbc10d_1049x655.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!3fbT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d386d33-e530-49fd-9619-a8d72cbbc10d_1049x655.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3fbT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d386d33-e530-49fd-9619-a8d72cbbc10d_1049x655.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!3fbT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d386d33-e530-49fd-9619-a8d72cbbc10d_1049x655.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710228",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!3fbT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d386d33-e530-49fd-9619-a8d72cbbc10d_1049x655.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "This is the glimpse of the future. A harness that understands the context of your day-to-day job or work and can build and generate information processing as needed. Instead of creating images from reports you download from your database, an agent will generate a report with better formatting than you could do yourself within excel for you. Whenever you need to gather information about, say, a sales quota, your agent will extract the information from a UI or API and generate the report for you on your behalf. Information work itself is going to be automated like Claude Code has automated software engineering.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This is the glimpse of the future. A harness that understands the context of your day-to-day job or work and can build and generate information processing as needed. Instead of creating images from reports you download from your database, an agent will generate a report with better formatting than you could do yourself within excel for you. Whenever you need to gather information about, say, a sales quota, your agent will extract the information from a UI or API and generate the report for you on your behalf. Information work itself is going to be automated like Claude Code has automated software engineering.",
+      "parent_block_plain_text": "This is the glimpse of the future. A harness that understands the context of your day-to-day job or work and can build and generate information processing as needed. Instead of creating images from reports you download from your database, an agent will generate a report with better formatting than you could do yourself within excel for you. Whenever you need to gather information about, say, a sales quota, your agent will extract the information from a UI or API and generate the report for you on your behalf. Information work itself is going to be automated like Claude Code has automated software engineering.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 616,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这是未来图景的惊鸿一瞥。这套工作台能够理解你日常工作的上下文，并根据需要构建和生成信息处理流程。你不再需要从数据库下载数据再手动制作图表，智能体（指能够自主规划并执行复杂任务的 AI）会为你生成一份排版远超你手动操作 Excel 的报告。每当你需要收集诸如销售配额之类的信息时，你的智能体就会从 UI 或 API 中提取数据，并代你生成报告。信息工作本身必将走向自动化，就像 Claude Code 自动化软件工程一样。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710238",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!qljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6321004f-cff8-45ec-abcd-dddbc20b1d6f_936x474.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6321004f-cff8-45ec-abcd-dddbc20b1d6f_936x474.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6321004f-cff8-45ec-abcd-dddbc20b1d6f_936x474.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6321004f-cff8-45ec-abcd-dddbc20b1d6f_936x474.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6321004f-cff8-45ec-abcd-dddbc20b1d6f_936x474.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6321004f-cff8-45ec-abcd-dddbc20b1d6f_936x474.png",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710249",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6321004f-cff8-45ec-abcd-dddbc20b1d6f_936x474.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Source: SemiAnalysis – Generated by Claude Code from our Co-Packaged Optics Article.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Co-Packaged Optics Article",
+          "start": 57,
+          "end": 83,
+          "href": "https://newsletter.semianalysis.com/p/co-packaged-optics-cpo-book-scaling",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0086",
+      "parent_block_index": 86,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis – Generated by Claude Code from our [Co-Packaged Optics Article](https://newsletter.semianalysis.com/p/co-packaged-optics-cpo-book-scaling).",
+      "parent_block_plain_text": "Source: SemiAnalysis – Generated by Claude Code from our Co-Packaged Optics Article.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Co-Packaged Optics Article",
+          "start": 57,
+          "end": 83,
+          "href": "https://newsletter.semianalysis.com/p/co-packaged-optics-cpo-book-scaling",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 84,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis – 由 Claude Code 根据我们的Co-Packaged Optics 文章生成。",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626940",
+          "tokenized_text": "来源：SemiAnalysis – 由 Claude Code 根据我们的[[[LINK_1|Co-Packaged Optics 文章]]]生成。",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis——由 Claude Code 根据我们的共封装光学文章生成。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710283",
+          "tokenized_text": "来源：SemiAnalysis——由 Claude Code 根据我们的[[[LINK_1|共封装光学文章]]]生成。",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis – 由 Claude Code 根据我们的Co-Packaged Optics 文章生成。",
+      "confirmed_tokenized": "来源：SemiAnalysis – 由 Claude Code 根据我们的[[[LINK_1|Co-Packaged Optics 文章]]]生成。",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "And while it is not perfect today, it clearly can generally process, synthesize, and format data faster than most humans can. This all comes at higher fidelity and lower cost than the average worker in some cases. While there will be hallucinations, most systems already exist with many human led errors in the process. If the information is processed at a viable level of fidelity and then passed to the next step, this itself will massively increase the supply of work. We are literally at the point where any individual could type into one of these agent workflows to run a multi-variable regression that would have taken a lifetime of training in the 2000s.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "p",
+      "parent_block_markdown": "And while it is not perfect today, it clearly can generally process, synthesize, and format data faster than most humans can. This all comes at higher fidelity and lower cost than the average worker in some cases. While there will be hallucinations, most systems already exist with many human led errors in the process. If the information is processed at a viable level of fidelity and then passed to the next step, this itself will massively increase the supply of work. We are literally at the point where any individual could type into one of these agent workflows to run a multi-variable regression that would have taken a lifetime of training in the 2000s.",
+      "parent_block_plain_text": "And while it is not perfect today, it clearly can generally process, synthesize, and format data faster than most humans can. This all comes at higher fidelity and lower cost than the average worker in some cases. While there will be hallucinations, most systems already exist with many human led errors in the process. If the information is processed at a viable level of fidelity and then passed to the next step, this itself will massively increase the supply of work. We are literally at the point where any individual could type into one of these agent workflows to run a multi-variable regression that would have taken a lifetime of training in the 2000s.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 661,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管目前的系统尚未尽善尽美，但它在处理、整合与格式化数据方面的速度，显然已全面超越大多数人类。在某些场景下，其准确度不仅高于普通员工，成本也更为低廉。诚然，AI 幻觉依然存在，但现有的多数业务流程中本就充斥着大量人为错误。只要信息能以达标的准确度完成处理并流转至下一环节，单凭这一点就能大幅拉升工作产出供给。毫不夸张地说，我们已经到了这样一个节点：任何人都可以在这些智能体工作流中输入指令，轻松运行多变量回归分析——而在 21 世纪初，这往往需要长年的专业训练才能掌握。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710295",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "The Stack Overflow 2025 Developer Survey has 84% of coders using AI, and that is the bleeding edge of adoption. Only 31% use coding agents, and that means that this penetration curve is early for broader waves of information work. Just like the blink for coding agent penetration, broader information work will quickly see AI adoption.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Stack Overflow 2025 Developer Survey",
+          "start": 4,
+          "end": 40,
+          "href": "https://survey.stackoverflow.co/2025",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0088",
+      "parent_block_index": 88,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The [Stack Overflow 2025 Developer Survey](https://survey.stackoverflow.co/2025) has 84% of coders using AI, and that is the bleeding edge of adoption. Only 31% use coding agents, and that means that this penetration curve is early for broader waves of information work. Just like the blink for coding agent penetration, broader information work will quickly see AI adoption.",
+      "parent_block_plain_text": "The Stack Overflow 2025 Developer Survey has 84% of coders using AI, and that is the bleeding edge of adoption. Only 31% use coding agents, and that means that this penetration curve is early for broader waves of information work. Just like the blink for coding agent penetration, broader information work will quickly see AI adoption.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Stack Overflow 2025 Developer Survey",
+          "start": 4,
+          "end": 40,
+          "href": "https://survey.stackoverflow.co/2025",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 335,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Stack Overflow 2025 年开发者调查显示，已有 84% 的程序员在使用 AI，这代表着技术普及的最前沿。然而，仅有 31% 的受访者在使用编程智能体，这意味着面对更广泛的信息工作浪潮，当前的渗透率曲线仍处于起步阶段。正如编程智能体在“眨眼之间”完成渗透一样，更广泛的信息工作领域也将迅速迎来 AI 的全面普及。",
+          "model": "pro",
+          "created_at": "2026-04-10T00:16:40.710332",
+          "tokenized_text": "[[[LINK_1|Stack Overflow 2025 年开发者调查]]]显示，已有 84% 的程序员在使用 AI，这代表着技术普及的最前沿。然而，仅有 31% 的受访者在使用编程智能体，这意味着面对更广泛的信息工作浪潮，当前的渗透率曲线仍处于起步阶段。正如编程智能体在“眨眼之间”完成渗透一样，更广泛的信息工作领域也将迅速迎来 AI 的全面普及。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.265,
+        "is_excellent": true,
+        "applied_terms": [
+          "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+          "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+          "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope of the argument from the niche of software development to the entire information work economy. It posits that coding is merely the 'beachhead' for a much larger disruption, using statistics (1B+ workers, $15T economy) to quantify the immense scale of the addressable market.",
+          "relation_to_previous": "Builds directly on the previous section's hint of potential 'beyond coding' ('Claude Computer') by making this the central argument and defining the full scope of the disruption.",
+          "relation_to_next": "By establishing that the massive information work economy is 'at risk,' it raises the question of the economic mechanism driving this change. This provides a perfect setup for the next section, which explains that the 'price of intelligence is collapsing'.",
+          "key_points": [
+            "Coding is not the ultimate target of agentic AI, but the strategic 'beachhead' for disrupting the entire information work economy.",
+            "The true market is the $15 trillion economy of over 1 billion information workers.",
+            "Rapid AI adoption among coders is a leading indicator of how quickly this technology will penetrate all other forms of information work."
+          ],
+          "translation_notes": [
+            "The military metaphor 'beachhead' (滩头阵地) is crucial. The translation must convey the strategic idea of a small, initial entry point for a much larger campaign.",
+            "The distinction in the survey data between 'using AI' (84%) and 'using coding agents' (31%) is an important nuance that must be preserved to show the adoption curve is still early.",
+            "The large figures ($15 trillion, 1 billion workers) are used for rhetorical impact and must be translated accurately."
+          ]
+        },
+        "scores": {
+          "readability": 9.4,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。"
+          },
+          {
+            "type": "annotation",
+            "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,2080 @@
+{
+  "report": {
+    "is_consistent": true,
+    "issues": [],
+    "auto_fixable": [],
+    "manual_review": [],
+    "term_stats": {
+      "foundry": {
+        "total_count": 22,
+        "translations": {
+          "晶圆代工厂": 14
+        },
+        "is_consistent": true,
+        "preferred": "晶圆代工厂"
+      },
+      "wafer": {
+        "total_count": 44,
+        "translations": {
+          "晶圆": 44
+        },
+        "is_consistent": true,
+        "preferred": "晶圆"
+      },
+      "node": {
+        "total_count": 55,
+        "translations": {
+          "制程节点": 44
+        },
+        "is_consistent": true,
+        "preferred": "制程节点"
+      },
+      "AI": {
+        "total_count": 77,
+        "translations": {
+          "AI": 31
+        },
+        "is_consistent": true,
+        "preferred": "AI"
+      },
+      "Wafer Demand Model": {
+        "total_count": 3,
+        "translations": {
+          "晶圆需求模型": 3
+        },
+        "is_consistent": true,
+        "preferred": "晶圆需求模型"
+      },
+      "AP": {
+        "total_count": 195,
+        "translations": {
+          "应用处理器": 3
+        },
+        "is_consistent": true,
+        "preferred": "应用处理器"
+      },
+      "Node Economics": {
+        "total_count": 1,
+        "translations": {
+          "节点经济学": 1
+        },
+        "is_consistent": true,
+        "preferred": "节点经济学"
+      },
+      "TSMC": {
+        "total_count": 89,
+        "translations": {
+          "台积电": 89
+        },
+        "is_consistent": true,
+        "preferred": "台积电"
+      },
+      "fab": {
+        "total_count": 20,
+        "translations": {
+          "晶圆厂": 16
+        },
+        "is_consistent": true,
+        "preferred": "晶圆厂"
+      },
+      "IP": {
+        "total_count": 94,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "IP / 知识产权"
+      },
+      "Morris Chang": {
+        "total_count": 3,
+        "translations": {
+          "张忠谋": 3
+        },
+        "is_consistent": true,
+        "preferred": "张忠谋"
+      },
+      "A8": {
+        "total_count": 6,
+        "translations": {
+          "A8": 3
+        },
+        "is_consistent": true,
+        "preferred": "A8"
+      },
+      "Yield learning curve": {
+        "total_count": 2,
+        "translations": {
+          "良率学习曲线": 2
+        },
+        "is_consistent": true,
+        "preferred": "良率学习曲线"
+      },
+      "yield": {
+        "total_count": 24,
+        "translations": {
+          "良率": 22
+        },
+        "is_consistent": true,
+        "preferred": "良率"
+      },
+      "revenue": {
+        "total_count": 42,
+        "translations": {
+          "营收": 42
+        },
+        "is_consistent": true,
+        "preferred": "营收"
+      },
+      "yield learning": {
+        "total_count": 5,
+        "translations": {
+          "良率学习": 4
+        },
+        "is_consistent": true,
+        "preferred": "良率学习"
+      },
+      "node transition": {
+        "total_count": 7,
+        "translations": {
+          "节点转换": 2
+        },
+        "is_consistent": true,
+        "preferred": "节点转换"
+      },
+      "capex": {
+        "total_count": 11,
+        "translations": {
+          "资本支出": 11
+        },
+        "is_consistent": true,
+        "preferred": "资本支出"
+      },
+      "IDM": {
+        "total_count": 3,
+        "translations": {
+          "IDM": 3
+        },
+        "is_consistent": true,
+        "preferred": "IDM"
+      },
+      "DEC": {
+        "total_count": 41,
+        "translations": {
+          "DEC": 1
+        },
+        "is_consistent": true,
+        "preferred": "DEC"
+      },
+      "Intel": {
+        "total_count": 37,
+        "translations": {
+          "英特尔": 35
+        },
+        "is_consistent": true,
+        "preferred": "英特尔"
+      },
+      "Samsung": {
+        "total_count": 19,
+        "translations": {
+          "三星": 19
+        },
+        "is_consistent": true,
+        "preferred": "三星"
+      },
+      "packaging": {
+        "total_count": 18,
+        "translations": {
+          "封装": 18
+        },
+        "is_consistent": true,
+        "preferred": "封装"
+      },
+      "vertical integration": {
+        "total_count": 7,
+        "translations": {
+          "垂直整合": 7
+        },
+        "is_consistent": true,
+        "preferred": "垂直整合"
+      },
+      "Advanced Packaging": {
+        "total_count": 7,
+        "translations": {
+          "先进封装": 7
+        },
+        "is_consistent": true,
+        "preferred": "先进封装"
+      },
+      "Fab 18": {
+        "total_count": 5,
+        "translations": {
+          "Fab 18": 5
+        },
+        "is_consistent": true,
+        "preferred": "Fab 18"
+      },
+      "Intel 18A": {
+        "total_count": 3,
+        "translations": {
+          "英特尔18A": 3
+        },
+        "is_consistent": true,
+        "preferred": "英特尔18A"
+      },
+      "Foundry Industry Model": {
+        "total_count": 1,
+        "translations": {
+          "晶圆代工行业模型": 1
+        },
+        "is_consistent": true,
+        "preferred": "晶圆代工行业模型"
+      },
+      "Anchor Tenant": {
+        "total_count": 7,
+        "translations": {
+          "锚定客户": 6
+        },
+        "is_consistent": true,
+        "preferred": "锚定客户"
+      },
+      "NVIDIA": {
+        "total_count": 27,
+        "translations": {
+          "英伟达": 27
+        },
+        "is_consistent": true,
+        "preferred": "英伟达"
+      },
+      "Vera": {
+        "total_count": 14,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "purchase obligations": {
+        "total_count": 4,
+        "translations": {
+          "采购承诺": 4
+        },
+        "is_consistent": true,
+        "preferred": "采购承诺"
+      },
+      "bleeding-edge capacity": {
+        "total_count": 1,
+        "translations": {
+          "尖端产能": 1
+        },
+        "is_consistent": true,
+        "preferred": "尖端产能"
+      },
+      "Manufacturing Purchase Obligations": {
+        "total_count": 3,
+        "translations": {
+          "制造采购承诺": 3
+        },
+        "is_consistent": true,
+        "preferred": "制造采购承诺"
+      },
+      "HPC": {
+        "total_count": 17,
+        "translations": {
+          "HPC": 17
+        },
+        "is_consistent": true,
+        "preferred": "HPC"
+      },
+      "N3": {
+        "total_count": 23,
+        "translations": {
+          "N3": 23
+        },
+        "is_consistent": true,
+        "preferred": "N3"
+      },
+      "N2": {
+        "total_count": 16,
+        "translations": {
+          "N2": 16
+        },
+        "is_consistent": true,
+        "preferred": "N2"
+      },
+      "Platform Shift": {
+        "total_count": 4,
+        "translations": {
+          "平台转移": 2
+        },
+        "is_consistent": true,
+        "preferred": "平台转移"
+      },
+      "Backside power delivery": {
+        "total_count": 3,
+        "translations": {
+          "背面供电": 3
+        },
+        "is_consistent": true,
+        "preferred": "背面供电"
+      },
+      "transistor": {
+        "total_count": 6,
+        "translations": {
+          "晶体管": 6
+        },
+        "is_consistent": true,
+        "preferred": "晶体管"
+      },
+      "gate-all-around transistors": {
+        "total_count": 2,
+        "translations": {
+          "环绕栅极晶体管": 2
+        },
+        "is_consistent": true,
+        "preferred": "环绕栅极晶体管"
+      },
+      "A14": {
+        "total_count": 8,
+        "translations": {
+          "A14": 8
+        },
+        "is_consistent": true,
+        "preferred": "A14"
+      },
+      "A16": {
+        "total_count": 6,
+        "translations": {
+          "A16": 5
+        },
+        "is_consistent": true,
+        "preferred": "A16"
+      },
+      "Super Power Rail": {
+        "total_count": 1,
+        "translations": {
+          "超级电轨": 1
+        },
+        "is_consistent": true,
+        "preferred": "超级电轨"
+      },
+      "thermal envelope": {
+        "total_count": 4,
+        "translations": {
+          "散热包络": 2
+        },
+        "is_consistent": true,
+        "preferred": "散热包络"
+      },
+      "1.4nm": {
+        "total_count": 6,
+        "translations": {
+          "1.4nm": 5
+        },
+        "is_consistent": true,
+        "preferred": "1.4nm"
+      },
+      "node share": {
+        "total_count": 3,
+        "translations": {
+          "节点份额": 2
+        },
+        "is_consistent": true,
+        "preferred": "节点份额"
+      },
+      "Qualcomm": {
+        "total_count": 22,
+        "translations": {
+          "高通": 21
+        },
+        "is_consistent": true,
+        "preferred": "高通"
+      },
+      "gross margin": {
+        "total_count": 11,
+        "translations": {
+          "毛利率": 10
+        },
+        "is_consistent": true,
+        "preferred": "毛利率"
+      },
+      "Broadcom": {
+        "total_count": 10,
+        "translations": {
+          "博通": 9
+        },
+        "is_consistent": true,
+        "preferred": "博通"
+      },
+      "ASML": {
+        "total_count": 1,
+        "translations": {
+          "ASML": 1
+        },
+        "is_consistent": true,
+        "preferred": "ASML"
+      },
+      "GM": {
+        "total_count": 5,
+        "translations": {
+          "毛利率": 2
+        },
+        "is_consistent": true,
+        "preferred": "毛利率"
+      },
+      "CIS": {
+        "total_count": 8,
+        "translations": {
+          "CMOS图像传感器 (CIS)": 1
+        },
+        "is_consistent": true,
+        "preferred": "CMOS图像传感器 (CIS)"
+      },
+      "C-series": {
+        "total_count": 11,
+        "translations": {
+          "C系列": 10
+        },
+        "is_consistent": true,
+        "preferred": "C系列"
+      },
+      "N-series": {
+        "total_count": 10,
+        "translations": {
+          "N系列": 9
+        },
+        "is_consistent": true,
+        "preferred": "N系列"
+      },
+      "wafer mix": {
+        "total_count": 1,
+        "translations": {
+          "晶圆产品组合": 1
+        },
+        "is_consistent": true,
+        "preferred": "晶圆产品组合"
+      },
+      "Annual Chip Savings": {
+        "total_count": 2,
+        "translations": {
+          "年度芯片节省成本": 1
+        },
+        "is_consistent": true,
+        "preferred": "年度芯片节省成本"
+      },
+      "SemiAnalysis": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "A-series": {
+        "total_count": 22,
+        "translations": {
+          "A系列": 22
+        },
+        "is_consistent": true,
+        "preferred": "A系列"
+      },
+      "M-series": {
+        "total_count": 25,
+        "translations": {
+          "M系列": 25
+        },
+        "is_consistent": true,
+        "preferred": "M系列"
+      },
+      "leading-edge": {
+        "total_count": 20,
+        "translations": {
+          "先进制程": 20
+        },
+        "is_consistent": true,
+        "preferred": "先进制程"
+      },
+      "AI accelerator": {
+        "total_count": 11,
+        "translations": {
+          "AI加速器": 3
+        },
+        "is_consistent": true,
+        "preferred": "AI加速器"
+      },
+      "capacity allocation": {
+        "total_count": 3,
+        "translations": {
+          "产能分配": 3
+        },
+        "is_consistent": true,
+        "preferred": "产能分配"
+      },
+      "S-series": {
+        "total_count": 2,
+        "translations": {
+          "S系列": 2
+        },
+        "is_consistent": true,
+        "preferred": "S系列"
+      },
+      "Apple Silicon": {
+        "total_count": 7,
+        "translations": {
+          "苹果自研芯片": 5
+        },
+        "is_consistent": true,
+        "preferred": "苹果自研芯片"
+      },
+      "R&D": {
+        "total_count": 8,
+        "translations": {
+          "研发": 8
+        },
+        "is_consistent": true,
+        "preferred": "研发"
+      },
+      "CoWoS": {
+        "total_count": 8,
+        "translations": {
+          "CoWoS": 8
+        },
+        "is_consistent": true,
+        "preferred": "CoWoS"
+      },
+      "InFO": {
+        "total_count": 8,
+        "translations": {
+          "InFO": 8
+        },
+        "is_consistent": true,
+        "preferred": "InFO"
+      },
+      "fabless": {
+        "total_count": 1,
+        "translations": {
+          "无晶圆厂": 1
+        },
+        "is_consistent": true,
+        "preferred": "无晶圆厂"
+      },
+      "performance": {
+        "total_count": 10,
+        "translations": {
+          "性能": 9
+        },
+        "is_consistent": true,
+        "preferred": "性能"
+      },
+      "benchmark": {
+        "total_count": 3,
+        "translations": {
+          "基准测试": 3
+        },
+        "is_consistent": true,
+        "preferred": "基准测试"
+      },
+      "performance-per-watt": {
+        "total_count": 3,
+        "translations": {
+          "每瓦性能": 3
+        },
+        "is_consistent": true,
+        "preferred": "每瓦性能"
+      },
+      "RF": {
+        "total_count": 15,
+        "translations": {
+          "射频": 2
+        },
+        "is_consistent": true,
+        "preferred": "射频"
+      },
+      "efficiency": {
+        "total_count": 6,
+        "translations": {
+          "效率": 4
+        },
+        "is_consistent": true,
+        "preferred": "效率"
+      },
+      "merchant silicon": {
+        "total_count": 1,
+        "translations": {
+          "商用芯片": 1
+        },
+        "is_consistent": true,
+        "preferred": "商用芯片"
+      },
+      "SVP": {
+        "total_count": 2,
+        "translations": {
+          "高级副总裁": 2
+        },
+        "is_consistent": true,
+        "preferred": "高级副总裁"
+      },
+      "GlobalFoundries": {
+        "total_count": 1,
+        "translations": {
+          "格芯": 1
+        },
+        "is_consistent": true,
+        "preferred": "格芯"
+      },
+      "Project Azalea": {
+        "total_count": 1,
+        "translations": {
+          "Azalea项目": 1
+        },
+        "is_consistent": true,
+        "preferred": "Azalea项目"
+      },
+      "COO": {
+        "total_count": 2,
+        "translations": {
+          "首席运营官": 1
+        },
+        "is_consistent": true,
+        "preferred": "首席运营官"
+      },
+      "leading-edge capacity": {
+        "total_count": 5,
+        "translations": {
+          "先进制程产能": 5
+        },
+        "is_consistent": true,
+        "preferred": "先进制程产能"
+      },
+      "N5": {
+        "total_count": 15,
+        "translations": {
+          "N5": 15
+        },
+        "is_consistent": true,
+        "preferred": "N5"
+      },
+      "N7": {
+        "total_count": 3,
+        "translations": {
+          "N7": 3
+        },
+        "is_consistent": true,
+        "preferred": "N7"
+      },
+      "N1": {
+        "total_count": 2,
+        "translations": {
+          "N1": 2
+        },
+        "is_consistent": true,
+        "preferred": "N1"
+      },
+      "IDM 2.0": {
+        "total_count": 1,
+        "translations": {
+          "IDM 2.0": 1
+        },
+        "is_consistent": true,
+        "preferred": "IDM 2.0"
+      },
+      "Night Hawk": {
+        "total_count": 1,
+        "translations": {
+          "夜鹰": 1
+        },
+        "is_consistent": true,
+        "preferred": "夜鹰"
+      },
+      "requalification": {
+        "total_count": 1,
+        "translations": {
+          "重新认证": 1
+        },
+        "is_consistent": true,
+        "preferred": "重新认证"
+      },
+      "X75": {
+        "total_count": 4,
+        "translations": {
+          "X75": 1
+        },
+        "is_consistent": true,
+        "preferred": "X75"
+      },
+      "Moore’s Law": {
+        "total_count": 2,
+        "translations": {
+          "摩尔定律": 2
+        },
+        "is_consistent": true,
+        "preferred": "摩尔定律"
+      },
+      "PDK": {
+        "total_count": 2,
+        "translations": {
+          "工艺设计套件": 2
+        },
+        "is_consistent": true,
+        "preferred": "工艺设计套件"
+      },
+      "AMD": {
+        "total_count": 15,
+        "translations": {
+          "AMD": 15
+        },
+        "is_consistent": true,
+        "preferred": "AMD"
+      },
+      "hyperscalers": {
+        "total_count": 3,
+        "translations": {
+          "超大规模云厂商": 3
+        },
+        "is_consistent": true,
+        "preferred": "超大规模云厂商"
+      },
+      "hyperscaler": {
+        "total_count": 8,
+        "translations": {
+          "超大规模云服务商": 5
+        },
+        "is_consistent": true,
+        "preferred": "超大规模云服务商"
+      },
+      "CoWoS (Chip-on-Wafer-on-Substrate)": {
+        "total_count": 1,
+        "translations": {
+          "CoWoS封装": 1
+        },
+        "is_consistent": true,
+        "preferred": "CoWoS封装"
+      },
+      "N3E": {
+        "total_count": 3,
+        "translations": {
+          "N3E": 3
+        },
+        "is_consistent": true,
+        "preferred": "N3E"
+      },
+      "N4": {
+        "total_count": 2,
+        "translations": {
+          "N4": 2
+        },
+        "is_consistent": true,
+        "preferred": "N4"
+      },
+      "capital expenditure": {
+        "total_count": 1,
+        "translations": {
+          "资本支出": 1
+        },
+        "is_consistent": true,
+        "preferred": "资本支出"
+      },
+      "CoWoS-L": {
+        "total_count": 1,
+        "translations": {
+          "CoWoS-L": 1
+        },
+        "is_consistent": true,
+        "preferred": "CoWoS-L"
+      },
+      "18A-P": {
+        "total_count": 4,
+        "translations": {
+          "18A-P": 4
+        },
+        "is_consistent": true,
+        "preferred": "18A-P"
+      },
+      "ASP": {
+        "total_count": 6,
+        "translations": {
+          "平均售价 (ASP)": 4
+        },
+        "is_consistent": true,
+        "preferred": "平均售价 (ASP)"
+      },
+      "die": {
+        "total_count": 14,
+        "translations": {
+          "裸片": 12
+        },
+        "is_consistent": true,
+        "preferred": "裸片"
+      },
+      "Panther Lake": {
+        "total_count": 1,
+        "translations": {
+          "Panther Lake": 1
+        },
+        "is_consistent": true,
+        "preferred": "Panther Lake"
+      },
+      "14A": {
+        "total_count": 1,
+        "translations": {
+          "14A": 1
+        },
+        "is_consistent": true,
+        "preferred": "14A"
+      },
+      "PowerVia": {
+        "total_count": 1,
+        "translations": {
+          "PowerVia": 1
+        },
+        "is_consistent": true,
+        "preferred": "PowerVia"
+      },
+      "Intel16": {
+        "total_count": 1,
+        "translations": {
+          "Intel16": 1
+        },
+        "is_consistent": true,
+        "preferred": "Intel16"
+      },
+      "DTV": {
+        "total_count": 1,
+        "translations": {
+          "数字电视 (DTV)": 1
+        },
+        "is_consistent": true,
+        "preferred": "数字电视 (DTV)"
+      },
+      "Display Drivers": {
+        "total_count": 2,
+        "translations": {
+          "显示驱动芯片": 2
+        },
+        "is_consistent": true,
+        "preferred": "显示驱动芯片"
+      },
+      "mature node": {
+        "total_count": 2,
+        "translations": {
+          "成熟制程": 2
+        },
+        "is_consistent": true,
+        "preferred": "成熟制程"
+      },
+      "PMICs": {
+        "total_count": 2,
+        "translations": {
+          "电源管理芯片 (PMIC)": 2
+        },
+        "is_consistent": true,
+        "preferred": "电源管理芯片 (PMIC)"
+      },
+      "LSI": {
+        "total_count": 1,
+        "translations": {
+          "LSI": 1
+        },
+        "is_consistent": true,
+        "preferred": "LSI"
+      },
+      "Texas": {
+        "total_count": 1,
+        "translations": {
+          "德克萨斯州": 1
+        },
+        "is_consistent": true,
+        "preferred": "德克萨斯州"
+      },
+      "TSMC Arizona": {
+        "total_count": 2,
+        "translations": {
+          "台积电亚利桑那州工厂": 2
+        },
+        "is_consistent": true,
+        "preferred": "台积电亚利桑那州工厂"
+      },
+      "GigaFab": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "超大晶圆厂"
+      },
+      "InFO-PoP (Integrated Fan-Out Package-on-Package)": {
+        "total_count": 1,
+        "translations": {
+          "集成扇出型层叠封装 (InFO-PoP)": 1
+        },
+        "is_consistent": true,
+        "preferred": "集成扇出型层叠封装 (InFO-PoP)"
+      },
+      "SoC": {
+        "total_count": 4,
+        "translations": {
+          "SoC": 4
+        },
+        "is_consistent": true,
+        "preferred": "SoC"
+      },
+      "GPU": {
+        "total_count": 13,
+        "translations": {
+          "GPU": 13
+        },
+        "is_consistent": true,
+        "preferred": "GPU"
+      },
+      "HBM": {
+        "total_count": 1,
+        "translations": {
+          "HBM": 1
+        },
+        "is_consistent": true,
+        "preferred": "HBM"
+      },
+      "DRAM": {
+        "total_count": 2,
+        "translations": {
+          "DRAM": 2
+        },
+        "is_consistent": true,
+        "preferred": "DRAM"
+      },
+      "bandwidth": {
+        "total_count": 1,
+        "translations": {
+          "带宽": 1
+        },
+        "is_consistent": true,
+        "preferred": "带宽"
+      },
+      "silicon interposer": {
+        "total_count": 1,
+        "translations": {
+          "硅中介层": 1
+        },
+        "is_consistent": true,
+        "preferred": "硅中介层"
+      },
+      "SoIC": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "系统级整合芯片 (SoIC)"
+      },
+      "WMCM": {
+        "total_count": 1,
+        "translations": {
+          "WMCM": 1
+        },
+        "is_consistent": true,
+        "preferred": "WMCM"
+      },
+      "AP3": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "AP3厂 (先进封装厂)"
+      },
+      "token": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "token"
+      },
+      "ramp": {
+        "total_count": 14,
+        "translations": {
+          "产能爬坡": 12
+        },
+        "is_consistent": true,
+        "preferred": "产能爬坡"
+      },
+      "token diversification": {
+        "total_count": 1,
+        "translations": {
+          "象征性的多元化": 1
+        },
+        "is_consistent": true,
+        "preferred": "象征性的多元化"
+      },
+      "ramp rates": {
+        "total_count": 1,
+        "translations": {
+          "产能爬坡速度": 1
+        },
+        "is_consistent": true,
+        "preferred": "产能爬坡速度"
+      },
+      "CPU": {
+        "total_count": 8,
+        "translations": {
+          "CPU": 8
+        },
+        "is_consistent": true,
+        "preferred": "CPU"
+      },
+      "semiconductor": {
+        "total_count": 2,
+        "translations": {
+          "半导体": 2
+        },
+        "is_consistent": true,
+        "preferred": "半导体"
+      },
+      "spatial computing": {
+        "total_count": 3,
+        "translations": {
+          "空间计算": 3
+        },
+        "is_consistent": true,
+        "preferred": "空间计算"
+      },
+      "custom silicon": {
+        "total_count": 5,
+        "translations": {
+          "定制芯片": 5
+        },
+        "is_consistent": true,
+        "preferred": "定制芯片"
+      },
+      "Secure Enclave": {
+        "total_count": 2,
+        "translations": {
+          "安全隔区": 2
+        },
+        "is_consistent": true,
+        "preferred": "安全隔区"
+      },
+      "TrueDepth camera": {
+        "total_count": 1,
+        "translations": {
+          "原深感摄像头": 1
+        },
+        "is_consistent": true,
+        "preferred": "原深感摄像头"
+      },
+      "LiDAR Scanner": {
+        "total_count": 1,
+        "translations": {
+          "激光雷达扫描仪": 1
+        },
+        "is_consistent": true,
+        "preferred": "激光雷达扫描仪"
+      },
+      "gross margin stacking": {
+        "total_count": 1,
+        "translations": {
+          "毛利率叠加": 1
+        },
+        "is_consistent": true,
+        "preferred": "毛利率叠加"
+      },
+      "C1 modem": {
+        "total_count": 2,
+        "translations": {
+          "C1基带": 2
+        },
+        "is_consistent": true,
+        "preferred": "C1基带"
+      },
+      "modems": {
+        "total_count": 3,
+        "translations": {
+          "基带": 3
+        },
+        "is_consistent": true,
+        "preferred": "基带"
+      },
+      "TCO": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "总拥有成本"
+      },
+      "DTCO": {
+        "total_count": 1,
+        "translations": {
+          "设计-工艺协同优化": 1
+        },
+        "is_consistent": true,
+        "preferred": "设计-工艺协同优化"
+      },
+      "virtual IDM": {
+        "total_count": 1,
+        "translations": {
+          "虚拟IDM": 1
+        },
+        "is_consistent": true,
+        "preferred": "虚拟IDM"
+      },
+      "TOPS": {
+        "total_count": 1,
+        "translations": {
+          "TOPS": 1
+        },
+        "is_consistent": true,
+        "preferred": "TOPS"
+      },
+      "Neural Engine": {
+        "total_count": 4,
+        "translations": {
+          "神经网络引擎": 4
+        },
+        "is_consistent": true,
+        "preferred": "神经网络引擎"
+      },
+      "decode": {
+        "total_count": 4,
+        "translations": {
+          "解码": 4
+        },
+        "is_consistent": true,
+        "preferred": "解码"
+      },
+      "8-wide decode": {
+        "total_count": 1,
+        "translations": {
+          "8宽解码": 1
+        },
+        "is_consistent": true,
+        "preferred": "8宽解码"
+      },
+      "MALL": {
+        "total_count": 4,
+        "translations": {
+          "MALL (内存附加末级缓存)": 1
+        },
+        "is_consistent": true,
+        "preferred": "MALL (内存附加末级缓存)"
+      },
+      "E-cores": {
+        "total_count": 1,
+        "translations": {
+          "能效核": 1
+        },
+        "is_consistent": true,
+        "preferred": "能效核"
+      },
+      "System-Level Cache (SLC)": {
+        "total_count": 1,
+        "translations": {
+          "系统级缓存 (SLC)": 1
+        },
+        "is_consistent": true,
+        "preferred": "系统级缓存 (SLC)"
+      },
+      "latency": {
+        "total_count": 2,
+        "translations": {
+          "延迟": 2
+        },
+        "is_consistent": true,
+        "preferred": "延迟"
+      },
+      "Unified Memory Architecture": {
+        "total_count": 2,
+        "translations": {
+          "统一内存架构": 2
+        },
+        "is_consistent": true,
+        "preferred": "统一内存架构"
+      },
+      "LLM": {
+        "total_count": 1,
+        "translations": {
+          "LLM": 1
+        },
+        "is_consistent": true,
+        "preferred": "LLM"
+      },
+      "fine-grained coherency": {
+        "total_count": 1,
+        "translations": {
+          "细粒度一致性": 1
+        },
+        "is_consistent": true,
+        "preferred": "细粒度一致性"
+      },
+      "dynamic voltage and frequency scaling": {
+        "total_count": 1,
+        "translations": {
+          "动态电压和频率调节 (DVFS)": 1
+        },
+        "is_consistent": true,
+        "preferred": "动态电压和频率调节 (DVFS)"
+      },
+      "races to sleep": {
+        "total_count": 1,
+        "translations": {
+          "快速休眠": 1
+        },
+        "is_consistent": true,
+        "preferred": "快速休眠"
+      },
+      "vapor chamber": {
+        "total_count": 1,
+        "translations": {
+          "均热板": 1
+        },
+        "is_consistent": true,
+        "preferred": "均热板"
+      },
+      "CAGR": {
+        "total_count": 6,
+        "translations": {
+          "复合年增长率": 5
+        },
+        "is_consistent": true,
+        "preferred": "复合年增长率"
+      },
+      "ASIC": {
+        "total_count": 3,
+        "translations": {
+          "ASIC (专用集成电路)": 1
+        },
+        "is_consistent": true,
+        "preferred": "ASIC (专用集成电路)"
+      },
+      "MediaTek": {
+        "total_count": 3,
+        "translations": {
+          "联发科": 2
+        },
+        "is_consistent": true,
+        "preferred": "联发科"
+      },
+      "Snapdragon 8 Elite 2": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "骁龙8 Elite 2"
+      },
+      "Dimensity 9600": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "天玑9600"
+      },
+      "Nova Lake": {
+        "total_count": 1,
+        "translations": {
+          "Nova Lake": 1
+        },
+        "is_consistent": true,
+        "preferred": "Nova Lake"
+      },
+      "MI450x": {
+        "total_count": 1,
+        "translations": {
+          "MI450x": 1
+        },
+        "is_consistent": true,
+        "preferred": "MI450x"
+      },
+      "wspm": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "每月晶圆投片量"
+      },
+      "RF chip": {
+        "total_count": 1,
+        "translations": {
+          "射频芯片": 1
+        },
+        "is_consistent": true,
+        "preferred": "射频芯片"
+      },
+      "incremental wafer demand": {
+        "total_count": 2,
+        "translations": {
+          "增量晶圆需求": 1
+        },
+        "is_consistent": true,
+        "preferred": "增量晶圆需求"
+      },
+      "attach rates": {
+        "total_count": 1,
+        "translations": {
+          "搭载率": 1
+        },
+        "is_consistent": true,
+        "preferred": "搭载率"
+      },
+      "Vision Pro": {
+        "total_count": 3,
+        "translations": {
+          "Vision Pro": 3
+        },
+        "is_consistent": true,
+        "preferred": "Vision Pro"
+      },
+      "Y/Y": {
+        "total_count": 1,
+        "translations": {
+          "同比": 1
+        },
+        "is_consistent": true,
+        "preferred": "同比"
+      },
+      "data center": {
+        "total_count": 2,
+        "translations": {
+          "数据中心": 2
+        },
+        "is_consistent": true,
+        "preferred": "数据中心"
+      },
+      "A14 SPR": {
+        "total_count": 1,
+        "translations": {
+          "A14 SPR": 1
+        },
+        "is_consistent": true,
+        "preferred": "A14 SPR"
+      },
+      "base process": {
+        "total_count": 1,
+        "translations": {
+          "基础工艺": 1
+        },
+        "is_consistent": true,
+        "preferred": "基础工艺"
+      },
+      "Portfolio Diversification": {
+        "total_count": 1,
+        "translations": {
+          "产品组合多元化": 1
+        },
+        "is_consistent": true,
+        "preferred": "产品组合多元化"
+      },
+      "concentration risk": {
+        "total_count": 2,
+        "translations": {
+          "集中度风险": 2
+        },
+        "is_consistent": true,
+        "preferred": "集中度风险"
+      },
+      "silicon portfolio": {
+        "total_count": 1,
+        "translations": {
+          "芯片产品组合": 1
+        },
+        "is_consistent": true,
+        "preferred": "芯片产品组合"
+      },
+      "unit shipments": {
+        "total_count": 1,
+        "translations": {
+          "出货量": 1
+        },
+        "is_consistent": true,
+        "preferred": "出货量"
+      },
+      "silicon value": {
+        "total_count": 1,
+        "translations": {
+          "芯片价值": 1
+        },
+        "is_consistent": true,
+        "preferred": "芯片价值"
+      },
+      "foundry economics": {
+        "total_count": 1,
+        "translations": {
+          "晶圆代工经济学": 1
+        },
+        "is_consistent": true,
+        "preferred": "晶圆代工经济学"
+      },
+      "silicon content intensity": {
+        "total_count": 1,
+        "translations": {
+          "硅含量强度": 1
+        },
+        "is_consistent": true,
+        "preferred": "硅含量强度"
+      },
+      "revenue volatility": {
+        "total_count": 1,
+        "translations": {
+          "营收波动": 1
+        },
+        "is_consistent": true,
+        "preferred": "营收波动"
+      },
+      "low-single-digit growth": {
+        "total_count": 1,
+        "translations": {
+          "低个位数增长": 1
+        },
+        "is_consistent": true,
+        "preferred": "低个位数增长"
+      },
+      "incremental device growth": {
+        "total_count": 1,
+        "translations": {
+          "增量设备增长": 1
+        },
+        "is_consistent": true,
+        "preferred": "增量设备增长"
+      },
+      "silicon intensity": {
+        "total_count": 2,
+        "translations": {
+          "硅含量": 2
+        },
+        "is_consistent": true,
+        "preferred": "硅含量"
+      },
+      "rounding error": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "零头 (指微乎其微的数量)"
+      },
+      "Baltra": {
+        "total_count": 2,
+        "translations": {
+          "Baltra": 2
+        },
+        "is_consistent": true,
+        "preferred": "Baltra"
+      },
+      "datacenter silicon": {
+        "total_count": 1,
+        "translations": {
+          "数据中心芯片": 1
+        },
+        "is_consistent": true,
+        "preferred": "数据中心芯片"
+      },
+      "Blackwell": {
+        "total_count": 1,
+        "translations": {
+          "Blackwell": 1
+        },
+        "is_consistent": true,
+        "preferred": "Blackwell"
+      },
+      "startup capacity": {
+        "total_count": 2,
+        "translations": {
+          "初始产能": 2
+        },
+        "is_consistent": true,
+        "preferred": "初始产能"
+      },
+      "TPU": {
+        "total_count": 3,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "TPU"
+      },
+      "revenue per smartphone": {
+        "total_count": 3,
+        "translations": {
+          "单部智能手机营收": 2
+        },
+        "is_consistent": true,
+        "preferred": "单部智能手机营收"
+      },
+      "advanced nodes": {
+        "total_count": 2,
+        "translations": {
+          "先进制程节点": 1
+        },
+        "is_consistent": true,
+        "preferred": "先进制程节点"
+      },
+      "premium tier": {
+        "total_count": 1,
+        "translations": {
+          "高端市场": 1
+        },
+        "is_consistent": true,
+        "preferred": "高端市场"
+      },
+      "Known Good Die (KGD)": {
+        "total_count": 1,
+        "translations": {
+          "已知良好裸片": 1
+        },
+        "is_consistent": true,
+        "preferred": "已知良好裸片"
+      },
+      "Known Good Die": {
+        "total_count": 2,
+        "translations": {
+          "已知良好裸片": 2
+        },
+        "is_consistent": true,
+        "preferred": "已知良好裸片"
+      },
+      "KGD": {
+        "total_count": 2,
+        "translations": {
+          "KGD": 2
+        },
+        "is_consistent": true,
+        "preferred": "KGD"
+      },
+      "binning": {
+        "total_count": 3,
+        "translations": {
+          "芯片分级": 3
+        },
+        "is_consistent": true,
+        "preferred": "芯片分级"
+      },
+      "Early Adopter Surplus": {
+        "total_count": 1,
+        "translations": {
+          "早期采用者红利": 1
+        },
+        "is_consistent": true,
+        "preferred": "早期采用者红利"
+      },
+      "EUV": {
+        "total_count": 2,
+        "translations": {
+          "EUV": 2
+        },
+        "is_consistent": true,
+        "preferred": "EUV"
+      },
+      "lifetime utilization weighting": {
+        "total_count": 1,
+        "translations": {
+          "全生命周期利用率加权": 1
+        },
+        "is_consistent": true,
+        "preferred": "全生命周期利用率加权"
+      },
+      "depreciation cycle": {
+        "total_count": 1,
+        "translations": {
+          "折旧周期": 1
+        },
+        "is_consistent": true,
+        "preferred": "折旧周期"
+      },
+      "R&D intensity": {
+        "total_count": 1,
+        "translations": {
+          "研发强度": 1
+        },
+        "is_consistent": true,
+        "preferred": "研发强度"
+      },
+      "crypto winter": {
+        "total_count": 1,
+        "translations": {
+          "加密货币寒冬": 1
+        },
+        "is_consistent": true,
+        "preferred": "加密货币寒冬"
+      },
+      "memory correction": {
+        "total_count": 1,
+        "translations": {
+          "存储市场回调": 1
+        },
+        "is_consistent": true,
+        "preferred": "存储市场回调"
+      },
+      "A10": {
+        "total_count": 1,
+        "translations": {
+          "A10": 1
+        },
+        "is_consistent": true,
+        "preferred": "A10"
+      },
+      "non-wafer revenue": {
+        "total_count": 1,
+        "translations": {
+          "非晶圆营收": 1
+        },
+        "is_consistent": true,
+        "preferred": "非晶圆营收"
+      },
+      "absolute packaging revenue": {
+        "total_count": 1,
+        "translations": {
+          "绝对封装营收": 1
+        },
+        "is_consistent": true,
+        "preferred": "绝对封装营收"
+      },
+      "NRE": {
+        "total_count": 4,
+        "translations": {
+          "一次性工程费用 (NRE)": 2
+        },
+        "is_consistent": true,
+        "preferred": "一次性工程费用 (NRE)"
+      },
+      "COGS": {
+        "total_count": 3,
+        "translations": {
+          "销货成本 (COGS)": 2
+        },
+        "is_consistent": true,
+        "preferred": "销货成本 (COGS)"
+      },
+      "mask sets": {
+        "total_count": 1,
+        "translations": {
+          "光罩套件": 1
+        },
+        "is_consistent": true,
+        "preferred": "光罩套件"
+      },
+      "qualification costs": {
+        "total_count": 1,
+        "translations": {
+          "认证成本": 1
+        },
+        "is_consistent": true,
+        "preferred": "认证成本"
+      },
+      "break-even volume": {
+        "total_count": 1,
+        "translations": {
+          "盈亏平衡销量": 1
+        },
+        "is_consistent": true,
+        "preferred": "盈亏平衡销量"
+      },
+      "combo chip": {
+        "total_count": 1,
+        "translations": {
+          "组合芯片": 1
+        },
+        "is_consistent": true,
+        "preferred": "组合芯片"
+      },
+      "NPU": {
+        "total_count": 1,
+        "translations": {
+          "NPU": 1
+        },
+        "is_consistent": true,
+        "preferred": "NPU"
+      },
+      "OEM": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "OEM厂商"
+      },
+      "Total Product Gross Margin": {
+        "total_count": 1,
+        "translations": {
+          "总产品毛利率": 1
+        },
+        "is_consistent": true,
+        "preferred": "总产品毛利率"
+      },
+      "export controls": {
+        "total_count": 1,
+        "translations": {
+          "出口管制": 1
+        },
+        "is_consistent": true,
+        "preferred": "出口管制"
+      },
+      "ZTE": {
+        "total_count": 1,
+        "translations": {
+          "中兴": 1
+        },
+        "is_consistent": true,
+        "preferred": "中兴"
+      },
+      "Exynos": {
+        "total_count": 1,
+        "translations": {
+          "Exynos": 1
+        },
+        "is_consistent": true,
+        "preferred": "Exynos"
+      }
+    },
+    "style_score": 100.0,
+    "suggestions": []
+  },
+  "translations_after_consistency": {
+    "00-intro": [
+      "晶圆需求模型、节点经济学，以及 AI 重塑晶圆代工厂（foundry）版图下的权力动态演变",
+      "作者：Sravan Kundojjala、Gerald Wong、Dylan Patel 与 Jeff Koch",
+      "2026 年 1 月 8 日 · 付费文章",
+      "2013 年，台积电（TSMC）将 100 亿美元押注于单一客户。张忠谋在经济效益尚不明朗的情况下，仅凭苹果会填满这些晶圆厂（fab）产能的承诺，便拍板建设 20 纳米产能。“我押上了整个公司，但我没想过会输，”张忠谋后来回忆道。他的确赢了。苹果的 A8 芯片于 2014 年发布，台积电自此一路高歌猛进。",
+      "https://substackcdn.com/image/fetch/$s_!PHO_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F92bb7233-a323-461e-88e7-d88343c7eab1_2077x1421.png",
+      "苹果在台积电的年度支出从 2014 年的 20 亿美元增长到 2025 年的 240 亿美元。12 年间实现了 12 倍的跃升。苹果占台积电营收的比例从 9% 攀升至巅峰期的 25%，并在 2025 年稳定在 20%。更惊人的是苹果在新制程节点发布初期的统治力：自 20 纳米以来，其份额始终保持在 50% 以上，部分情况下甚至接近 100%。可以说，自 20 纳米以来的每一次重大制程节点迭代，其良率学习曲线的成本实际上都由苹果买了单。",
+      "如今，晶圆代工模式占据主导地位。IDM 仅靠实质上的单一客户，根本无法支撑制程研发和晶圆厂资本支出（capex）。但即便是晶圆代工厂，也需要一个需求庞大且财力雄厚的“首发且最优”客户，来为其持续的技术演进提供资金。过去十年间，苹果在台积电扮演的正是这一角色。这对巨头联盟将两家公司双双推向新高度，将竞争对手远远甩在身后，并为整个芯片制造行业注入了强劲动力。",
+      "本报告追溯了苹果与台积电的合作关系。我们从 2010 年苹果遭英特尔（Intel）拒单开始，梳理了双方历经的五个截然不同的阶段，并探讨苹果如何通过多笔收购以及分布在 15 个设计中心的 8000 多名工程师，构筑起庞大的芯片帝国。我们将分析竞争对手为何始终无法复制这种垂直整合，梳理苹果在 Fab 18 及先进封装设施中的制造版图，并评估随着英特尔18A 与三星（Samsung）重新入局成为可行的替代方案，双方所面临的战略抉择。我们还将探讨双方合作关系的下一阶段。先进制程领域的玩家，如今已不再只有苹果。上述所有观点均由我们独家晶圆代工行业模型与苹果晶圆需求模型的具体数据提供量化支撑。"
+    ],
+    "01-anchor-tenant": [
+      "观察台积电的资本支出轨迹，“苹果效应”清晰可见。在“前苹果时代”（2005-2009 年），台积电年均支出仅为 24 亿美元，且缺乏锚定客户（Anchor Tenant）为巨额投资兜底。到了 2019 至 2022 年，台积电豪掷 980 亿美元，一举超越此前 14 年的支出总和。苹果的制造采购承诺从 2010 年的 87 亿美元一路飙升至 2022 年的 710 亿美元。其中，专门支付给台积电的款项从 2013 年的近乎为零，暴涨至 2025 年的超 230 亿美元。十多年来，苹果始终是唯一有实力大规模预付资金、包下尖端产能的企业。但随着英伟达（NVIDIA）凭借 AI 业务创造强劲现金流，这一局面已被打破。如今，已有两家巨头能够为台积电的技术路线图提供资金支持。",
+      "平台更迭已然发生。台积电的 HPC 营收占比从 2020 年的 36% 攀升至 2025 年的 58%。智能手机营收占比则从 46% 萎缩至 29%。我们的模型显示，到 2027 年第四季度，英伟达消耗的 N3 晶圆数量将超越苹果。苹果在 N2 上的份额将降至 48%，这是十年来苹果首次失去新制程节点绝对主导客户的地位。",
+      "市场共识将此视为永久性的地位取代。但我们的模型得出了不同结论。",
+      "台积电的 A16 节点（译注：此处指台积电的 1.6 纳米埃米级节点，而非苹果处理器）专为 HPC 架构而生。其背面供电、环绕栅极晶体管以及散热设计均针对 HPC 进行了深度优化，智能手机产品线将直接跳过该制程节点。英伟达从中获益尤为显著。苹果的 N2（N2 家族包含 N2 与 A16）份额之所以下滑，并非因为苹果失去了话语权，而是因为该制程节点本就为其他客户量身定制。A14（1.4 纳米）节点则将重新平衡这一格局。台积电从研发之初便让 A14 兼顾移动端与 HPC 需求，并专门为 HPC 打造了独立的背面供电（台积电的商业命名为超级电轨）版本。我们的模型显示，苹果将在 A14 节点上重新夺回 67% 的产能份额，创下自 N3 以来的新高。",
+      "苹果也并未原地踏步。到 2030 年，全新芯片产品线（N系列、C系列）将占据其 15% 的晶圆需求。随着 Mac 自研芯片与定制芯片规模放量，iPhone 在苹果晶圆产品组合中的占比已从 74% 降至 57%。毛利率的提升直观印证了芯片自研战略的成效。在彻底弃用英特尔之后，Mac 的毛利率从 28.5% 跃升至 39.5%，实现了 11 个百分点的扩张。从 A4 到 A18 芯片，iPhone 的毛利率也增长了 5 个百分点。通过逐步替代英特尔、高通（Qualcomm）与博通的芯片，苹果每年的芯片成本节约超 70 亿美元。过去十年间，苹果累计拉动了超 3000 亿美元的供应商资本支出，构筑起一个横跨富士康、ASML 以及数十家精密制造企业的供应链帝国。",
+      "本篇分析涵盖的内容",
+      "本篇分析基于两大独家模型。我们的[晶圆代工模型](https://semianalysis.com/foundry-industry-model/)追踪了营收、晶圆出货量与产能分配情况。该模型量化了终端平台的更迭进程——智能手机营收占比从 46% 跌至 29%，而 HPC 占比则从 36% 跃升至 58%；同时还原了苹果采购承诺从 87 亿美元攀升至 710 亿美元的完整轨迹。我们的[苹果晶圆需求模型](https://semianalysis.com/foundry-industry-model/)预测了各大芯片产品线（A系列、M系列、S系列、N系列、C系列等）的硅片需求。该模型计算出苹果每年由此带来的毛利提升超过 80 亿美元，并预测在 AI 加速器重塑产能分配的背景下，苹果的先进制程份额将从 N3 节点的近乎 100% 跌至 N2 节点的 50% 以下。",
+      "本报告最后将探讨台湾地区风险情景、亚利桑那州工厂的经济效益，以及苹果在何种条件下会自建晶圆厂。"
+    ],
+    "02-key-numbers": [
+      "晶圆需求",
+      "· A系列：从 42 亿美元（2018 年）增至 97 亿美元（2025 年），增幅达 131%",
+      "· M系列：从 0（2019 年）增至 49 亿美元（2025 年），6 年内实现从零到近 50 亿美元的突破",
+      "· S系列：从 8600 万美元（2018 年）增至 3.42 亿美元（2025 年），实现 4 倍增长",
+      "· Apple Silicon 总营收：235 亿美元（2025 年）",
+      "台积电转型：",
+      "· 营收：从 130 亿美元（2010 年）增至 1220 亿美元（2025 年），实现 9.4 倍增长",
+      "· 研发：从 10 亿美元（2010 年）增至超 80 亿美元（2025 年），实现 8 倍增长",
+      "· 资本支出：从 59 亿美元（2010 年）增至超 414 亿美元（2025 年），实现 7 倍增长",
+      "· 毛利率：从 45.5%（2010 年）增至超 59%（2025 年），提升 13.5 个百分点",
+      "封装革命：",
+      "· CoWoS 营收：从 6 亿美元（2018 年）增至 84 亿美元（2025 年），实现 14 倍增长",
+      "· Apple InFO 营收：超 35 亿美元（2025 年）",
+      "· 台积电先进封装占总营收比重：从 6%-7%（2018 年）增至超 10%（2025 年）",
+      "苹果供应链杠杆：",
+      "· 制造采购承诺：从 87 亿美元（2010 年）增至 562 亿美元（2025 年），实现 6.4 倍增长",
+      "· 月度晶圆需求：从 1.9 万片（2013 年）增至 13 万片（2025 年），实现 7 倍增长",
+      "· Fab 18 客户数量：从 4 家（2020 年）增至 45 家（2025 年），实现 11 倍增长",
+      "芯片经济学：",
+      "· iPhone 毛利率：从 36.5%（A4，2018 年）增至 41.5%（A18，2025 年），提升 5 个百分点",
+      "· Mac 毛利率：从 29%（英特尔，2019 年）增至 39.5%（M3 Pro，2023 年），提升 10.5 个百分点",
+      "· 年度芯片节省成本：超 70 亿美元（英特尔 50 亿美元 + 高通 12 亿美元 + 博通 7 亿美元 + 定制 IP 超 5 亿美元）",
+      "台积电平台转移：",
+      "· 智能手机营收占比：从 46%（2028 年第一季度）降至 29%（2025 年第四季度）",
+      "· HPC 营收占比：从 36%（2020 年第一季度）增至 58%（2025 年第四季度）= HPC 现已占据主导地位",
+      "https://substackcdn.com/image/fetch/$s_!HhW4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5b0042c-e3b4-44ac-bfac-5fbc2b48193e_3155x2049.png"
+    ],
+    "03-the-five-phases-of-apple-tsmc": [
+      "https://substackcdn.com/image/fetch/$s_!0uZo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F69fbfcbe-e7c8-4de6-899d-8cd0d36222ea_2058x769.png",
+      "第一阶段：苹果为何启动芯片自研及寻求代工结盟",
+      "2007 年发布的第一代 iPhone 高度依赖三星组件。三星供应了应用处理器、显示屏和闪存。虽然自研芯片是苹果必然的宿命，但有几个因素加速了这一进程。",
+      "第一，苹果的核心供应商三星在 iPhone 发布 18 个月后进军智能手机市场，由于早期的 Galaxy S 设计酷似 iPhone，双方最终陷入法律纠纷。随着三星每次发布新机及其在智能手机领域的竞争地位不断攀升，苹果的不安感与日俱增，迫使其寻找替代方案。",
+      "第二，2010 年代智能手机领域“Wintel”模式（安卓加高通）的崛起让苹果感到担忧，害怕通用芯片会削弱其在软件方面的差异化优势，并影响其高端定位。乔布斯在 2008 年拍板决定：苹果将自研芯片。但制造芯片需要耗资数百亿美元建设晶圆厂。因此，苹果采取了无晶圆厂（fabless）系统公司模式。",
+      "第三，工作负载优化：专门针对 iOS 进行设计，而非迎合通用基准测试，带来了显著的每瓦性能优势。",
+      "第四，能效：iPhone 的轻薄外形要求具备商用芯片无法提供的每瓦性能领先优势。",
+      "第五，利润率：随着时间推移，消除供应商的加价将带来数十亿美元的额外利润。",
+      "苹果渴望掌控其设备搭载的核心技术。2008 年 4 月斥资 2.78 亿美元收购 P.A. Semi 便是关键的垫脚石。Alpha 和 StrongARM 的缔造者 Dan Dobberpuhl 汇聚了全球 150 位最顶尖的低功耗芯片工程师。曾在英特尔和 IBM 任职的以色列工程师 Johny Srouji 便是其中之一。他如今作为硬件技术高级副总裁掌管 Apple Silicon。",
+      "首要问题是，如果我们这样做，能否打造出更优秀的产品？这是重中之重。这与芯片本身无关。苹果并不是一家芯片公司。\n\n—— 苹果硬件技术高级副总裁 Johny Srouji",
+      "继 P.A. Semi 之后，苹果于 2010 年斥资 1.21 亿美元收购了超低功耗芯片设计公司 Intrinsity。2010 年 9 月，苹果在 iPhone 4 中搭载了其首款定制智能手机应用处理器（AP）A4。尽管该芯片仍由三星代工，但苹果开始加紧寻找一家非竞争对手的制造合作伙伴。",
+      "改变计算历史的抉择：台积电、三星与英特尔之争",
+      "在 2010 年至 2014 年的“求偶期”，苹果通过“Azalea项目”探索三星的替代方案，曾考虑过格芯，甚至设想过自建晶圆厂。",
+      "英特尔和台积电这两大顶尖晶圆厂选项随之入局。苹果与英特尔的谈判无果而终，时任首席执行官 Paul Otellini 拒绝了合作，他笃定苹果的订单量不足以弥补其低利润率，也不值得为之承受苹果对供应商的严苛要求。而在台积电，张忠谋接下了这一挑战，将其视为业务增长的机遇，而非拖累利润率的包袱。",
+      "苹果首席运营官 Jeff Williams 在晚宴上与张忠谋会面，游说台积电建设 20 纳米产能。彼时，台积电正将重心与投资转向 16 纳米。苹果要求的资本开支与产能规模前所未闻；他们甚至提议台积电削减股息，以此为晶圆厂建设筹资。台积电押下了这一注。他们最终通过举债为晶圆厂筹集了资金。在最初拍板之际，对双方而言，成功都绝非板上钉钉。",
+      "第二阶段：苹果成就台积电（2014-2020）",
+      "苹果 A8 芯片于 2014 年发布，台积电从此一路高歌猛进。在接下来的六年里，苹果推动台积电在先进制程产能上投资了 600 亿至 800 亿美元。苹果的庞大体量支撑了每一次重大的制程节点迭代：N16、N7、N5。如果没有 iPhone 每年两亿部出货量的基本盘，台积电根本无力承担如此惊人的研发迭代速度，更无法将英特尔和三星甩在身后。",
+      "https://substackcdn.com/image/fetch/$s_!nT85!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47553882-9fa3-4886-aa11-d4452f22c7b0_2052x1518.png",
+      "https://substackcdn.com/image/fetch/$s_!Yiqb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd291825b-404c-4788-aab4-e2c4d580bfb6_2029x1529.png",
+      "https://substackcdn.com/image/fetch/$s_!VYK-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fef47eb93-cb92-4fc3-8c57-06eae322a16f_2184x1599.png",
+      "2016 年，苹果出资推动了 InFO 封装的研发。这不仅打造出机身更轻薄、散热更出色的手机，更催生了先进封装生态系统，如今正是该生态系统在为 AI 加速器提供强大动力。",
+      "在一次坦诚的采访中，张忠谋透露蒂姆·库克后来曾对他说：",
+      "英特尔根本不懂怎么做晶圆代工厂。",
+      "核心在于文化差异：英特尔受困于自身产品的成功光环，未能预见基于 Arm 架构的庞大晶圆代工市场；台积电则展现出极致的服务姿态与灵活性，甚至拿“全公司的命运”押注苹果的成功。台积电为苹果建设了专属产能，允许苹果工程师进驻其实验室，并将自身的技术路线图与 iPhone 的年度迭代周期深度绑定。这种文化上的契合度，体现为台积电甘愿定制的姿态与英特尔死守标准化产品的模式截然不同。时至今日，这依然是英特尔向 IDM 2.0 转型过程中的最大障碍。",
+      "据传苹果最初向台积电开出了 40% 的毛利率，这与台积电当时的毛利率水平相当。如今，台积电从苹果业务中获取的毛利率已远超最初的 40%。",
+      "尽管台积电为苹果投资建设了 20 纳米专属产能，起初却连苹果晶圆代工业务的大头都没能拿下。2015 年，台积电不得不与三星瓜分 14 纳米订单，且后者抢走了超过 60% 的份额。台积电管理层大为震惊，但随即予以反击：加速推进下一代 10 纳米工艺。",
+      "台积电最终胜出，是因为它展现出领先于竞争对手扩产 20 纳米工艺的能力，证明自身能够应对 iPhone 庞大的订单激增。台积电的“夜鹰”团队全天候连轴转，攻克良率难题，建立起了延续至今的运营信任。",
+      "试想，如果苹果在 2014 年选择了英特尔会怎样？英特尔每年将获得超过 150 亿美元的保底晶圆代工营收。失去这笔营收的台积电，恐怕根本无法企及如今的霸主地位。英特尔的晶圆代工业务则会比现在成熟十年。这是芯片代工史上最大的战略失误。",
+      "第三阶段：双向锁定（2020—2023 年）",
+      "到 2020 年，双方的合作关系已从互利共赢演变为相互依存。苹果再也无法抽身。放眼全球，没有任何一家其他晶圆代工厂能在产能和良率上满足 M系列和 A系列芯片的要求。三星的 3 纳米良率仅为 30% 至 40%，而台积电则高达 80% 以上。仅重新设计和重新认证带来的转换成本，估计就高达 20 亿至 50 亿美元。",
+      "台积电同样不能失去苹果。iPhone 贡献了其总营收的 22% 至 25%，并填补了超过 70% 的 3 纳米产能。苹果的订单会提前三年敲定，这让台积电能像公用事业公司一样，底气十足地规划资本支出。",
+      "https://substackcdn.com/image/fetch/$s_!HMKq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd65f4565-f831-4d47-9b4c-694760524e65_2106x757.png",
+      "https://substackcdn.com/image/fetch/$s_!uSih!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d2fb8af-38d8-4f06-b8b8-cb361db6f7c0_2109x754.png",
+      "https://substackcdn.com/image/fetch/$s_!_7t3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0f07975e-d2f2-4742-9214-0a645bef2ecd_1999x938.png",
+      "更严峻的风险在于时间节点。苹果的产品迭代步调与台积电的制程节点路线图高度同步。若转向英特尔或三星，意味着在良率爬坡追赶期间，苹果将面临长达两三年的产品劣势。产品升级周期也将受到威胁，尤其是与假日季同步的 iPhone 年度更新。",
+      "第四阶段：多元化依存（2023 年至今）：权力格局生变，苹果还是造王者吗？",
+      "多年来，新竹与库比蒂诺宛如一体，不遗余力地推动摩尔定律向前发展。苹果采用“同一团队”（One Team）模式，将数百名工程师派驻台积电总部，实际上已将这家晶圆代工厂视为库比蒂诺的延伸。该团队共同开发工艺设计套件（PDK），确保当 5 纳米等新制程节点发布时，苹果的设计能与晶体管特性完美契合。",
+      "然而，生成式 AI 的崛起正在重塑台积电的客户结构。尽管按营收计算，苹果依然是最大的单一客户，但在英伟达、AMD 以及超大规模云厂商的驱动下，HPC 业务板块的增长势头更为迅猛，苹果的相对影响力正被稀释。2020 年第一季度，智能手机占台积电营收的 49%，而 HPC 占 30%。到了 2025 年第三季度，HPC 占比已飙升至 57%，智能手机退居为次要增长引擎。",
+      "尽管苹果的平板电脑与 PC 芯片同样为台积电的 HPC 业务做出了贡献，但 AI 的爆发为台积电带来了一批对先进制程节点产能如饥似渴的新客户。虽然 AI 加速器已转向一年一更的迭代步调，但它们目前主要仍在使用 n-1 节点。苹果依然会是 N2（2 纳米）的基石客户，但将面临其他争夺产能者的激烈竞争。而在 A16（台积电 1.6 纳米埃米级节点，而非苹果处理器）上，由于该节点更侧重于 HPC，HPC 厂商很可能会击败苹果抢占先机。",
+      "苹果充当着可预测的业绩底盘，为新建晶圆厂庞大的固定成本提供了合理性支撑。英伟达则带来了高毛利的上升空间，驱动利润率增长。如今，台积电已拥有两大基石客户，而非一家独大。",
+      "https://substackcdn.com/image/fetch/$s_!CVJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3b95f45-de84-447b-90af-77247fc8c80f_2077x1421.png",
+      "AI 带来的分化：晶圆与封装",
+      "区别在于这些客户购买的产品。苹果购买先进制程逻辑晶圆（N3、N3E）和 InFO 封装。英伟达购买的逻辑晶圆（N4、N5）采用定制工艺，落后先进制程一两个制程节点，但对 CoWoS封装的依赖极高。",
+      "苹果是台积电首个实现规模化采用先进封装的客户。在 A系列和 M系列芯片的全面驱动下，InFO 营收从 2018 年的 18 亿美元增长至 2024 年的超 35 亿美元。然而，台积电的 AI 封装平台 CoWoS 现已实现反超。在英伟达和 AMD 需求的推动下，2025 年 CoWoS 营收达到 96 亿美元，是 InFO 的 2.5 倍。",
+      "https://substackcdn.com/image/fetch/$s_!3bJr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb421a17a-6967-40f7-b81d-01cb526a084f_2074x1421.png",
+      "https://substackcdn.com/image/fetch/$s_!Vy_p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb53c83b2-99cc-439f-ac68-2db99feae73b_2211x1456.png",
+      "这导致台积电的产能规划出现分化。苹果不再是资本支出的唯一驱动力。台积电目前的资本支出被一分为二：一部分用于推进摩尔定律（为苹果研发 2nm），另一部分用于提升封装密度（为英伟达扩充 CoWoS-L）。苹果充当着可预测的业绩底盘，为新建晶圆厂庞大的固定成本提供了合理性支撑。英伟达则带来了高毛利的上升空间，驱动利润率增长。权力格局已从单极世界（苹果）转向双极世界（苹果加 AI），台积电如今可以在两大领域的不同需求之间进行套利，借此维持定价权。",
+      "第五阶段：台积电之外的未来（2027 年及以后）",
+      "苹果正在积极寻找替代方案。",
+      "英特尔18A-P工艺（将于2026年底出货）是自2016年苹果离开三星以来，首个在理论上可行的替代方案。苹果可以对英特尔进行资质认证，初期先将其用于基础款M系列等低风险芯片，并取得不错的良率。如此一来，英特尔将斩获标杆客户订单，苹果也能在不危及核心产品的前提下实现供应链多元化。",
+      "英特尔曾在2014年错失过苹果。如今合作的大门并未完全关闭。核心问题在于：苹果真的会采用吗？",
+      "https://substackcdn.com/image/fetch/$s_!Mkbg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fad4827a2-9eae-4c49-a03d-f03042610f99_1878x915.png",
+      "https://substackcdn.com/image/fetch/$s_!3RG5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F784cd775-1a9c-48be-9969-5bd5e6bcbad3_2328x633.png",
+      "不过，将18A-P用于基础款M系列芯片确实合乎逻辑。如果苹果将20%的基础款M系列晶圆订单转移给英特尔18A-P，按1.8万美元的平均售价 (ASP) 计算，这将为英特尔带来6.3亿美元的晶圆代工厂营收。",
+      "基础款M系列裸片尺寸通常在150至170平方毫米之间，在18A-P工艺下有望实现70%以上的良率（参考目前裸片尺寸相近的Panther Lake）。",
+      "尽管对于150平方毫米的裸片，目前英特尔18A的良率仍低于台积电N3（大于80%），但英特尔能为苹果提供议价筹码、潜在的14A工艺选择权，以及美国本土的晶圆制造与封装能力。",
+      "相比采用背面供电（PowerVia）的英特尔18A，18A-P的每瓦性能提升了8%，且晶体管密度相近。",
+      "此外还有一些影响较小的备选方案：虽然英特尔爱尔兰晶圆厂的Intel16成熟制程节点足以应对数字电视 (DTV) 和连接应用，但我们怀疑其产能无法满足苹果的需求。苹果可对英特尔的低风险芯片进行认证，例如WiFi/蓝牙芯片、显示驱动芯片或电源管理芯片。这既能让英特尔获得标杆客户背书，又能让苹果在不危及核心产品的前提下实现供应链多元化。",
+      "苹果真正的多元化战略",
+      "苹果实际的晶圆代工厂多元化战略，并非将先进制程的A系列和M系列订单撤出台积电。非Pro版芯片、外围芯片以及封装业务，才是多元化战略的真正候选目标。",
+      "https://substackcdn.com/image/fetch/$s_!g79U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1a3272c5-453b-4dae-9970-bee96c35b5f9_2316x1026.png",
+      "多元化的合理切入点：电源管理芯片 (PMIC)、显示驱动芯片、音频/连接芯片",
+      "多元化的难点所在：先进制程A系列和M系列",
+      "苹果与三星LSI及晶圆代工厂重启合作",
+      "2016 年与三星分道扬镳后，苹果将代工订单独家交予台积电。如今苹果推行多元化战略，核心诉求是降低非关键芯片的供应链风险。",
+      "苹果已与三星晶圆代工厂签署战略协议，由三星德克萨斯州奥斯汀工厂代工先进CMOS图像传感器 (CIS)。此举打破了索尼十年来在 iPhone 图像传感器领域的独家垄断地位。借助三星的美国晶圆厂，苹果能够顺利推进内部的“美国制造”目标，无需将重注全压在专攻先进制程的台积电亚利桑那州工厂上。",
+      "我们预计，到 2027 年，三星有望拿下苹果 20% 至 30% 的 CIS 订单份额（年产 1.5 亿至 2 亿颗传感器），为三星贡献 10 亿至 15 亿美元的代工营收。",
+      "https://substackcdn.com/image/fetch/$s_!zvqD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa633537-4571-40e0-88ac-6a5e45b9625e_1770x1211.png"
+    ],
+    "04-the-manufacturing-footprint": [
+      "绘制苹果与台积电生态版图：芯片诞生之地",
+      "要理解双方的合作关系，必须先厘清芯片制造的物理分布。台积电的超大型晶圆厂（GigaFab）网络分布广泛，各厂专攻特定的制程节点与封装技术，每年为苹果量产逾十亿颗芯片。苹果的供应链深度扎根于台湾西部走廊，但出于地缘政治避险考量，目前正被迫向美国亚利桑那州进行成本高昂的产能扩张。",
+      "https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png",
+      "关键后段工序：先进封装",
+      "在先进封装领域，苹果与英伟达的需求分化最为剧烈。苹果依赖集成扇出型层叠封装 (InFO-PoP)。该技术将 DRAM 直接堆叠在系统级芯片 (SoC) 上方，以最大限度降低 iPhone 厚度。这项技术是苹果当年决定弃用三星的关键，它不仅让手机更轻薄，还提升了散热性能。相比之下，英伟达则依赖CoWoS技术。该技术将 HBM 与 GPU 并排平铺于硅中介层上，以榨取最大带宽。",
+      "https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png",
+      "目前，苹果与英伟达尚未在同一条封装产线上短兵相接。苹果独占 AP3 厂（先进封装厂）的 InFO 产能，而英伟达则在争夺 AP5 和 AP6 厂的 CoWoS 产能。然而，随着苹果转向采用系统级整合芯片（SoIC）和 WMCM 技术的 M5/M6 Ultra 芯片，双方必将在 AP6 和 AP7 厂争夺相同的先进 3D 封装资源。这种技术路线的趋同，为未来的产能分配埋下了隐患。",
+      "位于台南的 Fab 18 是台积电先进制程的旗舰工厂，本质上堪称“苹果专属晶圆厂”。A19 Pro、A18 Pro、M3、M4 以及 M5 芯片，均产自 Fab 18 的 3 纳米产线。这种将产能高度集中于台湾南部的布局，正是苹果供应链中不可忽视的地缘政治隐患。",
+      "https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png"
+    ],
+    "05-geographic-concentration-risk": [
+      "https://substackcdn.com/image/fetch/$s_!1UnP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44cf0d07-c0c8-4f99-9061-fe3e452808dd_1749x753.png",
+      "苹果在台湾地区的产能高度集中，是一个显而易见却避而不谈的隐患。苹果几乎所有的芯片制造业务，包括每一颗采用先进制程的 A系列与 M系列芯片，均集中在距离中国大陆仅 100 英里的单一岛屿上。",
+      "台积电亚利桑那州工厂仅能提供象征性的多元化，但按照目前的产能爬坡速度，至少要到 2028 年之后，才能实质性降低对台湾地区的依赖。目前，产自亚利桑那州的先进制程产能占比不足 5%。如果到 2028 年该比例升至 10% 至 15%，则表明苹果确实对台湾地区的风险感到担忧。"
+    ],
+    "06-apples-five-transformational": [
+      "苹果的核心半导体理念简单却展现出极致的掌控欲：掌控那些能让产品脱颖而出的“核心技术”。这一进程始于 2010 年的 A4 芯片，如今已演变为全面的内部化战略。这绝不仅仅局限于 CPU（A系列/M系列）；苹果已系统性地替换了几乎所有关键子系统的外部供应商，为音频（H系列）、安全（T系列）、无线通信（W系列）、超宽带（U系列）乃至如今的空间计算（R系列）开发定制芯片。2019 年收购英特尔基带业务是这块拼图的最后一块，意在取代高通，彻底实现全面的芯片独立。",
+      "https://substackcdn.com/image/fetch/$s_!T7QL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F525ffa40-53d6-4bb0-b973-29dfacb9ebf1_1428x1299.png",
+      "https://substackcdn.com/image/fetch/$s_!Ucm1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d4acf1b-5410-4bd3-92ba-06c13b9cae5d_2546x728.png",
+      "https://substackcdn.com/image/fetch/$s_!kX3T!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d0e0494-d6e0-4615-aaaa-8e13050a8c93_2546x671.png",
+      "https://substackcdn.com/image/fetch/$s_!TRXa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8abc4e05-96d6-4198-aaf9-d36aba20cba4_2546x600.png",
+      "https://substackcdn.com/image/fetch/$s_!qiO_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F54e3d4f8-4dd7-4145-9be2-e499a9f727f2_2548x722.png",
+      "https://substackcdn.com/image/fetch/$s_!D3JM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F84ad5390-5034-4b76-8fe9-06e27a069db4_2544x851.png",
+      "1. P.A. Semi（2008 年，2.78 亿美元）：奠定基石",
+      "P.A. Semi 是一家精品芯片设计公司，由业内最负盛名的处理器架构师之一 Dan Dobberpuhl（DEC Alpha 和 StrongARM 的缔造者）创立。公司拥有 150 名工程师，致力于设计低功耗、高性能的处理器。",
+      "该团队设计了苹果首款定制 SoC——A4。后来操刀 AMD Zen 架构的 Jim Keller，在离职前曾主导苹果 A4 和 A5 的开发工作。\n2. AuthenTec（2012 年，3.56 亿美元）：Touch ID",
+      "收购 AuthenTec 仅 13 个月后，Touch ID 便正式问世。AuthenTec 的架构催生了安全隔区，这一硬件安全子系统负责处理所有生物识别与加密操作。",
+      "安全隔区为 Apple Pay（2014 年）的推出奠定了基础。十年后的今天，Apple Pay 支撑起超 1.5 万亿美元的交易额（2024 年）。这笔 3.56 亿美元的收购可谓物超所值，它撑起了一项年营收达数十亿美元的金融服务业务。2012 年的一项芯片架构决策，在十年后成就了规模超千亿美元的服务业务版图。\n3. PrimeSense（2013 年，3.6 亿美元）：Face ID",
+      "PrimeSense 曾为微软 Kinect 开发 3D 深度感知技术。苹果斥资 3.6 亿美元将其收入囊中，并耗时四年将该技术微型化，使其能够完美嵌入手机刘海。",
+      "原深感摄像头将 3 万个红外点投射到用户面部，绘制出 3D 结构，并在毫秒级时间内完成身份验证。Face ID 的安全性远超 Touch ID（误识率仅为百万分之一，而后者为五万分之一）。",
+      "这项技术还催生了 Animoji 和 Memoji，并成为 iPhone 12 Pro 搭载激光雷达扫描仪的基石。\n4. 英特尔调制解调器业务（2019 年，10 亿美元）：自研 5G 调制解调器",
+      "苹果在与高通达成诉讼和解的同一周，火速收购了英特尔的智能手机调制解调器业务。这一时机绝非巧合。和解不过是暂时休战。",
+      "通过收购英特尔相关业务，苹果将分布在圣地亚哥和慕尼黑的 2200 名工程师（涵盖调制解调器设计、射频及验证领域）、1.7 万项无线专利，以及众多实验室、设备和 IP 收入囊中。",
+      "5G 调制解调器是苹果亟待攻克的最后堡垒。尽管有所延误，历经五年研发，C1基带最终在 iPhone 16e（2025 年）上实现商用。苹果预计到 2027 至 2028 年，将在其产品线中彻底剔除高通，为其带来毛利率叠加的良机。5. 与 Imagination 决裂（2017 年）：自研 GPU",
+      "自初代 iPhone 起，苹果一直向 Imagination Technologies 购买 GPU 设计授权。2017 年 4 月，苹果通知 Imagination，将在 15 到 24 个月内停止使用其 IP。Imagination 股价一夜之间暴跌 70%。",
+      "苹果早已秘密组建了内部 GPU 团队。A11 芯片（2017 年 9 月）搭载了苹果首款定制 GPU。这款苹果自研 GPU 的性能比 Imagination 的设计提升了 30%。",
+      "Imagination 濒临破产，最终被一家有中资背景的私募股权公司收购。到 2020 年，双方达成和解，并签署了多年授权协议。",
+      "全球设计运营版图",
+      "苹果在四大洲设有超 15 个设计中心，拥有 8000 多名芯片工程师：",
+      "https://substackcdn.com/image/fetch/$s_!L_yD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F66058ace-743d-430d-9cb3-fc188726f24a_2364x878.png",
+      "苹果的 CPU 性能领先优势正是在以色列孕育的。赫兹利亚（Herzliya）团队的许多成员是从英特尔以色列分公司挖来的，后者曾打造出 Pentium M、Core 和 Sandy Bridge 架构。正是这支团队设计了在基准测试中霸榜的 Firestorm、Avalanche 和 Everest 核心。",
+      "这个曾为英特尔贡献出最优秀架构的国家，如今正在设计击败英特尔的苹果芯片。",
+      "圣地亚哥研发中心则直指高通。苹果的基带设计部门就设在高通总部所在的同一条街上。该办公室的员工大多是前高通和前英特尔工程师，他们对高通基带的工作原理了如指掌，更清楚如何将其击败。",
+      "DTCO：设计-工艺协同优化",
+      "苹果与台积电共同定义了工艺设计套件（PDK）。台积电实质上为苹果配备了数百名专属工程师，打造出一种本质上的“虚拟IDM”（垂直整合制造商）模式。当苹果提出需要更宽的内存总线或特定的晶体管架构时，台积电便会相应调整 PDK 予以配合。"
+    ],
+    "07-silicon-performance-evolution": [
+      "A系列与M系列的持续进击",
+      "这种制造领域的统治力，造就了苹果过去十年间如复利般累积的性能领先优势。凭借率先迈向下一代制程节点的能力，苹果得以在相同的散热包络内容纳更多晶体管，在每瓦性能上持续压制 x86 生态系统。",
+      "晶体管数量呈线性增长，但每瓦性能才是核心指标。在 A18/M4 世代向 N3E 节点的过渡中，苹果优先考量成本与良率，而非纯粹的晶体管密度微缩（相比 N3B），因此与前几代相比，其晶体管数量的增幅相对温和。神经网络引擎则经历了最惊人的指数级爆发，算力从 A11 的 0.6 TOPS 一路狂飙至 A17/A18 的 35 TOPS。这印证了苹果早在“AI PC”炒作周期爆发的数年前，就已将战略重心全面转向端侧 AI。",
+      "https://substackcdn.com/image/fetch/$s_!jU4H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5db79be6-7c20-4af5-bf20-073e6fcdbd56_3234x2067.png",
+      "https://substackcdn.com/image/fetch/$s_!IUPy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F176c3a2f-dde5-4573-a923-db0b5925c877_3270x1031.png",
+      "https://substackcdn.com/image/fetch/$s_!Ci1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02d45a1f-87c8-4119-91a9-bedde9bd8070_3322x1110.png",
+      "自 2013 年以来，苹果始终比竞争对手提前 12 到 24 个月率先推出业界首创功能。",
+      "苹果自研芯片的技术优势",
+      "苹果的性能领先优势源于十年前在架构路线上的押注。当英特尔和高通竞相追逐 5GHz 以上的高主频时，苹果却另辟蹊径，追求“宽架构、低主频”，在较低频率下实现每个时钟周期执行更多指令。",
+      "前端架构：解码宽度走向均势",
+      "早在 2020 年，苹果就在 A14 和 M1 芯片上引入了 8宽解码，领先竞争对手整整四年。但到 2025 年，竞争对手已然追平了这一差距。",
+      "https://substackcdn.com/image/fetch/$s_!00WK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F488a6e86-3660-419e-933b-dcd1883c81f4_1612x846.png",
+      "解码宽度已不再是苹果的护城河。如今的优势已转移至缓存层级、垂直整合以及极致高效的微型能效核。",
+      "缓存层级：苹果依然领先的阵地",
+      "苹果的设计理念是：配备超大高速的 L1 缓存、大容量共享的 L2 缓存，并在 DRAM 之前设置系统级缓存 (SLC)。SLC 使得 CPU、GPU 和神经网络引擎能够直接共享数据，无需调用缓慢的系统内存。",
+      "https://substackcdn.com/image/fetch/$s_!GAx7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8af7977b-b9e9-42a2-b60b-6bf8b9bad677_2000x985.png",
+      "苹果的 SLC 容量优势比竞品大 3 到 4 倍，且支持 CPU 与 GPU 完全共享。AMD 的 Strix Halo 在容量上与之相当，但 CPU 核心无法访问该缓存。",
+      "https://substackcdn.com/image/fetch/$s_!zTFs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb09390ab-b7c5-4d9c-97e6-dc7718a72be5_1610x674.png",
+      "苹果与高通的 Oryon 在 L1 缓存容量、延迟和缓存层级上不相上下，毕竟最初的 Nuvia 设计团队大多是从苹果挖角而来的。英特尔的 L0/L1.5 层级结构则增加了延迟。",
+      "统一内存架构",
+      "传统 PC 架构为 CPU 和 GPU 配备独立的内存池，需要进行数据复制。苹果自研芯片采用统一内存架构：GPU 读取的内存地址与 CPU 完全一致。",
+      "这消除了对 AI 负载至关重要的“复制惩罚”。一个 20GB 的 LLM 只需加载一次，神经网络引擎与 GPU 即可同时访问。高通移动芯片虽使用共享的 LPDDR5X，但缺乏苹果的细粒度一致性。AMD Strix Halo 的 MALL (内存附加末级缓存) 则仅供 GPU 使用。",
+      "垂直整合",
+      "苹果的效率优势源于其掌控了那些看似不起眼的芯片：定制的电源管理 IC 和存储控制器实现了毫秒级的动态电压和频率调节 (DVFS)。芯片支持快速休眠，能在高功耗下完成突发任务，并比 x86 竞品更快地降至接近零功耗的空闲状态。",
+      "iPhone 17 Pro 的均热板与 A19 Pro 的散热包络系协同设计而成。苹果精准掌握其持续功耗预算（5-7W），并据此定制芯片。相比之下，高通必须兼顾三星、小米和一加等不同终端，针对最恶劣的散热工况进行设计。",
+      "2024 至 2025 年的行业变局：",
+      "1. 解码能力追平：英特尔、AMD 和高通均在 2024 年实现 8 宽解码架构。\n2. 引入 SLC：高通新增 8MB SLC；英特尔新增 8MB 内存侧缓存。\n3. L1 缓存追平：高通 Oryon 核心配备与苹果同等的 320KB L1 缓存，且延迟相近。\n4. 跑分逼近：安卓阵营的基准测试成绩正不断逼近 iPhone。\n5. 深度定制：小米自研 XRing 芯片在设计、功耗和软件层面实现了深度的垂直整合。",
+      "苹果的现存优势包括：更大的 SLC（32MB 对比 8-10MB）、实现 CPU 与 GPU 完全一致性的真正统一内存，以及赋能散热协同设计的垂直整合。尽管差距不断缩小，苹果依然稳坐效率王座。",
+      "接下来我们将深入剖析具体细节：苹果在台积电的晶圆需求与经济账，涵盖我们对台积电 A14 节点（译注：指台积电 1.4 纳米节点，而非苹果处理器）直至本年代末的预测。我们将量化苹果的 N2 需求，并分析其如何影响旧制程节点需求——令人意外的是，苹果对部分旧节点的需求不降反升。文中将展示按芯片划分的详细需求数据，揭示苹果试图打破 iPhone 单一依赖所带来的转变。正如前文所述，英伟达的需求正在先进制程节点上挤压苹果的份额，我们也将用具体数据来量化这一 HPC 爆发态势。",
+      "此外还有更多硬核内容：封装经济账、台积电的非苹果业务版图、苹果自研替换博通基带的进展、竞品效仿苹果垂直整合的动作、台积电之外向下游供应链的涓滴效应，以及台积电与苹果合作关系的未来走向。"
+    ],
+    "08-apple-wafer-demand": [
+      "按制程节点、芯片与设备划分：苹果在台积电的晶圆经济账",
+      "2014 至 2025 年间，苹果在台积电的晶圆需求增长 3.2 倍，复合年增长率（CAGR）达 11%。但这组宏观数据掩盖了实际的发展轨迹。其增长呈现阶梯式跃升。",
+      "https://substackcdn.com/image/fetch/$s_!fryo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F042db7e9-f67a-4419-ba2d-4d0540a28d86_2042x1488.png",
+      "https://substackcdn.com/image/fetch/$s_!64F1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0bc106e1-0132-4a7b-bfd4-733ca1f2ef62_2073x1422.png",
+      "2014 至 2017 年间，随着 16nm 和 20nm 伴随 iPhone 销量爬坡，需求以每年约 10% 的速度稳步增长。随后增长停滞。2018 至 2019 年间，尽管 N7 进入量产阶段，总晶圆需求却横盘整理。苹果正在消化上一次节点转换，蓄力开启下一轮增长。",
+      "真正的拐点出现在 2020 年。随着 N5 产能爬坡以及 Mac 搭载苹果自研芯片发布，晶圆需求在单年内飙升 37%。随后两年延续了这一强劲势头，2019 至 2022 年间需求几乎翻倍。这是整个数据集中最陡峭的增长曲线，并从根本上重塑了苹果的芯片版图。",
+      "紧接着便是增速放缓。2024 年，苹果录得自 2013 年以来的首次需求同比下滑。N5 需求崩盘的速度超过 N3 的承接能力，导致总需求萎缩约 10%。但随着 N3 达到峰值且 N2 投入量产，2025 年将迎来强势反弹。",
+      "核心洞察在于结构层面：苹果的晶圆需求呈阶梯式演进，数年的平台期后往往伴随猛烈跃升。每一次跃升都与重大的节点转换高度契合。",
+      "制程节点主导地位日益强化",
+      "苹果在每个新节点发布初期的份额占比，揭示了一个惊人的趋势。2014 年在 20nm 节点上，苹果在巅峰期贡献了该节点 77% 的营收。2016 年在 16nm 节点上，这一峰值为 46%。2018 年在 N7 节点上为 47%。随后 N5 问世，苹果在 2021 年攫取了该节点 75% 的营收。到了 2023 年的 N3 节点，苹果的份额更是高达 92%。",
+      "最后一个数字堪称不可思议。苹果几乎以一己之力，承担了台积电最先进制程节点整个良率学习曲线的资金成本。等到其他客户实现规模量产时，苹果早已充分榨取了丰厚的早期经济红利。这一趋势线呈凸型增长（前置爆发）：在每个新节点发布初期，苹果攫取的份额正持续攀升。",
+      "https://substackcdn.com/image/fetch/$s_!scr_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5a5c98b5-9000-478c-8945-3f73c485f914_2613x1734.png",
+      "https://substackcdn.com/image/fetch/$s_!m4zH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb698a1fb-80b1-4eed-a020-a32320cae9ad_2613x1735.png",
+      "https://substackcdn.com/image/fetch/$s_!GytB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6713176b-0b57-4af9-8ab7-1d840b5b97ff_2240x917.png",
+      "占台积电营收份额的波动",
+      "过去十年间，苹果占台积电总营收的份额一直在 17% 至 24% 的区间内波动。当苹果主导新节点产能爬坡时，其份额会急剧飙升；随着其他客户扩大规模，该份额随之回落；到了下一次节点转换时，份额又会再次飙升。",
+      "2023 年 24% 的峰值与 N3 的发布年份重合。2025 年 17% 的谷值则反映出 AI 加速器客户正在吸纳先进制程产能。在此期间，英伟达、AMD 和超大规模云服务商的 ASIC (专用集成电路) 增速超越了苹果。尽管苹果的绝对支出仍在持续攀升，但由于台积电总营收增速更快，其相对份额随之缩水。",
+      "如果我们在计算复合年增长率（CAGR）时剔除 2020 年这一异常值，实际底层增长率将从 11% 降至接近 8%。在 N5 产能爬坡以及疫情激发的苹果自研芯片需求双重驱动下，单单这一年就拉高了整体增长数据。尽管增长趋势依然存在，但这一特殊年份夸大了实际的增长幅度。",
+      "N2：台积电史上最多元化的节点发布",
+      "N2 标志着台积电在节点发布初期的客户结构发生了结构性转变。我们预计，2026 年苹果将再次以高份额占据 N2 的主导地位，但这仅代表 <50% of N2 demand. Qualcomm (Snapdragon 8 Elite 2), AMD (Venice and MI450x), MediaTek (Dimensity 9600), Broadcom (ASIC), and Intel (Nova Lake) will follow. This is unprecedented. Previous leading-edge nodes were mobile-heavy, with Apple capturing >90% 的份额。而 N2 从发布首日起，就将需求分散至智能手机、PC、服务器和网络设备领域。如今，HPC 驱动着产能分配，苹果十年来首次在先进制程产能上面临真正的竞争。",
+      "https://substackcdn.com/image/fetch/$s_!z0Rw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2defe9cc-d261-4ae0-91de-44a97a37de7b_1756x1262.png"
+    ],
+    "09-apples-wafer-demand-model-fo": [
+      "N2 打破既定格局",
+      "N2 将于 2025 年投入量产，初始产能为 23.4 万片晶圆，到 2027 年将迅速攀升至 77.8 万片。这一产能轨迹似曾相识。然而，苹果的份额却呈现出截然不同的景象。",
+      "在峰值时期，苹果占据了 N2 营收的 48%。这一比例低于 N5 的 75% 和 N3 的 92%。十年来，苹果首次不再是最新先进制程节点上的主导客户。来自超大规模云厂商的 AI加速器需求已从结构上重塑了客户组合。",
+      "N3 需求急速衰退",
+      "N3 晶圆需求在 2025 年达到 63.9 万片的峰值，到 2027 年降至 35.7 万片，并于 2030 年一路陡降至 14.1 万片。五年内降幅高达 78%，衰退速度超过以往任何制程节点。苹果并未像维持旧制程节点那样，为了旧款产品而保留 N3 产能。一旦开始过渡，撤出速度极快。这主要归因于向 N2 的过渡，而苹果腾出的产能将被 AI加速器接盘。台积电近期甚至扩充了 3 万至 4 万片晶圆月投片量（wspm）的 N3 产能，以满足涌入的加速器需求。",
+      "N5 迎来第二春",
+      "N5 是首个呈现 U 型复苏的苹果制程节点。其晶圆需求在 2025 年触底至 15.7 万片，随后在 2030 年攀升回 43.4 万片。以往的制程节点均呈单调衰退；N5 却迎来了反弹。",
+      "这很可能是出于成本优化的考量。苹果正将成熟的 N5 产能重新用于平均售价（ASP）较低的产品：入门级 Mac、旧款 iPhone、调制解调器与连接芯片（C系列/N系列）、射频芯片以及大批量生产的配件。该制程节点上的营收增速低于晶圆量增速，印证了 ASP 的下降。",
+      "1.4nm：苹果重夺主导权",
+      "1.4nm 晶圆需求在 2029 年起步时为 30.7 万片，到 2030 年暴涨至 80.8 万片。这一数字超越了 N5 历史峰值的 68.9 万片。其产能爬坡曲线是整个数据集中最陡峭的，首年产量甚至超过了 N3 的次年产量。",
+      "预计苹果将占据 1.4nm 产能的 67%。在 N2 节点上让步后，苹果在下一个前沿制程节点重夺领导地位。这种模式表明，苹果正在前置产能承诺，抢在竞争对手扩大规模前锁定供应。",
+      "https://substackcdn.com/image/fetch/$s_!C_w6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5752b485-7489-419c-8331-ff4c16cf7abe_2602x1562.png",
+      "全新芯片系列：N 系列与 C 系列",
+      "2025 年将出现两个全新的芯片系列。到 2030 年，它们合计约占苹果新增晶圆需求的三分之一。",
+      "N系列在首年实现 2.5 倍的产能爬坡，月度晶圆需求从 4500 片跃升至 1.14 万片。随后四年则几乎走平。这种曲线特征表明它属于特定产品类别，很可能是苹果的神经网络引擎或专用 AI加速器。其需求随设备搭载率同步增长，而非自身代表新的增长引擎。",
+      "C系列则呈现出不同的形态。从 2025 年到 2028 年，其需求增长 6 倍（月度晶圆从 3100 片增至 1.7 万片），随后进入平台期。这是一条凹型增长（增速递减）曲线：增速逐年放缓。这符合新产品的发布曲线：早期采用者推高初始销量，随后随着市场成熟，增长逐渐放缓。Vision Pro 与空间计算正符合这一特征。",
+      "到 2030 年，N系列与C系列合计将占苹果月度总晶圆需求的 15%。而在 2024 年，这两大系列均未问世。",
+      "2008 年至 2011 年间，随着 iPhone 和 iPad 规模扩张，苹果对台积电的晶圆需求实现连年三位数增长。到 2022 年，由于终端设备出货量步入平台期，增速回落至个位数，并在 2023 至 2024 年转为负增长。2020 年高达 37% 的激增是上一次重大拐点，主要由 5G iPhone 和 M1 Mac 的发布双重驱动。我们预计，2025 至 2030 年间苹果的晶圆需求将保持 9% 的增长。",
+      "https://substackcdn.com/image/fetch/$s_!WQhG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd81d73a6-b25d-4a69-b5e6-1e6ab1f65626_5033x1375.png",
+      "苹果支出同比",
+      "苹果在台积电的年度晶圆代工支出从 2014 年的 23 亿美元飙升至 2030 年的近 750 亿美元，16 年间狂飙 32 倍。唯一下滑的年份是 2023 年，当时 N5 向 N3 过渡引发了暂时的制程节点空档期，导致营收微降 1.3%。尽管支出规模持续扩张，苹果占台积电总营收的份额在 2021 年触及 25.5% 的历史高点后，便一直在 19% 至 26% 之间震荡。这表明，尽管苹果的支出在不断攀升，但台积电由 AI 驱动的营收增速同样迅猛。",
+      "晶圆需求量增长",
+      "2014 年至 2030 年间，苹果对台积电的年度晶圆需求量翻了四倍有余。这种增长并非线性，而是与制程节点迭代同频共振，呈波浪式推进。最陡峭的跃升出现在 2020 至 2021 年（分别增长 25% 和 23%），当时 N5 与苹果自研芯片同步开启产能爬坡。数据集中仅有的连续负增长出现在 2023 至 2024 年，当时 N5 向 N3 过渡造成了暂时的空档期，导致需求收缩。2026 年超 17% 的反弹则标志着新一轮增长周期的开启，届时 N2 将实现规模化量产，全新芯片系列也将开始放量。",
+      "苹果在台积电的份额回升",
+      "随着苹果在 2029 年过渡到定价更高的 A14 制程节点，其在台积电总营收中的占比有望回升。这将提升苹果对台积电的营收贡献。",
+      "这一周期与过往规律如出一辙。苹果的份额在制程节点发布时飙升，随着竞争对手扩大规模而回落，并在下一个制程节点到来时再次飙升。长期平均值始终保持在 20% 左右。",
+      "A16 与 A14：制程节点优化方向的转变",
+      "台积电的 A16（N2）制程节点专为 HPC 工作负载而设计。背面供电、环绕栅极晶体管以及热设计边界均针对数据中心功耗预算量身定制，而非迁就智能手机的电池瓶颈。英伟达成为最大受益者。苹果可能会在未来的 A21/M6 Pro 芯片世代中采用 A16 节点，但该制程节点的设计取舍更契合英伟达的应用场景，而非苹果。这正是苹果在 N2 节点上的份额跌至 48% 的原因。苹果并未丧失话语权。只是该制程节点本就为另一类客户而生。",
+      "A14（1.4nm）制程节点重新平衡了这一局面。台积电从一开始就将 A14 节点设计为兼顾移动端与 HPC，主打移动端的 A14 基础工艺率先登场，随后才是主攻 HPC 的 A14 SPR。能效曲线再次向消费级设备倾斜。我们的模型显示，苹果在 A14 节点上收复了 67% 的制程节点份额，创下自 N3 以来的新高。这一时间点与苹果的产品节奏完美契合：即 2029 至 2030 年间推出的 A23 Pro 和 M8 芯片。",
+      "市场共识将苹果在 N2 节点上的份额下滑解读为永久性失势。但制程节点路线图给出了不同的答案。A16 是英伟达的制程节点（译注：这里的 A16 指台积电的 1.6 纳米埃米级节点，而非苹果处理器）。A14 则是苹果的王者归来。"
+    ],
+    "10-chip-series-analysis": [
+      "A系列：步入成熟期",
+      "A系列的需求呈线性。2014 年至 2030 年的复合年增长率（CAGR）不足 2%，且在部分时间段内绝对规模停滞或下滑。2017 年至 2019 年间，增长率为零。2022 年至 2024 年间，需求略有收缩。",
+      "这一增长趋势确切无疑，但已触及天花板。iPhone 的出货量已步入成熟期。任何需求的增长均源于新制程节点上裸片尺寸的增大。到 2030 年，A系列在苹果总晶圆需求中的占比将从 2014 年的 92% 跌破 30%。",
+      "M系列：增长叙事",
+      "M系列在早期呈现指数级增长，2020 年至 2023 年的 CAGR 超过 170%。但这条曲线属于凹型增长（增速递减）。2023 年之后，增速急剧放缓，到 2030 年的 CAGR 将降至 8% 左右。",
+      "即便增速放缓，到 2030 年，M系列的需求量仍将达到 A系列需求的 60%。交叉点正在逼近。如果 M系列的增长再次提速（或许得益于主打 AI 的 Mac 等新品类），这两条曲线可能会在 2035 年前交叉。",
+      "https://substackcdn.com/image/fetch/$s_!xnAA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd8add941-7bec-40c0-8027-ef55852fc98c_2602x1562.png",
+      "产品组合多元化",
+      "2014 年，A系列占苹果晶圆需求的 92%，存在集中度风险。",
+      "到 2030 年，A系列占比为 29%，M系列为 16%，N系列加 C系列为 15%，而“其他”（电源管理芯片 (PMIC)、音频、显示、无线控制器）占比为 34%。没有任何单一产品系列的需求占比超过 35%。",
+      "苹果已从单一产品的芯片公司，演变出多元化的芯片产品组合。过去十年间，其集中度风险已减半。",
+      "两大全新芯片系列（N系列和 C系列）将于 2025 年发布。到 2030 年，两者将合计占据苹果增量晶圆需求的三分之一左右。",
+      "到 2030 年，N系列与 C系列将占苹果每月晶圆需求的 15%。而在五年前，这两大系列还根本不存在。"
+    ],
+    "11-device-mix-diversification": [
+      "出货量脱钩",
+      "出货量与芯片价值的脱钩，揭示了苹果晶圆代工经济学的真实面貌。自 2017 年以来，A系列出货量增长已基本停滞，但同期 A系列晶圆价值却增至近三倍。在更大尺寸的裸片、更昂贵的制程节点，以及主 SoC 之外不断扩张的硅含量的多重驱动下，如今每部 iPhone 创造的代工厂营收大约是七年前的三倍。M系列在更短的时间内展现了相同的规律：从 2020 年到 2030 年，其出货量增长 72 倍，价值却暴增 222 倍。苹果单台设备的硅含量正呈指数级飙升。这种脱钩现象解释了，为何在 iPhone 出货量增长停滞、Mac 销量保持平稳的情况下，苹果在台积电的绝对支出仍在持续攀升。苹果与台积电的合作主线，已从单纯的出货量，转向单台设备的硅含量强度。",
+      "iPhone 之外的多元化",
+      "自 2018 年以来，苹果在台积电的晶圆需求已实现显著的多元化。当年，iPhone 占苹果每月晶圆消耗量的 74%。到 2025 年，这一比例降至 57%。在 M1 之前根本不存在的 Mac 芯片，如今在整体份额中占比达 12%。包含成熟制程芯片的“其他”类别，其份额从 7% 翻倍至 14%。iPhone 依然是基石，但 Mac、可穿戴设备以及定制芯片已成为重要的贡献者。台积电如今大规模服务于苹果的五大产品线，有效降低了与 iPhone 周期绑定的营收波动。",
+      "https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff254d202-3236-484f-984d-364e66b22bf3_2602x1562.png"
+    ],
+    "12-device-shipments": [
+      "设备基数庞大但已趋于成熟。苹果目前全品类设备年出货量已超 6 亿台。但增长率却揭示了另一番景象：2020 至 2021 年间超 20% 的年增长率，在预测期内已压缩至 3% 左右。整体产品组合正步入平台期。",
+      "iPhone 出货量在近十年前便已触顶，此后始终在窄幅震荡。到 2030 年的预测显示其仅有低个位数增长，勉强跟上人口增速。iPhone 贡献了绝大部分出货量，但对增量设备增长几乎毫无贡献。",
+      "https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b702f05-f11d-4923-bbab-ed54ad45d6a0_2077x1421.png",
+      "https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0193568a-d512-439e-84e9-60c6e1d30864_3190x1120.png",
+      "可穿戴设备曾拉动增长，随后陷入停滞。AirPods 是苹果历史上起量最快的产品，发布不到四年便形成可观规模。Watch 也经历了类似轨迹。此后这两大品类均步入平台期，到 2025 年其增长率将压缩至低个位数。",
+      "新品类影响甚微。相对于超 6 亿台的设备基数，到 2030 年 Vision Pro 的出货量仍只是个零头。其主要贡献在于硅含量。驱动空间计算的 C系列芯片消耗了与其设备出货量极不相称的晶圆产能。",
+      "预测数据中出现了服务器的身影。2024 年新增了“服务器”单列项目，并将在 2030 年前持续增长。虽然出货量较小，但该品类的存在表明，苹果的数据中心芯片野心（Baltra）绝非空穴来风。",
+      "2025 至 2030 年的增长前景疲软。在预测期内，设备总出货量年均增长率约为 3%，远不及本年代初的两位数增速。苹果的晶圆需求增长将日益与设备出货量增长脱钩，其驱动力在于单台设备的硅含量，而非出货量的增加。"
+    ],
+    "13-ai-overtakes-apple-at-the-lead": [
+      "在台积电先进制程的大部分历史中，苹果是无可争议的产能霸主。在 N5 上，直到 2023 年，苹果的季度晶圆需求始终超过英伟达、博通、亚马逊和 AMD 的总和。如今，这一格局已彻底逆转。到 2025 年第四季度，仅英伟达一家消耗的 N5 晶圆，就超过了苹果所有 A系列和 M系列的总和。在 N3 上，差距进一步拉大。苹果率先推进 N3 产能爬坡，在 2023 年拿下了该制程节点 92% 的产能，但 AI 加速器随后以排山倒海之势席卷而来。到 2026 年第二季度，以英伟达 Blackwell 继任者为首的 AI 生态系统 N3 需求，已超出苹果 N3 需求近三倍。完成这一历史性交替仅用了不到 18 个月。",
+      "AI 需求的构成让这一转变愈发令人瞩目。预计到 2027 年第四季度，仅英伟达一家在 N3 上消耗的晶圆数量，就将超过苹果旗下所有芯片产品线的全部先进制程需求。博通、亚马逊和 AMD 更是进一步推高了这一总量。",
+      "这一结构性变化释放的信号十分明确。过去十年，苹果撑起了台积电的先进制程业务，在每一个新制程节点上为良率学习买单，并消化初始产能。如今，AI 客户正在大规模使用这一基础设施。苹果依然是台积电最大的智能手机客户与关键的锚定客户，但已不再是最前沿节点的决定性力量。台积电如今最大的增长引擎是英伟达。",
+      "https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe160da5b-334e-4209-94e8-a7503df66005_1864x942.png",
+      "台积电的平台转移：HPC 超越移动端",
+      "在台积电的大部分发展史中，智能手机始终是其锚定平台。从 2012 年到 2021 年，在苹果与高通于历代先进制程节点上持续迭代 SoC 的双重驱动下，智能手机营收每年能力压 HPC 营收。十多年来，苹果一直是台积电先进制程上无可争议的锚定客户。2012 至 2021 年间，由苹果和高通领衔的智能手机业务，为台积电贡献的晶圆代工厂营收超越了任何其他平台。",
+      "这种绝对优势源于精密的商业设计：苹果为良率学习买单，消化初始产能，并在竞争对手实现规模化量产前，攫取最优的经济效益。该模式之所以行之有效，是因为没有任何其他客户能像苹果一样，兼具庞大体量、高度可预测性与极强的支付意愿。",
+      "这一时代正在落幕。",
+      "但 2022 年标志着一个结构性拐点。HPC 营收首次超越智能手机，此后更是加速增长，复合年增长率（CAGR）近 22%，而智能手机仅为 11%。预计到 2025 年，HPC 营收将突破 710 亿美元，达到智能手机营收（350 亿美元）的两倍以上。这一差距仍在不断拉大。来自英伟达、AMD 的 AI 加速器以及超大规模云服务商的定制芯片，已从根本上重塑了台积电的客户结构。智能手机虽仍是台积电的第二大平台，却已不再是增长引擎。",
+      "https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ce07cbb-47d9-48d1-b618-4dbdb28201f8_1853x1318.png",
+      "这一转变对苹果产生了直接影响。尽管苹果是台积电最大的智能手机客户，但随着 HPC 客户吸纳了不成比例的先进制程产能，苹果的话语权已然削弱。即使苹果的绝对支出持续攀升，其在台积电总营收中的份额仍从 2023 年的 24% 跌至 2025 年的 17%。与之抗衡的趋势是单部智能手机营收，该指标自 2012 年以来已增至三倍，到 2025 年将接近 28 美元。如今，每部 iPhone 创造的晶圆代工厂营收是十年前的三倍，这反映出裸片尺寸更大、制程节点更先进，以及芯片含量不断增加（M系列 Mac、AirPods、Apple Watch）。苹果或许正在流失台积电总产量的份额，但其从单台设备中攫取的价值却创下历史新高。",
+      "苹果并未坐以待毙。2029 年的 1.4nm 产能爬坡显示，苹果将重新夺回 67% 的节点份额，这表明其提前数年就进行了战略性产能预订。有关 Baltra（苹果用于内部 AI 基础设施的服务器级芯片）的传闻，预示着其可能向 HPC 领域扩张。随着裸片尺寸增大以及整个产品组合中芯片含量的提升，单部智能手机营收自 2012 年以来已增至三倍。苹果或许会流失台积电产量的相对份额，但其从单台设备中攫取的价值却创下历史新高。问题在于，这是否足够。当 AI 晶圆需求以两倍于苹果的速度增长，且超大规模云厂商纷纷开出数十亿美元的预付款支票时，即便是全球最重要的智能手机客户，也不得不在晶圆代工厂里争夺关注度。",
+      "AI 浪潮已庞大到不容忽视，苹果在台积电的地位虽依然强大，却已不再无可撼动。",
+      "在 20nm、16nm、N5 和 N3 各自的巅峰时期，仅苹果一家就占据了超过 50% 的节点产能。",
+      "https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc8b5a2c-07ee-40bf-8d70-b29f66d1a800_2074x1421.png",
+      "2022 年，台积电的 HPC 营收首次超越智能手机，此后每个季度这一差距都在不断拉大。预计到 2025 年，HPC 营收将突破 710 亿美元，达到智能手机营收（350 亿美元）的两倍以上。驱动因素显而易见：来自英伟达、AMD 的 AI 加速器以及超大规模云服务商的定制芯片，正以智能手机从未有过的速度吞噬产能。",
+      "如今，仅英伟达一家的先进制程晶圆消耗量就足以与苹果匹敌。更广泛的 AI 生态系统正以近 22% 的复合年增长率扩张，相比之下，智能手机仅为 11%。尽管苹果的绝对支出仍在持续攀升，但其在台积电总营收中的占比却从 2023 年的 24% 跌至 2025 年的 17%。苹果首次在产能竞价中败下阵来。",
+      "尽管智能手机出货量已趋于饱和，且 HPC 营收已超越智能手机，台积电仍在不断提升其单部智能手机的平均营收。这要归功于苹果极其坚决的制程节点迭代与创新，以及安卓厂商对高端市场的日益重视。"
+    ],
+    "14-how-apple-subsidizes-tsmc": [
+      "苹果与台积电的合作关系中，最容易被误解的一点便是定价模型。浅层分析往往假定晶圆价格固定不变。实际情况却是一项动态的风险分担协议，该协议会随着制程节点生命周期的推进而不断演变。",
+      "已知良好裸片（KGD）模式",
+      "当台积电推出最尖端的制程节点（例如用于 A17 Pro 的 N3）时，在初始产能爬坡阶段，良率可能低至 55%。如果每片晶圆上近半数芯片都是次品，采用标准的晶圆定价模式（每片晶圆 20,000 美元）对苹果来说将是毁灭性的。",
+      "交易方案：苹果通过谈判达成协议，在初始产能爬坡期间仅为已知良好裸片（KGD）买单。台积电则承担次品成本。这有效统一了双方的利益诉求：台积电必须提高良率才能盈利，而苹果也免受制程节点不成熟的拖累。",
+      "利益交换：苹果承诺提供其他客户无法企及的庞大订单量（通常买断 50% 到 100% 的初始产能），这实际上为晶圆厂的研发和折旧提供了资金支持。",
+      "模式切换：一旦良率达到成熟阈值，合同便恢复为标准的按晶圆计价模式。这激励台积电迅速解决良率问题。",
+      "利用芯片分级优化良率",
+      "苹果利用其 M系列产品矩阵将良率最大化。一块 GPU 核心损坏的次品 M3 Max 裸片不会被扔进垃圾桶；经过芯片分级，它会变成 M3 Pro 或低配版 Max。",
+      "A系列：芯片分级灵活性较低（iPhone 的庞大出货量要求芯片具备高度一致性）。不过，A18 与 A18 Pro 的差异（5 核与 6 核 GPU）表明，激进的芯片分级策略正引入 iPhone 产品线，以对冲 N3E 的良率成本。这使得苹果能在标准版 iPhone 16 中使用存在单个 GPU 缺陷的裸片。",
+      "M系列：极致的芯片分级。M3 Max 拥有 30 核与 40 核 GPU 两个版本。这使得苹果能够回收利用那些原本会作为良率损耗报废的裸片。对于 M系列 Max 和 Ultra 这种大面积、高成本的裸片而言，该策略是维持利润率的关键。",
+      "2020 年，苹果刚开始为 iPhone 12（A14 芯片）量产 5 纳米芯片不久，Fab 18 报告显示其仅有 4 家客户。这种排他性解释了苹果为何能包揽 100% 的初始产能。",
+      "到 2024 年，随着制程节点走向成熟且良率企稳，Fab 18 的客户数量激增至 45 家。",
+      "https://substackcdn.com/image/fetch/$s_!vdcu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F42eb5fd1-d5ca-40e5-bd6d-2653f836848e_2023x1476.png",
+      "https://substackcdn.com/image/fetch/$s_!2aUo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91b4629f-760f-4e1a-98cc-1c94f1b71680_2218x1488.png",
+      "这一增长轨迹（从 4 家到 14 家、21 家，再到 45 家）印证了“苹果浪潮”假说：",
+      "第一阶段（基石客户）：新建晶圆厂投产，客户寥寥无几（由苹果独占）。",
+      "第二阶段（全面开放）：苹果将制程节点推向成熟并攫取“早期采用者红利”后，该节点向 AMD、英伟达和高通开放。",
+      "第三阶段（平台化）：苹果实质上为全行业先进制程的研发买单，同时换取最初 12 到 18 个月的独占期。",
+      "台积电资本支出大爆发（由苹果驱动）",
+      "台积电的资本支出轨迹呈现出三个截然不同的时代。前苹果时代（2005-2009 年），年均支出仅 24 亿美元。当时这家晶圆代工厂缺乏锚定客户，对未来需求的可见度也十分有限。后苹果时代（2010-2018 年），A系列芯片的庞大出货量为更大规模的投资提供了依据，资本支出攀升至每年 80 亿美元。EUV 时代（2019-2022 年）彻底打破了这一模式。台积电在四年内狂砸 980 亿美元，超过了此前 14 年累计支出的 920 亿美元。这种加速扩张需要极高的确定性。正是苹果的产量承诺与制造采购承诺，赋予了台积电重金下注的底气。如果尖端制程节点没有保底买家，任何晶圆代工厂都无法支撑起每年超 300 亿美元的资本支出。",
+      "https://substackcdn.com/image/fetch/$s_!rHve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F56125581-9776-4e1f-a532-54afff4fdb76_2224x1113.png",
+      "https://substackcdn.com/image/fetch/$s_!TC7Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F20b8ef63-eb59-4a38-be6c-8a1f1519d040_2410x591.png",
+      "自 2014 年 A8 芯片在 20 纳米制程节点发布以来，苹果实质上为台积电 730 亿美元的先进制程产能提供了资金支持，占同期所有先进制程节点资本支出的 47%。按照苹果 22% 至 25% 的营收占比推算，其对应的资金规模应为 430 亿美元，而实际出资额是这一数字的 1.7 倍。这种溢价源于苹果在节点发布初期的独家锚定客户地位：2014 年的 20 纳米和 2017 年的 10 纳米节点，苹果几乎包揽了 100% 的产能；2023 年的 N3 节点，苹果也吃下了超 90% 的产能。",
+      "上述数据采用了全生命周期利用率加权算法。该算法并未将节点发布首年的资本支出全额记在苹果账上，而是按 5 年折旧周期内苹果在该节点总产量中的份额进行折算。即使采用这种保守的计算方法，苹果的贡献依然令所有其他客户的总和相形见绌。截至 2025 年，台积电累计 2590 亿美元的资本支出中，有 830 亿美元的基础设施投资可归功于苹果。这一数字甚至超过了苹果同期自身的半导体研发支出。",
+      "高通、AMD、英伟达和联发科合计贡献了台积电 25% 的营收，却承担了约 30% 的先进制程资本支出重担。这是因为它们通常在苹果消化了良率风险并为初期产能爬坡提供资金的 12 到 18 个月后，才来填补产能空缺。这种动态机制促成了双向绑定：苹果得以率先享受晶体管密度和效率提升的红利；台积电则获得了一个有保障的锚定客户，从而化解每年高达 250 亿至 300 亿美元制程节点迭代的巨额风险。",
+      "台积电研发资金：苹果的角色",
+      "自 2010 年以来，台积电的研发支出增长了 8 倍，从不足 10 亿美元攀升至 2025 年的 80 亿美元。但研发强度却呈现出另一番景象。在 2015 至 2019 年间，当苹果还是推动先进制程演进的主力时，台积电的研发支出始终保持在营收的 8% 以上。如今该比例已降至 7% 以下，这并非因为台积电缩减了投资，而是因为 AI 驱动的营收增速，远超支撑其所需的研发投入增速。苹果出资扛过了 EUV 转型和 7 纳米以下制程开发的攻坚阶段；而 AI 客户如今正在大规模收割这些投资的红利。",
+      "https://substackcdn.com/image/fetch/$s_!TYZW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fee6cebd1-fd21-463d-8ea3-bc1c483eb2ab_2184x1599.png",
+      "苹果在台积电头部客户中的地位",
+      "过去二十年间，台积电的客户集中度稳步攀升，前十大客户的营收占比从 2000 年的 44% 增长至 2025 年的 78%。苹果一直是推动这一集中度上升的核心动力。2014 年之前，苹果对台积电的营收贡献微乎其微；而到 2025 年，仅苹果一家就占据了前十大客户营收的约四分之一。在 2014 至 2022 年的大部分时间里，苹果的增速超过了前十大客户中其余九家的平均水平，使得台积电的客户结构日益向库比蒂诺（译注：苹果总部）倾斜。",
+      "如今，这种动态已经逆转。在 2024 和 2025 年，受英伟达、博通、AMD 的 AI 加速器以及超大规模云服务商定制芯片的需求驱动，台积电非苹果业务的营收增速几乎是苹果的两倍。在 2010 年代的大部分时间里，除苹果外的前十大客户群体的增速仅为个位数，而如今正以每年 40% 以上的速度扩张。苹果依然是台积电最大的单一客户，但其增速已被一个由 AI 核心买家组成的联盟所超越，这些买家正在合力重塑这家晶圆代工厂的营收基本盘。客户集中度仍在持续攀升，但重心正从智能手机向数据中心芯片转移。",
+      "苹果的领先优势正在缩小。2020 年，苹果贡献的营收是其余九大客户平均值的 4.6 倍。到 2025 年，这一比例已压缩至 2.9 倍。苹果目前依然是遥遥领先的最大客户，但随着 AI 客户规模的不断扩大，这一差距正在不断缩小。",
+      "2022 年的回落值得注意。前十大客户集中度实际上从 2020 年的 74% 降至 2022 年的 68%，随后才触底反弹。这恰逢加密货币寒冬与存储市场回调，重创了数家前十大客户。到 2025 年集中度回升至 78%，则是受 AI 驱动。",
+      "https://substackcdn.com/image/fetch/$s_!ruoA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fde1a3584-a724-4132-8aa5-2431e21ca7a1_2076x1421.png",
+      "https://substackcdn.com/image/fetch/$s_!TOEI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2a6ec45b-54c0-4f80-aa71-b199438d84c6_1999x1419.png",
+      "https://substackcdn.com/image/fetch/$s_!iCdz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F43f2a692-06d7-4101-96e4-9ac3cba91af8_1946x1419.png",
+      "剔除苹果后的前十大客户增速迎来拐点。2014 至 2021 年间，这一群体的营收增速在多数年份仅为个位数。2023 年，该数字逆转跃升至 +37%。2024 年进一步达到 +40%。这种加速几乎完全归功于英伟达和超大规模云服务商的 ASIC 芯片。",
+      "客户集中度是一把双刃剑。台积电 78% 的营收来自 10 家客户，对少数买家的依赖愈发显著。到 2025 年，仅苹果和英伟达两家就可能占据总营收的 40% 以上。这两家公司中任何一方的需求震荡，都将产生重大影响。"
+    ],
+    "15-packaging-economics": [
+      "苹果开创了台积电的先进封装业务。InFO 于 2016 年随 A10 首次亮相，苹果将其规模从 2018 年的 18 亿美元一路推升至 2025 年的 38 亿美元。2018 年，CoWoS 营收仅为 1.18 亿美元，堪称零头；到 2025 年，这一数字将高达 96 亿美元。转折点发生在 2022 年，当时 AI 需求迎来爆发。苹果凭借 InFO 一手缔造了台积电的先进封装业务，而如今，英伟达对 CoWoS 的需求已成为核心驱动力。",
+      "2020 年，苹果占据了台积电非晶圆营收的 78%，这是其统治力的巅峰。当时 InFO 正为 A系列芯片扩大规模，而 CoWoS 客户寥寥无几。到 2024 年，苹果的份额跌至 36%；到 2025 年，这一数字将进一步降至 30%。苹果的绝对封装营收仍在持续增长，但以英伟达为首的 AI 客户，正以更快的速度扩张 CoWoS 规模。",
+      "https://substackcdn.com/image/fetch/$s_!mCH9!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc62347a3-6aaf-43ed-96e5-fb586e0612e9_1360x987.png",
+      "https://substackcdn.com/image/fetch/$s_!JN0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2e0b9e2-8634-4ad3-8f1a-c5b4cc1aa184_2330x1757.png"
+    ],
+    "16-apple-gross-margin-savings-fro": [
+      "踢出英特尔，入账超 40 亿美元",
+      "Mac 产品线弃用英特尔，是苹果史上利润最丰厚的一项供应链决策。",
+      "2020 年之前，苹果为采购一颗存在过热隐患的笔记本 CPU，需向英特尔支付约 250 美元。如今，苹果制造一颗 M系列芯片的成本预估仅为 40 至 50 美元。",
+      "Mac 产品线的毛利率表现，是苹果自研芯片战略最强有力的佐证。2019 年，受制于英特尔高达 150 美元以上的处理器平均售价 (ASP)，外加其产品路线图上的时钟频率不进反退，Mac 毛利率仅徘徊在 28.5%。到 2025 年，Mac 毛利率已攀升至 39.5%。在规模达 400 亿美元的 Mac 业务中，这 11 个百分点的增幅，意味着每年约 44 亿美元的新增毛利润。",
+      "https://substackcdn.com/image/fetch/$s_!e2JC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb2ec6024-f069-4d87-8506-232a28861129_1871x1266.png",
+      "https://substackcdn.com/image/fetch/$s_!4H9L!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f88aefa-99cb-4b29-91bd-e8a7c1f8d8ba_1150x981.png",
+      "https://substackcdn.com/image/fetch/$s_!MQH3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4502165c-3735-47fb-9f83-387768a9b6ed_1895x1204.png",
+      "英特尔长达五年多未能以具备竞争力的良率量产 10 纳米工艺，导致数十亿美元的价值从苹果流向了英特尔。如今，苹果终于夺回了这笔利润。M系列芯片的单颗销货成本 (COGS)（涵盖 N3 晶圆、封装及良率损耗）预估为 77 美元，相比之下，英特尔 Core i9 的平均售价 (ASP) 则高达 150 美元以上。按每年 6500 万台 Mac 的销量计算，此次架构转换可带来 47.7 亿美元的毛利润提升。面对 10 亿美元的一次性工程费用 (NRE) 投入，其盈亏平衡点仅为 1400 万颗。",
+      "基带豪赌：砸下 60 亿美元打破高通垄断",
+      "逐步摆脱对高通的依赖（预计每年节省 12 亿美元），是苹果自研芯片版图的最后一块关键拼图。",
+      "C1基带是苹果代价最高、也最具争议的一场自研豪赌。高通的 X75 5G 芯片平均售价 (ASP) 超过 20 美元，毛利率高达 50%。相比之下，苹果自研的 C1基带采用 N4 工艺，裸片面积为 50 平方毫米，单颗销货成本 (COGS) 估计为 14.40 美元。在 2.5 亿台支持蜂窝网络的 iOS 设备中，单机节省的 5 美元每年可带来 12 亿美元的毛利提升。",
+      "真正的重头戏在于一次性工程费用 (NRE)。为了达成这一目标，苹果砸下了 60 亿美元（包括斥资 10 亿美元收购英特尔基带业务、组建 2200 人的工程师团队，以及光罩套件和认证成本）。该项目的盈亏平衡销量高达 13 亿颗，大约相当于 iPhone 五年的总产量。到 2027 年高通芯片被彻底淘汰时，这些持续节省下来的成本将转化为纯粹的利润率扩张。",
+      "自研 Wi-Fi 7：从博通手中夺回 7 亿美元",
+      "苹果在 Wi-Fi 和蓝牙领域向博通发起的攻势鲜受关注，但意义同样重大。N1 是苹果首款自研 Wi-Fi 7 解决方案，它取代了博通售价 11 美元的组合芯片，其单颗 COGS 降至 8.7 美元。在 3 亿台 iOS 设备中，单机节省 2.3 美元，每年可夺回 7 亿美元的毛利。该项目的 NRE 相对较低，仅为 2.5 亿美元，盈亏平衡销量为 1.1 亿颗。预计在量产的首年内即可实现盈亏平衡。",
+      "毛利率层面的成本节约",
+      "这些节约下来的成本每年都会循环产生并带来复利效应。每一代 A系列芯片都能继承前代的设计成果。每一款 M系列芯片都能在 Mac、iPad 以及如今的 Vision Pro 产品线中摊销 NRE。每年合计高达 75 亿美元的成本节约（英特尔 CPU：50 亿美元；高通基带：12 亿美元；博通连接芯片：7 亿美元；GPU/NPU IP：5 亿美元，外加效率提升带来的收益）为下一轮研发提供了资金弹药。苹果将节约的资金反哺研发，而安卓手机厂商却仍在向高通和联发科购买苹果如今已能自研的芯片。",
+      "总产品毛利率的走势便是最好的佐证：从 2018 年的 34.4% 攀升至 2025 年的 36.8%。随着定制芯片日益成熟，Mac 率先发力，iPhone 紧随其后。",
+      "苹果自研芯片不断扩容，直接转化为台积电的业务增量。M系列拉动台积电的苹果业务营收增长了 50 亿美元。C系列与 N系列晶圆还将逐步带来 30 亿美元的增量。"
+    ],
+    "17-competitor-replication-efforts": [
+      "华为、三星、小米、中兴、谷歌等厂商曾试图复刻苹果在垂直整合上的成功，但均未能形成连贯的战略。华为曾看似是有力的挑战者，却因出口管制而在台积电处遭遇断供。华为目前已接近自给自足，且其投资版图远比苹果广阔，已深入光刻机、晶圆厂与存储器等供应链深层。然而，中国在先进制程节点上的产能受限，拖慢了其迈向成功的步伐。",
+      "三星凭借其 Exynos 应用处理器与基带，几乎复刻了 A系列战略，但受限于产能与良率，依然依赖高通等外部芯片企业。"
+    ]
+  }
+}

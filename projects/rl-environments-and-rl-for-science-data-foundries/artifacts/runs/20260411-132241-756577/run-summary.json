@@ -1,0 +1,98 @@
+{
+  "project_id": "rl-environments-and-rl-for-science-data-foundries",
+  "status": "incomplete",
+  "total_sections": 13,
+  "translated_sections": 2,
+  "total_paragraphs": 179,
+  "translated_paragraphs": 70,
+  "error_count": 12,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "SemiAnalysis",
+      "existing": "",
+      "new": "SemiAnalysis",
+      "existing_note": "",
+      "new_note": "Source: Sacra, SemiAnalysis.",
+      "section_id": "01-outsourcing-and-the-ghost-of-s",
+      "timestamp": "2026-04-11T13:23:11.923088"
+    },
+    {
+      "error": "Failed to translate section 02-during-a-gold-rush-sell-shove: Server disconnected without sending a response.",
+      "timestamp": "2026-04-11T13:39:11.995768",
+      "section": "02-during-a-gold-rush-sell-shove"
+    },
+    {
+      "error": "Failed to translate section 03-so-you-want-to-make-a-coding-e: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:39:22.521631",
+      "section": "03-so-you-want-to-make-a-coding-e"
+    },
+    {
+      "error": "Failed to translate section 04-data-foundries-and-expert-cont: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:39:32.606202",
+      "section": "04-data-foundries-and-expert-cont"
+    },
+    {
+      "error": "Failed to translate section 05-buying-patterns-across-labs: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:39:42.664342",
+      "section": "05-buying-patterns-across-labs"
+    },
+    {
+      "error": "Failed to translate section 06-llm-based-automation-is-not-a: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:39:52.753093",
+      "section": "06-llm-based-automation-is-not-a"
+    },
+    {
+      "error": "Failed to translate section 07-sorry-your-agent-is-not-allow: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:40:02.802505",
+      "section": "07-sorry-your-agent-is-not-allow"
+    },
+    {
+      "error": "Failed to translate section 08-rl-as-a-service: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:40:12.853399",
+      "section": "08-rl-as-a-service"
+    },
+    {
+      "error": "Failed to translate section 09-rl-for-science: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:40:22.954112",
+      "section": "09-rl-for-science"
+    },
+    {
+      "error": "Failed to translate section 10-rl-meets-the-wet-lab: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:40:33.068362",
+      "section": "10-rl-meets-the-wet-lab"
+    },
+    {
+      "error": "Failed to translate section 11-why-rl-for-biology-can-be-chal: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:40:43.104429",
+      "section": "11-why-rl-for-biology-can-be-chal"
+    },
+    {
+      "error": "Failed to translate section 12-multi-agent-architectures-gpt: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1077)",
+      "timestamp": "2026-04-11T13:40:53.189678",
+      "section": "12-multi-agent-architectures-gpt"
+    }
+  ],
+  "started_at": "2026-04-11T13:22:41.755898",
+  "finished_at": "2026-04-11T13:40:53.405023",
+  "run_id": "20260411-132241-756577",
+  "artifacts_path": "projects\\rl-environments-and-rl-for-science-data-foundries\\artifacts\\runs\\20260411-132241-756577",
+  "export": {
+    "generated_at": "2026-04-11T13:40:53.216991",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\rl-environments-and-rl-for-science-data-foundries\\强化学习环境与面向科学的强化学习：数据代工厂与多智能体架构_zh.md",
+      "generated": true,
+      "bytes": 49222
+    }
+  },
+  "api_calls": 3,
+  "elapsed_seconds": 1091.7,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

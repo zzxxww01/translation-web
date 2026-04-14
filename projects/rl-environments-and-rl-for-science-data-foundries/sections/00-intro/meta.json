@@ -1,0 +1,2100 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Worker Automation, RL as a Service, Anthropic's next big bet, GDPval and Utility Evals, Computer Use Agents, LLMs in Biology, Mid-Training, Lab Procurement Patterns, Platform Politics and Access",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Worker Automation, RL as a Service, Anthropic's next big bet, GDPval and Utility Evals, Computer Use Agents, LLMs in Biology, Mid-Training, Lab Procurement Patterns, Platform Politics and Access",
+      "parent_block_plain_text": "Worker Automation, RL as a Service, Anthropic's next big bet, GDPval and Utility Evals, Computer Use Agents, LLMs in Biology, Mid-Training, Lab Procurement Patterns, Platform Politics and Access",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 194,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "subtitle",
+      "translations": {
+        "source_metadata": {
+          "text": "劳动力自动化、强化学习即服务、Anthropic 的下一个重大押注、GDPval 与效用评估、计算机使用智能体、生物学领域的 LLM、中期训练、实验室采购模式、平台政治与访问权限",
+          "model": "source_metadata",
+          "created_at": "2026-04-10T22:52:40.341825",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "劳动力自动化、强化学习即服务、Anthropic 的下一个重大押注、GDPval 与实用性评估、计算机操作智能体、生物学领域的大语言模型、中期训练、实验室采购模式、平台政治与访问权限",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.737637",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "劳动力自动化、强化学习即服务、Anthropic 的下一个重大押注、GDPval 与效用评估、计算机使用智能体、生物学领域的 LLM、中期训练、实验室采购模式、平台政治与访问权限",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By AJ Kourabi and Dylan Patel",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "AJ Kourabi",
+          "start": 3,
+          "end": 13,
+          "href": "https://substack.com/@ajkourabi1",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 18,
+          "end": 29,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [AJ Kourabi](https://substack.com/@ajkourabi1) and [Dylan Patel](https://substack.com/@semianalysis)",
+      "parent_block_plain_text": "By AJ Kourabi and Dylan Patel",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "AJ Kourabi",
+          "start": 3,
+          "end": 13,
+          "href": "https://substack.com/@ajkourabi1",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Dylan Patel",
+          "start": 18,
+          "end": 29,
+          "href": "https://substack.com/@semianalysis",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 29,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "byline",
+      "translations": {
+        "source_metadata": {
+          "text": "作者：AJ Kourabi、Dylan Patel",
+          "model": "source_metadata",
+          "created_at": "2026-04-10T22:52:40.341857",
+          "tokenized_text": "作者：[[[LINK_1|AJ Kourabi]]]、[[[LINK_2|Dylan Patel]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "作者：AJ Kourabi 与 Dylan Patel",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.737768",
+          "tokenized_text": "作者：[[[LINK_1|AJ Kourabi]]] 与 [[[LINK_2|Dylan Patel]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "作者：AJ Kourabi、Dylan Patel",
+      "confirmed_tokenized": "作者：[[[LINK_1|AJ Kourabi]]]、[[[LINK_2|Dylan Patel]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Jan 06, 2026 · Paid",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Jan 06, 2026 · Paid",
+      "parent_block_plain_text": "Jan 06, 2026 · Paid",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "date_access",
+      "translations": {
+        "source_metadata": {
+          "text": "2026 年 1 月 6 日 · 付费文章",
+          "model": "source_metadata",
+          "created_at": "2026-04-10T22:52:40.341877",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "2026 年 1 月 6 日 · 付费文章",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.737807",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "2026 年 1 月 6 日 · 付费文章",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "We’re hiring for AI Analysts and Tokenomics Analyst roles. [Apply here](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f) or reach out directly.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "We’re hiring for AI Analysts and Tokenomics Analyst roles. [Apply here](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f) or reach out directly.",
+          "start": 0,
+          "end": 175,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0003",
+      "parent_block_index": 3,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*We’re hiring for AI Analysts and Tokenomics Analyst roles. [Apply here](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f) or reach out directly.*",
+      "parent_block_plain_text": "We’re hiring for AI Analysts and Tokenomics Analyst roles. [Apply here](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f) or reach out directly.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "We’re hiring for AI Analysts and Tokenomics Analyst roles. [Apply here](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f) or reach out directly.",
+          "start": 0,
+          "end": 175,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 175,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们正在招聘 AI 分析师与代币经济学分析师。[点击此处申请](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f)或直接与我们联系。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.737869",
+          "tokenized_text": "[[[EM_1|我们正在招聘 AI 分析师与代币经济学分析师。[点击此处申请](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f)或直接与我们联系。]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Last June, we argued that scaling RL is the critical path to unlocking further AI capabilities. As we will show, the past several months have affirmed our thesis: major capability gains are coming from ramping RL compute. Pre-training continues to see further optimizations, but the lab’s are laser focused on scaling compute for RL.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Last June, we argued that scaling RL is the critical path to unlocking further AI capabilities. As we will show, the past several months have affirmed our thesis: major capability gains are coming from ramping RL compute. Pre-training continues to see further optimizations, but the lab’s are laser focused on scaling compute for RL.",
+      "parent_block_plain_text": "Last June, we argued that scaling RL is the critical path to unlocking further AI capabilities. As we will show, the past several months have affirmed our thesis: major capability gains are coming from ramping RL compute. Pre-training continues to see further optimizations, but the lab’s are laser focused on scaling compute for RL.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 333,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "去年六月，我们曾断言：扩展 RL (强化学习) 是解锁更强 AI 能力的关键路径。正如后文所示，过去数月的发展印证了我们的预判——核心能力的大幅跃升正源于 RL 算力的持续加码。尽管预训练仍在不断优化，但各大实验室已将焦点死死锁定在扩展 RL 算力上。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.737893",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data - Dylan Patel and AJ Kourabi · June 8, 2025",
+      "source_html": null,
+      "element_type": "li",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data",
+          "start": 0,
+          "end": 82,
+          "href": "https://newsletter.semianalysis.com/p/scaling-reinforcement-learning-environments-reward-hacking-agents-scaling-data",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "li",
+      "parent_block_markdown": "* [Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data](https://newsletter.semianalysis.com/p/scaling-reinforcement-learning-environments-reward-hacking-agents-scaling-data) - Dylan Patel and AJ Kourabi · June 8, 2025",
+      "parent_block_plain_text": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data - Dylan Patel and AJ Kourabi · June 8, 2025",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data",
+          "start": 0,
+          "end": 82,
+          "href": "https://newsletter.semianalysis.com/p/scaling-reinforcement-learning-environments-reward-hacking-agents-scaling-data",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 126,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "扩展强化学习：环境、奖励劫持（Reward Hacking）、智能体、扩展数据 - Dylan Patel 与 AJ Kourabi · 2025 年 6 月 8 日",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.737951",
+          "tokenized_text": "[[[LINK_1|扩展强化学习：环境、奖励劫持（Reward Hacking）、智能体、扩展数据]]] - Dylan Patel 与 AJ Kourabi · 2025 年 6 月 8 日",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "The best example of this is demonstrated by OpenAI. The company has used the same base model, GPT-4o, for all their recent flagship models: o1, o3, and GPT-5 series. Gains in the performance of OpenAI’s models for 18 months were being driven by post-training and scaling up RL compute alone. OpenAI has now fixed their pretraining problems, so with that vector of scaling unlocked, progress will be even more rapid.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The best example of this is demonstrated by OpenAI. The company has used the same base model, GPT-4o, for all their recent flagship models: o1, o3, and GPT-5 series. Gains in the performance of OpenAI’s models for 18 months were being driven by post-training and scaling up RL compute alone. OpenAI has now fixed their pretraining problems, so with that vector of scaling unlocked, progress will be even more rapid.",
+      "parent_block_plain_text": "The best example of this is demonstrated by OpenAI. The company has used the same base model, GPT-4o, for all their recent flagship models: o1, o3, and GPT-5 series. Gains in the performance of OpenAI’s models for 18 months were being driven by post-training and scaling up RL compute alone. OpenAI has now fixed their pretraining problems, so with that vector of scaling unlocked, progress will be even more rapid.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 415,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "OpenAI 就是绝佳的例证。该公司近期发布的所有旗舰模型（o1、o3 及 GPT-5 系列），均沿用了同一个基础模型——GPT-4o。过去 18 个月里，OpenAI 模型的性能提升，完全归功于后训练与 RL 算力的扩展。如今，OpenAI 已解决其预训练难题；随着这一扩展维度的打通，未来的技术演进必将更加迅猛。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.737974",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0007",
+      "parent_block_index": 7,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.737997",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "This is not to say that pre-training is dead: Anthropic, xAI, and especially Google all derived significant gains from scaling up pre-training. But OpenAI’s progress last year and ability to keep up using an older base model was existence proof of the efficacy of post-training.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This is not to say that pre-training is dead: Anthropic, xAI, and especially Google all derived significant gains from scaling up pre-training. But OpenAI’s progress last year and ability to keep up using an older base model was existence proof of the efficacy of post-training.",
+      "parent_block_plain_text": "This is not to say that pre-training is dead: Anthropic, xAI, and especially Google all derived significant gains from scaling up pre-training. But OpenAI’s progress last year and ability to keep up using an older base model was existence proof of the efficacy of post-training.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 278,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这并非断言预训练已死：Anthropic、xAI，尤其是 Google，均从扩展预训练中获益匪浅。但 OpenAI 去年的进展，及其仅凭旧版基础模型便能稳居第一梯队的能力，正是后训练有效性的有力证明。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738020",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Scaling up RL is difficult as it requires a steady stream of tasks the model needs to solve and learn from. Pre-training had the entire internet to train on, but equivalent corpus for RL is yet to be fully created. Most RL data and tasks must be constructed from scratch, which can be quite labor intensive.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0009",
+      "parent_block_index": 9,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Scaling up RL is difficult as it requires a steady stream of tasks the model needs to solve and learn from. Pre-training had the entire internet to train on, but equivalent corpus for RL is yet to be fully created. Most RL data and tasks must be constructed from scratch, which can be quite labor intensive.",
+      "parent_block_plain_text": "Scaling up RL is difficult as it requires a steady stream of tasks the model needs to solve and learn from. Pre-training had the entire internet to train on, but equivalent corpus for RL is yet to be fully created. Most RL data and tasks must be constructed from scratch, which can be quite labor intensive.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 307,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "扩展 RL 绝非易事，这要求源源不断的任务供模型去解决并从中学习。预训练能以整个互联网为训练场，但 RL 尚无同等规模的语料库。绝大多数 RL 数据与任务必须从零构建，极耗人力。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738040",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Making the models “do the homework” started with math problems, which are easy to grade. Methods have since advanced, including branching out to newer domains like healthcare and financial modelling. To do this, models are placed in increasingly specialized “environments” that require the model to do these tasks.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Making the models “do the homework” started with math problems, which are easy to grade. Methods have since advanced, including branching out to newer domains like healthcare and financial modelling. To do this, models are placed in increasingly specialized “environments” that require the model to do these tasks.",
+      "parent_block_plain_text": "Making the models “do the homework” started with math problems, which are easy to grade. Methods have since advanced, including branching out to newer domains like healthcare and financial modelling. To do this, models are placed in increasingly specialized “environments” that require the model to do these tasks.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 314,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "让模型“做作业”始于数学题，这类问题极易评分。此后训练方法不断演进，触角已延伸至医疗健康与金融建模等全新领域。为此，模型被置于专业化程度日益加深的“环境”中，被迫在其中完成各项任务。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738059",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Aggregating tasks and data can be done manually, or through the curation of high signal user data. The latter is what gives companies like Windsurf and Cursor the ability to post-train their own competitive models despite not having the resources of a lab.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Aggregating tasks and data can be done manually, or through the curation of high signal user data. The latter is what gives companies like Windsurf and Cursor the ability to post-train their own competitive models despite not having the resources of a lab.",
+      "parent_block_plain_text": "Aggregating tasks and data can be done manually, or through the curation of high signal user data. The latter is what gives companies like Windsurf and Cursor the ability to post-train their own competitive models despite not having the resources of a lab.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 256,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "汇总任务与数据既可依靠人工，也可通过提炼高信号用户数据来实现。正是得益于后者，Windsurf 与 Cursor 等公司纵使缺乏顶尖实验室的资源，依然能后训练出极具竞争力的自有模型。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738078",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "These post-training efforts have improved model capability in domains like coding, but also model utility: models are more usable in everyday tools like Excel and PowerPoint.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "utility",
+          "start": 98,
+          "end": 105,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0012",
+      "parent_block_index": 12,
+      "parent_block_type": "p",
+      "parent_block_markdown": "These post-training efforts have improved model capability in domains like coding, but also model *utility*: models are more usable in everyday tools like Excel and PowerPoint.",
+      "parent_block_plain_text": "These post-training efforts have improved model capability in domains like coding, but also model utility: models are more usable in everyday tools like Excel and PowerPoint.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "utility",
+          "start": 98,
+          "end": 105,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 174,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这些后训练实践不仅提升了模型在编程等领域的能力，更增强了模型的实用性：模型在 Excel 与 PowerPoint 等日常工具中变得更加好用。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738131",
+          "tokenized_text": "这些后训练实践不仅提升了模型在编程等领域的能力，更增强了模型的[[[EM_1|实用性]]]：模型在 Excel 与 PowerPoint 等日常工具中变得更加好用。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "To measure how much models are improving in utility and capability, OpenAI created an eval called GDPval. This eval covers 1000+ tasks across 44 occupations, picked from sectors that representing >5% of the economy. Many of these tasks are digital but require several hours to complete for a human. These tasks were created in conjunction with experts, averaging 14 years of experience.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To measure how much models are improving in utility and capability, OpenAI created an eval called GDPval. This eval covers 1000+ tasks across 44 occupations, picked from sectors that representing >5% of the economy. Many of these tasks are digital but require several hours to complete for a human. These tasks were created in conjunction with experts, averaging 14 years of experience.",
+      "parent_block_plain_text": "To measure how much models are improving in utility and capability, OpenAI created an eval called GDPval. This eval covers 1000+ tasks across 44 occupations, picked from sectors that representing >5% of the economy. Many of these tasks are digital but require several hours to complete for a human. These tasks were created in conjunction with experts, averaging 14 years of experience.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 386,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为衡量模型在实用性与能力上的进步幅度，OpenAI 创立了名为 GDPval 的评估基准。该基准涵盖 44 个职业的 1000 多项任务，均精选自占经济比重超 5% 的行业。其中许多属于数字化任务，但人类仍需耗费数小时方可完成。这些任务由 OpenAI 携手平均从业经验达 14 年的专家共同设计。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738152",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Models are asked to solve these problems, given a prompt and a set of supporting documents. Tasks include filing a tax return for a fictitious human, creating slides as a client advisor for a resort, and creating commercials from a given set of stock footage. Grading occurs through experts picking between a model’s answer and a human expert’s answer. This win rate, if equal, would then mean that a model’s performance is then in parity with a human expert. The best current model, GPT-5.2, scores around 71%, meaning its work is tied to or preferred from human outputs 71% of the time.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Models are asked to solve these problems, given a prompt and a set of supporting documents. Tasks include filing a tax return for a fictitious human, creating slides as a client advisor for a resort, and creating commercials from a given set of stock footage. Grading occurs through experts picking between a model’s answer and a human expert’s answer. This win rate, if equal, would then mean that a model’s performance is then in parity with a human expert. The best current model, GPT-5.2, scores around 71%, meaning its work is tied to or preferred from human outputs 71% of the time.",
+      "parent_block_plain_text": "Models are asked to solve these problems, given a prompt and a set of supporting documents. Tasks include filing a tax return for a fictitious human, creating slides as a client advisor for a resort, and creating commercials from a given set of stock footage. Grading occurs through experts picking between a model’s answer and a human expert’s answer. This win rate, if equal, would then mean that a model’s performance is then in parity with a human expert. The best current model, GPT-5.2, scores around 71%, meaning its work is tied to or preferred from human outputs 71% of the time.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 588,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在提供提示词与一组参考文档的前提下，模型需着手解决这些问题。具体任务包括为虚构人物报税、以度假村客户顾问身份制作幻灯片，以及利用指定库存素材剪辑商业广告。评分方式是让专家在模型答案与人类专家答案之间做选择。若胜率持平，即意味着模型性能已与人类专家并驾齐驱。目前最强的 GPT-5.2 模型得分约为 71%，这意味着在 71% 的情况下，其产出与人类打平或更受青睐。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738175",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738194",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Sample task set from GDPval. Source: OpenAI",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Sample task set from GDPval. Source: OpenAI",
+          "start": 0,
+          "end": 43,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Sample task set from GDPval. Source: OpenAI*",
+      "parent_block_plain_text": "Sample task set from GDPval. Source: OpenAI",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Sample task set from GDPval. Source: OpenAI",
+          "start": 0,
+          "end": 43,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 43,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "GDPval 任务集示例。来源：OpenAI",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738250",
+          "tokenized_text": "[[[EM_1|GDPval 任务集示例。来源：OpenAI]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "While GDPval has some issues (e.g., skewed toward unusually specific digital work) it is the best example of how evaluations are shifting from measuring abstract intelligence to real world utility. This stands in contrast to most of the previous model evaluations, which focused on things like mathematical knowledge or PhD level scientific questions graded via multiple choice.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0017",
+      "parent_block_index": 17,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While GDPval has some issues (e.g., skewed toward unusually specific digital work) it is the best example of how evaluations are shifting from measuring abstract intelligence to real world utility. This stands in contrast to most of the previous model evaluations, which focused on things like mathematical knowledge or PhD level scientific questions graded via multiple choice.",
+      "parent_block_plain_text": "While GDPval has some issues (e.g., skewed toward unusually specific digital work) it is the best example of how evaluations are shifting from measuring abstract intelligence to real world utility. This stands in contrast to most of the previous model evaluations, which focused on things like mathematical knowledge or PhD level scientific questions graded via multiple choice.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 378,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管 GDPval 存在些许瑕疵（如过度偏重极其具体的数字化工作），但它仍是绝佳范例，印证了评估标准正从衡量抽象智力转向真实世界实用性。这与以往多数模型评估形成鲜明对比。此前的评估往往聚焦数学知识，或以选择题形式考查博士级科学问题。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738273",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "The underlying trend is models being able to operate autonomously for longer. With improved capabilities over shorter and longer horizons, AI companies think that models can help invent the next version of themselves. OpenAI, for their part, target having autonomous AI researchers by a March of 2028. Anthropic projects that in 2027, systems like Claude will be able to autonomously find breakthroughs that would otherwise take years to achieve.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The underlying trend is models being able to operate autonomously for longer. With improved capabilities over shorter and longer horizons, AI companies think that models can help invent the next version of themselves. OpenAI, for their part, target having autonomous AI researchers by a March of 2028. Anthropic projects that in 2027, systems like Claude will be able to autonomously find breakthroughs that would otherwise take years to achieve.",
+      "parent_block_plain_text": "The underlying trend is models being able to operate autonomously for longer. With improved capabilities over shorter and longer horizons, AI companies think that models can help invent the next version of themselves. OpenAI, for their part, target having autonomous AI researchers by a March of 2028. Anthropic projects that in 2027, systems like Claude will be able to autonomously find breakthroughs that would otherwise take years to achieve.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 446,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一转变背后的底层趋势是，模型自主运行的时长正不断增加。随着模型在长短周期任务中的能力双双提升，AI 公司笃定，模型必将能协助研发下一代模型。就 OpenAI 而言，其目标是在 2028 年 3 月前打造出自主AI研究员。Anthropic 则预测，到 2027 年，Claude 等系统将能自主攻克原本耗时数载方可达成的技术突破。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738292",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738312",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "Source: Anthropic",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: Anthropic",
+      "parent_block_plain_text": "Source: Anthropic",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 17,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Anthropic",
+          "model": "source_metadata",
+          "created_at": "2026-04-10T22:52:40.341892",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Anthropic",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738333",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Anthropic",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "But this journey will require significant amounts of data and task curation. Computer use environments for example require considerable amount of rote software engineering including replicating existing websites on the internet. This can be slow for the labs to do which is why much of it has been outsourced.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0021",
+      "parent_block_index": 21,
+      "parent_block_type": "p",
+      "parent_block_markdown": "But this journey will require significant amounts of data and task curation. Computer use environments for example require considerable amount of rote software engineering including replicating existing websites on the internet. This can be slow for the labs to do which is why much of it has been outsourced.",
+      "parent_block_plain_text": "But this journey will require significant amounts of data and task curation. Computer use environments for example require considerable amount of rote software engineering including replicating existing websites on the internet. This can be slow for the labs to do which is why much of it has been outsourced.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 309,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，实现这一愿景需要海量的数据与精细的任务提炼。以计算机操作环境为例，其构建过程充斥着大量机械性的软件工程工作，例如复刻互联网上的现有网站。顶尖实验室自行处理这些工作耗时费力，因此大部分此类工作已被外包。",
+          "model": "pro",
+          "created_at": "2026-04-10T22:56:06.738352",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.924999999999999,
+        "is_excellent": true,
+        "applied_terms": [
+          "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+          "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+          "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+          "relation_to_previous": "N/A (Opening section).",
+          "relation_to_next": "Mentions that labs find building these environments internally too slow and resort to outsourcing, perfectly setting up the historical context of Scale AI in the next section.",
+          "key_points": [
+            "The paradigm shift from pre-training data aggregation to RL scaling and post-training.",
+            "High-signal user data curation allows smaller companies to compete with major labs.",
+            "Building computer use environments requires rote software engineering, driving the need for outsourcing."
+          ],
+          "translation_notes": [
+            "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+            "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+            "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+          ]
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "未完全遵守 Guidelines 中关于该标题翻译的具体要求（要求译为“...智能体与数据扩展”，实际译为了“...智能体、扩展数据”，且额外添加了英文括注）。"
+          },
+          {
+            "type": "readability",
+            "description": "中英文之间缺少必要的空格（“自主AI研究员”）。"
+          },
+          {
+            "type": "tone",
+            "description": "将“require”译为“被迫”，语气略显夸张（Semantic inflation）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

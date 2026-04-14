@@ -1,0 +1,127 @@
+{
+  "section_id": "03-ai-driven-memory-supercycle-b",
+  "new_terms": [
+    {
+      "term": "TSV",
+      "suggested_translation": "硅通孔",
+      "context": "HBM’s larger die size is due to the presence of through-silicon vias (TSVs)",
+      "confidence": 0.99
+    },
+    {
+      "term": "ASIC",
+      "suggested_translation": "专用集成电路",
+      "context": "ASICs such as Goole’s TPU v8AX and Amazon’s Trainium3",
+      "confidence": 0.99
+    },
+    {
+      "term": "SOCAMM",
+      "suggested_translation": "SOCAMM",
+      "context": "emerging LPDDR5-based products such as SOCAMM and SOCAMM2",
+      "confidence": 0.95
+    },
+    {
+      "term": "kwspm",
+      "suggested_translation": "千片晶圆/月",
+      "context": "the three major memory suppliers had dedicated only ~123kwspm of wafer capacity to HBM",
+      "confidence": 0.98
+    },
+    {
+      "term": "dual-shortage dilemma",
+      "suggested_translation": "双重短缺困境",
+      "context": "the DRAM market is confronting what we characterize as a “dual-shortage dilemma”",
+      "confidence": 0.95
+    },
+    {
+      "term": "bit conversion rate",
+      "suggested_translation": "位元转换率",
+      "context": "reduce overall DRAM bit output due to HBM’s lower bit conversion rate",
+      "confidence": 0.98
+    },
+    {
+      "term": "keep-out zones",
+      "suggested_translation": "禁布区",
+      "context": "require dedicated keep-out zones that reduce usable array area and inflate die size",
+      "confidence": 0.95
+    },
+    {
+      "term": "reverse scaling",
+      "suggested_translation": "反向缩放",
+      "context": "far more manufacturing-intensive, effectively introducing a form of reverse scaling",
+      "confidence": 0.95
+    },
+    {
+      "term": "front-end sort yields",
+      "suggested_translation": "前道分选良率",
+      "context": "dramatically reduces front-end sort yields for HBM wafers",
+      "confidence": 0.92
+    },
+    {
+      "term": "HBM4",
+      "suggested_translation": "HBM4",
+      "context": "increased manufacturing complexity associated with HBM4",
+      "confidence": 1.0
+    },
+    {
+      "term": "TC bonders",
+      "suggested_translation": "热压键合机",
+      "context": "back-end equipment such as TC bonders",
+      "confidence": 0.95
+    },
+    {
+      "term": "process windows",
+      "suggested_translation": "工艺窗口",
+      "context": "process windows re-optimized, and yields typically deteriorate",
+      "confidence": 0.95
+    },
+    {
+      "term": "trailing nodes",
+      "suggested_translation": "成熟节点",
+      "context": "deliver materially higher bit output per wafer than trailing nodes",
+      "confidence": 0.9
+    },
+    {
+      "term": "equipment move-in and qualification",
+      "suggested_translation": "设备搬入与验证",
+      "context": "due to time for equipment move-in and qualification",
+      "confidence": 0.9
+    },
+    {
+      "term": "P5 Tongluo fab",
+      "suggested_translation": "P5铜锣厂",
+      "context": "Micron’s recently acquired P5 Tongluo fab from PSMC",
+      "confidence": 0.95
+    },
+    {
+      "term": "Yongin",
+      "suggested_translation": "龙仁",
+      "context": "SK hynix’s Yongin Phase 1 is not expected to bring its cleanroom online",
+      "confidence": 0.95
+    },
+    {
+      "term": "1γ",
+      "suggested_translation": "1γ节点",
+      "context": "allocate roughly 30% of its DRAM production to the 1c (or 1γ) node",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "commodity dram": "大宗DRAM",
+    "supercycle": "超级周期",
+    "bit output": "比特产出",
+    "wfe capex": "晶圆制造设备（WFE）资本支出",
+    "rubin": "Rubin",
+    "hbm3e 12-hi": "12层HBM3E",
+    "cleanroom": "洁净室",
+    "node migration": "节点演进",
+    "upcycle": "上行周期",
+    "margin": "利润率",
+    "capex": "资本支出",
+    "bit supply": "位元供应",
+    "bit growth": "位元增长",
+    "core research": "Core Research",
+    "semianalysis": "SemiAnalysis",
+    "memory model": "存储模型"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-09T02:56:16.635002"
+}

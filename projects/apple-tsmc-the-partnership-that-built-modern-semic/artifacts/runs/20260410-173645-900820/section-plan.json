@@ -1,0 +1,263 @@
+{
+  "article_theme": "The decade-long, symbiotic partnership between Apple and TSMC is undergoing a structural shift as AI, driven by NVIDIA, overtakes Apple in leading-edge capacity demand, fundamentally altering foundry power dynamics, node optimization, and semiconductor capital expenditures.",
+  "structure_summary": "The article begins with a historical retrospective of the Apple-TSMC alliance (the 'Anchor Tenant' era), transitions into quantitative analysis of wafer demand, packaging economics, and margin savings, and then pivots to the current disruption caused by AI/NVIDIA. It concludes with strategic forecasts for 2025-2035, analyzing geographic risks (Taiwan/Arizona) and the technical tug-of-war over future node optimization (A16 vs A14).",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/23",
+      "paragraph_count": 8,
+      "previous_section_title": "",
+      "next_section_title": "Anchor Tenant",
+      "section_role": "Establishes the core thesis of the article, framing the Apple-TSMC relationship as a historically foundational alliance that is now being structurally disrupted by NVIDIA and the AI boom.",
+      "translation_notes": [
+        "Ensure 'Anchor Tenant' is translated consistently as a foundational business concept (e.g., 锚定客户 or 基石客户).",
+        "Differentiate 'bleeding-edge' (often implying higher risk/cost, e.g., 尖端/流血前沿产能) from standard 'leading-edge' (先进制程).",
+        "Maintain a highly analytical, authoritative tone suitable for hardcore tech and finance readers."
+      ]
+    },
+    {
+      "section_id": "01-anchor-tenant",
+      "title": "Anchor Tenant",
+      "position": "2/23",
+      "paragraph_count": 8,
+      "previous_section_title": "Introduction",
+      "next_section_title": "Key Numbers",
+      "section_role": "Quantifies Apple's role as the financial de-risker for TSMC's massive capital expenditures and details the gross margin expansion Apple achieved through this silicon internalization.",
+      "translation_notes": [
+        "Translate 'de-risk investment' accurately in a financial context (e.g., 降低投资风险 / 为巨额投资兜底).",
+        "Translate 'wafer mix' as 晶圆需求结构 or 晶圆产品组合.",
+        "Ensure 'Gross Margins (GM)' and 'percentage point expansion' are translated strictly using standard financial terminology (毛利率, 百分点扩张)."
+      ]
+    },
+    {
+      "section_id": "02-key-numbers",
+      "title": "Key Numbers",
+      "position": "3/23",
+      "paragraph_count": 26,
+      "previous_section_title": "Anchor Tenant",
+      "next_section_title": "The Five Phases of Apple-TSMC Evolution",
+      "section_role": "Acts as a data dashboard, isolating the raw metrics on wafer demand and advanced packaging revenue to ground the narrative in undeniable facts.",
+      "translation_notes": [
+        "Keep formatting clean and use standard industry abbreviations.",
+        "Translate 'Advanced Packaging as % of Revenue' precisely (先进封装占总营收比重)."
+      ]
+    },
+    {
+      "section_id": "03-the-five-phases-of-apple-tsmc",
+      "title": "The Five Phases of Apple-TSMC Evolution",
+      "position": "4/23",
+      "paragraph_count": 68,
+      "previous_section_title": "Key Numbers",
+      "next_section_title": "The Manufacturing Footprint",
+      "section_role": "Chronologically maps the evolution of the alliance to highlight the immense switching costs and lock-in effects that prevent Apple from easily moving to competitors.",
+      "translation_notes": [
+        "Translate 'yield learning' as 良率爬坡 or 良率学习曲线.",
+        "Translate 'product cadence' as 产品发布节奏 or 产品迭代步调.",
+        "Ensure the translation captures the severity of 'switching costs' (转换成本) implied by the 2-3 year penalty."
+      ]
+    },
+    {
+      "section_id": "04-the-manufacturing-footprint",
+      "title": "The Manufacturing Footprint",
+      "position": "5/23",
+      "paragraph_count": 9,
+      "previous_section_title": "The Five Phases of Apple-TSMC Evolution",
+      "next_section_title": "Geographic Concentration Risk",
+      "section_role": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+      "translation_notes": [
+        "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+        "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+      ]
+    },
+    {
+      "section_id": "05-geographic-concentration-risk",
+      "title": "Geographic Concentration Risk",
+      "position": "6/23",
+      "paragraph_count": 3,
+      "previous_section_title": "The Manufacturing Footprint",
+      "next_section_title": "Apple’s Five Transformational Chip Acquisitions",
+      "section_role": "Assesses the geopolitical vulnerability of the Apple-TSMC alliance and evaluates the efficacy of mitigation efforts like the Arizona fab.",
+      "translation_notes": [
+        "Translate 'elephant in the room' idiomatically (e.g., 显而易见却被刻意回避的重大隐患 or 房间里的大象).",
+        "Translate 'token diversification' accurately to reflect its superficial nature (e.g., 象征性的多元化 or 点缀式的风险分散).",
+        "Maintain a neutral, objective tone regarding geopolitical risks."
+      ]
+    },
+    {
+      "section_id": "06-apples-five-transformational",
+      "title": "Apple’s Five Transformational Chip Acquisitions",
+      "position": "7/23",
+      "paragraph_count": 29,
+      "previous_section_title": "Geographic Concentration Risk",
+      "next_section_title": "Silicon Performance Evolution",
+      "section_role": "Details Apple's aggressive M&A strategy to internalize silicon design, culminating in a 'virtual IDM' relationship with TSMC that dictates process design.",
+      "translation_notes": [
+        "Translate 'virtual IDM' as 虚拟IDM or 虚拟垂直整合制造模式.",
+        "Translate 'Process Design Kit (PDK)' as 工艺设计套件 (PDK).",
+        "Capture the intensity of 'ruthless' in a business context (e.g., 极其冷酷/极致的掌控欲)."
+      ]
+    },
+    {
+      "section_id": "07-silicon-performance-evolution",
+      "title": "Silicon Performance Evolution",
+      "position": "8/23",
+      "paragraph_count": 30,
+      "previous_section_title": "Apple’s Five Transformational Chip Acquisitions",
+      "next_section_title": "Apple Wafer Demand",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "08-apple-wafer-demand",
+      "title": "Apple Wafer Demand",
+      "position": "9/23",
+      "paragraph_count": 21,
+      "previous_section_title": "Silicon Performance Evolution",
+      "next_section_title": "Apple’s Wafer Demand Model: Forecast Analysis (2026-2030)",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "09-apples-wafer-demand-model-fo",
+      "title": "Apple’s Wafer Demand Model: Forecast Analysis (2026-2030)",
+      "position": "10/23",
+      "paragraph_count": 30,
+      "previous_section_title": "Apple Wafer Demand",
+      "next_section_title": "Chip Series Analysis",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "10-chip-series-analysis",
+      "title": "Chip Series Analysis",
+      "position": "11/23",
+      "paragraph_count": 13,
+      "previous_section_title": "Apple’s Wafer Demand Model: Forecast Analysis (2026-2030)",
+      "next_section_title": "Device Mix & Diversification",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "11-device-mix-diversification",
+      "title": "Device Mix & Diversification",
+      "position": "12/23",
+      "paragraph_count": 5,
+      "previous_section_title": "Chip Series Analysis",
+      "next_section_title": "Device Shipments",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "12-device-shipments",
+      "title": "Device Shipments",
+      "position": "13/23",
+      "paragraph_count": 8,
+      "previous_section_title": "Device Mix & Diversification",
+      "next_section_title": "AI Overtakes Apple at the Leading Edge",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "13-ai-overtakes-apple-at-the-lead",
+      "title": "AI Overtakes Apple at the Leading Edge",
+      "position": "14/23",
+      "paragraph_count": 18,
+      "previous_section_title": "Device Shipments",
+      "next_section_title": "How Apple Subsidizes TSMC",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "14-how-apple-subsidizes-tsmc",
+      "title": "How Apple Subsidizes TSMC",
+      "position": "15/23",
+      "paragraph_count": 38,
+      "previous_section_title": "AI Overtakes Apple at the Leading Edge",
+      "next_section_title": "Packaging Economics",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "15-packaging-economics",
+      "title": "Packaging Economics",
+      "position": "16/23",
+      "paragraph_count": 4,
+      "previous_section_title": "How Apple Subsidizes TSMC",
+      "next_section_title": "Apple Gross Margin Savings from In-House Chips",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "16-apple-gross-margin-savings-fro",
+      "title": "Apple Gross Margin Savings from In-House Chips",
+      "position": "17/23",
+      "paragraph_count": 18,
+      "previous_section_title": "Packaging Economics",
+      "next_section_title": "Competitor Replication Efforts",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "17-competitor-replication-efforts",
+      "title": "Competitor Replication Efforts",
+      "position": "18/23",
+      "paragraph_count": 2,
+      "previous_section_title": "Apple Gross Margin Savings from In-House Chips",
+      "next_section_title": "Why Apple Will Not Build Fabs",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "18-why-apple-will-not-build-fabs",
+      "title": "Why Apple Will Not Build Fabs",
+      "position": "19/23",
+      "paragraph_count": 7,
+      "previous_section_title": "Competitor Replication Efforts",
+      "next_section_title": "Apple as Industrial Kingmaker",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "19-apple-as-industrial-kingmaker",
+      "title": "Apple as Industrial Kingmaker",
+      "position": "20/23",
+      "paragraph_count": 10,
+      "previous_section_title": "Why Apple Will Not Build Fabs",
+      "next_section_title": "The Next Decade: 2025-2035; Faceoff with NVIDIA for Capacity",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "20-the-next-decade-2025-2035-fa",
+      "title": "The Next Decade: 2025-2035; Faceoff with NVIDIA for Capacity",
+      "position": "21/23",
+      "paragraph_count": 9,
+      "previous_section_title": "Apple as Industrial Kingmaker",
+      "next_section_title": "The Arizona Question",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "21-the-arizona-question",
+      "title": "The Arizona Question",
+      "position": "22/23",
+      "paragraph_count": 5,
+      "previous_section_title": "The Next Decade: 2025-2035; Faceoff with NVIDIA for Capacity",
+      "next_section_title": "The Node Optimization Shift",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "22-the-node-optimization-shift",
+      "title": "The Node Optimization Shift",
+      "position": "23/23",
+      "paragraph_count": 7,
+      "previous_section_title": "The Arizona Question",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

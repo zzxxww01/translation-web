@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "source": "By Dylan Patel, Ray Wang, Myron Xie, and 2 others",
+      "translation": "作者：Dylan Patel、Ray Wang、Myron Xie 等 5 人",
+      "tokenized_translation": "作者：[[[LINK_1|Dylan Patel]]]、[[[LINK_2|Ray Wang]]]、[[[LINK_3|Myron Xie]]] 等 5 人",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Feb 06, 2026 · Paid",
+      "translation": "2026 年 2 月 6 日 · 付费文章",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Prices are doubling again, Supercycle is bigger, and could last longer than you think",
+      "translation": "价格再次翻倍，超级周期规模更大，且持续时间可能比你想象的更长",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Applied Materials",
+      "translation": "来源：Applied Materials",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Integrated Circuit Engineering, SemiAnalysis",
+      "translation": "来源：集成电路（Integrated Circuit）Engineering，SemiAnalysis",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: Micron",
+      "translation": "来源：美光",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: SK Hynix",
+      "translation": "来源：SK海力士",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: SemiAnalysis Core Research, AI Cloud TCO Model, and Memory Model",
+      "translation": "来源：SemiAnalysis Core Research, AI Cloud TCO Model, and Memory 模型",
+      "tokenized_translation": "来源：SemiAnalysis [[[LINK_1|Core Research]]], [[[LINK_2|AI Cloud TCO Model]]], and [[[LINK_3|Memory 模型]]]",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "Source: SemiAnalysis Memory Model - Sales@SemiAnalysis.com",
+      "translation": "来源：SemiAnalysis内存模型 - Sales@SemiAnalysis.com",
+      "tokenized_translation": "来源：[[[LINK_1|SemiAnalysis内存模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+      "format_issues": [],
+      "occurrences": 12
+    },
+    {
+      "source": "Source: SemiAnalysis WFE Model - Sales@SemiAnalysis.com",
+      "translation": "来源：SemiAnalysis WFE (晶圆制造设备)模型 - Sales@SemiAnalysis.com",
+      "tokenized_translation": "来源：[[[LINK_1|SemiAnalysis WFE (晶圆制造设备)模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+      "format_issues": [],
+      "occurrences": 2
+    },
+    {
+      "source": "Source: SemiAnalysis estimates",
+      "translation": "来源：SemiAnalysis 估算",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 2
+    }
+  ]
+}

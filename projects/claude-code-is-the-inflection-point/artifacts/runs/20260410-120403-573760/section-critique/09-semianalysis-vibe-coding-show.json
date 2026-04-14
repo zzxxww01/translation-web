@@ -1,0 +1,48 @@
+{
+  "section_id": "09-semianalysis-vibe-coding-show",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 9.0,
+    "accuracy_score": 8.5,
+    "conciseness_score": 9.0,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 3,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "vibe coded",
+        "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。",
+        "why_it_matters": "违反了给定的术语表，导致专有名词翻译在全篇中不一致。",
+        "suggestion": "将“直觉编程”统一修改为“氛围感编程”。"
+      },
+      {
+        "paragraph_index": 6,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Token效率",
+        "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。",
+        "why_it_matters": "不符合专业排版规范（CJK-Latin spacing），影响阅读体验。",
+        "suggestion": "修改为“Token 效率”。"
+      },
+      {
+        "paragraph_index": 17,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "OSI模型",
+        "description": "英文字母与中文字符之间缺少必要的空格。",
+        "why_it_matters": "不符合专业排版规范（CJK-Latin spacing）。",
+        "suggestion": "修改为“OSI 模型”。"
+      },
+      {
+        "paragraph_index": 18,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "Information work",
+        "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。",
+        "why_it_matters": "未能严格执行术语表，可能导致与行业通用语境或前文设定脱节。",
+        "suggestion": "将“知识工作”修改为“信息工作”。"
+      }
+    ]
+  }
+}

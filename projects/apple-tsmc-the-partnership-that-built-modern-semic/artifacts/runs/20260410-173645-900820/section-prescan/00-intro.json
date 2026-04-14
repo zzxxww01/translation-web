@@ -1,0 +1,48 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "Morris Chang",
+      "suggested_translation": "张忠谋",
+      "context": "Morris Chang committed to building 20nm capacity with uncertain economics",
+      "confidence": 1.0
+    },
+    {
+      "term": "Foundry Industry Model",
+      "suggested_translation": "晶圆代工行业模型",
+      "context": "All of this is quantified with specifics from our proprietary Foundry Industry Model",
+      "confidence": 0.9
+    },
+    {
+      "term": "20nm",
+      "suggested_translation": "20nm",
+      "context": "Morris Chang committed to building 20nm capacity... consistently >50% since 20nm",
+      "confidence": 1.0
+    },
+    {
+      "term": "A8",
+      "suggested_translation": "A8",
+      "context": "Apple’s A8 chip launched in 2014",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "wafer demand model": "晶圆需求模型",
+    "node economics": "节点经济学",
+    "tsmc": "台积电",
+    "yield learning curve": "良率学习曲线",
+    "foundry": "晶圆代工厂",
+    "idm": "IDM",
+    "capex": "资本支出",
+    "vertical integration": "垂直整合",
+    "fab 18": "Fab 18",
+    "advanced packaging": "先进封装",
+    "intel": "英特尔",
+    "18a": "18A",
+    "samsung": "三星",
+    "leading-edge": "先进制程",
+    "node transition": "制程转换"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:37:05.838057"
+}

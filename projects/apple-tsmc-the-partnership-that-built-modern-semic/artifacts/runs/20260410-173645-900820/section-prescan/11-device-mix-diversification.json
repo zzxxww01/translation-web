@@ -1,0 +1,53 @@
+{
+  "section_id": "11-device-mix-diversification",
+  "new_terms": [
+    {
+      "term": "foundry economics",
+      "suggested_translation": "晶圆代工经济学",
+      "context": "The decoupling between unit shipments and silicon value tells the real story of Apple’s foundry economics.",
+      "confidence": 0.95
+    },
+    {
+      "term": "silicon value",
+      "suggested_translation": "硅价值",
+      "context": "The decoupling between unit shipments and silicon value...",
+      "confidence": 0.9
+    },
+    {
+      "term": "wafer value",
+      "suggested_translation": "晶圆价值",
+      "context": "...yet A-series wafer value has nearly tripled over the same period.",
+      "confidence": 0.95
+    },
+    {
+      "term": "monthly wafer consumption",
+      "suggested_translation": "每月晶圆消耗量",
+      "context": "iPhone accounted for 74% of Apple’s monthly wafer consumption that year.",
+      "confidence": 0.95
+    },
+    {
+      "term": "revenue volatility",
+      "suggested_translation": "营收波动",
+      "context": "TSMC now serves five Apple product lines at scale, reducing revenue volatility tied to iPhone cycles.",
+      "confidence": 0.9
+    },
+    {
+      "term": "M1",
+      "suggested_translation": "M1",
+      "context": "Mac silicon, nonexistent before M1, now represents 12% of the mix.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "a-series": "A系列",
+    "m-series": "M系列",
+    "soc": "SoC",
+    "tsmc": "台积电",
+    "die": "裸片",
+    "node": "制程节点",
+    "silicon content": "硅含量",
+    "mature node": "成熟制程"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:44:25.299491"
+}

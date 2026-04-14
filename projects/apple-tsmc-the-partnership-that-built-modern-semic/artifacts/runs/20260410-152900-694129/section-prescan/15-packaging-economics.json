@@ -1,0 +1,35 @@
+{
+  "section_id": "15-packaging-economics",
+  "new_terms": [
+    {
+      "term": "A10",
+      "suggested_translation": "A10",
+      "context": "InFO launched with the A10 in 2016",
+      "confidence": 1.0
+    },
+    {
+      "term": "non-wafer revenue",
+      "suggested_translation": "非晶圆营收",
+      "context": "Apple accounted for 78% of TSMC’s non-wafer revenue in 2020.",
+      "confidence": 0.95
+    },
+    {
+      "term": "absolute packaging revenue",
+      "suggested_translation": "绝对封装营收",
+      "context": "Apple’s absolute packaging revenue continues growing.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "tsmc": "台积电",
+    "advanced packaging": "先进封装",
+    "info": "InFO",
+    "cowos": "CoWoS",
+    "rounding error": "零头 (指微乎其微的数量)",
+    "ai": "AI",
+    "nvidia": "英伟达",
+    "a-series": "A系列"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:18:51.939114"
+}

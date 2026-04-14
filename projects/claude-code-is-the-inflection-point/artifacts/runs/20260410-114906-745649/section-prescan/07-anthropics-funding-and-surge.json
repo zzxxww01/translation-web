@@ -1,0 +1,61 @@
+{
+  "section_id": "07-anthropics-funding-and-surge",
+  "new_terms": [
+    {
+      "term": "GPT-5.2 High",
+      "suggested_translation": "GPT-5.2 High",
+      "context": "GPT-5.2 High has been benchmark-maxxing for a year and held pole position",
+      "confidence": 1.0
+    },
+    {
+      "term": "SWE-bench",
+      "suggested_translation": "SWE-bench",
+      "context": "The SWE-bench verified result is effectively the same",
+      "confidence": 1.0
+    },
+    {
+      "term": "token efficiency",
+      "suggested_translation": "Token效率",
+      "context": "Opus 4.5 achieves dramatically better token efficiency than GPT-5.2 High",
+      "confidence": 0.95
+    },
+    {
+      "term": "long-horizon task",
+      "suggested_translation": "长跨度任务",
+      "context": "this matters enormously for long-horizon task achievement.",
+      "confidence": 0.95
+    },
+    {
+      "term": "tasks-to-tokens",
+      "suggested_translation": "任务-Token比",
+      "context": "the efficiency curve of tasks-to-tokens tells a different story.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Sonnet 5",
+      "suggested_translation": "Sonnet 5",
+      "context": "The new Sonnet 5 is allegedly coming in at a much smaller model size",
+      "confidence": 1.0
+    },
+    {
+      "term": "chain-of-thought",
+      "suggested_translation": "思维链",
+      "context": "having an extremely long chain-of-thought token context to achieve tasks.",
+      "confidence": 1.0
+    },
+    {
+      "term": "NPM",
+      "suggested_translation": "NPM",
+      "context": "SemiAnalysis Tokenomics Team, NPM",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "benchmark-maxxing": "唯基准至上 / 卷基准 (appears as benchmark-maxxed)",
+    "context window": "上下文窗口",
+    "Claude Code": "Claude Code",
+    "Opus 4.5": "Opus 4.5"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T12:00:12.455827"
+}

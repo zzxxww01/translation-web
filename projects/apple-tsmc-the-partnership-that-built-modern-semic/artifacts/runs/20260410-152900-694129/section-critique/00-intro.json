@@ -1,0 +1,30 @@
+{
+  "section_id": "00-intro",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 7,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Intel 18A and Samsung re-engagement",
+        "description": "中英文之间缺少空格（“英特尔18A”），且对“英特尔”和“三星”等行业极度常见的品牌进行英文括注（Intel, Samsung）属于过度加注，略微打断了阅读的流畅感。",
+        "why_it_matters": "遵守中英文排版规范可提升专业感；过度加注常见词汇会显得不够自信或冗余，不符合硬核科技读者的阅读习惯。",
+        "suggestion": "将“英特尔（Intel）”改为“英特尔”，将“英特尔18A”改为“英特尔 18A”，将“三星（Samsung）”改为“三星”。"
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "the shifting power dynamics as AI reshapes the foundry landscape",
+        "description": "“AI 重塑晶圆代工厂（foundry）版图下的权力动态演变”作为标题或副标题略显生硬。英文的 \"as\" 表伴随状态，转化为“随着……而演变”会更符合中文语感。同时，foundry 括注在此处略显多余。",
+        "why_it_matters": "作为文章的开篇导语，语言的流畅度和力量感至关重要，应尽量避免机械的定语堆砌。",
+        "suggestion": "建议修改为：“晶圆需求模型、节点经济学，以及随着 AI 重塑晶圆代工版图而演变的权力动态”。"
+      }
+    ]
+  }
+}

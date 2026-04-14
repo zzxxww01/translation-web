@@ -1,0 +1,73 @@
+{
+  "project_id": "claude-code-is-the-inflection-point",
+  "status": "incomplete",
+  "total_sections": 10,
+  "translated_sections": 4,
+  "total_paragraphs": 170,
+  "translated_paragraphs": 89,
+  "error_count": 7,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "Claude Code",
+      "existing": "",
+      "new": "Claude Code",
+      "existing_note": "The name of Anthropic's terminal-native AI agent product, which is the central subject of the article.",
+      "new_note": "The name of Anthropic's AI-powered code generation product, central to this article.",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-09T23:16:10.049871"
+    },
+    {
+      "error": "Failed to translate section 00-intro: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-10T00:07:11.639607",
+      "section": "00-intro"
+    },
+    {
+      "error": "Failed to translate section 02-what-is-claude-code: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-10T00:12:26.956963",
+      "section": "02-what-is-claude-code"
+    },
+    {
+      "error": "Failed to translate section 04-the-price-of-intelligence-is-c: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-10T00:22:08.809653",
+      "section": "04-the-price-of-intelligence-is-c"
+    },
+    {
+      "error": "Failed to translate section 05-competitive-landscape-microso: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-10T00:24:51.854770",
+      "section": "05-competitive-landscape-microso"
+    },
+    {
+      "error": "Failed to translate section 07-anthropics-funding-and-surge: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-10T00:31:32.512989",
+      "section": "07-anthropics-funding-and-surge"
+    },
+    {
+      "error": "Failed to translate section 09-semianalysis-vibe-coding-show: HTTPSConnectionPool(host='generativelanguage.googleapis.com', port=443): Max retries exceeded with url: /v1beta/models/gemini-2.5-pro:generateContent (Caused by ProxyError('Unable to connect to proxy', RemoteDisconnected('Remote end closed connection without response')))",
+      "timestamp": "2026-04-10T00:38:14.449446",
+      "section": "09-semianalysis-vibe-coding-show"
+    }
+  ],
+  "started_at": "2026-04-09T23:09:08.874300",
+  "finished_at": "2026-04-10T00:38:14.522329",
+  "run_id": "20260409-230908-874311",
+  "artifacts_path": "projects\\claude-code-is-the-inflection-point\\artifacts\\runs\\20260409-230908-874311",
+  "export": {
+    "generated_at": "2026-04-10T00:38:14.459667",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\claude-code-is-the-inflection-point\\Claude Code 是转折点_zh.md",
+      "generated": true,
+      "bytes": 42805
+    }
+  },
+  "api_calls": 35,
+  "elapsed_seconds": 5345.6,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

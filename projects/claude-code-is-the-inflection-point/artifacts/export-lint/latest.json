@@ -1,0 +1,95 @@
+{
+  "project_id": "claude-code-is-the-inflection-point",
+  "generated_at": "2026-04-10T15:14:13.553713",
+  "issue_count": 11,
+  "issues": [
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p005",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "[￰4￰"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p006",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "Malte Ubl@cramforce"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p008",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "￰5￰"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p009",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "Anthropic @AnthropicAI"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p014",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "[￰6￰"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p015",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "Ryan Dahl@rough\\\\sea"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p020",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "[￰7￰"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p021",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "DHH@dhh"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p023",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "￰8￰"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p027",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "[￰9￰"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "02-what-is-claude-code",
+      "paragraph_id": "p028",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "Boris Cherny@bcherny"
+    }
+  ]
+}

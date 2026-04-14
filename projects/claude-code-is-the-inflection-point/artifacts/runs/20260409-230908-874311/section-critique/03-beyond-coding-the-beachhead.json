@@ -1,0 +1,30 @@
+{
+  "section_id": "03-beyond-coding-the-beachhead",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.4,
+    "accuracy_score": 9.0,
+    "conciseness_score": 9.1,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 11,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "Same architecture: Claude Agent SDK, MCP, sub-agents.",
+        "description": "译文将产品/架构名称“Claude Agent SDK”翻译为了“Claude 智能体 SDK”。根据翻译指南“Maintain all proper nouns in English, including... product names”，作为技术框架专有名词，建议保留英文原名。",
+        "why_it_matters": "破坏了专有名词保留英文原名的规则，且在面向技术受众时，直接使用官方英文 SDK 名称更符合开发者的阅读习惯。",
+        "suggestion": "将“Claude 智能体 SDK”修改为“Claude Agent SDK”。"
+      },
+      {
+        "paragraph_index": 14,
+        "issue_type": "annotation",
+        "severity": "medium",
+        "original_text": "...an agent will generate a report with better formatting than you could do yourself within excel for you.",
+        "description": "译文在此处再次为“智能体”添加了括号解释“（指能够自主规划并执行复杂任务的 AI）”。根据翻译指南“On first use, provide a brief parenthetical explanation”，该解释只需在首现时（即第1段）添加，后续无需重复。",
+        "why_it_matters": "重复的括号注记会打断读者的阅读心流，显得行文冗余，且不符合“仅在首现时加注”的规范。",
+        "suggestion": "删除括号及其中内容，保留为：“智能体会为你生成一份排版远超你手动操作 Excel 的报告。”"
+      }
+    ]
+  }
+}

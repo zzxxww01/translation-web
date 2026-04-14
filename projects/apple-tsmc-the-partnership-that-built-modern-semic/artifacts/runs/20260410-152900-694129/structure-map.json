@@ -1,0 +1,3196 @@
+{
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "title_translation": null,
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Wafer Demand Model, Node Economics, and the shifting power dynamics as AI reshapes the foundry landscape"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By Sravan Kundojjala, Gerald Wong, Dylan Patel, and Jeff Koch"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Jan 08, 2026 · Paid"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In 2013, TSMC made a $10 billion bet on a single customer. Morris Chang committed to building 20nm capacity with uncertain economics on the promise that Apple w"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!PHO_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s annual spend at TSMC grew from $2B in 2014 to $24B in 2025. That is 12x in 12 years. Apple went from 9% of TSMC revenue to 25% at its peak and settled t"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The foundry model is dominant today. IDMs cannot support process development and fab capex with what is effectively a single customer. But even foundries need a"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This report traces the Apple-TSMC relationship from Intel’s 2010 rejection through five distinct phases, examining how Apple built its chip empire through acqui"
+        }
+      ]
+    },
+    {
+      "section_id": "01-anchor-tenant",
+      "title": "Anchor Tenant",
+      "title_translation": null,
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "You can see the Apple effect in TSMC’s capex trajectory. Pre-Apple (2005-2009), annual spending averaged $2.4B with no anchor tenant to de-risk investment. From"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The platform shift has already happened. HPC revenue at TSMC grew from 36% in 2020 to 58% in 2025. Smartphone revenue shrunk to 29% from 46%. Our model shows Nv"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Consensus sees this as permanent displacement. Our model says otherwise."
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC’s A16 is architected for HPC. Backside power delivery, gate-all-around transistors, and thermal envelopes are optimized for HPC and smartphones will skip t"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple is not standing still. New chip families (N-series, C-series) account for 15% of wafer demand by 2030. iPhone’s share of Apple’s wafer mix fell from 74% t"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "What This Analysis Covers"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The analysis is built on two proprietary models. Our [Foundry Model](https://semianalysis.com/foundry-industry-model/) tracks revenue, wafer shipments, and capa"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The report concludes with Taiwan risk scenarios, Arizona economics, and conditions under which Apple would build its own fabs."
+        }
+      ]
+    },
+    {
+      "section_id": "02-key-numbers",
+      "title": "Key Numbers",
+      "title_translation": null,
+      "paragraph_count": 26,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Wafer Demand"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· A-series: $4.2B (2018) to $9.7B (2025) = 131% growth"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· M-series: $0 (2019) to $4.9B (2025) = From zero to $5B in 6 years"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· S-series: $86M (2018) to $342M (2025) = 4x growth"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Total Apple Silicon Revenue: $23.5B (2025)"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC Transformation:"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Revenue: $13B (2010) to $122B (2025) = 9.4x growth"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· R&D: $1B (2010) to $8B+ (2025) = 8x growth"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Capex: $5.9B (2010) to $41.4B+ (2025) = 7x growth"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Gross Margin: 45.5% (2010) to 59%+ (2025) = 13.5pp expansion"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Packaging Revolution:"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· CoWoS Revenue: $0.6B (2018) to $8.4B (2025) = 14x growth"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Apple InFO Revenue: $3.5B+ (2025)"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· TSMC Advanced Packaging as % of Revenue: 6-7% (2018) to 10%+ (2025)"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s Supply Chain Leverage:"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Manufacturing Purchase Obligations: $8.7B (2010) to $56.2B (2025) = 6.4x growth"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Monthly Wafer Demand: 19K (2013) to 130k (2025) = 7x growth"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Fab 18 Customers: 4 (2020) to 45 (2025) = 11x growth"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Chip Economics:"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· iPhone Gross Margin: 36.5% (A4, 2018) to 41.5% (A18, 2025) = 5pp expansion"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Mac Gross Margin: 29% (Intel, 2019) to 39.5% (M3 Pro, 2023) = 10.5pp expansion"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Annual Chip Savings: $7B+ (Intel $5B + Qualcomm $1.2B + Broadcom $700M + custom IP $500M+)"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Platform Shift at TSMC:"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· Smartphone Revenue %: 46% (Q1 2028) to 29% (Q4 2025)"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "· HPC Revenue %: 36% (Q1 2020) to 58% (Q4 2025) = HPC now dominates"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!HhW4!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "03-the-five-phases-of-apple-tsmc",
+      "title": "The Five Phases of Apple-TSMC Evolution",
+      "title_translation": null,
+      "paragraph_count": 68,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!0uZo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Phase 1: Why Apple started making its own chips and Apple’s courtship"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The original iPhone launched in 2007 relied heavily on Samsung components. Samsung supplied the application processor, display, and flash memory. While making i"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "First, Apple’s key supplier Samsung entered smartphones 18 months after iPhone launched, ending up in a legal battle with Apple as early Galaxy S designs resemb"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Second, the rise of the Wintel model (Android plus Qualcomm) in smartphones in the 2010s worried Apple that commodity chips could erode its differentiation in s"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Third, workload optimization: designing for iOS specifically, rather than generic benchmarks, enabled meaningful performance-per-watt advantages."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Fourth, power efficiency: iPhone’s thin form factor demanded performance-per-watt leadership that merchant silicon couldn’t deliver."
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Fifth, margins: eliminating supplier markups over time would capture billions in additional profit."
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple wanted to control the primary technologies used in its devices. The $278M P.A. Semi acquisition in April 2008 served as a stepping stone. Dan Dobberpuhl, "
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "blockquote",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "First and foremost, if we do this, can we deliver better products? That’s the No. 1 question. It’s not about the chip. Apple is not a chip company.\n\n- Johny Sro"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Following P.A. Semi, Apple acquired ultra-low-power chip design company Intrinsity for $121M in 2010 Apple fielded its first custom smartphone applications proc"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "h4",
+          "heading_level": 4,
+          "heading_chain": [],
+          "source_preview": "The Decision That Changed Computing History: TSMC vs Samsung vs Intel Decision"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Between 2010 and 2014, the “courtship” phase, Apple explored alternatives to Samsung via “Project Azalea,” considering GlobalFoundries and even building its own"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Enter Intel and TSMC, two of the leading fab options for Apple. Discussions with Intel were unsuccessful as then CEO Paul Otellini declined, believing the volum"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple COO Jeff Williams met with Chang over dinner and pitched TSMC to build 20nm capacity. At that time, TSMC was shifting focus and investment to 16nm. The ca"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Phase 2: Apple Made TSMC (2014-2020)"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s A8 chip launched in 2014, and TSMC never looked back. Over the next six years, Apple drove TSMC to invest $60-80 billion in leading-edge capacity. Apple"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!nT85!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Yiqb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!VYK-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In 2016, Apple funded the development of InFO (Integrated Fan-Out) packaging. This allowed for thinner phones with better thermals and created the advanced pack"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In a candid interview, Morris Chang revealed that Tim Cook later told him:"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "blockquote",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel just does not know how to be a foundry."
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At the core there are cultural differences: Intel, trapped in its product success, couldn’t foresee the massive Arm-based foundry market; TSMC offered servitude"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple initially said to have offered 40% gross margin to TSMC, which was in line with TSMC’s margin then. Current gross margin from Apple business is significan"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Despite investing in dedicated 20nm capacity for Apple, TSMC did not even receive a majority share of Apple’s foundry business at first. It had to share a 14nm "
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Ultimately, TSMC won because it demonstrated the ability to scale 20nm ahead of the competition, proving it could handle the iPhone’s massive volume spikes. The"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "What if Apple chose Intel in 2014? Intel would have $15B+/year guaranteed foundry revenue. TSMC, without that revenue, would probably not have achieved dominanc"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Phase 3: Mutual Lock-In (2020-2023)"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By 2020, the partnership had evolved from mutually beneficial to co-dependence. Apple could no longer leave. No other foundry on earth could produce M-series an"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC could not lose Apple. The iPhone brought 22-25% of total revenue and filled 70%+ of 3nm capacity. Apple orders were known three years in advance, allowing "
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!HMKq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!uSih!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_7t3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p034",
+          "index": 34,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A more serious risk is timing. Apple’s product cadence is synchronized to TSMC’s node roadmap. Moving to Intel or Samsung would mean 2-3 years of inferior produ"
+        },
+        {
+          "id": "p035",
+          "index": 35,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Phase 4: Diversified Dependence (2023-Present): The Changing Power Dynamic: Is Apple Still the Kingmaker?"
+        },
+        {
+          "id": "p036",
+          "index": 36,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For years, Hsinchu and Cupertino worked as a single team to relentlessly advance Moore’s Law. Apple’s One Team approach embedded hundreds of engineers at TSMC’s"
+        },
+        {
+          "id": "p037",
+          "index": 37,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "However, the rise of generative AI is shifting TSMC’s customer mix. While Apple remains the largest single customer by revenue, its relative influence is diluti"
+        },
+        {
+          "id": "p038",
+          "index": 38,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While Apple also contributes to TSMC’s HPC segment through its tablet/PC chips, the uptake of AI offered TSMC a new stream of customers who are voracious for ad"
+        },
+        {
+          "id": "p039",
+          "index": 39,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple acts as the predictable baseline that justifies the massive, fixed costs of new fabs. NVIDIA provides the high-margin upside that drives profitability gro"
+        },
+        {
+          "id": "p040",
+          "index": 40,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!CVJM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p041",
+          "index": 41,
+          "element_type": "h4",
+          "heading_level": 4,
+          "heading_chain": [],
+          "source_preview": "The AI Divergence: Wafers vs. Packaging"
+        },
+        {
+          "id": "p042",
+          "index": 42,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The distinction lies in what these customers are buying. Apple buys leading-edge logic wafers (N3, N3E) and InFO (Integrated Fan-Out) packaging. NVIDIA buys log"
+        },
+        {
+          "id": "p043",
+          "index": 43,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple was TSMC’s first advanced packaging customer at scale. InFO revenue grew from $1.8B in 2018 to >$3.5B in 2024, driven entirely by A-series and M-series ch"
+        },
+        {
+          "id": "p044",
+          "index": 44,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!3bJr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p045",
+          "index": 45,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Vy_p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p046",
+          "index": 46,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This creates a bifurcation in TSMC’s capacity planning. Apple is no longer the sole driver of capex. TSMC’s capital expenditure is now split between chasing Moo"
+        },
+        {
+          "id": "p047",
+          "index": 47,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Phase 5: Beyond TSMC (2027+)"
+        },
+        {
+          "id": "p048",
+          "index": 48,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple is actively exploring alternatives."
+        },
+        {
+          "id": "p049",
+          "index": 49,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel’s 18A-P process (shipping late 2026) represents the first theoretically viable alternative since Apple left Samsung in 2016. Apple could qualify Intel, in"
+        },
+        {
+          "id": "p050",
+          "index": 50,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel missed Apple once before in 2014. The door hasn’t fully closed. The key question is: would Apple actually use it?"
+        },
+        {
+          "id": "p051",
+          "index": 51,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Mkbg!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p052",
+          "index": 52,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!3RG5!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p053",
+          "index": 53,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But, 18A-P on base M-series chips makes sense. If Apple were to shift 20% of base M-series wafers to Intel 18A-P, it would imply $630M in foundry revenue for In"
+        },
+        {
+          "id": "p054",
+          "index": 54,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Base M-series die sizes tend to be in the range of 150-170mm² and could yield 70%+ on 18A-P (based on current Panther Lake, which has a similar die size)."
+        },
+        {
+          "id": "p055",
+          "index": 55,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While Intel’s current 18A yields are lower than TSMC’s N3 for a 150mm² die (>80%), Intel offers pricing leverage, potential 14A optionality, and US-based wafer/"
+        },
+        {
+          "id": "p056",
+          "index": 56,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel 18A-P offers 8% higher performance/watt and similar density to 18A with backside power delivery (PowerVia)."
+        },
+        {
+          "id": "p057",
+          "index": 57,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There are a few lower impact possibilities too: while the Intel16 mature node in its Ireland fab could address DTV and connectivity apps, we doubt the capacity "
+        },
+        {
+          "id": "p058",
+          "index": 58,
+          "element_type": "h4",
+          "heading_level": 4,
+          "heading_chain": [],
+          "source_preview": "Apple’s Real Diversification Strategy"
+        },
+        {
+          "id": "p059",
+          "index": 59,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s actual foundry diversification isn’t about moving leading-edge A-series/M-series away from TSMC. Non-Pro versions, Peripheral chips and packaging are al"
+        },
+        {
+          "id": "p060",
+          "index": 60,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!g79U!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p061",
+          "index": 61,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Where diversification makes sense: PMICs, Display Drivers, Audio/Connectivity"
+        },
+        {
+          "id": "p062",
+          "index": 62,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Where diversification is Challenge: leading-edge A-series and M-series"
+        },
+        {
+          "id": "p063",
+          "index": 63,
+          "element_type": "h4",
+          "heading_level": 4,
+          "heading_chain": [],
+          "source_preview": "Apple’s Reengagement with Samsung LSI/Foundry"
+        },
+        {
+          "id": "p064",
+          "index": 64,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "After leaving Samsung in 2016, Apple went exclusive with TSMC. Apple’s diversification strategy is about reducing supply chain risk for non-critical chips."
+        },
+        {
+          "id": "p065",
+          "index": 65,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple has signed a strategic deal with Samsung Foundry to manufacture advanced CMOS Image Sensors (CIS) at Samsung’s Austin, Texas facilities, breaking Sony’s d"
+        },
+        {
+          "id": "p066",
+          "index": 66,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We estimate Samsung could capture 20-30% of Apple’s CIS volume by 2027 (150M-200M sensors annually), offering $1-$1.5B foundry revenue to Samsung."
+        },
+        {
+          "id": "p067",
+          "index": 67,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!zvqD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "04-the-manufacturing-footprint",
+      "title": "The Manufacturing Footprint",
+      "title_translation": null,
+      "paragraph_count": 9,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Mapping the Apple-TSMC Ecosystem: Where the Silicon is Born"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "To understand the relationship, one must understand the physical reality of where these chips are made. TSMC’s dispersed network of GigaFabs, each specializing "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "The Critical Back-End: Advanced Packaging"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Advanced packaging is an area where the divergence between Apple and NVIDIA is most acute. Apple relies on InFO-PoP (Integrated Fan-Out Package-on-Package), whi"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple and NVIDIA do not compete for the same packaging lines today. Apple dominates AP3 (InFO), while NVIDIA fights for AP5/AP6 (CoWoS). However, as Apple moves"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Fab 18 in Tainan is TSMC’s flagship facility for leading-edge production and it’s essentially “Apple’s fab.” The A19 Pro, A18 Pro, M3, M4 and M5 all come from F"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "05-geographic-concentration-risk",
+      "title": "Geographic Concentration Risk",
+      "title_translation": null,
+      "paragraph_count": 3,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!1UnP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s Taiwan concentration is the elephant in the room. Nearly all of Apple’s chip production, including every leading-edge A-series and M-series chip, happen"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC Arizona provides token diversification, but at current ramp rates, it won’t materially reduce Taiwan dependence until 2028+. Currently <5% of leading-edge "
+        }
+      ]
+    },
+    {
+      "section_id": "06-apples-five-transformational",
+      "title": "Apple’s Five Transformational Chip Acquisitions",
+      "title_translation": null,
+      "paragraph_count": 29,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s overarching semiconductor philosophy is simple but ruthless: control the “primary technologies” that differentiate the product. This journey, which bega"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!T7QL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Ucm1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!kX3T!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!TRXa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qiO_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!D3JM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "1. P.A. Semi (2008, $278M): The Foundation"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "P.A. Semi was a boutique chip design firm founded by Dan Dobberpuhl, one of the most respected processor architects in the industry (creator of DEC Alpha, Stron"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The team designed the A4, Apple’s first custom SoC. Jim Keller, who later designed AMD’s Zen architecture, led the A4/A5 development at Apple before departing. "
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Touch ID launched 13 months after the AuthenTec acquisition. AuthenTec’s architecture enabled the Secure Enclave, the hardware security subsystem that handles a"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Secure Enclave enabled Apple Pay (2014). A decade on, Apple Pay enabled $1.5T+ in transaction volume (2024). The $356M acquisition justified a financial ser"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "PrimeSense developed the 3D depth-sensing technology behind Microsoft’s Kinect. Apple bought them for $360M and spent four years miniaturizing the technology to"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The TrueDepth camera projects 30,000 infrared dots onto your face, maps the 3D structure, and authenticates in milliseconds. Face ID is more secure than Touch I"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The same technology enabled Animoji, Memoji, and became the foundation for LiDAR Scanner in the iPhone 12 Pro. 4. Intel Modem Business (2019, $1B): In-house 5G "
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple bought Intel’s smartphone modem business the same week they settled their lawsuit with Qualcomm. The timing was intentional. The settlement was a temporar"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "With Intel, Apple acquired 2,200 engineers (modem design, RF, validation), 17,000 wireless patents, Labs, equipment, IP across San Diego and Munich"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 5G modem was the final frontier for Apple and despite delays, the C1 modem shipped in iPhone 16e (2025), after five years of development. By 2027-2028, Appl"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple has licensed GPU designs from Imagination Technologies since the original iPhone. In April 2017, Apple notified Imagination they would stop using their IP"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple had secretly built an internal GPU team. The A11 (September 2017) shipped with Apple’s first custom GPU. The Apple GPU delivered 30% better performance th"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Imagination nearly went bankrupt. They were sold to a Chinese-backed private equity firm. By 2020, both companies settled their disputes and entered into multi-"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Global Design Operations"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple operates 8,000+ chip engineers across 15+ design centers on four continents:"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!L_yD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Israel is where Apple’s CPU performance leadership is designed. The Herzliya team, many recruited from Intel Israel, which created Pentium M, Core, and Sandy Br"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The same country that gave Intel its best architectures now designs Apple chips that beat Intel."
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The San Diego facility is squarely targeted at Qualcomm. Apple’s modem design operation sits literally down the street from Qualcomm’s headquarters. The office "
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "DTCO: Design-Technology Co-Optimization"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple co-defines the Process Design Kit (PDK) with TSMC. TSMC effectively dedicates hundreds of engineers to Apple, creating what is essentially a “virtual IDM”"
+        }
+      ]
+    },
+    {
+      "section_id": "07-silicon-performance-evolution",
+      "title": "Silicon Performance Evolution",
+      "title_translation": null,
+      "paragraph_count": 30,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "The Relentless March of the A-Series and M-Series"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The result of this manufacturing dominance is a performance lead that has compounded over a decade. Apple’s ability to move to the next node first allows it to "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The transistor count growth is linear, but performance per watt is the real metric. The shift to N3E in the A18/M4 generation prioritized cost and yield over pu"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!jU4H!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!IUPy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Ci1L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Since 2013, Apple has consistently shipped industry-first features 12-24 months ahead of competitors."
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Apple Silicon Technical Advantages"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s performance leadership stems from architectural bets made a decade ago. While Intel and Qualcomm chased 5GHz+ clock speeds, Apple pursued ‘wide and slow"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Front-End Architecture: Decode Width Parity"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple introduced 8-wide decode with A14/M1 in 2020, four years ahead of competitors. But by 2025, the competitors caught up."
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!00WK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Decode width is no longer Apple’s moat. The advantage has shifted to cache hierarchy, vertical integration and extremely efficient smaller E-cores."
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Cache Hierarchy: Where Apple Still Leads"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s philosophy: massive fast L1, large shared L2, and a System-Level Cache (SLC) before DRAM. The SLC allows CPU, GPU, and Neural Engine to share data witho"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!GAx7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s SLC advantage is 3-4x larger than competitors with full CPU/GPU sharing. AMD’s Strix Halo matches on size but CPU cores cannot access it."
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!zTFs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple and Qualcomm Oryon match on L1 size, latency and cache hierarchy, as the original Nuvia design team was largely poached from Apple. Intel’s L0/L1.5 tier s"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Unified Memory Architecture"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Traditional PC architectures have separate memory pools for CPU and GPU, requiring data copies. Apple Silicon uses Unified Memory Architecture: the GPU reads th"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This eliminates the “copy penalty” critical for AI workloads. A 20GB LLM loads once. The Neural Engine and GPU access it simultaneously. Qualcomm mobile chips u"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Vertical Integration"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s efficiency edge comes from owning the less attractive silicon: custom Power Management ICs and storage controllers enable millisecond-level dynamic volt"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The iPhone 17 Pro’s vapor chamber was co-designed with A19 Pro’s thermal envelope. Apple knows the exact sustained power budget (5-7W) and designs the chip acco"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "What’s changed in 2024-2025:"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "1. Decode parity: Intel, AMD, Qualcomm all reached 8-wide in 2024 2. SLC adoption: Qualcomm added 8MB SLC; Intel added 8MB memory-side cache 3. L1 parity: Qualc"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s remaining advantages: larger SLC (32MB vs 8-10MB), true unified memory with full CPU/GPU coherency, and vertical integration enabling thermal co-design."
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Next we’ll dive further into specifics: Apple wafer demand and economics at TSMC, including our forecasts through the end of the decade at the A14 node. We’ll q"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "And there’s more: packaging economics, what TSMC’s ex-Apple business looks like, Apple’s in-house efforts to replace Broadcom modems, competing efforts to copy "
+        }
+      ]
+    },
+    {
+      "section_id": "08-apple-wafer-demand",
+      "title": "Apple Wafer Demand",
+      "title_translation": null,
+      "paragraph_count": 21,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "By Node, Chip, and Device; Apple’s Wafer Economics at TSMC"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s wafer demand at TSMC grew 3.2x between 2014 and 2025, translating to an 11% CAGR. But that topline figure obscures the actual journey. The growth was a "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!fryo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!64F1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "From 2014 to 2017, demand grew steadily at around 10% annually as 16nm and 20nm ramped alongside iPhone volumes. Then growth stalled. Between 2018 and 2019, tot"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The real inflection came in 2020. Demand surged 37% in a single year as N5 ramped and Apple Silicon launched for Mac. The following two years sustained that mom"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Then came deceleration. In 2024, Apple posted its first year-over-year volume decline since 2013. N5 collapsed faster than N3 could absorb, and total demand con"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The key insight is structural: Apple’s wafer demand moves in stair-steps, with multi-year plateaus followed by sudden jumps. Every jump aligns with a major node"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Node Dominance Has Intensified"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s share of each new node at launch tells a striking story. On 20nm in 2014, Apple drove 77% of node revenue at peak. On 16nm in 2016, the peak was 46%. On"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "That last number is extraordinary. Apple funded nearly the entire yield learning curve for TSMC’s most advanced node. By the time other customers reached volume"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!scr_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!m4zH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!GytB!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "TSMC Share Volatility"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s share of total TSMC revenue moved within a band of 17% to 24% over the decade. Apple’s share spikes when it leads a new node ramp, then fades as other c"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 2023 peak of 24% coincided with N3’s launch year. The 2025 trough of 17% reflects AI accelerator customers absorbing leading-edge capacity. NVIDIA, AMD, and"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "If we remove the 2020 outlier from the CAGR calculation, the underlying growth rate drops from 11% to closer to 8%. That single year, driven by N5 ramp plus COV"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "N2: The Most Diversified Node Launch in TSMC History"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "N2 marks a structural shift in TSMC’s customer mix at node launch. We estimate Apple will once again the table with high share in N2 in 2026, but that represent"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!z0Rw!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "09-apples-wafer-demand-model-fo",
+      "title": "Apple’s Wafer Demand Model: Forecast Analysis (2026-2030)",
+      "title_translation": null,
+      "paragraph_count": 30,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "N2 Breaks the Pattern"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "N2 enters production in 2025 with 234K wafers and scales rapidly to 778K by 2027. The volume trajectory looks familiar. But Apple’s share tells a different stor"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At peak, Apple takes 48% of N2 revenue. That is down from 75% on N5 and 92% on N3. For the first time in a decade, Apple is not the dominant customer on the new"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "N3 Decays Fast"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "N3 peaks at 639K wafers in 2025, falls to 357K by 2027, and drops to 141K by 2030. That is a 78% decline in five years, faster than any prior node decay. Apple "
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "N5 Gets a Second Life"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "N5 is the first Apple node to show a U-shaped recovery. It bottoms at 157K wafers in 2025, then climbs back to 434K by 2030. Prior nodes decayed monotonically; "
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The likely explanation is cost optimization. Apple is repurposing mature N5 capacity for lower-ASP products: entry-level Macs, older iPhone variants, modem and "
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "1.4nm: Apple Dominance Returns"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "1.4nm enters in 2029 at 307K wafers and explodes to 808K by 2030. That exceeds N5’s all-time peak of 689K. The ramp is the steepest in the dataset, with year-on"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s share of 1.4nm is projected at 67%. After ceding ground on N2, Apple reclaims node leadership on the next frontier. The pattern suggests Apple is front-"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!C_w6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "New Chip Families: N-series and C-series"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Two entirely new chip families appear in 2025 and together account for roughly a third of Apple’s incremental wafer demand through 2030."
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "N-series ramps 2.5x in its first year, jumping from 4.5K to 11.4K monthly wafers. Then it nearly flatlines for four years. The profile suggests a defined produc"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "C-series shows a different shape. It grows 6x from 2025 to 2028 (3.1K to 17.0K monthly), then plateaus. The curve is concave: growth decelerates each year. This"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By 2030, N-series and C-series together represent 15% of Apple’s total monthly wafer demand. Neither existed in 2024."
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s wafer demand at TSMC grew triple digits annually from 2008-2011 as iPhone and iPad scaled. Growth moderated to single digits by 2022 and turned negative"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!WQhG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Y/Y Apple Spend"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s annual foundry spend at TSMC grew from $2.3 billion in 2014 to nearly $75 billion by 2030, a 32x increase in 16 years. The only down year was 2023, when"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Wafer Demand Volume Growth"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s annual wafer demand at TSMC more than quadrupled between 2014 and 2030. Growth was not linear: it came in waves aligned with node transitions, with the "
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "TSMC Share Recovery"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s share of total TSMC revenue will likely recover as Apple transitions to higher priced A14 node in 2029, boosting its revenue contribution to TSMC."
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The cycle appears consistent with prior patterns. Apple’s share spikes at node launches, fades as competitors scale, then spikes again when the next node arrive"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "A16 vs A14: The Node Optimization Shift"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC's A16 (N2) is architected for HPC workloads. Backside power delivery, gate-all-around transistors, and thermal envelopes are optimized for data center powe"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A14 (1.4nm) rebalances the equation. TSMC is designing A14 for both mobile and HPC from the start, with the HPC-focused A14 SPR coming after the mobile-oriented"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Consensus reads Apple’s N2 share decline as permanent displacement. The node roadmap says otherwise. A16 is Nvidia’s node. A14 is Apple’s comeback."
+        }
+      ]
+    },
+    {
+      "section_id": "10-chip-series-analysis",
+      "title": "Chip Series Analysis",
+      "title_translation": null,
+      "paragraph_count": 13,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "A-series: Maturity"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A-series demand is linear. The 2014–2030 CAGR is under 2%, and there are stretches where absolute volumes are flat or declining. From 2017 to 2019, growth was z"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The trend is real but plateauing. iPhone unit volumes have matured. Any demand increase reflects larger die sizes on newer nodes. By 2030, A-series falls below "
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "M-series: The Growth Story"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "M-series shows exponential growth in its early years, with 2020–2023 CAGR exceeding 170%. But the curve is concave. Growth decelerates sharply after 2023, dropp"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Even with that slowdown, M-series reaches 60% of A-series demand by 2030. The crossover is approaching. If M-series growth reaccelerates, perhaps through new ca"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!xnAA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Portfolio Diversification"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In 2014, A-series represented 92% of Apple’s wafer demand, representing a concentration risk."
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By 2030, A-series is 29%, M-series is 16%, N-series plus C-series is 15%, and “Other” (PMICs, audio, display, wireless controllers) is 34%. No single family exc"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple has evolved from a one-product silicon company to a diversified silicon portfolio. The concentration risk has halved over the decade."
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Two new chip families (N-series and C-series) launch in 2025 and together account for roughly a third of Apple’s incremental wafer demand through 2030."
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By 2030, N-series + C-series represent 15% of Apple’s monthly wafer demand. Neither existed five years prior."
+        }
+      ]
+    },
+    {
+      "section_id": "11-device-mix-diversification",
+      "title": "Device Mix & Diversification",
+      "title_translation": null,
+      "paragraph_count": 5,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Unit Decoupling"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The decoupling between unit shipments and silicon value tells the real story of Apple’s foundry economics. A-series unit growth has essentially flatlined since "
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Diversification beyond iPhone"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s wafer demand at TSMC has diversified meaningfully since 2018. iPhone accounted for 74% of Apple’s monthly wafer consumption that year. By 2025, that sha"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!ocdJ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "12-device-shipments",
+      "title": "Device Shipments",
+      "title_translation": null,
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The device base is massive but mature. Apple now ships over 600 million devices annually across all categories. But growth rates tell a different story: the 20%"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "iPhone volumes peaked nearly a decade ago and have oscillated in a narrow band ever since. The forecast through 2030 shows low-single-digit growth, barely keepi"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Wearables carried growth, then stalled. AirPods was the fastest-ramping product in Apple’s history, reaching meaningful scale within four years of launch. Watch"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "New categories are not moving the needle. Vision Pro shipments through 2030 remain a rounding error relative to the 600M+ device base. Its contribution is silic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Server appears in the forecast. A new “Server” line item emerges in 2024 and grows through 2030. Volumes are small, but the category’s existence signals Apple’s"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 2025-2030 growth outlook is muted. Total device shipment growth averages around 3% annually through the forecast, down from double-digits earlier in the dec"
+        }
+      ]
+    },
+    {
+      "section_id": "13-ai-overtakes-apple-at-the-lead",
+      "title": "AI Overtakes Apple at the Leading Edge",
+      "title_translation": null,
+      "paragraph_count": 18,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For most of TSMC’s advanced node history, Apple was the undisputed volume leader. On N5, Apple’s quarterly wafer demand consistently exceeded the combined deman"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The composition of AI demand makes the shift even more striking. NVIDIA alone is projected to consume more wafers on N3 by 4Q27 than Apple’s entire leading-edge"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The structural implication is clear. Apple built TSMC’s leading-edge business over the past decade, funding yield learning and absorbing startup capacity on eve"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "TSMC’s Platform Shift: HPC Overtakes Mobile"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For most of TSMC’s history, smartphones were the anchor platform. From 2012 to 2021, smartphone revenue exceeded HPC revenue every single year, driven by Apple "
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This was dominance by design: Apple funded yield learning, absorbed startup capacity, and extracted the best economics before competitors could reach volume. Th"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "That era is ending."
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But 2022 marked a structural inflection. HPC revenue surpassed smartphones for the first time and has accelerated since, growing at nearly 22% CAGR versus 11% f"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This shift has direct implications for Apple. Despite being the largest smartphone customer at TSMC, Apple’s leverage has diminished as HPC customers absorb dis"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple is not standing still. The 1.4nm ramp in 2029 shows Apple reclaiming 67% node share, suggesting strategic capacity reservations made years in advance. Rum"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The AI wave is too big to ignore, and Apple’s position at TSMC, while still formidable, is no longer uncontested."
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple alone took >50% of 20nm, 16nm, N5, and of N3 at each node’s respective peak."
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In 2022, HPC revenue surpassed smartphones at TSMC for the first time, and the gap has widened every quarter since. By 2025, HPC is projected to exceed $71 bill"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "NVIDIA alone now rivals Apple in leading-edge wafer consumption, and the broader AI ecosystem is growing at nearly 22% CAGR versus 11% for smartphones. Apple’s "
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Even as smartphone units saturate and HPC overtake smartphones, TSMC continues to increase its average revenue per smartphones, thanks to Apple’s relentless nod"
+        }
+      ]
+    },
+    {
+      "section_id": "14-how-apple-subsidizes-tsmc",
+      "title": "How Apple Subsidizes TSMC",
+      "title_translation": null,
+      "paragraph_count": 38,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "One of the most misunderstood aspects of the Apple-TSMC relationship is the pricing model. Surface-level analysis assumes a fixed wafer price. The reality is a "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "The Known Good Die (KGD) Model"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "When TSMC launches a bleeding-edge node (e.g., N3 for the A17 Pro), yields can be as low as 55% during the initial ramp. A standard wafer pricing model ($20,000"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Deal: Apple negotiates to pay only for Known Good Dies (KGD) during the initial ramp. TSMC absorbs the cost of the defects. This effectively aligns incentiv"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Trade-off: Apple commits to enormous volumes (often buying 50-100% of initial capacity) that no other customer can match, effectively funding the R&D and de"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Transition: Once yields hit a mature threshold, the contract reverts to standard per-wafer pricing. This incentivizes TSMC to fix yields quickly."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Binning as Yield Optimization"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple utilizes its M-series product stack to maximize yield. A defective M3 Max die with a broken GPU core doesn’t go in the trash; it becomes a binned M3 Pro o"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A-Series: Less binning flexibility (iPhone volumes require uniformity), though the A18 vs A18 Pro distinction (5-core vs 6-core GPU) suggests aggressive binning"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "M-Series: Extreme binning. M3 Max exists in 30-core and 40-core GPU variants. This allows Apple to harvest dies that would otherwise yield losses. This strategy"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In 2020, shortly after Apple commenced 5nm volume production for the iPhone 12 (A14 chip), Fab 18 reported having just 4 customers. This exclusivity explains ho"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By 2024, as the node matured and yield rates stabilized, the number of customers at Fab 18 exploded to 45."
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!vdcu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!2aUo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This trajectory (4 to 14 to 21 to 45) shows the ‘Apple Wave’ thesis:"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Phase 1 (Anchor): A new fab open with very few customers (Apple exclusive)."
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Phase 2 (Democratization): After Apple matures the node and captures the “Early Adopter Surplus,” the node opens to AMD, NVIDIA, and Qualcomm."
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Phase 3 (“Platformization”): Apple effectively pays for the R&D of the industry’s leading edge while securing the first 12-18 months of exclusivity."
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "TSMC Capex Explosion (Driven by Apple)"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC’s capex trajectory reveals three distinct eras. Pre-Apple (2005-2009), annual spending averaged $2.4B. The foundry had no anchor tenant and limited visibil"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!rHve!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!TC7Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple has effectively financed $73B of TSMC’s leading-edge capacity since the A8 launched on 20nm in 2014, representing 47% of all advanced node capex over that"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "These figures use lifetime utilization weighting, crediting Apple only for its share of each node’s output over a 5-year depreciation cycle rather than assignin"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Qualcomm, AMD, NVIDIA, and MediaTek collectively account for 25% of TSMC revenue but bear roughly 30% of leading-edge capex burden because they backfill capacit"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "TSMC R&D Funding: Apple Role"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC’s R&D spending has grown 8x since 2010, from under $1B to $8B in 2025. But R&D intensity tells a different story. In the 2015-2019 period when Apple was th"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!TYZW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Apple’s Position Among TSMC’s Top Customers"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC’s customer concentration has steadily increased over the past two decades, with the top-10 customers growing from 44% of revenue in 2000 to 78% by 2025. Ap"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "That dynamic has now reversed. In 2024 and 2025, non-Apple revenue at TSMC grew at nearly double Apple’s rate, driven by AI accelerator demand from NVIDIA, Broa"
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s lead is shrinking. In 2020, Apple’s revenue was 4.6x the average of the other top-9 customers. By 2025, that ratio has compressed to 2.9x. Apple is stil"
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 2022 dip is notable. Top-10 concentration actually fell from 74% in 2020 to 68% in 2022 before rebounding. This coincided with the crypto winter and memory "
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!ruoA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p034",
+          "index": 34,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!TOEI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p035",
+          "index": 35,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!iCdz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p036",
+          "index": 36,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Ex-Apple top-10 growth inflected. From 2014-2021, the ex-Apple top-10 cohort grew at single-digit rates most years. In 2023, that flipped to +37%. In 2024, +40%"
+        },
+        {
+          "id": "p037",
+          "index": 37,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Concentration is a double-edged sword. With 78% of revenue coming from 10 customers, TSMC is increasingly dependent on a small number of buyers. Apple and NVIDI"
+        }
+      ]
+    },
+    {
+      "section_id": "15-packaging-economics",
+      "title": "Packaging Economics",
+      "title_translation": null,
+      "paragraph_count": 4,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple pioneered TSMC’s advanced packaging business. InFO launched with the A10 in 2016, and Apple scaled it from $1.8B in 2018 to $3.8B in 2025. CoWoS was a rou"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple accounted for 78% of TSMC’s non-wafer revenue in 2020. That was peak dominance. InFO was scaling for A-series chips, and CoWoS had few customers. By 2024,"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!mCH9!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!JN0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "16-apple-gross-margin-savings-fro",
+      "title": "Apple Gross Margin Savings from In-House Chips",
+      "title_translation": null,
+      "paragraph_count": 18,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Intel Out, $4B+ In"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The decision to abandon Intel for the Mac was the single most profitable supply chain decision in Apple’s history."
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Prior to 2020, Apple paid Intel approximately $250 for a possibly overheating laptop CPU. Today, the M-series chip costs Apple estimated $40-50 to manufacture."
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Mac gross margin story is the clearest proof of Apple’s silicon thesis. In 2019, Mac GM sat at 28.5%, constrained by Intel’s $150+ processor ASPs and a road"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!e2JC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!4H9L!,w_474,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!MQH3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel’s failure to ship 10nm at competitive yields for over five years represented a multi-billion dollar transfer of value from Cupertino to Santa Clara. Apple"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "The Modem Bet: $6B to Break Qualcomm’s Stranglehold"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The ongoing transition away from Qualcomm (estimated $1.2B/year savings) represents the final major piece of the puzzle."
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The C1 modem represents Apple’s most expensive and most contentious insourcing bet. Qualcomm’s X75 5G chip commands a $20+ ASP with gross margins of 50%. Apple’"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The real story is the NRE. Apple spent $6B (including the $1B Intel modem acquisition, 2,200 engineers, mask sets, and qualification costs) to get here. Break-e"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Wi-Fi 7 In-House: $700M Recaptured from Broadcom"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s move against Broadcom in Wi-Fi and Bluetooth receives less attention but carries equal significance. The N1 chip, Apple’s first in-house Wi-Fi 7 solutio"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "Gross Margin Savings"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "These savings recur and compound annually. Each A-series generation inherits prior design wins. Each M-series chip amortizes NRE across Mac, iPad, and now Visio"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Total Product Gross Margin trajectory tells the story: 34.4% in 2018 to 36.8% in 2025, with Mac leading the charge and iPhone following as custom silicon ma"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "More Apple in-house chips mean more business for TSMC. M-series boosted TSMC’s Apple revenue by $5B. The C-series and N-series wafers will incrementally add up "
+        }
+      ]
+    },
+    {
+      "section_id": "17-competitor-replication-efforts",
+      "title": "Competitor Replication Efforts",
+      "title_translation": null,
+      "paragraph_count": 2,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Huawei, Samsung, Xiaomi, ZTE, Google and others tried to replicate Apple’s success in vertical integration but failed to put together a coherent strategy. Huawe"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung with its Exynos apps processors and modems nearly replicated the A-series strategy but due to capacity and yield limitations still depends on external c"
+        }
+      ]
+    },
+    {
+      "section_id": "18-why-apple-will-not-build-fabs",
+      "title": "Why Apple Will Not Build Fabs",
+      "title_translation": null,
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "With $200 billion in cash, Apple could theoretically outspend any foundry on earth. Yet, the economics of building a leading-edge fab from scratch are prohibiti"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!hue8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The catch-up cost to replicate TSMC’s capability would require an annual capex of $50B+ (vs TSMC’s $30-35B) just to play catch-up. The density of human capital "
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For Apple, the return on invested capital (ROIC) of building a fab is negative. Using TSMC’s balance sheet as a service allows Apple to maintain 35-40% corporat"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Every dollar Apple spends justifies $1.50 in TSMC capex, because TSMC knows Apple will fill those fabs."
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The only scenario where Apple builds fabs is the one where Taiwan becomes inaccessible. At that point, the semiconductor industry has already collapsed. TSMC Ar"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!QySE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        }
+      ]
+    },
+    {
+      "section_id": "19-apple-as-industrial-kingmaker",
+      "title": "Apple as Industrial Kingmaker",
+      "title_translation": null,
+      "paragraph_count": 10,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple as the Engine of Global Semiconductor Capex; Apple as Industrial Kingmaker"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s demand has catalyzed hundreds of billions in capital expenditure across the semiconductor ecosystem. The company ships over 600 million devices annually"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Companies Apple Built"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Foxconn: Revenue grew from approximately $40B in 2006 to $208B in 2024 (TWD 6.86 trillion). The company now operates 230+ facilities across 24 countries with 90"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "ASML: Apple has never purchased directly from ASML, yet Apple may be the primary reason ASML exists in its current form. Apple’s leading-edge chip requirements "
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC: Apple volumes consume the majority of TSMC’s leading-edge capacity. TSMC’s capital expenditure has increased fivefold since 2015, reaching $29.8B in 2024 "
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!8pFE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!HgS2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!AFJu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s $3 trillion market cap has driven $300B+ in supplier capital expenditure over the past decade. Multiple companies count Apple as 40-75% of their revenue"
+        }
+      ]
+    },
+    {
+      "section_id": "20-the-next-decade-2025-2035-fa",
+      "title": "The Next Decade: 2025-2035; Faceoff with NVIDIA for Capacity",
+      "title_translation": null,
+      "paragraph_count": 9,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC’s N2 node (2025-2026) marks a structural shift. For the first time, Apple faces genuine competition for leading-edge priority."
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The shift in economics:"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "NVIDIA’s H100/H200/B100 chips sell for $25,000-40,000 each"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple’s A18 Pro sells in iPhones for $1,099-1,199 (implied chip ASP: $100-150)"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "NVIDIA’s revenue per wafer: potentially 3-5x higher than Apple’s"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC has historically prioritized Apple as the anchor customer for new nodes. But AI margins are extraordinary. Will TSMC allocate N2 capacity to Apple’s predic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC will thread the needle. Apple gets guaranteed allocation (contractual commitments from the lock-in era). NVIDIA gets incremental capacity from aggressive f"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "But the balance of power is shifting. NVIDIA will likely wield more power at TSMC and given Apple’s stagnant volumes it could be even more difficult."
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We estimate AI accelerator wafers will overtake Apple at TSMC and will outgrow. While Apple will also participate in AI accelerator, it will come under pressure"
+        }
+      ]
+    },
+    {
+      "section_id": "21-the-arizona-question",
+      "title": "The Arizona Question",
+      "title_translation": null,
+      "paragraph_count": 5,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Arizona wafer costs run 2.4x higher than Taiwan’s Fab 18. Labor is 3x more expensive. Foundation construction costs 4x as much. Raw materials run 2x. Utilities "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple is already producing chips at Fab 21. TSMC lists Apple, AMD, Qualcomm, and NVIDIA as Phase 1 customers. Apple’s mobile SoCs, around 100mm² die size, are a"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The node lag matters more than cost. Taiwan’s “N-2 principle” requires overseas fabs to trail domestic production by at least two generations. If TSMC is develo"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apple can absorb higher costs as a hedge against Taiwan risk. But Apple won’t shift majority production to Arizona unless forced. At 2.4x the cost of Taiwan waf"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Currently 5% of leading-edge production is from Arizona. If this rises to 10-15% by 2028, it signals Apple is genuinely worried about Taiwan. If it stays at 5%,"
+        }
+      ]
+    },
+    {
+      "section_id": "22-the-node-optimization-shift",
+      "title": "The Node Optimization Shift",
+      "title_translation": null,
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC’s A16 (N2) is architected for HPC workloads. Backside power delivery, gate-all-around transistors, and thermal envelopes are optimized for data center powe"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A14 (1.4nm) rebalances the equation. TSMC is designing A14 for both mobile and HPC from the start. Power efficiency curves favor consumer devices again. Our mod"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Markets read Apple’s declining N2 share as permanent loss. The node roadmap disagrees. While Nvidia wins A16, Apple reclaims A14 at a high share."
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Meet with us at [PTC’26](https://www.ptc.org/ptc26/)!"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As this year's PTC media partner, Dylan Patel, Daniel Nishball, and Jeremie Eliahou Ontiveros are looking forward to connecting with AI mega datacenters and the"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We will also be spending time with telecom companies and equipment vendors to dive deep into exciting developments in scale-across networking."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Join us at our Happy Hour hosted on Sunday January 18! We'd love to connect with you."
+        }
+      ]
+    }
+  ]
+}

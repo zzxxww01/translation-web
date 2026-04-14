@@ -1,0 +1,2104 @@
+{
+  "section_id": "09-semianalysis-vibe-coding-show",
+  "title": "SemiAnalysis Vibe Coding Show and Tell",
+  "title_translation": "SemiAnalysis Vibe Coding 展示与讲解",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Heres a latency test of APIs to compare ISO/OSL to figure out latency over a 24 hour period.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0155",
+      "parent_block_index": 155,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Heres a latency test of APIs to compare ISO/OSL to figure out latency over a 24 hour period.",
+      "parent_block_plain_text": "Heres a latency test of APIs to compare ISO/OSL to figure out latency over a 24 hour period.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 92,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这是一份 API 延迟测试，通过对比 ISO/OSL 来计算 24 小时内的延迟情况。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.276927",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!yHky!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1cded36f-1f27-48a0-b7c9-b355b892b219_624x386.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!yHky!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1cded36f-1f27-48a0-b7c9-b355b892b219_624x386.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0156",
+      "parent_block_index": 156,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!yHky!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1cded36f-1f27-48a0-b7c9-b355b892b219_624x386.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!yHky!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1cded36f-1f27-48a0-b7c9-b355b892b219_624x386.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!yHky!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1cded36f-1f27-48a0-b7c9-b355b892b219_624x386.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!yHky!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1cded36f-1f27-48a0-b7c9-b355b892b219_624x386.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.276997",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!yHky!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1cded36f-1f27-48a0-b7c9-b355b892b219_624x386.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Source: SemiAnalysis, Doug’s Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0157",
+      "parent_block_index": 157,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis, Doug’s Claude Code",
+      "parent_block_plain_text": "Source: SemiAnalysis, Doug’s Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 40,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis，Doug 的 Claude Code",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627062",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis，Doug 的 Claude Code",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277033",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis，Doug 的 Claude Code",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "A website that Jordan vibe coded to learn about the world.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Jordan vibe coded",
+          "start": 15,
+          "end": 32,
+          "href": "https://www.learntheworld.ai/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0158",
+      "parent_block_index": 158,
+      "parent_block_type": "p",
+      "parent_block_markdown": "A website that [Jordan vibe coded](https://www.learntheworld.ai/) to learn about the world.",
+      "parent_block_plain_text": "A website that Jordan vibe coded to learn about the world.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Jordan vibe coded",
+          "start": 15,
+          "end": 32,
+          "href": "https://www.learntheworld.ai/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 58,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这是一个由 Jordan 通过“氛围感编程”（vibe coding，指主要依靠 AI 辅助而非手写代码的开发方式）构建的网站，旨在了解世界。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277168",
+          "tokenized_text": "这是一个[[[LINK_1|由 Jordan 通过“氛围感编程”（vibe coding，指主要依靠 AI 辅助而非手写代码的开发方式）构建]]]的网站，旨在了解世界。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!K968!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f9d3c95-7b19-4034-b339-9b0eee5826d8_624x474.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!K968!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f9d3c95-7b19-4034-b339-9b0eee5826d8_624x474.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0159",
+      "parent_block_index": 159,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!K968!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f9d3c95-7b19-4034-b339-9b0eee5826d8_624x474.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!K968!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f9d3c95-7b19-4034-b339-9b0eee5826d8_624x474.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!K968!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f9d3c95-7b19-4034-b339-9b0eee5826d8_624x474.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!K968!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f9d3c95-7b19-4034-b339-9b0eee5826d8_624x474.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277205",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!K968!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4f9d3c95-7b19-4034-b339-9b0eee5826d8_624x474.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Source: SemiAnalysis, Jordan’s Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0160",
+      "parent_block_index": 160,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis, Jordan’s Claude Code",
+      "parent_block_plain_text": "Source: SemiAnalysis, Jordan’s Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 42,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis，Jordan 的 Claude Code",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627097",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis，Jordan 的 Claude Code",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277232",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis，Jordan 的 Claude Code",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Here’s a CLI bench comparing token efficiency. Kimi’s 2.5 is pretty good but takes a lot of tokens. This is an expression of token efficiency; realized speed can be much faster even with slower tokens per second.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0161",
+      "parent_block_index": 161,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Here’s a CLI bench comparing token efficiency. Kimi’s 2.5 is pretty good but takes a lot of tokens. This is an expression of token efficiency; realized speed can be much faster even with slower tokens per second.",
+      "parent_block_plain_text": "Here’s a CLI bench comparing token efficiency. Kimi’s 2.5 is pretty good but takes a lot of tokens. This is an expression of token efficiency; realized speed can be much faster even with slower tokens per second.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 212,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这是一份对比 Token 效率的 CLI (命令行界面) 基准测试。Kimi 的 2.5 版本表现相当不错，但会消耗大量 token。这正是 Token 效率的直观体现；即便每秒 token 数较低，实际达到的速度也可能快得多。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277260",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!_63p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3cb2e9c-243f-4694-87a3-1ab0cbc26c15_624x264.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_63p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3cb2e9c-243f-4694-87a3-1ab0cbc26c15_624x264.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0162",
+      "parent_block_index": 162,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_63p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3cb2e9c-243f-4694-87a3-1ab0cbc26c15_624x264.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_63p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3cb2e9c-243f-4694-87a3-1ab0cbc26c15_624x264.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_63p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3cb2e9c-243f-4694-87a3-1ab0cbc26c15_624x264.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_63p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3cb2e9c-243f-4694-87a3-1ab0cbc26c15_624x264.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277288",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_63p!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe3cb2e9c-243f-4694-87a3-1ab0cbc26c15_624x264.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Source: SemiAnalysis, Doug’s Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0163",
+      "parent_block_index": 163,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis, Doug’s Claude Code",
+      "parent_block_plain_text": "Source: SemiAnalysis, Doug’s Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 40,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis，Doug 的 Claude Code",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627074",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis，Doug 的 Claude Code",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277315",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis，Doug 的 Claude Code",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Here’s a video game that Doug vibe coded for his fiancée.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0164",
+      "parent_block_index": 164,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Here’s a video game that Doug vibe coded for his fiancée.",
+      "parent_block_plain_text": "Here’s a video game that Doug vibe coded for his fiancée.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 57,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这是 Doug 为未婚妻通过“直觉编程”构建的一款电子游戏。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277344",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!kmZX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1588d70f-987e-4a15-98cc-abddaf449ed5_1045x662.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kmZX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1588d70f-987e-4a15-98cc-abddaf449ed5_1045x662.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0165",
+      "parent_block_index": 165,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!kmZX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1588d70f-987e-4a15-98cc-abddaf449ed5_1045x662.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!kmZX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1588d70f-987e-4a15-98cc-abddaf449ed5_1045x662.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kmZX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1588d70f-987e-4a15-98cc-abddaf449ed5_1045x662.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!kmZX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1588d70f-987e-4a15-98cc-abddaf449ed5_1045x662.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277374",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!kmZX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1588d70f-987e-4a15-98cc-abddaf449ed5_1045x662.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: SemiAnalysis, Doug’s Claude Code. You get money from a mini game at the bottom lol.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0166",
+      "parent_block_index": 166,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis, Doug’s Claude Code. You get money from a mini game at the bottom lol.",
+      "parent_block_plain_text": "Source: SemiAnalysis, Doug’s Claude Code. You get money from a mini game at the bottom lol.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 91,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis，Doug 的 Claude Code。你可以从底部的小游戏中赚钱，哈哈。",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627108",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis，Doug 的 Claude Code。你可以通过底部的小游戏赚钱，哈哈。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277401",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis，Doug 的 Claude Code。你可以从底部的小游戏中赚钱，哈哈。",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Here’s a chart comparing the gross margin of TSMC to margins to Entegris. The gross margins include the pro-forma adjustments for the acquisition.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0167",
+      "parent_block_index": 167,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Here’s a chart comparing the gross margin of TSMC to margins to Entegris. The gross margins include the pro-forma adjustments for the acquisition.",
+      "parent_block_plain_text": "Here’s a chart comparing the gross margin of TSMC to margins to Entegris. The gross margins include the pro-forma adjustments for the acquisition.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 146,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这是一张对比台积电（TSMC）与恩特格里斯毛利率的图表。此处的毛利率已包含针对收购的备考调整。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277427",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "https://substackcdn.com/image/fetch/$s_!Ibgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff18504c8-f5aa-4e9d-969b-785d90646866_1056x526.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Ibgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff18504c8-f5aa-4e9d-969b-785d90646866_1056x526.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0168",
+      "parent_block_index": 168,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Ibgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff18504c8-f5aa-4e9d-969b-785d90646866_1056x526.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Ibgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff18504c8-f5aa-4e9d-969b-785d90646866_1056x526.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Ibgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff18504c8-f5aa-4e9d-969b-785d90646866_1056x526.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Ibgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff18504c8-f5aa-4e9d-969b-785d90646866_1056x526.png",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277453",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Ibgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff18504c8-f5aa-4e9d-969b-785d90646866_1056x526.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Source: SemiAnalysis, Doug’s Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0169",
+      "parent_block_index": 169,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis, Doug’s Claude Code",
+      "parent_block_plain_text": "Source: SemiAnalysis, Doug’s Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 40,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis，Doug 的 Claude Code",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.627085",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis，Doug 的 Claude Code",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277479",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis，Doug 的 Claude Code",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Guys, the world of intelligence work has changed forever. And it’s going to hurt almost all of the incumbents. Do not listen to anyone who tells you that this is good for software companies who will sell more software. Radio over the internet is not a thing.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0170",
+      "parent_block_index": 170,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Guys, the world of intelligence work has changed forever. And it’s going to hurt almost all of the incumbents. Do not listen to anyone who tells you that this is good for software companies who will sell more software. Radio over the internet is not a thing.",
+      "parent_block_plain_text": "Guys, the world of intelligence work has changed forever. And it’s going to hurt almost all of the incumbents. Do not listen to anyone who tells you that this is good for software companies who will sell more software. Radio over the internet is not a thing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 258,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "各位，知识工作的世界已被彻底颠覆。这势必重创几乎所有的现有巨头。绝不要相信那些声称“这对软件公司是利好，能让他们卖出更多软件”的论调。就像“互联网广播”根本是个伪命题一样（译注：指新技术会诞生全新的业态，而非简单地将旧模式搬上新平台）。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277504",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Conclusion: The Model is the New TCP/IP",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Conclusion: The Model is the New TCP/IP",
+          "start": 0,
+          "end": 39,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0171",
+      "parent_block_index": 171,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Conclusion: The Model is the New TCP/IP**",
+      "parent_block_plain_text": "Conclusion: The Model is the New TCP/IP",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Conclusion: The Model is the New TCP/IP",
+          "start": 0,
+          "end": 39,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 39,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "结论：模型即新的 TCP/IP",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277584",
+          "tokenized_text": "[[[STRONG_1|结论：模型即新的 TCP/IP]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "In the 1970s and 1980s there was considerable competition to TCP/IP. The OSI, IBM SNA, Novell IPX/SPX, and other protocols were all in contention. But as you now know, no one cares, it’s really about the best information that’s built on top of the packets in the internet. We are at that same important point, and Claude Code is the first proof point. 4% of GitHub and rising is generated a day from Claude Code alone.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0172",
+      "parent_block_index": 172,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In the 1970s and 1980s there was considerable competition to TCP/IP. The OSI, IBM SNA, Novell IPX/SPX, and other protocols were all in contention. But as you now know, no one cares, it’s really about the best information that’s built on top of the packets in the internet. We are at that same important point, and Claude Code is the first proof point. 4% of GitHub and rising is generated a day from Claude Code alone.",
+      "parent_block_plain_text": "In the 1970s and 1980s there was considerable competition to TCP/IP. The OSI, IBM SNA, Novell IPX/SPX, and other protocols were all in contention. But as you now know, no one cares, it’s really about the best information that’s built on top of the packets in the internet. We are at that same important point, and Claude Code is the first proof point. 4% of GitHub and rising is generated a day from Claude Code alone.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 418,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 20 世纪 70 和 80 年代，TCP/IP 面临着激烈的竞争。OSI 模型、IBM 的 SNA (系统网络架构)、Novell IPX/SPX 以及其他协议都曾参与角逐。但正如你现在所知，没人再关心这些底层协议，真正重要的是构建在互联网数据包之上的优质信息。我们目前正处于同样关键的历史节点，而 Claude Code 就是首个证明。如今，GitHub 上每天有 4% 且仍在不断攀升的代码量，仅由 Claude Code 一己之力生成。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277613",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "The future is going to be about how agents can harness large amounts of tokens to build bigger and better projects. Claude Code is the first website and our best glimpse into the further Agentic future. Information work is about to accelerate meaningfully, and competition is about to skyrocket.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0173",
+      "parent_block_index": 173,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The future is going to be about how agents can harness large amounts of tokens to build bigger and better projects. Claude Code is the first website and our best glimpse into the further Agentic future. Information work is about to accelerate meaningfully, and competition is about to skyrocket.",
+      "parent_block_plain_text": "The future is going to be about how agents can harness large amounts of tokens to build bigger and better projects. Claude Code is the first website and our best glimpse into the further Agentic future. Information work is about to accelerate meaningfully, and competition is about to skyrocket.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 295,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "未来的核心在于智能体（指能够自主规划并执行复杂任务的 AI）如何驾驭海量 token，从而构建规模更庞大、质量更卓越的项目。Claude Code 犹如初代网站，为我们提供了窥探更深远智能体化未来的最佳窗口。信息工作即将迎来实质性的加速，竞争必将呈指数级飙升。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277640",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "*Analyst Certifications and Independence of Research. Each of the analysts whose names appear in this report hereby certify that all the views expressed in this Report accurately reflect our personal views about any and all of the subject securities or issuers and that no part of our compensation was, is, or will be, directly or indirectly, related to the specific recommendations or views of in this Report. SemiAnalysis LLC (the “Company”) is an independent equity research provider. The Company is not a member of the FINRA or the SIPC and is not a registered broker dealer or investment adviser. SemiAnalysis has no other regulated or unregulated business activities which conflict with its provision of independent research.*",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Analyst Certifications and Independence of Research.",
+          "start": 1,
+          "end": 53,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0174",
+      "parent_block_index": 174,
+      "parent_block_type": "p",
+      "parent_block_markdown": "***Analyst Certifications and Independence of Research.** Each of the analysts whose names appear in this report hereby certify that all the views expressed in this Report accurately reflect our personal views about any and all of the subject securities or issuers and that no part of our compensation was, is, or will be, directly or indirectly, related to the specific recommendations or views of in this Report. SemiAnalysis LLC (the “Company”) is an independent equity research provider. The Company is not a member of the FINRA or the SIPC and is not a registered broker dealer or investment adviser. SemiAnalysis has no other regulated or unregulated business activities which conflict with its provision of independent research.*",
+      "parent_block_plain_text": "*Analyst Certifications and Independence of Research. Each of the analysts whose names appear in this report hereby certify that all the views expressed in this Report accurately reflect our personal views about any and all of the subject securities or issuers and that no part of our compensation was, is, or will be, directly or indirectly, related to the specific recommendations or views of in this Report. SemiAnalysis LLC (the “Company”) is an independent equity research provider. The Company is not a member of the FINRA or the SIPC and is not a registered broker dealer or investment adviser. SemiAnalysis has no other regulated or unregulated business activities which conflict with its provision of independent research.*",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Analyst Certifications and Independence of Research.",
+          "start": 1,
+          "end": 53,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 732,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "*分析师认证与研究独立性。 本报告署名的每位分析师特此证明，本报告中表达的所有观点均准确反映了我们对任何及所有标的证券或发行人的个人看法，且我们的薪酬中没有任何部分曾经、现在或将来会直接或间接与本报告中的具体建议或观点相关。SemiAnalysis LLC（以下简称“本公司”）是一家独立的股票研究机构。本公司并非美国金融业监管局 (FINRA) 或美国证券投资者保护公司 (SIPC) 的成员，亦非注册的经纪交易商或投资顾问。SemiAnalysis 没有任何其他受监管或不受监管的业务活动会与其提供独立研究产生冲突。*",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277732",
+          "tokenized_text": "*[[[STRONG_1|分析师认证与研究独立性。]]] 本报告署名的每位分析师特此证明，本报告中表达的所有观点均准确反映了我们对任何及所有标的证券或发行人的个人看法，且我们的薪酬中没有任何部分曾经、现在或将来会直接或间接与本报告中的具体建议或观点相关。SemiAnalysis LLC（以下简称“本公司”）是一家独立的股票研究机构。本公司并非美国金融业监管局 (FINRA) 或美国证券投资者保护公司 (SIPC) 的成员，亦非注册的经纪交易商或投资顾问。SemiAnalysis 没有任何其他受监管或不受监管的业务活动会与其提供独立研究产生冲突。*",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "*Limitation of Research and Information. This Report has been prepared for distribution to only qualified institutional or professional clients of SemiAnalysis LLC. The contents of this Report represent the views, opinions, and analyses of its authors. The information contained herein does not constitute financial, legal, tax or any other advice. All third-party data presented herein were obtained from publicly available sources which are believed to be reliable; however, the Company makes no warranty, express or implied, concerning the accuracy or completeness of such information. In no event shall the Company be responsible or liable for the correctness of, or update to, any such material or for any damage or lost opportunities resulting from use of this data.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Limitation of Research and Information.",
+          "start": 1,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0175",
+      "parent_block_index": 175,
+      "parent_block_type": "p",
+      "parent_block_markdown": "***Limitation of Research and Information.** This Report has been prepared for distribution to only qualified institutional or professional clients of SemiAnalysis LLC. The contents of this Report represent the views, opinions, and analyses of its authors. The information contained herein does not constitute financial, legal, tax or any other advice. All third-party data presented herein were obtained from publicly available sources which are believed to be reliable; however, the Company makes no warranty, express or implied, concerning the accuracy or completeness of such information. In no event shall the Company be responsible or liable for the correctness of, or update to, any such material or for any damage or lost opportunities resulting from use of this data. Nothing contained in this Report or any distribution by the Company should be construed as any offer to sell, or any solicitation of an offer to buy, any security or investment. Any research or other material received should not be construed as individualized investment advice. Investment decisions should be made as part of an overall portfolio strategy and you should consult with a professional financial advisor, legal and tax advisor prior to making any investment decision. SemiAnalysis LLC shall not be liable for any direct or indirect, incidental or consequential loss or damage (including loss of profits, revenue or goodwill) arising from any investment decisions based on information or research obtained from SemiAnalysis LLC.*",
+      "parent_block_plain_text": "*Limitation of Research and Information. This Report has been prepared for distribution to only qualified institutional or professional clients of SemiAnalysis LLC. The contents of this Report represent the views, opinions, and analyses of its authors. The information contained herein does not constitute financial, legal, tax or any other advice. All third-party data presented herein were obtained from publicly available sources which are believed to be reliable; however, the Company makes no warranty, express or implied, concerning the accuracy or completeness of such information. In no event shall the Company be responsible or liable for the correctness of, or update to, any such material or for any damage or lost opportunities resulting from use of this data. Nothing contained in this Report or any distribution by the Company should be construed as any offer to sell, or any solicitation of an offer to buy, any security or investment. Any research or other material received should not be construed as individualized investment advice. Investment decisions should be made as part of an overall portfolio strategy and you should consult with a professional financial advisor, legal and tax advisor prior to making any investment decision. SemiAnalysis LLC shall not be liable for any direct or indirect, incidental or consequential loss or damage (including loss of profits, revenue or goodwill) arising from any investment decisions based on information or research obtained from SemiAnalysis LLC.*",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Limitation of Research and Information.",
+          "start": 1,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 772,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "*研究与信息限制。 本报告仅供分发给 SemiAnalysis LLC 的合格机构或专业客户。本报告的内容代表其作者的观点、意见和分析。本文包含的信息不构成金融、法律、税务或任何其他建议。本文提供的所有第三方数据均来自被认为可靠的公开来源；然而，本公司不对该等信息的准确性或完整性作出任何明示或暗示的保证。在任何情况下，本公司均不对任何此类材料的正确性或更新负责，亦不对因使用这些数据而导致的任何损害或错失的机会承担责任。",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277814",
+          "tokenized_text": "*[[[STRONG_1|研究与信息限制。]]] 本报告仅供分发给 SemiAnalysis LLC 的合格机构或专业客户。本报告的内容代表其作者的观点、意见和分析。本文包含的信息不构成金融、法律、税务或任何其他建议。本文提供的所有第三方数据均来自被认为可靠的公开来源；然而，本公司不对该等信息的准确性或完整性作出任何明示或暗示的保证。在任何情况下，本公司均不对任何此类材料的正确性或更新负责，亦不对因使用这些数据而导致的任何损害或错失的机会承担责任。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "Nothing contained in this Report or any distribution by the Company should be construed as any offer to sell, or any solicitation of an offer to buy, any security or investment. Any research or other material received should not be construed as individualized investment advice. Investment decisions should be made as part of an overall portfolio strategy and you should consult with a professional financial advisor, legal and tax advisor prior to making any investment decision. SemiAnalysis LLC shall not be liable for any direct or indirect, incidental or consequential loss or damage (including loss of profits, revenue or goodwill) arising from any investment decisions based on information or research obtained from SemiAnalysis LLC.*",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0175",
+      "parent_block_index": 175,
+      "parent_block_type": "p",
+      "parent_block_markdown": "***Limitation of Research and Information.** This Report has been prepared for distribution to only qualified institutional or professional clients of SemiAnalysis LLC. The contents of this Report represent the views, opinions, and analyses of its authors. The information contained herein does not constitute financial, legal, tax or any other advice. All third-party data presented herein were obtained from publicly available sources which are believed to be reliable; however, the Company makes no warranty, express or implied, concerning the accuracy or completeness of such information. In no event shall the Company be responsible or liable for the correctness of, or update to, any such material or for any damage or lost opportunities resulting from use of this data. Nothing contained in this Report or any distribution by the Company should be construed as any offer to sell, or any solicitation of an offer to buy, any security or investment. Any research or other material received should not be construed as individualized investment advice. Investment decisions should be made as part of an overall portfolio strategy and you should consult with a professional financial advisor, legal and tax advisor prior to making any investment decision. SemiAnalysis LLC shall not be liable for any direct or indirect, incidental or consequential loss or damage (including loss of profits, revenue or goodwill) arising from any investment decisions based on information or research obtained from SemiAnalysis LLC.*",
+      "parent_block_plain_text": "*Limitation of Research and Information. This Report has been prepared for distribution to only qualified institutional or professional clients of SemiAnalysis LLC. The contents of this Report represent the views, opinions, and analyses of its authors. The information contained herein does not constitute financial, legal, tax or any other advice. All third-party data presented herein were obtained from publicly available sources which are believed to be reliable; however, the Company makes no warranty, express or implied, concerning the accuracy or completeness of such information. In no event shall the Company be responsible or liable for the correctness of, or update to, any such material or for any damage or lost opportunities resulting from use of this data. Nothing contained in this Report or any distribution by the Company should be construed as any offer to sell, or any solicitation of an offer to buy, any security or investment. Any research or other material received should not be construed as individualized investment advice. Investment decisions should be made as part of an overall portfolio strategy and you should consult with a professional financial advisor, legal and tax advisor prior to making any investment decision. SemiAnalysis LLC shall not be liable for any direct or indirect, incidental or consequential loss or damage (including loss of profits, revenue or goodwill) arising from any investment decisions based on information or research obtained from SemiAnalysis LLC.*",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Limitation of Research and Information.",
+          "start": 1,
+          "end": 40,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 773,
+      "segment_end": 1514,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "本报告或本公司分发的任何内容均不应被解释为出售任何证券或投资的要约，或购买任何证券或投资的要约邀请。收到的任何研究或其他材料均不应被视为个性化的投资建议。投资决策应作为整体投资组合战略的一部分来制定，在做出任何投资决策之前，您应咨询专业的财务顾问、法律和税务顾问。对于基于从 SemiAnalysis LLC 获得的信息或研究而做出的任何投资决策所引起的任何直接或间接、附带或后果性的损失或损害（包括利润、营收或商誉的损失），SemiAnalysis LLC 概不负责。*",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277841",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "*Reproduction and Distribution Strictly Prohibited. No user of this Report may reproduce, modify, copy, distribute, sell, resell, transmit, transfer, license, assign or publish the Report itself or any information contained therein. Notwithstanding the foregoing, clients with access to working models are permitted to alter or modify the information contained therein, provided that it is solely for such client’s own use. This Report is not intended to be available or distributed for any purpose that would be deemed unlawful or otherwise prohibited by any local, state, national or international laws or regulations or would otherwise subject the Company to registration or regulation of any kind within such jurisdiction.*",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Reproduction and Distribution Strictly Prohibited.",
+          "start": 1,
+          "end": 51,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0176",
+      "parent_block_index": 176,
+      "parent_block_type": "p",
+      "parent_block_markdown": "***Reproduction and Distribution Strictly Prohibited.** No user of this Report may reproduce, modify, copy, distribute, sell, resell, transmit, transfer, license, assign or publish the Report itself or any information contained therein. Notwithstanding the foregoing, clients with access to working models are permitted to alter or modify the information contained therein, provided that it is solely for such client’s own use. This Report is not intended to be available or distributed for any purpose that would be deemed unlawful or otherwise prohibited by any local, state, national or international laws or regulations or would otherwise subject the Company to registration or regulation of any kind within such jurisdiction.*",
+      "parent_block_plain_text": "*Reproduction and Distribution Strictly Prohibited. No user of this Report may reproduce, modify, copy, distribute, sell, resell, transmit, transfer, license, assign or publish the Report itself or any information contained therein. Notwithstanding the foregoing, clients with access to working models are permitted to alter or modify the information contained therein, provided that it is solely for such client’s own use. This Report is not intended to be available or distributed for any purpose that would be deemed unlawful or otherwise prohibited by any local, state, national or international laws or regulations or would otherwise subject the Company to registration or regulation of any kind within such jurisdiction.*",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Reproduction and Distribution Strictly Prohibited.",
+          "start": 1,
+          "end": 51,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 727,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "*严禁复制与分发。 本报告的任何用户均不得复制、修改、复印、分发、出售、转售、传输、转让、许可、让与或出版报告本身或其中包含的任何信息。尽管有上述规定，获准访问工作模型的客户可以更改或修改其中包含的信息，前提是仅供该客户自行使用。本报告无意为任何被当地、州、国家或国际法律法规视为非法或以其他方式禁止的目的而提供或分发，亦无意使本公司在此类司法管辖区内接受任何形式的注册或监管。*",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277919",
+          "tokenized_text": "*[[[STRONG_1|严禁复制与分发。]]] 本报告的任何用户均不得复制、修改、复印、分发、出售、转售、传输、转让、许可、让与或出版报告本身或其中包含的任何信息。尽管有上述规定，获准访问工作模型的客户可以更改或修改其中包含的信息，前提是仅供该客户自行使用。本报告无意为任何被当地、州、国家或国际法律法规视为非法或以其他方式禁止的目的而提供或分发，亦无意使本公司在此类司法管辖区内接受任何形式的注册或监管。*",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "*Copyrights, Trademarks, Intellectual Property. SemiAnalysis LLC, and any logos or marks included in this Report are proprietary materials. The use of such terms and logos and marks without the express written consent of SemiAnalysis LLC is strictly prohibited. The copyright in the pages or in the screens of the Report, and in the information and material therein, is proprietary material owned by SemiAnalysis LLC unless otherwise indicated. The unauthorized use of any material on this Report may violate numerous statutes, regulations and laws, including, but not limited to, copyright, trademark, trade secret or patent laws.*",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Copyrights, Trademarks, Intellectual Property.",
+          "start": 1,
+          "end": 47,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0177",
+      "parent_block_index": 177,
+      "parent_block_type": "p",
+      "parent_block_markdown": "***Copyrights, Trademarks, Intellectual Property.** SemiAnalysis LLC, and any logos or marks included in this Report are proprietary materials. The use of such terms and logos and marks without the express written consent of SemiAnalysis LLC is strictly prohibited. The copyright in the pages or in the screens of the Report, and in the information and material therein, is proprietary material owned by SemiAnalysis LLC unless otherwise indicated. The unauthorized use of any material on this Report may violate numerous statutes, regulations and laws, including, but not limited to, copyright, trademark, trade secret or patent laws.*",
+      "parent_block_plain_text": "*Copyrights, Trademarks, Intellectual Property. SemiAnalysis LLC, and any logos or marks included in this Report are proprietary materials. The use of such terms and logos and marks without the express written consent of SemiAnalysis LLC is strictly prohibited. The copyright in the pages or in the screens of the Report, and in the information and material therein, is proprietary material owned by SemiAnalysis LLC unless otherwise indicated. The unauthorized use of any material on this Report may violate numerous statutes, regulations and laws, including, but not limited to, copyright, trademark, trade secret or patent laws.*",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Copyrights, Trademarks, Intellectual Property.",
+          "start": 1,
+          "end": 47,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 632,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "*版权、商标与知识产权。 SemiAnalysis LLC 以及本报告中包含的任何徽标或标志均为专有材料。未经 SemiAnalysis LLC 明确书面同意，严禁使用此类术语、徽标和标志。除非另有说明，本报告页面或屏幕以及其中的信息和材料的版权，均为 SemiAnalysis LLC 拥有的专有材料。未经授权使用本报告上的任何材料可能违反众多法规和法律，包括但不限于版权、商标、商业机密或专利法。*",
+          "model": "pro",
+          "created_at": "2026-04-10T12:13:30.277998",
+          "tokenized_text": "*[[[STRONG_1|版权、商标与知识产权。]]] SemiAnalysis LLC 以及本报告中包含的任何徽标或标志均为专有材料。未经 SemiAnalysis LLC 明确书面同意，严禁使用此类术语、徽标和标志。除非另有说明，本报告页面或屏幕以及其中的信息和材料的版权，均为 SemiAnalysis LLC 拥有的专有材料。未经授权使用本报告上的任何材料可能违反众多法规和法律，包括但不限于版权、商标、商业机密或专利法。*",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.299999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "译文将 vibe coded 译作“直觉编程”，但 Glossary 中已明确规定 Vibe coding 应译为“氛围感编程”。该问题同样出现在第9段中。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格（出现两次）。"
+          },
+          {
+            "type": "readability",
+            "description": "英文字母与中文字符之间缺少必要的空格。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将 Information work 译为“知识工作”，但 Glossary 明确规定其应译为“信息工作”。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

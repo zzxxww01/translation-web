@@ -1,0 +1,30 @@
+{
+  "section_id": "07-silicon-performance-evolution",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 10,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Apple introduced 8-wide decode with A14/M1 in 2020...",
+        "description": "译文“8宽解码”中，阿拉伯数字与中文字符之间缺少空格，不符合中英文混合排版规范（CJK-Latin spacing）。",
+        "why_it_matters": "细节排版问题会轻微影响专业科技文章的阅读体验和严谨度。",
+        "suggestion": "修改为“8 宽解码”。"
+      },
+      {
+        "paragraph_index": 24,
+        "issue_type": "tone",
+        "severity": "low",
+        "original_text": "The iPhone 17 Pro’s vapor chamber was co-designed with A19 Pro’s thermal envelope.",
+        "description": "译文“均热板与 A19 Pro 的散热包络系协同设计而成”中的“系”字带有较强的公文或法务色彩，在硬核科技分析文章中略显生硬。",
+        "why_it_matters": "破坏了文章原本流畅、现代的科技商业分析语感。",
+        "suggestion": "修改为“均热板是与 A19 Pro 的散热包络协同设计而成的”或“均热板与 A19 Pro 的散热包络经过了协同设计”。"
+      }
+    ]
+  }
+}

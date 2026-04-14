@@ -1,0 +1,1914 @@
+{
+  "section_id": "00-intro",
+  "title": "Introduction",
+  "title_translation": "引言",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "What It Is, How We Use It, Industry Repercussions, Microsoft's Dilemma, Why Anthropic Is Winning",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0000",
+      "parent_block_index": 0,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### What It Is, How We Use It, Industry Repercussions, Microsoft's Dilemma, Why Anthropic Is Winning",
+      "parent_block_plain_text": "What It Is, How We Use It, Industry Repercussions, Microsoft's Dilemma, Why Anthropic Is Winning",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 96,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "subtitle",
+      "translations": {
+        "source_metadata": {
+          "text": "产品解读，我们如何使用，行业影响，微软的困境，Anthropic 为何取胜",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626682",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "核心解析、使用体验、行业震荡、微软的困境，以及 Anthropic 为何胜出",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.970305",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "产品解读，我们如何使用，行业影响，微软的困境，Anthropic 为何取胜",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "By Doug O'Laughlin, Jeremie Eliahou Ontiveros, Jordan Nanos, and 2 others",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Doug O'Laughlin",
+          "start": 3,
+          "end": 18,
+          "href": "https://substack.com/@mule",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Jeremie Eliahou Ontiveros",
+          "start": 20,
+          "end": 45,
+          "href": "https://substack.com/@jeremieeliahouontiveros",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Jordan Nanos",
+          "start": 47,
+          "end": 59,
+          "href": "https://substack.com/@jnanos",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "parent_block_id": "b0001",
+      "parent_block_index": 1,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By [Doug O'Laughlin](https://substack.com/@mule), [Jeremie Eliahou Ontiveros](https://substack.com/@jeremieeliahouontiveros), [Jordan Nanos](https://substack.com/@jnanos), and 2 others",
+      "parent_block_plain_text": "By Doug O'Laughlin, Jeremie Eliahou Ontiveros, Jordan Nanos, and 2 others",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Doug O'Laughlin",
+          "start": 3,
+          "end": 18,
+          "href": "https://substack.com/@mule",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Jeremie Eliahou Ontiveros",
+          "start": 20,
+          "end": 45,
+          "href": "https://substack.com/@jeremieeliahouontiveros",
+          "title": null,
+          "span_id": "LINK_2"
+        },
+        {
+          "type": "link",
+          "text": "Jordan Nanos",
+          "start": 47,
+          "end": 59,
+          "href": "https://substack.com/@jnanos",
+          "title": null,
+          "span_id": "LINK_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 73,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2",
+        "LINK_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "byline",
+      "translations": {
+        "source_metadata": {
+          "text": "作者：Doug O'Laughlin、Jeremie Eliahou Ontiveros、Jordan Nanos 等 5 人",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626774",
+          "tokenized_text": "作者：[[[LINK_1|Doug O'Laughlin]]]、[[[LINK_2|Jeremie Eliahou Ontiveros]]]、[[[LINK_3|Jordan Nanos]]] 等 5 人",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "作者：Doug O'Laughlin、Jeremie Eliahou Ontiveros、Jordan Nanos 及另外 2 人",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.970790",
+          "tokenized_text": "作者：[[[LINK_1|Doug O'Laughlin]]]、[[[LINK_2|Jeremie Eliahou Ontiveros]]]、[[[LINK_3|Jordan Nanos]]] 及另外 2 人",
+          "format_issues": []
+        }
+      },
+      "confirmed": "作者：Doug O'Laughlin、Jeremie Eliahou Ontiveros、Jordan Nanos 等 5 人",
+      "confirmed_tokenized": "作者：[[[LINK_1|Doug O'Laughlin]]]、[[[LINK_2|Jeremie Eliahou Ontiveros]]]、[[[LINK_3|Jordan Nanos]]] 等 5 人",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Feb 05, 2026 · Paid",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0002",
+      "parent_block_index": 2,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Feb 05, 2026 · Paid",
+      "parent_block_plain_text": "Feb 05, 2026 · Paid",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "date_access",
+      "translations": {
+        "source_metadata": {
+          "text": "2026 年 2 月 5 日 · 付费文章",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626798",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "2026 年 2 月 5 日 · 付费文章",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.970972",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "2026 年 2 月 5 日 · 付费文章",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "4% of GitHub public commits are being authored by Claude Code right now. At the current trajectory, we believe that Claude Code will be 20%+ of all daily commits by the end of 2026. While you blinked, AI consumed all of software development.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0003",
+      "parent_block_index": 3,
+      "parent_block_type": "p",
+      "parent_block_markdown": "4% of GitHub public commits are being authored by Claude Code right now. At the current trajectory, we believe that Claude Code will be 20%+ of all daily commits by the end of 2026. While you blinked, AI consumed all of software development.",
+      "parent_block_plain_text": "4% of GitHub public commits are being authored by Claude Code right now. At the current trajectory, we believe that Claude Code will be 20%+ of all daily commits by the end of 2026. While you blinked, AI consumed all of software development.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 241,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "眼下，GitHub 上 4% 的公开提交正由 Claude Code 编写。按照当前轨迹，我们认为到 2026 年底，Claude Code 将包揽每日超 20% 的代码提交量。就在你眨眼之间，AI 已经吞噬了整个软件开发行业。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971065",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Our sister publication Fabricated Knowledge described software like linear TV during the rise of the internet and thinks that the rise of Claude Code is going to be a new layer of intelligence on top of software akin to DRAM versus NAND. Today SemiAnalysis is going to dive into the repercussions of Claude Code, what it is, and why Claude is so good.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "linear TV during the rise of the internet",
+          "start": 68,
+          "end": 109,
+          "href": "https://www.fabricatedknowledge.com/p/ai-is-creating-peak-software-media",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Claude Code is going to be a new layer of intelligence on top of software akin to DRAM versus NAND",
+          "start": 138,
+          "end": 236,
+          "href": "https://www.fabricatedknowledge.com/p/the-death-of-software-20-a-better",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0004",
+      "parent_block_index": 4,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Our sister publication Fabricated Knowledge described software like [linear TV during the rise of the internet](https://www.fabricatedknowledge.com/p/ai-is-creating-peak-software-media) and thinks that the rise of [Claude Code is going to be a new layer of intelligence on top of software akin to DRAM versus NAND](https://www.fabricatedknowledge.com/p/the-death-of-software-20-a-better). Today SemiAnalysis is going to dive into the repercussions of Claude Code, what it is, and why Claude is so good.",
+      "parent_block_plain_text": "Our sister publication Fabricated Knowledge described software like linear TV during the rise of the internet and thinks that the rise of Claude Code is going to be a new layer of intelligence on top of software akin to DRAM versus NAND. Today SemiAnalysis is going to dive into the repercussions of Claude Code, what it is, and why Claude is so good.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "linear TV during the rise of the internet",
+          "start": 68,
+          "end": 109,
+          "href": "https://www.fabricatedknowledge.com/p/ai-is-creating-peak-software-media",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "Claude Code is going to be a new layer of intelligence on top of software akin to DRAM versus NAND",
+          "start": 138,
+          "end": 236,
+          "href": "https://www.fabricatedknowledge.com/p/the-death-of-software-20-a-better",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 351,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们的姊妹刊 Fabricated Knowledge 曾将当下的软件比作互联网崛起时的传统电视，并认为Claude Code 势必将在软件之上构建全新的智能层，其颠覆性堪比 DRAM 之于 NAND。今天，SemiAnalysis 将深入剖析 Claude Code 引发的行业震荡、其核心本质，以及 Claude 为何如此强大。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971305",
+          "tokenized_text": "我们的姊妹刊 Fabricated Knowledge 曾将当下的软件比作[[[LINK_1|互联网崛起时的传统电视]]]，并认为[[[LINK_2|Claude Code 势必将在软件之上构建全新的智能层，其颠覆性堪比 DRAM 之于 NAND]]]。今天，SemiAnalysis 将深入剖析 Claude Code 引发的行业震荡、其核心本质，以及 Claude 为何如此强大。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!MG5m!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ec41954-9498-4c2f-b23a-81e2bae29f82_2761x1579.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!MG5m!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ec41954-9498-4c2f-b23a-81e2bae29f82_2761x1579.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0005",
+      "parent_block_index": 5,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!MG5m!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ec41954-9498-4c2f-b23a-81e2bae29f82_2761x1579.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!MG5m!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ec41954-9498-4c2f-b23a-81e2bae29f82_2761x1579.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!MG5m!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ec41954-9498-4c2f-b23a-81e2bae29f82_2761x1579.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!MG5m!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ec41954-9498-4c2f-b23a-81e2bae29f82_2761x1579.png",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971358",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!MG5m!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6ec41954-9498-4c2f-b23a-81e2bae29f82_2761x1579.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Source: Tokenomics Team, Github, Generated by Claude Code",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Tokenomics Team",
+          "start": 8,
+          "end": 23,
+          "href": "http://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0006",
+      "parent_block_index": 6,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: [Tokenomics Team](http://semianalysis.com/tokenomics-model/), Github, Generated by Claude Code",
+      "parent_block_plain_text": "Source: Tokenomics Team, Github, Generated by Claude Code",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Tokenomics Team",
+          "start": 8,
+          "end": 23,
+          "href": "http://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 57,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Tokenomics 团队，Github，由 Claude Code 生成",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626814",
+          "tokenized_text": "来源：[[[LINK_1|Tokenomics 团队]]]，Github，由 Claude Code 生成",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Tokenomics 模型（译注：指作者独创的 AI 公司经济分析模型，非加密货币领域的代币经济学）团队、GitHub、由 Claude Code 生成",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971552",
+          "tokenized_text": "来源：[[[LINK_1|Tokenomics 模型（译注：指作者独创的 AI 公司经济分析模型，非加密货币领域的代币经济学）团队]]]、GitHub、由 Claude Code 生成",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Tokenomics 团队，Github，由 Claude Code 生成",
+      "confirmed_tokenized": "来源：[[[LINK_1|Tokenomics 团队]]]，Github，由 Claude Code 生成",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "We believe that Claude Code is the inflection point for AI “Agents” and is a glimpse into the future of how AI will function. It is set to drive exceptional revenue growth for Anthropic in 2026, enabling the lab to dramatically outgrow OpenAI.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0007",
+      "parent_block_index": 7,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We believe that Claude Code is the inflection point for AI “Agents” and is a glimpse into the future of how AI will function. It is set to drive exceptional revenue growth for Anthropic in 2026, enabling the lab to dramatically outgrow OpenAI.",
+      "parent_block_plain_text": "We believe that Claude Code is the inflection point for AI “Agents” and is a glimpse into the future of how AI will function. It is set to drive exceptional revenue growth for Anthropic in 2026, enabling the lab to dramatically outgrow OpenAI.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 243,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们认为，Claude Code 正是 AI“智能体（指能够自主规划并执行复杂任务的 AI）”的破局拐点，预示了 AI 未来的运作范式。它注定将在 2026 年为 Anthropic 带来惊人的营收增长，助力这家实验室的增速将 OpenAI 远远甩在身后。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971613",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "We built a detailed economic model of Anthropic and precisely quantified revenue and capex implications for its cloud partners AWS, Google Cloud, Azure, as well as associated supply chains such as Trainium2/3, TPUs and GPUs. This is the core purpose of the Tokenomics model.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "core purpose of the Tokenomics model",
+          "start": 237,
+          "end": 273,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We built a detailed economic model of Anthropic and precisely quantified revenue and capex implications for its cloud partners AWS, Google Cloud, Azure, as well as associated supply chains such as Trainium2/3, TPUs and GPUs. This is the [core purpose of the Tokenomics model](https://semianalysis.com/tokenomics-model/).",
+      "parent_block_plain_text": "We built a detailed economic model of Anthropic and precisely quantified revenue and capex implications for its cloud partners AWS, Google Cloud, Azure, as well as associated supply chains such as Trainium2/3, TPUs and GPUs. This is the core purpose of the Tokenomics model.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "core purpose of the Tokenomics model",
+          "start": 237,
+          "end": 273,
+          "href": "https://semianalysis.com/tokenomics-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 274,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们为 Anthropic 构建了一套详尽的经济模型，精准量化了其对 AWS、Google Cloud、Azure 等云合作伙伴，以及 Trainium2/3、TPU 和 GPU 等相关供应链在营收与资本支出（capex）方面的影响。这正是 Tokenomics 模型的核心目的。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971727",
+          "tokenized_text": "我们为 Anthropic 构建了一套详尽的经济模型，精准量化了其对 AWS、Google Cloud、Azure 等云合作伙伴，以及 Trainium2/3、TPU 和 GPU 等相关供应链在营收与资本支出（capex）方面的影响。这正是 [[[LINK_1|Tokenomics 模型的核心目的]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Anthropic is on track to add as much power as OpenAI in the next three years. Refer to our Datacenter Industry Model for a building-by-building tracker of Anthropic and OpenAI. Sam’s AI lab is notably suffering from mutliple data center delays, which we’ve called out months ahead of the headlines, most notably in our Coreweave Q3’2025 earnings preview where we explicitly called out a large CapEx guidance miss.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Datacenter Industry Model",
+          "start": 91,
+          "end": 116,
+          "href": "https://semianalysis.com/datacenter-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0009",
+      "parent_block_index": 9,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Anthropic is on track to add as much power as OpenAI in the next three years. Refer to our [Datacenter Industry Model](https://semianalysis.com/datacenter-industry-model/) for a building-by-building tracker of Anthropic and OpenAI. Sam’s AI lab is notably suffering from mutliple data center delays, which we’ve called out months ahead of the headlines, most notably in our Coreweave Q3’2025 earnings preview where we explicitly called out a large CapEx guidance miss.",
+      "parent_block_plain_text": "Anthropic is on track to add as much power as OpenAI in the next three years. Refer to our Datacenter Industry Model for a building-by-building tracker of Anthropic and OpenAI. Sam’s AI lab is notably suffering from mutliple data center delays, which we’ve called out months ahead of the headlines, most notably in our Coreweave Q3’2025 earnings preview where we explicitly called out a large CapEx guidance miss.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Datacenter Industry Model",
+          "start": 91,
+          "end": 116,
+          "href": "https://semianalysis.com/datacenter-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 413,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "未来三年，Anthropic 的新增算力规模势必追平 OpenAI。您可以参考我们的 数据中心行业模型，其中对 Anthropic 和 OpenAI 进行了逐栋数据中心的追踪。值得注意的是，Sam 的 AI 实验室正饱受多个数据中心项目延期的困扰——我们在媒体大肆报道的数月前就已发出预警，最典型的一次是在我们的 CoreWeave 2025 年第三季度财报前瞻中，明确指出了其资本支出指引大幅不及预期。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971851",
+          "tokenized_text": "未来三年，Anthropic 的新增算力规模势必追平 OpenAI。您可以参考我们的 [[[LINK_1|数据中心行业模型]]]，其中对 Anthropic 和 OpenAI 进行了逐栋数据中心的追踪。值得注意的是，Sam 的 AI 实验室正饱受多个数据中心项目延期的困扰——我们在媒体大肆报道的数月前就已发出预警，最典型的一次是在我们的 CoreWeave 2025 年第三季度财报前瞻中，明确指出了其资本支出指引大幅不及预期。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!P1XQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc04de5e0-5ec5-4c11-a6d3-c3dab116d665_927x585.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!P1XQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc04de5e0-5ec5-4c11-a6d3-c3dab116d665_927x585.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!P1XQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc04de5e0-5ec5-4c11-a6d3-c3dab116d665_927x585.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!P1XQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc04de5e0-5ec5-4c11-a6d3-c3dab116d665_927x585.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!P1XQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc04de5e0-5ec5-4c11-a6d3-c3dab116d665_927x585.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!P1XQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc04de5e0-5ec5-4c11-a6d3-c3dab116d665_927x585.png",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971898",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!P1XQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc04de5e0-5ec5-4c11-a6d3-c3dab116d665_927x585.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Source: SemiAnalysis Datacenter Model",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Datacenter Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/datacenter-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Source: SemiAnalysis [Datacenter Model](https://semianalysis.com/datacenter-industry-model/)",
+      "parent_block_plain_text": "Source: SemiAnalysis Datacenter Model",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Datacenter Model",
+          "start": 21,
+          "end": 37,
+          "href": "https://semianalysis.com/datacenter-industry-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 37,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis Datacenter 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626829",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|Datacenter 模型]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis 数据中心模型",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.971997",
+          "tokenized_text": "来源：SemiAnalysis [[[LINK_1|数据中心模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis Datacenter 模型",
+      "confirmed_tokenized": "来源：SemiAnalysis [[[LINK_1|Datacenter 模型]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Since more compute means more revenue, we can forecast ARR growth and compare Anthropic to OpenAI directly.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0012",
+      "parent_block_index": 12,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Since more compute means more revenue, we can forecast ARR growth and compare Anthropic to OpenAI directly.",
+      "parent_block_plain_text": "Since more compute means more revenue, we can forecast ARR growth and compare Anthropic to OpenAI directly.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 107,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "既然算力越多意味着营收越高，我们便可预测其年度经常性收入 (ARR) 的增长，并将 Anthropic 与 OpenAI 进行直观对比。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.972040",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.972085",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!7xxX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7572d353-1443-483a-a286-4cb33d1413f9_927x585.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)",
+          "start": 0,
+          "end": 83,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)*",
+      "parent_block_plain_text": "source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "source: SemiAnalysis [Tokenomics Model](https://semianalysis.com/tokenomics-model/)",
+          "start": 0,
+          "end": 83,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 83,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "source",
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T23:15:01.626845",
+          "tokenized_text": "[[[EM_1|来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.972198",
+          "tokenized_text": "[[[EM_1|来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)",
+      "confirmed_tokenized": "[[[EM_1|来源：SemiAnalysis [Tokenomics 模型](https://semianalysis.com/tokenomics-model/)]]]",
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Notably, our forecast shows that Anthropic’s quarterly ARR additions have overtaken OpenAI’s. Anthropic is adding more revenue every month than OpenAI. We believe Anthropic’s growth will be constrained by compute.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Anthropic is adding more revenue every month than OpenAI.",
+          "start": 94,
+          "end": 151,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Notably, our forecast shows that Anthropic’s quarterly ARR additions have overtaken OpenAI’s. **Anthropic is adding more revenue every month than OpenAI.** We believe Anthropic’s growth will be constrained by compute.",
+      "parent_block_plain_text": "Notably, our forecast shows that Anthropic’s quarterly ARR additions have overtaken OpenAI’s. Anthropic is adding more revenue every month than OpenAI. We believe Anthropic’s growth will be constrained by compute.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Anthropic is adding more revenue every month than OpenAI.",
+          "start": 94,
+          "end": 151,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 213,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "值得注意的是，我们的预测显示，Anthropic 的季度 ARR 增量已经反超 OpenAI。Anthropic 每月的新增营收均高于 OpenAI。 我们认为，Anthropic 未来的增长将受制于算力。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.972332",
+          "tokenized_text": "值得注意的是，我们的预测显示，Anthropic 的季度 ARR 增量已经反超 OpenAI。[[[STRONG_1|Anthropic 每月的新增营收均高于 OpenAI。]]] 我们认为，Anthropic 未来的增长将受制于算力。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Let’s dig deeper into Anthropic’s Crown jewel: Claude Code.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Let’s dig deeper into Anthropic’s Crown jewel: Claude Code.",
+      "parent_block_plain_text": "Let’s dig deeper into Anthropic’s Crown jewel: Claude Code.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 59,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "接下来，让我们深入剖析 Anthropic 皇冠上的明珠：Claude Code。",
+          "model": "pro",
+          "created_at": "2026-04-10T11:51:18.972380",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.125,
+        "is_excellent": true,
+        "applied_terms": [
+          "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+          "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+          "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Serves as the executive summary. It states the core thesis (Anthropic's agentic AI is a paradigm shift), outlines the article's scope (from Claude Code to market-wide disruption), introduces key players and concepts (Microsoft's Dilemma, Why Anthropic is Winning), and establishes credibility by referencing a proprietary 'Tokenomics' model.",
+          "relation_to_previous": "N/A. This is the opening section.",
+          "relation_to_next": "It concludes with a direct hook, 'Let’s dig deeper into Anthropic’s Crown jewel: Claude Code,' which explicitly transitions the reader to the next section focused on defining this core technology.",
+          "key_points": [
+            "The central argument is that Anthropic's agentic AI, exemplified by Claude Code, will disrupt the software industry and challenge incumbents like Microsoft and OpenAI.",
+            "The analysis is supported by a quantitative economic model named 'Tokenomics'.",
+            "Claude Code is positioned as Anthropic's most important asset, its 'Crown jewel'."
+          ],
+          "translation_notes": [
+            "The term 'Tokenomics' is a neologism. It should be translated carefully, possibly with an annotation, to convey its meaning as a model for analyzing the economics of AI tokens (e.g., 'Tokenomics模型' or '通证经济学模型').",
+            "The metaphor 'Crown jewel' (皇冠上的明珠) is critical for establishing the importance of Claude Code and must be translated with equivalent impact.",
+            "The overall tone is that of a confident, bold analyst report; the translation must maintain this authoritative voice."
+          ]
+        },
+        "scores": {
+          "readability": 9.0,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "中英文之间缺少空格（CJK-Latin spacing）。"
+          },
+          {
+            "type": "readability|annotation",
+            "description": "译注插入位置不佳。在一个简短的图注中，将长达20多字的译注直接生硬地插在名词短语“Tokenomics 模型...团队”中间，严重割裂了阅读连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "未严格遵守 Translation Guidelines 中关于财务缩写的格式要求。指南明确要求使用“资本支出 (CapEx)”（半角括号+特定大小写），而译文使用了全角括号与小写“（capex）”。"
+          },
+          {
+            "type": "readability",
+            "description": "“我们的”和“数据中心行业模型”之间多了一个不必要的空格。"
+          },
+          {
+            "type": "readability",
+            "description": "句首多了一个不必要的空格（“ 我们认为”）。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

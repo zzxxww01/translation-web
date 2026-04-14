@@ -1,0 +1,124 @@
+{
+  "section_id": "02-memory-cycle-part-ii-key-feat",
+  "new_terms": [
+    {
+      "term": "yield-learning curve",
+      "suggested_translation": "良率学习曲线",
+      "context": "extended yield-learning curves across successive process nodes",
+      "confidence": 0.95
+    },
+    {
+      "term": "ramp-up period",
+      "suggested_translation": "产能爬坡期",
+      "context": "lengthy ramp-up periods before meaningful volume production is achieved",
+      "confidence": 0.95
+    },
+    {
+      "term": "under-absorbed",
+      "suggested_translation": "未充分吸收",
+      "context": "utilization rates fall, fixed costs are under-absorbed",
+      "confidence": 0.9
+    },
+    {
+      "term": "return on invested capital",
+      "suggested_translation": "投资资本回报率",
+      "context": "an inability to earn an adequate return on invested capital",
+      "confidence": 0.95
+    },
+    {
+      "term": "1c node",
+      "suggested_translation": "1c节点",
+      "context": "Samsung’s leading-edge 1c DRAM process node",
+      "confidence": 0.9
+    },
+    {
+      "term": "1a node",
+      "suggested_translation": "1a节点",
+      "context": "roughly ~70% higher bits output per wafer compared with its 1a node",
+      "confidence": 0.9
+    },
+    {
+      "term": "PC",
+      "suggested_translation": "个人电脑 (PC)",
+      "context": "During the Windows PC supercycle of the early to mid-1990s",
+      "confidence": 0.9
+    },
+    {
+      "term": "GUI",
+      "suggested_translation": "图形用户界面 (GUI)",
+      "context": "transitioned from text-based interfaces to GUI (Graphical User Interface)-driven computing",
+      "confidence": 0.95
+    },
+    {
+      "term": "MB",
+      "suggested_translation": "兆字节 (MB)",
+      "context": "Average DRAM content per PC jumped from roughly 1–2MB to 4–8MB",
+      "confidence": 0.9
+    },
+    {
+      "term": "GB",
+      "suggested_translation": "吉字节 (GB)",
+      "context": "DRAM content per server increased from single-digit gigabytes (GBs) to tens of GBs",
+      "confidence": 0.9
+    },
+    {
+      "term": "JEDEC",
+      "suggested_translation": "JEDEC (固态技术协会)",
+      "context": "LPDDR2 was standardized by JEDEC in 2009",
+      "confidence": 0.95
+    },
+    {
+      "term": "contract pricing",
+      "suggested_translation": "合约价",
+      "context": "The DDR3 2Gb contract pricing fell ~46% from its 1H10 peak",
+      "confidence": 0.95
+    },
+    {
+      "term": "spot market",
+      "suggested_translation": "现货市场",
+      "context": "a sharp tightening of spot and contract markets",
+      "confidence": 0.95
+    },
+    {
+      "term": "free cash flow",
+      "suggested_translation": "自由现金流",
+      "context": "Memory suppliers generated unprecedented levels of free cash flow",
+      "confidence": 0.95
+    },
+    {
+      "term": "double- and triple-ordering",
+      "suggested_translation": "双倍甚至三倍重复下单",
+      "context": "This led to widespread double- and triple-ordering across the supply chain.",
+      "confidence": 0.9
+    },
+    {
+      "term": "bit growth",
+      "suggested_translation": "位元增长",
+      "context": "diminishing bit-growth returns per wafer as scaling challenges increased",
+      "confidence": 0.9
+    },
+    {
+      "term": "downcycle",
+      "suggested_translation": "下行周期",
+      "context": "compressed the length of the upcycles and time to reach the downcycle",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "supercycle": "超级周期",
+    "greenfield": "新建（绿地）",
+    "node migration": "节点演进",
+    "scale-out": "横向扩展",
+    "hyperscaler": "超大规模云服务商",
+    "dram": "DRAM",
+    "upcycle": "上行周期",
+    "virtualization": "虚拟化",
+    "asp": "平均售价 (ASP)",
+    "gross margin": "毛利率",
+    "oem": "OEM",
+    "capex": "资本支出",
+    "wafer": "晶圆"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-09T02:49:43.397892"
+}

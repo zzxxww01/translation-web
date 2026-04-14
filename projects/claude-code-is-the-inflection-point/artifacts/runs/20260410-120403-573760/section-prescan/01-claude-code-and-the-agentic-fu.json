@@ -1,0 +1,62 @@
+{
+  "section_id": "01-claude-code-and-the-agentic-fu",
+  "new_terms": [
+    {
+      "term": "organic intelligence",
+      "suggested_translation": "有机智能",
+      "context": "Agents will be the primary method of how organic intelligence (humans) interact with artificial intelligence",
+      "confidence": 0.95
+    },
+    {
+      "term": "TCP/IP",
+      "suggested_translation": "TCP/IP",
+      "context": "akin to Web 1.0 with TCP/IP connecting users to static websites",
+      "confidence": 1.0
+    },
+    {
+      "term": "API",
+      "suggested_translation": "API",
+      "context": "we view the OpenAI ChatGPT API as the call and response of tokens",
+      "confidence": 1.0
+    },
+    {
+      "term": "SemiAnalysis",
+      "suggested_translation": "SemiAnalysis",
+      "context": "This is why SemiAnalysis believes we are yet again at another critical moment in AI.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Stable diffusion",
+      "suggested_translation": "Stable Diffusion",
+      "context": "Stable diffusion showed AI could make images.",
+      "confidence": 0.95
+    },
+    {
+      "term": "DeepSeek",
+      "suggested_translation": "DeepSeek",
+      "context": "DeepSeek proved that it could be done on a smaller scale",
+      "confidence": 1.0
+    },
+    {
+      "term": "o1",
+      "suggested_translation": "o1",
+      "context": "o1 showed that you could scale models to even better performance.",
+      "confidence": 1.0
+    },
+    {
+      "term": "agentic layer",
+      "suggested_translation": "智能体化层",
+      "context": "Claude Code is a new breakthrough in the agentic layer of organizing model outputs",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "agent": "智能体",
+    "claude code": "Claude Code",
+    "token": "token",
+    "tokenomics": "Tokenomics 模型",
+    "ai": "AI"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T12:04:47.403908"
+}

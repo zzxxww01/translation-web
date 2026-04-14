@@ -1,0 +1,64 @@
+{
+  "section_id": "08-apple-wafer-demand",
+  "new_terms": [
+    {
+      "term": "N7",
+      "suggested_translation": "N7",
+      "context": "Between 2018 and 2019, total wafer demand went sideways even as N7 entered production.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Snapdragon 8 Elite 2",
+      "suggested_translation": "骁龙8 Elite 2",
+      "context": "Qualcomm (Snapdragon 8 Elite 2)",
+      "confidence": 0.95
+    },
+    {
+      "term": "Dimensity 9600",
+      "suggested_translation": "天玑9600",
+      "context": "MediaTek (Dimensity 9600)",
+      "confidence": 1.0
+    },
+    {
+      "term": "Nova Lake",
+      "suggested_translation": "Nova Lake",
+      "context": "Intel (Nova Lake)",
+      "confidence": 1.0
+    },
+    {
+      "term": "MI450x",
+      "suggested_translation": "MI450x",
+      "context": "AMD (Venice and MI450x)",
+      "confidence": 1.0
+    },
+    {
+      "term": "node transition",
+      "suggested_translation": "节点转换",
+      "context": "Every jump aligns with a major node transition.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "cagr": "复合年增长率",
+    "tsmc": "台积电",
+    "apple silicon": "苹果自研芯片",
+    "n3": "N3",
+    "n5": "N5",
+    "n2": "N2",
+    "yield learning curve": "良率学习曲线",
+    "ai accelerator": "AI加速器",
+    "leading-edge capacity": "先进制程产能",
+    "nvidia": "英伟达",
+    "amd": "AMD",
+    "hyperscaler": "超大规模云服务商",
+    "asic": "ASIC (专用集成电路)",
+    "qualcomm": "高通",
+    "mediatek": "联发科",
+    "broadcom": "博通",
+    "intel": "英特尔",
+    "hpc": "HPC",
+    "capacity allocation": "产能分配"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:12:47.485723"
+}

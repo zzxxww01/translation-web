@@ -1,0 +1,52 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "Tokenomics",
+      "suggested_translation": "代币经济学",
+      "context": "We’re hiring for AI Analysts and Tokenomics Analyst roles.",
+      "confidence": 0.95
+    },
+    {
+      "term": "RL compute",
+      "suggested_translation": "强化学习算力",
+      "context": "major capability gains are coming from ramping RL compute.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Windsurf",
+      "suggested_translation": "Windsurf",
+      "context": "gives companies like Windsurf and Cursor the ability to post-train their own competitive models",
+      "confidence": 1.0
+    },
+    {
+      "term": "Cursor",
+      "suggested_translation": "Cursor",
+      "context": "gives companies like Windsurf and Cursor the ability to post-train their own competitive models",
+      "confidence": 1.0
+    },
+    {
+      "term": "Claude",
+      "suggested_translation": "Claude",
+      "context": "systems like Claude will be able to autonomously find breakthroughs",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "rl as a service": "RL即服务",
+    "gdpval": "GDPval",
+    "utility evals": "实用性评估",
+    "computer use agents": "计算机使用智能体",
+    "mid-training": "中期训练",
+    "rl": "强化学习",
+    "pre-training": "预训练",
+    "post-training": "后训练",
+    "reward hacking": "奖励劫持",
+    "openai": "OpenAI",
+    "anthropic": "Anthropic",
+    "xai": "xAI",
+    "computer use environments": "计算机操作环境"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-11T13:22:59.309195"
+}

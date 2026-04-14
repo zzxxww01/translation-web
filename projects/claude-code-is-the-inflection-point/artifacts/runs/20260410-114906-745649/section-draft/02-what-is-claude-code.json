@@ -1,0 +1,366 @@
+{
+  "section_id": "02-what-is-claude-code",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "02-what-is-claude-code",
+    "section_title": "What is Claude Code?",
+    "section_title_translation": "什么是 Claude Code？",
+    "section_position": "3/10",
+    "article_theme": "Anthropic's Claude Code represents a paradigm shift towards 'agentic' AI, which is poised to disrupt not only the software development industry but the entire information work economy, fundamentally challenging the business models of incumbents like Microsoft and OpenAI.",
+    "structure_summary": "The article follows a classic analyst report structure. It opens with a bold thesis (Anthropic overtaking OpenAI) and introduces the core technology (Claude Code). It then expands the scope to explain the broader market implications (disruption of information work), analyzes the competitive dynamics (Microsoft's dilemma), dissects the reasons for the shift ('why Anthropic is winning'), and concludes with a 'show and tell' section to provide concrete examples. The flow is designed to build a convincing, evidence-backed argument from a specific product to a macro-level industry transformation.",
+    "target_audience": "Technically-savvy professionals, investors, and analysts in the AI, cloud computing, and finance sectors.",
+    "translation_voice": "The Chinese voice should be sharp, authoritative, and professional (资深行业分析师的口吻). It must retain the original's confidence and forward-looking perspective. Use precise, industry-standard terminology, but also be able to handle informal jargon and metaphors vividly. The voice should project expertise and deep industry insight, not dry academic neutrality.",
+    "previous_section_title": "Claude Code and the Agentic Future",
+    "next_section_title": "Beyond Coding: The Beachhead, not the Destination",
+    "section_role": "Provides a concrete definition of the product. It moves from the abstract concept of 'agentic AI' to the specifics of Claude Code as a terminal-native CLI tool that can read an environment, plan, and execute multi-step tasks. It differentiates it from competitors and introduces its potential beyond coding.",
+    "translation_notes": [
+      "Technical terms like 'terminal-native', 'CLI', and 'IDE' should use standard Chinese industry translations (终端原生, 命令行界面, 集成开发环境) to ensure clarity for a technical audience.",
+      "The conceptual leap from 'Claude Code' to 'Claude Computer' is a key part of the argument and should be translated to preserve this sense of expanding scope (e.g., '克劳德计算机').",
+      "The phrase 'agentic long horizon tasks' (智能体长时程任务) is a key technical descriptor and requires a precise, consistent translation."
+    ],
+    "key_points": [
+      "Claude Code is a command-line interface (CLI) tool, not just an IDE plugin, giving it deep system access.",
+      "It operates by planning and iteratively executing multi-step tasks within the user's computing environment.",
+      "Its potential is far greater than coding, suggesting a future as a general-purpose 'Claude Computer'.",
+      "Its true capability lies in 'agentic long horizon tasks,' which linear benchmarks fail to measure."
+    ],
+    "guidelines": [
+      "Translate the core concept 'agentic' consistently as '智能体化' and 'agent' as '智能体'. On first use, provide a brief parenthetical explanation, e.g., 「智能体（指能够自主规划并执行复杂任务的 AI）」.",
+      "Preserve the author's assertive and predictive tone. Use strong, definitive phrasing such as 「我们认为」、「注定会」、「正面临一个根本性的困境」 instead of weaker, more passive language.",
+      "Maintain all proper nouns in English, including company names (Anthropic, OpenAI), product names (Claude Code, Office 365), and model names (Opus 4.5, GPT-5.2), to ensure alignment with industry conventions.",
+      "For financial acronyms like ARR and CapEx, provide the full Chinese translation followed by the English acronym in parentheses on first mention, e.g., 「年度经常性收入 (ARR)」 and 「资本支出 (CapEx)」.",
+      "Adapt sentence structure for natural Chinese flow. Combine short, staccato English sentences into smoother, logically connected Chinese sentences. Conversely, break down long English sentences with multiple subordinate clauses into shorter, clearer sentences in Chinese.",
+      "Handle informal jargon like 'vibe coding' and 'benchmark-maxxing' by providing a creative translation paired with a brief, non-intrusive explanation on first use to ensure the meaning is clear without sacrificing the insider tone."
+    ],
+    "article_challenges": [
+      {
+        "location": "Caught Between Two Businesses",
+        "issue": "The phrase 'renting GPUs to the barbarians who will ruin their castle' is a strong, dramatic metaphor.",
+        "suggestion": "Translate this metaphor faithfully to preserve the dramatic and critical tone. For example, 「将 GPU 租给那些将要摧毁自家城堡的野蛮人」. Flattening this to 'renting to competitors' would lose the article's sharp analytical edge.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Introduction",
+        "issue": "The sentence 'While you blinked, AI consumed all of software development' is a deliberate hyperbole to create a sense of urgency and rapid change.",
+        "suggestion": "The translation should capture this dramatic effect. A phrase like 「就在你眨眼之间，人工智能已经吞噬了整个软件开发行业」 maintains the intended impact.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Will the Pretrain Matter?",
+        "issue": "The 'TCP/IP analogy for agents' compares the foundational role of agents to the internet's core protocol.",
+        "suggestion": "This analogy is likely understood by the target audience. Translate it directly, e.g., 「将智能体比作 TCP/IP 协议」, as the concept will resonate with tech professionals.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Introduction",
+        "issue": "The term 'Tokenomics' is used as the name of the author's financial model, which is a significant departure from its common meaning in the blockchain/crypto space ('代币经济学').",
+        "suggestion": "Preserve the term in English ('Tokenomics 模型') and add a translator's note on its first appearance to clarify that it refers to the author's proprietary analysis model for AI companies, not cryptocurrency economics. This is crucial to prevent misunderstanding.",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "Agentic",
+        "term": "Agentic",
+        "translation": "智能体化",
+        "strategy": "translate",
+        "note": "Describes an AI system's capability to autonomously understand goals, create multi-step plans, and execute them by interacting with its environment (e.g., a computer's file system, terminal). It's more than just responding to a prompt.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Claude Code",
+        "term": "Claude Code",
+        "translation": "Claude Code",
+        "strategy": "preserve",
+        "note": "The name of Anthropic's terminal-native AI agent product, which is the central subject of the article.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Beachhead",
+        "term": "Beachhead",
+        "translation": "抢滩阵地",
+        "strategy": "translate",
+        "note": "A strategic foothold in a market (coding) from which to expand into a larger market (all information work). A military metaphor applied to business strategy.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Information work / Information worker",
+        "term": "Information work / Information worker",
+        "translation": "信息工作 / 信息工作者",
+        "strategy": "translate",
+        "note": "Refers to jobs primarily involving the creation, processing, and distribution of information, as opposed to manual labor. The target market for agentic AI disruption.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Seat-based software model",
+        "term": "Seat-based software model",
+        "translation": "按席位付费的软件模式",
+        "strategy": "translate",
+        "note": "A business model where software is sold on a per-user subscription basis (e.g., Microsoft Office 365).",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Vibe coding",
+        "term": "Vibe coding",
+        "translation": "氛围感编程",
+        "strategy": "translate",
+        "note": "An informal term for coding based on intuition and high-level direction, often by giving instructions to an AI, rather than writing every line of code manually.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Benchmark-maxxing",
+        "term": "Benchmark-maxxing",
+        "translation": "唯基准至上 / 卷基准",
+        "strategy": "translate",
+        "note": "Slang for the practice of optimizing an AI model obsessively to achieve the highest possible scores on standardized benchmarks, sometimes at the expense of real-world utility.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Orchestration layer",
+        "term": "Orchestration layer",
+        "translation": "编排层",
+        "strategy": "translate",
+        "note": "The software or system responsible for coordinating multiple AI agents or model components to perform a complex task.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Tokenomics",
+        "term": "Tokenomics",
+        "translation": "Tokenomics 模型",
+        "strategy": "preserve",
+        "note": "The name of the author's proprietary economic model for analyzing AI companies. It is NOT related to cryptocurrency/blockchain.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Provides a concrete definition of the product. It moves from the abstract concept of 'agentic AI' to the specifics of Claude Code as a terminal-native CLI tool that can read an environment, plan, and execute multi-step tasks. It differentiates it from competitors and introduces its potential beyond coding.",
+    "relation_to_previous": "Answers the question raised by the previous section ('What is this breakthrough technology, actually?') by providing a technical and functional description of Claude Code.",
+    "relation_to_next": "It concludes by stating that traditional benchmarks don't capture the power of the underlying model (Opus 4.5) for 'agentic long horizon tasks.' This pivots the focus from *what it is* to *what it can do*, setting up the next section's discussion on its broader impact beyond coding.",
+    "key_points": [
+      "Claude Code is a command-line interface (CLI) tool, not just an IDE plugin, giving it deep system access.",
+      "It operates by planning and iteratively executing multi-step tasks within the user's computing environment.",
+      "Its potential is far greater than coding, suggesting a future as a general-purpose 'Claude Computer'.",
+      "Its true capability lies in 'agentic long horizon tasks,' which linear benchmarks fail to measure."
+    ],
+    "translation_notes": [
+      "Technical terms like 'terminal-native', 'CLI', and 'IDE' should use standard Chinese industry translations (终端原生, 命令行界面, 集成开发环境) to ensure clarity for a technical audience.",
+      "The conceptual leap from 'Claude Code' to 'Claude Computer' is a key part of the argument and should be translated to preserve this sense of expanding scope (e.g., '克劳德计算机').",
+      "The phrase 'agentic long horizon tasks' (智能体长时程任务) is a key technical descriptor and requires a precise, consistent translation."
+    ]
+  },
+  "translations": [
+    "Claude Code 是一款终端原生 AI 智能体（指能够自主规划并执行复杂任务的 AI），其重心并非 IDE (集成开发环境) 或类似 Cursor 的聊天机器人侧边栏。Claude Code 是一款 CLI (命令行界面) 工具，能够读取代码库、规划多步任务并予以执行。如果仅仅把 Claude Code 视为聚焦于代码的工具，或许有失偏颇，它更像是克劳德计算机（Claude Computer）。在获得计算机的完全访问权限后，Claude 能够理解所处环境、制定计划并迭代完成该计划，且全程听从用户指令。",
+    "Claude Code 的能力远不止于编写代码，它是 AI 智能体的最佳范例。你可以用自然语言与计算机交互，描述目标和预期结果，而非具体的实现细节。只需为 Claude（即这款 CLI 工具）提供电子表格、代码库或网页链接等输入内容，并设定目标，它随即会制定计划、核实细节并执行操作。",
+    "这是对未来的一瞥，但在当今的软件领域，未来已然降临。你最欣赏的工程师们正在进行氛围感编程（Vibe coding）：",
+    "Andrej Karpathy（他在一年前创造了“氛围感编程”一词）正公开探讨这一范式转变，他明确表示：“我已经注意到，自己手动编写代码的能力正慢慢退化。生成（写代码）和辨别（读代码）是大脑中截然不同的两种能力。”",
+    "Vercel 首席技术官 Malte Ubl 声称，他的“新主业”是“告诉 AI 它哪里做错了”。",
+    "[￰4￰",
+    "Malte Ubl@cramforce",
+    "今年，我对 bash、文件系统、Postgres 传输协议以及 sqlite 的理解达到了前所未有的深度；如果我的新主业不是去告诉 AI 它哪里做错了，我绝不可能有如此深刻的认知。",
+    "￰5￰",
+    "Anthropic @AnthropicAI",
+    "AI 能让工作更高效，但人们也担忧：过度依赖 AI 或将阻碍员工在工作中学习新技能。为一探究竟，我们针对软件工程师开展了一项实验。结果显示，使用 AI 编程确实会导致技能熟练度下降——但这取决于人们的具体使用方式。https://t.co/lbxgP11I4I",
+    "下午 4:10 · 2026 年 1 月 31 日 · 7.43 万次查看",
+    "21 条回复 · 14 次转发 · 558 次点赞](https://x.com/cramforce/status/2017631686142644691?s=20)",
+    "NodeJS 创始人 Ryan Dahl 表示，“人类手写代码的时代已经终结”",
+    "[￰6￰",
+    "Ryan Dahl@rough\\\\sea",
+    "这话已经被说过无数次了，但请允许我再强调一遍：人类手写代码的时代已经终结。对于我们这些自诩为 SWE (软件工程师) 的人来说，这固然令人不安，但却是不争的事实。这并不是说 SWE 以后就无事可做了，只是直接手敲语法代码不再是我们的工作。",
+    "下午 4:02 · 2026 年 1 月 19 日 · 725 万次查看",
+    "970 条回复 · 2740 次转发 · 2.01 万次点赞](https://x.com/rough__sea/status/2013280952370573666?s=20)",
+    "Ruby on Rails 的创始人 David Heinemeier Hansson 正经历着某种预期中的怀旧情绪，一边手写代码，一边缅怀手写代码的时光：",
+    "[￰7￰",
+    "DHH@dhh",
+    "在文本编辑器里手写 Ruby 代码感觉就像是一种奢侈。也许这很快就会成为一门失传的艺术，但正因如此，我们才更应该在还能拥有这项特权时，尽情去享受它。",
+    "￰8￰",
+    "下午 2:11 · 2025 年 12 月 2 日 · 5.26 万次查看",
+    "54 条回复 · 44 次转发 · 968 次点赞](https://x.com/dhh/status/1995858288710476080?s=20)",
+    "Claude Code 的创始人 Boris Cherny 表示：“我们几乎 100% 的代码都是由 Claude Code 配合 Opus 4.5 编写的。”",
+    "[￰9￰",
+    "Boris Cherny@bcherny",
+    "@karpathy 一如既往，你的见解非常深刻且论证严密。我一直读到了最后。我认为 Claude Code 团队本身可能就是行业发展方向的风向标。对于你提出的一些（并非全部）问题，我们有方向性的答案：1. 我们主要招聘通才。我们既有资深",
+    "凌晨 2:44 · 2026 年 1 月 27 日 · 129 万次查看",
+    "162 条回复 · 411 次转发 · 6850 次点赞](https://x.com/bcherny/status/2015979257038831967?s=20)",
+    "甚至连 Linus Torvalds 都在尝试氛围感编程：https://github.com/torvalds/AudioNoise",
+    "但这绝不仅限于程序员。在 SemiAnalysis，我们的分析师和技术人员分工明确，各司其职。数据中心模型团队每周需审查数百份文档。AI 供应链团队需核查包含数千个条目的 BOM（物料清单）。随着现货市场价格一路狂飙，存储模型团队需近乎实时地构建预测。技术人员则需维护 InferenceMAX 的实时仪表板，包括每晚在 9 种不同系统类型/集群上运行最新软件配置。从监管文件到许可证，从规格书到说明文档，从配置到代码——我们与计算机的交互方式已然发生巨变。",
+    "举例而言，我们的行业模型分析师如今正使用 Claude Code 生成大量实用图表与分析，借此解析并传达海量数据集中的关键趋势：",
+    "以下是输入内容：",
+    "https://substackcdn.com/image/fetch/$s_!ds_u!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F456e53bb-cf1f-4e16-94cf-7ad23cb32e08_900x936.png",
+    "来源：SemiAnalysis、Claude Code",
+    "以下是输出结果：",
+    "https://substackcdn.com/image/fetch/$s_!1CW1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29cab5bf-fe5d-46e0-b93b-9caaf5a7d1ea_1043x585.png",
+    "来源：SemiAnalysis、Claude Code",
+    "程序员将不再亲自敲代码，而是直接派发任务代劳。Claude Code 的魔力就在于它就是好用。许多知名程序员终于向这股“氛围感编程”的新浪潮折服；他们开始意识到，编程几乎已成一个被攻克的难题，交由智能体（指能够自主规划并执行复杂任务的 AI）来辅助，远胜于人类亲力亲为。",
+    "竞争焦点正在转移。痴迷于用线性基准测试来评判哪个模型“最强”将显得十分老派，这就好比还在比较拨号上网与 DSL (数字用户线路) 的速度差异。速度与性能固然重要，模型也确实是驱动智能体的引擎，但未来的性能衡量标准将是构建网站的最终净产出，而非数据包本身的质量。未来的网站功能将依赖工具、记忆、子智能体以及验证循环的协同编排；其核心在于交付最终成果，而非仅仅生成回复。最终，所有信息工作都将被模型彻底接管。",
+    "Opus 4.5 正是让这一切成为可能的引擎。在线性基准测试中至关重要的指标，对于智能体长时程任务而言可能毫无意义。我们将在后文详细探讨这一点。"
+  ]
+}

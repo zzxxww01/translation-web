@@ -1,0 +1,47 @@
+{
+  "added": 7,
+  "terms": [
+    {
+      "original": "Surge",
+      "translation": "Surge",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Google DeepMind",
+      "translation": "Google DeepMind",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "human data team",
+      "translation": "人工数据团队",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PM",
+      "translation": "产品经理",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Adaptive ML",
+      "translation": "Adaptive ML",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Applied Compute",
+      "translation": "Applied Compute",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Gemini Deep Think",
+      "translation": "Gemini Deep Think",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    }
+  ]
+}

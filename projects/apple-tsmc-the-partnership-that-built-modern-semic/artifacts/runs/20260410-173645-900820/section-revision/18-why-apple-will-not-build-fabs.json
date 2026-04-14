@@ -1,0 +1,25 @@
+{
+  "section_id": "18-why-apple-will-not-build-fabs",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.2,
+    "scores": {
+      "readability": 9.0,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 7.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "坐拥2000亿美元现金，苹果在理论上足以在支出上碾压全球任何一家晶圆代工厂。然而，从零开始建设先进制程晶圆厂的经济成本，即便是对苹果而言也高得令人望而却步。",
+    "https://substackcdn.com/image/fetch/$s_!hue8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fb31e4-7a83-43ce-b75c-1d6aadbdd9b3_2672x825.png",
+    "要复制台积电的能力，单是追赶成本就要求每年投入超500亿美元的资本支出（相比之下，台积电为300亿至350亿美元）。此外，人力资本密度构筑了难以逾越的壁垒。台积电部署了超7万名工艺工程师，而苹果则必须从零组建这样一支大军。",
+    "对苹果而言，自建晶圆厂的投资资本回报率（ROIC）为负。将台积电的资产负债表作为一种服务（BaaS）来使用，让苹果得以维持35%至40%的公司营业利润率。自持晶圆厂将大幅稀释这一利润率，并引入良率崩溃、节点延迟等运营风险，而苹果目前已将这些风险转嫁给代工厂。",
+    "苹果每支出1美元，就能支撑台积电1.50美元的资本支出，因为台积电笃定苹果必将填满这些晶圆厂的产能。",
+    "苹果自建晶圆厂的唯一情境，是台湾地区的产能彻底断绝。真到了那一步，整个半导体产业早已彻底崩盘。台积电亚利桑那州工厂或许正是苹果的保险单。",
+    "https://substackcdn.com/image/fetch/$s_!QySE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe5cb53a8-4dd6-4d39-b20f-ccf305c4c6ca_2590x834.png"
+  ]
+}

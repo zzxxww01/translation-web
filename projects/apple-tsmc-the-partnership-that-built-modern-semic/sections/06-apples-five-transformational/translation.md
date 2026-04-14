@@ -1,0 +1,60 @@
+苹果的核心半导体理念简单却展现出极致的掌控欲：掌控那些能让产品脱颖而出的“核心技术”。这一进程始于 2010 年的 A4 芯片，如今已演变为全面的内部化战略。这绝不仅仅局限于 CPU（A系列/M系列）；苹果已系统性地替换了几乎所有关键子系统的外部供应商，为音频（H系列）、安全（T系列）、无线通信（W系列）、超宽带（U系列）乃至如今的空间计算（R系列）开发定制芯片。2019 年收购英特尔基带业务是这块拼图的最后一块，意在取代高通，彻底实现全面的芯片独立。
+
+https://substackcdn.com/image/fetch/$s_!T7QL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F525ffa40-53d6-4bb0-b973-29dfacb9ebf1_1428x1299.png
+
+https://substackcdn.com/image/fetch/$s_!Ucm1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d4acf1b-5410-4bd3-92ba-06c13b9cae5d_2546x728.png
+
+https://substackcdn.com/image/fetch/$s_!kX3T!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8d0e0494-d6e0-4615-aaaa-8e13050a8c93_2546x671.png
+
+https://substackcdn.com/image/fetch/$s_!TRXa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8abc4e05-96d6-4198-aaf9-d36aba20cba4_2546x600.png
+
+https://substackcdn.com/image/fetch/$s_!qiO_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F54e3d4f8-4dd7-4145-9be2-e499a9f727f2_2548x722.png
+
+https://substackcdn.com/image/fetch/$s_!D3JM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F84ad5390-5034-4b76-8fe9-06e27a069db4_2544x851.png
+
+1. P.A. Semi（2008 年，2.78 亿美元）：奠定基石
+
+P.A. Semi 是一家精品芯片设计公司，由业内最负盛名的处理器架构师之一 Dan Dobberpuhl（DEC Alpha 和 StrongARM 的缔造者）创立。公司拥有 150 名工程师，致力于设计低功耗、高性能的处理器。
+
+该团队设计了苹果首款定制 SoC——A4。后来操刀 AMD Zen 架构的 Jim Keller，在离职前曾主导苹果 A4 和 A5 的开发工作。
+2. AuthenTec（2012 年，3.56 亿美元）：Touch ID
+
+收购 AuthenTec 仅 13 个月后，Touch ID 便正式问世。AuthenTec 的架构催生了安全隔区，这一硬件安全子系统负责处理所有生物识别与加密操作。
+
+安全隔区为 Apple Pay（2014 年）的推出奠定了基础。十年后的今天，Apple Pay 支撑起超 1.5 万亿美元的交易额（2024 年）。这笔 3.56 亿美元的收购可谓物超所值，它撑起了一项年营收达数十亿美元的金融服务业务。2012 年的一项芯片架构决策，在十年后成就了规模超千亿美元的服务业务版图。
+3. PrimeSense（2013 年，3.6 亿美元）：Face ID
+
+PrimeSense 曾为微软 Kinect 开发 3D 深度感知技术。苹果斥资 3.6 亿美元将其收入囊中，并耗时四年将该技术微型化，使其能够完美嵌入手机刘海。
+
+原深感摄像头将 3 万个红外点投射到用户面部，绘制出 3D 结构，并在毫秒级时间内完成身份验证。Face ID 的安全性远超 Touch ID（误识率仅为百万分之一，而后者为五万分之一）。
+
+这项技术还催生了 Animoji 和 Memoji，并成为 iPhone 12 Pro 搭载激光雷达扫描仪的基石。
+4. 英特尔调制解调器业务（2019 年，10 亿美元）：自研 5G 调制解调器
+
+苹果在与高通达成诉讼和解的同一周，火速收购了英特尔的智能手机调制解调器业务。这一时机绝非巧合。和解不过是暂时休战。
+
+通过收购英特尔相关业务，苹果将分布在圣地亚哥和慕尼黑的 2200 名工程师（涵盖调制解调器设计、射频及验证领域）、1.7 万项无线专利，以及众多实验室、设备和 IP 收入囊中。
+
+5G 调制解调器是苹果亟待攻克的最后堡垒。尽管有所延误，历经五年研发，C1基带最终在 iPhone 16e（2025 年）上实现商用。苹果预计到 2027 至 2028 年，将在其产品线中彻底剔除高通，为其带来毛利率叠加的良机。5. 与 Imagination 决裂（2017 年）：自研 GPU
+
+自初代 iPhone 起，苹果一直向 Imagination Technologies 购买 GPU 设计授权。2017 年 4 月，苹果通知 Imagination，将在 15 到 24 个月内停止使用其 IP。Imagination 股价一夜之间暴跌 70%。
+
+苹果早已秘密组建了内部 GPU 团队。A11 芯片（2017 年 9 月）搭载了苹果首款定制 GPU。这款苹果自研 GPU 的性能比 Imagination 的设计提升了 30%。
+
+Imagination 濒临破产，最终被一家有中资背景的私募股权公司收购。到 2020 年，双方达成和解，并签署了多年授权协议。
+
+### 全球设计运营版图
+
+苹果在四大洲设有超 15 个设计中心，拥有 8000 多名芯片工程师：
+
+https://substackcdn.com/image/fetch/$s_!L_yD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F66058ace-743d-430d-9cb3-fc188726f24a_2364x878.png
+
+苹果的 CPU 性能领先优势正是在以色列孕育的。赫兹利亚（Herzliya）团队的许多成员是从英特尔以色列分公司挖来的，后者曾打造出 Pentium M、Core 和 Sandy Bridge 架构。正是这支团队设计了在基准测试中霸榜的 Firestorm、Avalanche 和 Everest 核心。
+
+这个曾为英特尔贡献出最优秀架构的国家，如今正在设计击败英特尔的苹果芯片。
+
+圣地亚哥研发中心则直指高通。苹果的基带设计部门就设在高通总部所在的同一条街上。该办公室的员工大多是前高通和前英特尔工程师，他们对高通基带的工作原理了如指掌，更清楚如何将其击败。
+
+### DTCO：设计-工艺协同优化
+
+苹果与台积电共同定义了工艺设计套件（PDK）。台积电实质上为苹果配备了数百名专属工程师，打造出一种本质上的“虚拟IDM”（垂直整合制造商）模式。当苹果提出需要更宽的内存总线或特定的晶体管架构时，台积电便会相应调整 PDK 予以配合。

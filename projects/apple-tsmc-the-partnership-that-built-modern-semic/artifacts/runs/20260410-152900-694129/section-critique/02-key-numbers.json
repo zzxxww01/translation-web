@@ -1,0 +1,39 @@
+{
+  "section_id": "02-key-numbers",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "· Total Apple Silicon Revenue: $23.5B (2025)",
+        "description": "未遵守术语表（Glossary）中对“Apple Silicon”的翻译要求。",
+        "why_it_matters": "虽然业内常直接使用 Apple Silicon，但在长篇严肃分析中，遵循既定术语表（苹果自研芯片）能保证全篇术语的一致性，降低非极客读者的阅读门槛。",
+        "suggestion": "改为：“· 苹果自研芯片（Apple Silicon）总营收：235 亿美元（2025 年）”"
+      },
+      {
+        "paragraph_index": 22,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Platform Shift at TSMC:",
+        "description": "“平台转移”略显生硬，这里的 Platform Shift 指的是台积电营收结构和主导业务板块的根本性变迁（从智能手机转向高性能计算）。",
+        "why_it_matters": "“转移”通常指物理位置或资金的移动，“变迁”或“演进”更能准确传达商业模式和营收结构的宏观变化。",
+        "suggestion": "改为：“台积电的平台变迁：” 或 “台积电的平台级演进：”"
+      },
+      {
+        "paragraph_index": 23,
+        "issue_type": "accuracy",
+        "severity": "low",
+        "original_text": "· Smartphone Revenue %: 46% (Q1 2028) to 29% (Q4 2025)",
+        "description": "原文中“Q1 2028”存在明显的笔误（应为 Q1 2018），译文直接照译导致时间线倒退（从2028年降至2025年），逻辑不通。",
+        "why_it_matters": "专业分析师文章的译者应具备识别并纠正（或至少标注）原文明显数据笔误的能力，直接照译会损害文章的专业可信度。",
+        "suggestion": "建议修正并加注：“· 智能手机营收占比：从 46%（2018 年第一季度）[注：原文为2028，疑为笔误] 降至 29%（2025 年第四季度）”"
+      }
+    ]
+  }
+}

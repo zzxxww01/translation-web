@@ -1,0 +1,54 @@
+{
+  "section_id": "07-silicon-performance-evolution",
+  "new_terms": [
+    {
+      "term": "N3B",
+      "suggested_translation": "N3B",
+      "context": "pure density scaling (compared to N3B)",
+      "confidence": 0.9
+    },
+    {
+      "term": "E-cores",
+      "suggested_translation": "能效核",
+      "context": "extremely efficient smaller E-cores",
+      "confidence": 0.9
+    },
+    {
+      "term": "MALL",
+      "suggested_translation": "MALL",
+      "context": "AMD Strix Halo’s MALL is GPU-only.",
+      "confidence": 0.9
+    },
+    {
+      "term": "dynamic voltage and frequency scaling",
+      "suggested_translation": "动态电压和频率调节",
+      "context": "enable millisecond-level dynamic voltage and frequency scaling",
+      "confidence": 0.9
+    },
+    {
+      "term": "vapor chamber",
+      "suggested_translation": "均热板",
+      "context": "The iPhone 17 Pro’s vapor chamber was co-designed",
+      "confidence": 0.9
+    },
+    {
+      "term": "Oryon",
+      "suggested_translation": "Oryon",
+      "context": "Qualcomm Oryon match on L1 size",
+      "confidence": 0.9
+    },
+    {
+      "term": "Nuvia",
+      "suggested_translation": "Nuvia",
+      "context": "the original Nuvia design team was largely poached from Apple",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "thermal envelope": "散热包络",
+    "neural engine": "神经网络引擎",
+    "unified memory architecture": "统一内存架构"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:42:54.586295"
+}

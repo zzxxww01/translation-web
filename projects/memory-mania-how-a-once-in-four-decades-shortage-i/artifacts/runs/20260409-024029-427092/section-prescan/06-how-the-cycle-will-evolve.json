@@ -1,0 +1,69 @@
+{
+  "section_id": "06-how-the-cycle-will-evolve",
+  "new_terms": [
+    {
+      "term": "fab pull-ins",
+      "suggested_translation": "晶圆厂进度提前",
+      "context": "More fab pull-ins and capacity expansion: We expect additional fab schedule pull-ins...",
+      "confidence": 0.9
+    },
+    {
+      "term": "LRCX",
+      "suggested_translation": "泛林集团 (LRCX)",
+      "context": "confirmed by ASML and LRCX’s management in the latest earnings call.",
+      "confidence": 0.95
+    },
+    {
+      "term": "HBM4E",
+      "suggested_translation": "HBM4E",
+      "context": "1c-based HBM4E in 2027",
+      "confidence": 1.0
+    },
+    {
+      "term": "wordline",
+      "suggested_translation": "字线",
+      "context": "Next the bitline, wordline, gate, and active area cuts are good candidates for EUV.",
+      "confidence": 1.0
+    },
+    {
+      "term": "pitch splitting",
+      "suggested_translation": "间距拆分",
+      "context": "Narrow lines are relatively easy to produce with DUV multipatterning (pitch splitting)...",
+      "confidence": 0.95
+    },
+    {
+      "term": "tip-to-tip distance",
+      "suggested_translation": "端到端距离",
+      "context": "how small the tip-to-tip distance needs to be in some cases - look at the ends of the bitlines.",
+      "confidence": 0.9
+    },
+    {
+      "term": "DC",
+      "suggested_translation": "位线接触 (DC)",
+      "context": "and bitline contact (denoted DC here) are the first layers where EUV is adopted.",
+      "confidence": 0.95
+    },
+    {
+      "term": "MOR",
+      "suggested_translation": "金属氧化物光刻胶 (MOR)",
+      "context": "This is due to likely MOR adoption, which effectively increases throughput per tool...",
+      "confidence": 0.95
+    },
+    {
+      "term": "VLSI",
+      "suggested_translation": "VLSI (超大规模集成电路研讨会)",
+      "context": "as it continues to scale in future nodes as part of our VLSI 2025 recap.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "supercycle": "超级周期",
+    "wfe": "WFE",
+    "duv multipatterning": "DUV 多重曝光",
+    "access transistor": "存取晶体管",
+    "storage capacitor": "存储电容",
+    "bitline cut": "位线切割"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-09T03:11:17.006490"
+}

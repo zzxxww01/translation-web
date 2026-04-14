@@ -1,0 +1,30 @@
+{
+  "section_id": "06-apples-five-transformational",
+  "reflection": {
+    "overall_score": 9.2,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 17,
+        "issue_type": "structure",
+        "severity": "medium",
+        "original_text": "By 2027-2028, Apple expects to eliminate Qualcomm entirely in its lineup, offering it a gross margin stacking opportunity. 5. The Imagination Breakup (2017): In-House GPU",
+        "description": "原文中序号“5”未换行，译文保留了这一格式瑕疵。前文的序号2、3、4均已在译文中做了独立段落处理，此处应保持列表结构的统一。同时，“C1基带”中英文字母与中文字符之间缺少空格。",
+        "why_it_matters": "破坏了并列小标题的视觉一致性，影响长文阅读的节奏感；中英文混排缺少空格不符合排版规范。",
+        "suggestion": "将“5. 与 Imagination 决裂（2017 年）：自研 GPU”另起一段。并将前文的“C1基带”修改为“C1 基带”。"
+      },
+      {
+        "paragraph_index": 28,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "TSMC effectively dedicates hundreds of engineers to Apple, creating what is essentially a “virtual IDM” (Integrated Device Manufacturer).",
+        "description": "译文“台积电实质上为苹果配备了……打造出一种本质上的‘虚拟IDM’”中，连续使用了“实质上”和“本质上的”，略显重复累赘。且“虚拟IDM”中英文之间缺少空格。",
+        "why_it_matters": "微调可提升译文的修辞美感与流畅度，确保排版规范。",
+        "suggestion": "建议修改为：“台积电实质上为苹果配备了数百名专属工程师，打造出一种堪称‘虚拟 IDM’（垂直整合制造商）的模式。”"
+      }
+    ]
+  }
+}

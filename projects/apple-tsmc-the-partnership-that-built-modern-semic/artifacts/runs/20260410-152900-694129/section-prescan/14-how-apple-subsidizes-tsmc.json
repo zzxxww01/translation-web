@@ -1,0 +1,61 @@
+{
+  "section_id": "14-how-apple-subsidizes-tsmc",
+  "new_terms": [
+    {
+      "term": "Early Adopter Surplus",
+      "suggested_translation": "早期采用者红利",
+      "context": "After Apple matures the node and captures the 'Early Adopter Surplus'",
+      "confidence": 0.9
+    },
+    {
+      "term": "lifetime utilization weighting",
+      "suggested_translation": "全生命周期利用率加权",
+      "context": "These figures use lifetime utilization weighting, crediting Apple only for its share of each node’s output",
+      "confidence": 0.95
+    },
+    {
+      "term": "depreciation cycle",
+      "suggested_translation": "折旧周期",
+      "context": "over a 5-year depreciation cycle rather than assigning full launch-year capex",
+      "confidence": 0.95
+    },
+    {
+      "term": "R&D intensity",
+      "suggested_translation": "研发强度",
+      "context": "TSMC’s R&D spending has grown 8x since 2010... But R&D intensity tells a different story.",
+      "confidence": 0.95
+    },
+    {
+      "term": "crypto winter",
+      "suggested_translation": "加密货币寒冬",
+      "context": "This coincided with the crypto winter and memory correction, which hit several top-10 customers hard.",
+      "confidence": 0.9
+    },
+    {
+      "term": "memory correction",
+      "suggested_translation": "存储市场回调",
+      "context": "This coincided with the crypto winter and memory correction",
+      "confidence": 0.9
+    },
+    {
+      "term": "N3E",
+      "suggested_translation": "N3E",
+      "context": "aggressive binning is now entering the iPhone lineup to combat N3E yield costs.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "anchor tenant": "锚定客户",
+    "binning": "芯片分级",
+    "ramp": "产能爬坡",
+    "capex": "资本支出",
+    "custom silicon": "定制芯片",
+    "ai accelerator": "AI加速器",
+    "hyperscaler": "超大规模云服务商",
+    "yield": "良率",
+    "fab": "晶圆厂",
+    "node": "制程节点"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:14:40.512012"
+}

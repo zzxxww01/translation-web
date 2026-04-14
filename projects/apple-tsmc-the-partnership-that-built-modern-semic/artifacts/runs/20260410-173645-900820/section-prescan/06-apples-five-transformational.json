@@ -1,0 +1,54 @@
+{
+  "section_id": "06-apples-five-transformational",
+  "new_terms": [
+    {
+      "term": "TrueDepth camera",
+      "suggested_translation": "原深感摄像头",
+      "context": "Apple's 3D depth-sensing camera system used for Face ID.",
+      "confidence": 1.0
+    },
+    {
+      "term": "LiDAR Scanner",
+      "suggested_translation": "激光雷达扫描仪",
+      "context": "3D scanning technology integrated into Apple devices.",
+      "confidence": 1.0
+    },
+    {
+      "term": "gross margin stacking",
+      "suggested_translation": "毛利率叠加",
+      "context": "Financial strategy where replacing a supplier allows a company to capture the supplier's margin, increasing overall profitability.",
+      "confidence": 0.9
+    },
+    {
+      "term": "virtual IDM",
+      "suggested_translation": "虚拟IDM",
+      "context": "A foundry (like TSMC) operating so closely with a fabless client (like Apple) that it functions essentially as an internal manufacturing division.",
+      "confidence": 0.95
+    },
+    {
+      "term": "C1 modem",
+      "suggested_translation": "C1基带",
+      "context": "Apple's first in-house 5G modem.",
+      "confidence": 0.95
+    },
+    {
+      "term": "H-series",
+      "suggested_translation": "H系列",
+      "context": "Apple's custom silicon for audio.",
+      "confidence": 1.0
+    },
+    {
+      "term": "U-series",
+      "suggested_translation": "U系列",
+      "context": "Apple's custom silicon for Ultra-Wideband.",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "secure enclave": "安全隔区",
+    "a-series": "A系列",
+    "m-series": "M系列"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:42:24.606229"
+}

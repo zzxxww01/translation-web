@@ -1,0 +1,21 @@
+{
+  "section_id": "12-device-shipments",
+  "reflection": {
+    "overall_score": 9.5,
+    "readability_score": 9.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 5,
+        "issue_type": "terminology|readability",
+        "severity": "low",
+        "original_text": "Its contribution is silicon intensity, primarily. The C-series chips powering spatial computing consume wafer capacity disproportionate to device shipments.",
+        "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。",
+        "why_it_matters": "采用更地道的行业术语能进一步巩固文章的专业分析师基调；规范的中英文混排间距能提升阅读体验。",
+        "suggestion": "建议修改为：'其主要贡献在于单机含硅量。驱动空间计算的 C 系列芯片消耗了与其设备出货量极不相称的晶圆产能。'"
+      }
+    ]
+  }
+}

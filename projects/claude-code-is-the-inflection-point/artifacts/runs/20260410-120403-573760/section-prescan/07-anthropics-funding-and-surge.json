@@ -1,0 +1,63 @@
+{
+  "section_id": "07-anthropics-funding-and-surge",
+  "new_terms": [
+    {
+      "term": "SWE-bench",
+      "suggested_translation": "SWE-bench",
+      "context": "The SWE-bench verified result is effectively the same",
+      "confidence": 1.0
+    },
+    {
+      "term": "MMLU-pro",
+      "suggested_translation": "MMLU-pro",
+      "context": "with GPT-5.2 high MMLU-pro and AIME 2025 in favor of 5.2",
+      "confidence": 1.0
+    },
+    {
+      "term": "AIME",
+      "suggested_translation": "AIME",
+      "context": "with GPT-5.2 high MMLU-pro and AIME 2025 in favor of 5.2",
+      "confidence": 1.0
+    },
+    {
+      "term": "token efficiency",
+      "suggested_translation": "Token效率",
+      "context": "The answer is token efficiency. Opus 4.5 achieves dramatically better token efficiency",
+      "confidence": 0.95
+    },
+    {
+      "term": "Sonnet 5",
+      "suggested_translation": "Sonnet 5",
+      "context": "The new Sonnet 5 is allegedly coming in at a much smaller model size",
+      "confidence": 1.0
+    },
+    {
+      "term": "chain-of-thought",
+      "suggested_translation": "思维链",
+      "context": "having an extremely long chain-of-thought token context to achieve tasks",
+      "confidence": 1.0
+    },
+    {
+      "term": "NPM",
+      "suggested_translation": "NPM",
+      "context": "SemiAnalysis Tokenomics Team, NPM",
+      "confidence": 1.0
+    },
+    {
+      "term": "Gemini",
+      "suggested_translation": "Gemini",
+      "context": "Gemini leading consumer adoption with image models",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "benchmark-maxxing": "卷基准 / 唯基准至上 (used as benchmark-maxxed)",
+    "Claude Code": "Claude Code",
+    "Opus 4.5": "Opus 4.5",
+    "context window": "上下文窗口",
+    "Anthropic": "Anthropic",
+    "agent": "智能体 (used as coding agents)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T12:06:56.574098"
+}

@@ -1,0 +1,37 @@
+编程曾是最具价值的工作，在 2020 年代的软件工程热潮中，程序员可谓炙手可热。如今，面对智能体化信息处理掀起的颠覆狂潮，编程仅仅是一个抢滩阵地，规模高达 15 万亿美元的庞大信息工作经济已然岌岌可危。根据国际劳工组织（ILO）的数据，全球 36 亿劳动力中，信息工作者超过 10 亿，占比约达三分之一。
+
+信息工作领域的各项工作流往往高度相似，均遵循一套已被 Claude Code 在软件领域验证行之有效的工作流：阅读（摄取非结构化信息）、思考（运用领域知识）、输出（生成结构化结果），最后验证（对照标准核查）。这构成了绝大多数信息工作者（甚至包括研究人员！）的核心工作内容。如果智能体（指能够自主规划并执行复杂任务的 AI）能够吞噬软件行业，还有哪个劳动力市场能独善其身？
+
+我们认为，智能体必将席卷众多领域。随着 Claude Code（以及 Cowork）的强势崛起，智能体的总潜在市场（TAM）远超单纯的大语言模型（LLM）。客户支持和软件开发等垂直领域仅仅是起点，智能体必将大举进军金融服务、法律、咨询等更为庞大的行业。这正是 SemiAnalysis Tokenomics 模型（译注：此处指作者为 AI 公司建立的专属财务分析模型，而非加密货币领域的代币经济学）的核心关注点。
+
+https://substackcdn.com/image/fetch/$s_!UO8Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F322aa44f-6be7-4182-9a2a-d8845c6a81c5_1430x818.png
+
+来源：McKinsey，Mordor Intelligence，Grand View Research，Precedence Research。由 Claude Code 生成。
+
+鉴于编程领域已跑出“杀手级用例”，且 Claude Code 与 Cowork 展现出清晰的通用性，我们必须采用一套截然不同的估值逻辑。将绝大多数问答交互和信息检索实现自动化已具备可行性，这将彻底打开商业变现的绝对天花板。随着智能体化 AI 全面渗透商业的各个角落，Tokenomics 模型的核心目标便是持续追踪不断涌现的杀手级用例及其总潜在市场（TAM）。
+
+### 落地瓶颈：任务视界
+
+真正能让这块庞大蛋糕被全面颠覆的关键，在于更长的任务视界——即智能体在任务失败前，究竟能持续自主工作多久？METR 数据显示，自主任务视界每 4 到 7 个月就会翻一番（在 2024 至 2025 年间，这一翻倍周期将加速缩短至 4 个月左右）。
+
+https://substackcdn.com/image/fetch/$s_!v-bP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa27e004c-72b7-4058-a24e-f1c6c6c9266f_1430x880.png
+
+来源：METR，SemiAnalysis Tokenomics 团队
+
+任务视界每翻一倍，就能解锁更大份额的蛋糕。在 30 分钟的任务视界下，你可以自动补全代码片段；达到 4.8 小时，你就能重构一个模块。对于长达数日的任务，你甚至可以实现整个审计流程的自动化。显然，Anthropic 也看到了这一点。
+
+2026 年 1 月 12 日，Anthropic 推出了 Cowork——“面向通用计算的 Claude Code”。4 名工程师仅用 10 天便完成了开发，其中绝大多数代码由 Claude Code 自主编写。它沿用了相同的架构：Claude 智能体 SDK、MCP 以及子智能体。它能根据收据生成电子表格，按内容对文件进行分类，并从零散笔记中起草报告。简而言之，它就是去掉了终端界面、加上了桌面环境的 Claude Code。
+
+https://substackcdn.com/image/fetch/$s_!9b5Y!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff50e715d-28e1-4397-9514-ece12ddd3632_1049x664.png
+
+https://substackcdn.com/image/fetch/$s_!3fbT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d386d33-e530-49fd-9619-a8d72cbbc10d_1049x655.png
+
+这是未来图景的惊鸿一瞥。这套工作台能够理解你日常工作的上下文，并根据需要构建和生成信息处理流程。你不再需要从数据库下载数据再手动制作图表，智能体（指能够自主规划并执行复杂任务的 AI）会为你生成一份排版远超你手动操作 Excel 的报告。每当你需要收集诸如销售配额之类的信息时，你的智能体就会从 UI 或 API 中提取数据，并代你生成报告。信息工作本身必将走向自动化，就像 Claude Code 自动化软件工程一样。
+
+https://substackcdn.com/image/fetch/$s_!qljZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6321004f-cff8-45ec-abcd-dddbc20b1d6f_936x474.png
+
+来源：SemiAnalysis – 由 Claude Code 根据我们的Co-Packaged Optics 文章生成。
+
+尽管目前的系统尚未尽善尽美，但它在处理、整合与格式化数据方面的速度，显然已全面超越大多数人类。在某些场景下，其准确度不仅高于普通员工，成本也更为低廉。诚然，AI 幻觉依然存在，但现有的多数业务流程中本就充斥着大量人为错误。只要信息能以达标的准确度完成处理并流转至下一环节，单凭这一点就能大幅拉升工作产出供给。毫不夸张地说，我们已经到了这样一个节点：任何人都可以在这些智能体工作流中输入指令，轻松运行多变量回归分析——而在 21 世纪初，这往往需要长年的专业训练才能掌握。
+
+Stack Overflow 2025 年开发者调查显示，已有 84% 的程序员在使用 AI，这代表着技术普及的最前沿。然而，仅有 31% 的受访者在使用编程智能体，这意味着面对更广泛的信息工作浪潮，当前的渗透率曲线仍处于起步阶段。正如编程智能体在“眨眼之间”完成渗透一样，更广泛的信息工作领域也将迅速迎来 AI 的全面普及。

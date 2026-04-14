@@ -1,0 +1,51 @@
+{
+  "section_id": "18-why-apple-will-not-build-fabs",
+  "new_terms": [
+    {
+      "term": "catch-up cost",
+      "suggested_translation": "追赶成本",
+      "context": "The catch-up cost to replicate TSMC’s capability would require an annual capex of $50B+",
+      "confidence": 0.9
+    },
+    {
+      "term": "process engineers",
+      "suggested_translation": "工艺工程师",
+      "context": "TSMC deploys 70,000+ process engineers",
+      "confidence": 0.95
+    },
+    {
+      "term": "balance sheet as a service",
+      "suggested_translation": "资产负债表即服务",
+      "context": "Using TSMC’s balance sheet as a service allows Apple to maintain 35-40% corporate operating margins.",
+      "confidence": 0.9
+    },
+    {
+      "term": "operating margins",
+      "suggested_translation": "营业利润率",
+      "context": "allows Apple to maintain 35-40% corporate operating margins",
+      "confidence": 0.95
+    },
+    {
+      "term": "yield crashes",
+      "suggested_translation": "良率崩溃",
+      "context": "introducing operational risks (yield crashes, node delays)",
+      "confidence": 0.9
+    },
+    {
+      "term": "node delays",
+      "suggested_translation": "节点延迟",
+      "context": "introducing operational risks (yield crashes, node delays)",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "foundry": "晶圆代工厂",
+    "leading-edge": "先进制程",
+    "fab": "晶圆厂",
+    "capex": "资本支出",
+    "tsmc": "台积电",
+    "tsmc arizona": "台积电亚利桑那州工厂"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T22:00:36.882339"
+}

@@ -1,0 +1,95 @@
+{
+  "article_theme": "The current AI-driven memory supercycle is structurally larger and longer than past cycles due to the massive wafer capacity drain of HBM production, significant node migration friction, and skyrocketing prices, creating distinct strategic advantages for top-tier suppliers while squeezing downstream margins.",
+  "structure_summary": "The article opens with a dramatic hook about skyrocketing memory prices, then establishes the historical context of DRAM scaling and cyclicality. It pivots to the core thesis: the AI-driven supercycle is unique because HBM production and node migration friction structurally constrain supply. The narrative then explores the downstream impact (margin pressure on mobile OEMs) and the upstream competitive landscape (SK Hynix vs. Samsung in HBM4). It concludes with a forecast of the cycle's timeline and the necessary WFE/EUV investments through 2027.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/7",
+      "paragraph_count": 4,
+      "previous_section_title": "",
+      "next_section_title": "The Inevitability of Memory Cycles: A History of Booms and Busts",
+      "section_role": "Serves as a dramatic hook and establishes the authoritative, predictive credibility of the author/publication.",
+      "translation_notes": [
+        "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+        "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+      ]
+    },
+    {
+      "section_id": "01-the-inevitability-of-memory-cy",
+      "title": "The Inevitability of Memory Cycles: A History of Booms and Busts",
+      "position": "2/7",
+      "paragraph_count": 14,
+      "previous_section_title": "Introduction",
+      "next_section_title": "Memory Cycle Part II: Key Features of a Cycle",
+      "section_role": "Provides historical and technical context to explain the structural shift in the DRAM industry from technology-driven deflation to capacity-driven cyclicality.",
+      "translation_notes": [
+        "Hardcore tech terms must be rigorously accurate: '1T1C DRAM cell' (1T1C DRAM存储单元), 'access transistor' (存取晶体管), 'storage capacitor' (存储电容), 'Dennard scaling' (登纳德缩放定律).",
+        "Translate 'deflationary force' in an economic context (通缩力量/降价驱动力)."
+      ]
+    },
+    {
+      "section_id": "02-memory-cycle-part-ii-key-feat",
+      "title": "Memory Cycle Part II: Key Features of a Cycle",
+      "position": "3/7",
+      "paragraph_count": 48,
+      "previous_section_title": "The Inevitability of Memory Cycles: A History of Booms and Busts",
+      "next_section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve",
+      "section_role": "Explains the economic and behavioral mechanics of memory cycles, highlighting how recent industry trauma led to the structurally tight supply of the current era.",
+      "translation_notes": [
+        "Business terminology requires precision: 'commoditization' (大宗商品化/通用化), 'capital discipline' (资本纪律), 'pure bit growth' (纯比特增长/单纯追求容量增长).",
+        "Ensure 'structurally tighter supply' (结构性供应趋紧) is emphasized as a core recurring theme."
+      ]
+    },
+    {
+      "section_id": "03-ai-driven-memory-supercycle-b",
+      "title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve",
+      "position": "4/7",
+      "paragraph_count": 56,
+      "previous_section_title": "Memory Cycle Part II: Key Features of a Cycle",
+      "next_section_title": "Supercycle Could be a Double-Edged Sword",
+      "section_role": "Delivers the core thesis: explaining exactly why the AI-driven supercycle is unique, larger, and longer due to specific structural manufacturing constraints.",
+      "translation_notes": [
+        "Maintain a strict distinction between 'wafer capacity' (晶圆产能) and 'bit output' (比特产出).",
+        "Manufacturing terms must sound native: 'execution friction' (执行摩擦/落地阻力), 'process windows' (工艺窗口), 'yields deteriorate' (良率下降/爬坡期良率折损)."
+      ]
+    },
+    {
+      "section_id": "04-supercycle-could-be-a-double-e",
+      "title": "Supercycle Could be a Double-Edged Sword",
+      "position": "5/7",
+      "paragraph_count": 13,
+      "previous_section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve",
+      "next_section_title": "HBM4 Competition and HBM3E Pricing",
+      "section_role": "Analyzes the downstream consequences of the supercycle, specifically the severe margin pressure and strategic dilemmas faced by mobile OEMs.",
+      "translation_notes": [
+        "Accurately render market segment terms: 'Tier-1.5 and Tier-2 mobile OEMs' (1.5线和二线手机OEM).",
+        "Financial impacts must be clear: 'contract price' (合约价), 'pass through higher costs' (转嫁高昂成本), 'specification downgrades' (规格降级/减配)."
+      ]
+    },
+    {
+      "section_id": "05-hbm4-competition-and-hbm3e-pri",
+      "title": "HBM4 Competition and HBM3E Pricing",
+      "position": "6/7",
+      "paragraph_count": 8,
+      "previous_section_title": "Supercycle Could be a Double-Edged Sword",
+      "next_section_title": "How the Cycle Will Evolve",
+      "section_role": "Evaluates the competitive landscape among top-tier memory suppliers, contrasting HBM pricing dynamics with commodity DRAM, and comparing Samsung vs. SK Hynix.",
+      "translation_notes": [
+        "Financial jargon 're-rate' should be translated as '重新定价' or '估值重估' depending on exact context.",
+        "Deep tech terms need strict accuracy: 'front-end (1c)' (前道工艺 1c节点), 'signal integrity' (信号完整性), 'jitter' (抖动)."
+      ]
+    },
+    {
+      "section_id": "06-how-the-cycle-will-evolve",
+      "title": "How the Cycle Will Evolve",
+      "position": "7/7",
+      "paragraph_count": 19,
+      "previous_section_title": "HBM4 Competition and HBM3E Pricing",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

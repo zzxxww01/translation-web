@@ -1,7 +1,7 @@
 {
   "section_id": "06-how-the-cycle-will-evolve",
   "title": "How the Cycle Will Evolve",
-  "title_translation": null,
+  "title_translation": "周期将如何演进",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,42 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "历史经验表明，即便是规模最大的存储超级周期也不会无休止地延续，我们笃定本轮周期亦不例外。尽管如此，正如我们此前反复强调的，本轮周期的规模与跨度必将超越以往。在我们看来，这场超级周期有望贯穿 2027 年。及至 2027 年末乃至 2028 年，市场环境将愈发严峻且动荡加剧。部分人或许认为该预测过于激进，但我们在调研中发现，众多业内人士对此深表认同，尽管尚未形成全行业共识。我们预判以下几大趋势即将上演，其中部分已然初现端倪：",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557237",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -74,19 +104,49 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "晶圆厂进度提前与产能扩张提速： 随着扩产计划加速，我们预计三大存储供应商均会进一步将晶圆厂日程提前，目前该趋势已初露端倪。SK海力士已将 M15X 与龙仁（Yongin）一期晶圆厂的建设节点双双提前。美光亦在加速扩产，将其爱达荷州 1 厂的产能爬坡节点从 2027 年下半年提前至 2027 年中。此外，美光近期收购的力积电（PSMC）晶圆厂每月可补充约 4.5 万片晶圆的潜在产能，预计将于 2027 年下半年开始贡献晶圆产出，并逐步进入爬坡期。到 2027 年底，随着存储供应商的洁净室大规模投用，产能扩张将迎来实质性跃升，届时市场或将传出更多关于未来扩产计划的动向。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557383",
+          "tokenized_text": "[[[STRONG_1|晶圆厂进度提前与产能扩张提速：]]] 随着扩产计划加速，我们预计三大存储供应商均会进一步将晶圆厂日程提前，目前该趋势已初露端倪。SK海力士已将 M15X 与龙仁（Yongin）一期晶圆厂的建设节点双双提前。美光亦在加速扩产，将其爱达荷州 1 厂的产能爬坡节点从 2027 年下半年提前至 2027 年中。此外，美光近期收购的力积电（PSMC）晶圆厂每月可补充约 4.5 万片晶圆的潜在产能，预计将于 2027 年下半年开始贡献晶圆产出，并逐步进入爬坡期。到 2027 年底，随着存储供应商的洁净室大规模投用，产能扩张将迎来实质性跃升，届时市场或将传出更多关于未来扩产计划的动向。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -128,19 +188,49 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "大规模节点演进： 如前所述，我们预判全行业将在未来两年内向 1b 节点与 1c 节点进行大规模节点演进。阿斯麦（ASML）与泛林集团（LRCX）管理层在最新财报电话会议中已证实此趋势。这一演进主要受双重驱动：\n1) 在新增晶圆产能有限的背景下，亟需大幅拉升比特产出；\n2) 2027 年将推出基于 1c 节点的 HBM4E。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557464",
+          "tokenized_text": "[[[STRONG_1|大规模节点演进：]]] 如前所述，我们预判全行业将在未来两年内向 1b 节点与 1c 节点进行大规模节点演进。阿斯麦（ASML）与泛林集团（LRCX）管理层在最新财报电话会议中已证实此趋势。这一演进主要受双重驱动：\n1) 在新增晶圆产能有限的背景下，亟需大幅拉升比特产出；\n2) 2027 年将推出基于 1c 节点的 HBM4E。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -182,19 +272,49 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "HBM 持续加速，标准型 DRAM 持续承压： 我们认为，相较于标准型 DRAM，HBM 具备结构性高回报与长期增长潜力。因此，存储供应商将继续把 HBM 视作首要战略重心。尽管传统 DRAM 亦步入极为有利的定价环境，但长远来看，HBM 代表着更具可持续性与战略价值的机遇。我们预计，如何在 HBM 与标准型 DRAM 之间平衡产能分配，必将持续占据存储企业高管的决策核心。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557541",
+          "tokenized_text": "[[[STRONG_1|HBM 持续加速，标准型 DRAM 持续承压：]]] 我们认为，相较于标准型 DRAM，HBM 具备结构性高回报与长期增长潜力。因此，存储供应商将继续把 HBM 视作首要战略重心。尽管传统 DRAM 亦步入极为有利的定价环境，但长远来看，HBM 代表着更具可持续性与战略价值的机遇。我们预计，如何在 HBM 与标准型 DRAM 之间平衡产能分配，必将持续占据存储企业高管的决策核心。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -221,12 +341,42 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "晶圆厂进度提前、节点演进提速与 HBM 战略优先级跃升，这三大趋势共同指向一个核心主线：对 WFE (晶圆制造设备) 的需求正日益高涨。为支撑上述布局，存储供应商势必大幅追加 DRAM 资本支出。这笔资金将用于晶圆厂建设、先进节点过渡以及扩充 HBM 晶圆增量产能。市场已在一定程度上对本轮周期进行了定价，逻辑芯片领域尤为显著。此前，台积电（TSMC）公布的 2026 年资本支出远超预期，进一步夯实了市场对未来数年资本支出攀升的笃定预期。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557566",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -253,12 +403,42 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "我们预计，这一势头将加速向存储生态系统蔓延，令前道与后道设备供应商双双获益。事实上，就在本周，阿斯麦管理层对存储领域的 EUV 需求给出了极为强劲的展望。其核心驱动力在于：\n1) HBM 晶圆产能的迅猛扩张与 EUV 光刻层数的硬性需求；\n2) 供应商向 1b 节点与 1c 节点演进的迫切诉求。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557590",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -285,12 +465,42 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "三大头部存储制造商均在较新工艺中增加了 EUV 光刻层数。这不仅是实现整体尺寸微缩的必由之路，更能在 HBM 占据更大产品组合比重时，有效拔高 HBM 的性能上限。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557624",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -317,12 +527,42 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!bxgD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb33e346a-a9b6-4360-8524-fd0fc99b2756_864x541.png",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557658",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!bxgD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb33e346a-a9b6-4360-8524-fd0fc99b2756_864x541.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -383,19 +623,56 @@
         "LINK_1",
         "LINK_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis WFE (晶圆制造设备)模型 - Sales@SemiAnalysis.com",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.956231",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis WFE (晶圆制造设备)模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis WFE 模型 - Sales@SemiAnalysis.com",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557792",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis WFE 模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis WFE (晶圆制造设备)模型 - Sales@SemiAnalysis.com",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis WFE (晶圆制造设备)模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -422,12 +699,42 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在几个明确的区域，EUV 可替代 DUV 多重曝光，主要集中在存取晶体管（用于读写存储单元）与存储电容（用于存储代表 1 或 0 的电荷）交汇的密集区域。存取晶体管源极与存储电容之间的接触点，以及晶体管漏极与位线之间的接触点，极可能率先转用 EUV。这些接触点是圆柱形通孔，在 X 和 Y 方向上的尺寸均极小，这使得其制造难度通常高于窄线。这与 7 纳米逻辑工艺类似，后者也是在间距最紧密的通孔层率先采用 EUV。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557829",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -454,12 +761,42 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "接下来，位线、字线、栅极与有源区切割也是采用 EUV 的理想对象。使用 DUV 多重曝光（间距拆分）制造窄线相对容易，但切割线端却极具挑战。从下图可以看出，在某些情况下，端到端距离需要做到极小——请留意位线的末端。其他线端虽未在图中标出，但也面临着同样的挑战。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557863",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -501,19 +838,49 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "关于这种 6F2 架构、其微缩机制，以及在未来制程节点持续微缩时哪些环节会率先触及瓶颈，我们在 VLSI (超大规模集成电路研讨会) 2025 回顾中作了详尽剖析。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557961",
+          "tokenized_text": "关于这种 6F2 架构、其微缩机制，以及在未来制程节点持续微缩时哪些环节会率先触及瓶颈，我们在[[[LINK_1| VLSI (超大规模集成电路研讨会) 2025 回顾中]]]作了详尽剖析。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -540,12 +907,42 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!M1y7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe41583fc-a320-4da1-9d3c-d017b89bd9e2_757x575.png",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.557997",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!M1y7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe41583fc-a320-4da1-9d3c-d017b89bd9e2_757x575.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -587,19 +984,49 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "存储节点接触（即埋入式接触，记为 BC）、位线切割（位线末端之间的狭窄间隙）以及位线接触 (DC) 是率先采用 EUV 的光刻层。来源：三星",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.558095",
+          "tokenized_text": "[[[EM_1|存储节点接触（即埋入式接触，记为 BC）、位线切割（位线末端之间的狭窄间隙）以及位线接触 (DC) 是率先采用 EUV 的光刻层。来源：三星]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -641,19 +1068,49 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "短期内，DRAM 的 EUV 采用强度将大幅攀升，因为芯片制造商正争相将尽可能多的产能转换为高度依赖 EUV 的最新工艺。长期来看，他们正采取措施控制成本。SK海力士将在即将推出的 1γ节点中继续增加 EUV 光刻层数，但预计 EUV 支出将开始趋于平稳。这主要归因于其可能采用金属氧化物光刻胶 (MOR)，该技术无需向阿斯麦 (ASML) 支付升级费用即可有效提升单台设备的吞吐量，同时可能还伴随其他技术改进。即便如此，EUV 支出增速的放缓依然意味着绝对支出的增长，这对阿斯麦 (ASML) 而言无疑是重大利好。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.558214",
+          "tokenized_text": "短期内，DRAM 的 EUV 采用强度将大幅攀升，因为芯片制造商正争相将尽可能多的产能转换为高度依赖 EUV 的最新工艺。长期来看，他们正采取措施控制成本。SK海力士将在即将推出的 1γ节点中继续增加 EUV 光刻层数，但预计 EUV 支出将开始趋于平稳。这主要归因于其可能采用金属氧化物光刻胶 (MOR)，该技术无需向阿斯麦 (ASML) 支付升级费用即可有效提升单台设备的吞吐量，同时可能还伴随其他技术改进。即便如此，EUV 支出增速的[[[EM_1|放缓]]]依然意味着绝对支出的增长，这对阿斯麦 (ASML) 而言无疑是重大利好。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -695,19 +1152,49 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "想要获取关于 WFE (晶圆制造设备) 超级周期的完整细节？模型订阅者早在这份报告发布前就已掌握：[https://semianalysis.com/wafer-fab-model/](https://semianalysis.com/wafer-fab-model/)",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.558338",
+          "tokenized_text": "[[[EM_1|想要获取关于 WFE (晶圆制造设备) 超级周期的完整细节？模型订阅者早在这份报告发布前就已掌握：[https://semianalysis.com/wafer-fab-model/](https://semianalysis.com/wafer-fab-model/)]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -734,12 +1221,42 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!78Ir!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24839116-a43e-40fe-9a59-2d9c470627f5_889x508.png",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.558376",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!78Ir!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24839116-a43e-40fe-9a59-2d9c470627f5_889x508.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -800,19 +1317,56 @@
         "LINK_1",
         "LINK_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis WFE (晶圆制造设备)模型 - Sales@SemiAnalysis.com",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.956246",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis WFE (晶圆制造设备)模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis WFE 模型 - Sales@SemiAnalysis.com",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.558502",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis WFE 模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis WFE (晶圆制造设备)模型 - Sales@SemiAnalysis.com",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis WFE (晶圆制造设备)模型]]] - [[[LINK_2|Sales@SemiAnalysis.com]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     },
     {
@@ -839,12 +1393,42 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "2026 年，三星、SK海力士和美光的 DRAM 晶圆制造设备（WFE）资本支出将分别增长约 26%、34% 和 20%。这一增长受多重因素驱动：激进的 HBM 产能扩张，向 EUV 层采用强度更高的 1b 和 1c 节点快速演进，计划于 2027 年投产的晶圆厂扩建项目，以及全行业不断加速的节点演进。我们预计，随着即将到来的财报季披露半导体管理层的表态与存储厂商的资本支出指引，这一观点将得到印证。",
+          "model": "pro",
+          "created_at": "2026-04-09T03:13:48.558565",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.765,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.8
+        }
+      },
       "history": []
     }
   ]

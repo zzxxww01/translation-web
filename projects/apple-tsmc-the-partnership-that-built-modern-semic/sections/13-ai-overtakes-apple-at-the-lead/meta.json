@@ -1,0 +1,1375 @@
+{
+  "section_id": "13-ai-overtakes-apple-at-the-lead",
+  "title": "AI Overtakes Apple at the Leading Edge",
+  "title_translation": "AI在先进制程上超越苹果",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "For most of TSMC’s advanced node history, Apple was the undisputed volume leader. On N5, Apple’s quarterly wafer demand consistently exceeded the combined demand from NVIDIA, Broadcom, Amazon, and AMD through 2023. That hierarchy has now inverted. By 4Q25, NVIDIA alone consumed more N5 wafers than Apple’s entire A-series and M-series combined. The gap widened on N3. Apple ramped N3 first, taking 92% of node capacity in 2023, but AI accelerators followed with overwhelming force. By 2Q26, AI ecosystem N3 demand (led by NVIDIA’s Blackwell successors) exceeds Apple’s N3 demand by nearly 3x. The crossover happened in under 18 months.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0270",
+      "parent_block_index": 270,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For most of TSMC’s advanced node history, Apple was the undisputed volume leader. On N5, Apple’s quarterly wafer demand consistently exceeded the combined demand from NVIDIA, Broadcom, Amazon, and AMD through 2023. That hierarchy has now inverted. By 4Q25, NVIDIA alone consumed more N5 wafers than Apple’s entire A-series and M-series combined. The gap widened on N3. Apple ramped N3 first, taking 92% of node capacity in 2023, but AI accelerators followed with overwhelming force. By 2Q26, AI ecosystem N3 demand (led by NVIDIA’s Blackwell successors) exceeds Apple’s N3 demand by nearly 3x. The crossover happened in under 18 months.",
+      "parent_block_plain_text": "For most of TSMC’s advanced node history, Apple was the undisputed volume leader. On N5, Apple’s quarterly wafer demand consistently exceeded the combined demand from NVIDIA, Broadcom, Amazon, and AMD through 2023. That hierarchy has now inverted. By 4Q25, NVIDIA alone consumed more N5 wafers than Apple’s entire A-series and M-series combined. The gap widened on N3. Apple ramped N3 first, taking 92% of node capacity in 2023, but AI accelerators followed with overwhelming force. By 2Q26, AI ecosystem N3 demand (led by NVIDIA’s Blackwell successors) exceeds Apple’s N3 demand by nearly 3x. The crossover happened in under 18 months.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 636,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在台积电先进制程的大部分历史中，苹果是无可争议的产能霸主。在 N5 上，直到 2023 年，苹果的季度晶圆需求始终超过英伟达、博通、亚马逊和 AMD 的总和。如今，这一格局已彻底逆转。到 2025 年第四季度，仅英伟达一家消耗的 N5 晶圆，就超过了苹果所有 A系列和 M系列的总和。在 N3 上，差距进一步拉大。苹果率先推进 N3 产能爬坡，在 2023 年拿下了该制程节点 92% 的产能，但 AI 加速器随后以排山倒海之势席卷而来。到 2026 年第二季度，以英伟达 Blackwell 继任者为首的 AI 生态系统 N3 需求，已超出苹果 N3 需求近三倍。完成这一历史性交替仅用了不到 18 个月。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.292966",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The composition of AI demand makes the shift even more striking. NVIDIA alone is projected to consume more wafers on N3 by 4Q27 than Apple’s entire leading-edge portfolio across all chip families. Broadcom, Amazon, and AMD add to this tally.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0271",
+      "parent_block_index": 271,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The composition of AI demand makes the shift even more striking. NVIDIA alone is projected to consume more wafers on N3 by 4Q27 than Apple’s entire leading-edge portfolio across all chip families. Broadcom, Amazon, and AMD add to this tally.",
+      "parent_block_plain_text": "The composition of AI demand makes the shift even more striking. NVIDIA alone is projected to consume more wafers on N3 by 4Q27 than Apple’s entire leading-edge portfolio across all chip families. Broadcom, Amazon, and AMD add to this tally.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 241,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AI 需求的构成让这一转变愈发令人瞩目。预计到 2027 年第四季度，仅英伟达一家在 N3 上消耗的晶圆数量，就将超过苹果旗下所有芯片产品线的全部先进制程需求。博通、亚马逊和 AMD 更是进一步推高了这一总量。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.294382",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "The structural implication is clear. Apple built TSMC’s leading-edge business over the past decade, funding yield learning and absorbing startup capacity on every new node. AI customers are now using that infrastructure at scale. Apple remains TSMC’s largest smartphone customer and a critical anchor tenant, but it is no longer the defining force at the bleeding edge. TSMC’s largest growth driver is now Nvidia.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0272",
+      "parent_block_index": 272,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The structural implication is clear. Apple built TSMC’s leading-edge business over the past decade, funding yield learning and absorbing startup capacity on every new node. AI customers are now using that infrastructure at scale. Apple remains TSMC’s largest smartphone customer and a critical anchor tenant, but it is no longer the defining force at the bleeding edge. TSMC’s largest growth driver is now Nvidia.",
+      "parent_block_plain_text": "The structural implication is clear. Apple built TSMC’s leading-edge business over the past decade, funding yield learning and absorbing startup capacity on every new node. AI customers are now using that infrastructure at scale. Apple remains TSMC’s largest smartphone customer and a critical anchor tenant, but it is no longer the defining force at the bleeding edge. TSMC’s largest growth driver is now Nvidia.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 413,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一结构性变化释放的信号十分明确。过去十年，苹果撑起了台积电的先进制程业务，在每一个新制程节点上为良率学习买单，并消化初始产能。如今，AI 客户正在大规模使用这一基础设施。苹果依然是台积电最大的智能手机客户与关键的锚定客户，但已不再是最前沿节点的决定性力量。台积电如今最大的增长引擎是英伟达。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.294450",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe160da5b-334e-4209-94e8-a7503df66005_1864x942.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe160da5b-334e-4209-94e8-a7503df66005_1864x942.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0273",
+      "parent_block_index": 273,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe160da5b-334e-4209-94e8-a7503df66005_1864x942.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe160da5b-334e-4209-94e8-a7503df66005_1864x942.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe160da5b-334e-4209-94e8-a7503df66005_1864x942.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe160da5b-334e-4209-94e8-a7503df66005_1864x942.png",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.294579",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!CI6b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe160da5b-334e-4209-94e8-a7503df66005_1864x942.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "TSMC’s Platform Shift: HPC Overtakes Mobile",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0274",
+      "parent_block_index": 274,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### TSMC’s Platform Shift: HPC Overtakes Mobile",
+      "parent_block_plain_text": "TSMC’s Platform Shift: HPC Overtakes Mobile",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 43,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电的平台转移：HPC 超越移动端",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.294631",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "For most of TSMC’s history, smartphones were the anchor platform. From 2012 to 2021, smartphone revenue exceeded HPC revenue every single year, driven by Apple and Qualcomm scaling their SoCs on successive leading-edge nodes. For over a decade, Apple was the undisputed anchor tenant at TSMC’s leading edge. From 2012 to 2021, smartphones (led by Apple and Qualcomm) generated more foundry revenue than any other platform.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0275",
+      "parent_block_index": 275,
+      "parent_block_type": "p",
+      "parent_block_markdown": "For most of TSMC’s history, smartphones were the anchor platform. From 2012 to 2021, smartphone revenue exceeded HPC revenue every single year, driven by Apple and Qualcomm scaling their SoCs on successive leading-edge nodes. For over a decade, Apple was the undisputed anchor tenant at TSMC’s leading edge. From 2012 to 2021, smartphones (led by Apple and Qualcomm) generated more foundry revenue than any other platform.",
+      "parent_block_plain_text": "For most of TSMC’s history, smartphones were the anchor platform. From 2012 to 2021, smartphone revenue exceeded HPC revenue every single year, driven by Apple and Qualcomm scaling their SoCs on successive leading-edge nodes. For over a decade, Apple was the undisputed anchor tenant at TSMC’s leading edge. From 2012 to 2021, smartphones (led by Apple and Qualcomm) generated more foundry revenue than any other platform.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 422,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在台积电的大部分发展史中，智能手机始终是其锚定平台。从 2012 年到 2021 年，在苹果与高通于历代先进制程节点上持续迭代 SoC 的双重驱动下，智能手机营收每年能力压 HPC 营收。十多年来，苹果一直是台积电先进制程上无可争议的锚定客户。2012 至 2021 年间，由苹果和高通领衔的智能手机业务，为台积电贡献的晶圆代工厂营收超越了任何其他平台。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.294766",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "This was dominance by design: Apple funded yield learning, absorbed startup capacity, and extracted the best economics before competitors could reach volume. The model worked because no other customer could match Apple’s combination of volume, predictability, and willingness to pay.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0276",
+      "parent_block_index": 276,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This was dominance by design: Apple funded yield learning, absorbed startup capacity, and extracted the best economics before competitors could reach volume. The model worked because no other customer could match Apple’s combination of volume, predictability, and willingness to pay.",
+      "parent_block_plain_text": "This was dominance by design: Apple funded yield learning, absorbed startup capacity, and extracted the best economics before competitors could reach volume. The model worked because no other customer could match Apple’s combination of volume, predictability, and willingness to pay.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 283,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种绝对优势源于精密的商业设计：苹果为良率学习买单，消化初始产能，并在竞争对手实现规模化量产前，攫取最优的经济效益。该模式之所以行之有效，是因为没有任何其他客户能像苹果一样，兼具庞大体量、高度可预测性与极强的支付意愿。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295157",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "That era is ending.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0277",
+      "parent_block_index": 277,
+      "parent_block_type": "p",
+      "parent_block_markdown": "That era is ending.",
+      "parent_block_plain_text": "That era is ending.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 19,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一时代正在落幕。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295198",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "But 2022 marked a structural inflection. HPC revenue surpassed smartphones for the first time and has accelerated since, growing at nearly 22% CAGR versus 11% for smartphones. By 2025, HPC revenue is projected to exceed $71 billion, more than double smartphone revenue of $35 billion. The gap is widening. AI accelerators from NVIDIA, AMD, and hyperscaler custom silicon have fundamentally reordered TSMC’s customer mix. Smartphones remain TSMC’s second-largest platform, but they are no longer the growth engine.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0278",
+      "parent_block_index": 278,
+      "parent_block_type": "p",
+      "parent_block_markdown": "But 2022 marked a structural inflection. HPC revenue surpassed smartphones for the first time and has accelerated since, growing at nearly 22% CAGR versus 11% for smartphones. By 2025, HPC revenue is projected to exceed $71 billion, more than double smartphone revenue of $35 billion. The gap is widening. AI accelerators from NVIDIA, AMD, and hyperscaler custom silicon have fundamentally reordered TSMC’s customer mix. Smartphones remain TSMC’s second-largest platform, but they are no longer the growth engine.",
+      "parent_block_plain_text": "But 2022 marked a structural inflection. HPC revenue surpassed smartphones for the first time and has accelerated since, growing at nearly 22% CAGR versus 11% for smartphones. By 2025, HPC revenue is projected to exceed $71 billion, more than double smartphone revenue of $35 billion. The gap is widening. AI accelerators from NVIDIA, AMD, and hyperscaler custom silicon have fundamentally reordered TSMC’s customer mix. Smartphones remain TSMC’s second-largest platform, but they are no longer the growth engine.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 513,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "但 2022 年标志着一个结构性拐点。HPC 营收首次超越智能手机，此后更是加速增长，复合年增长率（CAGR）近 22%，而智能手机仅为 11%。预计到 2025 年，HPC 营收将突破 710 亿美元，达到智能手机营收（350 亿美元）的两倍以上。这一差距仍在不断拉大。来自英伟达、AMD 的 AI 加速器以及超大规模云服务商的定制芯片，已从根本上重塑了台积电的客户结构。智能手机虽仍是台积电的第二大平台，却已不再是增长引擎。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295228",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ce07cbb-47d9-48d1-b618-4dbdb28201f8_1853x1318.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ce07cbb-47d9-48d1-b618-4dbdb28201f8_1853x1318.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0279",
+      "parent_block_index": 279,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ce07cbb-47d9-48d1-b618-4dbdb28201f8_1853x1318.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ce07cbb-47d9-48d1-b618-4dbdb28201f8_1853x1318.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ce07cbb-47d9-48d1-b618-4dbdb28201f8_1853x1318.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ce07cbb-47d9-48d1-b618-4dbdb28201f8_1853x1318.png",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295283",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!IS-2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4ce07cbb-47d9-48d1-b618-4dbdb28201f8_1853x1318.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "This shift has direct implications for Apple. Despite being the largest smartphone customer at TSMC, Apple’s leverage has diminished as HPC customers absorb disproportionate leading-edge capacity. Apple’s share of total TSMC revenue fell from 24% in 2023 to 17% in 2025, even as Apple’s absolute spend continued rising. The countervailing trend is revenue per smartphone, which has tripled since 2012 and reached nearly $28 by 2025. Each iPhone now generates 3x the foundry revenue it did a decade ago, reflecting larger dies, more advanced nodes, and increasing silicon content (M-series Macs, AirPods, Apple Watch). Apple may be losing share of TSMC’s total output, but it is extracting more value per device than ever before.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0280",
+      "parent_block_index": 280,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This shift has direct implications for Apple. Despite being the largest smartphone customer at TSMC, Apple’s leverage has diminished as HPC customers absorb disproportionate leading-edge capacity. Apple’s share of total TSMC revenue fell from 24% in 2023 to 17% in 2025, even as Apple’s absolute spend continued rising. The countervailing trend is revenue per smartphone, which has tripled since 2012 and reached nearly $28 by 2025. Each iPhone now generates 3x the foundry revenue it did a decade ago, reflecting larger dies, more advanced nodes, and increasing silicon content (M-series Macs, AirPods, Apple Watch). Apple may be losing share of TSMC’s total output, but it is extracting more value per device than ever before.",
+      "parent_block_plain_text": "This shift has direct implications for Apple. Despite being the largest smartphone customer at TSMC, Apple’s leverage has diminished as HPC customers absorb disproportionate leading-edge capacity. Apple’s share of total TSMC revenue fell from 24% in 2023 to 17% in 2025, even as Apple’s absolute spend continued rising. The countervailing trend is revenue per smartphone, which has tripled since 2012 and reached nearly $28 by 2025. Each iPhone now generates 3x the foundry revenue it did a decade ago, reflecting larger dies, more advanced nodes, and increasing silicon content (M-series Macs, AirPods, Apple Watch). Apple may be losing share of TSMC’s total output, but it is extracting more value per device than ever before.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 728,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这一转变对苹果产生了直接影响。尽管苹果是台积电最大的智能手机客户，但随着 HPC 客户吸纳了不成比例的先进制程产能，苹果的话语权已然削弱。即使苹果的绝对支出持续攀升，其在台积电总营收中的份额仍从 2023 年的 24% 跌至 2025 年的 17%。与之抗衡的趋势是单部智能手机营收，该指标自 2012 年以来已增至三倍，到 2025 年将接近 28 美元。如今，每部 iPhone 创造的晶圆代工厂营收是十年前的三倍，这反映出裸片尺寸更大、制程节点更先进，以及芯片含量不断增加（M系列 Mac、AirPods、Apple Watch）。苹果或许正在流失台积电总产量的份额，但其从单台设备中攫取的价值却创下历史新高。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295304",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Apple is not standing still. The 1.4nm ramp in 2029 shows Apple reclaiming 67% node share, suggesting strategic capacity reservations made years in advance. Rumors of Baltra, Apple’s server-class silicon for internal AI infrastructure, point to a potential expansion into HPC territory. And revenue per smartphone has tripled since 2012 as die sizes grow and silicon content expands across the product portfolio. Apple may lose relative share of TSMC’s output, but it is extracting more value per device than ever before. The question is whether that is enough. When AI wafer demand is growing at 2x Apple’s rate and hyperscalers are writing multi-billion dollar prepayment checks, even the world’s most important smartphone customer finds itself competing for attention at the foundry.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0281",
+      "parent_block_index": 281,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Apple is not standing still. The 1.4nm ramp in 2029 shows Apple reclaiming 67% node share, suggesting strategic capacity reservations made years in advance. Rumors of Baltra, Apple’s server-class silicon for internal AI infrastructure, point to a potential expansion into HPC territory. And revenue per smartphone has tripled since 2012 as die sizes grow and silicon content expands across the product portfolio. Apple may lose relative share of TSMC’s output, but it is extracting more value per device than ever before. The question is whether that is enough. When AI wafer demand is growing at 2x Apple’s rate and hyperscalers are writing multi-billion dollar prepayment checks, even the world’s most important smartphone customer finds itself competing for attention at the foundry. The AI wave is too big to ignore, and Apple’s position at TSMC, while still formidable, is no longer uncontested.",
+      "parent_block_plain_text": "Apple is not standing still. The 1.4nm ramp in 2029 shows Apple reclaiming 67% node share, suggesting strategic capacity reservations made years in advance. Rumors of Baltra, Apple’s server-class silicon for internal AI infrastructure, point to a potential expansion into HPC territory. And revenue per smartphone has tripled since 2012 as die sizes grow and silicon content expands across the product portfolio. Apple may lose relative share of TSMC’s output, but it is extracting more value per device than ever before. The question is whether that is enough. When AI wafer demand is growing at 2x Apple’s rate and hyperscalers are writing multi-billion dollar prepayment checks, even the world’s most important smartphone customer finds itself competing for attention at the foundry. The AI wave is too big to ignore, and Apple’s position at TSMC, while still formidable, is no longer uncontested.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 786,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "苹果并未坐以待毙。2029 年的 1.4nm 产能爬坡显示，苹果将重新夺回 67% 的节点份额，这表明其提前数年就进行了战略性产能预订。有关 Baltra（苹果用于内部 AI 基础设施的服务器级芯片）的传闻，预示着其可能向 HPC 领域扩张。随着裸片尺寸增大以及整个产品组合中芯片含量的提升，单部智能手机营收自 2012 年以来已增至三倍。苹果或许会流失台积电产量的相对份额，但其从单台设备中攫取的价值却创下历史新高。问题在于，这是否足够。当 AI 晶圆需求以两倍于苹果的速度增长，且超大规模云厂商纷纷开出数十亿美元的预付款支票时，即便是全球最重要的智能手机客户，也不得不在晶圆代工厂里争夺关注度。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295325",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "The AI wave is too big to ignore, and Apple’s position at TSMC, while still formidable, is no longer uncontested.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0281",
+      "parent_block_index": 281,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Apple is not standing still. The 1.4nm ramp in 2029 shows Apple reclaiming 67% node share, suggesting strategic capacity reservations made years in advance. Rumors of Baltra, Apple’s server-class silicon for internal AI infrastructure, point to a potential expansion into HPC territory. And revenue per smartphone has tripled since 2012 as die sizes grow and silicon content expands across the product portfolio. Apple may lose relative share of TSMC’s output, but it is extracting more value per device than ever before. The question is whether that is enough. When AI wafer demand is growing at 2x Apple’s rate and hyperscalers are writing multi-billion dollar prepayment checks, even the world’s most important smartphone customer finds itself competing for attention at the foundry. The AI wave is too big to ignore, and Apple’s position at TSMC, while still formidable, is no longer uncontested.",
+      "parent_block_plain_text": "Apple is not standing still. The 1.4nm ramp in 2029 shows Apple reclaiming 67% node share, suggesting strategic capacity reservations made years in advance. Rumors of Baltra, Apple’s server-class silicon for internal AI infrastructure, point to a potential expansion into HPC territory. And revenue per smartphone has tripled since 2012 as die sizes grow and silicon content expands across the product portfolio. Apple may lose relative share of TSMC’s output, but it is extracting more value per device than ever before. The question is whether that is enough. When AI wafer demand is growing at 2x Apple’s rate and hyperscalers are writing multi-billion dollar prepayment checks, even the world’s most important smartphone customer finds itself competing for attention at the foundry. The AI wave is too big to ignore, and Apple’s position at TSMC, while still formidable, is no longer uncontested.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 787,
+      "segment_end": 900,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "AI 浪潮已庞大到不容忽视，苹果在台积电的地位虽依然强大，却已不再无可撼动。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295346",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Apple alone took >50% of 20nm, 16nm, N5, and of N3 at each node’s respective peak.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0282",
+      "parent_block_index": 282,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Apple alone took >50% of 20nm, 16nm, N5, and of N3 at each node’s respective peak.",
+      "parent_block_plain_text": "Apple alone took >50% of 20nm, 16nm, N5, and of N3 at each node’s respective peak.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 82,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 20nm、16nm、N5 和 N3 各自的巅峰时期，仅苹果一家就占据了超过 50% 的节点产能。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295387",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc8b5a2c-07ee-40bf-8d70-b29f66d1a800_2074x1421.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc8b5a2c-07ee-40bf-8d70-b29f66d1a800_2074x1421.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0283",
+      "parent_block_index": 283,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc8b5a2c-07ee-40bf-8d70-b29f66d1a800_2074x1421.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc8b5a2c-07ee-40bf-8d70-b29f66d1a800_2074x1421.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc8b5a2c-07ee-40bf-8d70-b29f66d1a800_2074x1421.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc8b5a2c-07ee-40bf-8d70-b29f66d1a800_2074x1421.png",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295408",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!BczK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fdc8b5a2c-07ee-40bf-8d70-b29f66d1a800_2074x1421.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "In 2022, HPC revenue surpassed smartphones at TSMC for the first time, and the gap has widened every quarter since. By 2025, HPC is projected to exceed $71 billion, more than double the $35 billion from smartphones. The driver is obvious: AI accelerators from NVIDIA, AMD, and hyperscaler custom silicon are absorbing capacity at a pace smartphones never did.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0284",
+      "parent_block_index": 284,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In 2022, HPC revenue surpassed smartphones at TSMC for the first time, and the gap has widened every quarter since. By 2025, HPC is projected to exceed $71 billion, more than double the $35 billion from smartphones. The driver is obvious: AI accelerators from NVIDIA, AMD, and hyperscaler custom silicon are absorbing capacity at a pace smartphones never did.",
+      "parent_block_plain_text": "In 2022, HPC revenue surpassed smartphones at TSMC for the first time, and the gap has widened every quarter since. By 2025, HPC is projected to exceed $71 billion, more than double the $35 billion from smartphones. The driver is obvious: AI accelerators from NVIDIA, AMD, and hyperscaler custom silicon are absorbing capacity at a pace smartphones never did.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 359,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2022 年，台积电的 HPC 营收首次超越智能手机，此后每个季度这一差距都在不断拉大。预计到 2025 年，HPC 营收将突破 710 亿美元，达到智能手机营收（350 亿美元）的两倍以上。驱动因素显而易见：来自英伟达、AMD 的 AI 加速器以及超大规模云服务商的定制芯片，正以智能手机从未有过的速度吞噬产能。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295426",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "NVIDIA alone now rivals Apple in leading-edge wafer consumption, and the broader AI ecosystem is growing at nearly 22% CAGR versus 11% for smartphones. Apple’s share of TSMC’s total revenue fell from 24% in 2023 to 17% in 2025, even as Apple’s absolute spend continued rising. For the first time, Apple is being outbid for capacity.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0285",
+      "parent_block_index": 285,
+      "parent_block_type": "p",
+      "parent_block_markdown": "NVIDIA alone now rivals Apple in leading-edge wafer consumption, and the broader AI ecosystem is growing at nearly 22% CAGR versus 11% for smartphones. Apple’s share of TSMC’s total revenue fell from 24% in 2023 to 17% in 2025, even as Apple’s absolute spend continued rising. For the first time, Apple is being outbid for capacity.",
+      "parent_block_plain_text": "NVIDIA alone now rivals Apple in leading-edge wafer consumption, and the broader AI ecosystem is growing at nearly 22% CAGR versus 11% for smartphones. Apple’s share of TSMC’s total revenue fell from 24% in 2023 to 17% in 2025, even as Apple’s absolute spend continued rising. For the first time, Apple is being outbid for capacity.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 332,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如今，仅英伟达一家的先进制程晶圆消耗量就足以与苹果匹敌。更广泛的 AI 生态系统正以近 22% 的复合年增长率扩张，相比之下，智能手机仅为 11%。尽管苹果的绝对支出仍在持续攀升，但其在台积电总营收中的占比却从 2023 年的 24% 跌至 2025 年的 17%。苹果首次在产能竞价中败下阵来。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295444",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Even as smartphone units saturate and HPC overtake smartphones, TSMC continues to increase its average revenue per smartphones, thanks to Apple’s relentless node transitions and innovations and Android companies’ increased emphasis on premium tier.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0286",
+      "parent_block_index": 286,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Even as smartphone units saturate and HPC overtake smartphones, TSMC continues to increase its average revenue per smartphones, thanks to Apple’s relentless node transitions and innovations and Android companies’ increased emphasis on premium tier.",
+      "parent_block_plain_text": "Even as smartphone units saturate and HPC overtake smartphones, TSMC continues to increase its average revenue per smartphones, thanks to Apple’s relentless node transitions and innovations and Android companies’ increased emphasis on premium tier.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 248,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管智能手机出货量已趋于饱和，且 HPC 营收已超越智能手机，台积电仍在不断提升其单部智能手机的平均营收。这要归功于苹果极其坚决的制程节点迭代与创新，以及安卓厂商对高端市场的日益重视。",
+          "model": "pro",
+          "created_at": "2026-04-10T17:14:16.295464",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.6,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "accuracy|terminology",
+            "description": "“countervailing trend”在这里的语境是指能够抵消“苹果在台积电总营收份额下降”这一负面影响的积极趋势（即单机营收上升）。译为“与之抗衡的趋势”略带冲突意味，未能精准传达财务分析中“对冲/抵消”的含义。"
+          },
+          {
+            "type": "readability",
+            "description": "“每年能力压”读起来节奏略显生硬，“能”作为助动词在此处与“力压”结合不够流畅，且削弱了“every single year”的绝对性语气。"
+          },
+          {
+            "type": "structure",
+            "description": "“A系列和 M系列”中，英文字母与中文字符之间缺少空格（A与系之间缺少空格，M与系之间虽然有，但排版不一致）。第10段中的“M系列 Mac”也存在同样的问题。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

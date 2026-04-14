@@ -1,0 +1,58 @@
+{
+  "section_id": "06-apples-five-transformational",
+  "new_terms": [
+    {
+      "term": "TrueDepth camera",
+      "suggested_translation": "原深感摄像头",
+      "context": "The TrueDepth camera projects 30,000 infrared dots onto your face",
+      "confidence": 1.0
+    },
+    {
+      "term": "LiDAR Scanner",
+      "suggested_translation": "激光雷达扫描仪",
+      "context": "became the foundation for LiDAR Scanner in the iPhone 12 Pro",
+      "confidence": 1.0
+    },
+    {
+      "term": "gross margin stacking",
+      "suggested_translation": "毛利率叠加",
+      "context": "offering it a gross margin stacking opportunity",
+      "confidence": 0.9
+    },
+    {
+      "term": "virtual IDM",
+      "suggested_translation": "虚拟IDM",
+      "context": "creating what is essentially a “virtual IDM”",
+      "confidence": 0.95
+    },
+    {
+      "term": "C1 modem",
+      "suggested_translation": "C1基带",
+      "context": "the C1 modem shipped in iPhone 16e",
+      "confidence": 0.9
+    },
+    {
+      "term": "DEC",
+      "suggested_translation": "DEC",
+      "context": "creator of DEC Alpha, StrongARM",
+      "confidence": 0.9
+    },
+    {
+      "term": "RF",
+      "suggested_translation": "射频",
+      "context": "modem design, RF, validation",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "a-series": "A系列",
+    "m-series": "M系列",
+    "secure enclave": "安全隔区",
+    "gpu": "GPU",
+    "tsmc": "台积电",
+    "qualcomm": "高通",
+    "intel": "英特尔"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T16:06:21.009840"
+}

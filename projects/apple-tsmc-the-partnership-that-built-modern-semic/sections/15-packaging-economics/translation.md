@@ -1,0 +1,7 @@
+苹果开创了台积电的先进封装业务。InFO 于 2016 年随 A10 首次亮相，苹果将其规模从 2018 年的 18 亿美元一路推升至 2025 年的 38 亿美元。2018 年，CoWoS 营收仅为 1.18 亿美元，堪称零头；到 2025 年，这一数字将高达 96 亿美元。转折点发生在 2022 年，当时 AI 需求迎来爆发。苹果凭借 InFO 一手缔造了台积电的先进封装业务，而如今，英伟达对 CoWoS 的需求已成为核心驱动力。
+
+2020 年，苹果占据了台积电非晶圆营收的 78%，这是其统治力的巅峰。当时 InFO 正为 A系列芯片扩大规模，而 CoWoS 客户寥寥无几。到 2024 年，苹果的份额跌至 36%；到 2025 年，这一数字将进一步降至 30%。苹果的绝对封装营收仍在持续增长，但以英伟达为首的 AI 客户，正以更快的速度扩张 CoWoS 规模。
+
+https://substackcdn.com/image/fetch/$s_!mCH9!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc62347a3-6aaf-43ed-96e5-fb586e0612e9_1360x987.png
+
+https://substackcdn.com/image/fetch/$s_!JN0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2e0b9e2-8634-4ad3-8f1a-c5b4cc1aa184_2330x1757.png

@@ -1,0 +1,55 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "Claude Code",
+      "suggested_translation": "Claude Code",
+      "context": "Anthropic's AI coding product driving software development automation.",
+      "confidence": 1.0
+    },
+    {
+      "term": "ARR",
+      "suggested_translation": "年度经常性收入 (ARR)",
+      "context": "Since more compute means more revenue, we can forecast ARR growth",
+      "confidence": 0.95
+    },
+    {
+      "term": "compute",
+      "suggested_translation": "算力",
+      "context": "Since more compute means more revenue... Anthropic’s growth will be constrained by compute.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Agent",
+      "suggested_translation": "智能体",
+      "context": "Claude Code is the inflection point for AI 'Agents'",
+      "confidence": 0.95
+    },
+    {
+      "term": "Trainium2/3",
+      "suggested_translation": "Trainium2/3",
+      "context": "associated supply chains such as Trainium2/3, TPUs and GPUs.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Coreweave",
+      "suggested_translation": "Coreweave",
+      "context": "most notably in our Coreweave Q3’2025 earnings preview",
+      "confidence": 1.0
+    },
+    {
+      "term": "AWS",
+      "suggested_translation": "AWS",
+      "context": "capex implications for its cloud partners AWS, Google Cloud, Azure",
+      "confidence": 1.0
+    }
+  ],
+  "term_usages": {
+    "nand flash": "NAND",
+    "capex": "CapEx",
+    "gpu": "GPUs",
+    "tpu": "TPUs"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T12:04:28.359032"
+}

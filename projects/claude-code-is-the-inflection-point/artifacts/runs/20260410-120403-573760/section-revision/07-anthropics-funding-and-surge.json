@@ -1,0 +1,39 @@
+{
+  "section_id": "07-anthropics-funding-and-surge",
+  "assessment": {
+    "passed": true,
+    "overall_score": 8.875,
+    "scores": {
+      "readability": 8.2,
+      "accuracy": 9.1,
+      "terminology": 10.0,
+      "completeness": 10.0,
+      "style": 5.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "这场争论中最引人深思的问题之一在于：过去一年里，GPT-5.2 High 一直在狂卷基准测试（Benchmark-maxxing，即极度追求跑分数据），并在自 ChatGPT 崛起以来的两年间稳居霸主地位。两者的 SWE-bench 验证结果基本持平，GPT-5.2 在 MMLU-pro 和 AIME 2025 上的得分甚至更高，但所有人却都对 Opus 趋之若鹜。那么，为什么 Claude Code 能够占据统治地位？",
+    "https://substackcdn.com/image/fetch/$s_!Emov!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0a2d6df3-68a8-4a9b-bb3d-5cab6dbb3db1_1430x1486.png",
+    "来源：SemiAnalysis Tokenomics 模型团队、Artificial Analysis，由 Claude Code 生成的 Chatbot Arena 数据",
+    "答案在于 Token 效率。Opus 4.5 的 Token 效率远超 GPT-5.2 High，这对完成长周期任务至关重要。",
+    "https://substackcdn.com/image/fetch/$s_!huRl!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff13013ab-dc6a-4355-9261-68aa478cf6ea_2025x1453.png",
+    "来源：Artificial Analysis、SemiAnalysis Tokenomics 模型团队，由 Claude Code 生成",
+    "长周期性能的本质，是在跨越多个上下文窗口的多步操作中持续叠加有效信号。尽管 ChatGPT 拥有大得多的上下文窗口，但“任务-token”效率曲线却揭示了截然不同的真相。唯基准至上 / 卷基准的 ChatGPT 或许在评估中得分更高，但完成实际任务所需的 token 数量却高出一个数量级，这直接摧毁了任何长周期规划的可行性。",
+    "我们认为，这是 Anthropic 筹谋已久的战略选择。关键不在于堆砌海量 token（这会在产生部分有效信号的同时引入大量噪声），而在追求极致纯净的信噪比。在跨上下文窗口的规划中，这一点至关重要，因为任何误差的不断累积都会导致长周期任务彻底失败。",
+    "https://substackcdn.com/image/fetch/$s_!Y25K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7b2dbfa-6b85-4d08-b665-1fdeaebe9b95_2105x1299.png",
+    "来源：SemiAnalysis Tokenomics 模型团队，由 Claude Code 生成",
+    "如果单次上下文窗口需要达到 90% 的成功率，在跨越 X 个步骤进行连乘叠加后，哪怕单步错误率极小，也注定会导致最终任务失败。",
+    "https://substackcdn.com/image/fetch/$s_!W7M1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7da088ff-4352-4681-9baa-df566ac3dbee_787x443.png",
+    "来源：Weka",
+    "Anthropic 显然极度重视 Token效率。据传，全新的 Sonnet 5 模型体积大幅缩小，上下文窗口更大，且性能与 Opus 4.5 旗鼓相当。这在扩大上下文窗口的同时，有效推高了高效 token 曲线的绝对上限。对于编程智能体（指能够自主规划并执行复杂任务的 AI）而言，其实际性能的差异将是天壤之别。这正是 Anthropic 领先于 OpenAI 的身位优势。",
+    "OpenAI 必将反击，也必须反击。全新的预训练是先决条件，因为更大规模似乎能改善长上下文任务的表现。去年 OpenAI 模型之所以如此强大，全凭极长的思维链 token 上下文来完成任务。然而，在处理跨越多个上下文窗口的问题时，这种优势却沦为累赘，因为它会不断叠加噪声。破局之法很直接：重新进行预训练。我们预计未来几个月内会有新动作，但在此之前，Anthropic 依然稳占鳌头。OpenAI 代码生成模型的实际采用率，远比乍看之下要低得多。",
+    "https://substackcdn.com/image/fetch/$s_!rsVn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9feb4401-1aee-4794-9742-058453165cb3_2009x1260.png",
+    "SemiAnalysis Tokenomics 团队，NPM",
+    "尽管 VSCode 上的数据表现要亮眼得多，但考虑到 GitHub 坐拥“数百万”开发者，单看 VSCode 的安装量往往无法精准反映其实际使用情况。",
+    "https://substackcdn.com/image/fetch/$s_!fQeQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5d00375f-d5c5-46ea-a6ed-1b5b49bec853_1050x522.png",
+    "来源：Bloomberry.com",
+    "2025 年一家独大的竞争格局，到 2026 年看起来更像是一场三足鼎立的角逐：Gemini 凭借图像模型，在 ChatGPT 曾经称霸的 C 端市场领跑；而 Anthropic 则在 B 端落地与智能体领域拔得头筹。"
+  ]
+}

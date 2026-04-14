@@ -1,0 +1,80 @@
+{
+  "section_id": "16-apple-gross-margin-savings-fro",
+  "new_terms": [
+    {
+      "term": "mask sets",
+      "suggested_translation": "光罩套件",
+      "context": "Apple spent $6B (including the $1B Intel modem acquisition, 2,200 engineers, mask sets, and qualification costs) to get here.",
+      "confidence": 0.95
+    },
+    {
+      "term": "qualification costs",
+      "suggested_translation": "认证成本",
+      "context": "including the $1B Intel modem acquisition, 2,200 engineers, mask sets, and qualification costs",
+      "confidence": 0.9
+    },
+    {
+      "term": "combo chip",
+      "suggested_translation": "组合芯片",
+      "context": "replaces Broadcom’s $11 combo chip with an internally designed alternative",
+      "confidence": 0.95
+    },
+    {
+      "term": "break-even volume",
+      "suggested_translation": "盈亏平衡销量",
+      "context": "Break-even volume is 1.3B units, roughly 5 years of iPhone production.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Total Product Gross Margin",
+      "suggested_translation": "总产品毛利率",
+      "context": "The Total Product Gross Margin trajectory tells the story: 34.4% in 2018 to 36.8% in 2025",
+      "confidence": 0.9
+    },
+    {
+      "term": "N4",
+      "suggested_translation": "N4",
+      "context": "Apple’s C1 alternative, built on N4 with a 50mm² die",
+      "confidence": 1.0
+    },
+    {
+      "term": "N1",
+      "suggested_translation": "N1",
+      "context": "The N1 chip, Apple’s first in-house Wi-Fi 7 solution",
+      "confidence": 1.0
+    },
+    {
+      "term": "X75",
+      "suggested_translation": "X75",
+      "context": "Qualcomm’s X75 5G chip commands a $20+ ASP",
+      "confidence": 1.0
+    },
+    {
+      "term": "OEM",
+      "suggested_translation": "OEM厂商",
+      "context": "Android OEMs still pay Qualcomm and MediaTek for chips Apple now makes itself.",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "m-series": "M系列",
+    "gm": "毛利率",
+    "asp": "平均售价 (ASP)",
+    "cogs": "销货成本 (COGS)",
+    "n3": "N3",
+    "nre": "一次性工程费用 (NRE)",
+    "c1 modem": "C1基带",
+    "die": "裸片",
+    "a-series": "A系列",
+    "c-series": "C系列",
+    "n-series": "N系列",
+    "intel": "英特尔",
+    "qualcomm": "高通",
+    "broadcom": "博通",
+    "tsmc": "台积电",
+    "mediatek": "联发科",
+    "vision pro": "Vision Pro"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T17:20:02.351647"
+}

@@ -1,7 +1,7 @@
 {
   "section_id": "00-intro",
   "title": "Introduction",
-  "title_translation": null,
+  "title_translation": "引言",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,65 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "subtitle",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "价格再次翻倍，超级周期规模更大，且持续时间可能比你想象的更长",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.955866",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "价格再度翻番，超级周期规模更庞大，持续时间或超乎你的想象",
+          "model": "pro",
+          "created_at": "2026-04-09T02:46:51.419604",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "价格再次翻倍，超级周期规模更大，且持续时间可能比你想象的更长",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.34,
+        "is_excellent": false,
+        "applied_terms": [
+          "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+          "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a dramatic hook and establishes the authoritative, predictive credibility of the author/publication.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Teases the foundational 'background' that will be explored in the subsequent section.",
+          "key_points": [
+            "Memory prices are doubling and are nowhere near their peak.",
+            "The current supercycle is significantly larger and longer than anticipated.",
+            "The publication's granular fab-by-fab modeling provides superior forecasting accuracy for revenue, pricing, and margin."
+          ],
+          "translation_notes": [
+            "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+            "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.8
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了大量不正常的排版空格（如“我们将 逐个晶圆厂”、“与 扩产计划”、“以此 预测”等），割裂了中文阅读的连贯性。此外，“进行更多分享”带有明显的“进行+抽象名词”的翻译腔结构。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -112,19 +165,72 @@
         "LINK_2",
         "LINK_3"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "byline",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "作者：Dylan Patel、Ray Wang、Myron Xie 等 5 人",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.955949",
+          "tokenized_text": "作者：[[[LINK_1|Dylan Patel]]]、[[[LINK_2|Ray Wang]]]、[[[LINK_3|Myron Xie]]] 等 5 人",
+          "format_issues": []
+        },
+        "pro": {
+          "text": "作者：Dylan Patel、Ray Wang、Myron Xie 及另外 2 人",
+          "model": "pro",
+          "created_at": "2026-04-09T02:46:51.419770",
+          "tokenized_text": "作者：[[[LINK_1|Dylan Patel]]]、[[[LINK_2|Ray Wang]]]、[[[LINK_3|Myron Xie]]] 及另外 2 人",
+          "format_issues": []
+        }
+      },
+      "confirmed": "作者：Dylan Patel、Ray Wang、Myron Xie 等 5 人",
+      "confirmed_tokenized": "作者：[[[LINK_1|Dylan Patel]]]、[[[LINK_2|Ray Wang]]]、[[[LINK_3|Myron Xie]]] 等 5 人",
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.34,
+        "is_excellent": false,
+        "applied_terms": [
+          "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+          "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a dramatic hook and establishes the authoritative, predictive credibility of the author/publication.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Teases the foundational 'background' that will be explored in the subsequent section.",
+          "key_points": [
+            "Memory prices are doubling and are nowhere near their peak.",
+            "The current supercycle is significantly larger and longer than anticipated.",
+            "The publication's granular fab-by-fab modeling provides superior forecasting accuracy for revenue, pricing, and margin."
+          ],
+          "translation_notes": [
+            "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+            "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.8
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了大量不正常的排版空格（如“我们将 逐个晶圆厂”、“与 扩产计划”、“以此 预测”等），割裂了中文阅读的连贯性。此外，“进行更多分享”带有明显的“进行+抽象名词”的翻译腔结构。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -151,12 +257,65 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "date_access",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "2026 年 2 月 6 日 · 付费文章",
+          "model": "source_metadata",
+          "created_at": "2026-04-09T02:42:37.955973",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "pro": {
+          "text": "2026 年 2 月 6 日 · 付费文章",
+          "model": "pro",
+          "created_at": "2026-04-09T02:46:51.419807",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "2026 年 2 月 6 日 · 付费文章",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.34,
+        "is_excellent": false,
+        "applied_terms": [
+          "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+          "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a dramatic hook and establishes the authoritative, predictive credibility of the author/publication.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Teases the foundational 'background' that will be explored in the subsequent section.",
+          "key_points": [
+            "Memory prices are doubling and are nowhere near their peak.",
+            "The current supercycle is significantly larger and longer than anticipated.",
+            "The publication's granular fab-by-fab modeling provides superior forecasting accuracy for revenue, pricing, and margin."
+          ],
+          "translation_notes": [
+            "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+            "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.8
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了大量不正常的排版空格（如“我们将 逐个晶圆厂”、“与 扩产计划”、“以此 预测”等），割裂了中文阅读的连贯性。此外，“进行更多分享”带有明显的“进行+抽象名词”的翻译腔结构。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -274,19 +433,65 @@
         "LINK_4",
         "LINK_5"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "存储器价格正陷入狂热。自 2024 年底以来，SemiAnalysis 已经连续一年多发出预警。最令人胆寒的是，我们距离顶点还差得很远。我们将逐个晶圆厂（fab）的产量与扩产计划，同各存储器类型的终端市场需求逐一对比，以此预测存储器营收、定价与利润率，精准度无人能及。这些内容早已在SemiAnalysis 存储模型中详尽披露，今天我们将向公众公开更多细节。先来介绍一些背景信息。",
+          "model": "pro",
+          "created_at": "2026-04-09T02:46:51.419937",
+          "tokenized_text": "存储器价格正陷入狂热。自 2024 年底以来，SemiAnalysis 已经连续一年多发出预警。最令人胆寒的是，我们距离顶点还差得很远。我们将[[[LINK_1|逐个晶圆厂（fab）的产量]]]与[[[LINK_2|扩产计划]]]，同各存储器类型的[[[LINK_3|终端市场需求]]]逐一对比，以此[[[LINK_4|预测存储器营收、定价与利润率]]]，精准度无人能及。这些内容早已在[[[LINK_5|SemiAnalysis 存储模型]]]中详尽披露，今天我们将向公众公开更多细节。先来介绍一些背景信息。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.34,
+        "is_excellent": false,
+        "applied_terms": [
+          "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+          "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a dramatic hook and establishes the authoritative, predictive credibility of the author/publication.",
+          "relation_to_previous": "N/A - Opening section.",
+          "relation_to_next": "Teases the foundational 'background' that will be explored in the subsequent section.",
+          "key_points": [
+            "Memory prices are doubling and are nowhere near their peak.",
+            "The current supercycle is significantly larger and longer than anticipated.",
+            "The publication's granular fab-by-fab modeling provides superior forecasting accuracy for revenue, pricing, and margin."
+          ],
+          "translation_notes": [
+            "Preserve the highly confident, slightly aggressive tone ('going crazy', 'scariest thing', 'better than anyone else').",
+            "Ensure financial and modeling terms (revenue, pricing, margin, end market demand) use precise industry-standard Chinese equivalents."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.8
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文中出现了大量不正常的排版空格（如“我们将 逐个晶圆厂”、“与 扩产计划”、“以此 预测”等），割裂了中文阅读的连贯性。此外，“进行更多分享”带有明显的“进行+抽象名词”的翻译腔结构。"
+          }
+        ]
+      },
       "history": []
     }
   ]

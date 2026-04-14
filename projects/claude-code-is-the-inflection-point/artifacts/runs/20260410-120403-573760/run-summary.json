@@ -1,0 +1,53 @@
+{
+  "project_id": "claude-code-is-the-inflection-point",
+  "status": "completed",
+  "total_sections": 10,
+  "translated_sections": 10,
+  "total_paragraphs": 170,
+  "translated_paragraphs": 170,
+  "error_count": 2,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "Claude Code",
+      "existing": "",
+      "new": "Claude Code",
+      "existing_note": "The name of Anthropic's terminal-native AI agent product, which is the central subject of the article.",
+      "new_note": "Anthropic's AI coding product driving software development automation.",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-10T12:04:28.358991"
+    },
+    {
+      "type": "term_conflict",
+      "term": "SemiAnalysis",
+      "existing": "",
+      "new": "SemiAnalysis",
+      "existing_note": "",
+      "new_note": "This is why SemiAnalysis believes we are yet again at another critical moment in AI.",
+      "section_id": "01-claude-code-and-the-agentic-fu",
+      "timestamp": "2026-04-10T12:04:47.403876"
+    }
+  ],
+  "started_at": "2026-04-10T12:04:03.573744",
+  "finished_at": "2026-04-10T12:13:30.554682",
+  "run_id": "20260410-120403-573760",
+  "artifacts_path": "projects\\claude-code-is-the-inflection-point\\artifacts\\runs\\20260410-120403-573760",
+  "export": {
+    "generated_at": "2026-04-10T12:13:30.451260",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\claude-code-is-the-inflection-point\\Claude Code 是转折点_zh.md",
+      "generated": true,
+      "bytes": 43719
+    }
+  },
+  "api_calls": 27,
+  "elapsed_seconds": 567.0,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

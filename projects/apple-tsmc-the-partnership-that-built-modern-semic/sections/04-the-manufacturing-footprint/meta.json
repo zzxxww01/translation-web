@@ -1,0 +1,786 @@
+{
+  "section_id": "04-the-manufacturing-footprint",
+  "title": "The Manufacturing Footprint",
+  "title_translation": "制造版图",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Mapping the Apple-TSMC Ecosystem: Where the Silicon is Born",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0113",
+      "parent_block_index": 113,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### Mapping the Apple-TSMC Ecosystem: Where the Silicon is Born",
+      "parent_block_plain_text": "Mapping the Apple-TSMC Ecosystem: Where the Silicon is Born",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 59,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "绘制苹果与台积电生态版图：芯片诞生之地",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884481",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "To understand the relationship, one must understand the physical reality of where these chips are made. TSMC’s dispersed network of GigaFabs, each specializing in specific nodes and packaging technologies, churn out over a billion chips for Apple each year. Apple’s supply chain is deeply entrenched in Taiwan’s western corridor, but geopolitical hedging is forcing a costly expansion to Arizona.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0114",
+      "parent_block_index": 114,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To understand the relationship, one must understand the physical reality of where these chips are made. TSMC’s dispersed network of GigaFabs, each specializing in specific nodes and packaging technologies, churn out over a billion chips for Apple each year. Apple’s supply chain is deeply entrenched in Taiwan’s western corridor, but geopolitical hedging is forcing a costly expansion to Arizona.",
+      "parent_block_plain_text": "To understand the relationship, one must understand the physical reality of where these chips are made. TSMC’s dispersed network of GigaFabs, each specializing in specific nodes and packaging technologies, churn out over a billion chips for Apple each year. Apple’s supply chain is deeply entrenched in Taiwan’s western corridor, but geopolitical hedging is forcing a costly expansion to Arizona.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 396,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "要理解双方的合作关系，必须先厘清芯片制造的物理分布。台积电的超大型晶圆厂（GigaFab）网络分布广泛，各厂专攻特定的制程节点与封装技术，每年为苹果量产逾十亿颗芯片。苹果的供应链深度扎根于台湾西部走廊，但出于地缘政治避险考量，目前正被迫向美国亚利桑那州进行成本高昂的产能扩张。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884533",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0115",
+      "parent_block_index": 115,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884559",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!j0vc!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1ce6de05-07de-4fc3-a8fb-2eeab978904d_2122x1037.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The Critical Back-End: Advanced Packaging",
+      "source_html": null,
+      "element_type": "h3",
+      "inline_elements": [],
+      "parent_block_id": "b0116",
+      "parent_block_index": 116,
+      "parent_block_type": "h3",
+      "parent_block_markdown": "### The Critical Back-End: Advanced Packaging",
+      "parent_block_plain_text": "The Critical Back-End: Advanced Packaging",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 41,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": true,
+      "heading_level": 3,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "关键后段工序：先进封装",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884581",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Advanced packaging is an area where the divergence between Apple and NVIDIA is most acute. Apple relies on InFO-PoP (Integrated Fan-Out Package-on-Package), which stacks DRAM directly on top of the SoC to minimize thickness for iPhones. This technology was pivotal in Apple’s decision to leave Samsung, as it allowed for thinner phones with better thermal dissipation. NVIDIA, on the other hand, relies on CoWoS, which places HBM (High Bandwidth Memory) side-by-side with the GPU on a silicon interposer for maximum bandwidth.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "InFO-PoP",
+          "start": 107,
+          "end": 115,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "CoWoS",
+          "start": 406,
+          "end": 411,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "parent_block_id": "b0117",
+      "parent_block_index": 117,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Advanced packaging is an area where the divergence between Apple and NVIDIA is most acute. Apple relies on **InFO-PoP** (Integrated Fan-Out Package-on-Package), which stacks DRAM directly on top of the SoC to minimize thickness for iPhones. This technology was pivotal in Apple’s decision to leave Samsung, as it allowed for thinner phones with better thermal dissipation. NVIDIA, on the other hand, relies on **CoWoS**, which places HBM (High Bandwidth Memory) side-by-side with the GPU on a silicon interposer for maximum bandwidth.",
+      "parent_block_plain_text": "Advanced packaging is an area where the divergence between Apple and NVIDIA is most acute. Apple relies on InFO-PoP (Integrated Fan-Out Package-on-Package), which stacks DRAM directly on top of the SoC to minimize thickness for iPhones. This technology was pivotal in Apple’s decision to leave Samsung, as it allowed for thinner phones with better thermal dissipation. NVIDIA, on the other hand, relies on CoWoS, which places HBM (High Bandwidth Memory) side-by-side with the GPU on a silicon interposer for maximum bandwidth.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "InFO-PoP",
+          "start": 107,
+          "end": 115,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "CoWoS",
+          "start": 406,
+          "end": 411,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 526,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在先进封装领域，苹果与英伟达的需求分化最为剧烈。苹果依赖集成扇出型层叠封装 (InFO-PoP)。该技术将 DRAM 直接堆叠在系统级芯片 (SoC) 上方，以最大限度降低 iPhone 厚度。这项技术是苹果当年决定弃用三星的关键，它不仅让手机更轻薄，还提升了散热性能。相比之下，英伟达则依赖CoWoS技术。该技术将 HBM 与 GPU 并排平铺于硅中介层上，以榨取最大带宽。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884701",
+          "tokenized_text": "在先进封装领域，苹果与英伟达的需求分化最为剧烈。苹果依赖[[[STRONG_1|集成扇出型层叠封装 (InFO-PoP)]]]。该技术将 DRAM 直接堆叠在系统级芯片 (SoC) 上方，以最大限度降低 iPhone 厚度。这项技术是苹果当年决定弃用三星的关键，它不仅让手机更轻薄，还提升了散热性能。相比之下，英伟达则依赖[[[STRONG_2|CoWoS]]]技术。该技术将 HBM 与 GPU 并排平铺于硅中介层上，以榨取最大带宽。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0118",
+      "parent_block_index": 118,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884730",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!AzhN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbcaf8167-7def-4e49-b5a4-4be445ee4d9a_2200x1021.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Apple and NVIDIA do not compete for the same packaging lines today. Apple dominates AP3 (InFO), while NVIDIA fights for AP5/AP6 (CoWoS). However, as Apple moves toward M5/M6 Ultra chips utilizing SoIC (System on Integrated Chips) and WMCM, they will begin to compete for the same advanced 3D packaging resources in AP6 and AP7. This convergence of roadmaps poses a future risk for capacity allocation.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0119",
+      "parent_block_index": 119,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Apple and NVIDIA do not compete for the same packaging lines today. Apple dominates AP3 (InFO), while NVIDIA fights for AP5/AP6 (CoWoS). However, as Apple moves toward M5/M6 Ultra chips utilizing SoIC (System on Integrated Chips) and WMCM, they will begin to compete for the same advanced 3D packaging resources in AP6 and AP7. This convergence of roadmaps poses a future risk for capacity allocation.",
+      "parent_block_plain_text": "Apple and NVIDIA do not compete for the same packaging lines today. Apple dominates AP3 (InFO), while NVIDIA fights for AP5/AP6 (CoWoS). However, as Apple moves toward M5/M6 Ultra chips utilizing SoIC (System on Integrated Chips) and WMCM, they will begin to compete for the same advanced 3D packaging resources in AP6 and AP7. This convergence of roadmaps poses a future risk for capacity allocation.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 401,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "目前，苹果与英伟达尚未在同一条封装产线上短兵相接。苹果独占 AP3 厂（先进封装厂）的 InFO 产能，而英伟达则在争夺 AP5 和 AP6 厂的 CoWoS 产能。然而，随着苹果转向采用系统级整合芯片（SoIC）和 WMCM 技术的 M5/M6 Ultra 芯片，双方必将在 AP6 和 AP7 厂争夺相同的先进 3D 封装资源。这种技术路线的趋同，为未来的产能分配埋下了隐患。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884752",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Fab 18 in Tainan is TSMC’s flagship facility for leading-edge production and it’s essentially “Apple’s fab.” The A19 Pro, A18 Pro, M3, M4 and M5 all come from Fab 18’s 3nm lines. This concentration in southern Taiwan is one of the key geopolitical vulnerabilities in Apple’s supply chain.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0120",
+      "parent_block_index": 120,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Fab 18 in Tainan is TSMC’s flagship facility for leading-edge production and it’s essentially “Apple’s fab.” The A19 Pro, A18 Pro, M3, M4 and M5 all come from Fab 18’s 3nm lines. This concentration in southern Taiwan is one of the key geopolitical vulnerabilities in Apple’s supply chain.",
+      "parent_block_plain_text": "Fab 18 in Tainan is TSMC’s flagship facility for leading-edge production and it’s essentially “Apple’s fab.” The A19 Pro, A18 Pro, M3, M4 and M5 all come from Fab 18’s 3nm lines. This concentration in southern Taiwan is one of the key geopolitical vulnerabilities in Apple’s supply chain.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 288,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "位于台南的 Fab 18 是台积电先进制程的旗舰工厂，本质上堪称“苹果专属晶圆厂”。A19 Pro、A18 Pro、M3、M4 以及 M5 芯片，均产自 Fab 18 的 3 纳米产线。这种将产能高度集中于台湾南部的布局，正是苹果供应链中不可忽视的地缘政治隐患。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884774",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0121",
+      "parent_block_index": 121,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png",
+          "model": "pro",
+          "created_at": "2026-04-10T16:05:09.884795",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!EigO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3704d0d1-ac28-4a70-80d6-072f950f608a_2118x695.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.1,
+        "is_excellent": false,
+        "applied_terms": [
+          "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+          "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Highlights the physical and technical divergence between Apple's and NVIDIA's needs, specifically focusing on the battleground of advanced packaging technologies.",
+          "relation_to_previous": "Moves from the historical timeline of the partnership to the current physical and technical realities on TSMC's production lines.",
+          "relation_to_next": "The mapping of physical production locations naturally leads to the geopolitical vulnerabilities discussed in 'Geographic Concentration Risk'.",
+          "key_points": [
+            "Apple and NVIDIA have fundamentally diverging advanced packaging needs (InFO-PoP vs. CoWoS).",
+            "Apple's reliance on InFO-PoP is driven by consumer device constraints (thickness, thermal dissipation, stacked DRAM).",
+            "NVIDIA's reliance on CoWoS is driven by AI compute needs (side-by-side HBM)."
+          ],
+          "translation_notes": [
+            "Do not translate technical acronyms (InFO-PoP, CoWoS, HBM, SoC, DRAM), but provide brief Chinese contextual wrappers if necessary (e.g., 集成扇出型封装 InFO-PoP).",
+            "Preserve the contrast between 'stacked' (堆叠) and 'side-by-side' (并排/平铺) memory architectures."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "annotation",
+            "description": "译文出现了严重的双重加注和多余空格问题：“苹果依赖 集成扇出型层叠封装 (InFO-PoP)（InFO-PoP (Integrated Fan-Out Package-on-Package)）”。"
+          },
+          {
+            "type": "structure",
+            "description": "译文中“AP3厂 (先进封装厂)”的排版不够规范，使用了半角括号且括号前有多余空格。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

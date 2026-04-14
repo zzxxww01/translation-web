@@ -1,0 +1,56 @@
+{
+  "section_id": "03-beyond-coding-the-beachhead",
+  "new_terms": [
+    {
+      "term": "agentic information processing",
+      "suggested_translation": "智能体化信息处理",
+      "context": "Refers to the core disruptive capability of AI agents to autonomously handle information-based tasks, extending beyond coding to the broader information economy.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Cowork",
+      "suggested_translation": "Cowork",
+      "context": "A new product name from Anthropic, described as 'Claude Code for general computing,' designed to automate general information work like creating spreadsheets and drafting reports.",
+      "confidence": 1.0
+    },
+    {
+      "term": "Task Horizon",
+      "suggested_translation": "任务视界",
+      "context": "A key metric measuring how long an AI agent can work on a task autonomously before failing. The text states this is doubling every 4-7 months, unlocking more complex automation.",
+      "confidence": 0.9
+    },
+    {
+      "term": "killer use case",
+      "suggested_translation": "杀手级用例",
+      "context": "A highly compelling application that drives mainstream adoption of a technology. Coding is presented as the initial killer use case for AI agents.",
+      "confidence": 0.95
+    },
+    {
+      "term": "total addressable market (TAM)",
+      "suggested_translation": "总体潜在市场 (TAM)",
+      "context": "A business term for the total revenue opportunity. The text argues that agentic AI expands the TAM beyond just LLMs to all information work.",
+      "confidence": 1.0
+    },
+    {
+      "term": "METR",
+      "suggested_translation": "METR",
+      "context": "An organization or project cited as the source for data on the growth of autonomous task horizons for AI agents.",
+      "confidence": 0.9
+    },
+    {
+      "term": "MCP",
+      "suggested_translation": "MCP",
+      "context": "An undefined abbreviation for a component in Anthropic's agent architecture, mentioned in the list: 'Claude Agent SDK, MCP, sub-agents'.",
+      "confidence": 0.8
+    },
+    {
+      "term": "sub-agents",
+      "suggested_translation": "子智能体",
+      "context": "A component in an agentic architecture, presumably a specialized agent that performs sub-tasks under a main controller or framework.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T00:13:32.484829"
+}

@@ -1,0 +1,844 @@
+{
+  "project_id": "memory-mania-how-a-once-in-four-decades-shortage-i",
+  "project_title": "Memory Mania: How a Once-in-Four-Decades Shortage Is Fueling a Memory Boom",
+  "review_required": true,
+  "generated_at": "2026-04-09T02:40:29.369600",
+  "total_candidates": 24,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "Supercycle",
+          "suggested_translation": "超级周期",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 12,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            }
+          ],
+          "contexts": [
+            "Prices are doubling again, Supercycle is bigger, and could last longer than you think",
+            "ranging from roughly 95% in a supercycle to as low as 50% in significant downcycles."
+          ],
+          "similar_terms": [
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "01-the-inevitability-of-memory-cy",
+      "section_title": "The Inevitability of Memory Cycles: A History of Booms and Busts",
+      "candidates": [
+        {
+          "term": "cost per bit",
+          "suggested_translation": "每比特成本",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "01-the-inevitability-of-memory-cy",
+          "related_sections": [
+            {
+              "section_id": "01-the-inevitability-of-memory-cy",
+              "section_title": "The Inevitability of Memory Cycles: A History of Booms and Busts"
+            }
+          ],
+          "contexts": [
+            "Shrinking transistors reduced cost per bit... sustain cost-per-bit declines"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "02-memory-cycle-part-ii-key-feat",
+      "section_title": "Memory Cycle Part II: Key Features of a Cycle",
+      "candidates": [
+        {
+          "term": "upcycle",
+          "suggested_translation": "上行周期",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "02-memory-cycle-part-ii-key-feat",
+          "related_sections": [
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            }
+          ],
+          "contexts": [
+            "DRAM pricing in this cycle peaked earlier and rolled over more quickly than in previous upcycles."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "bit supply",
+          "suggested_translation": "位元供应",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "02-memory-cycle-part-ii-key-feat",
+          "related_sections": [
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            }
+          ],
+          "contexts": [
+            "increases bit supply without requiring new “greenfield” wafer capacity additions."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "ASP",
+          "suggested_translation": "平均售价 (ASP)",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "02-memory-cycle-part-ii-key-feat",
+          "related_sections": [
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            },
+            {
+              "section_id": "04-supercycle-could-be-a-double-e",
+              "section_title": "Supercycle Could be a Double-Edged Sword"
+            },
+            {
+              "section_id": "05-hbm4-competition-and-hbm3e-pri",
+              "section_title": "HBM4 Competition and HBM3E Pricing"
+            }
+          ],
+          "contexts": [
+            "Server DRAM also enjoys higher ASP and margins compared to PC and mobile",
+            "limited evidence to date of ASP increases sufficient to fully offset this pressure",
+            "market consensus shifted toward a roughly 15–20% ASP decline for HBM3E 12-hi"
+          ],
+          "similar_terms": [
+            {
+              "original": "capex",
+              "translation": "资本支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Capital Expenditure",
+              "similarity": 0.5
+            },
+            {
+              "original": "Texas",
+              "translation": "德克萨斯州",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "连续出现可以适当缩写成德州",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "LPDDR",
+          "suggested_translation": "LPDDR",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "02-memory-cycle-part-ii-key-feat",
+          "related_sections": [
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            },
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            }
+          ],
+          "contexts": [
+            "the rapid rise of LPDDR within the overall DRAM mix as mobile demand scaled.",
+            "DDDR/LPDDR/HBM in AI servers"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "greenfield",
+          "suggested_translation": "新建（绿地）",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-memory-cycle-part-ii-key-feat",
+          "related_sections": [
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            }
+          ],
+          "contexts": [
+            "without requiring new “greenfield” wafer capacity additions."
+          ],
+          "similar_terms": [
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.588
+            },
+            {
+              "original": "revenue",
+              "translation": "营收",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.588
+            },
+            {
+              "original": "yield",
+              "translation": "良率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.533
+            }
+          ]
+        },
+        {
+          "term": "hyperscaler",
+          "suggested_translation": "超大规模云服务商",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-memory-cycle-part-ii-key-feat",
+          "related_sections": [
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            }
+          ],
+          "contexts": [
+            "the early hyperscaler buildout wave (e.g., Google, Amazon, Facebook)."
+          ],
+          "similar_terms": [
+            {
+              "original": "neural network",
+              "translation": "神经网络",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "OEM",
+          "suggested_translation": "OEM",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-memory-cycle-part-ii-key-feat",
+          "related_sections": [
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            },
+            {
+              "section_id": "04-supercycle-could-be-a-double-e",
+              "section_title": "Supercycle Could be a Double-Edged Sword"
+            }
+          ],
+          "contexts": [
+            "OEMs, hyperscalers, and channel partners were taking a defensive posture",
+            "broad-based margin pressure for mobile and PC OEMs"
+          ],
+          "similar_terms": [
+            {
+              "original": "BoM",
+              "translation": "物料清单",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "node",
+              "translation": "制程节点",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+              "similarity": 0.571
+            },
+            {
+              "original": "opex",
+              "translation": "运营支出",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Operating Expense",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "scale-out",
+          "suggested_translation": "横向扩展",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-memory-cycle-part-ii-key-feat",
+          "related_sections": [
+            {
+              "section_id": "02-memory-cycle-part-ii-key-feat",
+              "section_title": "Memory Cycle Part II: Key Features of a Cycle"
+            }
+          ],
+          "contexts": [
+            "Server DRAM intensity increased due to virtualization and scale-out services."
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "semiconductor",
+              "translation": "半导体",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "03-ai-driven-memory-supercycle-b",
+      "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve",
+      "candidates": [
+        {
+          "term": "commodity DRAM",
+          "suggested_translation": "大宗DRAM",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 22,
+          "first_occurrence": "03-ai-driven-memory-supercycle-b",
+          "related_sections": [
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            },
+            {
+              "section_id": "05-hbm4-competition-and-hbm3e-pri",
+              "section_title": "HBM4 Competition and HBM3E Pricing"
+            },
+            {
+              "section_id": "06-how-the-cycle-will-evolve",
+              "section_title": "How the Cycle Will Evolve"
+            }
+          ],
+          "contexts": [
+            "commodity DRAM is also forecast to remain structurally tight",
+            "Unlike commodity DRAM, HBM typically provides suppliers with greater visibility...",
+            "sustained pressure on commodity... relative to commodity DRAM"
+          ],
+          "similar_terms": [
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.444
+            }
+          ]
+        },
+        {
+          "term": "bit output",
+          "suggested_translation": "比特产出",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "03-ai-driven-memory-supercycle-b",
+          "related_sections": [
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            }
+          ],
+          "contexts": [
+            "superior bit output from manufacturing and selling commodity DRAM"
+          ],
+          "similar_terms": [
+            {
+              "original": "throughput",
+              "translation": "吞吐量",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.6
+            },
+            {
+              "original": "TPU",
+              "translation": "TPU",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": "张量处理器 (Tensor Processing Unit)",
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "WFE",
+          "suggested_translation": "WFE (晶圆制造设备)",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "03-ai-driven-memory-supercycle-b",
+          "related_sections": [
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            },
+            {
+              "section_id": "06-how-the-cycle-will-evolve",
+              "section_title": "How the Cycle Will Evolve"
+            }
+          ],
+          "contexts": [
+            "DRAM EUV layer trends and WFE capex forecasts",
+            "rising demand for WFE... WFE capex will increase"
+          ],
+          "similar_terms": [
+            {
+              "original": "wafer",
+              "translation": "晶圆",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.75
+            }
+          ]
+        },
+        {
+          "term": "cleanroom",
+          "suggested_translation": "洁净室",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "03-ai-driven-memory-supercycle-b",
+          "related_sections": [
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            }
+          ],
+          "contexts": [
+            "memory suppliers are now constrained by insufficient cleanroom capacity"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "node migration",
+          "suggested_translation": "节点演进",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "03-ai-driven-memory-supercycle-b",
+          "related_sections": [
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            }
+          ],
+          "contexts": [
+            "the primary driver of this growth will be accelerated node migration to 1b and 1c"
+          ],
+          "similar_terms": [
+            {
+              "original": "deposition",
+              "translation": "沉积",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.583
+            },
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "12-Hi",
+          "suggested_translation": "12层堆叠",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-ai-driven-memory-supercycle-b",
+          "related_sections": [
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            }
+          ],
+          "contexts": [
+            "in the case of HBM3E 12-Hi"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "DDR",
+          "suggested_translation": "DDR",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-ai-driven-memory-supercycle-b",
+          "related_sections": [
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            }
+          ],
+          "contexts": [
+            "DDR in general-purpose servers"
+          ],
+          "similar_terms": [
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "PSMC",
+          "suggested_translation": "力积电",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-ai-driven-memory-supercycle-b",
+          "related_sections": [
+            {
+              "section_id": "03-ai-driven-memory-supercycle-b",
+              "section_title": "AI-Driven Memory Supercycle: Bigger, Longer, and a Shortage that is Harder to Solve"
+            },
+            {
+              "section_id": "06-how-the-cycle-will-evolve",
+              "section_title": "How the Cycle Will Evolve"
+            }
+          ],
+          "contexts": [
+            "Even Micron’s recently acquired P5 Tongluo fab from PSMC is unlikely to contribute meaningful wafer output",
+            "recent acquisition of PSMC’s fab"
+          ],
+          "similar_terms": [
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.75
+            },
+            {
+              "original": "HPC",
+              "translation": "HPC",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高性能计算 (High Performance Computing)",
+              "similarity": 0.571
+            },
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.571
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-supercycle-could-be-a-double-e",
+      "section_title": "Supercycle Could be a Double-Edged Sword",
+      "candidates": [
+        {
+          "term": "Core Research",
+          "suggested_translation": "Core Research",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-supercycle-could-be-a-double-e",
+          "related_sections": [
+            {
+              "section_id": "04-supercycle-could-be-a-double-e",
+              "section_title": "Supercycle Could be a Double-Edged Sword"
+            }
+          ],
+          "contexts": [
+            "highlighted this last week on our institutional platform, Core Research."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "DDR5",
+          "suggested_translation": "DDR5",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-supercycle-could-be-a-double-e",
+          "related_sections": [
+            {
+              "section_id": "04-supercycle-could-be-a-double-e",
+              "section_title": "Supercycle Could be a Double-Edged Sword"
+            }
+          ],
+          "contexts": [
+            "DDR5 and LPDDR5 pricing have surged over the past year."
+          ],
+          "similar_terms": [
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "LPDDR5",
+          "suggested_translation": "LPDDR5",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-supercycle-could-be-a-double-e",
+          "related_sections": [
+            {
+              "section_id": "04-supercycle-could-be-a-double-e",
+              "section_title": "Supercycle Could be a Double-Edged Sword"
+            }
+          ],
+          "contexts": [
+            "DDR5 and LPDDR5 pricing have surged over the past year."
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "05-hbm4-competition-and-hbm3e-pri",
+      "section_title": "HBM4 Competition and HBM3E Pricing",
+      "candidates": [
+        {
+          "term": "HBM3E 12-hi",
+          "suggested_translation": "12层HBM3E",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "05-hbm4-competition-and-hbm3e-pri",
+          "related_sections": [
+            {
+              "section_id": "05-hbm4-competition-and-hbm3e-pri",
+              "section_title": "HBM4 Competition and HBM3E Pricing"
+            }
+          ],
+          "contexts": [
+            "pricing negotiations for HBM3E 12-hi and, likely, HBM4 this year."
+          ],
+          "similar_terms": [
+            {
+              "original": "memory chip",
+              "translation": "存储芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            },
+            {
+              "original": "HBM",
+              "translation": "HBM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高带宽内存 (High Bandwidth Memory)",
+              "similarity": 0.429
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "06-how-the-cycle-will-evolve",
+      "section_title": "How the Cycle Will Evolve",
+      "candidates": [
+        {
+          "term": "ASML",
+          "suggested_translation": "阿斯麦 (ASML)",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "06-how-the-cycle-will-evolve",
+          "related_sections": [
+            {
+              "section_id": "06-how-the-cycle-will-evolve",
+              "section_title": "How the Cycle Will Evolve"
+            }
+          ],
+          "contexts": [
+            "confirmed by ASML and LRCX’s management"
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.571
+            },
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            },
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "multipatterning",
+          "suggested_translation": "多重曝光",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "06-how-the-cycle-will-evolve",
+          "related_sections": [
+            {
+              "section_id": "06-how-the-cycle-will-evolve",
+              "section_title": "How the Cycle Will Evolve"
+            }
+          ],
+          "contexts": [
+            "where EUV can replace DUV multipatterning"
+          ],
+          "similar_terms": [
+            {
+              "original": "self-attention",
+              "translation": "自注意力机制",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.552
+            },
+            {
+              "original": "training",
+              "translation": "训练",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.522
+            },
+            {
+              "original": "machine learning",
+              "translation": "机器学习",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.516
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

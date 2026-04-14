@@ -1,0 +1,551 @@
+{
+  "section_id": "12-device-shipments",
+  "title": "Device Shipments",
+  "title_translation": "产品出货量",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The device base is massive but mature. Apple now ships over 600 million devices annually across all categories. But growth rates tell a different story: the 20%+ annual growth of 2020-2021 has compressed to around 3% through the forecast period. The portfolio is collectively plateauing.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0261",
+      "parent_block_index": 261,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The device base is massive but mature. Apple now ships over 600 million devices annually across all categories. But growth rates tell a different story: the 20%+ annual growth of 2020-2021 has compressed to around 3% through the forecast period. The portfolio is collectively plateauing.",
+      "parent_block_plain_text": "The device base is massive but mature. Apple now ships over 600 million devices annually across all categories. But growth rates tell a different story: the 20%+ annual growth of 2020-2021 has compressed to around 3% through the forecast period. The portfolio is collectively plateauing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 287,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "设备基数庞大但已趋于成熟。苹果目前全品类设备年出货量已超 6 亿台。但增长率却揭示了另一番景象：2020 至 2021 年间超 20% 的年增长率，在预测期内已压缩至 3% 左右。整体产品组合正步入平台期。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:25:23.935376",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "iPhone volumes peaked nearly a decade ago and have oscillated in a narrow band ever since. The forecast through 2030 shows low-single-digit growth, barely keeping pace with population. iPhone drives the majority of unit volumes but contributes almost nothing to incremental device growth.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0262",
+      "parent_block_index": 262,
+      "parent_block_type": "p",
+      "parent_block_markdown": "iPhone volumes peaked nearly a decade ago and have oscillated in a narrow band ever since. The forecast through 2030 shows low-single-digit growth, barely keeping pace with population. iPhone drives the majority of unit volumes but contributes almost nothing to incremental device growth.",
+      "parent_block_plain_text": "iPhone volumes peaked nearly a decade ago and have oscillated in a narrow band ever since. The forecast through 2030 shows low-single-digit growth, barely keeping pace with population. iPhone drives the majority of unit volumes but contributes almost nothing to incremental device growth.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 288,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "iPhone 出货量在近十年前便已触顶，此后始终在窄幅震荡。到 2030 年的预测显示其仅有低个位数增长，勉强跟上人口增速。iPhone 贡献了绝大部分出货量，但对增量设备增长几乎毫无贡献。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:25:23.935451",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b702f05-f11d-4923-bbab-ed54ad45d6a0_2077x1421.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b702f05-f11d-4923-bbab-ed54ad45d6a0_2077x1421.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0263",
+      "parent_block_index": 263,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b702f05-f11d-4923-bbab-ed54ad45d6a0_2077x1421.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b702f05-f11d-4923-bbab-ed54ad45d6a0_2077x1421.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b702f05-f11d-4923-bbab-ed54ad45d6a0_2077x1421.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b702f05-f11d-4923-bbab-ed54ad45d6a0_2077x1421.png",
+          "model": "pro",
+          "created_at": "2026-04-10T16:25:23.935490",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!hJUe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3b702f05-f11d-4923-bbab-ed54ad45d6a0_2077x1421.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0193568a-d512-439e-84e9-60c6e1d30864_3190x1120.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0193568a-d512-439e-84e9-60c6e1d30864_3190x1120.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0264",
+      "parent_block_index": 264,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0193568a-d512-439e-84e9-60c6e1d30864_3190x1120.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0193568a-d512-439e-84e9-60c6e1d30864_3190x1120.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0193568a-d512-439e-84e9-60c6e1d30864_3190x1120.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0193568a-d512-439e-84e9-60c6e1d30864_3190x1120.png",
+          "model": "pro",
+          "created_at": "2026-04-10T16:25:23.935522",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!-vT0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0193568a-d512-439e-84e9-60c6e1d30864_3190x1120.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Wearables carried growth, then stalled. AirPods was the fastest-ramping product in Apple’s history, reaching meaningful scale within four years of launch. Watch followed a similar trajectory. Both categories have since plateaued, with growth rates compressing to low-single-digits by 2025.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0265",
+      "parent_block_index": 265,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Wearables carried growth, then stalled. AirPods was the fastest-ramping product in Apple’s history, reaching meaningful scale within four years of launch. Watch followed a similar trajectory. Both categories have since plateaued, with growth rates compressing to low-single-digits by 2025.",
+      "parent_block_plain_text": "Wearables carried growth, then stalled. AirPods was the fastest-ramping product in Apple’s history, reaching meaningful scale within four years of launch. Watch followed a similar trajectory. Both categories have since plateaued, with growth rates compressing to low-single-digits by 2025.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 289,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "可穿戴设备曾拉动增长，随后陷入停滞。AirPods 是苹果历史上起量最快的产品，发布不到四年便形成可观规模。Watch 也经历了类似轨迹。此后这两大品类均步入平台期，到 2025 年其增长率将压缩至低个位数。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:25:23.935555",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "New categories are not moving the needle. Vision Pro shipments through 2030 remain a rounding error relative to the 600M+ device base. Its contribution is silicon intensity, primarily. The C-series chips powering spatial computing consume wafer capacity disproportionate to device shipments.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0266",
+      "parent_block_index": 266,
+      "parent_block_type": "p",
+      "parent_block_markdown": "New categories are not moving the needle. Vision Pro shipments through 2030 remain a rounding error relative to the 600M+ device base. Its contribution is silicon intensity, primarily. The C-series chips powering spatial computing consume wafer capacity disproportionate to device shipments.",
+      "parent_block_plain_text": "New categories are not moving the needle. Vision Pro shipments through 2030 remain a rounding error relative to the 600M+ device base. Its contribution is silicon intensity, primarily. The C-series chips powering spatial computing consume wafer capacity disproportionate to device shipments.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 291,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "新品类影响甚微。相对于超 6 亿台的设备基数，到 2030 年 Vision Pro 的出货量仍只是个零头。其主要贡献在于硅含量。驱动空间计算的 C系列芯片消耗了与其设备出货量极不相称的晶圆产能。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:25:23.935585",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Server appears in the forecast. A new “Server” line item emerges in 2024 and grows through 2030. Volumes are small, but the category’s existence signals Apple’s datacenter silicon ambitions (Baltra) are more than rumors.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0267",
+      "parent_block_index": 267,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Server appears in the forecast. A new “Server” line item emerges in 2024 and grows through 2030. Volumes are small, but the category’s existence signals Apple’s datacenter silicon ambitions (Baltra) are more than rumors.",
+      "parent_block_plain_text": "Server appears in the forecast. A new “Server” line item emerges in 2024 and grows through 2030. Volumes are small, but the category’s existence signals Apple’s datacenter silicon ambitions (Baltra) are more than rumors.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 220,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "预测数据中出现了服务器的身影。2024 年新增了“服务器”单列项目，并将在 2030 年前持续增长。虽然出货量较小，但该品类的存在表明，苹果的数据中心芯片野心（Baltra）绝非空穴来风。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:25:23.935617",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "The 2025-2030 growth outlook is muted. Total device shipment growth averages around 3% annually through the forecast, down from double-digits earlier in the decade. Apple’s wafer demand growth will increasingly decouple from device unit growth, driven by silicon intensity per device rather than more devices shipped.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0268",
+      "parent_block_index": 268,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The 2025-2030 growth outlook is muted. Total device shipment growth averages around 3% annually through the forecast, down from double-digits earlier in the decade. Apple’s wafer demand growth will increasingly decouple from device unit growth, driven by silicon intensity per device rather than more devices shipped.",
+      "parent_block_plain_text": "The 2025-2030 growth outlook is muted. Total device shipment growth averages around 3% annually through the forecast, down from double-digits earlier in the decade. Apple’s wafer demand growth will increasingly decouple from device unit growth, driven by silicon intensity per device rather than more devices shipped.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 317,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "2025 至 2030 年的增长前景疲软。在预测期内，设备总出货量年均增长率约为 3%，远不及本年代初的两位数增速。苹果的晶圆需求增长将日益与设备出货量增长脱钩，其驱动力在于单台设备的硅含量，而非出货量的增加。",
+          "model": "pro",
+          "created_at": "2026-04-10T16:25:23.935648",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.675,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology|readability",
+            "description": "1. 术语微调：'silicon intensity' 译为'硅含量'略显生硬，容易让人联想到化学成分（如钢材的硅含量）。在半导体商业分析语境中，通常译作'含硅量'或'单机含硅量'（指单台设备消耗的硅片面积/芯片价值）。\n2. 格式问题：'C系列'中的英文字母与中文字符之间缺失空格。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

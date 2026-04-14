@@ -1,0 +1,62 @@
+{
+  "section_id": "01-anchor-tenant",
+  "new_terms": [
+    {
+      "term": "Super Power Rail",
+      "suggested_translation": "超级电轨",
+      "context": "TSMC’s trade name is Super Power Rail variant for HPC.",
+      "confidence": 0.95
+    },
+    {
+      "term": "bleeding-edge capacity",
+      "suggested_translation": "尖端产能",
+      "context": "Apple was the only company capable of pre-funding bleeding-edge capacity at scale.",
+      "confidence": 0.9
+    },
+    {
+      "term": "thermal envelope",
+      "suggested_translation": "散热包络",
+      "context": "Backside power delivery, gate-all-around transistors, and thermal envelopes are optimized for HPC.",
+      "confidence": 0.9
+    },
+    {
+      "term": "wafer mix",
+      "suggested_translation": "晶圆产品组合",
+      "context": "iPhone’s share of Apple’s wafer mix fell from 74% to 57%.",
+      "confidence": 0.85
+    },
+    {
+      "term": "capacity allocation",
+      "suggested_translation": "产能分配",
+      "context": "Our Foundry Model tracks revenue, wafer shipments, and capacity allocation.",
+      "confidence": 0.95
+    },
+    {
+      "term": "S-series",
+      "suggested_translation": "S系列",
+      "context": "forecasts silicon demand across chip families (A-series, M-series, S-series, N-series, C-series etc.)",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "anchor tenant": "锚定客户",
+    "capex": "资本支出",
+    "purchase obligations": "采购承诺",
+    "backside power delivery": "背面供电",
+    "gate-all-around transistors": "环绕栅极晶体管",
+    "gross margin": "毛利率",
+    "GM": "毛利率",
+    "HPC": "HPC",
+    "N3": "N3",
+    "N2": "N2",
+    "A16": "A16",
+    "A14": "A14",
+    "N-series": "N系列",
+    "C-series": "C系列",
+    "A-series": "A系列",
+    "M-series": "M系列",
+    "fab": "晶圆厂"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T15:33:29.609616"
+}

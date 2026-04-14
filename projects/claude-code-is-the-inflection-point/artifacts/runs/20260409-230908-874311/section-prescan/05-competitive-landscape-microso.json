@@ -1,0 +1,50 @@
+{
+  "section_id": "05-competitive-landscape-microso",
+  "new_terms": [
+    {
+      "term": "Office 365",
+      "suggested_translation": "Office 365",
+      "context": "A specific Microsoft product name, part of the seat-based software model being discussed.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Salesforce",
+      "suggested_translation": "Salesforce",
+      "context": "A specific CRM product used as an example of a form and workflow wrapper at risk from AI agents.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Tableau",
+      "suggested_translation": "Tableau",
+      "context": "A data visualization software product mentioned as an outdated concept in the age of AI.",
+      "confidence": 0.95
+    },
+    {
+      "term": "Figma",
+      "suggested_translation": "Figma",
+      "context": "A collaborative design tool for creating wireframes, mentioned as being at risk.",
+      "confidence": 0.95
+    },
+    {
+      "term": "UX",
+      "suggested_translation": "用户体验",
+      "context": "Abbreviation for User Experience. The text states that 'Every bit of UX or preference is at risk.'",
+      "confidence": 0.9
+    },
+    {
+      "term": "form and workflow wrapper",
+      "suggested_translation": "表单和工作流包装器",
+      "context": "A descriptive phrase for software like Salesforce that provides a structured interface over a database.",
+      "confidence": 0.85
+    },
+    {
+      "term": "scaffolded by AI",
+      "suggested_translation": "由 AI 搭建",
+      "context": "Refers to the process of AI automatically generating the basic structure (scaffolding) for a form or workflow.",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T00:23:24.902237"
+}

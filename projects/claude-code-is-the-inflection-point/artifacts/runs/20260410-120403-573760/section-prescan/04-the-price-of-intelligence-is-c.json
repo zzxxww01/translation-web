@@ -1,0 +1,63 @@
+{
+  "section_id": "04-the-price-of-intelligence-is-c",
+  "new_terms": [
+    {
+      "term": "SaaS",
+      "suggested_translation": "SaaS (软件即服务)",
+      "context": "SaaS itself is just crystalized information processing of workflows into code.",
+      "confidence": 0.99
+    },
+    {
+      "term": "CRM",
+      "suggested_translation": "CRM (客户关系管理)",
+      "context": "That was effectively the cost of a SaaS workflow like CRM...",
+      "confidence": 0.99
+    },
+    {
+      "term": "BI",
+      "suggested_translation": "BI (商业智能)",
+      "context": "BI/analytics (agents querying databases) data entry...",
+      "confidence": 0.99
+    },
+    {
+      "term": "ITSM",
+      "suggested_translation": "ITSM (IT服务管理)",
+      "context": "...ITSM (L1/L2 tickets triage) and back-office reconciliation is already in the process of automation!",
+      "confidence": 0.99
+    },
+    {
+      "term": "ROI",
+      "suggested_translation": "投资回报率 (ROI)",
+      "context": "An agent that handles even a fraction of their workflow a day at ~6-7 dollars is a 10-30x ROI...",
+      "confidence": 0.99
+    },
+    {
+      "term": "L1/L2 tickets",
+      "suggested_translation": "L1/L2 工单",
+      "context": "ITSM (L1/L2 tickets triage) and back-office reconciliation...",
+      "confidence": 0.95
+    },
+    {
+      "term": "knowledge worker",
+      "suggested_translation": "知识工作者",
+      "context": "The median US knowledge worker costs ~350-500 dollars a day fully loaded.",
+      "confidence": 0.95
+    },
+    {
+      "term": "OpenAI Frontier",
+      "suggested_translation": "OpenAI Frontier",
+      "context": "OpenAI just announced Frontier focused on enterprise adoption.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "agent": "智能体",
+    "claude code": "Claude Code",
+    "gross margin": "毛利率",
+    "mcp": "MCP",
+    "ui": "UI",
+    "llm": "LLM"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-10T12:05:49.481960"
+}

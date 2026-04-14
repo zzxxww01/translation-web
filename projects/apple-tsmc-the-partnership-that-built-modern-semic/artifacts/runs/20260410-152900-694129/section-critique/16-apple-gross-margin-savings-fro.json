@@ -1,0 +1,30 @@
+{
+  "section_id": "16-apple-gross-margin-savings-fro",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 9.0,
+    "accuracy_score": 9.5,
+    "conciseness_score": 9.0,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "structure",
+        "severity": "medium",
+        "original_text": "Today, the M-series chip costs Apple estimated $40-50 to manufacture.",
+        "description": "中英文之间缺少必要的空格，违反了中文排版规范（CJK-Latin spacing）。此问题在全文多次出现，例如第 7、15、17 段的“M系列”、“A系列”、“C系列”、“N系列”，以及第 10 段的“C1基带”。",
+        "why_it_matters": "在中英文和数字之间保留空格是专业的排版规范，能显著提升阅读体验，符合科技与金融分析文章的严谨性要求。",
+        "suggestion": "在英文字母/数字与中文字符之间增加空格，如将“M系列”改为“M 系列”，将“C1基带”改为“C1 基带”。请全局检查并修正。"
+      },
+      {
+        "paragraph_index": 14,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Gross Margin Savings",
+        "description": "译文“毛利率层面的成本节约”表达略显生硬，且“毛利率”（比例）与“成本节约”（绝对值）的搭配略显勉强。",
+        "why_it_matters": "作为小标题，应尽量精炼有力，准确传达“成本节约带来了毛利/毛利率提升”的递进含义。",
+        "suggestion": "建议优化为“推高毛利的成本节约”或直接译为“成本节约与毛利提升”。"
+      }
+    ]
+  }
+}

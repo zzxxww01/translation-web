@@ -1,0 +1,20 @@
+{
+  "section_id": "05-competitive-landscape-microso",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.45,
+    "scores": {
+      "readability": 9.5,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 8.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "成本暴跌正在摧毁按席位付费的软件模式。随着 SemiAnalysis 内部大规模采用 Claude Code，受份额转移冲击最严重的，莫过于微软按席位付费的 Office 365。微软堪称“人工点击按钮”模式的代名词，推而广之，它也代表了所有按席位付费的软件。值得关注的高危阵地，正是那些专为人类操作而设计、应用于跨行业工作流的软件。",
+    "如果智能体（指能够自主规划并执行复杂任务的 AI）能直接代你查询潜在客户数据，企业为何还要统一部署 Salesforce？Salesforce 本质上只是一个表单与工作流的封装外壳，而 AI 完全可以将这些表单与工作流直接构建为底层数据库，并按需执行查询。任何细枝末节的 UX（用户体验）或操作偏好都已岌岌可危。Tableau 的核心概念已经过时；Figma（专供人类绘制线框图的工具）也面临危机。人机交互的核心方式即将发生根本性变革，而微软正处于旧范式的中心。"
+  ]
+}
