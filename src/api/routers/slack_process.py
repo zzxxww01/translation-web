@@ -8,10 +8,25 @@ from ..middleware import BadRequestException, ServiceUnavailableException
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
 from .slack_models import (
+    ConversationMessage,
     SlackProcessRequest,
     SlackProcessResponse,
     normalize_variants,
 )
+
+
+def format_conversation_history(history: list[ConversationMessage]) -> str:
+    """Format conversation history into a readable string."""
+    if not history:
+        return ""
+
+    lines = ["## Conversation history"]
+    for msg in history:
+        role_label = "[Me]" if msg.role == "me" else "[Them]"
+        lines.append(f"{role_label}: {msg.content}")
+    lines.append("")
+
+    return "\n".join(lines)
 
 
 router = APIRouter()
