@@ -1,0 +1,19 @@
+{
+  "file_structure": {
+    "passed": true,
+    "issues": []
+  },
+  "data_completeness": {
+    "passed": true,
+    "issues": []
+  },
+  "term_counts": {
+    "passed": true,
+    "issues": []
+  },
+  "reference_integrity": {
+    "passed": true,
+    "issues": []
+  },
+  "overall_passed": true
+}
