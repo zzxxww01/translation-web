@@ -1,8 +1,13 @@
 """Slack router request/response models."""
 
-from typing import Optional
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
+
+
+class ConversationMessage(BaseModel):
+    role: Literal["them", "me"]
+    content: str
 
 
 class SlackReplyVariant(BaseModel):
@@ -14,6 +19,7 @@ class SlackReplyVariant(BaseModel):
 class SlackProcessRequest(BaseModel):
     message: str
     custom_prompt: Optional[str] = None
+    conversation_history: list[ConversationMessage] = Field(default_factory=list)
 
 
 class SlackProcessResponse(BaseModel):
@@ -31,6 +37,7 @@ class SlackSyncResponse(BaseModel):
 
 class SlackComposeRequest(BaseModel):
     content: str
+    conversation_history: list[ConversationMessage] = Field(default_factory=list)
 
 
 class SlackComposeResponse(BaseModel):
