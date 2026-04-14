@@ -51,11 +51,18 @@ class TerminologyMigration:
             "warnings": []
         }
 
-    def _generate_term_id(self, scope: str, original: str, translation: Optional[str]) -> str:
-        """Generate deterministic UUID for a term."""
-        # Use scope:original:translation as the unique key
-        key = f"{scope}:{original}:{translation or ''}"
-        return str(uuid.uuid5(TERM_NAMESPACE, key))
+    def _generate_term_id(self, scope: str, original: str, project_id: Optional[str] = None) -> str:
+        """Generate deterministic UUID for a term.
+
+        Uses the same logic as src.models.terminology.generate_term_id()
+        to ensure ID consistency.
+        """
+        namespace = uuid.UUID("6ba7b810-9dad-11d1-80b4-00c04fd430c8")  # DNS namespace
+        if scope == "global":
+            name = f"global:{original}"
+        else:
+            name = f"project:{project_id}:{original}"
+        return str(uuid.uuid5(namespace, name))
 
     def _map_strategy(self, old_strategy: str) -> str:
         """Map old strategy to new strategy."""
@@ -94,17 +101,15 @@ class TerminologyMigration:
                 # For TRANSLATE strategies with no translation, use empty string
                 translation = ""
 
-        # Generate deterministic ID
-        term_id = self._generate_term_id(scope, original, translation)
+        # Generate deterministic ID using same logic as model
+        term_id = self._generate_term_id(scope, original, project_id)
 
-        # Create Term
+        # Create Term (removed source_lang/target_lang - fields don't exist in model)
         term = Term(
             id=term_id,
             original=original,
             translation=translation,
-            strategy=new_strategy,
-            source_lang="en",  # Default, could be inferred
-            target_lang="zh"   # Default, could be inferred
+            strategy=new_strategy
         )
 
         # Parse updated_at

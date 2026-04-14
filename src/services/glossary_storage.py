@@ -282,7 +282,7 @@ class GlossaryStorage:
         return None
 
     def add_term(self, term: Term, metadata: TermMetadata) -> Term:
-        """Add a new term (atomic operation).
+        """Add a new term (atomic operation with rollback).
 
         Args:
             term: Term object to add
@@ -298,27 +298,43 @@ class GlossaryStorage:
         scope = metadata.scope
         project_id = metadata.project_id
 
-        # Load existing terms
+        # Load existing data
         terms = self.load_terms(scope, project_id)
+        metadata_list = self.load_metadata(scope, project_id)
 
         # Check for duplicates
         if any(t.id == term.id for t in terms):
             raise ValueError(f"Term with id {term.id} already exists")
 
-        # Add term
-        terms.append(term)
-        self.save_terms(terms, scope, project_id)
+        # Backup original data for rollback
+        original_terms = terms.copy()
+        original_metadata = metadata_list.copy()
 
-        # Add metadata
-        metadata_list = self.load_metadata(scope, project_id)
-        metadata_list.append(metadata)
-        self.save_metadata(metadata_list, scope, project_id)
+        try:
+            # Add term
+            terms.append(term)
+            self.save_terms(terms, scope, project_id)
 
-        logger.info(f"Added term: {term.original} ({term.id}) in {scope} scope")
-        return term
+            # Add metadata
+            metadata_list.append(metadata)
+            self.save_metadata(metadata_list, scope, project_id)
+
+            logger.info(f"Added term: {term.original} ({term.id}) in {scope} scope")
+            return term
+
+        except Exception as e:
+            # Rollback on failure
+            logger.error(f"Failed to add term {term.id}, rolling back: {e}")
+            try:
+                self.save_terms(original_terms, scope, project_id)
+                self.save_metadata(original_metadata, scope, project_id)
+                logger.info(f"Rollback successful for term {term.id}")
+            except Exception as rollback_error:
+                logger.critical(f"ROLLBACK FAILED for term {term.id}: {rollback_error}")
+            raise
 
     def update_term(self, term: Term, metadata: TermMetadata, changes: dict) -> Term:
-        """Update an existing term.
+        """Update an existing term (atomic operation with rollback).
 
         Args:
             term: Updated Term object
@@ -335,8 +351,15 @@ class GlossaryStorage:
         scope = metadata.scope
         project_id = metadata.project_id
 
-        # Update term
+        # Load existing data
         terms = self.load_terms(scope, project_id)
+        metadata_list = self.load_metadata(scope, project_id)
+
+        # Backup original data for rollback
+        original_terms = terms.copy()
+        original_metadata = metadata_list.copy()
+
+        # Find term
         found = False
         for i, t in enumerate(terms):
             if t.id == term.id:
@@ -347,17 +370,32 @@ class GlossaryStorage:
         if not found:
             raise ValueError(f"Term with id {term.id} not found")
 
-        self.save_terms(terms, scope, project_id)
+        try:
+            # Update term
+            self.save_terms(terms, scope, project_id)
 
-        # Update metadata
-        metadata.updated_at = datetime.now(timezone.utc)
-        metadata_list = self.load_metadata(scope, project_id)
-        for i, m in enumerate(metadata_list):
-            if m.term_id == term.id:
-                metadata_list[i] = metadata
-                break
+            # Update metadata
+            metadata.updated_at = datetime.now(timezone.utc)
+            for i, m in enumerate(metadata_list):
+                if m.term_id == term.id:
+                    metadata_list[i] = metadata
+                    break
 
-        self.save_metadata(metadata_list, scope, project_id)
+            self.save_metadata(metadata_list, scope, project_id)
+
+            logger.info(f"Updated term: {term.original} ({term.id})")
+            return term
+
+        except Exception as e:
+            # Rollback on failure
+            logger.error(f"Failed to update term {term.id}, rolling back: {e}")
+            try:
+                self.save_terms(original_terms, scope, project_id)
+                self.save_metadata(original_metadata, scope, project_id)
+                logger.info(f"Rollback successful for term {term.id}")
+            except Exception as rollback_error:
+                logger.critical(f"ROLLBACK FAILED for term {term.id}: {rollback_error}")
+            raise
 
         logger.info(f"Updated term: {term.original} ({term.id})")
         return term
@@ -573,7 +611,8 @@ class GlossaryStorage:
         scope: str,
         project_id: Optional[str] = None,
         status: Optional[str] = None,
-        original_pattern: Optional[str] = None
+        original_pattern: Optional[str] = None,
+        include_deleted: bool = False
     ) -> List[Tuple[Term, TermMetadata]]:
         """Find terms matching criteria.
 
@@ -582,6 +621,7 @@ class GlossaryStorage:
             project_id: Required when scope is "project"
             status: Filter by status (optional)
             original_pattern: Filter by original text pattern (case-insensitive, optional)
+            include_deleted: If False (default), exclude soft-deleted terms
 
         Returns:
             List of (Term, TermMetadata) tuples
@@ -594,22 +634,31 @@ class GlossaryStorage:
 
         results = []
         for term in terms:
-            # Apply filters
+            # Get metadata first
+            metadata = metadata_map.get(term.id)
+            if not metadata:
+                continue
+
+            # Filter by soft delete status
+            if not include_deleted and metadata.is_deleted:
+                continue
+
+            # Apply status filter
             if status and term.status != status:
                 continue
 
+            # Apply pattern filter
             if original_pattern and original_pattern.lower() not in term.original.lower():
                 continue
 
-            # Get metadata
-            metadata = metadata_map.get(term.id)
-            if metadata:
-                results.append((term, metadata))
+            results.append((term, metadata))
 
         return results
 
     def get_active_terms(self, project_id: Optional[str] = None) -> List[Term]:
         """Get all active terms (global + project, with project overriding global).
+
+        Only returns terms where Term.status == "active" AND TermMetadata.is_deleted == False.
 
         Args:
             project_id: Project identifier (optional)
@@ -617,15 +666,31 @@ class GlossaryStorage:
         Returns:
             List of active Term objects, with project terms overriding global terms
         """
-        # Load global active terms
+        # Load global terms and metadata
         global_terms = self.load_terms("global")
-        global_active = {t.original.lower(): t for t in global_terms if t.status == "active"}
+        global_metadata_list = self.load_metadata("global")
+        global_metadata_map = {m.term_id: m for m in global_metadata_list}
 
-        # Load project active terms (if project_id provided)
+        # Filter global active terms (status == "active" AND not deleted)
+        global_active = {}
+        for t in global_terms:
+            metadata = global_metadata_map.get(t.id)
+            if t.status == "active" and metadata and not metadata.is_deleted:
+                global_active[t.original.lower()] = t
+
+        # Load project terms and metadata (if project_id provided)
         if project_id:
             try:
                 project_terms = self.load_terms("project", project_id)
-                project_active = {t.original.lower(): t for t in project_terms if t.status == "active"}
+                project_metadata_list = self.load_metadata("project", project_id)
+                project_metadata_map = {m.term_id: m for m in project_metadata_list}
+
+                # Filter project active terms (status == "active" AND not deleted)
+                project_active = {}
+                for t in project_terms:
+                    metadata = project_metadata_map.get(t.id)
+                    if t.status == "active" and metadata and not metadata.is_deleted:
+                        project_active[t.original.lower()] = t
 
                 # Project terms override global terms
                 result = {**global_active, **project_active}

@@ -24,3 +24,4 @@ python-multipart>=0.0.22
 python-slugify>=8.0.0
 python-dotenv>=1.0.0
 tzdata>=2025.3
+portalocker>=2.8.0  # File locking for concurrent access safety

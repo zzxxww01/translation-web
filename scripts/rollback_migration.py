@@ -28,7 +28,9 @@ class MigrationRollback:
         self.base_path = base_path
         self.old_storage_path = base_path / "glossary"
         self.new_storage_path = base_path / "glossary_new"
-        self.backup_path = base_path / "glossary_backup"
+        # Updated: Use actual backup location created by migrate_terminology.py
+        self.backup_base_path = base_path / "backups" / "terminology"
+        self.backup_path = None  # Will be set to latest backup if found
         self.issues: List[str] = []
         self.warnings: List[str] = []
 
@@ -90,8 +92,20 @@ class MigrationRollback:
         return True
 
     def _check_backup(self) -> bool:
-        """Check if backup exists."""
-        return self.backup_path.exists()
+        """Check if backup exists and find the latest one."""
+        if not self.backup_base_path.exists():
+            return False
+
+        # Find all backup directories (format: YYYYMMDD_HHMMSS)
+        backup_dirs = [d for d in self.backup_base_path.iterdir() if d.is_dir()]
+
+        if not backup_dirs:
+            return False
+
+        # Use the latest backup (sorted by name, which is timestamp-based)
+        self.backup_path = sorted(backup_dirs)[-1]
+        print(f"  Found backup: {self.backup_path.name}")
+        return True
 
     def _remove_new_storage(self):
         """Remove new storage directory."""
@@ -100,13 +114,25 @@ class MigrationRollback:
 
     def _restore_from_backup(self):
         """Restore old storage from backup."""
-        if self.backup_path.exists():
-            # Remove current old storage
+        if self.backup_path and self.backup_path.exists():
+            # The backup contains glossary/ and projects/ directories
+            backup_glossary = self.backup_path / "glossary"
+            backup_projects = self.backup_path / "projects"
+
+            # Remove current old storage if exists
             if self.old_storage_path.exists():
                 shutil.rmtree(self.old_storage_path)
 
-            # Restore from backup
-            shutil.copytree(self.backup_path, self.old_storage_path)
+            # Restore glossary from backup
+            if backup_glossary.exists():
+                shutil.copytree(backup_glossary, self.old_storage_path)
+
+            # Restore projects from backup
+            projects_path = self.base_path / "projects"
+            if backup_projects.exists():
+                if projects_path.exists():
+                    shutil.rmtree(projects_path)
+                shutil.copytree(backup_projects, projects_path)
 
     def _verify_rollback(self):
         """Verify rollback was successful."""
@@ -133,7 +159,8 @@ class MigrationRollback:
             "warnings": self.warnings,
             "actions": {
                 "new_storage_removed": not dry_run and not self.new_storage_path.exists(),
-                "backup_restored": not dry_run and self._check_backup(),
+                "backup_restored": not dry_run and self.backup_path is not None,
+                "backup_used": str(self.backup_path) if self.backup_path else None
             }
         }
 
