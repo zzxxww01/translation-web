@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-04-14T18:47:31.992856",
+  "mode": "dry_run",
+  "success": true,
+  "issues": [],
+  "warnings": [
+    "No backup found"
+  ],
+  "actions": {
+    "new_storage_removed": false,
+    "backup_restored": false
+  }
+}

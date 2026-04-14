@@ -43,35 +43,35 @@ class MigrationRollback:
         print("Step 1: Verifying preconditions...")
         if not self._verify_preconditions():
             return self._generate_report(success=False)
-        print("✓ Preconditions verified\n")
+        print("[OK] Preconditions verified\n")
 
         # Step 2: Check if backup exists
         print("Step 2: Checking for backup...")
         has_backup = self._check_backup()
         if has_backup:
-            print("✓ Backup found\n")
+            print("[OK] Backup found\n")
         else:
-            print("⚠ No backup found, will keep old storage as-is\n")
+            print("[WARNING] No backup found, will keep old storage as-is\n")
             self.warnings.append("No backup found")
 
         # Step 3: Remove new storage
         print("Step 3: Removing new storage...")
         if not dry_run:
             self._remove_new_storage()
-        print(f"{'✓ Would remove' if dry_run else '✓ Removed'} new storage\n")
+        print(f"[OK] {'Would remove' if dry_run else 'Removed'} new storage\n")
 
         # Step 4: Restore from backup if exists
         if has_backup:
             print("Step 4: Restoring from backup...")
             if not dry_run:
                 self._restore_from_backup()
-            print(f"{'✓ Would restore' if dry_run else '✓ Restored'} from backup\n")
+            print(f"[OK] {'Would restore' if dry_run else 'Restored'} from backup\n")
 
         # Step 5: Verify rollback
         print("Step 5: Verifying rollback...")
         if not dry_run:
             self._verify_rollback()
-        print(f"{'✓ Would verify' if dry_run else '✓ Verified'} rollback\n")
+        print(f"[OK] {'Would verify' if dry_run else 'Verified'} rollback\n")
 
         return self._generate_report(success=True, dry_run=dry_run)
 
@@ -148,12 +148,12 @@ class MigrationRollback:
         if self.issues:
             print("\nIssues:")
             for issue in self.issues:
-                print(f"  ✗ {issue}")
+                print(f"  - {issue}")
 
         if self.warnings:
             print("\nWarnings:")
             for warning in self.warnings:
-                print(f"  ⚠ {warning}")
+                print(f"  - {warning}")
 
         print(f"\n{'='*60}\n")
 
