@@ -1,0 +1,194 @@
+[
+  {
+    "id": "a48273a0-e051-5ef4-b9b0-6ea945f45a69",
+    "original": "TSMC",
+    "translation": "台积电",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "dd25c504-f2da-5308-9e92-98355a828c2d",
+    "original": "Apple Silicon",
+    "translation": "Apple Silicon",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8aaf01e8-83f7-594e-b9b3-454b7859db16",
+    "original": "foundry",
+    "translation": "晶圆代工厂",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fc5621c5-84dc-5a24-8916-cbb47a30badc",
+    "original": "wafer",
+    "translation": "晶圆",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3afb692f-3cee-5783-ba91-a62a784bba86",
+    "original": "fab",
+    "translation": "晶圆厂",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "dcfd1dc1-cba1-5fb6-b610-0a6fd36f6875",
+    "original": "node",
+    "translation": "制程节点",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d5175c25-ac1b-50b2-8b89-ea901f53584d",
+    "original": "EUV",
+    "translation": "EUV",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "879b3cd8-c6cd-541e-ac4d-b683123bca55",
+    "original": "HPC",
+    "translation": "高性能计算",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "1373fe03-a701-518e-9e19-7b89463c50ed",
+    "original": "SoC",
+    "translation": "SoC",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "59236e13-e558-55b8-a654-7ee3ac1e691e",
+    "original": "GPU",
+    "translation": "GPU",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2a74d323-7ced-59c6-97e9-c8ec4edecda5",
+    "original": "CPU",
+    "translation": "CPU",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0e4a93ef-bcfe-5ba8-8e03-a551bf1f5229",
+    "original": "AI accelerator",
+    "translation": "AI 加速器",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "519b1abe-fc75-523e-8280-f48051c33c7a",
+    "original": "chiplet",
+    "translation": "芯粒",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "433412ac-4860-5b7a-ad46-d4e49900dcb8",
+    "original": "packaging",
+    "translation": "封装",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "10d367f3-cf9d-5b89-a98a-7b459fc5ca35",
+    "original": "CoWoS",
+    "translation": "CoWoS",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "34b0fffc-6b7b-587c-a337-99bad96ceaf0",
+    "original": "InFO",
+    "translation": "InFO",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "6ce4849d-b64f-5f72-9fb7-dea806c5f775",
+    "original": "yield",
+    "translation": "良率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7648d47b-7bf0-5fcb-aec3-ff80b6533330",
+    "original": "capex",
+    "translation": "资本支出",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "6f271ed4-b701-5445-ab6a-020b83355d0e",
+    "original": "R&D",
+    "translation": "研发",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0e2092b7-96d7-5395-802d-9228e7ec5457",
+    "original": "IDM",
+    "translation": "IDM",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "cc508d75-1c2f-5fcb-9e97-eb4f69314c3a",
+    "original": "fabless",
+    "translation": "无晶圆厂",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4054b5a2-f5a1-5582-8cb3-2158016edf49",
+    "original": "anchor tenant",
+    "translation": "锚定客户",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "91f677b8-3108-59a1-b267-3e517cbac258",
+    "original": "gross margin",
+    "translation": "毛利率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ee5991d1-9ba2-51f0-862d-de8aca5f621f",
+    "original": "revenue",
+    "translation": "营收",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  }
+]

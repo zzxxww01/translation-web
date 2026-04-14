@@ -1,0 +1,1303 @@
+{
+  "version": 30,
+  "terms": [
+    {
+      "original": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570216"
+    },
+    {
+      "original": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "tags": [
+        "company",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:48:26.972894"
+    },
+    {
+      "original": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570256"
+    },
+    {
+      "original": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570261"
+    },
+    {
+      "original": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570265"
+    },
+    {
+      "original": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570270"
+    },
+    {
+      "original": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.581089"
+    },
+    {
+      "original": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:48:10.854327"
+    },
+    {
+      "original": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570284"
+    },
+    {
+      "original": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570294"
+    },
+    {
+      "original": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570299"
+    },
+    {
+      "original": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570304"
+    },
+    {
+      "original": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570307"
+    },
+    {
+      "original": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-15T20:41:42.518425"
+    },
+    {
+      "original": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570326"
+    },
+    {
+      "original": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570344"
+    },
+    {
+      "original": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570349"
+    },
+    {
+      "original": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570367"
+    },
+    {
+      "original": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570374"
+    },
+    {
+      "original": "deposition",
+      "translation": "沉积",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570378"
+    },
+    {
+      "original": "CMP",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "note": "Chemical Mechanical Planarization",
+      "tags": [
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570384"
+    },
+    {
+      "original": "SoC",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "note": "系统级芯片 (System on Chip)",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570389"
+    },
+    {
+      "original": "GPU",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "note": "图形处理器",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570394"
+    },
+    {
+      "original": "CPU",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "note": "中央处理器",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570404"
+    },
+    {
+      "original": "NPU",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "note": "神经网络处理器",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570408"
+    },
+    {
+      "original": "TPU",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "note": "张量处理器 (Tensor Processing Unit)",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-08T14:30:49.498568"
+    },
+    {
+      "original": "chiplet",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570417"
+    },
+    {
+      "original": "packaging",
+      "translation": "封装",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570422"
+    },
+    {
+      "original": "CoWoS",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "note": "Chip on Wafer on Substrate",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570427"
+    },
+    {
+      "original": "InFO",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "note": "Integrated Fan-Out",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570431"
+    },
+    {
+      "original": "HBM",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "note": "高带宽内存 (High Bandwidth Memory)",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570435"
+    },
+    {
+      "original": "SRAM",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "note": "静态随机存取存储器",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570440"
+    },
+    {
+      "original": "DRAM",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "note": "动态随机存取存储器",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570445"
+    },
+    {
+      "original": "NAND flash",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570450"
+    },
+    {
+      "original": "logic chip",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570454"
+    },
+    {
+      "original": "memory chip",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "chip",
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570458"
+    },
+    {
+      "original": "analog chip",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570462"
+    },
+    {
+      "original": "RF chip",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "note": "Radio Frequency",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570466"
+    },
+    {
+      "original": "AI",
+      "translation": "AI",
+      "strategy": "preserve",
+      "note": "人工智能",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570475"
+    },
+    {
+      "original": "LLM",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "note": "大语言模型 (Large Language Model)",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570479"
+    },
+    {
+      "original": "token",
+      "translation": "词元",
+      "strategy": "preserve_annotate",
+      "note": "不翻译，保留原文",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-10T23:02:23.690524"
+    },
+    {
+      "original": "context window",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570486"
+    },
+    {
+      "original": "inference",
+      "translation": "推理",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570490"
+    },
+    {
+      "original": "training",
+      "translation": "训练",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570494"
+    },
+    {
+      "original": "fine-tuning",
+      "translation": "微调",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570498"
+    },
+    {
+      "original": "RLHF",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "note": "基于人类反馈的强化学习",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570502"
+    },
+    {
+      "original": "transformer",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "note": "一种深度学习模型架构",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570505"
+    },
+    {
+      "original": "self-attention",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570512"
+    },
+    {
+      "original": "parameter",
+      "translation": "参数",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570516"
+    },
+    {
+      "original": "weights",
+      "translation": "权重",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570520"
+    },
+    {
+      "original": "neural network",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570530"
+    },
+    {
+      "original": "deep learning",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570533"
+    },
+    {
+      "original": "machine learning",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570537"
+    },
+    {
+      "original": "GPU cluster",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570541"
+    },
+    {
+      "original": "data center",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570548"
+    },
+    {
+      "original": "cloud computing",
+      "translation": "云计算",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570551"
+    },
+    {
+      "original": "edge computing",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570555"
+    },
+    {
+      "original": "throughput",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570560"
+    },
+    {
+      "original": "latency",
+      "translation": "延迟",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570563"
+    },
+    {
+      "original": "bandwidth",
+      "translation": "带宽",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570566"
+    },
+    {
+      "original": "yield",
+      "translation": "良率",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570570"
+    },
+    {
+      "original": "utilization rate",
+      "translation": "利用率",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570573"
+    },
+    {
+      "original": "efficiency",
+      "translation": "效率",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570576"
+    },
+    {
+      "original": "performance",
+      "translation": "性能",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570579"
+    },
+    {
+      "original": "benchmark",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "note": "只有表示大模型等的评测方式时翻译成基准测试",
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-16T00:48:52.469999"
+    },
+    {
+      "original": "FLOPS",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "note": "每秒浮点运算次数",
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570618"
+    },
+    {
+      "original": "TOPS",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570622"
+    },
+    {
+      "original": "capex",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "note": "Capital Expenditure",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570625"
+    },
+    {
+      "original": "opex",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "note": "Operating Expense",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570642"
+    },
+    {
+      "original": "R&D",
+      "translation": "研发",
+      "strategy": "translate",
+      "note": "Research and Development",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570645"
+    },
+    {
+      "original": "IDM",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "note": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570649"
+    },
+    {
+      "original": "fabless",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "note": "无晶圆厂设计公司",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570652"
+    },
+    {
+      "original": "anchor tenant",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "note": "核心大客户",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570679"
+    },
+    {
+      "original": "gross margin",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570684"
+    },
+    {
+      "original": "revenue",
+      "translation": "营收",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570687"
+    },
+    {
+      "original": "net income",
+      "translation": "净收入",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570691"
+    },
+    {
+      "original": "market share",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570694"
+    },
+    {
+      "original": "HPC",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "note": "高性能计算 (High Performance Computing)",
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570709"
+    },
+    {
+      "original": "IoT",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "note": "物联网 (Internet of Things)",
+      "tags": [
+        "general"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570712"
+    },
+    {
+      "original": "semiconductor",
+      "translation": "半导体",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570719"
+    },
+    {
+      "original": "integrated circuit",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "note": "IC",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570723"
+    },
+    {
+      "original": "transistor",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570726"
+    },
+    {
+      "original": "virtualization",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "general"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570734"
+    },
+    {
+      "original": "scalability",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-12T12:47:53.570737"
+    },
+    {
+      "original": "SemiAnalysis",
+      "translation": null,
+      "strategy": "preserve",
+      "note": null,
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-13T21:15:37.217159"
+    },
+    {
+      "original": "prefill",
+      "translation": "预填充",
+      "strategy": "translate",
+      "note": "大模型的预填充阶段，常和decode一起出现",
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-16T00:28:15.876965"
+    },
+    {
+      "original": "decode",
+      "translation": "解码",
+      "strategy": "translate",
+      "note": "大模型的解码阶段，常和prefill一起出现",
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-16T00:28:10.009040"
+    },
+    {
+      "original": "Texas",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "note": "连续出现可以适当缩写成德州",
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-16T17:01:09.125132"
+    },
+    {
+      "original": "Vera",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "英伟达的架构",
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-17T21:08:58.841297"
+    },
+    {
+      "original": "Rubin",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "英伟达架构",
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-17T21:09:23.512853"
+    },
+    {
+      "original": "BoM",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-17T21:10:21.304276"
+    },
+    {
+      "original": "cableless",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-28T12:00:16.054111"
+    },
+    {
+      "original": "TCO",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "note": null,
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-28T12:11:03.402326"
+    },
+    {
+      "original": "Blackwell",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "英伟达的显卡",
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-03-28T12:16:02.253585"
+    }
+  ]
+}

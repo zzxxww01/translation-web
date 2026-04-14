@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "terms": [
+    {
+      "original": "TSMC",
+      "translation": "台积电",
+      "strategy": "preserve",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence": null
+    },
+    {
+      "original": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence": null
+    },
+    {
+      "original": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence": null
+    },
+    {
+      "original": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence": null
+    },
+    {
+      "original": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm",
+      "first_occurrence": null
+    },
+    {
+      "original": "EUV",
+      "translation": "EUV",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence": null
+    },
+    {
+      "original": "HPC",
+      "translation": "高性能计算",
+      "strategy": "first_annotate",
+      "note": "High Performance Computing",
+      "first_occurrence": null
+    },
+    {
+      "original": "SoC",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "note": "系统级芯片 (System on Chip)",
+      "first_occurrence": null
+    },
+    {
+      "original": "GPU",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "note": "图形处理器",
+      "first_occurrence": null
+    },
+    {
+      "original": "CPU",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "note": "中央处理器",
+      "first_occurrence": null
+    },
+    {
+      "original": "AI accelerator",
+      "translation": "AI 加速器",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "chiplet",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "packaging",
+      "translation": "封装",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "CoWoS",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "note": "Chip on Wafer on Substrate",
+      "first_occurrence": null
+    },
+    {
+      "original": "InFO",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "note": "Integrated Fan-Out",
+      "first_occurrence": null
+    },
+    {
+      "original": "yield",
+      "translation": "良率",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "capex",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "note": "Capital Expenditure",
+      "first_occurrence": null
+    },
+    {
+      "original": "R&D",
+      "translation": "研发",
+      "strategy": "translate",
+      "note": "Research and Development",
+      "first_occurrence": null
+    },
+    {
+      "original": "IDM",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "note": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "first_occurrence": null
+    },
+    {
+      "original": "fabless",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "note": "无晶圆厂设计公司",
+      "first_occurrence": null
+    },
+    {
+      "original": "anchor tenant",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "note": "核心大客户",
+      "first_occurrence": null
+    },
+    {
+      "original": "gross margin",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "revenue",
+      "translation": "营收",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    }
+  ]
+}

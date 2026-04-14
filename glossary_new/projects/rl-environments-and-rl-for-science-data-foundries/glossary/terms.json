@@ -1,0 +1,410 @@
+[
+  {
+    "id": "9133a9c6-d333-5dd7-af22-a2204174e5cc",
+    "original": "RL",
+    "translation": "RL (强化学习)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "95237953-dc2a-59ff-b5e8-73ab0649f83e",
+    "original": "post-training",
+    "translation": "后训练",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f8f3d160-83ec-5e89-81aa-93dd6c2c329a",
+    "original": "pre-training",
+    "translation": "预训练",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2228c760-87da-5e18-ae28-d1ae2104429b",
+    "original": "GDPval",
+    "translation": "GDPval",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b564a92f-26f7-56cc-b530-7bd9e8edd5ea",
+    "original": "Computer Use Agents",
+    "translation": "计算机使用智能体",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "68f23137-3b4e-54c8-aabc-325e7d853c31",
+    "original": "Meta",
+    "translation": "Meta",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "dd8d1842-f8c9-558c-aecd-f112606d0c56",
+    "original": "evaluations",
+    "translation": "评估",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "af9539dd-f16a-5e9d-ac7c-46d25d67edfe",
+    "original": "Scale AI",
+    "translation": "Scale AI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "848b4220-f83a-527a-9e80-3fe0b5507e1e",
+    "original": "mid-training",
+    "translation": "中期训练",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e38d56e5-3e0f-59d5-9fe5-e9e5339fb1b0",
+    "original": "MCP",
+    "translation": "MCP",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d474222d-903e-5c1d-86e6-7077f0d2ba8a",
+    "original": "AWS",
+    "translation": "AWS",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "01894bbe-c71f-5991-bf6d-6fab0db9d772",
+    "original": "UI",
+    "translation": "UI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "46b8a20a-0956-5b4c-a3e4-9374e383032a",
+    "original": "UI gyms",
+    "translation": "UI训练场",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e525f2e9-9061-5768-b820-22e3ac011b4f",
+    "original": "API",
+    "translation": "API",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f4e2a0a4-5e63-5059-8bdb-d47ffed20d9f",
+    "original": "RL environments",
+    "translation": "强化学习环境",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "dcd2c6bc-6a9e-5947-b12d-4366a3493961",
+    "original": "PR",
+    "translation": "PR (Pull Request/拉取请求)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ecc0d0cc-37d3-52ca-8443-b6c28f743b70",
+    "original": "rollout",
+    "translation": "推演 / 采样轨迹",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "cb3a6208-343f-5deb-8313-3c658ed8b9b1",
+    "original": "ARR",
+    "translation": "ARR (年度经常性收入)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0e670e93-7d51-54de-9f03-b934f0edc2c0",
+    "original": "Data Foundry",
+    "translation": "数据代工厂",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e0a71d37-9f2b-50fa-b6b3-4c94c6b3c8c2",
+    "original": "rubric",
+    "translation": "评分标准",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "892c029c-588e-5a12-aade-d198a0ba548d",
+    "original": "ML",
+    "translation": "机器学习 (ML)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e81c597b-a449-5ec4-b999-1808a7e8e9db",
+    "original": "IMO",
+    "translation": "IMO (国际数学奥林匹克)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "12657462-8bca-584b-b46e-6f73de98d9e5",
+    "original": "OpenAI",
+    "translation": "OpenAI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "efa354da-03c1-5fa8-b366-12b4fe3c2fbf",
+    "original": "RFT",
+    "translation": "强化微调",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3232e345-84f1-52ea-a88d-050a0c1cb1ec",
+    "original": "Trainium",
+    "translation": "Trainium",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f45c14c9-0681-5608-bcd4-74eee5a0b328",
+    "original": "Strategic Deployment",
+    "translation": "战略部署",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "133f9a6f-559f-5c2e-8738-798547b7a975",
+    "original": "YC",
+    "translation": "YC",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8da462a9-7ba2-5c41-98c4-cfe1e3a905da",
+    "original": "closed loop",
+    "translation": "闭环",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "714b4634-6984-53df-aa23-5c7456e7936b",
+    "original": "Wet Lab",
+    "translation": "湿实验室",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2cfb6d4a-60c2-5f87-9dd0-20c636cd8e2c",
+    "original": "AlphaEvolve",
+    "translation": "AlphaEvolve",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d7eff209-5fa6-5217-8b13-a4b14a16050a",
+    "original": "ARC-AGI",
+    "translation": "ARC-AGI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "eb25588b-17a2-56a6-9f4f-37fc522a8772",
+    "original": "orchestrator",
+    "translation": "编排器",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e4bf9d9d-4aa7-5981-b3a4-0b118955afc2",
+    "original": "SG Lang",
+    "translation": "SGLang",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a7127b90-5395-57c7-96ff-90dac3b7e20a",
+    "original": "Anthropic",
+    "translation": "Anthropic",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c0033a4a-d765-5bcb-bc0c-d225288de559",
+    "original": "RL as a Service",
+    "translation": "RL即服务",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "748aba38-4a70-5638-bc0c-5735b70cf8b6",
+    "original": "xAI",
+    "translation": "xAI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "95fe7916-8fb3-56c9-b183-01372b7eb237",
+    "original": "Utility Evals",
+    "translation": "实用性评估",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "aace30b4-f386-53a3-8661-284d1544ef0c",
+    "original": "observation",
+    "translation": "观察值",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a616079b-a67b-5267-b02c-7cdb93bc4d90",
+    "original": "tool call",
+    "translation": "工具调用",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0b236217-a3b4-52b8-901f-248a9f4b368b",
+    "original": "Qwen",
+    "translation": "通义千问",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8ef25655-149a-5419-8884-430543878f27",
+    "original": "reward signals",
+    "translation": "奖励信号",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ef9a1de7-78a1-59e4-93b5-c0f5518dc58e",
+    "original": "ChatGPT Agent",
+    "translation": "ChatGPT智能体",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7c0c30fe-db99-5d7e-8a36-4d5a314d5c5d",
+    "original": "Medra",
+    "translation": "Medra",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "729b2ca7-3e3d-57d3-a855-28298f602fd4",
+    "original": "straggler rollouts",
+    "translation": "掉队推演",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ddb40c16-79ca-5ff1-9a22-3d50c8b4fac6",
+    "original": "Surge",
+    "translation": "Surge",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "1fb63be1-f9e7-5dec-990e-284347de4c9e",
+    "original": "Google DeepMind",
+    "translation": "Google DeepMind",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "70cef796-8928-5f80-b25f-cba60fa5c229",
+    "original": "human data team",
+    "translation": "人工数据团队",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "71201a61-9a7d-5015-9eed-282e26d0facf",
+    "original": "PM",
+    "translation": "产品经理",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8909b551-1ac0-5865-8a7b-9346c8a46d02",
+    "original": "Adaptive ML",
+    "translation": "Adaptive ML",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "57843d50-0c4a-5ca1-a4c7-034e7c45f0e2",
+    "original": "Applied Compute",
+    "translation": "Applied Compute",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "40dc3a76-1ec1-56ba-93eb-64162a795f90",
+    "original": "Gemini Deep Think",
+    "translation": "Gemini Deep Think",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  }
+]

@@ -48,6 +48,8 @@ from .analysis import (
     SectionTranslationResult,
     TermUsageTracker,
     LayeredContext,
+    SectionQualityScore,
+    QualityReportSummary,
 )
 
 # --- Consistency ---
@@ -110,6 +112,8 @@ __all__ = [
     "SectionTranslationResult",
     "TermUsageTracker",
     "LayeredContext",
+    "SectionQualityScore",
+    "QualityReportSummary",
     # Consistency
     "ConsistencyIssue",
     "ConsistencyReport",

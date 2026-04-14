@@ -1,0 +1,649 @@
+{
+  "version": 1,
+  "terms": [
+    {
+      "original": "TSMC",
+      "translation": "台积电",
+      "strategy": "preserve",
+      "note": "Taiwan Semiconductor Manufacturing Company",
+      "first_occurrence": null
+    },
+    {
+      "original": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "苹果自研芯片品牌",
+      "first_occurrence": null
+    },
+    {
+      "original": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "preserve",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "note": "超微半导体",
+      "first_occurrence": null
+    },
+    {
+      "original": "Intel",
+      "translation": "英特尔",
+      "strategy": "preserve",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "Qualcomm",
+      "translation": "高通",
+      "strategy": "preserve",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "MediaTek",
+      "translation": "联发科",
+      "strategy": "preserve",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "Samsung",
+      "translation": "三星",
+      "strategy": "preserve",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "preserve",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "Micron",
+      "translation": "美光",
+      "strategy": "preserve",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "note": "后续可简称'代工厂'",
+      "first_occurrence": null
+    },
+    {
+      "original": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "note": "fabrication facility",
+      "first_occurrence": null
+    },
+    {
+      "original": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "note": "如 7nm, 5nm, 3nm",
+      "first_occurrence": null
+    },
+    {
+      "original": "process",
+      "translation": "工艺",
+      "strategy": "translate",
+      "note": "指芯片制造工艺",
+      "first_occurrence": null
+    },
+    {
+      "original": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "note": "极紫外光刻 (Extreme Ultraviolet)",
+      "first_occurrence": null
+    },
+    {
+      "original": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "note": "极紫外光刻技术",
+      "first_occurrence": null
+    },
+    {
+      "original": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "note": "深紫外光刻 (Deep Ultraviolet)",
+      "first_occurrence": null
+    },
+    {
+      "original": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "deposition",
+      "translation": "沉积",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "CMP",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "note": "Chemical Mechanical Planarization",
+      "first_occurrence": null
+    },
+    {
+      "original": "SoC",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "note": "系统级芯片 (System on Chip)",
+      "first_occurrence": null
+    },
+    {
+      "original": "GPU",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "note": "图形处理器",
+      "first_occurrence": null
+    },
+    {
+      "original": "CPU",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "note": "中央处理器",
+      "first_occurrence": null
+    },
+    {
+      "original": "NPU",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "note": "神经网络处理器",
+      "first_occurrence": null
+    },
+    {
+      "original": "TPU",
+      "translation": "TPU",
+      "strategy": "first_annotate",
+      "note": "张量处理器 (Tensor Processing Unit)",
+      "first_occurrence": null
+    },
+    {
+      "original": "chiplet",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "packaging",
+      "translation": "封装",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "CoWoS",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "note": "Chip on Wafer on Substrate",
+      "first_occurrence": null
+    },
+    {
+      "original": "InFO",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "note": "Integrated Fan-Out",
+      "first_occurrence": null
+    },
+    {
+      "original": "HBM",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "note": "高带宽内存 (High Bandwidth Memory)",
+      "first_occurrence": null
+    },
+    {
+      "original": "SRAM",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "note": "静态随机存取存储器",
+      "first_occurrence": null
+    },
+    {
+      "original": "DRAM",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "note": "动态随机存取存储器",
+      "first_occurrence": null
+    },
+    {
+      "original": "NAND flash",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "logic chip",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "memory chip",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "analog chip",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "RF chip",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "note": "Radio Frequency",
+      "first_occurrence": null
+    },
+    {
+      "original": "AI",
+      "translation": "AI",
+      "strategy": "preserve",
+      "note": "人工智能",
+      "first_occurrence": null
+    },
+    {
+      "original": "LLM",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "note": "大语言模型 (Large Language Model)",
+      "first_occurrence": null
+    },
+    {
+      "original": "token",
+      "translation": "token",
+      "strategy": "preserve",
+      "note": "不翻译，保留原文",
+      "first_occurrence": null
+    },
+    {
+      "original": "context window",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "inference",
+      "translation": "推理",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "training",
+      "translation": "训练",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "fine-tuning",
+      "translation": "微调",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "RLHF",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "note": "基于人类反馈的强化学习",
+      "first_occurrence": null
+    },
+    {
+      "original": "transformer",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "note": "一种深度学习模型架构",
+      "first_occurrence": null
+    },
+    {
+      "original": "attention",
+      "translation": "注意力机制",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "self-attention",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "parameter",
+      "translation": "参数",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "weights",
+      "translation": "权重",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "model architecture",
+      "translation": "模型架构",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "neural network",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "deep learning",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "machine learning",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "GPU cluster",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "data center",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "cloud computing",
+      "translation": "云计算",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "edge computing",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "throughput",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "latency",
+      "translation": "延迟",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "bandwidth",
+      "translation": "带宽",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "yield",
+      "translation": "良率",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "utilization rate",
+      "translation": "利用率",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "efficiency",
+      "translation": "效率",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "performance",
+      "translation": "性能",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "benchmark",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "FLOPS",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "note": "每秒浮点运算次数",
+      "first_occurrence": null
+    },
+    {
+      "original": "TOPS",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "first_occurrence": null
+    },
+    {
+      "original": "capex",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "note": "Capital Expenditure",
+      "first_occurrence": null
+    },
+    {
+      "original": "opex",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "note": "Operating Expense",
+      "first_occurrence": null
+    },
+    {
+      "original": "R&D",
+      "translation": "研发",
+      "strategy": "translate",
+      "note": "Research and Development",
+      "first_occurrence": null
+    },
+    {
+      "original": "IDM",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "note": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "first_occurrence": null
+    },
+    {
+      "original": "fabless",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "note": "无晶圆厂设计公司",
+      "first_occurrence": null
+    },
+    {
+      "original": "anchor tenant",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "note": "核心大客户",
+      "first_occurrence": null
+    },
+    {
+      "original": "gross margin",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "revenue",
+      "translation": "营收",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "net income",
+      "translation": "净收入",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "market share",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "supply chain",
+      "translation": "供应链",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "bottleneck",
+      "translation": "瓶颈",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "lead time",
+      "translation": "交货周期",
+      "strategy": "first_annotate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "HPC",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "note": "高性能计算 (High Performance Computing)",
+      "first_occurrence": null
+    },
+    {
+      "original": "IoT",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "note": "物联网 (Internet of Things)",
+      "first_occurrence": null
+    },
+    {
+      "original": "5G",
+      "translation": "5G",
+      "strategy": "preserve",
+      "note": "第五代移动通信技术",
+      "first_occurrence": null
+    },
+    {
+      "original": "semiconductor",
+      "translation": "半导体",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "integrated circuit",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "note": "IC",
+      "first_occurrence": null
+    },
+    {
+      "original": "transistor",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": " Moore's Law",
+      "translation": "摩尔定律",
+      "strategy": "preserve",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "virtualization",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    },
+    {
+      "original": "scalability",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "note": null,
+      "first_occurrence": null
+    }
+  ]
+}

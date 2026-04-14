@@ -1,0 +1,274 @@
+[
+  {
+    "term_id": "ba88f821-5ab8-5a7d-8bf3-5b7e6cbfa96c",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "kernel",
+    "term_translation": "内核",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "cuda"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "4c100724-872d-5a05-99b9-20954791e04a",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "multi-latent attention",
+    "term_translation": "多潜变量注意力",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ml"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "2c9f2817-4cc6-5d30-9333-93ecf4d8b835",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "bytes-in-flight",
+    "term_translation": "在途字节数",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "gpu"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "15bea411-f4eb-5189-8232-d3b988910967",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "singleton",
+    "term_translation": "独立的",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "gpu"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "d9ec5dc2-afec-5177-b3d1-f934be425a94",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "floorplan",
+    "term_translation": "版图",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "semiconductor"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "00611276-9cab-5c0c-b331-7d23e910f840",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "die shot",
+    "term_translation": "die shot",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "semiconductor"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "a5f75681-a282-5731-9e9e-3c5b431129dc",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "swizzle",
+    "term_translation": "swizzle",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "gpu"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "05dadc1b-19eb-5815-a825-063a33c6721a",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "TMA",
+    "term_translation": "TMA",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "gpu"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "055dd3af-2c2c-5313-9431-942f4bbf3876",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "CTA",
+    "term_translation": "CTA",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "cuda"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "324e9899-304a-5dcf-a84b-78f9521b2af3",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "SMEM",
+    "term_translation": "SMEM",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "gpu"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "c4bcb25c-4510-50c9-80a5-584c307cc547",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "floorsweep",
+    "term_translation": "核心屏蔽",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "semiconductor"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "9dae0f38-a6e9-5332-ab37-2588c226c05d",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "Speed of Light",
+    "term_translation": "光速指标",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "gpu"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "f469031f-7264-586f-995b-1fdf2a572202",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "LDGSTS",
+    "term_translation": "LDGSTS",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "cuda"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "8339dc23-8f08-5d76-80e8-fa3172e5e7c4",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "UBLKCP",
+    "term_translation": "UBLKCP",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "cuda"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "dc078ac0-b5d8-5a42-bc3a-ed8ca39f4ed3",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "tcgen05",
+    "term_translation": "tcgen05",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "cuda"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  },
+  {
+    "term_id": "b9cabe08-b341-5976-b3f4-e5a2681ce5e5",
+    "scope": "project",
+    "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+    "term_original": "operational intensity",
+    "term_translation": "计算访存比",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "gpu"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-02 12:00:00",
+    "updated_at": "2026-04-02 12:00:00"
+  }
+]

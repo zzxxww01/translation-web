@@ -1,0 +1,130 @@
+[
+  {
+    "id": "ba88f821-5ab8-5a7d-8bf3-5b7e6cbfa96c",
+    "original": "kernel",
+    "translation": "内核",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4c100724-872d-5a05-99b9-20954791e04a",
+    "original": "multi-latent attention",
+    "translation": "多潜变量注意力",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2c9f2817-4cc6-5d30-9333-93ecf4d8b835",
+    "original": "bytes-in-flight",
+    "translation": "在途字节数",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "15bea411-f4eb-5189-8232-d3b988910967",
+    "original": "singleton",
+    "translation": "独立的",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d9ec5dc2-afec-5177-b3d1-f934be425a94",
+    "original": "floorplan",
+    "translation": "版图",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "00611276-9cab-5c0c-b331-7d23e910f840",
+    "original": "die shot",
+    "translation": "die shot",
+    "strategy": "KEEP_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a5f75681-a282-5731-9e9e-3c5b431129dc",
+    "original": "swizzle",
+    "translation": "swizzle",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "05dadc1b-19eb-5815-a825-063a33c6721a",
+    "original": "TMA",
+    "translation": "TMA",
+    "strategy": "KEEP_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "055dd3af-2c2c-5313-9431-942f4bbf3876",
+    "original": "CTA",
+    "translation": "CTA",
+    "strategy": "KEEP_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "324e9899-304a-5dcf-a84b-78f9521b2af3",
+    "original": "SMEM",
+    "translation": "SMEM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c4bcb25c-4510-50c9-80a5-584c307cc547",
+    "original": "floorsweep",
+    "translation": "核心屏蔽",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9dae0f38-a6e9-5332-ab37-2588c226c05d",
+    "original": "Speed of Light",
+    "translation": "光速指标",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f469031f-7264-586f-995b-1fdf2a572202",
+    "original": "LDGSTS",
+    "translation": "LDGSTS",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8339dc23-8f08-5d76-80e8-fa3172e5e7c4",
+    "original": "UBLKCP",
+    "translation": "UBLKCP",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "dc078ac0-b5d8-5a42-bc3a-ed8ca39f4ed3",
+    "original": "tcgen05",
+    "translation": "tcgen05",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b9cabe08-b341-5976-b3f4-e5a2681ce5e5",
+    "original": "operational intensity",
+    "translation": "计算访存比",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  }
+]

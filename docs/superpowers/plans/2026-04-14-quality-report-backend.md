@@ -1,5 +1,7 @@
 # Plan 1: 后端质量报告服务和 API
 
+**状态**: ✅ 已完成 (2026-04-14)
+
 **规格文档**: [docs/superpowers/specs/2026-04-14-quality-report-redesign.md](../specs/2026-04-14-quality-report-redesign.md)
 
 **范围**: 后端数据服务和 API 端点，包括数据模型、服务层、路由层

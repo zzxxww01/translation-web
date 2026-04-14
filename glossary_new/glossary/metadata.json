@@ -1,0 +1,1582 @@
+[
+  {
+    "term_id": "1db9af3a-584a-542f-bbeb-c89871c4827c",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "TSMC",
+    "term_translation": "台积电",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570216",
+    "updated_at": "2026-03-12 12:47:53.570216"
+  },
+  {
+    "term_id": "cc06bf90-555c-567d-bd13-d730eb627959",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Apple Silicon",
+    "term_translation": "Apple Silicon",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company",
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:48:26.972894",
+    "updated_at": "2026-03-12 12:48:26.972894"
+  },
+  {
+    "term_id": "19ca4284-1d6f-5ce9-9a27-984f478106b0",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "NVIDIA",
+    "term_translation": "英伟达",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570256",
+    "updated_at": "2026-03-12 12:47:53.570256"
+  },
+  {
+    "term_id": "debdb9ab-b086-5e65-99db-e3e790a18702",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "AMD",
+    "term_translation": "AMD",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570261",
+    "updated_at": "2026-03-12 12:47:53.570261"
+  },
+  {
+    "term_id": "84af6714-256d-525b-ba2f-36dabc7db161",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Intel",
+    "term_translation": "英特尔",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570265",
+    "updated_at": "2026-03-12 12:47:53.570265"
+  },
+  {
+    "term_id": "f3ccb378-d8b9-51fb-9fe0-b1ab5bec950d",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Qualcomm",
+    "term_translation": "高通",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570270",
+    "updated_at": "2026-03-12 12:47:53.570270"
+  },
+  {
+    "term_id": "ca58e4aa-fd74-573e-a33b-8a7e69f51706",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "MediaTek",
+    "term_translation": "联发科",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.581089",
+    "updated_at": "2026-03-12 12:47:53.581089"
+  },
+  {
+    "term_id": "d29c11fd-9835-545a-bbcb-bda80b990be2",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Samsung",
+    "term_translation": "三星",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:48:10.854327",
+    "updated_at": "2026-03-12 12:48:10.854327"
+  },
+  {
+    "term_id": "4fff4d8d-9d42-55a2-8f61-9aa8735d0f4d",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "SK Hynix",
+    "term_translation": "SK海力士",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570284",
+    "updated_at": "2026-03-12 12:47:53.570284"
+  },
+  {
+    "term_id": "0f0e0dac-893c-5d84-988c-e814fff28372",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Micron",
+    "term_translation": "美光",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "company"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570294",
+    "updated_at": "2026-03-12 12:47:53.570294"
+  },
+  {
+    "term_id": "b7d174e6-6fd7-5d64-a8fd-faf596cbfdb6",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "foundry",
+    "term_translation": "晶圆代工厂",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570299",
+    "updated_at": "2026-03-12 12:47:53.570299"
+  },
+  {
+    "term_id": "681ea98b-4398-581e-a53d-52588d24c756",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "wafer",
+    "term_translation": "晶圆",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570304",
+    "updated_at": "2026-03-12 12:47:53.570304"
+  },
+  {
+    "term_id": "4aef0ad2-0fcb-5645-afc8-40322eb226d0",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "fab",
+    "term_translation": "晶圆厂",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570307",
+    "updated_at": "2026-03-12 12:47:53.570307"
+  },
+  {
+    "term_id": "5dd33f09-adb6-52eb-938c-fec455a82361",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "node",
+    "term_translation": "制程节点",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-15 20:41:42.518425",
+    "updated_at": "2026-03-15 20:41:42.518425"
+  },
+  {
+    "term_id": "a225534b-5cb3-5c9f-93a1-cda22bb5f73a",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "EUV",
+    "term_translation": "EUV",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570326",
+    "updated_at": "2026-03-12 12:47:53.570326"
+  },
+  {
+    "term_id": "f84f0270-39cb-5d82-8ead-ba6903a8e7e0",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "EUV lithography",
+    "term_translation": "EUV光刻",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570344",
+    "updated_at": "2026-03-12 12:47:53.570344"
+  },
+  {
+    "term_id": "0b557870-9a60-5dd4-a758-e948e709f95c",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "DUV",
+    "term_translation": "DUV",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570349",
+    "updated_at": "2026-03-12 12:47:53.570349"
+  },
+  {
+    "term_id": "e1afdf5f-ec49-5c3e-9e35-913c2220581c",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "photolithography",
+    "term_translation": "光刻",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570367",
+    "updated_at": "2026-03-12 12:47:53.570367"
+  },
+  {
+    "term_id": "8cebe344-1d23-5657-92db-e77e0100f805",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "etching",
+    "term_translation": "蚀刻",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570374",
+    "updated_at": "2026-03-12 12:47:53.570374"
+  },
+  {
+    "term_id": "485490f8-d801-5efd-ac5f-ad98330af84d",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "deposition",
+    "term_translation": "沉积",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570378",
+    "updated_at": "2026-03-12 12:47:53.570378"
+  },
+  {
+    "term_id": "8050aab2-17d4-5b6f-ab1d-7276ae2a9f27",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "CMP",
+    "term_translation": "化学机械抛光",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "manufacturing"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570384",
+    "updated_at": "2026-03-12 12:47:53.570384"
+  },
+  {
+    "term_id": "4af82df3-4034-5577-806f-98d5694bea61",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "SoC",
+    "term_translation": "SoC",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570389",
+    "updated_at": "2026-03-12 12:47:53.570389"
+  },
+  {
+    "term_id": "efc49083-ffeb-5635-9ff3-97e0cf14f5f8",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "GPU",
+    "term_translation": "GPU",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570394",
+    "updated_at": "2026-03-12 12:47:53.570394"
+  },
+  {
+    "term_id": "032e768f-913c-5b2b-9df7-143f2a22f8bb",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "CPU",
+    "term_translation": "CPU",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570404",
+    "updated_at": "2026-03-12 12:47:53.570404"
+  },
+  {
+    "term_id": "feecc09e-cc32-5dd9-bfb5-ffa232c13b2a",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "NPU",
+    "term_translation": "NPU",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570408",
+    "updated_at": "2026-03-12 12:47:53.570408"
+  },
+  {
+    "term_id": "3b7d0e67-8bdd-5541-a0e2-346dcd2b7c4e",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "TPU",
+    "term_translation": "TPU",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-08 14:30:49.498568",
+    "updated_at": "2026-04-08 14:30:49.498568"
+  },
+  {
+    "term_id": "d57c2724-c5a8-5876-90cf-f99ba3870ac8",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "chiplet",
+    "term_translation": "芯粒",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570417",
+    "updated_at": "2026-03-12 12:47:53.570417"
+  },
+  {
+    "term_id": "f1189b1d-a6e1-5f6e-ae1d-e055e55be6b0",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "packaging",
+    "term_translation": "封装",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "packaging"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570422",
+    "updated_at": "2026-03-12 12:47:53.570422"
+  },
+  {
+    "term_id": "7b9cf40b-cca6-5d17-8979-582831c43aef",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "CoWoS",
+    "term_translation": "CoWoS",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "packaging"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570427",
+    "updated_at": "2026-03-12 12:47:53.570427"
+  },
+  {
+    "term_id": "08cfe3d7-2815-566d-845a-4534d007bd0d",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "InFO",
+    "term_translation": "InFO",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "packaging"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570431",
+    "updated_at": "2026-03-12 12:47:53.570431"
+  },
+  {
+    "term_id": "666b7794-1b88-5371-980f-b045698d089f",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "HBM",
+    "term_translation": "HBM",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "memory"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570435",
+    "updated_at": "2026-03-12 12:47:53.570435"
+  },
+  {
+    "term_id": "3fdd608f-af99-52c5-aec4-f53fd13a1a4a",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "SRAM",
+    "term_translation": "SRAM",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "memory"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570440",
+    "updated_at": "2026-03-12 12:47:53.570440"
+  },
+  {
+    "term_id": "ee4d4261-3954-57f3-8168-694ca3921179",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "DRAM",
+    "term_translation": "DRAM",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "memory"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570445",
+    "updated_at": "2026-03-12 12:47:53.570445"
+  },
+  {
+    "term_id": "e5ac0c17-2ede-538d-ac21-4b802dda6f52",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "NAND flash",
+    "term_translation": "NAND闪存",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "memory"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570450",
+    "updated_at": "2026-03-12 12:47:53.570450"
+  },
+  {
+    "term_id": "7afe0b6d-5b5a-5694-81b7-942cf24a8300",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "logic chip",
+    "term_translation": "逻辑芯片",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570454",
+    "updated_at": "2026-03-12 12:47:53.570454"
+  },
+  {
+    "term_id": "7cd3d6d6-4c89-5583-a808-b619be44ea08",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "memory chip",
+    "term_translation": "存储芯片",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip",
+      "memory"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570458",
+    "updated_at": "2026-03-12 12:47:53.570458"
+  },
+  {
+    "term_id": "a354cb9c-c422-5d11-b122-f97026ef74ef",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "analog chip",
+    "term_translation": "模拟芯片",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570462",
+    "updated_at": "2026-03-12 12:47:53.570462"
+  },
+  {
+    "term_id": "5fe5695c-0e46-54aa-b9a6-3066b6109329",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "RF chip",
+    "term_translation": "射频芯片",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570466",
+    "updated_at": "2026-03-12 12:47:53.570466"
+  },
+  {
+    "term_id": "4778c9a2-097c-5b50-9b73-65d2c85c6c38",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "AI",
+    "term_translation": "AI",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570475",
+    "updated_at": "2026-03-12 12:47:53.570475"
+  },
+  {
+    "term_id": "ec4f631d-9294-5820-a06b-a698bd22e3d9",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "LLM",
+    "term_translation": "LLM",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570479",
+    "updated_at": "2026-03-12 12:47:53.570479"
+  },
+  {
+    "term_id": "d6d832fc-304c-561d-9430-56e006071178",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "token",
+    "term_translation": "词元",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-04-10 23:02:23.690524",
+    "updated_at": "2026-04-10 23:02:23.690524"
+  },
+  {
+    "term_id": "31750c5c-b7f3-56c5-aa0e-d3b612ea931c",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "context window",
+    "term_translation": "上下文窗口",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570486",
+    "updated_at": "2026-03-12 12:47:53.570486"
+  },
+  {
+    "term_id": "b57fccd6-6e29-5d3a-840b-e6ed7d55f65f",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "inference",
+    "term_translation": "推理",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570490",
+    "updated_at": "2026-03-12 12:47:53.570490"
+  },
+  {
+    "term_id": "c6f32ac6-a728-5791-8be9-fa23ae14b148",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "training",
+    "term_translation": "训练",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570494",
+    "updated_at": "2026-03-12 12:47:53.570494"
+  },
+  {
+    "term_id": "53fd7496-e4ec-5a8e-b50b-5b359e151888",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "fine-tuning",
+    "term_translation": "微调",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570498",
+    "updated_at": "2026-03-12 12:47:53.570498"
+  },
+  {
+    "term_id": "7fe8eac3-2790-5377-9981-cdd9bb80c3f9",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "RLHF",
+    "term_translation": "RLHF",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570502",
+    "updated_at": "2026-03-12 12:47:53.570502"
+  },
+  {
+    "term_id": "373f69fb-8aaa-582b-b2bf-a9260c716a96",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "transformer",
+    "term_translation": "Transformer",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570505",
+    "updated_at": "2026-03-12 12:47:53.570505"
+  },
+  {
+    "term_id": "214116ed-e006-57d5-bc99-38a4ef4e7887",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "self-attention",
+    "term_translation": "自注意力机制",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570512",
+    "updated_at": "2026-03-12 12:47:53.570512"
+  },
+  {
+    "term_id": "876c4371-d107-5f2c-a334-77f15e12bdea",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "parameter",
+    "term_translation": "参数",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570516",
+    "updated_at": "2026-03-12 12:47:53.570516"
+  },
+  {
+    "term_id": "e6633919-1487-5e73-90c1-d7f0f38834ba",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "weights",
+    "term_translation": "权重",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570520",
+    "updated_at": "2026-03-12 12:47:53.570520"
+  },
+  {
+    "term_id": "139523df-eb7f-5e7e-b972-fba8137916ae",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "neural network",
+    "term_translation": "神经网络",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570530",
+    "updated_at": "2026-03-12 12:47:53.570530"
+  },
+  {
+    "term_id": "4b6700cd-d434-5b89-8a9f-bc7d221efb21",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "deep learning",
+    "term_translation": "深度学习",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570533",
+    "updated_at": "2026-03-12 12:47:53.570533"
+  },
+  {
+    "term_id": "28fb47e8-f8a1-528e-a0b7-c52c035c0ec9",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "machine learning",
+    "term_translation": "机器学习",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570537",
+    "updated_at": "2026-03-12 12:47:53.570537"
+  },
+  {
+    "term_id": "30813045-496b-54b1-96f8-181b54bb6002",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "GPU cluster",
+    "term_translation": "GPU集群",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570541",
+    "updated_at": "2026-03-12 12:47:53.570541"
+  },
+  {
+    "term_id": "c712e58e-81b8-53cf-90d2-0be9184a5323",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "data center",
+    "term_translation": "数据中心",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570548",
+    "updated_at": "2026-03-12 12:47:53.570548"
+  },
+  {
+    "term_id": "25cd9256-62c2-5a4f-9580-ddf29f6bbfd5",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "cloud computing",
+    "term_translation": "云计算",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570551",
+    "updated_at": "2026-03-12 12:47:53.570551"
+  },
+  {
+    "term_id": "997a4383-8ffd-5fde-b3d4-e6d32b92ed69",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "edge computing",
+    "term_translation": "边缘计算",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "ai"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570555",
+    "updated_at": "2026-03-12 12:47:53.570555"
+  },
+  {
+    "term_id": "24009665-f20c-55f7-81ec-e2861131cccd",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "throughput",
+    "term_translation": "吞吐量",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570560",
+    "updated_at": "2026-03-12 12:47:53.570560"
+  },
+  {
+    "term_id": "042bc241-3ac0-5c67-a125-87610f083b97",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "latency",
+    "term_translation": "延迟",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570563",
+    "updated_at": "2026-03-12 12:47:53.570563"
+  },
+  {
+    "term_id": "79052a9a-004b-5a7b-a8d6-5fc1d2c78c71",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "bandwidth",
+    "term_translation": "带宽",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570566",
+    "updated_at": "2026-03-12 12:47:53.570566"
+  },
+  {
+    "term_id": "2f042541-d470-5d06-ab13-3eaad23b7b84",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "yield",
+    "term_translation": "良率",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570570",
+    "updated_at": "2026-03-12 12:47:53.570570"
+  },
+  {
+    "term_id": "397778b7-4288-5164-8fee-453394868c36",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "utilization rate",
+    "term_translation": "利用率",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570573",
+    "updated_at": "2026-03-12 12:47:53.570573"
+  },
+  {
+    "term_id": "4c6817d5-7c64-515e-b7d7-ec93b88cab2b",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "efficiency",
+    "term_translation": "效率",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570576",
+    "updated_at": "2026-03-12 12:47:53.570576"
+  },
+  {
+    "term_id": "314e3e6e-eabb-5cb8-a2ac-f7d8ba9950df",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "performance",
+    "term_translation": "性能",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570579",
+    "updated_at": "2026-03-12 12:47:53.570579"
+  },
+  {
+    "term_id": "2376e06e-a573-54bb-ada4-c2146f74936f",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "benchmark",
+    "term_translation": "基准测试",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-16 00:48:52.469999",
+    "updated_at": "2026-03-16 00:48:52.469999"
+  },
+  {
+    "term_id": "552123ec-3055-5ca8-967c-18dc5ad843f8",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "FLOPS",
+    "term_translation": "FLOPS",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570618",
+    "updated_at": "2026-03-12 12:47:53.570618"
+  },
+  {
+    "term_id": "a7b702fd-45b7-5db6-944a-8d4c51384849",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "TOPS",
+    "term_translation": "TOPS",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570622",
+    "updated_at": "2026-03-12 12:47:53.570622"
+  },
+  {
+    "term_id": "02c105e7-6c7d-54cc-be0d-18b182d0b438",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "capex",
+    "term_translation": "资本支出",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570625",
+    "updated_at": "2026-03-12 12:47:53.570625"
+  },
+  {
+    "term_id": "3af1ccc5-7834-5ae5-8071-0dead1953f42",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "opex",
+    "term_translation": "运营支出",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570642",
+    "updated_at": "2026-03-12 12:47:53.570642"
+  },
+  {
+    "term_id": "08416c36-6e45-5cc8-829b-90141fdc7284",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "R&D",
+    "term_translation": "研发",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570645",
+    "updated_at": "2026-03-12 12:47:53.570645"
+  },
+  {
+    "term_id": "9d3ace07-d3f7-5bb7-8404-00bf8b52c1ad",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "IDM",
+    "term_translation": "IDM",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570649",
+    "updated_at": "2026-03-12 12:47:53.570649"
+  },
+  {
+    "term_id": "024f8259-2a38-5abc-a9bf-7b3149c0007e",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "fabless",
+    "term_translation": "无晶圆厂",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570652",
+    "updated_at": "2026-03-12 12:47:53.570652"
+  },
+  {
+    "term_id": "cf073de7-9da4-53fb-ab99-676e38f6eb83",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "anchor tenant",
+    "term_translation": "锚定客户",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570679",
+    "updated_at": "2026-03-12 12:47:53.570679"
+  },
+  {
+    "term_id": "119be6eb-7d33-512a-89d2-fb5c27d944bf",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "gross margin",
+    "term_translation": "毛利率",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570684",
+    "updated_at": "2026-03-12 12:47:53.570684"
+  },
+  {
+    "term_id": "d828e563-de52-5d8c-920a-6d68f9ad70b0",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "revenue",
+    "term_translation": "营收",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570687",
+    "updated_at": "2026-03-12 12:47:53.570687"
+  },
+  {
+    "term_id": "c1334802-425f-585d-992e-37e73aab370c",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "net income",
+    "term_translation": "净收入",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570691",
+    "updated_at": "2026-03-12 12:47:53.570691"
+  },
+  {
+    "term_id": "7f8a70ac-4b04-5e21-949b-ace9ee20fd73",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "market share",
+    "term_translation": "市场份额",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "business"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570694",
+    "updated_at": "2026-03-12 12:47:53.570694"
+  },
+  {
+    "term_id": "5915bccc-0a20-516e-8549-cdf703dca32e",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "HPC",
+    "term_translation": "HPC",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570709",
+    "updated_at": "2026-03-12 12:47:53.570709"
+  },
+  {
+    "term_id": "fa07d000-310c-5dc1-ad31-ff2565feb013",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "IoT",
+    "term_translation": "IoT",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "general"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570712",
+    "updated_at": "2026-03-12 12:47:53.570712"
+  },
+  {
+    "term_id": "88f39400-84a2-5060-806c-34ccfa087610",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "semiconductor",
+    "term_translation": "半导体",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570719",
+    "updated_at": "2026-03-12 12:47:53.570719"
+  },
+  {
+    "term_id": "1f8e8c7e-1c28-531c-9d2a-20ba27cda192",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "integrated circuit",
+    "term_translation": "集成电路",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570723",
+    "updated_at": "2026-03-12 12:47:53.570723"
+  },
+  {
+    "term_id": "99f0b0b5-fc78-5266-a561-d966d9340626",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "transistor",
+    "term_translation": "晶体管",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "chip"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570726",
+    "updated_at": "2026-03-12 12:47:53.570726"
+  },
+  {
+    "term_id": "82f5059e-3663-5dc7-a0a5-ac22f91fd637",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "virtualization",
+    "term_translation": "虚拟化",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "general"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570734",
+    "updated_at": "2026-03-12 12:47:53.570734"
+  },
+  {
+    "term_id": "946f7d74-c7ec-5f6d-a268-7bb849c1603b",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "scalability",
+    "term_translation": "可扩展性",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [
+      "performance"
+    ],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-12 12:47:53.570737",
+    "updated_at": "2026-03-12 12:47:53.570737"
+  },
+  {
+    "term_id": "79f0622f-5b50-5684-b1c6-cc8a033c8f6a",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "SemiAnalysis",
+    "term_translation": "SemiAnalysis",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-13 21:15:37.217159",
+    "updated_at": "2026-03-13 21:15:37.217159"
+  },
+  {
+    "term_id": "2b90ba02-1748-5500-8649-b73f4f473209",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "prefill",
+    "term_translation": "预填充",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-16 00:28:15.876965",
+    "updated_at": "2026-03-16 00:28:15.876965"
+  },
+  {
+    "term_id": "7fd8933d-f5ab-5921-b08e-ffc2f794d137",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "decode",
+    "term_translation": "解码",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-16 00:28:10.009040",
+    "updated_at": "2026-03-16 00:28:10.009040"
+  },
+  {
+    "term_id": "7746fa21-1c11-53bc-98e5-bbc36b79451e",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Texas",
+    "term_translation": "德克萨斯州",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-16 17:01:09.125132",
+    "updated_at": "2026-03-16 17:01:09.125132"
+  },
+  {
+    "term_id": "42521ae6-4b94-5100-be5d-f976aed44e86",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Vera",
+    "term_translation": "Vera",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-17 21:08:58.841297",
+    "updated_at": "2026-03-17 21:08:58.841297"
+  },
+  {
+    "term_id": "338c534f-8983-5b17-b4f2-519bebe8828c",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Rubin",
+    "term_translation": "Rubin",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-17 21:09:23.512853",
+    "updated_at": "2026-03-17 21:09:23.512853"
+  },
+  {
+    "term_id": "21ccf43b-d530-5ed0-b4a0-39290017688a",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "BoM",
+    "term_translation": "物料清单",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-17 21:10:21.304276",
+    "updated_at": "2026-03-17 21:10:21.304276"
+  },
+  {
+    "term_id": "a487a23f-6f3b-5f98-80e0-a9e61f807f42",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "cableless",
+    "term_translation": "无缆化",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-28 12:00:16.054111",
+    "updated_at": "2026-03-28 12:00:16.054111"
+  },
+  {
+    "term_id": "a36d7c49-a119-51a2-b27f-83bd412a7138",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "TCO",
+    "term_translation": "总拥有成本",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-28 12:11:03.402326",
+    "updated_at": "2026-03-28 12:11:03.402326"
+  },
+  {
+    "term_id": "9fd78220-188c-5437-8495-07492e282afc",
+    "scope": "global",
+    "project_id": null,
+    "term_original": "Blackwell",
+    "term_translation": "Blackwell",
+    "overrides_term_id": null,
+    "promoted_from_term_id": null,
+    "tags": [],
+    "source": "manual",
+    "usage_count": 0,
+    "is_deleted": false,
+    "created_at": "2026-03-28 12:16:02.253585",
+    "updated_at": "2026-03-28 12:16:02.253585"
+  }
+]

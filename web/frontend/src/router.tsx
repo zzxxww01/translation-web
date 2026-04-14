@@ -23,6 +23,16 @@ const ConfirmationFeature = lazy(() =>
     default: module.ConfirmationFeature,
   }))
 );
+const QualityReportPage = lazy(() =>
+  import('./features/quality-report/index').then(module => ({
+    default: module.QualityReportPage,
+  }))
+);
+const ConfirmationWithQuality = lazy(() =>
+  import('./features/quality-report/index').then(module => ({
+    default: module.ConfirmationWithQuality,
+  }))
+);
 
 function RouteFallback() {
   return (
@@ -42,7 +52,7 @@ function ConfirmationRoute() {
   const { projectId = '' } = useParams<{ projectId: string }>();
   return (
     <LazyPage>
-      <ConfirmationFeature projectId={projectId} />
+      <ConfirmationWithQuality projectId={projectId} />
     </LazyPage>
   );
 }
@@ -67,6 +77,14 @@ const router = createBrowserRouter([
       {
         path: 'document/:projectId/confirmation',
         element: <ConfirmationRoute />,
+      },
+      {
+        path: 'document/:projectId/quality-report',
+        element: (
+          <LazyPage>
+            <QualityReportPage />
+          </LazyPage>
+        ),
       },
       {
         path: 'post',

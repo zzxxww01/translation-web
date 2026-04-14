@@ -22,6 +22,7 @@ from .routers import (
     glossary,
     project_glossary,
     projects,
+    quality_report,
     segmentation,
     slack,
     tasks,
@@ -46,6 +47,7 @@ app.include_router(glossary.router, prefix="/api", tags=["glossary"])
 app.include_router(project_glossary.router, prefix="/api", tags=["projects"])
 app.include_router(confirmation.router, prefix="/api", tags=["confirmation"])
 app.include_router(projects.router, prefix="/api", tags=["projects"])
+app.include_router(quality_report.router, tags=["quality-report"])
 app.include_router(slack.router, prefix="/api", tags=["slack"])
 app.include_router(tools.router, prefix="/api", tags=["tools"])
 app.include_router(tasks.router, prefix="/api", tags=["tasks"])

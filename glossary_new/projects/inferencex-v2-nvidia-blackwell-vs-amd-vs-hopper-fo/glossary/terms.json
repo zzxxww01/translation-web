@@ -1,0 +1,690 @@
+[
+  {
+    "id": "610dc706-15b3-5304-bc88-caca3c03074f",
+    "original": "SGLang",
+    "translation": "SGLang",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7f2f0f3b-6909-5ee2-b7c8-ea8e1ff5b81f",
+    "original": "vLLM",
+    "translation": "vLLM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "70b3a082-e3d3-5fca-92d8-ce0692740751",
+    "original": "MI355X",
+    "translation": "MI355X",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "13143cbf-ebf8-58d7-8dbb-e06077a72614",
+    "original": "Wide Expert Parallelism",
+    "translation": "宽专家并行",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "eb6841cf-740a-594e-a309-c04cd5dcff88",
+    "original": "Disaggregated Serving",
+    "translation": "解耦式推理服务",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "707d2cc3-9134-5eb8-9274-5dbcfc9ec1b0",
+    "original": "TRTLLM",
+    "translation": "TRT-LLM",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e3150fe5-a44d-5716-b19b-ddd1c5a15905",
+    "original": "GB300 NVL72",
+    "translation": "GB300 NVL72",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4c0f0f39-98ca-58a9-a730-5c2470fa822b",
+    "original": "Large Mixture of Experts",
+    "translation": "大规模混合专家模型",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "89f3aae0-48d2-5f19-9841-f7fedd945687",
+    "original": "FP4",
+    "translation": "FP4",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "94f3d4b3-6439-57c4-906e-e1389239e399",
+    "original": "FP8",
+    "translation": "FP8",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "278e8946-7b77-53ec-9d3f-cf71e685fa46",
+    "original": "disaggregated inference",
+    "translation": "解耦推理",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "66c5f960-12a8-54ea-9b4b-9834ab9dec98",
+    "original": "MoE",
+    "translation": "混合专家模型",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ba753140-9326-5457-977e-2e420297d418",
+    "original": "SKU",
+    "translation": "SKU",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "419ff7d8-b320-5299-8dec-292fa3ceaeb1",
+    "original": "MTP",
+    "translation": "多 token 预测",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2e3303bb-f019-51a7-9e15-a864d145d621",
+    "original": "wideEP",
+    "translation": "WideEP",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4ece4818-3c13-57df-bfe0-1ad392614907",
+    "original": "disagg prefill",
+    "translation": "解耦式预填充",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9bc8d24a-7c48-5111-87f3-70988f51b963",
+    "original": "NVL72",
+    "translation": "NVL72",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c729a482-ff3b-5bbd-b4a6-a7169733b9eb",
+    "original": "composability",
+    "translation": "可组合性",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0a07c125-3ee1-5146-ac6b-c6aa494a8186",
+    "original": "InferenceX",
+    "translation": "InferenceX",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9aa5ce9a-76ba-5c97-a28c-76c600d9dd91",
+    "original": "Hopper",
+    "translation": "Hopper",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ec96adf1-a149-5b95-bf6b-e87140ed682d",
+    "original": "Pareto Frontier",
+    "translation": "帕累托前沿",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b2c31c02-2bbe-5e9e-abeb-fccddbd03276",
+    "original": "interactivity",
+    "translation": "交互性",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3989bfcf-55b5-5ffe-ac63-26e0d908c77f",
+    "original": "KV cache",
+    "translation": "KV 缓存",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "656b9f47-3376-5805-a4b4-1dba156cc6d2",
+    "original": "disaggregated prefill",
+    "translation": "解耦式预填充",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fe0a7b24-0adf-5ef5-a4b6-9d886178cc4a",
+    "original": "forward pass",
+    "translation": "前向传播",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d224606e-929a-52de-8541-df607818980d",
+    "original": "EP",
+    "translation": "专家并行",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "db6efa5d-430d-5416-8780-ad0e1471ab4d",
+    "original": "TP",
+    "translation": "张量并行",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c8ff400f-97b7-5b47-88ab-ec8643dea1bc",
+    "original": "all-to-all",
+    "translation": "All-to-all",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "6ae2a1f2-f805-542e-af6b-7d783afadc6f",
+    "original": "all-reduce",
+    "translation": "All-reduce",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9dca93d4-c689-509d-9331-2d9c673a51cc",
+    "original": "DP",
+    "translation": "数据并行",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "838a5bab-cf82-56f9-bfe1-1820f28b7cb0",
+    "original": "cadence",
+    "translation": "节奏",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "6320f85f-2e99-51e5-bf8b-895e2f241091",
+    "original": "ROCm",
+    "translation": "ROCm",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "afcd0ab8-b077-5fc3-905f-c0b36acba081",
+    "original": "MoRI",
+    "translation": "MoRI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "250ee985-c08c-5bff-8ddc-4adbb43d0cd4",
+    "original": "TRT-LLM",
+    "translation": "TRT-LLM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fdc4257b-78dc-5cba-a60c-d6183cf72707",
+    "original": "fork",
+    "translation": "分叉版本",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b94bf888-a1ae-5a6a-9e4f-f4382f03238b",
+    "original": "Dynamo",
+    "translation": "Dynamo",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a4aa3c51-dcef-5b92-91af-7966ea7656e7",
+    "original": "Mooncake",
+    "translation": "Mooncake",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "33c8ae1e-0743-52eb-b185-b3479defc27a",
+    "original": "prefill-decode disaggregation",
+    "translation": "预填充-解码分离",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a9746d60-08aa-562e-8f73-0b31e4e8f43f",
+    "original": "RDMA",
+    "translation": "RDMA",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "048e2d8e-7fe2-5672-8293-8bfaa088d2b9",
+    "original": "NVLink",
+    "translation": "NVLink",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a1e8164a-0055-5199-a789-2e7c93f62299",
+    "original": "IB",
+    "translation": "InfiniBand",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7b9fe992-afcd-5f1a-b09f-c7214a38271e",
+    "original": "TTFT",
+    "translation": "首 token 延迟",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2c23865e-6b23-5b9f-81ba-ca118e76a4eb",
+    "original": "scale-up network",
+    "translation": "纵向扩展网络",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4c53cc62-70db-57f0-ba8c-d56c688c8619",
+    "original": "UALoE72",
+    "translation": "UALoE72",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "09da7286-8884-5da3-8f3d-897467c02f5e",
+    "original": "Blackwell Ultra",
+    "translation": "Blackwell Ultra",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "99280c50-9ddc-5b62-b222-ecd384f1201c",
+    "original": "MI325X",
+    "translation": "MI325X",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4396935f-22fc-5196-9015-a480265b45aa",
+    "original": "Disaggregated Inferencing",
+    "translation": "解耦推理",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2a1d35fd-0de8-5c03-8271-7b1986f21901",
+    "original": "MI300X",
+    "translation": "MI300X",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d22cb4d5-309c-5939-8fb6-c489bbe3ef9b",
+    "original": "DeepSeek",
+    "translation": "DeepSeek",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e0dac7d7-8768-548d-acfd-2ebb5999b5a1",
+    "original": "ATOM",
+    "translation": "ATOM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ba3acde3-d762-5187-9e34-f040ff41f2df",
+    "original": "GSM8k",
+    "translation": "GSM8k",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b65bc2d8-1803-53a4-8533-2e4b156b5a2b",
+    "original": "fast mode",
+    "translation": "快速模式",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e57752fc-00e5-51f4-9cce-60e89569f26f",
+    "original": "CPMT",
+    "translation": "每百万 token 成本",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3232e345-84f1-52ea-a88d-050a0c1cb1ec",
+    "original": "Trainium",
+    "translation": "Trainium",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "11c0449b-2ea9-5f00-bd08-3f2f638ab501",
+    "original": "SOTA",
+    "translation": "SOTA",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f7c76506-fbe9-5b50-b34a-3571ba6280f7",
+    "original": "Expert Parallelism",
+    "translation": "专家并行",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d9b3948d-42c1-5342-b642-075b643ae69a",
+    "original": "arithmetic intensity",
+    "translation": "计算强度",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "af9cde0c-8730-5bf4-ace7-b32f0347044e",
+    "original": "DEP",
+    "translation": "数据-专家并行",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7f819bb1-44f5-520b-8d0b-621fdeea0cf0",
+    "original": "Wide EP",
+    "translation": "宽专家并行",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a783f30e-3047-5b6d-88ee-599850778312",
+    "original": "TEP",
+    "translation": "张量-专家并行",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "503e93aa-ea61-51dc-8e15-e1b3f774a904",
+    "original": "B200",
+    "translation": "B200",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3c6f7fcf-f5d8-5f05-9892-7c08036a9032",
+    "original": "H200",
+    "translation": "H200",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "5a5188f1-460f-5337-98b3-675467ee549b",
+    "original": "GB200",
+    "translation": "GB200",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "12d5ec56-27a7-505f-9afd-2e9c3b422b2c",
+    "original": "scale-up world size",
+    "translation": "Scale-up 通信域大小",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b2704c8d-4f49-59f4-9401-d7df62e4f769",
+    "original": "sweep",
+    "translation": "扫描",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7cfa1024-f692-5fb6-8bd4-52c7882d3bb0",
+    "original": "Claude Code",
+    "translation": "Claude Code",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "74daaa85-72b4-5e12-b003-12c28b6c6384",
+    "original": "GitHub Actions",
+    "translation": "GitHub Actions",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "eb206a35-f6fa-5bf1-affd-bd8a117cecd4",
+    "original": "agentic coding",
+    "translation": "智能体编程",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8abc87f4-b540-51b7-874f-ba66cc886423",
+    "original": "ISL",
+    "translation": "输入序列长度",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7da4075a-1f28-59f0-80bf-bac80187acd8",
+    "original": "multi-turn",
+    "translation": "多轮",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7f63c3bd-912c-5684-a095-56dfb393263b",
+    "original": "OSL",
+    "translation": "输出序列长度",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "bf326004-cf38-53f8-8bcc-f6b594b1451b",
+    "original": "prefix caching",
+    "translation": "前缀缓存",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ff80e22e-4a2e-5d92-92be-020d5bd2ab4a",
+    "original": "compute tray",
+    "translation": "计算托盘",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8022ed26-3870-5069-a170-cfc25764ad09",
+    "original": "TDP",
+    "translation": "TDP",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9ea4a868-b283-50a5-a70d-8c6fe0dc6821",
+    "original": "Wide Expert Parallelism (WideEP)",
+    "translation": "宽专家并行 (WideEP)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "cf54a712-c273-5e13-b8e5-50aee3257c0e",
+    "original": "Time per output token (TPOT)",
+    "translation": "每个输出 Token 耗时 (TPOT)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "841b86ad-d185-5042-b644-f9c9f8f42d92",
+    "original": "Time per output token",
+    "translation": "每个输出 Token 耗时",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3cb0254c-413f-516b-ae40-ba810a49a571",
+    "original": "TPOT",
+    "translation": "TPOT",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c5eeff8c-7dce-5869-ae38-8f26bbf47b8a",
+    "original": "Multi Token Prediction (MTP)",
+    "translation": "多 Token 预测 (MTP)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "6a884357-cf58-5d1e-83d2-34c505f3b049",
+    "original": "Multi Token Prediction",
+    "translation": "多 Token 预测",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0b1c8dba-fe73-5817-99d5-0822a18f4d6f",
+    "original": "KV Cache offloading",
+    "translation": "KV Cache 卸载",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "1373fe03-a701-518e-9e19-7b89463c50ed",
+    "original": "SoC",
+    "translation": "SoC",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "73744714-2c56-5d85-8b36-4416ff978328",
+    "original": "NPU",
+    "translation": "NPU",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "380bdcc5-6743-5679-883f-c7d0d8242dec",
+    "original": "TPU",
+    "translation": "TPU",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "83fd8854-c4bb-5b31-b335-cec2f2ab3512",
+    "original": "RLHF",
+    "translation": "RLHF",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0e2092b7-96d7-5395-802d-9228e7ec5457",
+    "original": "IDM",
+    "translation": "IDM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  }
+]

@@ -97,6 +97,9 @@ class TranslationIssue(BaseModel):
     description: str
     why_it_matters: str = ""
     suggestion: str = ""
+    auto_fixed: bool = False
+    revised_text: Optional[str] = None
+    fix_method: Optional[str] = None
 
 
 class ReflectionResult(BaseModel):
@@ -108,6 +111,7 @@ class ReflectionResult(BaseModel):
     conciseness_score: float = 0.0
     is_excellent: bool = False
     issues: List[TranslationIssue] = Field(default_factory=list)
+    revised_translations: Optional[Dict[int, str]] = None
 
 
 class QualityAssessment(BaseModel):
@@ -172,3 +176,33 @@ class LayeredContext(BaseModel):
 
     term_usage: Dict[str, List[str]] = Field(default_factory=dict)
     defined_abbreviations: Dict[str, str] = Field(default_factory=dict)
+
+
+class SectionQualityScore(BaseModel):
+    """章节质量评分"""
+
+    section_id: str
+    section_title: str
+    overall_score: float
+    readability_score: float
+    accuracy_score: float
+    conciseness_score: float
+    is_excellent: bool
+    issue_count: int
+    auto_fixed_count: int
+    manual_review_count: int
+    paragraph_count: int = 0
+
+
+class QualityReportSummary(BaseModel):
+    """质量报告摘要"""
+
+    run_id: str
+    project_id: str
+    timestamp: str
+    overall_score: float
+    sections: List[SectionQualityScore]
+    total_issues: int
+    auto_fixed_issues: int
+    manual_review_issues: int
+    consistency_stats: Dict[str, Any] = Field(default_factory=dict)

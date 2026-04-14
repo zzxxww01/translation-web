@@ -1,0 +1,754 @@
+[
+  {
+    "id": "1db9af3a-584a-542f-bbeb-c89871c4827c",
+    "original": "TSMC",
+    "translation": "台积电",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "cc06bf90-555c-567d-bd13-d730eb627959",
+    "original": "Apple Silicon",
+    "translation": "Apple Silicon",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "19ca4284-1d6f-5ce9-9a27-984f478106b0",
+    "original": "NVIDIA",
+    "translation": "英伟达",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "debdb9ab-b086-5e65-99db-e3e790a18702",
+    "original": "AMD",
+    "translation": "AMD",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "84af6714-256d-525b-ba2f-36dabc7db161",
+    "original": "Intel",
+    "translation": "英特尔",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f3ccb378-d8b9-51fb-9fe0-b1ab5bec950d",
+    "original": "Qualcomm",
+    "translation": "高通",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ca58e4aa-fd74-573e-a33b-8a7e69f51706",
+    "original": "MediaTek",
+    "translation": "联发科",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d29c11fd-9835-545a-bbcb-bda80b990be2",
+    "original": "Samsung",
+    "translation": "三星",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4fff4d8d-9d42-55a2-8f61-9aa8735d0f4d",
+    "original": "SK Hynix",
+    "translation": "SK海力士",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0f0e0dac-893c-5d84-988c-e814fff28372",
+    "original": "Micron",
+    "translation": "美光",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b7d174e6-6fd7-5d64-a8fd-faf596cbfdb6",
+    "original": "foundry",
+    "translation": "晶圆代工厂",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "681ea98b-4398-581e-a53d-52588d24c756",
+    "original": "wafer",
+    "translation": "晶圆",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4aef0ad2-0fcb-5645-afc8-40322eb226d0",
+    "original": "fab",
+    "translation": "晶圆厂",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "5dd33f09-adb6-52eb-938c-fec455a82361",
+    "original": "node",
+    "translation": "制程节点",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a225534b-5cb3-5c9f-93a1-cda22bb5f73a",
+    "original": "EUV",
+    "translation": "EUV",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f84f0270-39cb-5d82-8ead-ba6903a8e7e0",
+    "original": "EUV lithography",
+    "translation": "EUV光刻",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0b557870-9a60-5dd4-a758-e948e709f95c",
+    "original": "DUV",
+    "translation": "DUV",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e1afdf5f-ec49-5c3e-9e35-913c2220581c",
+    "original": "photolithography",
+    "translation": "光刻",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8cebe344-1d23-5657-92db-e77e0100f805",
+    "original": "etching",
+    "translation": "蚀刻",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "485490f8-d801-5efd-ac5f-ad98330af84d",
+    "original": "deposition",
+    "translation": "沉积",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8050aab2-17d4-5b6f-ab1d-7276ae2a9f27",
+    "original": "CMP",
+    "translation": "化学机械抛光",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4af82df3-4034-5577-806f-98d5694bea61",
+    "original": "SoC",
+    "translation": "SoC",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "efc49083-ffeb-5635-9ff3-97e0cf14f5f8",
+    "original": "GPU",
+    "translation": "GPU",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "032e768f-913c-5b2b-9df7-143f2a22f8bb",
+    "original": "CPU",
+    "translation": "CPU",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "feecc09e-cc32-5dd9-bfb5-ffa232c13b2a",
+    "original": "NPU",
+    "translation": "NPU",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3b7d0e67-8bdd-5541-a0e2-346dcd2b7c4e",
+    "original": "TPU",
+    "translation": "TPU",
+    "strategy": "KEEP_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d57c2724-c5a8-5876-90cf-f99ba3870ac8",
+    "original": "chiplet",
+    "translation": "芯粒",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f1189b1d-a6e1-5f6e-ae1d-e055e55be6b0",
+    "original": "packaging",
+    "translation": "封装",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7b9cf40b-cca6-5d17-8979-582831c43aef",
+    "original": "CoWoS",
+    "translation": "CoWoS",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "08cfe3d7-2815-566d-845a-4534d007bd0d",
+    "original": "InFO",
+    "translation": "InFO",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "666b7794-1b88-5371-980f-b045698d089f",
+    "original": "HBM",
+    "translation": "HBM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3fdd608f-af99-52c5-aec4-f53fd13a1a4a",
+    "original": "SRAM",
+    "translation": "SRAM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ee4d4261-3954-57f3-8168-694ca3921179",
+    "original": "DRAM",
+    "translation": "DRAM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e5ac0c17-2ede-538d-ac21-4b802dda6f52",
+    "original": "NAND flash",
+    "translation": "NAND闪存",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7afe0b6d-5b5a-5694-81b7-942cf24a8300",
+    "original": "logic chip",
+    "translation": "逻辑芯片",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7cd3d6d6-4c89-5583-a808-b619be44ea08",
+    "original": "memory chip",
+    "translation": "存储芯片",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a354cb9c-c422-5d11-b122-f97026ef74ef",
+    "original": "analog chip",
+    "translation": "模拟芯片",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "5fe5695c-0e46-54aa-b9a6-3066b6109329",
+    "original": "RF chip",
+    "translation": "射频芯片",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4778c9a2-097c-5b50-9b73-65d2c85c6c38",
+    "original": "AI",
+    "translation": "AI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ec4f631d-9294-5820-a06b-a698bd22e3d9",
+    "original": "LLM",
+    "translation": "LLM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d6d832fc-304c-561d-9430-56e006071178",
+    "original": "token",
+    "translation": "词元",
+    "strategy": "KEEP_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "31750c5c-b7f3-56c5-aa0e-d3b612ea931c",
+    "original": "context window",
+    "translation": "上下文窗口",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b57fccd6-6e29-5d3a-840b-e6ed7d55f65f",
+    "original": "inference",
+    "translation": "推理",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c6f32ac6-a728-5791-8be9-fa23ae14b148",
+    "original": "training",
+    "translation": "训练",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "53fd7496-e4ec-5a8e-b50b-5b359e151888",
+    "original": "fine-tuning",
+    "translation": "微调",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7fe8eac3-2790-5377-9981-cdd9bb80c3f9",
+    "original": "RLHF",
+    "translation": "RLHF",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "373f69fb-8aaa-582b-b2bf-a9260c716a96",
+    "original": "transformer",
+    "translation": "Transformer",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "214116ed-e006-57d5-bc99-38a4ef4e7887",
+    "original": "self-attention",
+    "translation": "自注意力机制",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "876c4371-d107-5f2c-a334-77f15e12bdea",
+    "original": "parameter",
+    "translation": "参数",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e6633919-1487-5e73-90c1-d7f0f38834ba",
+    "original": "weights",
+    "translation": "权重",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "139523df-eb7f-5e7e-b972-fba8137916ae",
+    "original": "neural network",
+    "translation": "神经网络",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4b6700cd-d434-5b89-8a9f-bc7d221efb21",
+    "original": "deep learning",
+    "translation": "深度学习",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "28fb47e8-f8a1-528e-a0b7-c52c035c0ec9",
+    "original": "machine learning",
+    "translation": "机器学习",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "30813045-496b-54b1-96f8-181b54bb6002",
+    "original": "GPU cluster",
+    "translation": "GPU集群",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c712e58e-81b8-53cf-90d2-0be9184a5323",
+    "original": "data center",
+    "translation": "数据中心",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "25cd9256-62c2-5a4f-9580-ddf29f6bbfd5",
+    "original": "cloud computing",
+    "translation": "云计算",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "997a4383-8ffd-5fde-b3d4-e6d32b92ed69",
+    "original": "edge computing",
+    "translation": "边缘计算",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "24009665-f20c-55f7-81ec-e2861131cccd",
+    "original": "throughput",
+    "translation": "吞吐量",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "042bc241-3ac0-5c67-a125-87610f083b97",
+    "original": "latency",
+    "translation": "延迟",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "79052a9a-004b-5a7b-a8d6-5fc1d2c78c71",
+    "original": "bandwidth",
+    "translation": "带宽",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2f042541-d470-5d06-ab13-3eaad23b7b84",
+    "original": "yield",
+    "translation": "良率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "397778b7-4288-5164-8fee-453394868c36",
+    "original": "utilization rate",
+    "translation": "利用率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4c6817d5-7c64-515e-b7d7-ec93b88cab2b",
+    "original": "efficiency",
+    "translation": "效率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "314e3e6e-eabb-5cb8-a2ac-f7d8ba9950df",
+    "original": "performance",
+    "translation": "性能",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2376e06e-a573-54bb-ada4-c2146f74936f",
+    "original": "benchmark",
+    "translation": "基准测试",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "552123ec-3055-5ca8-967c-18dc5ad843f8",
+    "original": "FLOPS",
+    "translation": "FLOPS",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a7b702fd-45b7-5db6-944a-8d4c51384849",
+    "original": "TOPS",
+    "translation": "TOPS",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "02c105e7-6c7d-54cc-be0d-18b182d0b438",
+    "original": "capex",
+    "translation": "资本支出",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "3af1ccc5-7834-5ae5-8071-0dead1953f42",
+    "original": "opex",
+    "translation": "运营支出",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "08416c36-6e45-5cc8-829b-90141fdc7284",
+    "original": "R&D",
+    "translation": "研发",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9d3ace07-d3f7-5bb7-8404-00bf8b52c1ad",
+    "original": "IDM",
+    "translation": "IDM",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "024f8259-2a38-5abc-a9bf-7b3149c0007e",
+    "original": "fabless",
+    "translation": "无晶圆厂",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "cf073de7-9da4-53fb-ab99-676e38f6eb83",
+    "original": "anchor tenant",
+    "translation": "锚定客户",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "119be6eb-7d33-512a-89d2-fb5c27d944bf",
+    "original": "gross margin",
+    "translation": "毛利率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d828e563-de52-5d8c-920a-6d68f9ad70b0",
+    "original": "revenue",
+    "translation": "营收",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c1334802-425f-585d-992e-37e73aab370c",
+    "original": "net income",
+    "translation": "净收入",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7f8a70ac-4b04-5e21-949b-ace9ee20fd73",
+    "original": "market share",
+    "translation": "市场份额",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "5915bccc-0a20-516e-8549-cdf703dca32e",
+    "original": "HPC",
+    "translation": "HPC",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fa07d000-310c-5dc1-ad31-ff2565feb013",
+    "original": "IoT",
+    "translation": "IoT",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "88f39400-84a2-5060-806c-34ccfa087610",
+    "original": "semiconductor",
+    "translation": "半导体",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "1f8e8c7e-1c28-531c-9d2a-20ba27cda192",
+    "original": "integrated circuit",
+    "translation": "集成电路",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "99f0b0b5-fc78-5266-a561-d966d9340626",
+    "original": "transistor",
+    "translation": "晶体管",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "82f5059e-3663-5dc7-a0a5-ac22f91fd637",
+    "original": "virtualization",
+    "translation": "虚拟化",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "946f7d74-c7ec-5f6d-a268-7bb849c1603b",
+    "original": "scalability",
+    "translation": "可扩展性",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "79f0622f-5b50-5684-b1c6-cc8a033c8f6a",
+    "original": "SemiAnalysis",
+    "translation": "SemiAnalysis",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2b90ba02-1748-5500-8649-b73f4f473209",
+    "original": "prefill",
+    "translation": "预填充",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7fd8933d-f5ab-5921-b08e-ffc2f794d137",
+    "original": "decode",
+    "translation": "解码",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7746fa21-1c11-53bc-98e5-bbc36b79451e",
+    "original": "Texas",
+    "translation": "德克萨斯州",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "42521ae6-4b94-5100-be5d-f976aed44e86",
+    "original": "Vera",
+    "translation": "Vera",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "338c534f-8983-5b17-b4f2-519bebe8828c",
+    "original": "Rubin",
+    "translation": "Rubin",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "21ccf43b-d530-5ed0-b4a0-39290017688a",
+    "original": "BoM",
+    "translation": "物料清单",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a487a23f-6f3b-5f98-80e0-a9e61f807f42",
+    "original": "cableless",
+    "translation": "无缆化",
+    "strategy": "TRANSLATE_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a36d7c49-a119-51a2-b27f-83bd412a7138",
+    "original": "TCO",
+    "translation": "总拥有成本",
+    "strategy": "KEEP_ANNOTATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9fd78220-188c-5437-8495-07492e282afc",
+    "original": "Blackwell",
+    "translation": "Blackwell",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  }
+]

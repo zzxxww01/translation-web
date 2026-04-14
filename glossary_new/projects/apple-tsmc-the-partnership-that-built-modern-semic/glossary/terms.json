@@ -1,0 +1,618 @@
+[
+  {
+    "id": "4e57a891-6324-57fd-a0cd-2551a4e61d44",
+    "original": "vertical integration",
+    "translation": "垂直整合",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9ef4c60d-d69a-5dff-aa3a-e19eacc0ee0d",
+    "original": "Wafer Demand Model",
+    "translation": "晶圆需求模型",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e0b9c729-f817-52c7-8af2-930188e94a70",
+    "original": "yield learning curve",
+    "translation": "良率学习曲线",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b83dae93-ff37-57a1-bb1f-00703ed5b6db",
+    "original": "Broadcom",
+    "translation": "博通",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "14728990-7c66-526f-9155-b91a15402c4e",
+    "original": "ASML",
+    "translation": "ASML",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "1cb4fb2e-4c64-5698-9fff-212c02a48a17",
+    "original": "backside power delivery",
+    "translation": "背面供电",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0d70a7b6-470e-5830-9c53-cda845db50cd",
+    "original": "gate-all-around transistors",
+    "translation": "环绕栅极晶体管",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c7e1e89f-c44a-534f-bae5-4c9ab109b172",
+    "original": "GM",
+    "translation": "毛利率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "38d3e47f-4120-5fde-856b-5e78d1c787fd",
+    "original": "purchase obligations",
+    "translation": "采购承诺",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "dcc6f248-5451-56b3-bf73-9fca49790277",
+    "original": "Advanced Packaging",
+    "translation": "先进封装",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "be35574d-ab94-503d-9524-b1370b9ce3b2",
+    "original": "ASP",
+    "translation": "平均售价 (ASP)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7249d5ba-3aea-5867-b421-6c8a80f63c87",
+    "original": "18A-P",
+    "translation": "18A-P",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b463815b-8d7a-548a-af09-ceca31b10708",
+    "original": "CIS",
+    "translation": "CMOS图像传感器 (CIS)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b0b40a12-4935-5259-aaa5-2723d6a3674c",
+    "original": "hyperscalers",
+    "translation": "超大规模云厂商",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a6e39bcc-dca8-5657-a543-b6702d998adc",
+    "original": "Moore’s Law",
+    "translation": "摩尔定律",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9c3b4116-3e3b-5cd1-b4b2-f07b52a0de60",
+    "original": "AP",
+    "translation": "应用处理器",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "93d9b4cd-2d9c-500d-aeb0-c8610e072c1c",
+    "original": "LSI",
+    "translation": "LSI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "826b936b-f5bd-5ebb-96b0-9bcd06733c46",
+    "original": "A-series",
+    "translation": "A系列",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8d7296e6-e48b-5fa3-ad42-132b2ae3acdc",
+    "original": "M-series",
+    "translation": "M系列",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4cf3beea-3353-5131-9e7b-9b066ae74256",
+    "original": "leading-edge",
+    "translation": "先进制程",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "105ec0ec-22ea-5737-b276-556a51a5a398",
+    "original": "IP",
+    "translation": "IP / 知识产权",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b91d97aa-6f91-56b8-ac03-ebc85342603b",
+    "original": "PDK",
+    "translation": "工艺设计套件",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ec8be7ad-6d2a-5d8f-8998-5137c0719d1c",
+    "original": "Secure Enclave",
+    "translation": "安全隔区",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "19965fde-8e68-5f8c-949a-5f4104ea81f4",
+    "original": "DTCO",
+    "translation": "设计-工艺协同优化",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "873ba853-401c-5a15-beea-460f78c5008c",
+    "original": "Neural Engine",
+    "translation": "神经网络引擎",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0613e7e9-e429-59b3-af5b-c407198843ef",
+    "original": "Unified Memory Architecture",
+    "translation": "统一内存架构",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0382dfe7-b2ac-5ecd-b7d1-90741729a985",
+    "original": "CAGR",
+    "translation": "复合年增长率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "344bdeb8-56b8-5138-bcbb-50a71cb90306",
+    "original": "hyperscaler",
+    "translation": "超大规模云服务商",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b85fde15-d3b5-54a9-afe2-496935f09e38",
+    "original": "leading-edge capacity",
+    "translation": "先进制程产能",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e36b04bc-69d2-574a-8c9b-7fad27bca4f6",
+    "original": "ASIC",
+    "translation": "ASIC (专用集成电路)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "006dc4de-a95e-5494-8a3c-a85e75ec9bbe",
+    "original": "spatial computing",
+    "translation": "空间计算",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2aa8c3ee-1cc9-51ea-bcc7-f159541cc045",
+    "original": "wspm",
+    "translation": "每月晶圆投片量",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "93754b3a-086e-562a-b6e9-be8ee541f5a3",
+    "original": "Y/Y",
+    "translation": "同比",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a50a49fd-8e1c-5b55-89f7-395c90e325d9",
+    "original": "C-series",
+    "translation": "C系列",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fc19a891-e8b8-5735-aa2e-90e6c917edbe",
+    "original": "N-series",
+    "translation": "N系列",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d695cf3c-cf3d-5a0f-ae3e-dce10c446c41",
+    "original": "concentration risk",
+    "translation": "集中度风险",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "1f0c3c94-053f-528b-857d-ef95bb3e8ab8",
+    "original": "Baltra",
+    "translation": "Baltra",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e9744451-92cc-5ae5-a1ed-8cff220f4ba9",
+    "original": "silicon intensity",
+    "translation": "硅含量",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "ccfd1908-003d-5f61-8452-481704b9e4f4",
+    "original": "N3",
+    "translation": "N3",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d444cafc-f0be-5689-9ee7-747d04070ad2",
+    "original": "AI accelerator",
+    "translation": "AI加速器",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "53e736f4-8361-580a-811b-da58a79e7314",
+    "original": "N5",
+    "translation": "N5",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "6311154a-03eb-5857-9159-8770a0f414de",
+    "original": "die",
+    "translation": "裸片",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b38e1c7c-6aa9-58d8-9870-6019a4df04fd",
+    "original": "yield learning",
+    "translation": "良率学习",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9ee9deb9-67eb-5c26-8235-3d02a17ac3e7",
+    "original": "binning",
+    "translation": "芯片分级",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4ae0f429-c0d7-5c2d-896f-aab5e42a38d2",
+    "original": "ramp",
+    "translation": "产能爬坡",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b0c20078-1b15-5228-a13e-374fb0cf5c52",
+    "original": "Known Good Die (KGD)",
+    "translation": "已知良好裸片",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "979a2af9-3ed3-5a83-9cea-91eaf27f356c",
+    "original": "Known Good Die",
+    "translation": "已知良好裸片",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b00caa7a-0b6b-5657-9332-2f6b5f556fe6",
+    "original": "KGD",
+    "translation": "KGD",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "270cbcac-dc4d-5890-9de4-0420ed74c54a",
+    "original": "NRE",
+    "translation": "一次性工程费用 (NRE)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7afd4a62-40f6-53ce-bcd6-df222f75309d",
+    "original": "COGS",
+    "translation": "销货成本 (COGS)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "479f5a3a-7f97-5faf-afec-74bc1acccc8e",
+    "original": "capital expenditure",
+    "translation": "资本支出",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e8aaaa5d-a9e9-55d5-9049-d98ee265c10c",
+    "original": "market cap",
+    "translation": "市值",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e6b08ca1-59cf-5f1c-b01b-3821445fc065",
+    "original": "N2",
+    "translation": "N2",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "df3207f1-eaec-5b25-8b2a-597f56124e9d",
+    "original": "A14",
+    "translation": "A14",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fa6e4e22-5360-5e98-80a4-fea81bba714f",
+    "original": "A16",
+    "translation": "A16",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "53e73cd2-217b-5385-bee6-94769832c8c8",
+    "original": "PTC",
+    "translation": "PTC",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f342e1d5-87c3-57d6-a5fa-9d1e0c224687",
+    "original": "Fab 18",
+    "translation": "Fab 18",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f606d67d-ee77-5f87-8548-db301f83b0bf",
+    "original": "Node Economics",
+    "translation": "节点经济学",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "899b4570-b9a8-50aa-aba6-a8b179d723c3",
+    "original": "thermal envelope",
+    "translation": "散热包络",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f899e7fa-72f3-55d6-9d6a-6b3de9ebe359",
+    "original": "Foxconn",
+    "translation": "富士康",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a94e2f43-ebe1-5011-878c-d95d74163c24",
+    "original": "platform shift",
+    "translation": "平台转换",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "55b812c8-4f4d-5f0a-90f0-5e0fa8ac603d",
+    "original": "S-series",
+    "translation": "S系列",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "236ee063-2555-5af1-a299-13f86f22356d",
+    "original": "18A",
+    "translation": "18A",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "7ff48b8b-6ce9-59fb-ad1b-eda6da636cc0",
+    "original": "N3E",
+    "translation": "N3E",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f7e486af-f9f6-55fb-b8ab-a0060c4ad83d",
+    "original": "mature node",
+    "translation": "成熟制程",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "578ddb7c-be72-5b6a-8342-ca2aa4f36c41",
+    "original": "PMIC",
+    "translation": "PMIC (电源管理芯片)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a009b8b3-7aba-5408-be58-48e86063f31a",
+    "original": "AP6",
+    "translation": "AP6 (先进封装厂)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "bf259180-5a32-5f69-b169-b042d9ecaab7",
+    "original": "TSMC Arizona",
+    "translation": "台积电亚利桑那州工厂",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8f44da4c-f82b-5b34-922f-52723396e28c",
+    "original": "SLC",
+    "translation": "系统级缓存",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9c1760f3-3a29-5f43-921d-996ff30d4064",
+    "original": "Strix Halo",
+    "translation": "Strix Halo",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "96f6bb9e-336c-591c-a1c6-c81605eb51f5",
+    "original": "node transition",
+    "translation": "制程转换",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9672e9b1-538b-55b0-b3ea-9afd0220259e",
+    "original": "1.4nm",
+    "translation": "1.4纳米",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f479e482-5209-51d6-9cff-dd434006027f",
+    "original": "silicon content",
+    "translation": "硅含量",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "b99281ad-492f-5009-8a5f-ba6149cf3805",
+    "original": "device base",
+    "translation": "设备基数",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "21b3c8f6-632f-5786-9f58-398e847ff53e",
+    "original": "custom silicon",
+    "translation": "定制芯片",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e6fb4b74-df58-55eb-bfd8-e6c90a8cb3d2",
+    "original": "startup capacity",
+    "translation": "初始产能",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e61af056-ed1f-5ddf-8aa3-66a620cf0e5c",
+    "original": "Fab 21",
+    "translation": "Fab 21",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  }
+]

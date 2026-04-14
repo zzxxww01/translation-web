@@ -1,0 +1,194 @@
+[
+  {
+    "id": "c8d33801-8f1c-5a73-870e-009e6c5322dd",
+    "original": "Supercycle",
+    "translation": "超级周期",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "5e12daf0-be7c-53ef-8b3e-fe18a5373b95",
+    "original": "cost per bit",
+    "translation": "每比特成本",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f4456830-97da-5679-af88-2a3f5687ed69",
+    "original": "upcycle",
+    "translation": "上行周期",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d51f387c-3d4b-5c69-b96f-6609f78fd662",
+    "original": "bit supply",
+    "translation": "位元供应",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "be35574d-ab94-503d-9524-b1370b9ce3b2",
+    "original": "ASP",
+    "translation": "平均售价 (ASP)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "89e31357-1676-5908-8a42-fd03a6d3f2e9",
+    "original": "LPDDR",
+    "translation": "LPDDR",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d526a5e7-a808-50f3-b4ca-4ca09e6fdadf",
+    "original": "greenfield",
+    "translation": "新建（绿地）",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "344bdeb8-56b8-5138-bcbb-50a71cb90306",
+    "original": "hyperscaler",
+    "translation": "超大规模云服务商",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a85b2e00-c130-55a2-bacc-97d7ef2d9eb2",
+    "original": "OEM",
+    "translation": "OEM",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2ed0f47e-aa0c-5a26-a899-a5a82c683949",
+    "original": "scale-out",
+    "translation": "横向扩展",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0096b849-2141-5f8f-ad34-3132a97e2dae",
+    "original": "commodity DRAM",
+    "translation": "大宗DRAM",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fb1e59ef-e757-53a4-bc6e-3d7b0d95c635",
+    "original": "bit output",
+    "translation": "比特产出",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d70e1188-fb9b-5c56-8b73-4f2ff6bf5d3d",
+    "original": "WFE",
+    "translation": "WFE (晶圆制造设备)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fe5d020c-2edd-59c9-aaef-d3dd4a07788f",
+    "original": "cleanroom",
+    "translation": "洁净室",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "20145b48-d912-571c-939e-fcffd08cacce",
+    "original": "node migration",
+    "translation": "节点演进",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "611ab29f-6f14-5e61-83f7-27ed60931e7a",
+    "original": "12-Hi",
+    "translation": "12层堆叠",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "43cff256-bafd-5e21-81c7-5e30b1309b25",
+    "original": "DDR",
+    "translation": "DDR",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "197912ff-7aab-52e8-ae07-438a7f91a5db",
+    "original": "PSMC",
+    "translation": "力积电",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "2e9a24c1-7755-5402-a3f2-67faa64f0b32",
+    "original": "Core Research",
+    "translation": "Core Research",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "4fe733ef-333d-513f-a5ec-0a66d76b72df",
+    "original": "DDR5",
+    "translation": "DDR5",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "dabe8c79-3ee5-5802-ad20-d6870e4ef29f",
+    "original": "LPDDR5",
+    "translation": "LPDDR5",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "76dfa427-eac0-5162-a8bc-e2115c9047a6",
+    "original": "HBM3E 12-hi",
+    "translation": "12层HBM3E",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "56e81eea-17bf-5c68-85e3-4c5ba21ac245",
+    "original": "ASML",
+    "translation": "阿斯麦 (ASML)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "70409edc-fc64-5fbf-8295-08d88d4f4cb6",
+    "original": "multipatterning",
+    "translation": "多重曝光",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  }
+]

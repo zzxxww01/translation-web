@@ -5,6 +5,7 @@ from .consistency import router as consistency_router
 from .glossary import router as glossary_router
 from .project_glossary import router as project_glossary_router
 from .projects import router as projects_router
+from .quality_report import router as quality_report_router
 from .segmentation import router as segmentation_router
 from .slack import router as slack_router
 from .tasks import router as tasks_router
@@ -17,6 +18,7 @@ __all__ = [
     "glossary_router",
     "project_glossary_router",
     "projects_router",
+    "quality_report_router",
     "segmentation_router",
     "slack_router",
     "tasks_router",

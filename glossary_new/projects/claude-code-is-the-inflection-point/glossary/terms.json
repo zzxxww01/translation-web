@@ -1,0 +1,202 @@
+[
+  {
+    "id": "7cfa1024-f692-5fb6-8bd4-52c7882d3bb0",
+    "original": "Claude Code",
+    "translation": "Claude Code",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a7127b90-5395-57c7-96ff-90dac3b7e20a",
+    "original": "Anthropic",
+    "translation": "Anthropic",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "67e708c6-5e6e-5869-8db4-c3ab893629a3",
+    "original": "Tokenomics Model",
+    "translation": "Tokenomics模型",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "cb3a6208-343f-5deb-8313-3c658ed8b9b1",
+    "original": "ARR",
+    "translation": "ARR (年度经常性收入)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "fe5b4bb3-878a-548e-b383-0cf714c0bf47",
+    "original": "TCP/IP",
+    "translation": "TCP/IP",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "0b80415c-f411-5b7d-83d9-e583511b4037",
+    "original": "Agent",
+    "translation": "智能体",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "19bc920f-abd8-5e8a-be3a-1c160e01f098",
+    "original": "vibe coding",
+    "translation": "vibe coding (直觉编程/意念编程)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "f5f5f944-f348-5804-950d-534a9f63d349",
+    "original": "agentic",
+    "translation": "智能体化 / 代理化",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "1c3602dc-b3e3-58e7-8cb5-c04f4f81676f",
+    "original": "CLI",
+    "translation": "CLI (命令行界面)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "717fe1bb-b2ff-522e-b172-ba917015be6d",
+    "original": "Opus 4.5",
+    "translation": "Opus 4.5",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "aa8baed7-65e0-5425-97be-dcdf3b609fa6",
+    "original": "Cowork",
+    "translation": "Cowork",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "e38d56e5-3e0f-59d5-9fe5-e9e5339fb1b0",
+    "original": "MCP",
+    "translation": "MCP",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8a555071-2a91-543a-8761-bc86e442a6c3",
+    "original": "METR",
+    "translation": "METR",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "afe634dd-1456-5aef-9782-e45486d58ff2",
+    "original": "Task Horizon",
+    "translation": "任务跨度",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a8f42882-3b2e-5545-ab87-6ad8ee0b3ea8",
+    "original": "SaaS",
+    "translation": "SaaS",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "c6f3e44e-c7f3-5cbe-aebc-557c41093b71",
+    "original": "Salesforce",
+    "translation": "Salesforce",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "a368c4a2-05fe-564f-96d7-1a8596920839",
+    "original": "seat-based software",
+    "translation": "按席位授权软件",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "8b6b8c4e-2414-5756-9e33-1ddca200f192",
+    "original": "Azure",
+    "translation": "Azure",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "d16d1717-d6f8-5f35-bae6-35f795d17184",
+    "original": "Copilot",
+    "translation": "Copilot",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "12657462-8bca-584b-b46e-6f73de98d9e5",
+    "original": "OpenAI",
+    "translation": "OpenAI",
+    "strategy": "KEEP",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "9077a92c-6dbe-54b2-93af-bc05c94120ea",
+    "original": "terminal value",
+    "translation": "终值",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "74f8c1be-4e18-503b-96d9-f3b1a533e06d",
+    "original": "token efficiency",
+    "translation": "token效率",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "31f3cc9d-3b5f-5116-b8c5-5bfd02f2a3b3",
+    "original": "long-horizon task",
+    "translation": "长周期任务",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "daeb7bf2-3649-542d-b4a7-b2dd0976a81d",
+    "original": "agent orchestration",
+    "translation": "智能体编排",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  },
+  {
+    "id": "dd775e13-859f-5f45-b36d-be98688e06ce",
+    "original": "PARL",
+    "translation": "并行智能体强化学习 (Parallel Agent Reinforcement Learning)",
+    "strategy": "TRANSLATE",
+    "note": null,
+    "status": "active"
+  }
+]

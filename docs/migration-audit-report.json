@@ -1,0 +1,149 @@
+{
+  "audit_time": "2026-04-14T16:54:15.982840",
+  "global_glossary": {
+    "path": "glossary\\global_glossary_semi.json",
+    "version": 30,
+    "term_count": 94
+  },
+  "project_glossaries": [
+    {
+      "project_id": "apple-tsmc",
+      "path": "projects\\apple-tsmc\\glossary.json",
+      "version": 1,
+      "term_count": 24
+    },
+    {
+      "project_id": "apple-tsmc-the-partnership-that-built-modern-semic",
+      "path": "projects\\apple-tsmc-the-partnership-that-built-modern-semic\\glossary.json",
+      "version": 4,
+      "term_count": 77
+    },
+    {
+      "project_id": "are-ai-datacenters-increasing-electric-bills-for-a",
+      "path": "projects\\are-ai-datacenters-increasing-electric-bills-for-a\\glossary.json",
+      "version": 2,
+      "term_count": 0
+    },
+    {
+      "project_id": "claude-code-is-the-inflection-point",
+      "path": "projects\\claude-code-is-the-inflection-point\\glossary.json",
+      "version": 3,
+      "term_count": 25
+    },
+    {
+      "project_id": "clustermaxtm-2-0-the-industry-standard-gpu-cloud-r",
+      "path": "projects\\clustermaxtm-2-0-the-industry-standard-gpu-cloud-r\\glossary.json",
+      "version": 1,
+      "term_count": 92
+    },
+    {
+      "project_id": "cpus-are-back-the-datacenter-cpu-landscape-in-2026",
+      "path": "projects\\cpus-are-back-the-datacenter-cpu-landscape-in-2026\\glossary.json",
+      "version": 2,
+      "term_count": 0
+    },
+    {
+      "project_id": "dissecting-nvidia-blackwell-tensor-cores-ptx-instr",
+      "path": "projects\\dissecting-nvidia-blackwell-tensor-cores-ptx-instr\\glossary.json",
+      "version": 2,
+      "term_count": 16
+    },
+    {
+      "project_id": "gtc-2026",
+      "path": "projects\\gtc-2026\\glossary.json",
+      "version": 2,
+      "term_count": 0
+    },
+    {
+      "project_id": "gtc-2026-the-inference-kingdom-expands",
+      "path": "projects\\gtc-2026-the-inference-kingdom-expands\\glossary.json",
+      "version": 2,
+      "term_count": 0
+    },
+    {
+      "project_id": "inferencemaxtm-open-source-inference-benchmarking",
+      "path": "projects\\inferencemaxtm-open-source-inference-benchmarking\\glossary.json",
+      "version": 1,
+      "term_count": 24
+    },
+    {
+      "project_id": "inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo",
+      "path": "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\glossary.json",
+      "version": 3,
+      "term_count": 86
+    },
+    {
+      "project_id": "memory-mania-how-a-once-in-four-decades-shortage-i",
+      "path": "projects\\memory-mania-how-a-once-in-four-decades-shortage-i\\glossary.json",
+      "version": 3,
+      "term_count": 24
+    },
+    {
+      "project_id": "rl-environments-and-rl-for-science-data-foundries",
+      "path": "projects\\rl-environments-and-rl-for-science-data-foundries\\glossary.json",
+      "version": 5,
+      "term_count": 51
+    },
+    {
+      "project_id": "the-great-ai-silicon-shortage",
+      "path": "projects\\the-great-ai-silicon-shortage\\glossary.json",
+      "version": 2,
+      "term_count": 0
+    },
+    {
+      "project_id": "the-great-gpu-shortage-rental-capacity-launching-o",
+      "path": "projects\\the-great-gpu-shortage-rental-capacity-launching-o\\glossary.json",
+      "version": 2,
+      "term_count": 0
+    },
+    {
+      "project_id": "vera-rubin-extreme-co-design-an-evolution-from-gra",
+      "path": "projects\\vera-rubin-extreme-co-design-an-evolution-from-gra\\glossary.json",
+      "version": 2,
+      "term_count": 0
+    }
+  ],
+  "total_global_terms": 94,
+  "total_project_terms": 419,
+  "strategy_distribution": {
+    "first_annotate": 72,
+    "preserve": 160,
+    "translate": 275,
+    "preserve_annotate": 6
+  },
+  "scope_distribution": {
+    "global": 94,
+    "unknown": 140,
+    "project": 279
+  },
+  "source_distribution": {
+    "manual": 110,
+    "unknown": 140,
+    "term_review_auto": 251,
+    "analysis_auto": 12
+  },
+  "status_distribution": {
+    "active": 373,
+    "unknown": 140
+  },
+  "files_found": [
+    "glossary\\global_glossary_semi.json",
+    "projects\\apple-tsmc\\glossary.json",
+    "projects\\apple-tsmc-the-partnership-that-built-modern-semic\\glossary.json",
+    "projects\\are-ai-datacenters-increasing-electric-bills-for-a\\glossary.json",
+    "projects\\claude-code-is-the-inflection-point\\glossary.json",
+    "projects\\clustermaxtm-2-0-the-industry-standard-gpu-cloud-r\\glossary.json",
+    "projects\\cpus-are-back-the-datacenter-cpu-landscape-in-2026\\glossary.json",
+    "projects\\dissecting-nvidia-blackwell-tensor-cores-ptx-instr\\glossary.json",
+    "projects\\gtc-2026\\glossary.json",
+    "projects\\gtc-2026-the-inference-kingdom-expands\\glossary.json",
+    "projects\\inferencemaxtm-open-source-inference-benchmarking\\glossary.json",
+    "projects\\inferencex-v2-nvidia-blackwell-vs-amd-vs-hopper-fo\\glossary.json",
+    "projects\\memory-mania-how-a-once-in-four-decades-shortage-i\\glossary.json",
+    "projects\\rl-environments-and-rl-for-science-data-foundries\\glossary.json",
+    "projects\\the-great-ai-silicon-shortage\\glossary.json",
+    "projects\\the-great-gpu-shortage-rental-capacity-launching-o\\glossary.json",
+    "projects\\vera-rubin-extreme-co-design-an-evolution-from-gra\\glossary.json"
+  ],
+  "errors": []
+}
