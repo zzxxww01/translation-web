@@ -474,7 +474,6 @@ class SourceMetadataTranslationService:
             translated_text=translated_tokenized_text,
             format_tokens=format_token_context(paragraph),
             issues=issues,
-            model="preview",
         )
 
     def _apply_payload(self, paragraph: Paragraph, payload: TranslationPayload) -> None:

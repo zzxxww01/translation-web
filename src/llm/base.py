@@ -104,7 +104,7 @@ class LLMProvider(ABC):
         translated_text: str,
         format_tokens: List[Dict[str, Any]],
         issues: Optional[List[str]] = None,
-        model: str = "flash",
+        model: Optional[str] = None,
     ) -> Optional[str]:
         """Try to repair broken hidden format tokens after validation fails."""
         return None
@@ -409,7 +409,6 @@ class LLMProvider(ABC):
             section_title=section_title,
             section_content=section_content,
             existing_terms=existing_terms,
-            model="preview",
         )
 
     # ============ Prompt Building Methods ============

@@ -693,7 +693,7 @@ class GeminiProvider(LLMProvider):
         translated_text: str,
         format_tokens: List[Dict[str, Any]],
         issues: Optional[List[str]] = None,
-        model: str = "flash",
+        model: Optional[str] = None,
     ) -> Optional[str]:
         """Run a lightweight repair pass to restore hidden token wrappers."""
         preview_tokens = limit_format_tokens(format_tokens)
@@ -1243,17 +1243,12 @@ class GeminiProvider(LLMProvider):
         section_content: str,
         existing_terms: Dict[str, str],
     ) -> Dict[str, Any]:
-        """Run section prescan with the preview model.
-
-        `flash` is currently rejected for this environment, so the fast prescan
-        path is backed by `preview` instead of failing the workflow.
-        """
+        """Run section prescan with the default model."""
         return self.prescan_section(
             section_id=section_id,
             section_title=section_title,
             section_content=section_content,
             existing_terms=existing_terms,
-            model="preview",
         )
 
 

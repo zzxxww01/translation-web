@@ -2,7 +2,7 @@
  * 质量报告组件导出
  */
 
-export { QualityStatsCard } from './components/QualityStatsCard';
-export { IssueList } from './components/IssueList';
-export { SectionQualityCard } from './components/SectionQualityCard';
-export { DocumentQualityPanel } from './components/DocumentQualityPanel';
+export { QualityStatsCard } from './QualityStatsCard';
+export { IssueList } from './IssueList';
+export { SectionQualityCard } from './SectionQualityCard';
+export { DocumentQualityPanel } from './DocumentQualityPanel';

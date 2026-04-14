@@ -1,6 +1,16 @@
 import React, { useEffect, useState } from 'react';
+import { Cpu } from 'lucide-react';
 import { modelsApi } from '../shared/api/models';
 import type { ProviderInfo } from '../shared/types';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface ModelSelectorProps {
   value?: string;
@@ -39,43 +49,56 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
 
   if (loading) {
     return (
-      <select className={className} disabled>
-        <option>Loading models...</option>
-      </select>
+      <Select disabled>
+        <SelectTrigger className={className}>
+          <SelectValue placeholder="加载模型中..." />
+        </SelectTrigger>
+      </Select>
     );
   }
 
   if (error) {
     return (
-      <select className={className} disabled>
-        <option>Error loading models</option>
-      </select>
+      <Select disabled>
+        <SelectTrigger className={className}>
+          <SelectValue placeholder="加载失败" />
+        </SelectTrigger>
+      </Select>
     );
   }
 
   return (
-    <select
-      className={className}
-      value={value || ''}
-      onChange={(e) => onChange(e.target.value)}
-      disabled={disabled}
-    >
-      <option value="">Default model</option>
-      {providers.map((provider) => (
-        <optgroup key={provider.id} label={provider.name}>
-          {provider.models.map((model) => (
-            <option
-              key={model.alias}
-              value={model.alias}
-              disabled={!model.available}
-            >
-              {model.name} - {model.description}
-              {model.supports_thinking ? ' [思考]' : ''}
-              {!model.available ? ' [不可用]' : ''}
-            </option>
-          ))}
-        </optgroup>
-      ))}
-    </select>
+    <Select value={value || 'default'} onValueChange={(val) => onChange(val === 'default' ? '' : val)} disabled={disabled}>
+      <SelectTrigger className={className}>
+        <div className="flex items-center gap-2">
+          <Cpu className="h-3.5 w-3.5 text-text-muted" />
+          <SelectValue placeholder="默认模型" />
+        </div>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="default">默认模型</SelectItem>
+        {providers.map((provider) => (
+          <SelectGroup key={provider.id}>
+            <SelectLabel>{provider.name}</SelectLabel>
+            {provider.models.map((model) => (
+              <SelectItem
+                key={model.alias}
+                value={model.alias}
+                disabled={!model.available}
+              >
+                <div className="flex flex-col">
+                  <span className="font-medium">{model.name}</span>
+                  <span className="text-xs text-text-muted">
+                    {model.description}
+                    {model.supports_thinking && ' • 支持思考'}
+                    {!model.available && ' • 不可用'}
+                  </span>
+                </div>
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        ))}
+      </SelectContent>
+    </Select>
   );
 };

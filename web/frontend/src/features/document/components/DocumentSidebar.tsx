@@ -154,33 +154,38 @@ export function DocumentSidebar({
                   </button>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  <div className="space-y-2 mt-1">
-                    <div className="flex items-center gap-1.5">
-                      <Layers className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
-                      <Select
-                        value={selectedMethod}
-                        onValueChange={(value) => setSelectedMethod(value as TranslationMethod)}
-                        disabled={isTranslateBusy}
-                      >
-                        <SelectTrigger className="h-8 flex-1 text-xs">
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {TRANSLATION_METHOD_OPTIONS.map(method => (
-                            <SelectItem key={method.id} value={method.id}>
-                              {method.name}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                  <div className="space-y-3 mt-2 px-1">
+                    <div>
+                      <label className="text-xs text-text-muted mb-1.5 block">翻译方法</label>
+                      <div className="flex items-center gap-1.5">
+                        <Layers className="h-3.5 w-3.5 flex-shrink-0 text-text-muted" />
+                        <Select
+                          value={selectedMethod}
+                          onValueChange={(value) => setSelectedMethod(value as TranslationMethod)}
+                          disabled={isTranslateBusy}
+                        >
+                          <SelectTrigger className="h-8 flex-1 text-xs">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {TRANSLATION_METHOD_OPTIONS.map(method => (
+                              <SelectItem key={method.id} value={method.id}>
+                                {method.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
-                    <div className="text-xs text-text-muted mb-1">选择模型</div>
-                    <ModelSelector
-                      value={selectedModel || undefined}
-                      onChange={(model) => setSelectedModel(model || null)}
-                      className="h-8 text-xs"
-                      disabled={isTranslateBusy}
-                    />
+                    <div>
+                      <label className="text-xs text-text-muted mb-1.5 block">选择模型</label>
+                      <ModelSelector
+                        value={selectedModel || undefined}
+                        onChange={(model) => setSelectedModel(model || null)}
+                        className="h-8 text-xs"
+                        disabled={isTranslateBusy}
+                      />
+                    </div>
                   </div>
                 </CollapsibleContent>
               </Collapsible>

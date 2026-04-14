@@ -187,7 +187,6 @@ class ImageProcessingService:
             translated_text=translated_tokenized_text,
             format_tokens=format_token_context(paragraph),
             issues=issues,
-            model="flash",
         )
 
     def get_image_report(self) -> Dict[str, Any]:

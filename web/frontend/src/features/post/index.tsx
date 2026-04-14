@@ -133,19 +133,20 @@ export function PostFeature() {
   return (
     <div className="flex h-full overflow-auto">
       <div className="mx-auto w-full max-w-7xl p-6">
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold">帖子翻译</h2>
-          <p className="text-sm text-muted-foreground">翻译、优化并生成标题</p>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">选择模型</label>
-          <ModelSelector
-            value={selectedModel}
-            onChange={setSelectedModel}
-            className="w-full max-w-md px-3 py-2 border rounded-md"
-            disabled={isLoading}
-          />
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h2 className="text-xl font-semibold">帖子翻译</h2>
+            <p className="text-sm text-muted-foreground">翻译、优化并生成标题</p>
+          </div>
+          <div className="w-64">
+            <label className="block text-xs text-text-muted mb-1.5">选择模型</label>
+            <ModelSelector
+              value={selectedModel}
+              onChange={setSelectedModel}
+              className="h-9 text-sm"
+              disabled={isLoading}
+            />
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-h-[calc(100vh-200px)]">

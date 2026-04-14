@@ -20,6 +20,7 @@ from .routers import (
     confirmation,
     consistency,
     glossary,
+    image_cleanup,
     models,
     project_glossary,
     projects,
@@ -49,6 +50,7 @@ app.include_router(glossary.router, prefix="/api", tags=["glossary"])
 app.include_router(project_glossary.router, prefix="/api", tags=["projects"])
 app.include_router(confirmation.router, prefix="/api", tags=["confirmation"])
 app.include_router(projects.router, prefix="/api", tags=["projects"])
+app.include_router(image_cleanup.router, prefix="/api", tags=["image-cleanup"])
 app.include_router(quality_report.router, tags=["quality-report"])
 app.include_router(slack.router, prefix="/api", tags=["slack"])
 app.include_router(tools.router, prefix="/api", tags=["tools"])

@@ -68,8 +68,18 @@ export interface SectionAnalysis {
 
 // ============ 鐎电鐦介惄绋垮彠缁鐎?============
 
+export type MessageRole = 'them' | 'me';
+
+export interface ConversationMessage {
+  id: string;  // UUID for React key
+  role: MessageRole;
+  content: string;
+  timestamp: number;
+}
+
 export interface ProcessMessageDto {
   message: string;
+  conversation_history?: ConversationMessage[];
 }
 
 export interface SlackReplyVariant {
@@ -85,6 +95,7 @@ export interface ProcessResult {
 
 export interface ComposeDto {
   content: string;
+  conversation_history?: ConversationMessage[];
 }
 
 export interface ComposeResult {

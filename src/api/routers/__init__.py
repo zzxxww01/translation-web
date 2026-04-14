@@ -3,6 +3,7 @@
 from .confirmation import router as confirmation_router
 from .consistency import router as consistency_router
 from .glossary import router as glossary_router
+from .image_cleanup import router as image_cleanup_router
 from .models import router as models_router
 from .project_glossary import router as project_glossary_router
 from .projects import router as projects_router

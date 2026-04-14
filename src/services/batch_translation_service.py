@@ -1558,7 +1558,6 @@ class BatchTranslationService:
                 if element.span_id
             ],
             issues=issues,
-            model="preview",
         )
 
     def _collect_section_translations(self, section: Section) -> List[str]:
