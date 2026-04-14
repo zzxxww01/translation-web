@@ -51,9 +51,11 @@ async def process_slack_message(
     if request.custom_prompt:
         prompt = request.custom_prompt.replace("{message}", message)
     else:
+        conversation_history_section = format_conversation_history(request.conversation_history)
         prompt = prompt_manager.get(
             "slack_process",
             context_section="",
+            conversation_history_section=conversation_history_section,
             message=message,
         )
 

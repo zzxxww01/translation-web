@@ -48,9 +48,11 @@ async def compose_slack_message(
     if not content:
         raise BadRequestException(detail="content cannot be empty")
 
+    conversation_history_section = format_conversation_history(request.conversation_history)
     prompt = prompt_manager.get(
         "slack_compose",
         context_section="",
+        conversation_history_section=conversation_history_section,
         content=content,
     )
 
