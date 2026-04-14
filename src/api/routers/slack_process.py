@@ -20,7 +20,7 @@ def format_conversation_history(history: list[ConversationMessage]) -> str:
     if not history:
         return ""
 
-    lines = ["## Conversation history"]
+    lines = ["## Conversation history", ""]
     for msg in history:
         role_label = "[Me]" if msg.role == "me" else "[Them]"
         lines.append(f"{role_label}: {msg.content}")
