@@ -99,6 +99,7 @@ class BatchTranslationService:
         llm_provider: LLMProvider,
         project_manager: ProjectManager,
         translation_mode: str = "section",  # 默认使用章节级翻译
+        max_concurrent_sections: int = 10,  # 最大并发章节数（提高到10）
     ):
         """
         初始化批量翻译服务
@@ -107,10 +108,12 @@ class BatchTranslationService:
             llm_provider: LLM Provider
             project_manager: 项目管理器
             translation_mode: 翻译模式 ("four_step" 或 "section")
+            max_concurrent_sections: 最大并发章节数（默认10，VectorEngine可支持更高）
         """
         self.llm = llm_provider
         self.project_manager = project_manager
         self.translation_mode = translation_mode
+        self.max_concurrent_sections = max_concurrent_sections
         self.deep_analyzer = DeepAnalyzer(llm_provider)
         self.context_manager = LayeredContextManager()
         self._progress_tracker = self._shared_progress_tracker
@@ -901,68 +904,75 @@ class BatchTranslationService:
             # 更新项目状态为"翻译中"
             self._set_active_status(project_id, project, ProjectStatus.IN_PROGRESS)
 
-            # 逐章节翻译
+            # 并行翻译章节
             logger.info(
-                f"[{project_id}] Starting section translation (mode: {self.translation_mode})"
+                f"[{project_id}] Starting parallel section translation "
+                f"(mode: {self.translation_mode}, max_concurrent: {self.max_concurrent_sections})"
             )
 
             # 收集所有翻译结果用于一致性审查
             all_translations = {}
-            for i, section in enumerate(project.sections):
-                # 取消检查
+
+            # 使用信号量控制并发数
+            semaphore = asyncio.Semaphore(self.max_concurrent_sections)
+
+            async def translate_section_with_limit(section_index: int, section: Section):
+                """带并发限制的章节翻译"""
+                async with semaphore:
+                    return await self._translate_single_section(
+                        project_id=project_id,
+                        section=section,
+                        section_index=section_index,
+                        total_sections=total_sections,
+                        all_sections=project.sections,
+                        analysis=analysis,
+                        run_dir=run_dir,
+                        progress=progress,
+                        on_progress=on_progress,
+                        on_term_conflict=on_term_conflict,
+                        project=project,
+                        total_paragraphs=total_paragraphs,
+                    )
+
+            # 创建所有翻译任务
+            tasks = [
+                translate_section_with_limit(i, section)
+                for i, section in enumerate(project.sections)
+            ]
+
+            # 并行执行所有任务
+            logger.info(f"[{project_id}] Launching {len(tasks)} section translation tasks")
+            results = await asyncio.gather(*tasks, return_exceptions=True)
+
+            # 处理结果
+            for i, result in enumerate(results):
+                section = project.sections[i]
+
+                # 检查是否取消
                 if self._is_cancelled(project_id):
                     logger.info(f"[{project_id}] Translation cancelled by user")
                     return finalize_cancelled_result()
 
-                progress.current_section = section.title
-                progress.current_step = f"翻译章节 {i+1}/{total_sections}"
-                section_prompt_context = self._build_section_prompt_context(
-                    project,
-                    section,
-                    i,
-                    analysis,
-                )
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-context",
-                    section.section_id,
-                    section_prompt_context,
-                )
-                prescan_result = await self._run_section_prescan(
-                    project_id,
-                    section,
-                    progress,
-                    on_term_conflict=on_term_conflict,
-                )
-                if prescan_result:
-                    self._persist_section_artifact(
-                        run_dir,
-                        "section-prescan",
-                        section.section_id,
-                        prescan_result,
+                # 处理异常
+                if isinstance(result, Exception):
+                    error_msg = f"Failed to translate section {section.section_id}: {str(result)}"
+                    logger.error(f"[{project_id}] {error_msg}")
+                    self._progress_tracker.record_error(
+                        progress, error_msg, section.section_id
                     )
+                    continue
 
-                # 断点续传：检查章节是否已全部翻译
-                section_paragraph_count = len(section.paragraphs)
-                translated_in_section = self._count_translated_paragraphs(section)
+                # 处理取消
+                if result.get("cancelled"):
+                    logger.info(f"[{project_id}] Section {section.section_id} cancelled")
+                    continue
 
-                if (
-                    translated_in_section == section_paragraph_count
-                    and section_paragraph_count > 0
-                ):
-                    # 整个章节已翻译，跳过
-                    logger.info(
-                        f"[{project_id}] Skipping section {section.section_id}: "
-                        f"all {section_paragraph_count} paragraphs already translated"
-                    )
-                    translated_count += section_paragraph_count
+                # 处理跳过的章节
+                if result.get("skipped"):
+                    all_translations[section.section_id] = result["translations"]
+                    translated_count += result["paragraph_count"]
                     progress.translated_sections += 1
-                    progress.translated_paragraphs += section_paragraph_count
-
-                    # 收集已有翻译用于一致性审查
-                    all_translations[section.section_id] = (
-                        self._collect_section_translations(section)
-                    )
+                    progress.translated_paragraphs += result["paragraph_count"]
 
                     self._notify_progress(
                         on_progress,
@@ -970,134 +980,54 @@ class BatchTranslationService:
                         translated_count,
                         total_paragraphs,
                     )
+                    logger.info(
+                        f"[{project_id}] Skipped section {section.section_id}: "
+                        f"all {result['paragraph_count']} paragraphs already translated"
+                    )
                     continue
 
-                self._notify_progress(
-                    on_progress,
-                    f"翻译: {section.title}",
-                    translated_count,
-                    total_paragraphs,
-                )
-
-                try:
-                    # 根据翻译模式选择翻译方法
-                    if self.translation_mode == self.TRANSLATION_MODE_SECTION:
-                        # 章节级批量翻译（粗粒度）
-                        translations = await self._translate_section_batch(
-                            section=section,
-                            section_index=i,
-                            total_sections=total_sections,
-                            all_sections=project.sections,
-                            analysis=analysis,
-                        )
-
-                        # 保存翻译结果到段落并收集结果
-                        all_translations[section.section_id] = (
-                            self._apply_section_batch_translations(
-                                section,
-                                translations,
-                            )
-                        )
-                        self._record_section_batch_term_usage(section, analysis)
-                        self._persist_section_artifact(
-                            run_dir,
-                            "section-draft",
-                            section.section_id,
-                            {
-                                "section_id": section.section_id,
-                                "mode": self.translation_mode,
-                                "prompt_context": section_prompt_context,
-                                "translations": translations,
-                            },
-                        )
-
-                    else:
-                        # 四步法翻译（细粒度）
-                        result = self.translator.translate_section(
-                            section=section,
-                            all_sections=project.sections,
-                            project_id=project_id,
-                            on_progress=self._create_section_callback(
-                                section.title,
-                                on_progress,
-                                translated_count + translated_in_section,
-                                total_paragraphs,
-                                max(section_paragraph_count - translated_in_section, 0),
-                            ),
-                        )
-
-                        self._apply_four_step_translations(section, result)
-                        all_translations[section.section_id] = result.translations
-                        self._persist_section_artifact(
-                            run_dir,
-                            "section-draft",
-                            section.section_id,
-                            {
-                                "section_id": section.section_id,
-                                "mode": self.translation_mode,
-                                "prompt_context": section_prompt_context,
-                                "understanding": result.understanding,
-                                "translations": result.draft_translations,
-                            },
-                        )
-                        self._persist_section_artifact(
-                            run_dir,
-                            "section-critique",
-                            section.section_id,
-                            {
-                                "section_id": section.section_id,
-                                "reflection": result.reflection,
-                            },
-                        )
-                        self._persist_section_artifact(
-                            run_dir,
-                            "section-revision",
-                            section.section_id,
-                            {
-                                "section_id": section.section_id,
-                                "assessment": result.assessment,
-                                "translations": result.revised_translations,
-                            },
-                        )
-
-                    # 保存章节
-                    self.project_manager.save_section(project_id, section)
-
-                    # 更新进度
-                    translated_after_section = self._count_translated_paragraphs(section)
-                    translated_delta = max(
-                        translated_after_section - translated_in_section,
-                        0,
-                    )
-                    if (
-                        translated_after_section == section_paragraph_count
-                        and section_paragraph_count > 0
-                    ):
-                        progress.translated_sections += 1
-                    translated_count += translated_delta
-                    progress.translated_paragraphs += translated_delta
-
-                    # 发送章节完成进度
-                    self._notify_progress(
-                        on_progress,
-                        f"完成: {section.title}",
-                        translated_count,
-                        total_paragraphs,
-                    )
-
-                    logger.info(
-                        f"[{project_id}] Section {section.section_id} completed: "
-                        f"{len(section.paragraphs)} paragraphs"
-                    )
-
-                except Exception as e:
-                    error_msg = (
-                        f"Failed to translate section {section.section_id}: {str(e)}"
-                    )
+                # 处理错误
+                if "error" in result:
+                    error_msg = result["error"]
                     logger.error(f"[{project_id}] {error_msg}")
                     self._progress_tracker.record_error(
                         progress, error_msg, section.section_id
                     )
+                    continue
+
+                # 处理成功翻译的章节
+                all_translations[section.section_id] = result["translations"]
+
+                # 更新进度
+                section_paragraph_count = result["paragraph_count"]
+                translated_in_section = result["translated_before"]
+                translated_after_section = self._count_translated_paragraphs(section)
+                translated_delta = max(
+                    translated_after_section - translated_in_section,
+                    0,
+                )
+
+                if (
+                    translated_after_section == section_paragraph_count
+                    and section_paragraph_count > 0
+                ):
+                    progress.translated_sections += 1
+
+                translated_count += translated_delta
+                progress.translated_paragraphs += translated_delta
+
+                # 发送章节完成进度
+                self._notify_progress(
+                    on_progress,
+                    f"完成: {section.title}",
+                    translated_count,
+                    total_paragraphs,
+                )
+
+                logger.info(
+                    f"[{project_id}] Section {section.section_id} completed: "
+                    f"{section_paragraph_count} paragraphs"
+                )
 
             if self._is_cancelled(project_id):
                 return finalize_cancelled_result()
@@ -1315,6 +1245,177 @@ class BatchTranslationService:
             self._write_artifact_json(run_dir / "run-summary.json", failure_result)
             self._clear_cancelled(project_id)
             return failure_result
+
+    async def _translate_single_section(
+        self,
+        project_id: str,
+        section: Section,
+        section_index: int,
+        total_sections: int,
+        all_sections: List[Section],
+        analysis: ArticleAnalysis,
+        run_dir: Path,
+        progress: TranslationProgress,
+        on_progress: Optional[Callable[[str, int, int], None]],
+        on_term_conflict: Optional[Callable[[TermConflict], Awaitable[Dict[str, Any]]]],
+        project: ProjectMeta,
+        total_paragraphs: int,
+    ) -> Dict[str, Any]:
+        """
+        翻译单个章节（用于并行处理）
+
+        Returns:
+            Dict with keys: section_id, translations, error (if any)
+        """
+        try:
+            # 取消检查
+            if self._is_cancelled(project_id):
+                return {"section_id": section.section_id, "cancelled": True}
+
+            # 构建章节上下文
+            section_prompt_context = self._build_section_prompt_context(
+                project,
+                section,
+                section_index,
+                analysis,
+            )
+            self._persist_section_artifact(
+                run_dir,
+                "section-context",
+                section.section_id,
+                section_prompt_context,
+            )
+
+            # 预扫描
+            prescan_result = await self._run_section_prescan(
+                project_id,
+                section,
+                progress,
+                on_term_conflict=on_term_conflict,
+            )
+            if prescan_result:
+                self._persist_section_artifact(
+                    run_dir,
+                    "section-prescan",
+                    section.section_id,
+                    prescan_result,
+                )
+
+            # 检查是否已翻译
+            section_paragraph_count = len(section.paragraphs)
+            translated_in_section = self._count_translated_paragraphs(section)
+
+            if (
+                translated_in_section == section_paragraph_count
+                and section_paragraph_count > 0
+            ):
+                # 已翻译，跳过
+                logger.info(
+                    f"[{project_id}] Skipping section {section.section_id}: "
+                    f"all {section_paragraph_count} paragraphs already translated"
+                )
+                return {
+                    "section_id": section.section_id,
+                    "skipped": True,
+                    "translations": self._collect_section_translations(section),
+                    "paragraph_count": section_paragraph_count,
+                }
+
+            # 翻译章节
+            if self.translation_mode == self.TRANSLATION_MODE_SECTION:
+                # 章节级批量翻译
+                translations = await self._translate_section_batch(
+                    section=section,
+                    section_index=section_index,
+                    total_sections=total_sections,
+                    all_sections=all_sections,
+                    analysis=analysis,
+                )
+
+                # 应用翻译结果
+                collected_translations = self._apply_section_batch_translations(
+                    section,
+                    translations,
+                )
+                self._record_section_batch_term_usage(section, analysis)
+                self._persist_section_artifact(
+                    run_dir,
+                    "section-draft",
+                    section.section_id,
+                    {
+                        "section_id": section.section_id,
+                        "mode": self.translation_mode,
+                        "prompt_context": section_prompt_context,
+                        "translations": translations,
+                    },
+                )
+            else:
+                # 四步法翻译
+                result = self.translator.translate_section(
+                    section=section,
+                    all_sections=all_sections,
+                    project_id=project_id,
+                    on_progress=self._create_section_callback(
+                        section.title,
+                        on_progress,
+                        translated_in_section,
+                        total_paragraphs,
+                        max(section_paragraph_count - translated_in_section, 0),
+                    ),
+                )
+
+                self._apply_four_step_translations(section, result)
+                collected_translations = result.translations
+                self._persist_section_artifact(
+                    run_dir,
+                    "section-draft",
+                    section.section_id,
+                    {
+                        "section_id": section.section_id,
+                        "mode": self.translation_mode,
+                        "prompt_context": section_prompt_context,
+                        "understanding": result.understanding,
+                        "translations": result.draft_translations,
+                    },
+                )
+                self._persist_section_artifact(
+                    run_dir,
+                    "section-critique",
+                    section.section_id,
+                    {
+                        "section_id": section.section_id,
+                        "reflection": result.reflection,
+                    },
+                )
+                self._persist_section_artifact(
+                    run_dir,
+                    "section-revision",
+                    section.section_id,
+                    {
+                        "section_id": section.section_id,
+                        "assessment": result.assessment,
+                        "translations": result.revised_translations,
+                    },
+                )
+
+            # 保存章节
+            self.project_manager.save_section(project_id, section)
+
+            return {
+                "section_id": section.section_id,
+                "translations": collected_translations,
+                "paragraph_count": section_paragraph_count,
+                "translated_before": translated_in_section,
+            }
+
+        except Exception as e:
+            error_msg = f"Failed to translate section {section.section_id}: {str(e)}"
+            logger.error(f"[{project_id}] {error_msg}")
+            return {
+                "section_id": section.section_id,
+                "error": error_msg,
+                "exception": e,
+            }
 
     async def _run_section_prescan(
         self,

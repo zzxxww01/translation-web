@@ -350,6 +350,7 @@ async def translate_with_four_steps(
         llm_provider=llm,
         project_manager=pm,
         translation_mode=BatchTranslationService.TRANSLATION_MODE_FOUR_STEP,
+        max_concurrent_sections=10,  # 并发翻译10个章节（VectorEngine支持100并发）
     )
     progress_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
     event_loop = asyncio.get_running_loop()
