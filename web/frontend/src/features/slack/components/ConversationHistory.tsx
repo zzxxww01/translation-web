@@ -43,8 +43,8 @@ export function ConversationHistory({
   };
 
   return (
-    <Card className="mb-6 p-4">
-      <div className="mb-2 flex items-center justify-between">
+    <Card className="p-4">
+      <div className="mb-3 flex items-center justify-between">
         <button
           onClick={onToggleCollapse}
           className="flex items-center gap-2 text-sm font-semibold hover:text-primary"
@@ -55,7 +55,7 @@ export function ConversationHistory({
         {messages.length > 0 && (
           <Button variant="ghost" size="sm" onClick={onClearAll}>
             <Trash2 className="h-4 w-4" />
-            清空对话
+            清空
           </Button>
         )}
       </div>
@@ -63,8 +63,8 @@ export function ConversationHistory({
       {!isCollapsed && (
         <div className="space-y-2">
           {messages.length === 0 ? (
-            <div className="rounded-lg border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
-              暂无对话历史。使用"英译中 + 建议回复"或"生成英文版本"后，消息会自动加入历史记录。
+            <div className="rounded-lg border border-dashed bg-muted/30 p-4 text-center text-sm text-muted-foreground">
+              暂无对话历史。分析对方消息或生成回复后，会自动记录在这里。
             </div>
           ) : (
             messages.map((msg) => (

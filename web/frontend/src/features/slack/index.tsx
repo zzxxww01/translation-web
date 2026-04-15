@@ -69,7 +69,8 @@ export function SlackFeature() {
   };
 
   return (
-    <div className="mx-auto grid h-full w-full max-w-7xl gap-6 p-6 xl:grid-cols-2">
+    <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-6 p-6">
+      {/* Conversation History - Top Section */}
       <ConversationHistory
         messages={conversationMessages}
         isCollapsed={isHistoryCollapsed}
@@ -79,8 +80,10 @@ export function SlackFeature() {
         onClearAll={clearConversation}
       />
 
-      {/* Incoming panel */}
-      <Card className="flex flex-col">
+      {/* Two-column layout for incoming and draft */}
+      <div className="grid flex-1 gap-6 lg:grid-cols-2">
+        {/* Incoming panel */}
+        <Card className="flex flex-col">
         <CardHeader>
           <div className="flex items-center justify-between">
             <div>
@@ -206,6 +209,7 @@ export function SlackFeature() {
           )}
         </CardContent>
       </Card>
+      </div>
     </div>
   );
 }
