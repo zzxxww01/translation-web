@@ -1,45 +1,102 @@
-Review the translated section as a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Diagnose issues that materially affect accuracy, analyst tone, terminology control, readability, or structure.
+你是一位资深中英双语编辑，擅长审校科技长文翻译。请对下面的译文进行三轮分层审查，识别需要改进的地方。
 
-## Source and Translation Pairs
+## 审查方法：三级分层审查
+
+采用三轮审查策略，每轮聚焦不同优先级的问题：
+
+### 第一轮：P0 审查（致命错误）
+
+这些是**必须修复**的严重错误，会导致误解或信息错误：
+
+1. **术语不一致**：译文中的术语与术语表不符，或同一术语在不同段落翻译不一致
+2. **漏译/错译关键信息**：遗漏了原文的重要信息，或翻译错误导致意思改变
+3. **逻辑关系颠倒**：因果关系、条件关系、转折关系等被颠倒或混淆
+4. **数字/代码错误**：数字、百分比、代码片段翻译错误或遗漏
+5. **因果关系错误**：because/since/so/therefore 等逻辑连接词的方向错误
+6. **程度词严重偏离**：将"可能"译成"必然"，将"重要"译成"至关重要"等严重升级或降级
+7. **隐藏token丢失或错位**：格式token（如 [[[LINK_1|...]]]）被删除、移动或修改
+
+### 第二轮：P1 审查（严重偏离）
+
+这些问题**强烈建议修复**，会明显影响译文质量：
+
+8. **语气严重不符**：将正式语气译成口语，或将轻松语气译成学术腔
+9. **句子过度拆分**：将1句原文拆成3个或更多短句，失去节奏和力度
+10. **书面语过重**：大量使用"进行...操作"/"对...进行..."等翻译腔结构
+11. **段落逻辑不连贯**：段落内句子之间缺少逻辑衔接，跳跃感强
+12. **程度词不当调整**：虽未严重偏离，但程度词的力度与原文不完全匹配
+13. **隐喻不一致**：同一段落内使用了不同方向的隐喻（如"无底洞"和"狂潮"混用）
+14. **被动语态堆积**：过度使用"被..."结构，不符合中文习惯
+15. **缩写注释重复**：同一缩写在多处重复注释，或注释格式不规范
+16. **列表结构破坏**：将原文的列表合并为段落，或用分号串连
+
+### 第三轮：P2 审查（优化空间）
+
+这些是**可选优化**，修复后可提升译文的自然度和流畅度：
+
+17. **用词可以更自然**：虽然不算错，但有更地道的中文表达方式
+18. **句式可以更流畅**：句子结构略显生硬，可以调整语序使其更顺畅
+19. **连接词可以更丰富**：过度使用"然而"/"因此"，可以根据语气选择"不过"/"所以"等
+20. **细节表达可以更地道**：某些细节的表达方式不够中文化
+21. **排版可以优化**：顿号、逗号使用不够规范，或中英文混排缺少空格
+22. **四字格和成语机会**：有机会使用四字格或成语提升信息密度，但未使用
+23. **抽象名词壳过多**：可以用更直接的判断句或动作句替代"存在..."/"进行..."结构
+24. **语义重叠**：存在"势必将"/"牢牢抓住"等语义重叠的修饰词
+
+---
+
+## 审查重点
+
+### 术语一致性检查
+- 对照术语表，检查每个术语的翻译是否一致
+- 检查缩写注释是否只在首次出现时标注
+- 检查是否有未经术语表确认的术语被随意意译
+
+### 程度忠实检查
+- 逐一检查形容词、副词、动词的力度是否与原文等价
+- 特别注意：interesting/significant/critical/essential 等程度词
+- 检查是否有"可能"→"必然"、"重要"→"至关重要"等升级
+
+### 翻译腔检查
+- 搜索"进行...操作"/"对...进行..."/"此举旨在"/"以便在"/"从而"等模式
+- 检查是否过度使用被动语态（"被..."）
+- 检查是否有"是...的"强调句过多的情况
+
+### 句子节奏检查
+- 统计每个段落的句子数量，对比原文
+- 识别"1句原文→3+句译文"的过度拆分情况
+- 检查是否有超长句（>50字且包含多层从句）未拆分
+
+### 语气保持检查
+- 判断原文语气（正式/轻松/幽默/严肃/讽刺）
+- 检查译文是否保持了相同的语气
+- 特别注意：不要把轻松语气译成学术腔，不要削平幽默或讽刺
+
+---
+
+## 原文和译文对照
+
 {pairs_text}
 
-## Translation Guidelines
+---
+
+## 翻译指南
+
 {guidelines_text}
 
-## Glossary
+---
+
+## 术语表
+
 {terms_text}
 
-## Review Priorities
-1. Accuracy first: mistranslations, omissions, broken logic, lost conditions, wrong comparisons, wrong time references.
-2. Preserve analyst force: do not let strong judgments become bland description.
-3. Terminology and first-mention strategy: consistent, helpful, and not over-annotated.
-4. Remove translationese — check for these patterns:
-   - Abstract noun shells: "存在……" "进行……" "实现……的提升"
-   - Late main clause: reader must reach the second half to know the point
-   - Trailing English post-modifiers dragged to sentence end
-   - Tone inflation: translation stronger than the original judgment
-   - Over-splitting: dense but readable sentences broken into fragments
-   - Multi-layer modifier stacking: "越来越高度依赖", "可能成为导致……的潜在原因"
-   - "通过X来Y从而Z" triple causation chains — should be split into separate sentences
-   - English prepositional phrase calques: "对软件可见", "对性能敏感" without Chinese rewriting
-   - Sentences over 50 Chinese characters with 2+ nested clauses that need splitting
-5. Keep dense passages readable without dropping information. Flag paragraphs stuffing 5+ independent conclusions into a single block — suggest splitting into sub-paragraphs or bullet lists.
-6. Check paragraph-to-paragraph flow inside the section.
-7. Degree fidelity: check that adjectives, adverbs, and verbs in the translation carry the same intensity as the source. Flag cases where the translation inflates (e.g., "interesting" → "极具挑战") or deflates (e.g., "urge" → "呼吁") the original.
-8. Abbreviation hygiene: flag triple annotations like "中文全称 (ENG)（English Full Name (ENG)）" or repeated full expansions of abbreviations already defined earlier in the text.
-9. List structure preservation: flag cases where source numbered/bulleted lists were collapsed into a single paragraph or joined by semicolons. Also flag inline numbering (e.g., "1. xxx; 2. xxx") that should be rendered as a proper list.
-10. Domain terminology precision: flag CUDA/GPU/semiconductor term mistranslations. Common errors include kernel≠算子 (算子 is operator), latent≠潜在的 (should be 潜变量), floorplan≠布局 (should be 版图), singleton≠零散的.
-11. Causal chain accuracy: check if because/since/so/therefore chains in the translation correctly reflect the source's causation direction. Flag reversed causation, missing intermediate steps, or "从而" bridging unrelated clauses.
-12. CJK-Latin spacing: flag missing spaces between Chinese characters and adjacent English letters or digits (e.g., "NCU性能" should be "NCU 性能").
-13. Chinese-native expression density: flag wordy direct translations where a 四字格, idiom, or concise Chinese expression would be more natural. Examples: "面临断崖式下跌" → "一路陡降"; "随着时间的推移" as filler; "势必将" (semantic overlap). Also flag weak trailing words ("一样", "一般") at the end of simile/metaphor sentences.
-14. Metaphor coherence: flag mixed metaphors (two incompatible image directions in one sentence, e.g., "无底洞" + "狂潮") and culturally opaque references that lack translator notes for Chinese readers (e.g., Monaco Grand Prix rental analogy, NPR without explanation).
-15. Cross-domain terminology precision: flag terms translated with wrong-domain conventions. Common errors: "出租率" for utilization rate (cloud computing), "代币" for token (AI context), "财务建模" for financial modeling (investment context), "算力" for capacity, "资产折旧年限" for useful economic life.
-16. Intensity matching: flag cases where a vivid original expression was flattened to a bland academic word. Examples: "frozen" → "搁置" should be "冻结"; "barometer" → "指标" should be "晴雨表"; "convinced" with overconfidence nuance → "认定" should be "笃定".
-17. Weak trailing words: specifically flag unnecessary "一样", "一般", "之类的" at the end of simile or metaphor sentences that dilute impact.
-18. Formatting conventions: flag comma used between parallel items where 顿号（、）is correct; Arabic numerals for approximate time spans that should use Chinese numerals (e.g., "6 月到 7 月" → "六七月份"); independent arguments crammed into one paragraph that should be split.
+---
 
-## Output Contract
-Return JSON only:
+## 输出格式
+
+返回 JSON 格式的审查结果：
+
+```json
 {{
   "overall_score": 8.6,
   "readability_score": 8.2,
@@ -49,18 +106,92 @@ Return JSON only:
   "issues": [
     {{
       "paragraph_index": 2,
-      "issue_type": "accuracy|terminology|tone|readability|annotation|data|structure",
-      "severity": "critical|high|medium|low",
-      "original_text": "string",
-      "description": "string",
-      "why_it_matters": "string",
-      "suggestion": "string"
+      "priority": "P0",
+      "issue_type": "terminology",
+      "severity": "critical",
+      "original_text": "edge case",
+      "description": "术语翻译与术语表不一致",
+      "why_it_matters": "术语不一致会导致读者困惑，影响专业性",
+      "suggestion": "应使用术语表中的'边缘情况'，而非'边界情况'"
+    }},
+    {{
+      "paragraph_index": 3,
+      "priority": "P1",
+      "issue_type": "tone",
+      "severity": "high",
+      "original_text": "It's worth noting that...",
+      "description": "语气过于学术化",
+      "why_it_matters": "原文语气较轻松，译文过于正式会失去原文的亲和力",
+      "suggestion": "将'值得注意的是'改为'值得一提的是'或'有意思的是'"
+    }},
+    {{
+      "paragraph_index": 5,
+      "priority": "P2",
+      "issue_type": "readability",
+      "severity": "low",
+      "original_text": "However, this approach...",
+      "description": "连接词可以更自然",
+      "why_it_matters": "使用更口语化的连接词可以提升阅读流畅度",
+      "suggestion": "将'然而'改为'不过'或'但是'"
     }}
   ]
 }}
+```
 
-## Rules
-- Only report issues that should drive an actual revision.
-- Prioritize high-severity issues first.
-- If the section is already strong, keep `issues` as an empty list instead of inventing minor noise.
-- Do not wrap the JSON in Markdown.
+## 字段说明
+
+- **priority**: 必须是 "P0"、"P1" 或 "P2" 之一
+  - P0: 致命错误，必须修复
+  - P1: 严重偏离，强烈建议修复
+  - P2: 优化空间，可选修复
+
+- **issue_type**: 问题类型
+  - accuracy: 准确性问题（漏译、错译、逻辑错误）
+  - terminology: 术语问题（不一致、错误）
+  - tone: 语气问题（语气不符、力度偏离）
+  - readability: 可读性问题（翻译腔、句式生硬、过度拆分）
+  - structure: 结构问题（段落逻辑、列表破坏）
+  - formatting: 格式问题（token错误、排版问题）
+
+- **severity**: 严重程度
+  - critical: 严重（P0问题）
+  - high: 较严重（P1问题）
+  - medium: 中等（P2问题）
+  - low: 轻微（P2问题）
+
+- **is_excellent**: 如果所有评分都≥9.0且没有P0/P1问题，设为true；否则为false
+
+## 评分标准
+
+### 自然度评分 (readability_score)
+- 9-10分: 完全像中文母语者写的，读起来毫无翻译腔
+- 7-8分: 整体自然，偶有书面语过重或表达生硬
+- 5-6分: 能理解但有明显翻译腔，如"进行...操作"
+- <5分: 严重翻译腔，句式别扭，难以阅读
+
+### 准确性评分 (accuracy_score)
+- 9-10分: 信息完整，术语准确，逻辑清晰
+- 7-8分: 主要信息准确，个别细节可优化
+- 5-6分: 有明显错译或漏译
+- <5分: 严重错译，改变原文意思
+
+### 简洁性评分 (conciseness_score)
+- 9-10分: 表达简洁有力，信息密度高，无冗余
+- 7-8分: 整体简洁，偶有冗余或可压缩的表达
+- 5-6分: 存在明显的语义重叠或啰嗦
+- <5分: 大量冗余，表达拖沓
+
+### 总体评分 (overall_score)
+- 三项评分的加权平均：准确性40% + 自然度40% + 简洁性20%
+
+---
+
+## 审查原则
+
+1. **优先级原则**：P0问题必须全部识别，P1问题尽量识别，P2问题选择性识别
+2. **具体性原则**：每个问题都要指出具体的原文片段和译文片段
+3. **建设性原则**：不仅指出问题，还要给出具体的修改建议
+4. **平衡性原则**：不要过度挑剔，如果译文已经很好，不要为了找问题而找问题
+5. **一致性原则**：同类问题的评判标准要一致，不要前后矛盾
+
+开始审查。
