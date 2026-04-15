@@ -1153,6 +1153,9 @@ class GeminiProvider(LLMProvider):
         else:
             previous_translations_block = "无"
 
+        # 优化点7: 注入前序章节的反馈
+        feedback_block = context.get("feedback_from_previous_sections", "")
+
         return self.prompt_manager.get(
             "longform/translation/section_batch_translate",
             section_title=section_title,
@@ -1173,6 +1176,7 @@ class GeminiProvider(LLMProvider):
             ),
             guidelines="\n".join(enhanced_guidelines),
             previous_translations=previous_translations_block,
+            feedback_from_previous_sections=feedback_block or "无",
         )
 
     def _format_glossary_for_prompt(

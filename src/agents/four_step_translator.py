@@ -97,6 +97,9 @@ class FourStepTranslator:
         self.term_injection_service = term_injection_service
         self.term_validation_service = term_validation_service
 
+        # 优化点7: 反馈循环
+        self.feedback_history: List[Dict[str, Any]] = []
+
     # ============ 方案 C 新增：章节预扫描 ============
 
     def prescan_section(
@@ -162,6 +165,87 @@ class FourStepTranslator:
             term_usages=result.get("term_usages", {}),
             scan_coverage=1.0
         )
+
+    # ============ 优化点7: 反馈循环 ============
+
+    def extract_feedback_from_critique(
+        self,
+        critique_result: Dict[str, Any],
+        section_id: str
+    ) -> Dict[str, Any]:
+        """
+        从反思结果中提取反馈信息
+
+        Args:
+            critique_result: 反思步骤的输出
+            section_id: 章节ID
+
+        Returns:
+            反馈信息字典
+        """
+        from datetime import datetime
+
+        feedback = {
+            "section_id": section_id,
+            "timestamp": datetime.now().isoformat(),
+            "typical_issues": [],
+            "good_practices": []
+        }
+
+        # 提取典型问题（P0和P1优先级）
+        issues = critique_result.get("issues", [])
+        for issue in issues:
+            priority = issue.get("priority", "P2")
+            if priority in ["P0", "P1"]:
+                feedback["typical_issues"].append({
+                    "type": issue.get("issue_type", ""),
+                    "description": issue.get("description", ""),
+                    "priority": priority
+                })
+
+        return feedback
+
+    def inject_feedback_to_context(self, section_id: str) -> str:
+        """
+        将历史反馈注入到当前章节的上下文中
+
+        Args:
+            section_id: 当前章节ID
+
+        Returns:
+            反馈上下文字符串
+        """
+        if not self.feedback_history:
+            return ""
+
+        # 只使用最近3个章节的反馈
+        recent_feedback = self.feedback_history[-3:]
+
+        # 构建反馈上下文
+        feedback_text = "## 前序章节的翻译经验\n\n"
+
+        # 汇总典型问题
+        all_issues = []
+        for fb in recent_feedback:
+            all_issues.extend(fb.get("typical_issues", []))
+
+        if all_issues:
+            feedback_text += "### 需要注意的常见问题\n"
+            # 按优先级分组
+            p0_issues = [i for i in all_issues if i["priority"] == "P0"]
+            p1_issues = [i for i in all_issues if i["priority"] == "P1"]
+
+            if p0_issues:
+                feedback_text += "**致命错误（必须避免）：**\n"
+                for issue in p0_issues[:3]:  # 最多3个
+                    feedback_text += f"- {issue['type']}: {issue['description']}\n"
+
+            if p1_issues:
+                feedback_text += "\n**严重偏离（需要注意）：**\n"
+                for issue in p1_issues[:3]:  # 最多3个
+                    feedback_text += f"- {issue['type']}: {issue['description']}\n"
+
+        return feedback_text
 
     def translate_section(
         self,
@@ -244,6 +328,22 @@ class FourStepTranslator:
                 translations,
                 understanding,
             )
+
+            # 优化点7: 收集反馈用于后续章节
+            feedback = self.extract_feedback_from_critique(
+                critique_result={
+                    "issues": [
+                        {
+                            "priority": getattr(issue, "priority", "P2"),
+                            "issue_type": issue.issue_type,
+                            "description": issue.description,
+                        }
+                        for issue in reflection.issues
+                    ]
+                },
+                section_id=section.section_id
+            )
+            self.feedback_history.append(feedback)
 
             # 自学习：反思评分 < 8.0 且有具体 issues 时，后台提取规则
             if (
@@ -624,6 +724,11 @@ class FourStepTranslator:
                 {"source": src, "translation": trans}
                 for src, trans in previous_context_pairs
             ]
+
+        # 优化点7: 注入前序章节的反馈
+        feedback_text = self.inject_feedback_to_context(section.section_id)
+        if feedback_text:
+            context["feedback_from_previous_sections"] = feedback_text
 
         # 注入术语使用记录
         if self.context_manager.term_tracker.used_translations:

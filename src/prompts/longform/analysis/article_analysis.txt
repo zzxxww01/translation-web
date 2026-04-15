@@ -12,7 +12,11 @@ Analyze the article and return structured context for downstream translation, cr
 1. Identify the single-sentence core theme.
 2. Summarize the main argument flow in 3-6 key arguments.
 3. Explain the article structure in a way that helps translators keep the logic intact.
-4. Extract only the terminology that truly matters for consistency, reader comprehension, or analyst tone. Do not dump generic words.
+4. Extract only the terminology that truly matters for consistency, reader comprehension, or analyst tone. Do not dump generic words. For each term, provide:
+   - **translation**: The recommended Chinese translation (or null if should stay in English)
+   - **alternatives**: Other acceptable translations that could be used in different contexts (optional)
+   - **avoid**: Common mistranslations or inappropriate translations to avoid (optional)
+   - **frequency_estimate**: How often this term appears (high/medium/low) to help prioritize consistency checks
 5. Describe the source style and the Chinese voice that should preserve it.
 6. List the main translation risks that could cause mistranslation, diluted judgment, or unreadable Chinese.
 7. Produce 4-7 translation guidelines that the rest of the chain can directly follow. At least one guideline should address sentence restructuring and Chinese-native paragraph flow.
@@ -38,9 +42,12 @@ Return JSON only, do not wrap in Markdown:
       "term": "string",
       "context_meaning": "string",
       "translation": "string or null",
+      "alternatives": ["string"],
+      "avoid": ["string"],
       "strategy": "preserve|first_annotate|translate",
       "first_occurrence_note": true,
-      "rationale": "string"
+      "rationale": "string",
+      "frequency_estimate": "high|medium|low"
     }}
   ],
   "style": {{
@@ -62,6 +69,9 @@ Return JSON only, do not wrap in Markdown:
 ## Rules
 - Keep terminology selective. Do not dump generic words.
 - Use `translation: null` only when the term should stay in English.
+- `alternatives`: List other acceptable translations that might be used in different contexts or by different translators. This helps reviewers understand the translation choice. Example: "edge case" → translation: "边缘情况", alternatives: ["边界情况", "特殊情况"]
+- `avoid`: List common mistranslations or inappropriate translations that should be avoided. Example: "edge case" → avoid: ["边缘案例", "边缘用例"]
+- `frequency_estimate`: Estimate how often this term appears in the article (high: 10+ times, medium: 3-9 times, low: 1-2 times). This helps prioritize consistency checks.
 - `first_occurrence_note` should be true only when a short first-mention annotation materially helps Chinese readers.
 - `guidelines` must be concrete enough to drive translation, critique, and revision.
 - The article title translation must preserve all semantic components of the original title. Do not drop subject phrases (e.g., "Dissecting Nvidia Blackwell") even if the subtitle seems more keyword-rich.

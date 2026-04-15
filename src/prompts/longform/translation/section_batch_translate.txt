@@ -169,6 +169,9 @@
 ## 前文译文（保持风格和术语一致）
 {previous_translations}
 
+## 前序章节的翻译经验（如有）
+{feedback_from_previous_sections}
+
 ## 翻译指南
 {guidelines}
 

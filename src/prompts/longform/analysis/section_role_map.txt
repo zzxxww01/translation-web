@@ -17,6 +17,13 @@ For every section, explain:
 - which points a translator must not weaken,
 - and which translation risks are specific to that section.
 
+Additionally, for each section, analyze the paragraph-level structure:
+- **Paragraph roles**: Identify the role of each paragraph (引入论点/展开论证/举例说明/对比分析/总结收束/过渡段落)
+- **Key transitions**: Mark important transition words or phrases (However/Therefore/Moreover/In contrast/As a result)
+- **Paragraph relations**: Describe how paragraphs connect (并列/递进/转折/因果/总分)
+
+This paragraph-level analysis helps translators maintain logical flow and choose appropriate Chinese connectors.
+
 ## Output Contract
 Return JSON only:
 {{
@@ -26,10 +33,33 @@ Return JSON only:
       "relation_to_previous": "string",
       "relation_to_next": "string",
       "key_points": ["string"],
-      "translation_notes": ["string"]
+      "translation_notes": ["string"],
+      "paragraph_structure": [
+        {{
+          "paragraph_index": 0,
+          "role": "引入论点|展开论证|举例说明|对比分析|总结收束|过渡段落",
+          "key_transitions": ["However", "Therefore"],
+          "relation_to_next": "并列|递进|转折|因果|总分"
+        }}
+      ]
     }}
   }}
 }}
+
+## Paragraph Role Definitions
+- **引入论点**: Introduces a new argument or claim
+- **展开论证**: Develops and elaborates on an argument
+- **举例说明**: Provides examples or evidence
+- **对比分析**: Compares or contrasts different approaches/ideas
+- **总结收束**: Summarizes or concludes a section
+- **过渡段落**: Transitions between topics or sections
+
+## Paragraph Relation Types
+- **并列**: Parallel points at the same level
+- **递进**: Progressive development (building on previous point)
+- **转折**: Contrast or opposition
+- **因果**: Cause-and-effect relationship
+- **总分**: Summary-to-detail or detail-to-summary
 
 ## Rules
 - Cover every section id that appears in the summaries.
