@@ -42,10 +42,6 @@ export function ConversationHistory({
     setEditContent('');
   };
 
-  if (messages.length === 0) {
-    return null;
-  }
-
   return (
     <Card className="mb-6 p-4">
       <div className="mb-2 flex items-center justify-between">
@@ -56,15 +52,22 @@ export function ConversationHistory({
           {isCollapsed ? <ChevronDown className="h-4 w-4" /> : <ChevronUp className="h-4 w-4" />}
           对话历史 ({messages.length} 条消息)
         </button>
-        <Button variant="ghost" size="sm" onClick={onClearAll}>
-          <Trash2 className="h-4 w-4" />
-          清空对话
-        </Button>
+        {messages.length > 0 && (
+          <Button variant="ghost" size="sm" onClick={onClearAll}>
+            <Trash2 className="h-4 w-4" />
+            清空对话
+          </Button>
+        )}
       </div>
 
       {!isCollapsed && (
         <div className="space-y-2">
-          {messages.map((msg) => (
+          {messages.length === 0 ? (
+            <div className="rounded-lg border border-dashed bg-muted/30 p-6 text-center text-sm text-muted-foreground">
+              暂无对话历史。使用"英译中 + 建议回复"或"生成英文版本"后，消息会自动加入历史记录。
+            </div>
+          ) : (
+            messages.map((msg) => (
             <div
               key={msg.id}
               className="group flex items-start gap-2 rounded-lg border bg-muted/30 p-3"
@@ -106,7 +109,7 @@ export function ConversationHistory({
                 <X className="h-4 w-4 text-muted-foreground hover:text-destructive" />
               </button>
             </div>
-          ))}
+          )))}
         </div>
       )}
     </Card>
