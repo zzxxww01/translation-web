@@ -355,3 +355,82 @@ def _normalize_image_source(paragraph) -> str:
 - 现有代码：`src/core/project.py`
 - 现有代码：`src/core/image_processor.py`
 - 项目文档：`docs/长文翻译链路.md`
+
+## 实现状态
+
+**实现日期**: 2026-04-18  
+**状态**: 已完成
+
+### 已实现功能
+
+1. 修改 `_copy_image()` 函数，支持外部图片下载
+   - 添加 30 秒超时控制
+   - 添加 User-Agent 头避免反爬
+   - 增强错误处理和日志记录
+
+2. 修改 `copy_and_rewrite_images()` 函数
+   - 支持外部图片自动下载
+   - 使用顺序编号命名（`img_001.jpg`）
+   - 失败时保留原始 URL，不中断流程
+
+3. 启用项目创建时的图片下载
+   - 修改 `ProjectManager.create()` 调用参数
+   - 将 `copy_images` 设置为 `True`
+
+4. 完善错误处理机制
+   - 单个图片失败不影响整体流程
+   - 详细的错误日志记录
+   - 网络超时、HTTP 错误等异常处理
+
+5. 添加图片处理统计日志
+   - 记录成功/失败/跳过的图片数量
+   - 便于监控和问题排查
+
+6. 完整的测试覆盖
+   - 单元测试：8 个
+   - 集成测试：10 个
+
+### 关键提交记录
+
+- `9140049`: feat(html2md): enhance image download with timeout and logging
+- `e9475aa`: refactor(html2md): optimize logging and simplify HTTP status check
+- `1e35a33`: feat(project): enable image downloading for HTML sources
+- `7a85a94`: test(html2md): add comprehensive integration tests
+- 最新提交: feat(html2md): add image processing statistics logging
+
+### 测试覆盖
+
+**单元测试** (`tests/test_html2md_images.py`): 8 个
+- `_copy_image()` 函数测试：3 个
+  - 外部 URL 下载
+  - 本地文件复制
+  - 错误处理
+- 统计日志测试：5 个
+  - 成功下载统计
+  - 失败处理统计
+  - 跳过图片统计
+  - 混合场景统计
+  - 空图片列表处理
+
+**集成测试** (`tests/test_html2md_integration.py`): 10 个
+- 完整流程测试（HTML → Markdown + 图片下载）
+- 失败处理测试（404、超时、保留原始 URL）
+- 图片格式检测测试（无扩展名、Content-Type 检测）
+- 图片去重测试（重复 URL 只下载一次）
+- CDN URL 处理测试（Substack CDN 解析）
+- 边界场景测试（空 alt、特殊字符等）
+
+### 已知限制
+
+1. **超时时间固定**: 当前设置为 30 秒，未来可考虑配置化
+2. **支持的图片格式**: 仅支持常见格式（jpg, png, gif, webp, svg）
+3. **认证限制**: 不支持需要认证的图片 URL
+4. **文件大小**: 超大图片（>50MB）可能因超时失败
+
+### 未来改进方向
+
+1. 可配置的超时时间和重试策略
+2. 支持更多图片格式（bmp, tiff 等）
+3. 图片压缩和优化（减少存储空间）
+4. 第三方图床集成（七牛云、阿里云 OSS）
+5. 图片 hash 去重（跨项目复用）
