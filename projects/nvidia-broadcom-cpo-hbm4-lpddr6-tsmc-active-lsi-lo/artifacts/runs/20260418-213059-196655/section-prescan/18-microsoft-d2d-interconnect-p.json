@@ -1,0 +1,48 @@
+{
+  "section_id": "18-microsoft-d2d-interconnect-p",
+  "new_terms": [
+    {
+      "term": "Cobalt 200",
+      "suggested_translation": "Cobalt 200",
+      "context": "微软CPU产品名称",
+      "confidence": 0.95
+    },
+    {
+      "term": "compute chiplets",
+      "suggested_translation": "计算芯粒",
+      "context": "指构成CPU的多个计算核心裸片",
+      "confidence": 0.9
+    },
+    {
+      "term": "custom high-bandwidth interconnect",
+      "suggested_translation": "定制高带宽互连",
+      "context": "连接计算芯粒的专用互连技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "power delivery network",
+      "suggested_translation": "供电网络",
+      "context": "芯片上为各模块分配电源的电路网络",
+      "confidence": 0.9
+    },
+    {
+      "term": "crosstalk",
+      "suggested_translation": "串扰",
+      "context": "信号线之间的电磁干扰",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "die-to-die (D2D)": "裸片到裸片 (D2D)",
+    "D2D": "D2D",
+    "shoreline": "海岸线长度",
+    "TSMC": "台积电",
+    "N3P": "N3P",
+    "Gb/s": "Gb/s",
+    "pJ/b": "皮焦耳/比特",
+    "Active LSI": "有源本地硅互连 (aLSI)",
+    "clock gating": "时钟门控"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:40:07.351084"
+}

@@ -1,0 +1,121 @@
+{
+  "section_id": "24-microsoft-maia-200-paper-17",
+  "reflection": {
+    "overall_score": 8.9,
+    "readability_score": 8.8,
+    "accuracy_score": 9.2,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "flops/mm^2 and flops/w",
+        "description": "术语翻译不一致且注释位置不当。",
+        "why_it_matters": "原文中“flops/mm^2 and flops/w”是作为“claims”的具体例子出现的，译文将其拆解为两个独立术语并加注，打断了句子流畅性，且“单位面积浮点运算性能”和“单位功耗浮点运算性能”并非标准术语，在上下文中显得冗长。",
+        "suggestion": "建议保持术语简洁，与原文结构一致，可译为：“例如其宣称的每平方毫米浮点运算性能（FLOPS/mm²）和每瓦浮点运算性能（FLOPS/W）”。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Makes sense given a lot of Maia 200 claims are dubious...",
+        "description": "句式可以更流畅，更符合中文表达习惯。",
+        "why_it_matters": "“这种做法倒也合理”虽然准确，但略显口语化且与前半句的科技分析口吻略有脱节。可以调整为更紧凑、更具分析感的表达。",
+        "suggestion": "可优化为：“考虑到 Maia 200 的许多性能宣称（如 FLOPS/mm² 和 FLOPS/W）本身存疑，这种做法倒也合乎情理。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "Maia 200 nodes were made generally available on Azure.",
+        "description": "关键信息“nodes”的翻译可能引起歧义。",
+        "why_it_matters": "在云计算语境中，“node”通常指“计算节点”或“实例”，而非“芯片节点”（process node）。译为“搭载 Maia 200 芯片的节点”是正确的，但“节点”一词单独出现时仍可能让读者困惑。",
+        "suggestion": "为明确起见，可稍作补充：“今年早些时候，基于 Maia 200 芯片的计算节点已在 Azure 云平台上普遍可用。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "critical",
+        "original_text": "reticle-scale monolithic designs",
+        "description": "关键术语“reticle-scale”翻译不一致。",
+        "why_it_matters": "段落4中首次出现时译为“光罩尺寸单芯片设计”，但在段落7的图片标题中却出现了“光罩尺寸单芯片设计的最后坚守者”。虽然意思一致，但“光罩尺寸”和“光罩尺寸”用字不统一，属于致命错误。根据全文背景，应统一为“光罩尺寸”。",
+        "suggestion": "将段落4中的“光罩尺寸”统一修正为“光罩尺寸”。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability",
+        "severity": "high",
+        "original_text": "Every single mm² of the die has been hyper-optimized for one purpose.",
+        "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。",
+        "why_it_matters": "原文用“hyper-”强调极致的、超常的优化程度，译文应传递这种强度。同时，主动语态更符合中文科技文的表达习惯。",
+        "suggestion": "可改为：“芯片的每一平方毫米都为了单一目标进行了极致的、近乎偏执的优化。”或“芯片的每一平方毫米都为实现单一目标而做了极致优化。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "conciseness",
+        "severity": "medium",
+        "original_text": "packing in over 10 PFLOPs of FP4 compute, 6 HBM3E stacks, and 28× 400 Gb/s full-duplex D2D links.",
+        "description": "列表项翻译略显冗长，信息密度可提高。",
+        "why_it_matters": "“集成了超过 10 PFLOPs 的 FP4 计算能力、6 个 HBM3E 堆栈以及 28 条 400 Gb/s 全双工裸片到裸片（D2D）互连链路。”中“互连链路”可简化为“链路”，且“全双工”在高速互连中是默认属性，有时可省略以精简。",
+        "suggestion": "可优化为：“集成了超过 10 PFLOPs 的 FP4 算力、6 个 HBM3E 堆栈以及 28 条 400 Gb/s 全双工 D2D 链路。” (鉴于前文已解释D2D，此处可不再加注)",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "A CoWoS-S interposer, with 1 main die, and 6 HBM3E stacks.",
+        "description": "冒号后的解释性列表，句式可以更紧凑。",
+        "why_it_matters": "“：一个 CoWoS-S 中介层，上面搭载 1 个主裸片和 6 个 HBM3E 堆栈。”表述清晰，但“上面搭载”可以更简洁。",
+        "suggestion": "可微调为：“一个 CoWoS-S 中介层承载着 1 个主裸片和 6 个 HBM3E 堆栈。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 10,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "TSRAM (L1) and CSRAM (L2)",
+        "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。",
+        "why_it_matters": "“TSRAM”和“CSRAM”是微软可能使用的内部命名，译文试图意译并关联到通用缓存层级（L1/L2）。但“暂存SRAM”并非行业通用术语，容易让读者困惑。应优先保留英文缩写并加以说明。",
+        "suggestion": "建议改为：“其中包括 80 MB 的 TSRAM（作为 L1 缓存）和 192 MB 的 CSRAM（作为 L2 缓存）。” 这样既保留了原文信息，又明确了其功能。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 13,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "21 links are configured as fixed links, 7 to each other chip, while the remaining 7 links are configured as switched links to one of four in-rack switches.",
+        "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。",
+        "why_it_matters": "原文描述的是拓扑结构：21条固定链路，平均分配到与其他芯片的连接上（假设是3个其他芯片，各7条）。译文“每个芯片与其他芯片之间各有7条”在指代上可能产生歧义（是每个Maia 200芯片对外有7条固定链路？还是每对芯片之间有7条？）。",
+        "suggestion": "根据上下文（通常一个节点内多个芯片全互连），可优化为：“21条链路被配置为固定链路，用于连接节点内的其他芯片（例如，连接到其他三个芯片，各使用7条）；剩余的7条链路则被配置为交换链路，用于连接机架内的四个交换机之一。” 或更简洁地：“21条为固定链路（例如，分别连接至节点内其他三个芯片，各7条），其余7条为交换链路，连接至机架内的四个交换机之一。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

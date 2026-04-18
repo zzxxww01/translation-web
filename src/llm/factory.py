@@ -57,6 +57,52 @@ def resolve_llm_provider_name(provider: str | None = None) -> str:
     return provider_name
 
 
+def get_task_model_alias(task_type: str) -> str:
+    """Return the canonical model alias for a task type."""
+    alias = None
+
+    if USE_NEW_CONFIG:
+        try:
+            from .config_loader import get_config_loader
+
+            config_loader = get_config_loader()
+            llm_config = config_loader.load()
+            alias = llm_config.task_defaults.get(task_type)
+            if alias:
+                resolved_alias = config_loader.resolve_config_model_alias(alias)
+                if resolved_alias:
+                    return resolved_alias
+                logger.warning(
+                    "[LLM Factory] Invalid task default alias %s for task=%s, falling back to legacy settings",
+                    alias,
+                    task_type,
+                )
+        except Exception as e:
+            logger.warning(f"[LLM Factory] Failed to resolve task alias from new config: {e}")
+
+    task_model_map = {
+        "longform": settings.llm_model_longform,
+        "post": settings.llm_model_post,
+        "analysis": settings.llm_model_analysis,
+        "title": settings.llm_model_title,
+        "metadata": settings.llm_model_metadata,
+    }
+
+    alias = task_model_map.get(task_type, settings.llm_default_model)
+
+    try:
+        from .config_loader import get_config_loader
+
+        config_loader = get_config_loader()
+        resolved_alias = config_loader.resolve_config_model_alias(alias)
+        if resolved_alias:
+            return resolved_alias
+    except Exception:
+        pass
+
+    return alias.strip().lower()
+
+
 def get_llm_provider_for_task(task_type: str) -> LLMProvider:
     """Get LLM provider configured for a specific task type.
 
@@ -70,44 +116,14 @@ def get_llm_provider_for_task(task_type: str) -> LLMProvider:
         >>> provider = get_llm_provider_for_task("longform")  # Uses deepseek-relay
         >>> provider = get_llm_provider_for_task("post")      # Uses flash-official
     """
-    # Try new config system first
-    if USE_NEW_CONFIG:
-        try:
-            from .config_loader import get_config_loader
-
-            config_loader = get_config_loader()
-            llm_config = config_loader.load()
-            model_alias = llm_config.task_defaults.get(task_type)
-
-            if model_alias:
-                logger.info(
-                    "[LLM Factory] task=%s → model_alias=%s (from YAML config)",
-                    task_type,
-                    model_alias,
-                )
-                return create_llm_provider(model_alias)
-        except Exception as e:
-            logger.warning(f"[LLM Factory] New config system failed for task, falling back to legacy: {e}")
-
-    # Legacy system
-    task_model_map = {
-        "longform": settings.llm_model_longform,
-        "post": settings.llm_model_post,
-        "analysis": settings.llm_model_analysis,
-        "title": settings.llm_model_title,
-        "metadata": settings.llm_model_metadata,
-    }
-
-    model_alias = task_model_map.get(task_type, settings.llm_default_model)
+    model_alias = get_task_model_alias(task_type)
 
     logger.info(
-        "[LLM Factory] task=%s → model_alias=%s (from env)",
+        "[LLM Factory] task=%s → model_alias=%s",
         task_type,
         model_alias,
     )
 
-    # Pass the model alias directly to create_llm_provider
-    # It will resolve the provider and model internally
     return create_llm_provider(model_alias)
 
 

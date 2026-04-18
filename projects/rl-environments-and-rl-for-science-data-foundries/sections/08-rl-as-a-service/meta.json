@@ -27,12 +27,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "RL在教导模型使用工具方面极为有效。通过利用开源工具，一些初创公司现在为大型企业提供定制化的RL服务。这一领域既有像RunRL和Osmosis这样较小的YC初创公司，也有由经验丰富的研究者创立的公司，例如Applied Compute和Adaptive ML。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277769",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +115,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "通义千问模型常被用于此目的，因为它们易于进行后训练，且运行所需资源较少。通义千问拥有多种模型，包括小型密集模型，这些模型对技能和配置的要求较低。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277814",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +203,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "经过定制的后训练后，这些模型在租用的硬件上运行。目前，Baseten平台承载了许多这类小型定制模型。典型的目标任务包括处理Salesforce和AWS Terminal，以及创建或关闭Jira工单。此外，也可以让模型可靠地使用MCP（模型上下文协议），例如从SEC文件中提取数据。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277824",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +291,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这些提供“RL即服务”的初创公司正与各大实验室同台竞技，OpenAI最近就推出了“强化微调”服务。OpenAI RFT的目标是让任何拥有足够数据的客户都能对OpenAI模型进行RL训练，从而使其适应客户的具体任务和领域。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277834",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +379,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "然而在实践中，该服务并未达到预期。我们认为它不够稳定，且对大多数客户而言过于昂贵。因此，我们看到对这些服务的需求主要流向了年轻的初创公司。这些年轻的YC公司利润率不高，甚至经常亏损。但它们能够以仅为OpenAI平台成本1/5的价格为用户提供服务，从而获取市场份额。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277843",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -202,19 +482,79 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token STRONG_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "从长远来看，这种情况将会改变。OpenAI的目标是那些能花费数百万美元的大型企业；总体而言，各大实验室将攫取大部分营收。对OpenAI而言，这将通过其“战略部署”团队来实现，该团队的目标是直接与客户合作构建定制模型。OpenAI很早就将此项服务作为企业用例进行押注，并且该公司在2025年的企业业务增长已超过消费者业务。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277908",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token STRONG_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -241,12 +581,68 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!kiYf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc103b69d-c1f2-4a3e-8780-abd93fb63602_1040x995.png",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277918",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!kiYf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc103b69d-c1f2-4a3e-8780-abd93fb63602_1040x995.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -280,13 +676,68 @@
           "created_at": "2026-04-10T22:52:40.342018",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：OpenAI",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277928",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：OpenAI",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -313,12 +764,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Anthropic 也正在加入这场竞争。我们认为，Anthropic 拥有其自研的、类似于 RFT 的服务，该服务比 OpenAI 的版本更稳定且样本效率更高。Anthropic 可能会通过其 API 提供这项服务，同时也效仿 OpenAI，正在积极招聘“前线部署工程师”，其职能很可能与后者的战略部署团队类似。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277938",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -345,12 +852,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Anthropic 正在大规模引入 Trainium 芯片。这对 RL 工作负载而言具有经济吸引力，部分原因在于其较低的 $/HBM（高带宽内存）成本。HBM 通常占芯片物料清单的很大一部分，但亚马逊直接采购，从而降低了成本。RL 工作负载主要是受内存限制的推理任务。这意味着，如果客户能充分优化吞吐量，那么使用像 Trainium 这样总拥有成本较低的芯片，将能从此项服务中获取可观利润。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277947",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -392,19 +955,75 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "亚马逊的 AI 复兴：AWS 与 Anthropic 的多吉瓦级 Trainium 扩展 - Jeremie Eliahou Ontiveros, Dylan Patel 等 2 人 · 2025年9月3日",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277980",
+          "tokenized_text": "[[[LINK_1|亚马逊的 AI 复兴：AWS 与 Anthropic 的多吉瓦级 Trainium 扩展]]] - Jeremie Eliahou Ontiveros, Dylan Patel 等 2 人 · 2025年9月3日",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -431,12 +1050,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "如前所述，训练定制模型具有巨大的上升空间。我们特别看好的一个领域是科学发现，定制模型可以在该领域取得大量进展。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277991",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -463,12 +1138,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "提供“RL即服务”的公司还包括 ThinkingMachines Tinker、Applied Compute 以及 Adaptive ML。迄今为止，这三家公司在“RL即服务”这一细分市场上，取得的进展都超过了OpenAI和Anthropic（的相关服务）。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:57:09.277999",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.43,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.3,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语‘dense models’译为‘稠密模型’在中文AI语境中虽可理解，但更常见、更精确的译法是‘密集模型’。‘稠密’在中文中更常用于描述物理性质（如稠密液体），而‘密集’在计算领域（如密集连接、密集计算）更普遍。"
+          },
+          {
+            "type": "annotation",
+            "description": "‘MCP’在文中首次出现，但未提供英文全称或解释。虽然目标读者是业内人士，但MCP并非像RL那样广为人知的核心术语，不加注可能造成理解障碍。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘5x less compared to what it would cost on OpenAI's platform’译为‘比OpenAI平台低5倍的成本’存在歧义。中文‘低5倍’通常指成本是原来的1/5（即降低80%），但英文‘5x less’有时可能被误解为成本是原来的1/6（降低约83.3%）。虽然常见用法中‘5倍’多指乘数关系，但为绝对精确，应明确表达为成本是OpenAI的几分之一。"
+          },
+          {
+            "type": "readability",
+            "description": "句子‘Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“前线部署工程师”…’结构稍显松散，将‘通过API开放’和‘招聘工程师’两个并列动作用‘但也’连接，转折关系不强。可以调整语序，使逻辑更紧凑，更符合中文分析性文本的节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语‘memory bound’译为‘受内存限制’准确。但‘总拥有成本’是‘Total Cost of Ownership (TCO)’的标准译法，此处使用正确。整句表述清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文‘All three have more success then OpenAI and Anthropic so far in this market.’ 译文‘迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。’ 将‘then’处理为比较级‘than’是正确的（原文疑似笔误）。但‘更大的成功’表述稍显绝对，原文‘more success’是比较级，译文准确。需确保比较对象是OpenAI和Anthropic的RFT服务，而非这两家公司的整体。结合上下文，此意已隐含。"
+          }
+        ]
+      },
       "history": []
     }
   ]

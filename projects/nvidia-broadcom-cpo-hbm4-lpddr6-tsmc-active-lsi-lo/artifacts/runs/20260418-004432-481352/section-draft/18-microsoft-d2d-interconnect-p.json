@@ -1,0 +1,315 @@
+{
+  "section_id": "18-microsoft-d2d-interconnect-p",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "18-microsoft-d2d-interconnect-p",
+    "section_title": "Microsoft D2D Interconnect - Paper 8.3",
+    "section_title_translation": "Microsoft D2D Interconnect - Paper 8.3",
+    "section_position": "19/27",
+    "article_theme": "ISSCC 2026 展示了半导体行业在内存、光网络、高速互连和处理器等关键领域的最新电路与集成技术突破。",
+    "structure_summary": "文章采用典型的科技综述结构：引言概述 ISSCC 2026 及其与 IEDM/VLSI 的区别；随后按技术领域（内存、光网络、高速电互连、处理器）分章节深入评述各篇关键论文；每个子章节聚焦一家公司/一项技术，包含技术细节、性能对比、图表解读和行业背景分析；结尾以一个其他亮点（温度传感器）收尾。整体逻辑清晰，由面到点，技术深度逐层递进。",
+    "target_audience": "半导体行业从业者、分析师、资深科技爱好者，具备扎实的硬件知识。",
+    "translation_voice": "专业、准确、流畅的中文科技分析口吻。避免过度口语化，但需将英文长句合理切分为符合中文阅读习惯的短句。保留原文的技术严谨性和批判性视角。",
+    "previous_section_title": "TSMC Active LSI - Paper 8.2",
+    "next_section_title": "Processors",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "术语一致性优先：严格遵循提供的术语表进行翻译，尤其是高频技术缩写（HBM4, LPDDR6, GDDR7, UCIe, CPO）和关键概念（shmoo plot -> 舒姆图， bitcell -> 存储单元）。首次出现的重要缩写需加注中文全称。",
+      "句式重构与段落流：英文长句（尤其是包含多个从句、数据对比和技术术语的句子）必须拆分为符合中文阅读习惯的短句。确保每个中文句子主干清晰。段落内部逻辑需通过恰当的连接词（如‘此外’、‘然而’、‘具体而言’）衔接，避免直接堆砌翻译后的短句。",
+      "数据与比较的精确传达：所有性能数据（速度、电压、密度、带宽）、单位（Gb/s, V, mm², pJ/b）和比较关系（‘优于’、‘低于’、‘相当于’）必须准确翻译，不得有任何偏差。技术结论的强弱语气需与原文一致。",
+      "保留批判性与分析口吻：原文对厂商宣传持审慎态度（如对 Microsoft Maia 200 的评论）。翻译时需保留这种分析性甚至略带怀疑的语气，使用‘宣称’、‘据称’、‘值得注意’、‘存疑’等措辞，避免将其转化为纯粹的中性陈述或褒奖。"
+    ],
+    "article_challenges": [
+      {
+        "location": "全文，尤其是各技术缩写（HBM4, LPDDR6, UCIe, CPO, CoWoS）",
+        "issue": "大量专业缩写和术语，需确保首次出现时有解释，全文翻译一致。",
+        "suggestion": "在术语表中统一，首次出现时采用“英文全称（中文释义）”格式，如“UCIe（通用芯粒互连）”。",
+        "type": "accuracy"
+      },
+      {
+        "location": "各技术子章节",
+        "issue": "原文包含大量图表引用（如“Source: Samsung, ISSCC 2026”）和图片URL，翻译时需处理这些非文本元素。",
+        "suggestion": "保留图表标题和来源的翻译，将图片URL和占位符原文保留。确保图表引用与正文逻辑衔接。",
+        "type": "accuracy"
+      },
+      {
+        "location": "技术性能对比和数据分析段落（如 SK Hynix 与 Samsung LPDDR6 的 shmoo plot 对比）",
+        "issue": "涉及具体数据、单位（Gb/s, V, pJ/b）和对比结论，翻译必须精确无误。",
+        "suggestion": "数字、单位、比较级（“worse”, “higher”）需严格对应。技术结论的表述要清晰，避免模糊。",
+        "type": "accuracy"
+      },
+      {
+        "location": "对 Microsoft Maia 200 的描述（“claims are dubious”）",
+        "issue": "原文带有明显的怀疑和批判语气，翻译时需保留这种审慎态度，而非中性化。",
+        "suggestion": "将“dubious”译为“值得怀疑的”、“存疑的”，语气匹配原文的批判性。",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "ISSCC",
+        "term": "ISSCC",
+        "translation": "ISSCC",
+        "strategy": "preserve",
+        "note": "International Solid-State Circuits Conference，国际固态电路会议，顶级半导体电路设计会议。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "HBM4",
+        "term": "HBM4",
+        "translation": "HBM4",
+        "strategy": "preserve",
+        "note": "High Bandwidth Memory 第四代，高带宽内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "LPDDR6",
+        "term": "LPDDR6",
+        "translation": "LPDDR6",
+        "strategy": "preserve",
+        "note": "Low Power Double Data Rate 第六代，低功耗双倍数据速率内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "GDDR7",
+        "term": "GDDR7",
+        "translation": "GDDR7",
+        "strategy": "preserve",
+        "note": "Graphics Double Data Rate 第七代，图形用双倍数据速率内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "PHY",
+        "term": "PHY",
+        "translation": "物理层",
+        "strategy": "translate",
+        "note": "Physical Layer，物理层接口电路。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "shmoo plot",
+        "term": "shmoo plot",
+        "translation": "舒姆图",
+        "strategy": "translate",
+        "note": "表征芯片在不同电压、频率等参数下工作范围的测试图表。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "bitcell",
+        "term": "bitcell",
+        "translation": "存储单元",
+        "strategy": "translate",
+        "note": "存储单元，存储器中最基本的存储单位。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "COP (Cell-Over-Periphery)",
+        "term": "COP (Cell-Over-Periphery)",
+        "translation": "COP",
+        "strategy": "preserve",
+        "note": "一种 DRAM 架构，存储单元阵列堆叠在周边电路之上。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "BiCS",
+        "term": "BiCS",
+        "translation": "BiCS",
+        "strategy": "preserve",
+        "note": "Bit Cost Scalable，一种 3D NAND 存储技术。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MRAM",
+        "term": "MRAM",
+        "translation": "MRAM",
+        "strategy": "preserve",
+        "note": "Magnetoresistive Random-Access Memory，磁阻随机存取存储器。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DWDM",
+        "term": "DWDM",
+        "translation": "密集波分复用",
+        "strategy": "translate",
+        "note": "Dense Wavelength Division Multiplexing，密集波分复用。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CPO",
+        "term": "CPO",
+        "translation": "共封装光学",
+        "strategy": "translate",
+        "note": "Co-Packaged Optics，共封装光学。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "UCIe",
+        "term": "UCIe",
+        "translation": "UCIe",
+        "strategy": "preserve",
+        "note": "Universal Chiplet Interconnect Express，通用芯粒互连标准。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "die shot",
+        "term": "die shot",
+        "translation": "芯片显微照片",
+        "strategy": "translate",
+        "note": "芯片显微照片，展示芯片布局。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CoWoS",
+        "term": "CoWoS",
+        "translation": "CoWoS",
+        "strategy": "preserve",
+        "note": "Chip-on-Wafer-on-Substrate，台积电的一种 2.5D/3D 封装技术。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "半导体制造工艺节点。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "flops/mm²",
+        "term": "flops/mm²",
+        "translation": "FLOPS/mm²",
+        "strategy": "preserve",
+        "note": "每平方毫米的浮点运算次数，衡量计算密度。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!2aNW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d6415fa-2e4a-4565-af88-6db7a3c95dbc_1309x1267.jpeg",
+    "微软（Microsoft）裸片到裸片（D2D）测试载具布局与布线。来源：微软，ISSCC 2026",
+    "微软也详细介绍了其裸片到裸片（D2D）互连技术。他们的测试载具包含两颗裸片和两对用于互连的D2D节点。设计中还包含了完整的供电网络和布线模拟，以模拟时钟门控和串扰效应。",
+    "https://substackcdn.com/image/fetch/$s_!3kjp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bc8b78e-9738-4558-a155-efbddcf0dbbe_472x677.jpeg",
+    "微软（Microsoft）裸片到裸片（D2D）互连芯片显微照片。来源：微软，ISSCC 2026",
+    "其测试芯片上的互连模块占据了532微米的海岸线长度，深度为1350微米。该测试载具采用台积电（TSMC）的N3P制程节点制造。互连模块在两种数据速率下进行了测试：0.65V电压下为20 Gb/s，0.75V电压下为24 Gb/s。",
+    "https://substackcdn.com/image/fetch/$s_!i2ue!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffed7179-ed8f-414b-8aeb-2ff273f25784_2880x1620.jpeg",
+    "微软（Microsoft）裸片到裸片（D2D）功耗分解。来源：微软，ISSCC 2026",
+    "微软（Microsoft）报告了两个功耗数据：一个包含模拟和数字系统的总功耗，另一个则仅包含模拟功耗。后者是大多数裸片间互连（die-to-die interconnects）通常报告的指标。在24 Gb/s速率下，系统总功耗为0.33皮焦耳/比特（pJ/b），模拟功耗为0.226 pJ/b；而在20 Gb/s速率下，系统总功耗为0.25 pJ/b，模拟功耗为0.17 pJ/b。其空闲状态（idle state）下的功耗为0.05 pJ/b。",
+    "https://substackcdn.com/image/fetch/$s_!qn-K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F65fefab9-0819-4c73-8c7b-39b778230934_2880x1620.jpeg",
+    "微软（Microsoft）裸片到裸片（D2D）互连与其他裸片间互连技术的对比。来源：微软，ISSCC 2026",
+    "与台积电（TSMC）为其Active LSI所做的一样，微软也将自家的互连技术与先前相同的研究进行了对比。",
+    "正如我们在之前的文章中所解释的，微软的Cobalt 200 CPU（中央处理器）采用了两个通过定制高带宽（high-bandwidth）互连连接的计算芯粒（compute chiplets）。我们认为，本次演讲详细阐述的正是这一具体的互连技术。"
+  ]
+}

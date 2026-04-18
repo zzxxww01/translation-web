@@ -1,0 +1,39 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "GDPval",
+      "suggested_translation": "GDPval",
+      "context": "OpenAI创建的评估基准",
+      "confidence": 0.9
+    },
+    {
+      "term": "Cursor",
+      "suggested_translation": "Cursor",
+      "context": "AI代码编辑器/公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Windsurf",
+      "suggested_translation": "Windsurf",
+      "context": "AI代码助手/公司名",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "gdpval": "GDPval",
+    "computer use environments": "计算机操作环境",
+    "reward hacking": "奖励劫持",
+    "openai": "OpenAI",
+    "anthropic": "Anthropic",
+    "xai": "xAI",
+    "gpt-4o": "GPT-4o",
+    "gpt-5": "GPT-5",
+    "rl compute": "强化学习算力"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T21:08:24.801201"
+}

@@ -1,0 +1,2465 @@
+{
+  "section_id": "17-tsmc-active-lsi-paper-8-2",
+  "title": "TSMC Active LSI - Paper 8.2",
+  "title_translation": "TSMC Active LSI - Paper 8.2",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F903517c9-6ff3-4ac5-9d4a-c0130cb9cbea_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F903517c9-6ff3-4ac5-9d4a-c0130cb9cbea_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0262",
+      "parent_block_index": 262,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F903517c9-6ff3-4ac5-9d4a-c0130cb9cbea_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F903517c9-6ff3-4ac5-9d4a-c0130cb9cbea_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F903517c9-6ff3-4ac5-9d4a-c0130cb9cbea_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F903517c9-6ff3-4ac5-9d4a-c0130cb9cbea_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.282539",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F903517c9-6ff3-4ac5-9d4a-c0130cb9cbea_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "TSMC Passive vs. Active LSI Comparison. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Passive vs. Active LSI Comparison. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 64,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0263",
+      "parent_block_index": 263,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC Passive vs. Active LSI Comparison. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC Passive vs. Active LSI Comparison. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Passive vs. Active LSI Comparison. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 64,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 64,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电（TSMC）无源与有源本地硅互连（aLSI）对比。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285091",
+          "tokenized_text": "[[[EM_1|台积电（TSMC）无源与有源本地硅互连（aLSI）对比。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "TSMC’s advanced packaging division presented their Active Local Silicon Interconnect (aLSI) solution. As opposed to standard CoWoS-L or EMIB, aLSI improves signal integrity and reduces the complexity of PHYs and SerDes on the top dies.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0264",
+      "parent_block_index": 264,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TSMC’s advanced packaging division presented their Active Local Silicon Interconnect (aLSI) solution. As opposed to standard CoWoS-L or EMIB, aLSI improves signal integrity and reduces the complexity of PHYs and SerDes on the top dies.",
+      "parent_block_plain_text": "TSMC’s advanced packaging division presented their Active Local Silicon Interconnect (aLSI) solution. As opposed to standard CoWoS-L or EMIB, aLSI improves signal integrity and reduces the complexity of PHYs and SerDes on the top dies.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 235,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电（TSMC）的先进封装部门展示了其有源本地硅互连（Active Local Silicon Interconnect, aLSI）方案。与标准的CoWoS-L或EMIB不同，aLSI改善了信号完整性，并降低了顶层裸片上物理层（PHY）和串行器/解串器（SerDes）的复杂度。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285143",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8f473a9-3f0e-4b7a-b717-2bc9999adae6_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8f473a9-3f0e-4b7a-b717-2bc9999adae6_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0265",
+      "parent_block_index": 265,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8f473a9-3f0e-4b7a-b717-2bc9999adae6_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8f473a9-3f0e-4b7a-b717-2bc9999adae6_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8f473a9-3f0e-4b7a-b717-2bc9999adae6_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8f473a9-3f0e-4b7a-b717-2bc9999adae6_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285156",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8f473a9-3f0e-4b7a-b717-2bc9999adae6_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "TSMC Active LSI Die-to-Die Link Overview. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI Die-to-Die Link Overview. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 66,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0266",
+      "parent_block_index": 266,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC Active LSI Die-to-Die Link Overview. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC Active LSI Die-to-Die Link Overview. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI Die-to-Die Link Overview. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 66,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 66,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电（TSMC）有源本地硅互连（aLSI）裸片到裸片链路概览。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285189",
+          "tokenized_text": "[[[EM_1|台积电（TSMC）有源本地硅互连（aLSI）裸片到裸片链路概览。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "The device that TSMC showed used a 32 Gb/s UCIe-like transceiver. Due to aLSI improving signal integrity, the area of the transceivers could be decreased, and the bump pitch could also be reduced from 45 µm to 38.8 µm. The combination of a tighter pitch and a switch to a Manhattan grid allowed them to reduce the PHY depth from 1043 µm to 850 µm, saving space that designers can reallocate to compute, memory, or IO, or use to shrink the die. The transceiver is only UCIe-like and not true UCIe, as UCIe mandates a hexagonal bump map rather than the Manhattan grid used here.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0267",
+      "parent_block_index": 267,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The device that TSMC showed used a 32 Gb/s UCIe-like transceiver. Due to aLSI improving signal integrity, the area of the transceivers could be decreased, and the bump pitch could also be reduced from 45 µm to 38.8 µm. The combination of a tighter pitch and a switch to a Manhattan grid allowed them to reduce the PHY depth from 1043 µm to 850 µm, saving space that designers can reallocate to compute, memory, or IO, or use to shrink the die. The transceiver is only UCIe-like and not true UCIe, as UCIe mandates a hexagonal bump map rather than the Manhattan grid used here.",
+      "parent_block_plain_text": "The device that TSMC showed used a 32 Gb/s UCIe-like transceiver. Due to aLSI improving signal integrity, the area of the transceivers could be decreased, and the bump pitch could also be reduced from 45 µm to 38.8 µm. The combination of a tighter pitch and a switch to a Manhattan grid allowed them to reduce the PHY depth from 1043 µm to 850 µm, saving space that designers can reallocate to compute, memory, or IO, or use to shrink the die. The transceiver is only UCIe-like and not true UCIe, as UCIe mandates a hexagonal bump map rather than the Manhattan grid used here.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 576,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电展示的器件采用了32 Gb/s、类似UCIe的收发器。由于aLSI改善了信号完整性，收发器的面积得以减小，凸点间距也能从45微米缩减至38.8微米。更紧密的间距结合转向曼哈顿网格（Manhattan grid）的布局，使得物理层（PHY）的深度从1043微米降至850微米，从而节省了空间。设计者可将这些空间重新分配给计算、内存或输入/输出（IO）单元，或用于缩小裸片尺寸。需要指出的是，该收发器只是“类似UCIe”，并非真正的UCIe标准实现，因为UCIe标准强制要求六边形凸点排布，而非此处使用的曼哈顿网格。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285201",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "As designers eke out every bit of die space for next-generation AI accelerators, the switch to aLSI is inevitable.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0268",
+      "parent_block_index": 268,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As designers eke out every bit of die space for next-generation AI accelerators, the switch to aLSI is inevitable.",
+      "parent_block_plain_text": "As designers eke out every bit of die space for next-generation AI accelerators, the switch to aLSI is inevitable.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 114,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着设计者为下一代AI加速器竭力榨取每一寸裸片空间，转向aLSI技术已不可避免。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285210",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "The ‘active’ part of aLSI comes from replacing the passive long-reach metal channel in the bridge die with active transistors forming an Edge-Triggered Transceiver (ETT) circuit to maintain signal integrity over longer reaches. This also reduces the signal driving requirements of the top die’s Transmit/Receive ports. ETT circuits within the aLSI only add an additional 0.07pJ/b to the energy cost, minimizing thermal concerns from adding active circuits in stacked dies. By moving the signal conditioning circuits to the bridge die, PHY area on the top die TX/RX can be reduced by using smaller pre-drivers and clock buffers and remove the need for signal amplification on the receive end.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0269",
+      "parent_block_index": 269,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The ‘active’ part of aLSI comes from replacing the passive long-reach metal channel in the bridge die with active transistors forming an Edge-Triggered Transceiver (ETT) circuit to maintain signal integrity over longer reaches. This also reduces the signal driving requirements of the top die’s Transmit/Receive ports. ETT circuits within the aLSI only add an additional 0.07pJ/b to the energy cost, minimizing thermal concerns from adding active circuits in stacked dies. By moving the signal conditioning circuits to the bridge die, PHY area on the top die TX/RX can be reduced by using smaller pre-drivers and clock buffers and remove the need for signal amplification on the receive end.",
+      "parent_block_plain_text": "The ‘active’ part of aLSI comes from replacing the passive long-reach metal channel in the bridge die with active transistors forming an Edge-Triggered Transceiver (ETT) circuit to maintain signal integrity over longer reaches. This also reduces the signal driving requirements of the top die’s Transmit/Receive ports. ETT circuits within the aLSI only add an additional 0.07pJ/b to the energy cost, minimizing thermal concerns from adding active circuits in stacked dies. By moving the signal conditioning circuits to the bridge die, PHY area on the top die TX/RX can be reduced by using smaller pre-drivers and clock buffers and remove the need for signal amplification on the receive end.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 691,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "aLSI的‘有源’部分，体现在用有源晶体管构成的边沿触发收发器（Edge-Triggered Transceiver, ETT）电路，取代了桥接裸片中的无源长距离金属通道，从而在更长距离上维持信号完整性。这也降低了对顶层裸片发送/接收端口信号驱动能力的要求。aLSI内部的ETT电路仅额外增加0.07皮焦/比特（pJ/b）的能耗，最大限度地缓解了在堆叠裸片中加入有源电路可能引发的散热担忧。通过将信号调理电路移至桥接裸片，顶层裸片的发送/接收物理层（PHY）面积得以减小，这得益于可以使用更小的预驱动器和时钟缓冲器，并且接收端不再需要信号放大。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285221",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "The ETT integrates a driver, an AC-coupling capacitor (Cac), an amplifier with both negative and positive feedback, and an output stage. Running the signal through the Cac introduces peaks in the signal transition edges, which is then picked up by the dual-loop amplifier, hence the edge-triggered nomenclature. The amplifier leverages both positive and negative feedback loops to stabilize the voltage level. In this design, Cac is set to be 180 fF for a 1.7 mm channel length, with 2kΩ resistance on die A and 3kΩ on die B respectively.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0270",
+      "parent_block_index": 270,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The ETT integrates a driver, an AC-coupling capacitor (Cac), an amplifier with both negative and positive feedback, and an output stage. Running the signal through the Cac introduces peaks in the signal transition edges, which is then picked up by the dual-loop amplifier, hence the edge-triggered nomenclature. The amplifier leverages both positive and negative feedback loops to stabilize the voltage level. In this design, Cac is set to be 180 fF for a 1.7 mm channel length, with 2kΩ resistance on die A and 3kΩ on die B respectively.",
+      "parent_block_plain_text": "The ETT integrates a driver, an AC-coupling capacitor (Cac), an amplifier with both negative and positive feedback, and an output stage. Running the signal through the Cac introduces peaks in the signal transition edges, which is then picked up by the dual-loop amplifier, hence the edge-triggered nomenclature. The amplifier leverages both positive and negative feedback loops to stabilize the voltage level. In this design, Cac is set to be 180 fF for a 1.7 mm channel length, with 2kΩ resistance on die A and 3kΩ on die B respectively.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 538,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "边沿触发收发器（ETT）集成了驱动器、交流耦合电容（Cac）、一个兼具负反馈与正反馈的放大器以及输出级。信号通过Cac时，会在其转换边沿引入峰值，随后由双环路放大器拾取，这便是其‘边沿触发’名称的由来。该放大器利用正负反馈环路来稳定电压水平。在此设计中，针对1.7毫米的通道长度，Cac设定为180 fF，裸片A和裸片B上的电阻分别为2kΩ和3kΩ。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285230",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc151958f-7fdb-4903-b06a-38a0eace27d5_2667x1500.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc151958f-7fdb-4903-b06a-38a0eace27d5_2667x1500.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0271",
+      "parent_block_index": 271,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc151958f-7fdb-4903-b06a-38a0eace27d5_2667x1500.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc151958f-7fdb-4903-b06a-38a0eace27d5_2667x1500.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc151958f-7fdb-4903-b06a-38a0eace27d5_2667x1500.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc151958f-7fdb-4903-b06a-38a0eace27d5_2667x1500.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285239",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc151958f-7fdb-4903-b06a-38a0eace27d5_2667x1500.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "TSMC CoWoS-L Integrated Power Delivery with eDTC. Source: TSMC",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC CoWoS-L Integrated Power Delivery with eDTC. Source: TSMC",
+          "start": 0,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0272",
+      "parent_block_index": 272,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC CoWoS-L Integrated Power Delivery with eDTC. Source: TSMC*",
+      "parent_block_plain_text": "TSMC CoWoS-L Integrated Power Delivery with eDTC. Source: TSMC",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC CoWoS-L Integrated Power Delivery with eDTC. Source: TSMC",
+          "start": 0,
+          "end": 62,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 62,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电（TSMC）集成eDTC的CoWoS-L供电方案。来源：台积电",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285263",
+          "tokenized_text": "[[[EM_1|台积电（TSMC）集成eDTC的CoWoS-L供电方案。来源：台积电]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "These aLSI bridges can also integrate embedded deep trench capacitors (eDTC) along the front-end to improve power delivery to the PHY and D2D controllers. Instead of compromising the power grid by having a bridge die in the way, aLSI with eDTC improves both the power and signal routing along the D2D interfaces.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0273",
+      "parent_block_index": 273,
+      "parent_block_type": "p",
+      "parent_block_markdown": "These aLSI bridges can also integrate embedded deep trench capacitors (eDTC) along the front-end to improve power delivery to the PHY and D2D controllers. Instead of compromising the power grid by having a bridge die in the way, aLSI with eDTC improves both the power and signal routing along the D2D interfaces.",
+      "parent_block_plain_text": "These aLSI bridges can also integrate embedded deep trench capacitors (eDTC) along the front-end to improve power delivery to the PHY and D2D controllers. Instead of compromising the power grid by having a bridge die in the way, aLSI with eDTC improves both the power and signal routing along the D2D interfaces.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 312,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这些aLSI桥接芯片还能在前端集成嵌入式深沟槽电容（eDTC），以改善对物理层（PHY）和裸片到裸片（D2D）控制器的供电。aLSI配合eDTC技术，不仅没有因为桥接芯片的存在而损害电源配送网络，反而能同时优化沿D2D接口的供电与信号布线。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285273",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d837ed3-5395-4e1a-b579-c95f1d9497cc_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d837ed3-5395-4e1a-b579-c95f1d9497cc_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0274",
+      "parent_block_index": 274,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d837ed3-5395-4e1a-b579-c95f1d9497cc_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d837ed3-5395-4e1a-b579-c95f1d9497cc_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d837ed3-5395-4e1a-b579-c95f1d9497cc_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d837ed3-5395-4e1a-b579-c95f1d9497cc_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285282",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d837ed3-5395-4e1a-b579-c95f1d9497cc_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "TSMC Active LSI Routability and Cross-Section. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI Routability and Cross-Section. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0275",
+      "parent_block_index": 275,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC Active LSI Routability and Cross-Section. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC Active LSI Routability and Cross-Section. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI Routability and Cross-Section. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 71,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电（TSMC）有源本地硅互连（aLSI）布线能力与横截面。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285303",
+          "tokenized_text": "[[[EM_1|台积电（TSMC）有源本地硅互连（aLSI）布线能力与横截面。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Only 388 µm of shoreline is required for 64 TX and 64 RX data lanes, coming out to a total area of 0.330 mm². Only the top 2 metal layers are required for routing the signals. The remaining metal layers can be used for the front-end circuitry.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0276",
+      "parent_block_index": 276,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Only 388 µm of shoreline is required for 64 TX and 64 RX data lanes, coming out to a total area of 0.330 mm². Only the top 2 metal layers are required for routing the signals. The remaining metal layers can be used for the front-end circuitry.",
+      "parent_block_plain_text": "Only 388 µm of shoreline is required for 64 TX and 64 RX data lanes, coming out to a total area of 0.330 mm². Only the top 2 metal layers are required for routing the signals. The remaining metal layers can be used for the front-end circuitry.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 243,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "仅需388微米的互连接口宽度，即可容纳64条发送（TX）和64条接收（RX）数据通道，总面积仅为0.330平方毫米。信号布线仅需占用最顶部的两层金属层，其余金属层可用于前端电路。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285312",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa2747466-8e4c-4447-ad94-6c2e8b71ea4a_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa2747466-8e4c-4447-ad94-6c2e8b71ea4a_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0277",
+      "parent_block_index": 277,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa2747466-8e4c-4447-ad94-6c2e8b71ea4a_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa2747466-8e4c-4447-ad94-6c2e8b71ea4a_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa2747466-8e4c-4447-ad94-6c2e8b71ea4a_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa2747466-8e4c-4447-ad94-6c2e8b71ea4a_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285322",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa2747466-8e4c-4447-ad94-6c2e8b71ea4a_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "TSMC Active LSI Shmoo Plots at KGD and KGP Stages. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI Shmoo Plots at KGD and KGP Stages. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0278",
+      "parent_block_index": 278,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC Active LSI Shmoo Plots at KGD and KGP Stages. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC Active LSI Shmoo Plots at KGD and KGP Stages. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI Shmoo Plots at KGD and KGP Stages. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 75,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电（TSMC）有源本地硅互连（aLSI）在已知合格裸片（KGD）与已知合格封装（KGP）阶段的舒姆图。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285343",
+          "tokenized_text": "[[[EM_1|台积电（TSMC）有源本地硅互连（aLSI）在已知合格裸片（KGD）与已知合格封装（KGP）阶段的舒姆图。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "TSMC explained how the Active LSI can be tested at multiple stages. The first is Known Good Die (KGD) with just the LSI for die validation. Next is Known Good Stack (KGS) with the SoCs connected by the LSI for stack functionality. Lastly is Known Good Package (KGP) with the full assembly to comprehensively verify functionality, performance and reliability.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0279",
+      "parent_block_index": 279,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TSMC explained how the Active LSI can be tested at multiple stages. The first is Known Good Die (KGD) with just the LSI for die validation. Next is Known Good Stack (KGS) with the SoCs connected by the LSI for stack functionality. Lastly is Known Good Package (KGP) with the full assembly to comprehensively verify functionality, performance and reliability.",
+      "parent_block_plain_text": "TSMC explained how the Active LSI can be tested at multiple stages. The first is Known Good Die (KGD) with just the LSI for die validation. Next is Known Good Stack (KGS) with the SoCs connected by the LSI for stack functionality. Lastly is Known Good Package (KGP) with the full assembly to comprehensively verify functionality, performance and reliability.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 358,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电介绍了有源本地硅互连（aLSI）的多阶段测试方案。首先是已知合格裸片（KGD）阶段，仅测试LSI裸片本身以进行裸片验证。其次是已知合格堆叠（KGS）阶段，此时系统级芯片（SoC）已通过LSI连接，以测试堆叠功能。最后是已知合格封装（KGP）阶段，对完整组装体进行全面测试，以验证其功能、性能和可靠性。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285354",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "They showed shmoo plots at the KGD and KGP stages, both showing the interconnect hitting 32 Gb/s at 0.75V and 38.4 Gb/s at 0.95V.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0280",
+      "parent_block_index": 280,
+      "parent_block_type": "p",
+      "parent_block_markdown": "They showed shmoo plots at the KGD and KGP stages, both showing the interconnect hitting 32 Gb/s at 0.75V and 38.4 Gb/s at 0.95V.",
+      "parent_block_plain_text": "They showed shmoo plots at the KGD and KGP stages, both showing the interconnect hitting 32 Gb/s at 0.75V and 38.4 Gb/s at 0.95V.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 129,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "他们展示了在KGD和KGP阶段的舒姆图。两张图均显示，该互连技术在0.75V电压下达到了32 Gb/s的速度，在0.95V电压下则达到了38.4 Gb/s。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285362",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff44de7d8-9b9f-4086-a305-6c16677e9895_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff44de7d8-9b9f-4086-a305-6c16677e9895_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0281",
+      "parent_block_index": 281,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff44de7d8-9b9f-4086-a305-6c16677e9895_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff44de7d8-9b9f-4086-a305-6c16677e9895_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff44de7d8-9b9f-4086-a305-6c16677e9895_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff44de7d8-9b9f-4086-a305-6c16677e9895_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285371",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff44de7d8-9b9f-4086-a305-6c16677e9895_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "TSMC Active LSI Die Shot and Power Breakdown. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI Die Shot and Power Breakdown. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 70,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0282",
+      "parent_block_index": 282,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC Active LSI Die Shot and Power Breakdown. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC Active LSI Die Shot and Power Breakdown. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI Die Shot and Power Breakdown. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 70,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 70,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电（TSMC）有源本地硅互连（aLSI）芯片显微照片与功耗分解。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285392",
+          "tokenized_text": "[[[EM_1|台积电（TSMC）有源本地硅互连（aLSI）芯片显微照片与功耗分解。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "The package reveals two SoC dies and two IO dies. Interestingly, the test vehicle appears to match AMD’s MI450 GPU’s design, with 2 base dies connected to each other, 12 HBM4 stacks and 2 IO dies with Active LSI. Instead of each individual HBM4 stack having its own Active LSI, two HBM4 stacks share one.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0283",
+      "parent_block_index": 283,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The package reveals two SoC dies and two IO dies. Interestingly, the test vehicle appears to match AMD’s MI450 GPU’s design, with 2 base dies connected to each other, 12 HBM4 stacks and 2 IO dies with Active LSI. Instead of each individual HBM4 stack having its own Active LSI, two HBM4 stacks share one.",
+      "parent_block_plain_text": "The package reveals two SoC dies and two IO dies. Interestingly, the test vehicle appears to match AMD’s MI450 GPU’s design, with 2 base dies connected to each other, 12 HBM4 stacks and 2 IO dies with Active LSI. Instead of each individual HBM4 stack having its own Active LSI, two HBM4 stacks share one.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 304,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "该封装体展示了两颗系统级芯片（SoC）裸片和两颗输入/输出（IO）裸片。有趣的是，这个测试载具的设计似乎与AMD的MI450图形处理器（GPU）相符，包含两颗相互连接的基础裸片、12个HBM4堆栈以及两颗集成有源本地硅互连（aLSI）的IO裸片。其特点是，并非每个HBM4堆栈都拥有独立的aLSI，而是每两个共享一个。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285535",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "As for the power, the total is only 0.36 pJ/b at 0.75V, with only 0.07 pJ/b being used by the ETT in the Active LSI. Below is a comparison with other D2D solutions.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0284",
+      "parent_block_index": 284,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As for the power, the total is only 0.36 pJ/b at 0.75V, with only 0.07 pJ/b being used by the ETT in the Active LSI. Below is a comparison with other D2D solutions.",
+      "parent_block_plain_text": "As for the power, the total is only 0.36 pJ/b at 0.75V, with only 0.07 pJ/b being used by the ETT in the Active LSI. Below is a comparison with other D2D solutions.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 164,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在功耗方面，在0.75V电压下，总功耗仅为0.36皮焦耳/比特（pJ/b），其中有源本地硅互连（aLSI）中的嵌入式硅桥（ETT）部分仅消耗0.07 pJ/b。下图是与其他裸片到裸片（D2D）解决方案的对比。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285621",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd194a9ff-d0ee-4e74-98a9-1f426f98205c_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd194a9ff-d0ee-4e74-98a9-1f426f98205c_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0285",
+      "parent_block_index": 285,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd194a9ff-d0ee-4e74-98a9-1f426f98205c_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd194a9ff-d0ee-4e74-98a9-1f426f98205c_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd194a9ff-d0ee-4e74-98a9-1f426f98205c_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd194a9ff-d0ee-4e74-98a9-1f426f98205c_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285647",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd194a9ff-d0ee-4e74-98a9-1f426f98205c_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "TSMC Active LSI vs. Other Die-to-Die Interconnects. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI vs. Other Die-to-Die Interconnects. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0286",
+      "parent_block_index": 286,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC Active LSI vs. Other Die-to-Die Interconnects. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC Active LSI vs. Other Die-to-Die Interconnects. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC Active LSI vs. Other Die-to-Die Interconnects. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 76,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电（TSMC）有源本地硅互连（aLSI）与其他裸片间互连技术的对比。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:50:43.285705",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，中文译名与后续使用不一致。"
+          },
+          {
+            "type": "accuracy",
+            "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。"
+          },
+          {
+            "type": "terminology",
+            "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。"
+          },
+          {
+            "type": "readability",
+            "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。"
+          },
+          {
+            "type": "tone",
+            "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

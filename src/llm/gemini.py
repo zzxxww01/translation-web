@@ -11,10 +11,11 @@ import json
 import time
 import importlib
 import warnings
+from contextlib import contextmanager
 from dataclasses import dataclass
 import requests
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
-from threading import Lock
+from threading import Lock, RLock
 from typing import Optional, Dict, Any, List
 from types import ModuleType
 
@@ -27,6 +28,17 @@ from src.core.longform_context import (
 from src.core.glossary_prompt import render_glossary_prompt_block
 
 from .base import LLMProvider
+from .errors import (
+    LLMConnectionError,
+    LLMProxyConfigurationError,
+    LLMTimeoutError,
+    LLMUpstreamUnavailableError,
+    NormalizedLLMError,
+    normalize_llm_transport_error,
+)
+from .config_loader import get_config_loader
+from .network_policy import build_network_policy
+from .network_policy import RuntimeNetworkPolicy
 
 
 logger = logging.getLogger(__name__)
@@ -52,6 +64,83 @@ def _load_genai_module() -> ModuleType | None:
         return None
 
     return _genai_module
+
+
+def _resolve_default_network_policy() -> RuntimeNetworkPolicy | None:
+    try:
+        provider = get_config_loader().get_primary_provider_by_type("gemini")
+    except Exception:
+        return None
+
+    if provider is None or provider.network is None:
+        return None
+
+    try:
+        return build_network_policy("gemini", provider.network)
+    except ValueError as exc:
+        raise LLMProxyConfigurationError(str(exc)) from exc
+
+
+def _get_primary_gemini_provider():
+    try:
+        return get_config_loader().get_primary_provider_by_type("gemini")
+    except Exception:
+        return None
+
+
+def _resolve_effective_network_policy(
+    requested_policy: Any | None,
+) -> RuntimeNetworkPolicy | Any | None:
+    configured_policy = _resolve_default_network_policy()
+    if configured_policy is None:
+        return requested_policy
+
+    if requested_policy is None:
+        return configured_policy
+
+    requested_mode = str(getattr(requested_policy, "proxy_mode", "") or "").strip().lower()
+    configured_mode = str(configured_policy.proxy_mode).strip().lower()
+    if configured_mode == "required" and requested_mode and requested_mode != "required":
+        raise LLMProxyConfigurationError(
+            "Gemini proxy_mode=required is enforced by YAML and cannot be overridden."
+        )
+    return requested_policy
+
+
+def _resolve_default_runtime_settings(
+    model_selector: Optional[str],
+) -> tuple[Optional[int], Optional[int], Optional[float]]:
+    provider = _get_primary_gemini_provider()
+    if provider is None:
+        return None, None, None
+
+    selected_model = None
+    normalized_selector = (model_selector or "").strip().lower()
+    normalized_alias = MODEL_ALIASES.get(normalized_selector, normalized_selector)
+
+    for candidate in provider.models:
+        candidate_alias = candidate.alias.strip().lower()
+        candidate_real_model = candidate.real_model.strip().lower()
+        if normalized_selector and (
+            normalized_selector == candidate_alias
+            or normalized_selector == candidate_real_model
+            or candidate_alias.endswith(normalized_alias)
+        ):
+            selected_model = candidate
+            break
+
+    if selected_model is None and provider.models:
+        selected_model = sorted(provider.models, key=lambda item: item.priority)[0]
+
+    model_timeout = None
+    if selected_model is not None and isinstance(selected_model.config, dict):
+        model_timeout = selected_model.config.get("timeout")
+
+    return (
+        model_timeout,
+        provider.retry_config.max_retries,
+        provider.retry_config.base_delay,
+    )
 
 
 # Model catalog. Concrete model ids come from env vars.
@@ -111,6 +200,10 @@ class GeminiProvider(LLMProvider):
         backup_api_key: Optional[str] = None,
         model: str = "pro",
         model_type: str = "pro",
+        request_timeout: Optional[int] = None,
+        max_attempts: Optional[int] = None,
+        retry_delay: Optional[float] = None,
+        network_policy: Any | None = None,
     ):
         """
         鍒濆鍖?Gemini Provider
@@ -128,6 +221,7 @@ class GeminiProvider(LLMProvider):
         )
         self.api_key = self.api_keys[0] if self.api_keys else ""
         self.backup_api_key = self.api_keys[1] if len(self.api_keys) > 1 else ""
+        self.network_policy = _resolve_effective_network_policy(network_policy)
 
         if not self.api_keys:
             raise ValueError(
@@ -140,7 +234,7 @@ class GeminiProvider(LLMProvider):
         self.model_type = self._normalize_model_selector(model_type) or "pro"
 
         # Proxy configuration support.
-        self.proxy_config = self._get_proxy_config()
+        self.proxy_config = self._resolve_proxy_config()
         if self.proxy_config:
             logger.info("[Gemini] Using proxy config: %s", self.proxy_config)
 
@@ -155,11 +249,34 @@ class GeminiProvider(LLMProvider):
         )
         self.backup_model = self.resolve_model_name(backup_selector)
 
-        self.request_timeout = settings.gemini_timeout
-        self.max_attempts = (
-            settings.gemini_max_retries or settings.gemini_retry_count or 5
+        default_selector = settings.gemini_model or model or self.model_type
+        config_timeout, config_max_attempts, config_retry_delay = (
+            _resolve_default_runtime_settings(default_selector)
         )
-        self.retry_delay = settings.gemini_retry_delay or 0.5
+
+        self.request_timeout = (
+            request_timeout
+            if request_timeout is not None
+            else (config_timeout if config_timeout is not None else settings.gemini_timeout)
+        )
+        self.max_attempts = (
+            max_attempts
+            if max_attempts is not None
+            else (
+                config_max_attempts
+                if config_max_attempts is not None
+                else (settings.gemini_max_retries or settings.gemini_retry_count or 5)
+            )
+        )
+        self.retry_delay = (
+            retry_delay
+            if retry_delay is not None
+            else (
+                config_retry_delay
+                if config_retry_delay is not None
+                else (settings.gemini_retry_delay or 0.5)
+            )
+        )
         if not self._use_rest_transport():
             genai_module = _load_genai_module()
             if genai_module is None:
@@ -240,30 +357,126 @@ class GeminiProvider(LLMProvider):
             }
         return None
 
+    def _network_proxy_mode(self) -> str:
+        if self.network_policy is None:
+            return "env"
+        proxy_mode = getattr(self.network_policy, "proxy_mode", "env")
+        return str(proxy_mode).strip().lower() or "env"
+
+    def _resolve_proxy_config(self) -> Optional[Dict[str, str]]:
+        proxy_mode = self._network_proxy_mode()
+        if proxy_mode == "required":
+            proxies = getattr(self.network_policy, "proxies", None)
+            if not proxies:
+                raise LLMProxyConfigurationError(
+                    "Gemini proxy_mode=required but no proxy configuration was provided."
+                )
+            return dict(proxies)
+        if proxy_mode == "disabled":
+            return None
+        return self._get_proxy_config()
+
+    _proxy_env_lock = RLock()
+
+    def _proxy_env_overrides(self) -> Dict[str, str]:
+        if not self.proxy_config:
+            return {}
+
+        overrides: Dict[str, str] = {}
+        http_proxy = self.proxy_config.get("http")
+        https_proxy = self.proxy_config.get("https") or http_proxy
+        no_proxy = getattr(self.network_policy, "no_proxy", None)
+
+        if http_proxy:
+            overrides["HTTP_PROXY"] = http_proxy
+            overrides["http_proxy"] = http_proxy
+        if https_proxy:
+            overrides["HTTPS_PROXY"] = https_proxy
+            overrides["https_proxy"] = https_proxy
+        if no_proxy:
+            overrides["NO_PROXY"] = no_proxy
+            overrides["no_proxy"] = no_proxy
+        return overrides
+
+    @contextmanager
+    def _temporary_proxy_env(self):
+        overrides = self._proxy_env_overrides()
+        if not overrides:
+            yield
+            return
+
+        previous = {key: os.environ.get(key) for key in overrides}
+        with self._proxy_env_lock:
+            try:
+                for key, value in overrides.items():
+                    os.environ[key] = value
+                yield
+            finally:
+                for key, value in previous.items():
+                    if value is None:
+                        os.environ.pop(key, None)
+                    else:
+                        os.environ[key] = value
+
+    def _select_transport_label(self) -> str:
+        env_override = os.getenv("GEMINI_USE_REST", "").strip().lower()
+        if env_override in {"1", "true", "yes", "on"}:
+            return "rest"
+        return "sdk"
+
     def _use_rest_transport(self) -> bool:
-        override = os.getenv("GEMINI_USE_REST")
-        if override is not None:
-            return override.strip().lower() in {"1", "true", "yes", "y"}
-        # Default to the SDK path even when a proxy is configured.
-        # Recent longform failures came from the proxied REST transport
-        # (`requests` -> Clash Verge -> Gemini REST) terminating TLS reads
-        # with SSLEOFError. Keep REST available via GEMINI_USE_REST=true for
-        # targeted debugging, but do not force it just because a proxy exists.
-        return False
+        return self._select_transport_label() == "rest"
+
+    def _normalize_generation_exception(
+        self, exc: Exception, *, timeout: int | None
+    ) -> Exception:
+        if isinstance(exc, FutureTimeoutError):
+            timeout_s = timeout if timeout is not None else self.request_timeout
+            return LLMTimeoutError(f"Gemini request timed out after {timeout_s}s")
+        normalized = normalize_llm_transport_error(exc, provider_name="Gemini")
+        if normalized is not None:
+            return normalized.error
+        if exc.__class__.__module__.startswith("google.genai"):
+            text = str(exc).strip()
+            lower = text.lower()
+            if any(
+                phrase in lower
+                for phrase in [
+                    "response",
+                    "payload",
+                    "parse",
+                    "parsed",
+                    "malformed",
+                    "unexpected",
+                    "decode",
+                    "schema",
+                    "serialization",
+                    "deserialization",
+                    "function invocation",
+                    "unknown function",
+                    "unsupported function",
+                ]
+            ):
+                return LLMUpstreamUnavailableError(
+                    f"Gemini SDK response handling failed: {text}"
+                )
+            return LLMConnectionError(f"Gemini SDK transport failed: {text}")
+        return exc
 
     def _create_client(self, genai_module: ModuleType, api_key: str):
-        try:
-            return genai_module.Client(api_key=api_key)
-        except TypeError:
-            previous = os.environ.get("GEMINI_API_KEY")
-            os.environ["GEMINI_API_KEY"] = api_key
+        with self._temporary_proxy_env():
             try:
-                return genai_module.Client()
-            finally:
-                if previous is None:
-                    os.environ.pop("GEMINI_API_KEY", None)
-                else:
-                    os.environ["GEMINI_API_KEY"] = previous
+                return genai_module.Client(api_key=api_key)
+            except TypeError:
+                previous = os.environ.get("GEMINI_API_KEY")
+                os.environ["GEMINI_API_KEY"] = api_key
+                try:
+                    return genai_module.Client()
+                finally:
+                    if previous is None:
+                        os.environ.pop("GEMINI_API_KEY", None)
+                    else:
+                        os.environ["GEMINI_API_KEY"] = previous
 
     def _get_client(self, api_key: str):
         client = self._client_cache.get(api_key)
@@ -497,12 +710,13 @@ class GeminiProvider(LLMProvider):
         attempt: GeminiAttempt,
         temperature: float,
         response_mime_type: Optional[str],
+        timeout: int | None,
     ) -> str:
         if self._use_rest_transport():
             return self._generate_with_rest(
                 prompt=prompt,
                 api_key=attempt.api_key,
-                timeout=self.request_timeout,
+                timeout=timeout,
                 temperature=temperature,
                 response_mime_type=response_mime_type,
                 model_override=attempt.model_name,
@@ -514,14 +728,15 @@ class GeminiProvider(LLMProvider):
             config = {"temperature": temperature}
             if response_mime_type:
                 config["response_mime_type"] = response_mime_type
-            resp = client.models.generate_content(
-                model=attempt.model_name,
-                contents=prompt,
-                config=config,
-            )
+            with self._temporary_proxy_env():
+                resp = client.models.generate_content(
+                    model=attempt.model_name,
+                    contents=prompt,
+                    config=config,
+                )
             return resp.text
 
-        return self._generate_with_timeout_fn(_call, self.request_timeout)
+        return self._generate_with_timeout_fn(_call, timeout)
 
     def generate(
         self,
@@ -530,6 +745,7 @@ class GeminiProvider(LLMProvider):
         temperature: float = 0.7,
         max_retries: Optional[int] = None,
         model: Optional[str] = None,
+        timeout: Optional[int] = None,
         **_kwargs,
     ) -> str:
         """
@@ -548,6 +764,7 @@ class GeminiProvider(LLMProvider):
         attempt_plan = self._build_attempt_plan(primary_model)
         max_attempts = max(max_retries or self.max_attempts, len(attempt_plan))
         start_time = time.monotonic()
+        effective_timeout = timeout if timeout is not None else self.request_timeout
 
         logger.info(
             "[Gemini] generate start len=%s model=%s backup_model=%s keys=%s timeout=%ss transport=%s",
@@ -555,7 +772,7 @@ class GeminiProvider(LLMProvider):
             primary_model,
             self.backup_model or "-",
             len(self.api_keys),
-            self.request_timeout,
+            effective_timeout,
             "rest" if self._use_rest_transport() else "sdk",
         )
 
@@ -572,6 +789,7 @@ class GeminiProvider(LLMProvider):
                     attempt=attempt,
                     temperature=temperature,
                     response_mime_type=response_mime_type,
+                    timeout=effective_timeout,
                 )
                 duration = time.monotonic() - start_time
                 with GeminiProvider._api_call_count_lock:
@@ -588,10 +806,9 @@ class GeminiProvider(LLMProvider):
                 )
                 return text.strip()
             except Exception as exc:
-                if isinstance(exc, FutureTimeoutError):
-                    exc = TimeoutError(
-                        f"Gemini request timed out after {self.request_timeout}s"
-                    )
+                exc = self._normalize_generation_exception(
+                    exc, timeout=effective_timeout
+                )
 
                 error_text = self._error_to_text(exc)
                 last_exception = exc
@@ -1261,6 +1478,10 @@ def create_gemini_provider(
     backup_api_key: Optional[str] = None,
     model: str = "pro",
     model_type: str = "pro",
+    request_timeout: Optional[int] = None,
+    max_attempts: Optional[int] = None,
+    retry_delay: Optional[float] = None,
+    network_policy: Any | None = None,
 ) -> GeminiProvider:
     """Convenience helper to create a Gemini provider."""
     return GeminiProvider(
@@ -1268,4 +1489,8 @@ def create_gemini_provider(
         backup_api_key=backup_api_key,
         model=model,
         model_type=model_type,
+        request_timeout=request_timeout,
+        max_attempts=max_attempts,
+        retry_delay=retry_delay,
+        network_policy=network_policy,
     )

@@ -1,0 +1,32 @@
+{
+  "project_id": "rl-environments-and-rl-for-science-data-foundries",
+  "status": "completed",
+  "total_sections": 13,
+  "translated_sections": 13,
+  "total_paragraphs": 179,
+  "translated_paragraphs": 179,
+  "error_count": 0,
+  "errors": [],
+  "started_at": "2026-04-15T21:25:59.612196",
+  "finished_at": "2026-04-15T21:26:13.484660",
+  "run_id": "20260415-212559-612223",
+  "artifacts_path": "projects\\rl-environments-and-rl-for-science-data-foundries\\artifacts\\runs\\20260415-212559-612223",
+  "export": {
+    "generated_at": "2026-04-15T21:26:13.439466",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\rl-environments-and-rl-for-science-data-foundries\\强化学习环境与面向科学的强化学习：数据代工厂与多智能体架构_zh.md",
+      "generated": true,
+      "bytes": 47635
+    }
+  },
+  "api_calls": 0,
+  "elapsed_seconds": 13.9,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

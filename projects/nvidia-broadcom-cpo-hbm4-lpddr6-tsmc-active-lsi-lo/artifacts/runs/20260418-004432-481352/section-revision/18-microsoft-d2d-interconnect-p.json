@@ -1,0 +1,33 @@
+{
+  "section_id": "18-microsoft-d2d-interconnect-p",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.709999999999999,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.2,
+      "terminology": 8.0,
+      "completeness": 10.0,
+      "style": 5.5
+    },
+    "failed_criteria": [
+      "critical_errors (3 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!2aNW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d6415fa-2e4a-4565-af88-6db7a3c95dbc_1309x1267.jpeg",
+    "微软（Microsoft）裸片到裸片（D2D）测试载具布局与布线。来源：微软，ISSCC 2026",
+    "微软也详细介绍了其裸片到裸片（D2D）互连技术。其测试载具包含两颗裸片和两对用于互连的D2D节点。为了模拟时钟门控和串扰效应，设计中还包含了完整的供电网络和布线模型。",
+    "https://substackcdn.com/image/fetch/$s_!3kjp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1bc8b78e-9738-4558-a155-efbddcf0dbbe_472x677.jpeg",
+    "微软（Microsoft）裸片到裸片（D2D）互连芯片显微照片。来源：微软，ISSCC 2026",
+    "其测试芯片上的互连模块占据了532微米的芯片边缘长度，深度为1350微米。该测试载具采用台积电（TSMC）的N3P制程节点制造，互连模块在两种数据速率下进行了测试：0.65V电压下为20 Gb/s，0.75V电压下为24 Gb/s。",
+    "https://substackcdn.com/image/fetch/$s_!i2ue!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fffed7179-ed8f-414b-8aeb-2ff273f25784_2880x1620.jpeg",
+    "微软（Microsoft）裸片到裸片（D2D）功耗分解。来源：微软，ISSCC 2026",
+    "微软（Microsoft）报告了两个功耗数据：一个包含模拟和数字系统的总功耗，另一个则仅包含模拟功耗。后者是大多数裸片间互连（die-to-die interconnects）通常报告的指标。在24 Gb/s速率下，系统总功耗为0.33皮焦耳/比特（pJ/b），模拟功耗为0.226 pJ/b；而在20 Gb/s速率下，系统总功耗为0.25 pJ/b，模拟功耗为0.17 pJ/b。其静态状态下的功耗为0.05 pJ/b。",
+    "https://substackcdn.com/image/fetch/$s_!qn-K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F65fefab9-0819-4c73-8c7b-39b778230934_2880x1620.jpeg",
+    "微软（Microsoft）裸片到裸片（D2D）互连与其他裸片间互连技术的对比。来源：微软，ISSCC 2026",
+    "与台积电（TSMC）为其Active LSI所做的一样，微软也将自家的互连技术与同一批早期研究进行了对比。",
+    "正如我们在之前的文章中所解释的，微软的Cobalt 200 CPU（中央处理器）采用了两个通过定制高带宽（high-bandwidth）互连连接的计算芯粒（compute chiplets）。我们认为，本次演讲详细阐述的正是这一具体的互连技术。"
+  ]
+}

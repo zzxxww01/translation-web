@@ -1,0 +1,70 @@
+{
+  "section_id": "05-buying-patterns-across-labs",
+  "new_terms": [
+    {
+      "term": "Handshake",
+      "suggested_translation": "Handshake",
+      "context": "数据供应商名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "GPT-5.1 Codex Max",
+      "suggested_translation": "GPT-5.1 Codex Max",
+      "context": "OpenAI模型版本名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Sheets",
+      "suggested_translation": "Sheets",
+      "context": "Google产品（电子表格）",
+      "confidence": 0.9
+    },
+    {
+      "term": "Slides",
+      "suggested_translation": "Slides",
+      "context": "Google产品（演示文稿）",
+      "confidence": 0.9
+    },
+    {
+      "term": "Docs",
+      "suggested_translation": "Docs",
+      "context": "Google产品（文档）",
+      "confidence": 0.9
+    },
+    {
+      "term": "Drive",
+      "suggested_translation": "Drive",
+      "context": "Google产品（云存储）",
+      "confidence": 0.9
+    },
+    {
+      "term": "Maps",
+      "suggested_translation": "Maps",
+      "context": "Google产品（地图）",
+      "confidence": 0.9
+    },
+    {
+      "term": "Gmail",
+      "suggested_translation": "Gmail",
+      "context": "Google产品（电子邮件）",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "computer use": "计算机使用",
+    "ui gyms": "UI训练场",
+    "imo": "IMO",
+    "post-training": "后训练",
+    "mid-training": "中期训练",
+    "gpt-5.2": "GPT-5.2",
+    "anthropic": "Anthropic",
+    "openai": "OpenAI",
+    "xai": "xAI",
+    "google deepmind": "Google DeepMind",
+    "gemini": "Gemini",
+    "agi": "AGI"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T16:23:01.041422"
+}

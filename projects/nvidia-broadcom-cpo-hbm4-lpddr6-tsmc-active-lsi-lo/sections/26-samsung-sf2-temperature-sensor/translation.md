@@ -1,0 +1,31 @@
+https://substackcdn.com/image/fetch/$s_!S6Ri!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5ae89ead-c1e7-409c-912f-bf86d659e2c0_2880x1620.png
+
+传统温度传感器的权衡取舍。来源：三星，ISSCC 2026
+
+https://substackcdn.com/image/fetch/$s_!2aBs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F66a71ead-cde8-4e94-9ea5-ddf5caebf775_2880x1620.png
+
+三星SF2基于金属层电阻的温度传感器权衡取舍。来源：三星，ISSCC 2026
+
+三星在SF2工艺上展示了一款紧凑型温度传感器，它用后端金属层（BEOL， Back-End-of-Line）电阻取代了传统的双极结型晶体管方案。这可能不如下一代内存或处理器那样引人注目，但对于芯片的正常工作却至关重要。
+
+该金属电阻的方块电阻比等效布线金属高出518倍，因此实现相同电阻值所需面积仅为后者的约1%。由于它位于上层金属层中，为下方任何电路都留出了充足空间，并消除了前端工艺的面积开销。尽管其分辨率较低，但其带来的优势足以弥补这一不足。
+
+https://substackcdn.com/image/fetch/$s_!J1CI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F22987230-7e2a-4317-b244-f4e76930494b_2880x1620.png
+
+三星SF2温度传感器的堆叠式实现。来源：三星，ISSCC 2026
+
+该传感器采用全堆叠的电容-电阻-电路结构，总面积仅为625 μm²。作为一个经过特性表征的工艺设计套件（PDK， Process Design Kit）元件，其行为由晶圆代工厂建模并验证。这种设计更适用于需要严格控制工艺偏差的大规模生产。即使在单个芯片上，热点附近也可能使用数千个此类传感器。
+
+如前所述，金属层电阻的电阻温度系数（TCR）较低，仅为布线金属的0.2倍——这限制了传感分辨率。三星通过增大基础电阻值来补偿这一不足。然而，这会导致RC时间常数增大，从而拖慢传感速度。为了解决这个问题，三星采用了一种时间偏移压缩技术：首先通过一条低电阻（0.1R）的快速充电路径为RC滤波器快速充电，随后电路切换到全电阻值，用于测量波形中对温度敏感的部分。
+
+在时间数字转换器（TDC）部分，他们用一款基于紧凑型环形振荡器（RO， Ring Oscillator）的TDC取代了先前工作中使用的大型线性延迟发生器，将延迟发生器的面积削减了99.1%。该环形振荡器还兼任系统时钟，并通过相位交错计数避免了非单调性问题。
+
+https://substackcdn.com/image/fetch/$s_!f54k!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2cd264f4-0a79-4823-8ab5-1cbfd4627f9f_2880x1620.png
+
+三星SF2温度传感器转换时间与精度对比。来源：三星，ISSCC 2026
+
+https://substackcdn.com/image/fetch/$s_!nCIv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0d4c4094-3c4e-42fc-a4d5-6087d122c98a_2880x1620.png
+
+三星SF2温度传感器与先前工作的对比表。来源：三星，ISSCC 2026
+
+这款新型温度传感器的精度品质因数（FoM）为0.017 nJ·%²，优于先前基于三星5LPE、台积电N3E和英特尔4工艺（JSSC 2025）的工作。此前的温度传感器只能在面积或速度其中一项上进行优化。例如，台积电N3E上的传感器面积很小（900 μm²），但转换时间长达1毫秒；而三星5LPE上的传感器速度很快（12微秒），但面积巨大（6356 μm²）。

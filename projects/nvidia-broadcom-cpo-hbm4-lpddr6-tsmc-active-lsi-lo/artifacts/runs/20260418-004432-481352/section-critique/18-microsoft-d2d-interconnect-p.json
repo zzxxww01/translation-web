@@ -1,0 +1,85 @@
+{
+  "section_id": "18-microsoft-d2d-interconnect-p",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.2,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "die-to-die (D2D) interconnect",
+        "description": "术语“die-to-die”在段落2和段落8中翻译不一致。",
+        "why_it_matters": "术语翻译不一致会影响专业性和阅读连贯性。段落2译为“裸片到裸片”，段落8译为“裸片间互连”，虽含义相近，但未统一。",
+        "suggestion": "建议全文统一为“裸片到裸片（D2D）互连”，或在首次出现后，后续可简称为“D2D互连”。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "A full mock-up of the power delivery network and routing were included to mimic clock gating and crosstalk.",
+        "description": "译文“设计中还包含了完整的供电网络和布线模拟，以模拟时钟门控和串扰效应。”略显生硬，且“模拟”一词重复使用。",
+        "why_it_matters": "“模拟”一词在句中既作名词（mock-up）又作动词（mimic），容易造成混淆。可以调整语序使表达更清晰。",
+        "suggestion": "可优化为：“设计中还包含了完整的供电网络和布线模型，用以模拟时钟门控和串扰效应。”或“为了模拟时钟门控和串扰效应，设计中还包含了完整的供电网络和布线模型。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "The interconnect on their test die occupied 532 µm of shoreline and had a depth of 1350 µm.",
+        "description": "“shoreline”在此处是芯片设计领域的专业术语，译为“海岸线长度”可能不够准确或对部分读者造成理解障碍。",
+        "why_it_matters": "“shoreline”特指芯片与封装基板或中介层（interposer）的接触边缘长度，是衡量互连模块尺寸的关键参数。直译可能导致信息传递不精确。",
+        "suggestion": "建议译为：“其测试芯片上的互连模块占据了532微米的（芯片）边缘长度，深度为1350微米。” 或可考虑加注：“（注：shoreline在此指芯片与封装互连的边缘长度）”。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "The test vehicle was fabricated on TSMC’s N3P node, and the interconnect was tested at two data rates, 20 Gb/s at 0.65V, and 24 Gb/s at 0.75V.",
+        "description": "译文“该测试载具采用台积电（TSMC）的N3P制程节点制造。互连模块在两种数据速率下进行了测试：0.65V电压下为20 Gb/s，0.75V电压下为24 Gb/s。” 将原文一句拆为两句，信息清晰，但第二句的表述可以更紧凑。",
+        "why_it_matters": "数据密集的句子需要确保信息密度和阅读节奏。",
+        "suggestion": "可微调为：“该测试载具采用台积电（TSMC）的N3P制程节点制造，互连模块在两种数据速率下进行了测试：0.65V电压下为20 Gb/s，0.75V电压下为24 Gb/s。” 保持单句，用逗号连接，更显紧凑。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 8,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "idle state",
+        "description": "术语“idle state”译为“空闲状态”是准确的，但考虑到上下文（功耗分析），在半导体/电路设计中更常见的对应术语是“静态功耗”或“待机状态”所对应的状态。",
+        "why_it_matters": "使用领域内更通用的术语有助于目标读者（半导体从业者）快速理解。虽然“空闲状态”没错，但“静态状态”或“待机状态”可能更贴切。",
+        "suggestion": "建议译为“静态功耗状态”或“待机状态”，以更精确地反映其在功耗分析中的语境。例如：“其静态状态下的功耗为0.05 pJ/b。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 11,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Microsoft also compared their interconnect to the same prior research as TSMC did for their Active LSI.",
+        "description": "译文“与台积电（TSMC）为其Active LSI所做的一样，微软也将自家的互连技术与先前相同的研究进行了对比。” 语序调整后符合中文习惯，但“先前相同的研究”略显拗口。",
+        "why_it_matters": "“the same prior research”指代的是前文（TSMC章节）提到过的那些早期研究。译文需要更清晰地表达这层指代关系。",
+        "suggestion": "可优化为：“与台积电（TSMC）为其Active LSI所做的一样，微软也将自家的互连技术与（前文提及的）同一批早期研究进行了对比。” 或“微软也将其互连技术与台积电Active LSI所对比的那些早期研究进行了比较。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

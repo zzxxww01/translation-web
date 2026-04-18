@@ -27,12 +27,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "智能体也可能被各大网站屏蔽，这正是ChatGPT智能体与亚马逊之间正在上演的博弈。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:53:31.944822",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'Agent' is consistently translated as '智能体'.",
+          "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+          "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+          "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+          "relation_to_next": "N/A (Conclusion of the provided structure).",
+          "key_points": [
+            "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+            "Access requires complex backend negotiations and platform politics.",
+            "Deals may be contingent on leveraging cloud and hardware resources."
+          ],
+          "translation_notes": [
+            "Ensure 'Agent' is consistently translated as '智能体'.",
+            "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+            "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "译文“就正在上演这种动态”略显生硬，带有翻译腔。原文“this dynamic playing out”在商业分析语境下，更自然的表达是描述为“正在上演的博弈”或“正在发生的情况”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“允许智能体在平台上购物”存在歧义，可能被理解为亚马逊主动允许。原文“agents shopping on the platform”描述的是智能体（代表用户）在平台上购物的行为本身，而亚马逊的“此举”（this move）指的是“屏蔽智能体”。逻辑链是：如果允许智能体购物（行为），会导致用户绕过广告（后果），所以亚马逊屏蔽智能体（举措）是合理的。"
+          },
+          {
+            "type": "readability",
+            "description": "“后者正是当前上演的情况”与前一段的“这种动态”略有重复，且“上演的情况”搭配稍显生硬。可以更简洁地过渡。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“免费用户的货币化”表述准确，但在中文商业分析语境中，“变现”比“货币化”更常用、更自然。"
+          },
+          {
+            "type": "terminology",
+            "description": "“搭建”智能体略显口语化，在技术语境下，“部署”或“构建”更为常见。“RL即服务”的翻译正确，但首次出现时，可以考虑加注英文缩写，尽管术语表已定义，但在密集段落中首次出现时提示读者仍有益处。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +123,76 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!hEdn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29d60d24-7f6b-4aba-87bb-eb38e3bdd036_1016x380.png",
+          "model": "pro",
+          "created_at": "2026-04-15T19:53:31.944865",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!hEdn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29d60d24-7f6b-4aba-87bb-eb38e3bdd036_1016x380.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'Agent' is consistently translated as '智能体'.",
+          "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+          "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+          "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+          "relation_to_next": "N/A (Conclusion of the provided structure).",
+          "key_points": [
+            "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+            "Access requires complex backend negotiations and platform politics.",
+            "Deals may be contingent on leveraging cloud and hardware resources."
+          ],
+          "translation_notes": [
+            "Ensure 'Agent' is consistently translated as '智能体'.",
+            "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+            "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "译文“就正在上演这种动态”略显生硬，带有翻译腔。原文“this dynamic playing out”在商业分析语境下，更自然的表达是描述为“正在上演的博弈”或“正在发生的情况”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“允许智能体在平台上购物”存在歧义，可能被理解为亚马逊主动允许。原文“agents shopping on the platform”描述的是智能体（代表用户）在平台上购物的行为本身，而亚马逊的“此举”（this move）指的是“屏蔽智能体”。逻辑链是：如果允许智能体购物（行为），会导致用户绕过广告（后果），所以亚马逊屏蔽智能体（举措）是合理的。"
+          },
+          {
+            "type": "readability",
+            "description": "“后者正是当前上演的情况”与前一段的“这种动态”略有重复，且“上演的情况”搭配稍显生硬。可以更简洁地过渡。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“免费用户的货币化”表述准确，但在中文商业分析语境中，“变现”比“货币化”更常用、更自然。"
+          },
+          {
+            "type": "terminology",
+            "description": "“搭建”智能体略显口语化，在技术语境下，“部署”或“构建”更为常见。“RL即服务”的翻译正确，但首次出现时，可以考虑加注英文缩写，尽管术语表已定义，但在密集段落中首次出现时提示读者仍有益处。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -98,13 +226,76 @@
           "created_at": "2026-04-10T22:52:40.341963",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-15T19:53:31.944879",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'Agent' is consistently translated as '智能体'.",
+          "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+          "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+          "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+          "relation_to_next": "N/A (Conclusion of the provided structure).",
+          "key_points": [
+            "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+            "Access requires complex backend negotiations and platform politics.",
+            "Deals may be contingent on leveraging cloud and hardware resources."
+          ],
+          "translation_notes": [
+            "Ensure 'Agent' is consistently translated as '智能体'.",
+            "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+            "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "译文“就正在上演这种动态”略显生硬，带有翻译腔。原文“this dynamic playing out”在商业分析语境下，更自然的表达是描述为“正在上演的博弈”或“正在发生的情况”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“允许智能体在平台上购物”存在歧义，可能被理解为亚马逊主动允许。原文“agents shopping on the platform”描述的是智能体（代表用户）在平台上购物的行为本身，而亚马逊的“此举”（this move）指的是“屏蔽智能体”。逻辑链是：如果允许智能体购物（行为），会导致用户绕过广告（后果），所以亚马逊屏蔽智能体（举措）是合理的。"
+          },
+          {
+            "type": "readability",
+            "description": "“后者正是当前上演的情况”与前一段的“这种动态”略有重复，且“上演的情况”搭配稍显生硬。可以更简洁地过渡。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“免费用户的货币化”表述准确，但在中文商业分析语境中，“变现”比“货币化”更常用、更自然。"
+          },
+          {
+            "type": "terminology",
+            "description": "“搭建”智能体略显口语化，在技术语境下，“部署”或“构建”更为常见。“RL即服务”的翻译正确，但首次出现时，可以考虑加注英文缩写，尽管术语表已定义，但在密集段落中首次出现时提示读者仍有益处。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -131,12 +322,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "对亚马逊而言，此举合乎情理：因为如果允许智能体在平台上（代表用户）购物，用户就能绕过平台上的所有广告。亚马逊可以将生态系统限制在自家的模型（如Nova和Rufus）内，或者在谈判中以此作为筹码。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:53:31.944890",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'Agent' is consistently translated as '智能体'.",
+          "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+          "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+          "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+          "relation_to_next": "N/A (Conclusion of the provided structure).",
+          "key_points": [
+            "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+            "Access requires complex backend negotiations and platform politics.",
+            "Deals may be contingent on leveraging cloud and hardware resources."
+          ],
+          "translation_notes": [
+            "Ensure 'Agent' is consistently translated as '智能体'.",
+            "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+            "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "译文“就正在上演这种动态”略显生硬，带有翻译腔。原文“this dynamic playing out”在商业分析语境下，更自然的表达是描述为“正在上演的博弈”或“正在发生的情况”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“允许智能体在平台上购物”存在歧义，可能被理解为亚马逊主动允许。原文“agents shopping on the platform”描述的是智能体（代表用户）在平台上购物的行为本身，而亚马逊的“此举”（this move）指的是“屏蔽智能体”。逻辑链是：如果允许智能体购物（行为），会导致用户绕过广告（后果），所以亚马逊屏蔽智能体（举措）是合理的。"
+          },
+          {
+            "type": "readability",
+            "description": "“后者正是当前上演的情况”与前一段的“这种动态”略有重复，且“上演的情况”搭配稍显生硬。可以更简洁地过渡。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“免费用户的货币化”表述准确，但在中文商业分析语境中，“变现”比“货币化”更常用、更自然。"
+          },
+          {
+            "type": "terminology",
+            "description": "“搭建”智能体略显口语化，在技术语境下，“部署”或“构建”更为常见。“RL即服务”的翻译正确，但首次出现时，可以考虑加注英文缩写，尽管术语表已定义，但在密集段落中首次出现时提示读者仍有益处。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -178,19 +433,83 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "后者正是当前局势的焦点。OpenAI正在与亚马逊谈判，以获取其购物平台的访问权限，但这可能取决于与使用亚马逊云和芯片相关的细节条件。我们预计，谷歌、Meta、微软和X等公司也将在最大程度上限制对其生态系统的访问，尽管反垄断担忧可能对此有所制约。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:53:31.944949",
+          "tokenized_text": "后者正是当前局势的焦点。OpenAI正在与亚马逊谈判，以获取其购物平台的访问权限，但这可能取决于与使用[[[LINK_1|亚马逊云和芯片]]]相关的细节条件。我们预计，谷歌、Meta、微软和X等公司也将在最大程度上限制对其生态系统的访问，尽管反垄断担忧可能对此有所制约。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'Agent' is consistently translated as '智能体'.",
+          "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+          "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+          "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+          "relation_to_next": "N/A (Conclusion of the provided structure).",
+          "key_points": [
+            "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+            "Access requires complex backend negotiations and platform politics.",
+            "Deals may be contingent on leveraging cloud and hardware resources."
+          ],
+          "translation_notes": [
+            "Ensure 'Agent' is consistently translated as '智能体'.",
+            "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+            "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "译文“就正在上演这种动态”略显生硬，带有翻译腔。原文“this dynamic playing out”在商业分析语境下，更自然的表达是描述为“正在上演的博弈”或“正在发生的情况”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“允许智能体在平台上购物”存在歧义，可能被理解为亚马逊主动允许。原文“agents shopping on the platform”描述的是智能体（代表用户）在平台上购物的行为本身，而亚马逊的“此举”（this move）指的是“屏蔽智能体”。逻辑链是：如果允许智能体购物（行为），会导致用户绕过广告（后果），所以亚马逊屏蔽智能体（举措）是合理的。"
+          },
+          {
+            "type": "readability",
+            "description": "“后者正是当前上演的情况”与前一段的“这种动态”略有重复，且“上演的情况”搭配稍显生硬。可以更简洁地过渡。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“免费用户的货币化”表述准确，但在中文商业分析语境中，“变现”比“货币化”更常用、更自然。"
+          },
+          {
+            "type": "terminology",
+            "description": "“搭建”智能体略显口语化，在技术语境下，“部署”或“构建”更为常见。“RL即服务”的翻译正确，但首次出现时，可以考虑加注英文缩写，尽管术语表已定义，但在密集段落中首次出现时提示读者仍有益处。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -232,19 +551,83 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "像亚马逊与OpenAI这类交易的核心，在于免费用户的变现。这已有先例：OpenAI曾宣布与Shopify和Etsy集成的“即时结账”功能。我们在去年八月就曾指出，这可能是智能体发展的潜在路径。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:53:31.944983",
+          "tokenized_text": "像亚马逊与OpenAI这类交易的核心，在于免费用户的变现。这已有先例：[[[LINK_1|OpenAI曾宣布与Shopify和Etsy集成的“即时结账”功能]]]。我们在去年八月就曾指出，这可能是智能体发展的潜在路径。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'Agent' is consistently translated as '智能体'.",
+          "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+          "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+          "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+          "relation_to_next": "N/A (Conclusion of the provided structure).",
+          "key_points": [
+            "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+            "Access requires complex backend negotiations and platform politics.",
+            "Deals may be contingent on leveraging cloud and hardware resources."
+          ],
+          "translation_notes": [
+            "Ensure 'Agent' is consistently translated as '智能体'.",
+            "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+            "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "译文“就正在上演这种动态”略显生硬，带有翻译腔。原文“this dynamic playing out”在商业分析语境下，更自然的表达是描述为“正在上演的博弈”或“正在发生的情况”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“允许智能体在平台上购物”存在歧义，可能被理解为亚马逊主动允许。原文“agents shopping on the platform”描述的是智能体（代表用户）在平台上购物的行为本身，而亚马逊的“此举”（this move）指的是“屏蔽智能体”。逻辑链是：如果允许智能体购物（行为），会导致用户绕过广告（后果），所以亚马逊屏蔽智能体（举措）是合理的。"
+          },
+          {
+            "type": "readability",
+            "description": "“后者正是当前上演的情况”与前一段的“这种动态”略有重复，且“上演的情况”搭配稍显生硬。可以更简洁地过渡。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“免费用户的货币化”表述准确，但在中文商业分析语境中，“变现”比“货币化”更常用、更自然。"
+          },
+          {
+            "type": "terminology",
+            "description": "“搭建”智能体略显口语化，在技术语境下，“部署”或“构建”更为常见。“RL即服务”的翻译正确，但首次出现时，可以考虑加注英文缩写，尽管术语表已定义，但在密集段落中首次出现时提示读者仍有益处。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -286,19 +669,87 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token LINK_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "《GPT-5为广告货币化和超级应用铺平道路》 - Doug, Dylan Patel 等四人 · 2025年8月13日",
+          "model": "pro",
+          "created_at": "2026-04-15T19:53:31.948048",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token LINK_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'Agent' is consistently translated as '智能体'.",
+          "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+          "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+          "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+          "relation_to_next": "N/A (Conclusion of the provided structure).",
+          "key_points": [
+            "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+            "Access requires complex backend negotiations and platform politics.",
+            "Deals may be contingent on leveraging cloud and hardware resources."
+          ],
+          "translation_notes": [
+            "Ensure 'Agent' is consistently translated as '智能体'.",
+            "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+            "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "译文“就正在上演这种动态”略显生硬，带有翻译腔。原文“this dynamic playing out”在商业分析语境下，更自然的表达是描述为“正在上演的博弈”或“正在发生的情况”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“允许智能体在平台上购物”存在歧义，可能被理解为亚马逊主动允许。原文“agents shopping on the platform”描述的是智能体（代表用户）在平台上购物的行为本身，而亚马逊的“此举”（this move）指的是“屏蔽智能体”。逻辑链是：如果允许智能体购物（行为），会导致用户绕过广告（后果），所以亚马逊屏蔽智能体（举措）是合理的。"
+          },
+          {
+            "type": "readability",
+            "description": "“后者正是当前上演的情况”与前一段的“这种动态”略有重复，且“上演的情况”搭配稍显生硬。可以更简洁地过渡。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“免费用户的货币化”表述准确，但在中文商业分析语境中，“变现”比“货币化”更常用、更自然。"
+          },
+          {
+            "type": "terminology",
+            "description": "“搭建”智能体略显口语化，在技术语境下，“部署”或“构建”更为常见。“RL即服务”的翻译正确，但首次出现时，可以考虑加注英文缩写，尽管术语表已定义，但在密集段落中首次出现时提示读者仍有益处。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -325,12 +776,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在企业层面，许多公司正在部署自己的智能体。它们通常与其他初创公司签订合同，由后者为其提供针对特定任务或工作负载的“强化学习即服务”（RL as a Service）。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:53:31.948080",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure 'Agent' is consistently translated as '智能体'.",
+          "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+          "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+          "relation_to_previous": "Expands specifically on the 'defensive posturing' and barriers to adoption introduced at the end of the previous section.",
+          "relation_to_next": "N/A (Conclusion of the provided structure).",
+          "key_points": [
+            "Major platforms (e.g., Amazon) are actively blocking AI agents (e.g., ChatGPT Agent).",
+            "Access requires complex backend negotiations and platform politics.",
+            "Deals may be contingent on leveraging cloud and hardware resources."
+          ],
+          "translation_notes": [
+            "Ensure 'Agent' is consistently translated as '智能体'.",
+            "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+            "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "译文“就正在上演这种动态”略显生硬，带有翻译腔。原文“this dynamic playing out”在商业分析语境下，更自然的表达是描述为“正在上演的博弈”或“正在发生的情况”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“允许智能体在平台上购物”存在歧义，可能被理解为亚马逊主动允许。原文“agents shopping on the platform”描述的是智能体（代表用户）在平台上购物的行为本身，而亚马逊的“此举”（this move）指的是“屏蔽智能体”。逻辑链是：如果允许智能体购物（行为），会导致用户绕过广告（后果），所以亚马逊屏蔽智能体（举措）是合理的。"
+          },
+          {
+            "type": "readability",
+            "description": "“后者正是当前上演的情况”与前一段的“这种动态”略有重复，且“上演的情况”搭配稍显生硬。可以更简洁地过渡。"
+          },
+          {
+            "type": "accuracy",
+            "description": "“免费用户的货币化”表述准确，但在中文商业分析语境中，“变现”比“货币化”更常用、更自然。"
+          },
+          {
+            "type": "terminology",
+            "description": "“搭建”智能体略显口语化，在技术语境下，“部署”或“构建”更为常见。“RL即服务”的翻译正确，但首次出现时，可以考虑加注英文缩写，尽管术语表已定义，但在密集段落中首次出现时提示读者仍有益处。"
+          }
+        ]
+      },
       "history": []
     }
   ]

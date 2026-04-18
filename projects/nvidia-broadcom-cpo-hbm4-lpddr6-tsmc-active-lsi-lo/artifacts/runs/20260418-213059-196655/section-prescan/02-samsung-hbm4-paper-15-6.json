@@ -1,0 +1,60 @@
+{
+  "section_id": "02-samsung-hbm4-paper-15-6",
+  "new_terms": [
+    {
+      "term": "tCCDR",
+      "suggested_translation": "tCCDR",
+      "context": "HBM时序参数，不同堆栈ID间连续READ命令的最小间隔",
+      "confidence": 0.95
+    },
+    {
+      "term": "DCDL",
+      "suggested_translation": "延迟补偿电路",
+      "context": "用于校准通道间延迟差异的电路",
+      "confidence": 0.9
+    },
+    {
+      "term": "CoW",
+      "suggested_translation": "晶圆上芯片",
+      "context": "Chip-on-Wafer，一种先进封装技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "SiP",
+      "suggested_translation": "系统级封装",
+      "context": "System-in-Package",
+      "confidence": 0.9
+    },
+    {
+      "term": "JESD270-4",
+      "suggested_translation": "JESD270-4",
+      "context": "JEDEC发布的HBM4标准文档编号",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm4": "HBM4",
+    "hbm3e": "HBM3E",
+    "tsv": "硅通孔",
+    "jedec": "JEDEC",
+    "rdqs": "RDQS",
+    "tdc": "时间数字转换器",
+    "abb": "自适应体偏置",
+    "mbist": "内存内建自测试",
+    "pmbist": "可编程内存内建自测试",
+    "vddq": "VDDQ",
+    "vddc": "VDDC",
+    "shmoo plot": "舒姆图",
+    "die shot": "芯片显微照片",
+    "base die": "基础芯片",
+    "1c": "1c",
+    "sf4": "SF4",
+    "yield": "良率",
+    "cogs": "COGS",
+    "sid": "SID",
+    "tccds": "tCCDS"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:31:40.586818"
+}

@@ -1,0 +1,473 @@
+{
+  "added": 78,
+  "terms": [
+    {
+      "original": "LPDDR6",
+      "translation": "LPDDR6",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ISSCC",
+      "translation": "ISSCC",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "HBM4",
+      "translation": "HBM4",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "GDDR7",
+      "translation": "GDDR7",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "IEDM",
+      "translation": "国际电子器件会议",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "VLSI",
+      "translation": "超大规模集成电路",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "base die",
+      "translation": "基础芯片",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "HBM3E",
+      "translation": "HBM3E",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "1c",
+      "translation": "1c",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Shmoo plot",
+      "translation": "舒姆图",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "SF4",
+      "translation": "SF4",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "TSV",
+      "translation": "硅通孔",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PMBIST",
+      "translation": "可编程内存内建自测试",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "tCCDR",
+      "translation": "tCCDR",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "JEDEC",
+      "translation": "JEDEC",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "RDQS",
+      "translation": "RDQS",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "TDC",
+      "translation": "时间数字转换器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "ABB",
+      "translation": "自适应体偏置",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "MBIST",
+      "translation": "内存内建自测试",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "VDDC",
+      "translation": "VDDC",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "VDDQ",
+      "translation": "VDDQ",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "sub-channel",
+      "translation": "子通道",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "NRZ",
+      "translation": "不归零制",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "LPDDR5X",
+      "translation": "LPDDR5X",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PAM3",
+      "translation": "三电平脉冲幅度调制",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PHY",
+      "translation": "物理层",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "SF2",
+      "translation": "SF2",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "efficiency mode",
+      "translation": "能效模式",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "data rate",
+      "translation": "数据速率",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "bit density",
+      "translation": "位密度",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Gb/mm²",
+      "translation": "Gb/mm²",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Gb/s",
+      "translation": "Gb/s",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Cell-on-Peripheral (COP)",
+      "translation": "单元位于外围电路之上 (COP)",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Cell-on-Peripheral",
+      "translation": "单元位于外围电路之上",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "COP",
+      "translation": "COP",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "BiCS10",
+      "translation": "BiCS10",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "plane",
+      "translation": "平面",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "xBIT",
+      "translation": "xBIT",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "assist circuitry",
+      "translation": "辅助电路",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PDK",
+      "translation": "工艺设计套件",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "macro",
+      "translation": "宏单元",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "bitcell",
+      "translation": "存储单元",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "dual-port access",
+      "translation": "双端口访问",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Flash-Plus",
+      "translation": "Flash-Plus",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "interleaved reads",
+      "translation": "交错读取",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "iso-capacity",
+      "translation": "等容量",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "CPO",
+      "translation": "共封装光学",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "OCI MSA",
+      "translation": "光学计算互连多源协议",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "UCIe-S",
+      "translation": "UCIe-S",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "DWDM",
+      "translation": "密集波分复用",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "D2D",
+      "translation": "裸片到裸片",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "SerDes",
+      "translation": "串行器/解串器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "OBO",
+      "translation": "板载光学",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PAM4",
+      "translation": "四电平脉冲幅度调制",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "coherent-lite transceiver",
+      "translation": "精简相干光模块",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "DSP",
+      "translation": "数字信号处理器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Diamond Rapids",
+      "translation": "Diamond Rapids",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "EMIB",
+      "translation": "EMIB",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "lane",
+      "translation": "通道",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Manhattan grid",
+      "translation": "曼哈顿网格",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "pJ/b",
+      "translation": "皮焦耳/比特",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "test vehicle",
+      "translation": "测试载具",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "die shot",
+      "translation": "芯片显微照片",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Rebellions",
+      "translation": "Rebellions",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "M3DProc",
+      "translation": "M3DProc",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "3D mesh",
+      "translation": "3D网格",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Foveros Direct",
+      "translation": "Foveros Direct",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "hybrid bonding",
+      "translation": "混合键合",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "N3P",
+      "translation": "N3P",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Rebel100",
+      "translation": "Rebel100",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "I-CubeS",
+      "translation": "I-CubeS",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Hot Chips",
+      "translation": "Hot Chips",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "UCIe-A",
+      "translation": "UCIe-A",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Maia 200",
+      "translation": "Maia 200",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Maia 100",
+      "translation": "Maia 100",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "reticle-scale monolithic",
+      "translation": "光罩尺寸单芯片",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "RC",
+      "translation": "RC",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "RO",
+      "translation": "环形振荡器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    }
+  ]
+}

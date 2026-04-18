@@ -1,0 +1,327 @@
+{
+  "section_id": "17-tsmc-active-lsi-paper-8-2",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "17-tsmc-active-lsi-paper-8-2",
+    "section_title": "TSMC Active LSI - Paper 8.2",
+    "section_title_translation": "TSMC Active LSI - Paper 8.2",
+    "section_position": "18/27",
+    "article_theme": "ISSCC 2026 展示了半导体行业在内存、光网络、高速互连和处理器等关键领域的最新电路与集成技术突破。",
+    "structure_summary": "文章采用典型的科技综述结构：引言概述 ISSCC 2026 及其与 IEDM/VLSI 的区别；随后按技术领域（内存、光网络、高速电互连、处理器）分章节深入评述各篇关键论文；每个子章节聚焦一家公司/一项技术，包含技术细节、性能对比、图表解读和行业背景分析；结尾以一个其他亮点（温度传感器）收尾。整体逻辑清晰，由面到点，技术深度逐层递进。",
+    "target_audience": "半导体行业从业者、分析师、资深科技爱好者，具备扎实的硬件知识。",
+    "translation_voice": "专业、准确、流畅的中文科技分析口吻。避免过度口语化，但需将英文长句合理切分为符合中文阅读习惯的短句。保留原文的技术严谨性和批判性视角。",
+    "previous_section_title": "Intel UCIe-S - Paper 8.1",
+    "next_section_title": "Microsoft D2D Interconnect - Paper 8.3",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "术语一致性优先：严格遵循提供的术语表进行翻译，尤其是高频技术缩写（HBM4, LPDDR6, GDDR7, UCIe, CPO）和关键概念（shmoo plot -> 舒姆图， bitcell -> 存储单元）。首次出现的重要缩写需加注中文全称。",
+      "句式重构与段落流：英文长句（尤其是包含多个从句、数据对比和技术术语的句子）必须拆分为符合中文阅读习惯的短句。确保每个中文句子主干清晰。段落内部逻辑需通过恰当的连接词（如‘此外’、‘然而’、‘具体而言’）衔接，避免直接堆砌翻译后的短句。",
+      "数据与比较的精确传达：所有性能数据（速度、电压、密度、带宽）、单位（Gb/s, V, mm², pJ/b）和比较关系（‘优于’、‘低于’、‘相当于’）必须准确翻译，不得有任何偏差。技术结论的强弱语气需与原文一致。",
+      "保留批判性与分析口吻：原文对厂商宣传持审慎态度（如对 Microsoft Maia 200 的评论）。翻译时需保留这种分析性甚至略带怀疑的语气，使用‘宣称’、‘据称’、‘值得注意’、‘存疑’等措辞，避免将其转化为纯粹的中性陈述或褒奖。"
+    ],
+    "article_challenges": [
+      {
+        "location": "全文，尤其是各技术缩写（HBM4, LPDDR6, UCIe, CPO, CoWoS）",
+        "issue": "大量专业缩写和术语，需确保首次出现时有解释，全文翻译一致。",
+        "suggestion": "在术语表中统一，首次出现时采用“英文全称（中文释义）”格式，如“UCIe（通用芯粒互连）”。",
+        "type": "accuracy"
+      },
+      {
+        "location": "各技术子章节",
+        "issue": "原文包含大量图表引用（如“Source: Samsung, ISSCC 2026”）和图片URL，翻译时需处理这些非文本元素。",
+        "suggestion": "保留图表标题和来源的翻译，将图片URL和占位符原文保留。确保图表引用与正文逻辑衔接。",
+        "type": "accuracy"
+      },
+      {
+        "location": "技术性能对比和数据分析段落（如 SK Hynix 与 Samsung LPDDR6 的 shmoo plot 对比）",
+        "issue": "涉及具体数据、单位（Gb/s, V, pJ/b）和对比结论，翻译必须精确无误。",
+        "suggestion": "数字、单位、比较级（“worse”, “higher”）需严格对应。技术结论的表述要清晰，避免模糊。",
+        "type": "accuracy"
+      },
+      {
+        "location": "对 Microsoft Maia 200 的描述（“claims are dubious”）",
+        "issue": "原文带有明显的怀疑和批判语气，翻译时需保留这种审慎态度，而非中性化。",
+        "suggestion": "将“dubious”译为“值得怀疑的”、“存疑的”，语气匹配原文的批判性。",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "ISSCC",
+        "term": "ISSCC",
+        "translation": "ISSCC",
+        "strategy": "preserve",
+        "note": "International Solid-State Circuits Conference，国际固态电路会议，顶级半导体电路设计会议。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "HBM4",
+        "term": "HBM4",
+        "translation": "HBM4",
+        "strategy": "preserve",
+        "note": "High Bandwidth Memory 第四代，高带宽内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "LPDDR6",
+        "term": "LPDDR6",
+        "translation": "LPDDR6",
+        "strategy": "preserve",
+        "note": "Low Power Double Data Rate 第六代，低功耗双倍数据速率内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "GDDR7",
+        "term": "GDDR7",
+        "translation": "GDDR7",
+        "strategy": "preserve",
+        "note": "Graphics Double Data Rate 第七代，图形用双倍数据速率内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "PHY",
+        "term": "PHY",
+        "translation": "物理层",
+        "strategy": "translate",
+        "note": "Physical Layer，物理层接口电路。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "shmoo plot",
+        "term": "shmoo plot",
+        "translation": "舒姆图",
+        "strategy": "translate",
+        "note": "表征芯片在不同电压、频率等参数下工作范围的测试图表。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "bitcell",
+        "term": "bitcell",
+        "translation": "存储单元",
+        "strategy": "translate",
+        "note": "存储单元，存储器中最基本的存储单位。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "COP (Cell-Over-Periphery)",
+        "term": "COP (Cell-Over-Periphery)",
+        "translation": "COP",
+        "strategy": "preserve",
+        "note": "一种 DRAM 架构，存储单元阵列堆叠在周边电路之上。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "BiCS",
+        "term": "BiCS",
+        "translation": "BiCS",
+        "strategy": "preserve",
+        "note": "Bit Cost Scalable，一种 3D NAND 存储技术。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MRAM",
+        "term": "MRAM",
+        "translation": "MRAM",
+        "strategy": "preserve",
+        "note": "Magnetoresistive Random-Access Memory，磁阻随机存取存储器。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DWDM",
+        "term": "DWDM",
+        "translation": "密集波分复用",
+        "strategy": "translate",
+        "note": "Dense Wavelength Division Multiplexing，密集波分复用。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CPO",
+        "term": "CPO",
+        "translation": "共封装光学",
+        "strategy": "translate",
+        "note": "Co-Packaged Optics，共封装光学。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "UCIe",
+        "term": "UCIe",
+        "translation": "UCIe",
+        "strategy": "preserve",
+        "note": "Universal Chiplet Interconnect Express，通用芯粒互连标准。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "die shot",
+        "term": "die shot",
+        "translation": "芯片显微照片",
+        "strategy": "translate",
+        "note": "芯片显微照片，展示芯片布局。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CoWoS",
+        "term": "CoWoS",
+        "translation": "CoWoS",
+        "strategy": "preserve",
+        "note": "Chip-on-Wafer-on-Substrate，台积电的一种 2.5D/3D 封装技术。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "半导体制造工艺节点。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "flops/mm²",
+        "term": "flops/mm²",
+        "translation": "FLOPS/mm²",
+        "strategy": "preserve",
+        "note": "每平方毫米的浮点运算次数，衡量计算密度。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F903517c9-6ff3-4ac5-9d4a-c0130cb9cbea_2880x1620.jpeg",
+    "台积电（TSMC）无源与有源本地硅互连（aLSI）对比。来源：台积电，ISSCC 2026",
+    "台积电（TSMC）的先进封装部门展示了其有源本地硅互连（aLSI）方案。与标准的CoWoS-L或EMIB不同，aLSI改善了信号完整性，并降低了顶层裸片上物理层（PHY）和串行器/解串器（SerDes）的复杂度。",
+    "https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8f473a9-3f0e-4b7a-b717-2bc9999adae6_2880x1620.jpeg",
+    "台积电（TSMC）有源本地硅互连（aLSI）裸片到裸片链路概览。来源：台积电，ISSCC 2026",
+    "台积电展示的器件采用了32 Gb/s、类似UCIe的收发器。由于aLSI改善了信号完整性，收发器的面积得以减小，凸点间距也能从45微米缩减至38.8微米。更紧密的间距结合转向曼哈顿网格（Manhattan grid）的布局，使得物理层（PHY）的深度从1043微米降至850微米，从而节省了空间。设计者可将这些空间重新分配给计算、内存或输入/输出（IO）单元，或用于缩小裸片尺寸。需要指出的是，该收发器只是‘类似UCIe’，并非真正的UCIe，因为UCIe标准强制要求六边形凸点排布，而非此处使用的曼哈顿网格。",
+    "随着设计者为下一代AI加速器竭力榨取每一寸裸片空间，转向aLSI技术已不可避免。",
+    "aLSI的‘有源’部分，体现在用有源晶体管构成的边沿触发收发器（ETT）电路，取代了桥接裸片中的无源长距离金属通道，从而在更长距离上维持信号完整性。这也降低了对顶层裸片发送/接收端口信号驱动能力的要求。aLSI内部的ETT电路仅额外增加0.07皮焦/比特（pJ/b）的能耗，最大限度地缓解了在堆叠裸片中加入有源电路可能引发的散热担忧。通过将信号调理电路移至桥接裸片，顶层裸片的发送/接收物理层（PHY）面积得以减小，这得益于可以使用更小的预驱动器和时钟缓冲器，并且接收端不再需要信号放大。",
+    "边沿触发收发器（ETT）集成了驱动器、交流耦合电容（Cac）、一个兼具负反馈与正反馈的放大器以及输出级。信号通过Cac时，会在其转换边沿引入峰值，随后由双环路放大器拾取，这便是其‘边沿触发’名称的由来。该放大器利用正负反馈环路来稳定电压水平。在此设计中，针对1.7毫米的通道长度，Cac设定为180 fF，裸片A和裸片B上的电阻分别为2kΩ和3kΩ。",
+    "https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc151958f-7fdb-4903-b06a-38a0eace27d5_2667x1500.jpeg",
+    "台积电（TSMC）集成eDTC的CoWoS-L供电方案。来源：台积电",
+    "这些aLSI桥接芯片还能在前端集成嵌入式深沟槽电容（eDTC），以改善对物理层（PHY）和裸片到裸片（D2D）控制器的供电。aLSI配合eDTC技术，不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化沿D2D接口的供电与信号布线。",
+    "https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7d837ed3-5395-4e1a-b579-c95f1d9497cc_2880x1620.jpeg",
+    "台积电（TSMC）有源本地硅互连（aLSI）布线能力与横截面。来源：台积电，ISSCC 2026",
+    "仅需388微米的海岸线长度，即可容纳64条发送（TX）和64条接收（RX）数据通道，总面积仅为0.330平方毫米。信号布线仅需占用最顶部的两层金属层，其余金属层可用于前端电路。",
+    "https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa2747466-8e4c-4447-ad94-6c2e8b71ea4a_2880x1620.jpeg",
+    "台积电（TSMC）有源本地硅互连（aLSI）在已知合格裸片（KGD）与已知合格封装（KGP）阶段的舒姆图。来源：台积电，ISSCC 2026",
+    "台积电阐述了有源本地硅互连（aLSI）如何在多个阶段进行测试。首先是已知合格裸片（KGD）阶段，仅测试LSI裸片本身以进行裸片验证。其次是已知合格堆叠（KGS）阶段，此时系统级芯片（SoC）已通过LSI连接，以测试堆叠功能。最后是已知合格封装（KGP）阶段，对完整组装体进行全面测试，以验证其功能、性能和可靠性。",
+    "他们展示了在KGD和KGP阶段的舒姆图。两张图均显示，该互连技术在0.75V电压下达到了32 Gb/s的速度，在0.95V电压下则达到了38.4 Gb/s。",
+    "https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff44de7d8-9b9f-4086-a305-6c16677e9895_2880x1620.jpeg",
+    "台积电（TSMC）有源本地硅互连（aLSI）芯片显微照片与功耗分解。来源：台积电，ISSCC 2026",
+    "该封装体展示了两颗系统级芯片（SoC）裸片和两颗输入/输出（IO）裸片。有趣的是，这个测试载具的设计似乎与AMD的MI450图形处理器（GPU）相符：包含两颗相互连接的基础裸片、12个HBM4堆栈以及两颗集成有源本地硅互连（aLSI）的IO裸片。值得注意的是，并非每个HBM4堆栈都拥有独立的aLSI，而是每两个HBM4堆栈共享一个aLSI。",
+    "在功耗方面，在0.75V电压下，总功耗仅为0.36皮焦耳/比特（pJ/b），其中有源本地硅互连（aLSI）中的嵌入式硅桥（ETT）部分仅消耗0.07 pJ/b。下图是与其他裸片到裸片（D2D）解决方案的对比。",
+    "https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd194a9ff-d0ee-4e74-98a9-1f426f98205c_2880x1620.jpeg",
+    "台积电（TSMC）有源本地硅互连（aLSI）与其他裸片间互连技术的对比。来源：台积电，ISSCC 2026"
+  ]
+}

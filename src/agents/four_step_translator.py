@@ -612,7 +612,7 @@ class FourStepTranslator:
         for para in paragraphs:
             if para.id in dehydrated_results:
                 translations.append(dehydrated_results[para.id])
-            elif para.id in trans_map:
+            elif para.id in trans_map and isinstance(trans_map[para.id], str) and trans_map[para.id].strip():
                 payload = build_translation_payload(
                     para,
                     trans_map[para.id].strip(),
@@ -626,9 +626,9 @@ class FourStepTranslator:
                     self._extract_terms_used(para.source, payload.text),
                 )
             else:
-                # 回退：translate_section 遗漏了此段落，使用单段翻译
+                # 回退：translate_section 遗漏该段或返回空译文，使用单段翻译
                 logger.warning(
-                    "Batch translation missing paragraph %s, falling back to single",
+                    "Batch translation missing/empty paragraph %s, falling back to single",
                     para.id,
                 )
                 global_index = batch_index * self.paragraph_threshold + paragraphs.index(para)
@@ -1011,6 +1011,12 @@ class FourStepTranslator:
             )
 
             stripped = refined_text.strip()
+            if not stripped:
+                logger.warning(
+                    "Refine step returned empty translation for paragraph %s; keeping previous draft",
+                    paragraph.id,
+                )
+                continue
 
             if paragraph.inline_elements:
                 candidate = build_translation_payload(
@@ -1065,6 +1071,12 @@ class FourStepTranslator:
             )
 
             stripped = polished_text.strip()
+            if not stripped:
+                logger.warning(
+                    "Style polish returned empty translation for paragraph %s; keeping previous draft",
+                    para.id,
+                )
+                continue
 
             if para.inline_elements:
                 candidate = build_translation_payload(

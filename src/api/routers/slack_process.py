@@ -4,7 +4,8 @@ from fastapi import APIRouter
 
 from src.prompts import get_prompt_manager
 
-from ..middleware import BadRequestException, ServiceUnavailableException
+from ..middleware import BadRequestException
+from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
 from .slack_models import (
@@ -60,7 +61,7 @@ async def process_slack_message(
         )
 
     try:
-        response_text = generate_with_fallback(prompt)
+        response_text = generate_with_fallback(prompt, task_type="slack")
         data = parse_llm_json_response(response_text)
 
         translation = str(data.get("translation", "")).strip()
@@ -71,4 +72,4 @@ async def process_slack_message(
             suggested_replies=suggested_replies,
         )
     except Exception as exc:
-        raise ServiceUnavailableException(detail=f"process failed: {exc}") from exc
+        raise_llm_service_unavailable(operation="Slack process", exc=exc)

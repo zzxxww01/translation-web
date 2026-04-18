@@ -1,0 +1,33 @@
+{
+  "section_id": "08-rl-as-a-service",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.43,
+    "scores": {
+      "readability": 8.3,
+      "accuracy": 9.0,
+      "terminology": 8.0,
+      "completeness": 8.5,
+      "style": 7.0
+    },
+    "failed_criteria": [
+      "critical_errors (4 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "RL在教导模型使用工具方面极为有效。通过利用开源工具，一些初创公司现在为大型企业提供定制化的RL服务。这一领域既有像RunRL和Osmosis这样较小的YC初创公司，也有由经验丰富的研究者创立的公司，例如Applied Compute和Adaptive ML。",
+    "通义千问模型常被用于此目的，因为它们易于进行后训练，且运行所需资源较少。通义千问拥有多种模型，包括小型密集模型，这些模型对技能和配置的要求较低。",
+    "经过定制的后训练后，这些模型在租用的硬件上运行。目前，Baseten平台承载了许多这类小型定制模型。典型的目标任务包括处理Salesforce和AWS Terminal，以及创建或关闭Jira工单。此外，也可以让模型可靠地使用MCP（模型上下文协议），例如从SEC文件中提取数据。",
+    "这些提供“RL即服务”的初创公司正与各大实验室同台竞技，OpenAI最近就推出了“强化微调”服务。OpenAI RFT的目标是让任何拥有足够数据的客户都能对OpenAI模型进行RL训练，从而使其适应客户的具体任务和领域。",
+    "然而在实践中，该服务并未达到预期。我们认为它不够稳定，且对大多数客户而言过于昂贵。因此，我们看到对这些服务的需求主要流向了年轻的初创公司。这些年轻的YC公司利润率不高，甚至经常亏损。但它们能够以仅为OpenAI平台成本1/5的价格为用户提供服务，从而获取市场份额。",
+    "从长远来看，这种情况将会改变。OpenAI的目标是那些能花费数百万美元的大型企业；总体而言，各大实验室将攫取大部分营收。对OpenAI而言，这将通过其“战略部署”团队来实现，该团队的目标是直接与客户合作构建定制模型。OpenAI很早就将此项服务作为企业用例进行押注，并且该公司在2025年的企业业务增长已超过消费者业务。",
+    "https://substackcdn.com/image/fetch/$s_!kiYf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc103b69d-c1f2-4a3e-8780-abd93fb63602_1040x995.png",
+    "来源：OpenAI",
+    "Anthropic 也正在加入这场竞争。我们认为，Anthropic 拥有其自研的、类似于 RFT 的服务，该服务比 OpenAI 的版本更稳定且样本效率更高。Anthropic 可能会通过其 API 提供这项服务，同时也效仿 OpenAI，正在积极招聘“前线部署工程师”，其职能很可能与后者的战略部署团队类似。",
+    "Anthropic 正在大规模引入 Trainium 芯片。这对 RL 工作负载而言具有经济吸引力，部分原因在于其较低的 $/HBM（高带宽内存）成本。HBM 通常占芯片物料清单的很大一部分，但亚马逊直接采购，从而降低了成本。RL 工作负载主要是受内存限制的推理任务。这意味着，如果客户能充分优化吞吐量，那么使用像 Trainium 这样总拥有成本较低的芯片，将能从此项服务中获取可观利润。",
+    "亚马逊的 AI 复兴：AWS 与 Anthropic 的多吉瓦级 Trainium 扩展 - Jeremie Eliahou Ontiveros, Dylan Patel 等 2 人 · 2025年9月3日",
+    "如前所述，训练定制模型具有巨大的上升空间。我们特别看好的一个领域是科学发现，定制模型可以在该领域取得大量进展。",
+    "提供“RL即服务”的公司还包括 ThinkingMachines Tinker、Applied Compute 以及 Adaptive ML。迄今为止，这三家公司在“RL即服务”这一细分市场上，取得的进展都超过了OpenAI和Anthropic（的相关服务）。"
+  ]
+}

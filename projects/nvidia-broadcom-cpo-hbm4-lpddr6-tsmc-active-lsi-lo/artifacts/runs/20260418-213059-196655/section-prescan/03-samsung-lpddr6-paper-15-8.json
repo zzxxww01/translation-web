@@ -1,0 +1,59 @@
+{
+  "section_id": "03-samsung-lpddr6-paper-15-8",
+  "new_terms": [
+    {
+      "term": "sub-channel",
+      "suggested_translation": "子通道",
+      "context": "LPDDR6架构，每个裸片有两个子通道。",
+      "confidence": 0.95
+    },
+    {
+      "term": "efficiency mode",
+      "suggested_translation": "能效模式",
+      "context": "LPDDR6的两种工作模式之一，用于节能。",
+      "confidence": 0.95
+    },
+    {
+      "term": "Data Bus Inversion (DBI)",
+      "suggested_translation": "数据总线翻转",
+      "context": "一种用于降低功耗和保证信号完整性的机制。",
+      "confidence": 0.9
+    },
+    {
+      "term": "redistribution layer (RDL)",
+      "suggested_translation": "重布线层",
+      "context": "用于缩短关键延迟路径的封装层。",
+      "confidence": 0.9
+    },
+    {
+      "term": "VDD2C",
+      "suggested_translation": "VDD2C",
+      "context": "LPDDR6的恒定电源域之一，电压为0.875V。",
+      "confidence": 0.95
+    },
+    {
+      "term": "VDD2D",
+      "suggested_translation": "VDD2D",
+      "context": "LPDDR6的恒定电源域之一，电压为1.0V。",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "lpddr6": "LPDDR6",
+    "lpddr5x": "LPDDR5X",
+    "sub-channel": "子通道",
+    "nrz": "不归零制",
+    "pam3": "三电平脉冲幅度调制",
+    "die shot": "芯片显微照片",
+    "shmoo plot": "舒姆图",
+    "bit density": "位密度",
+    "Gb/mm²": "Gb/mm²",
+    "Gb/s": "Gb/s",
+    "data rate": "数据速率",
+    "isscc": "ISSCC",
+    "samsung": "三星",
+    "sk hynix": "SK海力士"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:32:01.505639"
+}

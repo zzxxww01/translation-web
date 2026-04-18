@@ -12,7 +12,7 @@ from src.core.models import ParagraphStatus
 from ..dependencies import (
     ConfirmationServiceDep,
     GlossaryManagerDep,
-    LLMProviderDep,
+    LongformLLMProviderDep,
     MemoryServiceDep,
     ProjectManagerDep,
 )
@@ -410,7 +410,7 @@ async def translate_paragraph(
     request: TranslateRequest,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
     service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
@@ -447,7 +447,7 @@ async def direct_translate_paragraph(
     paragraph_id: str,
     request: DirectTranslateRequest,
     pm: ProjectManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
     service: ConfirmationServiceDep,
 ):
     try:
@@ -482,7 +482,7 @@ async def query_word_meaning(
     paragraph_id: str,
     request: WordMeaningRequest,
     pm: ProjectManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
 ):
     try:
         return await asyncio.to_thread(
@@ -575,7 +575,7 @@ async def batch_translate_paragraphs(
     request: BatchTranslateRequest,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
     service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):

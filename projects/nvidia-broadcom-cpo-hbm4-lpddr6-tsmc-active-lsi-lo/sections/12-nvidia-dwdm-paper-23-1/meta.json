@@ -1,0 +1,1383 @@
+{
+  "section_id": "12-nvidia-dwdm-paper-23-1",
+  "title": "Nvidia DWDM - Paper 23.1",
+  "title_translation": "Nvidia DWDM - Paper 23.1",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "The choice of optical signaling format will affect the go-to-market timeline for scale-up co-packaged optics (CPO). Nvidia is ramping up production of COUPE optical engines that support 200G per lane PAM4 for scale-out switching in the near-term.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0207",
+      "parent_block_index": 207,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The choice of optical signaling format will affect the go-to-market timeline for scale-up co-packaged optics (CPO). Nvidia is ramping up production of COUPE optical engines that support 200G per lane PAM4 for scale-out switching in the near-term.",
+      "parent_block_plain_text": "The choice of optical signaling format will affect the go-to-market timeline for scale-up co-packaged optics (CPO). Nvidia is ramping up production of COUPE optical engines that support 200G per lane PAM4 for scale-out switching in the near-term.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 246,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "光学信号格式的选择将影响纵向扩展（scale-up）共封装光学（CPO）产品的上市时间表。英伟达正在加速生产其COUPE光学引擎，该引擎支持每通道200G PAM4，旨在短期内用于横向扩展（scale-out）交换。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056149",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!gqo1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1a30ce9-0d17-45f9-9e83-026ba5f0a876_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!gqo1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1a30ce9-0d17-45f9-9e83-026ba5f0a876_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0208",
+      "parent_block_index": 208,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!gqo1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1a30ce9-0d17-45f9-9e83-026ba5f0a876_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!gqo1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1a30ce9-0d17-45f9-9e83-026ba5f0a876_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!gqo1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1a30ce9-0d17-45f9-9e83-026ba5f0a876_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!gqo1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1a30ce9-0d17-45f9-9e83-026ba5f0a876_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056213",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!gqo1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa1a30ce9-0d17-45f9-9e83-026ba5f0a876_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Nvidia DWDM Architecture Overview. Source: Nvidia, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Nvidia DWDM Architecture Overview. Source: Nvidia, ISSCC 2026",
+          "start": 0,
+          "end": 61,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0209",
+      "parent_block_index": 209,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Nvidia DWDM Architecture Overview. Source: Nvidia, ISSCC 2026*",
+      "parent_block_plain_text": "Nvidia DWDM Architecture Overview. Source: Nvidia, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Nvidia DWDM Architecture Overview. Source: Nvidia, ISSCC 2026",
+          "start": 0,
+          "end": 61,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 61,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达DWDM架构概览。来源：英伟达，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056353",
+          "tokenized_text": "[[[EM_1|英伟达DWDM架构概览。来源：英伟达，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "However, at ISSCC, Nvidia proposed using 32 Gb/s per lambda, with 8 wavelengths multiplexed using DWDM. A 9th wavelength is used for clock forwarding at half rate — that is 16 Gb/s.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0210",
+      "parent_block_index": 210,
+      "parent_block_type": "p",
+      "parent_block_markdown": "However, at ISSCC, Nvidia proposed using 32 Gb/s per lambda, with 8 wavelengths multiplexed using DWDM. A 9th wavelength is used for clock forwarding at half rate — that is 16 Gb/s.",
+      "parent_block_plain_text": "However, at ISSCC, Nvidia proposed using 32 Gb/s per lambda, with 8 wavelengths multiplexed using DWDM. A 9th wavelength is used for clock forwarding at half rate — that is 16 Gb/s.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 181,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，在ISSCC上，英伟达提出了使用每波长32 Gb/s的方案，并通过DWDM复用8个波长。第9个波长以半速率（即16 Gb/s）用于时钟转发。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056391",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Clock forwarding means that SerDes can be made somewhat simpler by removing the Clock and Data Recovery (CDR) circuit as well as other circuitry, improving energy and chip shoreline efficiency.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0211",
+      "parent_block_index": 211,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Clock forwarding means that SerDes can be made somewhat simpler by removing the Clock and Data Recovery (CDR) circuit as well as other circuitry, improving energy and chip shoreline efficiency.",
+      "parent_block_plain_text": "Clock forwarding means that SerDes can be made somewhat simpler by removing the Clock and Data Recovery (CDR) circuit as well as other circuitry, improving energy and chip shoreline efficiency.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 193,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "时钟转发意味着可以通过移除时钟数据恢复（CDR）电路以及其他相关电路，使串行器/解串器设计在一定程度上得以简化，从而提升能效和芯片海岸线（shoreline）效率。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056416",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Earlier in March, just before OFC 2026, the formation of the Optical Compute Interconnect MSA (OCI MSA) was announced, and it will focus on a 200 Gb/s Bi-directional link, with each of transmit and receive formed using 4 lambdas of 50G NRZ, which will be sent bi-directionally across the same fiber. Did I hear anyone mention OCS?",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "formation of the Optical Compute Interconnect MSA",
+          "start": 44,
+          "end": 93,
+          "href": "https://www.businesswire.com/news/home/20260312254951/en/Optical-Scale-up-Consortium-Established-to-Create-an-Open-Specification-for-AI-Infrastructure-Led-by-Founding-Members-AMD-Broadcom-Meta-Microsoft-NVIDIA-and-OpenAI",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0212",
+      "parent_block_index": 212,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Earlier in March, just before OFC 2026, the [formation of the Optical Compute Interconnect MSA](https://www.businesswire.com/news/home/20260312254951/en/Optical-Scale-up-Consortium-Established-to-Create-an-Open-Specification-for-AI-Infrastructure-Led-by-Founding-Members-AMD-Broadcom-Meta-Microsoft-NVIDIA-and-OpenAI) (OCI MSA) was announced, and it will focus on a 200 Gb/s Bi-directional link, with each of transmit and receive formed using 4 lambdas of 50G NRZ, which will be sent bi-directionally across the same fiber. Did I hear anyone mention OCS?",
+      "parent_block_plain_text": "Earlier in March, just before OFC 2026, the formation of the Optical Compute Interconnect MSA (OCI MSA) was announced, and it will focus on a 200 Gb/s Bi-directional link, with each of transmit and receive formed using 4 lambdas of 50G NRZ, which will be sent bi-directionally across the same fiber. Did I hear anyone mention OCS?",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "formation of the Optical Compute Interconnect MSA",
+          "start": 44,
+          "end": 93,
+          "href": "https://www.businesswire.com/news/home/20260312254951/en/Optical-Scale-up-Consortium-Established-to-Create-an-Open-Specification-for-AI-Infrastructure-Led-by-Founding-Members-AMD-Broadcom-Meta-Microsoft-NVIDIA-and-OpenAI",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 330,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "早在今年三月，恰在OFC 2026之前，光学计算互连多源协议（OCI MSA）宣布成立，该协议将专注于200 Gb/s双向链路，其发送和接收均采用4个50G NRZ波长，并通过同一根光纤双向传输。是不是有人提到了OCS？",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056490",
+          "tokenized_text": "早在今年三月，恰在OFC 2026之前，[[[LINK_1|光学计算互连多源协议（OCI MSA）宣布成立]]]，该协议将专注于200 Gb/s双向链路，其发送和接收均采用4个50G NRZ波长，并通过同一根光纤双向传输。是不是有人提到了OCS？",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!Eh4Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62c2c764-5aab-4981-aedc-1e6ba3864cf4_2869x1869.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Eh4Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62c2c764-5aab-4981-aedc-1e6ba3864cf4_2869x1869.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0213",
+      "parent_block_index": 213,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Eh4Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62c2c764-5aab-4981-aedc-1e6ba3864cf4_2869x1869.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Eh4Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62c2c764-5aab-4981-aedc-1e6ba3864cf4_2869x1869.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Eh4Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62c2c764-5aab-4981-aedc-1e6ba3864cf4_2869x1869.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Eh4Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62c2c764-5aab-4981-aedc-1e6ba3864cf4_2869x1869.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056518",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Eh4Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62c2c764-5aab-4981-aedc-1e6ba3864cf4_2869x1869.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "OCI MSA Optical Link Specifications. Source: [OCI MSA](https://oci-msa.org/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "OCI MSA Optical Link Specifications. Source: [OCI MSA](https://oci-msa.org/)",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0214",
+      "parent_block_index": 214,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*OCI MSA Optical Link Specifications. Source: [OCI MSA](https://oci-msa.org/)*",
+      "parent_block_plain_text": "OCI MSA Optical Link Specifications. Source: [OCI MSA](https://oci-msa.org/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "OCI MSA Optical Link Specifications. Source: [OCI MSA](https://oci-msa.org/)",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 76,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "OCI MSA 光学链路规格。来源：[OCI MSA](https://oci-msa.org/)",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056578",
+          "tokenized_text": "[[[EM_1|OCI MSA 光学链路规格。来源：[OCI MSA](https://oci-msa.org/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Interestingly, the OCI MSA did not make use of an additional wavelength for clock forwarding, and it appears that reserving all wavelengths for actual data transmission is the priority.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0215",
+      "parent_block_index": 215,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Interestingly, the OCI MSA did not make use of an additional wavelength for clock forwarding, and it appears that reserving all wavelengths for actual data transmission is the priority.",
+      "parent_block_plain_text": "Interestingly, the OCI MSA did not make use of an additional wavelength for clock forwarding, and it appears that reserving all wavelengths for actual data transmission is the priority.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 185,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "有趣的是，光学计算互连多源协议（OCI MSA）并未使用额外的波长进行时钟转发。这似乎表明，将所有波长保留用于实际数据传输是其优先考虑的事项。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056602",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Much of Nvidia’s published research on scale-up CPO has centered on DWDM, though today’s CPO optical engines are oriented around 200G PAM4 DR Optics, which makes more sense for scale-out networking. The OCI MSA centering around DWDM for scale-up optics resolves this apparent contradiction, as it is now clear that Nvidia and others will center around the use of DWDM for scale-up and DR Optics for scale-out.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0216",
+      "parent_block_index": 216,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Much of Nvidia’s published research on scale-up CPO has centered on DWDM, though today’s CPO optical engines are oriented around 200G PAM4 DR Optics, which makes more sense for scale-out networking. The OCI MSA centering around DWDM for scale-up optics resolves this apparent contradiction, as it is now clear that Nvidia and others will center around the use of DWDM for scale-up and DR Optics for scale-out.",
+      "parent_block_plain_text": "Much of Nvidia’s published research on scale-up CPO has centered on DWDM, though today’s CPO optical engines are oriented around 200G PAM4 DR Optics, which makes more sense for scale-out networking. The OCI MSA centering around DWDM for scale-up optics resolves this apparent contradiction, as it is now clear that Nvidia and others will center around the use of DWDM for scale-up and DR Optics for scale-out.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 409,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达已发表的关于纵向扩展（scale-up）共封装光学（CPO）的研究大多集中在密集波分复用（DWDM）技术上。然而，当今的CPO光学引擎主要围绕200G PAM4 DR光学构建，这更适合横向扩展（scale-out）网络。OCI MSA围绕DWDM制定纵向扩展光学标准，正好化解了这一矛盾。现在情况已很明确：英伟达及其他厂商将主要采用DWDM进行纵向扩展，而采用DR光学进行横向扩展。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056623",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "The OCI MSA also illustrates different implementations, an On-Board Optics (OBO), a version of CPO that is integrated via the substrate on the ASIC package, and a version where the optical engine is integrated directly on the interposer. The implementation illustrated in the middle figure (b) will be the most common one used for scale-up and scale-out CPO for the next few years, but it still requires some form of serialized links that can pass through the ASIC substrate and will still require some form of SerDes on both sides. For example, UCIe-S could be used as a protocol for such transmission.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0217",
+      "parent_block_index": 217,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The OCI MSA also illustrates different implementations, an On-Board Optics (OBO), a version of CPO that is integrated via the substrate on the ASIC package, and a version where the optical engine is integrated directly on the interposer. The implementation illustrated in the middle figure (b) will be the most common one used for scale-up and scale-out CPO for the next few years, but it still requires some form of serialized links that can pass through the ASIC substrate and will still require some form of SerDes on both sides. For example, UCIe-S could be used as a protocol for such transmission.",
+      "parent_block_plain_text": "The OCI MSA also illustrates different implementations, an On-Board Optics (OBO), a version of CPO that is integrated via the substrate on the ASIC package, and a version where the optical engine is integrated directly on the interposer. The implementation illustrated in the middle figure (b) will be the most common one used for scale-up and scale-out CPO for the next few years, but it still requires some form of serialized links that can pass through the ASIC substrate and will still require some form of SerDes on both sides. For example, UCIe-S could be used as a protocol for such transmission.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 603,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "OCI MSA还展示了不同的实现方案：一种是板载光学（OBO），另一种是通过基板集成在专用集成电路（ASIC）封装上的CPO版本，以及第三种将光学引擎直接集成在硅中介层上的版本。中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。不过，该方案仍需要某种形式的串行化链路来穿过ASIC基板，并且两端仍需要某种形式的串行器/解串器（SerDes）。例如，UCIe-S协议就可以用于此类传输。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056644",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!r0uo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02eb01f6-1c42-4388-b07d-744346a1d768_2262x1962.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!r0uo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02eb01f6-1c42-4388-b07d-744346a1d768_2262x1962.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0218",
+      "parent_block_index": 218,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!r0uo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02eb01f6-1c42-4388-b07d-744346a1d768_2262x1962.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!r0uo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02eb01f6-1c42-4388-b07d-744346a1d768_2262x1962.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!r0uo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02eb01f6-1c42-4388-b07d-744346a1d768_2262x1962.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!r0uo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02eb01f6-1c42-4388-b07d-744346a1d768_2262x1962.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056664",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!r0uo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F02eb01f6-1c42-4388-b07d-744346a1d768_2262x1962.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Optical Engine Integration Levels (OBO, Substrate CPO, Interposer CPO). Source: [OCI MSA](https://oci-msa.org/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Optical Engine Integration Levels (OBO, Substrate CPO, Interposer CPO). Source: [OCI MSA](https://oci-msa.org/)",
+          "start": 0,
+          "end": 111,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0219",
+      "parent_block_index": 219,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Optical Engine Integration Levels (OBO, Substrate CPO, Interposer CPO). Source: [OCI MSA](https://oci-msa.org/)*",
+      "parent_block_plain_text": "Optical Engine Integration Levels (OBO, Substrate CPO, Interposer CPO). Source: [OCI MSA](https://oci-msa.org/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Optical Engine Integration Levels (OBO, Substrate CPO, Interposer CPO). Source: [OCI MSA](https://oci-msa.org/)",
+          "start": 0,
+          "end": 111,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 111,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "光学引擎集成层级（板载光学、基板CPO、中介层CPO）。来源：[OCI MSA](https://oci-msa.org/)",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056721",
+          "tokenized_text": "[[[EM_1|光学引擎集成层级（板载光学、基板CPO、中介层CPO）。来源：[OCI MSA](https://oci-msa.org/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "The “Final Boss” when it comes to implementing CPO will be when the optical engine can be integrated onto the interposer itself, connecting to the ASIC using a parallelized die to die (D2D) connection as depicted in (c) above. This could considerably improve shoreline bandwidth density, enable much higher radix and improve energy efficiency. This implementation thus unlocks benefits of CPO in ways that the other implementations cannot, but achieving it is still a few years away and requires further improvements in advanced packaging technology.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0220",
+      "parent_block_index": 220,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The “Final Boss” when it comes to implementing CPO will be when the optical engine can be integrated onto the interposer itself, connecting to the ASIC using a parallelized die to die (D2D) connection as depicted in (c) above. This could considerably improve shoreline bandwidth density, enable much higher radix and improve energy efficiency. This implementation thus unlocks benefits of CPO in ways that the other implementations cannot, but achieving it is still a few years away and requires further improvements in advanced packaging technology.",
+      "parent_block_plain_text": "The “Final Boss” when it comes to implementing CPO will be when the optical engine can be integrated onto the interposer itself, connecting to the ASIC using a parallelized die to die (D2D) connection as depicted in (c) above. This could considerably improve shoreline bandwidth density, enable much higher radix and improve energy efficiency. This implementation thus unlocks benefits of CPO in ways that the other implementations cannot, but achieving it is still a few years away and requires further improvements in advanced packaging technology.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 550,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "实现共封装光学（CPO）的“终极挑战”，在于将光学引擎直接集成到硅中介层上，并如上图（c）所示，通过并行化的裸片到裸片（D2D）连接与专用集成电路（ASIC）相连。这有望显著提升海岸线带宽密度，实现更高的端口数（radix），并改善能效。因此，这种实现方案能以其他方案无法企及的方式释放CPO的优势。但要实现它，仍需数年时间，并依赖于先进封装技术的进一步发展。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:29:57.056744",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.665,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“scale-up”首次出现时未加注中文解释，且与后文“纵向扩展”的译法存在潜在不一致。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“chip shoreline”的翻译“芯片海岸线长度”略显生硬，且“海岸线长度的利用效率”表述不够简洁。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“我是不是听到有人提到了OCS？”语气略显平淡，未能完全还原原文略带反问和引导性的口语化修辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“200G PAM4 DR光学（500米距离规格）”中，“（500米距离规格）”为译者补充的解释。虽然有助于理解，但属于原文未明确信息，可能带来解读偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子较长，且“围绕...制定...标准”与“主要采用...进行...”的句式略显重复和书面化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“中间图（b）所示的实现方案，在未来几年内将是用于纵向与横向扩展CPO的最常见方案。但它仍然需要...”将长句合理拆分，但“但它仍然需要”的转折略显突兀。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这有望显著提升单位海岸线长度的带宽密度，支持更高的端口数（基数），并改善能效。”中“单位海岸线长度的”稍显冗余，“基数”的括号解释打断了句子节奏。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

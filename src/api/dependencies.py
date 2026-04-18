@@ -9,6 +9,7 @@ from src.config import settings
 from src.core.glossary import GlossaryManager
 from src.core.project import ProjectManager
 from src.llm.base import LLMProvider
+from src.llm.factory import get_task_model_alias
 from src.services.batch_translation_service import BatchTranslationService
 from src.services.confirmation_service import ConfirmationService
 from src.services.memory_service import TranslationMemoryService
@@ -38,6 +39,28 @@ def get_llm_provider() -> LLMProvider:
         raise BadRequestException(detail=str(exc)) from exc
 
 
+def get_task_llm_provider(task_type: str) -> LLMProvider:
+    """Return the LLM provider configured for a specific task type."""
+    from src.api.middleware import BadRequestException
+    from src.api.utils.llm_factory import get_llm_provider as get_cached_llm_provider
+
+    try:
+        model_alias = get_task_model_alias(task_type)
+        return get_cached_llm_provider(model_alias)
+    except ValueError as exc:
+        raise BadRequestException(detail=str(exc)) from exc
+
+
+def get_longform_llm_provider() -> LLMProvider:
+    """Return the default LLM provider for long-form translation flows."""
+    return get_task_llm_provider("longform")
+
+
+def get_analysis_llm_provider() -> LLMProvider:
+    """Return the default LLM provider for analysis flows."""
+    return get_task_llm_provider("analysis")
+
+
 def get_confirmation_service(
     pm: ProjectManager = Depends(get_project_manager),
     gm: GlossaryManager = Depends(get_glossary_manager),
@@ -50,15 +73,19 @@ def get_confirmation_service(
 def get_batch_service() -> BatchTranslationService:
     """Return the batch translation service."""
     from src.api.middleware import BadRequestException
-    from src.api.utils.llm_factory import get_llm_provider as get_cached_llm_provider
 
     try:
-        llm = get_cached_llm_provider()
+        llm = get_longform_llm_provider()
+        analysis_llm = get_analysis_llm_provider()
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
 
     pm = get_project_manager()
-    return BatchTranslationService(llm_provider=llm, project_manager=pm)
+    return BatchTranslationService(
+        llm_provider=llm,
+        project_manager=pm,
+        analysis_llm_provider=analysis_llm,
+    )
 
 
 def get_version_service(
@@ -77,6 +104,8 @@ def get_memory_service() -> TranslationMemoryService:
 ProjectManagerDep = Annotated[ProjectManager, Depends(get_project_manager)]
 GlossaryManagerDep = Annotated[GlossaryManager, Depends(get_glossary_manager)]
 LLMProviderDep = Annotated[LLMProvider, Depends(get_llm_provider)]
+LongformLLMProviderDep = Annotated[LLMProvider, Depends(get_longform_llm_provider)]
+AnalysisLLMProviderDep = Annotated[LLMProvider, Depends(get_analysis_llm_provider)]
 ConfirmationServiceDep = Annotated[ConfirmationService, Depends(get_confirmation_service)]
 BatchServiceDep = Annotated[BatchTranslationService, Depends(get_batch_service)]
 VersionServiceDep = Annotated[VersionImportService, Depends(get_version_service)]

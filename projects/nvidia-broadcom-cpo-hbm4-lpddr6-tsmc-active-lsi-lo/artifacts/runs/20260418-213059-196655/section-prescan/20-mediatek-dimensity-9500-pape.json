@@ -1,0 +1,68 @@
+{
+  "section_id": "20-mediatek-dimensity-9500-pape",
+  "new_terms": [
+    {
+      "term": "Contacted Gate Pitch (CGP)",
+      "suggested_translation": "接触栅极间距 (CGP)",
+      "context": "TSMC N3E/N3P工艺的栅极间距选项",
+      "confidence": 0.95
+    },
+    {
+      "term": "C1 Ultra Core",
+      "suggested_translation": "C1超大核",
+      "context": "联发科天玑9500的高性能CPU核心",
+      "confidence": 0.9
+    },
+    {
+      "term": "die shrink",
+      "suggested_translation": "芯片面积缩小",
+      "context": "更小CGP带来的芯片尺寸缩减",
+      "confidence": 0.9
+    },
+    {
+      "term": "critical dimensions",
+      "suggested_translation": "关键尺寸",
+      "context": "制造工艺中的最小特征尺寸",
+      "confidence": 0.9
+    },
+    {
+      "term": "aging budget",
+      "suggested_translation": "老化余量",
+      "context": "芯片生命周期内预留的性能/可靠性余量",
+      "confidence": 0.85
+    },
+    {
+      "term": "thermal overshoots",
+      "suggested_translation": "热过冲",
+      "context": "温度瞬时超过设定阈值",
+      "confidence": 0.85
+    },
+    {
+      "term": "boost clocks",
+      "suggested_translation": "加速频率",
+      "context": "CPU动态提升的工作频率",
+      "confidence": 0.9
+    },
+    {
+      "term": "iso-leakage",
+      "suggested_translation": "等漏电",
+      "context": "在相同漏电功耗条件下",
+      "confidence": 0.9
+    },
+    {
+      "term": "iso-performance",
+      "suggested_translation": "等性能",
+      "context": "在相同性能条件下",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "tsmc": "台积电",
+    "mediatek": "联发科",
+    "cpu": "CPU",
+    "thermal penalty": "热代价"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:41:57.666890"
+}

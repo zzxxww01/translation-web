@@ -1,0 +1,45 @@
+{
+  "section_id": "24-microsoft-maia-200-paper-17",
+  "new_terms": [
+    {
+      "term": "TSRAM",
+      "suggested_translation": "暂存SRAM",
+      "context": "L1缓存，80 MB TSRAM",
+      "confidence": 0.9
+    },
+    {
+      "term": "CSRAM",
+      "suggested_translation": "缓存SRAM",
+      "context": "L2缓存，192 MB CSRAM",
+      "confidence": 0.9
+    },
+    {
+      "term": "scale-up network",
+      "suggested_translation": "纵向扩展网络",
+      "context": "芯片间互连网络拓扑",
+      "confidence": 0.8
+    },
+    {
+      "term": "fixed links",
+      "suggested_translation": "固定链路",
+      "context": "同一节点内芯片间的直接连接",
+      "confidence": 0.9
+    },
+    {
+      "term": "switched links",
+      "suggested_translation": "交换链路",
+      "context": "连接至机架内交换机的链路",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "reticle-scale monolithic": "光罩尺寸单芯片",
+    "hbm3e": "HBM3E",
+    "d2d": "裸片到裸片",
+    "phy": "物理层",
+    "cowos-s": "CoWoS-S",
+    "fp4": "FP4"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T02:08:44.146961"
+}

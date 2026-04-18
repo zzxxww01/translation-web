@@ -1,0 +1,30 @@
+{
+  "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.13,
+    "scores": {
+      "readability": 8.8,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 7.0
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c8da198-d711-4b0a-8fcd-0d7fce1aa327_2880x1620.jpeg",
+    "SK海力士 LPDDR6 规格参数与芯片显微图。来源：SK海力士，ISSCC 2026",
+    "SK海力士首次展示了其采用1c工艺的DRAM产品，包括LPDDR6和GDDR7两种封装。其LPDDR6的最高数据速率可达14.4 Gb/s，比最快的LPDDR5X提升了35%，且功耗更低。",
+    "尽管SK海力士未公布LPDDR6芯片的面积或密度，但根据其GDDR7产品的相对密度提升幅度，我们估计其位密度将达到0.59 Gb/mm²。",
+    "https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd451b064-d3c9-43a0-b92b-e26efd5df094_2880x1620.jpeg",
+    "SK海力士 LPDDR6 舒姆图。来源：SK海力士，ISSCC 2026",
+    "在其展示的舒姆图中，SK海力士表明其产品可在1.025V电压下达到14.4 Gb/s的数据速率，这与三星相同。然而，在0.95V电压下，其速率仅能达到10.9 Gb/s，而三星产品在0.97V下可达12.8 Gb/s。这表明，在较低的引脚速率下，与三星相比，SK海力士的能效可能较差，需要运行在更高电压以维持可靠性。",
+    "https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c3722fa-72c1-4ad3-9df8-2910380ab1d2_2880x1620.jpeg",
+    "SK海力士 LPDDR6 能效模式架构图。来源：SK海力士，ISSCC 2026",
+    "https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F001bcb01-81d3-42d2-b0a2-832688185377_2880x1620.jpeg",
+    "SK海力士 LPDDR6 能效模式节能效果。来源：SK海力士，ISSCC 2026",
+    "与三星的LPDDR6类似，SK海力士的LPDDR6也具备两种模式：普通模式和能效模式。在能效模式下，单个子通道以12.8 Gb/s的速率运行，其待机电流和工作电流相比普通模式分别降低了12.7%和18.9%。"
+  ]
+}

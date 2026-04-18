@@ -1,0 +1,87 @@
+{
+  "section_id": "24-microsoft-maia-200-paper-17",
+  "new_terms": [
+    {
+      "term": "Maia 200",
+      "suggested_translation": "Maia 200",
+      "context": "微软AI加速器产品名称",
+      "confidence": 1.0
+    },
+    {
+      "term": "TSRAM",
+      "suggested_translation": "TSRAM",
+      "context": "指L1 SRAM，一种片上高速缓存",
+      "confidence": 0.9
+    },
+    {
+      "term": "CSRAM",
+      "suggested_translation": "CSRAM",
+      "context": "指L2 SRAM，一种片上高速缓存",
+      "confidence": 0.9
+    },
+    {
+      "term": "FP4",
+      "suggested_translation": "FP4",
+      "context": "4位浮点数据格式",
+      "confidence": 1.0
+    },
+    {
+      "term": "full-duplex D2D links",
+      "suggested_translation": "全双工裸片到裸片链路",
+      "context": "芯片间高速互连",
+      "confidence": 0.9
+    },
+    {
+      "term": "fixed links",
+      "suggested_translation": "固定链路",
+      "context": "网络拓扑中的直连链路",
+      "confidence": 0.8
+    },
+    {
+      "term": "switched links",
+      "suggested_translation": "交换链路",
+      "context": "通过交换机连接的链路",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm3e": "HBM3E",
+    "phy": "物理层",
+    "d2d": "裸片到裸片",
+    "cowos": "CoWoS",
+    "node": "制程节点",
+    "flops/mm²": "FLOPS/mm²",
+    "tsmc": "台积电",
+    "nvidia": "英伟达",
+    "amd": "AMD",
+    "sram": "SRAM",
+    "ai": "AI",
+    "inference": "推理",
+    "training": "训练",
+    "gpu": "GPU",
+    "hbm": "HBM",
+    "data center": "数据中心",
+    "throughput": "吞吐量",
+    "latency": "延迟",
+    "bandwidth": "带宽",
+    "performance": "性能",
+    "flops": "FLOPS",
+    "tco": "总拥有成本",
+    "reticle-scale monolithic": "光罩尺寸单芯片",
+    "n3p": "N3P",
+    "microsoft": "微软",
+    "maia 100": "Maia 100",
+    "h100": "H100",
+    "package": "封装",
+    "die": "裸片",
+    "lane": "通道",
+    "Gb/s": "Gb/s",
+    "MB": "MB",
+    "L1": "L1",
+    "L2": "L2",
+    "switch": "交换机"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:49:18.116225"
+}

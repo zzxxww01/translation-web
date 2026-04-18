@@ -1,0 +1,42 @@
+{
+  "section_id": "06-llm-based-automation-is-not-a",
+  "new_terms": [
+    {
+      "term": "GDPval",
+      "suggested_translation": "GDPval",
+      "context": "OpenAI的研究论文，评估AI对经济生产力的影响。",
+      "confidence": 0.9
+    },
+    {
+      "term": "white collar work",
+      "suggested_translation": "白领工作",
+      "context": "指专业、管理或行政类工作。",
+      "confidence": 0.95
+    },
+    {
+      "term": "task augmentation",
+      "suggested_translation": "任务增强",
+      "context": "指AI增强而非完全取代人类执行任务。",
+      "confidence": 0.9
+    },
+    {
+      "term": "call center jobs",
+      "suggested_translation": "呼叫中心工作",
+      "context": "指客服、电话销售等重复性工作。",
+      "confidence": 0.95
+    },
+    {
+      "term": "defensive posturing",
+      "suggested_translation": "防御性姿态",
+      "context": "指公司为防止数据抓取或竞争而采取的保护措施。",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "GDPval": "GDPval",
+    "OpenAI": "OpenAI",
+    "SemiAnalysis": "SemiAnalysis"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T19:45:08.092680"
+}

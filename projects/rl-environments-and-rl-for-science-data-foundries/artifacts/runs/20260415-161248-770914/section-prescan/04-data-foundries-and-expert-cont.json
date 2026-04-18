@@ -1,0 +1,77 @@
+{
+  "section_id": "04-data-foundries-and-expert-cont",
+  "new_terms": [
+    {
+      "term": "EHR",
+      "suggested_translation": "电子健康记录",
+      "context": "医疗工作流软件",
+      "confidence": 0.95
+    },
+    {
+      "term": "Feather",
+      "suggested_translation": "Feather",
+      "context": "OpenAI内部承包商平台",
+      "confidence": 0.9
+    },
+    {
+      "term": "Mercor",
+      "suggested_translation": "Mercor",
+      "context": "专家承包商和数据标注公司",
+      "confidence": 0.9
+    },
+    {
+      "term": "Handshake",
+      "suggested_translation": "Handshake",
+      "context": "专家承包商和数据标注公司",
+      "confidence": 0.9
+    },
+    {
+      "term": "Aboda.ai",
+      "suggested_translation": "Aboda.ai",
+      "context": "专家承包商和数据标注公司",
+      "confidence": 0.9
+    },
+    {
+      "term": "Moonshot",
+      "suggested_translation": "月之暗面",
+      "context": "中国AI实验室",
+      "confidence": 0.95
+    },
+    {
+      "term": "Z.ai",
+      "suggested_translation": "Z.ai",
+      "context": "中国AI实验室",
+      "confidence": 0.9
+    },
+    {
+      "term": "Kimi K2 Thinking",
+      "suggested_translation": "Kimi K2 Thinking",
+      "context": "AI模型",
+      "confidence": 0.9
+    },
+    {
+      "term": "GLM-4.6",
+      "suggested_translation": "GLM-4.6",
+      "context": "AI模型",
+      "confidence": 0.9
+    },
+    {
+      "term": "The LLM Data Company",
+      "suggested_translation": "The LLM Data Company",
+      "context": "尝试用模型编写评分标准的公司",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "data foundries": "数据代工厂",
+    "rl environments": "强化学习环境",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "rubric": "评分标准",
+    "reward signals": "奖励信号",
+    "mcp": "MCP",
+    "arr": "ARR"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T16:15:53.103699"
+}

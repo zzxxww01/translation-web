@@ -100,6 +100,7 @@ class BatchTranslationService:
         project_manager: ProjectManager,
         translation_mode: str = "section",  # 默认使用章节级翻译
         max_concurrent_sections: int = 10,  # 最大并发章节数（提高到10）
+        analysis_llm_provider: Optional[LLMProvider] = None,
     ):
         """
         初始化批量翻译服务
@@ -114,7 +115,8 @@ class BatchTranslationService:
         self.project_manager = project_manager
         self.translation_mode = translation_mode
         self.max_concurrent_sections = max_concurrent_sections
-        self.deep_analyzer = DeepAnalyzer(llm_provider)
+        self.analysis_llm = analysis_llm_provider or llm_provider
+        self.deep_analyzer = DeepAnalyzer(self.analysis_llm)
         self.context_manager = LayeredContextManager()
         self._progress_tracker = self._shared_progress_tracker
 

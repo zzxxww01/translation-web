@@ -1,0 +1,1553 @@
+{
+  "section_id": "08-sandisk-kioxia-bics10-nand-p",
+  "title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1",
+  "title_translation": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "SanDisk and Kioxia demonstrated their BiCS10 NAND, with 332 layers and 3 decks. This is the highest reported NAND bit density, at 37.6 Gb/mm², dethroning the previous champion, SK Hynix’s 321L V9.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "SK Hynix’s 321L V9",
+          "start": 177,
+          "end": 195,
+          "href": "https://newsletter.semianalysis.com/i/184077729/3d-nand-hynix-321-layer",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0150",
+      "parent_block_index": 150,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SanDisk and Kioxia demonstrated their BiCS10 NAND, with 332 layers and 3 decks. This is the highest reported NAND bit density, at 37.6 Gb/mm², dethroning the previous champion, [SK Hynix’s 321L V9](https://newsletter.semianalysis.com/i/184077729/3d-nand-hynix-321-layer).",
+      "parent_block_plain_text": "SanDisk and Kioxia demonstrated their BiCS10 NAND, with 332 layers and 3 decks. This is the highest reported NAND bit density, at 37.6 Gb/mm², dethroning the previous champion, SK Hynix’s 321L V9.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "SK Hynix’s 321L V9",
+          "start": 177,
+          "end": 195,
+          "href": "https://newsletter.semianalysis.com/i/184077729/3d-nand-hynix-321-layer",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 196,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "闪迪（SanDisk）与铠侠（Kioxia）展示了其BiCS10 NAND闪存，该产品拥有332层，由3个栈（deck）构成。其位密度达到37.6 Gb/mm²，是目前公开报告中的最高纪录，超越了此前保持领先的SK海力士321层V9 NAND。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747650",
+          "tokenized_text": "闪迪（SanDisk）与铠侠（Kioxia）展示了其BiCS10 NAND闪存，该产品拥有332层，由3个栈（deck）构成。其位密度达到37.6 Gb/mm²，是目前公开报告中的最高纪录，超越了此前保持领先的[[[LINK_1|SK海力士321层V9 NAND]]]。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f240c14-4a4f-4fab-bc19-194185a47c6b_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f240c14-4a4f-4fab-bc19-194185a47c6b_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0151",
+      "parent_block_index": 151,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f240c14-4a4f-4fab-bc19-194185a47c6b_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f240c14-4a4f-4fab-bc19-194185a47c6b_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f240c14-4a4f-4fab-bc19-194185a47c6b_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f240c14-4a4f-4fab-bc19-194185a47c6b_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747708",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f240c14-4a4f-4fab-bc19-194185a47c6b_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "BiCS10 Die Shot and Density Comparison vs. SK Hynix and Samsung V9. Source: SanDisk/Kioxia, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "BiCS10 Die Shot and Density Comparison vs. SK Hynix and Samsung V9. Source: SanDisk/Kioxia, ISSCC 2026",
+          "start": 0,
+          "end": 102,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0152",
+      "parent_block_index": 152,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*BiCS10 Die Shot and Density Comparison vs. SK Hynix and Samsung V9. Source: SanDisk/Kioxia, ISSCC 2026*",
+      "parent_block_plain_text": "BiCS10 Die Shot and Density Comparison vs. SK Hynix and Samsung V9. Source: SanDisk/Kioxia, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "BiCS10 Die Shot and Density Comparison vs. SK Hynix and Samsung V9. Source: SanDisk/Kioxia, ISSCC 2026",
+          "start": 0,
+          "end": 102,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 102,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "BiCS10芯片显微照片及其与SK海力士、三星V9的密度对比。来源：闪迪/铠侠，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747779",
+          "tokenized_text": "[[[EM_1|BiCS10芯片显微照片及其与SK海力士、三星V9的密度对比。来源：闪迪/铠侠，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Despite using a similar architecture with 6 planes, 3 decks, and a similar number of layers, SK Hynix falls behind, with 30% lower bit density. In a QLC configuration, BiCS10 has a bit density of 37.6 Gb/mm², while SK Hynix’s V9 has a bit density of only 28.8 Gb/mm². While in a TLC configuration, the densities are 29 and 21 Gb/mm² respectively, another example of SK Hynix’s trailing position.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0153",
+      "parent_block_index": 153,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Despite using a similar architecture with 6 planes, 3 decks, and a similar number of layers, SK Hynix falls behind, with 30% lower bit density. In a QLC configuration, BiCS10 has a bit density of 37.6 Gb/mm², while SK Hynix’s V9 has a bit density of only 28.8 Gb/mm². While in a TLC configuration, the densities are 29 and 21 Gb/mm² respectively, another example of SK Hynix’s trailing position.",
+      "parent_block_plain_text": "Despite using a similar architecture with 6 planes, 3 decks, and a similar number of layers, SK Hynix falls behind, with 30% lower bit density. In a QLC configuration, BiCS10 has a bit density of 37.6 Gb/mm², while SK Hynix’s V9 has a bit density of only 28.8 Gb/mm². While in a TLC configuration, the densities are 29 and 21 Gb/mm² respectively, another example of SK Hynix’s trailing position.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 395,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管采用了相似的架构（6个平面、3个堆叠结构，且层数相近），SK海力士的位密度却落后了30%。在QLC（四层单元）配置下，BiCS10的位密度为37.6 Gb/mm²，而SK海力士V9仅为28.8 Gb/mm²。在TLC（三层单元）配置下，两者的密度分别为29 Gb/mm²和21 Gb/mm²，这进一步凸显了SK海力士在密度上的差距。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747809",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6701cf01-e5c3-4aeb-87e6-ab7e99222f7d_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6701cf01-e5c3-4aeb-87e6-ab7e99222f7d_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0154",
+      "parent_block_index": 154,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6701cf01-e5c3-4aeb-87e6-ab7e99222f7d_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6701cf01-e5c3-4aeb-87e6-ab7e99222f7d_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6701cf01-e5c3-4aeb-87e6-ab7e99222f7d_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6701cf01-e5c3-4aeb-87e6-ab7e99222f7d_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747834",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6701cf01-e5c3-4aeb-87e6-ab7e99222f7d_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "NAND 1×6 vs. 2×3 Plane Configuration Comparison. Source: SanDisk/Kioxia, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "NAND 1×6 vs. 2×3 Plane Configuration Comparison. Source: SanDisk/Kioxia, ISSCC 2026",
+          "start": 0,
+          "end": 83,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0155",
+      "parent_block_index": 155,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*NAND 1×6 vs. 2×3 Plane Configuration Comparison. Source: SanDisk/Kioxia, ISSCC 2026*",
+      "parent_block_plain_text": "NAND 1×6 vs. 2×3 Plane Configuration Comparison. Source: SanDisk/Kioxia, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "NAND 1×6 vs. 2×3 Plane Configuration Comparison. Source: SanDisk/Kioxia, ISSCC 2026",
+          "start": 0,
+          "end": 83,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 83,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "NAND闪存1×6与2×3平面配置对比。来源：闪迪/铠侠，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747899",
+          "tokenized_text": "[[[EM_1|NAND闪存1×6与2×3平面配置对比。来源：闪迪/铠侠，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Moreover, BiCS10 features a 6-plane configuration, increasing IO bandwidth by 50%. There are two ways to implement a 6-plane configuration, 1×6 and 2×3. SK Hynix chose to use a 2×3 configuration, while SanDisk and Kioxia have decided to use a 1×6 configuration.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0156",
+      "parent_block_index": 156,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Moreover, BiCS10 features a 6-plane configuration, increasing IO bandwidth by 50%. There are two ways to implement a 6-plane configuration, 1×6 and 2×3. SK Hynix chose to use a 2×3 configuration, while SanDisk and Kioxia have decided to use a 1×6 configuration.",
+      "parent_block_plain_text": "Moreover, BiCS10 features a 6-plane configuration, increasing IO bandwidth by 50%. There are two ways to implement a 6-plane configuration, 1×6 and 2×3. SK Hynix chose to use a 2×3 configuration, while SanDisk and Kioxia have decided to use a 1×6 configuration.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 261,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "此外，BiCS10采用了6平面配置，使其输入/输出（IO）带宽提升了50%。实现6平面配置有两种方式：1×6和2×3。SK海力士选择了2×3配置，而闪迪和铠侠则决定采用1×6配置。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747926",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "A 1x6 configuration has fewer ground pads and reduces area by 2.1%. However, the lower number of ground pads and vertical power tracks constrains power distribution.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0157",
+      "parent_block_index": 157,
+      "parent_block_type": "p",
+      "parent_block_markdown": "A 1x6 configuration has fewer ground pads and reduces area by 2.1%. However, the lower number of ground pads and vertical power tracks constrains power distribution.",
+      "parent_block_plain_text": "A 1x6 configuration has fewer ground pads and reduces area by 2.1%. However, the lower number of ground pads and vertical power tracks constrains power distribution.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 165,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "1×6配置的地线焊盘数量更少，能使芯片面积减少2.1%。然而，地线焊盘和垂直电源走线数量的减少，也对电源分配构成了限制。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747949",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1c58eb6-654f-4ec5-9d5b-14d27c7f3679_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1c58eb6-654f-4ec5-9d5b-14d27c7f3679_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0158",
+      "parent_block_index": 158,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1c58eb6-654f-4ec5-9d5b-14d27c7f3679_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1c58eb6-654f-4ec5-9d5b-14d27c7f3679_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1c58eb6-654f-4ec5-9d5b-14d27c7f3679_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1c58eb6-654f-4ec5-9d5b-14d27c7f3679_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.747972",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1c58eb6-654f-4ec5-9d5b-14d27c7f3679_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "BiCS10 CBA Additional Top-Metal Layer for Power Distribution. Source: SanDisk/Kioxia, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "BiCS10 CBA Additional Top-Metal Layer for Power Distribution. Source: SanDisk/Kioxia, ISSCC 2026",
+          "start": 0,
+          "end": 96,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0159",
+      "parent_block_index": 159,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*BiCS10 CBA Additional Top-Metal Layer for Power Distribution. Source: SanDisk/Kioxia, ISSCC 2026*",
+      "parent_block_plain_text": "BiCS10 CBA Additional Top-Metal Layer for Power Distribution. Source: SanDisk/Kioxia, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "BiCS10 CBA Additional Top-Metal Layer for Power Distribution. Source: SanDisk/Kioxia, ISSCC 2026",
+          "start": 0,
+          "end": 96,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 96,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "BiCS10 单元键合阵列（CBA）为电源分配增设的额外顶层金属层。来源：闪迪/铠侠，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.748054",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "By using the CBA (Cell Bonded Array) architecture, SanDisk and Kioxia are able to customize the CMOS wafer process. By adding another top-metal layer in parallel to the existing one, they created a stronger power grid and overcame their power distribution constraints.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0160",
+      "parent_block_index": 160,
+      "parent_block_type": "p",
+      "parent_block_markdown": "By using the CBA (Cell Bonded Array) architecture, SanDisk and Kioxia are able to customize the CMOS wafer process. By adding another top-metal layer in parallel to the existing one, they created a stronger power grid and overcame their power distribution constraints.",
+      "parent_block_plain_text": "By using the CBA (Cell Bonded Array) architecture, SanDisk and Kioxia are able to customize the CMOS wafer process. By adding another top-metal layer in parallel to the existing one, they created a stronger power grid and overcame their power distribution constraints.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 268,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "通过采用单元键合阵列（CBA）架构，闪迪和铠侠能够定制CMOS晶圆的制造工艺。他们在现有顶层金属层的基础上，并行增设了另一层，从而构建了更强大的电源网格，并克服了电源分配的限制。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.748081",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c965c54-2786-4298-bdfc-f916f5133490_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c965c54-2786-4298-bdfc-f916f5133490_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0161",
+      "parent_block_index": 161,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c965c54-2786-4298-bdfc-f916f5133490_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c965c54-2786-4298-bdfc-f916f5133490_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c965c54-2786-4298-bdfc-f916f5133490_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c965c54-2786-4298-bdfc-f916f5133490_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.748103",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c965c54-2786-4298-bdfc-f916f5133490_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Multi-Die NAND Idle Power Penalty and Die-Gating Solution. Source: SanDisk/Kioxia, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Multi-Die NAND Idle Power Penalty and Die-Gating Solution. Source: SanDisk/Kioxia, ISSCC 2026",
+          "start": 0,
+          "end": 93,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0162",
+      "parent_block_index": 162,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Multi-Die NAND Idle Power Penalty and Die-Gating Solution. Source: SanDisk/Kioxia, ISSCC 2026*",
+      "parent_block_plain_text": "Multi-Die NAND Idle Power Penalty and Die-Gating Solution. Source: SanDisk/Kioxia, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Multi-Die NAND Idle Power Penalty and Die-Gating Solution. Source: SanDisk/Kioxia, ISSCC 2026",
+          "start": 0,
+          "end": 93,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 93,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "多芯片NAND空闲功耗问题及芯片关断解决方案。来源：闪迪/铠侠，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.748169",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Stacking more dies is essential to increasing storage density. However, in multi-die architectures, the idle current from unselected dies is approaching the active current of the selected die. SanDisk implemented a gating system to fully shut down the data path of the unselected dies, reducing the idle current by two orders of magnitude.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0163",
+      "parent_block_index": 163,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Stacking more dies is essential to increasing storage density. However, in multi-die architectures, the idle current from unselected dies is approaching the active current of the selected die. SanDisk implemented a gating system to fully shut down the data path of the unselected dies, reducing the idle current by two orders of magnitude.",
+      "parent_block_plain_text": "Stacking more dies is essential to increasing storage density. However, in multi-die architectures, the idle current from unselected dies is approaching the active current of the selected die. SanDisk implemented a gating system to fully shut down the data path of the unselected dies, reducing the idle current by two orders of magnitude.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 339,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "虽然堆叠更多芯片对提升存储密度至关重要，但在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。为此，闪迪实现了一套关断系统，能够完全关闭未选中芯片的数据通路，从而将空闲电流降低了两个数量级。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:15:21.748194",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.875,
+        "is_excellent": false,
+        "applied_terms": [
+          "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+          "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+          "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+          "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+          "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+          "key_points": [
+            "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+          ],
+          "translation_notes": [
+            "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+            "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+            "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“decks”的翻译“堆叠结构”不够精确，且与后文“平面配置”中的“平面”概念可能混淆。"
+          },
+          {
+            "type": "readability",
+            "description": "“是目前已公开报告中的最高值”这一表述稍显口语化，且“冠军”的比喻在科技语境中略显随意。"
+          },
+          {
+            "type": "tone",
+            "description": "译文“这再次印证了SK海力士的落后地位”语气略显生硬和绝对化。原文“trailing position”是客观描述，译文“落后地位”带有更强的价值判断色彩。"
+          },
+          {
+            "type": "readability",
+            "description": "“将输入/输出（IO）带宽提升了50%”中的“将...提升了”是典型的“将”字句翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“可将芯片面积减少2.1%”中的“可”字，暗示了一种可能性，但原文“reduces area by 2.1%”是陈述一个确定的结果或优势。"
+          },
+          {
+            "type": "readability",
+            "description": "“得以定制其CMOS晶圆工艺”中的“得以”稍显书面化，且“其”指代略模糊（指CBA架构还是公司？）。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“堆叠更多芯片对于提升存储密度至关重要。然而，在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。”信息准确，但两句间的转折关系可以更紧凑。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

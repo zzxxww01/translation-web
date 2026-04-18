@@ -1,0 +1,75 @@
+{
+  "section_id": "08-rl-as-a-service",
+  "new_terms": [
+    {
+      "term": "RunRL",
+      "suggested_translation": "RunRL（公司名）",
+      "context": "YC初创公司，提供RL服务",
+      "confidence": 0.9
+    },
+    {
+      "term": "Osmosis",
+      "suggested_translation": "Osmosis（公司名）",
+      "context": "YC初创公司，提供RL服务",
+      "confidence": 0.9
+    },
+    {
+      "term": "Baseten",
+      "suggested_translation": "Baseten（平台名）",
+      "context": "托管小型定制模型的平台",
+      "confidence": 0.9
+    },
+    {
+      "term": "Salesforce",
+      "suggested_translation": "Salesforce（公司名）",
+      "context": "CRM软件公司，RL服务的目标客户",
+      "confidence": 0.9
+    },
+    {
+      "term": "AWS Terminal",
+      "suggested_translation": "AWS Terminal（工具名）",
+      "context": "AWS命令行工具，RL服务的目标应用",
+      "confidence": 0.9
+    },
+    {
+      "term": "Jira tickets",
+      "suggested_translation": "Jira工单",
+      "context": "项目管理工具中的任务单，RL服务的操作对象",
+      "confidence": 0.9
+    },
+    {
+      "term": "SEC filings",
+      "suggested_translation": "SEC文件",
+      "context": "美国证券交易委员会备案文件，RL服务的数据源",
+      "confidence": 0.9
+    },
+    {
+      "term": "Forward Deployed Engineers",
+      "suggested_translation": "前线部署工程师",
+      "context": "Anthropic的职位，类似OpenAI的战略部署团队",
+      "confidence": 0.9
+    },
+    {
+      "term": "ThinkingMachines Tinker",
+      "suggested_translation": "ThinkingMachines Tinker（产品/公司名）",
+      "context": "提供RL服务的公司",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "qwen": "通义千问",
+    "post-training": "后训练",
+    "mcp": "MCP",
+    "openai": "OpenAI",
+    "anthropic": "Anthropic",
+    "trainium": "Trainium",
+    "hbm": "HBM",
+    "bom": "物料清单",
+    "tco": "总拥有成本",
+    "api": "API",
+    "rft": "强化微调"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T19:53:45.391204"
+}

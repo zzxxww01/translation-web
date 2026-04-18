@@ -1,0 +1,37 @@
+{
+  "section_id": "02-during-a-gold-rush-sell-shove",
+  "new_terms": [
+    {
+      "term": "UI gyms",
+      "suggested_translation": "UI训练场",
+      "context": "用于训练AI智能体的模拟用户界面环境",
+      "confidence": 0.9
+    },
+    {
+      "term": "Environments Hub",
+      "suggested_translation": "环境中心",
+      "context": "一个集中提供RL环境的平台",
+      "confidence": 0.8
+    },
+    {
+      "term": "MCP server",
+      "suggested_translation": "MCP服务器",
+      "context": "模型上下文协议服务器，用于连接环境与智能体",
+      "confidence": 0.9
+    },
+    {
+      "term": "telemetry",
+      "suggested_translation": "遥测数据",
+      "context": "用于记录和分析智能体在环境中行为的性能数据",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "ui": "UI",
+    "api": "API",
+    "mcp": "MCP"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T16:03:49.845932"
+}

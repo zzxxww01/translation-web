@@ -1,0 +1,90 @@
+{
+  "section_id": "02-during-a-gold-rush-sell-shove",
+  "new_terms": [
+    {
+      "term": "Habitat",
+      "suggested_translation": "Habitat",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "DeepTune",
+      "suggested_translation": "DeepTune",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Fleet",
+      "suggested_translation": "Fleet",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Vmax",
+      "suggested_translation": "Vmax",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Turing",
+      "suggested_translation": "Turing",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Mechanize",
+      "suggested_translation": "Mechanize",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Preference Model",
+      "suggested_translation": "Preference Model",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Bespoke Labs",
+      "suggested_translation": "Bespoke Labs",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Veris.ai",
+      "suggested_translation": "Veris.ai",
+      "context": "环境构建公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Prime Intellect",
+      "suggested_translation": "Prime Intellect",
+      "context": "公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Environments Hub",
+      "suggested_translation": "Environments Hub",
+      "context": "环境仓库平台",
+      "confidence": 0.9
+    },
+    {
+      "term": "HUD",
+      "suggested_translation": "HUD",
+      "context": "环境工具公司/产品名",
+      "confidence": 0.9
+    },
+    {
+      "term": "dockerized container",
+      "suggested_translation": "Docker化容器",
+      "context": "容器化技术",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "UI gyms": "UI训练场",
+    "MCP": "MCP",
+    "reward signal": "奖励信号"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:26:51.532133"
+}

@@ -53,6 +53,9 @@ class Settings(BaseSettings):
     gemini_retry_count: int = 3
     gemini_retry_delay: float = 1.0
     gemini_timeout: int = 120
+    gemini_http_proxy: Optional[str] = None
+    gemini_https_proxy: Optional[str] = None
+    gemini_no_proxy: Optional[str] = None
 
     # VectorEngine (OpenAI-compatible relay)
     vectorengine_api_key: str = ""

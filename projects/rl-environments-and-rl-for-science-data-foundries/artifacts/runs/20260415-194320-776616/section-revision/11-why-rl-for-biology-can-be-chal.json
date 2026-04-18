@@ -1,0 +1,35 @@
+{
+  "section_id": "11-why-rl-for-biology-can-be-chal",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.559999999999999,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.2,
+      "terminology": 8.0,
+      "completeness": 8.5,
+      "style": 7.0
+    },
+    "failed_criteria": [
+      "critical_errors (4 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "科学实验所需的完成时间可能差异极大。在生物学领域，大量实验需要数天才能完成。这些较长的实验周期意味着需要进行长轨迹推演（即策略执行的完整过程耗时很长），这会导致奖励信号变得稀疏。稀疏奖励为模型学习提供的信号较少。",
+    "https://substackcdn.com/image/fetch/$s_!0_LC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31e4836d-b56b-4d50-b74a-c3119c191f47_937x296.png",
+    "来源：英伟达，TogetherAI，SemiAnalysis",
+    "一种解决方案是奖励模型的步骤，而不仅仅是其结果。这奖励的是模型的过程和思考，而非最终动作。虽然准确界定什么是“正确”的步骤可能很困难，但可以通过使用评分标准来近似实现。事实上，OpenAI在最近一项评估模型执行科学研究任务能力的测试——‘前沿科学’中，正是采用这种方式对开放式研究任务中的问题进行评分。在实际实验中，任务可以被拆分为多个独立评分的子任务，从而缩短评分所需的时间跨度。",
+    "https://substackcdn.com/image/fetch/$s_!HRMu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbebca705-7e8a-491b-bd76-887242074973_1067x1008.png",
+    "来源：OpenAI",
+    "长轨迹推演对GPU利用率也极为不利，这正是许多实验室一直在采用飞行中权重更新等方法的原因。在此过程中，权重被交换，而滞后的轨迹推演任务则继续使用过时的KV缓存。这使得训练可以在慢速推演任务完成的同时继续进行。其结果是在相同的挂钟时间内，迭代次数可提升约2倍。",
+    "https://substackcdn.com/image/fetch/$s_!orCV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0eb2e6c0-c770-46c2-9a0a-ad28f85be884_1345x1120.png",
+    "来源：Piché 等人，2025",
+    "另一个瓶颈在于可用的数据。科学文献中常常包含相互矛盾的结果，即使在基础问题上也是如此，这使得构建可靠的训练集变得困难。生物学领域的挑战相对较小，因为现有的开源数据更为常见。AlphaFold 是基于蛋白质数据库中包含的 17 万个样本数据进行训练的。FutureHouse 的 Ether0 则使用了开放反应数据库。像 EvE 这样的额外努力，将继续为模型提供商提供宝贵的平台。",
+    "尽管制药公司也拥有大量闭源数据集。我们预计会看到更多前沿实验室与制药公司之间的合作：前者拥有制药公司难以吸引的机器学习专业知识，而后者则拥有实验室所缺乏的生物数据和临床知识。",
+    "https://substackcdn.com/image/fetch/$s_!zcwh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2aed2777-73b3-4f31-b8ab-6683aa0b73fc_937x527.png",
+    "来源：诺和诺德",
+    "尽管存在障碍（包括上文概述的一些），但仍有大量易摘取的成果（low-hanging fruit）可以获取，因此我们预计，专注于科学领域的高算力强化学习工作将很快展现出极高的价值。",
+    "推动当前巨大进展的许多能力都依赖于扩展强化学习。虽然前路依然漫长，但另一个维度已展现出早期的希望。这可以用现有模型实现，尽管成本要高得多。接下来，我们将深入剖析一个近在眼前的新前沿。"
+  ]
+}

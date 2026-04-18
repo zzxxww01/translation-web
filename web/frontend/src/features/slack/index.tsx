@@ -4,6 +4,7 @@ import { Lightbulb, Loader2, RefreshCw, Send, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { ModelSelector } from '@/components/ModelSelector';
 import type { SlackReplyVariant } from '@/shared/types';
 import { copyToClipboard, detectLanguage } from '@/shared/utils';
 import { ReplySuggestions } from './components/ReplySuggestions';
@@ -19,9 +20,11 @@ export function SlackFeature() {
     incomingText, incomingTranslation, incomingSuggestions,
     draftText, draftVersions,
     conversationMessages, isHistoryCollapsed,
+    selectedModel,
     setIncomingText, setIncomingResult, clearIncoming,
     setDraftText, setDraftVersions, clearDraft,
     addMessage, addMessages, removeMessage, updateMessage, clearConversation, toggleHistoryCollapse,
+    setSelectedModel,
   } = useSlackWorkspaceStore();
 
   const draftLanguage = useMemo(() => detectLanguage(draftText.trim()), [draftText]);
@@ -42,6 +45,7 @@ export function SlackFeature() {
       const result = await analyzeMutation.mutateAsync({
         message: lines[lines.length - 1],
         conversation_history: conversationMessages,
+        model: selectedModel || undefined,
       });
 
       addMessages('them', lines);
@@ -61,6 +65,7 @@ export function SlackFeature() {
       const result = await composeMutation.mutateAsync({
         content,
         conversation_history: conversationMessages,
+        model: selectedModel || undefined,
       });
       setDraftVersions(
         result.versions.map((v: SlackReplyVariant) => ({ ...v, chinese: v.chinese || content }))
@@ -70,6 +75,23 @@ export function SlackFeature() {
 
   return (
     <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-6 p-6">
+      {/* Header with Model Selector */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-xl font-semibold">Slack 回复助手</h2>
+          <p className="text-sm text-muted-foreground">英译中理解 + 中译英回复生成</p>
+        </div>
+        <div className="w-64">
+          <label className="block text-xs text-text-muted mb-1.5">选择模型</label>
+          <ModelSelector
+            value={selectedModel}
+            onChange={setSelectedModel}
+            className="h-9 text-sm"
+            disabled={analyzeMutation.isPending || composeMutation.isPending}
+          />
+        </div>
+      </div>
+
       {/* Conversation History - Top Section */}
       <ConversationHistory
         messages={conversationMessages}

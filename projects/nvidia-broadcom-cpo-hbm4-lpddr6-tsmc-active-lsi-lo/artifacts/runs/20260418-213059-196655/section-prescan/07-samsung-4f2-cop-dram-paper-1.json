@@ -1,0 +1,66 @@
+{
+  "section_id": "07-samsung-4f2-cop-dram-paper-1",
+  "new_terms": [
+    {
+      "term": "peri-under-cell (puc)",
+      "suggested_translation": "外围电路位于单元之下 (PUC)",
+      "context": "DRAM架构，与COP同义。",
+      "confidence": 0.95
+    },
+    {
+      "term": "vertical channel transistor (vct)",
+      "suggested_translation": "垂直沟道晶体管 (VCT)",
+      "context": "4F² DRAM存储单元使用的晶体管结构。",
+      "confidence": 0.95
+    },
+    {
+      "term": "sub-wordline driver (swd)",
+      "suggested_translation": "子字线驱动器 (SWD)",
+      "context": "DRAM核心电路，用于驱动字线。",
+      "confidence": 0.9
+    },
+    {
+      "term": "column select line (csl)",
+      "suggested_translation": "列选择线 (CSL)",
+      "context": "DRAM中用于选择数据列的信号线。",
+      "confidence": 0.9
+    },
+    {
+      "term": "bitline sense amplifier (blsa)",
+      "suggested_translation": "位线感测放大器 (BLSA)",
+      "context": "DRAM核心电路，用于读取存储单元数据。",
+      "confidence": 0.9
+    },
+    {
+      "term": "floating-body effect",
+      "suggested_translation": "浮体效应",
+      "context": "VCT DRAM中导致漏电增加和保持时间减少的物理效应。",
+      "confidence": 0.85
+    },
+    {
+      "term": "1d",
+      "suggested_translation": "1d",
+      "context": "DRAM制程节点代号，指1d节点。",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "vlsi": "超大规模集成电路",
+    "cop (cell-over-periphery)": "COP",
+    "cell-on-peripheral (cop)": "单元位于外围电路之上 (COP)",
+    "hybrid bonding": "混合键合",
+    "bitcell": "存储单元",
+    "node": "制程节点",
+    "dram": "DRAM",
+    "nand": "NAND闪存",
+    "wafer": "晶圆",
+    "mux": "多路复用器",
+    "die": "芯片",
+    "density": "密度",
+    "yield": "良率",
+    "bit density": "位密度"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:33:49.721766"
+}

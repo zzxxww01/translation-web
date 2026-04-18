@@ -1,0 +1,61 @@
+{
+  "section_id": "05-buying-patterns-across-labs",
+  "new_terms": [
+    {
+      "term": "sandbox frameworks",
+      "suggested_translation": "沙盒框架",
+      "context": "Anthropic要求供应商遵守特定的沙盒框架。",
+      "confidence": 0.9
+    },
+    {
+      "term": "vendor engagement platform",
+      "suggested_translation": "供应商参与平台",
+      "context": "Anthropic为管理供应商而构建的平台。",
+      "confidence": 0.9
+    },
+    {
+      "term": "rate limits",
+      "suggested_translation": "速率限制",
+      "context": "Google降低其产品（如Gmail）的抓取速率限制。",
+      "confidence": 0.9
+    },
+    {
+      "term": "scraping",
+      "suggested_translation": "抓取",
+      "context": "指从网站或应用中自动提取数据的行为。",
+      "confidence": 0.9
+    },
+    {
+      "term": "replication efforts",
+      "suggested_translation": "复制工作",
+      "context": "指模仿或复制某个应用或功能的工作。",
+      "confidence": 0.8
+    },
+    {
+      "term": "mockup app",
+      "suggested_translation": "模拟应用",
+      "context": "用于训练目的的模拟应用程序。",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "rl environments": "强化学习环境",
+    "computer use": "计算机操作",
+    "mid-training": "中期训练",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "ui gyms": "UI训练场",
+    "imo": "国际数学奥林匹克",
+    "gpt-5.1 codex max": "GPT-5.1 Codex Max",
+    "chatgpt agent": "ChatGPT智能体",
+    "agi": "AGI",
+    "sheets": "Sheets",
+    "slides": "Slides",
+    "docs": "Docs",
+    "drive": "Drive",
+    "maps": "Maps",
+    "gmail": "Gmail"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T19:44:51.212297"
+}

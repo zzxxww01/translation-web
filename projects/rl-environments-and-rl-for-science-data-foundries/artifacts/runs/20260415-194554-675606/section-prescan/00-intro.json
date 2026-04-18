@@ -1,0 +1,41 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "GDPval",
+      "suggested_translation": "GDPval",
+      "context": "OpenAI创建的评估基准",
+      "confidence": 0.9
+    },
+    {
+      "term": "Cursor",
+      "suggested_translation": "Cursor",
+      "context": "公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Windsurf",
+      "suggested_translation": "Windsurf",
+      "context": "公司名",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "data foundries": "数据代工厂",
+    "computer use environments": "计算机操作环境",
+    "mid-training": "中期训练",
+    "rollouts": "轨迹推演",
+    "reward hacking": "奖励劫持",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "gdpval": "GDPval",
+    "computer use agents": "计算机使用智能体",
+    "openai": "OpenAI",
+    "anthropic": "Anthropic",
+    "xai": "xAI",
+    "utility evals": "实用性评估"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T19:46:12.512124"
+}

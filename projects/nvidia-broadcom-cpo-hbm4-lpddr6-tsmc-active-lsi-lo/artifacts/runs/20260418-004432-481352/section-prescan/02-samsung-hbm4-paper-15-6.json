@@ -1,0 +1,84 @@
+{
+  "section_id": "02-samsung-hbm4-paper-15-6",
+  "new_terms": [
+    {
+      "term": "tCCDR",
+      "suggested_translation": "tCCDR",
+      "context": "HBM时序参数，不同堆栈ID间连续READ命令的最小间隔",
+      "confidence": 0.9
+    },
+    {
+      "term": "SID",
+      "suggested_translation": "堆栈ID",
+      "context": "堆叠ID，用于区分HBM堆栈",
+      "confidence": 0.9
+    },
+    {
+      "term": "DCDL",
+      "suggested_translation": "延迟补偿电路",
+      "context": "用于补偿通道间时序差异的电路",
+      "confidence": 0.9
+    },
+    {
+      "term": "CoW",
+      "suggested_translation": "晶圆上芯片",
+      "context": "Chip-on-Wafer，一种先进封装技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "SiP",
+      "suggested_translation": "系统级封装",
+      "context": "System-in-Package，一种封装技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "JESD270-4",
+      "suggested_translation": "JESD270-4标准",
+      "context": "JEDEC发布的HBM4官方标准文档",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm4": "HBM4",
+    "hbm3e": "HBM3E",
+    "jedec": "JEDEC",
+    "tsv": "硅通孔",
+    "abb": "自适应体偏置",
+    "pmbist": "可编程内存内建自测试",
+    "mbist": "内存内建自测试",
+    "vddq": "VDDQ",
+    "vddc": "VDDC",
+    "rdqs": "RDQS",
+    "tdc": "时间数字转换器",
+    "samsung": "三星",
+    "sk hynix": "SK海力士",
+    "micron": "美光",
+    "tsmc": "台积电",
+    "nvidia": "英伟达",
+    "sf4": "SF4",
+    "1c": "1c",
+    "1a": "1a",
+    "1b": "1b",
+    "base die": "基础芯片",
+    "die shot": "芯片显微照片",
+    "shmoo plot": "舒姆图",
+    "yield": "良率",
+    "cogs": "COGS",
+    "channel": "通道",
+    "pin speed": "引脚速度",
+    "data rate": "数据速率",
+    "bandwidth": "带宽",
+    "gb/s": "Gb/s",
+    "tb/s": "TB/s",
+    "process node": "制程节点",
+    "logic process": "逻辑工艺",
+    "dram process": "DRAM工艺",
+    "front-end": "前端",
+    "margin": "利润率",
+    "reliability": "可靠性",
+    "stability": "稳定性"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T00:45:56.249593"
+}

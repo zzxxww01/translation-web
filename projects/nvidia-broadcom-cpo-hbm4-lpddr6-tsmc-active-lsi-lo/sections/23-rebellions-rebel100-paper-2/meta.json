@@ -1,0 +1,1739 @@
+{
+  "section_id": "23-rebellions-rebel100-paper-2",
+  "title": "Rebellions Rebel100 - Paper 2.2",
+  "title_translation": "Rebellions Rebel100 - Paper 2.2",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Rebellions is a South Korean startup working on AI accelerators. At ISSCC, they published the first architectural breakdown of their new accelerator, the Rebel100. Unlike other accelerators, which are generally manufactured at TSMC, Rebellions chose Samsung Foundry’s SF4X node. With Nvidia, AMD, Broadcom and others hogging most of TSMC’s capacity, this allows them more flexibility.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0344",
+      "parent_block_index": 344,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Rebellions is a South Korean startup working on AI accelerators. At ISSCC, they published the first architectural breakdown of their new accelerator, the Rebel100. Unlike other accelerators, which are generally manufactured at TSMC, Rebellions chose Samsung Foundry’s SF4X node. With Nvidia, AMD, Broadcom and others hogging most of TSMC’s capacity, this allows them more flexibility.",
+      "parent_block_plain_text": "Rebellions is a South Korean startup working on AI accelerators. At ISSCC, they published the first architectural breakdown of their new accelerator, the Rebel100. Unlike other accelerators, which are generally manufactured at TSMC, Rebellions chose Samsung Foundry’s SF4X node. With Nvidia, AMD, Broadcom and others hogging most of TSMC’s capacity, this allows them more flexibility.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 384,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebellions 是一家专注于 AI加速器（Artificial Intelligence Accelerator）的韩国初创公司。在 ISSCC（国际固态电路会议）上，他们首次公布了其新型加速器 Rebel100 的架构细节。与其他通常在台积电制造的加速器不同，Rebellions 选择了三星代工厂的 SF4X 制程节点。鉴于英伟达、AMD、博通等公司占据了台积电的大部分产能，这一选择为 Rebellions 提供了更大的灵活性。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829183",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff2ea04c2-71cf-4065-98b1-606182921d24_1068x801.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff2ea04c2-71cf-4065-98b1-606182921d24_1068x801.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0345",
+      "parent_block_index": 345,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff2ea04c2-71cf-4065-98b1-606182921d24_1068x801.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff2ea04c2-71cf-4065-98b1-606182921d24_1068x801.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff2ea04c2-71cf-4065-98b1-606182921d24_1068x801.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff2ea04c2-71cf-4065-98b1-606182921d24_1068x801.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829259",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff2ea04c2-71cf-4065-98b1-606182921d24_1068x801.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Rebellions Rebel-Quad (now Rebel100) Summary from Hot Chips 2025. Source: Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-and-144gb-hbm3e-accelerator-at-hot-chips-2025/)",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel-Quad (now Rebel100) Summary from Hot Chips 2025. Source: Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-and-144gb-hbm3e-accelerator-at-hot-chips-2025/)",
+          "start": 0,
+          "end": 207,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0346",
+      "parent_block_index": 346,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Rebellions Rebel-Quad (now Rebel100) Summary from Hot Chips 2025. Source: Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-and-144gb-hbm3e-accelerator-at-hot-chips-2025/)*",
+      "parent_block_plain_text": "Rebellions Rebel-Quad (now Rebel100) Summary from Hot Chips 2025. Source: Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-and-144gb-hbm3e-accelerator-at-hot-chips-2025/)",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel-Quad (now Rebel100) Summary from Hot Chips 2025. Source: Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-and-144gb-hbm3e-accelerator-at-hot-chips-2025/)",
+          "start": 0,
+          "end": 207,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 207,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebellions Rebel-Quad（现称 Rebel100）在 Hot Chips 2025 上的概要。来源：Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-and-144gb-hbm3e-accelerator-at-hot-chips-2025/)",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829399",
+          "tokenized_text": "[[[EM_1|Rebellions Rebel-Quad（现称 Rebel100）在 Hot Chips 2025 上的概要。来源：Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-and-144gb-hbm3e-accelerator-at-hot-chips-2025/)]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "At Hot Chips 2025, Rebellions demonstrated the chip running Llama 3.3 70B. The specs have remained the same between Hot Chips and ISSCC. One key point to note is the use of Samsung’s I-CubeS interposer technology. While the Hot Chips slide mentions the usage of TSMC’s CoWoS-S, we have clarified that this was a mistake on the slide, and that it has always been I-CubeS.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0347",
+      "parent_block_index": 347,
+      "parent_block_type": "p",
+      "parent_block_markdown": "At Hot Chips 2025, Rebellions demonstrated the chip running Llama 3.3 70B. The specs have remained the same between Hot Chips and ISSCC. One key point to note is the use of Samsung’s I-CubeS interposer technology. While the Hot Chips slide mentions the usage of TSMC’s CoWoS-S, we have clarified that this was a mistake on the slide, and that it has always been I-CubeS.",
+      "parent_block_plain_text": "At Hot Chips 2025, Rebellions demonstrated the chip running Llama 3.3 70B. The specs have remained the same between Hot Chips and ISSCC. One key point to note is the use of Samsung’s I-CubeS interposer technology. While the Hot Chips slide mentions the usage of TSMC’s CoWoS-S, we have clarified that this was a mistake on the slide, and that it has always been I-CubeS.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 370,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在 Hot Chips 2025 上，Rebellions 演示了该芯片运行 Llama 3.3 70B 模型。从 Hot Chips 到 ISSCC，其规格参数保持不变。一个关键点在于使用了 三星 的 I-CubeS 中介层技术。虽然 Hot Chips 的幻灯片提到了使用 台积电 的 CoWoS-S，但我们已经澄清这是幻灯片上的一个错误，实际上一贯使用的是 I-CubeS。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829440",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "We have recently mentioned that CoWoS-S capacity constraints have been easing. That said, Samsung may have offered steep discounts to bundle I-CubeS advanced packaging with their front-end process — sparing the startup from having to find and validate a separate advanced packaging supplier. Samsung may have also conditioned the availability of their HBM on using I-CubeS.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "CoWoS-S capacity constraints have been easing",
+          "start": 32,
+          "end": 77,
+          "href": "https://newsletter.semianalysis.com/i/190110359/cowos-tight-but-easing",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0348",
+      "parent_block_index": 348,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We have recently mentioned that [CoWoS-S capacity constraints have been easing](https://newsletter.semianalysis.com/i/190110359/cowos-tight-but-easing). That said, Samsung may have offered steep discounts to bundle I-CubeS advanced packaging with their front-end process — sparing the startup from having to find and validate a separate advanced packaging supplier. Samsung may have also conditioned the availability of their HBM on using I-CubeS.",
+      "parent_block_plain_text": "We have recently mentioned that CoWoS-S capacity constraints have been easing. That said, Samsung may have offered steep discounts to bundle I-CubeS advanced packaging with their front-end process — sparing the startup from having to find and validate a separate advanced packaging supplier. Samsung may have also conditioned the availability of their HBM on using I-CubeS.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "CoWoS-S capacity constraints have been easing",
+          "start": 32,
+          "end": 77,
+          "href": "https://newsletter.semianalysis.com/i/190110359/cowos-tight-but-easing",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 373,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们最近提到过，CoWoS-S的产能限制已有所缓解。尽管如此，三星可能提供了大幅折扣，将其I-CubeS先进封装技术与前端制程捆绑销售——这使得这家初创公司无需再寻找并验证另一家独立的先进封装供应商。三星提供其HBM（高带宽内存）也可能以必须使用I-CubeS为前提条件。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829534",
+          "tokenized_text": "我们最近提到过，[[[LINK_1|CoWoS-S的产能限制已有所缓解]]]。尽管如此，三星可能提供了大幅折扣，将其I-CubeS先进封装技术与前端制程捆绑销售——这使得这家初创公司无需再寻找并验证另一家独立的先进封装供应商。三星提供其HBM（高带宽内存）也可能以必须使用I-CubeS为前提条件。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "I-CubeS has not seen adoption among any of the leading AI accelerators, and this could be Samsung’s attempt to break into the market. There are only 5 confirmed users of I-CubeS: eSilicon, Baidu, Nvidia, Rebellions and Preferred Networks.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0349",
+      "parent_block_index": 349,
+      "parent_block_type": "p",
+      "parent_block_markdown": "I-CubeS has not seen adoption among any of the leading AI accelerators, and this could be Samsung’s attempt to break into the market. There are only 5 confirmed users of I-CubeS: eSilicon, Baidu, Nvidia, Rebellions and Preferred Networks.",
+      "parent_block_plain_text": "I-CubeS has not seen adoption among any of the leading AI accelerators, and this could be Samsung’s attempt to break into the market. There are only 5 confirmed users of I-CubeS: eSilicon, Baidu, Nvidia, Rebellions and Preferred Networks.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 238,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "I-CubeS 尚未在任何主流的 AI加速器 中得到采用，这可能是 三星 试图打入该市场的尝试。目前仅有 5 家已确认的 I-CubeS 用户：eSilicon、百度、英伟达、Rebellions 和 Preferred Networks。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829570",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "The first is a networking ASIC by eSilicon on Samsung’s 14LPP with HBM2. Baidu’s Kunlun1 accelerator is similar, using Samsung’s 14LPP process and 2 HBM2 stacks. When the CoWoS-S capacity was very tight back in 2023, Nvidia outsourced a small amount of H200 production to I-CubeS. Then, there is the Rebel100 and lastly, a planned accelerator from Preferred Networks on the SF2 process.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0350",
+      "parent_block_index": 350,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The first is a networking ASIC by eSilicon on Samsung’s 14LPP with HBM2. Baidu’s Kunlun1 accelerator is similar, using Samsung’s 14LPP process and 2 HBM2 stacks. When the CoWoS-S capacity was very tight back in 2023, Nvidia outsourced a small amount of H200 production to I-CubeS. Then, there is the Rebel100 and lastly, a planned accelerator from Preferred Networks on the SF2 process.",
+      "parent_block_plain_text": "The first is a networking ASIC by eSilicon on Samsung’s 14LPP with HBM2. Baidu’s Kunlun1 accelerator is similar, using Samsung’s 14LPP process and 2 HBM2 stacks. When the CoWoS-S capacity was very tight back in 2023, Nvidia outsourced a small amount of H200 production to I-CubeS. Then, there is the Rebel100 and lastly, a planned accelerator from Preferred Networks on the SF2 process.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 386,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "第一家是 eSilicon 基于 三星 14LPP 制程并搭载 HBM2 的网络专用集成电路。百度的昆仑1加速器类似，使用了 三星 的 14LPP 工艺和 2 颗 HBM2 堆栈。在 2023 年 CoWoS-S 产能非常紧张时，英伟达 将少量 H200 的生产外包给了 I-CubeS。接着是 Rebel100，最后是 Preferred Networks 计划在 SF2 制程节点上开发的加速器。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829598",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91f29194-e088-40ef-b134-ac45449d21ae_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91f29194-e088-40ef-b134-ac45449d21ae_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0351",
+      "parent_block_index": 351,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91f29194-e088-40ef-b134-ac45449d21ae_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91f29194-e088-40ef-b134-ac45449d21ae_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91f29194-e088-40ef-b134-ac45449d21ae_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91f29194-e088-40ef-b134-ac45449d21ae_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829625",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91f29194-e088-40ef-b134-ac45449d21ae_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Rebellions Rebel100 Multi-Die Architecture. Source: Rebellions, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel100 Multi-Die Architecture. Source: Rebellions, ISSCC 2026",
+          "start": 0,
+          "end": 74,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0352",
+      "parent_block_index": 352,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Rebellions Rebel100 Multi-Die Architecture. Source: Rebellions, ISSCC 2026*",
+      "parent_block_plain_text": "Rebellions Rebel100 Multi-Die Architecture. Source: Rebellions, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel100 Multi-Die Architecture. Source: Rebellions, ISSCC 2026",
+          "start": 0,
+          "end": 74,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 74,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebellions Rebel100 多芯片架构。来源：Rebellions，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829707",
+          "tokenized_text": "[[[EM_1|Rebellions Rebel100 多芯片架构。来源：Rebellions，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "The Rebel100 uses 4 compute dies and 4 HBM3E stacks. Each die has 3 UCIe-A interfaces. However, only two are used on each die, clocked at 16 Gb/s.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0353",
+      "parent_block_index": 353,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Rebel100 uses 4 compute dies and 4 HBM3E stacks. Each die has 3 UCIe-A interfaces. However, only two are used on each die, clocked at 16 Gb/s.",
+      "parent_block_plain_text": "The Rebel100 uses 4 compute dies and 4 HBM3E stacks. Each die has 3 UCIe-A interfaces. However, only two are used on each die, clocked at 16 Gb/s.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 146,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebel100 采用了 4 颗计算芯片和 4 个 HBM3E 堆栈。每颗芯片配备了 3 个 UCIe-A（通用芯粒互连扩展-A）接口，但实际每颗芯片仅启用了其中两个，运行速率为 16 Gb/s。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829738",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b5a17f-feb0-4c70-b528-cae2a38c11f3_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b5a17f-feb0-4c70-b528-cae2a38c11f3_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0354",
+      "parent_block_index": 354,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b5a17f-feb0-4c70-b528-cae2a38c11f3_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b5a17f-feb0-4c70-b528-cae2a38c11f3_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b5a17f-feb0-4c70-b528-cae2a38c11f3_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b5a17f-feb0-4c70-b528-cae2a38c11f3_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829765",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b5a17f-feb0-4c70-b528-cae2a38c11f3_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Rebellions Rebel100 Package-Level Modularity. Source: Rebellions, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel100 Package-Level Modularity. Source: Rebellions, ISSCC 2026",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0355",
+      "parent_block_index": 355,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Rebellions Rebel100 Package-Level Modularity. Source: Rebellions, ISSCC 2026*",
+      "parent_block_plain_text": "Rebellions Rebel100 Package-Level Modularity. Source: Rebellions, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel100 Package-Level Modularity. Source: Rebellions, ISSCC 2026",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 76,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebellions Rebel100 封装级模块化设计。来源：Rebellions，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829837",
+          "tokenized_text": "[[[EM_1|Rebellions Rebel100 封装级模块化设计。来源：Rebellions，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Rebellions claims that the design is reconfigurable at the package level, where additional IO or memory chiplets can be added to integrate with Ethernet for scale-up. This is where the remaining UCIe-A interface would be used.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0356",
+      "parent_block_index": 356,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Rebellions claims that the design is reconfigurable at the package level, where additional IO or memory chiplets can be added to integrate with Ethernet for scale-up. This is where the remaining UCIe-A interface would be used.",
+      "parent_block_plain_text": "Rebellions claims that the design is reconfigurable at the package level, where additional IO or memory chiplets can be added to integrate with Ethernet for scale-up. This is where the remaining UCIe-A interface would be used.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 226,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebellions宣称该设计在封装级别具备可重构性，能够额外添加输入输出或内存芯粒，并与以太网集成以实现纵向扩展（scale-up）。剩余的UCIe-A接口将用于此目的。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.829952",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Rebellions stated that the IO chiplets would be taped out by 1Q2026. There was no provided timeline for the memory chiplets.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0357",
+      "parent_block_index": 357,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Rebellions stated that the IO chiplets would be taped out by 1Q2026. There was no provided timeline for the memory chiplets.",
+      "parent_block_plain_text": "Rebellions stated that the IO chiplets would be taped out by 1Q2026. There was no provided timeline for the memory chiplets.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 124,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebellions 表示，输入输出芯粒预计将在 2026 年第一季度完成流片。但并未提供内存芯粒的具体时间表。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.830099",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbab43a4-26b7-4011-bfeb-ea01c4902a56_2880x1620.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbab43a4-26b7-4011-bfeb-ea01c4902a56_2880x1620.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0358",
+      "parent_block_index": 358,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbab43a4-26b7-4011-bfeb-ea01c4902a56_2880x1620.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbab43a4-26b7-4011-bfeb-ea01c4902a56_2880x1620.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbab43a4-26b7-4011-bfeb-ea01c4902a56_2880x1620.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbab43a4-26b7-4011-bfeb-ea01c4902a56_2880x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.830246",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbab43a4-26b7-4011-bfeb-ea01c4902a56_2880x1620.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Rebellions Rebel100 Summary and Roadmap. Source: Rebellions, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel100 Summary and Roadmap. Source: Rebellions, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0359",
+      "parent_block_index": 359,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Rebellions Rebel100 Summary and Roadmap. Source: Rebellions, ISSCC 2026*",
+      "parent_block_plain_text": "Rebellions Rebel100 Summary and Roadmap. Source: Rebellions, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel100 Summary and Roadmap. Source: Rebellions, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 71,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebellions Rebel100 总结与路线图。来源：Rebellions，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.830607",
+          "tokenized_text": "[[[EM_1|Rebellions Rebel100 总结与路线图。来源：Rebellions，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759c00f2-e242-404b-a841-5e4458a75e4c_2880x1620.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759c00f2-e242-404b-a841-5e4458a75e4c_2880x1620.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0360",
+      "parent_block_index": 360,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759c00f2-e242-404b-a841-5e4458a75e4c_2880x1620.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759c00f2-e242-404b-a841-5e4458a75e4c_2880x1620.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759c00f2-e242-404b-a841-5e4458a75e4c_2880x1620.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759c00f2-e242-404b-a841-5e4458a75e4c_2880x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.830753",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759c00f2-e242-404b-a841-5e4458a75e4c_2880x1620.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Rebellions Rebel100 Integrated Silicon Capacitors for HBM3E Power Quality. Source: Rebellions, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel100 Integrated Silicon Capacitors for HBM3E Power Quality. Source: Rebellions, ISSCC 2026",
+          "start": 0,
+          "end": 105,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0361",
+      "parent_block_index": 361,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Rebellions Rebel100 Integrated Silicon Capacitors for HBM3E Power Quality. Source: Rebellions, ISSCC 2026*",
+      "parent_block_plain_text": "Rebellions Rebel100 Integrated Silicon Capacitors for HBM3E Power Quality. Source: Rebellions, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Rebellions Rebel100 Integrated Silicon Capacitors for HBM3E Power Quality. Source: Rebellions, ISSCC 2026",
+          "start": 0,
+          "end": 105,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 105,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Rebellions Rebel100 为 HBM3E 供电质量集成的硅电容器。来源：Rebellions，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.831350",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "They have also integrated silicon capacitors beside each HBM3E stack to improve power quality for HBM3E and critical control blocks.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0362",
+      "parent_block_index": 362,
+      "parent_block_type": "p",
+      "parent_block_markdown": "They have also integrated silicon capacitors beside each HBM3E stack to improve power quality for HBM3E and critical control blocks.",
+      "parent_block_plain_text": "They have also integrated silicon capacitors beside each HBM3E stack to improve power quality for HBM3E and critical control blocks.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 132,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "此外，他们在每个 HBM3E 堆栈旁都集成了硅电容器，以改善 HBM3E 及关键控制模块的供电质量。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:08:27.831504",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致。在段落0中译为“AI加速器”，但在段落5中译为“AI加速器”。虽然中文一致，但根据全文背景和术语表，此处为首次出现，应考虑加注英文缩写或全称以增强专业性，但非强制。更关键的是，段落5中“主流的 AI加速器”的“主流”一词，原文为“leading”，译为“主流”是合理的，但结合上下文（I-CubeS未获采用），译为“领先的”或“头部”更能体现其市场地位和原文的对比意图。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，存在轻微的翻译腔。“将...的条件设定为”是直译英文“conditioned...on”的结构，虽然准确，但不够自然流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未按指南要求加注中文全称。原文要求‘首次出现的重要缩写需加注中文全称’。UCIe是全文高风险点提到的关键互连技术，其扩展‘UCIe-A’在段落9首次出现，但译文仅提供了括号内的英文全称缩写，缺少中文释义。"
+          },
+          {
+            "type": "readability",
+            "description": "“以便与以太网集成实现纵向扩展”这句话中的“纵向扩展”是“scale-up”的直译，在IT/硬件语境中虽可理解，但“纵向扩展”常与“横向扩展（scale-out）”对举。此处描述的是通过添加芯粒来增强单个封装/节点的能力，用“纵向扩展”是准确的。但整句的衔接“可以...以便...”略显程式化。"
+          },
+          {
+            "type": "readability",
+            "description": "“旨在改善”中的“旨在”稍显书面化。原文是简单的目的状语“to improve”，用“以改善”或“来改善”更简洁直接。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

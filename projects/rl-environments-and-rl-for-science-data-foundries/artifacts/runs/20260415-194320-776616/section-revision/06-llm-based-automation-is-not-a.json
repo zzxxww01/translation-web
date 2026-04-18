@@ -1,0 +1,30 @@
+{
+  "section_id": "06-llm-based-automation-is-not-a",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.424999999999999,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.0,
+      "terminology": 9.0,
+      "completeness": 7.0,
+      "style": 7.0
+    },
+    "failed_criteria": [
+      "critical_errors (4 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "关于AI（尤其是对白领工作）带来的职业自动化，一直存在诸多猜测。OpenAI的GDPval论文中有一个有趣的数据点，与这一假设相悖。OpenAI发现，在AI辅助下，人类专家完成任务的速度更快，且成本低于他们单独工作时的水平。随着AI能力提升，结果是增强人类，而非将其自动化。",
+    "https://substackcdn.com/image/fetch/$s_!szHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd48cf181-b0d4-4e01-af41-d3768ea66d19_1130x1100.png",
+    "来源：OpenAI。SemiAnalysis自身的数据点同样表明，其客户通过使用我们的服务，在速度和成本上获得了类似的改进。",
+    "短期内，专家工作可能不会走向自动化，而是实现任务增强。对于软件工程这类任务，情况很可能就是如此。",
+    "再举一例：在AI热潮之前，许多人曾预测放射学将被自动化。这源于视觉模型能力的提升。尽管模型持续改进，但这一预测并未成真。",
+    "事实证明，放射学的工作远比单纯的扫描分析复杂。",
+    "https://substackcdn.com/image/fetch/$s_!1l6B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50035824-6960-41dd-a500-980d0bc38d14_1140x925.png",
+    "来源：Works In Progress",
+    "“模型主要增强工作者”这一观点，可能在咨询或软件工程等专业领域成立。但我们认为，对于决策周期短、重复性高的任务（例如呼叫中心工作），情况则很可能相反。",
+    "撇开技术能力不谈，实际应用仍面临一些障碍。这包括但不限于网络平台提供商与企业所采取的防御性姿态，对于智能体而言尤其如此。"
+  ]
+}

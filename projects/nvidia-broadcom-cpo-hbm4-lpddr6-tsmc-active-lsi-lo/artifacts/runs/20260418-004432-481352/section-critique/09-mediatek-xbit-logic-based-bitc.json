@@ -1,0 +1,61 @@
+{
+  "section_id": "09-mediatek-xbit-logic-based-bitc",
+  "reflection": {
+    "overall_score": 8.9,
+    "readability_score": 8.5,
+    "accuracy_score": 9.3,
+    "conciseness_score": 8.8,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "Assist circuitry has scaled more, but it's not free lunch.",
+        "description": "习语翻译生硬，未完全本地化。",
+        "why_it_matters": "‘free lunch’是英文习语，直译为‘并非没有代价’虽然传达了基本意思，但失去了原文的比喻色彩和简洁性，在科技分析文章中略显平淡。",
+        "suggestion": "建议译为‘但这并非免费的午餐’或‘但这并非没有代价’，前者更生动，后者更直接。考虑到上下文批判性语气，保留‘免费的午餐’这一比喻可能更佳。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Do note these figures do not account for assist circuitry overhead.",
+        "description": "句式可以更流畅，更符合中文科技评论的提醒口吻。",
+        "why_it_matters": "‘值得注意的是’是标准译法，但在此处与‘Do note’的直接对应稍显刻板。可以调整得更自然，增强分析口吻。",
+        "suggestion": "建议调整为：‘需要指出的是，这些数据并未计入辅助电路的开销。’或‘请注意，上述数据未包含辅助电路的开销。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 10,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "The unequal number of NMOS and PMOS transistors requires specialized rules and makes layout more inefficient.",
+        "description": "句子结构略显生硬，可以调整语序使其更顺畅。",
+        "why_it_matters": "译文‘需要特殊的布局规则，并导致版图效率降低’是准确的，但‘导致...效率降低’的表述可以优化为更主动或更地道的说法。",
+        "suggestion": "建议微调为：‘…需要特殊的布局规则，从而降低了版图效率。’或‘…需要特殊的布局规则，这影响了版图效率。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 13,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "At 0.9V, performance was similar to an 8T bitcell and at 0.5V, although it was 16% slower than the 8T bitcell, it was fast enough not to be the bottleneck in a processor, and the voltage range was large enough for voltage-frequency scaling.",
+        "description": "长句拆分后逻辑衔接可以更清晰。",
+        "why_it_matters": "译文将长句拆分为两个分句，处理得当。但第二个分句内部‘虽然…但仍…并且…’的结构稍显冗长，可以优化节奏，使技术结论更突出。",
+        "suggestion": "建议优化为：‘在0.5V电压下，其速度虽比8T存储单元慢16%，但已足以避免成为处理器瓶颈，且其工作电压范围足够宽，适用于电压频率调节。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

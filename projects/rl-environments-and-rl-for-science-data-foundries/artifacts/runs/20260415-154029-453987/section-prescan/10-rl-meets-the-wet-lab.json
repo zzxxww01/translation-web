@@ -1,0 +1,41 @@
+{
+  "section_id": "10-rl-meets-the-wet-lab",
+  "new_terms": [
+    {
+      "term": "Benchling",
+      "suggested_translation": "Benchling（生命科学数据平台）",
+      "context": "生命科学数据平台",
+      "confidence": 0.9
+    },
+    {
+      "term": "10x Genomics",
+      "suggested_translation": "10x Genomics（单细胞基因组学公司）",
+      "context": "单细胞基因组学公司",
+      "confidence": 0.9
+    },
+    {
+      "term": "PubMed",
+      "suggested_translation": "PubMed（生物医学文献数据库）",
+      "context": "生物医学文献数据库",
+      "confidence": 0.9
+    },
+    {
+      "term": "Copilot for the Life Sciences",
+      "suggested_translation": "生命科学Copilot",
+      "context": "Anthropic推出的企业级解决方案",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "closed loop": "闭环",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "OpenAI": "OpenAI",
+    "Anthropic": "Anthropic",
+    "Medra": "Medra",
+    "Google DeepMind": "Google DeepMind"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:43:12.167624"
+}

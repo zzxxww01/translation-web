@@ -1,0 +1,80 @@
+{
+  "section_id": "04-data-foundries-and-expert-cont",
+  "new_terms": [
+    {
+      "term": "Feather",
+      "suggested_translation": "Feather（OpenAI内部承包商平台）",
+      "context": "OpenAI内部承包商平台名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Mercor",
+      "suggested_translation": "Mercor（专家承包商平台）",
+      "context": "专家承包商平台/公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Handshake",
+      "suggested_translation": "Handshake（专家承包商平台）",
+      "context": "专家承包商平台/公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Aboda.ai",
+      "suggested_translation": "Aboda.ai（专家承包商平台）",
+      "context": "专家承包商平台/公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Moonshot",
+      "suggested_translation": "月之暗面",
+      "context": "中国AI实验室名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Z.ai",
+      "suggested_translation": "Z.ai（中国AI实验室）",
+      "context": "中国AI实验室名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Kimi K2 Thinking",
+      "suggested_translation": "Kimi K2 Thinking（模型/产品）",
+      "context": "模型/产品名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "GLM-4.6",
+      "suggested_translation": "GLM-4.6（模型）",
+      "context": "模型版本",
+      "confidence": 0.9
+    },
+    {
+      "term": "The LLM Data Company",
+      "suggested_translation": "The LLM Data Company（LLM数据公司）",
+      "context": "公司名称",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "data foundries": "数据代工厂",
+    "environments": "环境",
+    "contractors": "承包商",
+    "reward signals": "奖励信号",
+    "rubrics": "评分标准",
+    "evals": "评估",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "GDPval": "GDPval",
+    "MCP": "MCP",
+    "Anthropic": "Anthropic",
+    "OpenAI": "OpenAI",
+    "Google": "Google",
+    "Qwen": "通义千问",
+    "ARR": "年度经常性收入",
+    "VC": "VC"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:41:47.290704"
+}

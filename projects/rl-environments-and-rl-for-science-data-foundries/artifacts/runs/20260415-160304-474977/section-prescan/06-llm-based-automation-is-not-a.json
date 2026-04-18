@@ -1,0 +1,30 @@
+{
+  "section_id": "06-llm-based-automation-is-not-a",
+  "new_terms": [
+    {
+      "term": "GDPval",
+      "suggested_translation": "GDPval",
+      "context": "OpenAI的研究论文名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "SemiAnalysis",
+      "suggested_translation": "SemiAnalysis",
+      "context": "公司/研究机构名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Works In Progress",
+      "suggested_translation": "Works In Progress",
+      "context": "出版物/博客名称",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "data foundries": "数据代工厂",
+    "computer use environments": "计算机操作环境"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T16:23:30.331631"
+}

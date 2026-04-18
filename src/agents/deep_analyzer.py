@@ -16,6 +16,7 @@ Translation Agent - Deep Analyzer
 """
 
 from typing import List, Optional, Dict
+import logging
 
 from ..core.models import (
     Section,
@@ -25,6 +26,9 @@ from ..core.models import (
 )
 from ..llm.base import LLMProvider
 from .smart_sampler import SmartSampler, create_smart_sampler
+
+
+logger = logging.getLogger(__name__)
 
 
 class DeepAnalyzer:
@@ -43,7 +47,11 @@ class DeepAnalyzer:
             max_sample_chars: 最大采样字符数
         """
         self.llm = llm_provider
+        self.max_sample_chars = max_sample_chars
         self.smart_sampler = create_smart_sampler(max_total_chars=max_sample_chars)
+
+    ANALYSIS_SAMPLE_STEPS = (18000, 12000, 8000, 5000)
+    ANALYSIS_TIMEOUT_STEPS = (None, 240, 360, 480)
 
     def analyze(self, sections: List[Section]) -> ArticleAnalysis:
         """
@@ -55,14 +63,44 @@ class DeepAnalyzer:
         Returns:
             ArticleAnalysis: 深度分析结果
         """
-        # 提取全文文本
-        full_text = self._extract_full_text(sections)
-
         # 构建章节大纲
         sections_outline = self._build_sections_outline(sections)
 
-        # 调用 LLM 深度分析
-        result = self.llm.deep_analyze(full_text, sections_outline)
+        result = None
+        last_error: Exception | None = None
+        sample_steps = [self.max_sample_chars, *self.ANALYSIS_SAMPLE_STEPS]
+        deduped_steps = []
+        for sample_chars in sample_steps:
+            if sample_chars not in deduped_steps:
+                deduped_steps.append(sample_chars)
+
+        for attempt_index, sample_chars in enumerate(deduped_steps):
+            timeout = self.ANALYSIS_TIMEOUT_STEPS[min(attempt_index, len(self.ANALYSIS_TIMEOUT_STEPS) - 1)]
+            try:
+                full_text = self._extract_full_text(sections, max_length=sample_chars)
+                logger.info(
+                    "Deep analysis attempt %s with sample_chars=%s timeout=%s",
+                    attempt_index + 1,
+                    sample_chars,
+                    timeout or "default",
+                )
+                result = self.llm.deep_analyze(full_text, sections_outline, timeout=timeout)
+                break
+            except Exception as exc:
+                last_error = exc
+                if attempt_index == len(deduped_steps) - 1 or not self._should_retry_with_smaller_sample(exc):
+                    raise
+                logger.warning(
+                    "Deep analysis attempt %s failed with sample_chars=%s: %s; retrying with a smaller sample",
+                    attempt_index + 1,
+                    sample_chars,
+                    exc,
+                )
+
+        if result is None:
+            if last_error is not None:
+                raise last_error
+            raise RuntimeError("Deep analysis returned no result")
 
         # 解析基础分析结果
         analysis = self._parse_analysis_result(result, sections)
@@ -94,16 +132,36 @@ class DeepAnalyzer:
             str: 采样后的全文文本
         """
         # 使用智能采样器
-        sampling_result = self.smart_sampler.sample_for_deep_analysis(
+        sampler = self.smart_sampler
+        if max_length != self.max_sample_chars:
+            sampler = create_smart_sampler(max_total_chars=max_length)
+        sampling_result = sampler.sample_for_deep_analysis(
             sections,
             include_term_dense=True
         )
 
         # 构建采样文本
-        return self.smart_sampler.build_sampled_text(
+        return sampler.build_sampled_text(
             sampling_result,
             include_section_headers=True
         )
+
+    def _should_retry_with_smaller_sample(self, exc: Exception) -> bool:
+        text = str(exc).lower()
+        retry_signals = [
+            "timed out",
+            "timeout",
+            "deadline exceeded",
+            "connection",
+            "temporarily unavailable",
+            "service unavailable",
+            "bad gateway",
+            "502",
+            "503",
+            "504",
+            "incomplete",
+        ]
+        return any(signal in text for signal in retry_signals)
 
     def _build_sections_outline(self, sections: List[Section]) -> str:
         """

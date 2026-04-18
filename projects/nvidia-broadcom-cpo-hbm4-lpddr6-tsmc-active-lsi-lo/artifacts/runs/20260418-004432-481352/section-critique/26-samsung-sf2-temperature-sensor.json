@@ -1,0 +1,109 @@
+{
+  "section_id": "26-samsung-sf2-temperature-sensor",
+  "reflection": {
+    "overall_score": 8.9,
+    "readability_score": 8.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 4,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "BEOL metal resistor",
+        "description": "术语“BEOL”在译文中被意译为“后端金属层电阻”，但未提供英文全称及中文释义的首次注释。",
+        "why_it_matters": "根据全文高风险点要求，重要技术缩写首次出现时应采用“英文全称（中文释义）”格式，以确保术语清晰度和一致性。",
+        "suggestion": "建议修改为：用后端金属层（BEOL， Back-End-of-Line）电阻取代了传统的双极结型晶体管方案。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "The metal resistor offers 518× higher sheet resistance than an equivalent routing metal, requiring roughly 1% of the area for the same resistance.",
+        "description": "译文“这意味着在实现相同电阻值时，其所需面积仅为后者的约1%”略显冗长，且“后者”指代不够直接。",
+        "why_it_matters": "科技翻译应力求简洁、直接，尤其是在描述倍数关系和优势时。",
+        "suggestion": "可优化为：该金属电阻的方块电阻比等效布线金属高出518倍，因此实现相同电阻值所需面积仅为后者的约1%。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 8,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "PDK",
+        "description": "术语“PDK”在译文中被译为“工艺设计套件（PDK）”，但未遵循“英文全称（中文释义）”的格式，且“工艺设计套件”是常见译法，但“套件”一词在半导体语境下略显宽泛。",
+        "why_it_matters": "术语注释格式需规范，且应使用行业更通用的译法。",
+        "suggestion": "建议修改为：作为一个经过特性表征的工艺设计套件（PDK， Process Design Kit）元件……",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 8,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Even on a single chip, thousands of these sensors may be used near hotspots.",
+        "description": "译文“即使在单个芯片上，也可能在热点附近部署数千个此类传感器”中的“部署”一词，在硬件语境下略显生硬。",
+        "why_it_matters": "“部署”常用于软件或系统层面，对于芯片内部的物理元件，“使用”或“布置”更为自然。",
+        "suggestion": "可优化为：即使在单个芯片上，热点附近也可能使用数千个此类传感器。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 9,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "Samsung compensates for this by increasing the base resistance.",
+        "description": "译文“三星通过提高基准电阻值来补偿这一不足”中的“基准电阻值”翻译不够准确。原文“base resistance”在此语境下更可能指“基础电阻”或“电阻基值”，而非一个“基准”参考值。",
+        "why_it_matters": "技术细节的准确性至关重要，错误的术语会影响对技术原理的理解。",
+        "suggestion": "建议修改为：三星通过增大基础电阻值来补偿这一不足。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 9,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "To address this, Samsung uses a time-offset compression technique: a low-resistance (0.1R) fast-charge path rapidly charges the RC filter, then the circuit switches to the full resistance for the temperature-sensitive portion of the waveform.",
+        "description": "译文将冒号后的解释拆分为两个句子，逻辑清晰，但“以捕捉波形中对温度敏感的部分”中的“捕捉”一词，在电路动作描述上可以更精确。",
+        "why_it_matters": "使用更贴切的动词可以提升技术描述的精准度。",
+        "suggestion": "可优化为：……随后电路切换到全电阻值，用于测量波形中对温度敏感的部分。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 10,
+        "issue_type": "terminology",
+        "severity": "low",
+        "original_text": "ring oscillator-based (RO) TDC",
+        "description": "译文“基于紧凑型环形振荡器（RO）的TDC”处理得当。但“RO”作为“Ring Oscillator”的缩写，在全文术语表中未列出，且在本章节首次出现。",
+        "why_it_matters": "虽然“环形振荡器”是常见术语，但为保持与全文处理方式一致，可考虑加注。鉴于其常见性，此为非强制性问题。",
+        "suggestion": "（可选优化）可考虑加注：基于紧凑型环形振荡器（RO， Ring Oscillator）的TDC。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 15,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Prior temperature sensors could only optimize for one of these: area or speed.",
+        "description": "译文“此前的温度传感器通常只能在面积或速度其中一项上进行优化”准确，但“通常”一词为译者添加，虽符合常识，但原文未明确此概率。",
+        "why_it_matters": "在严谨的技术评述中，应尽量避免添加原文未明确的程度修饰词。",
+        "suggestion": "可优化为：此前的温度传感器只能在面积或速度其中一项上进行优化。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

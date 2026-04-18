@@ -1,0 +1,1387 @@
+{
+  "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+  "title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6",
+  "title_translation": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!L-SD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc1e02d7-2ca4-4129-9200-e99084fa4cfc_1792x1265.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!L-SD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc1e02d7-2ca4-4129-9200-e99084fa4cfc_1792x1265.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0311",
+      "parent_block_index": 311,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!L-SD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc1e02d7-2ca4-4129-9200-e99084fa4cfc_1792x1265.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!L-SD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc1e02d7-2ca4-4129-9200-e99084fa4cfc_1792x1265.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!L-SD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc1e02d7-2ca4-4129-9200-e99084fa4cfc_1792x1265.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!L-SD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc1e02d7-2ca4-4129-9200-e99084fa4cfc_1792x1265.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.369547",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!L-SD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffc1e02d7-2ca4-4129-9200-e99084fa4cfc_1792x1265.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Intel M3DProc 18A and Intel 3 Die Floorplan. Source: Intel, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel M3DProc 18A and Intel 3 Die Floorplan. Source: Intel, ISSCC 2026",
+          "start": 0,
+          "end": 70,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0312",
+      "parent_block_index": 312,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel M3DProc 18A and Intel 3 Die Floorplan. Source: Intel, ISSCC 2026*",
+      "parent_block_plain_text": "Intel M3DProc 18A and Intel 3 Die Floorplan. Source: Intel, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel M3DProc 18A and Intel 3 Die Floorplan. Source: Intel, ISSCC 2026",
+          "start": 0,
+          "end": 70,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 70,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 M3DProc 18A 与英特尔 3 芯片布局规划图。来源：英特尔，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.369794",
+          "tokenized_text": "[[[EM_1|英特尔 M3DProc 18A 与英特尔 3 芯片布局规划图。来源：英特尔，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Intel disclosed their first hybrid bonded chip, the M3DProc. It consists of an Intel 3 bottom die, and an 18A top die. Each die contains 56 mesh tiles, cores and DNN accelerator tiles, respectively. The two dies are bonded together with Foveros Direct, hybrid bonding at a 9μm pitch.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0313",
+      "parent_block_index": 313,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Intel disclosed their first hybrid bonded chip, the M3DProc. It consists of an Intel 3 bottom die, and an 18A top die. Each die contains 56 mesh tiles, cores and DNN accelerator tiles, respectively. The two dies are bonded together with Foveros Direct, hybrid bonding at a 9μm pitch.",
+      "parent_block_plain_text": "Intel disclosed their first hybrid bonded chip, the M3DProc. It consists of an Intel 3 bottom die, and an 18A top die. Each die contains 56 mesh tiles, cores and DNN accelerator tiles, respectively. The two dies are bonded together with Foveros Direct, hybrid bonding at a 9μm pitch.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 283,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔首次披露了其采用混合键合技术的芯片 M3DProc。该芯片由一个英特尔 3 工艺的底层芯片和一个 18A 工艺的顶层芯片构成。每个芯片分别包含 56 个网格瓦片（mesh tile）、核心和深度神经网络（DNN）加速器瓦片。两个芯片通过间距为 9 微米的 Foveros Direct 混合键合技术互联。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.369860",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!Ysv3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F636479de-4917-48f9-b513-7c57fe81968e_2494x1403.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Ysv3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F636479de-4917-48f9-b513-7c57fe81968e_2494x1403.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0314",
+      "parent_block_index": 314,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Ysv3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F636479de-4917-48f9-b513-7c57fe81968e_2494x1403.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Ysv3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F636479de-4917-48f9-b513-7c57fe81968e_2494x1403.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Ysv3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F636479de-4917-48f9-b513-7c57fe81968e_2494x1403.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Ysv3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F636479de-4917-48f9-b513-7c57fe81968e_2494x1403.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.369919",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Ysv3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F636479de-4917-48f9-b513-7c57fe81968e_2494x1403.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Intel M3DProc 3D Mesh Architecture. Source: Intel, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel M3DProc 3D Mesh Architecture. Source: Intel, ISSCC 2026",
+          "start": 0,
+          "end": 61,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0315",
+      "parent_block_index": 315,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel M3DProc 3D Mesh Architecture. Source: Intel, ISSCC 2026*",
+      "parent_block_plain_text": "Intel M3DProc 3D Mesh Architecture. Source: Intel, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel M3DProc 3D Mesh Architecture. Source: Intel, ISSCC 2026",
+          "start": 0,
+          "end": 61,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 61,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 M3DProc 3D 网格架构。来源：英特尔，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370053",
+          "tokenized_text": "[[[EM_1|英特尔 M3DProc 3D 网格架构。来源：英特尔，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "The mesh tiles are arranged in a 14×4×2 3D mesh, with SRAM being shared across both dies.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0316",
+      "parent_block_index": 316,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The mesh tiles are arranged in a 14×4×2 3D mesh, with SRAM being shared across both dies.",
+      "parent_block_plain_text": "The mesh tiles are arranged in a 14×4×2 3D mesh, with SRAM being shared across both dies.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 89,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这些网格单元以 14×4×2 的 3D 网格形式排列，SRAM（静态随机存取存储器）由上下两片芯片共享。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370105",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!6vZe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2a08665-501d-4c3b-a54a-0bfae0dc5258_2412x910.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6vZe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2a08665-501d-4c3b-a54a-0bfae0dc5258_2412x910.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0317",
+      "parent_block_index": 317,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!6vZe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2a08665-501d-4c3b-a54a-0bfae0dc5258_2412x910.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!6vZe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2a08665-501d-4c3b-a54a-0bfae0dc5258_2412x910.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!6vZe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2a08665-501d-4c3b-a54a-0bfae0dc5258_2412x910.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!6vZe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2a08665-501d-4c3b-a54a-0bfae0dc5258_2412x910.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370150",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!6vZe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc2a08665-501d-4c3b-a54a-0bfae0dc5258_2412x910.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Intel M3DProc 2D vs. 3D Throughput and Energy Efficiency. Source: Intel, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel M3DProc 2D vs. 3D Throughput and Energy Efficiency. Source: Intel, ISSCC 2026",
+          "start": 0,
+          "end": 83,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0318",
+      "parent_block_index": 318,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel M3DProc 2D vs. 3D Throughput and Energy Efficiency. Source: Intel, ISSCC 2026*",
+      "parent_block_plain_text": "Intel M3DProc 2D vs. 3D Throughput and Energy Efficiency. Source: Intel, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel M3DProc 2D vs. 3D Throughput and Energy Efficiency. Source: Intel, ISSCC 2026",
+          "start": 0,
+          "end": 83,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 83,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 M3DProc 2D 与 3D 架构的吞吐量及能效对比。来源：英特尔，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370270",
+          "tokenized_text": "[[[EM_1|英特尔 M3DProc 2D 与 3D 架构的吞吐量及能效对比。来源：英特尔，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Intel found that the 3D mesh reduces latency and increases throughput by almost 40%. They also tested the energy efficiency of transferring data, with 2D being within the 56 mesh tiles of the bottom die, and 3D being 28 adjacent mesh tiles across both dies. The results show that the Hybrid Bonding Interconnect (HBI) had a negligible impact on efficiency.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0319",
+      "parent_block_index": 319,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Intel found that the 3D mesh reduces latency and increases throughput by almost 40%. They also tested the energy efficiency of transferring data, with 2D being within the 56 mesh tiles of the bottom die, and 3D being 28 adjacent mesh tiles across both dies. The results show that the Hybrid Bonding Interconnect (HBI) had a negligible impact on efficiency.",
+      "parent_block_plain_text": "Intel found that the 3D mesh reduces latency and increases throughput by almost 40%. They also tested the energy efficiency of transferring data, with 2D being within the 56 mesh tiles of the bottom die, and 3D being 28 adjacent mesh tiles across both dies. The results show that the Hybrid Bonding Interconnect (HBI) had a negligible impact on efficiency.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 356,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔发现，3D网格架构能降低延迟，并将吞吐量提升近40%。他们还测试了数据传输的能效，其中2D架构的数据传输发生在底部芯片的56个网格单元内，而3D架构则跨越两个芯片上的28个相邻网格单元。结果显示，其混合键合互连（Hybrid Bonding Interconnect, HBI）对能效的影响微乎其微。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370317",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!aWNv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4877bf3c-30c1-4278-b85e-65ddbc343f1b_1362x1400.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!aWNv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4877bf3c-30c1-4278-b85e-65ddbc343f1b_1362x1400.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0320",
+      "parent_block_index": 320,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!aWNv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4877bf3c-30c1-4278-b85e-65ddbc343f1b_1362x1400.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!aWNv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4877bf3c-30c1-4278-b85e-65ddbc343f1b_1362x1400.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!aWNv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4877bf3c-30c1-4278-b85e-65ddbc343f1b_1362x1400.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!aWNv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4877bf3c-30c1-4278-b85e-65ddbc343f1b_1362x1400.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370364",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!aWNv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4877bf3c-30c1-4278-b85e-65ddbc343f1b_1362x1400.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Intel M3DProc Tile Bonding Floorplan. Source: Intel, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel M3DProc Tile Bonding Floorplan. Source: Intel, ISSCC 2026",
+          "start": 0,
+          "end": 63,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0321",
+      "parent_block_index": 321,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Intel M3DProc Tile Bonding Floorplan. Source: Intel, ISSCC 2026*",
+      "parent_block_plain_text": "Intel M3DProc Tile Bonding Floorplan. Source: Intel, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Intel M3DProc Tile Bonding Floorplan. Source: Intel, ISSCC 2026",
+          "start": 0,
+          "end": 63,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 63,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英特尔 M3DProc 单元键合布局规划图。来源：英特尔，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370516",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Each tile has 552 pads, with just under half used for data, and just under a quarter used for power.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0322",
+      "parent_block_index": 322,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Each tile has 552 pads, with just under half used for data, and just under a quarter used for power.",
+      "parent_block_plain_text": "Each tile has 552 pads, with just under half used for data, and just under a quarter used for power.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 100,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "每个单元拥有552个焊盘，其中略少于一半用于数据传输，略少于四分之一用于供电。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370568",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "In terms of packaging, M3DProc is similar to Clearwater Forest (CWF). CWF has Intel 3 base dies, connected to 18A compute dies via 9μm Foveros Direct.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0323",
+      "parent_block_index": 323,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In terms of packaging, M3DProc is similar to Clearwater Forest (CWF). CWF has Intel 3 base dies, connected to 18A compute dies via 9μm Foveros Direct.",
+      "parent_block_plain_text": "In terms of packaging, M3DProc is similar to Clearwater Forest (CWF). CWF has Intel 3 base dies, connected to 18A compute dies via 9μm Foveros Direct.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 150,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在封装方面，M3DProc 与 Clearwater Forest (CWF) 类似。CWF 采用英特尔 3 工艺的基础芯片，通过9微米间距的 Foveros Direct 技术与 18A 工艺的计算芯片相连。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370611",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "The M3DProc achieves 875 GB/s 3D bandwidth, while each CWF compute die only achieves 210 GB/s. This chip’s 3D NoC has a significantly higher bandwidth density. CWF uses Foveros Direct to disaggregate the CPU core cluster’s L2 cache from the base L3 with 6 clusters per top die at 35GB/s each for 210GB/s per top die. M3DProc’s 875GB/s 3D bandwidth is aggregated over 56 vertical tile connections, or 15.6GB/s each over a far smaller area.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0324",
+      "parent_block_index": 324,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The M3DProc achieves 875 GB/s 3D bandwidth, while each CWF compute die only achieves 210 GB/s. This chip’s 3D NoC has a significantly higher bandwidth density. CWF uses Foveros Direct to disaggregate the CPU core cluster’s L2 cache from the base L3 with 6 clusters per top die at 35GB/s each for 210GB/s per top die. M3DProc’s 875GB/s 3D bandwidth is aggregated over 56 vertical tile connections, or 15.6GB/s each over a far smaller area.",
+      "parent_block_plain_text": "The M3DProc achieves 875 GB/s 3D bandwidth, while each CWF compute die only achieves 210 GB/s. This chip’s 3D NoC has a significantly higher bandwidth density. CWF uses Foveros Direct to disaggregate the CPU core cluster’s L2 cache from the base L3 with 6 clusters per top die at 35GB/s each for 210GB/s per top die. M3DProc’s 875GB/s 3D bandwidth is aggregated over 56 vertical tile connections, or 15.6GB/s each over a far smaller area.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 438,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "M3DProc 实现了 875 GB/s 的 3D 带宽，而每个 CWF 计算芯片仅能实现 210 GB/s。这款芯片的三维片上网络（3D NoC）拥有显著更高的带宽密度。具体而言，CWF 使用 Foveros Direct 技术，通过每个顶部芯片上6个集群（每个集群提供35GB/s的连接带宽）实现了CPU核心集群的L2缓存与基础芯片L3缓存的解耦，每个顶部芯片总带宽为210GB/s。相比之下，M3DProc 的 875GB/s 3D 带宽是通过56个垂直单元连接聚合实现的，每个连接在远小于（CWF方案中）单个连接的占位面积上提供了 15.6GB/s 的带宽。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:01:36.370659",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.785,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且略显生硬。原文中“tiles”在同一段落内被译为“单元”，但“mesh tiles”和“DNN accelerator tiles”的翻译未完全统一，且“网格单元”和“核心单元”的表述在中文语境下不够清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“通过 Foveros Direct 技术进行键合，这是一种间距为 9 微米的混合键合方案。”略显冗长，且“进行键合”是典型的翻译腔。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“SRAM（静态随机存取存储器）在两个芯片之间共享。”存在轻微歧义。原文“shared across both dies”更强调SRAM资源在上下两个芯片（die）构成的整体中是共享的，而非简单的“之间”连接。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“能将延迟降低，并将吞吐量提升近40%”中的“能将”和“并将”稍显书面化，可以更直接有力。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“HBI”在译文中首次出现时未加注英文全称，且中文翻译“混合键合互连”在上下文中略显突兀，因为前文已多次出现“混合键合”。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文逻辑关系存在模糊和可能的误译。原文结构是：CWF使用Foveros Direct做某事（disaggregate...），具体方式是（with...）。译文“将 CPU 核心集群的 L2 缓存与基础芯片上的 L3 缓存解耦，每个顶部芯片包含6个集群，每个集群提供 35GB/s 带宽，总计每个顶部芯片为 210GB/s。”将“with”引导的细节（6集群，每集群35GB/s）处理为对“解耦”结果的补充说明，但原文更可能是指“通过（利用）每个顶部芯片上的6个集群（每个35GB/s）来实现与基础L3的解耦”。译文未明确表达出这35GB/s/集群的带宽是用于连接L2和L3的互连带宽，而非L2缓存本身的带宽。"
+          },
+          {
+            "type": "conciseness",
+            "description": "译文“即每个连接在更小的面积上提供了 15.6GB/s 的带宽。”信息准确，但“在更小的面积上”这个比较对象（比什么小？）在中文中稍显突兀，因为前句未明确提及CWF连接的面积。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

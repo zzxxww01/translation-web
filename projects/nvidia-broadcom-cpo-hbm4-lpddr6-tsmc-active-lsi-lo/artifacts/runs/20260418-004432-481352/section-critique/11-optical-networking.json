@@ -1,0 +1,37 @@
+{
+  "section_id": "11-optical-networking",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.5,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "Several papers from major optics vendors tackled optical interconnects that will carry data between next-generation AI accelerators both within and between datacenters.",
+        "description": "译文句式略显冗余，信息密度可提升。\"该技术将在...传输数据\"的表述稍显拖沓。",
+        "why_it_matters": "科技文章追求信息密度和简洁性，冗余表达会削弱专业感和节奏感。",
+        "suggestion": "可优化为：\"多家主流光学器件供应商的论文聚焦于光学互连技术，该技术将负责在下一代AI加速器之间，以及数据中心内部和之间传输数据。\" 或更简洁：\"多家主流光学器件供应商的论文探讨了光学互连技术，该技术将用于下一代AI加速器之间以及数据中心内外的数据传输。\"",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "both within and between datacenters",
+        "description": "中文表达可以更地道。\"内部和之间\"的并列结构稍显生硬。",
+        "why_it_matters": "使用更符合中文习惯的表述能提升阅读流畅度。",
+        "suggestion": "可将\"数据中心内部和之间\"优化为\"数据中心内部与数据中心之间\"，或更简洁地译为\"数据中心内外\"。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

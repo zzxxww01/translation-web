@@ -39,9 +39,16 @@ def copy_and_rewrite_images(
     if images_dir_path.exists():
         shutil.rmtree(images_dir_path, ignore_errors=True)
 
+    images = list(IMAGE_PATTERN.finditer(markdown))
+    total_count = len(images)
+    logger.info(f"开始处理 {total_count} 张图片")
+
     replacements: dict[str, str] = {}
     counter = 1
-    for match in IMAGE_PATTERN.finditer(markdown):
+    success_count = 0
+    failed_count = 0
+
+    for match in images:
         src = _normalize_src(match.group("src"))
         if src in replacements:
             continue
@@ -53,6 +60,13 @@ def copy_and_rewrite_images(
         replacements[src] = target_rel if copied else src
         if copied:
             counter += 1
+            success_count += 1
+        else:
+            failed_count += 1
+
+    logger.info(
+        f"图片处理完成: 总数={total_count}, 成功={success_count}, 失败={failed_count}"
+    )
 
     def replace(match: re.Match[str]) -> str:
         alt = match.group("alt")

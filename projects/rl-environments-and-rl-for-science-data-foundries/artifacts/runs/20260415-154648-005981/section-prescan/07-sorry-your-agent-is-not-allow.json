@@ -1,0 +1,35 @@
+{
+  "section_id": "07-sorry-your-agent-is-not-allow",
+  "new_terms": [
+    {
+      "term": "Instant Checkout",
+      "suggested_translation": "即时结账",
+      "context": "OpenAI推出的购物功能",
+      "confidence": 0.9
+    },
+    {
+      "term": "RL as a service",
+      "suggested_translation": "强化学习即服务",
+      "context": "提供强化学习服务的商业模式",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "agents": "智能体",
+    "openai": "OpenAI",
+    "amazon": "亚马逊",
+    "chatgpt agent": "ChatGPT智能体",
+    "nova": "Nova",
+    "rufus": "Rufus",
+    "google": "谷歌",
+    "meta": "Meta",
+    "microsoft": "微软",
+    "x": "X",
+    "shopify": "Shopify",
+    "etsy": "Etsy",
+    "gpt-5": "GPT-5"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:49:01.892353"
+}

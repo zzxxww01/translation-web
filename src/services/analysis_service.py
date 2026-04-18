@@ -39,7 +39,7 @@ class AnalysisService:
 
         preview_content = content[:8000]
         prompt = self._build_project_prompt(preview_content)
-        response_text = generate_with_fallback(prompt)
+        response_text = generate_with_fallback(prompt, task_type="analysis")
         data = parse_llm_json_response(response_text)
 
         # Persist analysis result
@@ -68,7 +68,7 @@ class AnalysisService:
             content = file.read()
 
         prompt = self._build_section_prompt(content[:5000])
-        response_text = generate_with_fallback(prompt)
+        response_text = generate_with_fallback(prompt, task_type="analysis")
         data = parse_llm_json_response(response_text)
 
         # Persist analysis result

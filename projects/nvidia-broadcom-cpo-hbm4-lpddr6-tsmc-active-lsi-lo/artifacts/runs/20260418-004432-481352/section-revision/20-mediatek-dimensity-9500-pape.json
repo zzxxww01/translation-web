@@ -1,0 +1,26 @@
+{
+  "section_id": "20-mediatek-dimensity-9500-pape",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.275,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.5,
+      "terminology": 7.0,
+      "completeness": 8.5,
+      "style": 2.5
+    },
+    "failed_criteria": [
+      "critical_errors (3 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "联发科每年都会展示其旗舰移动CPU（中央处理器）的不同方面。今年也不例外，其移动CPU演示的重点在于性能提升与热管理。",
+    "https://substackcdn.com/image/fetch/$s_!G7l7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29b40070-6df4-435c-9621-f7837da8602f_2880x1620.jpeg",
+    "联发科天玑9500 C1 Ultra核心工艺优化。来源：联发科，ISSCC 2026",
+    "台积电为其N3E和N3P工艺提供了两种不同的接触栅极间距（Contacted Gate Pitch, CGP）选项：48纳米和54纳米。在大多数芯片中，都采用了更窄的48纳米CGP，因为这能带来更小的单元尺寸和更大的芯片面积缩减。然而，由于关键尺寸更小，它也会带来漏电、布线和制造方面的问题。",
+    "联发科在其天玑9500的C1 Ultra高性能核心上采用了更大的54纳米CGP，以提升能效。这使其能在更低的热量惩罚下达到更高性能，具体表现为同漏电下性能提升4.6%，或同性能下功耗降低3%。",
+    "联发科论文的其余部分重点阐述了如何利用未使用的老化余量和减少热过冲，来实现动态性能优化。总体而言，他们成功将提升时钟频率从4.21 GHz提高到了4.4 GHz。如果您对这些优化技术感兴趣，我们推荐您查阅这篇论文：10.2 一款基于3nm-Plus工艺的移动CPU中的动态性能增强技术。"
+  ]
+}

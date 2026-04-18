@@ -1,0 +1,24 @@
+{
+  "section_id": "06-llm-based-automation-is-not-a",
+  "new_terms": [
+    {
+      "term": "GDPval",
+      "suggested_translation": "GDPval",
+      "context": "OpenAI的研究报告名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "white collar work",
+      "suggested_translation": "白领工作",
+      "context": "指知识型、专业型工作",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "data foundries": "数据代工厂",
+    "computer use environments": "计算机操作环境"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:48:49.396722"
+}

@@ -1,0 +1,17 @@
+{
+  "section_id": "01-memory",
+  "new_terms": [],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm4": "HBM4",
+    "lpddr6": "LPDDR6",
+    "gddr7": "GDDR7",
+    "samsung": "三星",
+    "sk hynix": "SK海力士",
+    "dram": "DRAM",
+    "sram": "SRAM",
+    "mram": "MRAM"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:31:20.650862"
+}

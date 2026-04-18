@@ -1,0 +1,61 @@
+{
+  "section_id": "14-broadcom-6-4t-optical-engine",
+  "reflection": {
+    "overall_score": 9.0,
+    "readability_score": 8.8,
+    "accuracy_score": 9.5,
+    "conciseness_score": 8.5,
+    "is_excellent": true,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "MZM optical engine (OE)",
+        "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。",
+        "why_it_matters": "原文在首次出现时对“MZM”和“OE”都进行了括号解释，译文只解释了“MZM”，而“OE”作为本段核心概念，其全称“光学引擎”在首次出现时未与英文缩写明确关联。",
+        "suggestion": "建议调整为：“博通展示了其 6.4T MZM（马赫-曾德尔调制器）光学引擎的进展。该光学引擎（Optical Engine, OE）由 64 条通道组成...” 或在首次出现“光学引擎”时直接加注“（Optical Engine, OE）”。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "high",
+        "original_text": "The optical engines were tested in a Tomahawk 5 51.2T CPO system.",
+        "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。",
+        "why_it_matters": "“这些光学引擎”指代前文“其...光学引擎”，但前文主语是“博通”，指代跳跃。同时，“进行了测试”是典型的“进行+动词”结构，可以优化得更直接。",
+        "suggestion": "建议调整为：“该光学引擎在博通的 Tomahawk 5 51.2T CPO（共封装光学）系统中接受了测试。” 或 “博通在 Tomahawk 5 51.2T CPO 系统中对该光学引擎进行了测试。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "each with a PIC and an EIC, on TSMC’s N7 process.",
+        "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。",
+        "why_it_matters": "原文“on TSMC’s N7 process”修饰的是“each with a PIC and an EIC”，即每个引擎的芯片制造工艺。中文将工艺描述放在句末，可能被误解为修饰整个封装过程。",
+        "suggestion": "建议调整语序，使工艺归属更明确：“每个引擎均包含一个光子集成电路（PIC）和一个电子集成电路（EIC），二者均采用台积电 N7 工艺制造。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "tone",
+        "severity": "low",
+        "original_text": "Here are the promising results from their demonstration:",
+        "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。",
+        "why_it_matters": "“promising”一词在此语境下，不仅指结果本身不错，也暗示了这些结果是其技术路线的有力证明，带有一定的积极评价色彩。",
+        "suggestion": "可以译为“其演示取得了颇具前景的成果：”或“以下是其演示中展示的积极成果：”，以增强与下文数据图表的衔接力度。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

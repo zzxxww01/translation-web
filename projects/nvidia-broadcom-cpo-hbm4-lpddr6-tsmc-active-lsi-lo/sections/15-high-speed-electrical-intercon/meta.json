@@ -1,0 +1,79 @@
+{
+  "section_id": "15-high-speed-electrical-intercon",
+  "title": "High-Speed Electrical Interconnects",
+  "title_translation": "High-Speed Electrical Interconnects",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "As multi-die designs become the norm, die-to-die interconnects are a critical bottleneck. Major foundries and chip designers presented approaches to pushing bandwidth density and energy efficiency on both organic substrates and with advanced packaging.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0250",
+      "parent_block_index": 250,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As multi-die designs become the norm, die-to-die interconnects are a critical bottleneck. Major foundries and chip designers presented approaches to pushing bandwidth density and energy efficiency on both organic substrates and with advanced packaging.",
+      "parent_block_plain_text": "As multi-die designs become the norm, die-to-die interconnects are a critical bottleneck. Major foundries and chip designers presented approaches to pushing bandwidth density and energy efficiency on both organic substrates and with advanced packaging.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 252,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着多裸片设计成为常态，裸片间互连已成为关键瓶颈。各大晶圆代工厂和芯片设计公司提出了多种方案，力求在有机基板和先进封装技术上同时提升带宽密度与能效。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:37:56.692422",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文句式略显生硬，存在‘在...上’和‘通过...’的并列结构，可以优化得更流畅。"
+          },
+          {
+            "type": "readability",
+            "description": "‘已成为一个关键瓶颈’中的‘一个’略显冗余，可以省略以增强力度。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

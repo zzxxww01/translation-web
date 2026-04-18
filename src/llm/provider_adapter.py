@@ -8,15 +8,67 @@ LLM Provider 工厂适配器
 """
 
 import logging
+import uuid
 from typing import Optional, Any, Dict
 from functools import lru_cache
 
 from .config_loader import get_config_loader
-from .config_models import ProviderConfig, ModelConfig, APIKeyConfig
+from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, ProviderNetworkConfig
 from .fallback_strategy import FallbackStrategy, AttemptPlan
 from .base import LLMProvider
+from .errors import LLMProxyConfigurationError
+from .network_policy import build_network_policy
+from .network_policy import RuntimeNetworkPolicy
 
 logger = logging.getLogger(__name__)
+
+
+def _build_runtime_network_policy(
+    provider_type: str,
+    network_config: Optional[ProviderNetworkConfig],
+) -> Optional[RuntimeNetworkPolicy]:
+    provider_type = provider_type.strip().lower()
+
+    if network_config is None:
+        try:
+            provider = get_config_loader().get_primary_provider_by_type(provider_type)
+        except Exception:
+            provider = None
+        if provider is not None:
+            network_config = provider.network
+
+    if network_config is not None:
+        try:
+            return build_network_policy(provider_type, network_config)
+        except ValueError as exc:
+            raise LLMProxyConfigurationError(str(exc)) from exc
+
+    return None
+
+
+def _build_provider_runtime_kwargs(
+    provider_config: ProviderConfig,
+    model_config: ModelConfig,
+) -> Dict[str, Any]:
+    model_timeout = None
+    model_runtime_config = getattr(model_config, "config", None)
+    if isinstance(model_runtime_config, dict):
+        model_timeout = model_runtime_config.get("timeout")
+
+    if provider_config.type == "gemini":
+        return {
+            "request_timeout": model_timeout,
+            "max_attempts": provider_config.retry_config.max_retries,
+            "retry_delay": provider_config.retry_config.base_delay,
+        }
+
+    if provider_config.type == "vectorengine":
+        return {
+            "timeout": model_timeout,
+            "max_retries": provider_config.retry_config.max_retries,
+        }
+
+    return {}
 
 
 class ProviderAdapter:
@@ -57,16 +109,22 @@ class ProviderAdapter:
         provider_config = attempt.provider
         model_config = attempt.model
         api_key = attempt.api_key.key
+        network_policy = _build_runtime_network_policy(
+            provider_config.type, provider_config.network
+        )
+        provider_runtime_kwargs = _build_provider_runtime_kwargs(
+            provider_config, model_config
+        )
 
         # 根据 provider type 创建对应的 Provider
         if provider_config.type == "gemini":
             from .gemini import GeminiProvider
 
             return GeminiProvider(
-                primary_key=api_key,
+                api_key=api_key,
                 model=model_config.real_model,
-                timeout=model_config.config.get("timeout", 120),
-                max_retries=provider_config.retry_config.max_retries,
+                network_policy=network_policy,
+                **provider_runtime_kwargs,
             )
 
         elif provider_config.type == "vectorengine":
@@ -76,6 +134,8 @@ class ProviderAdapter:
                 api_key=api_key,
                 base_url=provider_config.base_url,
                 model=model_config.real_model,
+                network_policy=network_policy,
+                **provider_runtime_kwargs,
             )
 
         else:
@@ -104,11 +164,15 @@ class ProviderAdapter:
             Exception: 所有尝试都失败时抛出最后一个异常
         """
         last_error = None
+        provider_kwargs = dict(kwargs)
+        timeout = provider_kwargs.pop("timeout", None)
+        request_id = str(provider_kwargs.pop("request_id", "") or uuid.uuid4().hex[:8])
 
         for idx, attempt in enumerate(self.attempt_plan, 1):
             try:
                 logger.info(
-                    f"[ProviderAdapter] Attempt {idx}/{len(self.attempt_plan)}: "
+                    f"[ProviderAdapter] request_id={request_id} "
+                    f"Attempt {idx}/{len(self.attempt_plan)}: "
                     f"provider={attempt.provider.provider_id}, "
                     f"model={attempt.model.alias}, "
                     f"key={attempt.api_key.name}"
@@ -119,19 +183,22 @@ class ProviderAdapter:
                     prompt=prompt,
                     response_format=response_format,
                     temperature=temperature,
+                    timeout=timeout,
                     model=attempt.model.real_model,
-                    **kwargs,
+                    **provider_kwargs,
                 )
 
                 logger.info(
-                    f"[ProviderAdapter] Success on attempt {idx}/{len(self.attempt_plan)}"
+                    f"[ProviderAdapter] request_id={request_id} "
+                    f"Success on attempt {idx}/{len(self.attempt_plan)}"
                 )
                 return result
 
             except Exception as e:
                 last_error = e
                 logger.warning(
-                    f"[ProviderAdapter] Attempt {idx}/{len(self.attempt_plan)} failed: {type(e).__name__}: {e}"
+                    f"[ProviderAdapter] request_id={request_id} "
+                    f"Attempt {idx}/{len(self.attempt_plan)} failed: {type(e).__name__}: {e}"
                 )
 
                 # 如果还有更多尝试，继续
@@ -140,7 +207,8 @@ class ProviderAdapter:
                 else:
                     # 所有尝试都失败了
                     logger.error(
-                        f"[ProviderAdapter] All {len(self.attempt_plan)} attempts failed for model {self.model_alias}"
+                        f"[ProviderAdapter] request_id={request_id} "
+                        f"All {len(self.attempt_plan)} attempts failed for model {self.model_alias}"
                     )
                     raise last_error
 
@@ -188,15 +256,23 @@ def create_provider_from_config(model_alias: str) -> LLMProvider:
     if not api_key:
         raise ValueError(f"No valid API key for model {model_alias}")
 
+    network_policy = _build_runtime_network_policy(
+        provider_config.type,
+        provider_config.network,
+    )
+    provider_runtime_kwargs = _build_provider_runtime_kwargs(
+        provider_config, model_config
+    )
+
     # 根据 provider type 创建对应的 Provider
     if provider_config.type == "gemini":
         from .gemini import GeminiProvider
 
         return GeminiProvider(
-            primary_key=api_key,
+            api_key=api_key,
             model=model_config.real_model,
-            timeout=model_config.config.get("timeout", 120),
-            max_retries=provider_config.retry_config.max_retries,
+            network_policy=network_policy,
+            **provider_runtime_kwargs,
         )
 
     elif provider_config.type == "vectorengine":
@@ -206,6 +282,8 @@ def create_provider_from_config(model_alias: str) -> LLMProvider:
             api_key=api_key,
             base_url=provider_config.base_url,
             model=model_config.real_model,
+            network_policy=network_policy,
+            **provider_runtime_kwargs,
         )
 
     else:

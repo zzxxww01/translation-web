@@ -10,6 +10,7 @@ interface SlackWorkspaceState {
   draftVersions: SlackReplyVariant[];
   conversationMessages: ConversationMessage[];
   isHistoryCollapsed: boolean;
+  selectedModel: string;
   setIncomingText: (value: string) => void;
   setIncomingResult: (translation: string, suggestions: SlackReplyVariant[]) => void;
   clearIncoming: () => void;
@@ -22,6 +23,7 @@ interface SlackWorkspaceState {
   updateMessage: (id: string, content: string) => void;
   clearConversation: () => void;
   toggleHistoryCollapse: () => void;
+  setSelectedModel: (model: string) => void;
   reset: () => void;
 }
 
@@ -33,6 +35,7 @@ const initialState = {
   draftVersions: [],
   conversationMessages: [],
   isHistoryCollapsed: false,
+  selectedModel: '',
 };
 
 export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
@@ -105,6 +108,7 @@ export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
         clearConversation: () => set({ conversationMessages: [] }),
         toggleHistoryCollapse: () =>
           set(state => ({ isHistoryCollapsed: !state.isHistoryCollapsed })),
+        setSelectedModel: model => set({ selectedModel: model }),
         reset: () => set(initialState),
       }),
       {

@@ -27,12 +27,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "环境工具之所以普遍有用，是因为各类环境正在众多领域涌现：芯片设计环境能让模型辅助设计流程；会计环境用于处理税务；还有用于医疗工作流的电子健康记录(EHR)软件。这些都只是少数例子。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908164",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +131,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "虽然软件工程师构建环境本身，但工作流程通常由参与环境创建过程的特定领域承包商来创建、描述和评级。金融专业人士帮助定义金融任务，医生负责医疗领域，律师负责法律领域，等等。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908236",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +235,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "实验室会通过人类数据承包商公司（我们稍后会谈到）来运作，这些公司会参与进来，为特定任务的创建提供意见。合同通常至少持续一个季度，可以是兼职或全职。承包商负责设计任务、撰写预期解决方案、指定奖励信号，在某些情况下，还会对模型解决方案进行评级。这些奖励信号可以表现为评分准则(rubrics)，准则的撰写也可能涉及承包商或严格的验证器。这类专家正是会被聘请来帮助构建像 GDPval（一种评估基准）这类评估的。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908268",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +339,84 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!lCmR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e8dce0-9fc7-4835-bd97-ac730132e885_1880x802.png",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908297",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!lCmR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e8dce0-9fc7-4835-bd97-ac730132e885_1880x802.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -170,19 +458,91 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "OpenAI的数据处理流程。OpenAI拥有一个名为Feather的私有内部平台，供承包商使用，数据通过该平台进行处理。图片来源：OpenAI",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908409",
+          "tokenized_text": "[[[EM_1|OpenAI的数据处理流程。OpenAI拥有一个名为Feather的私有内部平台，供承包商使用，数据通过该平台进行处理。图片来源：OpenAI]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -209,12 +569,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "像 Mercor、Handshake、Surge 和 Aboda.ai 这样的公司被用来跨众多专业领域雇佣这些专家。Surge 是其中更成熟、规模更大的参与者，据我们分析，其年度经常性收入(ARR)已接近10亿美元。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908445",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -241,12 +673,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这些公司大多最初是AI面试官或职位匹配公司，但最终发现，充当实验室与承包商专家之间的连接器更有价值。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908476",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -273,12 +777,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "编码领域的需求量最大，但在非专业领域如摄影、音乐和设计上的支出也已增加。如前所述，实验室不仅希望增加他们在特定领域进行后期训练的任务数量，还希望扩展任务的广度和多样性。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908504",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -305,12 +881,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这些供应商的营收主要集中于Anthropic、OpenAI和Google等西方实验室。然而，我们认为Surge在国际上也相当活跃，向月之暗面和Z.ai等中国实验室销售服务。事实上，我们认为，能否获取这些强化学习环境，是Kimi K2 Thinking和GLM-4.6能力得以大幅提升的关键因素。当公司在宣传其制作PowerPoint演示文稿或Excel表格的能力有所提升时，这直接源于额外的强化学习训练。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908531",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -337,12 +985,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "中国的风险投资机构正积极扶持本土的数据代工厂竞争者，旨在以低于西方供应商的价格，全面服务本地生态系统。目前，大多数中国实验室在扩展强化学习方面仍处于早期阶段——例如，通义千问仅将约5%的预训练算力用于后训练。若能成功培育本土数据代工厂业务，将在算力允许的前提下，极大加速整个生态向强化学习范式的转型。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908557",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -369,12 +1089,84 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qotS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70e2bbd2-5bd8-4410-aace-24fef73f4e63_1606x1003.png",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908585",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!qotS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70e2bbd2-5bd8-4410-aace-24fef73f4e63_1606x1003.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -408,13 +1200,84 @@
           "created_at": "2026-04-10T22:52:40.341978",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Aboda.ai, SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908612",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：Aboda.ai，SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -441,12 +1304,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在上述案例中，承包商提供包含解释说明的完整解决方案。承包商也可以对模型输出进行评分，并提供错误反馈。这些数据可以以任何语言获取，并在需要时由另一个模型进行翻译。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908650",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -473,12 +1408,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "像Mercor这样的公司也是大量评分标准的生产者，这些标准可用于多种不同领域。目前，大多数评分标准仍由人工撰写，不过也有一些公司，例如The LLM Data Company，正尝试让模型来撰写评分标准。这可以通过例如将高性能模型连接到高度可靠的MCP（Model Context Protocol，模型上下文协议）来提取信息，进而用于构建结构化的评分准则。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908678",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -505,12 +1512,84 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!GqlC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0265b727-8cc7-4774-98f9-023dea365b99_1493x1744.png",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908706",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!GqlC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0265b727-8cc7-4774-98f9-023dea365b99_1493x1744.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -552,19 +1631,91 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "LLM生成的评分标准。来源：The LLM Data Company",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908787",
+          "tokenized_text": "[[[EM_1|LLM生成的评分标准。来源：The LLM Data Company]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -591,12 +1742,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "我们认为这种方法蕴藏着显著的价值提升空间，尽管目前AI实验室主要专注于消费人类生成的数据。长远来看，随着模型性能的提升，其可靠性和质量都将得到改善。如前所述，所有实验室都在追求AI自动化的AI研究。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908819",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -638,19 +1861,91 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "鉴于选项的多样性，理解数据采购决策对于制定实验室战略至关重要。这种范式与预训练阶段不同，那时所有人都能获取相同的数据。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:22:40.908896",
+          "tokenized_text": "鉴于选项的多样性，理解数据采购决策对于制定实验室战略至关重要。这种范式[[[LINK_1|与预训练阶段不同，那时所有人都能获取相同的数据]]]。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.29,
+        "is_excellent": false,
+        "applied_terms": [
+          "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+          "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+          "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+          "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+          "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+          "key_points": [
+            "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+            "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+            "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+          ],
+          "translation_notes": [
+            "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+            "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+            "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构略显松散，并列项之间的逻辑层次和节奏感可以优化，以更贴近原文紧凑、举例式的分析口吻。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'rubrics' 译为'评分量表'是可行的，但在AI评估领域，'评估标准'或'评分准则'可能更常用。'GDPval' 是首次出现，建议加注英文。"
+          },
+          {
+            "type": "accuracy",
+            "description": "'we believe' 的翻译'我们相信'语气略显主观和不确定。在分析师语境中，这通常代表基于调研的判断，可选用更坚定或更符合行业报告语气的措辞。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文是 'access to these RL environments played a huge part in increasing the capabilities for...'。译文'获取这些强化学习环境'是准确的，但'发挥了巨大作用'的表述稍显平淡，未能完全传达 'played a huge part' 所暗示的关键性、决定性作用。"
+          },
+          {
+            "type": "readability",
+            "description": "段落内部逻辑衔接可以更紧密。'例如'引出的具体例子与前后句的概括性论述之间，转折略显生硬。最后一句的'当然'让步，削弱了前文论断的连贯性。"
+          },
+          {
+            "type": "terminology",
+            "description": "'MCP' 是首次出现且未在提供的术语表中。根据上下文（连接模型以提取信息），'MCP' 很可能指 'Model Context Protocol'（模型上下文协议），这是一种让模型与工具/数据源交互的协议。译为'模型控制协议'可能不准确。"
+          },
+          {
+            "type": "tone",
+            "description": "'具有巨大的潜力' 表述稍显通用和保守。原文 'significant upside' 在商业/投资语境中更强调“上行空间”、“增值潜力”，带有更明确的机遇和回报预期。"
+          }
+        ]
+      },
       "history": []
     }
   ]

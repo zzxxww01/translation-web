@@ -1,0 +1,36 @@
+{
+  "section_id": "09-rl-for-science",
+  "new_terms": [
+    {
+      "term": "Periodic Labs",
+      "suggested_translation": "Periodic Labs（公司名）",
+      "context": "AI科研公司",
+      "confidence": 0.9
+    },
+    {
+      "term": "closed-loop RL system",
+      "suggested_translation": "闭环强化学习系统",
+      "context": "科研自动化流程",
+      "confidence": 0.9
+    },
+    {
+      "term": "mid-training",
+      "suggested_translation": "中期训练",
+      "context": "模型训练阶段",
+      "confidence": 0.8
+    },
+    {
+      "term": "rollouts",
+      "suggested_translation": "轨迹推演",
+      "context": "RL数据收集",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "llms": "LLM",
+    "rl system": "强化学习系统"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T19:57:20.353345"
+}

@@ -11,13 +11,11 @@ import logging
 from functools import lru_cache
 
 from ...llm.base import LLMProvider
-from ...llm.factory import create_llm_provider, get_llm_provider_for_task
+from ...llm.factory import create_llm_provider, get_task_model_alias
+from ...llm.provider_adapter import get_provider_adapter
 
 
 logger = logging.getLogger(__name__)
-
-# Flag to enable故障转移 (fallback) mechanism
-USE_FALLBACK_STRATEGY = True
 
 
 @lru_cache(maxsize=8)
@@ -53,27 +51,17 @@ def generate_with_fallback(
     Raises:
         Exception: If all fallback attempts fail
     """
-    # Determine which model to use
-    target_model = model
-
+    target_model = model or get_task_model_alias(task_type)
     if not target_model:
-        # Use task-specific default
-        provider = get_llm_provider_for_task(task_type)
-        return provider.generate(prompt, timeout=timeout, **kwargs)
+        raise ValueError(f"No model alias could be resolved for task_type={task_type!r}")
 
-    # Use fallback strategy if enabled
-    if USE_FALLBACK_STRATEGY:
-        try:
-            from ...llm.provider_adapter import get_provider_adapter
-
-            adapter = get_provider_adapter(target_model)
-            return adapter.generate_with_fallback(
-                prompt=prompt,
-                **kwargs
-            )
-        except Exception as e:
-            logger.warning(f"[LLM Factory] Fallback strategy failed: {e}, using legacy method")
-
-    # Legacy method: single provider
-    provider = create_llm_provider(target_model)
-    return provider.generate(prompt, model=target_model, timeout=timeout, **kwargs)
+    try:
+        adapter = get_provider_adapter(target_model)
+        return adapter.generate_with_fallback(
+            prompt=prompt,
+            timeout=timeout,
+            **kwargs,
+        )
+    except Exception as e:
+        logger.warning(f"[LLM Factory] Adapter routing failed for model={target_model}: {e}")
+        raise

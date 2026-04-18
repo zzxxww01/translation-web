@@ -1,0 +1,323 @@
+{
+  "section_id": "12-multi-agent-architectures-gpt",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "12-multi-agent-architectures-gpt",
+    "section_title": "Multi agent architectures: GPT-5.2 Pro, Gemini Deep Think, Grok Heavy, Claude",
+    "section_title_translation": "多智能体架构：GPT-5.2 Pro、Gemini Deep Think、Grok Heavy 与 Claude",
+    "section_position": "13/13",
+    "article_theme": "The AI industry's paradigm shift from pre-training data aggregation to Reinforcement Learning (RL) scaling, which is driving massive demand for specialized RL environments, expert data foundries, and multi-agent architectures.",
+    "structure_summary": "The article opens by introducing the shift toward RL and the resulting gap left by Scale AI. It then dives technically into how RL environments (specifically coding) are built. The narrative transitions to the business side—data foundries, procurement patterns, and 'RL as a service'. Finally, it explores the application of RL in scientific domains (biology) and concludes with a forward-looking perspective on multi-agent architectures.",
+    "target_audience": "AI researchers, ML engineers, tech investors, and industry strategists.",
+    "translation_voice": "Professional tech-business analyst. The Chinese should be concise, objective, and use precise industry jargon without sounding purely academic. Maintain the punchy, insider tone typical of SemiAnalysis.",
+    "previous_section_title": "Why RL for Biology Can be Challenging",
+    "next_section_title": "",
+    "section_role": "待分析",
+    "translation_notes": [],
+    "key_points": [],
+    "guidelines": [
+      "Preserve Semantic Density: Do not over-explain technical terms in the main text; rely on the terminology list. Readers are assumed to be industry insiders.",
+      "Sentence Restructuring: SemiAnalysis often uses long, clause-heavy sentences (e.g., explaining the test patch process). Break these down into shorter, logical Chinese sequences (e.g., using '首先...其次...最后...' or semicolons) to ensure natural paragraph flow.",
+      "Domain Consistency: Pay strict attention to RL terminology. 'Rollouts' must be translated as '轨迹推演', 'Sparse rewards' as '稀疏奖励', and 'Mid-training' as '中期训练'. Do not use general software or business translations for these.",
+      "Company Names: Keep all AI startup and lab names in English (e.g., Scale AI, Windsurf, Cursor, Anthropic, Qwen, Surge).",
+      "Tone Match: Emulate the 'insider analyst' voice. Use sharp, professional business-tech phrasing (e.g., '采购模式' for buying patterns, '防御性姿态' for defensive posturing).",
+      "Title Translation: Ensure all elements of the original title are translated without dropping keywords. 'Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data' -> '扩展强化学习：环境、奖励劫持、智能体与数据扩展'."
+    ],
+    "article_challenges": [
+      {
+        "location": "Heading: During a Gold Rush, Sell Shovels.",
+        "issue": "Classic business metaphor that needs natural phrasing in Chinese.",
+        "suggestion": "Translate as '淘金热中卖铲子'. The meaning is universally understood in Chinese tech/business circles.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Section: Why RL for Biology Can be Challenging",
+        "issue": "The word 'rollouts' in RL means executing a policy to gather trajectory data, not launching a product.",
+        "suggestion": "Translate as '轨迹推演' or '长序列推演' and add a brief translator note if necessary to distinguish from software rollouts.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Section: So You Want to Make a Coding Environment?",
+        "issue": "Long procedural sentence detailing the PR test patch process ('A task is considered valid only if...').",
+        "suggestion": "Break into a bulleted or logically sequenced Chinese sentence (e.g., '一个任务只有满足以下条件才算有效：首先...；其次...；最后...').",
+        "type": "accuracy"
+      },
+      {
+        "location": "Heading: Sorry, your agent is not allowed",
+        "issue": "Casual, slightly sarcastic tone reflecting platform API blocking.",
+        "suggestion": "Maintain the conversational tone: '抱歉，您的智能体被禁了' or '对不起，此地禁止智能体入内'.",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "RL (Reinforcement Learning)",
+        "term": "RL (Reinforcement Learning)",
+        "translation": "强化学习",
+        "strategy": "translate",
+        "note": "A machine learning training method based on rewarding desired behaviors, central to the article's scaling thesis.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Data Foundries",
+        "term": "Data Foundries",
+        "translation": "数据代工厂",
+        "strategy": "translate",
+        "note": "Companies that produce highly specialized, expert-level data for AI training, analogous to semiconductor foundries.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Computer use environments",
+        "term": "Computer use environments",
+        "translation": "计算机操作环境",
+        "strategy": "translate",
+        "note": "Simulated or real operating system environments where AI agents learn to interact with computers like humans.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Mid-Training",
+        "term": "Mid-Training",
+        "translation": "中期训练",
+        "strategy": "translate",
+        "note": "Continued pre-training (next token prediction) used to extend cutoff dates or improve domain knowledge before RL.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Rollouts",
+        "term": "Rollouts",
+        "translation": "轨迹推演",
+        "strategy": "translate",
+        "note": "In RL, the process of generating a sequence of states and actions (trajectories) by running a policy in an environment.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Sparse rewards",
+        "term": "Sparse rewards",
+        "translation": "稀疏奖励",
+        "strategy": "translate",
+        "note": "A challenge in RL where the feedback/reward is only given after a long sequence of actions.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Wet Lab",
+        "term": "Wet Lab",
+        "translation": "湿实验室",
+        "strategy": "translate",
+        "note": "Laboratories where chemicals, drugs, or other biological matter are handled in liquid solutions.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Execution-based verification",
+        "term": "Execution-based verification",
+        "translation": "基于执行的验证",
+        "strategy": "translate",
+        "note": "Validating AI-generated code by actually running it against test suites rather than just reading it.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Reward Hacking",
+        "term": "Reward Hacking",
+        "translation": "奖励劫持",
+        "strategy": "translate",
+        "note": "When an AI system finds a loophole to get high rewards without actually completing the intended task.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "待分析",
+    "relation_to_previous": "",
+    "relation_to_next": "",
+    "key_points": [],
+    "translation_notes": []
+  },
+  "translations": [
+    "一个具备扩展潜力的成熟领域，是将不同模型结合起来，共同为单一问题协同思考。从高层次看，Grok 4 Heavy、Gemini Deep Think 和 GPT-5 Pro 正是这样运作的。",
+    "https://substackcdn.com/image/fetch/$s_!zfNX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99c932f8-16e6-41c1-979d-4fecbe893678_1012x717.png",
+    "来源：xAI",
+    "在实践中，具体细节可能有所不同。例如，汇总不同智能体的答案可以采用基础方法，如选择最常见答案；也可以让模型之间相互商议后选定一个；或者让一个独立的模型阅读所有答案后再做选择。我们预计，许多即将推出的产品将采用更复杂的多智能体架构。",
+    "此类系统中首个成为主流的是谷歌的 AlphaEvolve，它将多个不同角色下的智能体锁定在一个循环中。该实例的整体架构包含：采样模型，用于从包含先前已发现问题解决方案的数据库中组装提示；集成模型，用于生成新的改进方案；以及验证系统，用于核实答案。",
+    "这些组件被串联在一个进化循环中，其输出结果持续由验证器检查。当针对特定问题的解决方案取得超越当前最优水平的特定改进后，或者当额外循环带来的收益递减时，该循环即告终止。",
+    "https://substackcdn.com/image/fetch/$s_!gQcy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67410dcd-d8ca-42d6-a63b-07d6ca923eb6_878x695.png",
+    "来源：AlphaEvolve, Google",
+    "自那时起，多种不同的架构相继涌现，其中一些专门针对特定的评估任务。例如，研究员 Jeremy Brennan 利用一个基于 Grok 4 构建的多智能体架构，在 ARC-AGI 上取得了创纪录的成绩。其实际方法相当简单：首先，Grok 4 为每项任务生成指令；随后，每条指令被分配给另一个智能体，该智能体在训练样本上测试这些指令。如果出现完美解决方案，则将其锁定并应用于预留的测试网格；否则，指令将进入迭代优化循环。",
+    "https://substackcdn.com/image/fetch/$s_!8kGI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F662d0269-0b70-451e-b252-2c3b1d96a4c2_937x611.jpeg",
+    "来源：Jeremy 提交时的 ARC-AGI 排行榜。",
+    "另一些架构则仅使用子智能体。例如，在一个案例中，4 个独立的 o4-mini 子智能体在现有的生产级 SGLang 内核上平均实现了 1.3 倍的加速。具体而言，首先从 SGLang 中提取现有的 CUDA 内核并将其隔离，以便能够独立评估；随后，这些内核在四个智能体之间进行循环处理：第一个智能体执行测试，以通过或失败为基础验证内核；第二个智能体进行详细性能剖析，以识别性能差异；第三个智能体规划针对性编辑；而第四个智能体则负责实施这些编辑。",
+    "https://substackcdn.com/image/fetch/$s_!DD3G!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45e34ae7-126b-4c3b-ab59-3675c36c5e3b_1258x603.png",
+    "来源：Wei et al.",
+    "值得注意的是，这并不必然要求模型能力本身的提升。尽管推理成本显著增加，但这些智能体所能解决问题的价值，远高于运行它们的成本。在科学计算和代码生成等领域，这一点尤其明显。",
+    "有些方法甚至报告了任务成本的降低，例如递归语言模型。在此类模型中，一个编排器在整个任务过程中递归调用其他模型。这些系统在长上下文评估中表现出极高的性能，因为上下文可以巧妙地分配给子智能体和编排器共同处理。",
+    "OpenAI 正在积极探索自博弈等理念，并将 AlphaGo 的原理引入 LLM；我们认为他们是这一特定领域的领导者。AlphaGo 的独特之处在于，它通过自我对弈而非与人类对弈，在象棋和围棋上实现了超人的性能。",
+    "当前的 LLM 系统还相当初级，原则上与在单一循环中运行的模型并无本质区别。但这在实践中已足够强大：Claude Code 作为一款年经常性收入达十亿美元的产品，其核心很大程度上就源于将简单理念组合成更自主智能体的思路。然而，重要的是展望当更复杂的多智能体协作投入生产时，系统将展现出何种能力。",
+    "改进的智能体协作架构同样将释放 LLM 处理越来越大型项目的能力。从原理上讲，这与人类能够通过团队协作完成比个人单独工作更庞大的项目并无太大不同。"
+  ]
+}

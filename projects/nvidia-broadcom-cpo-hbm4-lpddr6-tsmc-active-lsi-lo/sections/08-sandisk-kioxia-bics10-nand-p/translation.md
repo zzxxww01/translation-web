@@ -1,0 +1,27 @@
+闪迪（SanDisk）与铠侠（Kioxia）展示了其BiCS10 NAND闪存，该产品拥有332层，由3个栈（deck）构成。其位密度达到37.6 Gb/mm²，是目前公开报告中的最高纪录，超越了此前保持领先的SK海力士321层V9 NAND。
+
+https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9f240c14-4a4f-4fab-bc19-194185a47c6b_2880x1620.jpeg
+
+BiCS10芯片显微照片及其与SK海力士、三星V9的密度对比。来源：闪迪/铠侠，ISSCC 2026
+
+尽管采用了相似的架构（6个平面、3个堆叠结构，且层数相近），SK海力士的位密度却落后了30%。在QLC（四层单元）配置下，BiCS10的位密度为37.6 Gb/mm²，而SK海力士V9仅为28.8 Gb/mm²。在TLC（三层单元）配置下，两者的密度分别为29 Gb/mm²和21 Gb/mm²，这进一步凸显了SK海力士在密度上的差距。
+
+https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6701cf01-e5c3-4aeb-87e6-ab7e99222f7d_2880x1620.jpeg
+
+NAND闪存1×6与2×3平面配置对比。来源：闪迪/铠侠，ISSCC 2026
+
+此外，BiCS10采用了6平面配置，使其输入/输出（IO）带宽提升了50%。实现6平面配置有两种方式：1×6和2×3。SK海力士选择了2×3配置，而闪迪和铠侠则决定采用1×6配置。
+
+1×6配置的地线焊盘数量更少，能使芯片面积减少2.1%。然而，地线焊盘和垂直电源走线数量的减少，也对电源分配构成了限制。
+
+https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe1c58eb6-654f-4ec5-9d5b-14d27c7f3679_2880x1620.jpeg
+
+BiCS10 单元键合阵列（CBA）为电源分配增设的额外顶层金属层。来源：闪迪/铠侠，ISSCC 2026
+
+通过采用单元键合阵列（CBA）架构，闪迪和铠侠能够定制CMOS晶圆的制造工艺。他们在现有顶层金属层的基础上，并行增设了另一层，从而构建了更强大的电源网格，并克服了电源分配的限制。
+
+https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F3c965c54-2786-4298-bdfc-f916f5133490_2880x1620.jpeg
+
+多芯片NAND空闲功耗问题及芯片关断解决方案。来源：闪迪/铠侠，ISSCC 2026
+
+虽然堆叠更多芯片对提升存储密度至关重要，但在多芯片架构中，未选中芯片的空闲电流正逐渐接近选中芯片的工作电流。为此，闪迪实现了一套关断系统，能够完全关闭未选中芯片的数据通路，从而将空闲电流降低了两个数量级。

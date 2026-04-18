@@ -1,0 +1,322 @@
+{
+  "report": {
+    "is_consistent": true,
+    "issues": [],
+    "auto_fixable": [],
+    "manual_review": [],
+    "term_stats": {
+      "Mid-Training": {
+        "total_count": 1,
+        "translations": {
+          "中期训练": 1
+        },
+        "is_consistent": true,
+        "preferred": "中期训练"
+      },
+      "AI": {
+        "total_count": 15,
+        "translations": {
+          "AI": 9
+        },
+        "is_consistent": true,
+        "preferred": "AI"
+      },
+      "LLM": {
+        "total_count": 1,
+        "translations": {
+          "LLM": 1
+        },
+        "is_consistent": true,
+        "preferred": "LLM"
+      },
+      "training": {
+        "total_count": 6,
+        "translations": {
+          "训练": 6
+        },
+        "is_consistent": true,
+        "preferred": "训练"
+      },
+      "RL": {
+        "total_count": 6,
+        "translations": {
+          "RL (强化学习)": 1
+        },
+        "is_consistent": true,
+        "preferred": "RL (强化学习)"
+      },
+      "GDPval": {
+        "total_count": 4,
+        "translations": {
+          "GDPval": 4
+        },
+        "is_consistent": true,
+        "preferred": "GDPval"
+      },
+      "Computer Use Agents": {
+        "total_count": 1,
+        "translations": {
+          "计算机使用智能体": 1
+        },
+        "is_consistent": true,
+        "preferred": "计算机使用智能体"
+      },
+      "PR": {
+        "total_count": 17,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "PR (Pull Request/拉取请求)"
+      },
+      "Anthropic": {
+        "total_count": 4,
+        "translations": {
+          "Anthropic": 4
+        },
+        "is_consistent": true,
+        "preferred": "Anthropic"
+      },
+      "RL as a Service": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "RL即服务"
+      },
+      "Utility Evals": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "实用性评估"
+      },
+      "token": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "词元"
+      },
+      "SemiAnalysis": {
+        "total_count": 2,
+        "translations": {
+          "SemiAnalysis": 2
+        },
+        "is_consistent": true,
+        "preferred": "SemiAnalysis"
+      },
+      "Vera": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "pre-training": {
+        "total_count": 3,
+        "translations": {
+          "预训练": 3
+        },
+        "is_consistent": true,
+        "preferred": "预训练"
+      },
+      "Reward Hacking": {
+        "total_count": 1,
+        "translations": {
+          "奖励劫持": 1
+        },
+        "is_consistent": true,
+        "preferred": "奖励劫持"
+      },
+      "InFO": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "InFO"
+      },
+      "performance": {
+        "total_count": 2,
+        "translations": {
+          "性能": 2
+        },
+        "is_consistent": true,
+        "preferred": "性能"
+      },
+      "post-training": {
+        "total_count": 3,
+        "translations": {
+          "后训练": 3
+        },
+        "is_consistent": true,
+        "preferred": "后训练"
+      },
+      "API": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "API"
+      },
+      "OpenAI": {
+        "total_count": 5,
+        "translations": {
+          "OpenAI": 5
+        },
+        "is_consistent": true,
+        "preferred": "OpenAI"
+      },
+      "Drive": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "Drive"
+      },
+      "AWS": {
+        "total_count": 4,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "AWS"
+      },
+      "xAI": {
+        "total_count": 1,
+        "translations": {
+          "xAI": 1
+        },
+        "is_consistent": true,
+        "preferred": "xAI"
+      },
+      "UI": {
+        "total_count": 5,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "UI"
+      },
+      "Cursor": {
+        "total_count": 1,
+        "translations": {
+          "Cursor": 1
+        },
+        "is_consistent": true,
+        "preferred": "Cursor"
+      },
+      "Windsurf": {
+        "total_count": 1,
+        "translations": {
+          "Windsurf": 1
+        },
+        "is_consistent": true,
+        "preferred": "Windsurf"
+      },
+      "TPU": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "TPU"
+      },
+      "Slides": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "Slides"
+      },
+      "Intel": {
+        "total_count": 3,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "英特尔"
+      },
+      "evaluations": {
+        "total_count": 2,
+        "translations": {
+          "评估": 1
+        },
+        "is_consistent": true,
+        "preferred": "评估"
+      },
+      "Computer use environments": {
+        "total_count": 1,
+        "translations": {
+          "计算机操作环境": 1
+        },
+        "is_consistent": true,
+        "preferred": "计算机操作环境"
+      },
+      "revenue": {
+        "total_count": 1,
+        "translations": {
+          "营收": 1
+        },
+        "is_consistent": true,
+        "preferred": "营收"
+      },
+      "Meta": {
+        "total_count": 3,
+        "translations": {
+          "Meta": 3
+        },
+        "is_consistent": true,
+        "preferred": "Meta"
+      },
+      "Scale AI": {
+        "total_count": 1,
+        "translations": {
+          "Scale AI": 1
+        },
+        "is_consistent": true,
+        "preferred": "Scale AI"
+      },
+      "Sacra": {
+        "total_count": 1,
+        "translations": {
+          "Sacra": 1
+        },
+        "is_consistent": true,
+        "preferred": "Sacra"
+      },
+      "Superintelligence group": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "超智能团队"
+      },
+      "Surge": {
+        "total_count": 1,
+        "translations": {
+          "Surge": 1
+        },
+        "is_consistent": true,
+        "preferred": "Surge"
+      }
+    },
+    "style_score": 100.0,
+    "suggestions": []
+  },
+  "translations_after_consistency": {
+    "00-intro": [
+      "劳动力自动化、强化学习即服务、Anthropic 的下一个重大押注、GDPval 与效用评估、计算机使用智能体、生物学领域的 LLM、中期训练、实验室采购模式、平台政治与访问权限",
+      "作者：AJ Kourabi、Dylan Patel",
+      "2026 年 1 月 6 日 · 付费文章",
+      "我们正在招聘 AI 分析师与代币经济学分析师。[点击此处申请](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f)或直接与我们联系。",
+      "去年六月，我们曾断言：扩展 RL (强化学习) 是解锁更强 AI 能力的关键路径。正如后文所示，过去数月的发展印证了我们的预判——核心能力的大幅跃升正源于 RL 算力的持续加码。尽管预训练仍在不断优化，但各大实验室已将焦点死死锁定在扩展 RL 算力上。",
+      "扩展强化学习：环境、奖励劫持（Reward Hacking）、智能体、扩展数据 - Dylan Patel 与 AJ Kourabi · 2025 年 6 月 8 日",
+      "OpenAI 就是绝佳的例证。该公司近期发布的所有旗舰模型（o1、o3 及 GPT-5 系列），均沿用了同一个基础模型——GPT-4o。过去 18 个月里，OpenAI 模型的性能提升，完全归功于后训练与 RL 算力的扩展。如今，OpenAI 已解决其预训练难题；随着这一扩展维度的打通，未来的技术演进必将更加迅猛。",
+      "https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png",
+      "这并非断言预训练已死：Anthropic、xAI，尤其是 Google，均从扩展预训练中获益匪浅。但 OpenAI 去年的进展，及其仅凭旧版基础模型便能稳居第一梯队的能力，正是后训练有效性的有力证明。",
+      "扩展 RL 绝非易事，这要求源源不断的任务供模型去解决并从中学习。预训练能以整个互联网为训练场，但 RL 尚无同等规模的语料库。绝大多数 RL 数据与任务必须从零构建，极耗人力。",
+      "让模型“做作业”始于数学题，这类问题极易评分。此后训练方法不断演进，触角已延伸至医疗健康与金融建模等全新领域。为此，模型被置于专业化程度日益加深的“环境”中，被迫在其中完成各项任务。",
+      "汇总任务与数据既可依靠人工，也可通过提炼高信号用户数据来实现。正是得益于后者，Windsurf 与 Cursor 等公司纵使缺乏顶尖实验室的资源，依然能后训练出极具竞争力的自有模型。",
+      "这些后训练实践不仅提升了模型在编程等领域的能力，更增强了模型的实用性：模型在 Excel 与 PowerPoint 等日常工具中变得更加好用。",
+      "为衡量模型在实用性与能力上的进步幅度，OpenAI 创立了名为 GDPval 的评估基准。该基准涵盖 44 个职业的 1000 多项任务，均精选自占经济比重超 5% 的行业。其中许多属于数字化任务，但人类仍需耗费数小时方可完成。这些任务由 OpenAI 携手平均从业经验达 14 年的专家共同设计。",
+      "在提供提示词与一组参考文档的前提下，模型需着手解决这些问题。具体任务包括为虚构人物报税、以度假村客户顾问身份制作幻灯片，以及利用指定库存素材剪辑商业广告。评分方式是让专家在模型答案与人类专家答案之间做选择。若胜率持平，即意味着模型性能已与人类专家并驾齐驱。目前最强的 GPT-5.2 模型得分约为 71%，这意味着在 71% 的情况下，其产出与人类打平或更受青睐。",
+      "https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png",
+      "GDPval 任务集示例。来源：OpenAI",
+      "尽管 GDPval 存在些许瑕疵（如过度偏重极其具体的数字化工作），但它仍是绝佳范例，印证了评估标准正从衡量抽象智力转向真实世界实用性。这与以往多数模型评估形成鲜明对比。此前的评估往往聚焦数学知识，或以选择题形式考查博士级科学问题。",
+      "这一转变背后的底层趋势是，模型自主运行的时长正不断增加。随着模型在长短周期任务中的能力双双提升，AI 公司笃定，模型必将能协助研发下一代模型。就 OpenAI 而言，其目标是在 2028 年 3 月前打造出自主AI研究员。Anthropic 则预测，到 2027 年，Claude 等系统将能自主攻克原本耗时数载方可达成的技术突破。",
+      "https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png",
+      "来源：Anthropic",
+      "然而，实现这一愿景需要海量的数据与精细的任务提炼。以计算机操作环境为例，其构建过程充斥着大量机械性的软件工程工作，例如复刻互联网上的现有网站。顶尖实验室自行处理这些工作耗时费力，因此大部分此类工作已被外包。"
+    ],
+    "01-outsourcing-and-the-ghost-of-s": [
+      "过去，Scale AI 曾是各大实验室最大的数据承包商之一，但如今已基本被 Meta 收入麾下。各大实验室曾在 Scale 身上砸下重金，助其 2024 年营收突破 14 亿美元。",
+      "https://substackcdn.com/image/fetch/$s_!h8nm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12f97061-879f-43b5-8d42-acc3af9930f3_1652x977.png",
+      "来源：Sacra，SemiAnalysis。",
+      "然而，收购完成后，多家 AI 实验室基本终止了与 Scale 的合作。各大实验室借此防止 Meta 接触到其最渴求的数据。部分 Scale 团队成员加入了 Meta 超级智能团队，主要出任管理层，或编入安全与评测团队。如今，该机构虽仍在产出评测结果并保留部分数据合同，但对各大实验室的服务规模已远不及当年。",
+      "Meta 超级智能团队——领导层、算力、人才与数据 - Dylan Patel、Jeremie Eliahou Ontiveros 及另外 3 人 · 2025 年 7 月 11 日",
+      "尽管行业风向早已开始向 Surge 等其他数据提供商倾斜，但 Scale 离场后仍留下了巨大的市场真空。究竟是谁填补了这一空白？"
+    ]
+  }
+}

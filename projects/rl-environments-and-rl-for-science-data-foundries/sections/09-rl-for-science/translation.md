@@ -1,35 +1,35 @@
+大语言模型开启了一个新前沿：模型能够搜索、规划并提出实验方案。借助合适的工具，智能体还将能够执行这些实验。强化学习能够将这些实验产生的反馈转化为模型可用于改进的信息，从而在适当条件下形成一个自我提升的闭环。
 
+目前已有数家公司正在利用这一趋势，其中一家便是 Periodic Labs。该公司的目标是利用实验室生成的数据，训练出一个 AI 科学家。
 
+其目标是构建一个奖励信号根植于物理实验的闭环 RL 系统。模型会使用工具（包括其他更小型的专用模型）来测试假设并验证想法。随后，这些想法会在保真度越来越高的模拟器中进行测试，其结果最终将指导物理实验。
 
-
-
-
-
+通过这种方式，子智能体负责其擅长的任务，而通用大语言模型则可用于编排协调。这种编排也可能延伸到物理工具，例如材料表征。
 
 https://substackcdn.com/image/fetch/$s_!Tibh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67ec8066-bec8-4d85-afb9-0c08b0b62bf2_936x670.png
 
+现有闭环系统示例。来源：[Wang 等人](https://www.nature.com/articles/s41467-024-55655-3)，2025
 
-
-
+这种通过保真度逐级提升的方法来测试想法、从而在实验室实际运行前降低实验风险的过程，大致映射了研究生的典型工作流程。
 
 https://substackcdn.com/image/fetch/$s_!nwQx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F38ce44d5-ee80-4656-9a39-4b1a91873de6_1460x666.png
 
+Periodic 的闭环系统。来源：Rohan Pandey。
 
+开源模型可以作为起点，并通过中期训练来扩展能力。中期训练是持续的预训练（下一个词元预测），可用于扩展模型的知识截止日期、提升其在特定领域的专业知识，或为其进行高计算量的 RL 训练做准备。例如，当 OpenAI 模型的知识截止日期更新时，这通常是因为在模型基础上进行了持续的中期训练。
 
-
-
-
+在高度专业的科学领域，中期训练将使得后续训练后的模型质量更高。Meta 在其最近的代码专用模型中发现，中期训练的益处甚至在应用了其他阶段（例如监督微调）后依然存在。Meta 在最近的一个模型中使用了 1T 词元进行中期训练，但我们预计 OpenAI 的使用量会高出 5 到 10 倍。
 
 https://substackcdn.com/image/fetch/$s_!DVxi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F949e444d-605d-44bc-ab24-8b39d9b00554_1460x471.png
 
 来源：Meta
 
-
+中期训练阶段加入的数据，一个例子便是来自先前运行的环境轨迹。这些轨迹推演是在模型先前版本进行 RL 训练时收集生成的。
 
 https://substackcdn.com/image/fetch/$s_!nZ31!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ea859aa-bfe3-44a3-b203-8a6785c66335_1077x913.png
 
 来源：Meta
 
+为了给RL和中期训练提供数据，Periodic正在建设一个大型物理实验室，用于运行实验并生成经过实验验证的奖励信号。这一举措与其他努力方向一致，例如DeepMind也计划在2026年启动一个自动化材料科学研究实验室。
 
-
-
+自行开展实验能获得对输入变量和结果的完整认知，而仅依赖已发表论文进行训练则无法保证这种完整性——这些论文的数据即使在可比较的指标上也常常相互矛盾。另一个需要大量实验室工作的领域是生物学。该领域的实验室也采取了截然不同的技术路径。

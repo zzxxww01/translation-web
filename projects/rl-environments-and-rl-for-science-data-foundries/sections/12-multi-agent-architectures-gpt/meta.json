@@ -27,12 +27,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "一个具备扩展潜力的领域，是将不同模型结合起来，共同思考以解决单一问题。从高层次看，这正是 Grok 4 Heavy、Gemini Deep Think 和 GTP5-Pro 的工作原理。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879763",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +115,68 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!zfNX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99c932f8-16e6-41c1-979d-4fecbe893678_1012x717.png",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879817",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!zfNX!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F99c932f8-16e6-41c1-979d-4fecbe893678_1012x717.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -98,13 +210,68 @@
           "created_at": "2026-04-10T22:52:40.342108",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：xAI",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879829",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：xAI",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -131,12 +298,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在实践中，具体细节可能有所不同。例如，汇总不同智能体的答案可以采取一些基础方法，比如选择最常见的答案；也可以让模型之间相互商议以选定一个答案；或者让一个单独的模型阅读所有答案并做出选择。我们预计，许多即将推出的产品将采用更复杂的多智能体架构。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879839",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -163,12 +386,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "此类系统中第一个进入主流视野的案例是谷歌的 AlphaEvolve，它将多个扮演不同角色的智能体锁定在一个循环中。在这个具体架构中，包含采样模型（负责从包含先前已发现问题解决方案的数据库中组装提示）、集成模型（负责生成新的、改进的解决方案）以及验证系统（负责核实答案）。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879849",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -195,12 +474,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这些组件被串联在一个进化循环中，其输出结果持续由验证器进行检查。当针对特定问题的解决方案相对于现有最优方案取得特定改进后，或者当额外循环带来的收益递减时，该循环即告终止。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879860",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -227,12 +562,68 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!gQcy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67410dcd-d8ca-42d6-a63b-07d6ca923eb6_878x695.png",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879871",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!gQcy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67410dcd-d8ca-42d6-a63b-07d6ca923eb6_878x695.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -266,13 +657,68 @@
           "created_at": "2026-04-10T22:52:40.342122",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：AlphaEvolve, Google",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879883",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：AlphaEvolve，Google",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -314,19 +760,75 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "自那时起，各种架构层出不穷，其中一些专为特定评估任务设计。例如，研究员 Jeremy Brennan 利用基于 Grok 4 构建的多智能体架构，在 ARC-AGI 基准测试中创下纪录。其方法其实相当简单：先由 Grok 4 为每项任务生成指令，再由另一智能体在训练示例上测试这些指令。若出现完美解决方案，则锁定并应用于预留测试集；否则，便进入迭代优化循环。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879948",
+          "tokenized_text": "自那时起，各种架构层出不穷，其中一些专为特定评估任务设计。例如，研究员 [[[LINK_1|Jeremy Brennan]]] 利用基于 Grok 4 构建的多智能体架构，在 ARC-AGI 基准测试中创下纪录。其方法其实相当简单：先由 Grok 4 为每项任务生成指令，再由另一智能体在训练示例上测试这些指令。若出现完美解决方案，则锁定并应用于预留测试集；否则，便进入迭代优化循环。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -353,12 +855,68 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!8kGI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F662d0269-0b70-451e-b252-2c3b1d96a4c2_937x611.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879962",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!8kGI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F662d0269-0b70-451e-b252-2c3b1d96a4c2_937x611.jpeg",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -392,13 +950,68 @@
           "created_at": "2026-04-10T22:52:40.342134",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Jeremy 提交时的 ARC-AGI 排行榜。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.879973",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：Jeremy 提交时的 ARC-AGI 排行榜。",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -440,19 +1053,75 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "另一些架构则仅使用子智能体。例如，4 个独立的 o4-mini 子智能体在现有的生产级 SGLang 内核上平均实现了 1.3 倍的加速。具体而言，现有的 CUDA 内核从 SGLang 中抽取出来进行独立评估。随后，它通过四个智能体之间的循环进行处理：第一个智能体进行测试，以通过或失败为基础验证内核；第二个智能体进行详细性能剖析，以识别性能差异；第三个智能体规划有针对性的编辑；第四个智能体则负责实施这些编辑。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.880010",
+          "tokenized_text": "另一些架构则仅使用子智能体。[[[LINK_1|例如]]]，4 个独立的 o4-mini 子智能体在现有的生产级 SGLang 内核上平均实现了 1.3 倍的加速。具体而言，现有的 CUDA 内核从 SGLang 中抽取出来进行独立评估。随后，它通过四个智能体之间的循环进行处理：第一个智能体进行测试，以通过或失败为基础验证内核；第二个智能体进行详细性能剖析，以识别性能差异；第三个智能体规划有针对性的编辑；第四个智能体则负责实施这些编辑。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -479,12 +1148,68 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!DD3G!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45e34ae7-126b-4c3b-ab59-3675c36c5e3b_1258x603.png",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.880022",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!DD3G!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F45e34ae7-126b-4c3b-ab59-3675c36c5e3b_1258x603.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -526,8 +1251,10 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "ready",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token LINK_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
@@ -540,13 +1267,70 @@
           "created_at": "2026-04-10T22:52:40.342147",
           "tokenized_text": "来源：[[[LINK_1|Wei 等人]]]",
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Wei et al.",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.880059",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token LINK_1."
+          ]
         }
       },
       "confirmed": "来源：Wei 等人",
       "confirmed_tokenized": "来源：[[[LINK_1|Wei 等人]]]",
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -573,12 +1357,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "值得注意的是，这并不必然要求模型能力本身的提升。尽管推理成本显著增加，但这些智能体所能解决问题的价值，超过了运行它们的成本。在科学和编程等领域，这一点尤其明显。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.880071",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -620,19 +1460,79 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token LINK_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "有些方法甚至报告了任务成本的降低，例如递归语言模型。在这种情况下，一个编排器在整个任务过程中递归地调用其他模型。这些系统在长上下文评估中表现出极高的性能，因为上下文可以巧妙地分配在子智能体和编排器之间。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.880104",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token LINK_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -659,12 +1559,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "OpenAI 正在积极探索自我对弈等理念，并将 AlphaGo 的原理引入 LLM；我们认为他们是这一特定领域的领导者。AlphaGo（及其后续版本AlphaZero）的独特之处在于，它通过自我对弈而非与人类对弈，在围棋（以及后来的国际象棋等游戏）上实现了超人的性能。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.880114",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -691,12 +1647,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "当前的LLM系统还相当初级，原则上与在单一循环中运行的模型并无本质区别。但这在实践中已足够强大：Claude Code这项年经常性收入达十亿美元的产品，其核心不过是用简单思路拼凑出一个更自主的智能体。然而，重要的是展望当更复杂的多智能体协作投入生产时，系统能力将呈现何种面貌。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.880123",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -723,12 +1735,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "改进的智能体协作架构同样将释放 LLM 处理越来越大型项目的能力。从原理上看，这与人类能够通过团队协作完成比个人单独工作更庞大的项目并无太大不同。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:15:36.880132",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.139999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文为 'GTP5-Pro'，译文为 'GPT-5 Pro'。此处存在拼写不一致，需核实原文是否为笔误。若原文确为 'GTP5-Pro'，译文应保持一致；若原文为 'GPT-5 Pro'，则译文正确。"
+          },
+          {
+            "type": "terminology",
+            "description": "原文 'an ensemble models' 存在语法错误（应为 'ensemble models' 或 'an ensemble model'）。译文处理为 '集成模型（负责生成新的、改进的解决方案）'，将复数名词单数化处理，并添加了功能描述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将 'get a record on ARC-AGI' 译为 '在 ARC-AGI 上取得了创纪录的成绩'，意思准确。但整个段落的句子结构可以进一步优化，使其更符合中文科技报道的紧凑节奏。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语 'SG Lang' 和 'SGLang' 在原文中混用（段落11原文为'SG Lang'，但上下文和常见项目名称为'SGLang'）。译文统一为 'SGLang'。此外，'plucked from' 译为 '提取' 准确，但 'isolated' 译为 '隔离' 在计算机语境下略显生硬。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文 'on chess and go' 存在事实性错误。AlphaGo 专攻围棋（Go），而攻克国际象棋（chess）的是 AlphaZero（AlphaGo 的后续版本）。译文直接译为 '在象棋和围棋上'，延续了原文的错误。"
+          },
+          {
+            "type": "tone",
+            "description": "译文将 'rather primitive' 译为 '相当初级'，语气匹配。但 'largely off of simple ideas that stitch together a more autonomous agent' 译为 '很大程度上就依赖于将简单理念组合成更自主智能体的思路'，略显冗长，削弱了原文 'off of' 那种直接、略带调侃的简洁感。"
+          }
+        ]
+      },
       "history": []
     }
   ]

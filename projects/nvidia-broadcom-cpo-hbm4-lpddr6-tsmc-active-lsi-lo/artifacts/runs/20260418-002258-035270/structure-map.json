@@ -1,0 +1,3187 @@
+{
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "title_translation": null,
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "h3",
+          "heading_level": 3,
+          "heading_chain": [],
+          "source_preview": "ISSCC 2026 Roundup"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By Afzal Ahmad, Gerald Wong, Daniel Nishball, and 4 others"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Apr 15, 2026 · Paid"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There are three major semiconductor conferences each year, IEDM, VLSI and finally ISSCC. We have covered the former two in great detail over the past few years."
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Compared to IEDM and VLSI, ISSCC has a much bigger focus on integration and circuits. Almost every paper comes with some form of circuit diagram, together with "
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In past years, ISSCC findings have been hit or miss when it comes to industry impact. This year was different, a significant number of papers and presentations "
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In this roundup, we will cover major categories such as Memory, Optical Networking, High-Speed Electrical Interconnects, Processors."
+        }
+      ]
+    },
+    {
+      "section_id": "01-memory",
+      "title": "Memory",
+      "title_translation": null,
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "One key theme that caught our attention at this year’s ISSCC was memory, including Samsung HBM4, Samsung and SK Hynix LPDDR6, and SK Hynix GDDR7. Other than DRA"
+        }
+      ]
+    },
+    {
+      "section_id": "02-samsung-hbm4-paper-15-6",
+      "title": "Samsung HBM4 - Paper 15.6",
+      "title_translation": null,
+      "paragraph_count": 35,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung was the only one among the top three memory vendors to present a technical paper on HBM4. Before ISSCC, we noted in our Accelerator & HBM model that Sam"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The technical details presented at ISSCC, combined with industry chatter we have gathered, clearly demonstrate that Samsung’s HBM4 is competitive with its peers"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!8SFa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung HBM3E vs. HBM4 Specifications. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!t-2P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung HBM4 Die Shots and Cross-Section. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung demonstrated a 36 GB, 12-high HBM4 stack featuring 2048 IO pins and 3.3 TB/s of bandwidth, built using 6th-generation 10nm-class (1c) DRAM core dies pai"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The most obvious architectural change from HBM3E to HBM4 is the process technology split between the core DRAM dies and the base die. HBM4 uses the DRAM process"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The key architectural challenge arises as AI workloads demand higher bandwidth and faster data rates from HBM. By moving the base die to the SF4 logic process, "
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!SBki!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung HBM4 Adaptive Body-Bias Control and Process Variation. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Combined with adaptive body-bias (ABB) control, which mitigates process variation across stacked core dies, the doubled TSV counts further improve timing margin"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The improvement brought by the SF4 base die and 1c DRAM core dies comes with a trade-off. Samsung’s choice of SF4 for the logic base die comes at a higher cost "
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The 1c front-end manufacturing process has proved challenging for Samsung throughout 2025, especially given that the company skipped the 1b node and moved direc"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Historically, Samsung’s HBM has earned lower margins than those of their top competitor, SK Hynix, a dynamic that we model across all vendors comprehensively in"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung’s strategy appears to be an aggressive adoption of a more advanced node for the base die to achieve superior performance and outpace their competitors, "
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another key issue in HBM to address is tCCDR, the minimum interval required between consecutive READ commands issued across different stack IDs (SID). For AI wo"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In a stacked DRAM architecture, multiple core dies are vertically integrated on top of a base die. This naturally introduces small delay differences across the "
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The increased stack heights and channel counts, from 16 to 32, compound this challenge. As the channel counts and stack heights increase, the variation between "
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!YCM6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung HBM4 Per-Channel TSV RDQS Auto-Calibration Scheme. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "To address this issue, Samsung introduces a “per-channel TSV RDQS timing auto-calibration scheme.” After power-up, the system measures delay variation across ch"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This calibration accounts for both global delay variation between stacked core dies and local per-channel variation, aligning timing across the stack. By compen"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Some of our readers who are well versed in memory technology may be asking: How is there enough die area to accommodate the significant increase in TSV counts? "
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!FNwT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung HBM4 PMBIST Test Pattern Operation. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!06LM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung HBM4 PMBIST vs. HBM3E MBIST Comparison. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Another key innovation enabled by the logic base die is Samsung’s Programmable Memory Built-In Self-Test (PMBIST) architecture. PMBIST allows the base die to ge"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This approach represents a notable departure from HBM3E. As discussed earlier, the HBM3E base die is fabricated using a DRAM process, which imposed strict power"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This enables much more robust debugging and better yield learning for HBM. Engineers can create targeted stress patterns to validate critical timing parameters "
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!E1zF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung HBM4 Shmoo Plot. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung also demonstrated strong pin speed results — their HBM4 is able to hit 11 Gb/s at sub-1V core voltage (VDDC), and up to 13 Gb/s at higher voltages. We h"
+        },
+        {
+          "id": "p034",
+          "index": 34,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung’s implementation significantly exceeds the baseline specification of the official JEDEC HBM4 standard (JESD270-4), which specifies a maximum data rate o"
+        }
+      ]
+    },
+    {
+      "section_id": "03-samsung-lpddr6-paper-15-8",
+      "title": "Samsung LPDDR6 - Paper 15.8",
+      "title_translation": null,
+      "paragraph_count": 32,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Both Samsung and SK Hynix showed off their LPDDR6 chips. We will discuss Samsung’s chips first and turn to SK Hynix’s later."
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Odn_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR5X vs. LPDDR6 Comparison. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung presented their LPDDR6 architecture and detailed the power-saving techniques used."
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Ysn8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR6 Sub-Channel and Bank Structure. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR6 adopts a 2 sub-channel per die architecture, with 16 banks in each sub-channel. It also features two modes: a normal mode and an efficiency mode. In the "
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The dual sub-channel architecture also means that there is twice the amount of peripheral circuitry, such as command decoders, serialization and control. From t"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!79tH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR6 Signaling Options. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Unlike GDDR7, which uses PAM3 signaling, LPDDR6 will continue to use NRZ. However, it does not use standard NRZ as the eye would not have sufficient margin. It "
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!GQm1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR6 Metadata and DBI Bit Allocation per Burst. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For those of you doing the math, 12×24 is 288, not a power of two. The remaining 32 bits are split into 2 use cases, 16 for metadata like ECC, and 16 for Data B"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "DBI is a power-saving and signal integrity mechanism. Before a burst is sent out, the controller checks if more than half the bits would switch state compared t"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "To calculate the effective bandwidth, you must account for these metadata and DBI bits like so: Bandwidth = Data Rate × Width (24 b) × Data (32 b) / Packet (36 "
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!bjV0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung LPDDR6 High-Frequency Power Domain Optimization. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR6 has two constant power domains, VDD2C at 0.875V and VDD2D at 1.0V. By carefully choosing which peripheral logic is using which power domain, read power h"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!QJ_x!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung LPDDR6 I/O Power Switching at Low Data Rates. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!iMMC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung LPDDR6 Additional Low-Power DQ/CA Paths. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR is primarily used at low data rates of 3.2 Gb/s and below when idling. Samsung focused heavily on saving power at these lower data rates through careful u"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Tycr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR6 RDL Timing and Layout Benefits. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By using a redistribution layer (RDL), Samsung can locate related circuits closer together physically. This shortens critical delay paths and reduces their sens"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!UXaU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung LPDDR6 Specifications and Die Shot. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!003E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung LPDDR6 Shmoo Plot. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung’s LPDDR6 can reach a data rate of 12.8 Gb/s at 0.97V, and up to 14.4 Gb/s at 1.025V. Each 16 Gb die is 44.5 mm², with a density of 0.360 Gb/mm² on an un"
+        }
+      ]
+    },
+    {
+      "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+      "title": "Samsung SF2 LPDDR6 PHY - Paper 37.3",
+      "title_translation": null,
+      "paragraph_count": 7,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung LPDDR6 PHY Test Chip Specifications and Die Shot. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung also unveiled PHYs on the logic die interface with LPDDR6. The PHYs are fabricated on their new SF2 process and support up to 14.4 Gb/s. The PHYs take u"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung LPDDR6 PHY Efficiency Mode Power Reductions. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The PHYs also support the efficiency mode implemented by the LPDDR6 chips, which can reduce read power by 39% and write power by 29%."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The PHYs can augment the efficiency mode by gating the high-speed clock path for the inactive secondary sub-channel. With clock-gating, the power reduction reac"
+        }
+      ]
+    },
+    {
+      "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+      "title": "SK Hynix 1c LPDDR6 - Paper 15.7",
+      "title_translation": null,
+      "paragraph_count": 12,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SK Hynix LPDDR6 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SK Hynix unveiled their first 1c DRAM products, both in LPDDR6 and in GDDR7 packages. Their LPDDR6 can operate at a data rate of up to 14.4 Gb/s, 35% faster tha"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Although SK Hynix did not state the area or density of the LPDDR6 chip, we estimate the bit density will reach 0.59 Gb/mm², based on the relative density increa"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SK Hynix LPDDR6 Shmoo Plot. Source: SK Hynix, ISSCC 2026"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In their shmoo plot, SK Hynix showed that they can reach a data rate of 14.4 Gb/s at 1.025V, the same as Samsung. However, they can only reach 10.9 Gb/s at 0.95"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SK Hynix LPDDR6 Efficiency Mode Architecture. Source: SK Hynix, ISSCC 2026"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SK Hynix LPDDR6 Efficiency Mode Power Savings. Source: SK Hynix, ISSCC 2026"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Like Samsung’s LPDDR6, SK Hynix’s LPDDR6 also features two modes, a normal mode and an efficiency mode. The efficiency mode runs at 12.8 Gb/s over a single sub-"
+        }
+      ]
+    },
+    {
+      "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+      "title": "SK Hynix 1c GDDR7 - Paper 15.9",
+      "title_translation": null,
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SK Hynix 1c GDDR7 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While the LPDDR6 is a generational leap with new memory technology, SK Hynix’s GDDR7 on their 1c process shows an even greater improvement, clocking up to 48 Gb"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung 1z GDDR7 Shmoo Plot and Die Shot. Source: Samsung, ISSCC 2024"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung 1b GDDR7 Specifications and Die Shot. Source: Samsung, ISSCC 2025"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The bit density achieved is 0.412 Gb/mm², compared to 0.309 Gb/mm² on Samsung’s 1b process, and 0.192 Gb/mm² on Samsung’s older 1z process."
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "LPDDR5X vs. GDDR7 Density Comparison Across Vendors. Source: SemiAnalysis"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "GDDR7 has lower bit density than LPDDR5X, usually around 70% of the latter. Although it has much higher data rates, this comes at a cost, both in terms of power"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "GDDR7’s lower density is a result of the significantly higher periphery area for high access speeds. The actual memory arrays thus make up a smaller percentage "
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "GDDR7 is mainly used in gaming GPU applications that require high memory bandwidth at lower cost and capacity compared to HBM. NVIDIA had announced the Rubin CP"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We have detailed wafer volumes, yields, density, COGS, and more in our memory model for HBM, DDR, and LPDDR across various nodes."
+        }
+      ]
+    },
+    {
+      "section_id": "07-samsung-4f2-cop-dram-paper-1",
+      "title": "Samsung 4F² COP DRAM - Paper 15.10",
+      "title_translation": null,
+      "paragraph_count": 34,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We have extensively covered challenges in continuing to scale DRAM."
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "li",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Memory Wall: Past, Present, and Future of DRAM - Dylan Patel, Jeff Koch, and 3 others · September 3, 2024"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At VLSI 2025, SK Hynix detailed their own 4F² Peri-Under-Cell (PUC) DRAM. At ISSCC, Samsung disclosed their own implementation of a 4F² Cell-on-Peripheral (COP)"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!R4vq!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "4F² VCT DRAM Cell Architecture. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The architecture for 4F² cells is the same as SK Hynix’s, with vertical channel transistors (VCT), and capacitors above the drain."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!4BMO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Cell-on-Peripheral (COP) DRAM Stack Architecture. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The vertical architecture presented by Samsung is essentially the same as that used by SK Hynix, with a cell wafer hybrid bonded on top of a peripheral wafer. W"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!cEvZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "COP Architecture Comparison for DRAM vs. NAND. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung notes that hybrid bonding for COP has already been used for NAND. This is true for other NAND manufacturers, but Samsung has not brought hybrid bonding "
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Moreover, the number of inter-wafer connections for DRAM is an order of magnitude higher than for NAND and requires much tighter pitches. To reduce the number o"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!vZzA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "COP NOR-Type Sub-Wordline Driver Optimization. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Q4d0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "COP Even/Odd Column Select MUX Optimization. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "First, they have reorganized the sub-wordline drivers (SWD) from 128 per cell block to 16 groups of 8. This reduces the number of signals required for the SWD b"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Next, they split the column select into an even and an odd path. This requires twice the multiplexers (MUX) but halves the column select line (CSL) count to 32 "
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!-Vrx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "COP Core Circuitry Layout Under Cell Array. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "With hybrid bonding, the core circuitry, that is, bitline sense amplifiers (BLSA) and SWD can be placed under the cell array. The goal is for the core circuits "
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!2ZFO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "COP Core Circuitry Layout Options. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung adopted the “sandwich” structure, which allows them to maximize the area efficiency of the core circuitry, and reduce the edge region area, which is not"
+        },
+        {
+          "id": "p025",
+          "index": 25,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!NQFx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p026",
+          "index": 26,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "COP Sandwich Structure Area Efficiency. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p027",
+          "index": 27,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The area used by the core circuitry was reduced from 17.0% down to only 2.7%, a significant improvement, directly translating to overall die size reductions."
+        },
+        {
+          "id": "p028",
+          "index": 28,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In traditional DRAM, increasing the number of cells per bitline would result in a significant increase in chip area, while for VCT DRAM, the increase is almost "
+        },
+        {
+          "id": "p029",
+          "index": 29,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!cPId!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p030",
+          "index": 30,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung 4F² COP DRAM Summary and Die Shot. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p031",
+          "index": 31,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung did not provide any density figures for this chip, only stating that it was a 16 Gb chip on a 10nm DRAM process."
+        },
+        {
+          "id": "p032",
+          "index": 32,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung noted that the VCT DRAM suffers from the floating-body effect, increasing leakage and reducing retention time. Mitigating this effect remains a key chal"
+        },
+        {
+          "id": "p033",
+          "index": 33,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Despite these challenges, we still expect 4F² hybrid bonded DRAM to arrive in the latter part of the decade as early as the generation after 1d. Our memory mode"
+        }
+      ]
+    },
+    {
+      "section_id": "08-sandisk-kioxia-bics10-nand-p",
+      "title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1",
+      "title_translation": null,
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SanDisk and Kioxia demonstrated their BiCS10 NAND, with 332 layers and 3 decks. This is the highest reported NAND bit density, at 37.6 Gb/mm², dethroning the pr"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!xViG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "BiCS10 Die Shot and Density Comparison vs. SK Hynix and Samsung V9. Source: SanDisk/Kioxia, ISSCC 2026"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Despite using a similar architecture with 6 planes, 3 decks, and a similar number of layers, SK Hynix falls behind, with 30% lower bit density. In a QLC configu"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!mqol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "NAND 1×6 vs. 2×3 Plane Configuration Comparison. Source: SanDisk/Kioxia, ISSCC 2026"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Moreover, BiCS10 features a 6-plane configuration, increasing IO bandwidth by 50%. There are two ways to implement a 6-plane configuration, 1×6 and 2×3. SK Hyni"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "A 1x6 configuration has fewer ground pads and reduces area by 2.1%. However, the lower number of ground pads and vertical power tracks constrains power distribu"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qU7L!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "BiCS10 CBA Additional Top-Metal Layer for Power Distribution. Source: SanDisk/Kioxia, ISSCC 2026"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "By using the CBA (Cell Bonded Array) architecture, SanDisk and Kioxia are able to customize the CMOS wafer process. By adding another top-metal layer in paralle"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!6HeL!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Multi-Die NAND Idle Power Penalty and Die-Gating Solution. Source: SanDisk/Kioxia, ISSCC 2026"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Stacking more dies is essential to increasing storage density. However, in multi-die architectures, the idle current from unselected dies is approaching the act"
+        }
+      ]
+    },
+    {
+      "section_id": "09-mediatek-xbit-logic-based-bitc",
+      "title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2",
+      "title_translation": null,
+      "paragraph_count": 18,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!m8pd!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SRAM HC Bitcell Density vs. Logic-Based MBFF Across Nodes. Source: MediaTek, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!NbiN!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SRAM Bitcell Scaling Limitations: Area and Voltage Constraints. Source: MediaTek, ISSCC 2026"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "SRAM scaling is dead. Despite logic area decreasing by 40% from N5 to N2, 8-transistor high-current SRAM bitcells have only decreased in area by 18%. 6-transist"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "It is well known that N3E’s high-density bitcell is a regression from N3B’s, falling back to N5’s density. In this paper, MediaTek shed some light on the high-c"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!_Cbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "8T Bitcell NMOS/PMOS Layout Challenges with Logic Rules. Source: MediaTek, ISSCC 2026"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!oxdV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "MediaTek 10T xBIT Balanced Bitcell Circuit Design. Source: MediaTek, ISSCC 2026"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In modern logic nodes, 6T bitcells have 4 NMOS and 2 PMOS transistors, while 8T bitcells have 6 and 2 respectively. The unequal number of NMOS and PMOS transist"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!n1LG!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "xBIT vs. Foundry 8T Density and Power Comparison. Source: MediaTek, ISSCC 2026"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "When compared to the PDK’s standard 8T bitcells, the xBIT achieved 22% to 63% higher density, with the largest gains at lower wordline widths. Power has also im"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!xu_9!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "xBIT Shmoo Plot. Source: MediaTek, ISSCC 2026"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "MediaTek also showed a shmoo plot of the xBIT cell, going from 100 MHz at 0.35V, up to 4GHz at 0.95V."
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We will be doing a deep dive into SRAM and its scaling factors in an upcoming newsletter article."
+        }
+      ]
+    },
+    {
+      "section_id": "10-tsmc-n16-mram-paper-15-4",
+      "title": "TSMC N16 MRAM - Paper 15.4",
+      "title_translation": null,
+      "paragraph_count": 20,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC presented an updated STT-MRAM on their N16 node, building on their previous work from ISSCC 2023. TSMC is positioning the MRAM as an embedded non-volatile "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC N16 MRAM Design Features and Die Floorplan. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The MRAM features dual-port access so reads and writes can occur simultaneously — critical for over-the-air (OTA) updates in automotive, where the system cannot"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC N16 MRAM Shmoo Plot at -40 °C and 150 °C. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "It features interleaved reads across modules with independent clocks, raising throughput to 51.2 Gb/s at 200 MHz. On silicon, the 84 Mb macro achieves 7.5ns rea"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC N16 MRAM Modular Macro Architecture. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The architecture is modular — configurable in 16 Mb, 8 Mb and 2 Mb modules that compose into macros from 8 Mb to 128 Mb. By combining large 16 Mb modules with a"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC N16 MRAM Endurance and Reliability. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As stated earlier, reliability is where embedded MRAM lives or dies. After 1 million endurance cycles at -40 °C, the hard error rate stays well below 0.01 ppm —"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC N16 MRAM Specification vs Prior Work. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Compared to the old MRAM on the same N16 node, the bitcell has shrunk 25% from 0.033 µm² to 0.0249 µm², and macro density increases to 16.0 Mb/mm² iso-capacity."
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While Samsung Foundry also published work on 8LPP eMRAM this year, TSMC’s is far more promising. It targets the needed features, has great performance, and is o"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC N16 MRAM Flash-Plus Roadmap. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC is already planning the next-generation “Flash-Plus” variant with a 25% smaller bitcell and 100× higher endurance."
+        }
+      ]
+    },
+    {
+      "section_id": "11-optical-networking",
+      "title": "Optical Networking",
+      "title_translation": null,
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Several papers from major optics vendors tackled optical interconnects that will carry data between next-generation AI accelerators both within and between data"
+        }
+      ]
+    },
+    {
+      "section_id": "12-nvidia-dwdm-paper-23-1",
+      "title": "Nvidia DWDM - Paper 23.1",
+      "title_translation": null,
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The choice of optical signaling format will affect the go-to-market timeline for scale-up co-packaged optics (CPO). Nvidia is ramping up production of COUPE opt"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!gqo1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Nvidia DWDM Architecture Overview. Source: Nvidia, ISSCC 2026"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "However, at ISSCC, Nvidia proposed using 32 Gb/s per lambda, with 8 wavelengths multiplexed using DWDM. A 9th wavelength is used for clock forwarding at half ra"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Clock forwarding means that SerDes can be made somewhat simpler by removing the Clock and Data Recovery (CDR) circuit as well as other circuitry, improving ener"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Earlier in March, just before OFC 2026, the formation of the Optical Compute Interconnect MSA (OCI MSA) was announced, and it will focus on a 200 Gb/s Bi-direct"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Eh4Q!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "OCI MSA Optical Link Specifications. Source: [OCI MSA](https://oci-msa.org/)"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Interestingly, the OCI MSA did not make use of an additional wavelength for clock forwarding, and it appears that reserving all wavelengths for actual data tran"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Much of Nvidia’s published research on scale-up CPO has centered on DWDM, though today’s CPO optical engines are oriented around 200G PAM4 DR Optics, which make"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The OCI MSA also illustrates different implementations, an On-Board Optics (OBO), a version of CPO that is integrated via the substrate on the ASIC package, and"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!r0uo!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Optical Engine Integration Levels (OBO, Substrate CPO, Interposer CPO). Source: [OCI MSA](https://oci-msa.org/)"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The “Final Boss” when it comes to implementing CPO will be when the optical engine can be integrated onto the interposer itself, connecting to the ASIC using a "
+        }
+      ]
+    },
+    {
+      "section_id": "13-marvell-coherent-lite-transcei",
+      "title": "Marvell Coherent-Lite Transceiver - Paper 23.2",
+      "title_translation": null,
+      "paragraph_count": 18,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!B76F!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Direct Detection vs. Coherent-Lite vs. Coherent Transceiver Comparison. Source: Marvell, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Marvell presented an 800G transceiver for coherent-lite applications. Traditional transceivers have a limit on how far they can reach, less than 10 kilometers. "
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!1xhk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Coherent and Coherent-Lite Optical Band Comparison. Source: Marvell, ISSCC 2026"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Coherent transceivers primarily use C-band wavelengths for their low attenuation. However, the long-haul links in which coherent transmission is used typically "
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Coherent-Lite transceivers instead use O-band wavelengths, which have near-zero dispersion over the relatively short distances on a datacenter campus. This enab"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!oACP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Marvell Coherent-Lite Transceiver Architecture. Source: Marvell, ISSCC 2026"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Coherent-lite transceiver is a DSP-based pluggable module consisting of two 400G channels. Each 400G channel runs a dual polarization QAM and consists of tw"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qDgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Marvell Coherent-Lite Measured Link Performance. Source: Marvell, ISSCC 2026"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The key to this demonstration is highlighting other methods of scaling channel bandwidth that are optimized for the campus application."
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Higher-order modulation coupled with the dual polarization using X and Y axes delivers 400G channel bandwidth. There are 8 bits per channel for a total of 32 co"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "This modulation scheme is not entirely new to the industry, but it is now being brought into the datacenter campus setting for use in those shorter links."
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!jtsE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Marvell Coherent-Lite Performance vs. Prior Coherent Transceivers. Source: Marvell, ISSCC 2026"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Marvell’s approach significantly reduces power to only 3.72 pJ/b excluding silicon photonics, half of other full-fledged coherent transceivers. Their measuremen"
+        }
+      ]
+    },
+    {
+      "section_id": "14-broadcom-6-4t-optical-engine",
+      "title": "Broadcom 6.4T Optical Engine - Paper 23.4",
+      "title_translation": null,
+      "paragraph_count": 8,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Broadcom Tomahawk 5 51.2T CPO Optical Engine Die Shot and Package. Source: Broadcom, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Broadcom showcased progress on their 6.4T MZM optical engine (OE) consisting of 64 lanes of ~100G using PAM4 modulation. The optical engines were tested in a To"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Broadcom Tomahawk 5 CPO Optical Engine Packaging. Source: Broadcom, Hot Chips 2024"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While Nvidia uses COUPE, Broadcom uses a Fan-Out Wafer-Level Packaging approach for this OE. Broadcom will be switching to COUPE in the future, but older genera"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Broadcom 6.4T OE Egress Transmitter Performance. Source: Broadcom, ISSCC 2026"
+        }
+      ]
+    },
+    {
+      "section_id": "15-high-speed-electrical-intercon",
+      "title": "High-Speed Electrical Interconnects",
+      "title_translation": null,
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As multi-die designs become the norm, die-to-die interconnects are a critical bottleneck. Major foundries and chip designers presented approaches to pushing ban"
+        }
+      ]
+    },
+    {
+      "section_id": "16-intel-ucie-s-paper-8-1",
+      "title": "Intel UCIe-S - Paper 8.1",
+      "title_translation": null,
+      "paragraph_count": 9,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Ejnk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel UCIe-S Die-to-Die Link Die Shot and Overview. Source: Intel, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel presented their UCIe-S compatible die-to-die (D2D) interface. It can reach up to 48 Gb/s/lane over 16 lanes with UCIe-S and up to 56 Gb/s/lane with a cust"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!J1Ms!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel UCIe-S vs. Other Die-to-Die Link Comparison. Source: Intel, ISSCC 2026"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At VLSI 2025, Cadence demonstrated their own UCIe-S die-to-die interconnect on N3E. Despite the node disadvantage, Intel has managed to best Cadence’s interconn"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!NLKz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel Diamond Rapids Multi-Die Architecture Overview. Source: HEPiX via @InstLatX64"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The interconnect presented by Intel is likely to be a prototype of what will be used on their Diamond Rapids Xeon CPUs. Efficiency should be much better when de"
+        }
+      ]
+    },
+    {
+      "section_id": "17-tsmc-active-lsi-paper-8-2",
+      "title": "TSMC Active LSI - Paper 8.2",
+      "title_translation": null,
+      "paragraph_count": 25,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!kR_h!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC Passive vs. Active LSI Comparison. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC’s advanced packaging division presented their Active Local Silicon Interconnect (aLSI) solution. As opposed to standard CoWoS-L or EMIB, aLSI improves sign"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Gjwp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC Active LSI Die-to-Die Link Overview. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The device that TSMC showed used a 32 Gb/s UCIe-like transceiver. Due to aLSI improving signal integrity, the area of the transceivers could be decreased, and t"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As designers eke out every bit of die space for next-generation AI accelerators, the switch to aLSI is inevitable."
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The ‘active’ part of aLSI comes from replacing the passive long-reach metal channel in the bridge die with active transistors forming an Edge-Triggered Transcei"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The ETT integrates a driver, an AC-coupling capacitor (Cac), an amplifier with both negative and positive feedback, and an output stage. Running the signal thro"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!wpmP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC CoWoS-L Integrated Power Delivery with eDTC. Source: TSMC"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "These aLSI bridges can also integrate embedded deep trench capacitors (eDTC) along the front-end to improve power delivery to the PHY and D2D controllers. Inste"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Yp1W!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC Active LSI Routability and Cross-Section. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Only 388 µm of shoreline is required for 64 TX and 64 RX data lanes, coming out to a total area of 0.330 mm². Only the top 2 metal layers are required for routi"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!7zt3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC Active LSI Shmoo Plots at KGD and KGP Stages. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC explained how the Active LSI can be tested at multiple stages. The first is Known Good Die (KGD) with just the LSI for die validation. Next is Known Good S"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "They showed shmoo plots at the KGD and KGP stages, both showing the interconnect hitting 32 Gb/s at 0.75V and 38.4 Gb/s at 0.95V."
+        },
+        {
+          "id": "p019",
+          "index": 19,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!jY_b!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p020",
+          "index": 20,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC Active LSI Die Shot and Power Breakdown. Source: TSMC, ISSCC 2026"
+        },
+        {
+          "id": "p021",
+          "index": 21,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The package reveals two SoC dies and two IO dies. Interestingly, the test vehicle appears to match AMD’s MI450 GPU’s design, with 2 base dies connected to each "
+        },
+        {
+          "id": "p022",
+          "index": 22,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As for the power, the total is only 0.36 pJ/b at 0.75V, with only 0.07 pJ/b being used by the ETT in the Active LSI. Below is a comparison with other D2D soluti"
+        },
+        {
+          "id": "p023",
+          "index": 23,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!GHcE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p024",
+          "index": 24,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC Active LSI vs. Other Die-to-Die Interconnects. Source: TSMC, ISSCC 2026"
+        }
+      ]
+    },
+    {
+      "section_id": "18-microsoft-d2d-interconnect-p",
+      "title": "Microsoft D2D Interconnect - Paper 8.3",
+      "title_translation": null,
+      "paragraph_count": 13,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!2aNW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft D2D Test Vehicle Layout and Routing. Source: Microsoft, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft also detailed their die-to-die (D2D) interconnect. Their test vehicle includes two dies and two pairs of D2D nodes for interconnection. A full mock-up"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!3kjp!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft D2D Interconnect Die Shot. Source: Microsoft, ISSCC 2026"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The interconnect on their test die occupied 532 µm of shoreline and had a depth of 1350 µm. The test vehicle was fabricated on TSMC’s N3P node, and the intercon"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!i2ue!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft D2D Power Consumption Breakdown. Source: Microsoft, ISSCC 2026"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft reported two power consumption figures, one with both analog and digital system power, and one with only analog power. The latter is what most die-to-"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!qn-K!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft D2D vs. Other Die-to-Die Interconnects. Source: Microsoft, ISSCC 2026"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft also compared their interconnect to the same prior research as TSMC did for their Active LSI."
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As we explained in a previous article, Microsoft’s Cobalt 200 CPU features two compute chiplets connected by a custom high-bandwidth interconnect. We believe th"
+        }
+      ]
+    },
+    {
+      "section_id": "19-processors",
+      "title": "Processors",
+      "title_translation": null,
+      "paragraph_count": 1,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "From small mobile CPUs to large AI accelerators, ISSCC featured first-time architectural breakdowns from MediaTek, Intel, AMD, Rebellions, and Microsoft. Many e"
+        }
+      ]
+    },
+    {
+      "section_id": "20-mediatek-dimensity-9500-pape",
+      "title": "MediaTek Dimensity 9500 - Paper 10.2",
+      "title_translation": null,
+      "paragraph_count": 6,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Every year, MediaTek presents a different aspect of their flagship mobile CPUs. This year is no different, and the focus of this year’s mobile CPU presentation "
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!G7l7!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "MediaTek Dimensity 9500 C1 Ultra Core Process Optimization. Source: MediaTek, ISSCC 2026"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "TSMC offers two different Contacted Gate Pitch (CGP) options for N3E and N3P, 48nm and 54nm. Across most chips, the narrower CGP of 48nm has been used, as it le"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "MediaTek used the larger 54nm CGP on their Dimensity 9500’s C1 Ultra high-performance cores, for the improved power efficiency. This allowed them to reach highe"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The rest of MediaTek’s paper focuses on dynamic performance optimization by utilizing unused aging budget and reducing thermal overshoots. In total, they were a"
+        }
+      ]
+    },
+    {
+      "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+      "title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6",
+      "title_translation": null,
+      "paragraph_count": 14,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!L-SD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel M3DProc 18A and Intel 3 Die Floorplan. Source: Intel, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel disclosed their first hybrid bonded chip, the M3DProc. It consists of an Intel 3 bottom die, and an 18A top die. Each die contains 56 mesh tiles, cores an"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Ysv3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel M3DProc 3D Mesh Architecture. Source: Intel, ISSCC 2026"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The mesh tiles are arranged in a 14×4×2 3D mesh, with SRAM being shared across both dies."
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!6vZe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel M3DProc 2D vs. 3D Throughput and Energy Efficiency. Source: Intel, ISSCC 2026"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel found that the 3D mesh reduces latency and increases throughput by almost 40%. They also tested the energy efficiency of transferring data, with 2D being "
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!aWNv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Intel M3DProc Tile Bonding Floorplan. Source: Intel, ISSCC 2026"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Each tile has 552 pads, with just under half used for data, and just under a quarter used for power."
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "In terms of packaging, M3DProc is similar to Clearwater Forest (CWF). CWF has Intel 3 base dies, connected to 18A compute dies via 9μm Foveros Direct."
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The M3DProc achieves 875 GB/s 3D bandwidth, while each CWF compute die only achieves 210 GB/s. This chip’s 3D NoC has a significantly higher bandwidth density. "
+        }
+      ]
+    },
+    {
+      "section_id": "22-amd-mi355x-paper-2-1",
+      "title": "AMD MI355X - Paper 2.1",
+      "title_translation": null,
+      "paragraph_count": 17,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!o-hR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD MI300X vs. MI355X XCD Comparison. Source: AMD, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD presented on their MI355X GPUs. In conference presentations, AMD usually rehashes prior announcements while only introducing one or two new pieces of inform"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!zxX3!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD MI300X vs. MI355X XCD Area Efficiency. Source: AMD, ISSCC 2026"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD detailed how they doubled the matrix throughput per CU while keeping the total area the same and the number of CUs largely similar. First, of course, was th"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "They also used denser placement algorithms, similar to how the Zen 4c cores used in EPYC Bergamo CPUs are much smaller than the Zen 4 cores used in EPYC Genoa C"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "There are two approaches when performing the same calculations with many different data formats like FP16, FP8, MXFP4, etc. The first is using shared hardware, "
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!tuPF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD MI355X XCD Frequency and Power Efficiency Gains. Source: AMD, ISSCC 2026"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As the next node with improved transistors, N3P provides performance improvements by itself. Nevertheless, AMD was able to improve frequency iso-power by 5% bef"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Yxoy!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD MI355X IOD Merging Power Efficiency. Source: AMD, ISSCC 2026"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "MI300X featured 4 IO Dies. MI355X cuts that down to two. By doing this, AMD saves area on die-to-die interconnects. A larger monolithic die improves latency and"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!rkb_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "AMD MI355X IOD Interconnect Power Optimization. Source: AMD, ISSCC 2026"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As a large die with many routing options between any two areas on the chip, AMD had to do a lot of work to optimize the wires and interconnects. Through custom "
+        }
+      ]
+    },
+    {
+      "section_id": "23-rebellions-rebel100-paper-2",
+      "title": "Rebellions Rebel100 - Paper 2.2",
+      "title_translation": null,
+      "paragraph_count": 19,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rebellions is a South Korean startup working on AI accelerators. At ISSCC, they published the first architectural breakdown of their new accelerator, the Rebel1"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rebellions Rebel-Quad (now Rebel100) Summary from Hot Chips 2025. Source: Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "At Hot Chips 2025, Rebellions demonstrated the chip running Llama 3.3 70B. The specs have remained the same between Hot Chips and ISSCC. One key point to note i"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We have recently mentioned that CoWoS-S capacity constraints have been easing. That said, Samsung may have offered steep discounts to bundle I-CubeS advanced pa"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "I-CubeS has not seen adoption among any of the leading AI accelerators, and this could be Samsung’s attempt to break into the market. There are only 5 confirmed"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The first is a networking ASIC by eSilicon on Samsung’s 14LPP with HBM2. Baidu’s Kunlun1 accelerator is similar, using Samsung’s 14LPP process and 2 HBM2 stacks"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rebellions Rebel100 Multi-Die Architecture. Source: Rebellions, ISSCC 2026"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Rebel100 uses 4 compute dies and 4 HBM3E stacks. Each die has 3 UCIe-A interfaces. However, only two are used on each die, clocked at 16 Gb/s."
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rebellions Rebel100 Package-Level Modularity. Source: Rebellions, ISSCC 2026"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rebellions claims that the design is reconfigurable at the package level, where additional IO or memory chiplets can be added to integrate with Ethernet for sca"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rebellions stated that the IO chiplets would be taped out by 1Q2026. There was no provided timeline for the memory chiplets."
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rebellions Rebel100 Summary and Roadmap. Source: Rebellions, ISSCC 2026"
+        },
+        {
+          "id": "p016",
+          "index": 16,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p017",
+          "index": 17,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Rebellions Rebel100 Integrated Silicon Capacitors for HBM3E Power Quality. Source: Rebellions, ISSCC 2026"
+        },
+        {
+          "id": "p018",
+          "index": 18,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "They have also integrated silicon capacitors beside each HBM3E stack to improve power quality for HBM3E and critical control blocks."
+        }
+      ]
+    },
+    {
+      "section_id": "24-microsoft-maia-200-paper-17",
+      "title": "Microsoft Maia 200 - Paper 17.4",
+      "title_translation": null,
+      "paragraph_count": 15,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft detailed their Maia 200 AI accelerator. The paper was less of a research paper and more of a white paper, with only a single image, a spec sheet compa"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "While the Maia 100 was designed in a pre-GPT era, Maia 200 was designed for the current age of models and specifically inference. Earlier this year, Maia 200 no"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!3VIK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft Maia 200 Specifications Summary. Source: Microsoft, ISSCC 2026"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Maia 200 is the last holdout of reticle-scale monolithic designs. Every major HBM-equipped training and inference accelerator has moved on to multi-chip designs"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!oV7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft Maia 200 Package Cross-Section. Source: Microsoft, ISSCC 2026"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "On the package-level, Maia 200 is very standard, mimicking the H100. A CoWoS-S interposer, with 1 main die, and 6 HBM3E stacks."
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!1q24!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft Maia 200 Die Floorplan. Source: Microsoft, ISSCC 2026"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The long sides of the chip are covered in 3 HBM3E PHYs each, while the short sides each have 14 of the 28 lanes of 400 Gb/s D2D links. In the center, there is 2"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!Wj4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Microsoft Maia 200 Scale-Up Network and IO. Source: Microsoft, ISSCC 2026"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The Maia 200 has two different kinds of links, fixed links between other chips in the same node, and switched links between a chip and a switch. 21 links are co"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "We will be publishing a deep dive into the Maia 200, its microarchitecture and network topology, for institutional subscribers."
+        }
+      ]
+    },
+    {
+      "section_id": "25-other-highlight",
+      "title": "Other Highlight",
+      "title_translation": null,
+      "paragraph_count": 0,
+      "paragraphs": []
+    },
+    {
+      "section_id": "26-samsung-sf2-temperature-sensor",
+      "title": "Samsung SF2 Temperature Sensor - Paper 21.5",
+      "title_translation": null,
+      "paragraph_count": 16,
+      "paragraphs": [
+        {
+          "id": "p000",
+          "index": 0,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!S6Ri!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p001",
+          "index": 1,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Traditional Temperature Sensor Tradeoffs. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p002",
+          "index": 2,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!2aBs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p003",
+          "index": 3,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung SF2 Metal Resistor-Based Temperature Sensor Tradeoffs. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p004",
+          "index": 4,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung presented a compact temperature sensor on SF2, replacing the traditional bipolar junction transistor (BJT) approach with a BEOL metal resistor. This may"
+        },
+        {
+          "id": "p005",
+          "index": 5,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The metal resistor offers 518× higher sheet resistance than an equivalent routing metal, requiring roughly 1% of the area for the same resistance. As it sits in"
+        },
+        {
+          "id": "p006",
+          "index": 6,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!J1CI!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p007",
+          "index": 7,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung SF2 Temperature Sensor Stacked Implementation. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p008",
+          "index": 8,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The sensor uses a fully stacked capacitor-resistor-circuit structure with a total area of just 625 μm². As a characterized PDK element, its behavior is modeled "
+        },
+        {
+          "id": "p009",
+          "index": 9,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "As mentioned earlier, the metal resistors have a lower temperature coefficient of resistance (TCR), just 0.2× that of routing metal — which limits sensing resol"
+        },
+        {
+          "id": "p010",
+          "index": 10,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "For the time-to-digital conversion (TDC), they replaced the large linear delay generator used in prior work with a compact ring oscillator-based (RO) TDC, cutti"
+        },
+        {
+          "id": "p011",
+          "index": 11,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!f54k!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p012",
+          "index": 12,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung SF2 Temperature Sensor Conversion Time and Accuracy Comparisons. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p013",
+          "index": 13,
+          "element_type": "image",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "https://substackcdn.com/image/fetch/$s_!nCIv!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic"
+        },
+        {
+          "id": "p014",
+          "index": 14,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "Samsung SF2 Temperature Sensor vs. Prior Work Comparison Table. Source: Samsung, ISSCC 2026"
+        },
+        {
+          "id": "p015",
+          "index": 15,
+          "element_type": "p",
+          "heading_level": null,
+          "heading_chain": [],
+          "source_preview": "The new temperature sensor has an accuracy figure of merit (FoM) of 0.017 nJ·%², improving upon prior work on Samsung 5LPE, TSMC N3E and Intel 4 (JSSC 2025). Pr"
+        }
+      ]
+    }
+  ]
+}

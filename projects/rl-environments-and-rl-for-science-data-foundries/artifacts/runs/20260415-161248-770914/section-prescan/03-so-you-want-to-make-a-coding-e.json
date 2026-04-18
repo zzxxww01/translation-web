@@ -1,0 +1,38 @@
+{
+  "section_id": "03-so-you-want-to-make-a-coding-e",
+  "new_terms": [
+    {
+      "term": "SWE-rebench",
+      "suggested_translation": "SWE-rebench（软件工程基准测试）",
+      "context": "一个聚合GitHub任务用于构建编码环境的基准测试名称。",
+      "confidence": 0.9
+    },
+    {
+      "term": "GitHub Archive",
+      "suggested_translation": "GitHub存档",
+      "context": "包含大量仓库和PR的数据集来源。",
+      "confidence": 0.8
+    },
+    {
+      "term": "AST transformations",
+      "suggested_translation": "抽象语法树转换",
+      "context": "通过修改代码的抽象语法树来生成错误的方法。",
+      "confidence": 0.9
+    },
+    {
+      "term": "SWE-smith",
+      "suggested_translation": "SWE-smith",
+      "context": "一个通过LLM安装仓库并合成错误的工具/方法名称。",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl environments": "强化学习环境",
+    "rollouts": "推演",
+    "throughput": "吞吐量",
+    "PR": "PR（拉取请求）",
+    "LLM": "LLM"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T16:13:43.833089"
+}

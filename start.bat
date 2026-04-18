@@ -1,5 +1,5 @@
 @echo off
-setlocal
+setlocal EnableDelayedExpansion
 title Translation Agent
 
 rem ========== Environment checks ==========
@@ -42,15 +42,17 @@ set "FORCE_BUILD=0"
 set "RELOAD_ARGS="
 set "PORT=54321"
 set "FORCE_KILL_PORT=0"
-for %%a in (%*) do (
-    if /I "%%a"=="--force-build" set "FORCE_BUILD=1"
-    if /I "%%a"=="-f" set "FORCE_BUILD=1"
-    if /I "%%a"=="--dev" set "RELOAD_ARGS=--reload"
-    if /I "%%a"=="--force-kill-port" set "FORCE_KILL_PORT=1"
-    echo %%a | findstr /I /B "--port=" >nul && (
-        for /f "tokens=2 delims==" %%p in ("%%a") do set "PORT=%%p"
-    )
-)
+:parse_args
+if "%~1"=="" goto args_done
+if /I "%~1"=="--force-build" set "FORCE_BUILD=1"
+if /I "%~1"=="-f" set "FORCE_BUILD=1"
+if /I "%~1"=="--dev" set "RELOAD_ARGS=--reload"
+if /I "%~1"=="--force-kill-port" set "FORCE_KILL_PORT=1"
+set "ARG=%~1"
+if /I "!ARG:~0,7!"=="--port=" set "PORT=!ARG:~7!"
+shift
+goto parse_args
+:args_done
 
 echo ========================================
 echo   Translation Agent
@@ -147,6 +149,18 @@ rem Remove source maps to save space
 if exist "web\frontend\dist\assets\*.map" (
     echo [INFO] Removing source map files...
     del /Q "web\frontend\dist\assets\*.map" 2>nul
+)
+
+rem ========== Reuse healthy existing server ==========
+%PYTHON_CMD% -c "from src.startup_probe import is_translation_agent_running; import sys; sys.exit(0 if is_translation_agent_running(%PORT%) else 1)" >nul 2>&1
+if %errorlevel% equ 0 (
+    echo [INFO] Translation Agent is already running on port %PORT%.
+    echo [INFO] Reusing existing instance.
+    echo [INFO] API:      http://localhost:%PORT%/api
+    echo [INFO] Web UI:   http://localhost:%PORT%
+    echo [INFO] API Docs: http://localhost:%PORT%/docs
+    echo(
+    exit /b 0
 )
 
 rem ========== Force cleanup for port ==========

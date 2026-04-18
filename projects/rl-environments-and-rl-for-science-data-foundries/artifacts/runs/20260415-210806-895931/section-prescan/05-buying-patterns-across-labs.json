@@ -1,0 +1,34 @@
+{
+  "section_id": "05-buying-patterns-across-labs",
+  "new_terms": [
+    {
+      "term": "vendor engagement platform",
+      "suggested_translation": "供应商参与平台",
+      "context": "Anthropic为管理多家供应商而构建的平台。",
+      "confidence": 0.9
+    },
+    {
+      "term": "rate limits",
+      "suggested_translation": "速率限制",
+      "context": "Google为保护其产品（如Gmail）而设置的防爬取限制。",
+      "confidence": 0.9
+    },
+    {
+      "term": "mockup app",
+      "suggested_translation": "模拟应用",
+      "context": "用于训练模型的仿制应用程序。",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "rl environments": "强化学习环境",
+    "computer use": "计算机操作",
+    "post-training": "后训练",
+    "mid-training": "中期训练",
+    "pre-training": "预训练",
+    "ui gyms": "UI训练场",
+    "human data team": "人工数据团队"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T21:10:00.419756"
+}

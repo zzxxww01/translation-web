@@ -1,0 +1,22 @@
+{
+  "section_id": "11-optical-networking",
+  "new_terms": [
+    {
+      "term": "optical interconnects",
+      "suggested_translation": "光学互连",
+      "context": "用于数据中心内/间AI加速器数据传输",
+      "confidence": 0.9
+    },
+    {
+      "term": "AI accelerators",
+      "suggested_translation": "AI加速器",
+      "context": "下一代AI硬件",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "data center": "数据中心"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:35:49.201288"
+}

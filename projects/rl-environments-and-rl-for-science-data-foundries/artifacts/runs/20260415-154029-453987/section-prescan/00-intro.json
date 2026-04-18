@@ -1,0 +1,58 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "Cursor",
+      "suggested_translation": "Cursor",
+      "context": "AI代码编辑器/IDE公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "Windsurf",
+      "suggested_translation": "Windsurf",
+      "context": "AI代码助手/公司名",
+      "confidence": 0.9
+    },
+    {
+      "term": "GPT-4o",
+      "suggested_translation": "GPT-4o",
+      "context": "OpenAI基础模型",
+      "confidence": 0.95
+    },
+    {
+      "term": "o1",
+      "suggested_translation": "o1",
+      "context": "OpenAI推理模型系列",
+      "confidence": 0.95
+    },
+    {
+      "term": "o3",
+      "suggested_translation": "o3",
+      "context": "OpenAI推理模型系列",
+      "confidence": 0.95
+    },
+    {
+      "term": "GPT-5.2",
+      "suggested_translation": "GPT-5.2",
+      "context": "OpenAI模型版本",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "gdpval": "GDPval",
+    "computer use environments": "计算机操作环境",
+    "reward hacking": "奖励劫持",
+    "openai": "OpenAI",
+    "anthropic": "Anthropic",
+    "xai": "xAI",
+    "utility evals": "实用性评估",
+    "computer use agents": "计算机使用智能体",
+    "mid-training": "中期训练",
+    "rl as a service": "RL即服务"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:40:48.439519"
+}

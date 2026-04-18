@@ -1,0 +1,113 @@
+{
+  "section_id": "22-amd-mi355x-paper-2-1",
+  "new_terms": [
+    {
+      "term": "XCD",
+      "suggested_translation": "XCD",
+      "context": "AMD GPU计算芯片块（如MI355X XCD）",
+      "confidence": 0.95
+    },
+    {
+      "term": "IOD",
+      "suggested_translation": "IOD",
+      "context": "AMD GPU输入输出芯片块（如MI355X IOD）",
+      "confidence": 0.95
+    },
+    {
+      "term": "CU",
+      "suggested_translation": "CU",
+      "context": "计算单元（AMD GPU架构中的核心模块）",
+      "confidence": 0.9
+    },
+    {
+      "term": "N5",
+      "suggested_translation": "N5",
+      "context": "台积电5纳米制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "N3P",
+      "suggested_translation": "N3P",
+      "context": "台积电3纳米增强版制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "standard cells",
+      "suggested_translation": "标准单元",
+      "context": "芯片设计中的基本逻辑单元库",
+      "confidence": 0.85
+    },
+    {
+      "term": "FP16",
+      "suggested_translation": "FP16",
+      "context": "16位浮点数格式",
+      "confidence": 0.8
+    },
+    {
+      "term": "FP8",
+      "suggested_translation": "FP8",
+      "context": "8位浮点数格式",
+      "confidence": 0.8
+    },
+    {
+      "term": "MXFP4",
+      "suggested_translation": "MXFP4",
+      "context": "AMD的4位混合精度浮点格式",
+      "confidence": 0.8
+    },
+    {
+      "term": "flip-flop variants",
+      "suggested_translation": "触发器变体",
+      "context": "具有不同功耗/性能特性的触发器设计",
+      "confidence": 0.75
+    },
+    {
+      "term": "matrix throughput",
+      "suggested_translation": "矩阵吞吐量",
+      "context": "每个CU的矩阵运算吞吐量",
+      "confidence": 0.8
+    },
+    {
+      "term": "metal layers",
+      "suggested_translation": "金属层",
+      "context": "芯片互连布线层",
+      "confidence": 0.8
+    },
+    {
+      "term": "denser placement algorithms",
+      "suggested_translation": "更密集的布局算法",
+      "context": "芯片物理设计中的单元布局算法",
+      "confidence": 0.75
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm": "HBM",
+    "serdes": "串行器/解串器",
+    "die-to-die interconnects": "裸片间互连",
+    "amd": "AMD",
+    "tsmc": "台积电",
+    "euv": "EUV",
+    "gpu": "GPU",
+    "cpu": "CPU",
+    "sram": "SRAM",
+    "hpc": "HPC",
+    "bandwidth": "带宽",
+    "latency": "延迟",
+    "throughput": "吞吐量",
+    "power consumption": "功耗",
+    "frequency": "频率",
+    "node": "制程节点",
+    "chip": "芯片",
+    "die": "裸片",
+    "transistor density": "晶体管密度",
+    "cell utilization": "单元利用率",
+    "routing": "布线",
+    "monolithic die": "单芯片",
+    "interconnect width": "互连宽度",
+    "compute dies": "计算芯片块",
+    "wires": "导线"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:42:48.845005"
+}

@@ -1,0 +1,40 @@
+{
+  "section_id": "05-buying-patterns-across-labs",
+  "new_terms": [
+    {
+      "term": "vendor engagement platform",
+      "suggested_translation": "供应商参与平台",
+      "context": "Anthropic 为管理多个供应商而构建的平台。",
+      "confidence": 0.9
+    },
+    {
+      "term": "rate limits",
+      "suggested_translation": "速率限制",
+      "context": "Google 为保护其产品（如 Gmail）免受爬取而设置的限制。",
+      "confidence": 0.9
+    },
+    {
+      "term": "scraping",
+      "suggested_translation": "爬取 / 抓取",
+      "context": "从应用程序中自动提取数据的行为。",
+      "confidence": 0.9
+    },
+    {
+      "term": "mockup app",
+      "suggested_translation": "模拟应用",
+      "context": "用于训练目的的复制品应用程序。",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "rl environments": "强化学习环境",
+    "post-training": "后训练",
+    "mid-training": "中期训练",
+    "ui gyms": "UI训练场",
+    "imo": "国际数学奥林匹克",
+    "gpt-5.1 codex max": "GPT-5.1 Codex Max（模型名）",
+    "agi": "AGI（通用人工智能）"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T19:47:26.547230"
+}

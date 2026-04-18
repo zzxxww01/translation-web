@@ -1,0 +1,707 @@
+{
+  "report": {
+    "is_consistent": true,
+    "issues": [],
+    "auto_fixable": [],
+    "manual_review": [],
+    "term_stats": {
+      "Mid-Training": {
+        "total_count": 2,
+        "translations": {
+          "中期训练": 2
+        },
+        "is_consistent": true,
+        "preferred": "中期训练"
+      },
+      "AI": {
+        "total_count": 40,
+        "translations": {
+          "AI": 14
+        },
+        "is_consistent": true,
+        "preferred": "AI"
+      },
+      "LLM": {
+        "total_count": 5,
+        "translations": {
+          "LLM": 5
+        },
+        "is_consistent": true,
+        "preferred": "LLM"
+      },
+      "training": {
+        "total_count": 12,
+        "translations": {
+          "训练": 12
+        },
+        "is_consistent": true,
+        "preferred": "训练"
+      },
+      "RL": {
+        "total_count": 12,
+        "translations": {
+          "RL (强化学习)": 1
+        },
+        "is_consistent": true,
+        "preferred": "RL (强化学习)"
+      },
+      "GDPval": {
+        "total_count": 5,
+        "translations": {
+          "GDPval": 5
+        },
+        "is_consistent": true,
+        "preferred": "GDPval"
+      },
+      "Computer Use Agents": {
+        "total_count": 1,
+        "translations": {
+          "计算机使用智能体": 1
+        },
+        "is_consistent": true,
+        "preferred": "计算机使用智能体"
+      },
+      "PR": {
+        "total_count": 49,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "PR (Pull Request/拉取请求)"
+      },
+      "Anthropic": {
+        "total_count": 5,
+        "translations": {
+          "Anthropic": 5
+        },
+        "is_consistent": true,
+        "preferred": "Anthropic"
+      },
+      "RL as a Service": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "RL即服务"
+      },
+      "Utility Evals": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "实用性评估"
+      },
+      "token": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "词元"
+      },
+      "SemiAnalysis": {
+        "total_count": 5,
+        "translations": {
+          "SemiAnalysis": 5
+        },
+        "is_consistent": true,
+        "preferred": "SemiAnalysis"
+      },
+      "Vera": {
+        "total_count": 4,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": null
+      },
+      "pre-training": {
+        "total_count": 5,
+        "translations": {
+          "预训练": 5
+        },
+        "is_consistent": true,
+        "preferred": "预训练"
+      },
+      "Reward Hacking": {
+        "total_count": 1,
+        "translations": {
+          "奖励劫持": 1
+        },
+        "is_consistent": true,
+        "preferred": "奖励劫持"
+      },
+      "InFO": {
+        "total_count": 3,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "InFO"
+      },
+      "performance": {
+        "total_count": 2,
+        "translations": {
+          "性能": 2
+        },
+        "is_consistent": true,
+        "preferred": "性能"
+      },
+      "post-training": {
+        "total_count": 4,
+        "translations": {
+          "后训练": 4
+        },
+        "is_consistent": true,
+        "preferred": "后训练"
+      },
+      "API": {
+        "total_count": 2,
+        "translations": {
+          "API": 1
+        },
+        "is_consistent": true,
+        "preferred": "API"
+      },
+      "OpenAI": {
+        "total_count": 8,
+        "translations": {
+          "OpenAI": 8
+        },
+        "is_consistent": true,
+        "preferred": "OpenAI"
+      },
+      "o1": {
+        "total_count": 1,
+        "translations": {
+          "o1": 1
+        },
+        "is_consistent": true,
+        "preferred": "o1"
+      },
+      "o3": {
+        "total_count": 1,
+        "translations": {
+          "o3": 1
+        },
+        "is_consistent": true,
+        "preferred": "o3"
+      },
+      "Drive": {
+        "total_count": 2,
+        "translations": {
+          "Drive": 1
+        },
+        "is_consistent": true,
+        "preferred": "Drive"
+      },
+      "AWS": {
+        "total_count": 12,
+        "translations": {
+          "AWS": 1
+        },
+        "is_consistent": true,
+        "preferred": "AWS"
+      },
+      "xAI": {
+        "total_count": 1,
+        "translations": {
+          "xAI": 1
+        },
+        "is_consistent": true,
+        "preferred": "xAI"
+      },
+      "UI": {
+        "total_count": 14,
+        "translations": {
+          "UI": 3
+        },
+        "is_consistent": true,
+        "preferred": "UI"
+      },
+      "Cursor": {
+        "total_count": 1,
+        "translations": {
+          "Cursor": 1
+        },
+        "is_consistent": true,
+        "preferred": "Cursor"
+      },
+      "Windsurf": {
+        "total_count": 1,
+        "translations": {
+          "Windsurf": 1
+        },
+        "is_consistent": true,
+        "preferred": "Windsurf"
+      },
+      "TPU": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "TPU"
+      },
+      "GPT-5.2": {
+        "total_count": 1,
+        "translations": {
+          "GPT-5.2": 1
+        },
+        "is_consistent": true,
+        "preferred": "GPT-5.2"
+      },
+      "Slides": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "Slides"
+      },
+      "Intel": {
+        "total_count": 4,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "英特尔"
+      },
+      "evaluations": {
+        "total_count": 2,
+        "translations": {
+          "评估": 1
+        },
+        "is_consistent": true,
+        "preferred": "评估"
+      },
+      "Computer use environments": {
+        "total_count": 1,
+        "translations": {
+          "计算机操作环境": 1
+        },
+        "is_consistent": true,
+        "preferred": "计算机操作环境"
+      },
+      "revenue": {
+        "total_count": 3,
+        "translations": {
+          "营收": 2
+        },
+        "is_consistent": true,
+        "preferred": "营收"
+      },
+      "Meta": {
+        "total_count": 3,
+        "translations": {
+          "Meta": 3
+        },
+        "is_consistent": true,
+        "preferred": "Meta"
+      },
+      "Scale AI": {
+        "total_count": 1,
+        "translations": {
+          "Scale AI": 1
+        },
+        "is_consistent": true,
+        "preferred": "Scale AI"
+      },
+      "Sacra": {
+        "total_count": 1,
+        "translations": {
+          "Sacra": 1
+        },
+        "is_consistent": true,
+        "preferred": "Sacra"
+      },
+      "Superintelligence": {
+        "total_count": 2,
+        "translations": {
+          "超级智能": 2
+        },
+        "is_consistent": true,
+        "preferred": "超级智能"
+      },
+      "Surge": {
+        "total_count": 3,
+        "translations": {
+          "Surge": 3
+        },
+        "is_consistent": true,
+        "preferred": "Surge"
+      },
+      "RL environments": {
+        "total_count": 4,
+        "translations": {
+          "强化学习环境": 3
+        },
+        "is_consistent": true,
+        "preferred": "强化学习环境"
+      },
+      "UI gyms": {
+        "total_count": 2,
+        "translations": {
+          "UI训练场": 2
+        },
+        "is_consistent": true,
+        "preferred": "UI训练场"
+      },
+      "ChatGPT Agent": {
+        "total_count": 1,
+        "translations": {
+          "ChatGPT智能体": 1
+        },
+        "is_consistent": true,
+        "preferred": "ChatGPT智能体"
+      },
+      "PM": {
+        "total_count": 2,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "产品经理"
+      },
+      "Gmail": {
+        "total_count": 1,
+        "translations": {
+          "Gmail": 1
+        },
+        "is_consistent": true,
+        "preferred": "Gmail"
+      },
+      "Environments Hub": {
+        "total_count": 1,
+        "translations": {
+          "环境中心": 1
+        },
+        "is_consistent": true,
+        "preferred": "环境中心"
+      },
+      "MCP": {
+        "total_count": 2,
+        "translations": {
+          "MCP": 2
+        },
+        "is_consistent": true,
+        "preferred": "MCP"
+      },
+      "observation": {
+        "total_count": 2,
+        "translations": {
+          "观察值": 2
+        },
+        "is_consistent": true,
+        "preferred": "观察值"
+      },
+      "tool call": {
+        "total_count": 2,
+        "translations": {
+          "工具调用": 2
+        },
+        "is_consistent": true,
+        "preferred": "工具调用"
+      },
+      "MCP server": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "MCP服务器"
+      },
+      "Sheets": {
+        "total_count": 1,
+        "translations": {
+          "Sheets": 1
+        },
+        "is_consistent": true,
+        "preferred": "Sheets"
+      },
+      "telemetry": {
+        "total_count": 1,
+        "translations": {
+          "遥测数据": 1
+        },
+        "is_consistent": true,
+        "preferred": "遥测数据"
+      },
+      "benchmark": {
+        "total_count": 1,
+        "translations": {
+          "基准测试": 1
+        },
+        "is_consistent": true,
+        "preferred": "基准测试"
+      },
+      "SWE-rebench": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "SWE-rebench（软件工程基准测试）"
+      },
+      "GitHub Archive": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "GitHub存档"
+      },
+      "Execution-based verification": {
+        "total_count": 1,
+        "translations": {
+          "基于执行的验证": 1
+        },
+        "is_consistent": true,
+        "preferred": "基于执行的验证"
+      },
+      "yield": {
+        "total_count": 1,
+        "translations": {
+          "良率": 1
+        },
+        "is_consistent": true,
+        "preferred": "良率"
+      },
+      "AST transformations": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "AST（抽象语法树）转换"
+      },
+      "SWE-smith": {
+        "total_count": 1,
+        "translations": {
+          "SWE-smith": 1
+        },
+        "is_consistent": true,
+        "preferred": "SWE-smith"
+      },
+      "Rollouts": {
+        "total_count": 1,
+        "translations": {
+          "轨迹推演": 1
+        },
+        "is_consistent": true,
+        "preferred": "轨迹推演"
+      },
+      "throughput": {
+        "total_count": 1,
+        "translations": {
+          "吞吐量": 1
+        },
+        "is_consistent": true,
+        "preferred": "吞吐量"
+      },
+      "rollout": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "推演 / 采样轨迹"
+      },
+      "shots on goal": {
+        "total_count": 1,
+        "translations": {
+          "射门机会": 1
+        },
+        "is_consistent": true,
+        "preferred": "射门机会"
+      },
+      "EHR": {
+        "total_count": 1,
+        "translations": {
+          "电子健康记录": 1
+        },
+        "is_consistent": true,
+        "preferred": "电子健康记录"
+      },
+      "NPU": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "NPU"
+      },
+      "rubric": {
+        "total_count": 3,
+        "translations": {
+          "评分标准": 2
+        },
+        "is_consistent": true,
+        "preferred": "评分标准"
+      },
+      "reward signals": {
+        "total_count": 1,
+        "translations": {
+          "奖励信号": 1
+        },
+        "is_consistent": true,
+        "preferred": "奖励信号"
+      },
+      "Feather": {
+        "total_count": 1,
+        "translations": {
+          "Feather": 1
+        },
+        "is_consistent": true,
+        "preferred": "Feather"
+      },
+      "ARR": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "ARR (年度经常性收入)"
+      },
+      "Mercor": {
+        "total_count": 2,
+        "translations": {
+          "Mercor": 2
+        },
+        "is_consistent": true,
+        "preferred": "Mercor"
+      },
+      "Aboda.ai": {
+        "total_count": 2,
+        "translations": {
+          "Aboda.ai": 2
+        },
+        "is_consistent": true,
+        "preferred": "Aboda.ai"
+      },
+      "Handshake": {
+        "total_count": 1,
+        "translations": {
+          "Handshake": 1
+        },
+        "is_consistent": true,
+        "preferred": "Handshake"
+      },
+      "Moonshot": {
+        "total_count": 1,
+        "translations": {
+          "月之暗面": 1
+        },
+        "is_consistent": true,
+        "preferred": "月之暗面"
+      },
+      "Z.ai": {
+        "total_count": 1,
+        "translations": {
+          "Z.ai": 1
+        },
+        "is_consistent": true,
+        "preferred": "Z.ai"
+      },
+      "Kimi K2 Thinking": {
+        "total_count": 1,
+        "translations": {
+          "Kimi K2 Thinking": 1
+        },
+        "is_consistent": true,
+        "preferred": "Kimi K2 Thinking"
+      },
+      "GLM-4.6": {
+        "total_count": 1,
+        "translations": {
+          "GLM-4.6": 1
+        },
+        "is_consistent": true,
+        "preferred": "GLM-4.6"
+      },
+      "foundry": {
+        "total_count": 1,
+        "translations": {},
+        "is_consistent": true,
+        "preferred": "晶圆代工厂"
+      },
+      "Data Foundry": {
+        "total_count": 1,
+        "translations": {
+          "数据代工厂": 1
+        },
+        "is_consistent": true,
+        "preferred": "数据代工厂"
+      },
+      "Qwen": {
+        "total_count": 1,
+        "translations": {
+          "通义千问": 1
+        },
+        "is_consistent": true,
+        "preferred": "通义千问"
+      },
+      "The LLM Data Company": {
+        "total_count": 2,
+        "translations": {
+          "The LLM Data Company": 2
+        },
+        "is_consistent": true,
+        "preferred": "The LLM Data Company"
+      }
+    },
+    "style_score": 100.0,
+    "suggestions": []
+  },
+  "translations_after_consistency": {
+    "00-intro": [
+      "劳动力自动化、强化学习即服务、Anthropic 的下一个重大押注、GDPval 与效用评估、计算机使用智能体、生物学领域的 LLM、中期训练、实验室采购模式、平台政治与访问权限",
+      "作者：AJ Kourabi、Dylan Patel",
+      "2026 年 1 月 6 日 · 付费文章",
+      "我们正在招聘 AI 分析师与代币经济学分析师。[点击此处申请](https://app.dover.com/SemiAnalysis/careers/ddbb65b5-1f71-4c20-835f-7c6860ed5d7f)或直接与我们联系。",
+      "去年六月，我们曾断言：扩展 RL (强化学习) 是解锁更强 AI 能力的关键路径。正如后文所示，过去数月的发展印证了我们的预判——核心能力的大幅跃升正源于 RL 算力的持续加码。尽管预训练仍在不断优化，但各大实验室已将焦点死死锁定在扩展 RL 算力上。",
+      "扩展强化学习：环境、奖励劫持（Reward Hacking）、智能体、扩展数据 - Dylan Patel 与 AJ Kourabi · 2025 年 6 月 8 日",
+      "OpenAI 就是绝佳的例证。该公司近期发布的所有旗舰模型（o1、o3 及 GPT-5 系列），均沿用了同一个基础模型——GPT-4o。过去 18 个月里，OpenAI 模型的性能提升，完全归功于后训练与 RL 算力的扩展。如今，OpenAI 已解决其预训练难题；随着这一扩展维度的打通，未来的技术演进必将更加迅猛。",
+      "https://substackcdn.com/image/fetch/$s_!cYt8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7e50fdb7-cb85-4d29-b665-bf4743c5d3f6_1142x634.png",
+      "这并非断言预训练已死：Anthropic、xAI，尤其是 Google，均从扩展预训练中获益匪浅。但 OpenAI 去年的进展，及其仅凭旧版基础模型便能稳居第一梯队的能力，正是后训练有效性的有力证明。",
+      "扩展 RL 绝非易事，这要求源源不断的任务供模型去解决并从中学习。预训练能以整个互联网为训练场，但 RL 尚无同等规模的语料库。绝大多数 RL 数据与任务必须从零构建，极耗人力。",
+      "让模型“做作业”始于数学题，这类问题极易评分。此后训练方法不断演进，触角已延伸至医疗健康与金融建模等全新领域。为此，模型被置于专业化程度日益加深的“环境”中，被迫在其中完成各项任务。",
+      "汇总任务与数据既可依靠人工，也可通过提炼高信号用户数据来实现。正是得益于后者，Windsurf 与 Cursor 等公司纵使缺乏顶尖实验室的资源，依然能后训练出极具竞争力的自有模型。",
+      "这些后训练实践不仅提升了模型在编程等领域的能力，更增强了模型的实用性：模型在 Excel 与 PowerPoint 等日常工具中变得更加好用。",
+      "为衡量模型在实用性与能力上的进步幅度，OpenAI 创立了名为 GDPval 的评估基准。该基准涵盖 44 个职业的 1000 多项任务，均精选自占经济比重超 5% 的行业。其中许多属于数字化任务，但人类仍需耗费数小时方可完成。这些任务由 OpenAI 携手平均从业经验达 14 年的专家共同设计。",
+      "在提供提示词与一组参考文档的前提下，模型需着手解决这些问题。具体任务包括为虚构人物报税、以度假村客户顾问身份制作幻灯片，以及利用指定库存素材剪辑商业广告。评分方式是让专家在模型答案与人类专家答案之间做选择。若胜率持平，即意味着模型性能已与人类专家并驾齐驱。目前最强的 GPT-5.2 模型得分约为 71%，这意味着在 71% 的情况下，其产出与人类打平或更受青睐。",
+      "https://substackcdn.com/image/fetch/$s_!utwm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F370d577f-508c-40df-b6d4-857bf1225db8_1022x575.png",
+      "GDPval 任务集示例。来源：OpenAI",
+      "尽管 GDPval 存在些许瑕疵（如过度偏重极其具体的数字化工作），但它仍是绝佳范例，印证了评估标准正从衡量抽象智力转向真实世界实用性。这与以往多数模型评估形成鲜明对比。此前的评估往往聚焦数学知识，或以选择题形式考查博士级科学问题。",
+      "这一转变背后的底层趋势是，模型自主运行的时长正不断增加。随着模型在长短周期任务中的能力双双提升，AI 公司笃定，模型必将能协助研发下一代模型。就 OpenAI 而言，其目标是在 2028 年 3 月前打造出自主AI研究员。Anthropic 则预测，到 2027 年，Claude 等系统将能自主攻克原本耗时数载方可达成的技术突破。",
+      "https://substackcdn.com/image/fetch/$s_!2Q1-!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4d7a943d-bd4c-4a9a-8be7-c63038e40a79_1568x883.png",
+      "来源：Anthropic",
+      "然而，实现这一愿景需要海量的数据与精细的任务提炼。以计算机操作环境为例，其构建过程充斥着大量机械性的软件工程工作，例如复刻互联网上的现有网站。顶尖实验室自行处理这些工作耗时费力，因此大部分此类工作已被外包。"
+    ],
+    "01-outsourcing-and-the-ghost-of-s": [
+      "过去，Scale AI 曾是各大实验室最大的数据承包商之一，但如今已基本被 Meta 收入麾下。各大实验室曾在 Scale 身上砸下重金，助其 2024 年营收突破 14 亿美元。",
+      "https://substackcdn.com/image/fetch/$s_!h8nm!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F12f97061-879f-43b5-8d42-acc3af9930f3_1652x977.png",
+      "来源：Sacra，SemiAnalysis。",
+      "然而，收购完成后，多家 AI 实验室基本终止了与 Scale 的合作。各大实验室借此防止 Meta 接触到其最渴求的数据。部分 Scale 团队成员加入了 Meta 超级智能团队，主要出任管理层，或编入安全与评测团队。如今，该机构虽仍在产出评测结果并保留部分数据合同，但对各大实验室的服务规模已远不及当年。",
+      "Meta 超级智能团队——领导层、算力、人才与数据 - Dylan Patel、Jeremie Eliahou Ontiveros 及另外 3 人 · 2025 年 7 月 11 日",
+      "尽管行业风向早已开始向 Surge 等其他数据提供商倾斜，但 Scale 离场后仍留下了巨大的市场真空。究竟是谁填补了这一空白？"
+    ],
+    "02-during-a-gold-rush-sell-shove": [
+      "淘金热中，卖铲子。在RL规模化（Scaling）热潮中，卖强化学习环境。已有超过35家公司涌现，目标正是在各个领域提供此类环境。",
+      "一类公司专注于克隆网站。例如，环境公司雇佣海外开发者复制DoorDash或Uber Eats等网站的UI，并将模拟界面出售给实验室。实验室随后训练智能体在这些网站中导航，以便在生产环境中，智能体能够可靠且一致地执行所需功能。",
+      "这些“UI训练场”通常每个网站售价约2万美元，OpenAI已为ChatGPT智能体的训练和开发采购了数百个网站。这些环境是一次性购买，并可复用于未来的模型。先前运行的轨迹和日志会被保留，并反馈到训练的不同阶段，例如在中期训练中使用。",
+      "https://substackcdn.com/image/fetch/$s_!kvQ_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F04032584-5b2e-4b30-afa9-ba2fcc0f9ab9_2140x780.png",
+      "来源：Karina Nguyen 的公开演讲，SemiAnalysis",
+      "其他公司则拓展至比单纯网站更复杂的环境，例如Slack、Salesforce、AWS终端、Microsoft OneDrive、Gmail、Discord和Atlassian。目标是让智能体能在这些软件平台中自主操作，学习并更好地理解如何在其内部导航和运行。",
+      "这些平台一旦构建完成，便可组合起来，用以模拟更高保真度的任务与工作负载。将Slack、浏览器API端点以及代码编辑器等平台整合，能为模型构建出日益逼真的软件任务。这使得交互模式从单次提示转向多轮对话成为可能——例如，在任务执行中途通过Slack向模型发送消息，要求其调整某项功能。",
+      "构建此类环境的公司包括Habitat、DeepTune、Fleet、Vmax、Turing、Mechanize、Preference Model、Bespoke Labs、Veris.ai等众多其他公司。即使在这些公司内部，质量或专注领域也存在显著差异。有些公司专注于UI训练场，如Turing；而另一些如Mechanize则专注于软件工程任务。几乎所有公司都处于种子阶段，员工少于20人，最多只专注于1到3个客户。",
+      "上述大多数公司都将其环境闭源，并通过独家合同提供给实验室。然而，也有一些公司，如 Prime Intellect，选择将其环境开源，并正在培育旨在成为强化学习环境一站式商店的环境中心。",
+      "其他公司则在为环境构建工具。例如，HUD提供的工具可以将任何给定软件（如游戏、浏览器、Google Sheets）封装在 Docker 容器中，使其成为可扩展的强化学习环境。每个容器包含两层：环境后端（被封装的实际软件）以及位于其上层的 MCP 服务器，后者负责提供智能体可调用的工具定义。当智能体发出如click(x,y)或type(text)这样的工具调用时，MCP 服务器会将其转换为对底层软件的操作，并返回结果观察值。这一过程通常会被扩展到许多并行实例中。每个任务都包含一个提示、设置条件和成功标准，这些条件会返回奖励信号。",
+      "每一次工具调用和观察值都会通过遥测数据被捕获，这不仅有助于调试，还会在后续阶段被收集并输入到训练中。",
+      "https://substackcdn.com/image/fetch/$s_!FnWW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa0e265cb-a9a1-4cc2-8baa-3b1a353d98a1_1480x1620.png",
+      "目前需求最高的环境是编码环境。了解这些环境的构建、架构与集成方式，为我们提供了一个独特视角，得以窥见支撑当前AI进步的基础设施与工程实践。"
+    ],
+    "03-so-you-want-to-make-a-coding-e": [
+      "对编码环境的需求如此之高，以至于我们认为，一些已倒闭的初创公司被收购，其价值就在于获得了另一个私有的 GitHub 代码库，用以构建环境。要理解这些代码库为何如此宝贵，需要了解编码环境究竟是如何构建的。这个过程比看起来要复杂得多。",
+      "SWE-rebench 是一个基准测试，它汇总了来自 GitHub 的数千个 Python 任务，并展示了这些环境的构建方式。它所采用的流程也是自动化的，这正是我们所期望实验室正在做的事情。",
+      "该流程始于下载 GitHub 存档，其中包含 3 万个代码库和 45 万个采用宽松许可证的 PR。随后，该数据集会经过多轮筛选：PR 必须已关闭（即已解决）、已合并到主分支、有足够的问题描述、涉及多个文件的修改等。PR 必须引入或修改测试文件，因为这是用于评分的依据。例如，如果模型的补丁使先前失败的测试得以通过（且未破坏其他测试），则该任务被标记为已解决。",
+      "为了实现环境配置的自动化，LLM 会为每个任务生成安装指令。模型读取代码库中的相关文件（如 README、setup.py、requirements.txt、Docker 文件），然后合成一个结构化的 JSON“配方”，其中指定了 Python 版本、依赖安装命令和测试执行命令。",
+      "https://substackcdn.com/image/fetch/$s_!Y6RD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F997762d1-a8cc-47ab-b1b5-494566767783_1460x779.png",
+      "来源：Badertdinov, Golubev 等人",
+      "每个候选任务随后都会经过基于执行的验证。环境在容器中实例化，并执行来自 PR 测试补丁的测试。一个任务只有在满足以下所有条件时才被视为有效：在应用解决方案补丁前，至少有一个测试失败；应用补丁后，所有原先失败的测试均通过；并且所有原先通过的测试在补丁后依然通过。经过所有筛选后，我们从最初的 45 万个任务中最终得到了 21,336 个有效任务。",
+      "但大多数 PR 不符合这些严格的标准，因此良率很低。SWE-smith 通过以下方式证明了这一点：让 LLM 在最新提交版本上安装代码库，然后通过四种方法合成缺陷：提示模型在正常函数中引入细微错误；应用确定性抽象语法树转换（如翻转 if/else 代码块或移除循环）；使用 LLM，根据当前代码库语义，对真实的 PR 进行逆向操作（即生成能“撤销”该 PR 的缺陷）；以及将已验证的单函数缺陷组合成更复杂的多文件任务。每个候选缺陷都会通过检查其是否破坏了至少一个现有测试来进行验证。",
+      "重要的是，这些方法并非互斥。PR挖掘能从实际的开发历史中捕获真实的错误模式，而合成生成则能提供覆盖整个代码库的体量和广度。一个能够访问私有代码库的实验室，可以针对同一环境同时运行这两条流水线：先挖掘PR，再通过合成缺陷来丰富和提升这些任务。这种组合方法很可能近似地揭示了前沿实验室如何构建用于代码的RL环境。",
+      "在规模化层面，这些流水线能产出数以万计的任务。例如，DeepSeek最终使用了从GitHub提取的24,667个编码任务来训练其V3.2模型。我们从Kimi等其他实验室了解到，所开发的基础设施能够支持同时实例化超过10,000个环境实例。一般而言，任务难度越高，训练期间所需的轨迹推演就越多。这是因为问题更难解决，而更多的推演意味着模型拥有更多的“射门机会”。然而，这是以牺牲每次推演的速度为代价的——因为高吞吐量（并行大量实例）本身就会导致单次推演变慢。",
+      "https://substackcdn.com/image/fetch/$s_!7Ln8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe8df58ac-7c11-491d-9233-53f934d71a74_1536x1011.png",
+      "来源：SemiAnalysis"
+    ],
+    "04-data-foundries-and-expert-cont": [
+      "环境工具之所以普遍有用，是因为各类环境正在众多领域涌现：芯片设计环境能让模型辅助设计流程；会计环境用于处理税务；还有用于医疗工作流的电子健康记录(EHR)软件。这些都只是少数例子。",
+      "虽然软件工程师构建环境本身，但工作流程通常由参与环境创建过程的特定领域承包商来创建、描述和评级。金融专业人士帮助定义金融任务，医生负责医疗领域，律师负责法律领域，等等。",
+      "实验室会通过人类数据承包商公司（我们稍后会谈到）来运作，这些公司会参与进来，为特定任务的创建提供意见。合同通常至少持续一个季度，可以是兼职或全职。承包商负责设计任务、撰写预期解决方案、指定奖励信号，在某些情况下，还会对模型解决方案进行评级。这些奖励信号可以表现为评分准则(rubrics)，准则的撰写也可能涉及承包商或严格的验证器。这类专家正是会被聘请来帮助构建像 GDPval（一种评估基准）这类评估的。",
+      "https://substackcdn.com/image/fetch/$s_!lCmR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e8dce0-9fc7-4835-bd97-ac730132e885_1880x802.png",
+      "OpenAI的数据处理流程。OpenAI拥有一个名为Feather的私有内部平台，供承包商使用，数据通过该平台进行处理。图片来源：OpenAI",
+      "像 Mercor、Handshake、Surge 和 Aboda.ai 这样的公司被用来跨众多专业领域雇佣这些专家。Surge 是其中更成熟、规模更大的参与者，据我们分析，其年度经常性收入(ARR)已接近10亿美元。",
+      "这些公司大多最初是AI面试官或职位匹配公司，但最终发现，充当实验室与承包商专家之间的连接器更有价值。",
+      "编码领域的需求量最大，但在非专业领域如摄影、音乐和设计上的支出也已增加。如前所述，实验室不仅希望增加他们在特定领域进行后期训练的任务数量，还希望扩展任务的广度和多样性。",
+      "这些供应商的营收主要集中于Anthropic、OpenAI和Google等西方实验室。然而，我们认为Surge在国际上也相当活跃，向月之暗面和Z.ai等中国实验室销售服务。事实上，我们认为，能否获取这些强化学习环境，是Kimi K2 Thinking和GLM-4.6能力得以大幅提升的关键因素。当公司在宣传其制作PowerPoint演示文稿或Excel表格的能力有所提升时，这直接源于额外的强化学习训练。",
+      "中国的风险投资机构正积极扶持本土的数据代工厂竞争者，旨在以低于西方供应商的价格，全面服务本地生态系统。目前，大多数中国实验室在扩展强化学习方面仍处于早期阶段——例如，通义千问仅将约5%的预训练算力用于后训练。若能成功培育本土数据代工厂业务，将在算力允许的前提下，极大加速整个生态向强化学习范式的转型。",
+      "https://substackcdn.com/image/fetch/$s_!qotS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70e2bbd2-5bd8-4410-aace-24fef73f4e63_1606x1003.png",
+      "来源：Aboda.ai, SemiAnalysis",
+      "在上述案例中，承包商提供包含解释说明的完整解决方案。承包商也可以对模型输出进行评分，并提供错误反馈。这些数据可以以任何语言获取，并在需要时由另一个模型进行翻译。",
+      "像Mercor这样的公司也是大量评分标准的生产者，这些标准可用于多种不同领域。目前，大多数评分标准仍由人工撰写，不过也有一些公司，例如The LLM Data Company，正尝试让模型来撰写评分标准。这可以通过例如将高性能模型连接到高度可靠的MCP（Model Context Protocol，模型上下文协议）来提取信息，进而用于构建结构化的评分准则。",
+      "https://substackcdn.com/image/fetch/$s_!GqlC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0265b727-8cc7-4774-98f9-023dea365b99_1493x1744.png",
+      "LLM生成的评分标准。来源：The LLM Data Company",
+      "我们认为这种方法蕴藏着显著的价值提升空间，尽管目前AI实验室主要专注于消费人类生成的数据。长远来看，随着模型性能的提升，其可靠性和质量都将得到改善。如前所述，所有实验室都在追求AI自动化的AI研究。",
+      "鉴于选项的多样性，理解数据采购决策对于制定实验室战略至关重要。这种范式与预训练阶段不同，那时所有人都能获取相同的数据。"
+    ]
+  }
+}

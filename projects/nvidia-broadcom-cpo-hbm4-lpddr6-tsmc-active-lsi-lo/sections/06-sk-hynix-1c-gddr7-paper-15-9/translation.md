@@ -1,0 +1,27 @@
+https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg
+
+SK海力士 1c GDDR7 规格参数与芯片显微照片。来源：SK海力士，ISSCC 2026
+
+尽管LPDDR6凭借新存储技术实现了代际飞跃，但SK海力士在其1c工艺节点上开发的GDDR7进步更为显著，其在1.2V/1.2V电压下的时钟频率最高可达48 Gb/s。即使在仅1.05V/0.9V的电压下，其频率也能达到30.3 Gb/s，高于RTX 5080显卡中使用的30 Gb/s显存。
+
+https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg
+
+三星 1z GDDR7 舒姆图与芯片显微照片。来源：三星，ISSCC 2024
+
+https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg
+
+三星 1b GDDR7 规格参数与芯片显微照片。来源：三星，ISSCC 2025
+
+其实现的位密度为0.412 Gb/mm²，远高于三星1b工艺的0.309 Gb/mm²和更早1z工艺的0.192 Gb/mm²。
+
+https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png
+
+各厂商 LPDDR5X 与 GDDR7 位密度对比。来源：SemiAnalysis
+
+GDDR7 的位密度低于 LPDDR5X，通常约为后者的 70%。尽管其数据传输速率要高得多，但这在功耗和面积方面都付出了代价。
+
+GDDR7 密度较低，是因为为了实现高访问速度，其外围电路面积显著增加。因此，实际的存储阵列在芯片面积中所占比例较小。这种更复杂的逻辑控制电路，是 GDDR7 所采用的三电平脉冲幅度调制（PAM3）和四倍数据速率（QDR，每个时钟周期传输4个符号）信号技术所必需的。
+
+GDDR7 主要用于游戏 GPU 应用，这类应用需要高内存带宽，但与 HBM 相比，对成本和容量的要求较低。英伟达（NVIDIA）曾在 2025 年宣布其 Rubin CPX 大上下文 AI 处理器将配备 128GB GDDR7，但随着英伟达将重心转向推广其 Groq LPX 解决方案，该配置在 2026 年的路线图上已近乎绝迹。
+
+我们在内存模型中详细分析了 HBM、DDR 和 LPDDR 在不同制程节点上的晶圆产量、良率、密度、销售成本（COGS）等数据。

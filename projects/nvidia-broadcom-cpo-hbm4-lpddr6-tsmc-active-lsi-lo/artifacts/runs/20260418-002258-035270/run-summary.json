@@ -1,0 +1,13 @@
+{
+  "project_id": "nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo",
+  "status": "failed",
+  "error": "This provider does not implement source metadata batch translation.",
+  "errors": [
+    {
+      "error": "This provider does not implement source metadata batch translation.",
+      "timestamp": "2026-04-18T00:26:46.022607"
+    }
+  ],
+  "run_id": "20260418-002258-035270",
+  "artifacts_path": "projects\\nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo\\artifacts\\runs\\20260418-002258-035270"
+}

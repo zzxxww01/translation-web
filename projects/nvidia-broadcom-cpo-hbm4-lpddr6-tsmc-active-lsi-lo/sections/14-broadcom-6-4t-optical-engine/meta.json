@@ -1,0 +1,735 @@
+{
+  "section_id": "14-broadcom-6-4t-optical-engine",
+  "title": "Broadcom 6.4T Optical Engine - Paper 23.4",
+  "title_translation": "Broadcom 6.4T Optical Engine - Paper 23.4",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fde40b-9947-4fac-b9db-2ac5e7592aec_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fde40b-9947-4fac-b9db-2ac5e7592aec_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0241",
+      "parent_block_index": 241,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fde40b-9947-4fac-b9db-2ac5e7592aec_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fde40b-9947-4fac-b9db-2ac5e7592aec_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fde40b-9947-4fac-b9db-2ac5e7592aec_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fde40b-9947-4fac-b9db-2ac5e7592aec_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:36:55.779961",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fde40b-9947-4fac-b9db-2ac5e7592aec_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。"
+          },
+          {
+            "type": "tone",
+            "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Broadcom Tomahawk 5 51.2T CPO Optical Engine Die Shot and Package. Source: Broadcom, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Broadcom Tomahawk 5 51.2T CPO Optical Engine Die Shot and Package. Source: Broadcom, ISSCC 2026",
+          "start": 0,
+          "end": 95,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0242",
+      "parent_block_index": 242,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Broadcom Tomahawk 5 51.2T CPO Optical Engine Die Shot and Package. Source: Broadcom, ISSCC 2026*",
+      "parent_block_plain_text": "Broadcom Tomahawk 5 51.2T CPO Optical Engine Die Shot and Package. Source: Broadcom, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Broadcom Tomahawk 5 51.2T CPO Optical Engine Die Shot and Package. Source: Broadcom, ISSCC 2026",
+          "start": 0,
+          "end": 95,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 95,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "博通 Tomahawk 5 51.2T CPO 光学引擎芯片显微照片与封装。来源：博通，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:36:55.780199",
+          "tokenized_text": "[[[EM_1|博通 Tomahawk 5 51.2T CPO 光学引擎芯片显微照片与封装。来源：博通，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。"
+          },
+          {
+            "type": "tone",
+            "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Broadcom showcased progress on their 6.4T MZM optical engine (OE) consisting of 64 lanes of ~100G using PAM4 modulation. The optical engines were tested in a Tomahawk 5 51.2T CPO system. One CPO package consists of eight 6.4T OEs, each with a PIC and an EIC, on TSMC’s N7 process.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0243",
+      "parent_block_index": 243,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Broadcom showcased progress on their 6.4T MZM optical engine (OE) consisting of 64 lanes of ~100G using PAM4 modulation. The optical engines were tested in a Tomahawk 5 51.2T CPO system. One CPO package consists of eight 6.4T OEs, each with a PIC and an EIC, on TSMC’s N7 process.",
+      "parent_block_plain_text": "Broadcom showcased progress on their 6.4T MZM optical engine (OE) consisting of 64 lanes of ~100G using PAM4 modulation. The optical engines were tested in a Tomahawk 5 51.2T CPO system. One CPO package consists of eight 6.4T OEs, each with a PIC and an EIC, on TSMC’s N7 process.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 280,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "博通展示了其 6.4T MZM（马赫-曾德尔调制器）光学引擎的进展。该光学引擎由 64 条通道组成，每条通道速率约 100G，采用 PAM4（四电平脉冲幅度调制）调制。这些光学引擎在 Tomahawk 5 51.2T CPO（共封装光学）系统中进行了测试。一个 CPO 封装包含八个 6.4T 光学引擎，每个引擎均由一个光子集成电路和一个电子集成电路组成，采用台积电 N7 工艺制造。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:36:55.780262",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。"
+          },
+          {
+            "type": "tone",
+            "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F021fa5c2-1bfd-455b-84cc-730cabf6362c_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F021fa5c2-1bfd-455b-84cc-730cabf6362c_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0244",
+      "parent_block_index": 244,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F021fa5c2-1bfd-455b-84cc-730cabf6362c_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F021fa5c2-1bfd-455b-84cc-730cabf6362c_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F021fa5c2-1bfd-455b-84cc-730cabf6362c_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F021fa5c2-1bfd-455b-84cc-730cabf6362c_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:36:55.780313",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F021fa5c2-1bfd-455b-84cc-730cabf6362c_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。"
+          },
+          {
+            "type": "tone",
+            "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Broadcom Tomahawk 5 CPO Optical Engine Packaging. Source: Broadcom, Hot Chips 2024",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Broadcom Tomahawk 5 CPO Optical Engine Packaging. Source: Broadcom, Hot Chips 2024",
+          "start": 0,
+          "end": 82,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0245",
+      "parent_block_index": 245,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Broadcom Tomahawk 5 CPO Optical Engine Packaging. Source: Broadcom, Hot Chips 2024*",
+      "parent_block_plain_text": "Broadcom Tomahawk 5 CPO Optical Engine Packaging. Source: Broadcom, Hot Chips 2024",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Broadcom Tomahawk 5 CPO Optical Engine Packaging. Source: Broadcom, Hot Chips 2024",
+          "start": 0,
+          "end": 82,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 82,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "博通 Tomahawk 5 CPO 光学引擎封装。来源：博通，Hot Chips 2024",
+          "model": "pro",
+          "created_at": "2026-04-18T01:36:55.780453",
+          "tokenized_text": "[[[EM_1|博通 Tomahawk 5 CPO 光学引擎封装。来源：博通，Hot Chips 2024]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。"
+          },
+          {
+            "type": "tone",
+            "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "While Nvidia uses COUPE, Broadcom uses a Fan-Out Wafer-Level Packaging approach for this OE. Broadcom will be switching to COUPE in the future, but older generation products like this OE still use other supply chain partners. Here are the promising results from their demonstration:",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Broadcom will be switching to COUPE in the future",
+          "start": 93,
+          "end": 142,
+          "href": "https://newsletter.semianalysis.com/i/178153689/tsmc-coupe-is-emerging-as-the-integration-option-of-choice",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0246",
+      "parent_block_index": 246,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While Nvidia uses COUPE, Broadcom uses a Fan-Out Wafer-Level Packaging approach for this OE. [Broadcom will be switching to COUPE in the future](https://newsletter.semianalysis.com/i/178153689/tsmc-coupe-is-emerging-as-the-integration-option-of-choice), but older generation products like this OE still use other supply chain partners. Here are the promising results from their demonstration:",
+      "parent_block_plain_text": "While Nvidia uses COUPE, Broadcom uses a Fan-Out Wafer-Level Packaging approach for this OE. Broadcom will be switching to COUPE in the future, but older generation products like this OE still use other supply chain partners. Here are the promising results from their demonstration:",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Broadcom will be switching to COUPE in the future",
+          "start": 93,
+          "end": 142,
+          "href": "https://newsletter.semianalysis.com/i/178153689/tsmc-coupe-is-emerging-as-the-integration-option-of-choice",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 282,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "英伟达使用 COUPE 方案，而博通则为此光学引擎采用了扇出型晶圆级封装方法。博通未来将转向 COUPE 方案，但像此光学引擎这样的旧一代产品仍在使用其他供应链合作伙伴。以下是其演示中取得的有前景的结果：",
+          "model": "pro",
+          "created_at": "2026-04-18T01:36:55.780594",
+          "tokenized_text": "英伟达使用 COUPE 方案，而博通则为此光学引擎采用了扇出型晶圆级封装方法。[[[LINK_1|博通未来将转向 COUPE 方案]]]，但像此光学引擎这样的旧一代产品仍在使用其他供应链合作伙伴。以下是其演示中取得的有前景的结果：",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。"
+          },
+          {
+            "type": "tone",
+            "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F179ad311-5e3a-40c0-8fb6-f809fb2f8342_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F179ad311-5e3a-40c0-8fb6-f809fb2f8342_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0247",
+      "parent_block_index": 247,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F179ad311-5e3a-40c0-8fb6-f809fb2f8342_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F179ad311-5e3a-40c0-8fb6-f809fb2f8342_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F179ad311-5e3a-40c0-8fb6-f809fb2f8342_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F179ad311-5e3a-40c0-8fb6-f809fb2f8342_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:36:55.780647",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F179ad311-5e3a-40c0-8fb6-f809fb2f8342_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。"
+          },
+          {
+            "type": "tone",
+            "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "Broadcom 6.4T OE Egress Transmitter Performance. Source: Broadcom, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Broadcom 6.4T OE Egress Transmitter Performance. Source: Broadcom, ISSCC 2026",
+          "start": 0,
+          "end": 77,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0248",
+      "parent_block_index": 248,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Broadcom 6.4T OE Egress Transmitter Performance. Source: Broadcom, ISSCC 2026*",
+      "parent_block_plain_text": "Broadcom 6.4T OE Egress Transmitter Performance. Source: Broadcom, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Broadcom 6.4T OE Egress Transmitter Performance. Source: Broadcom, ISSCC 2026",
+          "start": 0,
+          "end": 77,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 77,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "博通 6.4T 光学引擎发送端性能。来源：博通，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:36:55.780765",
+          "tokenized_text": "[[[EM_1|博通 6.4T 光学引擎发送端性能。来源：博通，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.055,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现时，英文缩写与中文全称的对应关系可以更清晰。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，主语指代略显模糊，且“进行了测试”结构稍显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "“采用台积电 N7 工艺制造”这个状语的位置，使其修饰对象（是整个封装还是每个引擎？）在中文中产生轻微歧义。"
+          },
+          {
+            "type": "tone",
+            "description": "“有前景的结果”这个译法稍显平淡，未能完全传达原文在展示具体数据前所营造的期待感。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

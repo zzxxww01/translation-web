@@ -42,6 +42,7 @@ type DocumentView = 'glossary' | 'term-review' | 'consistency' | null;
 
 interface PendingTranslationRequest {
   method: TranslationMethod;
+  model?: string;
 }
 
 function LazyPanelFallback() {
@@ -354,14 +355,17 @@ export function DocumentFeature() {
   );
 
   const prepareTermReviewIfNeeded = useCallback(
-    async (method: TranslationMethod = TranslationMethod.FOUR_STEP) => {
+    async (
+      method: TranslationMethod = TranslationMethod.FOUR_STEP,
+      model?: string
+    ) => {
       if (!currentProject) return false;
 
       try {
-        const review = await glossaryApi.prepareTermReview(currentProject.id);
+        const review = await glossaryApi.prepareTermReview(currentProject.id, model);
         if (review.review_required && review.total_candidates > 0) {
           setPendingTermReview(review);
-          setPendingTranslationRequest({ method });
+          setPendingTranslationRequest({ method, model });
           setView('term-review');
           toast.info(`检测到 ${review.total_candidates} 个高优先级新术语，先确认再开始全文翻译`);
           return true;
@@ -419,7 +423,8 @@ export function DocumentFeature() {
         setView(null);
         toast.success('术语预检已保存，开始全文翻译');
         await runFullTranslate(
-          pendingTranslationRequest.method
+          pendingTranslationRequest.method,
+          pendingTranslationRequest.model
         );
       } catch (error) {
         console.error('Failed to submit term review:', error);
@@ -702,7 +707,10 @@ export function DocumentFeature() {
               setCurrentStep('术语预检中...');
               setIsPreparingFullTranslate(true);
               try {
-                const intercepted = await prepareTermReviewIfNeeded(pendingStartMethod);
+                const intercepted = await prepareTermReviewIfNeeded(
+                  pendingStartMethod,
+                  pendingStartModel
+                );
                 setIsPreparingFullTranslate(false);
                 if (intercepted) { setCurrentStep(null); return; }
                 await runFullTranslate(pendingStartMethod, pendingStartModel);

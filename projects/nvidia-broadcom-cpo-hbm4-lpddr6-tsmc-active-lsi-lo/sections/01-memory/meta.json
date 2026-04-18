@@ -1,0 +1,94 @@
+{
+  "section_id": "01-memory",
+  "title": "Memory",
+  "title_translation": "Memory",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "One key theme that caught our attention at this year’s ISSCC was memory, including Samsung HBM4, Samsung and SK Hynix LPDDR6, and SK Hynix GDDR7. Other than DRAM, logic-based SRAM and MRAM also piqued our interest.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0008",
+      "parent_block_index": 8,
+      "parent_block_type": "p",
+      "parent_block_markdown": "One key theme that caught our attention at this year’s ISSCC was memory, including Samsung HBM4, Samsung and SK Hynix LPDDR6, and SK Hynix GDDR7. Other than DRAM, logic-based SRAM and MRAM also piqued our interest.",
+      "parent_block_plain_text": "One key theme that caught our attention at this year’s ISSCC was memory, including Samsung HBM4, Samsung and SK Hynix LPDDR6, and SK Hynix GDDR7. Other than DRAM, logic-based SRAM and MRAM also piqued our interest.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 214,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在今年国际固态电路会议（ISSCC）上，一个引起我们关注的关键主题是存储器，具体涵盖了三星的HBM4、三星与SK海力士的LPDDR6，以及SK海力士的GDDR7。除了动态随机存取存储器（DRAM），基于逻辑的静态随机存取存储器（SRAM）和磁阻随机存取存储器（MRAM）也同样吸引了我们的目光。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:45:29.051862",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.04,
+        "is_excellent": false,
+        "applied_terms": [
+          "“piqued our interest”译为“引起了我们的浓厚兴趣”，需保留作者作为行业观察者的主观视角。",
+          "技术缩写（HBM4, LPDDR6, GDDR7, SRAM, MRAM）首次出现时需确保译名准确且全文统一。",
+          "段落虽短，但起到承上启下的关键作用，翻译时需确保逻辑衔接流畅。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "作为第一个技术章节的引言，概括ISSCC 2026在内存领域的核心议题和主要参与者，设定本章节的讨论框架。",
+          "relation_to_previous": "承接引言中预告的“Memory”类别，从宏观主题列表转入具体技术领域。",
+          "relation_to_next": "引出对具体内存技术（首先是三星HBM4）的深度分析。",
+          "key_points": [
+            "内存是本届ISSCC的关键主题之一。",
+            "涵盖DRAM（HBM4, LPDDR6, GDDR7）以及逻辑SRAM和MRAM。"
+          ],
+          "translation_notes": [
+            "“piqued our interest”译为“引起了我们的浓厚兴趣”，需保留作者作为行业观察者的主观视角。",
+            "技术缩写（HBM4, LPDDR6, GDDR7, SRAM, MRAM）首次出现时需确保译名准确且全文统一。",
+            "段落虽短，但起到承上启下的关键作用，翻译时需确保逻辑衔接流畅。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语注释格式与全文指南要求不完全一致。原文要求首次出现时采用“英文全称（中文释义）”格式，但译文对ISSCC和DRAM的处理方式不同。"
+          },
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑衔接略显生硬。‘这包括了...’中的‘这’指代前句的‘主题’，但‘主题是存储器’与‘这包括了三星的HBM4...’之间是包含关系，直接用‘这’连接稍显跳跃。"
+          },
+          {
+            "type": "readability",
+            "description": "‘也同样引起了我们的兴趣’中的‘也’和‘同样’语义略有重叠，可以更简洁。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "section_id": "17-tsmc-active-lsi-paper-8-2",
+  "reflection": {
+    "overall_score": 8.9,
+    "readability_score": 8.8,
+    "accuracy_score": 9.2,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "terminology",
+        "severity": "critical",
+        "original_text": "Active Local Silicon Interconnect (aLSI)",
+        "description": "术语首次出现时，中文译名与后续使用不一致。",
+        "why_it_matters": "首次出现时使用了‘有源本地硅互连（aLSI）’，但在段落1的图注中使用了‘有源本地硅互连（aLSI）’，虽然一致，但段落5、7、17等后续段落多次使用‘有源本地硅互连（aLSI）’，括号内缩写重复出现，略显冗余。根据术语表原则，首次出现后，后续应直接使用缩写‘aLSI’。",
+        "suggestion": "建议在段落2首次出现时，采用‘有源本地硅互连（Active Local Silicon Interconnect, aLSI）’的格式，后续段落（如5、7、17等）直接使用‘aLSI’。段落1的图注可简化为‘台积电无源与有源本地硅互连（aLSI）对比’。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "The transceiver is only UCIe-like and not true UCIe, as UCIe mandates a hexagonal bump map rather than the Manhattan grid used here.",
+        "description": "对‘UCIe-like’的翻译处理可能导致关键的技术区别信息被弱化。",
+        "why_it_matters": "原文明确指出了aLSI的收发器‘类似UCIe’但‘并非真正的UCIe’，并给出了具体的技术原因（凸点排布规则不同）。译文虽然传达了意思，但将‘UCIe-like’译为‘类似UCIe的收发器’并加引号，在后续解释原因时，语气稍显平铺直叙。可以稍加强调这种‘形似而神不似’的区别。",
+        "suggestion": "可微调为：‘需要指出的是，该收发器只是“类似UCIe”，并非真正的UCIe标准实现，因为UCIe标准强制要求六边形凸点排布，而非此处使用的曼哈顿网格。’ 将‘true UCIe’译为‘真正的UCIe标准实现’，并加入‘标准实现’一词，使技术对比更清晰。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 7,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "Edge-Triggered Transceiver (ETT)",
+        "description": "关键术语‘Edge-Triggered Transceiver (ETT)’的翻译在段落内不一致。",
+        "why_it_matters": "在段落7中，首次引入时译为‘边沿触发收发器（ETT）’，但在段落8中直接使用‘边沿触发收发器（ETT）’（括号内缩写重复），而在段落22中却使用了‘嵌入式硅桥（ETT）’，这是错误的。‘ETT’是‘Edge-Triggered Transceiver’的缩写，与‘嵌入式硅桥’无关。术语不一致和错误会严重影响技术理解的准确性。",
+        "suggestion": "1. 在段落7首次出现时，统一译为‘边沿触发收发器（Edge-Triggered Transceiver, ETT）’。\n2. 段落8及后续提及该电路时，直接使用‘ETT’或‘边沿触发收发器（ETT）’（根据上下文流畅度选择，但含义需明确）。\n3. 修正段落22的错误：‘其中有源本地硅互连（aLSI）中的边沿触发收发器（ETT）部分仅消耗0.07 pJ/b。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 11,
+        "issue_type": "readability",
+        "severity": "high",
+        "original_text": "Instead of compromising the power grid by having a bridge die in the way, aLSI with eDTC improves both the power and signal routing along the D2D interfaces.",
+        "description": "译文‘不仅避免了因桥接芯片存在而损害电源网格，反而能同时优化...’逻辑连接词‘不仅...反而...’使用稍显生硬，且‘损害电源网格’的表述可以更技术化。",
+        "why_it_matters": "‘不仅...反而...’在中文中常带有转折和对比意味，但这里原文是直接陈述aLSI+eDTC带来的正面改进（避免了一个问题，同时带来了两个好处）。译文略显翻译腔。",
+        "suggestion": "优化为：‘aLSI配合eDTC技术，不仅没有因为桥接芯片的存在而损害电源配送网络，反而能同时优化沿D2D接口的供电与信号布线。’ 将‘power grid’译为更专业的‘电源配送网络’，并将‘避免了...损害’调整为‘没有因为...而损害’，逻辑更直接。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 14,
+        "issue_type": "terminology",
+        "severity": "medium",
+        "original_text": "shoreline",
+        "description": "专业术语‘shoreline’的翻译‘海岸线’虽然形象，但在中文半导体封装语境中，更常见的对应术语是‘接口宽度’或‘互连接口宽度’。",
+        "why_it_matters": "‘海岸线’是英文‘shoreline’的直译，在技术文档中可能造成理解障碍。使用更通用的术语有助于目标读者（半导体从业者）快速理解。",
+        "suggestion": "建议将‘海岸线长度’改为‘互连接口宽度’或‘接口宽度’。全句可调整为：‘仅需388微米的互连接口宽度，即可容纳64条发送（TX）和64条接收（RX）数据通道，总面积仅为0.330平方毫米。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 17,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "TSMC explained how the Active LSI can be tested at multiple stages.",
+        "description": "‘阐述了...如何在多个阶段进行测试’是典型的‘进行...操作’翻译腔结构。",
+        "why_it_matters": "虽然意思准确，但可以优化为更简洁、主动的中文表达。",
+        "suggestion": "可改为：‘台积电阐述了有源本地硅互连（aLSI）的多阶段测试方法。’ 或 ‘台积电介绍了有源本地硅互连（aLSI）在多个阶段的测试方案。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 21,
+        "issue_type": "tone",
+        "severity": "low",
+        "original_text": "Interestingly, the test vehicle appears to match AMD’s MI450 GPU’s design...",
+        "description": "将‘Interestingly’译为‘有趣的是’是合适的，但后半句‘值得注意的是...’的添加略微改变了原文的节奏和焦点。",
+        "why_it_matters": "原文用一个‘Interestingly’引导观察，随后直接陈述观察到的设计细节。译文在细节陈述前又加了一个‘值得注意的是’，虽然意在强调，但可能稍显冗余，打断了原文一气呵成的叙述流。",
+        "suggestion": "可以考虑合并或调整语气：‘有趣的是，这个测试载具的设计似乎与AMD的MI450图形处理器（GPU）相符，包含两颗相互连接的基础裸片、12个HBM4堆栈以及两颗集成有源本地硅互连（aLSI）的IO裸片。其特点是，并非每个HBM4堆栈都拥有独立的aLSI，而是每两个共享一个。’ 将‘值得注意的是’改为‘其特点是’，使行文更紧凑。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

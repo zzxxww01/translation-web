@@ -1,0 +1,38 @@
+{
+  "section_id": "09-rl-for-science",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.049999999999999,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.0,
+      "terminology": 7.0,
+      "completeness": 7.0,
+      "style": 5.5
+    },
+    "failed_criteria": [
+      "critical_errors (5 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "LLM 开启了一个新前沿，模型能够搜索、规划和提出实验方案。借助合适的工具，智能体也将能够执行这些实验。强化学习能够将这些实验的反馈转化为模型可用于改进的信息，从而在条件具备时形成一个自我提升的闭环。",
+    "多家公司正在利用这一点，其中一家便是 Periodic Labs。该公司的目标是构建一个通过实验室生成数据训练的 AI 科学家。",
+    "其目标是创建一个基于物理实验奖励的闭环强化学习系统。模型使用工具（包括其他规模更小、功能更专一的专用模型）来测试假设并验证想法。随后，这些想法会在保真度越来越高的模拟器中进行测试，其结果最终将指导物理实验。",
+    "如此一来，子智能体各司其职，擅长处理特定任务，而通用的 LLM 则可用于编排协调。这种编排也可能扩展到物理工具，例如材料表征。",
+    "https://substackcdn.com/image/fetch/$s_!Tibh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F67ec8066-bec8-4d85-afb9-0c08b0b62bf2_936x670.png",
+    "现有闭环系统示例。来源：[Wang et al](https://www.nature.com/articles/s41467-024-55655-3), 2025",
+    "这种通过保真度递增的方法测试想法、从而在实验室进行实验前降低风险的过程，大致对应了研究生的典型工作流程。",
+    "https://substackcdn.com/image/fetch/$s_!nwQx!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F38ce44d5-ee80-4656-9a39-4b1a91873de6_1460x666.png",
+    "Periodic 的闭环系统。来源：Rohan Pandey。",
+    "开源模型可以作为起点，并通过中期训练来扩展其能力。中期训练即持续预训练（下一个词元预测），可用于扩展模型的截止日期、提升其在特定领域的知识，或为其接受高算力 RL 训练做预热。例如，当 OpenAI 模型的截止日期更新时，这通常是因为在模型基础上进行了持续的中期训练。",
+    "在高度专业的科学领域，中期训练将使模型在后续训练后达到更高质量。Meta 在其最近的代码专用模型中发现，中期训练带来的益处，即使在应用了其他阶段（例如监督微调）之后，依然持续显现。Meta 在最近的一个模型中使用了 1T 词元进行中期训练，但我们预计 OpenAI 的使用量会高出 5 到 10 倍。",
+    "https://substackcdn.com/image/fetch/$s_!DVxi!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F949e444d-605d-44bc-ab24-8b39d9b00554_1460x471.png",
+    "来源：Meta",
+    "被加入中期训练阶段的数据的一个例子是来自先前运行的环境轨迹。这些是先前版本模型在 RL 训练过程中生成并收集的轨迹推演。",
+    "https://substackcdn.com/image/fetch/$s_!nZ31!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F7ea859aa-bfe3-44a3-b203-8a6785c66335_1077x913.png",
+    "来源：Meta",
+    "为了给RL和中期训练提供数据，Periodic正在建设一个大型物理实验室，用于运行实验并产生经过实验验证的奖励信号。这与其他努力方向一致，例如DeepMind也计划在2026年启动一个自动化材料科学研究实验室。",
+    "自行运行实验能获得对输入变量和结果的完整认知，这是纯粹依赖已发表论文进行训练所无法保证的——后者即使在可比的指标上也常常相互矛盾。另一个需要大量实验室工作的领域是生物学。这也是一个各实验室采取了不同方法的领域。"
+  ]
+}

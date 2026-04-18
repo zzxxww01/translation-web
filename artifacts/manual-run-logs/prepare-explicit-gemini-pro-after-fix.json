@@ -1,0 +1,9 @@
+{
+  "status_code": 500,
+  "elapsed_seconds": 7.28,
+  "body": {
+    "detail": "Internal server error",
+    "error_code": "INTERNAL_ERROR",
+    "path": "/api/projects/nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo/term-review/prepare"
+  }
+}

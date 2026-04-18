@@ -24,8 +24,10 @@ class TranslationProgress:
         self.translated_paragraphs = 0
         self.current_section: Optional[str] = None
         self.current_step: Optional[str] = None
+        self.run_id: Optional[str] = None
         self.errors: List[Dict] = []
         self.started_at = datetime.now()
+        self.last_updated_at = self.started_at
         self.finished_at: Optional[datetime] = None
         self.final_status: Optional[str] = None
 
@@ -51,10 +53,12 @@ class TranslationProgress:
             "progress_percent": round(self.progress_percent, 2),
             "current_section": self.current_section,
             "current_step": self.current_step,
+            "run_id": self.run_id,
             "original_status": self.original_status.value,
             "error_count": len(self.errors),
             "is_complete": self.is_complete,
             "started_at": self.started_at.isoformat(),
+            "last_updated_at": self.last_updated_at.isoformat(),
             "finished_at": self.finished_at.isoformat() if self.finished_at else None,
             "final_status": self.final_status,
         }

@@ -1,0 +1,40 @@
+{
+  "section_id": "10-tsmc-n16-mram-paper-15-4",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.74,
+    "scores": {
+      "readability": 8.8,
+      "accuracy": 9.2,
+      "terminology": 8.0,
+      "completeness": 10.0,
+      "style": 4.0
+    },
+    "failed_criteria": [
+      "critical_errors (4 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "台积电展示了其基于N16制程节点的更新版自旋转移矩磁阻随机存取存储器（STT-MRAM），该工作建立在2023年ISSCC上先前研究的基础上。台积电将这款MRAM定位为嵌入式非易失性存储器，主要面向汽车、工业和边缘应用。这些应用场景并不追求最先进的制程技术，而是将可靠性置于首位。",
+    "https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb74d1b16-3ff4-4bca-8df1-6e8909f865d1_2880x1620.png",
+    "台积电N16 MRAM设计特性与芯片版图。来源：台积电，ISSCC 2026",
+    "这款MRAM具备双端口访问能力，因此读取和写入操作可以同时进行。这一特性对于汽车应用中的空中下载更新至关重要，因为在写入固件时，系统不能中断读取操作。",
+    "https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2bb08e47-26dd-4357-b813-60ec053c33d4_2880x1620.png",
+    "台积电N16 MRAM在-40°C和150°C下的舒姆图。来源：台积电，ISSCC 2026",
+    "其设计特点在于，支持跨模块的交错读取，且各模块拥有独立时钟。这使得在200MHz频率下，吞吐量提升至51.2 Gb/s。在硅芯片上，这个84 Mb的宏单元在0.8V电压、-40°C至150°C的温度范围内，实现了7.5纳秒的读取访问时间。",
+    "https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ac17a55-6e1f-415f-bebb-b5dd0c966ea9_2880x1620.png",
+    "台积电N16 MRAM模块化宏单元架构。来源：台积电，ISSCC 2026",
+    "该架构采用模块化设计——可配置为16 Mb、8 Mb和2 Mb的模块，这些模块组合成从8 Mb到128 Mb不等的宏单元。通过将大型的16 Mb模块与少量较小的2 Mb和8 Mb模块相结合，可以针对任何设计的需求对容量进行微调。例如，5个16 Mb模块和2个2 Mb模块即可构成一个84 Mb的宏单元。",
+    "https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe9063a9-d2b4-4d04-9dfd-ebf11aac4259_2880x1620.png",
+    "台积电N16 MRAM的耐久性与可靠性。来源：台积电，ISSCC 2026",
+    "如前所述，可靠性是嵌入式MRAM成败的关键。在-40°C下经过100万次耐久性循环后，其硬错误率仍远低于0.01 ppm——完全处于ECC（纠错码）的校正范围内。在150°C下，典型读取电压时的读取干扰低于10⁻²² ppm，实际上可忽略不计。这款168 Mb的测试芯片通过了回流焊测试，并支持在150°C下保持20年的数据保存期，满足了严苛的汽车应用要求。",
+    "https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef20058-3a8c-4df0-85e1-5912e2da26ff_2880x1620.png",
+    "台积电N16 MRAM规格与先前工作的对比。来源：台积电，ISSCC 2026",
+    "与同一N16节点上的旧款MRAM相比，其存储单元面积缩小了25%，从0.033 µm²降至0.0249 µm²，等容量下的宏单元密度则提升至16.0 Mb/mm²。读取速度在等容量下从6 ns降至5.5 ns，而双端口访问和交错读取功能则完全是新增的。",
+    "尽管三星晶圆代工厂今年也发布了基于8LPP制程的嵌入式MRAM（eMRAM）研究成果，但台积电的方案显得更有前景。它不仅瞄准了所需的关键特性，性能表现优异，而且基于成本更低的N16制程节点。",
+    "https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F87ac2737-caab-46a2-8b88-417507719b1a_2880x1620.png",
+    "台积电N16 MRAM Flash-Plus技术路线图。来源：台积电，ISSCC 2026",
+    "台积电已在规划下一代的“Flash-Plus”变体，其存储单元面积将再缩小25%，耐久性则提升100倍。"
+  ]
+}

@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "科学实验所需的完成时间差异巨大。在生物学领域，大量实验需要数天才能完成。这些较长的周期要求进行长序列的策略展开，这意味着奖励将是稀疏的。稀疏奖励为模型提供的学习信号较少。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547526",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +119,72 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!0_LC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31e4836d-b56b-4d50-b74a-c3119c191f47_937x296.png",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547560",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!0_LC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F31e4836d-b56b-4d50-b74a-c3119c191f47_937x296.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -98,13 +218,72 @@
           "created_at": "2026-04-10T22:52:40.342069",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：英伟达，TogetherAI，SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547571",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：英伟达（NVIDIA），TogetherAI，SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -131,12 +310,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "解决此问题的一种方法是奖励模型的步骤，而不仅仅是其结果。这奖励的是模型的过程和思考，而非最终动作。虽然正确识别一个“正确”的步骤是什么样子可能很困难，但可以通过使用评分标准来近似实现。事实上，OpenAI 在最近一项评估（Frontier Science，旨在衡量模型执行科学研究任务的能力）中，对开放式研究任务的问题进行评分时，采用的就是这种方法。在实际实验中，任务可以被拆分为多个单独奖励的子任务，从而缩短评分的时间跨度。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547581",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -163,12 +402,72 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!HRMu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbebca705-7e8a-491b-bd76-887242074973_1067x1008.png",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547590",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!HRMu!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbebca705-7e8a-491b-bd76-887242074973_1067x1008.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -202,13 +501,72 @@
           "created_at": "2026-04-10T22:52:40.342030",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：OpenAI",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547598",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：OpenAI",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -235,12 +593,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "长轨迹推演对 GPU 利用率也极为不利，这就是为什么许多实验室一直在采用飞行中权重更新等方法。在此过程中，权重被交换，而掉队的策略展开则继续使用过时的 KV 缓存。这使得训练可以继续进行，同时等待这些慢速推演任务完成。其结果是在相同的挂钟时间内，可完成的迭代次数可翻倍。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547607",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -267,12 +685,72 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!orCV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0eb2e6c0-c770-46c2-9a0a-ad28f85be884_1345x1120.png",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547617",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!orCV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0eb2e6c0-c770-46c2-9a0a-ad28f85be884_1345x1120.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -328,13 +806,72 @@
           "created_at": "2026-04-10T22:52:40.342082",
           "tokenized_text": "来源：[[[LINK_1|Piché 等人]]]，2025",
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Piché 等人，2025",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547665",
+          "tokenized_text": "来源：[[[LINK_1|Piché 等人]]]，2025",
+          "format_issues": []
         }
       },
       "confirmed": "来源：Piché 等人，2025",
       "confirmed_tokenized": "来源：[[[LINK_1|Piché 等人]]]，2025",
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -361,12 +898,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "另一个瓶颈在于可用的数据。科学文献中常常包含即使在基本问题上也相互矛盾的结果，这使得构建可靠的训练集变得困难。生物学领域的挑战相对较小，因为现有的开源数据更为普遍。AlphaFold 便是基于蛋白质数据库中包含的 17 万个样本进行训练的。FutureHouse 的 Ether0 则使用了开放反应数据库。像 EvE 这样的额外努力，将继续为模型提供商提供宝贵的平台。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547676",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -393,12 +990,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "尽管制药公司也拥有大量闭源数据集。我们预计，拥有制药公司难以企及的 ML 专业知识的前沿实验室，与拥有实验室所缺乏的生物数据及临床知识的制药公司之间，将建立更多的合作伙伴关系。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547685",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -425,12 +1082,72 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!zcwh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2aed2777-73b3-4f31-b8ab-6683aa0b73fc_937x527.png",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547693",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!zcwh!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2aed2777-73b3-4f31-b8ab-6683aa0b73fc_937x527.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -464,13 +1181,72 @@
           "created_at": "2026-04-10T22:52:40.342096",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：诺和诺德",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547702",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：Novo Nordisk",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -497,12 +1273,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "尽管存在障碍（包括上文概述的一些），但仍有大量唾手可得的成果可以获取，因此我们预计，专注于科学领域高算力强化学习的努力将能非常迅速地产生巨大价值。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547713",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -529,12 +1365,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "许多领域所取得的巨大进展，其背后的关键推动力正是 RL 的规模化扩展。虽然前路依然漫长，但另一个维度已展现出早期的希望。这可以用现有模型实现，尽管成本要高得多。接下来，我们将深入探讨一个正呈现在我们眼前的额外前沿领域。",
+          "model": "pro",
+          "created_at": "2026-04-15T20:09:37.547721",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“rollouts”的翻译“轨迹推演”在中文技术语境中虽可理解，但并非最通用或最直观的译法。在强化学习领域，描述策略执行以收集数据的过程，更常见的译法是“策略展开”或“轨迹采样”。"
+          },
+          {
+            "type": "terminology",
+            "description": "“straggler rollouts”被译为“掉队推演”，这个译法比较形象，但“straggler”在分布式计算/高性能计算语境下更常被译为“掉队者”或“慢任务”。直接组合成“掉队的策略展开”可能更清晰。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“迭代次数可提升约 2 倍”存在轻微歧义。原文“2x improvement on the amount of iterations”意指迭代数量变为原来的两倍（即提升一倍）。中文“提升约2倍”可能被理解为增加到原来的3倍（提升200%）。"
+          },
+          {
+            "type": "terminology",
+            "description": "“FutureHouse”是一个机构名，译文未提供中文译名或保留英文。根据全文对初创公司名保留英文的惯例，此处处理正确。但“Ether0”作为其项目/模型名，同样应保留英文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文结构基本忠实，但“前沿实验室（它们拥有...）与制药公司（它们拥有...）”的括号插入式说明稍显打断阅读流。可以考虑调整句式，使修饰关系更流畅。"
+          },
+          {
+            "type": "tone",
+            "description": "“唾手可得的成果”是“low hanging fruit”的标准译法，准确。但结合后半句“非常迅速地产生巨大价值”，整个判断的语气很强。需确认这种强度是否与原文“extremely valuable rather quickly”匹配。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“推动进展大幅提升的许多能力，都依赖于 RL 的扩展。”是准确的直译，但主语“能力”稍显抽象。可以考虑将“capabilities”具体化或调整语序，使句子更符合中文表达习惯。"
+          }
+        ]
+      },
       "history": []
     }
   ]

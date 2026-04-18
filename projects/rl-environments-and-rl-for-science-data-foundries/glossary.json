@@ -612,6 +612,18 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-11T15:15:06.096044"
+    },
+    {
+      "original": "SemiAnalysis",
+      "translation": "SemiAnalysis",
+      "strategy": "preserve",
+      "note": "半导体行业分析机构名称",
+      "tags": [],
+      "first_occurrence": null,
+      "scope": "project",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-15T15:45:00.000000"
     }
   ]
 }

@@ -1,0 +1,1595 @@
+{
+  "section_id": "24-microsoft-maia-200-paper-17",
+  "title": "Microsoft Maia 200 - Paper 17.4",
+  "title_translation": "Microsoft Maia 200 - Paper 17.4",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Microsoft detailed their Maia 200 AI accelerator. The paper was less of a research paper and more of a white paper, with only a single image, a spec sheet comparing it to the Maia 100. Makes sense given a lot of Maia 200 claims are dubious such as the flops/mm^2 and flops/w.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0364",
+      "parent_block_index": 364,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Microsoft detailed their Maia 200 AI accelerator. The paper was less of a research paper and more of a white paper, with only a single image, a spec sheet comparing it to the Maia 100. Makes sense given a lot of Maia 200 claims are dubious such as the flops/mm^2 and flops/w.",
+      "parent_block_plain_text": "Microsoft detailed their Maia 200 AI accelerator. The paper was less of a research paper and more of a white paper, with only a single image, a spec sheet comparing it to the Maia 100. Makes sense given a lot of Maia 200 claims are dubious such as the flops/mm^2 and flops/w.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 275,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "微软详细介绍了其Maia 200 AI加速器。这篇论文与其说是一篇研究论文，不如说更像一份白皮书，仅包含一张图片和一份将其与Maia 100进行比较的规格表。考虑到Maia 200的许多性能宣称（例如其每平方毫米浮点运算性能（FLOPS/mm²）和每瓦浮点运算性能（FLOPS/W））本身存疑，这种做法倒也合乎情理。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813502",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "While the Maia 100 was designed in a pre-GPT era, Maia 200 was designed for the current age of models and specifically inference. Earlier this year, Maia 200 nodes were made generally available on Azure.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0365",
+      "parent_block_index": 365,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While the Maia 100 was designed in a pre-GPT era, Maia 200 was designed for the current age of models and specifically inference. Earlier this year, Maia 200 nodes were made generally available on Azure.",
+      "parent_block_plain_text": "While the Maia 100 was designed in a pre-GPT era, Maia 200 was designed for the current age of models and specifically inference. Earlier this year, Maia 200 nodes were made generally available on Azure.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 203,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Maia 100 设计于 GPT 时代之前，而 Maia 200 则是为当前模型时代、特别是为推理任务而设计的。今年早些时候，基于 Maia 200 芯片的计算节点已在 Azure 云平台上普遍可用。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813552",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!3VIK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c381cad-9332-483a-9fd7-8de08cd7d90a_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3VIK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c381cad-9332-483a-9fd7-8de08cd7d90a_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0366",
+      "parent_block_index": 366,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!3VIK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c381cad-9332-483a-9fd7-8de08cd7d90a_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!3VIK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c381cad-9332-483a-9fd7-8de08cd7d90a_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!3VIK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c381cad-9332-483a-9fd7-8de08cd7d90a_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!3VIK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c381cad-9332-483a-9fd7-8de08cd7d90a_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813582",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!3VIK!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0c381cad-9332-483a-9fd7-8de08cd7d90a_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Microsoft Maia 200 Specifications Summary. Source: Microsoft, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Maia 200 Specifications Summary. Source: Microsoft, ISSCC 2026",
+          "start": 0,
+          "end": 72,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0367",
+      "parent_block_index": 367,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Microsoft Maia 200 Specifications Summary. Source: Microsoft, ISSCC 2026*",
+      "parent_block_plain_text": "Microsoft Maia 200 Specifications Summary. Source: Microsoft, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Maia 200 Specifications Summary. Source: Microsoft, ISSCC 2026",
+          "start": 0,
+          "end": 72,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 72,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "微软 Maia 200 规格总结。来源：微软，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813663",
+          "tokenized_text": "[[[EM_1|微软 Maia 200 规格总结。来源：微软，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Maia 200 is the last holdout of reticle-scale monolithic designs. Every major HBM-equipped training and inference accelerator has moved on to multi-chip designs with 2, 4, or even 8 compute dies per package. Every single mm² of the die has been hyper-optimized for one purpose. Unlike with an Nvidia or AMD GPU, there is no legacy hardware for media or vector operations. Microsoft has pushed the reticle-scale monolithic approach to its limit on TSMC’s N3P process, packing in over 10 PFLOPs of FP4 compute, 6 HBM3E stacks, and 28× 400 Gb/s full-duplex D2D links.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0368",
+      "parent_block_index": 368,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Maia 200 is the last holdout of reticle-scale monolithic designs. Every major HBM-equipped training and inference accelerator has moved on to multi-chip designs with 2, 4, or even 8 compute dies per package. Every single mm² of the die has been hyper-optimized for one purpose. Unlike with an Nvidia or AMD GPU, there is no legacy hardware for media or vector operations. Microsoft has pushed the reticle-scale monolithic approach to its limit on TSMC’s N3P process, packing in over 10 PFLOPs of FP4 compute, 6 HBM3E stacks, and 28× 400 Gb/s full-duplex D2D links.",
+      "parent_block_plain_text": "Maia 200 is the last holdout of reticle-scale monolithic designs. Every major HBM-equipped training and inference accelerator has moved on to multi-chip designs with 2, 4, or even 8 compute dies per package. Every single mm² of the die has been hyper-optimized for one purpose. Unlike with an Nvidia or AMD GPU, there is no legacy hardware for media or vector operations. Microsoft has pushed the reticle-scale monolithic approach to its limit on TSMC’s N3P process, packing in over 10 PFLOPs of FP4 compute, 6 HBM3E stacks, and 28× 400 Gb/s full-duplex D2D links.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 564,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Maia 200 是光罩尺寸单芯片设计的最后坚守者。所有配备高带宽内存（HBM）的主要训练和推理加速器都已转向多芯片设计，每个封装内包含 2、4 甚至 8 个计算裸片。芯片的每一平方毫米都为实现单一目标而做了极致优化。与英伟达或 AMD 的 GPU 不同，它没有为媒体或向量运算保留的遗留硬件。微软在台积电（TSMC）的 N3P 工艺上将光罩尺寸单芯片方法推向了极限，集成了超过 10 PFLOPs 的 FP4 算力、6 个 HBM3E 堆栈以及 28 条 400 Gb/s 全双工 D2D 链路。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813689",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!oV7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F98820b64-6a10-4132-b24a-a2122f7417ad_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!oV7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F98820b64-6a10-4132-b24a-a2122f7417ad_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0369",
+      "parent_block_index": 369,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!oV7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F98820b64-6a10-4132-b24a-a2122f7417ad_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!oV7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F98820b64-6a10-4132-b24a-a2122f7417ad_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!oV7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F98820b64-6a10-4132-b24a-a2122f7417ad_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!oV7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F98820b64-6a10-4132-b24a-a2122f7417ad_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813711",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!oV7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F98820b64-6a10-4132-b24a-a2122f7417ad_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Microsoft Maia 200 Package Cross-Section. Source: Microsoft, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Maia 200 Package Cross-Section. Source: Microsoft, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0370",
+      "parent_block_index": 370,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Microsoft Maia 200 Package Cross-Section. Source: Microsoft, ISSCC 2026*",
+      "parent_block_plain_text": "Microsoft Maia 200 Package Cross-Section. Source: Microsoft, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Maia 200 Package Cross-Section. Source: Microsoft, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 71,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "微软 Maia 200 封装横截面图。来源：微软，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813766",
+          "tokenized_text": "[[[EM_1|微软 Maia 200 封装横截面图。来源：微软，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "On the package-level, Maia 200 is very standard, mimicking the H100. A CoWoS-S interposer, with 1 main die, and 6 HBM3E stacks.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0371",
+      "parent_block_index": 371,
+      "parent_block_type": "p",
+      "parent_block_markdown": "On the package-level, Maia 200 is very standard, mimicking the H100. A CoWoS-S interposer, with 1 main die, and 6 HBM3E stacks.",
+      "parent_block_plain_text": "On the package-level, Maia 200 is very standard, mimicking the H100. A CoWoS-S interposer, with 1 main die, and 6 HBM3E stacks.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 127,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在封装层面，Maia 200 非常标准，模仿了 H100 的设计，采用一个 CoWoS-S 中介层来承载 1 个主裸片和 6 个 HBM3E 堆栈。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813794",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!1q24!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4949a336-f267-4f4c-b813-1f6af0d7f629_506x541.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!1q24!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4949a336-f267-4f4c-b813-1f6af0d7f629_506x541.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0372",
+      "parent_block_index": 372,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!1q24!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4949a336-f267-4f4c-b813-1f6af0d7f629_506x541.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!1q24!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4949a336-f267-4f4c-b813-1f6af0d7f629_506x541.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!1q24!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4949a336-f267-4f4c-b813-1f6af0d7f629_506x541.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!1q24!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4949a336-f267-4f4c-b813-1f6af0d7f629_506x541.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813816",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!1q24!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4949a336-f267-4f4c-b813-1f6af0d7f629_506x541.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "Microsoft Maia 200 Die Floorplan. Source: Microsoft, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Maia 200 Die Floorplan. Source: Microsoft, ISSCC 2026",
+          "start": 0,
+          "end": 63,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0373",
+      "parent_block_index": 373,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Microsoft Maia 200 Die Floorplan. Source: Microsoft, ISSCC 2026*",
+      "parent_block_plain_text": "Microsoft Maia 200 Die Floorplan. Source: Microsoft, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Maia 200 Die Floorplan. Source: Microsoft, ISSCC 2026",
+          "start": 0,
+          "end": 63,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 63,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "微软 Maia 200 裸片布局图。来源：微软，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813865",
+          "tokenized_text": "[[[EM_1|微软 Maia 200 裸片布局图。来源：微软，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "The long sides of the chip are covered in 3 HBM3E PHYs each, while the short sides each have 14 of the 28 lanes of 400 Gb/s D2D links. In the center, there is 272 MB of SRAM, with 80 MB of TSRAM (L1) and 192 MB of CSRAM (L2).",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0374",
+      "parent_block_index": 374,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The long sides of the chip are covered in 3 HBM3E PHYs each, while the short sides each have 14 of the 28 lanes of 400 Gb/s D2D links. In the center, there is 272 MB of SRAM, with 80 MB of TSRAM (L1) and 192 MB of CSRAM (L2).",
+      "parent_block_plain_text": "The long sides of the chip are covered in 3 HBM3E PHYs each, while the short sides each have 14 of the 28 lanes of 400 Gb/s D2D links. In the center, there is 272 MB of SRAM, with 80 MB of TSRAM (L1) and 192 MB of CSRAM (L2).",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 225,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "芯片的长边各覆盖了3个HBM3E物理层接口（PHY），而短边则各有14条通道，共同组成28条速率为400 Gb/s的裸片到裸片（D2D）互连接口。芯片中央集成了272 MB的SRAM，其中包括80 MB的TSRAM（作为L1缓存）和192 MB的CSRAM（作为L2缓存）。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813886",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "https://substackcdn.com/image/fetch/$s_!Wj4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62240549-cf4a-4472-8294-7b7b2bca21fa_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Wj4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62240549-cf4a-4472-8294-7b7b2bca21fa_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0375",
+      "parent_block_index": 375,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Wj4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62240549-cf4a-4472-8294-7b7b2bca21fa_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Wj4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62240549-cf4a-4472-8294-7b7b2bca21fa_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Wj4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62240549-cf4a-4472-8294-7b7b2bca21fa_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Wj4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62240549-cf4a-4472-8294-7b7b2bca21fa_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813905",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Wj4l!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F62240549-cf4a-4472-8294-7b7b2bca21fa_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "Microsoft Maia 200 Scale-Up Network and IO. Source: Microsoft, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Maia 200 Scale-Up Network and IO. Source: Microsoft, ISSCC 2026",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0376",
+      "parent_block_index": 376,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Microsoft Maia 200 Scale-Up Network and IO. Source: Microsoft, ISSCC 2026*",
+      "parent_block_plain_text": "Microsoft Maia 200 Scale-Up Network and IO. Source: Microsoft, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Microsoft Maia 200 Scale-Up Network and IO. Source: Microsoft, ISSCC 2026",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 73,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "微软 Maia 200 纵向扩展网络与输入/输出接口。来源：微软，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813972",
+          "tokenized_text": "[[[EM_1|微软 Maia 200 纵向扩展网络与输入/输出接口。来源：微软，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "The Maia 200 has two different kinds of links, fixed links between other chips in the same node, and switched links between a chip and a switch. 21 links are configured as fixed links, 7 to each other chip, while the remaining 7 links are configured as switched links to one of four in-rack switches.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0377",
+      "parent_block_index": 377,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Maia 200 has two different kinds of links, fixed links between other chips in the same node, and switched links between a chip and a switch. 21 links are configured as fixed links, 7 to each other chip, while the remaining 7 links are configured as switched links to one of four in-rack switches.",
+      "parent_block_plain_text": "The Maia 200 has two different kinds of links, fixed links between other chips in the same node, and switched links between a chip and a switch. 21 links are configured as fixed links, 7 to each other chip, while the remaining 7 links are configured as switched links to one of four in-rack switches.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 300,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Maia 200 配备两种不同类型的互连接口：一种是用于连接同一节点内其他芯片的固定链路，另一种是用于连接芯片与交换机的交换链路。具体而言，21条链路被配置为固定链路，分别连接至节点内的其他芯片（例如，连接到其他三个芯片，各使用7条）；剩余的7条链路则被配置为交换链路，用于连接机架内的四个交换机之一。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.813992",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "We will be publishing a deep dive into the Maia 200, its microarchitecture and network topology, for institutional subscribers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0378",
+      "parent_block_index": 378,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We will be publishing a deep dive into the Maia 200, its microarchitecture and network topology, for institutional subscribers.",
+      "parent_block_plain_text": "We will be publishing a deep dive into the Maia 200, its microarchitecture and network topology, for institutional subscribers.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 127,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们将为机构订阅用户发布一份关于 Maia 200 的深度分析报告，涵盖其微架构和网络拓扑结构。",
+          "model": "pro",
+          "created_at": "2026-04-18T02:14:06.814011",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.59,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致且注释位置不当。"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键信息“nodes”的翻译可能引起歧义。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“reticle-scale”翻译不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "“hyper-optimized”的翻译“极致优化”力度稍弱，且“进行了极致优化”是被动结构。"
+          },
+          {
+            "type": "conciseness",
+            "description": "列表项翻译略显冗长，信息密度可提高。"
+          },
+          {
+            "type": "readability",
+            "description": "冒号后的解释性列表，句式可以更紧凑。"
+          },
+          {
+            "type": "terminology",
+            "description": "自创术语“暂存SRAM”和“缓存SRAM”可能造成理解障碍，且未遵循术语表。"
+          },
+          {
+            "type": "readability",
+            "description": "“每个芯片与其他芯片之间各有7条”表述稍显绕口，逻辑可更清晰。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

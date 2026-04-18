@@ -1,0 +1,49 @@
+{
+  "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+  "new_terms": [
+    {
+      "term": "QDR",
+      "suggested_translation": "四倍数据速率",
+      "context": "GDDR7 signaling mode (4 symbols per clock cycle)",
+      "confidence": 0.9
+    },
+    {
+      "term": "Rubin CPX",
+      "suggested_translation": "Rubin CPX",
+      "context": "NVIDIA's large-context AI processor",
+      "confidence": 0.9
+    },
+    {
+      "term": "Groq LPX",
+      "suggested_translation": "Groq LPX",
+      "context": "NVIDIA's alternative memory solution",
+      "confidence": 0.9
+    },
+    {
+      "term": "COGS",
+      "suggested_translation": "销售成本",
+      "context": "Financial term in memory model",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "sk hynix": "SK海力士",
+    "1c": "1c",
+    "gddr7": "GDDR7",
+    "shmoo plot": "舒姆图",
+    "die shot": "芯片显微照片",
+    "bit density": "位密度",
+    "Gb/mm²": "Gb/mm²",
+    "data rates": "数据速率",
+    "pam3": "三电平脉冲幅度调制",
+    "hbm": "HBM",
+    "nvidia": "英伟达",
+    "lpddr5x": "LPDDR5X",
+    "samsung": "三星",
+    "1b": "1b",
+    "1z": "1z"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T01:03:23.342990"
+}

@@ -1,0 +1,43 @@
+{
+  "section_id": "12-multi-agent-architectures-gpt",
+  "new_terms": [
+    {
+      "term": "AlphaEvolve",
+      "suggested_translation": "AlphaEvolve",
+      "context": "Google的多智能体进化系统",
+      "confidence": 0.9
+    },
+    {
+      "term": "ARC-AGI",
+      "suggested_translation": "ARC-AGI",
+      "context": "抽象推理评测",
+      "confidence": 0.9
+    },
+    {
+      "term": "SG Lang",
+      "suggested_translation": "SG Lang",
+      "context": "编程语言/框架",
+      "confidence": 0.9
+    },
+    {
+      "term": "CUDA kernels",
+      "suggested_translation": "CUDA内核",
+      "context": "GPU计算内核",
+      "confidence": 0.9
+    },
+    {
+      "term": "AlphaGo",
+      "suggested_translation": "AlphaGo",
+      "context": "DeepMind的围棋AI",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "evaluations": "评估",
+    "subagents": "子智能体",
+    "orchestrator": "编排器"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:50:31.104594"
+}

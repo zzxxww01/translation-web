@@ -1,0 +1,1633 @@
+{
+  "section_id": "13-marvell-coherent-lite-transcei",
+  "title": "Marvell Coherent-Lite Transceiver - Paper 23.2",
+  "title_translation": "Marvell Coherent-Lite Transceiver - Paper 23.2",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!B76F!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc24a930f-d8f1-4622-96e6-9a39a7388ea5_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!B76F!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc24a930f-d8f1-4622-96e6-9a39a7388ea5_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0222",
+      "parent_block_index": 222,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!B76F!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc24a930f-d8f1-4622-96e6-9a39a7388ea5_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!B76F!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc24a930f-d8f1-4622-96e6-9a39a7388ea5_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!B76F!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc24a930f-d8f1-4622-96e6-9a39a7388ea5_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!B76F!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc24a930f-d8f1-4622-96e6-9a39a7388ea5_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898485",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!B76F!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc24a930f-d8f1-4622-96e6-9a39a7388ea5_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Direct Detection vs. Coherent-Lite vs. Coherent Transceiver Comparison. Source: Marvell, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Direct Detection vs. Coherent-Lite vs. Coherent Transceiver Comparison. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 99,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0223",
+      "parent_block_index": 223,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Direct Detection vs. Coherent-Lite vs. Coherent Transceiver Comparison. Source: Marvell, ISSCC 2026*",
+      "parent_block_plain_text": "Direct Detection vs. Coherent-Lite vs. Coherent Transceiver Comparison. Source: Marvell, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Direct Detection vs. Coherent-Lite vs. Coherent Transceiver Comparison. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 99,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 99,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "直接检测、精简相干与相干光模块对比。来源：Marvell，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898613",
+          "tokenized_text": "[[[EM_1|直接检测、精简相干与相干光模块对比。来源：Marvell，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Marvell presented an 800G transceiver for coherent-lite applications. Traditional transceivers have a limit on how far they can reach, less than 10 kilometers. Coherent transceivers support much further reach, but they are complex, consume more power, and are more expensive. Marvell’s Coherent-lite transceiver targets a middle ground with respect to power consumption, cost and range, which is perfect for large datacenter campuses with links spanning at most tens of kilometers.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0224",
+      "parent_block_index": 224,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Marvell presented an 800G transceiver for coherent-lite applications. Traditional transceivers have a limit on how far they can reach, less than 10 kilometers. Coherent transceivers support much further reach, but they are complex, consume more power, and are more expensive. Marvell’s Coherent-lite transceiver targets a middle ground with respect to power consumption, cost and range, which is perfect for large datacenter campuses with links spanning at most tens of kilometers.",
+      "parent_block_plain_text": "Marvell presented an 800G transceiver for coherent-lite applications. Traditional transceivers have a limit on how far they can reach, less than 10 kilometers. Coherent transceivers support much further reach, but they are complex, consume more power, and are more expensive. Marvell’s Coherent-lite transceiver targets a middle ground with respect to power consumption, cost and range, which is perfect for large datacenter campuses with links spanning at most tens of kilometers.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 481,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Marvell 展示了一款用于精简相干（Coherent-Lite）应用的 800G 光模块。传统光模块的传输距离有限，通常小于 10 公里。相干光模块则支持远得多的距离，但其设计复杂、功耗更高且成本更昂贵。Marvell 的精简相干光模块旨在功耗、成本和传输距离之间取得平衡，这对于链路跨度最多数十公里的大型数据中心园区而言堪称完美。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898644",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!1xhk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9995a322-bad8-4a3c-97e1-b84fde0aa424_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!1xhk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9995a322-bad8-4a3c-97e1-b84fde0aa424_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0225",
+      "parent_block_index": 225,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!1xhk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9995a322-bad8-4a3c-97e1-b84fde0aa424_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!1xhk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9995a322-bad8-4a3c-97e1-b84fde0aa424_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!1xhk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9995a322-bad8-4a3c-97e1-b84fde0aa424_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!1xhk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9995a322-bad8-4a3c-97e1-b84fde0aa424_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898661",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!1xhk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9995a322-bad8-4a3c-97e1-b84fde0aa424_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Coherent and Coherent-Lite Optical Band Comparison. Source: Marvell, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Coherent and Coherent-Lite Optical Band Comparison. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 79,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0226",
+      "parent_block_index": 226,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Coherent and Coherent-Lite Optical Band Comparison. Source: Marvell, ISSCC 2026*",
+      "parent_block_plain_text": "Coherent and Coherent-Lite Optical Band Comparison. Source: Marvell, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Coherent and Coherent-Lite Optical Band Comparison. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 79,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 79,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "相干与精简相干光模块的光波段对比。来源：Marvell，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898708",
+          "tokenized_text": "[[[EM_1|相干与精简相干光模块的光波段对比。来源：Marvell，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Coherent transceivers primarily use C-band wavelengths for their low attenuation. However, the long-haul links in which coherent transmission is used typically have a very high dispersion, needing heavy DSP processing. The long range of traditional Coherent optics can often be overkill for datacenter campuses with buildings that are only tens of kilometers apart.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0227",
+      "parent_block_index": 227,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Coherent transceivers primarily use C-band wavelengths for their low attenuation. However, the long-haul links in which coherent transmission is used typically have a very high dispersion, needing heavy DSP processing. The long range of traditional Coherent optics can often be overkill for datacenter campuses with buildings that are only tens of kilometers apart.",
+      "parent_block_plain_text": "Coherent transceivers primarily use C-band wavelengths for their low attenuation. However, the long-haul links in which coherent transmission is used typically have a very high dispersion, needing heavy DSP processing. The long range of traditional Coherent optics can often be overkill for datacenter campuses with buildings that are only tens of kilometers apart.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 365,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "相干光模块主要使用C波段波长，正是看中其低衰减特性。然而，使用相干传输的长距离链路通常色散非常高，需要大量的数字信号处理器（DSP）处理。对于建筑物之间仅相隔数十公里的数据中心园区而言，传统相干光学的超长传输距离往往显得大材小用。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898726",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Coherent-Lite transceivers instead use O-band wavelengths, which have near-zero dispersion over the relatively short distances on a datacenter campus. This enables minimal DSP processing, saving power and reducing latency.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0228",
+      "parent_block_index": 228,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Coherent-Lite transceivers instead use O-band wavelengths, which have near-zero dispersion over the relatively short distances on a datacenter campus. This enables minimal DSP processing, saving power and reducing latency.",
+      "parent_block_plain_text": "Coherent-Lite transceivers instead use O-band wavelengths, which have near-zero dispersion over the relatively short distances on a datacenter campus. This enables minimal DSP processing, saving power and reducing latency.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "精简相干光模块则转而使用 O 波段波长，该波段在数据中心园区相对较短的距离上色散近乎为零。这使得所需的 DSP 处理降至最低，从而节省了功耗并降低了延迟。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898742",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!oACP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0faa6bfc-c1c4-44bc-b8c8-c3b14f466c32_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!oACP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0faa6bfc-c1c4-44bc-b8c8-c3b14f466c32_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0229",
+      "parent_block_index": 229,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!oACP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0faa6bfc-c1c4-44bc-b8c8-c3b14f466c32_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!oACP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0faa6bfc-c1c4-44bc-b8c8-c3b14f466c32_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!oACP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0faa6bfc-c1c4-44bc-b8c8-c3b14f466c32_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!oACP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0faa6bfc-c1c4-44bc-b8c8-c3b14f466c32_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898759",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!oACP!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0faa6bfc-c1c4-44bc-b8c8-c3b14f466c32_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "Marvell Coherent-Lite Transceiver Architecture. Source: Marvell, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Marvell Coherent-Lite Transceiver Architecture. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0230",
+      "parent_block_index": 230,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Marvell Coherent-Lite Transceiver Architecture. Source: Marvell, ISSCC 2026*",
+      "parent_block_plain_text": "Marvell Coherent-Lite Transceiver Architecture. Source: Marvell, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Marvell Coherent-Lite Transceiver Architecture. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 75,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Marvell 精简相干光模块架构。来源：Marvell，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898803",
+          "tokenized_text": "[[[EM_1|Marvell 精简相干光模块架构。来源：Marvell，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "The Coherent-lite transceiver is a DSP-based pluggable module consisting of two 400G channels. Each 400G channel runs a dual polarization QAM and consists of two parallel modulation streams, X and Y.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0231",
+      "parent_block_index": 231,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The Coherent-lite transceiver is a DSP-based pluggable module consisting of two 400G channels. Each 400G channel runs a dual polarization QAM and consists of two parallel modulation streams, X and Y.",
+      "parent_block_plain_text": "The Coherent-lite transceiver is a DSP-based pluggable module consisting of two 400G channels. Each 400G channel runs a dual polarization QAM and consists of two parallel modulation streams, X and Y.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 199,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "精简相干光模块是一种基于数字信号处理器（DSP）的可插拔模块，包含两个 400G 通道。每个 400G 通道运行双偏振正交幅度调制（Dual-Polarization Quadrature Amplitude Modulation, DP-QAM），并由 X 和 Y 两个并行的调制流组成。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898820",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!qDgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc181023-63b7-4e6e-8769-eb69fdc1ca81_682x375.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qDgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc181023-63b7-4e6e-8769-eb69fdc1ca81_682x375.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0232",
+      "parent_block_index": 232,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qDgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc181023-63b7-4e6e-8769-eb69fdc1ca81_682x375.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qDgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc181023-63b7-4e6e-8769-eb69fdc1ca81_682x375.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qDgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc181023-63b7-4e6e-8769-eb69fdc1ca81_682x375.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qDgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc181023-63b7-4e6e-8769-eb69fdc1ca81_682x375.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.898834",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qDgr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcc181023-63b7-4e6e-8769-eb69fdc1ca81_682x375.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Marvell Coherent-Lite Measured Link Performance. Source: Marvell, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Marvell Coherent-Lite Measured Link Performance. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0233",
+      "parent_block_index": 233,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Marvell Coherent-Lite Measured Link Performance. Source: Marvell, ISSCC 2026*",
+      "parent_block_plain_text": "Marvell Coherent-Lite Measured Link Performance. Source: Marvell, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Marvell Coherent-Lite Measured Link Performance. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 76,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 76,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Marvell 精简相干光模块实测链路性能。来源：Marvell，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.899334",
+          "tokenized_text": "[[[EM_1|Marvell 精简相干光模块实测链路性能。来源：Marvell，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "The key to this demonstration is highlighting other methods of scaling channel bandwidth that are optimized for the campus application.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0234",
+      "parent_block_index": 234,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key to this demonstration is highlighting other methods of scaling channel bandwidth that are optimized for the campus application.",
+      "parent_block_plain_text": "The key to this demonstration is highlighting other methods of scaling channel bandwidth that are optimized for the campus application.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 135,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "本次演示的核心，在于展示其他几种专为园区应用优化的通道带宽扩展方法。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.899395",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "Higher-order modulation coupled with the dual polarization using X and Y axes delivers 400G channel bandwidth. There are 8 bits per channel for a total of 32 constellation points as demonstrated above. These 8 bits times the 62.5 GBd signal rate equals ~400G of total bandwidth.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0235",
+      "parent_block_index": 235,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Higher-order modulation coupled with the dual polarization using X and Y axes delivers 400G channel bandwidth. There are 8 bits per channel for a total of 32 constellation points as demonstrated above. These 8 bits times the 62.5 GBd signal rate equals ~400G of total bandwidth.",
+      "parent_block_plain_text": "Higher-order modulation coupled with the dual polarization using X and Y axes delivers 400G channel bandwidth. There are 8 bits per channel for a total of 32 constellation points as demonstrated above. These 8 bits times the 62.5 GBd signal rate equals ~400G of total bandwidth.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 278,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "高阶调制结合使用 X 和 Y 轴的双偏振技术，实现了 400G 的通道带宽。如上图所示，每个通道有 8 比特，总共构成 32 个星座点。这 8 比特乘以 62.5 GBd 的信号速率，总计约 400G 的总带宽。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.899418",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "This modulation scheme is not entirely new to the industry, but it is now being brought into the datacenter campus setting for use in those shorter links.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0236",
+      "parent_block_index": 236,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This modulation scheme is not entirely new to the industry, but it is now being brought into the datacenter campus setting for use in those shorter links.",
+      "parent_block_plain_text": "This modulation scheme is not entirely new to the industry, but it is now being brought into the datacenter campus setting for use in those shorter links.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 154,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种调制方案对业界来说并不陌生，但如今正被引入数据中心园区，用于那些距离较短的链路。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.899437",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "https://substackcdn.com/image/fetch/$s_!jtsE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F79b51c03-3812-498e-8f41-b9465e2c8164_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!jtsE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F79b51c03-3812-498e-8f41-b9465e2c8164_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0237",
+      "parent_block_index": 237,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!jtsE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F79b51c03-3812-498e-8f41-b9465e2c8164_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!jtsE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F79b51c03-3812-498e-8f41-b9465e2c8164_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!jtsE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F79b51c03-3812-498e-8f41-b9465e2c8164_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!jtsE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F79b51c03-3812-498e-8f41-b9465e2c8164_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.899455",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!jtsE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F79b51c03-3812-498e-8f41-b9465e2c8164_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Marvell Coherent-Lite Performance vs. Prior Coherent Transceivers. Source: Marvell, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Marvell Coherent-Lite Performance vs. Prior Coherent Transceivers. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0238",
+      "parent_block_index": 238,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Marvell Coherent-Lite Performance vs. Prior Coherent Transceivers. Source: Marvell, ISSCC 2026*",
+      "parent_block_plain_text": "Marvell Coherent-Lite Performance vs. Prior Coherent Transceivers. Source: Marvell, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Marvell Coherent-Lite Performance vs. Prior Coherent Transceivers. Source: Marvell, ISSCC 2026",
+          "start": 0,
+          "end": 94,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 94,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Marvell 精简相干光模块性能与先前相干收发器的对比。来源：Marvell，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.899551",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "Marvell’s approach significantly reduces power to only 3.72 pJ/b excluding silicon photonics, half of other full-fledged coherent transceivers. Their measurements were taken over a fiber length of 40km, with a latency of less than 300 ns.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0239",
+      "parent_block_index": 239,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Marvell’s approach significantly reduces power to only 3.72 pJ/b excluding silicon photonics, half of other full-fledged coherent transceivers. Their measurements were taken over a fiber length of 40km, with a latency of less than 300 ns.",
+      "parent_block_plain_text": "Marvell’s approach significantly reduces power to only 3.72 pJ/b excluding silicon photonics, half of other full-fledged coherent transceivers. Their measurements were taken over a fiber length of 40km, with a latency of less than 300 ns.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 238,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "Marvell 的方案显著降低了功耗，在不包含硅光部分的情况下，功耗仅为 3.72 皮焦耳/比特，仅为其他全功能相干收发器的一半。其测量是在 40 公里光纤长度上进行的，延迟低于 300 纳秒。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:35:50.899572",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.44,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

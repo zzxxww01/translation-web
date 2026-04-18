@@ -1,0 +1,78 @@
+{
+  "project_id": "rl-environments-and-rl-for-science-data-foundries",
+  "status": "incomplete",
+  "total_sections": 13,
+  "translated_sections": 4,
+  "total_paragraphs": 179,
+  "translated_paragraphs": 88,
+  "error_count": 9,
+  "errors": [
+    {
+      "error": "Failed to translate section 04-data-foundries-and-expert-cont: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.019388 (request id: 20260415162354528226781nTAE2GOP)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:54.406605",
+      "section": "04-data-foundries-and-expert-cont"
+    },
+    {
+      "error": "Failed to translate section 05-buying-patterns-across-labs: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.019888 (request id: 2026041516235589174103YGBh9W4c)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:54.980583",
+      "section": "05-buying-patterns-across-labs"
+    },
+    {
+      "error": "Failed to translate section 06-llm-based-automation-is-not-a: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.018584 (request id: 20260415162355646435539cmcmQgmd)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:55.525790",
+      "section": "06-llm-based-automation-is-not-a"
+    },
+    {
+      "error": "Failed to translate section 07-sorry-your-agent-is-not-allow: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.018670 (request id: 20260415162356228600164D3XPfsAG)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:56.099299",
+      "section": "07-sorry-your-agent-is-not-allow"
+    },
+    {
+      "error": "Failed to translate section 08-rl-as-a-service: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.019094 (request id: 20260415162356801439824Bgp5CFdV)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:56.680040",
+      "section": "08-rl-as-a-service"
+    },
+    {
+      "error": "Failed to translate section 09-rl-for-science: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.018736 (request id: 2026041516235736284015789furfvH)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:57.243850",
+      "section": "09-rl-for-science"
+    },
+    {
+      "error": "Failed to translate section 10-rl-meets-the-wet-lab: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.019548 (request id: 20260415162357941072885CAUhckqM)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:57.864582",
+      "section": "10-rl-meets-the-wet-lab"
+    },
+    {
+      "error": "Failed to translate section 11-why-rl-for-biology-can-be-chal: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.019066 (request id: 20260415162358543436711HTsWiFLr)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:58.428116",
+      "section": "11-why-rl-for-biology-can-be-chal"
+    },
+    {
+      "error": "Failed to translate section 12-multi-agent-architectures-gpt: Error code: 403 - {'error': {'message': 'chat pre-consumed quota failed, user quota: ＄0.017638, need quota: ＄0.018720 (request id: 20260415162359166592249pPCiMfMG)', 'type': 'new_api_error', 'param': '', 'code': 'local:insufficient_quota'}}",
+      "timestamp": "2026-04-15T16:23:59.035441",
+      "section": "12-multi-agent-architectures-gpt"
+    }
+  ],
+  "started_at": "2026-04-15T16:11:36.245684",
+  "finished_at": "2026-04-15T16:23:59.127079",
+  "run_id": "20260415-161136-245726",
+  "artifacts_path": "projects\\rl-environments-and-rl-for-science-data-foundries\\artifacts\\runs\\20260415-161136-245726",
+  "export": {
+    "generated_at": "2026-04-15T16:23:59.047819",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\rl-environments-and-rl-for-science-data-foundries\\强化学习环境与面向科学的强化学习：数据代工厂与多智能体架构_zh.md",
+      "generated": true,
+      "bytes": 48675
+    }
+  },
+  "api_calls": 0,
+  "elapsed_seconds": 742.9,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

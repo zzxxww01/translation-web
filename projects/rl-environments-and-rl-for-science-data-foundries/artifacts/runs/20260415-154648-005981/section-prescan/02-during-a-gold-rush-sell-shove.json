@@ -1,0 +1,45 @@
+{
+  "section_id": "02-during-a-gold-rush-sell-shove",
+  "new_terms": [
+    {
+      "term": "UI gyms",
+      "suggested_translation": "UI训练场",
+      "context": "指用于训练AI智能体的模拟用户界面环境。",
+      "confidence": 0.95
+    },
+    {
+      "term": "MCP server",
+      "suggested_translation": "MCP服务器",
+      "context": "位于容器化环境之上，暴露工具定义供智能体调用。",
+      "confidence": 0.9
+    },
+    {
+      "term": "telemetry",
+      "suggested_translation": "遥测数据",
+      "context": "捕获工具调用和观察结果，用于调试和训练。",
+      "confidence": 0.9
+    },
+    {
+      "term": "Environments Hub",
+      "suggested_translation": "环境中心",
+      "context": "Prime Intellect推动的一站式RL环境平台。",
+      "confidence": 0.85
+    },
+    {
+      "term": "dockerized container",
+      "suggested_translation": "Docker容器",
+      "context": "用于封装软件以创建可扩展RL环境。",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl environments": "强化学习环境",
+    "rollouts": "轨迹推演",
+    "mid-training": "中期训练",
+    "reward signal": "奖励信号",
+    "tool call": "工具调用",
+    "observation": "观察值"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:47:33.016846"
+}

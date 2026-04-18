@@ -1,0 +1,65 @@
+{
+  "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+  "new_terms": [
+    {
+      "term": "M3DProc",
+      "suggested_translation": "M3DProc",
+      "context": "英特尔3D处理器代号",
+      "confidence": 0.95
+    },
+    {
+      "term": "Foveros Direct",
+      "suggested_translation": "Foveros Direct",
+      "context": "英特尔的一种直接混合键合技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "HBI",
+      "suggested_translation": "混合键合互连",
+      "context": "Hybrid Bonding Interconnect的缩写",
+      "confidence": 0.9
+    },
+    {
+      "term": "Clearwater Forest (CWF)",
+      "suggested_translation": "Clearwater Forest (CWF)",
+      "context": "英特尔处理器产品代号",
+      "confidence": 0.9
+    },
+    {
+      "term": "3D NoC",
+      "suggested_translation": "三维片上网络",
+      "context": "3D Network-on-Chip",
+      "confidence": 0.85
+    },
+    {
+      "term": "mesh tile",
+      "suggested_translation": "网格单元",
+      "context": "3D Mesh架构中的基本单元",
+      "confidence": 0.8
+    },
+    {
+      "term": "DNN accelerator tile",
+      "suggested_translation": "DNN加速器单元",
+      "context": "深度神经网络加速器单元",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm": "HBM",
+    "sram": "SRAM",
+    "hybrid bonding": "混合键合",
+    "cpu": "CPU",
+    "die": "裸片",
+    "wafer": "晶圆",
+    "bandwidth": "带宽",
+    "throughput": "吞吐量",
+    "latency": "延迟",
+    "energy efficiency": "能效",
+    "packaging": "封装",
+    "cache": "缓存",
+    "node": "制程节点"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T01:57:50.806774"
+}

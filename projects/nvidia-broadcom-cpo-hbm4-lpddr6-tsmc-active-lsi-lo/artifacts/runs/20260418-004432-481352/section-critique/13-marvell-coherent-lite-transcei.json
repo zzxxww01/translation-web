@@ -1,0 +1,73 @@
+{
+  "section_id": "13-marvell-coherent-lite-transcei",
+  "reflection": {
+    "overall_score": 8.9,
+    "readability_score": 8.8,
+    "accuracy_score": 9.2,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "terminology",
+        "severity": "critical",
+        "original_text": "Coherent-lite transceiver",
+        "description": "关键术语“Coherent-lite”在段落内首次出现时，译文“精简相干（coherent-lite）”的注释格式与全文指南要求不符。",
+        "why_it_matters": "根据全文指南，首次出现的重要缩写或术语应采用“英文全称（中文释义）”格式。此处“精简相干”是核心概念，需明确标注其英文对应词，以确保术语清晰度和一致性。",
+        "suggestion": "将“精简相干（coherent-lite）”修改为“精简相干（Coherent-Lite）”，以符合术语标注规范。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "Coherent transceivers primarily use C-band wavelengths for their low attenuation.",
+        "description": "译文“因其衰减较低”的因果关系表述不够精确，可能削弱原文的技术逻辑。原文“for their low attenuation”是解释选择C波段的原因，译文“因其”虽正确，但结合上下文看，强调“低衰减”是C波段的核心优势，可以更突出。",
+        "why_it_matters": "在技术分析中，因果关系的精确传达对于理解设计决策至关重要。此处应明确C波段被选用的首要原因。",
+        "suggestion": "可优化为“相干光模块主要使用C波段波长，正是看中其低衰减特性。”或“相干光模块主要使用低衰减的C波段波长。”以更直接地关联原因。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 9,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "dual polarization QAM",
+        "description": "关键术语“dual polarization QAM”在段落内首次出现时，译文“双偏振正交幅度调制（dual polarization QAM）”的注释格式正确，但“QAM”本身作为缩写，其全称“正交幅度调制”在文中是首次出现，按照指南精神，也应考虑加注。",
+        "why_it_matters": "对于目标读者（半导体从业者、分析师），“QAM”是常见术语，可能无需加注。但根据指南“对真正有理解门槛的术语漏注”的检查点，此处存在判断空间。为确保严谨，建议评估是否需明确“QAM”的全称。",
+        "suggestion": "如果遵循最严格的术语首次出现加注原则，可修改为“双偏振正交幅度调制（Dual-Polarization Quadrature Amplitude Modulation, DP-QAM）”。但鉴于“QAM”在通信领域非常普及，此问题可标记为P1，由译者根据整体术语表策略决定是否调整。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 12,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "The key to this demonstration is highlighting other methods of scaling channel bandwidth that are optimized for the campus application.",
+        "description": "译文“此次演示的关键在于，它强调了其他几种为园区应用优化的通道带宽扩展方法。”略显生硬，存在“抽象名词壳”（“关键在于”）和轻微的翻译腔（“为...优化的”）。",
+        "why_it_matters": "优化后可提升句子的流畅度和信息密度，使其更符合中文科技分析文章的表述习惯。",
+        "suggestion": "可优化为：“本次演示的核心，是展示另外几种专为园区应用优化的通道带宽扩展方法。”或“此次演示的关键，在于凸显其他几种针对园区应用优化的通道带宽扩展方案。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 14,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "This modulation scheme is not entirely new to the industry, but it is now being brought into the datacenter campus setting for use in those shorter links.",
+        "description": "译文“这种调制方案对业界而言并非全新，但如今正被引入数据中心园区环境，用于那些更短的链路。”表达清晰准确，但“正被引入”是被动语态，且“用于那些”稍显口语化。",
+        "why_it_matters": "微调后可使语气更主动、书面，更贴合“专业、准确”的声线要求。",
+        "suggestion": "可优化为：“该调制方案在业界并非全新，但目前正被引入数据中心园区，应用于那些距离更短的链路。”或“此调制方案对行业来说并不陌生，但现在其应用场景正拓展至数据中心园区内的较短链路。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

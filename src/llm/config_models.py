@@ -46,6 +46,15 @@ class RetryConfig:
 
 
 @dataclass
+class ProviderNetworkConfig:
+    """Provider 网络配置"""
+    proxy_mode: str
+    http_proxy: Optional[str] = None
+    https_proxy: Optional[str] = None
+    no_proxy: Optional[str] = None
+
+
+@dataclass
 class ProviderConfig:
     """Provider 配置"""
     provider_id: str
@@ -55,6 +64,7 @@ class ProviderConfig:
     api_keys: List[APIKeyConfig]
     models: List[ModelConfig]
     retry_config: RetryConfig
+    network: Optional[ProviderNetworkConfig] = None
     group_priority: int = 999  # 组优先级，数字越小越优先
     base_url: Optional[str] = None
     enabled: bool = True

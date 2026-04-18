@@ -1,0 +1,58 @@
+{
+  "section_id": "19-processors",
+  "new_terms": [
+    {
+      "term": "ISSCC",
+      "suggested_translation": "ISSCC",
+      "context": "会议名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "MediaTek",
+      "suggested_translation": "联发科",
+      "context": "公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Intel",
+      "suggested_translation": "英特尔",
+      "context": "公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "AMD",
+      "suggested_translation": "AMD",
+      "context": "公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Rebellions",
+      "suggested_translation": "Rebellions",
+      "context": "公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Microsoft",
+      "suggested_translation": "微软",
+      "context": "公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "die shots",
+      "suggested_translation": "芯片显微照片",
+      "context": "芯片分析",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "mediatek": "联发科",
+    "intel": "英特尔",
+    "amd": "AMD",
+    "rebellions": "Rebellions",
+    "microsoft": "微软",
+    "die shot": "芯片显微照片"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:41:20.708576"
+}

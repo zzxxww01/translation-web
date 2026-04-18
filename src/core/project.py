@@ -204,16 +204,448 @@ class ProjectManager:
                 text = payload.text
         except FormatRecoveryError as error:
             logger.warning(
-                "Format recovery failed for block %s, fallback to plain export: %s",
+                "Format recovery failed for block %s, attempting smart fallback: %s",
                 first.parent_block_id or first.id,
                 error,
             )
-            # Best-effort export: keep translated plain text and avoid aborting the full document export.
-            text = reconstruct_block_tokenized_text(
+            # Smart fallback: try to restore links by position matching
+            plain_text = reconstruct_block_tokenized_text(
                 paragraphs,
                 fallback_to_source=fallback_to_source,
             ).text
+
+            # Attempt to restore inline elements (especially links) without calling LLM
+            if first.parent_inline_elements and first.source:
+                text = self._smart_fallback_restore_inline_elements(
+                    source_text=first.source,
+                    translated_text=plain_text,
+                    elements=first.parent_inline_elements,
+                    block_id=first.parent_block_id or first.id
+                )
+            else:
+                text = plain_text
         return self._format_markdown_line(block_type, text)
+
+    def _smart_fallback_restore_inline_elements(
+        self,
+        source_text: str,
+        translated_text: str,
+        elements: List[Any],
+        block_id: str
+    ) -> str:
+        """
+        Smart fallback: restore inline elements (links, bold, italic) by position matching.
+        Does not call LLM - uses heuristic matching instead.
+
+        Args:
+            source_text: Original text
+            translated_text: Translated text (without tokens)
+            elements: List of inline elements (links, bold, italic, etc.)
+            block_id: Block ID for logging
+
+        Returns:
+            Text with restored inline elements in Markdown format
+        """
+        from .models import InlineElement
+
+        result = translated_text
+
+        # Process elements in reverse order to maintain correct positions
+        # when inserting Markdown syntax
+        link_elements = [e for e in elements if e.type == "link"]
+
+        for element in reversed(link_elements):
+            try:
+                result = self._restore_single_link(
+                    source_text=source_text,
+                    translated_text=result,
+                    link_element=element
+                )
+            except Exception as e:
+                logger.warning(
+                    "Failed to restore link %s in block %s: %s",
+                    element.href if hasattr(element, 'href') else 'unknown',
+                    block_id,
+                    e
+                )
+                # Continue with other links even if one fails
+                continue
+
+        return result
+
+    def _restore_single_link(
+        self,
+        source_text: str,
+        translated_text: str,
+        link_element: Any
+    ) -> str:
+        """
+        Restore a single link by position matching.
+
+        Strategy:
+        1. Find the link text position in source
+        2. Calculate relative position (0.0 ~ 1.0)
+        3. Search for best match in translated text around that position
+        4. Replace matched text with Markdown link
+        """
+        from .models import InlineElement
+
+        # Find link position in source text
+        link_start = source_text.find(link_element.text)
+        if link_start == -1:
+            # Cannot locate link in source, wrap entire translated text
+            logger.debug(
+                "Cannot locate link text '%s' in source, wrapping entire translation",
+                link_element.text[:50]
+            )
+            return f"[{translated_text}]({link_element.href})"
+
+        # Calculate relative position
+        relative_pos = link_start / len(source_text) if len(source_text) > 0 else 0.5
+
+        # Strategy 1: Try to find exact match or very similar text first
+        # This handles cases where link text is preserved (e.g., "OpenAI", "Anthropic")
+        if link_element.text in translated_text:
+            # Exact match found
+            match_start = translated_text.find(link_element.text)
+            match_end = match_start + len(link_element.text)
+            return (
+                translated_text[:match_start] +
+                f"[{link_element.text}]({link_element.href})" +
+                translated_text[match_end:]
+            )
+
+        # Strategy 2: Fallback - use a reasonable chunk of text
+        # Since this is a fallback, we can be less precise
+        # Find a natural phrase boundary near the expected position
+        expected_pos = int(len(translated_text) * relative_pos)
+
+        # Look for sentence boundaries (punctuation marks)
+        sentence_breaks = [0]  # Start of text
+        for i, char in enumerate(translated_text):
+            if char in '，。！？；：、':
+                sentence_breaks.append(i + 1)
+        sentence_breaks.append(len(translated_text))  # End of text
+
+        # Find which sentence segment contains the expected position
+        for i in range(len(sentence_breaks) - 1):
+            start = sentence_breaks[i]
+            end = sentence_breaks[i + 1]
+            if start <= expected_pos < end:
+                # Use this sentence segment
+                segment = translated_text[start:end].strip('，。！？；：、 ')
+                if segment:
+                    return (
+                        translated_text[:start] +
+                        f"[{segment}]({link_element.href})" +
+                        translated_text[end:]
+                    )
+                break
+
+        # Strategy 3: Last resort - wrap entire text
+        logger.debug(
+            "No good sentence boundary found for link text '%s', wrapping entire translation",
+            link_element.text[:50]
+        )
+        return f"[{translated_text}]({link_element.href})"
+
+    def _extract_chinese_word_candidates(
+        self,
+        text: str,
+        center: int,
+        max_candidates: int = 5
+    ) -> list:
+        """
+        Extract Chinese word candidates near the expected position.
+
+        Chinese words are typically 2-6 characters long.
+        We look for natural word boundaries (punctuation, spaces, etc.)
+
+        Args:
+            text: Text to search in
+            center: Expected center position
+            max_candidates: Maximum number of candidates to return
+
+        Returns:
+            List of (start, end, text) tuples
+        """
+        import re
+
+        candidates = []
+
+        # Define word lengths to try (2-6 characters for Chinese)
+        word_lengths = [4, 3, 5, 2, 6]
+
+        # Search window: wider range to account for length differences
+        search_start = max(0, center - 20)
+        search_end = min(len(text), center + 20)
+
+        seen = set()  # Avoid duplicates
+
+        for length in word_lengths:
+            for start in range(search_start, min(search_end, len(text) - length + 1)):
+                end = start + length
+                candidate = text[start:end]
+
+                # Skip if already seen
+                if (start, end) in seen:
+                    continue
+                seen.add((start, end))
+
+                # Check if this looks like a valid Chinese word/phrase
+                # 1. Should contain mostly Chinese characters (at least 90%)
+                chinese_chars = sum(1 for c in candidate if '\u4e00' <= c <= '\u9fff')
+                if chinese_chars < length * 0.9:
+                    continue
+
+                # 2. Prefer candidates that start/end at word boundaries
+                boundary_score = 0
+                if start == 0 or not ('\u4e00' <= text[start-1] <= '\u9fff'):
+                    boundary_score += 1
+                if end == len(text) or not ('\u4e00' <= text[end] <= '\u9fff'):
+                    boundary_score += 1
+
+                # 3. Calculate distance from center
+                candidate_center = (start + end) // 2
+                distance = abs(candidate_center - center)
+
+                # Combined score: closer to center + word boundaries
+                # Prioritize boundary score, reduce distance penalty for pure Chinese
+                score = boundary_score * 20 - distance * 0.3
+
+                candidates.append((start, end, candidate, score))
+
+        # Sort by score and return top candidates
+        candidates.sort(key=lambda x: x[3], reverse=True)
+        return [(s, e, t) for s, e, t, _ in candidates[:max_candidates]]
+
+    def _find_best_match_window(
+        self,
+        text: str,
+        center: int,
+        estimated_length: int,
+        reference: str,
+        source_text: str = "",
+        link_start: int = 0
+    ) -> Optional[tuple]:
+        """
+        Find best matching text window around the estimated position.
+
+        Args:
+            text: Text to search in (translated text)
+            center: Estimated center position
+            estimated_length: Estimated length of the match
+            reference: Reference text (original link text)
+            source_text: Original source text (for context)
+            link_start: Link start position in source text
+
+        Returns:
+            (start, end, matched_text) or None if no good match found
+        """
+        if not text:
+            return None
+
+        # Extract context words around the link in source text
+        # This helps identify the correct position in translation
+        before_context = ""
+        after_context = ""
+        if source_text and link_start >= 0:
+            # Get 2-3 words before and after the link
+            before_start = max(0, link_start - 20)
+            before_context = source_text[before_start:link_start].strip().split()[-2:] if link_start > 0 else []
+
+            link_end = link_start + len(reference)
+            after_end = min(len(source_text), link_end + 20)
+            after_context = source_text[link_end:after_end].strip().split()[:2] if link_end < len(source_text) else []
+
+        # Search range: ±50% of text length around center (wider for cross-language matching)
+        search_start = max(0, center - len(text) // 2)
+        search_end = min(len(text), center + len(text) // 2)
+
+        # Window size range: For Chinese, typically much shorter than English
+        # Use 20% ~ 150% of estimated length
+        min_window = max(1, estimated_length // 5)
+        max_window = min(len(text), int(estimated_length * 1.5))
+
+        best_score = 0.0
+        best_match = None
+
+        # Sliding window search
+        for window_size in range(min_window, max_window + 1):
+            for start in range(search_start, min(search_end, len(text) - window_size + 1)):
+                end = start + window_size
+                candidate = text[start:end]
+
+                # Calculate match score
+                score = self._calculate_match_score(
+                    candidate=candidate,
+                    reference=reference,
+                    candidate_pos=start,
+                    expected_pos=center,
+                    translated_text=text,
+                    before_context=before_context,
+                    after_context=after_context
+                )
+
+                if score > best_score:
+                    best_score = score
+                    best_match = (start, end, candidate)
+
+        # Only return matches with score > 0.4 (raised threshold)
+        return best_match if best_score > 0.4 else None
+
+    def _calculate_match_score(
+        self,
+        candidate: str,
+        reference: str,
+        candidate_pos: int,
+        expected_pos: int,
+        translated_text: str = "",
+        before_context: list = None,
+        after_context: list = None
+    ) -> float:
+        """
+        简化的评分算法：
+        1. 长度匹配 (40%): 候选词长度越接近预期长度越好
+        2. 完整性 (40%): 候选词是完整词组（在词边界处）
+        3. 位置接近 (20%): 候选词位置越接近参考位置越好
+        """
+        has_alpha_ref = any(c.isalpha() and ord(c) < 128 for c in reference)
+        has_alpha_cand = any(c.isalpha() and ord(c) < 128 for c in candidate)
+
+        # 1. 长度得分 (0-1.0)
+        if has_alpha_ref and not has_alpha_cand:
+            # 英译中：预期压缩比约4倍
+            expected_len = len(reference) / 4.0
+            len_diff = abs(len(candidate) - expected_len)
+            len_score = 1.0 / (1.0 + len_diff)
+        else:
+            # 同语言：直接比较
+            len_ratio = min(len(candidate), len(reference)) / max(len(candidate), len(reference), 1)
+            len_score = len_ratio
+
+        # 2. 完整性得分 (0-1.0)
+        completeness_score = 0.0
+        if not has_alpha_cand and translated_text:
+            # 检查是否在词边界处
+            at_left_boundary = (candidate_pos == 0 or
+                              not ('\u4e00' <= translated_text[candidate_pos-1] <= '\u9fff'))
+            at_right_boundary = (candidate_pos + len(candidate) == len(translated_text) or
+                               not ('\u4e00' <= translated_text[candidate_pos + len(candidate)] <= '\u9fff'))
+
+            if at_left_boundary and at_right_boundary:
+                completeness_score = 1.0  # 完整词组
+            elif at_left_boundary or at_right_boundary:
+                completeness_score = 0.5  # 部分边界
+
+        # 3. 位置得分 (0-1.0)
+        pos_diff = abs(candidate_pos - expected_pos)
+        pos_score = 1.0 / (1.0 + pos_diff / 20.0)
+
+        # 加权总分
+        total_score = (
+            len_score * 0.4 +
+            completeness_score * 0.4 +
+            pos_score * 0.2
+        )
+
+        return total_score
+
+    def _calculate_match_score_old(
+        self,
+        candidate: str,
+        reference: str,
+        candidate_pos: int,
+        expected_pos: int,
+        translated_text: str = "",
+        before_context: list = None,
+        after_context: list = None
+    ) -> float:
+        """
+        旧的复杂评分算法（保留作为参考）
+        """
+        # 1. Position score
+        pos_diff = abs(candidate_pos - expected_pos)
+        pos_score = 1.0 / (1.0 + pos_diff / 10.0)
+
+        # 2. Length score
+        has_alpha_ref = any(c.isalpha() and ord(c) < 128 for c in reference)
+        has_alpha_cand = any(c.isalpha() and ord(c) < 128 for c in candidate)
+
+        if has_alpha_ref and not has_alpha_cand:
+            expected_chinese_len = len(reference) / 4.0
+            len_diff = abs(len(candidate) - expected_chinese_len)
+            len_score = 1.0 / (1.0 + len_diff / 2.0)
+        else:
+            len_ratio = min(len(candidate), len(reference)) / max(len(candidate), len(reference), 1)
+            len_score = len_ratio
+
+        # 3. Semantic features score
+        semantic_score = 0.0
+
+        if candidate and reference:
+            if candidate[0] == reference[0]:
+                semantic_score += 0.3
+
+        has_digit_candidate = any(c.isdigit() for c in candidate)
+        has_digit_reference = any(c.isdigit() for c in reference)
+        if has_digit_candidate == has_digit_reference:
+            semantic_score += 0.2
+
+        has_alpha_candidate = any(c.isalpha() and ord(c) < 128 for c in candidate)
+        has_alpha_reference = any(c.isalpha() and ord(c) < 128 for c in reference)
+        if has_alpha_candidate == has_alpha_reference:
+            semantic_score += 0.2
+
+        if ' ' in reference and not has_alpha_candidate:
+            if len(candidate) == 4:
+                semantic_score += 0.3
+
+        if has_alpha_reference == has_alpha_candidate:
+            len_ratio = min(len(candidate), len(reference)) / max(len(candidate), len(reference), 1)
+            if 0.7 <= len_ratio <= 1.3:
+                semantic_score += 0.3
+
+        if not has_alpha_candidate and translated_text:
+            boundary_count = 0
+            if candidate_pos == 0 or not ('\u4e00' <= translated_text[candidate_pos-1] <= '\u9fff'):
+                boundary_count += 1
+            candidate_end = candidate_pos + len(candidate)
+            if candidate_end == len(translated_text) or not ('\u4e00' <= translated_text[candidate_end] <= '\u9fff'):
+                boundary_count += 1
+
+            if boundary_count == 2:
+                semantic_score += 0.5
+            elif boundary_count == 1:
+                semantic_score += 0.2
+
+            # Check if context words appear near the candidate
+            candidate_start = candidate_pos
+            candidate_end = candidate_pos + len(candidate)
+
+            # Check before context
+            if before_context and candidate_start > 0:
+                before_text = translated_text[max(0, candidate_start - 15):candidate_start]
+                for word in before_context:
+                    if word.lower() in before_text.lower():
+                        context_score += 0.5
+                        break
+
+            # Check after context
+            if after_context and candidate_end < len(translated_text):
+                after_text = translated_text[candidate_end:min(len(translated_text), candidate_end + 15)]
+                for word in after_context:
+                    if word.lower() in after_text.lower():
+                        context_score += 0.5
+                        break
+
+        # Combined score with weights
+        return (
+            pos_score * 0.20 +
+            len_score * 0.15 +
+            semantic_score * 0.40 +
+            context_score * 0.25
+        )
 
     def _preferred_export_title(self, meta: ProjectMeta) -> str:
         """Use translated article title for exports when available."""

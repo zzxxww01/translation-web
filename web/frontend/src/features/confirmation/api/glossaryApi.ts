@@ -204,8 +204,10 @@ export const glossaryApi = {
     );
   },
 
-  async prepareTermReview(projectId: string): Promise<TermReviewPayload> {
-    return apiClient.post<TermReviewPayload>(`/projects/${projectId}/term-review/prepare`);
+  async prepareTermReview(projectId: string, model?: string): Promise<TermReviewPayload> {
+    return apiClient.post<TermReviewPayload>(`/projects/${projectId}/term-review/prepare`, {
+      model,
+    });
   },
 
   async submitTermReview(

@@ -1,0 +1,35 @@
+{
+  "section_id": "18-microsoft-d2d-interconnect-p",
+  "new_terms": [
+    {
+      "term": "Cobalt 200",
+      "suggested_translation": "Cobalt 200",
+      "context": "微软CPU产品名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "compute chiplets",
+      "suggested_translation": "计算芯粒",
+      "context": "指CPU中通过互连连接的核心芯片",
+      "confidence": 0.9
+    },
+    {
+      "term": "idle state",
+      "suggested_translation": "空闲状态",
+      "context": "互连电路的功耗状态",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "d2d": "裸片到裸片",
+    "shoreline": "海岸线长度",
+    "clock gating": "时钟门控",
+    "tsmc": "台积电",
+    "n3p": "N3P",
+    "gb/s": "Gb/s",
+    "pJ/b": "皮焦耳/比特",
+    "isscc": "ISSCC"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T01:50:55.396529"
+}

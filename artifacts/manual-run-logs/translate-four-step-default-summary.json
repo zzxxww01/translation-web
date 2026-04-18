@@ -1,0 +1,53 @@
+{
+  "status_code": 200,
+  "elapsed_s": 474.01,
+  "counts": {
+    "start": 1,
+    "progress": 1,
+    "heartbeat": 469,
+    "incomplete": 1
+  },
+  "last_event": {
+    "type": "incomplete",
+    "translated_count": 0,
+    "total": 371,
+    "result": {
+      "project_id": "nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo",
+      "status": "failed",
+      "error": "VectorEngine request timed out: Request timed out.",
+      "errors": [
+        {
+          "error": "VectorEngine request timed out: Request timed out.",
+          "timestamp": "2026-04-17T13:43:46.771425"
+        }
+      ],
+      "run_id": "20260417-133553-024530",
+      "artifacts_path": "projects\\nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo\\artifacts\\runs\\20260417-133553-024530"
+    },
+    "message": "VectorEngine request timed out: Request timed out.",
+    "_t": 474.005
+  },
+  "progress_tail": [
+    {
+      "_t": 0.286,
+      "type": "progress",
+      "step": "深度分析全文",
+      "current": 0,
+      "total": 371,
+      "translated_count": null,
+      "message": "深度分析全文",
+      "error": null
+    },
+    {
+      "_t": 474.005,
+      "type": "incomplete",
+      "step": null,
+      "current": null,
+      "total": 371,
+      "translated_count": 0,
+      "message": "VectorEngine request timed out: Request timed out.",
+      "error": null
+    }
+  ],
+  "sse_log": "artifacts\\manual-run-logs\\translate-four-step-default.sse.jsonl"
+}

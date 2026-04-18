@@ -1,0 +1,60 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "GDPval",
+      "suggested_translation": "GDPval",
+      "context": "OpenAI创建的评估基准，衡量模型在现实任务中的实用性。",
+      "confidence": 0.95
+    },
+    {
+      "term": "Cursor",
+      "suggested_translation": "Cursor",
+      "context": "一家AI代码助手/IDE公司，能够进行后训练。",
+      "confidence": 0.9
+    },
+    {
+      "term": "Windsurf",
+      "suggested_translation": "Windsurf",
+      "context": "一家AI代码助手/IDE公司，能够进行后训练。",
+      "confidence": 0.9
+    },
+    {
+      "term": "o1",
+      "suggested_translation": "o1",
+      "context": "OpenAI基于GPT-4o的旗舰模型系列之一。",
+      "confidence": 0.95
+    },
+    {
+      "term": "o3",
+      "suggested_translation": "o3",
+      "context": "OpenAI基于GPT-4o的旗舰模型系列之一。",
+      "confidence": 0.95
+    },
+    {
+      "term": "GPT-5.2",
+      "suggested_translation": "GPT-5.2",
+      "context": "OpenAI当前在GDPval评估中表现最佳的模型。",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "gdpval": "GDPval",
+    "computer use agents": "计算机使用智能体",
+    "openai": "OpenAI",
+    "anthropic": "Anthropic",
+    "xai": "xAI",
+    "google": "Google",
+    "utility evals": "实用性评估",
+    "reward hacking": "奖励劫持",
+    "computer use environments": "计算机操作环境",
+    "base model": "基础模型",
+    "eval": "评估",
+    "win rate": "胜率"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T16:11:55.933462"
+}

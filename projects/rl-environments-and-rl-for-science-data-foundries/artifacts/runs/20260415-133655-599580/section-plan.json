@@ -1,0 +1,166 @@
+{
+  "article_theme": "The AI industry's paradigm shift from pre-training data aggregation to Reinforcement Learning (RL) scaling, which is driving massive demand for specialized RL environments, expert data foundries, and multi-agent architectures.",
+  "structure_summary": "The article opens by introducing the shift toward RL and the resulting gap left by Scale AI. It then dives technically into how RL environments (specifically coding) are built. The narrative transitions to the business side—data foundries, procurement patterns, and 'RL as a service'. Finally, it explores the application of RL in scientific domains (biology) and concludes with a forward-looking perspective on multi-agent architectures.",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/13",
+      "paragraph_count": 22,
+      "previous_section_title": "",
+      "next_section_title": "Outsourcing and The Ghost of Scale AI",
+      "section_role": "Sets the overarching thesis: the AI industry is shifting towards RL and post-training, which demands massive amounts of highly curated data and complex computer use environments.",
+      "translation_notes": [
+        "Distinguish clearly between 'pre-training' (预训练) and 'post-training' (后训练).",
+        "Translate 'Computer Use Agents' accurately as '计算机操作智能体' rather than generic agents.",
+        "Ensure 'rote software engineering' conveys the tedious, repetitive nature of the task (e.g., 机械性的软件工程工作)."
+      ]
+    },
+    {
+      "section_id": "01-outsourcing-and-the-ghost-of-s",
+      "title": "Outsourcing and The Ghost of Scale AI",
+      "position": "2/13",
+      "paragraph_count": 6,
+      "previous_section_title": "Introduction",
+      "next_section_title": "During a Gold Rush, Sell Shovels. In an RL Scaling Boom…",
+      "section_role": "Provides historical market context and identifies the catalyst for the current industry landscape: the vacuum left by Scale AI.",
+      "translation_notes": [
+        "Translate 'The Ghost of Scale AI' non-literally to capture its lingering influence or the vacuum it left behind (e.g., Scale AI 的幽灵/余波).",
+        "Use industry-standard terms for 'evaluations' (模型评测) and 'data contractors' (数据承包商)."
+      ]
+    },
+    {
+      "section_id": "02-during-a-gold-rush-sell-shove",
+      "title": "During a Gold Rush, Sell Shovels. In an RL Scaling Boom…",
+      "position": "3/13",
+      "paragraph_count": 13,
+      "previous_section_title": "Outsourcing and The Ghost of Scale AI",
+      "next_section_title": "So You Want to Make a Coding Environment?",
+      "section_role": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+      "translation_notes": [
+        "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+        "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+        "Translate 'high fidelity' as '高保真' in the context of task simulation."
+      ]
+    },
+    {
+      "section_id": "03-so-you-want-to-make-a-coding-e",
+      "title": "So You Want to Make a Coding Environment?",
+      "position": "4/13",
+      "paragraph_count": 12,
+      "previous_section_title": "During a Gold Rush, Sell Shovels. In an RL Scaling Boom…",
+      "next_section_title": "Data Foundries and Expert Contractors",
+      "section_role": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+      "translation_notes": [
+        "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+        "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+        "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+      ]
+    },
+    {
+      "section_id": "04-data-foundries-and-expert-cont",
+      "title": "Data Foundries and Expert Contractors",
+      "position": "5/13",
+      "paragraph_count": 18,
+      "previous_section_title": "So You Want to Make a Coding Environment?",
+      "next_section_title": "Buying patterns across labs",
+      "section_role": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+      "translation_notes": [
+        "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+        "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+        "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+      ]
+    },
+    {
+      "section_id": "05-buying-patterns-across-labs",
+      "title": "Buying patterns across labs",
+      "position": "6/13",
+      "paragraph_count": 17,
+      "previous_section_title": "Data Foundries and Expert Contractors",
+      "next_section_title": "LLM-based Automation is not a given",
+      "section_role": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+      "translation_notes": [
+        "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+        "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+      ]
+    },
+    {
+      "section_id": "06-llm-based-automation-is-not-a",
+      "title": "LLM-based Automation is not a given",
+      "position": "7/13",
+      "paragraph_count": 10,
+      "previous_section_title": "Buying patterns across labs",
+      "next_section_title": "Sorry, your agent is not allowed",
+      "section_role": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+      "translation_notes": [
+        "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+        "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+      ]
+    },
+    {
+      "section_id": "07-sorry-your-agent-is-not-allow",
+      "title": "Sorry, your agent is not allowed",
+      "position": "8/13",
+      "paragraph_count": 8,
+      "previous_section_title": "LLM-based Automation is not a given",
+      "next_section_title": "RL as a service",
+      "section_role": "Explores the political, commercial, and platform-level roadblocks to Agent deployment in the real world.",
+      "translation_notes": [
+        "Ensure 'Agent' is consistently translated as '智能体'.",
+        "Translate 'contingent on details' to reflect corporate negotiation realities (取决于/附带...条件).",
+        "Maintain a forward-looking, analytical tone regarding platform politics (平台博弈)."
+      ]
+    },
+    {
+      "section_id": "08-rl-as-a-service",
+      "title": "RL as a service",
+      "position": "9/13",
+      "paragraph_count": 13,
+      "previous_section_title": "Sorry, your agent is not allowed",
+      "next_section_title": "RL for Science",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "09-rl-for-science",
+      "title": "RL for Science",
+      "position": "10/13",
+      "paragraph_count": 18,
+      "previous_section_title": "RL as a service",
+      "next_section_title": "RL Meets the Wet Lab",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "10-rl-meets-the-wet-lab",
+      "title": "RL Meets the Wet Lab",
+      "position": "11/13",
+      "paragraph_count": 8,
+      "previous_section_title": "RL for Science",
+      "next_section_title": "Why RL for Biology Can be Challenging",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "11-why-rl-for-biology-can-be-chal",
+      "title": "Why RL for Biology Can be Challenging",
+      "position": "12/13",
+      "paragraph_count": 15,
+      "previous_section_title": "RL Meets the Wet Lab",
+      "next_section_title": "Multi agent architectures: GPT-5.2 Pro, Gemini Deep Think, Grok Heavy, Claude",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "12-multi-agent-architectures-gpt",
+      "title": "Multi agent architectures: GPT-5.2 Pro, Gemini Deep Think, Grok Heavy, Claude",
+      "position": "13/13",
+      "paragraph_count": 19,
+      "previous_section_title": "Why RL for Biology Can be Challenging",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

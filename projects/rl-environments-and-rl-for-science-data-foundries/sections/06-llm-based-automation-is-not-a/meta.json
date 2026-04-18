@@ -27,12 +27,74 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "关于AI将导致工作（尤其是白领工作）自动化的猜测一直不绝于耳。OpenAI的GDPval论文中有一个有趣的数据点，与这一假设相悖。OpenAI发现，人类专家完成任务的速度更快，且成本低于没有AI辅助的情况。随着AI能力的提升，人类得到的是增强，而非被自动化取代。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256423",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +121,74 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!szHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd48cf181-b0d4-4e01-af41-d3768ea66d19_1130x1100.png",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256470",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!szHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd48cf181-b0d4-4e01-af41-d3768ea66d19_1130x1100.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -98,13 +222,74 @@
           "created_at": "2026-04-10T22:52:40.341991",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：OpenAI。图中SemiAnalysis的数据点反映了（作为SemiAnalysis客户所能实现的）速度和成本改进。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256487",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：OpenAI。SemiAnalysis 数据点反映了成为 SemiAnalysis 客户所获得的速度和成本提升。",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -131,12 +316,74 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "短期内，专家工作可能不会走向自动化，而是实现任务增强。对于软件工程这类任务，情况很可能就是如此。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256500",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -178,19 +425,81 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "再举一例，在AI热潮之前，许多人曾预测放射学将被自动化。这源于视觉模型能力的提升。尽管技术持续进步，但这并未成为现实。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256567",
+          "tokenized_text": "再举一例，在AI热潮之前，许多人曾预测放射学将被自动化。这源于视觉模型能力的提升。[[[LINK_1|尽管技术持续进步，但这并未成为现实]]]。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -217,12 +526,74 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "事实证明，放射学远比单纯的扫描分析更为复杂。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256582",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -249,12 +620,74 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!1l6B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50035824-6960-41dd-a500-980d0bc38d14_1140x925.png",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256596",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!1l6B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50035824-6960-41dd-a500-980d0bc38d14_1140x925.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -288,13 +721,74 @@
           "created_at": "2026-04-10T22:52:40.342005",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Works In Progress",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256610",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：Works In Progress",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -336,19 +830,81 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "模型主要将增强工作者能力的观点，可能在咨询或软件工程等专业领域得到印证。然而，我们认为这不太可能适用于决策链条短、重复性高的任务，例如呼叫中心工作。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256648",
+          "tokenized_text": "模型主要将增强工作者能力的观点，可能在咨询或软件工程等专业领域得到印证。然而，我们认为这不太可能适用于[[[LINK_1|决策链条短、重复性高的任务]]]，例如呼叫中心工作。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -375,12 +931,74 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "即便技术能力具备，应用落地仍面临一些障碍。这包括但不限于网络服务提供商和公司采取的防御性姿态。对于智能体而言，这一点尤为明显。",
+          "model": "pro",
+          "created_at": "2026-04-15T19:50:35.256662",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.19,
+        "is_excellent": false,
+        "applied_terms": [
+          "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+          "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Acts as an economic reality check, challenging the assumption that RL scaling automatically leads to white-collar job replacement.",
+          "relation_to_previous": "Answers the previous section's skepticism about AGI by showing economic data that points to human augmentation rather than full automation.",
+          "relation_to_next": "Mentions 'barriers to adoption' and 'defensive posturing', which leads directly into the final section on platform blocking.",
+          "key_points": [
+            "OpenAI's GDPval paper suggests AI augments humans (making them faster/cheaper) rather than fully automating them.",
+            "Real-world complexities, such as in radiology, prevent straightforward automation.",
+            "Significant barriers to adoption exist, including defensive posturing from incumbent companies."
+          ],
+          "translation_notes": [
+            "The contrast 'augmented, not automated' is rhetorically crucial; translate as '是增强/赋能，而非替代/自动化'.",
+            "Translate 'defensive posturing' accurately (防御性姿态) in a corporate strategy context."
+          ]
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "原文 'than they would otherwise' 的翻译 '且成本低于预期' 不够精确，削弱了原文的对比逻辑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 'SemiAnalysis的数据点反映了其客户在速度和成本上获得的改进' 存在严重误译。原文是SemiAnalysis在引用OpenAI的图表时，加入了自己的数据点作为对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "'shorter horizon' 被译为 '时间跨度较短'，虽然字面意思正确，但在RL/任务规划语境下，'horizon' 通常指任务的时间步长或规划范围。此处结合上下文（与呼叫中心工作并列），'shorter horizon' 更可能指任务决策链条短、无需长期规划。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '撇开技术能力不谈，实际应用仍面临一些障碍。' 中的 '撇开...不谈' 略显口语化，且 '实际应用' 与 'adoption' 的对应可以更精准。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '关于AI（尤其是针对白领工作）带来的职业自动化，一直存在诸多猜测。' 将 'due to AI' 处理为 '带来的' 略显平淡，且 '职业自动化' 不如 '工作自动化' 或 '岗位自动化' 常用。"
+          }
+        ]
+      },
       "history": []
     }
   ]

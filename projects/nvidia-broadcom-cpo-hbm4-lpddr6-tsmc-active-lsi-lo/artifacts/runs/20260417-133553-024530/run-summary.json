@@ -1,0 +1,13 @@
+{
+  "project_id": "nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo",
+  "status": "failed",
+  "error": "VectorEngine request timed out: Request timed out.",
+  "errors": [
+    {
+      "error": "VectorEngine request timed out: Request timed out.",
+      "timestamp": "2026-04-17T13:43:46.771425"
+    }
+  ],
+  "run_id": "20260417-133553-024530",
+  "artifacts_path": "projects\\nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo\\artifacts\\runs\\20260417-133553-024530"
+}

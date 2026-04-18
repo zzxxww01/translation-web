@@ -8,7 +8,8 @@ from fastapi import APIRouter
 
 from src.prompts import get_prompt_manager
 
-from ..middleware import BadRequestException, ServiceUnavailableException
+from ..middleware import BadRequestException
+from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.llm_factory import generate_with_fallback
 from .tools_models import TranslateRequest, TranslateResponse
 
@@ -47,4 +48,4 @@ async def translate_text(request: TranslateRequest):
                 translation = translation[len(prefix):].strip()
         return TranslateResponse(translation=translation)
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"翻译失败: {str(e)}")
+        raise_llm_service_unavailable(operation="Translation", exc=e)

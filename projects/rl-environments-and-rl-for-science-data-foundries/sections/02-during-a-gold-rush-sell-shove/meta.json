@@ -27,12 +27,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "淘金热中，卖铲子。在RL规模化（Scaling）热潮中，卖强化学习环境。已有超过35家公司涌现，目标正是在各个领域提供此类环境。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.213719",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +123,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "一类公司专注于克隆网站。例如，环境公司雇佣海外开发者复制DoorDash或Uber Eats等网站的UI，并将模拟界面出售给实验室。实验室随后训练智能体在这些网站中导航，以便在生产环境中，智能体能够可靠且一致地执行所需功能。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.213833",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +219,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这些“UI训练场”通常每个网站售价约2万美元，OpenAI已为ChatGPT智能体的训练和开发采购了数百个网站。这些环境是一次性购买，并可复用于未来的模型。先前运行的轨迹和日志会被保留，并反馈到训练的不同阶段，例如在中期训练中使用。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.213897",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +315,76 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!kvQ_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F04032584-5b2e-4b30-afa9-ba2fcc0f9ab9_2140x780.png",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.213928",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!kvQ_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F04032584-5b2e-4b30-afa9-ba2fcc0f9ab9_2140x780.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -184,13 +440,76 @@
           "created_at": "2026-04-10T22:52:40.341922",
           "tokenized_text": "来源：[[[LINK_1|Karina Nguyen 的公开演讲]]]，SemiAnalysis",
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Karina Nguyen的公开演讲，SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214027",
+          "tokenized_text": "来源：[[[LINK_1|Karina Nguyen的公开演讲]]]，SemiAnalysis",
+          "format_issues": []
         }
       },
       "confirmed": "来源：Karina Nguyen 的公开演讲，SemiAnalysis",
       "confirmed_tokenized": "来源：[[[LINK_1|Karina Nguyen 的公开演讲]]]，SemiAnalysis",
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -217,12 +536,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "其他公司则拓展至比单纯网站更复杂的环境，例如Slack、Salesforce、AWS终端、Microsoft OneDrive、Gmail、Discord和Atlassian。目标是让智能体能在这些软件平台中自主操作，学习并更好地理解如何在其内部导航和运行。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214058",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -249,12 +632,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这些平台一旦构建完成，便可组合起来，用以模拟更高保真度的任务与工作负载。将Slack、浏览器API端点以及代码编辑器等平台整合，能为模型构建出日益逼真的软件任务。这使得交互模式从单次提示转向多轮对话成为可能——例如，在任务执行中途通过Slack向模型发送消息，要求其调整某项功能。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214085",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -410,19 +857,83 @@
         "LINK_6",
         "LINK_7"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "构建此类环境的公司包括Habitat、DeepTune、Fleet、Vmax、Turing、Mechanize、Preference Model、Bespoke Labs、Veris.ai等众多其他公司。即使在这些公司内部，质量或专注领域也存在显著差异。有些公司专注于UI训练场，如Turing；而另一些如Mechanize则专注于软件工程任务。几乎所有公司都处于种子阶段，员工少于20人，最多只专注于1到3个客户。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214269",
+          "tokenized_text": "构建此类环境的公司包括[[[LINK_1|Habitat]]]、[[[LINK_2|DeepTune]]]、[[[LINK_3|Fleet]]]、[[[LINK_4|Vmax]]]、[[[LINK_5|Turing]]]、[[[LINK_6|Mechanize]]]、[[[LINK_7|Preference Model]]]、Bespoke Labs、Veris.ai等众多其他公司。即使在这些公司内部，质量或专注领域也存在显著差异。有些公司专注于UI训练场，如Turing；而另一些如Mechanize则专注于软件工程任务。几乎所有公司都处于种子阶段，员工少于20人，最多只专注于1到3个客户。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -464,19 +975,83 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "上述大多数公司都将其环境闭源，并通过独家合同提供给实验室。然而，也有一些公司，如 Prime Intellect，选择将其环境开源，并正在培育旨在成为强化学习环境一站式商店的环境中心。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214339",
+          "tokenized_text": "上述大多数公司都将其环境闭源，并通过独家合同提供给实验室。然而，也有一些公司，如 Prime Intellect，选择将其环境开源，并正在培育旨在成为强化学习环境一站式商店的[[[LINK_1|环境中心]]]。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -556,19 +1131,83 @@
         "CODE_1",
         "CODE_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "其他公司则在为环境构建工具。例如，HUD提供的工具可以将任何给定软件（如游戏、浏览器、Google Sheets）封装在 Docker 容器中，使其成为可扩展的强化学习环境。每个容器包含两层：环境后端（被封装的实际软件）以及位于其上层的 MCP 服务器，后者负责提供智能体可调用的工具定义。当智能体发出如click(x,y)或type(text)这样的工具调用时，MCP 服务器会将其转换为对底层软件的操作，并返回结果观察值。这一过程通常会被扩展到许多并行实例中。每个任务都包含一个提示、设置条件和成功标准，这些条件会返回奖励信号。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214457",
+          "tokenized_text": "其他公司则在为环境构建工具。例如，[[[LINK_1|HUD]]]提供的工具可以将任何给定软件（如游戏、浏览器、Google Sheets）封装在 Docker 容器中，使其成为可扩展的强化学习环境。每个容器包含两层：环境后端（被封装的实际软件）以及位于其上层的 MCP 服务器，后者负责提供智能体可调用的工具定义。当智能体发出如[[[CODE_1|click(x,y)]]]或[[[CODE_2|type(text)]]]这样的工具调用时，MCP 服务器会将其转换为对底层软件的操作，并返回结果观察值。这一过程通常会被扩展到许多并行实例中。每个任务都包含一个提示、设置条件和成功标准，这些条件会返回奖励信号。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -623,12 +1262,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "每一次工具调用和观察值都会通过遥测数据被捕获，这不仅有助于调试，还会在后续阶段被收集并输入到训练中。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214485",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -655,12 +1358,76 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!FnWW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa0e265cb-a9a1-4cc2-8baa-3b1a353d98a1_1480x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214512",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!FnWW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa0e265cb-a9a1-4cc2-8baa-3b1a353d98a1_1480x1620.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -687,12 +1454,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "目前需求最高的环境是编码环境。了解这些环境的构建、架构与集成方式，为我们提供了一个独特视角，得以窥见支撑当前AI进步的基础设施与工程实践。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:07:12.214538",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.559999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+          "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+          "Translate 'high fidelity' as '高保真' in the context of task simulation."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Introduces the market's response to the Scale AI gap: a boom in startups building RL environments as infrastructure.",
+          "relation_to_previous": "Directly answers the previous section's concluding question by introducing the 35+ companies stepping in to fill the void.",
+          "relation_to_next": "Highlights coding environments as the highest in demand, seamlessly transitioning into the technical deep dive of how they are built.",
+          "key_points": [
+            "Startups are capitalizing on the RL boom by selling RL environments ('shovels').",
+            "Environments are combined (Slack + browser + editor) to simulate high-fidelity, multi-turn software tasks.",
+            "Coding environments represent the peak of current market demand."
+          ],
+          "translation_notes": [
+            "Retain the 'Sell Shovels' idiom (卖铲子) as it is widely understood in Chinese tech/VC circles.",
+            "Differentiate 'multi-turn' (多轮交互) from 'single shot' (单次/零样本提示).",
+            "Translate 'high fidelity' as '高保真' in the context of task simulation."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'RL Scaling'的翻译'RL扩展'不够精确，未能完全传达原文中'Scaling'作为规模化、扩展能力核心概念的含义。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文'like mid-training'是举例说明，译文'例如中期训练'将其处理为并列的独立阶段，可能模糊了'反馈到训练的不同阶段'与'中期训练'之间的从属关系。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构稍显松散，'更多轮次进行'与'单次完成'的对比可以更紧凑有力。分号后的例子与前半句的逻辑衔接可以更流畅。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语'exposes'译为'暴露'在中文技术语境中略显生硬，更常见的译法是'提供'、'公开'或'暴露（API）'。此处'工具定义'的暴露，更接近'提供接口定义'。"
+          },
+          {
+            "type": "readability",
+            "description": "译文'洞察支撑当今进步的基础设施和工程努力'稍显冗长，且'工程努力'的表述不够地道，有翻译腔。"
+          }
+        ]
+      },
       "history": []
     }
   ]

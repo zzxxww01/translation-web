@@ -1,0 +1,32 @@
+{
+  "section_id": "15-high-speed-electrical-intercon",
+  "new_terms": [
+    {
+      "term": "die-to-die interconnects",
+      "suggested_translation": "裸片间互连",
+      "context": "多芯片设计中的互连技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "organic substrates",
+      "suggested_translation": "有机基板",
+      "context": "封装基板材料",
+      "confidence": 0.9
+    },
+    {
+      "term": "advanced packaging",
+      "suggested_translation": "先进封装",
+      "context": "半导体封装技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "bandwidth density",
+      "suggested_translation": "带宽密度",
+      "context": "单位面积或体积的带宽",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {},
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:39:08.943691"
+}

@@ -1,0 +1,70 @@
+{
+  "section_id": "05-buying-patterns-across-labs",
+  "new_terms": [
+    {
+      "term": "vendor engagement platform",
+      "suggested_translation": "供应商参与平台",
+      "context": "Anthropic's platform for managing multiple RL environment vendors.",
+      "confidence": 0.9
+    },
+    {
+      "term": "rate limits",
+      "suggested_translation": "速率限制",
+      "context": "Google decreasing limits for scraping products like Gmail.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Sheets",
+      "suggested_translation": "Sheets",
+      "context": "Google's spreadsheet product, part of its underlying platforms.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Slides",
+      "suggested_translation": "Slides",
+      "context": "Google's presentation product, part of its underlying platforms.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Docs",
+      "suggested_translation": "Docs",
+      "context": "Google's document product, part of its underlying platforms.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Drive",
+      "suggested_translation": "Drive",
+      "context": "Google's cloud storage product, part of its underlying platforms.",
+      "confidence": 0.9
+    },
+    {
+      "term": "Maps",
+      "suggested_translation": "Maps",
+      "context": "Google's mapping service, part of its underlying platforms.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "computer use": "计算机操作",
+    "mid-training": "中期训练",
+    "post-training": "后训练",
+    "pre-training": "预训练",
+    "ui gyms": "UI训练场",
+    "imo": "国际数学奥林匹克",
+    "anthropic": "Anthropic",
+    "openai": "OpenAI",
+    "google deepmind": "Google DeepMind",
+    "xai": "xAI",
+    "surge": "Surge",
+    "mercor": "Mercor",
+    "handshake": "Handshake",
+    "chatgpt agent": "ChatGPT智能体",
+    "gpt-5.1 codex max": "GPT-5.1 Codex Max",
+    "gemini 2.5 pro": "Gemini 2.5 Pro",
+    "gemini 3": "Gemini 3",
+    "agi": "AGI"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:27:55.798082"
+}

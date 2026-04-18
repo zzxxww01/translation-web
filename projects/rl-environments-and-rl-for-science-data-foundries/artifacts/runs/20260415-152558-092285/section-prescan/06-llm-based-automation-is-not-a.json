@@ -1,0 +1,83 @@
+{
+  "section_id": "06-llm-based-automation-is-not-a",
+  "new_terms": [
+    {
+      "term": "GDPval",
+      "suggested_translation": "GDPval",
+      "context": "OpenAI的研究论文，评估AI对经济生产力的影响。",
+      "confidence": 0.9
+    },
+    {
+      "term": "white collar work",
+      "suggested_translation": "白领工作",
+      "context": "指专业、管理或行政类工作。",
+      "confidence": 0.95
+    },
+    {
+      "term": "task augmentation",
+      "suggested_translation": "任务增强",
+      "context": "指AI增强而非完全取代人类工作。",
+      "confidence": 0.9
+    },
+    {
+      "term": "call center jobs",
+      "suggested_translation": "呼叫中心工作",
+      "context": "指客服、电话销售等重复性工作。",
+      "confidence": 0.95
+    },
+    {
+      "term": "defensive posturing",
+      "suggested_translation": "防御性姿态",
+      "context": "指公司为防止自动化而采取的保护性措施。",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "data foundries": "数据代工厂",
+    "computer use environments": "计算机操作环境",
+    "rollouts": "轨迹推演",
+    "sparse rewards": "稀疏奖励",
+    "reward hacking": "奖励劫持",
+    "llm": "LLM",
+    "ai": "AI",
+    "rlhf": "RLHF",
+    "fine-tuning": "微调",
+    "inference": "推理",
+    "training": "训练",
+    "openai": "OpenAI",
+    "meta": "Meta",
+    "scale ai": "Scale AI",
+    "anthropic": "Anthropic",
+    "xai": "xAI",
+    "google deepmind": "Google DeepMind",
+    "cursor": "Cursor",
+    "windsurf": "Windsurf",
+    "sacra": "Sacra",
+    "habitat": "Habitat",
+    "turing": "Turing",
+    "mechanize": "Mechanize",
+    "veris.ai": "Veris.ai",
+    "prime intellect": "Prime Intellect",
+    "github archive": "GitHub Archive",
+    "ehr": "电子健康记录",
+    "feather": "Feather",
+    "mercor": "Mercor",
+    "handshake": "Handshake",
+    "aboda.ai": "Aboda.ai",
+    "moonshot": "月之暗面",
+    "z.ai": "Z.ai",
+    "kimi k2 thinking": "Kimi K2 Thinking",
+    "glm-4.6": "GLM-4.6",
+    "the llm data company": "The LLM Data Company",
+    "vendor engagement platform": "供应商参与平台",
+    "rate limits": "速率限制",
+    "sheets": "Sheets",
+    "slides": "Slides",
+    "docs": "Docs",
+    "drive": "Drive",
+    "maps": "Maps"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:28:23.035579"
+}

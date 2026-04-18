@@ -191,20 +191,26 @@ class LLMProvider(ABC):
                 results[sec_id] = title  # keep original on failure
         return results
 
-    def deep_analyze(self, text: str, sections_outline: str) -> Dict[str, Any]:
+    def deep_analyze(
+        self,
+        text: str,
+        sections_outline: str,
+        timeout: Optional[float] = None,
+    ) -> Dict[str, Any]:
         """
         深度分析文本（Phase 0）
 
         Args:
             text: 全文内容
             sections_outline: 章节大纲
+            timeout: 可选的单次调用超时时间（秒）
 
         Returns:
             Dict: 深度分析结果
         """
         # 默认实现调用 generate，子类可以覆盖
         prompt = self._build_deep_analysis_prompt(text, sections_outline)
-        response = self.generate(prompt, response_format="json")
+        response = self.generate(prompt, response_format="json", timeout=timeout)
         return self._parse_json_response(response)
 
     def reflect_on_translation(

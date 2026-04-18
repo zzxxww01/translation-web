@@ -1,0 +1,51 @@
+{
+  "section_id": "08-rl-as-a-service",
+  "new_terms": [
+    {
+      "term": "RunRL",
+      "suggested_translation": "RunRL",
+      "context": "YC初创公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Osmosis",
+      "suggested_translation": "Osmosis",
+      "context": "YC初创公司名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Baseten",
+      "suggested_translation": "Baseten",
+      "context": "模型托管服务平台",
+      "confidence": 0.9
+    },
+    {
+      "term": "SEC filings",
+      "suggested_translation": "SEC文件",
+      "context": "美国证券交易委员会文件",
+      "confidence": 0.9
+    },
+    {
+      "term": "ThinkingMachines Tinker",
+      "suggested_translation": "ThinkingMachines Tinker",
+      "context": "公司/产品名称",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "qwen": "通义千问",
+    "mcp": "MCP",
+    "aws": "AWS",
+    "openai": "OpenAI",
+    "anthropic": "Anthropic",
+    "trainium": "Trainium",
+    "hbm": "HBM",
+    "bom": "物料清单",
+    "tco": "总拥有成本",
+    "yc": "YC",
+    "rft": "强化微调"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:42:38.778451"
+}

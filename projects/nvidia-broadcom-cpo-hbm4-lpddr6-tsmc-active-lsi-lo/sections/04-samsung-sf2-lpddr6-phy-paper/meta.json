@@ -1,0 +1,682 @@
+{
+  "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+  "title": "Samsung SF2 LPDDR6 PHY - Paper 37.3",
+  "title_translation": "Samsung SF2 LPDDR6 PHY - Paper 37.3",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F46165883-4137-4a8e-8fbd-76ee3b9dafd5_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F46165883-4137-4a8e-8fbd-76ee3b9dafd5_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0079",
+      "parent_block_index": 79,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F46165883-4137-4a8e-8fbd-76ee3b9dafd5_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F46165883-4137-4a8e-8fbd-76ee3b9dafd5_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F46165883-4137-4a8e-8fbd-76ee3b9dafd5_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F46165883-4137-4a8e-8fbd-76ee3b9dafd5_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:01:42.070025",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F46165883-4137-4a8e-8fbd-76ee3b9dafd5_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.035,
+        "is_excellent": false,
+        "applied_terms": [
+          "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+          "“clock-gating”译为“时钟门控”，是标准译法。",
+          "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+          "百分比数据（50%， 41%）的翻译需精确。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+          "relation_to_previous": "承接上文对三星LPDDR6密度和性能的讨论，深入其底层接口电路设计。",
+          "relation_to_next": "转向竞争对手SK海力士的LPDDR6方案，形成对比分析。",
+          "key_points": [
+            "PHY通过门控非活动子通道的高速时钟路径来实现效率模式。",
+            "时钟门控技术使读写功耗降低近50%，待机功耗降低41%。"
+          ],
+          "translation_notes": [
+            "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+            "“clock-gating”译为“时钟门控”，是标准译法。",
+            "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+            "百分比数据（50%， 41%）的翻译需精确。"
+          ]
+        },
+        "scores": {
+          "readability": 8.7,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“shoreline”的翻译“海岸线长度”在中文半导体语境中不够标准或常见。"
+          },
+          {
+            "type": "readability",
+            "description": "译文在描述两个带宽密度时，重复使用了单位“/毫米”和“/平方毫米”，略显冗余。中文科技文献中常将单位前置以提升简洁性。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“进一步增强能效模式的效果”是准确的，但“augment”一词在技术语境下，译为“增强”或“提升”已足够。“效果”二字可省略，使表达更直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "Samsung LPDDR6 PHY Test Chip Specifications and Die Shot. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung LPDDR6 PHY Test Chip Specifications and Die Shot. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 85,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0080",
+      "parent_block_index": 80,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung LPDDR6 PHY Test Chip Specifications and Die Shot. Source: Samsung, ISSCC 2026*",
+      "parent_block_plain_text": "Samsung LPDDR6 PHY Test Chip Specifications and Die Shot. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung LPDDR6 PHY Test Chip Specifications and Die Shot. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 85,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 85,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星 LPDDR6 物理层测试芯片规格参数与芯片显微照片。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:01:42.070328",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.035,
+        "is_excellent": false,
+        "applied_terms": [
+          "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+          "“clock-gating”译为“时钟门控”，是标准译法。",
+          "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+          "百分比数据（50%， 41%）的翻译需精确。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+          "relation_to_previous": "承接上文对三星LPDDR6密度和性能的讨论，深入其底层接口电路设计。",
+          "relation_to_next": "转向竞争对手SK海力士的LPDDR6方案，形成对比分析。",
+          "key_points": [
+            "PHY通过门控非活动子通道的高速时钟路径来实现效率模式。",
+            "时钟门控技术使读写功耗降低近50%，待机功耗降低41%。"
+          ],
+          "translation_notes": [
+            "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+            "“clock-gating”译为“时钟门控”，是标准译法。",
+            "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+            "百分比数据（50%， 41%）的翻译需精确。"
+          ]
+        },
+        "scores": {
+          "readability": 8.7,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“shoreline”的翻译“海岸线长度”在中文半导体语境中不够标准或常见。"
+          },
+          {
+            "type": "readability",
+            "description": "译文在描述两个带宽密度时，重复使用了单位“/毫米”和“/平方毫米”，略显冗余。中文科技文献中常将单位前置以提升简洁性。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“进一步增强能效模式的效果”是准确的，但“augment”一词在技术语境下，译为“增强”或“提升”已足够。“效果”二字可省略，使表达更直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "Samsung also unveiled PHYs on the logic die interface with LPDDR6. The PHYs are fabricated on their new SF2 process and support up to 14.4 Gb/s. The PHYs take up 2.32 mm of shoreline and 0.695 mm² of area, with bandwidth densities of 16.6 Gb/s/mm and 55.3 Gb/s/mm² respectively.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0081",
+      "parent_block_index": 81,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Samsung also unveiled PHYs on the logic die interface with LPDDR6. The PHYs are fabricated on their new SF2 process and support up to 14.4 Gb/s. The PHYs take up 2.32 mm of shoreline and 0.695 mm² of area, with bandwidth densities of 16.6 Gb/s/mm and 55.3 Gb/s/mm² respectively.",
+      "parent_block_plain_text": "Samsung also unveiled PHYs on the logic die interface with LPDDR6. The PHYs are fabricated on their new SF2 process and support up to 14.4 Gb/s. The PHYs take up 2.32 mm of shoreline and 0.695 mm² of area, with bandwidth densities of 16.6 Gb/s/mm and 55.3 Gb/s/mm² respectively.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 278,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星还展示了与 LPDDR6 接口的逻辑芯片上的物理层。这些物理层采用其全新的 SF2 工艺制造，最高支持 14.4 Gb/s 速率。其接口长度为 2.32 毫米，面积为 0.695 平方毫米，对应的带宽密度分别为每毫米 16.6 Gb/s 和每平方毫米 55.3 Gb/s。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:01:42.070388",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.035,
+        "is_excellent": false,
+        "applied_terms": [
+          "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+          "“clock-gating”译为“时钟门控”，是标准译法。",
+          "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+          "百分比数据（50%， 41%）的翻译需精确。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+          "relation_to_previous": "承接上文对三星LPDDR6密度和性能的讨论，深入其底层接口电路设计。",
+          "relation_to_next": "转向竞争对手SK海力士的LPDDR6方案，形成对比分析。",
+          "key_points": [
+            "PHY通过门控非活动子通道的高速时钟路径来实现效率模式。",
+            "时钟门控技术使读写功耗降低近50%，待机功耗降低41%。"
+          ],
+          "translation_notes": [
+            "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+            "“clock-gating”译为“时钟门控”，是标准译法。",
+            "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+            "百分比数据（50%， 41%）的翻译需精确。"
+          ]
+        },
+        "scores": {
+          "readability": 8.7,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“shoreline”的翻译“海岸线长度”在中文半导体语境中不够标准或常见。"
+          },
+          {
+            "type": "readability",
+            "description": "译文在描述两个带宽密度时，重复使用了单位“/毫米”和“/平方毫米”，略显冗余。中文科技文献中常将单位前置以提升简洁性。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“进一步增强能效模式的效果”是准确的，但“augment”一词在技术语境下，译为“增强”或“提升”已足够。“效果”二字可省略，使表达更直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36890f-e205-4a23-8281-71bf8c199448_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36890f-e205-4a23-8281-71bf8c199448_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0082",
+      "parent_block_index": 82,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36890f-e205-4a23-8281-71bf8c199448_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36890f-e205-4a23-8281-71bf8c199448_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36890f-e205-4a23-8281-71bf8c199448_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36890f-e205-4a23-8281-71bf8c199448_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:01:42.070426",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36890f-e205-4a23-8281-71bf8c199448_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.035,
+        "is_excellent": false,
+        "applied_terms": [
+          "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+          "“clock-gating”译为“时钟门控”，是标准译法。",
+          "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+          "百分比数据（50%， 41%）的翻译需精确。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+          "relation_to_previous": "承接上文对三星LPDDR6密度和性能的讨论，深入其底层接口电路设计。",
+          "relation_to_next": "转向竞争对手SK海力士的LPDDR6方案，形成对比分析。",
+          "key_points": [
+            "PHY通过门控非活动子通道的高速时钟路径来实现效率模式。",
+            "时钟门控技术使读写功耗降低近50%，待机功耗降低41%。"
+          ],
+          "translation_notes": [
+            "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+            "“clock-gating”译为“时钟门控”，是标准译法。",
+            "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+            "百分比数据（50%， 41%）的翻译需精确。"
+          ]
+        },
+        "scores": {
+          "readability": 8.7,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“shoreline”的翻译“海岸线长度”在中文半导体语境中不够标准或常见。"
+          },
+          {
+            "type": "readability",
+            "description": "译文在描述两个带宽密度时，重复使用了单位“/毫米”和“/平方毫米”，略显冗余。中文科技文献中常将单位前置以提升简洁性。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“进一步增强能效模式的效果”是准确的，但“augment”一词在技术语境下，译为“增强”或“提升”已足够。“效果”二字可省略，使表达更直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Samsung LPDDR6 PHY Efficiency Mode Power Reductions. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung LPDDR6 PHY Efficiency Mode Power Reductions. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 80,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0083",
+      "parent_block_index": 83,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung LPDDR6 PHY Efficiency Mode Power Reductions. Source: Samsung, ISSCC 2026*",
+      "parent_block_plain_text": "Samsung LPDDR6 PHY Efficiency Mode Power Reductions. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung LPDDR6 PHY Efficiency Mode Power Reductions. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 80,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 80,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星 LPDDR6 物理层能效模式功耗降低效果。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:01:42.070554",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.035,
+        "is_excellent": false,
+        "applied_terms": [
+          "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+          "“clock-gating”译为“时钟门控”，是标准译法。",
+          "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+          "百分比数据（50%， 41%）的翻译需精确。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+          "relation_to_previous": "承接上文对三星LPDDR6密度和性能的讨论，深入其底层接口电路设计。",
+          "relation_to_next": "转向竞争对手SK海力士的LPDDR6方案，形成对比分析。",
+          "key_points": [
+            "PHY通过门控非活动子通道的高速时钟路径来实现效率模式。",
+            "时钟门控技术使读写功耗降低近50%，待机功耗降低41%。"
+          ],
+          "translation_notes": [
+            "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+            "“clock-gating”译为“时钟门控”，是标准译法。",
+            "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+            "百分比数据（50%， 41%）的翻译需精确。"
+          ]
+        },
+        "scores": {
+          "readability": 8.7,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“shoreline”的翻译“海岸线长度”在中文半导体语境中不够标准或常见。"
+          },
+          {
+            "type": "readability",
+            "description": "译文在描述两个带宽密度时，重复使用了单位“/毫米”和“/平方毫米”，略显冗余。中文科技文献中常将单位前置以提升简洁性。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“进一步增强能效模式的效果”是准确的，但“augment”一词在技术语境下，译为“增强”或“提升”已足够。“效果”二字可省略，使表达更直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "The PHYs also support the efficiency mode implemented by the LPDDR6 chips, which can reduce read power by 39% and write power by 29%.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0084",
+      "parent_block_index": 84,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The PHYs also support the efficiency mode implemented by the LPDDR6 chips, which can reduce read power by 39% and write power by 29%.",
+      "parent_block_plain_text": "The PHYs also support the efficiency mode implemented by the LPDDR6 chips, which can reduce read power by 39% and write power by 29%.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 133,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这些物理层也支持 LPDDR6 芯片实现的能效模式，该模式可将读取功耗降低 39%，写入功耗降低 29%。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:01:42.070595",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.035,
+        "is_excellent": false,
+        "applied_terms": [
+          "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+          "“clock-gating”译为“时钟门控”，是标准译法。",
+          "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+          "百分比数据（50%， 41%）的翻译需精确。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+          "relation_to_previous": "承接上文对三星LPDDR6密度和性能的讨论，深入其底层接口电路设计。",
+          "relation_to_next": "转向竞争对手SK海力士的LPDDR6方案，形成对比分析。",
+          "key_points": [
+            "PHY通过门控非活动子通道的高速时钟路径来实现效率模式。",
+            "时钟门控技术使读写功耗降低近50%，待机功耗降低41%。"
+          ],
+          "translation_notes": [
+            "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+            "“clock-gating”译为“时钟门控”，是标准译法。",
+            "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+            "百分比数据（50%， 41%）的翻译需精确。"
+          ]
+        },
+        "scores": {
+          "readability": 8.7,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“shoreline”的翻译“海岸线长度”在中文半导体语境中不够标准或常见。"
+          },
+          {
+            "type": "readability",
+            "description": "译文在描述两个带宽密度时，重复使用了单位“/毫米”和“/平方毫米”，略显冗余。中文科技文献中常将单位前置以提升简洁性。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“进一步增强能效模式的效果”是准确的，但“augment”一词在技术语境下，译为“增强”或“提升”已足够。“效果”二字可省略，使表达更直接。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "The PHYs can augment the efficiency mode by gating the high-speed clock path for the inactive secondary sub-channel. With clock-gating, the power reduction reaches almost 50% for reading and writing, and idle power is reduced by 41%.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0085",
+      "parent_block_index": 85,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The PHYs can augment the efficiency mode by gating the high-speed clock path for the inactive secondary sub-channel. With clock-gating, the power reduction reaches almost 50% for reading and writing, and idle power is reduced by 41%.",
+      "parent_block_plain_text": "The PHYs can augment the efficiency mode by gating the high-speed clock path for the inactive secondary sub-channel. With clock-gating, the power reduction reaches almost 50% for reading and writing, and idle power is reduced by 41%.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 233,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "物理层还能通过门控非活跃的次子通道的高速时钟路径，来增强这一能效模式。结合时钟门控技术，读写功耗降低幅度接近 50%，空闲功耗则可降低 41%。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:01:42.070633",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.035,
+        "is_excellent": false,
+        "applied_terms": [
+          "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+          "“clock-gating”译为“时钟门控”，是标准译法。",
+          "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+          "百分比数据（50%， 41%）的翻译需精确。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+          "relation_to_previous": "承接上文对三星LPDDR6密度和性能的讨论，深入其底层接口电路设计。",
+          "relation_to_next": "转向竞争对手SK海力士的LPDDR6方案，形成对比分析。",
+          "key_points": [
+            "PHY通过门控非活动子通道的高速时钟路径来实现效率模式。",
+            "时钟门控技术使读写功耗降低近50%，待机功耗降低41%。"
+          ],
+          "translation_notes": [
+            "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+            "“clock-gating”译为“时钟门控”，是标准译法。",
+            "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+            "百分比数据（50%， 41%）的翻译需精确。"
+          ]
+        },
+        "scores": {
+          "readability": 8.7,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语“shoreline”的翻译“海岸线长度”在中文半导体语境中不够标准或常见。"
+          },
+          {
+            "type": "readability",
+            "description": "译文在描述两个带宽密度时，重复使用了单位“/毫米”和“/平方毫米”，略显冗余。中文科技文献中常将单位前置以提升简洁性。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“进一步增强能效模式的效果”是准确的，但“augment”一词在技术语境下，译为“增强”或“提升”已足够。“效果”二字可省略，使表达更直接。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

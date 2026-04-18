@@ -8,7 +8,7 @@ export function useGenerateReply() {
   const { handleError } = useErrorHandler();
 
   return useMutation({
-    mutationFn: (data: ProcessMessageDto) => slackApi.processMessage(data),
+    mutationFn: (data: ProcessMessageDto & { model?: string }) => slackApi.processMessage(data),
     onSuccess: () => {
       toast.success('建议回复已生成');
     },
@@ -22,7 +22,7 @@ export function useComposeReply() {
   const { handleError } = useErrorHandler();
 
   return useMutation({
-    mutationFn: (data: ComposeDto) => slackApi.composeReply(data),
+    mutationFn: (data: ComposeDto & { model?: string }) => slackApi.composeReply(data),
     onSuccess: () => {
       toast.success('英文版本已生成');
     },

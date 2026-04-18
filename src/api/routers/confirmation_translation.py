@@ -18,7 +18,7 @@ from src.api.utils.glossary import get_combined_glossary
 
 from ..dependencies import (
     ProjectManagerDep,
-    LLMProviderDep,
+    LongformLLMProviderDep,
     BatchServiceDep,
     ConfirmationServiceDep,
     MemoryServiceDep,
@@ -159,7 +159,7 @@ async def retranslate_paragraph(
     paragraph_id: str,
     request: RetranslateRequest,
     pm: ProjectManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
     service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
@@ -309,7 +309,7 @@ async def export_bilingual(
 async def run_consistency_review(
     project_id: str,
     pm: ProjectManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
 ):
     try:
         from src.agents.consistency_reviewer import ConsistencyReviewer

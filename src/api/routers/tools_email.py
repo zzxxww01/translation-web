@@ -6,7 +6,8 @@ from fastapi import APIRouter
 
 from src.prompts import get_prompt_manager
 
-from ..middleware import BadRequestException, ServiceUnavailableException
+from ..middleware import BadRequestException
+from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
 from .tools_models import EmailReplyRequest, EmailReplyResponse
@@ -61,4 +62,4 @@ async def generate_email_reply(request: EmailReplyRequest):
 
         return EmailReplyResponse(replies=replies)
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"生成回复失败: {str(e)}")
+        raise_llm_service_unavailable(operation="Email reply generation", exc=e)

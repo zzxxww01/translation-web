@@ -43,10 +43,11 @@ class TranslationMemoryService:
 
     @property
     def llm(self):
-        """懒加载规则提取专用 LLM provider（Flash 模型）。"""
+        """懒加载规则提取专用 LLM provider（走 analysis 任务默认模型）。"""
         if self._llm is None:
-            from src.llm.factory import create_llm_provider
-            self._llm = create_llm_provider(model_type="flash")
+            from src.llm.factory import create_llm_provider, get_task_model_alias
+
+            self._llm = create_llm_provider(provider=get_task_model_alias("analysis"))
         return self._llm
 
     # ============ 主入口方法 ============

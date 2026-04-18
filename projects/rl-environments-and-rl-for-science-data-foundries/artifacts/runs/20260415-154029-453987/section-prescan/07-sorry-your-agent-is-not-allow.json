@@ -1,0 +1,28 @@
+{
+  "section_id": "07-sorry-your-agent-is-not-allow",
+  "new_terms": [
+    {
+      "term": "Instant Checkout",
+      "suggested_translation": "即时结账",
+      "context": "OpenAI推出的购物功能",
+      "confidence": 0.9
+    },
+    {
+      "term": "Nova",
+      "suggested_translation": "Nova（亚马逊AI助手）",
+      "context": "亚马逊的AI模型/助手",
+      "confidence": 0.9
+    },
+    {
+      "term": "Rufus",
+      "suggested_translation": "Rufus（亚马逊AI购物助手）",
+      "context": "亚马逊的AI购物助手",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl as a service": "RL即服务"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:42:23.904704"
+}

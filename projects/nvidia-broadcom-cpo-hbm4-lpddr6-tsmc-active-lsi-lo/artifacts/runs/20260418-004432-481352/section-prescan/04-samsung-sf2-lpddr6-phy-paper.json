@@ -1,0 +1,32 @@
+{
+  "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+  "new_terms": [
+    {
+      "term": "shoreline",
+      "suggested_translation": "海岸线长度",
+      "context": "指PHY在芯片边缘占用的长度",
+      "confidence": 0.9
+    },
+    {
+      "term": "clock-gating",
+      "suggested_translation": "时钟门控",
+      "context": "一种通过关闭时钟信号来降低功耗的技术",
+      "confidence": 0.95
+    },
+    {
+      "term": "secondary sub-channel",
+      "suggested_translation": "次子通道",
+      "context": "LPDDR6中的非活动子通道",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "lpddr6": "LPDDR6",
+    "phy": "物理层",
+    "sf2": "SF2",
+    "sub-channel": "子通道"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T01:00:52.850156"
+}

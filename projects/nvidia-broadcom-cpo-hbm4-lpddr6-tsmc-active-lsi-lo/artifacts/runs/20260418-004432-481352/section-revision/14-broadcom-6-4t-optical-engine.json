@@ -1,0 +1,26 @@
+{
+  "section_id": "14-broadcom-6-4t-optical-engine",
+  "assessment": {
+    "passed": true,
+    "overall_score": 9.055,
+    "scores": {
+      "readability": 8.8,
+      "accuracy": 9.5,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 5.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!3q6a!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F47fde40b-9947-4fac-b9db-2ac5e7592aec_2880x1620.jpeg",
+    "博通 Tomahawk 5 51.2T CPO 光学引擎芯片显微照片与封装。来源：博通，ISSCC 2026",
+    "博通展示了其 6.4T MZM（马赫-曾德尔调制器）光学引擎的进展。该光学引擎由 64 条通道组成，每条通道速率约 100G，采用 PAM4（四电平脉冲幅度调制）调制。这些光学引擎在 Tomahawk 5 51.2T CPO（共封装光学）系统中进行了测试。一个 CPO 封装包含八个 6.4T 光学引擎，每个引擎均由一个光子集成电路和一个电子集成电路组成，采用台积电 N7 工艺制造。",
+    "https://substackcdn.com/image/fetch/$s_!vT7z!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F021fa5c2-1bfd-455b-84cc-730cabf6362c_2880x1620.jpeg",
+    "博通 Tomahawk 5 CPO 光学引擎封装。来源：博通，Hot Chips 2024",
+    "英伟达使用 COUPE 方案，而博通则为此光学引擎采用了扇出型晶圆级封装方法。博通未来将转向 COUPE 方案，但像此光学引擎这样的旧一代产品仍在使用其他供应链合作伙伴。以下是其演示中取得的有前景的结果：",
+    "https://substackcdn.com/image/fetch/$s_!0Dva!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F179ad311-5e3a-40c0-8fb6-f809fb2f8342_2880x1620.jpeg",
+    "博通 6.4T 光学引擎发送端性能。来源：博通，ISSCC 2026"
+  ]
+}

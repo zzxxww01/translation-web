@@ -1,0 +1,21 @@
+{
+  "elapsed_seconds": 0.1,
+  "status": {
+    "status": "failed",
+    "progress_percent": 98.38274932614556,
+    "translated_paragraphs": 365,
+    "total_paragraphs": 371,
+    "translated_sections": 0,
+    "total_sections": 27,
+    "current_section": null,
+    "current_step": "failed",
+    "is_complete": false,
+    "error_count": 0,
+    "started_at": null,
+    "finished_at": null,
+    "final_status": "failed",
+    "run_id": "20260418-002258-035270"
+  },
+  "last_non_heartbeat_event": null,
+  "resolutions": []
+}

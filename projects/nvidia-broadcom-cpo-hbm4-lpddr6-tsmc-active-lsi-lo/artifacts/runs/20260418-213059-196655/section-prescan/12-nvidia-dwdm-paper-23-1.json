@@ -1,0 +1,47 @@
+{
+  "section_id": "12-nvidia-dwdm-paper-23-1",
+  "new_terms": [
+    {
+      "term": "COUPE",
+      "suggested_translation": "COUPE",
+      "context": "英伟达的光学引擎产品名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "lambda",
+      "suggested_translation": "波长",
+      "context": "DWDM中的单个光波长通道",
+      "confidence": 0.9
+    },
+    {
+      "term": "CDR",
+      "suggested_translation": "时钟数据恢复",
+      "context": "SerDes中的关键电路",
+      "confidence": 0.9
+    },
+    {
+      "term": "OBO",
+      "suggested_translation": "板载光学",
+      "context": "On-Board Optics的缩写，一种光学集成方式",
+      "confidence": 0.9
+    },
+    {
+      "term": "radix",
+      "suggested_translation": "基数",
+      "context": "网络交换中的端口数量/连接度",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "dwdm": "密集波分复用",
+    "cpo": "共封装光学",
+    "serdes": "串行器/解串器",
+    "uci-e": "UCIe",
+    "d2d": "裸片到裸片",
+    "pam4": "四电平脉冲幅度调制",
+    "nrz": "不归零制",
+    "interposer": "中介层"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:36:18.477974"
+}

@@ -1,0 +1,37 @@
+{
+  "section_id": "23-rebellions-rebel100-paper-2",
+  "assessment": {
+    "passed": true,
+    "overall_score": 8.74,
+    "scores": {
+      "readability": 8.5,
+      "accuracy": 9.3,
+      "terminology": 8.0,
+      "completeness": 10.0,
+      "style": 5.5
+    },
+    "failed_criteria": [],
+    "action": "pass"
+  },
+  "translations": [
+    "Rebellions 是一家专注于 AI加速器（Artificial Intelligence Accelerator）的韩国初创公司。在 ISSCC（国际固态电路会议）上，他们首次公布了其新型加速器 Rebel100 的架构细节。与其他通常在台积电制造的加速器不同，Rebellions 选择了三星代工厂的 SF4X 制程节点。鉴于英伟达、AMD、博通等公司占据了台积电的大部分产能，这一选择为 Rebellions 提供了更大的灵活性。",
+    "https://substackcdn.com/image/fetch/$s_!HCo6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff2ea04c2-71cf-4065-98b1-606182921d24_1068x801.jpeg",
+    "Rebellions Rebel-Quad（现称 Rebel100）在 Hot Chips 2025 上的概要。来源：Rebellions via [ServeTheHome](https://www.servethehome.com/rebellions-rebel-quad-ucie-and-144gb-hbm3e-accelerator-at-hot-chips-2025/)",
+    "在 Hot Chips 2025 上，Rebellions 演示了该芯片运行 Llama 3.3 70B 模型。从 Hot Chips 到 ISSCC，其规格参数保持不变。一个关键点在于使用了 三星 的 I-CubeS 中介层技术。虽然 Hot Chips 的幻灯片提到了使用 台积电 的 CoWoS-S，但我们已经澄清这是幻灯片上的一个错误，实际上一贯使用的是 I-CubeS。",
+    "我们最近提到过，CoWoS-S的产能限制已有所缓解。尽管如此，三星可能提供了大幅折扣，将其I-CubeS先进封装技术与前端制程捆绑销售——这使得这家初创公司无需再寻找并验证另一家独立的先进封装供应商。三星提供其HBM（高带宽内存）也可能以必须使用I-CubeS为前提条件。",
+    "I-CubeS 尚未在任何主流的 AI加速器 中得到采用，这可能是 三星 试图打入该市场的尝试。目前仅有 5 家已确认的 I-CubeS 用户：eSilicon、百度、英伟达、Rebellions 和 Preferred Networks。",
+    "第一家是 eSilicon 基于 三星 14LPP 制程并搭载 HBM2 的网络专用集成电路。百度的昆仑1加速器类似，使用了 三星 的 14LPP 工艺和 2 颗 HBM2 堆栈。在 2023 年 CoWoS-S 产能非常紧张时，英伟达 将少量 H200 的生产外包给了 I-CubeS。接着是 Rebel100，最后是 Preferred Networks 计划在 SF2 制程节点上开发的加速器。",
+    "https://substackcdn.com/image/fetch/$s_!Wj1c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F91f29194-e088-40ef-b134-ac45449d21ae_2880x1620.jpeg",
+    "Rebellions Rebel100 多芯片架构。来源：Rebellions，ISSCC 2026",
+    "Rebel100 采用了 4 颗计算芯片和 4 个 HBM3E 堆栈。每颗芯片配备了 3 个 UCIe-A（通用芯粒互连扩展-A）接口，但实际每颗芯片仅启用了其中两个，运行速率为 16 Gb/s。",
+    "https://substackcdn.com/image/fetch/$s_!Rt0c!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff9b5a17f-feb0-4c70-b528-cae2a38c11f3_2880x1620.jpeg",
+    "Rebellions Rebel100 封装级模块化设计。来源：Rebellions，ISSCC 2026",
+    "Rebellions宣称该设计在封装级别具备可重构性，能够额外添加输入输出或内存芯粒，并与以太网集成以实现纵向扩展（scale-up）。剩余的UCIe-A接口将用于此目的。",
+    "Rebellions 表示，输入输出芯粒预计将在 2026 年第一季度完成流片。但并未提供内存芯粒的具体时间表。",
+    "https://substackcdn.com/image/fetch/$s_!kIab!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fcbab43a4-26b7-4011-bfeb-ea01c4902a56_2880x1620.png",
+    "Rebellions Rebel100 总结与路线图。来源：Rebellions，ISSCC 2026",
+    "https://substackcdn.com/image/fetch/$s_!NxmQ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F759c00f2-e242-404b-a841-5e4458a75e4c_2880x1620.png",
+    "Rebellions Rebel100 为 HBM3E 供电质量集成的硅电容器。来源：Rebellions，ISSCC 2026",
+    "此外，他们在每个 HBM3E 堆栈旁都集成了硅电容器，以改善 HBM3E 及关键控制模块的供电质量。"
+  ]
+}

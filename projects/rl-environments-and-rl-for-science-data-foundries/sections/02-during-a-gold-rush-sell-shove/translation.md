@@ -1,25 +1,25 @@
+淘金热中，卖铲子。在RL规模化（Scaling）热潮中，卖强化学习环境。已有超过35家公司涌现，目标正是在各个领域提供此类环境。
 
+一类公司专注于克隆网站。例如，环境公司雇佣海外开发者复制DoorDash或Uber Eats等网站的UI，并将模拟界面出售给实验室。实验室随后训练智能体在这些网站中导航，以便在生产环境中，智能体能够可靠且一致地执行所需功能。
 
-
-
-
+这些“UI训练场”通常每个网站售价约2万美元，OpenAI已为ChatGPT智能体的训练和开发采购了数百个网站。这些环境是一次性购买，并可复用于未来的模型。先前运行的轨迹和日志会被保留，并反馈到训练的不同阶段，例如在中期训练中使用。
 
 https://substackcdn.com/image/fetch/$s_!kvQ_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F04032584-5b2e-4b30-afa9-ba2fcc0f9ab9_2140x780.png
 
 来源：Karina Nguyen 的公开演讲，SemiAnalysis
 
+其他公司则拓展至比单纯网站更复杂的环境，例如Slack、Salesforce、AWS终端、Microsoft OneDrive、Gmail、Discord和Atlassian。目标是让智能体能在这些软件平台中自主操作，学习并更好地理解如何在其内部导航和运行。
 
+这些平台一旦构建完成，便可组合起来，用以模拟更高保真度的任务与工作负载。将Slack、浏览器API端点以及代码编辑器等平台整合，能为模型构建出日益逼真的软件任务。这使得交互模式从单次提示转向多轮对话成为可能——例如，在任务执行中途通过Slack向模型发送消息，要求其调整某项功能。
 
+构建此类环境的公司包括Habitat、DeepTune、Fleet、Vmax、Turing、Mechanize、Preference Model、Bespoke Labs、Veris.ai等众多其他公司。即使在这些公司内部，质量或专注领域也存在显著差异。有些公司专注于UI训练场，如Turing；而另一些如Mechanize则专注于软件工程任务。几乎所有公司都处于种子阶段，员工少于20人，最多只专注于1到3个客户。
 
+上述大多数公司都将其环境闭源，并通过独家合同提供给实验室。然而，也有一些公司，如 Prime Intellect，选择将其环境开源，并正在培育旨在成为强化学习环境一站式商店的环境中心。
 
+其他公司则在为环境构建工具。例如，HUD提供的工具可以将任何给定软件（如游戏、浏览器、Google Sheets）封装在 Docker 容器中，使其成为可扩展的强化学习环境。每个容器包含两层：环境后端（被封装的实际软件）以及位于其上层的 MCP 服务器，后者负责提供智能体可调用的工具定义。当智能体发出如click(x,y)或type(text)这样的工具调用时，MCP 服务器会将其转换为对底层软件的操作，并返回结果观察值。这一过程通常会被扩展到许多并行实例中。每个任务都包含一个提示、设置条件和成功标准，这些条件会返回奖励信号。
 
-
-
-
-
-
-
+每一次工具调用和观察值都会通过遥测数据被捕获，这不仅有助于调试，还会在后续阶段被收集并输入到训练中。
 
 https://substackcdn.com/image/fetch/$s_!FnWW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa0e265cb-a9a1-4cc2-8baa-3b1a353d98a1_1480x1620.png
 
-
+目前需求最高的环境是编码环境。了解这些环境的构建、架构与集成方式，为我们提供了一个独特视角，得以窥见支撑当前AI进步的基础设施与工程实践。

@@ -1,15 +1,15 @@
-
+智能体也可能被各大网站屏蔽，这正是ChatGPT智能体与亚马逊之间正在上演的博弈。
 
 https://substackcdn.com/image/fetch/$s_!hEdn!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F29d60d24-7f6b-4aba-87bb-eb38e3bdd036_1016x380.png
 
 来源：SemiAnalysis
 
+对亚马逊而言，此举合乎情理：因为如果允许智能体在平台上（代表用户）购物，用户就能绕过平台上的所有广告。亚马逊可以将生态系统限制在自家的模型（如Nova和Rufus）内，或者在谈判中以此作为筹码。
 
+后者正是当前局势的焦点。OpenAI正在与亚马逊谈判，以获取其购物平台的访问权限，但这可能取决于与使用亚马逊云和芯片相关的细节条件。我们预计，谷歌、Meta、微软和X等公司也将在最大程度上限制对其生态系统的访问，尽管反垄断担忧可能对此有所制约。
 
+像亚马逊与OpenAI这类交易的核心，在于免费用户的变现。这已有先例：OpenAI曾宣布与Shopify和Etsy集成的“即时结账”功能。我们在去年八月就曾指出，这可能是智能体发展的潜在路径。
 
+- 《GPT-5为广告货币化和超级应用铺平道路》 - Doug, Dylan Patel 等四人 · 2025年8月13日
 
-
-
-- 
-
-
+在企业层面，许多公司正在部署自己的智能体。它们通常与其他初创公司签订合同，由后者为其提供针对特定任务或工作负载的“强化学习即服务”（RL as a Service）。

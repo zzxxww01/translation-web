@@ -1,0 +1,18 @@
+{
+  "section_id": "06-llm-based-automation-is-not-a",
+  "new_terms": [
+    {
+      "term": "GDPval",
+      "suggested_translation": "GDPval",
+      "context": "OpenAI的研究论文",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "ai": "AI",
+    "llm": "LLM"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T15:42:13.869675"
+}

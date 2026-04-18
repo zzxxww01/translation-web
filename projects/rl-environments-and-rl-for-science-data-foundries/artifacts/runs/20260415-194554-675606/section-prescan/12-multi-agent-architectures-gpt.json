@@ -1,0 +1,59 @@
+{
+  "section_id": "12-multi-agent-architectures-gpt",
+  "new_terms": [
+    {
+      "term": "AlphaEvolve",
+      "suggested_translation": "AlphaEvolve（谷歌多智能体系统）",
+      "context": "谷歌的多智能体系统，用于通过进化循环改进解决方案。",
+      "confidence": 0.95
+    },
+    {
+      "term": "ARC-AGI",
+      "suggested_translation": "ARC-AGI（抽象推理基准）",
+      "context": "一个衡量AI抽象推理能力的基准测试。",
+      "confidence": 0.9
+    },
+    {
+      "term": "SG Lang",
+      "suggested_translation": "SG Lang（编程语言/框架）",
+      "context": "文中提到的编程语言或框架，包含CUDA内核。",
+      "confidence": 0.85
+    },
+    {
+      "term": "CUDA",
+      "suggested_translation": "CUDA（计算架构）",
+      "context": "NVIDIA的并行计算平台和编程模型。",
+      "confidence": 0.95
+    },
+    {
+      "term": "o4-mini",
+      "suggested_translation": "o4-mini（模型子智能体）",
+      "context": "文中提到的用于性能优化的子智能体模型。",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "grok 4 heavy": "Grok 4 Heavy",
+    "gemini deep think": "Gemini Deep Think",
+    "gpt5-pro": "GPT5-Pro",
+    "multi-agent architectures": "多智能体架构",
+    "agents": "智能体",
+    "subagents": "子智能体",
+    "evaluation system": "评估系统",
+    "verifiers": "验证器",
+    "state-of-the-art": "最先进的",
+    "diminishing returns": "收益递减",
+    "evals": "评估",
+    "kernels": "内核",
+    "profiling": "性能剖析",
+    "inference costs": "推理成本",
+    "recursive language models": "递归语言模型",
+    "orchestrator": "编排器",
+    "self-play": "自我对弈",
+    "AlphaGo": "AlphaGo",
+    "Claude Code": "Claude Code",
+    "ARR": "年度经常性收入"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T20:09:57.879865"
+}

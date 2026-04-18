@@ -1,0 +1,97 @@
+{
+  "section_id": "25-other-highlight",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.2,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "critical",
+        "original_text": "temperature sensor",
+        "description": "术语翻译不一致。在全文语境中，'temperature sensor' 应统一译为‘温度传感器’，而非‘温度感应器’。",
+        "why_it_matters": "术语不一致会影响专业性和读者理解，尤其是在技术文章中。",
+        "suggestion": "将‘温度感应器’统一修改为‘温度传感器’。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 0,
+        "issue_type": "readability",
+        "severity": "high",
+        "original_text": "The final paper we'll cover is a temperature sensor from TSMC.",
+        "description": "句子结构略显生硬，存在翻译腔。‘我们将要介绍的最后一篇论文’可以优化得更流畅。",
+        "why_it_matters": "开篇句的流畅度影响读者第一印象，优化后能更自然地引入主题。",
+        "suggestion": "建议调整为：‘我们最后要介绍的这篇论文，来自台积电（TSMC），聚焦于温度传感器。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "high",
+        "original_text": "Temperature sensors are critical for monitoring thermal conditions in modern processors, especially as power densities increase and thermal management becomes more challenging.",
+        "description": "译文将原文一句拆分为三句，虽然符合中文短句习惯，但‘这带来了更大的热管理挑战’与前句的因果关系被弱化，且‘这’指代稍显模糊。",
+        "why_it_matters": "拆分句子时需注意保持逻辑关系的清晰度。",
+        "suggestion": "建议微调为：‘温度传感器对于监控现代处理器的热状态至关重要。随着功率密度不断提升，热管理也面临更大挑战。’或保留更紧密的因果：‘温度传感器对于监控现代处理器的热状态至关重要，尤其是在功率密度不断攀升、热管理日益困难的背景下。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "TSMC's design aims to achieve high accuracy across a wide temperature range while minimizing power consumption and area overhead.",
+        "description": "‘同时最小化功耗和面积开销’是准确的直译，但‘面积开销’在中文技术语境中虽可理解，‘面积占用’或‘芯片面积’更为常见和直接。",
+        "why_it_matters": "使用更地道的表达可以提升译文的专业感和流畅度。",
+        "suggestion": "建议将‘面积开销’改为‘芯片面积’或‘面积占用’。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "The paper likely details innovative circuit techniques or calibration methods to accomplish these goals.",
+        "description": "原文‘likely details’表示推测（可能详细介绍了），译文‘详细介绍了’是肯定语气，改变了原文的确定性程度。",
+        "why_it_matters": "科技报道中，对论文内容的推测与肯定陈述有重要区别，需忠实反映原文的谨慎口吻。",
+        "suggestion": "建议修改为：‘这篇论文很可能详细介绍了为实现这些目标所采用的创新电路技术或校准方法。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "While not as flashy as some of the other topics, advancements in fundamental components like sensors are essential for the overall system reliability and performance.",
+        "description": "‘不如...那般炫目’的比喻很好，但后半句‘对于...而言至关重要’稍显书面化，可以调整得更流畅。",
+        "why_it_matters": "优化结尾句能提升整体收束力。",
+        "suggestion": "建议调整为：‘尽管不如其他一些主题那样炫目，但像传感器这类基础元件的进步，对于整个系统的可靠性与性能而言却至关重要。’或‘...却是保障整个系统可靠性与性能的基石。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "conciseness",
+        "severity": "low",
+        "original_text": "advancements in fundamental components like sensors",
+        "description": "‘基础元件的进步’表达清晰，但可以考虑使用‘基础组件’或‘底层组件’来匹配‘fundamental’的含义，并略微提升信息密度。",
+        "why_it_matters": "在总结句中使用更精准或有力的词汇可以增强表达效果。",
+        "suggestion": "可考虑改为‘底层组件（如传感器）的进步’或‘基础组件的演进’。此为优化项，原译法亦可接受。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

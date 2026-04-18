@@ -1,0 +1,2567 @@
+{
+  "project_id": "nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo",
+  "project_title": "ISSCC 2026: NVIDIA & Broadcom CPO, HBM4 & LPDDR6, TSMC Active LSI, Logic-Based SRAM, UCIe-S and More",
+  "review_required": true,
+  "generated_at": "2026-04-17T13:35:18.731592",
+  "total_candidates": 76,
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "section_title": "Introduction",
+      "candidates": [
+        {
+          "term": "LPDDR6",
+          "suggested_translation": "LPDDR6",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 35,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-memory",
+              "section_title": "Memory"
+            },
+            {
+              "section_id": "03-samsung-lpddr6-paper-15-8",
+              "section_title": "Samsung LPDDR6 - Paper 15.8"
+            },
+            {
+              "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+              "section_title": "Samsung SF2 LPDDR6 PHY - Paper 37.3"
+            },
+            {
+              "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+              "section_title": "SK Hynix 1c LPDDR6 - Paper 15.7"
+            },
+            {
+              "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+              "section_title": "SK Hynix 1c GDDR7 - Paper 15.9"
+            }
+          ],
+          "contexts": [
+            "第六代低功耗双倍数据速率内存",
+            "低功耗双倍数据速率第六代内存标准",
+            "低功耗双倍数据率第六代内存标准"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "ISSCC",
+          "suggested_translation": "ISSCC",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 30,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-memory",
+              "section_title": "Memory"
+            },
+            {
+              "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+              "section_title": "Samsung SF2 LPDDR6 PHY - Paper 37.3"
+            },
+            {
+              "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+              "section_title": "SK Hynix 1c LPDDR6 - Paper 15.7"
+            },
+            {
+              "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+              "section_title": "SK Hynix 1c GDDR7 - Paper 15.9"
+            },
+            {
+              "section_id": "08-sandisk-kioxia-bics10-nand-p",
+              "section_title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1"
+            },
+            {
+              "section_id": "19-processors",
+              "section_title": "Processors"
+            },
+            {
+              "section_id": "23-rebellions-rebel100-paper-2",
+              "section_title": "Rebellions Rebel100 - Paper 2.2"
+            },
+            {
+              "section_id": "24-microsoft-maia-200-paper-17",
+              "section_title": "Microsoft Maia 200 - Paper 17.4"
+            }
+          ],
+          "contexts": [
+            "半导体顶级学术会议",
+            "国际固态电路会议",
+            "技术会议名称，论文来源。"
+          ],
+          "similar_terms": [
+            {
+              "original": "SoC",
+              "translation": "SoC",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "系统级芯片 (System on Chip)",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "HBM4",
+          "suggested_translation": "HBM4",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 25,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-memory",
+              "section_title": "Memory"
+            },
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "第四代高带宽内存",
+            "下一代高带宽内存产品名称",
+            "下一代高带宽内存标准"
+          ],
+          "similar_terms": [
+            {
+              "original": "HBM",
+              "translation": "HBM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高带宽内存 (High Bandwidth Memory)",
+              "similarity": 0.857
+            },
+            {
+              "original": "BoM",
+              "translation": "物料清单",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "GDDR7",
+          "suggested_translation": "GDDR7",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 14,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            },
+            {
+              "section_id": "01-memory",
+              "section_title": "Memory"
+            },
+            {
+              "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+              "section_title": "SK Hynix 1c LPDDR6 - Paper 15.7"
+            },
+            {
+              "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+              "section_title": "SK Hynix 1c GDDR7 - Paper 15.9"
+            }
+          ],
+          "contexts": [
+            "第七代图形用双倍数据速率内存",
+            "图形用双倍数据速率第七代内存标准",
+            "图形用双倍数据率第七代内存"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "IEDM",
+          "suggested_translation": "国际电子器件会议",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "半导体顶级学术会议"
+          ],
+          "similar_terms": [
+            {
+              "original": "IDM",
+              "translation": "IDM",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "垂直整合制造商 (Integrated Device Manufacturer)",
+              "similarity": 0.857
+            },
+            {
+              "original": "yield",
+              "translation": "良率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "VLSI",
+          "suggested_translation": "超大规模集成电路",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "00-intro",
+          "related_sections": [
+            {
+              "section_id": "00-intro",
+              "section_title": "Introduction"
+            }
+          ],
+          "contexts": [
+            "半导体顶级学术会议/技术"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "02-samsung-hbm4-paper-15-6",
+      "section_title": "Samsung HBM4 - Paper 15.6",
+      "candidates": [
+        {
+          "term": "base die",
+          "suggested_translation": "基础芯片",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 18,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "HBM堆叠结构中底部的逻辑控制芯片"
+          ],
+          "similar_terms": [
+            {
+              "original": "MediaTek",
+              "translation": "联发科",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "bandwidth",
+              "translation": "带宽",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "HBM3E",
+          "suggested_translation": "HBM3E",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 12,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            },
+            {
+              "section_id": "24-microsoft-maia-200-paper-17",
+              "section_title": "Microsoft Maia 200 - Paper 17.4"
+            },
+            {
+              "section_id": "25-other-highlight",
+              "section_title": "Other Highlight"
+            }
+          ],
+          "contexts": [
+            "HBM3的增强版本",
+            "高带宽内存标准",
+            "高带宽内存的第三代增强版"
+          ],
+          "similar_terms": [
+            {
+              "original": "HBM",
+              "translation": "HBM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "高带宽内存 (High Bandwidth Memory)",
+              "similarity": 0.75
+            },
+            {
+              "original": "BoM",
+              "translation": "物料清单",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "1c",
+          "suggested_translation": "1c",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "三星第6代10nm级DRAM制程节点"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Shmoo plot",
+          "suggested_translation": "舒姆图",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            },
+            {
+              "section_id": "03-samsung-lpddr6-paper-15-8",
+              "section_title": "Samsung LPDDR6 - Paper 15.8"
+            },
+            {
+              "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+              "section_title": "SK Hynix 1c LPDDR6 - Paper 15.7"
+            },
+            {
+              "section_id": "09-mediatek-xbit-logic-based-bitc",
+              "section_title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2"
+            },
+            {
+              "section_id": "10-tsmc-n16-mram-paper-15-4",
+              "section_title": "TSMC N16 MRAM - Paper 15.4"
+            },
+            {
+              "section_id": "17-tsmc-active-lsi-paper-8-2",
+              "section_title": "TSMC Active LSI - Paper 8.2"
+            }
+          ],
+          "contexts": [
+            "用于表征芯片电压/频率工作边界的测试图表",
+            "用于测试芯片在不同电压/频率下工作状态的图表",
+            "用于测试芯片电压、频率等参数稳定性的图表"
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "SF4",
+          "suggested_translation": "SF4",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "三星代工厂的4nm级逻辑制程节点"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "TSV",
+          "suggested_translation": "硅通孔",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "用于垂直连接堆叠芯片的互连技术"
+          ],
+          "similar_terms": [
+            {
+              "original": "TOPS",
+              "translation": "TOPS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "每秒万亿次运算 (Trillions Operations Per Second)",
+              "similarity": 0.571
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.571
+            },
+            {
+              "original": "Texas",
+              "translation": "德克萨斯州",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "连续出现可以适当缩写成德州",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "PMBIST",
+          "suggested_translation": "可编程内存内建自测试",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "Programmable Memory Built-In Self-Test"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "tCCDR",
+          "suggested_translation": "tCCDR",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "跨不同堆叠ID的连续READ命令之间的最小间隔时间"
+          ],
+          "similar_terms": [
+            {
+              "original": "TCO",
+              "translation": "总拥有成本",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "JEDEC",
+          "suggested_translation": "JEDEC",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "固态技术协会，制定内存标准"
+          ],
+          "similar_terms": [
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.545
+            },
+            {
+              "original": "MediaTek",
+              "translation": "联发科",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "RDQS",
+          "suggested_translation": "RDQS",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "读取数据选通信号"
+          ],
+          "similar_terms": [
+            {
+              "original": "R&D",
+              "translation": "研发",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "Research and Development",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "TDC",
+          "suggested_translation": "时间数字转换器",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            },
+            {
+              "section_id": "26-samsung-sf2-temperature-sensor",
+              "section_title": "Samsung SF2 Temperature Sensor - Paper 21.5"
+            }
+          ],
+          "contexts": [
+            "Time-to-Digital Converter",
+            "time-to-digital conversion (TDC)"
+          ],
+          "similar_terms": [
+            {
+              "original": "TCO",
+              "translation": "总拥有成本",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "TSMC",
+              "translation": "台积电",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Taiwan Semiconductor Manufacturing Company",
+              "similarity": 0.571
+            }
+          ]
+        },
+        {
+          "term": "ABB",
+          "suggested_translation": "自适应体偏置",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "Adaptive Body-Bias，用于补偿工艺偏差的电路技术"
+          ],
+          "similar_terms": [
+            {
+              "original": "fab",
+              "translation": "晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "fabrication facility",
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "MBIST",
+          "suggested_translation": "内存内建自测试",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "Memory Built-In Self-Test"
+          ],
+          "similar_terms": [
+            {
+              "original": "IoT",
+              "translation": "IoT",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "物联网 (Internet of Things)",
+              "similarity": 0.5
+            },
+            {
+              "original": "MediaTek",
+              "translation": "联发科",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "VDDC",
+          "suggested_translation": "VDDC",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "核心电源电压"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "VDDQ",
+          "suggested_translation": "VDDQ",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "02-samsung-hbm4-paper-15-6",
+          "related_sections": [
+            {
+              "section_id": "02-samsung-hbm4-paper-15-6",
+              "section_title": "Samsung HBM4 - Paper 15.6"
+            }
+          ],
+          "contexts": [
+            "I/O接口电源电压"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "03-samsung-lpddr6-paper-15-8",
+      "section_title": "Samsung LPDDR6 - Paper 15.8",
+      "candidates": [
+        {
+          "term": "sub-channel",
+          "suggested_translation": "子通道",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 11,
+          "first_occurrence": "03-samsung-lpddr6-paper-15-8",
+          "related_sections": [
+            {
+              "section_id": "03-samsung-lpddr6-paper-15-8",
+              "section_title": "Samsung LPDDR6 - Paper 15.8"
+            },
+            {
+              "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+              "section_title": "Samsung SF2 LPDDR6 PHY - Paper 37.3"
+            },
+            {
+              "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+              "section_title": "SK Hynix 1c LPDDR6 - Paper 15.7"
+            }
+          ],
+          "contexts": [
+            "LPDDR6架构中的内存通道细分单元",
+            "内存接口中的独立数据通道",
+            "内存总线内的独立数据通道"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "NRZ",
+          "suggested_translation": "不归零制",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "03-samsung-lpddr6-paper-15-8",
+          "related_sections": [
+            {
+              "section_id": "03-samsung-lpddr6-paper-15-8",
+              "section_title": "Samsung LPDDR6 - Paper 15.8"
+            },
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            }
+          ],
+          "contexts": [
+            "一种信号编码方式",
+            "Non-Return-to-Zero, a signaling format (50G NRZ)."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "LPDDR5X",
+          "suggested_translation": "LPDDR5X",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "03-samsung-lpddr6-paper-15-8",
+          "related_sections": [
+            {
+              "section_id": "03-samsung-lpddr6-paper-15-8",
+              "section_title": "Samsung LPDDR6 - Paper 15.8"
+            }
+          ],
+          "contexts": [
+            "低功耗双倍数据率第五代扩展版内存标准"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "PAM3",
+          "suggested_translation": "三电平脉冲幅度调制",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "03-samsung-lpddr6-paper-15-8",
+          "related_sections": [
+            {
+              "section_id": "03-samsung-lpddr6-paper-15-8",
+              "section_title": "Samsung LPDDR6 - Paper 15.8"
+            },
+            {
+              "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+              "section_title": "SK Hynix 1c GDDR7 - Paper 15.9"
+            }
+          ],
+          "contexts": [
+            "GDDR7使用的信号编码方式",
+            "脉冲幅度调制（3级），用于GDDR7的信号调制技术"
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.571
+            },
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            },
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+      "section_title": "Samsung SF2 LPDDR6 PHY - Paper 37.3",
+      "candidates": [
+        {
+          "term": "PHY",
+          "suggested_translation": "物理层",
+          "reasons": [
+            "title",
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "04-samsung-sf2-lpddr6-phy-paper",
+          "related_sections": [
+            {
+              "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+              "section_title": "Samsung SF2 LPDDR6 PHY - Paper 37.3"
+            },
+            {
+              "section_id": "24-microsoft-maia-200-paper-17",
+              "section_title": "Microsoft Maia 200 - Paper 17.4"
+            }
+          ],
+          "contexts": [
+            "物理层接口芯片，连接逻辑芯片与内存",
+            "硬件物理接口"
+          ],
+          "similar_terms": [
+            {
+              "original": "EUV lithography",
+              "translation": "EUV光刻",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "极紫外光刻技术",
+              "similarity": 0.333
+            },
+            {
+              "original": "photolithography",
+              "translation": "光刻",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.316
+            }
+          ]
+        },
+        {
+          "term": "SF2",
+          "suggested_translation": "SF2",
+          "reasons": [
+            "title"
+          ],
+          "occurrence_count": 1,
+          "first_occurrence": "04-samsung-sf2-lpddr6-phy-paper",
+          "related_sections": [
+            {
+              "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+              "section_title": "Samsung SF2 LPDDR6 PHY - Paper 37.3"
+            }
+          ],
+          "contexts": [
+            "三星第二代3纳米级制程节点"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+      "section_title": "SK Hynix 1c LPDDR6 - Paper 15.7",
+      "candidates": [
+        {
+          "term": "efficiency mode",
+          "suggested_translation": "能效模式",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "05-sk-hynix-1c-lpddr6-paper-15",
+          "related_sections": [
+            {
+              "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+              "section_title": "SK Hynix 1c LPDDR6 - Paper 15.7"
+            }
+          ],
+          "contexts": [
+            "LPDDR6的一种低功耗运行模式"
+          ],
+          "similar_terms": [
+            {
+              "original": "efficiency",
+              "translation": "效率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.8
+            },
+            {
+              "original": "net income",
+              "translation": "净收入",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.48
+            },
+            {
+              "original": "decode",
+              "translation": "解码",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的解码阶段，常和prefill一起出现",
+              "similarity": 0.476
+            }
+          ]
+        },
+        {
+          "term": "data rate",
+          "suggested_translation": "数据速率",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "05-sk-hynix-1c-lpddr6-paper-15",
+          "related_sections": [
+            {
+              "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+              "section_title": "SK Hynix 1c LPDDR6 - Paper 15.7"
+            }
+          ],
+          "contexts": [
+            "内存的数据传输速率，单位Gb/s"
+          ],
+          "similar_terms": [
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.7
+            },
+            {
+              "original": "utilization rate",
+              "translation": "利用率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.56
+            },
+            {
+              "original": "parameter",
+              "translation": "参数",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.556
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+      "section_title": "SK Hynix 1c GDDR7 - Paper 15.9",
+      "candidates": [
+        {
+          "term": "bit density",
+          "suggested_translation": "位密度",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "06-sk-hynix-1c-gddr7-paper-15-9",
+          "related_sections": [
+            {
+              "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+              "section_title": "SK Hynix 1c GDDR7 - Paper 15.9"
+            },
+            {
+              "section_id": "08-sandisk-kioxia-bics10-nand-p",
+              "section_title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1"
+            }
+          ],
+          "contexts": [
+            "单位面积内存储的比特数",
+            "存储芯片单位面积的数据存储量，单位Gb/mm²。"
+          ],
+          "similar_terms": [
+            {
+              "original": "deposition",
+              "translation": "沉积",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.476
+            },
+            {
+              "original": "data center",
+              "translation": "数据中心",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "Gb/mm²",
+          "suggested_translation": "Gb/mm²",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "06-sk-hynix-1c-gddr7-paper-15-9",
+          "related_sections": [
+            {
+              "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+              "section_title": "SK Hynix 1c GDDR7 - Paper 15.9"
+            }
+          ],
+          "contexts": [
+            "位密度单位，千兆比特每平方毫米"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Gb/s",
+          "suggested_translation": "Gb/s",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "06-sk-hynix-1c-gddr7-paper-15-9",
+          "related_sections": [
+            {
+              "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+              "section_title": "SK Hynix 1c GDDR7 - Paper 15.9"
+            }
+          ],
+          "contexts": [
+            "数据传输速率单位，千兆比特每秒"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "07-samsung-4f2-cop-dram-paper-1",
+      "section_title": "Samsung 4F² COP DRAM - Paper 15.10",
+      "candidates": [
+        {
+          "term": "Cell-on-Peripheral (COP)",
+          "suggested_translation": "单元位于外围电路之上 (COP)",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "07-samsung-4f2-cop-dram-paper-1",
+          "related_sections": [
+            {
+              "section_id": "07-samsung-4f2-cop-dram-paper-1",
+              "section_title": "Samsung 4F² COP DRAM - Paper 15.10"
+            }
+          ],
+          "contexts": [
+            "DRAM架构"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "08-sandisk-kioxia-bics10-nand-p",
+      "section_title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1",
+      "candidates": [
+        {
+          "term": "BiCS10",
+          "suggested_translation": "BiCS10",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "08-sandisk-kioxia-bics10-nand-p",
+          "related_sections": [
+            {
+              "section_id": "08-sandisk-kioxia-bics10-nand-p",
+              "section_title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1"
+            }
+          ],
+          "contexts": [
+            "SanDisk/Kioxia的NAND产品名称，332层3D NAND。"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "plane",
+          "suggested_translation": "平面",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "08-sandisk-kioxia-bics10-nand-p",
+          "related_sections": [
+            {
+              "section_id": "08-sandisk-kioxia-bics10-nand-p",
+              "section_title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1"
+            }
+          ],
+          "contexts": [
+            "NAND闪存中的并行操作单元。"
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "performance",
+              "translation": "性能",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "09-mediatek-xbit-logic-based-bitc",
+      "section_title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2",
+      "candidates": [
+        {
+          "term": "xBIT",
+          "suggested_translation": "xBIT",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "09-mediatek-xbit-logic-based-bitc",
+          "related_sections": [
+            {
+              "section_id": "09-mediatek-xbit-logic-based-bitc",
+              "section_title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2"
+            }
+          ],
+          "contexts": [
+            "MediaTek's novel 10T bitcell design"
+          ],
+          "similar_terms": [
+            {
+              "original": "IoT",
+              "translation": "IoT",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "物联网 (Internet of Things)",
+              "similarity": 0.571
+            },
+            {
+              "original": "bandwidth",
+              "translation": "带宽",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "assist circuitry",
+          "suggested_translation": "辅助电路",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "09-mediatek-xbit-logic-based-bitc",
+          "related_sections": [
+            {
+              "section_id": "09-mediatek-xbit-logic-based-bitc",
+              "section_title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2"
+            }
+          ],
+          "contexts": [
+            "SRAM peripheral circuits for stability/performance"
+          ],
+          "similar_terms": [
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.588
+            },
+            {
+              "original": "transistor",
+              "translation": "晶体管",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "PDK",
+          "suggested_translation": "工艺设计套件",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "09-mediatek-xbit-logic-based-bitc",
+          "related_sections": [
+            {
+              "section_id": "09-mediatek-xbit-logic-based-bitc",
+              "section_title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2"
+            },
+            {
+              "section_id": "26-samsung-sf2-temperature-sensor",
+              "section_title": "Samsung SF2 Temperature Sensor - Paper 21.5"
+            }
+          ],
+          "contexts": [
+            "Process Design Kit",
+            "characterized PDK element"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "10-tsmc-n16-mram-paper-15-4",
+      "section_title": "TSMC N16 MRAM - Paper 15.4",
+      "candidates": [
+        {
+          "term": "macro",
+          "suggested_translation": "宏单元",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "10-tsmc-n16-mram-paper-15-4",
+          "related_sections": [
+            {
+              "section_id": "10-tsmc-n16-mram-paper-15-4",
+              "section_title": "TSMC N16 MRAM - Paper 15.4"
+            }
+          ],
+          "contexts": [
+            "芯片设计中可配置的IP模块"
+          ],
+          "similar_terms": [
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.727
+            },
+            {
+              "original": "TCO",
+              "translation": "总拥有成本",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "bitcell",
+          "suggested_translation": "存储单元",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-tsmc-n16-mram-paper-15-4",
+          "related_sections": [
+            {
+              "section_id": "10-tsmc-n16-mram-paper-15-4",
+              "section_title": "TSMC N16 MRAM - Paper 15.4"
+            }
+          ],
+          "contexts": [
+            "存储器中存储单个比特的基本单元"
+          ],
+          "similar_terms": [
+            {
+              "original": "Intel",
+              "translation": "英特尔",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "Blackwell",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "英伟达的显卡",
+              "similarity": 0.625
+            },
+            {
+              "original": "yield",
+              "translation": "良率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "dual-port access",
+          "suggested_translation": "双端口访问",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-tsmc-n16-mram-paper-15-4",
+          "related_sections": [
+            {
+              "section_id": "10-tsmc-n16-mram-paper-15-4",
+              "section_title": "TSMC N16 MRAM - Paper 15.4"
+            }
+          ],
+          "contexts": [
+            "允许同时读写操作的内存架构"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "Flash-Plus",
+          "suggested_translation": "Flash-Plus",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-tsmc-n16-mram-paper-15-4",
+          "related_sections": [
+            {
+              "section_id": "10-tsmc-n16-mram-paper-15-4",
+              "section_title": "TSMC N16 MRAM - Paper 15.4"
+            }
+          ],
+          "contexts": [
+            "TSMC规划的下一代eNVM技术路线"
+          ],
+          "similar_terms": [
+            {
+              "original": "NAND flash",
+              "translation": "NAND闪存",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "fabless",
+              "translation": "无晶圆厂",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "无晶圆厂设计公司",
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "interleaved reads",
+          "suggested_translation": "交错读取",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-tsmc-n16-mram-paper-15-4",
+          "related_sections": [
+            {
+              "section_id": "10-tsmc-n16-mram-paper-15-4",
+              "section_title": "TSMC N16 MRAM - Paper 15.4"
+            }
+          ],
+          "contexts": [
+            "跨模块交替读取以提高吞吐量"
+          ],
+          "similar_terms": [
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.571
+            },
+            {
+              "original": "inference",
+              "translation": "推理",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            },
+            {
+              "original": "Intel",
+              "translation": "英特尔",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        },
+        {
+          "term": "iso-capacity",
+          "suggested_translation": "等容量",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "10-tsmc-n16-mram-paper-15-4",
+          "related_sections": [
+            {
+              "section_id": "10-tsmc-n16-mram-paper-15-4",
+              "section_title": "TSMC N16 MRAM - Paper 15.4"
+            }
+          ],
+          "contexts": [
+            "在相同存储容量下的比较"
+          ],
+          "similar_terms": [
+            {
+              "original": "scalability",
+              "translation": "可扩展性",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.609
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "12-nvidia-dwdm-paper-23-1",
+      "section_title": "Nvidia DWDM - Paper 23.1",
+      "candidates": [
+        {
+          "term": "CPO",
+          "suggested_translation": "共封装光学",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 9,
+          "first_occurrence": "12-nvidia-dwdm-paper-23-1",
+          "related_sections": [
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            }
+          ],
+          "contexts": [
+            "Co-packaged optics, a key technology for integrating optics with ASICs."
+          ],
+          "similar_terms": [
+            {
+              "original": "CMP",
+              "translation": "化学机械抛光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Chemical Mechanical Planarization",
+              "similarity": 0.667
+            },
+            {
+              "original": "CPU",
+              "translation": "CPU",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "中央处理器",
+              "similarity": 0.667
+            },
+            {
+              "original": "TCO",
+              "translation": "总拥有成本",
+              "strategy": "preserve_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            }
+          ]
+        },
+        {
+          "term": "OCI MSA",
+          "suggested_translation": "光学计算互连多源协议",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "12-nvidia-dwdm-paper-23-1",
+          "related_sections": [
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            }
+          ],
+          "contexts": [
+            "Optical Compute Interconnect Multi-Source Agreement, an industry consortium."
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "UCIe-S",
+          "suggested_translation": "UCIe-S",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 6,
+          "first_occurrence": "12-nvidia-dwdm-paper-23-1",
+          "related_sections": [
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            },
+            {
+              "section_id": "16-intel-ucie-s-paper-8-1",
+              "section_title": "Intel UCIe-S - Paper 8.1"
+            }
+          ],
+          "contexts": [
+            "A protocol for die-to-die transmission (likely a variant of UCIe).",
+            "通用芯粒互连标准的一个版本，用于芯粒间连接。"
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "DWDM",
+          "suggested_translation": "密集波分复用",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "12-nvidia-dwdm-paper-23-1",
+          "related_sections": [
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            }
+          ],
+          "contexts": [
+            "Dense Wavelength Division Multiplexing, an optical signaling format."
+          ],
+          "similar_terms": [
+            {
+              "original": "IDM",
+              "translation": "IDM",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "垂直整合制造商 (Integrated Device Manufacturer)",
+              "similarity": 0.571
+            },
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            },
+            {
+              "original": "bandwidth",
+              "translation": "带宽",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "D2D",
+          "suggested_translation": "裸片到裸片",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "12-nvidia-dwdm-paper-23-1",
+          "related_sections": [
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            },
+            {
+              "section_id": "24-microsoft-maia-200-paper-17",
+              "section_title": "Microsoft Maia 200 - Paper 17.4"
+            }
+          ],
+          "contexts": [
+            "Die-to-die, a parallelized connection between chips.",
+            "芯片到芯片互连"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "SerDes",
+          "suggested_translation": "串行器/解串器",
+          "reasons": [
+            "high_frequency",
+            "ambiguous"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "12-nvidia-dwdm-paper-23-1",
+          "related_sections": [
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            },
+            {
+              "section_id": "22-amd-mi355x-paper-2-1",
+              "section_title": "AMD MI355X - Paper 2.1"
+            }
+          ],
+          "contexts": [
+            "Serializer/Deserializer, a circuit for high-speed serial communication.",
+            "串行器/解串器，用于高速芯片间通信"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "OBO",
+          "suggested_translation": "板载光学",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "12-nvidia-dwdm-paper-23-1",
+          "related_sections": [
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            }
+          ],
+          "contexts": [
+            "On-Board Optics, an optical engine integration level."
+          ],
+          "similar_terms": [
+            {
+              "original": "BoM",
+              "translation": "物料清单",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.667
+            },
+            {
+              "original": "CoWoS",
+              "translation": "CoWoS",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "Chip on Wafer on Substrate",
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "PAM4",
+          "suggested_translation": "四电平脉冲幅度调制",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "12-nvidia-dwdm-paper-23-1",
+          "related_sections": [
+            {
+              "section_id": "12-nvidia-dwdm-paper-23-1",
+              "section_title": "Nvidia DWDM - Paper 23.1"
+            }
+          ],
+          "contexts": [
+            "A modulation format for 200G per lane optical signaling."
+          ],
+          "similar_terms": [
+            {
+              "original": "AMD",
+              "translation": "AMD",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "超微半导体",
+              "similarity": 0.571
+            },
+            {
+              "original": "DRAM",
+              "translation": "DRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "动态随机存取存储器",
+              "similarity": 0.5
+            },
+            {
+              "original": "SRAM",
+              "translation": "SRAM",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "静态随机存取存储器",
+              "similarity": 0.5
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "13-marvell-coherent-lite-transcei",
+      "section_title": "Marvell Coherent-Lite Transceiver - Paper 23.2",
+      "candidates": [
+        {
+          "term": "coherent-lite transceiver",
+          "suggested_translation": "精简相干光模块",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "13-marvell-coherent-lite-transcei",
+          "related_sections": [
+            {
+              "section_id": "13-marvell-coherent-lite-transcei",
+              "section_title": "Marvell Coherent-Lite Transceiver - Paper 23.2"
+            }
+          ],
+          "contexts": [
+            "光通信器件"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "DSP",
+          "suggested_translation": "数字信号处理器",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "13-marvell-coherent-lite-transcei",
+          "related_sections": [
+            {
+              "section_id": "13-marvell-coherent-lite-transcei",
+              "section_title": "Marvell Coherent-Lite Transceiver - Paper 23.2"
+            }
+          ],
+          "contexts": [
+            "信号处理"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "16-intel-ucie-s-paper-8-1",
+      "section_title": "Intel UCIe-S - Paper 8.1",
+      "candidates": [
+        {
+          "term": "Diamond Rapids",
+          "suggested_translation": "Diamond Rapids",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "16-intel-ucie-s-paper-8-1",
+          "related_sections": [
+            {
+              "section_id": "16-intel-ucie-s-paper-8-1",
+              "section_title": "Intel UCIe-S - Paper 8.1"
+            }
+          ],
+          "contexts": [
+            "英特尔下一代至强（Xeon）CPU的代号。"
+          ],
+          "similar_terms": [
+            {
+              "original": "NAND flash",
+              "translation": "NAND闪存",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "utilization rate",
+              "translation": "利用率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.467
+            },
+            {
+              "original": "SemiAnalysis",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "EMIB",
+          "suggested_translation": "EMIB",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "16-intel-ucie-s-paper-8-1",
+          "related_sections": [
+            {
+              "section_id": "16-intel-ucie-s-paper-8-1",
+              "section_title": "Intel UCIe-S - Paper 8.1"
+            }
+          ],
+          "contexts": [
+            "英特尔的一种嵌入式多芯片互连桥接先进封装技术。"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "lane",
+          "suggested_translation": "通道",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "16-intel-ucie-s-paper-8-1",
+          "related_sections": [
+            {
+              "section_id": "16-intel-ucie-s-paper-8-1",
+              "section_title": "Intel UCIe-S - Paper 8.1"
+            }
+          ],
+          "contexts": [
+            "高速串行链路中的独立数据通道。"
+          ],
+          "similar_terms": [
+            {
+              "original": "latency",
+              "translation": "延迟",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.545
+            },
+            {
+              "original": "node",
+              "translation": "制程节点",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+              "similarity": 0.5
+            },
+            {
+              "original": "Blackwell",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "英伟达的显卡",
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "17-tsmc-active-lsi-paper-8-2",
+      "section_title": "TSMC Active LSI - Paper 8.2",
+      "candidates": [
+        {
+          "term": "Manhattan grid",
+          "suggested_translation": "曼哈顿网格",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "17-tsmc-active-lsi-paper-8-2",
+          "related_sections": [
+            {
+              "section_id": "17-tsmc-active-lsi-paper-8-2",
+              "section_title": "TSMC Active LSI - Paper 8.2"
+            }
+          ],
+          "contexts": [
+            "一种直角布线网格，与UCIe的六边形凸点图不同"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "18-microsoft-d2d-interconnect-p",
+      "section_title": "Microsoft D2D Interconnect - Paper 8.3",
+      "candidates": [
+        {
+          "term": "pJ/b",
+          "suggested_translation": "皮焦耳/比特",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 5,
+          "first_occurrence": "18-microsoft-d2d-interconnect-p",
+          "related_sections": [
+            {
+              "section_id": "18-microsoft-d2d-interconnect-p",
+              "section_title": "Microsoft D2D Interconnect - Paper 8.3"
+            }
+          ],
+          "contexts": [
+            "每比特能量消耗的单位"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "test vehicle",
+          "suggested_translation": "测试载具",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "18-microsoft-d2d-interconnect-p",
+          "related_sections": [
+            {
+              "section_id": "18-microsoft-d2d-interconnect-p",
+              "section_title": "Microsoft D2D Interconnect - Paper 8.3"
+            }
+          ],
+          "contexts": [
+            "用于验证新设计或工艺的测试芯片/结构"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "die shot",
+          "suggested_translation": "芯片显微照片",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "18-microsoft-d2d-interconnect-p",
+          "related_sections": [
+            {
+              "section_id": "18-microsoft-d2d-interconnect-p",
+              "section_title": "Microsoft D2D Interconnect - Paper 8.3"
+            },
+            {
+              "section_id": "19-processors",
+              "section_title": "Processors"
+            }
+          ],
+          "contexts": [
+            "芯片的显微结构照片",
+            "展示芯片内部布局的照片"
+          ],
+          "similar_terms": [
+            {
+              "original": "IoT",
+              "translation": "IoT",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "物联网 (Internet of Things)",
+              "similarity": 0.545
+            },
+            {
+              "original": "edge computing",
+              "translation": "边缘计算",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.455
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "19-processors",
+      "section_title": "Processors",
+      "candidates": [
+        {
+          "term": "Rebellions",
+          "suggested_translation": "Rebellions",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 18,
+          "first_occurrence": "19-processors",
+          "related_sections": [
+            {
+              "section_id": "19-processors",
+              "section_title": "Processors"
+            },
+            {
+              "section_id": "23-rebellions-rebel100-paper-2",
+              "section_title": "Rebellions Rebel100 - Paper 2.2"
+            }
+          ],
+          "contexts": [
+            "韩国AI芯片初创公司",
+            "韩国AI加速器初创公司名称"
+          ],
+          "similar_terms": [
+            {
+              "original": "Rubin",
+              "translation": null,
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "英伟达架构",
+              "similarity": 0.533
+            },
+            {
+              "original": "prefill",
+              "translation": "预填充",
+              "strategy": "translate",
+              "scope": "global",
+              "note": "大模型的预填充阶段，常和decode一起出现",
+              "similarity": 0.471
+            },
+            {
+              "original": "revenue",
+              "translation": "营收",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+      "section_title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6",
+      "candidates": [
+        {
+          "term": "M3DProc",
+          "suggested_translation": "M3DProc",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "21-intel-18a-on-intel-3-hybrid-bo",
+          "related_sections": [
+            {
+              "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+              "section_title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6"
+            }
+          ],
+          "contexts": [
+            "Intel首款混合键合芯片的产品代号。"
+          ],
+          "similar_terms": [
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        },
+        {
+          "term": "3D mesh",
+          "suggested_translation": "3D网格",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "21-intel-18a-on-intel-3-hybrid-bo",
+          "related_sections": [
+            {
+              "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+              "section_title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6"
+            }
+          ],
+          "contexts": [
+            "一种三维芯片互连网络架构。"
+          ],
+          "similar_terms": [
+            {
+              "original": "NAND flash",
+              "translation": "NAND闪存",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.471
+            }
+          ]
+        },
+        {
+          "term": "Foveros Direct",
+          "suggested_translation": "Foveros Direct",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "21-intel-18a-on-intel-3-hybrid-bo",
+          "related_sections": [
+            {
+              "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+              "section_title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6"
+            }
+          ],
+          "contexts": [
+            "英特尔的一种直接混合键合封装技术。"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "hybrid bonding",
+          "suggested_translation": "混合键合",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "21-intel-18a-on-intel-3-hybrid-bo",
+          "related_sections": [
+            {
+              "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+              "section_title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6"
+            }
+          ],
+          "contexts": [
+            "一种先进的3D封装技术，用于连接两片晶圆/芯片。"
+          ],
+          "similar_terms": [
+            {
+              "original": "training",
+              "translation": "训练",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.545
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "22-amd-mi355x-paper-2-1",
+      "section_title": "AMD MI355X - Paper 2.1",
+      "candidates": [
+        {
+          "term": "N3P",
+          "suggested_translation": "N3P",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 3,
+          "first_occurrence": "22-amd-mi355x-paper-2-1",
+          "related_sections": [
+            {
+              "section_id": "22-amd-mi355x-paper-2-1",
+              "section_title": "AMD MI355X - Paper 2.1"
+            }
+          ],
+          "contexts": [
+            "台积电的先进制程节点"
+          ],
+          "similar_terms": [
+            {
+              "original": "NPU",
+              "translation": "NPU",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "神经网络处理器",
+              "similarity": 0.667
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "23-rebellions-rebel100-paper-2",
+      "section_title": "Rebellions Rebel100 - Paper 2.2",
+      "candidates": [
+        {
+          "term": "Rebel100",
+          "suggested_translation": "Rebel100",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 8,
+          "first_occurrence": "23-rebellions-rebel100-paper-2",
+          "related_sections": [
+            {
+              "section_id": "23-rebellions-rebel100-paper-2",
+              "section_title": "Rebellions Rebel100 - Paper 2.2"
+            }
+          ],
+          "contexts": [
+            "Rebellions公司AI加速器产品名称"
+          ],
+          "similar_terms": []
+        },
+        {
+          "term": "I-CubeS",
+          "suggested_translation": "I-CubeS",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 7,
+          "first_occurrence": "23-rebellions-rebel100-paper-2",
+          "related_sections": [
+            {
+              "section_id": "23-rebellions-rebel100-paper-2",
+              "section_title": "Rebellions Rebel100 - Paper 2.2"
+            }
+          ],
+          "contexts": [
+            "三星的先进封装技术"
+          ],
+          "similar_terms": [
+            {
+              "original": "cableless",
+              "translation": "无缆化",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            }
+          ]
+        },
+        {
+          "term": "Hot Chips",
+          "suggested_translation": "Hot Chips",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 4,
+          "first_occurrence": "23-rebellions-rebel100-paper-2",
+          "related_sections": [
+            {
+              "section_id": "23-rebellions-rebel100-paper-2",
+              "section_title": "Rebellions Rebel100 - Paper 2.2"
+            }
+          ],
+          "contexts": [
+            "高性能芯片研讨会"
+          ],
+          "similar_terms": [
+            {
+              "original": "logic chip",
+              "translation": "逻辑芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.632
+            },
+            {
+              "original": "RF chip",
+              "translation": "射频芯片",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "Radio Frequency",
+              "similarity": 0.625
+            },
+            {
+              "original": "analog chip",
+              "translation": "模拟芯片",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.6
+            }
+          ]
+        },
+        {
+          "term": "UCIe-A",
+          "suggested_translation": "UCIe-A",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "23-rebellions-rebel100-paper-2",
+          "related_sections": [
+            {
+              "section_id": "23-rebellions-rebel100-paper-2",
+              "section_title": "Rebellions Rebel100 - Paper 2.2"
+            }
+          ],
+          "contexts": [
+            "UCIe（通用芯粒互连）的先进接口标准"
+          ],
+          "similar_terms": [
+            {
+              "original": "chiplet",
+              "translation": "芯粒",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.462
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "section_id": "24-microsoft-maia-200-paper-17",
+      "section_title": "Microsoft Maia 200 - Paper 17.4",
+      "candidates": [
+        {
+          "term": "Maia 200",
+          "suggested_translation": "Maia 200",
+          "reasons": [
+            "title",
+            "high_frequency"
+          ],
+          "occurrence_count": 12,
+          "first_occurrence": "24-microsoft-maia-200-paper-17",
+          "related_sections": [
+            {
+              "section_id": "24-microsoft-maia-200-paper-17",
+              "section_title": "Microsoft Maia 200 - Paper 17.4"
+            }
+          ],
+          "contexts": [
+            "微软AI加速器产品名称"
+          ],
+          "similar_terms": [
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.4
+            }
+          ]
+        },
+        {
+          "term": "Maia 100",
+          "suggested_translation": "Maia 100",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "24-microsoft-maia-200-paper-17",
+          "related_sections": [
+            {
+              "section_id": "24-microsoft-maia-200-paper-17",
+              "section_title": "Microsoft Maia 200 - Paper 17.4"
+            }
+          ],
+          "contexts": [
+            "微软上一代AI加速器产品名称"
+          ],
+          "similar_terms": [
+            {
+              "original": "AI",
+              "translation": "AI",
+              "strategy": "preserve",
+              "scope": "global",
+              "note": "人工智能",
+              "similarity": 0.4
+            }
+          ]
+        },
+        {
+          "term": "reticle-scale monolithic",
+          "suggested_translation": "光罩尺寸单芯片",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "24-microsoft-maia-200-paper-17",
+          "related_sections": [
+            {
+              "section_id": "24-microsoft-maia-200-paper-17",
+              "section_title": "Microsoft Maia 200 - Paper 17.4"
+            }
+          ],
+          "contexts": [
+            "芯片设计架构"
+          ],
+          "similar_terms": []
+        }
+      ]
+    },
+    {
+      "section_id": "26-samsung-sf2-temperature-sensor",
+      "section_title": "Samsung SF2 Temperature Sensor - Paper 21.5",
+      "candidates": [
+        {
+          "term": "RC",
+          "suggested_translation": "RC",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "26-samsung-sf2-temperature-sensor",
+          "related_sections": [
+            {
+              "section_id": "26-samsung-sf2-temperature-sensor",
+              "section_title": "Samsung SF2 Temperature Sensor - Paper 21.5"
+            }
+          ],
+          "contexts": [
+            "RC time constant"
+          ],
+          "similar_terms": [
+            {
+              "original": "integrated circuit",
+              "translation": "集成电路",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": "IC",
+              "similarity": 0.2
+            }
+          ]
+        },
+        {
+          "term": "RO",
+          "suggested_translation": "环形振荡器",
+          "reasons": [
+            "high_frequency"
+          ],
+          "occurrence_count": 2,
+          "first_occurrence": "26-samsung-sf2-temperature-sensor",
+          "related_sections": [
+            {
+              "section_id": "26-samsung-sf2-temperature-sensor",
+              "section_title": "Samsung SF2 Temperature Sensor - Paper 21.5"
+            }
+          ],
+          "contexts": [
+            "ring oscillator-based (RO) TDC"
+          ],
+          "similar_terms": [
+            {
+              "original": "Micron",
+              "translation": "美光",
+              "strategy": "first_annotate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.5
+            },
+            {
+              "original": "throughput",
+              "translation": "吞吐量",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.333
+            },
+            {
+              "original": "gross margin",
+              "translation": "毛利率",
+              "strategy": "translate",
+              "scope": "global",
+              "note": null,
+              "similarity": 0.286
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

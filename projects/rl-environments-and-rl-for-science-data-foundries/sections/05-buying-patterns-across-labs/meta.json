@@ -27,12 +27,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Anthropic",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.333877",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +117,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Anthropic一直是RL环境市场中激进的采购者。该公司通常是数十家新公司的首批客户，为其提供独家合同，有时甚至提供环境构建方面的建议。我们认为，他们与超过十几家RL环境公司签订了承包商协议。该公司很可能希望建立一个广泛的供应商生态系统，从而使产品商品化，以降低某些类型环境的成本。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.333938",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -106,19 +222,81 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token LINK_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "一个活跃的供应商生态系统也能吸引投资者，从而进一步补贴成本。其代价是同时管理众多供应商带来的管理开销，因此我们认为Anthropic要求供应商在大多数领域遵循特定的沙箱框架，并已构建了一个供应商参与平台。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334053",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token LINK_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -145,12 +323,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "尽管该公司确实专注于代码领域，但我们目前看到他们也开始在其他领域加速布局。例如，计算机使用已在其优先事项清单上名列前茅一段时间了。其他领域，如生物学，也在加速推进，我们将在后文展示。编码仍是其工作的核心，但并非他们唯一感兴趣的领域。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334086",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -177,12 +413,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "OpenAI",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334110",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -209,12 +503,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "我们认为OpenAI的供应商池比Anthropic更小，尽管他们在数据上的净支出超过了Anthropic和许多其他实验室。为了减少对Surge、Mercor和Handshake等第三方的依赖，OpenAI正在组建内部的人工数据团队。xAI从一开始就采取了类似的做法，自公司成立以来就一直在招聘AI导师，目前正在扩大此类招聘规模。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334132",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -241,12 +593,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "他们的支出之所以超过其他实验室，是因为他们有许多并行领域试图扩展。ChatGPT智能体大量使用了UI训练场。赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于大量的数学和代码数据。其消费级版本则混合了所有项目的数据，此外还进行了针对行为的有针对性后训练。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334154",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -273,12 +683,70 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Mzol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec316bd5-13f2-4f91-971e-62102e1570ab_1446x840.png",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334177",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!Mzol!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec316bd5-13f2-4f91-971e-62102e1570ab_1446x840.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -320,19 +788,77 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "来自赢得IMO的模型的示例答案。来源：OpenAI",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334245",
+          "tokenized_text": "[[[EM_1|来自赢得IMO的模型的示例答案。来源：OpenAI]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -359,12 +885,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "来自不同项目的数据会被汇总，并重新注入中期训练（我们将在后文详述）。这能全面提升模型的性能。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334271",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -391,12 +975,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "OpenAI采购的大量数据在其后训练工作中发挥了关键作用，如前所述，这推动了其最近几代模型核心能力的进步。随着其人工数据团队的扩大，他们将能够省去支付给众多数据供应商的利润空间，从而以相同成本汇集更多数据量。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334294",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -423,12 +1065,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Google DeepMind",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334316",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -455,12 +1155,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Google DeepMind的采购模式相当分散。具体到环境采购，主要由来自不同团队和项目的研究人员驱动。他们关注的核心环境集中在编码和计算机使用领域，尤其是与机器学习相关的环境和任务。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334337",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -487,12 +1245,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Google为Gemini 2.5 Pro投入的后训练算力很少，在发布时可能不到预训练算力的5%。尽管他们已为Gemini 3增加了投入，但我们认为相对于其他实验室而言，其规模仍然较小。然而，Google在这种新范式下拥有独特优势：他们已经拥有底层平台（Sheets、Slides、Docs、Drive、Maps），无需构建新平台。更重要的是，其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。因此，Google利用这些用户行为在这些应用上对Gemini进行后训练，主要只是时间和内部协调的问题。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334358",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -519,12 +1335,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这对Google而言，比单纯的技术障碍更为困难。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334380",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -551,12 +1425,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Google也采取了防御性姿态，降低了对其产品（如Gmail）的爬取速率限制。这使得其他方更难爬取其应用数据并用于复制工作（例如，构建用于训练的模拟应用）。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334402",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -583,12 +1515,70 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "然而长远来看，我们应如何预期这些模型的实际效用？通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？",
+          "model": "pro",
+          "created_at": "2026-04-15T16:23:21.334423",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.965,
+        "is_excellent": true,
+        "applied_terms": [
+          "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+          "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "Analyzes specific strategic implementations and procurement behaviors by major players like Anthropic and OpenAI.",
+          "relation_to_previous": "Provides concrete examples of the fragmented procurement landscape described in the previous section.",
+          "relation_to_next": "Poses a philosophical/strategic question about whether stacked environments lead to AGI, transitioning to real-world economic limits in the next section.",
+          "key_points": [
+            "Different labs have distinct strategies and buying patterns for expert data.",
+            "Examples of high-end capabilities include IMO-winning models.",
+            "Raises skepticism about whether merely stacking environments is the true path to AGI."
+          ],
+          "translation_notes": [
+            "Translate 'IMO winning model' accurately as '国际奥数(IMO)获奖模型'.",
+            "Capture the skepticism in 'stacked on top of each other' (环境的简单堆叠) without making it sound overly dismissive."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语 'UI Gyms' 的翻译不一致。前文（段落5）提到 'UI Gyms' 时未翻译，此处译文为 'UI训练场'。虽然 '训练场' 是 'Gym' 的合理意译，但作为专有名词，全文应保持统一。建议统一为英文原名 'UI Gyms' 或统一为 'UI训练场'，并在首次出现时加注。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文 '赢得IMO金牌的模型——GPT-5.1 Codex Max的一个版本——受益于...' 在结构上完全忠实，但中文破折号的使用稍显打断阅读流。可以考虑更流畅的表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文 '其庞大的产品经理团队对数亿用户如何实际与这些产品交互有着深刻的洞察，这为定义强大的模型性能应为何样提供了直接信号。' 后半句 '为定义...应为何样' 略显翻译腔，可以更精炼地道。"
+          },
+          {
+            "type": "tone",
+            "description": "译文 '通往通用人工智能的道路，难道仅仅是环境堆叠的无限叠加吗？' 添加了 '无限' 一词，虽能传达原文的怀疑口吻，但略微改变了原句的精确含义。原文 'stacked on top of each other' 强调简单的物理堆叠，而非强调 '无限'。"
+          }
+        ]
+      },
       "history": []
     }
   ]

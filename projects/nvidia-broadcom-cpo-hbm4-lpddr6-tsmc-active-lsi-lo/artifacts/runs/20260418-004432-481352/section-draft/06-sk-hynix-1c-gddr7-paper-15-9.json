@@ -1,0 +1,334 @@
+{
+  "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+    "section_title": "SK Hynix 1c GDDR7 - Paper 15.9",
+    "section_title_translation": "SK Hynix 1c GDDR7 - Paper 15.9",
+    "section_position": "7/27",
+    "article_theme": "ISSCC 2026 展示了半导体行业在内存、光网络、高速互连和处理器等关键领域的最新电路与集成技术突破。",
+    "structure_summary": "文章采用典型的科技综述结构：引言概述 ISSCC 2026 及其与 IEDM/VLSI 的区别；随后按技术领域（内存、光网络、高速电互连、处理器）分章节深入评述各篇关键论文；每个子章节聚焦一家公司/一项技术，包含技术细节、性能对比、图表解读和行业背景分析；结尾以一个其他亮点（温度传感器）收尾。整体逻辑清晰，由面到点，技术深度逐层递进。",
+    "target_audience": "半导体行业从业者、分析师、资深科技爱好者，具备扎实的硬件知识。",
+    "translation_voice": "专业、准确、流畅的中文科技分析口吻。避免过度口语化，但需将英文长句合理切分为符合中文阅读习惯的短句。保留原文的技术严谨性和批判性视角。",
+    "previous_section_title": "SK Hynix 1c LPDDR6 - Paper 15.7",
+    "next_section_title": "Samsung 4F² COP DRAM - Paper 15.10",
+    "section_role": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+    "translation_notes": [
+      "“bit density”译为“比特密度”或“位密度”。",
+      "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+      "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+      "比较级（“compared to”）的翻译需清晰体现优势程度。"
+    ],
+    "key_points": [
+      "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+      "其密度显著高于三星的1b和1z工艺。",
+      "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+    ],
+    "guidelines": [
+      "术语一致性优先：严格遵循提供的术语表进行翻译，尤其是高频技术缩写（HBM4, LPDDR6, GDDR7, UCIe, CPO）和关键概念（shmoo plot -> 舒姆图， bitcell -> 存储单元）。首次出现的重要缩写需加注中文全称。",
+      "句式重构与段落流：英文长句（尤其是包含多个从句、数据对比和技术术语的句子）必须拆分为符合中文阅读习惯的短句。确保每个中文句子主干清晰。段落内部逻辑需通过恰当的连接词（如‘此外’、‘然而’、‘具体而言’）衔接，避免直接堆砌翻译后的短句。",
+      "数据与比较的精确传达：所有性能数据（速度、电压、密度、带宽）、单位（Gb/s, V, mm², pJ/b）和比较关系（‘优于’、‘低于’、‘相当于’）必须准确翻译，不得有任何偏差。技术结论的强弱语气需与原文一致。",
+      "保留批判性与分析口吻：原文对厂商宣传持审慎态度（如对 Microsoft Maia 200 的评论）。翻译时需保留这种分析性甚至略带怀疑的语气，使用‘宣称’、‘据称’、‘值得注意’、‘存疑’等措辞，避免将其转化为纯粹的中性陈述或褒奖。"
+    ],
+    "article_challenges": [
+      {
+        "location": "全文，尤其是各技术缩写（HBM4, LPDDR6, UCIe, CPO, CoWoS）",
+        "issue": "大量专业缩写和术语，需确保首次出现时有解释，全文翻译一致。",
+        "suggestion": "在术语表中统一，首次出现时采用“英文全称（中文释义）”格式，如“UCIe（通用芯粒互连）”。",
+        "type": "accuracy"
+      },
+      {
+        "location": "各技术子章节",
+        "issue": "原文包含大量图表引用（如“Source: Samsung, ISSCC 2026”）和图片URL，翻译时需处理这些非文本元素。",
+        "suggestion": "保留图表标题和来源的翻译，将图片URL和占位符原文保留。确保图表引用与正文逻辑衔接。",
+        "type": "accuracy"
+      },
+      {
+        "location": "技术性能对比和数据分析段落（如 SK Hynix 与 Samsung LPDDR6 的 shmoo plot 对比）",
+        "issue": "涉及具体数据、单位（Gb/s, V, pJ/b）和对比结论，翻译必须精确无误。",
+        "suggestion": "数字、单位、比较级（“worse”, “higher”）需严格对应。技术结论的表述要清晰，避免模糊。",
+        "type": "accuracy"
+      },
+      {
+        "location": "对 Microsoft Maia 200 的描述（“claims are dubious”）",
+        "issue": "原文带有明显的怀疑和批判语气，翻译时需保留这种审慎态度，而非中性化。",
+        "suggestion": "将“dubious”译为“值得怀疑的”、“存疑的”，语气匹配原文的批判性。",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "ISSCC",
+        "term": "ISSCC",
+        "translation": "ISSCC",
+        "strategy": "preserve",
+        "note": "International Solid-State Circuits Conference，国际固态电路会议，顶级半导体电路设计会议。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "HBM4",
+        "term": "HBM4",
+        "translation": "HBM4",
+        "strategy": "preserve",
+        "note": "High Bandwidth Memory 第四代，高带宽内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "LPDDR6",
+        "term": "LPDDR6",
+        "translation": "LPDDR6",
+        "strategy": "preserve",
+        "note": "Low Power Double Data Rate 第六代，低功耗双倍数据速率内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "GDDR7",
+        "term": "GDDR7",
+        "translation": "GDDR7",
+        "strategy": "preserve",
+        "note": "Graphics Double Data Rate 第七代，图形用双倍数据速率内存。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "PHY",
+        "term": "PHY",
+        "translation": "物理层",
+        "strategy": "translate",
+        "note": "Physical Layer，物理层接口电路。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "shmoo plot",
+        "term": "shmoo plot",
+        "translation": "舒姆图",
+        "strategy": "translate",
+        "note": "表征芯片在不同电压、频率等参数下工作范围的测试图表。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "bitcell",
+        "term": "bitcell",
+        "translation": "存储单元",
+        "strategy": "translate",
+        "note": "存储单元，存储器中最基本的存储单位。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "COP (Cell-Over-Periphery)",
+        "term": "COP (Cell-Over-Periphery)",
+        "translation": "COP",
+        "strategy": "preserve",
+        "note": "一种 DRAM 架构，存储单元阵列堆叠在周边电路之上。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "BiCS",
+        "term": "BiCS",
+        "translation": "BiCS",
+        "strategy": "preserve",
+        "note": "Bit Cost Scalable，一种 3D NAND 存储技术。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MRAM",
+        "term": "MRAM",
+        "translation": "MRAM",
+        "strategy": "preserve",
+        "note": "Magnetoresistive Random-Access Memory，磁阻随机存取存储器。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DWDM",
+        "term": "DWDM",
+        "translation": "密集波分复用",
+        "strategy": "translate",
+        "note": "Dense Wavelength Division Multiplexing，密集波分复用。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CPO",
+        "term": "CPO",
+        "translation": "共封装光学",
+        "strategy": "translate",
+        "note": "Co-Packaged Optics，共封装光学。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "UCIe",
+        "term": "UCIe",
+        "translation": "UCIe",
+        "strategy": "preserve",
+        "note": "Universal Chiplet Interconnect Express，通用芯粒互连标准。",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "die shot",
+        "term": "die shot",
+        "translation": "芯片显微照片",
+        "strategy": "translate",
+        "note": "芯片显微照片，展示芯片布局。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CoWoS",
+        "term": "CoWoS",
+        "translation": "CoWoS",
+        "strategy": "preserve",
+        "note": "Chip-on-Wafer-on-Substrate，台积电的一种 2.5D/3D 封装技术。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "半导体制造工艺节点。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "flops/mm²",
+        "term": "flops/mm²",
+        "translation": "FLOPS/mm²",
+        "strategy": "preserve",
+        "note": "每平方毫米的浮点运算次数，衡量计算密度。",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+    "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+    "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+    "key_points": [
+      "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+      "其密度显著高于三星的1b和1z工艺。",
+      "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+    ],
+    "translation_notes": [
+      "“bit density”译为“比特密度”或“位密度”。",
+      "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+      "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+      "比较级（“compared to”）的翻译需清晰体现优势程度。"
+    ]
+  },
+  "translations": [
+    "https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg",
+    "SK海力士 1c GDDR7 规格参数与芯片显微照片。来源：SK海力士，ISSCC 2026",
+    "尽管LPDDR6是采用新存储技术的一次代际飞跃，但SK海力士在其1c工艺节点上实现的GDDR7进步更为显著。其在1.2V/1.2V电压下，时钟频率最高可达48 Gb/s。即使在仅1.05V/0.9V的电压下，其频率也能达到30.3 Gb/s，高于RTX 5080显卡中使用的30 Gb/s显存。",
+    "https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg",
+    "三星 1z GDDR7 舒姆图与芯片显微照片。来源：三星，ISSCC 2024",
+    "https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg",
+    "三星 1b GDDR7 规格参数与芯片显微照片。来源：三星，ISSCC 2025",
+    "其实现的位密度为0.412 Gb/mm²。作为对比，三星1b工艺的位密度为0.309 Gb/mm²，而其更早的1z工艺位密度则为0.192 Gb/mm²。",
+    "https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png",
+    "各厂商 LPDDR5X 与 GDDR7 位密度对比。来源：SemiAnalysis",
+    "GDDR7 的位密度低于 LPDDR5X，通常约为后者的 70%。尽管其数据传输速率要高得多，但这在功耗和面积方面都付出了代价。",
+    "GDDR7 密度较低，是因为为了实现高访问速度，其外围电路面积显著增加。因此，实际的存储阵列在芯片面积中所占比例较小。这种更复杂的逻辑控制电路，是 GDDR7 所采用的三电平脉冲幅度调制（PAM3）和四倍数据速率（QDR，每个时钟周期传输4个符号）信号技术所必需的。",
+    "GDDR7 主要用于游戏 GPU 应用，这类应用需要高内存带宽，但与 HBM 相比，对成本和容量的要求较低。英伟达（NVIDIA）曾在 2025 年宣布其 Rubin CPX 大上下文 AI 处理器将配备 128GB GDDR7，但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。",
+    "我们在内存模型中详细分析了 HBM、DDR 和 LPDDR 在不同制程节点上的晶圆产量、良率、密度、销售成本（COGS）等数据。"
+  ]
+}

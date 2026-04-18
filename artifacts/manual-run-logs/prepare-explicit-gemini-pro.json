@@ -1,0 +1,10 @@
+{
+  "status_code": 400,
+  "elapsed_s": 0.066,
+  "json_summary": {
+    "project_id": null,
+    "review_required": null,
+    "total_candidates": null,
+    "section_count": 0
+  }
+}

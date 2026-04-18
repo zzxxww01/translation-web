@@ -1,0 +1,25 @@
+{
+  "items": [
+    {
+      "source": "Apr 15, 2026 · Paid",
+      "translation": "2026 年 4 月 15 日 · 付费文章",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "By Afzal Ahmad, Gerald Wong, Daniel Nishball, and 4 others",
+      "translation": "作者：Afzal Ahmad、Gerald Wong、Daniel Nishball 等 7 人",
+      "tokenized_translation": "作者：[[[LINK_1|Afzal Ahmad]]]、[[[LINK_2|Gerald Wong]]]、[[[LINK_3|Daniel Nishball]]] 等 7 人",
+      "format_issues": [],
+      "occurrences": 1
+    },
+    {
+      "source": "ISSCC 2026 Roundup",
+      "translation": "ISSCC 2026 前瞻综述",
+      "tokenized_translation": null,
+      "format_issues": [],
+      "occurrences": 1
+    }
+  ]
+}

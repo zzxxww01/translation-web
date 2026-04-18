@@ -1,0 +1,63 @@
+三星和SK海力士均展示了各自的LPDDR6芯片。我们将首先讨论三星的芯片，稍后再转向SK海力士的。
+
+https://substackcdn.com/image/fetch/$s_!Odn_!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb15266c9-bc1e-4365-9316-28d2a6e36fac_2880x1620.jpeg
+
+LPDDR5X 与 LPDDR6 对比。来源：三星，ISSCC 2026
+
+三星介绍了其LPDDR6架构，并详细阐述了所采用的节能技术。
+
+https://substackcdn.com/image/fetch/$s_!Ysn8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0098a613-71de-4d6c-b446-2a203e66fef7_2880x1620.jpeg
+
+LPDDR6 子通道与存储体结构。来源：三星，ISSCC 2026
+
+LPDDR6采用了每颗芯片两个子通道的架构，每个子通道包含16个存储体。它还具备两种模式：正常模式和能效模式。在能效模式下，第二个子通道会断电，由主子通道控制全部32个存储体。然而，访问第二个子通道中的数据会带来延迟惩罚。
+
+双子通道架构也意味着外围电路（如命令解码器、串行化与控制电路）的数量翻倍。根据三星和SK海力士提供的芯片照片，这一面积惩罚约占芯片总面积的5%，导致每片晶圆的总比特数有所减少。
+
+https://substackcdn.com/image/fetch/$s_!79tH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F68f2f392-7912-4f69-9c53-ef6c4f6942b6_2880x1620.jpeg
+
+LPDDR6 信号方案。来源：三星，ISSCC 2026
+
+与采用三电平脉冲幅度调制（PAM3）信号的GDDR7不同，LPDDR6将继续使用不归零制（NRZ）。然而，它并不使用标准的NRZ，因为其信号眼图裕量会不足。LPDDR6采用的是宽不归零制（Wide NRZ），每个子通道有12个数据（DQ）引脚，且每次操作的突发长度为24。
+
+https://substackcdn.com/image/fetch/$s_!GQm1!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F1737c518-8a4f-4042-a536-513a9f769cb8_2880x1620.jpeg
+
+LPDDR6 每次突发的元数据与数据总线翻转（DBI）位分配。来源：三星，ISSCC 2026
+
+这里有个细节值得注意：12×24等于288，并非2的幂次方。剩余的32位被分配给了两种用途：16位用于元数据（如纠错码ECC），另外16位则用于数据总线翻转（DBI）。
+
+数据总线翻转（DBI）是一种节能和信号完整性机制。在发送一个突发数据之前，控制器会检查与前一次突发相比，是否有超过一半的比特位将发生状态翻转。如果是，控制器就会将所有比特位取反，并设置一个DBI标志位，以便接收端知道需要再次取反才能得到真实数据。这一机制将同时发生翻转的输出信号最大数量限制在总线宽度的一半，从而降低了功耗和电源噪声。
+
+计算有效带宽时，必须考虑这些元数据和DBI位，公式如下：带宽 = 数据速率 × 突发长度（24位） × 数据位（32位） / 数据包总位数（36位）。因此，在12.8 Gb/s的数据速率下，有效带宽为34.1 GB/s；而在14.4 Gb/s下，则为38.4 GB/s。
+
+https://substackcdn.com/image/fetch/$s_!bjV0!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F986010c2-7d39-4d5f-b195-76d6c653c5ea_2880x1620.jpeg
+
+三星 LPDDR6 高频电源域优化。来源：三星，ISSCC 2026
+
+LPDDR6 有两个恒定电源域：VDD2C 为 0.875V，VDD2D 为 1.0V。通过精心选择外围逻辑电路所使用的电源域，读取功耗降低了 27%，写入功耗降低了 22%。
+
+https://substackcdn.com/image/fetch/$s_!QJ_x!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8741b331-6528-4e4f-a064-722f271f43a0_2880x1620.jpeg
+
+三星 LPDDR6 在低数据速率下的 I/O 电源切换。来源：三星，ISSCC 2026
+
+https://substackcdn.com/image/fetch/$s_!iMMC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F06109578-4db8-490e-b963-1968a2ebacb0_2880x1620.jpeg
+
+三星 LPDDR6 额外的低功耗 DQ/CA 路径。来源：三星，ISSCC 2026
+
+LPDDR在空闲时主要运行于3.2 Gb/s及以下的低数据速率。三星将重点放在这些较低数据速率下的功耗节省上，通过精心利用电压域，同时降低了待机功耗和读写功耗。
+
+https://substackcdn.com/image/fetch/$s_!Tycr!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F931c917e-8cf5-4e59-9b07-45faa91aeee0_2880x1620.jpeg
+
+LPDDR6 重布线层时序与布局优势。来源：三星，ISSCC 2026
+
+通过使用重布线层，三星可以将相关电路在物理上布局得更近。这缩短了关键延迟路径，并降低了其对电压和温度变化的敏感性。在 LPDDR6 的高频下，更严格的时序控制和更小的变化至关重要。
+
+https://substackcdn.com/image/fetch/$s_!UXaU!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F295c4906-10e2-4877-909b-d7c76e61a6f4_2880x1620.jpeg
+
+三星 LPDDR6 规格参数与芯片显微照片。来源：三星，ISSCC 2026
+
+https://substackcdn.com/image/fetch/$s_!003E!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6c037b47-34b6-41db-b615-2e62e41bba05_2880x1620.jpeg
+
+三星 LPDDR6 舒姆图。来源：三星，ISSCC 2026
+
+三星的 LPDDR6 可在 0.97V 电压下实现 12.8 Gb/s 的数据速率，在 1.025V 电压下最高可达 14.4 Gb/s。每个 16 Gb 芯片的面积为 44.5 mm²，基于未知的 10纳米级工艺，其密度为 0.360 Gb/mm²。这一密度显著低于采用 1b 节点的 LPDDR5X（0.447 Gb/mm²），仅略高于采用 1a 节点的 LPDDR5X（0.341 Gb/mm²）。虽然双子通道架构确实带来了一定的面积代价，但 LPDDR6 本身似乎也存在其他问题。所描述的存储密度让我们相信，这款 LPDDR6 原型芯片是在其 1b 工艺上制造的。

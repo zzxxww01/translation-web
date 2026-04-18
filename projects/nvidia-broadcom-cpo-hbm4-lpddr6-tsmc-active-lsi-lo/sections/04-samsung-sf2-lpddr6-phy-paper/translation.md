@@ -1,0 +1,13 @@
+https://substackcdn.com/image/fetch/$s_!EUBE!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F46165883-4137-4a8e-8fbd-76ee3b9dafd5_2880x1620.jpeg
+
+三星 LPDDR6 物理层测试芯片规格参数与芯片显微照片。来源：三星，ISSCC 2026
+
+三星还展示了与 LPDDR6 接口的逻辑芯片上的物理层。这些物理层采用其全新的 SF2 工艺制造，最高支持 14.4 Gb/s 速率。其接口长度为 2.32 毫米，面积为 0.695 平方毫米，对应的带宽密度分别为每毫米 16.6 Gb/s 和每平方毫米 55.3 Gb/s。
+
+https://substackcdn.com/image/fetch/$s_!NkaV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ffa36890f-e205-4a23-8281-71bf8c199448_2880x1620.jpeg
+
+三星 LPDDR6 物理层能效模式功耗降低效果。来源：三星，ISSCC 2026
+
+这些物理层也支持 LPDDR6 芯片实现的能效模式，该模式可将读取功耗降低 39%，写入功耗降低 29%。
+
+物理层还能通过门控非活跃的次子通道的高速时钟路径，来增强这一能效模式。结合时钟门控技术，读写功耗降低幅度接近 50%，空闲功耗则可降低 41%。

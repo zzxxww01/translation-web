@@ -4,11 +4,16 @@ from datetime import datetime
 from typing import List, Literal, Optional
 from urllib.parse import unquote
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Body
 from pydantic import BaseModel, Field
 
-from src.api.dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep
+from src.api.dependencies import (
+    GlossaryManagerDep,
+    LongformLLMProviderDep,
+    ProjectManagerDep,
+)
 from src.api.middleware import BadRequestException, NotFoundException
+from src.api.utils.llm_factory import create_llm_provider
 from src.core.glossary import infer_glossary_tags, normalize_glossary_tags
 from src.core.models import GlossaryTerm, TranslationStrategy
 from src.services.terminology_review_service import TerminologyReviewService
@@ -69,6 +74,10 @@ class SubmitTermReviewRequest(BaseModel):
 class CheckConflictRequest(BaseModel):
     original: str
     translation: Optional[str] = None
+
+
+class PrepareTermReviewRequest(BaseModel):
+    model: Optional[str] = None
 
 
 def _normalize_tags(tags: Optional[List[str]]) -> List[str]:
@@ -335,15 +344,21 @@ async def prepare_term_review(
     project_id: str,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
+    request: PrepareTermReviewRequest = Body(default_factory=PrepareTermReviewRequest),
 ):
     try:
+        if request.model:
+            llm = create_llm_provider(provider=request.model)
+
         service = TerminologyReviewService(
             llm_provider=llm,
             project_manager=pm,
             glossary_manager=gm,
         )
         return service.prepare_review(project_id)
+    except ValueError as exc:
+        raise BadRequestException(detail=str(exc)) from exc
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 

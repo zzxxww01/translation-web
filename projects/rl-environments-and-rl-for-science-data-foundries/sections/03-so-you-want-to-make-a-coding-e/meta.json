@@ -27,12 +27,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "对编程环境的需求如此之高，以至于我们认为，一些已倒闭的初创公司被收购，纯粹是看中了其手中另一个私有的 GitHub 代码库——那是构建环境的原材料。要理解这些代码库为何如此宝贵，需要了解编程环境究竟是如何构建的。这个过程比看起来要复杂得多。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.942927",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +123,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "SWE-rebench 是一个基准测试，它汇集了来自 GitHub 的数千个 Python 任务，并展示了这些环境的构建方式。它所采用的流程也是自动化的，这正是我们预期各大实验室会采用的做法。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.942998",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +219,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "该流程首先从下载 GitHub 存档开始，其中包含 3 万个代码库和 45 万个采用宽松许可证的 PR。随后，该数据集会经过多轮筛选，条件包括：PR 必须已解决、已合并到主分支、对问题有充分描述、且影响多个文件等。PR 还必须引入或修改测试文件，因为这是用于评分的依据。例如，如果模型的补丁使得先前失败的测试得以通过（且不破坏其他测试），则该任务被标记为已解决。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943033",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +315,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "为了实现环境配置的自动化，LLM 会为每个任务生成安装指令。模型读取代码库中的相关文件（如 README、setup.py、requirements.txt、Docker 文件），然后综合生成一个结构化的 JSON“配方”，其中指定了 Python 版本、依赖安装命令和测试执行命令。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943065",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +411,76 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Y6RD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F997762d1-a8cc-47ab-b1b5-494566767783_1460x779.png",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943093",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!Y6RD!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F997762d1-a8cc-47ab-b1b5-494566767783_1460x779.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -216,13 +536,76 @@
           "created_at": "2026-04-10T22:52:40.341936",
           "tokenized_text": "来源：[[[LINK_1|Badertdinov, Golubev 等人]]]",
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：Badertdinov, Golubev 等人",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943194",
+          "tokenized_text": "来源：[[[LINK_1|Badertdinov, Golubev 等人]]]",
+          "format_issues": []
         }
       },
       "confirmed": "来源：Badertdinov, Golubev 等人",
       "confirmed_tokenized": "来源：[[[LINK_1|Badertdinov, Golubev 等人]]]",
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -249,12 +632,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "随后，每个候选任务都会经过基于执行的验证。环境在容器中实例化，并执行来自PR测试补丁的测试。一个任务只有在满足以下所有条件时才被视为有效：第一，在应用修复补丁前，至少有一个测试失败；第二，应用补丁后，所有先前失败的测试均通过；第三，所有原先已通过的测试在补丁应用后依然通过。经过所有筛选后，我们从最初的45万个任务中最终得到了21,336个有效任务。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943225",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -281,12 +728,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "但大多数 PR 无法满足这些严格标准，这正是良率低的原因。SWE-smith 通过以下流程证明了这一点：首先，让 LLM 安装代码库的最新提交版本。接着，通过四种方法合成缺陷：1) 提示模型在正常函数中引入细微错误；2) 应用确定性 AST 转换（例如翻转 if/else 代码块或移除循环）；3) 使用 LLM，根据当前代码库的语义来反转真实的 PR；4) 将已验证的单函数缺陷组合成更困难的多文件任务。每个候选缺陷都会经过验证，检查其是否至少破坏了一个现有测试。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943253",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -313,12 +824,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "重要的是，这些方法并非互斥。PR挖掘能从真实的开发历史中捕获现实的错误模式，而合成生成则能提供覆盖整个代码库的体量和广度。一个拥有私有代码库访问权限的实验室，可以针对同一环境同时运行这两条流水线：先挖掘PR，再用合成错误对其进行增强。这种组合方法很可能近似地反映了前沿实验室如何为代码构建RL环境。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943281",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -345,12 +920,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在规模化层面，这些流水线能产出数以万计的任务。例如，DeepSeek最终使用了从GitHub提取的24,667个编码任务来训练其V3.2模型。我们从Kimi等其他实验室了解到，所开发的基础设施能够支持同时实例化超过10,000个环境实例。一般而言，任务难度越高，训练期间所需的轨迹推演就越多。这是因为问题更难解决，而更多的推演意味着模型拥有更多的“尝试机会”。然而，这是以降低每次推演的速度为代价的——追求高吞吐量就会牺牲速度。",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943307",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -377,12 +1016,76 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!7Ln8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe8df58ac-7c11-491d-9233-53f934d71a74_1536x1011.png",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943332",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!7Ln8!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe8df58ac-7c11-491d-9233-53f934d71a74_1536x1011.png",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -416,13 +1119,76 @@
           "created_at": "2026-04-10T22:52:40.341950",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "pro": {
+          "text": "来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-15T16:16:42.943359",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
       "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.934999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+          "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+          "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "Serves as a technical deep dive to prove the complexity of RL environments, justifying their high market value and startup valuations.",
+          "relation_to_previous": "Fulfills the promise of explaining the mechanics behind the coding environments introduced in the previous section.",
+          "relation_to_next": "After establishing the technical difficulty of one domain (coding), it zooms back out to discuss the broader industry applying this to multiple domains (Data Foundries).",
+          "key_points": [
+            "Private GitHub repos are highly valuable assets for constructing unique RL environments.",
+            "Tasks undergo rigorous 'execution-based verification' in containerized environments.",
+            "Strict pass/fail logic is applied to test patches to validate tasks before they are used for training."
+          ],
+          "translation_notes": [
+            "Ensure precise technical translation of 'execution-based verification' (基于执行的验证).",
+            "The logic of 'failing before, passing after' (打补丁前失败，打补丁后通过) must be translated with absolute logical clarity.",
+            "Translate 'test patch' and 'solution patch' distinctly (测试补丁 vs. 修复补丁)."
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "译文将原文的‘defunct startups are getting acquired specifically for the value of another private GitHub repo’处理为一个较长的分句，虽然准确，但节奏稍显拖沓，削弱了原文紧凑、略带讽刺的‘insider’语气。"
+          },
+          {
+            "type": "structure",
+            "description": "原文的筛选条件是以冒号引导的并列列举。译文使用了顿号连接，但‘对问题有充分描述、涉及多个文件等’这一部分，将‘have sufficient descriptions of the problem’和‘impact more than one file’这两个独立条件用顿号简单并列，在中文中可能被误解为‘对问题有充分描述且涉及多个文件’。虽然加了‘等’字，但逻辑清晰度有提升空间。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文准确传达了三个条件，但‘所有之前通过的测试继续保持通过’这个表述，虽然正确，在技术语境下不如‘所有原先通过的测试在打补丁后依然通过’或‘所有既有的通过测试不受影响’来得直接和地道。‘继续保持通过’略显口语化。"
+          },
+          {
+            "type": "readability",
+            "description": "句子较长，包含多个步骤和方法列举。虽然译文已尝试使用分号和列举，但整个句子负担仍然较重，读者需要一口气消化‘证明方式’下的‘安装’步骤和‘四种方法’的详细内容。"
+          },
+          {
+            "type": "terminology",
+            "description": "译文将‘rollouts’译为‘轨迹推演’是正确的。最后一句‘吞吐量的提升往往伴随着速度的降低’表述上存在逻辑矛盾。原文是‘throughput comes at the expense of speed’，意指‘（追求）高吞吐量是以（牺牲）速度为代价的’。译文‘提升伴随着降低’容易产生歧义，似乎两者在同时变化。"
+          }
+        ]
+      },
       "history": []
     }
   ]

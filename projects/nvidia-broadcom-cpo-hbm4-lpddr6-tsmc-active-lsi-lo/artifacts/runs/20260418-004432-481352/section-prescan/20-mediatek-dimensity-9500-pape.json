@@ -1,0 +1,48 @@
+{
+  "section_id": "20-mediatek-dimensity-9500-pape",
+  "new_terms": [
+    {
+      "term": "Contacted Gate Pitch (CGP)",
+      "suggested_translation": "接触栅极间距 (CGP)",
+      "context": "芯片制造工艺参数",
+      "confidence": 0.9
+    },
+    {
+      "term": "N3E",
+      "suggested_translation": "N3E",
+      "context": "台积电制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "N3P",
+      "suggested_translation": "N3P",
+      "context": "台积电制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "C1 Ultra",
+      "suggested_translation": "C1 Ultra",
+      "context": "联发科高性能核心代号",
+      "confidence": 0.9
+    },
+    {
+      "term": "iso-leakage",
+      "suggested_translation": "等漏电",
+      "context": "性能/功耗比较条件",
+      "confidence": 0.8
+    },
+    {
+      "term": "iso-performance",
+      "suggested_translation": "等性能",
+      "context": "性能/功耗比较条件",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "tsmc": "台积电",
+    "mediatek": "联发科",
+    "isscc": "ISSCC"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T01:54:57.690228"
+}

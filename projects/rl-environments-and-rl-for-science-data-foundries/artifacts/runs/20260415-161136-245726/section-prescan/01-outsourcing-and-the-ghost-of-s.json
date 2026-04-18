@@ -1,0 +1,25 @@
+{
+  "section_id": "01-outsourcing-and-the-ghost-of-s",
+  "new_terms": [
+    {
+      "term": "Sacra",
+      "suggested_translation": "Sacra",
+      "context": "数据来源机构名",
+      "confidence": 0.9
+    },
+    {
+      "term": "SemiAnalysis",
+      "suggested_translation": "SemiAnalysis",
+      "context": "半导体分析机构名",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "Scale AI": "Scale AI",
+    "Meta": "Meta",
+    "Superintelligence": "超级智能",
+    "Surge": "Surge"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T16:12:03.577096"
+}

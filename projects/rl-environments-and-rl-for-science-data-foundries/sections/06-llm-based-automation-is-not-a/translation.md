@@ -1,19 +1,19 @@
-
+关于AI将导致工作（尤其是白领工作）自动化的猜测一直不绝于耳。OpenAI的GDPval论文中有一个有趣的数据点，与这一假设相悖。OpenAI发现，人类专家完成任务的速度更快，且成本低于没有AI辅助的情况。随着AI能力的提升，人类得到的是增强，而非被自动化取代。
 
 https://substackcdn.com/image/fetch/$s_!szHY!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd48cf181-b0d4-4e01-af41-d3768ea66d19_1130x1100.png
 
 来源：OpenAI。SemiAnalysis 数据点反映了成为 SemiAnalysis 客户所获得的速度和成本提升。
 
+短期内，专家工作可能不会走向自动化，而是实现任务增强。对于软件工程这类任务，情况很可能就是如此。
 
+再举一例，在AI热潮之前，许多人曾预测放射学将被自动化。这源于视觉模型能力的提升。尽管技术持续进步，但这并未成为现实。
 
-
-
-
+事实证明，放射学远比单纯的扫描分析更为复杂。
 
 https://substackcdn.com/image/fetch/$s_!1l6B!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F50035824-6960-41dd-a500-980d0bc38d14_1140x925.png
 
 来源：Works In Progress
 
+模型主要将增强工作者能力的观点，可能在咨询或软件工程等专业领域得到印证。然而，我们认为这不太可能适用于决策链条短、重复性高的任务，例如呼叫中心工作。
 
-
-
+即便技术能力具备，应用落地仍面临一些障碍。这包括但不限于网络服务提供商和公司采取的防御性姿态。对于智能体而言，这一点尤为明显。

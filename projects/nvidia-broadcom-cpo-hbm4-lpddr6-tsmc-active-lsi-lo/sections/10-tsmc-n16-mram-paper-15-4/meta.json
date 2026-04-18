@@ -1,0 +1,1979 @@
+{
+  "section_id": "10-tsmc-n16-mram-paper-15-4",
+  "title": "TSMC N16 MRAM - Paper 15.4",
+  "title_translation": "TSMC N16 MRAM - Paper 15.4",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "TSMC presented an updated STT-MRAM on their N16 node, building on their previous work from ISSCC 2023. TSMC is positioning the MRAM as an embedded non-volatile memory (eNVM), for use in automotive, industrial, and edge applications, which do not need the most advanced technology but instead reliability.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0184",
+      "parent_block_index": 184,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TSMC presented an updated STT-MRAM on their N16 node, building on their previous work from ISSCC 2023. TSMC is positioning the MRAM as an embedded non-volatile memory (eNVM), for use in automotive, industrial, and edge applications, which do not need the most advanced technology but instead reliability.",
+      "parent_block_plain_text": "TSMC presented an updated STT-MRAM on their N16 node, building on their previous work from ISSCC 2023. TSMC is positioning the MRAM as an embedded non-volatile memory (eNVM), for use in automotive, industrial, and edge applications, which do not need the most advanced technology but instead reliability.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 304,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电展示了其基于N16制程节点的更新版自旋转移矩磁阻随机存取存储器（STT-MRAM），该工作建立在2023年ISSCC上先前研究的基础上。台积电将这款MRAM定位为嵌入式非易失性存储器，主要面向汽车、工业和边缘应用。这些应用场景并不追求最先进的制程技术，而是将可靠性置于首位。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.231990",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb74d1b16-3ff4-4bca-8df1-6e8909f865d1_2880x1620.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb74d1b16-3ff4-4bca-8df1-6e8909f865d1_2880x1620.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0185",
+      "parent_block_index": 185,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb74d1b16-3ff4-4bca-8df1-6e8909f865d1_2880x1620.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb74d1b16-3ff4-4bca-8df1-6e8909f865d1_2880x1620.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb74d1b16-3ff4-4bca-8df1-6e8909f865d1_2880x1620.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb74d1b16-3ff4-4bca-8df1-6e8909f865d1_2880x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232047",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!AEKe!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb74d1b16-3ff4-4bca-8df1-6e8909f865d1_2880x1620.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "TSMC N16 MRAM Design Features and Die Floorplan. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Design Features and Die Floorplan. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0186",
+      "parent_block_index": 186,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC N16 MRAM Design Features and Die Floorplan. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC N16 MRAM Design Features and Die Floorplan. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Design Features and Die Floorplan. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 73,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电N16 MRAM设计特性与芯片版图。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232136",
+          "tokenized_text": "[[[EM_1|台积电N16 MRAM设计特性与芯片版图。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "The MRAM features dual-port access so reads and writes can occur simultaneously — critical for over-the-air (OTA) updates in automotive, where the system cannot halt reads while firmware is being written.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0187",
+      "parent_block_index": 187,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The MRAM features dual-port access so reads and writes can occur simultaneously — critical for over-the-air (OTA) updates in automotive, where the system cannot halt reads while firmware is being written.",
+      "parent_block_plain_text": "The MRAM features dual-port access so reads and writes can occur simultaneously — critical for over-the-air (OTA) updates in automotive, where the system cannot halt reads while firmware is being written.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 204,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这款MRAM具备双端口访问能力，因此读取和写入操作可以同时进行。这一特性对于汽车应用中的空中下载更新至关重要，因为在写入固件时，系统不能中断读取操作。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232161",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2bb08e47-26dd-4357-b813-60ec053c33d4_2880x1620.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2bb08e47-26dd-4357-b813-60ec053c33d4_2880x1620.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0188",
+      "parent_block_index": 188,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2bb08e47-26dd-4357-b813-60ec053c33d4_2880x1620.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2bb08e47-26dd-4357-b813-60ec053c33d4_2880x1620.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2bb08e47-26dd-4357-b813-60ec053c33d4_2880x1620.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2bb08e47-26dd-4357-b813-60ec053c33d4_2880x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232183",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!mICA!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F2bb08e47-26dd-4357-b813-60ec053c33d4_2880x1620.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "TSMC N16 MRAM Shmoo Plot at -40 °C and 150 °C. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Shmoo Plot at -40 °C and 150 °C. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0189",
+      "parent_block_index": 189,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC N16 MRAM Shmoo Plot at -40 °C and 150 °C. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC N16 MRAM Shmoo Plot at -40 °C and 150 °C. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Shmoo Plot at -40 °C and 150 °C. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 71,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电N16 MRAM在-40°C和150°C下的舒姆图。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232237",
+          "tokenized_text": "[[[EM_1|台积电N16 MRAM在-40°C和150°C下的舒姆图。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "It features interleaved reads across modules with independent clocks, raising throughput to 51.2 Gb/s at 200 MHz. On silicon, the 84 Mb macro achieves 7.5ns read access time at 0.8V across -40 °C to 150 °C.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0190",
+      "parent_block_index": 190,
+      "parent_block_type": "p",
+      "parent_block_markdown": "It features interleaved reads across modules with independent clocks, raising throughput to 51.2 Gb/s at 200 MHz. On silicon, the 84 Mb macro achieves 7.5ns read access time at 0.8V across -40 °C to 150 °C.",
+      "parent_block_plain_text": "It features interleaved reads across modules with independent clocks, raising throughput to 51.2 Gb/s at 200 MHz. On silicon, the 84 Mb macro achieves 7.5ns read access time at 0.8V across -40 °C to 150 °C.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 206,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "其设计特点在于，支持跨模块的交错读取，且各模块拥有独立时钟。这使得在200MHz频率下，吞吐量提升至51.2 Gb/s。在硅芯片上，这个84 Mb的宏单元在0.8V电压、-40°C至150°C的温度范围内，实现了7.5纳秒的读取访问时间。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232259",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ac17a55-6e1f-415f-bebb-b5dd0c966ea9_2880x1620.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ac17a55-6e1f-415f-bebb-b5dd0c966ea9_2880x1620.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0191",
+      "parent_block_index": 191,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ac17a55-6e1f-415f-bebb-b5dd0c966ea9_2880x1620.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ac17a55-6e1f-415f-bebb-b5dd0c966ea9_2880x1620.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ac17a55-6e1f-415f-bebb-b5dd0c966ea9_2880x1620.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ac17a55-6e1f-415f-bebb-b5dd0c966ea9_2880x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232282",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!qUbb!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9ac17a55-6e1f-415f-bebb-b5dd0c966ea9_2880x1620.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "TSMC N16 MRAM Modular Macro Architecture. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Modular Macro Architecture. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 66,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0192",
+      "parent_block_index": 192,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC N16 MRAM Modular Macro Architecture. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC N16 MRAM Modular Macro Architecture. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Modular Macro Architecture. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 66,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 66,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电N16 MRAM模块化宏单元架构。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232332",
+          "tokenized_text": "[[[EM_1|台积电N16 MRAM模块化宏单元架构。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "The architecture is modular — configurable in 16 Mb, 8 Mb and 2 Mb modules that compose into macros from 8 Mb to 128 Mb. By combining large 16 Mb modules with a few smaller 2 Mb and 8 Mb modules, the capacity can be fine tuned to the needs of any design. For example, 5× 16 Mb modules and 2× 2 Mb modules form an 84 Mb macro.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0193",
+      "parent_block_index": 193,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The architecture is modular — configurable in 16 Mb, 8 Mb and 2 Mb modules that compose into macros from 8 Mb to 128 Mb. By combining large 16 Mb modules with a few smaller 2 Mb and 8 Mb modules, the capacity can be fine tuned to the needs of any design. For example, 5× 16 Mb modules and 2× 2 Mb modules form an 84 Mb macro.",
+      "parent_block_plain_text": "The architecture is modular — configurable in 16 Mb, 8 Mb and 2 Mb modules that compose into macros from 8 Mb to 128 Mb. By combining large 16 Mb modules with a few smaller 2 Mb and 8 Mb modules, the capacity can be fine tuned to the needs of any design. For example, 5× 16 Mb modules and 2× 2 Mb modules form an 84 Mb macro.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 325,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "该架构采用模块化设计——可配置为16 Mb、8 Mb和2 Mb的模块，这些模块组合成从8 Mb到128 Mb不等的宏单元。通过将大型的16 Mb模块与少量较小的2 Mb和8 Mb模块相结合，可以针对任何设计的需求对容量进行微调。例如，5个16 Mb模块和2个2 Mb模块即可构成一个84 Mb的宏单元。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232353",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe9063a9-d2b4-4d04-9dfd-ebf11aac4259_2880x1620.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe9063a9-d2b4-4d04-9dfd-ebf11aac4259_2880x1620.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0194",
+      "parent_block_index": 194,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe9063a9-d2b4-4d04-9dfd-ebf11aac4259_2880x1620.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe9063a9-d2b4-4d04-9dfd-ebf11aac4259_2880x1620.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe9063a9-d2b4-4d04-9dfd-ebf11aac4259_2880x1620.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe9063a9-d2b4-4d04-9dfd-ebf11aac4259_2880x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232371",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!yxjs!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fbe9063a9-d2b4-4d04-9dfd-ebf11aac4259_2880x1620.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "TSMC N16 MRAM Endurance and Reliability. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Endurance and Reliability. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 65,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0195",
+      "parent_block_index": 195,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC N16 MRAM Endurance and Reliability. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC N16 MRAM Endurance and Reliability. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Endurance and Reliability. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 65,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 65,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电N16 MRAM的耐久性与可靠性。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232418",
+          "tokenized_text": "[[[EM_1|台积电N16 MRAM的耐久性与可靠性。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "As stated earlier, reliability is where embedded MRAM lives or dies. After 1 million endurance cycles at -40 °C, the hard error rate stays well below 0.01 ppm — well within ECC correction range. Read disturb at 150 °C is below 10⁻²² ppm at typical read voltages, effectively negligible. The 168 Mb test chip passes reflow and supports 20-year retention at 150 °C, meeting stringent automotive requirements.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0196",
+      "parent_block_index": 196,
+      "parent_block_type": "p",
+      "parent_block_markdown": "As stated earlier, reliability is where embedded MRAM lives or dies. After 1 million endurance cycles at -40 °C, the hard error rate stays well below 0.01 ppm — well within ECC correction range. Read disturb at 150 °C is below 10⁻²² ppm at typical read voltages, effectively negligible. The 168 Mb test chip passes reflow and supports 20-year retention at 150 °C, meeting stringent automotive requirements.",
+      "parent_block_plain_text": "As stated earlier, reliability is where embedded MRAM lives or dies. After 1 million endurance cycles at -40 °C, the hard error rate stays well below 0.01 ppm — well within ECC correction range. Read disturb at 150 °C is below 10⁻²² ppm at typical read voltages, effectively negligible. The 168 Mb test chip passes reflow and supports 20-year retention at 150 °C, meeting stringent automotive requirements.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 406,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "如前所述，可靠性是嵌入式MRAM成败的关键。在-40°C下经过100万次耐久性循环后，其硬错误率仍远低于0.01 ppm——完全处于ECC（纠错码）的校正范围内。在150°C下，典型读取电压时的读取干扰低于10⁻²² ppm，实际上可忽略不计。这款168 Mb的测试芯片通过了回流焊测试，并支持在150°C下保持20年的数据保存期，满足了严苛的汽车应用要求。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232436",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef20058-3a8c-4df0-85e1-5912e2da26ff_2880x1620.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef20058-3a8c-4df0-85e1-5912e2da26ff_2880x1620.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0197",
+      "parent_block_index": 197,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef20058-3a8c-4df0-85e1-5912e2da26ff_2880x1620.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef20058-3a8c-4df0-85e1-5912e2da26ff_2880x1620.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef20058-3a8c-4df0-85e1-5912e2da26ff_2880x1620.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef20058-3a8c-4df0-85e1-5912e2da26ff_2880x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232453",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!hLrV!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0ef20058-3a8c-4df0-85e1-5912e2da26ff_2880x1620.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "TSMC N16 MRAM Specification vs Prior Work. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Specification vs Prior Work. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 67,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0198",
+      "parent_block_index": 198,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC N16 MRAM Specification vs Prior Work. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC N16 MRAM Specification vs Prior Work. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Specification vs Prior Work. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 67,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 67,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电N16 MRAM规格与先前工作的对比。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232498",
+          "tokenized_text": "[[[EM_1|台积电N16 MRAM规格与先前工作的对比。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Compared to the old MRAM on the same N16 node, the bitcell has shrunk 25% from 0.033 µm² to 0.0249 µm², and macro density increases to 16.0 Mb/mm² iso-capacity. The read speed drops from 6 ns to 5.5 ns iso-capacity, and the dual-port access and interleaved reads are entirely new.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0199",
+      "parent_block_index": 199,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Compared to the old MRAM on the same N16 node, the bitcell has shrunk 25% from 0.033 µm² to 0.0249 µm², and macro density increases to 16.0 Mb/mm² iso-capacity. The read speed drops from 6 ns to 5.5 ns iso-capacity, and the dual-port access and interleaved reads are entirely new.",
+      "parent_block_plain_text": "Compared to the old MRAM on the same N16 node, the bitcell has shrunk 25% from 0.033 µm² to 0.0249 µm², and macro density increases to 16.0 Mb/mm² iso-capacity. The read speed drops from 6 ns to 5.5 ns iso-capacity, and the dual-port access and interleaved reads are entirely new.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 280,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与同一N16节点上的旧款MRAM相比，其存储单元面积缩小了25%，从0.033 µm²降至0.0249 µm²，等容量下的宏单元密度则提升至16.0 Mb/mm²。读取速度在等容量下从6 ns降至5.5 ns，而双端口访问和交错读取功能则完全是新增的。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232516",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "While Samsung Foundry also published work on 8LPP eMRAM this year, TSMC’s is far more promising. It targets the needed features, has great performance, and is on a cheaper N16 node.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0200",
+      "parent_block_index": 200,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While Samsung Foundry also published work on 8LPP eMRAM this year, TSMC’s is far more promising. It targets the needed features, has great performance, and is on a cheaper N16 node.",
+      "parent_block_plain_text": "While Samsung Foundry also published work on 8LPP eMRAM this year, TSMC’s is far more promising. It targets the needed features, has great performance, and is on a cheaper N16 node.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 181,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管三星晶圆代工厂今年也发布了基于8LPP制程的嵌入式MRAM（eMRAM）研究成果，但台积电的方案显得更有前景。它不仅瞄准了所需的关键特性，性能表现优异，而且基于成本更低的N16制程节点。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232532",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F87ac2737-caab-46a2-8b88-417507719b1a_2880x1620.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F87ac2737-caab-46a2-8b88-417507719b1a_2880x1620.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0201",
+      "parent_block_index": 201,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F87ac2737-caab-46a2-8b88-417507719b1a_2880x1620.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F87ac2737-caab-46a2-8b88-417507719b1a_2880x1620.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F87ac2737-caab-46a2-8b88-417507719b1a_2880x1620.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 222,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F87ac2737-caab-46a2-8b88-417507719b1a_2880x1620.png",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232548",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!09sO!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F87ac2737-caab-46a2-8b88-417507719b1a_2880x1620.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "TSMC N16 MRAM Flash-Plus Roadmap. Source: TSMC, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Flash-Plus Roadmap. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 58,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0202",
+      "parent_block_index": 202,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*TSMC N16 MRAM Flash-Plus Roadmap. Source: TSMC, ISSCC 2026*",
+      "parent_block_plain_text": "TSMC N16 MRAM Flash-Plus Roadmap. Source: TSMC, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "TSMC N16 MRAM Flash-Plus Roadmap. Source: TSMC, ISSCC 2026",
+          "start": 0,
+          "end": 58,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 58,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电N16 MRAM Flash-Plus技术路线图。来源：台积电，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232591",
+          "tokenized_text": "[[[EM_1|台积电N16 MRAM Flash-Plus技术路线图。来源：台积电，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "TSMC is already planning the next-generation “Flash-Plus” variant with a 25% smaller bitcell and 100× higher endurance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0203",
+      "parent_block_index": 203,
+      "parent_block_type": "p",
+      "parent_block_markdown": "TSMC is already planning the next-generation “Flash-Plus” variant with a 25% smaller bitcell and 100× higher endurance.",
+      "parent_block_plain_text": "TSMC is already planning the next-generation “Flash-Plus” variant with a 25% smaller bitcell and 100× higher endurance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 119,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "台积电已在规划下一代的“Flash-Plus”变体，其存储单元面积将再缩小25%，耐久性则提升100倍。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:24:21.232609",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称"
+          },
+          {
+            "type": "readability",
+            "description": "句式可以更流畅，\"而是更看重可靠性\"的表述略显口语化，可微调以更贴合专业分析口吻。"
+          },
+          {
+            "type": "readability",
+            "description": "破折号后的解释性从句处理稍显生硬，可以调整得更符合中文表达习惯。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"在硅芯片实测中\"与\"On silicon\"存在细微偏差。\"On silicon\"更强调芯片实物/硅片实现，而\"实测\"可能隐含了与仿真对比，原文无此对比。"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "两处\"iso-capacity\"的翻译（\"在等容量条件下\"）略显冗长且重复，影响简洁性。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"前景要广阔得多\"语气积极，但原文\"far more promising\"在对比语境下，可考虑用更中性或略带分析性的措辞，以匹配全文的批判性视角。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

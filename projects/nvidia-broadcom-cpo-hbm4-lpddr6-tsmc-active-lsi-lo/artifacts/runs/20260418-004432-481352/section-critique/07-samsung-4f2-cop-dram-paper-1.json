@@ -1,0 +1,145 @@
+{
+  "section_id": "07-samsung-4f2-cop-dram-paper-1",
+  "reflection": {
+    "overall_score": 8.8,
+    "readability_score": 8.5,
+    "accuracy_score": 9.3,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 2,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "Peri-Under-Cell (PUC) DRAM",
+        "description": "术语翻译不一致，且首次出现时未按指南要求加注中文全称。",
+        "why_it_matters": "术语首次出现时未提供中文释义，不符合‘首次出现时采用“英文全称（中文释义）”格式’的指南要求，可能影响读者理解。",
+        "suggestion": "建议修改为：‘4F² 外围电路位于单元之下（Peri-Under-Cell, PUC）DRAM’。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "Cell-on-Peripheral (COP) DRAM",
+        "description": "术语翻译不一致，且首次出现时未按指南要求加注中文全称。",
+        "why_it_matters": "术语首次出现时未提供中文释义，不符合指南要求。虽然‘COP’在章节标题中已出现，但‘Cell-on-Peripheral’的全称是首次在正文出现，应加注。",
+        "suggestion": "建议修改为：‘4F² 单元位于外围电路之上（Cell-on-Peripheral, COP）DRAM’。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "At VLSI 2025, SK Hynix detailed their own 4F² Peri-Under-Cell (PUC) DRAM. At ISSCC, Samsung disclosed their own implementation of a 4F² Cell-on-Peripheral (COP) DRAM.",
+        "description": "句式略显平行和机械，可以调整得更流畅，以体现原文的对比关系。",
+        "why_it_matters": "原文通过‘At VLSI... At ISSCC...’形成对比。译文虽然准确，但‘在...上，...。而在...上，...。’的句式可以进一步优化，使对比更自然。",
+        "suggestion": "可以考虑调整为：‘在 VLSI 2025 上，SK海力士详细介绍了其 4F² PUC DRAM。到了 ISSCC，三星则披露了其 4F² COP DRAM 的实现方案。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 8,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "The vertical architecture presented by Samsung is essentially the same as that used by SK Hynix, with a cell wafer hybrid bonded on top of a peripheral wafer.",
+        "description": "‘都是将...堆叠在...之上’的表述略显冗长，可以更简洁。",
+        "why_it_matters": "科技翻译追求信息密度和简洁性。‘都是将...通过...堆叠在...之上’可以压缩，使句子更紧凑。",
+        "suggestion": "可以优化为：‘三星展示的垂直架构与SK海力士所采用的架构基本相同，都是通过混合键合将存储单元晶圆堆叠在外围电路晶圆之上。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 11,
+        "issue_type": "tone",
+        "severity": "high",
+        "original_text": "This is true for other NAND manufacturers, but Samsung has not brought hybrid bonding for NAND into high volume production and is still years away from doing so.",
+        "description": "译文‘对于其他NAND制造商而言确实如此’语气略显中性，未能完全传递原文隐含的对比和轻微质疑意味。",
+        "why_it_matters": "原文通过‘This is true for other... but Samsung has not...’结构，意在指出三星在混合键合NAND量产上落后于同行。译文陈述事实，但批判性视角稍弱。",
+        "suggestion": "可以调整为：‘这一点对其他NAND制造商成立，但三星尚未将用于NAND的混合键合技术投入大规模生产，且距离实现量产仍有数年之遥。’（‘成立’比‘确实如此’更具分析口吻）",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 17,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "First, they have reorganized the sub-wordline drivers (SWD) from 128 per cell block to 16 groups of 8. This reduces the number of signals required for the SWD by 75%.",
+        "description": "‘重组为16组，每组8个’表述清晰，但‘这使得...’略显翻译腔，可以更直接。",
+        "why_it_matters": "‘这使得’是常见的英文‘This...’句式投影，可以优化为更地道的中文表达。",
+        "suggestion": "可以调整为：‘首先，他们将子字线驱动器（SWD）从每个存储单元块128个重组为16组（每组8个），从而使SWD所需的信号数量减少了75%。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 18,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Next, they split the column select into an even and an odd path. This requires twice the multiplexers (MUX) but halves the column select line (CSL) count to 32 per data pin.",
+        "description": "‘这虽然需要...但将...’的转折关系处理得很好。‘每个数据引脚对应的...数量’可以更简洁。",
+        "why_it_matters": "‘每个数据引脚对应的’可以简化为‘每数据引脚的’，在技术语境下更紧凑。",
+        "suggestion": "可以优化为：‘其次，他们将列选择路径拆分为奇数和偶数两条路径。这虽然需要两倍数量的多路复用器（MUX），但将每数据引脚的列选择线（CSL）数量减半至32条。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 21,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "With hybrid bonding, the core circuitry, that is, bitline sense amplifiers (BLSA) and SWD can be placed under the cell array.",
+        "description": "‘核心电路——即位线感测放大器（BLSA）和子字线驱动器（SWD）——’的破折号使用正确，但‘可以放置在’略显被动，可以更主动。",
+        "why_it_matters": "‘可以放置在’是‘can be placed’的直接翻译。在中文科技文中，使用‘得以置于’或‘可置于’更简洁有力。",
+        "suggestion": "可以调整为：‘借助混合键合技术，核心电路——即位线感测放大器（BLSA）和子字线驱动器（SWD）——得以置于存储单元阵列下方。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 24,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Samsung adopted the “sandwich” structure, which allows them to maximize the area efficiency of the core circuitry, and reduce the edge region area, which is not under any cells.",
+        "description": "‘这使其能够...，并减少...’的句式稍显冗长。‘不位于任何存储单元下方的’定语较长。",
+        "why_it_matters": "‘which allows them to...’的从句可以更简洁地融入主句。定语可以调整语序，使句子更流畅。",
+        "suggestion": "可以优化为：‘三星采用了‘三明治’结构，以最大化核心电路的面积效率，并减少未被任何存储单元覆盖的边缘区域面积。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 33,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "performance/$",
+        "description": "术语翻译不一致。前文译为‘性能/价格比’，此处译为‘性能/价格比（performance/$）’，括号内英文与符号不一致。",
+        "why_it_matters": "术语前后应统一。且‘performance/$’在中文中通常译为‘性价比’或‘每美元性能’，‘性能/价格比’虽可理解，但非最常用。根据指南‘performance/$’译为‘性能/价格比’或‘每美元性能’，此处应保持一致。",
+        "suggestion": "建议统一为‘性能/价格比’，或根据上下文选择更常见的‘性价比’。若保留‘性能/价格比’，则括号内应为‘performance per dollar’或直接省略英文。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 33,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "On the otherhand, performance/$ of memory is highly sought after more than capacity for many use cases.",
+        "description": "‘更受重视’的翻译准确，但‘对于许多应用场景而言，...比单纯追求容量更受重视。’句式可以更精炼，信息密度更高。",
+        "why_it_matters": "原文是简洁的结论句。译文略显拖沓，‘单纯追求容量’是对‘capacity’的意译，虽无错，但可考虑更直接的对比。",
+        "suggestion": "可以优化为：‘另一方面，对于许多应用场景，内存的性能/价格比（performance/$）比容量本身更受重视。’或‘...内存的性价比比容量更受追捧。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

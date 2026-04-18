@@ -56,6 +56,11 @@ class ProgressTracker:
         with self._lock:
             return self._cache.pop(project_id, None)
 
+    def touch(self, progress: TranslationProgress) -> None:
+        """Refresh TTL and last-updated timestamp for an existing progress object."""
+        progress.last_updated_at = datetime.now()
+        progress._mono_ts = _time.monotonic()
+
     def record_error(
         self,
         progress: TranslationProgress,

@@ -1,0 +1,75 @@
+{
+  "section_id": "19-processors",
+  "title": "Processors",
+  "title_translation": "Processors",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "From small mobile CPUs to large AI accelerators, ISSCC featured first-time architectural breakdowns from MediaTek, Intel, AMD, Rebellions, and Microsoft. Many even included die shots.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0302",
+      "parent_block_index": 302,
+      "parent_block_type": "p",
+      "parent_block_markdown": "From small mobile CPUs to large AI accelerators, ISSCC featured first-time architectural breakdowns from MediaTek, Intel, AMD, Rebellions, and Microsoft. Many even included die shots.",
+      "parent_block_plain_text": "From small mobile CPUs to large AI accelerators, ISSCC featured first-time architectural breakdowns from MediaTek, Intel, AMD, Rebellions, and Microsoft. Many even included die shots.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 183,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "从移动端的小型CPU（中央处理器）到大型AI（人工智能）加速器，本届ISSCC（国际固态电路会议）首次披露了来自联发科（MediaTek）、英特尔（Intel）、AMD、Rebellions和微软（Microsoft）的多款产品的架构细节。其中许多甚至提供了芯片裸片（die）照片。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:54:43.543170",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.495,
+        "is_excellent": true,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": false
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 9.2,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "“芯片裸片（die）照片”的表述略显冗余，可更简洁。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

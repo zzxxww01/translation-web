@@ -1,0 +1,70 @@
+{
+  "section_id": "10-tsmc-n16-mram-paper-15-4",
+  "new_terms": [
+    {
+      "term": "STT-MRAM",
+      "suggested_translation": "自旋转移矩磁阻随机存取存储器",
+      "context": "MRAM的一种实现技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "embedded non-volatile memory (eNVM)",
+      "suggested_translation": "嵌入式非易失性存储器",
+      "context": "集成在芯片中的非易失性存储",
+      "confidence": 0.9
+    },
+    {
+      "term": "over-the-air (OTA)",
+      "suggested_translation": "空中下载",
+      "context": "用于固件更新",
+      "confidence": 0.9
+    },
+    {
+      "term": "hard error rate",
+      "suggested_translation": "硬错误率",
+      "context": "MRAM可靠性指标",
+      "confidence": 0.9
+    },
+    {
+      "term": "ECC",
+      "suggested_translation": "纠错码",
+      "context": "错误检测与纠正",
+      "confidence": 0.9
+    },
+    {
+      "term": "read disturb",
+      "suggested_translation": "读取干扰",
+      "context": "非破坏性读取引起的潜在数据错误",
+      "confidence": 0.9
+    },
+    {
+      "term": "reflow",
+      "suggested_translation": "回流焊",
+      "context": "芯片封装工艺",
+      "confidence": 0.9
+    },
+    {
+      "term": "8LPP",
+      "suggested_translation": "8纳米低功耗增强版",
+      "context": "三星的制程节点",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "mram": "MRAM",
+    "shmoo plot": "舒姆图",
+    "bitcell": "存储单元",
+    "dual-port access": "双端口访问",
+    "interleaved reads": "交错读取",
+    "macro": "宏单元",
+    "iso-capacity": "等容量",
+    "flash-plus": "Flash-Plus",
+    "node": "制程节点",
+    "foundry": "晶圆代工厂",
+    "tsmc": "台积电",
+    "samsung": "三星"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:35:26.235550"
+}

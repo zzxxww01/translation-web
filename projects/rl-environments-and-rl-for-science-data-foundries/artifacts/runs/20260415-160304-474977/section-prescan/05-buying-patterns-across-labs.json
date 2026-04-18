@@ -1,0 +1,44 @@
+{
+  "section_id": "05-buying-patterns-across-labs",
+  "new_terms": [
+    {
+      "term": "IMO Gold",
+      "suggested_translation": "IMO金牌",
+      "context": "指在IMO竞赛中获得金牌的模型版本",
+      "confidence": 0.9
+    },
+    {
+      "term": "GPT-5.1 Codex Max",
+      "suggested_translation": "GPT-5.1 Codex Max",
+      "context": "OpenAI的模型名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Gemini 2.5 Pro",
+      "suggested_translation": "Gemini 2.5 Pro",
+      "context": "Google的模型名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "Gemini 3",
+      "suggested_translation": "Gemini 3",
+      "context": "Google的模型名称",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "Anthropic": "Anthropic",
+    "OpenAI": "OpenAI",
+    "xAI": "xAI",
+    "Google DeepMind": "Google DeepMind",
+    "ChatGPT Agent": "ChatGPT智能体",
+    "UI Gyms": "UI训练场",
+    "post-training": "后训练",
+    "mid-training": "中期训练",
+    "pre-training": "预训练",
+    "human data team": "人工数据团队",
+    "PMs": "产品经理"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T16:19:05.460777"
+}

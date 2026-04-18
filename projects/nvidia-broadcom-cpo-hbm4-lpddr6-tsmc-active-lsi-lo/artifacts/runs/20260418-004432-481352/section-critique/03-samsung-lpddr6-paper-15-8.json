@@ -1,0 +1,97 @@
+{
+  "section_id": "03-samsung-lpddr6-paper-15-8",
+  "reflection": {
+    "overall_score": 8.9,
+    "readability_score": 8.8,
+    "accuracy_score": 9.2,
+    "conciseness_score": 8.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 6,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "the secondary sub-channel is powered down, and the primary sub-channel controls all 32 banks.",
+        "description": "术语“primary sub-channel”的翻译不一致且不够准确。",
+        "why_it_matters": "在同一段落中，前文将“primary sub-channel”译为“主（第一个）子通道”，括号内解释略显冗余。后文“主（第一个）子通道”的表述不够简洁，且“主”与“第一个”语义重复。在技术文档中，应使用更标准、一致的术语。",
+        "suggestion": "将“主（第一个）子通道”统一简化为“主子通道”。同时，将“第二个子通道”与“主子通道”对应，保持术语的对称性。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 10,
+        "issue_type": "terminology",
+        "severity": "high",
+        "original_text": "wide NRZ",
+        "description": "关键术语“wide NRZ”未加注中文解释，且“方案”一词略显冗余。",
+        "why_it_matters": "“wide NRZ”是LPDDR6的一项具体信号技术，首次出现时应提供中文全称或解释，以帮助读者理解其与“标准NRZ”的区别。",
+        "suggestion": "将“宽NRZ方案”修改为“宽不归零制（Wide NRZ）”，并在括号内加注。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 13,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "For those of you doing the math, 12×24 is 288, not a power of two.",
+        "description": "译文“细心的读者可能会计算”语气略显生硬，且“可能会计算”的表述不够自然。",
+        "why_it_matters": "原文“For those of you doing the math”是一种与读者互动的轻松口吻，译文应保留这种语气，使其更符合中文科技评论的阅读习惯。",
+        "suggestion": "可调整为：“这里有个细节值得注意：12×24等于288，并非2的幂次方。”或“算一下就知道：12×24等于288，不是2的幂。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 15,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "Bandwidth = Data Rate × Width (24 b) × Data (32 b) / Packet (36 b).",
+        "description": "公式中的参数“Width (24 b)”翻译不准确，可能导致理解偏差。",
+        "why_it_matters": "原文“Width (24 b)”很可能指的是“数据位宽（24位）”，但译文直接译为“宽度（24位）”过于笼统，且与后文的“数据位（32位）”在逻辑上容易混淆。必须精确传达每个参数的技术含义。",
+        "suggestion": "根据上下文（每个子通道12个DQ引脚，突发长度24），此处的“Width”应指“突发长度”。建议修改为：“带宽 = 数据速率 × 突发长度（24位） × 数据位（32位） / 数据包总位数（36位）”。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 23,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "Samsung focused heavily on saving power at these lower data rates through careful use of the voltage domains, reducing both standby and read/write power consumption.",
+        "description": "句子结构可以调整得更紧凑，动词“降低了”的主语不够清晰。",
+        "why_it_matters": "“通过...，从而降低了...”的句式稍显松散，且“降低了”的主语是“三星”还是“这一做法”有些模糊。优化后可以使因果逻辑更直接。",
+        "suggestion": "可调整为：“三星将重点放在这些较低数据速率下的功耗节省上，通过精心利用电压域，同时降低了待机功耗和读写功耗。”或“三星通过精心利用电压域，重点优化了这些低数据速率下的功耗，从而降低了待机与读写功耗。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 31,
+        "issue_type": "terminology",
+        "severity": "critical",
+        "original_text": "10nm-class process",
+        "description": "关键工艺节点术语翻译不准确。",
+        "why_it_matters": "“10nm-class process”是半导体行业的特定说法，指“10纳米级别”的工艺，而非字面的“10nm 级别工艺”。后者在中文语境中不够专业和通用。",
+        "suggestion": "应译为“10纳米级工艺”或“10纳米级别工艺”。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 31,
+        "issue_type": "tone",
+        "severity": "high",
+        "original_text": "there seem to be other problems with the LPDDR6 as well.",
+        "description": "批判性语气被轻微削弱。",
+        "why_it_matters": "原文“seem to be other problems”带有分析性和推测性的批判口吻。译文“但LPDDR6似乎还存在其他问题”基本正确，但“似乎”一词的力度可以稍强，以更贴合原文对三星技术可能存疑的立场。",
+        "suggestion": "可加强为：“但LPDDR6本身似乎也存在其他问题。”或“但LPDDR6看来也存在其他问题。”",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

@@ -1,0 +1,1505 @@
+{
+  "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+  "title": "SK Hynix 1c GDDR7 - Paper 15.9",
+  "title_translation": "SK Hynix 1c GDDR7 - Paper 15.9",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0100",
+      "parent_block_index": 100,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.030124",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!02R2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F75df5c4b-d65e-4d6e-ad17-46db43d1c124_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "SK Hynix 1c GDDR7 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix 1c GDDR7 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0101",
+      "parent_block_index": 101,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SK Hynix 1c GDDR7 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026*",
+      "parent_block_plain_text": "SK Hynix 1c GDDR7 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix 1c GDDR7 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 75,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SK海力士 1c GDDR7 规格参数与芯片显微照片。来源：SK海力士，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.030419",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "While the LPDDR6 is a generational leap with new memory technology, SK Hynix’s GDDR7 on their 1c process shows an even greater improvement, clocking up to 48 Gb/s at 1.2V/1.2V. Even at only 1.05V/0.9V, it can clock up to 30.3 Gb/s, higher than the 30 Gb/s memory in the RTX 5080.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0102",
+      "parent_block_index": 102,
+      "parent_block_type": "p",
+      "parent_block_markdown": "While the LPDDR6 is a generational leap with new memory technology, SK Hynix’s GDDR7 on their 1c process shows an even greater improvement, clocking up to 48 Gb/s at 1.2V/1.2V. Even at only 1.05V/0.9V, it can clock up to 30.3 Gb/s, higher than the 30 Gb/s memory in the RTX 5080.",
+      "parent_block_plain_text": "While the LPDDR6 is a generational leap with new memory technology, SK Hynix’s GDDR7 on their 1c process shows an even greater improvement, clocking up to 48 Gb/s at 1.2V/1.2V. Even at only 1.05V/0.9V, it can clock up to 30.3 Gb/s, higher than the 30 Gb/s memory in the RTX 5080.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 279,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管LPDDR6凭借新存储技术实现了代际飞跃，但SK海力士在其1c工艺节点上开发的GDDR7进步更为显著，其在1.2V/1.2V电压下的时钟频率最高可达48 Gb/s。即使在仅1.05V/0.9V的电压下，其频率也能达到30.3 Gb/s，高于RTX 5080显卡中使用的30 Gb/s显存。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.030489",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0103",
+      "parent_block_index": 103,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.030548",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!M7-j!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fb54fd8fd-325c-495b-bd98-4187c051138b_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "Samsung 1z GDDR7 Shmoo Plot and Die Shot. Source: Samsung, ISSCC 2024",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung 1z GDDR7 Shmoo Plot and Die Shot. Source: Samsung, ISSCC 2024",
+          "start": 0,
+          "end": 69,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0104",
+      "parent_block_index": 104,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung 1z GDDR7 Shmoo Plot and Die Shot. Source: Samsung, ISSCC 2024*",
+      "parent_block_plain_text": "Samsung 1z GDDR7 Shmoo Plot and Die Shot. Source: Samsung, ISSCC 2024",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung 1z GDDR7 Shmoo Plot and Die Shot. Source: Samsung, ISSCC 2024",
+          "start": 0,
+          "end": 69,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 69,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星 1z GDDR7 舒姆图与芯片显微照片。来源：三星，ISSCC 2024",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.030711",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0105",
+      "parent_block_index": 105,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.030768",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!zcG2!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F5fcf00cd-4001-4a32-8220-0846b9baa526_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Samsung 1b GDDR7 Specifications and Die Shot. Source: Samsung, ISSCC 2025",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung 1b GDDR7 Specifications and Die Shot. Source: Samsung, ISSCC 2025",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0106",
+      "parent_block_index": 106,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung 1b GDDR7 Specifications and Die Shot. Source: Samsung, ISSCC 2025*",
+      "parent_block_plain_text": "Samsung 1b GDDR7 Specifications and Die Shot. Source: Samsung, ISSCC 2025",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung 1b GDDR7 Specifications and Die Shot. Source: Samsung, ISSCC 2025",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 73,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星 1b GDDR7 规格参数与芯片显微照片。来源：三星，ISSCC 2025",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.030923",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "The bit density achieved is 0.412 Gb/mm², compared to 0.309 Gb/mm² on Samsung’s 1b process, and 0.192 Gb/mm² on Samsung’s older 1z process.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0107",
+      "parent_block_index": 107,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The bit density achieved is 0.412 Gb/mm², compared to 0.309 Gb/mm² on Samsung’s 1b process, and 0.192 Gb/mm² on Samsung’s older 1z process.",
+      "parent_block_plain_text": "The bit density achieved is 0.412 Gb/mm², compared to 0.309 Gb/mm² on Samsung’s 1b process, and 0.192 Gb/mm² on Samsung’s older 1z process.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 139,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "其实现的位密度为0.412 Gb/mm²，远高于三星1b工艺的0.309 Gb/mm²和更早1z工艺的0.192 Gb/mm²。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.030984",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0108",
+      "parent_block_index": 108,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 221,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.031041",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!tQdH!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fa8119950-b6d0-424a-af28-90305882aae1_1731x703.png",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "LPDDR5X vs. GDDR7 Density Comparison Across Vendors. Source: SemiAnalysis",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "LPDDR5X vs. GDDR7 Density Comparison Across Vendors. Source: SemiAnalysis",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0109",
+      "parent_block_index": 109,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*LPDDR5X vs. GDDR7 Density Comparison Across Vendors. Source: SemiAnalysis*",
+      "parent_block_plain_text": "LPDDR5X vs. GDDR7 Density Comparison Across Vendors. Source: SemiAnalysis",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "LPDDR5X vs. GDDR7 Density Comparison Across Vendors. Source: SemiAnalysis",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 73,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "各厂商 LPDDR5X 与 GDDR7 位密度对比。来源：SemiAnalysis",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.031134",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "GDDR7 has lower bit density than LPDDR5X, usually around 70% of the latter. Although it has much higher data rates, this comes at a cost, both in terms of power and area.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0110",
+      "parent_block_index": 110,
+      "parent_block_type": "p",
+      "parent_block_markdown": "GDDR7 has lower bit density than LPDDR5X, usually around 70% of the latter. Although it has much higher data rates, this comes at a cost, both in terms of power and area.",
+      "parent_block_plain_text": "GDDR7 has lower bit density than LPDDR5X, usually around 70% of the latter. Although it has much higher data rates, this comes at a cost, both in terms of power and area.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 170,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "GDDR7 的位密度低于 LPDDR5X，通常约为后者的 70%。尽管其数据传输速率要高得多，但这在功耗和面积方面都付出了代价。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.031159",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "GDDR7’s lower density is a result of the significantly higher periphery area for high access speeds. The actual memory arrays thus make up a smaller percentage of die area. This more complex logic control circuit is required for the PAM3 and QDR (4 symbols per clock cycle) signaling used in GDDR7.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0111",
+      "parent_block_index": 111,
+      "parent_block_type": "p",
+      "parent_block_markdown": "GDDR7’s lower density is a result of the significantly higher periphery area for high access speeds. The actual memory arrays thus make up a smaller percentage of die area. This more complex logic control circuit is required for the PAM3 and QDR (4 symbols per clock cycle) signaling used in GDDR7.",
+      "parent_block_plain_text": "GDDR7’s lower density is a result of the significantly higher periphery area for high access speeds. The actual memory arrays thus make up a smaller percentage of die area. This more complex logic control circuit is required for the PAM3 and QDR (4 symbols per clock cycle) signaling used in GDDR7.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 298,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "GDDR7 密度较低，是因为为了实现高访问速度，其外围电路面积显著增加。因此，实际的存储阵列在芯片面积中所占比例较小。这种更复杂的逻辑控制电路，是 GDDR7 所采用的三电平脉冲幅度调制（PAM3）和四倍数据速率（QDR，每个时钟周期传输4个符号）信号技术所必需的。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.031182",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "GDDR7 is mainly used in gaming GPU applications that require high memory bandwidth at lower cost and capacity compared to HBM. NVIDIA had announced the Rubin CPX large-context AI processor in 2025 with 128GB of GDDR7, but this has all but vanished from the 2026 roadmaps as NVIDIA focuses on rolling out their Groq LPX solutions instead.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0112",
+      "parent_block_index": 112,
+      "parent_block_type": "p",
+      "parent_block_markdown": "GDDR7 is mainly used in gaming GPU applications that require high memory bandwidth at lower cost and capacity compared to HBM. NVIDIA had announced the Rubin CPX large-context AI processor in 2025 with 128GB of GDDR7, but this has all but vanished from the 2026 roadmaps as NVIDIA focuses on rolling out their Groq LPX solutions instead.",
+      "parent_block_plain_text": "GDDR7 is mainly used in gaming GPU applications that require high memory bandwidth at lower cost and capacity compared to HBM. NVIDIA had announced the Rubin CPX large-context AI processor in 2025 with 128GB of GDDR7, but this has all but vanished from the 2026 roadmaps as NVIDIA focuses on rolling out their Groq LPX solutions instead.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 337,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "GDDR7 主要用于游戏 GPU 应用，这类应用需要高内存带宽，但与 HBM 相比，对成本和容量的要求较低。英伟达（NVIDIA）曾在 2025 年宣布其 Rubin CPX 大上下文 AI 处理器将配备 128GB GDDR7，但随着英伟达将重心转向推广其 Groq LPX 解决方案，该配置在 2026 年的路线图上已近乎绝迹。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.031205",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "We have detailed wafer volumes, yields, density, COGS, and more in our memory model for HBM, DDR, and LPDDR across various nodes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "detailed wafer volumes, yields, density, COGS, and more in our memory model for HBM, DDR, and LPDDR across various nodes",
+          "start": 8,
+          "end": 128,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0113",
+      "parent_block_index": 113,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We have [detailed wafer volumes, yields, density, COGS, and more in our memory model for HBM, DDR, and LPDDR across various nodes](https://semianalysis.com/memory-model/).",
+      "parent_block_plain_text": "We have detailed wafer volumes, yields, density, COGS, and more in our memory model for HBM, DDR, and LPDDR across various nodes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "detailed wafer volumes, yields, density, COGS, and more in our memory model for HBM, DDR, and LPDDR across various nodes",
+          "start": 8,
+          "end": 128,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 129,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们在内存模型中详细分析了 HBM、DDR 和 LPDDR 在不同制程节点上的晶圆产量、良率、密度、销售成本（COGS）等数据。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:05:11.031268",
+          "tokenized_text": "我们在[[[LINK_1|内存模型]]]中详细分析了 HBM、DDR 和 LPDDR 在不同制程节点上的晶圆产量、良率、密度、销售成本（COGS）等数据。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [
+          "“bit density”译为“比特密度”或“位密度”。",
+          "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+          "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+          "比较级（“compared to”）的翻译需清晰体现优势程度。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+          "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+          "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+          "key_points": [
+            "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+            "其密度显著高于三星的1b和1z工艺。",
+            "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+          ],
+          "translation_notes": [
+            "“bit density”译为“比特密度”或“位密度”。",
+            "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+            "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+            "比较级（“compared to”）的翻译需清晰体现优势程度。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子拆分后，逻辑主语在第二句发生转换，略显突兀。原文用“SK Hynix’s GDDR7”作主语，译文第二句用“其”指代，但第一句主语是“LPDDR6”，衔接不够紧密。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将一句拆分为三句，虽然清晰，但“作为对比”和“而其更早的”这两个连接词的使用，使得对比的力度和节奏感较原文有所减弱。原文用“compared to”一气呵成，对比强烈。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“PAM3”和“QDR”在译文中首次出现时，仅对“QDR”进行了中文全称加注（“四倍数据速率”），但“PAM3”仅以“三电平脉冲幅度调制”的译名出现，未保留英文缩写。根据全文背景和术语一致性原则，首次出现的关键技术缩写应保留英文并加注中文。"
+          },
+          {
+            "type": "readability",
+            "description": "译文“但随着英伟达转而专注于推出其 Groq LPX 解决方案，这一配置在 2026 年的路线图中已几乎消失。”中，“转而专注于”和“已几乎消失”的表述准确，但“all but vanished”的语气（几乎完全消失）可以译得更强烈一些，以匹配原文略带惋惜或强调转折的意味。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“COGS”在译文中被处理为“销售成本（COGS）”，符合“首次出现时采用‘英文全称（中文释义）’”的指南。但需注意，前文（段落7、10等）在提及“成本”时未涉及此缩写，此处是首次出现，处理正确。为确保无误，在此标记为低优先级提醒。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

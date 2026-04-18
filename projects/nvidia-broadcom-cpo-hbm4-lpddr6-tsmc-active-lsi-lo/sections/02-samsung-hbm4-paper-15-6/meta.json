@@ -1,0 +1,4329 @@
+{
+  "section_id": "02-samsung-hbm4-paper-15-6",
+  "title": "Samsung HBM4 - Paper 15.6",
+  "title_translation": "Samsung HBM4 - Paper 15.6",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "Samsung was the only one among the top three memory vendors to present a technical paper on HBM4. Before ISSCC, we noted in our Accelerator & HBM model that Samsung had made great improvements in their HBM4 generation over their HBM3E. The data presented at ISSCC confirmed our analysis, with Samsung posting best-in-class performance - we have also detailed this development months ago, in a model update note.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator & HBM model",
+          "start": 128,
+          "end": 151,
+          "href": "https://semianalysis.com/institutional/hbm4-samsung-incremental-progress-micron-execution-risk-rising-hbm3e-pricing-revised-up/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "model update note",
+          "start": 393,
+          "end": 410,
+          "href": "https://semianalysis.com/institutional/samsung-hbm4-performance-leadership-sk-hynix-hbm4-issues/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "parent_block_id": "b0010",
+      "parent_block_index": 10,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Samsung was the only one among the top three memory vendors to present a technical paper on HBM4. Before ISSCC, we noted in our [Accelerator & HBM model](https://semianalysis.com/institutional/hbm4-samsung-incremental-progress-micron-execution-risk-rising-hbm3e-pricing-revised-up/) that Samsung had made great improvements in their HBM4 generation over their HBM3E. The data presented at ISSCC confirmed our analysis, with Samsung posting best-in-class performance - we have also detailed this development months ago, in a [model update note](https://semianalysis.com/institutional/samsung-hbm4-performance-leadership-sk-hynix-hbm4-issues/).",
+      "parent_block_plain_text": "Samsung was the only one among the top three memory vendors to present a technical paper on HBM4. Before ISSCC, we noted in our Accelerator & HBM model that Samsung had made great improvements in their HBM4 generation over their HBM3E. The data presented at ISSCC confirmed our analysis, with Samsung posting best-in-class performance - we have also detailed this development months ago, in a model update note.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Accelerator & HBM model",
+          "start": 128,
+          "end": 151,
+          "href": "https://semianalysis.com/institutional/hbm4-samsung-incremental-progress-micron-execution-risk-rising-hbm3e-pricing-revised-up/",
+          "title": null,
+          "span_id": "LINK_1"
+        },
+        {
+          "type": "link",
+          "text": "model update note",
+          "start": 393,
+          "end": 410,
+          "href": "https://semianalysis.com/institutional/samsung-hbm4-performance-leadership-sk-hynix-hbm4-issues/",
+          "title": null,
+          "span_id": "LINK_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 411,
+      "expected_tokens": [
+        "LINK_1",
+        "LINK_2"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在三大存储器厂商中，三星是唯一一家就HBM4发表技术论文的。在ISSCC之前，我们曾在加速器与HBM模型中指出，三星在其HBM4代产品上相比HBM3E取得了巨大改进。ISSCC上公布的数据证实了我们的分析，三星展示了同类最佳的性能——我们数月前也在模型更新说明中详细阐述了这一进展。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990457",
+          "tokenized_text": "在三大存储器厂商中，三星是唯一一家就HBM4发表技术论文的。在ISSCC之前，我们曾在[[[LINK_1|加速器与HBM模型]]]中指出，三星在其HBM4代产品上相比HBM3E取得了巨大改进。ISSCC上公布的数据证实了我们的分析，三星展示了同类最佳的性能——我们数月前也在[[[LINK_2|模型更新说明]]]中详细阐述了这一进展。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "The technical details presented at ISSCC, combined with industry chatter we have gathered, clearly demonstrate that Samsung’s HBM4 is competitive with its peers. Notably, it can meet the pin speed required for Rubin while staying below 1V. While Samsung still lags SK Hynix in terms of reliability and stability, the company has made meaningful progress in closing the gap on the technology front and could challenge SK Hynix’s dominance in HBM. Their 1c-based HBM4 paired with an SF4 logic base die appears to deliver stronger performance in pin speed.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0011",
+      "parent_block_index": 11,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The technical details presented at ISSCC, combined with industry chatter we have gathered, clearly demonstrate that Samsung’s HBM4 is competitive with its peers. Notably, it can meet the pin speed required for Rubin while staying below 1V. While Samsung still lags SK Hynix in terms of reliability and stability, the company has made meaningful progress in closing the gap on the technology front and could challenge SK Hynix’s dominance in HBM. Their 1c-based HBM4 paired with an SF4 logic base die appears to deliver stronger performance in pin speed.",
+      "parent_block_plain_text": "The technical details presented at ISSCC, combined with industry chatter we have gathered, clearly demonstrate that Samsung’s HBM4 is competitive with its peers. Notably, it can meet the pin speed required for Rubin while staying below 1V. While Samsung still lags SK Hynix in terms of reliability and stability, the company has made meaningful progress in closing the gap on the technology front and could challenge SK Hynix’s dominance in HBM. Their 1c-based HBM4 paired with an SF4 logic base die appears to deliver stronger performance in pin speed.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 553,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "ISSCC上披露的技术细节，结合我们收集到的业界讨论，清晰地表明三星的HBM4已具备与同行竞争的实力。值得注意的是，它能够在电压低于1V的同时，满足Rubin所需的引脚速度。尽管三星在可靠性和稳定性方面仍落后于SK海力士，但该公司在技术层面已取得显著进步，缩小了差距，并可能挑战SK海力士在HBM领域的统治地位。其基于1c制程的HBM4搭配SF4逻辑基础芯片，看来在引脚速度上表现更优。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990539",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "https://substackcdn.com/image/fetch/$s_!8SFa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F515a99f4-5397-4b1a-9f95-d9a3dff37521_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8SFa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F515a99f4-5397-4b1a-9f95-d9a3dff37521_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0012",
+      "parent_block_index": 12,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!8SFa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F515a99f4-5397-4b1a-9f95-d9a3dff37521_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!8SFa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F515a99f4-5397-4b1a-9f95-d9a3dff37521_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!8SFa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F515a99f4-5397-4b1a-9f95-d9a3dff37521_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!8SFa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F515a99f4-5397-4b1a-9f95-d9a3dff37521_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990577",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!8SFa!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F515a99f4-5397-4b1a-9f95-d9a3dff37521_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Samsung HBM3E vs. HBM4 Specifications. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM3E vs. HBM4 Specifications. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 66,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung HBM3E vs. HBM4 Specifications. Source: Samsung, ISSCC 2026*",
+      "parent_block_plain_text": "Samsung HBM3E vs. HBM4 Specifications. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM3E vs. HBM4 Specifications. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 66,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 66,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星HBM3E与HBM4规格对比。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990663",
+          "tokenized_text": "[[[EM_1|三星HBM3E与HBM4规格对比。来源：三星，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!t-2P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F773189fd-1dd5-434a-aa0c-694db785b9c9_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!t-2P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F773189fd-1dd5-434a-aa0c-694db785b9c9_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!t-2P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F773189fd-1dd5-434a-aa0c-694db785b9c9_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!t-2P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F773189fd-1dd5-434a-aa0c-694db785b9c9_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!t-2P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F773189fd-1dd5-434a-aa0c-694db785b9c9_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!t-2P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F773189fd-1dd5-434a-aa0c-694db785b9c9_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990701",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!t-2P!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F773189fd-1dd5-434a-aa0c-694db785b9c9_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Samsung HBM4 Die Shots and Cross-Section. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 Die Shots and Cross-Section. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 69,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung HBM4 Die Shots and Cross-Section. Source: Samsung, ISSCC 2026*",
+      "parent_block_plain_text": "Samsung HBM4 Die Shots and Cross-Section. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 Die Shots and Cross-Section. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 69,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 69,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星HBM4芯片照片与截面图。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990778",
+          "tokenized_text": "[[[EM_1|三星HBM4芯片照片与截面图。来源：三星，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "Samsung demonstrated a 36 GB, 12-high HBM4 stack featuring 2048 IO pins and 3.3 TB/s of bandwidth, built using 6th-generation 10nm-class (1c) DRAM core dies paired with an SF4 logic base die.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Samsung demonstrated a 36 GB, 12-high HBM4 stack featuring 2048 IO pins and 3.3 TB/s of bandwidth, built using 6th-generation 10nm-class (1c) DRAM core dies paired with an SF4 logic base die.",
+      "parent_block_plain_text": "Samsung demonstrated a 36 GB, 12-high HBM4 stack featuring 2048 IO pins and 3.3 TB/s of bandwidth, built using 6th-generation 10nm-class (1c) DRAM core dies paired with an SF4 logic base die.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 191,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星展示了一款36 GB、12层堆叠的HBM4产品，拥有2048个I/O引脚和3.3 TB/s的带宽。该产品采用第六代10纳米级（1c）DRAM核心芯片，并搭配了SF4逻辑基础芯片。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990813",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "The most obvious architectural change from HBM3E to HBM4 is the process technology split between the core DRAM dies and the base die. HBM4 uses the DRAM process node only for the core die while the base die is manufactured with an advanced logic node unlike previous generations of HBM that used the same process for both.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0017",
+      "parent_block_index": 17,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The most obvious architectural change from HBM3E to HBM4 is the process technology split between the core DRAM dies and the base die. HBM4 uses the DRAM process node only for the core die while the base die is manufactured with an advanced logic node unlike previous generations of HBM that used the same process for both.",
+      "parent_block_plain_text": "The most obvious architectural change from HBM3E to HBM4 is the process technology split between the core DRAM dies and the base die. HBM4 uses the DRAM process node only for the core die while the base die is manufactured with an advanced logic node unlike previous generations of HBM that used the same process for both.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 322,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "从HBM3E到HBM4，最明显的架构变化在于核心DRAM芯片与基础芯片采用了不同的工艺技术。HBM4仅对核心芯片使用DRAM制程节点，而基础芯片则采用先进的逻辑制程节点制造。这与前几代HBM对两者使用相同工艺的做法不同。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990841",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "The key architectural challenge arises as AI workloads demand higher bandwidth and faster data rates from HBM. By moving the base die to the SF4 logic process, Samsung enables higher operating speeds and lower power consumption. The operating voltage (VDDQ) fell 32%, from 1.1V in HBM3E to 0.75V in HBM4. A logic-based base die provides higher transistor density, smaller device dimensions, and better area efficiency due to smaller transistors and larger metal-layer stack availability as compared to a base die fabricated on a DRAM process. This helps Samsung’s HBM4 achieve — and significantly surpass — JEDEC’s HBM4 standard that we explain more at the end of this section.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The key architectural challenge arises as AI workloads demand higher bandwidth and faster data rates from HBM. By moving the base die to the SF4 logic process, Samsung enables higher operating speeds and lower power consumption. The operating voltage (VDDQ) fell 32%, from 1.1V in HBM3E to 0.75V in HBM4. A logic-based base die provides higher transistor density, smaller device dimensions, and better area efficiency due to smaller transistors and larger metal-layer stack availability as compared to a base die fabricated on a DRAM process. This helps Samsung’s HBM4 achieve — and significantly surpass — JEDEC’s HBM4 standard that we explain more at the end of this section.",
+      "parent_block_plain_text": "The key architectural challenge arises as AI workloads demand higher bandwidth and faster data rates from HBM. By moving the base die to the SF4 logic process, Samsung enables higher operating speeds and lower power consumption. The operating voltage (VDDQ) fell 32%, from 1.1V in HBM3E to 0.75V in HBM4. A logic-based base die provides higher transistor density, smaller device dimensions, and better area efficiency due to smaller transistors and larger metal-layer stack availability as compared to a base die fabricated on a DRAM process. This helps Samsung’s HBM4 achieve — and significantly surpass — JEDEC’s HBM4 standard that we explain more at the end of this section.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 677,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "随着AI工作负载对HBM的带宽和数据速率提出更高要求，关键的架构挑战也随之产生。通过将基础芯片转移到SF4逻辑制程，三星实现了更高的运行速度和更低的功耗。其工作电压（VDDQ）从HBM3E的1.1V降至HBM4的0.75V，降幅32%。与采用DRAM工艺制造的基础芯片相比，基于逻辑制程的基础芯片能提供更高的晶体管密度、更小的器件尺寸以及更好的面积效率，这得益于其更小的晶体管和更丰富的金属层堆叠可用性。这帮助三星的HBM4不仅达到，而且显著超越了JEDEC的HBM4标准——我们将在本节末尾对此进行更详细的解释。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990869",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!SBki!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3e96393-ade6-49e3-82fa-8127beff5ad4_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!SBki!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3e96393-ade6-49e3-82fa-8127beff5ad4_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0019",
+      "parent_block_index": 19,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!SBki!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3e96393-ade6-49e3-82fa-8127beff5ad4_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!SBki!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3e96393-ade6-49e3-82fa-8127beff5ad4_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!SBki!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3e96393-ade6-49e3-82fa-8127beff5ad4_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!SBki!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3e96393-ade6-49e3-82fa-8127beff5ad4_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.990899",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!SBki!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Ff3e96393-ade6-49e3-82fa-8127beff5ad4_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "Samsung HBM4 Adaptive Body-Bias Control and Process Variation. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 Adaptive Body-Bias Control and Process Variation. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 90,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0020",
+      "parent_block_index": 20,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung HBM4 Adaptive Body-Bias Control and Process Variation. Source: Samsung, ISSCC 2026*",
+      "parent_block_plain_text": "Samsung HBM4 Adaptive Body-Bias Control and Process Variation. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 Adaptive Body-Bias Control and Process Variation. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 90,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 90,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星HBM4自适应体偏置控制与工艺波动。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991003",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Combined with adaptive body-bias (ABB) control, which mitigates process variation across stacked core dies, the doubled TSV counts further improve timing margin. Together, Samsung’s paper claimed that the ABB and the 4× higher TSV count allow their HBM4 to achieve operating speeds up to 13 Gb/s per pin.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0021",
+      "parent_block_index": 21,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Combined with adaptive body-bias (ABB) control, which mitigates process variation across stacked core dies, the doubled TSV counts further improve timing margin. Together, Samsung’s paper claimed that the ABB and the 4× higher TSV count allow their HBM4 to achieve operating speeds up to 13 Gb/s per pin.",
+      "parent_block_plain_text": "Combined with adaptive body-bias (ABB) control, which mitigates process variation across stacked core dies, the doubled TSV counts further improve timing margin. Together, Samsung’s paper claimed that the ABB and the 4× higher TSV count allow their HBM4 to achieve operating speeds up to 13 Gb/s per pin.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 304,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "结合能缓解堆叠核心芯片间工艺波动的自适应体偏置（ABB）控制，翻倍的TSV数量进一步提升了时序裕量。三星的论文宣称，ABB和高达4倍的TSV数量共同使其HBM4能够实现每引脚高达13 Gb/s的运行速度。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991039",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p012",
+      "index": 12,
+      "source": "The improvement brought by the SF4 base die and 1c DRAM core dies comes with a trade-off. Samsung’s choice of SF4 for the logic base die comes at a higher cost comparedwith competing approaches even though Samsung Foundry can offer discounts for their internal base die usage. SK Hynix is adopting TSMC’s N12 logic process for their HBM4 base die, while Micron relies on their internal CMOS base-die technology, both of which are lower-cost options than the near leading-edge SF4 node, even considering vertical integration cost advantages.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "SF4 for the logic base die comes at a higher cost",
+          "start": 110,
+          "end": 159,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "TSMC’s N12 logic process",
+          "start": 298,
+          "end": 322,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "internal CMOS base-die technology,",
+          "start": 377,
+          "end": 411,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        }
+      ],
+      "parent_block_id": "b0022",
+      "parent_block_index": 22,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The improvement brought by the SF4 base die and 1c DRAM core dies comes with a trade-off. Samsung’s choice of **SF4 for the logic base die comes at a higher cost** comparedwith competing approaches even though Samsung Foundry can offer discounts for their internal base die usage. SK Hynix is adopting **TSMC’s N12 logic process** for their HBM4 base die, while Micron relies on their **internal CMOS base-die technology,** both of which are lower-cost options than the near leading-edge SF4 node, even considering vertical integration cost advantages.",
+      "parent_block_plain_text": "The improvement brought by the SF4 base die and 1c DRAM core dies comes with a trade-off. Samsung’s choice of SF4 for the logic base die comes at a higher cost comparedwith competing approaches even though Samsung Foundry can offer discounts for their internal base die usage. SK Hynix is adopting TSMC’s N12 logic process for their HBM4 base die, while Micron relies on their internal CMOS base-die technology, both of which are lower-cost options than the near leading-edge SF4 node, even considering vertical integration cost advantages.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "SF4 for the logic base die comes at a higher cost",
+          "start": 110,
+          "end": 159,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "TSMC’s N12 logic process",
+          "start": 298,
+          "end": 322,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "internal CMOS base-die technology,",
+          "start": 377,
+          "end": 411,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 540,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2",
+        "STRONG_3"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "然而，SF4基础芯片和1c DRAM核心芯片带来的性能提升是有代价的。三星选择SF4工艺制造逻辑基础芯片，这一决策导致其成本高于竞争对手的方案，尽管三星晶圆代工厂能为内部使用提供折扣。相比之下，SK海力士为其HBM4基础芯片采用台积电的N12逻辑制程，而美光则依赖其内部CMOS基础芯片技术。这两种方案的成本都低于接近前沿的SF4制程节点，即使考虑到垂直整合带来的成本优势也是如此。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991174",
+          "tokenized_text": "然而，SF4基础芯片和1c DRAM核心芯片带来的性能提升是有代价的。三星选择[[[STRONG_1|SF4工艺制造逻辑基础芯片，这一决策导致其成本高于竞争对手的方案]]]，尽管三星晶圆代工厂能为内部使用提供折扣。相比之下，SK海力士为其HBM4基础芯片采用[[[STRONG_2|台积电的N12逻辑制程]]]，而美光则依赖其[[[STRONG_3|内部CMOS基础芯片技术]]]。这两种方案的成本都低于接近前沿的SF4制程节点，即使考虑到垂直整合带来的成本优势也是如此。",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p013",
+      "index": 13,
+      "source": "The 1c front-end manufacturing process has proved challenging for Samsung throughout 2025, especially given that the company skipped the 1b node and moved directly from 1a-based HBM3E to the 1c generation. Front-end yields for the 1c node were only around 50% last year, although they have been gradually improving over time. The lower yield poses a risk for their HBM4 margins.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0023",
+      "parent_block_index": 23,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The 1c front-end manufacturing process has proved challenging for Samsung throughout 2025, especially given that the company skipped the 1b node and moved directly from 1a-based HBM3E to the 1c generation. Front-end yields for the 1c node were only around 50% last year, although they have been gradually improving over time. The lower yield poses a risk for their HBM4 margins.",
+      "parent_block_plain_text": "The 1c front-end manufacturing process has proved challenging for Samsung throughout 2025, especially given that the company skipped the 1b node and moved directly from 1a-based HBM3E to the 1c generation. Front-end yields for the 1c node were only around 50% last year, although they have been gradually improving over time. The lower yield poses a risk for their HBM4 margins.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 378,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "事实证明，1c前端制造工艺在整个2025年对三星而言都颇具挑战，尤其是考虑到该公司跳过了1b节点，直接从基于1a的HBM3E过渡到1c世代。去年，1c节点的前端良率仅约为50%，尽管随着时间的推移已逐步改善。较低的良率对其HBM4的利润率构成了风险。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991210",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p014",
+      "index": 14,
+      "source": "Historically, Samsung’s HBM has earned lower margins than those of their top competitor, SK Hynix, a dynamic that we model across all vendors comprehensively in our Memory Model. We have detailed wafer volumes, yields, density, COGS, and more for each vendors HBM, DDR, and LPDDR across various nodes.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "link",
+          "text": "Memory Model",
+          "start": 165,
+          "end": 177,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "parent_block_id": "b0024",
+      "parent_block_index": 24,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Historically, Samsung’s HBM has earned lower margins than those of their top competitor, SK Hynix, a dynamic that we model across all vendors comprehensively in our [Memory Model](https://semianalysis.com/memory-model/). We have detailed wafer volumes, yields, density, COGS, and more for each vendors HBM, DDR, and LPDDR across various nodes.",
+      "parent_block_plain_text": "Historically, Samsung’s HBM has earned lower margins than those of their top competitor, SK Hynix, a dynamic that we model across all vendors comprehensively in our Memory Model. We have detailed wafer volumes, yields, density, COGS, and more for each vendors HBM, DDR, and LPDDR across various nodes.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "link",
+          "text": "Memory Model",
+          "start": 165,
+          "end": 177,
+          "href": "https://semianalysis.com/memory-model/",
+          "title": null,
+          "span_id": "LINK_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 301,
+      "expected_tokens": [
+        "LINK_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token LINK_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "从历史上看，三星HBM的利润率一直低于其主要竞争对手SK海力士。我们在我们的**内存模型**中对所有厂商的这一动态进行了全面建模，详细列出了各厂商在不同制程节点下HBM、DDR和LPDDR的晶圆产量、良率、密度、销货成本等数据。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991320",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token LINK_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p015",
+      "index": 15,
+      "source": "Samsung’s strategy appears to be an aggressive adoption of a more advanced node for the base die to achieve superior performance and outpace their competitors, particularly as HBM requirements from leading customers such as NVIDIA continue to become more demanding.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0025",
+      "parent_block_index": 25,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Samsung’s strategy appears to be an aggressive adoption of a more advanced node for the base die to achieve superior performance and outpace their competitors, particularly as HBM requirements from leading customers such as NVIDIA continue to become more demanding.",
+      "parent_block_plain_text": "Samsung’s strategy appears to be an aggressive adoption of a more advanced node for the base die to achieve superior performance and outpace their competitors, particularly as HBM requirements from leading customers such as NVIDIA continue to become more demanding.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 265,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星的策略似乎是激进地采用更先进的制程节点来制造基础芯片，以实现卓越性能并超越竞争对手。尤其是在英伟达等主要客户对HBM的要求持续提高的背景下，这一策略显得尤为突出。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991356",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p016",
+      "index": 16,
+      "source": "Another key issue in HBM to address is tCCDR, the minimum interval required between consecutive READ commands issued across different stack IDs (SID). For AI workloads that rely heavily on parallel memory access across many channels, tCCDR directly impacts achievable memory throughput.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0026",
+      "parent_block_index": 26,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Another key issue in HBM to address is tCCDR, the minimum interval required between consecutive READ commands issued across different stack IDs (SID). For AI workloads that rely heavily on parallel memory access across many channels, tCCDR directly impacts achievable memory throughput.",
+      "parent_block_plain_text": "Another key issue in HBM to address is tCCDR, the minimum interval required between consecutive READ commands issued across different stack IDs (SID). For AI workloads that rely heavily on parallel memory access across many channels, tCCDR directly impacts achievable memory throughput.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 286,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "HBM中另一个需要解决的关键问题是tCCDR，即在不同堆栈ID（SID）间连续发出读取命令所需的最小时间间隔。对于严重依赖跨多个通道并行内存访问的AI工作负载而言，tCCDR直接影响可实现的存储器吞吐量。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991383",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p017",
+      "index": 17,
+      "source": "In a stacked DRAM architecture, multiple core dies are vertically integrated on top of a base die. This naturally introduces small delay differences across the stack, driven by factors such as process variation between the core dies and the base die, TSV propagation differences, and local channel variation.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0027",
+      "parent_block_index": 27,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In a stacked DRAM architecture, multiple core dies are vertically integrated on top of a base die. This naturally introduces small delay differences across the stack, driven by factors such as process variation between the core dies and the base die, TSV propagation differences, and local channel variation.",
+      "parent_block_plain_text": "In a stacked DRAM architecture, multiple core dies are vertically integrated on top of a base die. This naturally introduces small delay differences across the stack, driven by factors such as process variation between the core dies and the base die, TSV propagation differences, and local channel variation.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 308,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在堆叠式DRAM架构中，多个核心芯片垂直集成在基础芯片之上。这自然会引入整个堆栈内的微小延迟差异，其驱动因素包括核心芯片与基础芯片间的工艺波动、硅通孔（TSV）传输延迟差异以及局部通道差异。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991410",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p018",
+      "index": 18,
+      "source": "The increased stack heights and channel counts, from 16 to 32, compound this challenge. As the channel counts and stack heights increase, the variation between the dies accumulates, causing larger timing mismatches across channels and dies that impact the achievable tCCDR and overall HBM performance.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0028",
+      "parent_block_index": 28,
+      "parent_block_type": "p",
+      "parent_block_markdown": "The increased stack heights and channel counts, from 16 to 32, compound this challenge. As the channel counts and stack heights increase, the variation between the dies accumulates, causing larger timing mismatches across channels and dies that impact the achievable tCCDR and overall HBM performance.",
+      "parent_block_plain_text": "The increased stack heights and channel counts, from 16 to 32, compound this challenge. As the channel counts and stack heights increase, the variation between the dies accumulates, causing larger timing mismatches across channels and dies that impact the achievable tCCDR and overall HBM performance.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 301,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "堆叠高度和通道数量从16层增至32层，加剧了这一挑战。随着通道数和堆叠高度的增加，芯片间的差异会累积，导致跨通道和跨芯片的时序失配更严重，从而影响可实现的tCCDR和HBM整体性能。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991440",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p019",
+      "index": 19,
+      "source": "https://substackcdn.com/image/fetch/$s_!YCM6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe56f1735-adbc-4038-8473-b27f5ae002fb_1611x1352.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YCM6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe56f1735-adbc-4038-8473-b27f5ae002fb_1611x1352.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0029",
+      "parent_block_index": 29,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!YCM6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe56f1735-adbc-4038-8473-b27f5ae002fb_1611x1352.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!YCM6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe56f1735-adbc-4038-8473-b27f5ae002fb_1611x1352.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!YCM6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe56f1735-adbc-4038-8473-b27f5ae002fb_1611x1352.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!YCM6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe56f1735-adbc-4038-8473-b27f5ae002fb_1611x1352.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991466",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!YCM6!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fe56f1735-adbc-4038-8473-b27f5ae002fb_1611x1352.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p020",
+      "index": 20,
+      "source": "Samsung HBM4 Per-Channel TSV RDQS Auto-Calibration Scheme. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Samsung HBM4 Per-Channel TSV RDQS Auto-Calibration Scheme. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 86,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0030",
+      "parent_block_index": 30,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**Samsung HBM4 Per-Channel TSV RDQS Auto-Calibration Scheme. Source: Samsung, ISSCC 2026**",
+      "parent_block_plain_text": "Samsung HBM4 Per-Channel TSV RDQS Auto-Calibration Scheme. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Samsung HBM4 Per-Channel TSV RDQS Auto-Calibration Scheme. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 86,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 86,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星HBM4每通道TSV RDQS自动校准方案。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991542",
+          "tokenized_text": "[[[STRONG_1|三星HBM4每通道TSV RDQS自动校准方案。来源：三星，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p021",
+      "index": 21,
+      "source": "To address this issue, Samsung introduces a “per-channel TSV RDQS timing auto-calibration scheme.” After power-up, the system measures delay variation across channels using a replica RDQS path that mirrors the timing behavior of the real signal path. A time-to-digital converter (TDC) quantizes the timing differences, which are then compensated for using delay compensation circuits (DCDL) for each channel.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0031",
+      "parent_block_index": 31,
+      "parent_block_type": "p",
+      "parent_block_markdown": "To address this issue, Samsung introduces a “per-channel TSV RDQS timing auto-calibration scheme.” After power-up, the system measures delay variation across channels using a replica RDQS path that mirrors the timing behavior of the real signal path. A time-to-digital converter (TDC) quantizes the timing differences, which are then compensated for using delay compensation circuits (DCDL) for each channel.",
+      "parent_block_plain_text": "To address this issue, Samsung introduces a “per-channel TSV RDQS timing auto-calibration scheme.” After power-up, the system measures delay variation across channels using a replica RDQS path that mirrors the timing behavior of the real signal path. A time-to-digital converter (TDC) quantizes the timing differences, which are then compensated for using delay compensation circuits (DCDL) for each channel.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 408,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "为解决此问题，三星引入了一种“每通道TSV RDQS时序自动校准方案”。上电后，系统使用一个复制真实信号路径时序行为的RDQS复制路径来测量各通道的延迟差异。时间数字转换器（TDC）将这些时序差异量化，随后通过为每个通道配置的延迟补偿电路（DCDL）进行补偿。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991573",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p022",
+      "index": 22,
+      "source": "This calibration accounts for both global delay variation between stacked core dies and local per-channel variation, aligning timing across the stack. By compensating for these mismatches, Samsung significantly improves the effective timing margin and increases the maximum achievable data rate while maintaining the required tCCDR constraints. This scheme alone increased data rates from 7.8 Gb/s to 9.4 Gb/s.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0032",
+      "parent_block_index": 32,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This calibration accounts for both global delay variation between stacked core dies and local per-channel variation, aligning timing across the stack. By compensating for these mismatches, Samsung significantly improves the effective timing margin and increases the maximum achievable data rate while maintaining the required tCCDR constraints. This scheme alone increased data rates from 7.8 Gb/s to 9.4 Gb/s.",
+      "parent_block_plain_text": "This calibration accounts for both global delay variation between stacked core dies and local per-channel variation, aligning timing across the stack. By compensating for these mismatches, Samsung significantly improves the effective timing margin and increases the maximum achievable data rate while maintaining the required tCCDR constraints. This scheme alone increased data rates from 7.8 Gb/s to 9.4 Gb/s.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 410,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "该校准方案同时考虑了堆叠核心芯片间的全局延迟差异和局部每通道差异，从而对齐整个堆栈的时序。通过补偿这些失配，三星显著提升了有效时序裕量，并在满足所需tCCDR限制的同时，提高了最大可实现数据速率。仅此一项方案就将数据速率从7.8 Gb/s提升至9.4 Gb/s。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991614",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p023",
+      "index": 23,
+      "source": "Some of our readers who are well versed in memory technology may be asking: How is there enough die area to accommodate the significant increase in TSV counts? This is where the 1c node becomes important. Compared with the previous 1a node, 1c further shrinks the DRAM cell area, freeing up die space that can be used to integrate the larger number of TSVs required for HBM4.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0033",
+      "parent_block_index": 33,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Some of our readers who are well versed in memory technology may be asking: How is there enough die area to accommodate the significant increase in TSV counts? This is where the 1c node becomes important. Compared with the previous 1a node, 1c further shrinks the DRAM cell area, freeing up die space that can be used to integrate the larger number of TSVs required for HBM4.",
+      "parent_block_plain_text": "Some of our readers who are well versed in memory technology may be asking: How is there enough die area to accommodate the significant increase in TSV counts? This is where the 1c node becomes important. Compared with the previous 1a node, 1c further shrinks the DRAM cell area, freeing up die space that can be used to integrate the larger number of TSVs required for HBM4.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 375,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "我们一些精通存储器技术的读者可能会问：如何有足够的芯片面积来容纳大幅增加的TSV数量？这正是1c制程节点变得重要的原因。与之前的1a节点相比，1c进一步缩小了DRAM存储单元面积，从而释放出芯片空间，可用于集成HBM4所需的大量TSV。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991639",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p024",
+      "index": 24,
+      "source": "https://substackcdn.com/image/fetch/$s_!FNwT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F35b20c2b-2f00-4d4c-b05a-578d695a51c1_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!FNwT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F35b20c2b-2f00-4d4c-b05a-578d695a51c1_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0034",
+      "parent_block_index": 34,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!FNwT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F35b20c2b-2f00-4d4c-b05a-578d695a51c1_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!FNwT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F35b20c2b-2f00-4d4c-b05a-578d695a51c1_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!FNwT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F35b20c2b-2f00-4d4c-b05a-578d695a51c1_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!FNwT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F35b20c2b-2f00-4d4c-b05a-578d695a51c1_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991664",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!FNwT!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F35b20c2b-2f00-4d4c-b05a-578d695a51c1_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p025",
+      "index": 25,
+      "source": "Samsung HBM4 PMBIST Test Pattern Operation. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 PMBIST Test Pattern Operation. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0035",
+      "parent_block_index": 35,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung HBM4 PMBIST Test Pattern Operation. Source: Samsung, ISSCC 2026*",
+      "parent_block_plain_text": "Samsung HBM4 PMBIST Test Pattern Operation. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 PMBIST Test Pattern Operation. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 71,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 71,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星HBM4 PMBIST测试模式操作。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991737",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p026",
+      "index": 26,
+      "source": "https://substackcdn.com/image/fetch/$s_!06LM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec777954-f7fa-44fb-a8b3-f295d57f3e59_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!06LM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec777954-f7fa-44fb-a8b3-f295d57f3e59_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0036",
+      "parent_block_index": 36,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!06LM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec777954-f7fa-44fb-a8b3-f295d57f3e59_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!06LM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec777954-f7fa-44fb-a8b3-f295d57f3e59_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!06LM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec777954-f7fa-44fb-a8b3-f295d57f3e59_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!06LM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec777954-f7fa-44fb-a6b3-f295d57f3e59_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991764",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!06LM!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fec777954-f7fa-44fb-a8b3-f295d57f3e59_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p027",
+      "index": 27,
+      "source": "Samsung HBM4 PMBIST vs. HBM3E MBIST Comparison. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 PMBIST vs. HBM3E MBIST Comparison. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0037",
+      "parent_block_index": 37,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung HBM4 PMBIST vs. HBM3E MBIST Comparison. Source: Samsung, ISSCC 2026*",
+      "parent_block_plain_text": "Samsung HBM4 PMBIST vs. HBM3E MBIST Comparison. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 PMBIST vs. HBM3E MBIST Comparison. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 75,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星HBM4 PMBIST与HBM3E MBIST对比。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991831",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p028",
+      "index": 28,
+      "source": "Another key innovation enabled by the logic base die is Samsung’s Programmable Memory Built-In Self-Test (PMBIST) architecture. PMBIST allows the base die to generate fully programmable memory test patterns while supporting the complete JEDEC row and column command set, meaning the test engine can issue the same commands that a real system would generate and can do so at any clock edge and at full interface speed. In practical terms, this allows engineers to replicate complex real-world memory access patterns and stress the HBM interface under realistic operating conditions, which is difficult with traditional fixed-pattern test engines.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0038",
+      "parent_block_index": 38,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Another key innovation enabled by the logic base die is Samsung’s Programmable Memory Built-In Self-Test (PMBIST) architecture. PMBIST allows the base die to generate fully programmable memory test patterns while supporting the complete JEDEC row and column command set, meaning the test engine can issue the same commands that a real system would generate and can do so at any clock edge and at full interface speed. In practical terms, this allows engineers to replicate complex real-world memory access patterns and stress the HBM interface under realistic operating conditions, which is difficult with traditional fixed-pattern test engines.",
+      "parent_block_plain_text": "Another key innovation enabled by the logic base die is Samsung’s Programmable Memory Built-In Self-Test (PMBIST) architecture. PMBIST allows the base die to generate fully programmable memory test patterns while supporting the complete JEDEC row and column command set, meaning the test engine can issue the same commands that a real system would generate and can do so at any clock edge and at full interface speed. In practical terms, this allows engineers to replicate complex real-world memory access patterns and stress the HBM interface under realistic operating conditions, which is difficult with traditional fixed-pattern test engines.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 645,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "逻辑基础芯片带来的另一项关键创新是三星的可编程内存内建自测试（PMBIST）架构。PMBIST允许基础芯片生成完全可编程的内存测试模式，同时支持完整的JEDEC行与列命令集。这意味着测试引擎能够发出与实际系统完全相同的命令，且可在任意时钟沿、以全接口速度执行这些命令。实际上，这使得工程师能够复现复杂的真实世界内存访问模式，并在实际运行条件下对HBM接口进行压力测试，而这是传统固定模式测试引擎难以做到的。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991857",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p029",
+      "index": 29,
+      "source": "This approach represents a notable departure from HBM3E. As discussed earlier, the HBM3E base die is fabricated using a DRAM process, which imposed strict power and area constraints on the MBIST (Memory Built-In Self-Test) engine and limited testing to a small set of predefined patterns given the natural power and area disadvantage of DRAM against logic. By moving the base die to Samsung Foundry’s SF4 logic process, Samsung enables a fully programmable testing framework capable of running complex test algorithms and flexible access sequences.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0039",
+      "parent_block_index": 39,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This approach represents a notable departure from HBM3E. As discussed earlier, the HBM3E base die is fabricated using a DRAM process, which imposed strict power and area constraints on the MBIST (Memory Built-In Self-Test) engine and limited testing to a small set of predefined patterns given the natural power and area disadvantage of DRAM against logic. By moving the base die to Samsung Foundry’s SF4 logic process, Samsung enables a fully programmable testing framework capable of running complex test algorithms and flexible access sequences.",
+      "parent_block_plain_text": "This approach represents a notable departure from HBM3E. As discussed earlier, the HBM3E base die is fabricated using a DRAM process, which imposed strict power and area constraints on the MBIST (Memory Built-In Self-Test) engine and limited testing to a small set of predefined patterns given the natural power and area disadvantage of DRAM against logic. By moving the base die to Samsung Foundry’s SF4 logic process, Samsung enables a fully programmable testing framework capable of running complex test algorithms and flexible access sequences.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 548,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这种方法与HBM3E相比有显著不同。如前文所述，HBM3E的基础芯片采用DRAM工艺制造，这给其MBIST（内存内建自测试）引擎带来了严格的功耗和面积限制，并且，鉴于DRAM工艺在功耗和面积效率方面天然逊色于逻辑工艺，其测试只能局限于一小部分预定义的模式。通过将基础芯片转移到三星晶圆代工厂的SF4逻辑工艺，三星得以实现一个完全可编程的测试框架，能够运行复杂的测试算法和灵活的访问序列。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991903",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p030",
+      "index": 30,
+      "source": "This enables much more robust debugging and better yield learning for HBM. Engineers can create targeted stress patterns to validate critical timing parameters such as tCCDR and tCCDS, identify corner-case failures earlier in manufacturing, and accelerate characterization during chip-on-wafer (CoW) and system-in-package (SiP) testing. Put simply, PMBIST improves test coverage, debug efficiency, and ultimately production yield as HBM stacks grow more complex and operate at higher speeds.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0040",
+      "parent_block_index": 40,
+      "parent_block_type": "p",
+      "parent_block_markdown": "This enables much more robust debugging and better yield learning for HBM. Engineers can create targeted stress patterns to validate critical timing parameters such as tCCDR and tCCDS, identify corner-case failures earlier in manufacturing, and accelerate characterization during chip-on-wafer (CoW) and system-in-package (SiP) testing. Put simply, PMBIST improves test coverage, debug efficiency, and ultimately production yield as HBM stacks grow more complex and operate at higher speeds.",
+      "parent_block_plain_text": "This enables much more robust debugging and better yield learning for HBM. Engineers can create targeted stress patterns to validate critical timing parameters such as tCCDR and tCCDS, identify corner-case failures earlier in manufacturing, and accelerate characterization during chip-on-wafer (CoW) and system-in-package (SiP) testing. Put simply, PMBIST improves test coverage, debug efficiency, and ultimately production yield as HBM stacks grow more complex and operate at higher speeds.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 491,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "这为HBM带来了更强大的调试能力和更好的良率学习效果。工程师可以创建有针对性的压力测试模式，以验证tCCDR和tCCDS等关键时序参数，在制造早期识别极端情况下的故障，并加速晶圆上芯片（CoW）和系统级封装（SiP）测试阶段的特性表征。简而言之，随着HBM堆栈变得更复杂、运行速度更高，PMBIST提升了测试覆盖率、调试效率，并最终提高了生产良率。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991930",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p031",
+      "index": 31,
+      "source": "https://substackcdn.com/image/fetch/$s_!E1zF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a03c69a-dc9b-4dfb-a6d2-ad4315760852_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!E1zF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a03c69a-dc9b-4dfb-a6d2-ad4315760852_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0041",
+      "parent_block_index": 41,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!E1zF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a03c69a-dc9b-4dfb-a6d2-ad4315760852_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!E1zF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a03c69a-dc9b-4dfb-a6d2-ad4315760852_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!E1zF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a03c69a-dc9b-4dfb-a6d2-ad4315760852_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!E1zF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a03c69a-dc9b-4dfb-a6d2-ad4315760852_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.991953",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!E1zF!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F8a03c69a-dc9b-4dfb-a6d2-ad4315760852_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p032",
+      "index": 32,
+      "source": "Samsung HBM4 Shmoo Plot. Source: Samsung, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 Shmoo Plot. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 52,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0042",
+      "parent_block_index": 42,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*Samsung HBM4 Shmoo Plot. Source: Samsung, ISSCC 2026*",
+      "parent_block_plain_text": "Samsung HBM4 Shmoo Plot. Source: Samsung, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "Samsung HBM4 Shmoo Plot. Source: Samsung, ISSCC 2026",
+          "start": 0,
+          "end": 52,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 52,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星HBM4舒姆图。来源：三星，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.992021",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p033",
+      "index": 33,
+      "source": "Samsung also demonstrated strong pin speed results — their HBM4 is able to hit 11 Gb/s at sub-1V core voltage (VDDC), and up to 13 Gb/s at higher voltages. We have yet to see Samsung’s peers demonstrate comparable performance albeit they do have better reliability and stability.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0043",
+      "parent_block_index": 43,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Samsung also demonstrated strong pin speed results — their HBM4 is able to hit 11 Gb/s at sub-1V core voltage (VDDC), and up to 13 Gb/s at higher voltages. We have yet to see Samsung’s peers demonstrate comparable performance albeit they do have better reliability and stability.",
+      "parent_block_plain_text": "Samsung also demonstrated strong pin speed results — their HBM4 is able to hit 11 Gb/s at sub-1V core voltage (VDDC), and up to 13 Gb/s at higher voltages. We have yet to see Samsung’s peers demonstrate comparable performance albeit they do have better reliability and stability.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 279,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星还展示了强劲的引脚速度结果——其HBM4能够在低于1V的核心电压（VDDC）下达到11 Gb/s，并在更高电压下达到13 Gb/s。我们尚未看到三星的同行展示出可比的性能，尽管后者在可靠性和稳定性上确实更具优势。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.992049",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p034",
+      "index": 34,
+      "source": "Samsung’s implementation significantly exceeds the baseline specification of the official JEDEC HBM4 standard (JESD270-4), which specifies a maximum data rate of 6.4 Gb/s per pin and about 2 TB/s of bandwidth. Samsung demonstrates more than 2× the JEDEC-standard pin speed, reaching 13 Gb/s per pin and delivering 3.3 TB/s of bandwidth. Even at VDDC/VDDQ of 1.05V and 0.75V, the device can sustain a data rate of 11.8 Gb/s.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0044",
+      "parent_block_index": 44,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Samsung’s implementation significantly exceeds the baseline specification of the official JEDEC HBM4 standard (JESD270-4), which specifies a maximum data rate of 6.4 Gb/s per pin and about 2 TB/s of bandwidth. Samsung demonstrates more than 2× the JEDEC-standard pin speed, reaching 13 Gb/s per pin and delivering 3.3 TB/s of bandwidth. Even at VDDC/VDDQ of 1.05V and 0.75V, the device can sustain a data rate of 11.8 Gb/s.",
+      "parent_block_plain_text": "Samsung’s implementation significantly exceeds the baseline specification of the official JEDEC HBM4 standard (JESD270-4), which specifies a maximum data rate of 6.4 Gb/s per pin and about 2 TB/s of bandwidth. Samsung demonstrates more than 2× the JEDEC-standard pin speed, reaching 13 Gb/s per pin and delivering 3.3 TB/s of bandwidth. Even at VDDC/VDDQ of 1.05V and 0.75V, the device can sustain a data rate of 11.8 Gb/s.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 423,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "三星的实现方案大幅超越了官方JEDEC HBM4标准（JESD270-4）的基线规范，该规范规定的最大引脚数据速率为6.4 Gb/s，总带宽约为2 TB/s。三星展示的引脚速度是JEDEC标准的两倍多，达到13 Gb/s，可提供3.3 TB/s的带宽。即使在VDDC/VDDQ电压分别为1.05V和0.75V时，该器件仍能维持11.8 Gb/s的数据速率。",
+          "model": "pro",
+          "created_at": "2026-04-18T00:54:43.992074",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.575,
+        "is_excellent": false,
+        "applied_terms": [
+          "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+          "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+          "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+          "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+          "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+          "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+          "key_points": [
+            "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+            "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+            "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+            "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+          ],
+          "translation_notes": [
+            "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+            "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+            "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+            "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "术语翻译力度稍弱，未能完全体现原文的自信和领先地位。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构略显生硬，\"似乎能提供更强的性能\"的表述可以更直接有力。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将原文一个长句拆分为两句，处理得当。但\"其具备\"稍显书面化。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文\"降幅达32%\"是正确的，但原文\"fell 32%\"更简洁。此处虽非错误，但结合上下文，\"降至\"比\"降至...降幅达\"更紧凑。"
+          },
+          {
+            "type": "accuracy",
+            "description": "逻辑关系翻译有误。原文强调\"即使有内部折扣，成本仍更高\"，译文\"其成本更高，尽管...\"顺序正确，但\"选择采用SF4工艺制造逻辑基础芯片\"的表述将\"choice\"名词动词化，稍显冗余，且\"其成本更高\"的主语指代不够清晰。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语\"传播差异\"准确，但在此上下文中，\"传输延迟差异\"或\"传播延迟差异\"是更常见的工程表述。"
+          },
+          {
+            "type": "readability",
+            "description": "译文将长句合理拆分，但\"这意味着测试引擎可以发出与实际系统相同的命令，并且能在任意时钟沿、以全接口速度执行。\"这句话稍显冗长，\"并且能\"可以优化。"
+          },
+          {
+            "type": "readability",
+            "description": "译文\"鉴于DRAM工艺在功耗和面积上天然弱于逻辑工艺\"准确，但略显口语化且\"弱于\"的对比关系可以更技术化。"
+          },
+          {
+            "type": "tone",
+            "description": "译文\"我们尚未看到三星的同行展示出可比的性能，尽管他们在可靠性和稳定性方面确实更优。\"语气基本准确，但\"确实更优\"可以调整为更中立的分析口吻。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

@@ -1,0 +1,1747 @@
+{
+  "theme": "ISSCC 2026 展示了半导体行业在内存、光网络、高速互连和处理器等关键领域的最新电路与集成技术突破。",
+  "key_arguments": [
+    "内存技术是本届 ISSCC 的核心焦点，三星和 SK 海力士在 HBM4、LPDDR6 和 GDDR7 上展开激烈竞争，展示了性能、密度和能效的显著提升。",
+    "光网络和高速电互连技术正快速发展，以满足下一代 AI 加速器对数据中心内及跨数据中心数据交换的极高带宽和能效需求。",
+    "处理器领域呈现多元化，从移动 SoC 到大型 AI 加速器，各厂商通过先进封装、异构集成和架构优化来提升性能与能效。",
+    "新兴存储技术（如 MRAM、逻辑位单元）和先进封装技术（如 COP、混合键合）为解决传统缩放瓶颈提供了创新路径。",
+    "文章基于 ISSCC 论文的实测数据和电路图进行深度技术分析，强调集成与电路设计的重要性，并对厂商宣传持审慎批判态度。"
+  ],
+  "structure_summary": "文章采用典型的科技综述结构：引言概述 ISSCC 2026 及其与 IEDM/VLSI 的区别；随后按技术领域（内存、光网络、高速电互连、处理器）分章节深入评述各篇关键论文；每个子章节聚焦一家公司/一项技术，包含技术细节、性能对比、图表解读和行业背景分析；结尾以一个其他亮点（温度传感器）收尾。整体逻辑清晰，由面到点，技术深度逐层递进。",
+  "terminology": [
+    {
+      "term": "ISSCC",
+      "context_meaning": "International Solid-State Circuits Conference，国际固态电路会议，顶级半导体电路设计会议。",
+      "translation": "ISSCC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "行业标准缩写，首次出现可加注中文全称，后续直接使用英文缩写。"
+    },
+    {
+      "term": "HBM4",
+      "context_meaning": "High Bandwidth Memory 第四代，高带宽内存。",
+      "translation": "HBM4",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "行业标准术语，保持英文缩写+数字格式。"
+    },
+    {
+      "term": "LPDDR6",
+      "context_meaning": "Low Power Double Data Rate 第六代，低功耗双倍数据速率内存。",
+      "translation": "LPDDR6",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "行业标准术语，保持英文缩写+数字格式。"
+    },
+    {
+      "term": "GDDR7",
+      "context_meaning": "Graphics Double Data Rate 第七代，图形用双倍数据速率内存。",
+      "translation": "GDDR7",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "行业标准术语，保持英文缩写+数字格式。"
+    },
+    {
+      "term": "PHY",
+      "context_meaning": "Physical Layer，物理层接口电路。",
+      "translation": "物理层",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "行业通用缩写，首次出现可加注“物理层接口”。"
+    },
+    {
+      "term": "shmoo plot",
+      "context_meaning": "表征芯片在不同电压、频率等参数下工作范围的测试图表。",
+      "translation": "舒姆图",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "行业内有既定译名“舒姆图”，首次出现可加简短说明。"
+    },
+    {
+      "term": "bitcell",
+      "context_meaning": "存储单元，存储器中最基本的存储单位。",
+      "translation": "存储单元",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "标准技术术语。"
+    },
+    {
+      "term": "COP (Cell-Over-Periphery)",
+      "context_meaning": "一种 DRAM 架构，存储单元阵列堆叠在周边电路之上。",
+      "translation": "COP",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "特定技术缩写，首次出现需解释。"
+    },
+    {
+      "term": "BiCS",
+      "context_meaning": "Bit Cost Scalable，一种 3D NAND 存储技术。",
+      "translation": "BiCS",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "厂商特定技术名称，保留英文。"
+    },
+    {
+      "term": "MRAM",
+      "context_meaning": "Magnetoresistive Random-Access Memory，磁阻随机存取存储器。",
+      "translation": "MRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "行业标准缩写，首次出现可加注中文全称。"
+    },
+    {
+      "term": "DWDM",
+      "context_meaning": "Dense Wavelength Division Multiplexing，密集波分复用。",
+      "translation": "密集波分复用",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "光通信标准术语，保留缩写。"
+    },
+    {
+      "term": "CPO",
+      "context_meaning": "Co-Packaged Optics，共封装光学。",
+      "translation": "共封装光学",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "先进封装技术术语，保留缩写。"
+    },
+    {
+      "term": "UCIe",
+      "context_meaning": "Universal Chiplet Interconnect Express，通用芯粒互连标准。",
+      "translation": "UCIe",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "行业新兴互连标准，保留缩写并解释。"
+    },
+    {
+      "term": "die shot",
+      "context_meaning": "芯片显微照片，展示芯片布局。",
+      "translation": "芯片显微照片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "常用术语，有清晰中文对应。"
+    },
+    {
+      "term": "CoWoS",
+      "context_meaning": "Chip-on-Wafer-on-Substrate，台积电的一种 2.5D/3D 封装技术。",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "台积电专有封装技术名称，保留英文。"
+    },
+    {
+      "term": "node",
+      "context_meaning": "半导体制造工艺节点。",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "标准术语，需根据上下文明确为“制程节点”。"
+    },
+    {
+      "term": "flops/mm²",
+      "context_meaning": "每平方毫米的浮点运算次数，衡量计算密度。",
+      "translation": "FLOPS/mm²",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "性能指标标准写法，保留英文单位。"
+    },
+    {
+      "term": "TSMC",
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "context_meaning": "苹果自研芯片品牌",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "context_meaning": "",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "context_meaning": "超微半导体",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "context_meaning": "",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "context_meaning": "",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "context_meaning": "",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "context_meaning": "",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "context_meaning": "",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "context_meaning": "",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "context_meaning": "后续可简称'代工厂'",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "context_meaning": "",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "context_meaning": "fabrication facility",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "context_meaning": "极紫外光刻 (Extreme Ultraviolet)",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "context_meaning": "极紫外光刻技术",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "context_meaning": "深紫外光刻 (Deep Ultraviolet)",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "context_meaning": "",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "context_meaning": "",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "context_meaning": "",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "context_meaning": "Chemical Mechanical Planarization",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "context_meaning": "系统级芯片 (System on Chip)",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "context_meaning": "图形处理器",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "context_meaning": "中央处理器",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "context_meaning": "神经网络处理器",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "context_meaning": "张量处理器 (Tensor Processing Unit)",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "context_meaning": "",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "context_meaning": "",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "context_meaning": "Integrated Fan-Out",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "context_meaning": "高带宽内存 (High Bandwidth Memory)",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "context_meaning": "静态随机存取存储器",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "context_meaning": "动态随机存取存储器",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "context_meaning": "",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "context_meaning": "",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "context_meaning": "",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "context_meaning": "",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "context_meaning": "Radio Frequency",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "context_meaning": "人工智能",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "context_meaning": "大语言模型 (Large Language Model)",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "context_meaning": "不翻译，保留原文",
+      "translation": "词元",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "context_meaning": "",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "context_meaning": "",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "context_meaning": "",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "context_meaning": "",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "context_meaning": "基于人类反馈的强化学习",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "context_meaning": "一种深度学习模型架构",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "context_meaning": "",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "context_meaning": "",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "context_meaning": "",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "context_meaning": "",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "context_meaning": "",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "context_meaning": "",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "context_meaning": "",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "context_meaning": "",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "context_meaning": "",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "context_meaning": "",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "context_meaning": "",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "context_meaning": "",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "context_meaning": "",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "context_meaning": "",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "context_meaning": "",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "context_meaning": "",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "context_meaning": "",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "context_meaning": "只有表示大模型等的评测方式时翻译成基准测试",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "context_meaning": "每秒浮点运算次数",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "context_meaning": "每秒万亿次运算 (Trillions Operations Per Second)",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "context_meaning": "Capital Expenditure",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "context_meaning": "Operating Expense",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "context_meaning": "Research and Development",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "context_meaning": "垂直整合制造商 (Integrated Device Manufacturer)",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "context_meaning": "无晶圆厂设计公司",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "context_meaning": "核心大客户",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "context_meaning": "",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "context_meaning": "",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "context_meaning": "",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "context_meaning": "",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "context_meaning": "高性能计算 (High Performance Computing)",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "context_meaning": "物联网 (Internet of Things)",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "context_meaning": "",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "context_meaning": "IC",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "context_meaning": "",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "context_meaning": "",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "context_meaning": "",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "context_meaning": "",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "context_meaning": "大模型的预填充阶段，常和decode一起出现",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "context_meaning": "大模型的解码阶段，常和prefill一起出现",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "context_meaning": "连续出现可以适当缩写成德州",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "context_meaning": "英伟达的架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "context_meaning": "英伟达架构",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "context_meaning": "",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "context_meaning": "",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "context_meaning": "",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "context_meaning": "英伟达的显卡",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IEDM",
+      "context_meaning": "半导体顶级学术会议",
+      "translation": "国际电子器件会议",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "VLSI",
+      "context_meaning": "半导体顶级学术会议/技术",
+      "translation": "超大规模集成电路",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "base die",
+      "context_meaning": "HBM堆叠结构中底部的逻辑控制芯片",
+      "translation": "基础芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM3E",
+      "context_meaning": "HBM3的增强版本",
+      "translation": "HBM3E",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "1c",
+      "context_meaning": "三星第6代10nm级DRAM制程节点",
+      "translation": "1c",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SF4",
+      "context_meaning": "三星代工厂的4nm级逻辑制程节点",
+      "translation": "SF4",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TSV",
+      "context_meaning": "用于垂直连接堆叠芯片的互连技术",
+      "translation": "硅通孔",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PMBIST",
+      "context_meaning": "Programmable Memory Built-In Self-Test",
+      "translation": "可编程内存内建自测试",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "tCCDR",
+      "context_meaning": "跨不同堆叠ID的连续READ命令之间的最小间隔时间",
+      "translation": "tCCDR",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "JEDEC",
+      "context_meaning": "固态技术协会，制定内存标准",
+      "translation": "JEDEC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RDQS",
+      "context_meaning": "读取数据选通信号",
+      "translation": "RDQS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TDC",
+      "context_meaning": "Time-to-Digital Converter",
+      "translation": "时间数字转换器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ABB",
+      "context_meaning": "Adaptive Body-Bias，用于补偿工艺偏差的电路技术",
+      "translation": "自适应体偏置",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "MBIST",
+      "context_meaning": "Memory Built-In Self-Test",
+      "translation": "内存内建自测试",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "VDDC",
+      "context_meaning": "核心电源电压",
+      "translation": "VDDC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "VDDQ",
+      "context_meaning": "I/O接口电源电压",
+      "translation": "VDDQ",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "sub-channel",
+      "context_meaning": "LPDDR6架构中的内存通道细分单元",
+      "translation": "子通道",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NRZ",
+      "context_meaning": "一种信号编码方式",
+      "translation": "不归零制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LPDDR5X",
+      "context_meaning": "低功耗双倍数据率第五代扩展版内存标准",
+      "translation": "LPDDR5X",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PAM3",
+      "context_meaning": "GDDR7使用的信号编码方式",
+      "translation": "三电平脉冲幅度调制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SF2",
+      "context_meaning": "三星第二代3纳米级制程节点",
+      "translation": "SF2",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency mode",
+      "context_meaning": "LPDDR6的一种低功耗运行模式",
+      "translation": "能效模式",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "data rate",
+      "context_meaning": "内存的数据传输速率，单位Gb/s",
+      "translation": "数据速率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bit density",
+      "context_meaning": "单位面积内存储的比特数",
+      "translation": "位密度",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Gb/mm²",
+      "context_meaning": "位密度单位，千兆比特每平方毫米",
+      "translation": "Gb/mm²",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Gb/s",
+      "context_meaning": "数据传输速率单位，千兆比特每秒",
+      "translation": "Gb/s",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Cell-on-Peripheral (COP)",
+      "context_meaning": "DRAM架构",
+      "translation": "单元位于外围电路之上 (COP)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Cell-on-Peripheral",
+      "context_meaning": "DRAM架构",
+      "translation": "单元位于外围电路之上",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "COP",
+      "context_meaning": "DRAM架构",
+      "translation": "COP",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BiCS10",
+      "context_meaning": "SanDisk/Kioxia的NAND产品名称，332层3D NAND。",
+      "translation": "BiCS10",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "plane",
+      "context_meaning": "NAND闪存中的并行操作单元。",
+      "translation": "平面",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "xBIT",
+      "context_meaning": "MediaTek's novel 10T bitcell design",
+      "translation": "xBIT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "assist circuitry",
+      "context_meaning": "SRAM peripheral circuits for stability/performance",
+      "translation": "辅助电路",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PDK",
+      "context_meaning": "Process Design Kit",
+      "translation": "工艺设计套件",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "macro",
+      "context_meaning": "芯片设计中可配置的IP模块",
+      "translation": "宏单元",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "dual-port access",
+      "context_meaning": "允许同时读写操作的内存架构",
+      "translation": "双端口访问",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Flash-Plus",
+      "context_meaning": "TSMC规划的下一代eNVM技术路线",
+      "translation": "Flash-Plus",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "interleaved reads",
+      "context_meaning": "跨模块交替读取以提高吞吐量",
+      "translation": "交错读取",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "iso-capacity",
+      "context_meaning": "在相同存储容量下的比较",
+      "translation": "等容量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "OCI MSA",
+      "context_meaning": "Optical Compute Interconnect Multi-Source Agreement, an industry consortium.",
+      "translation": "光学计算互连多源协议",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "UCIe-S",
+      "context_meaning": "A protocol for die-to-die transmission (likely a variant of UCIe).",
+      "translation": "UCIe-S",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "D2D",
+      "context_meaning": "Die-to-die, a parallelized connection between chips.",
+      "translation": "裸片到裸片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SerDes",
+      "context_meaning": "Serializer/Deserializer, a circuit for high-speed serial communication.",
+      "translation": "串行器/解串器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "OBO",
+      "context_meaning": "On-Board Optics, an optical engine integration level.",
+      "translation": "板载光学",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PAM4",
+      "context_meaning": "A modulation format for 200G per lane optical signaling.",
+      "translation": "四电平脉冲幅度调制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "coherent-lite transceiver",
+      "context_meaning": "光通信器件",
+      "translation": "精简相干光模块",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DSP",
+      "context_meaning": "信号处理",
+      "translation": "数字信号处理器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Diamond Rapids",
+      "context_meaning": "英特尔下一代至强（Xeon）CPU的代号。",
+      "translation": "Diamond Rapids",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EMIB",
+      "context_meaning": "英特尔的一种嵌入式多芯片互连桥接先进封装技术。",
+      "translation": "EMIB",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "lane",
+      "context_meaning": "高速串行链路中的独立数据通道。",
+      "translation": "通道",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Manhattan grid",
+      "context_meaning": "一种直角布线网格，与UCIe的六边形凸点图不同",
+      "translation": "曼哈顿网格",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "pJ/b",
+      "context_meaning": "每比特能量消耗的单位",
+      "translation": "皮焦耳/比特",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "test vehicle",
+      "context_meaning": "用于验证新设计或工艺的测试芯片/结构",
+      "translation": "测试载具",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rebellions",
+      "context_meaning": "韩国AI芯片初创公司",
+      "translation": "Rebellions",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "M3DProc",
+      "context_meaning": "Intel首款混合键合芯片的产品代号。",
+      "translation": "M3DProc",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "3D mesh",
+      "context_meaning": "一种三维芯片互连网络架构。",
+      "translation": "3D网格",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Foveros Direct",
+      "context_meaning": "英特尔的一种直接混合键合封装技术。",
+      "translation": "Foveros Direct",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "hybrid bonding",
+      "context_meaning": "一种先进的3D封装技术，用于连接两片晶圆/芯片。",
+      "translation": "混合键合",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "N3P",
+      "context_meaning": "台积电的先进制程节点",
+      "translation": "N3P",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rebel100",
+      "context_meaning": "Rebellions公司AI加速器产品名称",
+      "translation": "Rebel100",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "I-CubeS",
+      "context_meaning": "三星的先进封装技术",
+      "translation": "I-CubeS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Hot Chips",
+      "context_meaning": "高性能芯片研讨会",
+      "translation": "Hot Chips",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "UCIe-A",
+      "context_meaning": "UCIe（通用芯粒互连）的先进接口标准",
+      "translation": "UCIe-A",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Maia 200",
+      "context_meaning": "微软AI加速器产品名称",
+      "translation": "Maia 200",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Maia 100",
+      "context_meaning": "微软上一代AI加速器产品名称",
+      "translation": "Maia 100",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "reticle-scale monolithic",
+      "context_meaning": "芯片设计架构",
+      "translation": "光罩尺寸单芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RC",
+      "context_meaning": "RC time constant",
+      "translation": "RC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RO",
+      "context_meaning": "ring oscillator-based (RO) TDC",
+      "translation": "环形振荡器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ],
+  "style": {
+    "tone": "专业、分析性、略带批判性（对厂商宣传持审慎态度），技术细节丰富，基于数据。",
+    "target_audience": "半导体行业从业者、分析师、资深科技爱好者，具备扎实的硬件知识。",
+    "translation_voice": "专业、准确、流畅的中文科技分析口吻。避免过度口语化，但需将英文长句合理切分为符合中文阅读习惯的短句。保留原文的技术严谨性和批判性视角。"
+  },
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "全文，尤其是各技术缩写（HBM4, LPDDR6, UCIe, CPO, CoWoS）",
+      "issue": "大量专业缩写和术语，需确保首次出现时有解释，全文翻译一致。",
+      "suggestion": "在术语表中统一，首次出现时采用“英文全称（中文释义）”格式，如“UCIe（通用芯粒互连）”。"
+    },
+    {
+      "type": "accuracy",
+      "location": "各技术子章节",
+      "issue": "原文包含大量图表引用（如“Source: Samsung, ISSCC 2026”）和图片URL，翻译时需处理这些非文本元素。",
+      "suggestion": "保留图表标题和来源的翻译，将图片URL和占位符原文保留。确保图表引用与正文逻辑衔接。"
+    },
+    {
+      "type": "accuracy",
+      "location": "技术性能对比和数据分析段落（如 SK Hynix 与 Samsung LPDDR6 的 shmoo plot 对比）",
+      "issue": "涉及具体数据、单位（Gb/s, V, pJ/b）和对比结论，翻译必须精确无误。",
+      "suggestion": "数字、单位、比较级（“worse”, “higher”）需严格对应。技术结论的表述要清晰，避免模糊。"
+    },
+    {
+      "type": "accuracy",
+      "location": "对 Microsoft Maia 200 的描述（“claims are dubious”）",
+      "issue": "原文带有明显的怀疑和批判语气，翻译时需保留这种审慎态度，而非中性化。",
+      "suggestion": "将“dubious”译为“值得怀疑的”、“存疑的”，语气匹配原文的批判性。"
+    },
+    {
+      "type": "accuracy",
+      "location": "长句和复杂技术描述（如 Intel 18A-on-Intel 3 Hybrid Bonding 部分对带宽的描述）",
+      "issue": "英文长句包含多层修饰和对比，直译会导致中文冗长难懂。",
+      "suggestion": "拆分长句，将定语从句、同位语转换为中文短句或前置定语。按照“主语-谓语-宾语”的中文习惯重组信息流。"
+    },
+    {
+      "type": "accuracy",
+      "location": "“model” (e.g., “our Accelerator & HBM model”, “our memory model”)",
+      "issue": "在本文上下文中，“model”指 SemiAnalysis 内部的预测/分析模型，而非通用的“模型”。",
+      "suggestion": "译为“（分析/预测）模型”，或根据上下文灵活处理为“分析报告”、“预测数据”。避免译为“型号”或“模组”。"
+    }
+  ],
+  "guidelines": [
+    "术语一致性优先：严格遵循提供的术语表进行翻译，尤其是高频技术缩写（HBM4, LPDDR6, GDDR7, UCIe, CPO）和关键概念（shmoo plot -> 舒姆图， bitcell -> 存储单元）。首次出现的重要缩写需加注中文全称。",
+    "句式重构与段落流：英文长句（尤其是包含多个从句、数据对比和技术术语的句子）必须拆分为符合中文阅读习惯的短句。确保每个中文句子主干清晰。段落内部逻辑需通过恰当的连接词（如‘此外’、‘然而’、‘具体而言’）衔接，避免直接堆砌翻译后的短句。",
+    "数据与比较的精确传达：所有性能数据（速度、电压、密度、带宽）、单位（Gb/s, V, mm², pJ/b）和比较关系（‘优于’、‘低于’、‘相当于’）必须准确翻译，不得有任何偏差。技术结论的强弱语气需与原文一致。",
+    "保留批判性与分析口吻：原文对厂商宣传持审慎态度（如对 Microsoft Maia 200 的评论）。翻译时需保留这种分析性甚至略带怀疑的语气，使用‘宣称’、‘据称’、‘值得注意’、‘存疑’等措辞，避免将其转化为纯粹的中性陈述或褒奖。"
+  ],
+  "section_roles": {
+    "00-intro": {
+      "role_in_article": "确立文章主题与范围，介绍ISSCC 2026在年度半导体会议中的定位，并预告后续章节结构。",
+      "relation_to_previous": "无（文章开头）",
+      "relation_to_next": "为后续详细的技术章节（如内存）提供宏观背景和逻辑入口。",
+      "key_points": [
+        "ISSCC是年度三大半导体会议（IEDM、VLSI、ISSCC）之一，本文完成对该系列的全面覆盖。",
+        "本文将重点评述内存、光网络、高速电互连、处理器等关键领域。"
+      ],
+      "translation_notes": [
+        "“Roundup”译为“综述”或“盘点”比“总结”更贴切，需体现汇编和评述性质。",
+        "“trinity”译为“三巨头”或“三驾马车”以保持比喻色彩，避免直译“三位一体”可能带来的宗教联想。",
+        "保持引言部分的权威性和前瞻性语气。"
+      ]
+    },
+    "01-memory": {
+      "role_in_article": "作为第一个技术章节的引言，概括ISSCC 2026在内存领域的核心议题和主要参与者，设定本章节的讨论框架。",
+      "relation_to_previous": "承接引言中预告的“Memory”类别，从宏观主题列表转入具体技术领域。",
+      "relation_to_next": "引出对具体内存技术（首先是三星HBM4）的深度分析。",
+      "key_points": [
+        "内存是本届ISSCC的关键主题之一。",
+        "涵盖DRAM（HBM4, LPDDR6, GDDR7）以及逻辑SRAM和MRAM。"
+      ],
+      "translation_notes": [
+        "“piqued our interest”译为“引起了我们的浓厚兴趣”，需保留作者作为行业观察者的主观视角。",
+        "技术缩写（HBM4, LPDDR6, GDDR7, SRAM, MRAM）首次出现时需确保译名准确且全文统一。",
+        "段落虽短，但起到承上启下的关键作用，翻译时需确保逻辑衔接流畅。"
+      ]
+    },
+    "02-samsung-hbm4-paper-15-6": {
+      "role_in_article": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+      "relation_to_previous": "从内存章节的概述，聚焦到具体的第一项技术（HBM4）和第一家公司（三星）。",
+      "relation_to_next": "自然过渡到同一公司（三星）的下一个内存技术（LPDDR6），形成按公司和产品线的逻辑递进。",
+      "key_points": [
+        "三星是三大内存厂商中唯一展示HBM4技术论文的，凸显其领先性或策略差异。",
+        "论文数据证实了作者早前模型中的预测，三星HBM4性能大幅超越其HBM3E。",
+        "三星实现的速度（13 Gb/s/引脚，3.3 TB/s带宽）是JEDEC HBM4基线标准（6.4 Gb/s）的两倍以上。",
+        "即使在较低电压下（1.05V/0.75V）仍能维持高性能（11.8 Gb/s）。"
+      ],
+      "translation_notes": [
+        "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+        "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+        "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+        "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+      ]
+    },
+    "03-samsung-lpddr6-paper-15-8": {
+      "role_in_article": "分析三星LPDDR6的性能参数，并通过密度对比揭示其可能存在的设计挑战或工艺问题。",
+      "relation_to_previous": "从三星的HBM4转向其另一主流内存产品LPDDR6，保持按公司分类的叙述逻辑。",
+      "relation_to_next": "引出对三星LPDDR6 PHY（物理层）的专门讨论，从内存颗粒深入到接口技术。",
+      "key_points": [
+        "三星LPDDR6可达12.8 Gb/s (0.97V) 和 14.4 Gb/s (1.025V)。",
+        "其密度（0.360 Gb/mm²）低于前代LPDDR5X（1b节点），仅略高于更早节点（1a）。",
+        "双子通道架构带来面积代价，但可能还存在其他问题。"
+      ],
+      "translation_notes": [
+        "“shmoo plot”是专业术语，可译为“舒姆图”并首次出现时考虑加简短注释（如“表征电压、频率与稳定性的关系图”）。",
+        "“area penalty”译为“面积代价”或“面积开销”。",
+        "“considerably lower than”和“only slightly higher than”的对比语气需准确传达。",
+        "图表链接需保留，并注明“图表：...”，以便编辑处理。"
+      ]
+    },
+    "04-samsung-sf2-lpddr6-phy-paper": {
+      "role_in_article": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+      "relation_to_previous": "承接上文对三星LPDDR6密度和性能的讨论，深入其底层接口电路设计。",
+      "relation_to_next": "转向竞争对手SK海力士的LPDDR6方案，形成对比分析。",
+      "key_points": [
+        "PHY通过门控非活动子通道的高速时钟路径来实现效率模式。",
+        "时钟门控技术使读写功耗降低近50%，待机功耗降低41%。"
+      ],
+      "translation_notes": [
+        "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+        "“clock-gating”译为“时钟门控”，是标准译法。",
+        "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+        "百分比数据（50%， 41%）的翻译需精确。"
+      ]
+    },
+    "05-sk-hynix-1c-lpddr6-paper-15": {
+      "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+      "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+      "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+      "key_points": [
+        "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+        "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+      ],
+      "translation_notes": [
+        "“shmoo plot”再次出现，保持译法一致。",
+        "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+        "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+        "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+      ]
+    },
+    "06-sk-hynix-1c-gddr7-paper-15-9": {
+      "role_in_article": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+      "relation_to_previous": "从SK海力士的LPDDR6自然过渡到其面向图形领域的GDDR7产品。",
+      "relation_to_next": "转向内存领域另一个根本性挑战——DRAM缩放，并引入三星的4F² COP DRAM解决方案。",
+      "key_points": [
+        "SK海力士GDDR7在1c节点上实现了0.412 Gb/mm²的比特密度。",
+        "其密度显著高于三星的1b和1z工艺。",
+        "更详细的分析（晶圆量、良率、成本等）已在作者的内存模型中涵盖。"
+      ],
+      "translation_notes": [
+        "“bit density”译为“比特密度”或“位密度”。",
+        "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+        "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+        "比较级（“compared to”）的翻译需清晰体现优势程度。"
+      ]
+    },
+    "07-samsung-4f2-cop-dram-paper-1": {
+      "role_in_article": "探讨DRAM微缩的根本性挑战，并介绍三星4F² COP DRAM作为一种创新解决方案，最后将其置于行业发展和市场需求的宏观背景下评估。",
+      "relation_to_previous": "从具体产品（GDDR7）的性能对比，上升到DRAM技术面临的普遍缩放挑战。",
+      "relation_to_next": "预计将过渡到非易失性存储（如NAND Flash，即BiCS10）或其他内存技术，形成从DRAM到其他存储类型的逻辑推进。",
+      "key_points": [
+        "DRAM持续微缩面临挑战。",
+        "三星4F² COP DRAM通过重组子字线驱动器（SWD）等创新减少信号数量。",
+        "尽管有挑战，混合键合4F² DRAM预计在本十年末、1d节点之后出现。",
+        "当前内存市场格局既激励高密度新节点以提高比特产出，也追求高性能/价格比。"
+      ],
+      "translation_notes": [
+        "“4F²”和“COP”（Cell-Over-Periphery）是专业术语，需准确翻译或保留英文并加注。",
+        "“hybrid bonded”译为“混合键合”。",
+        "“performance/$”译为“性能/价格比”或“每美元性能”。",
+        "“On the otherhand”引导的对比关系需清晰翻译（如“另一方面”）。",
+        "将技术细节（SWD重组）与行业洞察（市场激励）结合，翻译时需保持这种深度。"
+      ]
+    },
+    "08-sandisk-kioxia-bics10-nand-p": {
+      "role_in_article": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+      "relation_to_previous": "从易失性内存（DRAM）转向非易失性存储（NAND Flash），完成内存章节内的技术类别覆盖。",
+      "relation_to_next": "预计将结束内存章节，或引出其他技术亮点（如温度传感器），或直接过渡到文章下一大主题（如光网络）。",
+      "key_points": [
+        "SanDisk/Kioxia展示了其BiCS10 NAND闪存技术。"
+      ],
+      "translation_notes": [
+        "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+        "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+        "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+      ]
+    },
+    "09-mediatek-xbit-logic-based-bitc": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "10-tsmc-n16-mram-paper-15-4": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "11-optical-networking": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "12-nvidia-dwdm-paper-23-1": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "13-marvell-coherent-lite-transcei": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "14-broadcom-6-4t-optical-engine": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "15-high-speed-electrical-intercon": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "16-intel-ucie-s-paper-8-1": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "17-tsmc-active-lsi-paper-8-2": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "18-microsoft-d2d-interconnect-p": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "19-processors": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "20-mediatek-dimensity-9500-pape": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "21-intel-18a-on-intel-3-hybrid-bo": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "22-amd-mi355x-paper-2-1": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "23-rebellions-rebel100-paper-2": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "24-microsoft-maia-200-paper-17": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "25-other-highlight": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    },
+    "26-samsung-sf2-temperature-sensor": {
+      "role_in_article": "待分析",
+      "relation_to_previous": "",
+      "relation_to_next": "",
+      "key_points": [],
+      "translation_notes": []
+    }
+  },
+  "section_count": 27,
+  "paragraph_count": 371,
+  "word_count": 9108
+}

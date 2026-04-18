@@ -1,0 +1,33 @@
+{
+  "section_id": "08-rl-as-a-service",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.355,
+    "scores": {
+      "readability": 8.3,
+      "accuracy": 9.0,
+      "terminology": 7.0,
+      "completeness": 8.5,
+      "style": 8.5
+    },
+    "failed_criteria": [
+      "critical_errors (5 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": [
+    "RL在教导模型使用工具方面极为高效。通过利用开源工具，一些初创公司现已向大型企业提供定制化的RL服务。这一领域既有RunRL和Osmosis等YC小型初创公司，也有由经验丰富的研究者创立的公司，如Applied Compute和Adaptive ML。",
+    "此类任务通常选用通义千问模型，因其易于进行后训练且运行所需资源较少。通义千问提供多种模型，包括小型稠密模型，这些模型对部署技能和配置的要求极低。",
+    "经过定制的后训练后，这些模型在租用的硬件上运行。目前，Baseten托管了许多此类小型定制模型。典型应用目标包括Salesforce和AWS Terminal的操作，以及创建或关闭Jira工单。此外，也能使模型可靠地使用MCP（模型上下文协议），例如从SEC文件中提取数据。",
+    "这些提供RL即服务的初创公司正与各大实验室展开竞争，OpenAI近期就推出了“强化微调”服务。OpenAI RFT的目标是让任何拥有足够数据的客户都能对OpenAI模型进行RL训练，从而使其适应客户的具体任务和领域。",
+    "然而在实践中，该服务并未达到预期。我们认为其稳定性不足，且对大多数客户而言过于昂贵。因此，我们看到此类服务的需求主要流向了新兴的初创公司。这些年轻的YC公司利润率不高，甚至经常亏损。但它们能够以仅为 OpenAI 平台五分之一左右的成本服务用户，从而获取市场份额。",
+    "长远来看，这一局面将会改变。OpenAI的目标是那些能投入数百万资金的大型企业；总体而言，实验室将捕获大部分营收。对OpenAI而言，这将通过“战略部署”团队实现，其目标是直接与客户合作构建定制模型。OpenAI很早就将此服务作为企业用例进行押注，并且该公司在2025年的企业业务增速已超过消费者业务。",
+    "https://substackcdn.com/image/fetch/$s_!kiYf!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc103b69d-c1f2-4a3e-8780-abd93fb63602_1040x995.png",
+    "来源：OpenAI",
+    "Anthropic 也正在加入这场竞争。我们认为，Anthropic 拥有其自身类似于 RFT 的服务，该服务比 OpenAI 的版本更稳定、样本效率更高。Anthropic 可能会通过其 API 开放这项服务，但同时也像 OpenAI 一样，正在积极招聘“现场部署工程师（Forward Deployed Engineers）”，其职能很可能与 OpenAI 的战略部署团队相同。",
+    "Anthropic 正在大规模引入 Trainium 芯片。这对 RL 而言具有经济吸引力，部分原因在于其较低的 $/HBM 成本。HBM 通常占芯片物料清单的很大一部分，但亚马逊直接采购，从而降低了成本。RL 工作负载以内存密集型的推理为主。因此，采用 Trainium 这类总拥有成本（TCO）较低的芯片，并通过充分优化吞吐量，客户便能从这项服务中获取可观的利润。",
+    "亚马逊的 AI 复兴：AWS 与 Anthropic 的多吉瓦级 Trainium 扩展 - Jeremie Eliahou Ontiveros, Dylan Patel 等 2 人 · 2025年9月3日",
+    "如前所述，训练定制模型具有巨大的上升空间。我们特别看好的一个领域是科学发现，定制模型可以在该领域取得重大进展。",
+    "提供 RL 即服务的公司还包括 ThinkingMachines Tinker、Applied Compute 以及 Adaptive ML。迄今为止，这三家公司在该市场上都比 OpenAI 和 Anthropic 取得了更大的成功。"
+  ]
+}

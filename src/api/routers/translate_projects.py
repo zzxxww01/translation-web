@@ -15,7 +15,7 @@ from src.core.format_tokens import apply_translation_payload
 from src.core.models import ParagraphStatus
 from src.services.source_metadata_service import SourceMetadataTranslationService
 
-from ..dependencies import GlossaryManagerDep, LLMProviderDep, ProjectManagerDep
+from ..dependencies import AnalysisLLMProviderDep, GlossaryManagerDep, LongformLLMProviderDep, ProjectManagerDep
 
 logger = logging.getLogger(__name__)
 
@@ -113,7 +113,7 @@ async def batch_translate_section(
     section_id: str,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
 ):
     """批量翻译章节中所有非 APPROVED 状态段落。"""
     if not validate_path_component(project_id) or not validate_path_component(
@@ -168,7 +168,7 @@ async def translate_full_document(
     request: FullTranslateRequest,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
 ):
     """
     全文一键翻译（SSE）。
@@ -324,7 +324,8 @@ async def translate_with_four_steps(
     project_id: str,
     http_request: Request,
     pm: ProjectManagerDep,
-    llm: LLMProviderDep,
+    llm: LongformLLMProviderDep,
+    analysis_llm: AnalysisLLMProviderDep,
     _body: FullTranslateRequest = Body(default_factory=FullTranslateRequest),
 ):
     """
@@ -337,6 +338,7 @@ async def translate_with_four_steps(
     if _body.model:
         from src.api.utils.llm_factory import create_llm_provider
         llm = create_llm_provider(provider=_body.model)
+        analysis_llm = llm
 
     from src.services.batch_translation_service import BatchTranslationService
 
@@ -351,6 +353,7 @@ async def translate_with_four_steps(
         project_manager=pm,
         translation_mode=BatchTranslationService.TRANSLATION_MODE_FOUR_STEP,
         max_concurrent_sections=10,  # 并发翻译10个章节（VectorEngine支持100并发）
+        analysis_llm_provider=analysis_llm,
     )
     progress_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
     event_loop = asyncio.get_running_loop()

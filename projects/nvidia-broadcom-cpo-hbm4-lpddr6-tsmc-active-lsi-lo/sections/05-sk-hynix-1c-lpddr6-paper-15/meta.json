@@ -1,0 +1,1223 @@
+{
+  "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+  "title": "SK Hynix 1c LPDDR6 - Paper 15.7",
+  "title_translation": "SK Hynix 1c LPDDR6 - Paper 15.7",
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c8da198-d711-4b0a-8fcd-0d7fce1aa327_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c8da198-d711-4b0a-8fcd-0d7fce1aa327_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0087",
+      "parent_block_index": 87,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c8da198-d711-4b0a-8fcd-0d7fce1aa327_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c8da198-d711-4b0a-8fcd-0d7fce1aa327_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c8da198-d711-4b0a-8fcd-0d7fce1aa327_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c8da198-d711-4b0a-8fcd-0d7fce1aa327_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702587",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!Mi3M!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F4c8da198-d711-4b0a-8fcd-0d7fce1aa327_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "SK Hynix LPDDR6 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix LPDDR6 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0088",
+      "parent_block_index": 88,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SK Hynix LPDDR6 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026*",
+      "parent_block_plain_text": "SK Hynix LPDDR6 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix LPDDR6 Specifications and Die Shot. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 73,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 73,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "ready",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SK海力士 LPDDR6 规格参数与芯片显微图。来源：SK海力士，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702705",
+          "tokenized_text": "[[[EM_1|SK海力士 LPDDR6 规格参数与芯片显微图。来源：SK海力士，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "SK Hynix unveiled their first 1c DRAM products, both in LPDDR6 and in GDDR7 packages. Their LPDDR6 can operate at a data rate of up to 14.4 Gb/s, 35% faster than the fastest LPDDR5X, and at lower power.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0089",
+      "parent_block_index": 89,
+      "parent_block_type": "p",
+      "parent_block_markdown": "SK Hynix unveiled their first 1c DRAM products, both in LPDDR6 and in GDDR7 packages. Their LPDDR6 can operate at a data rate of up to 14.4 Gb/s, 35% faster than the fastest LPDDR5X, and at lower power.",
+      "parent_block_plain_text": "SK Hynix unveiled their first 1c DRAM products, both in LPDDR6 and in GDDR7 packages. Their LPDDR6 can operate at a data rate of up to 14.4 Gb/s, 35% faster than the fastest LPDDR5X, and at lower power.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 202,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SK海力士首次展示了其采用1c工艺的DRAM产品，包括LPDDR6和GDDR7两种封装。其LPDDR6的最高数据速率可达14.4 Gb/s，比最快的LPDDR5X提升了35%，且功耗更低。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702737",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "Although SK Hynix did not state the area or density of the LPDDR6 chip, we estimate the bit density will reach 0.59 Gb/mm², based on the relative density increase of their GDDR7.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0090",
+      "parent_block_index": 90,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Although SK Hynix did not state the area or density of the LPDDR6 chip, we estimate the bit density will reach 0.59 Gb/mm², based on the relative density increase of their GDDR7.",
+      "parent_block_plain_text": "Although SK Hynix did not state the area or density of the LPDDR6 chip, we estimate the bit density will reach 0.59 Gb/mm², based on the relative density increase of their GDDR7.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 178,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "尽管SK海力士未公布LPDDR6芯片的面积或密度，但根据其GDDR7产品的相对密度提升幅度，我们估计其位密度将达到0.59 Gb/mm²。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702762",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd451b064-d3c9-43a0-b92b-e26efd5df094_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd451b064-d3c9-43a0-b92b-e26efd5df094_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0091",
+      "parent_block_index": 91,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd451b064-d3c9-43a0-b92b-e26efd5df094_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd451b064-d3c9-43a0-b92b-e26efd5df094_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd451b064-d3c9-43a0-b92b-e26efd5df094_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd451b064-d3c9-43a0-b92b-e26efd5df094_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702784",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!s1zW!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fd451b064-d3c9-43a0-b92b-e26efd5df094_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "SK Hynix LPDDR6 Shmoo Plot. Source: SK Hynix, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix LPDDR6 Shmoo Plot. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 56,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0092",
+      "parent_block_index": 92,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SK Hynix LPDDR6 Shmoo Plot. Source: SK Hynix, ISSCC 2026*",
+      "parent_block_plain_text": "SK Hynix LPDDR6 Shmoo Plot. Source: SK Hynix, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix LPDDR6 Shmoo Plot. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 56,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 56,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SK海力士 LPDDR6 舒姆图。来源：SK海力士，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702857",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p006",
+      "index": 6,
+      "source": "In their shmoo plot, SK Hynix showed that they can reach a data rate of 14.4 Gb/s at 1.025V, the same as Samsung. However, they can only reach 10.9 Gb/s at 0.95V as compared to Samsung’s 12.8 Gb/s at 0.97V. This indicates that SK Hynix may have worse power efficiency at lower pin speeds when compared to Samsung, having to run at higher voltages to maintain reliability.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0093",
+      "parent_block_index": 93,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In their shmoo plot, SK Hynix showed that they can reach a data rate of 14.4 Gb/s at 1.025V, the same as Samsung. However, they can only reach 10.9 Gb/s at 0.95V as compared to Samsung’s 12.8 Gb/s at 0.97V. This indicates that SK Hynix may have worse power efficiency at lower pin speeds when compared to Samsung, having to run at higher voltages to maintain reliability.",
+      "parent_block_plain_text": "In their shmoo plot, SK Hynix showed that they can reach a data rate of 14.4 Gb/s at 1.025V, the same as Samsung. However, they can only reach 10.9 Gb/s at 0.95V as compared to Samsung’s 12.8 Gb/s at 0.97V. This indicates that SK Hynix may have worse power efficiency at lower pin speeds when compared to Samsung, having to run at higher voltages to maintain reliability.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 371,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "在其展示的舒姆图中，SK海力士表明其产品可在1.025V电压下达到14.4 Gb/s的数据速率，这与三星相同。然而，在0.95V电压下，其速率仅能达到10.9 Gb/s，而三星产品在0.97V下可达12.8 Gb/s。这表明，在较低的引脚速率下，与三星相比，SK海力士的能效可能较差，需要运行在更高电压以维持可靠性。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702881",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p007",
+      "index": 7,
+      "source": "https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c3722fa-72c1-4ad3-9df8-2910380ab1d2_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c3722fa-72c1-4ad3-9df8-2910380ab1d2_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0094",
+      "parent_block_index": 94,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c3722fa-72c1-4ad3-9df8-2910380ab1d2_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c3722fa-72c1-4ad3-9df8-2910380ab1d2_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c3722fa-72c1-4ad3-9df8-2910380ab1d2_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c3722fa-72c1-4ad3-9df8-2910380ab1d2_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702902",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!_oDZ!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F9c3722fa-72c1-4ad3-9df8-2910380ab1d2_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p008",
+      "index": 8,
+      "source": "SK Hynix LPDDR6 Efficiency Mode Architecture. Source: SK Hynix, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix LPDDR6 Efficiency Mode Architecture. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 74,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0095",
+      "parent_block_index": 95,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SK Hynix LPDDR6 Efficiency Mode Architecture. Source: SK Hynix, ISSCC 2026*",
+      "parent_block_plain_text": "SK Hynix LPDDR6 Efficiency Mode Architecture. Source: SK Hynix, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix LPDDR6 Efficiency Mode Architecture. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 74,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 74,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SK海力士 LPDDR6 能效模式架构图。来源：SK海力士，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702964",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p009",
+      "index": 9,
+      "source": "https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F001bcb01-81d3-42d2-b0a2-832688185377_2880x1620.jpeg",
+      "source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F001bcb01-81d3-42d2-b0a2-832688185377_2880x1620.jpeg\" />",
+      "element_type": "image",
+      "inline_elements": [],
+      "parent_block_id": "b0096",
+      "parent_block_index": 96,
+      "parent_block_type": "image",
+      "parent_block_markdown": "![](https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F001bcb01-81d3-42d2-b0a2-832688185377_2880x1620.jpeg)",
+      "parent_block_plain_text": "https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F001bcb01-81d3-42d2-b0a2-832688185377_2880x1620.jpeg",
+      "parent_source_html": "<img src=\"https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F001bcb01-81d3-42d2-b0a2-832688185377_2880x1620.jpeg\" />",
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 223,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": true,
+      "metadata_type": "image",
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F001bcb01-81d3-42d2-b0a2-832688185377_2880x1620.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.702987",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "https://substackcdn.com/image/fetch/$s_!io7g!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F001bcb01-81d3-42d2-b0a2-832688185377_2880x1620.jpeg",
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p010",
+      "index": 10,
+      "source": "SK Hynix LPDDR6 Efficiency Mode Power Savings. Source: SK Hynix, ISSCC 2026",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix LPDDR6 Efficiency Mode Power Savings. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "parent_block_id": "b0097",
+      "parent_block_index": 97,
+      "parent_block_type": "p",
+      "parent_block_markdown": "*SK Hynix LPDDR6 Efficiency Mode Power Savings. Source: SK Hynix, ISSCC 2026*",
+      "parent_block_plain_text": "SK Hynix LPDDR6 Efficiency Mode Power Savings. Source: SK Hynix, ISSCC 2026",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "em",
+          "text": "SK Hynix LPDDR6 Efficiency Mode Power Savings. Source: SK Hynix, ISSCC 2026",
+          "start": 0,
+          "end": 75,
+          "href": null,
+          "title": null,
+          "span_id": "EM_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 75,
+      "expected_tokens": [
+        "EM_1"
+      ],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token EM_1."
+      ],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "SK海力士 LPDDR6 能效模式节能效果。来源：SK海力士，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.703046",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token EM_1."
+          ]
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    },
+    {
+      "id": "p011",
+      "index": 11,
+      "source": "Like Samsung’s LPDDR6, SK Hynix’s LPDDR6 also features two modes, a normal mode and an efficiency mode. The efficiency mode runs at 12.8 Gb/s over a single sub-channel, with 12.7% and 18.9% lower standby and operational current draw respectively compared to normal mode.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0098",
+      "parent_block_index": 98,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Like Samsung’s LPDDR6, SK Hynix’s LPDDR6 also features two modes, a normal mode and an efficiency mode. The efficiency mode runs at 12.8 Gb/s over a single sub-channel, with 12.7% and 18.9% lower standby and operational current draw respectively compared to normal mode.",
+      "parent_block_plain_text": "Like Samsung’s LPDDR6, SK Hynix’s LPDDR6 also features two modes, a normal mode and an efficiency mode. The efficiency mode runs at 12.8 Gb/s over a single sub-channel, with 12.7% and 18.9% lower standby and operational current draw respectively compared to normal mode.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 270,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {
+        "pro": {
+          "text": "与三星的LPDDR6类似，SK海力士的LPDDR6也具备两种模式：普通模式和能效模式。在能效模式下，单个子通道以12.8 Gb/s的速率运行，其待机电流和工作电流相比普通模式分别降低了12.7%和18.9%。",
+          "model": "pro",
+          "created_at": "2026-04-18T01:03:08.703068",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 9.13,
+        "is_excellent": false,
+        "applied_terms": [
+          "“shmoo plot”再次出现，保持译法一致。",
+          "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+          "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+          "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+          "relation_to_previous": "从三星LPDDR6及其PHY转向其直接竞争对手SK海力士的同类产品，形成对比章节。",
+          "relation_to_next": "继续讨论SK海力士的另一产品线（GDDR7），保持按公司分类的叙述结构。",
+          "key_points": [
+            "SK海力士LPDDR6在最高速（14.4 Gb/s）上与三星持平，但在中低电压/速度下能效可能较差（需更高电压维持可靠性）。",
+            "同样具备正常模式和效率模式，效率模式在单子通道下运行，可降低待机和操作电流。"
+          ],
+          "translation_notes": [
+            "“shmoo plot”再次出现，保持译法一致。",
+            "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+            "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+            "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+          ]
+        },
+        "scores": {
+          "readability": 8.8,
+          "accuracy": 9.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译不一致，且“芯片显微照片”不够专业。"
+          },
+          {
+            "type": "readability",
+            "description": "“涵盖...两种封装形式”略显书面化，可以更简洁。"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文“在较低的引脚速度下”可能引起歧义，原文“at lower pin speeds”更可能指“在较低的引脚速率（即数据速率）下”。"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可以调整得更紧凑，使因果关系更清晰。"
+          }
+        ]
+      },
+      "history": []
+    }
+  ]
+}

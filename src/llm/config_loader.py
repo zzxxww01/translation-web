@@ -17,12 +17,20 @@ import logging
 from .config_models import (
     LLMConfig,
     ProviderConfig,
+    ProviderNetworkConfig,
     APIKeyConfig,
     ModelConfig,
     RetryConfig,
 )
+from .models import resolve_model_alias
 
 logger = logging.getLogger(__name__)
+
+_ENV_FALLBACKS = {
+    "GEMINI_HTTP_PROXY": "HTTP_PROXY",
+    "GEMINI_HTTPS_PROXY": "HTTPS_PROXY",
+    "GEMINI_NO_PROXY": "NO_PROXY",
+}
 
 
 class ConfigLoader:
@@ -97,6 +105,10 @@ class ConfigLoader:
             var_name = data[2:-1]
             value = os.getenv(var_name)
             if value is None:
+                fallback_name = _ENV_FALLBACKS.get(var_name)
+                if fallback_name:
+                    value = os.getenv(fallback_name)
+            if value is None:
                 logger.warning(f"环境变量 {var_name} 未设置")
                 return ""
             value = value.strip()
@@ -114,6 +126,9 @@ class ConfigLoader:
             ModelConfig(**model_data) for model_data in data['models']
         ]
         retry_config = RetryConfig(**data['retry_config'])
+        network_config = None
+        if data.get('network') is not None:
+            network_config = ProviderNetworkConfig(**data['network'])
 
         return ProviderConfig(
             provider_id=provider_id,
@@ -123,19 +138,53 @@ class ConfigLoader:
             api_keys=api_keys,
             models=models,
             retry_config=retry_config,
+            network=network_config,
             group_priority=data.get('group_priority', 999),
             base_url=data.get('base_url'),
             enabled=data.get('enabled', True)
         )
+
+    def resolve_config_model_alias(self, alias: str) -> Optional[str]:
+        """Resolve legacy/public aliases to the canonical alias used in YAML config."""
+        if not alias:
+            return None
+
+        if not self._config:
+            self._config = self.load()
+
+        normalized = alias.strip()
+        if not normalized:
+            return None
+
+        for provider in self._config.providers.values():
+            for model in provider.models:
+                if model.alias == normalized:
+                    return model.alias
+
+        try:
+            legacy_provider, legacy_real_model, _ = resolve_model_alias(normalized)
+        except Exception:
+            return None
+
+        for provider in self._config.providers.values():
+            for model in provider.models:
+                if provider.type == legacy_provider and model.real_model == legacy_real_model:
+                    return model.alias
+
+        return None
 
     def get_model_config(self, alias: str) -> Optional[ModelConfig]:
         """根据别名获取模型配置"""
         if not self._config:
             self._config = self.load()
 
+        resolved_alias = self.resolve_config_model_alias(alias)
+        if not resolved_alias:
+            return None
+
         for provider in self._config.providers.values():
             for model in provider.models:
-                if model.alias == alias:
+                if model.alias == resolved_alias:
                     return model
         return None
 
@@ -144,11 +193,34 @@ class ConfigLoader:
         if not self._config:
             self._config = self.load()
 
+        resolved_alias = self.resolve_config_model_alias(alias)
+        if not resolved_alias:
+            return None
+
         for provider in self._config.providers.values():
             for model in provider.models:
-                if model.alias == alias:
+                if model.alias == resolved_alias:
                     return provider
         return None
+
+    def get_primary_provider_by_type(self, provider_type: str) -> Optional[ProviderConfig]:
+        """Return the highest-priority enabled provider for a provider type."""
+        if not self._config:
+            self._config = self.load()
+
+        normalized_type = (provider_type or "").strip().lower()
+        if not normalized_type:
+            return None
+
+        matches = [
+            provider
+            for provider in self._config.providers.values()
+            if provider.enabled and provider.type.strip().lower() == normalized_type
+        ]
+        if not matches:
+            return None
+
+        return sorted(matches, key=lambda item: item.group_priority)[0]
 
     def list_all_models(self) -> Dict[str, Dict[str, Any]]:
         """列出所有可用的模型"""

@@ -1,0 +1,63 @@
+{
+  "section_id": "11-why-rl-for-biology-can-be-chal",
+  "new_terms": [
+    {
+      "term": "Frontier Science",
+      "suggested_translation": "前沿科学",
+      "context": "OpenAI用于衡量模型科研能力的评估名称",
+      "confidence": 0.9
+    },
+    {
+      "term": "in-flight weight updates",
+      "suggested_translation": "飞行中权重更新",
+      "context": "一种在长轨迹推演中更新模型权重以提高GPU利用率的技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "KV Caches",
+      "suggested_translation": "KV缓存",
+      "context": "Transformer模型中的键值缓存，用于加速推理",
+      "confidence": 0.9
+    },
+    {
+      "term": "Protein Data Bank",
+      "suggested_translation": "蛋白质数据库",
+      "context": "一个包含蛋白质结构数据的开源数据库",
+      "confidence": 0.9
+    },
+    {
+      "term": "Open Reaction Database",
+      "suggested_translation": "开放反应数据库",
+      "context": "一个用于化学反应的开放数据库",
+      "confidence": 0.9
+    },
+    {
+      "term": "EvE",
+      "suggested_translation": "EvE",
+      "context": "一个为模型提供商提供有价值平台的计划/项目",
+      "confidence": 0.8
+    },
+    {
+      "term": "Ether0",
+      "suggested_translation": "Ether0",
+      "context": "FutureHouse公司使用的模型名称",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "rl": "强化学习",
+    "rollouts": "轨迹推演",
+    "sparse rewards": "稀疏奖励",
+    "rubrics": "评分标准",
+    "straggler rollouts": "掉队推演",
+    "gpu utilization": "GPU利用率",
+    "weights": "权重",
+    "training sets": "训练集",
+    "open-source data": "开源数据",
+    "frontier labs": "前沿实验室",
+    "ml": "机器学习",
+    "pharma": "制药公司"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-15T21:11:42.462497"
+}

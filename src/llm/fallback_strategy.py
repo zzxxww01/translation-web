@@ -11,6 +11,7 @@ from typing import List, Optional
 import logging
 
 from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, LLMConfig
+from .models import resolve_model_alias
 
 logger = logging.getLogger(__name__)
 
@@ -43,15 +44,14 @@ class FallbackStrategy:
         3. 跨组：映射的其他组模型 + 所有 Key
         """
         attempts = []
-
-        # 获取初始模型的 Provider
-        initial_provider = self._get_provider_for_model(initial_model_alias)
-        if not initial_provider:
+        resolved_alias = self._resolve_config_model_alias(initial_model_alias)
+        if not resolved_alias:
             raise ValueError(f"Model {initial_model_alias} not found in any provider")
 
-        initial_model = self._get_model_config(initial_model_alias)
-        if not initial_model:
-            raise ValueError(f"Model config for {initial_model_alias} not found")
+        # 获取初始模型的 Provider
+        initial_provider = self._get_provider_for_model(resolved_alias)
+
+        initial_model = self._get_model_config(resolved_alias)
 
         # 第一阶段：同组内故障转移
         within_attempts = self._build_within_provider_attempts(initial_provider, initial_model)
@@ -59,15 +59,41 @@ class FallbackStrategy:
 
         # 第二阶段：跨组故障转移
         if self.config.fallback_rules.get('cross_provider', {}).get('enabled', False):
-            cross_attempts = self._build_cross_provider_attempts(initial_model_alias)
+            cross_attempts = self._build_cross_provider_attempts(resolved_alias)
             attempts.extend(cross_attempts)
 
         logger.info(
-            f"Built attempt plan with {len(attempts)} attempts for model {initial_model_alias} "
+            f"Built attempt plan with {len(attempts)} attempts for model {resolved_alias} "
             f"(within: {len(within_attempts)}, cross: {len(attempts) - len(within_attempts)})"
         )
 
         return attempts
+
+    def _resolve_config_model_alias(self, alias: str) -> Optional[str]:
+        """Resolve public/legacy aliases to a canonical YAML config alias."""
+        if not alias:
+            return None
+
+        normalized = alias.strip()
+        if not normalized:
+            return None
+
+        for provider in self.config.providers.values():
+            for model in provider.models:
+                if model.alias == normalized:
+                    return model.alias
+
+        try:
+            legacy_provider, legacy_real_model, _ = resolve_model_alias(normalized)
+        except Exception:
+            return None
+
+        for provider in self.config.providers.values():
+            for model in provider.models:
+                if provider.type == legacy_provider and model.real_model == legacy_real_model:
+                    return model.alias
+
+        return None
 
     def _build_within_provider_attempts(
         self, provider: ProviderConfig, initial_model: ModelConfig

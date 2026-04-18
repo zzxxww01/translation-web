@@ -1,0 +1,66 @@
+{
+  "section_id": "26-samsung-sf2-temperature-sensor",
+  "new_terms": [
+    {
+      "term": "bipolar junction transistor (BJT)",
+      "suggested_translation": "双极结型晶体管 (BJT)",
+      "context": "传统温度传感器使用的核心元件",
+      "confidence": 0.95
+    },
+    {
+      "term": "BEOL metal resistor",
+      "suggested_translation": "后端金属层电阻",
+      "context": "位于芯片后端金属层的电阻，用于温度传感",
+      "confidence": 0.9
+    },
+    {
+      "term": "temperature coefficient of resistance (TCR)",
+      "suggested_translation": "电阻温度系数 (TCR)",
+      "context": "电阻值随温度变化的比率",
+      "confidence": 0.95
+    },
+    {
+      "term": "time-offset compression technique",
+      "suggested_translation": "时间偏移压缩技术",
+      "context": "一种通过快速充电路径加速RC电路响应的技术",
+      "confidence": 0.85
+    },
+    {
+      "term": "time-to-digital conversion (TDC)",
+      "suggested_translation": "时间数字转换 (TDC)",
+      "context": "将时间间隔转换为数字信号的技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "linear delay generator",
+      "suggested_translation": "线性延迟发生器",
+      "context": "用于产生线性延迟的电路模块",
+      "confidence": 0.85
+    },
+    {
+      "term": "phase-interleaved counting",
+      "suggested_translation": "相位交错计数",
+      "context": "防止环形振荡器计数非单调性的技术",
+      "confidence": 0.85
+    },
+    {
+      "term": "accuracy figure of merit (FoM)",
+      "suggested_translation": "精度品质因数 (FoM)",
+      "context": "衡量传感器精度性能的综合指标",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "sf2": "SF2",
+    "tsmc": "台积电",
+    "intel": "英特尔",
+    "samsung": "三星",
+    "pdk": "工艺设计套件",
+    "ro": "环形振荡器",
+    "rc": "RC",
+    "jscc": "JSSC"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T21:52:13.668763"
+}

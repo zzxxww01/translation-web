@@ -1,0 +1,3 @@
+创建项目...
+[FAIL] 项目创建失败: 400
+{"detail":"Could not locate article node in C:\\Users\\DELL\\Desktop\\translation_agent\\test_parallel_source.html","error_code":"BAD_REQUEST","path":"/api/projects"}

@@ -1,0 +1,338 @@
+{
+  "section_id": "04-data-foundries-and-expert-cont",
+  "mode": "four_step",
+  "prompt_context": {
+    "section_id": "04-data-foundries-and-expert-cont",
+    "section_title": "Data Foundries and Expert Contractors",
+    "section_title_translation": "数据代工厂与专家外包",
+    "section_position": "5/13",
+    "article_theme": "The AI industry's paradigm shift from pre-training data aggregation to Reinforcement Learning (RL) scaling, which is driving massive demand for specialized RL environments, expert data foundries, and multi-agent architectures.",
+    "structure_summary": "The article opens by introducing the shift toward RL and the resulting gap left by Scale AI. It then dives technically into how RL environments (specifically coding) are built. The narrative transitions to the business side—data foundries, procurement patterns, and 'RL as a service'. Finally, it explores the application of RL in scientific domains (biology) and concludes with a forward-looking perspective on multi-agent architectures.",
+    "target_audience": "AI researchers, ML engineers, tech investors, and industry strategists.",
+    "translation_voice": "Professional tech-business analyst. The Chinese should be concise, objective, and use precise industry jargon without sounding purely academic. Maintain the punchy, insider tone typical of SemiAnalysis.",
+    "previous_section_title": "So You Want to Make a Coding Environment?",
+    "next_section_title": "Buying patterns across labs",
+    "section_role": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+    "translation_notes": [
+      "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+      "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+      "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+    ],
+    "key_points": [
+      "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+      "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+      "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+    ],
+    "guidelines": [
+      "Preserve Semantic Density: Do not over-explain technical terms in the main text; rely on the terminology list. Readers are assumed to be industry insiders.",
+      "Sentence Restructuring: SemiAnalysis often uses long, clause-heavy sentences (e.g., explaining the test patch process). Break these down into shorter, logical Chinese sequences (e.g., using '首先...其次...最后...' or semicolons) to ensure natural paragraph flow.",
+      "Domain Consistency: Pay strict attention to RL terminology. 'Rollouts' must be translated as '轨迹推演', 'Sparse rewards' as '稀疏奖励', and 'Mid-training' as '中期训练'. Do not use general software or business translations for these.",
+      "Company Names: Keep all AI startup and lab names in English (e.g., Scale AI, Windsurf, Cursor, Anthropic, Qwen, Surge).",
+      "Tone Match: Emulate the 'insider analyst' voice. Use sharp, professional business-tech phrasing (e.g., '采购模式' for buying patterns, '防御性姿态' for defensive posturing).",
+      "Title Translation: Ensure all elements of the original title are translated without dropping keywords. 'Scaling Reinforcement Learning: Environments, Reward Hacking, Agents, Scaling Data' -> '扩展强化学习：环境、奖励劫持、智能体与数据扩展'."
+    ],
+    "article_challenges": [
+      {
+        "location": "Heading: During a Gold Rush, Sell Shovels.",
+        "issue": "Classic business metaphor that needs natural phrasing in Chinese.",
+        "suggestion": "Translate as '淘金热中卖铲子'. The meaning is universally understood in Chinese tech/business circles.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Section: Why RL for Biology Can be Challenging",
+        "issue": "The word 'rollouts' in RL means executing a policy to gather trajectory data, not launching a product.",
+        "suggestion": "Translate as '轨迹推演' or '长序列推演' and add a brief translator note if necessary to distinguish from software rollouts.",
+        "type": "accuracy"
+      },
+      {
+        "location": "Section: So You Want to Make a Coding Environment?",
+        "issue": "Long procedural sentence detailing the PR test patch process ('A task is considered valid only if...').",
+        "suggestion": "Break into a bulleted or logically sequenced Chinese sentence (e.g., '一个任务只有满足以下条件才算有效：首先...；其次...；最后...').",
+        "type": "accuracy"
+      },
+      {
+        "location": "Heading: Sorry, your agent is not allowed",
+        "issue": "Casual, slightly sarcastic tone reflecting platform API blocking.",
+        "suggestion": "Maintain the conversational tone: '抱歉，您的智能体被禁了' or '对不起，此地禁止智能体入内'.",
+        "type": "accuracy"
+      }
+    ],
+    "terminology": [
+      {
+        "original": "RL (Reinforcement Learning)",
+        "term": "RL (Reinforcement Learning)",
+        "translation": "强化学习",
+        "strategy": "translate",
+        "note": "A machine learning training method based on rewarding desired behaviors, central to the article's scaling thesis.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Data Foundries",
+        "term": "Data Foundries",
+        "translation": "数据代工厂",
+        "strategy": "translate",
+        "note": "Companies that produce highly specialized, expert-level data for AI training, analogous to semiconductor foundries.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Computer use environments",
+        "term": "Computer use environments",
+        "translation": "计算机操作环境",
+        "strategy": "translate",
+        "note": "Simulated or real operating system environments where AI agents learn to interact with computers like humans.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Mid-Training",
+        "term": "Mid-Training",
+        "translation": "中期训练",
+        "strategy": "translate",
+        "note": "Continued pre-training (next token prediction) used to extend cutoff dates or improve domain knowledge before RL.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Rollouts",
+        "term": "Rollouts",
+        "translation": "轨迹推演",
+        "strategy": "translate",
+        "note": "In RL, the process of generating a sequence of states and actions (trajectories) by running a policy in an environment.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Sparse rewards",
+        "term": "Sparse rewards",
+        "translation": "稀疏奖励",
+        "strategy": "translate",
+        "note": "A challenge in RL where the feedback/reward is only given after a long sequence of actions.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Wet Lab",
+        "term": "Wet Lab",
+        "translation": "湿实验室",
+        "strategy": "translate",
+        "note": "Laboratories where chemicals, drugs, or other biological matter are handled in liquid solutions.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Execution-based verification",
+        "term": "Execution-based verification",
+        "translation": "基于执行的验证",
+        "strategy": "translate",
+        "note": "Validating AI-generated code by actually running it against test suites rather than just reading it.",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Reward Hacking",
+        "term": "Reward Hacking",
+        "translation": "奖励劫持",
+        "strategy": "translate",
+        "note": "When an AI system finds a loophole to get high rewards without actually completing the intended task.",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "TSMC",
+        "term": "TSMC",
+        "translation": "台积电",
+        "strategy": "first_annotate",
+        "note": "Taiwan Semiconductor Manufacturing Company",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Apple Silicon",
+        "term": "Apple Silicon",
+        "translation": null,
+        "strategy": "preserve",
+        "note": "苹果自研芯片品牌",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "NVIDIA",
+        "term": "NVIDIA",
+        "translation": "英伟达",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "AMD",
+        "term": "AMD",
+        "translation": "AMD",
+        "strategy": "preserve",
+        "note": "超微半导体",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "Intel",
+        "term": "Intel",
+        "translation": "英特尔",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Qualcomm",
+        "term": "Qualcomm",
+        "translation": "高通",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "MediaTek",
+        "term": "MediaTek",
+        "translation": "联发科",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Samsung",
+        "term": "Samsung",
+        "translation": "三星",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "SK Hynix",
+        "term": "SK Hynix",
+        "translation": "SK海力士",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "Micron",
+        "term": "Micron",
+        "translation": "美光",
+        "strategy": "first_annotate",
+        "note": null,
+        "first_occurrence_note": true
+      },
+      {
+        "original": "foundry",
+        "term": "foundry",
+        "translation": "晶圆代工厂",
+        "strategy": "first_annotate",
+        "note": "后续可简称'代工厂'",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "wafer",
+        "term": "wafer",
+        "translation": "晶圆",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "fab",
+        "term": "fab",
+        "translation": "晶圆厂",
+        "strategy": "first_annotate",
+        "note": "fabrication facility",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "node",
+        "term": "node",
+        "translation": "制程节点",
+        "strategy": "translate",
+        "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV",
+        "term": "EUV",
+        "translation": "EUV",
+        "strategy": "preserve",
+        "note": "极紫外光刻 (Extreme Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "EUV lithography",
+        "term": "EUV lithography",
+        "translation": "EUV光刻",
+        "strategy": "first_annotate",
+        "note": "极紫外光刻技术",
+        "first_occurrence_note": true
+      },
+      {
+        "original": "DUV",
+        "term": "DUV",
+        "translation": "DUV",
+        "strategy": "preserve",
+        "note": "深紫外光刻 (Deep Ultraviolet)",
+        "first_occurrence_note": false
+      },
+      {
+        "original": "photolithography",
+        "term": "photolithography",
+        "translation": "光刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "etching",
+        "term": "etching",
+        "translation": "蚀刻",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "deposition",
+        "term": "deposition",
+        "translation": "沉积",
+        "strategy": "translate",
+        "note": null,
+        "first_occurrence_note": false
+      },
+      {
+        "original": "CMP",
+        "term": "CMP",
+        "translation": "化学机械抛光",
+        "strategy": "first_annotate",
+        "note": "Chemical Mechanical Planarization",
+        "first_occurrence_note": true
+      }
+    ]
+  },
+  "understanding": {
+    "role_in_article": "Expands the scope from coding to general domains and introduces geopolitical and market fragmentation dynamics.",
+    "relation_to_previous": "Extrapolates the technical complexity of coding environments to other specialized fields like chip design and healthcare.",
+    "relation_to_next": "Concludes that RL data procurement is highly fragmented (unlike the pre-training era), setting up the analysis of specific lab buying patterns.",
+    "key_points": [
+      "RL environments are expanding into diverse, highly specialized domains (EHR, chip design, accounting).",
+      "Chinese VCs are heavily investing in local data foundries to serve domestic labs at lower costs.",
+      "Data procurement in the RL era is highly fragmented, diverging from the uniform data access of the pre-training era."
+    ],
+    "translation_notes": [
+      "Translate 'Data foundries' as '数据工厂' or '数据代工' to reflect the industrial scale.",
+      "Ensure 'EHR software' is localized correctly as '电子健康记录(EHR)软件'.",
+      "Maintain an objective, analytical tone when discussing geopolitical VC dynamics and domestic lab compute allocation."
+    ]
+  },
+  "translations": [
+    "环境工具之所以普遍有用，是因为它们正在众多不同领域中被创建：芯片设计环境能让模型辅助设计流程，会计环境让模型处理税务，以及用于医疗工作流程的电子健康记录软件，这些都只是少数例子。",
+    "虽然软件工程师构建环境本身，但工作流程通常由参与环境创建过程的特定领域承包商来创建、描述和评级。金融专业人士帮助定义金融任务，医生负责医疗领域，律师负责法律领域，等等。",
+    "实验室会通过人类数据承包商公司（我们稍后会谈到）来运作，这些公司会参与进来，为特定任务的创建提供意见。合同通常至少持续一个季度，可以是兼职或全职。承包商负责设计任务、撰写预期解决方案、指定奖励信号，在某些情况下，还会对模型解决方案进行评级。这些奖励信号可以以评分量表的形式出现，其撰写也可能涉及承包商或严格的验证器。这类专家正是会被聘请来帮助构建像 GDPval 这类评估的。",
+    "https://substackcdn.com/image/fetch/$s_!lCmR!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F44e8dce0-9fc7-4835-bd97-ac730132e885_1880x802.png",
+    "OpenAI的数据处理流程。OpenAI拥有一个名为Feather的私有内部平台，供承包商使用，数据通过该平台进行处理。图片来源：OpenAI",
+    "像 Mercor、Handshake、Surge 和 Aboda.ai 这样的公司被用来跨众多专业领域雇佣这些专家。Surge 是其中更成熟、规模更大的参与者，我们相信其营收更接近 10 亿美元的年度经常性收入。",
+    "这些公司大多最初是AI面试官或职位匹配公司，但最终发现，充当实验室与承包商专家之间的连接器更有价值。",
+    "编码领域的需求量最大，但在非专业领域如摄影、音乐和设计上的支出也已增加。如前所述，实验室不仅希望增加他们在特定领域进行后期训练的任务数量，还希望扩展任务的广度和多样性。",
+    "这些供应商的营收主要集中于Anthropic、OpenAI和Google等西方实验室。然而，我们认为Surge在国际上也相当活跃，向月之暗面和Z.ai等中国实验室销售服务。事实上，我们相信，获取这些强化学习环境在提升Kimi K2 Thinking和GLM-4.6的能力方面发挥了巨大作用。当公司在宣传其制作PowerPoint演示文稿或Excel表格的能力有所提升时，这直接源于额外的强化学习训练。",
+    "中国的风险投资机构正积极尝试扶持本土的数据代工厂竞争者，以期能以比西方供应商更低的价格，全面服务本地生态系统。大多数中国实验室在扩展强化学习方面仍处于早期阶段：例如，通义千问目前仅将约5%的预训练算力用于后训练。当然，在算力允许的前提下，成功的本土数据代工厂业务将极大加速这一转型进程。",
+    "https://substackcdn.com/image/fetch/$s_!qotS!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F70e2bbd2-5bd8-4410-aace-24fef73f4e63_1606x1003.png",
+    "来源：Aboda.ai, SemiAnalysis",
+    "在上述案例中，承包商提供包含解释说明的完整解决方案。承包商也可以对模型输出进行评分，并提供错误反馈。这些数据可以以任何语言获取，并在需要时由另一个模型进行翻译。",
+    "像Mercor这样的公司也是大量评分标准的生产者，这些标准可用于多种不同领域。目前，大多数评分标准仍由人工撰写，不过也有一些公司，例如The LLM Data Company，正尝试让模型来撰写评分标准。这可以通过例如将高性能模型连接到高度可靠的MCP（模型控制协议）来提取信息，然后将其用于结构化的评分标准中来实现。",
+    "https://substackcdn.com/image/fetch/$s_!GqlC!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F0265b727-8cc7-4774-98f9-023dea365b99_1493x1744.png",
+    "LLM生成的评分标准。来源：The LLM Data Company",
+    "我们认为这种方法具有巨大的潜力，尽管目前AI实验室主要专注于消费人类生成的数据。长远来看，随着模型性能的提升，其可靠性和质量都将得到改善。如前所述，所有实验室都在追求AI自动化的AI研究。",
+    "鉴于选项的多样性，理解数据采购决策对于制定实验室战略至关重要。这种范式与预训练阶段不同，那时所有人都能获取相同的数据。"
+  ]
+}
