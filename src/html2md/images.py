@@ -63,20 +63,33 @@ def copy_and_rewrite_images(
 
 
 def _copy_image(src: str, source_html_path: Path, target_path: Path) -> bool:
+    import logging
+    logger = logging.getLogger(__name__)
+
     target_path.parent.mkdir(parents=True, exist_ok=True)
     if src.startswith(("http://", "https://")):
         try:
             request = urllib.request.Request(src, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(request, timeout=10) as response, target_path.open("wb") as output:
-                output.write(response.read())
-            return True
-        except Exception:
+            with urllib.request.urlopen(request, timeout=30) as response:
+                if response.status == 200:
+                    content = response.read()
+                    with target_path.open("wb") as output:
+                        output.write(content)
+                    logger.info(f"Downloaded image: {src} -> {target_path.name}")
+                    return True
+                else:
+                    logger.warning(f"Failed to download image: {src}, HTTP {response.status}")
+                    return False
+        except Exception as e:
+            logger.warning(f"Failed to download image: {src}, reason: {e}")
             return False
 
     source_path = (source_html_path.parent / src).resolve()
     if not source_path.exists():
+        logger.warning(f"Local image not found: {src}")
         return False
     shutil.copy2(source_path, target_path)
+    logger.info(f"Copied local image: {src} -> {target_path.name}")
     return True
 
 
