@@ -1,0 +1,23 @@
+{
+  "project_id": "nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo",
+  "generated_at": "2026-04-18T22:56:50.686421",
+  "issue_count": 2,
+  "issues": [
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "13-marvell-coherent-lite-transcei",
+      "paragraph_id": "p009",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "精简相干光模块是一种基于数字信号处理器（DSP）的可插拔模块，包含两个 400G 通道。每个 400G 通道运行双偏振正交幅度调制（Dual-Polarization Quadrature Amplitude Modulation, DP-QAM），并由 X 和 Y 两个并行的调制流组成。"
+    },
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "17-tsmc-active-lsi-paper-8-2",
+      "paragraph_id": "p002",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "台积电（TSMC）的先进封装部门展示了其有源本地硅互连（Active Local Silicon Interconnect, aLSI）方案。与标准的CoWoS-L或EMIB不同，aLSI改善了信号完整性，并降低了顶层裸片上物理层（PHY）和串行器/解串器（SerDes）的复杂度。"
+    }
+  ]
+}

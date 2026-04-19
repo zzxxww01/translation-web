@@ -1,0 +1,62 @@
+{
+  "section_id": "17-tsmc-active-lsi-paper-8-2",
+  "new_terms": [
+    {
+      "term": "Active Local Silicon Interconnect (aLSI)",
+      "suggested_translation": "有源本地硅互连 (aLSI)",
+      "context": "TSMC先进封装技术，桥接芯片中包含有源电路",
+      "confidence": 0.95
+    },
+    {
+      "term": "Edge-Triggered Transceiver (ETT)",
+      "suggested_translation": "边沿触发收发器 (ETT)",
+      "context": "aLSI桥接芯片中的有源信号调理电路",
+      "confidence": 0.9
+    },
+    {
+      "term": "embedded deep trench capacitor (eDTC)",
+      "suggested_translation": "嵌入式深沟槽电容 (eDTC)",
+      "context": "集成于aLSI桥接芯片前端，用于改善供电",
+      "confidence": 0.9
+    },
+    {
+      "term": "Known Good Die (KGD)",
+      "suggested_translation": "已知合格裸片 (KGD)",
+      "context": "封装前对单个裸片的测试阶段",
+      "confidence": 0.85
+    },
+    {
+      "term": "Known Good Stack (KGS)",
+      "suggested_translation": "已知合格堆叠 (KGS)",
+      "context": "对通过LSI连接的裸片堆叠的测试阶段",
+      "confidence": 0.85
+    },
+    {
+      "term": "Known Good Package (KGP)",
+      "suggested_translation": "已知合格封装 (KGP)",
+      "context": "对完整封装组件的最终测试阶段",
+      "confidence": 0.85
+    },
+    {
+      "term": "MI450",
+      "suggested_translation": "MI450",
+      "context": "AMD GPU型号（推测），作为测试载具设计参考",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "CoWoS": "CoWoS",
+    "EMIB": "EMIB",
+    "PHY": "物理层",
+    "SerDes": "串行器/解串器",
+    "UCIe": "UCIe",
+    "D2D": "裸片到裸片",
+    "shmoo plot": "舒姆图",
+    "HBM4": "HBM4",
+    "SoC": "SoC",
+    "IO die": "IO裸片",
+    "bump pitch": "凸点间距"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:51:54.084255"
+}

@@ -1,0 +1,19 @@
+{
+  "section_id": "25-other-highlight",
+  "assessment": {
+    "passed": false,
+    "overall_score": 8.475,
+    "scores": {
+      "readability": 8.0,
+      "accuracy": 9.0,
+      "terminology": 9.0,
+      "completeness": 10.0,
+      "style": 2.5
+    },
+    "failed_criteria": [
+      "critical_errors (5 > 2)"
+    ],
+    "action": "retranslate"
+  },
+  "translations": []
+}

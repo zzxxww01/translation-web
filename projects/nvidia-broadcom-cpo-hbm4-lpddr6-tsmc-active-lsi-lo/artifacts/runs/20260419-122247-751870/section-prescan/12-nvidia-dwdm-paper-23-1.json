@@ -1,0 +1,55 @@
+{
+  "section_id": "12-nvidia-dwdm-paper-23-1",
+  "new_terms": [
+    {
+      "term": "lambda",
+      "suggested_translation": "波长",
+      "context": "DWDM中每个波长通道，如32 Gb/s per lambda。",
+      "confidence": 0.95
+    },
+    {
+      "term": "clock forwarding",
+      "suggested_translation": "时钟转发",
+      "context": "用于简化SerDes，移除CDR电路的技术。",
+      "confidence": 0.9
+    },
+    {
+      "term": "Clock and Data Recovery (CDR)",
+      "suggested_translation": "时钟数据恢复",
+      "context": "SerDes中的电路，clock forwarding可将其移除。",
+      "confidence": 0.95
+    },
+    {
+      "term": "DR Optics",
+      "suggested_translation": "DR光学",
+      "context": "一种光学引擎类型，用于scale-out网络。",
+      "confidence": 0.9
+    },
+    {
+      "term": "On-Board Optics (OBO)",
+      "suggested_translation": "板载光学",
+      "context": "一种CPO实现形式，光学引擎集成在ASIC封装基板上。",
+      "confidence": 0.9
+    },
+    {
+      "term": "radix",
+      "suggested_translation": "基数/端口数",
+      "context": "网络交换中的端口数量，CPO可提高此值。",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "dwdm": "密集波分复用",
+    "cpo": "共封装光学",
+    "serdes": "串行器/解串器",
+    "uci-e": "UCIe",
+    "d2d": "裸片到裸片",
+    "pam4": "四电平脉冲幅度调制",
+    "nrz": "不归零制",
+    "oci msa": "光学计算互连多源协议",
+    "uci-e-s": "UCIe-S",
+    "asic": "ASIC"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:26:40.193792"
+}

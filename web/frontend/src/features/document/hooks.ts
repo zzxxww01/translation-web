@@ -426,10 +426,23 @@ export function useFullTranslate() {
     }
   }, [handleError, queryClient, updateParagraphInSection, setFullTranslateProjectId, setFullTranslating, setFullTranslateProgress, endFullTranslate]);
 
-  const stopTranslation = useCallback(async () => {
-    endFullTranslate();
-    await fullTranslationService.stopTranslation();
-  }, [endFullTranslate]);
+  const stopTranslation = useCallback(async (projectId?: string) => {
+    try {
+      const targetProjectId = projectId || fullTranslationService.getProjectId();
+      if (targetProjectId && !fullTranslationService.getProjectId()) {
+        await documentApi.stopLongformTranslation(targetProjectId);
+      } else {
+        await fullTranslationService.stopTranslation();
+      }
+    } catch (error) {
+      handleError(error, '停止全文翻译失败');
+      throw error;
+    } finally {
+      endFullTranslate();
+      queryClient.invalidateQueries({ queryKey: ['project'] });
+      queryClient.invalidateQueries({ queryKey: ['section'] });
+    }
+  }, [endFullTranslate, handleError, queryClient]);
 
   return {
     startTranslation,

@@ -27,12 +27,64 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!Ejnk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7669995-eecb-4441-843f-bfaa0348e31e_2494x1403.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.644930",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!Ejnk!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fc7669995-eecb-4441-843f-bfaa0348e31e_2494x1403.jpeg",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -74,19 +126,71 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英特尔 UCIe-S 裸片到裸片互连接口芯片显微照片与概览。来源：英特尔，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.645078",
+          "tokenized_text": "[[[EM_1|英特尔 UCIe-S 裸片到裸片互连接口芯片显微照片与概览。来源：英特尔，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -113,12 +217,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英特尔展示了其符合 UCIe-S（通用芯粒互连-标准版）标准的裸片到裸片（D2D）接口。该接口在 UCIe-S 协议下，通过 16 个通道可实现高达 48 Gb/s/通道的速率；若采用定制协议，速率更可提升至 56 Gb/s/通道。它能在标准有机封装上工作，传输距离最远可达 30 毫米。值得注意的是，该接口采用了英特尔的 22 纳米制程节点制造。",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.645109",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -145,12 +301,64 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!J1Ms!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccbdc885-60a6-4372-b840-6e6525a06002_2494x1403.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.645127",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!J1Ms!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Fccbdc885-60a6-4372-b840-6e6525a06002_2494x1403.jpeg",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -192,19 +400,71 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英特尔 UCIe-S 与其他裸片到裸片互连接口对比。来源：英特尔，ISSCC 2026",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.645168",
+          "tokenized_text": "[[[EM_1|英特尔 UCIe-S 与其他裸片到裸片互连接口对比。来源：英特尔，ISSCC 2026]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -231,12 +491,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在 2025 年超大规模集成电路（VLSI）研讨会上，Cadence 展示了其基于 N3E 制程的 UCIe-S 裸片到裸片互连技术。尽管英特尔在制程节点上处于劣势，但其接口在数据速率、通道长度和单位边缘带宽方面均超越了 Cadence 的方案，仅在能效方面有所不及。",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.645185",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -263,12 +575,64 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "image",
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "https://substackcdn.com/image/fetch/$s_!NLKz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febe7307b-d87f-43d1-b7df-4b6cfbc8211a_2786x1606.jpeg",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.645201",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": "https://substackcdn.com/image/fetch/$s_!NLKz!,w_1456,c_limit,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2Febe7307b-d87f-43d1-b7df-4b6cfbc8211a_2786x1606.jpeg",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "approved",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -310,19 +674,71 @@
       "expected_tokens": [
         "EM_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英特尔 Diamond Rapids 多裸片架构概览。来源：HEPiX via @InstLatX64",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.645240",
+          "tokenized_text": "[[[EM_1|英特尔 Diamond Rapids 多裸片架构概览。来源：HEPiX via @InstLatX64]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -364,19 +780,71 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英特尔此次展示的互连技术，很可能是为其Diamond Rapids至强（Xeon）CPU设计的原型。与这款22纳米测试芯片相比，若基于英特尔3制程进行设计，其效率应有显著提升，并有望取代Granite Rapids上采用的EMIB等先进封装方案。正如我们在《数据中心CPU格局纵览》一文中所述，Diamond Rapids由两颗IMH裸片和四颗CBB裸片构成。考虑到每颗CBB裸片与两颗IMH裸片之间均存在长距离走线，我们认为该互连技术是实现在标准封装基板上连接各裸片的可行方案，从而无需使用EMIB。",
+          "model": "pro",
+          "created_at": "2026-04-18T22:51:31.645317",
+          "tokenized_text": "英特尔此次展示的互连技术，很可能是为其Diamond Rapids至强（Xeon）CPU设计的原型。与这款22纳米测试芯片相比，若基于英特尔3制程进行设计，其效率应有显著提升，并有望取代Granite Rapids上采用的EMIB等先进封装方案。正如我们[[[LINK_1|在《数据中心CPU格局纵览》一文中所述]]]，Diamond Rapids由两颗IMH裸片和四颗CBB裸片构成。考虑到每颗CBB裸片与两颗IMH裸片之间均存在长距离走线，我们认为该互连技术是实现在标准封装基板上连接各裸片的可行方案，从而无需使用EMIB。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.74,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.3
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键术语首次出现时未加注中文全称。"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，信息密度可以更高。"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“shoreline bandwidth”翻译不一致且可能不准确。"
+          },
+          {
+            "type": "readability",
+            "description": "“best”作为动词的翻译“优于”力度稍弱，且“稍逊一筹”的语气与“only losing out”的轻微劣势感略有偏差。"
+          },
+          {
+            "type": "readability",
+            "description": "句子后半部分“从而无需依赖EMIB”略显口语化，且“依赖”一词的主动性不强。"
+          }
+        ]
+      },
       "history": []
     }
   ]

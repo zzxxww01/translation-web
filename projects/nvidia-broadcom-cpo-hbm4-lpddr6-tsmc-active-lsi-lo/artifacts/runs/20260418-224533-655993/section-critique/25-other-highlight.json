@@ -1,0 +1,133 @@
+{
+  "section_id": "25-other-highlight",
+  "reflection": {
+    "overall_score": 8.3,
+    "readability_score": 8.0,
+    "accuracy_score": 9.0,
+    "conciseness_score": 7.5,
+    "is_excellent": false,
+    "issues": [
+      {
+        "paragraph_index": 0,
+        "issue_type": "terminology",
+        "severity": "critical",
+        "original_text": "Other Highlight",
+        "description": "章节标题翻译不一致且不准确。原文为'Other Highlight'，译文为'其他亮点'，但结合全文结构，此处是独立章节标题，应更正式、统一。",
+        "why_it_matters": "章节标题是文章结构的关键，翻译不一致或过于口语化会影响整体专业性和结构清晰度。",
+        "suggestion": "建议译为'其他亮点技术'或'其他重要进展'，以匹配全文的科技综述风格。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "accuracy",
+        "severity": "critical",
+        "original_text": "The final paper we'll cover is a temperature sensor from TSMC.",
+        "description": "关键信息漏译。译文'最后要介绍的是台积电（TSMC）的一篇温度传感器论文'遗漏了原文中'we'll cover'所隐含的'本文/本综述将涵盖'的限定范围。",
+        "why_it_matters": "这模糊了文章本身的论述边界，可能让读者误以为这是ISSCC 2026唯一的温度传感器论文，而非作者选择介绍的最后一篇。",
+        "suggestion": "建议译为'本文最后要介绍的，是台积电（TSMC）的一篇温度传感器论文。'",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 1,
+        "issue_type": "readability",
+        "severity": "high",
+        "original_text": "It's interesting because it's a rare example of a circuit technique that's actually useful for designers, rather than just an academic exercise.",
+        "description": "句式生硬，存在翻译腔。译文'这篇论文有趣之处在于，它展示了一种对设计者真正有用的电路技术，而非仅仅是学术演练。'将'because'引导的原因状语从句处理得较为平铺直叙，'展示了一种...技术'的表述稍显静态。",
+        "why_it_matters": "原文语气带有评价和对比，译文应更流畅地传达这种‘之所以有趣，是因为...’的逻辑，并增强动作感。",
+        "suggestion": "建议优化为：'这篇论文之所以有趣，是因为它涉及一种真正对设计者有用的电路技术，而非纸上谈兵。'",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "tone",
+        "severity": "high",
+        "original_text": "Most temperature sensors in advanced CMOS are based on substrate PNP transistors...",
+        "description": "语气轻微偏离，专业术语引入方式可优化。译文'在先进CMOS工艺中，大多数温度传感器都基于衬底PNP晶体管...'是准确的，但作为段落首句，可以更自然地引出这个技术背景。",
+        "why_it_matters": "开篇句的流畅度影响读者进入技术细节的体验。原文是客观陈述，译文可以稍作调整使其更符合中文技术文章的起笔习惯。",
+        "suggestion": "建议微调为：'在先进CMOS工艺里，温度传感器大多采用衬底PNP晶体管方案...'",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 2,
+        "issue_type": "readability",
+        "severity": "medium",
+        "original_text": "The problem is that these devices are huge, and they're getting relatively even huger as nodes shrink, because they don't scale well.",
+        "description": "口语词‘huge/huger’的翻译力度和一致性可优化。译文'问题是这些器件体积庞大，而且随着制程节点微缩，它们相对变得更为庞大，因为其缩放性不佳。'用‘庞大’和‘更为庞大’对应，但‘更为庞大’在中文里对‘even huger’的强调稍弱，且‘相对变得’的表述稍显冗长。",
+        "why_it_matters": "原文用口语化词汇强调尺寸问题的严重性，译文应在保持专业基调的同时，找到力度匹配的词汇。",
+        "suggestion": "建议优化为：'问题在于这些器件本就体积庞大，且随着制程节点微缩，由于缩放性差，其相对尺寸问题反而更加突出。'",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "structure",
+        "severity": "high",
+        "original_text": "TSMC's paper proposes using the gate of a regular old CMOS transistor as the sensor. This works because the threshold voltage has a well-defined temperature dependence. They built a sensor that's only 900 µm² in 3nm, which is 5.6× smaller than the PNP approach.",
+        "description": "段落内句子衔接可以更紧密，逻辑流可以更清晰。译文将原文三句拆分为三句独立陈述，虽无错误，但连接感不强。‘This works because...’的因果逻辑在译文中被弱化为平列句。",
+        "why_it_matters": "清晰的因果和递进关系对于理解技术原理和创新点至关重要。",
+        "suggestion": "建议优化句间衔接：'台积电的论文提出，使用普通CMOS晶体管的栅极作为传感器。其原理在于，阈值电压具有明确的温度依赖性。基于此，他们打造了一个在3nm工艺下面积仅900 µm²的传感器，比PNP方案小了5.6倍。'",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 3,
+        "issue_type": "conciseness",
+        "severity": "low",
+        "original_text": "regular old CMOS transistor",
+        "description": "形容词‘regular old’的翻译‘普通CMOS晶体管’准确但略显平淡，丢失了原文略带口语化的‘老式、常见’的意味，虽然这在科技翻译中常被简化。",
+        "why_it_matters": "在非关键信息上，保留一点原文风格可以增加可读性，但并非必须。",
+        "suggestion": "可选优化为‘普普通通的CMOS晶体管’或保留‘普通CMOS晶体管’亦可。此为P2优化项。",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 4,
+        "issue_type": "accuracy",
+        "severity": "high",
+        "original_text": "The performance is fine — within ±0.75°C from -40°C to 125°C — though not best-in-class.",
+        "description": "对‘though not best-in-class’的语气和位置处理可优化。译文‘其性能尚可——在-40°C至125°C范围内精度为±0.75°C——尽管并非业界最佳。’将让步状语后置，符合中文习惯，但‘尽管并非业界最佳’的语气稍显绝对。原文‘best-in-class’有‘同类中最佳’的对比范围。",
+        "why_it_matters": "准确传达这种限定性的比较（是‘同类中’不是‘所有中’），以及‘尚可’与‘非最佳’之间的转折关系，能更精确地反映作者的评价。",
+        "suggestion": "建议调整为：‘其性能还算不错，在-40°C至125°C范围内精度为±0.75°C，但并非同类方案中的佼佼者。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 5,
+        "issue_type": "readability",
+        "severity": "low",
+        "original_text": "The real win is the area reduction.",
+        "description": "‘The real win’的翻译‘真正的优势’准确，但可以考虑使用更生动、信息密度更高的中文表达。",
+        "why_it_matters": "这是段落的核心论点，一个有力的表达能增强说服力。",
+        "suggestion": "可选优化为：‘其真正的价值在于大幅缩减了面积。’或‘真正的成功之处在于面积的缩减。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      },
+      {
+        "paragraph_index": 6,
+        "issue_type": "tone",
+        "severity": "high",
+        "original_text": "It's a nice piece of engineering that solves a real problem.",
+        "description": "语气翻译可以更贴切。译文‘这是一项解决了实际工程问题的优秀设计。’将‘nice’译为‘优秀’稍显过誉（原文更接近‘不错’、‘挺好’），且‘工程’与‘设计’略有语义重叠。",
+        "why_it_matters": "需要准确传达原文那种肯定但不过分夸赞的语气，以及‘工程’与‘问题’的对应关系。",
+        "suggestion": "建议译为：‘这是一项不错的工程实践，切实解决了一个实际问题。’",
+        "auto_fixed": false,
+        "revised_text": null,
+        "fix_method": null
+      }
+    ],
+    "revised_translations": null
+  }
+}

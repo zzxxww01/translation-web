@@ -1,0 +1,1483 @@
+{
+  "article_theme": "ISSCC 2026 展示了半导体行业在内存、光网络、高速互连和处理器等关键领域的最新电路与集成技术突破。",
+  "structure_summary": "文章采用典型的科技综述结构：引言概述 ISSCC 2026 及其与 IEDM/VLSI 的区别；随后按技术领域（内存、光网络、高速电互连、处理器）分章节深入评述各篇关键论文；每个子章节聚焦一家公司/一项技术，包含技术细节、性能对比、图表解读和行业背景分析；结尾以一个其他亮点（温度传感器）收尾。整体逻辑清晰，由面到点，技术深度逐层递进。",
+  "style": {
+    "tone": "专业、分析性、略带批判性（对厂商宣传持审慎态度），技术细节丰富，基于数据。",
+    "target_audience": "半导体行业从业者、分析师、资深科技爱好者，具备扎实的硬件知识。",
+    "translation_voice": "专业、准确、流畅的中文科技分析口吻。避免过度口语化，但需将英文长句合理切分为符合中文阅读习惯的短句。保留原文的技术严谨性和批判性视角。"
+  },
+  "guidelines": [
+    "术语一致性优先：严格遵循提供的术语表进行翻译，尤其是高频技术缩写（HBM4, LPDDR6, GDDR7, UCIe, CPO）和关键概念（shmoo plot -> 舒姆图， bitcell -> 存储单元）。首次出现的重要缩写需加注中文全称。",
+    "句式重构与段落流：英文长句（尤其是包含多个从句、数据对比和技术术语的句子）必须拆分为符合中文阅读习惯的短句。确保每个中文句子主干清晰。段落内部逻辑需通过恰当的连接词（如‘此外’、‘然而’、‘具体而言’）衔接，避免直接堆砌翻译后的短句。",
+    "数据与比较的精确传达：所有性能数据（速度、电压、密度、带宽）、单位（Gb/s, V, mm², pJ/b）和比较关系（‘优于’、‘低于’、‘相当于’）必须准确翻译，不得有任何偏差。技术结论的强弱语气需与原文一致。",
+    "保留批判性与分析口吻：原文对厂商宣传持审慎态度（如对 Microsoft Maia 200 的评论）。翻译时需保留这种分析性甚至略带怀疑的语气，使用‘宣称’、‘据称’、‘值得注意’、‘存疑’等措辞，避免将其转化为纯粹的中性陈述或褒奖。"
+  ],
+  "challenges": [
+    {
+      "type": "accuracy",
+      "location": "全文，尤其是各技术缩写（HBM4, LPDDR6, UCIe, CPO, CoWoS）",
+      "issue": "大量专业缩写和术语，需确保首次出现时有解释，全文翻译一致。",
+      "suggestion": "在术语表中统一，首次出现时采用“英文全称（中文释义）”格式，如“UCIe（通用芯粒互连）”。"
+    },
+    {
+      "type": "accuracy",
+      "location": "各技术子章节",
+      "issue": "原文包含大量图表引用（如“Source: Samsung, ISSCC 2026”）和图片URL，翻译时需处理这些非文本元素。",
+      "suggestion": "保留图表标题和来源的翻译，将图片URL和占位符原文保留。确保图表引用与正文逻辑衔接。"
+    },
+    {
+      "type": "accuracy",
+      "location": "技术性能对比和数据分析段落（如 SK Hynix 与 Samsung LPDDR6 的 shmoo plot 对比）",
+      "issue": "涉及具体数据、单位（Gb/s, V, pJ/b）和对比结论，翻译必须精确无误。",
+      "suggestion": "数字、单位、比较级（“worse”, “higher”）需严格对应。技术结论的表述要清晰，避免模糊。"
+    },
+    {
+      "type": "accuracy",
+      "location": "对 Microsoft Maia 200 的描述（“claims are dubious”）",
+      "issue": "原文带有明显的怀疑和批判语气，翻译时需保留这种审慎态度，而非中性化。",
+      "suggestion": "将“dubious”译为“值得怀疑的”、“存疑的”，语气匹配原文的批判性。"
+    },
+    {
+      "type": "accuracy",
+      "location": "长句和复杂技术描述（如 Intel 18A-on-Intel 3 Hybrid Bonding 部分对带宽的描述）",
+      "issue": "英文长句包含多层修饰和对比，直译会导致中文冗长难懂。",
+      "suggestion": "拆分长句，将定语从句、同位语转换为中文短句或前置定语。按照“主语-谓语-宾语”的中文习惯重组信息流。"
+    },
+    {
+      "type": "accuracy",
+      "location": "“model” (e.g., “our Accelerator & HBM model”, “our memory model”)",
+      "issue": "在本文上下文中，“model”指 SemiAnalysis 内部的预测/分析模型，而非通用的“模型”。",
+      "suggestion": "译为“（分析/预测）模型”，或根据上下文灵活处理为“分析报告”、“预测数据”。避免译为“型号”或“模组”。"
+    }
+  ],
+  "terminology": [
+    {
+      "term": "ISSCC",
+      "translation": "ISSCC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "行业标准缩写，首次出现可加注中文全称，后续直接使用英文缩写。"
+    },
+    {
+      "term": "HBM4",
+      "translation": "HBM4",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "行业标准术语，保持英文缩写+数字格式。"
+    },
+    {
+      "term": "LPDDR6",
+      "translation": "LPDDR6",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "行业标准术语，保持英文缩写+数字格式。"
+    },
+    {
+      "term": "GDDR7",
+      "translation": "GDDR7",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "行业标准术语，保持英文缩写+数字格式。"
+    },
+    {
+      "term": "PHY",
+      "translation": "物理层",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "行业通用缩写，首次出现可加注“物理层接口”。"
+    },
+    {
+      "term": "shmoo plot",
+      "translation": "舒姆图",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "行业内有既定译名“舒姆图”，首次出现可加简短说明。"
+    },
+    {
+      "term": "bitcell",
+      "translation": "存储单元",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "标准技术术语。"
+    },
+    {
+      "term": "COP (Cell-Over-Periphery)",
+      "translation": "COP",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "特定技术缩写，首次出现需解释。"
+    },
+    {
+      "term": "BiCS",
+      "translation": "BiCS",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "厂商特定技术名称，保留英文。"
+    },
+    {
+      "term": "MRAM",
+      "translation": "MRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "行业标准缩写，首次出现可加注中文全称。"
+    },
+    {
+      "term": "DWDM",
+      "translation": "密集波分复用",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "光通信标准术语，保留缩写。"
+    },
+    {
+      "term": "CPO",
+      "translation": "共封装光学",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "先进封装技术术语，保留缩写。"
+    },
+    {
+      "term": "UCIe",
+      "translation": "UCIe",
+      "strategy": "preserve",
+      "first_occurrence_note": true,
+      "rationale": "行业新兴互连标准，保留缩写并解释。"
+    },
+    {
+      "term": "die shot",
+      "translation": "芯片显微照片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "常用术语，有清晰中文对应。"
+    },
+    {
+      "term": "CoWoS",
+      "translation": "CoWoS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "台积电专有封装技术名称，保留英文。"
+    },
+    {
+      "term": "node",
+      "translation": "制程节点",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": "标准术语，需根据上下文明确为“制程节点”。"
+    },
+    {
+      "term": "flops/mm²",
+      "translation": "FLOPS/mm²",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": "性能指标标准写法，保留英文单位。"
+    },
+    {
+      "term": "TSMC",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Apple Silicon",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NVIDIA",
+      "translation": "英伟达",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AMD",
+      "translation": "AMD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Intel",
+      "translation": "英特尔",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Qualcomm",
+      "translation": "高通",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "MediaTek",
+      "translation": "联发科",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Samsung",
+      "translation": "三星",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SK Hynix",
+      "translation": "SK海力士",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "Micron",
+      "translation": "美光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "foundry",
+      "translation": "晶圆代工厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "wafer",
+      "translation": "晶圆",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fab",
+      "translation": "晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "EUV",
+      "translation": "EUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EUV lithography",
+      "translation": "EUV光刻",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "DUV",
+      "translation": "DUV",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "photolithography",
+      "translation": "光刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "etching",
+      "translation": "蚀刻",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deposition",
+      "translation": "沉积",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CMP",
+      "translation": "化学机械抛光",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "SoC",
+      "translation": "SoC",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "GPU",
+      "translation": "GPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CPU",
+      "translation": "CPU",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NPU",
+      "translation": "NPU",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TPU",
+      "translation": "TPU",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "chiplet",
+      "translation": "芯粒",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "packaging",
+      "translation": "封装",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "InFO",
+      "translation": "InFO",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM",
+      "translation": "HBM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SRAM",
+      "translation": "SRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DRAM",
+      "translation": "DRAM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NAND flash",
+      "translation": "NAND闪存",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "logic chip",
+      "translation": "逻辑芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chip",
+      "translation": "存储芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "analog chip",
+      "translation": "模拟芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RF chip",
+      "translation": "射频芯片",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "AI",
+      "translation": "AI",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LLM",
+      "translation": "LLM",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "token",
+      "translation": "词元",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "context window",
+      "translation": "上下文窗口",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "inference",
+      "translation": "推理",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "training",
+      "translation": "训练",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fine-tuning",
+      "translation": "微调",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RLHF",
+      "translation": "RLHF",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transformer",
+      "translation": "Transformer",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "self-attention",
+      "translation": "自注意力机制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "parameter",
+      "translation": "参数",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "weights",
+      "translation": "权重",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "neural network",
+      "translation": "神经网络",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "deep learning",
+      "translation": "深度学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "machine learning",
+      "translation": "机器学习",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "GPU cluster",
+      "translation": "GPU集群",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "data center",
+      "translation": "数据中心",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "cloud computing",
+      "translation": "云计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "edge computing",
+      "translation": "边缘计算",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "throughput",
+      "translation": "吞吐量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "latency",
+      "translation": "延迟",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bandwidth",
+      "translation": "带宽",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "yield",
+      "translation": "良率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "utilization rate",
+      "translation": "利用率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency",
+      "translation": "效率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "performance",
+      "translation": "性能",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "benchmark",
+      "translation": "基准测试",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "FLOPS",
+      "translation": "FLOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TOPS",
+      "translation": "TOPS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "capex",
+      "translation": "资本支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "opex",
+      "translation": "运营支出",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "R&D",
+      "translation": "研发",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IDM",
+      "translation": "IDM",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "fabless",
+      "translation": "无晶圆厂",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "anchor tenant",
+      "translation": "锚定客户",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "gross margin",
+      "translation": "毛利率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "revenue",
+      "translation": "营收",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "net income",
+      "translation": "净收入",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "market share",
+      "translation": "市场份额",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HPC",
+      "translation": "HPC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IoT",
+      "translation": "IoT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "semiconductor",
+      "translation": "半导体",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "integrated circuit",
+      "translation": "集成电路",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "transistor",
+      "translation": "晶体管",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "virtualization",
+      "translation": "虚拟化",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "scalability",
+      "translation": "可扩展性",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SemiAnalysis",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "prefill",
+      "translation": "预填充",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "decode",
+      "translation": "解码",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Texas",
+      "translation": "德克萨斯州",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Vera",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rubin",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BoM",
+      "translation": "物料清单",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "cableless",
+      "translation": "无缆化",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": null
+    },
+    {
+      "term": "TCO",
+      "translation": "总拥有成本",
+      "strategy": "preserve_annotate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Blackwell",
+      "translation": null,
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IEDM",
+      "translation": "国际电子器件会议",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "VLSI",
+      "translation": "超大规模集成电路",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "base die",
+      "translation": "基础芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "HBM3E",
+      "translation": "HBM3E",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "1c",
+      "translation": "1c",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SF4",
+      "translation": "SF4",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TSV",
+      "translation": "硅通孔",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PMBIST",
+      "translation": "可编程内存内建自测试",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "tCCDR",
+      "translation": "tCCDR",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "JEDEC",
+      "translation": "JEDEC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RDQS",
+      "translation": "RDQS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "TDC",
+      "translation": "时间数字转换器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "ABB",
+      "translation": "自适应体偏置",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "MBIST",
+      "translation": "内存内建自测试",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "VDDC",
+      "translation": "VDDC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "VDDQ",
+      "translation": "VDDQ",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "sub-channel",
+      "translation": "子通道",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "NRZ",
+      "translation": "不归零制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "LPDDR5X",
+      "translation": "LPDDR5X",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PAM3",
+      "translation": "三电平脉冲幅度调制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SF2",
+      "translation": "SF2",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "efficiency mode",
+      "translation": "能效模式",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "data rate",
+      "translation": "数据速率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "bit density",
+      "translation": "位密度",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Gb/mm²",
+      "translation": "Gb/mm²",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Gb/s",
+      "translation": "Gb/s",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Cell-on-Peripheral (COP)",
+      "translation": "单元位于外围电路之上 (COP)",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Cell-on-Peripheral",
+      "translation": "单元位于外围电路之上",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "COP",
+      "translation": "COP",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "BiCS10",
+      "translation": "BiCS10",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "plane",
+      "translation": "平面",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "xBIT",
+      "translation": "xBIT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "assist circuitry",
+      "translation": "辅助电路",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PDK",
+      "translation": "工艺设计套件",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "macro",
+      "translation": "宏单元",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "dual-port access",
+      "translation": "双端口访问",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Flash-Plus",
+      "translation": "Flash-Plus",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "interleaved reads",
+      "translation": "交错读取",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "iso-capacity",
+      "translation": "等容量",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "OCI MSA",
+      "translation": "光学计算互连多源协议",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "UCIe-S",
+      "translation": "UCIe-S",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "D2D",
+      "translation": "裸片到裸片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SerDes",
+      "translation": "串行器/解串器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "OBO",
+      "translation": "板载光学",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PAM4",
+      "translation": "四电平脉冲幅度调制",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "coherent-lite transceiver",
+      "translation": "精简相干光模块",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DSP",
+      "translation": "数字信号处理器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Diamond Rapids",
+      "translation": "Diamond Rapids",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "EMIB",
+      "translation": "EMIB",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "lane",
+      "translation": "通道",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Manhattan grid",
+      "translation": "曼哈顿网格",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "pJ/b",
+      "translation": "皮焦耳/比特",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "test vehicle",
+      "translation": "测试载具",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rebellions",
+      "translation": "Rebellions",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "M3DProc",
+      "translation": "M3DProc",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "3D mesh",
+      "translation": "3D网格",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Foveros Direct",
+      "translation": "Foveros Direct",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "hybrid bonding",
+      "translation": "混合键合",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "N3P",
+      "translation": "N3P",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Rebel100",
+      "translation": "Rebel100",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "I-CubeS",
+      "translation": "I-CubeS",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Hot Chips",
+      "translation": "Hot Chips",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "UCIe-A",
+      "translation": "UCIe-A",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Maia 200",
+      "translation": "Maia 200",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Maia 100",
+      "translation": "Maia 100",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "reticle-scale monolithic",
+      "translation": "光罩尺寸单芯片",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RC",
+      "translation": "RC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "RO",
+      "translation": "环形振荡器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "channel",
+      "translation": "通道",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "pin speed",
+      "translation": "引脚速率",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "shoreline",
+      "translation": "海岸线长度",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "1b",
+      "translation": "1b",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "1z",
+      "translation": "1z",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "CBA",
+      "translation": "单元键合阵列",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "COUPE",
+      "translation": "COUPE",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Tomahawk 5",
+      "translation": "Tomahawk 5",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Cadence",
+      "translation": "铿腾电子",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "MI355X",
+      "translation": "MI355X",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "XCD",
+      "translation": "XCD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "IOD",
+      "translation": "IOD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "14LPP",
+      "translation": "14LPP",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "silicon capacitors",
+      "translation": "硅电容器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "fixed links",
+      "translation": "固定链路",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "switched links",
+      "translation": "交换链路",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "temperature sensor",
+      "translation": "温度传感器",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "VCT",
+      "translation": "VCT",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "SWD",
+      "translation": "SWD",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "PUC",
+      "translation": "PUC",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "DR Optics",
+      "translation": "DR光学",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "Gb/s/lane",
+      "translation": "千兆比特/秒/通道",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "tile",
+      "translation": "瓦片/计算单元块",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "N5",
+      "translation": "N5",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "eSilicon",
+      "translation": "eSilicon",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "memory chiplets",
+      "translation": "内存芯粒",
+      "strategy": "translate",
+      "first_occurrence_note": false,
+      "rationale": null
+    },
+    {
+      "term": "5LPE",
+      "translation": "5LPE",
+      "strategy": "preserve",
+      "first_occurrence_note": false,
+      "rationale": null
+    }
+  ]
+}

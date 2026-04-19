@@ -1,0 +1,61 @@
+{
+  "section_id": "26-samsung-sf2-temperature-sensor",
+  "new_terms": [
+    {
+      "term": "bipolar junction transistor (BJT)",
+      "suggested_translation": "双极结型晶体管 (BJT)",
+      "context": "传统温度传感器使用的核心元件",
+      "confidence": 0.95
+    },
+    {
+      "term": "BEOL metal resistor",
+      "suggested_translation": "后端金属层电阻器",
+      "context": "SF2温度传感器中替代BJT的关键元件",
+      "confidence": 0.9
+    },
+    {
+      "term": "temperature coefficient of resistance (TCR)",
+      "suggested_translation": "电阻温度系数 (TCR)",
+      "context": "金属电阻器的关键性能参数",
+      "confidence": 0.95
+    },
+    {
+      "term": "time-offset compression technique",
+      "suggested_translation": "时间偏移压缩技术",
+      "context": "用于补偿高电阻导致传感速度变慢的技术",
+      "confidence": 0.85
+    },
+    {
+      "term": "figure of merit (FoM)",
+      "suggested_translation": "品质因数 (FoM)",
+      "context": "评估传感器性能的指标，单位 nJ·%²",
+      "confidence": 0.95
+    },
+    {
+      "term": "5LPE",
+      "suggested_translation": "5LPE",
+      "context": "三星的5nm低功耗增强制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "JSSC",
+      "suggested_translation": "JSSC",
+      "context": "IEEE固态电路期刊",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "sf2": "SF2",
+    "tsmc": "台积电",
+    "intel": "英特尔",
+    "samsung": "三星",
+    "foundry": "晶圆代工厂",
+    "pdk": "工艺设计套件",
+    "rc": "RC",
+    "ro": "环形振荡器",
+    "tdc": "时间数字转换器"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:56:50.441539"
+}

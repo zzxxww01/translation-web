@@ -1,0 +1,66 @@
+{
+  "section_id": "23-rebellions-rebel100-paper-2",
+  "new_terms": [
+    {
+      "term": "Rebellions",
+      "suggested_translation": "Rebellions",
+      "context": "韩国AI加速器初创公司名称",
+      "confidence": 0.95
+    },
+    {
+      "term": "SF4X",
+      "suggested_translation": "SF4X制程",
+      "context": "三星代工制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "I-CubeS",
+      "suggested_translation": "I-CubeS",
+      "context": "三星2.5D/3D先进封装技术",
+      "confidence": 0.95
+    },
+    {
+      "term": "UCIe-A",
+      "suggested_translation": "UCIe-A",
+      "context": "UCIe协议的一种物理层实现",
+      "confidence": 0.9
+    },
+    {
+      "term": "IO chiplets",
+      "suggested_translation": "IO芯粒",
+      "context": "用于扩展输入输出功能的芯粒",
+      "confidence": 0.85
+    },
+    {
+      "term": "1Q2026",
+      "suggested_translation": "2026年第一季度",
+      "context": "时间节点，指流片时间",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm3e": "HBM3E",
+    "tsmc": "台积电",
+    "cowos-s": "CoWoS-S",
+    "node": "制程节点",
+    "foundry": "晶圆代工厂",
+    "chiplet": "芯粒",
+    "packaging": "封装",
+    "advanced packaging": "先进封装",
+    "hbm": "HBM",
+    "ai accelerators": "AI加速器",
+    "interposer technology": "中介层技术",
+    "front-end process": "前道工艺",
+    "asics": "ASIC",
+    "compute dies": "计算芯片",
+    "interfaces": "接口",
+    "reconfigurable": "可重构",
+    "ethernet": "以太网",
+    "scale-up": "纵向扩展",
+    "silicon capacitors": "硅电容器",
+    "power quality": "电源质量"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:29:28.303458"
+}

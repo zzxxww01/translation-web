@@ -264,6 +264,15 @@ export interface TranslationStatus {
   current_step?: string;
   error_count?: number;
   is_complete?: boolean;
+  run_id?: string | null;
+  final_status?: string | null;
+  last_updated_at?: string | null;
+  finished_at?: string | null;
+  active_project_id?: string | null;
+  active_run_id?: string | null;
+  can_stop?: boolean;
+  is_cancelling?: boolean;
+  cancel_requested?: boolean;
 }
 
 /**

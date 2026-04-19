@@ -1,0 +1,46 @@
+{
+  "section_id": "08-sandisk-kioxia-bics10-nand-p",
+  "new_terms": [
+    {
+      "term": "CBA",
+      "suggested_translation": "单元键合阵列",
+      "context": "Cell Bonded Array architecture for customizing CMOS wafer process.",
+      "confidence": 0.9
+    },
+    {
+      "term": "QLC",
+      "suggested_translation": "四层单元",
+      "context": "NAND flash memory cell storing 4 bits per cell.",
+      "confidence": 0.9
+    },
+    {
+      "term": "TLC",
+      "suggested_translation": "三层单元",
+      "context": "NAND flash memory cell storing 3 bits per cell.",
+      "confidence": 0.9
+    },
+    {
+      "term": "ground pad",
+      "suggested_translation": "接地焊盘",
+      "context": "Electrical contact for ground connection on a die.",
+      "confidence": 0.9
+    },
+    {
+      "term": "gating system",
+      "suggested_translation": "门控系统",
+      "context": "Circuitry to shut down data paths to reduce idle power.",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "bics": "BiCS",
+    "isscc": "ISSCC",
+    "die shot": "芯片显微照片",
+    "bit density": "位密度",
+    "plane": "平面",
+    "idle current": "待机电流",
+    "active current": "工作电流"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:25:25.820249"
+}

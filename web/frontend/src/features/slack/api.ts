@@ -12,4 +12,12 @@ export const slackApi = {
 
   composeReply: (data: ComposeDto) =>
     apiClient.post<ComposeResult>('/slack/compose', data),
+
+  refine: (data: {
+    context_type: 'incoming' | 'draft';
+    original_result: string;
+    adjustment_instruction: string;
+    conversation_history: Array<{ role: string; content: string }>;
+  }) =>
+    apiClient.post<{ refined_result: string }>('/slack/refine', data),
 };

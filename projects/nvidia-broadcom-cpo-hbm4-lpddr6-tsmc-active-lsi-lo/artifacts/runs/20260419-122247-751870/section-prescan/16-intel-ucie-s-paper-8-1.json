@@ -1,0 +1,48 @@
+{
+  "section_id": "16-intel-ucie-s-paper-8-1",
+  "new_terms": [
+    {
+      "term": "IMH die",
+      "suggested_translation": "IMH芯片",
+      "context": "Diamond Rapids CPU架构中的一种芯片类型",
+      "confidence": 0.9
+    },
+    {
+      "term": "CBB die",
+      "suggested_translation": "CBB芯片",
+      "context": "Diamond Rapids CPU架构中的一种芯片类型",
+      "confidence": 0.9
+    },
+    {
+      "term": "Granite Rapids",
+      "suggested_translation": "Granite Rapids",
+      "context": "英特尔前代至强CPU代号",
+      "confidence": 0.9
+    },
+    {
+      "term": "Intel 3",
+      "suggested_translation": "Intel 3制程",
+      "context": "英特尔先进制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "shoreline bandwidth",
+      "suggested_translation": "海岸线带宽",
+      "context": "芯片边缘互连的带宽密度指标",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "die-to-die (D2D)": "裸片到裸片",
+    "UCIe-S": "UCIe-S",
+    "ISSCC": "ISSCC",
+    "VLSI": "超大规模集成电路",
+    "Cadence": "铿腾电子",
+    "N3E": "N3E",
+    "EMIB": "EMIB",
+    "Diamond Rapids": "Diamond Rapids",
+    "Xeon": "至强"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:27:37.039444"
+}

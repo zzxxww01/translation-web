@@ -342,19 +342,33 @@ async def translate_with_four_steps(
 
     from src.services.batch_translation_service import BatchTranslationService
 
-    sections = pm.get_sections(project_id)
-    total_paragraphs = (
-        sum(len(section.paragraphs) for section in sections) if sections else 0
-    )
-    total_sections = len(sections) if sections else 0
+    slot_claim = await BatchTranslationService.claim_translation_slot(project_id)
+    if slot_claim["status"] == "busy":
+        raise BadRequestException(
+            detail=(
+                "Another project is still stopping. "
+                f"active_project_id={slot_claim.get('active_project_id')}, "
+                f"active_run_id={slot_claim.get('active_run_id')}"
+            )
+        )
 
-    batch_service = BatchTranslationService(
-        llm_provider=llm,
-        project_manager=pm,
-        translation_mode=BatchTranslationService.TRANSLATION_MODE_FOUR_STEP,
-        max_concurrent_sections=10,  # 并发翻译10个章节（VectorEngine支持100并发）
-        analysis_llm_provider=analysis_llm,
-    )
+    try:
+        sections = pm.get_sections(project_id)
+        total_paragraphs = (
+            sum(len(section.paragraphs) for section in sections) if sections else 0
+        )
+        total_sections = len(sections) if sections else 0
+
+        batch_service = BatchTranslationService(
+            llm_provider=llm,
+            project_manager=pm,
+            translation_mode=BatchTranslationService.TRANSLATION_MODE_FOUR_STEP,
+            max_concurrent_sections=10,  # 并发翻译10个章节（VectorEngine支持100并发）
+            analysis_llm_provider=analysis_llm,
+        )
+    except Exception:
+        BatchTranslationService._release_active_run(project_id)
+        raise
     progress_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
     event_loop = asyncio.get_running_loop()
 
@@ -576,3 +590,17 @@ async def resolve_term_conflict_live(
         "term": request.term,
         "chosen": request.chosen_translation,
     }
+
+
+@router.post("/projects/{project_id}/translate-four-step/stop")
+async def stop_translate_with_four_steps(project_id: str):
+    if not validate_path_component(project_id):
+        raise BadRequestException(detail="Invalid project_id")
+
+    from src.services.batch_translation_service import BatchTranslationService
+
+    service = BatchTranslationService.__new__(BatchTranslationService)
+    result = await service.cancel_translation(project_id)
+    if result.get("status") == "not_found":
+        raise BadRequestException(detail="No active longform translation for this project")
+    return result

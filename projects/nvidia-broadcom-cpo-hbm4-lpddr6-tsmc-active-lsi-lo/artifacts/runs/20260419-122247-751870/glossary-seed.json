@@ -1,0 +1,107 @@
+{
+  "added": 17,
+  "terms": [
+    {
+      "original": "channel",
+      "translation": "通道",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "pin speed",
+      "translation": "引脚速率",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "shoreline",
+      "translation": "海岸线长度",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "1b",
+      "translation": "1b",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "1z",
+      "translation": "1z",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "CBA",
+      "translation": "单元键合阵列",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "COUPE",
+      "translation": "COUPE",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Tomahawk 5",
+      "translation": "Tomahawk 5",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Cadence",
+      "translation": "铿腾电子",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "MI355X",
+      "translation": "MI355X",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "XCD",
+      "translation": "XCD",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "IOD",
+      "translation": "IOD",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "14LPP",
+      "translation": "14LPP",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "silicon capacitors",
+      "translation": "硅电容器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "fixed links",
+      "translation": "固定链路",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "switched links",
+      "translation": "交换链路",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "temperature sensor",
+      "translation": "温度传感器",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    }
+  ]
+}

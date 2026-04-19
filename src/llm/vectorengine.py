@@ -202,7 +202,13 @@ class VectorEngineProvider(LLMProvider):
 
         try:
             logger.debug(f"[VectorEngine] Calling model={model_name}, temp={temp}")
-            response = self.client.chat.completions.create(**request_params)
+            client = self.client
+            if hasattr(self.client, "with_options"):
+                client = self.client.with_options(
+                    timeout=request_timeout,
+                    max_retries=(0 if timeout is not None else self.max_retries),
+                )
+            response = client.chat.completions.create(**request_params)
 
             content = response.choices[0].message.content
 

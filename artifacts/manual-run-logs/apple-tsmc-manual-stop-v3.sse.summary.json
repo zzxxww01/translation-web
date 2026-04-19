@@ -1,0 +1,30 @@
+{
+  "project": "apple-tsmc",
+  "endpoint": "http://127.0.0.1:54321/api/projects/apple-tsmc/translate-four-step",
+  "events": 189,
+  "terminal_event": "cancelled",
+  "http_status": 200,
+  "terminal_payload": {
+    "type": "cancelled",
+    "translated_count": 10,
+    "total": 325,
+    "result": {
+      "project_id": "apple-tsmc",
+      "status": "cancelled",
+      "message": "Translation cancelled by user",
+      "total_sections": 23,
+      "translated_sections": 1,
+      "total_paragraphs": 325,
+      "translated_paragraphs": 10,
+      "error_count": 0,
+      "errors": [],
+      "started_at": "2026-04-19T11:50:58.727260",
+      "finished_at": "2026-04-19T11:54:07.320756",
+      "run_id": "20260419-115058-727282",
+      "artifacts_path": "projects\\apple-tsmc\\artifacts\\runs\\20260419-115058-727282",
+      "api_calls": 0,
+      "elapsed_seconds": 188.7
+    },
+    "message": "Translation cancelled by user"
+  }
+}

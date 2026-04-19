@@ -1,0 +1,320 @@
+{
+  "article_theme": "ISSCC 2026 展示了半导体行业在内存、光网络、高速互连和处理器等关键领域的最新电路与集成技术突破。",
+  "structure_summary": "文章采用典型的科技综述结构：引言概述 ISSCC 2026 及其与 IEDM/VLSI 的区别；随后按技术领域（内存、光网络、高速电互连、处理器）分章节深入评述各篇关键论文；每个子章节聚焦一家公司/一项技术，包含技术细节、性能对比、图表解读和行业背景分析；结尾以一个其他亮点（温度传感器）收尾。整体逻辑清晰，由面到点，技术深度逐层递进。",
+  "translation_mode": "four_step",
+  "sections": [
+    {
+      "section_id": "00-intro",
+      "title": "Introduction",
+      "position": "1/27",
+      "paragraph_count": 7,
+      "previous_section_title": "",
+      "next_section_title": "Memory",
+      "section_role": "确立文章主题与范围，介绍ISSCC 2026在年度半导体会议中的定位，并预告后续章节结构。",
+      "translation_notes": [
+        "“Roundup”译为“综述”或“盘点”比“总结”更贴切，需体现汇编和评述性质。",
+        "“trinity”译为“三巨头”或“三驾马车”以保持比喻色彩，避免直译“三位一体”可能带来的宗教联想。",
+        "保持引言部分的权威性和前瞻性语气。"
+      ]
+    },
+    {
+      "section_id": "01-memory",
+      "title": "Memory",
+      "position": "2/27",
+      "paragraph_count": 1,
+      "previous_section_title": "Introduction",
+      "next_section_title": "Samsung HBM4 - Paper 15.6",
+      "section_role": "作为第一个技术章节的引言，概括ISSCC 2026在内存领域的核心议题和主要参与者，设定本章节的讨论框架。",
+      "translation_notes": [
+        "“piqued our interest”译为“引起了我们的浓厚兴趣”，需保留作者作为行业观察者的主观视角。",
+        "技术缩写（HBM4, LPDDR6, GDDR7, SRAM, MRAM）首次出现时需确保译名准确且全文统一。",
+        "段落虽短，但起到承上启下的关键作用，翻译时需确保逻辑衔接流畅。"
+      ]
+    },
+    {
+      "section_id": "02-samsung-hbm4-paper-15-6",
+      "title": "Samsung HBM4 - Paper 15.6",
+      "position": "3/27",
+      "paragraph_count": 35,
+      "previous_section_title": "Memory",
+      "next_section_title": "Samsung LPDDR6 - Paper 15.8",
+      "section_role": "深度分析三星HBM4论文的技术突破，通过具体数据论证其性能领先性，并关联行业背景与作者自身的前期分析。",
+      "translation_notes": [
+        "技术细节（TSV传播差异、本地通道差异）需准确翻译，必要时可加括号注释。",
+        "“best-in-class performance”译为“业界顶尖性能”或“同类最佳性能”。",
+        "“confirmed our analysis”需翻译出“证实了我们早前的分析”的自信和权威口吻。",
+        "数字和单位（Gbps, TB/s, V）的格式需严格统一。"
+      ]
+    },
+    {
+      "section_id": "03-samsung-lpddr6-paper-15-8",
+      "title": "Samsung LPDDR6 - Paper 15.8",
+      "position": "4/27",
+      "paragraph_count": 32,
+      "previous_section_title": "Samsung HBM4 - Paper 15.6",
+      "next_section_title": "Samsung SF2 LPDDR6 PHY - Paper 37.3",
+      "section_role": "分析三星LPDDR6的性能参数，并通过密度对比揭示其可能存在的设计挑战或工艺问题。",
+      "translation_notes": [
+        "“shmoo plot”是专业术语，可译为“舒姆图”并首次出现时考虑加简短注释（如“表征电压、频率与稳定性的关系图”）。",
+        "“area penalty”译为“面积代价”或“面积开销”。",
+        "“considerably lower than”和“only slightly higher than”的对比语气需准确传达。",
+        "图表链接需保留，并注明“图表：...”，以便编辑处理。"
+      ]
+    },
+    {
+      "section_id": "04-samsung-sf2-lpddr6-phy-paper",
+      "title": "Samsung SF2 LPDDR6 PHY - Paper 37.3",
+      "position": "5/27",
+      "paragraph_count": 7,
+      "previous_section_title": "Samsung LPDDR6 - Paper 15.8",
+      "next_section_title": "SK Hynix 1c LPDDR6 - Paper 15.7",
+      "section_role": "深入探讨三星LPDDR6 PHY的具体节能技术，用数据量化其能效提升，作为对前文“其他问题”的可能解答或补充。",
+      "translation_notes": [
+        "“PHY”是标准术语，译为“物理层”或保留“PHY”。",
+        "“clock-gating”译为“时钟门控”，是标准译法。",
+        "“augment the efficiency mode”译为“增强效率模式”或“提升效率模式的效果”。",
+        "百分比数据（50%， 41%）的翻译需精确。"
+      ]
+    },
+    {
+      "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+      "title": "SK Hynix 1c LPDDR6 - Paper 15.7",
+      "position": "6/27",
+      "paragraph_count": 12,
+      "previous_section_title": "Samsung SF2 LPDDR6 PHY - Paper 37.3",
+      "next_section_title": "SK Hynix 1c GDDR7 - Paper 15.9",
+      "section_role": "将SK海力士的LPDDR6与三星进行对比分析，聚焦于能效差异，并介绍其类似的效率模式。",
+      "translation_notes": [
+        "“shmoo plot”再次出现，保持译法一致。",
+        "“worse power efficiency”译为“能效更差”或“功耗表现不佳”。",
+        "“maintain reliability”译为“维持可靠性”，是电路设计的关键考量。",
+        "对比数据（10.9 Gb/s @ 0.95V vs 12.8 Gb/s @ 0.97V）的翻译需清晰无误。"
+      ]
+    },
+    {
+      "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+      "title": "SK Hynix 1c GDDR7 - Paper 15.9",
+      "position": "7/27",
+      "paragraph_count": 14,
+      "previous_section_title": "SK Hynix 1c LPDDR6 - Paper 15.7",
+      "next_section_title": "Samsung 4F² COP DRAM - Paper 15.10",
+      "section_role": "介绍SK海力士GDDR7的密度优势，并通过与三星工艺的对比凸显其技术进步，同时引导读者参考更详细的行业模型。",
+      "translation_notes": [
+        "“bit density”译为“比特密度”或“位密度”。",
+        "“COGS”是“Cost of Goods Sold”的缩写，译为“销售成本”或保留“COGS”。",
+        "“Our memory model”译为“我们的内存模型”，需保持作者作为行业分析师的权威口吻。",
+        "比较级（“compared to”）的翻译需清晰体现优势程度。"
+      ]
+    },
+    {
+      "section_id": "07-samsung-4f2-cop-dram-paper-1",
+      "title": "Samsung 4F² COP DRAM - Paper 15.10",
+      "position": "8/27",
+      "paragraph_count": 34,
+      "previous_section_title": "SK Hynix 1c GDDR7 - Paper 15.9",
+      "next_section_title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1",
+      "section_role": "探讨DRAM微缩的根本性挑战，并介绍三星4F² COP DRAM作为一种创新解决方案，最后将其置于行业发展和市场需求的宏观背景下评估。",
+      "translation_notes": [
+        "“4F²”和“COP”（Cell-Over-Periphery）是专业术语，需准确翻译或保留英文并加注。",
+        "“hybrid bonded”译为“混合键合”。",
+        "“performance/$”译为“性能/价格比”或“每美元性能”。",
+        "“On the otherhand”引导的对比关系需清晰翻译（如“另一方面”）。",
+        "将技术细节（SWD重组）与行业洞察（市场激励）结合，翻译时需保持这种深度。"
+      ]
+    },
+    {
+      "section_id": "08-sandisk-kioxia-bics10-nand-p",
+      "title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1",
+      "position": "9/27",
+      "paragraph_count": 14,
+      "previous_section_title": "Samsung 4F² COP DRAM - Paper 15.10",
+      "next_section_title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2",
+      "section_role": "（根据现有摘要推断）从DRAM领域过渡到非易失性存储领域，介绍SanDisk/Kioxia的BiCS10 NAND Flash技术，可能涉及层数、密度、性能等指标。",
+      "translation_notes": [
+        "“BiCS”是“Bit Cost Scaling”的缩写，是铠侠/西数的3D NAND品牌，可保留“BiCS”并加注“3D NAND”。",
+        "公司名“SanDisk”现属西部数据，需注意与“Kioxia”（铠侠）的合资关系，翻译时可处理为“西部数据/铠侠”或“SanDisk/铠侠”。",
+        "需准备相关NAND术语（如层数、单元类型、IO速度等）的准确翻译。"
+      ]
+    },
+    {
+      "section_id": "09-mediatek-xbit-logic-based-bitc",
+      "title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2",
+      "position": "10/27",
+      "paragraph_count": 18,
+      "previous_section_title": "SanDisk/Kioxia BiCS10 NAND - Paper 15.1",
+      "next_section_title": "TSMC N16 MRAM - Paper 15.4",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "10-tsmc-n16-mram-paper-15-4",
+      "title": "TSMC N16 MRAM - Paper 15.4",
+      "position": "11/27",
+      "paragraph_count": 20,
+      "previous_section_title": "MediaTek xBIT Logic-based Bitcell - Paper 15.2",
+      "next_section_title": "Optical Networking",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "11-optical-networking",
+      "title": "Optical Networking",
+      "position": "12/27",
+      "paragraph_count": 1,
+      "previous_section_title": "TSMC N16 MRAM - Paper 15.4",
+      "next_section_title": "Nvidia DWDM - Paper 23.1",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "12-nvidia-dwdm-paper-23-1",
+      "title": "Nvidia DWDM - Paper 23.1",
+      "position": "13/27",
+      "paragraph_count": 14,
+      "previous_section_title": "Optical Networking",
+      "next_section_title": "Marvell Coherent-Lite Transceiver - Paper 23.2",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "13-marvell-coherent-lite-transcei",
+      "title": "Marvell Coherent-Lite Transceiver - Paper 23.2",
+      "position": "14/27",
+      "paragraph_count": 18,
+      "previous_section_title": "Nvidia DWDM - Paper 23.1",
+      "next_section_title": "Broadcom 6.4T Optical Engine - Paper 23.4",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "14-broadcom-6-4t-optical-engine",
+      "title": "Broadcom 6.4T Optical Engine - Paper 23.4",
+      "position": "15/27",
+      "paragraph_count": 8,
+      "previous_section_title": "Marvell Coherent-Lite Transceiver - Paper 23.2",
+      "next_section_title": "High-Speed Electrical Interconnects",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "15-high-speed-electrical-intercon",
+      "title": "High-Speed Electrical Interconnects",
+      "position": "16/27",
+      "paragraph_count": 1,
+      "previous_section_title": "Broadcom 6.4T Optical Engine - Paper 23.4",
+      "next_section_title": "Intel UCIe-S - Paper 8.1",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "16-intel-ucie-s-paper-8-1",
+      "title": "Intel UCIe-S - Paper 8.1",
+      "position": "17/27",
+      "paragraph_count": 9,
+      "previous_section_title": "High-Speed Electrical Interconnects",
+      "next_section_title": "TSMC Active LSI - Paper 8.2",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "17-tsmc-active-lsi-paper-8-2",
+      "title": "TSMC Active LSI - Paper 8.2",
+      "position": "18/27",
+      "paragraph_count": 25,
+      "previous_section_title": "Intel UCIe-S - Paper 8.1",
+      "next_section_title": "Microsoft D2D Interconnect - Paper 8.3",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "18-microsoft-d2d-interconnect-p",
+      "title": "Microsoft D2D Interconnect - Paper 8.3",
+      "position": "19/27",
+      "paragraph_count": 13,
+      "previous_section_title": "TSMC Active LSI - Paper 8.2",
+      "next_section_title": "Processors",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "19-processors",
+      "title": "Processors",
+      "position": "20/27",
+      "paragraph_count": 1,
+      "previous_section_title": "Microsoft D2D Interconnect - Paper 8.3",
+      "next_section_title": "MediaTek Dimensity 9500 - Paper 10.2",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "20-mediatek-dimensity-9500-pape",
+      "title": "MediaTek Dimensity 9500 - Paper 10.2",
+      "position": "21/27",
+      "paragraph_count": 6,
+      "previous_section_title": "Processors",
+      "next_section_title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+      "title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6",
+      "position": "22/27",
+      "paragraph_count": 14,
+      "previous_section_title": "MediaTek Dimensity 9500 - Paper 10.2",
+      "next_section_title": "AMD MI355X - Paper 2.1",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "22-amd-mi355x-paper-2-1",
+      "title": "AMD MI355X - Paper 2.1",
+      "position": "23/27",
+      "paragraph_count": 17,
+      "previous_section_title": "Intel 18A-on-Intel 3 Hybrid Bonding - Paper 10.6",
+      "next_section_title": "Rebellions Rebel100 - Paper 2.2",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "23-rebellions-rebel100-paper-2",
+      "title": "Rebellions Rebel100 - Paper 2.2",
+      "position": "24/27",
+      "paragraph_count": 19,
+      "previous_section_title": "AMD MI355X - Paper 2.1",
+      "next_section_title": "Microsoft Maia 200 - Paper 17.4",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "24-microsoft-maia-200-paper-17",
+      "title": "Microsoft Maia 200 - Paper 17.4",
+      "position": "25/27",
+      "paragraph_count": 15,
+      "previous_section_title": "Rebellions Rebel100 - Paper 2.2",
+      "next_section_title": "Other Highlight",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "25-other-highlight",
+      "title": "Other Highlight",
+      "position": "26/27",
+      "paragraph_count": 0,
+      "previous_section_title": "Microsoft Maia 200 - Paper 17.4",
+      "next_section_title": "Samsung SF2 Temperature Sensor - Paper 21.5",
+      "section_role": "待分析",
+      "translation_notes": []
+    },
+    {
+      "section_id": "26-samsung-sf2-temperature-sensor",
+      "title": "Samsung SF2 Temperature Sensor - Paper 21.5",
+      "position": "27/27",
+      "paragraph_count": 16,
+      "previous_section_title": "Other Highlight",
+      "next_section_title": "",
+      "section_role": "待分析",
+      "translation_notes": []
+    }
+  ]
+}

@@ -352,7 +352,7 @@ class FullTranslationService {
     }
 
     try {
-      await fetch(`/api/projects/${projectId}/translation-cancel`, {
+      await fetch(`/api/projects/${projectId}/translate-four-step/stop`, {
         method: 'POST',
       });
     } catch (error) {

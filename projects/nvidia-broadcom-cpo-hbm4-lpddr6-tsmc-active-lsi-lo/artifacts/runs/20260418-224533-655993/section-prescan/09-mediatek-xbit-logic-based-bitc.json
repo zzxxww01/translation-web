@@ -1,0 +1,45 @@
+{
+  "section_id": "09-mediatek-xbit-logic-based-bitc",
+  "new_terms": [
+    {
+      "term": "xBIT",
+      "suggested_translation": "xBIT",
+      "context": "MediaTek提出的10晶体管逻辑基存储单元名称",
+      "confidence": 0.95
+    },
+    {
+      "term": "10-transistor cell",
+      "suggested_translation": "10晶体管单元",
+      "context": "xBIT存储单元的具体结构描述",
+      "confidence": 0.9
+    },
+    {
+      "term": "6-transistor high-current (6T-HC)",
+      "suggested_translation": "6晶体管高电流 (6T-HC)",
+      "context": "一种SRAM存储单元类型",
+      "confidence": 0.9
+    },
+    {
+      "term": "8-transistor high-current",
+      "suggested_translation": "8晶体管高电流",
+      "context": "一种SRAM存储单元类型",
+      "confidence": 0.9
+    },
+    {
+      "term": "voltage-frequency scaling",
+      "suggested_translation": "电压频率调节",
+      "context": "处理器动态调整电压和频率以优化功耗和性能",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "bitcell": "存储单元",
+    "shmoo plot": "舒姆图",
+    "isscc": "ISSCC",
+    "assist circuitry": "辅助电路",
+    "pdk": "工艺设计套件",
+    "mediatek": "联发科"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:48:10.187404"
+}

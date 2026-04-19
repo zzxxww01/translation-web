@@ -15,7 +15,7 @@ Translation Agent - Deep Analyzer
 - 增强章节角色分析采样（首段+中段+末段）
 """
 
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Callable
 import logging
 
 from ..core.models import (
@@ -34,6 +34,10 @@ logger = logging.getLogger(__name__)
 class DeepAnalyzer:
     """全文深度分析器"""
 
+    ANALYSIS_SAMPLE_STEPS = (18000, 12000, 8000, 5000)
+    ANALYSIS_TIMEOUT_STEPS = (45, 60, 90, 120)
+    SECTION_ROLE_TIMEOUT = 45
+
     def __init__(
         self,
         llm_provider: LLMProvider,
@@ -50,10 +54,11 @@ class DeepAnalyzer:
         self.max_sample_chars = max_sample_chars
         self.smart_sampler = create_smart_sampler(max_total_chars=max_sample_chars)
 
-    ANALYSIS_SAMPLE_STEPS = (18000, 12000, 8000, 5000)
-    ANALYSIS_TIMEOUT_STEPS = (None, 240, 360, 480)
-
-    def analyze(self, sections: List[Section]) -> ArticleAnalysis:
+    def analyze(
+        self,
+        sections: List[Section],
+        should_cancel: Optional[Callable[[], bool]] = None,
+    ) -> ArticleAnalysis:
         """
         执行全文深度分析
 
@@ -75,6 +80,7 @@ class DeepAnalyzer:
                 deduped_steps.append(sample_chars)
 
         for attempt_index, sample_chars in enumerate(deduped_steps):
+            self._raise_if_cancelled(should_cancel)
             timeout = self.ANALYSIS_TIMEOUT_STEPS[min(attempt_index, len(self.ANALYSIS_TIMEOUT_STEPS) - 1)]
             try:
                 full_text = self._extract_full_text(sections, max_length=sample_chars)
@@ -102,14 +108,27 @@ class DeepAnalyzer:
                 raise last_error
             raise RuntimeError("Deep analysis returned no result")
 
+        self._raise_if_cancelled(should_cancel)
+
         # 解析基础分析结果
         analysis = self._parse_analysis_result(result, sections)
 
         # 优化：一次性分析所有章节角色（减少 LLM 调用）
-        section_roles = self._analyze_all_section_roles(sections, analysis)
+        section_roles = self._analyze_all_section_roles(
+            sections,
+            analysis,
+            should_cancel=should_cancel,
+        )
         analysis.section_roles = section_roles
 
         return analysis
+
+    def _raise_if_cancelled(
+        self,
+        should_cancel: Optional[Callable[[], bool]] = None,
+    ) -> None:
+        if should_cancel and should_cancel():
+            raise RuntimeError("Translation cancelled by user")
 
     def _extract_full_text(
         self,
@@ -255,7 +274,8 @@ class DeepAnalyzer:
     def _analyze_all_section_roles(
         self,
         sections: List[Section],
-        analysis: ArticleAnalysis
+        analysis: ArticleAnalysis,
+        should_cancel: Optional[Callable[[], bool]] = None,
     ) -> Dict[str, SectionUnderstanding]:
         """
         一次性分析所有章节的角色（优化：减少 LLM 调用次数）
@@ -267,6 +287,8 @@ class DeepAnalyzer:
         Returns:
             Dict[str, SectionUnderstanding]: section_id -> 角色理解
         """
+        self._raise_if_cancelled(should_cancel)
+
         # 构建章节摘要（用于一次性分析）
         sections_summary = self._build_sections_summary(sections)
 
@@ -278,7 +300,11 @@ class DeepAnalyzer:
         )
 
         # 调用 LLM 一次性分析所有章节
-        response = self.llm.generate(prompt, response_format="json")
+        response = self.llm.generate(
+            prompt,
+            response_format="json",
+            timeout=self.SECTION_ROLE_TIMEOUT,
+        )
         result = self.llm._parse_json_response(response)
 
         # 解析结果

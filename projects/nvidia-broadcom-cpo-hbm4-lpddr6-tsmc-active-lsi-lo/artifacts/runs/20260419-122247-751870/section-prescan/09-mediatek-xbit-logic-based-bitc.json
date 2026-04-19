@@ -1,0 +1,54 @@
+{
+  "section_id": "09-mediatek-xbit-logic-based-bitc",
+  "new_terms": [
+    {
+      "term": "xBIT",
+      "suggested_translation": "xBIT",
+      "context": "MediaTek's novel 10-transistor bitcell.",
+      "confidence": 0.95
+    },
+    {
+      "term": "6T-HC",
+      "suggested_translation": "6晶体管高电流",
+      "context": "6-transistor high-current SRAM bitcell.",
+      "confidence": 0.9
+    },
+    {
+      "term": "8T",
+      "suggested_translation": "8晶体管",
+      "context": "8-transistor SRAM bitcell.",
+      "confidence": 0.9
+    },
+    {
+      "term": "10T",
+      "suggested_translation": "10晶体管",
+      "context": "10-transistor bitcell (xBIT).",
+      "confidence": 0.9
+    },
+    {
+      "term": "Mib/mm²",
+      "suggested_translation": "兆比特/平方毫米",
+      "context": "Bit density unit (Mebibit per square millimeter).",
+      "confidence": 0.85
+    },
+    {
+      "term": "voltage-frequency scaling",
+      "suggested_translation": "电压频率调节",
+      "context": "Power management technique adjusting voltage and frequency.",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "bitcell": "存储单元",
+    "shmoo plot": "舒姆图",
+    "assist circuitry": "辅助电路",
+    "pdk": "工艺设计套件",
+    "isscc": "ISSCC",
+    "mediatek": "联发科",
+    "sram": "SRAM",
+    "nm": "NMOS",
+    "pmos": "PMOS"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:25:57.527533"
+}

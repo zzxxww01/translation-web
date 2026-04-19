@@ -12,6 +12,9 @@ const GlossaryFeature = lazy(() =>
 const PostFeature = lazy(() =>
   import('./features/post/index.tsx').then(module => ({ default: module.PostFeature }))
 );
+const WechatFeature = lazy(() =>
+  import('./features/wechat/index.tsx').then(module => ({ default: module.WechatFeature }))
+);
 const SlackFeature = lazy(() =>
   import('./features/slack/index.tsx').then(module => ({ default: module.SlackFeature }))
 );
@@ -91,6 +94,14 @@ const router = createBrowserRouter([
         element: (
           <LazyPage>
             <PostFeature />
+          </LazyPage>
+        ),
+      },
+      {
+        path: 'wechat',
+        element: (
+          <LazyPage>
+            <WechatFeature />
           </LazyPage>
         ),
       },

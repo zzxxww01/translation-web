@@ -1,0 +1,41 @@
+{
+  "section_id": "12-nvidia-dwdm-paper-23-1",
+  "new_terms": [
+    {
+      "term": "Clock and Data Recovery (CDR)",
+      "suggested_translation": "时钟数据恢复 (CDR)",
+      "context": "SerDes电路组件",
+      "confidence": 0.9
+    },
+    {
+      "term": "Optical Compute Interconnect MSA (OCI MSA)",
+      "suggested_translation": "光学计算互连多源协议 (OCI MSA)",
+      "context": "光学互连标准组织",
+      "confidence": 0.9
+    },
+    {
+      "term": "On-Board Optics (OBO)",
+      "suggested_translation": "板载光学 (OBO)",
+      "context": "一种共封装光学集成形式",
+      "confidence": 0.9
+    },
+    {
+      "term": "DR Optics",
+      "suggested_translation": "DR Optics",
+      "context": "一种用于横向扩展网络的光学引擎标准",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "dwdm": "密集波分复用",
+    "cpo": "共封装光学",
+    "pam4": "四电平脉冲幅度调制",
+    "serdes": "串行器/解串器",
+    "uci-e": "UCIe",
+    "d2d": "裸片到裸片",
+    "asic": "ASIC",
+    "nrz": "不归零制"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:49:00.963112"
+}

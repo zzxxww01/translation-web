@@ -1,0 +1,63 @@
+{
+  "section_id": "24-microsoft-maia-200-paper-17",
+  "new_terms": [
+    {
+      "term": "TSRAM",
+      "suggested_translation": "暂存器SRAM",
+      "context": "L1缓存类型，指代紧邻计算单元的快速SRAM。",
+      "confidence": 0.9
+    },
+    {
+      "term": "CSRAM",
+      "suggested_translation": "缓存SRAM",
+      "context": "L2缓存类型，指代容量更大、共享的SRAM。",
+      "confidence": 0.9
+    },
+    {
+      "term": "full-duplex",
+      "suggested_translation": "全双工",
+      "context": "描述D2D链路可同时双向传输数据。",
+      "confidence": 0.95
+    },
+    {
+      "term": "scale-up network",
+      "suggested_translation": "纵向扩展网络",
+      "context": "指芯片间用于构建更大计算系统的互连网络。",
+      "confidence": 0.9
+    },
+    {
+      "term": "fixed links",
+      "suggested_translation": "固定链路",
+      "context": "在同一节点内芯片间的直接、点对点连接。",
+      "confidence": 0.95
+    },
+    {
+      "term": "switched links",
+      "suggested_translation": "交换链路",
+      "context": "连接到交换机、用于跨节点通信的链路。",
+      "confidence": 0.95
+    },
+    {
+      "term": "in-rack switches",
+      "suggested_translation": "机架内交换机",
+      "context": "位于同一服务器机架内的网络交换设备。",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "hbm3e": "HBM3E",
+    "d2d": "裸片到裸片",
+    "phy": "物理层",
+    "sram": "SRAM",
+    "cowos": "CoWoS",
+    "reticle-scale monolithic": "光罩尺寸单芯片",
+    "n3p": "N3P制程",
+    "fp4": "FP4",
+    "pflops": "PFLOPs",
+    "node": "节点",
+    "microarchitecture": "微架构",
+    "topology": "拓扑"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:29:47.511272"
+}

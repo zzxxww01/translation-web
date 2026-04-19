@@ -1,0 +1,50 @@
+{
+  "section_id": "18-microsoft-d2d-interconnect-p",
+  "new_terms": [
+    {
+      "term": "Cobalt 200",
+      "suggested_translation": "Cobalt 200",
+      "context": "微软CPU产品名称",
+      "confidence": 0.95
+    },
+    {
+      "term": "compute chiplet",
+      "suggested_translation": "计算芯粒",
+      "context": "多裸片设计中的功能裸片",
+      "confidence": 0.9
+    },
+    {
+      "term": "custom high-bandwidth interconnect",
+      "suggested_translation": "定制高带宽互连",
+      "context": "连接芯粒的专有互连技术",
+      "confidence": 0.85
+    },
+    {
+      "term": "idle state",
+      "suggested_translation": "空闲状态",
+      "context": "电路或互连的低功耗待机模式",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "d2d": "裸片到裸片",
+    "isscc": "ISSCC",
+    "shoreline": "海岸线长度",
+    "tsmc": "台积电",
+    "n3p": "N3P",
+    "gb/s": "Gb/s",
+    "pj/b": "皮焦耳/比特",
+    "clock gating": "时钟门控",
+    "crosstalk": "串扰",
+    "die shot": "芯片显微照片",
+    "test vehicle": "测试载具",
+    "power delivery network": "供电网络",
+    "data rate": "数据速率",
+    "analog power": "模拟部分功耗",
+    "digital system power": "数字系统功耗",
+    "system power": "系统功耗",
+    "active lsi": "有源本地硅互连 (aLSI)"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:52:11.951265"
+}

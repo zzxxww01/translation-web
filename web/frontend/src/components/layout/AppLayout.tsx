@@ -35,6 +35,8 @@ function Breadcrumbs() {
     crumbs.push({ label: '确认' });
   } else if (parts[0] === 'post') {
     crumbs.push({ label: '帖子翻译' });
+  } else if (parts[0] === 'wechat') {
+    crumbs.push({ label: '微信排版' });
   } else if (parts[0] === 'slack') {
     crumbs.push({ label: 'Slack 回复' });
   } else if (parts[0] === 'tools') {

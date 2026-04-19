@@ -1,4 +1,5 @@
 import { apiClient } from '../../shared/api/client';
+import type { TranslationStatus } from '../confirmation/types';
 import type {
   Project,
   Section,
@@ -190,6 +191,14 @@ export const documentApi = {
       manual_review_count: number;
       issues: ConsistencyIssue[];
     }>(`/projects/${projectId}/consistency-review`),
+
+  getTranslationStatus: (projectId: string) =>
+    apiClient.get<TranslationStatus>(`/projects/${projectId}/translation-status`),
+
+  stopLongformTranslation: (projectId: string) =>
+    apiClient.post<{ status: string; project_id: string; run_id?: string }>(
+      `/projects/${projectId}/translate-four-step/stop`
+    ),
 
   /**
    * 批量翻译指定段落

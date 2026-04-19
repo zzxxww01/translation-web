@@ -1,0 +1,106 @@
+{
+  "section_id": "22-amd-mi355x-paper-2-1",
+  "new_terms": [
+    {
+      "term": "XCD",
+      "suggested_translation": "XCD",
+      "context": "AMD GPU计算裸片类型",
+      "confidence": 0.9
+    },
+    {
+      "term": "IOD",
+      "suggested_translation": "IOD",
+      "context": "AMD GPU输入输出裸片",
+      "confidence": 0.9
+    },
+    {
+      "term": "CU",
+      "suggested_translation": "CU",
+      "context": "AMD GPU计算单元",
+      "confidence": 0.9
+    },
+    {
+      "term": "N5",
+      "suggested_translation": "N5",
+      "context": "台积电5纳米制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "N3P",
+      "suggested_translation": "N3P",
+      "context": "台积电3纳米增强版制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "standard cells",
+      "suggested_translation": "标准单元",
+      "context": "芯片设计中的基本逻辑单元库",
+      "confidence": 0.9
+    },
+    {
+      "term": "FP16",
+      "suggested_translation": "FP16",
+      "context": "16位浮点数格式",
+      "confidence": 0.9
+    },
+    {
+      "term": "FP8",
+      "suggested_translation": "FP8",
+      "context": "8位浮点数格式",
+      "confidence": 0.9
+    },
+    {
+      "term": "MXFP4",
+      "suggested_translation": "MXFP4",
+      "context": "AMD的4位混合精度浮点格式",
+      "confidence": 0.9
+    },
+    {
+      "term": "flip-flop variants",
+      "suggested_translation": "触发器变体",
+      "context": "具有不同功耗/性能特性的触发器设计",
+      "confidence": 0.9
+    },
+    {
+      "term": "iso-power",
+      "suggested_translation": "等功耗",
+      "context": "在相同功耗下的性能比较",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm": "HBM",
+    "serdes": "串行器/解串器",
+    "die-to-die interconnects": "裸片间互连",
+    "node": "制程节点",
+    "hpc": "HPC",
+    "gpu": "GPU",
+    "amd": "AMD",
+    "tsmc": "台积电",
+    "euv": "EUV",
+    "chiplet": "芯粒",
+    "packaging": "封装",
+    "throughput": "吞吐量",
+    "latency": "延迟",
+    "bandwidth": "带宽",
+    "yield": "良率",
+    "efficiency": "效率",
+    "performance": "性能",
+    "flops": "FLOPS",
+    "transistor": "晶体管",
+    "metal layers": "金属层",
+    "routing": "布线",
+    "cell utilization": "单元利用率",
+    "density": "密度",
+    "matrix throughput": "矩阵吞吐量",
+    "area efficiency": "面积效率",
+    "power efficiency": "能效",
+    "frequency": "频率",
+    "monolithic die": "单芯片/单片裸片",
+    "interconnect width": "互连宽度",
+    "interconnect power consumption": "互连功耗"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:53:19.875490"
+}

@@ -1,0 +1,51 @@
+{
+  "section_id": "14-broadcom-6-4t-optical-engine",
+  "new_terms": [
+    {
+      "term": "MZM optical engine (OE)",
+      "suggested_translation": "MZM光学引擎 (OE)",
+      "context": "Broadcom 6.4T 光学引擎类型",
+      "confidence": 0.9
+    },
+    {
+      "term": "PIC",
+      "suggested_translation": "光子集成电路",
+      "context": "光学引擎组件",
+      "confidence": 0.9
+    },
+    {
+      "term": "EIC",
+      "suggested_translation": "电子集成电路",
+      "context": "光学引擎组件",
+      "confidence": 0.9
+    },
+    {
+      "term": "Fan-Out Wafer-Level Packaging",
+      "suggested_translation": "扇出型晶圆级封装",
+      "context": "Broadcom 使用的封装技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "COUPE",
+      "suggested_translation": "COUPE",
+      "context": "Nvidia 使用的封装技术",
+      "confidence": 0.9
+    },
+    {
+      "term": "Tomahawk 5",
+      "suggested_translation": "Tomahawk 5",
+      "context": "Broadcom 交换机芯片型号",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "cpo": "共封装光学",
+    "pam4": "四电平脉冲幅度调制",
+    "tsmc": "台积电",
+    "n7": "N7",
+    "isscc": "ISSCC",
+    "hot chips": "Hot Chips"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:49:39.723174"
+}

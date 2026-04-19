@@ -1,0 +1,46 @@
+{
+  "section_id": "20-mediatek-dimensity-9500-pape",
+  "new_terms": [
+    {
+      "term": "Contacted Gate Pitch (CGP)",
+      "suggested_translation": "接触栅极间距 (CGP)",
+      "context": "TSMC N3E/N3P 制程选项，影响单元尺寸和功耗。",
+      "confidence": 0.95
+    },
+    {
+      "term": "C1 Ultra Core",
+      "suggested_translation": "C1 超大核",
+      "context": "MediaTek Dimensity 9500 的高性能核心名称。",
+      "confidence": 0.9
+    },
+    {
+      "term": "aging budget",
+      "suggested_translation": "老化余量",
+      "context": "芯片可靠性设计中的性能/寿命预算。",
+      "confidence": 0.85
+    },
+    {
+      "term": "thermal overshoot",
+      "suggested_translation": "热过冲",
+      "context": "温度管理，指温度瞬时超过设定值。",
+      "confidence": 0.85
+    },
+    {
+      "term": "boost clocks",
+      "suggested_translation": "加速时钟频率",
+      "context": "CPU动态提升的工作频率。",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "mediatek": "联发科",
+    "tsmc": "台积电",
+    "node": "制程节点",
+    "performance": "性能",
+    "power efficiency": "能效",
+    "leakage": "漏电"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:52:32.290493"
+}

@@ -1,0 +1,27 @@
+{
+  "section_id": "05-sk-hynix-1c-lpddr6-paper-15",
+  "new_terms": [
+    {
+      "term": "standby current",
+      "suggested_translation": "待机电流",
+      "context": "功耗指标",
+      "confidence": 0.9
+    },
+    {
+      "term": "operational current",
+      "suggested_translation": "工作电流",
+      "context": "功耗指标",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "shmoo plot": "舒姆图",
+    "bit density": "位密度",
+    "data rate": "数据速率",
+    "pin speeds": "引脚速率",
+    "efficiency mode": "能效模式",
+    "sub-channel": "子通道"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:24:23.411393"
+}

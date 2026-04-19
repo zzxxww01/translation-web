@@ -44,6 +44,19 @@ class SlackComposeResponse(BaseModel):
     versions: list[SlackReplyVariant] = Field(default_factory=list)
 
 
+class SlackRefineRequest(BaseModel):
+    """Request to refine a previous result"""
+    context_type: Literal["incoming", "draft"]
+    original_result: str
+    adjustment_instruction: str
+    conversation_history: list[dict[str, str]] = []
+
+
+class SlackRefineResponse(BaseModel):
+    """Response from refine endpoint"""
+    refined_result: str
+
+
 class SlackOptimizeRequest(BaseModel):
     content: str
     target_language: str  # 'en' or 'cn'

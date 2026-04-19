@@ -25,6 +25,7 @@ import { useFullTranslate, useProject, useSection } from './hooks';
 import type { ConsistencyIssue } from './api';
 import { fullTranslationService } from './services/fullTranslationService';
 import type { TermConflictData } from './services/fullTranslationService';
+import type { TranslationStatus } from '../confirmation/types';
 
 const GlossaryCenter = lazy(() =>
   import('../glossary/GlossaryCenter').then(module => ({ default: module.GlossaryCenter }))
@@ -79,6 +80,7 @@ export function DocumentFeature() {
   } | null>(null);
   const [isSubmittingTermReview, setIsSubmittingTermReview] = useState(false);
   const [isPreparingFullTranslate, setIsPreparingFullTranslate] = useState(false);
+  const [backendTranslationStatus, setBackendTranslationStatus] = useState<TranslationStatus | null>(null);
 
   // AlertDialog 状态
   const [showStopDialog, setShowStopDialog] = useState(false);
@@ -109,6 +111,11 @@ export function DocumentFeature() {
 
   const isFullTranslating = useDocumentStore(state => state.isFullTranslating);
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
+  const fullTranslateProjectId = useDocumentStore(state => state.fullTranslateProjectId);
+  const setFullTranslating = useDocumentStore(state => state.setFullTranslating);
+  const setFullTranslateProgress = useDocumentStore(state => state.setFullTranslateProgress);
+  const setFullTranslateProjectId = useDocumentStore(state => state.setFullTranslateProjectId);
+  const endFullTranslate = useDocumentStore(state => state.endFullTranslate);
 
   useProject(currentProject?.id ?? '');
 
@@ -163,7 +170,71 @@ export function DocumentFeature() {
     setPendingTranslationRequest(null);
     setPendingIssueTarget(null);
     setIsPreparingFullTranslate(false);
+    setBackendTranslationStatus(null);
   }, [currentProject?.id]);
+
+  useEffect(() => {
+    if (!currentProject?.id) {
+      return;
+    }
+
+    let cancelled = false;
+
+    const syncStatus = async () => {
+      try {
+        const status = await documentApi.getTranslationStatus(currentProject.id);
+        if (cancelled) {
+          return;
+        }
+        setBackendTranslationStatus(status);
+
+        const isActiveForCurrentProject = status.active_project_id === currentProject.id;
+        const isRunning = status.status === 'processing' && isActiveForCurrentProject;
+        const isCancelling = Boolean(status.is_cancelling && isActiveForCurrentProject);
+        const hasTrackableRun = isRunning || isCancelling;
+
+        if (hasTrackableRun) {
+          setFullTranslateProjectId(currentProject.id);
+          setFullTranslating(true);
+          setFullTranslateProgress({
+            current: status.translated_paragraphs || 0,
+            total: status.total_paragraphs || 0,
+          });
+          setCurrentStep(status.current_step || null);
+          return;
+        }
+
+        if (
+          fullTranslateProjectId === currentProject.id ||
+          (!fullTranslationService.isTranslating() && !status.active_project_id)
+        ) {
+          endFullTranslate();
+          if (!fullTranslationService.isTranslating()) {
+            setCurrentStep(null);
+          }
+        }
+      } catch (error) {
+        if (!cancelled) {
+          console.error('Failed to sync translation status:', error);
+        }
+      }
+    };
+
+    void syncStatus();
+    const intervalId = window.setInterval(syncStatus, 5000);
+
+    return () => {
+      cancelled = true;
+      window.clearInterval(intervalId);
+    };
+  }, [
+    currentProject?.id,
+    endFullTranslate,
+    fullTranslateProjectId,
+    setFullTranslateProgress,
+    setFullTranslateProjectId,
+    setFullTranslating,
+  ]);
 
   useEffect(() => {
     if (activeView === 'term-review' && !pendingTermReview) {
@@ -343,6 +414,7 @@ export function DocumentFeature() {
         },
         () => {
           setCurrentStep(null);
+          setBackendTranslationStatus(null);
           if (activeSectionId) {
             refetchSection();
           }
@@ -545,6 +617,27 @@ export function DocumentFeature() {
   const currentIndex = getCurrentParagraphIndex();
   const totalCount = displaySection?.paragraphs?.length ?? 0;
   const showEditingPanels = !activeView;
+  const hasBackendStatusForCurrentProject =
+    backendTranslationStatus?.active_project_id === currentProject?.id;
+  const effectiveProgress = hasBackendStatusForCurrentProject
+    ? {
+        current: backendTranslationStatus?.translated_paragraphs || 0,
+        total: backendTranslationStatus?.total_paragraphs || 0,
+      }
+    : fullTranslateProgress;
+  const effectiveIsCancelling = Boolean(
+    hasBackendStatusForCurrentProject &&
+      backendTranslationStatus?.is_cancelling
+  );
+  const effectiveIsFullTranslating = Boolean(
+    (hasBackendStatusForCurrentProject &&
+      backendTranslationStatus?.status === 'processing') ||
+      isFullTranslating
+  );
+  const effectiveCurrentStep =
+    (hasBackendStatusForCurrentProject &&
+      backendTranslationStatus?.current_step) ||
+    currentStep;
 
   return (
     <div className="flex h-full overflow-auto">
@@ -554,10 +647,13 @@ export function DocumentFeature() {
         onSectionSelect={handleSelectSectionById}
         onNewProject={() => setIsNewProjectModalOpen(true)}
         onFullTranslate={handleFullTranslate}
-        isFullTranslating={isFullTranslating}
+        onStopTranslate={() => setShowStopDialog(true)}
+        isFullTranslating={effectiveIsFullTranslating}
+        isCancelling={effectiveIsCancelling}
         isPreparingFullTranslate={isPreparingFullTranslate}
-        fullTranslateProgress={fullTranslateProgress}
-        currentStep={currentStep}
+        fullTranslateProgress={effectiveProgress}
+        currentStep={effectiveCurrentStep}
+        activeTranslationProjectId={backendTranslationStatus?.active_project_id || null}
         onOpenConsistency={handleOpenConsistency}
         projectId={currentProject?.id}
       />
@@ -683,7 +779,10 @@ export function DocumentFeature() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>取消</AlertDialogCancel>
-            <AlertDialogAction onClick={() => { stopTranslation(); setCurrentStep(null); }}>
+            <AlertDialogAction onClick={() => {
+              void stopTranslation(currentProject?.id);
+              setCurrentStep('取消中');
+            }}>
               确定停止
             </AlertDialogAction>
           </AlertDialogFooter>

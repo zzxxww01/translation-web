@@ -9,8 +9,10 @@ import type { SlackReplyVariant } from '@/shared/types';
 import { copyToClipboard, detectLanguage } from '@/shared/utils';
 import { ReplySuggestions } from './components/ReplySuggestions';
 import { ConversationHistory } from './components/ConversationHistory';
+import { RefinementPanel } from './components/RefinementPanel';
 import { useComposeReply, useGenerateReply } from './hooks';
 import { useSlackWorkspaceStore } from './store';
+import { slackApi } from './api';
 
 export function SlackFeature() {
   const analyzeMutation = useGenerateReply();
@@ -21,10 +23,12 @@ export function SlackFeature() {
     draftText, draftVersions,
     conversationMessages, isHistoryCollapsed,
     selectedModel,
+    incomingRefinement, draftRefinement,
     setIncomingText, setIncomingResult, clearIncoming,
     setDraftText, setDraftVersions, clearDraft,
     addMessage, addMessages, removeMessage, updateMessage, clearConversation, toggleHistoryCollapse,
     setSelectedModel,
+    startRefinement, addRefinementVariant, clearRefinement, setRefining, confirmToHistory,
   } = useSlackWorkspaceStore();
 
   const draftLanguage = useMemo(() => detectLanguage(draftText.trim()), [draftText]);
@@ -33,6 +37,42 @@ export function SlackFeature() {
     const ok = await copyToClipboard(content);
     if (ok) toast.success(msg);
     else toast.error('复制失败');
+  };
+
+  const handleRefineIncoming = async (instruction: string) => {
+    if (!incomingRefinement) return;
+    setRefining('incoming', true);
+    try {
+      const latestVariant = incomingRefinement.variants[incomingRefinement.variants.length - 1];
+      const result = await slackApi.refine({
+        context_type: 'incoming',
+        original_result: latestVariant.content,
+        adjustment_instruction: instruction,
+        conversation_history: conversationMessages.map(m => ({ role: m.role, content: m.content })),
+      });
+      addRefinementVariant('incoming', result.refined_result);
+    } catch (error) {
+      toast.error('调整失败');
+      setRefining('incoming', false);
+    }
+  };
+
+  const handleRefineDraft = async (instruction: string) => {
+    if (!draftRefinement) return;
+    setRefining('draft', true);
+    try {
+      const latestVariant = draftRefinement.variants[draftRefinement.variants.length - 1];
+      const result = await slackApi.refine({
+        context_type: 'draft',
+        original_result: latestVariant.content,
+        adjustment_instruction: instruction,
+        conversation_history: conversationMessages.map(m => ({ role: m.role, content: m.content })),
+      });
+      addRefinementVariant('draft', result.refined_result);
+    } catch (error) {
+      toast.error('调整失败');
+      setRefining('draft', false);
+    }
   };
 
   const handleAnalyze = async () => {
@@ -51,6 +91,10 @@ export function SlackFeature() {
       addMessages('them', lines);
       setIncomingResult(result.translation, result.suggested_replies ?? []);
       setIncomingText('');
+
+      if (result.suggested_replies && result.suggested_replies.length > 0) {
+        startRefinement('incoming', content, result.suggested_replies[0].english);
+      }
     } catch { /* handled */ }
   };
 
@@ -70,6 +114,10 @@ export function SlackFeature() {
       setDraftVersions(
         result.versions.map((v: SlackReplyVariant) => ({ ...v, chinese: v.chinese || content }))
       );
+
+      if (result.versions && result.versions.length > 0) {
+        startRefinement('draft', content, result.versions[0].english);
+      }
     } catch { /* handled */ }
   };
 
@@ -169,6 +217,22 @@ export function SlackFeature() {
               />
             </div>
           )}
+
+          {incomingRefinement && (
+            <RefinementPanel
+              session={incomingRefinement}
+              onRefine={handleRefineIncoming}
+              onConfirm={(variantId) => {
+                confirmToHistory('incoming', variantId);
+                const variant = incomingRefinement.variants.find(v => v.id === variantId);
+                if (variant) {
+                  copyEnglish(variant.content, '已复制并加入对话历史');
+                }
+                clearRefinement('incoming');
+              }}
+              onClear={() => clearRefinement('incoming')}
+            />
+          )}
         </CardContent>
       </Card>
 
@@ -227,6 +291,23 @@ export function SlackFeature() {
                 toast.success('已复制并加入对话历史');
               }}
               onClose={() => setDraftVersions([])}
+            />
+          )}
+
+          {draftRefinement && (
+            <RefinementPanel
+              session={draftRefinement}
+              onRefine={handleRefineDraft}
+              onConfirm={(variantId) => {
+                confirmToHistory('draft', variantId);
+                const variant = draftRefinement.variants.find(v => v.id === variantId);
+                if (variant) {
+                  copyEnglish(variant.content, '已复制并加入对话历史');
+                }
+                clearRefinement('draft');
+                setDraftText('');
+              }}
+              onClear={() => clearRefinement('draft')}
             />
           )}
         </CardContent>

@@ -14,6 +14,7 @@ import json
 import threading
 import time
 from pathlib import Path
+from dataclasses import dataclass
 from typing import Any, Awaitable, List, Optional, Dict, Callable, Set
 from datetime import datetime
 import logging
@@ -70,12 +71,35 @@ from src.services.source_metadata_service import SourceMetadataTranslationServic
 logger = logging.getLogger(__name__)
 
 
+@dataclass
+class RunStateSnapshot:
+    run_id: str
+    status: str
+    current_step: str
+    current_section: Optional[str]
+    updated_at: Optional[str]
+    started_at: Optional[str]
+    finished_at: Optional[str]
+    error_count: int = 0
+
+
+@dataclass
+class ActiveRunLock:
+    project_id: str
+    run_id: Optional[str]
+    status: str
+    started_at: str
+    updated_at: str
+
+
 class BatchTranslationService:
     """批量翻译服务"""
 
     _shared_progress_tracker = ProgressTracker()
     _cancelled_projects: Set[str] = set()
     _cancelled_lock = threading.Lock()
+    _active_run_lock = threading.Lock()
+    _active_run: Optional[ActiveRunLock] = None
 
     # 翻译模式
     TRANSLATION_MODE_FOUR_STEP = "four_step"  # 四步法（段落级）
@@ -148,11 +172,122 @@ class BatchTranslationService:
         with self._cancelled_lock:
             self._cancelled_projects.discard(project_id)
 
+    @classmethod
+    def _get_active_run(cls) -> Optional[ActiveRunLock]:
+        with cls._active_run_lock:
+            if cls._active_run is None:
+                return None
+            return ActiveRunLock(
+                project_id=cls._active_run.project_id,
+                run_id=cls._active_run.run_id,
+                status=cls._active_run.status,
+                started_at=cls._active_run.started_at,
+                updated_at=cls._active_run.updated_at,
+            )
+
+    @classmethod
+    def _set_active_run(
+        cls,
+        project_id: str,
+        *,
+        run_id: Optional[str],
+        status: str,
+    ) -> ActiveRunLock:
+        now = datetime.now().isoformat()
+        with cls._active_run_lock:
+            if cls._active_run and cls._active_run.project_id == project_id:
+                started_at = cls._active_run.started_at
+            else:
+                started_at = now
+            cls._active_run = ActiveRunLock(
+                project_id=project_id,
+                run_id=run_id,
+                status=status,
+                started_at=started_at,
+                updated_at=now,
+            )
+            return cls._active_run
+
+    @classmethod
+    def _release_active_run(
+        cls,
+        project_id: str,
+        *,
+        run_id: Optional[str] = None,
+    ) -> None:
+        with cls._active_run_lock:
+            active = cls._active_run
+            if active is None:
+                return
+            if active.project_id != project_id:
+                return
+            if run_id is not None and active.run_id not in (None, run_id):
+                return
+            cls._active_run = None
+
+    @classmethod
+    async def claim_translation_slot(
+        cls,
+        project_id: str,
+        *,
+        wait_timeout: float = 300.0,
+        poll_interval: float = 0.5,
+    ) -> Dict[str, Any]:
+        active = cls._get_active_run()
+        if active is None:
+            placeholder = cls._set_active_run(
+                project_id,
+                run_id=None,
+                status="starting",
+            )
+            return {
+                "status": "acquired",
+                "project_id": project_id,
+                "run_id": placeholder.run_id,
+                "previous_project_id": None,
+            }
+
+        previous_project_id = active.project_id
+        previous_run_id = active.run_id
+        other_service = cls.__new__(cls)
+        cancel_result = await other_service.cancel_translation(previous_project_id)
+
+        deadline = time.monotonic() + wait_timeout
+        while time.monotonic() < deadline:
+            await asyncio.sleep(poll_interval)
+            active = cls._get_active_run()
+            if active is None or active.project_id == project_id:
+                placeholder = cls._set_active_run(
+                    project_id,
+                    run_id=None,
+                    status="starting",
+                )
+                return {
+                    "status": "acquired_after_cancel",
+                    "project_id": project_id,
+                    "run_id": placeholder.run_id,
+                    "previous_project_id": previous_project_id,
+                    "previous_run_id": previous_run_id,
+                    "cancel_result": cancel_result,
+                }
+
+        active = cls._get_active_run()
+        return {
+            "status": "busy",
+            "project_id": project_id,
+            "active_project_id": active.project_id if active else previous_project_id,
+            "active_run_id": active.run_id if active else previous_run_id,
+            "active_status": active.status if active else "cancelling",
+        }
+
     def _load_project_with_sections(self, project_id: str) -> ProjectMeta:
         """Load project and attach sections."""
         project = self.project_manager.get(project_id)
         project.sections = self.project_manager.get_sections(project_id)
         return project
+
+    def _progress_cache(self) -> ProgressTracker:
+        return getattr(self, "_progress_tracker", self._shared_progress_tracker)
 
     def _artifacts_root(self, project_id: str) -> Path:
         return self.project_manager.projects_path / project_id / "artifacts" / "runs"
@@ -241,6 +376,77 @@ class BatchTranslationService:
                     exc,
                 )
         return None
+
+    def _get_latest_run_dir(self, project_id: str) -> Optional[Path]:
+        artifacts_root = self._artifacts_root(project_id)
+        if not artifacts_root.exists():
+            return None
+
+        run_dirs = sorted(
+            (path for path in artifacts_root.iterdir() if path.is_dir()),
+            key=lambda path: path.stat().st_mtime,
+            reverse=True,
+        )
+        return run_dirs[0] if run_dirs else None
+
+    def _infer_run_state(self, project_id: str) -> Optional[RunStateSnapshot]:
+        run_dir = self._get_latest_run_dir(project_id)
+        if run_dir is None:
+            return None
+
+        summary_path = run_dir / "run-summary.json"
+        if summary_path.exists():
+            try:
+                payload = json.loads(summary_path.read_text(encoding="utf-8"))
+                if isinstance(payload, dict):
+                    return RunStateSnapshot(
+                        run_id=str(payload.get("run_id") or run_dir.name),
+                        status=str(payload.get("status") or "processing"),
+                        current_step=str(payload.get("status") or "processing"),
+                        current_section=None,
+                        updated_at=datetime.fromtimestamp(run_dir.stat().st_mtime).isoformat(),
+                        started_at=payload.get("started_at"),
+                        finished_at=payload.get("finished_at"),
+                        error_count=int(payload.get("error_count") or len(payload.get("errors") or [])),
+                    )
+            except Exception as exc:
+                logger.warning("Failed to parse run summary from %s: %s", summary_path, exc)
+
+        latest_file: Optional[Path] = None
+        latest_section: Optional[str] = None
+        latest_step = "processing"
+        step_map = {
+            "analysis.json": "深度分析全文",
+            "source-metadata.json": "翻译来源说明",
+            "consistency.json": "一致性审查",
+            "section-context": "准备章节上下文",
+            "section-prescan": "章节术语预扫描",
+            "section-draft": "章节初译",
+            "section-critique": "章节反思",
+            "section-revision": "章节润色",
+        }
+
+        for candidate in run_dir.rglob('*.json'):
+            if latest_file is None or candidate.stat().st_mtime > latest_file.stat().st_mtime:
+                latest_file = candidate
+
+        if latest_file is not None:
+            parent_name = latest_file.parent.name
+            latest_step = step_map.get(latest_file.name, step_map.get(parent_name, "processing"))
+            if parent_name.startswith('section-'):
+                latest_section = latest_file.stem
+
+        updated_at = datetime.fromtimestamp(run_dir.stat().st_mtime).isoformat()
+        return RunStateSnapshot(
+            run_id=run_dir.name,
+            status="processing",
+            current_step=latest_step,
+            current_section=latest_section,
+            updated_at=updated_at,
+            started_at=datetime.fromtimestamp(run_dir.stat().st_ctime).isoformat(),
+            finished_at=None,
+            error_count=0,
+        )
 
     def _build_source_manifest(
         self,
@@ -706,6 +912,19 @@ class BatchTranslationService:
         if callback:
             callback(step, current, total)
 
+    def _touch_progress(
+        self,
+        progress: TranslationProgress,
+        *,
+        step: Optional[str] = None,
+        current_section: Optional[str] = None,
+    ) -> None:
+        if step is not None:
+            progress.current_step = step
+        if current_section is not None:
+            progress.current_section = current_section
+        self._progress_cache().touch(progress)
+
     def _set_active_status(
         self,
         project_id: str,
@@ -765,6 +984,9 @@ class BatchTranslationService:
         )
 
         run_id, run_dir = self._create_run_artifact_dir(project_id)
+        progress.run_id = run_id
+        self._touch_progress(progress)
+        self._set_active_run(project_id, run_id=run_id, status="processing")
         self._write_artifact_json(
             run_dir / "source-manifest.json",
             self._build_source_manifest(project, project_id),
@@ -794,7 +1016,7 @@ class BatchTranslationService:
                 if self._count_translated_paragraphs(section) == len(section.paragraphs)
                 and len(section.paragraphs) > 0
             )
-            progress.current_step = "已取消"
+            self._touch_progress(progress, step="已取消")
             progress.final_status = "cancelled"
             project.status = original_status
             self._save_meta(project_id, project)
@@ -818,12 +1040,13 @@ class BatchTranslationService:
             }
             self._write_artifact_json(run_dir / "run-summary.json", result)
             self._clear_cancelled(project_id)
+            self._release_active_run(project_id, run_id=run_id)
             return result
 
         try:
             # Phase 0: 深度分析全文
             logger.info(f"[{project_id}] Starting Phase 0: Deep Analysis")
-            progress.current_step = "深度分析全文"
+            self._touch_progress(progress, step="深度分析全文")
             self._notify_progress(
                 on_progress, "深度分析全文", translated_count, total_paragraphs
             )
@@ -838,7 +1061,10 @@ class BatchTranslationService:
                     )
 
             if analysis is None:
-                analysis = self.deep_analyzer.analyze(project.sections)
+                analysis = self.deep_analyzer.analyze(
+                    project.sections,
+                    should_cancel=lambda: self._is_cancelled(project_id),
+                )
             glossary_seed_result = self._seed_project_glossary(project_id, analysis)
             analysis = self._merge_analysis_with_project_glossary(project_id, analysis)
 
@@ -868,7 +1094,7 @@ class BatchTranslationService:
 
             # 翻译标题和元信息
             logger.info(f"[{project_id}] Translating title and metadata")
-            progress.current_step = "翻译标题"
+            self._touch_progress(progress, step="翻译标题")
             self._notify_progress(
                 on_progress, "翻译标题", translated_count, total_paragraphs
             )
@@ -880,7 +1106,7 @@ class BatchTranslationService:
 
             # 翻译章节标题
             logger.info(f"[{project_id}] Translating section titles")
-            progress.current_step = "翻译章节标题"
+            self._touch_progress(progress, step="翻译章节标题")
             self._notify_progress(
                 on_progress, "翻译章节标题", translated_count, total_paragraphs
             )
@@ -890,7 +1116,7 @@ class BatchTranslationService:
                 return finalize_cancelled_result()
 
             logger.info(f"[{project_id}] Translating source metadata")
-            progress.current_step = "翻译来源说明"
+            self._touch_progress(progress, step="翻译来源说明")
             self._notify_progress(
                 on_progress, "翻译来源说明", translated_count, total_paragraphs
             )
@@ -1036,7 +1262,7 @@ class BatchTranslationService:
 
             # Phase 2: 一致性审查（优化：新增）
             logger.info(f"[{project_id}] Starting Phase 2: Consistency Review")
-            progress.current_step = "一致性审查"
+            self._touch_progress(progress, step="一致性审查")
             self._notify_progress(
                 on_progress, "一致性审查", translated_count, total_paragraphs
             )
@@ -1155,7 +1381,7 @@ class BatchTranslationService:
                 if self._count_translated_paragraphs(section) == len(section.paragraphs)
                 and len(section.paragraphs) > 0
             )
-            progress.current_step = "completed" if is_complete else "incomplete"
+            self._touch_progress(progress, step="completed" if is_complete else "incomplete")
             progress.final_status = "completed" if is_complete else "incomplete"
             project.status = (
                 self._final_status_after_success(original_status)
@@ -1224,9 +1450,17 @@ class BatchTranslationService:
             self._write_artifact_json(run_dir / "run-summary.json", result)
 
             self._clear_cancelled(project_id)
+            self._release_active_run(project_id, run_id=run_id)
             return result
 
         except Exception as e:
+            if self._is_cancelled(project_id) or "cancelled" in str(e).lower():
+                logger.info(
+                    "[%s] Translation cancelled during in-flight operation: %s",
+                    project_id,
+                    e,
+                )
+                return finalize_cancelled_result(str(e))
             logger.error(f"[{project_id}] Translation failed: {str(e)}")
             self._progress_tracker.record_error(progress, str(e))
             progress.finished_at = datetime.now()
@@ -1246,6 +1480,7 @@ class BatchTranslationService:
             }
             self._write_artifact_json(run_dir / "run-summary.json", failure_result)
             self._clear_cancelled(project_id)
+            self._release_active_run(project_id, run_id=run_id)
             return failure_result
 
     async def _translate_single_section(
@@ -1273,6 +1508,12 @@ class BatchTranslationService:
             # 取消检查
             if self._is_cancelled(project_id):
                 return {"section_id": section.section_id, "cancelled": True}
+
+            self._touch_progress(
+                progress,
+                step=f"处理中: {section.title}",
+                current_section=section.section_id,
+            )
 
             # 构建章节上下文
             section_prompt_context = self._build_section_prompt_context(
@@ -1402,6 +1643,11 @@ class BatchTranslationService:
 
             # 保存章节
             self.project_manager.save_section(project_id, section)
+            self._touch_progress(
+                progress,
+                step=f"完成: {section.title}",
+                current_section=section.section_id,
+            )
 
             return {
                 "section_id": section.section_id,
@@ -1412,6 +1658,11 @@ class BatchTranslationService:
 
         except Exception as e:
             error_msg = f"Failed to translate section {section.section_id}: {str(e)}"
+            self._touch_progress(
+                progress,
+                step=error_msg,
+                current_section=section.section_id,
+            )
             logger.error(f"[{project_id}] {error_msg}")
             return {
                 "section_id": section.section_id,
@@ -1771,19 +2022,51 @@ class BatchTranslationService:
         Returns:
             Dict: 进度信息
         """
-        progress = self._progress_tracker.get(project_id)
+        progress = self._progress_cache().get(project_id)
+        latest_run_state = self._infer_run_state(project_id)
+        active_run = self._get_active_run()
+
+        def attach_active_fields(payload: Dict[str, Any]) -> Dict[str, Any]:
+            is_active_project = bool(active_run and active_run.project_id == project_id)
+            terminal_statuses = {"completed", "cancelled", "failed", "incomplete"}
+            effective_status = str(payload.get("final_status") or payload.get("status") or "")
+            payload["active_project_id"] = active_run.project_id if active_run else None
+            payload["active_run_id"] = active_run.run_id if active_run else None
+            payload["can_stop"] = is_active_project and payload.get("status") in (
+                "processing",
+                "starting",
+                "cancelling",
+            )
+            payload["is_cancelling"] = bool(
+                effective_status not in terminal_statuses
+                and (
+                    (progress and progress.cancel_requested)
+                    or (is_active_project and active_run and active_run.status == "cancelling")
+                    or payload.get("status") == "cancelling"
+                )
+            )
+            return payload
 
         if progress:
+            payload = progress.to_dict()
+            if latest_run_state and latest_run_state.run_id == progress.run_id:
+                payload["current_step"] = progress.current_step or latest_run_state.current_step
+                payload["current_section"] = progress.current_section or latest_run_state.current_section
             if progress.final_status:
-                return {
+                return attach_active_fields({
                     "status": progress.final_status,
-                    **progress.to_dict(),
-                }
+                    **payload,
+                })
 
-            return {
+            stalled_seconds = max(
+                int((datetime.now() - progress.last_updated_at).total_seconds()),
+                0,
+            )
+            return attach_active_fields({
                 "status": "completed" if progress.is_complete else "processing",
-                **progress.to_dict(),
-            }
+                "stalled_seconds": stalled_seconds,
+                **payload,
+            })
 
         project = self._load_project_with_sections(project_id)
         total_paragraphs = sum(len(section.paragraphs) for section in project.sections)
@@ -1791,13 +2074,38 @@ class BatchTranslationService:
         is_complete = total_paragraphs > 0 and translated >= total_paragraphs
         latest_run = self._load_latest_run_summary(project_id)
 
+        if latest_run_state and latest_run and latest_run_state.run_id != str(latest_run.get("run_id") or ""):
+            return attach_active_fields({
+                "status": latest_run_state.status,
+                "progress_percent": (
+                    (translated / total_paragraphs * 100)
+                    if total_paragraphs > 0
+                    else 0
+                ),
+                "translated_paragraphs": translated,
+                "total_paragraphs": total_paragraphs,
+                "translated_sections": sum(
+                    1 for section in project.sections if self._count_translated_paragraphs(section) == len(section.paragraphs) and len(section.paragraphs) > 0
+                ),
+                "total_sections": len(project.sections),
+                "current_section": latest_run_state.current_section,
+                "current_step": latest_run_state.current_step,
+                "is_complete": False,
+                "error_count": latest_run_state.error_count,
+                "started_at": latest_run_state.started_at,
+                "last_updated_at": latest_run_state.updated_at,
+                "finished_at": latest_run_state.finished_at,
+                "final_status": None,
+                "run_id": latest_run_state.run_id,
+            })
+
         if latest_run:
             latest_status = str(latest_run.get("status") or "").strip() or "processing"
             latest_total = int(latest_run.get("total_paragraphs") or total_paragraphs or 0)
             latest_translated = int(
                 latest_run.get("translated_paragraphs") or translated or 0
             )
-            return {
+            return attach_active_fields({
                 "status": latest_status,
                 "progress_percent": (
                     (latest_translated / latest_total * 100)
@@ -1808,15 +2116,41 @@ class BatchTranslationService:
                 "total_paragraphs": latest_total,
                 "translated_sections": int(latest_run.get("translated_sections") or 0),
                 "total_sections": int(latest_run.get("total_sections") or len(project.sections)),
-                "current_section": None,
-                "current_step": latest_status,
+                "current_section": latest_run_state.current_section if latest_run_state else None,
+                "current_step": latest_run_state.current_step if latest_run_state else latest_status,
                 "is_complete": latest_status == "completed",
                 "error_count": int(latest_run.get("error_count") or 0),
                 "started_at": latest_run.get("started_at"),
+                "last_updated_at": latest_run_state.updated_at if latest_run_state else None,
                 "finished_at": latest_run.get("finished_at"),
                 "final_status": latest_status,
-                "run_id": latest_run.get("run_id"),
-            }
+                "run_id": latest_run.get("run_id") or (latest_run_state.run_id if latest_run_state else None),
+            })
+
+        if latest_run_state:
+            return attach_active_fields({
+                "status": latest_run_state.status,
+                "progress_percent": (
+                    (translated / total_paragraphs * 100)
+                    if total_paragraphs > 0
+                    else 0
+                ),
+                "translated_paragraphs": translated,
+                "total_paragraphs": total_paragraphs,
+                "translated_sections": sum(
+                    1 for section in project.sections if self._count_translated_paragraphs(section) == len(section.paragraphs) and len(section.paragraphs) > 0
+                ),
+                "total_sections": len(project.sections),
+                "current_section": latest_run_state.current_section,
+                "current_step": latest_run_state.current_step,
+                "is_complete": False,
+                "error_count": latest_run_state.error_count,
+                "started_at": latest_run_state.started_at,
+                "last_updated_at": latest_run_state.updated_at,
+                "finished_at": latest_run_state.finished_at,
+                "final_status": None,
+                "run_id": latest_run_state.run_id,
+            })
 
         if is_complete and project.status in (
             ProjectStatus.REVIEWING,
@@ -1830,7 +2164,7 @@ class BatchTranslationService:
         else:
             status = "not_started"
 
-        return {
+        return attach_active_fields({
             "status": status,
             "progress_percent": (
                 (translated / total_paragraphs * 100)
@@ -1840,7 +2174,7 @@ class BatchTranslationService:
             "translated_paragraphs": translated,
             "total_paragraphs": total_paragraphs,
             "is_complete": is_complete,
-        }
+        })
 
     async def cancel_translation(self, project_id: str) -> Dict:
         """
@@ -1855,11 +2189,34 @@ class BatchTranslationService:
         # 设置取消标记，让翻译循环在下一个 section 迭代时退出
         self._mark_cancelled(project_id)
 
-        progress = self._progress_tracker.get(project_id)
+        progress = self._progress_cache().get(project_id)
+        active_run = self._get_active_run()
 
         if progress is not None:
-            progress.current_step = "取消中"
-            return {"status": "cancelling", "project_id": project_id}
+            progress.cancel_requested = True
+            self._touch_progress(progress, step="取消中")
+            self._set_active_run(
+                project_id,
+                run_id=progress.run_id,
+                status="cancelling",
+            )
+            return {
+                "status": "cancelling",
+                "project_id": project_id,
+                "run_id": progress.run_id,
+            }
+
+        if active_run and active_run.project_id == project_id:
+            self._set_active_run(
+                project_id,
+                run_id=active_run.run_id,
+                status="cancelling",
+            )
+            return {
+                "status": "cancelling",
+                "project_id": project_id,
+                "run_id": active_run.run_id,
+            }
 
         self._clear_cancelled(project_id)
         return {"status": "not_found", "project_id": project_id}

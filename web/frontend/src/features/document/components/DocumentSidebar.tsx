@@ -25,11 +25,14 @@ interface DocumentSidebarProps {
   onSectionSelect: (sectionId: string) => void;
   onNewProject: () => void;
   onFullTranslate?: (method?: TranslationMethod, model?: string) => void;
+  onStopTranslate?: () => void;
   onOpenConsistency?: () => void;
   isFullTranslating?: boolean;
+  isCancelling?: boolean;
   isPreparingFullTranslate?: boolean;
   fullTranslateProgress?: { current: number; total: number } | null;
   currentStep?: string | null;
+  activeTranslationProjectId?: string | null;
   projectId?: string;
 }
 
@@ -39,11 +42,14 @@ export function DocumentSidebar({
   onSectionSelect,
   onNewProject,
   onFullTranslate,
+  onStopTranslate,
   onOpenConsistency,
   isFullTranslating,
+  isCancelling,
   isPreparingFullTranslate,
   fullTranslateProgress,
   currentStep,
+  activeTranslationProjectId,
   projectId,
 }: DocumentSidebarProps) {
   const [exportFormat, setExportFormat] = useState<'en' | 'zh'>('zh');
@@ -69,7 +75,9 @@ export function DocumentSidebar({
     exportMutation.mutate({ projectId, format: exportFormat });
   };
 
-  const isTranslateBusy = Boolean(isFullTranslating || isPreparingFullTranslate);
+  const isTranslateBusy = Boolean(isFullTranslating || isPreparingFullTranslate || isCancelling);
+  const isOtherProjectTranslating =
+    Boolean(activeTranslationProjectId && projectId && activeTranslationProjectId !== projectId);
 
   return (
     <aside className="flex h-full w-72 flex-col border-r border-border-subtle bg-bg-secondary">
@@ -110,41 +118,71 @@ export function DocumentSidebar({
             <p className="mt-1 text-right text-sm text-text-muted">{progressPercent.toFixed(0)}%</p>
           </div>
 
-          {isFullTranslating && fullTranslateProgress && (
+          {(isFullTranslating || isCancelling) && fullTranslateProgress && (
             <div className="rounded-md bg-primary-500/10 p-3">
-              <div className="mb-2 flex justify-between text-sm">
-                <span className="font-medium text-primary-500">
-                  {currentStep || '正在翻译...'}
-                </span>
-                <span className="text-primary-500">
-                  {fullTranslateProgress.current}/{fullTranslateProgress.total}
-                </span>
+              <div className="mb-2 flex items-start justify-between gap-3 text-sm">
+                <div className="min-w-0">
+                  <span className="font-medium text-primary-500">
+                    {isCancelling ? '正在取消...' : currentStep || '正在翻译...'}
+                  </span>
+                  {currentStep && (
+                    <p className="mt-1 truncate text-xs text-primary-400">
+                      {translateProgressPercent.toFixed(0)}%
+                    </p>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <span className="text-primary-500">
+                    {fullTranslateProgress.current}/{fullTranslateProgress.total}
+                  </span>
+                  {onStopTranslate && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={onStopTranslate}
+                      disabled={isCancelling}
+                    >
+                      {isCancelling ? '取消中...' : '取消'}
+                    </Button>
+                  )}
+                </div>
               </div>
               <Progress value={translateProgressPercent} className="h-1.5" />
-              {currentStep && (
-                <p className="mt-1 truncate text-xs text-primary-400">
-                  {translateProgressPercent.toFixed(0)}%
-                </p>
-              )}
+            </div>
+          )}
+
+          {isOtherProjectTranslating && (
+            <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
+              另一个项目正在翻译中：
+              <span className="mx-1 font-medium">{activeTranslationProjectId}</span>
+              现在启动当前项目会先停止它，再等待切换。
             </div>
           )}
 
           {onFullTranslate && projectId && (
             <div className="space-y-2">
-              <Button
-                variant="default"
-                size="default"
-                onClick={() => onFullTranslate(selectedMethod, selectedModel || undefined)}
-                disabled={isTranslateBusy}
-                leftIcon={<Zap className="h-5 w-5" />}
-                className="w-full"
-              >
-                {isFullTranslating
-                  ? '翻译中...'
-                  : isPreparingFullTranslate
-                    ? '术语预检中...'
-                    : '全文一键翻译'}
-              </Button>
+              {isFullTranslating ? (
+                <Button
+                  variant="outline"
+                  size="default"
+                  onClick={onStopTranslate}
+                  leftIcon={<Zap className="h-5 w-5" />}
+                  className="w-full"
+                >
+                  停止全文翻译
+                </Button>
+              ) : (
+                <Button
+                  variant="default"
+                  size="default"
+                  onClick={() => onFullTranslate(selectedMethod, selectedModel || undefined)}
+                  disabled={isTranslateBusy}
+                  leftIcon={<Zap className="h-5 w-5" />}
+                  className="w-full"
+                >
+                  {isCancelling ? '等待释放中...' : isPreparingFullTranslate ? '术语预检中...' : '全文一键翻译'}
+                </Button>
+              )}
 
               <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
                 <CollapsibleTrigger asChild>

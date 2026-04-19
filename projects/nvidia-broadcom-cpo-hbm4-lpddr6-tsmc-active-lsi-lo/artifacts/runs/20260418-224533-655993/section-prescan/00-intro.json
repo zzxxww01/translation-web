@@ -1,0 +1,33 @@
+{
+  "section_id": "00-intro",
+  "new_terms": [
+    {
+      "term": "ISSCC",
+      "suggested_translation": "国际固态电路会议",
+      "context": "半导体会议名称",
+      "confidence": 0.95
+    },
+    {
+      "term": "Microsoft",
+      "suggested_translation": "微软",
+      "context": "公司名称",
+      "confidence": 0.95
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "iedm": "国际电子器件会议",
+    "vlsi": "超大规模集成电路",
+    "hbm4": "HBM4",
+    "lpddr6": "LPDDR6",
+    "gddr7": "GDDR7",
+    "nand": "NAND闪存",
+    "co-packaged optics": "共封装光学",
+    "die-to-die": "裸片到裸片",
+    "mediatek": "联发科",
+    "amd": "AMD",
+    "nvidia": "英伟达"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:45:47.726201"
+}

@@ -1,0 +1,51 @@
+{
+  "section_id": "21-intel-18a-on-intel-3-hybrid-bo",
+  "new_terms": [
+    {
+      "term": "M3DProc",
+      "suggested_translation": "M3DProc",
+      "context": "英特尔首款混合键合芯片的名称，一种3D处理器架构。",
+      "confidence": 0.95
+    },
+    {
+      "term": "Foveros Direct",
+      "suggested_translation": "Foveros Direct",
+      "context": "英特尔的一种混合键合技术，间距为9μm。",
+      "confidence": 0.95
+    },
+    {
+      "term": "HBI",
+      "suggested_translation": "混合键合互连",
+      "context": "Hybrid Bonding Interconnect的缩写，指混合键合形成的互连结构。",
+      "confidence": 0.9
+    },
+    {
+      "term": "Clearwater Forest (CWF)",
+      "suggested_translation": "Clearwater Forest (CWF)",
+      "context": "英特尔的一款CPU产品代号，采用与M3DProc类似的封装技术。",
+      "confidence": 0.9
+    },
+    {
+      "term": "3D NoC",
+      "suggested_translation": "三维片上网络",
+      "context": "指在三维堆叠芯片中实现互连的片上网络。",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "hybrid bonding": "混合键合",
+    "mesh tiles": "网格单元",
+    "bottom die": "底层裸片",
+    "top die": "顶层裸片",
+    "pitch": "间距",
+    "throughput": "吞吐量",
+    "energy efficiency": "能效",
+    "bandwidth": "带宽",
+    "base die": "基础芯片",
+    "compute die": "计算裸片",
+    "L2 cache": "二级缓存",
+    "L3 cache": "三级缓存"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:52:50.361092"
+}

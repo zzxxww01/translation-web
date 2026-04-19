@@ -1,0 +1,54 @@
+{
+  "section_id": "24-microsoft-maia-200-paper-17",
+  "new_terms": [
+    {
+      "term": "Maia 200",
+      "suggested_translation": "Maia 200",
+      "context": "微软AI加速器型号",
+      "confidence": 0.9
+    },
+    {
+      "term": "H100",
+      "suggested_translation": "H100",
+      "context": "英伟达GPU型号",
+      "confidence": 0.9
+    },
+    {
+      "term": "CoWoS-S",
+      "suggested_translation": "CoWoS-S",
+      "context": "台积电封装技术变体",
+      "confidence": 0.9
+    },
+    {
+      "term": "PHYs",
+      "suggested_translation": "物理层接口",
+      "context": "HBM物理层",
+      "confidence": 0.8
+    },
+    {
+      "term": "TSRAM",
+      "suggested_translation": "TSRAM",
+      "context": "特定类型SRAM（L1）",
+      "confidence": 0.7
+    },
+    {
+      "term": "CSRAM",
+      "suggested_translation": "CSRAM",
+      "context": "特定类型SRAM（L2）",
+      "confidence": 0.7
+    }
+  ],
+  "term_usages": {
+    "reticle-scale monolithic": "光罩尺寸单芯片",
+    "HBM3E": "HBM3E",
+    "D2D": "裸片到裸片",
+    "CoWoS": "CoWoS",
+    "interposer": "中介层",
+    "FP4": "FP4",
+    "N3P": "N3P",
+    "SRAM": "SRAM",
+    "PHY": "物理层"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:53:59.748464"
+}

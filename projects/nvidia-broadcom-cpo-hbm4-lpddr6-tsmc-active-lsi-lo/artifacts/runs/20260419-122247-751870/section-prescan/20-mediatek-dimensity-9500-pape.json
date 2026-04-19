@@ -1,0 +1,58 @@
+{
+  "section_id": "20-mediatek-dimensity-9500-pape",
+  "new_terms": [
+    {
+      "term": "Contacted Gate Pitch (CGP)",
+      "suggested_translation": "接触栅极间距 (CGP)",
+      "context": "TSMC N3E/N3P工艺选项，指晶体管栅极接触孔的间距。",
+      "confidence": 0.95
+    },
+    {
+      "term": "C1 Ultra Core",
+      "suggested_translation": "C1超大核",
+      "context": "联发科天玑9500中的高性能CPU核心名称。",
+      "confidence": 0.9
+    },
+    {
+      "term": "iso-leakage",
+      "suggested_translation": "等漏电",
+      "context": "在相同漏电功耗条件下的性能比较。",
+      "confidence": 0.85
+    },
+    {
+      "term": "iso-performance",
+      "suggested_translation": "等性能",
+      "context": "在相同性能水平下的功耗比较。",
+      "confidence": 0.85
+    },
+    {
+      "term": "aging budget",
+      "suggested_translation": "老化余量",
+      "context": "为应对芯片性能随时间退化而预留的设计余量。",
+      "confidence": 0.8
+    },
+    {
+      "term": "thermal overshoot",
+      "suggested_translation": "热过冲",
+      "context": "温度瞬时超过设定目标值的现象。",
+      "confidence": 0.8
+    },
+    {
+      "term": "boost clock",
+      "suggested_translation": "加速频率",
+      "context": "CPU在短时间内可提升到的最高工作频率。",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "mediatek": "联发科",
+    "tsmc": "台积电",
+    "isscc": "ISSCC",
+    "node": "制程节点",
+    "performance": "性能",
+    "efficiency": "效率",
+    "power": "功耗"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:28:31.112704"
+}

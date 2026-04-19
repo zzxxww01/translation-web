@@ -12,7 +12,7 @@ from .markdown import render_markdown
 def convert_html_to_markdown_text(
     html_path: str | Path,
     output_dir: str | Path | None = None,
-    copy_images: bool = True,
+    copy_images: bool = False,
 ) -> tuple[str, ProjectArticleMetadata]:
     html_path = Path(html_path).resolve()
     target_dir = Path(output_dir).resolve() if output_dir else html_path.parent.resolve()
@@ -43,7 +43,7 @@ def convert_html_to_markdown_text(
 def convert_html_to_markdown(
     html_path: str | Path,
     output_dir: str | Path | None = None,
-    copy_images: bool = True,
+    copy_images: bool = False,
 ) -> Path:
     html_path = Path(html_path).resolve()
     target_dir = Path(output_dir).resolve() if output_dir else html_path.parent.resolve()

@@ -1,0 +1,51 @@
+{
+  "section_id": "06-sk-hynix-1c-gddr7-paper-15-9",
+  "new_terms": [
+    {
+      "term": "QDR",
+      "suggested_translation": "四倍数据速率",
+      "context": "GDDR7使用的信号调制技术，每个时钟周期传输4个符号。",
+      "confidence": 0.9
+    },
+    {
+      "term": "Rubin CPX",
+      "suggested_translation": "Rubin CPX",
+      "context": "英伟达在2025年宣布的一款大上下文AI处理器型号。",
+      "confidence": 0.9
+    },
+    {
+      "term": "Groq LPX",
+      "suggested_translation": "Groq LPX",
+      "context": "英伟达计划推出的解决方案系列，替代了Rubin CPX的GDDR7方案。",
+      "confidence": 0.9
+    },
+    {
+      "term": "COGS",
+      "suggested_translation": "销售成本",
+      "context": "财务术语，指生产产品所发生的直接成本。",
+      "confidence": 0.9
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "sk hynix": "SK海力士",
+    "gddr7": "GDDR7",
+    "1c": "1c",
+    "die shot": "芯片显微照片",
+    "shmoo plot": "舒姆图",
+    "1b": "1b",
+    "1z": "1z",
+    "bit density": "位密度",
+    "Gb/mm²": "Gb/mm²",
+    "Gb/s": "Gb/s",
+    "lpddr5x": "LPDDR5X",
+    "pam3": "三电平脉冲幅度调制",
+    "nvidia": "英伟达",
+    "hbm": "HBM",
+    "ddr": "DDR",
+    "lpddr": "LPDDR",
+    "node": "制程节点"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:24:40.520350"
+}

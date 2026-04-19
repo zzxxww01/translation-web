@@ -1,0 +1,56 @@
+{
+  "section_id": "03-samsung-lpddr6-paper-15-8",
+  "new_terms": [
+    {
+      "term": "VDD2C",
+      "suggested_translation": "VDD2C",
+      "context": "LPDDR6恒定电源域之一，电压0.875V",
+      "confidence": 0.95
+    },
+    {
+      "term": "VDD2D",
+      "suggested_translation": "VDD2D",
+      "context": "LPDDR6恒定电源域之一，电压1.0V",
+      "confidence": 0.95
+    },
+    {
+      "term": "Data Bus Inversion (DBI)",
+      "suggested_translation": "数据总线翻转 (DBI)",
+      "context": "一种用于节省功耗和保证信号完整性的机制",
+      "confidence": 0.9
+    },
+    {
+      "term": "redistribution layer (RDL)",
+      "suggested_translation": "重布线层 (RDL)",
+      "context": "用于将相关电路物理上布置得更近，缩短关键延迟路径",
+      "confidence": 0.9
+    },
+    {
+      "term": "burst length",
+      "suggested_translation": "突发长度",
+      "context": "每次操作传输的数据量，LPDDR6为24",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "LPDDR6": "LPDDR6",
+    "LPDDR5X": "LPDDR5X",
+    "GDDR7": "GDDR7",
+    "NRZ": "不归零制",
+    "PAM3": "三电平脉冲幅度调制",
+    "sub-channel": "子通道",
+    "bank": "存储体",
+    "efficiency mode": "能效模式",
+    "die shot": "芯片显微照片",
+    "shmoo plot": "舒姆图",
+    "data rate": "数据速率",
+    "Gb/s": "Gb/s",
+    "Gb/mm²": "Gb/mm²",
+    "bit density": "位密度",
+    "ISSCC": "ISSCC",
+    "Samsung": "三星",
+    "SK Hynix": "SK海力士"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:46:44.688800"
+}

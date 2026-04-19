@@ -1,0 +1,55 @@
+{
+  "section_id": "13-marvell-coherent-lite-transcei",
+  "new_terms": [
+    {
+      "term": "coherent-lite",
+      "suggested_translation": "精简相干",
+      "context": "一种介于直接检测与全相干之间的光模块技术",
+      "confidence": 0.95
+    },
+    {
+      "term": "C-band",
+      "suggested_translation": "C波段",
+      "context": "光通信中低衰减的波长范围",
+      "confidence": 0.9
+    },
+    {
+      "term": "O-band",
+      "suggested_translation": "O波段",
+      "context": "光通信中用于短距离、色散近零的波长范围",
+      "confidence": 0.9
+    },
+    {
+      "term": "dual polarization QAM",
+      "suggested_translation": "双偏振正交幅度调制",
+      "context": "一种光调制技术，使用X和Y两个偏振态",
+      "confidence": 0.85
+    },
+    {
+      "term": "GBd",
+      "suggested_translation": "千兆波特",
+      "context": "信号波特率单位",
+      "confidence": 0.9
+    },
+    {
+      "term": "constellation points",
+      "suggested_translation": "星座点",
+      "context": "调制方案中信号在星座图上的位置",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "dsp": "数字信号处理器",
+    "transceiver": "光模块",
+    "attenuation": "衰减",
+    "dispersion": "色散",
+    "latency": "延迟",
+    "bandwidth": "带宽",
+    "modulation": "调制",
+    "pluggable module": "可插拔模块",
+    "silicon photonics": "硅光技术"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-19T12:26:58.275001"
+}

@@ -1,0 +1,62 @@
+{
+  "section_id": "23-rebellions-rebel100-paper-2",
+  "new_terms": [
+    {
+      "term": "I-CubeS",
+      "suggested_translation": "I-CubeS",
+      "context": "三星的硅中介层封装技术",
+      "confidence": 0.95
+    },
+    {
+      "term": "SF4X",
+      "suggested_translation": "SF4X",
+      "context": "三星代工制程节点",
+      "confidence": 0.9
+    },
+    {
+      "term": "UCIe-A",
+      "suggested_translation": "UCIe-A",
+      "context": "UCIe高级版接口",
+      "confidence": 0.9
+    },
+    {
+      "term": "IO chiplets",
+      "suggested_translation": "IO芯粒",
+      "context": "用于扩展输入输出的芯粒",
+      "confidence": 0.85
+    },
+    {
+      "term": "memory chiplets",
+      "suggested_translation": "内存芯粒",
+      "context": "用于扩展内存的芯粒",
+      "confidence": 0.85
+    },
+    {
+      "term": "silicon capacitors",
+      "suggested_translation": "硅电容器",
+      "context": "集成在HBM旁用于改善电源质量的电容",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "isscc": "ISSCC",
+    "hbm3e": "HBM3E",
+    "tsmc": "台积电",
+    "cowos-s": "CoWoS-S",
+    "ucie": "UCIe",
+    "hbm": "HBM",
+    "asic": "ASIC",
+    "14lpp": "14LPP",
+    "sf2": "SF2",
+    "node": "制程节点",
+    "foundry": "晶圆代工厂",
+    "chiplet": "芯粒",
+    "packaging": "封装",
+    "interposer": "中介层",
+    "process": "制程",
+    "accelerator": "加速器",
+    "die": "裸片"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:53:40.234749"
+}

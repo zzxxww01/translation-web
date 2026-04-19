@@ -1,0 +1,58 @@
+{
+  "section_id": "08-sandisk-kioxia-bics10-nand-p",
+  "new_terms": [
+    {
+      "term": "CBA (Cell Bonded Array)",
+      "suggested_translation": "单元键合阵列 (CBA)",
+      "context": "NAND架构，允许定制CMOS晶圆工艺",
+      "confidence": 0.9
+    },
+    {
+      "term": "QLC",
+      "suggested_translation": "四层单元",
+      "context": "NAND闪存的一种存储单元类型（每单元4比特）",
+      "confidence": 0.9
+    },
+    {
+      "term": "TLC",
+      "suggested_translation": "三层单元",
+      "context": "NAND闪存的一种存储单元类型（每单元3比特）",
+      "confidence": 0.9
+    },
+    {
+      "term": "ground pad",
+      "suggested_translation": "接地焊盘",
+      "context": "芯片封装上的电源/地连接点",
+      "confidence": 0.9
+    },
+    {
+      "term": "vertical power track",
+      "suggested_translation": "垂直电源走线",
+      "context": "芯片内垂直方向的电源布线",
+      "confidence": 0.8
+    },
+    {
+      "term": "gating system",
+      "suggested_translation": "门控系统",
+      "context": "用于关闭未选中裸片数据路径以降低功耗的电路",
+      "confidence": 0.8
+    }
+  ],
+  "term_usages": {
+    "bics": "BiCS",
+    "isscc": "ISSCC",
+    "bit density": "位密度",
+    "plane": "平面",
+    "die": "裸片",
+    "deck": "堆叠层",
+    "layer": "层",
+    "IO bandwidth": "IO带宽",
+    "CMOS wafer": "CMOS晶圆",
+    "power grid": "电源网格",
+    "idle current": "待机电流",
+    "active current": "工作电流",
+    "data path": "数据路径"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:47:56.998327"
+}

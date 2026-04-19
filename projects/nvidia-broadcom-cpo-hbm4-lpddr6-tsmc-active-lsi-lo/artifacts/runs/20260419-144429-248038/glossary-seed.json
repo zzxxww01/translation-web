@@ -1,0 +1,65 @@
+{
+  "added": 10,
+  "terms": [
+    {
+      "original": "VCT",
+      "translation": "VCT",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "SWD",
+      "translation": "SWD",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "PUC",
+      "translation": "PUC",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "DR Optics",
+      "translation": "DR光学",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "Gb/s/lane",
+      "translation": "千兆比特/秒/通道",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "tile",
+      "translation": "瓦片/计算单元块",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "N5",
+      "translation": "N5",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "eSilicon",
+      "translation": "eSilicon",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "memory chiplets",
+      "translation": "内存芯粒",
+      "strategy": "translate",
+      "source": "term_review_auto"
+    },
+    {
+      "original": "5LPE",
+      "translation": "5LPE",
+      "strategy": "preserve",
+      "source": "term_review_auto"
+    }
+  ]
+}

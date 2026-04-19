@@ -1,0 +1,19 @@
+{
+  "exception": "ChunkedEncodingError(ProtocolError(\"Connection broken: ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)\", ConnectionResetError(10054, '远程主机强迫关闭了一个现有的连接。', None, 10054, None)))",
+  "elapsed_seconds": 4294.9,
+  "counts": {
+    "start": 1,
+    "progress": 27,
+    "heartbeat": 4243,
+    "term_conflict": 2
+  },
+  "heartbeat_count": 4243,
+  "last_non_heartbeat_event": {
+    "type": "progress",
+    "step": "Introduction - 完成",
+    "current": 7,
+    "total": 371,
+    "message": "Introduction - 完成",
+    "_t": 3214.82
+  }
+}

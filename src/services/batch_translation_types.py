@@ -25,6 +25,7 @@ class TranslationProgress:
         self.current_section: Optional[str] = None
         self.current_step: Optional[str] = None
         self.run_id: Optional[str] = None
+        self.cancel_requested: bool = False
         self.errors: List[Dict] = []
         self.started_at = datetime.now()
         self.last_updated_at = self.started_at
@@ -54,6 +55,7 @@ class TranslationProgress:
             "current_section": self.current_section,
             "current_step": self.current_step,
             "run_id": self.run_id,
+            "cancel_requested": self.cancel_requested,
             "original_status": self.original_status.value,
             "error_count": len(self.errors),
             "is_complete": self.is_complete,

@@ -1,0 +1,43 @@
+{
+  "project_id": "nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo",
+  "status": "completed",
+  "total_sections": 27,
+  "translated_sections": 26,
+  "total_paragraphs": 371,
+  "translated_paragraphs": 371,
+  "error_count": 1,
+  "errors": [
+    {
+      "type": "term_conflict",
+      "term": "ISSCC",
+      "existing": "ISSCC",
+      "new": "国际固态电路会议",
+      "existing_note": "International Solid-State Circuits Conference，国际固态电路会议，顶级半导体电路设计会议。",
+      "new_note": "半导体会议名称",
+      "section_id": "00-intro",
+      "timestamp": "2026-04-18T22:45:47.726179"
+    }
+  ],
+  "started_at": "2026-04-18T22:45:33.655972",
+  "finished_at": "2026-04-18T22:56:50.693210",
+  "run_id": "20260418-224533-655993",
+  "artifacts_path": "projects\\nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo\\artifacts\\runs\\20260418-224533-655993",
+  "export": {
+    "generated_at": "2026-04-18T22:56:50.498019",
+    "translation_mode": "four_step",
+    "markdown": {
+      "path": "projects\\nvidia-broadcom-cpo-hbm4-lpddr6-tsmc-active-lsi-lo\\ISSCC 2026：英伟达与博通共封装光学、HBM4与LPDDR6、台积电主动硅中介层、逻辑SRAM、UCIe-S等前瞻_zh.md",
+      "generated": true,
+      "bytes": 85620
+    }
+  },
+  "api_calls": 0,
+  "elapsed_seconds": 677.1,
+  "consistency": {
+    "is_consistent": true,
+    "total_issues": 0,
+    "auto_fixable_count": 0,
+    "manual_review_count": 0,
+    "issues": []
+  }
+}

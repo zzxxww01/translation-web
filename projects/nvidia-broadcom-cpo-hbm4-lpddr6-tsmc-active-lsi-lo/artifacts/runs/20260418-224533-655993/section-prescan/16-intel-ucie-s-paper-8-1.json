@@ -1,0 +1,47 @@
+{
+  "section_id": "16-intel-ucie-s-paper-8-1",
+  "new_terms": [
+    {
+      "term": "UCIe-S",
+      "suggested_translation": "UCIe-S",
+      "context": "Intel推出的die-to-die接口标准",
+      "confidence": 0.95
+    },
+    {
+      "term": "Diamond Rapids",
+      "suggested_translation": "Diamond Rapids",
+      "context": "英特尔未来Xeon CPU代号",
+      "confidence": 0.95
+    },
+    {
+      "term": "Granite Rapids",
+      "suggested_translation": "Granite Rapids",
+      "context": "英特尔Xeon CPU代号",
+      "confidence": 0.9
+    },
+    {
+      "term": "IMH die",
+      "suggested_translation": "IMH裸片",
+      "context": "Diamond Rapids架构中的核心模块裸片",
+      "confidence": 0.85
+    },
+    {
+      "term": "CBB die",
+      "suggested_translation": "CBB裸片",
+      "context": "Diamond Rapids架构中的计算基础模块裸片",
+      "confidence": 0.85
+    }
+  ],
+  "term_usages": {
+    "die-to-die (D2D)": "裸片到裸片 (D2D)",
+    "UCIe": "UCIe",
+    "ISSCC": "ISSCC",
+    "VLSI": "超大规模集成电路",
+    "Cadence": "Cadence",
+    "EMIB": "EMIB",
+    "Xeon": "Xeon",
+    "CPU": "CPU"
+  },
+  "scan_coverage": 1.0,
+  "scanned_at": "2026-04-18T22:50:04.569926"
+}
