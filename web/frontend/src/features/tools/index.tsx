@@ -18,16 +18,16 @@ export function ToolsFeature() {
 
   return (
     <div className="flex h-full overflow-auto">
-      <div className="mx-auto w-full max-w-4xl p-6">
-        <div className="mb-6">
-          <h2 className="text-xl font-semibold">工具箱</h2>
-          <p className="text-sm text-muted-foreground">实用翻译辅助工具</p>
+      <div className="mx-auto w-full max-w-4xl p-6 animate-liquid-rise">
+        <div className="mb-8">
+          <h2 className="text-3xl font-bold text-gradient-primary" style={{ fontFamily: 'var(--font-display)' }}>工具箱</h2>
+          <p className="text-sm text-muted-foreground mt-1">实用翻译辅助工具</p>
         </div>
 
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
-          <TabsList className="mb-6">
+          <TabsList className="mb-6 card-glass p-1">
             {tabs.map(tab => (
-              <TabsTrigger key={tab.id} value={tab.id} className="gap-2">
+              <TabsTrigger key={tab.id} value={tab.id} className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white">
                 {tab.icon}
                 {tab.label}
               </TabsTrigger>

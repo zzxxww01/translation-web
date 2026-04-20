@@ -16,9 +16,9 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
   const charCount = getCharCount(value);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col card-glass p-6">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-semibold">原文</h3>
+        <h3 className="text-sm font-semibold" style={{ fontFamily: 'var(--font-display)' }}>原文</h3>
         <span className="text-xs text-muted-foreground">{charCount} 字符</span>
       </div>
       <Textarea
@@ -36,10 +36,10 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
           onClick={onTranslate}
           disabled={!value.trim() || isLoading}
           size="icon"
-          className="h-10 w-10 rounded-full"
+          className="h-12 w-12 rounded-full shadow-lg hover:shadow-xl"
           title="翻译 (Ctrl+Enter)"
         >
-          <Send className="h-4 w-4" />
+          <Send className="h-5 w-5" />
         </Button>
       </div>
     </div>

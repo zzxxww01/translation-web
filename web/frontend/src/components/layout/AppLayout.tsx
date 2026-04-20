@@ -96,14 +96,12 @@ export function AppLayout() {
 
   return (
     <div className="flex h-screen flex-col bg-background relative overflow-hidden">
-      {/* 背景装饰 */}
-      <div className="absolute inset-0 gradient-mesh pointer-events-none" />
-      <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
+      {/* 流动网格背景 */}
+      <div className="absolute inset-0 gradient-mesh-fluid pointer-events-none" />
 
       {/* Header */}
       {!isImmersiveMode && (
-        <header className="sticky top-0 z-40 border-b bg-white shadow-sm relative">
+        <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur-md shadow-sm relative">
           <div className="flex h-14 items-center justify-between px-4 md:px-6">
           {/* Logo + Mobile menu */}
           <div className="flex items-center gap-3">
@@ -114,11 +112,11 @@ export function AppLayout() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-64">
+              <SheetContent side="left" className="w-64 card-glass">
                 <SheetHeader>
                   <SheetTitle className="flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-primary" />
-                    Translation Agent
+                    <Sparkles className="h-5 w-5 text-gradient-primary" />
+                    <span style={{ fontFamily: 'var(--font-display)' }}>Translation Agent</span>
                   </SheetTitle>
                 </SheetHeader>
                 <Separator className="my-4" />
@@ -130,10 +128,10 @@ export function AppLayout() {
             </Sheet>
 
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-md">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-primary shadow-md animate-breathing-glow">
                 <Sparkles className="h-4 w-4 text-white" />
               </div>
-              <h1 className="text-lg font-semibold hidden sm:block">
+              <h1 className="text-lg font-semibold hidden sm:block text-gradient-primary" style={{ fontFamily: 'var(--font-display)' }}>
                 Translation Agent
               </h1>
             </div>
