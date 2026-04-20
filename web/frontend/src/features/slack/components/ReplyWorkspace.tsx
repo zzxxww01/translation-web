@@ -34,8 +34,8 @@ export function ReplyWorkspace({
   const versionLabels = ['简洁', '正式', '友好'];
 
   return (
-    <div className="space-y-6">
-      <div className="space-y-2">
+    <div className="space-y-6 w-full">
+      <div className="space-y-2 w-full">
         <label className="text-sm font-medium">
           📝 输入内容
           <span className="ml-2 text-xs text-muted-foreground font-normal">

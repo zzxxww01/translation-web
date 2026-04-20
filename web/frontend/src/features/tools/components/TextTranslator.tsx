@@ -39,9 +39,9 @@ export function TextTranslator() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[2fr_auto_2fr] gap-6">
+    <div className="flex flex-col gap-6 w-full">
       {/* Source */}
-      <div className="space-y-3">
+      <div className="space-y-3 w-full">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">原文</label>
           <Select value={sourceLang} onValueChange={setSourceLang}>
@@ -64,7 +64,7 @@ export function TextTranslator() {
       </div>
 
       {/* Controls */}
-      <div className="flex md:flex-col items-center justify-center gap-3">
+      <div className="flex items-center justify-center gap-3">
         <Button variant="outline" size="icon" onClick={handleSwap} title="交换语言">
           <ArrowRightLeft className="h-4 w-4" />
         </Button>
@@ -78,7 +78,7 @@ export function TextTranslator() {
       </div>
 
       {/* Target */}
-      <div className="space-y-3">
+      <div className="space-y-3 w-full">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">译文</label>
           <Select value={targetLang} onValueChange={setTargetLang}>
