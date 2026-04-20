@@ -1,0 +1,45 @@
+[Unit]
+Description=Translation Agent API Service
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+WorkingDirectory=/opt/translation-agent
+Environment="PATH=/opt/translation-agent/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+EnvironmentFile=/opt/translation-agent/.env
+
+# 生产环境使用 Gunicorn
+ExecStart=/opt/translation-agent/.venv/bin/gunicorn src.api.app:app \
+    --workers 4 \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --bind 127.0.0.1:54321 \
+    --timeout 300 \
+    --keep-alive 5 \
+    --graceful-timeout 10 \
+    --max-requests 1000 \
+    --max-requests-jitter 50 \
+    --access-logfile /opt/translation-agent/logs/access.log \
+    --error-logfile /opt/translation-agent/logs/error.log \
+    --log-level info
+
+# 重启策略
+Restart=always
+RestartSec=10
+StartLimitInterval=60
+StartLimitBurst=3
+
+# 资源限制
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# 安全加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/translation-agent/projects /opt/translation-agent/logs /opt/translation-agent/backups
+
+[Install]
+WantedBy=multi-user.target

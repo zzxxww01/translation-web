@@ -1,51 +1,51 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import type { SlackReplyVariant, ConversationMessage, MessageRole } from '../../shared/types';
-import type { RefinementSession } from './types';
+import type { SlackReplyVariant, MessageRole } from '../../shared/types';
+
+export interface ConversationMessage {
+  id: string;
+  role: 'me' | 'them';
+  content: string;
+  translation?: string; // 对方消息的中文翻译
+  timestamp: number;
+}
 
 interface SlackWorkspaceState {
-  incomingText: string;
-  incomingTranslation: string;
-  incomingSuggestions: SlackReplyVariant[];
-  draftText: string;
-  draftVersions: SlackReplyVariant[];
+  // 当前工作区状态
+  currentInput: string;
+  currentVersions: SlackReplyVariant[];
+  isGenerating: boolean;
+
+  // 对话历史
   conversationMessages: ConversationMessage[];
   isHistoryCollapsed: boolean;
+
+  // 其他
   selectedModel: string;
-  incomingRefinement: RefinementSession | null;
-  draftRefinement: RefinementSession | null;
-  setIncomingText: (value: string) => void;
-  setIncomingResult: (translation: string, suggestions: SlackReplyVariant[]) => void;
-  clearIncoming: () => void;
-  setDraftText: (value: string) => void;
-  setDraftVersions: (versions: SlackReplyVariant[]) => void;
-  clearDraft: () => void;
-  addMessage: (role: MessageRole, content: string) => void;
-  addMessages: (role: MessageRole, contents: string[]) => void;
+
+  // Actions
+  setCurrentInput: (value: string) => void;
+  setCurrentVersions: (versions: SlackReplyVariant[]) => void;
+  setGenerating: (value: boolean) => void;
+  clearWorkspace: () => void;
+
+  addMessage: (role: 'me' | 'them', content: string, translation?: string) => void;
   removeMessage: (id: string) => void;
   updateMessage: (id: string, content: string) => void;
   clearConversation: () => void;
   toggleHistoryCollapse: () => void;
+
   setSelectedModel: (model: string) => void;
-  startRefinement: (contextType: 'incoming' | 'draft', originalInput: string, initialResult: string) => void;
-  addRefinementVariant: (contextType: 'incoming' | 'draft', content: string) => void;
-  clearRefinement: (contextType: 'incoming' | 'draft') => void;
-  setRefining: (contextType: 'incoming' | 'draft', isRefining: boolean) => void;
-  confirmToHistory: (contextType: 'incoming' | 'draft', variantId: string) => void;
   reset: () => void;
 }
 
 const initialState = {
-  incomingText: '',
-  incomingTranslation: '',
-  incomingSuggestions: [],
-  draftText: '',
-  draftVersions: [],
+  currentInput: '',
+  currentVersions: [],
+  isGenerating: false,
   conversationMessages: [],
   isHistoryCollapsed: false,
   selectedModel: '',
-  incomingRefinement: null,
-  draftRefinement: null,
 };
 
 export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
@@ -53,35 +53,16 @@ export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
     persist(
       set => ({
         ...initialState,
-        setIncomingText: value =>
+        setCurrentInput: value => set({ currentInput: value }),
+        setCurrentVersions: versions => set({ currentVersions: versions }),
+        setGenerating: value => set({ isGenerating: value }),
+        clearWorkspace: () =>
           set({
-            incomingText: value,
-            incomingTranslation: '',
-            incomingSuggestions: [],
+            currentInput: '',
+            currentVersions: [],
+            isGenerating: false,
           }),
-        setIncomingResult: (translation, suggestions) =>
-          set({
-            incomingTranslation: translation,
-            incomingSuggestions: suggestions,
-          }),
-        clearIncoming: () =>
-          set({
-            incomingText: '',
-            incomingTranslation: '',
-            incomingSuggestions: [],
-          }),
-        setDraftText: value =>
-          set({
-            draftText: value,
-            draftVersions: [],
-          }),
-        setDraftVersions: versions => set({ draftVersions: versions }),
-        clearDraft: () =>
-          set({
-            draftText: '',
-            draftVersions: [],
-          }),
-        addMessage: (role, content) =>
+        addMessage: (role, content, translation) =>
           set(state => ({
             conversationMessages: [
               ...state.conversationMessages,
@@ -89,20 +70,9 @@ export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
                 id: crypto.randomUUID(),
                 role,
                 content,
+                translation,
                 timestamp: Date.now(),
               },
-            ],
-          })),
-        addMessages: (role, contents) =>
-          set(state => ({
-            conversationMessages: [
-              ...state.conversationMessages,
-              ...contents.map(content => ({
-                id: crypto.randomUUID(),
-                role,
-                content,
-                timestamp: Date.now(),
-              })),
             ],
           })),
         removeMessage: id =>
@@ -119,78 +89,6 @@ export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
         toggleHistoryCollapse: () =>
           set(state => ({ isHistoryCollapsed: !state.isHistoryCollapsed })),
         setSelectedModel: model => set({ selectedModel: model }),
-        startRefinement: (contextType, originalInput, initialResult) =>
-          set(state => {
-            const session: RefinementSession = {
-              contextType,
-              originalInput,
-              variants: [
-                {
-                  id: crypto.randomUUID(),
-                  content: initialResult,
-                  timestamp: Date.now(),
-                },
-              ],
-              isRefining: false,
-            };
-            return contextType === 'incoming'
-              ? { incomingRefinement: session }
-              : { draftRefinement: session };
-          }),
-        addRefinementVariant: (contextType, content) =>
-          set(state => {
-            const session = contextType === 'incoming' ? state.incomingRefinement : state.draftRefinement;
-            if (!session) return state;
-            const newVariant = {
-              id: crypto.randomUUID(),
-              content,
-              timestamp: Date.now(),
-            };
-            const updatedSession = {
-              ...session,
-              variants: [...session.variants, newVariant],
-              isRefining: false,
-            };
-            return contextType === 'incoming'
-              ? { incomingRefinement: updatedSession }
-              : { draftRefinement: updatedSession };
-          }),
-        clearRefinement: contextType =>
-          set(
-            contextType === 'incoming'
-              ? { incomingRefinement: null }
-              : { draftRefinement: null }
-          ),
-        setRefining: (contextType, isRefining) =>
-          set(state => {
-            const session = contextType === 'incoming' ? state.incomingRefinement : state.draftRefinement;
-            if (!session) return state;
-            const updatedSession = { ...session, isRefining };
-            return contextType === 'incoming'
-              ? { incomingRefinement: updatedSession }
-              : { draftRefinement: updatedSession };
-          }),
-        confirmToHistory: (contextType, variantId) =>
-          set(state => {
-            const session = contextType === 'incoming' ? state.incomingRefinement : state.draftRefinement;
-            if (!session) return state;
-            const variant = session.variants.find(v => v.id === variantId);
-            if (!variant) return state;
-            // incoming 类型：对方发消息给我，我选择回复 → 应该是 'me'
-            // draft 类型：我主动发起 → 也是 'me'
-            const role: MessageRole = 'me';
-            return {
-              conversationMessages: [
-                ...state.conversationMessages,
-                {
-                  id: crypto.randomUUID(),
-                  role,
-                  content: variant.content,
-                  timestamp: Date.now(),
-                },
-              ],
-            };
-          }),
         reset: () => set(initialState),
       }),
       {

@@ -257,7 +257,7 @@ class WechatFormatter:
                     base64_src = self._image_to_base64(src)
                     return img_tag, base64_src if base64_src else None
             except Exception as e:
-                logger.error(f"Failed to process {src}: {e}")
+                logger.error(f"Failed to process {_sanitize_url_for_log(src)}: {e}")
                 return img_tag, None
 
             return img_tag, None
@@ -300,7 +300,7 @@ class WechatFormatter:
         import os
 
         logger = logging.getLogger(__name__)
-        logger.debug(f"Uploading to local: {url}")
+        logger.debug(f"Uploading to local: {_sanitize_url_for_log(url)}")
 
         # 允许的文件扩展名白名单
         ALLOWED_EXTENSIONS = {'.jpg', '.jpeg', '.png', '.gif', '.webp'}
@@ -310,7 +310,7 @@ class WechatFormatter:
             # 使用同步下载
             local_path = self._download_image_sync(url)
             if not local_path or not Path(local_path).exists():
-                logger.warning(f"Download failed: {url}")
+                logger.warning(f"Download failed: {_sanitize_url_for_log(url)}")
                 return None
 
             # 验证文件扩展名
@@ -379,7 +379,7 @@ class WechatFormatter:
 
             # 安全检查：防止 SSRF 攻击
             if not _is_safe_url(url):
-                logger.error(f"Unsafe URL blocked: {url}")
+                logger.error(f"Unsafe URL blocked: {_sanitize_url_for_log(url)}")
                 return None
 
             # 创建自定义连接函数，在连接时验证 IP（防止 DNS Rebinding）
@@ -399,7 +399,7 @@ class WechatFormatter:
 
             try:
                 # 下载远程图片
-                logger.debug(f"Downloading image: {url}")
+                logger.debug(f"Downloading image: {_sanitize_url_for_log(url)}")
                 headers = {
                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
                 }
@@ -477,7 +477,7 @@ class WechatFormatter:
         import os
 
         logger = logging.getLogger(__name__)
-        logger.debug(f"Converting image to base64: {url}")
+        logger.debug(f"Converting image to base64: {_sanitize_url_for_log(url)}")
 
         local_path = None
         try:

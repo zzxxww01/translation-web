@@ -1,0 +1,152 @@
+security: fix 9 critical security issues and add Linux production deployment support
+
+## Security Fixes (9 issues)
+
+### High Priority (3)
+- Fix path traversal vulnerability in all paragraph endpoints
+  - Add validate_path_component() to 7 endpoints in projects_paragraphs.py
+  - Prevent arbitrary file access via ../../ patterns
+
+- Fix SSE resource leak in four-step translation
+  - Add proper cleanup in finally block with thread lock protection
+  - Release translation slot on exit
+  - Prevent memory leak from global dictionaries
+
+- Fix race condition in global state management
+  - Add threading.Lock() to protect _pending_conflict_events
+  - Add threading.Lock() to protect _conflict_resolutions
+  - Fix 5 concurrent access points in translate_projects.py
+
+### Medium Priority (3)
+- Prevent error message information disclosure
+  - Hide stack traces in production (DEBUG=false)
+  - Log detailed errors server-side only
+  - Return generic error messages to clients
+
+- Implement request body size limit
+  - Add 100MB limit in LimitUploadSize middleware
+  - Return 413 status code for oversized requests
+  - Prevent OOM attacks
+
+- Add file write retry mechanism for Windows
+  - Retry 3 times with exponential backoff (0.1s, 0.2s, 0.3s)
+  - Handle file lock conflicts on Windows
+  - Log detailed error messages
+
+### Low Priority (3)
+- Add CORS configuration
+  - Support whitelist via CORS_ORIGINS env var
+  - Default to localhost for development
+
+- Add automated backup scripts
+  - Linux: scripts/backup.sh with cron support
+  - Windows: scripts/backup.bat with Task Scheduler support
+  - Support cloud storage (S3/OSS)
+
+- Clean sensitive information from .env.example
+  - Remove real API endpoints
+  - Comment out proxy configuration
+  - Add CORS configuration example
+
+## Linux Production Deployment
+
+### New Scripts
+- start.sh: Linux startup script with Gunicorn support
+- stop.sh: Linux graceful shutdown script
+- scripts/translation-agent.service: systemd service configuration
+- scripts/nginx.conf: Nginx reverse proxy with SSL
+- scripts/backup.sh: Automated backup with cloud storage support
+
+### New Documentation
+- docs/LINUX_DEPLOYMENT.md: Complete Linux deployment guide
+- docs/LINUX_CHECKLIST.md: Pre-deployment checklist
+- docs/PROXY_CONFIG.md: Proxy configuration guide (no proxy needed for production)
+- docs/SECURITY_REVIEW.md: Full security audit report
+- docs/SECURITY_FIXES.md: Detailed fix summary
+- docs/DEPLOYMENT.md: General deployment guide
+- docs/FINAL_SUMMARY.md: Complete project summary
+- SECURITY.md: Security policy and reporting process
+
+## Key Features
+
+### Security Hardening
+- Path traversal protection on all endpoints
+- Resource leak prevention with proper cleanup
+- Thread-safe global state management
+- Production-safe error handling
+- Request size limits
+- CORS whitelist support
+
+### Production Ready
+- systemd service with auto-restart
+- Nginx reverse proxy with SSL
+- Gunicorn multi-worker support
+- Automated backup with retention
+- Health check endpoints
+- Comprehensive logging
+
+### Linux Optimizations
+- No proxy configuration needed for direct connection
+- System proxy variable cleanup in systemd
+- File permission hardening
+- SELinux/AppArmor support
+- TCP/file descriptor tuning
+- Graceful shutdown handling
+
+## Testing
+
+All security fixes have been tested:
+- Path traversal returns 400 error
+- Request body limit returns 413 error
+- SSE cleanup verified with memory profiling
+- Race conditions tested with concurrent requests
+- CORS headers verified with curl
+
+## Breaking Changes
+
+None. All changes are backward compatible.
+
+## Migration Guide
+
+For existing deployments:
+1. Pull latest code
+2. Update .env (remove proxy config if not needed)
+3. Restart service: sudo systemctl restart translation-agent
+4. Verify health: curl https://your-domain.com/api/health
+
+## Files Changed
+
+Modified (5):
+- src/api/app.py
+- src/api/routers/projects_paragraphs.py
+- src/api/routers/translate_projects.py
+- src/core/project.py
+- .env.example
+
+Added (12):
+- start.sh
+- stop.sh
+- scripts/backup.sh
+- scripts/backup.bat
+- scripts/translation-agent.service
+- scripts/nginx.conf
+- docs/LINUX_DEPLOYMENT.md
+- docs/LINUX_CHECKLIST.md
+- docs/PROXY_CONFIG.md
+- docs/SECURITY_REVIEW.md
+- docs/SECURITY_FIXES.md
+- docs/FINAL_SUMMARY.md
+- SECURITY.md
+
+## Deployment Checklist
+
+- [ ] Review SECURITY.md
+- [ ] Follow docs/LINUX_DEPLOYMENT.md
+- [ ] Configure .env (no proxy for production)
+- [ ] Set up systemd service
+- [ ] Configure Nginx with SSL
+- [ ] Set up automated backups
+- [ ] Verify all security tests pass
+
+Closes #security-audit
+Closes #linux-deployment

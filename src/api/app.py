@@ -1,5 +1,6 @@
 """Translation Agent API entrypoint."""
 
+import os
 from dotenv import load_dotenv
 
 
@@ -12,6 +13,7 @@ from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.gzip import GZipMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -42,12 +44,29 @@ app = FastAPI(
 )
 
 # 增加请求体大小限制（支持大文档）
+MAX_REQUEST_SIZE = 100 * 1024 * 1024  # 100MB
+
 class LimitUploadSize(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
+        if request.method in ["POST", "PUT", "PATCH"]:
+            content_length = request.headers.get("content-length")
+            if content_length and int(content_length) > MAX_REQUEST_SIZE:
+                from fastapi.responses import JSONResponse
+                return JSONResponse(
+                    {"detail": "Request body too large (max 100MB)"},
+                    status_code=413
+                )
         return await call_next(request)
 
 app.add_middleware(LimitUploadSize)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=os.getenv("CORS_ORIGINS", "http://localhost:54321,http://127.0.0.1:54321").split(","),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 app.add_middleware(LoggingMiddleware)
 register_error_handlers(app)
 

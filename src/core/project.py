@@ -63,22 +63,46 @@ class ProjectManager:
         return self.projects_path / project_id
 
     def _write_text(self, path: Path, content: str) -> None:
+        import time
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp_path = path.with_name(f"{path.name}.{uuid4().hex}.tmp")
         with open(tmp_path, "w", encoding="utf-8") as f:
             f.write(content)
-        os.replace(tmp_path, path)
+
+        # Windows 重试逻辑：处理文件被占用的情况
+        for attempt in range(3):
+            try:
+                os.replace(tmp_path, path)
+                return
+            except OSError as e:
+                if attempt == 2:
+                    logger.error(f"Failed to write file after 3 attempts: {path}, error: {e}")
+                    raise
+                logger.warning(f"File write attempt {attempt + 1} failed for {path}: {e}, retrying...")
+                time.sleep(0.1 * (attempt + 1))
 
     def _read_json(self, path: Path) -> Any:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
 
     def _write_json(self, path: Path, payload: Any) -> None:
+        import time
         path.parent.mkdir(parents=True, exist_ok=True)
         tmp_path = path.with_name(f"{path.name}.{uuid4().hex}.tmp")
         with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2, default=str)
-        os.replace(tmp_path, path)
+
+        # Windows 重试逻辑：处理文件被占用的情况
+        for attempt in range(3):
+            try:
+                os.replace(tmp_path, path)
+                return
+            except OSError as e:
+                if attempt == 2:
+                    logger.error(f"Failed to write JSON after 3 attempts: {path}, error: {e}")
+                    raise
+                logger.warning(f"JSON write attempt {attempt + 1} failed for {path}: {e}, retrying...")
+                time.sleep(0.1 * (attempt + 1))
 
     def _section_lock_key(self, project_id: str, section_id: str) -> str:
         return f"{project_id}:{section_id}"

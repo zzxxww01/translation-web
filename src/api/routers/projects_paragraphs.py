@@ -28,7 +28,7 @@ from .projects_models import (
     WordMeaningRequest,
     WordMeaningResponse,
 )
-from .translate_utils import build_retranslate_instruction, get_latest_translation_text
+from .translate_utils import build_retranslate_instruction, get_latest_translation_text, validate_path_component
 
 
 router = APIRouter()
@@ -394,12 +394,22 @@ def _batch_translate_paragraphs_sync(
 
 
 def _to_bad_request(error: Exception, action: str) -> BadRequestException:
+    import os
+    import logging
+
     error_msg = str(error)
+    logger = logging.getLogger(__name__)
+
     if "429" in error_msg or "Too Many Requests" in error_msg:
         return BadRequestException(detail="API rate limit reached. Please try again later.")
     if "Generation failed after" in error_msg and "retries" in error_msg:
         return BadRequestException(detail=f"{action} service is temporarily unavailable. Please try again later.")
-    return BadRequestException(detail=f"{action} failed: {error_msg}")
+
+    # 生产环境不暴露详细错误信息
+    logger.error(f"{action} failed: {error_msg}")
+    if os.getenv("DEBUG") == "true":
+        return BadRequestException(detail=f"{action} failed: {error_msg}")
+    return BadRequestException(detail=f"{action} failed. Please try again or contact support.")
 
 
 @router.post("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/translate")
@@ -414,6 +424,8 @@ async def translate_paragraph(
     service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
+    if not validate_path_component(project_id) or not validate_path_component(section_id) or not validate_path_component(paragraph_id):
+        raise BadRequestException(detail="Invalid path component")
     try:
         result = await asyncio.to_thread(
             _translate_paragraph_sync,
@@ -450,6 +462,8 @@ async def direct_translate_paragraph(
     llm: LongformLLMProviderDep,
     service: ConfirmationServiceDep,
 ):
+    if not validate_path_component(project_id) or not validate_path_component(section_id) or not validate_path_component(paragraph_id):
+        raise BadRequestException(detail="Invalid path component")
     try:
         result = await asyncio.to_thread(
             _direct_translate_paragraph_sync,
@@ -484,6 +498,8 @@ async def query_word_meaning(
     pm: ProjectManagerDep,
     llm: LongformLLMProviderDep,
 ):
+    if not validate_path_component(project_id) or not validate_path_component(section_id) or not validate_path_component(paragraph_id):
+        raise BadRequestException(detail="Invalid path component")
     try:
         return await asyncio.to_thread(
             _query_word_meaning_sync,
@@ -513,6 +529,8 @@ async def confirm_paragraph(
     pm: ProjectManagerDep,
     service: ConfirmationServiceDep,
 ):
+    if not validate_path_component(project_id) or not validate_path_component(section_id) or not validate_path_component(paragraph_id):
+        raise BadRequestException(detail="Invalid path component")
     try:
         result = await asyncio.to_thread(
             _confirm_paragraph_sync,
@@ -538,6 +556,8 @@ async def update_paragraph(
     service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
+    if not validate_path_component(project_id) or not validate_path_component(section_id) or not validate_path_component(paragraph_id):
+        raise BadRequestException(detail="Invalid path component")
     try:
         result, correction_payload = await asyncio.to_thread(
             _update_paragraph_sync,
@@ -579,6 +599,8 @@ async def batch_translate_paragraphs(
     service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
 ):
+    if not validate_path_component(project_id) or not validate_path_component(section_id):
+        raise BadRequestException(detail="Invalid path component")
     try:
         result = await asyncio.to_thread(
             _batch_translate_paragraphs_sync,
@@ -603,9 +625,19 @@ async def batch_translate_paragraphs(
 
 
 def _to_error_message(error: Exception) -> str:
+    import os
+    import logging
+
     error_msg = str(error)
+    logger = logging.getLogger(__name__)
+    logger.error(f"Translation error: {error_msg}")
+
     if "429" in error_msg or "Too Many Requests" in error_msg:
         return "API rate limit reached. Please try again later."
     if "Generation failed after" in error_msg and "retries" in error_msg:
         return "Translation service is temporarily unavailable. Please try again later."
-    return f"Translation failed: {error_msg}"
+
+    # 生产环境不暴露详细错误信息
+    if os.getenv("DEBUG") == "true":
+        return f"Translation failed: {error_msg}"
+    return "Translation failed. Please try again or contact support."

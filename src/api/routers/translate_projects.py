@@ -5,6 +5,7 @@ Translate project-level endpoints.
 import asyncio
 import json
 import logging
+import threading
 from typing import Any, Dict
 
 from fastapi import APIRouter, Body, Request
@@ -37,6 +38,8 @@ from .translate_utils import validate_path_component
 router = APIRouter()
 
 # 活跃的四步法翻译会话冲突状态 {project_id: {term: Event}}
+# 使用线程锁保护全局状态
+_conflict_lock = threading.Lock()
 _pending_conflict_events: Dict[str, Dict[str, asyncio.Event]] = {}
 _conflict_resolutions: Dict[str, Dict[str, Dict[str, Any]]] = {}
 
@@ -372,14 +375,16 @@ async def translate_with_four_steps(
     progress_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
     event_loop = asyncio.get_running_loop()
 
-    # 初始化冲突状态
-    _pending_conflict_events[project_id] = {}
-    _conflict_resolutions[project_id] = {}
+    # 初始化冲突状态（使用锁保护）
+    with _conflict_lock:
+        _pending_conflict_events[project_id] = {}
+        _conflict_resolutions[project_id] = {}
 
     async def _handle_term_conflict_on_main(conflict) -> Dict[str, Any]:
         term_key = conflict.term.lower()
         event = asyncio.Event()
-        _pending_conflict_events[project_id][term_key] = event
+        with _conflict_lock:
+            _pending_conflict_events[project_id][term_key] = event
         await progress_queue.put(
             {
                 "type": "term_conflict",
@@ -388,7 +393,8 @@ async def translate_with_four_steps(
         )
         try:
             await event.wait()
-            resolution = _conflict_resolutions.get(project_id, {}).get(term_key, {})
+            with _conflict_lock:
+                resolution = _conflict_resolutions.get(project_id, {}).get(term_key, {})
             return {
                 "chosen_translation": resolution.get("chosen_translation")
                 or conflict.existing_translation
@@ -396,8 +402,9 @@ async def translate_with_four_steps(
                 "apply_to_all": resolution.get("apply_to_all", True),
             }
         finally:
-            _pending_conflict_events.get(project_id, {}).pop(term_key, None)
-            _conflict_resolutions.get(project_id, {}).pop(term_key, None)
+            with _conflict_lock:
+                _pending_conflict_events.get(project_id, {}).pop(term_key, None)
+                _conflict_resolutions.get(project_id, {}).pop(term_key, None)
 
     async def run_translation():
         """在后台运行翻译任务。"""
@@ -470,9 +477,13 @@ async def translate_with_four_steps(
                 }
             )
         finally:
-            # 清理冲突状态
-            _pending_conflict_events.pop(project_id, None)
-            _conflict_resolutions.pop(project_id, None)
+            # 清理冲突状态（使用锁保护）
+            with _conflict_lock:
+                _pending_conflict_events.pop(project_id, None)
+                _conflict_resolutions.pop(project_id, None)
+            # 释放翻译槽位
+            from src.services.batch_translation_service import BatchTranslationService
+            BatchTranslationService._release_active_run(project_id)
 
     async def generate_progress():
         translation_task: asyncio.Task | None = None
@@ -571,17 +582,19 @@ async def resolve_term_conflict_live(
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
 
-    events = _pending_conflict_events.get(project_id, {})
-    resolutions = _conflict_resolutions.setdefault(project_id, {})
+    with _conflict_lock:
+        events = _pending_conflict_events.get(project_id, {})
+        resolutions = _conflict_resolutions.setdefault(project_id, {})
 
-    term_key = request.term.lower()
-    resolutions[term_key] = {
-        "chosen_translation": request.chosen_translation,
-        "apply_to_all": request.apply_to_all,
-    }
+        term_key = request.term.lower()
+        resolutions[term_key] = {
+            "chosen_translation": request.chosen_translation,
+            "apply_to_all": request.apply_to_all,
+        }
 
-    # 唤醒等待的翻译线程
-    event = events.get(term_key)
+        # 唤醒等待的翻译线程
+        event = events.get(term_key)
+
     if event:
         event.set()
 
