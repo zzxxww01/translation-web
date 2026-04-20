@@ -2,9 +2,10 @@
 Tools timezone-convert endpoint.
 """
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from ..middleware import BadRequestException
+from ..middleware.rate_limit import limiter
 from ..utils.timezone import (
     convert_all_timezones,
     format_time,
@@ -18,7 +19,8 @@ router = APIRouter()
 
 
 @router.post("/timezone-convert", response_model=TimezoneConvertResponse)
-async def convert_timezone_api(request: TimezoneConvertRequest):
+@limiter.limit("30/minute")
+async def convert_timezone_api(request: TimezoneConvertRequest, req: Request):
     """
     时区转换 API
 

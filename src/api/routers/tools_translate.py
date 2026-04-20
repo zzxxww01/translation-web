@@ -4,11 +4,12 @@ Tools text-translation endpoint.
 
 import re
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from src.prompts import get_prompt_manager
 
 from ..middleware import BadRequestException
+from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.llm_factory import generate_with_fallback
 from .tools_models import TranslateRequest, TranslateResponse
@@ -19,7 +20,8 @@ prompt_manager = get_prompt_manager()
 
 
 @router.post("/translate", response_model=TranslateResponse)
-async def translate_text(request: TranslateRequest):
+@limiter.limit("20/minute")
+async def translate_text(request: TranslateRequest, req: Request):
     """
     文本翻译 API
 

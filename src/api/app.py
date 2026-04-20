@@ -19,6 +19,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.middleware.base import BaseHTTPMiddleware
 
 from .middleware import LoggingMiddleware, register_error_handlers
+from .middleware.rate_limit import limiter, RateLimitExceeded, _rate_limit_exceeded_handler
 from .routers import (
     confirmation,
     consistency,
@@ -68,6 +69,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 app.add_middleware(LoggingMiddleware)
+
+# 速率限制（公网环境必须）
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
 register_error_handlers(app)
 
 

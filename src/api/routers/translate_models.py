@@ -3,15 +3,28 @@ Translate router request/response models.
 """
 
 from typing import Optional
+from pydantic import BaseModel, Field, field_validator
 
-from pydantic import BaseModel
+
+# 内容长度限制（公网环境防止滥用）
+MAX_POST_CONTENT_LENGTH = 10000  # 10K 字符，约 3000 词
+MAX_CUSTOM_PROMPT_LENGTH = 2000
 
 
 class PostTranslateRequest(BaseModel):
-    content: str
+    content: str = Field(..., max_length=MAX_POST_CONTENT_LENGTH)
     preserve_tone: bool = True
-    custom_prompt: Optional[str] = None
+    custom_prompt: Optional[str] = Field(None, max_length=MAX_CUSTOM_PROMPT_LENGTH)
     model: Optional[str] = None
+
+    @field_validator('content')
+    @classmethod
+    def validate_content(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("Content cannot be empty")
+        if len(v.strip()) < 10:
+            raise ValueError("Content too short (minimum 10 characters)")
+        return v
 
 
 class PostTranslateResponse(BaseModel):
@@ -19,9 +32,16 @@ class PostTranslateResponse(BaseModel):
 
 
 class GenerateTitleRequest(BaseModel):
-    content: str
+    content: str = Field(..., max_length=MAX_POST_CONTENT_LENGTH)
     instruction: Optional[str] = None
     model: Optional[str] = None
+
+    @field_validator('content')
+    @classmethod
+    def validate_content(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("Content cannot be empty")
+        return v
 
 
 class GenerateTitleResponse(BaseModel):
@@ -40,12 +60,24 @@ class SectionAnalysisResponse(BaseModel):
 
 
 class PostOptimizeRequest(BaseModel):
-    original_text: str
-    current_translation: str
-    instruction: Optional[str] = None
+    original_text: str = Field(..., max_length=MAX_POST_CONTENT_LENGTH)
+    current_translation: str = Field(..., max_length=MAX_POST_CONTENT_LENGTH)
+    instruction: Optional[str] = Field(None, max_length=1000)
     option_id: Optional[str] = None
-    conversation_history: Optional[list[dict]] = None
+    conversation_history: Optional[list[dict]] = Field(None, max_length=10)
     model: Optional[str] = None
+
+    @field_validator('conversation_history')
+    @classmethod
+    def validate_history(cls, v: Optional[list[dict]]) -> Optional[list[dict]]:
+        if v is None:
+            return v
+        if len(v) > 10:
+            raise ValueError("Conversation history too long (max 10 messages)")
+        for msg in v:
+            if not isinstance(msg, dict) or 'role' not in msg or 'content' not in msg:
+                raise ValueError("Invalid conversation history format")
+        return v
 
 
 class PostOptimizeResponse(BaseModel):

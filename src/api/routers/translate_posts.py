@@ -5,10 +5,11 @@ Translate post/title endpoints.
 import asyncio
 import os
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from src.prompts import get_prompt_manager
 from ..middleware import BadRequestException
+from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.glossary import build_glossary_context
 from ..utils.json_utils import parse_llm_json_response
@@ -29,10 +30,16 @@ prompt_manager = get_prompt_manager()
 
 
 @router.post("/translate/post", response_model=PostTranslateResponse)
-async def translate_post(request: PostTranslateRequest):
+@limiter.limit("20/minute")
+async def translate_post(request: PostTranslateRequest, req: Request):
     """Translate a post to Chinese."""
     if not request.content.strip():
         raise BadRequestException(detail="Content cannot be empty")
+
+    # 公网环境禁用 custom_prompt（防止 prompt 注入）
+    if request.custom_prompt:
+        if not os.getenv("ALLOW_CUSTOM_PROMPTS", "false").lower() == "true":
+            raise BadRequestException(detail="Custom prompts are not allowed in production")
 
     glossary_context = build_glossary_context(request.content)
 
@@ -62,7 +69,8 @@ async def translate_post(request: PostTranslateRequest):
 
 
 @router.post("/translate/post/optimize", response_model=PostOptimizeResponse)
-async def optimize_post_translation(request: PostOptimizeRequest):
+@limiter.limit("20/minute")
+async def optimize_post_translation(request: PostOptimizeRequest, req: Request):
     """Optimize an existing translation."""
     if not request.current_translation.strip():
         raise BadRequestException(detail="Current translation cannot be empty")
@@ -101,7 +109,8 @@ async def optimize_post_translation(request: PostOptimizeRequest):
 
 
 @router.post("/generate/title", response_model=GenerateTitleResponse)
-async def generate_title(request: GenerateTitleRequest):
+@limiter.limit("20/minute")
+async def generate_title(request: GenerateTitleRequest, req: Request):
     """Generate 6 title options in JSON format."""
     if not request.content.strip():
         raise BadRequestException(detail="Content cannot be empty")

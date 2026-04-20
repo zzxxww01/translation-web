@@ -2,11 +2,15 @@
 Tools email-reply endpoint.
 """
 
-from fastapi import APIRouter
+import html
+import re
+
+from fastapi import APIRouter, Request
 
 from src.prompts import get_prompt_manager
 
 from ..middleware import BadRequestException
+from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
@@ -17,8 +21,22 @@ router = APIRouter()
 prompt_manager = get_prompt_manager()
 
 
+def sanitize_email_input(text: str) -> str:
+    """清洗邮件输入，防止 prompt 注入"""
+    if not text:
+        return ""
+    # HTML 转义
+    text = html.escape(text)
+    # 限制连续换行
+    text = re.sub(r'\n{4,}', '\n\n\n', text)
+    # 移除控制字符
+    text = ''.join(char for char in text if ord(char) >= 32 or char in '\n\r\t')
+    return text
+
+
 @router.post("/email-reply", response_model=EmailReplyResponse)
-async def generate_email_reply(request: EmailReplyRequest):
+@limiter.limit("10/minute")
+async def generate_email_reply(request: EmailReplyRequest, req: Request):
     """
     邮件回复建议 API
 
@@ -26,6 +44,11 @@ async def generate_email_reply(request: EmailReplyRequest):
     """
     if not request.content.strip():
         raise BadRequestException(detail="邮件内容不能为空")
+
+    # 清洗输入，防止 prompt 注入
+    content = sanitize_email_input(request.content)
+    sender = sanitize_email_input(request.sender) if request.sender else ""
+    subject = sanitize_email_input(request.subject) if request.subject else ""
 
     style_descriptions = {
         "professional": "专业正式 - 适合商务场合，表达得体、逻辑清晰",
@@ -35,16 +58,16 @@ async def generate_email_reply(request: EmailReplyRequest):
     style_desc = style_descriptions.get(request.style, "专业正式")
 
     context = []
-    if request.sender:
-        context.append(f"- 发件人: {request.sender}")
-    if request.subject:
-        context.append(f"- 主题: {request.subject}")
+    if sender:
+        context.append(f"- 发件人: {sender}")
+    if subject:
+        context.append(f"- 主题: {subject}")
     context_info = "\n".join(context) if context else "（无额外信息）"
 
     prompt = prompt_manager.get(
         "tools_email_reply",
         context_info=context_info,
-        content=request.content,
+        content=content,
         style_desc=style_desc,
     )
 

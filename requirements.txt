@@ -31,3 +31,6 @@ portalocker>=2.8.0  # File locking for concurrent access safety
 markdown-it-py>=3.0.0
 pygments>=2.15.0
 premailer>=3.10.0
+
+# 速率限制（公网环境必须）
+slowapi>=0.1.9
