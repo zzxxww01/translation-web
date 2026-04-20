@@ -11,6 +11,7 @@ export interface WechatFormatRequest {
 
 export interface WechatFormatResponse {
   html: string;
+  css: string;
   image_count: number;
   image_urls: string[];
 }
@@ -18,4 +19,9 @@ export interface WechatFormatResponse {
 export interface WechatTheme {
   id: string;
   name: string;
+  description: string;
+}
+
+export interface WechatThemesResponse {
+  themes: WechatTheme[];
 }

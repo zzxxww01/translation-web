@@ -26,3 +26,8 @@ python-slugify>=8.0.0
 python-dotenv>=1.0.0
 tzdata>=2025.3
 portalocker>=2.8.0  # File locking for concurrent access safety
+
+# 微信排版功能依赖
+markdown-it-py>=3.0.0
+pygments>=2.15.0
+premailer>=3.10.0

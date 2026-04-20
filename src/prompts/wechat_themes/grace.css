@@ -1,0 +1,119 @@
+/* 微信公众号排版 - 优雅主题（参考doocs-md grace） */
+
+/* 一级标题 - 下边框+阴影 */
+h1 {
+  margin: 2em 8px 1em;
+  padding: 0.5em 1em;
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid var(--md-primary-color);
+  font-size: calc(var(--md-font-size) * 1.5);
+  font-weight: 600;
+  color: var(--text-color);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+/* 二级标题 - 圆角+阴影 */
+h2 {
+  margin: 2em 8px 1em;
+  padding: 0.4em 1em;
+  border-radius: 8px;
+  font-size: calc(var(--md-font-size) * 1.3);
+  font-weight: 600;
+  color: #fff;
+  background: var(--md-primary-color);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
+}
+
+/* 三级标题 - 左边框+虚线下边框 */
+h3 {
+  margin: 1.5em 8px 1em;
+  padding-left: 12px;
+  padding-bottom: 0.3em;
+  font-size: calc(var(--md-font-size) * 1.2);
+  font-weight: 600;
+  color: var(--text-color);
+  border-left: 4px solid var(--md-primary-color);
+  border-bottom: 1px dashed var(--md-primary-color);
+}
+
+/* 四级标题 */
+h4 {
+  margin: 1.2em 8px 0.8em;
+  font-size: calc(var(--md-font-size) * 1.1);
+  font-weight: 500;
+  color: var(--md-primary-color);
+}
+
+/* 引用块 - 斜体+圆角+阴影 */
+blockquote {
+  margin: 1.5em 8px;
+  padding: 1em 1.2em 1em 2em;
+  border-left: 4px solid var(--md-primary-color);
+  border-radius: 6px;
+  background: #f8f9fa;
+  color: rgba(0, 0, 0, 0.65);
+  font-style: italic;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* 代码块 - 内阴影 */
+pre {
+  margin: 1.5em 8px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
+}
+
+/* 图片 - 圆角+阴影 */
+img {
+  margin: 1.5em 8px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* 表格 - 圆角+阴影 */
+table {
+  margin: 1.5em 8px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border: none;
+}
+
+th {
+  background: var(--md-primary-color);
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  padding: 0.8em 1em;
+}
+
+td {
+  border: 1px solid #e5e7eb;
+  padding: 0.6em 1em;
+}
+
+tbody tr:nth-child(even) {
+  background: #f8f9fa;
+}
+
+/* 强调文本 */
+strong {
+  color: var(--md-primary-color);
+  font-weight: 600;
+}
+
+/* 链接 - 微信蓝 */
+a {
+  color: #576b95;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(87, 107, 149, 0.3);
+}
+
+/* 分隔线 - 渐变 */
+hr {
+  height: 1px;
+  border: none;
+  margin: 2em 8px;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+}

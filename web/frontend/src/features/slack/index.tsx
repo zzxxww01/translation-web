@@ -92,9 +92,7 @@ export function SlackFeature() {
       setIncomingResult(result.translation, result.suggested_replies ?? []);
       setIncomingText('');
 
-      if (result.suggested_replies && result.suggested_replies.length > 0) {
-        startRefinement('incoming', content, result.suggested_replies[0].english);
-      }
+      // 不自动启动 refinement，让用户先选择一个建议回复
     } catch { /* handled */ }
   };
 
@@ -115,9 +113,7 @@ export function SlackFeature() {
         result.versions.map((v: SlackReplyVariant) => ({ ...v, chinese: v.chinese || content }))
       );
 
-      if (result.versions && result.versions.length > 0) {
-        startRefinement('draft', content, result.versions[0].english);
-      }
+      // 不自动启动 refinement，让用户先选择一个版本
     } catch { /* handled */ }
   };
 
@@ -207,11 +203,12 @@ export function SlackFeature() {
               <ReplySuggestions
                 title="建议回复"
                 options={incomingSuggestions}
-                confirmLabel="复制这个版本"
-                onSelectReply={async (en) => {
-                  await copyEnglish(en, '建议回复已复制');
-                  addMessage('me', en);
-                  toast.success('已复制并加入对话历史');
+                confirmLabel="用这个版本"
+                onSelectReply={async (en, cn) => {
+                  // 启动 refinement 模式，让用户可以继续调整
+                  startRefinement('incoming', incomingText, en);
+                  // 清空建议回复显示
+                  setIncomingResult(incomingTranslation, []);
                 }}
                 onClose={() => setIncomingResult(incomingTranslation, [])}
               />
@@ -283,12 +280,12 @@ export function SlackFeature() {
             <ReplySuggestions
               title="英文版本"
               options={draftVersions}
-              confirmLabel="复制这个版本"
-              onSelectReply={async (en) => {
-                await copyEnglish(en, '英文版本已复制');
-                addMessage('me', en);
-                setDraftText('');
-                toast.success('已复制并加入对话历史');
+              confirmLabel="用这个版本"
+              onSelectReply={async (en, cn) => {
+                // 启动 refinement 模式，让用户可以继续调整
+                startRefinement('draft', draftText, en);
+                // 清空版本显示
+                setDraftVersions([]);
               }}
               onClose={() => setDraftVersions([])}
             />

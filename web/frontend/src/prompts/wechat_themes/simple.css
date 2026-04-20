@@ -1,0 +1,50 @@
+/* 微信公众号排版 - 简洁主题 */
+
+/* 标题样式 */
+h1 {
+  font-size: 1.8em;
+  font-weight: 700;
+  margin: 2em 0 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid #e5e7eb;
+  color: #000;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 1.8em 0 1em;
+  padding-left: 0.8em;
+  border-left: 3px solid var(--md-primary-color);
+  color: #000;
+}
+
+h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 1.5em 0 0.8em;
+  color: #374151;
+}
+
+h4 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 1.2em 0 0.6em;
+  color: #6b7280;
+}
+
+h5, h6 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 1em 0 0.5em;
+  color: #6b7280;
+}
+
+/* 链接 - 继承文字颜色，虚线下划线 */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: #9ca3af;
+  font-weight: normal;
+}

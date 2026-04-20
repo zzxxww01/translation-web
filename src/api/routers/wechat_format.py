@@ -2,8 +2,9 @@
 微信公众号格式化 API 路由
 """
 
+import logging
 from fastapi import APIRouter
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 
 from ..middleware import BadRequestException, ServiceUnavailableException
 from src.services.wechat_formatter import WechatFormatter
@@ -11,6 +12,13 @@ from src.services.wechat_themes import list_themes
 
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
+
+# 允许的主题白名单
+ALLOWED_THEMES = {"default", "grace", "simple"}
+
+# 内容大小限制（10MB）
+MAX_MARKDOWN_SIZE = 10 * 1024 * 1024
 
 
 class WechatFormatRequest(BaseModel):
@@ -21,19 +29,42 @@ class WechatFormatRequest(BaseModel):
     upload_images: bool = False
     image_to_base64: bool = False
 
+    @field_validator('markdown')
+    @classmethod
+    def validate_markdown_size(cls, v: str) -> str:
+        if len(v.encode('utf-8')) > MAX_MARKDOWN_SIZE:
+            raise ValueError(f"Markdown content exceeds {MAX_MARKDOWN_SIZE} bytes")
+        return v
+
+    @field_validator('theme')
+    @classmethod
+    def validate_theme(cls, v: str) -> str:
+        if v not in ALLOWED_THEMES:
+            raise ValueError(f"Invalid theme. Allowed: {', '.join(sorted(ALLOWED_THEMES))}")
+        return v
+
 
 class WechatFormatResponse(BaseModel):
     """微信格式化响应"""
 
     html: str
+    css: str
     image_count: int
     image_urls: list[str]
+
+
+class ThemeInfo(BaseModel):
+    """主题信息"""
+
+    id: str
+    name: str
+    description: str
 
 
 class WechatThemesResponse(BaseModel):
     """主题列表响应"""
 
-    themes: list[str]
+    themes: list[ThemeInfo]
 
 
 @router.post("/wechat/format", response_model=WechatFormatResponse)
@@ -41,10 +72,12 @@ async def format_for_wechat(request: WechatFormatRequest):
     """
     将 Markdown 转换为微信公众号格式
 
-    - **markdown**: Markdown 文本
-    - **theme**: 主题名称（default, tech, minimal）
+    - **markdown**: Markdown 文本（最大 10MB）
+    - **theme**: 主题名称（default, grace, simple）
     - **upload_images**: 是否上传图片到图床
     - **image_to_base64**: 是否将图片转为 Base64
+
+    注意：建议在生产环境配置速率限制中间件
     """
     if not request.markdown.strip():
         raise BadRequestException(detail="Markdown content cannot be empty")
@@ -60,20 +93,44 @@ async def format_for_wechat(request: WechatFormatRequest):
 
         return WechatFormatResponse(
             html=result["html"],
+            css=result["css"],
             image_count=result["image_count"],
             image_urls=result["image_urls"],
         )
 
     except ImportError as e:
+        logger.error(f"Missing dependency: {e}", exc_info=True)
         raise ServiceUnavailableException(
-            detail=f"Missing required dependency: {str(e)}"
+            detail="Service temporarily unavailable"
         )
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"Format failed: {str(e)}")
+        logger.error(f"Format failed: {e}", exc_info=True)
+        raise ServiceUnavailableException(detail="Failed to format markdown")
 
 
 @router.get("/wechat/themes", response_model=WechatThemesResponse)
 async def get_wechat_themes():
     """获取所有可用主题"""
-    themes = list_themes()
-    return WechatThemesResponse(themes=themes)
+    # 主题元数据映射
+    theme_metadata = {
+        "default": {"name": "经典", "description": "专业稳重的经典风格"},
+        "grace": {"name": "优雅", "description": "精致美观的优雅风格"},
+        "simple": {"name": "简洁", "description": "清爽简约的极简风格"},
+    }
+
+    # 直接扫描文件系统
+    from pathlib import Path
+    themes_dir = Path(__file__).parent.parent.parent / "prompts" / "wechat_themes"
+    theme_files = [f.stem for f in themes_dir.glob("*.css") if f.stem != "base"]
+
+    # 构建主题对象列表
+    themes = [
+        ThemeInfo(
+            id=theme_id,
+            name=theme_metadata.get(theme_id, {}).get("name", theme_id),
+            description=theme_metadata.get(theme_id, {}).get("description", ""),
+        )
+        for theme_id in sorted(theme_files)
+    ]
+
+    return {"themes": themes}

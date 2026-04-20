@@ -1,5 +1,5 @@
 import { apiClient } from '../../shared/api/client';
-import type { WechatFormatRequest, WechatFormatResponse } from './types';
+import type { WechatFormatRequest, WechatFormatResponse, WechatThemesResponse } from './types';
 
 /**
  * 微信排版 API
@@ -10,7 +10,7 @@ export const wechatApi = {
    */
   format: (data: WechatFormatRequest) =>
     apiClient.post<WechatFormatResponse>('/wechat/format', data, {
-      timeout: 30000,
+      timeout: 300000, // 5分钟，支持大量图片处理
       retry: false,
     }),
 
@@ -18,5 +18,5 @@ export const wechatApi = {
    * 获取可用主题列表
    */
   getThemes: () =>
-    apiClient.get<{ themes: string[] }>('/wechat/themes'),
+    apiClient.get<WechatThemesResponse>('/wechat/themes'),
 };

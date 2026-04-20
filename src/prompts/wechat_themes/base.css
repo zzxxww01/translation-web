@@ -1,0 +1,184 @@
+/* 微信公众号排版 - 基础样式 */
+
+/* CSS变量定义 */
+:root {
+  --md-primary-color: #3b82f6;
+  --md-font-family: -apple-system-font, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Hiragino Sans GB, Microsoft YaHei UI, Microsoft YaHei, Arial, sans-serif;
+  --md-font-family-serif: Optima-Regular, Optima, PingFangSC-light, PingFangTC-light, PingFang SC, Cambria, Cochin, Georgia, Times, Times New Roman, serif;
+  --md-font-family-mono: Menlo, Monaco, Courier New, monospace;
+  --md-font-size: 16px;
+  --md-line-height: 1.75;
+  --md-letter-spacing: 0.1em;
+  --md-code-bg: #f6f8fa;
+  --md-code-color: #24292f;
+  --blockquote-background: #f8f9fa;
+  --text-color: #333;
+  --text-muted: #666;
+  --text-light: #888;
+}
+
+/* 容器样式 */
+section, container {
+  font-family: var(--md-font-family);
+  font-size: var(--md-font-size);
+  line-height: var(--md-line-height);
+  color: var(--text-color);
+  padding: 20px;
+  word-wrap: break-word;
+}
+
+/* 段落 */
+p {
+  margin: 1.5em 8px;
+  text-align: justify;
+  letter-spacing: 0.034em;
+  color: var(--text-color);
+}
+
+/* 链接样式 - 不使用蓝色 */
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--md-primary-color);
+  font-weight: 500;
+}
+
+/* 列表 */
+ul, ol {
+  margin: 1.5em 8px;
+  padding-left: 2em;
+  color: var(--text-color);
+}
+
+li {
+  margin: 0.5em 0;
+  line-height: 1.8;
+  letter-spacing: var(--md-letter-spacing);
+}
+
+/* 嵌套列表 */
+li > ul, li > ol {
+  margin: 0.3em 0;
+}
+
+/* 引用块 */
+blockquote {
+  margin: 1.5em 8px;
+  padding: 1em 1.5em;
+  border-left: 4px solid var(--md-primary-color);
+  background: var(--blockquote-background);
+  color: var(--text-muted);
+  border-radius: 4px;
+  font-style: normal;
+}
+
+blockquote p {
+  margin: 0.5em 0;
+  letter-spacing: var(--md-letter-spacing);
+}
+
+blockquote > p:first-child {
+  margin-top: 0;
+}
+
+blockquote > p:last-child {
+  margin-bottom: 0;
+}
+
+/* 代码 */
+code {
+  font-family: var(--md-font-family-mono);
+  background: var(--md-code-bg);
+  color: var(--md-code-color);
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 90%;
+}
+
+pre {
+  margin: 1.5em 8px;
+  padding: 1em;
+  background: var(--md-code-bg);
+  border-radius: 8px;
+  overflow-x: auto;
+  line-height: 1.6;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+  font-size: 90%;
+  line-height: 1.6;
+}
+
+/* 图片 */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5em auto;
+  border-radius: 4px;
+}
+
+/* 图片题注 */
+figure {
+  margin: 1.5em 8px;
+}
+
+figcaption {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 0.85em;
+  margin-top: 0.5em;
+  font-style: italic;
+  letter-spacing: 0;
+}
+
+/* 表格 */
+table {
+  width: 100%;
+  margin: 1.5em 8px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.75em 1em;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+  letter-spacing: var(--md-letter-spacing);
+}
+
+th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+/* 表格斑马纹 */
+tbody tr:nth-child(even) {
+  background: #f9fafb;
+}
+
+tbody tr:hover {
+  background: #f3f4f6;
+}
+
+/* 分隔线 */
+hr {
+  margin: 2em 0;
+  border: none;
+  border-top: 2px solid rgba(0, 0, 0, 0.1);
+  transform: scaleY(0.5);
+  transform-origin: 0 0;
+}
+
+/* 强调 */
+strong {
+  font-weight: 600;
+  color: var(--md-primary-color);
+}
+
+em {
+  font-style: italic;
+}

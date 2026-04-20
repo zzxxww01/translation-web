@@ -1,0 +1,60 @@
+/* 微信公众号排版 - 经典主题 */
+
+/* 标题样式 */
+h1 {
+  font-size: 1.8em;
+  font-weight: 700;
+  text-align: center;
+  display: table;
+  margin: 2em auto 1em;
+  padding: 0 1em;
+  border-bottom: 2px solid var(--md-primary-color);
+  color: #000;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 1.8em 0 1em;
+  padding: 0.3em 1em;
+  background: var(--md-primary-color);
+  color: #fff;
+  border-radius: 4px;
+}
+
+h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 1.5em 0 0.8em;
+  padding-left: 0.8em;
+  border-left: 4px solid var(--md-primary-color);
+  color: #000;
+}
+
+h4 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 1.2em 0 0.6em;
+  color: #333;
+}
+
+h5, h6 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 1em 0 0.5em;
+  color: #555;
+}
+
+/* 强调 - 保持黑色不变蓝 */
+strong {
+  font-weight: 600;
+  color: #000;
+}
+
+/* 链接 - 微信蓝 + 虚线 */
+a {
+  color: #576b95;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  font-weight: normal;
+}

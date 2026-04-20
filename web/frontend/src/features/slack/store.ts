@@ -176,7 +176,9 @@ export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
             if (!session) return state;
             const variant = session.variants.find(v => v.id === variantId);
             if (!variant) return state;
-            const role: MessageRole = contextType === 'incoming' ? 'them' : 'me';
+            // incoming 类型：对方发消息给我，我选择回复 → 应该是 'me'
+            // draft 类型：我主动发起 → 也是 'me'
+            const role: MessageRole = 'me';
             return {
               conversationMessages: [
                 ...state.conversationMessages,

@@ -1,7 +1,7 @@
 """Slack refine endpoint - adjust previous results based on user feedback"""
 from fastapi import APIRouter
 from src.api.routers.slack_models import SlackRefineRequest, SlackRefineResponse
-from src.llm.llm import get_llm_client
+from src.llm.factory import create_llm_provider
 import logging
 
 logger = logging.getLogger(__name__)
@@ -41,12 +41,8 @@ async def refine_result(request: SlackRefineRequest) -> SlackRefineResponse:
         )
 
         # Call LLM
-        llm = get_llm_client()
-        refined_result = await llm.generate(
-            prompt=prompt,
-            temperature=0.7,
-            max_tokens=1000
-        )
+        llm = create_llm_provider()
+        refined_result = llm.generate_text(prompt)
 
         return SlackRefineResponse(refined_result=refined_result.strip())
 

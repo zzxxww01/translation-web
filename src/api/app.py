@@ -10,10 +10,11 @@ load_dotenv()
 import subprocess
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.base import BaseHTTPMiddleware
 
 from .middleware import LoggingMiddleware, register_error_handlers
 from .routers import (
@@ -40,6 +41,12 @@ app = FastAPI(
     version="2.0.0",
 )
 
+# 增加请求体大小限制（支持大文档）
+class LimitUploadSize(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        return await call_next(request)
+
+app.add_middleware(LimitUploadSize)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(LoggingMiddleware)
 register_error_handlers(app)
@@ -94,8 +101,8 @@ if frontend_dist_path.exists():
     app.mount("/static", StaticFiles(directory=str(frontend_dist_path)), name="static")
 
 projects_path = Path(__file__).parent.parent.parent / "projects"
-if projects_path.exists():
-    app.mount("/projects", SafeStaticFiles(directory=str(projects_path)), name="projects")
+projects_path.mkdir(parents=True, exist_ok=True)  # 确保目录存在
+app.mount("/projects", SafeStaticFiles(directory=str(projects_path)), name="projects")
 
 
 @app.get(

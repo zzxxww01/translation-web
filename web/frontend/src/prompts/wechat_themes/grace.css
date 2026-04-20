@@ -1,0 +1,70 @@
+/* 微信公众号排版 - 优雅主题 */
+
+/* 标题样式 */
+h1 {
+  font-size: 1.8em;
+  font-weight: 700;
+  text-align: center;
+  margin: 2em 0 1em;
+  padding: 0.5em 1em;
+  background: linear-gradient(135deg, var(--md-primary-color) 0%, #60a5fa 100%);
+  color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin: 1.8em 0 1em;
+  padding: 0.5em 0.8em;
+  padding-left: 1em;
+  border-left: 4px solid var(--md-primary-color);
+  background: linear-gradient(to right, #f0f9ff 0%, #ffffff 100%);
+  color: #000;
+  border-radius: 4px;
+}
+
+h3 {
+  font-size: 1.3em;
+  font-weight: 600;
+  margin: 1.5em 0 0.8em;
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid #e5e7eb;
+  color: #000;
+}
+
+h4 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin: 1.2em 0 0.6em;
+  color: var(--md-primary-color);
+}
+
+h5, h6 {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 1em 0 0.5em;
+  color: #555;
+}
+
+/* 引用块 */
+blockquote {
+  border-left: 4px solid var(--md-primary-color);
+  background: linear-gradient(to right, #f0f9ff 0%, #ffffff 100%);
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* 代码块 */
+pre {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+}
+
+/* 图片 */
+img {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
