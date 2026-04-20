@@ -5,6 +5,8 @@
 import logging
 from fastapi import APIRouter
 from pydantic import BaseModel, field_validator
+import asyncio
+from functools import partial
 
 from ..middleware import BadRequestException, ServiceUnavailableException
 from src.services.wechat_formatter import WechatFormatter
@@ -84,11 +86,18 @@ async def format_for_wechat(request: WechatFormatRequest):
 
     try:
         formatter = WechatFormatter()
-        result = formatter.format(
-            markdown=request.markdown,
-            theme=request.theme,
-            upload_images=request.upload_images,
-            image_to_base64=request.image_to_base64,
+
+        # 在线程池中执行阻塞操作，避免阻塞事件循环
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(
+            None,
+            partial(
+                formatter.format,
+                markdown=request.markdown,
+                theme=request.theme,
+                upload_images=request.upload_images,
+                image_to_base64=request.image_to_base64,
+            )
         )
 
         return WechatFormatResponse(

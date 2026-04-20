@@ -100,11 +100,11 @@ strong {
   font-weight: 700;
 }
 
-/* 链接 - 微信蓝 */
+/* 链接 - 深灰色 */
 a {
-  color: #576b95;
+  color: #333;
   text-decoration: none;
-  border-bottom: 1px solid rgba(87, 107, 149, 0.3);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
   padding-bottom: 1px;
 }
 

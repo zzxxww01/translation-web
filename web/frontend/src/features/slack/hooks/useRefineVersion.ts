@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { apiClient } from '@/lib/api-client';
+import { apiClient } from '@/shared/api/client';
 import type { ReplyVersion } from '../types';
 
 interface RefineVersionParams {
@@ -13,10 +13,9 @@ export function useRefineVersion() {
     mutationFn: async (params: RefineVersionParams) => {
       const response = await apiClient.post<ReplyVersion>(
         '/slack/refine-version',
-        null,
-        { params }
+        params
       );
-      return response.data;
+      return response;
     },
   });
 }

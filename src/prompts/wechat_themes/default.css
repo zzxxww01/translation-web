@@ -75,10 +75,10 @@ strong {
   font-weight: 600;
 }
 
-/* 链接 - 微信蓝+虚线 */
+/* 链接 - 深灰色+虚线 */
 a {
-  color: #576b95;
+  color: #333;
   text-decoration: underline;
   text-decoration-style: dotted;
-  text-decoration-color: #576b95;
+  text-decoration-color: rgba(0, 0, 0, 0.4);
 }

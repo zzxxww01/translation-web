@@ -1,0 +1,498 @@
+/* ============================================
+   Translation Agent - Liquid Modernism Theme
+   流动的语言 · Fluid Language
+   ============================================ */
+
+/* ============ 字体导入 ============ */
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* ============ CSS 变量 ============ */
+@layer base {
+  :root {
+    /* 字体系统 */
+    --font-display: 'Sora', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-chinese: 'Noto Sans SC', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* 主色渐变 */
+    --color-primary-start: #1a365d;
+    --color-primary-mid: #3730a3;
+    --color-primary-end: #5b21b6;
+
+    /* 辅助色渐变 */
+    --color-secondary-start: #0891b2;
+    --color-secondary-end: #3b82f6;
+
+    /* 强调色渐变 */
+    --color-accent-start: #f59e0b;
+    --color-accent-end: #f97316;
+
+    /* 背景层次 */
+    --color-bg-base: #f8fafc;
+    --color-bg-elevated: #ffffff;
+    --color-bg-subtle: #f1f5f9;
+
+    /* 文本层次 */
+    --color-text-primary: #0f172a;
+    --color-text-secondary: #475569;
+    --color-text-muted: #94a3b8;
+
+    /* 语义色 */
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    --color-info: #3b82f6;
+
+    /* 过渡曲线 */
+    --ease-fluid: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* 间距系统 */
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 32px;
+    --spacing-xl: 48px;
+    --spacing-2xl: 64px;
+
+    /* 圆角系统 */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
+    --radius-full: 9999px;
+  }
+}
+
+/* ============ 全局样式 ============ */
+@layer base {
+  body {
+    font-family: var(--font-body);
+    background: var(--color-bg-base);
+    color: var(--color-text-primary);
+  }
+
+  /* 中文字体优化 */
+  :lang(zh), :lang(zh-CN), :lang(zh-TW) {
+    font-family: var(--font-chinese);
+  }
+
+  /* 标题字体 */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* 代码字体 */
+  code, pre, kbd, samp {
+    font-family: var(--font-mono);
+  }
+}
+
+/* ============ 渐变工具类 ============ */
+@layer utilities {
+  .gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary-start) 0%, var(--color-primary-end) 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, var(--color-secondary-start) 0%, var(--color-secondary-end) 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, var(--color-accent-start) 0%, var(--color-accent-end) 100%);
+  }
+
+  .gradient-mesh-fluid {
+    background:
+      radial-gradient(at 0% 0%, rgba(26, 54, 93, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(91, 33, 182, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(8, 145, 178, 0.08) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
+    animation: meshFlow 20s ease-in-out infinite;
+  }
+
+  @keyframes meshFlow {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+  }
+
+  /* 文本渐变 */
+  .text-gradient-primary {
+    background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-accent {
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ============ 核心动画 ============ */
+@layer components {
+  /* 液态上升 */
+  @keyframes liquidRise {
+    from {
+      opacity: 0;
+      transform: translateY(40px) scale(0.95);
+      filter: blur(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  .animate-liquid-rise {
+    animation: liquidRise 0.8s var(--ease-fluid);
+  }
+
+  /* 波纹扩散 */
+  @keyframes rippleExpand {
+    0% {
+      transform: scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(4);
+      opacity: 0;
+    }
+  }
+
+  .animate-ripple {
+    animation: rippleExpand 1.5s var(--ease-smooth) infinite;
+  }
+
+  /* 渐变流动 */
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .animate-gradient-flow {
+    background-size: 200% 200%;
+    animation: gradientFlow 8s ease infinite;
+  }
+
+  /* 呼吸发光 */
+  @keyframes breathingGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(91, 33, 182, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(91, 33, 182, 0.6);
+    }
+  }
+
+  .animate-breathing-glow {
+    animation: breathingGlow 3s ease-in-out infinite;
+  }
+
+  /* 浮动 */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  /* 脉冲缩放 */
+  @keyframes pulseScale {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-pulse-scale {
+    animation: pulseScale 2s ease-in-out infinite;
+  }
+}
+
+/* ============ 玻璃态组件 ============ */
+@layer components {
+  .card-glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-lg);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: all 0.4s var(--ease-fluid);
+  }
+
+  .card-glass:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .card-glass-dark {
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+  }
+}
+
+/* ============ 流动按钮 ============ */
+@layer components {
+  .button-fluid {
+    position: relative;
+    padding: 12px 32px;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1rem;
+    color: white;
+    background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
+    background-size: 200% 200%;
+    border: none;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.4s var(--ease-fluid);
+    animation: gradientFlow 8s ease infinite;
+  }
+
+  .button-fluid::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .button-fluid:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+
+  .button-fluid:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(91, 33, 182, 0.3);
+  }
+
+  .button-fluid:active {
+    transform: translateY(0);
+  }
+
+  /* 次要按钮 */
+  .button-fluid-secondary {
+    background: linear-gradient(135deg, var(--color-secondary-start), var(--color-secondary-end));
+  }
+
+  .button-fluid-secondary:hover {
+    box-shadow: 0 12px 24px rgba(8, 145, 178, 0.3);
+  }
+
+  /* 强调按钮 */
+  .button-fluid-accent {
+    background: linear-gradient(135deg, var(--color-accent-start), var(--color-accent-end));
+  }
+
+  .button-fluid-accent:hover {
+    box-shadow: 0 12px 24px rgba(245, 158, 11, 0.3);
+  }
+}
+
+/* ============ 流动输入框 ============ */
+@layer components {
+  .input-fluid {
+    padding: 14px 20px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: all 0.3s var(--ease-smooth);
+  }
+
+  .input-fluid:focus {
+    background: white;
+    border-color: var(--color-primary-end);
+    box-shadow:
+      0 0 0 4px rgba(91, 33, 182, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+
+  .input-fluid::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  /* Textarea */
+  .textarea-fluid {
+    padding: 14px 20px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
+    outline: none;
+    resize: vertical;
+    min-height: 120px;
+    transition: all 0.3s var(--ease-smooth);
+  }
+
+  .textarea-fluid:focus {
+    background: white;
+    border-color: var(--color-primary-end);
+    box-shadow:
+      0 0 0 4px rgba(91, 33, 182, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+  }
+}
+
+/* ============ 非对称网格 ============ */
+@layer components {
+  .grid-fluid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-auto-flow: dense;
+    gap: var(--spacing-md);
+  }
+
+  .grid-fluid > *:nth-child(3n+1) {
+    transform: rotate(-0.5deg);
+  }
+
+  .grid-fluid > *:nth-child(3n+2) {
+    transform: rotate(0.5deg);
+  }
+
+  .grid-fluid > *:nth-child(3n+3) {
+    transform: rotate(-0.3deg);
+  }
+
+  .grid-fluid > *:hover {
+    transform: rotate(0deg) scale(1.02);
+    z-index: 10;
+  }
+}
+
+/* ============ 发光效果 ============ */
+@layer utilities {
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(91, 33, 182, 0.4);
+  }
+
+  .glow-secondary {
+    box-shadow: 0 0 20px rgba(8, 145, 178, 0.4);
+  }
+
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+  }
+
+  .glow-success {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+
+  .glow-error {
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  }
+}
+
+/* ============ 响应式工具 ============ */
+@layer utilities {
+  .container-fluid {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+
+  @media (min-width: 768px) {
+    .container-fluid {
+      padding: var(--spacing-2xl) var(--spacing-xl);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container-fluid {
+      padding: 80px var(--spacing-2xl);
+    }
+  }
+}
+
+/* ============ 加载状态 ============ */
+@layer components {
+  .skeleton-fluid {
+    background: linear-gradient(
+      90deg,
+      rgba(241, 245, 249, 0.8) 0%,
+      rgba(226, 232, 240, 0.8) 50%,
+      rgba(241, 245, 249, 0.8) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    border-radius: var(--radius-md);
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+}
+
+/* ============ 滚动条样式 ============ */
+@layer base {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-subtle);
+    border-radius: var(--radius-full);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
+    border-radius: var(--radius-full);
+    transition: background 0.3s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--color-primary-mid), var(--color-primary-end));
+  }
+}

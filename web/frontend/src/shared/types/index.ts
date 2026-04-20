@@ -86,6 +86,7 @@ export interface SlackReplyVariant {
   version: string;
   english: string;
   chinese?: string;
+  style?: string;
 }
 
 export interface ProcessResult {

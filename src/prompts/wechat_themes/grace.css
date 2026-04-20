@@ -1,11 +1,5 @@
 /* 微信公众号排版 - 至臻优雅主题 */
 /* 融合 doocs/md、GordenSun/WX 和现代设计语言的精华 */
-/* 配色：深邃蓝灰 #4A5568 - 优雅专业的商务色调 */
-
-/* 覆盖主题色为深邃蓝灰 */
-:root {
-  --md-primary-color: #4A5568;
-}
 
 /* ==================== 一级标题 - 双色渐变下划线 ==================== */
 h1 {
@@ -284,9 +278,9 @@ strong {
 
 /* ==================== 链接 - 优雅下划线 ==================== */
 a {
-  color: #4A5568;
+  color: #333;
   text-decoration: none;
-  border-bottom: 2px solid color-mix(in srgb, #4A5568 20%, transparent);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.2);
   transition: border-color 0.3s ease, color 0.3s ease;
   padding-bottom: 2px;
   position: relative;
@@ -299,7 +293,7 @@ a::after {
   left: 0;
   width: 0;
   height: 2px;
-  background: #4A5568;
+  background: #333;
   transition: width 0.3s ease;
 }
 

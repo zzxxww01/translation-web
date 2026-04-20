@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./styles/fluid-theme.css";
 
 /* ============ shadcn/ui CSS Variables ============ */
 @layer base {
@@ -59,7 +60,7 @@
 }
 
 /* ============ 全局样式 ============ */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* 注意：字体已在 fluid-theme.css 中定义 */
 
 @layer base {
   * {
@@ -71,7 +72,8 @@
   }
 
   body {
-    @apply h-full m-0 font-sans bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased;
+    @apply h-full m-0 bg-[hsl(var(--background))] text-[hsl(var(--foreground))] antialiased;
+    font-family: var(--font-body);
     font-feature-settings: 'cv11' on, 'ss01' on;
   }
 
