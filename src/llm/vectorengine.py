@@ -13,7 +13,7 @@ import httpx
 from openai import OpenAI
 from openai import APIConnectionError, APIError, APITimeoutError, RateLimitError
 
-from src.config import settings
+from src.settings import settings
 from .base import LLMProvider
 from .config_loader import get_config_loader
 from .errors import LLMConfigurationError, normalize_llm_transport_error
@@ -241,7 +241,7 @@ class VectorEngineProvider(LLMProvider):
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
             raise normalized.error if normalized is not None else e
 
-    def translate(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
+    def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[float] = None) -> str:
         """Translate text (delegates to generate with translation prompt)"""
         context = context or {}
 
@@ -264,7 +264,7 @@ class VectorEngineProvider(LLMProvider):
 
 请直接输出中文译文，不要包含任何解释。"""
 
-        return self.generate(prompt, temperature=0.3)
+        return self.generate(prompt, temperature=0.3, timeout=timeout)
 
     def analyze(self, text: str) -> Dict[str, Any]:
         """Analyze text and extract terminology"""

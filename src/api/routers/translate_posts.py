@@ -7,6 +7,7 @@ import os
 
 from fastapi import APIRouter, Request
 
+from src.config.timeout_config import TimeoutConfig
 from src.prompts import get_prompt_manager
 from ..middleware import BadRequestException
 from ..middleware.rate_limit import limiter
@@ -53,12 +54,10 @@ async def translate_post(request: Request, body: PostTranslateRequest):
             dynamic_sections=glossary_context.strip(),
         )
 
-    timeout_s = int(
-        os.getenv("POST_TRANSLATE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "60"))
-    )
+    timeout_s = TimeoutConfig.get_timeout("post")
     try:
         translation = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, model=body.model),
+            asyncio.to_thread(generate_with_fallback, prompt, task_type="post", timeout=timeout_s, model=body.model),
             timeout=timeout_s,
         )
         return PostTranslateResponse(translation=translation.strip())
@@ -93,12 +92,10 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
         instruction=resolved_instruction,
     )
 
-    timeout_s = int(
-        os.getenv("POST_OPTIMIZE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "60"))
-    )
+    timeout_s = TimeoutConfig.get_timeout("post_optimize")
     try:
         optimized = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, model=body.model),
+            asyncio.to_thread(generate_with_fallback, prompt, task_type="post", timeout=timeout_s, model=body.model),
             timeout=timeout_s,
         )
         return PostOptimizeResponse(optimized_translation=optimized.strip())
@@ -125,10 +122,10 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
         instruction=normalized_instruction,
     )
 
-    timeout_s = int(os.getenv("POST_TITLE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "30")))
+    timeout_s = TimeoutConfig.get_timeout("title_generate")
     try:
         result = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, model=body.model),
+            asyncio.to_thread(generate_with_fallback, prompt, task_type="title", timeout=timeout_s, model=body.model),
             timeout=timeout_s,
         )
         data = parse_llm_json_response(result)

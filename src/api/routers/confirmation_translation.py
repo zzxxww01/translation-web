@@ -11,6 +11,7 @@ import uuid
 from fastapi import APIRouter
 
 from src.agents.translation import TranslationAgent, TranslationContext
+from src.config.timeout_config import TimeoutConfig
 from src.core.format_tokens import apply_translation_payload
 from src.core.glossary_prompt import build_term_usage_from_project
 from src.core.models import ArticleAnalysis
@@ -214,7 +215,8 @@ async def retranslate_paragraph(
         if latest is not None:
             old_translation = latest.text
 
-        agent = TranslationAgent(llm)
+        timeout_s = TimeoutConfig.get_timeout("longform")
+        agent = TranslationAgent(llm, timeout=timeout_s)
         formatted_instruction = build_retranslate_instruction(
             instruction,
             target_paragraph.source,

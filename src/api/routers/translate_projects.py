@@ -35,6 +35,8 @@ from .translate_models import (
 from .translate_utils import validate_path_component
 
 
+from src.config.timeout_config import TimeoutConfig
+
 router = APIRouter()
 
 # 活跃的四步法翻译会话冲突状态 {project_id: {term: Event}}
@@ -135,7 +137,8 @@ async def batch_translate_section(
         )
 
         glossary = gm.load_merged(project_id)
-        agent = TranslationAgent(llm)
+        timeout_s = TimeoutConfig.get_timeout("longform")
+        agent = TranslationAgent(llm, timeout=timeout_s)
         translated_count = source_metadata_result.get("translated", 0)
 
         for index, paragraph in enumerate(section.paragraphs):
@@ -198,7 +201,8 @@ async def translate_full_document(
             )
 
             glossary = gm.load_merged(project_id)
-            agent = TranslationAgent(llm)
+            timeout_s = TimeoutConfig.get_timeout("longform")
+            agent = TranslationAgent(llm, timeout=timeout_s)
             total_paragraphs = sum(len(section.paragraphs) for section in sections)
             processed_count = 0
             error_count = 0

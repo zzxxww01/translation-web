@@ -19,7 +19,7 @@ from threading import Lock, RLock
 from typing import Optional, Dict, Any, List
 from types import ModuleType
 
-from src.config import settings
+from src.settings import settings
 from src.core.longform_context import (
     build_article_challenge_payload,
     build_section_guideline_lines,
@@ -874,20 +874,21 @@ class GeminiProvider(LLMProvider):
 
         raise RuntimeError("Gemini generate failed without an exception.")
 
-    def translate(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
+    def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None) -> str:
         """
         缈昏瘧鏂囨湰
 
         Args:
             text: 瑕佺炕璇戠殑鍘熸枃
             context: 涓婁笅鏂囦俊鎭?
+            timeout: 超时时间（秒）
 
         Returns:
             str: 缈昏瘧缁撴灉
         """
         context_data = dict(context or {})
         prompt = self._build_translation_prompt(text, context_data)
-        return self.generate(prompt, temperature=0.5)
+        return self.generate(prompt, temperature=0.5, timeout=timeout)
 
     def retranslate(
         self,

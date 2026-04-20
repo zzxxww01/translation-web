@@ -12,14 +12,15 @@
 ## 输出要求
 请生成 3 个回复建议，每个建议包含：
 1. type: 回复类型（如：同意请求、婉拒、询问详情、确认收到等）
-2. content: 完整的回复内容（可直接发送）
+2. content_en: 英文回复内容（可直接发送的正式商务英文邮件）
+3. content_zh: 中文翻译（对应的中文版本，供参考理解）
 
 ## 输出格式（严格JSON）
 {{
   "replies": [
-    {{"type": "确认收到", "content": "您好，收到您的邮件..."}},
-    {{"type": "同意请求", "content": "没问题，我可以..."}},
-    {{"type": "询问详情", "content": "关于您提到的..."}}
+    {{"type": "确认收到", "content_en": "Dear [Name],\n\nThank you for your email...", "content_zh": "您好，\n\n感谢您的邮件..."}},
+    {{"type": "同意请求", "content_en": "Dear [Name],\n\nI would be happy to...", "content_zh": "您好，\n\n我很乐意..."}},
+    {{"type": "询问详情", "content_en": "Dear [Name],\n\nRegarding your inquiry...", "content_zh": "您好，\n\n关于您提到的..."}}
   ]
 }}
 

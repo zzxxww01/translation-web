@@ -6,6 +6,7 @@ from typing import List
 from fastapi import APIRouter
 
 from src.agents.translation import TranslationAgent, TranslationContext
+from src.config.timeout_config import TimeoutConfig
 from src.core.glossary_prompt import build_term_usage_from_project
 from src.core.models import ParagraphStatus
 
@@ -93,7 +94,8 @@ def _translate_paragraph_sync(
         sections=sections,
     )
 
-    agent = TranslationAgent(llm)
+    timeout_s = TimeoutConfig.get_timeout("longform")
+    agent = TranslationAgent(llm, timeout=timeout_s)
     instruction = resolve_retranslate_instruction(request.instruction, getattr(request, 'option_id', None))
     if instruction:
         formatted_instruction = build_retranslate_instruction(
@@ -144,7 +146,8 @@ def _direct_translate_paragraph_sync(
     if paragraph is None:
         raise NotFoundException(detail="Paragraph not found")
 
-    agent = TranslationAgent(llm)
+    timeout_s = TimeoutConfig.get_timeout("longform")
+    agent = TranslationAgent(llm, timeout=timeout_s)
     payload = agent.translate_paragraph(
         paragraph,
         TranslationContext(),
@@ -320,7 +323,8 @@ def _batch_translate_paragraphs_sync(
         raise BadRequestException(detail="段落 ID 列表不能为空")
 
     glossary = gm.load_merged(project_id)
-    agent = TranslationAgent(llm)
+    timeout_s = TimeoutConfig.get_timeout("longform")
+    agent = TranslationAgent(llm, timeout=timeout_s)
     paragraph_map = {p.id: (i, p) for i, p in enumerate(section.paragraphs)}
 
     translations = []

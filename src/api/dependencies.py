@@ -5,7 +5,7 @@ from typing import Annotated
 
 from fastapi import Depends
 
-from src.config import settings
+from src.settings import settings
 from src.core.glossary import GlossaryManager
 from src.core.project import ProjectManager
 from src.llm.base import LLMProvider

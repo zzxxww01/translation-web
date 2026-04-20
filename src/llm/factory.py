@@ -12,7 +12,7 @@ from __future__ import annotations
 import logging
 from typing import Callable, Optional, Tuple
 
-from src.config import settings
+from src.settings import settings
 
 from .base import LLMProvider
 from .gemini import create_gemini_provider

@@ -44,7 +44,7 @@ async def translate_text(request: Request, body: TranslateRequest):
         prompt = prompt_manager.get("tools_translate_cn2en", text=body.text)
 
     try:
-        translation = generate_with_fallback(prompt).strip()
+        translation = generate_with_fallback(prompt, task_type="post").strip()
         for prefix in ["翻译结果", "译文:", "Translation:", "翻译:", "译文：", "Translation："]:
             if translation.startswith(prefix):
                 translation = translation[len(prefix):].strip()

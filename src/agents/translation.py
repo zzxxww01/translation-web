@@ -70,9 +70,10 @@ class ContextWindow:
 class TranslationAgent:
     """Translate working segments while preserving hidden formatting tokens."""
 
-    def __init__(self, llm_provider: LLMProvider, context_window_size: int = 5):
+    def __init__(self, llm_provider: LLMProvider, context_window_size: int = 5, timeout: Optional[int] = None):
         self.llm = llm_provider
         self.context_window = ContextWindow(window_size=context_window_size)
+        self.timeout = timeout
 
     def translate_paragraph(
         self,
@@ -88,7 +89,7 @@ class TranslationAgent:
         llm_context = self._build_llm_context(context, paragraph)
 
         prompt_text = translation_input.tokenized_text or translation_input.text
-        translated = self.llm.translate(prompt_text, llm_context)
+        translated = self.llm.translate(prompt_text, llm_context, timeout=self.timeout)
         payload = build_translation_payload(
             paragraph,
             translated,

@@ -67,6 +67,15 @@ class PostOptimizeRequest(BaseModel):
     conversation_history: Optional[list[dict]] = Field(None, max_length=10)
     model: Optional[str] = None
 
+    @field_validator('original_text', 'current_translation')
+    @classmethod
+    def validate_text_fields(cls, v: str) -> str:
+        if not v.strip():
+            raise ValueError("Text cannot be empty")
+        if len(v.strip()) < 10:
+            raise ValueError("Text too short (minimum 10 characters)")
+        return v
+
     @field_validator('conversation_history')
     @classmethod
     def validate_history(cls, v: Optional[list[dict]]) -> Optional[list[dict]]:

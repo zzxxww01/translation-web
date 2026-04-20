@@ -9,6 +9,7 @@ LLM Provider 工厂适配器
 
 import logging
 import uuid
+import time
 from typing import Optional, Any, Dict
 from functools import lru_cache
 
@@ -21,6 +22,19 @@ from .network_policy import build_network_policy
 from .network_policy import RuntimeNetworkPolicy
 
 logger = logging.getLogger(__name__)
+
+# 故障转移统计
+_fallback_stats = {
+    "total_requests": 0,
+    "fallback_triggered": 0,
+    "total_attempts": 0,
+    "failed_requests": 0,
+}
+
+
+def get_fallback_stats() -> dict:
+    """获取故障转移统计信息"""
+    return _fallback_stats.copy()
 
 
 def _build_runtime_network_policy(
@@ -168,8 +182,14 @@ class ProviderAdapter:
         timeout = provider_kwargs.pop("timeout", None)
         request_id = str(provider_kwargs.pop("request_id", "") or uuid.uuid4().hex[:8])
 
+        # 更新统计
+        _fallback_stats["total_requests"] += 1
+        start_time = time.time()
+
         for idx, attempt in enumerate(self.attempt_plan, 1):
             try:
+                _fallback_stats["total_attempts"] += 1
+
                 logger.info(
                     f"[ProviderAdapter] request_id={request_id} "
                     f"Attempt {idx}/{len(self.attempt_plan)}: "
@@ -188,10 +208,19 @@ class ProviderAdapter:
                     **provider_kwargs,
                 )
 
-                logger.info(
-                    f"[ProviderAdapter] request_id={request_id} "
-                    f"Success on attempt {idx}/{len(self.attempt_plan)}"
-                )
+                duration = time.time() - start_time
+                if idx > 1:
+                    _fallback_stats["fallback_triggered"] += 1
+                    logger.warning(
+                        f"[ProviderAdapter] request_id={request_id} "
+                        f"Fallback succeeded on attempt {idx}/{len(self.attempt_plan)} "
+                        f"after {duration:.2f}s"
+                    )
+                else:
+                    logger.info(
+                        f"[ProviderAdapter] request_id={request_id} "
+                        f"Success on first attempt in {duration:.2f}s"
+                    )
                 return result
 
             except Exception as e:
@@ -206,9 +235,12 @@ class ProviderAdapter:
                     continue
                 else:
                     # 所有尝试都失败了
+                    _fallback_stats["failed_requests"] += 1
+                    duration = time.time() - start_time
                     logger.error(
                         f"[ProviderAdapter] request_id={request_id} "
-                        f"All {len(self.attempt_plan)} attempts failed for model {self.model_alias}"
+                        f"All {len(self.attempt_plan)} attempts failed for model {self.model_alias} "
+                        f"after {duration:.2f}s. Stats: {_fallback_stats}"
                     )
                     raise last_error
 

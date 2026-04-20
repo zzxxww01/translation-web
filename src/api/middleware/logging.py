@@ -15,6 +15,9 @@ from starlette.types import ASGIApp
 
 logger = logging.getLogger(__name__)
 
+# 慢请求阈值（秒）
+SLOW_REQUEST_THRESHOLD = 5.0
+
 
 class LoggingMiddleware(BaseHTTPMiddleware):
     """
@@ -48,6 +51,13 @@ class LoggingMiddleware(BaseHTTPMiddleware):
 
             # 计算处理时间
             process_time = time.time() - start_time
+
+            # 检查慢请求
+            if process_time > SLOW_REQUEST_THRESHOLD:
+                logger.warning(
+                    f"SLOW REQUEST: {request.method} {request.url.path} "
+                    f"took {process_time:.3f}s (threshold: {SLOW_REQUEST_THRESHOLD}s)"
+                )
 
             # 记录响应信息
             logger.info(

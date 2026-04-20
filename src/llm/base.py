@@ -18,7 +18,7 @@ class LLMProvider(ABC):
         self.prompt_manager = get_prompt_manager()
 
     @abstractmethod
-    def translate(self, text: str, context: Optional[Dict[str, Any]] = None) -> str:
+    def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[float] = None) -> str:
         """
         翻译文本
 
@@ -29,6 +29,7 @@ class LLMProvider(ABC):
                 - style_guide: 风格指南
                 - previous_paragraphs: 前文已确认译文
                 - next_preview: 后文预览
+            timeout: 超时时间（秒）
 
         Returns:
             str: 翻译结果

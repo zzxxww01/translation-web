@@ -1,12 +1,23 @@
 """Translation Agent API entrypoint."""
 
 import os
+import logging
 from dotenv import load_dotenv
 
 
 # Keep the runtime env aligned with `.env`, including proxy variables.
 # Gemini transport selection depends on whether the process sees a proxy.
 load_dotenv()
+
+# Validate critical environment variables at startup
+logger = logging.getLogger(__name__)
+REQUIRED_ENV_VARS = ["VECTORENGINE_API_KEY", "VECTORENGINE_BASE_URL"]
+missing_vars = [var for var in REQUIRED_ENV_VARS if not os.getenv(var)]
+
+if missing_vars:
+    error_msg = f"Missing required environment variables: {', '.join(missing_vars)}"
+    logger.error(error_msg)
+    raise RuntimeError(error_msg)
 
 import subprocess
 from pathlib import Path

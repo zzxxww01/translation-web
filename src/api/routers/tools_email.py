@@ -72,15 +72,27 @@ async def generate_email_reply(request: Request, body: EmailReplyRequest):
     )
 
     try:
-        response_text = generate_with_fallback(prompt)
+        response_text = generate_with_fallback(prompt, task_type="post")
         data = parse_llm_json_response(response_text)
 
         replies = data.get("replies", [])
         if not replies:
             replies = [
-                {"type": "确认收到", "content": "您好，已收到您的邮件，我会尽快处理。如有问题会再与您联系。"},
-                {"type": "简单回复", "content": "收到，谢谢。"},
-                {"type": "需要时间", "content": "收到您的邮件。我需要一些时间查看相关信息，稍后给您回复。"},
+                {
+                    "type": "确认收到",
+                    "content_en": "Dear Sender,\n\nThank you for your email. I have received it and will review the details shortly. I will get back to you if I have any questions.\n\nBest regards",
+                    "content_zh": "您好，\n\n感谢您的邮件。我已收到并会尽快查看详情。如有问题会再与您联系。\n\n此致敬礼"
+                },
+                {
+                    "type": "简单回复",
+                    "content_en": "Dear Sender,\n\nReceived, thank you.\n\nBest regards",
+                    "content_zh": "您好，\n\n收到，谢谢。\n\n此致敬礼"
+                },
+                {
+                    "type": "需要时间",
+                    "content_en": "Dear Sender,\n\nThank you for reaching out. I need some time to review the relevant information and will get back to you shortly.\n\nBest regards",
+                    "content_zh": "您好，\n\n感谢您的来信。我需要一些时间查看相关信息，稍后给您回复。\n\n此致敬礼"
+                },
             ]
 
         return EmailReplyResponse(replies=replies)
