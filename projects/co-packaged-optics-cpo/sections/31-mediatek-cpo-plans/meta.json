@@ -1,0 +1,39 @@
+{
+  "section_id": "31-mediatek-cpo-plans",
+  "title": "MediaTek CPO plans",
+  "title_translation": null,
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "MediaTek, as a custom ASIC design house, is working to integrate CPO capabilities into its design platform. They aim to offer PIC/EIC designs that can work seamless with their custom accelerators. They think that at 200G-per-lane generation, NPC (Near-Packaged Copper) can be an effective solution with fiber pitches >900 µm; as data rates rise to the 200-300G range, CPC with denser pitches >400 µm may become preferrable. However, once speeds reach 400G-per-lane or higher, moving toward CPO architecture – with even denser fiber pitches at ~130 µm and more compact interconnect IPs – will likely be necessary.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [],
+      "parent_block_id": "b0425",
+      "parent_block_index": 425,
+      "parent_block_type": "p",
+      "parent_block_markdown": "MediaTek, as a custom ASIC design house, is working to integrate CPO capabilities into its design platform. They aim to offer PIC/EIC designs that can work seamless with their custom accelerators. They think that at 200G-per-lane generation, NPC (Near-Packaged Copper) can be an effective solution with fiber pitches >900 µm; as data rates rise to the 200-300G range, CPC with denser pitches >400 µm may become preferrable. However, once speeds reach 400G-per-lane or higher, moving toward CPO architecture – with even denser fiber pitches at ~130 µm and more compact interconnect IPs – will likely be necessary.",
+      "parent_block_plain_text": "MediaTek, as a custom ASIC design house, is working to integrate CPO capabilities into its design platform. They aim to offer PIC/EIC designs that can work seamless with their custom accelerators. They think that at 200G-per-lane generation, NPC (Near-Packaged Copper) can be an effective solution with fiber pitches >900 µm; as data rates rise to the 200-300G range, CPC with denser pitches >400 µm may become preferrable. However, once speeds reach 400G-per-lane or higher, moving toward CPO architecture – with even denser fiber pitches at ~130 µm and more compact interconnect IPs – will likely be necessary.",
+      "parent_source_html": null,
+      "parent_inline_elements": [],
+      "segment_start": 0,
+      "segment_end": 612,
+      "expected_tokens": [],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

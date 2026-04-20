@@ -1,0 +1,23 @@
+### Scale-out and Scale-up CPO, CPO TCO and Power Budgets, DSP Transceivers vs LPO vs NPO vs CPO, TSMC COUPE, MZM vs MRM vs EAM Modulator Deep Dive, CPO Focused companies and CPO Supply Chain
+
+By [Dylan Patel](https://substack.com/@semianalysis), [Daniel Nishball](https://substack.com/@danielnishball730869), [Myron Xie](https://substack.com/@myronxie), and 3 others
+
+Jan 01, 2026 · Paid
+
+Co-Packaged Optics (CPO) has long promised to transform datacenter connectivity, but it has taken a long time for the technology to come to market, with tangible deployment-ready products only arriving in 2025. In the meantime, pluggable transceivers have kept pace with networking requirements and remain the default path thanks to their relative cost-effectiveness, familiarity in deployment, and standards-based interoperability.
+
+However the heavy networking demands that come with AI workloads mean that this time is different. The AI networking bandwidth roadmap is such that interconnect speed, range, density and reliability requirements, will soon outpace what transceivers can provide. CPO will provide some benefit and bring more options to scale-out networking, but it will be central to scale-up networking. **CPO will be the main driver of bandwidth increases in scale-up networking for the latter part of this decade and beyond.**
+
+Today’s copper-based scale-up solutions, such as NVLink, provide tremendous bandwidth of 7.2 Tbit/s per GPU – soon to be 14.4 Tbit/s per GPU in the Rubin generation, yet copper-based links are limited in range to two meters at most, meaning the scale-up domain world size is limited to one or two racks at most. It is also increasingly difficult to scale bandwidth over copper. In Rubin, Nvidia will deliver another doubling of bandwidth per copper lane through bi-directional SerDes, but doubling bandwidth on copper by developing ever-faster SerDes is a highly challenging vector of scaling that is a slow grind. **CPO can deliver the same or better bandwidth density and can provide additional vectors for scaling bandwidth, all while enabling larger scale-up domains.**
+
+A starting point for understanding the impetus for CPO is to consider the many inefficiencies and trade-offs when using a transceiver for optical communication. Transceivers can be used to achieve greater link range, but the cage on the front panel of a networking switch or compute tray that transceivers plug into is typically situated 15-30cm from an XPU or switch ASIC. This means that signals must first be transmitted electrically using an LR SerDes over that 15-30cm distance, with the electrical signal recovered and conditioned by a Digital Signal Processor (DSP) within the transceiver before being converted into an optical signal. With CPO, optical engines are instead placed next to XPUs or Switch ASICs, meaning that the DSP can be eliminated and that lower power SerDes can be used to move data from the XPU to the Optical Engine. This can reduce energy required to transmit data by more than 50% when compared to DSP Transceivers - with many aspiring to reduce energy requirements per bit by as much as 80%.
+
+![](./Co_Packaged_Optics_(CPO)_–_Scaling_with_Light_for_the_Next_Wave_of_Interconnect_images/img_001.png)
+
+Source: SemiAnalysis
+
+While scale-out CPO solutions like Nvidia and Broadcom’s are garnering more attention and are being closely looked at by end customers, major Hyperscalers are already starting to plan out their scale-up CPO strategy and are committing to suppliers. For instance, [Celestial AI is estimating that they could generate a $1B revenue run rate by the end of calendar year 2028](https://d1io3yog0oux5.cloudfront.net/_a2ff1b1766821fdbdf60a17efbf050dd/marvell/files/pages/marvell/db/3831/description/2025-12_02-Marvell-to-Acquire-Celestial-AI-vF2.pdf) - we believe this will primarily be driven by a CPO scale-up solution shipping with Amazon’s Trainium 4.
+
+CPO focused companies are now well beyond papers, pilot projects and demonstrations and and are making key product decisions such as optical port architecture to solve for high volume manufacturing. CPO for scale-up is now **not a matter of if and why, but when and how** – how to bring these systems to volume production, and when key component supply chain companies like laser manufacturers can ramp up sufficient production.
+
+This article will present an in-depth discussion on the benefits and challenges of CPO, how CPO architectures work, current and future CPO products, CPO focused companies, CPO-related components and their respective supply chains. This piece is intended to serve as a guide to practitioners, industry analysts, investors and everyone else who is interested in interconnect technology.

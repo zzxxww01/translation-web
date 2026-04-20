@@ -18,7 +18,7 @@ export function EmailReplyGenerator() {
   const [subject, setSubject] = useState('');
   const [content, setContent] = useState('');
   const [style, setStyle] = useState<EmailStyle>(EmailStyle.PROFESSIONAL);
-  const [replies, setReplies] = useState<Array<{ type: string; content: string }>>([]);
+  const [replies, setReplies] = useState<Array<{ type: string; content_en: string; content_zh: string }>>([]);
   const [selectedIdx, setSelectedIdx] = useState(0);
 
   const handleGenerate = async () => {
@@ -35,18 +35,20 @@ export function EmailReplyGenerator() {
 
   const handleCopy = async () => {
     if (replies[selectedIdx]) {
-      const ok = await copyToClipboard(replies[selectedIdx].content);
-      if (ok) toast.success('已复制到剪贴板');
+      const ok = await copyToClipboard(replies[selectedIdx].content_en);
+      if (ok) toast.success('已复制英文回复到剪贴板');
     }
   };
 
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-2 gap-4">
+    <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', width: '100%' }}>
+      {/* Left: Input */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         <div className="space-y-1.5">
           <Label>发件人（可选）</Label>
           <Input placeholder="例如: John Smith" value={sender} onChange={(e) => setSender(e.target.value)} />
         </div>
+
         <div className="space-y-1.5">
           <Label>回复风格</Label>
           <Select value={style} onValueChange={(v) => setStyle(v as EmailStyle)}>
@@ -60,66 +62,75 @@ export function EmailReplyGenerator() {
             </SelectContent>
           </Select>
         </div>
-      </div>
 
-      <div className="space-y-1.5">
-        <Label>邮件主题（可选）</Label>
-        <Input placeholder="邮件主题..." value={subject} onChange={(e) => setSubject(e.target.value)} />
-      </div>
+        <div className="space-y-1.5">
+          <Label>邮件主题（可选）</Label>
+          <Input placeholder="邮件主题..." value={subject} onChange={(e) => setSubject(e.target.value)} />
+        </div>
 
-      <div className="space-y-1.5">
-        <Label>邮件内容</Label>
-        <Textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          placeholder="粘贴收到的邮件内容..."
-          className="min-h-[300px] resize-y"
-        />
-      </div>
+        <div className="space-y-1.5" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
+          <Label>邮件内容</Label>
+          <Textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            placeholder="粘贴收到的邮件内容..."
+            className="resize-y"
+            style={{ flex: 1, minHeight: '200px', maxHeight: '300px' }}
+          />
+        </div>
 
-      <div className="flex gap-2">
-        <Button
-          variant="outline"
-          onClick={() => { setSender(''); setSubject(''); setContent(''); setReplies([]); }}
-        >
-          <Trash2 className="h-4 w-4" />
-          清空
-        </Button>
-        <Button
-          onClick={handleGenerate}
-          disabled={!content.trim() || emailMutation.isPending}
-        >
-          <Send className="h-4 w-4" />
-          {emailMutation.isPending ? '生成中...' : '生成回复'}
-        </Button>
-      </div>
-
-      {replies.length > 0 && (
-        <div className="space-y-3">
-          <h4 className="text-sm font-semibold">回复建议</h4>
-          <div className="space-y-2">
-            {replies.map((reply, i) => (
-              <Card
-                key={i}
-                onClick={() => setSelectedIdx(i)}
-                className={cn(
-                  'cursor-pointer transition-colors',
-                  selectedIdx === i && 'border-primary ring-1 ring-primary'
-                )}
-              >
-                <CardContent className="p-4">
-                  <div className="mb-1 text-xs font-medium text-muted-foreground">{reply.type}</div>
-                  <div className="text-sm whitespace-pre-wrap">{reply.content}</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          <Button variant="outline" onClick={handleCopy}>
-            <Copy className="h-4 w-4" />
-            复制选中回复
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            onClick={() => { setSender(''); setSubject(''); setContent(''); setReplies([]); }}
+          >
+            <Trash2 className="h-4 w-4" />
+            清空
+          </Button>
+          <Button
+            onClick={handleGenerate}
+            disabled={!content.trim() || emailMutation.isPending}
+          >
+            <Send className="h-4 w-4" />
+            {emailMutation.isPending ? '生成中...' : '生成回复'}
           </Button>
         </div>
-      )}
+      </div>
+
+      {/* Right: Replies */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        {replies.length > 0 ? (
+          <>
+            <h4 className="text-sm font-semibold">回复建议</h4>
+            <div className="space-y-2" style={{ flex: 1, overflowY: 'auto' }}>
+              {replies.map((reply, i) => (
+                <Card
+                  key={i}
+                  onClick={() => setSelectedIdx(i)}
+                  className={cn(
+                    'cursor-pointer transition-colors',
+                    selectedIdx === i && 'border-primary ring-1 ring-primary'
+                  )}
+                >
+                  <CardContent className="p-4">
+                    <div className="mb-2 text-xs font-medium text-muted-foreground">{reply.type}</div>
+                    <div className="mb-3 text-sm whitespace-pre-wrap border-l-2 border-primary pl-3">{reply.content_en}</div>
+                    <div className="text-xs text-muted-foreground whitespace-pre-wrap border-l-2 border-muted pl-3">{reply.content_zh}</div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+            <Button variant="outline" onClick={handleCopy}>
+              <Copy className="h-4 w-4" />
+              复制选中回复
+            </Button>
+          </>
+        ) : (
+          <div className="flex items-center justify-center h-full text-sm text-muted-foreground">
+            生成的回复将在这里显示
+          </div>
+        )}
+      </div>
     </div>
   );
 }

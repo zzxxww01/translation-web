@@ -174,7 +174,8 @@ export interface EmailReplyDto {
 
 export interface EmailReply {
   type: string;
-  content: string;
+  content_en: string;
+  content_zh: string;
 }
 
 export interface EmailReplyResult {

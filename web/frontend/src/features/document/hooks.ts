@@ -316,6 +316,32 @@ export function useExportProject() {
 }
 
 /**
+ * 删除项目
+ */
+export function useDeleteProject() {
+  const queryClient = useQueryClient();
+  const { setCurrentProject } = useDocumentStore();
+  const { handleError } = useErrorHandler();
+
+  return useMutation({
+    mutationFn: (projectId: string) => documentApi.deleteProject(projectId),
+    onSuccess: (_data, projectId) => {
+      // 如果删除的是当前项目，清空当前项目
+      const currentProject = useDocumentStore.getState().currentProject;
+      if (currentProject?.id === projectId) {
+        setCurrentProject(null);
+      }
+      // 刷新项目列表
+      queryClient.invalidateQueries({ queryKey: ['projects'] });
+      toast.success('项目已删除');
+    },
+    onError: error => {
+      handleError(error, '删除项目失败');
+    },
+  });
+}
+
+/**
  * 全文一键翻译 (SSE 流式，使用单例服务保持跨tab状态)
  * 支持选择翻译方法：普通翻译或四步法翻译
  */

@@ -1,0 +1,11 @@
+As the name suggests, “Co-**packaged** optics”, is fundamentally a packaging and assembly challenge.
+
+An optical engine has both optical and electrical components. The photodetector and modulators are optical components contained in the contained in the “PIC” (photonic integrated circuit). The Driver and Transimpedance Amplifier are electrical circuitry contained in the “EIC” (electric integrated circuit). The PIC and EIC need to be integrated for the OE to function. Multiple packaging methods exist to accomplish this PIC–EIC integration.
+
+![](./Co_Packaged_Optics_(CPO)_–_Scaling_with_Light_for_the_Next_Wave_of_Interconnect_images/img_031.png)
+
+Source: ID TechEx
+
+Optical engines can be monolithic by having both the PIC and EIC manufactured on the same silicon wafer. Monolithic integration is the most elegant approach in terms of parasitics, latency, and power. This is the approach taken by Ayar Labs for their second-gen TeraPHY chiplet (though their next-gen chiplet does pivot to TSMC COUPE). GlobalFoundries, Tower and Advanced Micro Foundry are foundries that can offer a monolithic CMOS and SiPho process. However, monolithic processes stop at geometries below around 35nm as photonics processes cannot scale like traditional CMOS. This limits the EIC’s capabilities, especially with the higher lane speeds expected in CPO systems. Despite the inherent simplicity and elegance, this makes monolithic integration a dealbreaker for scaling. This is why Ayar Labs is also moving their roadmap to heterogeneously integrated OEs to allow for further scaling.
+
+Heterogenous integration is becoming the mainstream approach which involves fabricating the PIC using a SiPho process and integrating that with an EIC from a CMOS wafer through advanced packaging. Various packaging solutions exist, with more advanced packaging solutions delivering higher performance. Among them, 3D integration offers the best bandwidth and energy efficiency. A big issue when it comes to EIC to PIC communication is parasitics which erodes performance. Reducing trace length drastically reduces parasitics and therefore coupling efficiency: 3D integration is the only way to reach the performance goals of CPO from a bandwidth and power perspective.

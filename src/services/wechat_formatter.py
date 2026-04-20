@@ -57,10 +57,22 @@ def _sanitize_project_id(project_id: str) -> str:
     清理 project_id，防止路径遍历攻击
 
     只允许字母、数字、下划线、连字符
-    限制长度为 64 字符
+    限制长度为 200 字符（内部使用，放宽限制）
     """
+    if not project_id or not project_id.strip():
+        return "default_project"
+
     sanitized = re.sub(r'[^a-zA-Z0-9_-]', '_', project_id)
-    return sanitized[:64]
+
+    # 验证清理后的值不为空或全下划线
+    if not sanitized.strip('_'):
+        return "default_project"
+
+    # 限制长度
+    if len(sanitized) > 200:
+        sanitized = sanitized[:200]
+
+    return sanitized
 
 
 def _is_safe_url(url: str) -> bool:
@@ -126,20 +138,26 @@ def _is_safe_ip(ip_str: str) -> bool:
 class WechatFormatter:
     """微信公众号格式转换器"""
 
-    # 类级线程池，所有实例共享
-    from concurrent.futures import ThreadPoolExecutor
-    _image_executor = ThreadPoolExecutor(max_workers=5)
-
     def __init__(self, project_id: Optional[str] = None):
+        from concurrent.futures import ThreadPoolExecutor
+
         raw_id = project_id or "wechat_temp"
         self.project_id = _sanitize_project_id(raw_id)  # 清理后再使用
         self.image_processor = ImageProcessor(self.project_id, base_dir="projects")
+
+        # 实例级线程池，避免多用户并发时的竞态条件
+        self._image_executor = ThreadPoolExecutor(max_workers=5)
 
         if MarkdownIt is None:
             raise ImportError("markdown-it-py is required. Install: pip install markdown-it-py")
 
         self.md = MarkdownIt("commonmark", {"html": True})
         self.md.enable(["table", "strikethrough"])
+
+    def __del__(self):
+        """清理线程池资源"""
+        if hasattr(self, '_image_executor'):
+            self._image_executor.shutdown(wait=False)
 
     def format(
         self,

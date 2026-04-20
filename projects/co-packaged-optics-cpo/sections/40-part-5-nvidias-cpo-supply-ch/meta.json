@@ -1,0 +1,61 @@
+{
+  "section_id": "40-part-5-nvidias-cpo-supply-ch",
+  "title": "Part 5: Nvidia’s CPO Supply Chain",
+  "title_translation": null,
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "We have discussed the role key components play in CPO systems, in this section we will discuss specific companies in the supply chain and component BOM cost with a focus on Nvidia’s suppliers, naming key suppliers for Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing",
+          "start": 218,
+          "end": 348,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0566",
+      "parent_block_index": 566,
+      "parent_block_type": "p",
+      "parent_block_markdown": "We have discussed the role key components play in CPO systems, in this section we will discuss specific companies in the supply chain and component BOM cost with a focus on Nvidia’s suppliers, naming key suppliers for **Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing**.",
+      "parent_block_plain_text": "We have discussed the role key components play in CPO systems, in this section we will discuss specific companies in the supply chain and component BOM cost with a focus on Nvidia’s suppliers, naming key suppliers for Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing",
+          "start": 218,
+          "end": 348,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 349,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

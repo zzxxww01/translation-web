@@ -1,0 +1,43 @@
+{
+  "id": "co-packaged-optics-cpo",
+  "title": "Co-Packaged Optics (CPO) Book – Scaling with Light for the Next Wave of Interconnect",
+  "title_translation": null,
+  "source_file": "source.html",
+  "created_at": "2026-04-21T00:08:26.157915",
+  "updated_at": "2026-04-21T00:08:26.160104",
+  "status": "created",
+  "progress": {
+    "total_sections": 48,
+    "total_paragraphs": 595,
+    "approved": 102,
+    "reviewing": 0,
+    "pending": 493
+  },
+  "config": {
+    "ai_model": "pro",
+    "model_type": "pro",
+    "translation_style": "natural_professional",
+    "segment_level": "h2",
+    "max_paragraph_length": 800,
+    "merge_short_paragraphs": true
+  },
+  "metadata": {
+    "authors": [
+      "Dylan Patel",
+      "Daniel Nishball",
+      "Myron Xie"
+    ],
+    "byline_markdown": "[Dylan Patel](https://substack.com/@semianalysis), [Daniel Nishball](https://substack.com/@danielnishball730869), [Myron Xie](https://substack.com/@myronxie), and 3 others",
+    "access_text": "Paid",
+    "published_date": "Jan 01, 2026",
+    "subtitle": "Scale-out and Scale-up CPO, CPO TCO and Power Budgets, DSP Transceivers vs LPO vs NPO vs CPO, TSMC COUPE, MZM vs MRM vs EAM Modulator Deep Dive, CPO Focused companies and CPO Supply Chain",
+    "publication": null,
+    "original_url": "https://newsletter.semianalysis.com/p/co-packaged-optics-cpo-book-scaling",
+    "cover_image": "https://substackcdn.com/image/fetch/$s_!oVCL!,w_1200,h_675,c_fill,f_jpg,q_auto:good,fl_progressive:steep,g_auto/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F24267f16-a83c-4aa6-9730-b9a86d526508_1536x1024.png",
+    "raw_metadata_html": null
+  },
+  "sections": [],
+  "versions": [],
+  "confirmation_map": {},
+  "workflow_mode": "paragraph_confirmation"
+}

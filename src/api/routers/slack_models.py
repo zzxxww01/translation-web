@@ -7,7 +7,7 @@ from pydantic import BaseModel, Field
 
 class ConversationMessage(BaseModel):
     role: Literal["them", "me"]
-    content: str
+    content: str = Field(..., max_length=50000)
 
 
 class SlackReplyVariant(BaseModel):
@@ -18,9 +18,9 @@ class SlackReplyVariant(BaseModel):
 
 
 class SlackProcessRequest(BaseModel):
-    message: str
-    custom_prompt: Optional[str] = None
-    conversation_history: list[ConversationMessage] = Field(default_factory=list)
+    message: str = Field(..., max_length=50000)
+    custom_prompt: Optional[str] = Field(None, max_length=10000)
+    conversation_history: list[ConversationMessage] = Field(default_factory=list, max_length=100)
 
 
 class SlackProcessResponse(BaseModel):
@@ -29,7 +29,7 @@ class SlackProcessResponse(BaseModel):
 
 
 class SlackSyncRequest(BaseModel):
-    chinese_reply: str
+    chinese_reply: str = Field(..., max_length=50000)
 
 
 class SlackSyncResponse(BaseModel):
@@ -37,8 +37,8 @@ class SlackSyncResponse(BaseModel):
 
 
 class SlackComposeRequest(BaseModel):
-    content: str
-    conversation_history: list[ConversationMessage] = Field(default_factory=list)
+    content: str = Field(..., max_length=50000)
+    conversation_history: list[ConversationMessage] = Field(default_factory=list, max_length=100)
 
 
 class SlackComposeResponse(BaseModel):
@@ -48,9 +48,9 @@ class SlackComposeResponse(BaseModel):
 class SlackRefineRequest(BaseModel):
     """Request to refine a previous result"""
     context_type: Literal["incoming", "draft"]
-    original_result: str
-    adjustment_instruction: str
-    conversation_history: list[dict[str, str]] = []
+    original_result: str = Field(..., max_length=50000)
+    adjustment_instruction: str = Field(..., max_length=10000)
+    conversation_history: list[dict[str, str]] = Field(default_factory=list, max_length=100)
 
 
 class SlackRefineResponse(BaseModel):
@@ -59,10 +59,10 @@ class SlackRefineResponse(BaseModel):
 
 
 class SlackOptimizeRequest(BaseModel):
-    content: str
-    target_language: str  # 'en' or 'cn'
-    context_type: str  # 'translation' | 'grammar' | 'tone' | 'formality'
-    original_text: Optional[str] = None
+    content: str = Field(..., max_length=50000)
+    target_language: str = Field(..., pattern="^(en|cn)$")
+    context_type: str = Field(..., pattern="^(translation|grammar|tone|formality)$")
+    original_text: Optional[str] = Field(None, max_length=50000)
 
 
 class SlackOptimizeResponse(BaseModel):

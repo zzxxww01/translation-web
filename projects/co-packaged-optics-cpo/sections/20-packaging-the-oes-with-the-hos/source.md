@@ -1,0 +1,5 @@
+The OEs themselves are placed on a substrate, after which the substrate is flip-chip bonded to the host package. For co-packaging the OEs a lot of package area is required. This necessitates significantly enlarging either the package substrate or interposer, depending on where it is placed. For Nvidia’s Spectrum-X Photonics switch ASIC package, the substrate will measure 110mm by 110mm. For context, this compares to the Blackwell package at 70mm by 76mm which is a very big chip in its own right.
+
+Additionally, attaching more elements to the substrate presents yield challenges. Again, for Spectrum-X, 36 known good OEs need to be flip-chip bonded onto the substrate first – before bonding the interposer module for the ‘on Substrate’ step to complete the CoWoS assembly.
+
+Similarly, for the interposer, the need to manufacture a much larger interposer is costly and it requires bonding many more elements, presents yield challenges. Additionally, these challenges are exacerbated by warpage issues, which become more pronounced as interposer/substrate size scales.

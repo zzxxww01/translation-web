@@ -1,0 +1,7 @@
+Despite its technical superiority, CPO has seen very limited real-world adoption due to several challenges that drive up cost. These include: the complexity of packaging (which costs more than the OEs themselves) and manufacturing, reliability and yield concerns, as well as thermal management issues arising from tightly integrated optical and electrical components. Another hang-up is the lack of industry-wide standardization. Additionally, customers are concerned about serviceability which hinders the transition from traditional pluggable optics to CPO solutions.
+
+Another key customer anxiety is that by adopting CPO, they potentially surrender their ability to control costs. It is much easier to squeeze a larger number of transceiver companies on costs than a smaller set of switch vendors.
+
+Meanwhile, pluggable optics—the incumbent technology that CPO would replace—continue to improve and still offers good enough performance for nearly all applications with far less end user anxiety.
+
+In the remainder of Part 2, we will dive further into the impetus for adopting CPO. We will start with explaining how SerDes scaling is reaching a plateau, making other interface types such as Wide I/O coupled with CPO necessary, and then step into manufacturing considerations and go to market. We will discuss key individual CPO component such as Optical Engines, Fiber Coupling, External Laser Sources and Modulators. Lastly, we will cover the roadmap for scaling bandwidth from CPO.

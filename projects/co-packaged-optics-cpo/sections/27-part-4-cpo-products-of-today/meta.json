@@ -1,0 +1,80 @@
+{
+  "section_id": "27-part-4-cpo-products-of-today",
+  "title": "Part 4: CPO Products of Today and Tomorrow",
+  "title_translation": null,
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "In this part, we will start by introducing CPO products that are on the market today or are shortly coming to market, starting with Nvidia and Broadcom’s portfolios and moving to explaining the offerings from various CPO focused companies. We cover Intel CPO, MediaTek’s CPO work, Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil, describing each provider’s solution in detail and weigh in on important puts and takes for each company’s approach. Finally, we will circle back to discuss the supply chain, covering manufacturing, testing and assembly of the key CPO components such as Optical Engines and External Laser Sources.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "We cover Intel CPO, MediaTek’s CPO work,",
+          "start": 240,
+          "end": 280,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil,",
+          "start": 281,
+          "end": 364,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "parent_block_id": "b0351",
+      "parent_block_index": 351,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In this part, we will start by introducing CPO products that are on the market today or are shortly coming to market, starting with Nvidia and Broadcom’s portfolios and moving to explaining the offerings from various CPO focused companies. **We cover Intel CPO, MediaTek’s CPO work,** **Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil,** describing each provider’s solution in detail and weigh in on important puts and takes for each company’s approach. Finally, we will circle back to discuss the supply chain, covering manufacturing, testing and assembly of the key CPO components such as Optical Engines and External Laser Sources.",
+      "parent_block_plain_text": "In this part, we will start by introducing CPO products that are on the market today or are shortly coming to market, starting with Nvidia and Broadcom’s portfolios and moving to explaining the offerings from various CPO focused companies. We cover Intel CPO, MediaTek’s CPO work, Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil, describing each provider’s solution in detail and weigh in on important puts and takes for each company’s approach. Finally, we will circle back to discuss the supply chain, covering manufacturing, testing and assembly of the key CPO components such as Optical Engines and External Laser Sources.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "We cover Intel CPO, MediaTek’s CPO work,",
+          "start": 240,
+          "end": 280,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil,",
+          "start": 281,
+          "end": 364,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 661,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

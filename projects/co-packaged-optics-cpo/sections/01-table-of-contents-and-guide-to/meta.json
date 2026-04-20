@@ -1,0 +1,597 @@
+{
+  "section_id": "01-table-of-contents-and-guide-to",
+  "title": "Table of Contents and Guide to this Article",
+  "title_translation": null,
+  "paragraphs": [
+    {
+      "id": "p000",
+      "index": 0,
+      "source": "We have segmented the article into five parts – readers are welcome to focus on sections that are most interesting or relevant to them.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "We have segmented the article into five parts – readers are welcome to focus on sections that are most interesting or relevant to them.",
+          "start": 0,
+          "end": 135,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "parent_block_id": "b0013",
+      "parent_block_index": 13,
+      "parent_block_type": "p",
+      "parent_block_markdown": "**We have segmented the article into five parts – readers are welcome to focus on sections that are most interesting or relevant to them.**",
+      "parent_block_plain_text": "We have segmented the article into five parts – readers are welcome to focus on sections that are most interesting or relevant to them.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "We have segmented the article into five parts – readers are welcome to focus on sections that are most interesting or relevant to them.",
+          "start": 0,
+          "end": 135,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 135,
+      "expected_tokens": [
+        "STRONG_1"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p001",
+      "index": 1,
+      "source": "In Part 1: CPO Total Cost of Ownership (TCO) Analysis, we start off by analyzing how adoption of CPO changes the total cost of ownership for scale-out and scale-up networks. We think that TCO, reliability, and equipment vendor bargaining power will be the primary considerations for adopting CPO in scale-out networks. We will explore whether CPO is ready for primetime when it comes to scale-out, touching on the data we have so far on solution reliability such as Meta’s CPO scale-out switch study presented at ECOC 2025.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 1: CPO Total Cost of Ownership (TCO) Analysis",
+          "start": 3,
+          "end": 53,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Meta’s CPO scale-out switch study",
+          "start": 466,
+          "end": 499,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "parent_block_id": "b0014",
+      "parent_block_index": 14,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In **Part 1: CPO Total Cost of Ownership (TCO) Analysis**, we start off by analyzing how adoption of CPO changes the total cost of ownership for scale-out and scale-up networks. We think that TCO, reliability, and equipment vendor bargaining power will be the primary considerations for adopting CPO in scale-out networks. We will explore whether CPO is ready for primetime when it comes to scale-out, touching on the data we have so far on solution reliability such as **Meta’s CPO scale-out switch study** presented at ECOC 2025.",
+      "parent_block_plain_text": "In Part 1: CPO Total Cost of Ownership (TCO) Analysis, we start off by analyzing how adoption of CPO changes the total cost of ownership for scale-out and scale-up networks. We think that TCO, reliability, and equipment vendor bargaining power will be the primary considerations for adopting CPO in scale-out networks. We will explore whether CPO is ready for primetime when it comes to scale-out, touching on the data we have so far on solution reliability such as Meta’s CPO scale-out switch study presented at ECOC 2025.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 1: CPO Total Cost of Ownership (TCO) Analysis",
+          "start": 3,
+          "end": 53,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Meta’s CPO scale-out switch study",
+          "start": 466,
+          "end": 499,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 523,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p002",
+      "index": 2,
+      "source": "In Part 2: CPO Introduction and Implementation, we will dive deeper into how CPO works. This section will explore the evolution of the market from copper to co-packaged copper and from digital signal processor (DSP) optics to linear pluggable optics (LPO) to CPO and the impetus and arguments for the adoption of CPO. SerDes scaling limits and Wide I/O as an alternative to SerDes – particularly when used in conjunction with CPO – will also be discussed.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 2: CPO Introduction and Implementation",
+          "start": 3,
+          "end": 46,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "copper to co-packaged copper",
+          "start": 147,
+          "end": 175,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "digital signal processor (DSP) optics to linear pluggable optics (LPO) to CPO",
+          "start": 185,
+          "end": 262,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        },
+        {
+          "type": "strong",
+          "text": "SerDes scaling limits and Wide I/O",
+          "start": 318,
+          "end": 352,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_4"
+        }
+      ],
+      "parent_block_id": "b0015",
+      "parent_block_index": 15,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In **Part 2: CPO Introduction and Implementation**, we will dive deeper into how CPO works. This section will explore the evolution of the market from **copper to co-packaged copper** and from **digital signal processor (DSP) optics to linear pluggable optics (LPO) to CPO** and the impetus and arguments for the adoption of CPO. **SerDes scaling limits and Wide I/O** as an alternative to SerDes – particularly when used in conjunction with CPO – will also be discussed.",
+      "parent_block_plain_text": "In Part 2: CPO Introduction and Implementation, we will dive deeper into how CPO works. This section will explore the evolution of the market from copper to co-packaged copper and from digital signal processor (DSP) optics to linear pluggable optics (LPO) to CPO and the impetus and arguments for the adoption of CPO. SerDes scaling limits and Wide I/O as an alternative to SerDes – particularly when used in conjunction with CPO – will also be discussed.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 2: CPO Introduction and Implementation",
+          "start": 3,
+          "end": 46,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "copper to co-packaged copper",
+          "start": 147,
+          "end": 175,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "digital signal processor (DSP) optics to linear pluggable optics (LPO) to CPO",
+          "start": 185,
+          "end": 262,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        },
+        {
+          "type": "strong",
+          "text": "SerDes scaling limits and Wide I/O",
+          "start": 318,
+          "end": 352,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_4"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 455,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2",
+        "STRONG_3",
+        "STRONG_4"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p003",
+      "index": 3,
+      "source": "In Part 3: Bringing CPO to Market, we will describe critical technologies that will enable CPO to gain traction and come to market. We first discuss Host and Optical Engine packaging and explain TSMC COUPE in detail and why it is emerging as the integration option of choice. Fiber Attach Units (FAUs), Fiber coupling as well as Edge Coupling vs Grating Couplers will be explained thoroughly. We will cover modulator types such as Mach-Zender Modulators (MZMs), Micro-Ring Modulators (MRMs) and Electro-Absorption Modulators (EAMs). This section will end with explaining the core of why CPO is being adopted – the many different vectors for scaling bandwidth with CPO: More fibers attached, using wavelength division multiplexing (WDM) and higher order modulation.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 3: Bringing CPO to Market",
+          "start": 3,
+          "end": 33,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "TSMC COUPE",
+          "start": 195,
+          "end": 205,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "Fiber Attach Units (FAUs)",
+          "start": 276,
+          "end": 301,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        },
+        {
+          "type": "strong",
+          "text": "Fiber coupling",
+          "start": 303,
+          "end": 317,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_4"
+        },
+        {
+          "type": "strong",
+          "text": "Edge Coupling",
+          "start": 329,
+          "end": 342,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_5"
+        },
+        {
+          "type": "strong",
+          "text": "Grating Couplers",
+          "start": 346,
+          "end": 362,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_6"
+        },
+        {
+          "type": "strong",
+          "text": "Mach-Zender Modulators (MZMs), Micro-Ring Modulators (MRMs) and Electro-Absorption Modulators (EAMs)",
+          "start": 431,
+          "end": 531,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_7"
+        },
+        {
+          "type": "strong",
+          "text": "vectors for scaling bandwidth",
+          "start": 629,
+          "end": 658,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_8"
+        }
+      ],
+      "parent_block_id": "b0016",
+      "parent_block_index": 16,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In **Part 3: Bringing CPO to Market**, we will describe critical technologies that will enable CPO to gain traction and come to market. We first discuss Host and Optical Engine packaging and explain **TSMC COUPE** in detail and why it is emerging as the integration option of choice. **Fiber Attach Units (FAUs)**, **Fiber coupling** as well as **Edge Coupling** vs **Grating Couplers** will be explained thoroughly. We will cover modulator types such as **Mach-Zender Modulators (MZMs), Micro-Ring Modulators (MRMs) and Electro-Absorption Modulators (EAMs)**. This section will end with explaining the core of why CPO is being adopted – the many different **vectors for scaling bandwidth** with CPO: More fibers attached, using wavelength division multiplexing (WDM) and higher order modulation.",
+      "parent_block_plain_text": "In Part 3: Bringing CPO to Market, we will describe critical technologies that will enable CPO to gain traction and come to market. We first discuss Host and Optical Engine packaging and explain TSMC COUPE in detail and why it is emerging as the integration option of choice. Fiber Attach Units (FAUs), Fiber coupling as well as Edge Coupling vs Grating Couplers will be explained thoroughly. We will cover modulator types such as Mach-Zender Modulators (MZMs), Micro-Ring Modulators (MRMs) and Electro-Absorption Modulators (EAMs). This section will end with explaining the core of why CPO is being adopted – the many different vectors for scaling bandwidth with CPO: More fibers attached, using wavelength division multiplexing (WDM) and higher order modulation.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 3: Bringing CPO to Market",
+          "start": 3,
+          "end": 33,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "TSMC COUPE",
+          "start": 195,
+          "end": 205,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "Fiber Attach Units (FAUs)",
+          "start": 276,
+          "end": 301,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        },
+        {
+          "type": "strong",
+          "text": "Fiber coupling",
+          "start": 303,
+          "end": 317,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_4"
+        },
+        {
+          "type": "strong",
+          "text": "Edge Coupling",
+          "start": 329,
+          "end": 342,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_5"
+        },
+        {
+          "type": "strong",
+          "text": "Grating Couplers",
+          "start": 346,
+          "end": 362,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_6"
+        },
+        {
+          "type": "strong",
+          "text": "Mach-Zender Modulators (MZMs), Micro-Ring Modulators (MRMs) and Electro-Absorption Modulators (EAMs)",
+          "start": 431,
+          "end": 531,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_7"
+        },
+        {
+          "type": "strong",
+          "text": "vectors for scaling bandwidth",
+          "start": 629,
+          "end": 658,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_8"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 764,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2",
+        "STRONG_3",
+        "STRONG_4",
+        "STRONG_5",
+        "STRONG_6",
+        "STRONG_7",
+        "STRONG_8"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p004",
+      "index": 4,
+      "source": "In Part 4: CPO Products of Today and Tomorrow, we will analyze CPO products available on the market today and their associated supply chain. We will start with Nvidia and Broadcom’s solutions before discussing major CPO companies. We cover Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil, describing each provider’s solution in detail and weigh in on important puts and takes for each company’s approach.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 4: CPO Products of Today and Tomorrow",
+          "start": 3,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Nvidia and Broadcom’s solutions",
+          "start": 160,
+          "end": 191,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil,",
+          "start": 240,
+          "end": 323,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        }
+      ],
+      "parent_block_id": "b0017",
+      "parent_block_index": 17,
+      "parent_block_type": "p",
+      "parent_block_markdown": "In **Part 4: CPO Products of Today and Tomorrow**, we will analyze CPO products available on the market today and their associated supply chain. We will start with **Nvidia and Broadcom’s solutions** before discussing major CPO companies. We cover **Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil,** describing each provider’s solution in detail and weigh in on important puts and takes for each company’s approach.",
+      "parent_block_plain_text": "In Part 4: CPO Products of Today and Tomorrow, we will analyze CPO products available on the market today and their associated supply chain. We will start with Nvidia and Broadcom’s solutions before discussing major CPO companies. We cover Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil, describing each provider’s solution in detail and weigh in on important puts and takes for each company’s approach.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 4: CPO Products of Today and Tomorrow",
+          "start": 3,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Nvidia and Broadcom’s solutions",
+          "start": 160,
+          "end": 191,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        },
+        {
+          "type": "strong",
+          "text": "Ayar Labs, Nubis, Celestial AI, Lightmatter, Xscape Photonics, Ranovus and Scintil,",
+          "start": 240,
+          "end": 323,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_3"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 439,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2",
+        "STRONG_3"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    },
+    {
+      "id": "p005",
+      "index": 5,
+      "source": "Finally, in Part 5: Nvidia’s CPO Supply Chain, we will conclude this report by describing in detail the supply chain for Nvidia’s CPO ecosystem, naming key suppliers for Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing.",
+      "source_html": null,
+      "element_type": "p",
+      "inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 5: Nvidia’s CPO Supply Chain",
+          "start": 12,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing",
+          "start": 170,
+          "end": 300,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "parent_block_id": "b0018",
+      "parent_block_index": 18,
+      "parent_block_type": "p",
+      "parent_block_markdown": "Finally, in **Part 5: Nvidia’s CPO Supply Chain**, we will conclude this report by describing in detail the supply chain for Nvidia’s CPO ecosystem, naming key suppliers for **Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing**.",
+      "parent_block_plain_text": "Finally, in Part 5: Nvidia’s CPO Supply Chain, we will conclude this report by describing in detail the supply chain for Nvidia’s CPO ecosystem, naming key suppliers for Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing.",
+      "parent_source_html": null,
+      "parent_inline_elements": [
+        {
+          "type": "strong",
+          "text": "Part 5: Nvidia’s CPO Supply Chain",
+          "start": 12,
+          "end": 45,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_1"
+        },
+        {
+          "type": "strong",
+          "text": "Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing",
+          "start": 170,
+          "end": 300,
+          "href": null,
+          "title": null,
+          "span_id": "STRONG_2"
+        }
+      ],
+      "segment_start": 0,
+      "segment_end": 301,
+      "expected_tokens": [
+        "STRONG_1",
+        "STRONG_2"
+      ],
+      "format_recovery_status": "not_applicable",
+      "format_errors": [],
+      "is_heading": false,
+      "heading_level": null,
+      "heading_chain": [],
+      "is_metadata": false,
+      "metadata_type": null,
+      "translations": {},
+      "confirmed": null,
+      "confirmed_tokenized": null,
+      "confirmed_format_issues": [],
+      "status": "pending",
+      "ai_insight": null,
+      "history": []
+    }
+  ]
+}

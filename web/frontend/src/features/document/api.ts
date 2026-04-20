@@ -239,4 +239,10 @@ export const documentApi = {
    */
   getFullTranslateUrl: (projectId: string) =>
     `/api/projects/${projectId}/translate-stream`,
+
+  /**
+   * 删除项目
+   */
+  deleteProject: (projectId: string) =>
+    apiClient.delete<{ message: string }>(`/projects/${projectId}`),
 };

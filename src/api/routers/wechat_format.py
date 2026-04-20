@@ -3,12 +3,13 @@
 """
 
 import logging
-from fastapi import APIRouter
-from pydantic import BaseModel, field_validator
+from fastapi import APIRouter, Request
+from pydantic import BaseModel, Field, field_validator
 import asyncio
 from functools import partial
 
 from ..middleware import BadRequestException, ServiceUnavailableException
+from ..middleware.rate_limit import limiter
 from src.services.wechat_formatter import WechatFormatter
 from src.services.wechat_themes import list_themes
 
@@ -26,7 +27,7 @@ MAX_MARKDOWN_SIZE = 10 * 1024 * 1024
 class WechatFormatRequest(BaseModel):
     """微信格式化请求"""
 
-    markdown: str
+    markdown: str = Field(..., max_length=MAX_MARKDOWN_SIZE)
     theme: str = "default"
     upload_images: bool = False
     image_to_base64: bool = False
@@ -36,6 +37,8 @@ class WechatFormatRequest(BaseModel):
     def validate_markdown_size(cls, v: str) -> str:
         if len(v.encode('utf-8')) > MAX_MARKDOWN_SIZE:
             raise ValueError(f"Markdown content exceeds {MAX_MARKDOWN_SIZE} bytes")
+        if not v.strip():
+            raise ValueError("Markdown content cannot be empty")
         return v
 
     @field_validator('theme')
@@ -70,7 +73,8 @@ class WechatThemesResponse(BaseModel):
 
 
 @router.post("/wechat/format", response_model=WechatFormatResponse)
-async def format_for_wechat(request: WechatFormatRequest):
+@limiter.limit("1000/minute")
+async def format_for_wechat(request: Request, body: WechatFormatRequest):
     """
     将 Markdown 转换为微信公众号格式
 
@@ -81,7 +85,7 @@ async def format_for_wechat(request: WechatFormatRequest):
 
     注意：建议在生产环境配置速率限制中间件
     """
-    if not request.markdown.strip():
+    if not body.markdown.strip():
         raise BadRequestException(detail="Markdown content cannot be empty")
 
     try:
@@ -93,10 +97,10 @@ async def format_for_wechat(request: WechatFormatRequest):
             None,
             partial(
                 formatter.format,
-                markdown=request.markdown,
-                theme=request.theme,
-                upload_images=request.upload_images,
-                image_to_base64=request.image_to_base64,
+                markdown=body.markdown,
+                theme=body.theme,
+                upload_images=body.upload_images,
+                image_to_base64=body.image_to_base64,
             )
         )
 

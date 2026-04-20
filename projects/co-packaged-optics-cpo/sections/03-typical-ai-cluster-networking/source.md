@@ -1,0 +1,15 @@
+A typical AI Cluster has three main networking fabrics, back-end, front-end and out of band management fabric. The most heavily utilized and technically demanding network fabric is the back-end fabric. The back-end fabric is used for scale-out communications between GPUs to communicate with one another and exchange data in collective operations to parallelize training and inference. Back-end networks typically use the InfiniBand or Ethernet protocols.
+
+Because of its demanding nature, the back-end network accounts for a dominant share of total networking cost and power, representing 85% of networking cost and 86% of networking power for 3-layer GB300 NVL72 clusters deployed on InfiniBand using Nvidia’s X800-Q3400 back-end switches. CPO-based switches and networking solutions can be used in both the back-end and front-end network, but we think that the focus for deployment at this stage will be in the back-end network. Readers can find much more details on back-end network topology, port, switch, and transceiver counts in our [Optical Boogeyman Article from 2024](https://semianalysis.com/2024/03/25/nvidias-optical-boogeyman-nvl72-infiniband/#the-clos-non-blocking-fat-tree-network) as well as in our [AI Networking Model](https://semianalysis.com/ai-networking-model/). Those that would like to understand total networking cost of ownership can read our [AI Neocloud Anatomy and Playbook article](https://semianalysis.com/2024/10/03/ai-neocloud-playbook-and-anatomy/).
+
+* [Nvidia’s Optical Boogeyman – NVL72, Infiniband Scale Out, 800G & 1.6T Ramp](https://newsletter.semianalysis.com/p/nvidias-optical-boogeyman-nvl72-infiniband) - Dylan Patel and Daniel Nishball · March 25, 2024
+
+* [AI Neocloud Playbook and Anatomy](https://newsletter.semianalysis.com/p/ai-neocloud-playbook-and-anatomy) - Dylan Patel and Daniel Nishball · October 3, 2024
+
+Zooming out – networking cost is the second largest component of total AI cluster cost behind the AI server itself. In a GB300 NVL72 Cluster with a 3-Layer InfiniBand network, this stands at 15% of total cluster cost, reaching 18% of total cluster cost for a 4-Layer network. Optical transceivers are a significant portion of this cost, accounting for 60% of networking cost for a 3-Layer network when using the relatively more expensive Nvidia LinkX Transceivers. They also consume 45% of total networking power for a 3-Layer network.
+
+![](./Co_Packaged_Optics_(CPO)_–_Scaling_with_Light_for_the_Next_Wave_of_Interconnect_images/img_003.png)
+
+Source: [SemiAnalysis AI Networking Model](https://semianalysis.com/ai-networking-model/)
+
+The greater the number of GPUs in an AI cluster, the more likely it is that more networking layers will be needed. Going from a two-layer to a three-layer network and beyond means higher costs and a greater power budget. CPO can both help reduce power and cost holding number of layers constant, and can reduce total power and cost requirements by expanding the number of GPUs that can be connected on a network of a given number of layers.

@@ -1,0 +1,71 @@
+{
+  "project_id": "gtc-2026-the-inference-kingdom-expands",
+  "generated_at": "2026-04-20T23:35:37.295561",
+  "issue_count": 8,
+  "issues": [
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "09-oberon-and-kyber-updates-larg",
+      "paragraph_id": "p007",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "对于 Rubin Ultra NVL144 Kyber，正如我们多次告知客户的那样，向上扩展网络不会使用光电共封装，尽管其他分析师有传言称 Kyber 将引入用于向上扩展的光电共封装。然而，用于 NVLink 的光器件即将到来，并将逐步引入。向上扩展的光电共封装将首先用于 Rubin Ultra NVL 576 系统，"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "09-oberon-and-kyber-updates-larg",
+      "paragraph_id": "p018",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "Rubin Ultra NVL288"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "09-oberon-and-kyber-updates-larg",
+      "paragraph_id": "p025",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "Rubin Ultra NVL576"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "09-oberon-and-kyber-updates-larg",
+      "paragraph_id": "p032",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "Feynman"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "10-cmx-and-stx",
+      "paragraph_id": "p001",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "CMX"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "10-cmx-and-stx",
+      "paragraph_id": "p007",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "STX"
+    },
+    {
+      "type": "untranslated_paragraph",
+      "severity": "error",
+      "section_id": "12-gtc-2026-supply-chain-implicat",
+      "paragraph_id": "p003",
+      "message": "段落译文与原文完全相同。",
+      "source_preview": "LPX PCB"
+    },
+    {
+      "type": "residual_english",
+      "severity": "warning",
+      "section_id": "12-gtc-2026-supply-chain-implicat",
+      "paragraph_id": "p008",
+      "message": "译文中存在较长英文残留片段，建议复核。",
+      "translation_preview": "对于我们在上文讨论过的 Vera Rubin Ultra NVL288 系统，可以说线缆背板将在 Kyber 中回归。如果 Rubin Ultra 采用这种形态部署——每颗 Rubin Ultra GPU 将具备 14.4Tbit/s 单向的纵向扩展带宽，需要 144 个 DP 线缆连接至 NVSwitch。144 个"
+    }
+  ]
+}

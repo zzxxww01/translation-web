@@ -1,0 +1,1 @@
+We have discussed the role key components play in CPO systems, in this section we will discuss specific companies in the supply chain and component BOM cost with a focus on Nvidia’s suppliers, naming key suppliers for **Laser Sources, ELS Modules, FAU, FAU Alight Tools, FAU Assembly, Shuffle Box, MPO Connectors, MT Ferrules, Fibers, and E/O Testing**.

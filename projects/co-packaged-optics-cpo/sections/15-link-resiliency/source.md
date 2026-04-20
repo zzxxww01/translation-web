@@ -1,0 +1,13 @@
+Link resiliency and reliability are other very important driving factors of CPO technology. In large AI clusters, link downtime is a significant contributor to overall cluster availability, and even small improvements in link availability and stability provides large return on infrastructure investment.
+
+Today, in a large-scale AI cluster approaching 1M links with pluggable modules, there can be dozens of link interruptions per day. Some of these are ‘hard’ failures as a result of component failures or hardware quality, while many of these are ‘soft’ failures resulting from a diversity of root causes that results from the inherent complexity and variability of pluggable-based solutions. There is a long tail of failure modes, including but not limited to signal integrity issues and variation, connector and wirebond quality, contamination on components and pins, noise injection, and other transient effects. There is little correlation with component failures. 80% of optical modules that are returned due to some link failure are ‘no trouble found’.
+
+CPO significantly reduces the inherent complexity and variability of the high-speed signal paths in large-scale AI networks by:
+
+* Significantly reducing the number of components in the optical interface. High levels of integration at both the photonic level and chip/package level reduce the complexity for critical high-speed assemblies and improve the reliability and yield at the system level. The number of E/O interfaces is also reduced, thereby minimizing the power loss that occurs at each interface
+
+* Significantly improving the signal integrity of the host electrical interface between the host ASIC (e.g. switch) and the optical engine. Insertion losses, reflections and other non-linear impairments are significantly reduced by packaging the optical engine on the first level package with very well defined and deterministic design rules and manufacturing tolerances
+
+* Reducing the port-to-port variation in high-speed signal path across the switch, which adds overhead and complexity to DSP signal processing, host and module equalization, host and module firmware and link optimization algorithms. All pluggable module solutions, and the host SerDes, must be designed to accommodate this variation in per-port performance which leads to complexity and points of failure
+
+Removing the ‘human’ element of optical link provisioning. A CPO switch or optical engine is fully assembled and tested ‘known-good’ out of the factory and does not require significant on-site operations to provision the optics in the switch, which can lead to installation variation, damage, contamination, and compatibility issues between systems and optical modules.
