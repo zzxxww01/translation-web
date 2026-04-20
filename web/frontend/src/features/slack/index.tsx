@@ -36,10 +36,15 @@ export function SlackFeature() {
     setGenerating(true);
 
     try {
-      // 检测是否是英文（对方消息场景）
-      const isEnglish = /^[a-zA-Z\s\d\p{P}]+$/u.test(input);
+      // 改进的中英文判断：统计中文字符占比
+      const chineseChars = input.match(/[\u4e00-\u9fa5]/g) || [];
+      const totalChars = input.replace(/\s/g, '').length;
+      const chineseRatio = totalChars > 0 ? chineseChars.length / totalChars : 0;
 
-      if (isEnglish) {
+      // 中文字符占比 > 30% 判断为中文输入
+      const isChinese = chineseRatio > 0.3;
+
+      if (!isChinese) {
         // 场景 1：对方发起 - 翻译并生成建议回复
         const result = await processMutation.mutateAsync({
           message: input,
@@ -118,6 +123,7 @@ export function SlackFeature() {
         onRemoveMessage={removeMessage}
         onUpdateMessage={updateMessage}
         onClearAll={clearConversation}
+        onSelectMessage={(content) => setCurrentInput(content)}
       />
 
       {/* 回复工作区 */}

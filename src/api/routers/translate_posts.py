@@ -31,25 +31,25 @@ prompt_manager = get_prompt_manager()
 
 @router.post("/translate/post", response_model=PostTranslateResponse)
 @limiter.limit("20/minute")
-async def translate_post(request: PostTranslateRequest, req: Request):
+async def translate_post(request: Request, body: PostTranslateRequest):
     """Translate a post to Chinese."""
-    if not request.content.strip():
+    if not body.content.strip():
         raise BadRequestException(detail="Content cannot be empty")
 
     # 公网环境禁用 custom_prompt（防止 prompt 注入）
-    if request.custom_prompt:
+    if body.custom_prompt:
         if not os.getenv("ALLOW_CUSTOM_PROMPTS", "false").lower() == "true":
             raise BadRequestException(detail="Custom prompts are not allowed in production")
 
-    glossary_context = build_glossary_context(request.content)
+    glossary_context = build_glossary_context(body.content)
 
-    if request.custom_prompt:
-        prompt = request.custom_prompt.replace("{content}", request.content)
+    if body.custom_prompt:
+        prompt = body.custom_prompt.replace("{content}", body.content)
         prompt = prompt.replace("{glossary}", glossary_context)
     else:
         prompt = prompt_manager.get(
             "post_translation",
-            text=request.content,
+            text=body.content,
             dynamic_sections=glossary_context.strip(),
         )
 
@@ -58,7 +58,7 @@ async def translate_post(request: PostTranslateRequest, req: Request):
     )
     try:
         translation = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, model=request.model),
+            asyncio.to_thread(generate_with_fallback, prompt, model=body.model),
             timeout=timeout_s,
         )
         return PostTranslateResponse(translation=translation.strip())
@@ -70,26 +70,26 @@ async def translate_post(request: PostTranslateRequest, req: Request):
 
 @router.post("/translate/post/optimize", response_model=PostOptimizeResponse)
 @limiter.limit("20/minute")
-async def optimize_post_translation(request: PostOptimizeRequest, req: Request):
+async def optimize_post_translation(request: Request, body: PostOptimizeRequest):
     """Optimize an existing translation."""
-    if not request.current_translation.strip():
+    if not body.current_translation.strip():
         raise BadRequestException(detail="Current translation cannot be empty")
 
     resolved_instruction = resolve_post_optimize_instruction(
-        request.instruction, request.option_id
+        body.instruction, body.option_id
     )
     if not resolved_instruction:
         raise BadRequestException(
             detail="Either instruction or a valid option_id must be provided"
         )
 
-    glossary_context = build_glossary_context(request.original_text)
+    glossary_context = build_glossary_context(body.original_text)
 
     prompt = prompt_manager.get(
         "post_optimize",
         glossary_section=glossary_context.strip(),
-        original_text=request.original_text,
-        current_translation=request.current_translation,
+        original_text=body.original_text,
+        current_translation=body.current_translation,
         instruction=resolved_instruction,
     )
 
@@ -98,7 +98,7 @@ async def optimize_post_translation(request: PostOptimizeRequest, req: Request):
     )
     try:
         optimized = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, model=request.model),
+            asyncio.to_thread(generate_with_fallback, prompt, model=body.model),
             timeout=timeout_s,
         )
         return PostOptimizeResponse(optimized_translation=optimized.strip())
@@ -110,25 +110,25 @@ async def optimize_post_translation(request: PostOptimizeRequest, req: Request):
 
 @router.post("/generate/title", response_model=GenerateTitleResponse)
 @limiter.limit("20/minute")
-async def generate_title(request: GenerateTitleRequest, req: Request):
+async def generate_title(request: Request, body: GenerateTitleRequest):
     """Generate 6 title options in JSON format."""
-    if not request.content.strip():
+    if not body.content.strip():
         raise BadRequestException(detail="Content cannot be empty")
 
     normalized_instruction = (
-        (request.instruction or "").strip()
+        (body.instruction or "").strip()
         or "在忠实内容的前提下，尽量更有吸引力、更有记忆点。"
     )
     prompt = prompt_manager.get(
         "post_title",
-        content=request.content,
+        content=body.content,
         instruction=normalized_instruction,
     )
 
     timeout_s = int(os.getenv("POST_TITLE_TIMEOUT", os.getenv("GEMINI_TIMEOUT", "30")))
     try:
         result = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, model=request.model),
+            asyncio.to_thread(generate_with_fallback, prompt, model=body.model),
             timeout=timeout_s,
         )
         data = parse_llm_json_response(result)

@@ -12,6 +12,7 @@ interface ConversationBubblesProps {
   onRemoveMessage: (id: string) => void;
   onUpdateMessage: (id: string, content: string) => void;
   onClearAll: () => void;
+  onSelectMessage?: (content: string) => void;
 }
 
 export function ConversationBubbles({
@@ -21,6 +22,7 @@ export function ConversationBubbles({
   onRemoveMessage,
   onUpdateMessage,
   onClearAll,
+  onSelectMessage,
 }: ConversationBubblesProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -80,6 +82,7 @@ export function ConversationBubbles({
                 message={message}
                 onDelete={onRemoveMessage}
                 onEdit={onUpdateMessage}
+                onSelect={onSelectMessage}
               />
             ))
           )}

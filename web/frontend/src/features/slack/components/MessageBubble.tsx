@@ -1,16 +1,18 @@
 import { useState } from 'react';
-import { Trash2, Edit2, ChevronDown, ChevronUp } from 'lucide-react';
+import { Trash2, Edit2, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 import type { ConversationMessage } from '../store';
 
 interface MessageBubbleProps {
   message: ConversationMessage;
   onDelete: (id: string) => void;
   onEdit: (id: string, content: string) => void;
+  onSelect?: (content: string) => void;
 }
 
-export function MessageBubble({ message, onDelete, onEdit }: MessageBubbleProps) {
+export function MessageBubble({ message, onDelete, onEdit, onSelect }: MessageBubbleProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isTranslationExpanded, setIsTranslationExpanded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
@@ -25,10 +27,17 @@ export function MessageBubble({ message, onDelete, onEdit }: MessageBubbleProps)
     setIsEditing(false);
   };
 
+  const handleSelect = () => {
+    if (onSelect) {
+      onSelect(message.content);
+      toast.success('已填入输入框');
+    }
+  };
+
   return (
     <div
       className={cn(
-        'flex w-full',
+        'flex w-full mb-1.5',
         isThemMessage ? 'justify-start' : 'justify-end'
       )}
       onMouseEnter={() => setIsHovered(true)}
@@ -36,10 +45,10 @@ export function MessageBubble({ message, onDelete, onEdit }: MessageBubbleProps)
     >
       <div
         className={cn(
-          'relative max-w-[70%] rounded-2xl px-4 py-2.5',
+          'relative max-w-[70%] rounded-lg px-3 py-1.5',
           isThemMessage
-            ? 'bg-muted text-foreground rounded-bl-sm'
-            : 'bg-primary text-primary-foreground rounded-br-sm'
+            ? 'bg-muted text-foreground'
+            : 'bg-primary text-primary-foreground'
         )}
       >
         {isEditing ? (
@@ -57,27 +66,25 @@ export function MessageBubble({ message, onDelete, onEdit }: MessageBubbleProps)
           </div>
         ) : (
           <>
-            <div className="whitespace-pre-wrap break-words">{message.content}</div>
+            <div className="whitespace-pre-wrap break-words text-sm leading-relaxed">{message.content}</div>
 
             {isThemMessage && message.translation && (
-              <div className="mt-2 pt-2 border-t border-border/50">
-                <button
-                  onClick={() => setIsTranslationExpanded(!isTranslationExpanded)}
-                  className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
-                >
-                  {isTranslationExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-                  中文翻译
-                </button>
-                {isTranslationExpanded && (
-                  <div className="mt-1 text-sm opacity-80">{message.translation}</div>
-                )}
-              </div>
+              <div className="mt-1 text-xs opacity-60 leading-relaxed">{message.translation}</div>
             )}
           </>
         )}
 
         {isHovered && !isEditing && (
           <div className="absolute -top-8 right-0 flex gap-1 bg-background border rounded-md shadow-sm p-1">
+            <Button
+              size="sm"
+              variant="ghost"
+              onClick={handleSelect}
+              className="h-6 w-6 p-0"
+              title="复制到输入框"
+            >
+              <Copy size={14} />
+            </Button>
             <Button
               size="sm"
               variant="ghost"

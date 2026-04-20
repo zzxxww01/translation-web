@@ -36,26 +36,26 @@ def sanitize_email_input(text: str) -> str:
 
 @router.post("/email-reply", response_model=EmailReplyResponse)
 @limiter.limit("10/minute")
-async def generate_email_reply(request: EmailReplyRequest, req: Request):
+async def generate_email_reply(request: Request, body: EmailReplyRequest):
     """
     邮件回复建议 API
 
     根据收到的邮件内容生成多种风格的回复建议
     """
-    if not request.content.strip():
+    if not body.content.strip():
         raise BadRequestException(detail="邮件内容不能为空")
 
     # 清洗输入，防止 prompt 注入
-    content = sanitize_email_input(request.content)
-    sender = sanitize_email_input(request.sender) if request.sender else ""
-    subject = sanitize_email_input(request.subject) if request.subject else ""
+    content = sanitize_email_input(body.content)
+    sender = sanitize_email_input(body.sender) if body.sender else ""
+    subject = sanitize_email_input(body.subject) if body.subject else ""
 
     style_descriptions = {
         "professional": "专业正式 - 适合商务场合，表达得体、逻辑清晰",
         "polite": "礼貌友好 - 语气温和，注重关系维护",
         "casual": "随意亲切 - 适合熟悉的同事或合作伙伴",
     }
-    style_desc = style_descriptions.get(request.style, "专业正式")
+    style_desc = style_descriptions.get(body.style, "专业正式")
 
     context = []
     if sender:

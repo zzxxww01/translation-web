@@ -21,7 +21,7 @@ prompt_manager = get_prompt_manager()
 
 @router.post("/translate", response_model=TranslateResponse)
 @limiter.limit("20/minute")
-async def translate_text(request: TranslateRequest, req: Request):
+async def translate_text(request: Request, body: TranslateRequest):
     """
     文本翻译 API
 
@@ -29,19 +29,19 @@ async def translate_text(request: TranslateRequest, req: Request):
     - 中英互译
     - 自动检测语言
     """
-    if not request.text.strip():
+    if not body.text.strip():
         raise BadRequestException(detail="文本不能为空")
 
-    if request.source_lang == "auto":
-        has_chinese = bool(re.search(r"[\u4e00-\u9fff]", request.text))
+    if body.source_lang == "auto":
+        has_chinese = bool(re.search(r"[\u4e00-\u9fff]", body.text))
         target_lang = "en" if has_chinese else "zh"
     else:
-        target_lang = request.target_lang
+        target_lang = body.target_lang
 
     if target_lang == "zh":
-        prompt = prompt_manager.get("tools_translate_en2cn", text=request.text)
+        prompt = prompt_manager.get("tools_translate_en2cn", text=body.text)
     else:
-        prompt = prompt_manager.get("tools_translate_cn2en", text=request.text)
+        prompt = prompt_manager.get("tools_translate_cn2en", text=body.text)
 
     try:
         translation = generate_with_fallback(prompt).strip()

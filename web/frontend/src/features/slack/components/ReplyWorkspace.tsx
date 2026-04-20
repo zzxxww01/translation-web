@@ -29,30 +29,37 @@ export function ReplyWorkspace({
     ? '重新生成'
     : '生成回复';
 
+  const versionLabels = ['简洁', '正式', '友好'];
+
   return (
-    <Card className="p-6 space-y-4">
+    <Card className="p-4 space-y-3">
       <div className="space-y-2">
-        <label className="text-sm font-medium">📝 输入中文回复</label>
+        <label className="text-sm font-medium">
+          📝 输入内容
+          <span className="ml-2 text-xs text-muted-foreground font-normal">
+            (粘贴对方英文 或 输入你的中文)
+          </span>
+        </label>
         <Textarea
           value={currentInput}
           onChange={(e) => onInputChange(e.target.value)}
-          placeholder="输入你想说的中文内容..."
-          className="min-h-[100px] resize-none"
+          placeholder="粘贴对方的英文消息，或输入你想说的中文..."
+          className="min-h-[80px] resize-none text-sm"
           disabled={isGenerating}
         />
         <Button
           onClick={onGenerate}
           disabled={!currentInput.trim() || isGenerating}
-          className="w-full"
+          className="w-full h-9"
         >
           {isGenerating ? (
             <>
-              <Loader2 size={16} className="mr-2 animate-spin" />
+              <Loader2 size={14} className="mr-2 animate-spin" />
               {buttonText}
             </>
           ) : (
             <>
-              <Sparkles size={16} className="mr-2" />
+              <Sparkles size={14} className="mr-2" />
               {buttonText}
             </>
           )}
@@ -60,13 +67,13 @@ export function ReplyWorkspace({
       </div>
 
       {hasVersions && (
-        <div className="space-y-3">
-          <div className="text-sm font-medium">💡 生成的版本</div>
+        <div className="space-y-2">
+          <div className="text-xs font-semibold text-muted-foreground">💡 生成的版本</div>
           {currentVersions.map((version, index) => (
             <VersionCard
               key={version.english}
               version={version}
-              label={String.fromCharCode(65 + index)}
+              label={versionLabels[index] || `版本${index + 1}`}
               onSelect={() => onSelectVersion(version)}
               disabled={isGenerating}
             />

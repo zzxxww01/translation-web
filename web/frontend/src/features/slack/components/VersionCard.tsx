@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Copy, Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -9,12 +10,16 @@ interface VersionCardProps {
   version: SlackReplyVariant;
   label: string;
   onSelect: () => void;
+  onEdit?: (newEnglish: string) => void;
   disabled?: boolean;
 }
 
-export function VersionCard({ version, label, onSelect, disabled }: VersionCardProps) {
+export function VersionCard({ version, label, onSelect, onEdit, disabled }: VersionCardProps) {
+  const [isEditing, setIsEditing] = useState(false);
+  const [editContent, setEditContent] = useState(version.english);
+
   const handleCopyOnly = async () => {
-    const ok = await copyToClipboard(version.english);
+    const ok = await copyToClipboard(isEditing ? editContent : version.english);
     if (ok) {
       toast.success('已复制到剪贴板');
     } else {
@@ -22,38 +27,65 @@ export function VersionCard({ version, label, onSelect, disabled }: VersionCardP
     }
   };
 
+  const handleSend = () => {
+    if (isEditing && editContent !== version.english && onEdit) {
+      onEdit(editContent);
+    }
+    onSelect();
+  };
+
+  const handleBlur = () => {
+    if (editContent !== version.english && onEdit) {
+      onEdit(editContent);
+    }
+    setIsEditing(false);
+  };
+
   return (
-    <Card className="p-4">
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="font-medium text-sm text-muted-foreground">{label}</div>
-        <div className="flex gap-2">
+    <Card className="p-3">
+      <div className="flex items-start justify-between gap-2 mb-2">
+        <div className="font-semibold text-xs text-muted-foreground">{label}</div>
+        <div className="flex gap-1.5">
           <Button
             size="sm"
             variant="outline"
             onClick={handleCopyOnly}
             disabled={disabled}
-            className="h-8"
+            className="h-7 text-xs px-2"
           >
-            <Copy size={14} className="mr-1" />
-            仅复制
+            <Copy size={12} className="mr-1" />
+            复制
           </Button>
           <Button
             size="sm"
-            onClick={onSelect}
+            onClick={handleSend}
             disabled={disabled}
-            className="h-8"
+            className="h-7 text-xs px-2"
           >
-            <Send size={14} className="mr-1" />
-            选择并发送
+            <Send size={12} className="mr-1" />
+            发送
           </Button>
         </div>
       </div>
-      <div className="text-sm whitespace-pre-wrap break-words bg-muted/50 rounded p-3">
-        {version.english}
-      </div>
+      {isEditing ? (
+        <textarea
+          value={editContent}
+          onChange={(e) => setEditContent(e.target.value)}
+          onBlur={handleBlur}
+          className="w-full min-h-[60px] p-2 text-sm border rounded resize-none leading-relaxed"
+          autoFocus
+        />
+      ) : (
+        <div
+          className="text-sm whitespace-pre-wrap break-words leading-relaxed cursor-text hover:bg-muted/30 rounded p-2 -m-2"
+          onClick={() => setIsEditing(true)}
+        >
+          {editContent}
+        </div>
+      )}
       {version.chinese && (
-        <div className="mt-2 text-xs text-muted-foreground">
-          中文: {version.chinese}
+        <div className="mt-1.5 text-xs text-muted-foreground opacity-60">
+          {version.chinese}
         </div>
       )}
     </Card>

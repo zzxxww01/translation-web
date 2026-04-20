@@ -93,6 +93,11 @@ export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
       }),
       {
         name: 'SlackWorkspaceStore',
+        partialize: (state) => ({
+          // 只持久化这些字段，conversationMessages 不持久化
+          selectedModel: state.selectedModel,
+          isHistoryCollapsed: state.isHistoryCollapsed,
+        }),
       }
     ),
     { name: 'SlackWorkspaceStore' }
