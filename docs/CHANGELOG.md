@@ -1,3 +1,36 @@
+# 更新日志
+
+## [2026-04-20] - LLM 路由修复与代理配置优化
+
+### 修复
+- **API 调用修复**：修复 5 个 API 端点缺少 `task_type` 参数导致的路由失败
+  - `/translate/post` - 帖子翻译
+  - `/translate/post/optimize` - 帖子优化
+  - `/generate/title` - 标题生成
+  - `/tools/email-reply` - 邮件回复
+  - `/tools/translate` - 文本翻译
+- **长文翻译修复**：修复 `_normalize_artifact_payload()` 递归处理 Pydantic 模型时的序列化错误
+
+### 变更
+- **代理配置优化**：
+  - Gemini 和 VectorEngine 默认改为 `proxy_mode: disabled`（无需代理）
+  - 支持通过 YAML 配置文件独立控制每个 Provider 的代理策略
+  - 更新 `.env.example` 和 `config/llm_providers.yaml.example`
+- **双 Key 配置**：VectorEngine 现在支持主备双 Key 配置
+
+### 文档更新
+- 更新 `docs/LLM模块系统手册.md` (v1.2)
+- 更新 `docs/PROXY_CONFIG.md` - 新增 YAML 配置方法
+- 更新 `README.md` - 简化配置说明
+- 更新 `config/llm_providers.yaml.example` - 添加代理配置注释
+
+### 技术细节
+- 所有 `generate_with_fallback()` 调用现在都正确指定 `task_type` 参数
+- 故障转移顺序：主 Key → 备用 Key → 同组其他模型 → 跨组模型
+- Pydantic 模型序列化现在正确处理嵌套模型（ArticleStyle, TranslationChallenge 等）
+
+---
+
 # 文档清理与整合记录
 
 ## 2026-04-15 文档清理与整合

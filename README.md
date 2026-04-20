@@ -37,11 +37,20 @@ start.bat
 
 ## 基础配置
 1. 复制 `.env.example` 为 `.env`
-2. 可选配置：`LLM_PROVIDER=gemini`
-3. 至少配置：`GEMINI_API_KEY`
-4. 可选配置备用 key：`GEMINI_BACKUP_API_KEY=...`
-5. 可选配置备用模型：`GEMINI_BACKUP_MODEL=gemini-flash-latest`
-- 调用顺序默认按：主 key → 备用 key → 备用模型；后续也可扩展到其他 LLM provider。
+2. 配置 LLM Provider（支持 Gemini 和 VectorEngine）：
+   ```bash
+   # Gemini 配置
+   GEMINI_API_KEY=your_key_here
+   GEMINI_BACKUP_API_KEY=your_backup_key_here
+   
+   # VectorEngine 配置（可选）
+   VECTORENGINE_API_KEY=your_key_here
+   VECTORENGINE_BACKUP_API_KEY=your_backup_key_here
+   VECTORENGINE_BASE_URL=https://api.vectorengine.ai/v1
+   ```
+3. 配置文件：`config/llm_providers.yaml`（已包含默认配置）
+4. 故障转移：主 Key → 备用 Key → 同组其他模型 → 跨组模型
+5. 详细配置说明：[docs/LLM模块系统手册.md](docs/LLM模块系统手册.md)
 
 ## 运行脚本说明
 - `start.bat` / `stop.bat` 保持原样，不在本次重构中改动。

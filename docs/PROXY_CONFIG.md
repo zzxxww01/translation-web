@@ -1,12 +1,19 @@
 # 代理配置说明
 
+更新时间：2026-04-20
+
 ## 概述
 
-Translation Agent 的 Gemini API 调用支持三种网络模式：
+Translation Agent 支持灵活的网络配置，可根据部署环境选择：
 
-1. **直连模式**（推荐用于生产环境）
-2. **可选代理模式**（开发环境）
-3. **强制代理模式**（受限网络）
+1. **直连模式**（推荐用于生产环境）- 无需代理
+2. **可选代理模式**（开发环境）- 按需启用
+3. **强制代理模式**（受限网络）- 必须使用代理
+
+**重要更新（2026-04-20）**：
+- Gemini 和 VectorEngine 均支持独立的代理配置
+- 默认配置已改为 `proxy_mode: disabled`（无需代理）
+- 通过 YAML 配置文件统一管理代理策略
 
 ---
 
@@ -18,9 +25,25 @@ Translation Agent 的 Gemini API 调用支持三种网络模式：
 - 企业专线网络
 - 任何可直接访问 Google API 的环境
 
-### 配置方法
+## 配置方法（2026-04-20 更新）
 
-#### 方法 1: 不配置代理（推荐）
+### 方法 1: YAML 配置文件（推荐）
+
+编辑 `config/llm_providers.yaml`：
+
+```yaml
+providers:
+  gemini-official:
+    network:
+      proxy_mode: disabled  # 直连模式（默认）
+      # proxy_mode: required  # 强制代理模式
+      # http_proxy: "${GEMINI_HTTP_PROXY}"
+      # https_proxy: "${GEMINI_HTTPS_PROXY}"
+      # no_proxy: "${GEMINI_NO_PROXY}"
+```
+
+### 方法 2: 环境变量（向后兼容）
+
 ```bash
 # .env 文件中完全不包含代理配置
 GEMINI_API_KEY=your_api_key_here
@@ -28,14 +51,6 @@ GEMINI_API_KEY=your_api_key_here
 # 不要添加以下行：
 # GEMINI_HTTP_PROXY=
 # GEMINI_HTTPS_PROXY=
-```
-
-#### 方法 2: 显式清空代理
-```bash
-# .env
-GEMINI_API_KEY=your_api_key_here
-GEMINI_HTTP_PROXY=
-GEMINI_HTTPS_PROXY=
 ```
 
 ### 验证直连
@@ -50,19 +65,45 @@ curl -H "Content-Type: application/json" \
 
 ---
 
-## 可选代理模式
+## 可选代理模式（2026-04-20 更新）
 
 ### 适用场景
 - 本地开发环境（中国大陆）
 - 需要通过代理访问 Google API
 
-### 配置方法
+### YAML 配置方法（推荐）
+
+编辑 `config/llm_providers.yaml`：
+
+```yaml
+providers:
+  gemini-official:
+    network:
+      proxy_mode: required  # 启用代理
+      http_proxy: "${GEMINI_HTTP_PROXY}"
+      https_proxy: "${GEMINI_HTTPS_PROXY}"
+      no_proxy: "${GEMINI_NO_PROXY}"
+```
+
+然后在 `.env` 中配置代理地址：
+
 ```bash
 # .env
 GEMINI_API_KEY=your_api_key_here
 GEMINI_HTTP_PROXY=http://127.0.0.1:7890
 GEMINI_HTTPS_PROXY=http://127.0.0.1:7890
 GEMINI_NO_PROXY=localhost,127.0.0.1
+```
+
+### VectorEngine 代理配置
+
+VectorEngine 默认不需要代理（国内可直连）：
+
+```yaml
+providers:
+  vectorengine-relay:
+    network:
+      proxy_mode: disabled  # 默认禁用
 ```
 
 ### 代理软件推荐

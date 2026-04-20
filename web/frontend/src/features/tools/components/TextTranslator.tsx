@@ -12,11 +12,12 @@ export function TextTranslator() {
   const [source, setSource] = useState('');
   const [target, setTarget] = useState('');
   const [sourceLang, setSourceLang] = useState('auto');
-  const [targetLang, setTargetLang] = useState('zh');
+
+  // 自动确定目标语言
+  const targetLang = sourceLang === 'zh' ? 'en' : 'zh';
 
   const handleSwap = () => {
-    setSourceLang(targetLang === 'auto' ? 'en' : targetLang);
-    setTargetLang(sourceLang === 'auto' ? 'zh' : sourceLang);
+    setSourceLang(targetLang);
     setSource(target);
     setTarget(source);
   };
@@ -39,9 +40,9 @@ export function TextTranslator() {
   };
 
   return (
-    <div className="flex gap-4 w-full">
+    <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', width: '100%' }}>
       {/* Source */}
-      <div className="flex-1 space-y-3">
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">原文</label>
           <Select value={sourceLang} onValueChange={setSourceLang}>
@@ -78,18 +79,9 @@ export function TextTranslator() {
       </div>
 
       {/* Target */}
-      <div className="flex-1 space-y-3">
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">译文</label>
-          <Select value={targetLang} onValueChange={setTargetLang}>
-            <SelectTrigger className="w-28 h-8">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="zh">中文</SelectItem>
-              <SelectItem value="en">英语</SelectItem>
-            </SelectContent>
-          </Select>
         </div>
         <Textarea
           value={target}

@@ -5,6 +5,12 @@ providers:
     name: "Gemini 官方 API"
     description: "Google 官方 API，稳定可靠"
     group_priority: 1
+    network:
+      proxy_mode: disabled  # 代理模式：disabled（无需代理）/ required（必须代理）
+      # 如需启用代理，取消注释以下行：
+      # http_proxy: "${GEMINI_HTTP_PROXY}"
+      # https_proxy: "${GEMINI_HTTPS_PROXY}"
+      # no_proxy: "${GEMINI_NO_PROXY}"
     api_keys:
       - key: "${GEMINI_API_KEY}"
         priority: 1
@@ -12,6 +18,9 @@ providers:
       - key: "${GEMINI_BACKUP_API_KEY}"
         priority: 2
         name: "备用 Key"
+    rate_limit:
+      max_concurrent: 2
+      requests_per_minute: 60
     models:
       - alias: "gemini-flash"
         real_model: "gemini-flash-latest"
@@ -55,14 +64,19 @@ providers:
     name: "VectorEngine 中转"
     description: "高性价比中转服务"
     group_priority: 2
+    network:
+      proxy_mode: disabled  # VectorEngine 国内可直连，无需代理
     api_keys:
       - key: "${VECTORENGINE_API_KEY}"
         priority: 1
         name: "主 Key"
-      - key: ""
+      - key: "${VECTORENGINE_BACKUP_API_KEY}"
         priority: 2
         name: "备用 Key"
-    base_url: "https://api.vectorengine.ai/v1"
+    base_url: "${VECTORENGINE_BASE_URL}"
+    rate_limit:
+      max_concurrent: 100
+      requests_per_minute: 1000
     models:
       - alias: "deepseek-v3"
         real_model: "deepseek-v3.2"
@@ -109,7 +123,8 @@ fallback_rules:
 # 任务类型默认模型
 task_defaults:
   longform: "deepseek-v3"
-  post: "gemini-flash"
-  analysis: "gemini-pro"
-  title: "gemini-flash"
-  metadata: "gemini-flash"
+  post: "deepseek-v3"
+  analysis: "deepseek-v3"
+  title: "deepseek-v3"
+  metadata: "deepseek-v3"
+  slack: "gemini-pro"
