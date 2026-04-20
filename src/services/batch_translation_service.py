@@ -299,13 +299,18 @@ class BatchTranslationService:
         return run_id, run_dir
 
     def _normalize_artifact_payload(self, payload: Any) -> Any:
+        # Handle Pydantic models (v2 and v1)
         if hasattr(payload, "model_dump"):
             return payload.model_dump(mode="json")
+        if hasattr(payload, "dict"):
+            return payload.dict()
+        # Handle dict
         if isinstance(payload, dict):
             return {
                 key: self._normalize_artifact_payload(value)
                 for key, value in payload.items()
             }
+        # Handle list
         if isinstance(payload, list):
             return [self._normalize_artifact_payload(item) for item in payload]
         return payload
