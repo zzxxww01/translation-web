@@ -73,7 +73,7 @@ class WechatThemesResponse(BaseModel):
 
 
 @router.post("/wechat/format", response_model=WechatFormatResponse)
-@limiter.limit("1000/minute")
+@limiter.limit("100/minute")
 async def format_for_wechat(request: Request, body: WechatFormatRequest):
     """
     将 Markdown 转换为微信公众号格式

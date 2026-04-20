@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 import uuid
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.config.timeout_config import TimeoutConfig
@@ -25,6 +25,7 @@ from ..dependencies import (
     MemoryServiceDep,
 )
 from ..middleware import NotFoundException, BadRequestException
+from ..middleware.rate_limit import limiter
 from .confirmation_models import (
     ConfirmParagraphRequest,
     UpdateTermsRequest,
@@ -71,7 +72,9 @@ def _filter_consistency_issues(issues: list[dict]) -> list[dict]:
 
 
 @router.post("/{project_id}/translate-all")
+@limiter.limit("20/minute")
 async def start_translation(
+    http_request: Request,
     project_id: str,
     service: BatchServiceDep,
 ):
@@ -97,7 +100,9 @@ async def get_translation_status(
 
 
 @router.post("/{project_id}/translation-cancel")
+@limiter.limit("20/minute")
 async def cancel_translation(
+    http_request: Request,
     project_id: str,
     service: BatchServiceDep,
 ):
@@ -122,7 +127,9 @@ async def get_paragraph_confirmation(
 
 
 @router.put("/{project_id}/paragraph/{paragraph_id}/confirm")
+@limiter.limit("20/minute")
 async def confirm_paragraph(
+    http_request: Request,
     project_id: str,
     paragraph_id: str,
     request: ConfirmParagraphRequest,
@@ -143,7 +150,9 @@ async def confirm_paragraph(
 
 
 @router.post("/{project_id}/term-update")
+@limiter.limit("20/minute")
 async def update_terms(
+    http_request: Request,
     project_id: str,
     request: UpdateTermsRequest,
     service: ConfirmationServiceDep,
@@ -155,7 +164,9 @@ async def update_terms(
 
 
 @router.post("/{project_id}/paragraph/{paragraph_id}/retranslate")
+@limiter.limit("20/minute")
 async def retranslate_paragraph(
+    http_request: Request,
     project_id: str,
     paragraph_id: str,
     request: RetranslateRequest,
@@ -262,7 +273,9 @@ async def retranslate_paragraph(
 
 
 @router.post("/{project_id}/export-translation")
+@limiter.limit("20/minute")
 async def export_translation(
+    http_request: Request,
     project_id: str,
     service: ConfirmationServiceDep,
     include_source: bool = False,
@@ -293,7 +306,9 @@ async def get_retranslate_options(project_id: str):
 
 
 @router.post("/{project_id}/export-bilingual")
+@limiter.limit("20/minute")
 async def export_bilingual(
+    http_request: Request,
     project_id: str,
     service: ConfirmationServiceDep,
 ):

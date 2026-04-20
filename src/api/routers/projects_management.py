@@ -9,13 +9,14 @@ from pathlib import Path
 from typing import List, Optional
 from urllib.parse import urlsplit
 
-from fastapi import APIRouter, Depends, File, Form, UploadFile
+from fastapi import APIRouter, Depends, File, Form, Request, UploadFile
 
 from src.core.models import ElementType
 from src.core.project import ProjectManager
 
 from ..dependencies import ProjectManagerDep, get_project_manager
 from ..middleware import BadRequestException, NotFoundException
+from ..middleware.rate_limit import limiter
 from .projects_models import CreateProjectRequest, ProjectResponse
 
 
@@ -78,7 +79,9 @@ async def list_projects(pm: ProjectManagerDep):
 
 
 @router.post("/projects", response_model=ProjectResponse)
+@limiter.limit("30/minute")
 async def create_project(
+    http_request: Request,
     request: CreateProjectRequest,
     pm: ProjectManagerDep,
 ):
@@ -92,7 +95,9 @@ async def create_project(
 
 
 @router.post("/projects/upload", response_model=ProjectResponse)
+@limiter.limit("30/minute")
 async def upload_project(
+    http_request: Request,
     pm: ProjectManager = Depends(get_project_manager),
     name: str = Form(...),
     file: UploadFile = File(...),
@@ -193,7 +198,8 @@ async def get_project(project_id: str, pm: ProjectManagerDep):
 
 
 @router.delete("/projects/{project_id}")
-async def delete_project(project_id: str, pm: ProjectManagerDep):
+@limiter.limit("30/minute")
+async def delete_project(http_request: Request, project_id: str, pm: ProjectManagerDep):
     try:
         pm.delete(project_id)
         return {"message": "Project deleted"}
@@ -202,7 +208,9 @@ async def delete_project(project_id: str, pm: ProjectManagerDep):
 
 
 @router.post("/projects/{project_id}/export")
+@limiter.limit("30/minute")
 async def export_project(
+    http_request: Request,
     project_id: str,
     pm: ProjectManagerDep,
     include_source: bool = False,

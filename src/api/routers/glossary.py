@@ -3,10 +3,12 @@
 from datetime import datetime
 from typing import List, Literal, Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Request
 from pydantic import BaseModel, Field
 
 from src.api.dependencies import GlossaryManagerDep
+from src.api.middleware import NotFoundException, BadRequestException
+from src.api.middleware.rate_limit import limiter
 from src.core.glossary import infer_glossary_tags, normalize_glossary_tags
 from src.core.models import GlossaryTerm, TranslationStrategy
 
@@ -86,7 +88,7 @@ def _term_to_response(term: GlossaryTerm, scope: str = "global") -> dict:
 def _find_existing_term(glossary, original: str) -> GlossaryTerm:
     existing = glossary.get_term(original)
     if not existing:
-        raise HTTPException(status_code=404, detail=f"Term '{original}' not found")
+        raise NotFoundException(detail=f"Term '{original}' not found")
     return existing
 
 
@@ -125,13 +127,13 @@ def _apply_batch_action(glossary, request: BatchGlossaryRequest) -> tuple[list[G
         return [], len(matched)
 
     if request.action == "set_status" and request.status is None:
-        raise HTTPException(status_code=400, detail="Batch action 'set_status' requires status")
+        raise BadRequestException(detail="Batch action 'set_status' requires status")
     if request.action == "set_strategy" and request.strategy is None:
-        raise HTTPException(status_code=400, detail="Batch action 'set_strategy' requires strategy")
+        raise BadRequestException(detail="Batch action 'set_strategy' requires strategy")
 
     normalized_tags = _normalize_tags(request.tags)
     if request.action in {"add_tags", "replace_tags", "remove_tags"} and not normalized_tags:
-        raise HTTPException(status_code=400, detail=f"Batch action '{request.action}' requires tags")
+        raise BadRequestException(detail=f"Batch action '{request.action}' requires tags")
 
     updated_terms: list[GlossaryTerm] = []
     for term in matched:
@@ -155,7 +157,8 @@ def _apply_batch_action(glossary, request: BatchGlossaryRequest) -> tuple[list[G
 
 
 @router.get("", response_model=GlossaryResponse)
-async def get_global_glossary(gm: GlossaryManagerDep):
+@limiter.limit("100/minute")
+async def get_global_glossary(http_request: Request, gm: GlossaryManagerDep):
     glossary = gm.load_global()
     return GlossaryResponse(
         version=glossary.version,
@@ -164,7 +167,8 @@ async def get_global_glossary(gm: GlossaryManagerDep):
 
 
 @router.post("", response_model=dict)
-async def add_global_term(request: TermRequest, gm: GlossaryManagerDep):
+@limiter.limit("60/minute")
+async def add_global_term(http_request: Request, request: TermRequest, gm: GlossaryManagerDep):
     glossary = gm.load_global()
     replaced = glossary.get_term(request.original) is not None
 
@@ -189,7 +193,9 @@ async def add_global_term(request: TermRequest, gm: GlossaryManagerDep):
 
 
 @router.put("/terms/{original}", response_model=dict)
+@limiter.limit("60/minute")
 async def update_global_term(
+    http_request: Request,
     original: str,
     request: TermUpdateRequest,
     gm: GlossaryManagerDep,
@@ -203,7 +209,8 @@ async def update_global_term(
 
 
 @router.delete("/terms/{original}", response_model=dict)
-async def delete_global_term(original: str, gm: GlossaryManagerDep):
+@limiter.limit("60/minute")
+async def delete_global_term(http_request: Request, original: str, gm: GlossaryManagerDep):
     glossary = gm.load_global()
     _find_existing_term(glossary, original)
     original_lower = original.lower()
@@ -213,7 +220,9 @@ async def delete_global_term(original: str, gm: GlossaryManagerDep):
 
 
 @router.post("/batch", response_model=dict)
+@limiter.limit("20/minute")
 async def batch_update_global_glossary(
+    http_request: Request,
     request: BatchGlossaryRequest,
     gm: GlossaryManagerDep,
 ):

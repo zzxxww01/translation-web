@@ -3,7 +3,7 @@
 import asyncio
 from typing import List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.config.timeout_config import TimeoutConfig
@@ -18,6 +18,7 @@ from ..dependencies import (
     ProjectManagerDep,
 )
 from ..middleware import BadRequestException, NotFoundException
+from ..middleware.rate_limit import limiter
 from .confirmation_models import resolve_retranslate_instruction
 from .projects_models import (
     BatchTranslateRequest,
@@ -417,7 +418,9 @@ def _to_bad_request(error: Exception, action: str) -> BadRequestException:
 
 
 @router.post("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/translate")
+@limiter.limit("30/minute")
 async def translate_paragraph(
+    http_request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
@@ -457,7 +460,9 @@ async def translate_paragraph(
 @router.post(
     "/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/direct-translate"
 )
+@limiter.limit("30/minute")
 async def direct_translate_paragraph(
+    http_request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
@@ -494,7 +499,9 @@ async def direct_translate_paragraph(
     "/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/word-meaning",
     response_model=WordMeaningResponse,
 )
+@limiter.limit("30/minute")
 async def query_word_meaning(
+    http_request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
@@ -525,7 +532,9 @@ async def query_word_meaning(
 
 
 @router.put("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/confirm")
+@limiter.limit("30/minute")
 async def confirm_paragraph(
+    http_request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
@@ -551,7 +560,9 @@ async def confirm_paragraph(
 
 
 @router.put("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}")
+@limiter.limit("30/minute")
 async def update_paragraph(
+    http_request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
@@ -593,7 +604,9 @@ async def update_paragraph(
     "/projects/{project_id}/sections/{section_id}/translate_batch",
     response_model=BatchTranslateResponse,
 )
+@limiter.limit("10/minute")
 async def batch_translate_paragraphs(
+    http_request: Request,
     project_id: str,
     section_id: str,
     request: BatchTranslateRequest,
