@@ -36,17 +36,11 @@ export function ReplyWorkspace({
   return (
     <div className="space-y-6 w-full">
       <div className="space-y-2 w-full">
-        <label className="text-sm font-medium">
-          📝 输入内容
-          <span className="ml-2 text-xs text-muted-foreground font-normal">
-            (粘贴对方英文 或 输入你的中文)
-          </span>
-        </label>
         <Textarea
           value={currentInput}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder="粘贴对方的英文消息，或输入你想说的中文..."
-          className="editorial-textarea min-h-[200px] resize-y text-sm"
+          className="editorial-textarea min-h-[200px] resize-y text-sm w-full"
           style={{
             fontFamily: 'var(--font-body)',
             borderColor: 'var(--color-border)'

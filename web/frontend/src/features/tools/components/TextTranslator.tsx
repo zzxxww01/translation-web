@@ -39,9 +39,9 @@ export function TextTranslator() {
   };
 
   return (
-    <div className="flex flex-col gap-6 w-full">
+    <div className="flex gap-4 w-full">
       {/* Source */}
-      <div className="space-y-3 w-full">
+      <div className="flex-1 space-y-3">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">原文</label>
           <Select value={sourceLang} onValueChange={setSourceLang}>
@@ -59,12 +59,12 @@ export function TextTranslator() {
           value={source}
           onChange={(e) => setSource(e.target.value)}
           placeholder="输入要翻译的文本..."
-          className="min-h-[400px] resize-y"
+          className="min-h-[500px] resize-y"
         />
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-3">
+      <div className="flex flex-col items-center justify-center gap-3 py-8">
         <Button variant="outline" size="icon" onClick={handleSwap} title="交换语言">
           <ArrowRightLeft className="h-4 w-4" />
         </Button>
@@ -78,7 +78,7 @@ export function TextTranslator() {
       </div>
 
       {/* Target */}
-      <div className="space-y-3 w-full">
+      <div className="flex-1 space-y-3">
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">译文</label>
           <Select value={targetLang} onValueChange={setTargetLang}>
@@ -95,7 +95,7 @@ export function TextTranslator() {
           value={target}
           readOnly
           placeholder="翻译结果..."
-          className="min-h-[400px] resize-y"
+          className="min-h-[500px] resize-y"
         />
         <Button variant="outline" className="w-full" onClick={handleCopy} disabled={!target}>
           <Copy className="h-4 w-4" />
