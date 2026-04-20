@@ -79,10 +79,7 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
     )}>
       <div className="flex items-start justify-between gap-2 mb-2">
         <div className="flex items-center gap-2">
-          <div className="font-semibold text-xs" style={{ color: 'var(--color-muted)' }}>{label}</div>
-          {version.style && (
-            <span className="style-tag">{version.style}</span>
-          )}
+          <span className="style-tag">{label}</span>
         </div>
         <div className="flex gap-1.5">
           {!isEditing && (

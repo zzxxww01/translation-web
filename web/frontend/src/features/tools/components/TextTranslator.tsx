@@ -39,7 +39,7 @@ export function TextTranslator() {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-[2fr_auto_2fr] gap-6">
       {/* Source */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
@@ -59,7 +59,7 @@ export function TextTranslator() {
           value={source}
           onChange={(e) => setSource(e.target.value)}
           placeholder="输入要翻译的文本..."
-          className="min-h-[300px] resize-y"
+          className="min-h-[400px] resize-y"
         />
       </div>
 
@@ -95,7 +95,7 @@ export function TextTranslator() {
           value={target}
           readOnly
           placeholder="翻译结果..."
-          className="min-h-[300px] resize-y"
+          className="min-h-[400px] resize-y"
         />
         <Button variant="outline" className="w-full" onClick={handleCopy} disabled={!target}>
           <Copy className="h-4 w-4" />

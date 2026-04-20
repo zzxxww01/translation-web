@@ -136,7 +136,7 @@ export function WechatFeature() {
             <select
               value={selectedTheme}
               onChange={(e) => setSelectedTheme(e.target.value)}
-              className="input-fluid h-9 px-3"
+              className="input-fluid h-9 px-3 border rounded"
             >
               {themes.map((theme) => (
                 <option key={theme.id} value={theme.id}>

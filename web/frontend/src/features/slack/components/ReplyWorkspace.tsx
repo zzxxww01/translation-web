@@ -46,7 +46,7 @@ export function ReplyWorkspace({
           value={currentInput}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder="粘贴对方的英文消息，或输入你想说的中文..."
-          className="editorial-textarea min-h-[80px] resize-none text-sm"
+          className="editorial-textarea min-h-[200px] resize-y text-sm"
           style={{
             fontFamily: 'var(--font-body)',
             borderColor: 'var(--color-border)'
