@@ -1,143 +1,117 @@
-import { useMemo } from 'react';
 import { toast } from 'sonner';
-import { Lightbulb, Loader2, RefreshCw, Send, User } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { ModelSelector } from '@/components/ModelSelector';
 import type { SlackReplyVariant } from '@/shared/types';
-import { copyToClipboard, detectLanguage } from '@/shared/utils';
-import { ReplySuggestions } from './components/ReplySuggestions';
-import { ConversationHistory } from './components/ConversationHistory';
-import { RefinementPanel } from './components/RefinementPanel';
+import { ConversationBubbles } from './components/ConversationBubbles';
+import { ReplyWorkspace } from './components/ReplyWorkspace';
 import { useComposeReply, useGenerateReply } from './hooks';
 import { useSlackWorkspaceStore } from './store';
-import { slackApi } from './api';
 
 export function SlackFeature() {
-  const analyzeMutation = useGenerateReply();
+  const processMutation = useGenerateReply();
   const composeMutation = useComposeReply();
 
   const {
-    incomingText, incomingTranslation, incomingSuggestions,
-    draftText, draftVersions,
-    conversationMessages, isHistoryCollapsed,
+    currentInput,
+    currentVersions,
+    isGenerating,
+    conversationMessages,
+    isHistoryCollapsed,
     selectedModel,
-    incomingRefinement, draftRefinement,
-    setIncomingText, setIncomingResult, clearIncoming,
-    setDraftText, setDraftVersions, clearDraft,
-    addMessage, addMessages, removeMessage, updateMessage, clearConversation, toggleHistoryCollapse,
+    setCurrentInput,
+    setCurrentVersions,
+    setGenerating,
+    clearWorkspace,
+    addMessage,
+    removeMessage,
+    updateMessage,
+    clearConversation,
+    toggleHistoryCollapse,
     setSelectedModel,
-    startRefinement, addRefinementVariant, clearRefinement, setRefining, confirmToHistory,
   } = useSlackWorkspaceStore();
 
-  const draftLanguage = useMemo(() => detectLanguage(draftText.trim()), [draftText]);
+  const handleGenerate = async () => {
+    const input = currentInput.trim();
+    if (!input) return;
 
-  const copyEnglish = async (content: string, msg: string) => {
-    const ok = await copyToClipboard(content);
-    if (ok) toast.success(msg);
-    else toast.error('复制失败');
-  };
+    setGenerating(true);
 
-  const handleRefineIncoming = async (instruction: string) => {
-    if (!incomingRefinement) return;
-    setRefining('incoming', true);
     try {
-      const latestVariant = incomingRefinement.variants[incomingRefinement.variants.length - 1];
-      const result = await slackApi.refine({
-        context_type: 'incoming',
-        original_result: latestVariant.content,
-        adjustment_instruction: instruction,
-        conversation_history: conversationMessages.map(m => ({ role: m.role, content: m.content })),
-      });
-      addRefinementVariant('incoming', result.refined_result);
+      // 检测是否是英文（对方消息场景）
+      const isEnglish = /^[a-zA-Z\s\d\p{P}]+$/u.test(input);
+
+      if (isEnglish) {
+        // 场景 1：对方发起 - 翻译并生成建议回复
+        const result = await processMutation.mutateAsync({
+          message: input,
+          conversation_history: conversationMessages,
+          model: selectedModel || undefined,
+        });
+
+        // 对方消息加入历史
+        addMessage('them', input, result.translation);
+
+        // 显示建议回复
+        setCurrentVersions(result.suggested_replies ?? []);
+
+        // 清空输入框，让用户可以输入中文调整
+        setCurrentInput('');
+      } else {
+        // 场景 2：我发起 / 调整建议 - 中译英
+        const result = await composeMutation.mutateAsync({
+          content: input,
+          conversation_history: conversationMessages,
+          model: selectedModel || undefined,
+        });
+
+        setCurrentVersions(
+          result.versions.map((v: SlackReplyVariant) => ({
+            ...v,
+            chinese: v.chinese || input,
+          }))
+        );
+      }
     } catch (error) {
-      toast.error('调整失败');
-      setRefining('incoming', false);
+      toast.error('生成失败，请重试');
+    } finally {
+      setGenerating(false);
     }
   };
 
-  const handleRefineDraft = async (instruction: string) => {
-    if (!draftRefinement) return;
-    setRefining('draft', true);
-    try {
-      const latestVariant = draftRefinement.variants[draftRefinement.variants.length - 1];
-      const result = await slackApi.refine({
-        context_type: 'draft',
-        original_result: latestVariant.content,
-        adjustment_instruction: instruction,
-        conversation_history: conversationMessages.map(m => ({ role: m.role, content: m.content })),
-      });
-      addRefinementVariant('draft', result.refined_result);
-    } catch (error) {
-      toast.error('调整失败');
-      setRefining('draft', false);
-    }
-  };
+  const handleSelectVersion = (version: SlackReplyVariant) => {
+    // 加入对话历史
+    addMessage('me', version.english);
 
-  const handleAnalyze = async () => {
-    const content = incomingText.trim();
-    if (!content || analyzeMutation.isPending) return;
+    // 清空工作区
+    clearWorkspace();
 
-    const lines = content.split('\n').map(l => l.trim()).filter(Boolean);
-
-    try {
-      const result = await analyzeMutation.mutateAsync({
-        message: lines[lines.length - 1],
-        conversation_history: conversationMessages,
-        model: selectedModel || undefined,
-      });
-
-      addMessages('them', lines);
-      setIncomingResult(result.translation, result.suggested_replies ?? []);
-      setIncomingText('');
-
-      // 不自动启动 refinement，让用户先选择一个建议回复
-    } catch { /* handled */ }
-  };
-
-  const handleTranslateDraft = async () => {
-    const content = draftText.trim();
-    if (!content || composeMutation.isPending) return;
-    if (draftLanguage === 'en') {
-      toast.error('这里用于中文草稿。英文内容直接复制即可。');
-      return;
-    }
-    try {
-      const result = await composeMutation.mutateAsync({
-        content,
-        conversation_history: conversationMessages,
-        model: selectedModel || undefined,
-      });
-      setDraftVersions(
-        result.versions.map((v: SlackReplyVariant) => ({ ...v, chinese: v.chinese || content }))
-      );
-
-      // 不自动启动 refinement，让用户先选择一个版本
-    } catch { /* handled */ }
+    toast.success('已加入对话历史');
   };
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-7xl flex-col gap-6 p-6">
-      {/* Header with Model Selector */}
+    <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-6 p-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-xl font-semibold">Slack 回复助手</h2>
-          <p className="text-sm text-muted-foreground">英译中理解 + 中译英回复生成</p>
+          <p className="text-sm text-muted-foreground">
+            粘贴对方英文或输入中文，生成专业回复
+          </p>
         </div>
         <div className="w-64">
-          <label className="block text-xs text-text-muted mb-1.5">选择模型</label>
+          <label className="block text-xs text-muted-foreground mb-1.5">
+            选择模型
+          </label>
           <ModelSelector
             value={selectedModel}
             onChange={setSelectedModel}
             className="h-9 text-sm"
-            disabled={analyzeMutation.isPending || composeMutation.isPending}
+            disabled={isGenerating}
           />
         </div>
       </div>
 
-      {/* Conversation History - Top Section */}
-      <ConversationHistory
+      {/* 对话历史 */}
+      <ConversationBubbles
         messages={conversationMessages}
         isCollapsed={isHistoryCollapsed}
         onToggleCollapse={toggleHistoryCollapse}
@@ -146,170 +120,15 @@ export function SlackFeature() {
         onClearAll={clearConversation}
       />
 
-      {/* Two-column layout for incoming and draft */}
-      <div className="grid flex-1 gap-6 lg:grid-cols-2">
-        {/* Incoming panel */}
-        <Card className="flex flex-col">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="flex items-center gap-2 text-base">
-                <User className="h-4 w-4" /> 对方的话
-              </CardTitle>
-              <CardDescription className="mt-1">
-                粘贴英文消息，获取中文理解和 A/B/C 三档建议回复
-              </CardDescription>
-            </div>
-            {(incomingTranslation || incomingSuggestions.length > 0) && (
-              <Button variant="ghost" size="sm" onClick={clearIncoming}>清空</Button>
-            )}
-          </div>
-        </CardHeader>
-        <CardContent className="flex flex-1 flex-col gap-4">
-          <Textarea
-            value={incomingText}
-            onChange={e => setIncomingText(e.target.value)}
-            placeholder="Paste the incoming English message here..."
-            className="min-h-[200px] flex-1"
-          />
-          <div className="flex gap-2">
-            <Button
-              onClick={handleAnalyze}
-              disabled={!incomingText.trim() || analyzeMutation.isPending}
-              className="flex-1"
-            >
-              {analyzeMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Lightbulb className="h-4 w-4" />}
-              英译中 + 建议回复
-            </Button>
-            <Button
-              variant="outline"
-              onClick={clearIncoming}
-              disabled={!incomingText && !incomingTranslation && incomingSuggestions.length === 0}
-            >
-              <RefreshCw className="h-4 w-4" /> 重置
-            </Button>
-          </div>
-
-          {(incomingTranslation || incomingSuggestions.length > 0) && (
-            <div className="space-y-4">
-              <div className="rounded-lg border bg-muted/50 p-4">
-                <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  中文理解
-                </div>
-                <div className="whitespace-pre-wrap text-sm leading-relaxed">
-                  {incomingTranslation || '暂无翻译结果'}
-                </div>
-              </div>
-              <ReplySuggestions
-                title="建议回复"
-                options={incomingSuggestions}
-                confirmLabel="用这个版本"
-                onSelectReply={async (en, cn) => {
-                  // 启动 refinement 模式，让用户可以继续调整
-                  startRefinement('incoming', incomingText, en);
-                  // 清空建议回复显示
-                  setIncomingResult(incomingTranslation, []);
-                }}
-                onClose={() => setIncomingResult(incomingTranslation, [])}
-              />
-            </div>
-          )}
-
-          {incomingRefinement && (
-            <RefinementPanel
-              session={incomingRefinement}
-              onRefine={handleRefineIncoming}
-              onConfirm={(variantId) => {
-                confirmToHistory('incoming', variantId);
-                const variant = incomingRefinement.variants.find(v => v.id === variantId);
-                if (variant) {
-                  copyEnglish(variant.content, '已复制并加入对话历史');
-                }
-                clearRefinement('incoming');
-              }}
-              onClear={() => clearRefinement('incoming')}
-            />
-          )}
-        </CardContent>
-      </Card>
-
-      {/* Draft panel */}
-      <Card className="flex flex-col">
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <div>
-              <CardTitle className="flex items-center gap-2 text-base">
-                <Send className="h-4 w-4" /> 我想回复的话
-              </CardTitle>
-              <CardDescription className="mt-1">
-                输入中文草稿，按 A/B/C 三档正式程度生成英文版本
-              </CardDescription>
-            </div>
-            {draftVersions.length > 0 && (
-              <Button variant="ghost" size="sm" onClick={clearDraft}>清空</Button>
-            )}
-          </div>
-        </CardHeader>
-        <CardContent className="flex flex-1 flex-col gap-4">
-          <Textarea
-            value={draftText}
-            onChange={e => setDraftText(e.target.value)}
-            placeholder="输入你想回复的中文内容..."
-            className="min-h-[200px] flex-1"
-          />
-          <p className="text-xs text-muted-foreground">
-            {draftLanguage === 'en'
-              ? '当前看起来已经是英文了，这里主要用于中文草稿。'
-              : '支持中文或中英混合草稿，建议先把意思写清楚再生成版本。'}
-          </p>
-          <div className="flex gap-2">
-            <Button
-              onClick={handleTranslateDraft}
-              disabled={!draftText.trim() || composeMutation.isPending}
-              className="flex-1"
-            >
-              {composeMutation.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-              中译英
-            </Button>
-            <Button variant="outline" onClick={clearDraft} disabled={!draftText && draftVersions.length === 0}>
-              <RefreshCw className="h-4 w-4" /> 重置
-            </Button>
-          </div>
-
-          {draftVersions.length > 0 && (
-            <ReplySuggestions
-              title="英文版本"
-              options={draftVersions}
-              confirmLabel="用这个版本"
-              onSelectReply={async (en, cn) => {
-                // 启动 refinement 模式，让用户可以继续调整
-                startRefinement('draft', draftText, en);
-                // 清空版本显示
-                setDraftVersions([]);
-              }}
-              onClose={() => setDraftVersions([])}
-            />
-          )}
-
-          {draftRefinement && (
-            <RefinementPanel
-              session={draftRefinement}
-              onRefine={handleRefineDraft}
-              onConfirm={(variantId) => {
-                confirmToHistory('draft', variantId);
-                const variant = draftRefinement.variants.find(v => v.id === variantId);
-                if (variant) {
-                  copyEnglish(variant.content, '已复制并加入对话历史');
-                }
-                clearRefinement('draft');
-                setDraftText('');
-              }}
-              onClear={() => clearRefinement('draft')}
-            />
-          )}
-        </CardContent>
-      </Card>
-      </div>
+      {/* 回复工作区 */}
+      <ReplyWorkspace
+        currentInput={currentInput}
+        currentVersions={currentVersions}
+        isGenerating={isGenerating}
+        onInputChange={setCurrentInput}
+        onGenerate={handleGenerate}
+        onSelectVersion={handleSelectVersion}
+      />
     </div>
   );
 }
