@@ -127,9 +127,9 @@ export function WechatFeature() {
   };
 
   return (
-    <div className="flex h-full flex-col gap-4 p-6 animate-liquid-rise">
-      <div className="flex items-center justify-between card-glass p-4 rounded-2xl">
-        <h1 className="text-2xl font-bold text-gradient-primary" style={{ fontFamily: 'var(--font-display)' }}>微信公众号排版</h1>
+    <div className="flex h-full flex-col gap-4 p-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-xl font-semibold">微信公众号排版</h1>
         <div className="flex items-center gap-4">
           <label className="flex items-center gap-2 text-sm">
             <span>主题:</span>
@@ -174,17 +174,17 @@ export function WechatFeature() {
 
       <div className="grid flex-1 grid-cols-2 gap-4 overflow-hidden">
         {/* 左侧：Markdown 输入 */}
-        <div className="flex flex-col overflow-hidden rounded-2xl card-glass">
+        <div className="flex flex-col overflow-hidden rounded-lg border">
           <Textarea
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
             placeholder="在此输入 Markdown 内容..."
-            className="flex-1 resize-none border-0 font-mono text-sm bg-transparent"
+            className="flex-1 resize-none border-0 font-mono text-sm"
           />
         </div>
 
         {/* 右侧：预览区（使用iframe隔离） */}
-        <div className="flex flex-col overflow-hidden rounded-2xl card-glass bg-white">
+        <div className="flex flex-col overflow-hidden rounded-lg border bg-white">
           {html ? (
             <iframe
               ref={iframeRef}

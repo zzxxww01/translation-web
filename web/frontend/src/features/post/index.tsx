@@ -132,11 +132,11 @@ export function PostFeature() {
 
   return (
     <div className="flex h-full overflow-auto">
-      <div className="mx-auto w-full max-w-7xl p-6 animate-liquid-rise">
-        <div className="mb-8 flex items-center justify-between">
+      <div className="mx-auto w-full max-w-7xl p-6">
+        <div className="mb-6 flex items-center justify-between">
           <div>
-            <h2 className="text-3xl font-bold text-gradient-primary" style={{ fontFamily: 'var(--font-display)' }}>帖子翻译</h2>
-            <p className="text-sm text-muted-foreground mt-1">翻译、优化并生成标题</p>
+            <h2 className="text-xl font-semibold">帖子翻译</h2>
+            <p className="text-sm text-muted-foreground">翻译、优化并生成标题</p>
           </div>
           <div className="w-64">
             <label className="block text-xs text-text-muted mb-1.5">选择模型</label>

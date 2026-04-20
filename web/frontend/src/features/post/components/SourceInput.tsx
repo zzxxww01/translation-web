@@ -16,9 +16,9 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
   const charCount = getCharCount(value);
 
   return (
-    <div className="flex flex-col card-glass p-6">
+    <div className="flex flex-col">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-semibold" style={{ fontFamily: 'var(--font-display)' }}>原文</h3>
+        <h3 className="text-sm font-semibold">原文</h3>
         <span className="text-xs text-muted-foreground">{charCount} 字符</span>
       </div>
       <Textarea

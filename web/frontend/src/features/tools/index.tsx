@@ -27,7 +27,7 @@ export function ToolsFeature() {
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
           <TabsList className="mb-6 card-glass p-1">
             {tabs.map(tab => (
-              <TabsTrigger key={tab.id} value={tab.id} className="gap-2 data-[state=active]:bg-gradient-primary data-[state=active]:text-white">
+              <TabsTrigger key={tab.id} value={tab.id} className="gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
                 {tab.icon}
                 {tab.label}
               </TabsTrigger>
