@@ -12,6 +12,7 @@ interface ReplyWorkspaceProps {
   onInputChange: (value: string) => void;
   onGenerate: () => void;
   onSelectVersion: (version: SlackReplyVariant) => void;
+  onRefineVersion?: (updatedVersion: SlackReplyVariant) => void;
 }
 
 export function ReplyWorkspace({
@@ -21,6 +22,7 @@ export function ReplyWorkspace({
   onInputChange,
   onGenerate,
   onSelectVersion,
+  onRefineVersion,
 }: ReplyWorkspaceProps) {
   const hasVersions = currentVersions.length > 0;
   const buttonText = isGenerating
@@ -71,10 +73,11 @@ export function ReplyWorkspace({
           <div className="text-xs font-semibold text-muted-foreground">💡 生成的版本</div>
           {currentVersions.map((version, index) => (
             <VersionCard
-              key={version.english}
+              key={version.version}
               version={version}
               label={versionLabels[index] || `版本${index + 1}`}
               onSelect={() => onSelectVersion(version)}
+              onRefine={onRefineVersion}
               disabled={isGenerating}
             />
           ))}

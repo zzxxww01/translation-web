@@ -92,6 +92,15 @@ export function SlackFeature() {
     toast.success('已加入对话历史');
   };
 
+  const handleRefineVersion = (updatedVersion: SlackReplyVariant) => {
+    // 更新当前版本列表中的对应版本
+    setCurrentVersions(
+      currentVersions.map((v) =>
+        v.version === updatedVersion.version ? updatedVersion : v
+      )
+    );
+  };
+
   return (
     <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-6 p-6">
       {/* Header */}
@@ -134,6 +143,7 @@ export function SlackFeature() {
         onInputChange={setCurrentInput}
         onGenerate={handleGenerate}
         onSelectVersion={handleSelectVersion}
+        onRefineVersion={handleRefineVersion}
       />
     </div>
   );

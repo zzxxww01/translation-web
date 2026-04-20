@@ -14,6 +14,7 @@ class SlackReplyVariant(BaseModel):
     version: str
     english: str
     chinese: str = ""
+    style: Optional[str] = None  # '简洁', '正式', '友好'
 
 
 class SlackProcessRequest(BaseModel):
@@ -71,6 +72,7 @@ class SlackOptimizeResponse(BaseModel):
 
 
 VERSION_ORDER = ("A", "B", "C")
+STYLE_MAP = {"A": "简洁", "B": "正式", "C": "友好"}
 
 
 def normalize_variants(raw_variants: object, chinese_fallback: str = "") -> list[SlackReplyVariant]:
@@ -88,16 +90,18 @@ def normalize_variants(raw_variants: object, chinese_fallback: str = "") -> list
 
             english = str(item.get("english", "")).strip()
             chinese = str(item.get("chinese", chinese_fallback)).strip() or chinese_fallback
+            style = STYLE_MAP.get(version)
             variant_map[version] = SlackReplyVariant(
                 version=version,
                 english=english,
                 chinese=chinese,
+                style=style,
             )
 
     return [
         variant_map.get(
             version,
-            SlackReplyVariant(version=version, english="", chinese=chinese_fallback),
+            SlackReplyVariant(version=version, english="", chinese=chinese_fallback, style=STYLE_MAP.get(version)),
         )
         for version in VERSION_ORDER
     ]

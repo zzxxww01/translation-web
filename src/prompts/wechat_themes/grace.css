@@ -1,119 +1,349 @@
-/* 微信公众号排版 - 优雅主题（参考doocs-md grace） */
+/* 微信公众号排版 - 至臻优雅主题 */
+/* 融合 doocs/md、GordenSun/WX 和现代设计语言的精华 */
 
-/* 一级标题 - 下边框+阴影 */
+/* ==================== 一级标题 - 双色渐变下划线 ==================== */
 h1 {
-  margin: 2em 8px 1em;
-  padding: 0.5em 1em;
-  padding-bottom: 0.3em;
-  border-bottom: 2px solid var(--md-primary-color);
-  font-size: calc(var(--md-font-size) * 1.5);
-  font-weight: 600;
+  margin: 2.8em 8px 1.5em;
+  padding: 0.6em 1.5em 0.8em;
+  font-size: calc(var(--md-font-size) * 1.65);
+  font-weight: 700;
   color: var(--text-color);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.08);
+  letter-spacing: 0.05em;
+  text-align: center;
+  position: relative;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.03);
 }
 
-/* 二级标题 - 圆角+阴影 */
+h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--md-primary-color) 20%,
+    var(--md-primary-color) 80%,
+    transparent 100%
+  );
+  border-radius: 2px;
+}
+
+/* ==================== 二级标题 - 渐变卡片 + 装饰点 ==================== */
 h2 {
-  margin: 2em 8px 1em;
-  padding: 0.4em 1em;
-  border-radius: 8px;
-  font-size: calc(var(--md-font-size) * 1.3);
+  margin: 2.5em 8px 1.5em;
+  padding: 0.7em 1.6em;
+  border-radius: 12px;
+  font-size: calc(var(--md-font-size) * 1.4);
   font-weight: 600;
   color: #fff;
-  background: var(--md-primary-color);
-  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
+  background: linear-gradient(135deg,
+    var(--md-primary-color) 0%,
+    color-mix(in srgb, var(--md-primary-color) 85%, #000) 100%
+  );
+  box-shadow:
+    0 4px 12px color-mix(in srgb, var(--md-primary-color) 25%, transparent),
+    0 2px 4px rgba(0, 0, 0, 0.08);
+  letter-spacing: 0.03em;
+  position: relative;
+  overflow: hidden;
 }
 
-/* 三级标题 - 左边框+虚线下边框 */
+h2::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0.8em;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 60%;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 2px;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -20%;
+  width: 100%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%);
+  transform: rotate(15deg);
+}
+
+/* ==================== 三级标题 - 渐变背景 + 左装饰 ==================== */
 h3 {
-  margin: 1.5em 8px 1em;
-  padding-left: 12px;
-  padding-bottom: 0.3em;
-  font-size: calc(var(--md-font-size) * 1.2);
+  margin: 2em 8px 1.2em;
+  padding: 0.6em 1.2em 0.6em 1.5em;
+  font-size: calc(var(--md-font-size) * 1.25);
   font-weight: 600;
   color: var(--text-color);
-  border-left: 4px solid var(--md-primary-color);
-  border-bottom: 1px dashed var(--md-primary-color);
+  border-left: 5px solid var(--md-primary-color);
+  border-radius: 0 10px 10px 0;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--md-primary-color) 12%, transparent) 0%,
+    color-mix(in srgb, var(--md-primary-color) 4%, transparent) 50%,
+    transparent 100%
+  );
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
 }
 
-/* 四级标题 */
+h3::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 40%;
+  background: linear-gradient(180deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+/* ==================== 四级标题 - 简约装饰 ==================== */
 h4 {
-  margin: 1.2em 8px 0.8em;
-  font-size: calc(var(--md-font-size) * 1.1);
-  font-weight: 500;
+  margin: 1.8em 8px 1em;
+  padding-left: 1em;
+  font-size: calc(var(--md-font-size) * 1.15);
+  font-weight: 600;
   color: var(--md-primary-color);
+  position: relative;
 }
 
-/* 引用块 - 斜体+圆角+阴影 */
+h4::before {
+  content: '◆';
+  position: absolute;
+  left: 0;
+  color: var(--md-primary-color);
+  font-size: 0.7em;
+  opacity: 0.6;
+}
+
+/* ==================== 引用块 - 优雅卡片 + 大引号 ==================== */
 blockquote {
-  margin: 1.5em 8px;
-  padding: 1em 1.2em 1em 2em;
-  border-left: 4px solid var(--md-primary-color);
-  border-radius: 6px;
-  background: #f8f9fa;
-  color: rgba(0, 0, 0, 0.65);
+  margin: 2em 8px;
+  padding: 1.5em 1.8em 1.5em 3em;
+  border-left: 5px solid var(--md-primary-color);
+  border-radius: 0 12px 12px 0;
+  background: linear-gradient(135deg,
+    color-mix(in srgb, var(--md-primary-color) 6%, #fafbfc) 0%,
+    #fafbfc 100%
+  );
+  color: rgba(0, 0, 0, 0.72);
   font-style: italic;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  position: relative;
 }
 
-/* 代码块 - 内阴影 */
+blockquote::before {
+  content: '"';
+  position: absolute;
+  left: 0.5em;
+  top: 0.2em;
+  font-size: 3.5em;
+  color: color-mix(in srgb, var(--md-primary-color) 15%, transparent);
+  font-family: Georgia, serif;
+  line-height: 1;
+  font-style: normal;
+}
+
+blockquote::after {
+  content: '';
+  position: absolute;
+  right: 1em;
+  bottom: 1em;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--md-primary-color) 8%, transparent) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+}
+
+/* ==================== 代码块 - 现代卡片 ==================== */
 pre {
-  margin: 1.5em 8px;
-  border-radius: 8px;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e5e7eb;
-}
-
-/* 图片 - 圆角+阴影 */
-img {
-  margin: 1.5em 8px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
-}
-
-/* 表格 - 圆角+阴影 */
-table {
-  margin: 1.5em 8px;
-  border-radius: 8px;
+  margin: 2em 8px;
+  border-radius: 12px;
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: #fafbfc;
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--md-primary-color) 0%,
+    color-mix(in srgb, var(--md-primary-color) 60%, transparent) 100%
+  );
+}
+
+/* ==================== 图片 - 优雅展示 ==================== */
+img {
+  margin: 2.5em 8px;
+  border-radius: 12px;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ==================== 表格 - 现代设计 ==================== */
+table {
+  margin: 2.5em 8px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.1),
+    0 2px 6px rgba(0, 0, 0, 0.06);
   border: none;
 }
 
 th {
-  background: var(--md-primary-color);
+  background: linear-gradient(135deg,
+    var(--md-primary-color) 0%,
+    color-mix(in srgb, var(--md-primary-color) 90%, #000) 100%
+  );
   color: #fff;
   border: none;
   font-weight: 600;
-  padding: 0.8em 1em;
+  padding: 1em 1.3em;
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+th::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(255, 255, 255, 0.1) 100%
+  );
 }
 
 td {
-  border: 1px solid #e5e7eb;
-  padding: 0.6em 1em;
+  border: 1px solid color-mix(in srgb, var(--md-primary-color) 10%, #e8eaed);
+  padding: 0.9em 1.3em;
+  color: rgba(0, 0, 0, 0.85);
+  transition: background 0.2s ease;
 }
 
 tbody tr:nth-child(even) {
-  background: #f8f9fa;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--md-primary-color) 3%, #fafbfc) 0%,
+    #fafbfc 100%
+  );
 }
 
-/* 强调文本 */
+tbody tr:hover {
+  background: color-mix(in srgb, var(--md-primary-color) 6%, transparent);
+}
+
+/* ==================== 强调文本 - 渐变色 ==================== */
 strong {
-  color: var(--md-primary-color);
-  font-weight: 600;
+  background: linear-gradient(135deg,
+    var(--md-primary-color) 0%,
+    color-mix(in srgb, var(--md-primary-color) 80%, #000) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  position: relative;
 }
 
-/* 链接 - 微信蓝 */
+/* ==================== 链接 - 优雅下划线 ==================== */
 a {
   color: #576b95;
   text-decoration: none;
-  border-bottom: 1px solid rgba(87, 107, 149, 0.3);
+  border-bottom: 2px solid color-mix(in srgb, #576b95 20%, transparent);
+  transition: border-color 0.3s ease, color 0.3s ease;
+  padding-bottom: 2px;
+  position: relative;
 }
 
-/* 分隔线 - 渐变 */
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #576b95;
+  transition: width 0.3s ease;
+}
+
+/* ==================== 分隔线 - 三色渐变 ==================== */
 hr {
-  height: 1px;
+  height: 2px;
   border: none;
-  margin: 2em 8px;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0));
+  margin: 3em 8px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--md-primary-color) 20%, transparent) 10%,
+    color-mix(in srgb, var(--md-primary-color) 50%, transparent) 30%,
+    var(--md-primary-color) 50%,
+    color-mix(in srgb, var(--md-primary-color) 50%, transparent) 70%,
+    color-mix(in srgb, var(--md-primary-color) 20%, transparent) 90%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  position: relative;
+}
+
+hr::before {
+  content: '✦';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--md-primary-color);
+  background: #fff;
+  padding: 0 0.5em;
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
+/* ==================== 列表装饰 ==================== */
+ul li {
+  position: relative;
+  padding-left: 0.3em;
+}
+
+ol li {
+  position: relative;
+}
+
+/* ==================== 行内代码 - 柔和背景 ==================== */
+code {
+  background: color-mix(in srgb, var(--md-primary-color) 8%, #f5f7fa);
+  color: color-mix(in srgb, var(--md-primary-color) 90%, #000);
+  padding: 0.2em 0.5em;
+  border-radius: 4px;
+  font-size: 0.9em;
+  border: 1px solid color-mix(in srgb, var(--md-primary-color) 15%, transparent);
 }
