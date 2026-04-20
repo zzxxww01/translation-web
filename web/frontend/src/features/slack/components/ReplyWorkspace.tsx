@@ -34,7 +34,17 @@ export function ReplyWorkspace({
   const versionLabels = ['简洁', '正式', '友好'];
 
   return (
-    <Card className="p-4 space-y-3">
+    <Card className="workspace-container relative p-6 space-y-6">
+      {/* Noise texture overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 space-y-3">
       <div className="space-y-2">
         <label className="text-sm font-medium">
           📝 输入内容
@@ -46,7 +56,11 @@ export function ReplyWorkspace({
           value={currentInput}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder="粘贴对方的英文消息，或输入你想说的中文..."
-          className="min-h-[80px] resize-none text-sm"
+          className="editorial-textarea min-h-[80px] resize-none text-sm"
+          style={{
+            fontFamily: 'var(--font-body)',
+            borderColor: 'var(--color-border)'
+          }}
           disabled={isGenerating}
         />
         <Button
@@ -70,19 +84,25 @@ export function ReplyWorkspace({
 
       {hasVersions && (
         <div className="space-y-2">
-          <div className="text-xs font-semibold text-muted-foreground">💡 生成的版本</div>
+          <div className="text-xs font-semibold" style={{ color: 'var(--color-muted)' }}>💡 生成的版本</div>
           {currentVersions.map((version, index) => (
-            <VersionCard
+            <div
               key={version.version}
-              version={version}
-              label={versionLabels[index] || `版本${index + 1}`}
-              onSelect={() => onSelectVersion(version)}
-              onRefine={onRefineVersion}
-              disabled={isGenerating}
-            />
+              className="version-card-animate"
+              style={{ marginLeft: index === 1 ? '16px' : '0' }}
+            >
+              <VersionCard
+                version={version}
+                label={versionLabels[index] || `版本${index + 1}`}
+                onSelect={() => onSelectVersion(version)}
+                onRefine={onRefineVersion}
+                disabled={isGenerating}
+              />
+            </div>
           ))}
         </div>
       )}
+    </div>
     </Card>
   );
 }

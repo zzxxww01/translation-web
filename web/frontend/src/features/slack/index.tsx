@@ -5,6 +5,7 @@ import { ConversationBubbles } from './components/ConversationBubbles';
 import { ReplyWorkspace } from './components/ReplyWorkspace';
 import { useComposeReply, useGenerateReply } from './hooks';
 import { useSlackWorkspaceStore } from './store';
+import './styles.css';
 
 export function SlackFeature() {
   const processMutation = useGenerateReply();
@@ -102,12 +103,14 @@ export function SlackFeature() {
   };
 
   return (
-    <div className="mx-auto flex h-full w-full max-w-5xl flex-col gap-6 p-6">
+    <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-12 p-6">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold">Slack 回复助手</h2>
-          <p className="text-sm text-muted-foreground">
+          <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>
+            Slack 回复助手
+          </h2>
+          <p className="text-sm mt-1" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-muted)' }}>
             粘贴对方英文或输入中文，生成专业回复
           </p>
         </div>

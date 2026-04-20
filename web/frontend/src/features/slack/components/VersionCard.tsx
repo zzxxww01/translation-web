@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import { copyToClipboard } from '@/shared/utils';
 import type { SlackReplyVariant } from '@/shared/types';
 import { useRefineVersion } from '../hooks/useRefineVersion';
+import { cn } from '@/lib/utils';
 
 interface VersionCardProps {
   version: SlackReplyVariant;
@@ -24,6 +25,7 @@ const STYLE_MAP: Record<string, string> = {
 export function VersionCard({ version, label, onSelect, onRefine, disabled }: VersionCardProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedChinese, setEditedChinese] = useState(version.chinese || '');
+  const [showSuccess, setShowSuccess] = useState(false);
   const refineMutation = useRefineVersion();
 
   const handleCopyOnly = async () => {
@@ -56,6 +58,8 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
 
       toast.success('已更新翻译');
       setIsEditing(false);
+      setShowSuccess(true);
+      setTimeout(() => setShowSuccess(false), 500);
     } catch (error) {
       toast.error('更新失败');
     }
@@ -67,12 +71,17 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
   };
 
   return (
-    <Card className="p-3">
+    <Card className={cn(
+      "version-card",
+      isEditing && "editing",
+      refineMutation.isPending && "saving",
+      showSuccess && "save-success"
+    )}>
       <div className="flex items-start justify-between gap-2 mb-2">
         <div className="flex items-center gap-2">
-          <div className="font-semibold text-xs text-muted-foreground">{label}</div>
+          <div className="font-semibold text-xs" style={{ color: 'var(--color-muted)' }}>{label}</div>
           {version.style && (
-            <span className="text-xs px-1.5 py-0.5 bg-muted rounded">{version.style}</span>
+            <span className="style-tag">{version.style}</span>
           )}
         </div>
         <div className="flex gap-1.5">
@@ -137,11 +146,15 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
 
       {isEditing ? (
         <div className="space-y-2">
-          <div className="text-xs text-muted-foreground mb-1">中文内容</div>
+          <div className="text-xs mb-1" style={{ color: 'var(--color-muted)' }}>中文内容</div>
           <textarea
             value={editedChinese}
             onChange={(e) => setEditedChinese(e.target.value)}
-            className="w-full min-h-[60px] p-2 text-sm border rounded resize-none leading-relaxed"
+            className="editorial-textarea w-full min-h-[60px] p-2 text-sm border rounded resize-none leading-relaxed"
+            style={{
+              fontFamily: 'var(--font-chinese)',
+              borderColor: 'var(--color-border)'
+            }}
             autoFocus
             placeholder="输入中文内容..."
           />
@@ -149,11 +162,16 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
       ) : (
         <>
           {version.chinese && (
-            <div className="text-xs text-muted-foreground mb-2 opacity-60">
+            <div className="text-xs mb-2 opacity-60" style={{
+              color: 'var(--color-muted)',
+              fontFamily: 'var(--font-chinese)'
+            }}>
               {version.chinese}
             </div>
           )}
-          <div className="text-sm whitespace-pre-wrap break-words leading-relaxed">
+          <div className="text-sm whitespace-pre-wrap break-words leading-relaxed" style={{
+            fontFamily: 'var(--font-body)'
+          }}>
             {version.english}
           </div>
         </>
