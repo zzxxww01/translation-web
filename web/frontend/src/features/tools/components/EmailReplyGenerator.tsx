@@ -73,7 +73,7 @@ export function EmailReplyGenerator() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
           placeholder="粘贴收到的邮件内容..."
-          className="min-h-[150px]"
+          className="min-h-[300px] resize-y"
         />
       </div>
 

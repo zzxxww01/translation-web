@@ -62,9 +62,11 @@ export function TimezoneConverter() {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-4 gap-4">
         <LiveTimeCard title="北京时间" timeZone="Asia/Shanghai" />
+        <LiveTimeCard title="美东时间" timeZone="America/New_York" />
         <LiveTimeCard title="美中时间" timeZone="America/Chicago" />
+        <LiveTimeCard title="美西时间" timeZone="America/Los_Angeles" />
       </div>
 
       <div className="space-y-2">

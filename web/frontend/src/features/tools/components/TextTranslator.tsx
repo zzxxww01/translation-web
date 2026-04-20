@@ -59,7 +59,7 @@ export function TextTranslator() {
           value={source}
           onChange={(e) => setSource(e.target.value)}
           placeholder="输入要翻译的文本..."
-          className="min-h-[150px]"
+          className="min-h-[300px] resize-y"
         />
       </div>
 
@@ -95,7 +95,7 @@ export function TextTranslator() {
           value={target}
           readOnly
           placeholder="翻译结果..."
-          className="min-h-[150px]"
+          className="min-h-[300px] resize-y"
         />
         <Button variant="outline" className="w-full" onClick={handleCopy} disabled={!target}>
           <Copy className="h-4 w-4" />
