@@ -18,8 +18,9 @@ IMAGE_PATTERN = re.compile(
 
 # Substack CDN proxy URL pattern:
 # https://substackcdn.com/image/fetch/$s_!TOKEN!,params.../https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2F...
+# 通用匹配：提取最后一个 URL 编码的 https:// 地址
 _SUBSTACK_CDN_PATTERN = re.compile(
-    r"https?://substackcdn\.com/image/fetch/[^/]*/(?P<encoded_url>https?%3A%2F%2F.+)"
+    r"https?://substackcdn\.com/image/fetch/.+/(https?%3A%2F%2F.+)"
 )
 
 
@@ -122,7 +123,7 @@ def _resolve_substack_cdn_url(url: str) -> str:
     m = _SUBSTACK_CDN_PATTERN.match(url)
     if not m:
         return url
-    return unquote(m.group("encoded_url"))
+    return unquote(m.group(1))
 
 
 def _normalize_src(src: str) -> str:

@@ -242,29 +242,47 @@ class VectorEngineProvider(LLMProvider):
             raise normalized.error if normalized is not None else e
 
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[float] = None) -> str:
-        """Translate text (delegates to generate with translation prompt)"""
-        context = context or {}
+        """Translate text using the shared prompt builder"""
+        context_data = dict(context or {})
+        prompt = self._build_translation_prompt(text, context_data)
+        return self.generate(prompt, temperature=0.5, timeout=timeout)
 
-        # Build translation prompt
-        glossary = context.get("glossary", {})
-        style_guide = context.get("style_guide", "")
+    def _build_translation_prompt(self, text: str, context: Dict[str, Any]) -> str:
+        """Build the paragraph translation prompt via the shared prompt builder."""
+        from ..prompts.prompt_builder import get_prompt_builder
 
-        glossary_text = "\n".join([f"- {k}: {v}" for k, v in glossary.items()]) if glossary else "无"
+        builder = get_prompt_builder(style="longform")
 
-        prompt = f"""请将以下英文翻译成中文：
+        # Extract runtime context for the paragraph prompt builder.
+        glossary = context.get("glossary", [])
+        previous_paragraphs = context.get("previous_paragraphs", [])
+        next_preview = context.get("next_preview", [])
+        article_title = context.get("article_title")
+        current_section_title = context.get("current_section_title")
+        heading_chain = context.get("heading_chain")
+        style_guide = context.get("style_guide")
+        learned_rules = context.get("learned_rules")
+        instruction = context.get("instruction")
+        format_tokens = context.get("format_tokens", [])
+        term_usage = context.get("term_usage")
 
-术语表：
-{glossary_text}
+        # Delegate prompt assembly to the long-form prompt builder.
+        prompt = builder.build_prompt(
+            source_text=text,
+            glossary=glossary,
+            previous_paragraphs=previous_paragraphs,
+            next_preview=next_preview,
+            article_title=article_title,
+            current_section_title=current_section_title,
+            heading_chain=heading_chain,
+            style_guide=style_guide,
+            learned_rules=learned_rules,
+            instruction=instruction,
+            format_tokens=format_tokens,
+            term_usage=term_usage,
+        )
 
-风格指南：
-{style_guide or "自然、专业"}
-
-原文：
-{text}
-
-请直接输出中文译文，不要包含任何解释。"""
-
-        return self.generate(prompt, temperature=0.3, timeout=timeout)
+        return prompt
 
     def analyze(self, text: str) -> Dict[str, Any]:
         """Analyze text and extract terminology"""
@@ -292,7 +310,16 @@ class VectorEngineProvider(LLMProvider):
             for i, p in enumerate(paragraphs)
         ])
 
-        glossary_text = "\n".join([f"- {k}: {v}" for k, v in glossary.items()])
+        # Handle both list and dict formats
+        if isinstance(glossary, list):
+            glossary_text = "\n".join([
+                f"- {term.get('original', '')}: {term.get('translation', '')}"
+                for term in glossary if isinstance(term, dict)
+            ])
+        elif isinstance(glossary, dict):
+            glossary_text = "\n".join([f"- {k}: {v}" for k, v in glossary.items()])
+        else:
+            glossary_text = "无"
 
         prompt = f"""检查以下译文的一致性问题：
 

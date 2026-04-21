@@ -1,10 +1,11 @@
 """Slack process endpoint."""
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from src.prompts import get_prompt_manager
 
 from ..middleware import BadRequestException
+from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
@@ -41,7 +42,9 @@ prompt_manager = get_prompt_manager()
     description="Translate the other person's message into Chinese and suggest 3 English replies.",
     tags=["slack"],
 )
+@limiter.limit("20/minute")
 async def process_slack_message(
+    http_request: Request,
     request: SlackProcessRequest,
 ):
     """Analyze an incoming workplace chat message."""

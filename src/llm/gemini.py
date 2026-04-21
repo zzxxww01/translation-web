@@ -1118,9 +1118,16 @@ class GeminiProvider(LLMProvider):
             ]
         )
 
-        glossary_text = "\n".join(
-            [f"- {term} -> {trans}" for term, trans in glossary.items()]
-        )
+        # Handle both list and dict formats
+        if isinstance(glossary, list):
+            glossary_text = "\n".join([
+                f"- {term.get('original', '')} -> {term.get('translation', '')}"
+                for term in glossary if isinstance(term, dict)
+            ])
+        elif isinstance(glossary, dict):
+            glossary_text = "\n".join([f"- {term} -> {trans}" for term, trans in glossary.items()])
+        else:
+            glossary_text = "无"
 
         return self.prompt_manager.get(
             "consistency", para_text=para_text, glossary_text=glossary_text

@@ -22,8 +22,6 @@ class PostTranslateRequest(BaseModel):
     def validate_content(cls, v: str) -> str:
         if not v.strip():
             raise ValueError("Content cannot be empty")
-        if len(v.strip()) < 10:
-            raise ValueError("Content too short (minimum 10 characters)")
         return v
 
 
@@ -72,8 +70,6 @@ class PostOptimizeRequest(BaseModel):
     def validate_text_fields(cls, v: str) -> str:
         if not v.strip():
             raise ValueError("Text cannot be empty")
-        if len(v.strip()) < 10:
-            raise ValueError("Text too short (minimum 10 characters)")
         return v
 
     @field_validator('conversation_history')

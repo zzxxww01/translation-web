@@ -5,6 +5,7 @@ Translate project-level endpoints.
 import asyncio
 import json
 import logging
+import os
 import threading
 from typing import Any, Dict
 
@@ -17,6 +18,7 @@ from src.core.models import ParagraphStatus
 from src.services.source_metadata_service import SourceMetadataTranslationService
 
 from ..dependencies import AnalysisLLMProviderDep, GlossaryManagerDep, LongformLLMProviderDep, ProjectManagerDep
+from ..middleware.rate_limit import limiter
 
 logger = logging.getLogger(__name__)
 
@@ -67,7 +69,8 @@ def _build_translation_context(section, index: int, glossary):
 
 
 @router.post("/projects/{project_id}/analyze", response_model=ProjectAnalysisResponse)
-async def analyze_project(project_id: str):
+@limiter.limit("10/minute")
+async def analyze_project(request: Request, project_id: str):
     """分析项目原文，生成摘要和翻译指南。"""
     from src.services.analysis_service import AnalysisService
 
@@ -84,14 +87,18 @@ async def analyze_project(project_id: str):
     except FileNotFoundError:
         raise NotFoundException(detail="Source file not found")
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"分析失败: {str(e)}")
+        logger.error(f"Project analysis failed: {str(e)}")
+        if os.getenv("DEBUG") == "true":
+            raise ServiceUnavailableException(detail=f"分析失败: {str(e)}")
+        raise ServiceUnavailableException(detail="分析失败，请稍后重试或联系支持")
 
 
 @router.post(
     "/projects/{project_id}/sections/{section_id}/analyze",
     response_model=SectionAnalysisResponse,
 )
-async def analyze_section(project_id: str, section_id: str):
+@limiter.limit("10/minute")
+async def analyze_section(request: Request, project_id: str, section_id: str):
     """分析章节内容，生成摘要和注意事项。"""
     from src.services.analysis_service import AnalysisService
 
@@ -113,7 +120,9 @@ async def analyze_section(project_id: str, section_id: str):
 
 
 @router.post("/projects/{project_id}/sections/{section_id}/translate_all")
+@limiter.limit("5/minute")
 async def batch_translate_section(
+    http_request: Request,
     project_id: str,
     section_id: str,
     pm: ProjectManagerDep,
@@ -169,7 +178,9 @@ async def batch_translate_section(
 
 
 @router.post("/projects/{project_id}/translate-stream")
+@limiter.limit("3/minute")
 async def translate_full_document(
+    http_request: Request,
     project_id: str,
     request: FullTranslateRequest,
     pm: ProjectManagerDep,
@@ -327,9 +338,10 @@ async def translate_full_document(
 
 
 @router.post("/projects/{project_id}/translate-four-step")
+@limiter.limit("3/minute")
 async def translate_with_four_steps(
-    project_id: str,
     http_request: Request,
+    project_id: str,
     pm: ProjectManagerDep,
     llm: LongformLLMProviderDep,
     analysis_llm: AnalysisLLMProviderDep,

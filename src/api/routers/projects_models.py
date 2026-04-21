@@ -8,13 +8,13 @@ from pydantic import BaseModel, Field
 
 
 class CreateProjectRequest(BaseModel):
-    name: str
-    html_path: str
+    name: str = Field(..., min_length=1, max_length=200)
+    html_path: str = Field(..., min_length=1, max_length=500)
 
 
 class TranslateRequest(BaseModel):
-    instruction: Optional[str] = None
-    option_id: Optional[str] = None
+    instruction: Optional[str] = Field(None, max_length=2000)
+    option_id: Optional[str] = Field(None, max_length=100)
 
 
 class DirectTranslateRequest(BaseModel):
@@ -22,18 +22,18 @@ class DirectTranslateRequest(BaseModel):
 
 
 class ConfirmRequest(BaseModel):
-    translation: str
+    translation: str = Field(..., min_length=1, max_length=50000)
 
 
 class WordMeaningMessage(BaseModel):
-    role: str
-    content: str
+    role: str = Field(..., max_length=50)
+    content: str = Field(..., max_length=10000)
 
 
 class WordMeaningRequest(BaseModel):
-    word: str
-    query: str
-    history: List[WordMeaningMessage] = Field(default_factory=list)
+    word: str = Field(..., min_length=1, max_length=200)
+    query: str = Field(..., min_length=1, max_length=2000)
+    history: List[WordMeaningMessage] = Field(default_factory=list, max_length=50)
 
 
 class WordMeaningResponse(BaseModel):
@@ -41,16 +41,16 @@ class WordMeaningResponse(BaseModel):
 
 
 class UpdateParagraphRequest(BaseModel):
-    translation: Optional[str] = None
-    status: Optional[str] = None
-    edit_source: Optional[str] = None
-    source_text: Optional[str] = None
+    translation: Optional[str] = Field(None, max_length=50000)
+    status: Optional[str] = Field(None, max_length=50)
+    edit_source: Optional[str] = Field(None, max_length=50)
+    source_text: Optional[str] = Field(None, max_length=50000)
 
 
 class BatchTranslateRequest(BaseModel):
-    paragraph_ids: List[str]
-    instruction: Optional[str] = None
-    option_id: Optional[str] = None
+    paragraph_ids: List[str] = Field(..., max_length=100)
+    instruction: Optional[str] = Field(None, max_length=2000)
+    option_id: Optional[str] = Field(None, max_length=100)
 
 
 class BatchTranslateResponse(BaseModel):

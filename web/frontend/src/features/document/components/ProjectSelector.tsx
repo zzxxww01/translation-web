@@ -83,31 +83,48 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject }) => {
           新建
         </Button>
         <Button
-          variant="destructive"
+          variant="ghost"
           size="sm"
           onClick={handleDeleteClick}
           disabled={!currentProject || deleteProject.isPending}
           title="删除当前项目"
+          className="group relative px-2.5 text-muted-foreground transition-all hover:text-destructive hover:bg-destructive/5 disabled:opacity-40"
         >
-          <Trash2 className="h-3.5 w-3.5" />
+          <Trash2 className="h-3.5 w-3.5 transition-transform group-hover:scale-110" />
         </Button>
       </div>
 
       <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <AlertDialogContent>
+        <AlertDialogContent className="max-w-md">
           <AlertDialogHeader>
-            <AlertDialogTitle>确认删除项目</AlertDialogTitle>
-            <AlertDialogDescription>
-              确定要删除项目 "{projectToDelete?.title}" 吗？
-              <br />
-              此操作无法撤销，将永久删除项目的所有数据。
+            <AlertDialogTitle className="flex items-center gap-2 text-lg">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-destructive/10">
+                <Trash2 className="h-5 w-5 text-destructive" />
+              </div>
+              确认删除项目
+            </AlertDialogTitle>
+            <AlertDialogDescription className="space-y-3 pt-2">
+              <p className="text-sm leading-relaxed">
+                确定要删除项目 <span className="font-semibold text-foreground">"{projectToDelete?.title}"</span> 吗？
+              </p>
+              <div className="rounded-md border border-destructive/20 bg-destructive/5 p-3">
+                <p className="text-xs text-destructive-foreground/80">
+                  ⚠️ 此操作无法撤销，将永久删除：
+                </p>
+                <ul className="mt-2 space-y-1 text-xs text-destructive-foreground/70">
+                  <li>• 所有章节和段落</li>
+                  <li>• 翻译内容和进度</li>
+                  <li>• 项目术语表</li>
+                  <li>• 导出文件和缓存</li>
+                </ul>
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>取消</AlertDialogCancel>
+          <AlertDialogFooter className="gap-2 sm:gap-2">
+            <AlertDialogCancel className="mt-0">取消</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleConfirmDelete}
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90 focus:ring-destructive"
             >
               确认删除
             </AlertDialogAction>

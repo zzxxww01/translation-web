@@ -1,10 +1,11 @@
 """Slack compose endpoint."""
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 
 from src.prompts import get_prompt_manager
 
 from ..middleware import BadRequestException
+from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
@@ -41,7 +42,9 @@ prompt_manager = get_prompt_manager()
     description="Return 3 English reply versions for internal workplace chat.",
     tags=["slack"],
 )
+@limiter.limit("20/minute")
 async def compose_slack_message(
+    http_request: Request,
     request: SlackComposeRequest,
 ):
     """Translate a Chinese reply draft into 3 English versions."""

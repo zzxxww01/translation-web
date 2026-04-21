@@ -4,33 +4,33 @@ Shared request/response models for confirmation-related routers.
 
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class ConfirmParagraphRequest(BaseModel):
-    translation: str
-    version_id: Optional[str] = None
+    translation: str = Field(..., min_length=1, max_length=50000)
+    version_id: Optional[str] = Field(None, max_length=100)
     custom_edit: bool = False
 
 
 class UpdateTermsRequest(BaseModel):
-    changes: List[dict]  # [{term, old_translation, new_translation}]
+    changes: List[dict] = Field(..., max_length=100)
 
 
 class ManualAlignRequest(BaseModel):
-    ref_index: int
-    target_paragraph_id: str
+    ref_index: int = Field(..., ge=0)
+    target_paragraph_id: str = Field(..., min_length=1, max_length=100)
 
 
 class ImportVersionRequest(BaseModel):
-    version_name: str
-    markdown_content: str
+    version_name: str = Field(..., min_length=1, max_length=200)
+    markdown_content: str = Field(..., min_length=1, max_length=1000000)
 
 
 class RetranslateRequest(BaseModel):
-    instruction: Optional[str] = None
-    base_version_id: Optional[str] = None
-    option_id: Optional[str] = None
+    instruction: Optional[str] = Field(None, max_length=2000)
+    base_version_id: Optional[str] = Field(None, max_length=100)
+    option_id: Optional[str] = Field(None, max_length=100)
 
 
 class RetranslateOptionResponse(BaseModel):

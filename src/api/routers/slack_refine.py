@@ -1,6 +1,7 @@
 """Slack refine endpoint - adjust previous results based on user feedback"""
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from src.api.routers.slack_models import SlackRefineRequest, SlackRefineResponse
+from src.api.middleware.rate_limit import limiter
 from src.llm.factory import create_llm_provider
 import logging
 
@@ -9,7 +10,8 @@ router = APIRouter()
 
 
 @router.post("/refine")
-async def refine_result(request: SlackRefineRequest) -> SlackRefineResponse:
+@limiter.limit("20/minute")
+async def refine_result(http_request: Request, request: SlackRefineRequest) -> SlackRefineResponse:
     """
     Refine a previous Slack result based on user's adjustment instruction.
 

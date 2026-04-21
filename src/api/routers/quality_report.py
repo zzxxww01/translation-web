@@ -2,8 +2,9 @@
 
 from pathlib import Path
 from typing import List, Optional, Dict, Any
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Query
 
+from src.api.middleware import NotFoundException
 from src.services.quality_report_service import QualityReportService
 from src.core.models.analysis import QualityReportSummary, TranslationIssue
 
@@ -19,7 +20,7 @@ async def get_latest_quality_report(project_id: str) -> QualityReportSummary:
     service = QualityReportService(PROJECT_ROOT)
     report = service.get_latest_report(project_id)
     if not report:
-        raise HTTPException(status_code=404, detail="No quality report found")
+        raise NotFoundException(detail="No quality report found")
     return report
 
 
@@ -32,7 +33,7 @@ async def get_quality_report_by_run(
     service = QualityReportService(PROJECT_ROOT)
     report = service.get_report_by_run_id(run_id, project_id)
     if not report:
-        raise HTTPException(status_code=404, detail="Quality report not found")
+        raise NotFoundException(detail="Quality report not found")
     return report
 
 
@@ -54,12 +55,12 @@ async def get_section_quality_report(
     service = QualityReportService(PROJECT_ROOT)
     report = service.get_latest_report(project_id)
     if not report:
-        raise HTTPException(status_code=404, detail="No quality report found")
+        raise NotFoundException(detail="No quality report found")
 
     # 查找章节
     section = next((s for s in report.sections if s.section_id == section_id), None)
     if not section:
-        raise HTTPException(status_code=404, detail="Section not found")
+        raise NotFoundException(detail="Section not found")
 
     # 获取章节问题
     issues = service.get_section_issues(report.run_id, section_id, project_id)

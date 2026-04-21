@@ -23,24 +23,24 @@ router = APIRouter(prefix="", tags=["projects"])
 
 
 class AddTermRequest(BaseModel):
-    original: str
-    translation: Optional[str] = None
+    original: str = Field(..., min_length=1, max_length=500)
+    translation: Optional[str] = Field(None, max_length=500)
     strategy: TranslationStrategy = TranslationStrategy.TRANSLATE
-    note: Optional[str] = None
-    tags: List[str] = Field(default_factory=list)
-    status: str = "active"
+    note: Optional[str] = Field(None, max_length=2000)
+    tags: List[str] = Field(default_factory=list, max_length=50)
+    status: str = Field(default="active", max_length=50)
 
 
 class UpdateTermRequest(BaseModel):
-    translation: Optional[str] = None
+    translation: Optional[str] = Field(None, max_length=500)
     strategy: Optional[TranslationStrategy] = None
-    note: Optional[str] = None
-    tags: Optional[List[str]] = None
-    status: Optional[str] = None
+    note: Optional[str] = Field(None, max_length=2000)
+    tags: Optional[List[str]] = Field(None, max_length=50)
+    status: Optional[str] = Field(None, max_length=50)
 
 
 class BatchGlossaryRequest(BaseModel):
-    originals: List[str] = Field(default_factory=list)
+    originals: List[str] = Field(default_factory=list, max_length=200)
     action: Literal[
         "delete",
         "set_status",
@@ -49,35 +49,35 @@ class BatchGlossaryRequest(BaseModel):
         "replace_tags",
         "remove_tags",
     ]
-    status: Optional[str] = None
+    status: Optional[str] = Field(None, max_length=50)
     strategy: Optional[TranslationStrategy] = None
-    tags: List[str] = Field(default_factory=list)
+    tags: List[str] = Field(default_factory=list, max_length=50)
 
 
 class MatchTermsRequest(BaseModel):
-    paragraph: str
-    max_terms: int = 20
+    paragraph: str = Field(..., min_length=1, max_length=50000)
+    max_terms: int = Field(default=20, ge=1, le=100)
 
 
 class TermReviewDecisionRequest(BaseModel):
-    term: str
+    term: str = Field(..., min_length=1, max_length=500)
     action: Literal["accept", "custom", "skip"]
-    translation: Optional[str] = None
-    note: Optional[str] = None
-    first_occurrence: Optional[str] = None
+    translation: Optional[str] = Field(None, max_length=500)
+    note: Optional[str] = Field(None, max_length=2000)
+    first_occurrence: Optional[str] = Field(None, max_length=1000)
 
 
 class SubmitTermReviewRequest(BaseModel):
-    decisions: List[TermReviewDecisionRequest]
+    decisions: List[TermReviewDecisionRequest] = Field(..., max_length=500)
 
 
 class CheckConflictRequest(BaseModel):
-    original: str
-    translation: Optional[str] = None
+    original: str = Field(..., min_length=1, max_length=500)
+    translation: Optional[str] = Field(None, max_length=500)
 
 
 class PrepareTermReviewRequest(BaseModel):
-    model: Optional[str] = None
+    model: Optional[str] = Field(None, max_length=100)
 
 
 def _normalize_tags(tags: Optional[List[str]]) -> List[str]:
