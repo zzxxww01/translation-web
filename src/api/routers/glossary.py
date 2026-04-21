@@ -142,11 +142,11 @@ def _apply_batch_action(glossary, body: BatchGlossaryRequest) -> tuple[list[Glos
             updated.status = body.status or updated.status
         elif body.action == "set_strategy":
             updated.strategy = body.strategy or updated.strategy
-        elif request.action == "add_tags":
+        elif body.action == "add_tags":
             updated.tags = _normalize_tags([*updated.tags, *normalized_tags])
-        elif request.action == "replace_tags":
+        elif body.action == "replace_tags":
             updated.tags = normalized_tags
-        elif request.action == "remove_tags":
+        elif body.action == "remove_tags":
             removed = {tag.lower() for tag in normalized_tags}
             updated.tags = [tag for tag in updated.tags if tag.lower() not in removed]
         updated.updated_at = datetime.now()
@@ -231,7 +231,7 @@ async def batch_update_global_glossary(
     gm.save_global(glossary)
     return {
         "message": "Batch action applied",
-        "action": request.action,
+        "action": body.action,
         "matched_count": matched_count,
         "updated_count": len(updated_terms),
         "terms": [_term_to_response(term) for term in updated_terms],

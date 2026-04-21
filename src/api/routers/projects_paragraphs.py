@@ -70,7 +70,7 @@ def _translate_paragraph_sync(
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: TranslateRequest,
+    body: TranslateRequest,
     pm,
     gm,
     llm,
@@ -97,7 +97,7 @@ def _translate_paragraph_sync(
 
     timeout_s = TimeoutConfig.get_timeout("longform")
     agent = TranslationAgent(llm, timeout=timeout_s)
-    instruction = resolve_retranslate_instruction(body.instruction, getattr(request, 'option_id', None))
+    instruction = resolve_retranslate_instruction(body.instruction, body.option_id)
     if instruction:
         formatted_instruction = build_retranslate_instruction(
             instruction,
@@ -135,7 +135,7 @@ def _direct_translate_paragraph_sync(
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: DirectTranslateRequest,
+    body: DirectTranslateRequest,
     pm,
     llm,
 ):
@@ -177,7 +177,7 @@ def _query_word_meaning_sync(
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: WordMeaningRequest,
+    body: WordMeaningRequest,
     pm,
     llm,
 ) -> WordMeaningResponse:
@@ -225,7 +225,7 @@ def _confirm_paragraph_sync(
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: ConfirmRequest,
+    body: ConfirmRequest,
     pm,
 ):
     paragraph = pm.update_paragraph_locked(
@@ -248,7 +248,7 @@ def _update_paragraph_sync(
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: UpdateParagraphRequest,
+    body: UpdateParagraphRequest,
     pm,
 ):
     section = pm.get_section(project_id, section_id)
@@ -310,7 +310,7 @@ def _update_paragraph_sync(
 def _batch_translate_paragraphs_sync(
     project_id: str,
     section_id: str,
-    request: BatchTranslateRequest,
+    body: BatchTranslateRequest,
     pm,
     gm,
     llm,
@@ -352,7 +352,7 @@ def _batch_translate_paragraphs_sync(
                 sections=sections,
             )
 
-            instruction = resolve_retranslate_instruction(body.instruction, getattr(request, 'option_id', None))
+            instruction = resolve_retranslate_instruction(body.instruction, body.option_id)
             if instruction:
                 formatted_instruction = build_retranslate_instruction(
                     instruction,
@@ -439,7 +439,7 @@ async def translate_paragraph(
             project_id,
             section_id,
             paragraph_id,
-            request,
+            body,
             pm,
             gm,
             llm,
@@ -479,7 +479,7 @@ async def direct_translate_paragraph(
             project_id,
             section_id,
             paragraph_id,
-            request,
+            body,
             pm,
             llm,
         )
@@ -517,7 +517,7 @@ async def query_word_meaning(
             project_id,
             section_id,
             paragraph_id,
-            request,
+            body,
             pm,
             llm,
         )
@@ -550,7 +550,7 @@ async def confirm_paragraph(
             project_id,
             section_id,
             paragraph_id,
-            request,
+            body,
             pm,
         )
         await service.invalidate_project_cache(project_id)
@@ -579,7 +579,7 @@ async def update_paragraph(
             project_id,
             section_id,
             paragraph_id,
-            request,
+            body,
             pm,
         )
         await service.invalidate_project_cache(project_id)
@@ -623,7 +623,7 @@ async def batch_translate_paragraphs(
             _batch_translate_paragraphs_sync,
             project_id,
             section_id,
-            request,
+            body,
             pm,
             gm,
             llm,

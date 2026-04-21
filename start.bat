@@ -152,15 +152,19 @@ if exist "web\frontend\dist\assets\*.map" (
 )
 
 rem ========== Reuse healthy existing server ==========
-%PYTHON_CMD% -c "from src.startup_probe import is_translation_agent_running; import sys; sys.exit(0 if is_translation_agent_running(%PORT%) else 1)" >nul 2>&1
-if %errorlevel% equ 0 (
-    echo [INFO] Translation Agent is already running on port %PORT%.
-    echo [INFO] Reusing existing instance.
-    echo [INFO] API:      http://localhost:%PORT%/api
-    echo [INFO] Web UI:   http://localhost:%PORT%
-    echo [INFO] API Docs: http://localhost:%PORT%/docs
-    echo(
-    exit /b 0
+if "%FORCE_KILL_PORT%"=="1" (
+    echo [INFO] Force-kill requested. Skipping healthy instance reuse.
+) else (
+    %PYTHON_CMD% -c "from src.startup_probe import is_translation_agent_running; import sys; sys.exit(0 if is_translation_agent_running(%PORT%) else 1)" >nul 2>&1
+    if %errorlevel% equ 0 (
+        echo [INFO] Translation Agent is already running on port %PORT%.
+        echo [INFO] Reusing existing instance.
+        echo [INFO] API:      http://localhost:%PORT%/api
+        echo [INFO] Web UI:   http://localhost:%PORT%
+        echo [INFO] API Docs: http://localhost:%PORT%/docs
+        echo(
+        exit /b 0
+    )
 )
 
 rem ========== Force cleanup for port ==========
