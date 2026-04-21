@@ -809,12 +809,26 @@
           "created_at": "2026-04-18T00:54:43.990813",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "default": {
+          "text": "三星展示了一款36 GB、12层堆叠的HBM4样品，其具备2048个输入/输出引脚，带宽高达3.3 TB/s。该样品采用第六代10nm级（1c）DRAM核心芯片，并搭配了SF4逻辑基础芯片制造而成。",
+          "model": "default",
+          "created_at": "2026-04-21T17:29:46.339037",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "三星展示了一款36 GB、12层堆叠的HBM4样品，其具备2048个输入/输出引脚，带宽高达3.3 TB/s。该样品采用第六代10nm级（1c）DRAM核心芯片，并搭配了SF4逻辑基础芯片制造而成。",
+          "model": "manual",
+          "created_at": "2026-04-21T17:29:53.528665",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
-      "confirmed": null,
+      "confirmed": "三星展示了一款36 GB、12层堆叠的HBM4样品，其具备2048个输入/输出引脚，带宽高达3.3 TB/s。该样品采用第六代10nm级（1c）DRAM核心芯片，并搭配了SF4逻辑基础芯片制造而成。",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "translated",
+      "status": "approved",
       "ai_insight": {
         "overall_score": 8.575,
         "is_excellent": false,
