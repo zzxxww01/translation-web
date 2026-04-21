@@ -22,6 +22,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Setup config
+        run: |
+          cp config/llm_providers.yaml.example config/llm_providers.yaml
+          echo "GEMINI_API_KEY=test" > .env
+
       - name: Compile Python source
         run: python -m compileall src
 
