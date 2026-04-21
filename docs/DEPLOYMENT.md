@@ -9,6 +9,8 @@
 - [系统要求](#系统要求)
 - [Windows 本地部署](#windows-本地部署)
 - [Linux 云服务器部署](#linux-云服务器部署)
+  - [方案 A: Cloudflare Tunnel 部署（推荐）](#方案-a-cloudflare-tunnel-部署推荐)
+  - [方案 B: 传统 Nginx + SSL 部署](#方案-b-传统-nginx--ssl-部署)
 - [环境配置](#环境配置)
 - [安全加固](#安全加固)
 - [备份与恢复](#备份与恢复)
@@ -128,7 +130,233 @@ stop.bat
 
 ## Linux 云服务器部署
 
-### 快速部署（5 分钟）
+本项目提供两种部署方案：
+
+- **方案 A: Cloudflare Tunnel**（推荐）- 无需公网 IP，自动 HTTPS，零配置 SSL
+- **方案 B: 传统 Nginx + SSL** - 需要公网 IP 和域名解析
+
+---
+
+### 方案 A: Cloudflare Tunnel 部署（推荐）
+
+#### 优势
+- ✅ 无需公网 IP 或开放端口
+- ✅ 自动 HTTPS，无需手动配置 SSL 证书
+- ✅ 内置 DDoS 防护和 CDN 加速
+- ✅ 支持内网服务器部署
+- ✅ 零维护成本（证书自动续期）
+
+#### 前置要求
+- Cloudflare 账号（免费）
+- 域名托管在 Cloudflare
+
+#### 1. 安装系统依赖
+
+```bash
+# Ubuntu/Debian
+sudo apt update
+sudo apt install -y python3.10 python3.10-venv python3-pip nodejs npm nginx git
+
+# CentOS/RHEL
+sudo yum install -y python3.10 python3-pip nodejs npm nginx git
+```
+
+#### 2. 安装 Cloudflare Tunnel
+
+```bash
+# 下载并安装 cloudflared
+wget -q https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb
+sudo dpkg -i cloudflared-linux-amd64.deb
+
+# 验证安装
+cloudflared --version
+```
+
+#### 3. 克隆并配置项目
+
+```bash
+cd ~
+git clone https://github.com/your-org/translation-agent.git
+cd translation-agent
+
+# 创建虚拟环境
+python3 -m venv .venv
+source .venv/bin/activate
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 前端构建
+cd web/frontend
+npm install
+npm run build
+cd ../..
+
+# 配置环境变量
+cp .env.example .env
+nano .env
+```
+
+**生产环境配置**（.env）:
+```bash
+# API 密钥
+GEMINI_API_KEY=your_real_api_key_here
+GEMINI_BACKUP_API_KEY=your_backup_key_here
+
+# 生产环境配置
+DEBUG=false
+LOG_LEVEL=INFO
+CORS_ORIGINS=https://your-domain.com
+API_HOST=127.0.0.1
+API_PORT=54321
+```
+
+#### 4. 配置 Nginx（本地反向代理）
+
+创建配置文件 `/etc/nginx/sites-available/translation-agent`:
+
+```nginx
+server {
+    listen 80;
+    server_name localhost;
+    
+    # 前端静态文件
+    location / {
+        root /home/your-user/translation-agent/web/frontend/dist;
+        try_files $uri $uri/ /index.html;
+        add_header Cache-Control "no-cache";
+    }
+    
+    # API 代理
+    location /api/ {
+        proxy_pass http://127.0.0.1:54321/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+启用配置：
+
+```bash
+# 修改目录权限（让 Nginx 可以访问）
+chmod o+x ~
+chmod o+x ~/translation-agent
+chmod -R o+rx ~/translation-agent/web/frontend/dist
+
+# 启用站点
+sudo ln -s /etc/nginx/sites-available/translation-agent /etc/nginx/sites-enabled/
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+#### 5. 创建 systemd 服务
+
+创建 `/etc/systemd/system/translation-agent.service`:
+
+```ini
+[Unit]
+Description=Translation Agent Service
+After=network.target
+
+[Service]
+Type=simple
+User=your-user
+WorkingDirectory=/home/your-user/translation-agent
+Environment="PATH=/home/your-user/translation-agent/.venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/your-user/translation-agent/.venv/bin/uvicorn src.api.app:app --host 127.0.0.1 --port 54321
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+```
+
+启动服务：
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start translation-agent
+sudo systemctl enable translation-agent
+sudo systemctl status translation-agent
+```
+
+#### 6. 配置 Cloudflare Tunnel
+
+```bash
+# 登录 Cloudflare（会打开浏览器）
+cloudflared tunnel login
+
+# 创建 Tunnel
+cloudflared tunnel create translation-agent
+
+# 记录返回的 Tunnel ID
+```
+
+创建配置文件 `/etc/cloudflared/config.yml`:
+
+```yaml
+tunnel: YOUR_TUNNEL_ID
+credentials-file: /home/your-user/.cloudflared/YOUR_TUNNEL_ID.json
+
+ingress:
+  - hostname: your-domain.com
+    service: http://localhost:80
+  - service: http_status:404
+```
+
+#### 7. 配置 DNS
+
+```bash
+# 创建 DNS 记录（自动）
+cloudflared tunnel route dns translation-agent your-domain.com
+```
+
+或手动在 Cloudflare Dashboard 添加 CNAME 记录：
+- Type: `CNAME`
+- Name: `@` 或 `translate`
+- Target: `YOUR_TUNNEL_ID.cfargotunnel.com`
+- Proxy status: `Proxied`（橙色云朵）
+
+#### 8. 启动 Cloudflare Tunnel
+
+```bash
+# 测试运行
+cloudflared tunnel run translation-agent
+
+# 验证成功后，安装为系统服务
+sudo cloudflared service install
+sudo systemctl start cloudflared
+sudo systemctl enable cloudflared
+```
+
+#### 9. 验证部署
+
+```bash
+# 检查服务状态
+sudo systemctl status translation-agent
+sudo systemctl status nginx
+sudo systemctl status cloudflared
+
+# 访问应用
+curl https://your-domain.com/api/
+```
+
+访问 `https://your-domain.com` 即可使用！
+
+---
+
+### 方案 B: 传统 Nginx + SSL 部署
+
+#### 前置要求
+- 公网 IP 地址
+- 域名已解析到服务器 IP
 
 #### 1. 安装系统依赖
 
@@ -479,17 +707,67 @@ ossutil config
 
 ## 监控与维护
 
+### 服务管理命令
+
+#### Cloudflare Tunnel 部署
+
+```bash
+# 后端服务管理
+sudo systemctl start translation-agent      # 启动
+sudo systemctl stop translation-agent       # 停止
+sudo systemctl restart translation-agent    # 重启
+sudo systemctl status translation-agent     # 查看状态
+
+# Nginx 管理
+sudo systemctl reload nginx                 # 重载配置
+sudo systemctl restart nginx                # 重启
+sudo nginx -t                               # 测试配置
+
+# Cloudflare Tunnel 管理
+sudo systemctl start cloudflared            # 启动
+sudo systemctl stop cloudflared             # 停止
+sudo systemctl restart cloudflared          # 重启
+sudo systemctl status cloudflared           # 查看状态
+
+# 查看日志
+sudo journalctl -u translation-agent -f     # 后端日志
+sudo journalctl -u cloudflared -f           # Tunnel 日志
+sudo tail -f /var/log/nginx/error.log       # Nginx 日志
+```
+
+#### 传统 Nginx + SSL 部署
+
+```bash
+# 后端服务管理
+sudo systemctl start translation-agent
+sudo systemctl stop translation-agent
+sudo systemctl restart translation-agent
+
+# Nginx 管理
+sudo systemctl reload nginx
+sudo systemctl restart nginx
+
+# 查看日志
+sudo journalctl -u translation-agent -f
+sudo tail -f /var/log/nginx/translation-agent-access.log
+sudo tail -f /var/log/nginx/translation-agent-error.log
+```
+
 ### 健康检查
 
 ```bash
 # 本地检查
-curl http://localhost:54321/api/health
+curl http://localhost:54321/
+curl http://localhost/api/
 
-# 外部检查
+# 外部检查（Cloudflare Tunnel）
+curl https://your-domain.com/api/
+
+# 外部检查（传统部署）
 curl https://translate.your-domain.com/api/health
 
 # 预期响应
-{"status":"healthy","service":"Translation Agent API"}
+# 返回项目列表 JSON 数据
 ```
 
 ### 查看日志
@@ -497,14 +775,11 @@ curl https://translate.your-domain.com/api/health
 ```bash
 # systemd 日志
 sudo journalctl -u translation-agent -f
-
-# 应用日志
-tail -f logs/error.log
-tail -f logs/access.log
+sudo journalctl -u cloudflared -f  # 仅 Cloudflare Tunnel
 
 # Nginx 日志
-sudo tail -f /var/log/nginx/translation-agent-access.log
-sudo tail -f /var/log/nginx/translation-agent-error.log
+sudo tail -f /var/log/nginx/error.log
+sudo tail -f /var/log/nginx/access.log
 ```
 
 ### 性能监控
@@ -545,6 +820,92 @@ curl https://translate.your-domain.com/api/health
 ---
 
 ## 故障排查
+
+### Cloudflare Tunnel 相关问题
+
+#### 问题 1: Tunnel 无法连接
+
+```bash
+# 检查 cloudflared 服务状态
+sudo systemctl status cloudflared
+
+# 查看详细日志
+sudo journalctl -u cloudflared -n 50
+
+# 测试 Tunnel 连接
+cloudflared tunnel info translation-agent
+
+# 重启 Tunnel
+sudo systemctl restart cloudflared
+```
+
+#### 问题 2: 域名返回 502 错误
+
+**原因**: Nginx 无法访问前端文件或后端服务未启动
+
+```bash
+# 检查后端服务
+sudo systemctl status translation-agent
+curl http://localhost:54321/
+
+# 检查 Nginx
+sudo systemctl status nginx
+curl http://localhost/
+
+# 检查文件权限
+ls -la ~/translation-agent/web/frontend/dist/
+chmod o+x ~
+chmod o+x ~/translation-agent
+chmod -R o+rx ~/translation-agent/web/frontend/dist
+
+# 查看 Nginx 错误日志
+sudo tail -50 /var/log/nginx/error.log
+```
+
+#### 问题 3: 端口 54321 被占用
+
+```bash
+# 查找占用进程
+sudo lsof -i :54321
+
+# 停止占用进程
+sudo kill -9 <PID>
+
+# 重启服务
+sudo systemctl restart translation-agent
+```
+
+#### 问题 4: Cloudflare Tunnel 配置错误
+
+```bash
+# 检查配置文件
+cat /etc/cloudflared/config.yml
+
+# 验证配置
+cloudflared tunnel ingress validate
+
+# 确认 Tunnel 指向正确的服务
+# 应该是: service: http://localhost:80
+# 而不是: service: http://localhost:54321
+```
+
+#### 问题 5: DNS 未生效
+
+```bash
+# 检查 DNS 记录
+nslookup your-domain.com
+
+# 手动添加 CNAME 记录（如果自动添加失败）
+# 在 Cloudflare Dashboard:
+# Type: CNAME
+# Name: @ 或 translate
+# Target: YOUR_TUNNEL_ID.cfargotunnel.com
+# Proxy: Enabled (橙色云朵)
+```
+
+---
+
+### 传统部署相关问题
 
 ### 问题 1: 服务无法启动
 
@@ -632,7 +993,29 @@ taskkill /PID <PID> /F
 - [ ] 服务可正常启动
 - [ ] Web 界面可访问
 
-### Linux 云服务器部署
+### Linux 云服务器部署 - Cloudflare Tunnel
+
+- [ ] 系统依赖已安装（Python, Node.js, Nginx）
+- [ ] cloudflared 已安装
+- [ ] 项目已克隆
+- [ ] 虚拟环境已创建并激活
+- [ ] Python 依赖已安装
+- [ ] 前端已构建
+- [ ] `.env` 已配置
+- [ ] Gemini API 密钥已填写
+- [ ] `DEBUG=false` 已设置
+- [ ] CORS 已配置为域名
+- [ ] Nginx 本地反向代理已配置
+- [ ] 目录权限已设置（chmod o+x）
+- [ ] systemd 服务已创建并启动
+- [ ] Cloudflare Tunnel 已创建
+- [ ] Tunnel 配置文件已创建（/etc/cloudflared/config.yml）
+- [ ] DNS 记录已添加（CNAME）
+- [ ] cloudflared 服务已启动并自启
+- [ ] 健康检查通过（https://your-domain.com/api/）
+- [ ] 前端页面可访问
+
+### Linux 云服务器部署 - 传统 Nginx + SSL
 
 - [ ] 系统依赖已安装（Python, Node.js, Nginx）
 - [ ] 项目已克隆到 `/opt/translation-agent`
