@@ -212,12 +212,26 @@
           "created_at": "2026-04-10T11:55:38.173308",
           "tokenized_text": null,
           "format_issues": []
+        },
+        "default": {
+          "text": "这既是未来的惊鸿一瞥，也已是今日软件开发的现实。你欣赏的工程师们正在实践 vibe coding（直觉编程/意念编程）：",
+          "model": "default",
+          "created_at": "2026-04-21T14:54:06.996391",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "manual": {
+          "text": "这既是未来的惊鸿一瞥，也已是今日软件开发的现实。你欣赏的工程师们正在实践 vibe coding（直觉编程/意念编程）：",
+          "model": "manual",
+          "created_at": "2026-04-21T14:54:17.389943",
+          "tokenized_text": null,
+          "format_issues": []
         }
       },
-      "confirmed": null,
+      "confirmed": "这既是未来的惊鸿一瞥，也已是今日软件开发的现实。你欣赏的工程师们正在实践 vibe coding（直觉编程/意念编程）：",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "translated",
+      "status": "approved",
       "ai_insight": {
         "overall_score": 9.125,
         "is_excellent": false,
@@ -361,12 +375,26 @@
           "created_at": "2026-04-10T11:55:38.175774",
           "tokenized_text": "[[[STRONG_1|Andrej Karpathy]]]（[[[LINK_1|他在一年前创造了“氛围感编程”一词]]]）[[[LINK_2|正公开探讨这一范式转变]]]，他明确表示：“我已经注意到，自己手动编写代码的能力正慢慢退化。生成（写代码）和辨别（读代码）是大脑中截然不同的两种能力。”",
           "format_issues": []
+        },
+        "default": {
+          "text": "Andrej Karpathy 一年前创造了“vibe coding”这一术语，如今正公开讨论这种范式转变。他明确指出：“我已经注意到，自己手动编写代码的能力正逐渐萎缩。生成（写代码）与辨别（读代码）是大脑中两种不同的能力。”",
+          "model": "default",
+          "created_at": "2026-04-21T14:54:25.725973",
+          "tokenized_text": "[[[STRONG_1|Andrej Karpathy]]] [[[LINK_1|一年前创造了“vibe coding”这一术语]]]，[[[LINK_2|如今正公开讨论这种范式转变]]]。他明确指出：“我已经注意到，自己手动编写代码的能力正逐渐萎缩。生成（写代码）与辨别（读代码）是大脑中两种不同的能力。”",
+          "format_issues": []
+        },
+        "manual": {
+          "text": "Andrej Karpathy 一年前创造了“vibe coding”这一术语，如今正公开讨论这种范式转变。他明确指出：“我已经注意到，自己手动编写代码的能力正逐渐萎缩。生成（写代码）与辨别（读代码）是大脑中两种不同的能力。”",
+          "model": "manual",
+          "created_at": "2026-04-21T14:54:54.059576",
+          "tokenized_text": "[[[STRONG_1|Andrej Karpathy]]] [[[LINK_1|一年前创造了“vibe coding”这一术语]]]，[[[LINK_2|如今正公开讨论这种范式转变]]]。他明确指出：“我已经注意到，自己手动编写代码的能力正逐渐萎缩。生成（写代码）与辨别（读代码）是大脑中两种不同的能力。”",
+          "format_issues": []
         }
       },
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "confirmed": "Andrej Karpathy 一年前创造了“vibe coding”这一术语，如今正公开讨论这种范式转变。他明确指出：“我已经注意到，自己手动编写代码的能力正逐渐萎缩。生成（写代码）与辨别（读代码）是大脑中两种不同的能力。”",
+      "confirmed_tokenized": "[[[STRONG_1|Andrej Karpathy]]] [[[LINK_1|一年前创造了“vibe coding”这一术语]]]，[[[LINK_2|如今正公开讨论这种范式转变]]]。他明确指出：“我已经注意到，自己手动编写代码的能力正逐渐萎缩。生成（写代码）与辨别（读代码）是大脑中两种不同的能力。”",
       "confirmed_format_issues": [],
-      "status": "translated",
+      "status": "approved",
       "ai_insight": {
         "overall_score": 9.125,
         "is_excellent": false,

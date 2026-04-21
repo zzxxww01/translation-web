@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any, Awaitable, Callable, Optional
 
 from src.core.models import ArticleAnalysis, ProjectMeta, Section, TermConflict
+from src.core.structured_metadata import is_structured_metadata_paragraph
 from src.services.batch_translation_types import TranslationProgress
 
 
@@ -82,7 +83,7 @@ class SectionTranslationExecutor:
 
             prescan_result = await self._run_section_prescan(
                 project_id,
-                section,
+                self._build_translatable_section(section),
                 progress,
                 on_term_conflict=on_term_conflict,
             )
@@ -107,16 +108,28 @@ class SectionTranslationExecutor:
                     "paragraph_count": section_paragraph_count,
                 }
 
+            translatable_section = self._build_translatable_section(section)
+            if not translatable_section.paragraphs:
+                return {
+                    "section_id": section.section_id,
+                    "translations": [],
+                    "paragraph_count": section_paragraph_count,
+                    "translated_before": translated_in_section,
+                }
+
             if translation_mode == translation_mode_section:
                 translations = await self._translate_section_batch(
-                    section=section,
+                    section=translatable_section,
                     section_index=section_index,
                     total_sections=total_sections,
                     all_sections=all_sections,
                     analysis=analysis,
                 )
-                collected_translations = self._apply_section_batch_translations(section, translations)
-                self._record_section_batch_term_usage(section, analysis)
+                collected_translations = self._apply_section_batch_translations(
+                    translatable_section,
+                    translations,
+                )
+                self._record_section_batch_term_usage(translatable_section, analysis)
                 self._persist_section_artifact(
                     run_dir,
                     "section-draft",
@@ -130,7 +143,7 @@ class SectionTranslationExecutor:
                 )
             else:
                 result = self._four_step_translate_section(
-                    section=section,
+                    section=translatable_section,
                     all_sections=all_sections,
                     project_id=project_id,
                     on_progress=self._create_section_callback(
@@ -141,7 +154,7 @@ class SectionTranslationExecutor:
                         max(section_paragraph_count - translated_in_section, 0),
                     ),
                 )
-                self._apply_four_step_translations(section, result)
+                self._apply_four_step_translations(translatable_section, result)
                 collected_translations = result.translations
                 self._persist_section_artifact(
                     run_dir,
@@ -196,3 +209,16 @@ class SectionTranslationExecutor:
                 "error": error_msg,
                 "exception": error,
             }
+
+    @staticmethod
+    def _build_translatable_section(section: Section) -> Section:
+        """Filter out structured metadata paragraphs from automatic body translation."""
+        return section.model_copy(
+            update={
+                "paragraphs": [
+                    paragraph
+                    for paragraph in section.paragraphs
+                    if not is_structured_metadata_paragraph(paragraph)
+                ]
+            }
+        )

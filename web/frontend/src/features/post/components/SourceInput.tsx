@@ -35,11 +35,11 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
         <Button
           onClick={onTranslate}
           disabled={!value.trim() || isLoading}
-          size="icon"
-          className="h-12 w-12 rounded-full shadow-lg hover:shadow-xl"
+          size="sm"
+          className="h-9 w-9 p-0 rounded-full shadow-md hover:shadow-lg"
           title="翻译 (Ctrl+Enter)"
         >
-          <Send className="h-5 w-5" />
+          <Send className="h-4 w-4" />
         </Button>
       </div>
     </div>

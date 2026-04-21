@@ -183,8 +183,10 @@
         "LINK_2",
         "LINK_3"
       ],
-      "format_recovery_status": "ready",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
@@ -206,17 +208,28 @@
           "format_issues": []
         },
         "default": {
-          "text": "作者：道格·奥洛克林、杰里米·以利亚胡·昂蒂韦罗斯、乔丹·纳诺斯 及另外两人",
+          "text": "道格·奥洛克林、杰里米·埃利亚胡·昂蒂韦罗斯、乔丹·纳诺斯 及另外两人合著\n\n2026年2月5日 · 付费内容",
           "model": "default",
-          "created_at": "2026-04-21T11:24:35.417005",
-          "tokenized_text": "作者：[[[LINK_1|道格·奥洛克林]]]、[[[LINK_2|杰里米·以利亚胡·昂蒂韦罗斯]]]、[[[LINK_3|乔丹·纳诺斯]]] 及另外两人",
+          "created_at": "2026-04-21T14:53:46.825855",
+          "tokenized_text": "[[[LINK_1|道格·奥洛克林]]]、[[[LINK_2|杰里米·埃利亚胡·昂蒂韦罗斯]]]、[[[LINK_3|乔丹·纳诺斯]]] 及另外两人合著\n\n2026年2月5日 · 付费内容",
           "format_issues": []
+        },
+        "manual": {
+          "text": "道格·奥洛克林、杰里米·埃利亚胡·昂蒂韦罗斯、乔丹·纳诺斯 及另外两人",
+          "model": "manual",
+          "created_at": "2026-04-21T14:53:56.165232",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
         }
       },
-      "confirmed": null,
+      "confirmed": "道格·奥洛克林、杰里米·埃利亚胡·昂蒂韦罗斯、乔丹·纳诺斯 及另外两人",
       "confirmed_tokenized": null,
-      "confirmed_format_issues": [],
-      "status": "translated",
+      "confirmed_format_issues": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
+      "status": "approved",
       "ai_insight": {
         "overall_score": 9.125,
         "is_excellent": true,

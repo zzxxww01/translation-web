@@ -83,7 +83,7 @@ export function OptimizationPanel({ onOptimize, isLoading, hasVersions, hasOrigi
             </Button>
           </div>
 
-          <div className="flex gap-2">
+          <div className="flex gap-2 items-center">
             <Input
               id="customInstructionInput"
               placeholder="优化要求..."
@@ -91,12 +91,14 @@ export function OptimizationPanel({ onOptimize, isLoading, hasVersions, hasOrigi
               onChange={(e) => setCustomInstruction(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendCustom()}
               disabled={isLoading}
+              className="flex-1"
             />
             <Button
-              size="icon"
+              size="sm"
               onClick={handleSendCustom}
               disabled={!hasVersions || !customInstruction.trim() || isLoading}
               title="发送指令 (Ctrl+K)"
+              className="h-9 w-9 p-0 shrink-0"
             >
               <Send className="h-4 w-4" />
             </Button>

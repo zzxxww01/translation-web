@@ -18,6 +18,7 @@ from src.api.streaming.translation_stream_session import (
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.core.format_tokens import apply_translation_payload
 from src.core.models import ParagraphStatus
+from src.core.structured_metadata import is_structured_metadata_paragraph
 from src.services.source_metadata_service import SourceMetadataTranslationService
 
 from ..dependencies import AnalysisLLMProviderDep, GlossaryManagerDep, LongformLLMProviderDep, ProjectManagerDep
@@ -148,6 +149,8 @@ async def batch_translate_section(
         translated_count = source_metadata_result.get("translated", 0)
 
         for index, paragraph in enumerate(section.paragraphs):
+            if is_structured_metadata_paragraph(paragraph):
+                continue
             if paragraph.status == ParagraphStatus.APPROVED:
                 continue
 
@@ -223,6 +226,22 @@ async def translate_full_document(
                     continue
 
                 for index, paragraph in enumerate(section_full.paragraphs):
+                    if is_structured_metadata_paragraph(paragraph):
+                        processed_count += 1
+                        yield (
+                            "data: "
+                            + json.dumps(
+                                {
+                                    "type": "skip",
+                                    "paragraph_id": paragraph.id,
+                                    "current": processed_count,
+                                    "total": total_paragraphs,
+                                }
+                            )
+                            + "\n\n"
+                        )
+                        continue
+
                     has_translation = paragraph.has_usable_translation()
                     if has_translation:
                         processed_count += 1

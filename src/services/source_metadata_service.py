@@ -24,6 +24,7 @@ from src.core.glossary_prompt import (
     select_glossary_terms_for_text,
 )
 from src.core.models import Glossary, Paragraph, ProjectMeta, Section
+from src.core.structured_metadata import STRUCTURED_METADATA_TYPES
 from src.llm.base import LLMProvider
 
 
@@ -42,7 +43,7 @@ class SourceMetadataTranslationService:
     """Translate `Source:` metadata once per unique entry and reuse results."""
 
     BATCH_SIZE = 20
-    SUPPORTED_METADATA_TYPES = {"source", "subtitle", "byline", "date_access"}
+    SUPPORTED_METADATA_TYPES = STRUCTURED_METADATA_TYPES
     SOURCE_PREFIX_RE = re.compile(
         r"^(?P<label>sources?|data)\s*:\s*(?P<body>.*)$",
         re.IGNORECASE | re.DOTALL,

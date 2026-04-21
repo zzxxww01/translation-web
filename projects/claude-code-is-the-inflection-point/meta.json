@@ -4,14 +4,14 @@
   "title_translation": "Claude Code 是转折点",
   "source_file": "source.html",
   "created_at": "2026-04-09T14:01:28.008532",
-  "updated_at": "2026-04-21T11:24:35.484623",
+  "updated_at": "2026-04-21T14:54:54.122350",
   "status": "reviewing",
   "progress": {
     "total_sections": 10,
     "total_paragraphs": 170,
-    "approved": 0,
+    "approved": 3,
     "reviewing": 0,
-    "pending": 170
+    "pending": 167
   },
   "config": {
     "ai_model": "pro",

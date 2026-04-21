@@ -9,6 +9,7 @@ from ..html2md import convert_html_to_markdown_text
 from .glossary import Glossary, GlossaryManager
 from .markdown_project_parser import MarkdownProjectParser
 from .models import ParagraphStatus, ProjectConfig, ProjectMeta, ProjectStatus, Section
+from .structured_metadata import STRUCTURED_METADATA_TYPES
 
 
 class ProjectLifecycleService:
@@ -131,12 +132,11 @@ class ProjectLifecycleService:
 
     @staticmethod
     def _auto_approve_structured_metadata(sections: list[Section]) -> None:
-        structured_metadata_types = {"source", "subtitle", "byline", "date_access"}
         for section in sections:
             for paragraph in section.paragraphs:
                 if not paragraph.is_metadata:
                     continue
-                if paragraph.metadata_type in structured_metadata_types:
+                if paragraph.metadata_type in STRUCTURED_METADATA_TYPES:
                     continue
                 paragraph.status = ParagraphStatus.APPROVED
                 paragraph.confirmed = paragraph.source
