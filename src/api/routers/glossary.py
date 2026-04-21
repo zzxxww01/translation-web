@@ -94,23 +94,23 @@ def _find_existing_term(glossary, original: str) -> GlossaryTerm:
 
 def _apply_term_updates(
     existing: GlossaryTerm,
-    request: TermUpdateRequest,
+    body: TermUpdateRequest,
     *,
     scope: str,
 ) -> GlossaryTerm:
-    fields_set = request.model_fields_set
+    fields_set = body.model_fields_set
     updated = existing.model_copy(deep=True)
 
     if "translation" in fields_set:
-        updated.translation = request.translation
-    if "strategy" in fields_set and request.strategy is not None:
-        updated.strategy = request.strategy
+        updated.translation = body.translation
+    if "strategy" in fields_set and body.strategy is not None:
+        updated.strategy = body.strategy
     if "note" in fields_set:
-        updated.note = request.note
+        updated.note = body.note
     if "tags" in fields_set:
-        updated.tags = _normalize_tags(request.tags)
-    if "status" in fields_set and request.status is not None:
-        updated.status = request.status
+        updated.tags = _normalize_tags(body.tags)
+    if "status" in fields_set and body.status is not None:
+        updated.status = body.status
 
     updated.scope = scope
     updated.source = existing.source or "manual"
@@ -118,30 +118,30 @@ def _apply_term_updates(
     return updated
 
 
-def _apply_batch_action(glossary, request: BatchGlossaryRequest) -> tuple[list[GlossaryTerm], int]:
-    originals = {item.strip().lower() for item in request.originals if item.strip()}
+def _apply_batch_action(glossary, body: BatchGlossaryRequest) -> tuple[list[GlossaryTerm], int]:
+    originals = {item.strip().lower() for item in body.originals if item.strip()}
     matched = [term for term in glossary.terms if term.original.lower() in originals]
 
-    if request.action == "delete":
+    if body.action == "delete":
         glossary.terms = [term for term in glossary.terms if term.original.lower() not in originals]
         return [], len(matched)
 
-    if request.action == "set_status" and request.status is None:
+    if body.action == "set_status" and body.status is None:
         raise BadRequestException(detail="Batch action 'set_status' requires status")
-    if request.action == "set_strategy" and request.strategy is None:
+    if body.action == "set_strategy" and body.strategy is None:
         raise BadRequestException(detail="Batch action 'set_strategy' requires strategy")
 
-    normalized_tags = _normalize_tags(request.tags)
-    if request.action in {"add_tags", "replace_tags", "remove_tags"} and not normalized_tags:
-        raise BadRequestException(detail=f"Batch action '{request.action}' requires tags")
+    normalized_tags = _normalize_tags(body.tags)
+    if body.action in {"add_tags", "replace_tags", "remove_tags"} and not normalized_tags:
+        raise BadRequestException(detail=f"Batch action '{body.action}' requires tags")
 
     updated_terms: list[GlossaryTerm] = []
     for term in matched:
         updated = term.model_copy(deep=True)
-        if request.action == "set_status":
-            updated.status = request.status or updated.status
-        elif request.action == "set_strategy":
-            updated.strategy = request.strategy or updated.strategy
+        if body.action == "set_status":
+            updated.status = body.status or updated.status
+        elif body.action == "set_strategy":
+            updated.strategy = body.strategy or updated.strategy
         elif request.action == "add_tags":
             updated.tags = _normalize_tags([*updated.tags, *normalized_tags])
         elif request.action == "replace_tags":
@@ -158,7 +158,7 @@ def _apply_batch_action(glossary, request: BatchGlossaryRequest) -> tuple[list[G
 
 @router.get("", response_model=GlossaryResponse)
 @limiter.limit("100/minute")
-async def get_global_glossary(http_request: Request, gm: GlossaryManagerDep):
+async def get_global_glossary(request: Request, gm: GlossaryManagerDep):
     glossary = gm.load_global()
     return GlossaryResponse(
         version=glossary.version,
@@ -168,19 +168,19 @@ async def get_global_glossary(http_request: Request, gm: GlossaryManagerDep):
 
 @router.post("", response_model=dict)
 @limiter.limit("60/minute")
-async def add_global_term(http_request: Request, request: TermRequest, gm: GlossaryManagerDep):
+async def add_global_term(request: Request, body: TermRequest, gm: GlossaryManagerDep):
     glossary = gm.load_global()
-    replaced = glossary.get_term(request.original) is not None
+    replaced = glossary.get_term(body.original) is not None
 
     term = GlossaryTerm(
-        original=request.original,
-        translation=request.translation,
-        strategy=request.strategy,
-        note=request.note,
-        tags=_initial_tags(request.original, request.tags),
+        original=body.original,
+        translation=body.translation,
+        strategy=body.strategy,
+        note=body.note,
+        tags=_initial_tags(body.original, body.tags),
         scope="global",
         source="manual",
-        status=request.status,
+        status=body.status,
     )
     glossary.add_term(term)
     gm.save_global(glossary)
@@ -195,14 +195,14 @@ async def add_global_term(http_request: Request, request: TermRequest, gm: Gloss
 @router.put("/terms/{original}", response_model=dict)
 @limiter.limit("60/minute")
 async def update_global_term(
-    http_request: Request,
+    request: Request,
     original: str,
-    request: TermUpdateRequest,
+    body: TermUpdateRequest,
     gm: GlossaryManagerDep,
 ):
     glossary = gm.load_global()
     existing = _find_existing_term(glossary, original)
-    updated = _apply_term_updates(existing, request, scope="global")
+    updated = _apply_term_updates(existing, body, scope="global")
     glossary.add_term(updated)
     gm.save_global(glossary)
     return {"message": "Term updated", "term": _term_to_response(updated)}
@@ -210,7 +210,7 @@ async def update_global_term(
 
 @router.delete("/terms/{original}", response_model=dict)
 @limiter.limit("60/minute")
-async def delete_global_term(http_request: Request, original: str, gm: GlossaryManagerDep):
+async def delete_global_term(request: Request, original: str, gm: GlossaryManagerDep):
     glossary = gm.load_global()
     _find_existing_term(glossary, original)
     original_lower = original.lower()
@@ -222,12 +222,12 @@ async def delete_global_term(http_request: Request, original: str, gm: GlossaryM
 @router.post("/batch", response_model=dict)
 @limiter.limit("20/minute")
 async def batch_update_global_glossary(
-    http_request: Request,
-    request: BatchGlossaryRequest,
+    request: Request,
+    body: BatchGlossaryRequest,
     gm: GlossaryManagerDep,
 ):
     glossary = gm.load_global()
-    updated_terms, matched_count = _apply_batch_action(glossary, request)
+    updated_terms, matched_count = _apply_batch_action(glossary, body)
     gm.save_global(glossary)
     return {
         "message": "Batch action applied",
@@ -235,5 +235,5 @@ async def batch_update_global_glossary(
         "matched_count": matched_count,
         "updated_count": len(updated_terms),
         "terms": [_term_to_response(term) for term in updated_terms],
-        "originals": request.originals,
+        "originals": body.originals,
     }

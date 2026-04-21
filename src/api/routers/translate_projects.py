@@ -122,7 +122,7 @@ async def analyze_section(request: Request, project_id: str, section_id: str):
 @router.post("/projects/{project_id}/sections/{section_id}/translate_all")
 @limiter.limit("5/minute")
 async def batch_translate_section(
-    http_request: Request,
+    request: Request,
     project_id: str,
     section_id: str,
     pm: ProjectManagerDep,
@@ -180,9 +180,9 @@ async def batch_translate_section(
 @router.post("/projects/{project_id}/translate-stream")
 @limiter.limit("3/minute")
 async def translate_full_document(
-    http_request: Request,
+    request: Request,
     project_id: str,
-    request: FullTranslateRequest,
+    body: FullTranslateRequest,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
     llm: LongformLLMProviderDep,
@@ -195,9 +195,9 @@ async def translate_full_document(
         raise BadRequestException(detail="Invalid project_id")
 
     # 如果指定了模型，创建新的 provider
-    if request.model:
+    if body.model:
         from src.api.utils.llm_factory import create_llm_provider
-        llm = create_llm_provider(provider=request.model)
+        llm = create_llm_provider(provider=body.model)
 
     async def generate_progress():
         try:
@@ -340,7 +340,7 @@ async def translate_full_document(
 @router.post("/projects/{project_id}/translate-four-step")
 @limiter.limit("3/minute")
 async def translate_with_four_steps(
-    http_request: Request,
+    request: Request,
     project_id: str,
     pm: ProjectManagerDep,
     llm: LongformLLMProviderDep,
@@ -602,10 +602,10 @@ async def resolve_term_conflict_live(
         events = _pending_conflict_events.get(project_id, {})
         resolutions = _conflict_resolutions.setdefault(project_id, {})
 
-        term_key = request.term.lower()
+        term_key = body.term.lower()
         resolutions[term_key] = {
-            "chosen_translation": request.chosen_translation,
-            "apply_to_all": request.apply_to_all,
+            "chosen_translation": body.chosen_translation,
+            "apply_to_all": body.apply_to_all,
         }
 
         # 唤醒等待的翻译线程
@@ -616,8 +616,8 @@ async def resolve_term_conflict_live(
 
     return {
         "status": "resolved",
-        "term": request.term,
-        "chosen": request.chosen_translation,
+        "term": body.term,
+        "chosen": body.chosen_translation,
     }
 
 

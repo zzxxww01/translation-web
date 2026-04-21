@@ -44,18 +44,18 @@ prompt_manager = get_prompt_manager()
 )
 @limiter.limit("20/minute")
 async def process_slack_message(
-    http_request: Request,
-    request: SlackProcessRequest,
+    request: Request,
+    body: SlackProcessRequest,
 ):
     """Analyze an incoming workplace chat message."""
-    message = request.message.strip()
+    message = body.message.strip()
     if not message:
         raise BadRequestException(detail="message cannot be empty")
 
-    if request.custom_prompt:
-        prompt = request.custom_prompt.replace("{message}", message)
+    if body.custom_prompt:
+        prompt = body.custom_prompt.replace("{message}", message)
     else:
-        conversation_history_section = format_conversation_history(request.conversation_history)
+        conversation_history_section = format_conversation_history(body.conversation_history)
         prompt = prompt_manager.get(
             "slack_process",
             context_section="",

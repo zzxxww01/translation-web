@@ -97,7 +97,7 @@ def _translate_paragraph_sync(
 
     timeout_s = TimeoutConfig.get_timeout("longform")
     agent = TranslationAgent(llm, timeout=timeout_s)
-    instruction = resolve_retranslate_instruction(request.instruction, getattr(request, 'option_id', None))
+    instruction = resolve_retranslate_instruction(body.instruction, getattr(request, 'option_id', None))
     if instruction:
         formatted_instruction = build_retranslate_instruction(
             instruction,
@@ -189,15 +189,15 @@ def _query_word_meaning_sync(
     if paragraph is None:
         raise NotFoundException(detail="Paragraph not found")
 
-    word = request.word.strip()
-    query = request.query.strip()
+    word = body.word.strip()
+    query = body.query.strip()
     if not word:
         raise BadRequestException(detail="查询词语不能为空")
     if not query:
         raise BadRequestException(detail="查询问题不能为空")
 
     history_lines: List[str] = []
-    for message in request.history[-8:]:
+    for message in body.history[-8:]:
         role = "用户" if message.role == "user" else "助手"
         content = message.content.strip()
         if content:
@@ -232,7 +232,7 @@ def _confirm_paragraph_sync(
         project_id,
         section_id,
         paragraph_id,
-        translation=request.translation,
+        translation=body.translation,
         status=ParagraphStatus.APPROVED,
         model="manual",
     )
@@ -263,12 +263,12 @@ def _update_paragraph_sync(
     if not previous_translation:
         previous_translation = existing_paragraph.latest_translation_text(non_empty=True)
 
-    status = ParagraphStatus(request.status) if request.status else None
+    status = ParagraphStatus(body.status) if body.status else None
     current_translation = get_latest_translation_text(existing_paragraph)
-    if request.translation is not None and status is None:
-        if existing_paragraph.status == ParagraphStatus.PENDING and request.translation.strip():
+    if body.translation is not None and status is None:
+        if existing_paragraph.status == ParagraphStatus.PENDING and body.translation.strip():
             status = ParagraphStatus.TRANSLATED
-        elif current_translation != request.translation:
+        elif current_translation != body.translation:
             status = (
                 ParagraphStatus.MODIFIED
                 if current_translation
@@ -279,21 +279,21 @@ def _update_paragraph_sync(
         project_id,
         section_id,
         paragraph_id,
-        translation=request.translation,
+        translation=body.translation,
         status=status,
     )
 
     correction_payload = None
     if (
-        request.translation is not None
-        and request.edit_source == "immersive_auto_save"
+        body.translation is not None
+        and body.edit_source == "immersive_auto_save"
         and previous_translation
-        and previous_translation != request.translation
+        and previous_translation != body.translation
     ):
         correction_payload = {
-            "source_text": request.source_text or existing_paragraph.source,
+            "source_text": body.source_text or existing_paragraph.source,
             "previous_translation": previous_translation,
-            "updated_translation": request.translation,
+            "updated_translation": body.translation,
         }
 
     return (
@@ -320,7 +320,7 @@ def _batch_translate_paragraphs_sync(
     if not section:
         raise NotFoundException(detail="Section not found")
 
-    if not request.paragraph_ids:
+    if not body.paragraph_ids:
         raise BadRequestException(detail="段落 ID 列表不能为空")
 
     glossary = gm.load_merged(project_id)
@@ -333,7 +333,7 @@ def _batch_translate_paragraphs_sync(
     success_count = 0
     error_count = 0
 
-    for paragraph_id in request.paragraph_ids:
+    for paragraph_id in body.paragraph_ids:
         if paragraph_id not in paragraph_map:
             errors.append({"id": paragraph_id, "error": "Paragraph not found"})
             error_count += 1
@@ -352,7 +352,7 @@ def _batch_translate_paragraphs_sync(
                 sections=sections,
             )
 
-            instruction = resolve_retranslate_instruction(request.instruction, getattr(request, 'option_id', None))
+            instruction = resolve_retranslate_instruction(body.instruction, getattr(request, 'option_id', None))
             if instruction:
                 formatted_instruction = build_retranslate_instruction(
                     instruction,
@@ -420,11 +420,11 @@ def _to_bad_request(error: Exception, action: str) -> BadRequestException:
 @router.post("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/translate")
 @limiter.limit("30/minute")
 async def translate_paragraph(
-    http_request: Request,
+    request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: TranslateRequest,
+    body: TranslateRequest,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
     llm: LongformLLMProviderDep,
@@ -462,11 +462,11 @@ async def translate_paragraph(
 )
 @limiter.limit("30/minute")
 async def direct_translate_paragraph(
-    http_request: Request,
+    request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: DirectTranslateRequest,
+    body: DirectTranslateRequest,
     pm: ProjectManagerDep,
     llm: LongformLLMProviderDep,
     service: ConfirmationServiceDep,
@@ -501,11 +501,11 @@ async def direct_translate_paragraph(
 )
 @limiter.limit("30/minute")
 async def query_word_meaning(
-    http_request: Request,
+    request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: WordMeaningRequest,
+    body: WordMeaningRequest,
     pm: ProjectManagerDep,
     llm: LongformLLMProviderDep,
 ):
@@ -534,11 +534,11 @@ async def query_word_meaning(
 @router.put("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/confirm")
 @limiter.limit("30/minute")
 async def confirm_paragraph(
-    http_request: Request,
+    request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: ConfirmRequest,
+    body: ConfirmRequest,
     pm: ProjectManagerDep,
     service: ConfirmationServiceDep,
 ):
@@ -562,11 +562,11 @@ async def confirm_paragraph(
 @router.put("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}")
 @limiter.limit("30/minute")
 async def update_paragraph(
-    http_request: Request,
+    request: Request,
     project_id: str,
     section_id: str,
     paragraph_id: str,
-    request: UpdateParagraphRequest,
+    body: UpdateParagraphRequest,
     pm: ProjectManagerDep,
     service: ConfirmationServiceDep,
     memory_service: MemoryServiceDep,
@@ -606,10 +606,10 @@ async def update_paragraph(
 )
 @limiter.limit("10/minute")
 async def batch_translate_paragraphs(
-    http_request: Request,
+    request: Request,
     project_id: str,
     section_id: str,
-    request: BatchTranslateRequest,
+    body: BatchTranslateRequest,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
     llm: LongformLLMProviderDep,

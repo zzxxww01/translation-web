@@ -74,7 +74,7 @@ def _filter_consistency_issues(issues: list[dict]) -> list[dict]:
 @router.post("/{project_id}/translate-all")
 @limiter.limit("20/minute")
 async def start_translation(
-    http_request: Request,
+    request: Request,
     project_id: str,
     service: BatchServiceDep,
 ):
@@ -102,7 +102,7 @@ async def get_translation_status(
 @router.post("/{project_id}/translation-cancel")
 @limiter.limit("20/minute")
 async def cancel_translation(
-    http_request: Request,
+    request: Request,
     project_id: str,
     service: BatchServiceDep,
 ):
@@ -129,19 +129,19 @@ async def get_paragraph_confirmation(
 @router.put("/{project_id}/paragraph/{paragraph_id}/confirm")
 @limiter.limit("20/minute")
 async def confirm_paragraph(
-    http_request: Request,
+    request: Request,
     project_id: str,
     paragraph_id: str,
-    request: ConfirmParagraphRequest,
+    body: ConfirmParagraphRequest,
     service: ConfirmationServiceDep,
 ):
     try:
         return await service.confirm_paragraph(
             project_id,
             paragraph_id,
-            request.translation,
-            request.version_id,
-            request.custom_edit,
+            body.translation,
+            body.version_id,
+            body.custom_edit,
         )
     except ValueError as e:
         raise BadRequestException(detail=str(e))
@@ -152,13 +152,13 @@ async def confirm_paragraph(
 @router.post("/{project_id}/term-update")
 @limiter.limit("20/minute")
 async def update_terms(
-    http_request: Request,
+    request: Request,
     project_id: str,
-    request: UpdateTermsRequest,
+    body: UpdateTermsRequest,
     service: ConfirmationServiceDep,
 ):
     try:
-        return await service.update_terms(project_id, request.changes)
+        return await service.update_terms(project_id, body.changes)
     except Exception as e:
         raise BadRequestException(detail=f"Failed to update terms: {str(e)}")
 
@@ -166,10 +166,10 @@ async def update_terms(
 @router.post("/{project_id}/paragraph/{paragraph_id}/retranslate")
 @limiter.limit("20/minute")
 async def retranslate_paragraph(
-    http_request: Request,
+    request: Request,
     project_id: str,
     paragraph_id: str,
-    request: RetranslateRequest,
+    body: RetranslateRequest,
     pm: ProjectManagerDep,
     llm: LongformLLMProviderDep,
     service: ConfirmationServiceDep,
@@ -218,7 +218,7 @@ async def retranslate_paragraph(
             current_paragraph_id=paragraph_id,
         )
 
-        instruction = resolve_retranslate_instruction(request.instruction, request.option_id)
+        instruction = resolve_retranslate_instruction(body.instruction, body.option_id)
 
         # 记录重翻前的译文
         old_translation = None
@@ -275,7 +275,7 @@ async def retranslate_paragraph(
 @router.post("/{project_id}/export-translation")
 @limiter.limit("20/minute")
 async def export_translation(
-    http_request: Request,
+    request: Request,
     project_id: str,
     service: ConfirmationServiceDep,
     include_source: bool = False,
@@ -308,7 +308,7 @@ async def get_retranslate_options(project_id: str):
 @router.post("/{project_id}/export-bilingual")
 @limiter.limit("20/minute")
 async def export_bilingual(
-    http_request: Request,
+    request: Request,
     project_id: str,
     service: ConfirmationServiceDep,
 ):

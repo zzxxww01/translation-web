@@ -7,6 +7,8 @@ Abstract base class for LLM providers.
 from abc import ABC, abstractmethod
 from typing import Optional, List, Dict, Any
 
+from ..core.limits import TranslationLimits
+
 
 class LLMProvider(ABC):
     """LLM Provider 基类"""
@@ -335,7 +337,7 @@ class LLMProvider(ABC):
             else "无"
         )
 
-        if len(section_content) <= 15000:
+        if len(section_content) <= TranslationLimits.PRESCAN_SINGLE_CALL_LIMIT:
             prompt = self._build_prescan_prompt(
                 section_id=section_id,
                 section_title=section_title,
@@ -348,7 +350,7 @@ class LLMProvider(ABC):
             return self._parse_json_response(response)
 
         # 分段处理
-        chunks = self._split_content_for_prescan(section_content, max_chars=12000)
+        chunks = self._split_content_for_prescan(section_content, max_chars=TranslationLimits.PRESCAN_CHUNK_SIZE)
         all_new_terms: Dict[str, Dict] = {}
         all_term_usages: Dict[str, str] = {}
         for i, chunk in enumerate(chunks):
@@ -377,7 +379,7 @@ class LLMProvider(ABC):
         }
 
     def _split_content_for_prescan(
-        self, content: str, max_chars: int = 12000
+        self, content: str, max_chars: int = TranslationLimits.PRESCAN_CHUNK_SIZE
     ) -> List[str]:
         """按段落边界分割内容用于 prescan"""
         paragraphs = content.split("\n\n")

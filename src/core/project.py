@@ -39,6 +39,8 @@ from .format_tokens import (
 from .markdown_project_parser import MarkdownProjectParser
 from ..html2md import convert_html_to_markdown_text
 from .title_guard import find_missing_title_terms
+from .file_utils import write_text_atomic, write_json_atomic, read_json, read_text
+from .limits import TranslationLimits
 
 
 class ProjectManager:
@@ -57,52 +59,19 @@ class ProjectManager:
         self.glossary_manager = GlossaryManager(projects_path=projects_path)
         self._section_locks: OrderedDict[str, threading.RLock] = OrderedDict()
         self._section_locks_guard = threading.Lock()
-        self._section_locks_max = 256
+        self._section_locks_max = TranslationLimits.SECTION_LOCK_CACHE_SIZE
 
     def _project_dir(self, project_id: str) -> Path:
         return self.projects_path / project_id
 
     def _write_text(self, path: Path, content: str) -> None:
-        import time
-        path.parent.mkdir(parents=True, exist_ok=True)
-        tmp_path = path.with_name(f"{path.name}.{uuid4().hex}.tmp")
-        with open(tmp_path, "w", encoding="utf-8") as f:
-            f.write(content)
-
-        # Windows 重试逻辑：处理文件被占用的情况
-        for attempt in range(3):
-            try:
-                os.replace(tmp_path, path)
-                return
-            except OSError as e:
-                if attempt == 2:
-                    logger.error(f"Failed to write file after 3 attempts: {path}, error: {e}")
-                    raise
-                logger.warning(f"File write attempt {attempt + 1} failed for {path}: {e}, retrying...")
-                time.sleep(0.1 * (attempt + 1))
+        write_text_atomic(path, content)
 
     def _read_json(self, path: Path) -> Any:
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
+        return read_json(path)
 
     def _write_json(self, path: Path, payload: Any) -> None:
-        import time
-        path.parent.mkdir(parents=True, exist_ok=True)
-        tmp_path = path.with_name(f"{path.name}.{uuid4().hex}.tmp")
-        with open(tmp_path, "w", encoding="utf-8") as f:
-            json.dump(payload, f, ensure_ascii=False, indent=2, default=str)
-
-        # Windows 重试逻辑：处理文件被占用的情况
-        for attempt in range(3):
-            try:
-                os.replace(tmp_path, path)
-                return
-            except OSError as e:
-                if attempt == 2:
-                    logger.error(f"Failed to write JSON after 3 attempts: {path}, error: {e}")
-                    raise
-                logger.warning(f"JSON write attempt {attempt + 1} failed for {path}: {e}, retrying...")
-                time.sleep(0.1 * (attempt + 1))
+        write_json_atomic(path, payload)
 
     def _section_lock_key(self, project_id: str, section_id: str) -> str:
         return f"{project_id}:{section_id}"

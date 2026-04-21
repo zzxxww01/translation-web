@@ -44,15 +44,15 @@ prompt_manager = get_prompt_manager()
 )
 @limiter.limit("20/minute")
 async def compose_slack_message(
-    http_request: Request,
-    request: SlackComposeRequest,
+    request: Request,
+    body: SlackComposeRequest,
 ):
     """Translate a Chinese reply draft into 3 English versions."""
-    content = request.content.strip()
+    content = body.content.strip()
     if not content:
         raise BadRequestException(detail="content cannot be empty")
 
-    conversation_history_section = format_conversation_history(request.conversation_history)
+    conversation_history_section = format_conversation_history(body.conversation_history)
     prompt = prompt_manager.get(
         "slack_compose",
         context_section="",

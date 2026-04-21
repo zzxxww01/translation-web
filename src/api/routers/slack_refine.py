@@ -11,7 +11,7 @@ router = APIRouter()
 
 @router.post("/refine")
 @limiter.limit("20/minute")
-async def refine_result(http_request: Request, request: SlackRefineRequest) -> SlackRefineResponse:
+async def refine_result(request: Request, body: SlackRefineRequest) -> SlackRefineResponse:
     """
     Refine a previous Slack result based on user's adjustment instruction.
 
@@ -26,9 +26,9 @@ async def refine_result(http_request: Request, request: SlackRefineRequest) -> S
 
         # Format conversation history
         history_text = ""
-        if request.conversation_history:
+        if body.conversation_history:
             history_items = []
-            for msg in request.conversation_history:
+            for msg in body.conversation_history:
                 role = msg.get("role", "unknown")
                 content = msg.get("content", "")
                 history_items.append(f"[{role}] {content}")
@@ -36,10 +36,10 @@ async def refine_result(http_request: Request, request: SlackRefineRequest) -> S
 
         # Fill in the prompt
         prompt = prompt_template.format(
-            original_result=request.original_result,
-            adjustment_instruction=request.adjustment_instruction,
+            original_result=body.original_result,
+            adjustment_instruction=body.adjustment_instruction,
             conversation_history=history_text or "无",
-            context_type=request.context_type
+            context_type=body.context_type
         )
 
         # Call LLM

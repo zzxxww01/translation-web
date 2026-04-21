@@ -81,12 +81,12 @@ async def list_projects(pm: ProjectManagerDep):
 @router.post("/projects", response_model=ProjectResponse)
 @limiter.limit("30/minute")
 async def create_project(
-    http_request: Request,
-    request: CreateProjectRequest,
+    request: Request,
+    body: CreateProjectRequest,
     pm: ProjectManagerDep,
 ):
     try:
-        meta = pm.create(request.name, request.html_path)
+        meta = pm.create(body.name, body.html_path)
         return _build_project_response(meta)
     except ValueError as e:
         raise BadRequestException(detail=str(e))
@@ -97,7 +97,7 @@ async def create_project(
 @router.post("/projects/upload", response_model=ProjectResponse)
 @limiter.limit("30/minute")
 async def upload_project(
-    http_request: Request,
+    request: Request,
     pm: ProjectManager = Depends(get_project_manager),
     name: str = Form(...),
     file: UploadFile = File(...),
@@ -199,7 +199,7 @@ async def get_project(project_id: str, pm: ProjectManagerDep):
 
 @router.delete("/projects/{project_id}")
 @limiter.limit("30/minute")
-async def delete_project(http_request: Request, project_id: str, pm: ProjectManagerDep):
+async def delete_project(request: Request, project_id: str, pm: ProjectManagerDep):
     try:
         pm.delete(project_id)
         return {"message": "Project deleted"}
@@ -210,7 +210,7 @@ async def delete_project(http_request: Request, project_id: str, pm: ProjectMana
 @router.post("/projects/{project_id}/export")
 @limiter.limit("30/minute")
 async def export_project(
-    http_request: Request,
+    request: Request,
     project_id: str,
     pm: ProjectManagerDep,
     include_source: bool = False,
