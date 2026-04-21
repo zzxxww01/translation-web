@@ -14,7 +14,6 @@ interface MessageBubbleProps {
 
 export function MessageBubble({ message, onDelete, onEdit, onSelect }: MessageBubbleProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [isTranslationExpanded, setIsTranslationExpanded] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(message.content);
 

@@ -21,11 +21,6 @@ const SlackFeature = lazy(() =>
 const ToolsFeature = lazy(() =>
   import('./features/tools/index.tsx').then(module => ({ default: module.ToolsFeature }))
 );
-const ConfirmationFeature = lazy(() =>
-  import('./features/confirmation/index.tsx').then(module => ({
-    default: module.ConfirmationFeature,
-  }))
-);
 const QualityReportPage = lazy(() =>
   import('./features/quality-report/index').then(module => ({
     default: module.QualityReportPage,

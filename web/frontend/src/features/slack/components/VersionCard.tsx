@@ -60,7 +60,7 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
       setIsEditing(false);
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 500);
-    } catch (error) {
+    } catch {
       toast.error('更新失败');
     }
   };

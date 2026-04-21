@@ -11,11 +11,9 @@
 
 import asyncio
 import json
-import threading
 import time
 from pathlib import Path
-from dataclasses import dataclass
-from typing import Any, Awaitable, List, Optional, Dict, Callable, Set
+from typing import Any, Awaitable, List, Optional, Dict, Callable
 from datetime import datetime
 import logging
 
@@ -66,40 +64,21 @@ from src.llm.base import LLMProvider
 from src.services.batch_translation_types import TranslationProgress
 from src.services.progress_tracker import ProgressTracker
 from src.services.source_metadata_service import SourceMetadataTranslationService
+from src.services.translation_artifact_service import TranslationArtifactService
+from src.services.translation_run_registry import (
+    RunStateSnapshot,
+    translation_run_registry,
+)
+from src.services.section_translation_executor import SectionTranslationExecutor
+from src.llm.usage_metrics import llm_usage_metrics
 
 
 logger = logging.getLogger(__name__)
-
-
-@dataclass
-class RunStateSnapshot:
-    run_id: str
-    status: str
-    current_step: str
-    current_section: Optional[str]
-    updated_at: Optional[str]
-    started_at: Optional[str]
-    finished_at: Optional[str]
-    error_count: int = 0
-
-
-@dataclass
-class ActiveRunLock:
-    project_id: str
-    run_id: Optional[str]
-    status: str
-    started_at: str
-    updated_at: str
-
 
 class BatchTranslationService:
     """批量翻译服务"""
 
     _shared_progress_tracker = ProgressTracker()
-    _cancelled_projects: Set[str] = set()
-    _cancelled_lock = threading.Lock()
-    _active_run_lock = threading.Lock()
-    _active_run: Optional[ActiveRunLock] = None
 
     # 翻译模式
     TRANSLATION_MODE_FOUR_STEP = "four_step"  # 四步法（段落级）
@@ -143,6 +122,8 @@ class BatchTranslationService:
         self.deep_analyzer = DeepAnalyzer(self.analysis_llm)
         self.context_manager = LayeredContextManager()
         self._progress_tracker = self._shared_progress_tracker
+        self._run_registry = translation_run_registry
+        self._artifact_service = TranslationArtifactService(self.project_manager.projects_path)
 
         # 懒加载翻译记忆服务
         memory_service = None
@@ -159,31 +140,34 @@ class BatchTranslationService:
             memory_service=memory_service,
         )
         self.consistency_reviewer = ConsistencyReviewer(llm_provider)
+        self._section_executor = SectionTranslationExecutor(
+            is_cancelled=self._is_cancelled,
+            touch_progress=self._touch_progress,
+            build_section_prompt_context=self._build_section_prompt_context,
+            persist_section_artifact=self._persist_section_artifact,
+            run_section_prescan=self._run_section_prescan,
+            count_translated_paragraphs=self._count_translated_paragraphs,
+            translate_section_batch=self._translate_section_batch,
+            apply_section_batch_translations=self._apply_section_batch_translations,
+            record_section_batch_term_usage=self._record_section_batch_term_usage,
+            four_step_translate_section=self.translator.translate_section,
+            create_section_callback=self._create_section_callback,
+            apply_four_step_translations=self._apply_four_step_translations,
+            save_section=self.project_manager.save_section,
+        )
 
     def _is_cancelled(self, project_id: str) -> bool:
-        with self._cancelled_lock:
-            return project_id in self._cancelled_projects
+        return self._run_registry.is_cancelled(project_id)
 
     def _mark_cancelled(self, project_id: str) -> None:
-        with self._cancelled_lock:
-            self._cancelled_projects.add(project_id)
+        self._run_registry.mark_cancelled(project_id)
 
     def _clear_cancelled(self, project_id: str) -> None:
-        with self._cancelled_lock:
-            self._cancelled_projects.discard(project_id)
+        self._run_registry.clear_cancelled(project_id)
 
     @classmethod
-    def _get_active_run(cls) -> Optional[ActiveRunLock]:
-        with cls._active_run_lock:
-            if cls._active_run is None:
-                return None
-            return ActiveRunLock(
-                project_id=cls._active_run.project_id,
-                run_id=cls._active_run.run_id,
-                status=cls._active_run.status,
-                started_at=cls._active_run.started_at,
-                updated_at=cls._active_run.updated_at,
-            )
+    def _get_active_run(cls):
+        return translation_run_registry.get_active_run()
 
     @classmethod
     def _set_active_run(
@@ -192,21 +176,12 @@ class BatchTranslationService:
         *,
         run_id: Optional[str],
         status: str,
-    ) -> ActiveRunLock:
-        now = datetime.now().isoformat()
-        with cls._active_run_lock:
-            if cls._active_run and cls._active_run.project_id == project_id:
-                started_at = cls._active_run.started_at
-            else:
-                started_at = now
-            cls._active_run = ActiveRunLock(
-                project_id=project_id,
-                run_id=run_id,
-                status=status,
-                started_at=started_at,
-                updated_at=now,
-            )
-            return cls._active_run
+    ):
+        return translation_run_registry.set_active_run(
+            project_id,
+            run_id=run_id,
+            status=status,
+        )
 
     @classmethod
     def _release_active_run(
@@ -215,15 +190,7 @@ class BatchTranslationService:
         *,
         run_id: Optional[str] = None,
     ) -> None:
-        with cls._active_run_lock:
-            active = cls._active_run
-            if active is None:
-                return
-            if active.project_id != project_id:
-                return
-            if run_id is not None and active.run_id not in (None, run_id):
-                return
-            cls._active_run = None
+        translation_run_registry.release_active_run(project_id, run_id=run_id)
 
     @classmethod
     async def claim_translation_slot(
@@ -233,52 +200,13 @@ class BatchTranslationService:
         wait_timeout: float = 300.0,
         poll_interval: float = 0.5,
     ) -> Dict[str, Any]:
-        active = cls._get_active_run()
-        if active is None:
-            placeholder = cls._set_active_run(
-                project_id,
-                run_id=None,
-                status="starting",
-            )
-            return {
-                "status": "acquired",
-                "project_id": project_id,
-                "run_id": placeholder.run_id,
-                "previous_project_id": None,
-            }
-
-        previous_project_id = active.project_id
-        previous_run_id = active.run_id
         other_service = cls.__new__(cls)
-        cancel_result = await other_service.cancel_translation(previous_project_id)
-
-        deadline = time.monotonic() + wait_timeout
-        while time.monotonic() < deadline:
-            await asyncio.sleep(poll_interval)
-            active = cls._get_active_run()
-            if active is None or active.project_id == project_id:
-                placeholder = cls._set_active_run(
-                    project_id,
-                    run_id=None,
-                    status="starting",
-                )
-                return {
-                    "status": "acquired_after_cancel",
-                    "project_id": project_id,
-                    "run_id": placeholder.run_id,
-                    "previous_project_id": previous_project_id,
-                    "previous_run_id": previous_run_id,
-                    "cancel_result": cancel_result,
-                }
-
-        active = cls._get_active_run()
-        return {
-            "status": "busy",
-            "project_id": project_id,
-            "active_project_id": active.project_id if active else previous_project_id,
-            "active_run_id": active.run_id if active else previous_run_id,
-            "active_status": active.status if active else "cancelling",
-        }
+        return await translation_run_registry.claim_translation_slot(
+            project_id,
+            other_service.cancel_translation,
+            wait_timeout=wait_timeout,
+            poll_interval=poll_interval,
+        )
 
     def _load_project_with_sections(self, project_id: str) -> ProjectMeta:
         """Load project and attach sections."""
@@ -290,168 +218,29 @@ class BatchTranslationService:
         return getattr(self, "_progress_tracker", self._shared_progress_tracker)
 
     def _artifacts_root(self, project_id: str) -> Path:
-        return self.project_manager.projects_path / project_id / "artifacts" / "runs"
+        return self._artifact_service.artifacts_root(project_id)
 
     def _create_run_artifact_dir(self, project_id: str) -> tuple[str, Path]:
-        run_id = datetime.now().strftime("%Y%m%d-%H%M%S-%f")
-        run_dir = self._artifacts_root(project_id) / run_id
-        run_dir.mkdir(parents=True, exist_ok=True)
-        return run_id, run_dir
+        return self._artifact_service.create_run_artifact_dir(project_id)
 
     def _normalize_artifact_payload(self, payload: Any) -> Any:
-        # Handle Pydantic models (v2 and v1)
-        if hasattr(payload, "model_dump"):
-            return payload.model_dump(mode="json")
-        if hasattr(payload, "dict"):
-            return payload.dict()
-        # Handle dict
-        if isinstance(payload, dict):
-            return {
-                key: self._normalize_artifact_payload(value)
-                for key, value in payload.items()
-            }
-        # Handle list
-        if isinstance(payload, list):
-            return [self._normalize_artifact_payload(item) for item in payload]
-        return payload
+        return self._artifact_service.normalize_payload(payload)
 
     def _write_artifact_json(self, path: Path, payload: Any) -> None:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "w", encoding="utf-8") as handle:
-            json.dump(
-                self._normalize_artifact_payload(payload),
-                handle,
-                ensure_ascii=False,
-                indent=2,
-                default=str,
-            )
+        self._artifact_service.write_json(path, payload)
 
     def _load_latest_analysis_snapshot(self, project_id: str) -> Optional[ArticleAnalysis]:
         """Load the most recent persisted article analysis for resume runs."""
-        artifacts_root = self._artifacts_root(project_id)
-        if not artifacts_root.exists():
-            return None
-
-        run_dirs = sorted(
-            (path for path in artifacts_root.iterdir() if path.is_dir()),
-            key=lambda path: path.stat().st_mtime,
-            reverse=True,
-        )
-        for run_dir in run_dirs:
-            analysis_path = run_dir / "analysis.json"
-            if not analysis_path.exists():
-                continue
-            try:
-                with open(analysis_path, "r", encoding="utf-8") as handle:
-                    payload = json.load(handle)
-                if hasattr(ArticleAnalysis, "model_validate"):
-                    return ArticleAnalysis.model_validate(payload)
-                return ArticleAnalysis.parse_obj(payload)
-            except Exception as exc:
-                logger.warning(
-                    "Failed to load analysis snapshot from %s: %s",
-                    analysis_path,
-                    exc,
-                )
-        return None
+        return self._artifact_service.load_latest_analysis_snapshot(project_id)
 
     def _load_latest_run_summary(self, project_id: str) -> Optional[Dict[str, Any]]:
-        artifacts_root = self._artifacts_root(project_id)
-        if not artifacts_root.exists():
-            return None
-
-        run_dirs = sorted(
-            (path for path in artifacts_root.iterdir() if path.is_dir()),
-            key=lambda path: path.stat().st_mtime,
-            reverse=True,
-        )
-        for run_dir in run_dirs:
-            summary_path = run_dir / "run-summary.json"
-            if not summary_path.exists():
-                continue
-            try:
-                with open(summary_path, "r", encoding="utf-8") as handle:
-                    payload = json.load(handle)
-                if isinstance(payload, dict):
-                    return payload
-            except Exception as exc:
-                logger.warning(
-                    "Failed to load run summary from %s: %s",
-                    summary_path,
-                    exc,
-                )
-        return None
+        return self._artifact_service.load_latest_run_summary(project_id)
 
     def _get_latest_run_dir(self, project_id: str) -> Optional[Path]:
-        artifacts_root = self._artifacts_root(project_id)
-        if not artifacts_root.exists():
-            return None
-
-        run_dirs = sorted(
-            (path for path in artifacts_root.iterdir() if path.is_dir()),
-            key=lambda path: path.stat().st_mtime,
-            reverse=True,
-        )
-        return run_dirs[0] if run_dirs else None
+        return self._artifact_service.get_latest_run_dir(project_id)
 
     def _infer_run_state(self, project_id: str) -> Optional[RunStateSnapshot]:
-        run_dir = self._get_latest_run_dir(project_id)
-        if run_dir is None:
-            return None
-
-        summary_path = run_dir / "run-summary.json"
-        if summary_path.exists():
-            try:
-                payload = json.loads(summary_path.read_text(encoding="utf-8"))
-                if isinstance(payload, dict):
-                    return RunStateSnapshot(
-                        run_id=str(payload.get("run_id") or run_dir.name),
-                        status=str(payload.get("status") or "processing"),
-                        current_step=str(payload.get("status") or "processing"),
-                        current_section=None,
-                        updated_at=datetime.fromtimestamp(run_dir.stat().st_mtime).isoformat(),
-                        started_at=payload.get("started_at"),
-                        finished_at=payload.get("finished_at"),
-                        error_count=int(payload.get("error_count") or len(payload.get("errors") or [])),
-                    )
-            except Exception as exc:
-                logger.warning("Failed to parse run summary from %s: %s", summary_path, exc)
-
-        latest_file: Optional[Path] = None
-        latest_section: Optional[str] = None
-        latest_step = "processing"
-        step_map = {
-            "analysis.json": "深度分析全文",
-            "source-metadata.json": "翻译来源说明",
-            "consistency.json": "一致性审查",
-            "section-context": "准备章节上下文",
-            "section-prescan": "章节术语预扫描",
-            "section-draft": "章节初译",
-            "section-critique": "章节反思",
-            "section-revision": "章节润色",
-        }
-
-        for candidate in run_dir.rglob('*.json'):
-            if latest_file is None or candidate.stat().st_mtime > latest_file.stat().st_mtime:
-                latest_file = candidate
-
-        if latest_file is not None:
-            parent_name = latest_file.parent.name
-            latest_step = step_map.get(latest_file.name, step_map.get(parent_name, "processing"))
-            if parent_name.startswith('section-'):
-                latest_section = latest_file.stem
-
-        updated_at = datetime.fromtimestamp(run_dir.stat().st_mtime).isoformat()
-        return RunStateSnapshot(
-            run_id=run_dir.name,
-            status="processing",
-            current_step=latest_step,
-            current_section=latest_section,
-            updated_at=updated_at,
-            started_at=datetime.fromtimestamp(run_dir.stat().st_ctime).isoformat(),
-            finished_at=None,
-            error_count=0,
-        )
+        return self._artifact_service.infer_run_state(project_id)
 
     def _build_source_manifest(
         self,
@@ -971,9 +760,7 @@ class BatchTranslationService:
         original_status = project.status
         self.context_manager.reset_all()
 
-        # 重置 API 调用计数器
-        from src.llm.gemini import GeminiProvider
-        GeminiProvider._api_call_count = 0
+        llm_usage_metrics.reset()
         project_start_time = time.monotonic()
 
         # 统计总数
@@ -1040,7 +827,7 @@ class BatchTranslationService:
                 "finished_at": progress.finished_at.isoformat(),
                 "run_id": run_id,
                 "artifacts_path": str(run_dir),
-                "api_calls": GeminiProvider._api_call_count,
+                "api_calls": llm_usage_metrics.api_call_count(),
                 "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
             }
             self._write_artifact_json(run_dir / "run-summary.json", result)
@@ -1403,7 +1190,7 @@ class BatchTranslationService:
             logger.info(
                 "[%s] Translation completed: %d API calls, %.0fs elapsed",
                 project_id,
-                GeminiProvider._api_call_count,
+                llm_usage_metrics.api_call_count(),
                 time.monotonic() - project_start_time,
             )
             if not is_complete:
@@ -1427,7 +1214,7 @@ class BatchTranslationService:
                 "run_id": run_id,
                 "artifacts_path": str(run_dir),
                 "export": export_report,
-                "api_calls": GeminiProvider._api_call_count,
+                "api_calls": llm_usage_metrics.api_call_count(),
                 "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
             }
 
@@ -1503,177 +1290,22 @@ class BatchTranslationService:
         project: ProjectMeta,
         total_paragraphs: int,
     ) -> Dict[str, Any]:
-        """
-        翻译单个章节（用于并行处理）
-
-        Returns:
-            Dict with keys: section_id, translations, error (if any)
-        """
-        try:
-            # 取消检查
-            if self._is_cancelled(project_id):
-                return {"section_id": section.section_id, "cancelled": True}
-
-            self._touch_progress(
-                progress,
-                step=f"处理中: {section.title}",
-                current_section=section.section_id,
-            )
-
-            # 构建章节上下文
-            section_prompt_context = self._build_section_prompt_context(
-                project,
-                section,
-                section_index,
-                analysis,
-            )
-            self._persist_section_artifact(
-                run_dir,
-                "section-context",
-                section.section_id,
-                section_prompt_context,
-            )
-
-            # 预扫描
-            prescan_result = await self._run_section_prescan(
-                project_id,
-                section,
-                progress,
-                on_term_conflict=on_term_conflict,
-            )
-            if prescan_result:
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-prescan",
-                    section.section_id,
-                    prescan_result,
-                )
-
-            # 检查是否已翻译
-            section_paragraph_count = len(section.paragraphs)
-            translated_in_section = self._count_translated_paragraphs(section)
-
-            if (
-                translated_in_section == section_paragraph_count
-                and section_paragraph_count > 0
-            ):
-                # 已翻译，跳过
-                logger.info(
-                    f"[{project_id}] Skipping section {section.section_id}: "
-                    f"all {section_paragraph_count} paragraphs already translated"
-                )
-                return {
-                    "section_id": section.section_id,
-                    "skipped": True,
-                    "translations": self._collect_section_translations(section),
-                    "paragraph_count": section_paragraph_count,
-                }
-
-            # 翻译章节
-            if self.translation_mode == self.TRANSLATION_MODE_SECTION:
-                # 章节级批量翻译
-                translations = await self._translate_section_batch(
-                    section=section,
-                    section_index=section_index,
-                    total_sections=total_sections,
-                    all_sections=all_sections,
-                    analysis=analysis,
-                )
-
-                # 应用翻译结果
-                collected_translations = self._apply_section_batch_translations(
-                    section,
-                    translations,
-                )
-                self._record_section_batch_term_usage(section, analysis)
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-draft",
-                    section.section_id,
-                    {
-                        "section_id": section.section_id,
-                        "mode": self.translation_mode,
-                        "prompt_context": section_prompt_context,
-                        "translations": translations,
-                    },
-                )
-            else:
-                # 四步法翻译
-                result = self.translator.translate_section(
-                    section=section,
-                    all_sections=all_sections,
-                    project_id=project_id,
-                    on_progress=self._create_section_callback(
-                        section.title,
-                        on_progress,
-                        translated_in_section,
-                        total_paragraphs,
-                        max(section_paragraph_count - translated_in_section, 0),
-                    ),
-                )
-
-                self._apply_four_step_translations(section, result)
-                collected_translations = result.translations
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-draft",
-                    section.section_id,
-                    {
-                        "section_id": section.section_id,
-                        "mode": self.translation_mode,
-                        "prompt_context": section_prompt_context,
-                        "understanding": result.understanding,
-                        "translations": result.draft_translations,
-                    },
-                )
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-critique",
-                    section.section_id,
-                    {
-                        "section_id": section.section_id,
-                        "reflection": result.reflection,
-                    },
-                )
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-revision",
-                    section.section_id,
-                    {
-                        "section_id": section.section_id,
-                        "assessment": result.assessment,
-                        "translations": result.revised_translations,
-                    },
-                )
-
-            # 保存章节
-            self.project_manager.save_section(project_id, section)
-            self._touch_progress(
-                progress,
-                step=f"完成: {section.title}",
-                current_section=section.section_id,
-            )
-
-            return {
-                "section_id": section.section_id,
-                "translations": collected_translations,
-                "paragraph_count": section_paragraph_count,
-                "translated_before": translated_in_section,
-            }
-
-        except Exception as e:
-            error_msg = f"Failed to translate section {section.section_id}: {str(e)}"
-            self._touch_progress(
-                progress,
-                step=error_msg,
-                current_section=section.section_id,
-            )
-            logger.error(f"[{project_id}] {error_msg}")
-            return {
-                "section_id": section.section_id,
-                "error": error_msg,
-                "exception": e,
-            }
+        return await self._section_executor.translate(
+            project_id=project_id,
+            section=section,
+            section_index=section_index,
+            total_sections=total_sections,
+            all_sections=all_sections,
+            analysis=analysis,
+            run_dir=run_dir,
+            progress=progress,
+            on_progress=on_progress,
+            on_term_conflict=on_term_conflict,
+            project=project,
+            total_paragraphs=total_paragraphs,
+            translation_mode=self.translation_mode,
+            translation_mode_section=self.TRANSLATION_MODE_SECTION,
+        )
 
     async def _run_section_prescan(
         self,

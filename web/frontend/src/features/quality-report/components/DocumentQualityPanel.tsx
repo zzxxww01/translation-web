@@ -9,7 +9,6 @@ import { cn } from '@/lib/utils';
 import { useProjectQualityReport, useSectionQualityReport } from '../api';
 import { QualityStatsCard } from './QualityStatsCard';
 import { IssueList } from './IssueList';
-import { SectionQualityCard } from './SectionQualityCard';
 
 interface DocumentQualityPanelProps {
   projectId: string;

@@ -5,7 +5,7 @@
  */
 
 import { useState } from 'react';
-import { ChevronLeft, ChevronRight, BarChart3 } from 'lucide-react';
+import { ChevronRight, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { ConfirmationFeature } from '../confirmation/index';
@@ -18,7 +18,7 @@ interface ConfirmationWithQualityProps {
 
 export function ConfirmationWithQuality({ projectId, onComplete }: ConfirmationWithQualityProps) {
   const [showQualityPanel, setShowQualityPanel] = useState(false);
-  const [currentSectionId, setCurrentSectionId] = useState<string>();
+  const [currentSectionId] = useState<string>();
 
   return (
     <div className="flex h-screen overflow-hidden">

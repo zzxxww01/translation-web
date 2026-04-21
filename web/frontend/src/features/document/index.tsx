@@ -1,8 +1,6 @@
 import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 import { toast } from 'sonner';
-import { glossaryApi } from '../confirmation/api/glossaryApi';
-import type { TermReviewDecision, TermReviewPayload } from '../confirmation/types';
+import type { TermReviewDecision } from '../confirmation/types';
 import { useDocumentStore } from '@/shared/stores';
 import { TranslationMethod } from '@/shared/constants';
 import type { Paragraph, Section } from '@/shared/types';
@@ -14,18 +12,22 @@ import {
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button-extended';
 import { ConsistencyReportView } from './components/ConsistencyReportView';
 import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
 import { NewProjectModal } from './components/NewProjectModal';
 import { SectionView } from './components/SectionView';
 import { WelcomeScreen } from './components/WelcomeScreen';
-import { useFullTranslate, useProject, useSection } from './hooks';
+import {
+  useDocumentViewState,
+  useFullTranslate,
+  useProject,
+  useSection,
+  useTermConflictDialog,
+  useTermReviewFlow,
+  useTranslationStatusSync,
+} from './hooks';
 import type { ConsistencyIssue } from './api';
-import { fullTranslationService } from './services/fullTranslationService';
-import type { TermConflictData } from './services/fullTranslationService';
-import type { TranslationStatus } from '../confirmation/types';
 
 const GlossaryCenter = lazy(() =>
   import('../glossary/GlossaryCenter').then(module => ({ default: module.GlossaryCenter }))
@@ -39,13 +41,6 @@ const TerminologyReviewPage = lazy(() =>
   }))
 );
 
-type DocumentView = 'glossary' | 'term-review' | 'consistency' | null;
-
-interface PendingTranslationRequest {
-  method: TranslationMethod;
-  model?: string;
-}
-
 function LazyPanelFallback() {
   return (
     <div className="flex min-h-[220px] items-center justify-center">
@@ -55,7 +50,6 @@ function LazyPanelFallback() {
 }
 
 export function DocumentFeature() {
-  const [searchParams, setSearchParams] = useSearchParams();
   const {
     currentProject,
     setCurrentProject,
@@ -69,18 +63,11 @@ export function DocumentFeature() {
 
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
-  const [currentStep, setCurrentStep] = useState<string | null>(null);
   const [immersiveTargetParagraphId, setImmersiveTargetParagraphId] = useState<string | null>(null);
-  const [pendingTermReview, setPendingTermReview] = useState<TermReviewPayload | null>(null);
-  const [pendingTranslationRequest, setPendingTranslationRequest] =
-    useState<PendingTranslationRequest | null>(null);
   const [pendingIssueTarget, setPendingIssueTarget] = useState<{
     sectionId: string;
     paragraphIndex: number;
   } | null>(null);
-  const [isSubmittingTermReview, setIsSubmittingTermReview] = useState(false);
-  const [isPreparingFullTranslate, setIsPreparingFullTranslate] = useState(false);
-  const [backendTranslationStatus, setBackendTranslationStatus] = useState<TranslationStatus | null>(null);
 
   // AlertDialog 状态
   const [showStopDialog, setShowStopDialog] = useState(false);
@@ -88,169 +75,39 @@ export function DocumentFeature() {
   const [pendingStartMethod, setPendingStartMethod] = useState<TranslationMethod>(TranslationMethod.FOUR_STEP);
   const [pendingStartModel, setPendingStartModel] = useState<string | undefined>(undefined);
 
-  // 术语冲突对话框状态
-  const [conflictDialogOpen, setConflictDialogOpen] = useState(false);
-  const [currentConflict, setCurrentConflict] = useState<TermConflictData | null>(null);
-  const [conflictResolver, setConflictResolver] = useState<{
-    resolve: (value: { chosenTranslation: string; applyToAll: boolean }) => void;
-  } | null>(null);
-
-  // 注册术语冲突回调
-  useEffect(() => {
-    fullTranslationService.setTermConflictCallback(async (conflict) => {
-      return new Promise((resolve) => {
-        setCurrentConflict(conflict);
-        setConflictDialogOpen(true);
-        setConflictResolver({ resolve });
-      });
-    });
-    return () => {
-      fullTranslationService.setTermConflictCallback(null);
-    };
-  }, []);
-
   const isFullTranslating = useDocumentStore(state => state.isFullTranslating);
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
-  const fullTranslateProjectId = useDocumentStore(state => state.fullTranslateProjectId);
-  const setFullTranslating = useDocumentStore(state => state.setFullTranslating);
-  const setFullTranslateProgress = useDocumentStore(state => state.setFullTranslateProgress);
-  const setFullTranslateProjectId = useDocumentStore(state => state.setFullTranslateProjectId);
-  const endFullTranslate = useDocumentStore(state => state.endFullTranslate);
 
   useProject(currentProject?.id ?? '');
-
-  const isImmersiveMode = searchParams.get('immersive') === '1';
-  const activeView = (searchParams.get('view') as DocumentView) || null;
-
-  const setView = useCallback(
-    (view: DocumentView) => {
-      const next = new URLSearchParams(searchParams);
-      if (view) {
-        next.set('view', view);
-      } else {
-        next.delete('view');
-      }
-      setSearchParams(next);
-    },
-    [searchParams, setSearchParams]
-  );
-
-  const updateRouteParams = useCallback(
-    ({
-      view,
-      immersive,
-    }: {
-      view?: DocumentView;
-      immersive?: boolean;
-    }) => {
-      const next = new URLSearchParams(searchParams);
-      if (view === undefined) {
-        // keep current view
-      } else if (view) {
-        next.set('view', view);
-      } else {
-        next.delete('view');
-      }
-
-      if (immersive === undefined) {
-        // keep current immersive state
-      } else if (immersive) {
-        next.set('immersive', '1');
-      } else {
-        next.delete('immersive');
-      }
-
-      setSearchParams(next);
-    },
-    [searchParams, setSearchParams]
-  );
+  const {
+    activeSectionId,
+    activeView,
+    isImmersiveMode,
+    setView,
+    updateRouteParams,
+  } = useDocumentViewState({
+    currentSectionId: currentSection?.section_id,
+    sections,
+    selectedSectionId,
+  });
+  const {
+    backendTranslationStatus,
+    currentStep,
+    setBackendTranslationStatus,
+    setCurrentStep,
+  } = useTranslationStatusSync(currentProject?.id);
+  const {
+    closeWithDefaultResolution,
+    conflictDialogOpen,
+    currentConflict,
+    resolveConflict,
+  } = useTermConflictDialog();
 
   useEffect(() => {
-    setPendingTermReview(null);
-    setPendingTranslationRequest(null);
-    setPendingIssueTarget(null);
-    setIsPreparingFullTranslate(false);
-    setBackendTranslationStatus(null);
+    queueMicrotask(() => {
+      setPendingIssueTarget(null);
+    });
   }, [currentProject?.id]);
-
-  useEffect(() => {
-    if (!currentProject?.id) {
-      return;
-    }
-
-    let cancelled = false;
-
-    const syncStatus = async () => {
-      try {
-        const status = await documentApi.getTranslationStatus(currentProject.id);
-        if (cancelled) {
-          return;
-        }
-        setBackendTranslationStatus(status);
-
-        const isActiveForCurrentProject = status.active_project_id === currentProject.id;
-        const isRunning = status.status === 'processing' && isActiveForCurrentProject;
-        const isCancelling = Boolean(status.is_cancelling && isActiveForCurrentProject);
-        const hasTrackableRun = isRunning || isCancelling;
-
-        if (hasTrackableRun) {
-          setFullTranslateProjectId(currentProject.id);
-          setFullTranslating(true);
-          setFullTranslateProgress({
-            current: status.translated_paragraphs || 0,
-            total: status.total_paragraphs || 0,
-          });
-          setCurrentStep(status.current_step || null);
-          return;
-        }
-
-        if (
-          fullTranslateProjectId === currentProject.id ||
-          (!fullTranslationService.isTranslating() && !status.active_project_id)
-        ) {
-          endFullTranslate();
-          if (!fullTranslationService.isTranslating()) {
-            setCurrentStep(null);
-          }
-        }
-      } catch (error) {
-        if (!cancelled) {
-          console.error('Failed to sync translation status:', error);
-        }
-      }
-    };
-
-    void syncStatus();
-    const intervalId = window.setInterval(syncStatus, 5000);
-
-    return () => {
-      cancelled = true;
-      window.clearInterval(intervalId);
-    };
-  }, [
-    currentProject?.id,
-    endFullTranslate,
-    fullTranslateProjectId,
-    setFullTranslateProgress,
-    setFullTranslateProjectId,
-    setFullTranslating,
-  ]);
-
-  useEffect(() => {
-    if (activeView === 'term-review' && !pendingTermReview) {
-      setView(null);
-    }
-  }, [activeView, pendingTermReview, setView]);
-
-  const activeSectionId = useMemo(() => {
-    const fallbackSectionId = isImmersiveMode ? currentSection?.section_id ?? null : null;
-    const candidateSectionId = selectedSectionId ?? fallbackSectionId;
-    if (!candidateSectionId) return null;
-    return sections.some(section => section.section_id === candidateSectionId) ||
-      candidateSectionId === currentSection?.section_id
-      ? candidateSectionId
-      : null;
-  }, [currentSection, isImmersiveMode, selectedSectionId, sections]);
 
   const {
     isLoading: sectionLoading,
@@ -259,6 +116,52 @@ export function DocumentFeature() {
   } = useSection(currentProject?.id ?? '', activeSectionId ?? '');
 
   const { startTranslation, stopTranslation } = useFullTranslate();
+
+  const runFullTranslate = useCallback(
+    async (method: TranslationMethod = TranslationMethod.FOUR_STEP, model?: string) => {
+      if (!currentProject) return;
+
+      const methodType = method === TranslationMethod.FOUR_STEP ? 'four-step' : 'normal';
+      await startTranslation(
+        currentProject.id,
+        data => {
+          if (data.step || data.message) {
+            setCurrentStep(data.step || data.message || null);
+          }
+        },
+        () => {
+          setCurrentStep(null);
+          setBackendTranslationStatus(null);
+          if (activeSectionId) {
+            refetchSection();
+          }
+        },
+        methodType,
+        model
+      );
+    },
+    [activeSectionId, currentProject, refetchSection, setBackendTranslationStatus, setCurrentStep, startTranslation]
+  );
+
+  const {
+    cancelTermReview,
+    isPreparingFullTranslate,
+    isSubmittingTermReview,
+    pendingTermReview,
+    prepareTermReviewIfNeeded,
+    setIsPreparingFullTranslate,
+    submitTermReview,
+  } = useTermReviewFlow({
+    currentProjectId: currentProject?.id,
+    setView,
+    runFullTranslate,
+  });
+
+  useEffect(() => {
+    if (activeView === 'term-review' && !pendingTermReview) {
+      setView(null);
+    }
+  }, [activeView, pendingTermReview, setView]);
 
   const selectedSection = useMemo(() => {
     if (!activeSectionId) {
@@ -366,12 +269,16 @@ export function DocumentFeature() {
 
     if (!targetParagraph) {
       toast.warning(`未找到段落 ${pendingIssueTarget.paragraphIndex}，请检查报告定位信息`);
-      setPendingIssueTarget(null);
+      queueMicrotask(() => {
+        setPendingIssueTarget(null);
+      });
       return;
     }
 
-    setCurrentParagraph(targetParagraph);
-    setPendingIssueTarget(null);
+    queueMicrotask(() => {
+      setCurrentParagraph(targetParagraph);
+      setPendingIssueTarget(null);
+    });
   }, [displaySection, pendingIssueTarget, setCurrentParagraph]);
 
   const getCurrentParagraphIndex = useCallback(() => {
@@ -400,58 +307,6 @@ export function DocumentFeature() {
     }
   }, [currentParagraph, displaySection, getCurrentParagraphIndex, setCurrentParagraph]);
 
-  const runFullTranslate = useCallback(
-    async (method: TranslationMethod = TranslationMethod.FOUR_STEP, model?: string) => {
-      if (!currentProject) return;
-
-      const methodType = method === TranslationMethod.FOUR_STEP ? 'four-step' : 'normal';
-      await startTranslation(
-        currentProject.id,
-        data => {
-          if (data.step || data.message) {
-            setCurrentStep(data.step || data.message || null);
-          }
-        },
-        () => {
-          setCurrentStep(null);
-          setBackendTranslationStatus(null);
-          if (activeSectionId) {
-            refetchSection();
-          }
-        },
-        methodType,
-        model
-      );
-    },
-    [activeSectionId, currentProject, refetchSection, startTranslation]
-  );
-
-  const prepareTermReviewIfNeeded = useCallback(
-    async (
-      method: TranslationMethod = TranslationMethod.FOUR_STEP,
-      model?: string
-    ) => {
-      if (!currentProject) return false;
-
-      try {
-        const review = await glossaryApi.prepareTermReview(currentProject.id, model);
-        if (review.review_required && review.total_candidates > 0) {
-          setPendingTermReview(review);
-          setPendingTranslationRequest({ method, model });
-          setView('term-review');
-          toast.info(`检测到 ${review.total_candidates} 个高优先级新术语，先确认再开始全文翻译`);
-          return true;
-        }
-      } catch (error) {
-        console.error('Failed to prepare term review:', error);
-        toast.warning('术语预检失败，已跳过并直接开始全文翻译');
-      }
-
-      return false;
-    },
-    [currentProject, setView]
-  );
-
   const handleFullTranslate = useCallback(
     async (method?: TranslationMethod, model?: string) => {
       if (!currentProject) return;
@@ -475,44 +330,19 @@ export function DocumentFeature() {
       currentProject,
       isFullTranslating,
       isPreparingFullTranslate,
-      prepareTermReviewIfNeeded,
-      runFullTranslate,
-      stopTranslation,
     ]
   );
 
   const handleSubmitTermReview = useCallback(
     async (decisions: TermReviewDecision[]) => {
-      if (!currentProject || !pendingTranslationRequest) {
-        return;
-      }
-
-      setIsSubmittingTermReview(true);
-      try {
-        await glossaryApi.submitTermReview(currentProject.id, decisions);
-        await glossaryApi.getProjectGlossary(currentProject.id);
-        setPendingTermReview(null);
-        setView(null);
-        toast.success('术语预检已保存，开始全文翻译');
-        await runFullTranslate(
-          pendingTranslationRequest.method,
-          pendingTranslationRequest.model
-        );
-      } catch (error) {
-        console.error('Failed to submit term review:', error);
-        toast.error('保存术语预检失败');
-      } finally {
-        setIsSubmittingTermReview(false);
-      }
+      await submitTermReview(decisions);
     },
-    [currentProject, pendingTranslationRequest, runFullTranslate, setView]
+    [submitTermReview]
   );
 
   const handleCancelTermReview = useCallback(() => {
-    setPendingTermReview(null);
-    setPendingTranslationRequest(null);
-    setView(null);
-  }, [setView]);
+    cancelTermReview();
+  }, [cancelTermReview]);
 
   const handleProjectCreated = useCallback(
     async (projectId: string) => {
@@ -694,16 +524,7 @@ export function DocumentFeature() {
       {/* 术语冲突对话框 */}
       <Dialog open={conflictDialogOpen} onOpenChange={(open) => {
         if (!open) {
-          // 用户点遮罩/Escape 关闭时，默认保留现有翻译以避免 Promise 永远挂起
-          if (conflictResolver && currentConflict) {
-            conflictResolver.resolve({
-              chosenTranslation: currentConflict.existing_translation,
-              applyToAll: true,
-            });
-          }
-          setConflictDialogOpen(false);
-          setCurrentConflict(null);
-          setConflictResolver(null);
+          closeWithDefaultResolution();
         }
       }}>
         <DialogContent className="sm:max-w-md">
@@ -719,13 +540,7 @@ export function DocumentFeature() {
                 <button
                   className="w-full text-left p-3 border rounded-lg hover:bg-accent transition-colors"
                   onClick={() => {
-                    conflictResolver?.resolve({
-                      chosenTranslation: currentConflict.existing_translation,
-                      applyToAll: true,
-                    });
-                    setConflictDialogOpen(false);
-                    setCurrentConflict(null);
-                    setConflictResolver(null);
+                    resolveConflict(currentConflict.existing_translation, true);
                   }}
                 >
                   <div className="font-medium">保留现有：{currentConflict.existing_translation}</div>
@@ -743,13 +558,7 @@ export function DocumentFeature() {
                 <button
                   className="w-full text-left p-3 border rounded-lg hover:bg-accent transition-colors"
                   onClick={() => {
-                    conflictResolver?.resolve({
-                      chosenTranslation: currentConflict.new_translation,
-                      applyToAll: true,
-                    });
-                    setConflictDialogOpen(false);
-                    setCurrentConflict(null);
-                    setConflictResolver(null);
+                    resolveConflict(currentConflict.new_translation, true);
                   }}
                 >
                   <div className="font-medium">使用新翻译：{currentConflict.new_translation}</div>

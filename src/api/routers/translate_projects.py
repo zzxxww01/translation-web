@@ -6,12 +6,15 @@ import asyncio
 import json
 import logging
 import os
-import threading
 from typing import Any, Dict
 
 from fastapi import APIRouter, Body, Request
 from fastapi.responses import StreamingResponse
 
+from src.api.streaming.translation_stream_session import (
+    TranslationStreamSession,
+    resolve_live_conflict,
+)
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.core.format_tokens import apply_translation_payload
 from src.core.models import ParagraphStatus
@@ -40,12 +43,6 @@ from .translate_utils import validate_path_component
 from src.config.timeout_config import TimeoutConfig
 
 router = APIRouter()
-
-# 活跃的四步法翻译会话冲突状态 {project_id: {term: Event}}
-# 使用线程锁保护全局状态
-_conflict_lock = threading.Lock()
-_pending_conflict_events: Dict[str, Dict[str, asyncio.Event]] = {}
-_conflict_resolutions: Dict[str, Dict[str, Dict[str, Any]]] = {}
 
 
 def _get_best_translation_text(paragraph) -> str:
@@ -388,196 +385,34 @@ async def translate_with_four_steps(
     except Exception:
         BatchTranslationService._release_active_run(project_id)
         raise
-    progress_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
-    event_loop = asyncio.get_running_loop()
-
-    # 初始化冲突状态（使用锁保护）
-    with _conflict_lock:
-        _pending_conflict_events[project_id] = {}
-        _conflict_resolutions[project_id] = {}
-
-    async def _handle_term_conflict_on_main(conflict) -> Dict[str, Any]:
-        term_key = conflict.term.lower()
-        event = asyncio.Event()
-        with _conflict_lock:
-            _pending_conflict_events[project_id][term_key] = event
-        await progress_queue.put(
-            {
-                "type": "term_conflict",
-                "conflict": conflict.model_dump(mode="json"),
-            }
-        )
-        try:
-            await event.wait()
-            with _conflict_lock:
-                resolution = _conflict_resolutions.get(project_id, {}).get(term_key, {})
-            return {
-                "chosen_translation": resolution.get("chosen_translation")
-                or conflict.existing_translation
-                or conflict.new_translation,
-                "apply_to_all": resolution.get("apply_to_all", True),
-            }
-        finally:
-            with _conflict_lock:
-                _pending_conflict_events.get(project_id, {}).pop(term_key, None)
-                _conflict_resolutions.get(project_id, {}).pop(term_key, None)
-
-    async def run_translation():
-        """在后台运行翻译任务。"""
-        try:
-
-            def on_progress(step: str, current: int, total: int):
-                event_loop.call_soon_threadsafe(
-                    progress_queue.put_nowait,
-                    {
-                        "type": "progress",
-                        "step": step,
-                        "current": current,
-                        "total": total,
-                        "message": step,
-                    },
+    async def run_translation(
+        on_progress,
+        on_term_conflict,
+    ) -> Dict[str, Any]:
+        def _run_translation_in_thread() -> Dict[str, Any]:
+            async def _runner() -> Dict[str, Any]:
+                return await batch_service.translate_project(
+                    project_id,
+                    on_progress=on_progress,
+                    on_term_conflict=on_term_conflict,
                 )
 
-            async def on_term_conflict(conflict) -> Dict[str, Any]:
-                future = asyncio.run_coroutine_threadsafe(
-                    _handle_term_conflict_on_main(conflict), event_loop
-                )
-                return await asyncio.wrap_future(future)
+            return asyncio.run(_runner())
 
-            def _run_translation_in_thread() -> Dict[str, Any]:
-                async def _runner() -> Dict[str, Any]:
-                    return await batch_service.translate_project(
-                        project_id,
-                        on_progress=on_progress,
-                        on_term_conflict=on_term_conflict,
-                    )
+        return await asyncio.to_thread(_run_translation_in_thread)
 
-                return asyncio.run(_runner())
-
-            result = await asyncio.to_thread(_run_translation_in_thread)
-            status = result.get("status")
-            if status == "completed":
-                event_type = "complete"
-            elif status == "cancelled":
-                event_type = "cancelled"
-            else:
-                event_type = "incomplete"
-            if event_type == "complete":
-                message = (
-                    f"Translation complete: "
-                    f"{result.get('translated_paragraphs', 0)}/{total_paragraphs} paragraphs usable"
-                )
-            elif event_type == "cancelled":
-                message = result.get("message") or "Translation cancelled"
-            else:
-                message = result.get("error") or (
-                    f"Translation incomplete: "
-                    f"{result.get('translated_paragraphs', 0)}/{total_paragraphs} paragraphs usable"
-                )
-            await progress_queue.put(
-                {
-                    "type": event_type,
-                    "translated_count": result.get(
-                        "translated_paragraphs", 0
-                    ),
-                    "total": total_paragraphs,
-                    "result": result,
-                    "message": message,
-                }
-            )
-        except Exception as e:
-            await progress_queue.put(
-                {
-                    "type": "error",
-                    "error": str(e),
-                }
-            )
-        finally:
-            # 清理冲突状态（使用锁保护）
-            with _conflict_lock:
-                _pending_conflict_events.pop(project_id, None)
-                _conflict_resolutions.pop(project_id, None)
-            # 释放翻译槽位
-            from src.services.batch_translation_service import BatchTranslationService
-            BatchTranslationService._release_active_run(project_id)
-
-    async def generate_progress():
-        translation_task: asyncio.Task | None = None
-        translation_finished = False
-        cancel_requested = False
-
-        async def request_cancel(reason: str) -> None:
-            nonlocal cancel_requested
-            if cancel_requested:
-                return
-            cancel_requested = True
-            logger.info("[%s] Requesting translation cancellation: %s", project_id, reason)
-            try:
-                await batch_service.cancel_translation(project_id)
-            except Exception as cancel_exc:
-                logger.warning("[%s] Failed to cancel translation: %s", project_id, cancel_exc)
-
-        try:
-            yield (
-                "data: "
-                + json.dumps(
-                    {
-                        "type": "start",
-                        "total": total_paragraphs,
-                        "total_sections": total_sections,
-                        "message": "开始四步法翻译",
-                    }
-                )
-                + "\n\n"
-            )
-
-            translation_task = asyncio.create_task(run_translation())
-
-            while True:
-                if await http_request.is_disconnected():
-                    await request_cancel("client disconnected")
-                    break
-                try:
-                    event = await asyncio.wait_for(progress_queue.get(), timeout=1.0)
-                    yield f"data: {json.dumps(event)}\n\n"
-                    if event.get("type") in ("complete", "error", "incomplete", "cancelled"):
-                        translation_finished = True
-                        break
-                except asyncio.TimeoutError:
-                    if await http_request.is_disconnected():
-                        await request_cancel("client disconnected during heartbeat")
-                        break
-                    yield f"data: {json.dumps({'type': 'heartbeat'})}\n\n"
-
-                    if translation_task.done():
-                        if translation_task.exception():
-                            yield (
-                                "data: "
-                                + json.dumps(
-                                    {
-                                        "type": "error",
-                                        "error": str(translation_task.exception()),
-                                    }
-                                )
-                                + "\n\n"
-                            )
-                        translation_finished = True
-                        break
-        except asyncio.CancelledError:
-            await request_cancel("stream task cancelled")
-            raise
-        except Exception as e:
-            yield f"data: {json.dumps({'type': 'error', 'error': str(e)})}\n\n"
-        finally:
-            if (
-                not translation_finished
-                and translation_task is not None
-                and not translation_task.done()
-            ):
-                await request_cancel("stream closed before translation finished")
+    session = TranslationStreamSession(
+        project_id=project_id,
+        request=request,
+        total_paragraphs=total_paragraphs,
+        total_sections=total_sections,
+        run_translation=run_translation,
+        cancel_translation=batch_service.cancel_translation,
+        release_slot=lambda pid: BatchTranslationService._release_active_run(pid),
+    )
 
     return StreamingResponse(
-        generate_progress(),
+        session.generate(),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",
@@ -598,26 +433,17 @@ async def resolve_term_conflict_live(
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
 
-    with _conflict_lock:
-        events = _pending_conflict_events.get(project_id, {})
-        resolutions = _conflict_resolutions.setdefault(project_id, {})
-
-        term_key = body.term.lower()
-        resolutions[term_key] = {
-            "chosen_translation": body.chosen_translation,
-            "apply_to_all": body.apply_to_all,
-        }
-
-        # 唤醒等待的翻译线程
-        event = events.get(term_key)
-
-    if event:
-        event.set()
+    resolved = resolve_live_conflict(
+        project_id,
+        request.term,
+        request.chosen_translation,
+        request.apply_to_all,
+    )
 
     return {
-        "status": "resolved",
-        "term": body.term,
-        "chosen": body.chosen_translation,
+        "status": "resolved" if resolved else "accepted",
+        "term": request.term,
+        "chosen": request.chosen_translation,
     }
 
 

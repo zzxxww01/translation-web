@@ -2,8 +2,10 @@
 微信公众号格式转换服务
 """
 
+import atexit
 import base64
 import re
+import weakref
 from typing import Optional
 from pathlib import Path
 
@@ -153,11 +155,27 @@ class WechatFormatter:
 
         self.md = MarkdownIt("commonmark", {"html": True})
         self.md.enable(["table", "strikethrough"])
+        self._executor_finalizer = weakref.finalize(
+            self,
+            self._shutdown_executor,
+            self._image_executor,
+        )
 
     def __del__(self):
         """清理线程池资源"""
-        if hasattr(self, '_image_executor'):
-            self._image_executor.shutdown(wait=False)
+        finalizer = getattr(self, "_executor_finalizer", None)
+        if finalizer is not None and finalizer.alive:
+            finalizer()
+
+    @staticmethod
+    def _shutdown_executor(executor) -> None:
+        if executor is None:
+            return
+        try:
+            executor.shutdown(wait=False)
+        except Exception:
+            logger = __import__("logging").getLogger(__name__)
+            logger.debug("Failed to shut down WechatFormatter executor", exc_info=True)
 
     def format(
         self,
@@ -577,8 +595,4 @@ class WechatFormatter:
 
         return str(soup)
 
-
-# 注册清理函数，确保线程池在程序退出时正确关闭
-# 使用 wait=False 避免在 FastAPI worker 被 SIGKILL 时挂起
-import atexit
-atexit.register(lambda: WechatFormatter._image_executor.shutdown(wait=False))
+atexit.register(lambda: None)

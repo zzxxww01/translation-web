@@ -39,6 +39,7 @@ from .errors import (
 from .config_loader import get_config_loader
 from .network_policy import build_network_policy
 from .network_policy import RuntimeNetworkPolicy
+from .usage_metrics import llm_usage_metrics
 
 
 logger = logging.getLogger(__name__)
@@ -188,11 +189,6 @@ class GeminiAttempt:
 
 class GeminiProvider(LLMProvider):
     """Google Gemini API Provider"""
-
-    # 类级别 API 调用计数器
-    _api_call_count = 0
-    _api_call_count_lock = Lock()
-    _api_call_start_time: float | None = None
 
     def __init__(
         self,
@@ -792,9 +788,7 @@ class GeminiProvider(LLMProvider):
                     timeout=effective_timeout,
                 )
                 duration = time.monotonic() - start_time
-                with GeminiProvider._api_call_count_lock:
-                    GeminiProvider._api_call_count += 1
-                    call_number = GeminiProvider._api_call_count
+                call_number = llm_usage_metrics.increment_api_calls()
                 logger.info(
                     "[API #%d] model=%s duration=%.1fs (key=%s attempt=%s/%s)",
                     call_number,

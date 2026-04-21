@@ -141,8 +141,10 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
 
   useEffect(() => {
     if (!isOpen) {
-      setIsDragging(false);
-      setIsWindowDragging(false);
+      queueMicrotask(() => {
+        setIsDragging(false);
+        setIsWindowDragging(false);
+      });
       windowDragDepthRef.current = 0;
       return;
     }

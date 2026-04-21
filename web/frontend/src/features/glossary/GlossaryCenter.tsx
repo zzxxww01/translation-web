@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ArrowLeft, BookOpen, Globe2, Languages, Plus, Search, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
@@ -54,7 +54,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
     setActiveScope(projectId ? defaultScope : 'global');
   }, [defaultScope, projectId]);
 
-  async function loadData() {
+  const loadData = useCallback(async () => {
     setIsLoading(true);
     try {
       const requests: Promise<unknown>[] = [glossaryApi.getGlobalGlossary()];
@@ -83,11 +83,11 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
     } finally {
       setIsLoading(false);
     }
-  }
+  }, [projectId]);
 
   useEffect(() => {
     void loadData();
-  }, [projectId]);
+  }, [loadData]);
 
   useEffect(() => {
     setSelectedOriginals([]);

@@ -3,9 +3,8 @@
  */
 
 import { useState, useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -14,6 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
+import type { BadgeProps } from '@/components/ui/badge';
 import type { QualityIssue, IssueType, IssueSeverity, IssueStatus, SortBy } from '../types';
 
 interface IssueListProps {
@@ -29,13 +29,13 @@ const issueTypeLabels: Record<IssueType, string> = {
   style: '风格',
 };
 
-const issueTypeColors: Record<IssueType, string> = {
+const issueTypeColors = {
   accuracy: 'error',
   readability: 'warning',
   terminology: 'info',
   consistency: 'warning',
   style: 'default',
-};
+} as const satisfies Record<IssueType, NonNullable<BadgeProps['variant']>>;
 
 const severityLabels: Record<IssueSeverity, string> = {
   critical: '严重',
@@ -43,11 +43,11 @@ const severityLabels: Record<IssueSeverity, string> = {
   minor: '轻微',
 };
 
-const severityColors: Record<IssueSeverity, string> = {
+const severityColors = {
   critical: 'error',
   major: 'warning',
   minor: 'default',
-};
+} as const satisfies Record<IssueSeverity, NonNullable<BadgeProps['variant']>>;
 
 const statusLabels: Record<IssueStatus, string> = {
   pending: '待审核',
@@ -56,18 +56,22 @@ const statusLabels: Record<IssueStatus, string> = {
   dismissed: '已忽略',
 };
 
-const statusColors: Record<IssueStatus, string> = {
+const statusColors = {
   pending: 'warning',
   auto_fixed: 'success',
   manual_fixed: 'success',
   dismissed: 'default',
-};
+} as const satisfies Record<IssueStatus, NonNullable<BadgeProps['variant']>>;
 
 const severityOrder: Record<IssueSeverity, number> = {
   critical: 0,
   major: 1,
   minor: 2,
 };
+
+const issueTypeBadgeVariant: Record<IssueType, NonNullable<BadgeProps['variant']>> = issueTypeColors;
+const severityBadgeVariant: Record<IssueSeverity, NonNullable<BadgeProps['variant']>> = severityColors;
+const statusBadgeVariant: Record<IssueStatus, NonNullable<BadgeProps['variant']>> = statusColors;
 
 export function IssueList({ issues, onIssueClick }: IssueListProps) {
   const [filters, setFilters] = useState<{
@@ -181,13 +185,13 @@ export function IssueList({ issues, onIssueClick }: IssueListProps) {
               <CardHeader className="pb-3">
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex flex-wrap gap-2">
-                    <Badge variant={issueTypeColors[issue.type] as any}>
+                    <Badge variant={issueTypeBadgeVariant[issue.type]}>
                       {issueTypeLabels[issue.type]}
                     </Badge>
-                    <Badge variant={severityColors[issue.severity] as any}>
+                    <Badge variant={severityBadgeVariant[issue.severity]}>
                       {severityLabels[issue.severity]}
                     </Badge>
-                    <Badge variant={statusColors[issue.status] as any}>
+                    <Badge variant={statusBadgeVariant[issue.status]}>
                       {statusLabels[issue.status]}
                     </Badge>
                     <Badge variant="outline">段落 {issue.paragraph_index + 1}</Badge>

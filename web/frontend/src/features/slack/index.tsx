@@ -76,7 +76,7 @@ export function SlackFeature() {
           }))
         );
       }
-    } catch (error) {
+    } catch {
       toast.error('生成失败，请重试');
     } finally {
       setGenerating(false);

@@ -13,6 +13,10 @@ import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import { DEFAULT_STALE_TIME, ParagraphStatus } from '@/shared/constants';
 import type { CreateProjectDto, Section } from '@/shared/types';
 import { fullTranslationService, type TranslationMethodType } from './services/fullTranslationService';
+export { useDocumentViewState, type DocumentView } from './hooks/useDocumentViewState';
+export { useTermConflictDialog } from './hooks/useTermConflictDialog';
+export { useTermReviewFlow } from './hooks/useTermReviewFlow';
+export { useTranslationStatusSync } from './hooks/useTranslationStatusSync';
 
 /**
  * 获取项目列表

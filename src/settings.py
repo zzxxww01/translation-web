@@ -148,9 +148,3 @@ class Settings(BaseSettings):
 
 
 settings = Settings()
-
-try:
-    settings.validate_required_settings()
-except ValueError as e:
-    print(f"Configuration validation failed:\n{e}")
-    print("\nHint: make sure required variables are present in your .env file.")

@@ -43,13 +43,29 @@ web/frontend/lint-report.json
 # ----------------------------
 # Test / temporary artifacts
 # ----------------------------
-tests/
+tests/*
+!tests/conftest.py
+!tests/unit/
+tests/unit/*
+!tests/unit/api/
+!tests/unit/services/
+tests/unit/api/*
+tests/unit/services/*
+!tests/unit/api/test_translation_stream_session.py
+!tests/unit/services/test_translation_artifact_service.py
+!tests/unit/services/test_translation_run_registry.py
+!tests/unit/services/test_wechat_formatter.py
+!tests/unit/services/test_inline_recovery_service.py
+!tests/unit/services/test_project_export_service.py
+!tests/unit/services/test_section_translation_executor.py
+!tests/unit/llm/test_usage_metrics.py
 .pytest_cache/
 .tmp_testdata/
 .coverage
 htmlcov/
-test_*.py
-*_test.py
+tests/.tmp/
+tests/temp/
+tests/**/__pycache__/
 
 # ----------------------------
 # IDE / local tooling

@@ -6,9 +6,7 @@ Manage translation projects: create, read, update, delete.
 
 import json
 import logging
-import os
 import re
-import shutil
 import threading
 from collections import OrderedDict
 from contextlib import contextmanager
@@ -17,29 +15,18 @@ from pathlib import Path
 from typing import Any, List, Optional
 from uuid import uuid4
 
-from slugify import slugify
-
 logger = logging.getLogger(__name__)
 
 from .models import (
-    ProjectMeta, ProjectStatus, ProjectProgress, ProjectConfig,
-    Section, Paragraph, ParagraphStatus, ElementType, Glossary
+    ProjectMeta, ProjectStatus, ProjectConfig,
+    Section, Paragraph, ParagraphStatus, ElementType
 )
 from .glossary import GlossaryManager
-from .format_tokens import (
-    FormatRecoveryError,
-    assign_span_ids,
-    group_paragraphs_by_parent_block,
-    reconstruct_block_tokenized_text,
-    require_valid_reconstruction,
-    restore_markdown_from_tokenized,
-    sorted_block_groups,
-    tokenize_text,
-)
-from .markdown_project_parser import MarkdownProjectParser
-from ..html2md import convert_html_to_markdown_text
-from .title_guard import find_missing_title_terms
-from .file_utils import write_text_atomic, write_json_atomic, read_json, read_text
+from .inline_recovery_service import InlineRecoveryService
+from .project_export_service import ProjectExportService
+from .project_lifecycle_service import ProjectLifecycleService
+from .project_repository import ProjectRepository
+from .file_utils import write_text_atomic, write_json_atomic, read_json
 from .limits import TranslationLimits
 
 
@@ -55,8 +42,36 @@ class ProjectManager:
         """
         self.projects_path = Path(projects_path)
         self.projects_path.mkdir(parents=True, exist_ok=True)
-        self.markdown_parser = MarkdownProjectParser()
         self.glossary_manager = GlossaryManager(projects_path=projects_path)
+        self.inline_recovery = InlineRecoveryService(logger)
+        self.project_export_service = ProjectExportService(
+            inline_recovery=self.inline_recovery,
+            project_dir_resolver=self._project_dir,
+            write_text=self._write_text,
+            write_json=self._write_json,
+            get_project=self.get,
+            get_sections=self.get_sections,
+            best_translation_text=self._best_translation_text,
+        )
+        self.project_repository = ProjectRepository(
+            project_dir_resolver=self._project_dir,
+            read_json=self._read_json,
+            write_json=self._write_json,
+            write_text=self._write_text,
+            get_project=self.get,
+            render_source_block_markdown=self._render_source_block_markdown,
+            render_markdown_line=self._format_markdown_line,
+            best_translation_text=self._best_translation_text,
+            logger_=logger,
+        )
+        self.project_lifecycle_service = ProjectLifecycleService(
+            project_dir_resolver=self._project_dir,
+            write_text=self._write_text,
+            save_section=self._save_section,
+            save_meta=self._save_meta,
+            glossary_manager=self.glossary_manager,
+            logger_=logger,
+        )
         self._section_locks: OrderedDict[str, threading.RLock] = OrderedDict()
         self._section_locks_guard = threading.Lock()
         self._section_locks_max = TranslationLimits.SECTION_LOCK_CACHE_SIZE
@@ -102,122 +117,34 @@ class ProjectManager:
 
     def _format_markdown_line(self, element_type: ElementType, text: str) -> str:
         """Format one markdown line based on paragraph element type."""
-        if element_type == ElementType.H3:
-            return f"### {text}"
-        if element_type == ElementType.H4:
-            return f"#### {text}"
-        if element_type == ElementType.LI:
-            return f"- {text}"
-        if element_type == ElementType.BLOCKQUOTE:
-            return f"> {text}"
-        return text
+        return self.inline_recovery.format_markdown_line(element_type, text)
 
     def _group_section_blocks(self, section: Section) -> list[list[Paragraph]]:
-        return sorted_block_groups(section.paragraphs)
+        return self.inline_recovery.group_section_blocks(section)
 
     def _section_display_title(self, section: Section) -> str:
-        return (section.title_translation or section.title or "").strip()
+        return self.project_export_service.section_display_title(section)
 
     def _is_front_matter_section(self, section: Section) -> bool:
-        paragraphs = section.paragraphs
-        if not paragraphs or len(paragraphs) > 4:
-            return False
-        first = paragraphs[0]
-        if not first.is_heading or first.heading_level not in {3, 4}:
-            return False
-        return all(
-            p.element_type in {ElementType.H3, ElementType.H4, ElementType.P, ElementType.IMAGE}
-            for p in paragraphs
-        )
+        return self.project_export_service.is_front_matter_section(section)
 
     def _should_render_section_heading(
         self, sections: list[Section], index: int, section: Section
     ) -> bool:
-        if index != 0 or index + 1 >= len(sections):
-            return True
-
-        current_title = self._section_display_title(section)
-        next_title = self._section_display_title(sections[index + 1])
-        if not current_title or current_title != next_title:
-            return True
-
-        return not self._is_front_matter_section(section)
+        return self.project_export_service.should_render_section_heading(sections, index, section)
 
     def _render_source_block_markdown(self, paragraphs: list[Paragraph]) -> str:
-        first = paragraphs[0]
-        if first.parent_block_markdown:
-            return first.parent_block_markdown
-        if first.source_html and first.element_type in {ElementType.IMAGE, ElementType.TABLE}:
-            return first.source_html
-        if first.inline_elements:
-            tokenized = tokenize_text(first.source, first.inline_elements)
-            return restore_markdown_from_tokenized(tokenized, first.inline_elements)
-        return self._format_markdown_line(first.element_type, first.source)
+        return self.inline_recovery.render_source_block_markdown(paragraphs)
 
     def _render_block_markdown(
         self,
         paragraphs: list[Paragraph],
         fallback_to_source: bool = True,
     ) -> str:
-        first = paragraphs[0]
-        block_type = first.parent_block_type or first.element_type
-
-        if block_type == ElementType.IMAGE:
-            return first.parent_block_markdown or first.source_html or f"![image]({first.source})"
-        if block_type == ElementType.TABLE:
-            return first.parent_block_markdown or first.parent_source_html or first.source
-        if block_type == ElementType.CODE:
-            try:
-                text = require_valid_reconstruction(
-                    paragraphs,
-                    fallback_to_source=fallback_to_source,
-                ).text
-            except FormatRecoveryError as error:
-                logger.warning(
-                    "Format recovery failed for code block %s, fallback to plain export: %s",
-                    first.parent_block_id or first.id,
-                    error,
-                )
-                text = reconstruct_block_tokenized_text(
-                    paragraphs,
-                    fallback_to_source=fallback_to_source,
-                ).text
-            return f"```\n{text}\n```"
-
-        try:
-            payload = require_valid_reconstruction(
-                paragraphs, fallback_to_source=fallback_to_source
-            )
-            if first.parent_inline_elements:
-                text = restore_markdown_from_tokenized(
-                    payload.tokenized_text or payload.text,
-                    first.parent_inline_elements,
-                )
-            else:
-                text = payload.text
-        except FormatRecoveryError as error:
-            logger.warning(
-                "Format recovery failed for block %s, attempting smart fallback: %s",
-                first.parent_block_id or first.id,
-                error,
-            )
-            # Smart fallback: try to restore links by position matching
-            plain_text = reconstruct_block_tokenized_text(
-                paragraphs,
-                fallback_to_source=fallback_to_source,
-            ).text
-
-            # Attempt to restore inline elements (especially links) without calling LLM
-            if first.parent_inline_elements and first.source:
-                text = self._smart_fallback_restore_inline_elements(
-                    source_text=first.source,
-                    translated_text=plain_text,
-                    elements=first.parent_inline_elements,
-                    block_id=first.parent_block_id or first.id
-                )
-            else:
-                text = plain_text
-        return self._format_markdown_line(block_type, text)
+        return self.inline_recovery.render_block_markdown(
+            paragraphs,
+            fallback_to_source=fallback_to_source,
+        )
 
     def _smart_fallback_restore_inline_elements(
         self,
@@ -226,45 +153,12 @@ class ProjectManager:
         elements: List[Any],
         block_id: str
     ) -> str:
-        """
-        Smart fallback: restore inline elements (links, bold, italic) by position matching.
-        Does not call LLM - uses heuristic matching instead.
-
-        Args:
-            source_text: Original text
-            translated_text: Translated text (without tokens)
-            elements: List of inline elements (links, bold, italic, etc.)
-            block_id: Block ID for logging
-
-        Returns:
-            Text with restored inline elements in Markdown format
-        """
-        from .models import InlineElement
-
-        result = translated_text
-
-        # Process elements in reverse order to maintain correct positions
-        # when inserting Markdown syntax
-        link_elements = [e for e in elements if e.type == "link"]
-
-        for element in reversed(link_elements):
-            try:
-                result = self._restore_single_link(
-                    source_text=source_text,
-                    translated_text=result,
-                    link_element=element
-                )
-            except Exception as e:
-                logger.warning(
-                    "Failed to restore link %s in block %s: %s",
-                    element.href if hasattr(element, 'href') else 'unknown',
-                    block_id,
-                    e
-                )
-                # Continue with other links even if one fails
-                continue
-
-        return result
+        return self.inline_recovery.smart_fallback_restore_inline_elements(
+            source_text=source_text,
+            translated_text=translated_text,
+            elements=elements,
+            block_id=block_id,
+        )
 
     def _restore_single_link(
         self,
@@ -272,75 +166,11 @@ class ProjectManager:
         translated_text: str,
         link_element: Any
     ) -> str:
-        """
-        Restore a single link by position matching.
-
-        Strategy:
-        1. Find the link text position in source
-        2. Calculate relative position (0.0 ~ 1.0)
-        3. Search for best match in translated text around that position
-        4. Replace matched text with Markdown link
-        """
-        from .models import InlineElement
-
-        # Find link position in source text
-        link_start = source_text.find(link_element.text)
-        if link_start == -1:
-            # Cannot locate link in source, wrap entire translated text
-            logger.debug(
-                "Cannot locate link text '%s' in source, wrapping entire translation",
-                link_element.text[:50]
-            )
-            return f"[{translated_text}]({link_element.href})"
-
-        # Calculate relative position
-        relative_pos = link_start / len(source_text) if len(source_text) > 0 else 0.5
-
-        # Strategy 1: Try to find exact match or very similar text first
-        # This handles cases where link text is preserved (e.g., "OpenAI", "Anthropic")
-        if link_element.text in translated_text:
-            # Exact match found
-            match_start = translated_text.find(link_element.text)
-            match_end = match_start + len(link_element.text)
-            return (
-                translated_text[:match_start] +
-                f"[{link_element.text}]({link_element.href})" +
-                translated_text[match_end:]
-            )
-
-        # Strategy 2: Fallback - use a reasonable chunk of text
-        # Since this is a fallback, we can be less precise
-        # Find a natural phrase boundary near the expected position
-        expected_pos = int(len(translated_text) * relative_pos)
-
-        # Look for sentence boundaries (punctuation marks)
-        sentence_breaks = [0]  # Start of text
-        for i, char in enumerate(translated_text):
-            if char in '，。！？；：、':
-                sentence_breaks.append(i + 1)
-        sentence_breaks.append(len(translated_text))  # End of text
-
-        # Find which sentence segment contains the expected position
-        for i in range(len(sentence_breaks) - 1):
-            start = sentence_breaks[i]
-            end = sentence_breaks[i + 1]
-            if start <= expected_pos < end:
-                # Use this sentence segment
-                segment = translated_text[start:end].strip('，。！？；：、 ')
-                if segment:
-                    return (
-                        translated_text[:start] +
-                        f"[{segment}]({link_element.href})" +
-                        translated_text[end:]
-                    )
-                break
-
-        # Strategy 3: Last resort - wrap entire text
-        logger.debug(
-            "No good sentence boundary found for link text '%s', wrapping entire translation",
-            link_element.text[:50]
+        return self.inline_recovery.restore_single_link(
+            source_text=source_text,
+            translated_text=translated_text,
+            link_element=link_element,
         )
-        return f"[{translated_text}]({link_element.href})"
 
     def _extract_chinese_word_candidates(
         self,
@@ -348,69 +178,11 @@ class ProjectManager:
         center: int,
         max_candidates: int = 5
     ) -> list:
-        """
-        Extract Chinese word candidates near the expected position.
-
-        Chinese words are typically 2-6 characters long.
-        We look for natural word boundaries (punctuation, spaces, etc.)
-
-        Args:
-            text: Text to search in
-            center: Expected center position
-            max_candidates: Maximum number of candidates to return
-
-        Returns:
-            List of (start, end, text) tuples
-        """
-        import re
-
-        candidates = []
-
-        # Define word lengths to try (2-6 characters for Chinese)
-        word_lengths = [4, 3, 5, 2, 6]
-
-        # Search window: wider range to account for length differences
-        search_start = max(0, center - 20)
-        search_end = min(len(text), center + 20)
-
-        seen = set()  # Avoid duplicates
-
-        for length in word_lengths:
-            for start in range(search_start, min(search_end, len(text) - length + 1)):
-                end = start + length
-                candidate = text[start:end]
-
-                # Skip if already seen
-                if (start, end) in seen:
-                    continue
-                seen.add((start, end))
-
-                # Check if this looks like a valid Chinese word/phrase
-                # 1. Should contain mostly Chinese characters (at least 90%)
-                chinese_chars = sum(1 for c in candidate if '\u4e00' <= c <= '\u9fff')
-                if chinese_chars < length * 0.9:
-                    continue
-
-                # 2. Prefer candidates that start/end at word boundaries
-                boundary_score = 0
-                if start == 0 or not ('\u4e00' <= text[start-1] <= '\u9fff'):
-                    boundary_score += 1
-                if end == len(text) or not ('\u4e00' <= text[end] <= '\u9fff'):
-                    boundary_score += 1
-
-                # 3. Calculate distance from center
-                candidate_center = (start + end) // 2
-                distance = abs(candidate_center - center)
-
-                # Combined score: closer to center + word boundaries
-                # Prioritize boundary score, reduce distance penalty for pure Chinese
-                score = boundary_score * 20 - distance * 0.3
-
-                candidates.append((start, end, candidate, score))
-
-        # Sort by score and return top candidates
-        candidates.sort(key=lambda x: x[3], reverse=True)
-        return [(s, e, t) for s, e, t, _ in candidates[:max_candidates]]
+        return self.inline_recovery.extract_chinese_word_candidates(
+            text=text,
+            center=center,
+            max_candidates=max_candidates,
+        )
 
     def _find_best_match_window(
         self,
@@ -421,71 +193,14 @@ class ProjectManager:
         source_text: str = "",
         link_start: int = 0
     ) -> Optional[tuple]:
-        """
-        Find best matching text window around the estimated position.
-
-        Args:
-            text: Text to search in (translated text)
-            center: Estimated center position
-            estimated_length: Estimated length of the match
-            reference: Reference text (original link text)
-            source_text: Original source text (for context)
-            link_start: Link start position in source text
-
-        Returns:
-            (start, end, matched_text) or None if no good match found
-        """
-        if not text:
-            return None
-
-        # Extract context words around the link in source text
-        # This helps identify the correct position in translation
-        before_context = ""
-        after_context = ""
-        if source_text and link_start >= 0:
-            # Get 2-3 words before and after the link
-            before_start = max(0, link_start - 20)
-            before_context = source_text[before_start:link_start].strip().split()[-2:] if link_start > 0 else []
-
-            link_end = link_start + len(reference)
-            after_end = min(len(source_text), link_end + 20)
-            after_context = source_text[link_end:after_end].strip().split()[:2] if link_end < len(source_text) else []
-
-        # Search range: ±50% of text length around center (wider for cross-language matching)
-        search_start = max(0, center - len(text) // 2)
-        search_end = min(len(text), center + len(text) // 2)
-
-        # Window size range: For Chinese, typically much shorter than English
-        # Use 20% ~ 150% of estimated length
-        min_window = max(1, estimated_length // 5)
-        max_window = min(len(text), int(estimated_length * 1.5))
-
-        best_score = 0.0
-        best_match = None
-
-        # Sliding window search
-        for window_size in range(min_window, max_window + 1):
-            for start in range(search_start, min(search_end, len(text) - window_size + 1)):
-                end = start + window_size
-                candidate = text[start:end]
-
-                # Calculate match score
-                score = self._calculate_match_score(
-                    candidate=candidate,
-                    reference=reference,
-                    candidate_pos=start,
-                    expected_pos=center,
-                    translated_text=text,
-                    before_context=before_context,
-                    after_context=after_context
-                )
-
-                if score > best_score:
-                    best_score = score
-                    best_match = (start, end, candidate)
-
-        # Only return matches with score > 0.4 (raised threshold)
-        return best_match if best_score > 0.4 else None
+        return self.inline_recovery.find_best_match_window(
+            text=text,
+            center=center,
+            estimated_length=estimated_length,
+            reference=reference,
+            source_text=source_text,
+            link_start=link_start,
+        )
 
     def _calculate_match_score(
         self,
@@ -497,52 +212,15 @@ class ProjectManager:
         before_context: list = None,
         after_context: list = None
     ) -> float:
-        """
-        简化的评分算法：
-        1. 长度匹配 (40%): 候选词长度越接近预期长度越好
-        2. 完整性 (40%): 候选词是完整词组（在词边界处）
-        3. 位置接近 (20%): 候选词位置越接近参考位置越好
-        """
-        has_alpha_ref = any(c.isalpha() and ord(c) < 128 for c in reference)
-        has_alpha_cand = any(c.isalpha() and ord(c) < 128 for c in candidate)
-
-        # 1. 长度得分 (0-1.0)
-        if has_alpha_ref and not has_alpha_cand:
-            # 英译中：预期压缩比约4倍
-            expected_len = len(reference) / 4.0
-            len_diff = abs(len(candidate) - expected_len)
-            len_score = 1.0 / (1.0 + len_diff)
-        else:
-            # 同语言：直接比较
-            len_ratio = min(len(candidate), len(reference)) / max(len(candidate), len(reference), 1)
-            len_score = len_ratio
-
-        # 2. 完整性得分 (0-1.0)
-        completeness_score = 0.0
-        if not has_alpha_cand and translated_text:
-            # 检查是否在词边界处
-            at_left_boundary = (candidate_pos == 0 or
-                              not ('\u4e00' <= translated_text[candidate_pos-1] <= '\u9fff'))
-            at_right_boundary = (candidate_pos + len(candidate) == len(translated_text) or
-                               not ('\u4e00' <= translated_text[candidate_pos + len(candidate)] <= '\u9fff'))
-
-            if at_left_boundary and at_right_boundary:
-                completeness_score = 1.0  # 完整词组
-            elif at_left_boundary or at_right_boundary:
-                completeness_score = 0.5  # 部分边界
-
-        # 3. 位置得分 (0-1.0)
-        pos_diff = abs(candidate_pos - expected_pos)
-        pos_score = 1.0 / (1.0 + pos_diff / 20.0)
-
-        # 加权总分
-        total_score = (
-            len_score * 0.4 +
-            completeness_score * 0.4 +
-            pos_score * 0.2
+        return self.inline_recovery.calculate_match_score(
+            candidate=candidate,
+            reference=reference,
+            candidate_pos=candidate_pos,
+            expected_pos=expected_pos,
+            translated_text=translated_text,
+            before_context=before_context,
+            after_context=after_context,
         )
-
-        return total_score
 
     def _calculate_match_score_old(
         self,
@@ -642,172 +320,44 @@ class ProjectManager:
 
     def _preferred_export_title(self, meta: ProjectMeta) -> str:
         """Use translated article title for exports when available."""
-        preferred_title = (meta.title_translation or meta.title or "").strip()
-        return preferred_title or meta.id
+        return self.project_export_service.preferred_export_title(meta)
 
     def _sanitize_export_filename_component(self, value: str, fallback: str) -> str:
         """Keep the original title readable while removing invalid filename chars."""
-        sanitized = re.sub(r'[<>:"/\\|?*\x00-\x1F]', "_", value)
-        sanitized = re.sub(r"\s+", " ", sanitized).strip().rstrip(".")
-        return sanitized or fallback
+        return self.project_export_service.sanitize_export_filename_component(value, fallback)
 
     _VALID_EXPORT_FORMATS = {"en", "zh"}
 
     def _normalize_export_format(self, format: str = "zh") -> str:
-        normalized = (format or "zh").strip().lower()
-        if normalized not in self._VALID_EXPORT_FORMATS:
-            raise ValueError(f"Unsupported export format: {format!r}. Use 'en' or 'zh'.")
-        return normalized
+        return self.project_export_service.normalize_export_format(format)
 
     def _build_export_filename(self, meta: ProjectMeta, format: str = "zh") -> str:
-        normalized = self._normalize_export_format(format)
-        title = self._sanitize_export_filename_component(
-            self._preferred_export_title(meta),
-            meta.id,
-        )
-        suffix = "_en.md" if normalized == "en" else "_zh.md"
-        return f"{title}{suffix}"
+        return self.project_export_service.build_export_filename(meta, format=format)
 
     def get_export_filename(self, project_id: str, format: str = "zh") -> str:
         """Return the user-facing export filename for a project."""
-        meta = self.get(project_id)
-        return self._build_export_filename(meta, format=format)
+        return self.project_export_service.get_export_filename(project_id, format=format)
 
     def get_export_path(self, project_id: str, format: str = "zh") -> Path:
         """Return the export file path for a project."""
-        filename = self.get_export_filename(project_id, format=format)
-        return self._project_dir(project_id) / filename
+        return self.project_export_service.get_export_path(project_id, format=format)
 
     def _looks_like_untranslated_residue(self, text: str) -> bool:
-        normalized = (text or "").strip()
-        if not normalized:
-            return False
-        if re.search(r"[\u4e00-\u9fff]", normalized) is None:
-            return False
-        if "来源：" in normalized and len(normalized) <= 80:
-            return False
-
-        english_spans = re.findall(
-            r"[A-Za-z][A-Za-z0-9'’/+.-]*(?:\s+[A-Za-z][A-Za-z0-9'’/+.-]*){2,}",
-            normalized,
-        )
-        if not english_spans:
-            return False
-
-        for span in english_spans:
-            words = re.findall(r"[A-Za-z][A-Za-z0-9'’/+.-]*", span)
-            if len(words) < 4:
-                continue
-            lowercase_words = [word for word in words if re.search(r"[a-z]", word)]
-            if len(words) >= 6:
-                return True
-            if len(lowercase_words) >= 3:
-                return True
-            if ":" in span or "’" in span or "'" in span:
-                return True
-        return False
+        return self.project_export_service.looks_like_untranslated_residue(text)
 
     def _build_export_lint_payload(
         self,
         meta: ProjectMeta,
         sections: list[Section],
     ) -> dict[str, Any]:
-        issues: list[dict[str, Any]] = []
-
-        missing_title_terms = find_missing_title_terms(
-            meta.title,
-            self._preferred_export_title(meta),
-        )
-        if missing_title_terms:
-            issues.append(
-                {
-                    "type": "title_semantics",
-                    "severity": "error",
-                    "message": "导出标题缺少原题中的关键品牌/版本信息。",
-                    "missing_terms": missing_title_terms,
-                }
-            )
-
-        if (
-            len(sections) > 1
-            and self._is_front_matter_section(sections[0])
-            and self._should_render_section_heading(sections, 0, sections[0])
-            and self._should_render_section_heading(sections, 1, sections[1])
-            and self._section_display_title(sections[0])
-            and self._section_display_title(sections[0])
-            == self._section_display_title(sections[1])
-        ):
-            issues.append(
-                {
-                    "type": "duplicate_intro_heading",
-                    "severity": "error",
-                    "message": "front matter 标题与正文首章标题重复，导出时可能出现重复 H2。",
-                    "heading": self._section_display_title(sections[0]),
-                }
-            )
-
-        for section in sections:
-            for paragraph in section.paragraphs:
-                if paragraph.is_metadata:
-                    continue
-                if paragraph.element_type in {ElementType.IMAGE, ElementType.TABLE, ElementType.CODE}:
-                    continue
-
-                translated = paragraph.best_translation_text(fallback_to_source=False).strip()
-                if not translated:
-                    issues.append(
-                        {
-                            "type": "missing_translation",
-                            "severity": "error",
-                            "section_id": section.section_id,
-                            "paragraph_id": paragraph.id,
-                            "message": "段落没有译文。",
-                            "source_preview": paragraph.source[:160],
-                        }
-                    )
-                    continue
-
-                if translated == paragraph.source.strip():
-                    issues.append(
-                        {
-                            "type": "untranslated_paragraph",
-                            "severity": "error",
-                            "section_id": section.section_id,
-                            "paragraph_id": paragraph.id,
-                            "message": "段落译文与原文完全相同。",
-                            "source_preview": paragraph.source[:160],
-                        }
-                    )
-                    continue
-
-                if self._looks_like_untranslated_residue(translated):
-                    issues.append(
-                        {
-                            "type": "residual_english",
-                            "severity": "warning",
-                            "section_id": section.section_id,
-                            "paragraph_id": paragraph.id,
-                            "message": "译文中存在较长英文残留片段，建议复核。",
-                            "translation_preview": translated[:160],
-                        }
-                    )
-
-        return {
-            "project_id": meta.id,
-            "generated_at": datetime.now().isoformat(),
-            "issue_count": len(issues),
-            "issues": issues,
-        }
+        return self.project_export_service.build_export_lint_payload(meta, sections)
 
     def _write_export_lint_artifact(
         self,
         project_id: str,
         payload: dict[str, Any],
     ) -> None:
-        artifact_path = (
-            self._project_dir(project_id) / "artifacts" / "export-lint" / "latest.json"
-        )
-        self._write_json(artifact_path, payload)
+        self.project_export_service.write_export_lint_artifact(project_id, payload)
 
     def create(
         self,
@@ -826,119 +376,19 @@ class ProjectManager:
         Returns:
             ProjectMeta: 项目元信息
         """
-        # 生成项目 ID
-        project_id = slugify(name, max_length=50)
-        project_dir = self._project_dir(project_id)
-
-        # 检查是否已存在
-        if project_dir.exists():
-            raise ValueError(f"Project '{project_id}' already exists")
-
-        # 创建项目目录
-        project_dir.mkdir(parents=True)
-        sections_dir = project_dir / "sections"
-        sections_dir.mkdir()
-
-        source_path = Path(html_path)
-        if not source_path.exists():
-            raise FileNotFoundError(f"Source file not found: {html_path}")
-
-        source_suffix = source_path.suffix.lower()
-        is_html_source = source_suffix in {".html", ".htm"}
-        is_markdown_source = source_suffix in {".md", ".markdown"}
-        if not (is_html_source or is_markdown_source):
-            raise ValueError("Only .html/.htm/.md/.markdown files are supported")
-
-        markdown_parser = MarkdownProjectParser(
-            max_paragraph_length=(config.max_paragraph_length if config else 800),
-            merge_short_paragraphs=(config.merge_short_paragraphs if config else True),
+        return self.project_lifecycle_service.create_project(
+            name=name,
+            html_path=html_path,
+            config=config,
         )
-        source_file = "source.md"
-        metadata = None
-
-        if is_html_source:
-            # HTML 链路：转 Markdown，保留原始图片 URL（不下载到本地）
-            shutil.copy(source_path, project_dir / "source.html")
-            source_file = "source.html"
-            source_md, metadata = convert_html_to_markdown_text(
-                html_path=html_path,
-                output_dir=project_dir,
-                copy_images=False,
-            )
-        else:
-            # Markdown 输入：跳过 HTML 转换，直接进入解析流程
-            source_md = source_path.read_text(encoding="utf-8-sig")
-
-        parsed_project = markdown_parser.parse(source_md, metadata=metadata)
-        title = parsed_project.title
-        sections = parsed_project.sections
-
-        # 自动批准 metadata 段落（图片等）；source metadata 走专用批翻链路
-        structured_metadata_types = {"source", "subtitle", "byline", "date_access"}
-        for section in sections:
-            for paragraph in section.paragraphs:
-                if paragraph.is_metadata:
-                    if paragraph.metadata_type in structured_metadata_types:
-                        continue
-                    paragraph.status = ParagraphStatus.APPROVED
-                    paragraph.confirmed = paragraph.source
-
-        # 保存完整原文 Markdown
-        self._write_text(project_dir / "source.md", source_md)
-
-        # 保存各章节
-        for section in sections:
-            self._save_section(project_id, section)
-
-        # 创建项目元信息
-        meta = ProjectMeta(
-            id=project_id,
-            title=title,
-            source_file=source_file,
-            status=ProjectStatus.CREATED,
-            config=config or ProjectConfig(),
-            metadata=metadata,
-        )
-        meta.update_progress(sections)
-
-        # 保存元信息
-        self._save_meta(project_id, meta)
-
-        # Copy related assets directory (e.g., *_files from saved HTML)
-        if is_html_source:
-            self._copy_assets_directory(source_path, project_dir)
-
-        # 初始化项目术语表（合并全局术语表）
-        self.glossary_manager.save_project(project_id, Glossary())
-
-        return meta
 
     def _copy_assets_directory(self, html_source: Path, project_dir: Path) -> None:
         """Copy HTML asset folder (e.g., *_files) into project directory."""
-        assets_dir = self._find_assets_directory(html_source)
-        if not assets_dir:
-            return
-
-        dest_dir = project_dir / assets_dir.name
-        try:
-            if dest_dir.exists():
-                shutil.rmtree(dest_dir)
-            shutil.copytree(assets_dir, dest_dir)
-        except Exception as e:
-            # Non-fatal: assets copy failure should not block project creation
-            logger.warning("Failed to copy assets directory: %s", e)
+        self.project_lifecycle_service.copy_assets_directory(html_source, project_dir)
 
     def _find_assets_directory(self, html_source: Path) -> Optional[Path]:
         """Find related assets directory next to the HTML file."""
-        stem = html_source.stem
-        candidates = [
-            html_source.parent / f"{stem}_files",
-            html_source.parent / f"{stem}.files",
-        ]
-        for candidate in candidates:
-            if candidate.exists() and candidate.is_dir():
-                return candidate
-        return None
+        return self.project_lifecycle_service.find_assets_directory(html_source)
 
     def get(self, project_id: str) -> ProjectMeta:
         """
@@ -1004,11 +454,7 @@ class ProjectManager:
         Args:
             project_id: 项目 ID
         """
-        project_dir = self._project_dir(project_id)
-        if not project_dir.exists():
-            raise FileNotFoundError(f"Project not found: {project_id}")
-
-        shutil.rmtree(project_dir)
+        self.project_lifecycle_service.delete_project(project_id)
 
     def get_sections(self, project_id: str) -> List[Section]:
         """
@@ -1020,18 +466,7 @@ class ProjectManager:
         Returns:
             List[Section]: 章节列表
         """
-        sections_dir = self._project_dir(project_id) / "sections"
-        if not sections_dir.exists():
-            return []
-
-        sections = []
-        for section_dir in sorted(sections_dir.iterdir()):
-            if section_dir.is_dir():
-                section = self._load_section(project_id, section_dir.name)
-                if section:
-                    sections.append(section)
-
-        return sections
+        return self.project_repository.get_sections(project_id)
 
     def get_section(self, project_id: str, section_id: str) -> Optional[Section]:
         """
@@ -1217,233 +652,43 @@ class ProjectManager:
         )
 
     def export(self, project_id: str, include_source: bool = False, format: str = 'zh') -> str:
-        """
-        导出项目
-
-        Args:
-            project_id: 项目 ID
-            include_source: 是否包含原文
-            format: 输出格式 ('en' 英文原文, 'zh' 中文译文)
-
-        Returns:
-            str: 导出内容
-        """
-        normalized = self._normalize_export_format(format)
-        if normalized == "en":
-            return self.export_source_markdown(project_id)
-        return self.export_markdown(project_id, include_source)
+        return self.project_export_service.export(
+            project_id,
+            include_source=include_source,
+            format=format,
+        )
 
     def export_source_markdown(self, project_id: str) -> str:
-        """Export the original English source markdown with original remote image URLs."""
-        project_dir = self._project_dir(project_id)
-
-        # 新项目直接用 source.md（已保留远程 URL），兼容旧项目的 source_en.md
-        for name in ("source_en.md", "source.md"):
-            path = project_dir / name
-            if path.exists():
-                content = path.read_text(encoding="utf-8")
-                break
-        else:
-            raise FileNotFoundError(f"Source markdown not found for project {project_id}")
-
-        # 保存一份带英文后缀的导出文件
-        meta = self.get(project_id)
-        output_path = project_dir / self._build_export_filename(meta, format="en")
-        self._write_text(output_path, content)
-
-        return content
+        return self.project_export_service.export_source_markdown(project_id)
 
     def export_markdown(self, project_id: str, include_source: bool = False) -> str:
-        """Export one project as markdown using parent-block reconstruction."""
-        meta = self.get(project_id)
-        sections = self.get_sections(project_id)
-
-        article_title = self._preferred_export_title(meta)
-        lines = [f"# {article_title}", ""]
-
-        for index, section in enumerate(sections):
-            if self._should_render_section_heading(sections, index, section):
-                title = self._section_display_title(section)
-                lines.append(f"## {title}")
-                lines.append("")
-
-            for block in self._group_section_blocks(section):
-                if include_source and any(p.confirmed for p in block):
-                    source_comment = block[0].parent_block_plain_text or " ".join(
-                        p.source for p in block
-                    )
-                    lines.append(f"<!-- {source_comment} -->")
-                lines.append(self._render_block_markdown(block, fallback_to_source=True))
-                lines.append("")
-
-        content = "\n".join(lines)
-
-        # Markdown 安全后处理：转义 $ 等特殊字符，注入 CJK-Latin 空格
-        from .markdown_postprocess import postprocess_markdown
-        content = postprocess_markdown(content)
-
-        # 保存到文件
-        output_path = self._project_dir(project_id) / self._build_export_filename(
-            meta,
-            format="zh",
-        )
-        self._write_text(output_path, content)
-        self._write_export_lint_artifact(
+        return self.project_export_service.export_markdown(
             project_id,
-            self._build_export_lint_payload(meta, sections),
+            include_source=include_source,
         )
-
-        return content
 
     def generate_preview(self, project_id: str) -> str:
-        """
-        生成预览（包含未确认的译文）
-
-        Args:
-            project_id: 项目 ID
-
-        Returns:
-            str: Markdown 内容
-        """
-        meta = self.get(project_id)
-        sections = self.get_sections(project_id)
-
-        lines = [f"# {meta.title}", ""]
-
-        for section in sections:
-            title = section.title_translation or section.title
-            lines.append(f"## {title}")
-            lines.append("")
-
-            for p in section.paragraphs:
-                # 优先使用确认的译文，其次是任意翻译，最后是原文
-                if p.has_confirmed_translation():
-                    text = p.confirmed
-                    status_mark = "✅"
-                elif p.has_draft_translation():
-                    text = self._best_translation_text(p, fallback_to_source=False)
-                    status_mark = "🔄"
-                else:
-                    text = p.source
-                    status_mark = "⏳"
-
-                if p.element_type == ElementType.H3:
-                    lines.append(f"### {status_mark} {text}")
-                elif p.element_type == ElementType.H4:
-                    lines.append(f"#### {status_mark} {text}")
-                else:
-                    lines.append(f"{status_mark} {text}")
-
-                lines.append("")
-
-        content = "\n".join(lines)
-
-        # Markdown 安全后处理
-        from .markdown_postprocess import postprocess_markdown
-        content = postprocess_markdown(content)
-
-        # 保存到文件
-        preview_path = self._project_dir(project_id) / "preview.md"
-        self._write_text(preview_path, content)
-
-        return content
+        return self.project_export_service.generate_preview(project_id)
 
     def _save_meta(self, project_id: str, meta: ProjectMeta) -> None:
         """保存项目元信息"""
-        meta_path = self._project_dir(project_id) / "meta.json"
-        self._write_json(meta_path, meta.model_dump(mode="json"))
+        self.project_repository.save_meta(project_id, meta)
 
     def _save_section(self, project_id: str, section: Section) -> None:
         """保存章节"""
-        section_dir = self._project_dir(project_id) / "sections" / section.section_id
-        section_dir.mkdir(parents=True, exist_ok=True)
-
-        # 保存原文
-        source_lines = []
-        for block in self._group_section_blocks(section):
-            source_lines.append(self._render_source_block_markdown(block))
-            source_lines.append("")
-
-        self._write_text(section_dir / "source.md", "\n".join(source_lines))
-
-        # 保存译文
-        trans_lines = []
-        for p in section.paragraphs:
-            text = self._best_translation_text(p, fallback_to_source=False)
-            trans_lines.append(self._format_markdown_line(p.element_type, text))
-            trans_lines.append("")
-
-        self._write_text(section_dir / "translation.md", "\n".join(trans_lines))
-
-        # 保存元数据
-        meta_data = {
-            "section_id": section.section_id,
-            "title": section.title,
-            "title_translation": section.title_translation,
-            "paragraphs": [p.model_dump(mode='json') for p in section.paragraphs]
-        }
-        self._write_json(section_dir / "meta.json", meta_data)
+        self.project_repository.save_section(
+            project_id,
+            section,
+            grouped_blocks=self._group_section_blocks(section),
+        )
 
     def _load_section(self, project_id: str, section_id: str) -> Optional[Section]:
         """加载章节"""
-        section_dir = self._project_dir(project_id) / "sections" / section_id
-        meta_path = section_dir / "meta.json"
-
-        if not meta_path.exists():
-            # 章节元数据文件不存在，返回 None
-            return None
-
-        try:
-            data = self._read_json(meta_path)
-
-            paragraphs = []
-            for p in data.get("paragraphs", []):
-                try:
-                    paragraph = Paragraph(**p)
-                    if paragraph.inline_elements and not paragraph.expected_tokens:
-                        paragraph.expected_tokens = [
-                            element.span_id
-                            for element in assign_span_ids(paragraph.inline_elements)
-                            if element.span_id
-                        ]
-                    if paragraph.inline_elements and not paragraph.parent_inline_elements:
-                        paragraph.parent_inline_elements = assign_span_ids(
-                            paragraph.inline_elements
-                        )
-                    if paragraph.parent_block_id is None:
-                        paragraph.parent_block_id = paragraph.id
-                    if paragraph.parent_block_index is None:
-                        paragraph.parent_block_index = paragraph.index
-                    if paragraph.parent_block_type is None:
-                        paragraph.parent_block_type = paragraph.element_type
-                    if paragraph.parent_block_plain_text is None:
-                        paragraph.parent_block_plain_text = paragraph.source
-                    if paragraph.parent_block_markdown is None:
-                        paragraph.parent_block_markdown = self._render_source_block_markdown([paragraph])
-                    if paragraph.segment_end is None:
-                        paragraph.segment_end = paragraph.segment_start + len(paragraph.source)
-                    paragraphs.append(paragraph)
-                except (TypeError, ValueError):
-                    # 跳过损坏的段落数据
-                    continue
-
-            if not data.get("section_id") or not data.get("title"):
-                return None
-
-            return Section(
-                section_id=data["section_id"],
-                title=data["title"],
-                title_translation=data.get("title_translation"),
-                paragraphs=paragraphs
-            )
-        except (json.JSONDecodeError, KeyError, TypeError, IOError) as e:
-            # 元数据文件损坏，返回 None
-            logger.warning("Failed to load section %s: %s", section_id, e)
-            return None
+        return self.project_repository.load_section(project_id, section_id)
 
     def _update_progress(self, project_id: str) -> None:
         """更新项目进度"""
-        meta = self.get(project_id)
-        sections = self.get_sections(project_id)
-        meta.update_progress(sections)
-        self._save_meta(project_id, meta)
+        self.project_repository.update_progress(
+            project_id,
+            get_sections=self.get_sections,
+        )

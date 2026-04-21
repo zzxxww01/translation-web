@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
 import { useFormatWechat, useWechatThemes } from './hooks';
 import juice from 'juice';
@@ -18,7 +17,7 @@ export function WechatFeature() {
 
   const html = data?.html || '';
   const css = data?.css || '';
-  const themes = themesData?.themes || [];
+  const themes = useMemo(() => themesData?.themes || [], [themesData]);
 
   // 调试信息
   useEffect(() => {

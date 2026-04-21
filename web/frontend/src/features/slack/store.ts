@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import type { SlackReplyVariant, MessageRole } from '../../shared/types';
+import type { SlackReplyVariant } from '../../shared/types';
 
 export interface ConversationMessage {
   id: string;

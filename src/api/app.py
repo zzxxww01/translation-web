@@ -3,21 +3,19 @@
 import os
 import logging
 from dotenv import load_dotenv
+from src.settings import settings
 
 
 # Keep the runtime env aligned with `.env`, including proxy variables.
 # Gemini transport selection depends on whether the process sees a proxy.
 load_dotenv()
 
-# Validate critical environment variables at startup
 logger = logging.getLogger(__name__)
-REQUIRED_ENV_VARS = ["VECTORENGINE_API_KEY", "VECTORENGINE_BASE_URL"]
-missing_vars = [var for var in REQUIRED_ENV_VARS if not os.getenv(var)]
-
-if missing_vars:
-    error_msg = f"Missing required environment variables: {', '.join(missing_vars)}"
-    logger.error(error_msg)
-    raise RuntimeError(error_msg)
+try:
+    settings.validate_required_settings()
+except ValueError as exc:
+    logger.error("Configuration validation failed: %s", exc)
+    raise RuntimeError(str(exc)) from exc
 
 import subprocess
 from pathlib import Path

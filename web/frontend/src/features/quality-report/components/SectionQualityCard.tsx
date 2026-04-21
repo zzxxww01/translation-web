@@ -13,13 +13,6 @@ interface SectionQualityCardProps {
   onViewDetails?: () => void;
 }
 
-function getScoreVariant(score: number): 'success' | 'warning' | 'error' | 'default' {
-  if (score >= 90) return 'success';
-  if (score >= 70) return 'warning';
-  if (score >= 50) return 'error';
-  return 'default';
-}
-
 function getScoreColor(score: number): string {
   if (score >= 90) return 'text-green-700';
   if (score >= 70) return 'text-amber-700';
@@ -28,7 +21,6 @@ function getScoreColor(score: number): string {
 }
 
 export function SectionQualityCard({ section, onViewDetails }: SectionQualityCardProps) {
-  const scoreVariant = getScoreVariant(section.overall_score);
   const scoreColor = getScoreColor(section.overall_score);
 
   const pendingIssues = section.issues.filter(i => i.status === 'pending').length;
