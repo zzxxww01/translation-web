@@ -4,7 +4,7 @@
 
 import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { useProjectQualityReport, useSectionQualityReport } from '../api';
 import { QualityStatsCard } from './QualityStatsCard';

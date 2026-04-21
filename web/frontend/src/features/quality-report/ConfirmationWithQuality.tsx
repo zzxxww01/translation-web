@@ -6,7 +6,7 @@
 
 import { useState } from 'react';
 import { ChevronRight, BarChart3 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { ConfirmationFeature } from '../confirmation/index';
 import { DocumentQualityPanel } from '../quality-report/components/DocumentQualityPanel';

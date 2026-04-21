@@ -2,7 +2,7 @@ import * as React from "react"
 import { Loader2 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
-import { Button, type ButtonProps } from "@/components/ui/button"
+import { Button, type ButtonProps } from "@/components/ui/Button"
 
 export interface ButtonExtendedProps extends ButtonProps {
   isLoading?: boolean

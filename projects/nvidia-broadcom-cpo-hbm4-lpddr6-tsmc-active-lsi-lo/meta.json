@@ -4,14 +4,14 @@
   "title_translation": "ISSCC 2026：英伟达与博通共封装光学、HBM4与LPDDR6、台积电主动硅中介层、逻辑SRAM、UCIe-S等前瞻",
   "source_file": "source.html",
   "created_at": "2026-04-17T12:39:39.704349",
-  "updated_at": "2026-04-21T02:39:20.554694",
+  "updated_at": "2026-04-21T17:13:58.129534",
   "status": "reviewing",
   "progress": {
     "total_sections": 27,
     "total_paragraphs": 371,
-    "approved": 1,
+    "approved": 0,
     "reviewing": 0,
-    "pending": 370
+    "pending": 371
   },
   "config": {
     "ai_model": "pro",

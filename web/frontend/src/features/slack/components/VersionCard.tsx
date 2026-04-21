@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Copy, Send, Edit2, Check, X } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/card';
 import { toast } from 'sonner';
 import { copyToClipboard } from '@/shared/utils';

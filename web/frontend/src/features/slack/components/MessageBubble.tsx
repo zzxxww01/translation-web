@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Trash2, Edit2, Copy } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 import type { ConversationMessage } from '../store';

@@ -2,7 +2,7 @@ import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-
 import { BookOpen, Sparkles, Menu, ChevronRight } from 'lucide-react';
 import { FeatureNav } from './FeatureNav';
 import { useDocumentStore } from '@/shared/stores';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/Button';
 import {
   Sheet,
   SheetContent,
