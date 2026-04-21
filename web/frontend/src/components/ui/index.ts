@@ -2,9 +2,9 @@
  * UI 组件库统一导出 (shadcn/ui)
  */
 
-export { Button } from './button'
+export { Button } from './Button'
 export { buttonVariants } from './button-variants'
-export type { ButtonProps } from './button'
+export type { ButtonProps } from './Button'
 export { ButtonExtended, ButtonExtended as ButtonLoading } from './button-extended'
 export { Badge } from './badge'
 export { badgeVariants } from './badge-variants'
