@@ -1,0 +1,73 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# 环境配置
+.env
+.env.*
+!.env.example
+
+# LLM provider 配置
+config/llm_providers.yaml
+config/*.local.yaml
+
+# 数据目录
+projects/
+conversations/
+data/
+backups/
+
+# 日志
+*.log
+logs/
+
+# 测试
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+test_*.py
+*_test.py
+
+# IDE
+.vscode/
+.idea/
+.claude/
+.antigravity/
+.agent/
+.agents/
+.junie/
+.trae/
+
+# 前端
+web/frontend/node_modules/
+web/frontend/dist/
+web/frontend/.next/
+web/frontend/out/
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# 临时文件
+*.tmp
+*.swp
+*.swo
+*.pid
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 其他
+*.db
+*.sqlite
+*.sqlite3
+skills-lock.json

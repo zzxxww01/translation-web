@@ -888,13 +888,13 @@ class ProjectManager:
         metadata = None
 
         if is_html_source:
-            # HTML 链路：转 Markdown，下载并本地化图片
+            # HTML 链路：转 Markdown，保留原始图片 URL（不下载到本地）
             shutil.copy(source_path, project_dir / "source.html")
             source_file = "source.html"
             source_md, metadata = convert_html_to_markdown_text(
                 html_path=html_path,
                 output_dir=project_dir,
-                copy_images=True,
+                copy_images=False,
             )
         else:
             # Markdown 输入：跳过 HTML 转换，直接进入解析流程

@@ -204,10 +204,17 @@
           "created_at": "2026-04-10T11:51:18.970790",
           "tokenized_text": "作者：[[[LINK_1|Doug O'Laughlin]]]、[[[LINK_2|Jeremie Eliahou Ontiveros]]]、[[[LINK_3|Jordan Nanos]]] 及另外 2 人",
           "format_issues": []
+        },
+        "default": {
+          "text": "作者：道格·奥洛克林、杰里米·以利亚胡·昂蒂韦罗斯、乔丹·纳诺斯 及另外两人",
+          "model": "default",
+          "created_at": "2026-04-21T11:24:35.417005",
+          "tokenized_text": "作者：[[[LINK_1|道格·奥洛克林]]]、[[[LINK_2|杰里米·以利亚胡·昂蒂韦罗斯]]]、[[[LINK_3|乔丹·纳诺斯]]] 及另外两人",
+          "format_issues": []
         }
       },
-      "confirmed": "作者：Doug O'Laughlin、Jeremie Eliahou Ontiveros、Jordan Nanos 等 5 人",
-      "confirmed_tokenized": "作者：[[[LINK_1|Doug O'Laughlin]]]、[[[LINK_2|Jeremie Eliahou Ontiveros]]]、[[[LINK_3|Jordan Nanos]]] 等 5 人",
+      "confirmed": null,
+      "confirmed_tokenized": null,
       "confirmed_format_issues": [],
       "status": "translated",
       "ai_insight": {
@@ -267,7 +274,13 @@
           }
         ]
       },
-      "history": []
+      "history": [
+        {
+          "text": "作者：Doug O'Laughlin、Jeremie Eliahou Ontiveros、Jordan Nanos 等 5 人",
+          "timestamp": "2026-04-21T02:32:16.484000",
+          "source": "default"
+        }
+      ]
     },
     {
       "id": "p002",
@@ -401,6 +414,13 @@
           "text": "眼下，GitHub 上 4% 的公开提交正由 Claude Code 编写。按照当前轨迹，我们认为到 2026 年底，Claude Code 将包揽每日超 20% 的代码提交量。就在你眨眼之间，AI 已经吞噬了整个软件开发行业。",
           "model": "pro",
           "created_at": "2026-04-10T11:51:18.971065",
+          "tokenized_text": null,
+          "format_issues": []
+        },
+        "default": {
+          "text": "目前，GitHub 上 4% 的公开代码提交由 Claude Code 完成。按此趋势，我们预计到 2026 年底，Claude Code 将占据每日总提交量的 20% 以上。就在你眨眼之间，AI 已悄然吞噬了整个软件开发领域。",
+          "model": "default",
+          "created_at": "2026-04-21T02:34:33.602999",
           "tokenized_text": null,
           "format_issues": []
         }

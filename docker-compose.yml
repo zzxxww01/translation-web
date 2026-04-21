@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  translation-agent:
+    build: .
+    container_name: translation-agent
+    ports:
+      - "54321:54321"
+    volumes:
+      - ./projects:/app/projects
+      - ./glossary:/app/glossary
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./backups:/app/backups
+    env_file:
+      - .env
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:54321/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

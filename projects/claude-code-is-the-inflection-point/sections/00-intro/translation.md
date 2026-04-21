@@ -1,10 +1,10 @@
 ### 产品解读，我们如何使用，行业影响，微软的困境，Anthropic 为何取胜
 
-作者：Doug O'Laughlin、Jeremie Eliahou Ontiveros、Jordan Nanos 等 5 人
+作者：道格·奥洛克林、杰里米·以利亚胡·昂蒂韦罗斯、乔丹·纳诺斯 及另外两人
 
 2026 年 2 月 5 日 · 付费文章
 
-眼下，GitHub 上 4% 的公开提交正由 Claude Code 编写。按照当前轨迹，我们认为到 2026 年底，Claude Code 将包揽每日超 20% 的代码提交量。就在你眨眼之间，AI 已经吞噬了整个软件开发行业。
+目前，GitHub 上 4% 的公开代码提交由 Claude Code 完成。按此趋势，我们预计到 2026 年底，Claude Code 将占据每日总提交量的 20% 以上。就在你眨眼之间，AI 已悄然吞噬了整个软件开发领域。
 
 我们的姊妹刊 Fabricated Knowledge 曾将当下的软件比作互联网崛起时的传统电视，并认为Claude Code 势必将在软件之上构建全新的智能层，其颠覆性堪比 DRAM 之于 NAND。今天，SemiAnalysis 将深入剖析 Claude Code 引发的行业震荡、其核心本质，以及 Claude 为何如此强大。
 
