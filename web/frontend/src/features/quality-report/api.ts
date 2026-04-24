@@ -12,6 +12,8 @@ import {
   type TranslationIssueDTO,
 } from './types';
 
+const REPORT_REQUEST_OPTIONS = { timeout: 8000, retry: false };
+
 interface BackendSectionQualityScore {
   section_id: string;
   section_title: string;
@@ -110,7 +112,8 @@ export function useProjectQualityReport(projectId: string) {
     queryKey: ['quality-report', projectId],
     queryFn: async () => {
       const report = await apiClient.get<BackendProjectQualityReport>(
-        `/quality-report/projects/${projectId}/quality-report`
+        `/quality-report/projects/${projectId}/quality-report`,
+        REPORT_REQUEST_OPTIONS
       );
       return mapProjectReport(report);
     },
@@ -127,7 +130,8 @@ export function useSectionQualityReport(projectId: string, sectionId: string) {
     queryKey: ['quality-report', projectId, sectionId],
     queryFn: async () => {
       const section = await apiClient.get<BackendSectionQualityReport>(
-        `/quality-report/projects/${projectId}/sections/${sectionId}/quality-report`
+        `/quality-report/projects/${projectId}/sections/${sectionId}/quality-report`,
+        REPORT_REQUEST_OPTIONS
       );
       return mapSectionDetails(section);
     },

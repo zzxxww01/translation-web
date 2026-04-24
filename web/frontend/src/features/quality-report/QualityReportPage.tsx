@@ -77,13 +77,19 @@ export function QualityReportPage() {
   if (error) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <Card className="max-w-md">
+        <Card className="max-w-lg">
           <CardContent className="p-8 text-center">
-            <p className="text-red-600 mb-4">加载质量报告失败</p>
-            <p className="text-sm text-gray-600 mb-4">
-              {error instanceof Error ? error.message : '未知错误'}
+            <CircleAlert className="mx-auto mb-4 h-10 w-10 text-amber-600" />
+            <h2 className="mb-2 text-xl font-semibold text-gray-900">质量报告暂不可用</h2>
+            <p className="mb-5 text-sm leading-6 text-gray-600">
+              当前项目没有可读取的完整质量报告，或者报告服务暂时没有响应。已完成的报告会在这里显示为摘要，不需要进入其它页面。
             </p>
-            <Button onClick={() => window.location.reload()}>重试</Button>
+            <div className="flex justify-center gap-3">
+              <Button variant="outline" onClick={() => navigate(`/document/${projectId}/confirmation`)}>
+                返回文档
+              </Button>
+              <Button onClick={() => window.location.reload()}>重新加载</Button>
+            </div>
           </CardContent>
         </Card>
       </div>

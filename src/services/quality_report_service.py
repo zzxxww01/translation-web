@@ -32,14 +32,26 @@ class QualityReportService:
         if not project_dir.exists():
             return None
 
-        # 找到最新的 run_id（按目录名排序，格式为 YYYYMMDD-HHMMSS-XXXXXX）
+        # 找到最新的完整 run_id（按目录名排序，格式为 YYYYMMDD-HHMMSS-XXXXXX）。
+        # 运行中或中断的目录可能已经创建，但还没有质量报告所需产物。
         run_dirs = sorted([d for d in project_dir.iterdir() if d.is_dir()], reverse=True)
 
-        if not run_dirs:
-            return None
+        for run_dir in run_dirs:
+            if not self._has_report_artifacts(run_dir):
+                continue
 
-        latest_run_id = run_dirs[0].name
-        return self.get_report_by_run_id(run_id=latest_run_id, project_id=project_id)
+            report = self.get_report_by_run_id(run_id=run_dir.name, project_id=project_id)
+            if report:
+                return report
+
+        return None
+
+    def _has_report_artifacts(self, run_dir: Path) -> bool:
+        """Return whether a run contains enough data to build a quality summary."""
+        return (
+            (run_dir / "run-summary.json").exists()
+            and (run_dir / "section-critique").is_dir()
+        )
 
     def get_report_by_run_id(
         self, run_id: str, project_id: Optional[str] = None
@@ -351,4 +363,3 @@ class QualityReportService:
                 continue
 
         return sections, all_issues, auto_fixed_count, manual_review_count
-
