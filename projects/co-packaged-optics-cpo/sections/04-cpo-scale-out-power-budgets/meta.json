@@ -1,7 +1,7 @@
 {
   "section_id": "04-cpo-scale-out-power-budgets",
   "title": "CPO Scale-out Power Budgets",
-  "title_translation": null,
+  "title_translation": "CPO横向扩展功率预算",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,11 +27,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "今年早些时候，在 GTC 2025 上，英伟达（NVIDIA）CEO 黄仁勋强调，仅收发器产生的巨大功耗便是推动 CPO 的关键动力。结合上表的单机架功耗预算，一个采用三层网络架构、规模达 20 万颗 GPU 的 GB300 NVL72 GPU集群（GPU cluster）（单机架包含 72 个 GPU 封装与 144 个计算小芯片），其关键 IT 功耗将高达 435 MW，其中仅光收发器就会消耗 17 MW。显然，若能剔除大部分收发器组件，必将节省巨量功耗。",
+          "model": "default",
+          "created_at": "2026-04-22T15:49:47.647688",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -59,11 +67,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "将单个 800G DSP 收发器的功耗与 CPO 系统内部光引擎及激光源的功耗（按每 800G 带宽折算）进行对比，这一点便一目了然。单个 800G DR4 光收发器的功耗约为 16-17W，而据我们测算，英伟达 Q3450 CPO 交换机所采用的光引擎及外部激光源，每 800G 带宽功耗仅约为 4-5W，降幅高达 73%。",
+          "model": "default",
+          "created_at": "2026-04-22T15:50:54.214002",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -91,11 +107,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "这些数据与 Meta 在 ECOC 2025 大会上发表并展示的论文数据极为接近。该报告指出，单个 800G 2xFR4 可插拔收发器的功耗约为 15W，而博通 Bailly 51.2T CPO 交换机内部的光引擎与激光源，每提供 800G 带宽的功耗约为 5.4W，功耗降幅达 65%。",
+          "model": "default",
+          "created_at": "2026-04-22T15:52:02.551888",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -155,11 +179,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Meta",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821361",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Meta",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -187,12 +219,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "我们将把分析拓展至集群层面。以基于三层网络搭建的GB300 NVL72集群为例，不难发现：若后端网络从数字信号处理器（Digital Signal Processor，DSP）收发器改用线性驱动可插拔光学（Linear-drive Pluggable Optics，LPO）收发器，总光收发器功耗可降低36%，网络总功耗可降低16%。相比DSP光器件，全面转向共封装光学（co-packaged optics，CPO）可实现更大幅度的功耗节省——光收发器功耗降幅可达84%，不过部分功耗节省会被新增功耗抵消：交换机需要加装光引擎（optical engines，OE）和外部光源（external light sources，ELS），因此交换机总功耗会上升23%。在下述示例中，CPO方案下每台服务器的光收发器功耗底线为1000W，这是因为我们假设前端网络仍采用DSP收发器。",
+          "model": "pro",
+          "created_at": "2026-04-22T17:06:00.534903",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+          "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+          "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "用具体功耗数据强化CPO的节能价值主张，并展示CPO如何通过高密度端口改变集群规模上限。引用Nvidia数据说明光模块功耗的绝对规模，并通过对比不同交换机端口的GPU连接能力，论证CPO对超大规模集群的必要性。",
+          "relation_to_previous": "直接延续03部分对成本和功耗的讨论，从“成本占比”聚焦到“具体功耗数值”和“集群规模可扩展性”这一更深层优势。",
+          "relation_to_next": "逻辑上平行于05-cpo-scale-out-total-cost-of-ow，本部分讲“功耗预算”，下一部分讲“成本细节”，共同构成CPO在scale-out场景的TCO分析核心。末句“It is a similar story when looking at total cluster capital cost.”直接桥接至下一部分。",
+          "key_points": [
+            "Nvidia以光模块巨大功耗作为推动CPO的关键理由，并以20万GPU集群的435MW总功耗中17MW来自光模块为例。",
+            "Spectrum 6800 CPO交换机凭借512个800G端口，相比6810，能将两层网络支持的GPU数量从8,192提升至131,072，实现规模突破。",
+            "CPO在降低总集群资本成本方面有类似故事。"
+          ],
+          "translation_notes": [
+            "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+            "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+            "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键缩写DSP和LPO均为首次在本文出现，未按要求标注英文全称与中文译名，违反术语注释规则"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重叠，两个逻辑衔接词「因此」「归根结底」连用，略显冗余"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -266,18 +350,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821290",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI Networking 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -305,11 +397,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "采用英伟达（NVIDIA）的 CPO 横向扩展交换机，实际上意味着默认采用高基数网络。不过，这一底层细节对最终用户而言被“抽象化”屏蔽了。在使用非 CPO 高基数交换机时，链路交织（shuffle）通常需要借助配线架或一分多分支线缆在交换机外部完成；而在 CPO 架构下，交织直接在交换机内部完成。取而代之的是，这些英伟达 CPO 交换机直接呈现出极高的端口数量——例如，Quantum 3450 提供 144 个 800G 端口，Spectrum 6800 提供 512 个 800G 端口。",
+          "model": "default",
+          "created_at": "2026-04-22T15:54:26.427400",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -337,11 +437,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "我们之所以使用“默认”一词，是因为英伟达非 CPO 架构的 InfiniBand Quantum Q3400 交换机同样提供 144 个 800G 端口，而 QM9700 等其他 InfiniBand 交换机仅提供 32 个 800G 端口——只有前者通过“单机高基数”（high radix in a box）设计实现了海量有效端口。这种高端口数有望让客户将三层网络扁平化为两层，同时免去部署交织盒、配线架或笨重的一分多分支线缆的繁琐，这可能成为一大核心卖点。在两层网络架构下，与传统 DSP 光模块相比，光模块功耗降低 84%，交换机功耗下降 21%，整体网络功耗可减少 48%。",
+          "model": "default",
+          "created_at": "2026-04-22T15:54:48.236851",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -369,11 +477,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "与 Spectrum 6810 相比，Spectrum 6800 交换机正是凭借其庞大的端口数量（在两种可用的逻辑配置下均为 512 个 800G 端口）实现了这一点。作为对比，Spectrum 6810 提供 128 个 800G 端口、256 个 400G 端口或 512 个 200G 端口。如果使用 Spectrum 6810 的 128 个 800G 端口配置，两层网络最多可连接 8,192 块 GPU；而配备 512 个 800G 端口的 Spectrum 6800 则可连接 131,072 块 GPU。",
+          "model": "default",
+          "created_at": "2026-04-22T15:55:07.350232",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -401,12 +517,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "简单补充说明：在L层网络中，端口数为k的交换机可支持的最大主机数量由下式给出：",
+          "model": "pro",
+          "created_at": "2026-04-22T17:06:00.547861",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+          "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+          "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "用具体功耗数据强化CPO的节能价值主张，并展示CPO如何通过高密度端口改变集群规模上限。引用Nvidia数据说明光模块功耗的绝对规模，并通过对比不同交换机端口的GPU连接能力，论证CPO对超大规模集群的必要性。",
+          "relation_to_previous": "直接延续03部分对成本和功耗的讨论，从“成本占比”聚焦到“具体功耗数值”和“集群规模可扩展性”这一更深层优势。",
+          "relation_to_next": "逻辑上平行于05-cpo-scale-out-total-cost-of-ow，本部分讲“功耗预算”，下一部分讲“成本细节”，共同构成CPO在scale-out场景的TCO分析核心。末句“It is a similar story when looking at total cluster capital cost.”直接桥接至下一部分。",
+          "key_points": [
+            "Nvidia以光模块巨大功耗作为推动CPO的关键理由，并以20万GPU集群的435MW总功耗中17MW来自光模块为例。",
+            "Spectrum 6800 CPO交换机凭借512个800G端口，相比6810，能将两层网络支持的GPU数量从8,192提升至131,072，实现规模突破。",
+            "CPO在降低总集群资本成本方面有类似故事。"
+          ],
+          "translation_notes": [
+            "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+            "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+            "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键缩写DSP和LPO均为首次在本文出现，未按要求标注英文全称与中文译名，违反术语注释规则"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重叠，两个逻辑衔接词「因此」「归根结底」连用，略显冗余"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -433,12 +601,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "\\(2(\\frac{k}{2})^L\\hspace{2cm}2(\\frac{512}{2})^2\\)",
+          "model": "pro",
+          "created_at": "2026-04-22T17:06:00.549032",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+          "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+          "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "用具体功耗数据强化CPO的节能价值主张，并展示CPO如何通过高密度端口改变集群规模上限。引用Nvidia数据说明光模块功耗的绝对规模，并通过对比不同交换机端口的GPU连接能力，论证CPO对超大规模集群的必要性。",
+          "relation_to_previous": "直接延续03部分对成本和功耗的讨论，从“成本占比”聚焦到“具体功耗数值”和“集群规模可扩展性”这一更深层优势。",
+          "relation_to_next": "逻辑上平行于05-cpo-scale-out-total-cost-of-ow，本部分讲“功耗预算”，下一部分讲“成本细节”，共同构成CPO在scale-out场景的TCO分析核心。末句“It is a similar story when looking at total cluster capital cost.”直接桥接至下一部分。",
+          "key_points": [
+            "Nvidia以光模块巨大功耗作为推动CPO的关键理由，并以20万GPU集群的435MW总功耗中17MW来自光模块为例。",
+            "Spectrum 6800 CPO交换机凭借512个800G端口，相比6810，能将两层网络支持的GPU数量从8,192提升至131,072，实现规模突破。",
+            "CPO在降低总集群资本成本方面有类似故事。"
+          ],
+          "translation_notes": [
+            "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+            "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+            "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键缩写DSP和LPO均为首次在本文出现，未按要求标注英文全称与中文译名，违反术语注释规则"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重叠，两个逻辑衔接词「因此」「归根结底」连用，略显冗余"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -465,11 +685,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "其中的奇妙之处在于，端口数 k 会以网络层数为指数进行幂运算。因此，对于两层网络而言，将每个端口的带宽减半（即把一个 800G 端口拆分为两个 400G 端口）以使逻辑端口数量翻倍——无论是采用内部重排（如 Spectrum 6800 那样）、分支线缆还是双端口光模块——都意味着所支持的主机数量将增至四倍！",
+          "model": "default",
+          "created_at": "2026-04-22T16:00:15.097163",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -497,12 +725,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "截至目前本节讨论的功耗节省效果——三层CPO网络可节省23%，精简为两层CPO网络可节省48%——听起来十分可观，但问题在于，对于三层网络架构而言，网络部分本身仅占集群总功耗的9%。因此，切换为CPO对整体功耗的影响会被大幅稀释，至少在横向扩展网络中是如此。三层网络改用CPO后，网络功耗降低23%，但仅能带来2%的集群总功耗节省；精简为两层CPO网络后，网络功耗降低48%，也仅能带来4%的集群总功耗节省。",
+          "model": "pro",
+          "created_at": "2026-04-22T17:06:00.549246",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+          "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+          "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "用具体功耗数据强化CPO的节能价值主张，并展示CPO如何通过高密度端口改变集群规模上限。引用Nvidia数据说明光模块功耗的绝对规模，并通过对比不同交换机端口的GPU连接能力，论证CPO对超大规模集群的必要性。",
+          "relation_to_previous": "直接延续03部分对成本和功耗的讨论，从“成本占比”聚焦到“具体功耗数值”和“集群规模可扩展性”这一更深层优势。",
+          "relation_to_next": "逻辑上平行于05-cpo-scale-out-total-cost-of-ow，本部分讲“功耗预算”，下一部分讲“成本细节”，共同构成CPO在scale-out场景的TCO分析核心。末句“It is a similar story when looking at total cluster capital cost.”直接桥接至下一部分。",
+          "key_points": [
+            "Nvidia以光模块巨大功耗作为推动CPO的关键理由，并以20万GPU集群的435MW总功耗中17MW来自光模块为例。",
+            "Spectrum 6800 CPO交换机凭借512个800G端口，相比6810，能将两层网络支持的GPU数量从8,192提升至131,072，实现规模突破。",
+            "CPO在降低总集群资本成本方面有类似故事。"
+          ],
+          "translation_notes": [
+            "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+            "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+            "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键缩写DSP和LPO均为首次在本文出现，未按要求标注英文全称与中文译名，违反术语注释规则"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重叠，两个逻辑衔接词「因此」「归根结底」连用，略显冗余"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -576,18 +856,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821301",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI Networking 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -662,18 +950,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821311",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI Networking 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -701,12 +997,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "从集群总资本成本的角度来看，情况也类似。",
+          "model": "pro",
+          "created_at": "2026-04-22T17:06:00.549951",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.95,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+          "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+          "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "用具体功耗数据强化CPO的节能价值主张，并展示CPO如何通过高密度端口改变集群规模上限。引用Nvidia数据说明光模块功耗的绝对规模，并通过对比不同交换机端口的GPU连接能力，论证CPO对超大规模集群的必要性。",
+          "relation_to_previous": "直接延续03部分对成本和功耗的讨论，从“成本占比”聚焦到“具体功耗数值”和“集群规模可扩展性”这一更深层优势。",
+          "relation_to_next": "逻辑上平行于05-cpo-scale-out-total-cost-of-ow，本部分讲“功耗预算”，下一部分讲“成本细节”，共同构成CPO在scale-out场景的TCO分析核心。末句“It is a similar story when looking at total cluster capital cost.”直接桥接至下一部分。",
+          "key_points": [
+            "Nvidia以光模块巨大功耗作为推动CPO的关键理由，并以20万GPU集群的435MW总功耗中17MW来自光模块为例。",
+            "Spectrum 6800 CPO交换机凭借512个800G端口，相比6810，能将两层网络支持的GPU数量从8,192提升至131,072，实现规模突破。",
+            "CPO在降低总集群资本成本方面有类似故事。"
+          ],
+          "translation_notes": [
+            "‘435 MW of Critical IT Power’, ‘17 MW’等功耗数据需确保单位（兆瓦）准确无误。",
+            "‘specifically enables this’中的‘this’指代前文‘连接更多GPU’，翻译时需明确指代关系。",
+            "端口数量（512 ports of 800G）和GPU连接数（131,072）的对比需清晰呈现，突出数量级差异。"
+          ]
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "关键缩写DSP和LPO均为首次在本文出现，未按要求标注英文全称与中文译名，违反术语注释规则"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重叠，两个逻辑衔接词「因此」「归根结底」连用，略显冗余"
+          }
+        ]
+      },
       "history": []
     }
   ]

@@ -1,7 +1,7 @@
 {
   "section_id": "11-past-obstacles-to-cpo-market-r",
   "title": "Past obstacles to CPO market readiness: Why only now?",
-  "title_translation": null,
+  "title_translation": "CPO市场化落地的过往障碍：为何时至今日？",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "尽管共封装光学（CPO）在技术上具有显著优势，但由于多项推高成本的挑战，其在实际部署中仍较为有限。这些挑战包括：封装复杂度（其成本甚至超过光引擎本身）、制造难度、可靠性和良率问题，以及光电组件高度集成带来的热管理难题。另一个障碍是缺乏行业统一的标准化。此外，客户还对可维护性心存顾虑，这阻碍了从传统可插拔光模块向CPO方案的转变。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:11:21.558954",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.445,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "OE首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "使用“光电器件”而非术语表规定的“光引擎（OE）”，且“封装复杂度”翻译腔明显"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，属于翻译腔和句子节奏问题"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语未按术语表处理，部分直接使用英文未翻译且未加注"
+          },
+          {
+            "type": "tone",
+            "description": "译文语气略显生硬，“探讨”“推动因素”等词带有翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "程度词“极为有限”略强于原文“very limited”"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +119,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "另一个关键客户顾虑是，采用共封装光学（CPO）可能意味着他们将失去成本控制权。向大量收发器厂商压价要容易得多，而交换机厂商数量则少得多。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:11:21.559011",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.445,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "OE首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "使用“光电器件”而非术语表规定的“光引擎（OE）”，且“封装复杂度”翻译腔明显"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，属于翻译腔和句子节奏问题"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语未按术语表处理，部分直接使用英文未翻译且未加注"
+          },
+          {
+            "type": "tone",
+            "description": "译文语气略显生硬，“探讨”“推动因素”等词带有翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "程度词“极为有限”略强于原文“very limited”"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +211,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "与此同时，可插拔光模块作为共封装光学（CPO）试图取代的主流技术仍在持续进步。对于几乎所有应用而言，其性能已足够出色，且给最终用户带来的顾虑也少得多。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:11:21.559028",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.445,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "OE首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "使用“光电器件”而非术语表规定的“光引擎（OE）”，且“封装复杂度”翻译腔明显"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，属于翻译腔和句子节奏问题"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语未按术语表处理，部分直接使用英文未翻译且未加注"
+          },
+          {
+            "type": "tone",
+            "description": "译文语气略显生硬，“探讨”“推动因素”等词带有翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "程度词“极为有限”略强于原文“very limited”"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +303,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在第二部分的剩余内容中，我们将深入探讨采用CPO的驱动因素。首先将解释SerDes扩展为何已触顶，从而使宽接口结合CPO等其他接口类型成为必要，随后讨论制造考量与市场路径。我们会重点介绍CPO的关键组件，包括光引擎（Optical Engine, OE）、光纤耦合、外部激光源（External Laser Source, ELS）以及调制器（Modulator）。最后，我们将阐述CPO带宽扩展的路线图。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:11:21.559043",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.445,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "OE首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "使用“光电器件”而非术语表规定的“光引擎（OE）”，且“封装复杂度”翻译腔明显"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，属于翻译腔和句子节奏问题"
+          },
+          {
+            "type": "terminology",
+            "description": "关键术语未按术语表处理，部分直接使用英文未翻译且未加注"
+          },
+          {
+            "type": "tone",
+            "description": "译文语气略显生硬，“探讨”“推动因素”等词带有翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "程度词“极为有限”略强于原文“very limited”"
+          }
+        ]
+      },
       "history": []
     }
   ]

@@ -93,7 +93,7 @@ class ProviderAdapter:
         初始化 Provider 适配器
 
         Args:
-            model_alias: 模型别名（如 "pro-official", "deepseek-relay"）
+            model_alias: 模型别名（如 "pro-official", "deepseek-v3.2"）
         """
         self.model_alias = model_alias
         self.config_loader = get_config_loader()

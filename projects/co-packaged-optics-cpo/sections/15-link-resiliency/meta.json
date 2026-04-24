@@ -1,7 +1,7 @@
 {
   "section_id": "15-link-resiliency",
   "title": "Link Resiliency",
-  "title_translation": null,
+  "title_translation": "链路韧性",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "链路弹性和可靠性是共封装光学（CPO）技术的另外两个重要驱动因素。在大型AI集群中，链路停机时间是影响整体集群可用性的重要因素，即使链路可用性和稳定性的微小改进也能为基础设施投资带来巨大回报。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:02.427272",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "程度词力度升级，'very important' 被译为'非常重要的'，与章节'Link Resiliency'的冷静分析语气不完全匹配"
+          },
+          {
+            "type": "terminology",
+            "description": "术语不一致，译文中使用'光电引擎'，但术语表明确规定 Optical Engine (OE) → 光引擎"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而最大限度地降低了每个接口产生的功率损耗'，书面语过重"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'显著改善...的信号完整性'可采用更自然的中文语序"
+          },
+          {
+            "type": "terminology",
+            "description": "缩写首次出现未按要求附注全称，术语表要求首次出现时必须附注"
+          },
+          {
+            "type": "readability",
+            "description": "可使用更地道的中文表达，当前译文'消除...中的“人为”因素'稍显直译"
+          },
+          {
+            "type": "conciseness",
+            "description": "存在轻微语义重叠，'由...所引发的一系列根本原因造成'表述可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +119,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "如今，在一个接近100万条链路、采用可插拔模块的大规模AI集群中，每天可能发生数十次链路中断。其中一些是因元器件失效或硬件质量导致的“硬”故障，而多数是“软”故障，由可插拔方案固有的复杂性和变异性导致的多种根本原因造成。故障模式存在长尾，包括但不限于信号完整性问题与波动、连接器和键合线质量、元器件和引脚污染、噪声注入以及其他瞬态效应。这些故障与元器件失效的相关性很低。80%因链路故障而退回的光模块被判定为“未发现问题”。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:02.427322",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "程度词力度升级，'very important' 被译为'非常重要的'，与章节'Link Resiliency'的冷静分析语气不完全匹配"
+          },
+          {
+            "type": "terminology",
+            "description": "术语不一致，译文中使用'光电引擎'，但术语表明确规定 Optical Engine (OE) → 光引擎"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而最大限度地降低了每个接口产生的功率损耗'，书面语过重"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'显著改善...的信号完整性'可采用更自然的中文语序"
+          },
+          {
+            "type": "terminology",
+            "description": "缩写首次出现未按要求附注全称，术语表要求首次出现时必须附注"
+          },
+          {
+            "type": "readability",
+            "description": "可使用更地道的中文表达，当前译文'消除...中的“人为”因素'稍显直译"
+          },
+          {
+            "type": "conciseness",
+            "description": "存在轻微语义重叠，'由...所引发的一系列根本原因造成'表述可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +211,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "共封装光学（CPO）通过以下方式显著降低了大规模AI网络中高速信号通路的固有复杂性和变异性：",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:02.427359",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "程度词力度升级，'very important' 被译为'非常重要的'，与章节'Link Resiliency'的冷静分析语气不完全匹配"
+          },
+          {
+            "type": "terminology",
+            "description": "术语不一致，译文中使用'光电引擎'，但术语表明确规定 Optical Engine (OE) → 光引擎"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而最大限度地降低了每个接口产生的功率损耗'，书面语过重"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'显著改善...的信号完整性'可采用更自然的中文语序"
+          },
+          {
+            "type": "terminology",
+            "description": "缩写首次出现未按要求附注全称，术语表要求首次出现时必须附注"
+          },
+          {
+            "type": "readability",
+            "description": "可使用更地道的中文表达，当前译文'消除...中的“人为”因素'稍显直译"
+          },
+          {
+            "type": "conciseness",
+            "description": "存在轻微语义重叠，'由...所引发的一系列根本原因造成'表述可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +303,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "大幅减少光学接口中的元器件数量。在光子层面和芯片/封装层面的高度集成，降低了关键高速组件的复杂性，并提升了系统级的可靠性和良率。电光接口数量也随之减少，从而降低各接口的功率损耗。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:02.427374",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "程度词力度升级，'very important' 被译为'非常重要的'，与章节'Link Resiliency'的冷静分析语气不完全匹配"
+          },
+          {
+            "type": "terminology",
+            "description": "术语不一致，译文中使用'光电引擎'，但术语表明确规定 Optical Engine (OE) → 光引擎"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而最大限度地降低了每个接口产生的功率损耗'，书面语过重"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'显著改善...的信号完整性'可采用更自然的中文语序"
+          },
+          {
+            "type": "terminology",
+            "description": "缩写首次出现未按要求附注全称，术语表要求首次出现时必须附注"
+          },
+          {
+            "type": "readability",
+            "description": "可使用更地道的中文表达，当前译文'消除...中的“人为”因素'稍显直译"
+          },
+          {
+            "type": "conciseness",
+            "description": "存在轻微语义重叠，'由...所引发的一系列根本原因造成'表述可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +395,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "显著提升主机ASIC（如交换芯片）与光引擎之间主机电气接口的信号完整性。通过将光引擎封装在第一级封装上，并采用定义明确且确定的设计规则和制造公差，可大幅降低插入损耗、反射及其他非线性损伤。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:02.427390",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "程度词力度升级，'very important' 被译为'非常重要的'，与章节'Link Resiliency'的冷静分析语气不完全匹配"
+          },
+          {
+            "type": "terminology",
+            "description": "术语不一致，译文中使用'光电引擎'，但术语表明确规定 Optical Engine (OE) → 光引擎"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而最大限度地降低了每个接口产生的功率损耗'，书面语过重"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'显著改善...的信号完整性'可采用更自然的中文语序"
+          },
+          {
+            "type": "terminology",
+            "description": "缩写首次出现未按要求附注全称，术语表要求首次出现时必须附注"
+          },
+          {
+            "type": "readability",
+            "description": "可使用更地道的中文表达，当前译文'消除...中的“人为”因素'稍显直译"
+          },
+          {
+            "type": "conciseness",
+            "description": "存在轻微语义重叠，'由...所引发的一系列根本原因造成'表述可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -187,12 +487,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "降低交换机内高速信号通路的端口间差异。这种差异会增加数字信号处理器（DSP）、主机和模块均衡、固件以及链路优化算法的开销和复杂性。所有可插拔模块方案以及主机SerDes都必须针对每端口性能的这种差异进行设计，这带来了额外的复杂性和故障点。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:02.427405",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "程度词力度升级，'very important' 被译为'非常重要的'，与章节'Link Resiliency'的冷静分析语气不完全匹配"
+          },
+          {
+            "type": "terminology",
+            "description": "术语不一致，译文中使用'光电引擎'，但术语表明确规定 Optical Engine (OE) → 光引擎"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而最大限度地降低了每个接口产生的功率损耗'，书面语过重"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'显著改善...的信号完整性'可采用更自然的中文语序"
+          },
+          {
+            "type": "terminology",
+            "description": "缩写首次出现未按要求附注全称，术语表要求首次出现时必须附注"
+          },
+          {
+            "type": "readability",
+            "description": "可使用更地道的中文表达，当前译文'消除...中的“人为”因素'稍显直译"
+          },
+          {
+            "type": "conciseness",
+            "description": "存在轻微语义重叠，'由...所引发的一系列根本原因造成'表述可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -219,12 +579,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "去除光学链路开通中的人为因素。CPO交换机或光引擎在出厂时已完成完整组装和测试，作为“已知良好”产品交付，无需在现场进行大量操作来开通交换机内的光学器件，从而避免了安装差异、损坏、污染以及系统与光模块之间的兼容性问题。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:02.427418",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "tone",
+            "description": "程度词力度升级，'very important' 被译为'非常重要的'，与章节'Link Resiliency'的冷静分析语气不完全匹配"
+          },
+          {
+            "type": "terminology",
+            "description": "术语不一致，译文中使用'光电引擎'，但术语表明确规定 Optical Engine (OE) → 光引擎"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而最大限度地降低了每个接口产生的功率损耗'，书面语过重"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'显著改善...的信号完整性'可采用更自然的中文语序"
+          },
+          {
+            "type": "terminology",
+            "description": "缩写首次出现未按要求附注全称，术语表要求首次出现时必须附注"
+          },
+          {
+            "type": "readability",
+            "description": "可使用更地道的中文表达，当前译文'消除...中的“人为”因素'稍显直译"
+          },
+          {
+            "type": "conciseness",
+            "description": "存在轻微语义重叠，'由...所引发的一系列根本原因造成'表述可更简洁"
+          }
+        ]
+      },
       "history": []
     }
   ]

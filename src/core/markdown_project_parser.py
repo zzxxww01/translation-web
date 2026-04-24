@@ -75,6 +75,17 @@ class MarkdownProjectParser:
 
     def _consume_front_matter(self, lines: list[str], start: int) -> int:
         index = start
+
+        # Skip YAML frontmatter (--- ... ---)
+        if index < len(lines) and lines[index].strip() == "---":
+            index += 1
+            while index < len(lines):
+                if lines[index].strip() == "---":
+                    index += 1
+                    break
+                index += 1
+
+        # Skip other metadata patterns
         while index < len(lines):
             stripped = lines[index].strip()
             if not stripped:

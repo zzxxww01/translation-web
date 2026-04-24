@@ -1,7 +1,7 @@
 {
   "section_id": "39-scintil",
   "title": "Scintil",
-  "title_translation": null,
+  "title_translation": "森提尔",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Scintil的主要产品是LEAF Light，这是一款光子系统级芯片（PSoC），可提供裸芯片（KGD）或已组装模块形式。该芯片集成了8或16个不同颜色的激光器，波长间隔为200 GHz或100 GHz，能够通过DWDM在一根光纤上传输多个波长。他们开发了电子控制技术，即使在温度变化的情况下，也能精确维持100 GHz或200 GHz的波长间隔。Scintil提供了一个符合OIF定义的外部激光源（External Laser Source, ELS）模块封装参考设计（类似于OSFP），便于客户集成这种外部激光源。其方案与采用环形调制器的共封装光学（CPO）兼容性良好。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:44:40.240656",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.084999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "外部激光光源的翻译未遵循术语表要求，首次出现ELSFP时缺少完整注释"
+          },
+          {
+            "type": "readability",
+            "description": "句末使用‘配合良好’略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显的翻译腔结构（‘对...进行图形化’），且句子过长"
+          },
+          {
+            "type": "readability",
+            "description": "缩写注释格式不够规范，中文解释放在括号内显得重复"
+          },
+          {
+            "type": "readability",
+            "description": "‘从而实现’属于典型翻译腔，可用更自然的表达"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文‘将每个传输比特的能耗降低一半’存在程度升级，原文是‘halving’而非明确对比现有方案"
+          },
+          {
+            "type": "tone",
+            "description": "‘一大关键优势’语气略显口语化，与全文冷静、专业、具有洞察力的声线不完全匹配"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,11 +151,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Scintil",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.822104",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Scintil",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -123,12 +191,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Scintil的工艺称为SHIP（Scintil异质集成光子技术）。其技术核心是在标准硅光子晶圆上通过晶圆级工艺集成III-V激光器。该工艺首先使用常规晶圆代工厂流程制作包含波导、探测器和复用/解复用器的标准硅光子晶圆，随后将晶圆翻转并键合到新的载体上，去除原始衬底并露出埋氧化层。之后将未图形的III-V材料键合到新暴露的表面，再通过光刻和刻蚀将其图形化以制作激光器，最终形成单片集成且带有片上激光器的硅光子芯片。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:44:40.240719",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.084999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "外部激光光源的翻译未遵循术语表要求，首次出现ELSFP时缺少完整注释"
+          },
+          {
+            "type": "readability",
+            "description": "句末使用‘配合良好’略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显的翻译腔结构（‘对...进行图形化’），且句子过长"
+          },
+          {
+            "type": "readability",
+            "description": "缩写注释格式不够规范，中文解释放在括号内显得重复"
+          },
+          {
+            "type": "readability",
+            "description": "‘从而实现’属于典型翻译腔，可用更自然的表达"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文‘将每个传输比特的能耗降低一半’存在程度升级，原文是‘halving’而非明确对比现有方案"
+          },
+          {
+            "type": "tone",
+            "description": "‘一大关键优势’语气略显口语化，与全文冷静、专业、具有洞察力的声线不完全匹配"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +283,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这与传统使用电子束光刻机（E-beam writers）制作的InP基激光器形成对比，后者在实现DWDM所需的精确波长控制时难度更大，难以支持通道间距很紧的场景。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:44:40.240739",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.084999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "外部激光光源的翻译未遵循术语表要求，首次出现ELSFP时缺少完整注释"
+          },
+          {
+            "type": "readability",
+            "description": "句末使用‘配合良好’略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显的翻译腔结构（‘对...进行图形化’），且句子过长"
+          },
+          {
+            "type": "readability",
+            "description": "缩写注释格式不够规范，中文解释放在括号内显得重复"
+          },
+          {
+            "type": "readability",
+            "description": "‘从而实现’属于典型翻译腔，可用更自然的表达"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文‘将每个传输比特的能耗降低一半’存在程度升级，原文是‘halving’而非明确对比现有方案"
+          },
+          {
+            "type": "tone",
+            "description": "‘一大关键优势’语气略显口语化，与全文冷静、专业、具有洞察力的声线不完全匹配"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -219,11 +407,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Scintil",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.822116",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Scintil",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -251,12 +447,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "开发DWDM DFB激光器阵列极具挑战性，因为每个波长的频率都必须精确产生。为了实现100 GHz的通道间隔，需要充分利用硅光子晶圆代工厂的先进能力和光刻工艺，在硅中精确且重复地刻出光栅。此外，由于激光器是在晶圆级制造的，每片晶圆可生产数百个器件，从而实现高产量和规模化生产。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:44:40.240754",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.084999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "外部激光光源的翻译未遵循术语表要求，首次出现ELSFP时缺少完整注释"
+          },
+          {
+            "type": "readability",
+            "description": "句末使用‘配合良好’略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显的翻译腔结构（‘对...进行图形化’），且句子过长"
+          },
+          {
+            "type": "readability",
+            "description": "缩写注释格式不够规范，中文解释放在括号内显得重复"
+          },
+          {
+            "type": "readability",
+            "description": "‘从而实现’属于典型翻译腔，可用更自然的表达"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文‘将每个传输比特的能耗降低一半’存在程度升级，原文是‘halving’而非明确对比现有方案"
+          },
+          {
+            "type": "tone",
+            "description": "‘一大关键优势’语气略显口语化，与全文冷静、专业、具有洞察力的声线不完全匹配"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -283,12 +539,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Scintil方案的一个重要优势在于功率效率。该方案能够在单芯片上生成并复用多个波长（8或16个），而采用多个分立激光器加合束器的方案则需要极高功率的激光器才能达到复用后每个颜色的目标功率。相比之下，Scintil解决方案具有更高的功率效率和带宽密度，同时使每个传输比特的能耗减半。这与现有的共封装光学（CPO）方案（包括英伟达目前在Q3450 CPO交换机中采用的方案）形成对比，后者使用单波长配合高调制速率，而不是采用多个波长配合较低调制速率。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:44:40.240768",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.084999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "外部激光光源的翻译未遵循术语表要求，首次出现ELSFP时缺少完整注释"
+          },
+          {
+            "type": "readability",
+            "description": "句末使用‘配合良好’略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显的翻译腔结构（‘对...进行图形化’），且句子过长"
+          },
+          {
+            "type": "readability",
+            "description": "缩写注释格式不够规范，中文解释放在括号内显得重复"
+          },
+          {
+            "type": "readability",
+            "description": "‘从而实现’属于典型翻译腔，可用更自然的表达"
+          },
+          {
+            "type": "accuracy",
+            "description": "译文‘将每个传输比特的能耗降低一半’存在程度升级，原文是‘halving’而非明确对比现有方案"
+          },
+          {
+            "type": "tone",
+            "description": "‘一大关键优势’语气略显口语化，与全文冷静、专业、具有洞察力的声线不完全匹配"
+          }
+        ]
+      },
       "history": []
     }
   ]

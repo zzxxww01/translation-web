@@ -1,1 +1,1 @@
-
+在本部分，我们将首先介绍目前已上市或即将上市的共封装光学（Co-packaged Optics, CPO）产品，从英伟达与博通的产品组合开始，进而介绍多家专注CPO公司的产品。我们涵盖英特尔CPO、联发科的CPO工作， Ayar Labs、Nubis、Celestial AI、Lightmatter、Xscape Photonics、Ranovus和Scintil， 详细介绍各家公司的解决方案，并深入点评各方案的关键优劣。最后，我们将回到供应链话题，讨论光引擎（Optical Engine, OE）和外部激光源（External Laser Sources, ELS）等关键CPO组件的制造、测试与组装。

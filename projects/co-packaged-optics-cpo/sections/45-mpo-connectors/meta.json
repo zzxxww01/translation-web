@@ -1,7 +1,7 @@
 {
   "section_id": "45-mpo-connectors",
   "title": "MPO Connectors",
-  "title_translation": null,
+  "title_translation": "MPO连接器",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在洗牌盒外围设有MPO连接器，用于将盒内光纤连至外部端口。随后可将光纤MPO线缆插入该端口，把交换机与其他远端交换机或远端网卡（NIC）连接起来。MPO连接器的主要制造工艺包括注塑成型、真空灌胶以及MT插芯的光纤穿入。对于X-800 Q3450共封装光学（CPO）交换机，共需使用144个MPO连接器。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:50:43.559042",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.895,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'光纤洗牌盒'与术语表及上下文不一致"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而'和过长从句"
+          },
+          {
+            "type": "terminology",
+            "description": "产品型号翻译错误且术语不规范"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'真空灌胶'和'光纤穿芯'可更地道"
+          },
+          {
+            "type": "terminology",
+            "description": "公司名称翻译错误"
+          },
+          {
+            "type": "accuracy",
+            "description": "轻微漏译和语义弱化"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +119,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n能够生产MPO连接器的厂商有多家，包括US Conec（美国）、T&S Communications（中国）、Senko（日本）、Broadex（中国）和Optec（中国）。这些厂商还需与光纤网络合同制造商（如康宁）合作，将其组件融入整体网络设计。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:50:43.559084",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.895,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语'光纤洗牌盒'与术语表及上下文不一致"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'从而'和过长从句"
+          },
+          {
+            "type": "terminology",
+            "description": "产品型号翻译错误且术语不规范"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构可更流畅，'真空灌胶'和'光纤穿芯'可更地道"
+          },
+          {
+            "type": "terminology",
+            "description": "公司名称翻译错误"
+          },
+          {
+            "type": "accuracy",
+            "description": "轻微漏译和语义弱化"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          }
+        ]
+      },
       "history": []
     }
   ]

@@ -1,7 +1,7 @@
 {
   "section_id": "14-wide-i-o-vs-serdes",
   "title": "Wide I/O vs SerDes",
-  "title_translation": null,
+  "title_translation": "宽I/O与SerDes",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "一旦不再需要将电信号驱动到相对较长的距离，我们就可以彻底摆脱串行接口，转而采用宽接口，在短距离内提供远优于串行接口的**边缘带宽密度**。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:15:11.308994",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.99,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不完全匹配，'shoreline density' 应统一使用术语表中对应的'边缘带宽密度'，且首次出现需注意与后续一致性"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次出现未按术语表要求附注完整英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "句子略显翻译腔，'恰恰说明了问题的核心' 较为生硬，可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 术语翻译与术语表不符，术语表规定为'光引擎 (Optical Engine, OE)'"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更流畅，'距离当今现实还非常遥远' 稍显书面，可优化为更自然的中文表达"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度升级，原文为'a big difference'，译文升级为'差距巨大'，略微夸大原文语气"
+          },
+          {
+            "type": "readability",
+            "description": "存在轻微翻译腔，'这种做法也是为了' 可简化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +119,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "其中一个典型例子是UCIe接口。UCIe-A可提供高达约10 Tbit/s/mm的边缘带宽密度，专为先进封装设计（即通过中介层互连、传输距离小于2mm的芯片let）。在一枚掩膜版尺寸芯片的长边上，这可实现高达330 Tbit/s（41TByte/s）的封装外带宽。若考虑芯片两侧长边，则双向封装外带宽可达660 Tbit/s。相比之下，Blackwell仅拥有23.6 Tbit/s的封装外带宽，相当于约0.4 Tbit/s/mm的边缘带宽密度，两者差距巨大。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:15:11.309038",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.99,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不完全匹配，'shoreline density' 应统一使用术语表中对应的'边缘带宽密度'，且首次出现需注意与后续一致性"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次出现未按术语表要求附注完整英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "句子略显翻译腔，'恰恰说明了问题的核心' 较为生硬，可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 术语翻译与术语表不符，术语表规定为'光引擎 (Optical Engine, OE)'"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更流畅，'距离当今现实还非常遥远' 稍显书面，可优化为更自然的中文表达"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度升级，原文为'a big difference'，译文升级为'差距巨大'，略微夸大原文语气"
+          },
+          {
+            "type": "readability",
+            "description": "存在轻微翻译腔，'这种做法也是为了' 可简化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,11 +243,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821182",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -187,11 +315,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821191",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -219,12 +355,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n当然，这并非同类比较，因为这些封装外PHY需要驱动长距离信号。但这正是本文想阐明的要点：采用共封装光学 (Co-packaged Optics, CPO) 后，传输距离不再是考虑因素，因为信号无需通过长距离电互连驱动。在10 Tbit/s/mm的带宽密度下，瓶颈不再位于电气接口，而是链路的其他部分，即光纤另一端能够承载多少带宽。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:15:11.309055",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.99,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不完全匹配，'shoreline density' 应统一使用术语表中对应的'边缘带宽密度'，且首次出现需注意与后续一致性"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次出现未按术语表要求附注完整英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "句子略显翻译腔，'恰恰说明了问题的核心' 较为生硬，可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 术语翻译与术语表不符，术语表规定为'光引擎 (Optical Engine, OE)'"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更流畅，'距离当今现实还非常遥远' 稍显书面，可优化为更自然的中文表达"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度升级，原文为'a big difference'，译文升级为'差距巨大'，略微夸大原文语气"
+          },
+          {
+            "type": "readability",
+            "description": "存在轻微翻译腔，'这种做法也是为了' 可简化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -251,12 +447,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n要达到这一瓶颈状态，距离当前技术现实仍十分遥远，光引擎（Optical Engine, OE）必须与主机芯片共享中介层。将共封装光学（CPO）直接集成在中介层上，在路线图上的位置比在基板上可靠集成光引擎还要更远。基板上的PHY性能自然较低，UCIe-S可提供约1.8Tbit/s/mm的边缘带宽密度，但这仍比我们认为224G SerDes所能达到的约0.4Tbit/s/mm有显著提升。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:15:11.309070",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.99,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不完全匹配，'shoreline density' 应统一使用术语表中对应的'边缘带宽密度'，且首次出现需注意与后续一致性"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次出现未按术语表要求附注完整英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "句子略显翻译腔，'恰恰说明了问题的核心' 较为生硬，可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 术语翻译与术语表不符，术语表规定为'光引擎 (Optical Engine, OE)'"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更流畅，'距离当今现实还非常遥远' 稍显书面，可优化为更自然的中文表达"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度升级，原文为'a big difference'，译文升级为'差距巨大'，略微夸大原文语气"
+          },
+          {
+            "type": "readability",
+            "description": "存在轻微翻译腔，'这种做法也是为了' 可简化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -283,12 +539,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "然而，尽管宽接口具有明显优势，Broadcom和英伟达仍在路线图中坚持采用电气SerDes。主要原因是他们相信SerDes仍可继续扩展，并且需要针对铜缆进行设计，尤其是光学方案的采用速度较慢。同时，混合的共封装铜缆和共封装光学解决方案预计将长期存在，这要求他们同时针对两者进行优化。这样也能避免为不同方案多次流片。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:15:11.309084",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.99,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不完全匹配，'shoreline density' 应统一使用术语表中对应的'边缘带宽密度'，且首次出现需注意与后续一致性"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次出现未按术语表要求附注完整英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "句子略显翻译腔，'恰恰说明了问题的核心' 较为生硬，可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 术语翻译与术语表不符，术语表规定为'光引擎 (Optical Engine, OE)'"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更流畅，'距离当今现实还非常遥远' 稍显书面，可优化为更自然的中文表达"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度升级，原文为'a big difference'，译文升级为'差距巨大'，略微夸大原文语气"
+          },
+          {
+            "type": "readability",
+            "description": "存在轻微翻译腔，'这种做法也是为了' 可简化"
+          }
+        ]
+      },
       "history": []
     }
   ]

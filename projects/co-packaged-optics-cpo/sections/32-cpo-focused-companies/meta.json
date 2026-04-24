@@ -1,7 +1,7 @@
 {
   "section_id": "32-cpo-focused-companies",
   "title": "CPO Focused Companies",
-  "title_translation": null,
+  "title_translation": "专注CPO的企业",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在英伟达、博通与Marvell各自推进专有方案之际，几家专注共封装光学（Co-packaged Optics，CPO）的公司正探索另一套技术路径。这些公司面临的核心问题是：如何与主流交换芯片和GPU/ASIC供应商竞争——尤其这些在位者大多已公布或展示自家专有方案。目前AMD仍是例外：它尚未展出任何产品，尽管外界已知其正在内部开发光子IP。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:36:01.575022",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.059999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.1,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "轻微翻译腔，可更地道"
+          },
+          {
+            "type": "accuracy",
+            "description": "存在明显语法错误和逻辑轻微偏差，原文为“However, with these approaches come elevated costs”，译文未准确体现伴随关系"
+          },
+          {
+            "type": "tone",
+            "description": "原文口吻较为轻松引导性，译文略显正式"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +115,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n对于光引擎芯粒供应商Ayar Labs、Lightmatter、Celestial AI、Nubis和Ranovus而言，挑战在于如何超越既有玩家，并拿出足够诱人、值得集成的方案。Ayar Labs与Celestial AI提供完全“首尾闭合”的系统，意味着客户必须采用其端到端的全套解决方案。相比之下，Nubis专注于更开放、基于标准的方案，力求简化实施、降低采用门槛。Ranovus则是另一家提供可互操作系统的CPO供应商。另一方面，还有一些更为激进的路径已成为部分公司产品路线图的重要一环——即Lightmatter的光学中介层和Celestial AI的光子桥。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:36:01.575086",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.059999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.1,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "轻微翻译腔，可更地道"
+          },
+          {
+            "type": "accuracy",
+            "description": "存在明显语法错误和逻辑轻微偏差，原文为“However, with these approaches come elevated costs”，译文未准确体现伴随关系"
+          },
+          {
+            "type": "tone",
+            "description": "原文口吻较为轻松引导性，译文略显正式"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +203,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这些解决方案需从根本上重构封装与主机硅芯片设计，方能释放全部潜力。不过，这些方案也伴随更高成本和显著不确定性，尤其是在与基于CMOS的硅芯片实现无缝集成以及高量产制造方面。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:36:01.575123",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.059999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.1,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "轻微翻译腔，可更地道"
+          },
+          {
+            "type": "accuracy",
+            "description": "存在明显语法错误和逻辑轻微偏差，原文为“However, with these approaches come elevated costs”，译文未准确体现伴随关系"
+          },
+          {
+            "type": "tone",
+            "description": "原文口吻较为轻松引导性，译文略显正式"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +291,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "下面我们逐一看这些公司的架构与上市计划。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:36:01.575150",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.059999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.1,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文略显生硬，可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "轻微翻译腔，可更地道"
+          },
+          {
+            "type": "accuracy",
+            "description": "存在明显语法错误和逻辑轻微偏差，原文为“However, with these approaches come elevated costs”，译文未准确体现伴随关系"
+          },
+          {
+            "type": "tone",
+            "description": "原文口吻较为轻松引导性，译文略显正式"
+          }
+        ]
+      },
       "history": []
     }
   ]

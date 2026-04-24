@@ -1,7 +1,7 @@
 {
   "section_id": "10-co-packaged-copper",
   "title": "Co-packaged Copper",
-  "title_translation": null,
+  "title_translation": "共封装铜",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "共封装铜缆（Co-packaged Copper，CPC）是共封装光学（CPO）的另一种替代方案。CPC采用直接从封装基板上的连接器引出的铜缆，所用电缆与飞线电缆相同，目的也一致：即绕过PCB走线。CPC将飞线电缆的概念进一步推进，将连接器直接置于封装基板之上。它使用的双轴电缆（Twinax电缆）绝缘良好，可显著降低串扰，与传统电气走线相比，插入损耗大幅降低。尽管该方案仍使用铜缆，但在信号完整性方面具备关键优势。CPC可提供一条实用的路径，以部署448G SerDes，从而实现封装外互连的又一次扩展。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:10:19.011971",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.215,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "章节标题及首次出现时未按要求提供完整英文缩写和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "存在翻译腔和被动语态堆积，句子结构生硬"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更自然流畅，当前表达略显生涩"
+          },
+          {
+            "type": "readability",
+            "description": "翻译为“我们将在下文进行探讨”属于典型的翻译腔书面语"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有升级，“有望成为...的关键技术”比原文“could be”更确定"
+          },
+          {
+            "type": "readability",
+            "description": "后半句语序可优化，当前表达略显倒装和书面化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,11 +147,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：LuxShare",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821418",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：LuxShare",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -155,11 +219,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Luxshare",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821428",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Luxshare",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -187,12 +259,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "CPC的挑战在于封装基板复杂度的增加。基板必须为数千条这样的电缆路由电源和信号。尽管存在这一挑战，CPC仍比CPO简单得多，后者还需要克服供应链多个环节的制造难题。我们认为CPC对于某些短距应用特别具有吸引力，例如机架内纵向扩展连接，我们将在后文详述。通过绕过有损耗的CCL走线，CPC有望成为实现448G线路速率的可行技术之一。该带宽的信号在PCB中传输时衰减过大，因此CPC也被广泛研究用于支持448G。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:10:19.012016",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.215,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "章节标题及首次出现时未按要求提供完整英文缩写和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "存在翻译腔和被动语态堆积，句子结构生硬"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更自然流畅，当前表达略显生涩"
+          },
+          {
+            "type": "readability",
+            "description": "翻译为“我们将在下文进行探讨”属于典型的翻译腔书面语"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有升级，“有望成为...的关键技术”比原文“could be”更确定"
+          },
+          {
+            "type": "readability",
+            "description": "后半句语序可优化，当前表达略显倒装和书面化"
+          }
+        ]
+      },
       "history": []
     }
   ]

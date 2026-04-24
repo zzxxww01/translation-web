@@ -1,7 +1,7 @@
 {
   "section_id": "03-typical-ai-cluster-networking",
   "title": "Typical AI Cluster Networking Configuration and TCO",
-  "title_translation": null,
+  "title_translation": "典型AI集群组网配置与总拥有成本",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,11 +27,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "典型的 AI 集群包含三大主要网络平面：后端网络、前端网络以及带外管理网络。其中，后端网络利用率最高，技术要求也最为苛刻。后端网络主要用于 GPU 间的横向扩展通信。GPU 依托该网络相互连接，并在集合通信操作中交换数据，进而实现训练与推理的并行化。后端网络通常采用 InfiniBand 或以太网协议。",
+          "model": "default",
+          "created_at": "2026-04-22T15:45:46.242704",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -112,18 +120,26 @@
         "LINK_2",
         "LINK_3"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "后端网络对性能要求极高，因此在整体网络成本和功耗中占据绝对大头。以采用英伟达（NVIDIA）X800-Q3400 后端交换机、基于 InfiniBand 部署的三层 GB300 NVL72 集群为例，其后端网络占总网络成本的 85%，功耗占比高达 86%。尽管基于 CPO（共封装光学）的交换机与网络方案在前端和后端网络中均可使用，但我们认为现阶段的部署重心仍将集中在后端网络。关于后端网络拓扑、端口、交换机及光模块数量的详尽细节，读者可参阅我们 2024 年发布的《Optical Boogeyman》一文 以及 AI 网络模型。若想深入了解整体网络总拥有成本，请阅读我们的 《AI 新型云厂商剖析与实操指南》一文。",
+          "model": "default",
+          "created_at": "2026-04-22T15:28:03.855622",
+          "tokenized_text": "后端网络对性能要求极高，因此在整体网络成本和功耗中占据绝对大头。以采用英伟达（NVIDIA）X800-Q3400 后端交换机、基于 InfiniBand 部署的三层 GB300 NVL72 集群为例，其后端网络占总网络成本的 85%，功耗占比高达 86%。尽管基于 CPO（共封装光学）的交换机与网络方案在前端和后端网络中均可使用，但我们认为现阶段的部署重心仍将集中在后端网络。关于后端网络拓扑、端口、交换机及光模块数量的详尽细节，读者可参阅我们 [[[LINK_1|2024 年发布的《Optical Boogeyman》一文]]] 以及 [[[LINK_2|AI 网络模型]]]。若想深入了解整体网络总拥有成本，请阅读我们的 [[[LINK_3|《AI 新型云厂商剖析与实操指南》一文]]]。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -166,18 +182,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "英伟达的光通信“假想敌”——NVL72、InfiniBand 横向扩展、800G 与 1.6T 放量 - Dylan Patel 与 Daniel Nishball · 2024 年 3 月 25 日",
+          "model": "default",
+          "created_at": "2026-04-22T15:29:11.078775",
+          "tokenized_text": "[[[LINK_1|英伟达的光通信“假想敌”——NVL72、InfiniBand 横向扩展、800G 与 1.6T 放量]]] - Dylan Patel 与 Daniel Nishball · 2024 年 3 月 25 日",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -220,18 +244,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "AI 新锐云打法与深度解析 - Dylan Patel 与 Daniel Nishball · 2024 年 10 月 3 日",
+          "model": "default",
+          "created_at": "2026-04-22T15:30:03.348034",
+          "tokenized_text": "[[[LINK_1|AI 新锐云打法与深度解析]]] - Dylan Patel 与 Daniel Nishball · 2024 年 10 月 3 日",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -259,11 +291,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "放眼全局，网络成本是 AI 集群总成本的第二大组成部分，仅次于 AI 服务器本身。在采用三层 InfiniBand 网络的 GB300 NVL72 集群中，网络成本占集群总成本的 15%；若采用四层网络，这一比例将达到 18%。光模块在这笔开销中占据大头。如果在三层网络中使用相对昂贵的英伟达（NVIDIA）LinkX 光模块，其成本将占到网络总成本的 60%。此外，在三层网络架构下，光模块还消耗了 45% 的网络总功耗。",
+          "model": "default",
+          "created_at": "2026-04-22T15:46:58.741288",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -338,18 +378,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821279",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI Networking 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -377,11 +425,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "AI 集群中的 GPU 数量越多，往往越需要增加网络层级。网络架构从两层扩展至三层甚至更多层，意味着更高的成本与更大的功耗预算。CPO 具备双重优势：一方面，在保持网络层级不变的前提下，它有助于降低功耗与成本；另一方面，在给定层级的网络中，它能增加可连接的 GPU 数量，从而降低整体的功耗与成本需求。",
+          "model": "default",
+          "created_at": "2026-04-22T15:47:49.222670",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     }

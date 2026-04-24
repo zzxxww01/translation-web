@@ -1,7 +1,7 @@
 {
   "section_id": "19-tsmc-coupe-is-emerging-as-the",
   "title": "TSMC COUPE is emerging as the integration option of choice",
-  "title_translation": null,
+  "title_translation": "台积电COUPE渐成首选集成方案",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,80 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n台积电正迅速成为无晶圆厂巨头与初创企业下一代光引擎的首选晶圆代工厂合作伙伴。以共封装光学端点为核心的首批高量产产品，正以“COUPE”——即“紧凑通用光子引擎”的名称推出。这包括EIC与PIC的制造，以及台积电COUPE方案下的异构集成。英伟达在GTC 2025上展出其COUPE光引擎，这些将成为首批出货的COUPE产品。尽管现有几代光引擎采用其他供应链伙伴，博通仍将COUPE纳入其未来技术路线。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497083",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +127,80 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "如前所述，此前依托Global Foundries Fotonix平台打造单片光学引擎的Ayar Labs，如今也已将COUPE纳入其技术路线。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497163",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +227,80 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n与在传统CMOS逻辑领域的主导地位不同，台积电此前在硅光子领域存在感较弱，当时Global Foundries和Tower Semi是更受欢迎的晶圆代工厂合作伙伴。然而近年来，台积电在光子能力上迅速追赶。同时，台积电还为其EIC组件带来了无可争议的先进CMOS逻辑制程优势，以及领先的封装能力——台积电是唯一一家已在合理规模上展示芯片到晶圆混合键合能力，并量产多种AMD混合键合芯片的晶圆代工厂。混合键合是性能更优的PIC与EIC键合方式，尽管其成本显著更高。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497199",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +327,80 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英特尔正着力开发同类能力，但在开拓这项技术上已遭遇重大挑战。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497222",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +427,80 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "总体而言，尽管此前台积电独立的硅光子能力相对较弱，但如今它已成为共封装光学领域的重要玩家。与其他主要玩家一样，台积电旨在尽可能多地占据价值链。采用台积电COUPE方案的客户，实际上等于承诺使用台积电制造的PIC，因为台积电不代工其他晶圆厂的SiPho晶圆。许多专注CPO的公司已果断转向，将台积电COUPE作为未来几年的主力上市方案。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497244",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -219,11 +559,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：台积电",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821481",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：台积电",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -266,19 +614,87 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Die fabrication: 台积电为芯片制造提供一套完整解决方案。EIC采用N7制程节点打造，集成高速光调制器驱动器与TIA，并内置加热器控制器以实现波长稳定等功能。PIC则在SOI N65制程节点上制造，台积电为其提供光子电路设计、光子版图设计与验证，以及光子电路仿真与建模（涵盖RF、噪声和多波长等方面）的全面支持。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497419",
+          "tokenized_text": "[[[STRONG_1|Die fabrication]]]: 台积电为芯片制造提供一套完整解决方案。EIC采用N7制程节点打造，集成高速光调制器驱动器与TIA，并内置加热器控制器以实现波长稳定等功能。PIC则在SOI N65制程节点上制造，台积电为其提供光子电路设计、光子版图设计与验证，以及光子电路仿真与建模（涵盖RF、噪声和多波长等方面）的全面支持。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -305,12 +721,80 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "台积电采用SoIC键合工艺将EIC与PIC键合一体。正如我们之前提到的，走线越长，寄生效应越大，性能也就越差。台积电的SoIC是一种无凸块接口，能在非单片集成的前提下提供最短走线，因而是异构集成EIC与PIC的性能最优方案。如图所示，在同等功耗下，基于SoIC的光引擎所提供的带宽密度，是采用凸块集成的光引擎的23倍以上。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497446",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -369,11 +853,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：台积电",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821492",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：台积电",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -401,12 +893,80 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "COUPE支持整个光引擎的设计与集成流程。在光学I/O方面，它支持µLens设计，可在晶圆级或芯片级集成微透镜，并提供涵盖反射镜、µLens、光栅耦合器（GC）和反射器的光学I/O路径仿真。在3D堆叠方面，它支持3D布局规划、SoIC-X/TDV/C4凸块布局实现、接口物理检查，以及高频通道模型提取与仿真。为确保开发顺畅，COUPE平台提供完整的PDK和EDA工作流程，用于COUPE的设计与验证，使设计师能够高效实现其技术。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497464",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -448,19 +1008,91 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token STRONG_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "【耦合方式】：正如我们后续将详细说明的，存在两种主要耦合方法——光栅耦合（GC）和边缘耦合（EC）。COUPE采用一种通用的EIC-on-PIC无凸块堆叠结构，同时支持GC和EC。然而，COUPE-GC结构会特别使用硅透镜（Si lens）和金属反射镜（MR），而COUPE-EC则独有EC端面（用于将边缘耦合终止至光纤）。在GC情况下，硅透镜设计在770µm厚的硅载体（Si-carrier）上，金属反射镜则直接置于光栅耦合器正下方，并搭配优化后的介电层以实现最佳光学性能。随后，该硅载体通过WoW（晶圆对晶圆）键合方式键合至CoW（芯片对晶圆）晶圆上。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497575",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token STRONG_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -519,11 +1151,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：台积电",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821502",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：台积电",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -583,11 +1223,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：台积电",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821511",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：台积电",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -630,19 +1278,91 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token STRONG_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "【光纤连接单元（FAU）】：FAU需要根据COUPE的光路进行协同设计。其目的是以低插入损耗将来自硅透镜的光耦合进光纤。随着I/O数量增加，制造难度也会上升，但如果业界能遵循特定标准，开发时间和成本将显著降低。总体而言，每个组件都需要经过优化设计，才能实现最佳光学性能。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497648",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token STRONG_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -701,11 +1421,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：台积电",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821521",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：台积电",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -748,19 +1476,91 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token STRONG_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "【产品路线图】：COUPE的第一代迭代将采用基板上的光学引擎，最终目标是能够将光学引擎（OE）置于中介层上。中介层可提供高得多的I/O密度，从而在光学引擎与ASIC PHY之间实现更大的带宽，单个光学引擎有望达到12.8Tbit/s的带宽，相当于约4 Tbit/s/mm。将光学引擎集成到中介层面临的挑战在于扩大中介层尺寸（其成本远高于封装基板），以容纳光学引擎。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497724",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token STRONG_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -787,12 +1587,80 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "这正是Broadcom转向台积电COUPE作为其CPO解决方案的原因，尽管它已用SPIL开发的扇出型晶圆级封装（FOWLP）迭代了多代CPO产品。值得注意的是，Broadcom已承诺在其未来的交换机和客户加速器路线图中采用COUPE。我们了解到，FOWLP方案因电信号必须穿过模塑通孔（TMV）才能抵达EIC，寄生电容过大，无法将单通道速率扩展至100G以上。为保持竞争力，Broadcom必须转向COUPE，后者能提供更优的性能和可扩展性。这凸显了台积电的技术优势，使其即使在过去被视为相对薄弱的光学领域也能斩获订单。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:26.497740",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.07,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现CPO端点和光学引擎时未按术语表要求规范注释。术语表要求Optical Engine (OE) 译为光引擎，CPO首次出现需附注全称。"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确为'die-to-wafer hybrid bonding'，译文误译为'晶圆到晶圆混合键合'，这是严重事实错误。"
+          },
+          {
+            "type": "terminology",
+            "description": "SiPho首次出现未提供完整英文（Silicon Photonics）和中文解释（硅光子），且与术语表中Co-packaged Optics (CPO) → 共封装光学的风格不一致。"
+          },
+          {
+            "type": "readability",
+            "description": "使用【】标题式标注与原文自然段落风格不符，制造了不必要的割裂感。"
+          },
+          {
+            "type": "readability",
+            "description": "出现典型翻译腔“进行键合”，且被动语态使用过多（“被键合”）。"
+          },
+          {
+            "type": "tone",
+            "description": "突然出现“台积电提供”，但前文主语是COUPE，逻辑主体混乱。"
+          },
+          {
+            "type": "terminology",
+            "description": "MR（metal reflector）在此处首次出现但未按规范注释全称和中文译名。"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且结构复杂，中文阅读体验不佳，存在明显翻译腔。"
+          },
+          {
+            "type": "readability",
+            "description": "用词略显生硬，可更自然。"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -851,11 +1719,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Broadcom",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821540",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Broadcom",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -915,11 +1791,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Broadcom",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821550",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Broadcom",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

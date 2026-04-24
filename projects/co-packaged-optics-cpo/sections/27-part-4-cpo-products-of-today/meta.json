@@ -1,7 +1,7 @@
 {
   "section_id": "27-part-4-cpo-products-of-today",
   "title": "Part 4: CPO Products of Today and Tomorrow",
-  "title_translation": null,
+  "title_translation": "第四部分：当前与未来的CPO产品",
   "paragraphs": [
     {
       "id": "p000",
@@ -61,19 +61,71 @@
         "STRONG_1",
         "STRONG_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在本部分，我们将首先介绍目前已上市或即将上市的共封装光学（Co-packaged Optics, CPO）产品，从英伟达与博通的产品组合开始，进而介绍多家专注CPO公司的产品。我们涵盖英特尔CPO、联发科的CPO工作， Ayar Labs、Nubis、Celestial AI、Lightmatter、Xscape Photonics、Ranovus和Scintil， 详细介绍各家公司的解决方案，并深入点评各方案的关键优劣。最后，我们将回到供应链话题，讨论光引擎（Optical Engine, OE）和外部激光源（External Laser Sources, ELS）等关键CPO组件的制造、测试与组装。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:28:39.492716",
+          "tokenized_text": "在本部分，我们将首先介绍目前已上市或即将上市的共封装光学（Co-packaged Optics, CPO）产品，从英伟达与博通的产品组合开始，进而介绍多家专注CPO公司的产品。[[[STRONG_1|我们涵盖英特尔CPO、联发科的CPO工作，]]] [[[STRONG_2|Ayar Labs、Nubis、Celestial AI、Lightmatter、Xscape Photonics、Ranovus和Scintil，]]] 详细介绍各家公司的解决方案，并深入点评各方案的关键优劣。最后，我们将回到供应链话题，讨论光引擎（Optical Engine, OE）和外部激光源（External Laser Sources, ELS）等关键CPO组件的制造、测试与组装。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.5,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不一致"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用'进行...权衡'结构"
+          },
+          {
+            "type": "terminology",
+            "description": "缩写注释格式不规范且位置不佳"
+          },
+          {
+            "type": "readability",
+            "description": "句子节奏可进一步优化，连接更自然"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有偏差"
+          }
+        ]
+      },
       "history": []
     }
   ]

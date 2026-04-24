@@ -1,7 +1,7 @@
 {
   "section_id": "21-faus-and-fiber-coupling",
   "title": "FAUs and Fiber Coupling",
-  "title_translation": null,
+  "title_translation": "FAU与光纤耦合",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "光纤从光引擎（OE）引出，用于数据传输。一个光通道由两根光纤或一对光纤（发送加接收）组成。光纤耦合——将光纤与芯片上的波导精确对准以实现平滑高效的光传输——是共封装光学（CPO）中关键且极具挑战性的步骤，而光纤阵列单元（FAU）被广泛用于协助这一过程。主要有两种实现方式，即边缘耦合（EC）和光栅耦合（GC）。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403173",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +123,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "边缘耦合",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403224",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +219,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "边缘耦合是将光纤沿芯片边缘对准。从下图可以看出，光纤端面必须与芯片抛光边缘精确对齐，以确保光束准确进入边缘耦合器。光纤端部的微透镜将光聚焦并引导至芯片，使其进入波导。波导锥形结构逐渐展宽，可实现平滑的模式转换，减少反射和散射，从而提升耦合效率。如果没有这样的透镜和锥形结构，光纤端面与波导端面之间的界面将产生显著的光损耗。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403249",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,11 +347,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Ansys",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821654",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Ansys",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -187,12 +387,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "边缘耦合因其低耦合损耗、可支持宽波长范围以及偏振不敏感而受到青睐。然而，它也存在若干缺点：",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403265",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -219,12 +483,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "1. 制备工艺更为复杂，需要底切和深层蚀刻；2. 由于属于一维结构，光纤密度会受到限制；3. 与裸片堆叠不兼容（因为TSV需要减薄）；4. 在外形尺寸、机械应力、翘曲及光纤操作等方面的机械可靠性面临挑战；5. 热可靠性较低；6. 总体上缺乏生态系统兼容性。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403280",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -251,12 +579,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Global Foundries（GFS）在其标志性的45nm“Fotonix”平台上展示了一种单片集成的SiN边缘耦合器，可实现32个通道和127µm间距，并于今年VLSI会议上发表。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403296",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -283,12 +675,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "光栅耦合（GC）",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403311",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -315,12 +771,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在光栅耦合器（GC）中，光从顶部入射，光纤以较小角度置于光栅上方。当光到达光栅时，周期性结构会将光散射并向下弯折，进入波导。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403325",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -347,12 +867,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "光栅/垂直耦合的主要优势在于能够布置多排光纤，从而使单个光引擎（OE）容纳更多光纤。光栅耦合器（GC）无需置于基板底部，因此可将光引擎（OE）放置在中介层上。最后，光栅耦合无需极高定位精度，且可通过简单的两步刻蚀工艺更轻松地实现制造。其缺点是，单偏振光栅耦合器的工作波长范围有限，且对偏振高度敏感。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403353",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -379,12 +963,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英伟达更倾向于采用光栅耦合（GC），因为它具备多项优势——能够实现二维高密度、占用空间更小、制造更简单，并且与边缘耦合（EC）相比，可支持更简便的晶圆级测试。不过，该公司也清楚光栅耦合存在若干缺点——其光学损耗通常更高，光学带宽也比边缘耦合窄（后者通常能容纳更宽的光谱范围）。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403368",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -411,12 +1059,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "台积电显然也更倾向于光栅耦合，这一点在其COUPE平台上得到了体现。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:22:11.403383",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.3549999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "FAU首次出现时注释格式与术语表及全文规范不符"
+          },
+          {
+            "type": "tone",
+            "description": "程度词升级：原文'crucial'被译为'至关重要'"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔及书面语过重"
+          },
+          {
+            "type": "structure",
+            "description": "列表项翻译腔：'进行底切和深层蚀刻'"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬，可更符合中文表达习惯"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "OE术语未保持一致"
+          },
+          {
+            "type": "readability",
+            "description": "可用更自然的中文表达"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -475,11 +1187,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Journal of Semiconductors",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821665",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Journal of Semiconductors",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

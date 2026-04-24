@@ -68,21 +68,23 @@ class FourStepTranslator:
         session_service: Optional["TranslationSessionService"] = None,
         term_injection_service: Optional["TermInjectionService"] = None,
         term_validation_service: Optional["TermValidationService"] = None,
+        get_provider_for_phase: Optional[Callable[[str], LLMProvider]] = None,
     ):
         """
         初始化四步法翻译器
 
         Args:
-            llm_provider: LLM Provider
+            llm_provider: LLM Provider（默认provider，用于向后兼容）
             context_manager: 分层上下文管理器
             quality_gate: 质量门禁（可选）
             paragraph_threshold: 混合模式阈值，超过此数量的段落分批翻译
             max_retries: 最大重试次数
             memory_service: 翻译记忆服务（可选，用于反思评分学习）
-            style_polish_threshold: 简洁性评分低于此阈值时触发 Style Polish（设为 0 关闭）
+            style_polish_threshold: 简洁性评分低于此阈值时触发 Style Polish（设为 0 关闭，默认 8.0）
             session_service: 翻译会话服务（可选）
             term_injection_service: 术语注入服务（可选）
             term_validation_service: 术语验证服务（可选）
+            get_provider_for_phase: 阶段化模型获取函数（可选，用于 Phase 1/2 使用不同模型）
         """
         self.llm = llm_provider
         self.context_manager = context_manager
@@ -96,6 +98,9 @@ class FourStepTranslator:
         self.session_service = session_service
         self.term_injection_service = term_injection_service
         self.term_validation_service = term_validation_service
+
+        # 阶段化模型支持
+        self.get_provider_for_phase = get_provider_for_phase
 
         # 优化点7: 反馈循环
         self.feedback_history: List[Dict[str, Any]] = []
@@ -286,6 +291,12 @@ class FourStepTranslator:
             logger.info(f"Created translation session: {session_id}")
 
         try:
+            import time
+
+            # 获取 Phase 1 和 Phase 2 的 provider
+            phase1_provider = self.get_provider_for_phase("phase1_draft") if self.get_provider_for_phase else self.llm
+            phase2_provider = self.get_provider_for_phase("phase2_refine") if self.get_provider_for_phase else self.llm
+
             if on_progress:
                 on_progress("理解章节", 0, 4)
 
@@ -298,11 +309,13 @@ class FourStepTranslator:
             if on_progress:
                 on_progress("初译", 1, 4)
 
-            # Step 2: 初译（混合模式）
+            # Step 2: 初译（混合模式）- 使用 Phase 1 provider
+            phase1_start = time.time()
             if len(section.paragraphs) <= self.paragraph_threshold:
                 # 短章节：整体翻译
                 translation_outputs = self._translate_batch(
-                    section, section.paragraphs, understanding, all_sections
+                    section, section.paragraphs, understanding, all_sections,
+                    provider=phase1_provider
                 )
             else:
                 # 长章节：分批翻译
@@ -311,22 +324,35 @@ class FourStepTranslator:
                 for batch_idx, batch in enumerate(batches):
                     batch_outputs = self._translate_batch(
                         section, batch, understanding, all_sections,
-                        batch_index=batch_idx
+                        batch_index=batch_idx,
+                        provider=phase1_provider
                     )
                     translation_outputs.extend(batch_outputs)
+            phase1_duration = time.time() - phase1_start
+            logger.info(f"[Phase 1] Draft translation completed in {phase1_duration:.2f}s")
 
             translations = [item.text for item in translation_outputs]
 
             draft_translations = list(translations)
 
+            # 方案 C：取消快速预检，直接执行 Step 3（100% 覆盖）
+            # 原因：快速预检只采样部分段落，可能遗漏问题；Step 3 是批量操作，成本可控
+
             if on_progress:
                 on_progress("反思", 2, 4)
 
-            # Step 3: 批量反思
+            # Step 3: 批量反思 - 使用 Phase 2 provider
+            step3_start = time.time()
             reflection = self._step_reflect(
                 section,
                 translations,
                 understanding,
+                provider=phase2_provider
+            )
+            step3_duration = time.time() - step3_start
+            logger.info(
+                f"[Phase 2 - Step 3] Reflection completed in {step3_duration:.2f}s, "
+                f"score={reflection.overall_score:.1f}, issues={len(reflection.issues)}"
             )
 
             # 优化点7: 收集反馈用于后续章节
@@ -366,26 +392,83 @@ class FourStepTranslator:
             if on_progress:
                 on_progress("润色", 3, 4)
 
-            # Step 4: 润色（如果需要）
-            if not reflection.is_excellent and reflection.issues:
-                translation_outputs = self._step_refine(
+            # Step 4+5: 批量润色（合并问题修复和风格优化）
+            # 触发条件：overall < 9.0 或存在 P0/P1 问题 或 fluency/conciseness < 8.5
+            step45_api_calls = 0
+
+            # 检查是否需要执行润色
+            has_critical_issues = any(
+                getattr(issue, "priority", "P2") in ["P0", "P1"]
+                for issue in reflection.issues
+            )
+
+            should_refine = (
+                reflection.overall_score < 9.0 or
+                has_critical_issues
+            )
+
+            should_polish = (
+                (reflection.fluency_score > 0 and reflection.fluency_score < 8.5) or
+                (reflection.conciseness_score > 0 and reflection.conciseness_score < 8.5)
+            )
+
+            if should_refine or should_polish:
+                # 根据 overall_score 决定修复哪些问题
+                if reflection.overall_score >= 8.5:
+                    # 良好：只修 P0/P1
+                    issues_to_fix = [
+                        issue for issue in reflection.issues
+                        if getattr(issue, "priority", "P2") in ["P0", "P1"]
+                    ]
+                    fix_level = "P0/P1"
+                else:
+                    # 合格或以下：修 P0/P1/P2
+                    issues_to_fix = [
+                        issue for issue in reflection.issues
+                        if getattr(issue, "priority", "P2") in ["P0", "P1", "P2"]
+                    ]
+                    fix_level = "P0/P1/P2"
+
+                step45_start = time.time()
+                translation_outputs = self._step_refine_and_polish(
                     section,
                     translation_outputs,
                     reflection,
                     understanding,
+                    provider=phase2_provider,
+                    issues_filter=issues_to_fix
                 )
                 translations = [item.text for item in translation_outputs]
+                step45_duration = time.time() - step45_start
+                step45_api_calls = 1  # 批量调用，只有 1 次 API 调用
 
-            # Step 5: 风格润色（可选，conciseness_score 低于阈值时触发）
-            if (
-                self.style_polish_threshold > 0
-                and reflection.conciseness_score > 0
-                and reflection.conciseness_score < self.style_polish_threshold
-            ):
-                translation_outputs = self._step_style_polish(
-                    section, translation_outputs
+                # 统计实际处理的段落数
+                issues_by_paragraph = {}
+                for issue in issues_to_fix:
+                    issues_by_paragraph[issue.paragraph_index] = True
+                paragraphs_with_issues = len(issues_by_paragraph)
+
+                logger.info(
+                    f"[Phase 2 - Step 4+5] Refine and polish completed in {step45_duration:.2f}s, "
+                    f"processed {len(section.paragraphs)} paragraphs in {step45_api_calls} API call "
+                    f"({paragraphs_with_issues} with {fix_level} issues, "
+                    f"overall={reflection.overall_score:.1f}, "
+                    f"fluency={reflection.fluency_score:.1f}, "
+                    f"conciseness={reflection.conciseness_score:.1f})"
                 )
-                translations = [item.text for item in translation_outputs]
+            else:
+                logger.info(
+                    f"[Phase 2 - Step 4+5] Skipped refine and polish "
+                    f"(overall={reflection.overall_score:.1f} >= 9.0, no P0/P1 issues, "
+                    f"fluency={reflection.fluency_score:.1f}, conciseness={reflection.conciseness_score:.1f})"
+                )
+
+            # 记录 Phase 2 总体统计
+            phase2_total_api_calls = 1 + step45_api_calls  # 1 for reflection
+            logger.info(
+                f"[Phase 2 Summary] Total API calls: {phase2_total_api_calls} "
+                f"(reflect=1, refine_and_polish={step45_api_calls})"
+            )
 
             revised_translations = list(translations)
 
@@ -548,9 +631,13 @@ class FourStepTranslator:
         paragraphs: List[Paragraph],
         understanding: SectionUnderstanding,
         all_sections: List[Section],
-        batch_index: int = 0
+        batch_index: int = 0,
+        provider: Optional[LLMProvider] = None
     ) -> List[TranslationPayload]:
         """Step 2: 批量初译 — 使用 translate_section 一次翻译整批段落"""
+        # 使用传入的 provider，如果没有则使用默认的 self.llm
+        llm_provider = provider or self.llm
+
         section_lines = []
         paragraph_ids = []
         dehydrated_results: Dict[str, TranslationPayload] = {}
@@ -601,7 +688,7 @@ class FourStepTranslator:
 
         # 单次 API 调用翻译整批段落
         section_text = "\n\n".join(section_lines)
-        translated = self.llm.translate_section(
+        translated = llm_provider.translate_section(
             section_text, section.title, context, paragraph_ids
         )
 
@@ -875,6 +962,61 @@ class FourStepTranslator:
             "translation_voice": translation_voice,
         }
 
+    def _should_skip_phase2(
+        self,
+        translations: List[str],
+        provider: LLMProvider
+    ) -> bool:
+        """
+        快速质量预检：判断是否需要 Phase 2
+
+        使用轻量级快速评估，如果 Phase 1 质量已经很高（预估 score >= 9.0），
+        则跳过整个 Phase 2，节省成本。
+
+        Args:
+            translations: Phase 1 的译文列表
+            provider: LLM Provider
+
+        Returns:
+            bool: True 表示跳过 Phase 2，False 表示执行 Phase 2
+        """
+        # 采样前 2 个段落进行快速评估（避免评估整个章节）
+        sample_translations = translations[:2]
+        sample_text = "\n\n".join(sample_translations)
+
+        # 快速评估 prompt（简化版，不需要详细分析）
+        quick_prompt = f"""你是一位资深中英双语编辑。请快速评估以下中文译文的质量（0-10分）。
+
+译文：
+{sample_text[:1000]}
+
+评分标准：
+- 9-10分：优秀，信息准确、表达自然、简洁有力，无明显问题
+- 7-8分：良好，整体质量不错，有少量可优化之处
+- 5-6分：及格，能理解但有明显问题
+- <5分：不及格，存在严重问题
+
+只返回一个数字评分（0-10），不要解释。"""
+
+        try:
+            response = provider.generate(quick_prompt, temperature=0.3)
+            # 解析评分
+            score_str = response.strip().split()[0]  # 取第一个词
+            score = float(score_str)
+
+            logger.info(f"[Phase 2 Pre-check] Quick quality score: {score:.1f}")
+
+            # 如果预估 score >= 9.0，跳过 Phase 2
+            if score >= 9.0:
+                return True
+
+        except (ValueError, IndexError) as e:
+            logger.warning(f"[Phase 2 Pre-check] Failed to parse quick score: {e}, proceeding with Phase 2")
+            # 解析失败，保守起见执行 Phase 2
+            return False
+
+        return False
+
     def _build_refine_context(
         self,
         section: Section,
@@ -888,8 +1030,12 @@ class FourStepTranslator:
         section: Section,
         translations: List[str],
         understanding: SectionUnderstanding,
+        provider: Optional[LLMProvider] = None
     ) -> ReflectionResult:
         """Step 3: 批量反思"""
+        # 使用传入的 provider，如果没有则使用默认的 self.llm
+        llm_provider = provider or self.llm
+
         # 获取原文列表
         source_paragraphs = [p.source for p in section.paragraphs]
 
@@ -905,7 +1051,7 @@ class FourStepTranslator:
             )
 
         # 调用 LLM 反思
-        result = self.llm.reflect_on_translation(
+        result = llm_provider.reflect_on_translation(
             source_paragraphs=source_paragraphs,
             translations=translations,
             guidelines=guidelines,
@@ -918,6 +1064,7 @@ class FourStepTranslator:
         for issue_data in result.get("issues", []):
             issues.append(TranslationIssue(
                 paragraph_index=issue_data.get("paragraph_index", 0),
+                priority=issue_data.get("priority", "P2"),
                 issue_type=issue_data.get("issue_type", "readability"),
                 severity=issue_data.get("severity", "medium"),
                 original_text=issue_data.get("original_text", ""),
@@ -928,9 +1075,12 @@ class FourStepTranslator:
 
         return ReflectionResult(
             overall_score=float(result.get("overall_score", 0)),
-            readability_score=float(result.get("readability_score", 0)),
+            terminology_score=float(result.get("terminology_score", 0)),
             accuracy_score=float(result.get("accuracy_score", 0)),
+            fluency_score=float(result.get("fluency_score", 0)),
             conciseness_score=float(result.get("conciseness_score", 0)),
+            consistency_score=float(result.get("consistency_score", 0)),
+            logic_score=float(result.get("logic_score", 0)),
             is_excellent=result.get("is_excellent", False),
             issues=issues
         )
@@ -943,8 +1093,16 @@ class FourStepTranslator:
         translations: List[TranslationPayload],
         reflection: ReflectionResult,
         understanding: SectionUnderstanding,
+        provider: Optional[LLMProvider] = None,
+        issues_filter: Optional[List[TranslationIssue]] = None
     ) -> List[TranslationPayload]:
         """Step 4: 针对性润色 — 按段落合并问题，每个有问题的段落只调用一次"""
+        # 使用传入的 provider，如果没有则使用默认的 self.llm
+        llm_provider = provider or self.llm
+
+        # 使用过滤后的 issues，如果没有则使用全部 issues
+        issues_to_refine = issues_filter if issues_filter is not None else reflection.issues
+
         refined = [
             TranslationPayload(
                 text=item.text,
@@ -956,7 +1114,7 @@ class FourStepTranslator:
 
         # 按段落索引分组 issues
         issues_by_paragraph: Dict[int, List[TranslationIssue]] = defaultdict(list)
-        for issue in reflection.issues:
+        for issue in issues_to_refine:
             issues_by_paragraph[issue.paragraph_index].append(issue)
 
         # 每个有问题的段落只调用一次
@@ -1001,7 +1159,7 @@ class FourStepTranslator:
                 suggestion = "请综合以上问题一并修订"
 
             # 调用 LLM 润色
-            refined_text = self.llm.refine_translation(
+            refined_text = llm_provider.refine_translation(
                 source=source,
                 current_translation=current_translation,
                 issue_type=issue_type,
@@ -1034,12 +1192,152 @@ class FourStepTranslator:
 
     # ============ Step 5: 风格润色（可选） ============
 
+    def _step_refine_and_polish(
+        self,
+        section: Section,
+        translations: List[TranslationPayload],
+        reflection: ReflectionResult,
+        understanding: SectionUnderstanding,
+        provider: Optional[LLMProvider] = None,
+        issues_filter: Optional[List[TranslationIssue]] = None
+    ) -> List[TranslationPayload]:
+        """Step 4+5: 批量润色 — 合并问题修复和风格优化，每 4 段一批"""
+        llm_provider = provider or self.llm
+        REFINE_BATCH_SIZE = 4  # 每批处理 4 段
+
+        refined = [
+            TranslationPayload(
+                text=item.text,
+                tokenized_text=item.tokenized_text,
+                format_issues=list(item.format_issues),
+            )
+            for item in translations
+        ]
+
+        # 使用过滤后的 issues，如果没有则使用全部 issues
+        issues_to_refine = issues_filter if issues_filter is not None else reflection.issues
+
+        # 准备批量输入
+        pairs = []
+        indices_to_polish = []
+
+        # 按段落索引分组 issues
+        issues_by_paragraph: Dict[int, List[TranslationIssue]] = defaultdict(list)
+        for issue in issues_to_refine:
+            issues_by_paragraph[issue.paragraph_index].append(issue)
+
+        for idx, (para, payload) in enumerate(zip(section.paragraphs, refined)):
+            # 跳过脱水链接段落
+            dehydrated_payload = build_dehydrated_link_payload(para)
+            if dehydrated_payload is not None:
+                refined[idx] = dehydrated_payload
+                continue
+
+            source = para.source
+            current_translation = payload.text
+
+            # 如果有 format tokens，用 tokenized 版本
+            if para.inline_elements:
+                prepared = build_translation_input(para)
+                source = prepared.tokenized_text or prepared.text
+                current_translation = payload.tokenized_text or payload.text
+
+            # 获取该段落的问题列表（可能为空）
+            issues = issues_by_paragraph.get(idx, [])
+
+            pairs.append((source, current_translation, issues, idx))
+            indices_to_polish.append(idx)
+
+        # 分批调用 API（每 4 段一批）
+        if pairs:
+            refine_context = self._build_refine_context(section, understanding)
+
+            # 添加评分信息到上下文
+            refine_context["reflection_scores"] = {
+                "terminology": reflection.terminology_score,
+                "accuracy": reflection.accuracy_score,
+                "fluency": reflection.fluency_score,
+                "conciseness": reflection.conciseness_score,
+                "consistency": reflection.consistency_score,
+                "logic": reflection.logic_score
+            }
+
+            total_api_calls = 0
+            # 分批处理
+            for batch_start in range(0, len(pairs), REFINE_BATCH_SIZE):
+                batch_end = min(batch_start + REFINE_BATCH_SIZE, len(pairs))
+                batch_pairs_data = pairs[batch_start:batch_end]
+
+                # 构建批量输入格式
+                batch_pairs = []
+                for source, translation, issues, _ in batch_pairs_data:
+                    pair_dict = {
+                        "source": source,
+                        "translation": translation,
+                        "issues": [
+                            {
+                                "type": issue.issue_type,
+                                "priority": getattr(issue, "priority", "P2"),
+                                "description": issue.description,
+                                "suggestion": issue.suggestion
+                            }
+                            for issue in issues
+                        ]
+                    }
+                    batch_pairs.append(pair_dict)
+
+                polished_texts = llm_provider.refine_and_polish_batch(
+                    pairs=batch_pairs,
+                    context=refine_context
+                )
+                total_api_calls += 1
+
+                # 更新结果
+                for i, polished_text in enumerate(polished_texts):
+                    data_idx = batch_start + i
+                    if data_idx >= len(pairs):
+                        break
+
+                    _, _, _, idx = pairs[data_idx]
+                    para = section.paragraphs[idx]
+
+                    stripped = polished_text.strip()
+                    if not stripped:
+                        logger.warning(
+                            "Refine and polish returned empty translation for paragraph %s; keeping previous draft",
+                            para.id,
+                        )
+                        continue
+
+                    if para.inline_elements:
+                        candidate = build_translation_payload(
+                            para,
+                            stripped,
+                            token_repairer=self._repair_format_tokens,
+                        )
+                        if candidate.format_valid:
+                            refined[idx] = candidate
+                        continue
+
+                    refined[idx] = TranslationPayload(text=stripped)
+
+            logger.info(
+                f"[Phase 2 - Step 4+5] Processed {len(pairs)} paragraphs in {total_api_calls} API calls "
+                f"(batch_size={REFINE_BATCH_SIZE})"
+            )
+
+        return refined
+
     def _step_style_polish(
         self,
         section: Section,
         translations: List[TranslationPayload],
+        provider: Optional[LLMProvider] = None
     ) -> List[TranslationPayload]:
-        """Step 5: 风格润色 — 逐段调用 style_polish，压缩冗长表达、统一隐喻、提升语气力度"""
+        """Step 5: 风格润色 — 批量调用 style_polish_batch，压缩冗长表达、统一隐喻、提升语气力度"""
+        # 使用传入的 provider，如果没有则使用默认的 self.llm
+        llm_provider = provider or self.llm
+
         polished = [
             TranslationPayload(
                 text=item.text,
@@ -1048,6 +1346,10 @@ class FourStepTranslator:
             )
             for item in translations
         ]
+
+        # 准备批量输入
+        pairs = []
+        indices_to_polish = []  # 记录需要润色的段落索引
 
         for idx, (para, payload) in enumerate(zip(section.paragraphs, polished)):
             # 跳过脱水链接段落
@@ -1065,30 +1367,37 @@ class FourStepTranslator:
                 source = prepared.tokenized_text or prepared.text
                 current_translation = payload.tokenized_text or payload.text
 
-            polished_text = self.llm.style_polish(
-                source=source,
-                current_translation=current_translation,
-            )
+            pairs.append((source, current_translation))
+            indices_to_polish.append(idx)
 
-            stripped = polished_text.strip()
-            if not stripped:
-                logger.warning(
-                    "Style polish returned empty translation for paragraph %s; keeping previous draft",
-                    para.id,
-                )
-                continue
+        # 批量调用 API（一次调用处理所有段落）
+        if pairs:
+            polished_texts = llm_provider.style_polish_batch(pairs)
 
-            if para.inline_elements:
-                candidate = build_translation_payload(
-                    para,
-                    stripped,
-                    token_repairer=self._repair_format_tokens,
-                )
-                if candidate.format_valid:
-                    polished[idx] = candidate
-                continue
+            # 更新结果
+            for i, polished_text in enumerate(polished_texts):
+                idx = indices_to_polish[i]
+                para = section.paragraphs[idx]
 
-            polished[idx] = TranslationPayload(text=stripped)
+                stripped = polished_text.strip()
+                if not stripped:
+                    logger.warning(
+                        "Style polish returned empty translation for paragraph %s; keeping previous draft",
+                        para.id,
+                    )
+                    continue
+
+                if para.inline_elements:
+                    candidate = build_translation_payload(
+                        para,
+                        stripped,
+                        token_repairer=self._repair_format_tokens,
+                    )
+                    if candidate.format_valid:
+                        polished[idx] = candidate
+                    continue
+
+                polished[idx] = TranslationPayload(text=stripped)
 
         return polished
 

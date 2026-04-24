@@ -1,7 +1,7 @@
 {
   "section_id": "44-fiber-shuffle-box",
   "title": "Fiber Shuffle Box",
-  "title_translation": null,
+  "title_translation": "光纤混排盒",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "以英伟达X800-Q3450共封装光学（CPO）交换机为例，从光引擎（OE）中会引出超过1000根光纤，因此需要使用光纤洗牌盒（shuffle box）来整理并将它们路由到各自目的地。不过，部分领先企业已开发出自动化对准设备，能够以更高精度和效率完成这一工作。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:49:22.051712",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.37,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "首次出现未规范注释且后续不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表要求BOM译为'物料清单'，但此处使用了'物料清单（BoM）'，大小写和格式不规范"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "语气略显平淡，专业洞察力不足"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +119,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "光纤洗牌盒的价格通常与其管理的光纤数量直接挂钩。例如，T&S通讯销售的48芯洗牌盒约为150美元，300芯版本约为1000美元，500芯型号约为1600美元。对于拥有数千根光纤的X800-Q3450而言，英伟达采购该洗牌盒的成本将超过3000美元。洗牌盒的主要BOM组件包括MT插芯和光纤。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:49:22.051772",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.37,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "首次出现未规范注释且后续不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表要求BOM译为'物料清单'，但此处使用了'物料清单（BoM）'，大小写和格式不规范"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "语气略显平淡，专业洞察力不足"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +211,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "T&S通讯（300570.SH）是光纤洗牌盒领域的主要玩家。该公司开发了自动化设备，可精准对准洗牌盒内光纤。相关技术均已获得专利保护，竞争对手若想绕开这些专利，势必耗费额外时间和成本。T&S的主要客户是康宁，两家公司经常联手为客户提供服务。例如，康宁帮助客户（英伟达、博通等）为其共封装光学（CPO）解决方案设计光纤网络，并将洗牌盒部分转包给T&S。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:49:22.051797",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.37,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "首次出现未规范注释且后续不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表要求BOM译为'物料清单'，但此处使用了'物料清单（BoM）'，大小写和格式不规范"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "语气略显平淡，专业洞察力不足"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +303,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Molex也是较早入场的厂商之一，不过由于制造效率较低，其产品价格通常比T&S高出约20%。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:49:22.051820",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.37,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "首次出现未规范注释且后续不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表要求BOM译为'物料清单'，但此处使用了'物料清单（BoM）'，大小写和格式不规范"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "语气略显平淡，专业洞察力不足"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -187,11 +427,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：英伟达",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821834",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：英伟达",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

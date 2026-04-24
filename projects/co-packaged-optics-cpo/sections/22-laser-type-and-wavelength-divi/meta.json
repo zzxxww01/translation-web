@@ -1,7 +1,7 @@
 {
   "section_id": "22-laser-type-and-wavelength-divi",
   "title": "Laser Type and Wavelength Division Multiplexing (WDM)",
-  "title_translation": null,
+  "title_translation": "激光器类型与波分复用（WDM）",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "将激光器集成到共封装光学（Co-packaged Optics，CPO）中有两种主要方式。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:23:02.600229",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.03,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE缩写首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子过长且翻译腔明显，存在被动与从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS注释顺序错误且重复了后续段落的ELS"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "readability",
+            "description": "列表式翻译较为生硬，可提升信息密度"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现注释格式不规范（缺少空格），且后续CWDM、DWDM注释重复"
+          },
+          {
+            "type": "tone",
+            "description": "程度词‘非常重要’力度略强于原文‘important’"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +123,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "第一种方法是片上激光器，即将激光器和调制器集成在同一块光子芯片上，通常通过将III-V族（InP）材料键合到硅上来实现。虽然片上激光器能简化设计并降低插入损耗，但也存在几项挑战：",
+          "model": "pro",
+          "created_at": "2026-04-22T18:23:02.600290",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.03,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE缩写首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子过长且翻译腔明显，存在被动与从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS注释顺序错误且重复了后续段落的ELS"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "readability",
+            "description": "列表式翻译较为生硬，可提升信息密度"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现注释格式不规范（缺少空格），且后续CWDM、DWDM注释重复"
+          },
+          {
+            "type": "tone",
+            "description": "程度词‘非常重要’力度略强于原文‘important’"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +219,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "激光器是系统中故障率最高的组件之一。若集成到共封装光引擎（Optical Engine，OE）中，一旦失效将产生极大影响范围，导致整个芯片无法工作；激光器对热量也非常敏感，将其置于共封装光引擎上会使其非常接近系统中最热的部件——主机硅芯片，这只会进一步加剧问题；此外，片上激光器通常难以提供足够高的输出功率。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:23:02.600308",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.03,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE缩写首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子过长且翻译腔明显，存在被动与从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS注释顺序错误且重复了后续段落的ELS"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "readability",
+            "description": "列表式翻译较为生硬，可提升信息密度"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现注释格式不规范（缺少空格），且后续CWDM、DWDM注释重复"
+          },
+          {
+            "type": "tone",
+            "description": "程度词‘非常重要’力度略强于原文‘important’"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +315,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n目前行业已达成共识的方案是采用外部光源（External Light Source，ELS）。激光器位于独立的模块中，通过光纤与光引擎相连。这种激光器通常采用OSFP等可插拔形式因子。该方案在激光器故障这一常见情况下，能显著简化现场维护。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:23:02.600325",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.03,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE缩写首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子过长且翻译腔明显，存在被动与从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS注释顺序错误且重复了后续段落的ELS"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "readability",
+            "description": "列表式翻译较为生硬，可提升信息密度"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现注释格式不规范（缺少空格），且后续CWDM、DWDM注释重复"
+          },
+          {
+            "type": "tone",
+            "description": "程度词‘非常重要’力度略强于原文‘important’"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +411,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "外部光源（ELS）的缺点是功耗较高。如以下图表所示，在基于ELS的系统中，输出功率会因连接器损耗、光纤耦合损耗以及调制器效率低下等因素在多个环节产生损失。因此，每个激光器需输出24.5 dBm的光功率，以补偿各类损耗并保证可靠传输。高输出激光器会产生更多热量，并在热应力下更快退化，其中激光器和热电制冷器约占ELS功耗的70%。虽然在激光器设计、封装和光路上的逐步改进有所帮助，但激光器高功率需求的问题仍未得到彻底解决。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:23:02.600354",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.03,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE缩写首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子过长且翻译腔明显，存在被动与从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS注释顺序错误且重复了后续段落的ELS"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "readability",
+            "description": "列表式翻译较为生硬，可提升信息密度"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现注释格式不规范（缺少空格），且后续CWDM、DWDM注释重复"
+          },
+          {
+            "type": "tone",
+            "description": "程度词‘非常重要’力度略强于原文‘important’"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -187,12 +507,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在今年的VLSI会议上，英伟达重点介绍了其生态系统内的多家激光器合作伙伴，包括提供高功率单DFB激光器的Lumentum、提供DFB阵列的Ayar Labs、提供量子点锁模梳的Innolume，以及提供泵浦非线性谐振梳的Xscape、Enlightra和Iloomina。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:23:02.600377",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.03,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE缩写首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子过长且翻译腔明显，存在被动与从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS注释顺序错误且重复了后续段落的ELS"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "readability",
+            "description": "列表式翻译较为生硬，可提升信息密度"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现注释格式不规范（缺少空格），且后续CWDM、DWDM注释重复"
+          },
+          {
+            "type": "tone",
+            "description": "程度词‘非常重要’力度略强于原文‘important’"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -219,12 +603,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英伟达还讨论了探索VCSEL阵列作为潜在替代激光器方案的可能性。虽然单光纤数据速率会较低，且可能存在一些热问题，但VCSEL阵列有望提供更好的功率和成本效率，适合“宽而慢”的应用。尽管如此，我们认为这并非英伟达目前的首要任务。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:23:02.600393",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.03,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE缩写首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子过长且翻译腔明显，存在被动与从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS注释顺序错误且重复了后续段落的ELS"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "readability",
+            "description": "列表式翻译较为生硬，可提升信息密度"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现注释格式不规范（缺少空格），且后续CWDM、DWDM注释重复"
+          },
+          {
+            "type": "tone",
+            "description": "程度词‘非常重要’力度略强于原文‘important’"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -283,11 +731,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：CPO 现状、挑战与解决方案",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821676",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：CPO 现状、挑战与解决方案",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -315,12 +771,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "波分复用（Wavelength Division Multiplexing，WDM）是指在同一根光纤中传输多个不同波长（或称lambda）的光。WDM的两种常见变体是粗波分复用（CWDM）和密集波分复用（DWDM）。CWDM通常承载较少的通道，通道间距相对较大（通常为20 nm），而DWDM则以极小的间距（通常小于1 nm）集成多条通道。CWDM较宽的通道间距限制了其容量，而DWDM较窄的间距可容纳40、80甚至超过100个通道。WDM至关重要，因为目前大多数提出的共封装光学（CPO）方案都受限于可连接到光引擎的光纤数量。有限的光纤对意味着必须最大化利用每一对光纤。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:23:02.600409",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.03,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.8,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "OE缩写首次出现未按术语表要求附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "译文句子过长且翻译腔明显，存在被动与从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS注释顺序错误且重复了后续段落的ELS"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "readability",
+            "description": "列表式翻译较为生硬，可提升信息密度"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现注释格式不规范（缺少空格），且后续CWDM、DWDM注释重复"
+          },
+          {
+            "type": "tone",
+            "description": "程度词‘非常重要’力度略强于原文‘important’"
+          }
+        ]
+      },
       "history": []
     }
   ]

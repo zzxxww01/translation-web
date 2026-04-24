@@ -1,7 +1,7 @@
 {
   "section_id": "25-key-approaches-for-scaling-ban",
   "title": "Key approaches for scaling bandwidth",
-  "title_translation": null,
+  "title_translation": "带宽扩容关键方案",
   "paragraphs": [
     {
       "id": "p000",
@@ -791,11 +791,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821203",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

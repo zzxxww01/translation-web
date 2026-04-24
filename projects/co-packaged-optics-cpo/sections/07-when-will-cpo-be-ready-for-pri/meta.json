@@ -1,7 +1,7 @@
 {
   "section_id": "07-when-will-cpo-be-ready-for-pri",
   "title": "When will CPO be ready for Primetime?",
-  "title_translation": null,
+  "title_translation": "CPO何时才能大规模商用？",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "那么，如果共封装光学（CPO）是解决方案，为什么英伟达不在Rubin Ultra中使用它，而只是首先将其用于横向扩展交换机？这主要是因为供应链尚不成熟、制造面临诸多挑战，以及客户对实际部署仍持观望态度。Quantum和Spectrum CPO交换机的推出，正是为了帮助供应链爬坡，并获取更多关于数据中心可靠性和可维护性的真实世界数据。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.363901",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -93,19 +157,89 @@
         "STRONG_1",
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token STRONG_1.",
+        "Missing token LINK_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在此期间，Meta在ECOC会议前后发布的CPO可靠性数据提供了一些有价值的信息。Meta与博通合作开展了这项研究，博通也发布了一些有用的演示文稿。在这项研究中，Meta进行了规模相当可观的测试，在15台Bailly 51.2T CPO交换机上累计运行了高达1,049k个400G端口设备小时，并公布了最大的非零KP4前向纠错（FEC）bin。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364078",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token STRONG_1.",
+            "Missing token LINK_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -164,11 +298,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Meta",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821371",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Meta",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -196,12 +338,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "该论文还解释道，在测试期间，链路中没有观察到任何故障或不可纠正码字（UCW），整个测试期间（累计高达1,049k个400G端口设备小时）仅观察到一次FEC bin大于10的情况。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364101",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -228,12 +434,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n然而，Meta并未止步于此。在ECOC会议上发表同一篇论文的演讲中，他们公布了扩展至15M个400G端口设备小时的结果。这些结果显示，在前4M个400G端口设备小时内没有出现UCW，同时还显示400G 2xFR4收发器的平均无故障时间（MTBF）为0.5-1M设备小时（全球2xFR4为550k），而CPO的MTBF为2.6M设备小时。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364117",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -292,11 +562,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Meta",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821396",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Meta",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -324,12 +602,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "虽然15M端口设备小时听起来是一个很大的数字，但其单位是400G端口小时。因此，一台51.2T交换机运行一小时相当于128个400G端口小时。15台51.2T交换机累计15M个400G端口小时，相当于7812个实际运行小时，约325天。事实上，这个15M小时的数字经常被简称为“小时”或“设备小时”，而省略了“端口”部分。虽然在4M端口设备小时内零故障和零UCW的统计数据非常有帮助，但行业需要在将目光转向CPO横向扩展交换机并投入数十亿美元之前，获得远超15台CPO交换机在实验室中测试11个月的更多数据。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364130",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -371,19 +713,87 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token LINK_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在动态的现场环境中运行数千台横向扩展交换机是完全不同的挑战，这些交换机在生产环境中的表现仍有待观察。生产环境中的温度波动可能高于实验室环境，从而导致元件性能或耐久性出现意料之外的变化。Meta自己的Llama 3论文提到数据中心存在1-2%的温度波动，这会对功耗波动产生不利影响——这种波动是否会以难以预料的方式影响整个网络结构？",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364208",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token LINK_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -457,18 +867,32 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Meta",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821406",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing tokenized translation for formatted paragraph."
+          ]
+        }
+      },
+      "confirmed": "来源：Meta",
       "confirmed_tokenized": null,
-      "confirmed_format_issues": [],
-      "status": "pending",
+      "confirmed_format_issues": [
+        "Missing tokenized translation for confirmed formatted paragraph."
+      ],
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -496,12 +920,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "即使是听起来平淡无奇的问题，例如数据中心内的灰尘，也让支持技术人员苦不堪言，他们需要花费大量时间清洁光纤端面。当然，CPO交换机前端有LC或MPO类型的可插拔连接器，但CPO交换机机箱内部的灰尘又该如何处理？0.06%的不可维护故障率听起来很有吸引力，但此类故障的影响范围（blast radius）为64个800G端口。本文主要关注基于FR光学的CPO交换机，而下一代CPO交换机将基于DR光学。这些只是已知的未知数，在现场测试中还可能出现更多未知的未知数。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364226",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -528,12 +1016,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "诚然，这些结果通过提供切实的可靠性数据，对说服行业人士产生了重要影响。我们在此的目的并非制造恐惧、不确定性和怀疑（FUD），而是呼吁进行更大规模的现场测试，以便行业能够快速理解和解决意外问题，从而为共封装光学（CPO）的更广泛采用铺平道路，尤其是在纵向扩展网络中。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364242",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -560,12 +1112,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "归根结底，英伟达的横向扩展共封装光学（CPO）产品发布，主要起到实战验证和供应链打通的作用，为后续真正的大规模部署做准备。我们认为，CPO在纵向扩展领域的部署规模将远超横向扩展，因为其在总体拥有成本（TCO）和性能/TCO方面的优势，在纵向扩展场景中要显著得多。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364255",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -592,12 +1208,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "此外，就横向扩展CPO而言，Rubin Ultra计划于2027年推出（我们预计实际落地时间可能推迟至2027年下半年），而供应链届时还无法量产数千万个CPO端点来满足GPU需求。即使这个时间表对英伟达来说也过于激进。这正是Feynman一代成为英伟达生态系统中CPO切入重点的原因。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364268",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -624,12 +1304,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "接下来，我们将深入讨论共封装光学（CPO）究竟是什么、其技术考量、主要挑战，以及当前产业生态的现状。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:07:37.364281",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.11,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构保留了英文并列结构，读起来略显生硬且翻译腔明显"
+          },
+          {
+            "type": "accuracy",
+            "description": "关键数字翻译错误"
+          },
+          {
+            "type": "readability",
+            "description": "数字单位表述不够自然，‘挂钟小时’属于生造翻译词"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确规定Scale-up → 纵向扩展，但此处译为‘纵向扩展网络’"
+          },
+          {
+            "type": "readability",
+            "description": "英文单词未翻译，直接保留在中文译文中"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然，‘实战演练和先行验证’稍显生硬"
+          },
+          {
+            "type": "tone",
+            "description": "括号内注释语气与整体冷静专业的声线略有偏差"
+          },
+          {
+            "type": "readability",
+            "description": "‘核心内涵’用词稍显抽象，可更直接"
+          }
+        ]
+      },
       "history": []
     }
   ]

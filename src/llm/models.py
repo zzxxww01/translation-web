@@ -31,7 +31,7 @@ MODEL_REGISTRY: Dict[str, Dict[str, Any]] = {
     },
 
     # VectorEngine Relay API
-    "deepseek-relay": {
+    "deepseek-v3.2": {
         "provider": "vectorengine",
         "real_model": "deepseek-v3.2",
         "description": "DeepSeek v3.2 中转 - 高性价比推理模型",
@@ -47,6 +47,12 @@ MODEL_REGISTRY: Dict[str, Dict[str, Any]] = {
         "provider": "vectorengine",
         "real_model": "claude-sonnet-4-20250514",
         "description": "Claude Sonnet 4 中转 - Anthropic 高质量模型",
+        "supports_thinking": False,
+    },
+    "grok-4": {
+        "provider": "vectorengine",
+        "real_model": "grok-4-20-non-reasoning",
+        "description": "Grok 4 中转 - xAI 推理模型",
         "supports_thinking": False,
     },
 }
@@ -74,7 +80,7 @@ def resolve_model_alias(alias: Optional[str]) -> Tuple[str, str, Dict[str, Any]]
         Tuple of (provider_name, real_model_name, model_config)
 
     Examples:
-        >>> resolve_model_alias("deepseek-relay")
+        >>> resolve_model_alias("deepseek-v3.2")
         ("vectorengine", "deepseek-v3.2", {...})
 
         >>> resolve_model_alias("pro-official")

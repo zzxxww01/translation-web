@@ -962,6 +962,144 @@ class GeminiProvider(LLMProvider):
             repaired = "\n".join(lines).strip()
         return repaired or None
 
+    def deep_analyze_with_term_verification(
+        self,
+        outline: str,
+        sampled_text: str,
+        high_freq_candidates: List[Dict[str, Any]],
+        timeout: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        合并深度分析和术语验证（方案6）
+
+        Args:
+            outline: 文档大纲
+            sampled_text: 采样文本
+            high_freq_candidates: 高频术语候选列表
+            timeout: 超时时间（秒）
+
+        Returns:
+            Dict: 合并分析结果
+        """
+        # 构建高频术语列表文本
+        high_freq_terms_list = "\n".join([
+            f"{i+1}. **{term['term']}** (出现 {term['frequency']} 次)"
+            for i, term in enumerate(high_freq_candidates)
+        ])
+
+        # 使用prompt_manager构建prompt
+        prompt = self.prompt_manager.get(
+            "longform/analysis/deep_analyze_with_terms",
+            outline=outline,
+            sampled_text=sampled_text,
+            high_freq_terms_list=high_freq_terms_list
+        )
+
+        # 调用LLM
+        response = self.generate(
+            prompt,
+            response_format="json",
+            temperature=0.3,
+            timeout=timeout
+        )
+
+        # 解析JSON响应
+        try:
+            result = json.loads(response)
+            return result
+        except json.JSONDecodeError as e:
+            logger.error(f"[Gemini] Failed to parse JSON response: {e}")
+            logger.error(f"[Gemini] Response: {response[:500]}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}")
+
+    def deep_analyze_document(
+        self,
+        outline: str,
+        sampled_text: str,
+        timeout: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        深度分析文档（不包含术语验证）
+
+        Args:
+            outline: 文档大纲
+            sampled_text: 采样文本
+            timeout: 超时时间（秒）
+
+        Returns:
+            Dict: 分析结果
+        """
+        # 使用prompt_manager构建prompt
+        prompt = self.prompt_manager.get(
+            "longform/analysis/deep_analyze",
+            outline=outline,
+            sampled_text=sampled_text
+        )
+
+        # 调用LLM
+        response = self.generate(
+            prompt,
+            response_format="json",
+            temperature=0.3,
+            timeout=timeout
+        )
+
+        # 解析JSON响应
+        try:
+            result = json.loads(response)
+            return result
+        except json.JSONDecodeError as e:
+            logger.error(f"[Gemini] Failed to parse JSON response: {e}")
+            logger.error(f"[Gemini] Response: {response[:500]}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}")
+
+    def verify_high_frequency_terms(
+        self,
+        sampled_text: str,
+        high_freq_candidates: List[Dict[str, Any]],
+        timeout: Optional[float] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        验证高频术语候选
+
+        Args:
+            sampled_text: 采样文本
+            high_freq_candidates: 高频术语候选列表
+            timeout: 超时时间（秒）
+
+        Returns:
+            List[Dict]: 验证通过的术语列表
+        """
+        # 构建高频术语列表文本
+        high_freq_terms_list = "\n".join([
+            f"{i+1}. **{term['term']}** (出现 {term['frequency']} 次)"
+            for i, term in enumerate(high_freq_candidates)
+        ])
+
+        # 使用prompt_manager构建prompt
+        prompt = self.prompt_manager.get(
+            "longform/analysis/verify_terms",
+            sampled_text=sampled_text,
+            high_freq_terms_list=high_freq_terms_list
+        )
+
+        # 调用LLM
+        response = self.generate(
+            prompt,
+            response_format="json",
+            temperature=0.3,
+            timeout=timeout
+        )
+
+        # 解析JSON响应
+        try:
+            result = json.loads(response)
+            return result.get("verified_terms", [])
+        except json.JSONDecodeError as e:
+            logger.error(f"[Gemini] Failed to parse JSON response: {e}")
+            logger.error(f"[Gemini] Response: {response[:500]}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}")
+
     def analyze(self, text: str) -> Dict[str, Any]:
         """
         鍒嗘瀽鏂囨湰锛屾彁鍙栨湳璇拰椋庢牸
@@ -1155,7 +1293,7 @@ class GeminiProvider(LLMProvider):
         )
 
         try:
-            response = self.generate(prompt, response_format="json", temperature=0.5)
+            response = self.generate(prompt, response_format="json", temperature=0.3)
             result = self._parse_json_response(response)
         except Exception as exc:
             logger.error("[Gemini] Batch translation failed: %s", exc)

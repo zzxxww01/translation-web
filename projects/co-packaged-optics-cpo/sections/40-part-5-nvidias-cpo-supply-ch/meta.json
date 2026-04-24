@@ -1,7 +1,7 @@
 {
   "section_id": "40-part-5-nvidias-cpo-supply-ch",
   "title": "Part 5: Nvidia’s CPO Supply Chain",
-  "title_translation": null,
+  "title_translation": "第五部分：英伟达CPO供应链",
   "paragraphs": [
     {
       "id": "p000",
@@ -42,19 +42,75 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n我们此前已讨论了各关键组件在共封装光学（CPO）系统中的作用，本节将聚焦英伟达的供应链，介绍相关企业及其组件物料清单（BOM）成本，重点列出激光源、外部激光源模块（External Laser Source, ELS）、光纤阵列（Fiber Array Unit, FAU）、FAU对准工具、FAU组装、光纤重排盒（Shuffle Box）、MPO连接器、MT插芯、光纤以及电光测试（E/O Testing）等环节的主要供应商。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:45:12.714010",
+          "tokenized_text": "**修订后的译文：**\n我们此前已讨论了各关键组件在共封装光学（CPO）系统中的作用，本节将聚焦英伟达的供应链，介绍相关企业及其组件物料清单（BOM）成本，重点列出[[[STRONG_1|激光源、外部激光源模块（External Laser Source, ELS）、光纤阵列（Fiber Array Unit, FAU）、FAU对准工具、FAU组装、光纤重排盒（Shuffle Box）、MPO连接器、MT插芯、光纤以及电光测试（E/O Testing）]]]等环节的主要供应商。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.97,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "BOM术语翻译不规范，未使用规定译法"
+          },
+          {
+            "type": "terminology",
+            "description": "部分关键缩写首次出现未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且存在翻译腔，列表结构被机械串联"
+          },
+          {
+            "type": "tone",
+            "description": "语气略显生硬，未能体现原文分析性、冷静且具有洞察力的专业声线"
+          },
+          {
+            "type": "readability",
+            "description": "术语翻译可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "术语表述不够准确和地道"
+          }
+        ]
+      },
       "history": []
     }
   ]

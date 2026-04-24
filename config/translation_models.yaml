@@ -1,0 +1,57 @@
+# Translation Model Configuration
+# 翻译模型配置 - 支持按阶段配置不同模型
+
+# 默认配置：按阶段使用不同模型（基于测试结果优化）
+default:
+  # Phase 0: 预扫描和术语提取
+  phase0_prescan:
+    model: "grok-4-20-non-reasoning"
+    temperature: 0.3
+    description: "术语提取，Grok结构化任务表现好"
+
+  # Phase 1: 初稿翻译
+  phase1_draft:
+    model: "deepseek-v3"
+    temperature: 0.3
+    description: "初稿翻译，DeepSeek术语准确+表达自然"
+
+  # Phase 2: 精修和润色
+  phase2_refine:
+    model: "deepseek-v3"
+    temperature: 0.3
+    description: "精修润色，DeepSeek术语准确+表达自然"
+
+  # Phase 3: 质量报告生成
+  phase3_review:
+    model: "gemini-preview"
+    temperature: 0.3
+    description: "质量报告生成，Gemini Preview 审阅能力强"
+
+# 用户可选的模型覆盖（全流程使用同一模型）
+model_overrides:
+  deepseek-v3:
+    all_phases:
+      model: "deepseek-v3"
+      temperature: 0.3
+
+  grok-4-20-non-reasoning:
+    all_phases:
+      model: "grok-4-20-non-reasoning"
+      temperature: 0.3
+
+  pro-official:
+    all_phases:
+      model: "pro-official"
+      temperature: 0.3
+
+# 快速模式（牺牲质量换速度）
+fast:
+  all_phases:
+    model: "flash-official"
+    temperature: 0.5
+
+# 高质量模式（所有阶段用最好的模型）
+premium:
+  all_phases:
+    model: "deepseek-v3"
+    temperature: 0.3

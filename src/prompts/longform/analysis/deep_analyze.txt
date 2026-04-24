@@ -1,0 +1,62 @@
+你是技术文档分析专家。请深度分析以下文档，理解其主题、风格和结构。
+
+## 采样文本
+{sampled_text}
+
+## 章节大纲
+{outline}
+
+请分析：
+1. **主题**：文档的核心主题（一句话概括）
+2. **关键论点**：文档的3-5个主要论点
+3. **结构**：文档的组织方式和逻辑流
+4. **风格**：
+   - 语气（informative/persuasive/instructional等）
+   - 目标受众（technical_professionals/general_audience等）
+   - 翻译语气建议
+
+## 输出格式
+
+返回JSON格式：
+
+```json
+{{
+  "theme": "文档的核心主题（一句话概括）",
+  "key_arguments": ["论点1", "论点2", "论点3"],
+  "structure_summary": "文档结构的简要描述",
+  "style": {{
+    "tone": "informative",
+    "target_audience": "technical_professionals",
+    "translation_voice": "保持专业、准确、流畅"
+  }},
+  "sampled_terms": [
+    {{
+      "term": "CPO",
+      "context_meaning": "Co-Packaged Optics，共封装光学技术",
+      "translation": "共封装光学",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "核心技术术语，首次出现需注释全称"
+    }}
+  ],
+  "challenges": [
+    {{
+      "location": "技术概念密集段落",
+      "issue": "术语密集，需要准确翻译",
+      "suggestion": "保持术语一致性，首次出现时注释"
+    }}
+  ],
+  "guidelines": [
+    "保持技术术语的准确性",
+    "首次出现的缩写需要注释全称",
+    "保持专业、正式的语气"
+  ]
+}}
+```
+
+**重要提示**：
+- `sampled_terms`：从采样文本中提取的专业术语（约20-30个）
+- 术语翻译策略：
+  - `keep_original`：保持原文（如API、GPU、AI）
+  - `first_annotate`：首次出现时注释，后续单独使用（如TSMC → 台积电 (TSMC)）
+  - `translate`：直接翻译为中文（如bandwidth → 带宽）

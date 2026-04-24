@@ -1,7 +1,7 @@
 {
   "section_id": "01-table-of-contents-and-guide-to",
   "title": "Table of Contents and Guide to this Article",
-  "title_translation": null,
+  "title_translation": "本文目录与导读",
   "paragraphs": [
     {
       "id": "p000",
@@ -42,18 +42,26 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "我们将本文划分为五个部分——读者可挑选最感兴趣或最相关的章节重点阅读。",
+          "model": "default",
+          "created_at": "2026-04-22T15:18:41.363242",
+          "tokenized_text": "[[[STRONG_1|我们将本文划分为五个部分——读者可挑选最感兴趣或最相关的章节重点阅读。]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -115,18 +123,26 @@
         "STRONG_1",
         "STRONG_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "在第一部分：CPO 的 TCO（总拥有成本）分析中，我们将首先分析采用 CPO 将如何改变 scale-out 和 scale-up 网络的 TCO。我们认为，TCO、可靠性以及设备供应商的议价能力，将是 scale-out 网络采用 CPO 的首要考量因素。我们将探讨 CPO 在 scale-out 领域是否已具备大规模商用的条件，并结合目前掌握的解决方案可靠性数据，例如 ECOC 2025 上展示的Meta 的 CPO scale-out 交换机研究。",
+          "model": "default",
+          "created_at": "2026-04-22T15:19:38.589615",
+          "tokenized_text": "在[[[STRONG_1|第一部分：CPO 的 TCO（总拥有成本）分析]]]中，我们将首先分析采用 CPO 将如何改变 scale-out 和 scale-up 网络的 TCO。我们认为，TCO、可靠性以及设备供应商的议价能力，将是 scale-out 网络采用 CPO 的首要考量因素。我们将探讨 CPO 在 scale-out 领域是否已具备大规模商用的条件，并结合目前掌握的解决方案可靠性数据，例如 ECOC 2025 上展示的[[[STRONG_2|Meta 的 CPO scale-out 交换机研究]]]。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -226,18 +242,26 @@
         "STRONG_3",
         "STRONG_4"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "在第二部分：CPO 简介与实现中，我们将深入探讨 CPO 的工作原理。本节将梳理市场的演进历程，包括从铜缆到共封装铜缆，以及从带数字信号处理器（DSP）的光模块，到线性可插拔光模块（LPO），再到 CPO的演变，并分析采用 CPO 的驱动力与核心论点。此外，我们还将讨论SerDes 扩展瓶颈与 Wide I/O——探讨后者作为 SerDes 替代方案的潜力，尤其是在与 CPO 结合使用时的表现。",
+          "model": "default",
+          "created_at": "2026-04-22T15:21:37.075587",
+          "tokenized_text": "在[[[STRONG_1|第二部分：CPO 简介与实现]]]中，我们将深入探讨 CPO 的工作原理。本节将梳理市场的演进历程，包括[[[STRONG_2|从铜缆到共封装铜缆]]]，以及[[[STRONG_3|从带数字信号处理器（DSP）的光模块，到线性可插拔光模块（LPO），再到 CPO]]]的演变，并分析采用 CPO 的驱动力与核心论点。此外，我们还将讨论[[[STRONG_4|SerDes 扩展瓶颈与 Wide I/O]]]——探讨后者作为 SerDes 替代方案的潜力，尤其是在与 CPO 结合使用时的表现。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -413,18 +437,26 @@
         "STRONG_7",
         "STRONG_8"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "在第三部分：推动 CPO 走向市场中，我们将介绍促使 CPO 获得市场认可并实现商用的关键技术。我们首先讨论主机与光引擎的封装，详细解析台积电（TSMC）COUPE技术及其为何能脱颖而出成为首选的集成方案。随后，我们将深入剖析光纤连接单元（FAU）与光纤耦合技术，并对比端面耦合与光栅耦合器的差异。此外，本节还将探讨多种调制器类型，如马赫-曾德尔调制器（MZM）、微环调制器（MRM）和电吸收调制器（EAM）。本节最后将阐明业界采用 CPO 的核心原因，即 CPO 提供了扩展带宽的多种路径：增加光纤连接数量、使用波分复用（WDM）以及更高阶的调制技术。",
+          "model": "default",
+          "created_at": "2026-04-22T15:21:58.656554",
+          "tokenized_text": "在[[[STRONG_1|第三部分：推动 CPO 走向市场]]]中，我们将介绍促使 CPO 获得市场认可并实现商用的关键技术。我们首先讨论主机与光引擎的封装，详细解析[[[STRONG_2|台积电（TSMC）COUPE]]]技术及其为何能脱颖而出成为首选的集成方案。随后，我们将深入剖析[[[STRONG_3|光纤连接单元（FAU）]]]与[[[STRONG_4|光纤耦合]]]技术，并对比[[[STRONG_5|端面耦合]]]与[[[STRONG_6|光栅耦合器]]]的差异。此外，本节还将探讨多种调制器类型，如[[[STRONG_7|马赫-曾德尔调制器（MZM）、微环调制器（MRM）和电吸收调制器（EAM）]]]。本节最后将阐明业界采用 CPO 的核心原因，即 CPO 提供了[[[STRONG_8|扩展带宽的多种路径]]]：增加光纤连接数量、使用波分复用（WDM）以及更高阶的调制技术。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -505,18 +537,26 @@
         "STRONG_2",
         "STRONG_3"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "在第四部分：CPO 产品的现状与未来中，我们将分析目前市面上的 CPO 产品及其相关供应链。我们将首先探讨英伟达（NVIDIA）与博通的解决方案，随后再讨论其他主要的 CPO 企业。我们将逐一介绍Ayar Labs、Nubis、Celestial AI、Lightmatter、Xscape Photonics、Ranovus 以及 Scintil，详细剖析各家供应商的解决方案，并对每家公司技术路线的优劣取舍给出我们的分析判断。",
+          "model": "default",
+          "created_at": "2026-04-22T15:22:17.052691",
+          "tokenized_text": "在[[[STRONG_1|第四部分：CPO 产品的现状与未来]]]中，我们将分析目前市面上的 CPO 产品及其相关供应链。我们将首先探讨[[[STRONG_2|英伟达（NVIDIA）与博通的解决方案]]]，随后再讨论其他主要的 CPO 企业。我们将逐一介绍[[[STRONG_3|Ayar Labs、Nubis、Celestial AI、Lightmatter、Xscape Photonics、Ranovus 以及 Scintil，]]]详细剖析各家供应商的解决方案，并对每家公司技术路线的优劣取舍给出我们的分析判断。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -578,18 +618,26 @@
         "STRONG_1",
         "STRONG_2"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "最后，本报告将在第五部分：英伟达 CPO 供应链进行总结。我们将详细解析英伟达 CPO 生态的供应链，并列举激光源、ELS 模块、FAU、FAU 对准设备、FAU 组装、Shuffle Box、MPO 连接器、MT 插芯、光纤及光电测试等环节的关键供应商。",
+          "model": "default",
+          "created_at": "2026-04-22T15:23:06.271015",
+          "tokenized_text": "最后，本报告将在[[[STRONG_1|第五部分：英伟达 CPO 供应链]]]进行总结。我们将详细解析英伟达 CPO 生态的供应链，并列举[[[STRONG_2|激光源、ELS 模块、FAU、FAU 对准设备、FAU 组装、Shuffle Box、MPO 连接器、MT 插芯、光纤及光电测试]]]等环节的关键供应商。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     }

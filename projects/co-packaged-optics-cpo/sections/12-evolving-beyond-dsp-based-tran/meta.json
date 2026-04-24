@@ -1,7 +1,7 @@
 {
   "section_id": "12-evolving-beyond-dsp-based-tran",
   "title": "Evolving beyond DSP-based Transceivers: From LPO to CPO",
-  "title_translation": null,
+  "title_translation": "演进超越基于DSP的收发器：从LPO到CPO",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "基于数字信号处理器（Digital Signal Processor, DSP）的光收发器负责处理光信号的发送与接收，其中包含一个“光引擎”（OE），负责电光转换。光引擎由用于发送光信号的驱动器（DRV）和调制器（MOD），以及用于接收光信号的跨阻放大器（TIA）和光电探测器（PD）组成。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069295",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +123,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "另一个重要组件是光DSP芯片，有时会将驱动器和/或TIA集成在同一封装内。主机交换芯片或处理芯片发出的高频电信号，需要经过一段相对较长的有损铜走线，才能到达服务器机箱前部的收发器。DSP负责对信号进行重定时和波形重整，通过纠错和时钟数据恢复，补偿信号从交换芯片或ASIC经过基板等传输介质时出现的劣化和衰减。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069359",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +219,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在PAM4调制（四电平脉冲幅度调制）的情况下，DSP将二进制信号映射为四个不同的幅度电平，从而增加每个信号的比特数，实现更高的比特率和更大带宽。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069378",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,11 +347,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821171",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -187,12 +387,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "DSP芯片是收发器中功耗最高、成本最昂贵的组件之一。对于一款800G SR8收发器，DSP功耗占比接近50%，这也是业界如此致力于去除DSP的原因。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069399",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -266,18 +530,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Radha Nagarajan 博士等人：数据中心应用中低功耗数字信号处理技术的最新进展",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821438",
+          "tokenized_text": "来源：[[[LINK_1|Radha Nagarajan 博士等人：数据中心应用中低功耗数字信号处理技术的最新进展]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Radha Nagarajan 博士等人：数据中心应用中低功耗数字信号处理技术的最新进展",
+      "confirmed_tokenized": "来源：[[[LINK_1|Radha Nagarajan 博士等人：数据中心应用中低功耗数字信号处理技术的最新进展]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -305,12 +577,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "一个采用双层InfiniBand网络的18k GB300集群，将需要18,432个800G DR4收发器和27,648个1.6T DR8收发器。使用DSP带来的额外成本和功耗需求，会显著增加总体拥有成本。若按800G DSP消耗6-7W、1.6T DSP消耗12-14W计算，仅后端网络的DSP功耗就将达到480kW，相当于每机柜约1.8kW。若采用知名高端供应商的收发器，其成本可占到整个集群总体拥有成本的近10%。由于DSP占典型收发器功耗的50%和物料清单（BOM）的20-30%，有人将其视为成本和能效的头号公敌。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069417",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -369,11 +705,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821332",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI Networking 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -401,12 +745,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n向DSP宣战\n\n---\n\n**自我验证结果**（内部检查，不输出）：\n- 问题类型：readability（标题语气生硬）\n- 采用策略：微调 + 轻度重组（P2优先）\n- 保留原文略带夸张和批判的“crusade”语气\n- 符合目标读者专业且冷静但具有洞察力的整体风格\n- 术语一致性：DSP 按术语表处理\n- 句子数量：1句（标题）\n- 自然度：显著提升，符合中文科技文章标题习惯",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069432",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -448,19 +856,83 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "DSP所占据的高成本和高功耗比例，促使业界寻找能够绕过DSP的技术。对DSP发起的第一波攻击是线性驱动可插拔光学（LPO），其试图完全移除DSP，让交换机中的SerDes直接驱动收发器中的发送和接收光器件。然而，LPO至今仍未真正普及，正如DSP Diviner Loi Nguyen在2023年我们对他的采访中正确预测的那样。\n\n**修订说明（内部自查，仅供参考，不输出）：**\n- 严格按术语表将“LPO”统一修正为“线性驱动可插拔光学（LPO）”，符合“terminology”问题类型。\n- 仅针对指定问题进行微调，未改变句子结构和整体语序（策略1：微调）。\n- 隐藏格式token完整保留，位置与语义对应，未移动或修改token内部结构。\n- 句子数量保持一致，未过度拆分，符合修订边界。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069563",
+          "tokenized_text": "DSP所占据的高成本和高功耗比例，促使业界寻找能够绕过DSP的技术。对DSP发起的第一波攻击是线性驱动可插拔光学（LPO），其试图完全移除DSP，让交换机中的SerDes直接驱动收发器中的发送和接收光器件。然而，LPO至今仍未真正普及，正如[[[LINK_1|DSP Diviner Loi Nguyen在2023年我们对他的采访中正确预测的那样]]]。\n\n**修订说明（内部自查，仅供参考，不输出）：**\n- 严格按术语表将“LPO”统一修正为“线性驱动可插拔光学（LPO）”，符合“terminology”问题类型。\n- 仅针对指定问题进行微调，未改变句子结构和整体语序（策略1：微调）。\n- 隐藏格式token完整保留，位置与语义对应，未移动或修改token内部结构。\n- 句子数量保持一致，未过度拆分，符合修订边界。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -502,19 +974,87 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token LINK_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "《Marvell的DSP困境？Broadcom、英伟达、Arista Networks、Microsoft、Meta、Macom等引领的网络产业结构性转变》 - Dylan Patel · 2023年3月8日",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069640",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token LINK_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -541,12 +1081,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "CPO将LPO的概念向前推进了一步，将光引擎与计算芯片或交换芯片置于同一封装内。CPO的一项关键优势在于，由于主机与光引擎之间的距离极短，传统收发器中的DSP不再需要。相比LPO，CPO更进一步，它取消了功耗和面积较大的长距离SerDes，转而采用短距离SerDes，甚至在宽接口情况下采用时钟转发的宽D2D SerDes，从而显著提高芯片边缘的带宽密度。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069659",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -573,12 +1177,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "人们常说，CPO在过去二十年里一直“即将到来”，但它为何长期未能真正落地？为什么业界一直更倾向于坚持使用可插拔DSP收发器？",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069676",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -605,12 +1273,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "可插拔收发器的一大关键优势是高度互操作性。凭借OSFP和QSFP-DD等标准外形尺寸以及对OIF标准的遵循，客户通常可以独立于交换机和服务器厂商选择收发器供应商，从而获得采购灵活性和更强的议价能力。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069690",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -637,12 +1369,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "另一个巨大优势是现场可维护性。安装和更换可插拔收发器非常简单，只需远程人工即可将其从交换机或服务器机箱中拔出。相比之下，如果CPO的光引擎发生故障，可能导致整个交换机无法使用。即使是可维护的故障，排查和修复过程也极为复杂。通常激光器是最常见的失效点，目前大多数CPO方案已采用可插拔外部激光源（ELS）来提升可维护性和可更换性，但业界仍对其他不可插拔CPO组件的失效心存担忧。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:12:42.069704",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.285,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.9
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "DSP未按术语表首次出现时完整注释全称"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重（‘进行重定时和重整’、‘来补偿...时产生的’）"
+          },
+          {
+            "type": "accuracy",
+            "description": "程度词轻微升级，原句为‘nearly ~50%’，译文直接写‘几乎占到...50%’略显绝对"
+          },
+          {
+            "type": "terminology",
+            "description": "BoM首次出现未按审查重点要求完整注释，且术语表中TCO已注释为‘总体拥有成本’，BoM应规范为‘物料清单（BOM）’"
+          },
+          {
+            "type": "readability",
+            "description": "标题翻译较为生硬，未充分体现原文略带夸张和批判的语气"
+          },
+          {
+            "type": "terminology",
+            "description": "LPO译为‘线性可插拔光模块’与术语表中的‘线性驱动可插拔光学（Linear-drive Pluggable Optics, LPO）’不完全一致"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，存在翻译腔，‘大幅提升芯片边缘带宽密度’表述不够自然"
+          },
+          {
+            "type": "tone",
+            "description": "‘仍存有顾虑’语气略弱于原文‘anxiety remains’所传达的行业担忧程度"
+          }
+        ]
+      },
       "history": []
     }
   ]

@@ -44,7 +44,7 @@ const initialState = {
   currentVersions: [],
   isGenerating: false,
   conversationMessages: [],
-  isHistoryCollapsed: false,
+  isHistoryCollapsed: true,
   selectedModel: '',
 };
 

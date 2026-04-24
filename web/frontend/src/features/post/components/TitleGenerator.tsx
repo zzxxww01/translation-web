@@ -50,6 +50,7 @@ export function TitleGenerator({ onGenerate, isLoading, canGenerate }: TitleGene
             onChange={(e) => setInstruction(e.target.value)}
             placeholder="标题要求（可选），例如：突出核心观点，语气克制"
             disabled={isLoading}
+            className="w-full"
           />
           <p className="mt-1 text-xs text-muted-foreground">
             写一两个词即可，系统会自动补全为完整 prompt

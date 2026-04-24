@@ -1,7 +1,7 @@
 {
   "section_id": "38-ranovus",
   "title": "Ranovus",
-  "title_translation": null,
+  "title_translation": "拉诺维斯",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Ranovus专注于光学芯粒技术及激光器设计制造。他们已沿多条技术路线完成产品流片，包括GlobalFoundries的单片式共封装光学（Co-packaged Optics, CPO）产品以及台积电（TSMC）的光子集成电路（PIC）流片。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:43:21.189445",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.8149999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.4,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语不一致且首次出现未按要求完整注释"
+          },
+          {
+            "type": "terminology",
+            "description": "关键技术术语被意译为“端到端解决方案”，与术语表及上下文不符"
+          },
+          {
+            "type": "terminology",
+            "description": "术语首次出现未提供中文全称解释"
+          },
+          {
+            "type": "readability",
+            "description": "长句未有效拆分，存在翻译腔和逻辑跳跃"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“XPU”和“Hyperscalers”未按行业习惯处理，句子结构生硬"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有偏差"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +119,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "与其他专注于两端对接解决方案的CPO供应商不同，Ranovus专注于开发可互操作系统，并将以太网标准互操作性作为核心差异化点。他们在OCP 2024上与联发科合作，展示了8x100G DR8光互操作性，证明可与多家第三方供应商的标准8x100G可插拔模块实现互操作。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:43:21.189527",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.8149999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.4,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语不一致且首次出现未按要求完整注释"
+          },
+          {
+            "type": "terminology",
+            "description": "关键技术术语被意译为“端到端解决方案”，与术语表及上下文不符"
+          },
+          {
+            "type": "terminology",
+            "description": "术语首次出现未提供中文全称解释"
+          },
+          {
+            "type": "readability",
+            "description": "长句未有效拆分，存在翻译腔和逻辑跳跃"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“XPU”和“Hyperscalers”未按行业习惯处理，句子结构生硬"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有偏差"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +211,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Ranovus的Odin光引擎采用微环谐振器调制器，能够以PAM4调制提供高达64通道的100Gbit/s传输。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:43:21.189558",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.8149999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.4,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语不一致且首次出现未按要求完整注释"
+          },
+          {
+            "type": "terminology",
+            "description": "关键技术术语被意译为“端到端解决方案”，与术语表及上下文不符"
+          },
+          {
+            "type": "terminology",
+            "description": "术语首次出现未提供中文全称解释"
+          },
+          {
+            "type": "readability",
+            "description": "长句未有效拆分，存在翻译腔和逻辑跳跃"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“XPU”和“Hyperscalers”未按行业习惯处理，句子结构生硬"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有偏差"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,11 +335,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Ranovus",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.822094",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Ranovus",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -187,12 +375,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Ranovus的上市策略以提供客户所需的互操作解决方案为核心。目前这意味着100G PAM4 DR光器件，但微环谐振器调制技术的采用为其转向其他方案打开了通道，例如采用56 Gbaud NRZ，并通过波分复用（WDM）结合4个波长，在每对光纤上实现400G传输。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:43:21.189583",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.8149999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.4,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语不一致且首次出现未按要求完整注释"
+          },
+          {
+            "type": "terminology",
+            "description": "关键技术术语被意译为“端到端解决方案”，与术语表及上下文不符"
+          },
+          {
+            "type": "terminology",
+            "description": "术语首次出现未提供中文全称解释"
+          },
+          {
+            "type": "readability",
+            "description": "长句未有效拆分，存在翻译腔和逻辑跳跃"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“XPU”和“Hyperscalers”未按行业习惯处理，句子结构生硬"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有偏差"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -219,12 +467,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Ranovus已在800G芯粒上与AMD完成互操作验证，并携手联发科推出Odin直接驱动CPO 3.0光引擎，作为芯粒解决方案，供超大规模云厂商未来定制的硅基XPU使用。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:43:21.189610",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.8149999999999995,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.4,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语不一致且首次出现未按要求完整注释"
+          },
+          {
+            "type": "terminology",
+            "description": "关键技术术语被意译为“端到端解决方案”，与术语表及上下文不符"
+          },
+          {
+            "type": "terminology",
+            "description": "术语首次出现未提供中文全称解释"
+          },
+          {
+            "type": "readability",
+            "description": "长句未有效拆分，存在翻译腔和逻辑跳跃"
+          },
+          {
+            "type": "terminology",
+            "description": "术语“XPU”和“Hyperscalers”未按行业习惯处理，句子结构生硬"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有偏差"
+          }
+        ]
+      },
       "history": []
     }
   ]

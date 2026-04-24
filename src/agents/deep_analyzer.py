@@ -17,6 +17,8 @@ Translation Agent - Deep Analyzer
 
 from typing import List, Optional, Dict, Callable
 import logging
+import re
+from collections import Counter
 
 from ..core.models import (
     Section,
@@ -34,14 +36,17 @@ logger = logging.getLogger(__name__)
 class DeepAnalyzer:
     """全文深度分析器"""
 
-    ANALYSIS_SAMPLE_STEPS = (18000, 12000, 8000, 5000)
-    ANALYSIS_TIMEOUT_STEPS = (45, 60, 90, 120)
-    SECTION_ROLE_TIMEOUT = 45
+    ANALYSIS_SAMPLE_STEPS = (2000, 1500, 1000, 800)
+    # 方案6合并调用需要更长的超时时间（深度分析+术语验证）
+    ANALYSIS_TIMEOUT_STEPS = (300, 420, 600)
+    SECTION_ROLE_TIMEOUT = 180
+    # 高频术语候选数量限制
+    MAX_HIGH_FREQ_TERMS = 30
 
     def __init__(
         self,
         llm_provider: LLMProvider,
-        max_sample_chars: int = 18000
+        max_sample_chars: int = 2000
     ):
         """
         初始化深度分析器
@@ -54,16 +59,83 @@ class DeepAnalyzer:
         self.max_sample_chars = max_sample_chars
         self.smart_sampler = create_smart_sampler(max_total_chars=max_sample_chars)
 
+    def extract_high_frequency_terms(
+        self,
+        sections: List[Section],
+        min_frequency: int = 5
+    ) -> tuple[List[str], Dict[str, int]]:
+        """
+        全文正则扫描提取高频术语候选
+
+        Args:
+            sections: 章节列表
+            min_frequency: 最小频率阈值（默认5次）
+
+        Returns:
+            tuple[List[str], Dict[str, int]]: (高频术语列表, 术语频率字典)
+        """
+        # 1. 提取全文
+        full_text = '\n'.join([
+            p.source
+            for s in sections
+            for p in s.paragraphs
+        ])
+
+        # 2. 应用正则规则提取候选术语
+        candidates = []
+
+        # 规则1：全大写缩写（2-6个字母）
+        # 示例：TSMC, ASIC, SerDes, CPO, AI, GPU, EUV
+        pattern1 = r'\b[A-Z]{2,6}\b'
+        candidates.extend(re.findall(pattern1, full_text))
+
+        # 规则2：驼峰命名
+        # 示例：TeraPHY, SuperNova, PowerBudget, SiPho
+        pattern2 = r'\b[A-Z][a-z]+(?:[A-Z][a-z]+)+\b'
+        candidates.extend(re.findall(pattern2, full_text))
+
+        # 规则3：带连字符的专有名词
+        # 示例：Co-Packaged, Multi-Mode, Single-Mode
+        pattern3 = r'\b[A-Z][a-z]+-[A-Z][a-z]+(?:-[A-Z][a-z]+)*\b'
+        candidates.extend(re.findall(pattern3, full_text))
+
+        # 规则4：技术术语模式（首字母大写的连续词）
+        # 示例：Silicon Photonics, Optical Engine, Pluggable Optics
+        pattern4 = r'\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+\b'
+        candidates.extend(re.findall(pattern4, full_text))
+
+        # 3. 统计频率
+        term_freq = Counter(candidates)
+
+        # 4. 过滤高频术语（≥min_frequency次）
+        high_freq_terms = [
+            term
+            for term, count in term_freq.most_common()
+            if count >= min_frequency
+        ]
+
+        logger.info(
+            f"Regex scan: extracted {len(candidates)} candidates, "
+            f"{len(high_freq_terms)} high-frequency terms (≥{min_frequency} occurrences)"
+        )
+
+        return high_freq_terms, dict(term_freq)
+
     def analyze(
         self,
         sections: List[Section],
         should_cancel: Optional[Callable[[], bool]] = None,
     ) -> ArticleAnalysis:
         """
-        执行全文深度分析
+        执行全文深度分析（增强版）
+
+        新增功能：
+        1. 全文正则扫描提取高频术语
+        2. 合并深度分析和术语验证为单次LLM调用
 
         Args:
             sections: 章节列表
+            should_cancel: 取消检查函数
 
         Returns:
             ArticleAnalysis: 深度分析结果
@@ -71,7 +143,20 @@ class DeepAnalyzer:
         # 构建章节大纲
         sections_outline = self._build_sections_outline(sections)
 
-        result = None
+        # ========== 新增：步骤0 - 全文正则扫描 ==========
+        logger.info("Phase 0.1: Extracting high-frequency terms via regex scan")
+        high_freq_terms, term_freq = self.extract_high_frequency_terms(sections)
+
+        # 限制高频术语数量，避免prompt过长
+        if len(high_freq_terms) > self.MAX_HIGH_FREQ_TERMS:
+            logger.info(f"Limiting high-frequency terms from {len(high_freq_terms)} to {self.MAX_HIGH_FREQ_TERMS}")
+            high_freq_terms = high_freq_terms[:self.MAX_HIGH_FREQ_TERMS]
+
+        logger.info(f"Extracted {len(high_freq_terms)} high-frequency terms")
+
+        # ========== 修改：步骤1 - 拆分调用（深度分析 + 术语验证）==========
+        deep_analysis_result = None
+        verified_terms = []
         last_error: Exception | None = None
         sample_steps = [self.max_sample_chars, *self.ANALYSIS_SAMPLE_STEPS]
         deduped_steps = []
@@ -79,41 +164,122 @@ class DeepAnalyzer:
             if sample_chars not in deduped_steps:
                 deduped_steps.append(sample_chars)
 
+        # 步骤1: 并发执行深度分析和术语验证
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        import time
+
+        # 准备高频术语候选列表
+        high_freq_candidates = [
+            {"term": term, "frequency": term_freq[term]}
+            for term in high_freq_terms
+        ]
+
+        # 步骤1.1: 深度分析文档（带重试）
         for attempt_index, sample_chars in enumerate(deduped_steps):
             self._raise_if_cancelled(should_cancel)
             timeout = self.ANALYSIS_TIMEOUT_STEPS[min(attempt_index, len(self.ANALYSIS_TIMEOUT_STEPS) - 1)]
+
             try:
+                start_time = time.time()
                 full_text = self._extract_full_text(sections, max_length=sample_chars)
+                actual_sample_length = len(full_text)
+
                 logger.info(
-                    "Deep analysis attempt %s with sample_chars=%s timeout=%s",
+                    "Phase 0.2: Concurrent execution - attempt %s/%s: "
+                    "sample_chars=%s actual_length=%s timeout=%s model=%s",
                     attempt_index + 1,
+                    len(deduped_steps),
                     sample_chars,
+                    actual_sample_length,
                     timeout or "default",
-                )
-                result = self.llm.deep_analyze(full_text, sections_outline, timeout=timeout)
-                break
-            except Exception as exc:
-                last_error = exc
-                if attempt_index == len(deduped_steps) - 1 or not self._should_retry_with_smaller_sample(exc):
-                    raise
-                logger.warning(
-                    "Deep analysis attempt %s failed with sample_chars=%s: %s; retrying with a smaller sample",
-                    attempt_index + 1,
-                    sample_chars,
-                    exc,
+                    getattr(self.llm, 'model_name', 'unknown'),
                 )
 
-        if result is None:
+                # 并发执行两个独立的LLM调用
+                with ThreadPoolExecutor(max_workers=2) as executor:
+                    # 提交任务1: 深度分析文档
+                    future_deep = executor.submit(
+                        self.llm.deep_analyze_document,
+                        outline=sections_outline,
+                        sampled_text=full_text,
+                        timeout=timeout
+                    )
+
+                    # 提交任务2: 验证高频术语
+                    future_terms = executor.submit(
+                        self.llm.verify_high_frequency_terms,
+                        sampled_text=full_text,
+                        high_freq_candidates=high_freq_candidates,
+                        timeout=timeout
+                    )
+
+                    # 等待两个任务完成
+                    deep_analysis_result = None
+                    verified_terms = []
+
+                    for future in as_completed([future_deep, future_terms], timeout=timeout*2 if timeout else None):
+                        self._raise_if_cancelled(should_cancel)
+
+                        if future == future_deep:
+                            try:
+                                deep_analysis_result = future.result()
+                                sampled_terms_count = len(deep_analysis_result.get("sampled_terms", []))
+                                logger.info(f"Phase 0.2a SUCCESS: sampled_terms={sampled_terms_count}")
+                            except Exception as exc:
+                                logger.error(f"Phase 0.2a FAILED: {str(exc)[:200]}")
+                                raise
+
+                        elif future == future_terms:
+                            try:
+                                verified_terms = future.result()
+                                verified_count = len([t for t in verified_terms if t.get("is_technical_term", False)])
+                                logger.info(f"Phase 0.2b SUCCESS: verified_terms={verified_count}")
+                            except Exception as exc:
+                                # 术语验证失败不影响整体流程
+                                logger.warning(f"Phase 0.2b FAILED: {str(exc)[:200]}, continuing without verified terms")
+                                verified_terms = []
+
+                elapsed = time.time() - start_time
+                logger.info(f"Phase 0.2 CONCURRENT SUCCESS: total_elapsed={elapsed:.1f}s")
+                break
+
+            except Exception as exc:
+                elapsed = time.time() - start_time
+                last_error = exc
+                if attempt_index == len(deduped_steps) - 1 or not self._should_retry_with_smaller_sample(exc):
+                    logger.error(
+                        "Phase 0.2 FAILED: attempt=%s/%s elapsed=%.1fs error=%s",
+                        attempt_index + 1,
+                        len(deduped_steps),
+                        elapsed,
+                        str(exc)[:200],
+                    )
+                    raise
+                logger.warning(
+                    "Phase 0.2 attempt %s/%s TIMEOUT/ERROR after %.1fs: %s; retrying with smaller sample",
+                    attempt_index + 1,
+                    len(deduped_steps),
+                    elapsed,
+                    str(exc)[:100],
+                )
+
+        if deep_analysis_result is None:
             if last_error is not None:
                 raise last_error
             raise RuntimeError("Deep analysis returned no result")
 
         self._raise_if_cancelled(should_cancel)
 
-        # 解析基础分析结果
-        analysis = self._parse_analysis_result(result, sections)
+        # 合并结果
+        result = deep_analysis_result.copy()
+        result["verified_high_freq_terms"] = verified_terms
 
-        # 优化：一次性分析所有章节角色（减少 LLM 调用）
+        self._raise_if_cancelled(should_cancel)
+
+        # 解析基础分析结果（修改：处理新的响应格式）
+        analysis = self._parse_combined_analysis_result(result, sections)
+
+        # 优化：一次性分析所有章节角色（保持不变）
         section_roles = self._analyze_all_section_roles(
             sections,
             analysis,
@@ -204,7 +370,7 @@ class DeepAnalyzer:
         sections: List[Section]
     ) -> ArticleAnalysis:
         """
-        解析分析结果
+        解析分析结果（旧版，保留兼容性）
 
         Args:
             result: LLM 返回的分析结果
@@ -251,6 +417,114 @@ class DeepAnalyzer:
             challenges.append(challenge)
 
         # 统计信息
+        total_paragraphs = sum(len(s.paragraphs) for s in sections)
+        total_words = sum(
+            len(p.source.split())
+            for s in sections
+            for p in s.paragraphs
+        )
+
+        return ArticleAnalysis(
+            theme=result.get("theme", ""),
+            key_arguments=result.get("key_arguments", []),
+            structure_summary=result.get("structure_summary", ""),
+            terminology=terminology,
+            style=style,
+            challenges=challenges,
+            guidelines=result.get("guidelines", []),
+            section_count=len(sections),
+            paragraph_count=total_paragraphs,
+            word_count=total_words
+        )
+
+    def _parse_combined_analysis_result(
+        self,
+        result: dict,
+        sections: List[Section]
+    ) -> ArticleAnalysis:
+        """
+        解析合并分析结果（新版：深度分析 + 术语验证）
+
+        Args:
+            result: LLM 返回的合并分析结果
+            sections: 章节列表
+
+        Returns:
+            ArticleAnalysis: 解析后的分析结果
+        """
+        # 1. 解析采样文本提取的术语
+        sampled_terms = []
+        for term_data in result.get("sampled_terms", []):
+            strategy_str = term_data.get("strategy", "translate")
+            try:
+                strategy = TranslationStrategy(strategy_str)
+            except ValueError:
+                strategy = TranslationStrategy.TRANSLATE
+
+            term = EnhancedTerm(
+                term=term_data.get("term", ""),
+                context_meaning=term_data.get("context_meaning", ""),
+                translation=term_data.get("translation"),
+                strategy=strategy,
+                first_occurrence_note=term_data.get("first_occurrence_note", False),
+                rationale=term_data.get("rationale")
+            )
+            sampled_terms.append(term)
+
+        # 2. 解析高频术语验证结果
+        verified_terms = []
+        for term_data in result.get("verified_high_freq_terms", []):
+            if not term_data.get("is_technical_term", False):
+                continue
+
+            strategy_str = term_data.get("strategy", "translate")
+            try:
+                strategy = TranslationStrategy(strategy_str)
+            except ValueError:
+                strategy = TranslationStrategy.TRANSLATE
+
+            term = EnhancedTerm(
+                term=term_data.get("term", ""),
+                context_meaning=term_data.get("context_meaning", ""),
+                translation=term_data.get("translation"),
+                strategy=strategy,
+                first_occurrence_note=term_data.get("first_occurrence_note", False),
+                rationale=term_data.get("rationale")
+            )
+            verified_terms.append(term)
+
+        # 3. 合并术语表（去重）
+        term_dict = {}
+        for term in sampled_terms + verified_terms:
+            if term.term not in term_dict:
+                term_dict[term.term] = term
+
+        terminology = list(term_dict.values())
+
+        logger.info(
+            f"Merged terminology: sampled={len(sampled_terms)} "
+            f"verified={len(verified_terms)} total={len(terminology)}"
+        )
+
+        # 4. 解析风格
+        style_data = result.get("style", {})
+        style = ArticleStyle(
+            tone=style_data.get("tone", "professional"),
+            target_audience=style_data.get("target_audience", ""),
+            translation_voice=style_data.get("translation_voice", "")
+        )
+
+        # 5. 解析翻译难点
+        challenges = []
+        for challenge_data in result.get("challenges", []):
+            challenge = TranslationChallenge(
+                location=challenge_data.get("location", ""),
+                issue=challenge_data.get("issue", ""),
+                suggestion=challenge_data.get("suggestion")
+            )
+            challenges.append(challenge)
+
+        # 6. 统计信息
         total_paragraphs = sum(len(s.paragraphs) for s in sections)
         total_words = sum(
             len(p.source.split())

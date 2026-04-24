@@ -1,7 +1,7 @@
 {
   "section_id": "42-external-laser-source-els",
   "title": "External Laser Source (ELS)",
-  "title_translation": null,
+  "title_translation": "外置光源",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英伟达X800-Q3450共封装光学（CPO）交换机采用18个外部激光源（ELS）模块作为激光源，每个模块内含8颗连续波（CW）DFB激光芯片。CPO系统需使用功率较高的激光源，每颗连续波DFB激光芯片可输出约350mW功率。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:46:23.028666",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.459999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现ELS时注释格式与术语表建议不完全一致，且CPO缩写注释位置可优化"
+          },
+          {
+            "type": "readability",
+            "description": "CWDFB未在首次出现时完整注释，且句子可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "译文中CWDFB与原文CW DFB格式不一致，且未保持首次出现时的完整注释"
+          },
+          {
+            "type": "tone",
+            "description": "分析性语气略微弱化，原文的行业判断力度被轻微淡化"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且使用'因为...但...'结构略显翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "公司名称中英文混排格式可优化，缺少适当空格"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +115,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n能够生产连续波（CW）激光器组件的主要业界厂商包括美国博通、日本古河电气、美国朗美通、相干，以及中国源杰科技和仕佳光子。朗美通、相干、古河电气和博通的定价通常高于中国厂商。中国厂商未来有望获得机会，因为CW激光光源总体已趋于标准化和商品化，不过CPO应用所需的高功率激光光源仍具有一定技术壁垒。\n\n预计朗美通将作为英伟达首批共封装光学（CPO）交换机出货的独家供应商，相干则可能在二〇二六年底成为第二供应商。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:46:23.028724",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.459999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现ELS时注释格式与术语表建议不完全一致，且CPO缩写注释位置可优化"
+          },
+          {
+            "type": "readability",
+            "description": "CWDFB未在首次出现时完整注释，且句子可更自然"
+          },
+          {
+            "type": "terminology",
+            "description": "译文中CWDFB与原文CW DFB格式不一致，且未保持首次出现时的完整注释"
+          },
+          {
+            "type": "tone",
+            "description": "分析性语气略微弱化，原文的行业判断力度被轻微淡化"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且使用'因为...但...'结构略显翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "公司名称中英文混排格式可优化，缺少适当空格"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,11 +235,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：英伟达",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821807",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：英伟达",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

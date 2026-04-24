@@ -1,0 +1,113 @@
+你是技术文档分析和术语提取专家。请完成以下任务：
+
+## 任务1：深度分析文档
+
+分析以下采样文本，理解文档的主题、风格和结构。
+
+### 采样文本
+{sampled_text}
+
+### 章节大纲
+{outline}
+
+请分析：
+1. **主题**：文档的3-5个核心主题
+2. **风格**：
+   - 技术性（high/medium/low）
+   - 正式度（formal/neutral/casual）
+   - 语气（informative/persuasive/instructional等）
+   - 目标受众（technical_professionals/general_audience等）
+3. **结构**：
+   - 组织方式（problem-solution/chronological/comparative等）
+   - 逻辑流（progressive/parallel/hierarchical等）
+
+## 任务2：提取术语（从采样文本）
+
+从上述采样文本中提取需要在翻译时特殊处理的专业术语。
+
+**提取标准**：
+- 专业技术术语
+- 缩写和首字母缩略词
+- 专有名词（公司、产品、技术名称）
+- 需要保留原文或首次注释的术语
+
+**翻译策略**：
+- `keep_original`：保持原文（如API、GPU、AI）
+- `first_annotate`：首次出现时注释，后续单独使用（如TSMC → 台积电 (TSMC)）
+- `translate`：直接翻译为中文（如bandwidth → 带宽）
+
+## 任务3：验证高频术语
+
+以下是通过全文扫描提取的高频术语候选（按频率排序）：
+
+{high_freq_terms_list}
+
+请判断每个候选术语：
+1. 是否是专业技术术语？
+2. 是否需要在翻译时特殊处理？
+3. 建议的翻译策略
+4. 术语注释（缩写全称、技术背景等）
+
+**注意**：结合采样文本的上下文来判断术语的使用场景和重要性。
+
+## 输出格式
+
+返回JSON格式：
+
+```json
+{{
+  "theme": "文档的核心主题（一句话概括）",
+  "key_arguments": ["论点1", "论点2", "论点3"],
+  "structure_summary": "文档结构的简要描述",
+  "style": {{
+    "tone": "informative",
+    "target_audience": "technical_professionals",
+    "translation_voice": "保持专业、准确、流畅"
+  }},
+  "sampled_terms": [
+    {{
+      "term": "CPO",
+      "context_meaning": "Co-Packaged Optics，共封装光学技术",
+      "translation": "共封装光学",
+      "strategy": "first_annotate",
+      "first_occurrence_note": true,
+      "rationale": "核心技术术语，首次出现需注释全称"
+    }}
+  ],
+  "verified_high_freq_terms": [
+    {{
+      "term": "TSMC",
+      "is_technical_term": true,
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company，台湾积体电路制造公司",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "frequency": 47,
+      "confidence": 1.0,
+      "rationale": "重要的公司名称，高频出现"
+    }},
+    {{
+      "term": "Silicon",
+      "is_technical_term": false,
+      "reason": "通用词汇，直接翻译为'硅'即可，无需特殊处理",
+      "confidence": 0.9
+    }}
+  ],
+  "challenges": [
+    {{
+      "location": "技术概念密集段落",
+      "issue": "术语密集，需要准确翻译",
+      "suggestion": "保持术语一致性，首次出现时注释"
+    }}
+  ],
+  "guidelines": [
+    "保持技术术语的准确性",
+    "首次出现的缩写需要注释全称",
+    "保持专业、正式的语气"
+  ]
+}}
+```
+
+**重要提示**：
+- `sampled_terms`：从采样文本中提取的术语（约30-50个）
+- `verified_high_freq_terms`：验证后的高频术语，仅包含`is_technical_term: true`的术语
+- 对于非技术术语，设置`is_technical_term: false`并说明原因

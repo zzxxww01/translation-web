@@ -1,7 +1,7 @@
 {
   "section_id": "34-nubis",
   "title": "Nubis",
-  "title_translation": null,
+  "title_translation": "努比斯",
   "paragraphs": [
     {
       "id": "p000",
@@ -42,19 +42,91 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "2025年10月，Nubis 刚刚被 Ciena acquired 。与 Ayar 类似，Nubis 提供光引擎（Optical Engine，OE）芯粒以集成到客户的 host silicon 中，但重点在于单波长连接。Nubis 专注于互操作性——包括协议和机械（即可插拔）互操作性，这也决定了其技术选择。Nubis 还有更广泛的使命，即解决 I/O 墙问题，其解决方案同时涵盖光学和铜缆。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313293",
+          "tokenized_text": "2025年10月，Nubis 刚刚被 Ciena [[[LINK_1|acquired]]] 。与 Ayar 类似，Nubis 提供光引擎（Optical Engine，OE）芯粒以集成到客户的 host silicon 中，但重点在于单波长连接。Nubis 专注于互操作性——包括协议和机械（即可插拔）互操作性，这也决定了其技术选择。Nubis 还有更广泛的使命，即解决 I/O 墙问题，其解决方案同时涵盖光学和铜缆。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -81,12 +153,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n他们现有的光引擎产品是 Vesta 100 1.6T NPX 光引擎。这是一个可插座式模块，可提供 1.6T 双向带宽，包含 16 条 100G 通道。该模块的尺寸为 6×7 mm。与其他公司不同，Nubis 大量采用马赫-曾德尔调制器（Mach-Zehnder Modulator，MZM），主要原因是该调制器具有良好的互操作性、可靠性和成熟度。另一个主要设计选择是，Nubis 兼容 IEEE/OIF 标准规定的电气接口，因为他们认为大多数 ASIC 开发商将继续使用这些技术。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313378",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -113,12 +257,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Nubis 的一个关键差异化点在于其光纤耦合方式。Nubis 从 PIC 表面进行耦合，具体采用一块薄玻璃来帮助布线和对齐光纤。与将光纤连接到芯片边缘的边缘耦合不同，Nubis 的 2D 光纤阵列方案是从硅光子芯片顶部连接光纤。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313408",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -145,12 +361,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "观察下图：PIC（底部绿色部分）包含调制器、光探测器和波导，其上方安装有 EIC。红色柱体为光纤，而容纳光纤的块状结构是玻璃块（FAU），用作光纤固定器。FAU 在块体顶部采用激光钻孔，以确保光纤精确定位。通过采用 2D 光纤阵列，他们能够将 36 根光纤（16 根发送、16 根接收、4 根激光器）连接到 PIC，并避免使用 WDM 在更少光纤上传输更多波长。这使得 Nubis 的 FAU 成为目前已出货产品中密度最高的光纤阵列之一。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313434",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -209,11 +497,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Nubis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821905",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Nubis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -241,12 +537,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "2D 光纤阵列已被纳入台积电等公司的路线图，也是垂直耦合的一大优势。不过，目前除 Nubis 之外尚无其他公司实现量产，这使其脱颖而出，尽管其他厂商计划后续转向 2D 阵列。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313451",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -273,12 +641,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "光纤向上引出后，通过采用住友电工开发的特殊光纤 FlexBeamGuidE 实现 90 度弯曲侧向引出，该光纤可在 90 度弯曲状态下仍保持高可靠性和低损耗。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313468",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -305,12 +745,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "采用 2D 阵列而非边缘耦合的另一个优势是，在物理上受可连接光纤数量的限制更小。如图所示，使用 Nubis 的 2D 光纤阵列结构，可以在 ASIC 周围布置多排光引擎，只要封装允许，即可显著提升带宽密度。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313485",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -369,11 +881,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Nubis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821915",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Nubis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -401,12 +921,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "2025 年 4 月，Nubis 宣布其下一代 PIC 量产，该硅光子芯片每通道支持 16×200G，单向前沿带宽密度达到 0.5Tbps/mm（与电气 host 接口密度相当）。此外，Nubis 宣布与 Samtec 合作，将提供 32×200G（6.4T）光模块样品，该模块可直接卡入 Samtec Si-Fly HD 共封装铜缆连接器。与其他共封装光学（Co-packaged Optics，CPO）方案相比，这种方法实现了铜缆与光学的通用封装尺寸，长期来看有可能形成一个开放的可插拔生态系统，用于部署 CPO。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313500",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -433,12 +1025,84 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n最后，在铜缆领域，Nubis 也在 OFC 上宣布并展示了其线性重驱动器芯片 Nitro，用于有源铜缆（ACC），可将 200G 铜缆的传输距离延伸至数米。这一方案是与安费诺（Amphenol）合作开发的，后者将基于 Nitro 线性重驱动器芯片生产 ACC。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:38:19.313518",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.705,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.9,
+          "accuracy": 8.8
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光引擎芯粒未在首次出现时提供完整术语注释"
+          },
+          {
+            "type": "readability",
+            "description": "句式略显生硬，可更符合中文科技报道习惯"
+          },
+          {
+            "type": "terminology",
+            "description": "MZM 首次出现未附注全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "单位表达不够规范，中英文混排缺少空格"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为 'one of the densest currently shipping'，译文将密度概念转为'出货量最大'，存在轻微偏差"
+          },
+          {
+            "type": "readability",
+            "description": "单句过长，包含多层逻辑，读起来较为吃力"
+          },
+          {
+            "type": "readability",
+            "description": "表达可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO 首次在本文出现（本章节上下文），需按术语表首次出现要求附注"
+          },
+          {
+            "type": "tone",
+            "description": "程度词轻微升级，原文为 'could create'（可能创造），译为'有望形成'力度略强"
+          },
+          {
+            "type": "terminology",
+            "description": "linear redriver 翻译为'线性重驱动芯片'可更精确和行业化"
+          }
+        ]
+      },
       "history": []
     }
   ]

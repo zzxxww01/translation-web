@@ -85,6 +85,7 @@ def get_batch_service() -> BatchTranslationService:
         llm_provider=llm,
         project_manager=pm,
         analysis_llm_provider=analysis_llm,
+        user_model_override=None,  # 默认无覆盖，使用阶段化配置
     )
 
 

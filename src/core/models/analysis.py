@@ -91,6 +91,7 @@ class TranslationIssue(BaseModel):
     """翻译问题"""
 
     paragraph_index: int
+    priority: str = "P2"
     issue_type: str
     severity: str = "medium"
     original_text: str = ""
@@ -106,9 +107,20 @@ class ReflectionResult(BaseModel):
     """反思结果（四步法 Step 3 输出）"""
 
     overall_score: float = 0.0
-    readability_score: float = 0.0
-    accuracy_score: float = 0.0
+
+    # 6 维度评分（方案 C）
+    terminology_score: float = 0.0  # 术语一致性
+    fluency_score: float = 0.0      # 流畅度
+    accuracy_score: float = 0.0     # 准确性
+    cultural_score: float = 0.0     # 文化适配
+    professional_score: float = 0.0 # 专业性
+    readability_score: float = 0.0  # 可读性
+
+    # 兼容旧字段
     conciseness_score: float = 0.0
+    consistency_score: float = 0.0
+    logic_score: float = 0.0
+
     is_excellent: bool = False
     issues: List[TranslationIssue] = Field(default_factory=list)
     revised_translations: Optional[Dict[int, str]] = None

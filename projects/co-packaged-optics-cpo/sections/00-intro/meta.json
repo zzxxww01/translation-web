@@ -1,7 +1,7 @@
 {
   "section_id": "00-intro",
   "title": "Introduction",
-  "title_translation": null,
+  "title_translation": "引言",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,11 +27,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "subtitle",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "横向扩展与纵向扩展 CPO、CPO TCO（总拥有成本）与功耗预算、DSP 收发器 vs LPO vs NPO vs CPO、台积电（TSMC）COUPE、MZM vs MRM vs EAM 调制器深度解析、CPO 重点公司与 CPO 供应链",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.820957",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "横向扩展与纵向扩展 CPO、CPO TCO（总拥有成本）与功耗预算、DSP 收发器 vs LPO vs NPO vs CPO、台积电（TSMC）COUPE、MZM vs MRM vs EAM 调制器深度解析、CPO 重点公司与 CPO 供应链",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -112,18 +120,26 @@
         "LINK_2",
         "LINK_3"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "byline",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "作者：Dylan Patel、Daniel Nishball、Myron Xie 等 6 人",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821043",
+          "tokenized_text": "作者：[[[LINK_1|Dylan Patel]]]、[[[LINK_2|Daniel Nishball]]]、[[[LINK_3|Myron Xie]]] 等 6 人",
+          "format_issues": []
+        }
+      },
+      "confirmed": "作者：Dylan Patel、Daniel Nishball、Myron Xie 等 6 人",
+      "confirmed_tokenized": "作者：[[[LINK_1|Dylan Patel]]]、[[[LINK_2|Daniel Nishball]]]、[[[LINK_3|Myron Xie]]] 等 6 人",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -151,11 +167,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "date_access",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "2026 年 1 月 1 日 · 付费文章",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821061",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "2026 年 1 月 1 日 · 付费文章",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -183,11 +207,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "光电共封装（CPO）技术长期以来被寄予重塑数据中心互连的厚望，但其走向市场耗时漫长，直到 2025 年才出现真正可部署的实体产品。在此期间，可插拔光模块紧跟网络需求演进。得益于相对较高的性价比、成熟的部署经验以及基于标准的互操作性，它依然是业界的默认路径。",
+          "model": "default",
+          "created_at": "2026-04-22T11:53:25.668893",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -230,18 +262,26 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "然而，AI 工作负载带来的海量网络需求意味着，这一次情况截然不同。根据 AI 网络带宽的发展路线，互连在速度、传输距离、密度和可靠性方面的需求，很快将全面超越可插拔光模块的承载极限。CPO 将为横向扩展网络带来一定增益与更多选择，但它必将成为纵向扩展网络的核心。在 2020 年代后期乃至更长远的未来，CPO 将成为纵向扩展网络带宽增长的主要驱动力。",
+          "model": "default",
+          "created_at": "2026-04-22T11:53:48.420431",
+          "tokenized_text": "然而，AI 工作负载带来的海量网络需求意味着，这一次情况截然不同。根据 AI 网络带宽的发展路线，互连在速度、传输距离、密度和可靠性方面的需求，很快将全面超越可插拔光模块的承载极限。CPO 将为横向扩展网络带来一定增益与更多选择，但它必将成为纵向扩展网络的核心。[[[STRONG_1|在 2020 年代后期乃至更长远的未来，CPO 将成为纵向扩展网络带宽增长的主要驱动力。]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -284,18 +324,26 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "如今，基于铜缆的纵向扩展解决方案（如 NVLink）可提供每 GPU 7.2 Tbit/s 的超高带宽——在 Rubin 架构中很快将达到每 GPU 14.4 Tbit/s。然而，铜缆链路的传输距离最多不超过两米，这意味着纵向扩展域的规模最多只能覆盖一到两个机架。此外，在铜缆上继续扩展带宽也愈发困难。在 Rubin 架构中，英伟达（NVIDIA）将通过双向 SerDes 技术，实现单条铜缆通道带宽的再次翻倍。但依靠研发更快的 SerDes 来实现铜缆带宽翻倍，是一条极具挑战且进展缓慢的扩展路径。CPO 能够提供相同甚至更高的带宽密度，为带宽扩展提供更多维度，同时还能支持更大规模的纵向扩展域。",
+          "model": "default",
+          "created_at": "2026-04-22T11:54:11.697899",
+          "tokenized_text": "如今，基于铜缆的纵向扩展解决方案（如 NVLink）可提供每 GPU 7.2 Tbit/s 的超高带宽——在 Rubin 架构中很快将达到每 GPU 14.4 Tbit/s。然而，铜缆链路的传输距离最多不超过两米，这意味着纵向扩展域的规模最多只能覆盖一到两个机架。此外，在铜缆上继续扩展带宽也愈发困难。在 Rubin 架构中，英伟达（NVIDIA）将通过双向 SerDes 技术，实现单条铜缆通道带宽的再次翻倍。但依靠研发更快的 SerDes 来实现铜缆带宽翻倍，是一条极具挑战且进展缓慢的扩展路径。[[[STRONG_1|CPO 能够提供相同甚至更高的带宽密度，为带宽扩展提供更多维度，同时还能支持更大规模的纵向扩展域。]]]",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -323,11 +371,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "要理解发展 CPO 的驱动力，首先需要审视传统光收发器在光通信中存在的诸多低效与妥协。光收发器固然能延长链路传输距离，但其插入的网络交换机或计算托盘前面板插槽，通常距离 XPU 或交换芯片 15 至 30 厘米。这意味着，信号必须先通过 LR SerDes 跨越这 15 至 30 厘米的距离进行电传输。随后，电信号需由收发器内置的数字信号处理器（DSP）进行恢复与调理，最后才能转换为光信号。",
+          "model": "default",
+          "created_at": "2026-04-22T11:54:31.921701",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -355,11 +411,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "采用 CPO 技术后，光引擎改为紧邻 XPU 或交换芯片部署。这意味着可以省去 DSP，并使用低功耗 SerDes 将数据从 XPU 传输至光引擎。与内置 DSP 的光收发器相比，这能将数据传输能耗降低 50% 以上，许多厂商甚至致力于将每比特能耗降低高达 80%。",
+          "model": "default",
+          "created_at": "2026-04-22T11:54:46.880324",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -419,11 +483,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821074",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -466,18 +538,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "尽管英伟达（NVIDIA）和博通的横向扩展（scale-out）CPO 解决方案备受瞩目，且正接受终端客户的密切评估，但头部云厂商已着手规划纵向扩展（scale-up）CPO 战略，并向供应商做出采购承诺。例如，Celestial AI 预计到 2028 年底其年化营收将达到 10 亿美元——我们认为，这主要得益于搭载亚马逊 Trainium 4 出货的纵向扩展 CPO 解决方案。",
+          "model": "default",
+          "created_at": "2026-04-22T15:16:39.395834",
+          "tokenized_text": "尽管英伟达（NVIDIA）和博通的横向扩展（scale-out）CPO 解决方案备受瞩目，且正接受终端客户的密切评估，但头部云厂商已着手规划纵向扩展（scale-up）CPO 战略，并向供应商做出采购承诺。例如，[[[LINK_1|Celestial AI 预计到 2028 年底其年化营收将达到 10 亿美元]]]——我们认为，这主要得益于搭载亚马逊 Trainium 4 出货的纵向扩展 CPO 解决方案。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -520,18 +600,26 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "专注 CPO 的企业如今早已度过论文、试点项目和演示阶段，正敲定光端口架构等关键产品决策，以攻克大批量制造难题。纵向扩展 CPO 如今 已不再是“是否”和“为何”要做的问题，而是“何时”与“如何”落地的问题——即如何将这些系统投入量产，以及激光器制造商等关键组件供应链企业何时能爬坡至充足产能。",
+          "model": "default",
+          "created_at": "2026-04-22T15:16:58.444182",
+          "tokenized_text": "专注 CPO 的企业如今早已度过论文、试点项目和演示阶段，正敲定光端口架构等关键产品决策，以攻克大批量制造难题。纵向扩展 CPO 如今 [[[STRONG_1|已不再是“是否”和“为何”要做的问题，而是“何时”与“如何”落地的问题]]]——即如何将这些系统投入量产，以及激光器制造商等关键组件供应链企业何时能爬坡至充足产能。",
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -559,11 +647,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "本文将深入探讨 CPO 的优势与挑战、架构原理、当前及未来的 CPO 产品、专注 CPO 的企业，以及 CPO 相关组件及其供应链。本文旨在为从业者、行业分析师、投资者，以及所有关注互连技术的读者提供一份参考指南。",
+          "model": "default",
+          "created_at": "2026-04-22T15:18:27.487535",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     }

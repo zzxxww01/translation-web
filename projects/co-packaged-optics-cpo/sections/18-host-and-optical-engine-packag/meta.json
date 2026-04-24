@@ -1,7 +1,7 @@
 {
   "section_id": "18-host-and-optical-engine-packag",
   "title": "Host and Optical Engine Packaging",
-  "title_translation": null,
+  "title_translation": "主芯片与光引擎封装",
   "paragraphs": [
     {
       "id": "p000",
@@ -42,19 +42,87 @@
       "expected_tokens": [
         "STRONG_1"
       ],
-      "format_recovery_status": "not_applicable",
-      "format_errors": [],
+      "format_recovery_status": "invalid",
+      "format_errors": [
+        "Missing token STRONG_1."
+      ],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "顾名思义，“共封装光学（co-packaged optics，CPO）”本质上是一项封装和组装挑战。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:18:08.255641",
+          "tokenized_text": null,
+          "format_issues": [
+            "Missing token STRONG_1."
+          ]
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.67,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现未按要求附注中文全称"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 首次出现时术语翻译与术语表不符"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重"
+          },
+          {
+            "type": "terminology",
+            "description": "使用未经术语表确认的意译词"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且保留了英文式的复杂结构，存在翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句式生硬，可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "Heterogeneous integration 拼写错误且术语未统一"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重复且可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -81,12 +149,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n光引擎兼具光学与电学组件。光电探测器和调制器是集成于“PIC”（光子集成电路）的光学组件，驱动器和跨阻放大器则是集成于“EIC”（电集成电路）的电学电路。PIC与EIC必须合为一体，光引擎（Optical Engine，OE）方能正常工作。目前有多种封装方法可实现这一PIC–EIC集成。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:18:08.255686",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.67,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现未按要求附注中文全称"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 首次出现时术语翻译与术语表不符"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重"
+          },
+          {
+            "type": "terminology",
+            "description": "使用未经术语表确认的意译词"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且保留了英文式的复杂结构，存在翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句式生硬，可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "Heterogeneous integration 拼写错误且术语未统一"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重复且可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -145,11 +277,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：ID TechEx",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821644",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：ID TechEx",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -177,12 +317,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "光学引擎可采用单片集成方式，在同一晶圆上同时制造 PIC 和 EIC。从寄生参数、延迟和功耗角度看，单片集成是最优雅的方法。Ayar Labs 的第二代 TeraPHY 芯粒就采用了这一方案（不过其下一代芯粒已转向台积电 COUPE）。GlobalFoundries、Tower 和 Advanced Micro Foundry 等晶圆代工厂可提供单片 CMOS 与 SiPho 工艺。然而，单片工艺在约三十五纳米以下节点便无法继续推进，因为光子工艺无法像传统 CMOS 那样持续缩放。这限制了 EIC 的性能，尤其是在 CPO 系统所需更高通道速率的情况下。尽管单片集成本身简洁优雅，但这一限制使其难以实现规模化扩展。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:18:08.255704",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.67,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现未按要求附注中文全称"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 首次出现时术语翻译与术语表不符"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重"
+          },
+          {
+            "type": "terminology",
+            "description": "使用未经术语表确认的意译词"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且保留了英文式的复杂结构，存在翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句式生硬，可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "Heterogeneous integration 拼写错误且术语未统一"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重复且可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -209,12 +413,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "因此，Ayar Labs 也在将其路线图转向异构集成的光引擎，以期进一步扩容。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:18:08.255726",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.67,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现未按要求附注中文全称"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 首次出现时术语翻译与术语表不符"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重"
+          },
+          {
+            "type": "terminology",
+            "description": "使用未经术语表确认的意译词"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且保留了英文式的复杂结构，存在翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句式生硬，可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "Heterogeneous integration 拼写错误且术语未统一"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重复且可更简洁"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -241,12 +509,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n异构集成正成为主流方案，即采用 SiPho 工艺制造 PIC，再通过先进封装将其与 CMOS 晶圆的 EIC 集成一体。目前存在多种封装方案，其中更先进的封装方案能带来更高性能。在这些方案中，3D 集成可提供最佳带宽与能效。EIC 与 PIC 通信的最大障碍是寄生参数，大幅缩短互连长度可显著降低寄生效应当，从而大幅提升耦合效率。从带宽和功耗角度看，3D 集成是实现共封装光学（CPO）性能目标的唯一途径。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:18:08.255739",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.67,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语首次出现未按要求附注中文全称"
+          },
+          {
+            "type": "terminology",
+            "description": "OE 首次出现时术语翻译与术语表不符"
+          },
+          {
+            "type": "readability",
+            "description": "存在明显翻译腔和书面语过重"
+          },
+          {
+            "type": "terminology",
+            "description": "使用未经术语表确认的意译词"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且保留了英文式的复杂结构，存在翻译腔"
+          },
+          {
+            "type": "readability",
+            "description": "句式生硬，可更自然流畅"
+          },
+          {
+            "type": "terminology",
+            "description": "Heterogeneous integration 拼写错误且术语未统一"
+          },
+          {
+            "type": "readability",
+            "description": "存在语义重复且可更简洁"
+          }
+        ]
+      },
       "history": []
     }
   ]

@@ -193,7 +193,11 @@ class SectionTranslationExecutor:
             )
             return {
                 "section_id": section.section_id,
-                "translations": collected_translations,
+                "translations": [
+                    paragraph.best_translation_text(fallback_to_source=False)
+                    for paragraph in section.paragraphs
+                ],
+                "updated_translations": collected_translations,
                 "paragraph_count": section_paragraph_count,
                 "translated_before": translated_in_section,
             }
@@ -212,13 +216,14 @@ class SectionTranslationExecutor:
 
     @staticmethod
     def _build_translatable_section(section: Section) -> Section:
-        """Filter out structured metadata paragraphs from automatic body translation."""
+        """Filter out structured metadata paragraphs and already translated paragraphs from automatic body translation."""
         return section.model_copy(
             update={
                 "paragraphs": [
                     paragraph
                     for paragraph in section.paragraphs
                     if not is_structured_metadata_paragraph(paragraph)
+                    and not paragraph.has_usable_translation()
                 ]
             }
         )

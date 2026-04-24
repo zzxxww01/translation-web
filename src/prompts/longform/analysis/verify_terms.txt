@@ -1,0 +1,60 @@
+你是技术术语提取和验证专家。请验证以下高频术语候选，判断哪些是需要在翻译时特殊处理的专业术语。
+
+## 采样文本（用于理解上下文）
+{sampled_text}
+
+## 高频术语候选列表
+以下是通过全文扫描提取的高频术语候选（按频率排序）：
+
+{high_freq_terms_list}
+
+## 验证任务
+
+请判断每个候选术语：
+1. 是否是专业技术术语？
+2. 是否需要在翻译时特殊处理？
+3. 建议的翻译策略
+4. 术语注释（缩写全称、技术背景等）
+
+**验证标准**：
+- 专业技术术语：特定领域的专业词汇
+- 缩写和首字母缩略词：需要注释全称
+- 专有名词：公司、产品、技术名称
+- 通用词汇：不需要特殊处理的普通词汇（应排除）
+
+**翻译策略**：
+- `keep_original`：保持原文（如API、GPU、AI）
+- `first_annotate`：首次出现时注释，后续单独使用（如TSMC → 台积电 (TSMC)）
+- `translate`：直接翻译为中文（如bandwidth → 带宽）
+
+## 输出格式
+
+返回JSON格式：
+
+```json
+{{
+  "verified_terms": [
+    {{
+      "term": "TSMC",
+      "is_technical_term": true,
+      "context_meaning": "Taiwan Semiconductor Manufacturing Company，台湾积体电路制造公司",
+      "translation": "台积电",
+      "strategy": "first_annotate",
+      "frequency": 47,
+      "confidence": 1.0,
+      "rationale": "重要的公司名称，高频出现"
+    }},
+    {{
+      "term": "Silicon",
+      "is_technical_term": false,
+      "reason": "通用词汇，直接翻译为'硅'即可，无需特殊处理",
+      "confidence": 0.9
+    }}
+  ]
+}}
+```
+
+**重要提示**：
+- 仅包含`is_technical_term: true`的术语
+- 对于非技术术语，设置`is_technical_term: false`并说明原因
+- 结合采样文本的上下文来判断术语的使用场景和重要性

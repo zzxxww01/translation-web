@@ -1,7 +1,7 @@
 {
   "section_id": "37-xscape-photonics",
   "title": "Xscape Photonics",
-  "title_translation": null,
+  "title_translation": "埃克斯凯普光子",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "Xscape Photonics是一家专注可编程激光技术的创新公司，其ChromX激光器目前可提供4至16个波长，并计划未来扩展至128个波长。通过提供多达128种不同颜色，ChromX将能实现远超现有仅提供4至8个波长激光器的带宽。ChromX依赖外部III-V激光器，并搭配片上多色发生器来产生用于波分复用（WDM）的多个波长。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:42:25.451356",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.385,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构偏长且带有明显翻译腔，多个定语从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现未按要求附注全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按术语表要求附注全称和中文译名"
+          },
+          {
+            "type": "tone",
+            "description": "原文使用“Interestingly”体现轻度分析性语气，译文“有趣的是”略显口语化，与全文冷静、专业的声线不完全匹配"
+          },
+          {
+            "type": "readability",
+            "description": "功耗和耗电量语义重叠"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为“targeting Scale Up CPO applications and is positioning itself for product announcements in 2026”，译文将两个并列动作合并且弱化了“positioning itself”的主动意味"
+          },
+          {
+            "type": "terminology",
+            "description": "Scale Up 未按术语表使用规范译名"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,11 +151,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Xscape Photonics",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.822072",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Xscape Photonics",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -123,12 +191,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "该激光器可编程的特点为其提供了灵活性，能够针对不同类型的工作负载提供相应波长，以满足不同的带宽和距离需求。值得注意的是，他们的方案仅需一个激光器，而现有的共封装光学（Co-packaged Optics，CPO）方案则需要多个高功耗激光器。此外，所有波长均通过单根光纤传输，避免了大多数CPO系统因需多根光纤而产生的复杂性，显著减少了光纤耦合问题。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:42:25.451401",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.385,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构偏长且带有明显翻译腔，多个定语从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现未按要求附注全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按术语表要求附注全称和中文译名"
+          },
+          {
+            "type": "tone",
+            "description": "原文使用“Interestingly”体现轻度分析性语气，译文“有趣的是”略显口语化，与全文冷静、专业的声线不完全匹配"
+          },
+          {
+            "type": "readability",
+            "description": "功耗和耗电量语义重叠"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为“targeting Scale Up CPO applications and is positioning itself for product announcements in 2026”，译文将两个并列动作合并且弱化了“positioning itself”的主动意味"
+          },
+          {
+            "type": "terminology",
+            "description": "Scale Up 未按术语表使用规范译名"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +283,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\nXscape Photonics最近宣布推出其EagleX，这是一款即插即用的技术评估套件，针对纵向扩展共封装光学（CPO）应用，并计划于2026年正式发布产品。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:42:25.451425",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.385,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "readability",
+            "description": "句子结构偏长且带有明显翻译腔，多个定语从句堆叠"
+          },
+          {
+            "type": "terminology",
+            "description": "WDM首次出现未按要求附注全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "CPO首次出现未按术语表要求附注全称和中文译名"
+          },
+          {
+            "type": "tone",
+            "description": "原文使用“Interestingly”体现轻度分析性语气，译文“有趣的是”略显口语化，与全文冷静、专业的声线不完全匹配"
+          },
+          {
+            "type": "readability",
+            "description": "功耗和耗电量语义重叠"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文为“targeting Scale Up CPO applications and is positioning itself for product announcements in 2026”，译文将两个并列动作合并且弱化了“positioning itself”的主动意味"
+          },
+          {
+            "type": "terminology",
+            "description": "Scale Up 未按术语表使用规范译名"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -219,11 +407,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：Xscape Photonics",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.822082",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：Xscape Photonics",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

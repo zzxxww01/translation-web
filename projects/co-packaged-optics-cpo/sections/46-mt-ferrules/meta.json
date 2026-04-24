@@ -1,7 +1,7 @@
 {
   "section_id": "46-mt-ferrules",
   "title": "MT Ferrules",
-  "title_translation": null,
+  "title_translation": "MT插芯",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "MT 插芯是 FAU、光纤洗牌盒以及 MPO 连接器中的关键组件，用于以平行方式对齐多根光纤。多家公司能够生产 MT 插芯，包括 US Conec（美国）、T&S（中国）、Senko（日本）、Fukushima（日本）、FOCI（台湾）、Sumitomo（日本）以及 TFC（中国）。MT 插芯制造难度并不特别大，但要同时实现所需的精度和可靠性，仍需投入大量工程努力。各厂商主要在注塑成型能力上展开竞争，以生产出能将光纤连接插入损耗降至最低的插芯。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:51:09.469926",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.549999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与前后文及术语表不一致"
+          },
+          {
+            "type": "readability",
+            "description": "公司名称翻译方式不规范"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "抽象名词壳较多，表达可更直接"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有偏差"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +111,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在这些厂商中，US Conec 拥有超过三十年的技术开发经验，预计将成为英伟达 Q3450 CPO 系统的重要供应商之一。福岛在模具设计和制造方面也具备较强实力，能够以具有竞争力的价格生产高质量 MT 插芯。与此同时，FOCI、TFC 和 T&S 主要为自己内部的 FAU 和光纤洗牌盒生产 MT 插芯，目的是通过垂直整合尽可能多的环节，以加强质量控制并降低成本。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:51:09.469975",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.549999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.0
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "术语翻译与前后文及术语表不一致"
+          },
+          {
+            "type": "readability",
+            "description": "公司名称翻译方式不规范"
+          },
+          {
+            "type": "readability",
+            "description": "句子可更自然流畅"
+          },
+          {
+            "type": "readability",
+            "description": "抽象名词壳较多，表达可更直接"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度略有偏差"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -138,18 +242,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821341",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI Networking 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

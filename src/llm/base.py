@@ -51,6 +51,81 @@ class LLMProvider(ABC):
         """
         pass
 
+    def deep_analyze_with_term_verification(
+        self,
+        outline: str,
+        sampled_text: str,
+        high_freq_candidates: List[Dict[str, Any]],
+        timeout: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        合并深度分析和术语验证（方案6）
+
+        Args:
+            outline: 文档大纲
+            sampled_text: 采样文本
+            high_freq_candidates: 高频术语候选列表
+            timeout: 超时时间（秒）
+
+        Returns:
+            Dict: 合并分析结果，包括：
+                - theme: 主题
+                - key_arguments: 关键论点
+                - structure_summary: 结构总结
+                - sampled_terms: 从采样文本提取的术语
+                - verified_high_freq_terms: 验证后的高频术语
+                - style: 风格
+                - challenges: 翻译难点
+                - guidelines: 翻译指南
+        """
+        raise NotImplementedError(
+            "This provider does not implement deep_analyze_with_term_verification."
+        )
+
+    @abstractmethod
+    def deep_analyze_document(
+        self,
+        outline: str,
+        sampled_text: str,
+        timeout: Optional[int] = None
+    ) -> Dict:
+        """
+        深度分析文档（不包含术语验证）
+
+        Args:
+            outline: 章节大纲
+            sampled_text: 采样文本
+            timeout: 超时时间（秒）
+
+        Returns:
+            Dict: 分析结果，包含theme, key_arguments, structure_summary, style, challenges, guidelines
+        """
+        raise NotImplementedError(
+            "This provider does not implement deep_analyze_document."
+        )
+
+    @abstractmethod
+    def verify_high_frequency_terms(
+        self,
+        sampled_text: str,
+        high_freq_candidates: List[Dict],
+        timeout: Optional[int] = None
+    ) -> List[Dict]:
+        """
+        验证高频术语候选
+
+        Args:
+            sampled_text: 采样文本（用于理解上下文）
+            high_freq_candidates: 高频术语候选列表 [{"term": ..., "frequency": ...}, ...]
+            timeout: 超时时间（秒）
+
+        Returns:
+            List[Dict]: 验证通过的术语列表
+        """
+        raise NotImplementedError(
+            "This provider does not implement verify_high_frequency_terms."
+        )
+
     @abstractmethod
     def check_consistency(
         self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
@@ -302,6 +377,131 @@ class LLMProvider(ABC):
         )
         return self.generate(prompt, temperature=0.3)
 
+    def style_polish_batch(
+        self,
+        pairs: List[tuple[str, str]],
+        context: Optional[Dict[str, Any]] = None,
+    ) -> List[str]:
+        """
+        批量风格润色（优化版 Step 5）
+
+        一次 API 调用润色多个段落，降低成本。
+
+        Args:
+            pairs: [(source, current_translation), ...] 原文和译文对
+            context: 可选上下文
+
+        Returns:
+            List[str]: 润色后的译文列表
+        """
+        # 构建批量输入
+        pairs_text = ""
+        for i, (source, translation) in enumerate(pairs):
+            pairs_text += f"### 段落 {i}\n\n"
+            pairs_text += f"**原文：**\n{source}\n\n"
+            pairs_text += f"**当前译文：**\n{translation}\n\n"
+
+        prompt = self.prompt_manager.get(
+            "longform/review/style_polish_batch",
+            pairs_text=pairs_text,
+        )
+
+        response = self.generate(prompt, temperature=0.3)
+
+        # 解析 JSON 响应
+        import json
+        try:
+            # 提取 JSON 部分
+            if "```json" in response:
+                json_start = response.find("```json") + 7
+                json_end = response.find("```", json_start)
+                json_str = response[json_start:json_end].strip()
+            elif "```" in response:
+                json_start = response.find("```") + 3
+                json_end = response.find("```", json_start)
+                json_str = response[json_start:json_end].strip()
+            else:
+                json_str = response.strip()
+
+            result = json.loads(json_str)
+            polished = result.get("polished_translations", [])
+
+            # 验证数量一致
+            if len(polished) != len(pairs):
+                logger.warning(
+                    f"Batch polish returned {len(polished)} translations, expected {len(pairs)}. "
+                    f"Falling back to original translations."
+                )
+                return [translation for _, translation in pairs]
+
+            return polished
+
+        except (json.JSONDecodeError, KeyError) as e:
+            logger.error(f"Failed to parse batch polish response: {e}")
+            logger.debug(f"Response was: {response}")
+            # 降级：返回原译文
+            return [translation for _, translation in pairs]
+
+    def refine_and_polish_batch(
+        self,
+        pairs: List[Dict[str, Any]],
+        context: Optional[Dict[str, Any]] = None,
+    ) -> List[str]:
+        """
+        批量润色（合并 Step 4 和 Step 5）
+
+        一次 API 调用同时处理问题修复和风格优化。
+
+        Args:
+            pairs: 段落列表，每个包含:
+                - source: 原文
+                - translation: 当前译文
+                - issues: 问题列表 (可选)
+            context: 上下文信息（术语表、reflection_scores 等）
+
+        Returns:
+            List[str]: 润色后的译文列表
+        """
+        # 从 context 中提取 reflection_scores
+        reflection_scores = context.get("reflection_scores", {}) if context else {}
+
+        prompt = self._build_refine_and_polish_prompt(pairs, reflection_scores, context)
+        response = self.generate(prompt, temperature=0.3)
+
+        # 解析 JSON 响应
+        import json
+        try:
+            # 提取 JSON 部分
+            if "```json" in response:
+                json_start = response.find("```json") + 7
+                json_end = response.find("```", json_start)
+                json_str = response[json_start:json_end].strip()
+            elif "```" in response:
+                json_start = response.find("```") + 3
+                json_end = response.find("```", json_start)
+                json_str = response[json_start:json_end].strip()
+            else:
+                json_str = response.strip()
+
+            result = json.loads(json_str)
+            polished = result.get("polished_translations", [])
+
+            # 验证数量一致
+            if len(polished) != len(pairs):
+                logger.warning(
+                    f"Batch refine_and_polish returned {len(polished)} translations, expected {len(pairs)}. "
+                    f"Falling back to original translations."
+                )
+                return [pair["translation"] for pair in pairs]
+
+            return polished
+
+        except (json.JSONDecodeError, KeyError) as e:
+            logger.error(f"Failed to parse batch refine_and_polish response: {e}")
+            logger.debug(f"Response was: {response}")
+            # 降级：返回原译文
+            return [pair["translation"] for pair in pairs]
+
     def prescan_section(
         self,
         section_id: str,
@@ -490,6 +690,75 @@ class LLMProvider(ABC):
         if context_blocks:
             return "\n\n".join(context_blocks + [base_prompt])
         return base_prompt
+
+    def _build_refine_and_polish_prompt(
+        self,
+        pairs: List[Dict[str, Any]],
+        reflection_scores: Dict[str, float],
+        context: Optional[Dict[str, Any]] = None,
+    ) -> str:
+        """构建批量润色 Prompt（合并问题修复和风格优化）"""
+        # 构建段落对照
+        pairs_text_list = []
+        for i, pair in enumerate(pairs):
+            src = pair.get("source", "")
+            trans = pair.get("translation", "")
+            issues = pair.get("issues", [])
+
+            pair_text = f"[段落 {i}]\n原文：{src}\n当前译文：{trans}"
+
+            if issues:
+                issues_text = "\n".join([
+                    f"  - [{issue.get('type', 'unknown')}] {issue.get('description', '')}"
+                    for issue in issues
+                ])
+                pair_text += f"\n问题：\n{issues_text}"
+
+            pairs_text_list.append(pair_text)
+
+        pairs_text = "\n\n".join(pairs_text_list)
+
+        # 构建评分信息
+        scores_text = ", ".join([
+            f"{k}={v:.1f}" for k, v in reflection_scores.items()
+        ])
+        issues_summary = self._build_refine_issue_summary(pairs)
+
+        base_prompt = self.prompt_manager.get(
+            "longform/review/refine_and_polish_batch",
+            pairs_text=pairs_text,
+            scores_text=scores_text,
+            issues_summary=issues_summary,
+            terminology_score=float(reflection_scores.get("terminology", 0.0) or 0.0),
+            accuracy_score=float(reflection_scores.get("accuracy", 0.0) or 0.0),
+            fluency_score=float(reflection_scores.get("fluency", 0.0) or 0.0),
+            conciseness_score=float(reflection_scores.get("conciseness", 0.0) or 0.0),
+            consistency_score=float(reflection_scores.get("consistency", 0.0) or 0.0),
+            logic_score=float(reflection_scores.get("logic", 0.0) or 0.0),
+        )
+
+        context_blocks = self._build_refine_context_blocks(context or {})
+        if context_blocks:
+            return "\n\n".join(context_blocks + [base_prompt])
+        return base_prompt
+
+    def _build_refine_issue_summary(self, pairs: List[Dict[str, Any]]) -> str:
+        """Summarize batch issues for the refine/polish prompt."""
+        lines = []
+        for index, pair in enumerate(pairs):
+            issues = pair.get("issues", [])
+            if not issues:
+                continue
+            for issue in issues:
+                priority = issue.get("priority", "P2")
+                issue_type = issue.get("type", "unknown")
+                description = issue.get("description", "")
+                suggestion = issue.get("suggestion", "")
+                line = f"- 段落 {index} [{priority}/{issue_type}]: {description}"
+                if suggestion:
+                    line += f"；建议：{suggestion}"
+                lines.append(line)
+        return "\n".join(lines) if lines else "无明确问题；请仅在确有必要时做轻量润色。"
 
     def _build_reflection_context_blocks(
         self,

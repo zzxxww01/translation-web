@@ -1,7 +1,7 @@
 {
   "section_id": "05-cpo-scale-out-total-cost-of-ow",
   "title": "CPO Scale-out Total Cost of Ownership (TCO)",
-  "title_translation": null,
+  "title_translation": "CPO横向扩展总拥有成本（TCO）",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,92 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文**：\n让我们深入审视传统收发器与共封装光学（CPO）方案的成本细节。英伟达首款CPO交换机Quantum X800-Q3450将采用72个光引擎，每个运行速率1.6T比特/秒；后续Quantum CPO交换机预计将转向36个光引擎，每个速率3.2T比特/秒，单价约1000美元（含FAU），这意味着每台系统的光引擎总成本约为3.6万美元。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:05:08.721585",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.444999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘Zoom into’呼应前文，可译为‘深入审视’。",
+          "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+          "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "从宏观TCO论证转向具体的成本构成对比。以Nvidia首款CPO交换机为例，初步揭示其光学引擎配置和成本结构，为Part 5详述供应链做铺垫，并暗示成本演进的路径（如从72个1.6T引擎向36个3.2T引擎演进）。",
+          "relation_to_previous": "直接承接04部分末句，开始详细分析“总资本成本”的故事。从功耗优势的论证，转入具体成本细节的剖析。",
+          "relation_to_next": "作为Part 1的收尾，它提供了一个从商业分析（TCO）转向技术实现（如何制造、供应链如何组织）的桥梁。其提到的‘optical engines’、‘cost’等关键词直接引向Part 3（制造）和Part 5（供应链）的深度讨论。",
+          "key_points": [
+            "通过对比传统可插拔光模块与CPO方案的成本细节来量化节省。",
+            "Nvidia Quantum X800-Q3450 CPO交换机采用72个1.6T光引擎，未来可能升级为36个3.2T光引擎以优化成本。",
+            "具体成本数据和分析（虽未在摘要中完整显示）是本节核心。"
+          ],
+          "translation_notes": [
+            "‘Zoom into’呼应前文，可译为‘深入审视’。",
+            "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+            "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+          ]
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光学引擎与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "单位翻译不符合本章翻译注意点要求"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS首次出现未附注全称和解释"
+          },
+          {
+            "type": "accuracy",
+            "description": "金额范围翻译不准确且逻辑轻微偏差"
+          },
+          {
+            "type": "terminology",
+            "description": "fiber shuffles 翻译为“光纤重排”不准确且未遵循行业惯例"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且逻辑关系表达不够清晰，存在轻微翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "语气轻微弱化，原文括号内“justified or not”带有分析性中立态度，译文处理较平"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "句式可更流畅，破折号使用稍显突兀"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +139,92 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "为了更直观地对比，若采用传统光收发器模块，成本情况如下：非CPO版本的X800-Q3400拥有72个OSFP笼，采用1.6T双端口收发器可提供144个800G端口。假设通用1.6T DR8收发器单价为1000美元，则填充该交换机的收发器总成本将达到7.2万美元，是CPO交换机实现相同带宽所需光引擎和电接口侧（ELS）估计成本（3.5万至4万美元）的两倍。不过，这还没有考虑交换机厂商的毛利率。若按60%的毛利率计算，最终卖给客户的CPO光引擎成本将达到8万至9万美元——反而比采用收发器的方案成本更高。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:05:08.721686",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.444999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘Zoom into’呼应前文，可译为‘深入审视’。",
+          "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+          "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "从宏观TCO论证转向具体的成本构成对比。以Nvidia首款CPO交换机为例，初步揭示其光学引擎配置和成本结构，为Part 5详述供应链做铺垫，并暗示成本演进的路径（如从72个1.6T引擎向36个3.2T引擎演进）。",
+          "relation_to_previous": "直接承接04部分末句，开始详细分析“总资本成本”的故事。从功耗优势的论证，转入具体成本细节的剖析。",
+          "relation_to_next": "作为Part 1的收尾，它提供了一个从商业分析（TCO）转向技术实现（如何制造、供应链如何组织）的桥梁。其提到的‘optical engines’、‘cost’等关键词直接引向Part 3（制造）和Part 5（供应链）的深度讨论。",
+          "key_points": [
+            "通过对比传统可插拔光模块与CPO方案的成本细节来量化节省。",
+            "Nvidia Quantum X800-Q3450 CPO交换机采用72个1.6T光引擎，未来可能升级为36个3.2T光引擎以优化成本。",
+            "具体成本数据和分析（虽未在摘要中完整显示）是本节核心。"
+          ],
+          "translation_notes": [
+            "‘Zoom into’呼应前文，可译为‘深入审视’。",
+            "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+            "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+          ]
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光学引擎与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "单位翻译不符合本章翻译注意点要求"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS首次出现未附注全称和解释"
+          },
+          {
+            "type": "accuracy",
+            "description": "金额范围翻译不准确且逻辑轻微偏差"
+          },
+          {
+            "type": "terminology",
+            "description": "fiber shuffles 翻译为“光纤重排”不准确且未遵循行业惯例"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且逻辑关系表达不够清晰，存在轻微翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "语气轻微弱化，原文括号内“justified or not”带有分析性中立态度，译文处理较平"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "句式可更流畅，破折号使用稍显突兀"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +251,92 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "此外还有光纤shuffle等其他组件同样需要承受这样的利润叠加。这也就解释了为什么根据所支付的收发器价格以及交换机厂商收取的毛利率不同，转向CPO所带来的成本节省可能并不显著。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:05:08.721711",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.444999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘Zoom into’呼应前文，可译为‘深入审视’。",
+          "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+          "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "从宏观TCO论证转向具体的成本构成对比。以Nvidia首款CPO交换机为例，初步揭示其光学引擎配置和成本结构，为Part 5详述供应链做铺垫，并暗示成本演进的路径（如从72个1.6T引擎向36个3.2T引擎演进）。",
+          "relation_to_previous": "直接承接04部分末句，开始详细分析“总资本成本”的故事。从功耗优势的论证，转入具体成本细节的剖析。",
+          "relation_to_next": "作为Part 1的收尾，它提供了一个从商业分析（TCO）转向技术实现（如何制造、供应链如何组织）的桥梁。其提到的‘optical engines’、‘cost’等关键词直接引向Part 3（制造）和Part 5（供应链）的深度讨论。",
+          "key_points": [
+            "通过对比传统可插拔光模块与CPO方案的成本细节来量化节省。",
+            "Nvidia Quantum X800-Q3450 CPO交换机采用72个1.6T光引擎，未来可能升级为36个3.2T光引擎以优化成本。",
+            "具体成本数据和分析（虽未在摘要中完整显示）是本节核心。"
+          ],
+          "translation_notes": [
+            "‘Zoom into’呼应前文，可译为‘深入审视’。",
+            "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+            "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+          ]
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光学引擎与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "单位翻译不符合本章翻译注意点要求"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS首次出现未附注全称和解释"
+          },
+          {
+            "type": "accuracy",
+            "description": "金额范围翻译不准确且逻辑轻微偏差"
+          },
+          {
+            "type": "terminology",
+            "description": "fiber shuffles 翻译为“光纤重排”不准确且未遵循行业惯例"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且逻辑关系表达不够清晰，存在轻微翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "语气轻微弱化，原文括号内“justified or not”带有分析性中立态度，译文处理较平"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "句式可更流畅，破折号使用稍显突兀"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +363,92 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "从下表可以看出，在三层网络中从收发器切换到CPO后，CPO组件上增加的毛利空间导致交换机成本上升81%，大幅抵消了不采购收发器所带来的86%节省。总体网络成本采用CPO仍比使用带DSP的收发器低31%，但正如功耗情况一样，由于服务器机架在集群总体拥有成本（TCO）中占比最大，集群总成本仅下降3%。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:05:08.721730",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.444999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘Zoom into’呼应前文，可译为‘深入审视’。",
+          "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+          "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "从宏观TCO论证转向具体的成本构成对比。以Nvidia首款CPO交换机为例，初步揭示其光学引擎配置和成本结构，为Part 5详述供应链做铺垫，并暗示成本演进的路径（如从72个1.6T引擎向36个3.2T引擎演进）。",
+          "relation_to_previous": "直接承接04部分末句，开始详细分析“总资本成本”的故事。从功耗优势的论证，转入具体成本细节的剖析。",
+          "relation_to_next": "作为Part 1的收尾，它提供了一个从商业分析（TCO）转向技术实现（如何制造、供应链如何组织）的桥梁。其提到的‘optical engines’、‘cost’等关键词直接引向Part 3（制造）和Part 5（供应链）的深度讨论。",
+          "key_points": [
+            "通过对比传统可插拔光模块与CPO方案的成本细节来量化节省。",
+            "Nvidia Quantum X800-Q3450 CPO交换机采用72个1.6T光引擎，未来可能升级为36个3.2T光引擎以优化成本。",
+            "具体成本数据和分析（虽未在摘要中完整显示）是本节核心。"
+          ],
+          "translation_notes": [
+            "‘Zoom into’呼应前文，可译为‘深入审视’。",
+            "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+            "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+          ]
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光学引擎与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "单位翻译不符合本章翻译注意点要求"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS首次出现未附注全称和解释"
+          },
+          {
+            "type": "accuracy",
+            "description": "金额范围翻译不准确且逻辑轻微偏差"
+          },
+          {
+            "type": "terminology",
+            "description": "fiber shuffles 翻译为“光纤重排”不准确且未遵循行业惯例"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且逻辑关系表达不够清晰，存在轻微翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "语气轻微弱化，原文括号内“justified or not”带有分析性中立态度，译文处理较平"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "句式可更流畅，破折号使用稍显突兀"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +475,92 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "若将网络从三层压平至两层，成本节省更为可观——集群总体拥有成本最高可降低7%，其中收发器成本下降86%，总体网络成本下降46%。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:05:08.721756",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.444999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘Zoom into’呼应前文，可译为‘深入审视’。",
+          "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+          "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "从宏观TCO论证转向具体的成本构成对比。以Nvidia首款CPO交换机为例，初步揭示其光学引擎配置和成本结构，为Part 5详述供应链做铺垫，并暗示成本演进的路径（如从72个1.6T引擎向36个3.2T引擎演进）。",
+          "relation_to_previous": "直接承接04部分末句，开始详细分析“总资本成本”的故事。从功耗优势的论证，转入具体成本细节的剖析。",
+          "relation_to_next": "作为Part 1的收尾，它提供了一个从商业分析（TCO）转向技术实现（如何制造、供应链如何组织）的桥梁。其提到的‘optical engines’、‘cost’等关键词直接引向Part 3（制造）和Part 5（供应链）的深度讨论。",
+          "key_points": [
+            "通过对比传统可插拔光模块与CPO方案的成本细节来量化节省。",
+            "Nvidia Quantum X800-Q3450 CPO交换机采用72个1.6T光引擎，未来可能升级为36个3.2T光引擎以优化成本。",
+            "具体成本数据和分析（虽未在摘要中完整显示）是本节核心。"
+          ],
+          "translation_notes": [
+            "‘Zoom into’呼应前文，可译为‘深入审视’。",
+            "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+            "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+          ]
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光学引擎与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "单位翻译不符合本章翻译注意点要求"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS首次出现未附注全称和解释"
+          },
+          {
+            "type": "accuracy",
+            "description": "金额范围翻译不准确且逻辑轻微偏差"
+          },
+          {
+            "type": "terminology",
+            "description": "fiber shuffles 翻译为“光纤重排”不准确且未遵循行业惯例"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且逻辑关系表达不够清晰，存在轻微翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "语气轻微弱化，原文括号内“justified or not”带有分析性中立态度，译文处理较平"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "句式可更流畅，破折号使用稍显突兀"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -234,18 +634,26 @@
       "expected_tokens": [
         "LINK_1"
       ],
-      "format_recovery_status": "not_applicable",
+      "format_recovery_status": "ready",
       "format_errors": [],
       "is_heading": false,
       "heading_level": null,
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
-      "confirmed_tokenized": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis AI Networking 模型",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821321",
+          "tokenized_text": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis AI Networking 模型",
+      "confirmed_tokenized": "来源：[[[LINK_1|SemiAnalysis AI Networking 模型]]]",
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -273,12 +681,92 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "那么，如果共封装光学（CPO）一方面仅能提供最高7%的成本节省和最高4%的功耗节省，另一方面却引发现场维护困难、对可靠性和爆炸半径的担忧（无论是否合理）、以及失去多家收发器厂商议价能力的问题——为什么GPU云服务商仍在采用它？简单的答案是：它目前尚未被广泛采用——我们预计在短期内，超大规模数据中心内横向扩展CPO系统的采用曲线不会快速上升。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:05:08.721773",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.444999999999999,
+        "is_excellent": false,
+        "applied_terms": [
+          "‘Zoom into’呼应前文，可译为‘深入审视’。",
+          "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+          "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+        ],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "从宏观TCO论证转向具体的成本构成对比。以Nvidia首款CPO交换机为例，初步揭示其光学引擎配置和成本结构，为Part 5详述供应链做铺垫，并暗示成本演进的路径（如从72个1.6T引擎向36个3.2T引擎演进）。",
+          "relation_to_previous": "直接承接04部分末句，开始详细分析“总资本成本”的故事。从功耗优势的论证，转入具体成本细节的剖析。",
+          "relation_to_next": "作为Part 1的收尾，它提供了一个从商业分析（TCO）转向技术实现（如何制造、供应链如何组织）的桥梁。其提到的‘optical engines’、‘cost’等关键词直接引向Part 3（制造）和Part 5（供应链）的深度讨论。",
+          "key_points": [
+            "通过对比传统可插拔光模块与CPO方案的成本细节来量化节省。",
+            "Nvidia Quantum X800-Q3450 CPO交换机采用72个1.6T光引擎，未来可能升级为36个3.2T光引擎以优化成本。",
+            "具体成本数据和分析（虽未在摘要中完整显示）是本节核心。"
+          ],
+          "translation_notes": [
+            "‘Zoom into’呼应前文，可译为‘深入审视’。",
+            "‘1.6Tbit/s’和‘3.2Tbit/s’需准确翻译为‘1.6T比特/秒’和‘3.2T比特/秒’，单位统一。",
+            "‘cost’一词虽未展开，但暗示后续有详细成本分析，翻译时需保持语句的开放性，为下文留出空间。此段可能是总分结构的总起句。"
+          ]
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "光学引擎与术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "单位翻译不符合本章翻译注意点要求"
+          },
+          {
+            "type": "terminology",
+            "description": "ELS首次出现未附注全称和解释"
+          },
+          {
+            "type": "accuracy",
+            "description": "金额范围翻译不准确且逻辑轻微偏差"
+          },
+          {
+            "type": "terminology",
+            "description": "fiber shuffles 翻译为“光纤重排”不准确且未遵循行业惯例"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且逻辑关系表达不够清晰，存在轻微翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "语气轻微弱化，原文括号内“justified or not”带有分析性中立态度，译文处理较平"
+          },
+          {
+            "type": "readability",
+            "description": "用词可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "句式可更流畅，破折号使用稍显突兀"
+          }
+        ]
+      },
       "history": []
     }
   ]

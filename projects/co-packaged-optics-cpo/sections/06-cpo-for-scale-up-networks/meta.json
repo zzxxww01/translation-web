@@ -1,7 +1,7 @@
 {
   "section_id": "06-cpo-for-scale-up-networks",
   "title": "CPO for Scale-up Networks",
-  "title_translation": null,
+  "title_translation": "面向纵向扩展网络的CPO",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "相反，我们认为共封装光学（CPO）在纵向扩展中的应用才是关键杀手级应用。正如前文所述，主要的超大规模云服务商已经开始向供应商做出承诺，计划在本十年末部署基于CPO的纵向扩展解决方案。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187439",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +123,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "目前，主流的基于铜缆的纵向扩展模式正面临极限：当每通道速率达到200Gbit/s时，铜缆最远只能传输两米，同时每通道带宽翻倍也变得越来越困难。共封装光学（CPO）能够解决这些问题，它可以满足带宽密度要求，并为未来带宽持续扩展提供多种技术路径，同时解锁规模大得多的纵向扩展域。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187483",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +219,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "一旦CPO部署于纵向扩展网络，纵向扩展域将不再受互连距离限制。原则上，客户能够将纵向扩展域扩展到任意规模。当然，如果希望将纵向扩展域保持在支持全互联的单级扇出网络内，其规模仍会受到交换机基数（switch radix）的限制。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187500",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -123,12 +315,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "横向扩展与纵向扩展的总可寻址市场（TAM）",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187515",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -155,12 +411,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "纵向扩展网络架构对网络的要求远高于后端横向扩展网络。GPU到GPU或GPU到交换机的链路需要更高的带宽和更低的延迟，才能让GPU实现互连并连贯地共享内存等资源。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187529",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -187,12 +507,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "以英伟达布莱克韦尔（Blackwell）上的第五代NVLink为例，每块GPU可提供900 GB/s（7,200 Gbit/s）的单向带宽。这比后端横向扩展网络中每块GPU的100 GB/s（800 Gbit/s）带宽高出9倍（后端使用CX-8 NIC连接GB300 NVL72）。这也对主机侧的边缘带宽密度提出了更高要求，正是推动GPU SerDes线速率不断提升的主要动力。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187543",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -219,12 +603,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "还需认识到，随着纵向扩展域规模不断扩大以及纵向扩展互连速度持续提升，纵向扩展互连（最终是纵向扩展共封装光学）的总可寻址市场已经大幅超过横向扩展网络。CPO的总可寻址市场预计将主要由纵向扩展而非横向扩展网络应用主导。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187557",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -283,11 +731,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821100",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -315,12 +771,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "铜缆与光通信在纵向扩展中的对比：规模、密度与距离",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187570",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -347,12 +867,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "目前，纵向扩展网络完全采用铜缆是有充分理由的。在当前可插拔光模块的范式下，要匹配NVLink的带宽，使用光收发器在成本和功耗上都高得令人望而却步，还会引入额外的延迟。此外，计算托盘的面面板可能也没有足够空间来容纳所有这些收发器。铜缆在实现这些低延迟、高吞吐量的连接方面表现出色。不过，如前所述，铜缆的有限传输距离限制了“世界规模”——即能够在单个纵向扩展域内互连的GPU数量。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187583",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -379,12 +963,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "扩大纵向扩展的世界规模是计算扩展中极其重要的一条路径。在当今基于推理的模型扩展和测试时计算的趋势下，在单个纵向扩展域内增加更多计算、内存容量和内存带宽已变得越来越关键。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187596",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -411,12 +1059,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英伟达的GB200系统带来了巨大的性能提升，因为它将世界规模从仅8个互连GPU扩大到72个GPU的全互联拓扑。结果是通过实现更复杂的集体通信技术（这些技术在横向扩展网络上无法实现）解锁了巨大的吞吐量提升。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187608",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -443,12 +1155,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在铜缆方案下，这只能在单个机架的物理空间内完成，从而对供电、热管理和可制造性提出了极高要求。这一系统的复杂性导致下游供应链仍在努力提升产能。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187620",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -475,12 +1251,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "英伟达将继续坚持使用铜缆。他们还需要进一步提升纵向扩展的规模，以保持对AMD和正在追赶的自研纵向扩展网络的超大规模云厂商等竞争对手的优势。因此，英伟达只能竭尽全力在单个机架内扩展纵向扩展域。英伟达在GTC 2025上展示的用于Rubin Ultra的极端Kyber机架架构可扩展至144个GPU封装（576个GPU裸片）。该机架的密度是已经很密集的GB200/300 NVL72机架的4倍。由于GB200的制造和部署已经极为复杂，Kyber更是将其推向了新的高度。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187631",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -507,12 +1347,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "光学方案则采用了相反的方法，通过跨多个机架扩展来增加世界规模，而不是在密集空间内塞入更多加速器——后者对供电和热密度而言极具挑战。目前使用可插拔收发器可以实现这一点，但光收发器的成本及其高功耗再次使其变得不切实际。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187642",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -571,11 +1475,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821112",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     },
@@ -603,12 +1515,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "铜缆与光通信在纵向扩展中的对比：带宽扩展",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187654",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -635,12 +1611,76 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "在铜缆上扩展带宽也变得越来越困难。在Rubin架构中，英伟达通过采用新型双向SerDes技术实现了带宽翻倍，即发送和接收操作共享同一通道，从而在每个通道实现224Gbit/s发送+224Gbit/s接收的全双工通信。在铜缆上实现“真正”的每通道448G仍是一项极具挑战性的任务，量产时间尚不确定。相比之下，共封装光学（CPO）提供了多种带宽扩展途径：波特率、密集波分复用（DWDM）、额外光纤对以及调制方式——所有这些将在本文后续部分详细讨论。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:06:26.187665",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.109999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.0,
+          "accuracy": 9.2
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "杀手级应用 程度词力度偏离原文"
+          },
+          {
+            "type": "terminology",
+            "description": "将 'bandwidth density requirements' 译为'边缘带宽密度要求'，但术语表中未定义'边缘带宽'，且前后文一致性不足"
+          },
+          {
+            "type": "readability",
+            "description": "数字格式与原文不完全一致，原文使用逗号分隔千位，译文未严格遵循"
+          },
+          {
+            "type": "tone",
+            "description": "译文'同样重要的是'削弱了原文的分析性强调语气"
+          },
+          {
+            "type": "readability",
+            "description": "长句未充分拆分，'在成本、功耗方面都极其昂贵，同时还会引入额外的延迟'仍有翻译腔"
+          },
+          {
+            "type": "tone",
+            "description": "将 'vitally important' 升级为'至关重要'，而原文使用 'vitally important' 后接 'critical'，译文造成程度词重复升级"
+          },
+          {
+            "type": "readability",
+            "description": "译文'被迫采取极端措施'语气过于负面，与原文冷静分析的语调不符"
+          },
+          {
+            "type": "terminology",
+            "description": "DWDM 首次出现未添加全称注释"
+          }
+        ]
+      },
       "history": []
     }
   ]

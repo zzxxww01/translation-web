@@ -1,7 +1,7 @@
 {
   "section_id": "41-optical-engines",
   "title": "Optical Engines",
-  "title_translation": null,
+  "title_translation": "光引擎",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,64 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n英伟达X800-Q3450共封装光学（Co-packaged Optics，CPO）交换机总吞吐量达115.2 Tbit/s，专为横向扩展网络设计。其初始版本将采用72个光引擎（Optical Engine，OE），每个速率为1.6 Tbit/s；后续版本预计将过渡到36个光引擎，每个速率为3.2 Tbit/s，每个光引擎成本约为1000美元（含光纤阵列单元（Fiber Array Unit，FAU））。因此，光引擎的物料清单（BOM）总成本约为3.5万至4万美元（按3.2T版本计算）。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:45:49.052709",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 8.635,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 8.5,
+          "accuracy": 8.7
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "首次出现'光引擎'时未按要求附注英文全称和中文解释"
+          },
+          {
+            "type": "terminology",
+            "description": "术语表中明确BOM应译为'物料清单'，但译文同时使用了'物料清单（BoM）'，缩写大小写不一致且未严格遵循术语表格式"
+          },
+          {
+            "type": "accuracy",
+            "description": "原文明确说明是per unit（每个光引擎）约1000美元（含FAU），而非'单价约为1000美元'可能产生的歧义，且FAU首次出现未标注"
+          },
+          {
+            "type": "readability",
+            "description": "译文略显生硬，可用更自然的中文科技表达方式"
+          },
+          {
+            "type": "readability",
+            "description": "句式可更简洁流畅，避免轻微的翻译腔"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,11 +143,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：英伟达",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821797",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：英伟达",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

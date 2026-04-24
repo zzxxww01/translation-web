@@ -1,7 +1,7 @@
 {
   "section_id": "17-cpo-optical-engine-manufacturi",
   "title": "CPO optical engine manufacturing considerations and go to market",
-  "title_translation": null,
+  "title_translation": "CPO光引擎的制造考量与市场化",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "共封装光学（CPO）目前尚未达到可支持大规模采用的制造量。博通是唯一已出货采用CPO生产系统的厂商，其Bailly和Humboldt交换机出货量都极低，但现在英伟达也加入战局。CPO引入了许多新的制造工艺，也带来了显著的可制造性挑战。由于供应链尚不成熟且缺乏可靠性数据，客户也因此不愿贸然采用这项技术。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:57.436699",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.425,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 6.8,
+          "accuracy": 7.9
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "关键事实完全错译：原文明确表示Broadcom是唯一出货CPO生产系统的厂商，而译文误将主语改为英伟达"
+          },
+          {
+            "type": "terminology",
+            "description": "首次出现CPO时未按要求同时提供英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显且程度词调整不当，“take the plunge”被译为“果断采用”后又接“持谨慎态度”，逻辑矛盾"
+          },
+          {
+            "type": "terminology",
+            "description": "Scale-up networking 翻译为“纵向扩展网络”与术语表中“Scale-up → 纵向扩展”不完全一致，且上下文应保持为“纵向扩展”"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬且有明显翻译腔，“正是正在”重复且awkward"
+          },
+          {
+            "type": "readability",
+            "description": "“获得市场 traction”混用英文，显得不够中文化"
+          },
+          {
+            "type": "readability",
+            "description": "列表项翻译可更精确和自然，“Host and Optical Engine packaging”中的Optical Engine应使用术语表中的“光引擎（OE）”"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +119,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n要让共封装光学（CPO）真正站稳脚跟，行业领军者必须投身出货这些产品，驱动供应链打造可规模化的制造与测试流程。英伟达正是率先入局的企业，其目标是让供应链准备就绪、发现并解决各类问题，并为数据中心运营商做好准备，以迎接我们认为将成为“杀手级”应用的纵向扩展（Scale-up）网络。关于CPO，有几个关键组件和考量因素需要重点关注，它们都对性能和可制造性产生重要影响。这些因素包括：",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:57.436745",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.425,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 6.8,
+          "accuracy": 7.9
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "关键事实完全错译：原文明确表示Broadcom是唯一出货CPO生产系统的厂商，而译文误将主语改为英伟达"
+          },
+          {
+            "type": "terminology",
+            "description": "首次出现CPO时未按要求同时提供英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显且程度词调整不当，“take the plunge”被译为“果断采用”后又接“持谨慎态度”，逻辑矛盾"
+          },
+          {
+            "type": "terminology",
+            "description": "Scale-up networking 翻译为“纵向扩展网络”与术语表中“Scale-up → 纵向扩展”不完全一致，且上下文应保持为“纵向扩展”"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬且有明显翻译腔，“正是正在”重复且awkward"
+          },
+          {
+            "type": "readability",
+            "description": "“获得市场 traction”混用英文，显得不够中文化"
+          },
+          {
+            "type": "readability",
+            "description": "列表项翻译可更精确和自然，“Host and Optical Engine packaging”中的Optical Engine应使用术语表中的“光引擎（OE）”"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +211,72 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "1. 主机与光引擎（Optical Engine，OE）封装 2. 光纤与光纤耦合 3. 激光光源与波长复用 4. 调制器类型",
+          "model": "pro",
+          "created_at": "2026-04-22T18:16:57.436762",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.425,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 6.8,
+          "accuracy": 7.9
+        },
+        "issues": [
+          {
+            "type": "accuracy",
+            "description": "关键事实完全错译：原文明确表示Broadcom是唯一出货CPO生产系统的厂商，而译文误将主语改为英伟达"
+          },
+          {
+            "type": "terminology",
+            "description": "首次出现CPO时未按要求同时提供英文全称和中文解释"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显且程度词调整不当，“take the plunge”被译为“果断采用”后又接“持谨慎态度”，逻辑矛盾"
+          },
+          {
+            "type": "terminology",
+            "description": "Scale-up networking 翻译为“纵向扩展网络”与术语表中“Scale-up → 纵向扩展”不完全一致，且上下文应保持为“纵向扩展”"
+          },
+          {
+            "type": "readability",
+            "description": "句子结构生硬且有明显翻译腔，“正是正在”重复且awkward"
+          },
+          {
+            "type": "readability",
+            "description": "“获得市场 traction”混用英文，显得不够中文化"
+          },
+          {
+            "type": "readability",
+            "description": "列表项翻译可更精确和自然，“Host and Optical Engine packaging”中的Optical Engine应使用术语表中的“光引擎（OE）”"
+          }
+        ]
+      },
       "history": []
     }
   ]

@@ -1,7 +1,7 @@
 {
   "section_id": "02-part-1-cpo-total-cost-of-owne",
   "title": "Part 1: CPO Total Cost of Ownership (TCO) Analysis",
-  "title_translation": null,
+  "title_translation": "第一部分：CPO总拥有成本（TCO）分析",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,11 +27,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "在今年早些时候的英伟达（NVIDIA）GTC 2025 上，最备受瞩目的焦点之一，莫过于黄仁勋宣布推出公司首款基于 CPO 技术的横向扩展网络交换机。值得注意的是，在纵向扩展方面，英伟达依然在坚持推进铜缆方案，极力避免转向光互连，这一策略甚至将延续至 2027 年和 2028 年。",
+          "model": "default",
+          "created_at": "2026-04-22T15:23:39.787658",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -59,11 +67,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "让我们先从总拥有成本（TCO）入手，开启对这些新型 CPO 交换机的探讨，分析 CPO 能为横向扩展节省多少成本与功耗。",
+          "model": "default",
+          "created_at": "2026-04-22T15:24:28.115906",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -91,11 +107,19 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "default": {
+          "text": "英伟达（NVIDIA）在 GTC 2025 主题演讲中发布了三款不同的 CPO 横向扩展交换机，这些设备搭载了两种不同的支持 CPO 的交换机 ASIC。尽管它们在 TCO、功耗和部署速度上具备优势，但这并不足以让客户贸然转向一套截然不同的部署体系。因此，我们预计首批 CPO 横向扩展交换机的采用率将十分有限。下面我们将剖析具体原因。",
+          "model": "default",
+          "created_at": "2026-04-22T15:24:45.752436",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "translated",
       "ai_insight": null,
       "history": []
     },
@@ -155,11 +179,19 @@
       "heading_chain": [],
       "is_metadata": true,
       "metadata_type": "source",
-      "translations": {},
-      "confirmed": null,
+      "translations": {
+        "source_metadata": {
+          "text": "来源：SemiAnalysis",
+          "model": "source_metadata",
+          "created_at": "2026-04-22T11:53:07.821087",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
+      "confirmed": "来源：SemiAnalysis",
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
+      "status": "approved",
       "ai_insight": null,
       "history": []
     }

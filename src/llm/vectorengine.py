@@ -193,7 +193,6 @@ class VectorEngineProvider(LLMProvider):
             "messages": messages,
             "temperature": temp,
             "max_tokens": max_tokens,
-            "timeout": request_timeout,
         }
 
         # Add response format if JSON requested
@@ -201,7 +200,7 @@ class VectorEngineProvider(LLMProvider):
             request_params["response_format"] = {"type": "json_object"}
 
         try:
-            logger.debug(f"[VectorEngine] Calling model={model_name}, temp={temp}")
+            logger.info(f"[VectorEngine] Calling model={model_name}, temp={temp}, timeout={request_timeout}")
             client = self.client
             if hasattr(self.client, "with_options"):
                 client = self.client.with_options(
@@ -284,6 +283,192 @@ class VectorEngineProvider(LLMProvider):
 
         return prompt
 
+    def deep_analyze_with_term_verification(
+        self,
+        outline: str,
+        sampled_text: str,
+        high_freq_candidates: List[Dict[str, Any]],
+        timeout: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        合并深度分析和术语验证（方案6）
+
+        Args:
+            outline: 文档大纲
+            sampled_text: 采样文本
+            high_freq_candidates: 高频术语候选列表
+            timeout: 超时时间（秒）
+
+        Returns:
+            Dict: 合并分析结果
+        """
+        # 构建高频术语列表文本
+        high_freq_terms_list = "\n".join([
+            f"{i+1}. **{term['term']}** (出现 {term['frequency']} 次)"
+            for i, term in enumerate(high_freq_candidates)
+        ])
+
+        # 使用prompt_manager构建prompt
+        prompt = self.prompt_manager.get(
+            "longform/analysis/deep_analyze_with_terms",
+            outline=outline,
+            sampled_text=sampled_text,
+            high_freq_terms_list=high_freq_terms_list
+        )
+
+        # 调用LLM
+        response = self.generate(
+            prompt,
+            response_format="json",
+            temperature=0.3,
+            timeout=timeout
+        )
+
+        # 清理响应：移除markdown代码块标记
+        response = response.strip()
+        if response.startswith("```json"):
+            response = response[7:]  # 移除 ```json
+        elif response.startswith("```"):
+            response = response[3:]  # 移除 ```
+        if response.endswith("```"):
+            response = response[:-3]  # 移除结尾的 ```
+        response = response.strip()
+
+        # 解析JSON响应
+        import json
+        import re
+        try:
+            result = json.loads(response)
+            return result
+        except json.JSONDecodeError as e:
+            # 尝试修复常见的JSON错误
+            logger.warning(f"[VectorEngine] Initial JSON parse failed: {e}, attempting to fix...")
+
+            # 尝试1: 截断到最后一个完整的对象
+            try:
+                # 找到最后一个完整的 }
+                last_brace = response.rfind('}')
+                if last_brace > 0:
+                    fixed_response = response[:last_brace + 1]
+                    result = json.loads(fixed_response)
+                    logger.info(f"[VectorEngine] Successfully parsed truncated JSON (method 1)")
+                    return result
+            except:
+                pass
+
+            # 尝试2: 智能补全未闭合的字符串和对象
+            try:
+                fixed = response
+                # 移除未闭合的字符串（找到最后一个完整的引号对）
+                quote_count = fixed.count('"')
+                if quote_count % 2 != 0:
+                    # 奇数个引号，移除最后一个未闭合的字符串
+                    last_quote = fixed.rfind('"')
+                    if last_quote > 0:
+                        # 回退到上一个逗号或换行
+                        prev_comma = fixed.rfind(',', 0, last_quote)
+                        prev_newline = fixed.rfind('\n', 0, last_quote)
+                        cutoff = max(prev_comma, prev_newline)
+                        if cutoff > 0:
+                            fixed = fixed[:cutoff]
+
+                # 补全缺失的括号
+                open_braces = fixed.count('{')
+                close_braces = fixed.count('}')
+                if open_braces > close_braces:
+                    fixed += '\n}' * (open_braces - close_braces)
+
+                open_brackets = fixed.count('[')
+                close_brackets = fixed.count(']')
+                if open_brackets > close_brackets:
+                    fixed += ']' * (open_brackets - close_brackets)
+
+                result = json.loads(fixed)
+                logger.info(f"[VectorEngine] Successfully parsed with smart completion (method 2)")
+                return result
+            except:
+                pass
+
+            # 尝试3: 逐行回退找到可解析的部分
+            try:
+                lines = response.split('\n')
+                for i in range(len(lines) - 1, max(0, len(lines) - 50), -1):
+                    partial = '\n'.join(lines[:i])
+
+                    # 移除未闭合的字符串
+                    if partial.count('"') % 2 != 0:
+                        last_quote = partial.rfind('"')
+                        if last_quote > 0:
+                            prev_comma = partial.rfind(',', 0, last_quote)
+                            if prev_comma > 0:
+                                partial = partial[:prev_comma]
+
+                    # 补全括号
+                    if partial.count('{') > partial.count('}'):
+                        partial += '\n}' * (partial.count('{') - partial.count('}'))
+                    if partial.count('[') > partial.count(']'):
+                        partial += ']' * (partial.count('[') - partial.count(']'))
+
+                    try:
+                        result = json.loads(partial)
+                        logger.info(f"[VectorEngine] Successfully parsed partial JSON (method 3: kept {i}/{len(lines)} lines)")
+                        return result
+                    except:
+                        continue
+            except:
+                pass
+
+            # 尝试4: 提取关键字段（最后的手段）
+            try:
+                # 尝试提取至少包含theme和key_arguments的部分
+                result = {}
+
+                # 提取theme
+                theme_match = re.search(r'"theme"\s*:\s*"([^"]*)"', response)
+                if theme_match:
+                    result['theme'] = theme_match.group(1)
+
+                # 提取key_arguments
+                key_args_match = re.search(r'"key_arguments"\s*:\s*\[(.*?)\]', response, re.DOTALL)
+                if key_args_match:
+                    args_text = key_args_match.group(1)
+                    args = re.findall(r'"([^"]*)"', args_text)
+                    result['key_arguments'] = args
+
+                # 提取structure_summary
+                struct_match = re.search(r'"structure_summary"\s*:\s*"([^"]*)"', response)
+                if struct_match:
+                    result['structure_summary'] = struct_match.group(1)
+
+                # 提取style
+                style_match = re.search(r'"style"\s*:\s*\{([^}]*)\}', response)
+                if style_match:
+                    style_text = style_match.group(1)
+                    style = {}
+                    for field in ['tone', 'target_audience', 'translation_voice']:
+                        field_match = re.search(f'"{field}"\s*:\s*"([^"]*)"', style_text)
+                        if field_match:
+                            style[field] = field_match.group(1)
+                    result['style'] = style
+
+                if result:
+                    logger.warning(f"[VectorEngine] Extracted partial data using regex (method 4): {list(result.keys())}")
+                    # 补充默认值
+                    result.setdefault('sampled_terms', [])
+                    result.setdefault('verified_high_freq_terms', [])
+                    result.setdefault('challenges', [])
+                    result.setdefault('guidelines', [])
+                    return result
+            except:
+                pass
+
+            # 所有修复尝试都失败
+            logger.error(f"[VectorEngine] Failed to parse JSON response: {e}")
+            logger.error(f"[VectorEngine] Response length: {len(response)}")
+            logger.error(f"[VectorEngine] Response preview: {response[:500]}")
+            logger.error(f"[VectorEngine] Response ending: {response[-500:]}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}")
+
     def analyze(self, text: str) -> Dict[str, Any]:
         """Analyze text and extract terminology"""
         prompt = f"""分析以下文本，提取关键术语和建议的翻译风格。
@@ -299,6 +484,104 @@ class VectorEngineProvider(LLMProvider):
 
         response = self.generate(prompt, response_format="json", temperature=0.3)
         return self._parse_json_response(response)
+
+    def deep_analyze_document(
+        self,
+        outline: str,
+        sampled_text: str,
+        timeout: Optional[float] = None
+    ) -> Dict[str, Any]:
+        """
+        深度分析文档（不包含术语验证）
+
+        Args:
+            outline: 文档大纲
+            sampled_text: 采样文本
+            timeout: 超时时间（秒）
+
+        Returns:
+            Dict: 分析结果
+        """
+        # 使用prompt_manager构建prompt
+        prompt = self.prompt_manager.get(
+            "longform/analysis/deep_analyze",
+            outline=outline,
+            sampled_text=sampled_text
+        )
+
+        # 调用LLM
+        response = self.generate(
+            prompt,
+            response_format="json",
+            temperature=0.3,
+            timeout=timeout
+        )
+
+        # 清理和解析响应
+        response = response.strip()
+        if response.startswith("```json"):
+            response = response[7:]
+        elif response.startswith("```"):
+            response = response[3:]
+        if response.endswith("```"):
+            response = response[:-3]
+        response = response.strip()
+
+        import json
+        result = json.loads(response)
+        return result
+
+    def verify_high_frequency_terms(
+        self,
+        sampled_text: str,
+        high_freq_candidates: List[Dict[str, Any]],
+        timeout: Optional[float] = None
+    ) -> List[Dict[str, Any]]:
+        """
+        验证高频术语候选
+
+        Args:
+            sampled_text: 采样文本
+            high_freq_candidates: 高频术语候选列表
+            timeout: 超时时间（秒）
+
+        Returns:
+            List[Dict]: 验证通过的术语列表
+        """
+        # 构建高频术语列表文本
+        high_freq_terms_list = "\n".join([
+            f"{i+1}. **{term['term']}** (出现 {term['frequency']} 次)"
+            for i, term in enumerate(high_freq_candidates)
+        ])
+
+        # 使用prompt_manager构建prompt
+        prompt = self.prompt_manager.get(
+            "longform/analysis/verify_terms",
+            sampled_text=sampled_text,
+            high_freq_terms_list=high_freq_terms_list
+        )
+
+        # 调用LLM
+        response = self.generate(
+            prompt,
+            response_format="json",
+            temperature=0.3,
+            timeout=timeout
+        )
+
+        # 清理和解析响应
+        response = response.strip()
+        if response.startswith("```json"):
+            response = response[7:]
+        elif response.startswith("```"):
+            response = response[3:]
+        if response.endswith("```"):
+            response = response[:-3]
+        response = response.strip()
+
+        import json
+        result = json.loads(response)
+        return result.get("verified_terms", [])
 
     def check_consistency(
         self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
@@ -360,7 +643,7 @@ class VectorEngineProvider(LLMProvider):
         )
 
         try:
-            response = self.generate(prompt, response_format="json", temperature=0.5)
+            response = self.generate(prompt, response_format="json", temperature=0.3)
             result = self._parse_json_response(response)
         except Exception as exc:
             logger.error(f"[VectorEngine] Batch translation failed: {exc}")

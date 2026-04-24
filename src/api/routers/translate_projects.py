@@ -394,12 +394,14 @@ async def translate_with_four_steps(
         )
         total_sections = len(sections) if sections else 0
 
+        # 创建BatchTranslationService实例，传递用户模型覆盖
         batch_service = BatchTranslationService(
             llm_provider=llm,
             project_manager=pm,
             translation_mode=BatchTranslationService.TRANSLATION_MODE_FOUR_STEP,
             max_concurrent_sections=10,  # 并发翻译10个章节（VectorEngine支持100并发）
             analysis_llm_provider=analysis_llm,
+            user_model_override=_body.model,  # 传递用户指定的模型
         )
     except Exception:
         BatchTranslationService._release_active_run(project_id)

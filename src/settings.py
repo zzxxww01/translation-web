@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     llm_default_model: str = "pro-official"  # Default model alias for all tasks
 
     # Task-specific default models (can override llm_default_model)
-    llm_model_longform: str = "deepseek-relay"  # Long-form translation
+    llm_model_longform: str = "deepseek-v3.2"  # Long-form translation
     llm_model_post: str = "flash-official"      # Post translation
     llm_model_analysis: str = "pro-official"    # Text analysis
     llm_model_title: str = "flash-official"     # Title translation
@@ -63,7 +63,7 @@ class Settings(BaseSettings):
     vectorengine_default_model: str = "deepseek-v3.2"
     vectorengine_temperature: float = 0.7
     vectorengine_max_tokens: int = 8192
-    vectorengine_timeout: int = 120
+    vectorengine_timeout: int = 600
     vectorengine_max_retries: int = 3
 
     # Storage

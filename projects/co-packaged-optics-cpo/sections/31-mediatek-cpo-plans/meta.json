@@ -1,7 +1,7 @@
 {
   "section_id": "31-mediatek-cpo-plans",
   "title": "MediaTek CPO plans",
-  "title_translation": null,
+  "title_translation": "联发科CPO计划",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n作为定制ASIC设计公司的联发科，正将共封装光学（CPO）能力融入其设计平台。他们计划提供可与其定制加速器无缝协同的PIC/EIC设计方案。联发科认为，在200G每通道世代，近封装铜互连（NPC）在光纤间距大于900 µm时可作为有效解决方案；而随着数据速率提升至200-300G范围，采用更密集光纤间距（大于400 µm）的共封装铜互连（CPC）可能更为合适。不过，一旦速率达到400G每通道或更高，很可能有必要转向共封装光学（CPO）架构。该架构可将光纤间距进一步缩小至约130 µm，并采用更为紧凑的互连IP。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:35:03.900283",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.97,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "NPC术语翻译与提供的术语表不一致"
+          },
+          {
+            "type": "terminology",
+            "description": "CPC为未在术语表中定义的新缩写，未进行任何注释"
+          },
+          {
+            "type": "readability",
+            "description": "句子过长且使用破折号嵌套，保留了明显的英文句法投影，读起来不够顺畅"
+          },
+          {
+            "type": "tone",
+            "description": "程度词力度调整不当，将原文推测性语气部分升级"
+          },
+          {
+            "type": "readability",
+            "description": "存在轻微翻译腔，“正致力于...整合到...中”可更自然"
+          },
+          {
+            "type": "readability",
+            "description": "分号连接的并列句逻辑衔接可更丰富"
+          }
+        ]
+      },
       "history": []
     }
   ]

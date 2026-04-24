@@ -59,7 +59,7 @@ from src.core.title_guard import (
 from src.agents.deep_analyzer import DeepAnalyzer
 from src.agents.four_step_translator import FourStepTranslator
 from src.agents.context_manager import LayeredContextManager
-from src.agents.consistency_reviewer import ConsistencyReviewer
+from src.agents.quality_report_generator import QualityReportGenerator
 from src.llm.base import LLMProvider
 from src.services.batch_translation_types import TranslationProgress
 from src.services.progress_tracker import ProgressTracker
@@ -104,21 +104,30 @@ class BatchTranslationService:
         translation_mode: str = "section",  # 默认使用章节级翻译
         max_concurrent_sections: int = 10,  # 最大并发章节数（提高到10）
         analysis_llm_provider: Optional[LLMProvider] = None,
+        user_model_override: Optional[str] = None,  # 用户指定的模型（全流程使用）
     ):
         """
         初始化批量翻译服务
 
         Args:
-            llm_provider: LLM Provider
+            llm_provider: LLM Provider（用于向后兼容）
             project_manager: 项目管理器
             translation_mode: 翻译模式 ("four_step" 或 "section")
             max_concurrent_sections: 最大并发章节数（默认10，VectorEngine可支持更高）
+            analysis_llm_provider: 分析专用LLM（可选）
+            user_model_override: 用户指定的模型名称，如果提供则全流程使用该模型
         """
         self.llm = llm_provider
         self.project_manager = project_manager
         self.translation_mode = translation_mode
         self.max_concurrent_sections = max_concurrent_sections
         self.analysis_llm = analysis_llm_provider or llm_provider
+        self.user_model_override = user_model_override
+
+        # 加载模型配置
+        from src.core.model_config import get_model_config
+        self.model_config = get_model_config()
+
         self.deep_analyzer = DeepAnalyzer(self.analysis_llm)
         self.context_manager = LayeredContextManager()
         self._progress_tracker = self._shared_progress_tracker
@@ -138,8 +147,17 @@ class BatchTranslationService:
             llm_provider=llm_provider,
             context_manager=self.context_manager,
             memory_service=memory_service,
+            get_provider_for_phase=self._get_provider_for_phase,
         )
-        self.consistency_reviewer = ConsistencyReviewer(llm_provider)
+        # Phase 3: 使用 Gemini Preview 生成质量报告
+        gemini_preview_provider = self._get_provider_for_phase("phase3_review")
+        self.quality_report_generator = QualityReportGenerator(gemini_preview_provider)
+
+        # 创建包装方法，自动使用phase1 provider
+        async def translate_section_batch_with_phase(*args, **kwargs):
+            phase1_provider = self._get_provider_for_phase("phase1_draft")
+            return await self._translate_section_batch(*args, **kwargs, phase1_provider=phase1_provider)
+
         self._section_executor = SectionTranslationExecutor(
             is_cancelled=self._is_cancelled,
             touch_progress=self._touch_progress,
@@ -147,7 +165,7 @@ class BatchTranslationService:
             persist_section_artifact=self._persist_section_artifact,
             run_section_prescan=self._run_section_prescan,
             count_translated_paragraphs=self._count_translated_paragraphs,
-            translate_section_batch=self._translate_section_batch,
+            translate_section_batch=translate_section_batch_with_phase,
             apply_section_batch_translations=self._apply_section_batch_translations,
             record_section_batch_term_usage=self._record_section_batch_term_usage,
             four_step_translate_section=self.translator.translate_section,
@@ -155,6 +173,35 @@ class BatchTranslationService:
             apply_four_step_translations=self._apply_four_step_translations,
             save_section=self.project_manager.save_section,
         )
+
+    def _get_provider_for_phase(self, phase: str) -> LLMProvider:
+        """
+        获取指定阶段的LLM Provider
+
+        Args:
+            phase: 翻译阶段 (phase0_prescan, phase1_draft, phase2_refine, phase3_review)
+
+        Returns:
+            LLMProvider实例
+        """
+        # 如果用户指定了模型，全流程使用该模型
+        if self.user_model_override:
+            model_config = self.model_config.get_model_for_phase(phase, model_override=self.user_model_override)
+            logger.info(f"Using user-specified model for {phase}: {model_config['model']}")
+            return self.llm  # 用户已经通过API传入了对应的provider
+
+        # 否则根据阶段获取不同的模型
+        model_config = self.model_config.get_model_for_phase(phase)
+        model_name = model_config['model']
+
+        # 如果当前provider已经是目标模型，直接返回
+        if hasattr(self.llm, 'model_name') and self.llm.model_name == model_name:
+            return self.llm
+
+        # 创建新的provider
+        from src.api.utils.llm_factory import create_llm_provider
+        logger.info(f"Creating provider for {phase}: {model_name} (temp={model_config['temperature']})")
+        return create_llm_provider(provider=model_name)
 
     def _is_cancelled(self, project_id: str) -> bool:
         return self._run_registry.is_cancelled(project_id)
@@ -842,6 +889,11 @@ class BatchTranslationService:
             self._notify_progress(
                 on_progress, "深度分析全文", translated_count, total_paragraphs
             )
+
+            # 获取Phase 0专用的provider
+            phase0_provider = self._get_provider_for_phase("phase0_prescan")
+            phase0_analyzer = DeepAnalyzer(phase0_provider)
+
             existing_translated = self._count_project_translated_paragraphs(project.sections)
             analysis = None
             if existing_translated > 0:
@@ -853,7 +905,7 @@ class BatchTranslationService:
                     )
 
             if analysis is None:
-                analysis = self.deep_analyzer.analyze(
+                analysis = phase0_analyzer.analyze(
                     project.sections,
                     should_cancel=lambda: self._is_cancelled(project_id),
                 )
@@ -1052,83 +1104,43 @@ class BatchTranslationService:
             if self._is_cancelled(project_id):
                 return finalize_cancelled_result()
 
-            # Phase 2: 一致性审查（优化：新增）
-            logger.info(f"[{project_id}] Starting Phase 2: Consistency Review")
-            self._touch_progress(progress, step="一致性审查")
+            # Phase 3: 质量报告生成
+            logger.info(f"[{project_id}] Starting Phase 3: Quality Report Generation")
+            self._touch_progress(progress, step="质量报告生成")
             self._notify_progress(
-                on_progress, "一致性审查", translated_count, total_paragraphs
+                on_progress, "质量报告生成", translated_count, total_paragraphs
             )
 
-            consistency_report = None
+            quality_report = None
             try:
-                consistency_report = self.consistency_reviewer.review(
+                quality_report = self.quality_report_generator.generate_report(
                     sections=project.sections,
                     translations=all_translations,
                     article_analysis=analysis,
-                    term_tracker=self.context_manager.term_tracker,
                 )
 
-                # 记录一致性审查结果
+                # 记录质量报告结果
                 logger.info(
-                    f"[{project_id}] Consistency review completed: "
-                    f"{len(consistency_report.issues)} issues found, "
-                    f"{len(consistency_report.auto_fixable)} auto-fixable"
+                    f"[{project_id}] Quality report generated: "
+                    f"{quality_report.summary.total_issues} issues found "
+                    f"(H:{quality_report.summary.high_severity_count}, "
+                    f"M:{quality_report.summary.medium_severity_count}, "
+                    f"L:{quality_report.summary.low_severity_count}), "
+                    f"overall score: {quality_report.summary.overall_score}"
                 )
-
-                # 如果有可自动修复的问题，应用修复
-                if consistency_report.auto_fixable:
-                    logger.info(
-                        f"[{project_id}] Applying {len(consistency_report.auto_fixable)} auto-fixes..."
-                    )
-                    auto_fixed_translations = self.consistency_reviewer.auto_fix(
-                        all_translations, consistency_report.auto_fixable
-                    )
-
-                    # Update paragraph translations, but never overwrite tokenized segments.
-                    for section in project.sections:
-                        if section.section_id in auto_fixed_translations:
-                            for j, translation in enumerate(
-                                auto_fixed_translations[section.section_id]
-                            ):
-                                if j < len(section.paragraphs):
-                                    para = section.paragraphs[j]
-                                    if para.expected_tokens:
-                                        auto_fixed_translations[section.section_id][j] = (
-                                            para.best_translation_text()
-                                        )
-                                        if translation != para.best_translation_text():
-                                            progress.errors.append(
-                                                {
-                                                    "type": "consistency_autofix_skipped",
-                                                    "section_id": section.section_id,
-                                                    "paragraph_id": para.id,
-                                                    "message": (
-                                                        "Skipped auto-fix for a formatted paragraph "
-                                                        "to preserve hidden token reconstruction."
-                                                    ),
-                                                    "timestamp": datetime.now().isoformat(),
-                                                }
-                                            )
-                                        continue
-                                    para.add_translation(translation, "gemini_refined")
-                            self.project_manager.save_section(project_id, section)
-                    all_translations = auto_fixed_translations
 
                 self._write_artifact_json(
-                    run_dir / "consistency.json",
-                    {
-                        "report": consistency_report,
-                        "translations_after_consistency": all_translations,
-                    },
+                    run_dir / "quality_report.json",
+                    quality_report.to_dict(),
                 )
 
             except Exception as e:
-                logger.error(f"[{project_id}] Consistency review failed: {str(e)}")
+                logger.error(f"[{project_id}] Quality report generation failed: {str(e)}")
                 self._write_artifact_json(
-                    run_dir / "consistency.json",
+                    run_dir / "quality_report.json",
                     {"error": str(e)},
                 )
-                # 一致性审查失败不影响翻译完成状态
+                # 质量报告生成失败不影响翻译完成状态
 
             if self._is_cancelled(project_id):
                 return finalize_cancelled_result()
@@ -2032,6 +2044,7 @@ class BatchTranslationService:
         total_sections: int,
         all_sections: List[Section],
         analysis: ArticleAnalysis,
+        phase1_provider: Optional[LLMProvider] = None,  # 新增参数
     ) -> List[Dict[str, str]]:
         """
         章节级批量翻译
@@ -2044,6 +2057,7 @@ class BatchTranslationService:
             total_sections: 总章节数
             all_sections: 所有章节
             analysis: 文章分析结果
+            phase1_provider: Phase 1专用provider（可选）
 
         Returns:
             List[Dict[str, str]]: 翻译结果列表 [{"id": "p001", "translation": "..."}, ...]
@@ -2134,7 +2148,9 @@ class BatchTranslationService:
         if not section_lines:
             return dehydrated_translations
 
-        translated = self.llm.translate_section(
+        # 使用Phase 1 provider（如果提供）或默认provider
+        provider = phase1_provider or self.llm
+        translated = provider.translate_section(
             section_text=section_text,
             section_title=section.title,
             context=context,

@@ -1,7 +1,7 @@
 {
   "section_id": "20-packaging-the-oes-with-the-hos",
   "title": "Packaging the OEs with the host",
-  "title_translation": null,
+  "title_translation": "光器件与主芯片共封装",
   "paragraphs": [
     {
       "id": "p000",
@@ -27,12 +27,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "**修订后的译文：**\n\n光引擎（Optical Engine，OE）先置于基板之上，再经倒装芯片键合与主机封装相连。共封装光学（CPO）需占用大量封装面积，因此必须大幅扩大封装基板或中介层，具体取决于其放置位置。对于英伟达Spectrum-X Photonics交换机ASIC封装而言，其基板尺寸将达110mm×110mm。作为对比，布莱克韦尔（Blackwell）封装尺寸为70mm×76mm，本身已是相当庞大的芯片。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:50.566278",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.819999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "Optical Engine (OE) 首次出现未按术语表要求完整注释"
+          },
+          {
+            "type": "readability",
+            "description": "被动语态堆积且翻译腔明显"
+          },
+          {
+            "type": "readability",
+            "description": "句子过度拆分且失去原文节奏"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用过多“以完成...并最终完成”结构"
+          },
+          {
+            "type": "tone",
+            "description": "原文语气冷静且带分析性，译文语气过于平淡且逻辑连接生硬"
+          },
+          {
+            "type": "readability",
+            "description": "语义略显重叠且可更紧凑"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -59,12 +115,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "此外，在基板上附加更多元件也带来良率挑战。以Spectrum-X为例，必须先将36颗已知良好的光引擎（OE）倒装键合到基板上，再键合中介层模块，才能完成“基板上”步骤并最终完成CoWoS组装。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:50.566358",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.819999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "Optical Engine (OE) 首次出现未按术语表要求完整注释"
+          },
+          {
+            "type": "readability",
+            "description": "被动语态堆积且翻译腔明显"
+          },
+          {
+            "type": "readability",
+            "description": "句子过度拆分且失去原文节奏"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用过多“以完成...并最终完成”结构"
+          },
+          {
+            "type": "tone",
+            "description": "原文语气冷静且带分析性，译文语气过于平淡且逻辑连接生硬"
+          },
+          {
+            "type": "readability",
+            "description": "语义略显重叠且可更紧凑"
+          }
+        ]
+      },
       "history": []
     },
     {
@@ -91,12 +203,68 @@
       "heading_chain": [],
       "is_metadata": false,
       "metadata_type": null,
-      "translations": {},
+      "translations": {
+        "pro": {
+          "text": "同样，制造尺寸大得多的中介层不仅成本高昂，还需键合更多元件，进一步加剧了良率挑战。这些挑战又因翘曲问题而雪上加霜，而翘曲会随着中介层或基板尺寸增大而愈发明显。",
+          "model": "pro",
+          "created_at": "2026-04-22T18:20:50.566386",
+          "tokenized_text": null,
+          "format_issues": []
+        }
+      },
       "confirmed": null,
       "confirmed_tokenized": null,
       "confirmed_format_issues": [],
-      "status": "pending",
-      "ai_insight": null,
+      "status": "translated",
+      "ai_insight": {
+        "overall_score": 7.819999999999999,
+        "is_excellent": false,
+        "applied_terms": [],
+        "style": "专业技术",
+        "steps": {
+          "understand": true,
+          "translate": true,
+          "reflect": true,
+          "refine": true
+        },
+        "understanding": {
+          "role_in_article": "待分析",
+          "relation_to_previous": "",
+          "relation_to_next": "",
+          "key_points": [],
+          "translation_notes": []
+        },
+        "scores": {
+          "readability": 7.2,
+          "accuracy": 8.5
+        },
+        "issues": [
+          {
+            "type": "terminology",
+            "description": "Optical Engine (OE) 首次出现未按术语表要求完整注释"
+          },
+          {
+            "type": "readability",
+            "description": "被动语态堆积且翻译腔明显"
+          },
+          {
+            "type": "readability",
+            "description": "句子过度拆分且失去原文节奏"
+          },
+          {
+            "type": "readability",
+            "description": "翻译腔明显，使用过多“以完成...并最终完成”结构"
+          },
+          {
+            "type": "tone",
+            "description": "原文语气冷静且带分析性，译文语气过于平淡且逻辑连接生硬"
+          },
+          {
+            "type": "readability",
+            "description": "语义略显重叠且可更紧凑"
+          }
+        ]
+      },
       "history": []
     }
   ]

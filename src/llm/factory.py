@@ -68,8 +68,12 @@ def get_task_model_alias(task_type: str) -> str:
             config_loader = get_config_loader()
             llm_config = config_loader.load()
             alias = llm_config.task_defaults.get(task_type)
+            print(f"[DEBUG] task_type={task_type}, alias from config={alias}", flush=True)
+            logger.info(f"[LLM Factory] task_type={task_type}, alias from config={alias}")
             if alias:
                 resolved_alias = config_loader.resolve_config_model_alias(alias)
+                print(f"[DEBUG] resolved_alias={resolved_alias}", flush=True)
+                logger.info(f"[LLM Factory] resolved_alias={resolved_alias}")
                 if resolved_alias:
                     return resolved_alias
                 logger.warning(
@@ -131,7 +135,7 @@ def create_llm_provider(provider: str | None = None, model: str | None = None, *
     """Create an LLM provider instance.
 
     Args:
-        provider: Provider name or model alias (e.g., "gemini", "vectorengine", "deepseek-relay")
+        provider: Provider name or model alias (e.g., "gemini", "vectorengine", "deepseek-v3.2")
         model: Optional model name to pass to the provider
         **kwargs: Additional arguments passed to provider factory
 
