@@ -185,10 +185,9 @@ export function QualityReportPage() {
                 const StatusIcon = status.icon;
 
                 return (
-                  <button
+                  <div
                     key={section.section_id}
-                    className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-gray-50"
-                    onClick={() => navigate(`/document/${projectId}/confirmation#${section.section_id}`)}
+                    className="flex w-full items-center gap-4 px-5 py-4"
                   >
                     <StatusIcon className="h-5 w-5 shrink-0 text-gray-500" />
                     <div className="min-w-0 flex-1">
@@ -206,7 +205,7 @@ export function QualityReportPage() {
                     <div className="w-14 text-right text-lg font-semibold text-gray-900">
                       {section.overall_score}
                     </div>
-                  </button>
+                  </div>
                 );
               })}
             </div>
