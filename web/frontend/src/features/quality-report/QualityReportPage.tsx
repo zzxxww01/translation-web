@@ -3,11 +3,14 @@
  */
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, CircleAlert, CircleDashed } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, CircleAlert, CircleDashed, Copy } from 'lucide-react';
+import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/Button';
+import { copyToClipboard } from '@/shared/utils';
 import { useProjectQualityReport } from './api';
+import type { ProjectQualityReport, QualityIssue, SectionQualityReport } from './types';
 
 function getQualityLevel(score: number) {
   if (score >= 90) {
@@ -93,6 +96,110 @@ const severityRank: Record<string, number> = {
   minor: 2,
 };
 
+function escapeMarkdown(value: string): string {
+  return value.replace(/\|/g, '\\|').trim();
+}
+
+function formatIssueMarkdown(issue: QualityIssue, index: number): string {
+  const lines = [
+    `${index}. **[${severityLabel(issue.severity)} / ${issueTypeLabel(issue.type)}] 段落 ${issue.paragraph_index + 1}**`,
+    `   - 问题：${issue.description}`,
+  ];
+
+  if (issue.source_text) {
+    lines.push(`   - 涉及文本：${issue.source_text}`);
+  }
+  if (issue.why_it_matters) {
+    lines.push(`   - 影响：${issue.why_it_matters}`);
+  }
+  if (issue.suggestion) {
+    lines.push(`   - 建议：${issue.suggestion}`);
+  }
+
+  return lines.join('\n');
+}
+
+function buildQualityReportMarkdown(
+  report: ProjectQualityReport,
+  sortedSections: SectionQualityReport[],
+  sortedIssues: QualityIssue[],
+  priorityIssues: QualityIssue[],
+  sectionIssueMap: Record<string, QualityIssue[]>,
+  topIssueTypes: Array<[string, number]>,
+): string {
+  const lines = [
+    `# ${report.project_title} 质量报告`,
+    '',
+    `- 生成时间：${formatDate(report.generated_at)}`,
+    `- 总体评分：${report.overall_score}`,
+    `- 问题总数：${report.total_issues}`,
+    `- 已自动修复：${report.issues_by_status.auto_fixed || 0}`,
+    `- 待人工复核：${report.issues_by_status.pending || 0}`,
+    '',
+    '## 主要问题类型',
+    '',
+  ];
+
+  if (topIssueTypes.length > 0) {
+    topIssueTypes.forEach(([type, count]) => {
+      lines.push(`- ${issueTypeLabel(type)}：${count}`);
+    });
+  } else {
+    lines.push('- 无');
+  }
+
+  lines.push(
+    '',
+    '## 严重程度分布',
+    '',
+    `- 严重：${report.issues_by_severity.critical || 0}`,
+    `- 重要：${report.issues_by_severity.major || 0}`,
+    `- 轻微：${report.issues_by_severity.minor || 0}`,
+    '',
+    '## 优先处理的问题',
+    '',
+  );
+
+  if (priorityIssues.length > 0) {
+    priorityIssues.forEach((issue, index) => {
+      lines.push(
+        `### ${index + 1}. ${issue.section_title || issue.section_id || '未知章节'} · 段落 ${issue.paragraph_index + 1}`,
+        '',
+        formatIssueMarkdown(issue, 1),
+        '',
+      );
+    });
+  } else {
+    lines.push('没有严重或重要问题。', '');
+  }
+
+  lines.push('## 章节汇总', '', '| 章节 | 分数 | 问题数 | 可读性 | 准确性 | 简洁性 |', '| --- | ---: | ---: | ---: | ---: | ---: |');
+  sortedSections.forEach(section => {
+    const issueCount = section.issue_count ?? section.issues.length;
+    lines.push(
+      `| ${escapeMarkdown(section.section_title)} | ${section.overall_score} | ${issueCount} | ${section.readability_score} | ${section.accuracy_score} | ${section.conciseness_score} |`
+    );
+  });
+
+  lines.push('', '## 按章节查看全部问题', '');
+  sortedSections.forEach(section => {
+    const issues = sectionIssueMap[section.section_id] || [];
+    const issueCount = section.issue_count ?? section.issues.length;
+    lines.push(`### ${section.section_title}`, '', `- 分数：${section.overall_score}`, `- 问题数：${issueCount}`, '');
+
+    if (issues.length === 0) {
+      lines.push('无具体问题。', '');
+      return;
+    }
+
+    issues.forEach((issue, index) => {
+      lines.push(formatIssueMarkdown(issue, index + 1), '');
+    });
+  });
+
+  return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim() + '\n';
+}
+
 export function QualityReportPage() {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
@@ -171,6 +278,23 @@ export function QualityReportPage() {
     .sort((a, b) => b[1] - a[1])
     .slice(0, 4);
 
+  const handleCopyMarkdown = async () => {
+    const markdown = buildQualityReportMarkdown(
+      report,
+      sortedSections,
+      sortedIssues,
+      priorityIssues,
+      sectionIssueMap,
+      topIssueTypes,
+    );
+    const copied = await copyToClipboard(markdown);
+    if (copied) {
+      toast.success('Markdown 报告已复制');
+    } else {
+      toast.error('复制失败，请稍后重试');
+    }
+  };
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
       <header className="mb-6 flex items-start justify-between gap-4">
@@ -179,13 +303,19 @@ export function QualityReportPage() {
           <p className="mt-1 text-sm text-gray-600">{report.project_title}</p>
           <p className="mt-2 text-xs text-gray-500">生成时间：{formatDate(report.generated_at)}</p>
         </div>
-        <Button
-          variant="outline"
-          onClick={() => navigate('/document')}
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          返回文档
-        </Button>
+        <div className="flex shrink-0 items-center gap-2">
+          <Button variant="outline" onClick={handleCopyMarkdown}>
+            <Copy className="mr-2 h-4 w-4" />
+            复制 Markdown
+          </Button>
+          <Button
+            variant="outline"
+            onClick={() => navigate('/document')}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            返回文档
+          </Button>
+        </div>
       </header>
 
       <Card className={`mb-6 border ${level.bg}`}>
