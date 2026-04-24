@@ -120,7 +120,7 @@ export function QualityReportPage() {
               当前项目没有可读取的完整质量报告，或者报告服务暂时没有响应。已完成的报告会在这里显示为摘要，不需要进入其它页面。
             </p>
             <div className="flex justify-center gap-3">
-              <Button variant="outline" onClick={() => navigate(`/document/${projectId}/confirmation`)}>
+              <Button variant="outline" onClick={() => navigate('/document')}>
                 返回文档
               </Button>
               <Button onClick={() => window.location.reload()}>重新加载</Button>
@@ -181,7 +181,7 @@ export function QualityReportPage() {
         </div>
         <Button
           variant="outline"
-          onClick={() => navigate(`/document/${projectId}/confirmation`)}
+          onClick={() => navigate('/document')}
         >
           <ArrowLeft className="mr-2 h-4 w-4" />
           返回文档
