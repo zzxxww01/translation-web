@@ -23,6 +23,7 @@ function getScoreColor(score: number): string {
 export function SectionQualityCard({ section, onViewDetails }: SectionQualityCardProps) {
   const scoreColor = getScoreColor(section.overall_score);
 
+  const issueCount = section.issue_count ?? section.issues.length;
   const pendingIssues = section.issues.filter(i => i.status === 'pending').length;
   const criticalIssues = section.issues.filter(i => i.severity === 'critical').length;
 
@@ -79,7 +80,7 @@ export function SectionQualityCard({ section, onViewDetails }: SectionQualityCar
         {/* 问题统计 */}
         <div className="flex items-center justify-between text-sm">
           <span className="text-gray-600">
-            共 {section.issues.length} 个问题
+            共 {issueCount} 个问题
           </span>
           {section.final_assessment && (
             <Badge variant={section.final_assessment.passed ? 'success' : 'error'}>

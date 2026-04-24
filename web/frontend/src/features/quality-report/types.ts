@@ -5,8 +5,9 @@
 // 后端原始类型（与后端完全匹配）
 export interface TranslationIssueDTO {
   paragraph_index: number;
+  priority?: string;
   issue_type: string;
-  severity: 'low' | 'medium' | 'high';
+  severity: string;
   original_text: string;
   description: string;
   why_it_matters: string;
@@ -40,6 +41,7 @@ export interface SectionQualityReport {
   conciseness_score: number;
   is_excellent: boolean;
   issues: QualityIssue[];
+  issue_count?: number;
   revision_count: number;
   final_assessment?: {
     passed: boolean;
@@ -64,20 +66,48 @@ export type IssueSeverity = QualityIssue['severity'];
 export type IssueStatus = QualityIssue['status'];
 export type SortBy = 'severity' | 'type' | 'paragraph';
 
+export function normalizeScore(score: number): number {
+  if (!Number.isFinite(score)) return 0;
+  const normalized = score <= 10 ? score * 10 : score;
+  return Math.round(normalized * 10) / 10;
+}
+
 // 映射函数
 export function mapSeverity(severity: string): 'critical' | 'major' | 'minor' {
   switch (severity) {
+    case 'critical': return 'critical';
     case 'high': return 'critical';
+    case 'major': return 'major';
     case 'medium': return 'major';
+    case 'minor': return 'minor';
     case 'low': return 'minor';
     default: return 'minor';
+  }
+}
+
+export function mapIssueType(issueType: string): QualityIssue['type'] {
+  switch (issueType) {
+    case 'accuracy':
+    case 'readability':
+    case 'terminology':
+    case 'consistency':
+    case 'style':
+      return issueType;
+    case 'tone':
+    case 'fluency':
+      return 'style';
+    case 'formatting':
+    case 'structure':
+      return 'readability';
+    default:
+      return 'readability';
   }
 }
 
 export function toQualityIssue(dto: TranslationIssueDTO, index: number): QualityIssue {
   return {
     id: `issue-${dto.paragraph_index}-${index}`,
-    type: dto.issue_type as QualityIssue['type'],
+    type: mapIssueType(dto.issue_type),
     severity: mapSeverity(dto.severity),
     paragraph_index: dto.paragraph_index,
     source_text: dto.original_text,

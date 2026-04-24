@@ -3,7 +3,7 @@
  */
 
 import { useState } from 'react';
-import { BookOpen, ChevronDown, Download, Layers, ScanSearch, Zap } from 'lucide-react';
+import { BarChart3, BookOpen, ChevronDown, Download, Layers, ScanSearch, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button-extended';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -239,6 +239,20 @@ export function DocumentSidebar({
               className="w-full"
             >
               查看一致性报告
+            </Button>
+          )}
+
+          {projectId && (
+            <Button
+              asChild
+              variant="outline"
+              size="default"
+              leftIcon={<BarChart3 className="h-4 w-4" />}
+              className="w-full"
+            >
+              <a href={`/document/${projectId}/quality-report`}>
+                查看质量报告
+              </a>
             </Button>
           )}
 

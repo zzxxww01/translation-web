@@ -223,7 +223,7 @@ export function DocumentQualityPanel({ projectId, currentSectionId }: DocumentQu
                     </span>
                   </div>
                   <div className="text-xs text-gray-500">
-                    {section.issues.length} 个问题
+                    {section.issue_count ?? section.issues.length} 个问题
                   </div>
                 </div>
               ))}

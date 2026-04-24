@@ -207,19 +207,27 @@ export function QualityReportPage() {
       {/* 全部问题列表 */}
       <section className="mb-8">
         <h2 className="text-xl font-semibold text-gray-900 mb-4">所有问题</h2>
-        <IssueList
-          issues={allIssues}
-          onIssueClick={(issue) => {
-            const section = report.sections.find(s =>
-              s.issues.some(i => i.id === issue.id)
-            );
-            if (section) {
-              navigate(
-                `/document/${projectId}/confirmation#${section.section_id}-p${issue.paragraph_index}`
+        {allIssues.length > 0 ? (
+          <IssueList
+            issues={allIssues}
+            onIssueClick={(issue) => {
+              const section = report.sections.find(s =>
+                s.issues.some(i => i.id === issue.id)
               );
-            }
-          }}
-        />
+              if (section) {
+                navigate(
+                  `/document/${projectId}/confirmation#${section.section_id}-p${issue.paragraph_index}`
+                );
+              }
+            }}
+          />
+        ) : (
+          <Card>
+            <CardContent className="p-6 text-sm text-gray-600">
+              当前项目摘要报告包含章节评分和问题数量。要查看具体问题，请在“章节质量”中打开对应章节详情。
+            </CardContent>
+          </Card>
+        )}
       </section>
     </div>
   );
