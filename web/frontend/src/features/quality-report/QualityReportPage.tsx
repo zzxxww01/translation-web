@@ -3,18 +3,38 @@
  */
 
 import { useParams, useNavigate } from 'react-router-dom';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ArrowLeft, CheckCircle2, CircleAlert, CircleDashed } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/Button';
 import { useProjectQualityReport } from './api';
-import { QualityStatsCard } from './components/QualityStatsCard';
-import { IssueList } from './components/IssueList';
-import { SectionQualityCard } from './components/SectionQualityCard';
 
-function getScoreVariant(score: number): 'success' | 'warning' | 'error' | 'default' {
-  if (score >= 90) return 'success';
-  if (score >= 70) return 'warning';
-  if (score >= 50) return 'error';
-  return 'default';
+function getQualityLevel(score: number) {
+  if (score >= 90) {
+    return {
+      label: '整体质量优秀',
+      description: '译文整体表现稳定，只需关注少量章节。',
+      tone: 'text-emerald-700',
+      bg: 'bg-emerald-50 border-emerald-200',
+      icon: CheckCircle2,
+    };
+  }
+  if (score >= 75) {
+    return {
+      label: '整体质量良好',
+      description: '译文可以继续使用，建议优先复核问题较多的章节。',
+      tone: 'text-amber-700',
+      bg: 'bg-amber-50 border-amber-200',
+      icon: CircleAlert,
+    };
+  }
+  return {
+    label: '需要重点复核',
+    description: '译文仍有较多风险，建议先处理低分章节。',
+    tone: 'text-rose-700',
+    bg: 'bg-rose-50 border-rose-200',
+    icon: CircleAlert,
+  };
 }
 
 function formatDate(dateString: string): string {
@@ -26,6 +46,16 @@ function formatDate(dateString: string): string {
     hour: '2-digit',
     minute: '2-digit',
   });
+}
+
+function getSectionStatus(score: number, issueCount: number) {
+  if (score >= 90 && issueCount === 0) {
+    return { label: '通过', variant: 'success' as const, icon: CheckCircle2 };
+  }
+  if (score >= 75) {
+    return { label: '建议复核', variant: 'warning' as const, icon: CircleDashed };
+  }
+  return { label: '重点复核', variant: 'error' as const, icon: CircleAlert };
 }
 
 export function QualityReportPage() {
@@ -73,161 +103,115 @@ export function QualityReportPage() {
     );
   }
 
-  const allIssues = report.sections.flatMap(s => s.issues);
+  const level = getQualityLevel(report.overall_score);
+  const LevelIcon = level.icon;
+  const sortedSections = [...report.sections].sort((a, b) => {
+    const issueDiff = (b.issue_count ?? b.issues.length) - (a.issue_count ?? a.issues.length);
+    if (issueDiff !== 0) return issueDiff;
+    return a.overall_score - b.overall_score;
+  });
+  const needsReviewCount = report.sections.filter(section => {
+    const issueCount = section.issue_count ?? section.issues.length;
+    return issueCount > 0 || section.overall_score < 90;
+  }).length;
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
-      {/* 页面标题和元信息 */}
-      <header className="mb-8">
-        <div className="flex items-center justify-between mb-4">
-          <div>
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">质量报告</h1>
-            <p className="text-gray-600">项目：{report.project_title}</p>
-            <p className="text-sm text-gray-500">生成时间：{formatDate(report.generated_at)}</p>
-          </div>
-          <Button
-            variant="outline"
-            onClick={() => navigate(`/document/${projectId}/confirmation`)}
-          >
-            返回文档
-          </Button>
+    <div className="mx-auto max-w-5xl px-4 py-8">
+      <header className="mb-6 flex items-start justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">质量报告</h1>
+          <p className="mt-1 text-sm text-gray-600">{report.project_title}</p>
+          <p className="mt-2 text-xs text-gray-500">生成时间：{formatDate(report.generated_at)}</p>
         </div>
+        <Button
+          variant="outline"
+          onClick={() => navigate(`/document/${projectId}/confirmation`)}
+        >
+          <ArrowLeft className="mr-2 h-4 w-4" />
+          返回文档
+        </Button>
       </header>
 
-      {/* 全文统计概览 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">统计概览</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <QualityStatsCard
-            title="总体评分"
-            value={report.overall_score}
-            variant={getScoreVariant(report.overall_score)}
-          />
-          <QualityStatsCard
-            title="问题总数"
-            value={report.total_issues}
-          />
-          <QualityStatsCard
-            title="待审核"
-            value={report.issues_by_status.pending || 0}
-            variant="warning"
-          />
-          <QualityStatsCard
-            title="已修复"
-            value={(report.issues_by_status.auto_fixed || 0) + (report.issues_by_status.manual_fixed || 0)}
-            variant="success"
-          />
-        </div>
+      <Card className={`mb-6 border ${level.bg}`}>
+        <CardContent className="flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between">
+          <div className="flex items-start gap-3">
+            <LevelIcon className={`mt-1 h-6 w-6 ${level.tone}`} />
+            <div>
+              <h2 className={`text-xl font-semibold ${level.tone}`}>{level.label}</h2>
+              <p className="mt-1 text-sm text-gray-700">{level.description}</p>
+            </div>
+          </div>
+          <div className={`text-5xl font-bold ${level.tone}`}>{report.overall_score}</div>
+        </CardContent>
+      </Card>
+
+      <section className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <Card>
+          <CardContent className="p-5">
+            <p className="text-sm text-gray-500">问题总数</p>
+            <p className="mt-2 text-3xl font-bold text-gray-900">{report.total_issues}</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-5">
+            <p className="text-sm text-gray-500">建议复核章节</p>
+            <p className="mt-2 text-3xl font-bold text-gray-900">{needsReviewCount}</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-5">
+            <p className="text-sm text-gray-500">已自动修复</p>
+            <p className="mt-2 text-3xl font-bold text-gray-900">
+              {report.issues_by_status.auto_fixed || 0}
+            </p>
+          </CardContent>
+        </Card>
       </section>
 
-      {/* 问题分布 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">问题分布</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">按严重程度</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">严重</span>
-                  <span className="text-lg font-semibold text-red-700">
-                    {report.issues_by_severity.critical || 0}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">重要</span>
-                  <span className="text-lg font-semibold text-amber-700">
-                    {report.issues_by_severity.major || 0}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">轻微</span>
-                  <span className="text-lg font-semibold text-gray-700">
-                    {report.issues_by_severity.minor || 0}
-                  </span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-base">按状态</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">待审核</span>
-                  <span className="text-lg font-semibold text-amber-700">
-                    {report.issues_by_status.pending || 0}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">已自动修复</span>
-                  <span className="text-lg font-semibold text-green-700">
-                    {report.issues_by_status.auto_fixed || 0}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">已手动修复</span>
-                  <span className="text-lg font-semibold text-green-700">
-                    {report.issues_by_status.manual_fixed || 0}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">已忽略</span>
-                  <span className="text-lg font-semibold text-gray-700">
-                    {report.issues_by_status.dismissed || 0}
-                  </span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+      <section>
+        <div className="mb-3 flex items-end justify-between gap-3">
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900">章节检查结果</h2>
+            <p className="mt-1 text-sm text-gray-500">优先显示问题更多、分数更低的章节。</p>
+          </div>
         </div>
-      </section>
 
-      {/* 章节质量列表 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">章节质量</h2>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {report.sections.map(section => (
-            <SectionQualityCard
-              key={section.section_id}
-              section={section}
-              onViewDetails={() => {
-                navigate(`/document/${projectId}/confirmation#${section.section_id}`);
-              }}
-            />
-          ))}
-        </div>
-      </section>
+        <Card>
+          <CardContent className="p-0">
+            <div className="divide-y divide-gray-100">
+              {sortedSections.map(section => {
+                const issueCount = section.issue_count ?? section.issues.length;
+                const status = getSectionStatus(section.overall_score, issueCount);
+                const StatusIcon = status.icon;
 
-      {/* 全部问题列表 */}
-      <section className="mb-8">
-        <h2 className="text-xl font-semibold text-gray-900 mb-4">所有问题</h2>
-        {allIssues.length > 0 ? (
-          <IssueList
-            issues={allIssues}
-            onIssueClick={(issue) => {
-              const section = report.sections.find(s =>
-                s.issues.some(i => i.id === issue.id)
-              );
-              if (section) {
-                navigate(
-                  `/document/${projectId}/confirmation#${section.section_id}-p${issue.paragraph_index}`
+                return (
+                  <button
+                    key={section.section_id}
+                    className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors hover:bg-gray-50"
+                    onClick={() => navigate(`/document/${projectId}/confirmation#${section.section_id}`)}
+                  >
+                    <StatusIcon className="h-5 w-5 shrink-0 text-gray-500" />
+                    <div className="min-w-0 flex-1">
+                      <div className="truncate text-sm font-medium text-gray-900">
+                        {section.section_title}
+                      </div>
+                      <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                        <span>问题 {issueCount}</span>
+                        <span>可读性 {section.readability_score}</span>
+                        <span>准确性 {section.accuracy_score}</span>
+                        <span>简洁性 {section.conciseness_score}</span>
+                      </div>
+                    </div>
+                    <Badge variant={status.variant}>{status.label}</Badge>
+                    <div className="w-14 text-right text-lg font-semibold text-gray-900">
+                      {section.overall_score}
+                    </div>
+                  </button>
                 );
-              }
-            }}
-          />
-        ) : (
-          <Card>
-            <CardContent className="p-6 text-sm text-gray-600">
-              当前项目摘要报告包含章节评分和问题数量。要查看具体问题，请在“章节质量”中打开对应章节详情。
-            </CardContent>
-          </Card>
-        )}
+              })}
+            </div>
+          </CardContent>
+        </Card>
       </section>
     </div>
   );

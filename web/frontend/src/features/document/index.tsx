@@ -12,7 +12,6 @@ import {
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
-import { ConsistencyReportView } from './components/ConsistencyReportView';
 import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
 import { NewProjectModal } from './components/NewProjectModal';
@@ -27,7 +26,6 @@ import {
   useTermReviewFlow,
   useTranslationStatusSync,
 } from './hooks';
-import type { ConsistencyIssue } from './api';
 
 const GlossaryCenter = lazy(() =>
   import('../glossary/GlossaryCenter').then(module => ({ default: module.GlossaryCenter }))
@@ -64,10 +62,6 @@ export function DocumentFeature() {
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
   const [immersiveTargetParagraphId, setImmersiveTargetParagraphId] = useState<string | null>(null);
-  const [pendingIssueTarget, setPendingIssueTarget] = useState<{
-    sectionId: string;
-    paragraphIndex: number;
-  } | null>(null);
 
   // AlertDialog 状态
   const [showStopDialog, setShowStopDialog] = useState(false);
@@ -102,12 +96,6 @@ export function DocumentFeature() {
     currentConflict,
     resolveConflict,
   } = useTermConflictDialog();
-
-  useEffect(() => {
-    queueMicrotask(() => {
-      setPendingIssueTarget(null);
-    });
-  }, [currentProject?.id]);
 
   const {
     isLoading: sectionLoading,
@@ -216,29 +204,6 @@ export function DocumentFeature() {
     [setCurrentParagraph]
   );
 
-  const handleOpenConsistency = useCallback(() => {
-    updateRouteParams({ view: 'consistency', immersive: false });
-  }, [updateRouteParams]);
-
-  const handleLocateConsistencyIssue = useCallback(
-    (issue: ConsistencyIssue) => {
-      const targetSection = sections.find(section => section.section_id === issue.section_id) ?? null;
-
-      updateRouteParams({ view: null, immersive: false });
-      setSelectedSectionId(issue.section_id);
-      setCurrentParagraph(null);
-      setPendingIssueTarget({
-        sectionId: issue.section_id,
-        paragraphIndex: issue.paragraph_index,
-      });
-
-      if (targetSection) {
-        setCurrentSection(targetSection);
-      }
-    },
-    [sections, setCurrentParagraph, setCurrentSection, updateRouteParams]
-  );
-
   const handleEnterImmersive = useCallback(() => {
     if (displaySection) {
       setSelectedSectionId(displaySection.section_id);
@@ -253,33 +218,6 @@ export function DocumentFeature() {
     setImmersiveTargetParagraphId(null);
     setImmersiveMode(false);
   }, [setImmersiveMode]);
-
-  useEffect(() => {
-    if (!pendingIssueTarget || !displaySection?.paragraphs) {
-      return;
-    }
-
-    if (displaySection.section_id !== pendingIssueTarget.sectionId) {
-      return;
-    }
-
-    const targetParagraph = displaySection.paragraphs.find(
-      paragraph => paragraph.index === pendingIssueTarget.paragraphIndex
-    );
-
-    if (!targetParagraph) {
-      toast.warning(`未找到段落 ${pendingIssueTarget.paragraphIndex}，请检查报告定位信息`);
-      queueMicrotask(() => {
-        setPendingIssueTarget(null);
-      });
-      return;
-    }
-
-    queueMicrotask(() => {
-      setCurrentParagraph(targetParagraph);
-      setPendingIssueTarget(null);
-    });
-  }, [displaySection, pendingIssueTarget, setCurrentParagraph]);
 
   const getCurrentParagraphIndex = useCallback(() => {
     if (!displaySection?.paragraphs || !currentParagraph) return -1;
@@ -389,16 +327,6 @@ export function DocumentFeature() {
       );
     }
 
-    if (activeView === 'consistency') {
-      return (
-        <ConsistencyReportView
-          projectId={currentProject.id}
-          projectTitle={currentProject.title}
-          onLocateIssue={handleLocateConsistencyIssue}
-        />
-      );
-    }
-
     if (!activeSectionId) {
       return (
         <div className="mx-auto max-w-3xl py-8">
@@ -484,7 +412,6 @@ export function DocumentFeature() {
         fullTranslateProgress={effectiveProgress}
         currentStep={effectiveCurrentStep}
         activeTranslationProjectId={backendTranslationStatus?.active_project_id || null}
-        onOpenConsistency={handleOpenConsistency}
         projectId={currentProject?.id}
       />
 

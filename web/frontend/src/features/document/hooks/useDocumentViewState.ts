@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import type { Section } from '@/shared/types';
 
-export type DocumentView = 'glossary' | 'term-review' | 'consistency' | null;
+export type DocumentView = 'glossary' | 'term-review' | null;
 
 interface UseDocumentViewStateOptions {
   currentSectionId?: string | null;

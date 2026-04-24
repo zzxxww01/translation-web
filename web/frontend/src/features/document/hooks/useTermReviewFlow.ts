@@ -11,7 +11,7 @@ interface PendingTranslationRequest {
 
 interface UseTermReviewFlowOptions {
   currentProjectId?: string;
-  setView: (view: 'glossary' | 'term-review' | 'consistency' | null) => void;
+  setView: (view: 'glossary' | 'term-review' | null) => void;
   runFullTranslate: (method: TranslationMethod, model?: string) => Promise<void>;
 }
 
