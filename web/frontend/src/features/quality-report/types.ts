@@ -4,6 +4,8 @@
 
 // 后端原始类型（与后端完全匹配）
 export interface TranslationIssueDTO {
+  section_id?: string;
+  section_title?: string;
   paragraph_index: number;
   priority?: string;
   issue_type: string;
@@ -20,6 +22,8 @@ export interface TranslationIssueDTO {
 // 前端视图模型
 export interface QualityIssue {
   id: string;
+  section_id?: string;
+  section_title?: string;
   type: 'accuracy' | 'readability' | 'terminology' | 'consistency' | 'style';
   severity: 'critical' | 'major' | 'minor';
   paragraph_index: number;
@@ -57,7 +61,9 @@ export interface ProjectQualityReport {
   total_issues: number;
   issues_by_status: Record<string, number>;
   issues_by_severity: Record<string, number>;
+  issue_type_counts: Record<string, number>;
   sections: SectionQualityReport[];
+  issues: QualityIssue[];
   generated_at: string;
 }
 
@@ -107,6 +113,8 @@ export function mapIssueType(issueType: string): QualityIssue['type'] {
 export function toQualityIssue(dto: TranslationIssueDTO, index: number): QualityIssue {
   return {
     id: `issue-${dto.paragraph_index}-${index}`,
+    section_id: dto.section_id,
+    section_title: dto.section_title,
     type: mapIssueType(dto.issue_type),
     severity: mapSeverity(dto.severity),
     paragraph_index: dto.paragraph_index,

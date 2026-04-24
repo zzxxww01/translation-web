@@ -12,6 +12,7 @@ from src.core.models.analysis import (
     TranslationIssue,
     ReflectionResult,
     SectionQualityScore,
+    QualityReportIssue,
     QualityReportSummary,
 )
 
@@ -136,6 +137,9 @@ class QualityReportService:
                 auto_fixed_issues=auto_fixed_count,
                 manual_review_issues=manual_review_count,
                 consistency_stats=consistency_stats,
+                issues=all_issues,
+                issue_type_counts=self._count_by_field(all_issues, "issue_type"),
+                severity_counts=self._count_by_field(all_issues, "severity"),
             )
         except Exception as e:
             logger.error(f"Unexpected error in get_report_by_run_id: {e}", exc_info=True)
@@ -259,7 +263,7 @@ class QualityReportService:
 
     def _process_section_data(
         self, run_dir: Path, consistency_stats: Dict[str, Any]
-    ) -> Tuple[List[SectionQualityScore], List[TranslationIssue], int, int]:
+    ) -> Tuple[List[SectionQualityScore], List[QualityReportIssue], int, int]:
         """一次性处理所有章节数据，返回评分和问题列表（避免重复文件读取）"""
         critique_dir = run_dir / "section-critique"
         if not critique_dir.exists():
@@ -303,10 +307,18 @@ class QualityReportService:
                     pass
 
             # 安全解析问题列表
-            issues = []
+            issues: List[QualityReportIssue] = []
+            section_title = section_id.replace("-", " ").title()
             for issue_data in reflection.get("issues", []):
                 try:
-                    issues.append(TranslationIssue(**issue_data))
+                    issue = TranslationIssue(**issue_data)
+                    issues.append(
+                        self._to_report_issue(
+                            issue=issue,
+                            section_id=section_id,
+                            section_title=section_title,
+                        )
+                    )
                 except Exception as e:
                     logger.warning(f"Failed to parse issue in {section_id}: {e}")
                     continue
@@ -356,10 +368,49 @@ class QualityReportService:
                     auto_fixed=True,
                     fix_method="consistency_auto_fix",
                 )
-                all_issues.append(issue)
+                all_issues.append(
+                    self._to_report_issue(
+                        issue=issue,
+                        section_id=issue_data.get("section_id", "consistency"),
+                        section_title="Consistency",
+                    )
+                )
                 auto_fixed_count += 1
             except Exception as e:
                 logger.warning(f"Failed to parse consistency issue: {e}")
                 continue
 
         return sections, all_issues, auto_fixed_count, manual_review_count
+
+    def _to_report_issue(
+        self,
+        issue: TranslationIssue,
+        section_id: str,
+        section_title: str,
+    ) -> QualityReportIssue:
+        """Attach section context to a translation issue for report display."""
+        return QualityReportIssue(
+            section_id=section_id,
+            section_title=section_title,
+            paragraph_index=issue.paragraph_index,
+            issue_type=issue.issue_type,
+            severity=issue.severity,
+            original_text=issue.original_text or "",
+            description=issue.description,
+            why_it_matters=issue.why_it_matters or "",
+            suggestion=issue.suggestion or "",
+            auto_fixed=issue.auto_fixed,
+            revised_text=issue.revised_text,
+            fix_method=issue.fix_method,
+        )
+
+    def _count_by_field(
+        self,
+        issues: List[QualityReportIssue],
+        field_name: str,
+    ) -> Dict[str, int]:
+        counts: Dict[str, int] = {}
+        for issue in issues:
+            value = getattr(issue, field_name, None) or "unknown"
+            counts[str(value)] = counts.get(str(value), 0) + 1
+        return counts

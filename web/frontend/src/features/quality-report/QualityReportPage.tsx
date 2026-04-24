@@ -58,6 +58,41 @@ function getSectionStatus(score: number, issueCount: number) {
   return { label: '重点复核', variant: 'error' as const, icon: CircleAlert };
 }
 
+function issueTypeLabel(type: string): string {
+  const labels: Record<string, string> = {
+    terminology: '术语',
+    accuracy: '准确性',
+    readability: '可读性',
+    consistency: '一致性',
+    style: '风格',
+    tone: '语气',
+    conciseness: '简洁性',
+    structure: '结构',
+  };
+  return labels[type] || type;
+}
+
+function severityLabel(severity: string): string {
+  const labels: Record<string, string> = {
+    critical: '严重',
+    major: '重要',
+    minor: '轻微',
+  };
+  return labels[severity] || severity;
+}
+
+function severityVariant(severity: string) {
+  if (severity === 'critical') return 'error' as const;
+  if (severity === 'major') return 'warning' as const;
+  return 'outline' as const;
+}
+
+const severityRank: Record<string, number> = {
+  critical: 0,
+  major: 1,
+  minor: 2,
+};
+
 export function QualityReportPage() {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
@@ -120,6 +155,21 @@ export function QualityReportPage() {
     const issueCount = section.issue_count ?? section.issues.length;
     return issueCount > 0 || section.overall_score < 90;
   }).length;
+  const sortedIssues = [...report.issues].sort((a, b) => {
+    const severityDiff = (severityRank[a.severity] ?? 9) - (severityRank[b.severity] ?? 9);
+    if (severityDiff !== 0) return severityDiff;
+    return a.paragraph_index - b.paragraph_index;
+  });
+  const priorityIssues = sortedIssues.filter(issue => issue.severity !== 'minor').slice(0, 20);
+  const sectionIssueMap = sortedIssues.reduce<Record<string, typeof sortedIssues>>((acc, issue) => {
+    const key = issue.section_id || 'unknown';
+    acc[key] = acc[key] || [];
+    acc[key].push(issue);
+    return acc;
+  }, {});
+  const topIssueTypes = Object.entries(report.issue_type_counts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 4);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
@@ -174,49 +224,122 @@ export function QualityReportPage() {
         </Card>
       </section>
 
-      <section>
+      {topIssueTypes.length > 0 && (
+        <section className="mb-6">
+          <Card>
+            <CardContent className="p-5">
+              <h2 className="mb-3 text-lg font-semibold text-gray-900">主要问题类型</h2>
+              <div className="flex flex-wrap gap-2">
+                {topIssueTypes.map(([type, count]) => (
+                  <Badge key={type} variant="outline">
+                    {issueTypeLabel(type)} {count}
+                  </Badge>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+      )}
+
+      <section className="mb-6">
         <div className="mb-3 flex items-end justify-between gap-3">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900">章节检查结果</h2>
-            <p className="mt-1 text-sm text-gray-500">优先显示问题更多、分数更低的章节。</p>
+            <h2 className="text-lg font-semibold text-gray-900">优先处理的问题</h2>
+            <p className="mt-1 text-sm text-gray-500">先看严重和重要问题，每条都标出章节、段落和修改建议。</p>
           </div>
         </div>
 
         <Card>
-          <CardContent className="p-0">
-            <div className="divide-y divide-gray-100">
-              {sortedSections.map(section => {
-                const issueCount = section.issue_count ?? section.issues.length;
-                const status = getSectionStatus(section.overall_score, issueCount);
-                const StatusIcon = status.icon;
-
-                return (
-                  <div
-                    key={section.section_id}
-                    className="flex w-full items-center gap-4 px-5 py-4"
-                  >
-                    <StatusIcon className="h-5 w-5 shrink-0 text-gray-500" />
-                    <div className="min-w-0 flex-1">
-                      <div className="truncate text-sm font-medium text-gray-900">
-                        {section.section_title}
-                      </div>
-                      <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-gray-500">
-                        <span>问题 {issueCount}</span>
-                        <span>可读性 {section.readability_score}</span>
-                        <span>准确性 {section.accuracy_score}</span>
-                        <span>简洁性 {section.conciseness_score}</span>
-                      </div>
-                    </div>
-                    <Badge variant={status.variant}>{status.label}</Badge>
-                    <div className="w-14 text-right text-lg font-semibold text-gray-900">
-                      {section.overall_score}
-                    </div>
+          <CardContent className="divide-y divide-gray-100 p-0">
+            {priorityIssues.length > 0 ? (
+              priorityIssues.map((issue, index) => (
+                <div key={`${issue.section_id}-${issue.paragraph_index}-${index}`} className="p-5">
+                  <div className="mb-2 flex flex-wrap items-center gap-2">
+                    <Badge variant={severityVariant(issue.severity)}>{severityLabel(issue.severity)}</Badge>
+                    <Badge variant="outline">{issueTypeLabel(issue.type)}</Badge>
+                    <span className="text-xs text-gray-500">
+                      {issue.section_title || issue.section_id} · 段落 {issue.paragraph_index + 1}
+                    </span>
                   </div>
-                );
-              })}
-            </div>
+                  <p className="text-sm font-medium leading-6 text-gray-900">{issue.description}</p>
+                  {issue.source_text && (
+                    <p className="mt-2 text-xs leading-5 text-gray-500">涉及文本：{issue.source_text}</p>
+                  )}
+                  {issue.why_it_matters && (
+                    <p className="mt-2 text-xs leading-5 text-gray-600">影响：{issue.why_it_matters}</p>
+                  )}
+                  {issue.suggestion && (
+                    <p className="mt-2 rounded-md bg-amber-50 px-3 py-2 text-sm leading-6 text-amber-900">
+                      建议：{issue.suggestion}
+                    </p>
+                  )}
+                </div>
+              ))
+            ) : (
+              <div className="p-5 text-sm text-gray-600">没有严重或重要问题。</div>
+            )}
           </CardContent>
         </Card>
+      </section>
+
+      <section>
+        <div className="mb-3">
+          <h2 className="text-lg font-semibold text-gray-900">按章节查看全部问题</h2>
+          <p className="mt-1 text-sm text-gray-500">展开章节后可以看到该章的具体问题和建议。</p>
+        </div>
+
+        <div className="space-y-3">
+          {sortedSections.map(section => {
+            const issueCount = section.issue_count ?? section.issues.length;
+            const status = getSectionStatus(section.overall_score, issueCount);
+            const StatusIcon = status.icon;
+            const issues = sectionIssueMap[section.section_id] || [];
+
+            return (
+              <details key={section.section_id} className="rounded-lg border border-gray-200 bg-white">
+                <summary className="flex cursor-pointer list-none items-center gap-4 px-5 py-4">
+                  <StatusIcon className="h-5 w-5 shrink-0 text-gray-500" />
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm font-medium text-gray-900">
+                      {section.section_title}
+                    </div>
+                    <div className="mt-1 flex flex-wrap items-center gap-2 text-xs text-gray-500">
+                      <span>问题 {issueCount}</span>
+                      <span>可读性 {section.readability_score}</span>
+                      <span>准确性 {section.accuracy_score}</span>
+                      <span>简洁性 {section.conciseness_score}</span>
+                    </div>
+                  </div>
+                  <Badge variant={status.variant}>{status.label}</Badge>
+                  <div className="w-14 text-right text-lg font-semibold text-gray-900">
+                    {section.overall_score}
+                  </div>
+                </summary>
+                <div className="border-t border-gray-100 px-5 py-4">
+                  {issues.length > 0 ? (
+                    <div className="space-y-4">
+                      {issues.map((issue, index) => (
+                        <div key={`${issue.paragraph_index}-${index}`} className="rounded-md bg-gray-50 p-4">
+                          <div className="mb-2 flex flex-wrap items-center gap-2">
+                            <Badge variant={severityVariant(issue.severity)}>{severityLabel(issue.severity)}</Badge>
+                            <Badge variant="outline">{issueTypeLabel(issue.type)}</Badge>
+                            <span className="text-xs text-gray-500">段落 {issue.paragraph_index + 1}</span>
+                          </div>
+                          <p className="text-sm font-medium leading-6 text-gray-900">{issue.description}</p>
+                          {issue.suggestion && (
+                            <p className="mt-2 text-sm leading-6 text-gray-700">建议：{issue.suggestion}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-500">这一章没有记录具体问题。</p>
+                  )}
+                </div>
+              </details>
+            );
+          })}
+        </div>
       </section>
     </div>
   );

@@ -49,6 +49,7 @@ from .analysis import (
     TermUsageTracker,
     LayeredContext,
     SectionQualityScore,
+    QualityReportIssue,
     QualityReportSummary,
 )
 
@@ -113,6 +114,7 @@ __all__ = [
     "TermUsageTracker",
     "LayeredContext",
     "SectionQualityScore",
+    "QualityReportIssue",
     "QualityReportSummary",
     # Consistency
     "ConsistencyIssue",

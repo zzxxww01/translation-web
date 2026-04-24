@@ -206,6 +206,23 @@ class SectionQualityScore(BaseModel):
     paragraph_count: int = 0
 
 
+class QualityReportIssue(BaseModel):
+    """质量报告中的可定位问题"""
+
+    section_id: str
+    section_title: str
+    paragraph_index: int
+    issue_type: str
+    severity: str
+    original_text: str = ""
+    description: str
+    why_it_matters: str = ""
+    suggestion: str = ""
+    auto_fixed: bool = False
+    revised_text: Optional[str] = None
+    fix_method: Optional[str] = None
+
+
 class QualityReportSummary(BaseModel):
     """质量报告摘要"""
 
@@ -218,3 +235,6 @@ class QualityReportSummary(BaseModel):
     auto_fixed_issues: int
     manual_review_issues: int
     consistency_stats: Dict[str, Any] = Field(default_factory=dict)
+    issues: List[QualityReportIssue] = Field(default_factory=list)
+    issue_type_counts: Dict[str, int] = Field(default_factory=dict)
+    severity_counts: Dict[str, int] = Field(default_factory=dict)

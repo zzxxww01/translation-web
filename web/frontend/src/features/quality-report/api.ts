@@ -37,6 +37,9 @@ interface BackendProjectQualityReport {
   total_issues: number;
   auto_fixed_issues: number;
   manual_review_issues: number;
+  issues?: TranslationIssueDTO[];
+  issue_type_counts?: Record<string, number>;
+  severity_counts?: Record<string, number>;
   consistency_stats?: Record<string, unknown>;
 }
 
@@ -95,11 +98,13 @@ function mapProjectReport(report: BackendProjectQualityReport): ProjectQualityRe
       dismissed: 0,
     },
     issues_by_severity: {
-      critical: 0,
-      major: 0,
-      minor: 0,
+      critical: (report.severity_counts?.critical || 0) + (report.severity_counts?.high || 0),
+      major: (report.severity_counts?.major || 0) + (report.severity_counts?.medium || 0),
+      minor: (report.severity_counts?.minor || 0) + (report.severity_counts?.low || 0),
     },
+    issue_type_counts: report.issue_type_counts || {},
     sections: report.sections.map(mapSection),
+    issues: (report.issues || []).map(toQualityIssue),
     generated_at: report.timestamp,
   };
 }
