@@ -244,15 +244,15 @@ export function DocumentSidebar({
 
           {projectId && (
             <Button
-              asChild
               variant="outline"
               size="default"
               leftIcon={<BarChart3 className="h-4 w-4" />}
               className="w-full"
+              onClick={() => {
+                window.location.href = `/document/${projectId}/quality-report`;
+              }}
             >
-              <a href={`/document/${projectId}/quality-report`}>
-                查看质量报告
-              </a>
+              查看质量报告
             </Button>
           )}
 
