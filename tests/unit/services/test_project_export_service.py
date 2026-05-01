@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from src.core.markdown_postprocess import postprocess_markdown
 from src.core.inline_recovery_service import InlineRecoveryService
 from src.core.models import ElementType, Paragraph, ProjectMeta, ProjectStatus, Section
 from src.core.project_export_service import ProjectExportService
@@ -87,3 +88,39 @@ def test_generate_preview_marks_confirmed_and_draft_paragraphs(tmp_path: Path) -
     assert "✅ 已确认译文" in preview
     assert "### 🔄 草稿译文" in preview
     assert (tmp_path / "preview-demo" / "preview.md").exists()
+
+
+def test_postprocess_normalizes_latex_for_obsidian() -> None:
+    content = (
+        r"这是公式 \( TCO\_{\text{Goodput}} = \frac{TCO\_{\text{total}}}{Goodput} \)"
+        "\n\n"
+        "$$\n"
+        r"\begin{align\*}"
+        "\n"
+        r"TCO\_{\text{total}} &= Cost\_{\text{hardware}}"
+        "\n"
+        r"\end{align\*}"
+        "\n$$"
+    )
+
+    output = postprocess_markdown(content)
+
+    assert r"$TCO_{\text{Goodput}} = \frac{TCO_{\text{total}}}{Goodput}$" in output
+    assert r"\begin{align*}" in output
+    assert r"TCO_{\text{total}} &= Cost_{\text{hardware}}" in output
+    assert r"\end{align*}" in output
+    assert r"\(" not in output
+    assert r"\_" not in output
+    assert r"align\*" not in output
+
+
+def test_postprocess_converts_latex_display_brackets() -> None:
+    output = postprocess_markdown(r"\[G\_{\text{total}} = \frac{1}{2}\]")
+
+    assert output == "$$\n" + r"G_{\text{total}} = \frac{1}{2}" + "\n$$"
+
+
+def test_postprocess_does_not_normalize_latex_inside_code_blocks() -> None:
+    content = "```\n" + r"\( TCO\_{\text{Goodput}} \)" + "\n```"
+
+    assert postprocess_markdown(content) == content

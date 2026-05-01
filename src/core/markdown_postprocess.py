@@ -21,6 +21,21 @@ _FENCED_CODE_BLOCK = re.compile(
     re.MULTILINE | re.DOTALL,
 )
 
+# LaTeX display math blocks: \[...\] or $$...$$
+_LATEX_DISPLAY_MATH = re.compile(
+    r"(\\\[.*?\\\]|\$\$.*?\$\$)",
+    re.DOTALL,
+)
+
+# LaTeX inline math: \(...\) or $...$
+_LATEX_INLINE_MATH = re.compile(
+    r"(\\\(.*?\\\)|\$[^\$\n]+\$)"
+)
+
+# Markdown escaping that is harmful inside LaTeX math.
+_LATEX_ESCAPED_SUBSCRIPT = re.compile(r"\\_")
+_LATEX_ESCAPED_STAR_ENV = re.compile(r"(\\(?:begin|end)\{[^{}\n]*?)\\\*([^{}\n]*\})")
+
 # Inline code spans (`...`) — must NOT be touched.
 _INLINE_CODE = re.compile(r"`[^`]+`")
 
@@ -81,7 +96,7 @@ def postprocess_markdown(content: str) -> str:
     2. Escape bare ``<`` (prevents accidental HTML interpretation).
     3. Normalise excessive blank lines.
     4. Inject CJK–Latin spacing where missing.
-    5. Preserve code blocks, inline code, images, links, and HTML tags.
+    5. Preserve LaTeX formulas, code blocks, inline code, images, links, and HTML tags.
     """
     if not content:
         return content
@@ -89,13 +104,21 @@ def postprocess_markdown(content: str) -> str:
     # --- Phase 1: Extract protected regions to placeholders ---
     protected: List[str] = []
 
-    def _protect(match: re.Match[str]) -> str:
+    def _protect_text(text: str) -> str:
         idx = len(protected)
-        protected.append(match.group(0))
+        protected.append(text)
         return f"\x00PROTECTED_{idx}\x00"
 
-    # Order matters: fenced code first (largest), then inline code, images, links, HTML.
+    def _protect(match: re.Match[str]) -> str:
+        return _protect_text(match.group(0))
+
+    def _protect_latex(match: re.Match[str]) -> str:
+        return _protect_text(_normalize_latex_math(match.group(0)))
+
+    # Order matters: fenced code first, then LaTeX, inline code, images, links, HTML.
     work = _FENCED_CODE_BLOCK.sub(_protect, content)
+    work = _LATEX_DISPLAY_MATH.sub(_protect_latex, work)
+    work = _LATEX_INLINE_MATH.sub(_protect_latex, work)
     work = _INLINE_CODE.sub(_protect, work)
     work = _MD_IMAGE.sub(_protect, work)
     work = _MD_LINK.sub(_protect, work)
@@ -125,3 +148,19 @@ def postprocess_markdown(content: str) -> str:
         work = work.replace(f"\x00PROTECTED_{idx}\x00", original)
 
     return work
+
+
+def _normalize_latex_math(math: str) -> str:
+    """Normalize LaTeX math for Obsidian-compatible Markdown export."""
+    if math.startswith(r"\(") and math.endswith(r"\)"):
+        body = _normalize_latex_body(math[2:-2].strip())
+        return f"${body}$"
+    if math.startswith(r"\[") and math.endswith(r"\]"):
+        body = _normalize_latex_body(math[2:-2].strip())
+        return f"$$\n{body}\n$$"
+    return _normalize_latex_body(math)
+
+
+def _normalize_latex_body(math: str) -> str:
+    math = _LATEX_ESCAPED_STAR_ENV.sub(r"\1*\2", math)
+    return _LATEX_ESCAPED_SUBSCRIPT.sub("_", math)
