@@ -984,6 +984,7 @@ class BatchTranslationService:
 
             # 收集所有翻译结果用于一致性审查
             all_translations = {}
+            consistency_report = None
 
             # 使用信号量控制并发数
             semaphore = asyncio.Semaphore(self.max_concurrent_sections)
@@ -1674,9 +1675,18 @@ class BatchTranslationService:
         progress = self._progress_cache().get(project_id)
         latest_run_state = self._infer_run_state(project_id)
         active_run = self._get_active_run()
+        is_active_project = bool(active_run and active_run.project_id == project_id)
+        active_run_id = active_run.run_id if active_run else None
+        latest_run_is_active = bool(
+            is_active_project
+            and latest_run_state
+            and (
+                active_run_id is None
+                or latest_run_state.run_id == active_run_id
+            )
+        )
 
         def attach_active_fields(payload: Dict[str, Any]) -> Dict[str, Any]:
-            is_active_project = bool(active_run and active_run.project_id == project_id)
             terminal_statuses = {"completed", "cancelled", "failed", "incomplete"}
             effective_status = str(payload.get("final_status") or payload.get("status") or "")
             payload["active_project_id"] = active_run.project_id if active_run else None
@@ -1723,7 +1733,12 @@ class BatchTranslationService:
         is_complete = total_paragraphs > 0 and translated >= total_paragraphs
         latest_run = self._load_latest_run_summary(project_id)
 
-        if latest_run_state and latest_run and latest_run_state.run_id != str(latest_run.get("run_id") or ""):
+        if (
+            latest_run_is_active
+            and latest_run
+            and latest_run_state
+            and latest_run_state.run_id != str(latest_run.get("run_id") or "")
+        ):
             return attach_active_fields({
                 "status": latest_run_state.status,
                 "progress_percent": (
@@ -1776,7 +1791,7 @@ class BatchTranslationService:
                 "run_id": latest_run.get("run_id") or (latest_run_state.run_id if latest_run_state else None),
             })
 
-        if latest_run_state:
+        if latest_run_is_active and latest_run_state:
             return attach_active_fields({
                 "status": latest_run_state.status,
                 "progress_percent": (
@@ -1806,10 +1821,13 @@ class BatchTranslationService:
             ProjectStatus.COMPLETED,
         ):
             status = "completed"
-        elif project.status in (ProjectStatus.ANALYZING, ProjectStatus.IN_PROGRESS):
+        elif is_active_project and project.status in (
+            ProjectStatus.ANALYZING,
+            ProjectStatus.IN_PROGRESS,
+        ):
             status = "processing"
         elif translated > 0:
-            status = "processing"
+            status = "partial"
         else:
             status = "not_started"
 

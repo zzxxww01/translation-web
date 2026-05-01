@@ -5,9 +5,13 @@ Abstract base class for LLM providers.
 """
 
 from abc import ABC, abstractmethod
+import logging
 from typing import Optional, List, Dict, Any
 
 from ..core.limits import TranslationLimits
+
+
+logger = logging.getLogger(__name__)
 
 
 class LLMProvider(ABC):

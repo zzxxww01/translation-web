@@ -81,20 +81,6 @@ class SectionTranslationExecutor:
                 section_prompt_context,
             )
 
-            prescan_result = await self._run_section_prescan(
-                project_id,
-                self._build_translatable_section(section),
-                progress,
-                on_term_conflict=on_term_conflict,
-            )
-            if prescan_result:
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-prescan",
-                    section.section_id,
-                    prescan_result,
-                )
-
             section_paragraph_count = len(section.paragraphs)
             translated_in_section = self._count_translated_paragraphs(section)
             if translated_in_section == section_paragraph_count and section_paragraph_count > 0:
@@ -116,6 +102,20 @@ class SectionTranslationExecutor:
                     "paragraph_count": section_paragraph_count,
                     "translated_before": translated_in_section,
                 }
+
+            prescan_result = await self._run_section_prescan(
+                project_id,
+                translatable_section,
+                progress,
+                on_term_conflict=on_term_conflict,
+            )
+            if prescan_result:
+                self._persist_section_artifact(
+                    run_dir,
+                    "section-prescan",
+                    section.section_id,
+                    prescan_result,
+                )
 
             if translation_mode == translation_mode_section:
                 translations = await self._translate_section_batch(

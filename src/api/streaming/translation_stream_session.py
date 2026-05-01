@@ -57,6 +57,7 @@ class TranslationStreamSession:
         self._release_slot = release_slot
         self._progress_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
         self._event_loop = asyncio.get_running_loop()
+        self._client_attached = True
 
     def _init_conflict_state(self) -> None:
         with _conflict_lock:
@@ -69,10 +70,25 @@ class TranslationStreamSession:
             _conflict_resolutions.pop(self.project_id, None)
 
     async def _handle_term_conflict_on_main(self, conflict) -> Dict[str, Any]:
+        def default_resolution() -> Dict[str, Any]:
+            return {
+                "chosen_translation": (
+                    conflict.existing_translation
+                    or conflict.new_translation
+                ),
+                "apply_to_all": True,
+            }
+
+        if not self._client_attached:
+            return default_resolution()
+
         term_key = conflict.term.lower()
         event = asyncio.Event()
         with _conflict_lock:
             _pending_conflict_events[self.project_id][term_key] = event
+            if not self._client_attached:
+                _pending_conflict_events[self.project_id].pop(term_key, None)
+                return default_resolution()
         await self._progress_queue.put(
             {
                 "type": "term_conflict",
@@ -93,6 +109,20 @@ class TranslationStreamSession:
             with _conflict_lock:
                 _pending_conflict_events.get(self.project_id, {}).pop(term_key, None)
                 _conflict_resolutions.get(self.project_id, {}).pop(term_key, None)
+
+    def _detach_client(self, reason: str) -> None:
+        if not self._client_attached:
+            return
+
+        self._client_attached = False
+        logger.info(
+            "[%s] SSE client detached; translation will continue in background: %s",
+            self.project_id,
+            reason,
+        )
+        with _conflict_lock:
+            for event in _pending_conflict_events.get(self.project_id, {}).values():
+                event.set()
 
     async def _run_translation_task(self) -> None:
         try:
@@ -155,18 +185,6 @@ class TranslationStreamSession:
     async def generate(self):
         translation_task: asyncio.Task | None = None
         translation_finished = False
-        cancel_requested = False
-
-        async def request_cancel(reason: str) -> None:
-            nonlocal cancel_requested
-            if cancel_requested:
-                return
-            cancel_requested = True
-            logger.info("[%s] Requesting translation cancellation: %s", self.project_id, reason)
-            try:
-                await self._cancel_translation(self.project_id)
-            except Exception as cancel_exc:
-                logger.warning("[%s] Failed to cancel translation: %s", self.project_id, cancel_exc)
 
         self._init_conflict_state()
         try:
@@ -187,7 +205,7 @@ class TranslationStreamSession:
 
             while True:
                 if await self.request.is_disconnected():
-                    await request_cancel("client disconnected")
+                    self._detach_client("client disconnected")
                     break
                 try:
                     event = await asyncio.wait_for(self._progress_queue.get(), timeout=1.0)
@@ -197,7 +215,7 @@ class TranslationStreamSession:
                         break
                 except asyncio.TimeoutError:
                     if await self.request.is_disconnected():
-                        await request_cancel("client disconnected during heartbeat")
+                        self._detach_client("client disconnected during heartbeat")
                         break
                     yield f"data: {json.dumps({'type': 'heartbeat'})}\n\n"
 
@@ -216,7 +234,7 @@ class TranslationStreamSession:
                         translation_finished = True
                         break
         except asyncio.CancelledError:
-            await request_cancel("stream task cancelled")
+            self._detach_client("stream task cancelled")
             raise
         except Exception as exc:
             yield f"data: {json.dumps({'type': 'error', 'error': str(exc)})}\n\n"
@@ -226,4 +244,4 @@ class TranslationStreamSession:
                 and translation_task is not None
                 and not translation_task.done()
             ):
-                await request_cancel("stream closed before translation finished")
+                self._detach_client("stream closed before translation finished")
