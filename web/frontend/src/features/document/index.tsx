@@ -12,11 +12,6 @@ import {
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
-import {
-  Sheet, SheetContent, SheetHeader, SheetTitle,
-} from '@/components/ui/sheet';
-import { Button } from '@/components/ui/Button';
-import { PanelLeftOpen } from 'lucide-react';
 import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
 import { NewProjectModal } from './components/NewProjectModal';
@@ -65,7 +60,6 @@ export function DocumentFeature() {
   } = useDocumentStore();
 
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
   const [immersiveTargetParagraphId, setImmersiveTargetParagraphId] = useState<string | null>(null);
 
@@ -203,19 +197,6 @@ export function DocumentFeature() {
     [handleSelectSection, sections]
   );
 
-  const handleMobileSelectSectionById = useCallback(
-    (sectionId: string) => {
-      handleSelectSectionById(sectionId);
-      setIsMobileSidebarOpen(false);
-    },
-    [handleSelectSectionById]
-  );
-
-  const handleMobileNewProject = useCallback(() => {
-    setIsMobileSidebarOpen(false);
-    setIsNewProjectModalOpen(true);
-  }, []);
-
   const handleSelectParagraph = useCallback(
     (paragraph: Paragraph) => {
       setCurrentParagraph(paragraph);
@@ -317,12 +298,7 @@ export function DocumentFeature() {
 
   const renderMainContent = () => {
     if (!currentProject) {
-      return (
-        <WelcomeScreen
-          onNewProject={() => setIsNewProjectModalOpen(true)}
-          onOpenProjects={() => setIsMobileSidebarOpen(true)}
-        />
-      );
+      return <WelcomeScreen />;
     }
 
     if (activeView === 'glossary') {
@@ -422,9 +398,8 @@ export function DocumentFeature() {
     currentStep;
 
   return (
-    <div className="flex h-[calc(100dvh-3.5rem)] min-h-0 overflow-hidden md:h-[calc(100dvh-5.5rem)]">
+    <div className="flex h-full overflow-auto">
       <DocumentSidebar
-        className="hidden md:flex"
         sections={sections}
         activeSectionId={activeSectionId}
         onSectionSelect={handleSelectSectionById}
@@ -440,53 +415,7 @@ export function DocumentFeature() {
         projectId={currentProject?.id}
       />
 
-      <Sheet open={isMobileSidebarOpen} onOpenChange={setIsMobileSidebarOpen}>
-        <SheetContent side="left" className="flex w-[88vw] max-w-80 flex-col p-0">
-          <SheetHeader className="border-b border-border-subtle px-4 py-4 text-left">
-            <SheetTitle className="text-base">项目与章节</SheetTitle>
-          </SheetHeader>
-          <DocumentSidebar
-            className="h-auto min-h-0 w-full flex-1 border-r-0"
-            sections={sections}
-            activeSectionId={activeSectionId}
-            onSectionSelect={handleMobileSelectSectionById}
-            onNewProject={handleMobileNewProject}
-            onFullTranslate={handleFullTranslate}
-            onStopTranslate={() => setShowStopDialog(true)}
-            isFullTranslating={effectiveIsFullTranslating}
-            isCancelling={effectiveIsCancelling}
-            isPreparingFullTranslate={isPreparingFullTranslate}
-            fullTranslateProgress={effectiveProgress}
-            currentStep={effectiveCurrentStep}
-            activeTranslationProjectId={backendTranslationStatus?.active_project_id || null}
-            projectId={currentProject?.id}
-          />
-        </SheetContent>
-      </Sheet>
-
-      <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex items-center justify-between border-b border-border-subtle bg-white/90 px-3 py-2 md:hidden">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setIsMobileSidebarOpen(true)}
-            className="h-10"
-          >
-            <PanelLeftOpen className="h-4 w-4" />
-            章节
-          </Button>
-          <div className="min-w-0 flex-1 px-3 text-right">
-            <div className="truncate text-sm font-semibold text-text-primary">
-              {currentProject?.title || '长文翻译'}
-            </div>
-            {displaySection ? (
-              <div className="truncate text-xs text-text-muted">{displaySection.title}</div>
-            ) : null}
-          </div>
-        </div>
-
-        <main className="min-h-0 flex-1 overflow-y-auto">{renderMainContent()}</main>
-      </div>
+      <main className="flex-1 overflow-y-auto">{renderMainContent()}</main>
 
       {showEditingPanels && currentParagraph && currentProject && activeSectionId && displaySection && (
         <EditPanel

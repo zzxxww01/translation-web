@@ -1,14 +1,9 @@
-import logging
-import time
 from pathlib import Path
 from typing import Any, Awaitable, Callable, Optional
 
 from src.core.models import ArticleAnalysis, ProjectMeta, Section, TermConflict
 from src.core.structured_metadata import is_structured_metadata_paragraph
 from src.services.batch_translation_types import TranslationProgress
-
-
-logger = logging.getLogger(__name__)
 
 
 class SectionTranslationExecutor:
@@ -19,7 +14,6 @@ class SectionTranslationExecutor:
         *,
         is_cancelled: Callable[[str], bool],
         touch_progress: Callable[..., None],
-        log_event: Callable[..., None],
         build_section_prompt_context: Callable[..., dict[str, Any]],
         persist_section_artifact: Callable[[Path, str, str, Any], None],
         run_section_prescan: Callable[..., Awaitable[Optional[Any]]],
@@ -27,14 +21,13 @@ class SectionTranslationExecutor:
         translate_section_batch: Callable[..., Awaitable[list[str]]],
         apply_section_batch_translations: Callable[[Section, list[str]], list[str]],
         record_section_batch_term_usage: Callable[[Section, ArticleAnalysis], None],
-        four_step_translate_section: Callable[..., Awaitable[Any]],
+        four_step_translate_section: Callable[..., Any],
         create_section_callback: Callable[..., Callable[[str, int, int], None]],
         apply_four_step_translations: Callable[[Section, Any], None],
         save_section: Callable[[str, Section], None],
     ) -> None:
         self._is_cancelled = is_cancelled
         self._touch_progress = touch_progress
-        self._log_event = log_event
         self._build_section_prompt_context = build_section_prompt_context
         self._persist_section_artifact = persist_section_artifact
         self._run_section_prescan = run_section_prescan
@@ -65,28 +58,8 @@ class SectionTranslationExecutor:
         translation_mode: str,
         translation_mode_section: str,
     ) -> dict[str, Any]:
-        section_start = time.monotonic()
-        self._log_event(
-            run_dir,
-            "section_start",
-            project_id=project_id,
-            section_id=section.section_id,
-            section_title=section.title,
-            section_index=section_index + 1,
-            total_sections=total_sections,
-            paragraph_count=len(section.paragraphs),
-            translated_before=self._count_translated_paragraphs(section),
-            translation_mode=translation_mode,
-        )
         try:
             if self._is_cancelled(project_id):
-                self._log_event(
-                    run_dir,
-                    "section_cancelled_before_start",
-                    project_id=project_id,
-                    section_id=section.section_id,
-                    elapsed_seconds=round(time.monotonic() - section_start, 3),
-                )
                 return {"section_id": section.section_id, "cancelled": True}
 
             self._touch_progress(
@@ -100,14 +73,6 @@ class SectionTranslationExecutor:
                 section,
                 section_index,
                 analysis,
-            )
-            self._log_event(
-                run_dir,
-                "section_context_built",
-                project_id=project_id,
-                section_id=section.section_id,
-                context_keys=sorted(section_prompt_context.keys()),
-                terminology_count=len(section_prompt_context.get("terminology") or []),
             )
             self._persist_section_artifact(
                 run_dir,
@@ -123,13 +88,6 @@ class SectionTranslationExecutor:
                 on_term_conflict=on_term_conflict,
             )
             if prescan_result:
-                self._log_event(
-                    run_dir,
-                    "section_prescan_result",
-                    project_id=project_id,
-                    section_id=section.section_id,
-                    new_terms_count=len(getattr(prescan_result, "new_terms", []) or []),
-                )
                 self._persist_section_artifact(
                     run_dir,
                     "section-prescan",
@@ -140,14 +98,6 @@ class SectionTranslationExecutor:
             section_paragraph_count = len(section.paragraphs)
             translated_in_section = self._count_translated_paragraphs(section)
             if translated_in_section == section_paragraph_count and section_paragraph_count > 0:
-                self._log_event(
-                    run_dir,
-                    "section_skipped_already_translated",
-                    project_id=project_id,
-                    section_id=section.section_id,
-                    paragraph_count=section_paragraph_count,
-                    elapsed_seconds=round(time.monotonic() - section_start, 3),
-                )
                 return {
                     "section_id": section.section_id,
                     "skipped": True,
@@ -160,15 +110,6 @@ class SectionTranslationExecutor:
 
             translatable_section = self._build_translatable_section(section)
             if not translatable_section.paragraphs:
-                self._log_event(
-                    run_dir,
-                    "section_no_translatable_paragraphs",
-                    project_id=project_id,
-                    section_id=section.section_id,
-                    paragraph_count=section_paragraph_count,
-                    translated_before=translated_in_section,
-                    elapsed_seconds=round(time.monotonic() - section_start, 3),
-                )
                 return {
                     "section_id": section.section_id,
                     "translations": [],
@@ -177,14 +118,6 @@ class SectionTranslationExecutor:
                 }
 
             if translation_mode == translation_mode_section:
-                self._log_event(
-                    run_dir,
-                    "section_translation_call_start",
-                    project_id=project_id,
-                    section_id=section.section_id,
-                    mode=translation_mode,
-                    translatable_paragraph_count=len(translatable_section.paragraphs),
-                )
                 translations = await self._translate_section_batch(
                     section=translatable_section,
                     section_index=section_index,
@@ -209,15 +142,7 @@ class SectionTranslationExecutor:
                     },
                 )
             else:
-                self._log_event(
-                    run_dir,
-                    "section_translation_call_start",
-                    project_id=project_id,
-                    section_id=section.section_id,
-                    mode=translation_mode,
-                    translatable_paragraph_count=len(translatable_section.paragraphs),
-                )
-                result = await self._four_step_translate_section(
+                result = self._four_step_translate_section(
                     section=translatable_section,
                     all_sections=all_sections,
                     project_id=project_id,
@@ -266,17 +191,6 @@ class SectionTranslationExecutor:
                 step=f"完成: {section.title}",
                 current_section=section.section_id,
             )
-            self._log_event(
-                run_dir,
-                "section_complete",
-                project_id=project_id,
-                section_id=section.section_id,
-                paragraph_count=section_paragraph_count,
-                updated_translation_count=len(collected_translations),
-                translated_before=translated_in_section,
-                translated_after=self._count_translated_paragraphs(section),
-                elapsed_seconds=round(time.monotonic() - section_start, 3),
-            )
             return {
                 "section_id": section.section_id,
                 "translations": [
@@ -289,17 +203,6 @@ class SectionTranslationExecutor:
             }
         except Exception as error:
             error_msg = f"Failed to translate section {section.section_id}: {str(error)}"
-            logger.exception("[%s] %s", project_id, error_msg)
-            self._log_event(
-                run_dir,
-                "section_error",
-                level="error",
-                project_id=project_id,
-                section_id=section.section_id,
-                error=str(error),
-                error_type=type(error).__name__,
-                elapsed_seconds=round(time.monotonic() - section_start, 3),
-            )
             self._touch_progress(
                 progress,
                 step=error_msg,

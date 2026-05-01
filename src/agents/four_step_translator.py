@@ -679,7 +679,6 @@ class FourStepTranslator:
         batch_source_text = "\n\n".join(batch_source_text_parts)
         context = self._build_batch_context(
             section,
-            paragraphs,
             batch_source_text,
             understanding,
             all_sections,
@@ -736,7 +735,6 @@ class FourStepTranslator:
     def _build_batch_context(
         self,
         section: Section,
-        paragraphs: List[Paragraph],
         batch_source_text: str,
         understanding: SectionUnderstanding,
         all_sections: List[Section],
@@ -819,63 +817,11 @@ class FourStepTranslator:
         if feedback_text:
             context["feedback_from_previous_sections"] = feedback_text
 
-        # 注入术语使用记录。并发翻译时不能只依赖运行时 tracker；
-        # 首现类策略按文档顺序判断当前批次前是否已经出现过。
-        term_usage = self._build_batch_term_usage(
-            article_analysis.terminology if article_analysis else [],
-            section,
-            paragraphs,
-            all_sections,
-        )
-        if term_usage:
-            context["term_usage"] = term_usage
+        # 注入术语使用记录
+        if self.context_manager.term_tracker.used_translations:
+            context["term_usage"] = self.context_manager.term_tracker.used_translations.copy()
 
         return context
-
-    def _build_batch_term_usage(
-        self,
-        terms: List[EnhancedTerm],
-        section: Section,
-        paragraphs: List[Paragraph],
-        all_sections: List[Section],
-    ) -> Dict[str, List[str]]:
-        """Build deterministic first-use state for the current source batch."""
-        usage: Dict[str, List[str]] = {
-            key: list(values)
-            for key, values in self.context_manager.term_tracker.used_translations.items()
-        }
-        if not terms or not paragraphs:
-            return usage
-
-        first_paragraph_id = paragraphs[0].id
-        current_marker = (section.section_id, first_paragraph_id)
-        prior_text_parts: List[str] = []
-        reached_current = False
-        for candidate_section in all_sections:
-            for paragraph in candidate_section.paragraphs:
-                marker = (candidate_section.section_id, paragraph.id)
-                if marker == current_marker:
-                    reached_current = True
-                    break
-                prior_text_parts.append(paragraph.source or "")
-            if reached_current:
-                break
-
-        if not prior_text_parts:
-            return usage
-
-        prior_text = "\n\n".join(prior_text_parts)
-        for term in terms:
-            strategy = getattr(term.strategy, "value", term.strategy)
-            if strategy not in ("first_annotate", "preserve_annotate"):
-                continue
-            key = term.term.lower()
-            if key in usage:
-                continue
-            if _count_term_occurrences(prior_text, term.term) > 0:
-                usage[key] = [term.translation or term.term]
-
-        return usage
 
     def _translate_single_paragraph(
         self,

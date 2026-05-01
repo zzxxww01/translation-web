@@ -10,19 +10,19 @@
 @layer base {
   :root {
     /* 字体系统 */
-    --font-display: 'IBM Plex Sans', 'Sora', sans-serif;
-    --font-body: 'IBM Plex Sans', 'Outfit', sans-serif;
+    --font-display: 'Sora', sans-serif;
+    --font-body: 'Outfit', sans-serif;
     --font-chinese: 'Noto Sans SC', sans-serif;
     --font-mono: 'JetBrains Mono', monospace;
 
     /* 主色渐变 */
-    --color-primary-start: #123c69;
-    --color-primary-mid: #1d4ed8;
-    --color-primary-end: #2563eb;
+    --color-primary-start: #1a365d;
+    --color-primary-mid: #3730a3;
+    --color-primary-end: #5b21b6;
 
     /* 辅助色渐变 */
-    --color-secondary-start: #0f766e;
-    --color-secondary-end: #2563eb;
+    --color-secondary-start: #0891b2;
+    --color-secondary-end: #3b82f6;
 
     /* 强调色渐变 */
     --color-accent-start: #f59e0b;
@@ -36,7 +36,7 @@
     /* 文本层次 */
     --color-text-primary: #0f172a;
     --color-text-secondary: #475569;
-    --color-text-muted: #64748b;
+    --color-text-muted: #94a3b8;
 
     /* 语义色 */
     --color-success: #10b981;
@@ -59,9 +59,9 @@
 
     /* 圆角系统 */
     --radius-sm: 8px;
-    --radius-md: 10px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-xl: 32px;
     --radius-full: 9999px;
   }
 }
@@ -83,7 +83,7 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     font-weight: 700;
-    letter-spacing: 0;
+    letter-spacing: -0.01em;
   }
 
   /* 代码字体 */
@@ -108,10 +108,11 @@
 
   .gradient-mesh-fluid {
     background:
-      linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(248, 250, 252, 0.94)),
-      radial-gradient(at 0% 0%, rgba(29, 78, 216, 0.05) 0px, transparent 44%),
-      radial-gradient(at 100% 8%, rgba(15, 118, 110, 0.05) 0px, transparent 42%),
-      radial-gradient(at 78% 100%, rgba(245, 158, 11, 0.04) 0px, transparent 36%);
+      radial-gradient(at 0% 0%, rgba(26, 54, 93, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(91, 33, 182, 0.08) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(8, 145, 178, 0.08) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
+    animation: meshFlow 20s ease-in-out infinite;
   }
 
   @keyframes meshFlow {
@@ -235,17 +236,21 @@
 /* ============ 玻璃态组件 ============ */
 @layer components {
   .card-glass {
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(10px) saturate(140%);
-    border: 1px solid rgba(203, 213, 225, 0.9);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: var(--radius-lg);
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
-    transition: border-color 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    transition: all 0.4s var(--ease-fluid);
   }
 
   .card-glass:hover {
-    border-color: rgba(148, 163, 184, 0.95);
-    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+      0 16px 48px rgba(0, 0, 0, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
   }
 
   .card-glass-dark {
@@ -260,17 +265,19 @@
 @layer components {
   .button-fluid {
     position: relative;
-    padding: 10px 20px;
+    padding: 12px 32px;
     font-family: var(--font-display);
     font-weight: 600;
-    font-size: 0.925rem;
+    font-size: 1rem;
     color: white;
-    background: var(--color-primary-mid);
+    background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
+    background-size: 200% 200%;
     border: none;
     border-radius: var(--radius-md);
     overflow: hidden;
     cursor: pointer;
-    transition: background 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth);
+    transition: all 0.4s var(--ease-fluid);
+    animation: gradientFlow 8s ease infinite;
   }
 
   .button-fluid::before {
@@ -287,17 +294,17 @@
   }
 
   .button-fluid:hover::before {
-    width: 0;
-    height: 0;
+    width: 300px;
+    height: 300px;
   }
 
   .button-fluid:hover {
-    background: var(--color-primary-start);
-    box-shadow: 0 8px 18px rgba(29, 78, 216, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(91, 33, 182, 0.3);
   }
 
   .button-fluid:active {
-    box-shadow: none;
+    transform: translateY(0);
   }
 
   /* 次要按钮 */
@@ -322,21 +329,24 @@
 /* ============ 流动输入框 ============ */
 @layer components {
   .input-fluid {
-    padding: 10px 14px;
+    padding: 14px 20px;
     font-family: var(--font-body);
     font-size: 1rem;
     color: var(--color-text-primary);
-    background: #f8fafc;
-    border: 1px solid #d7dee8;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid transparent;
+    border-radius: var(--radius-md);
     outline: none;
-    transition: border-color 0.2s var(--ease-smooth), background-color 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth);
+    transition: all 0.3s var(--ease-smooth);
   }
 
   .input-fluid:focus {
     background: white;
-    border-color: #0f172a;
-    box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.08);
+    border-color: var(--color-primary-end);
+    box-shadow:
+      0 0 0 4px rgba(91, 33, 182, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
   }
 
   .input-fluid::placeholder {
@@ -345,13 +355,13 @@
 
   /* Textarea */
   .textarea-fluid {
-    padding: 12px 14px;
+    padding: 14px 20px;
     font-family: var(--font-body);
     font-size: 1rem;
     line-height: 1.6;
     color: var(--color-text-primary);
     background: rgba(255, 255, 255, 0.9);
-    border: 1px solid #cbd5e1;
+    border: 2px solid transparent;
     border-radius: var(--radius-md);
     outline: none;
     resize: vertical;
@@ -362,7 +372,10 @@
   .textarea-fluid:focus {
     background: white;
     border-color: var(--color-primary-end);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    box-shadow:
+      0 0 0 4px rgba(91, 33, 182, 0.1),
+      0 8px 16px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
   }
 }
 

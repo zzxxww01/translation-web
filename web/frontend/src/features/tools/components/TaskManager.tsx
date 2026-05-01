@@ -21,7 +21,7 @@ export function TaskManager() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold">任务列表</h3>
         <Button
           size="sm"
@@ -47,7 +47,7 @@ export function TaskManager() {
                 className="h-4 w-4 rounded border-input"
               />
               <span
-                className={cn('min-w-0 flex-1 text-sm outline-none', task.completed && 'line-through text-muted-foreground')}
+                className={cn('flex-1 text-sm', task.completed && 'line-through text-muted-foreground')}
                 contentEditable
                 suppressContentEditableWarning
                 onBlur={(e) => updateTask(task.id, { text: e.currentTarget.textContent || '' })}

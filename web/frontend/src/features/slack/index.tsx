@@ -30,8 +30,6 @@ export function SlackFeature() {
     setSelectedModel,
   } = useSlackWorkspaceStore();
 
-  const recentConversationMessages = conversationMessages.slice(-3);
-
   const handleGenerate = async () => {
     const input = currentInput.trim();
     if (!input) return;
@@ -51,7 +49,7 @@ export function SlackFeature() {
         // 场景 1：对方发起 - 翻译并生成建议回复
         const result = await processMutation.mutateAsync({
           message: input,
-          conversation_history: recentConversationMessages,
+          conversation_history: conversationMessages,
           model: selectedModel || undefined,
         });
 
@@ -67,7 +65,7 @@ export function SlackFeature() {
         // 场景 2：我发起 / 调整建议 - 中译英
         const result = await composeMutation.mutateAsync({
           content: input,
-          conversation_history: recentConversationMessages,
+          conversation_history: conversationMessages,
           model: selectedModel || undefined,
         });
 
@@ -105,9 +103,9 @@ export function SlackFeature() {
   };
 
   return (
-    <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-6 overflow-auto p-4 md:gap-10 md:p-6">
+    <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-12 p-6">
       {/* Header */}
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>
             Slack 回复助手
@@ -116,7 +114,7 @@ export function SlackFeature() {
             粘贴对方英文或输入中文，生成专业回复
           </p>
         </div>
-        <div className="w-full md:w-64">
+        <div className="w-64">
           <label className="block text-xs text-muted-foreground mb-1.5">
             选择模型
           </label>
@@ -131,7 +129,7 @@ export function SlackFeature() {
 
       {/* 对话历史 */}
       <ConversationBubbles
-        messages={recentConversationMessages}
+        messages={conversationMessages}
         isCollapsed={isHistoryCollapsed}
         onToggleCollapse={toggleHistoryCollapse}
         onRemoveMessage={removeMessage}

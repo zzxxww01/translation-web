@@ -48,12 +48,11 @@ function Breadcrumbs() {
   if (crumbs.length <= 1) return null;
 
   return (
-    <div className="flex min-w-0 items-center gap-1 truncate text-xs text-muted-foreground md:text-sm">
+    <div className="flex items-center gap-1 text-sm text-muted-foreground">
       {crumbs.map((crumb, i) => (
-        <span key={i} className="flex min-w-0 items-center gap-1">
+        <span key={i} className="flex items-center gap-1">
           {i > 0 && <ChevronRight className="h-3 w-3" />}
           <span className={cn(
-            'truncate',
             i === crumbs.length - 1 ? 'text-foreground font-medium' : ''
           )}>
             {crumb.label}
@@ -96,27 +95,27 @@ export function AppLayout() {
   };
 
   return (
-    <div className="safe-area-shell flex flex-col bg-background relative overflow-hidden">
+    <div className="flex h-screen flex-col bg-background relative overflow-hidden">
       {/* 流动网格背景 */}
       <div className="absolute inset-0 gradient-mesh-fluid pointer-events-none" />
 
       {/* Header */}
       {!isImmersiveMode && (
-        <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/92 backdrop-blur-md relative safe-area-x">
-          <div className="flex h-12 items-center justify-between px-3 md:h-12 md:px-6">
+        <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur-md shadow-sm relative">
+          <div className="flex h-14 items-center justify-between px-4 md:px-6">
           {/* Logo + Mobile menu */}
           <div className="flex items-center gap-3">
             {/* Mobile menu */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden" aria-label="打开导航">
+                <Button variant="ghost" size="icon" className="md:hidden">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[82vw] max-w-80">
+              <SheetContent side="left" className="w-64 card-glass">
                 <SheetHeader>
                   <SheetTitle className="flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-primary" />
+                    <Sparkles className="h-5 w-5 text-gradient-primary" />
                     <span style={{ fontFamily: 'var(--font-display)' }}>Translation Agent</span>
                   </SheetTitle>
                 </SheetHeader>
@@ -129,10 +128,10 @@ export function AppLayout() {
             </Sheet>
 
             <div className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-md bg-slate-950 shadow-sm md:h-8 md:w-8">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-primary shadow-md animate-breathing-glow">
                 <Sparkles className="h-4 w-4 text-white" />
               </div>
-              <h1 className="hidden h-8 items-center text-base font-semibold leading-none text-slate-950 sm:flex" style={{ fontFamily: 'var(--font-display)' }}>
+              <h1 className="text-lg font-semibold hidden sm:block text-gradient-primary" style={{ fontFamily: 'var(--font-display)' }}>
                 Translation Agent
               </h1>
             </div>
@@ -149,20 +148,19 @@ export function AppLayout() {
             size="icon"
             onClick={handleGlossaryClick}
             title="术语管理"
-            aria-label="术语管理"
           >
             <BookOpen className="h-5 w-5" />
           </Button>
         </div>
 
         {/* Breadcrumbs */}
-        <div className="hidden min-h-5 overflow-hidden px-3 pb-1 md:block md:px-6">
+        <div className="px-4 pb-2 md:px-6">
           <Breadcrumbs />
         </div>
       </header>
       )}
 
-      <main className="relative z-10 flex min-h-0 flex-1 flex-col overflow-auto safe-area-x safe-area-bottom">
+      <main className="flex-1 overflow-auto relative z-10">
         <Outlet />
       </main>
     </div>

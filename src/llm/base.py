@@ -5,20 +5,9 @@ Abstract base class for LLM providers.
 """
 
 from abc import ABC, abstractmethod
-import json
-import logging
 from typing import Optional, List, Dict, Any
 
-from src.settings import settings
-from src.core.longform_context import (
-    build_article_challenge_payload,
-    build_section_guideline_lines,
-    limit_format_tokens,
-)
 from ..core.limits import TranslationLimits
-
-
-logger = logging.getLogger(__name__)
 
 
 class LLMProvider(ABC):
@@ -30,6 +19,7 @@ class LLMProvider(ABC):
 
         self.prompt_manager = get_prompt_manager()
 
+    @abstractmethod
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[float] = None) -> str:
         """
         翻译文本
@@ -46,10 +36,9 @@ class LLMProvider(ABC):
         Returns:
             str: 翻译结果
         """
-        context_data = dict(context or {})
-        prompt = self._build_translation_prompt(text, context_data)
-        return self.generate(prompt, temperature=0.5, timeout=timeout)
+        pass
 
+    @abstractmethod
     def analyze(self, text: str) -> Dict[str, Any]:
         """
         分析文本，提取术语和风格
@@ -60,18 +49,7 @@ class LLMProvider(ABC):
         Returns:
             Dict: 分析结果，包括检测到的术语、风格建议等
         """
-        prompt = self._build_analysis_prompt(text)
-
-        try:
-            response = self.generate(prompt, response_format="json")
-            return self._parse_json_response(response)
-        except json.JSONDecodeError:
-            return {
-                "terms": [],
-                "style": {"tone": "professional", "formality": "formal", "notes": []},
-            }
-        except Exception as exc:
-            raise RuntimeError(f"Analysis failed: {exc}") from exc
+        pass
 
     def deep_analyze_with_term_verification(
         self,
@@ -100,33 +78,17 @@ class LLMProvider(ABC):
                 - challenges: 翻译难点
                 - guidelines: 翻译指南
         """
-        high_freq_terms_list = "\n".join(
-            [
-                f"{i+1}. **{term['term']}** (出现 {term['frequency']} 次)"
-                for i, term in enumerate(high_freq_candidates)
-            ]
+        raise NotImplementedError(
+            "This provider does not implement deep_analyze_with_term_verification."
         )
 
-        prompt = self.prompt_manager.get(
-            "longform/analysis/deep_analyze_with_terms",
-            outline=outline,
-            sampled_text=sampled_text,
-            high_freq_terms_list=high_freq_terms_list,
-        )
-        response = self.generate(
-            prompt,
-            response_format="json",
-            temperature=0.3,
-            timeout=timeout,
-        )
-        return self._parse_json_response(response)
-
+    @abstractmethod
     def deep_analyze_document(
         self,
         outline: str,
         sampled_text: str,
-        timeout: Optional[float] = None
-    ) -> Dict[str, Any]:
+        timeout: Optional[int] = None
+    ) -> Dict:
         """
         深度分析文档（不包含术语验证）
 
@@ -138,25 +100,17 @@ class LLMProvider(ABC):
         Returns:
             Dict: 分析结果，包含theme, key_arguments, structure_summary, style, challenges, guidelines
         """
-        prompt = self.prompt_manager.get(
-            "longform/analysis/deep_analyze",
-            outline=outline,
-            sampled_text=sampled_text,
+        raise NotImplementedError(
+            "This provider does not implement deep_analyze_document."
         )
-        response = self.generate(
-            prompt,
-            response_format="json",
-            temperature=0.3,
-            timeout=timeout,
-        )
-        return self._parse_json_response(response)
 
+    @abstractmethod
     def verify_high_frequency_terms(
         self,
         sampled_text: str,
-        high_freq_candidates: List[Dict[str, Any]],
-        timeout: Optional[float] = None
-    ) -> List[Dict[str, Any]]:
+        high_freq_candidates: List[Dict],
+        timeout: Optional[int] = None
+    ) -> List[Dict]:
         """
         验证高频术语候选
 
@@ -168,27 +122,11 @@ class LLMProvider(ABC):
         Returns:
             List[Dict]: 验证通过的术语列表
         """
-        high_freq_terms_list = "\n".join(
-            [
-                f"{i+1}. **{term['term']}** (出现 {term['frequency']} 次)"
-                for i, term in enumerate(high_freq_candidates)
-            ]
+        raise NotImplementedError(
+            "This provider does not implement verify_high_frequency_terms."
         )
 
-        prompt = self.prompt_manager.get(
-            "longform/analysis/verify_terms",
-            sampled_text=sampled_text,
-            high_freq_terms_list=high_freq_terms_list,
-        )
-        response = self.generate(
-            prompt,
-            response_format="json",
-            temperature=0.3,
-            timeout=timeout,
-        )
-        result = self._parse_json_response(response)
-        return result.get("verified_terms", [])
-
+    @abstractmethod
     def check_consistency(
         self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
     ) -> List[Dict[str, Any]]:
@@ -202,14 +140,7 @@ class LLMProvider(ABC):
         Returns:
             List[Dict]: 问题列表
         """
-        prompt = self._build_consistency_prompt(paragraphs, glossary)
-
-        try:
-            response = self.generate(prompt, response_format="json")
-            result = self._parse_json_response(response)
-            return result if isinstance(result, list) else []
-        except Exception:
-            return []
+        pass
 
     @abstractmethod
     def generate(
@@ -241,13 +172,9 @@ class LLMProvider(ABC):
         context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """Retranslate one paragraph with the dedicated longform retranslation prompt."""
-        context_data = dict(context or {})
-        prompt = self._build_retranslation_prompt(
-            source_text,
-            current_translation,
-            context_data,
+        raise NotImplementedError(
+            "This provider does not implement paragraph retranslation."
         )
-        return self.generate(prompt, temperature=0.4)
 
     def repair_format_tokens(
         self,
@@ -257,60 +184,8 @@ class LLMProvider(ABC):
         issues: Optional[List[str]] = None,
         model: Optional[str] = None,
     ) -> Optional[str]:
-        """Run a lightweight repair pass to restore hidden token wrappers."""
-        preview_tokens = limit_format_tokens(format_tokens)
-        if not preview_tokens:
-            return None
-
-        token_lines: List[str] = []
-        for token in preview_tokens:
-            if not isinstance(token, dict):
-                continue
-            token_id = str(token.get("id", "")).strip()
-            token_type = str(token.get("type", "")).strip()
-            token_text = str(token.get("text", "")).strip()
-            if token_id:
-                token_lines.append(f"- {token_id} ({token_type}): {token_text}")
-
-        issue_lines = [f"- {item}" for item in (issues or []) if str(item).strip()]
-        issue_block = "\n".join(issue_lines) if issue_lines else "- (not provided)"
-        token_block = "\n".join(token_lines) if token_lines else "- (empty)"
-
-        prompt = "\n".join(
-            [
-                "You are a token repair engine for long-form translation.",
-                "Task: repair hidden backend tokens only.",
-                "",
-                "Rules:",
-                "1. Keep meaning and wording unchanged as much as possible.",
-                "2. Restore missing or malformed `[[[TYPE_N|...]]]` wrappers.",
-                "3. Keep token ids exactly from the token list.",
-                "4. Do not add extra commentary.",
-                "5. Output ONLY the repaired translation text.",
-                "",
-                "Expected tokens:",
-                token_block,
-                "",
-                "Validation issues:",
-                issue_block,
-                "",
-                "Source (tokenized):",
-                source_text,
-                "",
-                "Broken translation:",
-                translated_text,
-            ]
-        )
-
-        repaired = self.generate(prompt, temperature=0.1, model=model).strip()
-        if repaired.startswith("```"):
-            lines = repaired.splitlines()
-            if lines and lines[0].startswith("```"):
-                lines = lines[1:]
-            if lines and lines[-1].strip() == "```":
-                lines = lines[:-1]
-            repaired = "\n".join(lines).strip()
-        return repaired or None
+        """Try to repair broken hidden format tokens after validation fails."""
+        return None
 
     def translate_section(
         self,
@@ -320,20 +195,8 @@ class LLMProvider(ABC):
         paragraph_ids: List[str],
     ) -> List[Dict[str, str]]:
         """Translate one full section with the dedicated section-batch prompt."""
-        prompt = self._build_batch_translation_prompt(
-            section_text, section_title, context, paragraph_ids
-        )
-
-        response = self.generate(prompt, response_format="json", temperature=0.3)
-        result = self._parse_json_response(response)
-
-        if isinstance(result, dict) and "translations" in result:
-            return result["translations"]
-        if isinstance(result, list):
-            return result
-
-        raise ValueError(
-            "Batch translation response does not satisfy the JSON contract."
+        raise NotImplementedError(
+            "This provider does not implement section batch translation."
         )
 
     def translate_source_metadata_batch(
@@ -342,17 +205,8 @@ class LLMProvider(ABC):
         context: Optional[Dict[str, Any]] = None,
     ) -> List[Dict[str, str]]:
         """Translate source/citation metadata entries in one batch."""
-        prompt = self._build_source_metadata_batch_prompt(entries, context or {})
-        response = self.generate(prompt, response_format="json", temperature=0.2)
-        result = self._parse_json_response(response)
-
-        if isinstance(result, dict) and "translations" in result:
-            return result["translations"]
-        if isinstance(result, list):
-            return result
-
-        raise ValueError(
-            "Source metadata translation response does not satisfy the JSON contract."
+        raise NotImplementedError(
+            "This provider does not implement source metadata batch translation."
         )
 
     def translate_title(
@@ -362,43 +216,9 @@ class LLMProvider(ABC):
         subtitle: Optional[str] = None,
     ) -> Dict[str, str]:
         """Translate article title and optional subtitle in one call."""
-        context_lines: List[str] = []
-        if context:
-            if context.get("article_theme"):
-                context_lines.append(f"- Article theme: {context['article_theme']}")
-            if context.get("structure_summary"):
-                context_lines.append(
-                    f"- Structure summary: {context['structure_summary']}"
-                )
-            if context.get("target_audience"):
-                context_lines.append(f"- Target audience: {context['target_audience']}")
-
-        prompt = self.prompt_manager.get(
-            "longform/auxiliary/title_translate",
-            context_block="\n".join(context_lines) if context_lines else "- None",
-            glossary_block=(context or {}).get("glossary_block", "(无命中术语)"),
-            preservation_block=(
-                (context or {}).get("preservation_block", "- 无额外保留项")
-            ),
-            title=title,
-            subtitle=subtitle or "(无)",
+        raise NotImplementedError(
+            "This provider does not implement article title translation."
         )
-        raw = self.generate(prompt, temperature=0.3)
-
-        result: Dict[str, str] = {}
-        for line in raw.strip().splitlines():
-            line = line.strip()
-            if line.startswith("标题:") or line.startswith("标题："):
-                result["title"] = line.split(":", 1)[-1].split("：", 1)[-1].strip()
-            elif line.startswith("副标题:") or line.startswith("副标题："):
-                val = line.split(":", 1)[-1].split("：", 1)[-1].strip()
-                if val:
-                    result["subtitle"] = val
-
-        if not result.get("title"):
-            result["title"] = raw.strip().splitlines()[0].strip()
-
-        return result
 
     def translate_section_title(
         self,
@@ -406,25 +226,9 @@ class LLMProvider(ABC):
         context: Optional[Dict[str, Any]] = None,
     ) -> str:
         """Translate a section title."""
-        context_lines: List[str] = []
-        if context:
-            if context.get("article_theme"):
-                context_lines.append(f"- Article theme: {context['article_theme']}")
-            if context.get("context"):
-                context_lines.append(f"- Context: {context['context']}")
-            if context.get("previous_section_title"):
-                context_lines.append(
-                    f"- Previous section: {context['previous_section_title']}"
-                )
-            if context.get("next_section_title"):
-                context_lines.append(f"- Next section: {context['next_section_title']}")
-
-        prompt = self.prompt_manager.get(
-            "longform/auxiliary/section_title_translate",
-            context_block="\n".join(context_lines) if context_lines else "- None",
-            title=title,
+        raise NotImplementedError(
+            "This provider does not implement section title translation."
         )
-        return self.generate(prompt, temperature=0.3)
 
     def translate_all_section_titles(
         self,
@@ -446,59 +250,7 @@ class LLMProvider(ABC):
             If a section_id is missing from the result, callers should fall
             back to the per-title ``translate_section_title`` method.
         """
-        if not sections:
-            return {}
-
-        chapter_lines: List[str] = []
-        for i, sec in enumerate(sections, 1):
-            sec_id = sec.get("id", f"s{i:02d}")
-            title = sec.get("title", "")
-            prev_t = sec.get("prev", "")
-            next_t = sec.get("next", "")
-            parts = [f'{i}. id={sec_id}, title="{title}"']
-            if prev_t:
-                parts.append(f'prev="{prev_t}"')
-            if next_t:
-                parts.append(f'next="{next_t}"')
-            chapter_lines.append(", ".join(parts))
-
-        theme_line = f"文章主题：{article_theme}" if article_theme else ""
-        prompt = "\n".join(
-            filter(
-                None,
-                [
-                    "你是一位资深中英双语编辑，尤其擅长硬核科技长文领域。"
-                    "请将下面所有章节标题翻译为简洁、自然、契合文章上下文的中文。",
-                    "",
-                    theme_line,
-                    "",
-                    "## 章节列表（id, 原标题, 前后章节供参考）",
-                    "\n".join(chapter_lines),
-                    "",
-                    "## 输出规则",
-                    '以 JSON 返回，格式：{"translations": {"<id>": "<中文标题>", ...}}',
-                    "只输出 JSON，不要解释，不要额外文字。",
-                ],
-            )
-        )
-
-        try:
-            raw = self.generate(prompt, response_format="json", temperature=0.3)
-            result = self._parse_json_response(raw)
-            translations = result.get("translations", {})
-            if isinstance(translations, dict):
-                logger.info(
-                    "[LLMProvider] Batch section title translation: %d/%d titles returned",
-                    len(translations),
-                    len(sections),
-                )
-                return {str(k): str(v) for k, v in translations.items()}
-        except Exception as exc:
-            logger.warning(
-                "[LLMProvider] Batch section title translation failed, will use per-title fallback: %s",
-                exc,
-            )
-
+        # Default fallback: call translate_section_title one by one.
         results: Dict[str, str] = {}
         for sec in sections:
             sec_id = sec.get("id", "")
@@ -514,7 +266,7 @@ class LLMProvider(ABC):
             try:
                 results[sec_id] = self.translate_section_title(title, context=context)
             except Exception:
-                results[sec_id] = title
+                results[sec_id] = title  # keep original on failure
         return results
 
     def deep_analyze(
@@ -870,240 +622,6 @@ class LLMProvider(ABC):
 
     # ============ Prompt Building Methods ============
 
-    def _build_translation_prompt(self, text: str, context: Dict[str, Any]) -> str:
-        """Build the paragraph translation prompt via the shared prompt builder."""
-        from ..prompts.prompt_builder import get_prompt_builder
-
-        builder = get_prompt_builder(style=self._resolve_translation_prompt_style())
-        return builder.build_prompt(
-            source_text=text,
-            glossary=context.get("glossary", []),
-            previous_paragraphs=context.get("previous_paragraphs", []),
-            next_preview=context.get("next_preview", []),
-            article_title=context.get("article_title"),
-            article_theme=context.get("article_theme"),
-            article_structure=context.get("article_structure"),
-            current_section_title=context.get("current_section_title"),
-            heading_chain=context.get("heading_chain"),
-            target_audience=context.get("target_audience"),
-            translation_voice=context.get("translation_voice"),
-            article_challenges=context.get("article_challenges"),
-            style_guide=context.get("style_guide"),
-            section_context=context.get("section_context"),
-            learned_rules=context.get("learned_rules"),
-            instruction=context.get("instruction"),
-            previous_translation=context.get("previous_translation"),
-            format_tokens=context.get("format_tokens", []),
-            term_usage=context.get("term_usage"),
-        )
-
-    def _build_retranslation_prompt(
-        self,
-        source_text: str,
-        current_translation: str,
-        context: Dict[str, Any],
-    ) -> str:
-        """Build the paragraph retranslation prompt via the shared prompt builder."""
-        from ..prompts.prompt_builder import get_prompt_builder
-
-        builder = get_prompt_builder(style=self._resolve_translation_prompt_style())
-        return builder.build_retranslation_prompt(
-            source_text=source_text,
-            current_translation=current_translation,
-            glossary=context.get("glossary", []),
-            previous_paragraphs=context.get("previous_paragraphs", []),
-            next_preview=context.get("next_preview", []),
-            article_title=context.get("article_title"),
-            article_theme=context.get("article_theme"),
-            article_structure=context.get("article_structure"),
-            current_section_title=context.get("current_section_title"),
-            heading_chain=context.get("heading_chain"),
-            target_audience=context.get("target_audience"),
-            translation_voice=context.get("translation_voice"),
-            article_challenges=context.get("article_challenges"),
-            style_guide=context.get("style_guide"),
-            section_context=context.get("section_context"),
-            learned_rules=context.get("learned_rules"),
-            instruction=context.get("instruction"),
-            format_tokens=context.get("format_tokens", []),
-            term_usage=context.get("term_usage"),
-        )
-
-    def _resolve_translation_prompt_style(self) -> str:
-        style = settings.translation_prompt_style.strip().lower()
-        if style not in {"original", "simplified"}:
-            return "original"
-        return style
-
-    def _build_analysis_prompt(self, text: str) -> str:
-        """Build the analysis prompt."""
-        return self.prompt_manager.get("analysis", text=text[:8000])
-
-    def _build_consistency_prompt(
-        self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
-    ) -> str:
-        """Build the consistency review prompt."""
-        para_text = "\n\n".join(
-            [
-                f"[段落 {i+1}]\n原文：{p['source']}\n译文：{p['translation']}"
-                for i, p in enumerate(paragraphs[:20])
-            ]
-        )
-
-        if isinstance(glossary, list):
-            glossary_text = "\n".join(
-                [
-                    f"- {term.get('original', '')} -> {term.get('translation', '')}"
-                    for term in glossary
-                    if isinstance(term, dict)
-                ]
-            )
-        elif isinstance(glossary, dict):
-            glossary_text = "\n".join(
-                [f"- {term} -> {trans}" for term, trans in glossary.items()]
-            )
-        else:
-            glossary_text = "无"
-
-        return self.prompt_manager.get(
-            "consistency", para_text=para_text, glossary_text=glossary_text
-        )
-
-    def _build_batch_translation_prompt(
-        self,
-        section_text: str,
-        section_title: str,
-        context: Dict[str, Any],
-        paragraph_ids: List[str],
-    ) -> str:
-        """Build the section batch translation prompt."""
-        format_token_rules = self._format_token_rules_for_prompt(
-            context.get("format_tokens", []),
-            context.get("format_token_count", 0),
-        )
-        enhanced_guidelines = build_section_guideline_lines(
-            context.get("guidelines", []),
-            section_role=context.get("section_role", ""),
-            translation_voice=context.get("translation_voice", ""),
-            target_audience=context.get("target_audience", ""),
-            translation_notes=context.get("translation_notes"),
-            format_token_rules=format_token_rules,
-        )
-
-        prev_trans = context.get("previous_translations", [])
-        if prev_trans:
-            prev_lines = []
-            for pair in prev_trans[-5:]:
-                src_preview = pair.get("source", "")[:80]
-                trans_preview = pair.get("translation", "")[:80]
-                prev_lines.append(f"- EN: {src_preview}…\n  ZH: {trans_preview}…")
-            previous_translations_block = "\n".join(prev_lines)
-        else:
-            previous_translations_block = "无"
-
-        feedback_block = context.get("feedback_from_previous_sections", "")
-
-        return self.prompt_manager.get(
-            "longform/translation/section_batch_translate",
-            section_title=section_title,
-            section_text=section_text,
-            paragraph_ids=json.dumps(paragraph_ids),
-            article_theme=context.get("article_theme", ""),
-            section_position=context.get("section_position", ""),
-            previous_section=context.get("previous_section_title", ""),
-            next_section=context.get("next_section_title", ""),
-            target_audience=context.get("target_audience", ""),
-            translation_voice=context.get("translation_voice", ""),
-            article_challenges=self._format_challenges_for_prompt(
-                context.get("article_challenges", [])
-            ),
-            glossary=self._format_glossary_for_prompt(
-                context.get("glossary", []),
-                term_usage=context.get("term_usage"),
-            ),
-            guidelines="\n".join(enhanced_guidelines),
-            previous_translations=previous_translations_block,
-            feedback_from_previous_sections=feedback_block or "无",
-        )
-
-    def _build_source_metadata_batch_prompt(
-        self,
-        entries: List[Dict[str, str]],
-        context: Dict[str, Any],
-    ) -> str:
-        """Build the dedicated batch prompt for source/citation metadata."""
-        glossary_block = str(context.get("glossary_block", "")).strip() or "(无命中术语)"
-        entries_json = json.dumps(entries, ensure_ascii=False, indent=2)
-        return self.prompt_manager.get(
-            "longform/metadata/source_batch_translate",
-            glossary_block=glossary_block,
-            entry_count=len(entries),
-            entries_json=entries_json,
-        )
-
-    def _format_glossary_for_prompt(
-        self,
-        glossary: Any,
-        term_usage: Optional[Dict[str, List[str]]] = None,
-    ) -> str:
-        """Render glossary context into prompt-friendly text."""
-        from src.core.glossary_prompt import render_glossary_prompt_block
-
-        return render_glossary_prompt_block(
-            glossary,
-            include_title=False,
-            term_usage=term_usage,
-            empty_text="无",
-        )
-
-    def _format_token_rules_for_prompt(self, tokens: Any, token_count: int = 0) -> str:
-        """Render one compact rule block for hidden formatting tokens."""
-        preview_tokens = limit_format_tokens(tokens)
-        if not preview_tokens and not token_count:
-            return ""
-
-        lines = [
-            "Hidden token rule: `[[[TYPE_N|...]]]` is a backend control token, not Markdown.",
-            "Keep the wrapper, token type, and token id exactly unchanged.",
-            "Only translate the text after `|`.",
-            "Do not delete, duplicate, renumber, or move tokens to another paragraph.",
-        ]
-        preview_items = []
-        for item in preview_tokens:
-            if not isinstance(item, dict):
-                continue
-            token_id = item.get("id", "")
-            token_text = item.get("text", "")
-            token_type = item.get("type", "")
-            if token_id and token_text:
-                preview_items.append(f"{token_id}({token_type}): {token_text}")
-        if preview_items:
-            lines.append("Tokens in this request: " + "; ".join(preview_items))
-        elif token_count:
-            lines.append(f"This request contains {token_count} hidden format tokens.")
-        return " ".join(lines)
-
-    def _format_challenges_for_prompt(self, challenges: Any) -> str:
-        """Render article translation risks into prompt-friendly text."""
-        normalized_challenges = build_article_challenge_payload(challenges)
-        if not normalized_challenges:
-            return "None"
-
-        lines = []
-        for item in normalized_challenges:
-            location = item.get("location", "")
-            issue = item.get("issue", "")
-            suggestion = item.get("suggestion", "")
-            line = str(issue).strip()
-            if location:
-                line = f"[{location}] {line}"
-            if suggestion:
-                line = f"{line}; suggestion: {suggestion}"
-            if line:
-                lines.append(f"- {line}")
-
-        return "\n".join(lines) if lines else "None"
-
     def _build_deep_analysis_prompt(self, text: str, sections_outline: str) -> str:
         """构建深度分析 Prompt。"""
         return self.prompt_manager.get(
@@ -1413,12 +931,16 @@ class LLMProvider(ABC):
             existing_terms=existing_terms,
         )
 
-    def _parse_json_response(self, response: str) -> Any:
-        """Parse a JSON LLM response with shared cleanup and light repair."""
+    def _parse_json_response(self, response: str) -> Dict[str, Any]:
+        """解析 JSON 响应"""
+        import json
+
         text = response.strip()
 
+        # 移除可能的 markdown 代码块标记
         if text.startswith("```"):
             lines = text.split("\n")
+            # 移除第一行和最后一行
             if lines[0].startswith("```"):
                 lines = lines[1:]
             if lines and lines[-1].strip() == "```":
@@ -1427,37 +949,6 @@ class LLMProvider(ABC):
 
         try:
             return json.loads(text)
-        except json.JSONDecodeError as exc:
-            logger.warning(
-                "[LLMProvider] Initial JSON parse failed: %s; attempting shared repair",
-                exc,
-            )
-
-        last_brace = max(text.rfind("}"), text.rfind("]"))
-        if last_brace > 0:
-            try:
-                return json.loads(text[: last_brace + 1])
-            except json.JSONDecodeError:
-                pass
-
-        fixed = text
-        try:
-            if fixed.count('"') % 2 != 0:
-                last_quote = fixed.rfind('"')
-                prev_comma = fixed.rfind(",", 0, last_quote)
-                prev_newline = fixed.rfind("\n", 0, last_quote)
-                cutoff = max(prev_comma, prev_newline)
-                if cutoff > 0:
-                    fixed = fixed[:cutoff]
-
-            if fixed.count("{") > fixed.count("}"):
-                fixed += "\n}" * (fixed.count("{") - fixed.count("}"))
-            if fixed.count("[") > fixed.count("]"):
-                fixed += "]" * (fixed.count("[") - fixed.count("]"))
-
-            return json.loads(fixed)
         except json.JSONDecodeError:
-            pass
-
-        logger.error("[LLMProvider] Failed to parse JSON response. Preview: %s", text[:500])
-        return {}
+            # 返回空结果
+            return {}

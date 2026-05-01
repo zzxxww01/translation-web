@@ -149,19 +149,6 @@
   padding: 16px 20px;
 }
 
-@media (max-width: 767px) {
-  .slack-editorial-theme {
-    --spacing-card: 20px;
-    --spacing-section: 28px;
-  }
-
-  .bubble-them,
-  .bubble-me {
-    max-width: 88%;
-    padding: 12px 14px;
-  }
-}
-
 /* Background Texture */
 .workspace-container {
   background: var(--color-secondary);

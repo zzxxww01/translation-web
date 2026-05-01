@@ -10,14 +10,6 @@ from src.settings import settings
 # Gemini transport selection depends on whether the process sees a proxy.
 load_dotenv()
 
-log_level_name = os.getenv("LOG_LEVEL", settings.log_level).upper()
-log_level = getattr(logging, log_level_name, logging.INFO)
-logging.basicConfig(
-    level=log_level,
-    format="%(asctime)s %(levelname)s [%(name)s] %(message)s",
-)
-logging.getLogger().setLevel(log_level)
-
 logger = logging.getLogger(__name__)
 try:
     settings.validate_required_settings()

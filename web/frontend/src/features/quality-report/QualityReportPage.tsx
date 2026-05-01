@@ -296,14 +296,14 @@ export function QualityReportPage() {
   };
 
   return (
-    <div className="mx-auto max-w-5xl px-4 py-6 md:py-8">
-      <header className="mb-6 flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-        <div className="min-w-0">
+    <div className="mx-auto max-w-5xl px-4 py-8">
+      <header className="mb-6 flex items-start justify-between gap-4">
+        <div>
           <h1 className="text-2xl font-bold text-gray-900">质量报告</h1>
           <p className="mt-1 text-sm text-gray-600">{report.project_title}</p>
           <p className="mt-2 text-xs text-gray-500">生成时间：{formatDate(report.generated_at)}</p>
         </div>
-        <div className="flex shrink-0 flex-wrap items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <Button variant="outline" onClick={handleCopyMarkdown}>
             <Copy className="mr-2 h-4 w-4" />
             复制 Markdown
@@ -427,7 +427,7 @@ export function QualityReportPage() {
 
             return (
               <details key={section.section_id} className="rounded-lg border border-gray-200 bg-white">
-                <summary className="flex cursor-pointer list-none flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:gap-4 sm:px-5">
+                <summary className="flex cursor-pointer list-none items-center gap-4 px-5 py-4">
                   <StatusIcon className="h-5 w-5 shrink-0 text-gray-500" />
                   <div className="min-w-0 flex-1">
                     <div className="truncate text-sm font-medium text-gray-900">
@@ -441,7 +441,7 @@ export function QualityReportPage() {
                     </div>
                   </div>
                   <Badge variant={status.variant}>{status.label}</Badge>
-                  <div className="w-full text-left text-lg font-semibold text-gray-900 sm:w-14 sm:text-right">
+                  <div className="w-14 text-right text-lg font-semibold text-gray-900">
                     {section.overall_score}
                   </div>
                 </summary>

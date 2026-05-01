@@ -20,7 +20,8 @@ export function VersionCard({
   return (
     <div
       className={cn(
-        'group relative rounded-lg border bg-card p-4 shadow-sm transition-colors duration-200',
+        'group relative rounded-2xl border-2 bg-card p-4 transition-all duration-200 shadow-soft',
+        'hover:shadow-hover hover:-translate-y-0.5',
         isAI ? 'border-l-4 border-l-primary' : 'border-l-4 border-l-success',
         isSelected
           ? 'ring-2 ring-primary ring-offset-2 border-primary'
@@ -28,12 +29,12 @@ export function VersionCard({
       )}
     >
       {/* 版本头部 */}
-      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="flex min-w-0 items-center gap-2">
+      <div className="mb-3 flex items-center justify-between">
+        <div className="flex items-center gap-2">
           <span className="text-lg" role="img" aria-label="version-icon">
             {isAI ? '⭐' : '📄'}
           </span>
-          <span className="truncate font-semibold text-text-primary">{version.name}</span>
+          <span className="font-semibold text-text-primary">{version.name}</span>
           {isAI && (
             <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
               推荐
@@ -54,7 +55,7 @@ export function VersionCard({
       </div>
 
       {/* 操作按钮 */}
-      <div className="flex flex-col gap-2 sm:flex-row">
+      <div className="flex gap-2">
         <Button
           variant={isSelected ? 'default' : 'outline'}
           size="sm"

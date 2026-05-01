@@ -14,7 +14,7 @@ export function SourcePanel({
 }: SourcePanelProps) {
   if (!paragraph) {
     return (
-      <div className={cn('max-h-56 w-full overflow-auto border-b border-border bg-gray-50 p-4 md:max-h-none md:w-[30%] md:border-b-0 md:border-r md:p-6', className)}>
+      <div className={cn('w-[30%] border-r border-border bg-gray-50 p-6', className)}>
         <div className="flex h-full items-center justify-center text-text-secondary">
           加载中...
         </div>
@@ -25,7 +25,7 @@ export function SourcePanel({
   return (
     <div
       className={cn(
-        'relative max-h-64 w-full overflow-y-auto border-b border-border bg-gray-50 p-4 md:max-h-none md:w-[30%] md:border-b-0 md:border-r md:p-6',
+        'relative w-[30%] overflow-y-auto border-r border-border bg-gray-50 p-6',
         className
       )}
     >

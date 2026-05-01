@@ -39,7 +39,7 @@ export function SectionView({
   }
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-3 py-4 sm:px-4 md:px-0 md:py-6">
+    <div className="mx-auto max-w-3xl py-6">
       {/* 刷新指示器 */}
       {isRefetching && (
         <div className="mb-4 flex items-center justify-center text-sm text-text-muted">
@@ -49,11 +49,11 @@ export function SectionView({
       )}
 
       {/* 章节标题 */}
-      <div className="mb-5 flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h2 className="text-lg font-bold leading-7 md:text-xl">{currentSection.title}</h2>
+      <div className="mb-6 flex items-start justify-between gap-3">
+        <div>
+          <h2 className="text-xl font-bold">{currentSection.title}</h2>
           {currentSection.title_translation && (
-            <p className="mt-1 text-sm text-text-muted md:text-base">{currentSection.title_translation}</p>
+            <p className="text-text-muted">{currentSection.title_translation}</p>
           )}
         </div>
         {onEnterImmersive && (
@@ -62,7 +62,6 @@ export function SectionView({
             size="sm"
             onClick={onEnterImmersive}
             leftIcon={<Maximize2 className="h-4 w-4" />}
-            className="shrink-0"
           >
             沉浸编辑
           </Button>

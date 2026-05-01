@@ -61,11 +61,6 @@ def get_analysis_llm_provider() -> LLMProvider:
     return get_task_llm_provider("analysis")
 
 
-def get_term_review_llm_provider() -> LLMProvider:
-    """Return the LLM provider for terminology pre-review."""
-    return get_task_llm_provider("term_review")
-
-
 def get_confirmation_service(
     pm: ProjectManager = Depends(get_project_manager),
     gm: GlossaryManager = Depends(get_glossary_manager),
@@ -112,7 +107,6 @@ GlossaryManagerDep = Annotated[GlossaryManager, Depends(get_glossary_manager)]
 LLMProviderDep = Annotated[LLMProvider, Depends(get_llm_provider)]
 LongformLLMProviderDep = Annotated[LLMProvider, Depends(get_longform_llm_provider)]
 AnalysisLLMProviderDep = Annotated[LLMProvider, Depends(get_analysis_llm_provider)]
-TermReviewLLMProviderDep = Annotated[LLMProvider, Depends(get_term_review_llm_provider)]
 ConfirmationServiceDep = Annotated[ConfirmationService, Depends(get_confirmation_service)]
 BatchServiceDep = Annotated[BatchTranslationService, Depends(get_batch_service)]
 VersionServiceDep = Annotated[VersionImportService, Depends(get_version_service)]

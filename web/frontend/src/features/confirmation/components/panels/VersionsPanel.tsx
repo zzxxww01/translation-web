@@ -51,10 +51,10 @@ export function VersionsPanel({
   }
 
   return (
-    <div className={cn('flex-1 overflow-y-auto p-4 md:p-6', className)}>
+    <div className={cn('flex-1 overflow-y-auto p-6', className)}>
       {/* 进度信息 */}
-      <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-        <div className="min-w-0">
+      <div className="mb-4 flex items-center justify-between">
+        <div>
           <h2 className="text-lg font-semibold text-text-primary">
             第 {currentParagraph.index + 1} 段 / 共 {totalParagraphs || '?'} 段
           </h2>

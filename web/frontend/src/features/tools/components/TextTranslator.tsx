@@ -40,9 +40,9 @@ export function TextTranslator() {
   };
 
   return (
-    <div className="grid w-full gap-4 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+    <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', width: '100%' }}>
       {/* Source */}
-      <div className="flex min-w-0 flex-col gap-3">
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">原文</label>
           <Select value={sourceLang} onValueChange={setSourceLang}>
@@ -60,12 +60,12 @@ export function TextTranslator() {
           value={source}
           onChange={(e) => setSource(e.target.value)}
           placeholder="输入要翻译的文本..."
-          className="min-h-[260px] resize-y lg:min-h-[500px]"
+          className="min-h-[500px] resize-y"
         />
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-3 py-1 lg:flex-col lg:py-8">
+      <div className="flex flex-col items-center justify-center gap-3 py-8">
         <Button variant="outline" size="icon" onClick={handleSwap} title="交换语言">
           <ArrowRightLeft className="h-4 w-4" />
         </Button>
@@ -79,7 +79,7 @@ export function TextTranslator() {
       </div>
 
       {/* Target */}
-      <div className="flex min-w-0 flex-col gap-3">
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
         <div className="flex items-center justify-between">
           <label className="text-sm font-medium">译文</label>
         </div>
@@ -87,7 +87,7 @@ export function TextTranslator() {
           value={target}
           readOnly
           placeholder="翻译结果..."
-          className="min-h-[260px] resize-y lg:min-h-[500px]"
+          className="min-h-[500px] resize-y"
         />
         <Button variant="outline" className="w-full" onClick={handleCopy} disabled={!target}>
           <Copy className="h-4 w-4" />

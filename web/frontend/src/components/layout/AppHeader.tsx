@@ -7,7 +7,7 @@ export interface AppHeaderProps {
 export function AppHeader({ rightContent }: AppHeaderProps) {
   return (
     <header className="glass-effect sticky top-0 z-40 border-b border-border-subtle">
-      <div className="flex h-14 items-center justify-between px-6">
+      <div className="flex h-16 items-center justify-between px-6">
         {/* Logo */}
         <div className="flex items-center gap-3">
           <h1 className="text-xl font-bold text-text-primary">

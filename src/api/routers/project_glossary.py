@@ -9,10 +9,10 @@ from pydantic import BaseModel, Field
 
 from src.api.dependencies import (
     GlossaryManagerDep,
+    LongformLLMProviderDep,
     ProjectManagerDep,
-    TermReviewLLMProviderDep,
 )
-from src.api.middleware import BadRequestException, NotFoundException, ServiceUnavailableException
+from src.api.middleware import BadRequestException, NotFoundException
 from src.api.utils.llm_factory import create_llm_provider
 from src.core.glossary import infer_glossary_tags, normalize_glossary_tags
 from src.core.models import GlossaryTerm, TranslationStrategy
@@ -78,7 +78,6 @@ class CheckConflictRequest(BaseModel):
 
 class PrepareTermReviewRequest(BaseModel):
     model: Optional[str] = Field(None, max_length=100)
-    force: bool = False
 
 
 def _normalize_tags(tags: Optional[List[str]]) -> List[str]:
@@ -345,7 +344,7 @@ async def prepare_term_review(
     project_id: str,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
-    llm: TermReviewLLMProviderDep,
+    llm: LongformLLMProviderDep,
     request: PrepareTermReviewRequest = Body(default_factory=PrepareTermReviewRequest),
 ):
     try:
@@ -357,13 +356,11 @@ async def prepare_term_review(
             project_manager=pm,
             glossary_manager=gm,
         )
-        return service.prepare_review(project_id, force=request.force)
+        return service.prepare_review(project_id)
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
-    except RuntimeError as exc:
-        raise ServiceUnavailableException(detail=str(exc)) from exc
 
 
 @router.post("/projects/{project_id}/term-review/submit")

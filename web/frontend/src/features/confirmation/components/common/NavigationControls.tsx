@@ -23,7 +23,7 @@ export function NavigationControls({
   className,
 }: NavigationControlsProps) {
   return (
-    <div className={cn('flex flex-wrap items-center gap-2', className)}>
+    <div className={cn('flex items-center gap-2', className)}>
       <Button
         variant="outline"
         size="sm"

@@ -57,7 +57,7 @@ export function BatchActionsBar({
 
   return (
     <>
-      <div className="flex flex-col gap-3 rounded-lg border border-border bg-white p-3 shadow-sm sm:p-4">
+      <div className="flex flex-col gap-3 rounded-2xl border border-border bg-white p-4 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="text-sm text-muted-foreground">已选择 {selectedOriginals.length} 条术语</div>
           <Button size="sm" variant="outline" onClick={onClearSelection}>
@@ -96,7 +96,7 @@ export function BatchActionsBar({
             value={batchTagInput}
             onChange={event => setBatchTagInput(event.target.value)}
             placeholder="标签，逗号分隔"
-            className="w-full sm:min-w-[220px] sm:w-auto"
+            className="min-w-[220px]"
           />
           <Button size="sm" variant="outline" onClick={() => handleTagAction('add_tags')}>
             批量加标签

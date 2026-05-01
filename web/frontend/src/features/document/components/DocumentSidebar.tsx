@@ -18,7 +18,6 @@ import { useExportProject } from '../hooks';
 import { ProjectSelector } from './ProjectSelector';
 import { SectionList } from './SectionList';
 import { ModelSelector } from '@/components/ModelSelector';
-import { cn } from '@/lib/utils';
 
 interface DocumentSidebarProps {
   sections: Section[];
@@ -34,7 +33,6 @@ interface DocumentSidebarProps {
   currentStep?: string | null;
   activeTranslationProjectId?: string | null;
   projectId?: string;
-  className?: string;
 }
 
 export function DocumentSidebar({
@@ -51,7 +49,6 @@ export function DocumentSidebar({
   currentStep,
   activeTranslationProjectId,
   projectId,
-  className,
 }: DocumentSidebarProps) {
   const [exportFormat, setExportFormat] = useState<'en' | 'zh'>('zh');
   const [selectedMethod, setSelectedMethod] = useState<TranslationMethod>(
@@ -81,12 +78,12 @@ export function DocumentSidebar({
     Boolean(activeTranslationProjectId && projectId && activeTranslationProjectId !== projectId);
 
   return (
-    <aside className={cn('flex h-full min-h-0 w-72 flex-col border-r border-border-subtle bg-bg-secondary', className)}>
-      <div className="shrink-0 border-b border-border-subtle p-3">
+    <aside className="flex h-full w-72 flex-col border-r border-border-subtle bg-bg-secondary">
+      <div className="border-b border-border-subtle p-3">
         <ProjectSelector onNewProject={onNewProject} />
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto p-3">
+      <div className="flex-1 overflow-y-auto p-3">
         {sections.length > 0 ? (
           <>
             <h3 className="mb-2 text-xs font-bold uppercase tracking-wide text-text-muted">
@@ -107,7 +104,7 @@ export function DocumentSidebar({
       </div>
 
       {totalParagraphs > 0 && (
-        <div className="shrink-0 space-y-3 overflow-y-auto border-t border-border-subtle bg-bg-secondary p-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] shadow-[0_-12px_24px_-22px_rgba(15,23,42,0.45)] max-h-[48vh]">
+        <div className="space-y-3 border-t border-border-subtle p-3">
           <div>
             <div className="mb-2 flex justify-between text-sm">
               <span className="font-medium text-text-secondary">翻译进度</span>
@@ -136,6 +133,16 @@ export function DocumentSidebar({
                   <span className="text-primary-500">
                     {fullTranslateProgress.current}/{fullTranslateProgress.total}
                   </span>
+                  {onStopTranslate && (
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={onStopTranslate}
+                      disabled={isCancelling}
+                    >
+                      {isCancelling ? '取消中...' : '取消'}
+                    </Button>
+                  )}
                 </div>
               </div>
               <Progress value={translateProgressPercent} className="h-1.5" />
