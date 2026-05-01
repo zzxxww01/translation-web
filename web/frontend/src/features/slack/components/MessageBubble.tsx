@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trash2, Edit2, Copy } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
@@ -18,6 +18,12 @@ export function MessageBubble({ message, onDelete, onEdit, onSelect }: MessageBu
   const [editContent, setEditContent] = useState(message.content);
 
   const isThemMessage = message.role === 'them';
+
+  useEffect(() => {
+    if (!isEditing) {
+      setEditContent(message.content);
+    }
+  }, [isEditing, message.content]);
 
   const handleSaveEdit = () => {
     if (editContent.trim() !== message.content) {
@@ -44,7 +50,8 @@ export function MessageBubble({ message, onDelete, onEdit, onSelect }: MessageBu
     >
       <div
         className={cn(
-          'relative max-w-[70%] rounded-lg px-3 py-1.5',
+          'relative rounded-lg px-3 py-1.5',
+          isEditing ? 'w-full max-w-full md:max-w-[86%]' : 'max-w-[70%]',
           isThemMessage
             ? 'bg-muted text-foreground'
             : 'bg-primary text-primary-foreground'
@@ -55,12 +62,21 @@ export function MessageBubble({ message, onDelete, onEdit, onSelect }: MessageBu
             <textarea
               value={editContent}
               onChange={(e) => setEditContent(e.target.value)}
-              className="w-full min-h-[60px] p-2 rounded border bg-background text-foreground"
+              className="w-full min-h-[140px] resize-y rounded border bg-background p-3 text-sm leading-relaxed text-foreground"
               autoFocus
             />
-            <div className="flex gap-2">
+            <div className="flex justify-end gap-2">
               <Button size="sm" onClick={handleSaveEdit}>保存</Button>
-              <Button size="sm" variant="outline" onClick={() => setIsEditing(false)}>取消</Button>
+              <Button
+                size="sm"
+                variant="outline"
+                onClick={() => {
+                  setEditContent(message.content);
+                  setIsEditing(false);
+                }}
+              >
+                取消
+              </Button>
             </div>
           </div>
         ) : (

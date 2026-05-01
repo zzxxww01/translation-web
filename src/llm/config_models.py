@@ -65,6 +65,7 @@ class ProviderConfig:
     models: List[ModelConfig]
     retry_config: RetryConfig
     network: Optional[ProviderNetworkConfig] = None
+    rate_limit: Dict[str, Any] = field(default_factory=dict)
     group_priority: int = 999  # 组优先级，数字越小越优先
     base_url: Optional[str] = None
     enabled: bool = True

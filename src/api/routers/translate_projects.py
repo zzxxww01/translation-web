@@ -6,6 +6,7 @@ import asyncio
 import json
 import logging
 import os
+import time
 from typing import Any, Dict
 
 from fastapi import APIRouter, Body, Request
@@ -366,19 +367,34 @@ async def translate_with_four_steps(
     """
     使用四步法翻译整个项目（优化版）。
     """
+    request_start = time.monotonic()
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
+
+    logger.info(
+        "[%s] translate-four-step request received: model=%s client=%s",
+        project_id,
+        _body.model or "",
+        request.client.host if request.client else "",
+    )
 
     # 如果指定了模型，创建新的 provider
     if _body.model:
         from src.api.utils.llm_factory import create_llm_provider
         llm = create_llm_provider(provider=_body.model)
         analysis_llm = llm
+        logger.info(
+            "[%s] translate-four-step using user model override: %s",
+            project_id,
+            _body.model,
+        )
 
     from src.services.batch_translation_service import BatchTranslationService
 
     slot_claim = await BatchTranslationService.claim_translation_slot(project_id)
+    logger.info("[%s] translate-four-step slot claim: %s", project_id, slot_claim)
     if slot_claim["status"] == "busy":
+        logger.warning("[%s] translate-four-step rejected: active slot busy: %s", project_id, slot_claim)
         raise BadRequestException(
             detail=(
                 "Another project is still stopping. "
@@ -393,6 +409,13 @@ async def translate_with_four_steps(
             sum(len(section.paragraphs) for section in sections) if sections else 0
         )
         total_sections = len(sections) if sections else 0
+        logger.info(
+            "[%s] translate-four-step project loaded: total_sections=%d total_paragraphs=%d elapsed=%.3fs",
+            project_id,
+            total_sections,
+            total_paragraphs,
+            time.monotonic() - request_start,
+        )
 
         # 创建BatchTranslationService实例，传递用户模型覆盖
         batch_service = BatchTranslationService(
@@ -404,6 +427,7 @@ async def translate_with_four_steps(
             user_model_override=_body.model,  # 传递用户指定的模型
         )
     except Exception:
+        logger.exception("[%s] translate-four-step failed before stream creation", project_id)
         BatchTranslationService._release_active_run(project_id)
         raise
     async def run_translation(
@@ -421,6 +445,14 @@ async def translate_with_four_steps(
             return asyncio.run(_runner())
 
         return await asyncio.to_thread(_run_translation_in_thread)
+
+    logger.info(
+        "[%s] translate-four-step streaming response created: total_sections=%d total_paragraphs=%d setup_elapsed=%.3fs",
+        project_id,
+        total_sections,
+        total_paragraphs,
+        time.monotonic() - request_start,
+    )
 
     session = TranslationStreamSession(
         project_id=project_id,
@@ -454,6 +486,13 @@ async def resolve_term_conflict_live(
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
 
+    logger.info(
+        "[%s] live term conflict resolution received: term=%s chosen=%s apply_to_all=%s",
+        project_id,
+        request.term,
+        request.chosen_translation,
+        request.apply_to_all,
+    )
     resolved = resolve_live_conflict(
         project_id,
         request.term,
@@ -473,10 +512,12 @@ async def stop_translate_with_four_steps(project_id: str):
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
 
+    logger.info("[%s] translate-four-step stop requested", project_id)
     from src.services.batch_translation_service import BatchTranslationService
 
     service = BatchTranslationService.__new__(BatchTranslationService)
     result = await service.cancel_translation(project_id)
+    logger.info("[%s] translate-four-step stop result: %s", project_id, result)
     if result.get("status") == "not_found":
         raise BadRequestException(detail="No active longform translation for this project")
     return result

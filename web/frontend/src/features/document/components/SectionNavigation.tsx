@@ -43,13 +43,13 @@ export const SectionNavigation: FC<SectionNavigationProps> = ({
   };
 
   return (
-    <div className={cn('flex items-center gap-2', className)}>
+    <div className={cn('flex items-center gap-2 rounded-lg bg-white/70 p-1', className)}>
       {/* 上一章按钮 */}
       <button
         onClick={goToPrevious}
         disabled={!hasPrevious}
         className={cn(
-          'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+          'flex min-h-10 items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors',
           'disabled:cursor-not-allowed disabled:opacity-50',
           hasPrevious
             ? 'bg-primary-100 text-primary-700 hover:bg-primary-200'
@@ -61,12 +61,12 @@ export const SectionNavigation: FC<SectionNavigationProps> = ({
       </button>
 
       {/* 章节信息 */}
-      <div className="flex-1 text-center">
+      <div className="min-w-0 flex-1 text-center">
         {currentSection ? (
           <div className="text-sm">
             <span className="text-text-muted">第 {currentIndex + 1} 章 / 共 {sections.length} 章</span>
             {currentSection.title && (
-              <div className="truncate font-medium text-text-primary">
+              <div className="truncate px-1 font-medium text-text-primary">
                 {currentSection.title}
               </div>
             )}
@@ -81,7 +81,7 @@ export const SectionNavigation: FC<SectionNavigationProps> = ({
         onClick={goToNext}
         disabled={!hasNext}
         className={cn(
-          'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
+          'flex min-h-10 items-center gap-1 rounded-md px-3 py-2 text-sm font-medium transition-colors',
           'disabled:cursor-not-allowed disabled:opacity-50',
           hasNext
             ? 'bg-primary-100 text-primary-700 hover:bg-primary-200'

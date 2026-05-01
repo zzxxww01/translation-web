@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import type { SlackReplyVariant } from '../../shared/types';
 
+const MAX_CONVERSATION_MESSAGES = 3;
+
 export interface ConversationMessage {
   id: string;
   role: 'me' | 'them';
@@ -73,7 +75,7 @@ export const useSlackWorkspaceStore = create<SlackWorkspaceState>()(
                 translation,
                 timestamp: Date.now(),
               },
-            ],
+            ].slice(-MAX_CONVERSATION_MESSAGES),
           })),
         removeMessage: id =>
           set(state => ({

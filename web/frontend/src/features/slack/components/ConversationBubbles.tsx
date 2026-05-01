@@ -39,7 +39,7 @@ export function ConversationBubbles({
           <h3 className="font-medium">对话历史</h3>
           {messages.length > 0 && (
             <span className="text-xs text-muted-foreground">
-              ({messages.length} 条消息)
+              (最近 {messages.length} 条)
             </span>
           )}
         </div>

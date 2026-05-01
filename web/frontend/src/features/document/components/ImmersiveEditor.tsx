@@ -252,13 +252,13 @@ export function ImmersiveEditor({
 
   return (
     <div className="fixed inset-0 z-[70] flex flex-col bg-bg-primary">
-      <div className="border-b border-border-subtle bg-white px-6 py-3 shadow-sm">
-        <div className="flex items-center justify-between gap-3">
-          <div className="flex items-center gap-2">
-            <h2 className="text-base font-medium text-text-primary">{latestSection.title}</h2>
+      <div className="border-b border-border-subtle bg-white px-3 py-3 shadow-sm sm:px-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <h2 className="truncate text-base font-medium text-text-primary">{latestSection.title}</h2>
             <span className="text-sm text-text-muted">已确认 {approvedCount}/{paragraphs.length} 段</span>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-end gap-2 overflow-x-auto mobile-scrollbar-none">
             <button
               onClick={toggleSelectionMode}
               className={`flex items-center justify-center rounded-lg border p-2 transition-colors ${
@@ -313,7 +313,7 @@ export function ImmersiveEditor({
         </div>
       </div>
 
-      <div ref={listContainerRef} className="flex-1 overflow-auto px-6 py-2" onScroll={handleListScroll}>
+      <div ref={listContainerRef} className="flex-1 overflow-auto px-3 py-2 sm:px-6" onScroll={handleListScroll}>
         <div className="space-y-1">
           {displayedParagraphs.map(paragraph => (
             <div
@@ -358,7 +358,7 @@ export function ImmersiveEditor({
 
       {showBatchRetranslateDialog && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/50">
-          <div className="w-full max-w-md rounded-lg border border-border bg-bg-primary p-6 shadow-xl">
+          <div className="mx-4 w-full max-w-md rounded-lg border border-border bg-bg-primary p-5 shadow-xl sm:p-6">
             <h3 className="mb-4 text-lg font-semibold text-text-primary">
               批量重译 {selectedIds.size} 个段落
             </h3>

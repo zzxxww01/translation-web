@@ -61,17 +61,17 @@ export const ParagraphItem: FC<ParagraphItemProps> = ({
     <div
       onClick={onClick}
       className={cn(
-        'group cursor-pointer rounded-lg border p-5 transition-all',
+        'group cursor-pointer rounded-lg border bg-white p-4 shadow-sm transition-colors md:p-5',
         isActive
-          ? 'border-primary-500 bg-primary-50 shadow-md'
-          : 'border-border-subtle bg-bg-card hover:border-primary-300 hover:shadow-sm',
+          ? 'border-primary-500 bg-primary-50 shadow-sm'
+          : 'border-border-subtle hover:border-primary-300',
         // 已确认的段落有绿色边框标识
         isConfirmed && !isActive && 'border-l-4 border-l-green-500'
       )}
     >
       <div className="flex items-start justify-between">
         <div className="flex-1">
-          <div className="mb-2 flex items-center gap-2">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
             <span className="text-sm text-text-muted">#{paragraph.index}</span>
             <span className={cn('text-sm', PARAGRAPH_STATUS_CLASSES[status])}>
               {PARAGRAPH_STATUS_ICONS[status]}
@@ -86,12 +86,12 @@ export const ParagraphItem: FC<ParagraphItemProps> = ({
           </div>
 
           {/* 原文 */}
-          <div className="mb-2 text-base leading-relaxed text-text-primary">
+          <div className="mb-2 text-[15px] leading-7 text-text-primary md:text-base">
             {renderSource()}
           </div>
 
           {/* 译文 */}
-          <div className="text-base leading-relaxed text-text-secondary">
+          <div className="border-t border-border-subtle pt-3 text-[15px] leading-7 text-text-secondary md:text-base">
             {paragraph.translation ?? <span className="text-text-muted">点击翻译...</span>}
           </div>
         </div>

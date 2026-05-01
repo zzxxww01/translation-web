@@ -76,8 +76,8 @@ function TermRows({
           <TableRow
             key={term.original}
             className={cn(
-              'transition-all duration-200 cursor-pointer border-b border-gray-100 last:border-0',
-              'hover:bg-indigo-50/50 hover:shadow-sm hover:scale-[1.01]',
+              'cursor-pointer border-b border-gray-100 transition-colors last:border-0',
+              'hover:bg-primary/5',
               isFocused ? 'bg-primary/5' : ''
             )}
           >
@@ -187,7 +187,7 @@ export function TermTable({
     visibleOriginals.length > 0 && visibleOriginals.every(original => selectedOriginals.includes(original));
 
   return (
-    <div key={tableKey} className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+    <div key={tableKey} className="overflow-x-auto rounded-lg border border-border bg-white shadow-sm">
       <Table>
         <TableHeader>
           <TableRow className="bg-muted/50">

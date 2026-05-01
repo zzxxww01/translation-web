@@ -43,12 +43,12 @@ export function TranslationOutput({
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+      <div className="mb-3 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
           <h3 className="text-sm font-semibold">译文</h3>
           {versions.length > 0 && (
             <Select value={currentVersionId || ''} onValueChange={onSetCurrentVersion}>
-              <SelectTrigger className="h-8 w-48">
+              <SelectTrigger className="h-8 w-full sm:w-48">
                 <SelectValue placeholder="选择版本" />
               </SelectTrigger>
               <SelectContent>

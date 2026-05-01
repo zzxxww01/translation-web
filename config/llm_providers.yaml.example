@@ -125,6 +125,7 @@ task_defaults:
   longform: "deepseek-v3"
   post: "deepseek-v3"
   analysis: "deepseek-v3"
+  term_review: "gemini-preview"
   title: "deepseek-v3"
   metadata: "deepseek-v3"
   slack: "gemini-pro"

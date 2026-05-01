@@ -26,6 +26,12 @@ class InlineRecoveryService:
         if element_type == ElementType.LI:
             return f"- {text}"
         if element_type == ElementType.BLOCKQUOTE:
+            if text.startswith("*") and text.endswith("*"):
+                return f"> {text}"
+            if text.startswith("_") and text.endswith("_"):
+                return f"> {text}"
+            if text.startswith(("“", '"', "'")):
+                return f"> *{text}*"
             return f"> {text}"
         return text
 

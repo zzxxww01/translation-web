@@ -367,7 +367,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
 
     return (
       <div className="space-y-4">
-        <div className="grid gap-3 rounded-2xl border border-border bg-white p-4 shadow-sm lg:grid-cols-[minmax(0,1fr)_160px_160px_180px_160px]">
+        <div className="grid gap-3 rounded-lg border border-border bg-white p-3 shadow-sm sm:p-4 lg:grid-cols-[minmax(0,1fr)_160px_160px_180px_160px]">
           <div className="relative">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <Input
@@ -511,9 +511,9 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
   }
 
   return (
-    <div className="min-h-full bg-gray-50 px-6 py-6">
+    <div className="min-h-full bg-gray-50 px-3 py-4 md:px-6 md:py-6">
       <div className="mx-auto flex w-full max-w-7xl flex-col gap-6">
-        <div className="flex flex-col gap-4 rounded-3xl border border-border bg-white p-6 shadow-sm md:flex-row md:items-start md:justify-between">
+        <div className="flex flex-col gap-4 rounded-lg border border-border bg-white p-4 shadow-sm md:flex-row md:items-start md:justify-between md:p-6">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               {onBack ? (
@@ -527,7 +527,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
               </Badge>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-foreground">统一术语管理</h1>
+              <h1 className="text-xl font-bold text-foreground md:text-2xl">统一术语管理</h1>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 这里统一管理全局术语、项目术语和推荐提升。长文翻译会优先使用项目术语覆盖全局术语；帖子、Slack
                 和工具箱当前只使用全局术语。
@@ -548,7 +548,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
             setActiveScope(nextScope);
           }}
         >
-          <TabsList>
+          <TabsList className="w-full justify-start md:w-auto">
             {projectId ? (
               <TabsTrigger value="project" className="gap-1.5">
                 <Languages className="h-4 w-4" />

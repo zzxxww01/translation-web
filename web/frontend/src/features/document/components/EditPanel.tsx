@@ -535,22 +535,22 @@ export const EditPanel: FC<EditPanelProps> = ({
       />
 
       {/* 编辑面板 - 居中大弹窗 */}
-      <div className="fixed inset-4 z-50 flex items-center justify-center md:inset-8 lg:inset-16">
-        <div className="flex h-full w-full max-w-5xl flex-col rounded-xl bg-bg-primary shadow-2xl">
+      <div className="fixed inset-x-4 bottom-4 top-20 z-50 flex items-center justify-center sm:inset-x-6 sm:bottom-6 sm:top-24 md:inset-x-12 md:bottom-12 md:top-24 lg:inset-x-20 lg:bottom-20 lg:top-28">
+        <div className="flex h-full w-full max-w-5xl flex-col overflow-hidden bg-bg-primary shadow-2xl sm:rounded-xl">
           {/* 头部 */}
-          <div className="flex items-center justify-between border-b border-border-subtle px-6 py-4">
-            <div className="flex items-center gap-4">
-              <h3 className="text-xl font-semibold">编辑译文</h3>
-              <span className="text-lg text-text-muted">
+          <div className="flex flex-col gap-3 border-b border-border-subtle px-4 py-4 sm:px-6 sm:py-5 md:flex-row md:items-center md:justify-between">
+            <div className="flex min-w-0 items-baseline gap-3">
+              <h3 className="text-lg font-semibold md:text-xl">编辑译文</h3>
+              <span className="text-sm text-text-muted md:text-lg">
                 第 {currentIndex + 1} 段 / 共 {totalCount} 段
               </span>
             </div>
 
             {/* 导航按钮 */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 overflow-x-auto mobile-scrollbar-none">
               <Button
                 variant="outline"
-                size="default"
+                size="sm"
                 onClick={onPrev}
                 disabled={currentIndex <= 0 || isLoading}
                 leftIcon={<ChevronLeft className="h-5 w-5" />}
@@ -559,7 +559,7 @@ export const EditPanel: FC<EditPanelProps> = ({
               </Button>
               <Button
                 variant="outline"
-                size="default"
+                size="sm"
                 onClick={onNext}
                 disabled={currentIndex >= totalCount - 1 || isLoading}
                 rightIcon={<ChevronRight className="h-5 w-5" />}
@@ -568,10 +568,10 @@ export const EditPanel: FC<EditPanelProps> = ({
               </Button>
               {onEnterImmersive && (
                 <>
-                  <div className="mx-2 h-8 w-px bg-border-subtle" />
+                  <div className="mx-1 h-8 w-px bg-border-subtle" />
                   <Button
                     variant="outline"
-                    size="default"
+                    size="sm"
                     onClick={onEnterImmersive}
                     leftIcon={<Maximize2 className="h-4 w-4" />}
                   >
@@ -579,10 +579,10 @@ export const EditPanel: FC<EditPanelProps> = ({
                   </Button>
                 </>
               )}
-              <div className="mx-3 h-8 w-px bg-border-subtle" />
+              <div className="mx-1 h-8 w-px bg-border-subtle" />
               <button
                 onClick={onClose}
-                className="rounded p-2.5 text-text-muted transition-colors hover:text-text-primary hover:bg-bg-tertiary"
+                className="rounded p-2 text-text-muted transition-colors hover:text-text-primary hover:bg-bg-tertiary"
               >
                 <X className="h-6 w-6" />
               </button>
@@ -590,10 +590,10 @@ export const EditPanel: FC<EditPanelProps> = ({
           </div>
 
           {/* 主内容区 - 左右分栏 */}
-          <div className="flex flex-1 overflow-hidden">
+          <div className="flex flex-1 flex-col overflow-hidden md:flex-row">
             {/* 左侧：原文 */}
-            <div className="flex w-1/2 flex-col border-r border-border-subtle p-6">
-              <label className="mb-3 block text-lg font-semibold text-text-primary">
+            <div className="flex min-h-0 w-full flex-col border-b border-border-subtle p-4 md:w-1/2 md:border-b-0 md:border-r md:p-6">
+              <label className="mb-2 block text-base font-semibold text-text-primary md:mb-3 md:text-lg">
                 原文
               </label>
               <p className="mb-2 text-xs text-text-muted">
@@ -604,15 +604,15 @@ export const EditPanel: FC<EditPanelProps> = ({
                 onMouseUp={handleSourceSelection}
                 onKeyUp={handleSourceSelection}
                 onContextMenu={handleSourceContextMenu}
-                className="flex-1 overflow-auto rounded-lg bg-bg-secondary p-4 text-lg leading-7 text-text-primary"
+                className="max-h-[32dvh] min-h-28 flex-1 overflow-auto rounded-lg bg-bg-secondary p-3 text-base leading-7 text-text-primary md:max-h-none md:p-4 md:text-lg"
               >
                 {renderSource()}
               </div>
             </div>
 
             {/* 右侧：译文编辑 */}
-            <div className="flex w-1/2 flex-col p-6">
-              <label className="mb-3 block text-lg font-semibold text-text-primary">
+            <div className="flex min-h-0 w-full flex-1 flex-col p-4 md:w-1/2 md:p-6">
+              <label className="mb-2 block text-base font-semibold text-text-primary md:mb-3 md:text-lg">
                 译文
               </label>
               <textarea
@@ -621,16 +621,16 @@ export const EditPanel: FC<EditPanelProps> = ({
                   setTranslation(e.target.value);
                 }}
                 placeholder="在此输入或编辑译文..."
-                className="flex-1 w-full resize-none rounded-lg border border-border bg-bg-secondary p-4 text-lg leading-7 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="min-h-[32dvh] flex-1 w-full resize-none rounded-lg border border-border bg-bg-secondary p-3 text-base leading-7 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent md:p-4 md:text-lg"
               />
             </div>
           </div>
 
           {/* 底部操作栏 */}
-          <div className="border-t border-border-subtle px-6 py-4">
-            <div className="flex items-center justify-between">
+          <div className="border-t border-border-subtle px-4 pb-[max(2rem,env(safe-area-inset-bottom))] pt-4 sm:px-6 sm:pb-[max(2.5rem,env(safe-area-inset-bottom))] sm:pt-5">
+            <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
               {/* 快捷键提示和模型选择 */}
-              <div className="flex items-center gap-6">
+              <div className="hidden items-center gap-6 md:flex">
                 <div className="flex gap-4 text-sm text-text-muted">
                   <span>Ctrl+T 翻译</span>
                   <span>Ctrl+Enter 确认</span>
@@ -639,7 +639,7 @@ export const EditPanel: FC<EditPanelProps> = ({
               </div>
 
               {/* 操作按钮 */}
-              <div className="flex gap-3 items-center">
+              <div className="flex flex-wrap items-center gap-2 md:gap-3 md:justify-end">
                 {/* 翻译/重新翻译按钮组 */}
                 {paragraph.translation ? (
                   <DropdownMenu>

@@ -1,26 +1,26 @@
 import { cva, type VariantProps } from "class-variance-authority"
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:border disabled:border-slate-200 disabled:bg-slate-100 disabled:text-slate-400 disabled:shadow-none [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default:
-          "button-fluid shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]",
+          "bg-slate-950 text-white shadow-sm hover:bg-slate-800 active:bg-slate-900",
         destructive:
-          "bg-gradient-to-br from-red-500 to-red-600 text-white shadow-md hover:shadow-lg hover:from-red-600 hover:to-red-700 hover:scale-[1.02] active:scale-[0.98]",
+          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border-2 border-primary/20 bg-white/80 backdrop-blur-sm shadow-sm hover:border-primary/40 hover:bg-white hover:shadow-md hover:scale-[1.02] active:scale-[0.98]",
+          "border border-slate-200 bg-white text-slate-900 shadow-none hover:border-slate-300 hover:bg-slate-50",
         secondary:
-          "bg-gradient-to-br from-slate-100 to-slate-200 text-slate-700 shadow-sm hover:from-slate-200 hover:to-slate-300 hover:shadow-md hover:scale-[1.02] active:scale-[0.98]",
-        ghost: "hover:bg-primary/10 hover:text-primary transition-colors",
+          "bg-slate-100 text-slate-900 shadow-none hover:bg-slate-200",
+        ghost: "text-slate-700 hover:bg-slate-100 hover:text-slate-950",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-10 px-5 py-2",
-        sm: "h-8 rounded-lg px-3 text-xs",
-        lg: "h-12 rounded-xl px-8 text-base",
-        icon: "h-10 w-10",
+        default: "h-10 px-4 py-2 max-sm:h-11",
+        sm: "h-8 px-3 text-xs max-sm:h-10",
+        lg: "h-12 px-6 text-base",
+        icon: "h-10 w-10 max-sm:h-11 max-sm:w-11",
       },
     },
     defaultVariants: {

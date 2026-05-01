@@ -6,6 +6,7 @@ import asyncio
 import json
 import logging
 import threading
+import time
 from typing import Any, Awaitable, Callable, Dict
 
 
@@ -73,6 +74,13 @@ class TranslationStreamSession:
         event = asyncio.Event()
         with _conflict_lock:
             _pending_conflict_events[self.project_id][term_key] = event
+        logger.info(
+            "[%s] SSE term conflict emitted: term=%s existing=%s new=%s",
+            self.project_id,
+            conflict.term,
+            conflict.existing_translation,
+            conflict.new_translation,
+        )
         await self._progress_queue.put(
             {
                 "type": "term_conflict",
@@ -83,6 +91,13 @@ class TranslationStreamSession:
             await event.wait()
             with _conflict_lock:
                 resolution = _conflict_resolutions.get(self.project_id, {}).get(term_key, {})
+            logger.info(
+                "[%s] SSE term conflict resolved: term=%s chosen=%s apply_to_all=%s",
+                self.project_id,
+                conflict.term,
+                resolution.get("chosen_translation"),
+                resolution.get("apply_to_all", True),
+            )
             return {
                 "chosen_translation": resolution.get("chosen_translation")
                 or conflict.existing_translation
@@ -95,8 +110,16 @@ class TranslationStreamSession:
                 _conflict_resolutions.get(self.project_id, {}).pop(term_key, None)
 
     async def _run_translation_task(self) -> None:
+        task_start = time.monotonic()
         try:
             def on_progress(step: str, current: int, total: int) -> None:
+                logger.info(
+                    "[%s] SSE progress callback: step=%s current=%d total=%d",
+                    self.project_id,
+                    step,
+                    current,
+                    total,
+                )
                 self._event_loop.call_soon_threadsafe(
                     self._progress_queue.put_nowait,
                     {
@@ -116,6 +139,14 @@ class TranslationStreamSession:
                 return await asyncio.wrap_future(future)
 
             result = await self._run_translation(on_progress, on_term_conflict)
+            logger.info(
+                "[%s] Translation task returned: status=%s translated=%s/%s elapsed=%.3fs",
+                self.project_id,
+                result.get("status"),
+                result.get("translated_paragraphs"),
+                self.total_paragraphs,
+                time.monotonic() - task_start,
+            )
             status = result.get("status")
             if status == "completed":
                 event_type = "complete"
@@ -147,12 +178,15 @@ class TranslationStreamSession:
                 }
             )
         except Exception as exc:
+            logger.exception("[%s] Translation task crashed: %s", self.project_id, exc)
             await self._progress_queue.put({"type": "error", "error": str(exc)})
         finally:
+            logger.info("[%s] Translation task cleanup: releasing slot", self.project_id)
             self._clear_conflict_state()
             self._release_slot(self.project_id)
 
     async def generate(self):
+        stream_start = time.monotonic()
         translation_task: asyncio.Task | None = None
         translation_finished = False
         cancel_requested = False
@@ -170,6 +204,12 @@ class TranslationStreamSession:
 
         self._init_conflict_state()
         try:
+            logger.info(
+                "[%s] SSE stream start: total_paragraphs=%d total_sections=%d",
+                self.project_id,
+                self.total_paragraphs,
+                self.total_sections,
+            )
             yield (
                 "data: "
                 + json.dumps(
@@ -191,6 +231,15 @@ class TranslationStreamSession:
                     break
                 try:
                     event = await asyncio.wait_for(self._progress_queue.get(), timeout=1.0)
+                    event_type = event.get("type")
+                    if event_type != "heartbeat":
+                        logger.info(
+                            "[%s] SSE emit event: type=%s current=%s total=%s",
+                            self.project_id,
+                            event_type,
+                            event.get("current") or event.get("translated_count"),
+                            event.get("total"),
+                        )
                     yield f"data: {json.dumps(event)}\n\n"
                     if event.get("type") in ("complete", "error", "incomplete", "cancelled"):
                         translation_finished = True
@@ -219,6 +268,7 @@ class TranslationStreamSession:
             await request_cancel("stream task cancelled")
             raise
         except Exception as exc:
+            logger.exception("[%s] SSE stream error: %s", self.project_id, exc)
             yield f"data: {json.dumps({'type': 'error', 'error': str(exc)})}\n\n"
         finally:
             if (
@@ -227,3 +277,10 @@ class TranslationStreamSession:
                 and not translation_task.done()
             ):
                 await request_cancel("stream closed before translation finished")
+            logger.info(
+                "[%s] SSE stream end: finished=%s cancel_requested=%s elapsed=%.3fs",
+                self.project_id,
+                translation_finished,
+                cancel_requested,
+                time.monotonic() - stream_start,
+            )

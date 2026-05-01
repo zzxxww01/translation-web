@@ -21,10 +21,10 @@ export function ConfirmationWithQuality({ projectId, onComplete }: ConfirmationW
   const [currentSectionId] = useState<string>();
 
   return (
-    <div className="flex h-screen overflow-hidden">
+    <div className="flex h-full min-h-0 overflow-hidden">
       {/* 主确认工作流区域 */}
       <div className={cn(
-        'flex-1 transition-all duration-300',
+        'min-w-0 flex-1 transition-all duration-300',
         showQualityPanel ? 'mr-0' : 'mr-0'
       )}>
         <ConfirmationFeature
@@ -34,7 +34,7 @@ export function ConfirmationWithQuality({ projectId, onComplete }: ConfirmationW
       </div>
 
       {/* 质量面板切换按钮 */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 z-10">
+      <div className="absolute right-0 top-1/2 z-10 -translate-y-1/2">
         {!showQualityPanel && (
           <Button
             variant="default"
@@ -51,8 +51,8 @@ export function ConfirmationWithQuality({ projectId, onComplete }: ConfirmationW
       {/* 质量面板 */}
       <div
         className={cn(
-          'h-screen border-l border-border bg-background transition-all duration-300 overflow-hidden',
-          showQualityPanel ? 'w-96' : 'w-0'
+          'fixed inset-y-0 right-0 z-20 h-full border-l border-border bg-background shadow-xl transition-all duration-300 overflow-hidden md:static md:z-auto md:shadow-none',
+          showQualityPanel ? 'w-[88vw] max-w-sm md:w-96' : 'w-0'
         )}
       >
         {showQualityPanel && (

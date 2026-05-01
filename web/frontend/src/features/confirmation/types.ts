@@ -43,6 +43,10 @@ export interface SimilarGlossaryTerm {
 export interface TermReviewCandidate {
   term: string;
   suggested_translation: string;
+  suggested_translations?: Array<{
+    translation: string;
+    count: number;
+  }>;
   reasons: string[];
   occurrence_count: number;
   first_occurrence?: string | null;
@@ -52,6 +56,7 @@ export interface TermReviewCandidate {
   }>;
   contexts: string[];
   similar_terms: SimilarGlossaryTerm[];
+  existing_terms?: SimilarGlossaryTerm[];
 }
 
 export interface TermReviewSectionGroup {

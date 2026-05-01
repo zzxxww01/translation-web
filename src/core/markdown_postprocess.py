@@ -60,9 +60,6 @@ _BARE_DOLLAR = re.compile(r"(?<!\\)(?<![$])[$](?![$])")
 # Lookahead checks it's not followed by a tag-name pattern or `!--`.
 _BARE_LT = re.compile(r"<(?![a-zA-Z/!])")
 
-# Bare `>` at start of line that is NOT a blockquote (we only escape mid-line `>`).
-_MID_LINE_GT = re.compile(r"(?<=\S)>")
-
 # Pipe characters `|` outside of markdown tables can occasionally cause issues.
 # We only escape pipes that appear inside normal text paragraphs,
 # not in table rows (lines starting with `|`).
@@ -133,13 +130,10 @@ def postprocess_markdown(content: str) -> str:
     # 2b. Escape bare `<` → `&lt;`
     work = _BARE_LT.sub("&lt;", work)
 
-    # 2c. Escape mid-line `>` → `&gt;`  (preserve blockquote `>` at line start)
-    work = _MID_LINE_GT.sub("&gt;", work)
-
-    # 2d. Normalise excessive blank lines → max 2 newlines
+    # 2c. Normalise excessive blank lines → max 2 newlines
     work = _EXCESSIVE_BLANK_LINES.sub("\n\n", work)
 
-    # 2e. CJK–Latin spacing
+    # 2d. CJK–Latin spacing
     work = _CJK_LATIN_NO_SPACE.sub(r"\1 \2", work)
     work = _LATIN_CJK_NO_SPACE.sub(r"\1 \2", work)
 

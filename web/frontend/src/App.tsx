@@ -27,6 +27,13 @@ class AppErrorBoundary extends Component<
 
   componentDidCatch(error: Error, info: ErrorInfo) {
     console.error('App error:', error, info);
+    if (error.message.includes('Failed to fetch dynamically imported module')) {
+      const reloadKey = 'translation-agent:dynamic-import-reload';
+      if (sessionStorage.getItem(reloadKey) !== '1') {
+        sessionStorage.setItem(reloadKey, '1');
+        window.location.reload();
+      }
+    }
   }
 
   render() {

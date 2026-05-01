@@ -115,6 +115,8 @@ def _normalize_prompt_term(term: Any) -> Optional[Dict[str, Any]]:
         return None
     if not translation and strategy_value != "preserve":
         return None
+    if strategy_value == "preserve":
+        translation = original
 
     return {
         "original": original,

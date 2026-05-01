@@ -355,8 +355,8 @@
     {
       "original": "TPU",
       "translation": "TPU",
-      "strategy": "preserve_annotate",
-      "note": "张量处理器 (Tensor Processing Unit)",
+      "strategy": "preserve",
+      "note": "保留原文，不解释。",
       "tags": [
         "chip"
       ],
@@ -364,7 +364,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-04-08T14:30:49.498568"
+      "updated_at": "2026-04-26T11:34:42"
     },
     {
       "original": "chiplet",
@@ -565,8 +565,8 @@
     },
     {
       "original": "token",
-      "translation": "词元",
-      "strategy": "preserve_annotate",
+      "translation": "token",
+      "strategy": "preserve",
       "note": "不翻译，保留原文",
       "tags": [
         "ai"
@@ -575,13 +575,13 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-04-10T23:02:23.690524"
+      "updated_at": "2026-04-26T11:16:30"
     },
     {
       "original": "context window",
       "translation": "上下文窗口",
       "strategy": "translate",
-      "note": null,
+      "note": "直接翻译，不标注英文",
       "tags": [
         "ai"
       ],
@@ -589,7 +589,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570486"
+      "updated_at": "2026-04-26T11:16:30"
     },
     {
       "original": "inference",
@@ -902,16 +902,17 @@
     {
       "original": "benchmark",
       "translation": "基准测试",
-      "strategy": "first_annotate",
-      "note": "只有表示大模型等的评测方式时翻译成基准测试",
+      "strategy": "translate",
+      "note": "表示大模型/软件评测方式时译为“基准测试”，不标注英文。",
       "tags": [
-        "performance"
+        "ai",
+        "benchmark"
       ],
       "first_occurrence": null,
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-16T00:48:52.469999"
+      "updated_at": "2026-04-26T11:53:48"
     },
     {
       "original": "FLOPS",
@@ -1289,15 +1290,1282 @@
     },
     {
       "original": "Blackwell",
-      "translation": null,
+      "translation": "Blackwell",
       "strategy": "preserve",
-      "note": "英伟达的显卡",
-      "tags": [],
+      "note": "GPU 架构名，保留原文。",
+      "tags": [
+        "chip"
+      ],
       "first_occurrence": null,
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-28T12:16:02.253585"
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "bug",
+      "translation": "bug",
+      "strategy": "preserve",
+      "note": "保留英文原文",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:16:30"
+    },
+    {
+      "original": "FP4",
+      "translation": "FP4",
+      "strategy": "preserve",
+      "note": "保留原文，不解释。",
+      "tags": [
+        "ai",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "FP8",
+      "translation": "FP8",
+      "strategy": "preserve",
+      "note": "保留原文，不解释。",
+      "tags": [
+        "ai",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "Tokenomics",
+      "translation": "token 经济学",
+      "strategy": "preserve_annotate",
+      "note": "首次写“Tokenomics（token 经济学）”，后续保留 Tokenomics。",
+      "tags": [
+        "ai",
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "agent",
+      "translation": "智能体",
+      "strategy": "translate",
+      "note": "AI/编程语境中译为“智能体”，不要译为“代理”。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "AI agent",
+      "translation": "AI 智能体",
+      "strategy": "translate",
+      "note": "不要译为“AI 代理”。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "coding agent",
+      "translation": "编程智能体",
+      "strategy": "translate",
+      "note": "不要译为“编码代理”。",
+      "tags": [
+        "ai",
+        "coding"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "coding agents",
+      "translation": "编程智能体",
+      "strategy": "translate",
+      "note": "复数按中文习惯不加复数标记。",
+      "tags": [
+        "ai",
+        "coding"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "agentic coding",
+      "translation": "智能体编程",
+      "strategy": "first_annotate",
+      "note": "首次写“智能体编程（agentic coding）”，后续写“智能体编程”。",
+      "tags": [
+        "ai",
+        "coding"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "agentic benchmark",
+      "translation": "智能体基准测试",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai",
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "token efficiency",
+      "translation": "token 效率",
+      "strategy": "translate",
+      "note": "token 保留英文，efficiency 译为效率，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "total parameters",
+      "translation": "总参数量",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "active parameters",
+      "translation": "激活参数量",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "PR",
+      "translation": "拉取请求",
+      "strategy": "preserve_annotate",
+      "note": "首次写“PR（拉取请求）”，后续写“PR”。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "SOTA",
+      "translation": "业界最先进",
+      "strategy": "preserve_annotate",
+      "note": "首次写“SOTA（业界最先进）”，后续写“SOTA”。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:34:42"
+    },
+    {
+      "original": "harness",
+      "translation": "harness",
+      "strategy": "preserve",
+      "note": "保留英文原文，不翻译为测试框架。",
+      "tags": [
+        "ai",
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:47:09"
+    },
+    {
+      "original": "vibe coding",
+      "translation": "vibe coding",
+      "strategy": "preserve_annotate",
+      "note": "首次写“vibe coding（氛围式编程）”，后续保留 vibe coding。",
+      "tags": [
+        "ai",
+        "coding"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:47:09"
+    },
+    {
+      "original": "vibe coding startups",
+      "translation": "vibe coding 初创公司",
+      "strategy": "preserve_annotate",
+      "note": "首次写“vibe coding 初创公司（氛围式编程初创公司）”，后续写“vibe coding 初创公司”。",
+      "tags": [
+        "ai",
+        "coding",
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:47:09"
+    },
+    {
+      "original": "reasoning effort",
+      "translation": "推理强度",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "tool calls",
+      "translation": "工具调用",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai",
+        "tools"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "tokenizer",
+      "translation": "分词器",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "model card",
+      "translation": "模型卡",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "rubric",
+      "translation": "评分标准",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "rubrics",
+      "translation": "评分标准",
+      "strategy": "translate",
+      "note": "复数按中文习惯不加复数标记。",
+      "tags": [
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "priority tier",
+      "translation": "优先层级",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai",
+        "pricing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "fast mode",
+      "translation": "快速模式",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai",
+        "pricing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "rev share",
+      "translation": "收入分成",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "wrapper",
+      "translation": "wrapper",
+      "strategy": "preserve_annotate",
+      "note": "首次写“wrapper（包装器）”，后续保留 wrapper。",
+      "tags": [
+        "software",
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "wrappers",
+      "translation": "wrapper",
+      "strategy": "preserve_annotate",
+      "note": "首次写“wrapper（包装器）”，后续保留 wrapper；复数不单独体现。",
+      "tags": [
+        "software",
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "LLM-as-a-judge",
+      "translation": "LLM-as-a-judge",
+      "strategy": "preserve_annotate",
+      "note": "首次写“LLM-as-a-judge（LLM 评判器）”，后续保留 LLM-as-a-judge。",
+      "tags": [
+        "ai",
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "LLM judge",
+      "translation": "LLM judge",
+      "strategy": "preserve_annotate",
+      "note": "首次写“LLM judge（LLM 评判器）”，后续保留 LLM judge。",
+      "tags": [
+        "ai",
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "greenfield",
+      "translation": "greenfield",
+      "strategy": "preserve_annotate",
+      "note": "首次写“greenfield（从零开始）”，后续保留 greenfield。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "jagged frontier",
+      "translation": "jagged frontier",
+      "strategy": "preserve_annotate",
+      "note": "首次写“jagged frontier（锯齿状前沿）”，后续保留 jagged frontier。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "Mtok",
+      "translation": "Mtok",
+      "strategy": "preserve_annotate",
+      "note": "首次写“Mtok（百万 token）”，后续保留 Mtok。",
+      "tags": [
+        "ai",
+        "pricing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "ARR",
+      "translation": "ARR",
+      "strategy": "preserve_annotate",
+      "note": "首次写“ARR（年度经常性收入）”，后续保留 ARR。",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "checkpoint",
+      "translation": "checkpoint",
+      "strategy": "preserve",
+      "note": "AI 模型语境保留 checkpoint，不译为检查点。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "KV cache",
+      "translation": "KV cache",
+      "strategy": "preserve",
+      "note": "保留英文原文，不解释。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "postmortem",
+      "translation": "事后分析报告",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "engineering"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "SKU",
+      "translation": "SKU",
+      "strategy": "preserve",
+      "note": "保留英文原文。",
+      "tags": [
+        "business",
+        "pricing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "xhigh",
+      "translation": "xhigh",
+      "strategy": "preserve",
+      "note": "模型推理强度枚举值，保留原文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "non-reasoning",
+      "translation": "non-reasoning",
+      "strategy": "preserve",
+      "note": "模型推理强度枚举值，保留原文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "max_tokens",
+      "translation": "max_tokens",
+      "strategy": "preserve",
+      "note": "API 参数名，保留原文。",
+      "tags": [
+        "api"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "task budget",
+      "translation": "任务预算",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "prompt caching",
+      "translation": "提示缓存",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai",
+        "pricing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "input/output ratio",
+      "translation": "输入/输出比",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai",
+        "pricing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "token counting",
+      "translation": "token 计数",
+      "strategy": "translate",
+      "note": "token 保留英文，counting 译为计数。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "long-horizon",
+      "translation": "长时程",
+      "strategy": "translate",
+      "note": "用于 long-horizon tasks。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "de facto benchmark",
+      "translation": "事实标准基准测试",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "pass-to-pass",
+      "translation": "pass-to-pass",
+      "strategy": "preserve",
+      "note": "基准测试指标名，保留原文。",
+      "tags": [
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "fail-to-pass",
+      "translation": "fail-to-pass",
+      "strategy": "preserve",
+      "note": "基准测试指标名，保留原文。",
+      "tags": [
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "human in the loop",
+      "translation": "人在回路中",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "single-turn",
+      "translation": "单轮",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:53:48"
+    },
+    {
+      "original": "pretrained model",
+      "translation": "预训练模型",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "pre-training",
+      "translation": "预训练",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "post-training",
+      "translation": "后训练",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "frontier model",
+      "translation": "前沿模型",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "SLA",
+      "translation": "SLA",
+      "strategy": "preserve_annotate",
+      "note": "首次写“SLA（服务等级协议）”，后续保留 SLA。",
+      "tags": [
+        "business",
+        "pricing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "thinking content",
+      "translation": "思考内容",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "batch size",
+      "translation": "批次大小",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "interactivity",
+      "translation": "交互延迟",
+      "strategy": "translate",
+      "note": "推理性能语境中译为交互延迟。",
+      "tags": [
+        "ai",
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "tok/sec",
+      "translation": "tok/sec",
+      "strategy": "preserve",
+      "note": "性能单位，保留原文。",
+      "tags": [
+        "ai",
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "Mega-Kernel",
+      "translation": "Mega-Kernel",
+      "strategy": "preserve_annotate",
+      "note": "首次写“Mega-Kernel（巨型内核）”，后续保留 Mega-Kernel。",
+      "tags": [
+        "ai",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "MoE",
+      "translation": "MoE",
+      "strategy": "preserve_annotate",
+      "note": "首次写“MoE（混合专家模型）”，后续保留 MoE。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "DeepGEMM",
+      "translation": "DeepGEMM",
+      "strategy": "preserve",
+      "note": "项目/库名，保留原文。",
+      "tags": [
+        "ai",
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "Hopper",
+      "translation": "Hopper",
+      "strategy": "preserve",
+      "note": "GPU 架构名，保留原文。",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "SM90",
+      "translation": "SM90",
+      "strategy": "preserve",
+      "note": "GPU 架构代号，保留原文。",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "SM100",
+      "translation": "SM100",
+      "strategy": "preserve",
+      "note": "GPU 架构代号，保留原文。",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "Ascend",
+      "translation": "昇腾",
+      "strategy": "first_annotate",
+      "note": "华为昇腾芯片品牌；首次可写“昇腾（Ascend）”。",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "API",
+      "translation": "API",
+      "strategy": "preserve",
+      "note": "保留英文原文。",
+      "tags": [
+        "api"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "CLI",
+      "translation": "CLI",
+      "strategy": "preserve_annotate",
+      "note": "首次写“CLI（命令行界面）”，后续保留 CLI。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "IDE",
+      "translation": "IDE",
+      "strategy": "preserve_annotate",
+      "note": "首次写“IDE（集成开发环境）”，后续保留 IDE。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "VSCode",
+      "translation": "VSCode",
+      "strategy": "preserve",
+      "note": "产品名，保留原文。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "plugin",
+      "translation": "插件",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "web app",
+      "translation": "Web 应用",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "mobile app",
+      "translation": "移动应用",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "desktop app",
+      "translation": "桌面应用",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "remote control",
+      "translation": "远程控制",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "sandbox",
+      "translation": "沙盒",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "software"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "Cursor Bugbot",
+      "translation": "Cursor Bugbot",
+      "strategy": "preserve",
+      "note": "产品名，保留原文。",
+      "tags": [
+        "software",
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "narrow fix",
+      "translation": "narrow fix",
+      "strategy": "preserve_annotate",
+      "note": "首次写“narrow fix（小范围修复）”，后续保留 narrow fix。",
+      "tags": [
+        "software",
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "eval",
+      "translation": "评估",
+      "strategy": "translate",
+      "note": "AI 评测语境中译为评估。",
+      "tags": [
+        "ai",
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "evals",
+      "translation": "评估",
+      "strategy": "translate",
+      "note": "复数按中文习惯不加复数标记。",
+      "tags": [
+        "ai",
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "contamination",
+      "translation": "污染",
+      "strategy": "translate",
+      "note": "基准测试/数据污染语境。",
+      "tags": [
+        "ai",
+        "benchmark"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "agentic AI",
+      "translation": "智能体式 AI",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "Cournot competition",
+      "translation": "古诺竞争",
+      "strategy": "translate",
+      "note": "经济学术语，直接翻译。",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "rate limits",
+      "translation": "速率限制",
+      "strategy": "translate",
+      "note": "直接翻译，不标注英文。",
+      "tags": [
+        "api",
+        "pricing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "AGI-pilled",
+      "translation": "AGI-pilled",
+      "strategy": "preserve_annotate",
+      "note": "首次写“AGI-pilled（过度迷恋 AGI）”，后续保留 AGI-pilled。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
+    },
+    {
+      "original": "XPU",
+      "translation": "XPU",
+      "strategy": "preserve",
+      "note": "芯片/加速器统称，保留原文。",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-04-26T11:55:35"
     }
   ]
 }

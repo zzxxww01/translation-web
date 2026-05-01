@@ -4,6 +4,15 @@ import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { useFormatWechat, useWechatThemes } from './hooks';
 import juice from 'juice';
+import {
+  Copy,
+  Eye,
+  FileText,
+  ImagePlus,
+  Palette,
+  UploadCloud,
+  WandSparkles,
+} from 'lucide-react';
 import './wechat.css';
 
 export function WechatFeature() {
@@ -126,64 +135,110 @@ export function WechatFeature() {
   };
 
   return (
-    <div className="flex h-full flex-col gap-4 p-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">微信公众号排版</h1>
-        <div className="flex items-center gap-4">
-          <label className="flex items-center gap-2 text-sm">
-            <span>主题:</span>
-            <select
-              value={selectedTheme}
-              onChange={(e) => setSelectedTheme(e.target.value)}
-              className="h-9 px-3 border rounded bg-white text-foreground"
-            >
-              {themes.map((theme) => (
-                <option key={theme.id} value={theme.id}>
-                  {theme.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="flex items-center gap-2 text-sm cursor-pointer">
-            <input
-              type="checkbox"
-              checked={uploadImages}
-              onChange={(e) => setUploadImages(e.target.checked)}
-              className="rounded"
-            />
-            上传图片到图床
-          </label>
-          <label className="flex items-center gap-2 text-sm cursor-pointer">
-            <input
-              type="checkbox"
-              checked={imageToBase64}
-              onChange={(e) => setImageToBase64(e.target.checked)}
-              className="rounded"
-            />
-            图片转Base64
-          </label>
-          <Button onClick={handleConvert} disabled={isPending}>
-            {isPending ? '转换中...' : '转换'}
-          </Button>
-          <Button onClick={handleCopy} disabled={!html} variant="outline">
-            复制
-          </Button>
+    <div className="flex h-full min-h-0 flex-1 flex-col gap-3 overflow-hidden bg-[linear-gradient(180deg,#f8fafc_0%,#eef6f3_46%,#f8fafc_100%)] p-3 md:gap-4 md:p-6">
+      <div className="relative shrink-0 overflow-hidden rounded-lg border border-slate-200 bg-white/95 p-4 shadow-sm">
+        <div className="relative flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-slate-50 text-slate-800">
+              <FileText className="h-5 w-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-500">
+                WeChat Studio
+              </p>
+              <h1 className="text-xl font-semibold leading-tight text-slate-950 md:text-2xl">
+                微信公众号排版
+              </h1>
+            </div>
+          </div>
+
+          <div className="grid gap-2 lg:flex lg:flex-wrap lg:items-center lg:gap-3">
+            <label className="flex min-w-0 items-center justify-between gap-3 rounded-lg border border-slate-200 bg-slate-50/80 px-3 py-2.5 text-sm shadow-inner shadow-white/70">
+              <span className="flex shrink-0 items-center gap-2 font-medium text-slate-600">
+                <Palette className="h-4 w-4 text-teal-700" />
+                主题
+              </span>
+              <select
+                value={selectedTheme}
+                onChange={(e) => setSelectedTheme(e.target.value)}
+                className="h-10 min-w-0 flex-1 rounded-md border border-slate-300 bg-white px-3 text-right text-sm font-semibold text-slate-950 outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/15 lg:flex-none lg:text-left"
+              >
+                {themes.map((theme) => (
+                  <option key={theme.id} value={theme.id}>
+                    {theme.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label className="group flex min-w-0 cursor-pointer items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white/90 px-3 py-2.5 text-sm shadow-sm transition">
+              <input
+                type="checkbox"
+                checked={uploadImages}
+                onChange={(e) => setUploadImages(e.target.checked)}
+                className="peer sr-only"
+              />
+              <span className="flex min-w-0 items-center gap-2 font-medium text-slate-700">
+                <UploadCloud className="h-4 w-4 text-blue-700" />
+                <span className="truncate">上传图片到图床</span>
+              </span>
+              <span className="relative h-6 w-11 shrink-0 rounded-full bg-slate-200 transition after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow-sm after:transition peer-checked:bg-primary peer-checked:after:translate-x-5" />
+            </label>
+            <label className="group flex min-w-0 cursor-pointer items-center justify-between gap-3 rounded-lg border border-slate-200 bg-white/90 px-3 py-2.5 text-sm shadow-sm transition">
+              <input
+                type="checkbox"
+                checked={imageToBase64}
+                onChange={(e) => setImageToBase64(e.target.checked)}
+                className="peer sr-only"
+              />
+              <span className="flex min-w-0 items-center gap-2 font-medium text-slate-700">
+                <ImagePlus className="h-4 w-4 text-amber-600" />
+                <span className="truncate">图片转Base64</span>
+              </span>
+              <span className="relative h-6 w-11 shrink-0 rounded-full bg-slate-200 transition after:absolute after:left-0.5 after:top-0.5 after:h-5 after:w-5 after:rounded-full after:bg-white after:shadow-sm after:transition peer-checked:bg-primary peer-checked:after:translate-x-5" />
+            </label>
+            <div className="hidden items-center gap-3 lg:flex">
+              <Button onClick={handleConvert} disabled={isPending}>
+                {isPending ? '转换中...' : '转换'}
+              </Button>
+              <Button onClick={handleCopy} disabled={!html} variant="outline">
+                复制
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="grid flex-1 grid-cols-2 gap-4 overflow-hidden">
+      <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 overflow-auto lg:grid-cols-2 lg:overflow-hidden">
         {/* 左侧：Markdown 输入 */}
-        <div className="flex flex-col overflow-hidden rounded-lg border">
+        <div className="flex min-h-[calc(100dvh-280px)] flex-col overflow-hidden rounded-lg border border-slate-200/90 bg-white shadow-[0_18px_50px_-36px_rgba(15,23,42,0.55)] lg:h-full lg:min-h-0">
+          <div className="flex h-12 shrink-0 items-center justify-between border-b border-slate-200 bg-slate-50/90 px-4">
+            <span className="flex items-center gap-2 text-sm font-semibold text-slate-800">
+              <FileText className="h-4 w-4 text-blue-700" />
+              Markdown
+            </span>
+            <span className="rounded-full bg-slate-900 px-2.5 py-1 text-[11px] font-medium text-white">
+              输入
+            </span>
+          </div>
           <Textarea
             value={markdown}
             onChange={(e) => setMarkdown(e.target.value)}
             placeholder="在此输入 Markdown 内容..."
-            className="flex-1 resize-none border-0 font-mono text-sm"
+            className="min-h-0 flex-1 resize-none border-0 bg-white/95 p-4 font-mono text-[15px] leading-7 shadow-none"
           />
         </div>
 
         {/* 右侧：预览区（使用iframe隔离） */}
-        <div className="flex flex-col overflow-hidden rounded-lg border bg-white">
+        <div className="flex min-h-[calc(100dvh-280px)] flex-col overflow-hidden rounded-lg border border-slate-200/90 bg-white shadow-[0_18px_50px_-36px_rgba(15,23,42,0.55)] lg:h-full lg:min-h-0">
+          <div className="flex h-12 shrink-0 items-center justify-between border-b border-slate-200 bg-slate-50/90 px-4">
+            <span className="flex items-center gap-2 text-sm font-semibold text-slate-800">
+              <Eye className="h-4 w-4 text-teal-700" />
+              预览
+            </span>
+            <span className="rounded-full bg-teal-700 px-2.5 py-1 text-[11px] font-medium text-white">
+              微信
+            </span>
+          </div>
           {html ? (
             <iframe
               ref={iframeRef}
@@ -191,10 +246,26 @@ export function WechatFeature() {
               title="微信预览"
             />
           ) : (
-            <div className="flex h-full items-center justify-center text-sm text-gray-400">
-              转换后的内容将在这里显示
+            <div className="flex h-full flex-col items-center justify-center gap-3 bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_100%)] p-8 text-center text-sm text-slate-500">
+              <div className="flex h-14 w-14 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-400 shadow-sm">
+                <Eye className="h-6 w-6" />
+              </div>
+              <span className="font-medium">等待预览</span>
             </div>
           )}
+        </div>
+      </div>
+
+      <div className="shrink-0 rounded-lg border border-slate-200 bg-white/95 p-2 shadow-[0_-18px_50px_-34px_rgba(15,23,42,0.55)] lg:hidden">
+        <div className="grid grid-cols-[1fr_auto] gap-2">
+          <Button onClick={handleConvert} disabled={isPending} className="h-12 rounded-lg shadow-[0_14px_26px_-18px_rgba(29,78,216,0.9)]">
+            <WandSparkles className="h-4 w-4" />
+            {isPending ? '转换中...' : '转换'}
+          </Button>
+          <Button onClick={handleCopy} disabled={!html} variant="outline" className="h-12 w-28 rounded-lg border-slate-200 bg-white">
+            <Copy className="h-4 w-4" />
+            复制
+          </Button>
         </div>
       </div>
     </div>

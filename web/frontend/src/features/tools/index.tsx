@@ -17,17 +17,17 @@ export function ToolsFeature() {
   const { currentTool, setCurrentTool } = useToolsStore();
 
   return (
-    <div className="flex h-full overflow-auto">
-      <div className="mx-auto w-full max-w-4xl p-6 animate-liquid-rise">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gradient-primary" style={{ fontFamily: 'var(--font-display)' }}>工具箱</h2>
-          <p className="text-sm text-muted-foreground mt-1">实用翻译辅助工具</p>
+    <div className="flex h-full overflow-auto bg-[#f7f8fa] md:bg-transparent">
+      <div className="mx-auto w-full max-w-5xl p-3 animate-liquid-rise md:p-6">
+        <div className="mb-4 flex flex-col gap-1 md:mb-5">
+          <h2 className="text-2xl font-semibold tracking-normal text-slate-950 md:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>工具箱</h2>
+          <p className="text-sm text-slate-500">常用翻译辅助工具集中处理。</p>
         </div>
 
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
-          <TabsList className="mb-6 card-glass p-1">
+          <TabsList className="mb-4 grid h-auto w-full grid-cols-2 gap-1 p-1 sm:inline-flex sm:w-auto sm:grid-cols-none md:mb-5">
             {tabs.map(tab => (
-              <TabsTrigger key={tab.id} value={tab.id} className="gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
+              <TabsTrigger key={tab.id} value={tab.id} className="h-9 gap-2">
                 {tab.icon}
                 {tab.label}
               </TabsTrigger>

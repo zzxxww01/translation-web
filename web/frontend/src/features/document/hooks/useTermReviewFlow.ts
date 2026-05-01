@@ -50,7 +50,10 @@ export function useTermReviewFlow({
         }
       } catch (error) {
         console.error('Failed to prepare term review:', error);
-        toast.warning('术语预检失败，已跳过并直接开始全文翻译');
+        toast.error('术语预检失败，已停止启动全文翻译。请稍后重试或检查模型连接。');
+        setPendingTranslationRequest(null);
+        setView(null);
+        return true;
       }
 
       return false;

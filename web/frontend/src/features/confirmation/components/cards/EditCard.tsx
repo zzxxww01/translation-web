@@ -27,7 +27,7 @@ export function EditCard({ value, onChange, onConfirm, className }: EditCardProp
   return (
     <div
       className={cn(
-        'rounded-2xl border-2 bg-card p-4 transition-all',
+        'rounded-lg border bg-card p-4 transition-colors',
         isFocused ? 'ring-2 ring-primary border-primary' : 'border-border',
         className
       )}
@@ -53,7 +53,7 @@ export function EditCard({ value, onChange, onConfirm, className }: EditCardProp
       </div>
 
       {/* 操作按钮 */}
-      <div className="flex gap-2">
+      <div className="flex flex-col gap-2 sm:flex-row">
         <Button
           variant="default"
           size="sm"

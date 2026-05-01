@@ -26,7 +26,7 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="原文..."
-        className="flex-1 resize-y min-h-[280px] max-h-[400px]"
+        className="min-h-[260px] flex-1 resize-y lg:max-h-[400px]"
       />
       <div className="mt-4 flex items-center justify-between">
         <Button variant="outline" size="sm" onClick={onClear} disabled={isLoading || !canClear}>

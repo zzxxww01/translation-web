@@ -139,6 +139,7 @@ class ConfigLoader:
             models=models,
             retry_config=retry_config,
             network=network_config,
+            rate_limit=data.get('rate_limit', {}),
             group_priority=data.get('group_priority', 999),
             base_url=data.get('base_url'),
             enabled=data.get('enabled', True)

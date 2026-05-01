@@ -481,7 +481,7 @@ export function ConfirmationFeature({
 
     return (
 
-      <div className={cn('flex h-screen items-center justify-center', className)}>
+      <div className={cn('flex min-h-[60vh] items-center justify-center p-4', className)}>
 
         <div className="text-center">
 
@@ -509,7 +509,7 @@ export function ConfirmationFeature({
 
     return (
 
-      <div className={cn('flex h-screen items-center justify-center', className)}>
+      <div className={cn('flex min-h-[60vh] items-center justify-center p-4', className)}>
 
         <div className="text-center max-w-md">
 
@@ -553,7 +553,7 @@ export function ConfirmationFeature({
 
     return (
 
-      <div className={cn('flex h-screen items-center justify-center', className)}>
+      <div className={cn('flex min-h-[60vh] items-center justify-center p-4', className)}>
 
         <div className="text-center max-w-md">
 
@@ -585,7 +585,7 @@ export function ConfirmationFeature({
 
     return (
 
-      <div className={cn('flex h-screen items-center justify-center', className)}>
+      <div className={cn('flex min-h-[60vh] items-center justify-center p-4', className)}>
 
         <div className="text-center max-w-md">
 
@@ -633,7 +633,7 @@ export function ConfirmationFeature({
 
   return (
 
-    <div className={cn('flex h-screen bg-background', className)}>
+    <div className={cn('flex h-full min-h-0 flex-col bg-background md:flex-row', className)}>
 
       {/* 左侧原文面板 (30%) */}
 
@@ -643,15 +643,15 @@ export function ConfirmationFeature({
 
       {/* 右侧版本面板 (70%) */}
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex min-h-0 flex-1 flex-col">
 
         {/* 顶部进度条和导航 */}
 
-        <div className="border-b border-border bg-card p-4">
+        <div className="border-b border-border bg-card p-3 md:p-4">
 
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
 
-            <div className="flex-1 mr-6">
+            <div className="min-w-0 flex-1 lg:mr-6">
 
               <ProgressBar
 
@@ -681,7 +681,7 @@ export function ConfirmationFeature({
 
 
 
-            <div className="flex gap-2 ml-6">
+            <div className="flex flex-wrap gap-2 lg:ml-6">
 
               <Button
 
@@ -776,6 +776,4 @@ export function ConfirmationFeature({
   );
 
 }
-
-
 
