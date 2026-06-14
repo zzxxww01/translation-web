@@ -407,9 +407,12 @@ class FourStepTranslator:
                 has_critical_issues
             )
 
-            should_polish = (
-                (reflection.fluency_score > 0 and reflection.fluency_score < 8.5) or
-                (reflection.conciseness_score > 0 and reflection.conciseness_score < 8.5)
+            # style_polish_threshold 控制润色触发阈值（默认 8.0，设为 0 关闭润色）。
+            # 此前此处硬编码 8.5，导致构造参数（含关闭润色的 0）完全失效。
+            polish_threshold = self.style_polish_threshold
+            should_polish = polish_threshold > 0 and (
+                (reflection.fluency_score > 0 and reflection.fluency_score < polish_threshold) or
+                (reflection.conciseness_score > 0 and reflection.conciseness_score < polish_threshold)
             )
 
             if should_refine or should_polish:
@@ -692,8 +695,16 @@ class FourStepTranslator:
             section_text, section.title, context, paragraph_ids
         )
 
-        # 将 JSON 结果映射回 TranslationPayload
-        trans_map = {item["id"]: item["translation"] for item in translated}
+        # 将 JSON 结果映射回 TranslationPayload。
+        # 防御性取键：即便 provider 侧已清洗，这里也跳过缺键/非字符串条目，
+        # 让缺失段落落到下方逐段回退，而不是抛 KeyError 中断整章。
+        trans_map = {
+            item["id"]: item["translation"]
+            for item in translated
+            if isinstance(item, dict)
+            and "id" in item
+            and isinstance(item.get("translation"), str)
+        }
 
         translations: List[TranslationPayload] = []
         for para in paragraphs:

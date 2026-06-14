@@ -171,7 +171,9 @@ class BatchTranslationService:
             four_step_translate_section=self.translator.translate_section,
             create_section_callback=self._create_section_callback,
             apply_four_step_translations=self._apply_four_step_translations,
-            save_section=self.project_manager.save_section,
+            # 章节循环只写章节，不每次都全量重算进度（避免 O(N²) 读盘）；
+            # 进度在所有章节 gather 完成后由 update_progress() 统一聚合一次。
+            save_section=self.project_manager.save_section_only,
         )
 
     def _get_provider_for_phase(self, phase: str) -> LLMProvider:
@@ -1016,6 +1018,10 @@ class BatchTranslationService:
             logger.info(f"[{project_id}] Launching {len(tasks)} section translation tasks")
             results = await asyncio.gather(*tasks, return_exceptions=True)
 
+            # 所有章节已落盘（章节循环用 save_section_only，不逐次重算进度）；
+            # 此处统一聚合一次项目进度，避免每章保存都全量重读所有章节的 O(N²) 开销。
+            self.project_manager.update_progress(project_id)
+
             # 处理结果
             for i, result in enumerate(results):
                 section = project.sections[i]
@@ -1230,26 +1236,9 @@ class BatchTranslationService:
                 "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
             }
 
-            # 添加一致性审查报告
-            if consistency_report:
-                result["consistency"] = {
-                    "is_consistent": consistency_report.is_consistent,
-                    "total_issues": len(consistency_report.issues),
-                    "auto_fixable_count": len(consistency_report.auto_fixable),
-                    "manual_review_count": len(consistency_report.manual_review),
-                    "issues": [
-                        {
-                            "section_id": issue.section_id,
-                            "paragraph_index": issue.paragraph_index,
-                            "issue_type": issue.issue_type,
-                            "description": issue.description,
-                            "auto_fixable": issue.auto_fixable,
-                        }
-                        for issue in consistency_report.manual_review[
-                            :10
-                        ]  # 最多返回10个需人工审核的问题
-                    ],
-                }
+            # 注意：一致性审查已从本链路移除。此前残留的 `if consistency_report:`
+            # 消费代码引用了一个从未赋值的变量，会在每次成功翻译后抛 NameError，
+            # 导致整个 run 被误判为 failed。已删除该死代码。
 
             self._write_artifact_json(run_dir / "run-summary.json", result)
 

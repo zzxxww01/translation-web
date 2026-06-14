@@ -154,13 +154,20 @@ class TranslationMemoryService:
             rules = self._load_rules()
             if not rules:
                 return []
+            # 新规则由 _append_rules 追加到列表末尾（最新在尾部）。
+            # 注入 prompt 时应优先取最新规则，否则一旦规则总数超过上限，
+            # 新学习成果永远排在上限之后、注入不进 prompt，自学习闭环失效。
             selected = []
             total_chars = 0
-            for rule in rules[:MAX_RULES_IN_PROMPT]:
+            for rule in reversed(rules):
+                if len(selected) >= MAX_RULES_IN_PROMPT:
+                    break
                 total_chars += len(rule)
                 if total_chars > MAX_RULES_CHARS:
                     break
                 selected.append(rule)
+            # 在选中的最新规则内恢复时间顺序（旧→新），读起来更自然
+            selected.reverse()
             return selected
 
     def get_all_rules(self) -> List[str]:

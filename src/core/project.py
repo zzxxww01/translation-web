@@ -498,6 +498,21 @@ class ProjectManager:
             self._save_section(project_id, section)
             self._update_progress(project_id)
 
+    def save_section_only(self, project_id: str, section: Section) -> None:
+        """仅持久化章节，不触发全量进度重算。
+
+        批量翻译循环中每个章节都调用，避免每次 save 都 get_sections() 全量重读
+        所有章节（O(N²) 磁盘/JSON 开销）。进度应在所有章节完成后由
+        update_progress() 统一聚合一次。
+        """
+        section_lock = self._get_section_lock(project_id, section.section_id)
+        with section_lock:
+            self._save_section(project_id, section)
+
+    def update_progress(self, project_id: str) -> None:
+        """聚合并持久化项目进度（读取全部章节，重算计数与状态）。"""
+        self._update_progress(project_id)
+
     def update_paragraph(
         self,
         project_id: str,

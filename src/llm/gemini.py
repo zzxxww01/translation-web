@@ -631,10 +631,12 @@ class GeminiProvider(LLMProvider):
 
     @staticmethod
     def _is_retryable_error(error_str: str) -> bool:
+        # 注意：auth 错误（401/403/invalid key）是确定性失败，重试同一 key 永远不会成功，
+        # 因此不计入 retryable，避免在最终路由上空耗整个指数退避预算。auth 失败仍允许
+        # 在 has_fresh_attempt 分支轮换到其它 key/model（见 generate 重试循环）。
         text = error_str.lower()
         return (
-            GeminiProvider._is_auth_error(error_str)
-            or GeminiProvider._is_rate_limited(error_str)
+            GeminiProvider._is_rate_limited(error_str)
             or GeminiProvider._is_high_demand_unavailable(error_str)
             or "quota" in text
             or "500" in text
@@ -819,7 +821,11 @@ class GeminiProvider(LLMProvider):
                     raise exc
 
                 has_fresh_attempt = plan_index < len(attempt_plan) - 1
-                if has_fresh_attempt and self._is_retryable_error(error_text):
+                # auth 错误不进退避循环，但仍允许换一个 key/model 再试一次（另一个 key 可能有效）
+                if has_fresh_attempt and (
+                    self._is_retryable_error(error_text)
+                    or self._is_auth_error(error_text)
+                ):
                     next_attempt = attempt_plan[plan_index + 1]
                     logger.warning(
                         "[Gemini] attempt failed on model=%s key=%s; switching to model=%s key=%s (%s/%s). err=%s",
@@ -1300,13 +1306,49 @@ class GeminiProvider(LLMProvider):
             raise
 
         if isinstance(result, dict) and "translations" in result:
-            return result["translations"]
-        if isinstance(result, list):
-            return result
+            raw = result["translations"]
+        elif isinstance(result, list):
+            raw = result
+        else:
+            raise ValueError(
+                "Batch translation response does not satisfy the JSON contract."
+            )
 
-        raise ValueError(
-            "Batch translation response does not satisfy the JSON contract."
+        return self._coerce_translation_items(
+            raw, expected_count=len(paragraph_ids), label="section batch"
         )
+
+    @staticmethod
+    def _coerce_translation_items(
+        raw: Any, *, expected_count: Optional[int] = None, label: str = "batch"
+    ) -> List[Dict[str, str]]:
+        """规整批翻 JSON 输出，只保留含 id/translation 的合法条目。
+
+        模型偶尔会返回字符串列表、缺键或多/少条目。直接交给下游
+        ``{item["id"]: item["translation"]}`` 会抛 KeyError/TypeError，
+        中断整章并绕过本应触发的逐段回退。这里宽容地丢弃畸形条目，
+        让调用方的 per-paragraph fallback 干净接管。
+        """
+        if not isinstance(raw, list):
+            logger.warning("[Gemini] %s translation output is not a list: %r", label, type(raw))
+            return []
+        cleaned: List[Dict[str, str]] = []
+        for item in raw:
+            if not isinstance(item, dict):
+                continue
+            pid = item.get("id")
+            translation = item.get("translation")
+            if pid is None or not isinstance(translation, str):
+                continue
+            cleaned.append({"id": str(pid), "translation": translation})
+        if expected_count is not None and len(cleaned) != expected_count:
+            logger.warning(
+                "[Gemini] %s translation count mismatch: got %d well-formed of expected %d",
+                label,
+                len(cleaned),
+                expected_count,
+            )
+        return cleaned
 
     def translate_source_metadata_batch(
         self,
