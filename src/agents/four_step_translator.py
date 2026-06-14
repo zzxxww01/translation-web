@@ -445,7 +445,10 @@ class FourStepTranslator:
                     reflection,
                     understanding,
                     provider=phase2_provider,
-                    issues_filter=issues_to_fix
+                    issues_filter=issues_to_fix,
+                    # 仅当确需风格润色时才处理全章每段；纯修订（仅 refine）只处理有问题的段落，
+                    # 避免对无问题段落做不必要的 LLM 改写（省 token、降低改写引入错误的风险）。
+                    polish_all=should_polish,
                 )
                 translations = [item.text for item in translation_outputs]
                 step45_duration = time.time() - step45_start
@@ -1247,9 +1250,15 @@ class FourStepTranslator:
         reflection: ReflectionResult,
         understanding: SectionUnderstanding,
         provider: Optional[LLMProvider] = None,
-        issues_filter: Optional[List[TranslationIssue]] = None
+        issues_filter: Optional[List[TranslationIssue]] = None,
+        polish_all: bool = True,
     ) -> List[TranslationPayload]:
-        """Step 4+5: 批量润色 — 合并问题修复和风格优化，每 4 段一批"""
+        """Step 4+5: 批量润色 — 合并问题修复和风格优化，每 4 段一批。
+
+        polish_all=True：处理全章每段（风格润色需要覆盖全部段落）。
+        polish_all=False：纯修订模式，只处理有问题的段落，无问题段落保留初译，
+        避免不必要的 LLM 改写（省 token、降低改写引入错误的风险）。
+        """
         llm_provider = provider or self.llm
         REFINE_BATCH_SIZE = 4  # 每批处理 4 段
 
@@ -1292,6 +1301,10 @@ class FourStepTranslator:
 
             # 获取该段落的问题列表（可能为空）
             issues = issues_by_paragraph.get(idx, [])
+
+            # 纯修订模式（不做全章润色）下，跳过无问题的段落：保留其初译，不送 LLM
+            if not polish_all and not issues:
+                continue
 
             pairs.append((source, current_translation, issues, idx))
             indices_to_polish.append(idx)
