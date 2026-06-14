@@ -72,9 +72,26 @@ class LayeredContextManager:
         # 方案 C 新增：冲突解决回调
         self._conflict_callback: Optional[callable] = None
 
+        # 性能缓存（均在 _lock 保护下读写）：
+        # 合并术语基表（article_analysis.terminology + terminology_version 额外项），
+        # 仅在术语集合变化时失效；逐段的 select_prompt_terms_for_text 仍每段执行。
+        self._merged_terms_cache: Optional[List[EnhancedTerm]] = None
+        # 章节索引 {section_id: index}，随 all_sections 构成变化重建
+        self._section_index_cache: Dict[str, int] = {}
+        self._section_index_signature: Optional[tuple] = None
+        # guidelines 规范化结果（全文不变，逐段复用）
+        self._cached_guidelines: Optional[List[str]] = None
+
+    def _invalidate_term_cache(self) -> None:
+        """术语集合变化时使合并术语基表缓存失效。"""
+        self._merged_terms_cache = None
+
     def set_article_analysis(self, analysis: ArticleAnalysis) -> None:
         """设置全文分析结果"""
-        self.article_analysis = analysis
+        with self._lock:
+            self.article_analysis = analysis
+            self._merged_terms_cache = None
+            self._cached_guidelines = None
 
     def set_section_understanding(
         self,
@@ -119,9 +136,12 @@ class LayeredContextManager:
         if self.article_analysis:
             context.article_theme = self.article_analysis.theme
             context.article_structure = self.article_analysis.structure_summary
-            context.guidelines = build_translation_guidelines(
-                self.article_analysis.guidelines
-            )
+            # guidelines 全文不变，缓存复用，避免逐段重复 strip/截断
+            if self._cached_guidelines is None:
+                self._cached_guidelines = build_translation_guidelines(
+                    self.article_analysis.guidelines
+                )
+            context.guidelines = self._cached_guidelines
             # 获取当前段落文本用于段落级过滤
             paragraph_text = ""
             if 0 <= current_paragraph_index < len(current_section.paragraphs):
@@ -143,10 +163,12 @@ class LayeredContextManager:
         if section_index < len(all_sections) - 1:
             context.next_section_title = all_sections[section_index + 1].title
 
-        # Layer 3: 局部上下文
+        # Layer 3: 局部上下文（按文档章节顺序取前文，不依赖 dict 插入顺序）
         context.previous_paragraphs = self._get_previous_paragraphs(
             current_section,
-            current_paragraph_index
+            current_paragraph_index,
+            all_sections,
+            section_index,
         )
         context.next_preview = self._get_next_preview(
             current_section,
@@ -248,6 +270,10 @@ class LayeredContextManager:
             self.defined_abbreviations.clear()
             self.terminology_version = TerminologyVersion()
             self.pending_conflicts.clear()
+            self._merged_terms_cache = None
+            self._section_index_cache = {}
+            self._section_index_signature = None
+            self._cached_guidelines = None
 
     # ============ 方案 C 新增：术语管理方法 ============
 
@@ -279,6 +305,7 @@ class LayeredContextManager:
                 if conflict:
                     conflicts.append(conflict)
                     self.pending_conflicts.append(conflict)
+            self._invalidate_term_cache()
             return conflicts
 
     def add_terms_from_prescan(
@@ -306,6 +333,7 @@ class LayeredContextManager:
         prescan_terms: List[PrescanTerm],
         section_id: str
     ) -> List[TermConflict]:
+        self._invalidate_term_cache()
         conflicts = []
 
         for prescan_term in prescan_terms:
@@ -402,6 +430,7 @@ class LayeredContextManager:
         with self._lock:
             # 更新术语表
             self.terminology_version.resolve_conflict(resolution)
+            self._invalidate_term_cache()
 
             # 移除待解决冲突
             self.pending_conflicts = [
@@ -447,11 +476,14 @@ class LayeredContextManager:
         section: Section,
         all_sections: List[Section]
     ) -> int:
-        """获取章节在列表中的索引"""
-        for i, s in enumerate(all_sections):
-            if s.section_id == section.section_id:
-                return i
-        return 0
+        """获取章节在列表中的索引（带 {section_id: index} 缓存，避免每段 O(章节) 线性扫描）"""
+        signature = tuple(s.section_id for s in all_sections)
+        if signature != self._section_index_signature:
+            self._section_index_cache = {
+                s.section_id: i for i, s in enumerate(all_sections)
+            }
+            self._section_index_signature = signature
+        return self._section_index_cache.get(section.section_id, 0)
 
     def _get_relevant_terms(self, section: Section, paragraph_text: str = "") -> List[EnhancedTerm]:
         """
@@ -463,12 +495,15 @@ class LayeredContextManager:
         if not self.article_analysis:
             return []
 
-        # 合并 article_analysis.terminology + terminology_version 中的术语
-        all_terms: List[EnhancedTerm] = list(self.article_analysis.terminology)
-        seen_keys = {t.term.lower() for t in all_terms}
-        for key, enhanced in self.terminology_version.terms.items():
-            if key not in seen_keys:
-                all_terms.append(enhanced)
+        # 合并术语基表（与段落无关，缓存复用；术语集合变化时由 _invalidate_term_cache 失效）
+        if self._merged_terms_cache is None:
+            merged: List[EnhancedTerm] = list(self.article_analysis.terminology)
+            seen_keys = {t.term.lower() for t in merged}
+            for key, enhanced in self.terminology_version.terms.items():
+                if key not in seen_keys:
+                    merged.append(enhanced)
+            self._merged_terms_cache = merged
+        all_terms = self._merged_terms_cache
 
         relevant: List[EnhancedTerm] = []
 
@@ -491,12 +526,16 @@ class LayeredContextManager:
     def _get_previous_paragraphs(
         self,
         section: Section,
-        current_index: int
+        current_index: int,
+        all_sections: Optional[List[Section]] = None,
+        section_index: Optional[int] = None,
     ) -> List[Tuple[str, str]]:
         """
         获取前文段落（原文+译文）
 
-        优先从当前章节获取，不足时从之前章节补充
+        优先从当前章节获取，不足时从**文档顺序**上的前序章节补充。
+        此前用 section_translations 的 dict 插入顺序补充，并发/乱序翻译时会把文档中
+        靠后或不相邻章节的末尾段落误当作前文注入，污染上下文一致性。
         """
         result = []
 
@@ -507,14 +546,23 @@ class LayeredContextManager:
             start = max(0, len(section_trans) - self.context_window_size)
             result = section_trans[start:]
 
-        # 如果不足，从之前章节补充
+        # 如果不足，从文档顺序上的前序章节补充
         if len(result) < self.context_window_size:
             needed = self.context_window_size - len(result)
-            for section_id in reversed(list(self.section_translations.keys())):
-                if section_id == section.section_id:
+            if all_sections is not None:
+                if section_index is None:
+                    section_index = self._get_section_index(section, all_sections)
+                prior_section_ids = [s.section_id for s in all_sections[:section_index]]
+            else:
+                # 回退：无 all_sections 时沿用插入顺序（尽量保留旧行为）
+                prior_section_ids = [
+                    sid for sid in self.section_translations.keys()
+                    if sid != section.section_id
+                ]
+            for section_id in reversed(prior_section_ids):
+                prev_trans = self.section_translations.get(section_id)
+                if not prev_trans:
                     continue
-                prev_trans = self.section_translations[section_id]
-                # 取最后几段
                 take = min(needed, len(prev_trans))
                 result = prev_trans[-take:] + result
                 needed -= take
