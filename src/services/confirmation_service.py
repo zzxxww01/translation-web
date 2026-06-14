@@ -235,7 +235,8 @@ class ConfirmationService:
         # 自学习：如果用户修改了 AI 译文，后台提取翻译规则
         ai_translation = self._get_ai_translation_text(confirmed_paragraph)
         if ai_translation and translation != ai_translation:
-            asyncio.create_task(
+            # 经 _spawn_background 调度并保留强引用，防止后台学习 Task 被 GC 回收
+            self._memory_service._spawn_background(
                 self._extract_rules_background(
                     confirmed_paragraph.source,
                     ai_translation,

@@ -245,7 +245,8 @@ async def retranslate_paragraph(
 
         # 自学习：从重翻指令中后台提取风格偏好规则
         if instruction and old_translation:
-            asyncio.create_task(
+            # 经 _spawn_background 调度并保留强引用，防止后台学习 Task 被 GC 回收
+            memory_service._spawn_background(
                 memory_service.process_retranslation_instruction(
                     instruction,
                     target_paragraph.source,

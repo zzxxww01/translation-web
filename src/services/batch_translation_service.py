@@ -803,6 +803,15 @@ class BatchTranslationService:
         Returns:
             Dict: 翻译结果统计
         """
+        # 登记主事件循环：四步法经 asyncio.to_thread 在工作线程执行，后台学习协程
+        # 需经此循环用 run_coroutine_threadsafe 回投（见 memory_service._spawn_background）。
+        try:
+            from src.services.memory_service import TranslationMemoryService
+
+            TranslationMemoryService.register_loop()
+        except Exception:
+            pass
+
         # 加载项目
         self._clear_cancelled(project_id)
         project = self._load_project_with_sections(project_id)

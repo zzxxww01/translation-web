@@ -371,21 +371,22 @@ class FourStepTranslator:
             )
             self.feedback_history.append(feedback)
 
-            # 自学习：反思评分 < 8.0 且有具体 issues 时，后台提取规则
+            # 自学习：反思评分 < 8.0 且有具体 issues 时，后台提取规则。
+            # 四步法经 asyncio.to_thread 在工作线程执行，旧的 get_event_loop+create_task
+            # 在此恒失效（无运行中循环）。改用 memory_service._spawn_background，由其在
+            # 工作线程内通过 run_coroutine_threadsafe 回投到已登记的主循环。
             if (
                 self.memory_service
                 and reflection.overall_score < 8.0
                 and reflection.issues
             ):
                 try:
-                    loop = asyncio.get_event_loop()
-                    if loop.is_running():
-                        asyncio.create_task(
-                            self.memory_service.process_reflection_issues(
-                                reflection.issues,
-                                translations,
-                            )
+                    self.memory_service._spawn_background(
+                        self.memory_service.process_reflection_issues(
+                            reflection.issues,
+                            translations,
                         )
+                    )
                 except Exception as e:
                     logger.debug("Failed to schedule reflection rule extraction: %s", e)
 

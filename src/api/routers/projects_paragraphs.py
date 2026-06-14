@@ -585,7 +585,8 @@ async def update_paragraph(
         await service.invalidate_project_cache(project_id)
 
         if correction_payload is not None:
-            asyncio.create_task(
+            # 经 _spawn_background 调度并保留强引用，防止后台学习 Task 被 GC 回收
+            memory_service._spawn_background(
                 memory_service.process_correction(
                     correction_payload["source_text"],
                     correction_payload["previous_translation"],
