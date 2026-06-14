@@ -290,6 +290,11 @@ class FourStepTranslator:
             session_id = session.id
             logger.info(f"Created translation session: {session_id}")
 
+        # 降级哨兵：若初译已完成、后续步骤（反思/润色）出错，则保留 draft 而非整章丢弃。
+        draft_translations = None
+        understanding = None
+        translation_outputs = None
+
         try:
             import time
 
@@ -548,7 +553,37 @@ class FourStepTranslator:
             )
 
         except Exception as e:
-            # 标记会话失败
+            # 若初译已完成、仅后续步骤（反思/润色）出错，则降级返回 draft，
+            # 避免丢弃已花一次完整 LLM 调用得到的译文、并在重试时从头重译浪费 token。
+            if draft_translations is not None and translation_outputs is not None:
+                logger.warning(
+                    "四步法后续步骤失败，降级返回初译结果（section=%s）: %s",
+                    section.section_id, e,
+                )
+                if self.session_service and session_id:
+                    translated_text = "\n\n".join(draft_translations)
+                    try:
+                        self.session_service.complete_session(session_id, translated_text)
+                    except Exception:
+                        pass
+                return SectionTranslationResult(
+                    section_id=section.section_id,
+                    translations=list(draft_translations),
+                    draft_translations=list(draft_translations),
+                    revised_translations=[],
+                    translation_outputs=[
+                        {
+                            "text": item.text,
+                            "tokenized_text": item.tokenized_text,
+                            "format_issues": list(item.format_issues),
+                        }
+                        for item in translation_outputs
+                    ],
+                    understanding=understanding,
+                    reflection=None,
+                    assessment=None,
+                )
+            # 初译尚未完成（Step 1/2 失败）：无可用降级，标记失败并上抛
             if self.session_service and session_id:
                 self.session_service.fail_session(session_id, error=str(e))
             raise
@@ -762,6 +797,9 @@ class FourStepTranslator:
         )
         total_sections = len(all_sections)
 
+        # 一次构建 section 上下文 payload，下方 role / translation_notes 复用
+        _section_payload = build_section_context_payload(understanding)
+
         context: Dict[str, Any] = {
             "article_theme": article_analysis.theme if article_analysis else "",
             "target_audience": (
@@ -785,12 +823,9 @@ class FourStepTranslator:
                 if article_analysis
                 else []
             ),
-            "section_role": (
-                build_section_context_payload(understanding).get("role", "")
-            ),
-            "translation_notes": (
-                build_section_context_payload(understanding).get("translation_notes", [])
-            ),
+            # 一次构建 section 上下文 payload，复用 role / translation_notes，避免重复计算
+            "section_role": _section_payload.get("role", ""),
+            "translation_notes": _section_payload.get("translation_notes", []),
             "article_challenges": (
                 build_article_challenge_payload(article_analysis.challenges)
                 if article_analysis
