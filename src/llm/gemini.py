@@ -513,6 +513,17 @@ class GeminiProvider(LLMProvider):
             future.cancel()
             raise
 
+    def _resolve_max_output_tokens(self) -> int:
+        """解析当前模型的最大输出 token 数。
+
+        此前 SDK / REST 生成配置都未传 max_output_tokens，输出依赖供应商默认值，
+        长 section / 长 JSON 可能被静默截断（再喂给 _parse_json_response 退化为 {}）。
+        """
+        config = MODEL_CONFIG.get(self.model_type)
+        if config and isinstance(config.get("max_output_tokens"), int):
+            return config["max_output_tokens"]
+        return 65536
+
     def _generate_with_rest(
         self,
         prompt: str,
@@ -524,7 +535,10 @@ class GeminiProvider(LLMProvider):
     ) -> str:
         model = model_override or self.model_name
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-        generation_config = {"temperature": temperature}
+        generation_config = {
+            "temperature": temperature,
+            "maxOutputTokens": self._resolve_max_output_tokens(),
+        }
         if response_mime_type:
             generation_config["responseMimeType"] = response_mime_type
         payload = {
@@ -729,7 +743,10 @@ class GeminiProvider(LLMProvider):
         client = self._get_client(attempt.api_key)
 
         def _call():
-            config = {"temperature": temperature}
+            config = {
+                "temperature": temperature,
+                "max_output_tokens": self._resolve_max_output_tokens(),
+            }
             if response_mime_type:
                 config["response_mime_type"] = response_mime_type
             with self._temporary_proxy_env():

@@ -21,14 +21,24 @@ _FENCED_CODE_BLOCK = re.compile(
     re.MULTILINE | re.DOTALL,
 )
 
+# Indented code blocks (lines starting with 4 spaces or a tab) — content must
+# NOT be escaped. A run of consecutive indented lines is protected as one block.
+_INDENTED_CODE_BLOCK = re.compile(r"(?:^(?: {4}|\t).*(?:\n|$))+", re.MULTILINE)
+
+# Table rows (lines starting with optional whitespace then `|`). Cell contents
+# (which may legitimately contain `$`, `<`, `>`) must NOT be escaped.
+_TABLE_ROW = re.compile(r"^[ \t]*\|.*$", re.MULTILINE)
+
 # Inline code spans (`...`) — must NOT be touched.
 _INLINE_CODE = re.compile(r"`[^`]+`")
 
-# Markdown images: ![alt](url) or ![alt](url "title")
-_MD_IMAGE = re.compile(r"!\[[^\]]*\]\([^)]+\)")
+# Markdown images: ![alt](url) or ![alt](url "title").
+# URL may contain one level of nested parens, e.g. .../wiki/Foo_(bar).
+_PAREN_URL = r"\([^()]*(?:\([^()]*\)[^()]*)*\)"
+_MD_IMAGE = re.compile(r"!\[[^\]]*\]" + _PAREN_URL)
 
-# Markdown links: [text](url) or [text](url "title")
-_MD_LINK = re.compile(r"\[[^\]]*\]\([^)]+\)")
+# Markdown links: [text](url) or [text](url "title").
+_MD_LINK = re.compile(r"\[[^\]]*\]" + _PAREN_URL)
 
 # HTML tags (including self-closing) — preserve as-is.
 _HTML_TAG = re.compile(r"</?[a-zA-Z][^>]*>")
@@ -94,8 +104,11 @@ def postprocess_markdown(content: str) -> str:
         protected.append(match.group(0))
         return f"\x00PROTECTED_{idx}\x00"
 
-    # Order matters: fenced code first (largest), then inline code, images, links, HTML.
+    # Order matters: fenced code first (largest), then indented code blocks and
+    # table rows (whole-line protection), then inline code, images, links, HTML.
     work = _FENCED_CODE_BLOCK.sub(_protect, content)
+    work = _INDENTED_CODE_BLOCK.sub(_protect, work)
+    work = _TABLE_ROW.sub(_protect, work)
     work = _INLINE_CODE.sub(_protect, work)
     work = _MD_IMAGE.sub(_protect, work)
     work = _MD_LINK.sub(_protect, work)
