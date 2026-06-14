@@ -494,8 +494,14 @@ class GeminiProvider(LLMProvider):
             self._client_cache[api_key] = client
             return client
 
-    # Shared thread pool for timeout-guarded LLM calls
-    _timeout_executor = ThreadPoolExecutor(max_workers=4)
+    # Shared thread pool for timeout-guarded LLM calls.
+    # 章节级翻译现在通过 asyncio.to_thread 真并发执行；SDK 传输模式下每个 generate()
+    # 都经此池提交。若仍固定 4 worker，会把高并发翻译重新卡回 4 路串行。改为按需放大
+    # （主要是网络 IO 等待，worker 多无妨），可用 GEMINI_TIMEOUT_POOL_WORKERS 覆盖。
+    _timeout_executor = ThreadPoolExecutor(
+        max_workers=max(16, int(os.getenv("GEMINI_TIMEOUT_POOL_WORKERS", "0") or 0)),
+        thread_name_prefix="gemini-timeout",
+    )
 
     def _generate_with_timeout_fn(self, fn, timeout: int | None):
         if not timeout or timeout <= 0:

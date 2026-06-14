@@ -1339,7 +1339,9 @@ class BatchTranslationService:
                     }
                 )
 
-            prescan_result = self.translator.prescan_section(
+            # prescan_section 是同步阻塞 LLM 调用，卸载到线程池使其与其它章节工作重叠。
+            prescan_result = await asyncio.to_thread(
+                self.translator.prescan_section,
                 section=section,
                 on_conflict=record_conflict,
             )
@@ -1412,11 +1414,10 @@ class BatchTranslationService:
                 if not source:
                     continue
                 for term in tracked:
-                    key = term.term.lower()
-                    if key in self.context_manager.term_tracker.used_translations:
+                    if self.context_manager.has_term_usage(term.term):
                         continue  # already recorded
                     if _count_term_occurrences(source, term.term) > 0:
-                        self.context_manager.term_tracker.record_usage(
+                        self.context_manager.record_term_usage(
                             term.term,
                             term.translation or term.term,
                             section.section_id,
@@ -1477,11 +1478,10 @@ class BatchTranslationService:
                 continue
 
             for term in tracked_terms:
-                key = term.term.lower()
-                if key in self.context_manager.term_tracker.used_translations:
+                if self.context_manager.has_term_usage(term.term):
                     continue
                 if _count_term_occurrences(source, term.term) > 0:
-                    self.context_manager.term_tracker.record_usage(
+                    self.context_manager.record_term_usage(
                         term.term,
                         term.translation or term.term,
                         section.section_id,
@@ -2131,15 +2131,18 @@ class BatchTranslationService:
             "article_challenges": build_article_challenge_payload(analysis.challenges),
             "format_tokens": format_tokens,
             "format_token_count": token_count,
-            "term_usage": self.context_manager.term_tracker.used_translations.copy(),
+            "term_usage": self.context_manager.snapshot_term_usage(),
         }
 
         if not section_lines:
             return dehydrated_translations
 
-        # 使用Phase 1 provider（如果提供）或默认provider
+        # 使用Phase 1 provider（如果提供）或默认provider。
+        # translate_section 是同步阻塞网络调用，卸载到线程池，使 gather 的
+        # 多章节并发真正生效（否则会阻塞事件循环，章节退化为串行）。
         provider = phase1_provider or self.llm
-        translated = provider.translate_section(
+        translated = await asyncio.to_thread(
+            provider.translate_section,
             section_text=section_text,
             section_title=section.title,
             context=context,

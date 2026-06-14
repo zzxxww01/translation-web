@@ -828,9 +828,10 @@ class FourStepTranslator:
         if feedback_text:
             context["feedback_from_previous_sections"] = feedback_text
 
-        # 注入术语使用记录
-        if self.context_manager.term_tracker.used_translations:
-            context["term_usage"] = self.context_manager.term_tracker.used_translations.copy()
+        # 注入术语使用记录（经加锁快照，避免与并发章节的写入竞态）
+        term_usage_snapshot = self.context_manager.snapshot_term_usage()
+        if term_usage_snapshot:
+            context["term_usage"] = term_usage_snapshot
 
         return context
 
@@ -1469,11 +1470,10 @@ class FourStepTranslator:
         self, terms: List[EnhancedTerm]
     ) -> List[EnhancedTerm]:
         """根据 term_tracker 已有的使用记录修正术语翻译，与单段翻译路径对齐。"""
-        tracker = self.context_manager.term_tracker
         corrected: List[EnhancedTerm] = []
         for term in terms:
-            if term.term.lower() in tracker.used_translations:
-                preferred = tracker.get_preferred_translation(term.term)
+            if self.context_manager.has_term_usage(term.term):
+                preferred = self.context_manager.get_preferred_term_translation(term.term)
                 if preferred:
                     term = term.model_copy(update={"translation": preferred})
             corrected.append(term)

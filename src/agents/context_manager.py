@@ -9,6 +9,7 @@ Layer 3: 局部上下文（精确）
 Layer 4: 动态累积上下文
 """
 
+import threading
 from typing import List, Dict, Optional, Tuple
 
 from ..core.constants import MAX_GLOSSARY_TERMS_IN_PROMPT
@@ -44,6 +45,12 @@ class LayeredContextManager:
         self.context_window_size = context_window_size
         self.preview_size = preview_size
 
+        # 并发保护：章节级翻译在批量流程中由 asyncio.to_thread 真并发执行，
+        # 多个工作线程会并发读写下方共享可变状态（term_tracker、section_translations、
+        # terminology_version、defined_abbreviations 等）。用一把可重入锁串行化这些
+        # 纯内存操作（均无 LLM 调用，开销极低），LLM 调用本身在锁外执行。
+        self._lock = threading.RLock()
+
         # 术语使用追踪
         self.term_tracker = TermUsageTracker()
 
@@ -75,7 +82,8 @@ class LayeredContextManager:
         understanding: SectionUnderstanding
     ) -> None:
         """缓存章节理解结果"""
-        self.section_understandings[section_id] = understanding
+        with self._lock:
+            self.section_understandings[section_id] = understanding
 
     def build_context(
         self,
@@ -94,6 +102,17 @@ class LayeredContextManager:
         Returns:
             LayeredContext: 分层上下文
         """
+        with self._lock:
+            return self._build_context_locked(
+                current_section, current_paragraph_index, all_sections
+            )
+
+    def _build_context_locked(
+        self,
+        current_section: Section,
+        current_paragraph_index: int,
+        all_sections: List[Section]
+    ) -> LayeredContext:
         context = LayeredContext()
 
         # Layer 1: 全文级上下文
@@ -156,45 +175,79 @@ class LayeredContextManager:
             translation: 译文
             terms_used: 使用的术语翻译 {term: translation}
         """
-        # 记录段落翻译
-        if section_id not in self.section_translations:
-            self.section_translations[section_id] = []
-        self.section_translations[section_id].append((source, translation))
+        with self._lock:
+            # 记录段落翻译
+            if section_id not in self.section_translations:
+                self.section_translations[section_id] = []
+            self.section_translations[section_id].append((source, translation))
 
-        # 更新术语使用记录
-        if terms_used:
-            for term, trans in terms_used.items():
-                self.term_tracker.record_usage(term, trans, section_id)
+            # 更新术语使用记录
+            if terms_used:
+                for term, trans in terms_used.items():
+                    self.term_tracker.record_usage(term, trans, section_id)
 
-        # 检测并记录缩写词定义
-        self._detect_abbreviations(translation)
+            # 检测并记录缩写词定义
+            self._detect_abbreviations(translation)
+
+    # ============ 线程安全的术语追踪访问器 ============
+    # 批量翻译流程中，外部调用方（batch_translation_service / four_step_translator）
+    # 需要直接读写 term_tracker。真并发下必须经由这些加锁访问器，不可直接触碰
+    # term_tracker 的内部 dict，否则会出现 "dict changed size during iteration"
+    # 及首现标注非确定性等竞态。
+
+    def record_term_usage(self, term: str, translation: str, section_id: str) -> None:
+        """线程安全地记录一次术语使用。"""
+        with self._lock:
+            self.term_tracker.record_usage(term, translation, section_id)
+
+    def has_term_usage(self, term: str) -> bool:
+        """线程安全地判断某术语是否已有使用记录。"""
+        with self._lock:
+            return term.lower() in self.term_tracker.used_translations
+
+    def snapshot_term_usage(self) -> Dict[str, List[str]]:
+        """线程安全地获取 used_translations 的浅拷贝快照（值列表也拷贝）。"""
+        with self._lock:
+            return {
+                key: list(values)
+                for key, values in self.term_tracker.used_translations.items()
+            }
+
+    def get_preferred_term_translation(self, term: str) -> Optional[str]:
+        """线程安全地获取术语的首选译法。"""
+        with self._lock:
+            return self.term_tracker.get_preferred_translation(term)
 
     def get_section_translations(self, section_id: str) -> List[Tuple[str, str]]:
         """获取章节的所有翻译记录"""
-        return self.section_translations.get(section_id, [])
+        with self._lock:
+            return list(self.section_translations.get(section_id, []))
 
     def get_all_translations(self) -> Dict[str, List[str]]:
         """获取所有章节的译文（用于一致性审查）"""
-        return {
-            section_id: [t[1] for t in translations]
-            for section_id, translations in self.section_translations.items()
-        }
+        with self._lock:
+            return {
+                section_id: [t[1] for t in translations]
+                for section_id, translations in self.section_translations.items()
+            }
 
     def reset_section(self, section_id: str) -> None:
         """重置章节的翻译记录（用于重新翻译）"""
-        if section_id in self.section_translations:
-            del self.section_translations[section_id]
-        if section_id in self.section_understandings:
-            del self.section_understandings[section_id]
+        with self._lock:
+            if section_id in self.section_translations:
+                del self.section_translations[section_id]
+            if section_id in self.section_understandings:
+                del self.section_understandings[section_id]
 
     def reset_all(self) -> None:
         """重置所有上下文"""
-        self.section_translations.clear()
-        self.section_understandings.clear()
-        self.term_tracker = TermUsageTracker()
-        self.defined_abbreviations.clear()
-        self.terminology_version = TerminologyVersion()
-        self.pending_conflicts.clear()
+        with self._lock:
+            self.section_translations.clear()
+            self.section_understandings.clear()
+            self.term_tracker = TermUsageTracker()
+            self.defined_abbreviations.clear()
+            self.terminology_version = TerminologyVersion()
+            self.pending_conflicts.clear()
 
     # ============ 方案 C 新增：术语管理方法 ============
 
@@ -219,13 +272,14 @@ class LayeredContextManager:
         Returns:
             List[TermConflict]: 检测到的冲突列表
         """
-        conflicts = []
-        for term in terms:
-            conflict = self.terminology_version.add_term(term)
-            if conflict:
-                conflicts.append(conflict)
-                self.pending_conflicts.append(conflict)
-        return conflicts
+        with self._lock:
+            conflicts = []
+            for term in terms:
+                conflict = self.terminology_version.add_term(term)
+                if conflict:
+                    conflicts.append(conflict)
+                    self.pending_conflicts.append(conflict)
+            return conflicts
 
     def add_terms_from_prescan(
         self,
@@ -244,6 +298,14 @@ class LayeredContextManager:
         Returns:
             List[TermConflict]: 检测到的冲突列表
         """
+        with self._lock:
+            return self._add_terms_from_prescan_locked(prescan_terms, section_id)
+
+    def _add_terms_from_prescan_locked(
+        self,
+        prescan_terms: List[PrescanTerm],
+        section_id: str
+    ) -> List[TermConflict]:
         conflicts = []
 
         for prescan_term in prescan_terms:
@@ -309,22 +371,23 @@ class LayeredContextManager:
         Returns:
             TermConflict: 如果有冲突返回冲突对象，否则返回 None
         """
-        existing = self.terminology_version.get_term(term)
-        if existing and existing.translation and existing.translation != new_translation:
-            return TermConflict(
-                term=term,
-                existing_translation=existing.translation,
-                new_translation=new_translation,
-                existing_context=existing.context_meaning,
-                new_context=new_context,
-                existing_note=existing.context_meaning,
-                new_note=new_context,
-                existing_section_id=self.term_tracker.first_occurrences.get(
-                    term.lower(), ""
-                ),
-                new_section_id=section_id
-            )
-        return None
+        with self._lock:
+            existing = self.terminology_version.get_term(term)
+            if existing and existing.translation and existing.translation != new_translation:
+                return TermConflict(
+                    term=term,
+                    existing_translation=existing.translation,
+                    new_translation=new_translation,
+                    existing_context=existing.context_meaning,
+                    new_context=new_context,
+                    existing_note=existing.context_meaning,
+                    new_note=new_context,
+                    existing_section_id=self.term_tracker.first_occurrences.get(
+                        term.lower(), ""
+                    ),
+                    new_section_id=section_id
+                )
+            return None
 
     def resolve_conflict(self, resolution: TermConflictResolution) -> int:
         """
@@ -336,25 +399,26 @@ class LayeredContextManager:
         Returns:
             int: 受影响的段落数（如果 apply_to_all=True）
         """
-        # 更新术语表
-        self.terminology_version.resolve_conflict(resolution)
+        with self._lock:
+            # 更新术语表
+            self.terminology_version.resolve_conflict(resolution)
 
-        # 移除待解决冲突
-        self.pending_conflicts = [
-            c for c in self.pending_conflicts
-            if c.term.lower() != resolution.term.lower()
-        ]
+            # 移除待解决冲突
+            self.pending_conflicts = [
+                c for c in self.pending_conflicts
+                if c.term.lower() != resolution.term.lower()
+            ]
 
-        # 如果需要应用到所有已翻译段落，返回受影响数量
-        affected_count = 0
-        if resolution.apply_to_all:
-            # 统计包含该术语的段落数
-            for section_id, translations in self.section_translations.items():
-                for source, _ in translations:
-                    if resolution.term.lower() in source.lower():
-                        affected_count += 1
+            # 如果需要应用到所有已翻译段落，返回受影响数量
+            affected_count = 0
+            if resolution.apply_to_all:
+                # 统计包含该术语的段落数
+                for section_id, translations in self.section_translations.items():
+                    for source, _ in translations:
+                        if resolution.term.lower() in source.lower():
+                            affected_count += 1
 
-        return affected_count
+            return affected_count
 
     def has_pending_conflicts(self) -> bool:
         """检查是否有待解决的冲突"""
