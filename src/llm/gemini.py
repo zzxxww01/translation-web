@@ -797,7 +797,9 @@ class GeminiProvider(LLMProvider):
             "rest" if self._use_rest_transport() else "sdk",
         )
 
-        extra_retry_index = 0
+        # 贯穿整个重试循环单调递增的退避计数器，使 2**n 指数退避在 key/model 轮换
+        # 期间也真实增长（此前只在最终路由分支递增，轮换期间恒为 0）。
+        backoff_index = 0
         last_exception: Exception | None = None
         response_mime_type = "application/json" if response_format == "json" else None
 
@@ -849,6 +851,23 @@ class GeminiProvider(LLMProvider):
                     self._is_retryable_error(error_text)
                     or self._is_auth_error(error_text)
                 ):
+                    # 限流时换 key 前也要退避：否则会瞬间把所有 key 逐个撞限流、全部烧光，
+                    # 等真正进入退避路径时已无可用 key。auth/其它暂时性错误仍快速轮换。
+                    if self._is_rate_limited(error_text):
+                        retry_delay = self._retry_delay_for_error(
+                            error_text, backoff_index
+                        )
+                        backoff_index += 1
+                        logger.warning(
+                            "[Gemini] rate limited on model=%s key=%s; backing off %.1fs before switching key (%s/%s). err=%s",
+                            attempt.model_name,
+                            attempt.key_role,
+                            retry_delay,
+                            attempt_index + 1,
+                            max_attempts,
+                            error_text,
+                        )
+                        time.sleep(retry_delay)
                     next_attempt = attempt_plan[plan_index + 1]
                     logger.warning(
                         "[Gemini] attempt failed on model=%s key=%s; switching to model=%s key=%s (%s/%s). err=%s",
@@ -866,9 +885,9 @@ class GeminiProvider(LLMProvider):
                     error_text
                 ):
                     retry_delay = self._retry_delay_for_error(
-                        error_text, extra_retry_index
+                        error_text, backoff_index
                     )
-                    extra_retry_index += 1
+                    backoff_index += 1
                     logger.warning(
                         "[Gemini] request failed on final route model=%s key=%s; retry in %.1fs (%s/%s). err=%s",
                         attempt.model_name,
