@@ -354,4 +354,8 @@ def build_term_usage_from_project(
                 if _count_term_occurrences(source, term.original) > 0:
                     usage[key] = [term.translation or term.original]
 
+            # 所有 tracked 术语都已找到首次出现，后续段落不会改变结果，提前返回
+            if len(usage) >= len(tracked):
+                return usage
+
     return usage

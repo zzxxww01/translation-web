@@ -98,6 +98,9 @@ class ProviderAdapter:
         self.model_alias = model_alias
         self.config_loader = get_config_loader()
         self.llm_config = self.config_loader.load()
+        # 缓存已构建的 provider 实例，按 (type, provider_id, real_model, api_key) 复用，
+        # 避免每次 fallback attempt / 每次请求都重建 Provider 及其 genai Client/HTTP 会话。
+        self._provider_cache: dict = {}
 
         # 构建故障转移计划
         self.fallback_strategy = FallbackStrategy(self.llm_config)
@@ -123,6 +126,22 @@ class ProviderAdapter:
         provider_config = attempt.provider
         model_config = attempt.model
         api_key = attempt.api_key.key
+
+        # 懒初始化（兼容通过 __new__ 绕过 __init__ 构造的实例，如测试）
+        cache = getattr(self, "_provider_cache", None)
+        if cache is None:
+            cache = self._provider_cache = {}
+
+        cache_key = (
+            provider_config.type,
+            provider_config.provider_id,
+            model_config.real_model,
+            api_key,
+        )
+        cached = cache.get(cache_key)
+        if cached is not None:
+            return cached
+
         network_policy = _build_runtime_network_policy(
             provider_config.type, provider_config.network
         )
@@ -134,7 +153,7 @@ class ProviderAdapter:
         if provider_config.type == "gemini":
             from .gemini import GeminiProvider
 
-            return GeminiProvider(
+            provider = GeminiProvider(
                 api_key=api_key,
                 model=model_config.real_model,
                 network_policy=network_policy,
@@ -144,7 +163,7 @@ class ProviderAdapter:
         elif provider_config.type == "vectorengine":
             from .vectorengine import VectorEngineProvider
 
-            return VectorEngineProvider(
+            provider = VectorEngineProvider(
                 api_key=api_key,
                 base_url=provider_config.base_url,
                 model=model_config.real_model,
@@ -154,6 +173,9 @@ class ProviderAdapter:
 
         else:
             raise ValueError(f"Unknown provider type: {provider_config.type}")
+
+        cache[cache_key] = provider
+        return provider
 
     def generate_with_fallback(
         self,

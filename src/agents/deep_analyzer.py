@@ -218,8 +218,11 @@ class DeepAnalyzer:
                         )
 
                     deep_analysis_result = None
+                    deep_error = None
                     pending = [future_deep] + ([future_terms] if future_terms else [])
 
+                    # 在循环内收集两者结果（不在深度分析失败时提前 raise），
+                    # 确保已成功的术语验证结果被缓存复用，避免重试时重复调用。
                     for future in as_completed(pending, timeout=timeout*2 if timeout else None):
                         self._raise_if_cancelled(should_cancel)
 
@@ -229,11 +232,8 @@ class DeepAnalyzer:
                                 sampled_terms_count = len(deep_analysis_result.get("sampled_terms", []))
                                 logger.info(f"Phase 0.2a SUCCESS: sampled_terms={sampled_terms_count}")
                             except Exception as exc:
+                                deep_error = exc
                                 logger.error(f"Phase 0.2a FAILED: {str(exc)[:200]}")
-                                # 深度分析失败：取消仍在运行的术语验证，避免阻塞等待其超时
-                                if future_terms is not None:
-                                    future_terms.cancel()
-                                raise
 
                         elif future is future_terms:
                             try:
@@ -244,6 +244,9 @@ class DeepAnalyzer:
                                 # 术语验证失败不影响整体流程，标记为已尝试（空），不再重试
                                 logger.warning(f"Phase 0.2b FAILED: {str(exc)[:200]}, continuing without verified terms")
                                 cached_verified_terms = []
+
+                    if deep_error is not None:
+                        raise deep_error
                 finally:
                     # 不阻塞等待仍在运行的 future（默认 with 会 wait=True 拖到术语验证超时）
                     executor.shutdown(wait=False, cancel_futures=True)
