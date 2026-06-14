@@ -41,7 +41,12 @@ _MD_IMAGE = re.compile(r"!\[[^\]]*\]" + _PAREN_URL)
 _MD_LINK = re.compile(r"\[[^\]]*\]" + _PAREN_URL)
 
 # HTML tags (including self-closing) — preserve as-is.
-_HTML_TAG = re.compile(r"</?[a-zA-Z][^>]*>")
+# 收紧匹配，避免把散文里的 `<x and y>`（如 "5 < x and y > 3"）误判为标签而被保护，
+# 这类应当作普通文本转义。只识别：无属性标签（<div> </p> <br/>）或含 `=` 属性的标签。
+_HTML_TAG = re.compile(
+    r"</?[a-zA-Z][a-zA-Z0-9]*\s*/?>"
+    r"|<[a-zA-Z][a-zA-Z0-9]*\s+[^<>]*=[^<>]*>"
+)
 
 # HTML comments <!-- ... -->
 _HTML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)

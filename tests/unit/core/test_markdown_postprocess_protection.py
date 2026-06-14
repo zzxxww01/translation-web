@@ -46,6 +46,21 @@ def test_normal_text_still_escaped():
     assert "a&gt;b" in out
 
 
+def test_real_html_tags_preserved():
+    out = postprocess_markdown("保留 <div> 与 </p> 与 <br/> 与 <a href=\"x\">L</a>")
+    assert "<div>" in out
+    assert "</p>" in out
+    assert "<br/>" in out
+    assert '<a href="x">' in out
+
+
+def test_prose_angle_brackets_not_treated_as_tag():
+    # "<x and y>" 这类散文片段不应被当作 HTML 标签保护，应转义 `<`
+    out = postprocess_markdown("当 a < x and y 时")
+    assert "&lt;" in out
+    assert "<x" not in out
+
+
 def test_idempotent():
     src = "正文 $5 a < b\n\n    code = $x\n\n| c | $1 |"
     once = postprocess_markdown(src)

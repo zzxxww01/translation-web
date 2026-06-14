@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import html
+import logging
 import re
 from dataclasses import dataclass, field
 from typing import Callable, Iterable, List, Optional, Sequence
 
 from .models import InlineElement, Paragraph
+
+logger = logging.getLogger(__name__)
 
 
 TOKEN_TYPE_MAP = {
@@ -406,6 +409,13 @@ def reconstruct_block_tokenized_text(
         )
         if tokenized_text is None:
             if not paragraph.has_usable_translation() and fallback_to_source:
+                # 未翻译段落回填源文：记录告警以避免“静默把英文原文混入中文导出”
+                # 而无任何信号（断点续传/部分翻译场景）。不计入 issues，以免触发硬失败。
+                logger.warning(
+                    "Export fallback: paragraph %s has no usable translation; "
+                    "using source text verbatim.",
+                    paragraph.id,
+                )
                 tokenized_text = tokenize_text(paragraph.source, paragraph.inline_elements)
             elif paragraph.expected_tokens:
                 issues.append(
