@@ -27,6 +27,11 @@ MAX_REVIEW_TERMS_IN_PROMPT = 10  # 反思/润色阶段的关键术语数量
 MAX_LEARNED_RULES_IN_PROMPT = 20  # Prompt 中最大已学习规则条数
 MAX_LEARNED_RULES_CHARS = 600  # Prompt 中已学习规则的总字符上限
 
+# 自由文本上下文条目的字符上限：除"条数"外再以字符量收口，防止单条超长 guideline /
+# note / challenge 或其叠加把上下文撑爆（按 token≈字符量的粗略口径）。
+MAX_CONTEXT_ITEM_CHARS = 240  # 单条自由文本（guideline/note/key_point）字符上限
+MAX_CONTEXT_GROUP_CHARS = 800  # 单组自由文本累计字符上限
+
 # ============ 长文上下文配置 ============
 MAX_ARTICLE_GUIDELINES_IN_PROMPT = 6  # 长文翻译阶段注入的全局指南数量
 MAX_SECTION_KEY_POINTS_IN_PROMPT = 4  # 章节核心论点数量

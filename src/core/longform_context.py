@@ -7,6 +7,8 @@ from typing import Any, Dict, Iterable, List, Optional
 from .constants import (
     MAX_ARTICLE_CHALLENGES_IN_PROMPT,
     MAX_ARTICLE_GUIDELINES_IN_PROMPT,
+    MAX_CONTEXT_GROUP_CHARS,
+    MAX_CONTEXT_ITEM_CHARS,
     MAX_FORMAT_TOKENS_IN_PROMPT,
     MAX_GLOSSARY_TERMS_IN_PROMPT,
     MAX_REVIEW_PRIORITIES_IN_PROMPT,
@@ -17,16 +19,34 @@ from .constants import (
 )
 
 
-def limit_non_empty_strings(items: Optional[Iterable[Any]], limit: int) -> List[str]:
+def limit_non_empty_strings(
+    items: Optional[Iterable[Any]],
+    limit: int,
+    max_chars_per_item: Optional[int] = None,
+    max_total_chars: Optional[int] = None,
+) -> List[str]:
+    """裁剪非空字符串列表。
+
+    除"条数"上限外，可选地按字符量收口：
+    - max_chars_per_item: 单条超长则截断并加省略号；
+    - max_total_chars: 累计字符达到上限即停止。
+    使上下文预算不仅控制条数，也控制真实体积（token≈字符量的粗略口径）。
+    """
     if not items or limit <= 0:
         return []
 
     normalized: List[str] = []
+    total_chars = 0
     for item in items:
         text = str(item).strip()
         if not text:
             continue
+        if max_chars_per_item and len(text) > max_chars_per_item:
+            text = text[: max_chars_per_item - 1].rstrip() + "…"
+        if max_total_chars is not None and total_chars + len(text) > max_total_chars:
+            break
         normalized.append(text)
+        total_chars += len(text)
         if len(normalized) >= limit:
             break
     return normalized
@@ -79,7 +99,12 @@ def build_translation_guidelines(
     guidelines: Optional[Iterable[Any]],
     limit: int = MAX_ARTICLE_GUIDELINES_IN_PROMPT,
 ) -> List[str]:
-    return limit_non_empty_strings(guidelines, limit)
+    return limit_non_empty_strings(
+        guidelines,
+        limit,
+        max_chars_per_item=MAX_CONTEXT_ITEM_CHARS,
+        max_total_chars=MAX_CONTEXT_GROUP_CHARS,
+    )
 
 
 def build_review_priorities(
@@ -110,10 +135,14 @@ def build_section_context_payload(understanding: Any) -> Dict[str, Any]:
         "key_points": limit_non_empty_strings(
             key_points,
             MAX_SECTION_KEY_POINTS_IN_PROMPT,
+            max_chars_per_item=MAX_CONTEXT_ITEM_CHARS,
+            max_total_chars=MAX_CONTEXT_GROUP_CHARS,
         ),
         "translation_notes": limit_non_empty_strings(
             translation_notes,
             MAX_SECTION_NOTES_IN_PROMPT,
+            max_chars_per_item=MAX_CONTEXT_ITEM_CHARS,
+            max_total_chars=MAX_CONTEXT_GROUP_CHARS,
         ),
     }
 
