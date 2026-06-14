@@ -158,6 +158,8 @@ class DeepAnalyzer:
         deep_analysis_result = None
         verified_terms = []
         last_error: Exception | None = None
+        # 跨重试复用已成功的术语验证结果（None=尚未取得，[]=已尝试但无结果）
+        cached_verified_terms: "list | None" = None
         sample_steps = [self.max_sample_chars, *self.ANALYSIS_SAMPLE_STEPS]
         deduped_steps = []
         for sample_chars in sample_steps:
@@ -195,9 +197,11 @@ class DeepAnalyzer:
                     getattr(self.llm, 'model_name', 'unknown'),
                 )
 
-                # 并发执行两个独立的LLM调用
-                with ThreadPoolExecutor(max_workers=2) as executor:
-                    # 提交任务1: 深度分析文档
+                # 并发执行：深度分析每次都做；术语验证仅在尚未取得结果时做，
+                # 重试间复用上一轮已成功的 verified_terms，避免浪费独立的 LLM 调用。
+                executor = ThreadPoolExecutor(max_workers=2)
+                future_terms = None
+                try:
                     future_deep = executor.submit(
                         self.llm.deep_analyze_document,
                         outline=sections_outline,
@@ -205,40 +209,46 @@ class DeepAnalyzer:
                         timeout=timeout
                     )
 
-                    # 提交任务2: 验证高频术语
-                    future_terms = executor.submit(
-                        self.llm.verify_high_frequency_terms,
-                        sampled_text=full_text,
-                        high_freq_candidates=high_freq_candidates,
-                        timeout=timeout
-                    )
+                    if cached_verified_terms is None:
+                        future_terms = executor.submit(
+                            self.llm.verify_high_frequency_terms,
+                            sampled_text=full_text,
+                            high_freq_candidates=high_freq_candidates,
+                            timeout=timeout
+                        )
 
-                    # 等待两个任务完成
                     deep_analysis_result = None
-                    verified_terms = []
+                    pending = [future_deep] + ([future_terms] if future_terms else [])
 
-                    for future in as_completed([future_deep, future_terms], timeout=timeout*2 if timeout else None):
+                    for future in as_completed(pending, timeout=timeout*2 if timeout else None):
                         self._raise_if_cancelled(should_cancel)
 
-                        if future == future_deep:
+                        if future is future_deep:
                             try:
                                 deep_analysis_result = future.result()
                                 sampled_terms_count = len(deep_analysis_result.get("sampled_terms", []))
                                 logger.info(f"Phase 0.2a SUCCESS: sampled_terms={sampled_terms_count}")
                             except Exception as exc:
                                 logger.error(f"Phase 0.2a FAILED: {str(exc)[:200]}")
+                                # 深度分析失败：取消仍在运行的术语验证，避免阻塞等待其超时
+                                if future_terms is not None:
+                                    future_terms.cancel()
                                 raise
 
-                        elif future == future_terms:
+                        elif future is future_terms:
                             try:
-                                verified_terms = future.result()
-                                verified_count = len([t for t in verified_terms if t.get("is_technical_term", False)])
+                                cached_verified_terms = future.result()
+                                verified_count = len([t for t in cached_verified_terms if t.get("is_technical_term", False)])
                                 logger.info(f"Phase 0.2b SUCCESS: verified_terms={verified_count}")
                             except Exception as exc:
-                                # 术语验证失败不影响整体流程
+                                # 术语验证失败不影响整体流程，标记为已尝试（空），不再重试
                                 logger.warning(f"Phase 0.2b FAILED: {str(exc)[:200]}, continuing without verified terms")
-                                verified_terms = []
+                                cached_verified_terms = []
+                finally:
+                    # 不阻塞等待仍在运行的 future（默认 with 会 wait=True 拖到术语验证超时）
+                    executor.shutdown(wait=False, cancel_futures=True)
 
+                verified_terms = cached_verified_terms or []
                 elapsed = time.time() - start_time
                 logger.info(f"Phase 0.2 CONCURRENT SUCCESS: total_elapsed={elapsed:.1f}s")
                 break
