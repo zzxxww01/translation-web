@@ -1129,6 +1129,10 @@ class FourStepTranslator:
             terminology_score=float(result.get("terminology_score", 0)),
             accuracy_score=float(result.get("accuracy_score", 0)),
             fluency_score=float(result.get("fluency_score", 0)),
+            # readability_score 此前被漏读,导致质量门控 35% 权重维度与阈值判定恒为 0、
+            # assessment.passed 恒为 False、overall 被系统性压低约 3.5 分并写入记忆/质量
+            # 产物(审计 C1)。缺失时回退 fluency_score(prompt 注明二者通常相近)。
+            readability_score=float(result.get("readability_score", result.get("fluency_score", 0)) or 0),
             conciseness_score=float(result.get("conciseness_score", 0)),
             consistency_score=float(result.get("consistency_score", 0)),
             logic_score=float(result.get("logic_score", 0)),
