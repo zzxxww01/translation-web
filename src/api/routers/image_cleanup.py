@@ -336,23 +336,11 @@ async def prevent_image_translation(
                 pm.save_section(project_id, section)
                 processed_sections += 1
 
-        # 更新项目配置
-        project_meta_path = Path(pm.projects_path) / project_id / "meta.json"
-        if project_meta_path.exists():
-            with open(project_meta_path, 'r', encoding='utf-8') as f:
-                meta_data = json.load(f)
-
-            # 添加图片翻译预防配置
-            if "config" not in meta_data:
-                meta_data["config"] = {}
-
-            meta_data["config"]["skip_image_translation"] = True
-            meta_data["config"]["image_detection_enabled"] = True
-            meta_data["updated_at"] = datetime.now().isoformat()
-
-            with open(project_meta_path, 'w', encoding='utf-8') as f:
-                json.dump(meta_data, f, ensure_ascii=False, indent=2, default=str)
-
+        # 注:此前这里向 meta.json 裸写 config.skip_image_translation /
+        # image_detection_enabled,但全仓无任何代码读取这两个标志,且 ProjectConfig
+        # 为固定 schema——下一次模型化 save_meta 会把未知键静默抹除。故移除这段无效写入,
+        # 不再对用户作出不成立的"自动跳过"承诺(审计 C27)。真正生效的是上面对 IMAGE
+        # 段落的 element_type 标记。
         logger.info(f"[Image Prevention] 完成 - 标记了 {marked_count} 个图片段落")
 
         return {
@@ -360,7 +348,7 @@ async def prevent_image_translation(
             "marked_paragraphs": marked_count,
             "processed_sections": processed_sections,
             "prevention_enabled": True,
-            "message": f"已标记 {marked_count} 个图片段落，未来翻译将自动跳过这些内容",
+            "message": f"已标记 {marked_count} 个图片段落",
             "timestamp": datetime.now().isoformat()
         }
 

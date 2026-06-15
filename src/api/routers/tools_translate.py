@@ -37,7 +37,13 @@ async def translate_text(request: Request, body: TranslateRequest):
     if body.source_lang == "auto":
         has_chinese = bool(re.search(r"[\u4e00-\u9fff]", body.text))
         target_lang = "en" if has_chinese else "zh"
+    elif body.source_lang == "zh":
+        target_lang = "en"
+    elif body.source_lang == "en":
+        target_lang = "zh"
     else:
+        # \u672a\u77e5 source_lang \u56de\u9000\u5230\u663e\u5f0f target_lang;\u907f\u514d source_lang='zh' \u5374\u56e0 target_lang
+        # \u9ed8\u8ba4 'zh' \u628a\u4e2d\u6587\u5f53\u82f1\u6587\u7ffb\u8bd1(\u5ba1\u8ba1 C22)\u3002
         target_lang = body.target_lang
 
     if target_lang == "zh":
