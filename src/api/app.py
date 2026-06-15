@@ -197,9 +197,10 @@ async def connection_status():
     """Return basic connection stats for the API port."""
     try:
         connections = _collect_port_connections(54321)
+        # 安全:仅返回聚合计数,不再回传 netstat 原始行(含本机/对端 IP:Port 与 PID,
+        # 属未授权信息泄露,见审计 U8)。
         return {
             "active_connections": len(connections),
-            "connections": connections,
             "status": "healthy" if len(connections) < 10 else "warning",
         }
     except Exception as exc:

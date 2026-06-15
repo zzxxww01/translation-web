@@ -14,6 +14,8 @@ from urllib.parse import urljoin, urlparse, unquote
 
 import requests
 
+from .url_safety import is_safe_url, resolved_ips_are_safe
+
 
 class ImageDownloader:
     """Download or copy images to a local directory."""
@@ -57,6 +59,12 @@ class ImageDownloader:
             if not src.startswith(("http://", "https://")):
                 return None
 
+            # 安全:SSRF 防护。src 来自被翻译文档(外部可控),阻止指向内网/回环/
+            # 云元数据(如 169.254.169.254)等地址。请求前解析并校验所有 IP,线程安全。
+            if not is_safe_url(src) or not resolved_ips_are_safe(src):
+                print(f"[ImageDownloader] Blocked unsafe image URL: {src}")
+                return None
+
             if not self.images_dir:
                 return None
 
@@ -73,17 +81,31 @@ class ImageDownloader:
             if local_path.exists():
                 return self._relative_image_path(filename)
 
+            # 流式下载并限制大小,避免超大响应撑爆内存(原 response.content 无上限)。
+            MAX_IMAGE_BYTES = 20 * 1024 * 1024
             response = requests.get(
                 src,
                 timeout=30,
                 headers={
                     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
                 },
+                stream=True,
             )
             response.raise_for_status()
 
+            downloaded = 0
             with open(local_path, "wb") as f:
-                f.write(response.content)
+                for chunk in response.iter_content(chunk_size=8192):
+                    if not chunk:
+                        continue
+                    downloaded += len(chunk)
+                    if downloaded > MAX_IMAGE_BYTES:
+                        f.close()
+                        local_path.unlink(missing_ok=True)
+                        raise ValueError(
+                            f"Image too large: > {MAX_IMAGE_BYTES} bytes from {src}"
+                        )
+                    f.write(chunk)
 
             return self._relative_image_path(filename)
 

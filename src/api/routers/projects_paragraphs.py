@@ -454,7 +454,7 @@ async def translate_paragraph(
     except RuntimeError as error:
         raise _to_bad_request(error, "Translation")
     except Exception as error:
-        raise BadRequestException(detail=f"Unexpected translation error: {str(error)}")
+        raise _to_bad_request(error, "Translation")
 
 
 @router.post(
@@ -492,7 +492,7 @@ async def direct_translate_paragraph(
     except RuntimeError as error:
         raise _to_bad_request(error, "Translation")
     except Exception as error:
-        raise BadRequestException(detail=f"Unexpected translation error: {str(error)}")
+        raise _to_bad_request(error, "Translation")
 
 
 @router.post(
@@ -528,7 +528,7 @@ async def query_word_meaning(
     except RuntimeError as error:
         raise _to_bad_request(error, "Word meaning query")
     except Exception as error:
-        raise BadRequestException(detail=f"Unexpected word meaning error: {str(error)}")
+        raise _to_bad_request(error, "Word meaning query")
 
 
 @router.put("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/confirm")
@@ -639,7 +639,7 @@ async def batch_translate_paragraphs(
     except BadRequestException:
         raise
     except Exception as error:
-        raise BadRequestException(detail=f"Batch translation failed: {str(error)}")
+        raise _to_bad_request(error, "Batch translation")
 
 
 def _to_error_message(error: Exception) -> str:

@@ -114,7 +114,10 @@ async def analyze_section(request: Request, project_id: str, section_id: str):
     except FileNotFoundError:
         raise NotFoundException(detail="Section source file not found")
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"章节分析失败: {str(e)}")
+        logger.error(f"Section analysis failed: {str(e)}")
+        if os.getenv("DEBUG") == "true":
+            raise ServiceUnavailableException(detail=f"章节分析失败: {str(e)}")
+        raise ServiceUnavailableException(detail="章节分析失败，请稍后重试或联系支持")
 
 
 @router.post("/projects/{project_id}/sections/{section_id}/translate_all")
@@ -174,7 +177,10 @@ async def batch_translate_section(
     except NotFoundException:
         raise
     except Exception as e:
-        raise ServiceUnavailableException(detail=f"批量翻译失败: {str(e)}")
+        logger.error(f"Batch translation failed: {str(e)}")
+        if os.getenv("DEBUG") == "true":
+            raise ServiceUnavailableException(detail=f"批量翻译失败: {str(e)}")
+        raise ServiceUnavailableException(detail="批量翻译失败，请稍后重试或联系支持")
 
 
 @router.post("/projects/{project_id}/translate-stream")

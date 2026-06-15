@@ -110,9 +110,10 @@ class ImageProcessor:
             return image_info
 
         try:
-            # 生成本地文件名
+            # 生成本地文件名:用 URL 哈希而非共享自增计数器。并发下载(asyncio.gather)时
+            # 多协程会在各自 await 前读到相同的 image_counter,导致文件名碰撞、相互覆盖(审计 C10)。
             ext = self._get_file_extension(url)
-            filename = f"image-{self.image_counter}{ext}"
+            filename = f"image-{self._generate_hash(url)}{ext}"
             local_path = os.path.join(self.images_dir, filename)
 
             # 下载图片

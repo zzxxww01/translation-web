@@ -18,6 +18,7 @@ from ..dependencies import ProjectManagerDep, get_project_manager
 from ..middleware import BadRequestException, NotFoundException
 from ..middleware.rate_limit import limiter
 from .projects_models import CreateProjectRequest, ProjectResponse
+from .translate_utils import validate_path_component
 
 
 router = APIRouter()
@@ -157,7 +158,15 @@ async def upload_project(
     except BadRequestException:
         raise
     except Exception as e:
-        raise BadRequestException(detail=f"Upload failed: {str(e)}")
+        import os
+        import logging
+        logging.getLogger(__name__).error(f"Upload failed: {e}")
+        detail = (
+            f"Upload failed: {e}"
+            if os.getenv("DEBUG") == "true"
+            else "Upload failed. Please try again or contact support."
+        )
+        raise BadRequestException(detail=detail)
     finally:
         file.file.close()
         if assets:
@@ -167,6 +176,8 @@ async def upload_project(
 
 @router.get("/projects/{project_id}")
 async def get_project(project_id: str, pm: ProjectManagerDep):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         meta = pm.get(project_id)
         sections = pm.get_sections(project_id)
@@ -200,6 +211,8 @@ async def get_project(project_id: str, pm: ProjectManagerDep):
 @router.delete("/projects/{project_id}")
 @limiter.limit("30/minute")
 async def delete_project(request: Request, project_id: str, pm: ProjectManagerDep):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         pm.delete(project_id)
         return {"message": "Project deleted"}
@@ -216,6 +229,8 @@ async def export_project(
     include_source: bool = False,
     format: str = "zh",
 ):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         content = pm.export(project_id, include_source=include_source, format=format)
         filename = pm.get_export_filename(project_id, format=format)
@@ -233,6 +248,8 @@ async def export_project(
 
 @router.get("/projects/{project_id}/sections")
 async def get_sections(project_id: str, pm: ProjectManagerDep):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         sections = pm.get_sections(project_id)
         return [
@@ -252,6 +269,9 @@ async def get_sections(project_id: str, pm: ProjectManagerDep):
 
 @router.get("/projects/{project_id}/sections/{section_id}")
 async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
+
     def _normalize_image_source(paragraph) -> str:
         if paragraph.element_type != ElementType.IMAGE:
             return paragraph.source
