@@ -2,6 +2,7 @@
 Project and section management endpoints.
 """
 
+import asyncio
 import re
 import shutil
 import tempfile
@@ -75,7 +76,8 @@ def _build_project_response(meta) -> ProjectResponse:
 
 @router.get("/projects", response_model=List[ProjectResponse])
 async def list_projects(pm: ProjectManagerDep):
-    projects = pm.list_all()
+    # 全目录扫描 + 逐项目读 meta(可能再触发 get_sections)是阻塞 IO,放线程池避免冻结事件循环(审计 N16)。
+    projects = await asyncio.to_thread(pm.list_all)
     return [_build_project_response(p) for p in projects]
 
 
@@ -87,7 +89,7 @@ async def create_project(
     pm: ProjectManagerDep,
 ):
     try:
-        meta = pm.create(body.name, body.html_path)
+        meta = await asyncio.to_thread(pm.create, body.name, body.html_path)
         return _build_project_response(meta)
     except ValueError as e:
         raise BadRequestException(detail=str(e))
@@ -150,7 +152,8 @@ async def upload_project(
                     with open(dest_path, "wb") as out_file:
                         shutil.copyfileobj(asset.file, out_file)
 
-            meta = pm.create(name, str(temp_source_path))
+            # HTML->MD 转换 + 分段 + 逐章写盘是 CPU/IO 密集,放线程池避免阻塞事件循环(审计 N17)。
+            meta = await asyncio.to_thread(pm.create, name, str(temp_source_path))
 
         return _build_project_response(meta)
     except ValueError as e:

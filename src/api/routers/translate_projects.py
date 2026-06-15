@@ -76,7 +76,7 @@ async def analyze_project(request: Request, project_id: str):
         raise BadRequestException(detail="Invalid project_id")
 
     try:
-        data = AnalysisService().analyze_project(project_id)
+        data = await asyncio.to_thread(AnalysisService().analyze_project, project_id)
         return ProjectAnalysisResponse(
             summary=data.get("summary", ""),
             notes=data.get("notes", []),
@@ -106,7 +106,7 @@ async def analyze_section(request: Request, project_id: str, section_id: str):
         raise BadRequestException(detail="Invalid project_id or section_id")
 
     try:
-        data = AnalysisService().analyze_section(project_id, section_id)
+        data = await asyncio.to_thread(AnalysisService().analyze_section, project_id, section_id)
         return SectionAnalysisResponse(
             summary=data.get("summary", ""),
             tips=data.get("tips", []),
@@ -160,7 +160,7 @@ async def batch_translate_section(
             context = _build_translation_context(section, index, glossary)
 
             try:
-                payload = agent.translate_paragraph(paragraph, context)
+                payload = await asyncio.to_thread(agent.translate_paragraph, paragraph, context)
                 apply_translation_payload(paragraph, payload, "pro")
                 translated_count += 1
             except Exception as e:
@@ -268,8 +268,8 @@ async def translate_full_document(
                     context = _build_translation_context(section_full, index, glossary)
 
                     try:
-                        payload = agent.translate_paragraph(
-                            paragraph, context
+                        payload = await asyncio.to_thread(
+                            agent.translate_paragraph, paragraph, context
                         )
                         apply_translation_payload(paragraph, payload, "default")
                         pm.save_section(project_id, section_full)
