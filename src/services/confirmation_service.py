@@ -236,7 +236,7 @@ class ConfirmationService:
         ai_translation = self._get_ai_translation_text(confirmed_paragraph)
         if ai_translation and translation != ai_translation:
             # 经 _spawn_background 调度并保留强引用，防止后台学习 Task 被 GC 回收
-            self._memory_service._spawn_background(
+            self.memory_service._spawn_background(
                 self._extract_rules_background(
                     confirmed_paragraph.source,
                     ai_translation,

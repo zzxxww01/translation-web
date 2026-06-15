@@ -755,7 +755,17 @@ class GeminiProvider(LLMProvider):
                     contents=prompt,
                     config=config,
                 )
-            return resp.text
+            text = resp.text
+            if text is None:
+                # 候选被安全策略拦截或无有效候选时 resp.text 为 None。抛可重试的
+                # typed 错误以触发 key/model 轮换,避免上层对 None 调用 .strip()
+                # 抛出令人误解的裸 AttributeError(审计 C2)。
+                feedback = getattr(resp, "prompt_feedback", None)
+                block_reason = getattr(feedback, "block_reason", None) if feedback else None
+                raise LLMUpstreamUnavailableError(
+                    f"Gemini returned no text (block_reason={block_reason})"
+                )
+            return text
 
         return self._generate_with_timeout_fn(_call, timeout)
 

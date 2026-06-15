@@ -37,6 +37,7 @@ interface ConfirmationState {
     paragraph: Paragraph,
     versions: ParagraphVersion[]
   ) => void;
+  setTotalParagraphs: (total: number) => void;
   setSelectedVersion: (versionId: string) => void;
   setCustomTranslation: (text: string) => void;
   setIsEditing: (editing: boolean) => void;
@@ -79,6 +80,8 @@ export const useConfirmationStore = create<ConfirmationState>()(
             isEditing: false,
           }),
 
+        setTotalParagraphs: (total) => set({ totalParagraphs: total }),
+
         setSelectedVersion: (versionId) => set({ selectedVersionId: versionId }),
 
         setCustomTranslation: (text) => set({ customTranslation: text }),
@@ -106,6 +109,7 @@ export const useConfirmationStore = create<ConfirmationState>()(
             projectId: null,
             workflowStatus: 'loading',
             currentIndex: 0,
+            totalParagraphs: 0,
             currentParagraph: null,
             versions: [],
             selectedVersionId: null,

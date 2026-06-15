@@ -19,6 +19,7 @@ export function useConfirmationWorkflow() {
     setProjectId,
     setWorkflowStatus,
     setCurrentParagraph,
+    setTotalParagraphs,
     setCustomTranslation,
     goToNext,
     goToPrev,
@@ -126,6 +127,9 @@ export function useConfirmationWorkflow() {
     try {
       const data = await confirmationApi.getParagraphConfirmation(projectId, index);
       setCurrentParagraph(data.paragraph, data.versions);
+      if (typeof data.total_paragraphs === 'number') {
+        setTotalParagraphs(data.total_paragraphs);
+      }
       jumpTo(index);
       return data;
     } catch (error) {
@@ -135,7 +139,7 @@ export function useConfirmationWorkflow() {
     } finally {
       setLoading(false);
     }
-  }, [projectId, setCurrentParagraph, jumpTo, setLoading, setError]);
+  }, [projectId, setCurrentParagraph, setTotalParagraphs, jumpTo, setLoading, setError]);
 
   // 选择版本
   const selectVersion = useCallback((versionId: string) => {

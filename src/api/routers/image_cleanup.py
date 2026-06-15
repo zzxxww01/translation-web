@@ -250,7 +250,7 @@ async def get_image_statistics(
             section_images = 0
             section_errors = 0
 
-            for paragraph in sections.paragraphs:
+            for paragraph in section.paragraphs:
                 total_paragraphs += 1
 
                 # 检查是否为图片内容
