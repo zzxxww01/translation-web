@@ -2,6 +2,8 @@
 
 {glossary_section}
 
+{conversation_history_section}
+
 ## 原文
 {original_text}
 
