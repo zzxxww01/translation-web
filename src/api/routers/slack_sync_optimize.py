@@ -7,6 +7,8 @@ from src.prompts import get_prompt_manager
 from ..middleware import BadRequestException
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.json_utils import parse_llm_json_response
+import asyncio
+
 from ..utils.llm_factory import generate_with_fallback
 from .slack_models import (
     SlackOptimizeRequest,
@@ -38,7 +40,7 @@ async def sync_reply(request: SlackSyncRequest):
     )
 
     try:
-        response_text = generate_with_fallback(prompt, task_type="slack")
+        response_text = await asyncio.to_thread(generate_with_fallback, prompt, task_type="slack")
         return SlackSyncResponse(english_reply=response_text.strip())
     except Exception as exc:
         raise_llm_service_unavailable(operation="Slack sync", exc=exc)
@@ -79,7 +81,7 @@ async def optimize_text(request: SlackOptimizeRequest):
     )
 
     try:
-        response_text = generate_with_fallback(prompt, task_type="slack")
+        response_text = await asyncio.to_thread(generate_with_fallback, prompt, task_type="slack")
         data = parse_llm_json_response(response_text)
 
         optimized_text = data.get("optimized_text", request.content)
