@@ -5,6 +5,10 @@ Manage global and project-specific glossaries.
 """
 
 import json
+import os
+import tempfile
+import threading
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Optional, List, Dict
 
@@ -16,6 +20,43 @@ DEFAULT_GLOBAL_GLOSSARY_FILENAME = "global_glossary_semi.json"
 
 class GlossaryManager:
     """术语表管理器"""
+
+    # 类级 per-key 锁:GlossaryManager 在多处分别实例化,实例级锁无法互斥;用类级锁
+    # 保证同一 project/global 的读改写与原子落盘跨实例串行(审计 C5)。
+    _locks: Dict[str, threading.RLock] = {}
+    _locks_guard = threading.Lock()
+
+    @classmethod
+    def _get_lock(cls, key: str) -> threading.RLock:
+        with cls._locks_guard:
+            lock = cls._locks.get(key)
+            if lock is None:
+                lock = threading.RLock()
+                cls._locks[key] = lock
+            return lock
+
+    @contextmanager
+    def project_lock(self, project_id: str):
+        """保护项目术语表 load->mutate->save 的临界区,避免并发编辑丢更新(lost update)。"""
+        with self._get_lock(f"project:{project_id}"):
+            yield
+
+    @staticmethod
+    def _atomic_write_json(file_path: Path, payload) -> None:
+        """原子写:写临时文件再 os.replace,避免半写导致 glossary.json 非法 JSON。"""
+        fd, tmp = tempfile.mkstemp(
+            dir=str(file_path.parent), prefix=file_path.name, suffix=".tmp"
+        )
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                json.dump(payload, f, ensure_ascii=False, indent=2)
+            os.replace(tmp, file_path)
+        except Exception:
+            try:
+                os.unlink(tmp)
+            except OSError:
+                pass
+            raise
 
     def __init__(self, global_path: str = "glossary", projects_path: str = "projects"):
         """
@@ -56,11 +97,11 @@ class GlossaryManager:
         Args:
             glossary: 术语表
         """
-        glossary = normalize_glossary(glossary, default_scope="global")
-        glossary.version += 1
-        file_path = self._get_global_glossary_file_path()
-        with open(file_path, 'w', encoding='utf-8') as f:
-            json.dump(glossary.model_dump(mode="json"), f, ensure_ascii=False, indent=2)
+        with self._get_lock("global"):
+            glossary = normalize_glossary(glossary, default_scope="global")
+            glossary.version += 1
+            file_path = self._get_global_glossary_file_path()
+            self._atomic_write_json(file_path, glossary.model_dump(mode="json"))
 
     def load_project(self, project_id: str) -> Glossary:
         """
@@ -90,14 +131,14 @@ class GlossaryManager:
             project_id: 项目 ID
             glossary: 术语表
         """
-        glossary = normalize_glossary(glossary, default_scope="project")
-        glossary.version += 1
-        project_dir = self.projects_path / project_id
-        project_dir.mkdir(parents=True, exist_ok=True)
-
-        file_path = project_dir / "glossary.json"
-        with open(file_path, 'w', encoding='utf-8') as f:
-            json.dump(glossary.model_dump(mode="json"), f, ensure_ascii=False, indent=2)
+        with self._get_lock(f"project:{project_id}"):
+            glossary = normalize_glossary(glossary, default_scope="project")
+            glossary.version += 1
+            project_dir = self.projects_path / project_id
+            project_dir.mkdir(parents=True, exist_ok=True)
+            self._atomic_write_json(
+                project_dir / "glossary.json", glossary.model_dump(mode="json")
+            )
 
     def merge(self, global_glossary: Glossary, project_glossary: Glossary) -> Glossary:
         """
