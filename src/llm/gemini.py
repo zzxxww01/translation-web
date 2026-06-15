@@ -125,7 +125,7 @@ def _resolve_default_runtime_settings(
         if normalized_selector and (
             normalized_selector == candidate_alias
             or normalized_selector == candidate_real_model
-            or candidate_alias.endswith(normalized_alias)
+            or candidate_alias == normalized_alias
         ):
             selected_model = candidate
             break
