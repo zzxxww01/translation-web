@@ -399,11 +399,11 @@ export const useDocumentStore = create<DocumentStore>()(
       }),
       {
         name: STORAGE_KEYS.DOCUMENT_STATE,
-        // 只持久化必要的状态
+        // NU1: 只持久化轻量的当前项目标识。
+        // 之前持久化的 sections / currentSection 携带完整 paragraphs，会写入大量陈旧数据，
+        // 刷新后可能用过期段落覆盖最新内容；这些数据都应在挂载时从后端重新拉取。
         partialize: state => ({
           currentProject: state.currentProject,
-          currentSection: state.currentSection,
-          sections: state.sections,
         }),
       }
     ),

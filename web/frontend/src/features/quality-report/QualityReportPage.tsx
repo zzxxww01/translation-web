@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/Button';
 import { copyToClipboard } from '@/shared/utils';
+import { useDocumentStore } from '@/shared/stores';
 import { useProjectQualityReport } from './api';
 import type { ProjectQualityReport, QualityIssue, SectionQualityReport } from './types';
 
@@ -203,6 +204,7 @@ function buildQualityReportMarkdown(
 export function QualityReportPage() {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
+  const currentProjectTitle = useDocumentStore(state => state.currentProject?.title);
   const { data: report, isLoading, error } = useProjectQualityReport(projectId!);
 
   if (isLoading) {
@@ -251,6 +253,8 @@ export function QualityReportPage() {
     );
   }
 
+  // C29: 标题回退顺序——后端 project_title → 当前项目标题 → projectId，避免直接拿 ID 当标题
+  const displayTitle = report.project_title || currentProjectTitle || report.project_id;
   const level = getQualityLevel(report.overall_score);
   const LevelIcon = level.icon;
   const sortedSections = [...report.sections].sort((a, b) => {
@@ -280,7 +284,7 @@ export function QualityReportPage() {
 
   const handleCopyMarkdown = async () => {
     const markdown = buildQualityReportMarkdown(
-      report,
+      { ...report, project_title: displayTitle },
       sortedSections,
       sortedIssues,
       priorityIssues,
@@ -300,7 +304,7 @@ export function QualityReportPage() {
       <header className="mb-6 flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">质量报告</h1>
-          <p className="mt-1 text-sm text-gray-600">{report.project_title}</p>
+          <p className="mt-1 text-sm text-gray-600">{displayTitle}</p>
           <p className="mt-2 text-xs text-gray-500">生成时间：{formatDate(report.generated_at)}</p>
         </div>
         <div className="flex shrink-0 items-center gap-2">

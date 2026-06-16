@@ -15,6 +15,7 @@ import {
 import { ParagraphStatus } from '@/shared/constants';
 import type { Paragraph } from '@/shared/types';
 import { documentApi } from '../api';
+import { toast } from 'sonner';
 
 interface EditPanelProps {
   paragraph: Paragraph | null;

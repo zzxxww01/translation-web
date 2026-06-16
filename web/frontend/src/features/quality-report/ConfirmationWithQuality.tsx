@@ -9,6 +9,7 @@ import { ChevronRight, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { ConfirmationFeature } from '../confirmation/index';
+import { ConfirmationErrorBoundary } from '../confirmation/components/common/ConfirmationErrorBoundary';
 import { DocumentQualityPanel } from '../quality-report/components/DocumentQualityPanel';
 
 interface ConfirmationWithQualityProps {
@@ -18,7 +19,10 @@ interface ConfirmationWithQualityProps {
 
 export function ConfirmationWithQuality({ projectId, onComplete }: ConfirmationWithQualityProps) {
   const [showQualityPanel, setShowQualityPanel] = useState(false);
-  const [currentSectionId] = useState<string>();
+
+  // C30: "当前章节" 入口暂未接线（确认工作流没有上抛当前章节 id），
+  // 为避免出现永久禁用的死按钮，这里不再向质量面板传入 currentSectionId，
+  // 面板会自动只展示"全文"视图。待确认工作流能上抛当前章节后再恢复。
 
   return (
     <div className="flex h-screen overflow-hidden">
@@ -27,10 +31,12 @@ export function ConfirmationWithQuality({ projectId, onComplete }: ConfirmationW
         'flex-1 transition-all duration-300',
         showQualityPanel ? 'mr-0' : 'mr-0'
       )}>
-        <ConfirmationFeature
-          projectId={projectId}
-          onComplete={onComplete}
-        />
+        <ConfirmationErrorBoundary>
+          <ConfirmationFeature
+            projectId={projectId}
+            onComplete={onComplete}
+          />
+        </ConfirmationErrorBoundary>
       </div>
 
       {/* 质量面板切换按钮 */}
@@ -74,10 +80,8 @@ export function ConfirmationWithQuality({ projectId, onComplete }: ConfirmationW
 
             {/* 面板内容 */}
             <div className="flex-1 overflow-y-auto p-4">
-              <DocumentQualityPanel
-                projectId={projectId}
-                currentSectionId={currentSectionId}
-              />
+              {/* C30: 不传 currentSectionId，面板仅展示全文视图 */}
+              <DocumentQualityPanel projectId={projectId} />
             </div>
           </div>
         )}
