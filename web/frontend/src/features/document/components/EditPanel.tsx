@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { ParagraphStatus } from '@/shared/constants';
 import type { Paragraph } from '@/shared/types';
+import { documentApi } from '../api';
 
 interface EditPanelProps {
   paragraph: Paragraph | null;
@@ -189,6 +190,9 @@ export const EditPanel: FC<EditPanelProps> = ({
   const assistantBottomRef = useRef<HTMLDivElement | null>(null);
   const lastSelectedWordRef = useRef('');
   const lastSelectedAtRef = useRef(0);
+  // 记录上一段及其最新本地译文，用于切段时自动保存未确认的草稿（N6 防数据丢失）
+  const prevParagraphRef = useRef<Paragraph | null>(paragraph);
+  const translationRef = useRef(translation);
 
   // 词义助手相关状态
   const [selectedWord, setSelectedWord] = useState('');
@@ -224,7 +228,51 @@ export const EditPanel: FC<EditPanelProps> = ({
     },
   ];
 
+  // 保持 translationRef 与最新本地译文同步，供切段时读取上一段草稿
   useEffect(() => {
+    translationRef.current = translation;
+  }, [translation]);
+
+  useEffect(() => {
+    // 切段/关闭前，若上一段译文被编辑过但未确认，先静默保存草稿，避免编辑丢失（N6）
+    const previousParagraph = prevParagraphRef.current;
+    if (
+      previousParagraph &&
+      previousParagraph.id !== paragraph?.id &&
+      projectId &&
+      sectionId
+    ) {
+      const draft = translationRef.current;
+      const originalTranslation = previousParagraph.translation ?? '';
+      // 仅当本地译文相对上一段原译文有改动、且已确认值未覆盖该改动时才保存
+      const alreadyConfirmed = previousParagraph.confirmed === draft;
+      if (draft !== originalTranslation && !alreadyConfirmed) {
+        const previousId = previousParagraph.id;
+        void documentApi
+          .updateParagraph(projectId, sectionId, previousId, {
+            translation: draft,
+            edit_source: 'edit_panel_draft',
+            source_text: previousParagraph.source,
+          })
+          .then(result => {
+            const persistedTranslation = result.translation ?? draft;
+            const persistedStatus = result.status ?? previousParagraph.status;
+            updateParagraph(previousId, {
+              translation: persistedTranslation,
+              status: persistedStatus,
+              confirmed:
+                result.confirmed ??
+                (persistedStatus === ParagraphStatus.APPROVED ? persistedTranslation : undefined),
+            });
+          })
+          .catch(() => {
+            // 草稿保存失败不阻断切段，仅提示，避免静默丢失
+            toast.error('上一段草稿保存失败，请回到该段重试');
+          });
+      }
+    }
+    prevParagraphRef.current = paragraph;
+
     setTranslation(paragraph?.translation || '');
     setSelectedWord('');
     setActiveWord('');
@@ -236,7 +284,7 @@ export const EditPanel: FC<EditPanelProps> = ({
     setCustomRetranslateInstruction('');
     lastSelectedWordRef.current = '';
     lastSelectedAtRef.current = 0;
-  }, [paragraph]);
+  }, [paragraph, projectId, sectionId, updateParagraph]);
 
   const closeWordAssistant = useCallback(() => {
     setIsWordAssistantOpen(false);
