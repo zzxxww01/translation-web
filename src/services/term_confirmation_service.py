@@ -218,30 +218,27 @@ class TermConfirmationService:
         project_id: str
     ) -> None:
         """添加术语到存储"""
-        # 生成术语ID
-        term_id = str(uuid.uuid4())
-
         # 推断策略
         strategy = "preserve" if candidate_data["original"] == translation else "translate"
 
-        # 创建术语
-        term = Term(
-            id=term_id,
+        # 创建术语（使用基于 scope+project+original 的确定性 uuid5，避免同一术语重复入库）
+        term = Term.create(
             original=candidate_data["original"],
             translation=translation,
+            scope="project",
+            project_id=project_id,
             strategy=strategy,
-            status="active"
+            status="active",
         )
+        term_id = term.id
 
-        # 创建元数据
+        # 创建元数据（TermMetadata 无 context/confidence 字段，原先 kwarg 会被 pydantic 静默丢弃，已移除）
         metadata = TermMetadata(
             term_id=term_id,
             scope="project",
             project_id=project_id,
             term_original=candidate_data["original"],
             term_translation=translation,
-            context=candidate_data.get("context"),
-            confidence=candidate_data.get("confidence")
         )
 
         # 添加到存储

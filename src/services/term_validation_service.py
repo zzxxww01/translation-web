@@ -156,8 +156,11 @@ class TermValidationService:
         """
         expected = term.translation
 
-        # For PRESERVE strategy, expect original term
-        if term.strategy == "PRESERVE" or term.strategy == "PRESERVE_ANNOTATE":
+        # For PRESERVE strategy, expect original term.
+        # Normalize case: TranslationStrategy enum values are lower-case
+        # ("preserve"/"preserve_annotate"), so compare against upper-cased value.
+        strategy = (term.strategy or "").upper()
+        if strategy == "PRESERVE" or strategy == "PRESERVE_ANNOTATE":
             expected = term.original
 
         # Check if expected translation appears in translated text
