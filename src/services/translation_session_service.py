@@ -84,33 +84,52 @@ class TranslationSessionService:
         self._save_session(session)
         return session
 
-    def complete_session(self, session_id: str) -> TranslationSession:
+    def complete_session(self, session_id: str, result: Optional[str] = None) -> TranslationSession:
         """Mark a session as completed.
 
         Args:
             session_id: Session identifier
+            result: Optional translated-text preview to persist on the session
 
         Returns:
             Updated session
         """
         session = self.load_session(session_id)
         session.update_status(SessionStatus.COMPLETED)
+        if result is not None:
+            session.progress["result_preview"] = result[:500]
         self._save_session(session)
         return session
 
-    def fail_session(self, session_id: str) -> TranslationSession:
+    def fail_session(self, session_id: str, error: Optional[str] = None) -> TranslationSession:
         """Mark a session as failed.
 
         Args:
             session_id: Session identifier
+            error: Optional error message to persist on the session
 
         Returns:
             Updated session
         """
         session = self.load_session(session_id)
         session.update_status(SessionStatus.FAILED)
+        if error is not None:
+            session.progress["error"] = str(error)
         self._save_session(session)
         return session
+
+    def get_session_terms(self, session: TranslationSession) -> List[Term]:
+        """Resolve a session's snapshot term_ids into Term objects (for validation).
+
+        TranslationSession stores only term ids in its snapshot; callers that need
+        the actual Term objects (e.g. terminology validation) use this helper.
+        """
+        terms: List[Term] = []
+        for term_id in session.term_ids:
+            term = self._load_term_by_id(term_id, session.project_id)
+            if term:
+                terms.append(term)
+        return terms
 
     def detect_term_changes(
         self,

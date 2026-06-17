@@ -280,12 +280,13 @@ class FourStepTranslator:
         # 创建翻译会话（如果启用）
         session_id = None
         if self.session_service and project_id:
-            source_text = "\n\n".join([p.source for p in section.paragraphs])
+            # U3:对齐 TranslationSessionService.create_session 的真实签名
+            # (project_id/section_id/create_snapshot);此前传的 source_text/target_language/
+            # include_snapshot 不存在,注入 session_service 后会 TypeError。
             session = self.session_service.create_session(
                 project_id=project_id,
-                source_text=source_text,
-                target_language="zh-CN",
-                include_snapshot=True
+                section_id=section.section_id,
+                create_snapshot=True,
             )
             session_id = session.id
             logger.info(f"Created translation session: {session_id}")
@@ -488,14 +489,17 @@ class FourStepTranslator:
             validation_report = None
             if self.term_validation_service and self.session_service and session_id:
                 try:
-                    session = self.session_service.get_session(session_id)
-                    if session and session.terminology_snapshot:
+                    # U3:服务方法是 load_session(非 get_session);快照术语经 term_ids 反查
+                    # 得到 List[Term](TranslationSession 无 terminology_snapshot 字段)。
+                    session = self.session_service.load_session(session_id)
+                    snapshot_terms = self.session_service.get_session_terms(session)
+                    if session and snapshot_terms:
                         source_text = "\n\n".join([p.source for p in section.paragraphs])
                         translated_text = "\n\n".join(translations)
                         validation_report = self.term_validation_service.validate_translation(
                             source_text=source_text,
                             translated_text=translated_text,
-                            terms=session.terminology_snapshot,
+                            terms=snapshot_terms,
                             strict=False
                         )
                         if validation_report.violations:
