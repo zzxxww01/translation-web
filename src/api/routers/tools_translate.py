@@ -11,6 +11,8 @@ from src.prompts import get_prompt_manager
 from ..middleware import BadRequestException
 from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
+import asyncio
+
 from ..utils.llm_factory import generate_with_fallback
 from .tools_models import TranslateRequest, TranslateResponse
 
@@ -35,7 +37,13 @@ async def translate_text(request: Request, body: TranslateRequest):
     if body.source_lang == "auto":
         has_chinese = bool(re.search(r"[\u4e00-\u9fff]", body.text))
         target_lang = "en" if has_chinese else "zh"
+    elif body.source_lang == "zh":
+        target_lang = "en"
+    elif body.source_lang == "en":
+        target_lang = "zh"
     else:
+        # \u672a\u77e5 source_lang \u56de\u9000\u5230\u663e\u5f0f target_lang;\u907f\u514d source_lang='zh' \u5374\u56e0 target_lang
+        # \u9ed8\u8ba4 'zh' \u628a\u4e2d\u6587\u5f53\u82f1\u6587\u7ffb\u8bd1(\u5ba1\u8ba1 C22)\u3002
         target_lang = body.target_lang
 
     if target_lang == "zh":
@@ -44,7 +52,7 @@ async def translate_text(request: Request, body: TranslateRequest):
         prompt = prompt_manager.get("tools_translate_cn2en", text=body.text)
 
     try:
-        translation = generate_with_fallback(prompt, task_type="post").strip()
+        translation = (await asyncio.to_thread(generate_with_fallback, prompt, task_type="post")).strip()
         for prefix in ["翻译结果", "译文:", "Translation:", "翻译:", "译文：", "Translation："]:
             if translation.startswith(prefix):
                 translation = translation[len(prefix):].strip()

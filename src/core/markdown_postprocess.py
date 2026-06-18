@@ -60,8 +60,10 @@ _BARE_DOLLAR = re.compile(r"(?<!\\)(?<![$])[$](?![$])")
 # Lookahead checks it's not followed by a tag-name pattern or `!--`.
 _BARE_LT = re.compile(r"<(?![a-zA-Z/!])")
 
-# Bare `>` at start of line that is NOT a blockquote (we only escape mid-line `>`).
-_MID_LINE_GT = re.compile(r"(?<=\S)>")
+# Bare `>` mid-line that is NOT a blockquote. Exclude common safe sequences so we
+# don't mangle prose arrows/comparisons (a -> b, x => y, n >= m). `<` is already
+# escaped and real HTML tags are protected, so these standalone `>` need no escaping.
+_MID_LINE_GT = re.compile(r"(?<=[^\s\-=>])>(?![=>])")
 
 # Pipe characters `|` outside of markdown tables can occasionally cause issues.
 # We only escape pipes that appear inside normal text paragraphs,

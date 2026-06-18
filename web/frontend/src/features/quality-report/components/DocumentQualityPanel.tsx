@@ -3,6 +3,7 @@
  */
 
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
@@ -29,7 +30,8 @@ export function DocumentQualityPanel({ projectId, currentSectionId }: DocumentQu
     currentSectionId || ''
   );
 
-  const [view, setView] = useState<'current' | 'all'>('current');
+  // 没有当前章节时直接默认到"全文"视图，避免停留在空白的当前章节视图
+  const [view, setView] = useState<'current' | 'all'>(currentSectionId ? 'current' : 'all');
 
   if (reportLoading) {
     return (
@@ -235,12 +237,12 @@ export function DocumentQualityPanel({ projectId, currentSectionId }: DocumentQu
       {/* 查看完整报告链接 */}
       <Card>
         <CardContent className="p-4">
-          <a
-            href={`/document/${projectId}/quality-report`}
+          <Link
+            to={`/document/${projectId}/quality-report`}
             className="text-sm text-primary hover:underline flex items-center justify-center gap-1"
           >
             查看完整质量报告 →
-          </a>
+          </Link>
         </CardContent>
       </Card>
     </div>

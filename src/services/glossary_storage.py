@@ -6,6 +6,9 @@ with file locking, atomic writes, and soft deletion support.
 
 import json
 import logging
+import os
+import tempfile
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +23,27 @@ except ImportError:
 from src.models.terminology import DecisionRecord, Term, TermMetadata
 
 logger = logging.getLogger(__name__)
+
+# Process-wide registry of per-file in-process locks. Used to serialize reads
+# and writes to the same JSON file across threads (and across GlossaryStorage
+# instances) within a single process. portalocker provides cross-process
+# locking when available; this guards the common in-process case and is the
+# only available mutual exclusion on the no-portalocker fallback path, where a
+# concurrent reader's open handle would otherwise make the writer's atomic
+# replace() fail on Windows.
+_FILE_LOCKS: Dict[str, threading.Lock] = {}
+_FILE_LOCKS_GUARD = threading.Lock()
+
+
+def _get_inproc_lock(path: Path) -> threading.Lock:
+    """Return a stable per-path in-process lock (keyed by absolute path)."""
+    key = str(path.resolve()) if path.is_absolute() else str(Path(os.path.abspath(path)))
+    with _FILE_LOCKS_GUARD:
+        lock = _FILE_LOCKS.get(key)
+        if lock is None:
+            lock = threading.Lock()
+            _FILE_LOCKS[key] = lock
+        return lock
 
 
 class GlossaryStorage:
@@ -144,8 +168,23 @@ class GlossaryStorage:
                 raise ValueError("project_id is required when scope is 'project'")
             return self.base_path / "projects" / project_id / "artifacts" / "audit" / "decisions.jsonl"
 
+    def _get_lock_path(self, path: Path) -> Path:
+        """Get the sidecar lock-file path used to serialize reads and writes.
+
+        Both readers and writers acquire this single ``<file>.lock`` so they
+        mutually exclude. Locking the data file directly (read) and the temp
+        file (write) does NOT mutually exclude, and on Windows a read handle
+        held open on the target blocks ``temp.replace(target)`` with a
+        PermissionError. Using one independent lock file avoids both problems.
+        """
+        return path.with_suffix(path.suffix + '.lock')
+
     def _read_json_with_lock(self, path: Path, default: list) -> list:
-        """Read JSON file with file locking.
+        """Read JSON file under the shared sidecar lock.
+
+        The lock file is held only long enough to read the target into memory;
+        the target's own handle is closed immediately (not held), so it never
+        blocks a concurrent writer's atomic replace on Windows.
 
         Args:
             path: Path to JSON file
@@ -161,33 +200,51 @@ class GlossaryStorage:
         if not path.exists():
             return default
 
-        if HAS_PORTALOCKER:
+        def _read_target() -> list:
+            # Read target into memory and close the handle ASAP (do not hold it).
             try:
-                with portalocker.Lock(path, 'r', timeout=10) as f:
+                with open(path, 'r', encoding='utf-8') as f:
                     content = f.read()
-                    if not content.strip():
-                        return default
-                    return json.loads(content)
-            except portalocker.exceptions.LockException as e:
-                raise PermissionError(f"Failed to acquire lock on {path}: {e}")
-        else:
-            # Fallback: simple retry mechanism
-            for attempt in range(3):
+            except FileNotFoundError:
+                # Target may have been replaced/removed between the existence
+                # check and the open; treat as empty rather than erroring.
+                return default
+            if not content.strip():
+                return default
+            return json.loads(content)
+
+        lock_path = self._get_lock_path(path)
+
+        # In-process lock serializes threads regardless of portalocker.
+        with _get_inproc_lock(path):
+            if HAS_PORTALOCKER:
                 try:
-                    with open(path, 'r', encoding='utf-8') as f:
-                        content = f.read()
-                        if not content.strip():
-                            return default
-                        return json.loads(content)
-                except (IOError, OSError) as e:
-                    if attempt == 2:
-                        raise PermissionError(f"Failed to read {path} after 3 attempts: {e}")
-                    time.sleep(0.1 * (attempt + 1))
+                    with portalocker.Lock(lock_path, 'w', timeout=10):
+                        return _read_target()
+                except portalocker.exceptions.LockException as e:
+                    raise PermissionError(f"Failed to acquire lock on {lock_path}: {e}")
+            else:
+                # Fallback: in-process lock above already serializes readers vs
+                # writers; retry covers transient OS errors.
+                for attempt in range(3):
+                    try:
+                        return _read_target()
+                    except (IOError, OSError) as e:
+                        if attempt == 2:
+                            raise PermissionError(f"Failed to read {path} after 3 attempts: {e}")
+                        time.sleep(0.1 * (attempt + 1))
 
         return default
 
     def _write_json_with_lock(self, path: Path, data: list) -> None:
-        """Write JSON file with file locking and atomic write.
+        """Write JSON file atomically under the shared sidecar lock.
+
+        Holds ``<file>.lock`` (the same lock readers use) for the entire
+        write-temp-then-replace sequence, so it is mutually exclusive with
+        readers and other writers. Each write uses a uniquely-named temp file
+        in the target directory (so concurrent writers never collide on a
+        shared ``.tmp`` name), and PermissionError from the replace itself is
+        handled (with orphan-temp cleanup) instead of escaping uncaught.
 
         Args:
             path: Path to JSON file
@@ -202,32 +259,55 @@ class GlossaryStorage:
         # Serialize data with datetime handling
         json_data = json.dumps(data, ensure_ascii=False, indent=2, default=str)
 
-        # Atomic write: write to temp file, then rename
-        temp_path = path.with_suffix('.tmp')
-
-        if HAS_PORTALOCKER:
+        def _atomic_write() -> None:
+            # Unique temp name in the same directory => same filesystem, so
+            # replace() is atomic and concurrent writers don't share a name.
+            fd, tmp_name = tempfile.mkstemp(
+                dir=str(path.parent), prefix=path.name + '.', suffix='.tmp'
+            )
+            temp_path = Path(tmp_name)
             try:
-                with portalocker.Lock(temp_path, 'w', timeout=10) as f:
+                with os.fdopen(fd, 'w', encoding='utf-8') as f:
                     f.write(json_data)
+                # replace() can raise PermissionError on Windows if the target
+                # is momentarily held open; surface it as PermissionError after
+                # cleaning up the temp file rather than leaving an orphan.
                 temp_path.replace(path)
-            except portalocker.exceptions.LockException as e:
+            except Exception:
                 if temp_path.exists():
-                    temp_path.unlink()
-                raise PermissionError(f"Failed to acquire lock on {temp_path}: {e}")
-        else:
-            # Fallback: simple retry mechanism
-            for attempt in range(3):
-                try:
-                    with open(temp_path, 'w', encoding='utf-8') as f:
-                        f.write(json_data)
-                    temp_path.replace(path)
-                    break
-                except (IOError, OSError) as e:
-                    if temp_path.exists():
+                    try:
                         temp_path.unlink()
-                    if attempt == 2:
-                        raise PermissionError(f"Failed to write {path} after 3 attempts: {e}")
-                    time.sleep(0.1 * (attempt + 1))
+                    except OSError:
+                        pass
+                raise
+
+        lock_path = self._get_lock_path(path)
+
+        # In-process lock serializes threads regardless of portalocker; this is
+        # what prevents a concurrent reader's open handle from making the
+        # replace() below fail with PermissionError on Windows.
+        with _get_inproc_lock(path):
+            if HAS_PORTALOCKER:
+                try:
+                    with portalocker.Lock(lock_path, 'w', timeout=10):
+                        _atomic_write()
+                except portalocker.exceptions.LockException as e:
+                    raise PermissionError(f"Failed to acquire lock on {lock_path}: {e}")
+                except PermissionError:
+                    raise
+                except OSError as e:
+                    raise PermissionError(f"Failed to write {path}: {e}")
+            else:
+                # Fallback: in-process lock above serializes writers vs readers;
+                # retry covers transient OS errors (e.g. AV/indexer touching it).
+                for attempt in range(3):
+                    try:
+                        _atomic_write()
+                        break
+                    except (IOError, OSError) as e:
+                        if attempt == 2:
+                            raise PermissionError(f"Failed to write {path} after 3 attempts: {e}")
+                        time.sleep(0.1 * (attempt + 1))
 
     # === Term CRUD ===
 

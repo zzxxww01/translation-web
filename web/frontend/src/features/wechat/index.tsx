@@ -189,6 +189,7 @@ export function WechatFeature() {
               ref={iframeRef}
               className="h-full w-full border-0"
               title="微信预览"
+              sandbox="allow-same-origin"
             />
           ) : (
             <div className="flex h-full items-center justify-center text-sm text-gray-400">

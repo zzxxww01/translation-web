@@ -15,6 +15,7 @@ from ...services.consistency_service import (
 )
 from ..dependencies import GlossaryManagerDep, ProjectManagerDep
 from ..middleware import BadRequestException, NotFoundException
+from .translate_utils import validate_path_component
 
 
 router = APIRouter(prefix="/consistency", tags=["consistency"])
@@ -61,6 +62,8 @@ async def review_consistency(
     """
     执行一致性审查（术语和风格）。
     """
+    if not validate_path_component(request.project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         project = pm.get(request.project_id)
         sections = pm.get_sections(request.project_id)
@@ -92,6 +95,8 @@ async def auto_fix_issue(
     """
     自动修复一致性问题（轻量实现，当前仅返回统计）。
     """
+    if not validate_path_component(request.project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         pm.get(request.project_id)
     except FileNotFoundError:
@@ -111,6 +116,8 @@ async def get_consistency_report(
     """
     获取最近一次一致性报告。
     """
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         pm.get(project_id)
     except FileNotFoundError:

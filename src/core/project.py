@@ -77,7 +77,17 @@ class ProjectManager:
         self._section_locks_max = TranslationLimits.SECTION_LOCK_CACHE_SIZE
 
     def _project_dir(self, project_id: str) -> Path:
-        return self.projects_path / project_id
+        # 安全:校验 project_id 防止路径遍历。否则经 ../ 或绝对路径可逃逸 projects 目录,
+        # 导致任意目录删除(shutil.rmtree)/任意文件读取。合法 id 由 slugify 生成,
+        # 仅含字母/数字/下划线/连字符。这是所有项目磁盘路径的唯一收口处。
+        if not project_id or not re.fullmatch(r"[A-Za-z0-9_\-]+", project_id):
+            raise ValueError(f"Invalid project_id: {project_id!r}")
+        project_dir = self.projects_path / project_id
+        base = self.projects_path.resolve()
+        resolved = project_dir.resolve()
+        if resolved != base and base not in resolved.parents:
+            raise ValueError(f"project_id escapes projects root: {project_id!r}")
+        return project_dir
 
     def _write_text(self, path: Path, content: str) -> None:
         write_text_atomic(path, content)

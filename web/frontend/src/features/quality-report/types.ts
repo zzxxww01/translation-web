@@ -56,7 +56,7 @@ export interface SectionQualityReport {
 
 export interface ProjectQualityReport {
   project_id: string;
-  project_title: string;
+  project_title: string | null;
   overall_score: number;
   total_issues: number;
   issues_by_status: Record<string, number>;

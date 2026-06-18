@@ -31,6 +31,7 @@ interface BackendSectionQualityScore {
 interface BackendProjectQualityReport {
   run_id: string;
   project_id: string;
+  project_title?: string | null;
   timestamp: string;
   overall_score: number;
   sections: BackendSectionQualityScore[];
@@ -88,7 +89,9 @@ function mapSectionDetails(section: BackendSectionQualityReport): SectionQuality
 function mapProjectReport(report: BackendProjectQualityReport): ProjectQualityReport {
   return {
     project_id: report.project_id,
-    project_title: report.project_id,
+    // C29: 透传后端的 project_title（可空），不再用 project_id 冒充标题；
+    // 渲染端再回退到 currentProject?.title || project_id。
+    project_title: report.project_title ?? null,
     overall_score: normalizeScore(report.overall_score),
     total_issues: report.total_issues,
     issues_by_status: {

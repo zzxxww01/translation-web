@@ -84,9 +84,27 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
 
     glossary_context = build_glossary_context(body.original_text)
 
+    # C21:conversation_history 此前被前端发送、被校验,却从未注入 prompt(多轮优化上下文失效)。
+    # 这里把最近几轮调整格式化为参考上下文传入。值里的花括号由 str.format 安全处理(不二次解析)。
+    history_section = ""
+    if body.conversation_history:
+        _hist_lines = ["## 历史调整记录(供参考,理解用户连续优化的意图)"]
+        for _item in list(body.conversation_history)[-3:]:
+            if isinstance(_item, dict):
+                _role = _item.get("role", "")
+                _content = _item.get("content") or _item.get("instruction") or ""
+            else:
+                _role = getattr(_item, "role", "")
+                _content = getattr(_item, "content", "") or getattr(_item, "instruction", "")
+            if _content:
+                _hist_lines.append(f"- [{_role}] {_content}")
+        if len(_hist_lines) > 1:
+            history_section = "\n".join(_hist_lines)
+
     prompt = prompt_manager.get(
         "post_optimize",
         glossary_section=glossary_context.strip(),
+        conversation_history_section=history_section,
         original_text=body.original_text,
         current_translation=body.current_translation,
         instruction=resolved_instruction,
