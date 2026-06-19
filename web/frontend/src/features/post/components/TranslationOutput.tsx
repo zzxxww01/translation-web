@@ -37,18 +37,19 @@ export function TranslationOutput({
     const content = isEdited ? editedContent : versions.find(v => v.id === currentVersionId)?.content || '';
     if (content) {
       const ok = await copyToClipboard(content);
-      if (ok) toast.success('已复制');
+      if (ok) toast.success('译文已复制');
+      else toast.error('复制失败，请长按文本手动复制');
     }
   };
 
   return (
-    <div className="flex flex-1 flex-col">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-3">
+    <div className="flex min-w-0 flex-1 flex-col">
+      <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex min-w-0 flex-wrap items-center gap-3">
           <h3 className="text-sm font-semibold">译文</h3>
           {versions.length > 0 && (
             <Select value={currentVersionId || ''} onValueChange={onSetCurrentVersion}>
-              <SelectTrigger className="h-8 w-48">
+              <SelectTrigger className="h-9 w-full min-w-0 sm:w-48">
                 <SelectValue placeholder="选择版本" />
               </SelectTrigger>
               <SelectContent>
@@ -66,7 +67,7 @@ export function TranslationOutput({
             </Select>
           )}
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2 sm:justify-end">
           {isEdited && <Badge variant="warning">已编辑</Badge>}
           <span className="text-xs text-muted-foreground">{charCount} 字</span>
         </div>
@@ -77,12 +78,13 @@ export function TranslationOutput({
         value={currentContent}
         onChange={(e) => onSetEditedContent(e.target.value)}
         placeholder="译文..."
-        className="flex-1 min-h-[250px]"
+        className="min-h-[34svh] sm:min-h-[280px] lg:min-h-[280px]"
       />
 
-      <div className="mt-3 flex justify-end gap-2">
-        <Button variant="outline" size="icon" className="h-8 w-8" onClick={handleCopy} disabled={!currentContent} title="复制">
+      <div className="mt-3 flex flex-wrap justify-end gap-2">
+        <Button variant="outline" size="sm" className="h-10 min-w-28 sm:h-9" onClick={handleCopy} disabled={!currentContent} title="复制译文">
           <Copy className="h-4 w-4" />
+          复制译文
         </Button>
         {isEdited && (
           <>

@@ -4,6 +4,7 @@
  */
 
 import { apiClient } from '../../../shared/api/client';
+import { REQUEST_TIMEOUTS } from '../../../shared/constants';
 import type {
   GlossaryBatchAction,
   GlossaryRecommendation,
@@ -205,9 +206,16 @@ export const glossaryApi = {
   },
 
   async prepareTermReview(projectId: string, model?: string): Promise<TermReviewPayload> {
-    return apiClient.post<TermReviewPayload>(`/projects/${projectId}/term-review/prepare`, {
-      model,
-    });
+    return apiClient.post<TermReviewPayload>(
+      `/projects/${projectId}/term-review/prepare`,
+      {
+        model,
+      },
+      {
+        timeout: REQUEST_TIMEOUTS.TERM_REVIEW_PREPARE,
+        retry: false,
+      }
+    );
   },
 
   async submitTermReview(

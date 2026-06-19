@@ -21,12 +21,14 @@ export function PostFeature() {
   const optimizeMutation = useOptimizePost();
   const generateTitleMutation = useGenerateTitle();
   const [customInstruction, setCustomInstruction] = useState('');
+  const [pendingAction, setPendingAction] = useState<'translate' | 'optimize' | 'title' | null>(null);
 
   const currentContent = isEdited ? editedContent : versions.find(v => v.id === currentVersionId)?.content || '';
 
   const handleTranslate = useCallback(async () => {
     if (!originalText.trim()) return;
     setLoading(true);
+    setPendingAction('translate');
     try {
       const result = await translateMutation.mutateAsync({
         content: originalText,
@@ -41,6 +43,7 @@ export function PostFeature() {
       console.error('翻译失败:', error);
     } finally {
       setLoading(false);
+      setPendingAction(null);
     }
   }, [originalText, selectedModel, setLoading, translateMutation, addVersion]);
 
@@ -52,6 +55,7 @@ export function PostFeature() {
       return;
     }
     setLoading(true);
+    setPendingAction('optimize');
     try {
       const result = await optimizeMutation.mutateAsync({
         original_text: originalText,
@@ -75,6 +79,7 @@ export function PostFeature() {
       console.error('优化失败:', error);
     } finally {
       setLoading(false);
+      setPendingAction(null);
     }
   }, [originalText, versions, currentVersionId, selectedModel, setLoading, optimizeMutation, addVersion]);
 
@@ -87,6 +92,7 @@ export function PostFeature() {
       return [];
     }
     setLoading(true);
+    setPendingAction('title');
     try {
       const result = await generateTitleMutation.mutateAsync({
         content,
@@ -96,6 +102,7 @@ export function PostFeature() {
       return result.title.split('\n').filter((t: string) => t.trim()).slice(0, 8);
     } finally {
       setLoading(false);
+      setPendingAction(null);
     }
   }, [versions, currentVersionId, editedContent, originalText, selectedModel, setLoading, generateTitleMutation]);
 
@@ -135,14 +142,14 @@ export function PostFeature() {
   }, [customInstruction, discardEdit, handleOptimize, handleTranslate, isEdited]);
 
   return (
-    <div className="flex h-full overflow-auto">
-      <div className="mx-auto w-full max-w-7xl p-6">
-        <div className="mb-6 flex items-center justify-between">
+    <div className="min-h-full overflow-auto">
+      <div className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-6">
+        <div className="mb-5 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-xl font-semibold">帖子翻译</h2>
             <p className="text-sm text-muted-foreground">翻译、优化并生成标题</p>
           </div>
-          <div className="w-64">
+          <div className="w-full sm:w-64">
             <label className="block text-xs text-text-muted mb-1.5">选择模型</label>
             <ModelSelector
               value={selectedModel}
@@ -153,17 +160,18 @@ export function PostFeature() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-h-[calc(100vh-200px)]">
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           <SourceInput
             value={originalText}
             onChange={setOriginalText}
             onTranslate={handleTranslate}
             onClear={handleClear}
             isLoading={isLoading}
+            isTranslating={pendingAction === 'translate'}
             canClear={!!(originalText.trim() || versions.length > 0 || currentContent)}
           />
 
-          <div className="flex flex-col gap-5">
+          <div className="flex min-w-0 flex-col gap-5">
             <TranslationOutput
               versions={versions}
               currentVersionId={currentVersionId}
@@ -179,6 +187,7 @@ export function PostFeature() {
             <OptimizationPanel
               onOptimize={handleOptimize}
               isLoading={isLoading}
+              isOptimizing={pendingAction === 'optimize'}
               hasVersions={versions.length > 0}
               hasOriginal={!!originalText}
             />
@@ -186,6 +195,7 @@ export function PostFeature() {
             <TitleGenerator
               onGenerate={handleGenerateTitle}
               isLoading={isLoading}
+              isGenerating={pendingAction === 'title'}
               canGenerate={versions.length > 0 || !!originalText}
             />
           </div>

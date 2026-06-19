@@ -1,5 +1,6 @@
 """Project glossary and terminology review router."""
 
+import asyncio
 from datetime import datetime
 from typing import List, Literal, Optional
 from urllib.parse import unquote
@@ -360,7 +361,7 @@ async def prepare_term_review(
             project_manager=pm,
             glossary_manager=gm,
         )
-        return service.prepare_review(project_id)
+        return await asyncio.to_thread(service.prepare_review, project_id)
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
     except FileNotFoundError:

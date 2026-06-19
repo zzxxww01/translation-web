@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
-import { Card, CardContent } from '@/components/ui/card';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
-import { Wand2, Send } from 'lucide-react';
+import { Loader2, Wand2, Send } from 'lucide-react';
 import type { Instruction } from '../types';
 
 const quickInstructions: Instruction[] = [
@@ -27,11 +26,12 @@ const moreInstructions: Instruction[] = [
 interface OptimizationPanelProps {
   onOptimize: (options: { instruction?: string; optionId?: string }) => void;
   isLoading: boolean;
+  isOptimizing: boolean;
   hasVersions: boolean;
   hasOriginal: boolean;
 }
 
-export function OptimizationPanel({ onOptimize, isLoading, hasVersions, hasOriginal }: OptimizationPanelProps) {
+export function OptimizationPanel({ onOptimize, isLoading, isOptimizing, hasVersions, hasOriginal }: OptimizationPanelProps) {
   const [customInstruction, setCustomInstruction] = useState('');
   const [showMore, setShowMore] = useState(false);
   const disabled = isLoading || !hasOriginal || !hasVersions;
@@ -53,8 +53,8 @@ export function OptimizationPanel({ onOptimize, isLoading, hasVersions, hasOrigi
 
   return (
     <>
-      <Card>
-        <CardContent className="p-4 space-y-4">
+      <div className="rounded-xl border border-white/60 bg-white/85 p-4 shadow-sm backdrop-blur-sm">
+        <div className="space-y-4">
           <div className="flex items-center gap-2">
             <Wand2 className="h-4 w-4 text-primary" />
             <h4 className="text-sm font-semibold">优化指令</h4>
@@ -68,6 +68,7 @@ export function OptimizationPanel({ onOptimize, isLoading, hasVersions, hasOrigi
                 size="sm"
                 onClick={() => handleQuick(inst.id)}
                 disabled={disabled}
+                className="min-h-10 px-3 text-sm sm:min-h-9 sm:text-xs"
               >
                 {inst.icon} {inst.label}
               </Button>
@@ -77,13 +78,13 @@ export function OptimizationPanel({ onOptimize, isLoading, hasVersions, hasOrigi
               size="sm"
               onClick={() => setShowMore(true)}
               disabled={disabled}
-              className="border-dashed"
+              className="min-h-10 border-dashed px-3 text-sm sm:min-h-9 sm:text-xs"
             >
               更多...
             </Button>
           </div>
 
-          <div className="flex gap-2 items-center">
+          <div className="flex items-center gap-2">
             <Input
               id="customInstructionInput"
               placeholder="优化要求..."
@@ -91,36 +92,36 @@ export function OptimizationPanel({ onOptimize, isLoading, hasVersions, hasOrigi
               onChange={(e) => setCustomInstruction(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendCustom()}
               disabled={isLoading}
-              className="flex-1"
+              className="h-10 min-w-0 flex-1"
             />
             <Button
               size="sm"
               onClick={handleSendCustom}
               disabled={!hasVersions || !customInstruction.trim() || isLoading}
               title="发送指令 (Ctrl+K)"
-              className="h-9 w-9 p-0 shrink-0"
+              className="h-10 w-10 shrink-0 p-0"
             >
-              <Send className="h-4 w-4" />
+              {isOptimizing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
             </Button>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
       <Dialog open={showMore} onOpenChange={setShowMore}>
         <DialogContent>
           <DialogHeader>
             <DialogTitle>更多优化指令</DialogTitle>
           </DialogHeader>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {moreInstructions.map(inst => (
               <Button
                 key={inst.id}
                 variant="outline"
                 onClick={() => { setShowMore(false); onOptimize({ instruction: inst.instruction }); }}
                 disabled={isLoading}
-                className="h-auto flex-col gap-2 py-4"
+                className="h-auto min-h-16 flex-row justify-start gap-3 py-3 text-left sm:min-h-20 sm:flex-col sm:justify-center sm:gap-2 sm:py-4"
               >
-                <span className="text-2xl">{inst.icon}</span>
+                <span className="text-xl sm:text-2xl">{inst.icon}</span>
                 <span className="text-sm">{inst.label}</span>
               </Button>
             ))}
