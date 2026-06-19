@@ -147,13 +147,13 @@ export function ConfirmationFeature({
 
   useEffect(() => {
 
-    if (workflowStatus === 'ready' && totalParagraphs > 0) {
+    if (workflowStatus === 'ready') {
 
       loadParagraph(currentIndex);
 
     }
 
-  }, [workflowStatus, currentIndex, totalParagraphs, loadParagraph]);
+  }, [workflowStatus, currentIndex, loadParagraph]);
 
 
 

@@ -93,3 +93,10 @@ logs/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# ----------------------------
+# Scratch / analysis artifacts (not part of the codebase)
+# ----------------------------
+tmp_findings_*.json
+tmp_findings_*.py
+translation-agent-analysis/

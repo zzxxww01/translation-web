@@ -185,7 +185,9 @@ class ConsistencyReviewer:
                         term_usage[term.term]["translations"][term.translation] += 1
                     else:
                         # 尝试检测其他可能的翻译
-                        used_trans = term_tracker.used_translations.get(term.term, [])
+                        # used_translations 的键始终是小写 (term.lower())，
+                        # 直接用原始大小写查询对非全小写术语恒为空，故归一化为小写。
+                        used_trans = term_tracker.used_translations.get(term.term.lower(), [])
                         for ut in used_trans:
                             if ut in trans:
                                 term_usage[term.term]["translations"][ut] += 1
@@ -255,7 +257,8 @@ class ConsistencyReviewer:
                     # 检查译文中是否使用了正确的翻译
                     if term.translation and term.translation not in trans:
                         # 检查是否使用了其他翻译
-                        used_trans = term_tracker.used_translations.get(term.term, [])
+                        # used_translations 的键始终是小写 (term.lower())，故归一化为小写查询。
+                        used_trans = term_tracker.used_translations.get(term.term.lower(), [])
                         if used_trans and used_trans[0] != term.translation:
                             # 使用了不同的翻译，可能是不一致
                             issues.append(ConsistencyIssue(

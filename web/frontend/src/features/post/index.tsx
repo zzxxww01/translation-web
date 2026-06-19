@@ -81,7 +81,11 @@ export function PostFeature() {
   const handleGenerateTitle = useCallback(async (instruction?: string): Promise<string[]> => {
     const currentVersion = versions.find(v => v.id === currentVersionId);
     const content = currentVersion?.content || editedContent || originalText;
-    if (!content || content.trim().length < 50) return [];
+    if (!content || content.trim().length < 50) {
+      // C32: 内容过短时给出明确提示，而不是静默返回空标题列表
+      toast.warning('内容过短，至少需要 50 字才能生成标题');
+      return [];
+    }
     setLoading(true);
     try {
       const result = await generateTitleMutation.mutateAsync({

@@ -6,6 +6,8 @@ from src.prompts import get_prompt_manager
 
 from ..middleware import BadRequestException
 from ..utils.llm_errors import raise_llm_service_unavailable
+import asyncio
+
 from ..utils.llm_factory import generate_with_fallback
 from .slack_models import SlackReplyVariant
 
@@ -43,7 +45,7 @@ async def refine_version(
     )
 
     try:
-        english = generate_with_fallback(prompt, task_type="slack").strip()
+        english = (await asyncio.to_thread(generate_with_fallback, prompt, task_type="slack")).strip()
 
         return SlackReplyVariant(
             version=version,

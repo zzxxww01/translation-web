@@ -20,6 +20,7 @@ from src.services.term_confirmation_service import (
     ConfirmationDecision
 )
 from src.services.term_conflict_detector import ConflictType
+from src.services.glossary_storage import GlossaryStorage
 
 
 console = Console()
@@ -29,7 +30,9 @@ class TermConfirmationCLI:
     """Interactive CLI for term confirmation."""
 
     def __init__(self, base_path: Path):
-        self.service = TermConfirmationService(base_path)
+        # TermConfirmationService 需要 GlossaryStorage，而非裸 Path；先构造 storage 再注入。
+        storage = GlossaryStorage(base_path)
+        self.service = TermConfirmationService(storage)
 
     def run_interactive(self, package_id: str, project_id: str) -> bool:
         """
@@ -116,9 +119,9 @@ class TermConfirmationCLI:
                         f"  • Translation mismatch: existing '{conflict['existing_translation']}' "
                         f"vs suggested '{conflict['suggested_translation']}'"
                     )
-                elif conflict_type == ConflictType.PROJECT_OVERRIDES_GLOBAL.value:
+                elif conflict_type == ConflictType.CONTEXT_MISMATCH.value:
                     console.print(
-                        f"  • Project term overrides global: '{conflict['existing_translation']}'"
+                        f"  • Context mismatch: existing '{conflict['existing_translation']}'"
                     )
 
         # Get user decision

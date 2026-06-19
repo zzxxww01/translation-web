@@ -280,15 +280,21 @@ class FourStepTranslator:
         # 创建翻译会话（如果启用）
         session_id = None
         if self.session_service and project_id:
-            source_text = "\n\n".join([p.source for p in section.paragraphs])
+            # U3:对齐 TranslationSessionService.create_session 的真实签名
+            # (project_id/section_id/create_snapshot);此前传的 source_text/target_language/
+            # include_snapshot 不存在,注入 session_service 后会 TypeError。
             session = self.session_service.create_session(
                 project_id=project_id,
-                source_text=source_text,
-                target_language="zh-CN",
-                include_snapshot=True
+                section_id=section.section_id,
+                create_snapshot=True,
             )
             session_id = session.id
             logger.info(f"Created translation session: {session_id}")
+
+        # 降级哨兵：若初译已完成、后续步骤（反思/润色）出错，则保留 draft 而非整章丢弃。
+        draft_translations = None
+        understanding = None
+        translation_outputs = None
 
         try:
             import time
@@ -371,21 +377,22 @@ class FourStepTranslator:
             )
             self.feedback_history.append(feedback)
 
-            # 自学习：反思评分 < 8.0 且有具体 issues 时，后台提取规则
+            # 自学习：反思评分 < 8.0 且有具体 issues 时，后台提取规则。
+            # 四步法经 asyncio.to_thread 在工作线程执行，旧的 get_event_loop+create_task
+            # 在此恒失效（无运行中循环）。改用 memory_service._spawn_background，由其在
+            # 工作线程内通过 run_coroutine_threadsafe 回投到已登记的主循环。
             if (
                 self.memory_service
                 and reflection.overall_score < 8.0
                 and reflection.issues
             ):
                 try:
-                    loop = asyncio.get_event_loop()
-                    if loop.is_running():
-                        asyncio.create_task(
-                            self.memory_service.process_reflection_issues(
-                                reflection.issues,
-                                translations,
-                            )
+                    self.memory_service._spawn_background(
+                        self.memory_service.process_reflection_issues(
+                            reflection.issues,
+                            translations,
                         )
+                    )
                 except Exception as e:
                     logger.debug("Failed to schedule reflection rule extraction: %s", e)
 
@@ -407,9 +414,12 @@ class FourStepTranslator:
                 has_critical_issues
             )
 
-            should_polish = (
-                (reflection.fluency_score > 0 and reflection.fluency_score < 8.5) or
-                (reflection.conciseness_score > 0 and reflection.conciseness_score < 8.5)
+            # style_polish_threshold 控制润色触发阈值（默认 8.0，设为 0 关闭润色）。
+            # 此前此处硬编码 8.5，导致构造参数（含关闭润色的 0）完全失效。
+            polish_threshold = self.style_polish_threshold
+            should_polish = polish_threshold > 0 and (
+                (reflection.fluency_score > 0 and reflection.fluency_score < polish_threshold) or
+                (reflection.conciseness_score > 0 and reflection.conciseness_score < polish_threshold)
             )
 
             if should_refine or should_polish:
@@ -436,7 +446,10 @@ class FourStepTranslator:
                     reflection,
                     understanding,
                     provider=phase2_provider,
-                    issues_filter=issues_to_fix
+                    issues_filter=issues_to_fix,
+                    # 仅当确需风格润色时才处理全章每段；纯修订（仅 refine）只处理有问题的段落，
+                    # 避免对无问题段落做不必要的 LLM 改写（省 token、降低改写引入错误的风险）。
+                    polish_all=should_polish,
                 )
                 translations = [item.text for item in translation_outputs]
                 step45_duration = time.time() - step45_start
@@ -476,14 +489,17 @@ class FourStepTranslator:
             validation_report = None
             if self.term_validation_service and self.session_service and session_id:
                 try:
-                    session = self.session_service.get_session(session_id)
-                    if session and session.terminology_snapshot:
+                    # U3:服务方法是 load_session(非 get_session);快照术语经 term_ids 反查
+                    # 得到 List[Term](TranslationSession 无 terminology_snapshot 字段)。
+                    session = self.session_service.load_session(session_id)
+                    snapshot_terms = self.session_service.get_session_terms(session)
+                    if session and snapshot_terms:
                         source_text = "\n\n".join([p.source for p in section.paragraphs])
                         translated_text = "\n\n".join(translations)
                         validation_report = self.term_validation_service.validate_translation(
                             source_text=source_text,
                             translated_text=translated_text,
-                            terms=session.terminology_snapshot,
+                            terms=snapshot_terms,
                             strict=False
                         )
                         if validation_report.violations:
@@ -544,7 +560,37 @@ class FourStepTranslator:
             )
 
         except Exception as e:
-            # 标记会话失败
+            # 若初译已完成、仅后续步骤（反思/润色）出错，则降级返回 draft，
+            # 避免丢弃已花一次完整 LLM 调用得到的译文、并在重试时从头重译浪费 token。
+            if draft_translations is not None and translation_outputs is not None:
+                logger.warning(
+                    "四步法后续步骤失败，降级返回初译结果（section=%s）: %s",
+                    section.section_id, e,
+                )
+                if self.session_service and session_id:
+                    translated_text = "\n\n".join(draft_translations)
+                    try:
+                        self.session_service.complete_session(session_id, translated_text)
+                    except Exception:
+                        pass
+                return SectionTranslationResult(
+                    section_id=section.section_id,
+                    translations=list(draft_translations),
+                    draft_translations=list(draft_translations),
+                    revised_translations=[],
+                    translation_outputs=[
+                        {
+                            "text": item.text,
+                            "tokenized_text": item.tokenized_text,
+                            "format_issues": list(item.format_issues),
+                        }
+                        for item in translation_outputs
+                    ],
+                    understanding=understanding,
+                    reflection=None,
+                    assessment=None,
+                )
+            # 初译尚未完成（Step 1/2 失败）：无可用降级，标记失败并上抛
             if self.session_service and session_id:
                 self.session_service.fail_session(session_id, error=str(e))
             raise
@@ -692,8 +738,16 @@ class FourStepTranslator:
             section_text, section.title, context, paragraph_ids
         )
 
-        # 将 JSON 结果映射回 TranslationPayload
-        trans_map = {item["id"]: item["translation"] for item in translated}
+        # 将 JSON 结果映射回 TranslationPayload。
+        # 防御性取键：即便 provider 侧已清洗，这里也跳过缺键/非字符串条目，
+        # 让缺失段落落到下方逐段回退，而不是抛 KeyError 中断整章。
+        trans_map = {
+            item["id"]: item["translation"]
+            for item in translated
+            if isinstance(item, dict)
+            and "id" in item
+            and isinstance(item.get("translation"), str)
+        }
 
         translations: List[TranslationPayload] = []
         for para in paragraphs:
@@ -750,6 +804,9 @@ class FourStepTranslator:
         )
         total_sections = len(all_sections)
 
+        # 一次构建 section 上下文 payload，下方 role / translation_notes 复用
+        _section_payload = build_section_context_payload(understanding)
+
         context: Dict[str, Any] = {
             "article_theme": article_analysis.theme if article_analysis else "",
             "target_audience": (
@@ -773,12 +830,9 @@ class FourStepTranslator:
                 if article_analysis
                 else []
             ),
-            "section_role": (
-                build_section_context_payload(understanding).get("role", "")
-            ),
-            "translation_notes": (
-                build_section_context_payload(understanding).get("translation_notes", [])
-            ),
+            # 一次构建 section 上下文 payload，复用 role / translation_notes，避免重复计算
+            "section_role": _section_payload.get("role", ""),
+            "translation_notes": _section_payload.get("translation_notes", []),
             "article_challenges": (
                 build_article_challenge_payload(article_analysis.challenges)
                 if article_analysis
@@ -817,9 +871,10 @@ class FourStepTranslator:
         if feedback_text:
             context["feedback_from_previous_sections"] = feedback_text
 
-        # 注入术语使用记录
-        if self.context_manager.term_tracker.used_translations:
-            context["term_usage"] = self.context_manager.term_tracker.used_translations.copy()
+        # 注入术语使用记录（经加锁快照，避免与并发章节的写入竞态）
+        term_usage_snapshot = self.context_manager.snapshot_term_usage()
+        if term_usage_snapshot:
+            context["term_usage"] = term_usage_snapshot
 
         return context
 
@@ -1078,6 +1133,10 @@ class FourStepTranslator:
             terminology_score=float(result.get("terminology_score", 0)),
             accuracy_score=float(result.get("accuracy_score", 0)),
             fluency_score=float(result.get("fluency_score", 0)),
+            # readability_score 此前被漏读,导致质量门控 35% 权重维度与阈值判定恒为 0、
+            # assessment.passed 恒为 False、overall 被系统性压低约 3.5 分并写入记忆/质量
+            # 产物(审计 C1)。缺失时回退 fluency_score(prompt 注明二者通常相近)。
+            readability_score=float(result.get("readability_score", result.get("fluency_score", 0)) or 0),
             conciseness_score=float(result.get("conciseness_score", 0)),
             consistency_score=float(result.get("consistency_score", 0)),
             logic_score=float(result.get("logic_score", 0)),
@@ -1199,9 +1258,15 @@ class FourStepTranslator:
         reflection: ReflectionResult,
         understanding: SectionUnderstanding,
         provider: Optional[LLMProvider] = None,
-        issues_filter: Optional[List[TranslationIssue]] = None
+        issues_filter: Optional[List[TranslationIssue]] = None,
+        polish_all: bool = True,
     ) -> List[TranslationPayload]:
-        """Step 4+5: 批量润色 — 合并问题修复和风格优化，每 4 段一批"""
+        """Step 4+5: 批量润色 — 合并问题修复和风格优化，每 4 段一批。
+
+        polish_all=True：处理全章每段（风格润色需要覆盖全部段落）。
+        polish_all=False：纯修订模式，只处理有问题的段落，无问题段落保留初译，
+        避免不必要的 LLM 改写（省 token、降低改写引入错误的风险）。
+        """
         llm_provider = provider or self.llm
         REFINE_BATCH_SIZE = 4  # 每批处理 4 段
 
@@ -1244,6 +1309,10 @@ class FourStepTranslator:
 
             # 获取该段落的问题列表（可能为空）
             issues = issues_by_paragraph.get(idx, [])
+
+            # 纯修订模式（不做全章润色）下，跳过无问题的段落：保留其初译，不送 LLM
+            if not polish_all and not issues:
+                continue
 
             pairs.append((source, current_translation, issues, idx))
             indices_to_polish.append(idx)
@@ -1458,11 +1527,10 @@ class FourStepTranslator:
         self, terms: List[EnhancedTerm]
     ) -> List[EnhancedTerm]:
         """根据 term_tracker 已有的使用记录修正术语翻译，与单段翻译路径对齐。"""
-        tracker = self.context_manager.term_tracker
         corrected: List[EnhancedTerm] = []
         for term in terms:
-            if term.term.lower() in tracker.used_translations:
-                preferred = tracker.get_preferred_translation(term.term)
+            if self.context_manager.has_term_usage(term.term):
+                preferred = self.context_manager.get_preferred_term_translation(term.term)
                 if preferred:
                     term = term.model_copy(update={"translation": preferred})
             corrected.append(term)

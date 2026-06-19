@@ -106,10 +106,17 @@ class TermInjectionService:
         return self.first_occurrence_tracker.get(session_id, set()).copy()
 
     def _group_by_strategy(self, terms: List[Term]) -> Dict[str, List[Term]]:
-        """Group terms by their translation strategy."""
+        """Group terms by their translation strategy.
+
+        Strategy is normalized to upper-case so callers can match the
+        canonical keys ("TRANSLATE"/"PRESERVE"/...) regardless of how the
+        stored value is cased. TranslationStrategy enum values are lower-case
+        (e.g. "preserve"), so without normalization grouping silently fails.
+        """
         grouped: Dict[str, List[Term]] = {}
         for term in terms:
-            strategy = term.strategy or "TRANSLATE"
+            # Normalize case: enum values are lower-case, group keys are upper-case.
+            strategy = (term.strategy or "TRANSLATE").upper()
             if strategy not in grouped:
                 grouped[strategy] = []
             grouped[strategy].append(term)

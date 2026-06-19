@@ -4,7 +4,7 @@ Confirmation reference-version endpoints.
 
 from fastapi import APIRouter
 
-from ..dependencies import ProjectManagerDep, VersionServiceDep
+from ..dependencies import ConfirmationServiceDep, ProjectManagerDep, VersionServiceDep
 from ..middleware import NotFoundException, BadRequestException
 from .confirmation_models import ImportVersionRequest, ManualAlignRequest
 
@@ -18,6 +18,7 @@ async def import_reference_version(
     request: ImportVersionRequest,
     pm: ProjectManagerDep,
     service: VersionServiceDep,
+    confirm_service: ConfirmationServiceDep,
 ):
     try:
         version = await service.import_reference_translation(
@@ -29,6 +30,8 @@ async def import_reference_version(
         project = pm.get(project_id)
         project.versions.append(version)
         pm.save_meta(project)
+        # 导入新版本后清确认缓存,否则确认页最长 5 分钟仍返回旧 versions(审计 C26)
+        await confirm_service.invalidate_project_cache(project_id)
 
         return {
             "version_id": version.id,
@@ -52,14 +55,18 @@ async def manual_align(
     version_id: str,
     request: ManualAlignRequest,
     service: VersionServiceDep,
+    confirm_service: ConfirmationServiceDep,
 ):
     try:
-        return await service.manual_align(
+        result = await service.manual_align(
             project_id,
             version_id,
             request.ref_index,
             request.target_paragraph_id,
         )
+        # 对齐变更后清确认缓存,避免确认页脏读(审计 C26)
+        await confirm_service.invalidate_project_cache(project_id)
+        return result
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
     except ValueError as e:
@@ -74,13 +81,16 @@ async def skip_unaligned(
     version_id: str,
     ref_index: int,
     service: VersionServiceDep,
+    confirm_service: ConfirmationServiceDep,
 ):
     try:
-        return await service.skip_unaligned(
+        result = await service.skip_unaligned(
             project_id,
             version_id,
             ref_index,
         )
+        await confirm_service.invalidate_project_cache(project_id)
+        return result
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
     except ValueError as e:

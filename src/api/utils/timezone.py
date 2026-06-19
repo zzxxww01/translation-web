@@ -95,7 +95,11 @@ def parse_datetime_input(input_str: str) -> Tuple[Optional[datetime], Optional[s
         day = int(match.group(2))
         year = int(match.group(3))
         if year < 100:
-            year += 2000 if year >= 26 else 2100  # 假设 26-99 是 2026-2099
+            # 两位数年份按相对当前年份的滑动窗口扩展,避免写死阈值导致 '25'->2125(审计 C3)
+            _cy = datetime.now().year
+            year = (_cy // 100) * 100 + year
+            if year > _cy + 20:
+                year -= 100
         hour = int(match.group(4))
         minute = int(match.group(5))
         ampm = match.group(6)
@@ -106,7 +110,10 @@ def parse_datetime_input(input_str: str) -> Tuple[Optional[datetime], Optional[s
         elif ampm == "am" and hour == 12:
             hour = 0
 
-        return datetime(year, month, day, hour, minute), tz_abbr
+        try:
+            return datetime(year, month, day, hour, minute), tz_abbr
+        except ValueError:
+            return None, None
 
     # 尝试解析格式: M/D/YY h am/pm tz（不带分钟，支持4pm格式）
     pattern_no_minutes = r'(\d{1,2})/(\d{1,2})/(\d{2,4})\s+(?:at\s+)?(\d{1,2})\s*(am|pm)\s*(est|edt|cst|cdt|mst|mdt|pst|pdt)?'
@@ -116,7 +123,11 @@ def parse_datetime_input(input_str: str) -> Tuple[Optional[datetime], Optional[s
         day = int(match.group(2))
         year = int(match.group(3))
         if year < 100:
-            year += 2000 if year >= 26 else 2100  # 假设 26-99 是 2026-2099
+            # 两位数年份按相对当前年份的滑动窗口扩展,避免写死阈值导致 '25'->2125(审计 C3)
+            _cy = datetime.now().year
+            year = (_cy // 100) * 100 + year
+            if year > _cy + 20:
+                year -= 100
         hour = int(match.group(4))
         minute = 0  # 分钟设为0
         ampm = match.group(5)
@@ -127,7 +138,10 @@ def parse_datetime_input(input_str: str) -> Tuple[Optional[datetime], Optional[s
         elif ampm == "am" and hour == 12:
             hour = 0
 
-        return datetime(year, month, day, hour, minute), tz_abbr
+        try:
+            return datetime(year, month, day, hour, minute), tz_abbr
+        except ValueError:
+            return None, None
 
     # 尝试解析格式: 2025-01-15 14:00 cst
     pattern2 = r'(\d{4})-(\d{1,2})-(\d{1,2})\s+(?:at\s+)?(\d{1,2}):(\d{2})\s*(est|edt|cst|cdt|mst|mdt|pst|pdt)?'
@@ -140,7 +154,10 @@ def parse_datetime_input(input_str: str) -> Tuple[Optional[datetime], Optional[s
         minute = int(match.group(5))
         tz_abbr = match.group(6)
 
-        return datetime(year, month, day, hour, minute), tz_abbr
+        try:
+            return datetime(year, month, day, hour, minute), tz_abbr
+        except ValueError:
+            return None, None
 
     # 尝试解析格式: January 15, 2026 2:00 pm est
     pattern3 = r'([a-zA-Z]+)\s+(\d{1,2}),?\s*(\d{4})\s+(?:at\s+)?(\d{1,2}):(\d{2})\s*(am|pm)?\s*(est|edt|cst|cdt|mst|mdt|pst|pdt)?'
@@ -167,7 +184,10 @@ def parse_datetime_input(input_str: str) -> Tuple[Optional[datetime], Optional[s
             elif ampm == "am" and hour == 12:
                 hour = 0
 
-            return datetime(year, month, day, hour, minute), tz_abbr
+            try:
+                return datetime(year, month, day, hour, minute), tz_abbr
+            except ValueError:
+                return None, None
 
     return None, None
 

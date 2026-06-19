@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 import html
+import logging
 import re
 from dataclasses import dataclass, field
 from typing import Callable, Iterable, List, Optional, Sequence
 
 from .models import InlineElement, Paragraph
+
+logger = logging.getLogger(__name__)
 
 
 TOKEN_TYPE_MAP = {
@@ -98,12 +101,25 @@ def tokenize_text(text: str, elements: Optional[Sequence[InlineElement]]) -> str
         return text
 
     result = text
+    # 反向（按 start 降序）替换：每步只改动右侧文本，左侧元素的绝对偏移仍有效。
     for element in sorted(assigned, key=lambda item: item.start, reverse=True):
         token_id = element.span_id
         if not token_id:
             continue
         replacement = f"[[[{token_id}|{element.text}]]]"
-        result = result[: element.start] + replacement + result[element.end :]
+        # 一致性校验：偏移指向的文本必须等于该元素的期望文本。偏移漂移时
+        # （start/end 与实际内容不符）不再静默把 token 插到错误位置导致译文错乱，
+        # 而是跳过该 token 并告警；下游 token 校验会按"缺失 token"走既有的格式修复/回退。
+        if result[element.start : element.end] == element.text:
+            result = result[: element.start] + replacement + result[element.end :]
+        else:
+            logger.warning(
+                "tokenize_text: offset drift for token %s (expected %r, found %r); "
+                "skipping token to avoid corrupting text.",
+                token_id,
+                element.text[:40],
+                result[element.start : element.end][:40],
+            )
     return result
 
 
@@ -406,6 +422,13 @@ def reconstruct_block_tokenized_text(
         )
         if tokenized_text is None:
             if not paragraph.has_usable_translation() and fallback_to_source:
+                # 未翻译段落回填源文：记录告警以避免“静默把英文原文混入中文导出”
+                # 而无任何信号（断点续传/部分翻译场景）。不计入 issues，以免触发硬失败。
+                logger.warning(
+                    "Export fallback: paragraph %s has no usable translation; "
+                    "using source text verbatim.",
+                    paragraph.id,
+                )
                 tokenized_text = tokenize_text(paragraph.source, paragraph.inline_elements)
             elif paragraph.expected_tokens:
                 issues.append(

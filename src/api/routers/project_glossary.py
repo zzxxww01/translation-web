@@ -182,19 +182,20 @@ async def update_project_glossary(
     gm: GlossaryManagerDep,
 ):
     try:
-        glossary = gm.load_project(project_id)
-        term = GlossaryTerm(
-            original=request.original,
-            translation=request.translation,
-            strategy=request.strategy,
-            note=request.note,
-            tags=_initial_tags(request.original, request.tags),
-            scope="project",
-            source="manual",
-            status=request.status,
-        )
-        glossary.add_term(term)
-        gm.save_project(project_id, glossary)
+        with gm.project_lock(project_id):
+            glossary = gm.load_project(project_id)
+            term = GlossaryTerm(
+                original=request.original,
+                translation=request.translation,
+                strategy=request.strategy,
+                note=request.note,
+                tags=_initial_tags(request.original, request.tags),
+                scope="project",
+                source="manual",
+                status=request.status,
+            )
+            glossary.add_term(term)
+            gm.save_project(project_id, glossary)
         return {"message": "Term added", "term": term.model_dump(mode="json")}
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
@@ -209,14 +210,15 @@ async def update_glossary_term(
 ):
     try:
         original_decoded = unquote(original)
-        glossary = gm.load_project(project_id)
-        existing = glossary.get_term(original_decoded)
-        if not existing:
-            raise NotFoundException(detail=f"Term '{original_decoded}' not found in glossary")
+        with gm.project_lock(project_id):
+            glossary = gm.load_project(project_id)
+            existing = glossary.get_term(original_decoded)
+            if not existing:
+                raise NotFoundException(detail=f"Term '{original_decoded}' not found in glossary")
 
-        updated_term = _apply_term_updates(existing, request)
-        glossary.add_term(updated_term)
-        gm.save_project(project_id, glossary)
+            updated_term = _apply_term_updates(existing, request)
+            glossary.add_term(updated_term)
+            gm.save_project(project_id, glossary)
         return {"message": "Term updated", "term": updated_term.model_dump(mode="json")}
     except NotFoundException:
         raise
@@ -232,13 +234,14 @@ async def delete_glossary_term(
 ):
     try:
         original_decoded = unquote(original)
-        glossary = gm.load_project(project_id)
-        original_lower = original_decoded.lower()
-        filtered_terms = [term for term in glossary.terms if term.original.lower() != original_lower]
-        if len(filtered_terms) == len(glossary.terms):
-            raise NotFoundException(detail=f"Term '{original_decoded}' not found in glossary")
-        glossary.terms = filtered_terms
-        gm.save_project(project_id, glossary)
+        with gm.project_lock(project_id):
+            glossary = gm.load_project(project_id)
+            original_lower = original_decoded.lower()
+            filtered_terms = [term for term in glossary.terms if term.original.lower() != original_lower]
+            if len(filtered_terms) == len(glossary.terms):
+                raise NotFoundException(detail=f"Term '{original_decoded}' not found in glossary")
+            glossary.terms = filtered_terms
+            gm.save_project(project_id, glossary)
         return {"message": "Term deleted", "original": original_decoded}
     except NotFoundException:
         raise
@@ -253,9 +256,10 @@ async def batch_update_project_glossary(
     gm: GlossaryManagerDep,
 ):
     try:
-        glossary = gm.load_project(project_id)
-        updated_terms, matched_count = _apply_batch_action(glossary, request)
-        gm.save_project(project_id, glossary)
+        with gm.project_lock(project_id):
+            glossary = gm.load_project(project_id)
+            updated_terms, matched_count = _apply_batch_action(glossary, request)
+            gm.save_project(project_id, glossary)
         return {
             "message": "Batch action applied",
             "action": request.action,

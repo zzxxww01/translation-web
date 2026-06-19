@@ -13,6 +13,8 @@ from ..middleware import BadRequestException
 from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.json_utils import parse_llm_json_response
+import asyncio
+
 from ..utils.llm_factory import generate_with_fallback
 from .tools_models import EmailReplyRequest, EmailReplyResponse
 
@@ -72,7 +74,7 @@ async def generate_email_reply(request: Request, body: EmailReplyRequest):
     )
 
     try:
-        response_text = generate_with_fallback(prompt, task_type="post")
+        response_text = await asyncio.to_thread(generate_with_fallback, prompt, task_type="post")
         data = parse_llm_json_response(response_text)
 
         replies = data.get("replies", [])

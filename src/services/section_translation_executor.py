@@ -1,3 +1,4 @@
+import asyncio
 from pathlib import Path
 from typing import Any, Awaitable, Callable, Optional
 
@@ -142,7 +143,10 @@ class SectionTranslationExecutor:
                     },
                 )
             else:
-                result = self._four_step_translate_section(
+                # 四步法 translate_section 是同步阻塞（多次 LLM 调用），卸载到线程池，
+                # 使 gather 的多章节并发真正生效（否则阻塞事件循环、章节退化为串行）。
+                result = await asyncio.to_thread(
+                    self._four_step_translate_section,
                     section=translatable_section,
                     all_sections=all_sections,
                     project_id=project_id,

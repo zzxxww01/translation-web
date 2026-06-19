@@ -100,6 +100,25 @@ class TranslationRunRegistry:
                 return
             self._active_run = None
 
+    def try_acquire_slot(
+        self, project_id: str, *, status: str = "starting"
+    ) -> Optional[ActiveRunLock]:
+        """原子 check-and-set:仅当当前没有任何活动 run 时占用槽并返回它,否则返回
+        None。消除 get_active_run()+set_active_run() 之间的竞态窗口(审计 C4),
+        避免两个不同 project 同时通过 'active is None' 判断而都获得唯一槽。"""
+        with self._active_run_lock:
+            if self._active_run is not None:
+                return None
+            now = datetime.now().isoformat()
+            self._active_run = ActiveRunLock(
+                project_id=project_id,
+                run_id=None,
+                status=status,
+                started_at=now,
+                updated_at=now,
+            )
+            return self._active_run
+
     async def claim_translation_slot(
         self,
         project_id: str,
@@ -108,9 +127,9 @@ class TranslationRunRegistry:
         wait_timeout: float = 300.0,
         poll_interval: float = 0.5,
     ) -> Dict[str, Any]:
-        active = self.get_active_run()
-        if active is None:
-            placeholder = self.set_active_run(project_id, run_id=None, status="starting")
+        # 原子 check-and-set,消除 get_active_run()/set_active_run() 之间的竞态窗口(审计 C4)。
+        placeholder = self.try_acquire_slot(project_id, status="starting")
+        if placeholder is not None:
             return {
                 "status": "acquired",
                 "project_id": project_id,
@@ -118,16 +137,16 @@ class TranslationRunRegistry:
                 "previous_project_id": None,
             }
 
-        previous_project_id = active.project_id
-        previous_run_id = active.run_id
+        active = self.get_active_run()
+        previous_project_id = active.project_id if active else None
+        previous_run_id = active.run_id if active else None
         cancel_result = await cancel_callback(previous_project_id)
 
         deadline = time.monotonic() + wait_timeout
         while time.monotonic() < deadline:
             await asyncio.sleep(poll_interval)
-            active = self.get_active_run()
-            if active is None or active.project_id == project_id:
-                placeholder = self.set_active_run(project_id, run_id=None, status="starting")
+            placeholder = self.try_acquire_slot(project_id, status="starting")
+            if placeholder is not None:
                 return {
                     "status": "acquired_after_cancel",
                     "project_id": project_id,

@@ -2,6 +2,7 @@
 Project and section management endpoints.
 """
 
+import asyncio
 import re
 import shutil
 import tempfile
@@ -18,6 +19,7 @@ from ..dependencies import ProjectManagerDep, get_project_manager
 from ..middleware import BadRequestException, NotFoundException
 from ..middleware.rate_limit import limiter
 from .projects_models import CreateProjectRequest, ProjectResponse
+from .translate_utils import validate_path_component
 
 
 router = APIRouter()
@@ -74,7 +76,8 @@ def _build_project_response(meta) -> ProjectResponse:
 
 @router.get("/projects", response_model=List[ProjectResponse])
 async def list_projects(pm: ProjectManagerDep):
-    projects = pm.list_all()
+    # 全目录扫描 + 逐项目读 meta(可能再触发 get_sections)是阻塞 IO,放线程池避免冻结事件循环(审计 N16)。
+    projects = await asyncio.to_thread(pm.list_all)
     return [_build_project_response(p) for p in projects]
 
 
@@ -86,7 +89,7 @@ async def create_project(
     pm: ProjectManagerDep,
 ):
     try:
-        meta = pm.create(body.name, body.html_path)
+        meta = await asyncio.to_thread(pm.create, body.name, body.html_path)
         return _build_project_response(meta)
     except ValueError as e:
         raise BadRequestException(detail=str(e))
@@ -149,7 +152,8 @@ async def upload_project(
                     with open(dest_path, "wb") as out_file:
                         shutil.copyfileobj(asset.file, out_file)
 
-            meta = pm.create(name, str(temp_source_path))
+            # HTML->MD 转换 + 分段 + 逐章写盘是 CPU/IO 密集,放线程池避免阻塞事件循环(审计 N17)。
+            meta = await asyncio.to_thread(pm.create, name, str(temp_source_path))
 
         return _build_project_response(meta)
     except ValueError as e:
@@ -157,7 +161,15 @@ async def upload_project(
     except BadRequestException:
         raise
     except Exception as e:
-        raise BadRequestException(detail=f"Upload failed: {str(e)}")
+        import os
+        import logging
+        logging.getLogger(__name__).error(f"Upload failed: {e}")
+        detail = (
+            f"Upload failed: {e}"
+            if os.getenv("DEBUG") == "true"
+            else "Upload failed. Please try again or contact support."
+        )
+        raise BadRequestException(detail=detail)
     finally:
         file.file.close()
         if assets:
@@ -167,6 +179,8 @@ async def upload_project(
 
 @router.get("/projects/{project_id}")
 async def get_project(project_id: str, pm: ProjectManagerDep):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         meta = pm.get(project_id)
         sections = pm.get_sections(project_id)
@@ -200,6 +214,8 @@ async def get_project(project_id: str, pm: ProjectManagerDep):
 @router.delete("/projects/{project_id}")
 @limiter.limit("30/minute")
 async def delete_project(request: Request, project_id: str, pm: ProjectManagerDep):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         pm.delete(project_id)
         return {"message": "Project deleted"}
@@ -216,6 +232,8 @@ async def export_project(
     include_source: bool = False,
     format: str = "zh",
 ):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         content = pm.export(project_id, include_source=include_source, format=format)
         filename = pm.get_export_filename(project_id, format=format)
@@ -233,6 +251,8 @@ async def export_project(
 
 @router.get("/projects/{project_id}/sections")
 async def get_sections(project_id: str, pm: ProjectManagerDep):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
     try:
         sections = pm.get_sections(project_id)
         return [
@@ -252,6 +272,9 @@ async def get_sections(project_id: str, pm: ProjectManagerDep):
 
 @router.get("/projects/{project_id}/sections/{section_id}")
 async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project not found")
+
     def _normalize_image_source(paragraph) -> str:
         if paragraph.element_type != ElementType.IMAGE:
             return paragraph.source

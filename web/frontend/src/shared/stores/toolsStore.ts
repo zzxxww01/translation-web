@@ -73,8 +73,11 @@ export const useToolsStore = create<ToolsState>()(
       }),
       {
         name: 'ToolsStore',
+        // C33: 不再持久化 tasks。tasks 的初始值是内置示例任务，
+        // 持久化后会把示例数据/陈旧任务长期写入 localStorage；
+        // 这里只保留轻量的当前工具选择作为 UI 偏好。
         partialize: state => ({
-          tasks: state.tasks,
+          currentTool: state.currentTool,
         }),
       }
     ),

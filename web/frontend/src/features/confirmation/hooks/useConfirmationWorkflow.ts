@@ -2,7 +2,7 @@
  * 分段确认工作流 - 核心Hook
  */
 
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useConfirmationStore } from '../stores/confirmationStore';
 import { confirmationApi } from '../api/confirmationApi';
 import type {
@@ -19,6 +19,8 @@ export function useConfirmationWorkflow() {
     setProjectId,
     setWorkflowStatus,
     setCurrentParagraph,
+    setTotalParagraphs,
+    setSelectedVersion,
     setCustomTranslation,
     goToNext,
     goToPrev,
@@ -26,6 +28,9 @@ export function useConfirmationWorkflow() {
     setLoading,
     setError,
   } = useConfirmationStore();
+
+  // N13: 单调递增的请求ID，用于丢弃过期的 loadParagraph 响应（防止并发/快速切段时旧数据覆盖新段落）
+  const loadRequestRef = useRef(0);
 
   const getCompletionState = useCallback(
     (status: {
@@ -120,22 +125,39 @@ export function useConfirmationWorkflow() {
       return;
     }
 
+    // N13: 记录本次请求ID；若响应返回时已被更新的请求取代，则丢弃本次结果，避免旧数据覆盖新段落或回拨 index
+    const requestId = ++loadRequestRef.current;
+
     setLoading(true);
     setError(null);
 
     try {
       const data = await confirmationApi.getParagraphConfirmation(projectId, index);
+      // 过期请求：直接丢弃，不写入任何状态
+      if (requestId !== loadRequestRef.current) {
+        return data;
+      }
       setCurrentParagraph(data.paragraph, data.versions);
+      if (typeof data.total_paragraphs === 'number') {
+        setTotalParagraphs(data.total_paragraphs);
+      }
       jumpTo(index);
       return data;
     } catch (error) {
+      // 过期请求的错误同样丢弃，避免覆盖更新请求的状态
+      if (requestId !== loadRequestRef.current) {
+        return undefined;
+      }
       const message = error instanceof Error ? error.message : '加载段落失败';
       setError(message);
       return undefined;
     } finally {
-      setLoading(false);
+      // 仅最新请求负责清除 loading，避免过期请求提前关闭新请求的加载态
+      if (requestId === loadRequestRef.current) {
+        setLoading(false);
+      }
     }
-  }, [projectId, setCurrentParagraph, jumpTo, setLoading, setError]);
+  }, [projectId, setCurrentParagraph, setTotalParagraphs, jumpTo, setLoading, setError]);
 
   // 选择版本
   const selectVersion = useCallback((versionId: string) => {
@@ -143,9 +165,11 @@ export function useConfirmationWorkflow() {
     const version = versions.find((v) => v.id === versionId);
 
     if (version) {
+      // N21: 同时记录选中版本 ID,使卡片显示选中态、确认时能带上 version_id 归因
+      setSelectedVersion(versionId);
       setCustomTranslation(version.translation);
     }
-  }, [setCustomTranslation]);
+  }, [setSelectedVersion, setCustomTranslation]);
 
   // 确认段落
   const confirmParagraph = useCallback(async (translation: string, versionId?: string, customEdit = false) => {

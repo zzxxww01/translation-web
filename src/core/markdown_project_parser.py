@@ -93,7 +93,16 @@ class MarkdownProjectParser:
                 continue
             if stripped.startswith("## "):
                 break
-            if stripped.startswith("By "):
+            # 仅把 "By <Title-Case 人名列表>" 形态的短行当作 byline 跳过;
+            # 避免误删以 "By leveraging/By contrast/By the way" 开头的正文句子(审计 N4)。
+            if (
+                len(stripped) <= 80
+                and re.fullmatch(
+                    r"By\s+[A-Z][A-Za-z.'\-]+(?:\s+[A-Z][A-Za-z.'\-]+)*"
+                    r"(?:\s*(?:,|and|&)\s*[A-Z][A-Za-z.'\-]+(?:\s+[A-Z][A-Za-z.'\-]+)*)*",
+                    stripped,
+                )
+            ):
                 index += 1
                 continue
             if re.match(r"^[A-Z][a-z]{2}\s+\d{2},\s+\d{4}(?:\s+\S+\s+\w+)?$", stripped):
@@ -251,6 +260,23 @@ class MarkdownProjectParser:
                 index += 1
                 continue
 
+            # 有序列表项:各自成独立块,保留序号("1. text")。不并入散文累积,
+            # 否则连续条目会被合并成一行散文、序号变正文(审计 N3)。
+            if re.match(r"^\d+[.)]\s+", stripped):
+                blocks.append(
+                    self._make_text_block(
+                        block_id=f"b{block_index:04d}",
+                        block_index=block_index,
+                        kind="p",
+                        element_type=ElementType.P,
+                        raw_markdown=stripped,
+                        markdown_text=stripped,
+                    )
+                )
+                block_index += 1
+                index += 1
+                continue
+
             if stripped.startswith("!["):
                 blocks.append(
                     self._make_image_block(
@@ -362,6 +388,7 @@ class MarkdownProjectParser:
         return (
             stripped.startswith(("## ", "### ", "#### ", "```", "![", ">"))
             or re.match(r"^[-*+]\s+", stripped) is not None
+            or re.match(r"^\d+[.)]\s+", stripped) is not None
             or self._starts_table(lines, index)
         )
 
@@ -642,8 +669,15 @@ class MarkdownProjectParser:
         elements: list[InlineElement] = []
         index = 0
         output_pos = 0
+        # italic 分支遵循 CommonMark flanking:* 定界符内侧不可为空白(避免 "2 * 3 * 4"
+        # 被当强调);_ 定界符外侧不可为单词字符(避免 snake_case 标识符如 get_data_from_api
+        # 的下划线被吞并、单词被粘连)。见审计 N2。
         combined = re.compile(
-            r'\[([^\]]+)\]\((<[^>]+>|[^()\s]*(?:\([^)]*\)[^()\s]*)*)(?:\s+"([^"]+)")?\)|\*\*([^*]+)\*\*|__([^_]+)__|(?<!\*)\*([^*]+)\*(?!\*)|(?<!_)_([^_]+)_(?!_)|`([^`]+)`'
+            r'\[([^\]]+)\]\((<[^>]+>|[^()\s]*(?:\([^)]*\)[^()\s]*)*)(?:\s+"([^"]+)")?\)'
+            r'|\*\*([^*]+)\*\*|__([^_]+)__'
+            r'|(?<!\*)\*([^\s*](?:[^*]*[^\s*])?)\*(?!\*)'
+            r"|(?<![A-Za-z0-9_])_([^\s_](?:[^_]*[^\s_])?)_(?![A-Za-z0-9_])"
+            r'|`([^`]+)`'
         )
 
         for match in combined.finditer(text):

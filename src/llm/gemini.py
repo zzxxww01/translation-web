@@ -125,7 +125,7 @@ def _resolve_default_runtime_settings(
         if normalized_selector and (
             normalized_selector == candidate_alias
             or normalized_selector == candidate_real_model
-            or candidate_alias.endswith(normalized_alias)
+            or candidate_alias == normalized_alias
         ):
             selected_model = candidate
             break
@@ -494,8 +494,14 @@ class GeminiProvider(LLMProvider):
             self._client_cache[api_key] = client
             return client
 
-    # Shared thread pool for timeout-guarded LLM calls
-    _timeout_executor = ThreadPoolExecutor(max_workers=4)
+    # Shared thread pool for timeout-guarded LLM calls.
+    # 章节级翻译现在通过 asyncio.to_thread 真并发执行；SDK 传输模式下每个 generate()
+    # 都经此池提交。若仍固定 4 worker，会把高并发翻译重新卡回 4 路串行。改为按需放大
+    # （主要是网络 IO 等待，worker 多无妨），可用 GEMINI_TIMEOUT_POOL_WORKERS 覆盖。
+    _timeout_executor = ThreadPoolExecutor(
+        max_workers=max(16, int(os.getenv("GEMINI_TIMEOUT_POOL_WORKERS", "0") or 0)),
+        thread_name_prefix="gemini-timeout",
+    )
 
     def _generate_with_timeout_fn(self, fn, timeout: int | None):
         if not timeout or timeout <= 0:
@@ -506,6 +512,17 @@ class GeminiProvider(LLMProvider):
         except FutureTimeoutError:
             future.cancel()
             raise
+
+    def _resolve_max_output_tokens(self) -> int:
+        """解析当前模型的最大输出 token 数。
+
+        此前 SDK / REST 生成配置都未传 max_output_tokens，输出依赖供应商默认值，
+        长 section / 长 JSON 可能被静默截断（再喂给 _parse_json_response 退化为 {}）。
+        """
+        config = MODEL_CONFIG.get(self.model_type)
+        if config and isinstance(config.get("max_output_tokens"), int):
+            return config["max_output_tokens"]
+        return 65536
 
     def _generate_with_rest(
         self,
@@ -518,7 +535,10 @@ class GeminiProvider(LLMProvider):
     ) -> str:
         model = model_override or self.model_name
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-        generation_config = {"temperature": temperature}
+        generation_config = {
+            "temperature": temperature,
+            "maxOutputTokens": self._resolve_max_output_tokens(),
+        }
         if response_mime_type:
             generation_config["responseMimeType"] = response_mime_type
         payload = {
@@ -631,10 +651,12 @@ class GeminiProvider(LLMProvider):
 
     @staticmethod
     def _is_retryable_error(error_str: str) -> bool:
+        # 注意：auth 错误（401/403/invalid key）是确定性失败，重试同一 key 永远不会成功，
+        # 因此不计入 retryable，避免在最终路由上空耗整个指数退避预算。auth 失败仍允许
+        # 在 has_fresh_attempt 分支轮换到其它 key/model（见 generate 重试循环）。
         text = error_str.lower()
         return (
-            GeminiProvider._is_auth_error(error_str)
-            or GeminiProvider._is_rate_limited(error_str)
+            GeminiProvider._is_rate_limited(error_str)
             or GeminiProvider._is_high_demand_unavailable(error_str)
             or "quota" in text
             or "500" in text
@@ -721,7 +743,10 @@ class GeminiProvider(LLMProvider):
         client = self._get_client(attempt.api_key)
 
         def _call():
-            config = {"temperature": temperature}
+            config = {
+                "temperature": temperature,
+                "max_output_tokens": self._resolve_max_output_tokens(),
+            }
             if response_mime_type:
                 config["response_mime_type"] = response_mime_type
             with self._temporary_proxy_env():
@@ -730,7 +755,17 @@ class GeminiProvider(LLMProvider):
                     contents=prompt,
                     config=config,
                 )
-            return resp.text
+            text = resp.text
+            if text is None:
+                # 候选被安全策略拦截或无有效候选时 resp.text 为 None。抛可重试的
+                # typed 错误以触发 key/model 轮换,避免上层对 None 调用 .strip()
+                # 抛出令人误解的裸 AttributeError(审计 C2)。
+                feedback = getattr(resp, "prompt_feedback", None)
+                block_reason = getattr(feedback, "block_reason", None) if feedback else None
+                raise LLMUpstreamUnavailableError(
+                    f"Gemini returned no text (block_reason={block_reason})"
+                )
+            return text
 
         return self._generate_with_timeout_fn(_call, timeout)
 
@@ -772,7 +807,9 @@ class GeminiProvider(LLMProvider):
             "rest" if self._use_rest_transport() else "sdk",
         )
 
-        extra_retry_index = 0
+        # 贯穿整个重试循环单调递增的退避计数器，使 2**n 指数退避在 key/model 轮换
+        # 期间也真实增长（此前只在最终路由分支递增，轮换期间恒为 0）。
+        backoff_index = 0
         last_exception: Exception | None = None
         response_mime_type = "application/json" if response_format == "json" else None
 
@@ -819,7 +856,28 @@ class GeminiProvider(LLMProvider):
                     raise exc
 
                 has_fresh_attempt = plan_index < len(attempt_plan) - 1
-                if has_fresh_attempt and self._is_retryable_error(error_text):
+                # auth 错误不进退避循环，但仍允许换一个 key/model 再试一次（另一个 key 可能有效）
+                if has_fresh_attempt and (
+                    self._is_retryable_error(error_text)
+                    or self._is_auth_error(error_text)
+                ):
+                    # 限流时换 key 前也要退避：否则会瞬间把所有 key 逐个撞限流、全部烧光，
+                    # 等真正进入退避路径时已无可用 key。auth/其它暂时性错误仍快速轮换。
+                    if self._is_rate_limited(error_text):
+                        retry_delay = self._retry_delay_for_error(
+                            error_text, backoff_index
+                        )
+                        backoff_index += 1
+                        logger.warning(
+                            "[Gemini] rate limited on model=%s key=%s; backing off %.1fs before switching key (%s/%s). err=%s",
+                            attempt.model_name,
+                            attempt.key_role,
+                            retry_delay,
+                            attempt_index + 1,
+                            max_attempts,
+                            error_text,
+                        )
+                        time.sleep(retry_delay)
                     next_attempt = attempt_plan[plan_index + 1]
                     logger.warning(
                         "[Gemini] attempt failed on model=%s key=%s; switching to model=%s key=%s (%s/%s). err=%s",
@@ -837,9 +895,9 @@ class GeminiProvider(LLMProvider):
                     error_text
                 ):
                     retry_delay = self._retry_delay_for_error(
-                        error_text, extra_retry_index
+                        error_text, backoff_index
                     )
-                    extra_retry_index += 1
+                    backoff_index += 1
                     logger.warning(
                         "[Gemini] request failed on final route model=%s key=%s; retry in %.1fs (%s/%s). err=%s",
                         attempt.model_name,
@@ -1300,13 +1358,49 @@ class GeminiProvider(LLMProvider):
             raise
 
         if isinstance(result, dict) and "translations" in result:
-            return result["translations"]
-        if isinstance(result, list):
-            return result
+            raw = result["translations"]
+        elif isinstance(result, list):
+            raw = result
+        else:
+            raise ValueError(
+                "Batch translation response does not satisfy the JSON contract."
+            )
 
-        raise ValueError(
-            "Batch translation response does not satisfy the JSON contract."
+        return self._coerce_translation_items(
+            raw, expected_count=len(paragraph_ids), label="section batch"
         )
+
+    @staticmethod
+    def _coerce_translation_items(
+        raw: Any, *, expected_count: Optional[int] = None, label: str = "batch"
+    ) -> List[Dict[str, str]]:
+        """规整批翻 JSON 输出，只保留含 id/translation 的合法条目。
+
+        模型偶尔会返回字符串列表、缺键或多/少条目。直接交给下游
+        ``{item["id"]: item["translation"]}`` 会抛 KeyError/TypeError，
+        中断整章并绕过本应触发的逐段回退。这里宽容地丢弃畸形条目，
+        让调用方的 per-paragraph fallback 干净接管。
+        """
+        if not isinstance(raw, list):
+            logger.warning("[Gemini] %s translation output is not a list: %r", label, type(raw))
+            return []
+        cleaned: List[Dict[str, str]] = []
+        for item in raw:
+            if not isinstance(item, dict):
+                continue
+            pid = item.get("id")
+            translation = item.get("translation")
+            if pid is None or not isinstance(translation, str):
+                continue
+            cleaned.append({"id": str(pid), "translation": translation})
+        if expected_count is not None and len(cleaned) != expected_count:
+            logger.warning(
+                "[Gemini] %s translation count mismatch: got %d well-formed of expected %d",
+                label,
+                len(cleaned),
+                expected_count,
+            )
+        return cleaned
 
     def translate_source_metadata_batch(
         self,

@@ -7,16 +7,46 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { RotateCw } from 'lucide-react';
 import type { TimezoneConvertResult } from '@/shared/types';
 
-function formatTime(date: Date): string {
-  return `${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}:${date.getSeconds().toString().padStart(2, '0')}`;
+const WEEKDAY_LABELS: Record<string, string> = {
+  Sun: '周日',
+  Mon: '周一',
+  Tue: '周二',
+  Wed: '周三',
+  Thu: '周四',
+  Fri: '周五',
+  Sat: '周六',
+};
+
+// C38: 用 Intl.DateTimeFormat 直接按目标时区格式化，避免
+// new Date(now.toLocaleString('en-US', { timeZone })) 在不同浏览器下解析不一致的问题。
+function formatTimeInZone(now: Date, timeZone: string): string {
+  return new Intl.DateTimeFormat('zh-CN', {
+    timeZone,
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  }).format(now);
 }
 
-function formatDate(date: Date): string {
-  const weekdays = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
-  const y = date.getFullYear();
-  const m = (date.getMonth() + 1).toString().padStart(2, '0');
-  const d = date.getDate().toString().padStart(2, '0');
-  return `${y}/${m}/${d} ${weekdays[date.getDay()]}`;
+function formatDateInZone(now: Date, timeZone: string): string {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    weekday: 'short',
+  }).formatToParts(now);
+
+  const lookup = (type: Intl.DateTimeFormatPartTypes) =>
+    parts.find(part => part.type === type)?.value ?? '';
+
+  const year = lookup('year');
+  const month = lookup('month');
+  const day = lookup('day');
+  const weekday = WEEKDAY_LABELS[lookup('weekday')] ?? '';
+
+  return `${year}/${month}/${day} ${weekday}`.trim();
 }
 
 function LiveTimeCard({ title, timeZone }: { title: string; timeZone: string }) {
@@ -26,9 +56,8 @@ function LiveTimeCard({ title, timeZone }: { title: string; timeZone: string }) 
   useEffect(() => {
     const update = () => {
       const now = new Date();
-      const local = new Date(now.toLocaleString('en-US', { timeZone }));
-      setTime(formatTime(local));
-      setDate(formatDate(local));
+      setTime(formatTimeInZone(now, timeZone));
+      setDate(formatDateInZone(now, timeZone));
     };
     update();
     const id = setInterval(update, 1000);

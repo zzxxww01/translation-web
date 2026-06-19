@@ -36,17 +36,32 @@ _LATEX_INLINE_MATH = re.compile(
 _LATEX_ESCAPED_SUBSCRIPT = re.compile(r"\\_")
 _LATEX_ESCAPED_STAR_ENV = re.compile(r"(\\(?:begin|end)\{[^{}\n]*?)\\\*([^{}\n]*\})")
 
+# Indented code blocks (lines starting with 4 spaces or a tab) — content must
+# NOT be escaped. A run of consecutive indented lines is protected as one block.
+_INDENTED_CODE_BLOCK = re.compile(r"(?:^(?: {4}|\t).*(?:\n|$))+", re.MULTILINE)
+
+# Table rows (lines starting with optional whitespace then `|`). Cell contents
+# (which may legitimately contain `$`, `<`, `>`) must NOT be escaped.
+_TABLE_ROW = re.compile(r"^[ \t]*\|.*$", re.MULTILINE)
+
 # Inline code spans (`...`) — must NOT be touched.
 _INLINE_CODE = re.compile(r"`[^`]+`")
 
-# Markdown images: ![alt](url) or ![alt](url "title")
-_MD_IMAGE = re.compile(r"!\[[^\]]*\]\([^)]+\)")
+# Markdown images: ![alt](url) or ![alt](url "title").
+# URL may contain one level of nested parens, e.g. .../wiki/Foo_(bar).
+_PAREN_URL = r"\([^()]*(?:\([^()]*\)[^()]*)*\)"
+_MD_IMAGE = re.compile(r"!\[[^\]]*\]" + _PAREN_URL)
 
-# Markdown links: [text](url) or [text](url "title")
-_MD_LINK = re.compile(r"\[[^\]]*\]\([^)]+\)")
+# Markdown links: [text](url) or [text](url "title").
+_MD_LINK = re.compile(r"\[[^\]]*\]" + _PAREN_URL)
 
 # HTML tags (including self-closing) — preserve as-is.
-_HTML_TAG = re.compile(r"</?[a-zA-Z][^>]*>")
+# 收紧匹配，避免把散文里的 `<x and y>`（如 "5 < x and y > 3"）误判为标签而被保护，
+# 这类应当作普通文本转义。只识别：无属性标签（<div> </p> <br/>）或含 `=` 属性的标签。
+_HTML_TAG = re.compile(
+    r"</?[a-zA-Z][a-zA-Z0-9]*\s*/?>"
+    r"|<[a-zA-Z][a-zA-Z0-9]*\s+[^<>]*=[^<>]*>"
+)
 
 # HTML comments <!-- ... -->
 _HTML_COMMENT = re.compile(r"<!--.*?-->", re.DOTALL)
@@ -60,8 +75,10 @@ _BARE_DOLLAR = re.compile(r"(?<!\\)(?<![$])[$](?![$])")
 # Lookahead checks it's not followed by a tag-name pattern or `!--`.
 _BARE_LT = re.compile(r"<(?![a-zA-Z/!])")
 
-# Bare `>` at start of line that is NOT a blockquote (we only escape mid-line `>`).
-_MID_LINE_GT = re.compile(r"(?<=\S)>")
+# Bare `>` mid-line that is NOT a blockquote. Exclude common safe sequences so we
+# don't mangle prose arrows/comparisons (a -> b, x => y, n >= m). `<` is already
+# escaped and real HTML tags are protected, so these standalone `>` need no escaping.
+_MID_LINE_GT = re.compile(r"(?<=[^\s\-=>])>(?![=>])")
 
 # Pipe characters `|` outside of markdown tables can occasionally cause issues.
 # We only escape pipes that appear inside normal text paragraphs,
@@ -115,8 +132,11 @@ def postprocess_markdown(content: str) -> str:
     def _protect_latex(match: re.Match[str]) -> str:
         return _protect_text(_normalize_latex_math(match.group(0)))
 
-    # Order matters: fenced code first, then LaTeX, inline code, images, links, HTML.
+    # Order matters: fenced code first (largest), then indented code blocks and
+    # table rows (whole-line protection), then LaTeX, inline code, images, links, HTML.
     work = _FENCED_CODE_BLOCK.sub(_protect, content)
+    work = _INDENTED_CODE_BLOCK.sub(_protect, work)
+    work = _TABLE_ROW.sub(_protect, work)
     work = _LATEX_DISPLAY_MATH.sub(_protect_latex, work)
     work = _LATEX_INLINE_MATH.sub(_protect_latex, work)
     work = _INLINE_CODE.sub(_protect, work)

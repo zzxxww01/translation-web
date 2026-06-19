@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Copy, Send, Edit2, Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/card';
@@ -27,6 +27,14 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
   const [editedChinese, setEditedChinese] = useState(version.chinese || '');
   const [showSuccess, setShowSuccess] = useState(false);
   const refineMutation = useRefineVersion();
+
+  // C31: 当外部 version.chinese 变化（如重新生成/切换版本）时，在非编辑态同步本地草稿，
+  // 避免卡片显示陈旧内容；编辑中不打断用户输入。
+  useEffect(() => {
+    if (!isEditing) {
+      setEditedChinese(version.chinese || '');
+    }
+  }, [version.chinese, isEditing]);
 
   const handleCopyOnly = async () => {
     const ok = await copyToClipboard(version.english);

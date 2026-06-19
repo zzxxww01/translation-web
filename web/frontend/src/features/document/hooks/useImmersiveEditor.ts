@@ -466,14 +466,39 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         return next;
       });
 
+      // N11: 通过 runParagraphOperation 把整个批量请求串到每个段落的操作链上，
+      // 避免与在途自动保存/单段重译互相覆盖。先等待所有选中段落的在途操作完成，
+      // 再发起单次批量请求，并把该批量 Promise 注册回每个段落的操作链，
+      // 让随后到来的单段操作排在它后面。
+      const inFlight = ids
+        .map(id => paragraphOperationRef.current[id])
+        .filter((promise): promise is Promise<unknown> => Boolean(promise));
+      if (inFlight.length > 0) {
+        await Promise.allSettled(inFlight);
+      }
+
+      const batchPromise = documentApi.batchTranslateParagraphs(
+        projectId,
+        sectionId,
+        ids,
+        instruction,
+        optionId
+      );
+
+      // 将批量操作登记到每个段落的串行链上，使后续单段操作排队等待。
+      ids.forEach(id => {
+        const tracked: Promise<unknown> = batchPromise
+          .catch(() => undefined)
+          .finally(() => {
+            if (paragraphOperationRef.current[id] === tracked) {
+              delete paragraphOperationRef.current[id];
+            }
+          });
+        paragraphOperationRef.current[id] = tracked;
+      });
+
       try {
-        const result = await documentApi.batchTranslateParagraphs(
-          projectId,
-          sectionId,
-          ids,
-          instruction,
-          optionId
-        );
+        const result = await batchPromise;
 
         result.translations.forEach(({ id, translation, status, confirmed }) => {
           setDrafts(previous => ({ ...previous, [id]: translation }));

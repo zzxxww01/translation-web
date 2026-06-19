@@ -34,7 +34,13 @@ class ProjectRepository:
         self._logger = logger_ or logging.getLogger(__name__)
 
     def save_meta(self, project_id: str, meta: ProjectMeta) -> None:
-        self._write_json(self._project_dir(project_id) / "meta.json", meta.model_dump(mode="json"))
+        # 不把内存中的 sections 全量写进 meta.json:sections 持久化在
+        # sections/<id>/meta.json,写进顶层 meta.json 会造成双数据源、陈旧快照与
+        # 体积膨胀(审计 N10)。ProjectMeta.sections 有默认空值,读取时不受影响。
+        self._write_json(
+            self._project_dir(project_id) / "meta.json",
+            meta.model_dump(mode="json", exclude={"sections"}),
+        )
 
     def save_section(
         self,

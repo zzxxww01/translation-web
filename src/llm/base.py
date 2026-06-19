@@ -4,11 +4,14 @@ Translation Agent - LLM Provider Base
 Abstract base class for LLM providers.
 """
 
+import logging
 from abc import ABC, abstractmethod
 import logging
 from typing import Optional, List, Dict, Any
 
 from ..core.limits import TranslationLimits
+
+logger = logging.getLogger(__name__)
 
 
 logger = logging.getLogger(__name__)
@@ -936,7 +939,12 @@ class LLMProvider(ABC):
         )
 
     def _parse_json_response(self, response: str) -> Dict[str, Any]:
-        """解析 JSON 响应"""
+        """解析 JSON 响应。
+
+        解析失败时不再静默返回 {}：先尝试从可能含截断/前后赘述的文本中提取
+        最大的平衡 {...} / [...] 子串再解析；仍失败才返回 {} 兜底，并记录
+        warning（含截断预览），避免分析/术语数据被静默丢弃而无任何信号。
+        """
         import json
 
         text = response.strip()
@@ -954,5 +962,59 @@ class LLMProvider(ABC):
         try:
             return json.loads(text)
         except json.JSONDecodeError:
-            # 返回空结果
-            return {}
+            pass
+
+        # 容错恢复：截取首个 { 或 [ 到末个匹配 } 或 ] 的子串再试
+        recovered = self._extract_balanced_json(text)
+        if recovered is not None:
+            try:
+                parsed = json.loads(recovered)
+                logger.warning(
+                    "[LLM] JSON 直接解析失败，已通过平衡括号子串恢复（原长度=%d）。",
+                    len(text),
+                )
+                return parsed
+            except json.JSONDecodeError:
+                pass
+
+        logger.warning(
+            "[LLM] JSON 解析失败，返回空结果。可能是输出被 max_output_tokens 截断或含赘述。预览=%r",
+            text[:200],
+        )
+        return {}
+
+    @staticmethod
+    def _extract_balanced_json(text: str) -> Optional[str]:
+        """从文本中提取首个完整平衡的 JSON 对象/数组子串（容忍前后赘述）。"""
+        start = None
+        for i, ch in enumerate(text):
+            if ch in "{[":
+                start = i
+                break
+        if start is None:
+            return None
+
+        open_ch = text[start]
+        close_ch = "}" if open_ch == "{" else "]"
+        depth = 0
+        in_string = False
+        escaped = False
+        for i in range(start, len(text)):
+            ch = text[i]
+            if in_string:
+                if escaped:
+                    escaped = False
+                elif ch == "\\":
+                    escaped = True
+                elif ch == '"':
+                    in_string = False
+                continue
+            if ch == '"':
+                in_string = True
+            elif ch == open_ch:
+                depth += 1
+            elif ch == close_ch:
+                depth -= 1
+                if depth == 0:
+                    return text[start : i + 1]
+        return None

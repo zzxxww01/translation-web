@@ -22,10 +22,11 @@
 - 专有名词：公司、产品、技术名称
 - 通用词汇：不需要特殊处理的普通词汇（应排除）
 
-**翻译策略**：
-- `keep_original`：保持原文（如API、GPU、AI）
-- `first_annotate`：首次出现时注释，后续单独使用（如TSMC → 台积电 (TSMC)）
-- `translate`：直接翻译为中文（如bandwidth → 带宽）
+**翻译策略**（必须严格取以下四个值之一）：
+- `preserve`：全文保持英文原文，不加注释（如 API、GPU、AI、CUDA）
+- `preserve_annotate`：首次出现保留英文原文+括号注中文，后续只保留英文（如 SerDes → SerDes（串行解串器））
+- `first_annotate`：首次出现译为中文+括号注英文，后续用中文（如 TSMC → 台积电（TSMC））
+- `translate`：全文直接译为中文（如 bandwidth → 带宽）
 
 ## 输出格式
 

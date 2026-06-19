@@ -171,7 +171,9 @@ class BatchTranslationService:
             four_step_translate_section=self.translator.translate_section,
             create_section_callback=self._create_section_callback,
             apply_four_step_translations=self._apply_four_step_translations,
-            save_section=self.project_manager.save_section,
+            # 章节循环只写章节，不每次都全量重算进度（避免 O(N²) 读盘）；
+            # 进度在所有章节 gather 完成后由 update_progress() 统一聚合一次。
+            save_section=self.project_manager.save_section_only,
         )
 
     def _get_provider_for_phase(self, phase: str) -> LLMProvider:
@@ -801,6 +803,15 @@ class BatchTranslationService:
         Returns:
             Dict: 翻译结果统计
         """
+        # 登记主事件循环：四步法经 asyncio.to_thread 在工作线程执行，后台学习协程
+        # 需经此循环用 run_coroutine_threadsafe 回投（见 memory_service._spawn_background）。
+        try:
+            from src.services.memory_service import TranslationMemoryService
+
+            TranslationMemoryService.register_loop()
+        except Exception:
+            pass
+
         # 加载项目
         self._clear_cancelled(project_id)
         project = self._load_project_with_sections(project_id)
@@ -1017,6 +1028,10 @@ class BatchTranslationService:
             logger.info(f"[{project_id}] Launching {len(tasks)} section translation tasks")
             results = await asyncio.gather(*tasks, return_exceptions=True)
 
+            # 所有章节已落盘（章节循环用 save_section_only，不逐次重算进度）；
+            # 此处统一聚合一次项目进度，避免每章保存都全量重读所有章节的 O(N²) 开销。
+            self.project_manager.update_progress(project_id)
+
             # 处理结果
             for i, result in enumerate(results):
                 section = project.sections[i]
@@ -1231,26 +1246,9 @@ class BatchTranslationService:
                 "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
             }
 
-            # 添加一致性审查报告
-            if consistency_report:
-                result["consistency"] = {
-                    "is_consistent": consistency_report.is_consistent,
-                    "total_issues": len(consistency_report.issues),
-                    "auto_fixable_count": len(consistency_report.auto_fixable),
-                    "manual_review_count": len(consistency_report.manual_review),
-                    "issues": [
-                        {
-                            "section_id": issue.section_id,
-                            "paragraph_index": issue.paragraph_index,
-                            "issue_type": issue.issue_type,
-                            "description": issue.description,
-                            "auto_fixable": issue.auto_fixable,
-                        }
-                        for issue in consistency_report.manual_review[
-                            :10
-                        ]  # 最多返回10个需人工审核的问题
-                    ],
-                }
+            # 注意：一致性审查已从本链路移除。此前残留的 `if consistency_report:`
+            # 消费代码引用了一个从未赋值的变量，会在每次成功翻译后抛 NameError，
+            # 导致整个 run 被误判为 failed。已删除该死代码。
 
             self._write_artifact_json(run_dir / "run-summary.json", result)
 
@@ -1351,7 +1349,9 @@ class BatchTranslationService:
                     }
                 )
 
-            prescan_result = self.translator.prescan_section(
+            # prescan_section 是同步阻塞 LLM 调用，卸载到线程池使其与其它章节工作重叠。
+            prescan_result = await asyncio.to_thread(
+                self.translator.prescan_section,
                 section=section,
                 on_conflict=record_conflict,
             )
@@ -1424,11 +1424,10 @@ class BatchTranslationService:
                 if not source:
                     continue
                 for term in tracked:
-                    key = term.term.lower()
-                    if key in self.context_manager.term_tracker.used_translations:
+                    if self.context_manager.has_term_usage(term.term):
                         continue  # already recorded
                     if _count_term_occurrences(source, term.term) > 0:
-                        self.context_manager.term_tracker.record_usage(
+                        self.context_manager.record_term_usage(
                             term.term,
                             term.translation or term.term,
                             section.section_id,
@@ -1489,11 +1488,10 @@ class BatchTranslationService:
                 continue
 
             for term in tracked_terms:
-                key = term.term.lower()
-                if key in self.context_manager.term_tracker.used_translations:
+                if self.context_manager.has_term_usage(term.term):
                     continue
                 if _count_term_occurrences(source, term.term) > 0:
-                    self.context_manager.term_tracker.record_usage(
+                    self.context_manager.record_term_usage(
                         term.term,
                         term.translation or term.term,
                         section.section_id,
@@ -2160,15 +2158,18 @@ class BatchTranslationService:
             "article_challenges": build_article_challenge_payload(analysis.challenges),
             "format_tokens": format_tokens,
             "format_token_count": token_count,
-            "term_usage": self.context_manager.term_tracker.used_translations.copy(),
+            "term_usage": self.context_manager.snapshot_term_usage(),
         }
 
         if not section_lines:
             return dehydrated_translations
 
-        # 使用Phase 1 provider（如果提供）或默认provider
+        # 使用Phase 1 provider（如果提供）或默认provider。
+        # translate_section 是同步阻塞网络调用，卸载到线程池，使 gather 的
+        # 多章节并发真正生效（否则会阻塞事件循环，章节退化为串行）。
         provider = phase1_provider or self.llm
-        translated = provider.translate_section(
+        translated = await asyncio.to_thread(
+            provider.translate_section,
             section_text=section_text,
             section_title=section.title,
             context=context,

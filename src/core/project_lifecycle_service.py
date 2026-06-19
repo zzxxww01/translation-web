@@ -2,6 +2,7 @@ import logging
 import shutil
 from pathlib import Path
 from typing import Callable, Optional
+from uuid import uuid4
 
 from slugify import slugify
 
@@ -40,6 +41,9 @@ class ProjectLifecycleService:
         config: Optional[ProjectConfig] = None,
     ) -> ProjectMeta:
         project_id = slugify(name, max_length=50)
+        if not project_id:
+            # slugify 对纯符号/非 ASCII 标题会返回空串，回退到唯一 ID 避免路径冲突与空目录名。
+            project_id = f"project-{uuid4().hex[:8]}"
         project_dir = self._project_dir(project_id)
         if project_dir.exists():
             raise ValueError(f"Project '{project_id}' already exists")

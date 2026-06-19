@@ -13,8 +13,15 @@ import difflib
 import logging
 import random
 import threading
+from contextlib import contextmanager
 from pathlib import Path
 from typing import List
+
+try:
+    from filelock import FileLock, Timeout as FileLockTimeout
+except ImportError:  # pragma: no cover - filelock 应已安装
+    FileLock = None
+    FileLockTimeout = ()
 
 logger = logging.getLogger(__name__)
 
@@ -31,14 +38,44 @@ CONSOLIDATION_PROBABILITY = 0.05
 MAX_RULES_IN_PROMPT = 20
 MAX_RULES_CHARS = 600
 
+# 规则库硬上限：超过即确定性触发一次梳理（不再仅靠 5% 概率），防止无界膨胀
+MAX_RULES_HARD_CAP = 60
+
+# 近似去重阈值：相似度高于此值视为语义重复，跳过写入
+RULE_SIMILARITY_THRESHOLD = 0.85
+
+# diff 比对的最大字符数，避免长段落 SequenceMatcher O(n^2) 阻塞
+MAX_DIFF_CHARS = 2000
+
+# 术语型规则的特征：这类规则应进术语库而非规则库，代码侧兜底过滤
+_TERM_RULE_PATTERNS = (
+    "翻译为",
+    "译为",
+    "翻译成",
+    "应译作",
+    "译作",
+    "统一译为",
+)
+
 
 class TranslationMemoryService:
     """翻译记忆服务 - 管理自学习翻译规则"""
 
+    # 进程级共享状态：多处会各自 new 一个实例（dependencies 单例 + batch /
+    # confirmation 自建），但都读写同一个 global_memory.md。若每实例各持独立缓存与锁，
+    # 会出现脏读（单例读盘后看不到其它实例追加的新规则）与丢写（跨实例 read-modify-write
+    # 后写覆盖先写）。改为类级共享缓存 + 类级锁，使同进程内成为单一真相来源。
+    # 配合 _load_rules 的 mtime 校验，跨进程/外部修改也能被感知并重读。
+    _cache: dict[str, list[str]] = {}
+    _cache_mtime: dict[str, "int | None"] = {}
+    _lock = threading.RLock()
+    # 后台学习任务强引用集合，防止未被引用的 Task 在完成前被 GC 回收（CPython 陷阱）
+    _bg_tasks: set = set()
+    # 主事件循环引用，供工作线程回投后台学习协程（见 register_loop / _spawn_background）
+    _main_loop = None
+
     def __init__(self, llm_provider=None):
         self._llm = llm_provider
-        self._cache: dict[str, list[str]] = {}
-        self._lock = threading.RLock()
         self._llm_lock = threading.Lock()
 
     @property
@@ -154,13 +191,20 @@ class TranslationMemoryService:
             rules = self._load_rules()
             if not rules:
                 return []
+            # 新规则由 _append_rules 追加到列表末尾（最新在尾部）。
+            # 注入 prompt 时应优先取最新规则，否则一旦规则总数超过上限，
+            # 新学习成果永远排在上限之后、注入不进 prompt，自学习闭环失效。
             selected = []
             total_chars = 0
-            for rule in rules[:MAX_RULES_IN_PROMPT]:
+            for rule in reversed(rules):
+                if len(selected) >= MAX_RULES_IN_PROMPT:
+                    break
                 total_chars += len(rule)
                 if total_chars > MAX_RULES_CHARS:
                     break
                 selected.append(rule)
+            # 在选中的最新规则内恢复时间顺序（旧→新），读起来更自然
+            selected.reverse()
             return selected
 
     def get_all_rules(self) -> List[str]:
@@ -202,40 +246,106 @@ class TranslationMemoryService:
         with self._llm_lock:
             return self.llm.generate(prompt, temperature=0.3)
 
+    @staticmethod
+    def _is_term_rule(rule: str) -> bool:
+        """判断是否是术语型规则（应进术语库而非规则库）。"""
+        return any(pat in rule for pat in _TERM_RULE_PATTERNS)
+
+    @staticmethod
+    def _is_near_duplicate(rule: str, existing: List[str]) -> bool:
+        """与已有规则做轻量语义近似判断，避免措辞不同的重复无限累积。"""
+        for other in existing:
+            if difflib.SequenceMatcher(None, rule, other).ratio() >= RULE_SIMILARITY_THRESHOLD:
+                return True
+        return False
+
     def _append_rules(self, new_rules: List[str]) -> None:
-        """追加规则，跳过精确重复。"""
-        with self._lock:
+        """追加规则：过滤术语型规则、跳过精确与近似重复。"""
+        with self._file_lock(), self._lock:
             existing = self._load_rules()
             existing_set = {r.strip() for r in existing}
             added = 0
             for rule in new_rules:
                 rule = rule.strip()
-                if rule and rule not in existing_set:
-                    existing.append(rule)
-                    existing_set.add(rule)
-                    added += 1
+                if not rule or rule in existing_set:
+                    continue
+                if self._is_term_rule(rule):
+                    # 术语型规则不进规则库（规则提取 prompt 已禁止，这里代码侧兜底）
+                    logger.debug("Skip term-like rule from memory: %s", rule)
+                    continue
+                if self._is_near_duplicate(rule, existing):
+                    continue
+                existing.append(rule)
+                existing_set.add(rule)
+                added += 1
             if added:
                 self._save_rules(existing)
 
     def _maybe_consolidate(self) -> None:
-        """以 CONSOLIDATION_PROBABILITY 概率触发规则库梳理（异步非阻塞）。"""
+        """触发规则库梳理（异步非阻塞）。
+
+        超过硬上限时确定性触发；否则按 CONSOLIDATION_PROBABILITY 概率触发。
+        """
         with self._lock:
             rules = self._load_rules()
             if len(rules) < 8:
                 return
-        if random.random() < CONSOLIDATION_PROBABILITY:
-            logger.info("Triggering rule consolidation (%.0f%% chance)",
-                       CONSOLIDATION_PROBABILITY * 100)
-            asyncio.create_task(self._consolidate_rules())
+            over_cap = len(rules) > MAX_RULES_HARD_CAP
+        if over_cap or random.random() < CONSOLIDATION_PROBABILITY:
+            logger.info(
+                "Triggering rule consolidation (over_cap=%s)", over_cap
+            )
+            self._spawn_background(self._consolidate_rules())
+
+    @classmethod
+    def register_loop(cls) -> None:
+        """登记当前主事件循环，供工作线程（asyncio.to_thread）回投后台学习协程。"""
+        try:
+            cls._main_loop = asyncio.get_running_loop()
+        except RuntimeError:
+            cls._main_loop = None
+
+    @classmethod
+    def _spawn_background(cls, coro) -> None:
+        """调度后台协程并保留强引用，防止 Task 在完成前被 GC 回收。
+
+        - 在事件循环线程内：create_task。
+        - 在工作线程内（如四步法经 asyncio.to_thread 执行）：若已登记主循环，则用
+          run_coroutine_threadsafe 回投到主循环；否则静默跳过（关闭协程避免告警）。
+        """
+        try:
+            loop = asyncio.get_running_loop()
+        except RuntimeError:
+            loop = None
+
+        if loop is not None:
+            task = loop.create_task(coro)
+            cls._bg_tasks.add(task)
+            task.add_done_callback(cls._bg_tasks.discard)
+            return
+
+        main_loop = getattr(cls, "_main_loop", None)
+        if main_loop is not None and main_loop.is_running():
+            fut = asyncio.run_coroutine_threadsafe(coro, main_loop)
+            cls._bg_tasks.add(fut)
+            fut.add_done_callback(cls._bg_tasks.discard)
+            return
+
+        coro.close()
 
     async def _consolidate_rules(self) -> None:
-        """使用 LLM 梳理规则库：合并重复、解决矛盾、删除模糊规则。"""
+        """使用 LLM 梳理规则库：合并重复、解决矛盾、删除模糊规则。
+
+        梳理期间（LLM 调用耗时数秒）可能有其它学习任务追加新规则。完成保存前
+        会把这些窗口期新增规则并入 consolidated，避免被整表覆盖而丢失。
+        """
         try:
             with self._lock:
                 rules = self._load_rules()
                 if not rules:
                     return
-                rules_text = "\n".join(f"- {r}" for r in rules)
+                snapshot = list(rules)
+                rules_text = "\n".join(f"- {r}" for r in snapshot)
 
             from src.prompts import get_prompt_manager
             pm = get_prompt_manager()
@@ -251,26 +361,65 @@ class TranslationMemoryService:
                 logger.warning("Consolidation returned empty, skipping")
                 return
 
-            with self._lock:
-                old_rules = self._load_rules()
-                old_count = len(old_rules)
-                self._save_rules(consolidated)
+            with self._file_lock(), self._lock:
+                current = self._load_rules()
+                old_count = len(current)
+                # 并入窗口期新增（在 current 中但不在送去梳理的 snapshot 里）的规则
+                snapshot_set = set(snapshot)
+                merged = list(consolidated)
+                merged_set = set(consolidated)
+                for rule in current:
+                    if rule not in snapshot_set and rule not in merged_set:
+                        merged.append(rule)
+                        merged_set.add(rule)
+                self._save_rules(merged)
 
-            logger.info("Consolidation complete: %d → %d rules", old_count, len(consolidated))
+            logger.info("Consolidation complete: %d → %d rules", old_count, len(merged))
 
         except Exception as e:
             logger.warning("Rule consolidation failed: %s", e)
 
     # ============ 存储 ============
 
+    @contextmanager
+    def _file_lock(self):
+        """跨进程文件锁，保护 global_memory.md 的 read-modify-write 不被并发覆盖。
+
+        类级 _lock 只能串行化同进程内的访问；多进程部署时需文件锁防止丢写。
+        filelock 不可用或获取超时时降级为无锁（仍由 _lock 保证同进程安全）。
+        """
+        if FileLock is None:
+            yield
+            return
+        lock_path = str(GLOBAL_MEMORY_PATH) + ".lock"
+        lock = FileLock(lock_path, timeout=10)
+        try:
+            with lock:
+                yield
+        except FileLockTimeout:
+            logger.warning("global_memory 文件锁获取超时，降级为进程内锁继续")
+            yield
+
+    @staticmethod
+    def _current_mtime() -> "int | None":
+        try:
+            return GLOBAL_MEMORY_PATH.stat().st_mtime_ns
+        except OSError:
+            return None
+
     def _load_rules(self) -> List[str]:
-        """加载规则列表（从缓存或磁盘）。"""
+        """加载规则列表（缓存有效则返回缓存，否则读盘）。
+
+        缓存以文件 mtime 校验：mtime 未变才复用缓存，使其它实例/进程写入后能被感知，
+        消除“缓存永不失效”导致的脏读。
+        """
         cache_key = str(GLOBAL_MEMORY_PATH)
-        if cache_key in self._cache:
+        mtime = self._current_mtime()
+        if cache_key in self._cache and self._cache_mtime.get(cache_key) == mtime:
             return self._cache[cache_key]
 
         rules: List[str] = []
-        if GLOBAL_MEMORY_PATH.exists():
+        if mtime is not None:
             try:
                 text = GLOBAL_MEMORY_PATH.read_text(encoding="utf-8")
                 rules = self._parse_bullet_list(text)
@@ -278,12 +427,12 @@ class TranslationMemoryService:
                 logger.warning("Failed to load rules from %s: %s", GLOBAL_MEMORY_PATH, e)
 
         self._cache[cache_key] = rules
+        self._cache_mtime[cache_key] = mtime
         return rules
 
     def _save_rules(self, rules: List[str]) -> None:
-        """原子写入规则到 markdown 文件。"""
+        """原子写入规则到 markdown 文件，并刷新缓存 mtime。"""
         cache_key = str(GLOBAL_MEMORY_PATH)
-        self._cache[cache_key] = rules
 
         GLOBAL_MEMORY_PATH.parent.mkdir(parents=True, exist_ok=True)
         content = "\n".join(f"- {r}" for r in rules) + "\n" if rules else ""
@@ -291,13 +440,19 @@ class TranslationMemoryService:
         temp_path.write_text(content, encoding="utf-8")
         temp_path.replace(GLOBAL_MEMORY_PATH)
 
+        self._cache[cache_key] = rules
+        self._cache_mtime[cache_key] = self._current_mtime()
+
     # ============ 工具方法 ============
 
     @staticmethod
     def _compute_diff_ratio(text_a: str, text_b: str) -> float:
         if not text_a or not text_b:
             return 1.0
-        matcher = difflib.SequenceMatcher(None, text_a, text_b)
+        # 截断到 MAX_DIFF_CHARS，避免长段落 SequenceMatcher O(n^2) 阻塞事件循环
+        a = text_a[:MAX_DIFF_CHARS]
+        b = text_b[:MAX_DIFF_CHARS]
+        matcher = difflib.SequenceMatcher(None, a, b)
         return 1.0 - matcher.ratio()
 
     @staticmethod

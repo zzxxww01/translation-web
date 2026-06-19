@@ -158,6 +158,8 @@ class DeepAnalyzer:
         deep_analysis_result = None
         verified_terms = []
         last_error: Exception | None = None
+        # 跨重试复用已成功的术语验证结果（None=尚未取得，[]=已尝试但无结果）
+        cached_verified_terms: "list | None" = None
         sample_steps = [self.max_sample_chars, *self.ANALYSIS_SAMPLE_STEPS]
         deduped_steps = []
         for sample_chars in sample_steps:
@@ -195,9 +197,11 @@ class DeepAnalyzer:
                     getattr(self.llm, 'model_name', 'unknown'),
                 )
 
-                # 并发执行两个独立的LLM调用
-                with ThreadPoolExecutor(max_workers=2) as executor:
-                    # 提交任务1: 深度分析文档
+                # 并发执行：深度分析每次都做；术语验证仅在尚未取得结果时做，
+                # 重试间复用上一轮已成功的 verified_terms，避免浪费独立的 LLM 调用。
+                executor = ThreadPoolExecutor(max_workers=2)
+                future_terms = None
+                try:
                     future_deep = executor.submit(
                         self.llm.deep_analyze_document,
                         outline=sections_outline,
@@ -205,40 +209,49 @@ class DeepAnalyzer:
                         timeout=timeout
                     )
 
-                    # 提交任务2: 验证高频术语
-                    future_terms = executor.submit(
-                        self.llm.verify_high_frequency_terms,
-                        sampled_text=full_text,
-                        high_freq_candidates=high_freq_candidates,
-                        timeout=timeout
-                    )
+                    if cached_verified_terms is None:
+                        future_terms = executor.submit(
+                            self.llm.verify_high_frequency_terms,
+                            sampled_text=full_text,
+                            high_freq_candidates=high_freq_candidates,
+                            timeout=timeout
+                        )
 
-                    # 等待两个任务完成
                     deep_analysis_result = None
-                    verified_terms = []
+                    deep_error = None
+                    pending = [future_deep] + ([future_terms] if future_terms else [])
 
-                    for future in as_completed([future_deep, future_terms], timeout=timeout*2 if timeout else None):
+                    # 在循环内收集两者结果（不在深度分析失败时提前 raise），
+                    # 确保已成功的术语验证结果被缓存复用，避免重试时重复调用。
+                    for future in as_completed(pending, timeout=timeout*2 if timeout else None):
                         self._raise_if_cancelled(should_cancel)
 
-                        if future == future_deep:
+                        if future is future_deep:
                             try:
                                 deep_analysis_result = future.result()
                                 sampled_terms_count = len(deep_analysis_result.get("sampled_terms", []))
                                 logger.info(f"Phase 0.2a SUCCESS: sampled_terms={sampled_terms_count}")
                             except Exception as exc:
+                                deep_error = exc
                                 logger.error(f"Phase 0.2a FAILED: {str(exc)[:200]}")
-                                raise
 
-                        elif future == future_terms:
+                        elif future is future_terms:
                             try:
-                                verified_terms = future.result()
-                                verified_count = len([t for t in verified_terms if t.get("is_technical_term", False)])
+                                cached_verified_terms = future.result()
+                                verified_count = len([t for t in cached_verified_terms if t.get("is_technical_term", False)])
                                 logger.info(f"Phase 0.2b SUCCESS: verified_terms={verified_count}")
                             except Exception as exc:
-                                # 术语验证失败不影响整体流程
+                                # 术语验证失败不影响整体流程，标记为已尝试（空），不再重试
                                 logger.warning(f"Phase 0.2b FAILED: {str(exc)[:200]}, continuing without verified terms")
-                                verified_terms = []
+                                cached_verified_terms = []
 
+                    if deep_error is not None:
+                        raise deep_error
+                finally:
+                    # 不阻塞等待仍在运行的 future（默认 with 会 wait=True 拖到术语验证超时）
+                    executor.shutdown(wait=False, cancel_futures=True)
+
+                verified_terms = cached_verified_terms or []
                 elapsed = time.time() - start_time
                 logger.info(f"Phase 0.2 CONCURRENT SUCCESS: total_elapsed={elapsed:.1f}s")
                 break
@@ -325,11 +338,15 @@ class DeepAnalyzer:
             include_term_dense=True
         )
 
-        # 构建采样文本
-        return sampler.build_sampled_text(
+        # 构建采样文本。硬截断到 max_length：智能采样对每章首段无条件纳入且无全局
+        # 字符上限，actual_length 可能显著超过传入值，导致“样本递减重试”
+        # (2000/1500/1000/800) 几乎不改变实际输入而形同空转。此处兜底截断，
+        # 使递减重试真正减小输入规模、有效规避超时/截断。
+        text = sampler.build_sampled_text(
             sampling_result,
             include_section_headers=True
         )
+        return text[:max_length]
 
     def _should_retry_with_smaller_sample(self, exc: Exception) -> bool:
         text = str(exc).lower()
@@ -345,6 +362,12 @@ class DeepAnalyzer:
             "503",
             "504",
             "incomplete",
+            # JSON 解析类失败：较大样本更易产出超长/被截断的 JSON，缩小样本恰能
+            # 提升 JSON 完整性——这种最该重试的情况此前被排除在重试之外。
+            "json",
+            "parse",
+            "unterminated",
+            "expecting value",
         ]
         return any(signal in text for signal in retry_signals)
 
@@ -386,6 +409,14 @@ class DeepAnalyzer:
             try:
                 strategy = TranslationStrategy(strategy_str)
             except ValueError:
+                # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
+                # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
+                logger.warning(
+                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "TranslationStrategy 枚举是否一致。",
+                    strategy_str,
+                    term_data.get("term", ""),
+                )
                 strategy = TranslationStrategy.TRANSLATE
 
             term = EnhancedTerm(
@@ -459,6 +490,14 @@ class DeepAnalyzer:
             try:
                 strategy = TranslationStrategy(strategy_str)
             except ValueError:
+                # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
+                # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
+                logger.warning(
+                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "TranslationStrategy 枚举是否一致。",
+                    strategy_str,
+                    term_data.get("term", ""),
+                )
                 strategy = TranslationStrategy.TRANSLATE
 
             term = EnhancedTerm(
@@ -481,6 +520,14 @@ class DeepAnalyzer:
             try:
                 strategy = TranslationStrategy(strategy_str)
             except ValueError:
+                # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
+                # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
+                logger.warning(
+                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "TranslationStrategy 枚举是否一致。",
+                    strategy_str,
+                    term_data.get("term", ""),
+                )
                 strategy = TranslationStrategy.TRANSLATE
 
             term = EnhancedTerm(
@@ -573,13 +620,26 @@ class DeepAnalyzer:
             sections_summary=sections_summary
         )
 
-        # 调用 LLM 一次性分析所有章节
-        response = self.llm.generate(
-            prompt,
-            response_format="json",
-            timeout=self.SECTION_ROLE_TIMEOUT,
-        )
-        result = self.llm._parse_json_response(response)
+        # 调用 LLM 一次性分析所有章节。
+        # 此调用无重试；若超时/网络/解析失败，不应废弃前面已成功且代价高昂的
+        # 深度分析+术语验证结果。捕获异常后让所有章节落到默认 SectionUnderstanding
+        # （与下方“LLM 未返回该章节”分支一致），使 Phase0 仍能产出可用 analysis。
+        # 注意：取消（RuntimeError 含 cancelled）仍需向上传播。
+        try:
+            response = self.llm.generate(
+                prompt,
+                response_format="json",
+                timeout=self.SECTION_ROLE_TIMEOUT,
+            )
+            result = self.llm._parse_json_response(response)
+        except Exception as exc:
+            if "cancel" in str(exc).lower():
+                raise
+            logger.warning(
+                "Section role map 分析失败，回退为默认章节角色（保留已完成的深度分析）: %s",
+                exc,
+            )
+            result = {}
 
         # 解析结果
         section_roles = {}

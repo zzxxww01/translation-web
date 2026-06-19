@@ -218,6 +218,10 @@ class WechatFormatter:
         # 5. 微信兼容性修复
         html = self._apply_wechat_fixes(html)
 
+        # 6. 安全:消毒 HTML,移除 XSS 向量。MarkdownIt 开启了 html:True 透传裸 HTML,
+        #    若不消毒,用户 markdown 中的 <script>/<img onerror> 会在前端预览 iframe 内执行。
+        html = self._sanitize_html(html)
+
         return {
             "html": html,
             "css": theme_css,
@@ -227,6 +231,8 @@ class WechatFormatter:
 
     def _highlight_code(self, html: str) -> str:
         """代码高亮"""
+        import logging
+        logger = logging.getLogger(__name__)
         if highlight is None or HtmlFormatter is None:
             return html
 
@@ -395,10 +401,8 @@ class WechatFormatter:
         import logging
         import tempfile
         import requests
-        from requests.adapters import HTTPAdapter
-        from requests.packages.urllib3.util.connection import create_connection
         from pathlib import Path
-        from urllib.parse import unquote
+        from urllib.parse import unquote, urlparse
         import socket
 
         logger = logging.getLogger(__name__)
@@ -418,43 +422,45 @@ class WechatFormatter:
                 logger.error(f"Unsafe URL blocked: {_sanitize_url_for_log(url)}")
                 return None
 
-            # 创建自定义连接函数，在连接时验证 IP（防止 DNS Rebinding）
-            original_create_connection = create_connection
-            def safe_create_connection(address, *args, **kwargs):
-                host, port = address
-                # 解析域名获取 IP
-                ip = socket.gethostbyname(host)
-                # 验证 IP 是否安全
-                if not _is_safe_ip(ip):
-                    raise ValueError(f"Unsafe IP address: {ip}")
-                # 使用原始函数创建连接
-                return original_create_connection((ip, port), *args, **kwargs)
-
-            # 临时替换连接函数
-            requests.packages.urllib3.util.connection.create_connection = safe_create_connection
-
+            # 安全:线程安全的 SSRF / DNS-rebinding 校验。
+            # 旧实现 monkeypatch 进程全局 create_connection,在并发下载下存在竞态
+            # （一个线程的 finally 提前还原,其它线程绕过 IP 校验,见审计 U6）。
+            # 改为请求前解析并校验该主机所有 IP,无任何全局可变状态,线程安全。
+            hostname = urlparse(url).hostname
+            if not hostname:
+                logger.error(f"No hostname in URL: {_sanitize_url_for_log(url)}")
+                return None
             try:
-                # 下载远程图片
-                logger.debug(f"Downloading image: {_sanitize_url_for_log(url)}")
-                headers = {
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-                }
+                addr_infos = socket.getaddrinfo(hostname, None)
+            except socket.gaierror as e:
+                logger.error(f"DNS resolution failed for {_sanitize_url_for_log(url)}: {e}")
+                return None
+            for info in addr_infos:
+                resolved_ip = info[4][0]
+                if not _is_safe_ip(resolved_ip):
+                    logger.error(
+                        f"Unsafe IP {resolved_ip} resolved for {_sanitize_url_for_log(url)}, blocked"
+                    )
+                    return None
 
-                # 使用 certifi 提供的可信证书，防止环境变量绕过
-                import certifi
+            # 下载远程图片
+            logger.debug(f"Downloading image: {_sanitize_url_for_log(url)}")
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+            }
 
-                # 使用更短的超时时间，启用 SSL 验证，流式下载
-                response = requests.get(
-                    url,
-                    headers=headers,
-                    timeout=(5, 15),
-                    verify=certifi.where(),  # 使用固定的证书包
-                    stream=True
-                )
-                response.raise_for_status()
-            finally:
-                # 恢复原始连接函数
-                requests.packages.urllib3.util.connection.create_connection = original_create_connection
+            # 使用 certifi 提供的可信证书，防止环境变量绕过
+            import certifi
+
+            # 使用更短的超时时间，启用 SSL 验证，流式下载
+            response = requests.get(
+                url,
+                headers=headers,
+                timeout=(5, 15),
+                verify=certifi.where(),  # 使用固定的证书包
+                stream=True
+            )
+            response.raise_for_status()
 
             # 检测文件扩展名
             content_type = response.headers.get("content-type", "")
@@ -593,6 +599,32 @@ class WechatFormatter:
             if "display" not in style:
                 img["style"] = f"{style};max-width:100%;height:auto;display:block;margin:1.5em auto;"
 
+        return str(soup)
+
+    def _sanitize_html(self, html: str) -> str:
+        """安全:消毒 HTML,剥离 XSS 向量(危险标签 / on* 事件 / javascript: 等协议)。"""
+        soup = BeautifulSoup(html, "html.parser")
+        DANGEROUS_TAGS = {
+            "script", "iframe", "object", "embed", "form", "input", "button",
+            "link", "meta", "base", "style", "svg", "math", "applet",
+            "frame", "frameset", "template",
+        }
+        for tag in soup.find_all(DANGEROUS_TAGS):
+            tag.decompose()
+        for tag in soup.find_all(True):
+            for attr in list(tag.attrs):
+                attr_lower = attr.lower()
+                if attr_lower.startswith("on"):
+                    del tag.attrs[attr]
+                    continue
+                if attr_lower in ("href", "src", "xlink:href", "action", "formaction"):
+                    normalized = re.sub(r"\s+", "", str(tag.attrs[attr]).strip().lower())
+                    if normalized.startswith(("javascript:", "vbscript:", "data:text/html")):
+                        del tag.attrs[attr]
+                elif attr_lower == "style":
+                    value = str(tag.attrs[attr]).lower()
+                    if "javascript:" in value or "expression(" in value or "behavior:" in value:
+                        del tag.attrs[attr]
         return str(soup)
 
 atexit.register(lambda: None)

@@ -30,6 +30,17 @@ export function useKeyboardShortcuts({
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
+      // 在输入框/文本域/可编辑元素中输入时，不拦截快捷键，避免 Ctrl+方向键等误触翻页
+      const target = event.target as HTMLElement | null;
+      if (
+        target &&
+        (target.tagName === 'INPUT' ||
+          target.tagName === 'TEXTAREA' ||
+          target.isContentEditable)
+      ) {
+        return;
+      }
+
       // 如果正在编辑，不处理快捷键
       if (isEditing) return;
 

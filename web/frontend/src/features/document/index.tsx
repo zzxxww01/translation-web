@@ -338,7 +338,10 @@ export function DocumentFeature() {
       );
     }
 
-    if (!displaySection && sectionLoading) {
+    // N12: 切到未缓存章节时，selectedSection 只是不含 paragraphs 的摘要，
+    // displaySection 为真值会跳过加载分支并闪现空段落。
+    // 因此只要还没有 paragraphs 且正在加载，就继续显示加载骨架。
+    if ((!displaySection || !displaySection.paragraphs) && sectionLoading) {
       return (
         <div className="flex justify-center py-12">
           <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-500 border-t-transparent" />
