@@ -3,7 +3,7 @@
  * 提供统一的数据获取和状态管理
  */
 
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { documentApi } from './api';
@@ -349,16 +349,25 @@ export function useDeleteProject() {
  * 全文一键翻译 (SSE 流式，使用单例服务保持跨tab状态)
  * 支持选择翻译方法：普通翻译或四步法翻译
  */
-export function useFullTranslate() {
+export function useFullTranslate(currentProjectId?: string) {
   const { handleError } = useErrorHandler();
   const queryClient = useQueryClient();
-  const updateParagraphInSection = useDocumentStore(state => state.updateParagraphInSection);
+  const updateParagraphInProject = useDocumentStore(state => state.updateParagraphInProject);
 
   // Store actions for full translation state
-  const setFullTranslating = useDocumentStore(state => state.setFullTranslating);
-  const setFullTranslateProgress = useDocumentStore(state => state.setFullTranslateProgress);
-  const setFullTranslateProjectId = useDocumentStore(state => state.setFullTranslateProjectId);
+  const startFullTranslate = useDocumentStore(state => state.startFullTranslate);
+  const setFullTranslateProgressForProject = useDocumentStore(
+    state => state.setFullTranslateProgressForProject
+  );
   const endFullTranslate = useDocumentStore(state => state.endFullTranslate);
+
+  useEffect(() => {
+    return () => {
+      if (!currentProjectId) return;
+      fullTranslationService.detachTranslation(currentProjectId);
+      endFullTranslate(currentProjectId);
+    };
+  }, [currentProjectId, endFullTranslate]);
 
   const startTranslation = useCallback(async (
     projectId: string,
@@ -378,23 +387,41 @@ export function useFullTranslate() {
     method: TranslationMethodType = 'four-step',
     model?: string
   ) => {
-    // 开始翻译，设置初始状态
-    setFullTranslateProjectId(projectId);
-    setFullTranslating(true);
-    setFullTranslateProgress({ current: 0, total: 0 });
+    startFullTranslate(projectId, 0);
 
     try {
       await fullTranslationService.startTranslation(
         projectId,
         (data) => {
+          const state = useDocumentStore.getState();
+          const isTerminalEvent =
+            data.type === 'complete' ||
+            data.type === 'incomplete' ||
+            data.type === 'cancelled';
+          const isOwnedRun = state.fullTranslateProjectId === projectId;
+          const isJustFinishedRun =
+            isTerminalEvent &&
+            state.fullTranslateProjectId === null &&
+            fullTranslationService.getProjectId() === projectId;
+          if (!isOwnedRun && !isJustFinishedRun) {
+            return;
+          }
+          const isVisibleProject = state.currentProject?.id === projectId;
+          if (!isVisibleProject) {
+            return;
+          }
+
           // 处理开始事件，更新 total
           if (data.type === 'start' && data.total) {
-            setFullTranslateProgress({ current: 0, total: data.total });
+            setFullTranslateProgressForProject(projectId, {
+              current: 0,
+              total: data.total,
+            });
           }
 
           // 实时更新：当收到翻译结果时，立即更新 store
           if (data.type === 'translated' && data.paragraph_id && data.section_id && data.translation) {
-            updateParagraphInSection(data.section_id, data.paragraph_id, {
+            updateParagraphInProject(projectId, data.section_id, data.paragraph_id, {
               translation: data.translation,
               status: ParagraphStatus.TRANSLATED,
             });
@@ -403,74 +430,100 @@ export function useFullTranslate() {
           // 更新进度
           if (data.type === 'translated' || data.type === 'skip' || data.type === 'error') {
             if (data.current !== undefined && data.total !== undefined) {
-              setFullTranslateProgress({ current: data.current, total: data.total });
+              setFullTranslateProgressForProject(projectId, {
+                current: data.current,
+                total: data.total,
+              });
             }
           }
 
           if (data.type === 'complete' || data.type === 'incomplete') {
             const finalCount = data.translated_count ?? data.current ?? 0;
             if (data.total !== undefined) {
-              setFullTranslateProgress({ current: finalCount, total: data.total });
+              setFullTranslateProgressForProject(projectId, {
+                current: finalCount,
+                total: data.total,
+              });
             }
           }
 
-          // 调用外部进度回调
           onProgress(data);
 
           if (data.type === 'complete') {
             const translatedCount = (data as { translated_count?: number }).translated_count || 0;
             const methodLabel = method === 'four-step' ? '四步法翻译' : '翻译';
             toast.success(`${methodLabel}完成！共翻译 ${translatedCount} 个段落`);
-            // 刷新查询以确保数据同步
-            queryClient.invalidateQueries({ queryKey: ['section'] });
-            queryClient.invalidateQueries({ queryKey: ['project'] });
+            queryClient.invalidateQueries({ queryKey: ['section', projectId] });
+            queryClient.invalidateQueries({ queryKey: ['project', projectId] });
           }
 
           if (data.type === 'incomplete') {
             const methodLabel = method === 'four-step' ? '四步法翻译' : '翻译';
             const message = data.message || '翻译未完成，可以继续翻译';
             toast.warning(`${methodLabel}未完成：${message}`);
-            queryClient.invalidateQueries({ queryKey: ['section'] });
-            queryClient.invalidateQueries({ queryKey: ['project'] });
+            queryClient.invalidateQueries({ queryKey: ['section', projectId] });
+            queryClient.invalidateQueries({ queryKey: ['project', projectId] });
           }
 
           if (data.type === 'cancelled') {
             const methodLabel = method === 'four-step' ? '四步法翻译' : '翻译';
             toast.info(`${methodLabel}已取消`);
-            queryClient.invalidateQueries({ queryKey: ['section'] });
-            queryClient.invalidateQueries({ queryKey: ['project'] });
+            queryClient.invalidateQueries({ queryKey: ['section', projectId] });
+            queryClient.invalidateQueries({ queryKey: ['project', projectId] });
           }
         },
         () => {
-          // 完成回调
-          endFullTranslate();
-          onComplete();
+          const isVisibleProject =
+            useDocumentStore.getState().currentProject?.id === projectId;
+          endFullTranslate(projectId);
+          if (isVisibleProject) {
+            onComplete();
+          }
         },
         method,
         model
       );
     } catch (error) {
-      handleError(error, '全文翻译失败');
-      endFullTranslate();
-      onComplete();
+      const isVisibleProject =
+        useDocumentStore.getState().currentProject?.id === projectId;
+      if (isVisibleProject) {
+        handleError(error, '全文翻译失败');
+      }
+      endFullTranslate(projectId);
     }
-  }, [handleError, queryClient, updateParagraphInSection, setFullTranslateProjectId, setFullTranslating, setFullTranslateProgress, endFullTranslate]);
+  }, [
+    endFullTranslate,
+    handleError,
+    queryClient,
+    setFullTranslateProgressForProject,
+    startFullTranslate,
+    updateParagraphInProject,
+  ]);
 
   const stopTranslation = useCallback(async (projectId?: string) => {
+    const targetProjectId = projectId || fullTranslationService.getProjectId() || undefined;
+    let stopAccepted = false;
     try {
-      const targetProjectId = projectId || fullTranslationService.getProjectId();
-      if (targetProjectId && !fullTranslationService.getProjectId()) {
+      const observedProjectId = fullTranslationService.getProjectId();
+      if (targetProjectId && observedProjectId !== targetProjectId) {
         await documentApi.stopLongformTranslation(targetProjectId);
       } else {
         await fullTranslationService.stopTranslation();
       }
+      stopAccepted = true;
     } catch (error) {
       handleError(error, '停止全文翻译失败');
       throw error;
     } finally {
-      endFullTranslate();
-      queryClient.invalidateQueries({ queryKey: ['project'] });
-      queryClient.invalidateQueries({ queryKey: ['section'] });
+      if (stopAccepted) {
+        endFullTranslate(targetProjectId);
+      }
+      queryClient.invalidateQueries({
+        queryKey: targetProjectId ? ['project', targetProjectId] : ['project'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: targetProjectId ? ['section', targetProjectId] : ['section'],
+      });
     }
   }, [endFullTranslate, handleError, queryClient]);
 

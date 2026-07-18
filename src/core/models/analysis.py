@@ -99,6 +99,7 @@ class TranslationIssue(BaseModel):
     why_it_matters: str = ""
     suggestion: str = ""
     auto_fixed: bool = False
+    revision_attempted: bool = False
     revised_text: Optional[str] = None
     fix_method: Optional[str] = None
 
@@ -147,6 +148,7 @@ class SectionTranslationResult(BaseModel):
     understanding: Optional[SectionUnderstanding] = None
     reflection: Optional[ReflectionResult] = None
     assessment: Optional[QualityAssessment] = None
+    revision_attempted: bool = False
 
 
 class TermUsageTracker(BaseModel):
@@ -202,6 +204,7 @@ class SectionQualityScore(BaseModel):
     is_excellent: bool
     issue_count: int
     auto_fixed_count: int
+    revision_attempted_count: int = 0
     manual_review_count: int
     paragraph_count: int = 0
 
@@ -219,6 +222,8 @@ class QualityReportIssue(BaseModel):
     why_it_matters: str = ""
     suggestion: str = ""
     auto_fixed: bool = False
+    revision_attempted: bool = False
+    auto_fixable: bool = False
     revised_text: Optional[str] = None
     fix_method: Optional[str] = None
 
@@ -233,6 +238,7 @@ class QualityReportSummary(BaseModel):
     sections: List[SectionQualityScore]
     total_issues: int
     auto_fixed_issues: int
+    revision_attempted_issues: int = 0
     manual_review_issues: int
     consistency_stats: Dict[str, Any] = Field(default_factory=dict)
     issues: List[QualityReportIssue] = Field(default_factory=list)

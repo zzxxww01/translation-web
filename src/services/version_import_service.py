@@ -7,6 +7,7 @@
 3. 提供手动对齐功能
 """
 
+import asyncio
 from typing import List, Dict, Optional
 from difflib import SequenceMatcher
 import re
@@ -46,10 +47,25 @@ class VersionImportService:
 
         return unaligned_items
 
-    def _validate_ref_index(self, ref_index: int, unaligned_items: List[Dict]) -> None:
-        """验证未对齐索引范围。"""
-        if ref_index < 0 or ref_index >= len(unaligned_items):
+    def _find_unaligned_item_position(
+        self,
+        ref_index: int,
+        unaligned_items: List[Dict],
+    ) -> int:
+        """Resolve the stable import index, with positional fallback for legacy data."""
+        if ref_index < 0:
             raise ValueError(f"ref_index {ref_index} out of range")
+
+        has_stable_indexes = any("ref_index" in item for item in unaligned_items)
+        if has_stable_indexes:
+            for position, item in enumerate(unaligned_items):
+                if item.get("ref_index") == ref_index:
+                    return position
+            raise ValueError(f"ref_index {ref_index} not found")
+
+        if ref_index >= len(unaligned_items):
+            raise ValueError(f"ref_index {ref_index} out of range")
+        return ref_index
 
     def _update_alignment_counters(self, version: TranslationVersion) -> None:
         """同步更新对齐统计字段。"""
@@ -85,6 +101,19 @@ class VersionImportService:
         Returns:
             TranslationVersion: 导入的版本对象
         """
+        return await asyncio.to_thread(
+            self._import_reference_translation_sync,
+            project_id,
+            markdown_content,
+            version_name,
+        )
+
+    def _import_reference_translation_sync(
+        self,
+        project_id: str,
+        markdown_content: str,
+        version_name: str,
+    ) -> TranslationVersion:
         # 解析markdown
         ref_paragraphs = self._parse_markdown(markdown_content)
 
@@ -399,28 +428,42 @@ class VersionImportService:
         Returns:
             Updated alignment info
         """
-        project = self._load_project_with_sections(project_id)
-        version = self._find_version(project, version_id)
-        unaligned_items = self._get_unaligned_items(version)
-        self._validate_ref_index(ref_index, unaligned_items)
+        return await asyncio.to_thread(
+            self._manual_align_sync,
+            project_id,
+            version_id,
+            ref_index,
+            target_paragraph_id,
+        )
 
-        if target_paragraph_id not in version.paragraphs:
-            raise ValueError(f"Target paragraph {target_paragraph_id} not found")
+    def _manual_align_sync(
+        self,
+        project_id: str,
+        version_id: str,
+        ref_index: int,
+        target_paragraph_id: str,
+    ) -> Dict:
+        def mutate(version: TranslationVersion) -> None:
+            unaligned_items = self._get_unaligned_items(version)
+            position = self._find_unaligned_item_position(ref_index, unaligned_items)
+            if target_paragraph_id not in version.paragraphs:
+                raise ValueError(
+                    f"Target paragraph {target_paragraph_id} not found"
+                )
 
-        unaligned_item = unaligned_items[ref_index]
-        ref_text = unaligned_item.get("ref_text")
-        if not isinstance(ref_text, str) or not ref_text.strip():
-            raise ValueError("Invalid unaligned item: missing ref_text")
+            unaligned_item = unaligned_items[position]
+            ref_text = unaligned_item.get("ref_text")
+            if not isinstance(ref_text, str) or not ref_text.strip():
+                raise ValueError("Invalid unaligned item: missing ref_text")
+            version.paragraphs[target_paragraph_id] = ref_text
+            unaligned_items.pop(position)
+            self._update_alignment_counters(version)
 
-        # 更新对齐
-        version.paragraphs[target_paragraph_id] = ref_text
-
-        # 从未对齐列表中移除
-        unaligned_items.pop(ref_index)
-        self._update_alignment_counters(version)
-
-        # 保存项目
-        self.project_manager.save_meta(project)
+        version, _ = self.project_manager.mutate_translation_version(
+            project_id,
+            version_id,
+            mutate,
+        )
 
         return {
             'version_id': version_id,
@@ -446,17 +489,30 @@ class VersionImportService:
         Returns:
             Updated alignment info
         """
-        project = self._load_project_with_sections(project_id)
-        version = self._find_version(project, version_id)
-        unaligned_items = self._get_unaligned_items(version)
-        self._validate_ref_index(ref_index, unaligned_items)
+        return await asyncio.to_thread(
+            self._skip_unaligned_sync,
+            project_id,
+            version_id,
+            ref_index,
+        )
 
-        # 从未对齐列表中移除
-        unaligned_items.pop(ref_index)
-        self._update_alignment_counters(version)
+    def _skip_unaligned_sync(
+        self,
+        project_id: str,
+        version_id: str,
+        ref_index: int,
+    ) -> Dict:
+        def mutate(version: TranslationVersion) -> None:
+            unaligned_items = self._get_unaligned_items(version)
+            position = self._find_unaligned_item_position(ref_index, unaligned_items)
+            unaligned_items.pop(position)
+            self._update_alignment_counters(version)
 
-        # 保存项目
-        self.project_manager.save_meta(project)
+        version, _ = self.project_manager.mutate_translation_version(
+            project_id,
+            version_id,
+            mutate,
+        )
 
         return {
             'version_id': version_id,

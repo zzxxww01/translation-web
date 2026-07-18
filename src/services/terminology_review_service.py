@@ -2,15 +2,18 @@
 
 from __future__ import annotations
 
-import json
+import logging
 import re
+import threading
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime
 from difflib import SequenceMatcher
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+from uuid import uuid4
 
+from src.core.file_utils import read_json, write_json_atomic
 from src.core.glossary import GlossaryManager, infer_glossary_tags
 from src.core.models import (
     ElementType,
@@ -22,6 +25,19 @@ from src.core.models import (
 )
 from src.core.project import ProjectManager
 from src.llm.base import LLMProvider
+from src.services.term_review_artifact import (
+    SUBMISSION_PENDING,
+    SUBMISSION_SUBMITTED,
+    TERM_REVIEW_SCHEMA,
+    TERM_REVIEW_SCHEMA_VERSION,
+)
+
+
+logger = logging.getLogger(__name__)
+
+
+class TermReviewArtifactConflict(RuntimeError):
+    """Raised when a submission does not target the current pending artifact."""
 
 
 def _normalize_term(term: str) -> str:
@@ -62,6 +78,8 @@ class TerminologyReviewService:
     HIGH_FREQUENCY_THRESHOLD = 2
     SIMILARITY_THRESHOLD = 0.45
     MAX_SIMILAR_TERMS = 3
+    _artifact_locks: Dict[str, threading.RLock] = {}
+    _artifact_locks_guard = threading.Lock()
 
     def __init__(
         self,
@@ -73,7 +91,12 @@ class TerminologyReviewService:
         self.project_manager = project_manager
         self.glossary_manager = glossary_manager
 
-    def prepare_review(self, project_id: str) -> Dict[str, Any]:
+    def prepare_review(
+        self,
+        project_id: str,
+        *,
+        artifact_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
         project = self.project_manager.get(project_id)
         sections = self.project_manager.get_sections(project_id)
         merged_glossary = self.glossary_manager.load_merged(project_id)
@@ -132,49 +155,92 @@ class TerminologyReviewService:
             project=project,
             merged_glossary=merged_glossary,
             aggregated=aggregated,
+            artifact_id=(artifact_id or "").strip() or uuid4().hex,
         )
         self._write_payload(project_id, payload)
         return payload
 
-    def apply_review(self, project_id: str, decisions: List[Dict[str, Any]]) -> Dict[str, Any]:
-        glossary = self.glossary_manager.load_project(project_id)
+    def apply_review(
+        self,
+        project_id: str,
+        decisions: List[Dict[str, Any]],
+        *,
+        artifact_id: Optional[str] = None,
+    ) -> Dict[str, Any]:
+        self.project_manager.get(project_id)
         applied: List[Dict[str, Any]] = []
         skipped: List[str] = []
 
-        for decision in decisions:
-            term = (decision.get("term") or "").strip()
-            action = (decision.get("action") or "").strip().lower()
-            translation = (decision.get("translation") or "").strip()
-            note = (decision.get("note") or "").strip() or None
-            first_occurrence = (decision.get("first_occurrence") or "").strip() or None
-            if not term:
-                continue
+        if not decisions:
+            raise ValueError("At least one terminology review decision is required")
 
-            if action == "skip":
-                skipped.append(term)
-                continue
-
-            if not translation:
-                continue
-
-            existing = glossary.get_term(term)
-            term_entry = GlossaryTerm(
-                original=term,
-                translation=translation,
-                strategy=existing.strategy if existing else self._infer_strategy(term, translation),
-                note=note if note is not None else (existing.note if existing else None),
-                tags=list(existing.tags) if existing and existing.tags else infer_glossary_tags(term),
-                first_occurrence=first_occurrence or (existing.first_occurrence if existing else None),
-                scope="project",
-                source="term_review",
-                status="active",
+        with self._get_artifact_lock(project_id):
+            payload = self._load_artifact_for_submission(
+                project_id,
+                artifact_id=artifact_id,
             )
-            glossary.add_term(term_entry)
-            applied.append(term_entry.model_dump(mode="json"))
+            with self.glossary_manager.project_lock(project_id):
+                glossary = self.glossary_manager.load_project(project_id)
+                for decision in decisions:
+                    term = (decision.get("term") or "").strip()
+                    action = (decision.get("action") or "").strip().lower()
+                    translation = (decision.get("translation") or "").strip()
+                    note = (decision.get("note") or "").strip() or None
+                    first_occurrence = (
+                        (decision.get("first_occurrence") or "").strip() or None
+                    )
 
-        self.glossary_manager.save_project(project_id, glossary)
+                    if not term:
+                        raise ValueError("Term must not be blank")
+                    if action not in {"accept", "custom", "skip"}:
+                        raise ValueError(
+                            f"Unsupported terminology review action: {action}"
+                        )
+                    if action == "skip":
+                        skipped.append(term)
+                        continue
+                    if not translation:
+                        raise ValueError(
+                            f"Translation is required for term '{term}'"
+                        )
+
+                    existing = glossary.get_term(term)
+                    term_entry = GlossaryTerm(
+                        original=term,
+                        translation=translation,
+                        strategy=(
+                            existing.strategy
+                            if existing
+                            else self._infer_strategy(term, translation)
+                        ),
+                        note=(
+                            note
+                            if note is not None
+                            else (existing.note if existing else None)
+                        ),
+                        tags=(
+                            list(existing.tags)
+                            if existing and existing.tags
+                            else infer_glossary_tags(term)
+                        ),
+                        first_occurrence=(
+                            first_occurrence
+                            or (existing.first_occurrence if existing else None)
+                        ),
+                        scope="project",
+                        source="term_review",
+                        status="active",
+                    )
+                    glossary.add_term(term_entry)
+                    applied.append(term_entry.model_dump(mode="json"))
+
+                self.glossary_manager.save_project(project_id, glossary)
+            self._write_review_decisions(project_id, payload, decisions)
+
+        resolved_artifact_id = payload.get("artifact_id")
         return {
             "project_id": project_id,
+            "artifact_id": resolved_artifact_id,
             "applied_count": len(applied),
             "skipped_count": len(skipped),
             "applied_terms": applied,
@@ -232,25 +298,29 @@ class TerminologyReviewService:
         }
 
     def promote_project_term(self, project_id: str, original: str) -> Dict[str, Any]:
-        project_glossary = self.glossary_manager.load_project(project_id)
-        global_glossary = self.glossary_manager.load_global()
-        project_term = project_glossary.get_term(original)
-        if not project_term:
-            raise FileNotFoundError(f"Project term not found: {original}")
+        self.project_manager.get(project_id)
+        with self.glossary_manager.project_lock(project_id):
+            project_glossary = self.glossary_manager.load_project(project_id)
+            project_term = project_glossary.get_term(original)
+            if not project_term:
+                raise FileNotFoundError(f"Project term not found: {original}")
 
-        promoted = GlossaryTerm(
-            original=project_term.original,
-            translation=project_term.translation,
-            strategy=project_term.strategy,
-            note=project_term.note,
-            tags=list(project_term.tags),
-            first_occurrence=project_term.first_occurrence,
-            scope="global",
-            source="promoted_from_project",
-            status=project_term.status,
-        )
-        global_glossary.add_term(promoted)
-        self.glossary_manager.save_global(global_glossary)
+            promoted = GlossaryTerm(
+                original=project_term.original,
+                translation=project_term.translation,
+                strategy=project_term.strategy,
+                note=project_term.note,
+                tags=list(project_term.tags),
+                first_occurrence=project_term.first_occurrence,
+                scope="global",
+                source="promoted_from_project",
+                status=project_term.status,
+            )
+
+        with self.glossary_manager.global_lock():
+            global_glossary = self.glossary_manager.load_global()
+            global_glossary.add_term(promoted)
+            self.glossary_manager.save_global(global_glossary)
         return {
             "message": "Term promoted to global glossary",
             "term": promoted.model_dump(mode="json"),
@@ -276,6 +346,7 @@ class TerminologyReviewService:
         project: ProjectMeta,
         merged_glossary: Glossary,
         aggregated: Dict[str, AggregatedCandidate],
+        artifact_id: str,
     ) -> Dict[str, Any]:
         section_groups: Dict[str, Dict[str, Any]] = {}
 
@@ -325,6 +396,10 @@ class TerminologyReviewService:
 
         total_candidates = sum(len(section["candidates"]) for section in sections)
         return {
+            "schema": TERM_REVIEW_SCHEMA,
+            "schema_version": TERM_REVIEW_SCHEMA_VERSION,
+            "submission_status": SUBMISSION_PENDING,
+            "artifact_id": artifact_id,
             "project_id": project.id,
             "project_title": project.title,
             "review_required": total_candidates > 0,
@@ -391,7 +466,96 @@ class TerminologyReviewService:
         return TranslationStrategy.TRANSLATE
 
     def _write_payload(self, project_id: str, payload: Dict[str, Any]) -> None:
-        output_dir = self.project_manager.projects_path / project_id / "artifacts" / "term-review"
-        output_dir.mkdir(parents=True, exist_ok=True)
-        with open(output_dir / "latest.json", "w", encoding="utf-8") as handle:
-            json.dump(payload, handle, ensure_ascii=False, indent=2)
+        with self._get_artifact_lock(project_id):
+            write_json_atomic(self._artifact_path(project_id), payload)
+
+    @classmethod
+    def _artifact_lock_key(cls, projects_path: Path, project_id: str) -> str:
+        return f"{projects_path.resolve()}:{project_id}"
+
+    def _get_artifact_lock(self, project_id: str) -> threading.RLock:
+        key = self._artifact_lock_key(
+            Path(self.project_manager.projects_path),
+            project_id,
+        )
+        with self._artifact_locks_guard:
+            return self._artifact_locks.setdefault(key, threading.RLock())
+
+    def _artifact_path(self, project_id: str) -> Path:
+        return (
+            Path(self.project_manager.projects_path)
+            / project_id
+            / "artifacts"
+            / "term-review"
+            / "latest.json"
+        )
+
+    def _load_artifact_for_submission(
+        self,
+        project_id: str,
+        *,
+        artifact_id: Optional[str],
+    ) -> Dict[str, Any]:
+        latest_path = self._artifact_path(project_id)
+        if not latest_path.exists():
+            raise TermReviewArtifactConflict(
+                "No prepared terminology review is available. Prepare it again."
+            )
+
+        try:
+            payload = read_json(latest_path)
+        except (OSError, ValueError) as exc:
+            raise TermReviewArtifactConflict(
+                "The prepared terminology review could not be loaded. "
+                "Prepare it again."
+            ) from exc
+
+        if payload.get("project_id") != project_id:
+            raise TermReviewArtifactConflict(
+                "The prepared terminology review belongs to a different project."
+            )
+
+        expected_id = str(payload.get("artifact_id") or "").strip() or None
+        provided_id = (artifact_id or "").strip() or None
+        if expected_id is not None and provided_id != expected_id:
+            raise TermReviewArtifactConflict(
+                "The terminology review changed after this page was opened. "
+                "Reload the latest review before submitting."
+            )
+        if expected_id is None and provided_id is not None:
+            raise TermReviewArtifactConflict(
+                "The terminology review identity does not match the legacy artifact."
+            )
+        if payload.get("submission_status") == SUBMISSION_SUBMITTED:
+            raise TermReviewArtifactConflict(
+                "This terminology review has already been submitted."
+            )
+        return payload
+
+    def _write_review_decisions(
+        self,
+        project_id: str,
+        payload: Dict[str, Any],
+        decisions: List[Dict[str, Any]],
+    ) -> None:
+        payload.update(
+            {
+                "schema": TERM_REVIEW_SCHEMA,
+                "schema_version": TERM_REVIEW_SCHEMA_VERSION,
+                "submission_status": SUBMISSION_SUBMITTED,
+            }
+        )
+        payload["decisions"] = [
+            {
+                "term": (decision.get("term") or "").strip(),
+                "action": (decision.get("action") or "").strip().lower(),
+                "translation": (decision.get("translation") or "").strip() or None,
+                "note": (decision.get("note") or "").strip() or None,
+                "first_occurrence": (
+                    (decision.get("first_occurrence") or "").strip() or None
+                ),
+            }
+            for decision in decisions
+        ]
+        payload["submitted_at"] = datetime.now().isoformat()
+        write_json_atomic(self._artifact_path(project_id), payload)

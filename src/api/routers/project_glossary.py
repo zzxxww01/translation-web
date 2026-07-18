@@ -1,26 +1,38 @@
 """Project glossary and terminology review router."""
 
 import asyncio
+import logging
 from datetime import datetime
-from typing import List, Literal, Optional
+from typing import Dict, List, Literal, Optional
 from urllib.parse import unquote
+from uuid import UUID
 
 from fastapi import APIRouter, Body
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 from src.api.dependencies import (
     GlossaryManagerDep,
     LongformLLMProviderDep,
     ProjectManagerDep,
 )
-from src.api.middleware import BadRequestException, NotFoundException
+from src.api.middleware import BadRequestException, ConflictException, NotFoundException
+from src.api.utils.concurrency import run_blocking
 from src.api.utils.llm_factory import create_llm_provider
 from src.core.glossary import infer_glossary_tags, normalize_glossary_tags
 from src.core.models import GlossaryTerm, TranslationStrategy
-from src.services.terminology_review_service import TerminologyReviewService
+from src.services.terminology_review_job_service import (
+    ActiveTerminologyReviewModelConflict,
+    TerminologyReviewJobStore,
+)
+from src.services.terminology_review_service import (
+    TerminologyReviewService,
+    TermReviewArtifactConflict,
+)
 
 
 router = APIRouter(prefix="", tags=["projects"])
+logger = logging.getLogger(__name__)
+_term_review_tasks: Dict[str, asyncio.Task[None]] = {}
 
 
 class AddTermRequest(BaseModel):
@@ -67,9 +79,30 @@ class TermReviewDecisionRequest(BaseModel):
     note: Optional[str] = Field(None, max_length=2000)
     first_occurrence: Optional[str] = Field(None, max_length=1000)
 
+    @field_validator("term")
+    @classmethod
+    def validate_term(cls, value: str) -> str:
+        value = value.strip()
+        if not value:
+            raise ValueError("Term must not be blank")
+        return value
+
+    @model_validator(mode="after")
+    def validate_translation(self):
+        if self.translation is not None:
+            self.translation = self.translation.strip() or None
+        if self.action != "skip" and not self.translation:
+            raise ValueError("Accepted and custom terms require a translation")
+        return self
+
 
 class SubmitTermReviewRequest(BaseModel):
-    decisions: List[TermReviewDecisionRequest] = Field(..., max_length=500)
+    artifact_id: Optional[str] = Field(None, min_length=1, max_length=128)
+    decisions: List[TermReviewDecisionRequest] = Field(
+        ...,
+        min_length=1,
+        max_length=500,
+    )
 
 
 class CheckConflictRequest(BaseModel):
@@ -79,6 +112,48 @@ class CheckConflictRequest(BaseModel):
 
 class PrepareTermReviewRequest(BaseModel):
     model: Optional[str] = Field(None, max_length=100)
+
+
+async def _run_term_review_job(
+    *,
+    job_store: TerminologyReviewJobStore,
+    job_id: str,
+    project_id: str,
+    service: TerminologyReviewService,
+) -> None:
+    try:
+        await run_blocking(job_store.mark_running, project_id, job_id)
+        result = await run_blocking(
+            service.prepare_review,
+            project_id,
+            artifact_id=job_id,
+        )
+        await run_blocking(
+            job_store.mark_succeeded,
+            project_id,
+            job_id,
+            result,
+        )
+    except asyncio.CancelledError:
+        await run_blocking(
+            job_store.mark_failed,
+            project_id,
+            job_id,
+            "Terminology review job stopped before completion.",
+        )
+        raise
+    except Exception as exc:
+        logger.exception(
+            "Terminology review job %s failed for project %s",
+            job_id,
+            project_id,
+        )
+        await run_blocking(
+            job_store.mark_failed,
+            project_id,
+            job_id,
+            str(exc),
+        )
 
 
 def _normalize_tags(tags: Optional[List[str]]) -> List[str]:
@@ -152,26 +227,36 @@ def _apply_batch_action(glossary, request: BatchGlossaryRequest) -> tuple[list[G
 @router.get("/projects/{project_id}/glossary")
 async def get_project_glossary(project_id: str, gm: GlossaryManagerDep):
     try:
-        glossary = gm.load_project(project_id)
-        global_glossary = gm.load_global()
-        visible_terms = []
-        for term in glossary.terms:
-            global_term = global_glossary.get_term(term.original)
-            is_inherited_seed = (
-                global_term is not None
-                and global_term.translation == term.translation
-                and global_term.strategy == term.strategy
-                and (global_term.note or "") == (term.note or "")
-                and list(global_term.tags) == list(term.tags)
-                and (global_term.status or "active") == (term.status or "active")
-            )
-            if is_inherited_seed:
-                continue
-            visible_terms.append(term)
-        return {
-            "version": glossary.version,
-            "terms": [term.model_dump(mode="json") for term in visible_terms],
-        }
+        def load_glossary() -> dict:
+            glossary = gm.load_project(project_id)
+            global_glossary = gm.load_global()
+            global_terms = {
+                term.original.lower(): term
+                for term in global_glossary.terms
+            }
+            visible_terms = []
+            for term in glossary.terms:
+                global_term = global_terms.get(term.original.lower())
+                is_inherited_seed = (
+                    global_term is not None
+                    and global_term.translation == term.translation
+                    and global_term.strategy == term.strategy
+                    and (global_term.note or "") == (term.note or "")
+                    and list(global_term.tags) == list(term.tags)
+                    and (global_term.status or "active")
+                    == (term.status or "active")
+                )
+                if not is_inherited_seed:
+                    visible_terms.append(term)
+            return {
+                "version": glossary.version,
+                "terms": [
+                    term.model_dump(mode="json")
+                    for term in visible_terms
+                ],
+            }
+
+        return await run_blocking(load_glossary)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -183,21 +268,27 @@ async def update_project_glossary(
     gm: GlossaryManagerDep,
 ):
     try:
-        with gm.project_lock(project_id):
-            glossary = gm.load_project(project_id)
-            term = GlossaryTerm(
-                original=request.original,
-                translation=request.translation,
-                strategy=request.strategy,
-                note=request.note,
-                tags=_initial_tags(request.original, request.tags),
-                scope="project",
-                source="manual",
-                status=request.status,
-            )
-            glossary.add_term(term)
-            gm.save_project(project_id, glossary)
-        return {"message": "Term added", "term": term.model_dump(mode="json")}
+        def add_term() -> dict:
+            with gm.project_lock(project_id):
+                glossary = gm.load_project(project_id)
+                term = GlossaryTerm(
+                    original=request.original,
+                    translation=request.translation,
+                    strategy=request.strategy,
+                    note=request.note,
+                    tags=_initial_tags(request.original, request.tags),
+                    scope="project",
+                    source="manual",
+                    status=request.status,
+                )
+                glossary.add_term(term)
+                gm.save_project(project_id, glossary)
+            return {
+                "message": "Term added",
+                "term": term.model_dump(mode="json"),
+            }
+
+        return await run_blocking(add_term)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -211,16 +302,25 @@ async def update_glossary_term(
 ):
     try:
         original_decoded = unquote(original)
-        with gm.project_lock(project_id):
-            glossary = gm.load_project(project_id)
-            existing = glossary.get_term(original_decoded)
-            if not existing:
-                raise NotFoundException(detail=f"Term '{original_decoded}' not found in glossary")
 
-            updated_term = _apply_term_updates(existing, request)
-            glossary.add_term(updated_term)
-            gm.save_project(project_id, glossary)
-        return {"message": "Term updated", "term": updated_term.model_dump(mode="json")}
+        def update_term() -> dict:
+            with gm.project_lock(project_id):
+                glossary = gm.load_project(project_id)
+                existing = glossary.get_term(original_decoded)
+                if not existing:
+                    raise NotFoundException(
+                        detail=f"Term '{original_decoded}' not found in glossary"
+                    )
+
+                updated_term = _apply_term_updates(existing, request)
+                glossary.add_term(updated_term)
+                gm.save_project(project_id, glossary)
+            return {
+                "message": "Term updated",
+                "term": updated_term.model_dump(mode="json"),
+            }
+
+        return await run_blocking(update_term)
     except NotFoundException:
         raise
     except FileNotFoundError:
@@ -235,15 +335,25 @@ async def delete_glossary_term(
 ):
     try:
         original_decoded = unquote(original)
-        with gm.project_lock(project_id):
-            glossary = gm.load_project(project_id)
-            original_lower = original_decoded.lower()
-            filtered_terms = [term for term in glossary.terms if term.original.lower() != original_lower]
-            if len(filtered_terms) == len(glossary.terms):
-                raise NotFoundException(detail=f"Term '{original_decoded}' not found in glossary")
-            glossary.terms = filtered_terms
-            gm.save_project(project_id, glossary)
-        return {"message": "Term deleted", "original": original_decoded}
+
+        def delete_term() -> dict:
+            with gm.project_lock(project_id):
+                glossary = gm.load_project(project_id)
+                original_lower = original_decoded.lower()
+                filtered_terms = [
+                    term
+                    for term in glossary.terms
+                    if term.original.lower() != original_lower
+                ]
+                if len(filtered_terms) == len(glossary.terms):
+                    raise NotFoundException(
+                        detail=f"Term '{original_decoded}' not found in glossary"
+                    )
+                glossary.terms = filtered_terms
+                gm.save_project(project_id, glossary)
+            return {"message": "Term deleted", "original": original_decoded}
+
+        return await run_blocking(delete_term)
     except NotFoundException:
         raise
     except FileNotFoundError:
@@ -257,18 +367,27 @@ async def batch_update_project_glossary(
     gm: GlossaryManagerDep,
 ):
     try:
-        with gm.project_lock(project_id):
-            glossary = gm.load_project(project_id)
-            updated_terms, matched_count = _apply_batch_action(glossary, request)
-            gm.save_project(project_id, glossary)
-        return {
-            "message": "Batch action applied",
-            "action": request.action,
-            "matched_count": matched_count,
-            "updated_count": len(updated_terms),
-            "terms": [term.model_dump(mode="json") for term in updated_terms],
-            "originals": request.originals,
-        }
+        def update_batch() -> dict:
+            with gm.project_lock(project_id):
+                glossary = gm.load_project(project_id)
+                updated_terms, matched_count = _apply_batch_action(
+                    glossary,
+                    request,
+                )
+                gm.save_project(project_id, glossary)
+            return {
+                "message": "Batch action applied",
+                "action": request.action,
+                "matched_count": matched_count,
+                "updated_count": len(updated_terms),
+                "terms": [
+                    term.model_dump(mode="json")
+                    for term in updated_terms
+                ],
+                "originals": request.originals,
+            }
+
+        return await run_blocking(update_batch)
     except ValueError as exc:
         raise BadRequestException(detail=str(exc))
     except FileNotFoundError:
@@ -282,26 +401,32 @@ async def check_term_conflict(
     gm: GlossaryManagerDep,
 ):
     try:
-        project_glossary = gm.load_project(project_id)
-        global_glossary = gm.load_global()
+        def check_conflicts() -> dict:
+            project_glossary = gm.load_project(project_id)
+            global_glossary = gm.load_global()
 
-        conflicts = []
-        for scope, glossary in [("project", project_glossary), ("global", global_glossary)]:
-            existing = glossary.get_term(request.original)
-            if existing and existing.translation != request.translation:
-                conflicts.append(
-                    {
-                        "scope": scope,
-                        "existing_translation": existing.translation,
-                        "existing_strategy": existing.strategy.value,
-                        "existing_note": existing.note,
-                    }
-                )
+            conflicts = []
+            for scope, glossary in [
+                ("project", project_glossary),
+                ("global", global_glossary),
+            ]:
+                existing = glossary.get_term(request.original)
+                if existing and existing.translation != request.translation:
+                    conflicts.append(
+                        {
+                            "scope": scope,
+                            "existing_translation": existing.translation,
+                            "existing_strategy": existing.strategy.value,
+                            "existing_note": existing.note,
+                        }
+                    )
 
-        return {
-            "has_conflict": len(conflicts) > 0,
-            "conflicts": conflicts,
-        }
+            return {
+                "has_conflict": bool(conflicts),
+                "conflicts": conflicts,
+            }
+
+        return await run_blocking(check_conflicts)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -313,33 +438,36 @@ async def match_paragraph_terms(
     gm: GlossaryManagerDep,
 ):
     try:
-        from src.core.glossary import create_default_global_glossary
-        from src.core.term_matcher import TermMatcher
+        def match_terms() -> dict:
+            from src.core.glossary import create_default_global_glossary
+            from src.core.term_matcher import TermMatcher
 
-        glossary = gm.load_merged(project_id)
-        if not glossary.terms:
-            global_glossary = gm.load_global()
-            if not global_glossary.terms:
-                global_glossary = create_default_global_glossary()
-            glossary = global_glossary
+            glossary = gm.load_merged(project_id)
+            if not glossary.terms:
+                glossary = create_default_global_glossary()
 
-        matcher = TermMatcher(glossary)
-        matches = matcher.match_paragraph(request.paragraph, request.max_terms)
-        return {
-            "total_terms": len(glossary.terms),
-            "matched_count": len(matches),
-            "matches": [
-                {
-                    "original": match.term.original,
-                    "translation": match.term.translation,
-                    "strategy": match.term.strategy.value,
-                    "note": match.term.note,
-                    "score": match.score,
-                    "match_type": match.match_type,
-                }
-                for match in matches
-            ],
-        }
+            matcher = TermMatcher(glossary)
+            matches = matcher.match_paragraph(
+                request.paragraph,
+                request.max_terms,
+            )
+            return {
+                "total_terms": len(glossary.terms),
+                "matched_count": len(matches),
+                "matches": [
+                    {
+                        "original": match.term.original,
+                        "translation": match.term.translation,
+                        "strategy": match.term.strategy.value,
+                        "note": match.term.note,
+                        "score": match.score,
+                        "match_type": match.match_type,
+                    }
+                    for match in matches
+                ],
+            }
+
+        return await run_blocking(match_terms)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -361,11 +489,90 @@ async def prepare_term_review(
             project_manager=pm,
             glossary_manager=gm,
         )
-        return await asyncio.to_thread(service.prepare_review, project_id)
+        return await run_blocking(service.prepare_review, project_id)
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
+
+
+@router.post("/projects/{project_id}/term-review/jobs", status_code=202)
+async def start_term_review_job(
+    project_id: str,
+    pm: ProjectManagerDep,
+    gm: GlossaryManagerDep,
+    llm: LongformLLMProviderDep,
+    request: PrepareTermReviewRequest = Body(default_factory=PrepareTermReviewRequest),
+):
+    """Start terminology preparation without keeping the HTTP request open."""
+    try:
+        await run_blocking(pm.get, project_id)
+        job_store = TerminologyReviewJobStore(pm.projects_path)
+        job, created = await run_blocking(
+            job_store.create_or_get_active,
+            project_id,
+            request.model,
+        )
+        if not created:
+            existing_task = _term_review_tasks.get(job["job_id"])
+            if existing_task is not None and not existing_task.done():
+                return job
+            await run_blocking(
+                job_store.mark_failed,
+                project_id,
+                job["job_id"],
+                "Terminology review task is no longer running.",
+            )
+            job, created = await run_blocking(
+                job_store.create_or_get_active,
+                project_id,
+                request.model,
+            )
+            if not created:
+                return job
+        if request.model:
+            llm = create_llm_provider(provider=request.model)
+        service = TerminologyReviewService(
+            llm_provider=llm,
+            project_manager=pm,
+            glossary_manager=gm,
+        )
+        task = asyncio.create_task(
+            _run_term_review_job(
+                job_store=job_store,
+                job_id=job["job_id"],
+                project_id=project_id,
+                service=service,
+            )
+        )
+        _term_review_tasks[job["job_id"]] = task
+        task.add_done_callback(
+            lambda _task, job_id=job["job_id"]: _term_review_tasks.pop(job_id, None)
+        )
+        return job
+    except ActiveTerminologyReviewModelConflict as exc:
+        raise ConflictException(
+            detail=str(exc),
+            error_code="TERM_REVIEW_MODEL_CONFLICT",
+        ) from exc
+    except ValueError as exc:
+        raise BadRequestException(detail=str(exc)) from exc
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
+
+
+@router.get("/projects/{project_id}/term-review/jobs/{job_id}")
+async def get_term_review_job(
+    project_id: str,
+    job_id: UUID,
+    pm: ProjectManagerDep,
+):
+    """Return persisted state and, when complete, the prepared review payload."""
+    try:
+        job_store = TerminologyReviewJobStore(pm.projects_path)
+        return await run_blocking(job_store.get, project_id, job_id.hex)
+    except FileNotFoundError:
+        raise NotFoundException(detail="Terminology review job not found")
 
 
 @router.post("/projects/{project_id}/term-review/submit")
@@ -380,10 +587,19 @@ async def submit_term_review(
             project_manager=pm,
             glossary_manager=gm,
         )
-        return service.apply_review(
+        return await run_blocking(
+            service.apply_review,
             project_id,
             [decision.model_dump() for decision in request.decisions],
+            artifact_id=request.artifact_id,
         )
+    except TermReviewArtifactConflict as exc:
+        raise ConflictException(
+            detail=str(exc),
+            error_code="TERM_REVIEW_ARTIFACT_CONFLICT",
+        ) from exc
+    except ValueError as exc:
+        raise BadRequestException(detail=str(exc)) from exc
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -399,7 +615,10 @@ async def get_project_glossary_recommendations(
             project_manager=pm,
             glossary_manager=gm,
         )
-        return service.get_project_recommendations(project_id)
+        return await run_blocking(
+            service.get_project_recommendations,
+            project_id,
+        )
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -416,6 +635,10 @@ async def promote_project_term(
             project_manager=pm,
             glossary_manager=gm,
         )
-        return service.promote_project_term(project_id, unquote(original))
+        return await run_blocking(
+            service.promote_project_term,
+            project_id,
+            unquote(original),
+        )
     except FileNotFoundError:
         raise NotFoundException(detail="Project or term not found")

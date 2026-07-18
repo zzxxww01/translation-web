@@ -18,9 +18,10 @@ import {
 
 interface ProjectSelectorProps {
   onNewProject: () => void;
+  onProjectChange?: () => void;
 }
 
-export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject }) => {
+export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject, onProjectChange }) => {
   const { currentProject, setCurrentProject } = useDocumentStore();
   const { data: projects } = useProjects();
   const deleteProject = useDeleteProject();
@@ -31,6 +32,7 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject }) => {
     const project = projects?.find((p: Project) => p.id === projectId);
     if (project) {
       setCurrentProject(project);
+      onProjectChange?.();
     }
   };
 
@@ -75,6 +77,7 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject }) => {
         <Button
           variant="default"
           size="sm"
+          type="button"
           onClick={onNewProject}
           className="flex-1"
           title="新建项目"
@@ -85,6 +88,7 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject }) => {
         <Button
           variant="ghost"
           size="sm"
+          type="button"
           onClick={handleDeleteClick}
           disabled={!currentProject || deleteProject.isPending}
           title="删除当前项目"

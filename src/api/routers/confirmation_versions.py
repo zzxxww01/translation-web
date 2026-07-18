@@ -4,6 +4,8 @@ Confirmation reference-version endpoints.
 
 from fastapi import APIRouter
 
+from src.api.utils.concurrency import run_blocking
+
 from ..dependencies import ConfirmationServiceDep, ProjectManagerDep, VersionServiceDep
 from ..middleware import NotFoundException, BadRequestException
 from .confirmation_models import ImportVersionRequest, ManualAlignRequest
@@ -27,9 +29,7 @@ async def import_reference_version(
             request.version_name,
         )
 
-        project = pm.get(project_id)
-        project.versions.append(version)
-        pm.save_meta(project)
+        await run_blocking(pm.upsert_translation_version, project_id, version)
         # 导入新版本后清确认缓存,否则确认页最长 5 分钟仍返回旧 versions(审计 C26)
         await confirm_service.invalidate_project_cache(project_id)
 
@@ -105,7 +105,7 @@ async def list_versions(
     pm: ProjectManagerDep,
 ):
     try:
-        project = pm.get(project_id)
+        project = await run_blocking(pm.get, project_id)
         return {
             "versions": [
                 {

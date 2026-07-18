@@ -55,6 +55,12 @@ interface DocumentActions {
     paragraphId: string,
     updates: Partial<Paragraph>
   ) => void;
+  updateParagraphInProject: (
+    projectId: string,
+    sectionId: string,
+    paragraphId: string,
+    updates: Partial<Paragraph>
+  ) => boolean;
 
   // 批量操作
   updateMultipleParagraphs: (
@@ -66,10 +72,14 @@ interface DocumentActions {
   // 全文翻译状态操作
   setFullTranslating: (isTranslating: boolean) => void;
   setFullTranslateProgress: (progress: { current: number; total: number } | null) => void;
+  setFullTranslateProgressForProject: (
+    projectId: string,
+    progress: { current: number; total: number } | null
+  ) => void;
   setFullTranslateProjectId: (projectId: string | null) => void;
   startFullTranslate: (projectId: string, total: number) => void;
   updateFullTranslateProgress: (current: number) => void;
-  endFullTranslate: () => void;
+  endFullTranslate: (projectId?: string) => void;
 
   // 导航操作
   goToNextSection: () => boolean;
@@ -230,6 +240,14 @@ export const useDocumentStore = create<DocumentStore>()(
             'updateParagraphInSection'
           ),
 
+        updateParagraphInProject: (projectId, sectionId, paragraphId, updates) => {
+          if (get().currentProject?.id !== projectId) {
+            return false;
+          }
+          get().updateParagraphInSection(sectionId, paragraphId, updates);
+          return true;
+        },
+
         // 批量操作
         updateMultipleParagraphs: (sectionId, paragraphIds, updates) =>
           set(
@@ -345,6 +363,16 @@ export const useDocumentStore = create<DocumentStore>()(
         setFullTranslateProgress: (progress) =>
           set({ fullTranslateProgress: progress }, false, 'setFullTranslateProgress'),
 
+        setFullTranslateProgressForProject: (projectId, progress) =>
+          set(
+            state =>
+              state.fullTranslateProjectId === projectId
+                ? { fullTranslateProgress: progress }
+                : state,
+            false,
+            'setFullTranslateProgressForProject'
+          ),
+
         setFullTranslateProjectId: (projectId) =>
           set({ fullTranslateProjectId: projectId }, false, 'setFullTranslateProjectId'),
 
@@ -370,13 +398,16 @@ export const useDocumentStore = create<DocumentStore>()(
             'updateFullTranslateProgress'
           ),
 
-        endFullTranslate: () =>
+        endFullTranslate: (projectId) =>
           set(
-            {
-              isFullTranslating: false,
-              fullTranslateProgress: null,
-              fullTranslateProjectId: null,
-            },
+            state =>
+              projectId && state.fullTranslateProjectId !== projectId
+                ? state
+                : {
+                    isFullTranslating: false,
+                    fullTranslateProgress: null,
+                    fullTranslateProjectId: null,
+                  },
             false,
             'endFullTranslate'
           ),
@@ -443,6 +474,7 @@ export const useDocumentActions = () =>
     updateSection: state.updateSection,
     updateParagraph: state.updateParagraph,
     updateParagraphInSection: state.updateParagraphInSection,
+    updateParagraphInProject: state.updateParagraphInProject,
     updateMultipleParagraphs: state.updateMultipleParagraphs,
     goToNextSection: state.goToNextSection,
     goToPreviousSection: state.goToPreviousSection,
@@ -453,6 +485,7 @@ export const useDocumentActions = () =>
     // 全文翻译操作
     setFullTranslating: state.setFullTranslating,
     setFullTranslateProgress: state.setFullTranslateProgress,
+    setFullTranslateProgressForProject: state.setFullTranslateProgressForProject,
     setFullTranslateProjectId: state.setFullTranslateProjectId,
     startFullTranslate: state.startFullTranslate,
     updateFullTranslateProgress: state.updateFullTranslateProgress,

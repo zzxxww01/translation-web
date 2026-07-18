@@ -33,8 +33,23 @@ export class ApiErrorWrapper extends Error {
 /**
  * 延迟函数
  */
-function delay(ms: number): Promise<void> {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function delay(ms: number, signal?: AbortSignal | null): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(signal.reason ?? new DOMException('Request cancelled', 'AbortError'));
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      signal?.removeEventListener('abort', handleAbort);
+      resolve();
+    }, ms);
+    const handleAbort = () => {
+      clearTimeout(timeoutId);
+      reject(signal?.reason ?? new DOMException('Request cancelled', 'AbortError'));
+    };
+    signal?.addEventListener('abort', handleAbort, { once: true });
+  });
 }
 
 /**
@@ -96,7 +111,21 @@ export class ApiClient {
     }
 
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    const externalSignal = options.signal;
+    const handleExternalAbort = () => {
+      controller.abort(
+        externalSignal?.reason ?? new DOMException('Request cancelled', 'AbortError')
+      );
+    };
+    if (externalSignal?.aborted) {
+      handleExternalAbort();
+    } else {
+      externalSignal?.addEventListener('abort', handleExternalAbort, { once: true });
+    }
+    const timeoutId = setTimeout(
+      () => controller.abort(new DOMException('Request timeout', 'TimeoutError')),
+      timeout
+    );
 
     return fetch(url, {
       ...options,
@@ -104,6 +133,7 @@ export class ApiClient {
     })
       .finally(() => {
         clearTimeout(timeoutId);
+        externalSignal?.removeEventListener('abort', handleExternalAbort);
       });
   }
 
@@ -182,7 +212,7 @@ export class ApiClient {
           !isAbort
         ) {
           // 等待后重试
-          await delay(this.retryDelay * Math.pow(2, attempt));
+          await delay(this.retryDelay * Math.pow(2, attempt), options?.signal);
           continue;
         }
 
@@ -209,6 +239,7 @@ export class ApiClient {
               'Content-Type': 'application/json',
               ...options?.headers,
             },
+            signal: options?.signal,
           },
           options?.timeout ?? this.defaultTimeout
         ),
@@ -233,6 +264,7 @@ export class ApiClient {
               ...options?.headers,
             },
             body: hasBody ? JSON.stringify(data) : undefined,
+            signal: options?.signal,
           },
           options?.timeout ?? this.defaultTimeout
         ),
@@ -259,6 +291,7 @@ export class ApiClient {
               ...options?.headers,
             },
             body: formData,
+            signal: options?.signal,
           },
           options?.timeout ?? this.defaultTimeout
         ),
@@ -283,6 +316,7 @@ export class ApiClient {
               ...options?.headers,
             },
             body: hasBody ? JSON.stringify(data) : undefined,
+            signal: options?.signal,
           },
           options?.timeout ?? this.defaultTimeout
         ),
@@ -307,6 +341,7 @@ export class ApiClient {
               ...options?.headers,
             },
             body: hasBody ? JSON.stringify(data) : undefined,
+            signal: options?.signal,
           },
           options?.timeout ?? this.defaultTimeout
         ),
@@ -329,6 +364,7 @@ export class ApiClient {
               'Content-Type': 'application/json',
               ...options?.headers,
             },
+            signal: options?.signal,
           },
           options?.timeout ?? this.defaultTimeout
         ),

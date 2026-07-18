@@ -52,7 +52,8 @@ interface TranslationState {
   pendingConflict: TermConflictData | null;
 }
 
-class FullTranslationService {
+export class FullTranslationService {
+  private sessionGeneration = 0;
   private state: TranslationState = {
     isTranslating: false,
     projectId: null,
@@ -84,9 +85,10 @@ class FullTranslationService {
     }
 
     if (this.state.isTranslating) {
-      await this.stopTranslation();
+      this.detachCurrentStream();
     }
 
+    const sessionGeneration = ++this.sessionGeneration;
     this.state.isTranslating = true;
     this.state.projectId = projectId;
     this.state.progress = { current: 0, total: 0 };
@@ -115,6 +117,9 @@ class FullTranslationService {
         signal: controller.signal,
       });
 
+      if (!this.isCurrentSession(sessionGeneration, projectId)) {
+        return;
+      }
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -128,9 +133,12 @@ class FullTranslationService {
       const translatedParagraphs = new Set<string>();
       let buffer = '';
 
-      while (this.state.isTranslating) {
+      while (this.isCurrentSession(sessionGeneration, projectId)) {
         const { done, value } = await reader.read();
 
+        if (!this.isCurrentSession(sessionGeneration, projectId)) {
+          return;
+        }
         if (done) {
           buffer += decoder.decode();
           break;
@@ -146,7 +154,12 @@ class FullTranslationService {
             continue;
           }
 
-          const shouldStop = await this.handleEvent(projectId, event, translatedParagraphs);
+          const shouldStop = await this.handleEvent(
+            projectId,
+            event,
+            translatedParagraphs,
+            sessionGeneration
+          );
           if (shouldStop) {
             return;
           }
@@ -156,23 +169,34 @@ class FullTranslationService {
       if (buffer.trim()) {
         const event = this.parseSseEvent(buffer);
         if (event) {
-          const shouldStop = await this.handleEvent(projectId, event, translatedParagraphs);
+          const shouldStop = await this.handleEvent(
+            projectId,
+            event,
+            translatedParagraphs,
+            sessionGeneration
+          );
           if (shouldStop) {
             return;
           }
         }
       }
 
-      if (this.state.isTranslating) {
-        this.finalizeTranslation(false);
+      if (this.isCurrentSession(sessionGeneration, projectId)) {
+        this.finalizeTranslation(false, sessionGeneration);
       }
     } catch (error: unknown) {
-      if (error instanceof Error && error.name === 'AbortError') {
+      if (
+        !this.isCurrentSession(sessionGeneration, projectId) ||
+        (error instanceof Error && error.name === 'AbortError')
+      ) {
         return;
       }
 
       console.error('Translation error:', error);
-      this.finalizeTranslation(false);
+      this.finalizeTranslation(false, sessionGeneration);
+      throw error instanceof Error
+        ? error
+        : new Error('Translation failed');
     }
   }
 
@@ -220,8 +244,12 @@ class FullTranslationService {
   private async handleEvent(
     projectId: string,
     data: TranslationProgressPayload,
-    translatedParagraphs: Set<string>
+    translatedParagraphs: Set<string>,
+    sessionGeneration: number
   ): Promise<boolean> {
+    if (!this.isCurrentSession(sessionGeneration, projectId)) {
+      return true;
+    }
     if (data.type === 'start') {
       this.state.progress = { current: 0, total: data.total || 0 };
     } else if (data.type === 'translated' && data.paragraph_id && data.section_id && data.translation) {
@@ -239,6 +267,8 @@ class FullTranslationService {
         current: data.current || this.state.progress?.current || 0,
         total: data.total || this.state.progress?.total || 0,
       };
+    } else if (data.type === 'error' && !data.paragraph_id) {
+      throw new Error(data.error || data.message || 'Translation failed');
     } else if (data.type === 'skip' || data.type === 'error') {
       this.state.progress = {
         current: data.current || this.state.progress?.current || 0,
@@ -253,10 +283,19 @@ class FullTranslationService {
       if (this.onTermConflictCallback && data.conflict) {
         try {
           const resolution = await this.onTermConflictCallback(data.conflict);
+          if (!this.isCurrentSession(sessionGeneration, projectId)) {
+            return true;
+          }
           await this.resolveConflict(projectId, data.conflict.term, resolution);
+          if (!this.isCurrentSession(sessionGeneration, projectId)) {
+            return true;
+          }
           this.state.isPaused = false;
           this.state.pendingConflict = null;
         } catch (error) {
+          if (!this.isCurrentSession(sessionGeneration, projectId)) {
+            return true;
+          }
           console.error('Failed to resolve conflict:', error);
         }
       }
@@ -267,10 +306,9 @@ class FullTranslationService {
           total: data.total,
         };
       }
-      this.finalizeTranslation(true);
-      if (this.onProgressCallback) {
-        this.onProgressCallback(data);
-      }
+      const progressCallback = this.onProgressCallback;
+      this.finalizeTranslation(true, sessionGeneration);
+      progressCallback?.(data);
       return true;
     } else if (data.type === 'incomplete') {
       if (data.translated_count !== undefined && data.total !== undefined) {
@@ -279,10 +317,9 @@ class FullTranslationService {
           total: data.total,
         };
       }
-      this.finalizeTranslation(false);
-      if (this.onProgressCallback) {
-        this.onProgressCallback(data);
-      }
+      const progressCallback = this.onProgressCallback;
+      this.finalizeTranslation(false, sessionGeneration);
+      progressCallback?.(data);
       return true;
     } else if (data.type === 'cancelled') {
       if (data.translated_count !== undefined && data.total !== undefined) {
@@ -291,10 +328,9 @@ class FullTranslationService {
           total: data.total,
         };
       }
-      this.finalizeTranslation(false);
-      if (this.onProgressCallback) {
-        this.onProgressCallback(data);
-      }
+      const progressCallback = this.onProgressCallback;
+      this.finalizeTranslation(false, sessionGeneration);
+      progressCallback?.(data);
       return true;
     }
 
@@ -305,7 +341,13 @@ class FullTranslationService {
     return false;
   }
 
-  private finalizeTranslation(isCompleted: boolean): void {
+  private finalizeTranslation(
+    isCompleted: boolean,
+    sessionGeneration: number
+  ): void {
+    if (this.sessionGeneration !== sessionGeneration) {
+      return;
+    }
     this.state.isTranslating = false;
     this.state.controller = null;
     this.state.currentStep = null;
@@ -344,41 +386,66 @@ class FullTranslationService {
   }
 
   private async requestServerCancel(
-    projectId: string,
-    method: TranslationMethodType | null
+    projectId: string
   ): Promise<void> {
-    if (method !== 'four-step') {
-      return;
-    }
-
-    try {
-      await fetch(`/api/projects/${projectId}/translate-four-step/stop`, {
+    const response = await fetch(
+      `/api/projects/${projectId}/translation-cancel`,
+      {
         method: 'POST',
-      });
-    } catch (error) {
-      console.warn('Failed to request server-side cancellation:', error);
+      }
+    );
+    if (!response.ok) {
+      throw new Error(
+        `Failed to request server-side cancellation: ${response.status}`
+      );
     }
+  }
+
+  private detachCurrentStream(): void {
+    this.sessionGeneration += 1;
+    this.state.controller?.abort();
+    this.state = {
+      isTranslating: false,
+      projectId: null,
+      progress: null,
+      controller: null,
+      method: null,
+      currentStep: null,
+      isPaused: false,
+      pendingConflict: null,
+    };
+    this.onProgressCallback = null;
+    this.onCompleteCallback = null;
+  }
+
+  detachTranslation(projectId: string): boolean {
+    if (
+      !this.state.isTranslating ||
+      this.state.projectId !== projectId
+    ) {
+      return false;
+    }
+    this.detachCurrentStream();
+    return true;
   }
 
   async stopTranslation(): Promise<void> {
     const projectId = this.state.projectId;
-    const method = this.state.method;
-    const cancelPromise = projectId
-      ? this.requestServerCancel(projectId, method)
-      : Promise.resolve();
-
-    if (this.state.controller) {
-      this.state.controller.abort();
-      this.state.controller = null;
+    if (projectId) {
+      await this.requestServerCancel(projectId);
     }
-    this.state.isTranslating = false;
-    this.state.progress = null;
-    this.state.method = null;
-    this.state.currentStep = null;
-    this.state.isPaused = false;
-    this.state.pendingConflict = null;
+    this.detachCurrentStream();
+  }
 
-    await cancelPromise;
+  private isCurrentSession(
+    sessionGeneration: number,
+    projectId: string
+  ): boolean {
+    return (
+      this.sessionGeneration === sessionGeneration &&
+      this.state.isTranslating &&
+      this.state.projectId === projectId
+    );
   }
 
   getState(): TranslationState {

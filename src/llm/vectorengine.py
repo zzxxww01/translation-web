@@ -18,6 +18,7 @@ from .base import LLMProvider
 from .config_loader import get_config_loader
 from .errors import LLMConfigurationError, normalize_llm_transport_error
 from .network_policy import build_network_policy
+from .usage_metrics import llm_usage_metrics
 
 
 logger = logging.getLogger(__name__)
@@ -181,6 +182,18 @@ class VectorEngineProvider(LLMProvider):
             Generated text
         """
         model_name = model or self.default_model
+        started_at = time.monotonic()
+
+        def record_failure(error: Exception) -> None:
+            llm_usage_metrics.record_call(
+                provider="vectorengine",
+                model=model_name,
+                duration_seconds=time.monotonic() - started_at,
+                success=False,
+                input_chars=len(prompt),
+                error_type=type(error).__name__,
+            )
+
         temp = temperature if temperature is not None else self.temperature
         max_tokens = kwargs.get("max_tokens", self.max_tokens)
         request_timeout = timeout if timeout is not None else self.timeout
@@ -210,32 +223,52 @@ class VectorEngineProvider(LLMProvider):
             response = client.chat.completions.create(**request_params)
 
             content = response.choices[0].message.content
+            usage = getattr(response, "usage", None)
+            input_tokens = getattr(usage, "prompt_tokens", None)
+            output_tokens = getattr(usage, "completion_tokens", None)
+            total_tokens = getattr(usage, "total_tokens", None)
+            llm_usage_metrics.record_call(
+                provider="vectorengine",
+                model=model_name,
+                duration_seconds=time.monotonic() - started_at,
+                success=True,
+                input_chars=len(prompt),
+                output_chars=len(content or ""),
+                input_tokens=input_tokens,
+                output_tokens=output_tokens,
+                total_tokens=total_tokens,
+            )
 
             logger.info(
                 f"[VectorEngine] Success: model={model_name}, "
-                f"tokens={response.usage.total_tokens} "
-                f"(in={response.usage.prompt_tokens}, out={response.usage.completion_tokens})"
+                f"tokens={total_tokens} "
+                f"(in={input_tokens}, out={output_tokens})"
             )
 
             return content
 
         except RateLimitError as e:
+            record_failure(e)
             logger.error(f"[VectorEngine] Rate limit exceeded: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
             raise normalized.error if normalized is not None else e
         except APITimeoutError as e:
+            record_failure(e)
             logger.error(f"[VectorEngine] Request timeout: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
             raise normalized.error if normalized is not None else e
         except APIConnectionError as e:
+            record_failure(e)
             logger.error(f"[VectorEngine] Connection error: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
             raise normalized.error if normalized is not None else e
         except APIError as e:
+            record_failure(e)
             logger.error(f"[VectorEngine] API error: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
             raise normalized.error if normalized is not None else e
         except Exception as e:
+            record_failure(e)
             logger.error(f"[VectorEngine] Unexpected error: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
             raise normalized.error if normalized is not None else e
@@ -446,7 +479,9 @@ class VectorEngineProvider(LLMProvider):
                     style_text = style_match.group(1)
                     style = {}
                     for field in ['tone', 'target_audience', 'translation_voice']:
-                        field_match = re.search(f'"{field}"\s*:\s*"([^"]*)"', style_text)
+                        field_match = re.search(
+                            rf'"{field}"\s*:\s*"([^"]*)"', style_text
+                        )
                         if field_match:
                             style[field] = field_match.group(1)
                     result['style'] = style

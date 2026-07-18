@@ -8,18 +8,23 @@ import json
 import logging
 import re
 import threading
+from copy import deepcopy
 from collections import OrderedDict
 from contextlib import contextmanager
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Any, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Tuple
 from uuid import uuid4
+
+from pydantic_core import from_json
 
 logger = logging.getLogger(__name__)
 
 from .models import (
     ProjectMeta, ProjectStatus, ProjectConfig,
-    Section, Paragraph, ParagraphStatus, ElementType
+    Section, Paragraph, ParagraphStatus, ElementType, TranslationVersion,
+    ParagraphConfirmation,
 )
 from .glossary import GlossaryManager
 from .inline_recovery_service import InlineRecoveryService
@@ -30,8 +35,62 @@ from .file_utils import write_text_atomic, write_json_atomic, read_json
 from .limits import TranslationLimits
 
 
+class ConcurrentParagraphUpdateError(RuntimeError):
+    """Raised when an AI result targets a paragraph changed since generation began."""
+
+    def __init__(self, paragraph_id: str):
+        self.paragraph_id = paragraph_id
+        super().__init__(
+            f"Paragraph {paragraph_id} changed while translation was running"
+        )
+
+
+@dataclass(frozen=True)
+class ProjectListProgress:
+    """Immutable progress fields needed by the project-list response."""
+
+    total_paragraphs: int
+    approved: int
+
+    @property
+    def progress_percent(self) -> float:
+        if self.total_paragraphs == 0:
+            return 0.0
+        return (self.approved / self.total_paragraphs) * 100
+
+
+@dataclass(frozen=True)
+class ProjectListSummary:
+    """Small, immutable projection of a potentially very large meta.json."""
+
+    id: str
+    title: str
+    status: ProjectStatus
+    progress: ProjectListProgress
+    created_at: datetime
+
+
+@dataclass(frozen=True)
+class _ProjectSummaryCacheEntry:
+    signature: Tuple[int, int, int, int, int]
+    summary: ProjectListSummary
+
+
 class ProjectManager:
     """项目管理器"""
+
+    _meta_locks: Dict[str, threading.RLock] = {}
+    _meta_locks_guard = threading.Lock()
+    _PROJECT_SUMMARY_CACHE_SIZE = 256
+    _PROJECT_SUMMARY_PREFIX_BYTES = 16 * 1024
+    _PROJECT_SUMMARY_FIELDS = {
+        "id",
+        "title",
+        "source_file",
+        "created_at",
+        "status",
+        "progress",
+    }
 
     def __init__(self, projects_path: str = "projects"):
         """
@@ -75,6 +134,10 @@ class ProjectManager:
         self._section_locks: OrderedDict[str, threading.RLock] = OrderedDict()
         self._section_locks_guard = threading.Lock()
         self._section_locks_max = TranslationLimits.SECTION_LOCK_CACHE_SIZE
+        self._project_summary_cache: OrderedDict[
+            str, _ProjectSummaryCacheEntry
+        ] = OrderedDict()
+        self._project_summary_cache_lock = threading.RLock()
 
     def _project_dir(self, project_id: str) -> Path:
         # 安全:校验 project_id 防止路径遍历。否则经 ../ 或绝对路径可逃逸 projects 目录,
@@ -100,6 +163,15 @@ class ProjectManager:
 
     def _section_lock_key(self, project_id: str, section_id: str) -> str:
         return f"{project_id}:{section_id}"
+
+    def _get_meta_lock(self, project_id: str) -> threading.RLock:
+        lock_key = f"{self.projects_path.resolve()}:{project_id}"
+        with self._meta_locks_guard:
+            lock = self._meta_locks.get(lock_key)
+            if lock is None:
+                lock = threading.RLock()
+                self._meta_locks[lock_key] = lock
+            return lock
 
     def _get_section_lock(self, project_id: str, section_id: str) -> threading.RLock:
         lock_key = self._section_lock_key(project_id, section_id)
@@ -420,6 +492,11 @@ class ProjectManager:
             raise FileNotFoundError(f"Failed to load project meta: {e}")
 
         try:
+            # Sections are persisted under sections/<id>/meta.json. Older project
+            # metadata may still contain a large, stale duplicate snapshot.
+            if not isinstance(data, dict):
+                raise TypeError("Project metadata must be a JSON object")
+            data.pop("sections", None)
             meta = ProjectMeta(**data)
         except (TypeError, ValueError) as e:
             # meta.json 损坏，返回默认项目元信息
@@ -438,6 +515,115 @@ class ProjectManager:
                 logger.warning("Failed to recalculate progress for %s: %s", project_id, e)
 
         return meta
+
+    @staticmethod
+    def _project_meta_signature(meta_path: Path) -> Tuple[int, int, int, int, int]:
+        stat = meta_path.stat()
+        return (
+            stat.st_dev,
+            stat.st_ino,
+            stat.st_size,
+            stat.st_mtime_ns,
+            stat.st_ctime_ns,
+        )
+
+    def _parse_project_summary(self, meta_path: Path) -> ProjectListSummary:
+        """Parse only the leading list fields, falling back for reordered JSON."""
+        file_size = meta_path.stat().st_size
+        with open(meta_path, "rb") as meta_file:
+            prefix = meta_file.read(self._PROJECT_SUMMARY_PREFIX_BYTES)
+            if file_size > len(prefix):
+                meta_file.seek(max(0, file_size - 256))
+                tail = meta_file.read()
+                if not tail.rstrip().endswith(b"}"):
+                    raise ValueError("Project metadata is truncated")
+
+        try:
+            data = from_json(
+                prefix,
+                allow_partial=file_size > len(prefix),
+            )
+        except ValueError:
+            data = None
+
+        if (
+            not isinstance(data, dict)
+            or not self._PROJECT_SUMMARY_FIELDS.issubset(data)
+        ):
+            data = self._read_json(meta_path)
+
+        summary_payload = {
+            field_name: data[field_name]
+            for field_name in self._PROJECT_SUMMARY_FIELDS
+            if field_name in data
+        }
+        # Reuse ProjectMeta's validation/default semantics without constructing
+        # legacy sections, versions, confirmations, or other large fields.
+        validated = ProjectMeta.model_validate(summary_payload)
+        return ProjectListSummary(
+            id=validated.id,
+            title=validated.title,
+            status=validated.status,
+            progress=ProjectListProgress(
+                total_paragraphs=validated.progress.total_paragraphs,
+                approved=validated.progress.approved,
+            ),
+            created_at=validated.created_at,
+        )
+
+    def _get_project_summary(
+        self,
+        project_id: str,
+        meta_path: Path,
+    ) -> ProjectListSummary:
+        """Return a summary cached only while the on-disk signature is unchanged."""
+        with self._get_meta_lock(project_id):
+            for _attempt in range(3):
+                signature = self._project_meta_signature(meta_path)
+                with self._project_summary_cache_lock:
+                    cached = self._project_summary_cache.get(project_id)
+                    if cached is not None and cached.signature == signature:
+                        self._project_summary_cache.move_to_end(project_id)
+                        return cached.summary
+
+                summary = self._parse_project_summary(meta_path)
+                if self._project_meta_signature(meta_path) == signature:
+                    break
+            else:
+                raise OSError("Project metadata changed repeatedly while reading")
+
+            with self._project_summary_cache_lock:
+                self._project_summary_cache[project_id] = _ProjectSummaryCacheEntry(
+                    signature=signature,
+                    summary=summary,
+                )
+                self._project_summary_cache.move_to_end(project_id)
+                while (
+                    len(self._project_summary_cache)
+                    > self._PROJECT_SUMMARY_CACHE_SIZE
+                ):
+                    self._project_summary_cache.popitem(last=False)
+            return summary
+
+    def list_summaries(self) -> List[ProjectListSummary]:
+        """List projects without loading sections or full ProjectMeta models."""
+        projects: List[ProjectListSummary] = []
+        for project_dir in self.projects_path.iterdir():
+            if not project_dir.is_dir():
+                continue
+            try:
+                meta_path = self._project_dir(project_dir.name) / "meta.json"
+            except ValueError:
+                continue
+            if not meta_path.exists():
+                continue
+            try:
+                projects.append(
+                    self._get_project_summary(project_dir.name, meta_path)
+                )
+            except Exception:
+                pass
+        return sorted(projects, key=lambda project: project.created_at, reverse=True)
 
     def list_all(self) -> List[ProjectMeta]:
         """
@@ -495,6 +681,163 @@ class ProjectManager:
         """Persist project metadata to disk."""
         self._save_meta(meta.id, meta)
 
+    def merge_meta_fields(
+        self,
+        project_id: str,
+        *,
+        fields: Optional[Dict[str, Any]] = None,
+        mapping_fields: Optional[Dict[str, Dict[str, Any]]] = None,
+        nested_fields: Optional[Dict[str, Dict[str, Any]]] = None,
+    ) -> ProjectMeta:
+        """Merge workflow-owned metadata fields into the latest project snapshot."""
+        fields = fields or {}
+        mapping_fields = mapping_fields or {}
+        nested_fields = nested_fields or {}
+        disallowed_fields = {"id", "sections"}
+        requested_fields = set(fields) | set(mapping_fields) | set(nested_fields)
+        unknown_fields = requested_fields - set(ProjectMeta.model_fields)
+        if unknown_fields:
+            raise ValueError(
+                f"Unknown project metadata fields: {', '.join(sorted(unknown_fields))}"
+            )
+        if disallowed_fields & requested_fields:
+            raise ValueError("Project id and sections cannot be merged through metadata")
+
+        meta_lock = self._get_meta_lock(project_id)
+        with meta_lock:
+            latest = self.get(project_id)
+            for field_name, value in fields.items():
+                setattr(latest, field_name, deepcopy(value))
+            for field_name, updates in mapping_fields.items():
+                current = getattr(latest, field_name)
+                if not isinstance(current, dict):
+                    raise ValueError(
+                        f"Project metadata field is not a mapping: {field_name}"
+                    )
+                current.update(deepcopy(updates))
+            for field_name, updates in nested_fields.items():
+                current = getattr(latest, field_name)
+                if current is None:
+                    continue
+                model_field_names = getattr(type(current), "model_fields", {})
+                unknown_nested_fields = set(updates) - set(model_field_names)
+                if unknown_nested_fields:
+                    raise ValueError(
+                        "Unknown nested project metadata fields for "
+                        f"{field_name}: {', '.join(sorted(unknown_nested_fields))}"
+                    )
+                for nested_name, value in updates.items():
+                    setattr(current, nested_name, deepcopy(value))
+            latest.updated_at = datetime.now()
+            self._save_meta(project_id, latest)
+            return latest
+
+    def compare_and_set_meta_fields(
+        self,
+        project_id: str,
+        *,
+        expected_fields: Optional[Dict[str, Any]] = None,
+        fields: Optional[Dict[str, Any]] = None,
+        expected_nested_fields: Optional[Dict[str, Dict[str, Any]]] = None,
+        nested_fields: Optional[Dict[str, Dict[str, Any]]] = None,
+    ) -> Tuple[ProjectMeta, set[str]]:
+        """Update generated metadata only when its source snapshot is unchanged."""
+
+        expected_fields = expected_fields or {}
+        fields = fields or {}
+        expected_nested_fields = expected_nested_fields or {}
+        nested_fields = nested_fields or {}
+        if set(fields) != set(expected_fields):
+            raise ValueError("Every metadata update requires an expected value")
+        if set(nested_fields) != set(expected_nested_fields):
+            raise ValueError("Every nested metadata update requires expected values")
+
+        requested_fields = set(fields) | set(nested_fields)
+        unknown_fields = requested_fields - set(ProjectMeta.model_fields)
+        if unknown_fields:
+            raise ValueError(
+                f"Unknown project metadata fields: {', '.join(sorted(unknown_fields))}"
+            )
+        if {"id", "sections"} & requested_fields:
+            raise ValueError("Project id and sections cannot be conditionally updated")
+
+        with self._get_meta_lock(project_id):
+            latest = self.get(project_id)
+            applied_fields: set[str] = set()
+            for field_name, value in fields.items():
+                if getattr(latest, field_name) != expected_fields[field_name]:
+                    continue
+                setattr(latest, field_name, deepcopy(value))
+                applied_fields.add(field_name)
+
+            for field_name, updates in nested_fields.items():
+                expected_updates = expected_nested_fields[field_name]
+                if set(updates) != set(expected_updates):
+                    raise ValueError(
+                        f"Every nested update for {field_name} requires an expected value"
+                    )
+                current = getattr(latest, field_name)
+                if current is None:
+                    continue
+                model_field_names = getattr(type(current), "model_fields", {})
+                unknown_nested_fields = set(updates) - set(model_field_names)
+                if unknown_nested_fields:
+                    raise ValueError(
+                        "Unknown nested project metadata fields for "
+                        f"{field_name}: {', '.join(sorted(unknown_nested_fields))}"
+                    )
+                for nested_name, value in updates.items():
+                    if getattr(current, nested_name) != expected_updates[nested_name]:
+                        continue
+                    setattr(current, nested_name, deepcopy(value))
+                    applied_fields.add(f"{field_name}.{nested_name}")
+
+            if applied_fields:
+                latest.updated_at = datetime.now()
+                self._save_meta(project_id, latest)
+            return latest, applied_fields
+
+    def upsert_translation_version(
+        self,
+        project_id: str,
+        version: TranslationVersion,
+    ) -> ProjectMeta:
+        """Merge one workflow-owned reference version into the latest metadata."""
+        meta_lock = self._get_meta_lock(project_id)
+        with meta_lock:
+            latest = self.get(project_id)
+            updated_version = deepcopy(version)
+            for index, existing in enumerate(latest.versions):
+                if existing.id == version.id:
+                    latest.versions[index] = updated_version
+                    break
+            else:
+                latest.versions.append(updated_version)
+            latest.updated_at = datetime.now()
+            self._save_meta(project_id, latest)
+            return latest
+
+    def mutate_translation_version(
+        self,
+        project_id: str,
+        version_id: str,
+        mutator: Callable[[TranslationVersion], Any],
+    ) -> Tuple[TranslationVersion, Any]:
+        """Mutate one reference version against the latest locked snapshot."""
+
+        with self._get_meta_lock(project_id):
+            latest = self.get(project_id)
+            for index, existing in enumerate(latest.versions):
+                if existing.id != version_id:
+                    continue
+                updated_version = existing.model_copy(deep=True)
+                result = mutator(updated_version)
+                latest.versions[index] = updated_version
+                latest.updated_at = datetime.now()
+                self._save_meta(project_id, latest)
+                return updated_version.model_copy(deep=True), result
+        raise ValueError(f"Version {version_id} not found")
+
     def save_section(self, project_id: str, section: Section) -> None:
         """
         保存章节
@@ -532,7 +875,8 @@ class ProjectManager:
         tokenized_text: Optional[str] = None,
         format_issues: Optional[List[str]] = None,
         status: Optional[ParagraphStatus] = None,
-        model: str = "manual"
+        model: str = "manual",
+        recompute_progress: bool = True,
     ) -> Paragraph:
         """
         更新段落
@@ -552,14 +896,37 @@ class ProjectManager:
         if not section:
             raise FileNotFoundError(f"Section not found: {section_id}")
 
-        # 找到段落
-        paragraph = None
-        for p in section.paragraphs:
-            if p.id == paragraph_id:
-                paragraph = p
-                break
+        return self._update_paragraph_in_section(
+            project_id,
+            section,
+            paragraph_id,
+            translation=translation,
+            tokenized_text=tokenized_text,
+            format_issues=format_issues,
+            status=status,
+            model=model,
+            recompute_progress=recompute_progress,
+        )
 
-        if not paragraph:
+    def _update_paragraph_in_section(
+        self,
+        project_id: str,
+        section: Section,
+        paragraph_id: str,
+        *,
+        translation: Optional[str] = None,
+        tokenized_text: Optional[str] = None,
+        format_issues: Optional[List[str]] = None,
+        status: Optional[ParagraphStatus] = None,
+        model: str = "manual",
+        recompute_progress: bool = True,
+    ) -> Paragraph:
+        """Mutate and persist a paragraph in an already-loaded section."""
+        paragraph = next(
+            (item for item in section.paragraphs if item.id == paragraph_id),
+            None,
+        )
+        if paragraph is None:
             raise FileNotFoundError(f"Paragraph not found: {paragraph_id}")
 
         # Clear confirmation as soon as an approved paragraph is retranslated or edited.
@@ -614,7 +981,10 @@ class ProjectManager:
 
         # 保存
         self._save_section(project_id, section)
-        self._update_progress(project_id)
+        if should_unconfirm:
+            self.remove_paragraph_confirmation(project_id, paragraph_id)
+        if recompute_progress:
+            self._update_progress(project_id)
 
         return paragraph
 
@@ -627,21 +997,197 @@ class ProjectManager:
         tokenized_text: Optional[str] = None,
         format_issues: Optional[List[str]] = None,
         status: Optional[ParagraphStatus] = None,
-        model: str = "manual"
-    ) -> Paragraph:
-        """Update one paragraph while holding the section write lock."""
+        model: str = "manual",
+        expected_paragraph: Optional[Paragraph] = None,
+        recompute_progress: bool = True,
+        return_section: bool = False,
+    ) -> Paragraph | Tuple[Paragraph, Section]:
+        """Update one paragraph while holding the section write lock.
+
+        ``expected_paragraph`` turns the write into an optimistic concurrency
+        check. This is intended for AI calls that may take minutes: a manual
+        edit made while generation is running must not be overwritten when the
+        result eventually arrives. ``return_section`` also returns the exact
+        latest section snapshot used by the write, avoiding a follow-up disk
+        read when the next operation needs persisted context.
+        """
         section_lock = self._get_section_lock(project_id, section_id)
         with section_lock:
-            return self.update_paragraph(
+            section = self._load_section(project_id, section_id)
+            if not section:
+                raise FileNotFoundError(f"Section not found: {section_id}")
+
+            if expected_paragraph is not None:
+                current = next(
+                    (item for item in section.paragraphs if item.id == paragraph_id),
+                    None,
+                )
+                if current is None:
+                    raise FileNotFoundError(
+                        f"Paragraph not found: {paragraph_id}"
+                    )
+                if not self._paragraph_matches(current, expected_paragraph):
+                    raise ConcurrentParagraphUpdateError(paragraph_id)
+
+            paragraph = self._update_paragraph_in_section(
                 project_id,
-                section_id,
+                section,
                 paragraph_id,
                 translation=translation,
                 tokenized_text=tokenized_text,
                 format_issues=format_issues,
                 status=status,
                 model=model,
+                recompute_progress=recompute_progress,
             )
+            if return_section:
+                return paragraph, section
+            return paragraph
+
+    def update_paragraph_confirmation_locked(
+        self,
+        project_id: str,
+        section_id: str,
+        paragraph_id: str,
+        *,
+        translation: str,
+        confirmation: ParagraphConfirmation,
+        tokenized_text: Optional[str] = None,
+        format_issues: Optional[List[str]] = None,
+        model: str = "manual",
+        recompute_progress: bool = True,
+    ) -> Paragraph:
+        """Confirm a paragraph and its metadata entry as one locked operation."""
+
+        if confirmation.paragraph_id != paragraph_id:
+            raise ValueError(
+                "Paragraph confirmation id does not match target paragraph"
+            )
+
+        section_lock = self._get_section_lock(project_id, section_id)
+        with section_lock:
+            section = self._load_section(project_id, section_id)
+            if not section:
+                raise FileNotFoundError(f"Section not found: {section_id}")
+            paragraph = next(
+                (
+                    item
+                    for item in section.paragraphs
+                    if item.id == paragraph_id
+                ),
+                None,
+            )
+            if paragraph is None:
+                raise FileNotFoundError(f"Paragraph not found: {paragraph_id}")
+            paragraph.confirm(
+                translation,
+                source=model,
+                tokenized_text=tokenized_text,
+                format_issues=list(format_issues or []),
+            )
+            self._save_section(project_id, section)
+            with self._get_meta_lock(project_id):
+                latest = self.get(project_id)
+                latest.confirmation_map[paragraph_id] = deepcopy(confirmation)
+                latest.updated_at = datetime.now()
+                self._save_meta(project_id, latest)
+
+        if recompute_progress:
+            self._update_progress(project_id)
+        return paragraph
+
+    def remove_paragraph_confirmation(
+        self,
+        project_id: str,
+        paragraph_id: str,
+    ) -> bool:
+        """Remove one stale confirmation from the latest project metadata."""
+
+        with self._get_meta_lock(project_id):
+            try:
+                latest = self.get(project_id)
+            except FileNotFoundError:
+                return False
+            if paragraph_id not in latest.confirmation_map:
+                return False
+            latest.confirmation_map.pop(paragraph_id, None)
+            latest.updated_at = datetime.now()
+            self._save_meta(project_id, latest)
+            return True
+
+    def merge_translation_updates_locked(
+        self,
+        project_id: str,
+        section_id: str,
+        updated_paragraphs: List[Paragraph],
+        expected_paragraphs: Dict[str, Paragraph],
+        *,
+        recompute_progress: bool = True,
+    ) -> Tuple[Section, List[str], List[str]]:
+        """Merge generated paragraph updates into the latest section snapshot.
+
+        Only paragraphs that still match their pre-generation snapshots are
+        replaced. Unrelated manual edits are retained, while edits to a target
+        paragraph are reported as conflicts.
+        """
+        section_lock = self._get_section_lock(project_id, section_id)
+        with section_lock:
+            section = self._load_section(project_id, section_id)
+            if not section:
+                raise FileNotFoundError(f"Section not found: {section_id}")
+
+            paragraph_indexes = {
+                paragraph.id: index
+                for index, paragraph in enumerate(section.paragraphs)
+            }
+            applied_ids: List[str] = []
+            conflict_ids: List[str] = []
+
+            for updated in updated_paragraphs:
+                expected = expected_paragraphs.get(updated.id)
+                index = paragraph_indexes.get(updated.id)
+                if expected is None or index is None:
+                    conflict_ids.append(updated.id)
+                    continue
+
+                current = section.paragraphs[index]
+                if not self._paragraph_matches(current, expected):
+                    conflict_ids.append(updated.id)
+                    continue
+
+                section.paragraphs[index] = updated.model_copy(deep=True)
+                applied_ids.append(updated.id)
+
+            if applied_ids:
+                self._save_section(project_id, section)
+                if recompute_progress:
+                    self._update_progress(project_id)
+
+            return section, applied_ids, conflict_ids
+
+    def update_section_title_translation_locked(
+        self,
+        project_id: str,
+        section_id: str,
+        title_translation: str,
+        *,
+        expected_title_translation: Optional[str] = None,
+    ) -> Tuple[Section, bool]:
+        """Update a section title on the latest snapshot without replacing paragraphs."""
+        section_lock = self._get_section_lock(project_id, section_id)
+        with section_lock:
+            section = self._load_section(project_id, section_id)
+            if not section:
+                raise FileNotFoundError(f"Section not found: {section_id}")
+            if section.title_translation != expected_title_translation:
+                return section, False
+            section.title_translation = title_translation
+            self._save_section(project_id, section)
+            return section, True
+
+    @staticmethod
+    def _paragraph_matches(current: Paragraph, expected: Paragraph) -> bool:
+        return current.model_dump(mode="json") == expected.model_dump(mode="json")
 
     @contextmanager
     def section_lock(self, project_id: str, section_id: str):
@@ -697,7 +1243,8 @@ class ProjectManager:
 
     def _save_meta(self, project_id: str, meta: ProjectMeta) -> None:
         """保存项目元信息"""
-        self.project_repository.save_meta(project_id, meta)
+        with self._get_meta_lock(project_id):
+            self.project_repository.save_meta(project_id, meta)
 
     def _save_section(self, project_id: str, section: Section) -> None:
         """保存章节"""
@@ -713,7 +1260,8 @@ class ProjectManager:
 
     def _update_progress(self, project_id: str) -> None:
         """更新项目进度"""
-        self.project_repository.update_progress(
-            project_id,
-            get_sections=self.get_sections,
-        )
+        with self._get_meta_lock(project_id):
+            self.project_repository.update_progress(
+                project_id,
+                get_sections=self.get_sections,
+            )

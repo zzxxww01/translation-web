@@ -25,7 +25,8 @@ class SectionTranslationExecutor:
         four_step_translate_section: Callable[..., Any],
         create_section_callback: Callable[..., Callable[[str, int, int], None]],
         apply_four_step_translations: Callable[[Section, Any], None],
-        save_section: Callable[[str, Section], None],
+        merge_translation_updates: Callable[..., tuple[Section, list[str], list[str]]],
+        commit_four_step_result: Optional[Callable[[Any], None]] = None,
     ) -> None:
         self._is_cancelled = is_cancelled
         self._touch_progress = touch_progress
@@ -39,7 +40,42 @@ class SectionTranslationExecutor:
         self._four_step_translate_section = four_step_translate_section
         self._create_section_callback = create_section_callback
         self._apply_four_step_translations = apply_four_step_translations
-        self._save_section = save_section
+        self._merge_translation_updates = merge_translation_updates
+        self._commit_four_step_result = commit_four_step_result
+
+    async def prescan(
+        self,
+        *,
+        project_id: str,
+        section: Section,
+        run_dir: Path,
+        progress: TranslationProgress,
+        on_term_conflict: Optional[
+            Callable[[TermConflict], Awaitable[dict[str, Any]]]
+        ],
+    ) -> Optional[Any]:
+        """Prescan one translatable section without starting its translation."""
+        if self._is_cancelled(project_id):
+            return None
+
+        translatable_section = self._build_translatable_section(section)
+        if not translatable_section.paragraphs:
+            return None
+
+        prescan_result = await self._run_section_prescan(
+            project_id,
+            translatable_section,
+            progress,
+            on_term_conflict=on_term_conflict,
+        )
+        if prescan_result:
+            self._persist_section_artifact(
+                run_dir,
+                "section-prescan",
+                section.section_id,
+                prescan_result,
+            )
+        return prescan_result
 
     async def translate(
         self,
@@ -58,6 +94,7 @@ class SectionTranslationExecutor:
         total_paragraphs: int,
         translation_mode: str,
         translation_mode_section: str,
+        prescan_completed: bool = False,
     ) -> dict[str, Any]:
         try:
             if self._is_cancelled(project_id):
@@ -99,25 +136,36 @@ class SectionTranslationExecutor:
             if not translatable_section.paragraphs:
                 return {
                     "section_id": section.section_id,
-                    "translations": [],
+                    "translations": [
+                        paragraph.best_translation_text(fallback_to_source=False)
+                        for paragraph in section.paragraphs
+                    ],
                     "paragraph_count": section_paragraph_count,
                     "translated_before": translated_in_section,
+                    "translated_after": translated_in_section,
+                    "conflict_paragraph_ids": [],
                 }
+            expected_paragraphs = {
+                paragraph.id: paragraph.model_copy(deep=True)
+                for paragraph in translatable_section.paragraphs
+            }
 
-            prescan_result = await self._run_section_prescan(
-                project_id,
-                translatable_section,
-                progress,
-                on_term_conflict=on_term_conflict,
-            )
-            if prescan_result:
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-prescan",
-                    section.section_id,
-                    prescan_result,
+            if not prescan_completed:
+                prescan_result = await self._run_section_prescan(
+                    project_id,
+                    translatable_section,
+                    progress,
+                    on_term_conflict=on_term_conflict,
                 )
+                if prescan_result:
+                    self._persist_section_artifact(
+                        run_dir,
+                        "section-prescan",
+                        section.section_id,
+                        prescan_result,
+                    )
 
+            four_step_result = None
             if translation_mode == translation_mode_section:
                 translations = await self._translate_section_batch(
                     section=translatable_section,
@@ -126,7 +174,7 @@ class SectionTranslationExecutor:
                     all_sections=all_sections,
                     analysis=analysis,
                 )
-                collected_translations = self._apply_section_batch_translations(
+                self._apply_section_batch_translations(
                     translatable_section,
                     translations,
                 )
@@ -143,9 +191,8 @@ class SectionTranslationExecutor:
                     },
                 )
             else:
-                # 四步法 translate_section 是同步阻塞（多次 LLM 调用），卸载到线程池，
-                # 使 gather 的多章节并发真正生效（否则阻塞事件循环、章节退化为串行）。
-                result = await asyncio.to_thread(
+                # 四步法内部仍是同步批调用；卸载到线程池以保持事件循环可响应取消和查询。
+                four_step_result = await asyncio.to_thread(
                     self._four_step_translate_section,
                     section=translatable_section,
                     all_sections=all_sections,
@@ -158,8 +205,10 @@ class SectionTranslationExecutor:
                         max(section_paragraph_count - translated_in_section, 0),
                     ),
                 )
-                self._apply_four_step_translations(translatable_section, result)
-                collected_translations = result.translations
+                self._apply_four_step_translations(
+                    translatable_section,
+                    four_step_result,
+                )
                 self._persist_section_artifact(
                     run_dir,
                     "section-draft",
@@ -168,28 +217,54 @@ class SectionTranslationExecutor:
                         "section_id": section.section_id,
                         "mode": translation_mode,
                         "prompt_context": section_prompt_context,
-                        "understanding": result.understanding,
-                        "translations": result.draft_translations,
+                        "understanding": four_step_result.understanding,
+                        "translations": four_step_result.draft_translations,
                     },
                 )
                 self._persist_section_artifact(
                     run_dir,
                     "section-critique",
                     section.section_id,
-                    {"section_id": section.section_id, "reflection": result.reflection},
-                )
-                self._persist_section_artifact(
-                    run_dir,
-                    "section-revision",
-                    section.section_id,
                     {
                         "section_id": section.section_id,
-                        "assessment": result.assessment,
-                        "translations": result.revised_translations,
+                        "reflection": four_step_result.reflection,
                     },
                 )
+                if four_step_result.revision_attempted:
+                    self._persist_section_artifact(
+                        run_dir,
+                        "section-revision",
+                        section.section_id,
+                        {
+                            "section_id": section.section_id,
+                            "assessment": four_step_result.assessment,
+                            "translations": four_step_result.revised_translations,
+                            "revision_attempted": True,
+                        },
+                    )
 
-            self._save_section(project_id, section)
+            persisted_section, applied_ids, conflict_ids = (
+                self._merge_translation_updates(
+                    project_id,
+                    section.section_id,
+                    translatable_section.paragraphs,
+                    expected_paragraphs,
+                    recompute_progress=False,
+                )
+            )
+            applied_id_set = set(applied_ids)
+            applied_translations = [
+                paragraph.best_translation_text(fallback_to_source=False)
+                for paragraph in persisted_section.paragraphs
+                if paragraph.id in applied_id_set
+            ]
+            if (
+                four_step_result is not None
+                and applied_ids
+                and not conflict_ids
+                and self._commit_four_step_result is not None
+            ):
+                self._commit_four_step_result(four_step_result)
             self._touch_progress(
                 progress,
                 step=f"完成: {section.title}",
@@ -199,11 +274,16 @@ class SectionTranslationExecutor:
                 "section_id": section.section_id,
                 "translations": [
                     paragraph.best_translation_text(fallback_to_source=False)
-                    for paragraph in section.paragraphs
+                    for paragraph in persisted_section.paragraphs
                 ],
-                "updated_translations": collected_translations,
+                "updated_translations": applied_translations,
                 "paragraph_count": section_paragraph_count,
                 "translated_before": translated_in_section,
+                "translated_after": self._count_translated_paragraphs(
+                    persisted_section
+                ),
+                "applied_paragraph_ids": applied_ids,
+                "conflict_paragraph_ids": conflict_ids,
             }
         except Exception as error:
             error_msg = f"Failed to translate section {section.section_id}: {str(error)}"

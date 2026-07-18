@@ -34,7 +34,10 @@ export const SectionList: FC<SectionListProps> = ({
         return (
           <button
             key={section.section_id}
+            type="button"
             onClick={() => onSelectSection(section.section_id)}
+            aria-current={isActive ? 'page' : undefined}
+            aria-label={`${section.title}，已审核 ${section.approved_count}/${section.total_paragraphs}`}
             className={cn(
               'relative w-full rounded-lg p-2.5 text-left transition-all border-l-2 border-transparent',
               isActive

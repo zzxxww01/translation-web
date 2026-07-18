@@ -8,7 +8,7 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, Iterable, List, Optional, Set, Tuple
 
 from src.core.constants import MAX_GLOSSARY_TERMS_IN_PROMPT
 from src.core.format_tokens import (
@@ -90,7 +90,7 @@ class SourceMetadataTranslationService:
         project_id: str,
         sections: Optional[List[Section]] = None,
         artifact_dir: Optional[Path] = None,
-    ) -> Dict[str, int]:
+    ) -> Dict[str, Any]:
         sections = sections or self.project_manager.get_sections(project_id)
         if not sections:
             return self._empty_result()
@@ -102,9 +102,18 @@ class SourceMetadataTranslationService:
         pending_targets: Dict[str, List[Tuple[Section, Paragraph]]] = {}
         unique_entries: Dict[str, SourceMetadataEntry] = {}
         changed_sections: Dict[str, Section] = {}
+        expected_paragraphs = {
+            section.section_id: {
+                paragraph.id: paragraph.model_copy(deep=True)
+                for paragraph in section.paragraphs
+                if paragraph.metadata_type in self.SUPPORTED_METADATA_TYPES
+            }
+            for section in sections
+        }
 
         reused_count = 0
         rule_count = 0
+        reused_target_keys: Set[Tuple[str, str]] = set()
 
         for section in sections:
             for paragraph in section.paragraphs:
@@ -119,6 +128,7 @@ class SourceMetadataTranslationService:
                         self._apply_payload(paragraph, cached_payload)
                         changed_sections[section.section_id] = section
                         reused_count += 1
+                        reused_target_keys.add((section.section_id, paragraph.id))
                     continue
 
                 pending_targets.setdefault(paragraph.source, []).append((section, paragraph))
@@ -128,13 +138,22 @@ class SourceMetadataTranslationService:
                 )
 
         if not unique_entries:
-            self._persist_changed_sections(project_id, changed_sections)
+            applied_keys, conflict_keys = self._persist_changed_sections(
+                project_id,
+                changed_sections,
+                expected_paragraphs,
+            )
             return {
                 "total": len(existing_cache),
                 "translated": 0,
-                "reused": reused_count,
+                "reused": len(applied_keys & reused_target_keys),
                 "rule_applied": rule_count,
                 "llm_batches": 0,
+                "applied_count": len(applied_keys),
+                "conflict_count": len(conflict_keys),
+                "conflict_paragraph_ids": [
+                    paragraph_id for _, paragraph_id in sorted(conflict_keys)
+                ],
             }
 
         resolved_payloads: Dict[str, TranslationPayload] = {}
@@ -159,6 +178,7 @@ class SourceMetadataTranslationService:
             llm_batches += 1
 
         translated_count = 0
+        translated_target_keys: Set[Tuple[str, str]] = set()
         for source_text, targets in pending_targets.items():
             payload = resolved_payloads.get(source_text)
             if payload is None:
@@ -168,8 +188,13 @@ class SourceMetadataTranslationService:
                 self._apply_payload(paragraph, payload)
                 changed_sections[section.section_id] = section
                 translated_count += 1
+                translated_target_keys.add((section.section_id, paragraph.id))
 
-        self._persist_changed_sections(project_id, changed_sections)
+        applied_keys, conflict_keys = self._persist_changed_sections(
+            project_id,
+            changed_sections,
+            expected_paragraphs,
+        )
         self._write_artifact(
             artifact_dir,
             resolved_payloads=resolved_payloads,
@@ -178,19 +203,27 @@ class SourceMetadataTranslationService:
 
         return {
             "total": len(pending_targets) + len(existing_cache),
-            "translated": translated_count,
-            "reused": reused_count,
+            "translated": len(applied_keys & translated_target_keys),
+            "reused": len(applied_keys & reused_target_keys),
             "rule_applied": rule_count,
             "llm_batches": llm_batches,
+            "applied_count": len(applied_keys),
+            "conflict_count": len(conflict_keys),
+            "conflict_paragraph_ids": [
+                paragraph_id for _, paragraph_id in sorted(conflict_keys)
+            ],
         }
 
-    def _empty_result(self) -> Dict[str, int]:
+    def _empty_result(self) -> Dict[str, Any]:
         return {
             "total": 0,
             "translated": 0,
             "reused": 0,
             "rule_applied": 0,
             "llm_batches": 0,
+            "applied_count": 0,
+            "conflict_count": 0,
+            "conflict_paragraph_ids": [],
         }
 
     def _build_existing_cache(
@@ -490,9 +523,47 @@ class SourceMetadataTranslationService:
         self,
         project_id: str,
         changed_sections: Dict[str, Section],
-    ) -> None:
+        expected_paragraphs: Dict[str, Dict[str, Paragraph]],
+    ) -> Tuple[Set[Tuple[str, str]], Set[Tuple[str, str]]]:
+        applied_any = False
+        applied_keys: Set[Tuple[str, str]] = set()
+        conflict_keys: Set[Tuple[str, str]] = set()
         for section in changed_sections.values():
-            self.project_manager.save_section(project_id, section)
+            expected = expected_paragraphs.get(section.section_id, {})
+            updates = [
+                paragraph
+                for paragraph in section.paragraphs
+                if paragraph.id in expected
+                and paragraph.model_dump(mode="json")
+                != expected[paragraph.id].model_dump(mode="json")
+            ]
+            _, applied_ids, conflict_ids = (
+                self.project_manager.merge_translation_updates_locked(
+                    project_id,
+                    section.section_id,
+                    updates,
+                    expected,
+                    recompute_progress=False,
+                )
+            )
+            applied_any = applied_any or bool(applied_ids)
+            applied_keys.update(
+                (section.section_id, paragraph_id)
+                for paragraph_id in applied_ids
+            )
+            conflict_keys.update(
+                (section.section_id, paragraph_id)
+                for paragraph_id in conflict_ids
+            )
+            if conflict_ids:
+                logger.info(
+                    "Skipped stale source metadata translations in %s: %s",
+                    section.section_id,
+                    ", ".join(conflict_ids),
+                )
+        if applied_any:
+            self.project_manager.update_progress(project_id)
+        return applied_keys, conflict_keys
 
     def _write_artifact(
         self,

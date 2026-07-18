@@ -187,6 +187,14 @@ class GeminiAttempt:
     uses_backup_model: bool
 
 
+@dataclass(frozen=True)
+class GeminiGenerationResult:
+    text: str
+    input_tokens: Optional[int] = None
+    output_tokens: Optional[int] = None
+    total_tokens: Optional[int] = None
+
+
 class GeminiProvider(LLMProvider):
     """Google Gemini API Provider"""
 
@@ -532,7 +540,7 @@ class GeminiProvider(LLMProvider):
         temperature: float = 0.7,
         response_mime_type: Optional[str] = None,
         model_override: Optional[str] = None,
-    ) -> str:
+    ) -> GeminiGenerationResult:
         model = model_override or self.model_name
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
         generation_config = {
@@ -564,9 +572,41 @@ class GeminiProvider(LLMProvider):
             self._raise_rest_http_error(response, model)
         data = response.json()
         try:
-            return data["candidates"][0]["content"]["parts"][0]["text"]
+            text = data["candidates"][0]["content"]["parts"][0]["text"]
         except Exception as exc:
             raise RuntimeError(f"Unexpected Gemini REST response: {data}") from exc
+        usage = data.get("usageMetadata", {})
+        return GeminiGenerationResult(
+            text=text,
+            input_tokens=self._usage_value(
+                usage,
+                "prompt_token_count",
+                "promptTokenCount",
+            ),
+            output_tokens=self._usage_value(
+                usage,
+                "candidates_token_count",
+                "candidatesTokenCount",
+            ),
+            total_tokens=self._usage_value(
+                usage,
+                "total_token_count",
+                "totalTokenCount",
+            ),
+        )
+
+    @staticmethod
+    def _usage_value(usage: Any, *names: str) -> Optional[int]:
+        if usage is None:
+            return None
+        for name in names:
+            if isinstance(usage, dict):
+                value = usage.get(name)
+            else:
+                value = getattr(usage, name, None)
+            if isinstance(value, int) and not isinstance(value, bool):
+                return value
+        return None
 
     # ============ 閿欒鍒嗙被鏂规硶 ============
 
@@ -729,7 +769,7 @@ class GeminiProvider(LLMProvider):
         temperature: float,
         response_mime_type: Optional[str],
         timeout: int | None,
-    ) -> str:
+    ) -> GeminiGenerationResult:
         if self._use_rest_transport():
             return self._generate_with_rest(
                 prompt=prompt,
@@ -765,7 +805,25 @@ class GeminiProvider(LLMProvider):
                 raise LLMUpstreamUnavailableError(
                     f"Gemini returned no text (block_reason={block_reason})"
                 )
-            return text
+            usage = getattr(resp, "usage_metadata", None)
+            return GeminiGenerationResult(
+                text=text,
+                input_tokens=self._usage_value(
+                    usage,
+                    "prompt_token_count",
+                    "promptTokenCount",
+                ),
+                output_tokens=self._usage_value(
+                    usage,
+                    "candidates_token_count",
+                    "candidatesTokenCount",
+                ),
+                total_tokens=self._usage_value(
+                    usage,
+                    "total_token_count",
+                    "totalTokenCount",
+                ),
+            )
 
         return self._generate_with_timeout_fn(_call, timeout)
 
@@ -817,7 +875,7 @@ class GeminiProvider(LLMProvider):
             plan_index = min(attempt_index, len(attempt_plan) - 1)
             attempt = attempt_plan[plan_index]
             try:
-                text = self._generate_once(
+                generation = self._generate_once(
                     prompt=prompt,
                     attempt=attempt,
                     temperature=temperature,
@@ -825,7 +883,30 @@ class GeminiProvider(LLMProvider):
                     timeout=effective_timeout,
                 )
                 duration = time.monotonic() - start_time
-                call_number = llm_usage_metrics.increment_api_calls()
+                if isinstance(generation, GeminiGenerationResult):
+                    stripped_text = generation.text.strip()
+                    input_tokens = generation.input_tokens
+                    output_tokens = generation.output_tokens
+                    total_tokens = generation.total_tokens
+                else:
+                    # Keep compatibility with provider subclasses and tests
+                    # written against the former private string return type.
+                    stripped_text = str(generation).strip()
+                    input_tokens = None
+                    output_tokens = None
+                    total_tokens = None
+                call_number = llm_usage_metrics.record_call(
+                    provider="gemini",
+                    model=attempt.model_name,
+                    duration_seconds=duration,
+                    success=True,
+                    input_chars=len(prompt),
+                    output_chars=len(stripped_text),
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    total_tokens=total_tokens,
+                    attempts=attempt_index + 1,
+                )
                 logger.info(
                     "[API #%d] model=%s duration=%.1fs (key=%s attempt=%s/%s)",
                     call_number,
@@ -835,7 +916,7 @@ class GeminiProvider(LLMProvider):
                     attempt_index + 1,
                     max_attempts,
                 )
-                return text.strip()
+                return stripped_text
             except Exception as exc:
                 exc = self._normalize_generation_exception(
                     exc, timeout=effective_timeout
@@ -846,6 +927,15 @@ class GeminiProvider(LLMProvider):
 
                 if self._is_non_retryable_error(error_text):
                     duration = time.monotonic() - start_time
+                    llm_usage_metrics.record_call(
+                        provider="gemini",
+                        model=attempt.model_name,
+                        duration_seconds=duration,
+                        success=False,
+                        input_chars=len(prompt),
+                        attempts=attempt_index + 1,
+                        error_type=type(exc).__name__,
+                    )
                     logger.error(
                         "[Gemini] generate aborted in %.2fs on non-retryable error (model=%s key=%s). err=%s",
                         duration,
@@ -911,6 +1001,15 @@ class GeminiProvider(LLMProvider):
                     continue
 
                 duration = time.monotonic() - start_time
+                llm_usage_metrics.record_call(
+                    provider="gemini",
+                    model=attempt.model_name,
+                    duration_seconds=duration,
+                    success=False,
+                    input_chars=len(prompt),
+                    attempts=attempt_index + 1,
+                    error_type=type(exc).__name__,
+                )
                 logger.error(
                     "[Gemini] generate failed in %.2fs after %s attempts (model=%s key=%s). err=%s",
                     duration,

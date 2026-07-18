@@ -9,6 +9,7 @@ from src.agents.translation import TranslationAgent, TranslationContext
 from src.config.timeout_config import TimeoutConfig
 from src.core.glossary_prompt import build_term_usage_from_project
 from src.core.models import ParagraphStatus
+from src.core.project import ConcurrentParagraphUpdateError
 
 from ..dependencies import (
     ConfirmationServiceDep,
@@ -17,7 +18,7 @@ from ..dependencies import (
     MemoryServiceDep,
     ProjectManagerDep,
 )
-from ..middleware import BadRequestException, NotFoundException
+from ..middleware import BadRequestException, ConflictException, NotFoundException
 from ..middleware.rate_limit import limiter
 from .confirmation_models import resolve_retranslate_instruction
 from .projects_models import (
@@ -52,7 +53,9 @@ def _build_translation_context(
 ) -> TranslationContext:
     context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
     context.previous_paragraphs = [
-        (p.source, p.confirmed) for p in section.paragraphs[:para_index] if p.confirmed
+        (paragraph.source, translation)
+        for paragraph in section.paragraphs[:para_index]
+        if (translation := paragraph.best_translation_text())
     ][-5:]
     context.next_preview = [
         p.source for p in section.paragraphs[para_index + 1 : para_index + 3]
@@ -83,6 +86,7 @@ def _translate_paragraph_sync(
     paragraph, para_index = _find_paragraph(section, paragraph_id)
     if paragraph is None or para_index is None:
         raise NotFoundException(detail="Paragraph not found")
+    expected_paragraph = paragraph.model_copy(deep=True)
 
     glossary = gm.load_merged(project_id)
     learned_rules = memory_service.get_rules_for_prompt()
@@ -121,6 +125,7 @@ def _translate_paragraph_sync(
         format_issues=payload.format_issues,
         status=ParagraphStatus.TRANSLATED,
         model="default",
+        expected_paragraph=expected_paragraph,
     )
     return {
         "id": persisted_paragraph.id,
@@ -146,6 +151,7 @@ def _direct_translate_paragraph_sync(
     paragraph, _ = _find_paragraph(section, paragraph_id)
     if paragraph is None:
         raise NotFoundException(detail="Paragraph not found")
+    expected_paragraph = paragraph.model_copy(deep=True)
 
     timeout_s = TimeoutConfig.get_timeout("longform")
     agent = TranslationAgent(llm, timeout=timeout_s)
@@ -162,6 +168,7 @@ def _direct_translate_paragraph_sync(
         format_issues=payload.format_issues,
         status=ParagraphStatus.TRANSLATED,
         model="default-direct",
+        expected_paragraph=expected_paragraph,
     )
     return {
         "id": persisted_paragraph.id,
@@ -316,14 +323,20 @@ def _batch_translate_paragraphs_sync(
     llm,
     memory_service,
 ) -> BatchTranslateResponse:
-    section = pm.get_section(project_id, section_id)
-    if not section:
-        raise NotFoundException(detail="Section not found")
-
     if not body.paragraph_ids:
         raise BadRequestException(detail="段落 ID 列表不能为空")
 
     glossary = gm.load_merged(project_id)
+    learned_rules = memory_service.get_rules_for_prompt()
+    sections = pm.get_sections(project_id)
+    section_positions = {
+        project_section.section_id: index
+        for index, project_section in enumerate(sections)
+    }
+    section_position = section_positions.get(section_id)
+    if section_position is None:
+        raise NotFoundException(detail="Section not found")
+    section = sections[section_position]
     timeout_s = TimeoutConfig.get_timeout("longform")
     agent = TranslationAgent(llm, timeout=timeout_s)
     paragraph_map = {p.id: (i, p) for i, p in enumerate(section.paragraphs)}
@@ -332,6 +345,7 @@ def _batch_translate_paragraphs_sync(
     errors = []
     success_count = 0
     error_count = 0
+    instruction = resolve_retranslate_instruction(body.instruction, body.option_id)
 
     for paragraph_id in body.paragraph_ids:
         if paragraph_id not in paragraph_map:
@@ -342,8 +356,7 @@ def _batch_translate_paragraphs_sync(
         para_index, paragraph = paragraph_map[paragraph_id]
 
         try:
-            learned_rules = memory_service.get_rules_for_prompt()
-            sections = pm.get_sections(project_id)
+            expected_paragraph = paragraph.model_copy(deep=True)
             context = _build_translation_context(
                 section,
                 para_index,
@@ -352,7 +365,6 @@ def _batch_translate_paragraphs_sync(
                 sections=sections,
             )
 
-            instruction = resolve_retranslate_instruction(body.instruction, body.option_id)
             if instruction:
                 formatted_instruction = build_retranslate_instruction(
                     instruction,
@@ -367,7 +379,7 @@ def _batch_translate_paragraphs_sync(
             else:
                 payload = agent.translate_paragraph(paragraph, context)
 
-            persisted_paragraph = pm.update_paragraph_locked(
+            persisted_paragraph, persisted_section = pm.update_paragraph_locked(
                 project_id,
                 section_id,
                 paragraph_id,
@@ -376,10 +388,19 @@ def _batch_translate_paragraphs_sync(
                 format_issues=payload.format_issues,
                 status=ParagraphStatus.TRANSLATED,
                 model="default",
+                expected_paragraph=expected_paragraph,
+                recompute_progress=False,
+                return_section=True,
             )
+            section = persisted_section
+            sections[section_position] = persisted_section
+            paragraph_map = {
+                persisted.id: (index, persisted)
+                for index, persisted in enumerate(persisted_section.paragraphs)
+            }
             translations.append(
                 {
-                    "id": paragraph.id,
+                    "id": persisted_paragraph.id,
                     "translation": payload.text,
                     "status": persisted_paragraph.status.value,
                     "confirmed": persisted_paragraph.confirmed,
@@ -387,8 +408,22 @@ def _batch_translate_paragraphs_sync(
             )
             success_count += 1
         except Exception as error:
+            try:
+                latest_section = pm.get_section(project_id, section_id)
+            except Exception:
+                latest_section = None
+            if latest_section is not None:
+                section = latest_section
+                sections[section_position] = latest_section
+                paragraph_map = {
+                    persisted.id: (index, persisted)
+                    for index, persisted in enumerate(latest_section.paragraphs)
+                }
             errors.append({"id": paragraph_id, "error": _to_error_message(error)})
             error_count += 1
+
+    if success_count:
+        pm.update_progress(project_id)
 
     return BatchTranslateResponse(
         translations=translations,
@@ -449,6 +484,14 @@ async def translate_paragraph(
         return result
     except NotFoundException:
         raise
+    except ConcurrentParagraphUpdateError as error:
+        raise ConflictException(
+            detail=(
+                f"Paragraph {error.paragraph_id} was edited while translation "
+                "was running. Reload it before retrying."
+            ),
+            error_code="PARAGRAPH_CHANGED",
+        )
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
     except RuntimeError as error:
@@ -487,6 +530,14 @@ async def direct_translate_paragraph(
         return result
     except NotFoundException:
         raise
+    except ConcurrentParagraphUpdateError as error:
+        raise ConflictException(
+            detail=(
+                f"Paragraph {error.paragraph_id} was edited while translation "
+                "was running. Reload it before retrying."
+            ),
+            error_code="PARAGRAPH_CHANGED",
+        )
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
     except RuntimeError as error:
@@ -650,6 +701,11 @@ def _to_error_message(error: Exception) -> str:
     logger = logging.getLogger(__name__)
     logger.error(f"Translation error: {error_msg}")
 
+    if isinstance(error, ConcurrentParagraphUpdateError):
+        return (
+            f"Paragraph {error.paragraph_id} changed while translation was "
+            "running. Reload it before retrying."
+        )
     if "429" in error_msg or "Too Many Requests" in error_msg:
         return "API rate limit reached. Please try again later."
     if "Generation failed after" in error_msg and "retries" in error_msg:

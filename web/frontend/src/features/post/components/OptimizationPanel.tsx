@@ -5,7 +5,10 @@ import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
 import { Loader2, Wand2, Send } from 'lucide-react';
-import type { Instruction } from '../types';
+import {
+  OPTIMIZATION_INSTRUCTION_MAX_LENGTH,
+  type Instruction,
+} from '../types';
 
 const quickInstructions: Instruction[] = [
   { id: 'readable', label: '可读性', icon: '✨', instruction: '' },
@@ -24,15 +27,24 @@ const moreInstructions: Instruction[] = [
 ];
 
 interface OptimizationPanelProps {
-  onOptimize: (options: { instruction?: string; optionId?: string }) => void;
+  onOptimize: (options: { instruction?: string; optionId?: string }) => Promise<boolean>;
   isLoading: boolean;
   isOptimizing: boolean;
   hasVersions: boolean;
   hasOriginal: boolean;
+  customInstruction: string;
+  onCustomInstructionChange: (value: string) => void;
 }
 
-export function OptimizationPanel({ onOptimize, isLoading, isOptimizing, hasVersions, hasOriginal }: OptimizationPanelProps) {
-  const [customInstruction, setCustomInstruction] = useState('');
+export function OptimizationPanel({
+  onOptimize,
+  isLoading,
+  isOptimizing,
+  hasVersions,
+  hasOriginal,
+  customInstruction,
+  onCustomInstructionChange,
+}: OptimizationPanelProps) {
   const [showMore, setShowMore] = useState(false);
   const disabled = isLoading || !hasOriginal || !hasVersions;
 
@@ -40,15 +52,15 @@ export function OptimizationPanel({ onOptimize, isLoading, isOptimizing, hasVers
     if (id === 'custom') {
       document.getElementById('customInstructionInput')?.focus();
     } else {
-      onOptimize({ optionId: id });
+      void onOptimize({ optionId: id });
     }
   };
 
-  const handleSendCustom = () => {
-    if (customInstruction.trim()) {
-      onOptimize({ instruction: customInstruction });
-      setCustomInstruction('');
-    }
+  const handleSendCustom = async () => {
+    const instruction = customInstruction.trim();
+    if (!instruction || disabled) return;
+    const completed = await onOptimize({ instruction });
+    if (completed) onCustomInstructionChange('');
   };
 
   return (
@@ -66,6 +78,7 @@ export function OptimizationPanel({ onOptimize, isLoading, isOptimizing, hasVers
                 key={inst.id}
                 variant="outline"
                 size="sm"
+                type="button"
                 onClick={() => handleQuick(inst.id)}
                 disabled={disabled}
                 className="min-h-10 px-3 text-sm sm:min-h-9 sm:text-xs"
@@ -76,6 +89,7 @@ export function OptimizationPanel({ onOptimize, isLoading, isOptimizing, hasVers
             <Button
               variant="outline"
               size="sm"
+              type="button"
               onClick={() => setShowMore(true)}
               disabled={disabled}
               className="min-h-10 border-dashed px-3 text-sm sm:min-h-9 sm:text-xs"
@@ -89,17 +103,26 @@ export function OptimizationPanel({ onOptimize, isLoading, isOptimizing, hasVers
               id="customInstructionInput"
               placeholder="优化要求..."
               value={customInstruction}
-              onChange={(e) => setCustomInstruction(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSendCustom()}
+              onChange={(e) => onCustomInstructionChange(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && !e.repeat) {
+                  e.preventDefault();
+                  void handleSendCustom();
+                }
+              }}
+              maxLength={OPTIMIZATION_INSTRUCTION_MAX_LENGTH}
+              aria-label="自定义优化要求"
               disabled={isLoading}
               className="h-10 min-w-0 flex-1"
             />
             <Button
               size="sm"
-              onClick={handleSendCustom}
+              type="button"
+              onClick={() => void handleSendCustom()}
               disabled={!hasVersions || !customInstruction.trim() || isLoading}
               title="发送指令 (Ctrl+K)"
               className="h-10 w-10 shrink-0 p-0"
+              aria-label={isOptimizing ? '正在优化译文' : '发送优化要求'}
             >
               {isOptimizing ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
             </Button>
@@ -117,7 +140,11 @@ export function OptimizationPanel({ onOptimize, isLoading, isOptimizing, hasVers
               <Button
                 key={inst.id}
                 variant="outline"
-                onClick={() => { setShowMore(false); onOptimize({ instruction: inst.instruction }); }}
+                type="button"
+                onClick={() => {
+                  setShowMore(false);
+                  void onOptimize({ instruction: inst.instruction });
+                }}
                 disabled={isLoading}
                 className="h-auto min-h-16 flex-row justify-start gap-3 py-3 text-left sm:min-h-20 sm:flex-col sm:justify-center sm:gap-2 sm:py-4"
               >

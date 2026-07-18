@@ -69,9 +69,8 @@ def get_confirmation_service(
     return ConfirmationService(project_manager=pm, glossary_manager=gm)
 
 
-@lru_cache(maxsize=1)
 def get_batch_service() -> BatchTranslationService:
-    """Return the batch translation service."""
+    """Return a run-isolated batch translation service."""
     from src.api.middleware import BadRequestException
 
     try:

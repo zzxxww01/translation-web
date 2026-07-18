@@ -61,6 +61,7 @@ export interface TermReviewSectionGroup {
 }
 
 export interface TermReviewPayload {
+  artifact_id: string;
   project_id: string;
   project_title: string;
   review_required: boolean;
@@ -256,7 +257,7 @@ export interface ManualAlignRequest {
  * 翻译状态
  */
 export interface TranslationStatus {
-  status: 'processing' | 'completed' | 'failed' | 'cancelled' | 'not_started';
+  status: 'starting' | 'processing' | 'completed' | 'failed' | 'cancelled' | 'not_started' | 'partial';
   progress_percent?: number;
   translated_paragraphs?: number;
   total_paragraphs?: number;

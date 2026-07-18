@@ -7,6 +7,7 @@ import json
 import logging
 import threading
 from typing import Any, Awaitable, Callable, Dict
+from uuid import uuid4
 
 
 logger = logging.getLogger(__name__)
@@ -14,6 +15,7 @@ logger = logging.getLogger(__name__)
 _conflict_lock = threading.Lock()
 _pending_conflict_events: Dict[str, Dict[str, asyncio.Event]] = {}
 _conflict_resolutions: Dict[str, Dict[str, Dict[str, Any]]] = {}
+_conflict_session_owners: Dict[str, str] = {}
 
 
 def resolve_live_conflict(project_id: str, term: str, chosen_translation: str, apply_to_all: bool) -> bool:
@@ -58,14 +60,22 @@ class TranslationStreamSession:
         self._progress_queue: asyncio.Queue[Dict[str, Any]] = asyncio.Queue()
         self._event_loop = asyncio.get_running_loop()
         self._client_attached = True
+        self._translation_task: asyncio.Task | None = None
+        self._conflict_prompt_lock = asyncio.Lock()
+        self._resolved_conflicts: Dict[str, Dict[str, Any]] = {}
+        self._session_id = uuid4().hex
 
     def _init_conflict_state(self) -> None:
         with _conflict_lock:
+            _conflict_session_owners[self.project_id] = self._session_id
             _pending_conflict_events[self.project_id] = {}
             _conflict_resolutions[self.project_id] = {}
 
     def _clear_conflict_state(self) -> None:
         with _conflict_lock:
+            if _conflict_session_owners.get(self.project_id) != self._session_id:
+                return
+            _conflict_session_owners.pop(self.project_id, None)
             _pending_conflict_events.pop(self.project_id, None)
             _conflict_resolutions.pop(self.project_id, None)
 
@@ -79,36 +89,54 @@ class TranslationStreamSession:
                 "apply_to_all": True,
             }
 
-        if not self._client_attached:
-            return default_resolution()
-
         term_key = conflict.term.lower()
-        event = asyncio.Event()
-        with _conflict_lock:
-            _pending_conflict_events[self.project_id][term_key] = event
+        async with self._conflict_prompt_lock:
+            cached = self._resolved_conflicts.get(term_key)
+            if cached is not None:
+                return dict(cached)
             if not self._client_attached:
-                _pending_conflict_events[self.project_id].pop(term_key, None)
                 return default_resolution()
-        await self._progress_queue.put(
-            {
-                "type": "term_conflict",
-                "conflict": conflict.model_dump(mode="json"),
-            }
-        )
-        try:
-            await event.wait()
+
+            event = asyncio.Event()
             with _conflict_lock:
-                resolution = _conflict_resolutions.get(self.project_id, {}).get(term_key, {})
-            return {
-                "chosen_translation": resolution.get("chosen_translation")
-                or conflict.existing_translation
-                or conflict.new_translation,
-                "apply_to_all": resolution.get("apply_to_all", True),
-            }
-        finally:
-            with _conflict_lock:
-                _pending_conflict_events.get(self.project_id, {}).pop(term_key, None)
-                _conflict_resolutions.get(self.project_id, {}).pop(term_key, None)
+                if (
+                    _conflict_session_owners.get(self.project_id)
+                    != self._session_id
+                ):
+                    return default_resolution()
+                _pending_conflict_events[self.project_id][term_key] = event
+                if not self._client_attached:
+                    _pending_conflict_events[self.project_id].pop(term_key, None)
+                    return default_resolution()
+            await self._progress_queue.put(
+                {
+                    "type": "term_conflict",
+                    "conflict": conflict.model_dump(mode="json"),
+                }
+            )
+            try:
+                await event.wait()
+                with _conflict_lock:
+                    resolution = _conflict_resolutions.get(
+                        self.project_id, {}
+                    ).get(term_key, {})
+                result = {
+                    "chosen_translation": resolution.get("chosen_translation")
+                    or conflict.existing_translation
+                    or conflict.new_translation,
+                    "apply_to_all": resolution.get("apply_to_all", True),
+                }
+                if result["apply_to_all"]:
+                    self._resolved_conflicts[term_key] = dict(result)
+                return result
+            finally:
+                with _conflict_lock:
+                    _pending_conflict_events.get(self.project_id, {}).pop(
+                        term_key, None
+                    )
+                    _conflict_resolutions.get(self.project_id, {}).pop(
+                        term_key, None
+                    )
 
     def _detach_client(self, reason: str) -> None:
         if not self._client_attached:
@@ -121,6 +149,8 @@ class TranslationStreamSession:
             reason,
         )
         with _conflict_lock:
+            if _conflict_session_owners.get(self.project_id) != self._session_id:
+                return
             for event in _pending_conflict_events.get(self.project_id, {}).values():
                 event.set()
 
@@ -183,10 +213,13 @@ class TranslationStreamSession:
             self._release_slot(self.project_id)
 
     async def generate(self):
-        translation_task: asyncio.Task | None = None
         translation_finished = False
 
         self._init_conflict_state()
+        # Start the worker before exposing the first SSE frame. A client may
+        # close immediately after reading "start"; the translation and slot
+        # cleanup must still have an owning task in that case.
+        self._translation_task = asyncio.create_task(self._run_translation_task())
         try:
             yield (
                 "data: "
@@ -200,8 +233,6 @@ class TranslationStreamSession:
                 )
                 + "\n\n"
             )
-
-            translation_task = asyncio.create_task(self._run_translation_task())
 
             while True:
                 if await self.request.is_disconnected():
@@ -219,14 +250,14 @@ class TranslationStreamSession:
                         break
                     yield f"data: {json.dumps({'type': 'heartbeat'})}\n\n"
 
-                    if translation_task.done():
-                        if translation_task.exception():
+                    if self._translation_task.done():
+                        if self._translation_task.exception():
                             yield (
                                 "data: "
                                 + json.dumps(
                                     {
                                         "type": "error",
-                                        "error": str(translation_task.exception()),
+                                        "error": str(self._translation_task.exception()),
                                     }
                                 )
                                 + "\n\n"
@@ -241,7 +272,7 @@ class TranslationStreamSession:
         finally:
             if (
                 not translation_finished
-                and translation_task is not None
-                and not translation_task.done()
+                and self._translation_task is not None
+                and not self._translation_task.done()
             ):
                 self._detach_client("stream closed before translation finished")

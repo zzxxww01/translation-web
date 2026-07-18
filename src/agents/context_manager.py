@@ -261,6 +261,35 @@ class LayeredContextManager:
             if section_id in self.section_understandings:
                 del self.section_understandings[section_id]
 
+    def replace_translation_history(
+        self,
+        records: List[Tuple[str, str, str, Dict[str, str]]],
+    ) -> None:
+        """Atomically rebuild translation-derived context from persisted records.
+
+        Section translation writes draft context while an LLM call is in flight.
+        After optimistic persistence, callers use this method to replace that
+        provisional state with the canonical project snapshot, so rejected AI
+        output cannot influence later sections.
+        """
+        with self._lock:
+            self.section_translations.clear()
+            self.section_understandings.clear()
+            self.term_tracker = TermUsageTracker()
+            self.defined_abbreviations.clear()
+
+            for section_id, source, translation, terms_used in records:
+                self.section_translations.setdefault(section_id, []).append(
+                    (source, translation)
+                )
+                for term, translated_term in terms_used.items():
+                    self.term_tracker.record_usage(
+                        term,
+                        translated_term,
+                        section_id,
+                    )
+                self._detect_abbreviations(translation)
+
     def reset_all(self) -> None:
         """重置所有上下文"""
         with self._lock:
@@ -451,23 +480,30 @@ class LayeredContextManager:
 
     def has_pending_conflicts(self) -> bool:
         """检查是否有待解决的冲突"""
-        return len(self.pending_conflicts) > 0
+        with self._lock:
+            return bool(self.pending_conflicts)
 
     def get_pending_conflicts(self) -> List[TermConflict]:
         """获取所有待解决的冲突"""
-        return self.pending_conflicts.copy()
+        with self._lock:
+            return [
+                conflict.model_copy(deep=True)
+                for conflict in self.pending_conflicts
+            ]
 
     def get_terminology_version(self) -> int:
         """获取当前术语表版本号"""
-        return self.terminology_version.version
+        with self._lock:
+            return self.terminology_version.version
 
     def get_all_terms(self) -> Dict[str, str]:
         """获取所有术语的翻译映射"""
-        return {
-            term: enhanced.translation
-            for term, enhanced in self.terminology_version.terms.items()
-            if enhanced.translation
-        }
+        with self._lock:
+            return {
+                term: enhanced.translation
+                for term, enhanced in self.terminology_version.terms.items()
+                if enhanced.translation
+            }
 
     # ============ Private Methods ============
 

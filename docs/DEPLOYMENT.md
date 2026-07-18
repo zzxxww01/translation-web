@@ -446,7 +446,7 @@ Group=www-data
 WorkingDirectory=/opt/translation-agent
 Environment="PATH=/opt/translation-agent/.venv/bin"
 ExecStart=/opt/translation-agent/.venv/bin/gunicorn src.api.app:app \
-    --workers 4 \
+    --workers 1 \
     --worker-class uvicorn.workers.UvicornWorker \
     --bind 127.0.0.1:54321 \
     --timeout 300 \
@@ -458,6 +458,10 @@ RestartSec=10
 [Install]
 WantedBy=multi-user.target
 ```
+
+> 当前翻译任务注册表、取消状态和项目写锁保存在应用进程内，因此必须使用单个
+> application worker。章节与模型调用的并发由应用内部管理；不要通过增加
+> Gunicorn/Uvicorn worker 数扩展本服务。
 
 启动服务：
 

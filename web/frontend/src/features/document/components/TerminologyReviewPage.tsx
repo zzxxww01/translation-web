@@ -37,7 +37,7 @@ export function TerminologyReviewPage({
       section.candidates.map(candidate => [
         candidate.term,
         {
-          action: 'accept' as DecisionAction,
+          action: (candidate.suggested_translation ? 'accept' : 'custom') as DecisionAction,
           translation: candidate.suggested_translation,
         },
       ])
@@ -55,10 +55,10 @@ export function TerminologyReviewPage({
     };
   }, [decisions]);
 
-  const hasInvalidCustom = useMemo(
+  const hasInvalidDecision = useMemo(
     () =>
       Object.values(decisions).some(
-        item => item.action === 'custom' && !item.translation.trim()
+        item => item.action !== 'skip' && !item.translation.trim()
       ),
     [decisions]
   );
@@ -292,7 +292,7 @@ export function TerminologyReviewPage({
                       >
                         <div className="mb-1 font-medium text-text-primary">先跳过</div>
                         <div className="text-sm text-text-muted">
-                          本次翻译先沿用系统建议，但不写入项目术语库。
+                          本次不预设译法，也不写入项目术语库。
                         </div>
                       </button>
                     </div>
@@ -324,7 +324,7 @@ export function TerminologyReviewPage({
             variant="default"
             onClick={handleSubmit}
             isLoading={isSubmitting}
-            disabled={hasInvalidCustom}
+            disabled={hasInvalidDecision}
           >
             保存术语并开始全文翻译
           </Button>

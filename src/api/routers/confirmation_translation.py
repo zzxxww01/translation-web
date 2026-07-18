@@ -12,9 +12,10 @@ from fastapi import APIRouter, Request
 
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.config.timeout_config import TimeoutConfig
-from src.core.format_tokens import apply_translation_payload
 from src.core.glossary_prompt import build_term_usage_from_project
-from src.core.models import ArticleAnalysis
+from src.core.models import ArticleAnalysis, ParagraphStatus
+from src.core.project import ConcurrentParagraphUpdateError
+from src.api.utils.concurrency import run_blocking
 from src.api.utils.glossary import get_combined_glossary
 
 from ..dependencies import (
@@ -24,7 +25,7 @@ from ..dependencies import (
     ConfirmationServiceDep,
     MemoryServiceDep,
 )
-from ..middleware import NotFoundException, BadRequestException
+from ..middleware import BadRequestException, ConflictException, NotFoundException
 from ..middleware.rate_limit import limiter
 from .confirmation_models import (
     ConfirmParagraphRequest,
@@ -71,6 +72,180 @@ def _filter_consistency_issues(issues: list[dict]) -> list[dict]:
     ]
 
 
+def _prepare_retranslation_sync(
+    sections,
+    glossary,
+    learned_rules,
+    paragraph_id: str,
+):
+    """Locate a paragraph and build its project-wide prompt context off-loop."""
+    target_section = None
+    target_paragraph = None
+    target_local_index = None
+
+    for section in sections:
+        for index, paragraph in enumerate(section.paragraphs):
+            if paragraph.id == paragraph_id:
+                target_section = section
+                target_paragraph = paragraph
+                target_local_index = index
+                break
+        if target_paragraph is not None:
+            break
+
+    if (
+        target_paragraph is None
+        or target_section is None
+        or target_local_index is None
+    ):
+        raise NotFoundException(detail="Paragraph not found")
+
+    context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
+    context.previous_paragraphs = [
+        (paragraph.source, translation)
+        for paragraph in target_section.paragraphs[:target_local_index]
+        if (translation := paragraph.best_translation_text())
+    ][-5:]
+    context.next_preview = [
+        paragraph.source
+        for paragraph in target_section.paragraphs[
+            target_local_index + 1 : target_local_index + 3
+        ]
+    ]
+    context.term_usage = build_term_usage_from_project(
+        sections,
+        glossary,
+        current_section_id=target_section.section_id,
+        current_paragraph_id=paragraph_id,
+    )
+    latest = target_paragraph.latest_translation(non_empty=True)
+    old_translation = latest.text if latest is not None else None
+
+    return (
+        target_section.section_id,
+        target_paragraph,
+        target_paragraph.model_copy(deep=True),
+        context,
+        old_translation,
+    )
+
+
+def _run_consistency_review_sync(project_id: str, pm, llm) -> dict:
+    from src.agents.consistency_reviewer import ConsistencyReviewer
+
+    sections = pm.get_sections(project_id)
+    translations = {}
+    for section in sections:
+        translations[section.section_id] = [
+            (
+                paragraph.confirmed
+                if paragraph.confirmed
+                else (
+                    paragraph.latest_translation_text(non_empty=True) or ""
+                    if paragraph.has_draft_translation()
+                    else ""
+                )
+            )
+            for paragraph in section.paragraphs
+        ]
+
+    report = ConsistencyReviewer(llm).review(
+        sections,
+        translations,
+        article_analysis=_load_latest_article_analysis(pm, project_id),
+    )
+    return {
+        "is_consistent": report.is_consistent,
+        "style_score": report.style_score,
+        "issue_count": len(report.issues),
+        "auto_fixable_count": len(report.auto_fixable),
+        "manual_review_count": len(report.manual_review),
+        "term_stats": report.term_stats,
+        "suggestions": report.suggestions,
+        "issues": [
+            {
+                "section_id": issue.section_id,
+                "paragraph_index": issue.paragraph_index,
+                "issue_type": issue.issue_type,
+                "description": issue.description,
+                "auto_fixable": issue.auto_fixable,
+                "fix_suggestion": issue.fix_suggestion,
+            }
+            for issue in report.issues
+        ],
+    }
+
+
+def _get_latest_consistency_report_sync(project_id: str, pm) -> dict:
+    pm.get(project_id)
+    runs_root = Path(pm.projects_path) / project_id / "artifacts" / "runs"
+    if not runs_root.exists():
+        return {
+            "project_id": project_id,
+            "report": None,
+            "message": "暂无运行报告",
+        }
+
+    run_dirs = sorted(
+        (path for path in runs_root.iterdir() if path.is_dir()),
+        key=lambda path: path.stat().st_mtime,
+        reverse=True,
+    )
+    for run_dir in run_dirs:
+        summary_path = run_dir / "run-summary.json"
+        if not summary_path.exists():
+            continue
+        try:
+            with open(summary_path, "r", encoding="utf-8") as handle:
+                summary = json.load(handle)
+        except (json.JSONDecodeError, OSError):
+            continue
+
+        consistency = summary.get("consistency")
+        if not consistency:
+            continue
+        issues = [
+            {
+                "section_id": item.get("section_id", ""),
+                "paragraph_index": item.get("paragraph_index", 0),
+                "issue_type": item.get("issue_type", ""),
+                "description": item.get("description", ""),
+                "auto_fixable": item.get("auto_fixable", False),
+                "fix_suggestion": item.get("fix_suggestion"),
+            }
+            for item in consistency.get("issues", [])
+        ]
+        filtered_issues = _filter_consistency_issues(issues)
+        report = {
+            "is_consistent": not filtered_issues,
+            "issue_count": len(filtered_issues),
+            "total_issues": len(filtered_issues),
+            "auto_fixable_count": sum(
+                1 for issue in filtered_issues if issue.get("auto_fixable")
+            ),
+            "manual_review_count": sum(
+                1 for issue in filtered_issues if not issue.get("auto_fixable")
+            ),
+            "issues": filtered_issues,
+        }
+        return {
+            "project_id": project_id,
+            "report": report,
+            "run_id": summary.get("run_id") or run_dir.name,
+            "status": summary.get("status"),
+            "started_at": summary.get("started_at"),
+            "finished_at": summary.get("finished_at"),
+            "artifacts_path": summary.get("artifacts_path"),
+            "source": "latest_run_summary",
+        }
+
+    return {
+        "project_id": project_id,
+        "report": None,
+        "message": "暂无一致性报告",
+    }
+
+
 @router.post("/{project_id}/translate-all")
 @limiter.limit("20/minute")
 async def start_translation(
@@ -78,11 +253,22 @@ async def start_translation(
     project_id: str,
     service: BatchServiceDep,
 ):
+    slot_claim = await service.claim_translation_slot(project_id)
+    if slot_claim["status"] == "busy":
+        raise BadRequestException(
+            detail=(
+                "This project already has an active translation. "
+                f"active_run_id={slot_claim.get('active_run_id')}"
+            )
+        )
+    lease_id = str(slot_claim["lease_id"])
     try:
         return await service.translate_project(project_id)
     except NotFoundException:
+        service._release_active_run(project_id, lease_id=lease_id)
         raise
     except Exception as e:
+        service._release_active_run(project_id, lease_id=lease_id)
         raise BadRequestException(detail=f"Failed to start translation: {str(e)}")
 
 
@@ -176,55 +362,26 @@ async def retranslate_paragraph(
     memory_service: MemoryServiceDep,
 ):
     try:
-        sections = pm.get_sections(project_id)
-        target_section = None
-        target_paragraph = None
-        target_local_index = None
-
-        for section in sections:
-            for idx, para in enumerate(section.paragraphs):
-                if para.id == paragraph_id:
-                    target_section = section
-                    target_paragraph = para
-                    target_local_index = idx
-                    break
-            if target_paragraph:
-                break
-
-        if not target_paragraph or target_section is None or target_local_index is None:
-            raise NotFoundException(detail="Paragraph not found")
-
-        glossary = get_combined_glossary(project_id)
-
-        # 加载已学习的翻译规则
-        learned_rules = memory_service.get_rules_for_prompt()
-
-        context = TranslationContext(glossary=glossary, learned_rules=learned_rules)
-        context.previous_paragraphs = [
-            (p.source, p.confirmed)
-            for p in target_section.paragraphs[:target_local_index]
-            if p.confirmed
-        ][-5:]
-        context.next_preview = [
-            p.source
-            for p in target_section.paragraphs[target_local_index + 1 : target_local_index + 3]
-        ]
-
-        # 构建术语使用记录，避免 first_annotate/preserve_annotate 术语重复加注
-        context.term_usage = build_term_usage_from_project(
+        sections, glossary, learned_rules = await asyncio.gather(
+            run_blocking(pm.get_sections, project_id),
+            run_blocking(get_combined_glossary, project_id),
+            run_blocking(memory_service.get_rules_for_prompt),
+        )
+        (
+            target_section_id,
+            target_paragraph,
+            expected_paragraph,
+            context,
+            old_translation,
+        ) = await run_blocking(
+            _prepare_retranslation_sync,
             sections,
             glossary,
-            current_section_id=target_section.section_id,
-            current_paragraph_id=paragraph_id,
+            learned_rules,
+            paragraph_id,
         )
 
         instruction = resolve_retranslate_instruction(body.instruction, body.option_id)
-
-        # 记录重翻前的译文
-        old_translation = None
-        latest = target_paragraph.latest_translation(non_empty=True)
-        if latest is not None:
-            old_translation = latest.text
 
         timeout_s = TimeoutConfig.get_timeout("longform")
         agent = TranslationAgent(llm, timeout=timeout_s)
@@ -233,14 +390,24 @@ async def retranslate_paragraph(
             target_paragraph.source,
             get_latest_translation_text(target_paragraph),
         )
-        payload = agent.retranslate_paragraph(
+        payload = await run_blocking(
+            agent.retranslate_paragraph,
             target_paragraph,
             context,
             instruction=formatted_instruction,
         )
-        apply_translation_payload(target_paragraph, payload, "default")
-
-        pm.save_section(project_id, target_section)
+        target_paragraph = await run_blocking(
+            pm.update_paragraph_locked,
+            project_id,
+            target_section_id,
+            paragraph_id,
+            translation=payload.text,
+            tokenized_text=payload.tokenized_text,
+            format_issues=payload.format_issues,
+            status=ParagraphStatus.TRANSLATED,
+            model="default",
+            expected_paragraph=expected_paragraph,
+        )
         await service.invalidate_project_cache(project_id)
 
         # 自学习：从重翻指令中后台提取风格偏好规则
@@ -269,6 +436,14 @@ async def retranslate_paragraph(
 
     except NotFoundException:
         raise
+    except ConcurrentParagraphUpdateError as error:
+        raise ConflictException(
+            detail=(
+                f"Paragraph {error.paragraph_id} was edited while translation "
+                "was running. Reload it before retrying."
+            ),
+            error_code="PARAGRAPH_CHANGED",
+        )
     except Exception as e:
         raise BadRequestException(detail=f"Failed to retranslate: {str(e)}")
 
@@ -330,51 +505,12 @@ async def run_consistency_review(
     llm: LongformLLMProviderDep,
 ):
     try:
-        from src.agents.consistency_reviewer import ConsistencyReviewer
-
-        sections = pm.get_sections(project_id)
-
-        translations = {}
-        for section in sections:
-            trans_list = []
-            for para in section.paragraphs:
-                if para.confirmed:
-                    trans_list.append(para.confirmed)
-                elif para.has_draft_translation():
-                    trans_list.append(para.latest_translation_text(non_empty=True) or "")
-                else:
-                    trans_list.append("")
-            translations[section.section_id] = trans_list
-
-        reviewer = ConsistencyReviewer(llm)
-        analysis = _load_latest_article_analysis(pm, project_id)
-        report = reviewer.review(
-            sections,
-            translations,
-            article_analysis=analysis,
+        return await run_blocking(
+            _run_consistency_review_sync,
+            project_id,
+            pm,
+            llm,
         )
-
-        return {
-            "is_consistent": report.is_consistent,
-            "style_score": report.style_score,
-            "issue_count": len(report.issues),
-            "auto_fixable_count": len(report.auto_fixable),
-            "manual_review_count": len(report.manual_review),
-            "term_stats": report.term_stats,
-            "suggestions": report.suggestions,
-            "issues": [
-                {
-                    "section_id": i.section_id,
-                    "paragraph_index": i.paragraph_index,
-                    "issue_type": i.issue_type,
-                    "description": i.description,
-                    "auto_fixable": i.auto_fixable,
-                    "fix_suggestion": i.fix_suggestion,
-                }
-                for i in report.issues
-            ],
-        }
-
     except Exception as e:
         raise BadRequestException(detail=f"Failed to run review: {str(e)}")
 
@@ -385,73 +521,13 @@ async def get_latest_consistency_report(
     pm: ProjectManagerDep,
 ):
     try:
-        pm.get(project_id)
+        return await run_blocking(
+            _get_latest_consistency_report_sync,
+            project_id,
+            pm,
+        )
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
-
-    runs_root = Path(pm.projects_path) / project_id / "artifacts" / "runs"
-    if not runs_root.exists():
-        return {
-            "project_id": project_id,
-            "report": None,
-            "message": "暂无运行报告",
-        }
-
-    run_dirs = sorted(
-        (path for path in runs_root.iterdir() if path.is_dir()),
-        key=lambda path: path.stat().st_mtime,
-        reverse=True,
-    )
-    for run_dir in run_dirs:
-        summary_path = run_dir / "run-summary.json"
-        if not summary_path.exists():
-            continue
-        try:
-            with open(summary_path, "r", encoding="utf-8") as handle:
-                summary = json.load(handle)
-        except (json.JSONDecodeError, OSError):
-            continue
-
-        consistency = summary.get("consistency")
-        if not consistency:
-            continue
-
-        issues = [
-            {
-                "section_id": item.get("section_id", ""),
-                "paragraph_index": item.get("paragraph_index", 0),
-                "issue_type": item.get("issue_type", ""),
-                "description": item.get("description", ""),
-                "auto_fixable": item.get("auto_fixable", False),
-                "fix_suggestion": item.get("fix_suggestion"),
-            }
-            for item in consistency.get("issues", [])
-        ]
-        filtered_issues = _filter_consistency_issues(issues)
-        report = {
-            "is_consistent": len(filtered_issues) == 0,
-            "issue_count": len(filtered_issues),
-            "total_issues": len(filtered_issues),
-            "auto_fixable_count": sum(1 for issue in filtered_issues if issue.get("auto_fixable")),
-            "manual_review_count": sum(1 for issue in filtered_issues if not issue.get("auto_fixable")),
-            "issues": filtered_issues,
-        }
-        return {
-            "project_id": project_id,
-            "report": report,
-            "run_id": summary.get("run_id") or run_dir.name,
-            "status": summary.get("status"),
-            "started_at": summary.get("started_at"),
-            "finished_at": summary.get("finished_at"),
-            "artifacts_path": summary.get("artifacts_path"),
-            "source": "latest_run_summary",
-        }
-
-    return {
-        "project_id": project_id,
-        "report": None,
-        "message": "暂无一致性报告",
-    }
 
 
 # ============ 翻译规则管理 API（全局） ============
@@ -469,7 +545,7 @@ async def get_translation_rules(
     memory_service: MemoryServiceDep,
 ):
     """查看所有全局翻译规则"""
-    rules = memory_service.get_all_rules()
+    rules = await run_blocking(memory_service.get_all_rules)
     return {
         "rules": [
             {"index": i, "text": r}
@@ -485,7 +561,7 @@ async def delete_translation_rule(
     memory_service: MemoryServiceDep,
 ):
     """删除指定索引的全局翻译规则"""
-    deleted = memory_service.delete_rule_by_index(rule_index)
+    deleted = await run_blocking(memory_service.delete_rule_by_index, rule_index)
     if not deleted:
         raise NotFoundException(detail=f"Rule at index {rule_index} not found")
     return {"deleted": True, "index": rule_index}
@@ -500,5 +576,5 @@ async def add_translation_rule(
     text = request.text.strip()
     if not text:
         raise BadRequestException(detail="Rule text cannot be empty")
-    memory_service.add_rule_manually(text)
+    await run_blocking(memory_service.add_rule_manually, text)
     return {"added": True, "text": text}

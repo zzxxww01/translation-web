@@ -24,6 +24,7 @@ interface BackendSectionQualityScore {
   is_excellent: boolean;
   issue_count: number;
   auto_fixed_count: number;
+  revision_attempted_count?: number;
   manual_review_count: number;
   paragraph_count: number;
 }
@@ -37,6 +38,7 @@ interface BackendProjectQualityReport {
   sections: BackendSectionQualityScore[];
   total_issues: number;
   auto_fixed_issues: number;
+  revision_attempted_issues?: number;
   manual_review_issues: number;
   issues?: TranslationIssueDTO[];
   issue_type_counts?: Record<string, number>;
@@ -67,7 +69,8 @@ function mapSection(section: BackendSectionQualityScore): SectionQualityReport {
     is_excellent: section.is_excellent,
     issues: [],
     issue_count: section.issue_count,
-    revision_count: section.auto_fixed_count > 0 ? 1 : 0,
+    revision_count:
+      (section.revision_attempted_count || 0) > 0 || section.auto_fixed_count > 0 ? 1 : 0,
   };
 }
 
@@ -87,6 +90,7 @@ function mapSectionDetails(section: BackendSectionQualityReport): SectionQuality
 }
 
 function mapProjectReport(report: BackendProjectQualityReport): ProjectQualityReport {
+  const revisionAttemptedIssues = report.revision_attempted_issues || 0;
   return {
     project_id: report.project_id,
     // C29: 透传后端的 project_title（可空），不再用 project_id 冒充标题；
@@ -96,7 +100,11 @@ function mapProjectReport(report: BackendProjectQualityReport): ProjectQualityRe
     total_issues: report.total_issues,
     issues_by_status: {
       auto_fixed: report.auto_fixed_issues,
-      pending: report.manual_review_issues,
+      revision_attempted: revisionAttemptedIssues,
+      pending: Math.max(
+        0,
+        report.manual_review_issues - revisionAttemptedIssues
+      ),
       manual_fixed: 0,
       dismissed: 0,
     },

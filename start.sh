@@ -8,7 +8,7 @@ set -e
 PYTHON_CMD="${PYTHON_CMD:-python3}"
 PORT="${PORT:-54321}"
 HOST="${HOST:-127.0.0.1}"
-WORKERS="${WORKERS:-4}"
+WORKERS="${WORKERS:-1}"
 RELOAD=""
 
 # 解析参数
@@ -36,6 +36,13 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
+
+if [ "$WORKERS" != "1" ]; then
+    echo "[ERROR] WORKERS must be 1."
+    echo "Translation run state, cancellation, jobs, and project locks are process-local."
+    echo "Use one application worker; scale model calls with the built-in task concurrency."
+    exit 1
+fi
 
 echo "========================================"
 echo "  Translation Agent"
@@ -75,8 +82,17 @@ fi
 FRONTEND_DIR="web/frontend"
 FRONTEND_DIST="${FRONTEND_DIR}/dist"
 
+FRONTEND_NEEDS_BUILD=false
 if [ ! -f "${FRONTEND_DIST}/index.html" ]; then
-    echo "[INFO] Frontend not built. Building..."
+    FRONTEND_NEEDS_BUILD=true
+elif find "${FRONTEND_DIR}/src" "${FRONTEND_DIR}/index.html" \
+    "${FRONTEND_DIR}/package.json" "${FRONTEND_DIR}/vite.config.ts" \
+    -newer "${FRONTEND_DIST}/index.html" -print -quit 2>/dev/null | grep -q .; then
+    FRONTEND_NEEDS_BUILD=true
+fi
+
+if [ "$FRONTEND_NEEDS_BUILD" = true ]; then
+    echo "[INFO] Building frontend..."
     cd $FRONTEND_DIR
 
     if [ ! -d "node_modules" ]; then
@@ -89,7 +105,7 @@ if [ ! -f "${FRONTEND_DIST}/index.html" ]; then
     cd ../..
     echo ""
 else
-    echo "[INFO] Frontend is up-to-date. Skipping build."
+    echo "[INFO] Frontend build is current. Skipping build."
     echo ""
 fi
 
@@ -132,8 +148,6 @@ if command -v gunicorn &> /dev/null && [ -z "$RELOAD" ]; then
         --timeout 300 \
         --keep-alive 5 \
         --graceful-timeout 10 \
-        --max-requests 1000 \
-        --max-requests-jitter 50 \
         --access-logfile logs/access.log \
         --error-logfile logs/error.log \
         --log-level info
@@ -146,6 +160,5 @@ else
         --timeout-keep-alive 5 \
         --timeout-graceful-shutdown 10 \
         --limit-concurrency 100 \
-        --limit-max-requests 1000 \
         $RELOAD
 fi

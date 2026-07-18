@@ -2,12 +2,11 @@
 
 from __future__ import annotations
 
-import asyncio
 import threading
-import time
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Any, Dict, Optional, Set
+from uuid import uuid4
 
 
 @dataclass
@@ -26,19 +25,20 @@ class RunStateSnapshot:
 class ActiveRunLock:
     project_id: str
     run_id: Optional[str]
+    lease_id: str
     status: str
     started_at: str
     updated_at: str
 
 
 class TranslationRunRegistry:
-    """Process-local registry for active longform translation runs."""
+    """Track active longform runs independently for each project."""
 
     def __init__(self) -> None:
         self._cancelled_projects: Set[str] = set()
         self._cancelled_lock = threading.Lock()
         self._active_run_lock = threading.Lock()
-        self._active_run: Optional[ActiveRunLock] = None
+        self._active_runs: Dict[str, ActiveRunLock] = {}
 
     def is_cancelled(self, project_id: str) -> bool:
         with self._cancelled_lock:
@@ -48,21 +48,72 @@ class TranslationRunRegistry:
         with self._cancelled_lock:
             self._cancelled_projects.add(project_id)
 
+    def mark_active_cancelled(
+        self,
+        project_id: str,
+    ) -> Optional[ActiveRunLock]:
+        """Atomically mark the currently leased run as cancelled.
+
+        Holding the active-run lock across the marker write prevents an old
+        stop request from racing with release + reacquire and cancelling a new
+        lease for the same project.
+        """
+
+        with self._active_run_lock:
+            active = self._active_runs.get(project_id)
+            if active is None:
+                return None
+            with self._cancelled_lock:
+                self._cancelled_projects.add(project_id)
+            now = datetime.now().isoformat()
+            active.status = "cancelling"
+            active.updated_at = now
+            return self._copy_active_run(active)
+
     def clear_cancelled(self, project_id: str) -> None:
         with self._cancelled_lock:
             self._cancelled_projects.discard(project_id)
 
-    def get_active_run(self) -> Optional[ActiveRunLock]:
+    @staticmethod
+    def _copy_active_run(active: ActiveRunLock) -> ActiveRunLock:
+        return ActiveRunLock(
+            project_id=active.project_id,
+            run_id=active.run_id,
+            lease_id=active.lease_id,
+            status=active.status,
+            started_at=active.started_at,
+            updated_at=active.updated_at,
+        )
+
+    def get_active_run(
+        self,
+        project_id: Optional[str] = None,
+    ) -> Optional[ActiveRunLock]:
+        """Return one project's run.
+
+        The no-argument form is kept for compatibility with older callers. It
+        returns the most recently updated run when several projects are active.
+        New code should always pass ``project_id``.
+        """
         with self._active_run_lock:
-            if self._active_run is None:
+            if project_id is not None:
+                active = self._active_runs.get(project_id)
+            else:
+                active = max(
+                    self._active_runs.values(),
+                    key=lambda item: item.updated_at,
+                    default=None,
+                )
+            if active is None:
                 return None
-            return ActiveRunLock(
-                project_id=self._active_run.project_id,
-                run_id=self._active_run.run_id,
-                status=self._active_run.status,
-                started_at=self._active_run.started_at,
-                updated_at=self._active_run.updated_at,
-            )
+            return self._copy_active_run(active)
+
+    def list_active_runs(self) -> list[ActiveRunLock]:
+        with self._active_run_lock:
+            return [
+                self._copy_active_run(active)
+                for active in self._active_runs.values()
+            ]
 
     def set_active_run(
         self,
@@ -73,96 +124,94 @@ class TranslationRunRegistry:
     ) -> ActiveRunLock:
         now = datetime.now().isoformat()
         with self._active_run_lock:
-            if self._active_run and self._active_run.project_id == project_id:
-                started_at = self._active_run.started_at
-            else:
-                started_at = now
-            self._active_run = ActiveRunLock(
+            existing = self._active_runs.get(project_id)
+            started_at = existing.started_at if existing else now
+            active = ActiveRunLock(
                 project_id=project_id,
                 run_id=run_id,
+                lease_id=existing.lease_id if existing else uuid4().hex,
                 status=status,
                 started_at=started_at,
                 updated_at=now,
             )
-            return self._active_run
+            self._active_runs[project_id] = active
+            return self._copy_active_run(active)
 
     def release_active_run(
         self,
         project_id: str,
         *,
         run_id: Optional[str] = None,
+        lease_id: Optional[str] = None,
     ) -> None:
         with self._active_run_lock:
-            active = self._active_run
-            if active is None or active.project_id != project_id:
+            active = self._active_runs.get(project_id)
+            if active is None:
                 return
             if run_id is not None and active.run_id not in (None, run_id):
                 return
-            self._active_run = None
+            if lease_id is not None and active.lease_id != lease_id:
+                return
+            self._active_runs.pop(project_id, None)
 
     def try_acquire_slot(
         self, project_id: str, *, status: str = "starting"
     ) -> Optional[ActiveRunLock]:
-        """原子 check-and-set:仅当当前没有任何活动 run 时占用槽并返回它,否则返回
-        None。消除 get_active_run()+set_active_run() 之间的竞态窗口(审计 C4),
-        避免两个不同 project 同时通过 'active is None' 判断而都获得唯一槽。"""
+        """Atomically reserve a slot for one project.
+
+        Runs for different projects are independent. A second run for the same
+        project is rejected so two workers cannot overwrite the same document.
+        """
         with self._active_run_lock:
-            if self._active_run is not None:
+            if project_id in self._active_runs:
                 return None
+            # Clear only while creating a new lease. Once the placeholder is
+            # visible, a stop request owns a real run and must not be erased by
+            # worker startup.
+            with self._cancelled_lock:
+                self._cancelled_projects.discard(project_id)
             now = datetime.now().isoformat()
-            self._active_run = ActiveRunLock(
+            active = ActiveRunLock(
                 project_id=project_id,
                 run_id=None,
+                lease_id=uuid4().hex,
                 status=status,
                 started_at=now,
                 updated_at=now,
             )
-            return self._active_run
+            self._active_runs[project_id] = active
+            return self._copy_active_run(active)
 
     async def claim_translation_slot(
         self,
         project_id: str,
-        cancel_callback,
+        cancel_callback=None,
         *,
         wait_timeout: float = 300.0,
         poll_interval: float = 0.5,
     ) -> Dict[str, Any]:
-        # 原子 check-and-set,消除 get_active_run()/set_active_run() 之间的竞态窗口(审计 C4)。
+        """Reserve a project slot without affecting runs for other projects.
+
+        ``cancel_callback``, ``wait_timeout`` and ``poll_interval`` remain in
+        the signature for API compatibility. Starting one project no longer
+        cancels an unrelated active translation.
+        """
         placeholder = self.try_acquire_slot(project_id, status="starting")
         if placeholder is not None:
             return {
                 "status": "acquired",
                 "project_id": project_id,
                 "run_id": placeholder.run_id,
-                "previous_project_id": None,
+                "lease_id": placeholder.lease_id,
             }
 
-        active = self.get_active_run()
-        previous_project_id = active.project_id if active else None
-        previous_run_id = active.run_id if active else None
-        cancel_result = await cancel_callback(previous_project_id)
-
-        deadline = time.monotonic() + wait_timeout
-        while time.monotonic() < deadline:
-            await asyncio.sleep(poll_interval)
-            placeholder = self.try_acquire_slot(project_id, status="starting")
-            if placeholder is not None:
-                return {
-                    "status": "acquired_after_cancel",
-                    "project_id": project_id,
-                    "run_id": placeholder.run_id,
-                    "previous_project_id": previous_project_id,
-                    "previous_run_id": previous_run_id,
-                    "cancel_result": cancel_result,
-                }
-
-        active = self.get_active_run()
+        active = self.get_active_run(project_id)
         return {
             "status": "busy",
             "project_id": project_id,
-            "active_project_id": active.project_id if active else previous_project_id,
-            "active_run_id": active.run_id if active else previous_run_id,
-            "active_status": active.status if active else "cancelling",
+            "active_project_id": project_id,
+            "active_run_id": active.run_id if active else None,
+            "active_status": active.status if active else "starting",
         }
 
 

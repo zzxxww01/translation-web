@@ -43,11 +43,13 @@ export const SectionNavigation: FC<SectionNavigationProps> = ({
   };
 
   return (
-    <div className={cn('flex items-center gap-2', className)}>
+    <nav className={cn('flex w-full items-center gap-2', className)} aria-label="章节导航">
       {/* 上一章按钮 */}
       <button
+        type="button"
         onClick={goToPrevious}
         disabled={!hasPrevious}
+        aria-label="上一章"
         className={cn(
           'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
           'disabled:cursor-not-allowed disabled:opacity-50',
@@ -61,7 +63,7 @@ export const SectionNavigation: FC<SectionNavigationProps> = ({
       </button>
 
       {/* 章节信息 */}
-      <div className="flex-1 text-center">
+      <div className="min-w-0 flex-1 text-center" aria-live="polite">
         {currentSection ? (
           <div className="text-sm">
             <span className="text-text-muted">第 {currentIndex + 1} 章 / 共 {sections.length} 章</span>
@@ -78,8 +80,10 @@ export const SectionNavigation: FC<SectionNavigationProps> = ({
 
       {/* 下一章按钮 */}
       <button
+        type="button"
         onClick={goToNext}
         disabled={!hasNext}
+        aria-label="下一章"
         className={cn(
           'flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors',
           'disabled:cursor-not-allowed disabled:opacity-50',
@@ -91,7 +95,7 @@ export const SectionNavigation: FC<SectionNavigationProps> = ({
         <span className="hidden sm:inline">下一章</span>
         <ChevronRight className="h-4 w-4" />
       </button>
-    </div>
+    </nav>
   );
 };
 
@@ -120,7 +124,9 @@ export const SectionSelector: FC<SectionSelectorProps> = ({
         return (
           <button
             key={section.section_id}
+            type="button"
             onClick={() => onSectionChange(section.section_id)}
+            aria-current={isActive ? 'page' : undefined}
             className={cn(
               'rounded-lg px-3 py-2 text-sm font-medium transition-colors',
               'disabled:cursor-not-allowed disabled:opacity-50',

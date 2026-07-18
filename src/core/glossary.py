@@ -8,9 +8,10 @@ import json
 import os
 import tempfile
 import threading
+from collections import OrderedDict
 from contextlib import contextmanager
 from pathlib import Path
-from typing import Optional, List, Dict
+from typing import Optional, List, Dict, Tuple
 
 from .models import Glossary, GlossaryTerm, TranslationStrategy
 
@@ -25,6 +26,12 @@ class GlossaryManager:
     # 保证同一 project/global 的读改写与原子落盘跨实例串行(审计 C5)。
     _locks: Dict[str, threading.RLock] = {}
     _locks_guard = threading.Lock()
+    _read_cache: OrderedDict[
+        str,
+        Tuple[Tuple[int, int, int, int], Glossary],
+    ] = OrderedDict()
+    _read_cache_guard = threading.Lock()
+    _read_cache_max = 256
 
     @classmethod
     def _get_lock(cls, key: str) -> threading.RLock:
@@ -40,6 +47,78 @@ class GlossaryManager:
         """保护项目术语表 load->mutate->save 的临界区,避免并发编辑丢更新(lost update)。"""
         with self._get_lock(f"project:{project_id}"):
             yield
+
+    @contextmanager
+    def global_lock(self):
+        """Protect global glossary load-mutate-save operations."""
+        with self._get_lock("global"):
+            yield
+
+    @staticmethod
+    def _file_signature(file_path: Path) -> Optional[Tuple[int, int, int, int]]:
+        try:
+            stat = file_path.stat()
+        except FileNotFoundError:
+            return None
+        return (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns)
+
+    @classmethod
+    def _cache_key(cls, file_path: Path, scope: str) -> str:
+        return f"{scope}:{file_path.resolve()}"
+
+    @classmethod
+    def _get_cached(
+        cls,
+        file_path: Path,
+        scope: str,
+        signature: Tuple[int, int, int, int],
+    ) -> Optional[Glossary]:
+        key = cls._cache_key(file_path, scope)
+        with cls._read_cache_guard:
+            cached = cls._read_cache.get(key)
+            if cached is None or cached[0] != signature:
+                return None
+            cls._read_cache.move_to_end(key)
+            return cached[1].model_copy(deep=True)
+
+    @classmethod
+    def _store_cached(
+        cls,
+        file_path: Path,
+        scope: str,
+        glossary: Glossary,
+    ) -> None:
+        signature = cls._file_signature(file_path)
+        if signature is None:
+            return
+        key = cls._cache_key(file_path, scope)
+        with cls._read_cache_guard:
+            cls._read_cache[key] = (signature, glossary.model_copy(deep=True))
+            cls._read_cache.move_to_end(key)
+            while len(cls._read_cache) > cls._read_cache_max:
+                cls._read_cache.popitem(last=False)
+
+    @classmethod
+    def _load_cached_file(
+        cls,
+        file_path: Path,
+        *,
+        scope: str,
+    ) -> Glossary:
+        signature = cls._file_signature(file_path)
+        if signature is None:
+            return Glossary()
+        cached = cls._get_cached(file_path, scope, signature)
+        if cached is not None:
+            return cached
+
+        with open(file_path, "r", encoding="utf-8") as handle:
+            glossary = normalize_glossary(
+                Glossary(**json.load(handle)),
+                default_scope=scope,
+            )
+        cls._store_cached(file_path, scope, glossary)
+        return glossary.model_copy(deep=True)
 
     @staticmethod
     def _atomic_write_json(file_path: Path, payload) -> None:
@@ -81,14 +160,8 @@ class GlossaryManager:
             Glossary: 术语表
         """
         file_path = self._get_global_glossary_file_path()
-        if not file_path.exists():
-            return Glossary()
-
-        with open(file_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-
-        glossary = Glossary(**data)
-        return normalize_glossary(glossary, default_scope="global")
+        with self._get_lock("global"):
+            return self._load_cached_file(file_path, scope="global")
 
     def save_global(self, glossary: Glossary) -> None:
         """
@@ -102,6 +175,7 @@ class GlossaryManager:
             glossary.version += 1
             file_path = self._get_global_glossary_file_path()
             self._atomic_write_json(file_path, glossary.model_dump(mode="json"))
+            self._store_cached(file_path, "global", glossary)
 
     def load_project(self, project_id: str) -> Glossary:
         """
@@ -114,14 +188,8 @@ class GlossaryManager:
             Glossary: 术语表
         """
         file_path = self.projects_path / project_id / "glossary.json"
-        if not file_path.exists():
-            return Glossary()
-
-        with open(file_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-
-        glossary = Glossary(**data)
-        return normalize_glossary(glossary, default_scope="project")
+        with self._get_lock(f"project:{project_id}"):
+            return self._load_cached_file(file_path, scope="project")
 
     def save_project(self, project_id: str, glossary: Glossary) -> None:
         """
@@ -139,6 +207,7 @@ class GlossaryManager:
             self._atomic_write_json(
                 project_dir / "glossary.json", glossary.model_dump(mode="json")
             )
+            self._store_cached(project_dir / "glossary.json", "project", glossary)
 
     def merge(self, global_glossary: Glossary, project_glossary: Glossary) -> Glossary:
         """
@@ -527,6 +596,11 @@ def normalize_glossary_term(
     original = term.original.strip()
     translation = term.translation.strip() if isinstance(term.translation, str) else term.translation
     note = term.note.strip() if isinstance(term.note, str) else term.note
+    strategy = term.strategy
+    if original.casefold() == "token":
+        translation = "token"
+        strategy = TranslationStrategy.PRESERVE
+        note = "强制保留英文 token，不译为“词元”"
     first_occurrence = (
         term.first_occurrence.strip()
         if isinstance(term.first_occurrence, str) and term.first_occurrence.strip()
@@ -540,6 +614,7 @@ def normalize_glossary_term(
         update={
             "original": original,
             "translation": translation,
+            "strategy": strategy,
             "note": note,
             "tags": tags,
             "first_occurrence": first_occurrence,
@@ -685,4 +760,3 @@ def create_default_global_glossary() -> Glossary:
         ))
 
     return glossary
-

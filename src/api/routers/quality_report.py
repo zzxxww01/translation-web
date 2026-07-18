@@ -5,6 +5,7 @@ from typing import List, Optional, Dict, Any
 from fastapi import APIRouter, Query
 
 from src.api.middleware import NotFoundException
+from src.api.utils.concurrency import run_blocking
 from src.services.quality_report_service import QualityReportService
 from src.core.models.analysis import QualityReportSummary, TranslationIssue
 
@@ -18,7 +19,7 @@ router = APIRouter(prefix="/api/quality-report", tags=["quality-report"])
 async def get_latest_quality_report(project_id: str) -> QualityReportSummary:
     """获取项目最新的质量报告"""
     service = QualityReportService(PROJECT_ROOT)
-    report = service.get_latest_report(project_id)
+    report = await run_blocking(service.get_latest_report, project_id)
     if not report:
         raise NotFoundException(detail="No quality report found")
     return report
@@ -31,7 +32,7 @@ async def get_quality_report_by_run(
 ) -> QualityReportSummary:
     """根据 run_id 获取质量报告"""
     service = QualityReportService(PROJECT_ROOT)
-    report = service.get_report_by_run_id(run_id, project_id)
+    report = await run_blocking(service.get_report_by_run_id, run_id, project_id)
     if not report:
         raise NotFoundException(detail="Quality report not found")
     return report
@@ -44,7 +45,7 @@ async def get_quality_report_history(
 ):
     """获取项目的历史报告列表"""
     service = QualityReportService(PROJECT_ROOT)
-    return service.list_report_history(project_id, limit)
+    return await run_blocking(service.list_report_history, project_id, limit)
 
 
 @router.get("/projects/{project_id}/sections/{section_id}/quality-report")
@@ -53,7 +54,7 @@ async def get_section_quality_report(
 ) -> Dict[str, Any]:
     """获取章节质量报告"""
     service = QualityReportService(PROJECT_ROOT)
-    report = service.get_latest_report(project_id)
+    report = await run_blocking(service.get_latest_report, project_id)
     if not report:
         raise NotFoundException(detail="No quality report found")
 
@@ -63,7 +64,12 @@ async def get_section_quality_report(
         raise NotFoundException(detail="Section not found")
 
     # 获取章节问题
-    issues = service.get_section_issues(report.run_id, section_id, project_id)
+    issues = await run_blocking(
+        service.get_section_issues,
+        report.run_id,
+        section_id,
+        project_id,
+    )
 
     return {
         "section_id": section.section_id,
@@ -86,5 +92,10 @@ async def get_section_issues(
 ) -> List[TranslationIssue]:
     """获取特定章节的问题列表"""
     service = QualityReportService(PROJECT_ROOT)
-    issues = service.get_section_issues(run_id, section_id, project_id)
+    issues = await run_blocking(
+        service.get_section_issues,
+        run_id,
+        section_id,
+        project_id,
+    )
     return issues

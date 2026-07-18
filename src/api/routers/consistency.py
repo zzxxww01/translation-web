@@ -13,8 +13,10 @@ from ...services.consistency_service import (
     ConsistencyReviewer,
     generate_consistency_report_markdown,
 )
+from ...core.file_utils import write_json_atomic
 from ..dependencies import GlossaryManagerDep, ProjectManagerDep
 from ..middleware import BadRequestException, NotFoundException
+from ..utils.concurrency import run_blocking
 from .translate_utils import validate_path_component
 
 
@@ -53,6 +55,38 @@ def _report_path(projects_root: Path, project_id: str) -> Path:
     return projects_root / project_id / "consistency_report.json"
 
 
+def _review_consistency_sync(project_id: str, pm, gm) -> tuple[dict, str]:
+    pm.get(project_id)
+    sections = pm.get_sections(project_id)
+    glossary = gm.load_project(project_id)
+    reviewer = ConsistencyReviewer()
+    report = reviewer.review(sections, glossary)
+    report_data = report.model_dump(mode="json")
+    write_json_atomic(_report_path(Path(pm.projects_path), project_id), report_data)
+    return report_data, generate_consistency_report_markdown(report)
+
+
+def _load_consistency_report_sync(project_id: str, pm) -> Dict[str, Any]:
+    pm.get(project_id)
+    path = _report_path(Path(pm.projects_path), project_id)
+    if not path.exists():
+        return {
+            "project_id": project_id,
+            "report": None,
+            "message": "暂无审查报告",
+        }
+    try:
+        with open(path, "r", encoding="utf-8") as handle:
+            report = json.load(handle)
+    except (json.JSONDecodeError, OSError):
+        return {
+            "project_id": project_id,
+            "report": None,
+            "message": "报告文件损坏，请重新执行审查",
+        }
+    return {"project_id": project_id, "report": report}
+
+
 @router.post("/review")
 async def review_consistency(
     request: ReviewRequest,
@@ -65,24 +99,16 @@ async def review_consistency(
     if not validate_path_component(request.project_id):
         raise NotFoundException(detail="Project not found")
     try:
-        project = pm.get(request.project_id)
-        sections = pm.get_sections(request.project_id)
-        glossary = gm.load_project(request.project_id)
-        _ = project
+        report_data, markdown = await run_blocking(
+            _review_consistency_sync,
+            request.project_id,
+            pm,
+            gm,
+        )
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
     except Exception as e:
         raise BadRequestException(detail=f"加载项目失败: {e}")
-
-    reviewer = ConsistencyReviewer()
-    report = reviewer.review(sections, glossary)
-    markdown = generate_consistency_report_markdown(report)
-
-    report_data = report.model_dump(mode="json")
-    save_path = _report_path(Path(pm.projects_path), request.project_id)
-    save_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(save_path, "w", encoding="utf-8") as f:
-        json.dump(report_data, f, ensure_ascii=False, indent=2)
 
     return ReviewResponse(report=report_data, markdown_report=markdown)
 
@@ -98,7 +124,7 @@ async def auto_fix_issue(
     if not validate_path_component(request.project_id):
         raise NotFoundException(detail="Project not found")
     try:
-        pm.get(request.project_id)
+        await run_blocking(pm.get, request.project_id)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -119,29 +145,9 @@ async def get_consistency_report(
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
     try:
-        pm.get(project_id)
+        return await run_blocking(_load_consistency_report_sync, project_id, pm)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
-
-    path = _report_path(Path(pm.projects_path), project_id)
-    if not path.exists():
-        return {
-            "project_id": project_id,
-            "report": None,
-            "message": "暂无审查报告",
-        }
-
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            report = json.load(f)
-    except (json.JSONDecodeError, OSError):
-        return {
-            "project_id": project_id,
-            "report": None,
-            "message": "报告文件损坏，请重新执行审查",
-        }
-
-    return {"project_id": project_id, "report": report}
 
 
 @router.get("/settings")

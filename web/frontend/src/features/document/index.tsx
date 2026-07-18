@@ -5,6 +5,7 @@ import { useDocumentStore } from '@/shared/stores';
 import { TranslationMethod } from '@/shared/constants';
 import type { Paragraph, Section } from '@/shared/types';
 import { documentApi } from './api';
+import { isTranslationRunActive } from './translationStatus';
 import {
   AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent,
   AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
@@ -12,6 +13,16 @@ import {
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+import { Button } from '@/components/ui/Button';
+import { PanelLeft } from 'lucide-react';
 import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
 import { NewProjectModal } from './components/NewProjectModal';
@@ -62,6 +73,7 @@ export function DocumentFeature() {
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
   const [immersiveTargetParagraphId, setImmersiveTargetParagraphId] = useState<string | null>(null);
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // AlertDialog 状态
   const [showStopDialog, setShowStopDialog] = useState(false);
@@ -71,6 +83,12 @@ export function DocumentFeature() {
 
   const isFullTranslating = useDocumentStore(state => state.isFullTranslating);
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
+  const fullTranslateProjectId = useDocumentStore(state => state.fullTranslateProjectId);
+  const hasLocalRunForCurrentProject = Boolean(
+    isFullTranslating &&
+      currentProject?.id &&
+      fullTranslateProjectId === currentProject.id
+  );
 
   useProject(currentProject?.id ?? '');
   const {
@@ -90,6 +108,12 @@ export function DocumentFeature() {
     setBackendTranslationStatus,
     setCurrentStep,
   } = useTranslationStatusSync(currentProject?.id);
+  const hasActiveBackendRunForCurrentProject = isTranslationRunActive(
+    backendTranslationStatus,
+    currentProject?.id
+  );
+  const isCurrentProjectFullTranslating =
+    hasLocalRunForCurrentProject || hasActiveBackendRunForCurrentProject;
   const {
     closeWithDefaultResolution,
     conflictDialogOpen,
@@ -103,7 +127,7 @@ export function DocumentFeature() {
     refetch: refetchSection,
   } = useSection(currentProject?.id ?? '', activeSectionId ?? '');
 
-  const { startTranslation, stopTranslation } = useFullTranslate();
+  const { startTranslation, stopTranslation } = useFullTranslate(currentProject?.id);
 
   const runFullTranslate = useCallback(
     async (method: TranslationMethod = TranslationMethod.FOUR_STEP, model?: string) => {
@@ -137,7 +161,6 @@ export function DocumentFeature() {
     isSubmittingTermReview,
     pendingTermReview,
     prepareTermReviewIfNeeded,
-    setIsPreparingFullTranslate,
     submitTermReview,
   } = useTermReviewFlow({
     currentProjectId: currentProject?.id,
@@ -254,7 +277,7 @@ export function DocumentFeature() {
         return;
       }
 
-      if (isFullTranslating) {
+      if (isCurrentProjectFullTranslating) {
         setShowStopDialog(true);
         return;
       }
@@ -266,7 +289,7 @@ export function DocumentFeature() {
     },
     [
       currentProject,
-      isFullTranslating,
+      isCurrentProjectFullTranslating,
       isPreparingFullTranslate,
     ]
   );
@@ -378,47 +401,87 @@ export function DocumentFeature() {
   const currentIndex = getCurrentParagraphIndex();
   const totalCount = displaySection?.paragraphs?.length ?? 0;
   const showEditingPanels = !activeView;
-  const hasBackendStatusForCurrentProject =
-    backendTranslationStatus?.active_project_id === currentProject?.id;
-  const effectiveProgress = hasBackendStatusForCurrentProject
+  const effectiveProgress = hasActiveBackendRunForCurrentProject
     ? {
         current: backendTranslationStatus?.translated_paragraphs || 0,
         total: backendTranslationStatus?.total_paragraphs || 0,
       }
-    : fullTranslateProgress;
+    : hasLocalRunForCurrentProject
+      ? fullTranslateProgress
+      : null;
   const effectiveIsCancelling = Boolean(
-    hasBackendStatusForCurrentProject &&
+    hasActiveBackendRunForCurrentProject &&
       backendTranslationStatus?.is_cancelling
   );
   const effectiveIsFullTranslating = Boolean(
-    (hasBackendStatusForCurrentProject &&
-      backendTranslationStatus?.status === 'processing') ||
-      isFullTranslating
+    hasActiveBackendRunForCurrentProject || hasLocalRunForCurrentProject
   );
   const effectiveCurrentStep =
-    (hasBackendStatusForCurrentProject &&
+    (hasActiveBackendRunForCurrentProject &&
       backendTranslationStatus?.current_step) ||
-    currentStep;
+    (hasLocalRunForCurrentProject ? currentStep : null);
+
+  const renderSidebar = (mobile: boolean) => (
+    <DocumentSidebar
+      sections={sections}
+      activeSectionId={activeSectionId}
+      onSectionSelect={handleSelectSectionById}
+      onNewProject={() => setIsNewProjectModalOpen(true)}
+      onFullTranslate={handleFullTranslate}
+      onStopTranslate={() => setShowStopDialog(true)}
+      isFullTranslating={effectiveIsFullTranslating}
+      isCancelling={effectiveIsCancelling}
+      isPreparingFullTranslate={isPreparingFullTranslate}
+      fullTranslateProgress={effectiveProgress}
+      currentStep={effectiveCurrentStep}
+      activeTranslationProjectId={
+        backendTranslationStatus?.active_project_id ||
+        (isFullTranslating ? fullTranslateProjectId : null)
+      }
+      projectId={currentProject?.id}
+      className={mobile ? 'w-full border-r-0' : 'hidden md:flex'}
+      onNavigate={mobile ? () => setMobileSidebarOpen(false) : undefined}
+    />
+  );
 
   return (
-    <div className="flex h-full overflow-auto">
-      <DocumentSidebar
-        sections={sections}
-        activeSectionId={activeSectionId}
-        onSectionSelect={handleSelectSectionById}
-        onNewProject={() => setIsNewProjectModalOpen(true)}
-        onFullTranslate={handleFullTranslate}
-        onStopTranslate={() => setShowStopDialog(true)}
-        isFullTranslating={effectiveIsFullTranslating}
-        isCancelling={effectiveIsCancelling}
-        isPreparingFullTranslate={isPreparingFullTranslate}
-        fullTranslateProgress={effectiveProgress}
-        currentStep={effectiveCurrentStep}
-        activeTranslationProjectId={backendTranslationStatus?.active_project_id || null}
-        projectId={currentProject?.id}
-      />
+    <div className="flex h-full min-h-0 overflow-hidden">
+      {renderSidebar(false)}
 
-      <main className="flex-1 overflow-y-auto">{renderMainContent()}</main>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="flex h-12 shrink-0 items-center gap-2 border-b border-border-subtle bg-bg-secondary px-3 md:hidden">
+          <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>
+            <SheetTrigger asChild>
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon"
+                aria-label="打开文档导航"
+                title="文档导航"
+              >
+                <PanelLeft className="h-5 w-5" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="w-[min(90vw,22rem)] p-0 pt-10">
+              <SheetHeader className="sr-only">
+                <SheetTitle>文档导航</SheetTitle>
+                <SheetDescription>选择项目和章节，查看进度并执行全文操作。</SheetDescription>
+              </SheetHeader>
+              {renderSidebar(true)}
+            </SheetContent>
+          </Sheet>
+          <div className="min-w-0">
+            <p className="truncate text-sm font-medium">
+              {currentSection?.title || currentProject?.title || '文档工作台'}
+            </p>
+            {currentProject && currentSection && (
+              <p className="truncate text-xs text-text-muted">{currentProject.title}</p>
+            )}
+          </div>
+        </div>
+
+        <main className="min-w-0 flex-1 overflow-y-auto">{renderMainContent()}</main>
+      </div>
 
       {showEditingPanels && currentParagraph && currentProject && activeSectionId && displaySection && (
         <EditPanel
@@ -542,21 +605,16 @@ export function DocumentFeature() {
           <AlertDialogFooter>
             <AlertDialogCancel>取消</AlertDialogCancel>
             <AlertDialogAction onClick={async () => {
-              setCurrentStep('术语预检中...');
-              setIsPreparingFullTranslate(true);
               try {
                 const intercepted = await prepareTermReviewIfNeeded(
                   pendingStartMethod,
                   pendingStartModel
                 );
-                setIsPreparingFullTranslate(false);
-                if (intercepted) { setCurrentStep(null); return; }
+                if (intercepted) return;
                 await runFullTranslate(pendingStartMethod, pendingStartModel);
               } catch (error) {
                 console.error('Failed to start full translation:', error);
                 toast.error('启动全文翻译失败，请重试');
-                setCurrentStep(null);
-                setIsPreparingFullTranslate(false);
               }
             }}>
               开始翻译

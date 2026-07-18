@@ -9,6 +9,7 @@ from pydantic import BaseModel, Field
 from src.api.dependencies import GlossaryManagerDep
 from src.api.middleware import NotFoundException, BadRequestException
 from src.api.middleware.rate_limit import limiter
+from src.api.utils.concurrency import run_blocking
 from src.core.glossary import infer_glossary_tags, normalize_glossary_tags
 from src.core.models import GlossaryTerm, TranslationStrategy
 
@@ -159,37 +160,47 @@ def _apply_batch_action(glossary, body: BatchGlossaryRequest) -> tuple[list[Glos
 @router.get("", response_model=GlossaryResponse)
 @limiter.limit("100/minute")
 async def get_global_glossary(request: Request, gm: GlossaryManagerDep):
-    glossary = gm.load_global()
-    return GlossaryResponse(
-        version=glossary.version,
-        terms=[TermResponse(**_term_to_response(term)) for term in glossary.terms],
-    )
+    def load_response() -> GlossaryResponse:
+        glossary = gm.load_global()
+        return GlossaryResponse(
+            version=glossary.version,
+            terms=[
+                TermResponse(**_term_to_response(term))
+                for term in glossary.terms
+            ],
+        )
+
+    return await run_blocking(load_response)
 
 
 @router.post("", response_model=dict)
 @limiter.limit("60/minute")
 async def add_global_term(request: Request, body: TermRequest, gm: GlossaryManagerDep):
-    glossary = gm.load_global()
-    replaced = glossary.get_term(body.original) is not None
+    def add_term() -> dict:
+        with gm.global_lock():
+            glossary = gm.load_global()
+            replaced = glossary.get_term(body.original) is not None
 
-    term = GlossaryTerm(
-        original=body.original,
-        translation=body.translation,
-        strategy=body.strategy,
-        note=body.note,
-        tags=_initial_tags(body.original, body.tags),
-        scope="global",
-        source="manual",
-        status=body.status,
-    )
-    glossary.add_term(term)
-    gm.save_global(glossary)
+            term = GlossaryTerm(
+                original=body.original,
+                translation=body.translation,
+                strategy=body.strategy,
+                note=body.note,
+                tags=_initial_tags(body.original, body.tags),
+                scope="global",
+                source="manual",
+                status=body.status,
+            )
+            glossary.add_term(term)
+            gm.save_global(glossary)
 
-    return {
-        "message": "Term added",
-        "replaced": replaced,
-        "term": _term_to_response(term),
-    }
+        return {
+            "message": "Term added",
+            "replaced": replaced,
+            "term": _term_to_response(term),
+        }
+
+    return await run_blocking(add_term)
 
 
 @router.put("/terms/{original}", response_model=dict)
@@ -200,23 +211,35 @@ async def update_global_term(
     body: TermUpdateRequest,
     gm: GlossaryManagerDep,
 ):
-    glossary = gm.load_global()
-    existing = _find_existing_term(glossary, original)
-    updated = _apply_term_updates(existing, body, scope="global")
-    glossary.add_term(updated)
-    gm.save_global(glossary)
-    return {"message": "Term updated", "term": _term_to_response(updated)}
+    def update_term() -> dict:
+        with gm.global_lock():
+            glossary = gm.load_global()
+            existing = _find_existing_term(glossary, original)
+            updated = _apply_term_updates(existing, body, scope="global")
+            glossary.add_term(updated)
+            gm.save_global(glossary)
+        return {"message": "Term updated", "term": _term_to_response(updated)}
+
+    return await run_blocking(update_term)
 
 
 @router.delete("/terms/{original}", response_model=dict)
 @limiter.limit("60/minute")
 async def delete_global_term(request: Request, original: str, gm: GlossaryManagerDep):
-    glossary = gm.load_global()
-    _find_existing_term(glossary, original)
-    original_lower = original.lower()
-    glossary.terms = [term for term in glossary.terms if term.original.lower() != original_lower]
-    gm.save_global(glossary)
-    return {"message": "Term deleted", "original": original}
+    def delete_term() -> dict:
+        with gm.global_lock():
+            glossary = gm.load_global()
+            _find_existing_term(glossary, original)
+            original_lower = original.lower()
+            glossary.terms = [
+                term
+                for term in glossary.terms
+                if term.original.lower() != original_lower
+            ]
+            gm.save_global(glossary)
+        return {"message": "Term deleted", "original": original}
+
+    return await run_blocking(delete_term)
 
 
 @router.post("/batch", response_model=dict)
@@ -226,14 +249,18 @@ async def batch_update_global_glossary(
     body: BatchGlossaryRequest,
     gm: GlossaryManagerDep,
 ):
-    glossary = gm.load_global()
-    updated_terms, matched_count = _apply_batch_action(glossary, body)
-    gm.save_global(glossary)
-    return {
-        "message": "Batch action applied",
-        "action": body.action,
-        "matched_count": matched_count,
-        "updated_count": len(updated_terms),
-        "terms": [_term_to_response(term) for term in updated_terms],
-        "originals": body.originals,
-    }
+    def update_batch() -> dict:
+        with gm.global_lock():
+            glossary = gm.load_global()
+            updated_terms, matched_count = _apply_batch_action(glossary, body)
+            gm.save_global(glossary)
+        return {
+            "message": "Batch action applied",
+            "action": body.action,
+            "matched_count": matched_count,
+            "updated_count": len(updated_terms),
+            "terms": [_term_to_response(term) for term in updated_terms],
+            "originals": body.originals,
+        }
+
+    return await run_blocking(update_batch)

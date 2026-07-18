@@ -3,8 +3,19 @@ from types import SimpleNamespace
 import pytest
 
 from src.api.routers import projects_paragraphs
-from src.api.routers.projects_models import TranslateRequest, WordMeaningMessage, WordMeaningRequest
-from src.core.models import Paragraph, Section
+from src.api.routers.projects_models import (
+    BatchTranslateRequest,
+    TranslateRequest,
+    WordMeaningMessage,
+    WordMeaningRequest,
+)
+from src.core.models import (
+    Paragraph,
+    ParagraphStatus,
+    ProjectMeta,
+    Section,
+)
+from src.core.project import ProjectManager
 
 
 class _FakeProjectManager:
@@ -116,3 +127,73 @@ def test_query_word_meaning_sync_reads_body_fields():
     assert response.answer == "词义解释"
     assert "这里的 HBM 是什么含义？" in llm.prompt
 
+
+def test_batch_translation_reloads_persisted_context_after_target_conflict(
+    tmp_path,
+    monkeypatch,
+):
+    pm = ProjectManager(projects_path=str(tmp_path / "projects"))
+    pm.save_section_only(
+        "demo",
+        Section(
+            section_id="s1",
+            title="Section",
+            paragraphs=[
+                Paragraph(id="p1", index=0, source="First"),
+                Paragraph(id="p2", index=1, source="Second"),
+            ],
+        ),
+    )
+    pm.project_repository.save_meta(
+        "demo",
+        ProjectMeta(id="demo", title="Demo", source_file="source.md"),
+    )
+    contexts = []
+
+    class FakeAgent:
+        def __init__(self, _llm, timeout=None):
+            pass
+
+        def translate_paragraph(self, paragraph, context):
+            contexts.append((paragraph.id, list(context.previous_paragraphs)))
+            if paragraph.id == "p1":
+                pm.update_paragraph_locked(
+                    "demo",
+                    "s1",
+                    "p1",
+                    translation="人工第一段",
+                    status=ParagraphStatus.MODIFIED,
+                    recompute_progress=False,
+                )
+                text = "过期 AI 第一段"
+            else:
+                text = "AI 第二段"
+            return SimpleNamespace(
+                text=text,
+                tokenized_text=None,
+                format_issues=[],
+            )
+
+    monkeypatch.setattr(projects_paragraphs, "TranslationAgent", FakeAgent)
+    monkeypatch.setattr(
+        projects_paragraphs.TimeoutConfig,
+        "get_timeout",
+        lambda _key: 5,
+    )
+
+    result = projects_paragraphs._batch_translate_paragraphs_sync(
+        "demo",
+        "s1",
+        BatchTranslateRequest(paragraph_ids=["p1", "p2"]),
+        pm,
+        _FakeGlossaryManager(),
+        object(),
+        _FakeMemoryService(),
+    )
+
+    assert result.success_count == 1
+    assert result.error_count == 1
+    assert contexts[1] == ("p2", [("First", "人工第一段")])
+    persisted = pm.get_section("demo", "s1")
+    assert persisted.paragraphs[0].best_translation_text() == "人工第一段"
+    assert persisted.paragraphs[1].best_translation_text() == "AI 第二段"

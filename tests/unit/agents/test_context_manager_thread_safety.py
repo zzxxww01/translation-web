@@ -6,8 +6,10 @@
 """
 
 import threading
+import time
 
 from src.agents.context_manager import LayeredContextManager
+from src.core.models import EnhancedTerm, TermConflict
 
 
 def test_accessor_semantics():
@@ -63,3 +65,75 @@ def test_concurrent_term_and_translation_no_race():
     assert len(all_trans) == workers
     for n in range(workers):
         assert len(all_trans[f"s{n}"]) == per_worker
+
+
+def test_terminology_readers_return_detached_snapshots():
+    cm = LayeredContextManager()
+    cm.add_terms_from_analysis(
+        [EnhancedTerm(term="GPU", translation="图形处理器")]
+    )
+    with cm._lock:
+        cm.pending_conflicts.append(
+            TermConflict(
+                term="GPU",
+                existing_translation="图形处理器",
+                new_translation="GPU",
+            )
+        )
+
+    terms = cm.get_all_terms()
+    conflicts = cm.get_pending_conflicts()
+    terms["gpu"] = "污染"
+    conflicts[0].new_translation = "污染"
+
+    assert cm.get_all_terms()["gpu"] == "图形处理器"
+    assert cm.get_pending_conflicts()[0].new_translation == "GPU"
+    assert cm.has_pending_conflicts() is True
+    assert cm.get_terminology_version() == 2
+
+
+def test_concurrent_terminology_reads_and_writes_use_stable_snapshots():
+    cm = LayeredContextManager()
+    errors = []
+    done = threading.Event()
+
+    def writer():
+        try:
+            for index in range(600):
+                cm.add_terms_from_analysis(
+                    [
+                        EnhancedTerm(
+                            term=f"term-{index}",
+                            translation=f"translation-{index}",
+                        )
+                    ]
+                )
+                if index % 10 == 0:
+                    time.sleep(0)
+        except Exception as exc:  # noqa: BLE001 - collect race failures
+            errors.append(exc)
+        finally:
+            done.set()
+
+    def reader():
+        try:
+            while not done.is_set():
+                snapshot = cm.get_all_terms()
+                list(snapshot.items())
+                cm.has_pending_conflicts()
+                cm.get_pending_conflicts()
+                cm.get_terminology_version()
+        except Exception as exc:  # noqa: BLE001 - collect race failures
+            errors.append(exc)
+
+    writer_thread = threading.Thread(target=writer)
+    reader_threads = [threading.Thread(target=reader) for _ in range(4)]
+    for thread in reader_threads:
+        thread.start()
+    writer_thread.start()
+    writer_thread.join()
+    for thread in reader_threads:
+        thread.join()
+
+    assert not errors, f"并发术语读写出现异常: {errors[:3]}"
+    assert len(cm.get_all_terms()) == 600

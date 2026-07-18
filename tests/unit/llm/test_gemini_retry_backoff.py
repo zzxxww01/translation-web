@@ -11,7 +11,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
 
 import src.llm.gemini as gemini_mod
-from src.llm.gemini import GeminiProvider
+from src.llm.gemini import GeminiGenerationResult, GeminiProvider
+from src.llm.usage_metrics import llm_usage_metrics
 
 
 def _make_provider():
@@ -71,3 +72,29 @@ def test_non_rate_limit_transient_rotates_without_backoff(monkeypatch):
     # 第一次换 key 不退避；之后最终路由用 _retry_delay_for_error 的非限流分支（平坦小延迟）
     # 因此 sleeps 数量比限流场景少一次（没有换 key 退避），且首个延迟不是限流退避。
     assert len(sleeps) == 3, sleeps
+
+
+def test_success_records_provider_token_usage(monkeypatch):
+    p = _make_provider()
+    monkeypatch.setattr(p, "_use_rest_transport", lambda: False)
+    monkeypatch.setattr(
+        p,
+        "_generate_once",
+        lambda **_kwargs: GeminiGenerationResult(
+            text=" translated ",
+            input_tokens=12,
+            output_tokens=7,
+            total_tokens=19,
+        ),
+    )
+    run_id = "gemini-token-usage"
+    llm_usage_metrics.start_run(run_id, project_id="demo")
+    try:
+        assert p.generate("source") == "translated"
+        summary = llm_usage_metrics.summary(run_id)
+        assert summary["api_calls"] == 1
+        assert summary["input_tokens"] == 12
+        assert summary["output_tokens"] == 7
+        assert summary["total_tokens"] == 19
+    finally:
+        llm_usage_metrics.finish_run(run_id)

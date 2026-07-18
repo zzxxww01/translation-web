@@ -8,11 +8,14 @@ import os
 from fastapi import APIRouter, Request
 
 from src.config.timeout_config import TimeoutConfig
+from src.core.post_hashtags import append_xiaohongshu_hashtags
+from src.core.protected_terms import preserve_protected_terms
 from src.prompts import get_prompt_manager
 from ..middleware import BadRequestException
 from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.glossary import build_glossary_context
+from ..utils.concurrency import run_blocking
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
 from .translate_models import (
@@ -42,7 +45,7 @@ async def translate_post(request: Request, body: PostTranslateRequest):
         if not os.getenv("ALLOW_CUSTOM_PROMPTS", "false").lower() == "true":
             raise BadRequestException(detail="Custom prompts are not allowed in production")
 
-    glossary_context = build_glossary_context(body.content)
+    glossary_context = await run_blocking(build_glossary_context, body.content)
 
     if body.custom_prompt:
         prompt = body.custom_prompt.replace("{content}", body.content)
@@ -60,7 +63,9 @@ async def translate_post(request: Request, body: PostTranslateRequest):
             asyncio.to_thread(generate_with_fallback, prompt, task_type="post", timeout=timeout_s, model=body.model),
             timeout=timeout_s,
         )
-        return PostTranslateResponse(translation=translation.strip())
+        translation = preserve_protected_terms(body.content, translation.strip())
+        translation = append_xiaohongshu_hashtags(translation, body.content)
+        return PostTranslateResponse(translation=translation)
     except asyncio.TimeoutError as e:
         raise_llm_service_unavailable(operation="Translation", exc=e, timeout_s=timeout_s)
     except Exception as e:
@@ -82,7 +87,10 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
             detail="Either instruction or a valid option_id must be provided"
         )
 
-    glossary_context = build_glossary_context(body.original_text)
+    glossary_context = await run_blocking(
+        build_glossary_context,
+        body.original_text,
+    )
 
     # C21:conversation_history 此前被前端发送、被校验,却从未注入 prompt(多轮优化上下文失效)。
     # 这里把最近几轮调整格式化为参考上下文传入。值里的花括号由 str.format 安全处理(不二次解析)。
@@ -116,7 +124,9 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
             asyncio.to_thread(generate_with_fallback, prompt, task_type="post", timeout=timeout_s, model=body.model),
             timeout=timeout_s,
         )
-        return PostOptimizeResponse(optimized_translation=optimized.strip())
+        optimized = preserve_protected_terms(body.original_text, optimized.strip())
+        optimized = append_xiaohongshu_hashtags(optimized, body.original_text)
+        return PostOptimizeResponse(optimized_translation=optimized)
     except asyncio.TimeoutError as e:
         raise_llm_service_unavailable(operation="Optimization", exc=e, timeout_s=timeout_s)
     except Exception as e:

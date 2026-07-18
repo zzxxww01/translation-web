@@ -18,6 +18,7 @@ import { useExportProject } from '../hooks';
 import { ProjectSelector } from './ProjectSelector';
 import { SectionList } from './SectionList';
 import { ModelSelector } from '@/components/ModelSelector';
+import { cn } from '@/shared/utils';
 
 interface DocumentSidebarProps {
   sections: Section[];
@@ -33,6 +34,8 @@ interface DocumentSidebarProps {
   currentStep?: string | null;
   activeTranslationProjectId?: string | null;
   projectId?: string;
+  className?: string;
+  onNavigate?: () => void;
 }
 
 export function DocumentSidebar({
@@ -49,6 +52,8 @@ export function DocumentSidebar({
   currentStep,
   activeTranslationProjectId,
   projectId,
+  className,
+  onNavigate,
 }: DocumentSidebarProps) {
   const [exportFormat, setExportFormat] = useState<'en' | 'zh'>('zh');
   const [selectedMethod, setSelectedMethod] = useState<TranslationMethod>(
@@ -78,9 +83,21 @@ export function DocumentSidebar({
     Boolean(activeTranslationProjectId && projectId && activeTranslationProjectId !== projectId);
 
   return (
-    <aside className="flex h-full w-72 flex-col border-r border-border-subtle bg-bg-secondary">
+    <aside
+      className={cn(
+        'flex h-full min-h-0 w-72 shrink-0 flex-col border-r border-border-subtle bg-bg-secondary',
+        className
+      )}
+      aria-label="文档项目与章节导航"
+    >
       <div className="border-b border-border-subtle p-3">
-        <ProjectSelector onNewProject={onNewProject} />
+        <ProjectSelector
+          onNewProject={() => {
+            onNavigate?.();
+            onNewProject();
+          }}
+          onProjectChange={onNavigate}
+        />
       </div>
 
       <div className="flex-1 overflow-y-auto p-3">
@@ -92,7 +109,10 @@ export function DocumentSidebar({
             <SectionList
               sections={sections}
               activeSectionId={activeSectionId || undefined}
-              onSelectSection={onSectionSelect}
+              onSelectSection={(sectionId) => {
+                onSectionSelect(sectionId);
+                onNavigate?.();
+              }}
             />
           </>
         ) : (
@@ -104,7 +124,7 @@ export function DocumentSidebar({
       </div>
 
       {totalParagraphs > 0 && (
-        <div className="space-y-3 border-t border-border-subtle p-3">
+        <div className="max-h-[62svh] shrink-0 space-y-3 overflow-y-auto overscroll-contain border-t border-border-subtle p-3">
           <div>
             <div className="mb-2 flex justify-between text-sm">
               <span className="font-medium text-text-secondary">翻译进度</span>
@@ -112,7 +132,11 @@ export function DocumentSidebar({
                 {approvedParagraphs}/{totalParagraphs}
               </span>
             </div>
-            <Progress value={progressPercent} className="h-2" />
+            <Progress
+              value={progressPercent}
+              className="h-2"
+              aria-label={`翻译审核进度 ${progressPercent.toFixed(0)}%`}
+            />
             <p className="mt-1 text-right text-sm text-text-muted">{progressPercent.toFixed(0)}%</p>
           </div>
 
@@ -145,7 +169,11 @@ export function DocumentSidebar({
                   )}
                 </div>
               </div>
-              <Progress value={translateProgressPercent} className="h-1.5" />
+              <Progress
+                value={translateProgressPercent}
+                className="h-1.5"
+                aria-label={`全文翻译进度 ${translateProgressPercent.toFixed(0)}%`}
+              />
             </div>
           )}
 
@@ -153,7 +181,7 @@ export function DocumentSidebar({
             <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
               另一个项目正在翻译中：
               <span className="mx-1 font-medium">{activeTranslationProjectId}</span>
-              现在启动当前项目会先停止它，再等待切换。
+              当前项目仍可独立启动翻译。
             </div>
           )}
 
@@ -184,7 +212,7 @@ export function DocumentSidebar({
 
               <Collapsible open={advancedOpen} onOpenChange={setAdvancedOpen}>
                 <CollapsibleTrigger asChild>
-                  <button className="flex w-full items-center gap-1 rounded px-2 py-1 text-xs text-text-muted hover:bg-bg-tertiary">
+                  <button type="button" className="flex w-full items-center gap-1 rounded px-2 py-1 text-xs text-text-muted hover:bg-bg-tertiary">
                     <ChevronDown className={`h-3 w-3 transition-transform ${advancedOpen ? 'rotate-180' : ''}`} />
                     高级选项
                   </button>
@@ -245,7 +273,7 @@ export function DocumentSidebar({
           {projectId && (
             <Collapsible open={exportOpen} onOpenChange={setExportOpen}>
               <CollapsibleTrigger asChild>
-                <button className="flex w-full items-center gap-1 rounded px-2 py-1 text-xs text-text-muted hover:bg-bg-tertiary">
+                <button type="button" className="flex w-full items-center gap-1 rounded px-2 py-1 text-xs text-text-muted hover:bg-bg-tertiary">
                   <ChevronDown className={`h-3 w-3 transition-transform ${exportOpen ? 'rotate-180' : ''}`} />
                   导出文章
                 </button>

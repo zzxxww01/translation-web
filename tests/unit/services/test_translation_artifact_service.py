@@ -34,3 +34,28 @@ def test_artifact_service_infers_latest_run_state_from_summary(tmp_path):
     assert inferred.run_id == run_id
     assert inferred.status == "completed"
     assert inferred.error_count == 1
+
+
+def test_artifact_service_persists_live_run_state(tmp_path):
+    service = TranslationArtifactService(tmp_path)
+    run_id, _run_dir = service.create_run_artifact_dir("demo")
+
+    service.write_run_state(
+        "demo",
+        run_id,
+        {
+            "status": "processing",
+            "current_step": "翻译章节",
+            "current_section": "section-2",
+            "started_at": "2026-04-21T12:00:00",
+            "error_count": 0,
+        },
+    )
+
+    inferred = service.infer_run_state("demo")
+
+    assert inferred is not None
+    assert inferred.run_id == run_id
+    assert inferred.status == "processing"
+    assert inferred.current_step == "翻译章节"
+    assert inferred.current_section == "section-2"

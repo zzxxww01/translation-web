@@ -15,6 +15,8 @@ export interface TranslationIssueDTO {
   why_it_matters: string;
   suggestion: string;
   auto_fixed: boolean;
+  revision_attempted?: boolean;
+  auto_fixable?: boolean;
   revised_text?: string;
   fix_method?: string;
 }
@@ -31,7 +33,7 @@ export interface QualityIssue {
   translation_text: string;
   description: string;
   suggestion?: string;
-  status: 'pending' | 'auto_fixed' | 'manual_fixed' | 'dismissed';
+  status: 'pending' | 'revision_attempted' | 'auto_fixed' | 'manual_fixed' | 'dismissed';
   fixed_text?: string;
   why_it_matters: string;
 }
@@ -122,7 +124,11 @@ export function toQualityIssue(dto: TranslationIssueDTO, index: number): Quality
     translation_text: '', // 需要从其他地方获取
     description: dto.description,
     suggestion: dto.suggestion,
-    status: dto.auto_fixed ? 'auto_fixed' : 'pending',
+    status: dto.auto_fixed
+      ? 'auto_fixed'
+      : dto.revision_attempted
+        ? 'revision_attempted'
+        : 'pending',
     fixed_text: dto.revised_text,
     why_it_matters: dto.why_it_matters,
   };

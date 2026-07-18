@@ -9,6 +9,7 @@ from dataclasses import dataclass, field
 from typing import Callable, Iterable, List, Optional, Sequence
 
 from .models import InlineElement, Paragraph
+from .protected_terms import preserve_protected_terms
 
 logger = logging.getLogger(__name__)
 
@@ -316,7 +317,10 @@ def build_translation_payload(
     token_repairer: Optional[TokenRepairer] = None,
 ) -> TranslationPayload:
     """Normalize model output into a saved translation payload."""
-    candidate = (translated_tokenized_text or "").strip()
+    candidate = preserve_protected_terms(
+        paragraph.source,
+        (translated_tokenized_text or "").strip(),
+    )
     if not paragraph.inline_elements:
         return TranslationPayload(
             text=candidate,
@@ -341,6 +345,8 @@ def build_translation_payload(
             if len(repaired_issues) < len(issues):
                 candidate = repaired_candidate
                 issues = repaired_issues
+
+    candidate = preserve_protected_terms(paragraph.source, candidate)
 
     return TranslationPayload(
         text=strip_token_markup(candidate),

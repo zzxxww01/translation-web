@@ -124,26 +124,4 @@ async def format_for_wechat(request: Request, body: WechatFormatRequest):
 @router.get("/wechat/themes", response_model=WechatThemesResponse)
 async def get_wechat_themes():
     """获取所有可用主题"""
-    # 主题元数据映射
-    theme_metadata = {
-        "default": {"name": "经典", "description": "专业稳重的经典风格"},
-        "grace": {"name": "优雅", "description": "精致美观的优雅风格"},
-        "simple": {"name": "简洁", "description": "清爽简约的极简风格"},
-    }
-
-    # 直接扫描文件系统
-    from pathlib import Path
-    themes_dir = Path(__file__).parent.parent.parent / "prompts" / "wechat_themes"
-    theme_files = [f.stem for f in themes_dir.glob("*.css") if f.stem != "base"]
-
-    # 构建主题对象列表
-    themes = [
-        ThemeInfo(
-            id=theme_id,
-            name=theme_metadata.get(theme_id, {}).get("name", theme_id),
-            description=theme_metadata.get(theme_id, {}).get("description", ""),
-        )
-        for theme_id in sorted(theme_files)
-    ]
-
-    return {"themes": themes}
+    return {"themes": [ThemeInfo(**theme) for theme in list_themes()]}

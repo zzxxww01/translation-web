@@ -51,13 +51,15 @@ const severityColors = {
 
 const statusLabels: Record<IssueStatus, string> = {
   pending: '待审核',
-  auto_fixed: '已自动修复',
+  revision_attempted: '已尝试修订',
+  auto_fixed: '已验证修复',
   manual_fixed: '已手动修复',
   dismissed: '已忽略',
 };
 
 const statusColors = {
   pending: 'warning',
+  revision_attempted: 'info',
   auto_fixed: 'success',
   manual_fixed: 'success',
   dismissed: 'default',
@@ -230,7 +232,9 @@ export function IssueList({ issues, onIssueClick }: IssueListProps) {
 
                 {issue.fixed_text && (
                   <div>
-                    <p className="text-xs font-medium text-green-600 mb-1">修复后文本</p>
+                    <p className="text-xs font-medium text-green-600 mb-1">
+                      {issue.status === 'revision_attempted' ? '修订后文本（待验证）' : '修复后文本'}
+                    </p>
                     <p className="text-sm text-green-700 bg-green-50 p-2 rounded border border-green-200">
                       {issue.fixed_text}
                     </p>

@@ -1,5 +1,5 @@
 {
-  "version": 30,
+  "version": 31,
   "terms": [
     {
       "original": "TSMC",
@@ -565,9 +565,9 @@
     },
     {
       "original": "token",
-      "translation": "词元",
-      "strategy": "preserve_annotate",
-      "note": "不翻译，保留原文",
+      "translation": "token",
+      "strategy": "preserve",
+      "note": "强制保留英文 token，不译为“词元”",
       "tags": [
         "ai"
       ],

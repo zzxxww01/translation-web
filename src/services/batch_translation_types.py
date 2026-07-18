@@ -16,7 +16,9 @@ class TranslationProgress:
         total_sections: int,
         total_paragraphs: int,
         original_status: ProjectStatus,
+        project_id: str = "",
     ):
+        self.project_id = project_id
         self.total_sections = total_sections
         self.total_paragraphs = total_paragraphs
         self.original_status = original_status
@@ -47,6 +49,7 @@ class TranslationProgress:
     def to_dict(self) -> Dict:
         """转换为字典"""
         return {
+            "project_id": self.project_id,
             "total_sections": self.total_sections,
             "total_paragraphs": self.total_paragraphs,
             "translated_sections": self.translated_sections,

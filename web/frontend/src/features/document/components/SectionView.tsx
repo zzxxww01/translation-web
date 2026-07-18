@@ -39,7 +39,7 @@ export function SectionView({
   }
 
   return (
-    <div className="mx-auto max-w-3xl py-6">
+    <div className="mx-auto max-w-3xl px-4 py-5 sm:px-6 sm:py-6">
       {/* 刷新指示器 */}
       {isRefetching && (
         <div className="mb-4 flex items-center justify-center text-sm text-text-muted">
@@ -49,8 +49,8 @@ export function SectionView({
       )}
 
       {/* 章节标题 */}
-      <div className="mb-6 flex items-start justify-between gap-3">
-        <div>
+      <div className="mb-6 flex flex-col items-start justify-between gap-3 sm:flex-row">
+        <div className="min-w-0">
           <h2 className="text-xl font-bold">{currentSection.title}</h2>
           {currentSection.title_translation && (
             <p className="text-text-muted">{currentSection.title_translation}</p>
@@ -60,6 +60,7 @@ export function SectionView({
           <Button
             variant="outline"
             size="sm"
+            type="button"
             onClick={onEnterImmersive}
             leftIcon={<Maximize2 className="h-4 w-4" />}
           >
@@ -90,7 +91,7 @@ export function SectionView({
       </div>
 
       {/* 底部导航 */}
-      <div className="mt-6 flex justify-center">
+      <div className="sticky bottom-0 z-10 -mx-4 mt-6 flex justify-center border-t bg-background/95 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur-sm sm:static sm:mx-0 sm:border-0 sm:bg-transparent sm:px-0 sm:pb-3 sm:backdrop-blur-none">
         <SectionNavigation
           sections={sections}
           currentSection={currentSection}

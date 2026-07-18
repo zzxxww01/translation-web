@@ -5,16 +5,20 @@ Tasks Router - 任务管理 API
 """
 
 import json
+import threading
 from pathlib import Path
 from typing import List
 
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
 
+from src.api.utils.concurrency import run_blocking
+from src.core.file_utils import write_json_atomic
 
 router = APIRouter(prefix="", tags=["tasks"])
 
 TASKS_FILE = Path("data/tasks.json")
+_tasks_lock = threading.RLock()
 
 
 # ============ Models ============
@@ -63,25 +67,25 @@ DEFAULT_TASKS = [
 
 
 def _write_tasks(tasks: List[dict]) -> None:
-    TASKS_FILE.parent.mkdir(parents=True, exist_ok=True)
-    with open(TASKS_FILE, "w", encoding="utf-8") as f:
-        json.dump({"tasks": tasks}, f, ensure_ascii=False, indent=2)
+    with _tasks_lock:
+        write_json_atomic(TASKS_FILE, {"tasks": tasks})
 
 
 def _load_tasks_or_default() -> List[dict]:
-    if not TASKS_FILE.exists():
-        _write_tasks(DEFAULT_TASKS)
-        return DEFAULT_TASKS
+    with _tasks_lock:
+        if not TASKS_FILE.exists():
+            _write_tasks(DEFAULT_TASKS)
+            return DEFAULT_TASKS
 
-    try:
-        with open(TASKS_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        tasks = data.get("tasks", [])
-        return tasks if isinstance(tasks, list) else DEFAULT_TASKS
-    except (json.JSONDecodeError, OSError, TypeError):
-        # 文件损坏时回退默认值，保证接口可用
-        _write_tasks(DEFAULT_TASKS)
-        return DEFAULT_TASKS
+        try:
+            with open(TASKS_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            tasks = data.get("tasks", [])
+            return tasks if isinstance(tasks, list) else DEFAULT_TASKS
+        except (json.JSONDecodeError, OSError, TypeError):
+            # 文件损坏时回退默认值，保证接口可用
+            _write_tasks(DEFAULT_TASKS)
+            return DEFAULT_TASKS
 
 
 # ============ API Endpoints ============
@@ -90,11 +94,11 @@ def _load_tasks_or_default() -> List[dict]:
 @router.get("/tasks")
 async def get_tasks():
     """获取所有任务"""
-    return _load_tasks_or_default()
+    return await run_blocking(_load_tasks_or_default)
 
 
 @router.post("/tasks")
 async def save_tasks(tasks: List[Task]):
     """保存所有任务"""
-    _write_tasks([t.model_dump() for t in tasks])
+    await run_blocking(_write_tasks, [t.model_dump() for t in tasks])
     return {"message": "Tasks saved", "count": len(tasks)}

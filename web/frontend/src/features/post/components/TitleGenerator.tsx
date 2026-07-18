@@ -4,23 +4,40 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
 import { Sparkles, Copy, Loader2 } from 'lucide-react';
 import { copyToClipboard } from '@/shared/utils';
+import { TITLE_INSTRUCTION_MAX_LENGTH } from '../types';
 
 interface TitleGeneratorProps {
   onGenerate: (instruction?: string) => Promise<string[]>;
   isLoading: boolean;
   isGenerating: boolean;
   canGenerate: boolean;
+  contentIdentity: string;
 }
 
-export function TitleGenerator({ onGenerate, isLoading, isGenerating, canGenerate }: TitleGeneratorProps) {
+export function TitleGenerator({
+  onGenerate,
+  isLoading,
+  isGenerating,
+  canGenerate,
+  contentIdentity,
+}: TitleGeneratorProps) {
   const [instruction, setInstruction] = useState('');
-  const [titles, setTitles] = useState<string[]>([]);
+  const [titleResult, setTitleResult] = useState<{
+    contentIdentity: string;
+    titles: string[];
+  } | null>(null);
+  const titles =
+    titleResult?.contentIdentity === contentIdentity ? titleResult.titles : [];
 
   const handleGenerate = async () => {
-    const result = await onGenerate(instruction.trim() || undefined);
-    setTitles(result);
-    if (result.length === 0) {
-      toast.info('内容太短，先补充原文或译文后再生成标题');
+    setTitleResult({ contentIdentity, titles: [] });
+    try {
+      const result = await onGenerate(instruction.trim() || undefined);
+      if (result.length > 0) {
+        setTitleResult({ contentIdentity, titles: result });
+      }
+    } catch {
+      // 请求错误由统一 mutation 错误处理器展示。
     }
   };
 
@@ -41,6 +58,7 @@ export function TitleGenerator({ onGenerate, isLoading, isGenerating, canGenerat
           <Button
             size="sm"
             variant="outline"
+            type="button"
             onClick={handleGenerate}
             disabled={isLoading || !canGenerate}
             className="h-10 min-w-24 sm:h-9 sm:min-w-0"
@@ -54,6 +72,8 @@ export function TitleGenerator({ onGenerate, isLoading, isGenerating, canGenerat
           <Input
             value={instruction}
             onChange={(e) => setInstruction(e.target.value)}
+            maxLength={TITLE_INSTRUCTION_MAX_LENGTH}
+            aria-label="标题生成要求"
             placeholder="标题要求（可选），例如：突出核心观点，语气克制"
             disabled={isLoading}
             className="h-10 w-full"

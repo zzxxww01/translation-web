@@ -134,7 +134,8 @@ function buildQualityReportMarkdown(
     `- 生成时间：${formatDate(report.generated_at)}`,
     `- 总体评分：${report.overall_score}`,
     `- 问题总数：${report.total_issues}`,
-    `- 已自动修复：${report.issues_by_status.auto_fixed || 0}`,
+    `- 已验证修复：${report.issues_by_status.auto_fixed || 0}`,
+    `- 已尝试修订：${report.issues_by_status.revision_attempted || 0}`,
     `- 待人工复核：${report.issues_by_status.pending || 0}`,
     '',
     '## 主要问题类型',
@@ -335,7 +336,7 @@ export function QualityReportPage() {
         </CardContent>
       </Card>
 
-      <section className="mb-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+      <section className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardContent className="p-5">
             <p className="text-sm text-gray-500">问题总数</p>
@@ -350,7 +351,15 @@ export function QualityReportPage() {
         </Card>
         <Card>
           <CardContent className="p-5">
-            <p className="text-sm text-gray-500">已自动修复</p>
+            <p className="text-sm text-gray-500">已尝试修订</p>
+            <p className="mt-2 text-3xl font-bold text-gray-900">
+              {report.issues_by_status.revision_attempted || 0}
+            </p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-5">
+            <p className="text-sm text-gray-500">已验证修复</p>
             <p className="mt-2 text-3xl font-bold text-gray-900">
               {report.issues_by_status.auto_fixed || 0}
             </p>

@@ -135,6 +135,9 @@ class QualityReportService:
                 sections=sections,
                 total_issues=len(all_issues),
                 auto_fixed_issues=auto_fixed_count,
+                revision_attempted_issues=sum(
+                    1 for issue in all_issues if issue.revision_attempted
+                ),
                 manual_review_issues=manual_review_count,
                 consistency_stats=consistency_stats,
                 issues=all_issues,
@@ -240,24 +243,30 @@ class QualityReportService:
                 logger.warning(f"Failed to parse issue in {section_id}: {e}")
                 continue
 
-        # 检查是否有 section-revision
+        # A revision artifact records an attempted refinement, not a verified fix.
         revision_file = run_dir / "section-revision" / f"{section_id}.json"
-        if revision_file.exists() and not reflection.get("is_excellent", False):
+        if revision_file.exists():
             try:
                 with open(revision_file, "r", encoding="utf-8") as f:
                     revision_data = json.load(f)
 
-                revised_translations = revision_data.get("translations", [])
+                revision_attempted = revision_data.get("revision_attempted") is True
+                raw_translations = revision_data.get("translations", [])
+                revised_translations = (
+                    raw_translations if isinstance(raw_translations, list) else []
+                )
 
                 for issue in issues:
-                    issue.auto_fixed = True
-                    issue.fix_method = "step4_refine"
-                    # 尝试匹配修复后的文本
-                    if 0 <= issue.paragraph_index < len(revised_translations):
+                    issue.revision_attempted = revision_attempted
+                    if revision_attempted:
+                        issue.fix_method = issue.fix_method or "step4_refine"
+                    if (
+                        revision_attempted
+                        and 0 <= issue.paragraph_index < len(revised_translations)
+                    ):
                         issue.revised_text = revised_translations[issue.paragraph_index]
             except (json.JSONDecodeError, IOError) as e:
                 logger.warning(f"Failed to read {revision_file}: {e}")
-                # 继续执行，但不标记为已修复
 
         return issues
 
@@ -289,12 +298,23 @@ class QualityReportService:
             paragraph_count = 0
             revision_file = run_dir / "section-revision" / f"{section_id}.json"
             draft_file = run_dir / "section-draft" / f"{section_id}.json"
+            revision_attempted = False
+            revised_translations: List[str] = []
 
             if revision_file.exists():
                 try:
                     with open(revision_file, "r", encoding="utf-8") as f:
                         revision_data = json.load(f)
-                        paragraph_count = len(revision_data.get("translations", []))
+                        revision_attempted = (
+                            revision_data.get("revision_attempted") is True
+                        )
+                        raw_translations = revision_data.get("translations", [])
+                        revised_translations = (
+                            raw_translations
+                            if isinstance(raw_translations, list)
+                            else []
+                        )
+                        paragraph_count = len(revised_translations)
                 except (json.JSONDecodeError, IOError):
                     pass
 
@@ -312,6 +332,13 @@ class QualityReportService:
             for issue_data in reflection.get("issues", []):
                 try:
                     issue = TranslationIssue(**issue_data)
+                    if revision_attempted:
+                        issue.revision_attempted = True
+                        issue.fix_method = issue.fix_method or "step4_refine"
+                        if 0 <= issue.paragraph_index < len(revised_translations):
+                            issue.revised_text = revised_translations[
+                                issue.paragraph_index
+                            ]
                     issues.append(
                         self._to_report_issue(
                             issue=issue,
@@ -325,17 +352,12 @@ class QualityReportService:
 
             issue_count = len(issues)
 
-            # 检查是否有修复
-            section_auto_fixed = 0
-            if revision_file.exists() and not reflection.get("is_excellent", False):
-                # 标记所有问题为已修复
-                for issue in issues:
-                    issue.auto_fixed = True
-                    issue.fix_method = "step4_refine"
-                section_auto_fixed = issue_count
-                auto_fixed_count += section_auto_fixed
-            else:
-                manual_review_count += issue_count
+            section_auto_fixed = sum(1 for issue in issues if issue.auto_fixed)
+            section_revision_attempted = sum(
+                1 for issue in issues if issue.revision_attempted
+            )
+            auto_fixed_count += section_auto_fixed
+            manual_review_count += issue_count - section_auto_fixed
 
             all_issues.extend(issues)
 
@@ -351,12 +373,13 @@ class QualityReportService:
                     is_excellent=reflection.get("is_excellent", False),
                     issue_count=issue_count,
                     auto_fixed_count=section_auto_fixed,
+                    revision_attempted_count=section_revision_attempted,
                     manual_review_count=issue_count - section_auto_fixed,
                     paragraph_count=paragraph_count,
                 )
             )
 
-        # 检查 consistency.json 中的 auto_fixable 问题
+        # "auto_fixable" describes capability, not evidence that a fix ran.
         auto_fixable_issues = consistency_stats.get("auto_fixable", [])
         for issue_data in auto_fixable_issues:
             try:
@@ -365,17 +388,16 @@ class QualityReportService:
                     issue_type=issue_data.get("issue_type", "consistency"),
                     severity="medium",
                     description=issue_data.get("description", ""),
-                    auto_fixed=True,
-                    fix_method="consistency_auto_fix",
+                    auto_fixed=False,
                 )
-                all_issues.append(
-                    self._to_report_issue(
-                        issue=issue,
-                        section_id=issue_data.get("section_id", "consistency"),
-                        section_title="Consistency",
-                    )
+                report_issue = self._to_report_issue(
+                    issue=issue,
+                    section_id=issue_data.get("section_id", "consistency"),
+                    section_title="Consistency",
                 )
-                auto_fixed_count += 1
+                report_issue.auto_fixable = True
+                all_issues.append(report_issue)
+                manual_review_count += 1
             except Exception as e:
                 logger.warning(f"Failed to parse consistency issue: {e}")
                 continue
@@ -400,6 +422,7 @@ class QualityReportService:
             why_it_matters=issue.why_it_matters or "",
             suggestion=issue.suggestion or "",
             auto_fixed=issue.auto_fixed,
+            revision_attempted=issue.revision_attempted,
             revised_text=issue.revised_text,
             fix_method=issue.fix_method,
         )

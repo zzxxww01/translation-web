@@ -10,6 +10,7 @@ from pydantic import BaseModel
 from ...core.models import Section
 from ...core.segmentation import SegmentationStrategy
 from ..middleware import BadRequestException
+from ..utils.concurrency import run_blocking
 
 
 router = APIRouter(prefix="/segmentation", tags=["segmentation"])
@@ -57,6 +58,12 @@ async def create_confirmation_units(
 
     将已翻译段落按策略合并为确认单元，供用户逐个确认。
     """
+    return await run_blocking(_create_confirmation_units_sync, request)
+
+
+def _create_confirmation_units_sync(
+    request: CreateConfirmationUnitsRequest,
+) -> CreateConfirmationUnitsResponse:
     try:
         config = request.config or SegmentationConfig()
         strategy = SegmentationStrategy(
@@ -65,11 +72,14 @@ async def create_confirmation_units(
             confirmation_max_size=config.confirmation_max_size,
         )
         sections = [Section(**item) for item in request.sections]
-    except Exception as e:
-        raise BadRequestException(detail=f"参数错误: {e}")
-
-    all_paragraphs = [para for section in sections for para in section.paragraphs]
-    units = strategy.create_confirmation_units(all_paragraphs)
+        all_paragraphs = [
+            paragraph
+            for section in sections
+            for paragraph in section.paragraphs
+        ]
+        units = strategy.create_confirmation_units(all_paragraphs)
+    except Exception as error:
+        raise BadRequestException(detail=f"参数错误: {error}") from error
 
     unit_responses = [
         ConfirmationUnitResponse(

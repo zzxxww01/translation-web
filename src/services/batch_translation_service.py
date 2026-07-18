@@ -11,6 +11,7 @@
 
 import asyncio
 import json
+import re
 import time
 from pathlib import Path
 from typing import Any, Awaitable, List, Optional, Dict, Callable
@@ -70,6 +71,11 @@ from src.services.translation_run_registry import (
     translation_run_registry,
 )
 from src.services.section_translation_executor import SectionTranslationExecutor
+from src.services.term_review_artifact import (
+    SUBMISSION_SUBMITTED,
+    is_current_term_review_artifact,
+    is_legacy_term_review_artifact,
+)
 from src.llm.usage_metrics import llm_usage_metrics
 
 
@@ -102,7 +108,7 @@ class BatchTranslationService:
         llm_provider: LLMProvider,
         project_manager: ProjectManager,
         translation_mode: str = "section",  # 默认使用章节级翻译
-        max_concurrent_sections: int = 10,  # 最大并发章节数（提高到10）
+        max_concurrent_sections: int = 10,  # 保留兼容；跨章节按文档顺序提交
         analysis_llm_provider: Optional[LLMProvider] = None,
         user_model_override: Optional[str] = None,  # 用户指定的模型（全流程使用）
     ):
@@ -113,7 +119,7 @@ class BatchTranslationService:
             llm_provider: LLM Provider（用于向后兼容）
             project_manager: 项目管理器
             translation_mode: 翻译模式 ("four_step" 或 "section")
-            max_concurrent_sections: 最大并发章节数（默认10，VectorEngine可支持更高）
+            max_concurrent_sections: 兼容旧调用方；章节现按文档顺序翻译
             analysis_llm_provider: 分析专用LLM（可选）
             user_model_override: 用户指定的模型名称，如果提供则全流程使用该模型
         """
@@ -171,9 +177,12 @@ class BatchTranslationService:
             four_step_translate_section=self.translator.translate_section,
             create_section_callback=self._create_section_callback,
             apply_four_step_translations=self._apply_four_step_translations,
-            # 章节循环只写章节，不每次都全量重算进度（避免 O(N²) 读盘）；
-            # 进度在所有章节 gather 完成后由 update_progress() 统一聚合一次。
-            save_section=self.project_manager.save_section_only,
+            # 章节循环仅合并本次生成的段落，不覆盖并发人工编辑，也不每章
+            # 全量重算进度；所有章节完成后统一聚合一次。
+            merge_translation_updates=(
+                self.project_manager.merge_translation_updates_locked
+            ),
+            commit_four_step_result=self.translator.commit_section_feedback,
         )
 
     def _get_provider_for_phase(self, phase: str) -> LLMProvider:
@@ -186,6 +195,8 @@ class BatchTranslationService:
         Returns:
             LLMProvider实例
         """
+        llm_usage_metrics.set_phase(phase)
+
         # 如果用户指定了模型，全流程使用该模型
         if self.user_model_override:
             model_config = self.model_config.get_model_for_phase(phase, model_override=self.user_model_override)
@@ -208,15 +219,12 @@ class BatchTranslationService:
     def _is_cancelled(self, project_id: str) -> bool:
         return self._run_registry.is_cancelled(project_id)
 
-    def _mark_cancelled(self, project_id: str) -> None:
-        self._run_registry.mark_cancelled(project_id)
-
     def _clear_cancelled(self, project_id: str) -> None:
         self._run_registry.clear_cancelled(project_id)
 
     @classmethod
-    def _get_active_run(cls):
-        return translation_run_registry.get_active_run()
+    def _get_active_run(cls, project_id: Optional[str] = None):
+        return translation_run_registry.get_active_run(project_id)
 
     @classmethod
     def _set_active_run(
@@ -238,8 +246,13 @@ class BatchTranslationService:
         project_id: str,
         *,
         run_id: Optional[str] = None,
+        lease_id: Optional[str] = None,
     ) -> None:
-        translation_run_registry.release_active_run(project_id, run_id=run_id)
+        translation_run_registry.release_active_run(
+            project_id,
+            run_id=run_id,
+            lease_id=lease_id,
+        )
 
     @classmethod
     async def claim_translation_slot(
@@ -249,10 +262,8 @@ class BatchTranslationService:
         wait_timeout: float = 300.0,
         poll_interval: float = 0.5,
     ) -> Dict[str, Any]:
-        other_service = cls.__new__(cls)
         return await translation_run_registry.claim_translation_slot(
             project_id,
-            other_service.cancel_translation,
             wait_timeout=wait_timeout,
             poll_interval=poll_interval,
         )
@@ -284,6 +295,12 @@ class BatchTranslationService:
 
     def _load_latest_run_summary(self, project_id: str) -> Optional[Dict[str, Any]]:
         return self._artifact_service.load_latest_run_summary(project_id)
+
+    def _load_latest_run_snapshot(
+        self,
+        project_id: str,
+    ) -> tuple[Optional[Dict[str, Any]], Optional[RunStateSnapshot]]:
+        return self._artifact_service.load_latest_run_snapshot(project_id)
 
     def _get_latest_run_dir(self, project_id: str) -> Optional[Path]:
         return self._artifact_service.get_latest_run_dir(project_id)
@@ -549,11 +566,49 @@ class BatchTranslationService:
             logger.warning("Failed to load term-review artifact %s: %s", latest_path, exc)
             return []
 
+        is_current_artifact = is_current_term_review_artifact(payload)
+        is_legacy_artifact = is_legacy_term_review_artifact(payload)
+        if not is_current_artifact and not is_legacy_artifact:
+            logger.warning(
+                "Ignoring term-review artifact with unsupported schema: %s",
+                latest_path,
+            )
+            return []
+        if (
+            is_current_artifact
+            and payload.get("submission_status") != SUBMISSION_SUBMITTED
+        ):
+            return []
+
+        raw_decisions = payload.get("decisions")
+        has_submitted_decisions = isinstance(raw_decisions, list)
+        if is_current_artifact and not has_submitted_decisions:
+            logger.warning(
+                "Ignoring submitted term-review artifact without decisions: %s",
+                latest_path,
+            )
+            return []
+        decisions_by_term = {
+            re.sub(r"\s+", " ", str(decision.get("term") or "").strip()).lower(): decision
+            for decision in (raw_decisions or [])
+            if isinstance(decision, dict) and str(decision.get("term") or "").strip()
+        }
+
         terms: List[GlossaryTerm] = []
         for section in payload.get("sections", []):
             for candidate in section.get("candidates", []):
                 original = str(candidate.get("term") or "").strip()
-                translation = str(candidate.get("suggested_translation") or "").strip()
+                normalized_original = re.sub(r"\s+", " ", original).lower()
+                decision = decisions_by_term.get(normalized_original)
+                if has_submitted_decisions:
+                    action = str((decision or {}).get("action") or "").strip().lower()
+                    if not decision or action not in {"accept", "custom"}:
+                        continue
+                    translation = str(decision.get("translation") or "").strip()
+                else:
+                    # Only the explicitly recognized schema-less v1 shape keeps
+                    # the historical auto-seed behavior.
+                    translation = str(candidate.get("suggested_translation") or "").strip()
                 reasons = {
                     str(reason).strip().lower()
                     for reason in (candidate.get("reasons") or [])
@@ -622,41 +677,44 @@ class BatchTranslationService:
         project_id: str,
         analysis: ArticleAnalysis,
     ) -> Dict[str, Any]:
-        glossary = self.project_manager.glossary_manager.load_project(project_id)
-        global_glossary = self.project_manager.glossary_manager.load_global()
-        existing_terms = {
-            term.original.lower(): term
-            for term in glossary.terms
-            if term.status == "active"
-        }
+        glossary_manager = self.project_manager.glossary_manager
+        global_glossary = glossary_manager.load_global()
         global_terms = {
             term.original.lower(): term
             for term in global_glossary.terms
             if term.status == "active"
         }
-
-        added_terms: List[GlossaryTerm] = []
-        for candidate in [
+        seed_candidates = [
             *self._load_term_review_seed_terms(project_id),
             *self._build_analysis_seed_terms(analysis),
-        ]:
-            key = candidate.original.lower()
-            if key in existing_terms:
-                continue
-            global_term = global_terms.get(key)
-            if global_term is not None:
-                same_translation = (
-                    (global_term.translation or global_term.original)
-                    == (candidate.translation or candidate.original)
-                )
-                if same_translation and global_term.strategy == candidate.strategy:
-                    continue
-            glossary.add_term(candidate)
-            existing_terms[key] = candidate
-            added_terms.append(candidate)
+        ]
 
-        if added_terms:
-            self.project_manager.glossary_manager.save_project(project_id, glossary)
+        added_terms: List[GlossaryTerm] = []
+        with glossary_manager.project_lock(project_id):
+            glossary = glossary_manager.load_project(project_id)
+            existing_terms = {
+                term.original.lower(): term
+                for term in glossary.terms
+                if term.status == "active"
+            }
+            for candidate in seed_candidates:
+                key = candidate.original.lower()
+                if key in existing_terms:
+                    continue
+                global_term = global_terms.get(key)
+                if global_term is not None:
+                    same_translation = (
+                        (global_term.translation or global_term.original)
+                        == (candidate.translation or candidate.original)
+                    )
+                    if same_translation and global_term.strategy == candidate.strategy:
+                        continue
+                glossary.add_term(candidate)
+                existing_terms[key] = candidate
+                added_terms.append(candidate)
+
+            if added_terms:
+                glossary_manager.save_project(project_id, glossary)
 
         return {
             "added": len(added_terms),
@@ -767,6 +825,15 @@ class BatchTranslationService:
         if current_section is not None:
             progress.current_section = current_section
         self._progress_cache().touch(progress)
+        if progress.run_id:
+            self._artifact_service.write_run_state(
+                progress.project_id,
+                progress.run_id,
+                {
+                    "status": progress.final_status or "processing",
+                    **progress.to_dict(),
+                },
+            )
 
     def _set_active_status(
         self,
@@ -813,12 +880,11 @@ class BatchTranslationService:
             pass
 
         # 加载项目
-        self._clear_cancelled(project_id)
         project = self._load_project_with_sections(project_id)
         original_status = project.status
         self.context_manager.reset_all()
+        self.translator.reset_feedback_history()
 
-        llm_usage_metrics.reset()
         project_start_time = time.monotonic()
 
         # 统计总数
@@ -834,6 +900,7 @@ class BatchTranslationService:
         )
 
         run_id, run_dir = self._create_run_artifact_dir(project_id)
+        llm_usage_metrics.start_run(run_id, project_id=project_id)
         progress.run_id = run_id
         self._touch_progress(progress)
         self._set_active_run(project_id, run_id=run_id, status="processing")
@@ -871,6 +938,7 @@ class BatchTranslationService:
             project.status = original_status
             self._save_meta(project_id, project)
 
+            usage_summary = llm_usage_metrics.finish_run(run_id)
             result = {
                 "project_id": project_id,
                 "status": "cancelled",
@@ -885,7 +953,8 @@ class BatchTranslationService:
                 "finished_at": progress.finished_at.isoformat(),
                 "run_id": run_id,
                 "artifacts_path": str(run_dir),
-                "api_calls": llm_usage_metrics.api_call_count(),
+                "api_calls": usage_summary["api_calls"],
+                "llm_usage": usage_summary,
                 "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
             }
             self._write_artifact_json(run_dir / "run-summary.json", result)
@@ -927,8 +996,9 @@ class BatchTranslationService:
             self.context_manager.set_article_analysis(analysis)
             self.context_manager.add_terms_from_analysis(analysis.terminology)
 
-            # 断点续传：预填充术语使用记录，让已译章节的术语不被重复加注
-            self._prepopulate_term_tracker(project)
+            # 从持久化快照建立运行时上下文。后续每章乐观合并后都会重建，
+            # 确保未落盘的 AI 草稿不会影响下一章。
+            self._rebuild_persisted_translation_context(project.sections)
 
             if self._is_cancelled(project_id):
                 return finalize_cancelled_result()
@@ -954,7 +1024,6 @@ class BatchTranslationService:
                 on_progress, "翻译标题", translated_count, total_paragraphs
             )
             await self._translate_title_and_metadata(project, analysis)
-            self._save_meta(project_id, project)
 
             if self._is_cancelled(project_id):
                 return finalize_cancelled_result()
@@ -983,54 +1052,44 @@ class BatchTranslationService:
                 sections=project.sections,
                 artifact_dir=run_dir,
             )
+            # Metadata/title writes merge into fresh section snapshots. Reload
+            # before body translation so prompt context also sees any manual
+            # edits made while the earlier LLM stages were running.
+            project.sections = self.project_manager.get_sections(project_id)
 
             # 更新项目状态为"翻译中"
             self._set_active_status(project_id, project, ProjectStatus.IN_PROGRESS)
 
-            # 并行翻译章节
+            # Prescan 必须先覆盖全部待译章节，再按文档顺序逐章翻译和提交。
+            # 四步法与章节模式都依赖前文章节、术语首现和已提交反馈；跨章节
+            # 并发会让这些状态取决于网络返回顺序。
             logger.info(
-                f"[{project_id}] Starting parallel section translation "
-                f"(mode: {self.translation_mode}, max_concurrent: {self.max_concurrent_sections})"
+                "[%s] Starting ordered section translation (mode: %s)",
+                project_id,
+                self.translation_mode,
             )
 
             # 收集所有翻译结果用于一致性审查
             all_translations = {}
             consistency_report = None
 
-            # 使用信号量控制并发数
-            semaphore = asyncio.Semaphore(self.max_concurrent_sections)
+            results = await self._translate_sections_in_document_order(
+                project_id=project_id,
+                project=project,
+                analysis=analysis,
+                run_dir=run_dir,
+                progress=progress,
+                on_progress=on_progress,
+                on_term_conflict=on_term_conflict,
+                total_paragraphs=total_paragraphs,
+            )
 
-            async def translate_section_with_limit(section_index: int, section: Section):
-                """带并发限制的章节翻译"""
-                async with semaphore:
-                    return await self._translate_single_section(
-                        project_id=project_id,
-                        section=section,
-                        section_index=section_index,
-                        total_sections=total_sections,
-                        all_sections=project.sections,
-                        analysis=analysis,
-                        run_dir=run_dir,
-                        progress=progress,
-                        on_progress=on_progress,
-                        on_term_conflict=on_term_conflict,
-                        project=project,
-                        total_paragraphs=total_paragraphs,
-                    )
-
-            # 创建所有翻译任务
-            tasks = [
-                translate_section_with_limit(i, section)
-                for i, section in enumerate(project.sections)
-            ]
-
-            # 并行执行所有任务
-            logger.info(f"[{project_id}] Launching {len(tasks)} section translation tasks")
-            results = await asyncio.gather(*tasks, return_exceptions=True)
-
-            # 所有章节已落盘（章节循环用 save_section_only，不逐次重算进度）；
-            # 此处统一聚合一次项目进度，避免每章保存都全量重读所有章节的 O(N²) 开销。
+            # All section deltas are persisted without per-section progress
+            # scans. Aggregate once, then reload the canonical snapshots so
+            # later reporting/export sees concurrent manual edits rather than
+            # generated in-memory candidates that lost a conflict.
             self.project_manager.update_progress(project_id)
+            project.sections = self.project_manager.get_sections(project_id)
 
             # 处理结果
             for i, result in enumerate(results):
@@ -1085,11 +1144,27 @@ class BatchTranslationService:
 
                 # 处理成功翻译的章节
                 all_translations[section.section_id] = result["translations"]
+                conflict_ids = result.get("conflict_paragraph_ids", [])
+                if conflict_ids:
+                    conflict_message = (
+                        "Skipped stale AI results for paragraphs changed during "
+                        f"translation: {', '.join(conflict_ids)}"
+                    )
+                    logger.info(
+                        "[%s] %s",
+                        project_id,
+                        conflict_message,
+                    )
+                    self._progress_tracker.record_error(
+                        progress,
+                        conflict_message,
+                        section.section_id,
+                    )
 
                 # 更新进度
                 section_paragraph_count = result["paragraph_count"]
                 translated_in_section = result["translated_before"]
-                translated_after_section = self._count_translated_paragraphs(section)
+                translated_after_section = result["translated_after"]
                 translated_delta = max(
                     translated_after_section - translated_in_section,
                     0,
@@ -1129,6 +1204,7 @@ class BatchTranslationService:
 
             quality_report = None
             try:
+                llm_usage_metrics.set_phase("phase3_review")
                 quality_report = self.quality_report_generator.generate_report(
                     sections=project.sections,
                     translations=all_translations,
@@ -1215,10 +1291,11 @@ class BatchTranslationService:
                 export_report,
             )
 
+            usage_summary = llm_usage_metrics.finish_run(run_id)
             logger.info(
                 "[%s] Translation completed: %d API calls, %.0fs elapsed",
                 project_id,
-                llm_usage_metrics.api_call_count(),
+                usage_summary["api_calls"],
                 time.monotonic() - project_start_time,
             )
             if not is_complete:
@@ -1242,7 +1319,8 @@ class BatchTranslationService:
                 "run_id": run_id,
                 "artifacts_path": str(run_dir),
                 "export": export_report,
-                "api_calls": llm_usage_metrics.api_call_count(),
+                "api_calls": usage_summary["api_calls"],
+                "llm_usage": usage_summary,
                 "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
             }
 
@@ -1273,6 +1351,7 @@ class BatchTranslationService:
             project.status = original_status
             self._save_meta(project_id, project)
 
+            usage_summary = llm_usage_metrics.finish_run(run_id)
             failure_result = {
                 "project_id": project_id,
                 "status": "failed",
@@ -1280,11 +1359,129 @@ class BatchTranslationService:
                 "errors": progress.errors,
                 "run_id": run_id,
                 "artifacts_path": str(run_dir),
+                "api_calls": usage_summary["api_calls"],
+                "llm_usage": usage_summary,
+                "elapsed_seconds": round(time.monotonic() - project_start_time, 1),
             }
             self._write_artifact_json(run_dir / "run-summary.json", failure_result)
             self._clear_cancelled(project_id)
             self._release_active_run(project_id, run_id=run_id)
             return failure_result
+
+    async def _translate_sections_in_document_order(
+        self,
+        *,
+        project_id: str,
+        project: ProjectMeta,
+        analysis: ArticleAnalysis,
+        run_dir: Path,
+        progress: TranslationProgress,
+        on_progress: Optional[Callable[[str, int, int], None]],
+        on_term_conflict: Optional[
+            Callable[[TermConflict], Awaitable[Dict[str, Any]]]
+        ],
+        total_paragraphs: int,
+    ) -> List[Any]:
+        """Prescan all sections, then generate and persist them in document order."""
+        planned_section_ids = [
+            section.section_id
+            for section in project.sections
+        ]
+
+        logger.info(
+            "[%s] Prescanning %d sections before translation",
+            project_id,
+            len(planned_section_ids),
+        )
+        for section_id in planned_section_ids:
+            if self._is_cancelled(project_id):
+                return []
+            section = next(
+                (
+                    candidate
+                    for candidate in project.sections
+                    if candidate.section_id == section_id
+                ),
+                None,
+            )
+            if section is None:
+                continue
+            await self._section_executor.prescan(
+                project_id=project_id,
+                section=section,
+                run_dir=run_dir,
+                progress=progress,
+                on_term_conflict=on_term_conflict,
+            )
+
+        results: List[Any] = []
+        for section_id in planned_section_ids:
+            if self._is_cancelled(project_id):
+                break
+
+            # Refresh before generation so manual edits made during prescan or a
+            # previous chapter's LLM call are part of the optimistic snapshot.
+            project.sections = self.project_manager.get_sections(project_id)
+            section_index = next(
+                (
+                    index
+                    for index, candidate in enumerate(project.sections)
+                    if candidate.section_id == section_id
+                ),
+                None,
+            )
+            if section_index is None:
+                results.append(
+                    RuntimeError(
+                        f"Section disappeared during translation: {section_id}"
+                    )
+                )
+                continue
+
+            # Runtime context for this chapter contains only the canonical
+            # document prefix. Persisted future chapters must not suppress a
+            # FIRST_ANNOTATE occurrence in an earlier chapter.
+            self._rebuild_persisted_translation_context(
+                project.sections[: section_index + 1]
+            )
+            section = project.sections[section_index]
+            try:
+                result = await self._translate_single_section(
+                    project_id=project_id,
+                    section=section,
+                    section_index=section_index,
+                    total_sections=len(project.sections),
+                    all_sections=project.sections,
+                    analysis=analysis,
+                    run_dir=run_dir,
+                    progress=progress,
+                    on_progress=on_progress,
+                    on_term_conflict=on_term_conflict,
+                    project=project,
+                    total_paragraphs=total_paragraphs,
+                    prescan_completed=True,
+                )
+            except Exception as exc:
+                result = exc
+            results.append(result)
+
+            # The four-step translator records provisional draft context while
+            # generating. Replace it after every merge (including conflicts and
+            # failures) with the latest persisted prefix before the next chapter.
+            project.sections = self.project_manager.get_sections(project_id)
+            persisted_index = next(
+                (
+                    index
+                    for index, candidate in enumerate(project.sections)
+                    if candidate.section_id == section_id
+                ),
+                section_index,
+            )
+            self._rebuild_persisted_translation_context(
+                project.sections[: persisted_index + 1]
+            )
+
+        return results
 
     async def _translate_single_section(
         self,
@@ -1300,6 +1497,7 @@ class BatchTranslationService:
         on_term_conflict: Optional[Callable[[TermConflict], Awaitable[Dict[str, Any]]]],
         project: ProjectMeta,
         total_paragraphs: int,
+        prescan_completed: bool = False,
     ) -> Dict[str, Any]:
         return await self._section_executor.translate(
             project_id=project_id,
@@ -1316,6 +1514,7 @@ class BatchTranslationService:
             total_paragraphs=total_paragraphs,
             translation_mode=self.translation_mode,
             translation_mode_section=self.TRANSLATION_MODE_SECTION,
+            prescan_completed=prescan_completed,
         )
 
     async def _run_section_prescan(
@@ -1394,6 +1593,42 @@ class BatchTranslationService:
             self._count_translated_paragraphs(section)
             for section in sections
         )
+
+    def _rebuild_persisted_translation_context(
+        self,
+        sections: List[Section],
+    ) -> None:
+        """Replace provisional context with a canonical persisted section prefix."""
+        analysis = self.context_manager.article_analysis
+        terms = list(analysis.terminology) if analysis else []
+        records: List[tuple[str, str, str, Dict[str, str]]] = []
+
+        for section in sections:
+            for paragraph in section.paragraphs:
+                if not paragraph.has_usable_translation():
+                    continue
+                translation = paragraph.best_translation_text(
+                    fallback_to_source=False
+                )
+                if not translation:
+                    continue
+                source = paragraph.source or ""
+                terms_used = {
+                    term.term: term.translation
+                    for term in terms
+                    if term.translation
+                    and _count_term_occurrences(source, term.term) > 0
+                }
+                records.append(
+                    (
+                        section.section_id,
+                        source,
+                        translation,
+                        terms_used,
+                    )
+                )
+
+        self.context_manager.replace_translation_history(records)
 
     def _prepopulate_term_tracker(self, project: ProjectMeta) -> None:
         """Scan already-translated paragraphs to pre-fill the term usage tracker.
@@ -1671,18 +1906,31 @@ class BatchTranslationService:
             Dict: 进度信息
         """
         progress = self._progress_cache().get(project_id)
-        latest_run_state = self._infer_run_state(project_id)
-        active_run = self._get_active_run()
-        is_active_project = bool(active_run and active_run.project_id == project_id)
+        active_run = self._get_active_run(project_id)
+        is_active_project = active_run is not None
         active_run_id = active_run.run_id if active_run else None
-        latest_run_is_active = bool(
-            is_active_project
-            and latest_run_state
+        if (
+            progress is not None
+            and is_active_project
             and (
                 active_run_id is None
-                or latest_run_state.run_id == active_run_id
+                or progress.run_id != active_run_id
             )
-        )
+        ):
+            progress = None
+        def compact_usage(run_id: Optional[str], stored: Any = None) -> Optional[Dict[str, Any]]:
+            usage = stored if isinstance(stored, dict) else None
+            if usage is None and run_id:
+                current = llm_usage_metrics.summary(run_id)
+                if current.get("api_calls"):
+                    usage = current
+            if usage is None:
+                return None
+            return {
+                key: value
+                for key, value in usage.items()
+                if key != "calls"
+            }
 
         def attach_active_fields(payload: Dict[str, Any]) -> Dict[str, Any]:
             terminal_statuses = {"completed", "cancelled", "failed", "incomplete"}
@@ -1702,13 +1950,15 @@ class BatchTranslationService:
                     or payload.get("status") == "cancelling"
                 )
             )
+            run_id = payload.get("run_id")
+            if run_id and "llm_usage" not in payload:
+                usage = compact_usage(str(run_id))
+                if usage is not None:
+                    payload["llm_usage"] = usage
             return payload
 
         if progress:
             payload = progress.to_dict()
-            if latest_run_state and latest_run_state.run_id == progress.run_id:
-                payload["current_step"] = progress.current_step or latest_run_state.current_step
-                payload["current_section"] = progress.current_section or latest_run_state.current_section
             if progress.final_status:
                 return attach_active_fields({
                     "status": progress.final_status,
@@ -1725,11 +1975,42 @@ class BatchTranslationService:
                 **payload,
             })
 
-        project = self._load_project_with_sections(project_id)
+        if is_active_project and active_run_id is None:
+            project = await asyncio.to_thread(
+                self._load_project_with_sections,
+                project_id,
+            )
+            latest_run = None
+            latest_run_state = None
+        else:
+            project, run_snapshot = await asyncio.gather(
+                asyncio.to_thread(self._load_project_with_sections, project_id),
+                asyncio.to_thread(self._load_latest_run_snapshot, project_id),
+            )
+            latest_run, latest_run_state = run_snapshot
+
         total_paragraphs = sum(len(section.paragraphs) for section in project.sections)
         translated = self._count_project_translated_paragraphs(project.sections)
         is_complete = total_paragraphs > 0 and translated >= total_paragraphs
-        latest_run = self._load_latest_run_summary(project_id)
+        latest_run_is_active = bool(
+            is_active_project
+            and active_run_id is not None
+            and latest_run_state
+            and latest_run_state.run_id == active_run_id
+        )
+
+        if is_active_project and active_run_id is None:
+            return attach_active_fields({
+                "status": active_run.status,
+                "progress_percent": (
+                    (translated / total_paragraphs * 100)
+                    if total_paragraphs > 0
+                    else 0
+                ),
+                "translated_paragraphs": translated,
+                "total_paragraphs": total_paragraphs,
+                "is_complete": False,
+            })
 
         if (
             latest_run_is_active
@@ -1787,6 +2068,10 @@ class BatchTranslationService:
                 "finished_at": latest_run.get("finished_at"),
                 "final_status": latest_status,
                 "run_id": latest_run.get("run_id") or (latest_run_state.run_id if latest_run_state else None),
+                "llm_usage": compact_usage(
+                    str(latest_run.get("run_id") or ""),
+                    latest_run.get("llm_usage"),
+                ),
             })
 
         if latest_run_is_active and latest_run_state:
@@ -1851,40 +2136,33 @@ class BatchTranslationService:
         Returns:
             Dict: 取消结果
         """
-        # 设置取消标记，让翻译循环在下一个 section 迭代时退出
-        self._mark_cancelled(project_id)
+        active_run = self._run_registry.mark_active_cancelled(project_id)
+        if active_run is None:
+            self._clear_cancelled(project_id)
+            return {"status": "not_found", "project_id": project_id}
 
+        # Only a registry-owned run can be cancelled. Completed progress remains
+        # cached for status polling and must never recreate an active slot.
         progress = self._progress_cache().get(project_id)
-        active_run = self._get_active_run()
 
-        if progress is not None:
+        if (
+            progress is not None
+            and not progress.final_status
+            and progress.run_id == active_run.run_id
+        ):
             progress.cancel_requested = True
             self._touch_progress(progress, step="取消中")
-            self._set_active_run(
-                project_id,
-                run_id=progress.run_id,
-                status="cancelling",
-            )
             return {
                 "status": "cancelling",
                 "project_id": project_id,
                 "run_id": progress.run_id,
             }
 
-        if active_run and active_run.project_id == project_id:
-            self._set_active_run(
-                project_id,
-                run_id=active_run.run_id,
-                status="cancelling",
-            )
-            return {
-                "status": "cancelling",
-                "project_id": project_id,
-                "run_id": active_run.run_id,
-            }
-
-        self._clear_cancelled(project_id)
-        return {"status": "not_found", "project_id": project_id}
+        return {
+            "status": "cancelling",
+            "project_id": project_id,
+            "run_id": active_run.run_id,
+        }
 
     def _can_transition_to_active_status(self, status: ProjectStatus) -> bool:
         """Whether service can temporarily move project into active translation status."""
@@ -1898,11 +2176,28 @@ class BatchTranslationService:
             return original_status
         return ProjectStatus.REVIEWING
 
-    def _save_meta(self, project_id: str, meta: ProjectMeta) -> None:
-        """保存项目元信息。"""
+    def _save_meta(
+        self,
+        project_id: str,
+        meta: ProjectMeta,
+        *,
+        fields: tuple[str, ...] = ("status",),
+        metadata_fields: tuple[str, ...] = (),
+    ) -> None:
+        """Merge only metadata fields owned by the batch translation flow."""
         if meta.id != project_id:
             raise ValueError(f"Project id mismatch: {project_id} != {meta.id}")
-        self.project_manager.save_meta(meta)
+        nested_fields = {}
+        if meta.metadata is not None and metadata_fields:
+            nested_fields["metadata"] = {
+                field_name: getattr(meta.metadata, field_name)
+                for field_name in metadata_fields
+            }
+        self.project_manager.merge_meta_fields(
+            project_id,
+            fields={field_name: getattr(meta, field_name) for field_name in fields},
+            nested_fields=nested_fields,
+        )
 
     async def _translate_title_and_metadata(
         self,
@@ -1921,6 +2216,8 @@ class BatchTranslationService:
 
         try:
             subtitle = project.metadata.subtitle if project.metadata else None
+            expected_title_translation = project.title_translation
+            expected_subtitle = subtitle
             requirements = extract_title_requirements(project.title)
             preservation_lines: List[str] = []
             if requirements.required_prefix:
@@ -1960,13 +2257,50 @@ class BatchTranslationService:
                     missing_terms,
                     project.id,
                 )
-            project.title_translation = translated_title
-            logger.info(
-                f"Title translated: {project.title} -> {project.title_translation}"
+            fields = {"title_translation": translated_title}
+            expected_fields = {
+                "title_translation": expected_title_translation,
+            }
+            nested_fields: Dict[str, Dict[str, Any]] = {}
+            expected_nested_fields: Dict[str, Dict[str, Any]] = {}
+            translated_subtitle = result.get("subtitle")
+            if translated_subtitle and project.metadata:
+                nested_fields["metadata"] = {"subtitle": translated_subtitle}
+                expected_nested_fields["metadata"] = {
+                    "subtitle": expected_subtitle,
+                }
+
+            persisted, applied_fields = (
+                self.project_manager.compare_and_set_meta_fields(
+                    project.id,
+                    fields=fields,
+                    expected_fields=expected_fields,
+                    nested_fields=nested_fields,
+                    expected_nested_fields=expected_nested_fields,
+                )
             )
-            if result.get("subtitle") and project.metadata:
-                project.metadata.subtitle = result["subtitle"]
-                logger.info(f"Subtitle translated: {result['subtitle']}")
+            project.title_translation = persisted.title_translation
+            if project.metadata and persisted.metadata:
+                project.metadata.subtitle = persisted.metadata.subtitle
+
+            if "title_translation" in applied_fields:
+                logger.info(
+                    "Title translated: %s -> %s",
+                    project.title,
+                    project.title_translation,
+                )
+            else:
+                logger.info(
+                    "Skipped stale generated title for project %s",
+                    project.id,
+                )
+            if "metadata.subtitle" in applied_fields:
+                logger.info("Subtitle translated: %s", translated_subtitle)
+            elif translated_subtitle:
+                logger.info(
+                    "Skipped stale generated subtitle for project %s",
+                    project.id,
+                )
         except Exception as e:
             logger.error(f"Failed to translate title/subtitle: {e}")
 
@@ -2015,10 +2349,24 @@ class BatchTranslationService:
         for section_index, section in enumerate(project.sections):
             if not section.title or section.title_translation:
                 continue
+            expected_title_translation = section.title_translation
             translated_title = str(translated_map.get(section.section_id, "")).strip()
             if translated_title:
-                section.title_translation = translated_title
-                self.project_manager.save_section(project_id, section)
+                persisted_section, applied = (
+                    self.project_manager.update_section_title_translation_locked(
+                        project_id,
+                        section.section_id,
+                        translated_title,
+                        expected_title_translation=expected_title_translation,
+                    )
+                )
+                section.title_translation = persisted_section.title_translation
+                if not applied:
+                    logger.info(
+                        "Skipped stale section title translation: %s",
+                        section.section_id,
+                    )
+                    continue
                 logger.info(
                     "Section title translated (batch): %s -> %s",
                     section.title,
@@ -2027,7 +2375,7 @@ class BatchTranslationService:
                 continue
 
             try:
-                section.title_translation = self.llm.translate_section_title(
+                translated_title = self.llm.translate_section_title(
                     section.title,
                     context={
                         "article_theme": analysis.theme,
@@ -2044,7 +2392,21 @@ class BatchTranslationService:
                         ),
                     },
                 )
-                self.project_manager.save_section(project_id, section)
+                persisted_section, applied = (
+                    self.project_manager.update_section_title_translation_locked(
+                        project_id,
+                        section.section_id,
+                        translated_title,
+                        expected_title_translation=expected_title_translation,
+                    )
+                )
+                section.title_translation = persisted_section.title_translation
+                if not applied:
+                    logger.info(
+                        "Skipped stale section title translation: %s",
+                        section.section_id,
+                    )
+                    continue
                 logger.info(
                     "Section title translated (fallback): %s -> %s",
                     section.title,
@@ -2164,9 +2526,8 @@ class BatchTranslationService:
         if not section_lines:
             return dehydrated_translations
 
-        # 使用Phase 1 provider（如果提供）或默认provider。
-        # translate_section 是同步阻塞网络调用，卸载到线程池，使 gather 的
-        # 多章节并发真正生效（否则会阻塞事件循环，章节退化为串行）。
+        # 使用Phase 1 provider（如果提供）或默认provider。同步网络调用
+        # 卸载到线程池，保证顺序章节翻译期间事件循环仍可响应取消和进度查询。
         provider = phase1_provider or self.llm
         translated = await asyncio.to_thread(
             provider.translate_section,

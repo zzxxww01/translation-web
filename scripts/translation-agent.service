@@ -12,14 +12,12 @@ EnvironmentFile=/opt/translation-agent/.env
 
 # 生产环境使用 Gunicorn
 ExecStart=/opt/translation-agent/.venv/bin/gunicorn src.api.app:app \
-    --workers 4 \
+    --workers 1 \
     --worker-class uvicorn.workers.UvicornWorker \
     --bind 127.0.0.1:54321 \
     --timeout 300 \
     --keep-alive 5 \
     --graceful-timeout 10 \
-    --max-requests 1000 \
-    --max-requests-jitter 50 \
     --access-logfile /opt/translation-agent/logs/access.log \
     --error-logfile /opt/translation-agent/logs/error.log \
     --log-level info
@@ -39,7 +37,7 @@ NoNewPrivileges=true
 PrivateTmp=true
 ProtectSystem=strict
 ProtectHome=true
-ReadWritePaths=/opt/translation-agent/projects /opt/translation-agent/logs /opt/translation-agent/backups
+ReadWritePaths=/opt/translation-agent/projects /opt/translation-agent/glossary /opt/translation-agent/data /opt/translation-agent/logs /opt/translation-agent/backups
 
 [Install]
 WantedBy=multi-user.target

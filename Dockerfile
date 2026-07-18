@@ -1,3 +1,12 @@
+FROM node:20-bookworm-slim AS frontend-build
+
+WORKDIR /frontend
+COPY web/frontend/package.json web/frontend/package-lock.json ./
+RUN npm ci
+COPY web/frontend/ ./
+RUN npm run build
+
+
 FROM python:3.11-slim
 
 WORKDIR /app
@@ -19,7 +28,11 @@ COPY src/ ./src/
 COPY config/ ./config/
 COPY scripts/ ./scripts/
 COPY start.sh .
+COPY --from=frontend-build /frontend/dist ./web/frontend/dist
 RUN chmod +x start.sh
+RUN if [ ! -f config/llm_providers.yaml ]; then \
+      cp config/llm_providers.yaml.example config/llm_providers.yaml; \
+    fi
 
 # 创建数据目录
 RUN mkdir -p projects glossary data logs backups

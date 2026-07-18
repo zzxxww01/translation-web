@@ -19,6 +19,7 @@ from typing import List, Optional, Dict, Callable
 import logging
 import re
 from collections import Counter
+from contextvars import copy_context
 
 from ..core.models import (
     Section,
@@ -31,6 +32,11 @@ from .smart_sampler import SmartSampler, create_smart_sampler
 
 
 logger = logging.getLogger(__name__)
+
+
+def _submit_with_current_context(executor, func, /, *args, **kwargs):
+    context = copy_context()
+    return executor.submit(context.run, func, *args, **kwargs)
 
 
 class DeepAnalyzer:
@@ -202,7 +208,8 @@ class DeepAnalyzer:
                 executor = ThreadPoolExecutor(max_workers=2)
                 future_terms = None
                 try:
-                    future_deep = executor.submit(
+                    future_deep = _submit_with_current_context(
+                        executor,
                         self.llm.deep_analyze_document,
                         outline=sections_outline,
                         sampled_text=full_text,
@@ -210,7 +217,8 @@ class DeepAnalyzer:
                     )
 
                     if cached_verified_terms is None:
-                        future_terms = executor.submit(
+                        future_terms = _submit_with_current_context(
+                            executor,
                             self.llm.verify_high_frequency_terms,
                             sampled_text=full_text,
                             high_freq_candidates=high_freq_candidates,

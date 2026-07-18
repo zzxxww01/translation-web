@@ -111,6 +111,9 @@ export interface TranslationVersion {
   content: string;
   type: TranslationVersionType;
   instruction?: string;
+  sourceRevision: number;
+  sourceText: string;
+  parentVersionId?: string;
   isCurrent: boolean;
   createdAt: Date;
 }

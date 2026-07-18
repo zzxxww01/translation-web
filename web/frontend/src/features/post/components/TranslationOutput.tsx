@@ -6,18 +6,13 @@ import { Copy, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 import { copyToClipboard, getCharCount } from '@/shared/utils';
 import { TranslationVersionType } from '@/shared/constants';
-
-interface Version {
-  id: string;
-  content: string;
-  type: string;
-  instruction?: string;
-  versionNumber: number;
-}
+import type { TranslationVersion } from '@/shared/types';
+import { POST_CONTENT_MAX_LENGTH } from '../types';
 
 interface TranslationOutputProps {
-  versions: Version[];
+  versions: TranslationVersion[];
   currentVersionId: string | null;
+  currentSourceRevision: number;
   currentContent: string;
   isEdited: boolean;
   editedContent: string;
@@ -28,10 +23,13 @@ interface TranslationOutputProps {
 }
 
 export function TranslationOutput({
-  versions, currentVersionId, currentContent, isEdited, editedContent,
+  versions, currentVersionId, currentSourceRevision, currentContent, isEdited, editedContent,
   onSetCurrentVersion, onSetEditedContent, onSaveEdit, onDiscardEdit,
 }: TranslationOutputProps) {
   const charCount = getCharCount(currentContent);
+  const currentVersion = versions.find(v => v.id === currentVersionId);
+  const isBasedOnOlderSource =
+    currentVersion !== undefined && currentVersion.sourceRevision !== currentSourceRevision;
 
   const handleCopy = async () => {
     const content = isEdited ? editedContent : versions.find(v => v.id === currentVersionId)?.content || '';
@@ -49,7 +47,7 @@ export function TranslationOutput({
           <h3 className="text-sm font-semibold">译文</h3>
           {versions.length > 0 && (
             <Select value={currentVersionId || ''} onValueChange={onSetCurrentVersion}>
-              <SelectTrigger className="h-9 w-full min-w-0 sm:w-48">
+              <SelectTrigger className="h-9 w-full min-w-0 sm:w-48" aria-label="选择译文版本">
                 <SelectValue placeholder="选择版本" />
               </SelectTrigger>
               <SelectContent>
@@ -69,7 +67,10 @@ export function TranslationOutput({
         </div>
         <div className="flex items-center justify-between gap-2 sm:justify-end">
           {isEdited && <Badge variant="warning">已编辑</Badge>}
-          <span className="text-xs text-muted-foreground">{charCount} 字</span>
+          {isBasedOnOlderSource && <Badge variant="outline">原文已更新</Badge>}
+          <span className="text-xs text-muted-foreground">
+            {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()} 字
+          </span>
         </div>
       </div>
 
@@ -77,19 +78,21 @@ export function TranslationOutput({
         id="translationEditor"
         value={currentContent}
         onChange={(e) => onSetEditedContent(e.target.value)}
+        maxLength={POST_CONTENT_MAX_LENGTH}
+        aria-label="帖子译文"
         placeholder="译文..."
         className="min-h-[34svh] sm:min-h-[280px] lg:min-h-[280px]"
       />
 
       <div className="mt-3 flex flex-wrap justify-end gap-2">
-        <Button variant="outline" size="sm" className="h-10 min-w-28 sm:h-9" onClick={handleCopy} disabled={!currentContent} title="复制译文">
+        <Button type="button" variant="outline" size="sm" className="h-10 min-w-28 sm:h-9" onClick={handleCopy} disabled={!currentContent} title="复制译文">
           <Copy className="h-4 w-4" />
           复制译文
         </Button>
         {isEdited && (
           <>
-            <Button variant="outline" size="sm" onClick={onDiscardEdit}>放弃</Button>
-            <Button size="sm" onClick={onSaveEdit}>
+            <Button type="button" variant="outline" size="sm" onClick={onDiscardEdit}>放弃</Button>
+            <Button type="button" size="sm" onClick={onSaveEdit} disabled={!editedContent.trim()}>
               <Sparkles className="h-4 w-4" /> 保存版本
             </Button>
           </>

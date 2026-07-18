@@ -252,6 +252,54 @@ class FourStepTranslator:
 
         return feedback_text
 
+    def reset_feedback_history(self) -> None:
+        """Clear run-scoped feedback before a new project translation."""
+        self.feedback_history.clear()
+
+    def commit_section_feedback(self, result: SectionTranslationResult) -> None:
+        """Publish feedback only after the section result is persisted.
+
+        Draft generation can lose an optimistic merge race to a manual edit.
+        Keeping feedback and memory learning behind the persistence boundary
+        prevents a rejected draft from steering subsequent sections.
+        """
+        reflection = result.reflection
+        if reflection is None:
+            return
+
+        feedback = self.extract_feedback_from_critique(
+            critique_result={
+                "issues": [
+                    {
+                        "priority": getattr(issue, "priority", "P2"),
+                        "issue_type": issue.issue_type,
+                        "description": issue.description,
+                    }
+                    for issue in reflection.issues
+                ]
+            },
+            section_id=result.section_id,
+        )
+        self.feedback_history.append(feedback)
+
+        if (
+            self.memory_service
+            and reflection.overall_score < 8.0
+            and reflection.issues
+        ):
+            try:
+                self.memory_service._spawn_background(
+                    self.memory_service.process_reflection_issues(
+                        reflection.issues,
+                        result.translations,
+                    )
+                )
+            except Exception as exc:
+                logger.debug(
+                    "Failed to schedule reflection rule extraction: %s",
+                    exc,
+                )
+
     def translate_section(
         self,
         section: Section,
@@ -299,10 +347,6 @@ class FourStepTranslator:
         try:
             import time
 
-            # 获取 Phase 1 和 Phase 2 的 provider
-            phase1_provider = self.get_provider_for_phase("phase1_draft") if self.get_provider_for_phase else self.llm
-            phase2_provider = self.get_provider_for_phase("phase2_refine") if self.get_provider_for_phase else self.llm
-
             if on_progress:
                 on_progress("理解章节", 0, 4)
 
@@ -316,6 +360,11 @@ class FourStepTranslator:
                 on_progress("初译", 1, 4)
 
             # Step 2: 初译（混合模式）- 使用 Phase 1 provider
+            phase1_provider = (
+                self.get_provider_for_phase("phase1_draft")
+                if self.get_provider_for_phase
+                else self.llm
+            )
             phase1_start = time.time()
             if len(section.paragraphs) <= self.paragraph_threshold:
                 # 短章节：整体翻译
@@ -348,6 +397,11 @@ class FourStepTranslator:
                 on_progress("反思", 2, 4)
 
             # Step 3: 批量反思 - 使用 Phase 2 provider
+            phase2_provider = (
+                self.get_provider_for_phase("phase2_refine")
+                if self.get_provider_for_phase
+                else self.llm
+            )
             step3_start = time.time()
             reflection = self._step_reflect(
                 section,
@@ -360,41 +414,6 @@ class FourStepTranslator:
                 f"[Phase 2 - Step 3] Reflection completed in {step3_duration:.2f}s, "
                 f"score={reflection.overall_score:.1f}, issues={len(reflection.issues)}"
             )
-
-            # 优化点7: 收集反馈用于后续章节
-            feedback = self.extract_feedback_from_critique(
-                critique_result={
-                    "issues": [
-                        {
-                            "priority": getattr(issue, "priority", "P2"),
-                            "issue_type": issue.issue_type,
-                            "description": issue.description,
-                        }
-                        for issue in reflection.issues
-                    ]
-                },
-                section_id=section.section_id
-            )
-            self.feedback_history.append(feedback)
-
-            # 自学习：反思评分 < 8.0 且有具体 issues 时，后台提取规则。
-            # 四步法经 asyncio.to_thread 在工作线程执行，旧的 get_event_loop+create_task
-            # 在此恒失效（无运行中循环）。改用 memory_service._spawn_background，由其在
-            # 工作线程内通过 run_coroutine_threadsafe 回投到已登记的主循环。
-            if (
-                self.memory_service
-                and reflection.overall_score < 8.0
-                and reflection.issues
-            ):
-                try:
-                    self.memory_service._spawn_background(
-                        self.memory_service.process_reflection_issues(
-                            reflection.issues,
-                            translations,
-                        )
-                    )
-                except Exception as e:
-                    logger.debug("Failed to schedule reflection rule extraction: %s", e)
 
             if on_progress:
                 on_progress("润色", 3, 4)
@@ -421,8 +440,9 @@ class FourStepTranslator:
                 (reflection.fluency_score > 0 and reflection.fluency_score < polish_threshold) or
                 (reflection.conciseness_score > 0 and reflection.conciseness_score < polish_threshold)
             )
+            revision_attempted = should_refine or should_polish
 
-            if should_refine or should_polish:
+            if revision_attempted:
                 # 根据 overall_score 决定修复哪些问题
                 if reflection.overall_score >= 8.5:
                     # 良好：只修 P0/P1
@@ -556,7 +576,8 @@ class FourStepTranslator:
                 ],
                 understanding=understanding,
                 reflection=reflection,
-                assessment=assessment
+                assessment=assessment,
+                revision_attempted=revision_attempted,
             )
 
         except Exception as e:

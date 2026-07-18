@@ -3,7 +3,7 @@
  * 提供术语库的增删改查和匹配功能
  */
 
-import { apiClient } from '../../../shared/api/client';
+import { apiClient, ApiErrorWrapper } from '../../../shared/api/client';
 import { REQUEST_TIMEOUTS } from '../../../shared/constants';
 import type {
   GlossaryBatchAction,
@@ -61,6 +61,59 @@ export interface BatchGlossaryRequest {
   status?: 'active' | 'disabled' | string;
   strategy?: TranslationStrategy;
   tags?: string[] | null;
+}
+
+export interface TermReviewJob {
+  job_id: string;
+  project_id: string;
+  model?: string | null;
+  status: 'queued' | 'running' | 'succeeded' | 'failed';
+  created_at: string;
+  updated_at: string;
+  started_at?: string | null;
+  completed_at?: string | null;
+  result?: TermReviewPayload | null;
+  error?: string | null;
+}
+
+function hasTermReviewErrorCode(error: unknown, errorCode: string): boolean {
+  if (!(error instanceof ApiErrorWrapper) || error.status !== 409) {
+    return false;
+  }
+  const data = error.data;
+  return (
+    typeof data === 'object' &&
+    data !== null &&
+    'error_code' in data &&
+    data.error_code === errorCode
+  );
+}
+
+export function isTermReviewModelConflict(error: unknown): boolean {
+  return hasTermReviewErrorCode(error, 'TERM_REVIEW_MODEL_CONFLICT');
+}
+
+export function isTermReviewArtifactConflict(error: unknown): boolean {
+  return hasTermReviewErrorCode(error, 'TERM_REVIEW_ARTIFACT_CONFLICT');
+}
+
+function waitForPoll(ms: number, signal?: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(signal.reason ?? new DOMException('Request cancelled', 'AbortError'));
+      return;
+    }
+
+    const timeoutId = setTimeout(() => {
+      signal?.removeEventListener('abort', handleAbort);
+      resolve();
+    }, ms);
+    const handleAbort = () => {
+      clearTimeout(timeoutId);
+      reject(signal?.reason ?? new DOMException('Request cancelled', 'AbortError'));
+    };
+    signal?.addEventListener('abort', handleAbort, { once: true });
+  });
 }
 
 /**
@@ -205,22 +258,66 @@ export const glossaryApi = {
     );
   },
 
-  async prepareTermReview(projectId: string, model?: string): Promise<TermReviewPayload> {
-    return apiClient.post<TermReviewPayload>(
-      `/projects/${projectId}/term-review/prepare`,
+  async startTermReview(
+    projectId: string,
+    model?: string,
+    signal?: AbortSignal
+  ): Promise<TermReviewJob> {
+    return apiClient.post<TermReviewJob>(
+      `/projects/${projectId}/term-review/jobs`,
       {
         model,
       },
       {
-        timeout: REQUEST_TIMEOUTS.TERM_REVIEW_PREPARE,
+        timeout: REQUEST_TIMEOUTS.DEFAULT,
         retry: false,
+        signal,
       }
     );
   },
 
+  async getTermReviewJob(
+    projectId: string,
+    jobId: string,
+    signal?: AbortSignal
+  ): Promise<TermReviewJob> {
+    return apiClient.get<TermReviewJob>(
+      `/projects/${projectId}/term-review/jobs/${encodeURIComponent(jobId)}`,
+      {
+        timeout: REQUEST_TIMEOUTS.DEFAULT,
+        retry: false,
+        signal,
+      }
+    );
+  },
+
+  async prepareTermReview(
+    projectId: string,
+    model?: string,
+    signal?: AbortSignal
+  ): Promise<TermReviewPayload> {
+    let job = await this.startTermReview(projectId, model, signal);
+    const deadline = Date.now() + REQUEST_TIMEOUTS.TERM_REVIEW_PREPARE;
+
+    while (job.status === 'queued' || job.status === 'running') {
+      if (Date.now() >= deadline) {
+        throw new Error('Terminology review preparation timed out');
+      }
+      await waitForPoll(1000, signal);
+      job = await this.getTermReviewJob(projectId, job.job_id, signal);
+    }
+
+    if (job.status === 'succeeded' && job.result) {
+      return job.result;
+    }
+    throw new Error(job.error || 'Terminology review preparation failed');
+  },
+
   async submitTermReview(
     projectId: string,
-    decisions: TermReviewDecision[]
+    artifactId: string,
+    decisions: TermReviewDecision[],
+    signal?: AbortSignal
   ): Promise<{
     project_id: string;
     applied_count: number;
@@ -228,9 +325,17 @@ export const glossaryApi = {
     applied_terms: GlossaryTerm[];
     skipped_terms: string[];
   }> {
-    return apiClient.post(`/projects/${projectId}/term-review/submit`, {
-      decisions,
-    });
+    return apiClient.post(
+      `/projects/${projectId}/term-review/submit`,
+      {
+        artifact_id: artifactId,
+        decisions,
+      },
+      {
+        retry: false,
+        signal,
+      }
+    );
   },
 
   async getProjectRecommendations(

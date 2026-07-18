@@ -9,6 +9,8 @@ import { TranslationVersionType } from '../constants';
 interface PostState {
   // 原文
   originalText: string;
+  // 原文修订号，用于识别异步返回是否已过期
+  sourceRevision: number;
   // 所有翻译版本
   versions: TranslationVersion[];
   // 当前版本 ID
@@ -26,10 +28,19 @@ interface PostState {
 interface PostActions {
   // Actions
   setOriginalText: (text: string) => void;
-  addVersion: (content: string, type: TranslationVersion['type'], instruction?: string) => void;
+  addVersion: (
+    content: string,
+    type: TranslationVersion['type'],
+    instruction?: string,
+    lineage?: {
+      sourceRevision?: number;
+      sourceText?: string;
+      parentVersionId?: string;
+    }
+  ) => string;
   setCurrentVersion: (versionId: string) => void;
   setEditedContent: (content: string) => void;
-  saveEdit: () => void;
+  saveEdit: () => string | null;
   discardEdit: () => void;
   clear: () => void;
   setLoading: (isLoading: boolean) => void;
@@ -41,6 +52,7 @@ type PostStore = PostState & PostActions;
 
 const initialState: PostState = {
   originalText: '',
+  sourceRevision: 0,
   versions: [],
   currentVersionId: null,
   isEdited: false,
@@ -49,27 +61,46 @@ const initialState: PostState = {
   selectedModel: undefined,
 };
 
+function createVersionId(): string {
+  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+    return `v-${crypto.randomUUID()}`;
+  }
+  return `v-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+}
+
 export const usePostStore = create<PostStore>()(
   devtools(
     (set, get) => ({
       ...initialState,
 
-      setOriginalText: text => set({ originalText: text }),
-
-      addVersion: (content, type, instruction) =>
+      setOriginalText: text =>
         set(state => {
+          if (text === state.originalText) return state;
+          return {
+            originalText: text,
+            sourceRevision: state.sourceRevision + 1,
+          };
+        }),
+
+      addVersion: (content, type, instruction, lineage) => {
+        const state = get();
+        const versionId = createVersionId();
+        set(currentState => {
           const newVersion: TranslationVersion = {
-            id: `v-${Date.now()}`,
-            versionNumber: state.versions.length + 1,
+            id: versionId,
+            versionNumber: currentState.versions.length + 1,
             content,
             type,
             instruction,
+            sourceRevision: lineage?.sourceRevision ?? state.sourceRevision,
+            sourceText: lineage?.sourceText ?? state.originalText,
+            parentVersionId: lineage?.parentVersionId,
             isCurrent: true,
             createdAt: new Date(),
           };
 
           // 将其他版本设为非当前
-          const updatedVersions = state.versions.map(v => ({
+          const updatedVersions = currentState.versions.map(v => ({
             ...v,
             isCurrent: false,
           }));
@@ -80,7 +111,9 @@ export const usePostStore = create<PostStore>()(
             isEdited: false,
             editedContent: '',
           };
-        }),
+        });
+        return versionId;
+      },
 
       setCurrentVersion: versionId =>
         set(state => ({
@@ -102,20 +135,26 @@ export const usePostStore = create<PostStore>()(
           };
         }),
 
-      saveEdit: () =>
-        set(state => {
-          if (!state.editedContent) return state;
+      saveEdit: () => {
+        const state = get();
+        if (!state.isEdited || !state.editedContent.trim()) return null;
 
+        const currentVersion = state.versions.find(v => v.id === state.currentVersionId);
+        const versionId = createVersionId();
+        set(currentState => {
           const newVersion: TranslationVersion = {
-            id: `v-${Date.now()}`,
-            versionNumber: state.versions.length + 1,
-            content: state.editedContent,
+            id: versionId,
+            versionNumber: currentState.versions.length + 1,
+            content: currentState.editedContent,
             type: TranslationVersionType.MANUAL,
+            sourceRevision: currentVersion?.sourceRevision ?? currentState.sourceRevision,
+            sourceText: currentVersion?.sourceText ?? currentState.originalText,
+            parentVersionId: currentVersion?.id,
             isCurrent: true,
             createdAt: new Date(),
           };
 
-          const updatedVersions = state.versions.map(v => ({
+          const updatedVersions = currentState.versions.map(v => ({
             ...v,
             isCurrent: false,
           }));
@@ -126,7 +165,9 @@ export const usePostStore = create<PostStore>()(
             isEdited: false,
             editedContent: '',
           };
-        }),
+        });
+        return versionId;
+      },
 
       discardEdit: () =>
         set({
@@ -137,6 +178,7 @@ export const usePostStore = create<PostStore>()(
       clear: () =>
         set({
           originalText: '',
+          sourceRevision: 0,
           versions: [],
           currentVersionId: null,
           isEdited: false,

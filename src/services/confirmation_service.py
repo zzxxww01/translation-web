@@ -14,9 +14,13 @@ import logging
 import asyncio
 import time
 from concurrent.futures import ThreadPoolExecutor
+from functools import partial
 
 from src.core.models import (
-    ProjectMeta, Paragraph, ParagraphConfirmation
+    Paragraph,
+    ParagraphConfirmation,
+    ParagraphStatus,
+    ProjectMeta,
 )
 from src.core.project import ProjectManager
 from src.core.glossary import GlossaryManager
@@ -200,45 +204,45 @@ class ConfirmationService:
         Returns:
             Dict: 确认结果
         """
-        # 加载项目
-        project = self._load_project_with_sections(project_id)
+        project = await self._load_project_with_sections_async(project_id)
 
-        # 找到段落并确认
+        # Resolve the requested payload from the displayed snapshot, then apply
+        # it to the latest section under the paragraph write lock.
         confirmed_paragraph = None
-        confirmed_section = None
+        confirmed_section_id = None
+        source = "manual" if custom_edit else (version_id or "ai")
+        tokenized_text = None
+        format_issues = []
+        ai_translation = None
 
         for section in project.sections:
             for para in section.paragraphs:
                 if para.id == paragraph_id:
-                    # 确认译文
-                    source = "manual" if custom_edit else (version_id or "ai")
                     tokenized_text, format_issues = self._resolve_confirmation_payload(
                         para,
                         translation,
                         version_id=version_id,
                     )
-                    para.confirm(
-                        translation,
-                        source=source,
-                        tokenized_text=tokenized_text,
-                        format_issues=format_issues,
-                    )
-                    confirmed_paragraph = para
-                    confirmed_section = section
+                    ai_translation = self._get_ai_translation_text(para)
+                    confirmed_section_id = section.section_id
                     break
-            if confirmed_paragraph:
+            if confirmed_section_id:
                 break
 
-        if not confirmed_paragraph:
+        if not confirmed_section_id:
             raise ValueError(f"Paragraph {paragraph_id} not found")
 
         # 自学习：如果用户修改了 AI 译文，后台提取翻译规则
-        ai_translation = self._get_ai_translation_text(confirmed_paragraph)
         if ai_translation and translation != ai_translation:
             # 经 _spawn_background 调度并保留强引用，防止后台学习 Task 被 GC 回收
             self.memory_service._spawn_background(
                 self._extract_rules_background(
-                    confirmed_paragraph.source,
+                    next(
+                        para.source
+                        for section in project.sections
+                        for para in section.paragraphs
+                        if para.id == paragraph_id
+                    ),
                     ai_translation,
                     translation,
                 )
@@ -251,13 +255,17 @@ class ConfirmationService:
             custom_translation=translation if custom_edit else None,
             confirmed_at=datetime.now()
         )
-        project.confirmation_map[paragraph_id] = confirmation
-
-        # 保存章节
-        self.project_manager.save_section(project_id, confirmed_section)
-
-        # 保存项目元信息（更新confirmation_map）
-        self._save_meta(project_id, project)
+        confirmed_paragraph = await asyncio.to_thread(
+            self.project_manager.update_paragraph_confirmation_locked,
+            project_id,
+            confirmed_section_id,
+            paragraph_id,
+            translation=translation,
+            confirmation=confirmation,
+            tokenized_text=tokenized_text,
+            format_issues=format_issues,
+            model=source,
+        )
 
         # 清理项目缓存，避免返回旧确认状态
         await self._invalidate_cache_for_project(project_id)
@@ -289,40 +297,45 @@ class ConfirmationService:
         Returns:
             Dict: 更新结果
         """
-        # 加载术语表
-        glossary = self.glossary_manager.load_project(project_id)
+        return await asyncio.to_thread(
+            self._update_terms_sync,
+            project_id,
+            changes,
+        )
 
+    def _update_terms_sync(
+        self,
+        project_id: str,
+        changes: List[Dict],
+    ) -> Dict:
         updated_terms = []
+        with self.glossary_manager.project_lock(project_id):
+            glossary = self.glossary_manager.load_project(project_id)
+            for change in changes:
+                term_original = change.get('term')
+                new_translation = change.get('new_translation')
 
-        for change in changes:
-            term_original = change.get('term')
-            new_translation = change.get('new_translation')
+                if not term_original or not new_translation:
+                    continue
 
-            if not term_original or not new_translation:
-                continue
+                existing_term = glossary.get_term(term_original)
+                if existing_term:
+                    old_translation = existing_term.translation
+                    existing_term.translation = new_translation
 
-            # 查找现有术语
-            existing_term = glossary.get_term(term_original)
+                    updated_terms.append({
+                        "term": term_original,
+                        "old_translation": old_translation,
+                        "new_translation": new_translation
+                    })
 
-            if existing_term:
-                # 更新现有术语的翻译
-                old_translation = existing_term.translation
-                existing_term.translation = new_translation
+                    logger.info(
+                        f"[{project_id}] Term updated: {term_original} "
+                        f"({old_translation} -> {new_translation})"
+                    )
 
-                updated_terms.append({
-                    "term": term_original,
-                    "old_translation": old_translation,
-                    "new_translation": new_translation
-                })
-
-                logger.info(
-                    f"[{project_id}] Term updated: {term_original} "
-                    f"({old_translation} -> {new_translation})"
-                )
-
-        # 保存术语表
-        if updated_terms:
-            self.glossary_manager.save_project(project_id, glossary)
+            if updated_terms:
+                self.glossary_manager.save_project(project_id, glossary)
 
         return {
             "updated_count": len(updated_terms),
@@ -351,6 +364,19 @@ class ConfirmationService:
                 "saved_path": str
             }
         """
+        return await asyncio.to_thread(
+            self._export_translation_sync,
+            project_id,
+            include_source,
+            export_format,
+        )
+
+    def _export_translation_sync(
+        self,
+        project_id: str,
+        include_source: bool,
+        export_format: str,
+    ) -> Dict:
         from pathlib import Path
         from src.core.exporter import MarkdownExporter
 
@@ -419,7 +445,7 @@ class ConfirmationService:
         Returns:
             Dict: 进度信息
         """
-        project = self._load_project_with_sections(project_id)
+        project = await self._load_project_with_sections_async(project_id)
 
         total_paragraphs = sum(len(s.paragraphs) for s in project.sections)
         confirmed_paragraphs = sum(
@@ -503,11 +529,25 @@ class ConfirmationService:
 
         return None
 
-    def _save_meta(self, project_id: str, meta: ProjectMeta) -> None:
-        """保存项目元信息。"""
+    def _save_meta(
+        self,
+        project_id: str,
+        meta: ProjectMeta,
+        paragraph_ids: List[str],
+    ) -> None:
+        """Merge only confirmations produced by the current operation."""
         if meta.id != project_id:
             raise ValueError(f"Project id mismatch: {project_id} != {meta.id}")
-        self.project_manager.save_meta(meta)
+        confirmations = {
+            paragraph_id: meta.confirmation_map[paragraph_id]
+            for paragraph_id in paragraph_ids
+            if paragraph_id in meta.confirmation_map
+        }
+        if confirmations:
+            self.project_manager.merge_meta_fields(
+                project_id,
+                mapping_fields={"confirmation_map": confirmations},
+            )
 
     async def _build_versions_async(self, paragraph: Paragraph, project: ProjectMeta) -> List[Dict]:
         """
@@ -589,23 +629,21 @@ class ConfirmationService:
         self.performance_stats["confirm_paragraph_calls"] += len(confirmations)
 
         try:
-            # 批量加载项目数据
-            loop = asyncio.get_event_loop()
+            # Load once for displayed-version resolution. Each write below is
+            # applied to the latest paragraph under ProjectManager locks.
+            loop = asyncio.get_running_loop()
             project = await self._load_project_with_sections_async(project_id)
             sections = project.sections
 
             # 创建段落ID到段落的映射
             paragraph_map = {}
             section_map = {}
-            section_lookup = {}
             for section in sections:
-                section_lookup[section.section_id] = section
                 for para in section.paragraphs:
                     paragraph_map[para.id] = para
                     section_map[para.id] = section
 
             results = []
-            modified_sections = set()
 
             # 批量处理确认
             for confirmation in confirmations:
@@ -627,50 +665,41 @@ class ConfirmationService:
                     translation,
                     version_id=version_id,
                 )
-                paragraph.confirm(
-                    translation,
-                    source=source,
-                    tokenized_text=tokenized_text,
-                    format_issues=format_issues,
-                )
-
-                # 更新确认映射
-                project.confirmation_map[paragraph_id] = ParagraphConfirmation(
+                confirmation_record = ParagraphConfirmation(
                     paragraph_id=paragraph_id,
                     selected_version_id=version_id,
                     custom_translation=translation if custom_edit else None,
                     confirmed_at=datetime.now()
                 )
-
-                modified_sections.add(section.section_id)
+                confirmed_paragraph = await loop.run_in_executor(
+                    self._thread_pool,
+                    partial(
+                        self.project_manager.update_paragraph_confirmation_locked,
+                        project_id,
+                        section.section_id,
+                        paragraph_id,
+                        translation=translation,
+                        confirmation=confirmation_record,
+                        tokenized_text=tokenized_text,
+                        format_issues=format_issues,
+                        model=source,
+                        recompute_progress=False,
+                    ),
+                )
                 results.append({
                     "paragraph_id": paragraph_id,
                     "translation": translation,
-                    "status": paragraph.status.value,
+                    "status": confirmed_paragraph.status.value,
                     "selected_version_id": version_id,
-                    "confirmed_at": project.confirmation_map[paragraph_id].confirmed_at.isoformat()
+                    "confirmed_at": confirmation_record.confirmed_at.isoformat()
                 })
 
-            # 批量保存修改的章节
-            save_tasks = [
-                loop.run_in_executor(
+            if results:
+                await loop.run_in_executor(
                     self._thread_pool,
-                    self.project_manager.save_section,
+                    self.project_manager.update_progress,
                     project_id,
-                    section_lookup[section_id]
                 )
-                for section_id in modified_sections
-                if section_id in section_lookup
-            ]
-            await asyncio.gather(*save_tasks)
-
-            # 保存项目元信息
-            await loop.run_in_executor(
-                self._thread_pool,
-                self._save_meta,
-                project_id,
-                project
-            )
 
             # 清理相关缓存
             await self._invalidate_cache_for_project(project_id)

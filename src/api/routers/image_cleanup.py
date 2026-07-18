@@ -9,6 +9,7 @@
 """
 
 from typing import List, Dict, Any, Optional
+from contextlib import nullcontext
 import json
 import logging
 from pathlib import Path
@@ -18,6 +19,7 @@ from fastapi import APIRouter, Depends, BackgroundTasks
 from pydantic import BaseModel
 
 from src.core.models import ElementType, ParagraphStatus
+from src.api.utils.concurrency import run_blocking
 from ..dependencies import ProjectManagerDep, get_project_manager
 from ..middleware import NotFoundException, BadRequestException
 
@@ -105,6 +107,204 @@ def detect_image_translation_error(text: str) -> bool:
     return any(pattern in text for pattern in error_patterns)
 
 
+def _cleanup_image_paragraphs_sync(
+    project_id: str,
+    request: ImageCleanupRequest,
+    pm,
+) -> ImageCleanupResponse:
+    pm.get(project_id)
+    sections = pm.get_sections(project_id)
+    total_image_paragraphs = 0
+    cleaned_translations = 0
+    marked_paragraphs = 0
+    affected_sections = []
+    modified_sections = 0
+
+    for section_snapshot in sections:
+        section_lock = (
+            nullcontext()
+            if request.dry_run
+            else pm.section_lock(project_id, section_snapshot.section_id)
+        )
+        with section_lock:
+            section = (
+                section_snapshot
+                if request.dry_run
+                else pm.get_section(project_id, section_snapshot.section_id)
+            )
+            if section is None:
+                continue
+            section_image_count = 0
+            section_cleaned = 0
+            section_marked = 0
+
+            for paragraph in section.paragraphs:
+                if not detect_image_content(paragraph.source):
+                    continue
+                total_image_paragraphs += 1
+                section_image_count += 1
+
+                if (
+                    paragraph.element_type != ElementType.IMAGE
+                    and not request.dry_run
+                    and request.mark_as_image
+                ):
+                    paragraph.element_type = ElementType.IMAGE
+                    section_marked += 1
+                    marked_paragraphs += 1
+
+                if paragraph.translations and request.clean_translations:
+                    retained_translations = {}
+                    for trans_id, translation in paragraph.translations.items():
+                        trans_text = (
+                            translation.text
+                            if hasattr(translation, "text")
+                            else str(translation)
+                        )
+                        if detect_image_translation_error(trans_text):
+                            if not request.dry_run:
+                                section_cleaned += 1
+                                cleaned_translations += 1
+                            continue
+                        retained_translations[trans_id] = translation
+
+                    if not request.dry_run:
+                        paragraph.translations = retained_translations
+                        if not paragraph.translations:
+                            paragraph.status = ParagraphStatus.PENDING
+
+            if not request.dry_run and (
+                section_cleaned > 0 or section_marked > 0
+            ):
+                pm.save_section_only(project_id, section)
+                modified_sections += 1
+
+        if section_image_count > 0:
+            affected_sections.append(
+                {
+                    "section_id": section.section_id,
+                    "section_title": section.title,
+                    "image_paragraphs": section_image_count,
+                    "cleaned_translations": section_cleaned,
+                    "marked_paragraphs": section_marked,
+                }
+            )
+
+    if modified_sections:
+        pm.update_progress(project_id)
+
+    return ImageCleanupResponse(
+        project_id=project_id,
+        total_image_paragraphs=total_image_paragraphs,
+        cleaned_translations=cleaned_translations,
+        marked_paragraphs=marked_paragraphs,
+        affected_sections=affected_sections,
+        dry_run=request.dry_run,
+        timestamp=datetime.now().isoformat(),
+    )
+
+
+def _get_image_statistics_sync(project_id: str, pm) -> ImageStatsResponse:
+    pm.get(project_id)
+    sections = pm.get_sections(project_id)
+    total_paragraphs = 0
+    image_paragraphs = 0
+    error_translations = 0
+    sections_with_images = []
+
+    for section in sections:
+        section_total = len(section.paragraphs)
+        section_images = 0
+        section_errors = 0
+
+        for paragraph in section.paragraphs:
+            total_paragraphs += 1
+            if (
+                paragraph.element_type == ElementType.IMAGE
+                or detect_image_content(paragraph.source)
+            ):
+                image_paragraphs += 1
+                section_images += 1
+
+            for translation in paragraph.translations.values():
+                trans_text = (
+                    translation.text
+                    if hasattr(translation, "text")
+                    else str(translation)
+                )
+                if detect_image_translation_error(trans_text):
+                    error_translations += 1
+                    section_errors += 1
+
+        if section_images > 0:
+            sections_with_images.append(
+                {
+                    "section_id": section.section_id,
+                    "section_title": section.title,
+                    "total_paragraphs": section_total,
+                    "image_paragraphs": section_images,
+                    "error_translations": section_errors,
+                    "image_percentage": (
+                        section_images / section_total * 100
+                        if section_total > 0
+                        else 0
+                    ),
+                }
+            )
+
+    image_percentage = (
+        image_paragraphs / total_paragraphs * 100
+        if total_paragraphs > 0
+        else 0
+    )
+    return ImageStatsResponse(
+        project_id=project_id,
+        total_paragraphs=total_paragraphs,
+        image_paragraphs=image_paragraphs,
+        image_percentage=round(image_percentage, 2),
+        sections_with_images=sections_with_images,
+        error_translations=error_translations,
+    )
+
+
+def _prevent_image_translation_sync(project_id: str, pm) -> Dict[str, Any]:
+    pm.get(project_id)
+    sections = pm.get_sections(project_id)
+    marked_count = 0
+    processed_sections = 0
+
+    for section_snapshot in sections:
+        with pm.section_lock(project_id, section_snapshot.section_id):
+            section = pm.get_section(project_id, section_snapshot.section_id)
+            if section is None:
+                continue
+            section_modified = False
+            for paragraph in section.paragraphs:
+                if (
+                    detect_image_content(paragraph.source)
+                    and paragraph.element_type != ElementType.IMAGE
+                ):
+                    paragraph.element_type = ElementType.IMAGE
+                    marked_count += 1
+                    section_modified = True
+
+            if section_modified:
+                pm.save_section_only(project_id, section)
+                processed_sections += 1
+
+    if processed_sections:
+        pm.update_progress(project_id)
+
+    return {
+        "project_id": project_id,
+        "marked_paragraphs": marked_count,
+        "processed_sections": processed_sections,
+        "prevention_enabled": True,
+        "message": f"已标记 {marked_count} 个图片段落",
+        "timestamp": datetime.now().isoformat(),
+    }
+
+
 @router.post("/{project_id}/cleanup-images", response_model=ImageCleanupResponse)
 async def cleanup_image_paragraphs(
     project_id: str,
@@ -123,95 +323,25 @@ async def cleanup_image_paragraphs(
     """
     try:
         logger.info(f"[Image Cleanup] 开始处理项目 {project_id}, dry_run={request.dry_run}")
-
-        # 加载项目
-        project = pm.get(project_id)
-        sections = pm.get_sections(project_id)
-
-        total_image_paragraphs = 0
-        cleaned_translations = 0
-        marked_paragraphs = 0
-        affected_sections = []
-
-        for section in sections:
-            section_image_count = 0
-            section_cleaned = 0
-            section_marked = 0
-
-            for paragraph in section.paragraphs:
-                # 检查是否为图片内容
-                if detect_image_content(paragraph.source):
-                    total_image_paragraphs += 1
-                    section_image_count += 1
-
-                    # 标记为图片类型
-                    if paragraph.element_type != ElementType.IMAGE:
-                        if not request.dry_run and request.mark_as_image:
-                            paragraph.element_type = ElementType.IMAGE
-                            section_marked += 1
-                            marked_paragraphs += 1
-
-                    # 清理错误翻译
-                    if paragraph.translations and request.clean_translations:
-                        cleaned_translations_for_paragraph = {}
-
-                        for trans_id, translation in paragraph.translations.items():
-                            trans_text = translation.text if hasattr(translation, 'text') else str(translation)
-
-                            # 如果是图片翻译错误
-                            if detect_image_translation_error(trans_text):
-                                if not request.dry_run:
-                                    section_cleaned += 1
-                                    cleaned_translations += 1
-                                    logger.info(f"清理段落 {paragraph.id} 的图片翻译错误")
-                                    continue
-
-                            # 保留正常翻译
-                            cleaned_translations_for_paragraph[trans_id] = translation
-
-                        # 更新翻译记录
-                        if not request.dry_run:
-                            paragraph.translations = cleaned_translations_for_paragraph
-
-                            # 如果清理后没有翻译了，重置状态
-                            if not paragraph.translations:
-                                paragraph.status = ParagraphStatus.PENDING
-
-            # 保存修改的章节
-            if not request.dry_run and (section_cleaned > 0 or section_marked > 0):
-                pm.save_section(project_id, section)
-
-            # 记录影响的章节
-            if section_image_count > 0:
-                affected_sections.append({
-                    "section_id": section.section_id,
-                    "section_title": section.title,
-                    "image_paragraphs": section_image_count,
-                    "cleaned_translations": section_cleaned,
-                    "marked_paragraphs": section_marked
-                })
+        result = await run_blocking(
+            _cleanup_image_paragraphs_sync,
+            project_id,
+            request,
+            pm,
+        )
 
         # 后台任务：更新项目统计和缓存清理
         background_tasks.add_task(
             update_project_after_cleanup,
             project_id,
-            total_image_paragraphs,
-            cleaned_translations
-        )
-
-        result = ImageCleanupResponse(
-            project_id=project_id,
-            total_image_paragraphs=total_image_paragraphs,
-            cleaned_translations=cleaned_translations,
-            marked_paragraphs=marked_paragraphs,
-            affected_sections=affected_sections,
-            dry_run=request.dry_run,
-            timestamp=datetime.now().isoformat()
+            result.total_image_paragraphs,
+            result.cleaned_translations,
         )
 
         logger.info(
-            f"[Image Cleanup] 完成 - 图片段落: {total_image_paragraphs}, "
-            f"清理翻译: {cleaned_translations}, 标记段落: {marked_paragraphs}"
+            f"[Image Cleanup] 完成 - 图片段落: {result.total_image_paragraphs}, "
+            f"清理翻译: {result.cleaned_translations}, "
+            f"标记段落: {result.marked_paragraphs}"
         )
 
         return result
@@ -236,57 +366,7 @@ async def get_image_statistics(
     - 检测到的翻译错误数量
     """
     try:
-        # 加载项目数据
-        project = pm.get(project_id)
-        sections = pm.get_sections(project_id)
-
-        total_paragraphs = 0
-        image_paragraphs = 0
-        error_translations = 0
-        sections_with_images = []
-
-        for section in sections:
-            section_total = len(section.paragraphs)
-            section_images = 0
-            section_errors = 0
-
-            for paragraph in section.paragraphs:
-                total_paragraphs += 1
-
-                # 检查是否为图片内容
-                if (paragraph.element_type == ElementType.IMAGE or
-                    detect_image_content(paragraph.source)):
-                    image_paragraphs += 1
-                    section_images += 1
-
-                # 检查翻译错误
-                if paragraph.translations:
-                    for translation in paragraph.translations.values():
-                        trans_text = translation.text if hasattr(translation, 'text') else str(translation)
-                        if detect_image_translation_error(trans_text):
-                            error_translations += 1
-                            section_errors += 1
-
-            if section_images > 0:
-                sections_with_images.append({
-                    "section_id": section.section_id,
-                    "section_title": section.title,
-                    "total_paragraphs": section_total,
-                    "image_paragraphs": section_images,
-                    "error_translations": section_errors,
-                    "image_percentage": (section_images / section_total * 100) if section_total > 0 else 0
-                })
-
-        image_percentage = (image_paragraphs / total_paragraphs * 100) if total_paragraphs > 0 else 0
-
-        return ImageStatsResponse(
-            project_id=project_id,
-            total_paragraphs=total_paragraphs,
-            image_paragraphs=image_paragraphs,
-            image_percentage=round(image_percentage, 2),
-            sections_with_images=sections_with_images,
-            error_translations=error_translations
-        )
+        return await run_blocking(_get_image_statistics_sync, project_id, pm)
 
     except Exception as e:
         logger.error(f"[Image Stats] 获取统计失败: {e}")
@@ -309,48 +389,16 @@ async def prevent_image_translation(
     try:
         logger.info(f"[Image Prevention] 设置图片翻译预防机制: {project_id}")
 
-        # 加载项目
-        project = pm.get(project_id)
-        sections = pm.get_sections(project_id)
-
-        marked_count = 0
-        processed_sections = 0
-
-        for section in sections:
-            section_modified = False
-
-            for paragraph in section.paragraphs:
-                # 检查是否为图片内容但未标记
-                if (detect_image_content(paragraph.source) and
-                    paragraph.element_type != ElementType.IMAGE):
-
-                    # 标记为图片类型
-                    paragraph.element_type = ElementType.IMAGE
-                    marked_count += 1
-                    section_modified = True
-
-                    logger.debug(f"标记段落 {paragraph.id} 为图片类型")
-
-            # 保存修改的章节
-            if section_modified:
-                pm.save_section(project_id, section)
-                processed_sections += 1
-
         # 注:此前这里向 meta.json 裸写 config.skip_image_translation /
         # image_detection_enabled,但全仓无任何代码读取这两个标志,且 ProjectConfig
         # 为固定 schema——下一次模型化 save_meta 会把未知键静默抹除。故移除这段无效写入,
         # 不再对用户作出不成立的"自动跳过"承诺(审计 C27)。真正生效的是上面对 IMAGE
         # 段落的 element_type 标记。
-        logger.info(f"[Image Prevention] 完成 - 标记了 {marked_count} 个图片段落")
-
-        return {
-            "project_id": project_id,
-            "marked_paragraphs": marked_count,
-            "processed_sections": processed_sections,
-            "prevention_enabled": True,
-            "message": f"已标记 {marked_count} 个图片段落",
-            "timestamp": datetime.now().isoformat()
-        }
+        result = await run_blocking(_prevent_image_translation_sync, project_id, pm)
+        logger.info(
+            f"[Image Prevention] 完成 - 标记了 {result['marked_paragraphs']} 个图片段落"
+        )
+        return result
 
     except Exception as e:
         logger.error(f"[Image Prevention] 设置失败: {e}")

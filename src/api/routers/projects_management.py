@@ -14,6 +14,7 @@ from fastapi import APIRouter, Depends, File, Form, Request, UploadFile
 
 from src.core.models import ElementType
 from src.core.project import ProjectManager
+from src.api.utils.concurrency import run_blocking
 
 from ..dependencies import ProjectManagerDep, get_project_manager
 from ..middleware import BadRequestException, NotFoundException
@@ -76,8 +77,9 @@ def _build_project_response(meta) -> ProjectResponse:
 
 @router.get("/projects", response_model=List[ProjectResponse])
 async def list_projects(pm: ProjectManagerDep):
-    # 全目录扫描 + 逐项目读 meta(可能再触发 get_sections)是阻塞 IO,放线程池避免冻结事件循环(审计 N16)。
-    projects = await asyncio.to_thread(pm.list_all)
+    # Read only list fields; full metadata can include megabytes of legacy
+    # section snapshots and total=0 must not trigger a sections scan here.
+    projects = await asyncio.to_thread(pm.list_summaries)
     return [_build_project_response(p) for p in projects]
 
 
@@ -132,28 +134,33 @@ async def upload_project(
             raise BadRequestException(detail="Please upload an HTML or Markdown file")
         is_html_source = source_suffix in HTML_SOURCE_EXTENSIONS
 
-        with tempfile.TemporaryDirectory() as temp_dir:
-            temp_dir_path = Path(temp_dir)
-            safe_source_name = Path(file.filename).name
-            temp_source_path = temp_dir_path / safe_source_name
+        def stage_and_create():
+            with tempfile.TemporaryDirectory() as temp_dir:
+                temp_dir_path = Path(temp_dir)
+                temp_source_path = temp_dir_path / Path(file.filename).name
 
-            with open(temp_source_path, "wb") as out_file:
-                shutil.copyfileobj(file.file, out_file)
+                with open(temp_source_path, "wb") as out_file:
+                    shutil.copyfileobj(file.file, out_file)
 
-            # Keep existing HTML assets upload behavior unchanged.
-            if assets and is_html_source:
-                for asset in assets:
-                    if not asset.filename:
-                        continue
-                    dest_path = _safe_asset_path(temp_dir_path, asset.filename)
-                    if not dest_path:
-                        continue
-                    dest_path.parent.mkdir(parents=True, exist_ok=True)
-                    with open(dest_path, "wb") as out_file:
-                        shutil.copyfileobj(asset.file, out_file)
+                if assets and is_html_source:
+                    for asset in assets:
+                        if not asset.filename:
+                            continue
+                        dest_path = _safe_asset_path(
+                            temp_dir_path,
+                            asset.filename,
+                        )
+                        if not dest_path:
+                            continue
+                        dest_path.parent.mkdir(parents=True, exist_ok=True)
+                        with open(dest_path, "wb") as out_file:
+                            shutil.copyfileobj(asset.file, out_file)
 
-            # HTML->MD 转换 + 分段 + 逐章写盘是 CPU/IO 密集,放线程池避免阻塞事件循环(审计 N17)。
-            meta = await asyncio.to_thread(pm.create, name, str(temp_source_path))
+                return pm.create(name, str(temp_source_path))
+
+        # Staging, conversion, section writes, and temporary cleanup are all
+        # blocking work and must stay off the FastAPI event loop.
+        meta = await run_blocking(stage_and_create)
 
         return _build_project_response(meta)
     except ValueError as e:
@@ -171,10 +178,9 @@ async def upload_project(
         )
         raise BadRequestException(detail=detail)
     finally:
-        file.file.close()
+        await file.close()
         if assets:
-            for asset in assets:
-                asset.file.close()
+            await asyncio.gather(*(asset.close() for asset in assets))
 
 
 @router.get("/projects/{project_id}")
@@ -182,8 +188,9 @@ async def get_project(project_id: str, pm: ProjectManagerDep):
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
     try:
-        meta = pm.get(project_id)
-        sections = pm.get_sections(project_id)
+        meta, sections = await run_blocking(
+            lambda: (pm.get(project_id), pm.get_sections(project_id))
+        )
         return {
             "id": meta.id,
             "title": meta.title,
@@ -217,7 +224,7 @@ async def delete_project(request: Request, project_id: str, pm: ProjectManagerDe
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
     try:
-        pm.delete(project_id)
+        await run_blocking(pm.delete, project_id)
         return {"message": "Project deleted"}
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
@@ -235,8 +242,16 @@ async def export_project(
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
     try:
-        content = pm.export(project_id, include_source=include_source, format=format)
-        filename = pm.get_export_filename(project_id, format=format)
+        content, filename = await run_blocking(
+            lambda: (
+                pm.export(
+                    project_id,
+                    include_source=include_source,
+                    format=format,
+                ),
+                pm.get_export_filename(project_id, format=format),
+            )
+        )
         return {
             "content": content,
             "path": f"projects/{project_id}/{filename}",
@@ -254,7 +269,7 @@ async def get_sections(project_id: str, pm: ProjectManagerDep):
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
     try:
-        sections = pm.get_sections(project_id)
+        sections = await run_blocking(pm.get_sections, project_id)
         return [
             {
                 "section_id": s.section_id,
@@ -291,10 +306,10 @@ async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
         return html
 
     try:
-        section = pm.get_section(project_id, section_id)
+        section = await run_blocking(pm.get_section, project_id, section_id)
         if not section:
             try:
-                pm.get(project_id)
+                await run_blocking(pm.get, project_id)
                 raise NotFoundException(
                     detail=(
                         f"Section '{section_id}' not found in project '{project_id}'. "

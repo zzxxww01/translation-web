@@ -37,5 +37,6 @@ export const postApi = {
   generateTitle: (data: GenerateTitleDto) =>
     apiClient.post<GenerateTitleResult>('/generate/title', data, {
       timeout: REQUEST_TIMEOUTS.POST_TITLE,
+      retry: false,
     }),
 };

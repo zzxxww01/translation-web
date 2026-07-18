@@ -40,7 +40,7 @@
 - 术语必须匹配文章所在领域的中文惯例，不可跨域套用：
   - 云计算：utilization rate→"利用率"（非"出租率"）；capacity→"产能"（非"算力"，除非确实指 compute）
   - 金融：financial modeling→投资分析语境译"金融建模"（非"财务建模"）；tighten→"收紧"
-  - AI：token→AI 语境保留"token"或"Token"（非"代币"）
+  - AI：英文 token/tokens 一律保留为"token"，绝不能译为或注释为"词元"
 - 缩写先后顺序：目标读者熟悉的行业缩写先写缩写后括注全称。
 - 注意区分相近但不同的概念：useful economic life≠资产折旧年限。
 

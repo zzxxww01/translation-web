@@ -35,6 +35,7 @@ class ProgressTracker:
     ) -> TranslationProgress:
         """Create and register a new progress entry."""
         progress = TranslationProgress(
+            project_id=project_id,
             total_sections=total_sections,
             total_paragraphs=total_paragraphs,
             original_status=original_status,

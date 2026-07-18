@@ -197,7 +197,7 @@ export const documentApi = {
 
   stopLongformTranslation: (projectId: string) =>
     apiClient.post<{ status: string; project_id: string; run_id?: string }>(
-      `/projects/${projectId}/translate-four-step/stop`
+      `/projects/${projectId}/translation-cancel`
     ),
 
   /**

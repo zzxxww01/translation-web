@@ -54,6 +54,21 @@ class BadRequestException(APIException):
         )
 
 
+class ConflictException(APIException):
+    """The resource changed while an operation was in progress."""
+
+    def __init__(
+        self,
+        detail: str = "Resource changed while the operation was running",
+        error_code: Optional[str] = None,
+    ):
+        super().__init__(
+            status_code=status.HTTP_409_CONFLICT,
+            detail=detail,
+            error_code=error_code or "RESOURCE_CONFLICT",
+        )
+
+
 class UnauthorizedException(APIException):
     """未授权异常"""
 

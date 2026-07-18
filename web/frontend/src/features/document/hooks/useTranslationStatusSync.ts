@@ -3,6 +3,7 @@ import { documentApi } from '../api';
 import { fullTranslationService } from '../services/fullTranslationService';
 import type { TranslationStatus } from '../../confirmation/types';
 import { useDocumentStore } from '@/shared/stores';
+import { isTranslationRunActive } from '../translationStatus';
 
 export function useTranslationStatusSync(currentProjectId?: string) {
   const [currentStep, setCurrentStep] = useState<string | null>(null);
@@ -33,10 +34,10 @@ export function useTranslationStatusSync(currentProjectId?: string) {
 
         setBackendTranslationStatus(status);
 
-        const isActiveForCurrentProject = status.active_project_id === currentProjectId;
-        const isRunning = status.status === 'processing' && isActiveForCurrentProject;
-        const isCancelling = Boolean(status.is_cancelling && isActiveForCurrentProject);
-        const hasTrackableRun = isRunning || isCancelling;
+        const hasTrackableRun = isTranslationRunActive(
+          status,
+          currentProjectId
+        );
 
         if (hasTrackableRun) {
           setFullTranslateProjectId(currentProjectId);
@@ -49,11 +50,14 @@ export function useTranslationStatusSync(currentProjectId?: string) {
           return;
         }
 
+        const hasActiveLocalStream =
+          fullTranslationService.isTranslating() &&
+          fullTranslationService.getProjectId() === currentProjectId;
         if (
-          fullTranslateProjectId === currentProjectId ||
-          (!fullTranslationService.isTranslating() && !status.active_project_id)
+          fullTranslateProjectId === currentProjectId &&
+          !hasActiveLocalStream
         ) {
-          endFullTranslate();
+          endFullTranslate(currentProjectId);
           if (!fullTranslationService.isTranslating()) {
             setCurrentStep(null);
           }

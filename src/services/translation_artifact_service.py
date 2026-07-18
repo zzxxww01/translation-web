@@ -9,10 +9,12 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 from src.core.models import ArticleAnalysis
+from src.core.file_utils import write_json_atomic
 from src.services.translation_run_registry import RunStateSnapshot
 
 
 logger = logging.getLogger(__name__)
+_MISSING = object()
 
 
 class TranslationArtifactService:
@@ -45,15 +47,23 @@ class TranslationArtifactService:
         return payload
 
     def write_json(self, path: Path, payload: Any) -> None:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "w", encoding="utf-8") as handle:
-            json.dump(
-                self.normalize_payload(payload),
-                handle,
-                ensure_ascii=False,
-                indent=2,
-                default=str,
-            )
+        write_json_atomic(path, self.normalize_payload(payload))
+
+    def write_run_state(
+        self,
+        project_id: str,
+        run_id: str,
+        payload: Dict[str, Any],
+    ) -> None:
+        """Persist the latest task state so polling survives client disconnects."""
+        state = dict(payload)
+        state["project_id"] = project_id
+        state["run_id"] = run_id
+        state["updated_at"] = datetime.now().isoformat()
+        self.write_json(
+            self.artifacts_root(project_id) / run_id / "run-state.json",
+            state,
+        )
 
     def load_latest_analysis_snapshot(self, project_id: str) -> Optional[ArticleAnalysis]:
         artifacts_root = self.artifacts_root(project_id)
@@ -111,39 +121,102 @@ class TranslationArtifactService:
         return None
 
     def get_latest_run_dir(self, project_id: str) -> Optional[Path]:
+        run_dirs = self._get_run_dirs(project_id)
+        return run_dirs[0] if run_dirs else None
+
+    def load_latest_run_snapshot(
+        self,
+        project_id: str,
+    ) -> tuple[Optional[Dict[str, Any]], Optional[RunStateSnapshot]]:
+        """Load polling state and the newest summary with one directory scan."""
+        run_dirs = self._get_run_dirs(project_id)
+        if not run_dirs:
+            return None, None
+
+        latest_run_dir = run_dirs[0]
+        latest_summary = self._read_run_summary(latest_run_dir)
+        summary = latest_summary
+        if summary is None:
+            for run_dir in run_dirs[1:]:
+                summary = self._read_run_summary(run_dir)
+                if summary is not None:
+                    break
+
+        state = self._infer_run_state_from_dir(
+            latest_run_dir,
+            summary_payload=latest_summary,
+        )
+        return summary, state
+
+    def infer_run_state(self, project_id: str) -> Optional[RunStateSnapshot]:
+        return self.load_latest_run_snapshot(project_id)[1]
+
+    def _get_run_dirs(self, project_id: str) -> list[Path]:
         artifacts_root = self.artifacts_root(project_id)
         if not artifacts_root.exists():
-            return None
-
-        run_dirs = sorted(
+            return []
+        return sorted(
             (path for path in artifacts_root.iterdir() if path.is_dir()),
             key=lambda path: path.stat().st_mtime,
             reverse=True,
         )
-        return run_dirs[0] if run_dirs else None
 
-    def infer_run_state(self, project_id: str) -> Optional[RunStateSnapshot]:
-        run_dir = self.get_latest_run_dir(project_id)
-        if run_dir is None:
+    def _read_run_summary(self, run_dir: Path) -> Optional[Dict[str, Any]]:
+        summary_path = run_dir / "run-summary.json"
+        if not summary_path.exists():
+            return None
+        try:
+            payload = json.loads(summary_path.read_text(encoding="utf-8"))
+            return payload if isinstance(payload, dict) else None
+        except Exception as exc:
+            logger.warning("Failed to parse run summary from %s: %s", summary_path, exc)
             return None
 
-        summary_path = run_dir / "run-summary.json"
-        if summary_path.exists():
+    def _infer_run_state_from_dir(
+        self,
+        run_dir: Path,
+        *,
+        summary_payload: Any = _MISSING,
+    ) -> RunStateSnapshot:
+        if summary_payload is _MISSING:
+            summary_payload = self._read_run_summary(run_dir)
+
+        if isinstance(summary_payload, dict):
+            return RunStateSnapshot(
+                run_id=str(summary_payload.get("run_id") or run_dir.name),
+                status=str(summary_payload.get("status") or "processing"),
+                current_step=str(summary_payload.get("status") or "processing"),
+                current_section=None,
+                updated_at=datetime.fromtimestamp(run_dir.stat().st_mtime).isoformat(),
+                started_at=summary_payload.get("started_at"),
+                finished_at=summary_payload.get("finished_at"),
+                error_count=int(
+                    summary_payload.get("error_count")
+                    or len(summary_payload.get("errors") or [])
+                ),
+            )
+
+        state_path = run_dir / "run-state.json"
+        if state_path.exists():
             try:
-                payload = json.loads(summary_path.read_text(encoding="utf-8"))
+                payload = json.loads(state_path.read_text(encoding="utf-8"))
                 if isinstance(payload, dict):
                     return RunStateSnapshot(
                         run_id=str(payload.get("run_id") or run_dir.name),
-                        status=str(payload.get("status") or "processing"),
-                        current_step=str(payload.get("status") or "processing"),
-                        current_section=None,
-                        updated_at=datetime.fromtimestamp(run_dir.stat().st_mtime).isoformat(),
+                        status=str(
+                            payload.get("final_status")
+                            or payload.get("status")
+                            or "processing"
+                        ),
+                        current_step=str(payload.get("current_step") or "processing"),
+                        current_section=payload.get("current_section"),
+                        updated_at=payload.get("updated_at"),
                         started_at=payload.get("started_at"),
                         finished_at=payload.get("finished_at"),
-                        error_count=int(payload.get("error_count") or len(payload.get("errors") or [])),
+                        error_count=int(payload.get("error_count") or 0),
                     )
             except Exception as exc:
-                logger.warning("Failed to parse run summary from %s: %s", summary_path, exc)
+                logger.warning("Failed to parse run state from %s: %s", state_path, exc)
 
         latest_file: Optional[Path] = None
         latest_section: Optional[str] = None

@@ -9,6 +9,7 @@ from pydantic import BaseModel
 from typing import List
 
 from src.llm.models import MODEL_REGISTRY
+from src.api.utils.concurrency import run_blocking
 
 
 router = APIRouter()
@@ -53,6 +54,11 @@ class LegacyModelListResponse(BaseModel):
 
 @router.get("/models", response_model=ModelListResponse)
 async def list_models():
+    """List all available LLM models without blocking the request loop."""
+    return await run_blocking(_list_models_sync)
+
+
+def _list_models_sync() -> ModelListResponse:
     """
     List all available LLM models (grouped by provider).
 
