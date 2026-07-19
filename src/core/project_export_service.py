@@ -7,6 +7,7 @@ from .inline_recovery_service import InlineRecoveryService
 from .markdown_postprocess import postprocess_markdown
 from .models import ElementType, ProjectMeta, Section
 from .title_guard import find_missing_title_terms
+from .translation_qa import run_deterministic_qa
 
 
 class ProjectExportService:
@@ -120,8 +121,13 @@ class ProjectExportService:
         self,
         meta: ProjectMeta,
         sections: list[Section],
+        content: str | None = None,
     ) -> dict[str, Any]:
         issues: list[dict[str, Any]] = []
+        if content:
+            issues.extend(
+                issue.to_dict() for issue in run_deterministic_qa(content)
+            )
         missing_title_terms = find_missing_title_terms(
             meta.title,
             self.preferred_export_title(meta),
@@ -253,7 +259,9 @@ class ProjectExportService:
         content = postprocess_markdown("\n".join(lines))
         output_path = self._project_dir(project_id) / self.build_export_filename(meta, format="zh")
         self._write_text(output_path, content)
-        self.write_export_lint_artifact(project_id, self.build_export_lint_payload(meta, sections))
+        self.write_export_lint_artifact(
+            project_id, self.build_export_lint_payload(meta, sections, content=content)
+        )
         return content
 
     def generate_preview(self, project_id: str) -> str:

@@ -1,5 +1,5 @@
 {
-  "version": 31,
+  "version": 32,
   "terms": [
     {
       "original": "TSMC",
@@ -1298,6 +1298,456 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-03-28T12:16:02.253585"
+    },
+    {
+      "original": "Jensen Huang",
+      "translation": "黄仁勋",
+      "strategy": "first_annotate",
+      "note": "Nvidia CEO，通行译名",
+      "tags": [
+        "people"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Lisa Su",
+      "translation": "苏姿丰",
+      "strategy": "first_annotate",
+      "note": "AMD CEO，通行译名",
+      "tags": [
+        "people"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Microsoft",
+      "translation": "微软",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Google",
+      "translation": "谷歌",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Amazon",
+      "translation": "亚马逊",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Apple",
+      "translation": "苹果",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Oracle",
+      "translation": "甲骨文",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Broadcom",
+      "translation": "博通",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "ASML",
+      "translation": "阿斯麦",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "GlobalFoundries",
+      "translation": "格芯",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Kioxia",
+      "translation": "铠侠",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "SanDisk",
+      "translation": "闪迪",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Western Digital",
+      "translation": "西部数据",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Tesla",
+      "translation": "特斯拉",
+      "strategy": "first_annotate",
+      "note": null,
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Meta",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "无通行译名，保留英文",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "OpenAI",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "保留英文",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Anthropic",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "保留英文",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "SpaceX",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "保留英文",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "CoreWeave",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "保留英文",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "xAI",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "保留英文",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "hyperscaler",
+      "translation": "超大规模云厂商",
+      "strategy": "first_annotate",
+      "note": "全文统一一种译法",
+      "tags": [
+        "ai",
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Neocloud",
+      "translation": "新兴云厂商",
+      "strategy": "first_annotate",
+      "note": "新兴 GPU 算力云厂商；全文统一，不与「新兴算力云厂商」混用",
+      "tags": [
+        "ai",
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "die",
+      "translation": "裸片",
+      "strategy": "translate",
+      "note": "与 chip=芯片 区分；勿与 chiplet=芯粒 混淆",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "scale-up",
+      "translation": "纵向扩展",
+      "strategy": "first_annotate",
+      "note": "与 scale-out=横向扩展 相对；全文统一",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "scale-out",
+      "translation": "横向扩展",
+      "strategy": "first_annotate",
+      "note": "与 scale-up=纵向扩展 相对；全文统一",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "rack-scale",
+      "translation": "机架级",
+      "strategy": "translate",
+      "note": "全文统一，不与「机柜级」混用",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "rollout",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "RL 语境保留英文，不意译为「部署」",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Day 0",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "Day 0/Day N 一律保留英文，禁「第零天/第 N 天」",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "harness",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "保留英文，首次出现可括注（运行/测试框架）",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "financial engineering",
+      "translation": "金融工程",
+      "strategy": "translate",
+      "note": "不得弱化为「财务运作」",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "terminal value",
+      "translation": "终值",
+      "strategy": "translate",
+      "note": "金融术语，非「长期价值」",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "backlog",
+      "translation": "在手订单",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-19T00:00:00.000000"
     }
   ]
 }

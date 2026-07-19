@@ -40,9 +40,29 @@
 - 术语必须匹配文章所在领域的中文惯例，不可跨域套用：
   - 云计算：utilization rate→"利用率"（非"出租率"）；capacity→"产能"（非"算力"，除非确实指 compute）
   - 金融：financial modeling→投资分析语境译"金融建模"（非"财务建模"）；tighten→"收紧"
-  - AI：英文 token/tokens 一律保留为"token"，绝不能译为或注释为"词元"
+  - AI：英文 token/tokens 一律保留为"token"且统一小写（专名 Tokenomics 除外），绝不能译为或注释为"词元"
 - 缩写先后顺序：目标读者熟悉的行业缩写先写缩写后括注全称。
 - 注意区分相近但不同的概念：useful economic life≠资产折旧年限。
+
+## 专名与人名本地化（硬规则）
+- 有通行中文译名的公司/机构/人名，全文首次出现写"中文（English）"，之后只用中文：Nvidia→英伟达、Jensen Huang→黄仁勋、Lisa Su→苏姿丰、TSMC→台积电、Samsung→三星、Micron→美光、SK Hynix→SK 海力士、Microsoft→微软、Google→谷歌、Amazon→亚马逊、Apple→苹果、Oracle→甲骨文、Broadcom→博通、ASML→阿斯麦。
+- 同一名称全篇必须一致，禁止中英混用；无通行译名者（SpaceX、OpenAI、Anthropic、CoreWeave、xAI、作者 handle）保留英文。
+- 拿不准的缩写一律保留英文原样，严禁凭猜测展开全称。
+
+## 语气强度双向对齐（硬规则）
+- 不加码：outperform=优于（≠碾压）、competitive=有竞争（≠白热化）、a real chance=不无可能（≠很大可能）、procure=采购（≠抢购）。原文没有 set to/must/inevitably 时禁用"势必/必将/注定"；标题不得添加原文没有的升格词。
+- 不弱化：sneaky=耍花招（≠精明）、shill=硬推（≠推崇）、mogs=碾压（≠更胜一筹）、cannibalize=蚕食（≠取代）、lackluster/subpar=乏善可陈/拉胯、bet against=看空（≠无意质疑）。俚语的贬义必须保留贬义。
+- 梗与生造词不得字面直译，转写为中文读者能领会的表达。
+
+## 高危句式核查（译前先显式确认再译）
+- "X saw spending from Y" = Y 在 X 身上花钱，先标注主客/金流方向再译，禁止颠倒。
+- 倍数对比保持方向与基准；"and N others"→"等 N 人"（N 不含已署名作者）；比较基准（than …）不得丢。
+- 人称与原文一致：our/we=我们，不得改成"其/该公司"。
+- 形近专名逐字符核对（SWE-rebench≠SWE-bench）；triple/tripling=三倍（禁"翻两番"）。
+
+## 原文笔误处理
+- 明显 typo 在不改事实前提下顺修；数字、URL 即使可疑也照搬。
+- 与上下文量级明显不符的数值按原文翻译并加"（译注：原文如此）"交人工裁决。
 
 ## 中文排版适配
 - 并列词语之间用顿号（、），不用逗号。
