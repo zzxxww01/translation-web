@@ -110,6 +110,42 @@ def test_capitalized_token_words_lowercased():
     assert "TokenBudgeting" in out
 
 
+def test_token_sinicized_words_replaced():
+    # token 严禁翻译（用户硬性要求）：词元/令牌 确定性替换回 token，
+    # 且发生在 CJK–ASCII 补空格之前，替换结果自动获得空格。
+    out = postprocess_markdown("每个词元都要计费，令牌预算翻倍，词元化流程不变")
+    assert "每个 token 都要计费" in out
+    assert "token 预算翻倍" in out
+    assert "token 化流程不变" in out
+    assert "词元" not in out
+    assert "令牌" not in out
+
+
+def test_token_bucket_and_ring_exempted():
+    # 令牌桶/令牌环是网络术语既定译法，紧邻组合词豁免；孤立「令牌」仍替换。
+    out = postprocess_markdown("限流用令牌桶算法，旧网用令牌环，孤立令牌要替换")
+    assert "令牌桶" in out
+    assert "令牌环" in out
+    assert "孤立 token 要替换" in out
+
+
+def test_token_replacement_skips_protected_regions():
+    src = "行内代码`词元`保持，正文词元替换\n\n```\n令牌 bucket sample\n```\n"
+    out = postprocess_markdown(src)
+    assert "`词元`" in out
+    assert "正文 token 替换" in out
+    assert "令牌 bucket sample" in out
+
+
+def test_token_replacement_idempotent():
+    src = "词元化与令牌桶：每个词元、每块令牌都要过一遍"
+    once = postprocess_markdown(src)
+    twice = postprocess_markdown(once)
+    assert once == twice
+    assert "token 化" in once
+    assert "令牌桶" in once
+
+
 def test_repeated_annotation_deduped():
     # A-11：同一"中文（English）"精确重复的第 2+ 次出现自动去括注。
     src = "德州电力可靠性委员会（ERCOT）负责调度。稍后德州电力可靠性委员会（ERCOT）再次表态。"

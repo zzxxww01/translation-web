@@ -600,7 +600,10 @@ def normalize_glossary_term(
     if original.casefold() == "token":
         translation = "token"
         strategy = TranslationStrategy.PRESERVE
-        note = "强制保留英文 token，不译为“词元”"
+        note = (
+            "严禁翻译：强制保留英文 token，且一律小写（Token→token；"
+            "Tokenomics 等复合专名除外），不能译为「词元/令牌」"
+        )
     first_occurrence = (
         term.first_occurrence.strip()
         if isinstance(term.first_occurrence, str) and term.first_occurrence.strip()

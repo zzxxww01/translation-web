@@ -567,7 +567,7 @@
       "original": "token",
       "translation": "token",
       "strategy": "preserve",
-      "note": "强制保留英文 token，且一律小写（Token→token；Tokenomics 等复合专名除外），不能译为「词元/令牌」",
+      "note": "严禁翻译：强制保留英文 token，且一律小写（Token→token；Tokenomics 等复合专名除外），不能译为「词元/令牌」",
       "tags": [
         "ai"
       ],

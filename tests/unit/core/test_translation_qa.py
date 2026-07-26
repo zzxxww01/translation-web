@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """确定性 QA gate 单元测试（translation_qa）。"""
 
+from src.core import translation_qa
 from src.core.translation_qa import (
     QAIssue,
     format_qa_report,
@@ -56,10 +57,29 @@ def test_token_sinicized_is_critical():
     assert has_critical(issues)
 
 
-def test_lingpai_is_warning_only():
+def test_lingpai_is_critical():
+    # token 严禁翻译（用户硬性要求）：「令牌」从 warning 升级为 critical。
     issues = run_deterministic_qa("每秒 500 个令牌")
-    assert "token_as_lingpai" in _codes(issues)
-    assert not has_critical(issues)
+    assert "token_sinicized" in _codes(issues)
+    assert has_critical(issues)
+
+
+def test_daibi_is_critical():
+    issues = run_deterministic_qa("该模型的代币定价上调了")
+    assert "token_sinicized" in _codes(issues)
+    assert has_critical(issues)
+
+
+def test_token_bucket_and_ring_exempted():
+    # 令牌桶/令牌环是网络术语 token bucket / token ring 的既定译法，豁免。
+    issues = run_deterministic_qa("限流采用令牌桶算法，旧局域网用令牌环拓扑")
+    assert "token_sinicized" not in _codes(issues)
+
+
+def test_isolated_lingpai_next_to_exempt_compound_still_flagged():
+    issues = run_deterministic_qa("令牌桶里的令牌会定期补充")
+    assert "token_sinicized" in _codes(issues)
+    assert has_critical(issues)
 
 
 def test_bold_parity_detected():
@@ -227,3 +247,70 @@ def test_money_magnitude_correct_conversion_not_flagged():
     content = "营收达 12 亿美元，资本支出为 5 亿美元。"
     issues = run_deterministic_qa(content, source=source)
     assert "money_magnitude" not in _codes(issues)
+
+
+# --- 词表术语英文残留扫描（glossary_term_residue，warning）---
+
+
+def test_glossary_term_residue_reports_top_counts(monkeypatch):
+    monkeypatch.setattr(
+        translation_qa, "_load_translate_strategy_terms",
+        lambda: ["wafer", "foundry"],
+    )
+    content = "这批 wafer 良率不错，Wafers 供应仍紧张，foundry 产能已满载。"
+    issues = run_deterministic_qa(content)
+    issue = next(i for i in issues if i.code == "glossary_term_residue")
+    assert issue.severity == "warning"
+    assert "wafer×2" in issue.sample  # 大小写不敏感 + 简单复数 s
+    assert "foundry×1" in issue.sample
+    assert not has_critical(issues)
+
+
+def test_glossary_term_residue_annotation_exempt(monkeypatch):
+    # `中文（English）` 首现括注内的英文属合法出现，不计入残留。
+    monkeypatch.setattr(
+        translation_qa, "_load_translate_strategy_terms", lambda: ["wafer"]
+    )
+    issues = run_deterministic_qa("晶圆（wafer）产线扩建，此后全文均用中文晶圆。")
+    assert "glossary_term_residue" not in _codes(issues)
+
+
+def test_glossary_term_residue_word_boundary(monkeypatch):
+    monkeypatch.setattr(
+        translation_qa, "_load_translate_strategy_terms", lambda: ["node"]
+    )
+    issues = run_deterministic_qa("内部代号 nodex 不算残留，nodes 才算。")
+    issue = next(i for i in issues if i.code == "glossary_term_residue")
+    assert "node×1" in issue.sample
+
+
+def test_glossary_residue_only_translate_strategies_scanned(monkeypatch):
+    from src.core.glossary import GlossaryManager
+    from src.core.models import Glossary, GlossaryTerm, TranslationStrategy
+
+    glossary = Glossary(terms=[
+        GlossaryTerm(
+            original="wafer", translation="晶圆",
+            strategy=TranslationStrategy.TRANSLATE,
+        ),
+        GlossaryTerm(
+            original="EUV", translation="EUV",
+            strategy=TranslationStrategy.PRESERVE,
+        ),
+    ])
+    monkeypatch.setattr(GlossaryManager, "load_global", lambda self: glossary)
+    issues = run_deterministic_qa("EUV 光刻配套的 wafer 产线。")
+    issue = next(i for i in issues if i.code == "glossary_term_residue")
+    assert "wafer×1" in issue.sample
+    assert "EUV" not in issue.sample  # preserve 策略不参与残留扫描
+
+
+def test_glossary_residue_loader_failure_is_silent(monkeypatch):
+    from src.core.glossary import GlossaryManager
+
+    def _boom(self):
+        raise RuntimeError("glossary unavailable")
+
+    monkeypatch.setattr(GlossaryManager, "load_global", _boom)
+    issues = run_deterministic_qa("这批 wafer 良率不错。")
+    assert "glossary_term_residue" not in _codes(issues)

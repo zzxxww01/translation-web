@@ -143,6 +143,13 @@ _USELESS_ESCAPES = re.compile(r"\\([@&])")
 # must stay lowercase English per the house style.
 _CAPITALIZED_TOKEN_WORD = re.compile(r"\bToken(s)?\b")
 
+# token 严禁翻译（2026-07 用户硬性要求）：词元/令牌 确定性替换回 token。
+# 仅「令牌桶/令牌环」（网络术语 token bucket / token ring 的既定译法）按
+# 紧邻组合词豁免；孤立「令牌」仍替换。「词元化」→「token 化」显式给出
+# 空格，保证该步自身幂等（与 2e 的 CJK–ASCII 补空格结果一致）。
+_TOKEN_CIYUAN_HUA = re.compile(r"词元化")
+_TOKEN_SINICIZED_WORD = re.compile(r"词元|令牌(?![桶环])")
+
 # `\u4e2d\u6587\uff08English\uff09` first-occurrence annotation. Used to strip exact repeated
 # annotations for the same English term (annotation stacking, 2026-07 audit).
 _CJK_EN_ANNOTATION = re.compile(
@@ -322,6 +329,11 @@ def postprocess_markdown(
 
     # 2d. Normalise excessive blank lines → max 2 newlines
     work = _EXCESSIVE_BLANK_LINES.sub("\n\n", work)
+
+    # 2d2. token 严禁翻译：词元/令牌 → token（令牌桶/令牌环 网络术语豁免）。
+    #      置于 2e 之前，让替换出的 token 与相邻 CJK 之间补上空格。
+    work = _TOKEN_CIYUAN_HUA.sub("token 化", work)
+    work = _TOKEN_SINICIZED_WORD.sub("token", work)
 
     # 2e. CJK–Latin spacing
     work = normalize_cjk_ascii_spacing(work)

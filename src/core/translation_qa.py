@@ -35,12 +35,14 @@ _LATEX_MANGLED = re.compile(
 )
 _LINK_COLLAPSE = re.compile(r"\[[^\]\[]*\[[^\]]*\]\(")
 _URL_ESCAPED_AMP = re.compile(r"\\&")
-_TOKEN_SINICIZED = re.compile(r"词元|代币经济学")
+# token 严禁翻译（用户硬性要求）：词元/令牌/代币 任一出现即 critical。
+# 仅「令牌桶/令牌环」（网络术语 token bucket / token ring 的既定译法）按
+# 紧邻组合词豁免；孤立「令牌」仍报。
+_TOKEN_SINICIZED = re.compile(r"词元|代币|令牌(?![桶环])")
 _POWER_UNIT_SINICIZED = re.compile(r"吉瓦|兆瓦|千瓦")
 
 # --- warning patterns ------------------------------------------------------
 
-_TOKEN_AS_LINGPAI = re.compile(r"令牌")
 _DAY_SINICIZED = re.compile(r"第\s?[零0一]\s?[天日]")
 _FAN_LIANG_FAN = re.compile(r"翻两番")
 _THOUSANDS_MAGNITUDE = re.compile(r"\d,\d{3}\s?[万亿]")
@@ -65,6 +67,12 @@ _TOKEN_CAPITALIZED = re.compile(r"\bTokens?\b")
 _CJK_EN_ANNOTATION = re.compile(
     r"(?<=[一-鿿])（\s*([A-Za-z][A-Za-z0-9 .&'/+-]{0,60}?)\s*）"
 )
+# 括注区段（术语残留扫描用）：`（English）` 内的英文属合法首现标注，
+# 统计残留前整段掩掉。
+_EN_ANNOTATION_SPAN = re.compile(r"（\s*[A-Za-z][A-Za-z0-9 .&'/+-]{0,60}\s*）")
+# 词表英文原词的合法形态（用于构造词边界残留扫描 regex）
+_GLOSSARY_TERM_SHAPE = re.compile(r"[A-Za-z][A-Za-z0-9 .&'/+-]*")
+_GLOSSARY_RESIDUE_TOP_N = 10
 # 金额量级抽验（A-6）：en 侧 $?数字+million/billion/trillion/M/B/T
 # （单字母缩写只认大写，避免把 "3 m cable" 之类误当金额量级）
 _EN_MONEY_MAGNITUDE = re.compile(
@@ -183,7 +191,8 @@ def run_deterministic_qa(
     _collect(issues, _URL_ESCAPED_AMP, raw_pairs, "url_escaped_amp",
              "critical", "残留 \\&（URL 内会破坏链接）")
     _collect(issues, _TOKEN_SINICIZED, prose_pairs, "token_sinicized",
-             "critical", "token 被汉化（词元）或 Tokenomics 误译为代币经济学")
+             "critical", "token 被汉化（词元/令牌/代币）——严禁翻译，应保留英文 "
+                         "token（令牌桶/令牌环 等网络术语除外）")
     _collect(issues, _POWER_UNIT_SINICIZED, prose_pairs, "power_unit_sinicized",
              "critical", "功率/能量单位被译（吉瓦/兆瓦/千瓦），应保留 GW/MW/kW 原形")
     _collect(issues, _LOCAL_IMAGE_PLACEHOLDER, raw_pairs, "local_image_placeholder",
@@ -211,8 +220,6 @@ def run_deterministic_qa(
         ))
 
     # --- 惯例与排版（warning）---
-    _collect(issues, _TOKEN_AS_LINGPAI, prose_pairs, "token_as_lingpai",
-             "warning", "出现「令牌」——若源文是 AI 语境的 token 应保留英文")
     _collect(issues, _DAY_SINICIZED, prose_pairs, "day_sinicized",
              "warning", "Day 0/Day N 疑似被汉化（第零天/第一日）")
     _collect(issues, _FAN_LIANG_FAN, prose_pairs, "fan_liang_fan",
@@ -227,6 +234,11 @@ def run_deterministic_qa(
              "warning", "疑似拼接叠字（在在/的的/了了）")
     _collect(issues, _TOKEN_CAPITALIZED, prose_pairs, "token_capitalized",
              "warning", "独立词大写 Token/Tokens（应小写；Tokenomics 等复合专名除外）")
+
+    # 词表 translate/first_annotate 术语的英文原词残留扫描（warning）
+    residue_issue = _check_glossary_term_residue(prose_pairs)
+    if residue_issue is not None:
+        issues.append(residue_issue)
 
     # 同一英文词的 `中文（English）` 括注出现 >= 2 次（括注堆叠，A-11）
     annotation_counts: dict[str, int] = {}
@@ -372,6 +384,74 @@ def _check_money_magnitude(source: str, content: str) -> List[QAIssue]:
             ))
         flagged += 1
     return issues
+
+
+def _load_translate_strategy_terms() -> List[str]:
+    """加载全局词表中 strategy 为 translate/first_annotate 的英文原词。
+
+    复用项目现有 Glossary 加载方式（GlossaryManager.load_global）；任何加载
+    异常（缺文件/坏 JSON/依赖问题）一律静默跳过——本检查是 best-effort
+    warning，不得因词表不可用而阻断 QA。
+    """
+    try:
+        from .glossary import GlossaryManager
+        from .models import TranslationStrategy
+
+        glossary = GlossaryManager().load_global()
+    except Exception:
+        return []
+
+    terms: List[str] = []
+    for term in glossary.terms:
+        if getattr(term, "status", "active") != "active":
+            continue
+        if term.strategy not in (
+            TranslationStrategy.TRANSLATE,
+            TranslationStrategy.FIRST_ANNOTATE,
+        ):
+            continue
+        original = (term.original or "").strip()
+        if original and _GLOSSARY_TERM_SHAPE.fullmatch(original):
+            terms.append(original)
+    return terms
+
+
+def _check_glossary_term_residue(
+    prose_pairs: List[tuple[int, str]]
+) -> Optional[QAIssue]:
+    """词表要求翻译的术语在译文正文中的英文原词残留扫描（warning）。
+
+    词边界、大小写不敏感、含简单复数 s；`中文（English）` 首现括注内的
+    英文属合法出现，先掩掉括注区段再统计。报 top 10。
+    """
+    terms = _load_translate_strategy_terms()
+    if not terms:
+        return None
+
+    masked_lines = [
+        _EN_ANNOTATION_SPAN.sub("（）", line) for _, line in prose_pairs
+    ]
+    counts: dict[str, int] = {}
+    for term in terms:
+        pattern = re.compile(
+            r"(?<![A-Za-z0-9])" + re.escape(term) + r"s?(?![A-Za-z0-9])",
+            re.IGNORECASE,
+        )
+        total = sum(len(pattern.findall(line)) for line in masked_lines)
+        if total:
+            counts[term] = total
+    if not counts:
+        return None
+
+    top = sorted(counts.items(), key=lambda item: (-item[1], item[0].lower()))
+    top = top[:_GLOSSARY_RESIDUE_TOP_N]
+    return QAIssue(
+        code="glossary_term_residue",
+        severity="warning",
+        message=f"词表 translate/first_annotate 术语英文原词残留 {len(counts)} 种"
+                f"（top {len(top)}；“中文（English）”首现括注内不计）",
+        sample="、".join(f"{term}×{count}" for term, count in top),
+    )
 
 
 def has_critical(issues: Iterable[QAIssue]) -> bool:
