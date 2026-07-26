@@ -69,7 +69,7 @@ async def test_section_executor_filters_structured_metadata_from_automatic_trans
         source="By Jane Doe, and 2 others",
         is_metadata=True,
         metadata_type="byline",
-        confirmed="作者：Jane Doe 等 3 人",
+        confirmed="作者：Jane Doe 及另外 2 位作者",
     )
     body = Paragraph(id="p1", index=1, source="Claude Code changes workflows")
     section = Section(

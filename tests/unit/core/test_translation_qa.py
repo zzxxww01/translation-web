@@ -17,7 +17,7 @@ def test_clean_content_has_no_issues():
     content = (
         "# 英伟达（Nvidia）发布新品\n\n"
         "## 市场影响\n\n"
-        "黄仁勋表示，token 消耗量增长了三倍，“前所未有”。\n\n"
+        '黄仁勋表示，token 消耗量增长了三倍，"前所未有"。\n\n'
         "估值达到 2600 万美元。\n"
     )
     assert run_deterministic_qa(content) == []
@@ -68,8 +68,10 @@ def test_bold_parity_detected():
 
 
 def test_quote_imbalance_detected():
-    issues = run_deterministic_qa("他说“话没关上就走了")
+    # A-12：改为直引号计数配平（奇数即 critical）
+    issues = run_deterministic_qa('他说"话没关上就走了')
     assert "quote_imbalance" in _codes(issues)
+    assert has_critical(issues)
 
 
 def test_fan_liang_fan_is_warning():
@@ -124,3 +126,104 @@ def test_format_report_contains_tags():
     report = format_qa_report(issues)
     assert "CRITICAL" in report
     assert "token_sinicized" in report
+
+# --- 2026-07 新增检查项（A-2 / A-5 / A-6 / A-12）---
+
+
+def test_malformed_link_token_residue_detected():
+    # A-2：`](LINK_1)`（token id 被当 URL 写入）也必须命中 critical。
+    issues = run_deterministic_qa("残留 [**报告**](LINK_1)外](https://x.com)")
+    assert "format_token_residue" in _codes(issues)
+    assert has_critical(issues)
+
+
+def test_power_unit_sinicized_is_critical():
+    issues = run_deterministic_qa("园区容量达 5 吉瓦，另有 300 兆瓦备用")
+    assert "power_unit_sinicized" in _codes(issues)
+    assert has_critical(issues)
+
+
+def test_capitalized_token_word_is_warning():
+    issues = run_deterministic_qa("每个 Token 都要计费")
+    assert "token_capitalized" in _codes(issues)
+    assert not has_critical(issues)
+
+
+def test_compound_token_proper_nouns_whitelisted():
+    issues = run_deterministic_qa("Tokenomics 与 TokenBudgeting 是专名，Tokenmaxxing 也是")
+    assert "token_capitalized" not in _codes(issues)
+
+
+def test_repeated_annotation_is_warning():
+    content = (
+        "德州电力可靠性委员会（ERCOT）负责调度。"
+        "德州电力可靠性委员会（ERCOT）再次表态。"
+    )
+    issues = run_deterministic_qa(content)
+    assert "annotation_repeated" in _codes(issues)
+    assert not has_critical(issues)
+
+
+def test_single_annotation_not_flagged():
+    issues = run_deterministic_qa("英伟达（Nvidia）发布，台积电（TSMC）代工。")
+    assert "annotation_repeated" not in _codes(issues)
+
+
+def test_link_count_and_url_set_diff_are_critical():
+    source = "见 [A](https://a.com) 与 [B](https://b.com)。"
+    content = "见 [甲](https://a.com)。"
+    issues = run_deterministic_qa(content, source=source)
+    codes = _codes(issues)
+    assert "link_count_mismatch" in codes
+    assert "url_set_diff" in codes
+    assert has_critical(issues)
+
+
+def test_matching_links_not_flagged():
+    source = "See [A](https://a.com) and ![img](https://i.com/x.png)."
+    content = "见 [甲](https://a.com) 与 ![图](https://i.com/x.png)。"
+    issues = run_deterministic_qa(content, source=source)
+    codes = _codes(issues)
+    assert "link_count_mismatch" not in codes
+    assert "url_set_diff" not in codes
+
+
+def test_extra_zh_heading_is_critical():
+    source = "## A\n\n正文。\n"
+    content = "## 引言\n\n导语。\n\n## 甲\n\n正文。\n"
+    issues = run_deterministic_qa(content, source=source)
+    assert "extra_heading" in _codes(issues)
+    assert has_critical(issues)
+
+
+def test_missing_zh_heading_is_warning():
+    source = "## A\n\n## B\n\n正文。\n"
+    content = "## 甲\n\n正文。\n"
+    issues = run_deterministic_qa(content, source=source)
+    codes = _codes(issues)
+    assert "heading_count_mismatch" in codes
+    assert "extra_heading" not in codes
+
+
+def test_blockquote_count_mismatch_is_warning():
+    source = "> a\n\n> b\n\n> c\n\n> d\n"
+    content = "> 甲\n\n> 乙\n"
+    issues = run_deterministic_qa(content, source=source)
+    assert "blockquote_count_mismatch" in _codes(issues)
+    assert not has_critical(issues)
+
+
+def test_money_magnitude_tenfold_error_flagged():
+    # CXMT 实测：KRW 14.8 billion 被译成 1480 亿（10 倍错）。
+    source = "Revenue reached KRW 14.8 billion this quarter."
+    content = "本季度营收达 1480 亿韩元。"
+    issues = run_deterministic_qa(content, source=source)
+    assert "money_magnitude" in _codes(issues)
+    assert not has_critical(issues)
+
+
+def test_money_magnitude_correct_conversion_not_flagged():
+    source = "Revenue reached $1.2B and capex was $500 million."
+    content = "营收达 12 亿美元，资本支出为 5 亿美元。"
+    issues = run_deterministic_qa(content, source=source)
+    assert "money_magnitude" not in _codes(issues)

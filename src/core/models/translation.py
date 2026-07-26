@@ -269,6 +269,9 @@ class Section(BaseModel):
     title: str
     title_translation: Optional[str] = None
     title_source: Optional[str] = None
+    # 解析器合成的章节（如首个 H2 之前导语的 "00-intro"）：源文并无对应
+    # 标题，导出时必须跳过标题行，否则 zh 会比 en 多出 "## 引言"（A-4）。
+    synthetic: bool = False
     paragraphs: List[Paragraph] = Field(default_factory=list)
 
     @property

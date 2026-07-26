@@ -342,24 +342,27 @@ class SourceMetadataTranslationService:
         body_without_others = self.BYLINE_OTHERS_RE.sub("", body)
         body_without_others = re.sub(r"\s*,\s*$", "", body_without_others).strip()
 
+        # 口径统一（A-8）："and N others" → "及另外 N 位作者"，N 取 others
+        # 原值，禁止与已署名作者数累加（累加口径是 2026-07 审校实测 bug）。
         tokenized_names = self._extract_byline_names(entry.paragraph)
-        total_count = len(tokenized_names) + others_count
 
         if tokenized_names:
             translated = f"作者：{'、'.join(tokenized_names)}"
             if others_count:
-                translated += f" 等 {total_count} 人"
+                translated += f" 及另外 {others_count} 位作者"
             return self._build_payload(entry.paragraph, translated)
 
         plain_names = self._split_plain_byline_names(body_without_others)
         if not plain_names and others_count:
-            return self._build_payload(entry.paragraph, f"作者：等 {others_count} 人")
+            return self._build_payload(
+                entry.paragraph, f"作者：另外 {others_count} 位作者"
+            )
         if not plain_names:
             return None
 
         translated = f"作者：{'、'.join(plain_names)}"
         if others_count:
-            translated += f" 等 {len(plain_names) + others_count} 人"
+            translated += f" 及另外 {others_count} 位作者"
         return self._build_payload(entry.paragraph, translated)
 
     def _translate_date_access(

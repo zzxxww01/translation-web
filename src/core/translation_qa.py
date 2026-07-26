@@ -25,8 +25,10 @@ _CJK_RE = re.compile(r"[一-鿿]")
 # --- critical patterns -----------------------------------------------------
 
 _PLACEHOLDER_RESIDUE = re.compile(r"\x00PROTECTED_\d+\x00|￰\d+￰")
+# 放宽（A-2）：既抓 `[[LINK_n` 形近写法，也抓 `](LINK_1)`（token id 被当 URL）
+# 等任意 `(`/`[`/`{` 后紧跟 token id 的畸形残留。
 _FORMAT_TOKEN_RESIDUE = re.compile(
-    r"\[{2,}\s*(?:LINK|STRONG|EM|CODE)_\d+", re.IGNORECASE
+    r"[\(\[\{]\s*(?:LINK|STRONG|EM|CODE)_\d+", re.IGNORECASE
 )
 _LATEX_MANGLED = re.compile(
     r"(?<![\\A-Za-z])(?:ext\{|rac\{|egin\{|imes\b|cdot\b)"
@@ -34,6 +36,7 @@ _LATEX_MANGLED = re.compile(
 _LINK_COLLAPSE = re.compile(r"\[[^\]\[]*\[[^\]]*\]\(")
 _URL_ESCAPED_AMP = re.compile(r"\\&")
 _TOKEN_SINICIZED = re.compile(r"词元|代币经济学")
+_POWER_UNIT_SINICIZED = re.compile(r"吉瓦|兆瓦|千瓦")
 
 # --- warning patterns ------------------------------------------------------
 
@@ -48,8 +51,35 @@ _DOUBLED_PUNCT = re.compile(r"(?:，，|。。|：：|、、|；；)")
 _STACKED_CHARS = re.compile(r"(?<!实)在在|(?<!的)的的|(?<!了)了了")
 _HEADING_LINE = re.compile(r"^#{2,6}\s")
 _IMAGE_MD = re.compile(r"!\[[^\]]*\]\(")
-_HEADING_MD = re.compile(r"^#{1,6}\s", re.MULTILINE)
+# H2-H6 对照（导出 zh 固定带 `# 标题` H1，而 en 源文常无 H1，
+# 用 H2+ 对照才能准确抓"zh 独有标题"，见 A-4/A-5）。
+_SUBHEADING_MD = re.compile(r"^#{2,6}\s", re.MULTILINE)
+_BLOCKQUOTE_LINE = re.compile(r"^\s*>", re.MULTILINE)
 _LOCAL_IMAGE_PLACEHOLDER = re.compile(r"\]\(images/img_")
+# 非图片 markdown 链接的 URL（`![...](...)` 由 image 检查负责）
+_MD_LINK_URL = re.compile(r"(?<!!)\[[^\]]*\]\(\s*(<?[^)\s]+>?)(?:\s+\"[^\"]*\")?\s*\)")
+# 大写 Token/Tokens 独立词（词边界天然放过 Tokenomics/TokenBudgeting/
+# Tokenmaxxing 等复合专名白名单）
+_TOKEN_CAPITALIZED = re.compile(r"\bTokens?\b")
+# `中文（English）` 首现括注
+_CJK_EN_ANNOTATION = re.compile(
+    r"(?<=[一-鿿])（\s*([A-Za-z][A-Za-z0-9 .&'/+-]{0,60}?)\s*）"
+)
+# 金额量级抽验（A-6）：en 侧 $?数字+million/billion/trillion/M/B/T
+# （单字母缩写只认大写，避免把 "3 m cable" 之类误当金额量级）
+_EN_MONEY_MAGNITUDE = re.compile(
+    r"\$?\s*(\d+(?:\.\d+)?)\s*([Mm]illion|[Bb]illion|[Tt]rillion|[MBT]\b)"
+)
+_ZH_MONEY_MAGNITUDE = re.compile(r"(\d+(?:\.\d+)?)\s*(万亿|亿|万)")
+_EN_MAGNITUDE_MULTIPLIER = {
+    "million": 1e6,
+    "m": 1e6,
+    "billion": 1e9,
+    "b": 1e9,
+    "trillion": 1e12,
+    "t": 1e12,
+}
+_ZH_MAGNITUDE_MULTIPLIER = {"万": 1e4, "亿": 1e8, "万亿": 1e12}
 
 _INLINE_CODE_MASK = re.compile(r"`[^`]*`")
 _URL_MASK = re.compile(r"\(https?://[^)]*\)|https?://\S+")
@@ -154,6 +184,8 @@ def run_deterministic_qa(
              "critical", "残留 \\&（URL 内会破坏链接）")
     _collect(issues, _TOKEN_SINICIZED, prose_pairs, "token_sinicized",
              "critical", "token 被汉化（词元）或 Tokenomics 误译为代币经济学")
+    _collect(issues, _POWER_UNIT_SINICIZED, prose_pairs, "power_unit_sinicized",
+             "critical", "功率/能量单位被译（吉瓦/兆瓦/千瓦），应保留 GW/MW/kW 原形")
     _collect(issues, _LOCAL_IMAGE_PLACEHOLDER, raw_pairs, "local_image_placeholder",
              "critical", "本地图片占位链接（images/img_），导出后必成死链")
 
@@ -170,11 +202,12 @@ def run_deterministic_qa(
             code="mathblock_parity", severity="critical",
             message=f"$$ 公式块定界符共 {math_fences} 个（奇数，存在未闭合）",
         ))
-    n_open, n_close = content.count("“"), content.count("”")
-    if n_open != n_close:
+    # 目标风格为英文直引号（A-12）：按直引号总数配平（散文区，掩码后统计）
+    straight_quotes = sum(line.count('"') for _, line in prose_pairs)
+    if straight_quotes % 2:
         issues.append(QAIssue(
             code="quote_imbalance", severity="critical",
-            message=f"双引号方向不配平：开引号={n_open} 闭引号={n_close}",
+            message=f"直引号 \" 全文共 {straight_quotes} 个（奇数，存在未闭合）",
         ))
 
     # --- 惯例与排版（warning）---
@@ -192,6 +225,24 @@ def run_deterministic_qa(
              "warning", "叠写标点（：： ，， 。。）")
     _collect(issues, _STACKED_CHARS, prose_pairs, "stacked_chars",
              "warning", "疑似拼接叠字（在在/的的/了了）")
+    _collect(issues, _TOKEN_CAPITALIZED, prose_pairs, "token_capitalized",
+             "warning", "独立词大写 Token/Tokens（应小写；Tokenomics 等复合专名除外）")
+
+    # 同一英文词的 `中文（English）` 括注出现 >= 2 次（括注堆叠，A-11）
+    annotation_counts: dict[str, int] = {}
+    for _, line in prose_pairs:
+        for term in _CJK_EN_ANNOTATION.findall(line):
+            key = term.strip()
+            annotation_counts[key] = annotation_counts.get(key, 0) + 1
+    repeated_annotations = sorted(
+        term for term, count in annotation_counts.items() if count >= 2
+    )
+    if repeated_annotations:
+        issues.append(QAIssue(
+            code="annotation_repeated", severity="warning",
+            message="同一英文词的“中文（English）”括注出现 ≥2 次（首现之后应只用中文名）",
+            sample="、".join(repeated_annotations[:_MAX_SAMPLES_PER_CHECK]),
+        ))
 
     odd_quote_lines = [
         (lineno, line) for lineno, line in prose_pairs
@@ -215,7 +266,7 @@ def run_deterministic_qa(
             line=lineno, sample=line.strip()[:120],
         ))
 
-    # --- 与英文原文对照（可选，warning）---
+    # --- 与英文原文对照（可选）---
     if source:
         src_imgs = len(_IMAGE_MD.findall(source))
         dst_imgs = len(_IMAGE_MD.findall(content))
@@ -224,15 +275,102 @@ def run_deterministic_qa(
                 code="image_count_mismatch", severity="warning",
                 message=f"图片数量与原文不一致：en={src_imgs} zh={dst_imgs}",
             ))
-        src_heads = len(_HEADING_MD.findall(source))
-        dst_heads = len(_HEADING_MD.findall(content))
-        if src_heads != dst_heads:
+
+        # zh 独有标题（A-4/A-5，critical）：按 H2-H6 对照——导出 zh 固定带
+        # `# 标题` H1，而 en 源文常无 H1，全级别对照会造成常态误报。
+        src_subheads = len(_SUBHEADING_MD.findall(source))
+        dst_subheads = len(_SUBHEADING_MD.findall(content))
+        if dst_subheads > src_subheads:
+            issues.append(QAIssue(
+                code="extra_heading", severity="critical",
+                message=f"译文标题数多于原文：en={src_subheads} zh={dst_subheads}"
+                        "（疑似自造“引言”类标题）",
+            ))
+        elif src_subheads != dst_subheads:
             issues.append(QAIssue(
                 code="heading_count_mismatch", severity="warning",
-                message=f"标题数量与原文不一致：en={src_heads} zh={dst_heads}"
-                        "（检查是否自造或漏译标题）",
+                message=f"标题数量与原文不一致：en={src_subheads} zh={dst_subheads}"
+                        "（检查是否漏译标题）",
             ))
 
+        # 链接数对照 + URL 集合 diff（A-5，critical）
+        src_urls = [url.strip("<>") for url in _MD_LINK_URL.findall(source)]
+        dst_urls = [url.strip("<>") for url in _MD_LINK_URL.findall(content)]
+        if len(src_urls) != len(dst_urls):
+            issues.append(QAIssue(
+                code="link_count_mismatch", severity="critical",
+                message=f"链接数量与原文不一致：en={len(src_urls)} zh={len(dst_urls)}",
+            ))
+        missing_urls = sorted(set(src_urls) - set(dst_urls))
+        extra_urls = sorted(set(dst_urls) - set(src_urls))
+        if missing_urls or extra_urls:
+            samples = []
+            if missing_urls:
+                samples.append("缺失: " + " ".join(missing_urls[:3]))
+            if extra_urls:
+                samples.append("多出: " + " ".join(extra_urls[:3]))
+            issues.append(QAIssue(
+                code="url_set_diff", severity="critical",
+                message=f"URL 集合与原文不一致：缺失 {len(missing_urls)} 条、"
+                        f"多出 {len(extra_urls)} 条（防漏链/错链）",
+                sample=" | ".join(samples)[:200],
+            ))
+
+        # blockquote `>` 行数对照（warning，防引用块合并/拆分）
+        src_quotes = len(_BLOCKQUOTE_LINE.findall(source))
+        dst_quotes = len(_BLOCKQUOTE_LINE.findall(content))
+        if src_quotes != dst_quotes:
+            issues.append(QAIssue(
+                code="blockquote_count_mismatch", severity="warning",
+                message=f"blockquote `>` 行数与原文不一致：en={src_quotes} "
+                        f"zh={dst_quotes}（禁合并/拆分引用块）",
+            ))
+
+        issues.extend(_check_money_magnitude(source, content))
+
+    return issues
+
+
+def _check_money_magnitude(source: str, content: str) -> List[QAIssue]:
+    """金额量级抽验（A-6，warning）：抓 en↔zh 之间疑似 10 倍量级换算错。
+
+    en 侧提取 `$X million/billion/trillion|M/B/T`，zh 侧提取 `Y 万/亿/万亿`，
+    数值做货币无关的等值比对；某个 en 金额在 zh 中找不到等值数（±18%），
+    却存在 ~10 倍/0.1 倍的数（±15%），即报 warning。不求全，抓 top 案例。
+    """
+    issues: List[QAIssue] = []
+    zh_values = [
+        float(number) * _ZH_MAGNITUDE_MULTIPLIER[unit]
+        for number, unit in _ZH_MONEY_MAGNITUDE.findall(content)
+    ]
+    if not zh_values:
+        return issues
+
+    seen: set = set()
+    flagged = 0
+    for number, unit in _EN_MONEY_MAGNITUDE.findall(source):
+        value = float(number) * _EN_MAGNITUDE_MULTIPLIER[unit.lower()]
+        if value in seen or value <= 0:
+            continue
+        seen.add(value)
+
+        has_equivalent = any(0.82 <= zh / value <= 1.18 for zh in zh_values)
+        if has_equivalent:
+            continue
+        near_tenfold = [
+            zh for zh in zh_values
+            if 8.5 <= zh / value <= 11.5 or 8.5 <= value / zh <= 11.5
+        ]
+        if not near_tenfold:
+            continue
+        if flagged < _MAX_SAMPLES_PER_CHECK:
+            issues.append(QAIssue(
+                code="money_magnitude", severity="warning",
+                message="金额量级疑似 10 倍换算错误（原文已是万/亿量级时禁止再乘 10）",
+                sample=f"en: {number} {unit} ≈ {value:g} ↔ zh 侧最近值 "
+                       f"{near_tenfold[0]:g}",
+            ))
+        flagged += 1
     return issues
 
 

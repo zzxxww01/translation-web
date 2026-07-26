@@ -67,23 +67,62 @@ def test_doubled_fullwidth_punct_collapsed():
     assert "，，" not in out
 
 
-def test_straight_quotes_paired():
+def test_straight_quotes_kept_with_cjk_spacing():
+    # A-12 目标风格反转：统一为英文直引号，与中文相邻处留半角空格。
     out = postprocess_markdown('黄仁勋说"我们赢了"然后离场')
-    assert "“我们赢了”" in out
+    assert '黄仁勋说 "我们赢了" 然后离场' in out
+    assert "“" not in out and "”" not in out
+
+
+def test_curly_quotes_flattened_to_straight():
+    out = postprocess_markdown("他说“很好”，后来又说“不行”")
+    assert '他说 "很好"，后来又说 "不行"' in out
+    assert "“" not in out and "”" not in out
 
 
 def test_single_direction_quotes_repaired():
-    # GTC 2026 指纹 bug：全文开引号 0 命中、引号两侧同向
+    # GTC 2026 指纹 bug：全文开引号 0 命中、引号两侧同向——直引号目标
+    # 风格下方向不再存在，统一拉平并配平计数。
     out = postprocess_markdown("他说”很好”，后来又说”不行”")
-    assert "“很好”" in out
-    assert "“不行”" in out
-    assert out.count("“") == out.count("”")
+    assert '"很好"' in out
+    assert '"不行"' in out
+    assert out.count('"') % 2 == 0
+    assert "”" not in out
 
 
 def test_odd_quote_count_left_alone():
     src = '他说"话没说完'
     out = postprocess_markdown(src)
-    assert '"' in out
+    assert out.count('"') == 1
+
+
+def test_quote_spacing_idempotent_and_english_untouched():
+    once = postprocess_markdown('He said "fine" and left.')
+    assert once == 'He said "fine" and left.'
+
+
+def test_capitalized_token_words_lowercased():
+    # A-13：独立词 Token/Tokens 确定性转小写；复合专名白名单不受影响。
+    out = postprocess_markdown("每个 Token 都要计费，Tokens 总量翻倍，但 Tokenomics 和 TokenBudgeting 不变")
+    assert "每个 token 都要计费" in out
+    assert "tokens 总量翻倍" in out
+    assert "Tokenomics" in out
+    assert "TokenBudgeting" in out
+
+
+def test_repeated_annotation_deduped():
+    # A-11：同一"中文（English）"精确重复的第 2+ 次出现自动去括注。
+    src = "德州电力可靠性委员会（ERCOT）负责调度。稍后德州电力可靠性委员会（ERCOT）再次表态。"
+    out = postprocess_markdown(src)
+    assert out.count("（ERCOT）") == 1
+    assert out.count("德州电力可靠性委员会") == 2
+
+
+def test_different_annotations_not_deduped():
+    src = "英伟达（Nvidia）与台积电（TSMC）合作。"
+    out = postprocess_markdown(src)
+    assert "（Nvidia）" in out
+    assert "（TSMC）" in out
 
 
 def test_url_escaped_amp_fixed_inside_link():
@@ -125,7 +164,7 @@ def test_nested_image_in_link_placeholder_restored():
 
 def test_normalization_idempotent():
     src = (
-        '中文,测试(英伟达)说"好"；估值 2,600 万。。\n\n'
+        '中文,测试(英伟达)说"好"；估值 2,600 万。。有 5 个 Token\n\n'
         r"[链](https://a.com/?x=1\&y=2) 与 \@abc"
     )
     once = postprocess_markdown(src)

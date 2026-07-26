@@ -394,7 +394,9 @@ class MarkdownProjectParser:
 
     def _build_sections(self, blocks: list[MarkdownBlock]) -> list[Section]:
         sections: list[Section] = []
-        current_section = Section(section_id="00-intro", title="Introduction", paragraphs=[])
+        current_section = Section(
+            section_id="00-intro", title="Introduction", synthetic=True, paragraphs=[]
+        )
         paragraph_index = 0
         seen_h2 = False
 

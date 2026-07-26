@@ -8,7 +8,9 @@ while preserving intentional markdown syntax and embedded images/links.
 from __future__ import annotations
 
 import re
-from typing import List
+from typing import List, Optional
+
+from src.settings import settings
 
 
 # ---------------------------------------------------------------------------
@@ -136,6 +138,19 @@ _DOUBLED_FULLWIDTH_PUNCT = re.compile(r"([\uff0c\u3002\uff1a\uff1b\u3001])\1+")
 # Escape residue that is never meaningful in markdown prose (`\@`, `\&`).
 _USELESS_ESCAPES = re.compile(r"\\([@&])")
 
+# Standalone capitalized Token/Tokens (word boundary keeps compound proper nouns
+# like Tokenomics / TokenBudgeting / Tokenmaxxing untouched). AI-context tokens
+# must stay lowercase English per the house style.
+_CAPITALIZED_TOKEN_WORD = re.compile(r"\bToken(s)?\b")
+
+# `\u4e2d\u6587\uff08English\uff09` first-occurrence annotation. Used to strip exact repeated
+# annotations for the same English term (annotation stacking, 2026-07 audit).
+_CJK_EN_ANNOTATION = re.compile(
+    rf"(?<=[{_CJK_CLASS}])\uff08\s*([A-Za-z][A-Za-z0-9 .&'/+-]{{0,60}}?)\s*\uff09"
+)
+
+_CJK_SINGLE = re.compile(rf"[{_CJK_CLASS}]")
+
 
 def _normalize_cjk_punctuation(text: str) -> str:
     """Normalise halfwidth punctuation drift inside Chinese prose.
@@ -154,52 +169,86 @@ def _normalize_cjk_punctuation(text: str) -> str:
 
 
 def _pair_quotes_in_line(line: str) -> str:
-    """Repair quote direction line by line.
+    """Normalise double quotes line by line to the review house style.
 
-    Two failure modes from batch translation are handled deterministically:
-    straight double quotes left unpaired (`"x"`), and fullwidth quotes
-    flattened to a single direction (`\u201dx\u201d` with zero opening quotes).
-    Lines with an odd quote count are left untouched for the QA gate to flag.
+    Target style (2026-07 \u5ba1\u6821\u6807\u51c6): English straight double quotes ``"``,
+    with one halfwidth space wherever a quote touches a CJK character on its
+    outside. Fullwidth/curly quotes (\u201c \u201d) are flattened to straight quotes
+    first \u2014 direction is irrelevant for straight quotes, so single-direction
+    model output no longer needs repair. Lines with an odd straight-quote
+    count get the conversion but no spacing pass (QA flags them).
     """
-    n_straight = line.count('"')
-    if n_straight and n_straight % 2 == 0:
-        parts = []
-        open_next = True
-        for ch in line:
-            if ch == '"':
-                parts.append("\u201c" if open_next else "\u201d")
-                open_next = not open_next
-            else:
-                parts.append(ch)
-        line = "".join(parts)
+    line = line.replace("\u201c", '"').replace("\u201d", '"')
 
-    n_open, n_close = line.count("\u201c"), line.count("\u201d")
-    if (
-        (n_open == 0) != (n_close == 0)
-        and (n_open + n_close) % 2 == 0
-        and n_open + n_close >= 2
-    ):
-        parts = []
-        open_next = True
-        for ch in line:
-            if ch in "\u201c\u201d":
-                parts.append("\u201c" if open_next else "\u201d")
-                open_next = not open_next
-            else:
-                parts.append(ch)
-        line = "".join(parts)
-    return line
+    count = line.count('"')
+    if not count or count % 2:
+        return line
+
+    parts: List[str] = []
+    open_next = True
+    for index, ch in enumerate(line):
+        if ch != '"':
+            parts.append(ch)
+            continue
+        if open_next:
+            if parts and _CJK_SINGLE.match(parts[-1]):
+                parts.append(" ")
+            parts.append('"')
+        else:
+            parts.append('"')
+            next_char = line[index + 1] if index + 1 < len(line) else ""
+            if next_char and _CJK_SINGLE.match(next_char):
+                parts.append(" ")
+        open_next = not open_next
+    return "".join(parts)
 
 
 def _repair_quotes(text: str) -> str:
     return "\n".join(_pair_quotes_in_line(line) for line in text.split("\n"))
 
 
+def _dedupe_repeated_annotations(text: str) -> str:
+    """Drop the 2nd+ exact repeat of a `中文（English）` annotation.
+
+    First occurrence keeps its annotation; later occurrences of the same
+    English term keep the Chinese name and lose the redundant bracket
+    (annotation stacking, A-11). Operates on placeholder-protected text so
+    links/code/tables are never touched.
+    """
+    seen: set = set()
+
+    def _replace(match: re.Match[str]) -> str:
+        key = match.group(1).strip()
+        if key in seen:
+            return ""
+        seen.add(key)
+        return match.group(0)
+
+    return _CJK_EN_ANNOTATION.sub(_replace, text)
+
+
+def normalize_cjk_ascii_spacing(text: str) -> str:
+    """Insert missing halfwidth spaces between CJK and ASCII letters/digits.
+
+    Shared by the markdown pipeline (phase 2e) and export title/filename
+    normalisation (A-14: `meta.title_translation` used to skip this pass).
+    """
+    if not text:
+        return text
+    text = _CJK_LATIN_NO_SPACE.sub(r"\1 \2", text)
+    text = _LATIN_CJK_NO_SPACE.sub(r"\1 \2", text)
+    return text
+
+
 # ---------------------------------------------------------------------------
 # Core processor
 # ---------------------------------------------------------------------------
 
-def postprocess_markdown(content: str) -> str:
+def postprocess_markdown(
+    content: str,
+    *,
+    latex_obsidian_normalize: Optional[bool] = None,
+) -> str:
     """Apply all markdown-safety transformations to *content*.
 
     The function is idempotent — running it twice produces the same output.
@@ -210,9 +259,19 @@ def postprocess_markdown(content: str) -> str:
     3. Normalise excessive blank lines.
     4. Inject CJK–Latin spacing where missing.
     5. Preserve LaTeX formulas, code blocks, inline code, images, links, and HTML tags.
+
+    ``latex_obsidian_normalize`` controls the Obsidian-oriented LaTeX delimiter
+    rewrite (``\\( \\)`` → ``$ $``, ``\\[ \\]`` → ``$$``). Default (None) reads
+    ``settings.latex_obsidian_normalize`` which is **off** — the exported file
+    keeps the source delimiters verbatim (A-15, 与 en.md 保真).
     """
     if not content:
         return content
+
+    if latex_obsidian_normalize is None:
+        latex_obsidian_normalize = getattr(
+            settings, "latex_obsidian_normalize", False
+        )
 
     # --- Phase 1: Extract protected regions to placeholders ---
     protected: List[str] = []
@@ -226,7 +285,11 @@ def postprocess_markdown(content: str) -> str:
         return _protect_text(match.group(0))
 
     def _protect_latex(match: re.Match[str]) -> str:
-        return _protect_text(_normalize_latex_math(match.group(0)))
+        return _protect_text(
+            _normalize_latex_math(
+                match.group(0), obsidian=bool(latex_obsidian_normalize)
+            )
+        )
 
     def _protect_link(match: re.Match[str]) -> str:
         # `\&` inside a URL breaks the link once rendered; unescape it while
@@ -261,8 +324,7 @@ def postprocess_markdown(content: str) -> str:
     work = _EXCESSIVE_BLANK_LINES.sub("\n\n", work)
 
     # 2e. CJK–Latin spacing
-    work = _CJK_LATIN_NO_SPACE.sub(r"\1 \2", work)
-    work = _LATIN_CJK_NO_SPACE.sub(r"\1 \2", work)
+    work = normalize_cjk_ascii_spacing(work)
 
     # 2f. Strip escape residue that has no meaning in prose (`\@`, `\&`)
     work = _USELESS_ESCAPES.sub(r"\1", work)
@@ -271,8 +333,15 @@ def postprocess_markdown(content: str) -> str:
     #     doubled fullwidth punctuation
     work = _normalize_cjk_punctuation(work)
 
-    # 2h. Quote-direction repair (straight quotes / single-direction bug)
+    # 2h. Quote style normalisation (straight quotes + CJK-adjacent spacing)
     work = _repair_quotes(work)
+
+    # 2i. Standalone capitalized Token/Tokens → lowercase (compound proper
+    #     nouns like Tokenomics/TokenBudgeting survive the word boundary)
+    work = _CAPITALIZED_TOKEN_WORD.sub(lambda m: "token" + (m.group(1) or ""), work)
+
+    # 2j. Strip exact repeated `中文（English）` annotations (annotation stacking)
+    work = _dedupe_repeated_annotations(work)
 
     # --- Phase 3: Restore protected regions ---
     # A stashed value can itself contain a placeholder (e.g. an image nested
@@ -291,8 +360,16 @@ def postprocess_markdown(content: str) -> str:
     return work
 
 
-def _normalize_latex_math(math: str) -> str:
-    """Normalize LaTeX math for Obsidian-compatible Markdown export."""
+def _normalize_latex_math(math: str, *, obsidian: bool = False) -> str:
+    """Normalize LaTeX math; optionally rewrite delimiters for Obsidian.
+
+    With ``obsidian=False`` (default, per A-15) the source delimiters
+    (``\\( \\)`` / ``\\[ \\]`` / ``$``) are preserved verbatim and only the
+    harmful markdown escapes (``\\_``, ``\\*`` in environment names) inside
+    the math body are repaired.
+    """
+    if not obsidian:
+        return _normalize_latex_body(math)
     if math.startswith(r"\(") and math.endswith(r"\)"):
         body = _normalize_latex_body(math[2:-2].strip())
         return f"${body}$"

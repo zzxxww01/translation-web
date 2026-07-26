@@ -398,7 +398,10 @@ class HTMLParser:
             # 如果还没有章节，创建一个"引言"章节
             if current_section is None:
                 current_section = Section(
-                    section_id="00-intro", title="Introduction", paragraphs=[]
+                    section_id="00-intro",
+                    title="Introduction",
+                    synthetic=True,
+                    paragraphs=[],
                 )
 
             # 处理段落

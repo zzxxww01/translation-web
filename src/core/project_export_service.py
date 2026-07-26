@@ -4,10 +4,14 @@ from pathlib import Path
 from typing import Any, Callable
 
 from .inline_recovery_service import InlineRecoveryService
-from .markdown_postprocess import postprocess_markdown
+from .markdown_postprocess import normalize_cjk_ascii_spacing, postprocess_markdown
 from .models import ElementType, ProjectMeta, Section
 from .title_guard import find_missing_title_terms
 from .translation_qa import run_deterministic_qa
+
+
+class ExportBlockedError(ValueError):
+    """Raised when deterministic QA finds critical issues in the export (A-5)."""
 
 
 class ProjectExportService:
@@ -36,10 +40,15 @@ class ProjectExportService:
 
     def preferred_export_title(self, meta: ProjectMeta) -> str:
         preferred_title = (meta.title_translation or meta.title or "").strip()
+        if preferred_title:
+            # A-14：标题译文未过 postprocess 就直接进文件名/H1，这里补一次
+            # CJK↔ASCII 空格归一（"挑战DRAM巨头"→"挑战 DRAM 巨头"）。
+            preferred_title = normalize_cjk_ascii_spacing(preferred_title)
         return preferred_title or meta.id
 
     def sanitize_export_filename_component(self, value: str, fallback: str) -> str:
-        sanitized = re.sub(r'[<>:"/\\|?*\x00-\x1F]', "_", value)
+        # 全角 ：？！、 一并替换（A-1：回插用的全角冒号曾直接进文件名）。
+        sanitized = re.sub(r'[<>:"/\\|?*\x00-\x1F：？！、]', "_", value)
         sanitized = re.sub(r"\s+", " ", sanitized).strip().rstrip(".")
         return sanitized or fallback
 
@@ -81,6 +90,10 @@ class ProjectExportService:
     def should_render_section_heading(
         self, sections: list[Section], index: int, section: Section
     ) -> bool:
+        # A-4：解析器合成的章节（00-intro 导语）在源文中没有标题，
+        # 导出时跳过标题行，保证 zh 标题数 == en 标题数。
+        if getattr(section, "synthetic", False):
+            return False
         if index != 0 or index + 1 >= len(sections):
             return True
 
@@ -122,11 +135,26 @@ class ProjectExportService:
         meta: ProjectMeta,
         sections: list[Section],
         content: str | None = None,
+        source: str | None = None,
+        fallback_block_ids: list[str] | None = None,
     ) -> dict[str, Any]:
         issues: list[dict[str, Any]] = []
         if content:
             issues.extend(
-                issue.to_dict() for issue in run_deterministic_qa(content)
+                issue.to_dict()
+                for issue in run_deterministic_qa(content, source=source)
+            )
+        if fallback_block_ids:
+            issues.append(
+                {
+                    "type": "inline_recovery_fallback",
+                    "severity": "warning",
+                    "message": (
+                        f"本篇有 {len(fallback_block_ids)} 段走了 inline 兜底恢复"
+                        "（格式 token 校验失败，质量风险信号，建议复核链接/格式）。"
+                    ),
+                    "block_ids": list(fallback_block_ids),
+                }
             )
         missing_title_terms = find_missing_title_terms(
             meta.title,
@@ -237,11 +265,24 @@ class ProjectExportService:
         self._write_text(output_path, content)
         return content
 
+    def read_source_markdown(self, project_id: str) -> str | None:
+        """Best-effort read of the English source markdown for QA comparison."""
+        project_dir = self._project_dir(project_id)
+        for name in ("source_en.md", "source.md"):
+            path = project_dir / name
+            if path.exists():
+                try:
+                    return path.read_text(encoding="utf-8")
+                except OSError:
+                    return None
+        return None
+
     def export_markdown(self, project_id: str, include_source: bool = False) -> str:
         meta = self._get_project(project_id)
         sections = self._get_sections(project_id)
         lines = [f"# {self.preferred_export_title(meta)}", ""]
 
+        self._inline_recovery.reset_fallback_stats()
         for index, section in enumerate(sections):
             if self.should_render_section_heading(sections, index, section):
                 lines.append(f"## {self.section_display_title(section)}")
@@ -257,11 +298,34 @@ class ProjectExportService:
                 lines.append("")
 
         content = postprocess_markdown("\n".join(lines))
+        # A-5：传入英文源文，激活 image/heading/link/blockquote 对照检查。
+        payload = self.build_export_lint_payload(
+            meta,
+            sections,
+            content=content,
+            source=self.read_source_markdown(project_id),
+            fallback_block_ids=self._inline_recovery.fallback_block_ids,
+        )
+        self.write_export_lint_artifact(project_id, payload)
+
+        # A-5：确定性 QA 的 critical 问题阻断导出（lint 工件已写盘供排查）。
+        critical_qa = [
+            issue
+            for issue in payload["issues"]
+            if issue.get("severity") == "error"
+            and str(issue.get("type", "")).startswith("qa_")
+        ]
+        if critical_qa:
+            summary = "; ".join(
+                f"{issue.get('type')}: {issue.get('message', '')}"
+                for issue in critical_qa[:5]
+            )
+            raise ExportBlockedError(
+                f"导出被 QA 阻断（{len(critical_qa)} 个 critical 问题）：{summary}"
+            )
+
         output_path = self._project_dir(project_id) / self.build_export_filename(meta, format="zh")
         self._write_text(output_path, content)
-        self.write_export_lint_artifact(
-            project_id, self.build_export_lint_payload(meta, sections, content=content)
-        )
         return content
 
     def generate_preview(self, project_id: str) -> str:

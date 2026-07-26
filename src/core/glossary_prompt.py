@@ -151,14 +151,20 @@ def _build_requirement_text(
 
     if strategy == "preserve_annotate":
         if already_used:
-            return f"本段直接写\u201c{original}\u201d"
+            return (
+                f"该术语已在前文完成首现注释，本段一律只写\u201c{original}\u201d，"
+                "禁止再加任何括注"
+            )
         if translation and translation != original:
             return f"首次出现写\u201c{original}（{translation}）\u201d，后文写\u201c{original}\u201d"
         return f"首次出现时加简短中文注释，后文继续写\u201c{original}\u201d"
 
     if strategy == "first_annotate" or first_occurrence_note:
         if already_used:
-            return f"本段直接写\u201c{translation}\u201d"
+            return (
+                f"该术语已在前文完成首现括注，本段一律只写\u201c{translation}\u201d，"
+                "禁止再加括注或英文原名"
+            )
         if translation != original:
             return f"首次出现写\u201c{translation}（{original}）\u201d，后文写\u201c{translation}\u201d"
         return f"首次出现时加简短注释，后文继续写\u201c{translation}\u201d"

@@ -1,5 +1,5 @@
 {
-  "version": 32,
+  "version": 33,
   "terms": [
     {
       "original": "TSMC",
@@ -145,7 +145,7 @@
     {
       "original": "foundry",
       "translation": "晶圆代工厂",
-      "strategy": "first_annotate",
+      "strategy": "translate",
       "note": "后续可简称'代工厂'",
       "tags": [
         "manufacturing"
@@ -154,7 +154,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570299"
+      "updated_at": "2026-07-26T00:00:00"
     },
     {
       "original": "wafer",
@@ -173,7 +173,7 @@
     {
       "original": "fab",
       "translation": "晶圆厂",
-      "strategy": "first_annotate",
+      "strategy": "translate",
       "note": "fabrication facility",
       "tags": [
         "manufacturing"
@@ -182,7 +182,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570307"
+      "updated_at": "2026-07-26T00:00:00"
     },
     {
       "original": "node",
@@ -285,7 +285,7 @@
     {
       "original": "CMP",
       "translation": "化学机械抛光",
-      "strategy": "first_annotate",
+      "strategy": "translate",
       "note": "Chemical Mechanical Planarization",
       "tags": [
         "manufacturing"
@@ -294,7 +294,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570384"
+      "updated_at": "2026-07-26T00:00:00"
     },
     {
       "original": "SoC",
@@ -567,7 +567,7 @@
       "original": "token",
       "translation": "token",
       "strategy": "preserve",
-      "note": "强制保留英文 token，不译为“词元”",
+      "note": "强制保留英文 token，且一律小写（Token→token；Tokenomics 等复合专名除外），不能译为「词元/令牌」",
       "tags": [
         "ai"
       ],
@@ -575,7 +575,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-04-10T23:02:23.690524"
+      "updated_at": "2026-07-26T00:00:00"
     },
     {
       "original": "context window",
@@ -847,7 +847,7 @@
       "original": "yield",
       "translation": "良率",
       "strategy": "translate",
-      "note": null,
+      "note": "制造/晶圆语境=良率；金融/收益语境=收益率（bond yield→债券收益率、rental yield→租金收益率），不得单义硬套",
       "tags": [
         "performance"
       ],
@@ -855,7 +855,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570570"
+      "updated_at": "2026-07-26T00:00:00"
     },
     {
       "original": "utilization rate",
@@ -902,7 +902,7 @@
     {
       "original": "benchmark",
       "translation": "基准测试",
-      "strategy": "first_annotate",
+      "strategy": "translate",
       "note": "只有表示大模型等的评测方式时翻译成基准测试",
       "tags": [
         "performance"
@@ -911,7 +911,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-16T00:48:52.469999"
+      "updated_at": "2026-07-26T00:00:00"
     },
     {
       "original": "FLOPS",
@@ -944,7 +944,7 @@
     {
       "original": "capex",
       "translation": "资本支出",
-      "strategy": "first_annotate",
+      "strategy": "translate",
       "note": "Capital Expenditure",
       "tags": [
         "business"
@@ -953,7 +953,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570625"
+      "updated_at": "2026-07-26T00:00:00"
     },
     {
       "original": "opex",
@@ -986,7 +986,7 @@
     {
       "original": "IDM",
       "translation": "IDM",
-      "strategy": "first_annotate",
+      "strategy": "translate",
       "note": "垂直整合制造商 (Integrated Device Manufacturer)",
       "tags": [
         "business"
@@ -995,7 +995,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570649"
+      "updated_at": "2026-07-26T00:00:00"
     },
     {
       "original": "fabless",
@@ -1748,6 +1748,818 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-07-19T00:00:00.000000"
+    },
+    {
+      "original": "Bedrock",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "AWS Bedrock 托管模型平台，禁译“基石”",
+      "tags": [
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Vertex",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "Google Vertex AI 平台，保留英文",
+      "tags": [
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "SageMaker",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "AWS SageMaker 机器学习平台",
+      "tags": [
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Gemini",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "Google Gemini 模型，保留英文",
+      "tags": [
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Azure AI Foundry",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "微软 Azure AI Foundry 平台；注意与小写 foundry=晶圆代工厂区分",
+      "tags": [
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Trainium",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "AWS 自研训练芯片",
+      "tags": [
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Copilot",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "微软 Copilot 产品名",
+      "tags": [
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Maia",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "微软自研 AI 芯片",
+      "tags": [
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "GW",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "TW",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "MW",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "kW",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "GWh",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "MWh",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "TWh",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "W",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "AI Agent",
+      "translation": "AI 智能体",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Vibe Coding",
+      "translation": "凭感觉编程",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "the Bitter Lesson",
+      "translation": "苦涩的教训",
+      "strategy": "translate",
+      "note": "作为概念词出现时译“苦涩的教训”，作为被引文章标题时保留英文",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Context Engineering",
+      "translation": "上下文工程",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "AI Wrapper",
+      "translation": "AI 套壳",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Hallucination",
+      "translation": "幻觉",
+      "strategy": "translate",
+      "note": "AI 语境专义",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Alignment",
+      "translation": "对齐",
+      "strategy": "translate",
+      "note": "AI 安全语境",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Guardrails",
+      "translation": "护栏",
+      "strategy": "translate",
+      "note": "AI 安全语境",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Agentic",
+      "translation": "智能体化的",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Grounding",
+      "translation": "基础化/落地",
+      "strategy": "translate",
+      "note": "依语境选择",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Embedding",
+      "translation": "嵌入/向量化",
+      "strategy": "translate",
+      "note": "依语境选择",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Moat",
+      "translation": "护城河",
+      "strategy": "translate",
+      "note": "商业语境",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Flywheel",
+      "translation": "飞轮效应",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Boilerplate",
+      "translation": "样板代码",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Prompt Engineering",
+      "translation": "提示词工程",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Retrieval-Augmented Generation",
+      "translation": "检索增强生成",
+      "strategy": "translate",
+      "note": "缩写 RAG",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Scaling Laws",
+      "translation": "缩放定律",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Open Source",
+      "translation": "开源",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Distillation",
+      "translation": "蒸馏",
+      "strategy": "translate",
+      "note": "模型压缩语境",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Mixture of Experts",
+      "translation": "混合专家",
+      "strategy": "translate",
+      "note": "缩写 MoE",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Chain-of-Thought",
+      "translation": "思维链",
+      "strategy": "translate",
+      "note": "缩写 CoT",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Reinforcement Learning",
+      "translation": "强化学习",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Synthetic Data",
+      "translation": "合成数据",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Breakdown",
+      "translation": "拆解",
+      "strategy": "translate",
+      "note": "标题语境=拆解/详解，禁望文生义“崩溃”",
+      "tags": [
+        "editorial"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "performance hurdle",
+      "translation": "业绩门槛",
+      "strategy": "translate",
+      "note": "金融语境，非“奖励”；亦可译“达标线”",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "accretive",
+      "translation": "增厚",
+      "strategy": "translate",
+      "note": "财务语境",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "inflated",
+      "translation": "虚高",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "the street",
+      "translation": "华尔街",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "TTM",
+      "translation": "滚动十二个月",
+      "strategy": "translate",
+      "note": "Trailing Twelve Months",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "enterprise value",
+      "translation": "企业价值",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "unwind",
+      "translation": "解约/拆解",
+      "strategy": "translate",
+      "note": "依语境选择",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "burnout",
+      "translation": "过热失效",
+      "strategy": "translate",
+      "note": "硬件语境，非“极限负载”",
+      "tags": [
+        "hardware"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "skill-glossary-merge",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "deep dive",
+      "translation": "深度研究",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "editorial"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "resource adequacy",
+      "translation": "资源充裕度",
+      "strategy": "translate",
+      "note": "电力语境",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "collective communication",
+      "translation": "集合通信",
+      "strategy": "translate",
+      "note": "并行训练/网络语境",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "fleet",
+      "translation": "机群",
+      "strategy": "translate",
+      "note": "数据中心/GPU 语境=机群",
+      "tags": [
+        "datacenter"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "time-to-power",
+      "translation": "通电时间",
+      "strategy": "translate",
+      "note": "数据中心供电语境",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Base Residual Auction",
+      "translation": "基本剩余拍卖",
+      "strategy": "translate",
+      "note": "PJM 容量市场机制",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "behind-the-meter",
+      "translation": "表后",
+      "strategy": "translate",
+      "note": "电力：用户侧（表后）",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "firm capacity",
+      "translation": "可靠容量",
+      "strategy": "translate",
+      "note": "电力语境",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "Jenbacher",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "燃气发电机品牌（INNIO Jenbacher），防 Jembacher 错拼",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "perf per TCO",
+      "translation": "单位 TCO 的性能",
+      "strategy": "translate",
+      "note": null,
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "review-2026-07",
+      "status": "active",
+      "updated_at": "2026-07-26T00:00:00"
     }
   ]
 }

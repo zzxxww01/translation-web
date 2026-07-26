@@ -41,8 +41,15 @@
   - 云计算：utilization rate→"利用率"（非"出租率"）；capacity→"产能"（非"算力"，除非确实指 compute）
   - 金融：financial modeling→投资分析语境译"金融建模"（非"财务建模"）；tighten→"收紧"
   - AI：英文 token/tokens 一律保留为"token"且统一小写（专名 Tokenomics 除外），绝不能译为或注释为"词元"
+- 多义词消歧（yield）：制造/晶圆语境=良率（wafer yields→晶圆良率）；金融/收益语境=收益率（bond yield→债券收益率、rental yield→租金收益率），不得单义硬套"良率"。
 - 缩写先后顺序：目标读者熟悉的行业缩写先写缩写后括注全称。
 - 注意区分相近但不同的概念：useful economic life≠资产折旧年限。
+
+## 数字与金额换算（硬规则）
+- 金额换算表：$1M=100 万｜$10M=1000 万｜$100M=1 亿｜$1B=10 亿｜$1.5B=15 亿｜$1T=1 万亿（单位为美元时加"美元"，其他货币同理）。
+- 换算防呆：原文若已是万/亿量级（如 KRW 14.8 billion=148 亿韩元），换算后必须与原数值等值，禁止再乘 10。
+- 功率/能量单位保留半角原形（GW/TW/MW/kW/GWh/MWh/W），禁译"吉瓦/兆瓦/千瓦"。
+- blockquote（`>` 引用块）条数必须与原文一致，禁止合并或拆分引用块。
 
 ## 专名与人名本地化（硬规则）
 - 有通行中文译名的公司/机构/人名，全文首次出现写"中文（English）"，之后只用中文：Nvidia→英伟达、Jensen Huang→黄仁勋、Lisa Su→苏姿丰、TSMC→台积电、Samsung→三星、Micron→美光、SK Hynix→SK 海力士、Microsoft→微软、Google→谷歌、Amazon→亚马逊、Apple→苹果、Oracle→甲骨文、Broadcom→博通、ASML→阿斯麦。
@@ -56,7 +63,7 @@
 
 ## 高危句式核查（译前先显式确认再译）
 - "X saw spending from Y" = Y 在 X 身上花钱，先标注主客/金流方向再译，禁止颠倒。
-- 倍数对比保持方向与基准；"and N others"→"等 N 人"（N 不含已署名作者）；比较基准（than …）不得丢。
+- 倍数对比保持方向与基准；"and N others"→"及另外 N 位作者"（N=others 原值，不含已署名作者，禁止累加）；比较基准（than …）不得丢。
 - 人称与原文一致：our/we=我们，不得改成"其/该公司"。
 - 形近专名逐字符核对（SWE-rebench≠SWE-bench）；triple/tripling=三倍（禁"翻两番"）。
 

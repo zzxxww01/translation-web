@@ -1,4 +1,5 @@
 import logging
+import re
 from typing import Any, Optional
 
 from .format_tokens import (
@@ -11,12 +12,33 @@ from .format_tokens import (
 )
 from .models import ElementType, Paragraph, Section
 
+# 已闭合的 markdown 链接区段：兜底恢复时不可再被包裹（A-3 嵌套坏链防护）。
+_MD_LINK_SPAN = re.compile(r"\[[^\]]*\]\([^)]*\)")
+
 
 class InlineRecoveryService:
     """Render and recover markdown blocks without coupling to project storage."""
 
     def __init__(self, logger_: logging.Logger | None = None) -> None:
         self._logger = logger_ or logging.getLogger(__name__)
+        # P2：兜底路径计数——format 校验失败走 smart fallback 本身就是质量
+        # 风险信号，导出报告里要能看到"本篇有 N 段走了兜底"。
+        self._fallback_block_ids: list[str] = []
+
+    def reset_fallback_stats(self) -> None:
+        self._fallback_block_ids = []
+
+    @property
+    def fallback_block_ids(self) -> list[str]:
+        return list(self._fallback_block_ids)
+
+    def _record_fallback(self, block_id: str) -> None:
+        self._fallback_block_ids.append(block_id)
+        self._logger.info(
+            "Inline recovery fallback used for block %s (total this run: %d)",
+            block_id,
+            len(self._fallback_block_ids),
+        )
 
     def format_markdown_line(self, element_type: ElementType, text: str) -> str:
         if element_type == ElementType.H3:
@@ -67,6 +89,7 @@ class InlineRecoveryService:
                     first.parent_block_id or first.id,
                     error,
                 )
+                self._record_fallback(first.parent_block_id or first.id)
                 text = reconstruct_block_tokenized_text(
                     paragraphs,
                     fallback_to_source=fallback_to_source,
@@ -90,6 +113,7 @@ class InlineRecoveryService:
                 first.parent_block_id or first.id,
                 error,
             )
+            self._record_fallback(first.parent_block_id or first.id)
             plain_text = reconstruct_block_tokenized_text(
                 paragraphs,
                 fallback_to_source=fallback_to_source,
@@ -132,30 +156,61 @@ class InlineRecoveryService:
                 )
         return result
 
+    @staticmethod
+    def _link_protected_spans(text: str) -> list[tuple[int, int]]:
+        """Spans of already-closed markdown links; never wrap into these again."""
+        return [match.span() for match in _MD_LINK_SPAN.finditer(text)]
+
+    @staticmethod
+    def _overlaps_protected_span(
+        spans: list[tuple[int, int]], start: int, end: int
+    ) -> bool:
+        return any(span_start < end and start < span_end for span_start, span_end in spans)
+
+    def _append_link_fallback(self, translated_text: str, href: str) -> str:
+        """降级策略（A-3）：绝不包裹含链接的文本，改为段末追加来源链接。"""
+        return f"{translated_text}（[来源]({href})）"
+
     def restore_single_link(
         self,
         source_text: str,
         translated_text: str,
         link_element: Any,
     ) -> str:
+        protected_spans = self._link_protected_spans(translated_text)
+
+        def _wrap_or_append(candidate: str) -> str:
+            # 硬约束（A-3）：候选锚文本含 `](` 即禁止包裹，防嵌套坏链
+            # `[[A](url), B](url)`；降级为段末追加。
+            if "](" in candidate:
+                return self._append_link_fallback(translated_text, link_element.href)
+            return f"[{candidate}]({link_element.href})"
+
         link_start = source_text.find(link_element.text)
         if link_start == -1:
             self._logger.debug(
                 "Cannot locate link text '%s' in source, wrapping entire translation",
                 link_element.text[:50],
             )
-            return f"[{translated_text}]({link_element.href})"
+            return _wrap_or_append(translated_text)
 
         relative_pos = link_start / len(source_text) if len(source_text) > 0 else 0.5
 
         if link_element.text in translated_text:
             match_start = translated_text.find(link_element.text)
-            match_end = match_start + len(link_element.text)
-            return (
-                translated_text[:match_start]
-                + f"[{link_element.text}]({link_element.href})"
-                + translated_text[match_end:]
-            )
+            while match_start != -1:
+                match_end = match_start + len(link_element.text)
+                if not self._overlaps_protected_span(
+                    protected_spans, match_start, match_end
+                ):
+                    return (
+                        translated_text[:match_start]
+                        + f"[{link_element.text}]({link_element.href})"
+                        + translated_text[match_end:]
+                    )
+                match_start = translated_text.find(link_element.text, match_end)
+            # 所有精确命中都落在既有链接区段内：只能追加，不能再包裹。
+            return self._append_link_fallback(translated_text, link_element.href)
 
         expected_pos = int(len(translated_text) * relative_pos)
         sentence_breaks = [0]
@@ -170,6 +225,12 @@ class InlineRecoveryService:
             if start <= expected_pos < end:
                 segment = translated_text[start:end].strip("，。！？；：、 ")
                 if segment:
+                    if "](" in segment or self._overlaps_protected_span(
+                        protected_spans, start, end
+                    ):
+                        return self._append_link_fallback(
+                            translated_text, link_element.href
+                        )
                     return (
                         translated_text[:start]
                         + f"[{segment}]({link_element.href})"
@@ -181,7 +242,7 @@ class InlineRecoveryService:
             "No good sentence boundary found for link text '%s', wrapping entire translation",
             link_element.text[:50],
         )
-        return f"[{translated_text}]({link_element.href})"
+        return _wrap_or_append(translated_text)
 
     def extract_chinese_word_candidates(
         self,

@@ -75,6 +75,9 @@ class Settings(BaseSettings):
     default_translation_style: str = "natural_professional"
     default_segment_level: str = "h2"
     translation_prompt_style: str = "original"
+    # Obsidian-oriented LaTeX delimiter rewrite (\( \) → $ $) in markdown
+    # postprocess. Off by default: exports keep the source delimiters (A-15).
+    latex_obsidian_normalize: bool = False
 
     # Logging
     log_level: str = "INFO"

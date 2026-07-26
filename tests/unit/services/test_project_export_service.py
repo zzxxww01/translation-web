@@ -1,9 +1,11 @@
 from pathlib import Path
 
+import pytest
+
 from src.core.markdown_postprocess import postprocess_markdown
 from src.core.inline_recovery_service import InlineRecoveryService
 from src.core.models import ElementType, Paragraph, ProjectMeta, ProjectStatus, Section
-from src.core.project_export_service import ProjectExportService
+from src.core.project_export_service import ExportBlockedError, ProjectExportService
 
 
 def _build_service(tmp_path: Path, sections: list[Section], meta: ProjectMeta) -> ProjectExportService:
@@ -90,7 +92,7 @@ def test_generate_preview_marks_confirmed_and_draft_paragraphs(tmp_path: Path) -
     assert (tmp_path / "preview-demo" / "preview.md").exists()
 
 
-def test_postprocess_normalizes_latex_for_obsidian() -> None:
+def test_postprocess_normalizes_latex_for_obsidian_when_enabled() -> None:
     content = (
         r"这是公式 \( TCO\_{\text{Goodput}} = \frac{TCO\_{\text{total}}}{Goodput} \)"
         "\n\n"
@@ -103,7 +105,7 @@ def test_postprocess_normalizes_latex_for_obsidian() -> None:
         "\n$$"
     )
 
-    output = postprocess_markdown(content)
+    output = postprocess_markdown(content, latex_obsidian_normalize=True)
 
     assert r"$TCO_{\text{Goodput}} = \frac{TCO_{\text{total}}}{Goodput}$" in output
     assert r"\begin{align*}" in output
@@ -114,13 +116,182 @@ def test_postprocess_normalizes_latex_for_obsidian() -> None:
     assert r"align\*" not in output
 
 
-def test_postprocess_converts_latex_display_brackets() -> None:
-    output = postprocess_markdown(r"\[G\_{\text{total}} = \frac{1}{2}\]")
+def test_postprocess_keeps_latex_delimiters_by_default() -> None:
+    # A-15：Obsidian 定界符改写默认关闭——\( \) 与 en.md 保真，
+    # 但 \_ / \* 这类有害转义仍要修。
+    content = r"这是公式 \( TCO\_{\text{Goodput}} \) 结束"
+
+    output = postprocess_markdown(content)
+
+    assert r"\( TCO_{\text{Goodput}} \)" in output
+    assert r"\_" not in output
+    assert "$" not in output
+
+
+def test_postprocess_converts_latex_display_brackets_when_enabled() -> None:
+    output = postprocess_markdown(
+        r"\[G\_{\text{total}} = \frac{1}{2}\]", latex_obsidian_normalize=True
+    )
 
     assert output == "$$\n" + r"G_{\text{total}} = \frac{1}{2}" + "\n$$"
+
+
+def test_postprocess_keeps_display_brackets_by_default() -> None:
+    output = postprocess_markdown(r"\[G\_{\text{total}} = \frac{1}{2}\]")
+
+    assert output == r"\[G_{\text{total}} = \frac{1}{2}\]"
 
 
 def test_postprocess_does_not_normalize_latex_inside_code_blocks() -> None:
     content = "```\n" + r"\( TCO\_{\text{Goodput}} \)" + "\n```"
 
+    assert postprocess_markdown(content, latex_obsidian_normalize=True) == content
     assert postprocess_markdown(content) == content
+
+
+# --- 2026-07 新增：A-1 / A-4 / A-5 / A-14 / P2 ---
+
+
+def _demo_meta(**overrides) -> ProjectMeta:
+    payload = dict(
+        id="demo",
+        title="Demo",
+        title_translation="演示项目",
+        source_file="source.md",
+        status=ProjectStatus.CREATED,
+    )
+    payload.update(overrides)
+    return ProjectMeta(**payload)
+
+
+def test_synthetic_intro_section_heading_skipped(tmp_path: Path) -> None:
+    # A-4：合成 "00-intro" 章节不渲染标题行，zh 标题数 == en 标题数。
+    intro_paragraph = Paragraph(
+        id="p0",
+        index=0,
+        source="Lead-in paragraph.",
+        element_type=ElementType.P,
+        confirmed="导语段落。",
+    )
+    body_paragraph = Paragraph(
+        id="p1",
+        index=0,
+        source="Body paragraph.",
+        element_type=ElementType.P,
+        confirmed="正文段落。",
+    )
+    intro = Section(
+        section_id="00-intro",
+        title="Introduction",
+        title_translation="引言",
+        synthetic=True,
+        paragraphs=[intro_paragraph],
+    )
+    body = Section(
+        section_id="01-market",
+        title="Market",
+        title_translation="市场",
+        paragraphs=[body_paragraph],
+    )
+    meta = _demo_meta()
+    service = _build_service(tmp_path, [intro, body], meta)
+    (tmp_path / "demo" / "source_en.md").write_text(
+        "## Market\n\nLead-in paragraph.\n\nBody paragraph.\n", encoding="utf-8"
+    )
+
+    content = service.export_markdown("demo")
+
+    assert "## 引言" not in content
+    assert "## 市场" in content
+    en_headings = 1
+    zh_headings = sum(
+        1 for line in content.splitlines() if line.startswith("## ")
+    )
+    assert zh_headings == en_headings
+
+
+def test_export_blocked_on_critical_qa_issue(tmp_path: Path) -> None:
+    # A-5：critical 级 QA 问题阻断导出，导出文件不落盘，lint 工件保留。
+    paragraph = Paragraph(
+        id="p1",
+        index=0,
+        source="Capacity is 5 GW.",
+        element_type=ElementType.P,
+        confirmed="容量为 5 吉瓦。",
+    )
+    section = Section(section_id="s1", title="Intro", title_translation="引言", paragraphs=[paragraph])
+    meta = _demo_meta()
+    service = _build_service(tmp_path, [section], meta)
+
+    with pytest.raises(ExportBlockedError):
+        service.export_markdown("demo")
+
+    assert not (tmp_path / "demo" / "演示项目_zh.md").exists()
+    assert (tmp_path / "demo" / "artifacts" / "export-lint" / "latest.json").parent.exists()
+
+
+def test_export_lint_records_inline_recovery_fallbacks(tmp_path: Path) -> None:
+    # P2：兜底段计数进导出报告。
+    meta = _demo_meta()
+    section = Section(section_id="s1", title="Intro", title_translation="引言", paragraphs=[])
+    service = _build_service(tmp_path, [section], meta)
+
+    payload = service.build_export_lint_payload(
+        meta, [section], content="正文。", fallback_block_ids=["b1", "b2"]
+    )
+
+    fallback_issues = [
+        issue for issue in payload["issues"]
+        if issue["type"] == "inline_recovery_fallback"
+    ]
+    assert len(fallback_issues) == 1
+    assert fallback_issues[0]["severity"] == "warning"
+    assert fallback_issues[0]["block_ids"] == ["b1", "b2"]
+    assert "2 段" in fallback_issues[0]["message"]
+
+
+def test_export_filename_strips_fullwidth_punctuation(tmp_path: Path) -> None:
+    # A-1：全角 ：？！、 不得进入导出文件名。
+    meta = _demo_meta(title_translation="Token 预算：全新监控方案")
+    service = _build_service(tmp_path, [], meta)
+
+    filename = service.build_export_filename(meta, format="zh")
+
+    assert "：" not in filename
+    assert filename.endswith("_zh.md")
+
+
+def test_double_title_regression_filenames(tmp_path: Path) -> None:
+    # A-1 验收：三个实测标题走完标题守卫 + 文件名构建后，导出文件名为
+    # 纯中文标题 + _zh.md，无双标题、无全角冒号残留。
+    from src.core.title_guard import enforce_translated_title
+
+    cases = [
+        ("Anthropic 3Q26 Profit Over $1B: X", "Anthropic 2026 年第三季度利润超 10 亿美元：X 展望"),
+        ("TokenBudgeting: X", "Token 预算：X 方案"),
+        ("Cerebras — Faster Tokens Please", "Cerebras：更快的 token 供给"),
+    ]
+    for source_title, translated_title in cases:
+        enforced = enforce_translated_title(source_title, translated_title)
+        assert enforced == translated_title  # 不回插英文前缀
+
+        meta = _demo_meta(title=source_title, title_translation=enforced)
+        service = _build_service(tmp_path, [], meta)
+
+        filename = service.build_export_filename(meta, format="zh")
+
+        assert "：" not in filename
+        assert filename.endswith("_zh.md")
+
+    # 双标题指纹逐一确认不存在
+    meta = _demo_meta(title="TokenBudgeting: X", title_translation="Token 预算：X 方案")
+    service = _build_service(tmp_path, [], meta)
+    assert "TokenBudgeting" not in service.build_export_filename(meta, format="zh")
+
+
+def test_preferred_export_title_normalizes_cjk_ascii_spacing(tmp_path: Path) -> None:
+    # A-14：标题译文过 CJK↔ASCII 空格归一后再进文件名/H1。
+    meta = _demo_meta(title_translation="挑战DRAM巨头：迈向2028年")
+    service = _build_service(tmp_path, [], meta)
+
+    assert service.preferred_export_title(meta) == "挑战 DRAM 巨头：迈向 2028 年"

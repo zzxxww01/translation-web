@@ -34,6 +34,11 @@ LOOSE_TOKEN_PATTERN = re.compile(
 LINK_SEPARATOR_PATTERN = re.compile(
     r"^[\s,.;:|/\\\-+&()\[\]{}<>!\?\u3001\u3002\uFF0C\uFF1B\uFF1A\u00B7\u2022\uFF01\uFF1F\u2014\u2013]*$"
 )
+# Malformed model output where the token id is written as a markdown URL,
+# e.g. `[\u8BD1\u6587](LINK_1)` (2026-07 audit: Nvidia \u7A3F `](LINK_1)` residue).
+MALFORMED_MD_TOKEN_PATTERN = re.compile(
+    r"\[(?P<text>[^\[\]]*)\]\(\s*(?P<token>(?:LINK|STRONG|EM|CODE)_\d+)\s*\)"
+)
 FULLWIDTH_TOKEN_TRANSLATION = str.maketrans(
     {
         "\uFF3B": "[",
@@ -136,7 +141,14 @@ def canonicalize_tokenized_markup(tokenized_text: str) -> str:
     if not tokenized_text:
         return tokenized_text
     normalized = tokenized_text.translate(FULLWIDTH_TOKEN_TRANSLATION)
-    return LOOSE_TOKEN_PATTERN.sub(
+    normalized = LOOSE_TOKEN_PATTERN.sub(
+        lambda match: f"[[[{match.group('token')}|{match.group('text')}]]]",
+        normalized,
+    )
+    # `[text](LINK_1)` — the model wrote the token id as a markdown URL.
+    # Recover it into canonical form so the normal restore path can look up
+    # the real href from the token table instead of leaking `](LINK_1)`.
+    return MALFORMED_MD_TOKEN_PATTERN.sub(
         lambda match: f"[[[{match.group('token')}|{match.group('text')}]]]",
         normalized,
     )
@@ -260,7 +272,10 @@ def restore_markdown_from_tokenized(
             return f"`{element.text}`"
         return translated_text
 
-    return TOKEN_PATTERN.sub(replace, tokenized_text)
+    restored = TOKEN_PATTERN.sub(replace, tokenized_text)
+    # Safety net: recover `[text](LINK_1)` residue (token id written as URL)
+    # using the token table, so no `](LINK_1)` ever reaches the export.
+    return MALFORMED_MD_TOKEN_PATTERN.sub(replace, restored)
 
 
 def restore_html_from_tokenized(
