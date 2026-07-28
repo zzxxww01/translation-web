@@ -1,5 +1,5 @@
 {
-  "version": 33,
+  "version": 34,
   "terms": [
     {
       "original": "TSMC",
@@ -845,9 +845,9 @@
     },
     {
       "original": "yield",
-      "translation": "良率",
+      "translation": "良率(制造)/收益率(金融)",
       "strategy": "translate",
-      "note": "制造/晶圆语境=良率；金融/收益语境=收益率（bond yield→债券收益率、rental yield→租金收益率），不得单义硬套",
+      "note": "制造/晶圆=良率；金融/债券/租金=收益率；禁单义硬套良率",
       "tags": [
         "performance"
       ],
@@ -855,7 +855,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-07-28T00:00:00"
     },
     {
       "original": "utilization rate",
@@ -1963,7 +1963,7 @@
       "original": "W",
       "translation": null,
       "strategy": "preserve",
-      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "note": "单位符号 W（大小写敏感按符号匹配），保留半角原形禁译瓦，非人名 Watt",
       "tags": [
         "unit"
       ],
@@ -2425,7 +2425,7 @@
       "original": "deep dive",
       "translation": "深度研究",
       "strategy": "translate",
-      "note": null,
+      "note": "命中即用，禁写深度分析/深度剖析（全篇统一）",
       "tags": [
         "editorial"
       ],
@@ -2433,7 +2433,7 @@
       "scope": "global",
       "source": "review-2026-07",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-07-28T00:00:00"
     },
     {
       "original": "resource adequacy",
@@ -2467,7 +2467,7 @@
       "original": "fleet",
       "translation": "机群",
       "strategy": "translate",
-      "note": "数据中心/GPU 语境=机群",
+      "note": "数据中心/GPU 机队语境=机群(非集群)",
       "tags": [
         "datacenter"
       ],
@@ -2475,7 +2475,7 @@
       "scope": "global",
       "source": "review-2026-07",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-07-28T00:00:00"
     },
     {
       "original": "time-to-power",
@@ -2560,6 +2560,412 @@
       "source": "review-2026-07",
       "status": "active",
       "updated_at": "2026-07-26T00:00:00"
+    },
+    {
+      "original": "gigawatt",
+      "translation": "GW",
+      "strategy": "translate",
+      "note": "拼写形功率/能量单位统一改写为半角 GW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "gigawatts",
+      "translation": "GW",
+      "strategy": "translate",
+      "note": "拼写形功率/能量单位统一改写为半角 GW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "megawatt",
+      "translation": "MW",
+      "strategy": "translate",
+      "note": "拼写形功率/能量单位统一改写为半角 MW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "megawatts",
+      "translation": "MW",
+      "strategy": "translate",
+      "note": "拼写形功率/能量单位统一改写为半角 MW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "kilowatt",
+      "translation": "kW",
+      "strategy": "translate",
+      "note": "拼写形功率/能量单位统一改写为半角 kW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "kilowatts",
+      "translation": "kW",
+      "strategy": "translate",
+      "note": "拼写形功率/能量单位统一改写为半角 kW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "terawatt",
+      "translation": "TW",
+      "strategy": "translate",
+      "note": "拼写形功率/能量单位统一改写为半角 TW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "terawatts",
+      "translation": "TW",
+      "strategy": "translate",
+      "note": "拼写形功率/能量单位统一改写为半角 TW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "watt",
+      "translation": "W",
+      "strategy": "translate",
+      "note": "拼写形单位统一改写为半角 W，禁译瓦；人名 Watt 不改写",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "watts",
+      "translation": "W",
+      "strategy": "translate",
+      "note": "拼写形单位统一改写为半角 W，禁译瓦；人名 Watt 不改写",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "kWh",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "能量单位保留半角原形，禁译千瓦时",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "W/cm²",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "复合单位整体保留，禁拆译为瓦/平方厘米",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "W/m²",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "复合单位整体保留，禁拆译为瓦/平方米",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "LPM",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "流量单位(升/分)整体保留原形，勿拆译",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "$/kW",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "单位造价整体保留，勿拆译美元/千瓦",
+      "tags": [
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "memory",
+      "translation": "内存",
+      "strategy": "translate",
+      "note": "系统/DRAM=内存；NAND/盘存=存储；泛指器件=存储器；单篇统一",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "scaling",
+      "translation": "扩展",
+      "strategy": "translate",
+      "note": "系统/算力=扩展/规模化(禁缩放)；晶体管/制程=微缩",
+      "tags": [
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "Changxin Jidian",
+      "translation": "长鑫集电（北京）",
+      "strategy": "first_annotate",
+      "note": "集电≠积电≠机电；北京，CXMT 关联实体",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "Changxin Xinqiao",
+      "translation": "长鑫新桥",
+      "strategy": "first_annotate",
+      "note": "CXMT 关联实体，勿臆造用字",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "Qinghui Jidian",
+      "translation": "清辉集电（合肥）",
+      "strategy": "first_annotate",
+      "note": "集电≠积电≠机电；合肥，勿写清辉机电",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "Tsinghua Unigroup",
+      "translation": "紫光集团",
+      "strategy": "first_annotate",
+      "note": "禁译过时的清华紫光",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "Unigroup",
+      "translation": "紫光集团",
+      "strategy": "first_annotate",
+      "note": "禁译过时的清华紫光",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "YMTC",
+      "translation": "长江存储",
+      "strategy": "first_annotate",
+      "note": "Yangtze Memory Technologies",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "SMIC",
+      "translation": "中芯国际",
+      "strategy": "first_annotate",
+      "note": "Semiconductor Manufacturing Int'l",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "NAURA",
+      "translation": "北方华创",
+      "strategy": "first_annotate",
+      "note": "半导体设备厂商，北方华创",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "AMEC",
+      "translation": "中微公司",
+      "strategy": "first_annotate",
+      "note": "Advanced Micro-Fabrication，中微公司",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "Hua Hong",
+      "translation": "华虹",
+      "strategy": "first_annotate",
+      "note": "华虹半导体/华虹集团",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "CXMT",
+      "translation": "长鑫存储",
+      "strategy": "first_annotate",
+      "note": "Changxin Memory Technologies，长鑫存储",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "SMSC",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "≠SMIC≠中芯国际；未认定实体，原样保留英文",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-28T00:00:00"
     }
   ]
 }
