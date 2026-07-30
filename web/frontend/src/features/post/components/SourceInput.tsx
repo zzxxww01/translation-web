@@ -1,7 +1,7 @@
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/Button';
 import { Loader2, Send, Trash2 } from 'lucide-react';
-import { getCharCount } from '@/shared/utils';
+import { toast } from 'sonner';
 import { POST_CONTENT_MAX_LENGTH } from '../types';
 
 interface SourceInputProps {
@@ -15,7 +15,22 @@ interface SourceInputProps {
 }
 
 export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, isTranslating, canClear }: SourceInputProps) {
-  const charCount = getCharCount(value);
+  // 计数与上限必须同源：都用 value.length（与后端校验口径一致）
+  const charCount = value.length;
+
+  const handleChange = (next: string) => {
+    if (next.length > POST_CONTENT_MAX_LENGTH) {
+      // textarea 原生 maxLength 会在粘贴时静默截断且不产生任何事件，
+      // 这里改为显式截断并告知用户被丢弃了多少字符
+      const dropped = next.length - POST_CONTENT_MAX_LENGTH;
+      onChange(next.slice(0, POST_CONTENT_MAX_LENGTH));
+      toast.warning(
+        `原文超出 ${POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符上限，已截断 ${dropped.toLocaleString()} 个字符`
+      );
+      return;
+    }
+    onChange(next);
+  };
 
   return (
     <div className="flex min-w-0 flex-col">
@@ -28,8 +43,7 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
       <Textarea
         id="postSourceInput"
         value={value}
-        onChange={(e) => onChange(e.target.value)}
-        maxLength={POST_CONTENT_MAX_LENGTH}
+        onChange={(e) => handleChange(e.target.value)}
         aria-label="帖子原文"
         placeholder="原文..."
         className="min-h-[42svh] resize-y sm:min-h-[320px] lg:min-h-[560px] lg:max-h-[calc(100svh-240px)]"

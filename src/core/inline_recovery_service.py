@@ -10,7 +10,9 @@ from .format_tokens import (
     sorted_block_groups,
     tokenize_text,
 )
+from .block_format import render_blockquote, render_list_item, restore_ordered_number
 from .models import ElementType, Paragraph, Section
+from .table_render import render_table_markdown
 
 # 已闭合的 markdown 链接区段：兜底恢复时不可再被包裹（A-3 嵌套坏链防护）。
 _MD_LINK_SPAN = re.compile(r"\[[^\]]*\]\([^)]*\)")
@@ -40,16 +42,25 @@ class InlineRecoveryService:
             len(self._fallback_block_ids),
         )
 
-    def format_markdown_line(self, element_type: ElementType, text: str) -> str:
+    def format_markdown_line(
+        self,
+        element_type: ElementType,
+        text: str,
+        *,
+        list_indent: int = 0,
+        source_text: str = "",
+    ) -> str:
         if element_type == ElementType.H3:
             return f"### {text}"
         if element_type == ElementType.H4:
             return f"#### {text}"
         if element_type == ElementType.LI:
-            return f"- {text}"
+            return render_list_item(text, list_indent)
         if element_type == ElementType.BLOCKQUOTE:
-            return f"> {text}"
-        return text
+            return render_blockquote(text)
+        # 有序列表项按普通段落解析，编号在待译文本里，模型常把它当格式标记
+        # 吃掉——这里按原文补回。
+        return restore_ordered_number(source_text, text)
 
     def group_section_blocks(self, section: Section) -> list[list[Paragraph]]:
         return sorted_block_groups(section.paragraphs)
@@ -63,7 +74,12 @@ class InlineRecoveryService:
         if first.inline_elements:
             tokenized = tokenize_text(first.source, first.inline_elements)
             return restore_markdown_from_tokenized(tokenized, first.inline_elements)
-        return self.format_markdown_line(first.element_type, first.source)
+        return self.format_markdown_line(
+            first.element_type,
+            first.source,
+            list_indent=getattr(first, "list_indent", 0),
+            source_text=first.source,
+        )
 
     def render_block_markdown(
         self,
@@ -74,9 +90,11 @@ class InlineRecoveryService:
         block_type = first.parent_block_type or first.element_type
 
         if block_type == ElementType.IMAGE:
+            # 图片段在项目创建时即被 auto-approve（confirmed=图片 URL），从不
+            # 送翻，因此直接输出原始 markdown。
             return first.parent_block_markdown or first.source_html or f"![image]({first.source})"
         if block_type == ElementType.TABLE:
-            return first.parent_block_markdown or first.parent_source_html or first.source
+            return self._render_table_block(first, fallback_to_source=fallback_to_source)
         if block_type == ElementType.CODE:
             try:
                 text = require_valid_reconstruction(
@@ -128,7 +146,37 @@ class InlineRecoveryService:
                 )
             else:
                 text = plain_text
-        return self.format_markdown_line(block_type, text)
+        return self.format_markdown_line(
+            block_type,
+            text,
+            list_indent=getattr(first, "list_indent", 0),
+            source_text=first.parent_block_plain_text or first.source,
+        )
+
+    def _render_table_block(
+        self, first: Paragraph, *, fallback_to_source: bool = True
+    ) -> str:
+        """采用结构校验通过的表格译文，否则回退英文原表。
+
+        表格是整表一段，译文直接就是一整张 markdown 表。结构校验（行数 /
+        每行竖线数 / 分隔行位置）不通过就回退——损坏的表格比未翻译的表格
+        更糟。
+        """
+        source_markdown = first.parent_block_markdown or first.parent_source_html or first.source
+        translated = first.best_translation_text(fallback_to_source=False)
+
+        def _reject(reason: str) -> None:
+            self._logger.warning(
+                "Table block %s: %s", first.parent_block_id or first.id, reason
+            )
+            self._record_fallback(first.parent_block_id or first.id)
+
+        rendered = render_table_markdown(
+            translated, source_markdown, on_reject=_reject
+        )
+        if rendered is not None:
+            return rendered
+        return source_markdown if fallback_to_source else (translated or source_markdown)
 
     def smart_fallback_restore_inline_elements(
         self,

@@ -26,9 +26,34 @@ def test_token_glossary_entry_is_forced_to_preserve():
 def test_protected_token_rewrites_model_translation_and_annotation():
     source = "Each token is processed independently."
 
-    assert preserve_protected_terms(source, "每个词元都会独立处理。") == "每个token都会独立处理。"
-    assert preserve_protected_terms(source, "每个token（词元）都会处理。") == "每个token都会处理。"
-    assert preserve_protected_terms(source, "每个词元（Token）都会处理。") == "每个token都会处理。"
+    # 替换出的 token 就地补 CJK–ASCII 空格（帖子链路不跑 markdown 后处理，
+    # 不补就会得到「每个token」这种没有空格的混排）。
+    assert preserve_protected_terms(source, "每个词元都会独立处理。") == "每个 token 都会独立处理。"
+    assert preserve_protected_terms(source, "每个token（词元）都会处理。") == "每个 token 都会处理。"
+    assert preserve_protected_terms(source, "每个词元（Token）都会处理。") == "每个 token 都会处理。"
+
+
+def test_protected_token_covers_all_sinicized_forms():
+    # 三处规则统一到 protected_terms 之后，帖子链路也认「令牌」「代币」。
+    assert (
+        preserve_protected_terms("Access token expires.", "访问令牌会过期。")
+        == "访问 token 会过期。"
+    )
+    assert (
+        preserve_protected_terms("The token price rose.", "该代币价格上涨。")
+        == "该 token 价格上涨。"
+    )
+    # 「令牌桶」是 token bucket 的既定网络术语译法，豁免。
+    assert (
+        preserve_protected_terms("A token bucket limiter.", "使用令牌桶限流。")
+        == "使用令牌桶限流。"
+    )
+
+
+def test_protected_token_source_guard_covers_crypto_sense():
+    # 原文没提 token 时，「代币」（加密货币）是正确译法，不得改写。
+    translated = "该代币价格上涨。"
+    assert preserve_protected_terms("The coin price rose.", translated) == translated
 
 
 def test_protected_token_is_source_aware():
@@ -45,7 +70,7 @@ def test_translation_payload_enforces_token_guard():
 
     payload = build_translation_payload(paragraph, "模型会输出一个词元。")
 
-    assert payload.text == "模型会输出一个token。"
+    assert payload.text == "模型会输出一个 token。"
 
 
 def test_xiaohongshu_tags_prioritize_specific_topics():

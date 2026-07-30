@@ -26,7 +26,13 @@ from src.services.source_metadata_service import SourceMetadataTranslationServic
 from src.services.translation_artifact_service import TranslationArtifactService
 from src.services.translation_run_registry import translation_run_registry
 
-from ..dependencies import AnalysisLLMProviderDep, GlossaryManagerDep, LongformLLMProviderDep, ProjectManagerDep
+from ..dependencies import (
+    AnalysisLLMProviderDep,
+    BatchServiceDep,
+    GlossaryManagerDep,
+    LongformLLMProviderDep,
+    ProjectManagerDep,
+)
 from ..middleware.rate_limit import limiter
 
 logger = logging.getLogger(__name__)
@@ -857,10 +863,12 @@ async def stop_translate_with_four_steps(project_id: str):
     if not validate_path_component(project_id):
         raise BadRequestException(detail="Invalid project_id")
 
+    # 走 classmethod：取消只依赖模块级 translation_run_registry 与类级进度缓存，
+    # 不构造服务实例、不触碰 LLM 配置——LLM 配置坏掉时也必须能停下正在跑的翻译。
+    # （此前用 __new__ 绕过 __init__，缺 _run_registry 属性，必 500。）
     from src.services.batch_translation_service import BatchTranslationService
 
-    service = BatchTranslationService.__new__(BatchTranslationService)
-    result = await service.cancel_translation(project_id)
+    result = BatchTranslationService.cancel_run(project_id)
     if result.get("status") == "not_found":
         raise BadRequestException(detail="No active longform translation for this project")
     return result

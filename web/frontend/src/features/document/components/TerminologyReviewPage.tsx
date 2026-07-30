@@ -26,6 +26,10 @@ const reasonLabels: Record<string, string> = {
   ambiguous: '存在歧义或多种译法',
 };
 
+// 术语原文可能含空格等字符，统一编码后再做 DOM id，供「跳到第一个未填写」定位
+const termAnchorId = (term: string) => `term-card-${encodeURIComponent(term)}`;
+const termInputId = (term: string) => `term-input-${encodeURIComponent(term)}`;
+
 export function TerminologyReviewPage({
   review,
   isSubmitting = false,
@@ -55,13 +59,24 @@ export function TerminologyReviewPage({
     };
   }, [decisions]);
 
-  const hasInvalidDecision = useMemo(
+  // 保留术语顺序，既用于禁用提交，也用于底栏「跳到第一个未填写」
+  const invalidTerms = useMemo(
     () =>
-      Object.values(decisions).some(
-        item => item.action !== 'skip' && !item.translation.trim()
-      ),
+      Object.entries(decisions)
+        .filter(([, item]) => item.action !== 'skip' && !item.translation.trim())
+        .map(([term]) => term),
     [decisions]
   );
+  const hasInvalidDecision = invalidTerms.length > 0;
+
+  const jumpToFirstInvalid = () => {
+    const term = invalidTerms[0];
+    if (!term) return;
+    document
+      .getElementById(termAnchorId(term))
+      ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    document.getElementById(termInputId(term))?.focus();
+  };
 
   const updateDecision = (
     term: string,
@@ -86,7 +101,9 @@ export function TerminologyReviewPage({
           translation:
             decision.action === 'skip'
               ? undefined
-              : (decision.translation || candidate.suggested_translation).trim(),
+              // 不再用建议译法回填用户清空的输入——那正是用户手动改写的意图。
+              // 空值由提交前的 invalidTerms 校验拦下，不会走到这里。
+              : decision.translation.trim(),
           first_occurrence: candidate.first_occurrence ?? candidate.related_sections[0]?.section_id,
         };
       })
@@ -152,10 +169,15 @@ export function TerminologyReviewPage({
             <div className="space-y-4">
               {section.candidates.map(candidate => {
                 const decision = decisions[candidate.term];
+                const isMissingTranslation =
+                  decision.action !== 'skip' && !decision.translation.trim();
                 return (
                   <div
                     key={candidate.term}
-                    className="rounded-xl border border-border-subtle bg-bg-primary p-4"
+                    id={termAnchorId(candidate.term)}
+                    className={`rounded-xl border bg-bg-primary p-4 ${
+                      isMissingTranslation ? 'border-error' : 'border-border-subtle'
+                    }`}
                   >
                     <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
                       <div>
@@ -224,9 +246,15 @@ export function TerminologyReviewPage({
                       </div>
                     )}
 
-                    <div className="grid gap-3 md:grid-cols-3">
+                    <div
+                      className="grid gap-3 md:grid-cols-3"
+                      role="radiogroup"
+                      aria-label={`${candidate.term} 的处理方式`}
+                    >
                       <button
                         type="button"
+                        role="radio"
+                        aria-checked={decision.action === 'accept'}
                         onClick={() =>
                           updateDecision(candidate.term, {
                             action: 'accept',
@@ -248,22 +276,28 @@ export function TerminologyReviewPage({
                         </div>
                       </button>
 
-                      <button
-                        type="button"
-                        onClick={() =>
-                          updateDecision(candidate.term, {
-                            action: 'custom',
-                            translation: decision.translation || candidate.suggested_translation,
-                          })
-                        }
+                      {/* 输入框不能再嵌在 button 内：既是无效 HTML，点击输入框也会被外层
+                          onClick 用建议译法覆盖用户刚清空的内容。改为外层 div + 独立标题按钮。 */}
+                      <div
                         className={`rounded-xl border px-4 py-3 text-left transition-colors ${
                           decision.action === 'custom'
                             ? 'border-primary-500 bg-primary-500/10'
-                            : 'border-border-subtle hover:border-primary-500/50'
+                            : 'border-border-subtle'
                         }`}
                       >
-                        <div className="mb-1 font-medium text-text-primary">自定义译法</div>
+                        <button
+                          type="button"
+                          role="radio"
+                          aria-checked={decision.action === 'custom'}
+                          onClick={() =>
+                            updateDecision(candidate.term, { action: 'custom' })
+                          }
+                          className="mb-1 w-full text-left font-medium text-text-primary"
+                        >
+                          自定义译法
+                        </button>
                         <input
+                          id={termInputId(candidate.term)}
                           value={decision.translation}
                           onChange={event =>
                             updateDecision(candidate.term, {
@@ -272,12 +306,21 @@ export function TerminologyReviewPage({
                             })
                           }
                           placeholder="输入你的项目术语译法"
+                          aria-label={`${candidate.term} 的自定义译法`}
+                          aria-invalid={isMissingTranslation}
                           className="mt-2 w-full rounded-lg border border-border-subtle bg-bg-primary px-3 py-2 text-sm text-text-primary outline-none focus:border-primary-500"
                         />
-                      </button>
+                        {isMissingTranslation && (
+                          <p className="mt-1.5 text-xs text-error">
+                            请填写译法，或改选「先跳过」
+                          </p>
+                        )}
+                      </div>
 
                       <button
                         type="button"
+                        role="radio"
+                        aria-checked={decision.action === 'skip'}
                         onClick={() =>
                           updateDecision(candidate.term, {
                             action: 'skip',
@@ -314,7 +357,20 @@ export function TerminologyReviewPage({
 
       <div className="sticky bottom-0 mt-6 flex items-center justify-between rounded-2xl border border-border-subtle bg-white px-5 py-4 shadow-sm">
         <div className="text-sm text-text-muted">
-          确认结果会优先写入项目术语库，后续你可以在术语管理页里再提升到全局。
+          {hasInvalidDecision ? (
+            <span className="flex flex-wrap items-center gap-2 text-error">
+              还有 {invalidTerms.length} 个术语未填写译法
+              <button
+                type="button"
+                onClick={jumpToFirstInvalid}
+                className="underline underline-offset-2"
+              >
+                跳到第一个未填写
+              </button>
+            </span>
+          ) : (
+            '确认结果会优先写入项目术语库，后续你可以在术语管理页里再提升到全局。'
+          )}
         </div>
         <div className="flex gap-3">
           <Button variant="outline" onClick={onCancel}>

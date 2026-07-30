@@ -64,6 +64,7 @@ export function ImmersiveEditor({
   const listContainerRef = useRef<HTMLDivElement>(null);
   const targetParagraphRef = useRef<HTMLDivElement | null>(null);
   const hasAutoScrolledRef = useRef(false);
+  const batchDialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -88,6 +89,7 @@ export function ImmersiveEditor({
     retranslatingCount,
     hasPendingWork,
     updateDraft,
+    saveNow,
     queueRetranslate,
     confirmParagraph,
     batchConfirmSelected,
@@ -224,15 +226,40 @@ export function ImmersiveEditor({
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
+      if (event.key !== 'Escape') return;
+      // Esc 分层：先关批量重译弹层；退出确认框打开时交给 AlertDialog 自己处理；否则才退出沉浸编辑
+      if (showBatchRetranslateDialog) {
         event.preventDefault();
-        handleClose();
+        setShowBatchRetranslateDialog(false);
+        return;
       }
+      if (showExitDialog) {
+        return;
+      }
+      event.preventDefault();
+      handleClose();
     };
 
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [handleClose]);
+  }, [handleClose, showBatchRetranslateDialog, showExitDialog]);
+
+  // 浏览器刷新/关页时拦截提示，避免防抖窗口内的草稿与在途任务被丢弃
+  useEffect(() => {
+    if (!hasPendingWork) return;
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = '';
+    };
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+  }, [hasPendingWork]);
+
+  // 弹层打开时把焦点移进去，避免 Tab 走到被遮罩盖住的段落输入框
+  useEffect(() => {
+    if (!showBatchRetranslateDialog) return;
+    batchDialogRef.current?.querySelector('button')?.focus();
+  }, [showBatchRetranslateDialog]);
 
   const batchRetranslateMenuOptions = useMemo(() => {
     const noneOption = { id: 'none', label: '仅重译（无额外要求）', description: '', instruction: '' };
@@ -335,6 +362,7 @@ export function ImmersiveEditor({
                 onRetranslate={(instruction?: string, optionId?: string) =>
                   queueRetranslate(paragraph.id, instruction, optionId)
                 }
+                onRetrySave={() => void saveNow(paragraph.id)}
                 onConfirm={() => void confirmParagraph(paragraph.id)}
                 isSelectionMode={isSelectionMode}
                 isSelected={selectedIds.has(paragraph.id)}
@@ -357,9 +385,19 @@ export function ImmersiveEditor({
       </div>
 
       {showBatchRetranslateDialog && (
-        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/50">
-          <div className="w-full max-w-md rounded-lg border border-border bg-bg-primary p-6 shadow-xl">
-            <h3 className="mb-4 text-lg font-semibold text-text-primary">
+        <div
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setShowBatchRetranslateDialog(false)}
+        >
+          <div
+            ref={batchDialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="batch-retranslate-title"
+            onClick={event => event.stopPropagation()}
+            className="w-full max-w-md rounded-lg border border-border bg-bg-primary p-6 shadow-xl"
+          >
+            <h3 id="batch-retranslate-title" className="mb-4 text-lg font-semibold text-text-primary">
               批量重译 {selectedIds.size} 个段落
             </h3>
             <div className="space-y-3">

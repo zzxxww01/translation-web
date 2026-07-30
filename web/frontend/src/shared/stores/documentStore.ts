@@ -452,42 +452,8 @@ export const useProjects = () => useDocumentStore(state => state.projects);
 export const useSections = () => useDocumentStore(state => state.sections);
 export const useIsProcessing = () => useDocumentStore(state => state.isProcessing);
 export const useDocumentError = () => useDocumentStore(state => state.error);
-export const useFullTranslateState = () => useDocumentStore(state => ({
-  isFullTranslating: state.isFullTranslating,
-  fullTranslateProgress: state.fullTranslateProgress,
-  fullTranslateProjectId: state.fullTranslateProjectId,
-}));
 
-/**
- * 操作 hooks
- */
-export const useDocumentActions = () =>
-  useDocumentStore(state => ({
-    setCurrentProject: state.setCurrentProject,
-    setCurrentSection: state.setCurrentSection,
-    setCurrentParagraph: state.setCurrentParagraph,
-    setProjects: state.setProjects,
-    setSections: state.setSections,
-    setProcessing: state.setProcessing,
-    setError: state.setError,
-    updateProject: state.updateProject,
-    updateSection: state.updateSection,
-    updateParagraph: state.updateParagraph,
-    updateParagraphInSection: state.updateParagraphInSection,
-    updateParagraphInProject: state.updateParagraphInProject,
-    updateMultipleParagraphs: state.updateMultipleParagraphs,
-    goToNextSection: state.goToNextSection,
-    goToPreviousSection: state.goToPreviousSection,
-    goToNextParagraph: state.goToNextParagraph,
-    goToPreviousParagraph: state.goToPreviousParagraph,
-    reset: state.reset,
-    resetCurrentProject: state.resetCurrentProject,
-    // 全文翻译操作
-    setFullTranslating: state.setFullTranslating,
-    setFullTranslateProgress: state.setFullTranslateProgress,
-    setFullTranslateProgressForProject: state.setFullTranslateProgressForProject,
-    setFullTranslateProjectId: state.setFullTranslateProjectId,
-    startFullTranslate: state.startFullTranslate,
-    updateFullTranslateProgress: state.updateFullTranslateProgress,
-    endFullTranslate: state.endFullTranslate,
-  }));
+// 注意：不要再新增「返回对象字面量」的选择器 hook。
+// zustand v5 的 useStore 直接把 selector 结果交给 useSyncExternalStore，
+// 不再做浅比较，返回新对象会触发无限重渲染。
+// 需要一次取多个字段时请用 useShallow 包裹，或逐个字段单独选择。

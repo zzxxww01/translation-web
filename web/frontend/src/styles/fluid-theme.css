@@ -36,7 +36,10 @@
     /* 文本层次 */
     --color-text-primary: #0f172a;
     --color-text-secondary: #475569;
-    --color-text-muted: #94a3b8;
+    /* 与 index.css @theme 保持同值：muted 需满足正文对比度要求 */
+    --color-text-muted: #64748b;
+    /* disabled 仅供 placeholder/分隔符等装饰性文本使用 */
+    --color-text-disabled: #94a3b8;
 
     /* 语义色 */
     --color-success: #10b981;
@@ -350,7 +353,7 @@
   }
 
   .input-fluid::placeholder {
-    color: var(--color-text-muted);
+    color: var(--color-text-disabled);
   }
 
   /* Textarea */

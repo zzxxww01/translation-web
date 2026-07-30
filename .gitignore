@@ -84,3 +84,8 @@ desktop.ini
 tmp_findings_*.json
 tmp_findings_*.py
 translation-agent-analysis/
+
+# 词表升版脚本留下的本地备份（scripts/sync_glossary_to_skill.py 等），
+# 不应进版本控制——真正的历史在 git 里
+*.bak-v*
+*.bak

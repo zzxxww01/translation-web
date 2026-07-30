@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Copy, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
-import { copyToClipboard, getCharCount } from '@/shared/utils';
+import { copyToClipboard } from '@/shared/utils';
 import { TranslationVersionType } from '@/shared/constants';
 import type { TranslationVersion } from '@/shared/types';
 import { POST_CONTENT_MAX_LENGTH } from '../types';
@@ -12,7 +12,7 @@ import { POST_CONTENT_MAX_LENGTH } from '../types';
 interface TranslationOutputProps {
   versions: TranslationVersion[];
   currentVersionId: string | null;
-  currentSourceRevision: number;
+  originalText: string;
   currentContent: string;
   isEdited: boolean;
   editedContent: string;
@@ -22,14 +22,36 @@ interface TranslationOutputProps {
   onDiscardEdit: () => void;
 }
 
+/**
+ * 判断某个版本是否基于与当前原文不同的底稿。
+ * 必须比原文文本而不是 sourceRevision —— revision 单调递增，用户「改一个字再删掉」
+ * 后文本完全相同但 revision 已经 +2，会常驻一个误导性的「原文已更新」徽标。
+ */
+function isStaleVersion(version: TranslationVersion, originalText: string): boolean {
+  return version.sourceText.trim() !== '' && version.sourceText !== originalText;
+}
+
 export function TranslationOutput({
-  versions, currentVersionId, currentSourceRevision, currentContent, isEdited, editedContent,
+  versions, currentVersionId, originalText, currentContent, isEdited, editedContent,
   onSetCurrentVersion, onSetEditedContent, onSaveEdit, onDiscardEdit,
 }: TranslationOutputProps) {
-  const charCount = getCharCount(currentContent);
+  // 计数与上限同源，都用 length（与后端校验口径一致）
+  const charCount = currentContent.length;
   const currentVersion = versions.find(v => v.id === currentVersionId);
   const isBasedOnOlderSource =
-    currentVersion !== undefined && currentVersion.sourceRevision !== currentSourceRevision;
+    currentVersion !== undefined && isStaleVersion(currentVersion, originalText);
+
+  const handleChange = (next: string) => {
+    if (next.length > POST_CONTENT_MAX_LENGTH) {
+      const dropped = next.length - POST_CONTENT_MAX_LENGTH;
+      onSetEditedContent(next.slice(0, POST_CONTENT_MAX_LENGTH));
+      toast.warning(
+        `译文超出 ${POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符上限，已截断 ${dropped.toLocaleString()} 个字符`
+      );
+      return;
+    }
+    onSetEditedContent(next);
+  };
 
   const handleCopy = async () => {
     const content = isEdited ? editedContent : versions.find(v => v.id === currentVersionId)?.content || '';
@@ -54,10 +76,14 @@ export function TranslationOutput({
                 {versions.map(v => {
                   const typeLabel = v.type === TranslationVersionType.TRANSLATION ? '翻译' :
                     v.type === TranslationVersionType.OPTIMIZATION ? '优化' : '编辑';
-                  const preview = v.instruction ? ` - ${v.instruction.substring(0, 12)}...` : '';
+                  const instruction = v.instruction?.trim() ?? '';
+                  const preview = instruction
+                    ? ` - ${instruction.length > 12 ? `${instruction.slice(0, 12)}…` : instruction}`
+                    : '';
+                  const staleMark = isStaleVersion(v, originalText) ? ' · 旧底稿' : '';
                   return (
                     <SelectItem key={v.id} value={v.id}>
-                      v{v.versionNumber} ({typeLabel}){preview}
+                      v{v.versionNumber} ({typeLabel}){preview}{staleMark}
                     </SelectItem>
                   );
                 })}
@@ -69,7 +95,7 @@ export function TranslationOutput({
           {isEdited && <Badge variant="warning">已编辑</Badge>}
           {isBasedOnOlderSource && <Badge variant="outline">原文已更新</Badge>}
           <span className="text-xs text-muted-foreground">
-            {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()} 字
+            {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符
           </span>
         </div>
       </div>
@@ -77,8 +103,15 @@ export function TranslationOutput({
       <Textarea
         id="translationEditor"
         value={currentContent}
-        onChange={(e) => onSetEditedContent(e.target.value)}
-        maxLength={POST_CONTENT_MAX_LENGTH}
+        onChange={(e) => handleChange(e.target.value)}
+        onKeyDown={(e) => {
+          // Escape 只在译文编辑框内生效：挂到 window 上会与 Radix 弹层/下拉的
+          // Escape 关闭逻辑抢同一次事件，导致确认框关不掉、语义被替换
+          if (e.key === 'Escape' && !e.repeat && isEdited) {
+            e.preventDefault();
+            onDiscardEdit();
+          }
+        }}
         aria-label="帖子译文"
         placeholder="译文..."
         className="min-h-[34svh] sm:min-h-[280px] lg:min-h-[280px]"

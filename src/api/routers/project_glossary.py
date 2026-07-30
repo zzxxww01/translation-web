@@ -7,7 +7,7 @@ from typing import Dict, List, Literal, Optional
 from urllib.parse import unquote
 from uuid import UUID
 
-from fastapi import APIRouter, Body
+from fastapi import APIRouter, Body, Query
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 from src.api.dependencies import (
@@ -16,6 +16,7 @@ from src.api.dependencies import (
     ProjectManagerDep,
 )
 from src.api.middleware import BadRequestException, ConflictException, NotFoundException
+from src.api.routers.translate_utils import validate_path_component
 from src.api.utils.concurrency import run_blocking
 from src.api.utils.llm_factory import create_llm_provider
 from src.core.glossary import infer_glossary_tags, normalize_glossary_tags
@@ -156,6 +157,12 @@ async def _run_term_review_job(
         )
 
 
+def _ensure_valid_project_id(project_id: str) -> None:
+    """拦截含路径分隔符或 .. 的 project_id,防止目录穿越读写 glossary.json(审计 BE1)。"""
+    if not validate_path_component(project_id):
+        raise BadRequestException(detail="Invalid project_id")
+
+
 def _normalize_tags(tags: Optional[List[str]]) -> List[str]:
     return normalize_glossary_tags(tags)
 
@@ -226,6 +233,7 @@ def _apply_batch_action(glossary, request: BatchGlossaryRequest) -> tuple[list[G
 
 @router.get("/projects/{project_id}/glossary")
 async def get_project_glossary(project_id: str, gm: GlossaryManagerDep):
+    _ensure_valid_project_id(project_id)
     try:
         def load_glossary() -> dict:
             glossary = gm.load_project(project_id)
@@ -267,6 +275,7 @@ async def update_project_glossary(
     request: AddTermRequest,
     gm: GlossaryManagerDep,
 ):
+    _ensure_valid_project_id(project_id)
     try:
         def add_term() -> dict:
             with gm.project_lock(project_id):
@@ -293,23 +302,22 @@ async def update_project_glossary(
         raise NotFoundException(detail="Project not found")
 
 
-@router.put("/projects/{project_id}/glossary/terms/{original}")
-async def update_glossary_term(
+async def _update_project_term(
     project_id: str,
     original: str,
     request: UpdateTermRequest,
     gm: GlossaryManagerDep,
-):
+) -> dict:
+    """按术语原文更新项目术语,原文由调用方解码后传入。"""
+    _ensure_valid_project_id(project_id)
     try:
-        original_decoded = unquote(original)
-
         def update_term() -> dict:
             with gm.project_lock(project_id):
                 glossary = gm.load_project(project_id)
-                existing = glossary.get_term(original_decoded)
+                existing = glossary.get_term(original)
                 if not existing:
                     raise NotFoundException(
-                        detail=f"Term '{original_decoded}' not found in glossary"
+                        detail=f"Term '{original}' not found in glossary"
                     )
 
                 updated_term = _apply_term_updates(existing, request)
@@ -327,19 +335,18 @@ async def update_glossary_term(
         raise NotFoundException(detail="Project not found")
 
 
-@router.delete("/projects/{project_id}/glossary/terms/{original}")
-async def delete_glossary_term(
+async def _delete_project_term(
     project_id: str,
     original: str,
     gm: GlossaryManagerDep,
-):
+) -> dict:
+    """按术语原文删除项目术语,原文由调用方解码后传入。"""
+    _ensure_valid_project_id(project_id)
     try:
-        original_decoded = unquote(original)
-
         def delete_term() -> dict:
             with gm.project_lock(project_id):
                 glossary = gm.load_project(project_id)
-                original_lower = original_decoded.lower()
+                original_lower = original.lower()
                 filtered_terms = [
                     term
                     for term in glossary.terms
@@ -347,11 +354,11 @@ async def delete_glossary_term(
                 ]
                 if len(filtered_terms) == len(glossary.terms):
                     raise NotFoundException(
-                        detail=f"Term '{original_decoded}' not found in glossary"
+                        detail=f"Term '{original}' not found in glossary"
                     )
                 glossary.terms = filtered_terms
                 gm.save_project(project_id, glossary)
-            return {"message": "Term deleted", "original": original_decoded}
+            return {"message": "Term deleted", "original": original}
 
         return await run_blocking(delete_term)
     except NotFoundException:
@@ -360,12 +367,53 @@ async def delete_glossary_term(
         raise NotFoundException(detail="Project not found")
 
 
+# 术语原文放在 query 参数里:含 `/` 的术语(如 W/cm²、$/kW)拼进路径段会被
+# uvicorn 还原成真斜杠导致 404,路径版路由保留仅为向后兼容(审计 FEB4)。
+@router.put("/projects/{project_id}/glossary/term")
+async def update_glossary_term_by_query(
+    project_id: str,
+    request: UpdateTermRequest,
+    gm: GlossaryManagerDep,
+    original: str = Query(..., min_length=1, description="术语原文"),
+):
+    return await _update_project_term(project_id, original, request, gm)
+
+
+@router.delete("/projects/{project_id}/glossary/term")
+async def delete_glossary_term_by_query(
+    project_id: str,
+    gm: GlossaryManagerDep,
+    original: str = Query(..., min_length=1, description="术语原文"),
+):
+    return await _delete_project_term(project_id, original, gm)
+
+
+@router.put("/projects/{project_id}/glossary/terms/{original}")
+async def update_glossary_term(
+    project_id: str,
+    original: str,
+    request: UpdateTermRequest,
+    gm: GlossaryManagerDep,
+):
+    return await _update_project_term(project_id, unquote(original), request, gm)
+
+
+@router.delete("/projects/{project_id}/glossary/terms/{original}")
+async def delete_glossary_term(
+    project_id: str,
+    original: str,
+    gm: GlossaryManagerDep,
+):
+    return await _delete_project_term(project_id, unquote(original), gm)
+
+
 @router.post("/projects/{project_id}/glossary/batch")
 async def batch_update_project_glossary(
     project_id: str,
     request: BatchGlossaryRequest,
     gm: GlossaryManagerDep,
 ):
+    _ensure_valid_project_id(project_id)
     try:
         def update_batch() -> dict:
             with gm.project_lock(project_id):
@@ -400,6 +448,7 @@ async def check_term_conflict(
     request: CheckConflictRequest,
     gm: GlossaryManagerDep,
 ):
+    _ensure_valid_project_id(project_id)
     try:
         def check_conflicts() -> dict:
             project_glossary = gm.load_project(project_id)
@@ -437,6 +486,7 @@ async def match_paragraph_terms(
     request: MatchTermsRequest,
     gm: GlossaryManagerDep,
 ):
+    _ensure_valid_project_id(project_id)
     try:
         def match_terms() -> dict:
             from src.core.glossary import create_default_global_glossary
@@ -480,6 +530,7 @@ async def prepare_term_review(
     llm: LongformLLMProviderDep,
     request: PrepareTermReviewRequest = Body(default_factory=PrepareTermReviewRequest),
 ):
+    _ensure_valid_project_id(project_id)
     try:
         if request.model:
             llm = create_llm_provider(provider=request.model)
@@ -505,6 +556,7 @@ async def start_term_review_job(
     request: PrepareTermReviewRequest = Body(default_factory=PrepareTermReviewRequest),
 ):
     """Start terminology preparation without keeping the HTTP request open."""
+    _ensure_valid_project_id(project_id)
     try:
         await run_blocking(pm.get, project_id)
         job_store = TerminologyReviewJobStore(pm.projects_path)
@@ -568,6 +620,7 @@ async def get_term_review_job(
     pm: ProjectManagerDep,
 ):
     """Return persisted state and, when complete, the prepared review payload."""
+    _ensure_valid_project_id(project_id)
     try:
         job_store = TerminologyReviewJobStore(pm.projects_path)
         return await run_blocking(job_store.get, project_id, job_id.hex)
@@ -582,6 +635,7 @@ async def submit_term_review(
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
 ):
+    _ensure_valid_project_id(project_id)
     try:
         service = TerminologyReviewService(
             project_manager=pm,
@@ -610,6 +664,7 @@ async def get_project_glossary_recommendations(
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
 ):
+    _ensure_valid_project_id(project_id)
     try:
         service = TerminologyReviewService(
             project_manager=pm,
@@ -623,13 +678,13 @@ async def get_project_glossary_recommendations(
         raise NotFoundException(detail="Project not found")
 
 
-@router.post("/projects/{project_id}/glossary/terms/{original}/promote")
-async def promote_project_term(
+async def _promote_project_term(
     project_id: str,
     original: str,
     pm: ProjectManagerDep,
     gm: GlossaryManagerDep,
 ):
+    _ensure_valid_project_id(project_id)
     try:
         service = TerminologyReviewService(
             project_manager=pm,
@@ -638,7 +693,34 @@ async def promote_project_term(
         return await run_blocking(
             service.promote_project_term,
             project_id,
-            unquote(original),
+            original,
         )
     except FileNotFoundError:
         raise NotFoundException(detail="Project or term not found")
+
+
+@router.post("/projects/{project_id}/glossary/term/promote")
+async def promote_project_term_by_query(
+    project_id: str,
+    pm: ProjectManagerDep,
+    gm: GlossaryManagerDep,
+    original: str = Query(..., min_length=1),
+):
+    """按 query 参数定位术语。
+
+    含斜杠的术语（`W/cm²`、`$/kW`）拼进路径段时会被 uvicorn 还原成真斜杠，
+    路由匹配不上——那类术语此前既改不了也提升不了。query 版不做二次 unquote，
+    否则含 `%` 的术语会被二次解码损坏。
+    """
+    return await _promote_project_term(project_id, original, pm, gm)
+
+
+@router.post("/projects/{project_id}/glossary/terms/{original}/promote")
+async def promote_project_term(
+    project_id: str,
+    original: str,
+    pm: ProjectManagerDep,
+    gm: GlossaryManagerDep,
+):
+    """旧的路径参数版，保留兼容。"""
+    return await _promote_project_term(project_id, unquote(original), pm, gm)

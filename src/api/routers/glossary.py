@@ -3,7 +3,7 @@
 from datetime import datetime
 from typing import List, Literal, Optional
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Query, Request
 from pydantic import BaseModel, Field
 
 from src.api.dependencies import GlossaryManagerDep
@@ -203,14 +203,8 @@ async def add_global_term(request: Request, body: TermRequest, gm: GlossaryManag
     return await run_blocking(add_term)
 
 
-@router.put("/terms/{original}", response_model=dict)
-@limiter.limit("60/minute")
-async def update_global_term(
-    request: Request,
-    original: str,
-    body: TermUpdateRequest,
-    gm: GlossaryManagerDep,
-):
+async def _update_global_term(original: str, body: TermUpdateRequest, gm) -> dict:
+    """按术语原文更新全局术语。"""
     def update_term() -> dict:
         with gm.global_lock():
             glossary = gm.load_global()
@@ -223,9 +217,8 @@ async def update_global_term(
     return await run_blocking(update_term)
 
 
-@router.delete("/terms/{original}", response_model=dict)
-@limiter.limit("60/minute")
-async def delete_global_term(request: Request, original: str, gm: GlossaryManagerDep):
+async def _delete_global_term(original: str, gm) -> dict:
+    """按术语原文删除全局术语。"""
     def delete_term() -> dict:
         with gm.global_lock():
             glossary = gm.load_global()
@@ -240,6 +233,46 @@ async def delete_global_term(request: Request, original: str, gm: GlossaryManage
         return {"message": "Term deleted", "original": original}
 
     return await run_blocking(delete_term)
+
+
+# 术语原文放在 query 参数里:含 `/` 的术语(如 W/cm²、$/kW)拼进路径段会被
+# uvicorn 还原成真斜杠导致 404,路径版路由保留仅为向后兼容(审计 FEB4)。
+@router.put("/term", response_model=dict)
+@limiter.limit("60/minute")
+async def update_global_term_by_query(
+    request: Request,
+    body: TermUpdateRequest,
+    gm: GlossaryManagerDep,
+    original: str = Query(..., min_length=1, description="术语原文"),
+):
+    return await _update_global_term(original, body, gm)
+
+
+@router.delete("/term", response_model=dict)
+@limiter.limit("60/minute")
+async def delete_global_term_by_query(
+    request: Request,
+    gm: GlossaryManagerDep,
+    original: str = Query(..., min_length=1, description="术语原文"),
+):
+    return await _delete_global_term(original, gm)
+
+
+@router.put("/terms/{original}", response_model=dict)
+@limiter.limit("60/minute")
+async def update_global_term(
+    request: Request,
+    original: str,
+    body: TermUpdateRequest,
+    gm: GlossaryManagerDep,
+):
+    return await _update_global_term(original, body, gm)
+
+
+@router.delete("/terms/{original}", response_model=dict)
+@limiter.limit("60/minute")
+async def delete_global_term(request: Request, original: str, gm: GlossaryManagerDep):
+    return await _delete_global_term(original, gm)
 
 
 @router.post("/batch", response_model=dict)

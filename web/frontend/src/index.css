@@ -412,7 +412,10 @@
   /* 文本色 */
   --color-text-primary: #1e293b;
   --color-text-secondary: #475569;
-  --color-text-muted: #94a3b8;
+  /* muted 承载进度、段落定位、建议译法等信息性文本，须满足 WCAG AA（对白底约 4.76:1） */
+  --color-text-muted: #64748b;
+  /* disabled 仅用于 placeholder、分隔符等装饰性文本，不承载信息 */
+  --color-text-disabled: #94a3b8;
 
   /* 边框色 */
   --color-border-subtle: #e2e8f0;

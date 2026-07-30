@@ -17,11 +17,23 @@ from .config_loader import get_config_loader
 from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, ProviderNetworkConfig
 from .fallback_strategy import FallbackStrategy, AttemptPlan
 from .base import LLMProvider
-from .errors import LLMProxyConfigurationError
+from .errors import LLMError, LLMProxyConfigurationError
 from .network_policy import build_network_policy
 from .network_policy import RuntimeNetworkPolicy
 
 logger = logging.getLogger(__name__)
+
+
+class LLMNonRetryableError(LLMError):
+    """provider 已判定「换 key/换模型也必然同样失败」的错误。
+
+    典型场景：prompt 过长、token 数超限、内容被安全策略拦截、invalid argument。
+    provider（如 GeminiProvider）识别后抛出该类型，故障转移层看到即刻中止整个
+    attempt_plan，避免把秒级失败重放成 N 次无效调用、白烧每个 key 一次配额
+    （审计 BE9）。类型定义在适配层是为了保持 provider 无关——适配器不得反向
+    依赖任何具体 provider 的实现或私有判定函数。
+    """
+
 
 # 故障转移统计
 _fallback_stats = {
@@ -251,6 +263,19 @@ class ProviderAdapter:
                     f"[ProviderAdapter] request_id={request_id} "
                     f"Attempt {idx}/{len(self.attempt_plan)} failed: {type(e).__name__}: {e}"
                 )
+
+                # provider 已判定为不可重试（prompt 过长 / 被安全策略拦截 / invalid
+                # argument 等）：后续路由只是用同一份 prompt 重复触发同一个错误，
+                # 直接中止，把秒级失败原样抛给调用方（审计 BE9）。
+                if isinstance(e, LLMNonRetryableError):
+                    _fallback_stats["failed_requests"] += 1
+                    duration = time.time() - start_time
+                    logger.error(
+                        f"[ProviderAdapter] request_id={request_id} "
+                        f"Aborted at attempt {idx}/{len(self.attempt_plan)} on non-retryable error "
+                        f"after {duration:.2f}s: {e}"
+                    )
+                    raise
 
                 # 如果还有更多尝试，继续
                 if idx < len(self.attempt_plan):

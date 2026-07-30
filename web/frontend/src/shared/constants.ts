@@ -91,6 +91,9 @@ export const PAGE_SIZE_OPTIONS = [10, 20, 50, 100] as const;
 
 export const REQUEST_TIMEOUTS = {
   DEFAULT: API_TIMEOUT,
+  // POST_* 必须大于服务端的整体预算（src/api/routers/translate_posts.py 的
+  // _TIMEOUT_BUDGETS，当前 post/post_optimize 170s、title 120s），这样超时时
+  // 用户拿到的是服务端可读的 503，而不是浏览器侧的裸中断。
   POST_TRANSLATE: 180000,
   POST_OPTIMIZE: 180000,
   POST_TITLE: 180000,

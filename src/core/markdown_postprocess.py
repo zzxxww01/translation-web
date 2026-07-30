@@ -12,6 +12,8 @@ from typing import List, Optional
 
 from src.settings import settings
 
+from .protected_terms import desinicize_token, source_mentions_token
+
 
 # ---------------------------------------------------------------------------
 # Regex patterns
@@ -138,17 +140,17 @@ _DOUBLED_FULLWIDTH_PUNCT = re.compile(r"([\uff0c\u3002\uff1a\uff1b\u3001])\1+")
 # Escape residue that is never meaningful in markdown prose (`\@`, `\&`).
 _USELESS_ESCAPES = re.compile(r"\\([@&])")
 
-# Standalone capitalized Token/Tokens (word boundary keeps compound proper nouns
-# like Tokenomics / TokenBudgeting / Tokenmaxxing untouched). AI-context tokens
-# must stay lowercase English per the house style.
-_CAPITALIZED_TOKEN_WORD = re.compile(r"\bToken(s)?\b")
+# Standalone capitalized Token/Tokens。词边界本就放过 Tokenomics /
+# TokenBudgeting 这类无空格复合词；`(?!\s+[A-Z])` 再放过带空格的英文专名
+# （Token Ring / Token Factory / Token Economics），句首/标题首由 sub 回调
+# 里的 _at_sentence_start 判断保留大写。剩下的 AI 语境 token 按 house style
+# 一律小写。
+_CAPITALIZED_TOKEN_WORD = re.compile(r"\bToken(s)?\b(?!\s+[A-Z])")
 
-# token 严禁翻译（2026-07 用户硬性要求）：词元/令牌 确定性替换回 token。
-# 仅「令牌桶/令牌环」（网络术语 token bucket / token ring 的既定译法）按
-# 紧邻组合词豁免；孤立「令牌」仍替换。「词元化」→「token 化」显式给出
-# 空格，保证该步自身幂等（与 2e 的 CJK–ASCII 补空格结果一致）。
-_TOKEN_CIYUAN_HUA = re.compile(r"词元化")
-_TOKEN_SINICIZED_WORD = re.compile(r"词元|令牌(?![桶环])")
+# 行首 / 标题标记后 / 句末标点后 —— 这些位置的大写 Token 是正常英文书写，
+# 不做小写化。
+_SENTENCE_START_BEFORE = re.compile(r"(?:^|\n)[ \t]*(?:#{1,6}[ \t]+|[-*+][ \t]+|>[ \t]*)?$")
+_SENTENCE_END_BEFORE = re.compile(r"[.!?][\"')\]]?\s+$")
 
 # `\u4e2d\u6587\uff08English\uff09` first-occurrence annotation. Used to strip exact repeated
 # annotations for the same English term (annotation stacking, 2026-07 audit).
@@ -251,9 +253,30 @@ def normalize_cjk_ascii_spacing(text: str) -> str:
 # Core processor
 # ---------------------------------------------------------------------------
 
+def _desinicize_in_protected(text: str) -> str:
+    """保护区（链接锚文本 / 表格单元）内的 token 去汉化。
+
+    保护区跑不到 2e 的 CJK–ASCII 补空格，所以只对**确实发生了替换**的文本
+    就地补一次空格；没有 token 汉化的内容一个字符都不动。
+    """
+    replaced = desinicize_token(text)
+    if replaced == text:
+        return text
+    return normalize_cjk_ascii_spacing(replaced)
+
+
+def _at_sentence_start(text: str, index: int) -> bool:
+    """``index`` 处是否位于行首、标题/列表标记之后，或上一句句末之后。"""
+    before = text[:index]
+    return bool(
+        _SENTENCE_START_BEFORE.search(before) or _SENTENCE_END_BEFORE.search(before)
+    )
+
+
 def postprocess_markdown(
     content: str,
     *,
+    source: Optional[str] = None,
     latex_obsidian_normalize: Optional[bool] = None,
 ) -> str:
     """Apply all markdown-safety transformations to *content*.
@@ -267,6 +290,11 @@ def postprocess_markdown(
     4. Inject CJK–Latin spacing where missing.
     5. Preserve LaTeX formulas, code blocks, inline code, images, links, and HTML tags.
 
+    ``source`` 是对应的英文原文；给出时，token 去汉化（词元/令牌/代币 →
+    token）只在原文确实出现 ``token`` 一词时才执行——否则译文里的「访问
+    令牌」「代币」是正确译法，不得改写。``None``（默认）保持无条件改写，
+    以免破坏拿不到原文的既有调用。
+
     ``latex_obsidian_normalize`` controls the Obsidian-oriented LaTeX delimiter
     rewrite (``\\( \\)`` → ``$ $``, ``\\[ \\]`` → ``$$``). Default (None) reads
     ``settings.latex_obsidian_normalize`` which is **off** — the exported file
@@ -274,6 +302,8 @@ def postprocess_markdown(
     """
     if not content:
         return content
+
+    should_desinicize = source is None or source_mentions_token(source)
 
     if latex_obsidian_normalize is None:
         latex_obsidian_normalize = getattr(
@@ -301,13 +331,38 @@ def postprocess_markdown(
     def _protect_link(match: re.Match[str]) -> str:
         # `\&` inside a URL breaks the link once rendered; unescape it while
         # the link is being stashed so the fix survives protection.
-        return _protect_text(match.group(0).replace("\\&", "&"))
+        text = match.group(0).replace("\\&", "&")
+        # 锚文本（`[...]` 内）属正文，token 去汉化必须在这里做——保护之后
+        # 2d2 再也够不着它，否则会出现「QA 判死、fixer 修不掉」。URL 不动。
+        if should_desinicize:
+            text = re.sub(
+                r"(?<=\[)[^\]]*(?=\])",
+                lambda m: _desinicize_in_protected(m.group(0)),
+                text,
+                count=1,
+            )
+        return _protect_text(text)
+
+    def _protect_table_row(match: re.Match[str]) -> str:
+        # 表格单元同样是正文。先掩掉 inline code 再改写，避免动到单元格里的
+        # 代码标识符。
+        row = match.group(0)
+        if should_desinicize:
+            chunks: List[str] = []
+            cursor = 0
+            for code in _INLINE_CODE.finditer(row):
+                chunks.append(_desinicize_in_protected(row[cursor:code.start()]))
+                chunks.append(code.group(0))
+                cursor = code.end()
+            chunks.append(_desinicize_in_protected(row[cursor:]))
+            row = "".join(chunks)
+        return _protect_text(row)
 
     # Order matters: fenced code first (largest), then indented code blocks and
     # table rows (whole-line protection), then LaTeX, inline code, images, links, HTML.
     work = _FENCED_CODE_BLOCK.sub(_protect, content)
     work = _INDENTED_CODE_BLOCK.sub(_protect, work)
-    work = _TABLE_ROW.sub(_protect, work)
+    work = _TABLE_ROW.sub(_protect_table_row, work)
     work = _LATEX_DISPLAY_MATH.sub(_protect_latex, work)
     work = _LATEX_INLINE_MATH.sub(_protect_latex, work)
     work = _INLINE_CODE.sub(_protect, work)
@@ -330,10 +385,11 @@ def postprocess_markdown(
     # 2d. Normalise excessive blank lines → max 2 newlines
     work = _EXCESSIVE_BLANK_LINES.sub("\n\n", work)
 
-    # 2d2. token 严禁翻译：词元/令牌 → token（令牌桶/令牌环 网络术语豁免）。
-    #      置于 2e 之前，让替换出的 token 与相邻 CJK 之间补上空格。
-    work = _TOKEN_CIYUAN_HUA.sub("token 化", work)
-    work = _TOKEN_SINICIZED_WORD.sub("token", work)
+    # 2d2. token 严禁翻译：词元/令牌/代币 → token（令牌桶/令牌环 网络术语
+    #      豁免）。置于 2e 之前，让替换出的 token 与相邻 CJK 之间补上空格。
+    #      链接锚文本与表格单元已在 Phase 1 的保护回调里处理过。
+    if should_desinicize:
+        work = desinicize_token(work)
 
     # 2e. CJK–Latin spacing
     work = normalize_cjk_ascii_spacing(work)
@@ -348,9 +404,16 @@ def postprocess_markdown(
     # 2h. Quote style normalisation (straight quotes + CJK-adjacent spacing)
     work = _repair_quotes(work)
 
-    # 2i. Standalone capitalized Token/Tokens → lowercase (compound proper
-    #     nouns like Tokenomics/TokenBudgeting survive the word boundary)
-    work = _CAPITALIZED_TOKEN_WORD.sub(lambda m: "token" + (m.group(1) or ""), work)
+    # 2i. Standalone capitalized Token/Tokens → lowercase。复合专名
+    #     （Tokenomics/TokenBudgeting）由词边界放过，带空格的专名
+    #     （Token Ring/Token Factory）由 `(?!\s+[A-Z])` 放过，句首/标题首
+    #     由位置判断放过。
+    def _lower_token(match: re.Match[str]) -> str:
+        if _at_sentence_start(work, match.start()):
+            return match.group(0)
+        return "token" + (match.group(1) or "")
+
+    work = _CAPITALIZED_TOKEN_WORD.sub(_lower_token, work)
 
     # 2j. Strip exact repeated `中文（English）` annotations (annotation stacking)
     work = _dedupe_repeated_annotations(work)

@@ -1,5 +1,5 @@
 {
-  "version": 34,
+  "version": 38,
   "terms": [
     {
       "original": "TSMC",
@@ -1311,7 +1311,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Lisa Su",
@@ -1325,7 +1325,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Microsoft",
@@ -1339,7 +1339,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Google",
@@ -1353,7 +1353,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Amazon",
@@ -1367,7 +1367,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Apple",
@@ -1381,7 +1381,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Oracle",
@@ -1395,7 +1395,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Broadcom",
@@ -1409,7 +1409,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "ASML",
@@ -1423,7 +1423,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "GlobalFoundries",
@@ -1437,7 +1437,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Kioxia",
@@ -1451,7 +1451,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "SanDisk",
@@ -1465,7 +1465,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Western Digital",
@@ -1479,7 +1479,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Tesla",
@@ -1493,7 +1493,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Meta",
@@ -1507,7 +1507,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "OpenAI",
@@ -1521,7 +1521,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Anthropic",
@@ -1535,7 +1535,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "SpaceX",
@@ -1549,7 +1549,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "CoreWeave",
@@ -1563,7 +1563,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "xAI",
@@ -1577,7 +1577,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "hyperscaler",
@@ -1592,7 +1592,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Neocloud",
@@ -1607,7 +1607,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "die",
@@ -1621,7 +1621,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "scale-up",
@@ -1635,7 +1635,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "scale-out",
@@ -1649,7 +1649,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "rack-scale",
@@ -1663,7 +1663,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "rollout",
@@ -1677,7 +1677,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Day 0",
@@ -1691,7 +1691,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "harness",
@@ -1705,7 +1705,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "financial engineering",
@@ -1719,7 +1719,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "terminal value",
@@ -1733,7 +1733,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "backlog",
@@ -1747,7 +1747,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00.000000"
+      "updated_at": "2026-07-19T00:00:00"
     },
     {
       "original": "Bedrock",
@@ -2966,6 +2966,292 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-07-28T00:00:00"
+    },
+    {
+      "original": "backstop",
+      "translation": "兜底",
+      "strategy": "first_annotate",
+      "note": "由高信用方出具的最低营收保证（租不出去由其按约定价接手）。禁译「担保」——那会被读成债务担保；兜底的是租金收入，不是债务本身",
+      "tags": [
+        "finance",
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "offtake",
+      "translation": "承购",
+      "strategy": "first_annotate",
+      "note": "长期包租/包销合同，锁定未来收入，是银行眼中「稳定现金流」的凭证。offtaker=承购方。首次出现建议加注「长期包租合同」",
+      "tags": [
+        "finance",
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "take-or-pay",
+      "translation": "照付不议",
+      "strategy": "first_annotate",
+      "note": "不论是否实际使用，买方都须付款。首次出现建议加注释义",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "AI Project Trinity",
+      "translation": "AI 项目铁三角",
+      "strategy": "first_annotate",
+      "note": "资本、承购、数据中心三者互为前提。禁译「三位一体」（宗教味，且切断与「不可能三角」的双关）。其中 leg 一律译「边」，禁译「腿」",
+      "tags": [
+        "finance",
+        "ai",
+        "editorial"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "debt service coverage ratio",
+      "translation": "偿债覆盖率",
+      "strategy": "first_annotate",
+      "note": "DSCR。经营现金流对当期还本付息的覆盖倍数。首次出现保留缩写 DSCR",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "loan to value",
+      "translation": "贷款价值比",
+      "strategy": "first_annotate",
+      "note": "LTV。贷款额占资产价值的比例。首次出现保留缩写 LTV",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "cash sweep",
+      "translation": "超额现金强制还款",
+      "strategy": "first_annotate",
+      "note": "项目融资条款：超额现金须强制用于提前还贷。禁译「现金归集」——那是 cash pooling（集团资金池），完全另一回事",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "Yield on Cost",
+      "translation": "成本收益率",
+      "strategy": "first_annotate",
+      "note": "年营收占项目成本的百分比。与之比较时用「个百分点」而非「%」表述差值",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "Z-spread",
+      "translation": "Z 利差",
+      "strategy": "first_annotate",
+      "note": "剔除利率曲线影响后的风险溢价。利差「宽/窄」= 要求的风险补偿「高/低」，首次出现建议点明",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "tenor",
+      "translation": "期限",
+      "strategy": "first_annotate",
+      "note": "合同/租约的期限长短。首次出现建议加注英文",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "take rate",
+      "translation": "抽成率",
+      "strategy": "first_annotate",
+      "note": "平台方从合作方总营收中分走的比例。首次出现建议加注释义",
+      "tags": [
+        "finance",
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "Total Addressable Market",
+      "translation": "可触达市场规模",
+      "strategy": "first_annotate",
+      "note": "TAM。禁译「目标市场」——那是 target market，含义不同。首次出现保留缩写 TAM",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "delayed-draw term loan",
+      "translation": "延迟提取定期贷款",
+      "strategy": "first_annotate",
+      "note": "DDTL。注意注释位置：应写「…延迟提取定期贷款（DDTL 4.0）」，勿先用缩写后解释",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "speculative build",
+      "translation": "无预租约先行开工",
+      "strategy": "first_annotate",
+      "note": "数据中心行业 spec build。禁译「投机性建设/投机性开工」——「投机」在中文带强贬义，原文无此色彩",
+      "tags": [
+        "finance",
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "firm energy",
+      "translation": "保供电力",
+      "strategy": "first_annotate",
+      "note": "承诺按约定容量稳定供应的电力合约",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "net operating income",
+      "translation": "净营业收入",
+      "strategy": "first_annotate",
+      "note": "NOI。地产/数据中心口径的经营净收入",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "investment grade",
+      "translation": "投资级",
+      "strategy": "translate",
+      "note": "IG。信用评级达到投资级别；修饰承购方/兜底方时注意辖域，勿只挂在其中一方上",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "SOFR",
+      "translation": "有担保隔夜融资利率",
+      "strategy": "first_annotate",
+      "note": "Secured Overnight Financing Rate。首次出现保留缩写 SOFR",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "credit spread",
+      "translation": "信用利差",
+      "strategy": "translate",
+      "note": "相对无风险利率的风险溢价",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "residual value",
+      "translation": "残值",
+      "strategy": "translate",
+      "note": "资产在合约期末的剩余价值",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-07-29T00:00:00"
     }
   ]
 }

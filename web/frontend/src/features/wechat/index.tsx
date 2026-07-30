@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/Button';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { useFormatWechat, useWechatThemes } from './hooks';
+import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 import juice from 'juice';
 import './wechat.css';
 
@@ -12,18 +13,26 @@ export function WechatFeature() {
   const [uploadImages, setUploadImages] = useState(false);
   const [imageToBase64, setImageToBase64] = useState(false);
   const { mutate: formatWechat, isPending, data } = useFormatWechat();
-  const { data: themesData } = useWechatThemes();
+  const {
+    data: themesData,
+    isError: isThemesError,
+    error: themesError,
+    isFetching: isThemesFetching,
+    refetch: refetchThemes,
+  } = useWechatThemes();
+  const { handleError } = useErrorHandler();
   const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const html = data?.html || '';
   const css = data?.css || '';
   const themes = useMemo(() => themesData?.themes || [], [themesData]);
 
-  // 调试信息
+  // useQuery 在 v5 没有 onError，主题加载失败只能在这里消费错误态并提示
   useEffect(() => {
-    console.log('themesData:', themesData);
-    console.log('themes:', themes);
-  }, [themesData, themes]);
+    if (isThemesError) {
+      handleError(themesError, '主题列表加载失败');
+    }
+  }, [isThemesError, themesError, handleError]);
 
   // 更新iframe内容
   useEffect(() => {
@@ -135,15 +144,33 @@ export function WechatFeature() {
             <select
               value={selectedTheme}
               onChange={(e) => setSelectedTheme(e.target.value)}
-              className="h-9 px-3 border rounded bg-white text-foreground"
+              disabled={themes.length === 0}
+              className="h-9 px-3 border rounded bg-white text-foreground disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {themes.map((theme) => (
-                <option key={theme.id} value={theme.id}>
-                  {theme.name}
+              {themes.length === 0 ? (
+                // 占位项的 value 必须等于 selectedTheme，否则受控 select 会告警
+                <option value={selectedTheme} disabled>
+                  {isThemesError ? '主题加载失败' : '加载中...'}
                 </option>
-              ))}
+              ) : (
+                themes.map((theme) => (
+                  <option key={theme.id} value={theme.id}>
+                    {theme.name}
+                  </option>
+                ))
+              )}
             </select>
           </label>
+          {isThemesError && (
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => void refetchThemes()}
+              disabled={isThemesFetching}
+            >
+              {isThemesFetching ? '重试中...' : '重试'}
+            </Button>
+          )}
           <label className="flex items-center gap-2 text-sm cursor-pointer">
             <input
               type="checkbox"

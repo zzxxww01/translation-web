@@ -3,7 +3,9 @@ Translate post/title endpoints.
 """
 
 import asyncio
+import logging
 import os
+import re
 
 from fastapi import APIRouter, Request
 
@@ -15,10 +17,11 @@ from ..middleware import BadRequestException
 from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.glossary import build_glossary_context
-from ..utils.concurrency import run_blocking
+from ..utils.concurrency import run_blocking, run_llm_blocking
 from ..utils.json_utils import parse_llm_json_response
 from ..utils.llm_factory import generate_with_fallback
 from .translate_models import (
+    POST_OPTIMIZE_OPTIONS,
     GenerateTitleRequest,
     GenerateTitleResponse,
     PostOptimizeRequest,
@@ -29,8 +32,53 @@ from .translate_models import (
 )
 
 
+logger = logging.getLogger(__name__)
+
 router = APIRouter()
 prompt_manager = get_prompt_manager()
+
+
+# BE-03：单次尝试超时与整体预算必须分开取值。两者相等时，第一次 attempt 卡满
+# 就会被外层 wait_for 取消，config/llm_providers.yaml 里配置的多 key / 多模型
+# 故障转移永远跑不到第二次。整体预算按「至少容纳 2-3 次尝试」取值。
+# 注：更合适的归属地是 src/config/timeout_config.py，本次改动不拥有该文件，
+# 先在调用侧收口，后续可整体上移。
+# 整体预算必须**小于**前端 REQUEST_TIMEOUTS.POST_*（web/frontend/src/shared/
+# constants.ts，当前 180s）：否则浏览器先断开，用户看不到服务端这条可读的 503，
+# 而被放弃的线程还会继续占着线程池跑到预算耗尽。
+_TIMEOUT_BUDGETS: dict[str, tuple[int, int]] = {
+    # task_type: (单次尝试超时, 整体预算)
+    # 帖子是短文本，60s 单次足够；170s 预算刚好容纳两次完整尝试 + 余量，
+    # 且严格早于前端 180s 超时。
+    "post": (60, 170),
+    "post_optimize": (60, 170),
+    "title_generate": (45, 120),
+}
+
+# BE-02：历史记录内容/角色未做任何长度与内容约束就拼进 prompt，这里压平空白并截断，
+# 防止调用方用超长内容放大一次 LLM 调用，或在历史块里伪造出新的「## 」小节标题。
+_HISTORY_CONTENT_MAX_LENGTH = 300
+_HISTORY_ROLE_MAX_LENGTH = 20
+
+# BE-02：GenerateTitleRequest.instruction 目前没有 max_length（对比
+# PostOptimizeRequest.instruction 为 1000），这里在路由层兜底。
+_TITLE_INSTRUCTION_MAX_LENGTH = 1000
+
+# BE-07：前端对三个快捷优化按钮只记录 `[readable]` 这类内部 id，原样注入历史等于没有信息。
+# 这里在服务端单点还原成一行摘要（完整正文见 translate_models.POST_OPTIMIZE_OPTIONS，
+# 只注入摘要而非全文，避免 3 轮历史把 prompt 撑爆）。
+_POST_OPTIMIZE_OPTION_SUMMARIES = {
+    "readable": "上一轮要求：降低阅读负荷，一句一事、主语明确、先结论后解释",
+    "idiomatic": "上一轮要求：让中文更自然地道，去连接词与套话，修辞不字面直译",
+    "professional": "上一轮要求：提高信息密度与精准度，删口水话、不增不减",
+}
+_OPTION_ID_RE = re.compile(r"\[(\w+)\]")
+
+
+def _resolve_timeouts(task_type: str) -> tuple[int, int]:
+    """返回 (单次尝试超时, 整体预算)；整体预算严格大于单次尝试超时。"""
+    fallback = TimeoutConfig.get_timeout(task_type)
+    return _TIMEOUT_BUDGETS.get(task_type, (fallback, fallback * 3))
 
 
 @router.post("/translate/post", response_model=PostTranslateResponse)
@@ -57,19 +105,37 @@ async def translate_post(request: Request, body: PostTranslateRequest):
             dynamic_sections=glossary_context.strip(),
         )
 
-    timeout_s = TimeoutConfig.get_timeout("post")
+    attempt_timeout_s, total_timeout_s = _resolve_timeouts("post")
+    # BE-06：try 只包住 LLM 调用本身，后处理失败不再被当成「LLM 服务不可用」。
     try:
         translation = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, task_type="post", timeout=timeout_s, model=body.model),
-            timeout=timeout_s,
+            run_llm_blocking(
+                generate_with_fallback,
+                prompt,
+                task_type="post",
+                timeout=attempt_timeout_s,
+                model=body.model,
+            ),
+            timeout=total_timeout_s,
         )
-        translation = preserve_protected_terms(body.content, translation.strip())
-        translation = append_xiaohongshu_hashtags(translation, body.content)
-        return PostTranslateResponse(translation=translation)
+        # BE-05：上游返回 None / 空串时不能 200 返回空译文（这样写同时覆盖 None，
+        # 避免 .strip() 抛 AttributeError 把内部错误文本回传出去）。
+        if not (translation or "").strip():
+            raise ValueError("LLM returned empty translation")
     except asyncio.TimeoutError as e:
-        raise_llm_service_unavailable(operation="Translation", exc=e, timeout_s=timeout_s)
+        raise_llm_service_unavailable(operation="Translation", exc=e, timeout_s=total_timeout_s)
     except Exception as e:
-        raise_llm_service_unavailable(operation="Translation", exc=e, timeout_s=timeout_s)
+        raise_llm_service_unavailable(operation="Translation", exc=e, timeout_s=total_timeout_s)
+
+    translation = translation.strip()
+    # BE-06：后处理只做 token 守卫与标签整理，出错时降级返回原始模型输出，
+    # 不丢弃已经生成（且已付费）的译文。
+    try:
+        translation = preserve_protected_terms(body.content, translation)
+        translation = append_xiaohongshu_hashtags(translation, body.content)
+    except Exception:
+        logger.exception("Post-processing failed for /translate/post; returning raw model output")
+    return PostTranslateResponse(translation=translation)
 
 
 @router.post("/translate/post/optimize", response_model=PostOptimizeResponse)
@@ -104,8 +170,16 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
             else:
                 _role = getattr(_item, "role", "")
                 _content = getattr(_item, "content", "") or getattr(_item, "instruction", "")
-            if _content:
-                _hist_lines.append(f"- [{_role}] {_content}")
+            # BE-02：压平空白并截断，防止超长历史放大调用成本或伪造小节标题。
+            _content = " ".join(str(_content).split())[:_HISTORY_CONTENT_MAX_LENGTH]
+            if not _content:
+                continue
+            # BE-07：把 `[readable]` 这类快捷选项 id 还原成一行可读摘要。
+            _matched = _OPTION_ID_RE.fullmatch(_content)
+            if _matched and _matched.group(1) in POST_OPTIMIZE_OPTIONS:
+                _content = _POST_OPTIMIZE_OPTION_SUMMARIES.get(_matched.group(1), _content)
+            _role = " ".join(str(_role).split())[:_HISTORY_ROLE_MAX_LENGTH] or "user"
+            _hist_lines.append(f"- [{_role}] {_content}")
         if len(_hist_lines) > 1:
             history_section = "\n".join(_hist_lines)
 
@@ -118,19 +192,41 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
         instruction=resolved_instruction,
     )
 
-    timeout_s = TimeoutConfig.get_timeout("post_optimize")
+    attempt_timeout_s, total_timeout_s = _resolve_timeouts("post_optimize")
+    # BE-06：try 只包住 LLM 调用本身。
     try:
         optimized = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, task_type="post", timeout=timeout_s, model=body.model),
-            timeout=timeout_s,
+            run_llm_blocking(
+                generate_with_fallback,
+                prompt,
+                task_type="post",
+                timeout=attempt_timeout_s,
+                model=body.model,
+            ),
+            timeout=total_timeout_s,
         )
-        optimized = preserve_protected_terms(body.original_text, optimized.strip())
-        optimized = append_xiaohongshu_hashtags(optimized, body.original_text)
-        return PostOptimizeResponse(optimized_translation=optimized)
+        # BE-05：上游返回 None / 空串时不能 200 返回空译文。
+        if not (optimized or "").strip():
+            raise ValueError("LLM returned empty optimized translation")
     except asyncio.TimeoutError as e:
-        raise_llm_service_unavailable(operation="Optimization", exc=e, timeout_s=timeout_s)
+        raise_llm_service_unavailable(operation="Optimization", exc=e, timeout_s=total_timeout_s)
     except Exception as e:
-        raise_llm_service_unavailable(operation="Optimization", exc=e, timeout_s=timeout_s)
+        raise_llm_service_unavailable(operation="Optimization", exc=e, timeout_s=total_timeout_s)
+
+    optimized = optimized.strip()
+    # BE-06：后处理失败时降级返回原始模型输出，不丢弃已生成的结果。
+    try:
+        optimized = preserve_protected_terms(body.original_text, optimized)
+        # 优化路径不再自动补推荐标签：用户可能正是要求「去掉话题标签」，
+        # 但已有标签的去重/去违禁词/截断仍需保留。
+        optimized = append_xiaohongshu_hashtags(
+            optimized, body.original_text, allow_recommend=False
+        )
+    except Exception:
+        logger.exception(
+            "Post-processing failed for /translate/post/optimize; returning raw model output"
+        )
+    return PostOptimizeResponse(optimized_translation=optimized)
 
 
 @router.post("/generate/title", response_model=GenerateTitleResponse)
@@ -139,6 +235,13 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
     """Generate 6 title options in JSON format."""
     if not body.content.strip():
         raise BadRequestException(detail="Content cannot be empty")
+
+    # BE-02：instruction 在模型层没有长度上限，这里兜底拒绝超长指令，避免一次请求
+    # 就把无上限文本灌进 prompt 放大 LLM 调用成本。
+    if body.instruction and len(body.instruction) > _TITLE_INSTRUCTION_MAX_LENGTH:
+        raise BadRequestException(
+            detail=f"Instruction is too long (max {_TITLE_INSTRUCTION_MAX_LENGTH} characters)"
+        )
 
     normalized_instruction = (
         (body.instruction or "").strip()
@@ -150,11 +253,17 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
         instruction=normalized_instruction,
     )
 
-    timeout_s = TimeoutConfig.get_timeout("title_generate")
+    attempt_timeout_s, total_timeout_s = _resolve_timeouts("title_generate")
     try:
         result = await asyncio.wait_for(
-            asyncio.to_thread(generate_with_fallback, prompt, task_type="title", timeout=timeout_s, model=body.model),
-            timeout=timeout_s,
+            run_llm_blocking(
+                generate_with_fallback,
+                prompt,
+                task_type="title",
+                timeout=attempt_timeout_s,
+                model=body.model,
+            ),
+            timeout=total_timeout_s,
         )
         data = parse_llm_json_response(result)
         titles = [
@@ -168,8 +277,12 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
             data.get("free_2", ""),
         ]
         titles = [title for title in titles if title]
+        if not titles:
+            # LLM 输出被截断或不可解析时 parse_llm_json_response 返回 {}，
+            # 这里显式失败，交给下面的 except 统一转成 503，避免 200 返回空标题。
+            raise ValueError("LLM returned unparseable or empty title JSON")
         return GenerateTitleResponse(title="\n".join(titles))
     except asyncio.TimeoutError as e:
-        raise_llm_service_unavailable(operation="Title generation", exc=e, timeout_s=timeout_s)
+        raise_llm_service_unavailable(operation="Title generation", exc=e, timeout_s=total_timeout_s)
     except Exception as e:
-        raise_llm_service_unavailable(operation="Title generation", exc=e, timeout_s=timeout_s)
+        raise_llm_service_unavailable(operation="Title generation", exc=e, timeout_s=total_timeout_s)

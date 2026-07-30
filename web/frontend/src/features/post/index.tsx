@@ -1,6 +1,7 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { toast } from 'sonner';
 import { usePostStore } from '@/shared/stores';
+import type { PostNetworkAction } from '@/shared/stores/postStore';
 import { useTranslatePost, useOptimizePost, useGenerateTitle } from './hooks';
 import { TranslationVersionType } from '@/shared/constants';
 import { SourceInput } from './components/SourceInput';
@@ -8,7 +9,9 @@ import { TranslationOutput } from './components/TranslationOutput';
 import { OptimizationPanel } from './components/OptimizationPanel';
 import { TitleGenerator } from './components/TitleGenerator';
 import { ModelSelector } from '@/components/ModelSelector';
-import { POST_CONTENT_MAX_LENGTH } from './types';
+import { Button } from '@/components/ui/Button';
+import { Loader2, X } from 'lucide-react';
+import { POST_CONTENT_MAX_LENGTH, describeOptimizeOption } from './types';
 import { getOptimizationHistory } from './versionLineage';
 import {
   AlertDialog,
@@ -21,27 +24,38 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
-type NetworkAction = 'translate' | 'optimize' | 'title';
 type PendingEditAction =
   | { kind: 'switch-version'; versionId: string }
   | { kind: 'clear' }
   | { kind: 'discard-edit' };
 
+const ACTION_LABELS: Record<PostNetworkAction, string> = {
+  translate: '正在翻译',
+  optimize: '正在优化译文',
+  title: '正在生成标题',
+};
+
+// 模块级状态：PostFeature 是懒加载路由组件，切走会被卸载。
+// 取消句柄与请求代际放在模块作用域，才能在重新挂载后仍然可用。
+let activeAbortController: AbortController | null = null;
+// 请求代际：每发起或取消一次请求就 +1。返回结果只有代际匹配时才写入，
+// 从而保证「取消」之后到达的结果一定不会落库。
+let requestGeneration = 0;
+
 export function PostFeature() {
   const {
     originalText, sourceRevision, versions, currentVersionId, isEdited, editedContent, isLoading,
-    selectedModel,
+    pendingAction, pendingStartedAt, selectedModel,
     setOriginalText, addVersion, setCurrentVersion, setEditedContent,
-    saveEdit, discardEdit, clear, setLoading, setSelectedModel,
+    saveEdit, discardEdit, clear, setPendingAction, setSelectedModel,
   } = usePostStore();
 
   const translateMutation = useTranslatePost();
   const optimizeMutation = useOptimizePost();
   const generateTitleMutation = useGenerateTitle();
   const [customInstruction, setCustomInstruction] = useState('');
-  const [pendingAction, setPendingAction] = useState<NetworkAction | null>(null);
   const [pendingEditAction, setPendingEditAction] = useState<PendingEditAction | null>(null);
-  const activeActionRef = useRef<NetworkAction | null>(null);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
 
   const currentVersion = versions.find(v => v.id === currentVersionId);
   const currentContent = isEdited ? editedContent : currentVersion?.content || '';
@@ -50,20 +64,44 @@ export function PostFeature() {
     ? `version:${currentVersionId}:${currentContent}`
     : `source:${sourceRevision}:${originalText}`;
 
-  const beginAction = useCallback((action: NetworkAction) => {
-    if (activeActionRef.current) return false;
-    activeActionRef.current = action;
-    setLoading(true);
+  const beginAction = useCallback((action: PostNetworkAction) => {
+    // 互斥判断读 store，避免重新挂载的新实例绕过本地 ref 再发起一次并发请求
+    if (usePostStore.getState().pendingAction) return null;
+    const controller = new AbortController();
+    activeAbortController = controller;
+    requestGeneration += 1;
+    const generation = requestGeneration;
     setPendingAction(action);
-    return true;
-  }, [setLoading]);
+    return { controller, generation };
+  }, [setPendingAction]);
 
-  const finishAction = useCallback((action: NetworkAction) => {
-    if (activeActionRef.current !== action) return;
-    activeActionRef.current = null;
-    setLoading(false);
+  const finishAction = useCallback((controller: AbortController) => {
+    // 只有仍然是当前请求时才解除加载态（已取消/已被替换的请求不干扰新请求）
+    if (activeAbortController !== controller) return;
+    activeAbortController = null;
     setPendingAction(null);
-  }, [setLoading]);
+  }, [setPendingAction]);
+
+  const cancelActiveAction = useCallback(() => {
+    // 代际 +1：即便后端仍在跑，返回结果也不会再写入
+    requestGeneration += 1;
+    activeAbortController?.abort(
+      new DOMException('user-cancel', 'AbortError')
+    );
+    activeAbortController = null;
+    setPendingAction(null);
+    toast.info('已取消，本次结果不再写入');
+  }, [setPendingAction]);
+
+  const requestVersionSwitch = useCallback((versionId: string) => {
+    const state = usePostStore.getState();
+    if (versionId === state.currentVersionId) return;
+    if (state.isEdited) {
+      setPendingEditAction({ kind: 'switch-version', versionId });
+      return;
+    }
+    setCurrentVersion(versionId);
+  }, [setCurrentVersion]);
 
   const preserveCurrentEdit = useCallback(() => {
     if (!usePostStore.getState().isEdited) return null;
@@ -75,38 +113,52 @@ export function PostFeature() {
   const handleTranslate = useCallback(async (): Promise<boolean> => {
     const sourceText = originalText;
     const requestSourceRevision = sourceRevision;
-    if (!sourceText.trim() || !beginAction('translate')) return false;
+    if (!sourceText.trim()) return false;
+    const request = beginAction('translate');
+    if (!request) return false;
     preserveCurrentEdit();
     try {
       const result = await translateMutation.mutateAsync({
         content: sourceText,
         model: selectedModel,
+        signal: request.controller.signal,
       });
+      // 已被用户取消：结果一律丢弃
+      if (request.generation !== requestGeneration) return false;
       if (!result.translation?.trim()) {
         toast.error('翻译失败：服务器返回了空内容');
         return false;
       }
 
       const latest = usePostStore.getState();
-      if (
+      const isStale =
         latest.sourceRevision !== requestSourceRevision ||
-        latest.originalText !== sourceText
-      ) {
-        toast.info('原文已更新，本次旧译文结果未写入版本记录');
-        return false;
-      }
+        latest.originalText !== sourceText;
 
-      addVersion(result.translation, TranslationVersionType.TRANSLATION, undefined, {
-        sourceRevision: requestSourceRevision,
-        sourceText,
-      });
+      // 等待期间原文被改过时，结果不再整份丢弃，而是作为旁支版本落库
+      const versionId = addVersion(
+        result.translation,
+        TranslationVersionType.TRANSLATION,
+        undefined,
+        {
+          sourceRevision: requestSourceRevision,
+          sourceText,
+          makeCurrent: !isStale,
+        }
+      );
+      if (isStale) {
+        toast.info('原文已更新，本次译文已另存为旧底稿版本', {
+          action: { label: '查看', onClick: () => requestVersionSwitch(versionId) },
+        });
+        return true;
+      }
       toast.success('翻译完成');
       return true;
     } catch (error) {
       console.error('翻译失败:', error);
       return false;
     } finally {
-      finishAction('translate');
+      finishAction(request.controller);
     }
   }, [
     addVersion,
@@ -114,6 +166,7 @@ export function PostFeature() {
     finishAction,
     originalText,
     preserveCurrentEdit,
+    requestVersionSwitch,
     selectedModel,
     sourceRevision,
     translateMutation,
@@ -132,14 +185,15 @@ export function PostFeature() {
       toast.error(`译文超过 ${POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符，请精简后再优化`);
       return false;
     }
-    if (!beginAction('optimize')) return false;
+    const request = beginAction('optimize');
+    if (!request) return false;
 
     const savedEditVersionId = preserveCurrentEdit();
     const baseVersionId = savedEditVersionId ?? activeVersion.id;
     const stateAfterPreserve = usePostStore.getState();
     const baseVersion = stateAfterPreserve.versions.find(v => v.id === baseVersionId);
     if (!baseVersion) {
-      finishAction('optimize');
+      finishAction(request.controller);
       return false;
     }
     const baseSourceText = baseVersion.sourceText.trim()
@@ -149,7 +203,7 @@ export function PostFeature() {
       ? baseVersion.sourceRevision
       : stateAfterPreserve.sourceRevision;
     if (!baseSourceText.trim()) {
-      finishAction('optimize');
+      finishAction(request.controller);
       toast.error('缺少对应原文，无法优化译文');
       return false;
     }
@@ -168,7 +222,9 @@ export function PostFeature() {
         option_id: options.optionId,
         conversation_history: history,
         model: selectedModel,
+        signal: request.controller.signal,
       });
+      if (request.generation !== requestGeneration) return false;
       if (!result.optimized_translation?.trim()) {
         toast.error('优化失败：服务器返回了空内容');
         return false;
@@ -176,32 +232,38 @@ export function PostFeature() {
 
       const latest = usePostStore.getState();
       const latestBaseVersion = latest.versions.find(v => v.id === baseVersionId);
-      if (
+      const isStale =
         latest.currentVersionId !== baseVersionId ||
         latest.isEdited ||
-        latestBaseVersion?.content !== translationAtStart
-      ) {
-        toast.info('译文已更新，本次旧优化结果未写入版本记录');
-        return false;
-      }
+        latestBaseVersion?.content !== translationAtStart;
 
-      addVersion(
+      // 版本体系是 append-only，等待期间的编辑/切版本不应该让优化结果作废；
+      // makeCurrent:false 保证不会顶掉用户当前未保存的编辑
+      const versionId = addVersion(
         result.optimized_translation,
         TranslationVersionType.OPTIMIZATION,
-        options.optionId ? `[${options.optionId}]` : options.instruction,
+        // 记录人话摘要而不是内部 id：版本下拉与多轮优化历史都会读这个字段
+        options.optionId ? describeOptimizeOption(options.optionId) : options.instruction,
         {
           sourceRevision: baseSourceRevision,
           sourceText: baseSourceText,
           parentVersionId: baseVersionId,
+          makeCurrent: !isStale,
         }
       );
+      if (isStale) {
+        toast.info('译文已更新，本次优化结果已另存为新版本', {
+          action: { label: '查看', onClick: () => requestVersionSwitch(versionId) },
+        });
+        return true;
+      }
       toast.success('优化完成');
       return true;
     } catch (error) {
       console.error('优化失败:', error);
       return false;
     } finally {
-      finishAction('optimize');
+      finishAction(request.controller);
     }
   }, [
     addVersion,
@@ -211,6 +273,7 @@ export function PostFeature() {
     finishAction,
     optimizeMutation,
     preserveCurrentEdit,
+    requestVersionSwitch,
     selectedModel,
     versions,
   ]);
@@ -226,14 +289,17 @@ export function PostFeature() {
       toast.error(`内容超过 ${POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符，请精简后再生成标题`);
       return [];
     }
-    if (!beginAction('title')) return [];
+    const request = beginAction('title');
+    if (!request) return [];
 
     try {
       const result = await generateTitleMutation.mutateAsync({
         content,
         instruction: instruction || undefined,
         model: selectedModel,
+        signal: request.controller.signal,
       });
+      if (request.generation !== requestGeneration) return [];
 
       const latest = usePostStore.getState();
       const latestVersion = latest.versions.find(v => v.id === latest.currentVersionId);
@@ -259,7 +325,7 @@ export function PostFeature() {
       toast.success('标题生成完成');
       return titles;
     } finally {
-      finishAction('title');
+      finishAction(request.controller);
     }
   }, [
     beginAction,
@@ -272,15 +338,6 @@ export function PostFeature() {
 
   const handleClear = () => {
     setPendingEditAction({ kind: 'clear' });
-  };
-
-  const handleSetCurrentVersion = (versionId: string) => {
-    if (versionId === currentVersionId) return;
-    if (isEdited) {
-      setPendingEditAction({ kind: 'switch-version', versionId });
-      return;
-    }
-    setCurrentVersion(versionId);
   };
 
   const handleSaveEdit = () => {
@@ -335,14 +392,12 @@ export function PostFeature() {
           }
         }
       }
-      if (e.key === 'Escape' && isEdited) {
-        e.preventDefault();
-        setPendingEditAction({ kind: 'discard-edit' });
-      }
+      // Escape 已下放到译文编辑框自身的 onKeyDown（见 TranslationOutput），
+      // 挂在 window 上会与 Radix 弹层/下拉的 Escape 关闭抢同一次事件
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [customInstruction, handleOptimize, handleTranslate, isEdited]);
+  }, [customInstruction, handleOptimize, handleTranslate]);
 
   useEffect(() => {
     if (!isEdited) return;
@@ -353,6 +408,19 @@ export function PostFeature() {
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
   }, [isEdited]);
+
+  // 等待期间展示已耗时，避免只有一个小转圈、用户无法判断是否卡死
+  useEffect(() => {
+    if (!pendingAction || !pendingStartedAt) {
+      setElapsedSeconds(0);
+      return;
+    }
+    const tick = () =>
+      setElapsedSeconds(Math.max(0, Math.floor((Date.now() - pendingStartedAt) / 1000)));
+    tick();
+    const timer = window.setInterval(tick, 1000);
+    return () => window.clearInterval(timer);
+  }, [pendingAction, pendingStartedAt]);
 
   return (
     <div className="min-h-full overflow-auto">
@@ -373,6 +441,30 @@ export function PostFeature() {
           </div>
         </div>
 
+        {pendingAction && (
+          <div
+            className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/60 bg-white/85 px-4 py-3 text-sm shadow-sm backdrop-blur-sm"
+            role="status"
+            aria-live="polite"
+          >
+            <div className="flex min-w-0 items-center gap-2">
+              <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" />
+              <span className="min-w-0">
+                {ACTION_LABELS[pendingAction]}，已用时 {elapsedSeconds} 秒（最长约 3 分钟）
+              </span>
+            </div>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="h-9"
+              onClick={cancelActiveAction}
+            >
+              <X className="h-4 w-4" /> 取消
+            </Button>
+          </div>
+        )}
+
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           <SourceInput
             value={originalText}
@@ -388,11 +480,11 @@ export function PostFeature() {
             <TranslationOutput
               versions={versions}
               currentVersionId={currentVersionId}
-              currentSourceRevision={sourceRevision}
+              originalText={originalText}
               currentContent={currentContent}
               isEdited={isEdited}
               editedContent={editedContent}
-              onSetCurrentVersion={handleSetCurrentVersion}
+              onSetCurrentVersion={requestVersionSwitch}
               onSetEditedContent={setEditedContent}
               onSaveEdit={handleSaveEdit}
               onDiscardEdit={handleDiscardEdit}

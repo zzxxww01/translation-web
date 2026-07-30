@@ -17,6 +17,8 @@ import re
 from dataclasses import dataclass
 from typing import Iterable, List, Optional
 
+from .protected_terms import SINICIZED_TOKEN_RE, source_mentions_token
+
 
 _MAX_SAMPLES_PER_CHECK = 5
 
@@ -35,11 +37,17 @@ _LATEX_MANGLED = re.compile(
 )
 _LINK_COLLAPSE = re.compile(r"\[[^\]\[]*\[[^\]]*\]\(")
 _URL_ESCAPED_AMP = re.compile(r"\\&")
-# token 严禁翻译（用户硬性要求）：词元/令牌/代币 任一出现即 critical。
-# 仅「令牌桶/令牌环」（网络术语 token bucket / token ring 的既定译法）按
-# 紧邻组合词豁免；孤立「令牌」仍报。
-_TOKEN_SINICIZED = re.compile(r"词元|代币|令牌(?![桶环])")
-_POWER_UNIT_SINICIZED = re.compile(r"吉瓦|兆瓦|千瓦")
+# token 严禁翻译（用户硬性要求）。定义源在 protected_terms，与
+# markdown_postprocess 的确定性 fixer 共用同一套规则——只有「fixer 修得掉」
+# 的东西才配判 critical，否则就是永久阻断导出。
+_TOKEN_SINICIZED = SINICIZED_TOKEN_RE
+# 功率单位被汉化：warning 而非 critical。中文功率单位不是工程残骸而是风格
+# 偏好，且没有确定性 fixer（「兆瓦时 / 千瓦时 / 兆瓦日」在电力市场文章里
+# 就是标准中文单位，机械回写会改坏），故以 `(?![时日])` 排除计量组合词。
+_POWER_UNIT_SINICIZED = re.compile(r"(?:吉瓦|兆瓦|千瓦)(?![时日])")
+# 英寸/机架尺寸记号（2.5" SSD、19" 机架）：统计引号配平前先掩掉，否则一个
+# 尺寸标记就会让全文直引号数变奇数。
+_INCH_MARK = re.compile(r"\d+(?:\.\d+)?\s*\"")
 
 # --- warning patterns ------------------------------------------------------
 
@@ -92,6 +100,7 @@ _ZH_MAGNITUDE_MULTIPLIER = {"万": 1e4, "亿": 1e8, "万亿": 1e12}
 _INLINE_CODE_MASK = re.compile(r"`[^`]*`")
 _URL_MASK = re.compile(r"\(https?://[^)]*\)|https?://\S+")
 _FENCE = re.compile(r"^\s*(?:`{3,}|~{3,})")
+_TABLE_ROW_LINE = re.compile(r"^[ \t]*\|")
 
 
 @dataclass(frozen=True)
@@ -117,8 +126,18 @@ class QAIssue:
         return payload
 
 
-def _iter_prose_lines(lines: List[str]) -> Iterable[tuple[int, str]]:
-    """Yield (lineno, line) outside fenced code, with inline code/URLs masked."""
+def _iter_prose_lines(
+    lines: List[str], *, skip_tables: bool = False, mask_urls: bool = True
+) -> Iterable[tuple[int, str]]:
+    """Yield (lineno, line) outside fenced code, with inline code/URLs masked.
+
+    ``skip_tables`` 额外跳过表格行。语义类检查（token 汉化、标点、单位）要
+    看表格单元，因为那里同样是译文；而工程残留类检查（``ext{``、``LINK_n``）
+    不能看表格——表格单元里的这些字符往往是合法内容。
+
+    ``mask_urls=False`` 保留 URL 原文，供 ``url_escaped_amp`` 这类**专查 URL
+    内部**的检查使用（掩掉 URL 会让它永远查不到东西）。
+    """
     in_fence = False
     for lineno, line in enumerate(lines, 1):
         if _FENCE.match(line):
@@ -126,8 +145,11 @@ def _iter_prose_lines(lines: List[str]) -> Iterable[tuple[int, str]]:
             continue
         if in_fence:
             continue
+        if skip_tables and _TABLE_ROW_LINE.match(line):
+            continue
         masked = _INLINE_CODE_MASK.sub("`X`", line)
-        masked = _URL_MASK.sub("(URL)", masked)
+        if mask_urls:
+            masked = _URL_MASK.sub("(URL)", masked)
         yield lineno, masked
 
 
@@ -178,48 +200,65 @@ def run_deterministic_qa(
     lines = content.split("\n")
     raw_pairs = list(enumerate(lines, 1))
     prose_pairs = list(_iter_prose_lines(lines))
+    # 工程残留类检查用的窄口径：额外跳过表格行。
+    strict_pairs = list(_iter_prose_lines(lines, skip_tables=True))
+    # url_escaped_amp 专查 URL 内部，必须保留 URL 原文。
+    url_pairs = list(_iter_prose_lines(lines, skip_tables=True, mask_urls=False))
+    prose_text = "\n".join(line for _, line in prose_pairs)
 
     # --- 工程残留（critical）---
+    # 占位符残留用 raw：PROTECTED_n 出现在代码块里同样是真 bug。
     _collect(issues, _PLACEHOLDER_RESIDUE, raw_pairs, "placeholder_residue",
              "critical", "占位符残留（PROTECTED_n / ￰n￰）")
-    _collect(issues, _FORMAT_TOKEN_RESIDUE, raw_pairs, "format_token_residue",
+    # 其余四项只看散文：fenced code 里的 `fetch(link_1)`、`int \& x`、
+    # `\begin{}` 都是合法代码，表格单元同理。
+    _collect(issues, _FORMAT_TOKEN_RESIDUE, strict_pairs, "format_token_residue",
              "critical", "隐藏格式 token 残留（[[[LINK_n|...]]] 类）")
-    _collect(issues, _LATEX_MANGLED, raw_pairs, "latex_mangled",
+    _collect(issues, _LATEX_MANGLED, strict_pairs, "latex_mangled",
              "critical", "LaTeX 脱杠残骸（ext{ / rac{ / egin{ / imes）")
-    _collect(issues, _LINK_COLLAPSE, raw_pairs, "link_collapse",
+    _collect(issues, _LINK_COLLAPSE, strict_pairs, "link_collapse",
              "critical", "markdown 链接嵌套塌缩（[ 内含 [...](）")
-    _collect(issues, _URL_ESCAPED_AMP, raw_pairs, "url_escaped_amp",
+    _collect(issues, _URL_ESCAPED_AMP, url_pairs, "url_escaped_amp",
              "critical", "残留 \\&（URL 内会破坏链接）")
-    _collect(issues, _TOKEN_SINICIZED, prose_pairs, "token_sinicized",
-             "critical", "token 被汉化（词元/令牌/代币）——严禁翻译，应保留英文 "
-                         "token（令牌桶/令牌环 等网络术语除外）")
-    _collect(issues, _POWER_UNIT_SINICIZED, prose_pairs, "power_unit_sinicized",
-             "critical", "功率/能量单位被译（吉瓦/兆瓦/千瓦），应保留 GW/MW/kW 原形")
+    # token 汉化：与 markdown_postprocess 的 fixer 同口径——原文没提 token
+    # 时，「访问令牌」「代币」是正确译法，不报。
+    if source is None or source_mentions_token(source):
+        _collect(issues, _TOKEN_SINICIZED, prose_pairs, "token_sinicized",
+                 "critical", "token 被汉化（词元/令牌/代币）——严禁翻译，应保留英文 "
+                             "token（令牌桶/令牌环 等网络术语除外）")
     _collect(issues, _LOCAL_IMAGE_PLACEHOLDER, raw_pairs, "local_image_placeholder",
              "critical", "本地图片占位链接（images/img_），导出后必成死链")
 
-    # 全文配平检查（document-level）
-    bold_marks = len(re.findall(r"\*\*", content))
+    # 全文配平检查（document-level）。统计基于散文文本，代码块里的
+    # `**kwargs` / `$$` 不参与配平。
+    bold_marks = len(re.findall(r"\*\*", prose_text))
     if bold_marks % 2:
         issues.append(QAIssue(
             code="bold_parity", severity="critical",
             message=f"加粗标记 ** 全文共 {bold_marks} 个（奇数，存在未闭合）",
         ))
-    math_fences = len(re.findall(r"^\s*\$\$\s*$", content, re.MULTILINE))
+    math_fences = len(re.findall(r"^\s*\$\$\s*$", prose_text, re.MULTILINE))
     if math_fences % 2:
         issues.append(QAIssue(
             code="mathblock_parity", severity="critical",
             message=f"$$ 公式块定界符共 {math_fences} 个（奇数，存在未闭合）",
         ))
-    # 目标风格为英文直引号（A-12）：按直引号总数配平（散文区，掩码后统计）
-    straight_quotes = sum(line.count('"') for _, line in prose_pairs)
+
+    # --- 惯例与排版（warning）---
+    _collect(issues, _POWER_UNIT_SINICIZED, prose_pairs, "power_unit_sinicized",
+             "warning", "功率单位被译（吉瓦/兆瓦/千瓦），建议保留 GW/MW/kW 原形"
+                        "（兆瓦时/千瓦时 等计量组合词不计）")
+    # 目标风格为英文直引号（A-12）：按直引号总数配平（散文区，掩码后统计）。
+    # 单段漏一个闭引号不该让整篇不可导出——定位交给行级 straight_quote_odd。
+    straight_quotes = sum(
+        _INCH_MARK.sub("", line).count('"') for _, line in prose_pairs
+    )
     if straight_quotes % 2:
         issues.append(QAIssue(
-            code="quote_imbalance", severity="critical",
+            code="quote_imbalance", severity="warning",
             message=f"直引号 \" 全文共 {straight_quotes} 个（奇数，存在未闭合）",
         ))
 
-    # --- 惯例与排版（warning）---
     _collect(issues, _DAY_SINICIZED, prose_pairs, "day_sinicized",
              "warning", "Day 0/Day N 疑似被汉化（第零天/第一日）")
     _collect(issues, _FAN_LIANG_FAN, prose_pairs, "fan_liang_fan",
@@ -258,7 +297,7 @@ def run_deterministic_qa(
 
     odd_quote_lines = [
         (lineno, line) for lineno, line in prose_pairs
-        if line.count('"') % 2
+        if _INCH_MARK.sub("", line).count('"') % 2
     ]
     for lineno, line in odd_quote_lines[:_MAX_SAMPLES_PER_CHECK]:
         issues.append(QAIssue(
@@ -288,13 +327,15 @@ def run_deterministic_qa(
                 message=f"图片数量与原文不一致：en={src_imgs} zh={dst_imgs}",
             ))
 
-        # zh 独有标题（A-4/A-5，critical）：按 H2-H6 对照——导出 zh 固定带
-        # `# 标题` H1，而 en 源文常无 H1，全级别对照会造成常态误报。
+        # zh 独有标题（A-4/A-5）：按 H2-H6 对照——导出 zh 固定带 `# 标题` H1，
+        # 而 en 源文常无 H1，全级别对照会造成常态误报。
+        # warning 而非 critical：源文页尾促销/署名段常不纳入翻译，数量对不上
+        # 是常态，硬阻断会让现存文章全部导不出。
         src_subheads = len(_SUBHEADING_MD.findall(source))
         dst_subheads = len(_SUBHEADING_MD.findall(content))
         if dst_subheads > src_subheads:
             issues.append(QAIssue(
-                code="extra_heading", severity="critical",
+                code="extra_heading", severity="warning",
                 message=f"译文标题数多于原文：en={src_subheads} zh={dst_subheads}"
                         "（疑似自造“引言”类标题）",
             ))
@@ -305,12 +346,18 @@ def run_deterministic_qa(
                         "（检查是否漏译标题）",
             ))
 
-        # 链接数对照 + URL 集合 diff（A-5，critical）
-        src_urls = [url.strip("<>") for url in _MD_LINK_URL.findall(source)]
-        dst_urls = [url.strip("<>") for url in _MD_LINK_URL.findall(content)]
+        # 链接数对照 + URL 集合 diff（A-5）。两侧口径先归一：zh 已过
+        # postprocess（URL 里的 `\&` 被还原成 `&`），en 是原始源文。
+        # warning 而非 critical，理由同 extra_heading。
+        src_urls = [
+            url.strip("<>").replace("\\&", "&") for url in _MD_LINK_URL.findall(source)
+        ]
+        dst_urls = [
+            url.strip("<>").replace("\\&", "&") for url in _MD_LINK_URL.findall(content)
+        ]
         if len(src_urls) != len(dst_urls):
             issues.append(QAIssue(
-                code="link_count_mismatch", severity="critical",
+                code="link_count_mismatch", severity="warning",
                 message=f"链接数量与原文不一致：en={len(src_urls)} zh={len(dst_urls)}",
             ))
         missing_urls = sorted(set(src_urls) - set(dst_urls))
@@ -322,7 +369,7 @@ def run_deterministic_qa(
             if extra_urls:
                 samples.append("多出: " + " ".join(extra_urls[:3]))
             issues.append(QAIssue(
-                code="url_set_diff", severity="critical",
+                code="url_set_diff", severity="warning",
                 message=f"URL 集合与原文不一致：缺失 {len(missing_urls)} 条、"
                         f"多出 {len(extra_urls)} 条（防漏链/错链）",
                 sample=" | ".join(samples)[:200],

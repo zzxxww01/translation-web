@@ -16,7 +16,11 @@ from openai import APIConnectionError, APIError, APITimeoutError, RateLimitError
 from src.settings import settings
 from .base import LLMProvider
 from .config_loader import get_config_loader
-from .errors import LLMConfigurationError, normalize_llm_transport_error
+from .errors import (
+    LLMConfigurationError,
+    LLMUpstreamUnavailableError,
+    normalize_llm_transport_error,
+)
 from .network_policy import build_network_policy
 from .usage_metrics import llm_usage_metrics
 
@@ -245,8 +249,22 @@ class VectorEngineProvider(LLMProvider):
                 f"(in={input_tokens}, out={output_tokens})"
             )
 
+            if not (content or "").strip():
+                # 空响应当成上游不可用抛出，才能触发 key/model 轮换。直接返回
+                # 空串会让上层拿到"成功但没内容"的结果，一路传到接口 200 返回
+                # 空译文。usage 已按 success=True 记过——那次调用确实发生了。
+                empty_error = LLMUpstreamUnavailableError(
+                    f"VectorEngine returned empty content (model={model_name})"
+                )
+                logger.warning("[VectorEngine] Empty content from model=%s", model_name)
+                raise empty_error
+
             return content
 
+        except LLMUpstreamUnavailableError:
+            # 空响应是我们自己抛的，usage 已按 success=True 记过（调用确实发生），
+            # 直接向上抛，不要再走下面的 record_failure 记第二条。
+            raise
         except RateLimitError as e:
             record_failure(e)
             logger.error(f"[VectorEngine] Rate limit exceeded: {e}")

@@ -261,3 +261,39 @@ def limit_format_tokens(tokens: Optional[Iterable[Any]]) -> List[Any]:
     if not tokens:
         return []
     return list(tokens)[:MAX_FORMAT_TOKENS_IN_PROMPT]
+
+
+def build_previous_translation_pairs(
+    context_manager: Any,
+    section_id: str,
+    prev_section_id: Optional[str] = None,
+    limit: int = 5,
+) -> List[Dict[str, str]]:
+    """构建提示词用的「前文译文」对照，供四步法与章节级批翻共用。
+
+    优先取当前章节已完成批次的译文，不足 *limit* 对时再从上一章节尾部补齐，
+    保证跨章节的首现判定与风格锚点不会断档。
+
+    ``context_manager`` 只需提供 ``get_section_translations(section_id)``
+    （返回 ``[(source, translation), ...]``），此处用鸭子类型避免 core 反向
+    依赖 agents 层。
+    """
+    if context_manager is None or limit <= 0:
+        return []
+
+    pairs: List[Any] = []
+
+    current = context_manager.get_section_translations(section_id) or []
+    if current:
+        pairs.extend(current[-limit:])
+
+    if len(pairs) < limit and prev_section_id:
+        previous = context_manager.get_section_translations(prev_section_id) or []
+        if previous:
+            needed = limit - len(pairs)
+            pairs = previous[-needed:] + pairs
+
+    return [
+        {"source": source, "translation": translation}
+        for source, translation in pairs
+    ]

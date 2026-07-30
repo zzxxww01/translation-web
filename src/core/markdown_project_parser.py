@@ -29,6 +29,9 @@ class MarkdownBlock:
     source_html: Optional[str] = None
     is_heading: bool = False
     heading_level: Optional[int] = None
+    # 列表项的缩进层级（0=一级）。解析时不记录的话，多级列表导出后会被
+    # 统一渲染成一级 `- `，信息结构被改变。
+    list_indent: int = 0
 
 
 class MarkdownProjectParser:
@@ -244,7 +247,10 @@ class MarkdownProjectParser:
                 continue
 
             if re.match(r"^[-*+]\s+", stripped):
-                raw = stripped
+                # 缩进层级从未 strip 的原行算，raw 也保留缩进——否则多级列表
+                # 在导出时全部塌成一级。
+                list_indent = self._list_indent_level(lines[index])
+                raw = " " * (list_indent * 2) + stripped
                 text = re.sub(r"^[-*+]\s+", "", stripped)
                 blocks.append(
                     self._make_text_block(
@@ -254,6 +260,7 @@ class MarkdownProjectParser:
                         element_type=ElementType.LI,
                         raw_markdown=raw,
                         markdown_text=text,
+                        list_indent=list_indent,
                     )
                 )
                 block_index += 1
@@ -312,6 +319,13 @@ class MarkdownProjectParser:
 
         return blocks
 
+    @staticmethod
+    def _list_indent_level(line: str) -> int:
+        """列表项的缩进层级：每 2 个空格算一级，tab 按 4 空格归一。"""
+        leading = len(line) - len(line.lstrip(" \t"))
+        expanded = len(line[:leading].expandtabs(4))
+        return expanded // 2
+
     def _make_text_block(
         self,
         block_id: str,
@@ -322,6 +336,7 @@ class MarkdownProjectParser:
         markdown_text: str,
         is_heading: bool = False,
         heading_level: Optional[int] = None,
+        list_indent: int = 0,
     ) -> MarkdownBlock:
         plain_text, inline_elements = self._extract_inline_elements(markdown_text)
         return MarkdownBlock(
@@ -334,6 +349,7 @@ class MarkdownProjectParser:
             inline_elements=assign_span_ids(inline_elements),
             is_heading=is_heading,
             heading_level=heading_level,
+            list_indent=list_indent,
         )
 
     def _make_image_block(
@@ -518,6 +534,7 @@ class MarkdownProjectParser:
             expected_tokens=expected_token_ids(local_inline_elements),
             is_heading=block.is_heading,
             heading_level=block.heading_level,
+            list_indent=block.list_indent,
             is_metadata=is_metadata,
             metadata_type=metadata_type,
         )

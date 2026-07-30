@@ -1,5 +1,5 @@
 import { Check, ChevronDown, RotateCw } from 'lucide-react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button-extended';
 import { ParagraphStatus } from '../../../shared/constants';
 import type { Paragraph } from '../../../shared/types';
@@ -16,6 +16,7 @@ interface ImmersiveRowProps {
   retranslateError?: string | null;
   onChange: (value: string) => void;
   onRetranslate: (instruction?: string, optionId?: string) => void;
+  onRetrySave: () => void;
   onConfirm: () => void;
   isSelectionMode: boolean;
   isSelected: boolean;
@@ -67,6 +68,7 @@ export function ImmersiveRow({
   retranslateError,
   onChange,
   onRetranslate,
+  onRetrySave,
   onConfirm,
   isSelectionMode,
   isSelected,
@@ -103,6 +105,30 @@ export function ImmersiveRow({
     }
     setShowRetranslateMenu(previous => !previous);
   };
+
+  // 菜单打开后：点击别处即关闭；Esc 只关菜单，并在捕获阶段拦住事件，
+  // 否则会冒泡到 ImmersiveEditor 的全局 Esc 监听而直接退出整个沉浸编辑。
+  useEffect(() => {
+    if (!showRetranslateMenu) return;
+
+    const handleWindowClick = (event: MouseEvent) => {
+      if (menuButtonRef.current?.contains(event.target as Node)) return;
+      setShowRetranslateMenu(false);
+    };
+    const handleWindowKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      event.stopPropagation();
+      setShowRetranslateMenu(false);
+    };
+
+    window.addEventListener('click', handleWindowClick, true);
+    window.addEventListener('keydown', handleWindowKeyDown, true);
+    return () => {
+      window.removeEventListener('click', handleWindowClick, true);
+      window.removeEventListener('keydown', handleWindowKeyDown, true);
+    };
+  }, [showRetranslateMenu]);
 
   const calculateRows = (text: string) => {
     const lines = text.split('\n').length;
@@ -236,8 +262,19 @@ export function ImmersiveRow({
       </div>
 
       {(saveError || retranslateError) && (
-        <div className="mt-2 rounded bg-error/10 px-3 py-2 text-sm text-error">
-          {saveError || retranslateError}
+        <div
+          className="mt-2 flex items-center justify-between gap-3 rounded bg-error/10 px-3 py-2 text-sm text-error"
+          onClick={event => event.stopPropagation()}
+        >
+          <span>{saveError || retranslateError}</span>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => (saveError ? onRetrySave() : onRetranslate())}
+            disabled={isSaving || isRetranslating}
+          >
+            重试
+          </Button>
         </div>
       )}
     </div>

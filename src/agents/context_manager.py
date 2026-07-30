@@ -261,6 +261,51 @@ class LayeredContextManager:
             if section_id in self.section_understandings:
                 del self.section_understandings[section_id]
 
+            # 回滚该章写入的术语首现记录。否则重译请求会被告知「该术语已在前文完成
+            # 首现括注、禁止再加括注」，本章首现的术语将全文再无英文原名（审计 LC5）。
+            # 注意 used_translations[key] 是**跨章节累积**的译法列表（record_usage
+            # 每次都 append），整键删除会连带抹掉其它章节对同一术语的记录，让本次
+            # 运行内的一致性约束凭空消失。因此只保留仍被剩余章节实际使用的译法，
+            # 并把首现归属改判给仍在使用它的最早章节。
+            remaining_sections = list(self.section_translations.items())
+            rolled_back_terms = [
+                key
+                for key, first_section in self.term_tracker.first_occurrences.items()
+                if first_section == section_id
+            ]
+            for key in rolled_back_terms:
+                self.term_tracker.first_occurrences.pop(key, None)
+                candidates = self.term_tracker.used_translations.get(key, [])
+                survivors = [
+                    candidate
+                    for candidate in candidates
+                    if candidate
+                    and any(
+                        candidate in text
+                        for _, translations in remaining_sections
+                        for _, text in translations
+                    )
+                ]
+                if not survivors:
+                    self.term_tracker.used_translations.pop(key, None)
+                    continue
+                self.term_tracker.used_translations[key] = survivors
+                for other_id, translations in remaining_sections:
+                    if any(
+                        candidate in text
+                        for _, text in translations
+                        for candidate in survivors
+                    ):
+                        self.term_tracker.first_occurrences[key] = other_id
+                        break
+
+            # 缩写词定义没有章节归属，按剩余章节的译文重建，
+            # 否则本章的缩写首次定义在重译时同样会被当成「前文已定义」而被吞掉。
+            self.defined_abbreviations.clear()
+            for translations in self.section_translations.values():
+                for _, translation in translations:
+                    self._detect_abbreviations(translation)
+
     def replace_translation_history(
         self,
         records: List[Tuple[str, str, str, Dict[str, str]]],

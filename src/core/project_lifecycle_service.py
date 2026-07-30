@@ -1,5 +1,6 @@
 import logging
 import shutil
+import tempfile
 from pathlib import Path
 from typing import Callable, Optional
 from uuid import uuid4
@@ -33,6 +34,28 @@ class ProjectLifecycleService:
         self._glossary_manager = glossary_manager
         self._logger = logger_ or logging.getLogger(__name__)
 
+    def _ensure_allowed_source_path(self, html_path: str, *, projects_root: Path) -> None:
+        """限制源文件只能取自 inbox 目录与系统临时目录(上传流程把文件落在后者)。"""
+        try:
+            resolved = Path(html_path).resolve()
+        except OSError as error:
+            raise ValueError(f"Invalid source path: {html_path}") from error
+
+        allowed_roots = [
+            projects_root.parent / "inbox",
+            Path(tempfile.gettempdir()),
+        ]
+        for root in allowed_roots:
+            try:
+                if resolved.is_relative_to(root.resolve()):
+                    return
+            except OSError:
+                continue
+
+        raise ValueError(
+            "html_path must be inside the inbox directory or the upload temp directory"
+        )
+
     def create_project(
         self,
         *,
@@ -47,6 +70,10 @@ class ProjectLifecycleService:
         project_dir = self._project_dir(project_id)
         if project_dir.exists():
             raise ValueError(f"Project '{project_id}' already exists")
+
+        # html_path 由客户端直接指定,不限制允许根即构成任意本地文件读取
+        # (读出的内容会写进 projects/ 并被静态挂载取回,审计 BE4)。
+        self._ensure_allowed_source_path(html_path, projects_root=project_dir.parent)
 
         project_dir.mkdir(parents=True)
         (project_dir / "sections").mkdir()

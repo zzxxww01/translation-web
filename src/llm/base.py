@@ -241,6 +241,9 @@ class LLMProvider(ABC):
         self,
         sections: List[Dict[str, Any]],
         article_theme: str = "",
+        *,
+        glossary_block: str = "",
+        whitelist_rules: str = "",
     ) -> Dict[str, str]:
         """Translate all section titles in a single API call.
 
@@ -251,6 +254,8 @@ class LLMProvider(ABC):
                 - prev (str): previous section title (may be empty)
                 - next (str): next section title (may be empty)
             article_theme: article theme from deep analysis
+            glossary_block: 命中术语块，保证标题与正文用同一套术语
+            whitelist_rules: 「永不翻译」白名单铁律（token / GW·MW·kW 等）
 
         Returns:
             Dict mapping section_id -> translated Chinese title.
@@ -269,6 +274,8 @@ class LLMProvider(ABC):
                 "context": "Section heading inside a long-form article",
                 "previous_section_title": sec.get("prev", ""),
                 "next_section_title": sec.get("next", ""),
+                "glossary_block": glossary_block,
+                "whitelist_rules": whitelist_rules,
             }
             try:
                 results[sec_id] = self.translate_section_title(title, context=context)
@@ -327,128 +334,6 @@ class LLMProvider(ABC):
         response = self.generate(prompt, response_format="json")
         return self._parse_json_response(response)
 
-    def refine_translation(
-        self,
-        source: str,
-        current_translation: str,
-        issue_type: str,
-        description: str,
-        suggestion: str,
-        context: Optional[Dict[str, Any]] = None,
-    ) -> str:
-        """
-        润色翻译（四步法 Step 4）
-
-        Args:
-            source: 原文
-            current_translation: 当前译文
-            issue_type: 问题类型
-            description: 问题描述
-            suggestion: 修改建议
-
-        Returns:
-            str: 润色后的译文
-        """
-        prompt = self._build_refine_prompt(
-            source,
-            current_translation,
-            issue_type,
-            description,
-            suggestion,
-            context=context,
-        )
-        return self.generate(prompt, temperature=0.3)
-
-    def style_polish(
-        self,
-        source: str,
-        current_translation: str,
-        context: Optional[Dict[str, Any]] = None,
-    ) -> str:
-        """
-        风格润色（四步法 Step 5 - 可选）
-
-        针对简洁性、四字格、隐喻一致性、语气力度做最终打磨。
-
-        Args:
-            source: 原文
-            current_translation: 当前译文
-
-        Returns:
-            str: 润色后的译文
-        """
-        prompt = self.prompt_manager.get(
-            "longform/review/style_polish",
-            source=source,
-            current_translation=current_translation,
-        )
-        return self.generate(prompt, temperature=0.3)
-
-    def style_polish_batch(
-        self,
-        pairs: List[tuple[str, str]],
-        context: Optional[Dict[str, Any]] = None,
-    ) -> List[str]:
-        """
-        批量风格润色（优化版 Step 5）
-
-        一次 API 调用润色多个段落，降低成本。
-
-        Args:
-            pairs: [(source, current_translation), ...] 原文和译文对
-            context: 可选上下文
-
-        Returns:
-            List[str]: 润色后的译文列表
-        """
-        # 构建批量输入
-        pairs_text = ""
-        for i, (source, translation) in enumerate(pairs):
-            pairs_text += f"### 段落 {i}\n\n"
-            pairs_text += f"**原文：**\n{source}\n\n"
-            pairs_text += f"**当前译文：**\n{translation}\n\n"
-
-        prompt = self.prompt_manager.get(
-            "longform/review/style_polish_batch",
-            pairs_text=pairs_text,
-        )
-
-        response = self.generate(prompt, temperature=0.3)
-
-        # 解析 JSON 响应
-        import json
-        try:
-            # 提取 JSON 部分
-            if "```json" in response:
-                json_start = response.find("```json") + 7
-                json_end = response.find("```", json_start)
-                json_str = response[json_start:json_end].strip()
-            elif "```" in response:
-                json_start = response.find("```") + 3
-                json_end = response.find("```", json_start)
-                json_str = response[json_start:json_end].strip()
-            else:
-                json_str = response.strip()
-
-            result = json.loads(json_str)
-            polished = result.get("polished_translations", [])
-
-            # 验证数量一致
-            if len(polished) != len(pairs):
-                logger.warning(
-                    f"Batch polish returned {len(polished)} translations, expected {len(pairs)}. "
-                    f"Falling back to original translations."
-                )
-                return [translation for _, translation in pairs]
-
-            return polished
-
-        except (json.JSONDecodeError, KeyError) as e:
-            logger.error(f"Failed to parse batch polish response: {e}")
-            logger.debug(f"Response was: {response}")
-            # 降级：返回原译文
-            return [translation for _, translation in pairs]
-
     def refine_and_polish_batch(
         self,
         pairs: List[Dict[str, Any]],
@@ -492,22 +377,93 @@ class LLMProvider(ABC):
 
             result = json.loads(json_str)
             polished = result.get("polished_translations", [])
-
-            # 验证数量一致
-            if len(polished) != len(pairs):
-                logger.warning(
-                    f"Batch refine_and_polish returned {len(polished)} translations, expected {len(pairs)}. "
-                    f"Falling back to original translations."
-                )
-                return [pair["translation"] for pair in pairs]
-
-            return polished
+            return self._align_polished_batch(polished, pairs)
 
         except (json.JSONDecodeError, KeyError) as e:
             logger.error(f"Failed to parse batch refine_and_polish response: {e}")
             logger.debug(f"Response was: {response}")
             # 降级：返回原译文
             return [pair["translation"] for pair in pairs]
+
+    def _align_polished_batch(
+        self,
+        polished: Any,
+        pairs: List[Dict[str, Any]],
+    ) -> List[str]:
+        """把批量润色结果对齐回输入段落顺序。
+
+        新契约返回 `[{"index": 0, "translation": "..."}]`，按 index 归位；
+        旧契约返回裸字符串数组，按位置回落（模型不遵守新契约时不至于整批降级）。
+        两种格式下缺失、越界或非字符串的条目一律回退该段原译文，避免"数量凑够但
+        内容错位"静默通过（审计 TR12）。
+        """
+        originals = [pair.get("translation", "") for pair in pairs]
+
+        if not isinstance(polished, list) or not polished:
+            logger.warning(
+                "Batch refine_and_polish returned no usable translations (%s); "
+                "falling back to original translations.",
+                type(polished).__name__,
+            )
+            return originals
+
+        has_indexed_items = any(isinstance(item, dict) for item in polished)
+
+        if has_indexed_items:
+            by_index: Dict[int, str] = {}
+            for position, item in enumerate(polished):
+                if not isinstance(item, dict):
+                    # 混合数组（部分带 index、部分是裸字符串）：裸字符串按它在
+                    # 数组里的位置补位，不然会被静默丢弃、只在 missing 计数里
+                    # 露一下头。带 index 的条目优先，后面统一覆盖。
+                    if (
+                        isinstance(item, str)
+                        and item.strip()
+                        and 0 <= position < len(originals)
+                    ):
+                        by_index.setdefault(position, item)
+                    continue
+                try:
+                    index = int(item.get("index"))
+                except (TypeError, ValueError):
+                    logger.warning(
+                        "Batch refine_and_polish item has invalid index: %r", item.get("index")
+                    )
+                    continue
+                text = item.get("translation")
+                if not isinstance(text, str) or not text.strip():
+                    continue
+                if not 0 <= index < len(originals):
+                    logger.warning(
+                        "Batch refine_and_polish index %s out of range (batch size %s); skipped.",
+                        index, len(originals),
+                    )
+                    continue
+                # 显式带 index 的条目优先于按位置补位的裸字符串。
+                by_index[index] = text
+
+            missing = [i for i in range(len(originals)) if i not in by_index]
+            if missing:
+                logger.warning(
+                    "Batch refine_and_polish missing %s/%s paragraphs (index %s); "
+                    "keeping their original translations.",
+                    len(missing), len(originals), missing,
+                )
+            return [by_index.get(i, originals[i]) for i in range(len(originals))]
+
+        # 旧格式：裸字符串数组，只能按位置对齐，长度不符则整批回退
+        if len(polished) != len(pairs):
+            logger.warning(
+                "Batch refine_and_polish returned %s translations, expected %s. "
+                "Falling back to original translations.",
+                len(polished), len(pairs),
+            )
+            return originals
+
+        return [
+            item if isinstance(item, str) and item.strip() else originals[i]
+            for i, item in enumerate(polished)
+        ]
 
     def prescan_section(
         self,
@@ -671,29 +627,6 @@ class LLMProvider(ABC):
         )
 
         context_blocks = self._build_reflection_context_blocks(context or {})
-        if context_blocks:
-            return "\n\n".join(context_blocks + [base_prompt])
-        return base_prompt
-
-    def _build_refine_prompt(
-        self,
-        source: str,
-        current_translation: str,
-        issue_type: str,
-        description: str,
-        suggestion: str,
-        context: Optional[Dict[str, Any]] = None,
-    ) -> str:
-        """构建润色 Prompt"""
-        base_prompt = self.prompt_manager.get(
-            "longform/review/paragraph_revision",
-            source=source,
-            current_translation=current_translation,
-            issue_type=issue_type,
-            description=description,
-            suggestion=suggestion,
-        )
-        context_blocks = self._build_refine_context_blocks(context or {})
         if context_blocks:
             return "\n\n".join(context_blocks + [base_prompt])
         return base_prompt

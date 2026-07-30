@@ -72,6 +72,8 @@ class Paragraph(BaseModel):
     is_heading: bool = False
     heading_level: Optional[int] = None
     heading_chain: List[str] = Field(default_factory=list)
+    # 列表项缩进层级（0=一级），导出时用于还原多级列表结构。
+    list_indent: int = 0
 
     is_metadata: bool = False
     metadata_type: Optional[str] = None

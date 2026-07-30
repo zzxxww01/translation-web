@@ -11,7 +11,17 @@ from .models import Glossary, GlossaryTerm, Section
 from .models.enums import TranslationStrategy
 
 DEFAULT_GLOSSARY_PROMPT_TITLE = "## 术语约束（仅列出当前文本命中的术语，必须优先遵守）"
+# 短帖（社媒）专用标题：词表在这里只负责"用哪个中文写法"，不负责注释与篇幅——
+# 那些由帖子提示词自己决定。沿用长文标题里的"必须优先遵守"会让词表的括注
+# 要求压过帖子提示词"注释克制"的规则，一条 80 字的帖子被塞进四五个英文括注。
+SHORT_FORM_GLOSSARY_PROMPT_TITLE = (
+    "## 术语约束（仅统一用词写法，不改变下文的注释与篇幅规则）"
+)
 MAX_GLOSSARY_NOTE_CHARS_IN_PROMPT = 48
+
+# 词义栏里的括注部分（多为英文全称），取中文全称时先掐掉。
+_CJK_ANNOTATION_PARENS = re.compile(r"[（(][^）)]*[)）]")
+_CJK_CHAR_RE = re.compile(r"[一-鿿]")
 
 
 @lru_cache(maxsize=4096)
@@ -138,6 +148,40 @@ def _normalize_prompt_term(term: Any) -> Optional[Dict[str, Any]]:
     }
 
 
+def _has_multiple_translation_candidates(translation: str) -> bool:
+    """标准写法本身就是一串候选（如 ``良率(制造)/收益率(金融)``、``嵌入/向量化``）。
+
+    只按 ``/``／``／`` 切分判断，不把括号单独当信号——``宽专家并行 (WideEP)``
+    这类「中文名 + 英文缩写」条目是单义的，误判会削弱最强的术语约束。
+    """
+    parts = [part.strip() for part in re.split(r"[/／]", translation or "") if part.strip()]
+    return len(parts) >= 2
+
+
+def _note_maps_multiple_translations(translation: str, note: str) -> bool:
+    """【词义】栏写了 ≥2 组「场景=写法」映射，且当前写法正是其中一项。
+
+    如 memory 的 ``系统/DRAM=内存；NAND/盘存=存储；泛指器件=存储器``。
+    ``die`` 的 ``与 chip=芯片 区分`` 里的 ``=`` 指向的是别的术语，不算多义。
+    """
+    targets = [
+        segment.split("=", 1)[1].strip()
+        for segment in re.split(r"[；;]", note or "")
+        if "=" in segment
+    ]
+    targets = [target for target in targets if target]
+    if len(targets) < 2 or not translation:
+        return False
+    return any(translation in target or target in translation for target in targets)
+
+
+def _is_polysemous_translation(translation: str, note: str) -> bool:
+    """判定词表条目是否为「多义术语」：写法多候选，或【词义】栏分场景映射。"""
+    return _has_multiple_translation_candidates(
+        translation
+    ) or _note_maps_multiple_translations(translation, note)
+
+
 def _build_requirement_text(
     *,
     original: str,
@@ -145,7 +189,29 @@ def _build_requirement_text(
     strategy: str,
     first_occurrence_note: bool = False,
     already_used: bool = False,
+    note: str = "",
+    short_form: bool = False,
 ) -> str:
+    # 短帖模式：词表只约束"用哪个写法"，首现括注/已首现之类的长文规则一概不发。
+    # 必须在所有 strategy 分支之前短路——already_used 分支说的"该术语已在前文
+    # 完成首现括注"在没有前文的单条帖子里毫无意义。
+    if short_form:
+        if strategy == "preserve" or not translation or translation == original:
+            # 「不加注释」会压过帖子提示词「缩写首现展开」的规则，让面向普通
+            # 中文读者的短帖裸写 HBM/UBI 一类缩写。这里改为允许首现展开，但
+            # 只在词义栏确实给出了中文全称时才给建议——词义栏也可能是纯英文
+            # （CoWoS = "Chip on Wafer on Substrate"），照搬会写出英文全称括注。
+            chinese_name = _CJK_ANNOTATION_PARENS.sub("", note or "").strip()
+            if chinese_name and _CJK_CHAR_RE.search(chinese_name):
+                return (
+                    f"保留英文写法；若该缩写对普通中文读者不自明，首次出现可写"
+                    f"“{chinese_name}（{original}）”，后文只写“{original}”"
+                )
+            return f"保留英文写法“{original}”，不要改写成其他中文译名"
+        if _is_polysemous_translation(translation, note):
+            return "多义词：按【词义】栏择一，禁止整串照抄"
+        return f"直接使用该写法“{translation}”"
+
     if strategy == "preserve":
         return "保留英文原文，不加注释"
 
@@ -169,6 +235,9 @@ def _build_requirement_text(
             return f"首次出现写\u201c{translation}（{original}）\u201d，后文写\u201c{translation}\u201d"
         return f"首次出现时加简短注释，后文继续写\u201c{translation}\u201d"
 
+    if _is_polysemous_translation(translation, note):
+        return "多义词：按【词义】栏逐处判义后择一，禁止整串照抄，全篇不得一刀切"
+
     return "直接使用该写法"
 
 
@@ -177,6 +246,7 @@ def _render_glossary_prompt_line(
     *,
     already_used: bool = False,
     max_note_chars: int = MAX_GLOSSARY_NOTE_CHARS_IN_PROMPT,
+    short_form: bool = False,
 ) -> str:
     payload = _normalize_prompt_term(term)
     if not payload:
@@ -188,10 +258,17 @@ def _render_glossary_prompt_line(
         strategy=payload["strategy"],
         first_occurrence_note=payload["first_occurrence_note"],
         already_used=already_used,
+        note=payload["note"],
+        short_form=short_form,
     )
+    # 写法本身是一串候选时不能自称「标准写法」，否则与提示词里的「强制采用」
+    # 叠加会诱导模型整串照抄或直接取首项。
+    is_candidate_list = requirement.startswith(
+        "多义词"
+    ) and _has_multiple_translation_candidates(payload["translation"])
     parts = [
         f"原文：{payload['original']}",
-        f"标准写法：{payload['translation']}",
+        f"{'候选写法' if is_candidate_list else '标准写法'}：{payload['translation']}",
         f"要求：{requirement}",
     ]
 
@@ -262,8 +339,13 @@ def render_glossary_prompt_block(
     term_usage: Optional[Dict[str, List[str]]] = None,
     max_note_chars: int = MAX_GLOSSARY_NOTE_CHARS_IN_PROMPT,
     empty_text: str = "",
+    short_form: bool = False,
 ) -> str:
-    """Render prompt-ready glossary constraints from term objects or dictionaries."""
+    """Render prompt-ready glossary constraints from term objects or dictionaries.
+
+    ``short_form=True`` 供社媒短帖使用：只输出用词写法，不发首现括注一类的
+    长文规则（详见 :func:`_build_requirement_text`）。
+    """
     if not terms or max_terms <= 0:
         return empty_text
 
@@ -283,6 +365,7 @@ def render_glossary_prompt_block(
             payload,
             already_used=payload["original"].lower() in used_keys,
             max_note_chars=max_note_chars,
+            short_form=short_form,
         )
         if not line:
             continue

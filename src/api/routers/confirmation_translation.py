@@ -262,8 +262,17 @@ async def start_translation(
             )
         )
     lease_id = str(slot_claim["lease_id"])
+
+    def _run_translation_in_thread():
+        async def _runner():
+            return await service.translate_project(project_id)
+
+        return asyncio.run(_runner())
+
     try:
-        return await service.translate_project(project_id)
+        # translate_project 内部有多段同步 LLM 调用（Phase0 分析、标题翻译、质量报告），
+        # 直接 await 会冻结整个事件循环，按四步法路由的写法整段搬到工作线程执行。
+        return await asyncio.to_thread(_run_translation_in_thread)
     except NotFoundException:
         service._release_active_run(project_id, lease_id=lease_id)
         raise

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """确定性 QA gate 单元测试（translation_qa）。"""
 
+import pytest
+
 from src.core import translation_qa
 from src.core.translation_qa import (
     QAIssue,
@@ -88,10 +90,12 @@ def test_bold_parity_detected():
 
 
 def test_quote_imbalance_detected():
-    # A-12：改为直引号计数配平（奇数即 critical）
+    # A-12：直引号计数配平。奇数报 warning——单段漏一个闭引号不该让整篇
+    # 不可导出，定位由行级 straight_quote_odd 承担。
     issues = run_deterministic_qa('他说"话没关上就走了')
     assert "quote_imbalance" in _codes(issues)
-    assert has_critical(issues)
+    assert "straight_quote_odd" in _codes(issues)
+    assert not has_critical(issues)
 
 
 def test_fan_liang_fan_is_warning():
@@ -121,6 +125,55 @@ def test_code_blocks_are_skipped():
     issues = run_deterministic_qa(content)
     assert "token_sinicized" not in _codes(issues)
     assert "halfwidth_punct" not in _codes(issues)
+    # 关键断言：代码块内的任何内容都不得产生 critical。旧版只断言上面两个
+    # code「不在」结果里，于是 `ext{abc}` 触发的 latex_mangled critical 一直
+    # 绿灯通过，掩盖了整类误报。
+    assert not has_critical(issues)
+
+
+@pytest.mark.parametrize(
+    "snippet",
+    [
+        "def f(**kwargs):\n    pass",  # ** 不参与全文加粗配平
+        "void f(int \\& x);",  # C++ 引用不是 URL 转义残留
+        "result = fetch(link_1)",  # 小写 link_1 不是格式 token 残留
+        "$$\nE = mc^2",  # 代码块里的 $$ 不参与公式块配平
+    ],
+)
+def test_fenced_code_never_blocks_export(snippet):
+    content = f"说明文字。\n\n```\n{snippet}\n```\n"
+    assert not has_critical(run_deterministic_qa(content))
+
+
+def test_table_cells_are_exempt_from_engineering_residue():
+    # 表格单元里的 `\&` 是合法内容，不该被当成 URL 转义残留而阻断导出。
+    content = "| 参数 | 说明 |\n|---|---|\n| a \\& b | 位与 |\n"
+    assert not has_critical(run_deterministic_qa(content))
+
+
+def test_inch_mark_does_not_break_quote_parity():
+    # 2.5" / 19" 是尺寸记号，不参与直引号配平。
+    issues = run_deterministic_qa('机架采用 2.5" 硬盘位。')
+    assert not has_critical(issues)
+    assert "quote_imbalance" not in _codes(issues)
+
+
+def test_quote_imbalance_is_warning_not_blocking():
+    issues = run_deterministic_qa('他称之为 "最后一公里问题。')
+    assert "quote_imbalance" in _codes(issues)
+    assert not has_critical(issues)
+
+
+def test_token_check_respects_source_without_token():
+    # 原文没提 token 时，「访问令牌」「代币」是正确译法，不得判 critical。
+    issues = run_deterministic_qa(
+        "访问令牌会过期。", source="The access ticket expires."
+    )
+    assert "token_sinicized" not in _codes(issues)
+    issues = run_deterministic_qa(
+        "访问令牌会过期。", source="The access token expires."
+    )
+    assert "token_sinicized" in _codes(issues)
 
 
 def test_source_structure_comparison():
@@ -157,10 +210,17 @@ def test_malformed_link_token_residue_detected():
     assert has_critical(issues)
 
 
-def test_power_unit_sinicized_is_critical():
+def test_power_unit_sinicized_is_warning():
+    # warning 而非 critical：没有确定性 fixer 的 critical 等于永久阻断导出。
     issues = run_deterministic_qa("园区容量达 5 吉瓦，另有 300 兆瓦备用")
     assert "power_unit_sinicized" in _codes(issues)
-    assert has_critical(issues)
+    assert not has_critical(issues)
+
+
+def test_power_unit_measure_words_are_not_flagged():
+    # 「兆瓦时 / 千瓦时 / 兆瓦日」在电力市场文章里就是标准中文计量单位。
+    issues = run_deterministic_qa("电价为 29 美元/兆瓦时，居民电价 0.15 美元/千瓦时")
+    assert "power_unit_sinicized" not in _codes(issues)
 
 
 def test_capitalized_token_word_is_warning():
@@ -189,14 +249,23 @@ def test_single_annotation_not_flagged():
     assert "annotation_repeated" not in _codes(issues)
 
 
-def test_link_count_and_url_set_diff_are_critical():
+def test_link_count_and_url_set_diff_are_warnings():
+    # 与源文的结构对照降为 warning：源文页尾促销/署名段常不纳入翻译，
+    # 数量对不上是常态，硬阻断会让现存文章全部导不出。
     source = "见 [A](https://a.com) 与 [B](https://b.com)。"
     content = "见 [甲](https://a.com)。"
     issues = run_deterministic_qa(content, source=source)
     codes = _codes(issues)
     assert "link_count_mismatch" in codes
     assert "url_set_diff" in codes
-    assert has_critical(issues)
+    assert not has_critical(issues)
+
+
+def test_url_set_diff_normalises_escaped_amp():
+    # zh 侧经 postprocess 已把 URL 里的 `\&` 还原成 `&`，两侧需同口径。
+    source = r"见 [A](https://a.com/?x=1\&y=2)。"
+    content = "见 [甲](https://a.com/?x=1&y=2)。"
+    assert "url_set_diff" not in _codes(run_deterministic_qa(content, source=source))
 
 
 def test_matching_links_not_flagged():
@@ -208,12 +277,12 @@ def test_matching_links_not_flagged():
     assert "url_set_diff" not in codes
 
 
-def test_extra_zh_heading_is_critical():
+def test_extra_zh_heading_is_warning():
     source = "## A\n\n正文。\n"
     content = "## 引言\n\n导语。\n\n## 甲\n\n正文。\n"
     issues = run_deterministic_qa(content, source=source)
     assert "extra_heading" in _codes(issues)
-    assert has_critical(issues)
+    assert not has_critical(issues)
 
 
 def test_missing_zh_heading_is_warning():

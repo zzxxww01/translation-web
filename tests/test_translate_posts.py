@@ -101,7 +101,7 @@ class TranslatePostRegressionTests(unittest.IsolatedAsyncioTestCase):
                 body,
             )
 
-        self.assertIn("更多token", response.translation)
+        self.assertIn("更多 token", response.translation)
         self.assertNotIn("词元", response.translation)
         self.assertTrue(
             response.translation.endswith("#英伟达 #AI芯片 #大模型推理")
@@ -131,7 +131,8 @@ class TranslatePostRegressionTests(unittest.IsolatedAsyncioTestCase):
             )
 
         self.assertNotIn("词元", response.optimized_translation)
-        self.assertIn("token吞吐量", response.optimized_translation)
+        # 替换出的 token 就地补 CJK–ASCII 空格，与长文链路口径一致。
+        self.assertIn("token 吞吐量", response.optimized_translation)
         self.assertTrue(
             response.optimized_translation.endswith("#大模型")
         )

@@ -299,7 +299,21 @@ class TranslationMemoryService:
 
     @classmethod
     def register_loop(cls) -> None:
-        """登记当前主事件循环，供工作线程（asyncio.to_thread）回投后台学习协程。"""
+        """登记承载本次翻译的事件循环，供工作线程（asyncio.to_thread）回投后台学习协程。
+
+        仅在尚未登记、或已登记的循环**已关闭或已停止运行**时才写入。无条件覆盖
+        会把仍在服务中的循环换成随即销毁的临时子循环；而只判 ``is_closed()`` 又会
+        让引用长期停在一个已经跑完、只是尚未关闭的循环上，导致后续 run 的后台学习
+        协程被 :meth:`_spawn_background` 静默丢弃。
+
+        已知限制：并发多个 run 时只保留先登记的那个循环，后来者的后台学习协程会
+        回投到前者（memory service 是单例，功能上等价）；若前者已结束，后来者的
+        协程会被丢弃并记 warning。
+        """
+        existing = getattr(cls, "_main_loop", None)
+        if existing is not None and not existing.is_closed() and existing.is_running():
+            return
+
         try:
             cls._main_loop = asyncio.get_running_loop()
         except RuntimeError:
@@ -331,6 +345,11 @@ class TranslationMemoryService:
             fut.add_done_callback(cls._bg_tasks.discard)
             return
 
+        # 没有可回投的循环时协程被丢弃——这会静默吃掉一次反思学习，必须留痕，
+        # 否则「规则库不增长」这类问题无从排查。
+        logger.warning(
+            "No live event loop to run background learning task; coroutine dropped."
+        )
         coro.close()
 
     async def _consolidate_rules(self) -> None:

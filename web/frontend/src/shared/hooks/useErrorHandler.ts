@@ -39,7 +39,7 @@ function extractErrorMessage(error: unknown): string {
   // 标准错误对象
   if (error instanceof Error) {
     if (error.name === 'AbortError' || error.message.toLowerCase().includes('aborted')) {
-      return 'Request timeout. Please try again.';
+      return '请求超时，请稍后重试';
     }
     return error.message;
   }

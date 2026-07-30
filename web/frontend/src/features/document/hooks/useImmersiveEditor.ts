@@ -35,7 +35,38 @@ function toErrorMessage(error: unknown): string {
   if (error instanceof Error && error.message) {
     return error.message;
   }
-  return 'Request failed. Please retry.';
+  return '请求失败，请重试';
+}
+
+// 草稿本地快照：防抖窗口内刷新/关页时服务端还没收到改动，靠 sessionStorage 兜底
+const DRAFT_STORAGE_PREFIX = 'immersive-draft';
+
+function draftStorageKey(projectId: string, sectionId: string, paragraphId: string): string {
+  return `${DRAFT_STORAGE_PREFIX}:${projectId}:${sectionId}:${paragraphId}`;
+}
+
+function readStoredDraft(key: string): string | null {
+  try {
+    return window.sessionStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function writeStoredDraft(key: string, value: string): void {
+  try {
+    window.sessionStorage.setItem(key, value);
+  } catch {
+    // 隐私模式/配额不足时忽略，不影响正常编辑
+  }
+}
+
+function clearStoredDraft(key: string): void {
+  try {
+    window.sessionStorage.removeItem(key);
+  } catch {
+    // 同上，静默忽略
+  }
 }
 
 function pruneMapByIds<T>(input: Record<string, T>, validIds: Set<string>): Record<string, T> {
@@ -151,6 +182,15 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
   useEffect(() => {
     const saveTimers = saveTimersRef.current;
     return () => {
+      // 应用内卸载兜底：仍有未保存改动的段落先补发一次保存，再清理定时器。
+      // （浏览器刷新/关页由 sessionStorage 快照 + beforeunload 负责，此处只管应用内跳转）
+      // 遍历 dirty 集合而非定时器 key：从 sessionStorage 恢复出来的草稿没有
+      // 定时器 key，按 key 遍历会把它们整批漏掉。
+      Object.keys(dirtyMapRef.current).forEach(paragraphId => {
+        if (dirtyMapRef.current[paragraphId]) {
+          void saveParagraphRef.current(paragraphId);
+        }
+      });
       Object.values(saveTimers).forEach(timerId => clearTimeout(timerId));
     };
   }, []);
@@ -261,6 +301,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         const latestDraft = draftsRef.current[paragraphId] ?? '';
         if (latestDraft === translation) {
           setDirtyMap(previous => ({ ...previous, [paragraphId]: false }));
+          clearStoredDraft(draftStorageKey(projectId, sectionId, paragraphId));
         } else {
           scheduleAutoSave(paragraphId);
         }
@@ -286,6 +327,46 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
     saveParagraphRef.current = saveParagraph;
   }, [saveParagraph]);
 
+  // 刷新回来后恢复本地草稿快照：同一 project/section 只尝试一次。
+  // 位置必须在 scheduleAutoSave 之后——依赖数组在渲染期求值，放在它前面会撞 TDZ。
+  const restoredScopeRef = useRef('');
+  useEffect(() => {
+    if (!projectId || !sectionId || paragraphs.length === 0) return;
+    const scopeKey = `${projectId}:${sectionId}`;
+    if (restoredScopeRef.current === scopeKey) return;
+    restoredScopeRef.current = scopeKey;
+
+    const recovered: Record<string, string> = {};
+    paragraphs.forEach(paragraph => {
+      const key = draftStorageKey(projectId, sectionId, paragraph.id);
+      const stored = readStoredDraft(key);
+      if (stored === null) return;
+      // 与服务端译文一致说明已落库，清掉快照即可
+      if (stored === (paragraph.translation ?? '')) {
+        clearStoredDraft(key);
+        return;
+      }
+      recovered[paragraph.id] = stored;
+    });
+
+    const recoveredIds = Object.keys(recovered);
+    if (recoveredIds.length === 0) return;
+
+    setDrafts(previous => ({ ...previous, ...recovered }));
+    setDirtyMap(previous => {
+      const next = { ...previous };
+      recoveredIds.forEach(paragraphId => {
+        next[paragraphId] = true;
+      });
+      return next;
+    });
+    // 恢复出来的草稿必须排进自动保存队列。否则它们没有定时器、永远停在 dirty，
+    // 把 hasPendingWork 永久钉成 true——每次退出沉浸编辑都会弹「仍有未完成的
+    // 保存任务」，而那些草稿其实谁也不会去保存它们。
+    recoveredIds.forEach(paragraphId => scheduleAutoSave(paragraphId));
+    toast.info(`已恢复 ${recoveredIds.length} 段未保存的本地草稿，正在自动保存`);
+  }, [paragraphs, projectId, scheduleAutoSave, sectionId]);
+
   const updateDraft = useCallback(
     (paragraphId: string, value: string) => {
       setDrafts(previous => ({ ...previous, [paragraphId]: value }));
@@ -296,9 +377,13 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
         return next;
       });
 
+      if (projectId && sectionId) {
+        writeStoredDraft(draftStorageKey(projectId, sectionId, paragraphId), value);
+      }
+
       scheduleAutoSave(paragraphId);
     },
-    [scheduleAutoSave]
+    [projectId, scheduleAutoSave, sectionId]
   );
 
   const saveNow = useCallback(
@@ -361,6 +446,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           delete next[paragraphId];
           return next;
         });
+        clearStoredDraft(draftStorageKey(projectId, sectionId, paragraphId));
 
         applyParagraphUpdate(paragraphId, {
           translation,
@@ -508,6 +594,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
             delete next[id];
             return next;
           });
+          clearStoredDraft(draftStorageKey(projectId, sectionId, id));
 
           applyParagraphUpdate(id, {
             translation,
@@ -577,6 +664,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
             delete next[paragraphId];
             return next;
           });
+          clearStoredDraft(draftStorageKey(projectId, sectionId, paragraphId));
 
           toast.success('段落已确认');
           void queryClient.invalidateQueries({ queryKey: ['section', projectId, sectionId] });
@@ -632,7 +720,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
           failedIds.add(paragraphId);
           setSaveErrorMap(previous => ({
             ...previous,
-            [paragraphId]: 'Translation cannot be empty',
+            [paragraphId]: '译文不能为空',
           }));
           continue;
         }
@@ -652,6 +740,7 @@ export function useImmersiveEditor({ projectId, sectionId, paragraphs }: UseImme
             delete next[paragraphId];
             return next;
           });
+          clearStoredDraft(draftStorageKey(projectId, sectionId, paragraphId));
           successCount += 1;
         } catch (error) {
           failedIds.add(paragraphId);

@@ -14,7 +14,9 @@ from .format_tokens import (
     tokenize_text,
 )
 from .markdown_postprocess import postprocess_markdown
+from .block_format import render_blockquote, render_list_item, restore_ordered_number
 from .models import ArticleMetadata, ElementType, Glossary, Paragraph, Section
+from .table_render import render_table_markdown
 
 
 class MarkdownExporter:
@@ -127,9 +129,16 @@ class MarkdownExporter:
             return self._render_source_block_markdown(first)
 
         if block_type == ElementType.IMAGE:
+            # 图片段创建时即 auto-approve，从不送翻，原样输出。
             return first.parent_block_markdown or first.source_html or f"![image]({first.source})"
         if block_type == ElementType.TABLE:
-            return first.parent_block_markdown or first.parent_source_html or first.source
+            source_markdown = (
+                first.parent_block_markdown or first.parent_source_html or first.source
+            )
+            rendered = render_table_markdown(
+                first.best_translation_text(fallback_to_source=False), source_markdown
+            )
+            return rendered if rendered is not None else source_markdown
         if block_type == ElementType.CODE:
             try:
                 payload = require_valid_reconstruction(paragraphs, fallback_to_source=True)
@@ -148,7 +157,12 @@ class MarkdownExporter:
                 text = payload.text
         except FormatRecoveryError:
             text = reconstruct_block_tokenized_text(paragraphs, fallback_to_source=True).text
-        return self._format_by_element_type(block_type, text)
+        return self._format_by_element_type(
+            block_type,
+            text,
+            list_indent=getattr(first, "list_indent", 0),
+            source_text=first.parent_block_plain_text or first.source,
+        )
 
     def _render_source_block_markdown(self, paragraph: Paragraph) -> str:
         if paragraph.parent_block_markdown:
@@ -158,7 +172,12 @@ class MarkdownExporter:
             text = restore_markdown_from_tokenized(tokenized, paragraph.inline_elements)
         else:
             text = paragraph.source
-        return self._format_by_element_type(paragraph.element_type, text)
+        return self._format_by_element_type(
+            paragraph.element_type,
+            text,
+            list_indent=getattr(paragraph, "list_indent", 0),
+            source_text=paragraph.source,
+        )
 
     def _status_mark(self, paragraph: Paragraph) -> str:
         status_map = {
@@ -171,7 +190,14 @@ class MarkdownExporter:
         }
         return status_map.get(paragraph.status.value, "")
 
-    def _format_by_element_type(self, element_type: ElementType, text: str) -> str:
+    def _format_by_element_type(
+        self,
+        element_type: ElementType,
+        text: str,
+        *,
+        list_indent: int = 0,
+        source_text: str = "",
+    ) -> str:
         if element_type == ElementType.H1:
             return f"# {text}"
         if element_type == ElementType.H2:
@@ -181,14 +207,14 @@ class MarkdownExporter:
         if element_type == ElementType.H4:
             return f"#### {text}"
         if element_type == ElementType.LI:
-            return f"- {text}"
+            return render_list_item(text, list_indent)
         if element_type == ElementType.BLOCKQUOTE:
-            return f"> {text}"
+            return render_blockquote(text)
         if element_type == ElementType.CODE:
             return f"```\n{text}\n```"
         if element_type == ElementType.IMAGE:
             return f"![image]({text})"
-        return text
+        return restore_ordered_number(source_text, text)
 
     def export_glossary(self, glossary: Glossary) -> str:
         lines = ["## 术语表", ""]

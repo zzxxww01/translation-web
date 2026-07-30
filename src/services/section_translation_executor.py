@@ -284,6 +284,11 @@ class SectionTranslationExecutor:
                 ),
                 "applied_paragraph_ids": applied_ids,
                 "conflict_paragraph_ids": conflict_ids,
+                # 四步法降级（反思/润色异常后只回裸初译）必须透传给上层，否则
+                # 一次跳过了质量门禁的翻译会被报告成完全成功（审计 LC7）。
+                # section 模式没有四步法结果，恒为 False。
+                "degraded": bool(getattr(four_step_result, "degraded", False)),
+                "degraded_reason": getattr(four_step_result, "degraded_reason", "") or "",
             }
         except Exception as error:
             error_msg = f"Failed to translate section {section.section_id}: {str(error)}"

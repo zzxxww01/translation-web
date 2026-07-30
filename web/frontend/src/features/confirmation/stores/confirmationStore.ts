@@ -10,6 +10,19 @@ import type {
   WorkflowStatus,
 } from '../types';
 
+/**
+ * 钳制段落下标。
+ *
+ * totalParagraphs 还是 0（首次加载、或后端没返回 total_paragraphs）时**不能**
+ * 钳到 0：那会让 currentIndex 与面板正在显示的段落失同步，还会多打一次
+ * loadParagraph(0)。此时只保证非负，等 total 到位后自然收敛。
+ */
+const clampParagraphIndex = (index: number, totalParagraphs: number): number => {
+  const safeIndex = Number.isFinite(index) ? Math.max(0, Math.trunc(index)) : 0;
+  if (totalParagraphs <= 0) return safeIndex;
+  return Math.min(safeIndex, totalParagraphs - 1);
+};
+
 interface ConfirmationState {
   // 项目状态
   projectId: string | null;
@@ -67,7 +80,14 @@ export const useConfirmationStore = create<ConfirmationState>()(
         error: null,
 
         // 操作方法
-        setProjectId: (id) => set({ projectId: id }),
+        // 切换项目时把段落下标复位到 0，避免沿用上一个项目的下标请求新项目导致 404
+        // 注意：不能用 reset()，那会把刚设置的 projectId 一并清空
+        setProjectId: (id) =>
+          set((state) =>
+            state.projectId === id
+              ? { projectId: id }
+              : { projectId: id, currentIndex: 0 }
+          ),
 
         setWorkflowStatus: (status) => set({ workflowStatus: status }),
 
@@ -94,7 +114,10 @@ export const useConfirmationStore = create<ConfirmationState>()(
 
         goToNext: () =>
           set((state) => ({
-            currentIndex: Math.min(state.currentIndex + 1, state.totalParagraphs - 1),
+            currentIndex: clampParagraphIndex(
+              state.currentIndex + 1,
+              state.totalParagraphs
+            ),
           })),
 
         goToPrev: () =>
@@ -102,7 +125,12 @@ export const useConfirmationStore = create<ConfirmationState>()(
             currentIndex: Math.max(state.currentIndex - 1, 0),
           })),
 
-        jumpTo: (index) => set({ currentIndex: index }),
+        // 钳制越界下标：进度条等外部调用可能传入 totalParagraphs（1-based）或负数，
+        // 未钳制的坏值会让 loadParagraph 打到后端 404 并卡在错误页
+        jumpTo: (index) =>
+          set((state) => ({
+            currentIndex: clampParagraphIndex(index, state.totalParagraphs),
+          })),
 
         reset: () =>
           set({
@@ -121,10 +149,23 @@ export const useConfirmationStore = create<ConfirmationState>()(
       }),
       {
         name: 'confirmation-storage',
+        // currentIndex 不再持久化：它能由 loadParagraph 成功后的 jumpTo 重建，
+        // 而全局持久化会把越界坏值长期留在 localStorage，造成永久 404
         partialize: (state) => ({
           projectId: state.projectId,
-          currentIndex: state.currentIndex,
         }),
+        // partialize 只管写。存量用户的 localStorage 里已经有 currentIndex，
+        // persist 默认 merge 仍会把那个坏下标 hydrate 回来——必须显式迁移剔除，
+        // 否则本次修复对老用户在覆盖写入前完全无效。
+        version: 1,
+        migrate: (persisted) => {
+          if (!persisted || typeof persisted !== 'object') return persisted;
+          const { currentIndex: _dropped, ...rest } = persisted as Record<
+            string,
+            unknown
+          >;
+          return rest;
+        },
       }
     ),
     { name: 'ConfirmationStore' }

@@ -169,7 +169,7 @@ export class ApiClient {
     try {
       data = JSON.parse(text) as T;
     } catch {
-      throw new Error('Invalid JSON response from server');
+      throw new Error('服务器返回的数据格式无效，请稍后重试');
     }
 
     return data;
@@ -198,7 +198,7 @@ export class ApiClient {
           rawError.message.toLowerCase().includes('aborted');
 
         const normalizedError = isAbort
-          ? new ApiErrorWrapper('Request timeout. Please try again.', 408)
+          ? new ApiErrorWrapper('请求超时，请稍后重试', 408)
           : rawError;
 
         lastError = normalizedError as Error;
@@ -419,7 +419,7 @@ export class ApiClient {
 
       // 监听错误
       xhr.addEventListener('error', () => {
-        reject(new ApiErrorWrapper('Network error during upload'));
+        reject(new ApiErrorWrapper('上传过程中发生网络错误，请重试'));
       });
 
       // 监听超时

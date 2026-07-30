@@ -2,7 +2,8 @@
  * Document sidebar with project picker, section list, translation controls, and export actions.
  */
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { BarChart3, BookOpen, ChevronDown, Download, Layers, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button-extended';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -20,6 +21,13 @@ import { SectionList } from './SectionList';
 import { ModelSelector } from '@/components/ModelSelector';
 import { cn } from '@/shared/utils';
 
+/** 把秒数格式化为 mm:ss，用于术语预检的已用时展示 */
+function formatElapsed(seconds: number): string {
+  const minutes = String(Math.floor(seconds / 60)).padStart(2, '0');
+  const rest = String(seconds % 60).padStart(2, '0');
+  return `${minutes}:${rest}`;
+}
+
 interface DocumentSidebarProps {
   sections: Section[];
   activeSectionId: string | null;
@@ -27,6 +35,8 @@ interface DocumentSidebarProps {
   onNewProject: () => void;
   onFullTranslate?: (method?: TranslationMethod, model?: string) => void;
   onStopTranslate?: () => void;
+  /** 术语预检进行中的取消回调；未传入时不渲染「取消预检」按钮 */
+  onCancelTermReview?: () => void;
   isFullTranslating?: boolean;
   isCancelling?: boolean;
   isPreparingFullTranslate?: boolean;
@@ -45,6 +55,7 @@ export function DocumentSidebar({
   onNewProject,
   onFullTranslate,
   onStopTranslate,
+  onCancelTermReview,
   isFullTranslating,
   isCancelling,
   isPreparingFullTranslate,
@@ -62,7 +73,26 @@ export function DocumentSidebar({
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
   const [exportOpen, setExportOpen] = useState(false);
+  const [prepareElapsedSec, setPrepareElapsedSec] = useState(0);
   const exportMutation = useExportProject();
+  const navigate = useNavigate();
+
+  // 术语预检最长可挂 30 分钟（TIMEOUTS.TERM_REVIEW_PREPARE），
+  // 这里做一个本地计时，让用户至少能看到已用时而不是一个静止的禁用按钮。
+  useEffect(() => {
+    if (!isPreparingFullTranslate) {
+      return;
+    }
+    const startedAt = Date.now();
+    const timerId = window.setInterval(() => {
+      setPrepareElapsedSec(Math.floor((Date.now() - startedAt) / 1000));
+    }, 1000);
+    return () => {
+      window.clearInterval(timerId);
+      // 归零，避免下一次预检开始的第一秒沿用上一次的计时
+      setPrepareElapsedSec(0);
+    };
+  }, [isPreparingFullTranslate]);
 
   const totalParagraphs = sections.reduce((acc, section) => acc + section.total_paragraphs, 0);
   const approvedParagraphs = sections.reduce((acc, section) => acc + section.approved_count, 0);
@@ -177,6 +207,31 @@ export function DocumentSidebar({
             </div>
           )}
 
+          {isPreparingFullTranslate && (
+            <div className="rounded-md bg-primary-500/10 p-3">
+              <div className="flex items-start justify-between gap-3 text-sm">
+                <div className="min-w-0">
+                  <span className="font-medium text-primary-500">术语预检中...</span>
+                  {/* 用 text-text-secondary 而非 text-primary-400：后者在
+                      bg-primary-500/10 浅底上只有约 2.6:1，达不到 AA。 */}
+                  <p className="mt-1 text-xs text-text-secondary">
+                    已用时 {formatElapsed(prepareElapsedSec)}
+                  </p>
+                </div>
+                {onCancelTermReview && (
+                  <Button variant="outline" size="sm" onClick={onCancelTermReview}>
+                    取消预检
+                  </Button>
+                )}
+              </div>
+              {onCancelTermReview && (
+                <p className="mt-2 text-xs text-text-muted">
+                  取消只会中断本地请求，后端预检槽位可能仍被占用，稍后重试即可。
+                </p>
+              )}
+            </div>
+          )}
+
           {isOtherProjectTranslating && (
             <div className="rounded-md border border-amber-200 bg-amber-50 p-3 text-xs text-amber-800">
               另一个项目正在翻译中：
@@ -263,7 +318,10 @@ export function DocumentSidebar({
               leftIcon={<BarChart3 className="h-4 w-4" />}
               className="w-full"
               onClick={() => {
-                window.location.href = `/document/${projectId}/quality-report`;
+                // 必须走 react-router：整页跳转会销毁 fullTranslationService 单例与 SSE 流，
+                // 进行中的全文翻译会中断，内存里的草稿也会丢失。
+                onNavigate?.();
+                navigate(`/document/${projectId}/quality-report`);
               }}
             >
               查看质量报告

@@ -22,6 +22,7 @@ from src.core.glossary import infer_glossary_tags
 from src.core.longform_context import (
     build_article_challenge_payload,
     build_glossary_entries_from_terms,
+    build_previous_translation_pairs,
     build_section_context_payload,
     build_translation_guidelines,
 )
@@ -52,6 +53,9 @@ from src.core.glossary_prompt import (
     select_glossary_terms_for_text,
 )
 from src.core.project import ProjectManager
+from src.core.project_export_service import ExportBlockedError
+from src.core.protected_terms import desinicize_token
+from src.core.translation_qa import _POWER_UNIT_SINICIZED
 from src.core.title_guard import (
     enforce_translated_title,
     extract_title_requirements,
@@ -80,6 +84,37 @@ from src.llm.usage_metrics import llm_usage_metrics
 
 
 logger = logging.getLogger(__name__)
+
+# 章节标题翻译共用的「白名单铁律」，与
+# src/prompts/longform/translation/section_batch_translate.txt 第 7-14 行保持一致。
+# 标题走的是独立的提示词链路，若不显式带上这段铁律，标题会出现「吉瓦」「词元」
+# 一类正文里被明令禁止的写法，与正文形成两套术语。
+SECTION_TITLE_WHITELIST_RULES = """## 白名单铁律——永不翻译（最高优先级，压过下方一切"尽量译成中文"的要求）
+即便下文要求"白名单外复杂名词尽量译成中文"，**本清单中的词也绝不适用**，永远保持英文半角原形：
+1. **token**：一律小写英文 token，绝不写成 词元／令牌／代币／词块。✅"更快的 token"、"40 token/秒"；❌"更快的词元"、"40 词元/秒"。复合专名 Tokenomics 也保留英文（❌代币经济学）。
+2. **功率／能量单位**：GW／TW／MW／kW／W／GWh／MWh／kWh，以及任何含单位的复合／派生单位（W/cm²、W/m²、LPM、$/kW 等）永远保留半角原形、整体保留不拆译。✅"10GW"、"25 kW"、"50 W/cm²"；❌"10 吉瓦"、"25 千瓦"、"50 瓦/平方厘米"。原文用拼写形（gigawatts／kilowatts）时改写成符号（GW／kW），但绝不译成"吉瓦／千瓦"。GW/MW 显眼易留、kW/W 像中文而最易被误译——**kW≠千瓦、W≠瓦、W/cm²≠瓦/平方厘米**。其余计量/物理量符号（A/V/Hz/℃/bar/bps/GB·s⁻¹ 等）一律同理保留半角原形，禁译安培/伏特/赫兹/摄氏度。
+3. **代码标识符／函数名／文件名／命令／环境变量／行内代码**、**软件库与产品名**（vLLM、CUDA、Bedrock、Copilot 等）、**硬件型号与工艺节点**（GB300、H100、N2、18A 等）、**基准测试名**：保持英文原名，禁意译（❌ Bedrock→基石）。
+4. **URL／slug／被引用的英文文章·论文·报告标题／作者署名行**：保持英文。
+5. **无通行中文译名的公司/机构专名（含术语表未登记者）**：一律保留英文原形；拿不准即保留，禁臆造中文名（如 CoreWeave 类术语表未登记的新公司不得译成中文）。
+判定顺序：先看词是否落在本铁律或下方白名单；命中则永不翻译，不再走"尽量译成中文"。"""
+
+
+def _repair_title_sinicization(translated_title: Optional[str]) -> tuple[str, str]:
+    """修复标题里的白名单违规写法，返回 ``(修复后的标题, 未能修复的命中项)``。
+
+    token 汉化有确定性 fixer（``desinicize_token``），就地改回英文即可，不必丢弃
+    整个译名。功率单位没有 fixer——但它在正文里只是 warning，标题却把整条译名
+    丢掉、回退成英文原标题，反而让成品更糟；所以只记 warning、保留译名，与正文
+    口径一致（见 translation_qa 里 power_unit_sinicized 的降级说明）。
+    """
+    text = (translated_title or "").strip()
+    if not text:
+        return "", ""
+
+    repaired = desinicize_token(text)
+    match = _POWER_UNIT_SINICIZED.search(repaired)
+    return repaired, (match.group(0) if match else "")
+
 
 class BatchTranslationService:
     """批量翻译服务"""
@@ -1144,6 +1179,21 @@ class BatchTranslationService:
 
                 # 处理成功翻译的章节
                 all_translations[section.section_id] = result["translations"]
+
+                # 四步法降级（反思/润色异常回落裸初译）也要记一笔，否则 run-summary
+                # 的 error_count 为 0，未经润色的章节完全不可见（审计 LC7）
+                if result.get("degraded"):
+                    degraded_message = (
+                        f"Section {section.section_id} degraded to draft translation: "
+                        f"{result.get('degraded_reason') or 'unknown reason'}"
+                    )
+                    logger.warning("[%s] %s", project_id, degraded_message)
+                    self._progress_tracker.record_error(
+                        progress,
+                        degraded_message,
+                        section.section_id,
+                    )
+
                 conflict_ids = result.get("conflict_paragraph_ids", [])
                 if conflict_ids:
                     conflict_message = (
@@ -1264,10 +1314,26 @@ class BatchTranslationService:
                 )
                 export_report["markdown"]["generated"] = True
                 export_report["markdown"]["bytes"] = len(markdown_output.encode("utf-8"))
+            except ExportBlockedError as blocked_exc:
+                # QA 阻断：译文已落盘到 *_zh.blocked.md，用户拿得到可交付文本，
+                # 属于「已完成 + 待复核」，不能因此把整轮翻译标成未完成（审计 RR6）
+                export_report["markdown"]["error"] = str(blocked_exc)
+                export_report["markdown"]["blocked"] = True
+                blocked_path = getattr(blocked_exc, "blocked_path", None)
+                if blocked_path:
+                    export_report["markdown"]["blocked_path"] = str(blocked_path)
+                logger.warning(
+                    "[%s] Markdown export blocked by QA: %s",
+                    project_id,
+                    blocked_exc,
+                )
             except Exception as export_exc:
                 export_report["markdown"]["error"] = str(export_exc)
 
-            is_complete = translation_complete and export_report["markdown"]["generated"]
+            is_complete = translation_complete and (
+                export_report["markdown"]["generated"]
+                or export_report["markdown"].get("blocked", False)
+            )
 
             progress.finished_at = datetime.now()
             progress.translated_paragraphs = actual_translated
@@ -2126,24 +2192,32 @@ class BatchTranslationService:
             "is_complete": is_complete,
         })
 
-    async def cancel_translation(self, project_id: str) -> Dict:
-        """
-        取消翻译任务
+    @classmethod
+    def cancel_run(
+        cls,
+        project_id: str,
+        *,
+        registry=None,
+        progress_tracker: Optional[ProgressTracker] = None,
+    ) -> Dict:
+        """取消翻译任务（不需要服务实例）。
 
-        Args:
-            project_id: 项目ID
-
-        Returns:
-            Dict: 取消结果
+        取消只依赖运行登记与进度缓存，**不碰 LLM**。做成 classmethod 是为了让
+        stop 端点在 LLM 配置损坏时仍能取消正在跑的翻译——否则"配置坏了导致
+        翻译卡住"和"取消不了"会同时发生。两个参数缺省时用模块级/类级单例，
+        实例方法会把自己的依赖传进来。
         """
-        active_run = self._run_registry.mark_active_cancelled(project_id)
+        registry = registry or translation_run_registry
+        tracker = progress_tracker or cls._shared_progress_tracker
+
+        active_run = registry.mark_active_cancelled(project_id)
         if active_run is None:
-            self._clear_cancelled(project_id)
+            registry.clear_cancelled(project_id)
             return {"status": "not_found", "project_id": project_id}
 
         # Only a registry-owned run can be cancelled. Completed progress remains
         # cached for status polling and must never recreate an active slot.
-        progress = self._progress_cache().get(project_id)
+        progress = tracker.get(project_id)
 
         if (
             progress is not None
@@ -2151,7 +2225,8 @@ class BatchTranslationService:
             and progress.run_id == active_run.run_id
         ):
             progress.cancel_requested = True
-            self._touch_progress(progress, step="取消中")
+            progress.current_step = "取消中"
+            tracker.touch(progress)
             return {
                 "status": "cancelling",
                 "project_id": project_id,
@@ -2163,6 +2238,28 @@ class BatchTranslationService:
             "project_id": project_id,
             "run_id": active_run.run_id,
         }
+
+    async def cancel_translation(self, project_id: str) -> Dict:
+        """
+        取消翻译任务
+
+        Args:
+            project_id: 项目ID
+
+        Returns:
+            Dict: 取消结果
+        """
+        result = self.cancel_run(
+            project_id,
+            registry=self._run_registry,
+            progress_tracker=self._progress_cache(),
+        )
+        # 实例路径额外落一次 run-state 工件（classmethod 版拿不到 artifact
+        # service，取消本身不依赖它）。
+        progress = self._progress_cache().get(project_id)
+        if result.get("status") == "cancelling" and progress is not None:
+            self._touch_progress(progress)
+        return result
 
     def _can_transition_to_active_status(self, status: ProjectStatus) -> bool:
         """Whether service can temporarily move project into active translation status."""
@@ -2337,10 +2434,26 @@ class BatchTranslationService:
         if not pending:
             return
 
+        # 标题链路此前完全绕过词表与白名单，导致标题与正文两套术语（审计 LC2）。
         try:
+            title_glossary_block = self._build_title_glossary_block(
+                project_id,
+                "\n".join(item["title"] for item in pending),
+                None,
+            )
+        except Exception as exc:
+            logger.warning("Failed to build section title glossary block: %s", exc)
+            title_glossary_block = "(无命中术语)"
+
+        try:
+            # 基类默认实现已接受这两个关键字参数，无需再靠捕获 TypeError 兼容——
+            # 那种写法会把方法体内部抛出的 TypeError 一并吞掉，静默触发第二次
+            # 完整 LLM 调用，且第二次丢掉词表与白名单，成本翻倍还让约束失效。
             translated_map = self.llm.translate_all_section_titles(
                 pending,
                 article_theme=analysis.theme,
+                glossary_block=title_glossary_block,
+                whitelist_rules=SECTION_TITLE_WHITELIST_RULES,
             )
         except Exception as exc:
             logger.error("Failed to batch translate section titles: %s", exc)
@@ -2350,7 +2463,23 @@ class BatchTranslationService:
             if not section.title or section.title_translation:
                 continue
             expected_title_translation = section.title_translation
-            translated_title = str(translated_map.get(section.section_id, "")).strip()
+            raw_title = str(translated_map.get(section.section_id, "")).strip()
+            translated_title, violation = _repair_title_sinicization(raw_title)
+            if translated_title != raw_title:
+                logger.info(
+                    "Repaired sinicized token in section title: %s -> %s",
+                    raw_title,
+                    translated_title,
+                )
+            if violation:
+                # 保留译名、只记 warning：丢弃会让整章标题回退成英文，比一个
+                # 「吉瓦」更糟。功率单位在正文里同样只是 warning。
+                logger.warning(
+                    "Section title keeps a sinicized power unit %r (title=%s); "
+                    "review before publishing.",
+                    violation,
+                    translated_title,
+                )
             if translated_title:
                 persisted_section, applied = (
                     self.project_manager.update_section_title_translation_locked(
@@ -2390,8 +2519,19 @@ class BatchTranslationService:
                             if section_index < len(project.sections) - 1
                             else ""
                         ),
+                        "glossary_block": title_glossary_block,
+                        "whitelist_rules": SECTION_TITLE_WHITELIST_RULES,
                     },
                 )
+                translated_title, violation = _repair_title_sinicization(translated_title)
+                if violation:
+                    # 同上：保留译名只记 warning，丢弃反而让标题退回英文。
+                    logger.warning(
+                        "Fallback section title keeps a sinicized power unit %r "
+                        "(title=%s); review before publishing.",
+                        violation,
+                        translated_title,
+                    )
                 persisted_section, applied = (
                     self.project_manager.update_section_title_translation_locked(
                         project_id,
@@ -2522,6 +2662,22 @@ class BatchTranslationService:
             "format_token_count": token_count,
             "term_usage": self.context_manager.snapshot_term_usage(),
         }
+
+        # 注入前文译文：section 模式此前从不传这一项，提示词里的「前文译文」恒为
+        # 「无」，跨章节首现判定与风格锚点全部失效（审计 LC1）。
+        # feedback_from_previous_sections 由四步法 reflection 产出，section 模式下
+        # 永远为空，故不一并注入。
+        previous_translations = build_previous_translation_pairs(
+            self.context_manager,
+            section.section_id,
+            prev_section_id=(
+                all_sections[section_index - 1].section_id
+                if section_index > 0
+                else None
+            ),
+        )
+        if previous_translations:
+            context["previous_translations"] = previous_translations
 
         if not section_lines:
             return dehydrated_translations

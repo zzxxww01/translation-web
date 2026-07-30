@@ -432,6 +432,7 @@ export function DocumentFeature() {
       isFullTranslating={effectiveIsFullTranslating}
       isCancelling={effectiveIsCancelling}
       isPreparingFullTranslate={isPreparingFullTranslate}
+      onCancelTermReview={handleCancelTermReview}
       fullTranslateProgress={effectiveProgress}
       currentStep={effectiveCurrentStep}
       activeTranslationProjectId={

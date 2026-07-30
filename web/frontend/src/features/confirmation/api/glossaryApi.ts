@@ -63,6 +63,13 @@ export interface BatchGlossaryRequest {
   tags?: string[] | null;
 }
 
+/**
+ * 只读查询的可选项（用于切换项目时取消过期请求）
+ */
+export interface GlossaryFetchOptions {
+  signal?: AbortSignal;
+}
+
 export interface TermReviewJob {
   job_id: string;
   project_id: string;
@@ -123,17 +130,18 @@ export const glossaryApi = {
   /**
    * 获取项目术语表
    */
-  async getProjectGlossary(projectId: string): Promise<Glossary> {
+  async getProjectGlossary(projectId: string, options?: GlossaryFetchOptions): Promise<Glossary> {
     return apiClient.get<Glossary>(
-      `/projects/${projectId}/glossary`
+      `/projects/${projectId}/glossary`,
+      { signal: options?.signal }
     );
   },
 
   /**
    * 获取全局术语表
    */
-  async getGlobalGlossary(): Promise<Glossary> {
-    return apiClient.get<Glossary>('/glossary');
+  async getGlobalGlossary(options?: GlossaryFetchOptions): Promise<Glossary> {
+    return apiClient.get<Glossary>('/glossary', { signal: options?.signal });
   },
 
   /**
@@ -168,10 +176,12 @@ export const glossaryApi = {
     original: string,
     updates: Partial<AddTermRequest>
   ): Promise<{ message: string; term: GlossaryTerm }> {
-    const encodedOriginal = encodeURIComponent(original);
+    // 原文走 query 参数：拼进路径段时 uvicorn 会把 %2F 还原成真斜杠，
+    // 导致 "W/m²" 这类术语永远匹配不到路由
     return apiClient.put<{ message: string; term: GlossaryTerm }>(
-      `/glossary/terms/${encodedOriginal}`,
-      updates
+      '/glossary/term',
+      updates,
+      { params: { original } }
     );
   },
 
@@ -181,10 +191,9 @@ export const glossaryApi = {
   async deleteGlobalTerm(
     original: string
   ): Promise<{ message: string; original: string }> {
-    const encodedOriginal = encodeURIComponent(original);
-
     return apiClient.delete<{ message: string; original: string }>(
-      `/glossary/terms/${encodedOriginal}`
+      '/glossary/term',
+      { params: { original } }
     );
   },
 
@@ -196,10 +205,10 @@ export const glossaryApi = {
     original: string,
     updates: Partial<AddTermRequest>
   ): Promise<{ message: string; term: GlossaryTerm }> {
-    const encodedOriginal = encodeURIComponent(original);
     return apiClient.put<{ message: string; term: GlossaryTerm }>(
-      `/projects/${projectId}/glossary/terms/${encodedOriginal}`,
-      updates
+      `/projects/${projectId}/glossary/term`,
+      updates,
+      { params: { original } }
     );
   },
 
@@ -210,10 +219,9 @@ export const glossaryApi = {
     projectId: string,
     original: string
   ): Promise<{ message: string; original: string }> {
-    const encodedOriginal = encodeURIComponent(original);
-
     return apiClient.delete<{ message: string; original: string }>(
-      `/projects/${projectId}/glossary/terms/${encodedOriginal}`
+      `/projects/${projectId}/glossary/term`,
+      { params: { original } }
     );
   },
 
@@ -339,17 +347,25 @@ export const glossaryApi = {
   },
 
   async getProjectRecommendations(
-    projectId: string
+    projectId: string,
+    options?: GlossaryFetchOptions
   ): Promise<{ project_id: string; recommendations: GlossaryRecommendation[] }> {
-    return apiClient.get(`/projects/${projectId}/glossary/recommendations`);
+    return apiClient.get(`/projects/${projectId}/glossary/recommendations`, {
+      signal: options?.signal,
+    });
   },
 
   async promoteProjectTerm(
     projectId: string,
     original: string
   ): Promise<{ message: string; term: GlossaryTerm }> {
-    const encodedOriginal = encodeURIComponent(original);
-    return apiClient.post(`/projects/${projectId}/glossary/terms/${encodedOriginal}/promote`);
+    // 走 query 参数：含斜杠的术语（W/cm²、$/kW）拼进路径段会被服务端还原成
+    // 真斜杠，路由匹配不上
+    return apiClient.post(
+      `/projects/${projectId}/glossary/term/promote`,
+      undefined,
+      { params: { original } }
+    );
   },
 
   /**

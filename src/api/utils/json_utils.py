@@ -5,7 +5,11 @@ JSON 解析工具函数
 """
 
 import json
+import logging
 from typing import Any, Dict, List, Union
+
+
+logger = logging.getLogger(__name__)
 
 
 def parse_llm_json_response(response: str) -> Dict[str, Any]:
@@ -36,6 +40,8 @@ def parse_llm_json_response(response: str) -> Dict[str, Any]:
     try:
         return json.loads(text)
     except json.JSONDecodeError:
+        # 解析失败仍返回 {}（调用方依赖该语义），但记录首段原文以便定位截断/赘述
+        logger.warning("parse_llm_json_response failed, head=%r", text[:200])
         return {}
 
 

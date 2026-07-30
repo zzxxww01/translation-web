@@ -11,7 +11,15 @@ from .translation_qa import run_deterministic_qa
 
 
 class ExportBlockedError(ValueError):
-    """Raised when deterministic QA finds critical issues in the export (A-5)."""
+    """Raised when deterministic QA finds critical issues in the export (A-5).
+
+    ``blocked_path`` 指向已落盘的 ``*_zh.blocked.md``——译文内容在抛错前就
+    写好了，用户永远拿得到可交付文本，不会因为一条 QA 误报而零产出。
+    """
+
+    def __init__(self, message: str, blocked_path: Path | None = None) -> None:
+        super().__init__(message)
+        self.blocked_path = blocked_path
 
 
 class ProjectExportService:
@@ -191,7 +199,9 @@ class ProjectExportService:
             for paragraph in section.paragraphs:
                 if paragraph.is_metadata:
                     continue
-                if paragraph.element_type in {ElementType.IMAGE, ElementType.TABLE, ElementType.CODE}:
+                # 表格现在会采用译文（结构校验通过时），因此纳入漏译预检；
+                # 图片段从不送翻、代码块不译，继续排除。
+                if paragraph.element_type in {ElementType.IMAGE, ElementType.CODE}:
                     continue
 
                 translated = paragraph.best_translation_text(fallback_to_source=False).strip()
@@ -208,7 +218,11 @@ class ProjectExportService:
                     )
                     continue
 
-                if translated == paragraph.source.strip():
+                # 纯数字表格的「译文」与原表逐字相同是正常的，不算漏译。
+                if (
+                    translated == paragraph.source.strip()
+                    and paragraph.element_type != ElementType.TABLE
+                ):
                     issues.append(
                         {
                             "type": "untranslated_paragraph",
@@ -297,13 +311,14 @@ class ProjectExportService:
                 lines.append(self._inline_recovery.render_block_markdown(block, fallback_to_source=True))
                 lines.append("")
 
-        content = postprocess_markdown("\n".join(lines))
+        source_markdown = self.read_source_markdown(project_id)
+        content = postprocess_markdown("\n".join(lines), source=source_markdown)
         # A-5：传入英文源文，激活 image/heading/link/blockquote 对照检查。
         payload = self.build_export_lint_payload(
             meta,
             sections,
             content=content,
-            source=self.read_source_markdown(project_id),
+            source=source_markdown,
             fallback_block_ids=self._inline_recovery.fallback_block_ids,
         )
         self.write_export_lint_artifact(project_id, payload)
@@ -315,16 +330,23 @@ class ProjectExportService:
             if issue.get("severity") == "error"
             and str(issue.get("type", "")).startswith("qa_")
         ]
+        export_name = self.build_export_filename(meta, format="zh")
         if critical_qa:
+            # 先落盘再抛：翻译已经花掉全部成本，一条 QA 命中不该等于零产出。
+            blocked_name = f"{export_name[: -len('_zh.md')]}_zh.blocked.md"
+            blocked_path = self._project_dir(project_id) / blocked_name
+            self._write_text(blocked_path, content)
             summary = "; ".join(
                 f"{issue.get('type')}: {issue.get('message', '')}"
                 for issue in critical_qa[:5]
             )
             raise ExportBlockedError(
                 f"导出被 QA 阻断（{len(critical_qa)} 个 critical 问题）：{summary}"
+                f"；译文已保存到 {blocked_path.name}，修正后重新导出即可",
+                blocked_path=blocked_path,
             )
 
-        output_path = self._project_dir(project_id) / self.build_export_filename(meta, format="zh")
+        output_path = self._project_dir(project_id) / export_name
         self._write_text(output_path, content)
         return content
 

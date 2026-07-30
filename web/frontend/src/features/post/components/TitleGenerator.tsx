@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
 import { Sparkles, Copy, Loader2 } from 'lucide-react';
 import { copyToClipboard } from '@/shared/utils';
 import { TITLE_INSTRUCTION_MAX_LENGTH } from '../types';
@@ -26,11 +27,13 @@ export function TitleGenerator({
     contentIdentity: string;
     titles: string[];
   } | null>(null);
-  const titles =
-    titleResult?.contentIdentity === contentIdentity ? titleResult.titles : [];
+  // 已生成的标题一律保留：内容变化只标记为「已过期」，不清空，
+  // 否则在译文里敲一个字符或一次请求失败就会把用户还没复制的结果抹掉
+  const titles = titleResult?.titles ?? [];
+  const isStale =
+    titleResult !== null && titleResult.contentIdentity !== contentIdentity;
 
   const handleGenerate = async () => {
-    setTitleResult({ contentIdentity, titles: [] });
     try {
       const result = await onGenerate(instruction.trim() || undefined);
       if (result.length > 0) {
@@ -54,6 +57,9 @@ export function TitleGenerator({
           <div className="flex items-center gap-2">
             <Sparkles className="h-4 w-4 text-primary" />
             <h4 className="text-sm font-semibold">生成标题</h4>
+            {isStale && titles.length > 0 && (
+              <Badge variant="outline">内容已变更</Badge>
+            )}
           </div>
           <Button
             size="sm"
@@ -82,6 +88,12 @@ export function TitleGenerator({
             写一两个词即可，系统会自动补全为完整 prompt
           </p>
         </div>
+
+        {isStale && titles.length > 0 && (
+          <p className="text-xs text-muted-foreground">
+            这批标题基于此前的内容生成，仍可点击复制；如需匹配当前内容请重新生成。
+          </p>
+        )}
 
         {titles.length > 0 ? (
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">

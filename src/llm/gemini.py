@@ -43,6 +43,10 @@ from .usage_metrics import llm_usage_metrics
 
 
 logger = logging.getLogger(__name__)
+
+# 传输层超时相对 future 门限的比例。取小于 1 让 httpx 先于 future.result() 醒来，
+# 这样超时的 worker 通常已经退出，_timeout_leak_count 才只统计真正的泄漏。
+_TRANSPORT_TIMEOUT_RATIO = 0.9
 _genai_module: ModuleType | None = None
 
 
@@ -511,6 +515,15 @@ class GeminiProvider(LLMProvider):
         thread_name_prefix="gemini-timeout",
     )
 
+    # 超时后无法回收的 worker 计数：future.cancel() 对已开始执行的任务返回 False，
+    # 线程要等传输层超时才会退出。累计该计数便于把「所有调用瞬间超时」定位到
+    # 本地线程池被挤满，而不是误判为上游劣化（审计 BE8）。
+    _timeout_leak_lock = Lock()
+    _timeout_leak_count = 0
+    # 装的 google-genai 不支持 per-request http_options 时置位，避免每个请求都
+    # 先失败一次再重发（旧 SDK 环境等于每次两轮往返）。
+    _http_options_unsupported = False
+
     def _generate_with_timeout_fn(self, fn, timeout: int | None):
         if not timeout or timeout <= 0:
             return fn()
@@ -518,7 +531,17 @@ class GeminiProvider(LLMProvider):
         try:
             return future.result(timeout=timeout)
         except FutureTimeoutError:
-            future.cancel()
+            if not future.cancel():
+                with GeminiProvider._timeout_leak_lock:
+                    GeminiProvider._timeout_leak_count += 1
+                    leaked = GeminiProvider._timeout_leak_count
+                logger.warning(
+                    "[Gemini] timeout worker still running after %ss; pool workers occupied so far=%d "
+                    "(pool size=%d). 若该计数持续增长，说明传输层超时未生效或代理挂死。",
+                    timeout,
+                    leaked,
+                    getattr(self._timeout_executor, "_max_workers", -1),
+                )
             raise
 
     def _resolve_max_output_tokens(self) -> int:
@@ -721,7 +744,42 @@ class GeminiProvider(LLMProvider):
         )
 
     @staticmethod
+    def _as_non_retryable(exc: Exception) -> Exception:
+        """把已判定为不可重试的异常换成 fallback 层能识别的类型（审计 BE9）。
+
+        适配器只认类型、不认具体 provider 的判定函数，避免强耦合；此处延迟导入
+        provider_adapter，防止 gemini ←→ provider_adapter 的模块级循环导入。
+        原始异常保留在 __cause__ 中，消息原样透传给上层错误映射。
+        """
+        try:
+            from .provider_adapter import LLMNonRetryableError
+        except Exception:  # pragma: no cover - 兜底，导入失败时不改变原有行为
+            return exc
+
+        if isinstance(exc, LLMNonRetryableError):
+            return exc
+        wrapped = LLMNonRetryableError(str(exc))
+        wrapped.__cause__ = exc
+        return wrapped
+
+    @staticmethod
     def _is_non_retryable_error(error_str: str) -> bool:
+        text = error_str.lower()
+        return (
+            GeminiProvider._is_provider_agnostic_failure(error_str)
+            or "prompt is too long" in text
+            or "too many tokens" in text
+            or "context length" in text
+        )
+
+    @staticmethod
+    def _is_provider_agnostic_failure(error_str: str) -> bool:
+        """换 key／换模型／换 provider 都救不回来的失败。
+
+        只有这一类才向上层 fallback 宣告"别试了"。上下文超长一类**不算**：
+        它是模型相关的，换到上下文窗口更大的模型或另一家 provider 仍有机会
+        成功，整盘中止会白白砍掉本可成功的回退。
+        """
         text = error_str.lower()
         return (
             "invalid argument" in text
@@ -729,9 +787,6 @@ class GeminiProvider(LLMProvider):
             or "unsupported response mime type" in text
             or "candidate was blocked" in text
             or ("safety" in text and "blocked" in text)
-            or "prompt is too long" in text
-            or "too many tokens" in text
-            or "context length" in text
         )
 
     def _build_attempt_plan(self, primary_model: str) -> List[GeminiAttempt]:
@@ -789,12 +844,41 @@ class GeminiProvider(LLMProvider):
             }
             if response_mime_type:
                 config["response_mime_type"] = response_mime_type
+            if timeout and timeout > 0 and not GeminiProvider._http_options_unsupported:
+                # 把超时下推到传输层：google-genai 在 HttpOptions.timeout 为空时会显式
+                # 把 timeout=None 交给 httpx（等于禁用超时），挂死的请求永远不返回，
+                # _timeout_executor 的 worker 也就永久泄漏（审计 BE8）。timeout 逐调用
+                # 可变而 client 按 api_key 缓存，因此只能放在 per-request config 里。
+                # HttpOptions.timeout 单位是毫秒；取 90% 让传输层先于 future 门限醒来，
+                # 否则 worker 必然仍在跑，泄漏计数会次次误报而失去信噪比。
+                config["http_options"] = {
+                    "timeout": int(timeout * _TRANSPORT_TIMEOUT_RATIO * 1000)
+                }
             with self._temporary_proxy_env():
-                resp = client.models.generate_content(
-                    model=attempt.model_name,
-                    contents=prompt,
-                    config=config,
-                )
+                try:
+                    resp = client.models.generate_content(
+                        model=attempt.model_name,
+                        contents=prompt,
+                        config=config,
+                    )
+                except (TypeError, ValueError) as exc:
+                    # 旧版 SDK 不认 request 级 http_options（pydantic 校验失败会抛
+                    # ValidationError，它是 ValueError 子类）：退回不带传输层超时的调用。
+                    if "http_options" not in config or "http_options" not in str(exc):
+                        raise
+                    # 记住这套 SDK 不支持，避免后续每个请求都白跑一轮往返。
+                    GeminiProvider._http_options_unsupported = True
+                    logger.warning(
+                        "[Gemini] installed google-genai rejects per-request http_options; "
+                        "falling back without transport timeout for the rest of this process. err=%s",
+                        exc,
+                    )
+                    config.pop("http_options", None)
+                    resp = client.models.generate_content(
+                        model=attempt.model_name,
+                        contents=prompt,
+                        config=config,
+                    )
             text = resp.text
             if text is None:
                 # 候选被安全策略拦截或无有效候选时 resp.text 为 None。抛可重试的
@@ -943,7 +1027,12 @@ class GeminiProvider(LLMProvider):
                         attempt.key_role,
                         error_text,
                     )
-                    raise exc
+                    # 只有 provider 无关的失败才向 fallback 层宣告"整盘别试了"；
+                    # 上下文超长这类换个更大窗口的模型/provider 仍可能成功，
+                    # 抛原异常让适配器继续走它的 attempt plan。
+                    if self._is_provider_agnostic_failure(error_text):
+                        raise self._as_non_retryable(exc)
+                    raise
 
                 has_fresh_attempt = plan_index < len(attempt_plan) - 1
                 # auth 错误不进退避循环，但仍允许换一个 key/model 再试一次（另一个 key 可能有效）
@@ -1578,8 +1667,24 @@ class GeminiProvider(LLMProvider):
         self,
         title: str,
         context: Optional[Dict[str, Any]] = None,
+        *,
+        glossary_block: str = "",
+        whitelist_rules: str = "",
     ) -> str:
-        """Translate a section title with section-aware context."""
+        """Translate a section title with section-aware context.
+
+        ``glossary_block`` / ``whitelist_rules`` 为可选约束段（术语表块与「永不翻译」
+        白名单铁律），缺省为空串时行为与此前一致。也兼容通过 ``context`` 字典传入
+        （键名 ``glossary`` / ``glossary_block`` / ``whitelist_rules``）。
+        """
+        if context:
+            glossary_block = glossary_block or str(
+                context.get("glossary") or context.get("glossary_block") or ""
+            )
+            whitelist_rules = whitelist_rules or str(
+                context.get("whitelist_rules") or ""
+            )
+
         context_lines: List[str] = []
         if context:
             if context.get("article_theme"):
@@ -1593,17 +1698,24 @@ class GeminiProvider(LLMProvider):
             if context.get("next_section_title"):
                 context_lines.append(f"- Next section: {context['next_section_title']}")
 
+        # 模板可能尚未加上 {glossary}/{whitelist_rules} 占位符：str.format 会忽略多余
+        # 关键字，故这里恒传两项，不会因模板未同步而报错。
         prompt = self.prompt_manager.get(
             "longform/auxiliary/section_title_translate",
             context_block="\n".join(context_lines) if context_lines else "- None",
             title=title,
+            glossary=glossary_block.strip() or "（无）",
+            whitelist_rules=whitelist_rules.strip(),
         )
         return self.generate(prompt, temperature=0.3)
 
     def translate_all_section_titles(
         self,
         sections: List[Dict[str, Any]],
+        *,
         article_theme: str = "",
+        glossary_block: str = "",
+        whitelist_rules: str = "",
     ) -> Dict[str, str]:
         """Translate all section titles in a single JSON API call.
 
@@ -1611,6 +1723,11 @@ class GeminiProvider(LLMProvider):
         requests a JSON response ``{"translations": {"<id>": "<中文标题>"}}``,
         and returns the mapping.  If parsing fails or a section is missing,
         callers should fall back to ``translate_section_title`` per-entry.
+
+        ``glossary_block``（术语表块）与 ``whitelist_rules``（「永不翻译」白名单铁律）
+        为可选约束段：此前标题链路完全绕过词表与白名单，导致标题与正文两套术语，
+        且一个「吉瓦/词元」就能让整篇导出被 QA 阻断（审计 LC2）。缺省空串时提示词
+        与改动前完全一致。
         """
         if not sections:
             return {}
@@ -1629,6 +1746,15 @@ class GeminiProvider(LLMProvider):
             chapter_lines.append(", ".join(parts))
 
         theme_line = f"文章主题：{article_theme}" if article_theme else ""
+        # filter(None, ...) 会吃掉纯空串分隔项，故各约束段自带前后换行保证留白
+        whitelist_section = (
+            "\n" + whitelist_rules.strip() + "\n" if whitelist_rules.strip() else ""
+        )
+        glossary_section = (
+            "\n## 术语表\n" + glossary_block.strip() + "\n"
+            if glossary_block.strip()
+            else ""
+        )
         prompt = "\n".join(
             filter(
                 None,
@@ -1636,8 +1762,10 @@ class GeminiProvider(LLMProvider):
                     "你是一位资深中英双语编辑，尤其擅长硬核科技长文领域。"
                     "请将下面所有章节标题翻译为简洁、自然、契合文章上下文的中文。",
                     "",
+                    whitelist_section,
                     theme_line,
                     "",
+                    glossary_section,
                     "## 章节列表（id, 原标题, 前后章节供参考）",
                     "\n".join(chapter_lines),
                     "",
@@ -1665,10 +1793,30 @@ class GeminiProvider(LLMProvider):
                 exc,
             )
 
-        # Fallback: delegate to base class (loops over translate_section_title)
-        return super().translate_all_section_titles(
-            sections, article_theme=article_theme
-        )
+        # Fallback: 逐条翻译。这里不走 super()，因为基类构造的 context 无法带上词表与
+        # 白名单铁律，兜底路径会重新退化成零约束翻译（审计 LC2）。
+        results: Dict[str, str] = {}
+        for sec in sections:
+            sec_id = sec.get("id", "")
+            title = sec.get("title", "")
+            if not title:
+                continue
+            context = {
+                "article_theme": article_theme,
+                "context": "Section heading inside a long-form article",
+                "previous_section_title": sec.get("prev", ""),
+                "next_section_title": sec.get("next", ""),
+            }
+            try:
+                results[sec_id] = self.translate_section_title(
+                    title,
+                    context=context,
+                    glossary_block=glossary_block,
+                    whitelist_rules=whitelist_rules,
+                )
+            except Exception:
+                results[sec_id] = title  # keep original on failure
+        return results
 
     def _build_batch_translation_prompt(
         self,

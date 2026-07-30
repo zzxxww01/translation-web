@@ -3,6 +3,9 @@
 from __future__ import annotations
 
 import asyncio
+import logging
+import uuid
+from typing import NoReturn
 
 from src.llm.errors import (
     LLMConfigurationError,
@@ -15,6 +18,9 @@ from src.llm.errors import (
 )
 
 from ..middleware import ServiceUnavailableException
+
+
+logger = logging.getLogger(__name__)
 
 
 def format_llm_exception(exc: Exception, *, operation: str, timeout_s: int | None = None) -> str:
@@ -55,10 +61,16 @@ def format_llm_exception(exc: Exception, *, operation: str, timeout_s: int | Non
     if isinstance(exc, LLMConfigurationError):
         return f"{operation} failed: LLM configuration is invalid."
 
-    text = str(exc).strip()
-    if text:
-        return f"{operation} failed: {text}"
-    return f"{operation} failed."
+    # BE-06：未识别异常不再把 str(exc) 原样回传给客户端（会泄露异常类型、属性名等
+    # 内部实现细节）。对外只给一个关联 id，真实异常写日志，排查时按 ref 检索。
+    ref = uuid.uuid4().hex[:8]
+    logger.error(
+        "%s failed with unexpected error (ref=%s)",
+        operation,
+        ref,
+        exc_info=exc,
+    )
+    return f"{operation} failed: unexpected server error (ref={ref})."
 
 
 def raise_llm_service_unavailable(
@@ -66,7 +78,13 @@ def raise_llm_service_unavailable(
     operation: str,
     exc: Exception,
     timeout_s: int | None = None,
-) -> None:
+) -> NoReturn:
+    """永不返回。
+
+    调用方（如 translate_posts）依赖这一点：`except` 块之后紧跟着对
+    `translation` 之类局部变量的使用，若本函数存在任何早返回路径，那里会
+    直接 NameError。用 NoReturn 让类型检查器替我们守住这个契约。
+    """
     raise ServiceUnavailableException(
         detail=format_llm_exception(exc, operation=operation, timeout_s=timeout_s),
         error_code="LLM_UNAVAILABLE",

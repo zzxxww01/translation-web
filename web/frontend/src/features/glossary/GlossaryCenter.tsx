@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowLeft, BookOpen, Globe2, Languages, Plus, Search, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
@@ -31,6 +31,12 @@ import { TermEditor } from './components/TermEditor';
 import { BatchActionsBar } from './components/BatchActionsBar';
 import { RecommendationsList } from './components/RecommendationsList';
 
+/** 把后端 detail 拼进提示文案，避免只看到「保存术语失败」无从排查 */
+function describeError(error: unknown, fallback: string): string {
+  const detail = error instanceof Error ? error.message.trim() : '';
+  return detail ? `${fallback}：${detail}` : fallback;
+}
+
 export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global', onBack }: GlossaryCenterProps) {
   const [activeScope, setActiveScope] = useState<GlossaryScope>(projectId ? defaultScope : 'global');
   const [projectTerms, setProjectTerms] = useState<GlossaryTerm[]>([]);
@@ -54,15 +60,28 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
     setActiveScope(projectId ? defaultScope : 'global');
   }, [defaultScope, projectId]);
 
+  // 单调递增的加载代次：快速切项目时用于丢弃旧项目的迟到响应
+  const loadGenerationRef = useRef(0);
+  const loadAbortRef = useRef<AbortController | null>(null);
+
   const loadData = useCallback(async () => {
+    const generation = ++loadGenerationRef.current;
+    loadAbortRef.current?.abort();
+    const controller = new AbortController();
+    loadAbortRef.current = controller;
+    const fetchOptions = { signal: controller.signal };
+
     setIsLoading(true);
     try {
-      const requests: Promise<unknown>[] = [glossaryApi.getGlobalGlossary()];
+      const requests: Promise<unknown>[] = [glossaryApi.getGlobalGlossary(fetchOptions)];
       if (projectId) {
-        requests.unshift(glossaryApi.getProjectGlossary(projectId));
-        requests.push(glossaryApi.getProjectRecommendations(projectId));
+        requests.unshift(glossaryApi.getProjectGlossary(projectId, fetchOptions));
+        requests.push(glossaryApi.getProjectRecommendations(projectId, fetchOptions));
       }
       const results = await Promise.all(requests);
+      if (generation !== loadGenerationRef.current) {
+        return;
+      }
       if (projectId) {
         const [projectGlossary, globalGlossary, recommendationData] = results as [
           { terms: GlossaryTerm[] },
@@ -78,15 +97,27 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
         setRecommendations([]);
       }
     } catch (error) {
+      // 已被新一轮加载取代（含主动 abort）时静默丢弃，不打断新项目的界面
+      if (generation !== loadGenerationRef.current) {
+        return;
+      }
       console.error('Failed to load glossary center:', error);
       toast.error('加载术语中心失败');
     } finally {
-      setIsLoading(false);
+      if (generation === loadGenerationRef.current) {
+        setIsLoading(false);
+      }
     }
   }, [projectId]);
 
   useEffect(() => {
     void loadData();
+    return () => {
+      // 卸载或切项目时作废本轮加载，避免旧项目术语覆盖新项目
+      loadGenerationRef.current += 1;
+      loadAbortRef.current?.abort();
+      loadAbortRef.current = null;
+    };
   }, [loadData]);
 
   useEffect(() => {
@@ -269,7 +300,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
       toast.success(isCreating ? '术语已创建' : '术语已更新');
     } catch (error) {
       console.error('Failed to save glossary term:', error);
-      toast.error('保存术语失败');
+      toast.error(describeError(error, '保存术语失败'));
     } finally {
       setIsSaving(false);
     }
@@ -295,7 +326,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
       toast.success('术语已删除');
     } catch (error) {
       console.error('Failed to delete glossary term:', error);
-      toast.error('删除术语失败');
+      toast.error(describeError(error, '删除术语失败'));
     }
   }
 

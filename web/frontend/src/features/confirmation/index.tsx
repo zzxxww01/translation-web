@@ -22,6 +22,8 @@ import { useEffect, useCallback, useState } from 'react';
 
 import { Upload } from 'lucide-react';
 
+import { toast } from 'sonner';
+
 import { useConfirmationWorkflow } from './hooks/useConfirmationWorkflow';
 
 import { useConfirmationStore } from './stores/confirmationStore';
@@ -38,14 +40,11 @@ import { NavigationControls } from './components/common/NavigationControls';
 
 import { ImportVersionModal } from './components/modals/ImportVersionModal';
 
-import { AlignmentModal } from './components/modals/AlignmentModal';
-
 import { Button } from '@/components/ui/button-extended';
 
 import { cn } from '@/shared/utils';
 
 import { confirmationApi } from './api/confirmationApi';
-import type { UnalignedItem } from './types';
 
 const RETRANSLATE_SYNC_RETRIES = 6;
 const RETRANSLATE_SYNC_DELAY_MS = 250;
@@ -117,13 +116,7 @@ export function ConfirmationFeature({
 
   const [isImportModalOpen, setIsImportModalOpen] = useState(false);
 
-  const [isAlignmentModalOpen, setIsAlignmentModalOpen] = useState(false);
-
-  const [unalignedItems, setUnalignedItems] = useState<UnalignedItem[]>([]);
-
   const [isImporting, setIsImporting] = useState(false);
-
-  const [isAligning, setIsAligning] = useState(false);
 
 
 
@@ -369,21 +362,19 @@ export function ConfirmationFeature({
 
 
 
-        // 如果有未对齐的段落，显示对齐模态框
+        // 后端尚无对齐接口，手动对齐能力未实现：如实告知未对齐数量，不再弹出「假成功」的对齐弹窗
 
-        if (result && result.unaligned_count > 0 && result.unaligned_items?.length > 0) {
+        if (result && result.unaligned_count > 0) {
 
-          setUnalignedItems(result.unaligned_items);
-
-          setIsAlignmentModalOpen(true);
-
-        } else {
-
-          // 导入完成，重新加载当前段落
-
-          await loadParagraph(currentIndex);
+          toast.warning(`${result.unaligned_count} 段参考译文未能自动对齐，暂不支持手动对齐`);
 
         }
+
+
+
+        // 导入完成，重新加载当前段落
+
+        await loadParagraph(currentIndex);
 
 
 
@@ -409,69 +400,8 @@ export function ConfirmationFeature({
 
 
 
-  // 手动对齐
-
-  const handleManualAlign = useCallback(
-
-    async (_refIndex: number, _targetParagraphId: string) => {
-
-      setIsAligning(true);
-
-      try {
-
-        // 调用对齐API（需要在workflow hook中实现）
-
-        // await confirmationApi.manualAlign(projectId, versionId, { refIndex, targetParagraphId });
-
-        // 临时处理
-
-        await new Promise((resolve) => setTimeout(resolve, 500));
-
-      } catch (error) {
-
-        console.error('Align failed:', error);
-
-      } finally {
-
-        setIsAligning(false);
-
-      }
-
-    },
-    []
-  );
-
-
-
-  // 跳过未对齐段落
-
-  const handleSkipUnaligned = useCallback(
-
-    async (_refIndex: number) => {
-
-      setIsAligning(true);
-
-      try {
-
-        // 调用跳过API
-
-        // await confirmationApi.skipUnaligned(projectId, versionId, refIndex);
-
-        await new Promise((resolve) => setTimeout(resolve, 500));
-
-      } catch (error) {
-
-        console.error('Skip failed:', error);
-
-      } finally {
-
-        setIsAligning(false);
-
-      }
-
-    },
-    []
-  );
+  // 手动对齐 / 跳过未对齐段落：原为 setTimeout(500) 的空实现，会给出 loading→前进→完成的假成功反馈，
+  // 在后端提供真实对齐接口前一并移除，改由导入后的 toast 如实提示
 
 
 
@@ -748,26 +678,6 @@ export function ConfirmationFeature({
         onImport={handleImportReference}
 
         isImporting={isImporting}
-
-      />
-
-
-
-      {/* 手动对齐模态框 */}
-
-      <AlignmentModal
-
-        isOpen={isAlignmentModalOpen}
-
-        onClose={() => setIsAlignmentModalOpen(false)}
-
-        unalignedItems={unalignedItems}
-
-        onAlign={handleManualAlign}
-
-        onSkip={handleSkipUnaligned}
-
-        isProcessing={isAligning}
 
       />
 

@@ -10,6 +10,11 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
+  test: {
+    // e2e 用 Playwright 单独跑（npx playwright test）。不排除的话 vitest 会
+    // 收集 tests/e2e/*.spec.ts，在没装 @playwright/test 的环境里直接报错。
+    exclude: ['**/node_modules/**', '**/dist/**', 'tests/e2e/**'],
+  },
   server: {
     port: 8888,
     proxy: {

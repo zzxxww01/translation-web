@@ -194,6 +194,10 @@ export const EditPanel: FC<EditPanelProps> = ({
   // 记录上一段及其最新本地译文，用于切段时自动保存未确认的草稿（N6 防数据丢失）
   const prevParagraphRef = useRef<Paragraph | null>(paragraph);
   const translationRef = useRef(translation);
+  // projectId/sectionId 的最新快照：卸载兜底 effect 只跑一次，需靠 ref 避免闭包过期
+  const projectIdRef = useRef(projectId);
+  const sectionIdRef = useRef(sectionId);
+  const translationTextareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   // 词义助手相关状态
   const [selectedWord, setSelectedWord] = useState('');
@@ -234,43 +238,77 @@ export const EditPanel: FC<EditPanelProps> = ({
     translationRef.current = translation;
   }, [translation]);
 
+  // 保持 projectId/sectionId 快照同步，供卸载兜底读取
   useEffect(() => {
-    // 切段/关闭前，若上一段译文被编辑过但未确认，先静默保存草稿，避免编辑丢失（N6）
-    const previousParagraph = prevParagraphRef.current;
-    if (
-      previousParagraph &&
-      previousParagraph.id !== paragraph?.id &&
-      projectId &&
-      sectionId
-    ) {
-      const draft = translationRef.current;
+    projectIdRef.current = projectId;
+    sectionIdRef.current = sectionId;
+  }, [projectId, sectionId]);
+
+  // 把草稿落库逻辑抽出来，切段与卸载两条路径共用（N6 防数据丢失）
+  const flushDraft = useCallback(
+    (
+      previousParagraph: Paragraph | null,
+      draft: string,
+      pid: string | null,
+      sid: string | null
+    ) => {
+      if (!previousParagraph || !pid || !sid) return;
+
       const originalTranslation = previousParagraph.translation ?? '';
-      // 仅当本地译文相对上一段原译文有改动、且已确认值未覆盖该改动时才保存
+      // 仅当本地译文相对原译文有改动、且已确认值未覆盖该改动时才保存
       const alreadyConfirmed = previousParagraph.confirmed === draft;
-      if (draft !== originalTranslation && !alreadyConfirmed) {
-        const previousId = previousParagraph.id;
-        void documentApi
-          .updateParagraph(projectId, sectionId, previousId, {
-            translation: draft,
-            edit_source: 'edit_panel_draft',
-            source_text: previousParagraph.source,
-          })
-          .then(result => {
-            const persistedTranslation = result.translation ?? draft;
-            const persistedStatus = result.status ?? previousParagraph.status;
-            updateParagraph(previousId, {
-              translation: persistedTranslation,
-              status: persistedStatus,
-              confirmed:
-                result.confirmed ??
-                (persistedStatus === ParagraphStatus.APPROVED ? persistedTranslation : undefined),
-            });
-          })
-          .catch(() => {
-            // 草稿保存失败不阻断切段，仅提示，避免静默丢失
-            toast.error('上一段草稿保存失败，请回到该段重试');
+      if (draft === originalTranslation || alreadyConfirmed) return;
+
+      const previousId = previousParagraph.id;
+      void documentApi
+        .updateParagraph(pid, sid, previousId, {
+          translation: draft,
+          edit_source: 'edit_panel_draft',
+          source_text: previousParagraph.source,
+        })
+        .then(result => {
+          const persistedTranslation = result.translation ?? draft;
+          const persistedStatus = result.status ?? previousParagraph.status;
+          updateParagraph(previousId, {
+            translation: persistedTranslation,
+            status: persistedStatus,
+            confirmed:
+              result.confirmed ??
+              (persistedStatus === ParagraphStatus.APPROVED ? persistedTranslation : undefined),
           });
-      }
+        })
+        .catch(() => {
+          // 草稿保存失败不阻断切段/关闭，仅提示，避免静默丢失
+          toast.error('上一段草稿保存失败，请回到该段重试');
+        });
+    },
+    [updateParagraph]
+  );
+
+  const flushDraftRef = useRef(flushDraft);
+  useEffect(() => {
+    flushDraftRef.current = flushDraft;
+  }, [flushDraft]);
+
+  // 关闭面板 / 最后一段点“下一段” / 切章节都会直接卸载本组件，
+  // 这里只在卸载时兜底落库一次；切段保存仍走下面的 effect 体，二者靠 prevParagraphRef 互斥。
+  useEffect(
+    () => () => {
+      flushDraftRef.current(
+        prevParagraphRef.current,
+        translationRef.current,
+        projectIdRef.current,
+        sectionIdRef.current
+      );
+    },
+    []
+  );
+
+  useEffect(() => {
+    // 切段前，若上一段译文被编辑过但未确认，先静默保存草稿，避免编辑丢失（N6）
+    const previousParagraph = prevParagraphRef.current;
+    if (previousParagraph && previousParagraph.id !== paragraph?.id) {
+      flushDraft(previousParagraph, translationRef.current, projectId, sectionId);
     }
     prevParagraphRef.current = paragraph;
 
@@ -285,7 +323,12 @@ export const EditPanel: FC<EditPanelProps> = ({
     setCustomRetranslateInstruction('');
     lastSelectedWordRef.current = '';
     lastSelectedAtRef.current = 0;
-  }, [paragraph, projectId, sectionId, updateParagraph]);
+  }, [paragraph, projectId, sectionId, flushDraft]);
+
+  // 弹窗挂载时把焦点移到译文输入框，避免焦点仍停留在背后的段落列表
+  useEffect(() => {
+    translationTextareaRef.current?.focus();
+  }, []);
 
   const closeWordAssistant = useCallback(() => {
     setIsWordAssistantOpen(false);
@@ -585,18 +628,23 @@ export const EditPanel: FC<EditPanelProps> = ({
 
       {/* 编辑面板 - 居中大弹窗 */}
       <div className="fixed inset-4 z-50 flex items-center justify-center md:inset-8 lg:inset-16">
-        <div className="flex h-full w-full max-w-5xl flex-col rounded-xl bg-bg-primary shadow-2xl">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="edit-panel-title"
+          className="flex h-full w-full max-w-5xl flex-col rounded-xl bg-bg-primary shadow-2xl"
+        >
           {/* 头部 */}
-          <div className="flex items-center justify-between border-b border-border-subtle px-6 py-4">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border-subtle px-4 py-3 md:px-6 md:py-4">
             <div className="flex items-center gap-4">
-              <h3 className="text-xl font-semibold">编辑译文</h3>
-              <span className="text-lg text-text-muted">
+              <h3 id="edit-panel-title" className="text-lg font-semibold md:text-xl">编辑译文</h3>
+              <span className="text-base text-text-muted md:text-lg">
                 第 {currentIndex + 1} 段 / 共 {totalCount} 段
               </span>
             </div>
 
             {/* 导航按钮 */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Button
                 variant="outline"
                 size="default"
@@ -631,6 +679,7 @@ export const EditPanel: FC<EditPanelProps> = ({
               <div className="mx-3 h-8 w-px bg-border-subtle" />
               <button
                 onClick={onClose}
+                aria-label="关闭编辑译文"
                 className="rounded p-2.5 text-text-muted transition-colors hover:text-text-primary hover:bg-bg-tertiary"
               >
                 <X className="h-6 w-6" />
@@ -638,11 +687,11 @@ export const EditPanel: FC<EditPanelProps> = ({
             </div>
           </div>
 
-          {/* 主内容区 - 左右分栏 */}
-          <div className="flex flex-1 overflow-hidden">
+          {/* 主内容区 - 窄屏上下堆叠，md 起左右分栏 */}
+          <div className="flex flex-1 flex-col overflow-auto md:flex-row md:overflow-hidden">
             {/* 左侧：原文 */}
-            <div className="flex w-1/2 flex-col border-r border-border-subtle p-6">
-              <label className="mb-3 block text-lg font-semibold text-text-primary">
+            <div className="flex w-full flex-col border-b border-border-subtle p-4 md:w-1/2 md:border-b-0 md:border-r md:p-6">
+              <label className="mb-3 block text-base font-semibold text-text-primary md:text-lg">
                 原文
               </label>
               <p className="mb-2 text-xs text-text-muted">
@@ -653,34 +702,35 @@ export const EditPanel: FC<EditPanelProps> = ({
                 onMouseUp={handleSourceSelection}
                 onKeyUp={handleSourceSelection}
                 onContextMenu={handleSourceContextMenu}
-                className="flex-1 overflow-auto rounded-lg bg-bg-secondary p-4 text-lg leading-7 text-text-primary"
+                className="min-h-32 flex-1 overflow-auto rounded-lg bg-bg-secondary p-4 text-base leading-7 text-text-primary md:text-lg"
               >
                 {renderSource()}
               </div>
             </div>
 
             {/* 右侧：译文编辑 */}
-            <div className="flex w-1/2 flex-col p-6">
-              <label className="mb-3 block text-lg font-semibold text-text-primary">
+            <div className="flex w-full flex-col p-4 md:w-1/2 md:p-6">
+              <label className="mb-3 block text-base font-semibold text-text-primary md:text-lg">
                 译文
               </label>
               <textarea
+                ref={translationTextareaRef}
                 value={translation}
                 onChange={(e) => {
                   setTranslation(e.target.value);
                 }}
                 placeholder="在此输入或编辑译文..."
-                className="flex-1 w-full resize-none rounded-lg border border-border bg-bg-secondary p-4 text-lg leading-7 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                className="min-h-48 flex-1 w-full resize-none rounded-lg border border-border bg-bg-secondary p-4 text-base leading-7 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent md:min-h-0 md:text-lg"
               />
             </div>
           </div>
 
           {/* 底部操作栏 */}
-          <div className="border-t border-border-subtle px-6 py-4">
-            <div className="flex items-center justify-between">
+          <div className="border-t border-border-subtle px-4 py-3 md:px-6 md:py-4">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               {/* 快捷键提示和模型选择 */}
               <div className="flex items-center gap-6">
-                <div className="flex gap-4 text-sm text-text-muted">
+                <div className="hidden gap-4 text-sm text-text-muted sm:flex">
                   <span>Ctrl+T 翻译</span>
                   <span>Ctrl+Enter 确认</span>
                   <span>Esc 关闭</span>
@@ -688,7 +738,7 @@ export const EditPanel: FC<EditPanelProps> = ({
               </div>
 
               {/* 操作按钮 */}
-              <div className="flex gap-3 items-center">
+              <div className="flex flex-wrap gap-3 items-center">
                 {/* 翻译/重新翻译按钮组 */}
                 {paragraph.translation ? (
                   <DropdownMenu>

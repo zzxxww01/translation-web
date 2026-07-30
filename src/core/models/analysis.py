@@ -149,6 +149,10 @@ class SectionTranslationResult(BaseModel):
     reflection: Optional[ReflectionResult] = None
     assessment: Optional[QualityAssessment] = None
     revision_attempted: bool = False
+    # 降级标记：反思/润色出错时会直接返回初译，此时上层看到的仍是「成功」，
+    # 需要靠这两个字段区分「四步成品」与「未经反思/润色/质量门禁的初译」
+    degraded: bool = False
+    degraded_reason: str = ""
 
 
 class TermUsageTracker(BaseModel):

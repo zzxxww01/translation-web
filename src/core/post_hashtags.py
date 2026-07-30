@@ -232,6 +232,15 @@ def _tags_from_tag_only_line(line: str) -> list[str]:
     return [f"#{match.group(1)}" for match in matches]
 
 
+def is_hashtag_only_line(line: str) -> bool:
+    """该行是否是纯话题标签行（不含正文）。
+
+    供后处理判断"这一行不要做排版规范化"——标签内不能插空格，否则
+    ``#AI芯片`` 会断成 ``#AI`` + 裸文字「芯片」，标签行随之失效。
+    """
+    return bool(_tags_from_tag_only_line(line))
+
+
 def select_xiaohongshu_hashtags(
     source_text: str,
     translated_text: str = "",
@@ -262,8 +271,16 @@ def select_xiaohongshu_hashtags(
     return selected[:maximum]
 
 
-def append_xiaohongshu_hashtags(text: str, source_text: str = "") -> str:
-    """Ensure a translated post ends with one deduplicated hashtag line."""
+def append_xiaohongshu_hashtags(
+    text: str,
+    source_text: str = "",
+    allow_recommend: bool = True,
+) -> str:
+    """Ensure a translated post ends with one deduplicated hashtag line.
+
+    allow_recommend=False 时不再自动推荐新标签（仅保留去重/去违禁词/截断），
+    用于优化路径——否则用户「去掉话题标签」的指令会被后端贴回去。
+    """
 
     body = (text or "").rstrip()
     if not body:
@@ -298,9 +315,9 @@ def append_xiaohongshu_hashtags(text: str, source_text: str = "") -> str:
         or tag.casefold() in source_tag_keys
     ]
     recommended = (
-        []
-        if trailing_tags
-        else select_xiaohongshu_hashtags(source_text, body)
+        select_xiaohongshu_hashtags(source_text, body)
+        if (allow_recommend and not trailing_tags)
+        else []
     )
     inline_tag_keys = {
         f"#{match}".casefold()

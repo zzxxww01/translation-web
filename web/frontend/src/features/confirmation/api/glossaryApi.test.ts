@@ -33,6 +33,55 @@ afterEach(() => {
   vi.restoreAllMocks();
 });
 
+describe('glossaryApi term addressing', () => {
+  // 含 "/" 的术语（W/m²、$/kW 等）拼进路径段会被 uvicorn 还原成真斜杠导致 404，
+  // 因此原文必须走 query 参数
+  it('addresses global terms by query parameter instead of a path segment', async () => {
+    const put = vi.spyOn(apiClient, 'put').mockResolvedValueOnce({ message: 'ok', term: {} });
+    const del = vi.spyOn(apiClient, 'delete').mockResolvedValueOnce({ message: 'ok', original: 'W/m²' });
+
+    await glossaryApi.updateGlobalTerm('W/m²', { translation: '瓦每平方米' });
+    await glossaryApi.deleteGlobalTerm('W/m²');
+
+    expect(put).toHaveBeenCalledWith(
+      '/glossary/term',
+      { translation: '瓦每平方米' },
+      { params: { original: 'W/m²' } }
+    );
+    expect(del).toHaveBeenCalledWith('/glossary/term', { params: { original: 'W/m²' } });
+  });
+
+  it('addresses project terms by query parameter instead of a path segment', async () => {
+    const put = vi.spyOn(apiClient, 'put').mockResolvedValueOnce({ message: 'ok', term: {} });
+    const del = vi.spyOn(apiClient, 'delete').mockResolvedValueOnce({ message: 'ok', original: '$/kW' });
+
+    await glossaryApi.updateProjectTerm('project-1', '$/kW', { translation: '美元每千瓦' });
+    await glossaryApi.deleteProjectTerm('project-1', '$/kW');
+
+    expect(put).toHaveBeenCalledWith(
+      '/projects/project-1/glossary/term',
+      { translation: '美元每千瓦' },
+      { params: { original: '$/kW' } }
+    );
+    expect(del).toHaveBeenCalledWith('/projects/project-1/glossary/term', {
+      params: { original: '$/kW' },
+    });
+  });
+
+  it('forwards the abort signal on read requests so stale project loads can be cancelled', async () => {
+    const get = vi.spyOn(apiClient, 'get').mockResolvedValue({ version: 1, terms: [] });
+    const controller = new AbortController();
+
+    await glossaryApi.getGlobalGlossary({ signal: controller.signal });
+    await glossaryApi.getProjectGlossary('project-1', { signal: controller.signal });
+
+    expect(get).toHaveBeenNthCalledWith(1, '/glossary', { signal: controller.signal });
+    expect(get).toHaveBeenNthCalledWith(2, '/projects/project-1/glossary', {
+      signal: controller.signal,
+    });
+  });
+});
+
 describe('glossaryApi terminology review identity', () => {
   it('preserves the prepared artifact identity from the completed job', async () => {
     vi.spyOn(apiClient, 'post').mockResolvedValueOnce(succeededJob);

@@ -1,0 +1,105 @@
+{
+  "description": "帖子翻译人工回归样例：沉淀典型失败模式与目标译文。source 为英文原帖，expected_translation 是人工认可的中文社媒版本，must_include / should_avoid 是判定要点。结构由 test_post_translation_regression_cases.py 校验；调用真实 LLM 的语义校验需设置环境变量 RUN_LLM_TESTS=1。",
+  "cases": [
+    {
+      "id": "tone-flattening",
+      "category": "语气磨平",
+      "target_style": "xiaohongshu",
+      "source": "NVIDIA is printing money while everyone else is fighting for scraps",
+      "expected_translation": "英伟达在闷声赚大钱，其他家都在抢残羹剩饭",
+      "must_include": ["英伟达"],
+      "should_avoid": ["盈利能力突出", "竞争激烈"],
+      "notes": "原文尖锐，译文不得文雅化。printing money / fighting for scraps 要转写成同等力度的中文口语。"
+    },
+    {
+      "id": "function-word-bloat",
+      "category": "虚词堆砌",
+      "target_style": "xiaohongshu",
+      "source": "TSMC's 3nm yield is now above 80%. A year ago it was below 50%.",
+      "expected_translation": "台积电3nm良率已超80%，一年前还不到50%。",
+      "must_include": ["台积电", "80%", "50%"],
+      "should_avoid": ["目前已经达到了", "这一数字", "水平"],
+      "notes": "译文不得比原文长。数字必须零误差。词表只规定用「台积电」这个写法，不要求补「（TSMC）」括注。"
+    },
+    {
+      "id": "sentence-inflation",
+      "category": "句式膨胀",
+      "target_style": "xiaohongshu",
+      "source": "Revenue came in at $35.1B, up 122% YoY. The street expected $33.9B.",
+      "expected_translation": "营收351亿美元，同比增长122%。华尔街预期339亿美元。",
+      "must_include": ["351亿美元", "122%", "339亿美元"],
+      "should_avoid": ["达到了", "的水平", "显著增长", "此前预期"],
+      "notes": "$35.1B = 351 亿美元（×10 亿），量级换算不得出错。两句短帖不得撑成一段报告。"
+    },
+    {
+      "id": "person-weakening",
+      "category": "视角弱化",
+      "target_style": "xiaohongshu",
+      "source": "We believe Samsung Foundry is at least 2 years behind",
+      "expected_translation": "我们认为三星晶圆代工至少落后两年",
+      "must_include": ["我们认为", "三星"],
+      "should_avoid": ["据分析", "业内认为", "存在约两年的差距"],
+      "notes": "第一人称判断不得改写成第三人称转述腔。"
+    },
+    {
+      "id": "bare-abbreviation",
+      "category": "裸写缩写",
+      "target_style": "xiaohongshu",
+      "source": "This made me support UBI",
+      "expected_translation": "这让我开始支持全民基本收入（UBI）",
+      "must_include": ["全民基本收入", "UBI"],
+      "should_avoid": [],
+      "notes": "缩写首现要展开成「中文全称（缩写）」，后文可从简。"
+    },
+    {
+      "id": "literal-rhetoric",
+      "category": "字面直译修辞",
+      "target_style": "xiaohongshu",
+      "source": "She went viral for her rant on OpenAI Codex",
+      "expected_translation": "她因痛批OpenAI Codex火爆全网",
+      "must_include": ["OpenAI Codex"],
+      "should_avoid": ["火了，因为", "一段关于", "吐槽而火"],
+      "notes": "went viral / rant 要转写为中文社媒真实说法；报道句式要紧凑，不要写成松散的「X 火了，因为……」。"
+    },
+    {
+      "id": "missing-progression",
+      "category": "态度链条缺失",
+      "target_style": "xiaohongshu",
+      "source": "Using Codex I couldn't feel the AGI. With Claude Code, I felt the enlightenment coming and support UBI.",
+      "expected_translation": "用Codex根本感受不到AGI。反观Claude Code，它让我真切感受到AGI要来了，立马开始支持全民基本收入（UBI）。",
+      "must_include": ["Codex", "Claude Code", "全民基本收入", "UBI"],
+      "should_avoid": ["直接顿悟"],
+      "notes": "递进关系（对比 → 转折 → 结论）必须写清楚，不能只留抽象结论。"
+    },
+    {
+      "id": "token-never-translated",
+      "category": "白名单铁律",
+      "target_style": "xiaohongshu",
+      "source": "OpenAI cut token prices again; inference demand keeps climbing.",
+      "expected_translation": "OpenAI 又降了 token 价格，推理需求还在往上走。",
+      "must_include": ["token"],
+      "should_avoid": ["词元", "令牌", "代币"],
+      "notes": "token 严禁汉化。后端 preserve_protected_terms 会兜底改回，但 prompt 侧也要约束。"
+    },
+    {
+      "id": "hashtag-line-intact",
+      "category": "特殊元素",
+      "target_style": "xiaohongshu",
+      "source": "NVIDIA GPU demand from OpenAI keeps rising. Check @sama's thread 1/7 for details.",
+      "expected_translation": "OpenAI 对英伟达 GPU 的需求还在涨。细节看 @sama 的 thread 1/7。\n\n#英伟达 #OpenAI #AI芯片",
+      "must_include": ["@sama", "1/7", "#AI芯片"],
+      "should_avoid": ["#AI 芯片", "#科技资讯", "#行业观察"],
+      "notes": "@用户名、线程编号原样保留；话题标签内不得被插入空格（曾因 CJK-ASCII 补空格把 #AI芯片 打断成 #AI 芯片）。"
+    },
+    {
+      "id": "short-post-no-annotation-flood",
+      "category": "注释克制",
+      "target_style": "xiaohongshu",
+      "source": "NVIDIA, TSMC and Broadcom all beat estimates this quarter.",
+      "expected_translation": "英伟达、台积电、博通这个季度全部超预期。",
+      "must_include": ["英伟达", "台积电", "博通"],
+      "should_avoid": ["英伟达（NVIDIA）", "台积电（TSMC）", "博通（Broadcom）"],
+      "notes": "已有通用中文译名的公司在短帖里只写中文。词表的 first_annotate 是长文规则，短帖注入时已切换为 short_form（只规定写法，不要求括注）。"
+    }
+  ]
+}

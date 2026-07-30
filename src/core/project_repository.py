@@ -33,6 +33,21 @@ class ProjectRepository:
         self._best_translation_text = best_translation_text
         self._logger = logger_ or logging.getLogger(__name__)
 
+    def _resolve_section_dir(self, project_id: str, section_id: str) -> Optional[Path]:
+        """兜底路径边界校验:section_id 含 ../ 或 ..\\ 时不得越出本项目的 sections 目录。
+
+        路由层已有 validate_path_component,这里是不依赖调用方的第二道防线(审计 BE10)。
+        get_sections 用真实目录名回调,不受影响。
+        """
+        base = (self._project_dir(project_id) / "sections").resolve()
+        resolved = (self._project_dir(project_id) / "sections" / section_id).resolve()
+        # `resolved == base` 也要拒：""、"."、"a/.." 会解析回 sections 根，
+        # 随后 save_section 就把 meta.json 写到根目录上，污染整个 sections。
+        if resolved == base or not resolved.is_relative_to(base):
+            return None
+        # 返回归一化后的路径，避免把 "a/.." 这类未归一化路径传给下游 mkdir。
+        return resolved
+
     def save_meta(self, project_id: str, meta: ProjectMeta) -> None:
         # 不把内存中的 sections 全量写进 meta.json:sections 持久化在
         # sections/<id>/meta.json,写进顶层 meta.json 会造成双数据源、陈旧快照与
@@ -49,7 +64,9 @@ class ProjectRepository:
         *,
         grouped_blocks: list[list[Paragraph]],
     ) -> None:
-        section_dir = self._project_dir(project_id) / "sections" / section.section_id
+        section_dir = self._resolve_section_dir(project_id, section.section_id)
+        if section_dir is None:
+            raise ValueError(f"Invalid section_id: {section.section_id}")
         section_dir.mkdir(parents=True, exist_ok=True)
 
         source_lines: list[str] = []
@@ -74,7 +91,9 @@ class ProjectRepository:
         self._write_json(section_dir / "meta.json", payload)
 
     def load_section(self, project_id: str, section_id: str) -> Optional[Section]:
-        section_dir = self._project_dir(project_id) / "sections" / section_id
+        section_dir = self._resolve_section_dir(project_id, section_id)
+        if section_dir is None:
+            return None
         meta_path = section_dir / "meta.json"
         if not meta_path.exists():
             return None

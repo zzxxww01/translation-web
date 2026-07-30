@@ -9,7 +9,9 @@ export function useTranslationStatusSync(currentProjectId?: string) {
   const [currentStep, setCurrentStep] = useState<string | null>(null);
   const [backendTranslationStatus, setBackendTranslationStatus] = useState<TranslationStatus | null>(null);
 
-  const fullTranslateProjectId = useDocumentStore(state => state.fullTranslateProjectId);
+  // 注意：fullTranslateProjectId 由 syncStatus 自己写入（setFullTranslateProjectId / endFullTranslate），
+  // 若订阅成组件状态并放进依赖数组，会导致 effect 反复重建 interval 并多打请求，
+  // 因此改为在 syncStatus 内用 getState() 读取瞬时值。
   const setFullTranslating = useDocumentStore(state => state.setFullTranslating);
   const setFullTranslateProgress = useDocumentStore(state => state.setFullTranslateProgress);
   const setFullTranslateProjectId = useDocumentStore(state => state.setFullTranslateProjectId);
@@ -17,10 +19,16 @@ export function useTranslationStatusSync(currentProjectId?: string) {
 
   useEffect(() => {
     let cancelled = false;
+    // 只在项目切换后的首次同步清一次旧项目状态；轮询回调内不再清空，
+    // 否则每 5 秒都会先置 null 再等 HTTP 往返回填，侧栏步骤文案与百分比会周期性闪烁。
+    let isFirstSync = true;
 
     const syncStatus = async () => {
-      setCurrentStep(null);
-      setBackendTranslationStatus(null);
+      if (isFirstSync) {
+        isFirstSync = false;
+        setCurrentStep(null);
+        setBackendTranslationStatus(null);
+      }
 
       if (!currentProjectId) {
         return;
@@ -54,13 +62,16 @@ export function useTranslationStatusSync(currentProjectId?: string) {
           fullTranslationService.isTranslating() &&
           fullTranslationService.getProjectId() === currentProjectId;
         if (
-          fullTranslateProjectId === currentProjectId &&
+          useDocumentStore.getState().fullTranslateProjectId === currentProjectId &&
           !hasActiveLocalStream
         ) {
           endFullTranslate(currentProjectId);
-          if (!fullTranslationService.isTranslating()) {
-            setCurrentStep(null);
-          }
+        }
+        // 后端没有在跑、本地也没有 SSE 流时清掉步骤文案。放在 if 外面：
+        // 只在 if 内清会让「store 里记的是别的项目」这条路径永远留着上一次
+        // 轮询的残留文案（消除闪烁不该顺带让文案永不过期）。
+        if (!fullTranslationService.isTranslating()) {
+          setCurrentStep(null);
         }
       } catch (error) {
         if (!cancelled) {
@@ -84,7 +95,6 @@ export function useTranslationStatusSync(currentProjectId?: string) {
   }, [
     currentProjectId,
     endFullTranslate,
-    fullTranslateProjectId,
     setFullTranslateProgress,
     setFullTranslateProjectId,
     setFullTranslating,

@@ -211,7 +211,34 @@ def test_synthetic_intro_section_heading_skipped(tmp_path: Path) -> None:
 
 
 def test_export_blocked_on_critical_qa_issue(tmp_path: Path) -> None:
-    # A-5：critical 级 QA 问题阻断导出，导出文件不落盘，lint 工件保留。
+    # A-5：critical 级 QA 问题阻断导出，正常文件名不落盘，lint 工件保留。
+    # 用占位符残留做样本——它是真正「必须拦」的工程缺陷；功率单位汉化已
+    # 降为 warning（无确定性 fixer 的 critical 等于永久阻断导出）。
+    paragraph = Paragraph(
+        id="p1",
+        index=0,
+        source="Capacity is 5 GW.",
+        element_type=ElementType.P,
+        confirmed="容量为 5 GW\x00PROTECTED_7\x00。",
+    )
+    section = Section(section_id="s1", title="Intro", title_translation="引言", paragraphs=[paragraph])
+    meta = _demo_meta()
+    service = _build_service(tmp_path, [section], meta)
+
+    with pytest.raises(ExportBlockedError) as excinfo:
+        service.export_markdown("demo")
+
+    assert not (tmp_path / "demo" / "演示项目_zh.md").exists()
+    assert (tmp_path / "demo" / "artifacts" / "export-lint" / "latest.json").parent.exists()
+    # 阻断前先落盘：翻译成本已经花掉，用户必须拿得到可交付文本。
+    blocked = tmp_path / "demo" / "演示项目_zh.blocked.md"
+    assert blocked.exists()
+    assert excinfo.value.blocked_path == blocked
+    assert "演示项目_zh.blocked.md" in str(excinfo.value)
+
+
+def test_power_unit_no_longer_blocks_export(tmp_path: Path) -> None:
+    # 功率单位汉化降为 warning 后，正常译文必须能导出。
     paragraph = Paragraph(
         id="p1",
         index=0,
@@ -220,14 +247,12 @@ def test_export_blocked_on_critical_qa_issue(tmp_path: Path) -> None:
         confirmed="容量为 5 吉瓦。",
     )
     section = Section(section_id="s1", title="Intro", title_translation="引言", paragraphs=[paragraph])
-    meta = _demo_meta()
-    service = _build_service(tmp_path, [section], meta)
+    service = _build_service(tmp_path, [section], _demo_meta())
 
-    with pytest.raises(ExportBlockedError):
-        service.export_markdown("demo")
+    content = service.export_markdown("demo")
 
-    assert not (tmp_path / "demo" / "演示项目_zh.md").exists()
-    assert (tmp_path / "demo" / "artifacts" / "export-lint" / "latest.json").parent.exists()
+    assert (tmp_path / "demo" / "演示项目_zh.md").exists()
+    assert "吉瓦" in content
 
 
 def test_export_lint_records_inline_recovery_fallbacks(tmp_path: Path) -> None:

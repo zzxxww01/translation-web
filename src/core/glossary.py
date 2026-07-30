@@ -152,6 +152,20 @@ class GlossaryManager:
     def _get_global_glossary_file_path(self) -> Path:
         return self.global_path / DEFAULT_GLOBAL_GLOSSARY_FILENAME
 
+    def _resolve_project_dir(self, project_id: str) -> Path:
+        """兜底路径边界校验:project_id 含 ../ 或 ..\\ 时拒绝越界读写 glossary.json。
+
+        路由层已有 validate_path_component,这里是不依赖调用方的第二道防线(审计 BE1)。
+        """
+        base = self.projects_path.resolve()
+        target = (self.projects_path / project_id).resolve()
+        # `target == base` 也要拒：一个路径相对于它自己也满足 is_relative_to，
+        # 于是 ""、"."、"demo/.." 会解析回 projects 根，把 glossary.json 写到
+        # 根目录上。
+        if target == base or not target.is_relative_to(base):
+            raise ValueError(f"Invalid project_id: {project_id}")
+        return target
+
     def load_global(self) -> Glossary:
         """
         加载全局术语表
@@ -187,7 +201,7 @@ class GlossaryManager:
         Returns:
             Glossary: 术语表
         """
-        file_path = self.projects_path / project_id / "glossary.json"
+        file_path = self._resolve_project_dir(project_id) / "glossary.json"
         with self._get_lock(f"project:{project_id}"):
             return self._load_cached_file(file_path, scope="project")
 
@@ -199,10 +213,10 @@ class GlossaryManager:
             project_id: 项目 ID
             glossary: 术语表
         """
+        project_dir = self._resolve_project_dir(project_id)
         with self._get_lock(f"project:{project_id}"):
             glossary = normalize_glossary(glossary, default_scope="project")
             glossary.version += 1
-            project_dir = self.projects_path / project_id
             project_dir.mkdir(parents=True, exist_ok=True)
             self._atomic_write_json(
                 project_dir / "glossary.json", glossary.model_dump(mode="json")

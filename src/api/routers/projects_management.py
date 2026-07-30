@@ -287,7 +287,8 @@ async def get_sections(project_id: str, pm: ProjectManagerDep):
 
 @router.get("/projects/{project_id}/sections/{section_id}")
 async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
-    if not validate_path_component(project_id):
+    # section_id 同样参与拼路径,漏校验即可通过 ..%5c 穿越读取任意 meta.json(审计 BE10)
+    if not validate_path_component(project_id) or not validate_path_component(section_id):
         raise NotFoundException(detail="Project not found")
 
     def _normalize_image_source(paragraph) -> str:
