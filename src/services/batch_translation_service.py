@@ -744,14 +744,12 @@ class BatchTranslationService:
                     # 旧译名把全局的修正静默压回去（实测一次性覆盖了 15 条全局条目：
                     # capex 资本开支→资本支出、node 判据型→制程节点、agentic 智能体→
                     # 智能体化…）。全局词表是单一事实源：候选与全局不一致时，应当去
-                    # 修全局词表，而不是在项目里另立一份。
-                    # 确需为某篇指定不同译法时，在候选词条上显式标 force=True。
-                    if not getattr(candidate, "force", False):
-                        logger.debug(
-                            "[%s] skip project-glossary seed %r: already in global glossary",
-                            project_id, candidate.original,
-                        )
-                        continue
+                    # 修全局词表，而不是在项目里另立一份。不设单篇破例的开关。
+                    logger.debug(
+                        "[%s] skip project-glossary seed %r: already in global glossary",
+                        project_id, candidate.original,
+                    )
+                    continue
                 glossary.add_term(candidate)
                 existing_terms[key] = candidate
                 added_terms.append(candidate)

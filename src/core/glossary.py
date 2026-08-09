@@ -233,7 +233,8 @@ class GlossaryManager:
         一份项目词表就能让全局词表整体失效。全局词表是单一事实源，理应最高优先级。
 
         项目词表的正当用途是**补充**全局没有的项目专属术语（型号、人名、一次性概念），
-        不是覆盖全局。确需为某篇指定不同译法时，在项目词条上显式标 `"force": true`。
+        不是覆盖全局。**不支持单篇破例**：某篇需要不同译法时，改全局词表本身
+        （多半意味着该词条的判据没写清，值得写清楚给所有文章受益）。
 
         Args:
             global_glossary: 全局术语表
@@ -244,28 +245,17 @@ class GlossaryManager:
         """
         merged = Glossary(version=max(global_glossary.version, project_glossary.version))
 
-        # 先添加项目术语（提供全局没有的补充条目）
+        # 依赖 Glossary.add_term 的同名覆盖语义：后写者赢。故项目在先、全局在后。
         for term in project_glossary.terms:
             merged.add_term(term)
 
-        # 再添加全局术语 —— 同名时以全局为准
-        global_keys = set()
         for term in global_glossary.terms:
             merged.add_term(term)
-            global_keys.add(getattr(term, "original", "").lower())
-
-        # 逃生舱：项目词条显式 force=True 时才允许覆盖全局
-        for term in project_glossary.terms:
-            forced = getattr(term, "force", None)
-            if forced is None and isinstance(term, dict):
-                forced = term.get("force")
-            if forced and getattr(term, "original", "").lower() in global_keys:
-                merged.add_term(term)
 
         return merged
 
     def load_merged(self, project_id: str) -> Glossary:
-        """Load merged glossary with project terms overriding global terms."""
+        """Load merged glossary; global terms win over project terms on a clash."""
         return self.merge(
             self.load_global(),
             self.load_project(project_id),
