@@ -78,9 +78,11 @@ providers:
       max_concurrent: 100
       requests_per_minute: 1000
     models:
+      # alias 保留 "deepseek-v3" 这个历史名：task_defaults 与
+      # translation_models.yaml 共有 8 处引用它，真实模型以 real_model 为准。
       - alias: "deepseek-v3"
-        real_model: "deepseek-v3.2"
-        name: "DeepSeek v3.2"
+        real_model: "deepseek-v4-flash-0731"
+        name: "DeepSeek v4 Flash"
         description: "高性价比推理模型"
         priority: 1
         supports_thinking: true
@@ -93,6 +95,18 @@ providers:
         name: "Qwen 3.6 Plus"
         description: "阿里通义千问高性能模型"
         priority: 2
+        supports_thinking: false
+        config:
+          temperature: 0.7
+          max_tokens: 8192
+          timeout: 120
+      # phase0_prescan 依赖这一条。缺了它 create_llm_provider 不会报错，
+      # 而是静默回落到 Gemini——务必与 translation_models.yaml 保持同步。
+      - alias: "grok-4-1-fast-non-reasoning"
+        real_model: "grok-4-1-fast-non-reasoning"
+        name: "Grok 4.1 Fast"
+        description: "非推理版，结构化抽取任务快且稳"
+        priority: 3
         supports_thinking: false
         config:
           temperature: 0.7
