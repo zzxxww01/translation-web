@@ -15,8 +15,11 @@ env/
 .env.*
 !.env.example
 
-# LLM provider configuration (contains API keys)
-config/llm_providers.yaml
+# config/llm_providers.yaml 不在此列：它只用 ${VAR} 占位符引用 .env，
+# 不含明文密钥，纳入版本控制才能让各机器共享 provider/模型定义
+# （否则 translation_models.yaml 引用的别名在别的机器上无定义，
+# create_llm_provider 不报错而是静默回落到 Gemini）。
+# 本地覆盖配置仍然排除——按约定它可能直接写明文密钥。
 config/*.local.yaml
 
 # ----------------------------
