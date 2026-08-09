@@ -89,6 +89,8 @@ tmp_findings_*.py
 translation-agent-analysis/
 
 # 词表升版脚本留下的本地备份（scripts/sync_glossary_to_skill.py 等），
-# 不应进版本控制——真正的历史在 git 里
-*.bak-v*
+# 不应进版本控制——真正的历史在 git 里。
+# *.bak-* 覆盖带时间戳的变体，如 global_glossary_semi.bak-20260809-135207.json：
+# 这类文件名以 .json 收尾，*.bak 和 *.bak-v* 都匹配不到。
 *.bak
+*.bak-*

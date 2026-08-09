@@ -2465,17 +2465,17 @@
     },
     {
       "original": "fleet",
-      "translation": "机群",
+      "translation": "机群/星座/机台(按被计数对象)",
       "strategy": "translate",
-      "note": "数据中心/GPU 机队语境=机群(非集群)",
+      "note": "**按被计数的对象选词**：卫星→星座；光刻机等设备→机台；服务器/GPU→机群；车队→车队。只有 fleet management 固定作「机群管理」。禁一律译「机群」",
       "tags": [
         "datacenter"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "review-2026-07",
+      "source": "corpus-audit-2026-08-09",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T13:52:07.089830"
     },
     {
       "original": "time-to-power",
@@ -2773,31 +2773,31 @@
     },
     {
       "original": "memory",
-      "translation": "内存",
+      "translation": "显存/内存/存储(按位置)",
       "strategy": "translate",
-      "note": "系统/DRAM=内存；NAND/盘存=存储；泛指器件=存储器；单篇统一",
+      "note": "**判据：这块 memory 在卡上还是在主机上**。HBM/GPU/KV 缓存/权重驻留→显存（显存带宽、显存容量）；host/CPU 侧/系统内存/offload 目的地→内存；NAND/盘存→存储；泛指器件→存储器。DRAM 产业语境（产能、颗粒、涨价）→内存。单篇统一",
       "tags": [
         "memory"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "corpus-audit-2026-08-09",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T13:52:07.089830"
     },
     {
       "original": "scaling",
-      "translation": "扩展",
+      "translation": "扩展/微缩/缩放(按语境)",
       "strategy": "translate",
-      "note": "系统/算力=扩展/规模化(禁缩放)；晶体管/制程=微缩",
+      "note": "系统/算力=扩展、规模化；晶体管/制程=微缩；**但固定术语中的 scaling 保留「缩放」**：Dennard scaling=登纳德缩放定律、micro-scaling=微缩放、block scaling factor=块缩放因子。禁把固定术语里的「缩放」也改掉",
       "tags": [
         "performance"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "corpus-audit-2026-08-09",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T13:52:07.089830"
     },
     {
       "original": "Changxin Jidian",
@@ -3252,6 +3252,133 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-07-29T00:00:00"
+    },
+    {
+      "original": "OEM",
+      "translation": "原始设备制造商",
+      "strategy": "first_annotate",
+      "note": "**禁译「代工厂」**（那是 foundry/OEM 代工≠晶圆代工）。指整机厂商，服务器语境可简称「整机厂」。实测 3 种译法，含 1 处错译",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "ARR",
+      "translation": "年度经常性收入",
+      "strategy": "first_annotate",
+      "note": "Annual Recurring Revenue。统一「收入」不用「营收」，统一「年度」不用「年化」。实测 3 种译法",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "SLA",
+      "translation": "服务等级协议",
+      "strategy": "first_annotate",
+      "note": "统一「等级」不用「水平」。实测 2 种译法",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "TAM",
+      "translation": "可触达市场规模",
+      "strategy": "first_annotate",
+      "note": "Total Addressable Market。**禁译「目标市场」**（那是 target market）；亦禁「总潜在市场/总可寻址市场/总可服务市场」等变体。实测 5 种译法，是全语料分歧最严重的术语",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "MCM",
+      "translation": "多芯片模块",
+      "strategy": "first_annotate",
+      "note": "Multi-Chip Module。与 chiplet=芯粒 区分",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "interposer",
+      "translation": "中介层",
+      "strategy": "first_annotate",
+      "note": "**统一「中介层」**，禁「转接板」「硅中介层」（后者是 silicon interposer 的完整说法，首现可用一次，后文用「中介层」）。实测 3 篇 3 种译法",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "COT",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "**一词两义，必须看语境**：芯片制造语境=Customer-Owned Tooling（客户自主流片）；LLM 推理语境=Chain of Thought（思维链）。实测有篇目按错义展开成「思维链」。拿不准就保留 COT 原形并按上下文加一次括注",
+      "tags": [
+        "chip",
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "ASIC",
+      "translation": "ASIC",
+      "strategy": "preserve",
+      "note": "易混缩写，保留英文。首现可注「专用集成电路」一次，后文只用 ASIC；禁全篇反复写「专用集成电路」",
+      "tags": [
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "GEMM",
+      "translation": "GEMM",
+      "strategy": "preserve",
+      "note": "R1 易混缩写清单内，保留英文。首现至多注一次「通用矩阵乘法」，**禁全篇展开**（实测被展开成「通用矩阵乘法」多次）",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "corpus-audit-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T13:52:07.089830"
     }
   ]
 }
