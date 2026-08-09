@@ -24,9 +24,9 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
+// 只剩「会丢掉未保存编辑」的两种动作需要拦一道。清空按用户要求直接执行。
 type PendingEditAction =
   | { kind: 'switch-version'; versionId: string }
-  | { kind: 'clear' }
   | { kind: 'discard-edit' };
 
 const ACTION_LABELS: Record<PostNetworkAction, string> = {
@@ -337,7 +337,8 @@ export function PostFeature() {
   ]);
 
   const handleClear = () => {
-    setPendingEditAction({ kind: 'clear' });
+    clear();
+    setCustomInstruction('');
   };
 
   const handleSaveEdit = () => {
@@ -351,14 +352,9 @@ export function PostFeature() {
 
   const confirmPendingEditAction = () => {
     if (!pendingEditAction) return;
+    discardEdit();
     if (pendingEditAction.kind === 'switch-version') {
-      discardEdit();
       setCurrentVersion(pendingEditAction.versionId);
-    } else if (pendingEditAction.kind === 'clear') {
-      clear();
-      setCustomInstruction('');
-    } else {
-      discardEdit();
     }
     setPendingEditAction(null);
   };
@@ -519,19 +515,15 @@ export function PostFeature() {
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>
-              {pendingEditAction?.kind === 'clear' ? '清空帖子工作区' : '放弃未保存的编辑'}
-            </AlertDialogTitle>
+            <AlertDialogTitle>放弃未保存的编辑</AlertDialogTitle>
             <AlertDialogDescription>
-              {pendingEditAction?.kind === 'clear'
-                ? '原文、译文版本和生成的标题都会被清空，此操作无法撤销。'
-                : '当前译文有尚未保存的修改。继续后，这些修改将被放弃。'}
+              当前译文有尚未保存的修改。继续后，这些修改将被放弃。
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>返回编辑</AlertDialogCancel>
             <AlertDialogAction onClick={confirmPendingEditAction}>
-              {pendingEditAction?.kind === 'clear' ? '确认清空' : '放弃修改'}
+              放弃修改
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
