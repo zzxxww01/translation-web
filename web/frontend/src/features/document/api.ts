@@ -49,6 +49,16 @@ export interface LatestConsistencyReportResponse {
   message?: string;
 }
 
+export interface LongformWorkflowStartResponse {
+  status: 'started';
+  project_id: string;
+  run_id: string;
+  term_review_job_id: string;
+  term_review_timeout_seconds: number;
+  method: 'normal' | 'four-step';
+  model?: string | null;
+}
+
 /**
  * 长文翻译 API
  */
@@ -194,6 +204,17 @@ export const documentApi = {
 
   getTranslationStatus: (projectId: string) =>
     apiClient.get<TranslationStatus>(`/projects/${projectId}/translation-status`),
+
+  startLongformWorkflow: (
+    projectId: string,
+    method: 'normal' | 'four-step',
+    model?: string,
+  ) =>
+    apiClient.post<LongformWorkflowStartResponse>(
+      `/projects/${projectId}/translation-workflow`,
+      { method, model },
+      { retry: false },
+    ),
 
   stopLongformTranslation: (projectId: string) =>
     apiClient.post<{ status: string; project_id: string; run_id?: string }>(

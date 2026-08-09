@@ -43,3 +43,49 @@ test('document workspace exposes its mobile navigation sheet', async ({ page }) 
     fullPage: true,
   });
 });
+
+
+test('background translation tray survives an in-app route change', async ({ page }) => {
+  const project = {
+    id: 'demo',
+    title: 'Demo project',
+    status: 'created',
+    progress: {
+      total: 4,
+      total_sections: 1,
+      total_paragraphs: 4,
+      approved: 0,
+      percent: 0,
+    },
+    created_at: '2026-08-09T00:00:00',
+    sections: [],
+  };
+
+  await page.route('**/api/projects/demo/translation-status', route =>
+    route.fulfill({
+      contentType: 'application/json',
+      body: JSON.stringify({
+        status: 'processing',
+        translated_paragraphs: 1,
+        total_paragraphs: 4,
+        active_project_id: 'demo',
+        active_run_id: 'run-1',
+        current_step: '章节术语预扫描',
+      }),
+    })
+  );
+  await page.route('**/api/projects/demo', route =>
+    route.fulfill({ contentType: 'application/json', body: JSON.stringify(project) })
+  );
+  await page.route('**/api/projects', route =>
+    route.fulfill({ contentType: 'application/json', body: JSON.stringify([project]) })
+  );
+
+  await page.goto('/document/demo');
+  const taskTray = page.getByRole('region', { name: '后台任务' });
+  await expect(taskTray).toContainText('正在翻译：Demo project');
+
+  await page.getByRole('link', { name: '帖子翻译' }).click();
+  await expect(page).toHaveURL(/\/post$/);
+  await expect(taskTray).toContainText('正在翻译：Demo project');
+});

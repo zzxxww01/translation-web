@@ -19,6 +19,7 @@ from datetime import datetime
 import logging
 
 from src.core.glossary import infer_glossary_tags
+from src.config.timeout_config import TimeoutConfig
 from src.core.longform_context import (
     build_article_challenge_payload,
     build_glossary_entries_from_terms,
@@ -80,6 +81,7 @@ from src.services.term_review_artifact import (
     is_current_term_review_artifact,
     is_legacy_term_review_artifact,
 )
+from src.api.utils.concurrency import run_llm_blocking
 from src.llm.usage_metrics import llm_usage_metrics
 
 
@@ -120,6 +122,7 @@ class BatchTranslationService:
     """批量翻译服务"""
 
     _shared_progress_tracker = ProgressTracker()
+    PRESCAN_TIMEOUT_SECONDS = TimeoutConfig.ANALYSIS
 
     # 翻译模式
     TRANSLATION_MODE_FOUR_STEP = "four_step"  # 四步法（段落级）
@@ -164,6 +167,7 @@ class BatchTranslationService:
         self.max_concurrent_sections = max_concurrent_sections
         self.analysis_llm = analysis_llm_provider or llm_provider
         self.user_model_override = user_model_override
+        self._phase_provider_cache: Dict[str, LLMProvider] = {}
 
         # 加载模型配置
         from src.core.model_config import get_model_config
@@ -190,9 +194,10 @@ class BatchTranslationService:
             memory_service=memory_service,
             get_provider_for_phase=self._get_provider_for_phase,
         )
-        # Phase 3: 使用 Gemini Preview 生成质量报告
-        gemini_preview_provider = self._get_provider_for_phase("phase3_review")
-        self.quality_report_generator = QualityReportGenerator(gemini_preview_provider)
+        # Phase 3 provider is optional and only needed after every section has
+        # translated. Construct it lazily so startup does not open an unused HTTP
+        # client or fail an otherwise viable run because the review model is down.
+        self.quality_report_generator: Optional[QualityReportGenerator] = None
 
         # 创建包装方法，自动使用phase1 provider
         async def translate_section_batch_with_phase(*args, **kwargs):
@@ -242,14 +247,50 @@ class BatchTranslationService:
         model_config = self.model_config.get_model_for_phase(phase)
         model_name = model_config['model']
 
-        # 如果当前provider已经是目标模型，直接返回
-        if hasattr(self.llm, 'model_name') and self.llm.model_name == model_name:
+        cached = self._phase_provider_cache.get(model_name)
+        if cached is not None:
+            return cached
+
+        # 如果当前 provider 已经是目标模型，直接返回。配置使用 alias，而
+        # concrete provider 往往只暴露 real model，所以两种名称都要比较。
+        provider_selectors = {
+            str(value).strip().lower()
+            for value in (
+                getattr(self.llm, "model_alias", None),
+                getattr(self.llm, "model_name", None),
+                getattr(self.llm, "default_model", None),
+            )
+            if value
+        }
+        expected_selectors = {str(model_name).strip().lower()}
+        try:
+            from src.llm.config_loader import get_config_loader
+
+            configured_model = get_config_loader().get_model_config(model_name)
+            if configured_model is not None and configured_model.real_model:
+                expected_selectors.add(configured_model.real_model.strip().lower())
+        except Exception:
+            # Alias comparison still works for adapters and test providers.
+            pass
+        if provider_selectors & expected_selectors:
+            self._phase_provider_cache[model_name] = self.llm
             return self.llm
 
         # 创建新的provider
         from src.api.utils.llm_factory import create_llm_provider
         logger.info(f"Creating provider for {phase}: {model_name} (temp={model_config['temperature']})")
-        return create_llm_provider(provider=model_name)
+        provider = create_llm_provider(provider=model_name)
+        self._phase_provider_cache[model_name] = provider
+        return provider
+
+    def _get_quality_report_generator(self) -> QualityReportGenerator:
+        generator = self.quality_report_generator
+        if generator is None:
+            generator = QualityReportGenerator(
+                self._get_provider_for_phase("phase3_review")
+            )
+            self.quality_report_generator = generator
+        return generator
 
     def _is_cancelled(self, project_id: str) -> bool:
         return self._run_registry.is_cancelled(project_id)
@@ -268,11 +309,13 @@ class BatchTranslationService:
         *,
         run_id: Optional[str],
         status: str,
+        current_step: Optional[str] = None,
     ):
         return translation_run_registry.set_active_run(
             project_id,
             run_id=run_id,
             status=status,
+            current_step=current_step,
         )
 
     @classmethod
@@ -1261,7 +1304,7 @@ class BatchTranslationService:
             quality_report = None
             try:
                 llm_usage_metrics.set_phase("phase3_review")
-                quality_report = self.quality_report_generator.generate_report(
+                quality_report = self._get_quality_report_generator().generate_report(
                     sections=project.sections,
                     translations=all_translations,
                     article_analysis=analysis,
@@ -1620,12 +1663,34 @@ class BatchTranslationService:
                     }
                 )
 
-            # prescan_section 是同步阻塞 LLM 调用，卸载到线程池使其与其它章节工作重叠。
-            prescan_result = await asyncio.to_thread(
-                self.translator.prescan_section,
-                section=section,
-                on_conflict=record_conflict,
-            )
+            # prescan_section 是同步阻塞 LLM 调用。使用隔离的有界线程池，且给
+            # 整个预扫描设置硬预算；传输层即使未按自身 timeout 返回，也不会
+            # 永久卡住整篇翻译或耗尽通用请求线程池。
+            scan_terms = getattr(self.translator, "scan_section_terms", None)
+            apply_prescan = getattr(self.translator, "apply_section_prescan", None)
+            if callable(scan_terms) and callable(apply_prescan):
+                # Only the pure network/parse phase runs in the abandonable
+                # worker. Shared terminology is committed below, after the call
+                # returned inside its budget.
+                prescan_result = await asyncio.wait_for(
+                    run_llm_blocking(scan_terms, section=section),
+                    timeout=self.PRESCAN_TIMEOUT_SECONDS,
+                )
+                if prescan_result is not None:
+                    prescan_result = apply_prescan(
+                        prescan_result,
+                        on_conflict=record_conflict,
+                    )
+            else:
+                # Compatibility path for test doubles and custom translators.
+                prescan_result = await asyncio.wait_for(
+                    run_llm_blocking(
+                        self.translator.prescan_section,
+                        section=section,
+                        on_conflict=record_conflict,
+                    ),
+                    timeout=self.PRESCAN_TIMEOUT_SECONDS,
+                )
             if on_term_conflict:
                 for conflict in conflicts:
                     resolution_data = await on_term_conflict(conflict)
@@ -1645,6 +1710,22 @@ class BatchTranslationService:
                     f"{len(prescan_result.new_terms)} new terms found"
                 )
             return prescan_result
+        except TimeoutError:
+            progress.errors.append(
+                {
+                    "type": "prescan_timeout",
+                    "section_id": section.section_id,
+                    "timeout_seconds": self.PRESCAN_TIMEOUT_SECONDS,
+                    "timestamp": datetime.now().isoformat(),
+                }
+            )
+            logger.warning(
+                "[%s] Section %s prescan timed out after %ss; continuing",
+                project_id,
+                section.section_id,
+                self.PRESCAN_TIMEOUT_SECONDS,
+            )
+            return None
         except Exception as exc:
             logger.warning(
                 f"[{project_id}] Section {section.section_id} prescan skipped due to error: {exc}"
@@ -1993,7 +2074,7 @@ class BatchTranslationService:
         def compact_usage(run_id: Optional[str], stored: Any = None) -> Optional[Dict[str, Any]]:
             usage = stored if isinstance(stored, dict) else None
             if usage is None and run_id:
-                current = llm_usage_metrics.summary(run_id)
+                current = llm_usage_metrics.summary(run_id, include_calls=False)
                 if current.get("api_calls"):
                     usage = current
             if usage is None:

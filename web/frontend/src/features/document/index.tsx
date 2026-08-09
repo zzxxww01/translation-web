@@ -135,7 +135,6 @@ export function DocumentFeature() {
   const {
     backendTranslationStatus,
     currentStep,
-    setBackendTranslationStatus,
     setCurrentStep,
   } = useTranslationStatusSync(activeProject?.id);
   const hasActiveBackendRunForCurrentProject = isTranslationRunActive(
@@ -154,7 +153,6 @@ export function DocumentFeature() {
   const {
     isLoading: sectionLoading,
     data: sectionData,
-    refetch: refetchSection,
   } = useSection(activeProject?.id ?? '', activeSectionId ?? '');
 
   useEffect(() => {
@@ -162,45 +160,20 @@ export function DocumentFeature() {
     setCurrentSection(sectionData);
   }, [activeSectionId, sectionData, setCurrentSection]);
 
-  const { startTranslation, stopTranslation } = useFullTranslate(activeProject?.id);
-
-  const runFullTranslate = useCallback(
-    async (method: TranslationMethod = TranslationMethod.FOUR_STEP, model?: string) => {
-      if (!activeProject) return;
-
-      const methodType = method === TranslationMethod.FOUR_STEP ? 'four-step' : 'normal';
-      await startTranslation(
-        activeProject.id,
-        data => {
-          if (data.step || data.message) {
-            setCurrentStep(data.step || data.message || null);
-          }
-        },
-        () => {
-          setCurrentStep(null);
-          setBackendTranslationStatus(null);
-          if (activeSectionId) {
-            refetchSection();
-          }
-        },
-        methodType,
-        model
-      );
-    },
-    [activeProject, activeSectionId, refetchSection, setBackendTranslationStatus, setCurrentStep, startTranslation]
-  );
+  const { stopTranslation } = useFullTranslate();
 
   const {
     cancelTermReview,
     isPreparingFullTranslate,
     isSubmittingTermReview,
     pendingTermReview,
+    termReviewTimeoutSeconds,
     prepareTermReviewIfNeeded,
     submitTermReview,
   } = useTermReviewFlow({
     currentProjectId: activeProject?.id,
+    activeRunId: backendTranslationStatus?.active_run_id,
     setView,
-    runFullTranslate,
   });
 
   useEffect(() => {
@@ -497,8 +470,10 @@ export function DocumentFeature() {
       return (
         <Suspense fallback={<LazyPanelFallback />}>
           <TerminologyReviewPage
+            key={pendingTermReview.artifact_id}
             review={pendingTermReview}
             isSubmitting={isSubmittingTermReview}
+            autoContinueSeconds={termReviewTimeoutSeconds}
             onSubmit={handleSubmitTermReview}
             onCancel={handleCancelTermReview}
           />
@@ -760,18 +735,17 @@ export function DocumentFeature() {
               {pendingStartMethod === TranslationMethod.FOUR_STEP
                 ? '确定要使用四步法翻译全文吗？系统会先做术语预检，再进行分析、初稿、批评和修订。'
                 : '确定要开始全文翻译吗？系统会先做术语预检，再进行普通全文翻译。'}
+              {' '}任务由后台持续运行，关闭浏览器不会中断；术语未在确认窗口内提交时会自动采用建议继续。
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>取消</AlertDialogCancel>
             <AlertDialogAction onClick={async () => {
               try {
-                const intercepted = await prepareTermReviewIfNeeded(
+                await prepareTermReviewIfNeeded(
                   pendingStartMethod,
                   pendingStartModel
                 );
-                if (intercepted) return;
-                await runFullTranslate(pendingStartMethod, pendingStartModel);
               } catch (error) {
                 console.error('Failed to start full translation:', error);
                 toast.error('启动全文翻译失败，请重试');

@@ -180,9 +180,10 @@ export class ApiClient {
    */
   private async executeRequest<T>(
     fn: () => Promise<Response>,
-    options?: RequestOptions
+    options?: RequestOptions,
+    retryByDefault: boolean = true
   ): Promise<T> {
-    const retry = options?.retry !== false;
+    const retry = options?.retry ?? retryByDefault;
     let lastError: Error | null = null;
 
     for (let attempt = 0; attempt <= (retry ? this.retryCount : 0); attempt++) {
@@ -268,7 +269,8 @@ export class ApiClient {
           },
           options?.timeout ?? this.defaultTimeout
         ),
-      options
+      options,
+      false
     );
   }
 
@@ -295,7 +297,8 @@ export class ApiClient {
           },
           options?.timeout ?? this.defaultTimeout
         ),
-      options
+      options,
+      false
     );
   }
 
@@ -320,7 +323,8 @@ export class ApiClient {
           },
           options?.timeout ?? this.defaultTimeout
         ),
-      options
+      options,
+      false
     );
   }
 
@@ -345,7 +349,8 @@ export class ApiClient {
           },
           options?.timeout ?? this.defaultTimeout
         ),
-      options
+      options,
+      false
     );
   }
 
@@ -368,7 +373,8 @@ export class ApiClient {
           },
           options?.timeout ?? this.defaultTimeout
         ),
-      options
+      options,
+      false
     );
   }
 

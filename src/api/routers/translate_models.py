@@ -2,7 +2,7 @@
 Translate router request/response models.
 """
 
-from typing import Optional
+from typing import Literal, Optional
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -120,6 +120,11 @@ class PostOptimizeResponse(BaseModel):
 
 class FullTranslateRequest(BaseModel):
     model: Optional[str] = None
+
+
+class LongformWorkflowStartRequest(BaseModel):
+    method: Literal["normal", "four-step"] = "four-step"
+    model: Optional[str] = Field(None, max_length=100)
 
 
 class ResolveConflictRequest(BaseModel):

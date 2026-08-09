@@ -1,5 +1,6 @@
 """Translation Agent API entrypoint."""
 
+import asyncio
 import os
 import logging
 from dotenv import load_dotenv
@@ -20,14 +21,13 @@ except ValueError as exc:
 import subprocess
 from pathlib import Path
 
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
-from starlette.middleware.base import BaseHTTPMiddleware
 
-from .middleware import LoggingMiddleware, register_error_handlers
+from .middleware import LimitUploadSize, LoggingMiddleware, register_error_handlers
 from .middleware.rate_limit import limiter, RateLimitExceeded, _rate_limit_exceeded_handler
 from .routers import (
     confirmation,
@@ -56,19 +56,7 @@ app = FastAPI(
 # 增加请求体大小限制（支持大文档）
 MAX_REQUEST_SIZE = 100 * 1024 * 1024  # 100MB
 
-class LimitUploadSize(BaseHTTPMiddleware):
-    async def dispatch(self, request: Request, call_next):
-        if request.method in ["POST", "PUT", "PATCH"]:
-            content_length = request.headers.get("content-length")
-            if content_length and int(content_length) > MAX_REQUEST_SIZE:
-                from fastapi.responses import JSONResponse
-                return JSONResponse(
-                    {"detail": "Request body too large (max 100MB)"},
-                    status_code=413
-                )
-        return await call_next(request)
-
-app.add_middleware(LimitUploadSize)
+app.add_middleware(LimitUploadSize, max_request_size=MAX_REQUEST_SIZE)
 app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(
     CORSMiddleware,
@@ -196,7 +184,7 @@ def _collect_port_connections(port: int) -> list[str]:
 async def connection_status():
     """Return basic connection stats for the API port."""
     try:
-        connections = _collect_port_connections(54321)
+        connections = await asyncio.to_thread(_collect_port_connections, 54321)
         # 安全:仅返回聚合计数,不再回传 netstat 原始行(含本机/对端 IP:Port 与 PID,
         # 属未授权信息泄露,见审计 U8)。
         return {

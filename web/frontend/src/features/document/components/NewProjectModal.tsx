@@ -93,8 +93,12 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
     const relativePath = first.webkitRelativePath || first.name;
     const topFolder = relativePath.split('/')[0];
 
-    if (!topFolder.endsWith('_files') && !topFolder.endsWith('.files')) {
-      toast.error('请选择对应的 *_files 资源目录');
+    if (
+      !topFolder.endsWith('_files') &&
+      !topFolder.endsWith('.files') &&
+      !topFolder.endsWith('_images')
+    ) {
+      toast.error('请选择对应的 *_files、.files 或 *_images 资源目录');
       return;
     }
 
@@ -352,7 +356,7 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
           {currentFileIsHtml && (
             <div>
               <Label className="mb-2 block">
-                选择对应 *_files 资源目录（可选）
+                选择对应资源目录（*_files、.files 或 *_images，可选）
               </Label>
               <div
                 onClick={() => assetsInputRef.current?.click()}

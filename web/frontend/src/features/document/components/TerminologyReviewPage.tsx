@@ -1,5 +1,5 @@
-﻿import { useMemo, useState } from 'react';
-import { AlertTriangle, ArrowLeft, CheckCircle2, Languages, Sparkles } from 'lucide-react';
+﻿import { useEffect, useMemo, useState } from 'react';
+import { AlertTriangle, ArrowLeft, CheckCircle2, Clock3, Languages, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button-extended';
 import type {
   TermReviewDecision,
@@ -9,6 +9,7 @@ import type {
 interface TerminologyReviewPageProps {
   review: TermReviewPayload;
   isSubmitting?: boolean;
+  autoContinueSeconds?: number;
   onSubmit: (decisions: TermReviewDecision[]) => Promise<void> | void;
   onCancel: () => void;
 }
@@ -33,6 +34,7 @@ const termInputId = (term: string) => `term-input-${encodeURIComponent(term)}`;
 export function TerminologyReviewPage({
   review,
   isSubmitting = false,
+  autoContinueSeconds = 600,
   onSubmit,
   onCancel,
 }: TerminologyReviewPageProps) {
@@ -49,6 +51,26 @@ export function TerminologyReviewPage({
 
     return Object.fromEntries(entries);
   });
+  const [autoContinueDeadline] = useState(
+    () => Date.now() + Math.max(0, autoContinueSeconds) * 1000
+  );
+  const [clockTime, setClockTime] = useState(() => Date.now());
+
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setClockTime(Date.now());
+    }, 1000);
+    return () => window.clearInterval(intervalId);
+  }, []);
+
+  const remainingSeconds = Math.max(
+    0,
+    Math.ceil((autoContinueDeadline - clockTime) / 1000)
+  );
+
+  const remainingLabel = `${Math.floor(remainingSeconds / 60)}:${String(
+    remainingSeconds % 60
+  ).padStart(2, '0')}`;
 
   const stats = useMemo(() => {
     const values = Object.values(decisions);
@@ -121,12 +143,24 @@ export function TerminologyReviewPage({
           </div>
           <h1 className="text-2xl font-bold text-text-primary">{review.project_title}</h1>
           <p className="mt-2 text-sm text-text-muted">
-            正式开始全文四步法翻译前，先确认高优先级新术语。系统只拦截标题命中、高频和明显歧义的术语。
+            后台任务已经启动，当前停在术语确认阶段。系统只展示标题命中、高频和明显歧义的术语。
           </p>
         </div>
         <Button variant="outline" onClick={onCancel} leftIcon={<ArrowLeft className="h-4 w-4" />}>
-          暂不翻译
+          返回文档
         </Button>
+      </div>
+
+      <div className="mb-6 flex items-start gap-3 rounded-xl border border-primary-500/20 bg-primary-500/5 p-4">
+        <Clock3 className="mt-0.5 h-5 w-5 flex-none text-primary-600" />
+        <div>
+          <div className="font-medium text-text-primary">
+            自动继续倒计时：{remainingLabel}
+          </div>
+          <p className="mt-1 text-sm text-text-muted">
+            倒计时结束后，后台会自动采用当前建议并继续翻译。关闭或刷新浏览器不会中断任务；只有“停止全文翻译”会终止它。
+          </p>
+        </div>
       </div>
 
       <div className="mb-6 grid gap-4 md:grid-cols-4">
@@ -374,7 +408,7 @@ export function TerminologyReviewPage({
         </div>
         <div className="flex gap-3">
           <Button variant="outline" onClick={onCancel}>
-            取消
+            返回文档（后台继续等待）
           </Button>
           <Button
             variant="default"
@@ -382,7 +416,7 @@ export function TerminologyReviewPage({
             isLoading={isSubmitting}
             disabled={hasInvalidDecision}
           >
-            保存术语并开始全文翻译
+            保存术语并让后台继续
           </Button>
         </div>
       </div>

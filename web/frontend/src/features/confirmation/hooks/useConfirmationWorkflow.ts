@@ -5,6 +5,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useConfirmationStore } from '../stores/confirmationStore';
 import { confirmationApi } from '../api/confirmationApi';
+import { isTranslationRunActive } from '../../document/translationStatus';
 import type {
   ConfirmParagraphRequest,
   ParagraphConfirmationResponse,
@@ -58,7 +59,7 @@ export function useConfirmationWorkflow() {
 
       const { isComplete } = getCompletionState(status);
 
-      if (status.status === 'processing') {
+      if (isTranslationRunActive(status, id)) {
         setWorkflowStatus('translating');
       } else if (status.status === 'cancelled') {
         setError('翻译已取消，可重新开始');
@@ -85,37 +86,55 @@ export function useConfirmationWorkflow() {
   useEffect(() => {
     if (!projectId || workflowStatus !== 'translating') return;
 
-    const interval = setInterval(async () => {
+    let cancelled = false;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const scheduleNext = (delayMs: number) => {
+      if (!cancelled) {
+        timeoutId = setTimeout(() => {
+          void pollStatus();
+        }, delayMs);
+      }
+    };
+
+    const pollStatus = async () => {
       try {
         const status = await confirmationApi.getTranslationStatus(projectId);
+        if (cancelled) return;
         const { isComplete } = getCompletionState(status);
 
-        if (status.status === 'processing') {
+        if (isTranslationRunActive(status, projectId)) {
+          scheduleNext(2000);
           return;
         }
 
         if (status.status === 'cancelled') {
           setError('翻译已取消，可重新开始');
           setWorkflowStatus('ready');
-          clearInterval(interval);
         } else if (status.status === 'failed') {
           setError('翻译失败，请重试');
           setWorkflowStatus('ready');
-          clearInterval(interval);
         } else if (isComplete) {
           setWorkflowStatus('ready');
-          clearInterval(interval);
         } else {
           setError('翻译未完成，请点击重试继续翻译');
           setWorkflowStatus('ready');
-          clearInterval(interval);
         }
       } catch (error) {
-        console.error('Failed to check translation status:', error);
+        if (!cancelled) {
+          console.error('Failed to check translation status:', error);
+          scheduleNext(5000);
+        }
       }
-    }, 2000);
+    };
 
-    return () => clearInterval(interval);
+    scheduleNext(2000);
+
+    return () => {
+      cancelled = true;
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
+    };
   }, [getCompletionState, projectId, workflowStatus, setWorkflowStatus, setError]);
 
   // 加载段落

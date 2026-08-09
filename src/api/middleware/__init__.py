@@ -16,6 +16,7 @@ from .error_handlers import (
     register_error_handlers,
 )
 from .logging import LoggingMiddleware
+from .upload_limit import LimitUploadSize
 
 __all__ = [
     "APIException",
@@ -26,4 +27,5 @@ __all__ = [
     "ServiceUnavailableException",
     "register_error_handlers",
     "LoggingMiddleware",
+    "LimitUploadSize",
 ]

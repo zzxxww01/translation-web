@@ -68,12 +68,14 @@ def get_task_model_alias(task_type: str) -> str:
             config_loader = get_config_loader()
             llm_config = config_loader.load()
             alias = llm_config.task_defaults.get(task_type)
-            print(f"[DEBUG] task_type={task_type}, alias from config={alias}", flush=True)
-            logger.info(f"[LLM Factory] task_type={task_type}, alias from config={alias}")
+            logger.debug(
+                "[LLM Factory] task_type=%s, alias from config=%s",
+                task_type,
+                alias,
+            )
             if alias:
                 resolved_alias = config_loader.resolve_config_model_alias(alias)
-                print(f"[DEBUG] resolved_alias={resolved_alias}", flush=True)
-                logger.info(f"[LLM Factory] resolved_alias={resolved_alias}")
+                logger.debug("[LLM Factory] resolved_alias=%s", resolved_alias)
                 if resolved_alias:
                     return resolved_alias
                 logger.warning(

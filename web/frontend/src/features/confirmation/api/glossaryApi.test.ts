@@ -30,6 +30,7 @@ const succeededJob: TermReviewJob = {
 };
 
 afterEach(() => {
+  vi.useRealTimers();
   vi.restoreAllMocks();
 });
 
@@ -93,6 +94,30 @@ describe('glossaryApi terminology review identity', () => {
 
     expect(result).toEqual(reviewPayload);
     expect(result.artifact_id).toBe('artifact-1');
+  });
+
+  it('backs off polling for long-running terminology review jobs', async () => {
+    vi.useFakeTimers();
+    vi.spyOn(apiClient, 'post').mockResolvedValueOnce({
+      ...succeededJob,
+      status: 'queued',
+      result: null,
+    });
+    vi.spyOn(apiClient, 'get')
+      .mockResolvedValueOnce({ ...succeededJob, status: 'running', result: null })
+      .mockResolvedValueOnce({ ...succeededJob, status: 'running', result: null })
+      .mockResolvedValueOnce(succeededJob);
+    const timeoutSpy = vi.spyOn(globalThis, 'setTimeout');
+
+    const pending = glossaryApi.prepareTermReview('project-1', 'model-a');
+    await vi.runAllTimersAsync();
+
+    await expect(pending).resolves.toEqual(reviewPayload);
+    expect(timeoutSpy.mock.calls.map(call => call[1])).toEqual([
+      1000,
+      1600,
+      2560,
+    ]);
   });
 
   it('submits decisions with the identity of the displayed artifact', async () => {

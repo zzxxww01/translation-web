@@ -1,4 +1,5 @@
 from pathlib import Path
+import asyncio
 from types import SimpleNamespace
 
 import pytest
@@ -14,6 +15,7 @@ from src.core.models import (
     TranslationStrategy,
 )
 from src.services.batch_translation_service import BatchTranslationService
+import src.services.batch_translation_service as batch_translation_module
 from src.services.batch_translation_types import TranslationProgress
 
 
@@ -190,3 +192,47 @@ def test_rebuild_context_uses_only_persisted_prefix() -> None:
 
     assert service.context_manager.get_all_translations() == {}
     assert service.context_manager.has_term_usage("token") is False
+
+
+@pytest.mark.asyncio
+async def test_section_prescan_timeout_is_recorded_and_does_not_block_translation(
+    monkeypatch,
+) -> None:
+    async def never_returns(*_args, **_kwargs):
+        await asyncio.Event().wait()
+
+    monkeypatch.setattr(
+        batch_translation_module,
+        "run_llm_blocking",
+        never_returns,
+    )
+    section = Section(
+        section_id="s1",
+        title="Intro",
+        paragraphs=[Paragraph(id="p1", index=0, source="Source")],
+    )
+    service = BatchTranslationService.__new__(BatchTranslationService)
+    service.PRESCAN_TIMEOUT_SECONDS = 0.01
+    applied_results = []
+    service.translator = SimpleNamespace(
+        scan_section_terms=lambda **_kwargs: None,
+        apply_section_prescan=lambda result, **_kwargs: applied_results.append(result),
+        prescan_section=lambda **_kwargs: None,
+    )
+    progress = TranslationProgress(
+        project_id="demo",
+        total_sections=1,
+        total_paragraphs=1,
+        original_status=ProjectStatus.CREATED,
+    )
+
+    result = await service._run_section_prescan(
+        "demo",
+        section,
+        progress,
+    )
+
+    assert result is None
+    assert progress.errors[0]["type"] == "prescan_timeout"
+    assert progress.errors[0]["section_id"] == "s1"
+    assert applied_results == []

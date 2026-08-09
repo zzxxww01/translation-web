@@ -8,9 +8,7 @@ from ..middleware import BadRequestException
 from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.json_utils import parse_llm_json_response
-import asyncio
-
-from ..utils.llm_factory import generate_with_fallback
+from ..utils.llm_factory import generate_with_fallback_budget
 from .slack_models import (
     ConversationMessage,
     SlackComposeRequest,
@@ -63,7 +61,10 @@ async def compose_slack_message(
     )
 
     try:
-        response_text = await asyncio.to_thread(generate_with_fallback, prompt, task_type="slack")
+        response_text = await generate_with_fallback_budget(
+            prompt,
+            task_type="slack",
+        )
         data = parse_llm_json_response(response_text)
         versions = normalize_variants(data.get("versions", []), chinese_fallback=content)
         return SlackComposeResponse(versions=versions)

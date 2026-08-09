@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import Optional
 
+from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -75,6 +76,15 @@ class Settings(BaseSettings):
     default_translation_style: str = "natural_professional"
     default_segment_level: str = "h2"
     translation_prompt_style: str = "original"
+    # A long-form run is owned by the backend as soon as the user starts it.
+    # Terminology review remains interactive for this grace period, then the
+    # current suggestions are accepted automatically so an unattended browser
+    # cannot leave a paid translation run blocked forever.
+    term_review_confirmation_timeout_seconds: int = Field(
+        default=600,
+        ge=30,
+        le=86400,
+    )
     # Obsidian-oriented LaTeX delimiter rewrite (\( \) → $ $) in markdown
     # postprocess. Off by default: exports keep the source delimiters (A-15).
     latex_obsidian_normalize: bool = False

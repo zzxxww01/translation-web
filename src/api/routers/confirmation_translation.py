@@ -5,18 +5,31 @@ Confirmation translation/review endpoints.
 import asyncio
 from datetime import datetime
 import json
+import logging
 from pathlib import Path
 import uuid
+from typing import Any, Dict
 
-from fastapi import APIRouter, Request
+from fastapi import APIRouter, Body, Request
 
 from src.agents.translation import TranslationAgent, TranslationContext
 from src.config.timeout_config import TimeoutConfig
+from src.settings import settings
 from src.core.glossary_prompt import build_term_usage_from_project
 from src.core.models import ArticleAnalysis, ParagraphStatus
 from src.core.project import ConcurrentParagraphUpdateError
 from src.api.utils.concurrency import run_blocking
+from src.api.utils.llm_factory import create_llm_provider
 from src.api.utils.glossary import get_combined_glossary
+from src.services.batch_translation_service import BatchTranslationService
+from src.services.terminology_review_job_service import (
+    ActiveTerminologyReviewModelConflict,
+    TerminologyReviewJobStore,
+)
+from src.services.terminology_review_service import (
+    TermReviewArtifactConflict,
+    TerminologyReviewService,
+)
 
 from ..dependencies import (
     ProjectManagerDep,
@@ -24,6 +37,7 @@ from ..dependencies import (
     BatchServiceDep,
     ConfirmationServiceDep,
     MemoryServiceDep,
+    TranslationStatusServiceDep,
 )
 from ..middleware import BadRequestException, ConflictException, NotFoundException
 from ..middleware.rate_limit import limiter
@@ -34,12 +48,265 @@ from .confirmation_models import (
     RETRANSLATE_OPTIONS,
     resolve_retranslate_instruction,
 )
+from .project_glossary import ensure_term_review_job
+from .translate_models import LongformWorkflowStartRequest
 from .translate_utils import build_retranslate_instruction, get_latest_translation_text
 
 
 router = APIRouter()
+logger = logging.getLogger(__name__)
+
+# Background translations started by the confirmation workflow must outlive the
+# request that acknowledged them. Keeping strong references also prevents an
+# unobserved task from being garbage-collected after the browser navigates away.
+_confirmation_translation_tasks: set[asyncio.Task] = set()
+_longform_workflow_tasks: set[asyncio.Task] = set()
 
 ALLOWED_CONSISTENCY_ISSUE_TYPES = {"terminology"}
+
+
+def _build_auto_term_review_decisions(review: Dict[str, Any]) -> list[dict]:
+    """Accept the current suggestions once the human confirmation window ends."""
+    decisions: list[dict] = []
+    seen: set[str] = set()
+    for section in review.get("sections") or []:
+        for candidate in section.get("candidates") or []:
+            term = str(candidate.get("term") or "").strip()
+            if not term:
+                continue
+            key = term.casefold()
+            if key in seen:
+                continue
+            seen.add(key)
+            translation = str(
+                candidate.get("suggested_translation") or ""
+            ).strip()
+            decision = {
+                "term": term,
+                "action": "accept" if translation else "skip",
+                "translation": translation or None,
+                "first_occurrence": candidate.get("first_occurrence"),
+            }
+            decisions.append(decision)
+    return decisions
+
+
+def _build_longform_service(
+    base_service: BatchTranslationService,
+    body: LongformWorkflowStartRequest,
+) -> BatchTranslationService:
+    if body.model:
+        llm = create_llm_provider(provider=body.model)
+        analysis_llm = llm
+    else:
+        llm = base_service.llm
+        analysis_llm = base_service.analysis_llm
+    translation_mode = (
+        BatchTranslationService.TRANSLATION_MODE_FOUR_STEP
+        if body.method == "four-step"
+        else BatchTranslationService.TRANSLATION_MODE_SECTION
+    )
+    return BatchTranslationService(
+        llm_provider=llm,
+        project_manager=base_service.project_manager,
+        translation_mode=translation_mode,
+        max_concurrent_sections=10,
+        analysis_llm_provider=analysis_llm,
+        user_model_override=body.model,
+    )
+
+
+async def _run_longform_workflow(
+    *,
+    project_id: str,
+    lease_id: str,
+    term_review_job_id: str,
+    translation_service: BatchTranslationService,
+    confirmation_timeout_seconds: float,
+    poll_interval_seconds: float = 1.0,
+) -> None:
+    """Own the pre-review gate and translation independently of any browser."""
+    project_manager = translation_service.project_manager
+    job_store = TerminologyReviewJobStore(project_manager.projects_path)
+    review_service = TerminologyReviewService(
+        project_manager=project_manager,
+        glossary_manager=project_manager.glossary_manager,
+    )
+
+    def cancelled() -> bool:
+        return translation_service._is_cancelled(project_id)
+
+    try:
+        job: Dict[str, Any]
+        while True:
+            if cancelled():
+                await asyncio.to_thread(
+                    job_store.mark_confirmation_resolved,
+                    project_id,
+                    term_review_job_id,
+                    "cancelled",
+                )
+                return
+            job = await asyncio.to_thread(
+                job_store.get,
+                project_id,
+                term_review_job_id,
+            )
+            if job.get("status") not in {"queued", "running"}:
+                break
+            await asyncio.sleep(poll_interval_seconds)
+
+        if job.get("status") == "succeeded":
+            review = job.get("result") or {}
+            review_required = bool(
+                review.get("review_required")
+                and int(review.get("total_candidates") or 0) > 0
+            )
+            if review_required:
+                translation_service._set_active_run(
+                    project_id,
+                    run_id=term_review_job_id,
+                    status="starting",
+                    current_step="等待术语确认",
+                )
+                await asyncio.to_thread(
+                    job_store.mark_waiting_confirmation,
+                    project_id,
+                    term_review_job_id,
+                    timeout_seconds=max(1, int(confirmation_timeout_seconds)),
+                )
+                logger.info(
+                    "[%s] Waiting up to %.1fs for terminology confirmation",
+                    project_id,
+                    confirmation_timeout_seconds,
+                )
+                loop = asyncio.get_running_loop()
+                deadline = loop.time() + confirmation_timeout_seconds
+                while True:
+                    if cancelled():
+                        await asyncio.to_thread(
+                            job_store.mark_confirmation_resolved,
+                            project_id,
+                            term_review_job_id,
+                            "cancelled",
+                        )
+                        return
+                    current = await asyncio.to_thread(
+                        job_store.get,
+                        project_id,
+                        term_review_job_id,
+                    )
+                    if current.get("confirmation_status") == "submitted":
+                        break
+                    remaining = deadline - loop.time()
+                    if remaining <= 0:
+                        decisions = _build_auto_term_review_decisions(review)
+                        if decisions:
+                            try:
+                                await asyncio.to_thread(
+                                    review_service.apply_review,
+                                    project_id,
+                                    decisions,
+                                    artifact_id=term_review_job_id,
+                                )
+                            except TermReviewArtifactConflict:
+                                # A human submission can win the artifact lock at
+                                # the exact timeout boundary. Either winner is a
+                                # valid release of the gate, so continue once.
+                                logger.info(
+                                    "[%s] Terminology review was resolved while the auto-accept ran",
+                                    project_id,
+                                )
+                            except Exception:
+                                logger.exception(
+                                    "[%s] Failed to auto-accept terminology; continuing with the persisted glossary",
+                                    project_id,
+                                )
+                                await asyncio.to_thread(
+                                    job_store.mark_confirmation_resolved,
+                                    project_id,
+                                    term_review_job_id,
+                                    "auto_apply_failed",
+                                )
+                            else:
+                                await asyncio.to_thread(
+                                    job_store.mark_confirmation_resolved,
+                                    project_id,
+                                    term_review_job_id,
+                                    "auto_accepted",
+                                )
+                        else:
+                            await asyncio.to_thread(
+                                job_store.mark_confirmation_resolved,
+                                project_id,
+                                term_review_job_id,
+                                "auto_skipped",
+                            )
+                        break
+                    await asyncio.sleep(min(poll_interval_seconds, remaining))
+            else:
+                translation_service._set_active_run(
+                    project_id,
+                    run_id=term_review_job_id,
+                    status="starting",
+                    current_step="术语预检完成，准备翻译",
+                )
+                await asyncio.to_thread(
+                    job_store.mark_confirmation_resolved,
+                    project_id,
+                    term_review_job_id,
+                    "not_required",
+                )
+        else:
+            translation_service._set_active_run(
+                project_id,
+                run_id=term_review_job_id,
+                status="starting",
+                current_step="术语预检失败，继续翻译",
+            )
+            logger.warning(
+                "[%s] Terminology preparation failed; translation will continue: %s",
+                project_id,
+                job.get("error") or "unknown error",
+            )
+            await asyncio.to_thread(
+                job_store.mark_confirmation_resolved,
+                project_id,
+                term_review_job_id,
+                "preparation_failed",
+            )
+
+        if cancelled():
+            return
+
+        translation_service._set_active_run(
+            project_id,
+            run_id=term_review_job_id,
+            status="starting",
+            current_step="开始全文翻译",
+        )
+
+        def _run_translation_in_thread() -> Dict[str, Any]:
+            async def _runner() -> Dict[str, Any]:
+                return await translation_service.translate_project(project_id)
+
+            return asyncio.run(_runner())
+
+        await asyncio.to_thread(_run_translation_in_thread)
+    except asyncio.CancelledError:
+        logger.warning(
+            "[%s] Long-form workflow stopped because the API process is shutting down",
+            project_id,
+        )
+        raise
+    except Exception:
+        logger.exception("[%s] Long-form background workflow failed", project_id)
+    finally:
+        translation_service._clear_cancelled(project_id)
+        translation_service._release_active_run(
+            project_id,
+            lease_id=lease_id,
+        )
 
 
 def _load_latest_article_analysis(pm, project_id: str) -> ArticleAnalysis | None:
@@ -253,6 +520,11 @@ async def start_translation(
     project_id: str,
     service: BatchServiceDep,
 ):
+    try:
+        await asyncio.to_thread(service.project_manager.get, project_id)
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
+
     slot_claim = await service.claim_translation_slot(project_id)
     if slot_claim["status"] == "busy":
         raise BadRequestException(
@@ -269,25 +541,135 @@ async def start_translation(
 
         return asyncio.run(_runner())
 
+    async def _run_translation_background() -> None:
+        try:
+            # translate_project 内部仍含同步 LLM 链路，整段放到工作线程；HTTP
+            # 请求只负责成功取得项目租约并立即确认启动。
+            await asyncio.to_thread(_run_translation_in_thread)
+        except Exception:
+            logger.exception(
+                "[%s] Confirmation workflow background translation failed",
+                project_id,
+            )
+        finally:
+            # translate_project 正常终止时会按 run_id 释放；这里再按原 lease
+            # 兜底，覆盖项目读取/工件初始化等进入主 try 之前的失败。
+            service._release_active_run(project_id, lease_id=lease_id)
+
     try:
-        # translate_project 内部有多段同步 LLM 调用（Phase0 分析、标题翻译、质量报告），
-        # 直接 await 会冻结整个事件循环，按四步法路由的写法整段搬到工作线程执行。
-        return await asyncio.to_thread(_run_translation_in_thread)
-    except NotFoundException:
+        task = asyncio.create_task(
+            _run_translation_background(),
+            name=f"confirmation-translation:{project_id}",
+        )
+    except Exception:
         service._release_active_run(project_id, lease_id=lease_id)
         raise
-    except Exception as e:
-        service._release_active_run(project_id, lease_id=lease_id)
-        raise BadRequestException(detail=f"Failed to start translation: {str(e)}")
+    _confirmation_translation_tasks.add(task)
+    task.add_done_callback(_confirmation_translation_tasks.discard)
+    return {
+        "status": "started",
+        "project_id": project_id,
+        "run_id": slot_claim.get("run_id"),
+    }
+
+
+@router.post("/{project_id}/translation-workflow", status_code=202)
+@limiter.limit("3/minute")
+async def start_longform_workflow(
+    request: Request,
+    project_id: str,
+    service: BatchServiceDep,
+    body: LongformWorkflowStartRequest = Body(
+        default_factory=LongformWorkflowStartRequest
+    ),
+):
+    """Start a server-owned terminology-review and translation workflow."""
+    try:
+        await asyncio.to_thread(service.project_manager.get, project_id)
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
+
+    translation_service = await asyncio.to_thread(
+        _build_longform_service,
+        service,
+        body,
+    )
+    slot_claim = await translation_service.claim_translation_slot(project_id)
+    if slot_claim["status"] == "busy":
+        raise ConflictException(
+            detail=(
+                "This project already has an active long-form workflow. "
+                f"active_run_id={slot_claim.get('active_run_id')}"
+            )
+        )
+    lease_id = str(slot_claim["lease_id"])
+
+    try:
+        job = await ensure_term_review_job(
+            project_id=project_id,
+            pm=translation_service.project_manager,
+            gm=translation_service.project_manager.glossary_manager,
+            llm=translation_service.llm,
+            model=body.model,
+        )
+        translation_service._set_active_run(
+            project_id,
+            run_id=job["job_id"],
+            status="starting",
+            current_step="术语预检中",
+        )
+        task = asyncio.create_task(
+            _run_longform_workflow(
+                project_id=project_id,
+                lease_id=lease_id,
+                term_review_job_id=job["job_id"],
+                translation_service=translation_service,
+                confirmation_timeout_seconds=(
+                    settings.term_review_confirmation_timeout_seconds
+                ),
+            ),
+            name=f"longform-workflow:{project_id}",
+        )
+    except ActiveTerminologyReviewModelConflict as exc:
+        translation_service._release_active_run(
+            project_id,
+            lease_id=lease_id,
+        )
+        raise ConflictException(
+            detail=str(exc),
+            error_code="TERM_REVIEW_MODEL_CONFLICT",
+        ) from exc
+    except Exception:
+        translation_service._release_active_run(
+            project_id,
+            lease_id=lease_id,
+        )
+        raise
+
+    _longform_workflow_tasks.add(task)
+    task.add_done_callback(_longform_workflow_tasks.discard)
+    return {
+        "status": "started",
+        "project_id": project_id,
+        "run_id": job["job_id"],
+        "term_review_job_id": job["job_id"],
+        "term_review_timeout_seconds": (
+            settings.term_review_confirmation_timeout_seconds
+        ),
+        "method": body.method,
+        "model": body.model,
+    }
 
 
 @router.get("/{project_id}/translation-status")
 async def get_translation_status(
     project_id: str,
-    service: BatchServiceDep,
+    service: TranslationStatusServiceDep,
 ):
     try:
         return await service.get_translation_progress(project_id)
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
     except NotFoundException:
         raise
     except Exception as e:
@@ -299,7 +681,7 @@ async def get_translation_status(
 async def cancel_translation(
     request: Request,
     project_id: str,
-    service: BatchServiceDep,
+    service: TranslationStatusServiceDep,
 ):
     try:
         return await service.cancel_translation(project_id)

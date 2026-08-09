@@ -101,6 +101,9 @@ export const REQUEST_TIMEOUTS = {
   PARAGRAPH_BATCH_TRANSLATE: 600000,
   PARAGRAPH_WORD_MEANING: 120000,
   TERM_REVIEW_PREPARE: 1800000,
+  // The server allows provider fallback for up to 170s on Slack/tools LLM
+  // requests, so the browser must remain connected slightly longer.
+  SHORT_FORM_LLM: 180000,
 } as const;
 
 export enum TranslationMethod {

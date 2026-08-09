@@ -126,7 +126,10 @@ class InlineRecoveryService:
             else:
                 text = payload.text
         except FormatRecoveryError as error:
-            self._logger.warning(
+            # Expected recoverable quality signal. Export aggregates all affected
+            # block ids into one warning and one lint artifact; logging every
+            # block made a single export emit hundreds of near-identical lines.
+            self._logger.debug(
                 "Format recovery failed for block %s, attempting smart fallback: %s",
                 first.parent_block_id or first.id,
                 error,

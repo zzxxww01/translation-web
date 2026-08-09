@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import re
 import threading
+import time
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -25,6 +26,7 @@ from src.core.models import (
 )
 from src.core.project import ProjectManager
 from src.llm.base import LLMProvider
+from src.llm.errors import LLMTransportError
 from src.services.term_review_artifact import (
     SUBMISSION_PENDING,
     SUBMISSION_SUBMITTED,
@@ -78,6 +80,8 @@ class TerminologyReviewService:
     HIGH_FREQUENCY_THRESHOLD = 2
     SIMILARITY_THRESHOLD = 0.45
     MAX_SIMILAR_TERMS = 3
+    PRESCAN_MAX_ATTEMPTS = 3
+    PRESCAN_RETRY_BASE_DELAY_SECONDS = 0.5
     _artifact_locks: Dict[str, threading.RLock] = {}
     _artifact_locks_guard = threading.Lock()
 
@@ -105,9 +109,32 @@ class TerminologyReviewService:
             include_strategy_notes=False,
         )
         aggregated: Dict[str, AggregatedCandidate] = {}
+        scan_errors: List[Dict[str, str]] = []
+        scanned_sections = 0
 
         for section in sections:
-            prescan_result = self._prescan_section(section, existing_terms)
+            try:
+                prescan_result = self._prescan_section(section, existing_terms)
+                scanned_sections += 1
+            except LLMTransportError as exc:
+                # A single transient upstream failure must not discard results
+                # already collected for every other section. The UI can surface
+                # this as a partial review and still continue translation.
+                logger.warning(
+                    "Term-review prescan skipped section %s after %d attempts: %s",
+                    section.section_id,
+                    self.PRESCAN_MAX_ATTEMPTS,
+                    exc,
+                )
+                scan_errors.append(
+                    {
+                        "section_id": section.section_id,
+                        "section_title": section.title,
+                        "error_type": type(exc).__name__,
+                        "error": str(exc)[:500],
+                    }
+                )
+                continue
             if not prescan_result:
                 continue
 
@@ -156,6 +183,15 @@ class TerminologyReviewService:
             merged_glossary=merged_glossary,
             aggregated=aggregated,
             artifact_id=(artifact_id or "").strip() or uuid4().hex,
+        )
+        payload.update(
+            {
+                "is_partial": bool(scan_errors),
+                "total_sections": len(sections),
+                "scanned_sections": scanned_sections,
+                "failed_sections": len(scan_errors),
+                "scan_errors": scan_errors,
+            }
         )
         self._write_payload(project_id, payload)
         return payload
@@ -334,12 +370,20 @@ class TerminologyReviewService:
         if self.llm is None:
             raise RuntimeError("LLM provider is required for term-review prepare flow.")
         section_content = "\n\n".join(paragraph.source for paragraph in section.paragraphs)
-        return self.llm.prescan_section_with_flash(
-            section_id=section.section_id,
-            section_title=section.title,
-            section_content=section_content,
-            existing_terms=existing_terms,
-        )
+        for attempt in range(1, self.PRESCAN_MAX_ATTEMPTS + 1):
+            try:
+                return self.llm.prescan_section_with_flash(
+                    section_id=section.section_id,
+                    section_title=section.title,
+                    section_content=section_content,
+                    existing_terms=existing_terms,
+                )
+            except LLMTransportError:
+                if attempt >= self.PRESCAN_MAX_ATTEMPTS:
+                    raise
+                time.sleep(self.PRESCAN_RETRY_BASE_DELAY_SECONDS * attempt)
+
+        raise RuntimeError("Term-review prescan exhausted without a result")
 
     def _build_review_payload(
         self,

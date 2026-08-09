@@ -91,6 +91,9 @@ class TerminologyReviewJobStore:
                 "completed_at": None,
                 "result": None,
                 "error": None,
+                "confirmation_status": None,
+                "confirmation_deadline": None,
+                "confirmation_resolved_at": None,
             }
             self._write(job)
         return job, True
@@ -138,6 +141,58 @@ class TerminologyReviewJobStore:
             completed_at=self._now(),
             error=error,
         )
+
+    def mark_waiting_confirmation(
+        self,
+        project_id: str,
+        job_id: str,
+        *,
+        timeout_seconds: int,
+    ) -> Dict[str, Any]:
+        """Persist the human-review window after preparation has succeeded."""
+        with self._get_lock(project_id):
+            job = read_json(self._job_path(project_id, job_id))
+            if job.get("status") != "succeeded":
+                return job
+            # A very fast user can submit immediately after the preparation
+            # result becomes visible and before the workflow poller records its
+            # waiting window. Never turn that completed decision back into a
+            # pending gate.
+            if job.get("confirmation_status") == "submitted":
+                return job
+            now = datetime.now()
+            job.update(
+                {
+                    "confirmation_status": "waiting",
+                    "confirmation_deadline": (
+                        now + timedelta(seconds=timeout_seconds)
+                    ).isoformat(),
+                    "confirmation_resolved_at": None,
+                    "updated_at": now.isoformat(),
+                }
+            )
+            self._write(job)
+            return job
+
+    def mark_confirmation_resolved(
+        self,
+        project_id: str,
+        job_id: str,
+        resolution: str,
+    ) -> Dict[str, Any]:
+        """Record how the review gate was released without changing job result."""
+        with self._get_lock(project_id):
+            job = read_json(self._job_path(project_id, job_id))
+            now = self._now()
+            job.update(
+                {
+                    "confirmation_status": resolution,
+                    "confirmation_resolved_at": now,
+                    "updated_at": now,
+                }
+            )
+            self._write(job)
+            return job
 
     def _update(self, project_id: str, job_id: str, **updates: Any) -> Dict[str, Any]:
         with self._get_lock(project_id):

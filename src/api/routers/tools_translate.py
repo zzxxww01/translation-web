@@ -11,9 +11,8 @@ from src.prompts import get_prompt_manager
 from ..middleware import BadRequestException
 from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
-import asyncio
 
-from ..utils.llm_factory import generate_with_fallback
+from ..utils.llm_factory import generate_with_fallback_budget
 from .tools_models import TranslateRequest, TranslateResponse
 
 
@@ -52,7 +51,9 @@ async def translate_text(request: Request, body: TranslateRequest):
         prompt = prompt_manager.get("tools_translate_cn2en", text=body.text)
 
     try:
-        translation = (await asyncio.to_thread(generate_with_fallback, prompt, task_type="post")).strip()
+        translation = (
+            await generate_with_fallback_budget(prompt, task_type="post")
+        ).strip()
         for prefix in ["翻译结果", "译文:", "Translation:", "翻译:", "译文：", "Translation："]:
             if translation.startswith(prefix):
                 translation = translation[len(prefix):].strip()

@@ -157,6 +157,62 @@ async def _run_term_review_job(
         )
 
 
+async def ensure_term_review_job(
+    *,
+    project_id: str,
+    pm,
+    gm,
+    llm,
+    model: Optional[str],
+) -> Dict:
+    """Create one browser-independent preparation job, or reuse its live task."""
+    job_store = TerminologyReviewJobStore(pm.projects_path)
+    job, created = await run_blocking(
+        job_store.create_or_get_active,
+        project_id,
+        model,
+    )
+    if not created:
+        existing_task = _term_review_tasks.get(job["job_id"])
+        if existing_task is not None and not existing_task.done():
+            return job
+        await run_blocking(
+            job_store.mark_failed,
+            project_id,
+            job["job_id"],
+            "Terminology review task is no longer running.",
+        )
+        job, created = await run_blocking(
+            job_store.create_or_get_active,
+            project_id,
+            model,
+        )
+        if not created:
+            return job
+
+    if model:
+        llm = await run_blocking(create_llm_provider, provider=model)
+    service = TerminologyReviewService(
+        llm_provider=llm,
+        project_manager=pm,
+        glossary_manager=gm,
+    )
+    task = asyncio.create_task(
+        _run_term_review_job(
+            job_store=job_store,
+            job_id=job["job_id"],
+            project_id=project_id,
+            service=service,
+        ),
+        name=f"term-review:{project_id}:{job['job_id']}",
+    )
+    _term_review_tasks[job["job_id"]] = task
+    task.add_done_callback(
+        lambda _task, job_id=job["job_id"]: _term_review_tasks.pop(job_id, None)
+    )
+    return job
+
+
 def _ensure_valid_project_id(project_id: str) -> None:
     """拦截含路径分隔符或 .. 的 project_id,防止目录穿越读写 glossary.json(审计 BE1)。"""
     if not validate_path_component(project_id):
@@ -559,49 +615,13 @@ async def start_term_review_job(
     _ensure_valid_project_id(project_id)
     try:
         await run_blocking(pm.get, project_id)
-        job_store = TerminologyReviewJobStore(pm.projects_path)
-        job, created = await run_blocking(
-            job_store.create_or_get_active,
-            project_id,
-            request.model,
+        return await ensure_term_review_job(
+            project_id=project_id,
+            pm=pm,
+            gm=gm,
+            llm=llm,
+            model=request.model,
         )
-        if not created:
-            existing_task = _term_review_tasks.get(job["job_id"])
-            if existing_task is not None and not existing_task.done():
-                return job
-            await run_blocking(
-                job_store.mark_failed,
-                project_id,
-                job["job_id"],
-                "Terminology review task is no longer running.",
-            )
-            job, created = await run_blocking(
-                job_store.create_or_get_active,
-                project_id,
-                request.model,
-            )
-            if not created:
-                return job
-        if request.model:
-            llm = create_llm_provider(provider=request.model)
-        service = TerminologyReviewService(
-            llm_provider=llm,
-            project_manager=pm,
-            glossary_manager=gm,
-        )
-        task = asyncio.create_task(
-            _run_term_review_job(
-                job_store=job_store,
-                job_id=job["job_id"],
-                project_id=project_id,
-                service=service,
-            )
-        )
-        _term_review_tasks[job["job_id"]] = task
-        task.add_done_callback(
-            lambda _task, job_id=job["job_id"]: _term_review_tasks.pop(job_id, None)
-        )
-        return job
     except ActiveTerminologyReviewModelConflict as exc:
         raise ConflictException(
             detail=str(exc),
@@ -641,12 +661,30 @@ async def submit_term_review(
             project_manager=pm,
             glossary_manager=gm,
         )
-        return await run_blocking(
+        result = await run_blocking(
             service.apply_review,
             project_id,
             [decision.model_dump() for decision in request.decisions],
             artifact_id=request.artifact_id,
         )
+        if request.artifact_id:
+            try:
+                job_store = TerminologyReviewJobStore(pm.projects_path)
+                await run_blocking(
+                    job_store.mark_confirmation_resolved,
+                    project_id,
+                    request.artifact_id,
+                    "submitted",
+                )
+            except (FileNotFoundError, OSError, ValueError):
+                # Legacy/manual artifacts are valid submissions even when they
+                # do not have a corresponding preparation-job record.
+                logger.debug(
+                    "No terminology job metadata to mark submitted for %s/%s",
+                    project_id,
+                    request.artifact_id,
+                )
+        return result
     except TermReviewArtifactConflict as exc:
         raise ConflictException(
             detail=str(exc),

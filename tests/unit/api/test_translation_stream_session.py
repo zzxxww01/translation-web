@@ -7,6 +7,7 @@ from src.api.streaming.translation_stream_session import (
     resolve_live_conflict,
 )
 from src.core.models import TermConflict
+from src.settings import settings
 
 
 class DummyRequest:
@@ -178,6 +179,41 @@ async def test_parallel_same_term_conflicts_are_serialized_and_reuse_resolution(
         "apply_to_all": True,
     }
     assert session._progress_queue.empty()
+    session._clear_conflict_state()
+
+
+@pytest.mark.asyncio
+async def test_unanswered_term_conflict_uses_default_after_timeout(monkeypatch):
+    monkeypatch.setattr(
+        settings,
+        "term_review_confirmation_timeout_seconds",
+        0.01,
+    )
+    session = TranslationStreamSession(
+        project_id="timed-conflict",
+        request=DummyRequest(),
+        total_paragraphs=1,
+        total_sections=1,
+        run_translation=lambda *_args: None,
+        cancel_translation=lambda *_args: None,
+        release_slot=lambda _project_id: None,
+    )
+    session._init_conflict_state()
+    conflict = TermConflict(
+        term="CPO",
+        existing_translation="共封装光学",
+        new_translation="协同封装光学",
+    )
+
+    result = await asyncio.wait_for(
+        session._handle_term_conflict_on_main(conflict),
+        timeout=1,
+    )
+
+    assert result == {
+        "chosen_translation": "共封装光学",
+        "apply_to_all": True,
+    }
     session._clear_conflict_state()
 
 

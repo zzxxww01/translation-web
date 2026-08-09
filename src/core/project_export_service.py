@@ -1,3 +1,4 @@
+import logging
 import re
 from datetime import datetime
 from pathlib import Path
@@ -8,6 +9,9 @@ from .markdown_postprocess import normalize_cjk_ascii_spacing, postprocess_markd
 from .models import ElementType, ProjectMeta, Section
 from .title_guard import find_missing_title_terms
 from .translation_qa import run_deterministic_qa
+
+
+logger = logging.getLogger(__name__)
 
 
 class ExportBlockedError(ValueError):
@@ -321,6 +325,13 @@ class ProjectExportService:
             source=source_markdown,
             fallback_block_ids=self._inline_recovery.fallback_block_ids,
         )
+        fallback_block_ids = self._inline_recovery.fallback_block_ids
+        if fallback_block_ids:
+            logger.warning(
+                "[%s] Inline recovery fallback used for %d blocks; see export lint artifact",
+                project_id,
+                len(fallback_block_ids),
+            )
         self.write_export_lint_artifact(project_id, payload)
 
         # A-5：确定性 QA 的 critical 问题阻断导出（lint 工件已写盘供排查）。

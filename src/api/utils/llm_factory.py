@@ -7,15 +7,22 @@ Supports both legacy and new config-based systems with automatic fallback.
 
 from __future__ import annotations
 
+import asyncio
 import logging
 from functools import lru_cache
 
 from ...llm.base import LLMProvider
 from ...llm.factory import create_llm_provider, get_task_model_alias
 from ...llm.provider_adapter import get_provider_adapter
+from .concurrency import run_llm_blocking
 
 
 logger = logging.getLogger(__name__)
+
+# Short-form endpoints need enough room for provider fallback, while still
+# finishing before the browser's 180-second request budget.
+SHORT_FORM_ATTEMPT_TIMEOUT_SECONDS = 60
+SHORT_FORM_TOTAL_TIMEOUT_SECONDS = 170
 
 
 @lru_cache(maxsize=8)
@@ -65,3 +72,25 @@ def generate_with_fallback(
     except Exception as e:
         logger.warning(f"[LLM Factory] Adapter routing failed for model={target_model}: {e}")
         raise
+
+
+async def generate_with_fallback_budget(
+    prompt: str,
+    *,
+    task_type: str,
+    attempt_timeout: int = SHORT_FORM_ATTEMPT_TIMEOUT_SECONDS,
+    total_timeout: int = SHORT_FORM_TOTAL_TIMEOUT_SECONDS,
+    **kwargs,
+) -> str:
+    """Run a blocking short-form LLM call in the bounded pool with a total budget."""
+
+    return await asyncio.wait_for(
+        run_llm_blocking(
+            generate_with_fallback,
+            prompt,
+            task_type=task_type,
+            timeout=attempt_timeout,
+            **kwargs,
+        ),
+        timeout=total_timeout,
+    )

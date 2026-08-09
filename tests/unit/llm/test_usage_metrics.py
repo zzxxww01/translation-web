@@ -63,6 +63,29 @@ def test_finish_run_returns_summary_and_releases_call_records() -> None:
     assert metrics.api_call_count("run-finished") == 0
 
 
+def test_compact_summary_omits_per_call_payloads_but_keeps_aggregates() -> None:
+    metrics = LLMUsageMetrics()
+    metrics.start_run("run-live", project_id="project-a")
+    metrics.set_phase("phase1_draft")
+    metrics.record_call(
+        provider="gemini",
+        model="model-a",
+        duration_seconds=0.25,
+        success=True,
+        input_tokens=7,
+        output_tokens=5,
+        total_tokens=12,
+    )
+
+    summary = metrics.summary("run-live", include_calls=False)
+
+    assert summary["api_calls"] == 1
+    assert summary["total_tokens"] == 12
+    assert summary["models"] == ["model-a"]
+    assert summary["phases"] == ["phase1_draft"]
+    assert "calls" not in summary
+
+
 def test_late_background_call_does_not_recreate_finished_run() -> None:
     metrics = LLMUsageMetrics()
     metrics.start_run("run-finished", project_id="project-a")

@@ -29,6 +29,7 @@ class ActiveRunLock:
     status: str
     started_at: str
     updated_at: str
+    current_step: Optional[str] = None
 
 
 class TranslationRunRegistry:
@@ -67,6 +68,7 @@ class TranslationRunRegistry:
                 self._cancelled_projects.add(project_id)
             now = datetime.now().isoformat()
             active.status = "cancelling"
+            active.current_step = "取消中"
             active.updated_at = now
             return self._copy_active_run(active)
 
@@ -83,6 +85,7 @@ class TranslationRunRegistry:
             status=active.status,
             started_at=active.started_at,
             updated_at=active.updated_at,
+            current_step=active.current_step,
         )
 
     def get_active_run(
@@ -121,6 +124,7 @@ class TranslationRunRegistry:
         *,
         run_id: Optional[str],
         status: str,
+        current_step: Optional[str] = None,
     ) -> ActiveRunLock:
         now = datetime.now().isoformat()
         with self._active_run_lock:
@@ -133,6 +137,7 @@ class TranslationRunRegistry:
                 status=status,
                 started_at=started_at,
                 updated_at=now,
+                current_step=current_step,
             )
             self._active_runs[project_id] = active
             return self._copy_active_run(active)
@@ -178,6 +183,7 @@ class TranslationRunRegistry:
                 status=status,
                 started_at=now,
                 updated_at=now,
+                current_step="正在启动",
             )
             self._active_runs[project_id] = active
             return self._copy_active_run(active)

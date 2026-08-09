@@ -68,6 +68,16 @@ export interface TermReviewPayload {
   generated_at: string;
   total_candidates: number;
   sections: TermReviewSectionGroup[];
+  is_partial?: boolean;
+  total_sections?: number;
+  scanned_sections?: number;
+  failed_sections?: number;
+  scan_errors?: Array<{
+    section_id: string;
+    section_title: string;
+    error_type: string;
+    error: string;
+  }>;
 }
 
 export interface TermReviewDecision {
@@ -257,7 +267,16 @@ export interface ManualAlignRequest {
  * 翻译状态
  */
 export interface TranslationStatus {
-  status: 'starting' | 'processing' | 'completed' | 'failed' | 'cancelled' | 'not_started' | 'partial';
+  status:
+    | 'starting'
+    | 'processing'
+    | 'cancelling'
+    | 'completed'
+    | 'incomplete'
+    | 'failed'
+    | 'cancelled'
+    | 'not_started'
+    | 'partial';
   progress_percent?: number;
   translated_paragraphs?: number;
   total_paragraphs?: number;

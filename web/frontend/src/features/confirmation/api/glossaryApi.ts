@@ -81,6 +81,18 @@ export interface TermReviewJob {
   completed_at?: string | null;
   result?: TermReviewPayload | null;
   error?: string | null;
+  confirmation_status?:
+    | 'waiting'
+    | 'submitted'
+    | 'auto_accepted'
+    | 'auto_skipped'
+    | 'auto_apply_failed'
+    | 'not_required'
+    | 'preparation_failed'
+    | 'cancelled'
+    | null;
+  confirmation_deadline?: string | null;
+  confirmation_resolved_at?: string | null;
 }
 
 function hasTermReviewErrorCode(error: unknown, errorCode: string): boolean {
@@ -304,21 +316,42 @@ export const glossaryApi = {
     model?: string,
     signal?: AbortSignal
   ): Promise<TermReviewPayload> {
-    let job = await this.startTermReview(projectId, model, signal);
-    const deadline = Date.now() + REQUEST_TIMEOUTS.TERM_REVIEW_PREPARE;
-
-    while (job.status === 'queued' || job.status === 'running') {
-      if (Date.now() >= deadline) {
-        throw new Error('Terminology review preparation timed out');
-      }
-      await waitForPoll(1000, signal);
-      job = await this.getTermReviewJob(projectId, job.job_id, signal);
-    }
+    const startedJob = await this.startTermReview(projectId, model, signal);
+    const job = await this.waitForTermReviewJob(
+      projectId,
+      startedJob.job_id,
+      signal,
+      startedJob
+    );
 
     if (job.status === 'succeeded' && job.result) {
       return job.result;
     }
     throw new Error(job.error || 'Terminology review preparation failed');
+  },
+
+  async waitForTermReviewJob(
+    projectId: string,
+    jobId: string,
+    signal?: AbortSignal,
+    initialJob?: TermReviewJob
+  ): Promise<TermReviewJob> {
+    let job = initialJob ?? await this.getTermReviewJob(projectId, jobId, signal);
+    const deadline = Date.now() + REQUEST_TIMEOUTS.TERM_REVIEW_PREPARE;
+    let pollDelayMs = 1000;
+
+    while (job.status === 'queued' || job.status === 'running') {
+      if (Date.now() >= deadline) {
+        throw new Error('Terminology review preparation timed out');
+      }
+      await waitForPoll(pollDelayMs, signal);
+      job = await this.getTermReviewJob(projectId, job.job_id, signal);
+      // Prescanning a long article can take minutes. Back off quickly after the
+      // initial feedback instead of generating one status request per second
+      // for the full run.
+      pollDelayMs = Math.min(Math.round(pollDelayMs * 1.6), 5000);
+    }
+    return job;
   },
 
   async submitTermReview(

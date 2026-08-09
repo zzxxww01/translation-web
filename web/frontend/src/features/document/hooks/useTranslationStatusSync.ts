@@ -10,7 +10,7 @@ export function useTranslationStatusSync(currentProjectId?: string) {
   const [backendTranslationStatus, setBackendTranslationStatus] = useState<TranslationStatus | null>(null);
 
   // 注意：fullTranslateProjectId 由 syncStatus 自己写入（setFullTranslateProjectId / endFullTranslate），
-  // 若订阅成组件状态并放进依赖数组，会导致 effect 反复重建 interval 并多打请求，
+  // 若订阅成组件状态并放进依赖数组，会导致 effect 反复重建轮询并多打请求，
   // 因此改为在 syncStatus 内用 getState() 读取瞬时值。
   const setFullTranslating = useDocumentStore(state => state.setFullTranslating);
   const setFullTranslateProgress = useDocumentStore(state => state.setFullTranslateProgress);
@@ -19,11 +19,21 @@ export function useTranslationStatusSync(currentProjectId?: string) {
 
   useEffect(() => {
     let cancelled = false;
+    let timeoutId: number | null = null;
     // 只在项目切换后的首次同步清一次旧项目状态；轮询回调内不再清空，
     // 否则每 5 秒都会先置 null 再等 HTTP 往返回填，侧栏步骤文案与百分比会周期性闪烁。
     let isFirstSync = true;
 
+    const scheduleNext = (delayMs: number) => {
+      if (!cancelled && currentProjectId) {
+        timeoutId = window.setTimeout(() => {
+          void syncStatus();
+        }, delayMs);
+      }
+    };
+
     const syncStatus = async () => {
+      let nextDelayMs = 30_000;
       if (isFirstSync) {
         isFirstSync = false;
         setCurrentStep(null);
@@ -48,6 +58,7 @@ export function useTranslationStatusSync(currentProjectId?: string) {
         );
 
         if (hasTrackableRun) {
+          nextDelayMs = 5_000;
           setFullTranslateProjectId(currentProjectId);
           setFullTranslating(true);
           setFullTranslateProgress({
@@ -77,6 +88,9 @@ export function useTranslationStatusSync(currentProjectId?: string) {
         if (!cancelled) {
           console.error('Failed to sync translation status:', error);
         }
+        nextDelayMs = 10_000;
+      } finally {
+        scheduleNext(nextDelayMs);
       }
     };
 
@@ -86,11 +100,11 @@ export function useTranslationStatusSync(currentProjectId?: string) {
         cancelled = true;
       };
     }
-    const intervalId = window.setInterval(syncStatus, 5000);
-
     return () => {
       cancelled = true;
-      window.clearInterval(intervalId);
+      if (timeoutId !== null) {
+        window.clearTimeout(timeoutId);
+      }
     };
   }, [
     currentProjectId,

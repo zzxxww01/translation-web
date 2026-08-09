@@ -7,6 +7,7 @@ from typing import List, Optional
 from slugify import slugify
 
 from .format_tokens import assign_span_ids, expected_token_ids
+from .image_assets import parse_markdown_image_reference
 from .models import ArticleMetadata, ElementType, InlineElement, Paragraph, Section
 
 
@@ -358,18 +359,13 @@ class MarkdownProjectParser:
         block_index: int,
         raw_markdown: str,
     ) -> MarkdownBlock:
-        match = re.match(
-            r'!\[(?P<alt>[^\]]*)\]\((?P<src><[^>]+>|[^)"]+?)(?:\s+"(?P<title>[^"]*)")?\)$',
-            raw_markdown.strip(),
-        )
+        reference = parse_markdown_image_reference(raw_markdown)
         src = raw_markdown.strip()
         source_html = f'<img src="{self._escape_html_attr(src)}" />'
-        if match:
-            src = match.group("src").strip()
-            if src.startswith("<") and src.endswith(">"):
-                src = src[1:-1].strip()
-            alt = match.group("alt").strip()
-            title = (match.group("title") or "").strip()
+        if reference:
+            src = reference.source
+            alt = reference.alt.strip()
+            title = reference.title.strip()
             attrs = [f'src="{self._escape_html_attr(src)}"']
             if alt:
                 attrs.append(f'alt="{self._escape_html_attr(alt)}"')

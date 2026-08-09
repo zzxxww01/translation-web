@@ -11,6 +11,7 @@ export function isTranslationRunActive(
   return (
     status.status === 'starting' ||
     status.status === 'processing' ||
+    status.status === 'cancelling' ||
     Boolean(status.is_cancelling)
   );
 }

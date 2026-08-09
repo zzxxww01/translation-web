@@ -381,8 +381,9 @@ class WechatFormatter:
             shutil.copy2(local_path, target_path)
             logger.debug(f"Saved to: {target_path}")
 
-            # 返回可访问的URL（通过FastAPI的/projects路由）
-            return f"/projects/{self.project_id}/wechat_images/{filename}"
+            # 通过受限的项目图片 API 暴露；公网 Nginx 的 /projects 路径由 SPA
+            # 接管，且直接开放整个项目目录会泄露 meta/运行工件。
+            return f"/api/projects/{self.project_id}/assets/wechat_images/{filename}"
 
         except Exception as e:
             logger.error(f"Failed to upload image to local: {e}", exc_info=True)

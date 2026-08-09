@@ -1,9 +1,12 @@
 import json
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 
 from src.api.routers.projects_management import _build_project_response
 from src.core.file_utils import write_json_atomic
-from src.core.models import ProjectMeta
+from src.core.models import Paragraph, ProjectMeta, Section
 from src.core.project import ProjectManager
 
 
@@ -173,3 +176,113 @@ def test_get_ignores_legacy_sections_snapshot(tmp_path, monkeypatch):
 
     assert project.sections == []
     assert project.progress.total_paragraphs == 10
+
+
+def test_translation_summary_collapses_concurrent_reads_and_invalidates_on_write(
+    tmp_path,
+    monkeypatch,
+):
+    manager = ProjectManager(projects_path=str(tmp_path / "projects"))
+    manager.save_meta(
+        ProjectMeta(
+            id="demo",
+            title="Demo",
+            source_file="source.md",
+            progress={"total_sections": 1, "total_paragraphs": 1},
+        )
+    )
+    manager.save_section_only(
+        "demo",
+        Section(
+            section_id="s1",
+            title="Section",
+            paragraphs=[Paragraph(id="p1", index=0, source="Source")],
+        ),
+    )
+
+    original_get_sections = manager.get_sections
+    calls = 0
+    calls_lock = threading.Lock()
+
+    def counted_get_sections(project_id):
+        nonlocal calls
+        with calls_lock:
+            calls += 1
+        time.sleep(0.02)
+        return original_get_sections(project_id)
+
+    monkeypatch.setattr(manager, "get_sections", counted_get_sections)
+
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        summaries = list(
+            executor.map(
+                manager.get_translation_summary,
+                ["demo"] * 8,
+            )
+        )
+
+    assert calls == 1
+    assert {summary.translated_paragraphs for summary in summaries} == {0}
+
+    section = original_get_sections("demo")[0]
+    section.paragraphs[0].add_translation("译文", "pro")
+    manager.save_section_only("demo", section)
+
+    refreshed = manager.get_translation_summary("demo")
+    assert calls == 2
+    assert refreshed.translated_paragraphs == 1
+    assert refreshed.translated_sections == 1
+
+
+def test_translation_summary_retries_when_section_changes_during_cold_scan(
+    tmp_path,
+    monkeypatch,
+):
+    manager = ProjectManager(projects_path=str(tmp_path / "projects"))
+    manager.save_meta(
+        ProjectMeta(
+            id="demo",
+            title="Demo",
+            source_file="source.md",
+            progress={"total_sections": 1, "total_paragraphs": 1},
+        )
+    )
+    manager.save_section_only(
+        "demo",
+        Section(
+            section_id="s1",
+            title="Section",
+            paragraphs=[Paragraph(id="p1", index=0, source="Source")],
+        ),
+    )
+
+    original_get_sections = manager.get_sections
+    first_scan_loaded = threading.Event()
+    allow_first_scan_to_finish = threading.Event()
+    calls = 0
+
+    def blocking_get_sections(project_id):
+        nonlocal calls
+        calls += 1
+        sections = original_get_sections(project_id)
+        if calls == 1:
+            first_scan_loaded.set()
+            assert allow_first_scan_to_finish.wait(timeout=2)
+        return sections
+
+    monkeypatch.setattr(manager, "get_sections", blocking_get_sections)
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        summary_future = executor.submit(manager.get_translation_summary, "demo")
+        assert first_scan_loaded.wait(timeout=2)
+
+        updated_section = original_get_sections("demo")[0]
+        updated_section.paragraphs[0].add_translation("译文", "pro")
+        manager.save_section_only("demo", updated_section)
+        allow_first_scan_to_finish.set()
+
+        summary = summary_future.result(timeout=2)
+
+    assert calls == 2
+    assert summary.translated_paragraphs == 1
+    assert summary.translated_sections == 1

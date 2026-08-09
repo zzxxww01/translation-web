@@ -729,6 +729,9 @@ async def translate_full_document(
         headers={
             "Cache-Control": "no-cache",
             "Connection": "keep-alive",
+            # Nginx otherwise buffers small SSE frames until a proxy buffer
+            # fills, making live progress appear frozen despite heartbeats.
+            "X-Accel-Buffering": "no",
         },
     )
 
@@ -828,6 +831,7 @@ async def translate_with_four_steps(
         headers={
             "Cache-Control": "no-cache",
             "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
         },
     )
 

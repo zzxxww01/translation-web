@@ -1,5 +1,4 @@
 """Slack refine endpoint - adjust previous results based on user feedback"""
-import asyncio
 import logging
 
 from fastapi import APIRouter, Request
@@ -8,7 +7,7 @@ from src.prompts import get_prompt_manager
 from src.api.routers.slack_models import SlackRefineRequest, SlackRefineResponse
 from src.api.middleware.rate_limit import limiter
 
-from ..utils.llm_factory import generate_with_fallback
+from ..utils.llm_factory import generate_with_fallback_budget
 from ..utils.llm_errors import raise_llm_service_unavailable
 
 logger = logging.getLogger(__name__)
@@ -16,7 +15,8 @@ router = APIRouter()
 prompt_manager = get_prompt_manager()
 
 
-@router.post("/refine")
+@router.post("/slack/refine")
+@router.post("/refine", include_in_schema=False)
 @limiter.limit("20/minute")
 async def refine_result(request: Request, body: SlackRefineRequest) -> SlackRefineResponse:
     """
@@ -48,8 +48,9 @@ async def refine_result(request: Request, body: SlackRefineRequest) -> SlackRefi
 
     try:
         # 同步 LLM 调用放入线程池,避免阻塞事件循环
-        refined_result = await asyncio.to_thread(
-            generate_with_fallback, prompt, task_type="slack"
+        refined_result = await generate_with_fallback_budget(
+            prompt,
+            task_type="slack",
         )
         return SlackRefineResponse(refined_result=refined_result.strip())
     except Exception as exc:

@@ -13,7 +13,7 @@ from collections import OrderedDict
 from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import datetime
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 from typing import Any, Callable, Dict, List, Optional, Tuple
 from uuid import uuid4
 
@@ -74,6 +74,24 @@ class ProjectListSummary:
 class _ProjectSummaryCacheEntry:
     signature: Tuple[int, int, int, int, int]
     summary: ProjectListSummary
+
+
+@dataclass(frozen=True)
+class ProjectTranslationSummary:
+    """Small projection used by the frequently-polled translation status API."""
+
+    status: ProjectStatus
+    total_sections: int
+    total_paragraphs: int
+    translated_sections: int
+    translated_paragraphs: int
+
+
+@dataclass(frozen=True)
+class _ProjectTranslationSummaryCacheEntry:
+    signature: Tuple[int, int, int, int, int]
+    generation: int
+    summary: ProjectTranslationSummary
 
 
 class ProjectManager:
@@ -138,6 +156,11 @@ class ProjectManager:
             str, _ProjectSummaryCacheEntry
         ] = OrderedDict()
         self._project_summary_cache_lock = threading.RLock()
+        self._translation_summary_cache: OrderedDict[
+            str, _ProjectTranslationSummaryCacheEntry
+        ] = OrderedDict()
+        self._translation_summary_cache_lock = threading.RLock()
+        self._translation_summary_generations: Dict[str, int] = {}
 
     def _project_dir(self, project_id: str) -> Path:
         # 安全:校验 project_id 防止路径遍历。否则经 ../ 或绝对路径可逃逸 projects 目录,
@@ -151,6 +174,28 @@ class ProjectManager:
         if resolved != base and base not in resolved.parents:
             raise ValueError(f"project_id escapes projects root: {project_id!r}")
         return project_dir
+
+    def resolve_project_asset(self, project_id: str, asset_path: str) -> Path:
+        """Resolve an existing project asset without permitting path escape."""
+        if not asset_path or "\\" in asset_path or "\x00" in asset_path:
+            raise FileNotFoundError("Project asset not found")
+
+        relative = PurePosixPath(asset_path)
+        if relative.is_absolute() or any(
+            part in {"", ".", ".."} for part in relative.parts
+        ):
+            raise FileNotFoundError("Project asset not found")
+
+        project_dir = self._project_dir(project_id).resolve()
+        unresolved = project_dir.joinpath(*relative.parts)
+        # Uploaded assets are regular files. Reject symlinks explicitly and
+        # also verify the fully-resolved target remains inside this project.
+        if unresolved.is_symlink():
+            raise FileNotFoundError("Project asset not found")
+        resolved = unresolved.resolve()
+        if project_dir not in resolved.parents or not resolved.is_file():
+            raise FileNotFoundError("Project asset not found")
+        return resolved
 
     def _write_text(self, path: Path, content: str) -> None:
         write_text_atomic(path, content)
@@ -643,6 +688,99 @@ class ProjectManager:
                         pass
         return sorted(projects, key=lambda p: p.created_at, reverse=True)
 
+    def get_translation_summary(self, project_id: str) -> ProjectTranslationSummary:
+        """Return cached translation counts without reparsing every section per poll.
+
+        Status polling used to load and validate every paragraph JSON on every
+        request. Concurrent browser polls therefore amplified one cold read into
+        many simultaneous full-document scans. All writes owned by this manager
+        invalidate the cache, while the metadata signature also detects external
+        or cross-process updates.
+        """
+
+        meta_path = self._project_dir(project_id) / "meta.json"
+        if not meta_path.exists():
+            raise FileNotFoundError(f"Project not found: {project_id}")
+
+        with self._get_meta_lock(project_id):
+            for _attempt in range(3):
+                signature = self._project_meta_signature(meta_path)
+                with self._translation_summary_cache_lock:
+                    generation = self._translation_summary_generations.get(
+                        project_id,
+                        0,
+                    )
+                    cached = self._translation_summary_cache.get(project_id)
+                    if (
+                        cached is not None
+                        and cached.signature == signature
+                        and cached.generation == generation
+                    ):
+                        self._translation_summary_cache.move_to_end(project_id)
+                        return cached.summary
+
+                project = self.get(project_id)
+                sections = self.get_sections(project_id)
+                translated_by_section = [
+                    sum(
+                        1
+                        for paragraph in section.paragraphs
+                        if paragraph.has_usable_translation()
+                    )
+                    for section in sections
+                ]
+                summary = ProjectTranslationSummary(
+                    status=project.status,
+                    total_sections=len(sections),
+                    total_paragraphs=sum(
+                        len(section.paragraphs) for section in sections
+                    ),
+                    translated_sections=sum(
+                        1
+                        for section, translated_count in zip(
+                            sections,
+                            translated_by_section,
+                        )
+                        if section.paragraphs
+                        and translated_count == len(section.paragraphs)
+                    ),
+                    translated_paragraphs=sum(translated_by_section),
+                )
+
+                # Do not cache a mixed snapshot if metadata changed externally or
+                # a section was replaced while the cold scan was in progress.
+                if self._project_meta_signature(meta_path) != signature:
+                    continue
+                with self._translation_summary_cache_lock:
+                    if (
+                        self._translation_summary_generations.get(project_id, 0)
+                        != generation
+                    ):
+                        continue
+                    self._translation_summary_cache[project_id] = (
+                        _ProjectTranslationSummaryCacheEntry(
+                            signature=signature,
+                            generation=generation,
+                            summary=summary,
+                        )
+                    )
+                    self._translation_summary_cache.move_to_end(project_id)
+                    while (
+                        len(self._translation_summary_cache)
+                        > self._PROJECT_SUMMARY_CACHE_SIZE
+                    ):
+                        self._translation_summary_cache.popitem(last=False)
+                    return summary
+            else:
+                raise OSError("Project metadata changed repeatedly while reading")
+
+    def _invalidate_translation_summary(self, project_id: str) -> None:
+        with self._translation_summary_cache_lock:
+            self._translation_summary_generations[project_id] = (
+                self._translation_summary_generations.get(project_id, 0) + 1
+            )
+            self._translation_summary_cache.pop(project_id, None)
+
     def delete(self, project_id: str) -> None:
         """
         删除项目
@@ -651,6 +789,14 @@ class ProjectManager:
             project_id: 项目 ID
         """
         self.project_lifecycle_service.delete_project(project_id)
+        # 删除成功后同步丢弃所有以项目 ID 为键的派生状态。列表缓存本身有上限，
+        # 但 translation generations 原先会随“创建→删除”循环永久增长；同时若
+        # 随后复用同名项目，也不应继承旧项目的缓存代际。
+        with self._project_summary_cache_lock:
+            self._project_summary_cache.pop(project_id, None)
+        with self._translation_summary_cache_lock:
+            self._translation_summary_cache.pop(project_id, None)
+            self._translation_summary_generations.pop(project_id, None)
 
     def get_sections(self, project_id: str) -> List[Section]:
         """
@@ -1245,6 +1391,7 @@ class ProjectManager:
         """保存项目元信息"""
         with self._get_meta_lock(project_id):
             self.project_repository.save_meta(project_id, meta)
+            self._invalidate_translation_summary(project_id)
 
     def _save_section(self, project_id: str, section: Section) -> None:
         """保存章节"""
@@ -1253,6 +1400,7 @@ class ProjectManager:
             section,
             grouped_blocks=self._group_section_blocks(section),
         )
+        self._invalidate_translation_summary(project_id)
 
     def _load_section(self, project_id: str, section_id: str) -> Optional[Section]:
         """加载章节"""
@@ -1265,3 +1413,4 @@ class ProjectManager:
                 project_id,
                 get_sections=self.get_sections,
             )
+            self._invalidate_translation_summary(project_id)

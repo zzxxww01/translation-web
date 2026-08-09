@@ -9,6 +9,8 @@ import threading
 from typing import Any, Awaitable, Callable, Dict
 from uuid import uuid4
 
+from src.settings import settings
+
 
 logger = logging.getLogger(__name__)
 
@@ -16,6 +18,7 @@ _conflict_lock = threading.Lock()
 _pending_conflict_events: Dict[str, Dict[str, asyncio.Event]] = {}
 _conflict_resolutions: Dict[str, Dict[str, Dict[str, Any]]] = {}
 _conflict_session_owners: Dict[str, str] = {}
+_translation_tasks: set[asyncio.Task] = set()
 
 
 def resolve_live_conflict(project_id: str, term: str, chosen_translation: str, apply_to_all: bool) -> bool:
@@ -115,7 +118,19 @@ class TranslationStreamSession:
                 }
             )
             try:
-                await event.wait()
+                try:
+                    await asyncio.wait_for(
+                        event.wait(),
+                        timeout=(
+                            settings.term_review_confirmation_timeout_seconds
+                        ),
+                    )
+                except asyncio.TimeoutError:
+                    logger.info(
+                        "[%s] Term conflict %r timed out; using the existing/default translation",
+                        self.project_id,
+                        conflict.term,
+                    )
                 with _conflict_lock:
                     resolution = _conflict_resolutions.get(
                         self.project_id, {}
@@ -220,6 +235,8 @@ class TranslationStreamSession:
         # close immediately after reading "start"; the translation and slot
         # cleanup must still have an owning task in that case.
         self._translation_task = asyncio.create_task(self._run_translation_task())
+        _translation_tasks.add(self._translation_task)
+        self._translation_task.add_done_callback(_translation_tasks.discard)
         try:
             yield (
                 "data: "

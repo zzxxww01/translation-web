@@ -14,6 +14,21 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def _log_http_failure(status_code: int, message: str) -> None:
+    """Log expected client failures below server-side failures.
+
+    Public 404 probes are routine and should not pollute ERROR-based alerts.
+    Other 4xx responses remain visible as warnings; only 5xx responses are
+    server failures.
+    """
+    if status_code >= 500:
+        logger.error(message)
+    elif status_code == status.HTTP_404_NOT_FOUND:
+        logger.debug(message)
+    else:
+        logger.warning(message)
+
+
 # ============ 自定义异常类 ============
 
 
@@ -118,7 +133,10 @@ def create_error_response(
 
 async def api_exception_handler(request: Request, exc: APIException) -> JSONResponse:
     """处理自定义 API 异常"""
-    logger.error(f"API Exception: {exc.detail} at {request.url.path}")
+    _log_http_failure(
+        exc.status_code,
+        f"API Exception: {exc.detail} at {request.url.path}",
+    )
     return create_error_response(
         status_code=exc.status_code,
         detail=exc.detail,
@@ -131,7 +149,10 @@ async def http_exception_handler(
     request: Request, exc: StarletteHTTPException
 ) -> JSONResponse:
     """处理 HTTP 异常"""
-    logger.warning(f"HTTP Exception: {exc.detail} at {request.url.path}")
+    _log_http_failure(
+        exc.status_code,
+        f"HTTP Exception: {exc.detail} at {request.url.path}",
+    )
     return create_error_response(
         status_code=exc.status_code,
         detail=str(exc.detail),

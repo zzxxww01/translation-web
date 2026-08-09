@@ -13,6 +13,7 @@ from src.llm.factory import get_task_model_alias
 from src.services.batch_translation_service import BatchTranslationService
 from src.services.confirmation_service import ConfirmationService
 from src.services.memory_service import TranslationMemoryService
+from src.services.translation_status_service import TranslationStatusService
 from src.services.version_import_service import VersionImportService
 
 
@@ -88,6 +89,20 @@ def get_batch_service() -> BatchTranslationService:
     )
 
 
+@lru_cache(maxsize=1)
+def get_translation_status_service() -> TranslationStatusService:
+    """Return the lightweight status reader used by polling routes.
+
+    Status and cancellation must remain available even when LLM configuration
+    is invalid, and polling must not construct translators or model clients.
+    """
+
+    return TranslationStatusService(
+        project_manager=get_project_manager(),
+        progress_tracker=BatchTranslationService._shared_progress_tracker,
+    )
+
+
 def get_version_service(
     pm: ProjectManager = Depends(get_project_manager),
 ) -> VersionImportService:
@@ -108,5 +123,9 @@ LongformLLMProviderDep = Annotated[LLMProvider, Depends(get_longform_llm_provide
 AnalysisLLMProviderDep = Annotated[LLMProvider, Depends(get_analysis_llm_provider)]
 ConfirmationServiceDep = Annotated[ConfirmationService, Depends(get_confirmation_service)]
 BatchServiceDep = Annotated[BatchTranslationService, Depends(get_batch_service)]
+TranslationStatusServiceDep = Annotated[
+    TranslationStatusService,
+    Depends(get_translation_status_service),
+]
 VersionServiceDep = Annotated[VersionImportService, Depends(get_version_service)]
 MemoryServiceDep = Annotated[TranslationMemoryService, Depends(get_memory_service)]

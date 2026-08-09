@@ -28,4 +28,16 @@ describe('isTranslationRunActive', () => {
       )
     ).toBe(false);
   });
+
+  it('keeps a cancelling run visible even without the compatibility flag', () => {
+    expect(
+      isTranslationRunActive(
+        {
+          status: 'cancelling',
+          active_project_id: 'project-a',
+        },
+        'project-a'
+      )
+    ).toBe(true);
+  });
 });

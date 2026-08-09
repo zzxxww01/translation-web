@@ -62,6 +62,11 @@ class SectionTranslationExecutor:
         if not translatable_section.paragraphs:
             return None
 
+        self._touch_progress(
+            progress,
+            step=f"术语预扫描: {section.title or section.section_id}",
+            current_section=section.section_id,
+        )
         prescan_result = await self._run_section_prescan(
             project_id,
             translatable_section,

@@ -67,3 +67,32 @@ def test_term_review_job_store_replaces_orphan_after_worker_restart(tmp_path):
     failed = restarted_store.get("demo", orphaned["job_id"])
     assert failed["status"] == "failed"
     assert "restarted" in failed["error"]
+
+
+def test_term_review_job_store_persists_confirmation_lifecycle(tmp_path):
+    store = TerminologyReviewJobStore(tmp_path)
+    job = store.create("demo")
+    store.mark_succeeded("demo", job["job_id"], {"review_required": True})
+
+    waiting = store.mark_waiting_confirmation(
+        "demo",
+        job["job_id"],
+        timeout_seconds=60,
+    )
+    assert waiting["confirmation_status"] == "waiting"
+    assert waiting["confirmation_deadline"]
+
+    resolved = store.mark_confirmation_resolved(
+        "demo",
+        job["job_id"],
+        "submitted",
+    )
+    assert resolved["confirmation_status"] == "submitted"
+    assert resolved["confirmation_resolved_at"]
+
+    unchanged = store.mark_waiting_confirmation(
+        "demo",
+        job["job_id"],
+        timeout_seconds=60,
+    )
+    assert unchanged["confirmation_status"] == "submitted"

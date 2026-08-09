@@ -62,6 +62,55 @@ async def _noop_prescan(*args, **kwargs):
 
 
 @pytest.mark.asyncio
+async def test_section_prescan_updates_progress_before_blocking_work(tmp_path) -> None:
+    section = Section(
+        section_id="s1",
+        title="Intro",
+        paragraphs=[Paragraph(id="p1", index=0, source="Source")],
+    )
+    progress = TranslationProgress(
+        total_sections=1,
+        total_paragraphs=1,
+        original_status=ProjectStatus.CREATED,
+    )
+    events = []
+
+    async def record_prescan(*args, **kwargs):
+        events.append(("prescan", kwargs))
+        return None
+
+    executor = SectionTranslationExecutor(
+        is_cancelled=lambda _project_id: False,
+        touch_progress=lambda _progress, **kwargs: events.append(("progress", kwargs)),
+        build_section_prompt_context=lambda *args, **kwargs: {},
+        persist_section_artifact=lambda *args, **kwargs: None,
+        run_section_prescan=record_prescan,
+        count_translated_paragraphs=lambda _section: 0,
+        translate_section_batch=lambda **kwargs: [],
+        apply_section_batch_translations=lambda *_args, **_kwargs: [],
+        record_section_batch_term_usage=lambda *_args, **_kwargs: None,
+        four_step_translate_section=lambda **kwargs: None,
+        create_section_callback=lambda *args, **kwargs: None,
+        apply_four_step_translations=lambda *_args, **_kwargs: None,
+        merge_translation_updates=lambda *_args, **_kwargs: (section, [], []),
+    )
+
+    await executor.prescan(
+        project_id="demo",
+        section=section,
+        run_dir=tmp_path,
+        progress=progress,
+        on_term_conflict=None,
+    )
+
+    assert events[0] == (
+        "progress",
+        {"step": "术语预扫描: Intro", "current_section": "s1"},
+    )
+    assert events[1][0] == "prescan"
+
+
+@pytest.mark.asyncio
 async def test_section_executor_filters_structured_metadata_from_automatic_translation() -> None:
     metadata = Paragraph(
         id="p0",

@@ -6,9 +6,8 @@ from src.prompts import get_prompt_manager
 
 from ..middleware import BadRequestException
 from ..utils.llm_errors import raise_llm_service_unavailable
-import asyncio
 
-from ..utils.llm_factory import generate_with_fallback
+from ..utils.llm_factory import generate_with_fallback_budget
 from .slack_models import SlackReplyVariant
 
 router = APIRouter()
@@ -45,7 +44,9 @@ async def refine_version(
     )
 
     try:
-        english = (await asyncio.to_thread(generate_with_fallback, prompt, task_type="slack")).strip()
+        english = (
+            await generate_with_fallback_budget(prompt, task_type="slack")
+        ).strip()
 
         return SlackReplyVariant(
             version=version,

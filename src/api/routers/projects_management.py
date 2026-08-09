@@ -8,24 +8,31 @@ import shutil
 import tempfile
 from pathlib import Path
 from typing import List, Optional
-from urllib.parse import urlsplit
+from urllib.parse import quote, unquote, urlsplit
 
 from fastapi import APIRouter, Depends, File, Form, Request, UploadFile
+from fastapi.responses import FileResponse
 
 from src.core.models import ElementType
+from src.core.image_assets import (
+    BROWSER_IMAGE_EXTENSIONS,
+    parse_markdown_image_reference,
+)
 from src.core.project import ProjectManager
 from src.api.utils.concurrency import run_blocking
 
 from ..dependencies import ProjectManagerDep, get_project_manager
-from ..middleware import BadRequestException, NotFoundException
+from ..middleware import BadRequestException, ConflictException, NotFoundException
 from ..middleware.rate_limit import limiter
 from .projects_models import CreateProjectRequest, ProjectResponse
 from .translate_utils import validate_path_component
+from src.services.translation_run_registry import translation_run_registry
 
 
 router = APIRouter()
 SUPPORTED_SOURCE_EXTENSIONS = {".html", ".htm", ".md", ".markdown"}
 HTML_SOURCE_EXTENSIONS = {".html", ".htm"}
+PROJECT_ASSET_EXTENSIONS = BROWSER_IMAGE_EXTENSIONS
 
 
 def _is_external_asset_url(path: str) -> bool:
@@ -47,18 +54,42 @@ def _project_asset_url(project_id: str, path: Optional[str]) -> Optional[str]:
     value = path.strip()
     if not value:
         return value
+    markdown_reference = parse_markdown_image_reference(value)
+    if markdown_reference is not None:
+        value = markdown_reference.source
     if _is_external_asset_url(value):
         return value
 
-    normalized = value.replace("\\", "/")
+    local_url = urlsplit(value)
+    normalized = unquote(local_url.path).replace("\\", "/")
     if normalized.startswith("./"):
         normalized = normalized[2:]
     normalized = normalized.lstrip("/")
-    while normalized.startswith("../"):
-        normalized = normalized[3:]
-    if not normalized:
+    if not normalized or any(part in {"", ".", ".."} for part in normalized.split("/")):
         return None
-    return f"/projects/{project_id}/{normalized}"
+    encoded_path = quote(normalized, safe="/")
+    return f"/api/projects/{project_id}/assets/{encoded_path}"
+
+
+_IMAGE_SRC_PATTERN = re.compile(
+    r"(?P<prefix>\bsrc\s*=\s*)(?P<quote>['\"])(?P<url>.*?)(?P=quote)",
+    re.IGNORECASE | re.DOTALL,
+)
+
+
+def _rewrite_project_image_html(project_id: str, html: Optional[str]) -> Optional[str]:
+    if not html:
+        return html
+
+    def replace(match: re.Match[str]) -> str:
+        source = match.group("url")
+        normalized = _project_asset_url(project_id, source)
+        if not normalized:
+            return match.group(0)
+        quote_char = match.group("quote")
+        return f"{match.group('prefix')}{quote_char}{normalized}{quote_char}"
+
+    return _IMAGE_SRC_PATTERN.sub(replace, html)
 
 
 def _build_project_response(meta) -> ProjectResponse:
@@ -218,11 +249,56 @@ async def get_project(project_id: str, pm: ProjectManagerDep):
         raise NotFoundException(detail="Project not found")
 
 
+@router.get(
+    "/projects/{project_id}/assets/{asset_path:path}",
+    include_in_schema=False,
+)
+async def get_project_asset(
+    project_id: str,
+    asset_path: str,
+    pm: ProjectManagerDep,
+):
+    """Serve only browser-safe project image assets through the public API."""
+    if not validate_path_component(project_id):
+        raise NotFoundException(detail="Project asset not found")
+    if Path(asset_path).suffix.lower() not in PROJECT_ASSET_EXTENSIONS:
+        raise NotFoundException(detail="Project asset not found")
+
+    try:
+        resolved = await run_blocking(
+            pm.resolve_project_asset,
+            project_id,
+            asset_path,
+        )
+    except (FileNotFoundError, ValueError, OSError):
+        raise NotFoundException(detail="Project asset not found")
+
+    headers = {
+        "Cache-Control": "public, max-age=3600",
+        "Cross-Origin-Resource-Policy": "same-origin",
+        "X-Content-Type-Options": "nosniff",
+    }
+    if resolved.suffix.lower() == ".svg":
+        headers["Content-Security-Policy"] = (
+            "default-src 'none'; style-src 'unsafe-inline'; sandbox"
+        )
+    return FileResponse(resolved, headers=headers)
+
+
 @router.delete("/projects/{project_id}")
 @limiter.limit("30/minute")
 async def delete_project(request: Request, project_id: str, pm: ProjectManagerDep):
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
+    active_run = translation_run_registry.get_active_run(project_id)
+    if active_run is not None:
+        raise ConflictException(
+            detail=(
+                "Project has an active translation; cancel it before deleting "
+                f"(run_id={active_run.run_id or 'starting'})"
+            ),
+            error_code="PROJECT_TRANSLATION_ACTIVE",
+        )
     try:
         await run_blocking(pm.delete, project_id)
         return {"message": "Project deleted"}
@@ -297,14 +373,7 @@ async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
         return _project_asset_url(project_id, paragraph.source) or paragraph.source
 
     def _normalize_image_html(paragraph) -> Optional[str]:
-        if not paragraph.source_html:
-            return paragraph.source_html
-        html = paragraph.source_html
-        html = html.replace("src=\"./images/", f"src=\"/projects/{project_id}/images/")
-        html = html.replace("src=\"images/", f"src=\"/projects/{project_id}/images/")
-        html = html.replace("src=\"./", f"src=\"/projects/{project_id}/")
-        html = html.replace("href=\"./", f"href=\"/projects/{project_id}/")
-        return html
+        return _rewrite_project_image_html(project_id, paragraph.source_html)
 
     try:
         section = await run_blocking(pm.get_section, project_id, section_id)

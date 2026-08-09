@@ -168,12 +168,23 @@ class LLMUsageMetrics:
             run = self._runs.get(resolved_run_id)
             return len(run.calls) if run else 0
 
-    def summary(self, run_id: Optional[str] = None) -> dict[str, Any]:
+    def summary(
+        self,
+        run_id: Optional[str] = None,
+        *,
+        include_calls: bool = True,
+    ) -> dict[str, Any]:
+        """Return aggregate usage, optionally omitting per-call payloads.
+
+        Frequently-polled status endpoints only need aggregate counters.  Avoid
+        converting as many as 5,000 call dataclasses into dictionaries for every
+        poll when those dictionaries would immediately be discarded.
+        """
         resolved_run_id = self._resolve_run_id(run_id)
         with self._lock:
             run = self._runs.get(resolved_run_id)
             if run is None:
-                return {
+                empty_summary = {
                     "run_id": resolved_run_id,
                     "api_calls": 0,
                     "successful_calls": 0,
@@ -182,13 +193,15 @@ class LLMUsageMetrics:
                     "output_tokens": 0,
                     "total_tokens": 0,
                     "duration_seconds": 0.0,
-                    "calls": [],
                 }
+                if include_calls:
+                    empty_summary["calls"] = []
+                return empty_summary
             calls = list(run.calls)
             project_id = run.project_id
             started_at = run.started_at
 
-        return {
+        summary = {
             "run_id": resolved_run_id,
             "project_id": project_id,
             "started_at": started_at,
@@ -206,8 +219,10 @@ class LLMUsageMetrics:
             ),
             "models": sorted({call.model for call in calls if call.model}),
             "phases": sorted({call.phase for call in calls if call.phase}),
-            "calls": [asdict(call) for call in calls],
         }
+        if include_calls:
+            summary["calls"] = [asdict(call) for call in calls]
+        return summary
 
 
 llm_usage_metrics = LLMUsageMetrics()

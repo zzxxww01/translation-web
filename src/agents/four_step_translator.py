@@ -127,6 +127,22 @@ class FourStepTranslator:
         Returns:
             SectionPrescanResult: 预扫描结果
         """
+        result = self.scan_section_terms(section)
+        if result is None:
+            return None
+        return self.apply_section_prescan(result, on_conflict=on_conflict)
+
+    def scan_section_terms(
+        self,
+        section: Section,
+    ) -> Optional[SectionPrescanResult]:
+        """Call the prescan model without mutating shared translation context.
+
+        Keeping the network phase side-effect free lets orchestration abandon a
+        timed-out worker safely: a late response cannot change terminology after
+        translation has already moved on to another section.
+        """
+
         # 获取章节完整内容
         section_content = "\n\n".join([p.source for p in section.paragraphs])
 
@@ -143,7 +159,7 @@ class FourStepTranslator:
             )
         except Exception as e:
             # 预扫描失败不阻塞翻译流程
-            logging.warning(f"Section prescan failed: {e}")
+            logger.warning("Section prescan failed: %s", e)
             return None
 
         # 解析新术语
@@ -156,10 +172,24 @@ class FourStepTranslator:
                 confidence=term_data.get("confidence", 0.8)
             ))
 
+        return SectionPrescanResult(
+            section_id=section.section_id,
+            new_terms=new_terms,
+            term_usages=result.get("term_usages", {}),
+            scan_coverage=1.0,
+        )
+
+    def apply_section_prescan(
+        self,
+        result: SectionPrescanResult,
+        on_conflict: Optional[Callable[[TermConflict], None]] = None,
+    ) -> SectionPrescanResult:
+        """Commit a completed prescan result to shared terminology state."""
+
         # 检测术语冲突
         conflicts = self.context_manager.add_terms_from_prescan(
-            new_terms,
-            section.section_id
+            result.new_terms,
+            result.section_id,
         )
 
         # 如果有冲突且提供了回调，调用回调
@@ -167,12 +197,7 @@ class FourStepTranslator:
             for conflict in conflicts:
                 on_conflict(conflict)
 
-        return SectionPrescanResult(
-            section_id=section.section_id,
-            new_terms=new_terms,
-            term_usages=result.get("term_usages", {}),
-            scan_coverage=1.0
-        )
+        return result
 
     # ============ 优化点7: 反馈循环 ============
 

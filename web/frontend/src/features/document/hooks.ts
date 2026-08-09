@@ -3,7 +3,7 @@
  * 提供统一的数据获取和状态管理
  */
 
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { documentApi } from './api';
@@ -342,7 +342,7 @@ export function useDeleteProject() {
  * 全文一键翻译 (SSE 流式，使用单例服务保持跨tab状态)
  * 支持选择翻译方法：普通翻译或四步法翻译
  */
-export function useFullTranslate(currentProjectId?: string) {
+export function useFullTranslate() {
   const { handleError } = useErrorHandler();
   const queryClient = useQueryClient();
   const updateParagraphInProject = useDocumentStore(state => state.updateParagraphInProject);
@@ -353,14 +353,6 @@ export function useFullTranslate(currentProjectId?: string) {
     state => state.setFullTranslateProgressForProject
   );
   const endFullTranslate = useDocumentStore(state => state.endFullTranslate);
-
-  useEffect(() => {
-    return () => {
-      if (!currentProjectId) return;
-      fullTranslationService.detachTranslation(currentProjectId);
-      endFullTranslate(currentProjectId);
-    };
-  }, [currentProjectId, endFullTranslate]);
 
   const startTranslation = useCallback(async (
     projectId: string,

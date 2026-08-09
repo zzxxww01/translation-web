@@ -354,9 +354,10 @@ export class FullTranslationService {
     this.state.isPaused = false;
     this.state.pendingConflict = null;
 
-    if (this.onCompleteCallback) {
-      this.onCompleteCallback();
-    }
+    const onComplete = this.onCompleteCallback;
+    this.onProgressCallback = null;
+    this.onCompleteCallback = null;
+    onComplete?.();
 
     if (!isCompleted) {
       this.state.method = null;
