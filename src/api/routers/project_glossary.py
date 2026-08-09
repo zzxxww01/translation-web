@@ -29,6 +29,10 @@ from src.services.terminology_review_service import (
     TerminologyReviewService,
     TermReviewArtifactConflict,
 )
+from src.services.translation_resume_service import (
+    TranslationResumeCheckpoint,
+    inspect_translation_resume,
+)
 
 
 router = APIRouter(prefix="", tags=["projects"])
@@ -211,6 +215,64 @@ async def ensure_term_review_job(
         lambda _task, job_id=job["job_id"]: _term_review_tasks.pop(job_id, None)
     )
     return job
+
+
+async def create_legacy_resume_job(
+    *,
+    project_id: str,
+    pm,
+    model: Optional[str],
+    checkpoint: TranslationResumeCheckpoint,
+) -> Dict:
+    """Release cached pre-workflow clients directly into checkpoint resume.
+
+    Browser tabs opened before the server-owned workflow deployment still call
+    ``/term-review/jobs`` and wait for that request before starting four-step
+    translation. Returning a completed, no-review job keeps those tabs
+    compatible and avoids rescanning the whole article before retrying only the
+    paragraphs that are missing on disk.
+    """
+
+    job_store = TerminologyReviewJobStore(pm.projects_path)
+    job, created = await run_blocking(
+        job_store.create_or_get_active,
+        project_id,
+        model,
+    )
+    if not created:
+        return job
+
+    project = await run_blocking(pm.get, project_id)
+    await run_blocking(job_store.mark_running, project_id, job["job_id"])
+    result = {
+        "artifact_id": job["job_id"],
+        "project_id": project_id,
+        "project_title": project.title,
+        "review_required": False,
+        "generated_at": datetime.now().isoformat(),
+        "total_candidates": 0,
+        "sections": [],
+        "is_partial": False,
+        "total_sections": checkpoint.total_sections,
+        "scanned_sections": 0,
+        "failed_sections": 0,
+        "scan_errors": [],
+        "resume_checkpoint": checkpoint.to_dict(),
+    }
+    completed = await run_blocking(
+        job_store.mark_succeeded,
+        project_id,
+        job["job_id"],
+        result,
+    )
+    if completed.get("status") != "succeeded":
+        return completed
+    return await run_blocking(
+        job_store.mark_confirmation_resolved,
+        project_id,
+        job["job_id"],
+        "not_required",
+    )
 
 
 def _ensure_valid_project_id(project_id: str) -> None:
@@ -615,6 +677,24 @@ async def start_term_review_job(
     _ensure_valid_project_id(project_id)
     try:
         await run_blocking(pm.get, project_id)
+        checkpoint = await run_blocking(
+            inspect_translation_resume,
+            pm,
+            project_id,
+        )
+        if checkpoint.resumable:
+            logger.info(
+                "[%s] Legacy client is resuming from %d/%d persisted paragraphs",
+                project_id,
+                checkpoint.translated_paragraphs,
+                checkpoint.total_paragraphs,
+            )
+            return await create_legacy_resume_job(
+                project_id=project_id,
+                pm=pm,
+                model=request.model,
+                checkpoint=checkpoint,
+            )
         return await ensure_term_review_job(
             project_id=project_id,
             pm=pm,

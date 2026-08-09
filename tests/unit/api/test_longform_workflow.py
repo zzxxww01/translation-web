@@ -68,6 +68,11 @@ async def test_start_workflow_returns_while_server_task_keeps_ownership(
     )
     monkeypatch.setattr(
         confirmation_translation,
+        "inspect_translation_resume",
+        lambda *_args: SimpleNamespace(resumable=False),
+    )
+    monkeypatch.setattr(
+        confirmation_translation,
         "ensure_term_review_job",
         fake_ensure_job,
     )
@@ -89,6 +94,8 @@ async def test_start_workflow_returns_while_server_task_keeps_ownership(
     assert response["term_review_timeout_seconds"] == (
         confirmation_translation.settings.term_review_confirmation_timeout_seconds
     )
+    assert response["resumed"] is False
+    assert response["resume_checkpoint"] is None
     assert active_updates == [
         (
             "demo",
@@ -101,6 +108,104 @@ async def test_start_workflow_returns_while_server_task_keeps_ownership(
     ]
     assert await asyncio.wait_for(started.wait(), timeout=1)
     assert confirmation_translation._longform_workflow_tasks
+
+    allow_finish.set()
+    for _ in range(100):
+        if not confirmation_translation._longform_workflow_tasks:
+            break
+        await asyncio.sleep(0.01)
+    assert not confirmation_translation._longform_workflow_tasks
+
+
+@pytest.mark.asyncio
+async def test_start_workflow_resumes_persisted_checkpoint_without_term_review(
+    monkeypatch,
+):
+    allow_finish = asyncio.Event()
+    started = asyncio.Event()
+    active_updates = []
+    checkpoint = SimpleNamespace(
+        resumable=True,
+        translated_paragraphs=70,
+        total_paragraphs=75,
+        to_dict=lambda: {
+            "resumable": True,
+            "translated_paragraphs": 70,
+            "total_paragraphs": 75,
+            "remaining_paragraphs": 5,
+        },
+    )
+
+    class WorkflowService:
+        project_manager = SimpleNamespace(
+            get=lambda _project_id: object(),
+            glossary_manager=object(),
+        )
+        llm = object()
+
+        async def claim_translation_slot(self, project_id):
+            return {
+                "status": "acquired",
+                "project_id": project_id,
+                "run_id": None,
+                "lease_id": "lease-resume",
+            }
+
+        def _set_active_run(self, project_id, **kwargs):
+            active_updates.append((project_id, kwargs))
+
+        def _release_active_run(self, *_args, **_kwargs):
+            pass
+
+    async def fake_resume_workflow(**kwargs):
+        assert kwargs["translated_paragraphs"] == 70
+        assert kwargs["total_paragraphs"] == 75
+        started.set()
+        await allow_finish.wait()
+
+    monkeypatch.setattr(
+        confirmation_translation,
+        "_build_longform_service",
+        lambda _base, _body: WorkflowService(),
+    )
+    monkeypatch.setattr(
+        confirmation_translation,
+        "inspect_translation_resume",
+        lambda *_args: checkpoint,
+    )
+    monkeypatch.setattr(
+        confirmation_translation,
+        "ensure_term_review_job",
+        lambda **_kwargs: (_ for _ in ()).throw(
+            AssertionError("resume must bypass terminology preparation")
+        ),
+    )
+    monkeypatch.setattr(
+        confirmation_translation,
+        "_run_longform_resume_workflow",
+        fake_resume_workflow,
+    )
+    base_service = SimpleNamespace(
+        project_manager=SimpleNamespace(get=lambda _project_id: object())
+    )
+
+    response = await confirmation_translation.start_longform_workflow(
+        _request(),
+        "demo",
+        base_service,
+        LongformWorkflowStartRequest(method="four-step"),
+    )
+
+    assert response["status"] == "started"
+    assert response["resumed"] is True
+    assert response["term_review_job_id"] is None
+    assert response["term_review_timeout_seconds"] == 0
+    assert response["resume_checkpoint"]["remaining_paragraphs"] == 5
+    assert response["run_id"].startswith("resume-")
+    assert active_updates[0][1]["current_step"] == (
+        "断点续译：已完成 70/75 段"
+    )
+    assert await asyncio.wait_for(started.wait(), timeout=1)
 
     allow_finish.set()
     for _ in range(100):
@@ -137,6 +242,38 @@ class _WorkflowTranslationService:
     async def translate_project(self, _project_id):
         self.translated += 1
         return {"status": "completed"}
+
+
+@pytest.mark.asyncio
+async def test_resume_workflow_keeps_server_ownership_until_translation_finishes(
+    tmp_path,
+):
+    service = _WorkflowTranslationService(tmp_path)
+
+    await confirmation_translation._run_longform_resume_workflow(
+        project_id="demo",
+        lease_id="lease-resume",
+        workflow_run_id="resume-demo",
+        translation_service=service,
+        translated_paragraphs=7,
+        total_paragraphs=10,
+    )
+
+    assert service.translated == 1
+    assert service.active_updates == [
+        (
+            "demo",
+            {
+                "run_id": "resume-demo",
+                "status": "starting",
+                "current_step": "断点续译：已完成 7/10 段",
+            },
+        )
+    ]
+    assert service.cleared == ["demo"]
+    assert service.released == [
+        ("demo", {"lease_id": "lease-resume"})
+    ]
 
 
 @pytest.mark.asyncio

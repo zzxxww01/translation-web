@@ -30,6 +30,7 @@ from src.services.terminology_review_service import (
     TermReviewArtifactConflict,
     TerminologyReviewService,
 )
+from src.services.translation_resume_service import inspect_translation_resume
 
 from ..dependencies import (
     ProjectManagerDep,
@@ -114,6 +115,21 @@ def _build_longform_service(
         analysis_llm_provider=analysis_llm,
         user_model_override=body.model,
     )
+
+
+async def _translate_project_in_worker(
+    translation_service: BatchTranslationService,
+    project_id: str,
+) -> Dict[str, Any]:
+    """Run the blocking long-form stack outside the API event loop."""
+
+    def _run_translation_in_thread() -> Dict[str, Any]:
+        async def _runner() -> Dict[str, Any]:
+            return await translation_service.translate_project(project_id)
+
+        return asyncio.run(_runner())
+
+    return await asyncio.to_thread(_run_translation_in_thread)
 
 
 async def _run_longform_workflow(
@@ -286,13 +302,7 @@ async def _run_longform_workflow(
             current_step="开始全文翻译",
         )
 
-        def _run_translation_in_thread() -> Dict[str, Any]:
-            async def _runner() -> Dict[str, Any]:
-                return await translation_service.translate_project(project_id)
-
-            return asyncio.run(_runner())
-
-        await asyncio.to_thread(_run_translation_in_thread)
+        await _translate_project_in_worker(translation_service, project_id)
     except asyncio.CancelledError:
         logger.warning(
             "[%s] Long-form workflow stopped because the API process is shutting down",
@@ -301,6 +311,51 @@ async def _run_longform_workflow(
         raise
     except Exception:
         logger.exception("[%s] Long-form background workflow failed", project_id)
+    finally:
+        translation_service._clear_cancelled(project_id)
+        translation_service._release_active_run(
+            project_id,
+            lease_id=lease_id,
+        )
+
+
+async def _run_longform_resume_workflow(
+    *,
+    project_id: str,
+    lease_id: str,
+    workflow_run_id: str,
+    translation_service: BatchTranslationService,
+    translated_paragraphs: int,
+    total_paragraphs: int,
+) -> None:
+    """Resume directly from paragraph snapshots without reopening term review."""
+
+    try:
+        if translation_service._is_cancelled(project_id):
+            return
+        translation_service._set_active_run(
+            project_id,
+            run_id=workflow_run_id,
+            status="starting",
+            current_step=(
+                f"断点续译：已完成 {translated_paragraphs}/{total_paragraphs} 段"
+            ),
+        )
+        logger.info(
+            "[%s] Resuming long-form translation from %d/%d persisted paragraphs",
+            project_id,
+            translated_paragraphs,
+            total_paragraphs,
+        )
+        await _translate_project_in_worker(translation_service, project_id)
+    except asyncio.CancelledError:
+        logger.warning(
+            "[%s] Resume workflow stopped because the API process is shutting down",
+            project_id,
+        )
+        raise
+    except Exception:
+        logger.exception("[%s] Long-form resume workflow failed", project_id)
     finally:
         translation_service._clear_cancelled(project_id)
         translation_service._release_active_run(
@@ -605,31 +660,63 @@ async def start_longform_workflow(
     lease_id = str(slot_claim["lease_id"])
 
     try:
-        job = await ensure_term_review_job(
-            project_id=project_id,
-            pm=translation_service.project_manager,
-            gm=translation_service.project_manager.glossary_manager,
-            llm=translation_service.llm,
-            model=body.model,
-        )
-        translation_service._set_active_run(
+        checkpoint = await asyncio.to_thread(
+            inspect_translation_resume,
+            translation_service.project_manager,
             project_id,
-            run_id=job["job_id"],
-            status="starting",
-            current_step="术语预检中",
         )
-        task = asyncio.create_task(
-            _run_longform_workflow(
-                project_id=project_id,
-                lease_id=lease_id,
-                term_review_job_id=job["job_id"],
-                translation_service=translation_service,
-                confirmation_timeout_seconds=(
-                    settings.term_review_confirmation_timeout_seconds
+        if checkpoint.resumable:
+            workflow_run_id = f"resume-{uuid.uuid4().hex}"
+            translation_service._set_active_run(
+                project_id,
+                run_id=workflow_run_id,
+                status="starting",
+                current_step=(
+                    "断点续译：已完成 "
+                    f"{checkpoint.translated_paragraphs}/"
+                    f"{checkpoint.total_paragraphs} 段"
                 ),
-            ),
-            name=f"longform-workflow:{project_id}",
-        )
+            )
+            task = asyncio.create_task(
+                _run_longform_resume_workflow(
+                    project_id=project_id,
+                    lease_id=lease_id,
+                    workflow_run_id=workflow_run_id,
+                    translation_service=translation_service,
+                    translated_paragraphs=checkpoint.translated_paragraphs,
+                    total_paragraphs=checkpoint.total_paragraphs,
+                ),
+                name=f"longform-resume:{project_id}",
+            )
+            term_review_job_id = None
+        else:
+            job = await ensure_term_review_job(
+                project_id=project_id,
+                pm=translation_service.project_manager,
+                gm=translation_service.project_manager.glossary_manager,
+                llm=translation_service.llm,
+                model=body.model,
+            )
+            workflow_run_id = job["job_id"]
+            term_review_job_id = job["job_id"]
+            translation_service._set_active_run(
+                project_id,
+                run_id=workflow_run_id,
+                status="starting",
+                current_step="术语预检中",
+            )
+            task = asyncio.create_task(
+                _run_longform_workflow(
+                    project_id=project_id,
+                    lease_id=lease_id,
+                    term_review_job_id=term_review_job_id,
+                    translation_service=translation_service,
+                    confirmation_timeout_seconds=(
+                        settings.term_review_confirmation_timeout_seconds
+                    ),
+                ),
+                name=f"longform-workflow:{project_id}",
+            )
     except ActiveTerminologyReviewModelConflict as exc:
         translation_service._release_active_run(
             project_id,
@@ -651,13 +738,19 @@ async def start_longform_workflow(
     return {
         "status": "started",
         "project_id": project_id,
-        "run_id": job["job_id"],
-        "term_review_job_id": job["job_id"],
+        "run_id": workflow_run_id,
+        "term_review_job_id": term_review_job_id,
         "term_review_timeout_seconds": (
-            settings.term_review_confirmation_timeout_seconds
+            0
+            if checkpoint.resumable
+            else settings.term_review_confirmation_timeout_seconds
         ),
         "method": body.method,
         "model": body.model,
+        "resumed": checkpoint.resumable,
+        "resume_checkpoint": (
+            checkpoint.to_dict() if checkpoint.resumable else None
+        ),
     }
 
 

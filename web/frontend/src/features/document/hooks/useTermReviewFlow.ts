@@ -89,6 +89,17 @@ export function useTermReviewFlow({
         ) {
           return true;
         }
+        if (workflow.resumed || !workflow.term_review_job_id) {
+          const checkpoint = workflow.resume_checkpoint;
+          if (checkpoint) {
+            toast.success(
+              `已从断点继续：保留 ${checkpoint.translated_paragraphs} 段，只处理剩余 ${checkpoint.remaining_paragraphs} 段`
+            );
+          } else {
+            toast.info('后台已从最近断点继续翻译');
+          }
+          return true;
+        }
         setPendingTranslationRequest({
           termReviewJobId: workflow.term_review_job_id,
           timeoutSeconds: workflow.term_review_timeout_seconds,

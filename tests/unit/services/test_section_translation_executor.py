@@ -264,3 +264,98 @@ async def test_four_step_feedback_is_committed_only_after_full_merge_success(
 
     assert result["conflict_paragraph_ids"] == conflict_ids
     assert committed == ([result_model] if should_commit else [])
+
+
+@pytest.mark.asyncio
+async def test_four_step_resume_translates_only_missing_paragraphs_and_keeps_progress(
+    tmp_path,
+) -> None:
+    completed = Paragraph(id="p1", index=0, source="one")
+    completed.add_translation("已有译文", "pro")
+    pending = Paragraph(id="p2", index=1, source="two")
+    section = Section(
+        section_id="s1",
+        title="Resume",
+        paragraphs=[completed, pending],
+    )
+    progress = TranslationProgress(
+        total_sections=1,
+        total_paragraphs=2,
+        original_status=ProjectStatus.IN_PROGRESS,
+    )
+    captured = {}
+    result_model = SimpleNamespace(
+        translations=["补写译文"],
+        draft_translations=["补写译文"],
+        revised_translations=["补写译文"],
+        translation_outputs=[],
+        understanding=None,
+        reflection=None,
+        assessment=None,
+        revision_attempted=False,
+        degraded=False,
+        degraded_reason="",
+    )
+
+    def run_four_step(**kwargs):
+        captured["translated_ids"] = [
+            paragraph.id for paragraph in kwargs["section"].paragraphs
+        ]
+        return result_model
+
+    def apply_result(translatable_section, _result):
+        translatable_section.paragraphs[0].add_translation("补写译文", "pro")
+
+    def merge_updates(_project_id, _section_id, candidates, *_args, **_kwargs):
+        persisted = section.model_copy(deep=True)
+        persisted.paragraphs[1] = candidates[0].model_copy(deep=True)
+        return persisted, ["p2"], []
+
+    def create_callback(*args):
+        captured["callback_args"] = args
+        return lambda *_args: None
+
+    executor = SectionTranslationExecutor(
+        is_cancelled=lambda _project_id: False,
+        touch_progress=lambda *args, **kwargs: None,
+        build_section_prompt_context=lambda *args, **kwargs: {"ok": True},
+        persist_section_artifact=lambda *args, **kwargs: None,
+        run_section_prescan=_noop_prescan,
+        count_translated_paragraphs=lambda section_: sum(
+            1
+            for paragraph in section_.paragraphs
+            if paragraph.has_usable_translation()
+        ),
+        translate_section_batch=lambda **kwargs: [],
+        apply_section_batch_translations=lambda *_args, **_kwargs: [],
+        record_section_batch_term_usage=lambda *_args, **_kwargs: None,
+        four_step_translate_section=run_four_step,
+        create_section_callback=create_callback,
+        apply_four_step_translations=apply_result,
+        merge_translation_updates=merge_updates,
+    )
+
+    result = await executor.translate(
+        project_id="demo",
+        section=section,
+        section_index=0,
+        total_sections=1,
+        all_sections=[section],
+        analysis=SimpleNamespace(),
+        run_dir=tmp_path,
+        progress=progress,
+        on_progress=lambda *_args: None,
+        on_term_conflict=None,
+        project=SimpleNamespace(),
+        total_paragraphs=2,
+        translation_mode="four_step",
+        translation_mode_section="section",
+        prescan_completed=True,
+        translated_before_project=1,
+    )
+
+    assert captured["translated_ids"] == ["p2"]
+    assert captured["callback_args"][2:] == (1, 2, 1)
+    assert result["translated_before"] == 1
+    assert result["translated_after"] == 2
+    assert result["translations"] == ["已有译文", "补写译文"]

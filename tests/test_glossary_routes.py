@@ -418,6 +418,10 @@ class GlossaryRouteTests(unittest.IsolatedAsyncioTestCase):
                     raise FileNotFoundError(project_id)
                 return object()
 
+            @staticmethod
+            def get_sections(_project_id: str):
+                return []
+
         pm = FakeProjectManager()
         with patch.object(
             TerminologyReviewService,
@@ -458,6 +462,10 @@ class GlossaryRouteTests(unittest.IsolatedAsyncioTestCase):
                 if project_id != "demo":
                     raise FileNotFoundError(project_id)
                 return object()
+
+            @staticmethod
+            def get_sections(_project_id: str):
+                return []
 
         pm = FakeProjectManager()
         store = TerminologyReviewJobStore(pm.projects_path)

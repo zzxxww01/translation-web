@@ -974,6 +974,27 @@ class BatchTranslationService:
         # 统计总数
         total_paragraphs = sum(len(s.paragraphs) for s in project.sections)
         total_sections = len(project.sections)
+        existing_translated = self._count_project_translated_paragraphs(
+            project.sections
+        )
+        existing_translated_sections = sum(
+            1
+            for section in project.sections
+            if section.paragraphs
+            and self._count_translated_paragraphs(section)
+            == len(section.paragraphs)
+        )
+        is_resume_run = 0 < existing_translated < total_paragraphs
+        previous_summary = (
+            self._artifact_service.load_latest_run_summary(project_id)
+            if is_resume_run
+            else None
+        )
+        resume_from_run_id = None
+        if previous_summary:
+            resume_from_run_id = (
+                str(previous_summary.get("run_id") or "").strip() or None
+            )
 
         # 创建进度跟踪
         progress = self._progress_tracker.create(
@@ -982,12 +1003,23 @@ class BatchTranslationService:
             total_paragraphs=total_paragraphs,
             original_status=original_status,
         )
+        progress.translated_paragraphs = existing_translated
+        progress.translated_sections = existing_translated_sections
+        if is_resume_run:
+            progress.current_step = (
+                f"断点续译：已完成 {existing_translated}/{total_paragraphs} 段"
+            )
 
         run_id, run_dir = self._create_run_artifact_dir(project_id)
         llm_usage_metrics.start_run(run_id, project_id=project_id)
         progress.run_id = run_id
         self._touch_progress(progress)
-        self._set_active_run(project_id, run_id=run_id, status="processing")
+        self._set_active_run(
+            project_id,
+            run_id=run_id,
+            status="processing",
+            current_step=progress.current_step,
+        )
         self._write_artifact_json(
             run_dir / "source-manifest.json",
             self._build_source_manifest(project, project_id),
@@ -996,12 +1028,25 @@ class BatchTranslationService:
             run_dir / "structure-map.json",
             self._build_structure_map(project),
         )
+        if is_resume_run:
+            self._write_artifact_json(
+                run_dir / "resume-checkpoint.json",
+                {
+                    "resumed": True,
+                    "source_run_id": resume_from_run_id,
+                    "translated_paragraphs": existing_translated,
+                    "total_paragraphs": total_paragraphs,
+                    "remaining_paragraphs": (
+                        total_paragraphs - existing_translated
+                    ),
+                },
+            )
 
         # 更新项目状态为"分析中"
         self._set_active_status(project_id, project, ProjectStatus.ANALYZING)
 
         # 已翻译的段落计数器
-        translated_count = 0
+        translated_count = existing_translated
 
         def finalize_cancelled_result(
             message: str = "Translation cancelled by user",
@@ -1017,8 +1062,8 @@ class BatchTranslationService:
                 if self._count_translated_paragraphs(section) == len(section.paragraphs)
                 and len(section.paragraphs) > 0
             )
-            self._touch_progress(progress, step="已取消")
             progress.final_status = "cancelled"
+            self._touch_progress(progress, step="已取消")
             project.status = original_status
             self._save_meta(project_id, project)
 
@@ -1031,6 +1076,10 @@ class BatchTranslationService:
                 "translated_sections": progress.translated_sections,
                 "total_paragraphs": progress.total_paragraphs,
                 "translated_paragraphs": actual_translated,
+                "translation_mode": self.translation_mode,
+                "resumed": is_resume_run,
+                "resume_from_run_id": resume_from_run_id,
+                "checkpoint_paragraphs": existing_translated,
                 "error_count": len(progress.errors),
                 "errors": progress.errors,
                 "started_at": progress.started_at.isoformat(),
@@ -1049,16 +1098,16 @@ class BatchTranslationService:
         try:
             # Phase 0: 深度分析全文
             logger.info(f"[{project_id}] Starting Phase 0: Deep Analysis")
-            self._touch_progress(progress, step="深度分析全文")
+            phase0_step = "恢复分析上下文" if is_resume_run else "深度分析全文"
+            self._touch_progress(progress, step=phase0_step)
             self._notify_progress(
-                on_progress, "深度分析全文", translated_count, total_paragraphs
+                on_progress, phase0_step, translated_count, total_paragraphs
             )
 
             # 获取Phase 0专用的provider
             phase0_provider = self._get_provider_for_phase("phase0_prescan")
             phase0_analyzer = DeepAnalyzer(phase0_provider)
 
-            existing_translated = self._count_project_translated_paragraphs(project.sections)
             analysis = None
             if existing_translated > 0:
                 analysis = self._load_latest_analysis_snapshot(project_id)
@@ -1201,9 +1250,6 @@ class BatchTranslationService:
                 # 处理跳过的章节
                 if result.get("skipped"):
                     all_translations[section.section_id] = result["translations"]
-                    translated_count += result["paragraph_count"]
-                    progress.translated_sections += 1
-                    progress.translated_paragraphs += result["paragraph_count"]
 
                     self._notify_progress(
                         on_progress,
@@ -1392,8 +1438,11 @@ class BatchTranslationService:
                 if self._count_translated_paragraphs(section) == len(section.paragraphs)
                 and len(section.paragraphs) > 0
             )
-            self._touch_progress(progress, step="completed" if is_complete else "incomplete")
             progress.final_status = "completed" if is_complete else "incomplete"
+            self._touch_progress(
+                progress,
+                step="completed" if is_complete else "incomplete",
+            )
             project.status = (
                 self._final_status_after_success(original_status)
                 if is_complete
@@ -1427,6 +1476,10 @@ class BatchTranslationService:
                 "translated_sections": progress.translated_sections,
                 "total_paragraphs": progress.total_paragraphs,
                 "translated_paragraphs": actual_translated,
+                "translation_mode": self.translation_mode,
+                "resumed": is_resume_run,
+                "resume_from_run_id": resume_from_run_id,
+                "checkpoint_paragraphs": existing_translated,
                 "error_count": len(progress.errors),
                 "errors": progress.errors,
                 "started_at": progress.started_at.isoformat(),
@@ -1461,6 +1514,7 @@ class BatchTranslationService:
             self._progress_tracker.record_error(progress, str(e))
             progress.finished_at = datetime.now()
             progress.final_status = "failed"
+            self._touch_progress(progress, step="failed")
 
             # 更新项目状态为失败
             project.status = original_status
@@ -1472,6 +1526,10 @@ class BatchTranslationService:
                 "status": "failed",
                 "error": str(e),
                 "errors": progress.errors,
+                "translation_mode": self.translation_mode,
+                "resumed": is_resume_run,
+                "resume_from_run_id": resume_from_run_id,
+                "checkpoint_paragraphs": existing_translated,
                 "run_id": run_id,
                 "artifacts_path": str(run_dir),
                 "api_calls": usage_summary["api_calls"],
@@ -1575,6 +1633,11 @@ class BatchTranslationService:
                     project=project,
                     total_paragraphs=total_paragraphs,
                     prescan_completed=True,
+                    translated_before_project=(
+                        self._count_project_translated_paragraphs(
+                            project.sections
+                        )
+                    ),
                 )
             except Exception as exc:
                 result = exc
@@ -1613,6 +1676,7 @@ class BatchTranslationService:
         project: ProjectMeta,
         total_paragraphs: int,
         prescan_completed: bool = False,
+        translated_before_project: Optional[int] = None,
     ) -> Dict[str, Any]:
         return await self._section_executor.translate(
             project_id=project_id,
@@ -1630,6 +1694,7 @@ class BatchTranslationService:
             translation_mode=self.translation_mode,
             translation_mode_section=self.TRANSLATION_MODE_SECTION,
             prescan_completed=prescan_completed,
+            translated_before_project=translated_before_project,
         )
 
     async def _run_section_prescan(

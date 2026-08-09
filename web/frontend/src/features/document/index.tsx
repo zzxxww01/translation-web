@@ -551,6 +551,16 @@ export function DocumentFeature() {
     (hasActiveBackendRunForCurrentProject &&
       backendTranslationStatus?.current_step) ||
     (hasLocalRunForCurrentProject ? currentStep : null);
+  const resumableCheckpoint = (() => {
+    const translated = backendTranslationStatus?.translated_paragraphs ?? 0;
+    const total = backendTranslationStatus?.total_paragraphs ?? 0;
+    if (translated <= 0 || total <= translated) return null;
+    return {
+      translated,
+      total,
+      remaining: total - translated,
+    };
+  })();
 
   const renderSidebar = (mobile: boolean) => (
     <DocumentSidebar
@@ -732,10 +742,12 @@ export function DocumentFeature() {
           <AlertDialogHeader>
             <AlertDialogTitle>开始全文翻译</AlertDialogTitle>
             <AlertDialogDescription>
-              {pendingStartMethod === TranslationMethod.FOUR_STEP
+              {pendingStartMethod === TranslationMethod.FOUR_STEP && resumableCheckpoint
+                ? `将从持久化断点继续四步法翻译：保留已完成的 ${resumableCheckpoint.translated}/${resumableCheckpoint.total} 段，只处理剩余 ${resumableCheckpoint.remaining} 段，不会覆盖已有译文。`
+                : pendingStartMethod === TranslationMethod.FOUR_STEP
                 ? '确定要使用四步法翻译全文吗？系统会先做术语预检，再进行分析、初稿、批评和修订。'
                 : '确定要开始全文翻译吗？系统会先做术语预检，再进行普通全文翻译。'}
-              {' '}任务由后台持续运行，关闭浏览器不会中断；术语未在确认窗口内提交时会自动采用建议继续。
+              {' '}任务由后台持续运行，关闭浏览器不会中断；新任务的术语未在确认窗口内提交时会自动采用建议继续。
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

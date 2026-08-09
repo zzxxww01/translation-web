@@ -100,6 +100,7 @@ class SectionTranslationExecutor:
         translation_mode: str,
         translation_mode_section: str,
         prescan_completed: bool = False,
+        translated_before_project: Optional[int] = None,
     ) -> dict[str, Any]:
         try:
             if self._is_cancelled(project_id):
@@ -205,7 +206,11 @@ class SectionTranslationExecutor:
                     on_progress=self._create_section_callback(
                         section.title,
                         on_progress,
-                        translated_in_section,
+                        (
+                            translated_before_project
+                            if translated_before_project is not None
+                            else translated_in_section
+                        ),
                         total_paragraphs,
                         max(section_paragraph_count - translated_in_section, 0),
                     ),

@@ -53,10 +53,20 @@ export interface LongformWorkflowStartResponse {
   status: 'started';
   project_id: string;
   run_id: string;
-  term_review_job_id: string;
+  term_review_job_id: string | null;
   term_review_timeout_seconds: number;
   method: 'normal' | 'four-step';
   model?: string | null;
+  resumed: boolean;
+  resume_checkpoint?: {
+    translated_paragraphs: number;
+    total_paragraphs: number;
+    translated_sections: number;
+    total_sections: number;
+    remaining_paragraphs: number;
+    source_run_id?: string | null;
+    source_run_status?: string | null;
+  } | null;
 }
 
 /**
