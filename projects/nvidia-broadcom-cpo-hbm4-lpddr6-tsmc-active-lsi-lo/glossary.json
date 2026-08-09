@@ -1202,18 +1202,6 @@
       "updated_at": "2026-04-19T14:44:29.290729"
     },
     {
-      "original": "tile",
-      "translation": "瓦片/计算单元块",
-      "strategy": "translate",
-      "note": "芯片上可复制的功能模块单元",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-19T14:44:29.290742"
-    },
-    {
       "original": "N5",
       "translation": "N5",
       "strategy": "preserve",

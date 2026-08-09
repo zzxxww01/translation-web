@@ -218,18 +218,6 @@
       "updated_at": "2026-04-08T14:59:15.568551"
     },
     {
-      "original": "InferenceX",
-      "translation": "InferenceX",
-      "strategy": "preserve",
-      "note": "The initiative name (formerly InferenceMAX) for benchmarking and optimization.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-08T14:59:15.568558"
-    },
-    {
       "original": "Hopper",
       "translation": "Hopper",
       "strategy": "preserve",
@@ -638,18 +626,6 @@
       "updated_at": "2026-04-08T14:59:15.568804"
     },
     {
-      "original": "Trainium",
-      "translation": "Trainium",
-      "strategy": "preserve",
-      "note": "AWS's custom AI training and inference chip used by Anthropic",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-08T14:59:15.568810"
-    },
-    {
       "original": "SOTA",
       "translation": "SOTA",
       "strategy": "preserve",
@@ -972,76 +948,6 @@
       "source": "analysis_auto",
       "status": "active",
       "updated_at": "2026-04-08T14:59:15.569144"
-    },
-    {
-      "original": "SoC",
-      "translation": "SoC",
-      "strategy": "preserve",
-      "note": "系统级芯片 (System on Chip)",
-      "tags": [
-        "chip"
-      ],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "analysis_auto",
-      "status": "active",
-      "updated_at": "2026-04-08T14:59:15.569294"
-    },
-    {
-      "original": "NPU",
-      "translation": "NPU",
-      "strategy": "preserve",
-      "note": "神经网络处理器",
-      "tags": [
-        "chip"
-      ],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "analysis_auto",
-      "status": "active",
-      "updated_at": "2026-04-08T14:59:15.569310"
-    },
-    {
-      "original": "TPU",
-      "translation": "TPU",
-      "strategy": "preserve",
-      "note": "张量处理器 (Tensor Processing Unit)",
-      "tags": [
-        "chip"
-      ],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "analysis_auto",
-      "status": "active",
-      "updated_at": "2026-04-08T14:59:15.569315"
-    },
-    {
-      "original": "RLHF",
-      "translation": "RLHF",
-      "strategy": "preserve",
-      "note": "基于人类反馈的强化学习",
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "analysis_auto",
-      "status": "active",
-      "updated_at": "2026-04-08T14:59:15.569433"
-    },
-    {
-      "original": "IDM",
-      "translation": "IDM",
-      "strategy": "preserve",
-      "note": "垂直整合制造商 (Integrated Device Manufacturer)",
-      "tags": [
-        "business"
-      ],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "analysis_auto",
-      "status": "active",
-      "updated_at": "2026-04-08T14:59:15.569574"
     }
   ]
 }

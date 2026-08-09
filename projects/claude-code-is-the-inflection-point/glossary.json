@@ -14,42 +14,6 @@
       "updated_at": "2026-04-10T14:51:21.349523"
     },
     {
-      "original": "Anthropic",
-      "translation": "Anthropic",
-      "strategy": "preserve",
-      "note": "AI research lab and company",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T14:51:21.349552"
-    },
-    {
-      "original": "Tokenomics Model",
-      "translation": "Tokenomics模型",
-      "strategy": "translate",
-      "note": "SemiAnalysis proprietary economic model",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T14:51:21.349571"
-    },
-    {
-      "original": "ARR",
-      "translation": "ARR (年度经常性收入)",
-      "strategy": "translate",
-      "note": "Annual Recurring Revenue, financial metric used to compare Anthropic and OpenAI",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T14:51:21.349583"
-    },
-    {
       "original": "TCP/IP",
       "translation": "TCP/IP",
       "strategy": "preserve",
@@ -72,30 +36,6 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-10T14:51:21.349605"
-    },
-    {
-      "original": "vibe coding",
-      "translation": "vibe coding (直觉编程/意念编程)",
-      "strategy": "translate",
-      "note": "Your favorite engineers are vibe coding... Andrej Karpathy, who coined the term vibe coding 1 year ago",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T14:51:21.349616"
-    },
-    {
-      "original": "agentic",
-      "translation": "智能体化 / 代理化",
-      "strategy": "translate",
-      "note": "what is important in linear benchmarking might not matter at all for agentic long horizon tasks.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T14:51:21.349626"
     },
     {
       "original": "CLI",
@@ -216,42 +156,6 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-10T14:51:21.349726"
-    },
-    {
-      "original": "Copilot",
-      "translation": "Copilot",
-      "strategy": "preserve",
-      "note": "Microsoft's AI assistant suite (e.g., M365 Copilot, GitHub Copilot, Office Copilot).",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T14:51:21.349735"
-    },
-    {
-      "original": "OpenAI",
-      "translation": "OpenAI",
-      "strategy": "preserve",
-      "note": "AI research organization and Microsoft's core partner.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T14:51:21.349744"
-    },
-    {
-      "original": "terminal value",
-      "translation": "终值",
-      "strategy": "translate",
-      "note": "Finance term referring to the present value of all future cash flows beyond the projection period.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T14:51:21.349753"
     },
     {
       "original": "token efficiency",

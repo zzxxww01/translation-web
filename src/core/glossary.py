@@ -225,7 +225,15 @@ class GlossaryManager:
 
     def merge(self, global_glossary: Glossary, project_glossary: Glossary) -> Glossary:
         """
-        合并全局和项目术语表（项目优先）
+        合并全局和项目术语表（**全局优先**，2026-08-09 反转）
+
+        原先是「项目优先」，实测造成严重问题：项目词表里沉淀的是**翻译当时**的
+        旧译名，一旦全局词表修正（capex 资本支出→资本开支、node 制程节点→判据型、
+        agentic 智能体化→智能体…），旧值会把修正压回去，且难以察觉——
+        一份项目词表就能让全局词表整体失效。全局词表是单一事实源，理应最高优先级。
+
+        项目词表的正当用途是**补充**全局没有的项目专属术语（型号、人名、一次性概念），
+        不是覆盖全局。确需为某篇指定不同译法时，在项目词条上显式标 `"force": true`。
 
         Args:
             global_glossary: 全局术语表
@@ -236,13 +244,23 @@ class GlossaryManager:
         """
         merged = Glossary(version=max(global_glossary.version, project_glossary.version))
 
-        # 先添加全局术语
-        for term in global_glossary.terms:
-            merged.add_term(term)
-
-        # 再添加项目术语（会覆盖同名的全局术语）
+        # 先添加项目术语（提供全局没有的补充条目）
         for term in project_glossary.terms:
             merged.add_term(term)
+
+        # 再添加全局术语 —— 同名时以全局为准
+        global_keys = set()
+        for term in global_glossary.terms:
+            merged.add_term(term)
+            global_keys.add(getattr(term, "original", "").lower())
+
+        # 逃生舱：项目词条显式 force=True 时才允许覆盖全局
+        for term in project_glossary.terms:
+            forced = getattr(term, "force", None)
+            if forced is None and isinstance(term, dict):
+                forced = term.get("force")
+            if forced and getattr(term, "original", "").lower() in global_keys:
+                merged.add_term(term)
 
         return merged
 

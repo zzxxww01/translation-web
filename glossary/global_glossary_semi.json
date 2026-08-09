@@ -116,17 +116,17 @@
     },
     {
       "original": "SK Hynix",
-      "translation": "SK海力士",
+      "translation": "SK 海力士",
       "strategy": "first_annotate",
-      "note": null,
+      "note": "**中英之间加空格**（R6）。首现「SK 海力士（SK Hynix）」，后文可简作「海力士」",
       "tags": [
         "company"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "compliance-fix-2026-08-09",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570284"
+      "updated_at": "2026-08-09T14:50:58.199506"
     },
     {
       "original": "Micron",
@@ -144,17 +144,17 @@
     },
     {
       "original": "foundry",
-      "translation": "晶圆代工厂",
+      "translation": "晶圆代工厂/代工厂",
       "strategy": "translate",
-      "note": "后续可简称'代工厂'",
+      "note": "**首现「晶圆代工厂」，后文简作「代工厂」或「代工」**（foundry business→代工业务、foundry model→代工模式）。实测全称仅占 4%，简称占 89%，故不强制全称",
       "tags": [
         "manufacturing"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "compliance-fix-2026-08-09",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:50:58.199506"
     },
     {
       "original": "wafer",
@@ -186,17 +186,17 @@
     },
     {
       "original": "node",
-      "translation": "制程节点",
+      "translation": "节点/制程节点",
       "strategy": "translate",
-      "note": "如 7nm, 5nm, 3nm，需要注意翻译时不要语义重复，如 N3 node直接翻译成3纳米制程",
+      "note": "**看语境**：制程/工艺语境（N5、3nm、先进节点）→「节点」或「工艺节点」，首现可作「制程节点」；网络/计算语境（compute node、node failure）→「节点」。**禁一律作「制程节点」**（实测仅 4% 采用，且会误伤网络语境）",
       "tags": [
         "manufacturing"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "compliance-fix-2026-08-09",
       "status": "active",
-      "updated_at": "2026-03-15T20:41:42.518425"
+      "updated_at": "2026-08-09T14:50:58.199506"
     },
     {
       "original": "EUV",
@@ -211,20 +211,6 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-03-12T12:47:53.570326"
-    },
-    {
-      "original": "EUV lithography",
-      "translation": "EUV光刻",
-      "strategy": "first_annotate",
-      "note": "极紫外光刻技术",
-      "tags": [
-        "manufacturing"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570344"
     },
     {
       "original": "DUV",
@@ -466,7 +452,7 @@
     },
     {
       "original": "NAND flash",
-      "translation": "NAND闪存",
+      "translation": "NAND 闪存",
       "strategy": "first_annotate",
       "note": null,
       "tags": [
@@ -476,7 +462,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570450"
+      "updated_at": "2026-08-09T15:03:09.445738"
     },
     {
       "original": "logic chip",
@@ -506,34 +492,6 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-03-12T12:47:53.570458"
-    },
-    {
-      "original": "analog chip",
-      "translation": "模拟芯片",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "chip"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570462"
-    },
-    {
-      "original": "RF chip",
-      "translation": "射频芯片",
-      "strategy": "first_annotate",
-      "note": "Radio Frequency",
-      "tags": [
-        "chip"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570466"
     },
     {
       "original": "AI",
@@ -637,7 +595,7 @@
       "original": "RLHF",
       "translation": "RLHF",
       "strategy": "first_annotate",
-      "note": "基于人类反馈的强化学习",
+      "note": "基于人类反馈的强化学习　【低频保留：易混缩写】",
       "tags": [
         "ai"
       ],
@@ -645,7 +603,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570502"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "transformer",
@@ -660,20 +618,6 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-03-12T12:47:53.570505"
-    },
-    {
-      "original": "self-attention",
-      "translation": "自注意力机制",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570512"
     },
     {
       "original": "parameter",
@@ -718,46 +662,18 @@
       "updated_at": "2026-03-12T12:47:53.570530"
     },
     {
-      "original": "deep learning",
-      "translation": "深度学习",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570533"
-    },
-    {
-      "original": "machine learning",
-      "translation": "机器学习",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570537"
-    },
-    {
       "original": "GPU cluster",
-      "translation": "GPU集群",
+      "translation": "GPU 集群",
       "strategy": "first_annotate",
-      "note": null,
+      "note": "**中英之间加空格**（R6）",
       "tags": [
         "ai"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "compliance-fix-2026-08-09",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570541"
+      "updated_at": "2026-08-09T14:50:58.199506"
     },
     {
       "original": "data center",
@@ -786,20 +702,6 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-03-12T12:47:53.570551"
-    },
-    {
-      "original": "edge computing",
-      "translation": "边缘计算",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570555"
     },
     {
       "original": "throughput",
@@ -943,31 +845,31 @@
     },
     {
       "original": "capex",
-      "translation": "资本支出",
+      "translation": "资本开支",
       "strategy": "translate",
-      "note": "Capital Expenditure",
+      "note": "Capital Expenditure。**统一「开支」不用「支出」**（33 篇实测 17:7 倾向开支），与 opex=运营开支 配套，二者用字必须一致",
       "tags": [
         "business"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "user-verdict-2026-08-09",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:13:13.560193"
     },
     {
       "original": "opex",
-      "translation": "运营支出",
+      "translation": "运营开支",
       "strategy": "first_annotate",
-      "note": "Operating Expense",
+      "note": "Operating Expense。**统一「开支」不用「支出」**，与 capex=资本开支 配套",
       "tags": [
         "business"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "user-verdict-2026-08-09",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570642"
+      "updated_at": "2026-08-09T14:13:13.560193"
     },
     {
       "original": "R&D",
@@ -1094,20 +996,6 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-03-12T12:47:53.570709"
-    },
-    {
-      "original": "IoT",
-      "translation": "IoT",
-      "strategy": "preserve",
-      "note": "物联网 (Internet of Things)",
-      "tags": [
-        "general"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570712"
     },
     {
       "original": "semiconductor",
@@ -1413,17 +1301,17 @@
     },
     {
       "original": "ASML",
-      "translation": "阿斯麦",
-      "strategy": "first_annotate",
-      "note": null,
+      "translation": null,
+      "strategy": "preserve",
+      "note": "中文半导体圈通行直接用 ASML。首现可注一次「阿斯麦」，后文用 ASML。**禁全篇写「阿斯麦」**（实测 ASML 占 92%）",
       "tags": [
         "company"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "compliance-fix-2026-08-09",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00"
+      "updated_at": "2026-08-09T14:50:58.199506"
     },
     {
       "original": "GlobalFoundries",
@@ -1613,15 +1501,15 @@
       "original": "die",
       "translation": "裸片",
       "strategy": "translate",
-      "note": "与 chip=芯片 区分；勿与 chiplet=芯粒 混淆",
+      "note": "**统一「裸片」**，禁「裸晶」「晶粒」。与 chip=芯片、chiplet=芯粒 区分——chiplet 译「芯粒」是对的，勿改",
       "tags": [
         "chip"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "user-verdict-2026-08-09",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00"
+      "updated_at": "2026-08-09T14:13:13.560193"
     },
     {
       "original": "scale-up",
@@ -1806,20 +1694,6 @@
       "updated_at": "2026-07-26T00:00:00"
     },
     {
-      "original": "Azure AI Foundry",
-      "translation": null,
-      "strategy": "preserve",
-      "note": "微软 Azure AI Foundry 平台；注意与小写 foundry=晶圆代工厂区分",
-      "tags": [
-        "product"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
       "original": "Trainium",
       "translation": null,
       "strategy": "preserve",
@@ -1921,7 +1795,7 @@
       "original": "GWh",
       "translation": null,
       "strategy": "preserve",
-      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦　【低频保留：R1 单位铁律】",
       "tags": [
         "unit"
       ],
@@ -1929,7 +1803,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "MWh",
@@ -1949,7 +1823,7 @@
       "original": "TWh",
       "translation": null,
       "strategy": "preserve",
-      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦",
+      "note": "功率/能量单位保留半角原形，禁译吉瓦/兆瓦/千瓦　【低频保留：R1 单位铁律】",
       "tags": [
         "unit"
       ],
@@ -1957,7 +1831,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "W",
@@ -2005,7 +1879,7 @@
       "original": "the Bitter Lesson",
       "translation": "苦涩的教训",
       "strategy": "translate",
-      "note": "作为概念词出现时译“苦涩的教训”，作为被引文章标题时保留英文",
+      "note": "作为概念词出现时译“苦涩的教训”，作为被引文章标题时保留英文　【低频保留：作概念词译「苦涩的教训」、作被引标题保留英文】",
       "tags": [
         "ai"
       ],
@@ -2013,49 +1887,7 @@
       "scope": "global",
       "source": "skill-glossary-merge",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
-      "original": "Context Engineering",
-      "translation": "上下文工程",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "skill-glossary-merge",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
-      "original": "AI Wrapper",
-      "translation": "AI 套壳",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "skill-glossary-merge",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
-      "original": "Hallucination",
-      "translation": "幻觉",
-      "strategy": "translate",
-      "note": "AI 语境专义",
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "skill-glossary-merge",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "Alignment",
@@ -2072,32 +1904,18 @@
       "updated_at": "2026-07-26T00:00:00"
     },
     {
-      "original": "Guardrails",
-      "translation": "护栏",
-      "strategy": "translate",
-      "note": "AI 安全语境",
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "skill-glossary-merge",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
       "original": "Agentic",
-      "translation": "智能体化的",
+      "translation": "智能体",
       "strategy": "translate",
-      "note": null,
+      "note": "agentic AI→智能体 AI；agentic workload→智能体工作负载；agentic coding→智能体编程。**禁「智能体化的」**（33 篇实测 0% 采用，实际 83% 用「智能体」）",
       "tags": [
         "ai"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "skill-glossary-merge",
+      "source": "compliance-fix-2026-08-09",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:50:58.199506"
     },
     {
       "original": "Grounding",
@@ -2156,48 +1974,6 @@
       "updated_at": "2026-07-26T00:00:00"
     },
     {
-      "original": "Boilerplate",
-      "translation": "样板代码",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "skill-glossary-merge",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
-      "original": "Prompt Engineering",
-      "translation": "提示词工程",
-      "strategy": "translate",
-      "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "skill-glossary-merge",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
-      "original": "Retrieval-Augmented Generation",
-      "translation": "检索增强生成",
-      "strategy": "translate",
-      "note": "缩写 RAG",
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "skill-glossary-merge",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
       "original": "Scaling Laws",
       "translation": "缩放定律",
       "strategy": "translate",
@@ -2216,20 +1992,6 @@
       "translation": "开源",
       "strategy": "translate",
       "note": null,
-      "tags": [
-        "ai"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "skill-glossary-merge",
-      "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
-    },
-    {
-      "original": "Distillation",
-      "translation": "蒸馏",
-      "strategy": "translate",
-      "note": "模型压缩语境",
       "tags": [
         "ai"
       ],
@@ -2369,7 +2131,7 @@
       "original": "TTM",
       "translation": "滚动十二个月",
       "strategy": "translate",
-      "note": "Trailing Twelve Months",
+      "note": "Trailing Twelve Months　【低频保留：R4 易错短语=滚动十二个月】",
       "tags": [
         "finance"
       ],
@@ -2377,7 +2139,7 @@
       "scope": "global",
       "source": "skill-glossary-merge",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "enterprise value",
@@ -2420,20 +2182,6 @@
       "source": "skill-glossary-merge",
       "status": "active",
       "updated_at": "2026-07-26T00:00:00"
-    },
-    {
-      "original": "deep dive",
-      "translation": "深度研究",
-      "strategy": "translate",
-      "note": "命中即用，禁写深度分析/深度剖析（全篇统一）",
-      "tags": [
-        "editorial"
-      ],
-      "first_occurrence": null,
-      "scope": "global",
-      "source": "review-2026-07",
-      "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
     },
     {
       "original": "resource adequacy",
@@ -2481,7 +2229,7 @@
       "original": "time-to-power",
       "translation": "通电时间",
       "strategy": "translate",
-      "note": "数据中心供电语境",
+      "note": "数据中心供电语境　【低频保留：电力术语，易误译】",
       "tags": [
         "power"
       ],
@@ -2489,7 +2237,7 @@
       "scope": "global",
       "source": "review-2026-07",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "Base Residual Auction",
@@ -2537,7 +2285,7 @@
       "original": "Jenbacher",
       "translation": null,
       "strategy": "preserve",
-      "note": "燃气发电机品牌（INNIO Jenbacher），防 Jembacher 错拼",
+      "note": "燃气发电机品牌（INNIO Jenbacher），防 Jembacher 错拼　【低频保留：防错拼 Jembacher】",
       "tags": [
         "company"
       ],
@@ -2545,7 +2293,7 @@
       "scope": "global",
       "source": "review-2026-07",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "perf per TCO",
@@ -2635,7 +2383,7 @@
       "original": "kilowatts",
       "translation": "kW",
       "strategy": "translate",
-      "note": "拼写形功率/能量单位统一改写为半角 kW，禁译吉瓦/兆瓦/千瓦/瓦",
+      "note": "拼写形功率/能量单位统一改写为半角 kW，禁译吉瓦/兆瓦/千瓦/瓦　【低频保留：R1 铁律：拼写形改符号 kW】",
       "tags": [
         "unit"
       ],
@@ -2643,7 +2391,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "terawatt",
@@ -2803,7 +2551,7 @@
       "original": "Changxin Jidian",
       "translation": "长鑫集电（北京）",
       "strategy": "first_annotate",
-      "note": "集电≠积电≠机电；北京，CXMT 关联实体",
+      "note": "集电≠积电≠机电；北京，CXMT 关联实体　【低频保留：R4 中文实体名可查证，禁臆造用字】",
       "tags": [
         "company"
       ],
@@ -2811,13 +2559,13 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "Changxin Xinqiao",
       "translation": "长鑫新桥",
       "strategy": "first_annotate",
-      "note": "CXMT 关联实体，勿臆造用字",
+      "note": "CXMT 关联实体，勿臆造用字　【低频保留：同上】",
       "tags": [
         "company"
       ],
@@ -2825,13 +2573,13 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "Qinghui Jidian",
       "translation": "清辉集电（合肥）",
       "strategy": "first_annotate",
-      "note": "集电≠积电≠机电；合肥，勿写清辉机电",
+      "note": "集电≠积电≠机电；合肥，勿写清辉机电　【低频保留：同上】",
       "tags": [
         "company"
       ],
@@ -2839,13 +2587,13 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "Tsinghua Unigroup",
       "translation": "紫光集团",
       "strategy": "first_annotate",
-      "note": "禁译过时的清华紫光",
+      "note": "禁译过时的清华紫光　【低频保留：R4 禁译「清华紫光」】",
       "tags": [
         "company"
       ],
@@ -2853,7 +2601,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "Unigroup",
@@ -2929,7 +2677,7 @@
       "original": "Hua Hong",
       "translation": "华虹",
       "strategy": "first_annotate",
-      "note": "华虹半导体/华虹集团",
+      "note": "华虹半导体/华虹集团　【低频保留：R4 实体名】",
       "tags": [
         "company"
       ],
@@ -2937,7 +2685,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "CXMT",
@@ -2957,7 +2705,7 @@
       "original": "SMSC",
       "translation": null,
       "strategy": "preserve",
-      "note": "≠SMIC≠中芯国际；未认定实体，原样保留英文",
+      "note": "≠SMIC≠中芯国际；未认定实体，原样保留英文　【低频保留：形近 SMIC，R4 明令禁就近映射】",
       "tags": [
         "company"
       ],
@@ -2965,7 +2713,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-28T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "backstop",
@@ -3173,7 +2921,7 @@
       "original": "firm energy",
       "translation": "保供电力",
       "strategy": "first_annotate",
-      "note": "承诺按约定容量稳定供应的电力合约",
+      "note": "承诺按约定容量稳定供应的电力合约　【低频保留：电力术语，易误译】",
       "tags": [
         "power"
       ],
@@ -3181,7 +2929,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-29T00:00:00"
+      "updated_at": "2026-08-09T14:57:07.812690"
     },
     {
       "original": "net operating income",
@@ -3255,79 +3003,79 @@
     },
     {
       "original": "OEM",
-      "translation": "原始设备制造商",
-      "strategy": "first_annotate",
-      "note": "**禁译「代工厂」**（那是 foundry/OEM 代工≠晶圆代工）。指整机厂商，服务器语境可简称「整机厂」。实测 3 种译法，含 1 处错译",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "通行缩写，直接用 OEM。首现可注一次「原始设备制造商」，后文用 OEM。**勿与 foundry 混淆**：foundry=晶圆代工厂，OEM≠代工厂",
       "tags": [
         "business"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "corpus-audit-2026-08-09",
+      "source": "compliance-fix-2026-08-09",
       "status": "active",
-      "updated_at": "2026-08-09T13:52:07.089830"
+      "updated_at": "2026-08-09T14:50:58.199506"
     },
     {
       "original": "ARR",
       "translation": "年度经常性收入",
       "strategy": "first_annotate",
-      "note": "Annual Recurring Revenue。统一「收入」不用「营收」，统一「年度」不用「年化」。实测 3 种译法",
+      "note": "Annual Recurring Revenue。**统一「年度」不用「年化」、「收入」不用「营收」**。实测 3 种译法",
       "tags": [
         "finance"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "corpus-audit-2026-08-09",
+      "source": "user-verdict-2026-08-09",
       "status": "active",
-      "updated_at": "2026-08-09T13:52:07.089830"
+      "updated_at": "2026-08-09T14:13:13.560193"
     },
     {
       "original": "SLA",
       "translation": "服务等级协议",
       "strategy": "first_annotate",
-      "note": "统一「等级」不用「水平」。实测 2 种译法",
+      "note": "Service Level Agreement。**统一「等级」不用「水平」/「级别」**",
       "tags": [
         "business"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "corpus-audit-2026-08-09",
+      "source": "user-verdict-2026-08-09",
       "status": "active",
-      "updated_at": "2026-08-09T13:52:07.089830"
+      "updated_at": "2026-08-09T14:13:13.560193"
     },
     {
       "original": "TAM",
-      "translation": "可触达市场规模",
+      "translation": "总潜在市场",
       "strategy": "first_annotate",
-      "note": "Total Addressable Market。**禁译「目标市场」**（那是 target market）；亦禁「总潜在市场/总可寻址市场/总可服务市场」等变体。实测 5 种译法，是全语料分歧最严重的术语",
+      "note": "Total Addressable Market。**禁译「目标市场」**（那是 target market，qa_check 有红线）；亦禁「总可服务市场/总可寻址市场/潜在市场总规模」等变体。33 篇实测 6 种译法，是全语料分歧最严重的术语，已裁决统一",
       "tags": [
         "finance"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "corpus-audit-2026-08-09",
+      "source": "user-verdict-2026-08-09",
       "status": "active",
-      "updated_at": "2026-08-09T13:52:07.089830"
+      "updated_at": "2026-08-09T14:13:13.560193"
     },
     {
       "original": "MCM",
       "translation": "多芯片模块",
       "strategy": "first_annotate",
-      "note": "Multi-Chip Module。与 chiplet=芯粒 区分",
+      "note": "Multi-Chip Module。**「多」不能丢**，禁简作「芯片模块」。与 chiplet=芯粒 区分",
       "tags": [
         "chip"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "corpus-audit-2026-08-09",
+      "source": "user-verdict-2026-08-09",
       "status": "active",
-      "updated_at": "2026-08-09T13:52:07.089830"
+      "updated_at": "2026-08-09T14:13:13.560193"
     },
     {
       "original": "interposer",
       "translation": "中介层",
       "strategy": "first_annotate",
-      "note": "**统一「中介层」**，禁「转接板」「硅中介层」（后者是 silicon interposer 的完整说法，首现可用一次，后文用「中介层」）。实测 3 篇 3 种译法",
+      "note": "统一「中介层」（现有译文已一致，勿改成「转接板」「内插器」）；silicon interposer 首现可作「硅中介层」，后文用「中介层」",
       "tags": [
         "packaging"
       ],
@@ -3335,7 +3083,7 @@
       "scope": "global",
       "source": "corpus-audit-2026-08-09",
       "status": "active",
-      "updated_at": "2026-08-09T13:52:07.089830"
+      "updated_at": "2026-08-09T14:10:11.868672"
     },
     {
       "original": "COT",
@@ -3379,6 +3127,243 @@
       "source": "corpus-audit-2026-08-09",
       "status": "active",
       "updated_at": "2026-08-09T13:52:07.089830"
+    },
+    {
+      "original": "tile",
+      "translation": "单元块/芯块(按语境)",
+      "strategy": "translate",
+      "note": "**不可全局统一，按它指什么**：芯片内重复排布的计算/存储单元阵列（mesh tile、DNN accelerator tile、DRAM sub-array）→单元块；晶圆上重复曝光的光罩单元（defective tile）→单元块；封装内独立的一小片硅（SerDes tile）→芯块。2026-08-09 实测三篇三语境，各自都对",
+      "tags": [
+        "chip",
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:15:26.159591"
+    },
+    {
+      "original": "target market",
+      "translation": "目标市场",
+      "strategy": "translate",
+      "note": "产品面向的市场，**与 TAM=总潜在市场是两回事**。芯片设计流程「规划」步骤里的target market 就是目标市场，不要按 TAM 的红线改掉",
+      "tags": [
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:15:26.159591"
+    },
+    {
+      "original": "Tokenomics Model",
+      "translation": "token 经济学模型",
+      "strategy": "translate",
+      "note": "SemiAnalysis 订阅产品（semianalysis.com/tokenomics-model）。**Tokenomics→「token 经济学」**：token 守 R1 铁律不译，-nomics 译「经济学」；**禁「代币经济学」「Tokenomics 模型」**。衍生：Tokenomics Dashboard→token 经济学仪表板、Tokenomics Team→token 经济学团队",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "Datacenter Industry Model",
+      "translation": "数据中心行业模型",
+      "strategy": "translate",
+      "note": "SemiAnalysis 订阅产品（/datacenter-industry-model）。原文简作 Datacenter Model 时**中文仍用全称「数据中心行业模型」**；禁「数据中心产业模型」「AI 数据中心模型」",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "AI TCO Model",
+      "translation": "AI TCO 模型",
+      "strategy": "translate",
+      "note": "SemiAnalysis 订阅产品（/ai-cloud-tco-model，官方名 AI TCO Model）。TCO 属 R1 白名单缩写保留",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "Accelerator Model",
+      "translation": "加速器模型",
+      "strategy": "translate",
+      "note": "SemiAnalysis 订阅产品（/accelerator-hbm-model）。原文出现 Accelerator & HBM Model 时作「加速器与 HBM 模型」（HBM 前后留空格）",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "Memory Model",
+      "translation": "内存模型",
+      "strategy": "translate",
+      "note": "SemiAnalysis 订阅产品（/memory-model）。注意是「内存」不是「存储」",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "Energy Model",
+      "translation": "能源模型",
+      "strategy": "translate",
+      "note": "SemiAnalysis 订阅产品（/energy-model）",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "AI Networking Model",
+      "translation": "AI 网络模型",
+      "strategy": "translate",
+      "note": "SemiAnalysis 订阅产品（/ai-networking-model）。原文简作 Networking Model 时中文仍用全称",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "Core Research",
+      "translation": "核心研究",
+      "strategy": "translate",
+      "note": "SemiAnalysis 栏目名（/core-research），非模型",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "InferenceX",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "SemiAnalysis 基准测试品牌（/inferencex）。**保留英文**，X 后缀是品牌标识",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "InferenceMAX",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "InferenceX 的旧名。**保留英文**",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "ClusterMAX",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "SemiAnalysis GPU 云评级体系。**保留英文**",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "AgentX",
+      "translation": null,
+      "strategy": "preserve",
+      "note": "SemiAnalysis 智能体轨迹产品。**保留英文**",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:29:10.333476"
+    },
+    {
+      "original": "E-Town",
+      "translation": "屹唐",
+      "strategy": "first_annotate",
+      "note": "北京屹唐半导体（Beijing E-Town Semiconductor）。中文实体名可查证，禁臆造用字　【低频保留：R4 实体名】",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "extend-merge-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:57:07.812690"
+    },
+    {
+      "original": "BEST",
+      "translation": "屹唐股份",
+      "strategy": "first_annotate",
+      "note": "北京屹唐半导体科技股份有限公司的英文缩写。**必须全大写才是该公司**——小写 best 是普通英文词（33 篇实测 best 出现 92 次、全大写 BEST 仅 1 次），qa_check 对全大写短词已改为大小写敏感匹配　【低频保留：全大写才是屹唐股份，小写是普通词】",
+      "tags": [
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "extend-merge-2026-08-09",
+      "status": "active",
+      "updated_at": "2026-08-09T14:57:07.812690"
     }
   ]
 }

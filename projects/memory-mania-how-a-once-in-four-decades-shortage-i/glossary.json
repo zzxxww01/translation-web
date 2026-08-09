@@ -86,42 +86,6 @@
       "updated_at": "2026-04-09T02:41:42.987111"
     },
     {
-      "original": "hyperscaler",
-      "translation": "超大规模云服务商",
-      "strategy": "translate",
-      "note": "the early hyperscaler buildout wave (e.g., Google, Amazon, Facebook).",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-09T02:41:42.987130"
-    },
-    {
-      "original": "OEM",
-      "translation": "OEM",
-      "strategy": "preserve",
-      "note": "OEMs, hyperscalers, and channel partners were taking a defensive posture",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-09T02:41:42.987150"
-    },
-    {
-      "original": "scale-out",
-      "translation": "横向扩展",
-      "strategy": "translate",
-      "note": "Server DRAM intensity increased due to virtualization and scale-out services.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-09T02:41:42.987169"
-    },
-    {
       "original": "commodity DRAM",
       "translation": "大宗DRAM",
       "strategy": "translate",
@@ -218,18 +182,6 @@
       "updated_at": "2026-04-09T02:41:42.987318"
     },
     {
-      "original": "Core Research",
-      "translation": "Core Research",
-      "strategy": "preserve",
-      "note": "highlighted this last week on our institutional platform, Core Research.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-09T02:41:42.987337"
-    },
-    {
       "original": "DDR5",
       "translation": "DDR5",
       "strategy": "preserve",
@@ -264,18 +216,6 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-09T02:41:42.987393"
-    },
-    {
-      "original": "ASML",
-      "translation": "阿斯麦 (ASML)",
-      "strategy": "translate",
-      "note": "confirmed by ASML and LRCX’s management",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-09T02:41:42.987411"
     },
     {
       "original": "multipatterning",

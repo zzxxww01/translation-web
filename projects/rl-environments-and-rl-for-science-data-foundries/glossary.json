@@ -62,18 +62,6 @@
       "updated_at": "2026-04-10T22:51:12.653209"
     },
     {
-      "original": "Meta",
-      "translation": "Meta",
-      "strategy": "preserve",
-      "note": "Tech company that absorbed Scale AI",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T22:51:12.653219"
-    },
-    {
       "original": "evaluations",
       "translation": "评估",
       "strategy": "translate",
@@ -194,30 +182,6 @@
       "updated_at": "2026-04-10T22:51:12.653306"
     },
     {
-      "original": "rollout",
-      "translation": "推演 / 采样轨迹",
-      "strategy": "translate",
-      "note": "the more difficult the task the more rollouts are needed during training",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T22:51:12.653314"
-    },
-    {
-      "original": "ARR",
-      "translation": "ARR (年度经常性收入)",
-      "strategy": "translate",
-      "note": "revenue we believe is closer to $1B ARR",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T22:51:12.653322"
-    },
-    {
       "original": "Data Foundry",
       "translation": "数据代工厂",
       "strategy": "translate",
@@ -266,18 +230,6 @@
       "updated_at": "2026-04-10T22:51:12.653355"
     },
     {
-      "original": "OpenAI",
-      "translation": "OpenAI",
-      "strategy": "preserve",
-      "note": "An interesting datapoint against this hypothesis can be found in OpenAI’s GDPval paper.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T22:51:12.653363"
-    },
-    {
       "original": "RFT",
       "translation": "强化微调",
       "strategy": "translate",
@@ -288,18 +240,6 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-10T22:51:12.653371"
-    },
-    {
-      "original": "Trainium",
-      "translation": "Trainium",
-      "strategy": "preserve",
-      "note": "Anthropic is bringing on large volumes of Trainium",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T22:51:12.653380"
     },
     {
       "original": "Strategic Deployment",
@@ -398,18 +338,6 @@
       "updated_at": "2026-04-10T22:51:12.653445"
     },
     {
-      "original": "Anthropic",
-      "translation": "Anthropic",
-      "strategy": "preserve",
-      "note": "Anthropic's next big bet",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-11T13:22:41.830021"
-    },
-    {
       "original": "RL as a Service",
       "translation": "RL即服务",
       "strategy": "translate",
@@ -420,18 +348,6 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-11T13:22:41.830858"
-    },
-    {
-      "original": "xAI",
-      "translation": "xAI",
-      "strategy": "preserve",
-      "note": "Anthropic, xAI, and especially Google all derived significant gains",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-11T13:22:41.830876"
     },
     {
       "original": "Utility Evals",
@@ -612,18 +528,6 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-11T15:15:06.096044"
-    },
-    {
-      "original": "SemiAnalysis",
-      "translation": "SemiAnalysis",
-      "strategy": "preserve",
-      "note": "半导体行业分析机构名称",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "manual",
-      "status": "active",
-      "updated_at": "2026-04-15T15:45:00.000000"
     }
   ]
 }

@@ -38,30 +38,6 @@
       "updated_at": "2026-04-10T15:30:27.800750"
     },
     {
-      "original": "Broadcom",
-      "translation": "博通",
-      "strategy": "translate",
-      "note": "Annual chip savings exceed $7B across Intel, Qualcomm, and Broadcom displacement.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T15:30:27.800762"
-    },
-    {
-      "original": "ASML",
-      "translation": "ASML",
-      "strategy": "preserve",
-      "note": "building a supply chain empire that spans Foxconn, ASML, and dozens of precision manufacturers.",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T15:30:27.800775"
-    },
-    {
       "original": "backside power delivery",
       "translation": "背面供电",
       "strategy": "translate",
@@ -326,18 +302,6 @@
       "updated_at": "2026-04-10T15:30:27.801001"
     },
     {
-      "original": "hyperscaler",
-      "translation": "超大规模云服务商",
-      "strategy": "translate",
-      "note": "NVIDIA, AMD, and hyperscaler ASICs grew faster",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T15:30:27.801010"
-    },
-    {
       "original": "leading-edge capacity",
       "translation": "先进制程产能",
       "strategy": "translate",
@@ -348,18 +312,6 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-10T15:30:27.801021"
-    },
-    {
-      "original": "ASIC",
-      "translation": "ASIC (专用集成电路)",
-      "strategy": "translate",
-      "note": "hyperscaler ASICs grew faster than Apple",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T15:30:27.801030"
     },
     {
       "original": "spatial computing",
@@ -492,18 +444,6 @@
       "source": "term_review_auto",
       "status": "active",
       "updated_at": "2026-04-10T15:30:27.801135"
-    },
-    {
-      "original": "die",
-      "translation": "裸片",
-      "strategy": "translate",
-      "note": "reflecting larger dies, more advanced nodes, and increasing silicon content...",
-      "tags": [],
-      "first_occurrence": null,
-      "scope": "project",
-      "source": "term_review_auto",
-      "status": "active",
-      "updated_at": "2026-04-10T15:30:27.801145"
     },
     {
       "original": "yield learning",
