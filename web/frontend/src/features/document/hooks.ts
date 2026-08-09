@@ -42,17 +42,13 @@ export function useProjects() {
  * 获取单个项目
  */
 export function useProject(projectId: string) {
-  const { setCurrentProject, setSections } = useDocumentStore();
   const { handleError } = useErrorHandler();
 
   return useQuery({
     queryKey: ['project', projectId],
     queryFn: async () => {
       try {
-        const project = await documentApi.getProject(projectId);
-        setCurrentProject(project);
-        setSections(project.sections ?? []);
-        return project;
+        return await documentApi.getProject(projectId);
       } catch (error) {
         handleError(error, '获取项目详情失败');
         throw error;
@@ -93,16 +89,13 @@ export function useCreateProject() {
  * 获取章节
  */
 export function useSection(projectId: string, sectionId: string) {
-  const { setCurrentSection } = useDocumentStore();
   const { handleError } = useErrorHandler();
 
   return useQuery({
     queryKey: ['section', projectId, sectionId],
     queryFn: async () => {
       try {
-        const section = await documentApi.getSection(projectId, sectionId);
-        setCurrentSection(section);
-        return section;
+        return await documentApi.getSection(projectId, sectionId);
       } catch (error) {
         handleError(error, '获取章节失败');
         throw error;
@@ -407,10 +400,6 @@ export function useFullTranslate(currentProjectId?: string) {
             return;
           }
           const isVisibleProject = state.currentProject?.id === projectId;
-          if (!isVisibleProject) {
-            return;
-          }
-
           // 处理开始事件，更新 total
           if (data.type === 'start' && data.total) {
             setFullTranslateProgressForProject(projectId, {
@@ -421,10 +410,29 @@ export function useFullTranslate(currentProjectId?: string) {
 
           // 实时更新：当收到翻译结果时，立即更新 store
           if (data.type === 'translated' && data.paragraph_id && data.section_id && data.translation) {
-            updateParagraphInProject(projectId, data.section_id, data.paragraph_id, {
+            const updates = {
               translation: data.translation,
               status: ParagraphStatus.TRANSLATED,
-            });
+            };
+            updateParagraphInProject(projectId, data.section_id, data.paragraph_id, updates);
+            queryClient.setQueryData<Section | undefined>(
+              ['section', projectId, data.section_id],
+              previous => {
+                if (!previous?.paragraphs) return previous;
+                return {
+                  ...previous,
+                  paragraphs: previous.paragraphs.map(paragraph =>
+                    paragraph.id === data.paragraph_id
+                      ? { ...paragraph, ...updates }
+                      : paragraph
+                  ),
+                };
+              }
+            );
+          }
+
+          if (!isVisibleProject) {
+            return;
           }
 
           // 更新进度

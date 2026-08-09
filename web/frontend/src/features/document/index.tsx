@@ -3,7 +3,7 @@ import { toast } from 'sonner';
 import type { TermReviewDecision } from '../confirmation/types';
 import { useDocumentStore } from '@/shared/stores';
 import { TranslationMethod } from '@/shared/constants';
-import type { Paragraph, Section } from '@/shared/types';
+import type { Paragraph, Project, Section } from '@/shared/types';
 import { documentApi } from './api';
 import { isTranslationRunActive } from './translationStatus';
 import {
@@ -32,11 +32,13 @@ import {
   useDocumentViewState,
   useFullTranslate,
   useProject,
+  useProjects,
   useSection,
   useTermConflictDialog,
   useTermReviewFlow,
   useTranslationStatusSync,
 } from './hooks';
+import { findFirstUnresolvedParagraphId, findResumeSectionId } from './workflow';
 
 const GlossaryCenter = lazy(() =>
   import('../glossary/GlossaryCenter').then(module => ({ default: module.GlossaryCenter }))
@@ -59,20 +61,17 @@ function LazyPanelFallback() {
 }
 
 export function DocumentFeature() {
-  const {
-    currentProject,
-    setCurrentProject,
-    currentSection,
-    setCurrentSection,
-    currentParagraph,
-    sections,
-    setSections,
-    setCurrentParagraph,
-  } = useDocumentStore();
+  const currentProject = useDocumentStore(state => state.currentProject);
+  const setCurrentProject = useDocumentStore(state => state.setCurrentProject);
+  const resetCurrentProject = useDocumentStore(state => state.resetCurrentProject);
+  const currentSection = useDocumentStore(state => state.currentSection);
+  const setCurrentSection = useDocumentStore(state => state.setCurrentSection);
+  const currentParagraph = useDocumentStore(state => state.currentParagraph);
+  const setCurrentParagraph = useDocumentStore(state => state.setCurrentParagraph);
+  const sections = useDocumentStore(state => state.sections);
+  const setSections = useDocumentStore(state => state.setSections);
 
   const [isNewProjectModalOpen, setIsNewProjectModalOpen] = useState(false);
-  const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
-  const [immersiveTargetParagraphId, setImmersiveTargetParagraphId] = useState<string | null>(null);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   // AlertDialog 状态
@@ -84,33 +83,64 @@ export function DocumentFeature() {
   const isFullTranslating = useDocumentStore(state => state.isFullTranslating);
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
   const fullTranslateProjectId = useDocumentStore(state => state.fullTranslateProjectId);
-  const hasLocalRunForCurrentProject = Boolean(
-    isFullTranslating &&
-      currentProject?.id &&
-      fullTranslateProjectId === currentProject.id
-  );
-
-  useProject(currentProject?.id ?? '');
   const {
+    activeProjectId,
     activeSectionId,
+    activeParagraphId,
+    requestedSectionId,
     activeView,
     isImmersiveMode,
     setView,
     updateRouteParams,
-  } = useDocumentViewState({
-    currentSectionId: currentSection?.section_id,
-    sections,
-    selectedSectionId,
-  });
+  } = useDocumentViewState({ sections });
+  const { data: projects = [] } = useProjects();
+  const {
+    data: projectData,
+    isLoading: projectLoading,
+  } = useProject(activeProjectId ?? '');
+  const activeProject =
+    activeProjectId && currentProject?.id === activeProjectId
+      ? currentProject
+      : projectData ?? null;
+  const hasLocalRunForCurrentProject = Boolean(
+    isFullTranslating &&
+      activeProject?.id &&
+      fullTranslateProjectId === activeProject.id
+  );
+
+  useEffect(() => {
+    if (!activeProjectId || !projectData || projectData.id !== activeProjectId) return;
+    setCurrentProject(projectData);
+    setSections(projectData.sections ?? []);
+  }, [activeProjectId, projectData, setCurrentProject, setSections]);
+
+  useEffect(() => {
+    if (!activeProjectId || !projectData) return;
+    const projectSections = projectData.sections ?? [];
+    const requestedSectionExists =
+      requestedSectionId &&
+      projectSections.some(section => section.section_id === requestedSectionId);
+    if (requestedSectionExists || projectSections.length === 0) return;
+
+    updateRouteParams(
+      {
+        sectionId: findResumeSectionId(projectSections),
+        paragraphId: null,
+        mode: null,
+      },
+      { replace: true }
+    );
+  }, [activeProjectId, projectData, requestedSectionId, updateRouteParams]);
+
   const {
     backendTranslationStatus,
     currentStep,
     setBackendTranslationStatus,
     setCurrentStep,
-  } = useTranslationStatusSync(currentProject?.id);
+  } = useTranslationStatusSync(activeProject?.id);
   const hasActiveBackendRunForCurrentProject = isTranslationRunActive(
     backendTranslationStatus,
-    currentProject?.id
+    activeProject?.id
   );
   const isCurrentProjectFullTranslating =
     hasLocalRunForCurrentProject || hasActiveBackendRunForCurrentProject;
@@ -125,17 +155,22 @@ export function DocumentFeature() {
     isLoading: sectionLoading,
     data: sectionData,
     refetch: refetchSection,
-  } = useSection(currentProject?.id ?? '', activeSectionId ?? '');
+  } = useSection(activeProject?.id ?? '', activeSectionId ?? '');
 
-  const { startTranslation, stopTranslation } = useFullTranslate(currentProject?.id);
+  useEffect(() => {
+    if (!sectionData || sectionData.section_id !== activeSectionId) return;
+    setCurrentSection(sectionData);
+  }, [activeSectionId, sectionData, setCurrentSection]);
+
+  const { startTranslation, stopTranslation } = useFullTranslate(activeProject?.id);
 
   const runFullTranslate = useCallback(
     async (method: TranslationMethod = TranslationMethod.FOUR_STEP, model?: string) => {
-      if (!currentProject) return;
+      if (!activeProject) return;
 
       const methodType = method === TranslationMethod.FOUR_STEP ? 'four-step' : 'normal';
       await startTranslation(
-        currentProject.id,
+        activeProject.id,
         data => {
           if (data.step || data.message) {
             setCurrentStep(data.step || data.message || null);
@@ -152,7 +187,7 @@ export function DocumentFeature() {
         model
       );
     },
-    [activeSectionId, currentProject, refetchSection, setBackendTranslationStatus, setCurrentStep, startTranslation]
+    [activeProject, activeSectionId, refetchSection, setBackendTranslationStatus, setCurrentStep, startTranslation]
   );
 
   const {
@@ -163,7 +198,7 @@ export function DocumentFeature() {
     prepareTermReviewIfNeeded,
     submitTermReview,
   } = useTermReviewFlow({
-    currentProjectId: currentProject?.id,
+    currentProjectId: activeProject?.id,
     setView,
     runFullTranslate,
   });
@@ -189,23 +224,47 @@ export function DocumentFeature() {
     [sectionData, selectedSection]
   );
 
-  const setImmersiveMode = useCallback(
-    (enabled: boolean) => {
-      updateRouteParams({ immersive: enabled });
-    },
-    [updateRouteParams]
-  );
+  useEffect(() => {
+    if (!displaySection?.paragraphs || isImmersiveMode) {
+      if (isImmersiveMode && currentParagraph) {
+        setCurrentParagraph(null);
+      }
+      return;
+    }
+
+    if (!activeParagraphId) {
+      if (currentParagraph) setCurrentParagraph(null);
+      return;
+    }
+
+    const paragraph = displaySection.paragraphs.find(item => item.id === activeParagraphId);
+    if (!paragraph) {
+      updateRouteParams({ paragraphId: null }, { replace: true });
+      setCurrentParagraph(null);
+      return;
+    }
+    if (currentParagraph?.id !== paragraph.id || currentParagraph !== paragraph) {
+      setCurrentParagraph(paragraph);
+    }
+  }, [
+    activeParagraphId,
+    currentParagraph,
+    displaySection,
+    isImmersiveMode,
+    setCurrentParagraph,
+    updateRouteParams,
+  ]);
 
   const handleSelectSection = useCallback(
     (section: Section) => {
-      setSelectedSectionId(section.section_id);
       setCurrentSection(section);
       setCurrentParagraph(null);
-      if (activeView) {
-        updateRouteParams({ view: null, immersive: false });
-      } else {
-        updateRouteParams({ immersive: false });
-      }
+      updateRouteParams({
+        sectionId: section.section_id,
+        paragraphId: null,
+        mode: null,
+        view: activeView ? null : undefined,
+      });
     },
     [activeView, setCurrentParagraph, setCurrentSection, updateRouteParams]
   );
@@ -222,25 +281,47 @@ export function DocumentFeature() {
 
   const handleSelectParagraph = useCallback(
     (paragraph: Paragraph) => {
+      const useFullScreenEditor =
+        typeof window !== 'undefined' &&
+        window.matchMedia('(max-width: 767px)').matches;
+      if (useFullScreenEditor) {
+        setCurrentParagraph(null);
+        updateRouteParams({ paragraphId: paragraph.id, mode: 'immersive' });
+        return;
+      }
       setCurrentParagraph(paragraph);
+      updateRouteParams({ paragraphId: paragraph.id, mode: null });
     },
-    [setCurrentParagraph]
+    [setCurrentParagraph, updateRouteParams]
   );
 
   const handleEnterImmersive = useCallback(() => {
     if (displaySection) {
-      setSelectedSectionId(displaySection.section_id);
       setCurrentSection(displaySection);
     }
-    setImmersiveTargetParagraphId(currentParagraph?.id ?? null);
+    const immersiveTargetParagraphId =
+      currentParagraph?.id ??
+      activeParagraphId ??
+      findFirstUnresolvedParagraphId(displaySection?.paragraphs ?? []);
     setCurrentParagraph(null);
-    setImmersiveMode(true);
-  }, [currentParagraph, displaySection, setCurrentParagraph, setCurrentSection, setImmersiveMode]);
+    updateRouteParams({ paragraphId: immersiveTargetParagraphId, mode: 'immersive' });
+  }, [
+    activeParagraphId,
+    currentParagraph,
+    displaySection,
+    setCurrentParagraph,
+    setCurrentSection,
+    updateRouteParams,
+  ]);
 
   const handleExitImmersive = useCallback(() => {
-    setImmersiveTargetParagraphId(null);
-    setImmersiveMode(false);
-  }, [setImmersiveMode]);
+    updateRouteParams({ paragraphId: null, mode: null });
+  }, [updateRouteParams]);
+
+  const handleCloseEditPanel = useCallback(() => {
+    setCurrentParagraph(null);
+    updateRouteParams({ paragraphId: null });
+  }, [setCurrentParagraph, updateRouteParams]);
 
   const getCurrentParagraphIndex = useCallback(() => {
     if (!displaySection?.paragraphs || !currentParagraph) return -1;
@@ -252,25 +333,42 @@ export function DocumentFeature() {
 
     const currentIndex = getCurrentParagraphIndex();
     if (currentIndex < displaySection.paragraphs.length - 1) {
-      setCurrentParagraph(displaySection.paragraphs[currentIndex + 1]);
+      const nextParagraph = displaySection.paragraphs[currentIndex + 1];
+      setCurrentParagraph(nextParagraph);
+      updateRouteParams({ paragraphId: nextParagraph.id });
       return;
     }
 
-    setCurrentParagraph(null);
-  }, [currentParagraph, displaySection, getCurrentParagraphIndex, setCurrentParagraph]);
+    handleCloseEditPanel();
+  }, [
+    currentParagraph,
+    displaySection,
+    getCurrentParagraphIndex,
+    handleCloseEditPanel,
+    setCurrentParagraph,
+    updateRouteParams,
+  ]);
 
   const handlePrevParagraph = useCallback(() => {
     if (!displaySection?.paragraphs || !currentParagraph) return;
 
     const currentIndex = getCurrentParagraphIndex();
     if (currentIndex > 0) {
-      setCurrentParagraph(displaySection.paragraphs[currentIndex - 1]);
+      const previousParagraph = displaySection.paragraphs[currentIndex - 1];
+      setCurrentParagraph(previousParagraph);
+      updateRouteParams({ paragraphId: previousParagraph.id });
     }
-  }, [currentParagraph, displaySection, getCurrentParagraphIndex, setCurrentParagraph]);
+  }, [
+    currentParagraph,
+    displaySection,
+    getCurrentParagraphIndex,
+    setCurrentParagraph,
+    updateRouteParams,
+  ]);
 
   const handleFullTranslate = useCallback(
     async (method?: TranslationMethod, model?: string) => {
-      if (!currentProject) return;
+      if (!activeProject) return;
 
       if (isPreparingFullTranslate) {
         toast.info('术语预检进行中，请稍候');
@@ -288,7 +386,7 @@ export function DocumentFeature() {
       setShowStartDialog(true);
     },
     [
-      currentProject,
+      activeProject,
       isCurrentProjectFullTranslating,
       isPreparingFullTranslate,
     ]
@@ -308,28 +406,86 @@ export function DocumentFeature() {
   const handleProjectCreated = useCallback(
     async (projectId: string) => {
       try {
-        const projectData = await documentApi.getProject(projectId);
-        setCurrentProject(projectData);
-        setSections(projectData.sections ?? []);
-        setView(null);
+        const createdProject = await documentApi.getProject(projectId);
+        setCurrentProject(createdProject);
+        setSections(createdProject.sections ?? []);
+        updateRouteParams({
+          projectId: createdProject.id,
+          sectionId: findResumeSectionId(createdProject.sections ?? []),
+          paragraphId: null,
+          mode: null,
+          view: null,
+        });
       } catch (error) {
         console.error('Failed to load project:', error);
       }
     },
-    [setCurrentProject, setSections, setView]
+    [setCurrentProject, setSections, updateRouteParams]
   );
 
+  const handleSelectProject = useCallback(
+    (project: Project) => {
+      setCurrentProject(project);
+      updateRouteParams({
+        projectId: project.id,
+        sectionId: null,
+        paragraphId: null,
+        mode: null,
+        view: null,
+      });
+    },
+    [setCurrentProject, updateRouteParams]
+  );
+
+  const handleProjectDeleted = useCallback(() => {
+    resetCurrentProject();
+    updateRouteParams({
+      projectId: null,
+      sectionId: null,
+      paragraphId: null,
+      mode: null,
+      view: null,
+    });
+  }, [resetCurrentProject, updateRouteParams]);
+
   const renderMainContent = () => {
-    if (!currentProject) {
-      return <WelcomeScreen />;
+    if (!activeProjectId) {
+      return (
+        <WelcomeScreen
+          projects={projects}
+          lastProjectId={activeProjectId}
+          onSelectProject={handleSelectProject}
+          onNewProject={() => setIsNewProjectModalOpen(true)}
+        />
+      );
+    }
+
+    if (projectLoading && !activeProject) {
+      return (
+        <div className="flex justify-center py-12">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary-500 border-t-transparent" />
+        </div>
+      );
+    }
+
+    if (!activeProject) {
+      return (
+        <div className="mx-auto max-w-3xl py-12 text-center">
+          <h2 className="text-lg font-semibold">无法加载该项目</h2>
+          <p className="mt-2 text-sm text-text-muted">项目可能已被删除，或当前暂时无法访问。</p>
+          <Button type="button" variant="outline" className="mt-4" onClick={handleProjectDeleted}>
+            返回项目列表
+          </Button>
+        </div>
+      );
     }
 
     if (activeView === 'glossary') {
       return (
         <Suspense fallback={<LazyPanelFallback />}>
           <GlossaryCenter
-            projectId={currentProject.id}
-            projectTitle={currentProject.title}
+            projectId={activeProject.id}
+            projectTitle={activeProject.title}
             defaultScope="project"
             onBack={() => setView(null)}
           />
@@ -354,7 +510,7 @@ export function DocumentFeature() {
       return (
         <div className="mx-auto max-w-3xl py-8">
           <div className="mb-6">
-            <h2 className="text-xl font-bold">{currentProject.title}</h2>
+            <h2 className="text-xl font-bold">{activeProject.title}</h2>
             <p className="text-text-muted">请选择一个章节开始翻译</p>
           </div>
         </div>
@@ -376,7 +532,7 @@ export function DocumentFeature() {
       return (
         <div className="mx-auto max-w-3xl py-8">
           <div className="mb-6">
-            <h2 className="text-xl font-bold">{currentProject.title}</h2>
+            <h2 className="text-xl font-bold">{activeProject.title}</h2>
             <p className="text-text-muted">请选择一个章节开始翻译</p>
           </div>
         </div>
@@ -426,6 +582,9 @@ export function DocumentFeature() {
       sections={sections}
       activeSectionId={activeSectionId}
       onSectionSelect={handleSelectSectionById}
+      selectedProjectId={activeProject?.id}
+      onProjectSelect={handleSelectProject}
+      onProjectDeleted={handleProjectDeleted}
       onNewProject={() => setIsNewProjectModalOpen(true)}
       onFullTranslate={handleFullTranslate}
       onStopTranslate={() => setShowStopDialog(true)}
@@ -439,7 +598,7 @@ export function DocumentFeature() {
         backendTranslationStatus?.active_project_id ||
         (isFullTranslating ? fullTranslateProjectId : null)
       }
-      projectId={currentProject?.id}
+      projectId={activeProject?.id}
       className={mobile ? 'w-full border-r-0' : 'hidden md:flex'}
       onNavigate={mobile ? () => setMobileSidebarOpen(false) : undefined}
     />
@@ -473,10 +632,10 @@ export function DocumentFeature() {
           </Sheet>
           <div className="min-w-0">
             <p className="truncate text-sm font-medium">
-              {currentSection?.title || currentProject?.title || '文档工作台'}
+              {currentSection?.title || activeProject?.title || '文档工作台'}
             </p>
-            {currentProject && currentSection && (
-              <p className="truncate text-xs text-text-muted">{currentProject.title}</p>
+            {activeProject && currentSection && (
+              <p className="truncate text-xs text-text-muted">{activeProject.title}</p>
             )}
           </div>
         </div>
@@ -484,10 +643,10 @@ export function DocumentFeature() {
         <main className="min-w-0 flex-1 overflow-y-auto">{renderMainContent()}</main>
       </div>
 
-      {showEditingPanels && currentParagraph && currentProject && activeSectionId && displaySection && (
+      {showEditingPanels && currentParagraph && activeProject && activeSectionId && displaySection && (
         <EditPanel
           paragraph={currentParagraph}
-          projectId={currentProject.id}
+          projectId={activeProject.id}
           sectionId={activeSectionId}
           onClose={() => setCurrentParagraph(null)}
           onNext={handleNextParagraph}
@@ -498,12 +657,12 @@ export function DocumentFeature() {
         />
       )}
 
-      {showEditingPanels && isImmersiveMode && currentProject && displaySection && (
+      {showEditingPanels && isImmersiveMode && activeProject && displaySection && (
         <Suspense fallback={<LazyPanelFallback />}>
           <ImmersiveEditor
-            projectId={currentProject.id}
+            projectId={activeProject.id}
             section={displaySection}
-            initialParagraphId={immersiveTargetParagraphId}
+            initialParagraphId={activeParagraphId ?? undefined}
             onClose={handleExitImmersive}
           />
         </Suspense>
@@ -583,7 +742,7 @@ export function DocumentFeature() {
           <AlertDialogFooter>
             <AlertDialogCancel>取消</AlertDialogCancel>
             <AlertDialogAction onClick={() => {
-              void stopTranslation(currentProject?.id);
+              void stopTranslation(activeProject?.id);
               setCurrentStep('取消中');
             }}>
               确定停止

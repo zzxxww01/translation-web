@@ -271,6 +271,40 @@ def select_xiaohongshu_hashtags(
     return selected[:maximum]
 
 
+def normalize_xiaohongshu_hashtags(
+    candidates: Iterable[str],
+    source_text: str = "",
+    translated_text: str = "",
+    *,
+    maximum: int = 5,
+) -> list[str]:
+    """Normalize model-generated tags and reject broad placeholders."""
+
+    normalized: list[str] = []
+    forbidden_keys = {tag.casefold() for tag in _FORBIDDEN_GENERIC_TAGS}
+    for candidate in candidates:
+        raw = str(candidate or "").strip().replace("＃", "#")
+        if not raw:
+            continue
+        raw = raw if raw.startswith("#") else f"#{raw}"
+        match = _HASHTAG_RE.fullmatch(raw)
+        if not match:
+            continue
+        tag = f"#{match.group(1)}"
+        if tag.casefold() in forbidden_keys or len(tag) > 25:
+            continue
+        normalized.append(tag)
+
+    tags = _deduplicate(normalized)[:maximum]
+    if tags:
+        return tags
+    return select_xiaohongshu_hashtags(
+        source_text,
+        translated_text,
+        maximum=maximum,
+    )
+
+
 def append_xiaohongshu_hashtags(
     text: str,
     source_text: str = "",

@@ -7,6 +7,8 @@ import type {
   OptimizePostResult,
   GenerateTitleDto,
   GenerateTitleResult,
+  GenerateHashtagsDto,
+  GenerateHashtagsResult,
 } from '../../shared/types';
 
 /** 允许调用方传入取消信号；signal 只用于 fetch，不会进入请求体 */
@@ -41,6 +43,16 @@ export const postApi = {
    */
   generateTitle: ({ signal, ...data }: Cancellable<GenerateTitleDto>) =>
     apiClient.post<GenerateTitleResult>('/generate/title', data, {
+      timeout: REQUEST_TIMEOUTS.POST_TITLE,
+      retry: false,
+      signal,
+    }),
+
+  /**
+   * 只生成与当前内容直接相关的小红书标签
+   */
+  generateHashtags: ({ signal, ...data }: Cancellable<GenerateHashtagsDto>) =>
+    apiClient.post<GenerateHashtagsResult>('/generate/hashtags', data, {
       timeout: REQUEST_TIMEOUTS.POST_TITLE,
       retry: false,
       signal,

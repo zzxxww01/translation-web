@@ -19,7 +19,7 @@ MODEL_REGISTRY: Dict[str, Dict[str, Any]] = {
     },
     "pro-official": {
         "provider": "gemini",
-        "real_model": "gemini-3-pro-preview",
+        "real_model": "gemini-2.5-pro",
         "description": "Gemini Pro 官方 API - 平衡质量与成本",
         "supports_thinking": True,
     },
@@ -33,8 +33,8 @@ MODEL_REGISTRY: Dict[str, Dict[str, Any]] = {
     # VectorEngine Relay API
     "deepseek-v3.2": {
         "provider": "vectorengine",
-        "real_model": "deepseek-v3.2",
-        "description": "DeepSeek v3.2 中转 - 高性价比推理模型",
+        "real_model": "deepseek-v4-flash-0731",
+        "description": "DeepSeek v4 Flash 中转 - 高性价比推理模型",
         "supports_thinking": True,
     },
     "gpt4-relay": {
@@ -51,8 +51,8 @@ MODEL_REGISTRY: Dict[str, Dict[str, Any]] = {
     },
     "grok-4": {
         "provider": "vectorengine",
-        "real_model": "grok-4-20-non-reasoning",
-        "description": "Grok 4 中转 - xAI 推理模型",
+        "real_model": "grok-4-1-fast-non-reasoning",
+        "description": "Grok 4.1 Fast 中转 - xAI 结构化任务模型",
         "supports_thinking": False,
     },
 }
@@ -66,6 +66,9 @@ LEGACY_ALIASES = {
     "gemini": "pro-official",
     "default": "pro-official",
     "reasoning": "pro-official",
+    # The relay retired this model name; retain it only as a client-facing
+    # compatibility alias and resolve it to the configured Grok 4.1 model.
+    "grok-4-20-non-reasoning": "grok-4",
 }
 
 

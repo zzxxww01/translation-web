@@ -21,17 +21,6 @@ const SlackFeature = lazy(() =>
 const ToolsFeature = lazy(() =>
   import('./features/tools/index.tsx').then(module => ({ default: module.ToolsFeature }))
 );
-const QualityReportPage = lazy(() =>
-  import('./features/quality-report/index').then(module => ({
-    default: module.QualityReportPage,
-  }))
-);
-const ConfirmationWithQuality = lazy(() =>
-  import('./features/quality-report/index').then(module => ({
-    default: module.ConfirmationWithQuality,
-  }))
-);
-
 function RouteFallback() {
   return (
     <div className="flex min-h-[40vh] items-center justify-center">
@@ -46,13 +35,9 @@ function LazyPage({ children }: { children: React.ReactNode }) {
   return <Suspense fallback={<RouteFallback />}>{children}</Suspense>;
 }
 
-function ConfirmationRoute() {
+function LegacyDocumentWorkflowRedirect() {
   const { projectId = '' } = useParams<{ projectId: string }>();
-  return (
-    <LazyPage>
-      <ConfirmationWithQuality projectId={projectId} />
-    </LazyPage>
-  );
+  return <Navigate to={`/document/${projectId}?mode=immersive`} replace />;
 }
 
 const router = createBrowserRouter([
@@ -65,22 +50,18 @@ const router = createBrowserRouter([
         element: <Navigate to="/document" replace />,
       },
       {
-        path: 'document',
-        element: (
-          <LazyPage>
-            <DocumentFeature />
-          </LazyPage>
-        ),
-      },
-      {
         path: 'document/:projectId/confirmation',
-        element: <ConfirmationRoute />,
+        element: <LegacyDocumentWorkflowRedirect />,
       },
       {
         path: 'document/:projectId/quality-report',
+        element: <LegacyDocumentWorkflowRedirect />,
+      },
+      {
+        path: 'document/:projectId?/:sectionId?',
         element: (
           <LazyPage>
-            <QualityReportPage />
+            <DocumentFeature />
           </LazyPage>
         ),
       },
@@ -127,7 +108,7 @@ const router = createBrowserRouter([
       // Legacy route — redirect to new nested route
       {
         path: 'confirmation/:projectId',
-        element: <ConfirmationRoute />,
+        element: <LegacyDocumentWorkflowRedirect />,
       },
       {
         path: '*',

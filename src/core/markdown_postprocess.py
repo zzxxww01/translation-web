@@ -59,6 +59,21 @@ _MD_IMAGE = re.compile(r"!\[[^\]]*\]" + _PAREN_URL)
 # Markdown links: [text](url) or [text](url "title").
 _MD_LINK = re.compile(r"\[[^\]]*\]" + _PAREN_URL)
 
+# 模型或 inline 兜底偶尔会把一个已经完整的 Markdown 链接再套一层
+# ``[[...]]``，甚至再追加第二个 URL：
+# ``[[[ROCm.ai](inner)]](outer)``。这不是合法 Markdown，也是 QA 的
+# link_collapse 阻断项。收尾层保留内层完整链接（它通常来自源文恢复），并
+# 只剥掉多余外壳；普通 Obsidian ``[[Page]]`` 不在这些模式内，不会被改动。
+_WIKI_LINK_WITH_OUTER_TARGET = re.compile(
+    r"\[\[(?P<link>\[[^\]\n]*\]" + _PAREN_URL + r")\]\]" + _PAREN_URL
+)
+_WIKI_WRAPPED_MD_LINK = re.compile(
+    r"\[\[(?P<link>\[[^\]\n]*\]" + _PAREN_URL + r")\]\]"
+)
+_DOUBLE_BRACKET_LINK_LABEL = re.compile(
+    r"\[\[(?P<label>[^\[\]\n]+)\]\](?P<target>" + _PAREN_URL + r")"
+)
+
 # HTML tags (including self-closing) — preserve as-is.
 # 收紧匹配，避免把散文里的 `<x and y>`（如 "5 < x and y > 3"）误判为标签而被保护，
 # 这类应当作普通文本转义。只识别：无属性标签（<div> </p> <br/>）或含 `=` 属性的标签。
@@ -236,6 +251,22 @@ def _dedupe_repeated_annotations(text: str) -> str:
     return _CJK_EN_ANNOTATION.sub(_replace, text)
 
 
+def _repair_collapsed_markdown_links(text: str) -> str:
+    """Remove redundant ``[[...]]`` shells around Markdown links.
+
+    The inner link wins when two targets are present because it is the link
+    reconstructed from the source inline element; the outer target is typically
+    model-authored duplication. The transformation is deliberately narrow and
+    idempotent.
+    """
+    text = _WIKI_LINK_WITH_OUTER_TARGET.sub(lambda match: match.group("link"), text)
+    text = _WIKI_WRAPPED_MD_LINK.sub(lambda match: match.group("link"), text)
+    return _DOUBLE_BRACKET_LINK_LABEL.sub(
+        lambda match: f'[{match.group("label")}]{match.group("target")}',
+        text,
+    )
+
+
 def normalize_cjk_ascii_spacing(text: str) -> str:
     """Insert missing halfwidth spaces between CJK and ASCII letters/digits.
 
@@ -366,6 +397,8 @@ def postprocess_markdown(
     work = _LATEX_DISPLAY_MATH.sub(_protect_latex, work)
     work = _LATEX_INLINE_MATH.sub(_protect_latex, work)
     work = _INLINE_CODE.sub(_protect, work)
+    # 代码、表格、公式和 inline code 已先保护；只修复正文中的链接外壳。
+    work = _repair_collapsed_markdown_links(work)
     work = _MD_IMAGE.sub(_protect_link, work)
     work = _MD_LINK.sub(_protect_link, work)
     work = _HTML_COMMENT.sub(_protect, work)

@@ -10,7 +10,10 @@ import re
 from fastapi import APIRouter, Request
 
 from src.config.timeout_config import TimeoutConfig
-from src.core.post_hashtags import append_xiaohongshu_hashtags
+from src.core.post_hashtags import (
+    append_xiaohongshu_hashtags,
+    normalize_xiaohongshu_hashtags,
+)
 from src.core.protected_terms import preserve_protected_terms
 from src.prompts import get_prompt_manager
 from ..middleware import BadRequestException
@@ -24,6 +27,8 @@ from .translate_models import (
     POST_OPTIMIZE_OPTIONS,
     GenerateTitleRequest,
     GenerateTitleResponse,
+    PostHashtagRequest,
+    PostHashtagResponse,
     PostOptimizeRequest,
     PostOptimizeResponse,
     PostTranslateRequest,
@@ -81,6 +86,57 @@ def _resolve_timeouts(task_type: str) -> tuple[int, int]:
     return _TIMEOUT_BUDGETS.get(task_type, (fallback, fallback * 3))
 
 
+@router.post("/generate/hashtags", response_model=PostHashtagResponse)
+@limiter.limit("30/minute")
+async def generate_hashtags(request: Request, body: PostHashtagRequest):
+    """Generate content-specific Xiaohongshu hashtags without broad padding."""
+
+    prompt = prompt_manager.get(
+        "post_hashtags",
+        content=body.content,
+        translation=body.translation,
+    )
+    attempt_timeout_s, total_timeout_s = _resolve_timeouts("title_generate")
+    model_metadata: dict[str, object] = {}
+    try:
+        result = await asyncio.wait_for(
+            run_llm_blocking(
+                generate_with_fallback,
+                prompt,
+                task_type="title",
+                timeout=attempt_timeout_s,
+                model=body.model,
+                result_metadata=model_metadata,
+            ),
+            timeout=total_timeout_s,
+        )
+        data = parse_llm_json_response(result)
+        candidates = data.get("tags", []) if isinstance(data, dict) else []
+        tags = normalize_xiaohongshu_hashtags(
+            candidates if isinstance(candidates, list) else [],
+            body.content,
+            body.translation,
+        )
+        return PostHashtagResponse(
+            tags=tags,
+            model_used=model_metadata.get("model_used"),
+            provider_used=model_metadata.get("provider_used"),
+            fallback_used=bool(model_metadata.get("fallback_used", False)),
+        )
+    except asyncio.TimeoutError as error:
+        raise_llm_service_unavailable(
+            operation="Hashtag generation",
+            exc=error,
+            timeout_s=total_timeout_s,
+        )
+    except Exception as error:
+        raise_llm_service_unavailable(
+            operation="Hashtag generation",
+            exc=error,
+            timeout_s=total_timeout_s,
+        )
+
+
 @router.post("/translate/post", response_model=PostTranslateResponse)
 @limiter.limit("20/minute")
 async def translate_post(request: Request, body: PostTranslateRequest):
@@ -108,6 +164,7 @@ async def translate_post(request: Request, body: PostTranslateRequest):
     attempt_timeout_s, total_timeout_s = _resolve_timeouts("post")
     # BE-06：try 只包住 LLM 调用本身，后处理失败不再被当成「LLM 服务不可用」。
     try:
+        model_metadata: dict[str, object] = {}
         translation = await asyncio.wait_for(
             run_llm_blocking(
                 generate_with_fallback,
@@ -115,6 +172,7 @@ async def translate_post(request: Request, body: PostTranslateRequest):
                 task_type="post",
                 timeout=attempt_timeout_s,
                 model=body.model,
+                result_metadata=model_metadata,
             ),
             timeout=total_timeout_s,
         )
@@ -135,7 +193,12 @@ async def translate_post(request: Request, body: PostTranslateRequest):
         translation = append_xiaohongshu_hashtags(translation, body.content)
     except Exception:
         logger.exception("Post-processing failed for /translate/post; returning raw model output")
-    return PostTranslateResponse(translation=translation)
+    return PostTranslateResponse(
+        translation=translation,
+        model_used=model_metadata.get("model_used"),
+        provider_used=model_metadata.get("provider_used"),
+        fallback_used=bool(model_metadata.get("fallback_used", False)),
+    )
 
 
 @router.post("/translate/post/optimize", response_model=PostOptimizeResponse)
@@ -195,6 +258,7 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
     attempt_timeout_s, total_timeout_s = _resolve_timeouts("post_optimize")
     # BE-06：try 只包住 LLM 调用本身。
     try:
+        model_metadata: dict[str, object] = {}
         optimized = await asyncio.wait_for(
             run_llm_blocking(
                 generate_with_fallback,
@@ -202,6 +266,7 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
                 task_type="post",
                 timeout=attempt_timeout_s,
                 model=body.model,
+                result_metadata=model_metadata,
             ),
             timeout=total_timeout_s,
         )
@@ -226,7 +291,12 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
         logger.exception(
             "Post-processing failed for /translate/post/optimize; returning raw model output"
         )
-    return PostOptimizeResponse(optimized_translation=optimized)
+    return PostOptimizeResponse(
+        optimized_translation=optimized,
+        model_used=model_metadata.get("model_used"),
+        provider_used=model_metadata.get("provider_used"),
+        fallback_used=bool(model_metadata.get("fallback_used", False)),
+    )
 
 
 @router.post("/generate/title", response_model=GenerateTitleResponse)
@@ -255,6 +325,7 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
 
     attempt_timeout_s, total_timeout_s = _resolve_timeouts("title_generate")
     try:
+        model_metadata: dict[str, object] = {}
         result = await asyncio.wait_for(
             run_llm_blocking(
                 generate_with_fallback,
@@ -262,6 +333,7 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
                 task_type="title",
                 timeout=attempt_timeout_s,
                 model=body.model,
+                result_metadata=model_metadata,
             ),
             timeout=total_timeout_s,
         )
@@ -281,7 +353,12 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
             # LLM 输出被截断或不可解析时 parse_llm_json_response 返回 {}，
             # 这里显式失败，交给下面的 except 统一转成 503，避免 200 返回空标题。
             raise ValueError("LLM returned unparseable or empty title JSON")
-        return GenerateTitleResponse(title="\n".join(titles))
+        return GenerateTitleResponse(
+            title="\n".join(titles),
+            model_used=model_metadata.get("model_used"),
+            provider_used=model_metadata.get("provider_used"),
+            fallback_used=bool(model_metadata.get("fallback_used", False)),
+        )
     except asyncio.TimeoutError as e:
         raise_llm_service_unavailable(operation="Title generation", exc=e, timeout_s=total_timeout_s)
     except Exception as e:

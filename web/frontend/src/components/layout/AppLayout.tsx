@@ -13,19 +13,31 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
+import { GlobalTaskTray } from './GlobalTaskTray';
 
 function Breadcrumbs() {
   const location = useLocation();
   const currentProject = useDocumentStore(state => state.currentProject);
+  const currentSection = useDocumentStore(state => state.currentSection);
   const parts = location.pathname.split('/').filter(Boolean);
 
   const crumbs: { label: string; path?: string }[] = [];
 
   if (parts[0] === 'document') {
     crumbs.push({ label: '长文翻译', path: '/document' });
-    if (parts.length > 1 && parts[1] === 'confirmation' && currentProject) {
-      crumbs.push({ label: currentProject.title || '项目' });
-      crumbs.push({ label: '确认' });
+    if (parts[1]) {
+      crumbs.push({
+        label: currentProject?.id === parts[1] ? currentProject.title || '项目' : '项目',
+        path: `/document/${parts[1]}`,
+      });
+    }
+    if (parts[2] && !['confirmation', 'quality-report'].includes(parts[2])) {
+      crumbs.push({
+        label:
+          currentSection?.section_id === parts[2]
+            ? currentSection.title || '章节'
+            : '章节',
+      });
     }
   } else if (parts[0] === 'confirmation') {
     crumbs.push({ label: '长文翻译', path: '/document' });
@@ -68,7 +80,8 @@ export function AppLayout() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const isImmersiveMode = searchParams.get('immersive') === '1';
+  const isImmersiveMode =
+    searchParams.get('immersive') === '1' || searchParams.get('mode') === 'immersive';
   const isDocumentRoute = location.pathname.startsWith('/document');
   const isGlossaryRoute = location.pathname.startsWith('/glossary');
   const currentProjectId = useDocumentStore(state => state.currentProject?.id);
@@ -95,27 +108,29 @@ export function AppLayout() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-background relative overflow-hidden">
-      {/* 流动网格背景 */}
-      <div className="absolute inset-0 gradient-mesh-fluid pointer-events-none" />
-
+    <div className="relative flex h-screen flex-col overflow-hidden bg-background">
       {/* Header */}
       {!isImmersiveMode && (
-        <header className="sticky top-0 z-40 border-b bg-white/80 backdrop-blur-md shadow-sm relative">
+        <header className="relative sticky top-0 z-40 border-b bg-white">
           <div className="flex h-14 items-center justify-between px-4 md:px-6">
           {/* Logo + Mobile menu */}
           <div className="flex items-center gap-3">
             {/* Mobile menu */}
             <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="md:hidden"
+                  aria-label="打开功能导航"
+                >
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-64 card-glass">
+              <SheetContent side="left" className="w-72 bg-white">
                 <SheetHeader>
                   <SheetTitle className="flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-gradient-primary" />
+                    <Sparkles className="h-5 w-5 text-primary" />
                     <span style={{ fontFamily: 'var(--font-display)' }}>Translation Agent</span>
                   </SheetTitle>
                 </SheetHeader>
@@ -128,10 +143,10 @@ export function AppLayout() {
             </Sheet>
 
             <div className="flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg gradient-primary shadow-md animate-breathing-glow">
+              <div className="flex h-8 w-8 items-center justify-center rounded-md bg-primary">
                 <Sparkles className="h-4 w-4 text-white" />
               </div>
-              <h1 className="text-lg font-semibold hidden sm:block text-gradient-primary" style={{ fontFamily: 'var(--font-display)' }}>
+              <h1 className="hidden text-lg font-semibold text-foreground sm:block" style={{ fontFamily: 'var(--font-display)' }}>
                 Translation Agent
               </h1>
             </div>
@@ -148,6 +163,7 @@ export function AppLayout() {
             size="icon"
             onClick={handleGlossaryClick}
             title="术语管理"
+            aria-label="术语与规则管理"
           >
             <BookOpen className="h-5 w-5" />
           </Button>
@@ -160,7 +176,9 @@ export function AppLayout() {
       </header>
       )}
 
-      <main className="flex-1 overflow-auto relative z-10">
+      {!isImmersiveMode && <GlobalTaskTray />}
+
+      <main className="relative z-10 flex-1 overflow-auto">
         <Outlet />
       </main>
     </div>

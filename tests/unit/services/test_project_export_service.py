@@ -255,6 +255,36 @@ def test_power_unit_no_longer_blocks_export(tmp_path: Path) -> None:
     assert "吉瓦" in content
 
 
+def test_export_repairs_redundant_link_shells_before_qa_gate(tmp_path: Path) -> None:
+    paragraph = Paragraph(
+        id="p1",
+        index=0,
+        source="AMD announced ROCm.ai and published GEAK.",
+        element_type=ElementType.P,
+        confirmed=(
+            "AMD 宣布了[[[ROCm.ai](https://www.amd.com/rocm)]](https://rocm.ai)，"
+            "代码位于[[AMD-AGI 组织]](https://github.com/AMD-AGI)，"
+            "核心是[[[GEAK](https://github.com/AMD-AGI/GEAK)]]。"
+        ),
+    )
+    section = Section(
+        section_id="s1",
+        title="Intro",
+        title_translation="引言",
+        paragraphs=[paragraph],
+    )
+    service = _build_service(tmp_path, [section], _demo_meta())
+
+    content = service.export_markdown("demo")
+
+    assert "[ROCm.ai](https://www.amd.com/rocm)" in content
+    assert "[AMD-AGI 组织](https://github.com/AMD-AGI)" in content
+    assert "[GEAK](https://github.com/AMD-AGI/GEAK)" in content
+    assert "[[[" not in content
+    assert "]](" not in content
+    assert (tmp_path / "demo" / "演示项目_zh.md").exists()
+
+
 def test_export_lint_records_inline_recovery_fallbacks(tmp_path: Path) -> None:
     # P2：兜底段计数进导出报告。
     meta = _demo_meta()

@@ -1,7 +1,8 @@
 export type { GlossaryTerm, GlossaryRecommendation, TranslationStrategy } from '@/features/confirmation/types';
 import type { GlossaryTerm, TranslationStrategy } from '@/features/confirmation/types';
+import type { Project } from '@/shared/types';
 
-export type GlossaryScope = 'project' | 'global' | 'recommendations';
+export type GlossaryScope = 'effective' | 'project' | 'global' | 'recommendations' | 'rules';
 export type SortKey = 'updated_at' | 'original' | 'translation';
 export type ListMode = 'table' | 'grouped';
 
@@ -19,6 +20,8 @@ export interface GlossaryCenterProps {
   projectTitle?: string | null;
   defaultScope?: GlossaryScope;
   onBack?: () => void;
+  projects?: Project[];
+  onProjectChange?: (project: Project | null) => void;
 }
 
 export const strategyLabels: Record<TranslationStrategy, string> = {
@@ -72,7 +75,9 @@ export function toEditor(term: GlossaryTerm): EditingTerm {
 }
 
 export function scopeLabel(scope: GlossaryScope): string {
+  if (scope === 'effective') return '有效术语';
   if (scope === 'project') return '项目术语';
   if (scope === 'recommendations') return '推荐提升';
+  if (scope === 'rules') return '翻译规则';
   return '全局术语';
 }

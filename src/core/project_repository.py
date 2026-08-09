@@ -39,6 +39,16 @@ class ProjectRepository:
         路由层已有 validate_path_component,这里是不依赖调用方的第二道防线(审计 BE10)。
         get_sections 用真实目录名回调,不受影响。
         """
+        # 与路由层保持跨平台一致：POSIX 会把 ``..\evil`` 当普通文件名，
+        # 但同一值在 Windows 上是父目录跳转，必须在 resolve 前拒绝。
+        if (
+            not section_id
+            or section_id in {".", ".."}
+            or "/" in section_id
+            or "\\" in section_id
+        ):
+            return None
+
         base = (self._project_dir(project_id) / "sections").resolve()
         resolved = (self._project_dir(project_id) / "sections" / section_id).resolve()
         # `resolved == base` 也要拒：""、"."、"a/.." 会解析回 sections 根，

@@ -3,6 +3,7 @@ from src.core.glossary import normalize_glossary_term
 from src.core.models import GlossaryTerm, Paragraph, TranslationStrategy
 from src.core.post_hashtags import (
     append_xiaohongshu_hashtags,
+    normalize_xiaohongshu_hashtags,
     select_xiaohongshu_hashtags,
 )
 from src.core.protected_terms import preserve_protected_terms
@@ -83,6 +84,15 @@ def test_xiaohongshu_tags_prioritize_specific_topics():
 
 def test_xiaohongshu_tags_do_not_use_generic_fallback_for_unclassified_post():
     assert select_xiaohongshu_hashtags("A short general update.") == []
+
+
+def test_generated_hashtags_reject_broad_and_invalid_candidates():
+    tags = normalize_xiaohongshu_hashtags(
+        ["#科技资讯", "#Blackwell架构", "AI推理成本", "#带 空格", "#Blackwell架构"],
+        "NVIDIA discusses Blackwell inference costs.",
+    )
+
+    assert tags == ["#Blackwell架构", "#AI推理成本"]
 
 
 def test_append_xiaohongshu_tags_merges_trailing_tags_without_duplicates():

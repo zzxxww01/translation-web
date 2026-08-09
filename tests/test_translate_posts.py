@@ -4,7 +4,11 @@ from unittest.mock import patch
 from starlette.requests import Request
 
 from src.api.routers import translate_posts
-from src.api.routers.translate_models import PostOptimizeRequest, PostTranslateRequest
+from src.api.routers.translate_models import (
+    PostHashtagRequest,
+    PostOptimizeRequest,
+    PostTranslateRequest,
+)
 
 
 class TranslatePostRegressionTests(unittest.IsolatedAsyncioTestCase):
@@ -136,6 +140,27 @@ class TranslatePostRegressionTests(unittest.IsolatedAsyncioTestCase):
         self.assertTrue(
             response.optimized_translation.endswith("#大模型")
         )
+
+    async def test_generate_hashtags_filters_broad_model_tags(self) -> None:
+        body = PostHashtagRequest(
+            content="NVIDIA announced the Blackwell B200 GPU.",
+            translation="英伟达发布 Blackwell B200 GPU。",
+        )
+
+        with patch.object(
+            translate_posts.prompt_manager,
+            "get",
+            return_value="rendered-prompt",
+        ), patch(
+            "src.api.routers.translate_posts.generate_with_fallback",
+            return_value='{"tags":["#科技资讯","#BlackwellB200","#英伟达"]}',
+        ):
+            response = await translate_posts.generate_hashtags(
+                self.make_http_request(),
+                body,
+            )
+
+        self.assertEqual(response.tags, ["#BlackwellB200", "#英伟达"])
 
 
 if __name__ == "__main__":

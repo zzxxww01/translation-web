@@ -17,22 +17,30 @@ export function ToolsFeature() {
   const { currentTool, setCurrentTool } = useToolsStore();
 
   return (
-    <div className="flex h-full overflow-auto">
-      <div className="mx-auto w-full max-w-4xl p-6 animate-liquid-rise">
-        <div className="mb-8">
-          <h2 className="text-3xl font-bold text-gradient-primary" style={{ fontFamily: 'var(--font-display)' }}>工具箱</h2>
-          <p className="text-sm text-muted-foreground mt-1">实用翻译辅助工具</p>
+    <div className="flex h-full min-w-0 overflow-auto">
+      <div className="mx-auto w-full min-w-0 max-w-4xl px-4 py-5 sm:p-6 animate-liquid-rise">
+        <div className="mb-5 sm:mb-8">
+          <h1 className="text-2xl font-bold text-foreground sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
+            工具箱
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">实用翻译辅助工具</p>
         </div>
 
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
-          <TabsList className="mb-6 card-glass p-1">
-            {tabs.map(tab => (
-              <TabsTrigger key={tab.id} value={tab.id} className="gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-                {tab.icon}
-                {tab.label}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+          <div className="-mx-4 mb-5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:mb-6 sm:px-0">
+            <TabsList className="h-auto w-max min-w-full justify-start p-1 sm:min-w-0">
+              {tabs.map(tab => (
+                <TabsTrigger
+                  key={tab.id}
+                  value={tab.id}
+                  className="h-9 shrink-0 gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                >
+                  {tab.icon}
+                  {tab.label}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
 
           <TabsContent value="timezone">
             <TimezoneConverter />

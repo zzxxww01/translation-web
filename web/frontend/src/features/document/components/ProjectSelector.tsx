@@ -18,10 +18,19 @@ import {
 
 interface ProjectSelectorProps {
   onNewProject: () => void;
+  selectedProjectId?: string | null;
+  onProjectSelect: (project: Project) => void;
   onProjectChange?: () => void;
+  onProjectDeleted?: () => void;
 }
 
-export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject, onProjectChange }) => {
+export const ProjectSelector: FC<ProjectSelectorProps> = ({
+  onNewProject,
+  selectedProjectId,
+  onProjectSelect,
+  onProjectChange,
+  onProjectDeleted,
+}) => {
   const { currentProject, setCurrentProject } = useDocumentStore();
   const { data: projects } = useProjects();
   const deleteProject = useDeleteProject();
@@ -32,6 +41,7 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject, onProj
     const project = projects?.find((p: Project) => p.id === projectId);
     if (project) {
       setCurrentProject(project);
+      onProjectSelect(project);
       onProjectChange?.();
     }
   };
@@ -46,6 +56,7 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject, onProj
   const handleConfirmDelete = async () => {
     if (projectToDelete) {
       await deleteProject.mutateAsync(projectToDelete.id);
+      onProjectDeleted?.();
       setDeleteDialogOpen(false);
       setProjectToDelete(null);
     }
@@ -53,7 +64,7 @@ export const ProjectSelector: FC<ProjectSelectorProps> = ({ onNewProject, onProj
 
   return (
     <div className="space-y-1.5">
-      <Select value={currentProject?.id || ''} onValueChange={handleProjectChange}>
+      <Select value={selectedProjectId || ''} onValueChange={handleProjectChange}>
         <SelectTrigger className="w-full">
           <SelectValue placeholder="选择项目..." />
         </SelectTrigger>

@@ -157,6 +157,17 @@ class GlossaryManager:
 
         路由层已有 validate_path_component,这里是不依赖调用方的第二道防线(审计 BE1)。
         """
+        # 在 POSIX 上反斜杠不是路径分隔符，单靠 Path.resolve() 会把
+        # ``..\evil`` 当作普通目录名；Windows 部署时同一输入却会越界。
+        # 因此先按跨平台路径组件规则拒绝两类分隔符。
+        if (
+            not project_id
+            or project_id in {".", ".."}
+            or "/" in project_id
+            or "\\" in project_id
+        ):
+            raise ValueError(f"Invalid project_id: {project_id}")
+
         base = self.projects_path.resolve()
         target = (self.projects_path / project_id).resolve()
         # `target == base` 也要拒：一个路径相对于它自己也满足 is_relative_to，

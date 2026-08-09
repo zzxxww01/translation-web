@@ -25,7 +25,7 @@ export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNa
   const isVertical = orientation === 'vertical';
 
   return (
-    <nav className={cn(
+    <nav aria-label="主要功能" className={cn(
       'flex gap-1',
       isVertical ? 'flex-col' : 'items-center'
     )}>
@@ -34,6 +34,7 @@ export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNa
           key={item.path}
           to={item.path}
           onClick={onNavigate}
+          aria-label={item.label}
           className={({ isActive }) =>
             cn(
               'flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors',

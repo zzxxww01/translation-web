@@ -27,6 +27,9 @@ class PostTranslateRequest(BaseModel):
 
 class PostTranslateResponse(BaseModel):
     translation: str
+    model_used: Optional[str] = None
+    provider_used: Optional[str] = None
+    fallback_used: bool = False
 
 
 class GenerateTitleRequest(BaseModel):
@@ -44,6 +47,29 @@ class GenerateTitleRequest(BaseModel):
 
 class GenerateTitleResponse(BaseModel):
     title: str
+    model_used: Optional[str] = None
+    provider_used: Optional[str] = None
+    fallback_used: bool = False
+
+
+class PostHashtagRequest(BaseModel):
+    content: str = Field(..., max_length=MAX_POST_CONTENT_LENGTH)
+    translation: str = Field("", max_length=MAX_POST_CONTENT_LENGTH)
+    model: Optional[str] = None
+
+    @field_validator("content")
+    @classmethod
+    def validate_hashtag_content(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("Content cannot be empty")
+        return value
+
+
+class PostHashtagResponse(BaseModel):
+    tags: list[str]
+    model_used: Optional[str] = None
+    provider_used: Optional[str] = None
+    fallback_used: bool = False
 
 
 class ProjectAnalysisResponse(BaseModel):
@@ -87,6 +113,9 @@ class PostOptimizeRequest(BaseModel):
 
 class PostOptimizeResponse(BaseModel):
     optimized_translation: str
+    model_used: Optional[str] = None
+    provider_used: Optional[str] = None
+    fallback_used: bool = False
 
 
 class FullTranslateRequest(BaseModel):

@@ -1,5 +1,15 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, BookOpen, Globe2, Languages, Plus, Search, Star } from 'lucide-react';
+import {
+  ArrowLeft,
+  BookOpen,
+  Globe2,
+  Languages,
+  Layers3,
+  ListChecks,
+  Plus,
+  Search,
+  Star,
+} from 'lucide-react';
 import { toast } from 'sonner';
 import { Badge } from '@/components/ui/badge';
 import { ButtonExtended as Button } from '@/components/ui/button-extended';
@@ -30,6 +40,9 @@ import { TermTable, GroupedTermView } from './components/TermTable';
 import { TermEditor } from './components/TermEditor';
 import { BatchActionsBar } from './components/BatchActionsBar';
 import { RecommendationsList } from './components/RecommendationsList';
+import { TranslationRulesPanel } from './components/TranslationRulesPanel';
+import { translationRulesApi, type TranslationRule } from './api';
+import { buildEffectiveTerms, type EffectiveGlossaryTerm } from './model';
 
 /** 把后端 detail 拼进提示文案，避免只看到「保存术语失败」无从排查 */
 function describeError(error: unknown, fallback: string): string {
@@ -37,8 +50,20 @@ function describeError(error: unknown, fallback: string): string {
   return detail ? `${fallback}：${detail}` : fallback;
 }
 
+function normalizeScope(
+  projectId: string | null | undefined,
+  requested: GlossaryScope
+): GlossaryScope {
+  if (!projectId && ['project', 'effective', 'recommendations'].includes(requested)) {
+    return 'global';
+  }
+  return requested;
+}
+
 export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global', onBack }: GlossaryCenterProps) {
-  const [activeScope, setActiveScope] = useState<GlossaryScope>(projectId ? defaultScope : 'global');
+  const [activeScope, setActiveScope] = useState<GlossaryScope>(() =>
+    normalizeScope(projectId, defaultScope)
+  );
   const [projectTerms, setProjectTerms] = useState<GlossaryTerm[]>([]);
   const [globalTerms, setGlobalTerms] = useState<GlossaryTerm[]>([]);
   const [recommendations, setRecommendations] = useState<GlossaryRecommendation[]>([]);
@@ -55,9 +80,14 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
   const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [tagDraft, setTagDraft] = useState('');
+  const [rules, setRules] = useState<TranslationRule[]>([]);
+  const [rulesLoading, setRulesLoading] = useState(false);
+  const [rulesError, setRulesError] = useState<unknown>(null);
+  const [isAddingRule, setIsAddingRule] = useState(false);
+  const [deletingRuleIndex, setDeletingRuleIndex] = useState<number | null>(null);
 
   useEffect(() => {
-    setActiveScope(projectId ? defaultScope : 'global');
+    setActiveScope(normalizeScope(projectId, defaultScope));
   }, [defaultScope, projectId]);
 
   // 单调递增的加载代次：快速切项目时用于丢弃旧项目的迟到响应
@@ -120,6 +150,24 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
     };
   }, [loadData]);
 
+  const loadRules = useCallback(async () => {
+    setRulesLoading(true);
+    setRulesError(null);
+    try {
+      const response = await translationRulesApi.getAll();
+      setRules(response.rules);
+    } catch (error) {
+      console.error('Failed to load translation rules:', error);
+      setRulesError(error);
+    } finally {
+      setRulesLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (activeScope === 'rules') void loadRules();
+  }, [activeScope, loadRules]);
+
   useEffect(() => {
     setSelectedOriginals([]);
     setFocusedOriginal(null);
@@ -128,7 +176,16 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
     setTagDraft('');
   }, [activeScope]);
 
-  const activeTerms = activeScope === 'project' ? projectTerms : globalTerms;
+  const effectiveTerms = useMemo(
+    () => buildEffectiveTerms(globalTerms, projectTerms),
+    [globalTerms, projectTerms]
+  );
+  const activeTerms =
+    activeScope === 'project'
+      ? projectTerms
+      : activeScope === 'effective'
+        ? effectiveTerms
+        : globalTerms;
   const focusedTerm = activeTerms.find(term => term.original === focusedOriginal) || null;
 
   useEffect(() => {
@@ -264,9 +321,14 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
   }
 
   async function saveEditor() {
-    if (activeScope === 'recommendations') {
+    if (activeScope === 'recommendations' || activeScope === 'rules') {
       return;
     }
+
+    const editableScope =
+      activeScope === 'effective'
+        ? ((focusedTerm as EffectiveGlossaryTerm | null)?.effectiveScope ?? 'global')
+        : activeScope;
 
     const payload = currentTermPayload();
     if (!payload.original) {
@@ -276,7 +338,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
 
     setIsSaving(true);
     try {
-      if (activeScope === 'project') {
+      if (editableScope === 'project') {
         if (!projectId) {
           toast.error('缺少项目上下文，无法保存项目术语');
           return;
@@ -307,6 +369,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
   }
 
   async function deleteTerm(original: string) {
+    if (activeScope === 'effective' || activeScope === 'rules') return;
     try {
       if (activeScope === 'project') {
         if (!projectId) {
@@ -331,7 +394,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
   }
 
   async function runBatch(action: BatchGlossaryRequest['action'], overrides: Partial<BatchGlossaryRequest> = {}) {
-    if (activeScope === 'recommendations') {
+    if (activeScope !== 'project' && activeScope !== 'global') {
       return;
     }
     if (!selectedOriginals.length) {
@@ -382,9 +445,54 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
     }
   }
 
+  async function addTranslationRule(text: string): Promise<boolean> {
+    setIsAddingRule(true);
+    try {
+      await translationRulesApi.add(text);
+      await loadRules();
+      toast.success('翻译规则已添加');
+      return true;
+    } catch (error) {
+      console.error('Failed to add translation rule:', error);
+      toast.error(describeError(error, '添加翻译规则失败'));
+      return false;
+    } finally {
+      setIsAddingRule(false);
+    }
+  }
+
+  async function deleteTranslationRule(index: number): Promise<void> {
+    setDeletingRuleIndex(index);
+    try {
+      await translationRulesApi.delete(index);
+      await loadRules();
+      toast.success('翻译规则已删除');
+    } catch (error) {
+      console.error('Failed to delete translation rule:', error);
+      toast.error(describeError(error, '删除翻译规则失败'));
+    } finally {
+      setDeletingRuleIndex(null);
+    }
+  }
+
   const projectLabel = projectTitle || projectId || '当前项目';
 
   function renderListPanel() {
+    if (activeScope === 'rules') {
+      return (
+        <TranslationRulesPanel
+          rules={rules}
+          isLoading={rulesLoading}
+          isAdding={isAddingRule}
+          deletingIndex={deletingRuleIndex}
+          error={rulesError}
+          onRetry={() => void loadRules()}
+          onAdd={addTranslationRule}
+          onDelete={deleteTranslationRule}
+        />
+      );
+    }
+
     if (activeScope === 'recommendations') {
       return (
         <RecommendationsList
@@ -484,18 +592,22 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
             >
               按标签分组
             </Button>
-            <Button size="sm" leftIcon={<Plus className="h-4 w-4" />} onClick={startCreate}>
-              新建术语
-            </Button>
+            {activeScope !== 'effective' ? (
+              <Button size="sm" leftIcon={<Plus className="h-4 w-4" />} onClick={startCreate}>
+                新建术语
+              </Button>
+            ) : null}
           </div>
         </div>
 
-        <BatchActionsBar
-          activeScope={activeScope}
-          selectedOriginals={selectedOriginals}
-          onClearSelection={() => setSelectedOriginals([])}
-          onRunBatch={runBatch}
-        />
+        {activeScope === 'project' || activeScope === 'global' ? (
+          <BatchActionsBar
+            activeScope={activeScope}
+            selectedOriginals={selectedOriginals}
+            onClearSelection={() => setSelectedOriginals([])}
+            onRunBatch={runBatch}
+          />
+        ) : null}
 
         {listMode === 'grouped' ? (
           <GroupedTermView
@@ -528,6 +640,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
   }
 
   function renderTabsContent() {
+    if (activeScope === 'rules') return renderListPanel();
     return (
       <div className="flex flex-col gap-6">
         {isLoading ? (
@@ -560,7 +673,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
             <div>
               <h1 className="text-2xl font-bold text-foreground">统一术语管理</h1>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                这里统一管理全局术语、项目术语和推荐提升。长文翻译会优先使用项目术语覆盖全局术语；帖子、Slack
+                这里统一管理有效术语、项目术语、全局术语和翻译规则。有效术语会展示项目覆盖后的最终结果；帖子、Slack
                 和工具箱当前只使用全局术语。
               </p>
             </div>
@@ -574,12 +687,26 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
         <Tabs
           value={activeScope}
           onValueChange={(value: string) => {
-            const nextScope: GlossaryScope =
-              value === 'project' || value === 'global' || value === 'recommendations' ? value : 'global';
-            setActiveScope(nextScope);
+            const validScopes: GlossaryScope[] = [
+              'effective',
+              'project',
+              'global',
+              'recommendations',
+              'rules',
+            ];
+            const requested = validScopes.includes(value as GlossaryScope)
+              ? (value as GlossaryScope)
+              : 'global';
+            setActiveScope(normalizeScope(projectId, requested));
           }}
         >
           <TabsList>
+            {projectId ? (
+              <TabsTrigger value="effective" className="gap-1.5">
+                <Layers3 className="h-4 w-4" />
+                有效术语
+              </TabsTrigger>
+            ) : null}
             {projectId ? (
               <TabsTrigger value="project" className="gap-1.5">
                 <Languages className="h-4 w-4" />
@@ -596,10 +723,16 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
                 推荐提升
               </TabsTrigger>
             ) : null}
+            <TabsTrigger value="rules" className="gap-1.5">
+              <ListChecks className="h-4 w-4" />
+              翻译规则
+            </TabsTrigger>
           </TabsList>
+          {projectId ? <TabsContent value="effective">{renderTabsContent()}</TabsContent> : null}
           {projectId ? <TabsContent value="project">{renderTabsContent()}</TabsContent> : null}
           <TabsContent value="global">{renderTabsContent()}</TabsContent>
           {projectId ? <TabsContent value="recommendations">{renderTabsContent()}</TabsContent> : null}
+          <TabsContent value="rules">{renderTabsContent()}</TabsContent>
         </Tabs>
 
         {/* 编辑器模态框 */}

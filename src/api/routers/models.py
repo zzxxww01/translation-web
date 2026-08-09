@@ -5,8 +5,8 @@ Supports both legacy (MODEL_REGISTRY) and new (YAML config) systems.
 """
 
 from fastapi import APIRouter
-from pydantic import BaseModel
-from typing import List
+from pydantic import BaseModel, Field
+from typing import Dict, List, Optional
 
 from src.llm.models import MODEL_REGISTRY
 from src.api.utils.concurrency import run_blocking
@@ -23,6 +23,7 @@ class ModelInfo(BaseModel):
     supports_thinking: bool
     priority: int
     available: bool
+    real_model: Optional[str] = None
 
 
 class ProviderInfo(BaseModel):
@@ -36,6 +37,7 @@ class ProviderInfo(BaseModel):
 class ModelListResponse(BaseModel):
     """Response for model list endpoint (grouped by provider)."""
     providers: List[ProviderInfo]
+    task_defaults: Dict[str, str] = Field(default_factory=dict)
 
 
 class LegacyModelInfo(BaseModel):
@@ -94,6 +96,7 @@ def _list_models_sync() -> ModelListResponse:
                         supports_thinking=model.supports_thinking,
                         priority=model.priority,
                         available=has_valid_key,
+                        real_model=model.real_model,
                     )
                 )
 
@@ -112,7 +115,10 @@ def _list_models_sync() -> ModelListResponse:
         # Sort providers by group_priority
         providers.sort(key=lambda p: config.providers[p.id].group_priority)
 
-        return ModelListResponse(providers=providers)
+        return ModelListResponse(
+            providers=providers,
+            task_defaults=dict(config.task_defaults),
+        )
 
     except (FileNotFoundError, yaml.YAMLError, ValueError, KeyError) as e:
         # Expected errors - fall back to legacy system
@@ -140,6 +146,7 @@ def _list_models_sync() -> ModelListResponse:
                     supports_thinking=config.get("supports_thinking", False),
                     priority=1,
                     available=True,  # Assume available in legacy mode
+                    real_model=config["real_model"],
                 )
             )
 

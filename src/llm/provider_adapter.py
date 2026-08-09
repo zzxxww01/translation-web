@@ -215,6 +215,7 @@ class ProviderAdapter:
         provider_kwargs = dict(kwargs)
         timeout = provider_kwargs.pop("timeout", None)
         request_id = str(provider_kwargs.pop("request_id", "") or uuid.uuid4().hex[:8])
+        result_metadata = provider_kwargs.pop("result_metadata", None)
 
         # 更新统计
         _fallback_stats["total_requests"] += 1
@@ -243,6 +244,16 @@ class ProviderAdapter:
                 )
 
                 duration = time.time() - start_time
+                if isinstance(result_metadata, dict):
+                    result_metadata.update(
+                        {
+                            "model_used": attempt.model.alias,
+                            "real_model_used": attempt.model.real_model,
+                            "provider_used": attempt.provider.provider_id,
+                            "fallback_used": idx > 1,
+                            "attempt": idx,
+                        }
+                    )
                 if idx > 1:
                     _fallback_stats["fallback_triggered"] += 1
                     logger.warning(

@@ -25,3 +25,11 @@ export interface WechatTheme {
 export interface WechatThemesResponse {
   themes: WechatTheme[];
 }
+
+export type WechatImageMode = 'keep' | 'upload' | 'base64';
+
+export interface WechatDraft {
+  markdown: string;
+  selectedTheme: string;
+  imageMode: WechatImageMode;
+}

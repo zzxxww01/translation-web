@@ -24,12 +24,16 @@ export function TextTranslator() {
 
   const handleTranslate = async () => {
     if (!source.trim()) return;
-    const result = await translateMutation.mutateAsync({
-      text: source,
-      source_lang: sourceLang,
-      target_lang: targetLang,
-    });
-    setTarget(result.translation);
+    try {
+      const result = await translateMutation.mutateAsync({
+        text: source,
+        source_lang: sourceLang,
+        target_lang: targetLang,
+      });
+      setTarget(result.translation);
+    } catch {
+      // Mutation hook owns the user-facing error message.
+    }
   };
 
   const handleCopy = async () => {
@@ -40,13 +44,12 @@ export function TextTranslator() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', width: '100%' }}>
-      {/* Source */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+    <div className="grid min-w-0 gap-4 md:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)]">
+      <section className="flex min-w-0 flex-col gap-3" aria-labelledby="translator-source-label">
         <div className="flex items-center justify-between">
-          <label className="text-sm font-medium">原文</label>
+          <label id="translator-source-label" className="text-sm font-medium">原文</label>
           <Select value={sourceLang} onValueChange={setSourceLang}>
-            <SelectTrigger className="w-28 h-8">
+            <SelectTrigger className="h-8 w-28" aria-label="原文语言">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -60,14 +63,15 @@ export function TextTranslator() {
           value={source}
           onChange={(e) => setSource(e.target.value)}
           placeholder="输入要翻译的文本..."
-          className="min-h-[500px] resize-y"
+          aria-labelledby="translator-source-label"
+          className="min-h-[260px] resize-y md:min-h-[500px]"
         />
-      </div>
+      </section>
 
-      {/* Controls */}
-      <div className="flex flex-col items-center justify-center gap-3 py-8">
+      <div className="flex items-center justify-center gap-3 md:flex-col md:py-8">
         <Button variant="outline" size="icon" onClick={handleSwap} title="交换语言">
           <ArrowRightLeft className="h-4 w-4" />
+          <span className="sr-only">交换语言和内容</span>
         </Button>
         <Button
           onClick={handleTranslate}
@@ -78,22 +82,25 @@ export function TextTranslator() {
         </Button>
       </div>
 
-      {/* Target */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <section className="flex min-w-0 flex-col gap-3" aria-labelledby="translator-target-label">
         <div className="flex items-center justify-between">
-          <label className="text-sm font-medium">译文</label>
+          <label id="translator-target-label" className="text-sm font-medium">
+            译文 · {targetLang === 'zh' ? '中文' : '英语'}
+          </label>
         </div>
         <Textarea
           value={target}
           readOnly
           placeholder="翻译结果..."
-          className="min-h-[500px] resize-y"
+          aria-labelledby="translator-target-label"
+          aria-live="polite"
+          className="min-h-[260px] resize-y md:min-h-[500px]"
         />
         <Button variant="outline" className="w-full" onClick={handleCopy} disabled={!target}>
           <Copy className="h-4 w-4" />
           复制译文
         </Button>
-      </div>
+      </section>
     </div>
   );
 }

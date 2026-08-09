@@ -1,13 +1,32 @@
 import { create } from 'zustand';
-import { devtools, persist } from 'zustand/middleware';
+import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 import type { TranslationVersion } from '../types';
 import { TranslationVersionType } from '../constants';
 
-/** 当前正在进行的网络请求类型 */
-export type PostNetworkAction = 'translate' | 'optimize' | 'title';
+export interface PostVersionMetadata {
+  name: string;
+  pinned: boolean;
+  modelAlias?: string;
+  modelUsed?: string;
+  providerUsed?: string;
+  fallbackUsed?: boolean;
+}
 
-/** 持久化时最多保留的版本数，避免长期使用后撑爆 localStorage 配额 */
-const MAX_PERSISTED_VERSIONS = 20;
+export type PostTaskKind = 'translate' | 'optimize' | 'title' | 'hashtags';
+export type PostNetworkAction = PostTaskKind;
+export type PostTaskProgressState =
+  | 'running'
+  | 'completed'
+  | 'failed'
+  | 'cancelled';
+
+export interface PostActiveTask {
+  kind: PostTaskKind;
+  label: string;
+  startedAt: number;
+  progressState: PostTaskProgressState;
+  message?: string;
+}
 
 /**
  * 帖子翻译状态
@@ -27,13 +46,24 @@ interface PostState {
   editedContent: string;
   // 是否正在加载
   isLoading: boolean;
-  // 当前进行中的请求类型（提升到 store，避免切走路由卸载后本地状态丢失、
-  // 造成「按钮全禁用却没有任何加载指示」的假死界面）
+  // 最近一次网络动作，用于页面和全局任务条显示及过期保护
   pendingAction: PostNetworkAction | null;
-  // 当前请求的发起时间戳，用于展示已耗时
   pendingStartedAt: number | null;
   // 选中的模型
   selectedModel: string | undefined;
+  // 版本的展示信息
+  versionMetadata: Record<string, PostVersionMetadata>;
+  // 发布标题
+  generatedTitles: string[];
+  selectedTitle: string;
+  titleContentIdentity: string;
+  // 发布标签（不混入译文正文）
+  hashtags: string[];
+  // 自定义优化要求
+  customInstruction: string;
+  // 当前或刚结束的长请求，供页面和全局任务条共享
+  activeTask: PostActiveTask | null;
+  cancelActiveTask: (() => void) | null;
 }
 
 interface PostActions {
@@ -47,20 +77,42 @@ interface PostActions {
       sourceRevision?: number;
       sourceText?: string;
       parentVersionId?: string;
-      // 为 false 时只追加版本，不改变当前选中版本与编辑态
-      // （用于把过期结果安全落库，避免清掉用户正在编辑的内容）
+      modelAlias?: string;
+      modelUsed?: string;
+      providerUsed?: string;
+      fallbackUsed?: boolean;
       makeCurrent?: boolean;
     }
   ) => string;
   setCurrentVersion: (versionId: string) => void;
+  renameVersion: (versionId: string, name: string) => void;
+  toggleVersionPinned: (versionId: string) => void;
+  deleteVersion: (versionId: string) => void;
   setEditedContent: (content: string) => void;
   saveEdit: () => string | null;
   discardEdit: () => void;
   clear: () => void;
   setLoading: (isLoading: boolean) => void;
-  setPendingAction: (action: PostNetworkAction | null) => void;
+  setPendingAction: (action: PostNetworkAction | null, startedAt?: number) => void;
   getCurrentVersion: () => TranslationVersion | null;
   setSelectedModel: (model: string | undefined) => void;
+  setGeneratedTitles: (titles: string[], contentIdentity: string) => void;
+  setSelectedTitle: (title: string) => void;
+  setHashtags: (hashtags: string[]) => void;
+  addHashtag: (hashtag: string) => void;
+  updateHashtag: (index: number, hashtag: string) => void;
+  removeHashtag: (index: number) => void;
+  moveHashtag: (index: number, direction: -1 | 1) => void;
+  setCustomInstruction: (instruction: string) => void;
+  startTask: (
+    task: Omit<PostActiveTask, 'startedAt' | 'progressState'>,
+    cancel: () => void
+  ) => void;
+  finishTask: (
+    progressState: Exclude<PostTaskProgressState, 'running'>,
+    message?: string
+  ) => void;
+  clearTask: () => void;
 }
 
 type PostStore = PostState & PostActions;
@@ -76,6 +128,14 @@ const initialState: PostState = {
   pendingAction: null,
   pendingStartedAt: null,
   selectedModel: undefined,
+  versionMetadata: {},
+  generatedTitles: [],
+  selectedTitle: '',
+  titleContentIdentity: '',
+  hashtags: [],
+  customInstruction: '',
+  activeTask: null,
+  cancelActiveTask: null,
 };
 
 function createVersionId(): string {
@@ -84,6 +144,8 @@ function createVersionId(): string {
   }
   return `v-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 }
+
+const MAX_PERSISTED_VERSIONS = 20;
 
 export const usePostStore = create<PostStore>()(
   devtools(
@@ -97,6 +159,10 @@ export const usePostStore = create<PostStore>()(
             return {
               originalText: text,
               sourceRevision: state.sourceRevision + 1,
+              generatedTitles: [],
+              selectedTitle: '',
+              titleContentIdentity: '',
+              hashtags: [],
             };
           }),
 
@@ -107,7 +173,8 @@ export const usePostStore = create<PostStore>()(
           set(currentState => {
             const newVersion: TranslationVersion = {
               id: versionId,
-              versionNumber: currentState.versions.length + 1,
+              versionNumber:
+                Math.max(0, ...currentState.versions.map(version => version.versionNumber)) + 1,
               content,
               type,
               instruction,
@@ -118,39 +185,105 @@ export const usePostStore = create<PostStore>()(
               createdAt: new Date(),
             };
 
-            if (!makeCurrent) {
-              // 只追加，不夺取当前版本，也不动编辑态
-              return {
-                versions: [...currentState.versions, newVersion],
-              };
-            }
+            const typeName =
+              type === TranslationVersionType.TRANSLATION
+                ? '初始翻译'
+                : type === TranslationVersionType.OPTIMIZATION
+                  ? '优化版本'
+                  : '手工编辑';
 
-            // 将其他版本设为非当前
-            const updatedVersions = currentState.versions.map(v => ({
-              ...v,
-              isCurrent: false,
-            }));
+            const versions = makeCurrent
+              ? [
+                  ...currentState.versions.map(v => ({ ...v, isCurrent: false })),
+                  newVersion,
+                ]
+              : [...currentState.versions, newVersion];
 
             return {
-              versions: [...updatedVersions, newVersion],
-              currentVersionId: newVersion.id,
-              isEdited: false,
-              editedContent: '',
+              versions,
+              versionMetadata: {
+                ...currentState.versionMetadata,
+                [versionId]: {
+                  name: `${typeName} v${newVersion.versionNumber}`,
+                  pinned: false,
+                  modelAlias: lineage?.modelAlias,
+                  modelUsed: lineage?.modelUsed,
+                  providerUsed: lineage?.providerUsed,
+                  fallbackUsed: lineage?.fallbackUsed,
+                },
+              },
+              ...(makeCurrent
+                ? {
+                    currentVersionId: newVersion.id,
+                    isEdited: false,
+                    editedContent: '',
+                  }
+                : {}),
             };
           });
           return versionId;
         },
 
         setCurrentVersion: versionId =>
-          set(state => ({
-            currentVersionId: versionId,
-            versions: state.versions.map(v => ({
-              ...v,
-              isCurrent: v.id === versionId,
-            })),
-            isEdited: false,
-            editedContent: '',
-          })),
+          set(state => {
+            if (!state.versions.some(version => version.id === versionId)) return state;
+            return {
+              currentVersionId: versionId,
+              versions: state.versions.map(v => ({
+                ...v,
+                isCurrent: v.id === versionId,
+              })),
+              isEdited: false,
+              editedContent: '',
+            };
+          }),
+
+        renameVersion: (versionId, name) =>
+          set(state => {
+            const metadata = state.versionMetadata[versionId];
+            const normalizedName = name.trim();
+            if (!metadata || !normalizedName) return state;
+            return {
+              versionMetadata: {
+                ...state.versionMetadata,
+                [versionId]: { ...metadata, name: normalizedName },
+              },
+            };
+          }),
+
+        toggleVersionPinned: versionId =>
+          set(state => {
+            const metadata = state.versionMetadata[versionId];
+            if (!metadata) return state;
+            return {
+              versionMetadata: {
+                ...state.versionMetadata,
+                [versionId]: { ...metadata, pinned: !metadata.pinned },
+              },
+            };
+          }),
+
+        deleteVersion: versionId =>
+          set(state => {
+            if (!state.versions.some(version => version.id === versionId)) return state;
+            const versions = state.versions.filter(version => version.id !== versionId);
+            const nextCurrentId =
+              state.currentVersionId === versionId
+                ? (versions.at(-1)?.id ?? null)
+                : state.currentVersionId;
+            const versionMetadata = { ...state.versionMetadata };
+            delete versionMetadata[versionId];
+            return {
+              versions: versions.map(version => ({
+                ...version,
+                isCurrent: version.id === nextCurrentId,
+              })),
+              versionMetadata,
+              currentVersionId: nextCurrentId,
+              isEdited: false,
+              editedContent: '',
+            };
+          }),
 
         setEditedContent: content =>
           set(state => {
@@ -166,33 +299,17 @@ export const usePostStore = create<PostStore>()(
           if (!state.isEdited || !state.editedContent.trim()) return null;
 
           const currentVersion = state.versions.find(v => v.id === state.currentVersionId);
-          const versionId = createVersionId();
-          set(currentState => {
-            const newVersion: TranslationVersion = {
-              id: versionId,
-              versionNumber: currentState.versions.length + 1,
-              content: currentState.editedContent,
-              type: TranslationVersionType.MANUAL,
-              sourceRevision: currentVersion?.sourceRevision ?? currentState.sourceRevision,
-              sourceText: currentVersion?.sourceText ?? currentState.originalText,
+          return get().addVersion(
+            state.editedContent,
+            TranslationVersionType.MANUAL,
+            undefined,
+            {
+              sourceRevision: currentVersion?.sourceRevision ?? state.sourceRevision,
+              sourceText: currentVersion?.sourceText ?? state.originalText,
               parentVersionId: currentVersion?.id,
-              isCurrent: true,
-              createdAt: new Date(),
-            };
-
-            const updatedVersions = currentState.versions.map(v => ({
-              ...v,
-              isCurrent: false,
-            }));
-
-            return {
-              versions: [...updatedVersions, newVersion],
-              currentVersionId: newVersion.id,
-              isEdited: false,
-              editedContent: '',
-            };
-          });
-          return versionId;
+              modelAlias: state.versionMetadata[currentVersion?.id ?? '']?.modelAlias,
+            }
+          );
         },
 
         discardEdit: () =>
@@ -206,22 +323,29 @@ export const usePostStore = create<PostStore>()(
             originalText: '',
             sourceRevision: 0,
             versions: [],
+            versionMetadata: {},
             currentVersionId: null,
             isEdited: false,
             editedContent: '',
             isLoading: false,
             pendingAction: null,
             pendingStartedAt: null,
+            generatedTitles: [],
+            selectedTitle: '',
+            titleContentIdentity: '',
+            hashtags: [],
+            customInstruction: '',
+            activeTask: null,
+            cancelActiveTask: null,
           }),
 
         setLoading: isLoading => set({ isLoading }),
 
-        // pendingAction 与 isLoading 始终一起写，避免二者不一致
-        setPendingAction: action =>
+        setPendingAction: (pendingAction, startedAt = Date.now()) =>
           set({
-            pendingAction: action,
-            isLoading: action !== null,
-            pendingStartedAt: action !== null ? Date.now() : null,
+            pendingAction,
+            pendingStartedAt: pendingAction ? startedAt : null,
+            isLoading: Boolean(pendingAction),
           }),
 
         getCurrentVersion: () => {
@@ -230,11 +354,103 @@ export const usePostStore = create<PostStore>()(
         },
 
         setSelectedModel: model => set({ selectedModel: model }),
+
+        setGeneratedTitles: (titles, contentIdentity) =>
+          set(state => {
+            const normalizedTitles = Array.from(
+              new Set(titles.map(title => title.trim()).filter(Boolean))
+            );
+            return {
+              generatedTitles: normalizedTitles,
+              selectedTitle: normalizedTitles.includes(state.selectedTitle)
+                ? state.selectedTitle
+                : (normalizedTitles[0] ?? ''),
+              titleContentIdentity: contentIdentity,
+            };
+          }),
+
+        setSelectedTitle: title => set({ selectedTitle: title }),
+
+        setHashtags: hashtags =>
+          set({
+            hashtags: Array.from(new Set(hashtags.map(tag => tag.trim()).filter(Boolean))),
+          }),
+
+        addHashtag: hashtag =>
+          set(state => {
+            const normalized = hashtag.trim();
+            if (!normalized || state.hashtags.includes(normalized)) return state;
+            return { hashtags: [...state.hashtags, normalized] };
+          }),
+
+        updateHashtag: (index, hashtag) =>
+          set(state => {
+            const normalized = hashtag.trim();
+            if (
+              !normalized ||
+              index < 0 ||
+              index >= state.hashtags.length ||
+              state.hashtags.some((tag, tagIndex) => tagIndex !== index && tag === normalized)
+            ) {
+              return state;
+            }
+            return {
+              hashtags: state.hashtags.map((tag, tagIndex) =>
+                tagIndex === index ? normalized : tag
+              ),
+            };
+          }),
+
+        removeHashtag: index =>
+          set(state => ({
+            hashtags: state.hashtags.filter((_, tagIndex) => tagIndex !== index),
+          })),
+
+        moveHashtag: (index, direction) =>
+          set(state => {
+            const targetIndex = index + direction;
+            if (
+              index < 0 ||
+              targetIndex < 0 ||
+              index >= state.hashtags.length ||
+              targetIndex >= state.hashtags.length
+            ) {
+              return state;
+            }
+            const hashtags = [...state.hashtags];
+            [hashtags[index], hashtags[targetIndex]] = [
+              hashtags[targetIndex],
+              hashtags[index],
+            ];
+            return { hashtags };
+          }),
+
+        setCustomInstruction: customInstruction => set({ customInstruction }),
+
+        startTask: (task, cancel) =>
+          set({
+            activeTask: {
+              ...task,
+              startedAt: Date.now(),
+              progressState: 'running',
+            },
+            cancelActiveTask: cancel,
+          }),
+
+        finishTask: (progressState, message) =>
+          set(state => ({
+            activeTask: state.activeTask
+              ? { ...state.activeTask, progressState, message }
+              : null,
+            cancelActiveTask: null,
+          })),
+
+        clearTask: () => set({ activeTask: null, cancelActiveTask: null }),
       }),
       {
-        name: 'translation_agent_post_state',
-        // 只持久化用户内容与偏好；isLoading / pendingAction 等瞬时状态不入库，
-        // 否则刷新后会恢复成「加载中」的假死界面
+        name: 'translation-post-workspace',
+        version: 1,
+        storage: createJSONStorage(() => localStorage),
         partialize: state => ({
           originalText: state.originalText,
           sourceRevision: state.sourceRevision,
@@ -243,32 +459,30 @@ export const usePostStore = create<PostStore>()(
           isEdited: state.isEdited,
           editedContent: state.editedContent,
           selectedModel: state.selectedModel,
+          versionMetadata: state.versionMetadata,
+          generatedTitles: state.generatedTitles,
+          selectedTitle: state.selectedTitle,
+          titleContentIdentity: state.titleContentIdentity,
+          hashtags: state.hashtags,
+          customInstruction: state.customInstruction,
         }),
-        onRehydrateStorage: () => state => {
-          if (!state) return;
-          // createdAt 经 JSON 序列化后是字符串，需还原成 Date，否则时间展示会崩
-          state.versions = state.versions.map(version => ({
-            ...version,
-            createdAt: new Date(version.createdAt),
-          }));
-          // 若当前版本因 slice 截断而丢失，回落到最后一个版本
-          if (
-            state.currentVersionId &&
-            !state.versions.some(v => v.id === state.currentVersionId)
-          ) {
-            const fallback = state.versions[state.versions.length - 1];
-            state.currentVersionId = fallback?.id ?? null;
-            state.isEdited = false;
-            state.editedContent = '';
-            // isCurrent 标志要跟着回落，否则 store 内部两处真相不一致
-            state.versions = state.versions.map(version => ({
+        merge: (persisted, current) => {
+          const saved = persisted as Partial<PostState>;
+          return {
+            ...current,
+            ...saved,
+            isLoading: false,
+            activeTask: null,
+            cancelActiveTask: null,
+            versions: (saved.versions ?? current.versions)
+              .slice(-MAX_PERSISTED_VERSIONS)
+              .map(version => ({
               ...version,
-              isCurrent: version.id === state.currentVersionId,
-            }));
-          }
-          state.isLoading = false;
-          state.pendingAction = null;
-          state.pendingStartedAt = null;
+              createdAt: new Date(version.createdAt),
+              })),
+            pendingAction: null,
+            pendingStartedAt: null,
+          };
         },
       }
     ),

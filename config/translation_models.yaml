@@ -34,20 +34,20 @@ model_overrides:
       model: "deepseek-v3"
       temperature: 0.3
 
-  grok-4-20-non-reasoning:
+  grok-4-1-fast-non-reasoning:
     all_phases:
-      model: "grok-4-20-non-reasoning"
+      model: "grok-4-1-fast-non-reasoning"
       temperature: 0.3
 
-  pro-official:
+  gemini-pro:
     all_phases:
-      model: "pro-official"
+      model: "gemini-pro"
       temperature: 0.3
 
 # 快速模式（牺牲质量换速度）
 fast:
   all_phases:
-    model: "flash-official"
+    model: "gemini-flash"
     temperature: 0.5
 
 # 高质量模式（所有阶段用最好的模型）

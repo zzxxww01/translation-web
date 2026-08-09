@@ -82,28 +82,35 @@ export function TimezoneConverter() {
 
   const handleConvert = async () => {
     if (!input.trim()) return;
-    const res = await timezoneMutation.mutateAsync({
-      input,
-      source_timezone: 'auto',
-    });
-    setResult(res);
+    try {
+      const res = await timezoneMutation.mutateAsync({
+        input,
+        source_timezone: 'auto',
+      });
+      setResult(res);
+    } catch {
+      // Mutation hook owns the user-facing error message.
+    }
   };
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
         <LiveTimeCard title="北京时间" timeZone="Asia/Shanghai" />
         <LiveTimeCard title="美中时间" timeZone="America/Chicago" />
         <LiveTimeCard title="美西时间" timeZone="America/Los_Angeles" />
       </div>
 
       <div className="space-y-2">
-        <label className="text-sm font-medium">输入时间</label>
+        <label htmlFor="timezone-input" className="text-sm font-medium">输入时间</label>
         <Input
+          id="timezone-input"
           placeholder="例如: 今天下午3点、1/26/26 4pm cdt、2024-01-15 14:00"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === 'Enter' && handleConvert()}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') void handleConvert();
+          }}
         />
         <p className="text-xs text-muted-foreground">
           支持: 今天下午3点、1/26/26 4pm、M/D/YY h:mm am/pm、YYYY-MM-DD HH:mm，默认 CDT
@@ -122,7 +129,7 @@ export function TimezoneConverter() {
       {result && (
         <div className="space-y-3">
           <h4 className="text-sm font-semibold">转换结果</h4>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid gap-3 sm:grid-cols-2" aria-live="polite">
             {[
               { label: '美东时间', value: result.est },
               { label: '美中时间', value: result.cst },
@@ -136,7 +143,7 @@ export function TimezoneConverter() {
                 </CardContent>
               </Card>
             ))}
-            <Card className="col-span-2 border-primary/30 bg-primary/5">
+            <Card className="border-primary/30 bg-primary/5 sm:col-span-2">
               <CardContent className="p-3">
                 <div className="text-xs text-primary">北京时间</div>
                 <div className="text-lg font-semibold text-primary">{result.beijing || '--'}</div>

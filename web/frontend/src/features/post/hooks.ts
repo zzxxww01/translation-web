@@ -13,7 +13,6 @@ function isUserCancelled(variables: unknown): boolean {
 
 export function useTranslatePost() {
   const { handleError } = useErrorHandler();
-
   return useMutation({
     mutationFn: postApi.translate,
     onError: (error, variables) => {
@@ -25,7 +24,6 @@ export function useTranslatePost() {
 
 export function useOptimizePost() {
   const { handleError } = useErrorHandler();
-
   return useMutation({
     mutationFn: postApi.optimize,
     onError: (error, variables) => {
@@ -37,12 +35,22 @@ export function useOptimizePost() {
 
 export function useGenerateTitle() {
   const { handleError } = useErrorHandler();
-
   return useMutation({
     mutationFn: postApi.generateTitle,
     onError: (error, variables) => {
       if (isUserCancelled(variables)) return;
       handleError(error, '生成标题失败');
+    },
+  });
+}
+
+export function useGenerateHashtags() {
+  const { handleError } = useErrorHandler();
+  return useMutation({
+    mutationFn: postApi.generateHashtags,
+    onError: (error, variables) => {
+      if (isUserCancelled(variables)) return;
+      handleError(error, '生成标签失败');
     },
   });
 }

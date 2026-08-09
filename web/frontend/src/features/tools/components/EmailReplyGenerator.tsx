@@ -23,14 +23,18 @@ export function EmailReplyGenerator() {
 
   const handleGenerate = async () => {
     if (!content.trim()) return;
-    const result = await emailMutation.mutateAsync({
-      sender,
-      subject,
-      content,
-      style,
-    });
-    setReplies(result.replies);
-    setSelectedIdx(0);
+    try {
+      const result = await emailMutation.mutateAsync({
+        sender,
+        subject,
+        content,
+        style,
+      });
+      setReplies(result.replies);
+      setSelectedIdx(0);
+    } catch {
+      // Mutation hook owns the user-facing error message.
+    }
   };
 
   const handleCopy = async () => {
@@ -41,18 +45,18 @@ export function EmailReplyGenerator() {
   };
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'row', gap: '1rem', width: '100%' }}>
-      {/* Left: Input */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <div className="grid min-w-0 gap-6 lg:grid-cols-2">
+      <section className="flex min-w-0 flex-col gap-4" aria-labelledby="email-input-heading">
+        <h2 id="email-input-heading" className="sr-only">邮件信息</h2>
         <div className="space-y-1.5">
-          <Label>发件人（可选）</Label>
-          <Input placeholder="例如: John Smith" value={sender} onChange={(e) => setSender(e.target.value)} />
+          <Label htmlFor="email-sender">发件人（可选）</Label>
+          <Input id="email-sender" placeholder="例如: John Smith" value={sender} onChange={(e) => setSender(e.target.value)} />
         </div>
 
         <div className="space-y-1.5">
-          <Label>回复风格</Label>
+          <Label id="email-style-label">回复风格</Label>
           <Select value={style} onValueChange={(v) => setStyle(v as EmailStyle)}>
-            <SelectTrigger>
+            <SelectTrigger aria-labelledby="email-style-label">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -64,22 +68,22 @@ export function EmailReplyGenerator() {
         </div>
 
         <div className="space-y-1.5">
-          <Label>邮件主题（可选）</Label>
-          <Input placeholder="邮件主题..." value={subject} onChange={(e) => setSubject(e.target.value)} />
+          <Label htmlFor="email-subject">邮件主题（可选）</Label>
+          <Input id="email-subject" placeholder="邮件主题..." value={subject} onChange={(e) => setSubject(e.target.value)} />
         </div>
 
-        <div className="space-y-1.5" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-          <Label>邮件内容</Label>
+        <div className="flex flex-1 flex-col space-y-1.5">
+          <Label htmlFor="email-content">邮件内容</Label>
           <Textarea
+            id="email-content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder="粘贴收到的邮件内容..."
-            className="resize-y"
-            style={{ flex: 1, minHeight: '200px', maxHeight: '300px' }}
+            className="min-h-[220px] flex-1 resize-y lg:max-h-[340px]"
           />
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Button
             variant="outline"
             onClick={() => { setSender(''); setSubject(''); setContent(''); setReplies([]); }}
@@ -95,27 +99,32 @@ export function EmailReplyGenerator() {
             {emailMutation.isPending ? '生成中...' : '生成回复'}
           </Button>
         </div>
-      </div>
+      </section>
 
-      {/* Right: Replies */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+      <section className="flex min-w-0 flex-col gap-3" aria-labelledby="email-replies-heading" aria-live="polite">
         {replies.length > 0 ? (
           <>
-            <h4 className="text-sm font-semibold">回复建议</h4>
-            <div className="space-y-2" style={{ flex: 1, overflowY: 'auto' }}>
+            <h2 id="email-replies-heading" className="text-sm font-semibold">回复建议</h2>
+            <div className="max-h-[640px] flex-1 space-y-2 overflow-y-auto">
               {replies.map((reply, i) => (
                 <Card
                   key={i}
-                  onClick={() => setSelectedIdx(i)}
                   className={cn(
-                    'cursor-pointer transition-colors',
+                    'transition-colors',
                     selectedIdx === i && 'border-primary ring-1 ring-primary'
                   )}
                 >
                   <CardContent className="p-4">
+                    <button
+                      type="button"
+                      className="w-full text-left"
+                      onClick={() => setSelectedIdx(i)}
+                      aria-pressed={selectedIdx === i}
+                    >
                     <div className="mb-2 text-xs font-medium text-muted-foreground">{reply.type}</div>
                     <div className="mb-3 text-sm whitespace-pre-wrap border-l-2 border-primary pl-3">{reply.content_en}</div>
                     <div className="text-xs text-muted-foreground whitespace-pre-wrap border-l-2 border-muted pl-3">{reply.content_zh}</div>
+                    </button>
                   </CardContent>
                 </Card>
               ))}
@@ -126,11 +135,11 @@ export function EmailReplyGenerator() {
             </Button>
           </>
         ) : (
-          <div className="flex items-center justify-center h-full text-sm text-muted-foreground">
+          <div id="email-replies-heading" className="flex min-h-[220px] items-center justify-center text-sm text-muted-foreground">
             生成的回复将在这里显示
           </div>
         )}
-      </div>
+      </section>
     </div>
   );
 }

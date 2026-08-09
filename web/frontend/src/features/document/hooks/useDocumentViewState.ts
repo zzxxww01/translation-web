@@ -1,81 +1,120 @@
 import { useCallback, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import type { Section } from '@/shared/types';
 
 export type DocumentView = 'glossary' | 'term-review' | null;
+export type DocumentMode = 'immersive' | null;
 
 interface UseDocumentViewStateOptions {
-  currentSectionId?: string | null;
   sections: Section[];
-  selectedSectionId: string | null;
 }
 
-export function useDocumentViewState({
-  currentSectionId,
-  sections,
-  selectedSectionId,
-}: UseDocumentViewStateOptions) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const isImmersiveMode = searchParams.get('immersive') === '1';
-  const activeView = (searchParams.get('view') as DocumentView) || null;
+interface RouteUpdate {
+  projectId?: string | null;
+  sectionId?: string | null;
+  paragraphId?: string | null;
+  mode?: DocumentMode;
+  view?: DocumentView;
+}
 
-  const setView = useCallback(
-    (view: DocumentView) => {
-      const next = new URLSearchParams(searchParams);
-      if (view) {
-        next.set('view', view);
-      } else {
-        next.delete('view');
-      }
-      setSearchParams(next);
-    },
-    [searchParams, setSearchParams]
-  );
+interface RouteUpdateOptions {
+  replace?: boolean;
+}
+
+function documentPath(projectId?: string | null, sectionId?: string | null): string {
+  if (!projectId) return '/document';
+  if (!sectionId) return `/document/${encodeURIComponent(projectId)}`;
+  return `/document/${encodeURIComponent(projectId)}/${encodeURIComponent(sectionId)}`;
+}
+
+export function useDocumentViewState({ sections }: UseDocumentViewStateOptions) {
+  const navigate = useNavigate();
+  const params = useParams<{ projectId?: string; sectionId?: string }>();
+  const [searchParams] = useSearchParams();
+
+  const activeProjectId = params.projectId ?? null;
+  const requestedSectionId = params.sectionId ?? null;
+  const requestedParagraphId = searchParams.get('paragraph');
+  const activeView = (searchParams.get('view') as DocumentView) || null;
+  const mode = searchParams.get('mode');
+  const isImmersiveMode = mode === 'immersive' || searchParams.get('immersive') === '1';
+
+  const activeSectionId = useMemo(() => {
+    if (!requestedSectionId) return null;
+    if (sections.length === 0) return requestedSectionId;
+    return sections.some(section => section.section_id === requestedSectionId)
+      ? requestedSectionId
+      : null;
+  }, [requestedSectionId, sections]);
 
   const updateRouteParams = useCallback(
-    ({
-      view,
-      immersive,
-    }: {
-      view?: DocumentView;
-      immersive?: boolean;
-    }) => {
+    (updates: RouteUpdate, options: RouteUpdateOptions = {}) => {
+      const nextProjectId =
+        updates.projectId !== undefined ? updates.projectId : activeProjectId;
+      const projectChanged =
+        updates.projectId !== undefined && updates.projectId !== activeProjectId;
+      const nextSectionId = projectChanged
+        ? updates.sectionId ?? null
+        : updates.sectionId !== undefined
+          ? updates.sectionId
+          : requestedSectionId;
       const next = new URLSearchParams(searchParams);
-      if (view !== undefined) {
-        if (view) {
-          next.set('view', view);
+
+      if (updates.paragraphId !== undefined || projectChanged || updates.sectionId !== undefined) {
+        const nextParagraphId =
+          projectChanged || updates.sectionId !== undefined
+            ? updates.paragraphId ?? null
+            : updates.paragraphId;
+        if (nextParagraphId) {
+          next.set('paragraph', nextParagraphId);
+        } else {
+          next.delete('paragraph');
+        }
+      }
+
+      if (updates.mode !== undefined || projectChanged) {
+        const nextMode = projectChanged ? updates.mode ?? null : updates.mode;
+        if (nextMode === 'immersive') {
+          next.set('mode', 'immersive');
+        } else {
+          next.delete('mode');
+        }
+        next.delete('immersive');
+      }
+
+      if (updates.view !== undefined || projectChanged) {
+        const nextView = projectChanged ? updates.view ?? null : updates.view;
+        if (nextView) {
+          next.set('view', nextView);
         } else {
           next.delete('view');
         }
       }
 
-      if (immersive !== undefined) {
-        if (immersive) {
-          next.set('immersive', '1');
-        } else {
-          next.delete('immersive');
-        }
-      }
-
-      setSearchParams(next);
+      const query = next.toString();
+      void navigate(
+        {
+          pathname: documentPath(nextProjectId, nextSectionId),
+          search: query ? `?${query}` : '',
+        },
+        { replace: options.replace }
+      );
     },
-    [searchParams, setSearchParams]
+    [activeProjectId, navigate, requestedSectionId, searchParams]
   );
 
-  const activeSectionId = useMemo(() => {
-    const fallbackSectionId = isImmersiveMode ? currentSectionId ?? null : null;
-    const candidateSectionId = selectedSectionId ?? fallbackSectionId;
-    if (!candidateSectionId) {
-      return null;
-    }
-    return sections.some(section => section.section_id === candidateSectionId) ||
-      candidateSectionId === currentSectionId
-      ? candidateSectionId
-      : null;
-  }, [currentSectionId, isImmersiveMode, sections, selectedSectionId]);
+  const setView = useCallback(
+    (view: DocumentView) => {
+      updateRouteParams({ view });
+    },
+    [updateRouteParams]
+  );
 
   return {
+    activeProjectId,
     activeSectionId,
+    activeParagraphId: requestedParagraphId,
+    requestedSectionId,
     activeView,
     isImmersiveMode,
     searchParams,

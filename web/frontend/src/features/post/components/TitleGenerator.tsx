@@ -13,6 +13,10 @@ interface TitleGeneratorProps {
   isGenerating: boolean;
   canGenerate: boolean;
   contentIdentity: string;
+  titles: string[];
+  titlesContentIdentity: string;
+  selectedTitle: string;
+  onSelectTitle: (title: string) => void;
 }
 
 export function TitleGenerator({
@@ -21,30 +25,26 @@ export function TitleGenerator({
   isGenerating,
   canGenerate,
   contentIdentity,
+  titles,
+  titlesContentIdentity,
+  selectedTitle,
+  onSelectTitle,
 }: TitleGeneratorProps) {
   const [instruction, setInstruction] = useState('');
-  const [titleResult, setTitleResult] = useState<{
-    contentIdentity: string;
-    titles: string[];
-  } | null>(null);
   // 已生成的标题一律保留：内容变化只标记为「已过期」，不清空，
   // 否则在译文里敲一个字符或一次请求失败就会把用户还没复制的结果抹掉
-  const titles = titleResult?.titles ?? [];
-  const isStale =
-    titleResult !== null && titleResult.contentIdentity !== contentIdentity;
+  const isStale = titles.length > 0 && titlesContentIdentity !== contentIdentity;
 
   const handleGenerate = async () => {
     try {
-      const result = await onGenerate(instruction.trim() || undefined);
-      if (result.length > 0) {
-        setTitleResult({ contentIdentity, titles: result });
-      }
+      await onGenerate(instruction.trim() || undefined);
     } catch {
       // 请求错误由统一 mutation 错误处理器展示。
     }
   };
 
   const handleCopy = async (title: string) => {
+    onSelectTitle(title);
     const ok = await copyToClipboard(title);
     if (ok) toast.success('标题已复制');
     else toast.error('复制失败，请长按标题手动复制');
@@ -101,7 +101,7 @@ export function TitleGenerator({
               <button
                 key={i}
                 type="button"
-                className="group relative min-h-12 rounded-lg border bg-white/70 p-3 pr-9 text-left text-sm leading-relaxed transition-colors hover:border-primary/50 active:border-primary active:bg-primary/5"
+                className={`group relative min-h-12 rounded-lg border bg-white/70 p-3 pr-9 text-left text-sm leading-relaxed transition-colors hover:border-primary/50 active:border-primary active:bg-primary/5 ${selectedTitle === title ? 'border-primary bg-primary/5 ring-1 ring-primary/20' : ''}`}
                 onClick={() => handleCopy(title)}
                 title="复制标题"
               >

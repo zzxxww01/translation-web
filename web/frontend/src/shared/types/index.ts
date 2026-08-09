@@ -125,6 +125,9 @@ export interface TranslatePostDto {
 
 export interface TranslatePostResult {
   translation: string;
+  model_used?: string;
+  provider_used?: string;
+  fallback_used?: boolean;
 }
 
 export interface OptimizePostDto {
@@ -138,6 +141,9 @@ export interface OptimizePostDto {
 
 export interface OptimizePostResult {
   optimized_translation: string;
+  model_used?: string;
+  provider_used?: string;
+  fallback_used?: boolean;
 }
 
 export interface GenerateTitleDto {
@@ -148,6 +154,22 @@ export interface GenerateTitleDto {
 
 export interface GenerateTitleResult {
   title: string;
+  model_used?: string;
+  provider_used?: string;
+  fallback_used?: boolean;
+}
+
+export interface GenerateHashtagsDto {
+  content: string;
+  translation: string;
+  model?: string;
+}
+
+export interface GenerateHashtagsResult {
+  tags: string[];
+  model_used?: string;
+  provider_used?: string;
+  fallback_used?: boolean;
 }
 
 // ============ 瀹搞儱鍙块惄绋垮彠缁鐎?============
@@ -239,6 +261,7 @@ export interface ModelInfo {
   supports_thinking: boolean;
   priority: number;
   available: boolean;
+  real_model?: string;
 }
 
 export interface ProviderInfo {
@@ -250,6 +273,7 @@ export interface ProviderInfo {
 
 export interface ModelListResponse {
   providers: ProviderInfo[];
+  task_defaults: Record<string, string>;
 }
 
 // Legacy flat model list (for backward compatibility)

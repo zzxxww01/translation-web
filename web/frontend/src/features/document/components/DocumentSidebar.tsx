@@ -14,7 +14,7 @@ import {
   TRANSLATION_METHOD_OPTIONS,
   TranslationMethod,
 } from '@/shared/constants';
-import type { Section } from '@/shared/types';
+import type { Project, Section } from '@/shared/types';
 import { useExportProject } from '../hooks';
 import { ProjectSelector } from './ProjectSelector';
 import { SectionList } from './SectionList';
@@ -32,6 +32,9 @@ interface DocumentSidebarProps {
   sections: Section[];
   activeSectionId: string | null;
   onSectionSelect: (sectionId: string) => void;
+  selectedProjectId?: string | null;
+  onProjectSelect: (project: Project) => void;
+  onProjectDeleted?: () => void;
   onNewProject: () => void;
   onFullTranslate?: (method?: TranslationMethod, model?: string) => void;
   onStopTranslate?: () => void;
@@ -52,6 +55,9 @@ export function DocumentSidebar({
   sections,
   activeSectionId,
   onSectionSelect,
+  selectedProjectId,
+  onProjectSelect,
+  onProjectDeleted,
   onNewProject,
   onFullTranslate,
   onStopTranslate,
@@ -122,6 +128,9 @@ export function DocumentSidebar({
     >
       <div className="border-b border-border-subtle p-3">
         <ProjectSelector
+          selectedProjectId={selectedProjectId}
+          onProjectSelect={onProjectSelect}
+          onProjectDeleted={onProjectDeleted}
           onNewProject={() => {
             onNavigate?.();
             onNewProject();

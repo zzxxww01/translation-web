@@ -121,7 +121,24 @@ export const useDocumentStore = create<DocumentStore>()(
 
         // 设置操作
         setCurrentProject: project =>
-          set({ currentProject: project }, false, 'setCurrentProject'),
+          set(
+            state => {
+              const projectChanged = state.currentProject?.id !== project?.id;
+              if (!projectChanged) {
+                return { currentProject: project };
+              }
+
+              return {
+                currentProject: project,
+                currentSection: null,
+                currentParagraph: null,
+                sections: [],
+                error: null,
+              };
+            },
+            false,
+            'setCurrentProject'
+          ),
 
         setCurrentSection: section =>
           set({ currentSection: section }, false, 'setCurrentSection'),
@@ -435,6 +452,9 @@ export const useDocumentStore = create<DocumentStore>()(
         // 刷新后可能用过期段落覆盖最新内容；这些数据都应在挂载时从后端重新拉取。
         partialize: state => ({
           currentProject: state.currentProject,
+          isFullTranslating: state.isFullTranslating,
+          fullTranslateProgress: state.fullTranslateProgress,
+          fullTranslateProjectId: state.fullTranslateProjectId,
         }),
       }
     ),

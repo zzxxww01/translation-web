@@ -198,6 +198,38 @@ def test_nested_image_in_link_placeholder_restored():
     assert "PROTECTED_" not in out
 
 
+def test_collapsed_link_shell_keeps_source_recovered_inner_link():
+    src = (
+        "宣布了[[[ROCm.ai](https://www.amd.com/rocm?utm_source=301)]]"
+        "(https://rocm.ai)，随后发布工具链。"
+    )
+    out = postprocess_markdown(src)
+    assert out == (
+        "宣布了[ROCm.ai](https://www.amd.com/rocm?utm_source=301)，"
+        "随后发布工具链。"
+    )
+
+
+def test_double_bracket_link_label_is_repaired():
+    out = postprocess_markdown("代码位于[[AMD-AGI 组织]](https://github.com/AMD-AGI)中。")
+    assert "[AMD-AGI 组织](https://github.com/AMD-AGI)" in out
+    assert "[[AMD-AGI 组织]](" not in out
+
+
+def test_wiki_wrapped_markdown_link_is_repaired_but_plain_wikilink_is_kept():
+    src = "核心是[[[GEAK](https://github.com/AMD-AGI/GEAK)]]，参见 [[项目首页]]。"
+    out = postprocess_markdown(src)
+    assert "[GEAK](https://github.com/AMD-AGI/GEAK)" in out
+    assert "[[项目首页]]" in out
+    assert postprocess_markdown(out) == out
+
+
+def test_collapsed_link_like_text_inside_code_is_untouched():
+    snippet = "[[[label](https://inner.example)]](https://outer.example)"
+    out = postprocess_markdown(f"```text\n{snippet}\n```")
+    assert snippet in out
+
+
 def test_normalization_idempotent():
     src = (
         '中文,测试(英伟达)说"好"；估值 2,600 万。。有 5 个 Token\n\n'
