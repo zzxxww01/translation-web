@@ -1,5 +1,7 @@
 import path from 'path';
-import { defineConfig } from 'vite';
+// 从 vitest/config 导入：它是 vite defineConfig 的超集，多认一个 `test` 字段。
+// 用 vite 的版本会让下面的 test 块过不了 tsc -b，进而卡死 npm run build。
+import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
