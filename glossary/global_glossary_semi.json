@@ -1,5 +1,5 @@
 {
-  "version": 38,
+  "version": 39,
   "terms": [
     {
       "original": "TSMC",
@@ -2969,9 +2969,9 @@
     },
     {
       "original": "backstop",
-      "translation": "兜底",
+      "translation": "担保",
       "strategy": "first_annotate",
-      "note": "由高信用方出具的最低营收保证（租不出去由其按约定价接手）。禁译「担保」——那会被读成债务担保；兜底的是租金收入，不是债务本身",
+      "note": "以「担保」为主，可与「保底」「兜底」混用，哪个通顺用哪个（2026-07-29 用户定稿口径）。分工：机制/计划/协议→担保（回购担保、担保计划、担保条款）；价格下限→保底价、保底水平（禁用「担保价」，讲不通）；动词或强调语气→兜底（如「英伟达的兜底给了放贷机构所需的支持」）。★ 关键陷阱：secured/unsecured 也译「担保」（无担保债券/无担保融资），所以表达「没有 backstop」时必须写「没有保底」，写「没有担保」会与 unsecured 撞义。",
       "tags": [
         "finance",
         "business"
@@ -2980,7 +2980,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-29T00:00:00"
+      "updated_at": "2026-07-29T12:00:00.000000"
     },
     {
       "original": "offtake",
