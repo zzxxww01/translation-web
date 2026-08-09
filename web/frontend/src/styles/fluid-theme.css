@@ -358,6 +358,10 @@
 
   /* Textarea */
   .textarea-fluid {
+    /* 不写 width 的话 textarea 会回落到浏览器默认的 cols=20（约 20 字符宽），
+       在宽容器里就缩成窄窄一条、右侧全是空白——微信排版页的左栏即如此。
+       放在 components 层，调用处仍可用 utilities 的 w-* 覆盖。 */
+    width: 100%;
     padding: 14px 20px;
     font-family: var(--font-body);
     font-size: 1rem;
