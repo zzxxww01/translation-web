@@ -1,5 +1,5 @@
 {
-  "version": 39,
+  "version": 41,
   "terms": [
     {
       "original": "TSMC",
@@ -3406,6 +3406,35 @@
       "source": "heading-audit-2026-08-09",
       "status": "active",
       "updated_at": "2026-08-09T15:53:05.174101"
+    },
+    {
+      "original": "disaggregation",
+      "translation": "分离",
+      "strategy": "translate",
+      "note": "**统一「分离」，禁「解耦」**：disaggregated inference→分离式推理、PD disaggregation→PD 分离、disaggregated prefill→分离式预填充、attention/FFN disaggregation (AFD)→注意力/前馈分离（全称「注意力与前馈网络分离」）。「PD 分离」是中文推理圈通行说法；「解耦」对应 decoupling，另有其词，且与 aggregated=聚合式 不成对。2026-08-10 用户定稿口径",
+      "tags": [
+        "inference"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-08-10T00:00:00.000000"
+    },
+    {
+      "original": "neolab",
+      "translation": "新兴实验室",
+      "strategy": "first_annotate",
+      "note": "新兴 AI 实验室（Discovery Loop、Ineffable Intelligence 一类从大厂出走另起炉灶的）。与 Neocloud→新兴云厂商 同一构词，全文统一。**禁「新型实验室」**——2026-08-10 全语料核查：neolab 出现于 3 篇，中文 6/6 均作「新兴实验室」，Gemini 篇初译误作「新型」被用户逐处改回。",
+      "tags": [
+        "ai",
+        "business"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "manual",
+      "status": "active",
+      "updated_at": "2026-08-10T00:00:00.000000"
     }
   ]
 }
