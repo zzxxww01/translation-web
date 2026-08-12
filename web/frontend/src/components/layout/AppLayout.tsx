@@ -1,5 +1,5 @@
 import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { BookOpen, Sparkles, Menu, ChevronRight } from 'lucide-react';
+import { BookOpen, Sparkles, Menu } from 'lucide-react';
 import { FeatureNav } from './FeatureNav';
 import { useDocumentStore } from '@/shared/stores';
 import { Button } from '@/components/ui/Button';
@@ -11,69 +11,8 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
-import { cn } from '@/lib/utils';
 import { useState } from 'react';
-import { GlobalTaskTray } from './GlobalTaskTray';
-
-function Breadcrumbs() {
-  const location = useLocation();
-  const currentProject = useDocumentStore(state => state.currentProject);
-  const currentSection = useDocumentStore(state => state.currentSection);
-  const parts = location.pathname.split('/').filter(Boolean);
-
-  const crumbs: { label: string; path?: string }[] = [];
-
-  if (parts[0] === 'document') {
-    crumbs.push({ label: '长文翻译', path: '/document' });
-    if (parts[1]) {
-      crumbs.push({
-        label: currentProject?.id === parts[1] ? currentProject.title || '项目' : '项目',
-        path: `/document/${parts[1]}`,
-      });
-    }
-    if (parts[2] && !['confirmation', 'quality-report'].includes(parts[2])) {
-      crumbs.push({
-        label:
-          currentSection?.section_id === parts[2]
-            ? currentSection.title || '章节'
-            : '章节',
-      });
-    }
-  } else if (parts[0] === 'confirmation') {
-    crumbs.push({ label: '长文翻译', path: '/document' });
-    if (currentProject) {
-      crumbs.push({ label: currentProject.title || '项目' });
-    }
-    crumbs.push({ label: '确认' });
-  } else if (parts[0] === 'post') {
-    crumbs.push({ label: '帖子翻译' });
-  } else if (parts[0] === 'wechat') {
-    crumbs.push({ label: '微信排版' });
-  } else if (parts[0] === 'slack') {
-    crumbs.push({ label: 'Slack 回复' });
-  } else if (parts[0] === 'tools') {
-    crumbs.push({ label: '工具箱' });
-  } else if (parts[0] === 'glossary') {
-    crumbs.push({ label: '术语管理' });
-  }
-
-  if (crumbs.length <= 1) return null;
-
-  return (
-    <div className="flex items-center gap-1 text-sm text-muted-foreground">
-      {crumbs.map((crumb, i) => (
-        <span key={i} className="flex items-center gap-1">
-          {i > 0 && <ChevronRight className="h-3 w-3" />}
-          <span className={cn(
-            i === crumbs.length - 1 ? 'text-foreground font-medium' : ''
-          )}>
-            {crumb.label}
-          </span>
-        </span>
-      ))}
-    </div>
-  );
-}
+import { GlobalTaskIndicator } from './GlobalTaskIndicator';
 
 export function AppLayout() {
   const location = useLocation();
@@ -158,25 +97,21 @@ export function AppLayout() {
           </div>
 
           {/* Right side */}
-          <Button
-            variant={isGlossaryRoute ? 'secondary' : 'ghost'}
-            size="icon"
-            onClick={handleGlossaryClick}
-            title="术语管理"
-            aria-label="术语与规则管理"
-          >
-            <BookOpen className="h-5 w-5" />
-          </Button>
-        </div>
-
-        {/* Breadcrumbs */}
-        <div className="px-4 pb-2 md:px-6">
-          <Breadcrumbs />
+          <div className="flex items-center gap-1">
+            <GlobalTaskIndicator />
+            <Button
+              variant={isGlossaryRoute ? 'secondary' : 'ghost'}
+              size="icon"
+              onClick={handleGlossaryClick}
+              title="术语管理"
+              aria-label="术语与规则管理"
+            >
+              <BookOpen className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
       </header>
       )}
-
-      {!isImmersiveMode && <GlobalTaskTray />}
 
       <main className="relative z-10 flex-1 overflow-auto">
         <Outlet />

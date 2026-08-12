@@ -35,6 +35,40 @@
   }
 }
 
+/* ============ shadcn 语义色 → Tailwind v4 主题 token ============
+   Tailwind v4 只为 `@theme` 里登记的 `--color-*` 生成工具类。上面那些
+   `:root { --background: ... }` 是**裸 HSL 通道**，v3 时代由 tailwind.config
+   的 colors 映射消费；迁到 v4 后没人再映射它们，于是 bg-background /
+   text-muted-foreground / bg-primary / bg-accent / border-border / ring-ring /
+   bg-destructive 等类在产物 CSS 里一条规则都没生成（已用 dist/assets/*.css
+   逐条核对，全为 0），而源码里用了 458 处。
+   后果是可见的：全文翻译进度条（bg-primary）、骨架屏（bg-muted）、顶栏导航
+   选中态（bg-primary + text-primary-foreground）、键盘焦点环（ring-ring）
+   全部无色。这里把两者接上。 */
+@theme inline {
+  --color-background: hsl(var(--background));
+  --color-background-elevated: hsl(var(--background-elevated));
+  --color-background-subtle: hsl(var(--background-subtle));
+  --color-foreground: hsl(var(--foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+}
+
 /* ============ tailwindcss-animate utilities ============ */
 @theme inline {
   --animate-in: enter 0.2s ease-out;
