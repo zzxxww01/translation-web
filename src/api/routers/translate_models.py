@@ -3,7 +3,7 @@ Translate router request/response models.
 """
 
 from typing import Literal, Optional
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
 
 # 内容长度限制（公网环境防止滥用）
@@ -125,6 +125,23 @@ class FullTranslateRequest(BaseModel):
 class LongformWorkflowStartRequest(BaseModel):
     method: Literal["normal", "four-step"] = "four-step"
     model: Optional[str] = Field(None, max_length=100)
+    # 覆盖已有译文的范围。默认 resume 是历史行为——只翻没有可用译文的段落。
+    # section 需要同时给出 retranslate_section_ids。
+    retranslate_scope: Literal["resume", "section", "all"] = "resume"
+    retranslate_section_ids: list[str] = Field(default_factory=list, max_length=500)
+
+    @model_validator(mode="after")
+    def _check_section_ids(self) -> "LongformWorkflowStartRequest":
+        if self.retranslate_scope == "section" and not self.retranslate_section_ids:
+            raise ValueError(
+                "retranslate_scope='section' requires retranslate_section_ids"
+            )
+        if self.retranslate_scope != "section" and self.retranslate_section_ids:
+            # 范围不是 section 时带 id 属于调用方笔误，静默忽略会让用户以为只重译了部分。
+            raise ValueError(
+                "retranslate_section_ids is only valid with retranslate_scope='section'"
+            )
+        return self
 
 
 class ResolveConflictRequest(BaseModel):

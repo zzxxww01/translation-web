@@ -107,7 +107,7 @@ def _build_longform_service(
         if body.method == "four-step"
         else BatchTranslationService.TRANSLATION_MODE_SECTION
     )
-    return BatchTranslationService(
+    service = BatchTranslationService(
         llm_provider=llm,
         project_manager=base_service.project_manager,
         translation_mode=translation_mode,
@@ -115,6 +115,11 @@ def _build_longform_service(
         analysis_llm_provider=analysis_llm,
         user_model_override=body.model,
     )
+    service.set_retranslate_scope(
+        body.retranslate_scope,
+        body.retranslate_section_ids,
+    )
+    return service
 
 
 async def _translate_project_in_worker(
@@ -665,7 +670,10 @@ async def start_longform_workflow(
             translation_service.project_manager,
             project_id,
         )
-        if checkpoint.resumable:
+        # 用户明确要求重译时，续跑捷径必须让开——否则「重译」会被识别成
+        # 「接着上次继续」，已有译文原样保留，等于按钮没反应。
+        wants_retranslate = body.retranslate_scope != "resume"
+        if checkpoint.resumable and not wants_retranslate:
             workflow_run_id = f"resume-{uuid.uuid4().hex}"
             translation_service._set_active_run(
                 project_id,
@@ -735,22 +743,23 @@ async def start_longform_workflow(
 
     _longform_workflow_tasks.add(task)
     task.add_done_callback(_longform_workflow_tasks.discard)
+    # 走了重译分支时 resumed 必须是 false，否则前端会照着 resume_checkpoint
+    # 显示「保留已完成的 N 段」——而这次恰恰是要覆盖它们。
+    resumed = checkpoint.resumable and not wants_retranslate
     return {
         "status": "started",
         "project_id": project_id,
         "run_id": workflow_run_id,
         "term_review_job_id": term_review_job_id,
         "term_review_timeout_seconds": (
-            0
-            if checkpoint.resumable
-            else settings.term_review_confirmation_timeout_seconds
+            0 if resumed else settings.term_review_confirmation_timeout_seconds
         ),
         "method": body.method,
         "model": body.model,
-        "resumed": checkpoint.resumable,
-        "resume_checkpoint": (
-            checkpoint.to_dict() if checkpoint.resumable else None
-        ),
+        "resumed": resumed,
+        "resume_checkpoint": checkpoint.to_dict() if resumed else None,
+        "retranslate_scope": body.retranslate_scope,
+        "retranslate_section_ids": body.retranslate_section_ids,
     }
 
 

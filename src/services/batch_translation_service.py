@@ -179,6 +179,10 @@ class BatchTranslationService:
         self._run_registry = translation_run_registry
         self._artifact_service = TranslationArtifactService(self.project_manager.projects_path)
 
+        # 覆盖已有译文的范围，由 set_retranslate_scope() 设置；默认保持历史行为。
+        self._retranslate_scope: str = "resume"
+        self._retranslate_section_ids: set[str] = set()
+
         # 懒加载翻译记忆服务
         memory_service = None
         try:
@@ -223,7 +227,40 @@ class BatchTranslationService:
                 self.project_manager.merge_translation_updates_locked
             ),
             commit_four_step_result=self.translator.commit_section_feedback,
+            should_force_retranslate=self._should_force_retranslate,
         )
+
+    def set_retranslate_scope(
+        self,
+        scope: str = "resume",
+        section_ids: Optional[List[str]] = None,
+    ) -> None:
+        """选择本次运行覆盖已有译文的范围。
+
+        - ``resume``（默认，历史行为）：只翻没有可用译文的段落。
+        - ``section``：只重译 ``section_ids`` 列出的章节，其余章节仍走续跑。
+        - ``all``：整篇重译。
+
+        重译不会绕过段落级的版本机制——``merge_translation_updates_locked`` 仍按
+        model 维度写入 ``paragraph.translations``，旧译文作为历史版本保留。
+        """
+        normalized = (scope or "resume").strip().lower()
+        if normalized not in {"resume", "section", "all"}:
+            raise ValueError(f"Unsupported retranslate scope: {scope}")
+        if normalized == "section" and not section_ids:
+            raise ValueError("retranslate scope 'section' requires section_ids")
+        self._retranslate_scope = normalized
+        self._retranslate_section_ids = set(section_ids or ())
+
+    def _should_force_retranslate(self, section: Section) -> bool:
+        scope = getattr(self, "_retranslate_scope", "resume")
+        if scope == "all":
+            return True
+        if scope == "section":
+            return section.section_id in getattr(
+                self, "_retranslate_section_ids", set()
+            )
+        return False
 
     def _get_provider_for_phase(self, phase: str) -> LLMProvider:
         """
@@ -974,17 +1011,31 @@ class BatchTranslationService:
         # 统计总数
         total_paragraphs = sum(len(s.paragraphs) for s in project.sections)
         total_sections = len(project.sections)
+        # 将被重译的章节，其已有译文不计入起始进度——否则「整篇重译」一开机
+        # 进度条就是 100%，而且下面的 is_resume_run 会把重译误判成续跑。
+        retranslated_ids = {
+            section.section_id
+            for section in project.sections
+            if self._should_force_retranslate(section)
+        }
+        countable_sections = [
+            section
+            for section in project.sections
+            if section.section_id not in retranslated_ids
+        ]
         existing_translated = self._count_project_translated_paragraphs(
-            project.sections
+            countable_sections
         )
         existing_translated_sections = sum(
             1
-            for section in project.sections
+            for section in countable_sections
             if section.paragraphs
             and self._count_translated_paragraphs(section)
             == len(section.paragraphs)
         )
-        is_resume_run = 0 < existing_translated < total_paragraphs
+        is_resume_run = (
+            not retranslated_ids and 0 < existing_translated < total_paragraphs
+        )
         previous_summary = (
             self._artifact_service.load_latest_run_summary(project_id)
             if is_resume_run
@@ -1005,7 +1056,13 @@ class BatchTranslationService:
         )
         progress.translated_paragraphs = existing_translated
         progress.translated_sections = existing_translated_sections
-        if is_resume_run:
+        if retranslated_ids:
+            progress.current_step = (
+                "整篇重译"
+                if self._retranslate_scope == "all"
+                else f"重译 {len(retranslated_ids)} 个章节"
+            )
+        elif is_resume_run:
             progress.current_step = (
                 f"断点续译：已完成 {existing_translated}/{total_paragraphs} 段"
             )

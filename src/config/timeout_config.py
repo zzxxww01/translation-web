@@ -27,6 +27,11 @@ class TimeoutConfig:
 
         timeout_map = {
             "long_article": cls.LONG_ARTICLE,
+            # 全部 6 个长文调用点传的都是 "longform"（confirmation_translation.py:870、
+            # projects_paragraphs.py:102/156/340、translate_projects.py:166/418），而这里
+            # 只登记了 "long_article"，于是长文一直静默拿 DEFAULT=120s 而不是 300s。
+            # 四步法单次调用要跑分析/初稿/批评/修订，120s 会触发超时重试并重复计费。
+            "longform": cls.LONG_ARTICLE,
             "post": cls.POST,
             "post_optimize": cls.POST_OPTIMIZE,
             "title_generate": cls.TITLE_GENERATE,

@@ -27,6 +27,7 @@ class SectionTranslationExecutor:
         apply_four_step_translations: Callable[[Section, Any], None],
         merge_translation_updates: Callable[..., tuple[Section, list[str], list[str]]],
         commit_four_step_result: Optional[Callable[[Any], None]] = None,
+        should_force_retranslate: Optional[Callable[[Section], bool]] = None,
     ) -> None:
         self._is_cancelled = is_cancelled
         self._touch_progress = touch_progress
@@ -42,6 +43,14 @@ class SectionTranslationExecutor:
         self._apply_four_step_translations = apply_four_step_translations
         self._merge_translation_updates = merge_translation_updates
         self._commit_four_step_result = commit_four_step_result
+        # 返回 True 表示该章节要**重译**：已有译文的段落也一并送翻，而不是跳过。
+        # 缺省（None）保持历史行为——只翻没有可用译文的段落。
+        self._should_force_retranslate = should_force_retranslate
+
+    def _force_for(self, section: Section) -> bool:
+        if self._should_force_retranslate is None:
+            return False
+        return bool(self._should_force_retranslate(section))
 
     async def prescan(
         self,
@@ -58,7 +67,9 @@ class SectionTranslationExecutor:
         if self._is_cancelled(project_id):
             return None
 
-        translatable_section = self._build_translatable_section(section)
+        translatable_section = self._build_translatable_section(
+            section, force=self._force_for(section)
+        )
         if not translatable_section.paragraphs:
             return None
 
@@ -125,9 +136,16 @@ class SectionTranslationExecutor:
                 section_prompt_context,
             )
 
+            force_retranslate = self._force_for(section)
             section_paragraph_count = len(section.paragraphs)
             translated_in_section = self._count_translated_paragraphs(section)
-            if translated_in_section == section_paragraph_count and section_paragraph_count > 0:
+            # 整章已译完时默认整章跳过；重译模式下这条捷径必须让开，
+            # 否则"重译"对已完成的章节等于什么都没做。
+            if (
+                not force_retranslate
+                and translated_in_section == section_paragraph_count
+                and section_paragraph_count > 0
+            ):
                 return {
                     "section_id": section.section_id,
                     "skipped": True,
@@ -138,7 +156,9 @@ class SectionTranslationExecutor:
                     "paragraph_count": section_paragraph_count,
                 }
 
-            translatable_section = self._build_translatable_section(section)
+            translatable_section = self._build_translatable_section(
+                section, force=force_retranslate
+            )
             if not translatable_section.paragraphs:
                 return {
                     "section_id": section.section_id,
@@ -314,15 +334,19 @@ class SectionTranslationExecutor:
             }
 
     @staticmethod
-    def _build_translatable_section(section: Section) -> Section:
-        """Filter out structured metadata paragraphs and already translated paragraphs from automatic body translation."""
+    def _build_translatable_section(section: Section, force: bool = False) -> Section:
+        """Filter out structured metadata paragraphs and already translated paragraphs from automatic body translation.
+
+        ``force=True`` 时保留已有译文的段落——这是「重译本章 / 整篇重译」用的路径。
+        结构化元数据段（图片等）任何情况下都不送翻。
+        """
         return section.model_copy(
             update={
                 "paragraphs": [
                     paragraph
                     for paragraph in section.paragraphs
                     if not is_structured_metadata_paragraph(paragraph)
-                    and not paragraph.has_usable_translation()
+                    and (force or not paragraph.has_usable_translation())
                 ]
             }
         )
