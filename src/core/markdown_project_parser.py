@@ -679,23 +679,61 @@ class MarkdownProjectParser:
             )
         return local
 
+    # 数学区域。必须在强调解析之前整段排除掉，否则 LaTeX 的下标 `_` 会被当成
+    # 斜体定界符成对吞掉。实测：
+    #   `\alpha_{i\to t}\,\mathbf{v}_i, \qquad \alpha_{i\to t}`
+    #   → `\alpha_{i\to t}\,\mathbf{v}i, \qquad \alpha{i\to t}`（两个 `_` 消失，
+    #     还凭空产生一个横跨半条公式的假 em token）
+    # 关键在于 `}` 和 `,` 不是单词字符，flanking 守卫挡不住它们后面的 `_`。
+    # 行内 `$...$` 沿用 markdown_postprocess 的 Pandoc 规则：开定界符后非空白、
+    # 闭定界符前非空白、闭定界符后不跟数字（否则 `$100 到 $200` 会被当公式）。
+    _MATH_SPAN = re.compile(
+        r"\$\$[\s\S]*?\$\$"
+        r"|\\\[[\s\S]*?\\\]"
+        r"|\\\([\s\S]*?\\\)"
+        r"|\$(?![\s$])[^$\n]*[^\s$]\$(?![\d$])"
+    )
+    # 掩码用：行内代码里的 `$` 不得参与配对（`` `a $ b` `` 后面若有真公式会错配）。
+    _INLINE_CODE_SPAN = re.compile(r"`[^`\n]+`")
+
+    @classmethod
+    def _math_spans(cls, text: str) -> list[tuple[int, int]]:
+        if "$" not in text and "\\[" not in text and "\\(" not in text:
+            return []
+        # 等长空格掩码，保持所有偏移不变
+        masked = cls._INLINE_CODE_SPAN.sub(lambda m: " " * len(m.group(0)), text)
+        return [(m.start(), m.end()) for m in cls._MATH_SPAN.finditer(masked)]
+
     def _extract_inline_elements(self, text: str) -> tuple[str, list[InlineElement]]:
         result: list[str] = []
         elements: list[InlineElement] = []
         index = 0
         output_pos = 0
+        math_spans = self._math_spans(text)
         # italic 分支遵循 CommonMark flanking:* 定界符内侧不可为空白(避免 "2 * 3 * 4"
         # 被当强调);_ 定界符外侧不可为单词字符(避免 snake_case 标识符如 get_data_from_api
         # 的下划线被吞并、单词被粘连)。见审计 N2。
+        #
+        # 每个定界符还必须带 `(?<!\\)`：html2md 会把原文里的字面 `*` `_` 转义成
+        # `\*` `\_`，不认转义就会把它们当成强调标记吃掉，并凭空造出一个假的
+        # em/strong token 送进 prompt。实测受损案例：
+        #   `\*not italic\*`      → `\not italic\`（字面星号丢失）
+        #   `数学 P\_{max} 与 V\_{dd}` → `数学 P\{max} 与 V\{dd}`（LaTeX 下标被破坏，
+        #                            假 em 还跨越了两个变量）
+        # 下标场景尤其危险：`_` 的后置守卫只挡字母数字，`_{max}` 后面是 `{` 会放行。
         combined = re.compile(
-            r'\[([^\]]+)\]\((<[^>]+>|[^()\s]*(?:\([^)]*\)[^()\s]*)*)(?:\s+"([^"]+)")?\)'
-            r'|\*\*([^*]+)\*\*|__([^_]+)__'
-            r'|(?<!\*)\*([^\s*](?:[^*]*[^\s*])?)\*(?!\*)'
-            r"|(?<![A-Za-z0-9_])_([^\s_](?:[^_]*[^\s_])?)_(?![A-Za-z0-9_])"
-            r'|`([^`]+)`'
+            r'(?<!\\)\[([^\]]+)\]\((<[^>]+>|[^()\s]*(?:\([^)]*\)[^()\s]*)*)(?:\s+"([^"]+)")?\)'
+            r'|(?<!\\)\*\*([^*]+)(?<!\\)\*\*|(?<!\\)__([^_]+)(?<!\\)__'
+            r'|(?<![\\*])\*([^\s*](?:[^*]*[^\s*])?)(?<!\\)\*(?!\*)'
+            r"|(?<![\\A-Za-z0-9_])_([^\s_](?:[^_]*[^\s_])?)(?<!\\)_(?![A-Za-z0-9_])"
+            r'|(?<!\\)`([^`]+)`'
         )
 
         for match in combined.finditer(text):
+            # 落在数学区域里的"强调"一律不认。跳过时不推进 index，这段文本会由
+            # 下一次的 gap 拼接（或末尾 tail）原样输出，偏移因此保持正确。
+            if any(start <= match.start() < end for start, end in math_spans):
+                continue
             if match.start() > index:
                 segment = text[index:match.start()]
                 result.append(segment)

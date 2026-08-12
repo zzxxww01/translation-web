@@ -48,6 +48,37 @@ def test_pure_english_paren_untouched():
     assert "(Figure 3)" in out
 
 
+def test_paren_after_cjk_with_space_converted():
+    # 最常见的括注形态：中文 + 半角空格 + (纯英文缩写)。旧规则要求括号紧跟
+    # CJK 或内容含 CJK，这一形态两条都不命中，于是同篇里（capex）与 (ARR) 并存。
+    out = postprocess_markdown("我们便可预测其年度经常性收入 (ARR) 的增长。")
+    assert "年度经常性收入（ARR）的增长" in out
+    assert "(ARR)" not in out
+
+
+def test_same_term_two_paren_widths_unified():
+    out = postprocess_markdown("大模型（LLM）很强，另一处大模型 (LLM) 也很强。")
+    assert " (LLM)" not in out
+
+
+def test_function_call_paren_not_converted():
+    # foo(bar) 紧跟 ASCII 标识符，不是括注，必须保持半角。
+    out = postprocess_markdown("直接调用 foo(bar) 即可完成。")
+    assert "foo(bar)" in out
+
+
+def test_fullwidth_paren_sheds_adjacent_halfwidth_spaces():
+    # 全角括号自带间距，转换后两侧不应残留半角空格。
+    out = postprocess_markdown("其重心并非 IDE (集成开发环境) 或侧边栏。")
+    assert "IDE（集成开发环境）或侧边栏" in out
+
+
+def test_list_marker_space_before_paren_preserved():
+    # 删空格不得吃掉列表标记后的必需空格，否则 `- （译注：…）` 会塌成 `-（…）`。
+    out = postprocess_markdown("- （译注：这是一条说明）\n- 第二项")
+    assert "- （译注：这是一条说明）" in out
+
+
 def test_thousands_separator_before_cjk_magnitude_removed():
     out = postprocess_markdown("估值 2,600 万美元，产能 1,000 亿")
     assert "2600 万" in out
@@ -159,6 +190,39 @@ def test_different_annotations_not_deduped():
     out = postprocess_markdown(src)
     assert "（Nvidia）" in out
     assert "（TSMC）" in out
+
+
+def test_repeated_chinese_gloss_annotation_deduped():
+    # 实测缺陷：同一条中文释义括注在一篇成品里出现 11 次。旧去重只认
+    # `中文（English）`，中文释义可以无限重复。
+    src = (
+        "智能体（指能够自主规划并执行复杂任务的 AI）是未来。\n\n"
+        "我们认为智能体（指能够自主规划并执行复杂任务的 AI）会普及。\n\n"
+        "第三次提到智能体（指能够自主规划并执行复杂任务的 AI）。"
+    )
+    out = postprocess_markdown(src)
+    assert out.count("（指能够自主规划并执行复杂任务的 AI）") == 1
+    assert out.count("智能体") == 3
+
+
+def test_source_parenthetical_not_treated_as_gloss():
+    # 原文自带的括号内容（有机智能（人类））不以释义引导词开头，不参与去重。
+    src = "有机智能（人类）与 AI 交互。稍后有机智能（人类）再次出现。"
+    out = postprocess_markdown(src)
+    assert out.count("（人类）") == 2
+
+
+def test_distinct_glosses_both_kept():
+    src = "甲（指第一种含义）与乙（指第二种含义）并存。"
+    out = postprocess_markdown(src)
+    assert "（指第一种含义）" in out
+    assert "（指第二种含义）" in out
+
+
+def test_gloss_dedupe_idempotent():
+    src = "智能体（指自主规划的 AI）出现。再提智能体（指自主规划的 AI）。"
+    once = postprocess_markdown(src)
+    assert once == postprocess_markdown(once)
 
 
 def test_url_escaped_amp_fixed_inside_link():

@@ -6,6 +6,7 @@ import atexit
 import base64
 import re
 import weakref
+from html import escape as html_escape
 from typing import Optional
 from pathlib import Path
 
@@ -204,21 +205,31 @@ class WechatFormatter:
         # 1. 获取主题CSS（先获取，后面要返回）
         theme_css = get_theme(theme)
 
-        # 2. 解析 Markdown
+        # 2. 先把数学公式摘出来。CommonMark 不认 `$$`，而公式里的下标 `_` 会被
+        #    markdown-it 当成强调定界符成对吞掉：
+        #      `\mathbf{v}_i, \qquad \alpha_{i\to t}` → `\mathbf{v}<em>i, \qquad \alpha</em>{i\to t}`
+        #    公式因此既丢字符又多出 <em>。必须在 render 之前替换成惰性占位符。
+        markdown, formulas = self._extract_math(markdown)
+
+        # 3. 解析 Markdown
         html = self.md.render(markdown)
 
-        # 3. 代码高亮
+        # 4. 代码高亮
         html = self._highlight_code(html)
 
-        # 4. 处理图片
+        # 5. 还原公式。放在代码高亮之后、微信兼容修复之前：高亮器不会碰它，
+        #    而兼容修复里的 <code> 规则会因为我们已写了 white-space 而跳过。
+        html = self._restore_math(html, formulas)
+
+        # 6. 处理图片
         image_info = {"count": 0, "urls": []}
         if upload_images or image_to_base64:
             html, image_info = self._process_images(html, upload_images, image_to_base64)
 
-        # 5. 微信兼容性修复
+        # 7. 微信兼容性修复
         html = self._apply_wechat_fixes(html)
 
-        # 6. 安全:消毒 HTML,移除 XSS 向量。MarkdownIt 开启了 html:True 透传裸 HTML,
+        # 8. 安全:消毒 HTML,移除 XSS 向量。MarkdownIt 开启了 html:True 透传裸 HTML,
         #    若不消毒,用户 markdown 中的 <script>/<img onerror> 会在前端预览 iframe 内执行。
         html = self._sanitize_html(html)
 
@@ -227,7 +238,87 @@ class WechatFormatter:
             "css": theme_css,
             "image_count": image_info["count"],
             "image_urls": image_info["urls"],
+            # 前端据此提示：微信公众号不支持数学排版，公式按等宽原样呈现。
+            "formula_count": len(formulas),
         }
+
+    # 数学公式。块级在前，避免 `$$` 被行内规则拆成两个空公式。
+    # 行内 `$...$` 用 Pandoc 规则：开定界符后非空白、闭定界符前非空白、闭定界符后
+    # 不跟数字——否则「$100 到 $200」这类价格会被当成公式。
+    _MATH_PATTERN = re.compile(
+        r"(?P<block>\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\])"
+        r"|(?P<inline>\\\([\s\S]*?\\\)|\$(?![\s$])[^$\n]*[^\s$]\$(?![\d$]))"
+    )
+    # 占位符必须是纯小写字母数字：任何标点都可能被 CommonMark 解释掉。
+    _MATH_TOKEN = "xxmathxx{index}xx"
+    _MATH_TOKEN_RE = re.compile(r"xxmathxx(\d+)xx")
+
+    _MATH_BLOCK_STYLE = (
+        "margin:16px 0;padding:12px 14px;background:#f7f8fa;"
+        "border-left:3px solid #d0d5dd;border-radius:4px;overflow-x:auto;"
+    )
+    _MATH_CODE_STYLE = (
+        "font-family:Consolas,Menlo,'Liberation Mono',monospace;font-size:14px;"
+        "line-height:1.7;color:#1f2328;white-space:pre-wrap;word-break:normal;"
+        "background:transparent;padding:0;"
+    )
+    _MATH_INLINE_STYLE = (
+        "font-family:Consolas,Menlo,'Liberation Mono',monospace;font-size:0.95em;"
+        "padding:0 3px;background:#f2f4f7;border-radius:3px;"
+        "white-space:pre-wrap;word-break:normal;"
+    )
+
+    def _extract_math(self, markdown: str) -> tuple[str, list[tuple[str, str]]]:
+        """把公式换成惰性占位符，返回 (替换后的 markdown, [(kind, latex)])。"""
+        if "$" not in markdown and "\\[" not in markdown and "\\(" not in markdown:
+            return markdown, []
+
+        formulas: list[tuple[str, str]] = []
+
+        def _stash(match: re.Match[str]) -> str:
+            raw = match.group("block") or match.group("inline") or ""
+            kind = "block" if match.group("block") else "inline"
+            formulas.append((kind, raw))
+            token = self._MATH_TOKEN.format(index=len(formulas) - 1)
+            # 块级公式两侧留空行，确保 markdown-it 把它当成独立段落而不是并进上一段
+            return f"\n\n{token}\n\n" if kind == "block" else token
+
+        return self._MATH_PATTERN.sub(_stash, markdown), formulas
+
+    def _restore_math(self, html: str, formulas: list[tuple[str, str]]) -> str:
+        """把占位符换回公式。微信公众号不支持 MathJax/KaTeX，也不会保留外部
+        样式表，因此这里用**内联样式**把 LaTeX 原样呈现为等宽块——保证不丢字符、
+        不被强调标记污染。真正的排版需要渲染成图片走图床，属另一档改动。
+        """
+        if not formulas:
+            return html
+
+        def _block_html(latex: str) -> str:
+            return (
+                f'<section style="{self._MATH_BLOCK_STYLE}">'
+                f'<code style="{self._MATH_CODE_STYLE}">{html_escape(latex)}</code>'
+                f"</section>"
+            )
+
+        def _inline_html(latex: str) -> str:
+            return (
+                f'<code style="{self._MATH_INLINE_STYLE}">{html_escape(latex)}</code>'
+            )
+
+        def _render(index_text: str) -> str:
+            try:
+                kind, latex = formulas[int(index_text)]
+            except (ValueError, IndexError):
+                return ""
+            return _block_html(latex) if kind == "block" else _inline_html(latex)
+
+        # 独占一段的占位符：连同外层 <p> 一起换掉，避免 <section> 嵌进 <p> 变成非法 HTML
+        html = re.sub(
+            r"<p>\s*xxmathxx(\d+)xx\s*</p>",
+            lambda m: _render(m.group(1)),
+            html,
+        )
+        return self._MATH_TOKEN_RE.sub(lambda m: _render(m.group(1)), html)
 
     def _highlight_code(self, html: str) -> str:
         """代码高亮"""

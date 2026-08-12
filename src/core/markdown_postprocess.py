@@ -32,8 +32,17 @@ _LATEX_DISPLAY_MATH = re.compile(
 )
 
 # LaTeX inline math: \(...\) or $...$
+#
+# `$` 定界符采用 Pandoc 的判定规则，否则同一行出现两个货币金额时，中间整段
+# 正文会被当成一个行内公式：`价格区间是 $100 到 $200。` → `$100 到 $200` 被
+# 识别为公式，既跳过了全部后处理，渲染时还会被 MathJax/KaTeX 吃成数学斜体。
+# 仓库现存源文里有 85 行同时含两个以上 `$数字`。三条约束：
+#   1. 开定界符后不能是空白（`$ x$` 不是公式）；
+#   2. 闭定界符前不能是空白；
+#   3. 闭定界符后不能紧跟数字——这一条正是货币与公式的分水岭。
+# 真公式 `$x > 0$ 时` 仍然命中（闭定界符后是空格）。
 _LATEX_INLINE_MATH = re.compile(
-    r"(\\\(.*?\\\)|\$[^\$\n]+\$)"
+    r"(\\\(.*?\\\)|\$(?![\s$])[^\$\n]*[^\s$]\$(?![\d$]))"
 )
 
 # Markdown escaping that is harmful inside LaTeX math.
@@ -108,12 +117,17 @@ _BARE_PIPE_LINE = re.compile(r"^(?!\s*\|)(.+\|.+)$", re.MULTILINE)
 _EXCESSIVE_BLANK_LINES = re.compile(r"\n{3,}")
 
 # CJK–Latin spacing: missing space between CJK and ASCII letter/digit.
+# \u5b57\u7b26\u7c7b\u4e0d\u80fd\u53ea\u6709 [A-Za-z0-9]\uff1a\u6280\u672f\u6587\u91cc\u7d27\u8d34\u4e2d\u6587\u7684\u5f80\u5f80\u662f**\u7b26\u53f7\u578b\u8bcd\u5c3e**\u2014\u2014\u767e\u5206\u53f7\u3001
+# \u4e0a\u6807\u5e73\u65b9\u3001\u4e58\u53f7\u3001\u6b27\u59c6\u3001\u5ea6\u3002\u5b9e\u6d4b\u6f0f\u7f51:\u300c45%\u7684\u4ea7\u80fd\u300d\u300c858mm\u00b2\u964d\u81f3\u300d\u300c2\u00d7\u5de6\u53f3\u300d
+# \u300c50\u03a9\u7684\u8d70\u7ebf\u300d\u5168\u90fd\u4e0d\u8865\u7a7a\u683c\uff0c\u800c\u300c105\u00b0C \u7684\u7ed3\u6e29\u300d\u56e0\u4e3a\u7ed3\u5c3e\u6070\u597d\u662f\u5b57\u6bcd C \u53cd\u800c\u8865\u4e0a\u4e86\uff0c
+# \u540c\u4e00\u7bc7\u91cc\u4e24\u79cd\u98ce\u683c\u5e76\u5b58\u3002
+_LATIN_UNIT_TAIL = "A-Za-z0-9%\u00b0\u00b1\u00b2\u00b3\u00d7\u03a9\u00b5\u2030"
 _CJK_LATIN_NO_SPACE = re.compile(
     r"([\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff])"
-    r"([A-Za-z0-9])"
+    rf"([{_LATIN_UNIT_TAIL}])"
 )
 _LATIN_CJK_NO_SPACE = re.compile(
-    r"([A-Za-z0-9])"
+    rf"([{_LATIN_UNIT_TAIL}])"
     r"([\u4e00-\u9fff\u3400-\u4dbf\uf900-\ufaff])"
 )
 
@@ -141,6 +155,23 @@ _PAREN_CJK_INNER = re.compile(
 )
 _PAREN_AFTER_CJK = re.compile(
     rf"(?<=[{_CJK_CLASS}])\(([^()\n]*)\)"
+)
+# \u4e0a\u9762\u4e24\u6761\u6f0f\u6389\u4e86\u6700\u5e38\u89c1\u7684\u62ec\u6ce8\u5f62\u6001\uff1a\u300c\u4e2d\u6587 + \u534a\u89d2\u7a7a\u683c + (\u7eaf\u82f1\u6587)\u300d\u2014\u2014
+# \u201c\u5e74\u5ea6\u7ecf\u5e38\u6027\u6536\u5165 (ARR)\u201d \u56e0\u62ec\u53f7\u524d\u662f\u7a7a\u683c\u800c\u4e0d\u662f CJK\u3001\u5185\u5bb9\u53c8\u4e0d\u542b CJK\uff0c
+# \u4e24\u6761\u90fd\u4e0d\u547d\u4e2d\uff0c\u4e8e\u662f\u540c\u4e00\u7bc7\u91cc\u4f1a\u540c\u65f6\u5b58\u5728\uff08capex\uff09\u4e0e (ARR)\u3002\u9650\u5b9a\u201c\u7d27\u8ddf\u5728 CJK
+# \u540e\u7684\u5355\u4e2a\u7a7a\u683c\u201d\uff0c\u907f\u5f00\u51fd\u6570\u8c03\u7528 foo(bar) \u4e0e\u7eaf\u82f1\u6587\u53e5 appendix (Figure 3)\u3002
+_PAREN_AFTER_CJK_SPACE = re.compile(
+    rf"(?<=[{_CJK_CLASS}])[ ]\(([^()\n]{{1,60}})\)"
+)
+
+# \u5168\u89d2\u62ec\u53f7\u81ea\u5e26\u89c6\u89c9\u95f4\u8ddd\uff0c\u4e24\u4fa7\u4e0d\u5e94\u518d\u6302\u534a\u89d2\u7a7a\u683c\uff08\u8f6c\u5168\u89d2\u540e\u7684\u201cIDE \uff08\u96c6\u6210
+# \u5f00\u53d1\u73af\u5883\uff09 \u6216\u201d\uff09\u3002\u53ea\u5728\u7a7a\u683c\u53e6\u4e00\u4fa7\u662f CJK/\u5b57\u6bcd/\u6570\u5b57\u65f6\u624d\u5220\uff0c\u4ee5\u514d\u52a8\u5230
+# \u5217\u8868\u6807\u8bb0\u3001\u5f15\u7528\u524d\u7f00\u3001\u6807\u9898\u4e95\u53f7\u540e\u7684\u90a3\u4e2a\u5fc5\u9700\u7a7a\u683c\u3002
+_SPACE_BEFORE_FULLWIDTH_PAREN = re.compile(
+    rf"(?<=[{_CJK_CLASS}A-Za-z0-9])[ \t]+\uff08"
+)
+_SPACE_AFTER_FULLWIDTH_PAREN = re.compile(
+    rf"\uff09[ \t]+(?=[{_CJK_CLASS}A-Za-z0-9])"
 )
 
 # Thousands separators inside numbers followed by a Chinese magnitude word:
@@ -173,6 +204,17 @@ _CJK_EN_ANNOTATION = re.compile(
     rf"(?<=[{_CJK_CLASS}])\uff08\s*([A-Za-z][A-Za-z0-9 .&'/+-]{{0,60}}?)\s*\uff09"
 )
 
+# \u8bd1\u8005\u81ea\u52a0\u7684**\u4e2d\u6587\u91ca\u4e49**\u62ec\u6ce8\uff1a\u300c\u667a\u80fd\u4f53\uff08\u6307\u80fd\u591f\u81ea\u4e3b\u89c4\u5212\u5e76\u6267\u884c\u590d\u6742\u4efb\u52a1\u7684 AI\uff09\u300d\u3002
+# \u4e0a\u9762\u90a3\u6761\u53ea\u8ba4\u62ec\u6ce8\u5185\u5bb9\u662f\u82f1\u6587\u539f\u8bcd\u7684\u5f62\u6001\uff0c\u6240\u4ee5\u8fd9\u7c7b\u4e2d\u6587\u91ca\u4e49\u53ef\u4ee5\u65e0\u9650\u91cd\u590d\u2014\u2014
+# \u5b9e\u6d4b\u67d0\u7bc7\u6210\u54c1\u91cc\u540c\u4e00\u6761\u91ca\u4e49\u51fa\u73b0\u4e86 11 \u6b21\u3002\u4ee5\u300c\u6307/\u5373/\u610f\u4e3a/\u8bd1\u6ce8/\u5168\u79f0\u2026\u300d\u8fd9\u7c7b
+# \u91ca\u4e49\u5f15\u5bfc\u8bcd\u5f00\u5934\u662f\u5224\u5b9a\u4f9d\u636e\uff1a\u82f1\u6587\u539f\u6587\u4e0d\u53ef\u80fd\u4ea7\u51fa\u4e2d\u6587\u91ca\u4e49\uff0c\u56e0\u6b64\u8fd9\u7c7b\u62ec\u6ce8\u4e00\u5b9a
+# \u662f\u8bd1\u8005\u6dfb\u52a0\u7684\uff0c\u53bb\u91cd\u4e0d\u4f1a\u635f\u4f24\u539f\u6587\u4fe1\u606f\u3002
+_CJK_GLOSS_ANNOTATION = re.compile(
+    rf"(?<=[{_CJK_CLASS}])\uff08\s*"
+    r"(?:\u6307|\u5373|\u610f\u4e3a|\u4ea6\u5373|\u4ea6\u79f0|\u53c8\u79f0|\u5168\u79f0|\u7b80\u79f0|\u7f29\u5199\u4e3a|\u8bd1\u6ce8|\u8bd1\u8005\u6ce8)"
+    r"[^\uff08\uff09\n]{0,80}\uff09"
+)
+
 _CJK_SINGLE = re.compile(rf"[{_CJK_CLASS}]")
 
 
@@ -187,6 +229,9 @@ def _normalize_cjk_punctuation(text: str) -> str:
     )
     text = _PAREN_CJK_INNER.sub("\uff08\\1\uff09", text)
     text = _PAREN_AFTER_CJK.sub("\uff08\\1\uff09", text)
+    text = _PAREN_AFTER_CJK_SPACE.sub("\uff08\\1\uff09", text)
+    text = _SPACE_BEFORE_FULLWIDTH_PAREN.sub("\uff08", text)
+    text = _SPACE_AFTER_FULLWIDTH_PAREN.sub("\uff09", text)
     text = _THOUSANDS_BEFORE_CJK_MAGNITUDE.sub(r"\1", text)
     text = _DOUBLED_FULLWIDTH_PUNCT.sub(r"\1", text)
     return text
@@ -232,23 +277,40 @@ def _repair_quotes(text: str) -> str:
 
 
 def _dedupe_repeated_annotations(text: str) -> str:
-    """Drop the 2nd+ exact repeat of a `中文（English）` annotation.
+    """Drop the 2nd+ exact repeat of a translator-added annotation.
 
-    First occurrence keeps its annotation; later occurrences of the same
-    English term keep the Chinese name and lose the redundant bracket
-    (annotation stacking, A-11). Operates on placeholder-protected text so
-    links/code/tables are never touched.
+    Two shapes are handled, both keyed on the annotation's own content so an
+    annotation only survives at its first occurrence:
+
+    * ``中文（English）`` — the English term itself (annotation stacking, A-11).
+    * ``中文（指……）`` — a Chinese gloss the translator added. The prompt caps
+      每个词全篇至多括注一次, but that instruction is not reliably followed:
+      一篇成品实测出现同一条释义 11 次。这里做确定性兜底。
+
+    Operates on placeholder-protected text so links/code/tables are never
+    touched.
     """
-    seen: set = set()
+    seen_en: set = set()
 
-    def _replace(match: re.Match[str]) -> str:
+    def _replace_en(match: re.Match[str]) -> str:
         key = match.group(1).strip()
-        if key in seen:
+        if key in seen_en:
             return ""
-        seen.add(key)
+        seen_en.add(key)
         return match.group(0)
 
-    return _CJK_EN_ANNOTATION.sub(_replace, text)
+    text = _CJK_EN_ANNOTATION.sub(_replace_en, text)
+
+    seen_gloss: set = set()
+
+    def _replace_gloss(match: re.Match[str]) -> str:
+        key = match.group(0).strip()
+        if key in seen_gloss:
+            return ""
+        seen_gloss.add(key)
+        return match.group(0)
+
+    return _CJK_GLOSS_ANNOTATION.sub(_replace_gloss, text)
 
 
 def _repair_collapsed_markdown_links(text: str) -> str:
