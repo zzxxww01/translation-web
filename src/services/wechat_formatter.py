@@ -285,24 +285,44 @@ class WechatFormatter:
 
         return self._MATH_PATTERN.sub(_stash, markdown), formulas
 
+    @staticmethod
+    def _strip_math_delimiters(raw: str) -> str:
+        """剥掉 `$$` / `$` / `\\[ \\]` / `\\( \\)`，留下纯 LaTeX 供渲染器使用。"""
+        text = raw.strip()
+        for opening, closing in (("$$", "$$"), ("\\[", "\\]"), ("\\(", "\\)")):
+            if text.startswith(opening) and text.endswith(closing):
+                return text[len(opening) : -len(closing)].strip()
+        if len(text) >= 2 and text.startswith("$") and text.endswith("$"):
+            return text[1:-1].strip()
+        return text
+
     def _restore_math(self, html: str, formulas: list[tuple[str, str]]) -> str:
-        """把占位符换回公式。微信公众号不支持 MathJax/KaTeX，也不会保留外部
-        样式表，因此这里用**内联样式**把 LaTeX 原样呈现为等宽块——保证不丢字符、
-        不被强调标记污染。真正的排版需要渲染成图片走图床，属另一档改动。
+        """把占位符换回公式节点。
+
+        公众号没有 MathJax/KaTeX 运行环境，正文里也不执行 JS，所以公式只能在
+        **发布前**变成图形。节点上带 ``data-latex``，由前端在预览与复制时用
+        MathJax 渲染成独立 SVG（公众号正文支持以 DOM 形式内嵌 SVG）。
+
+        节点内容保留等宽 LaTeX 原文作为**降级**：渲染器加载失败或某条公式语法
+        有误时，用户至少拿到不丢字符、不被强调标记污染的原文，而不是空白。
         """
         if not formulas:
             return html
 
         def _block_html(latex: str) -> str:
+            inner = html_escape(self._strip_math_delimiters(latex), quote=True)
             return (
-                f'<section style="{self._MATH_BLOCK_STYLE}">'
+                f'<section data-formula="block" data-latex="{inner}"'
+                f' style="{self._MATH_BLOCK_STYLE}">'
                 f'<code style="{self._MATH_CODE_STYLE}">{html_escape(latex)}</code>'
                 f"</section>"
             )
 
         def _inline_html(latex: str) -> str:
+            inner = html_escape(self._strip_math_delimiters(latex), quote=True)
             return (
-                f'<code style="{self._MATH_INLINE_STYLE}">{html_escape(latex)}</code>'
+                f'<code data-formula="inline" data-latex="{inner}"'
+                f' style="{self._MATH_INLINE_STYLE}">{html_escape(latex)}</code>'
             )
 
         def _render(index_text: str) -> str:

@@ -100,8 +100,41 @@ export function WechatFeature() {
   } = useWechatThemes();
   const { handleError } = useErrorHandler();
 
-  const html = formatWechat.data?.html || '';
+  const rawHtml = formatWechat.data?.html || '';
   const css = formatWechat.data?.css || '';
+  const formulaCount = formatWechat.data?.formula_count ?? 0;
+  // 公式渲染是异步的（MathJax 懒加载）。渲染完成前先用后端返回的等宽降级版本，
+  // 这样预览不会空一段，也不会因为渲染失败而卡住整篇。
+  const [renderedHtml, setRenderedHtml] = useState('');
+  const [formulaFailed, setFormulaFailed] = useState(0);
+  const html = renderedHtml || rawHtml;
+
+  useEffect(() => {
+    if (!rawHtml || !rawHtml.includes('data-latex')) {
+      setRenderedHtml('');
+      setFormulaFailed(0);
+      return;
+    }
+    let cancelled = false;
+    setRenderedHtml('');
+    setFormulaFailed(0);
+    void (async () => {
+      const { renderFormulas } = await import('./formulaRenderer');
+      const result = await renderFormulas(rawHtml);
+      if (cancelled) return;
+      setRenderedHtml(result.html);
+      setFormulaFailed(result.failed);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [rawHtml]);
+
+  useEffect(() => {
+    if (formulaFailed > 0) {
+      toast.warning(`${formulaFailed} 条公式渲染失败，已保留 LaTeX 原文`);
+    }
+  }, [formulaFailed]);
   const themes = useMemo(() => themesData?.themes || [], [themesData]);
   const selectedThemeName =
     themes.find(theme => theme.id === selectedTheme)?.name || selectedTheme;
@@ -155,8 +188,16 @@ export function WechatFeature() {
     }
 
     try {
+      // 复制走的必须是渲染后的 HTML；若异步渲染还没回来，这里同步等一次，
+      // 免得用户抢在渲染完成前点复制、把等宽降级版粘进公众号。
+      let htmlToCopy = html;
+      if (rawHtml.includes('data-latex') && !renderedHtml) {
+        const { renderFormulas } = await import('./formulaRenderer');
+        htmlToCopy = (await renderFormulas(rawHtml)).html;
+      }
+
       const { default: juice } = await import('juice');
-      const styledHtml = `<style>${css}</style>${html}`;
+      const styledHtml = `<style>${css}</style>${htmlToCopy}`;
       const inlinedHtml = juice(styledHtml, {
         inlinePseudoElements: true,
         preserveImportant: true,
@@ -291,6 +332,21 @@ export function WechatFeature() {
           )}
         </section>
       </main>
+
+      {formulaCount > 0 && (
+        <div
+          className="shrink-0 border-t bg-amber-50 px-4 py-2 text-xs leading-5 text-amber-900 sm:px-6"
+          role="note"
+        >
+          本文含 {formulaCount} 条公式，已渲染为矢量 SVG 直接内嵌。
+          <strong className="mx-1">粘贴后请直接发布，不要再在公众号后台编辑正文</strong>
+          ——后台二次编辑会丢公式。公式较多时 Chrome 偶发粘贴无响应，可改用 Firefox。
+          LaTeX 侧建议：用 <code className="rounded bg-amber-100 px-1">\qquad (1)</code> 代替
+          <code className="mx-1 rounded bg-amber-100 px-1">\tag{'{1}'}</code>，用
+          <code className="mx-1 rounded bg-amber-100 px-1">aligned</code> 代替
+          <code className="rounded bg-amber-100 px-1">\\</code> 换行。
+        </div>
+      )}
 
       <footer className="sticky bottom-0 z-10 flex shrink-0 items-center gap-2 border-t bg-background/95 px-4 py-3 backdrop-blur sm:justify-end sm:px-6">
         <Button

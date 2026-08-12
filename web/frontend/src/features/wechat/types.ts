@@ -14,6 +14,8 @@ export interface WechatFormatResponse {
   css: string;
   image_count: number;
   image_urls: string[];
+  /** 识别到的数学公式条数，用于提示公众号侧的已知限制 */
+  formula_count?: number;
 }
 
 export interface WechatTheme {

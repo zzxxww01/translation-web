@@ -82,3 +82,54 @@ def test_markdown_without_math_is_unaffected(formatter: WechatFormatter) -> None
     result = _render(formatter, "# 标题\n\n普通段落，含 *强调*。")
     assert result["formula_count"] == 0
     assert "<em>强调</em>" in result["html"]
+
+
+# --- 公式节点标记：供前端 MathJax 渲染成内嵌 SVG -------------------------------
+
+
+def test_block_formula_carries_data_latex_without_delimiters(
+    formatter: WechatFormatter,
+) -> None:
+    result = _render(formatter, BLOCK_FORMULA)
+    html = result["html"]
+
+    assert 'data-formula="block"' in html
+    assert "data-latex=" in html
+    # data-latex 里必须是纯 LaTeX，带上 $$ 会让 MathJax 解析失败
+    unescaped = html_lib.unescape(html)
+    assert 'data-latex="$$' not in unescaped
+    assert r"\mathbf{o}_t" in unescaped
+
+
+def test_inline_formula_carries_data_latex(formatter: WechatFormatter) -> None:
+    result = _render(formatter, r"其中 $\alpha_{i}$ 是权重。")
+    html = result["html"]
+
+    assert 'data-formula="inline"' in html
+    unescaped = html_lib.unescape(html)
+    assert r"\alpha_{i}" in unescaped
+    assert 'data-latex="$' not in unescaped
+
+
+def test_fallback_content_kept_for_degraded_rendering(
+    formatter: WechatFormatter,
+) -> None:
+    # 前端渲染器加载失败时，节点内容仍是等宽 LaTeX 原文，而不是空白
+    result = _render(formatter, BLOCK_FORMULA)
+    html = html_lib.unescape(result["html"])
+    assert "<code" in result["html"]
+    assert r"\sum_{i=1}^{t}" in html
+
+
+@pytest.mark.parametrize(
+    "raw,expected",
+    [
+        (r"$$ a_1 $$", "a_1"),
+        (r"$a_1$", "a_1"),
+        (r"\[ a_1 \]", "a_1"),
+        (r"\( a_1 \)", "a_1"),
+        ("a_1", "a_1"),
+    ],
+)
+def test_strip_math_delimiters(raw: str, expected: str) -> None:
+    assert WechatFormatter._strip_math_delimiters(raw) == expected

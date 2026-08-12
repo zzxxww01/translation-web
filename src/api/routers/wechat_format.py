@@ -56,6 +56,8 @@ class WechatFormatResponse(BaseModel):
     css: str
     image_count: int
     image_urls: list[str]
+    # 识别到的数学公式条数。前端据此提示公众号侧的已知限制（后台二次编辑会丢公式）。
+    formula_count: int = 0
 
 
 class ThemeInfo(BaseModel):
@@ -109,6 +111,7 @@ async def format_for_wechat(request: Request, body: WechatFormatRequest):
             css=result["css"],
             image_count=result["image_count"],
             image_urls=result["image_urls"],
+            formula_count=result.get("formula_count", 0),
         )
 
     except ImportError as e:
