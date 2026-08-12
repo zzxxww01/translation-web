@@ -94,3 +94,6 @@ translation-agent-analysis/
 # 这类文件名以 .json 收尾，*.bak 和 *.bak-v* 都匹配不到。
 *.bak
 *.bak-*
+
+# 运行时文件锁（glossary/*.json.lock 等），不应进版本控制
+*.json.lock

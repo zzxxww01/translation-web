@@ -2,9 +2,10 @@ import type { AddTermRequest } from '@/features/confirmation/api/glossaryApi';
 import type { GlossaryTerm, TranslationStrategy } from '@/features/confirmation/types';
 
 export interface EffectiveGlossaryTerm extends GlossaryTerm {
+  /** 实际生效的那一份。后端 2026-08-09 起全局优先，所以同名时恒为 global。 */
   effectiveScope: 'global' | 'project';
-  overridesGlobal: boolean;
-  globalTerm?: GlossaryTerm;
+  /** 同名项目条目存在但被全局压掉、事实上不生效时给出，用于在表格里打灰标。 */
+  shadowedProjectTerm?: GlossaryTerm;
 }
 
 export interface GlossaryMutationResult {
@@ -23,29 +24,38 @@ function keyFor(original: string): string {
   return original.trim().toLocaleLowerCase();
 }
 
+/**
+ * 合成「有效术语」，顺序必须与后端 `GlossaryManager.merge`
+ * （src/core/glossary.py:237-266）一致：**先项目、后全局，全局覆盖同名项目条目**。
+ *
+ * 此前这里是反的（先全局、项目覆盖），于是同一个词在界面上显示的是项目译法、
+ * 实际翻译时用的却是全局译法——用户按界面改词却改不动结果。项目词表的正当用途
+ * 是补充全局没有的词，不是覆盖全局。
+ */
 export function buildEffectiveTerms(
   globalTerms: GlossaryTerm[],
   projectTerms: GlossaryTerm[]
 ): EffectiveGlossaryTerm[] {
   const terms = new Map<string, EffectiveGlossaryTerm>();
 
-  globalTerms.forEach(term => {
-    terms.set(keyFor(term.original), {
-      ...term,
-      scope: 'global',
-      effectiveScope: 'global',
-      overridesGlobal: false,
-    });
-  });
-
   projectTerms.forEach(term => {
-    const globalTerm = terms.get(keyFor(term.original));
     terms.set(keyFor(term.original), {
       ...term,
       scope: 'project',
       effectiveScope: 'project',
-      overridesGlobal: Boolean(globalTerm),
-      globalTerm,
+    });
+  });
+
+  globalTerms.forEach(term => {
+    const key = keyFor(term.original);
+    const shadowed = terms.get(key);
+    terms.set(key, {
+      ...term,
+      scope: 'global',
+      effectiveScope: 'global',
+      // 只有真的存在同名项目条目时才记，用于提示"这条项目术语不生效"
+      shadowedProjectTerm:
+        shadowed?.effectiveScope === 'project' ? shadowed : undefined,
     });
   });
 

@@ -673,8 +673,9 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
             <div>
               <h1 className="text-2xl font-bold text-foreground">统一术语管理</h1>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                这里统一管理有效术语、项目术语、全局术语和翻译规则。有效术语会展示项目覆盖后的最终结果；帖子、Slack
-                和工具箱当前只使用全局术语。
+                这里统一管理有效术语、项目术语、全局术语和翻译规则。<strong>全局术语优先</strong>——
+                项目术语只补充全局没有的词，同名时不生效；有效术语展示的就是翻译时真正会用的那一份。
+                帖子、Slack 和工具箱当前只使用全局术语。
               </p>
             </div>
             <div className="flex flex-wrap gap-2">

@@ -49,6 +49,12 @@ export interface LatestConsistencyReportResponse {
   message?: string;
 }
 
+/** 本次运行覆盖已有译文的范围。resume=只补未译段落（默认）。 */
+export type RetranslateOption =
+  | { scope: 'resume' }
+  | { scope: 'all' }
+  | { scope: 'section'; sectionIds: string[] };
+
 export interface LongformWorkflowStartResponse {
   status: 'started';
   project_id: string;
@@ -57,6 +63,8 @@ export interface LongformWorkflowStartResponse {
   term_review_timeout_seconds: number;
   method: 'normal' | 'four-step';
   model?: string | null;
+  retranslate_scope?: 'resume' | 'section' | 'all';
+  retranslate_section_ids?: string[];
   resumed: boolean;
   resume_checkpoint?: {
     translated_paragraphs: number;
@@ -219,10 +227,18 @@ export const documentApi = {
     projectId: string,
     method: 'normal' | 'four-step',
     model?: string,
+    retranslate?: RetranslateOption,
   ) =>
     apiClient.post<LongformWorkflowStartResponse>(
       `/projects/${projectId}/translation-workflow`,
-      { method, model },
+      {
+        method,
+        model,
+        retranslate_scope: retranslate?.scope ?? 'resume',
+        // 后端在 scope != 'section' 时带 id 会直接报错，这里保持严格对齐
+        retranslate_section_ids:
+          retranslate?.scope === 'section' ? retranslate.sectionIds : [],
+      },
       { retry: false },
     ),
 

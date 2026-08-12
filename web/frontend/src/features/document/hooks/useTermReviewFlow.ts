@@ -7,7 +7,7 @@ import {
 } from '../../confirmation/api/glossaryApi';
 import type { TermReviewDecision, TermReviewPayload } from '../../confirmation/types';
 import { TranslationMethod } from '@/shared/constants';
-import { documentApi } from '../api';
+import { documentApi, type RetranslateOption } from '../api';
 
 interface PendingTranslationRequest {
   termReviewJobId: string;
@@ -60,7 +60,11 @@ export function useTermReviewFlow({
   );
 
   const prepareTermReviewIfNeeded = useCallback(
-    async (method: TranslationMethod = TranslationMethod.FOUR_STEP, model?: string) => {
+    async (
+      method: TranslationMethod = TranslationMethod.FOUR_STEP,
+      model?: string,
+      retranslate?: RetranslateOption,
+    ) => {
       if (!currentProjectId) {
         return false;
       }
@@ -81,6 +85,7 @@ export function useTermReviewFlow({
           projectId,
           method,
           model,
+          retranslate,
         );
         workflowStarted = true;
         if (

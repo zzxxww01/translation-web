@@ -49,8 +49,9 @@ function effectiveDetails(term: GlossaryTerm) {
       effective.effectiveScope === 'project' || term.scope === 'project'
         ? '项目'
         : '全局',
-    overridesGlobal: Boolean(effective.overridesGlobal),
-    globalTranslation: effective.globalTerm?.translation,
+    // 全局优先：同名时生效的是全局条目，项目那条被压掉不生效。
+    shadowsProjectTerm: Boolean(effective.shadowedProjectTerm),
+    shadowedProjectTranslation: effective.shadowedProjectTerm?.translation,
   };
 }
 
@@ -64,7 +65,11 @@ function TermBadges({ term, showSource }: { term: GlossaryTerm; showSource: bool
           {details.source}生效
         </Badge>
       ) : null}
-      {details.overridesGlobal ? <Badge variant="outline">覆盖全局</Badge> : null}
+      {details.shadowsProjectTerm ? (
+        <Badge variant="outline" title="项目词表里有同名条目，但全局优先，那条不生效">
+          项目条目不生效
+        </Badge>
+      ) : null}
       <Badge variant={(term.status || 'active') === 'disabled' ? 'secondary' : 'default'}>
         {(term.status || 'active') === 'disabled' ? '停用' : '启用'}
       </Badge>
@@ -158,9 +163,9 @@ export function TermTable({
                   ))}
                 </div>
               ) : null}
-              {details.overridesGlobal ? (
+              {details.shadowsProjectTerm ? (
                 <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                  全局译法：{details.globalTranslation || '保留原文'}
+                  项目词表里的「{details.shadowedProjectTranslation || '保留原文'}」不生效——全局优先
                 </p>
               ) : null}
 
@@ -234,9 +239,9 @@ export function TermTable({
                   </TableCell>
                   <TableCell className="max-w-64 break-words align-top text-muted-foreground">
                     {term.translation || '保留原文'}
-                    {details.overridesGlobal ? (
-                      <span className="mt-1 block text-xs">
-                        全局：{details.globalTranslation || '保留原文'}
+                    {details.shadowsProjectTerm ? (
+                      <span className="mt-1 block text-xs text-muted-foreground line-through">
+                        项目：{details.shadowedProjectTranslation || '保留原文'}
                       </span>
                     ) : null}
                   </TableCell>

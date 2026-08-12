@@ -22,7 +22,12 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '@/components/ui/Button';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { cn } from '@/lib/utils';
 import { PanelLeft } from 'lucide-react';
+
+/** 开始翻译时选择的覆盖范围 */
+type RetranslateScope = 'resume' | 'section' | 'all';
 import { DocumentSidebar } from './components/DocumentSidebar';
 import { EditPanel } from './components/EditPanel';
 import { NewProjectModal } from './components/NewProjectModal';
@@ -79,6 +84,7 @@ export function DocumentFeature() {
   const [showStartDialog, setShowStartDialog] = useState(false);
   const [pendingStartMethod, setPendingStartMethod] = useState<TranslationMethod>(TranslationMethod.FOUR_STEP);
   const [pendingStartModel, setPendingStartModel] = useState<string | undefined>(undefined);
+  const [pendingScope, setPendingScope] = useState<RetranslateScope>('resume');
 
   const isFullTranslating = useDocumentStore(state => state.isFullTranslating);
   const fullTranslateProgress = useDocumentStore(state => state.fullTranslateProgress);
@@ -562,6 +568,18 @@ export function DocumentFeature() {
     };
   })();
 
+  // 三档重译各自的代价，直接摆在选项上——用户在点之前就该知道会覆盖多少段。
+  const totalParagraphsInProject =
+    backendTranslationStatus?.total_paragraphs ??
+    sections.reduce((sum, section) => sum + (section.total_paragraphs ?? 0), 0);
+  const activeSectionSummary = activeSectionId
+    ? sections.find(section => section.section_id === activeSectionId)
+    : undefined;
+  const activeSectionParagraphs =
+    activeSectionSummary?.total_paragraphs ??
+    displaySection?.paragraphs?.length ??
+    0;
+
   const renderSidebar = (mobile: boolean) => (
     <DocumentSidebar
       sections={sections}
@@ -737,33 +755,101 @@ export function DocumentFeature() {
       </AlertDialog>
 
       {/* 开始全文翻译确认对话框 */}
-      <AlertDialog open={showStartDialog} onOpenChange={setShowStartDialog}>
+      <AlertDialog
+        open={showStartDialog}
+        onOpenChange={(open) => {
+          setShowStartDialog(open);
+          // 每次重新打开都回到最安全的一档，避免上次选的「整篇重译」被误带入
+          if (!open) setPendingScope('resume');
+        }}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>开始全文翻译</AlertDialogTitle>
             <AlertDialogDescription>
-              {pendingStartMethod === TranslationMethod.FOUR_STEP && resumableCheckpoint
-                ? `将从持久化断点继续四步法翻译：保留已完成的 ${resumableCheckpoint.translated}/${resumableCheckpoint.total} 段，只处理剩余 ${resumableCheckpoint.remaining} 段，不会覆盖已有译文。`
-                : pendingStartMethod === TranslationMethod.FOUR_STEP
-                ? '确定要使用四步法翻译全文吗？系统会先做术语预检，再进行分析、初稿、批评和修订。'
-                : '确定要开始全文翻译吗？系统会先做术语预检，再进行普通全文翻译。'}
-              {' '}任务由后台持续运行，关闭浏览器不会中断；新任务的术语未在确认窗口内提交时会自动采用建议继续。
+              {pendingStartMethod === TranslationMethod.FOUR_STEP
+                ? '四步法：先做术语预检，再进行分析、初稿、批评和修订。'
+                : '普通全文翻译：先做术语预检，再逐章翻译。'}
+              {' '}任务由后台持续运行，关闭浏览器不会中断；术语未在确认窗口内提交时会自动采用建议继续。
             </AlertDialogDescription>
           </AlertDialogHeader>
+
+          <RadioGroup
+            value={pendingScope}
+            onValueChange={(value) => setPendingScope(value as RetranslateScope)}
+            className="gap-0 divide-y divide-border rounded-md border"
+          >
+            <label
+              htmlFor="scope-resume"
+              className="flex cursor-pointer items-start gap-3 p-3"
+            >
+              <RadioGroupItem value="resume" id="scope-resume" className="mt-1" />
+              <span className="min-w-0">
+                <span className="block text-sm font-medium">
+                  继续未完成的部分
+                </span>
+                <span className="mt-0.5 block text-xs text-muted-foreground">
+                  {resumableCheckpoint
+                    ? `保留已完成的 ${resumableCheckpoint.translated}/${resumableCheckpoint.total} 段，只处理剩余 ${resumableCheckpoint.remaining} 段。不会覆盖已有译文。`
+                    : '只翻译还没有译文的段落，不会覆盖已有译文。'}
+                </span>
+              </span>
+            </label>
+
+            <label
+              htmlFor="scope-section"
+              className={cn(
+                'flex items-start gap-3 p-3',
+                activeSectionId ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'
+              )}
+            >
+              <RadioGroupItem
+                value="section"
+                id="scope-section"
+                className="mt-1"
+                disabled={!activeSectionId}
+              />
+              <span className="min-w-0">
+                <span className="block text-sm font-medium">重译当前章节</span>
+                <span className="mt-0.5 block text-xs text-muted-foreground">
+                  {activeSectionId
+                    ? `覆盖「${activeSectionSummary?.title || currentSection?.title || '当前章节'}」的 ${activeSectionParagraphs} 段译文，其余章节仍只补未译部分。`
+                    : '先在左侧选中一个章节。'}
+                </span>
+              </span>
+            </label>
+
+            <label
+              htmlFor="scope-all"
+              className="flex cursor-pointer items-start gap-3 p-3"
+            >
+              <RadioGroupItem value="all" id="scope-all" className="mt-1" />
+              <span className="min-w-0">
+                <span className="block text-sm font-medium">整篇重译</span>
+                <span className="mt-0.5 block text-xs text-muted-foreground">
+                  覆盖全部 {totalParagraphsInProject} 段译文。旧译文作为历史版本保留，但当前显示的译文会被替换。
+                </span>
+              </span>
+            </label>
+          </RadioGroup>
+
           <AlertDialogFooter>
             <AlertDialogCancel>取消</AlertDialogCancel>
             <AlertDialogAction onClick={async () => {
               try {
                 await prepareTermReviewIfNeeded(
                   pendingStartMethod,
-                  pendingStartModel
+                  pendingStartModel,
+                  pendingScope === 'section' && activeSectionId
+                    ? { scope: 'section', sectionIds: [activeSectionId] }
+                    : { scope: pendingScope === 'section' ? 'resume' : pendingScope }
                 );
               } catch (error) {
                 console.error('Failed to start full translation:', error);
                 toast.error('启动全文翻译失败，请重试');
               }
             }}>
-              开始翻译
+              {pendingScope === 'resume' ? '开始翻译' : '确认重译'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

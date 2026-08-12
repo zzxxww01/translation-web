@@ -6,17 +6,13 @@ import {
   useTranslatePost,
   useOptimizePost,
   useGenerateTitle,
-  useGenerateHashtags,
 } from './hooks';
 import { TranslationVersionType } from '@/shared/constants';
 import { SourceInput } from './components/SourceInput';
 import { TranslationOutput } from './components/TranslationOutput';
 import { OptimizationPanel } from './components/OptimizationPanel';
 import { TitleGenerator } from './components/TitleGenerator';
-import { PublishingComposer } from './components/PublishingComposer';
-import { splitPostContent, suggestSpecificHashtags } from './publishing';
 import { ModelSelector } from '@/components/ModelSelector';
-import { Button } from '@/components/ui/Button';
 import { Loader2, X } from 'lucide-react';
 import { POST_CONTENT_MAX_LENGTH, describeOptimizeOption } from './types';
 import { getOptimizationHistory } from './versionLineage';
@@ -56,18 +52,18 @@ export function PostFeature() {
     pendingAction, pendingStartedAt, selectedModel,
     setOriginalText, addVersion, setCurrentVersion, setEditedContent,
     saveEdit, discardEdit, clear, setPendingAction, setSelectedModel,
-    generatedTitles, selectedTitle, titleContentIdentity: savedTitleContentIdentity, hashtags,
-    setGeneratedTitles, setSelectedTitle, setHashtags,
-    addHashtag, updateHashtag, removeHashtag, moveHashtag,
+    generatedTitles, selectedTitle, titleContentIdentity: savedTitleContentIdentity,
+    setGeneratedTitles, setSelectedTitle,
   } = usePostStore();
 
   const translateMutation = useTranslatePost();
   const optimizeMutation = useOptimizePost();
   const generateTitleMutation = useGenerateTitle();
-  const generateHashtagsMutation = useGenerateHashtags();
   const [customInstruction, setCustomInstruction] = useState('');
   const [pendingEditAction, setPendingEditAction] = useState<PendingEditAction | null>(null);
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  /** 每次「清空」自增，用作 TitleGenerator 的 key，重置它内部的输入框 */
+  const [clearToken, setClearToken] = useState(0);
 
   const currentVersion = versions.find(v => v.id === currentVersionId);
   const currentContent = isEdited ? editedContent : currentVersion?.content || '';
@@ -75,8 +71,6 @@ export function PostFeature() {
   const titleContentIdentity = currentVersionId
     ? `version:${currentVersionId}:${currentContent}`
     : `source:${sourceRevision}:${originalText}`;
-  const publishingBody = splitPostContent(currentContent).body;
-  const publishingTitle = selectedTitle || generatedTitles[0] || '';
 
   const beginAction = useCallback((action: PostNetworkAction) => {
     // 互斥判断读 store，避免重新挂载的新实例绕过本地 ref 再发起一次并发请求
@@ -170,15 +164,6 @@ export function PostFeature() {
         });
         return true;
       }
-      const parsed = splitPostContent(result.translation);
-      setHashtags(
-        Array.from(
-          new Set([
-            ...parsed.hashtags,
-            ...suggestSpecificHashtags(sourceText, parsed.body),
-          ])
-        ).slice(0, 8)
-      );
       toast.success('翻译完成');
       return true;
     } catch (error) {
@@ -195,7 +180,6 @@ export function PostFeature() {
     preserveCurrentEdit,
     requestVersionSwitch,
     selectedModel,
-    setHashtags,
     sourceRevision,
     translateMutation,
   ]);
@@ -289,15 +273,6 @@ export function PostFeature() {
         });
         return true;
       }
-      const parsed = splitPostContent(result.optimized_translation);
-      setHashtags(
-        Array.from(
-          new Set([
-            ...parsed.hashtags,
-            ...suggestSpecificHashtags(baseSourceText, parsed.body),
-          ])
-        ).slice(0, 8)
-      );
       toast.success('优化完成');
       return true;
     } catch (error) {
@@ -316,7 +291,6 @@ export function PostFeature() {
     preserveCurrentEdit,
     requestVersionSwitch,
     selectedModel,
-    setHashtags,
     versions,
   ]);
 
@@ -380,68 +354,12 @@ export function PostFeature() {
     titleContentIdentity,
   ]);
 
-  const handleRegenerateHashtags = useCallback(async (): Promise<boolean> => {
-    const source = originalText.trim() || currentContent;
-    const translation = splitPostContent(currentContent).body.trim();
-    const sourceAtStart = originalText;
-    const revisionAtStart = sourceRevision;
-    const versionAtStart = currentVersionId;
-    if (!translation) {
-      toast.warning('请先完成翻译，再生成标签');
-      return false;
-    }
-    if (translation.length > POST_CONTENT_MAX_LENGTH) {
-      toast.error(`译文超过 ${POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符，请精简后再生成标签`);
-      return false;
-    }
-    const request = beginAction('hashtags');
-    if (!request) return false;
-
-    try {
-      const result = await generateHashtagsMutation.mutateAsync({
-        content: source,
-        translation,
-        model: selectedModel,
-        signal: request.controller.signal,
-      });
-      if (request.generation !== requestGeneration) return false;
-      const latest = usePostStore.getState();
-      const latestContent = latest.isEdited
-        ? latest.editedContent
-        : latest.versions.find(v => v.id === latest.currentVersionId)?.content || '';
-      if (
-        latest.sourceRevision !== revisionAtStart ||
-        latest.originalText !== sourceAtStart ||
-        latest.currentVersionId !== versionAtStart ||
-        splitPostContent(latestContent).body.trim() !== translation
-      ) {
-        toast.info('内容已更新，本次旧标签结果已忽略');
-        return false;
-      }
-      setHashtags(result.tags);
-      toast.success('标签生成完成');
-      return true;
-    } catch (error) {
-      console.error('生成标签失败:', error);
-      return false;
-    } finally {
-      finishAction(request.controller);
-    }
-  }, [
-    beginAction,
-    currentContent,
-    currentVersionId,
-    finishAction,
-    generateHashtagsMutation,
-    originalText,
-    selectedModel,
-    setHashtags,
-    sourceRevision,
-  ]);
-
   const handleClear = () => {
     clear();
     setCustomInstruction('');
+    // TitleGenerator 的「标题要求」输入框是组件内部 state，store 的 clear()
+    // 够不着它。换 key 强制重挂载，把它一并清干净。
+    setClearToken(token => token + 1);
   };
 
   const handleSaveEdit = () => {
@@ -525,8 +443,33 @@ export function PostFeature() {
     <div className="min-h-full overflow-auto">
       <div className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-6">
         <div className="mb-5 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h2 className="text-xl font-semibold">帖子翻译</h2>
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <h2 className="text-xl font-semibold">帖子翻译</h2>
+              {/* 进行中的状态跟在标题后面，不再占一整条通栏横幅。
+                  各个按钮本身已有加载态，这里只补它们给不了的两件事：已用时和取消。 */}
+              {pendingAction && (
+                <span
+                  role="status"
+                  aria-live="polite"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-muted/60 py-0.5 pl-2.5 pr-1 text-xs text-muted-foreground"
+                >
+                  <Loader2 className="h-3 w-3 shrink-0 animate-spin text-primary" />
+                  <span className="tabular-nums">
+                    {ACTION_LABELS[pendingAction]} · {elapsedSeconds}s
+                  </span>
+                  <button
+                    type="button"
+                    onClick={cancelActiveAction}
+                    className="rounded-full p-0.5 text-muted-foreground transition-colors hover:bg-background hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                    aria-label={`取消${ACTION_LABELS[pendingAction]}`}
+                    title="取消"
+                  >
+                    <X className="h-3 w-3" />
+                  </button>
+                </span>
+              )}
+            </div>
             <p className="text-sm text-muted-foreground">翻译、优化并生成标题</p>
           </div>
           <div className="w-full sm:w-64">
@@ -539,30 +482,6 @@ export function PostFeature() {
             />
           </div>
         </div>
-
-        {pendingAction && (
-          <div
-            className="mb-5 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/60 bg-white/85 px-4 py-3 text-sm shadow-sm backdrop-blur-sm"
-            role="status"
-            aria-live="polite"
-          >
-            <div className="flex min-w-0 items-center gap-2">
-              <Loader2 className="h-4 w-4 shrink-0 animate-spin text-primary" />
-              <span className="min-w-0">
-                {ACTION_LABELS[pendingAction]}，已用时 {elapsedSeconds} 秒（最长约 3 分钟）
-              </span>
-            </div>
-            <Button
-              type="button"
-              variant="outline"
-              size="sm"
-              className="h-9"
-              onClick={cancelActiveAction}
-            >
-              <X className="h-4 w-4" /> 取消
-            </Button>
-          </div>
-        )}
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           <SourceInput
@@ -600,6 +519,7 @@ export function PostFeature() {
             />
 
             <TitleGenerator
+              key={clearToken}
               onGenerate={handleGenerateTitle}
               isLoading={isLoading}
               isGenerating={pendingAction === 'title'}
@@ -609,18 +529,6 @@ export function PostFeature() {
               titlesContentIdentity={savedTitleContentIdentity}
               selectedTitle={selectedTitle}
               onSelectTitle={setSelectedTitle}
-            />
-
-            <PublishingComposer
-              title={publishingTitle}
-              body={publishingBody}
-              hashtags={hashtags}
-              onAddHashtag={addHashtag}
-              onUpdateHashtag={updateHashtag}
-              onRemoveHashtag={removeHashtag}
-              onMoveHashtag={moveHashtag}
-              onRegenerateHashtags={handleRegenerateHashtags}
-              isRegenerating={pendingAction === 'hashtags'}
             />
           </div>
         </div>
