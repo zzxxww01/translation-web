@@ -27,6 +27,7 @@ from ..core.models import (
     TranslationChallenge, TranslationStrategy,
     SectionUnderstanding
 )
+from ..core.constants import MAX_DEEP_ANALYSIS_LENGTH
 from ..llm.base import LLMProvider
 from .smart_sampler import SmartSampler, create_smart_sampler
 
@@ -42,7 +43,18 @@ def _submit_with_current_context(executor, func, /, *args, **kwargs):
 class DeepAnalyzer:
     """全文深度分析器"""
 
-    ANALYSIS_SAMPLE_STEPS = (2000, 1500, 1000, 800)
+    # 采样预算的**递减重试**比例。此前这里是四个绝对值 (2000, 1500, 1000, 800)，
+    # 与文章长度完全解耦：ClusterMAX（295k 字符）只有 0.68% 的正文参与主题/术语/
+    # 风格判断，而这些判断会注入到每一章的翻译提示词里。现在改为按实际预算取比例，
+    # 预算本身由 _resolve_sample_budget 按文章长度算出。
+    ANALYSIS_SAMPLE_RATIOS = (1.0, 0.75, 0.5, 0.4)
+    # 采样占正文的比例，与 MIN/MAX 一起把预算夹在合理区间：
+    # 短文（<25k 字符）拿到 MIN=2000（原行为不变），长文按比例放大到 MAX=15000。
+    SAMPLE_RATIO_OF_ARTICLE = 0.08
+    MIN_SAMPLE_CHARS = 2000
+    # 递减重试的绝对下限，只用于防止预算被比例乘到过小；与 MIN_SAMPLE_CHARS 不同，
+    # 它必须显著低于后者，否则四档递减会塌成同一个值。
+    RETRY_FLOOR_CHARS = 800
     # 方案6合并调用需要更长的超时时间（深度分析+术语验证）
     ANALYSIS_TIMEOUT_STEPS = (300, 420, 600)
     SECTION_ROLE_TIMEOUT = 180
@@ -52,18 +64,48 @@ class DeepAnalyzer:
     def __init__(
         self,
         llm_provider: LLMProvider,
-        max_sample_chars: int = 2000
+        max_sample_chars: Optional[int] = None
     ):
         """
         初始化深度分析器
 
         Args:
             llm_provider: LLM Provider
-            max_sample_chars: 最大采样字符数
+            max_sample_chars: 采样字符数上限。``None``（默认）表示按文章长度自适应，
+                见 :meth:`_resolve_sample_budget`；显式传值则固定为该值（测试与
+                特殊调用方使用）。
         """
         self.llm = llm_provider
         self.max_sample_chars = max_sample_chars
-        self.smart_sampler = create_smart_sampler(max_total_chars=max_sample_chars)
+        self.smart_sampler = create_smart_sampler(
+            max_total_chars=max_sample_chars or self.MIN_SAMPLE_CHARS
+        )
+
+    def _resolve_sample_budget(self, sections: List[Section]) -> int:
+        """按文章实际长度决定分析采样预算。
+
+        深度分析产出的主题/论点/风格/术语会注入**每一章**的翻译提示词，采样覆盖率
+        直接决定这些判断的可靠性。此前预算是写死的 2000 字符，与文章长度完全解耦：
+        实测 16 篇语料覆盖率 0.68%–7.92%，最长的 ClusterMAX（295k 字符）只有
+        0.68% 的正文参与过判断，且没有任何告警。
+
+        现在按比例取样并夹在 [MIN, MAX] 之间。上限沿用 ``constants`` 里早就定义、
+        却一直无人引用的 ``MAX_DEEP_ANALYSIS_LENGTH``——原设计本就是 15000，
+        只是实现时退化成了 2000。
+        """
+        if self.max_sample_chars:
+            return self.max_sample_chars
+
+        total_chars = sum(
+            len(paragraph.source or "")
+            for section in sections
+            for paragraph in section.paragraphs
+        )
+        if total_chars <= 0:
+            return self.MIN_SAMPLE_CHARS
+
+        budget = int(total_chars * self.SAMPLE_RATIO_OF_ARTICLE)
+        return max(self.MIN_SAMPLE_CHARS, min(budget, MAX_DEEP_ANALYSIS_LENGTH))
 
     def extract_high_frequency_terms(
         self,
@@ -166,9 +208,12 @@ class DeepAnalyzer:
         last_error: Exception | None = None
         # 跨重试复用已成功的术语验证结果（None=尚未取得，[]=已尝试但无结果）
         cached_verified_terms: "list | None" = None
-        sample_steps = [self.max_sample_chars, *self.ANALYSIS_SAMPLE_STEPS]
+        budget = self._resolve_sample_budget(sections)
         deduped_steps = []
-        for sample_chars in sample_steps:
+        for ratio in self.ANALYSIS_SAMPLE_RATIOS:
+            # 这里**不能**用 MIN_SAMPLE_CHARS 兜底：递减重试的目的正是缩小输入以
+            # 规避超时/截断，套上下限会让四档全部塌回同一个值、重试形同空转。
+            sample_chars = max(self.RETRY_FLOOR_CHARS, int(budget * ratio))
             if sample_chars not in deduped_steps:
                 deduped_steps.append(sample_chars)
 
@@ -337,7 +382,8 @@ class DeepAnalyzer:
         Returns:
             str: 采样后的全文文本
         """
-        # 使用智能采样器
+        # 使用智能采样器。预算自适应后 max_length 每篇都不同，缓存的 sampler
+        # 只在显式固定了 max_sample_chars 且恰好相等时才复用。
         sampler = self.smart_sampler
         if max_length != self.max_sample_chars:
             sampler = create_smart_sampler(max_total_chars=max_length)

@@ -75,7 +75,7 @@
 - 有通行中文译名的公司/机构/人名，全文首次出现写"中文（English）"，之后只用中文：Nvidia→英伟达、Jensen Huang→黄仁勋、Lisa Su→苏姿丰、TSMC→台积电、Samsung→三星、Micron→美光、SK Hynix→SK 海力士、Microsoft→微软、Google→谷歌、Amazon→亚马逊、Apple→苹果、Oracle→甲骨文、Broadcom→博通、ASML→阿斯麦。
 - 同一名称全篇必须一致，禁止中英混用；无通行译名者（SpaceX、OpenAI、Anthropic、CoreWeave、xAI、作者 handle）保留英文。
 - 拿不准的缩写一律保留英文原样，严禁凭猜测展开全称。含形近于已知公司的缩写也必须原样保留，**禁就近映射**：SMSC≠SMIC（≠中芯国际）。
-- 中文实体名必须可查证，查证不了保留英文原名，**禁止臆造用字**：Jidian=集电（≠积电≠机电）；Changxin Jidian=长鑫集电（北京）、Qinghui Jidian=清辉集电（合肥，禁"清辉机电"）；Tsinghua Unigroup=紫光集团（禁"清华紫光"）。
+- 中文实体名必须可查证：只写你确知该公司**官方在用**的中文名，查证不了的一律保留英文原名。**禁止按读音或字形臆造用字**——同音不同字、形近字、把英文名逐字对译，都是臆造。拿不准就保留英文，这不算失误；写错公司名才是。术语表已登记的中文名以术语表为准。
 
 ## 语气强度双向对齐（硬规则）
 - 不加码：outperform=优于（≠碾压）、competitive=有竞争（≠白热化）、a real chance=不无可能（≠很大可能）、procure=采购（≠抢购）。原文没有 set to/must/inevitably 时禁用"势必/必将/注定"；标题不得添加原文没有的升格词。

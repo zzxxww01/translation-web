@@ -25,32 +25,82 @@ _CJK_CHAR_RE = re.compile(r"[一-鿿]")
 
 
 @lru_cache(maxsize=4096)
-def _term_word_pattern(normalized_term: str) -> "re.Pattern | None":
-    """按规范化术语缓存已编译的词边界正则；CJK 等术语返回 None（改用 str.count）。
+def _term_word_pattern(term: str) -> "re.Pattern | None":
+    """按术语**原形**缓存已编译的词边界正则；CJK 等术语返回 None（改用 str.count）。
 
-    逐段翻译会对全量术语反复调用本函数，缓存 fullmatch 判断 + re.escape + 编译，
-    把每段 O(术语) 的重复编译开销降为一次。
+    逐段翻译会对全量术语反复调用本函数，缓存判断 + re.escape + 编译，把每段
+    O(术语) 的重复编译开销降为一次。
+
+    三条匹配语义（都是通用规则，不针对具体词条）：
+
+    1. **全大写术语大小写敏感**。全大写写法本身就说明它是缩写/专名，而英文正文里
+       缩写一定写成大写；反过来，大小写不敏感会让 ``BEST``（某公司）命中每一篇
+       文章里的 ``the best``、``best-in-class``。实测 16 篇语料 BEST 命中 16/16 篇。
+    2. **认词形变化**（复数 -s / -es）。此前 ``s`` 属于 ``[a-z0-9]`` 而被后瞻挡掉，
+       于是 hyperscalers / chiplets / wafers / foundries 这类复数写法一条都不命中——
+       而以复数作主语正是英文标题与段落的常见句式。兄弟实现
+       ``translation_qa`` 与 ``term_matcher`` 早已支持，唯独注入路径漏了。
+    3. **短术语允许紧跟数字**。``200MW`` ``1400W`` ``8GPUs`` 里单位/缩写紧贴数字，
+       原先的 ``(?<![a-z0-9])`` 前瞻把它们全部挡掉；实测语料中 ``W`` 紧贴数字 31 次、
+       空格分隔 0 次，即单位类词条在真实文本上基本不触发。
     """
-    if re.fullmatch(r"[a-z0-9 .,+\-/]+", normalized_term):
-        return re.compile(rf"(?<![a-z0-9]){re.escape(normalized_term)}(?![a-z0-9])")
-    return None
+    stripped = term.strip()
+    if not stripped or not re.fullmatch(r"[A-Za-z0-9 .,+\-/]+", stripped):
+        return None
+
+    has_alpha = any(char.isalpha() for char in stripped)
+    flags = 0 if (has_alpha and stripped.isupper()) else re.IGNORECASE
+
+    # 单位与短缩写常紧贴数字书写（200MW / 8GPUs）；长术语放宽反而易误伤，故只对
+    # ≤4 字符的纯字母术语放开数字前瞻。
+    digit_adjacent = len(stripped) <= 4 and stripped.isalpha()
+    lookbehind = r"(?<![A-Za-z])" if digit_adjacent else r"(?<![A-Za-z0-9])"
+
+    # 词尾是字母时才追加复数后缀，避免给 "3D" "5.0" 这类加上无意义的 s。
+    plural = r"(?:e?s)?" if stripped[-1].isalpha() else ""
+
+    return re.compile(
+        rf"{lookbehind}{re.escape(stripped)}{plural}(?![A-Za-z0-9])",
+        flags,
+    )
 
 
 def _count_term_occurrences(text: str, term: str) -> int:
-    normalized_text = text.lower()
-    normalized_term = term.lower().strip()
+    """统计 ``term`` 在 ``text`` 中的命中次数（保留大小写，交给模式自行决定敏感性）。"""
+    normalized_term = term.strip()
     if not normalized_term:
         return 0
 
     pattern = _term_word_pattern(normalized_term)
     if pattern is not None:
-        return len(pattern.findall(normalized_text))
+        return len(pattern.findall(text))
 
-    return normalized_text.count(normalized_term)
+    return text.lower().count(normalized_term.lower())
 
 
 def _normalize_whitespace(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
+
+
+# 命中统计只应看**正文**。URL、图片地址、行内代码与代码块里的字母串不是术语用例，
+# 却会顶掉真正的术语名额：实测 16 篇语料里 `W` 命中 606 次，其中 589 次来自
+# markdown 图片地址的尺寸参数（`?w_1456,c_limit`），于是 `W` 在 16/16 篇都挤进
+# 注入名额，去讲一条与正文无关的单位规则。
+_NON_PROSE_SPANS = re.compile(
+    r"```[\s\S]*?```"          # 围栏代码块
+    r"|`[^`\n]+`"              # 行内代码
+    r"|!\[[^\]]*\]\([^)]*\)"   # 图片（含地址）
+    r"|\]\([^)]*\)"            # 链接地址（锚文本保留，它属于正文）
+    r"|<[^>\s]+>"              # 裸尖括号 URL / HTML 标签
+    r"|(?:https?://|www\.)\S+"  # 裸 URL
+)
+
+
+def _prose_only(text: str) -> str:
+    """掩掉非正文区，长度保持不变（用等长空格替换），偏移语义不受影响。"""
+    if not text:
+        return ""
+    return _NON_PROSE_SPANS.sub(lambda m: " " * len(m.group(0)), text)
 
 
 def _truncate_note(note: str, max_chars: int) -> str:
@@ -83,7 +133,11 @@ def select_prompt_terms_for_text(
     if not terms or max_terms <= 0:
         return []
 
-    normalized_source = _normalize_whitespace(source_text)
+    # 「调用方没给原文」才走兜底（返回前 N 条）；「给了原文但掩掉非正文后为空」
+    # 说明这段本来就没有可翻译的正文（例如整段只有一张图片），此时一条都不该注入
+    # ——否则会把任意 30 条术语塞进一个图片段的 prompt 里。
+    has_source = bool(_normalize_whitespace(source_text))
+    normalized_source = _normalize_whitespace(_prose_only(source_text or ""))
     candidates: List[tuple[int, int, int, Any]] = []
     fallback: List[Any] = []
 
@@ -92,10 +146,13 @@ def select_prompt_terms_for_text(
         if not payload:
             continue
 
-        if not normalized_source:
+        if not has_source:
             fallback.append(term)
             if len(fallback) >= max_terms:
                 break
+            continue
+
+        if not normalized_source:
             continue
 
         occurrences = _count_term_occurrences(normalized_source, payload["original"])
@@ -104,7 +161,7 @@ def select_prompt_terms_for_text(
 
         candidates.append((occurrences, len(payload["original"]), index, term))
 
-    if not normalized_source:
+    if not has_source:
         return fallback
 
     candidates.sort(key=lambda item: (-item[0], -item[1], item[2]))

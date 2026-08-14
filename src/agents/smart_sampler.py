@@ -96,33 +96,34 @@ class SmartSampler:
                 coverage_stats[section.section_id] = 0
                 continue
 
-            # 1. 采样首段
-            first_sample = self._sample_paragraph(
-                section, 0, "first"
-            )
-            if first_sample:
-                section_samples.append(first_sample)
-                section_chars += len(first_sample.text)
-
-            # 2. 采样中段
+            # 首段/中段/末段按**槽位**均分本章配额，装不下就截断而不是整段丢弃。
+            #
+            # 此前首段无条件全文纳入且不受配额约束，中段/末段再做「放得下才要」的
+            # 全有或全无判断。长文里每章配额只有几十到几百字符，而首段动辄数百字符，
+            # 于是首段一进来余量就是负数，四路采样永远退化成只取首段——实测 16 篇
+            # 语料中 9 篇如此，最长的一篇 25 章全是 first。本章的展开与收束因此
+            # 从不进入分析视野，而那正是论证与数据最密集的位置。
+            slots = [(0, "first")]
             if len(paragraphs) >= 3:
-                mid_index = len(paragraphs) // 2
-                mid_sample = self._sample_paragraph(
-                    section, mid_index, "middle"
-                )
-                if mid_sample and section_chars + len(mid_sample.text) <= base_quota_per_section:
-                    section_samples.append(mid_sample)
-                    section_chars += len(mid_sample.text)
-
-            # 3. 采样末段
+                slots.append((len(paragraphs) // 2, "middle"))
             if len(paragraphs) >= 2:
-                last_index = len(paragraphs) - 1
-                last_sample = self._sample_paragraph(
-                    section, last_index, "last"
+                slots.append((len(paragraphs) - 1, "last"))
+
+            slot_quota = max(
+                self.MIN_USEFUL_SNIPPET_CHARS,
+                base_quota_per_section // len(slots),
+            )
+            for index, reason in slots:
+                sample = self._sample_paragraph(section, index, reason)
+                # 允许结转前面槽位没用完的额度，短首段不会白白浪费配额
+                allowance = max(
+                    slot_quota,
+                    base_quota_per_section - section_chars,
                 )
-                if last_sample and section_chars + len(last_sample.text) <= base_quota_per_section:
-                    section_samples.append(last_sample)
-                    section_chars += len(last_sample.text)
+                taken = self._fit_into_quota(sample, allowance)
+                if taken:
+                    section_samples.append(taken)
+                    section_chars += len(taken.text)
 
             # 4. 检测并采样术语密集段落
             if include_term_dense:
@@ -213,6 +214,33 @@ class SmartSampler:
             paragraph_index=index,
             text=text,
             sample_reason=reason
+        )
+
+    # 截断后的片段短于这个长度就没有分析价值，宁可不取。
+    MIN_USEFUL_SNIPPET_CHARS = 80
+
+    def _fit_into_quota(
+        self,
+        sample: Optional[SampledParagraph],
+        remaining_quota: int
+    ) -> Optional[SampledParagraph]:
+        """把采样片段裁到剩余配额内；装不下有意义的片段时返回 None。"""
+        if sample is None or remaining_quota <= 0:
+            return None
+        if len(sample.text) <= remaining_quota:
+            return sample
+        if remaining_quota < self.MIN_USEFUL_SNIPPET_CHARS:
+            return None
+
+        truncated = sample.text[:remaining_quota].rstrip()
+        if not truncated:
+            return None
+        return SampledParagraph(
+            section_id=sample.section_id,
+            section_title=sample.section_title,
+            paragraph_index=sample.paragraph_index,
+            text=truncated + "…",
+            sample_reason=sample.sample_reason,
         )
 
     def _find_term_dense_paragraphs(
