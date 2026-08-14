@@ -28,7 +28,7 @@ Analyze the article and return structured context for downstream translation, cr
    - Profiling/debugging tools (NCU = Nsight Compute, NSight Systems) — include full product name
    All such terms should have `first_occurrence_note: true`.
 9. Identify metaphors, analogies, and cultural references that may be opaque to Chinese readers. For each, note the reference, its cultural context, and whether a translator note is needed or a Chinese cultural equivalent can substitute.
-10. Identify the article's domain mix (e.g., GPU + finance + cloud computing). For cross-domain articles, list terminology that has different translations in different domains, and specify which domain convention to follow in this article's context. Common cross-domain pitfalls: utilization rate (cloud) vs 出租率 (real estate); capacity vs 算力; financial modeling (investment) vs 财务建模 (corporate); token (AI) vs 代币 (blockchain).
+10. Identify the article's domain mix (e.g., GPU + finance + cloud computing). For cross-domain articles, list terminology that has different translations in different domains, and specify which domain convention to follow in this article's context. Common cross-domain pitfalls: utilization rate (cloud) vs 出租率 (real estate); capacity — 产能 (fab/packaging) vs 容量 (power, datacenter, memory device, network link) vs 算力 (only when it means compute); financial modeling (investment) vs 财务建模 (corporate); token (AI) vs 代币 (blockchain).
 11. Identify passages with strong rhetorical tone (sarcasm, emphasis, dramatic effect, irony) and note the intended emotional register so translators can match intensity rather than flatten it to academic prose.
 
 ## Output Contract

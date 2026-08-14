@@ -34,7 +34,12 @@
   - 数字与单位：货币按完整换算表处理：$1M=100 万｜$10M=1000 万｜$100M=1 亿｜$1B=10 亿｜$1.5B=15 亿｜$1T=1 万亿（单位为美元时加“美元”，其他货币同理）；百分比（131% growth→增长 131%）、量级（K/M/B/bn）按中文习惯换算并核对，不改变数值本身；区间用波浪号或“至”，不要颠倒上下界。
   - 换算口径（可执行算式，逐位复算）：**X billion = X×10 亿（乘 10，不是乘 100）**，小数位逐位保留、禁取整或移位。正例：7.14B=71.4 亿、14.8 billion=148 亿、36.65B=366.5 亿、8.6B=86 亿；反例（均实测翻车）：7.14B≠714 亿、14.8B≠1480 亿、36.65B≠365 亿。原文已是万/亿量级时换算后必须等值，**严禁再乘 10**。
   - 松散量词专项：tens of billions=数百亿、hundreds of billions=数千亿、a few/single-digit billions=几十亿、mid-single-digit billions=四五十亿；**禁把 tens of billions 读成“数十亿”（差一个数量级）**。
-  - 模糊区间/程度词固定译法：low/mid/high-teens=百分之十几的低/中/高段（约 13–19%），禁“十位数/十几位”（十位数=10–99）；high-90% range=约 95–99%（90% 台后段），禁“90% 以上/90% 多”（含 90 本身即错）；low-90s=约 90–93%；high-single-digit=高个位数。
+  - 模糊区间/程度词：**先判断它修饰的是什么量纲，再选中文形态**——teens／90s 这类词本身只表示数值区间（13–19、90–99），不自带单位。
+    · 修饰**百分比**时用百分比：low/mid/high-teens=百分之十几的低/中/高段（约 13–19%）；high-90% range=约 95–99%（90% 台后段，禁“90% 以上／90% 多”，含 90 本身即错）；low-90s=约 90–93%。
+    · 修饰**计数**（公司数、厂数、机柜数…）时用中文计数：the number of players contracted to the mid-teens=收缩到十四五家；the low-teens of OSATs=十来家。
+    · 修饰**金额**时保留量级：capex in the mid-teens billions=约 140–160 亿美元。
+    · 指**年代**时译年代：back in the low-90s=九十年代初。
+    high-single-digit=高个位数（同样按量纲落到「亿美元／家／个百分点」）。
   - 功率/能量单位（GW/TW/MW/kW/GWh/MWh/W 及 W/cm² 等复合单位）属白名单铁律，永久保留半角原形、整体不拆译，禁译“吉瓦/兆瓦/千瓦/瓦”；拼写形 gigawatts/kilowatts 改写成符号 GW/kW，同样禁译“吉瓦/千瓦”。
 - 允许重组语序和拆句，保持信息与逻辑不变；短句保持密度不过度拆分。
 - 少用抽象名词壳（`存在……`、`进行……`），多用判断句和动作句。
@@ -171,7 +176,8 @@
 
 ## 跨域术语精度
 - 术语必须匹配文章所在领域的中文惯例，不可跨域套用：
-  - 云计算：utilization rate→"利用率"（非"出租率"）；capacity→"产能"（非"算力"，除非确实指 compute）
+  - 云计算：utilization rate→"利用率"（非"出租率"）
+  - **capacity 是多义词，逐处判义**：制造/晶圆/封装语境=产能（fab capacity→晶圆厂产能、CoWoS capacity→CoWoS 产能）；电力/数据中心语境=容量（capacity auction→容量拍卖、contracted capacity→签约容量、generation capacity→发电容量）；存储器件语境=容量（HBM capacity per stack→每堆栈 HBM 容量）；网络语境=容量（link capacity→链路容量）；确实指 compute 时才是算力。同一篇里两种义项常并存（如"HBM 产能扩张"与"单颗 HBM 容量"），禁全篇一刀切。
   - 金融：financial modeling→投资分析语境译"金融建模"（非"财务建模"）；tighten→"收紧"（非"加剧紧缺态势"）；capex cadence→"资本开支节奏"
   - AI：英文 token/tokens 一律保留为"token"且统一小写（专名 Tokenomics 除外），绝不能译为或注释为"词元"（本流水线语境一律不适用区块链义，token 恒不译作代币/词元/令牌）
 - 多义词消歧（yield，先判语境再译，绝不单义硬套"良率"）：制造/晶圆语境=良率（wafer yield→晶圆良率）；金融/收益/租金语境=收益率（bond yield→债券收益率、total yield→总收益率、rental yield→租金收益率）。✅"5.9% total yield"→总收益率约 5.9%；❌"5.9% 的总良率"。同一篇里两种义项都出现时，逐处判义，禁全篇一刀切。
