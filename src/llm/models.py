@@ -20,7 +20,7 @@ MODEL_REGISTRY: Dict[str, Dict[str, Any]] = {
     },
     "pro-official": {
         "provider": "gemini",
-        "real_model": "gemini-2.5-pro",
+        "real_model": "gemini-3.1-pro-preview",
         "description": "Gemini Pro 官方 API - 平衡质量与成本",
         "supports_thinking": True,
     },
@@ -88,7 +88,7 @@ def resolve_model_alias(alias: Optional[str]) -> Tuple[str, str, Dict[str, Any]]
         ("vectorengine", "deepseek-v3.2", {...})
 
         >>> resolve_model_alias("pro-official")
-        ("gemini", "gemini-2.5-pro", {...})
+        ("gemini", "gemini-3.1-pro-preview", {...})
 
         >>> resolve_model_alias("flash")  # legacy alias
         ("gemini", "gemini-3.6-flash", {...})

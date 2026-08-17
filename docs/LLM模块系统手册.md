@@ -117,7 +117,7 @@ providers:
         available: true
       
       - alias: "gemini-pro"
-        real_model: "gemini-2.5-pro"
+        real_model: "gemini-3.1-pro-preview"
         name: "Gemini 2.5 Pro"
         description: "Balanced performance"
         supports_thinking: true

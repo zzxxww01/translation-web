@@ -166,12 +166,27 @@ class ConfigLoader:
         except Exception:
             return None
 
-        for provider in self._config.providers.values():
-            for model in provider.models:
-                if provider.type == legacy_provider and model.real_model == legacy_real_model:
-                    return model.alias
+        candidates = [
+            model.alias
+            for provider in self._config.providers.values()
+            for model in provider.models
+            if provider.type == legacy_provider and model.real_model == legacy_real_model
+        ]
+        if not candidates:
+            return None
+        if len(candidates) == 1:
+            return candidates[0]
 
-        return None
+        # 多个 canonical alias 共用同一个 real_model 时（例如把 gemini-pro 和
+        # gemini-preview 都指向同一个模型），按 real_model 反查会退化成"取第一个"，
+        # preview-official 于是解析成 gemini-pro。用请求别名的词干消歧。
+        stem = normalized.rsplit("-official", 1)[0].strip().lower()
+        for candidate in candidates:
+            lowered = candidate.lower()
+            if lowered == stem or lowered.endswith(f"-{stem}"):
+                return candidate
+
+        return candidates[0]
 
     def get_model_config(self, alias: str) -> Optional[ModelConfig]:
         """根据别名获取模型配置"""

@@ -47,7 +47,7 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     gemini_backup_api_key: str = ""  # legacy compatibility
     gemini_flash_model: str = "gemini-3.6-flash"
-    gemini_pro_model: str = "gemini-3-pro-preview"
+    gemini_pro_model: str = "gemini-3.1-pro-preview"
     gemini_preview_model: str = "gemini-3.1-pro-preview"
     gemini_model: str = "pro"  # selector/alias: flash/pro/preview or concrete model id
     gemini_backup_model: str = "flash"  # selector/alias or concrete model id

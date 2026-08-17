@@ -34,7 +34,7 @@ providers:
           max_tokens: 8192
           timeout: 60
       - alias: "gemini-pro"
-        real_model: "gemini-2.5-pro"
+        real_model: "gemini-3.1-pro-preview"
         name: "Gemini Pro"
         description: "平衡质量与成本"
         priority: 2

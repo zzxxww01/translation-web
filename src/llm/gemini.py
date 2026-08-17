@@ -160,7 +160,7 @@ MODEL_CONFIG = {
     },
     "pro": {
         "env_var": "GEMINI_PRO_MODEL",
-        "default": "gemini-3-pro-preview",
+        "default": "gemini-3.1-pro-preview",
         "description": "Balanced quality and cost",
         "max_output_tokens": 65536,
         "supports_thinking": True,
