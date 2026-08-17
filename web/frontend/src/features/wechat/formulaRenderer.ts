@@ -1,5 +1,5 @@
 /**
- * 把后端标记出来的公式节点渲染成独立 SVG。
+ * 把后端标记出来的公式节点渲染成公众号能承载的内嵌 SVG。
  *
  * 为什么是 SVG：公众号正文没有 MathJax/KaTeX 运行环境，也不执行 JS，公式只能在
  * 发布前变成图形。而公众号正文**支持以 DOM 形式内嵌 SVG**（"SVG 互动排版"就是
@@ -8,64 +8,58 @@
  * 为什么是 MathJax 而不是 KaTeX：KaTeX 至今没有 SVG 输出（KaTeX#375），它产出的是
  * HTML+CSS，而外部样式表进了公众号会被剥掉，公式会散架。
  *
- * 关键实现点，都是为了扛住公众号粘贴时的 HTML 过滤：
+ * ## 为什么用 es5 bundle 而不是 js/ 下的模块
  *
- * 1. `fontCache: 'none'`。SVG 输出默认把字形收进 `<defs>`、正文用 `<use xlink:href>`
- *    引用（'global' 是跨公式共享一份，'local' 是每条公式一份）。但公众号会剥掉
- *    `xlink:href`——它是能引用外部资源的属性，在过滤器的黑名单里——引用一断，
- *    公式就整条变成空白。'none' 让每个字形直接内联成 `<path>`，零引用、零 id，
- *    过滤器再怎么删属性都拿它没办法。代价是块级公式体积涨约 25%，
- *    但行内公式反而更小（省掉了 defs + use 的双份开销）。
- * 2. 去掉 MathJax 的 `<mjx-container>` 外壳，只留 `<svg>`。自定义标签不在公众号
- *    白名单里，会被当成未知元素处理成块级，行内公式于是条条断行、正文被切碎。
- * 3. 尺寸从 `ex` 换算成 `px`。公众号里正文字体不受我们控制，`ex` 取决于字体的
+ * `mathjax-full/js/**` 是 CommonJS，内部（components/version.js）有 vite 无法静态
+ * 转换的动态 require。它在 Node 下正常，所以单测全绿；但在浏览器里必定抛
+ * `ReferenceError: require is not defined`，而 getEngine 的 catch 会把它静默吞掉，
+ * 于是公式**整篇降级成 LaTeX 原文**——线上一直是这个状态，测试却一片绿。
+ * `es5/tex-svg-full.js` 是官方给浏览器用的预打包 bundle，自包含、无 require。
+ *
+ * ## 公众号对 SVG 的限制（决定了 sanitizeSvg 做哪些事）
+ *
+ * 1. **`<path>` 上不允许有 id**，因此不能用 `<use xlink:href>` 引用字形——
+ *    `fontCache: 'none'` 让字形直接内联成 path，没有 id 也没有引用。
+ * 2. **`data-*` 不在属性白名单里**。最危险的是 `data-mml-node="TeXAtom"`：
+ *    公众号会把这个组元素**以及它之外的所有组一起删掉**，公式直接变白纸。
+ *    统一删掉所有 `data-*` 即可——`<g>` 元素本身和它的 transform 都保留，
+ *    结构完整。
+ * 3. **`<mjx-container>` 是自定义标签**，不在白名单，会被当未知元素处理成块级，
+ *    行内公式于是条条断行、正文被切碎。只保留 `<svg>`。
+ * 4. **尺寸 `ex` 换算成 px**：公众号里正文字体不受我们控制，ex 取决于字体的
  *    x-height，换个字体公式大小就飘了。
  */
 
-/** convert() 传入的 ex 值：SVG 里的 ex 尺寸都以它为基准，换算成 px 时要一致。 */
+/** 传给 tex2svg 的度量基准：SVG 里的 ex 尺寸都以它为准，换算 px 时要一致。 */
 const EX_IN_PX = 8;
 const EM_IN_PX = 16;
 
-type MathDocument = {
-  convert: (latex: string, options: Record<string, unknown>) => unknown;
+type MathJaxGlobal = {
+  startup: { promise: Promise<unknown> };
+  tex2svg: (latex: string, options: Record<string, unknown>) => HTMLElement;
 };
 
-type Adaptor = {
-  outerHTML: (node: unknown) => string;
-};
+let enginePromise: Promise<MathJaxGlobal> | null = null;
 
-let enginePromise: Promise<{ doc: MathDocument; adaptor: Adaptor }> | null = null;
-
-/** MathJax 体积较大，只在真正遇到公式时才拉起来，且全应用只初始化一次。 */
-async function getEngine() {
+/** MathJax 体积较大（约 2.2MB），只在真正遇到公式时才拉起来，且全应用只初始化一次。 */
+async function getEngine(): Promise<MathJaxGlobal> {
   if (!enginePromise) {
     enginePromise = (async () => {
-      const [
-        { mathjax },
-        { TeX },
-        { SVG },
-        { liteAdaptor },
-        { RegisterHTMLHandler },
-        { AllPackages },
-      ] = await Promise.all([
-        import('mathjax-full/js/mathjax.js'),
-        import('mathjax-full/js/input/tex.js'),
-        import('mathjax-full/js/output/svg.js'),
-        import('mathjax-full/js/adaptors/liteAdaptor.js'),
-        import('mathjax-full/js/handlers/html.js'),
-        import('mathjax-full/js/input/tex/AllPackages.js'),
-      ]);
-
-      const adaptor = liteAdaptor();
-      RegisterHTMLHandler(adaptor);
-
-      const doc = mathjax.document('', {
-        InputJax: new TeX({ packages: AllPackages }),
-        // fontCache: 'none' 是硬要求，理由见文件头第 1 点
-        OutputJax: new SVG({ fontCache: 'none' }),
-      });
-
-      return { doc: doc as unknown as MathDocument, adaptor: adaptor as unknown as Adaptor };
+      const scope = window as unknown as Record<string, unknown>;
+      // 启动配置必须在 bundle 加载**之前**挂上去，加载后 window.MathJax 会被
+      // 替换成 API 对象。
+      scope.MathJax = {
+        startup: { typeset: false },
+        svg: { fontCache: 'none' },
+        options: { enableMenu: false },
+      };
+      await import('mathjax-full/es5/tex-svg-full.js');
+      const mathJax = scope.MathJax as MathJaxGlobal;
+      if (!mathJax?.startup?.promise || typeof mathJax.tex2svg !== 'function') {
+        throw new Error('MathJax bundle loaded but tex2svg is unavailable');
+      }
+      await mathJax.startup.promise;
+      return mathJax;
     })().catch(error => {
       // 允许下次重试，不要把失败永久缓存住
       enginePromise = null;
@@ -84,19 +78,24 @@ function exToPx(value: string): string {
 }
 
 /**
- * 把 MathJax 的输出整理成公众号能安全承载的形态：脱掉 `<mjx-container>` 外壳、
- * 尺寸换成 px、行内公式显式声明 inline-block。
- *
- * 纯字符串处理，不碰 DOM，因此可以在 Node 下直接测试。导出仅为测试可见。
+ * 把 MathJax 的 SVG 整理成公众号能安全承载的形态。理由见文件头「公众号对 SVG
+ * 的限制」。纯字符串处理，不碰 DOM，因此可以在 Node 下直接测试。
  */
-export function normalizeSvg(containerHtml: string, display: boolean): string | null {
-  const start = containerHtml.indexOf('<svg');
-  const end = containerHtml.lastIndexOf('</svg>');
+export function sanitizeSvg(svgHtml: string, display: boolean): string | null {
+  const start = svgHtml.indexOf('<svg');
+  const end = svgHtml.lastIndexOf('</svg>');
   if (start === -1 || end === -1) return null;
-  const svg = containerHtml.slice(start, end + '</svg>'.length);
+  let svg = svgHtml.slice(start, end + '</svg>'.length);
 
-  // 只改根 <svg> 的开标签。SVG 内部元素（<rect> 等）的 width/height 是用户坐标系
-  // 里的无单位数值，style 也各有用途，一起改会让公式错位。
+  // data-* 全部去掉（含 data-mml-node="TeXAtom"，留着会让公众号删光整片公式）；
+  // aria-hidden / xlink 同样在白名单之外。
+  svg = svg
+    .replace(/\sdata-[\w-]+="[^"]*"/g, '')
+    .replace(/\saria-hidden="[^"]*"/g, '')
+    .replace(/\sxmlns:xlink="[^"]*"/g, '');
+
+  // 只改根 <svg> 的开标签：SVG 内部元素的 width/height 是用户坐标系里的无单位
+  // 数值，style 也各有用途，一起改会让公式错位。
   const tagEnd = svg.indexOf('>');
   if (tagEnd === -1) return null;
   let openTag = svg.slice(0, tagEnd + 1);
@@ -126,9 +125,8 @@ export function normalizeSvg(containerHtml: string, display: boolean): string | 
 }
 
 /**
- * 把一条 LaTeX 渲染成自包含的 SVG 字符串。
+ * 把一条 LaTeX 渲染成公众号可用的自包含 SVG 字符串。
  *
- * 不碰 DOM（liteAdaptor 用的是自己的轻量节点树），因此可以在 Node 下直接测试。
  * 渲染失败返回 null，由调用方决定降级。
  */
 export async function latexToSvg(
@@ -137,15 +135,16 @@ export async function latexToSvg(
 ): Promise<string | null> {
   if (!latex.trim()) return null;
   try {
-    const { doc, adaptor } = await getEngine();
-    const node = doc.convert(latex, {
+    const mathJax = await getEngine();
+    const container = mathJax.tex2svg(latex, {
       display,
       em: EM_IN_PX,
       ex: EX_IN_PX,
       containerWidth: display ? 800 : 400,
     });
-    const svg = adaptor.outerHTML(node);
-    return svg && svg.includes('<svg') ? normalizeSvg(svg, display) : null;
+    const svg = container.querySelector('svg');
+    if (!svg) return null;
+    return sanitizeSvg(svg.outerHTML, display);
   } catch {
     return null;
   }
