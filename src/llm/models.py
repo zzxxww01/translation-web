@@ -13,7 +13,8 @@ MODEL_REGISTRY: Dict[str, Dict[str, Any]] = {
     # Gemini Official API
     "flash-official": {
         "provider": "gemini",
-        "real_model": "gemini-flash-latest",
+        # 钉具体版本，不用 *-latest：见 config/llm_providers.yaml 同处说明
+        "real_model": "gemini-3.6-flash",
         "description": "Gemini Flash 官方 API - 快速低成本",
         "supports_thinking": False,
     },
@@ -87,10 +88,10 @@ def resolve_model_alias(alias: Optional[str]) -> Tuple[str, str, Dict[str, Any]]
         ("vectorengine", "deepseek-v3.2", {...})
 
         >>> resolve_model_alias("pro-official")
-        ("gemini", "gemini-3-pro-preview", {...})
+        ("gemini", "gemini-2.5-pro", {...})
 
         >>> resolve_model_alias("flash")  # legacy alias
-        ("gemini", "gemini-flash-latest", {...})
+        ("gemini", "gemini-3.6-flash", {...})
     """
     if not alias:
         alias = "pro-official"  # default fallback

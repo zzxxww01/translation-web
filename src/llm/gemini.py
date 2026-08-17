@@ -152,7 +152,8 @@ def _resolve_default_runtime_settings(
 MODEL_CONFIG = {
     "flash": {
         "env_var": "GEMINI_FLASH_MODEL",
-        "default": "gemini-flash-latest",
+        # 钉具体版本，不用 *-latest：见 config/llm_providers.yaml 同处说明
+        "default": "gemini-3.6-flash",
         "description": "Fast model with lower cost",
         "max_output_tokens": 65536,
         "supports_thinking": False,

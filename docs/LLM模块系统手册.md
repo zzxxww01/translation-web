@@ -109,7 +109,7 @@ providers:
     # 模型列表
     models:
       - alias: "gemini-flash"              # 模型别名（用于代码中引用）
-        real_model: "gemini-flash-latest"  # 实际 API 模型名
+        real_model: "gemini-3.6-flash"     # 实际 API 模型名（钉具体版本，别用 *-latest）
         name: "Gemini Flash"               # 显示名称
         description: "Fast and efficient"
         supports_thinking: false

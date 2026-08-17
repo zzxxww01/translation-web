@@ -19,7 +19,9 @@ providers:
       requests_per_minute: 60
     models:
       - alias: "gemini-flash"
-        real_model: "gemini-flash-latest"
+        # 钉具体版本，不用 *-latest：浮动别名会让供应商换代时质量无声漂移，
+        # 代码一行没改译文风格却变了，排查时几乎无从下手。
+        real_model: "gemini-3.6-flash"
         name: "Gemini Flash"
         description: "快速低成本"
         priority: 2

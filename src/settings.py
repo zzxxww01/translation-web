@@ -24,7 +24,10 @@ class Settings(BaseSettings):
 
     # Task-specific default models (can override llm_default_model)
     llm_model_longform: str = "deepseek-v3.2"  # Long-form translation
-    llm_model_post: str = "flash-official"      # Post translation
+    # 帖子翻译是"用地道中文重新创作"，最吃语言能力：flash 上译文会散成一串
+    # 断句、丢连词丢主语。这里的默认值必须和 .env 一致，否则换台机器部署（或
+    # .env 缺失）就会静默退回 flash，而且从代码里看不出任何变化。
+    llm_model_post: str = "pro-official"        # Post translation
     llm_model_analysis: str = "pro-official"    # Text analysis
     llm_model_title: str = "flash-official"     # Title translation
     llm_model_metadata: str = "flash-official"  # Metadata translation
@@ -43,7 +46,7 @@ class Settings(BaseSettings):
     # Gemini
     gemini_api_key: str = ""
     gemini_backup_api_key: str = ""  # legacy compatibility
-    gemini_flash_model: str = "gemini-flash-latest"
+    gemini_flash_model: str = "gemini-3.6-flash"
     gemini_pro_model: str = "gemini-3-pro-preview"
     gemini_preview_model: str = "gemini-3.1-pro-preview"
     gemini_model: str = "pro"  # selector/alias: flash/pro/preview or concrete model id
