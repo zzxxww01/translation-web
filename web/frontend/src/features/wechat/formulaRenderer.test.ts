@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { latexToSvg } from './formulaRenderer';
+import { latexToSvg, normalizeSvg } from './formulaRenderer';
 
 // 用户实际遇到的那条公式
 const USER_FORMULA = String.raw`\mathbf{o}_t = \sum_{i=1}^{t} \alpha_{i\rightarrow t}\,\mathbf{v}_i, \qquad \alpha_{i\rightarrow t} = \frac{\phi(\mathbf{q}_t,\mathbf{k}_i)}{\sum_{j=1}^{t}\phi(\mathbf{q}_t,\mathbf{k}_j)}`;
@@ -13,59 +13,76 @@ describe('公众号公式渲染', () => {
     expect(svg).toContain('</svg>');
   });
 
-  it('SVG 自带字形，不依赖全局字形缓存', async () => {
-    // fontCache 必须是 'local'：默认的 'global' 会把字形放进页面上一份独立的
-    // <svg id="MJX-SVG-global-cache">，各公式用 <use> 跨元素引用。公式一旦被
-    // 粘进公众号成为彼此独立的 DOM 岛，引用就断了，公式显示成空白。
-    const svg = await latexToSvg(USER_FORMULA, true);
-    expect(svg).toContain('<defs');
-    expect(svg).not.toContain('MJX-SVG-global-cache');
-  });
-
-  it('两条公式各自独立自包含', async () => {
-    const [a, b] = await Promise.all([
-      latexToSvg(String.raw`E = mc^2`, true),
-      latexToSvg(String.raw`\alpha_{i} + \beta_{j}`, true),
-    ]);
-    for (const svg of [a, b]) {
-      expect(svg).toContain('<defs');
+  it('SVG 不含任何 id 引用，字形全部内联', async () => {
+    // 这是整套方案的命门。SVG 输出默认把字形收进 <defs>，正文用 <use xlink:href>
+    // 引用；公众号的粘贴过滤会剥掉 xlink:href（它能引用外部资源，在黑名单里），
+    // 引用一断，公式整条变空白——这正是"粘过去全是乱码"的成因。
+    // fontCache:'none' 让字形直接内联成 <path>，没有引用可断。
+    for (const display of [true, false]) {
+      const svg = await latexToSvg(USER_FORMULA, display);
+      expect(svg).toBeTruthy();
+      expect(svg).toContain('<path');
+      expect(svg).not.toContain('<use');
+      expect(svg).not.toContain('xlink:href');
+      expect(svg).not.toContain('<defs');
       expect(svg).not.toContain('MJX-SVG-global-cache');
     }
-    expect(a).not.toEqual(b);
   });
 
-  it('同一篇里的多条公式字形 id 不冲突', async () => {
-    // 每条公式在公众号里都是独立 DOM 岛，但它们同处一篇文章。若两条 SVG 的
-    // <defs> 用了相同的 path id，后一条会被前一条的定义覆盖，字形错乱。
-    // MathJax 给每次渲染的 id 加了自增前缀（MJX-5- / MJX-6-），这里把它钉死。
-    const first = await latexToSvg(String.raw`x_1 + x_2`, false);
-    const second = await latexToSvg(String.raw`x_1 + x_2`, false);
-    expect(first).toBeTruthy();
-    expect(second).toBeTruthy();
+  it('剥掉 xlink:href 后公式内容依然完好', async () => {
+    // 直接模拟公众号过滤器的动作：删掉所有 xlink:href，看还剩多少可见内容。
+    const svg = await latexToSvg(USER_FORMULA, true);
+    const filtered = svg!.replace(/ xlink:href="[^"]*"/g, '');
+    expect(filtered).toEqual(svg);
+    expect((filtered.match(/<path/g) || []).length).toBeGreaterThan(10);
+  });
 
-    const idsOf = (svg: string) =>
-      Array.from(svg.matchAll(/<path id="([^"]+)"/g), match => match[1]);
-    const firstIds = idsOf(first!);
-    const secondIds = idsOf(second!);
+  it('不带 mjx-container 外壳', async () => {
+    // 自定义标签不在公众号白名单里，会被当未知元素处理成块级，
+    // 于是每条行内公式都断行、正文被切碎。
+    const svg = await latexToSvg(String.raw`x_1 + x_2`, false);
+    expect(svg).not.toContain('mjx-container');
+    expect(svg!.startsWith('<svg')).toBe(true);
+    expect(svg!.endsWith('</svg>')).toBe(true);
+  });
 
-    expect(firstIds.length).toBeGreaterThan(0);
-    expect(secondIds.length).toBeGreaterThan(0);
-    expect(firstIds.some(id => secondIds.includes(id))).toBe(false);
+  it('尺寸单位换算成 px，不留 ex', async () => {
+    // ex 取决于所在字体的 x-height，公众号里字体不受我们控制。
+    const svg = await latexToSvg(String.raw`\frac{a}{b}`, false);
+    expect(svg).toMatch(/width="[\d.]+px"/);
+    expect(svg).toMatch(/height="[\d.]+px"/);
+    expect(svg).not.toMatch(/="[\d.]+ex"/);
+    expect(svg).not.toMatch(/vertical-align:\s*-?[\d.]+ex/);
+  });
 
-    // 每个 <use> 都必须指向本 SVG 自己 <defs> 里的 id
-    for (const [svg, ids] of [
-      [first!, firstIds],
-      [second!, secondIds],
-    ] as const) {
-      const refs = Array.from(
-        svg.matchAll(/xlink:href="#([^"]+)"/g),
-        match => match[1]
-      );
-      expect(refs.length).toBeGreaterThan(0);
-      for (const ref of refs) {
-        expect(ids).toContain(ref);
-      }
-    }
+  it('行内公式保留 MathJax 算好的基线偏移并声明 inline-block', async () => {
+    const svg = await latexToSvg(String.raw`\frac{a}{b}`, false);
+    expect(svg).toContain('display:inline-block');
+    expect(svg).toMatch(/vertical-align:\s*-?[\d.]+px/);
+  });
+
+  it('normalizeSvg 对拿不到 svg 的输入返回 null', () => {
+    expect(normalizeSvg('<mjx-container></mjx-container>', false)).toBeNull();
+    expect(normalizeSvg('', true)).toBeNull();
+  });
+
+  it('normalizeSvg 只改根标签，不动 SVG 内部的用户坐标', () => {
+    // 根 <svg> 未必带 style（display 公式常常没有 vertical-align）。若不限定在
+    // 根标签内替换，display:inline-block 会被塞到内部元素上，公式当场错位。
+    const noStyle =
+      '<mjx-container class="MathJax" jax="SVG">' +
+      '<svg width="2ex" height="1ex" viewBox="0 -750 2514 1000">' +
+      '<rect width="574.1" height="60" x="120" y="220"></rect></svg></mjx-container>';
+    const out = normalizeSvg(noStyle, false)!;
+
+    expect(out.startsWith('<svg style="display:inline-block;"')).toBe(true);
+    // 根标签的 ex 换成 px
+    expect(out).toContain('width="16.00px"');
+    expect(out).toContain('height="8.00px"');
+    // 内部 <rect> 是用户坐标系里的无单位数值，必须原样保留
+    expect(out).toContain('<rect width="574.1" height="60" x="120" y="220">');
+    // viewBox 不能被当成尺寸改掉
+    expect(out).toContain('viewBox="0 -750 2514 1000"');
   });
 
   it('display 与 inline 产出不同（求和号大小不同）', async () => {
