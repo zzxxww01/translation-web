@@ -49,6 +49,14 @@ _LATEX_INLINE_MATH = re.compile(
 _LATEX_ESCAPED_SUBSCRIPT = re.compile(r"\\_")
 _LATEX_ESCAPED_STAR_ENV = re.compile(r"(\\(?:begin|end)\{[^{}\n]*?)\\\*([^{}\n]*\})")
 
+# 翻译环节偶尔把公式里的反斜杠输出成 `\backslash `，于是 `\mathbf{q}_l` 变成
+# `\backslash mathbf{q}\backslash _l`，渲染出来就是字面的 `\mathbfq\_l`。
+# `\backslash` 本身是合法命令（集合差），所以只认这两种不合法的位置：后面跟
+# 空白+字母（那位置只能是命令名），或紧跟 `_` `^`（集合差不可能这么用）。
+_LATEX_BACKSLASH_ARTIFACT = re.compile(r"\\backslash(?:\s+(?=[A-Za-z])|\s*(?=[_^]))")
+# 紧跟 `_` `^` 的形态没有任何合法解释，出现一次就足以判定被污染。
+_LATEX_BACKSLASH_CERTAIN = re.compile(r"\\backslash\s*[_^]")
+
 # Indented code blocks (lines starting with 4 spaces or a tab) — content must
 # NOT be escaped. A run of consecutive indented lines is protected as one block.
 _INDENTED_CODE_BLOCK = re.compile(r"(?:^(?: {4}|\t).*(?:\n|$))+", re.MULTILINE)
@@ -549,6 +557,31 @@ def _normalize_latex_math(math: str, *, obsidian: bool = False) -> str:
     return _normalize_latex_body(math)
 
 
+def _repair_backslash_artifact(math: str) -> str:
+    """还原被写成 ``\\backslash `` 的反斜杠。
+
+    只在**明显是污染**时才动手：命中两处以上，或出现 ``\\backslash _`` 这种
+    没有合法解释的形态。单独一处 ``\\backslash B`` 可能真是集合差，放过。
+    """
+    hits = _LATEX_BACKSLASH_ARTIFACT.findall(math)
+    if not hits:
+        return math
+    if len(hits) < 2 and not _LATEX_BACKSLASH_CERTAIN.search(math):
+        return math
+    return _LATEX_BACKSLASH_ARTIFACT.sub("\\\\", math)
+
+
+def normalize_math_fragment(math: str) -> str:
+    """规范化一段公式正文（不含定界符），对外可用。
+
+    导出链路走 :func:`postprocess_markdown` 时会自动做这件事，但公众号排版是
+    另一条链路——用户往往直接把**已经存在**的译文粘进来，那里面的污染只能在
+    排版时现修，否则公式照样渲染成字面的 ``\\mathbfq\\_l``。
+    """
+    return _normalize_latex_body(math)
+
+
 def _normalize_latex_body(math: str) -> str:
+    math = _repair_backslash_artifact(math)
     math = _LATEX_ESCAPED_STAR_ENV.sub(r"\1*\2", math)
     return _LATEX_ESCAPED_SUBSCRIPT.sub("_", math)

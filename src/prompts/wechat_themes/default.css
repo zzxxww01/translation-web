@@ -46,10 +46,10 @@ h4 {
   color: var(--md-primary-color);
 }
 
-/* 代码块 - 阴影效果 */
+/* 代码块 - 一道浅边框就够。公众号对 box-shadow / rgba 支持很差，阴影常被渲染
+   成一圈实心黑边，代码块看起来像被框住了，比不加还显眼。 */
 pre {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e5e7eb;
+  border: 1px solid #eaecef;
 }
 
 /* 图片 - 圆角+阴影 */

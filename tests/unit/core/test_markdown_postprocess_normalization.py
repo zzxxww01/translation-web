@@ -302,3 +302,37 @@ def test_normalization_idempotent():
     once = postprocess_markdown(src)
     twice = postprocess_markdown(once)
     assert once == twice
+
+
+# --- `\backslash` 污染还原 ---------------------------------------------------
+# 翻译环节偶尔把公式里的反斜杠写成 `\backslash `，`$\mathbf{q}_l=\mathbf{w}_l$`
+# 于是变成 `$\backslash mathbf{q}\backslash _l=\backslash mathbf{w}\backslash _l$`，
+# 渲染出来是字面的 `\mathbfq\_l`（真实产物里出现过）。
+
+
+def test_backslash_artifact_restored_in_inline_math():
+    src = r"每层学习一个查询向量：$\backslash mathbf{q}\backslash _l=\backslash mathbf{w}\backslash _l$"
+    out = postprocess_markdown(src)
+    assert r"$\mathbf{q}_l=\mathbf{w}_l$" in out
+    assert "backslash" not in out
+
+
+def test_backslash_artifact_restored_in_display_math():
+    src = "$$\n" + r"\backslash frac{\backslash alpha}{\backslash beta}" + "\n$$"
+    out = postprocess_markdown(src)
+    assert r"\frac{\alpha}{\beta}" in out
+    assert "backslash" not in out
+
+
+def test_legitimate_backslash_command_survives():
+    """`\backslash` 是合法命令（集合差），单独一处不能当成污染改掉。"""
+    src = r"集合差记作 $A \backslash B$。"
+    out = postprocess_markdown(src)
+    assert r"$A \backslash B$" in out
+
+
+def test_backslash_outside_math_untouched():
+    """正文里的 backslash 字样与公式无关，不该被动。"""
+    src = "Windows 路径分隔符英文叫 backslash。"
+    out = postprocess_markdown(src)
+    assert "backslash" in out

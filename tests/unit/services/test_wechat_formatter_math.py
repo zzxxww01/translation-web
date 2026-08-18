@@ -133,3 +133,26 @@ def test_fallback_content_kept_for_degraded_rendering(
 )
 def test_strip_math_delimiters(raw: str, expected: str) -> None:
     assert WechatFormatter._strip_math_delimiters(raw) == expected
+
+
+def test_backslash_artifact_repaired_before_rendering():
+    """排版链路必须自己修 `\backslash ` 污染。
+
+    导出走 postprocess_markdown 时会修，但公众号排版是另一条链路：用户往往直接
+    把**早就生成好的**译文粘进来。不在这里修，`\mathbf{q}_l=\mathbf{w}_l` 就会
+    带着 `\backslash ` 送进 MathJax，渲染成字面的 `\mathbfq\_l`（真实产物如此）。
+    """
+    polluted = r"每层学习一个查询向量：$\backslash mathbf{q}\backslash _l=\backslash mathbf{w}\backslash _l$"
+    result = WechatFormatter().format(polluted, theme="default")
+    html = result["html"]
+
+    assert result["formula_count"] == 1
+    assert 'data-latex="\\mathbf{q}_l=\\mathbf{w}_l"' in html
+    assert "backslash" not in html
+
+
+def test_legitimate_backslash_command_survives_formatting():
+    """`\backslash` 是合法命令（集合差），单独一处不能被当成污染改掉。"""
+    src = r"集合差记作 $A \backslash B$。"
+    html = WechatFormatter().format(src, theme="default")["html"]
+    assert r"A \backslash B" in html

@@ -32,6 +32,7 @@ except ImportError:
 from bs4 import BeautifulSoup
 
 from .wechat_themes import get_theme
+from ..core.markdown_postprocess import normalize_math_fragment
 from ..core.image_processor import ImageProcessor
 
 
@@ -136,6 +137,18 @@ def _is_safe_ip(ip_str: str) -> bool:
         return True
     except ValueError:
         return False
+
+
+
+def _repair_math_fragment(raw: str) -> str:
+    """规范化带定界符的公式：定界符原样留下，只修中间的正文。"""
+    for opening, closing in (("$$", "$$"), ("\\[", "\\]"), ("\\(", "\\)")):
+        if raw.startswith(opening) and raw.endswith(closing) and len(raw) > len(opening) + len(closing) - 1:
+            body = raw[len(opening) : -len(closing)]
+            return f"{opening}{normalize_math_fragment(body)}{closing}"
+    if len(raw) >= 2 and raw.startswith("$") and raw.endswith("$"):
+        return f"${normalize_math_fragment(raw[1:-1])}$"
+    return normalize_math_fragment(raw)
 
 
 class WechatFormatter:
@@ -278,6 +291,10 @@ class WechatFormatter:
         def _stash(match: re.Match[str]) -> str:
             raw = match.group("block") or match.group("inline") or ""
             kind = "block" if match.group("block") else "inline"
+            # 就地修翻译带来的转义污染（`\backslash ` / `\_`）。导出链路有
+            # postprocess_markdown 兜着，但排版这条路没有——用户粘进来的往往是
+            # 早就生成好的译文，不在这里修，公式就会渲染成字面的 `\mathbfq\_l`。
+            raw = _repair_math_fragment(raw)
             formulas.append((kind, raw))
             token = self._MATH_TOKEN.format(index=len(formulas) - 1)
             # 块级公式两侧留空行，确保 markdown-it 把它当成独立段落而不是并进上一段
@@ -363,7 +380,13 @@ class WechatFormatter:
                 else:
                     lexer = guess_lexer(code_text)
 
-                formatter = HtmlFormatter(style="monokai", noclasses=True, nowrap=False)
+                # 浅色高亮 + 不输出背景：monokai 是深色主题，它自带的
+                # `background:#272822` 会盖在主题的浅色 pre 上，公众号里就是
+                # 一圈突兀的黑框，亮色代码字压在浅色底上还几乎看不清。
+                # 背景交给主题 CSS（--md-code-bg）统一控制。
+                formatter = HtmlFormatter(
+                    style="default", noclasses=True, nowrap=False, nobackground=True
+                )
                 highlighted = highlight(code_text, lexer, formatter)
 
                 # 替换 pre 标签内容

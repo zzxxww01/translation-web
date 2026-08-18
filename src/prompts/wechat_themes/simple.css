@@ -56,7 +56,7 @@ blockquote {
 /* 代码块 - 极简边框 */
 pre {
   margin: 1.8em 8px;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  border: 1px solid #eaecef;
   border-radius: 8px;
   background: #fafbfc;
 }
