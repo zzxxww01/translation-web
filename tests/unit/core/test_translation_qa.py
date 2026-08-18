@@ -383,3 +383,53 @@ def test_glossary_residue_loader_failure_is_silent(monkeypatch):
     monkeypatch.setattr(GlossaryManager, "load_global", _boom)
     issues = run_deterministic_qa("这批 wafer 良率不错。")
     assert "glossary_term_residue" not in _codes(issues)
+
+
+# --- 公式对照（与英文原文逐一比对）-----------------------------------------
+# 翻译改写公式是真实发生过的事故：`\mathbf{q}_l` 被写成
+# `\backslash mathbf{q}\backslash _l`，渲染出来是字面的 `\mathbfq\_l`。
+
+
+def test_math_altered_by_translation_reported():
+    source = r"Each layer learns $\mathbf{q}_l=\mathbf{w}_l$ directly."
+    content = r"每层直接学习 $\backslash mathbf{q}\backslash _l=\backslash mathbf{w}\backslash _l$。"
+    codes = _codes(run_deterministic_qa(content, source=source))
+    assert "math_inline_altered" in codes
+
+
+def test_math_block_dropped_reported():
+    source = "A $$x=1$$ and B $$y=2$$."
+    content = "甲 $$x=1$$，乙漏了。"
+    codes = _codes(run_deterministic_qa(content, source=source))
+    assert "math_block_count_mismatch" in codes
+
+
+def test_identical_math_not_reported():
+    source = r"Formula $$\frac{a}{b}$$ and inline $x^2$."
+    content = r"公式 $$\frac{a}{b}$$，行内 $x^2$。"
+    codes = _codes(run_deterministic_qa(content, source=source))
+    assert not [code for code in codes if code.startswith("math_")]
+
+
+def test_math_delimiter_rewrite_not_reported():
+    r"""`\(x\)` 与 `$x$` 是同一条公式，译文换写法不算问题。"""
+    source = r"Inline \(x^2\) here."
+    content = r"行内 $x^2$ 如下。"
+    codes = _codes(run_deterministic_qa(content, source=source))
+    assert not [code for code in codes if code.startswith("math_")]
+
+
+def test_math_curly_apostrophe_normalization_not_reported():
+    """撇号弯直归一（f_l’ → f_l'）是正常的规范化，不该每篇都误报。"""
+    source = "Inline \\(f_l\u2019(x_l)\\) here."
+    content = "行内 \\(f_l'(x_l)\\) 如下。"
+    codes = _codes(run_deterministic_qa(content, source=source))
+    assert not [code for code in codes if code.startswith("math_")]
+
+
+def test_math_text_content_may_be_translated():
+    r"""`\text{}` 里的文字允许被翻译，不算公式被改写。"""
+    source = r"$$E=\text{energy}$$"
+    content = r"$$E=\text{能量}$$"
+    codes = _codes(run_deterministic_qa(content, source=source))
+    assert not [code for code in codes if code.startswith("math_")]

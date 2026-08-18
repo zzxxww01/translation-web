@@ -185,6 +185,33 @@ def _collect(
         )
 
 
+# 公式对照（与英文原文逐一比对）。公式是语言无关的，除了 `\text{}` 里可能被翻译
+# 的文字，译文里的每一条都应当与原文完全相同。
+_MATH_BLOCK_MD = re.compile(r"\$\$[\s\S]*?\$\$|\\\[[\s\S]*?\\\]")
+_MATH_INLINE_MD = re.compile(r"(?<!\$)\$(?!\s)[^$\n]+?(?<!\s)\$(?!\$)|\\\([\s\S]*?\\\)")
+# 撇号/引号在译文里会被规范化（弯 → 直），公式里的 `f_l’` → `f_l'` 属正常，
+# 不归一会让每篇都误报。
+_MATH_QUOTE_VARIANTS = str.maketrans({"\u2018": "'", "\u2019": "'", "\u201c": '"', "\u201d": '"', "`": "'"})
+
+
+def _math_signature(math: str) -> str:
+    r"""公式的比较指纹：抹掉定界符、空白、`\text{}` 内容与引号变体。
+
+    定界符不参与比较——`\(x\)` 和 `$x$` 是同一条公式，译文换写法不算问题。
+    """
+    body = math.strip()
+    for opening, closing in (("$$", "$$"), ("\\[", "\\]"), ("\\(", "\\)")):
+        if body.startswith(opening) and body.endswith(closing):
+            body = body[len(opening) : -len(closing)]
+            break
+    else:
+        if len(body) >= 2 and body.startswith("$") and body.endswith("$"):
+            body = body[1:-1]
+    body = re.sub(r"\\text\{[^{}]*\}", r"\\text{}", body)
+    body = body.translate(_MATH_QUOTE_VARIANTS)
+    return re.sub(r"\s+", "", body)
+
+
 def run_deterministic_qa(
     content: str, source: Optional[str] = None
 ) -> List[QAIssue]:
@@ -326,6 +353,42 @@ def run_deterministic_qa(
                 code="image_count_mismatch", severity="warning",
                 message=f"图片数量与原文不一致：en={src_imgs} zh={dst_imgs}",
             ))
+
+        # 公式对照（A-5 同款口径）。翻译环节改写公式是真实发生过的事故：
+        # `\mathbf{q}_l` 被写成 `\backslash mathbf{q}\backslash _l`，渲染出来是
+        # 字面的 `\mathbfq\_l`。postprocess 已能自动还原这一类，这里是兜底报警，
+        # 也能抓到自动修不了的（公式被改写、整条漏译）。
+        # warning 而非 critical，理由同 image_count_mismatch。
+        for kind, pattern, label in (
+            ("block", _MATH_BLOCK_MD, "块级"),
+            ("inline", _MATH_INLINE_MD, "行内"),
+        ):
+            src_math = pattern.findall(source)
+            dst_math = pattern.findall(content)
+            if len(src_math) != len(dst_math):
+                issues.append(QAIssue(
+                    code=f"math_{kind}_count_mismatch", severity="warning",
+                    message=f"{label}公式数量与原文不一致："
+                            f"en={len(src_math)} zh={len(dst_math)}（检查漏译或被改写）",
+                ))
+                continue
+            altered = [
+                (index, src_item, dst_item)
+                for index, (src_item, dst_item) in enumerate(zip(src_math, dst_math), 1)
+                if _math_signature(src_item) != _math_signature(dst_item)
+            ]
+            if altered:
+                samples = [
+                    f"第{index}条 en={_math_signature(src_item)[:60]} "
+                    f"zh={_math_signature(dst_item)[:60]}"
+                    for index, src_item, dst_item in altered[:_MAX_SAMPLES_PER_CHECK]
+                ]
+                issues.append(QAIssue(
+                    code=f"math_{kind}_altered", severity="warning",
+                    message=f"{label}公式有 {len(altered)} 条与原文不一致"
+                            "（公式不该被翻译改写）",
+                    sample=" | ".join(samples)[:300],
+                ))
 
         # zh 独有标题（A-4/A-5）：按 H2-H6 对照——导出 zh 固定带 `# 标题` H1，
         # 而 en 源文常无 H1，全级别对照会造成常态误报。
