@@ -385,6 +385,44 @@ class GeminiProvider(LLMProvider):
             return None
         return self._get_proxy_config()
 
+    def _sdk_http_options(self) -> Optional[Dict[str, Dict[str, Any]]]:
+        """Build explicit SDK transport options from the provider policy.
+
+        google-genai/httpx trusts HTTP_PROXY and HTTPS_PROXY by default.  Merely
+        returning ``None`` from ``_resolve_proxy_config`` therefore does not make
+        ``proxy_mode: disabled`` a direct connection: ambient proxy variables can
+        still be picked up by the SDK.  Pass trust_env explicitly so the YAML
+        policy remains authoritative.
+        """
+        policy = self.network_policy
+        if policy is None:
+            return None
+
+        trust_env = bool(getattr(policy, "trust_env", False))
+        client_args: Dict[str, Any] = {"trust_env": trust_env}
+        async_client_args: Dict[str, Any] = {"trust_env": trust_env}
+
+        if getattr(policy, "use_proxy", False):
+            proxies = getattr(policy, "proxies", None) or {}
+            proxy_url = proxies.get("https") or proxies.get("http")
+            if proxy_url:
+                client_args["proxy"] = proxy_url
+                async_client_args["proxy"] = proxy_url
+
+        return {
+            "client_args": client_args,
+            "async_client_args": async_client_args,
+        }
+
+    def _build_rest_session(self) -> requests.Session:
+        """Create a REST client that obeys the same network policy as the SDK."""
+        session = requests.Session()
+        if self.network_policy is not None:
+            session.trust_env = bool(
+                getattr(self.network_policy, "trust_env", False)
+            )
+        return session
+
     _proxy_env_lock = RLock()
 
     def _proxy_env_overrides(self) -> Dict[str, str]:
@@ -473,14 +511,22 @@ class GeminiProvider(LLMProvider):
         return exc
 
     def _create_client(self, genai_module: ModuleType, api_key: str):
+        client_kwargs: Dict[str, Any] = {"api_key": api_key}
+        http_options = self._sdk_http_options()
+        if http_options is not None:
+            client_kwargs["http_options"] = http_options
+
         with self._temporary_proxy_env():
             try:
-                return genai_module.Client(api_key=api_key)
+                return genai_module.Client(**client_kwargs)
             except TypeError:
                 previous = os.environ.get("GEMINI_API_KEY")
                 os.environ["GEMINI_API_KEY"] = api_key
                 try:
-                    return genai_module.Client()
+                    fallback_kwargs: Dict[str, Any] = {}
+                    if http_options is not None:
+                        fallback_kwargs["http_options"] = http_options
+                    return genai_module.Client(**fallback_kwargs)
                 finally:
                     if previous is None:
                         os.environ.pop("GEMINI_API_KEY", None)
@@ -585,13 +631,14 @@ class GeminiProvider(LLMProvider):
             connect_timeout = min(max(float(timeout) * 0.2, 5.0), 15.0)
             request_timeout = (connect_timeout, float(timeout))
 
-        response = requests.post(
-            url,
-            json=payload,
-            headers=headers,
-            timeout=request_timeout,
-            proxies=self.proxy_config,
-        )
+        with self._build_rest_session() as session:
+            response = session.post(
+                url,
+                json=payload,
+                headers=headers,
+                timeout=request_timeout,
+                proxies=self.proxy_config,
+            )
         if response.status_code >= 400:
             self._raise_rest_http_error(response, model)
         data = response.json()
