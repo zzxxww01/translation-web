@@ -87,6 +87,9 @@ from src.llm.usage_metrics import llm_usage_metrics
 
 logger = logging.getLogger(__name__)
 
+# 章节内段落在提示词里的分隔符，与整章拼接保持一致。
+SECTION_LINE_SEPARATOR = chr(10) * 2
+
 # 章节标题翻译共用的「白名单铁律」，与
 # src/prompts/longform/translation/section_batch_translate.txt 第 7-14 行保持一致。
 # 标题走的是独立的提示词链路，若不显式带上这段铁律，标题会出现「吉瓦」「词元」
@@ -127,6 +130,13 @@ class BatchTranslationService:
     # 翻译模式
     TRANSLATION_MODE_FOUR_STEP = "four_step"  # 四步法（段落级）
     TRANSLATION_MODE_SECTION = "section"  # 章节级批量翻译
+
+    # section 模式的单批上限。模型输出上限是 8192 token，而中文译文约 1 字 1 token，
+    # 一批英文源文 12000 字符大致产出 4000-5000 中文字符，留足余量。
+    # 语料实测：单章 9400 英文词的章节整章一次调用需要约 14000 输出 token，必然截断。
+    MAX_SECTION_BATCH_PARAGRAPHS = 40
+    MAX_SECTION_BATCH_CHARS = 12000
+    MISSING_PARAGRAPH_RETRIES = 2
     AUTO_GLOSSARY_TERM_OVERRIDES: Dict[str, str] = {
         "wide expert parallelism": "宽专家并行",
         "wide expert parallelism (wideep)": "宽专家并行 (WideEP)",
@@ -2894,11 +2904,169 @@ class BatchTranslationService:
         # 使用Phase 1 provider（如果提供）或默认provider。同步网络调用
         # 卸载到线程池，保证顺序章节翻译期间事件循环仍可响应取消和进度查询。
         provider = phase1_provider or self.llm
-        translated = await asyncio.to_thread(
-            provider.translate_section,
-            section_text=section_text,
-            section_title=section.title,
+
+        # 按段数与字符数分批。此前整章一次调用、无任何上限：单章 9400 词的章节
+        # （ClusterMAX 有 5 个）产出约 14000 输出 token，稳超模型 8192 的上限，
+        # 模型只吐出前几十段，其余段落**既不报错也不重试**地留在未翻译状态，
+        # 而本次运行仍报「成功」。四步法那条路早有分批与逐段回退，默认的
+        # section 模式反而两样都没有。
+        batches = self._split_section_batches(section_lines, paragraph_ids)
+        translated: List[Dict[str, str]] = []
+        for batch_lines, batch_ids in batches:
+            translated.extend(
+                await self._call_section_batch(
+                    provider=provider,
+                    section=section,
+                    context=context,
+                    format_tokens=format_tokens,
+                    batch_lines=batch_lines,
+                    batch_ids=batch_ids,
+                )
+            )
+
+        # 完整性校验 + 缺段重试。模型漏返、超长截断都会表现为「返回条目少于请求」，
+        # 静默丢段比翻译失败更糟——用户看到的是一篇夹杂英文原文的成品。
+        translated = await self._retry_missing_paragraphs(
+            provider=provider,
+            section=section,
             context=context,
+            format_tokens=format_tokens,
+            section_lines=section_lines,
             paragraph_ids=paragraph_ids,
+            translated=translated,
         )
         return [*translated, *dehydrated_translations]
+
+    def _split_section_batches(
+        self,
+        section_lines: List[str],
+        paragraph_ids: List[str],
+    ) -> List[tuple[List[str], List[str]]]:
+        """按段数与字符数把一章切成若干批，保证单批输出不撞模型的输出上限。"""
+        batches: List[tuple[List[str], List[str]]] = []
+        cur_lines: List[str] = []
+        cur_ids: List[str] = []
+        cur_chars = 0
+
+        for line, para_id in zip(section_lines, paragraph_ids):
+            over_count = len(cur_lines) >= self.MAX_SECTION_BATCH_PARAGRAPHS
+            over_chars = cur_chars + len(line) > self.MAX_SECTION_BATCH_CHARS
+            if cur_lines and (over_count or over_chars):
+                batches.append((cur_lines, cur_ids))
+                cur_lines, cur_ids, cur_chars = [], [], 0
+            cur_lines.append(line)
+            cur_ids.append(para_id)
+            cur_chars += len(line)
+
+        if cur_lines:
+            batches.append((cur_lines, cur_ids))
+        return batches
+
+    async def _call_section_batch(
+        self,
+        *,
+        provider: LLMProvider,
+        section: Section,
+        context: Dict[str, Any],
+        format_tokens: List[Dict[str, Any]],
+        batch_lines: List[str],
+        batch_ids: List[str],
+    ) -> List[Dict[str, str]]:
+        """翻译一批段落。格式 token 按批过滤，避免把别批的 token 说明发给模型。"""
+        batch_id_set = set(batch_ids)
+        batch_tokens = [
+            token for token in format_tokens
+            if token.get("paragraph_id") in batch_id_set
+        ]
+        batch_context = {
+            **context,
+            "format_tokens": batch_tokens,
+            "format_token_count": len(batch_tokens),
+        }
+        result = await asyncio.to_thread(
+            provider.translate_section,
+            section_text=SECTION_LINE_SEPARATOR.join(batch_lines),
+            section_title=section.title,
+            context=batch_context,
+            paragraph_ids=batch_ids,
+        )
+        return list(result or [])
+
+    async def _retry_missing_paragraphs(
+        self,
+        *,
+        provider: LLMProvider,
+        section: Section,
+        context: Dict[str, Any],
+        format_tokens: List[Dict[str, Any]],
+        section_lines: List[str],
+        paragraph_ids: List[str],
+        translated: List[Dict[str, str]],
+    ) -> List[Dict[str, str]]:
+        """补齐模型漏返的段落；补不齐时明确告警，不让运行伪装成功。"""
+        line_by_id = dict(zip(paragraph_ids, section_lines))
+
+        for attempt in range(self.MISSING_PARAGRAPH_RETRIES):
+            returned = {
+                item.get("id")
+                for item in translated
+                if isinstance(item, dict)
+                and isinstance(item.get("translation"), str)
+                and item["translation"].strip()
+            }
+            missing = [pid for pid in paragraph_ids if pid not in returned]
+            if not missing:
+                return translated
+
+            logger.warning(
+                "[%s] Section batch returned %s/%s paragraphs; retrying %s missing "
+                "(attempt %s/%s)",
+                section.section_id,
+                len(returned),
+                len(paragraph_ids),
+                len(missing),
+                attempt + 1,
+                self.MISSING_PARAGRAPH_RETRIES,
+            )
+
+            # 重试用更小的批，漏返多半就是单批过大导致的输出截断
+            retry_size = max(1, self.MAX_SECTION_BATCH_PARAGRAPHS // 4)
+            for start in range(0, len(missing), retry_size):
+                chunk_ids = missing[start:start + retry_size]
+                chunk_lines = [line_by_id[pid] for pid in chunk_ids]
+                try:
+                    translated.extend(
+                        await self._call_section_batch(
+                            provider=provider,
+                            section=section,
+                            context=context,
+                            format_tokens=format_tokens,
+                            batch_lines=chunk_lines,
+                            batch_ids=chunk_ids,
+                        )
+                    )
+                except Exception as exc:
+                    logger.warning(
+                        "[%s] Missing-paragraph retry failed for %s ids: %s",
+                        section.section_id,
+                        len(chunk_ids),
+                        exc,
+                    )
+
+        returned = {
+            item.get("id")
+            for item in translated
+            if isinstance(item, dict)
+            and isinstance(item.get("translation"), str)
+            and item["translation"].strip()
+        }
+        still_missing = [pid for pid in paragraph_ids if pid not in returned]
+        if still_missing:
+            logger.error(
+                "[%s] %s/%s paragraphs still untranslated after retries: %s",
+                section.section_id,
+                len(still_missing),
+                len(paragraph_ids),
+                ", ".join(still_missing[:10]),
+            )
+        return translated
