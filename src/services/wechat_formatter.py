@@ -728,6 +728,24 @@ class WechatFormatter:
                 if "white-space" not in style:
                     code["style"] = f"{style};white-space:pre-wrap;word-break:break-all;"
 
+        # 标题外壳：把内容包进 span，让"收缩成居中标签"的效果落到 inline-block 上。
+        # 主题原先用 `display:table` + `margin:auto` 实现收缩居中，但公众号不支持
+        # table 显示类型——失效后标题退回块级，铺满整行变成一条大色块（用户实拍）。
+        # inline-block 是公众号支持的，外层标题只负责 text-align:center。
+        for heading in soup.find_all(["h1", "h2"]):
+            children = [child for child in heading.children]
+            if (
+                len(children) == 1
+                and getattr(children[0], "name", None) == "span"
+                and "wx-heading-label" in (children[0].get("class") or [])
+            ):
+                continue  # 幂等：已经包过就不再套一层
+            label = soup.new_tag("span")
+            label["class"] = "wx-heading-label"
+            for child in list(heading.contents):
+                label.append(child.extract())
+            heading.append(label)
+
         # 图片居中
         for img in soup.find_all("img"):
             style = img.get("style", "")

@@ -1,28 +1,37 @@
 /* 微信公众号排版 - 经典主题 */
 
-/* 一级标题 - 居中+下边框 */
+/* 一级标题 - 居中+下边框。
+   收缩成「刚好包住文字」的标签，过去靠 display:table + margin:auto，但公众号不
+   支持 table 显示类型：失效后标题退回块级、铺满整行变成一条大色块。改成外层只
+   负责居中、内层 span 用 inline-block 收缩承载视觉样式（span 由排版器注入）。 */
 h1 {
-  display: table;
-  margin: 2em auto 1em;
+  margin: 2em 0 1em;
+  text-align: center;
+}
+
+h1 .wx-heading-label {
+  display: inline-block;
   padding: 0 1em 0.5em;
   border-bottom: 2px solid var(--md-primary-color);
   font-size: calc(var(--md-font-size) * 1.5);
   font-weight: 700;
-  text-align: center;
   color: var(--text-color);
   letter-spacing: 0.05em;
 }
 
-/* 二级标题 - 背景色填充 */
+/* 二级标题 - 背景色填充（同上，视觉样式落在内层 span 上） */
 h2 {
-  display: table;
-  margin: 2em auto 1em;
+  margin: 2em 0 1em;
+  text-align: center;
+}
+
+h2 .wx-heading-label {
+  display: inline-block;
   padding: 0.4em 1.2em;
   background: var(--md-primary-color);
   color: #fff;
   font-size: calc(var(--md-font-size) * 1.3);
   font-weight: 600;
-  text-align: center;
   border-radius: 6px;
   letter-spacing: 0.05em;
 }
