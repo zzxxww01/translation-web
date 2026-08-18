@@ -206,6 +206,9 @@ class PlaceholderHandler:
                 elif elem.type == "code":
                     # 代码不翻译，保持原文
                     return f"`{elem.text}`"
+                elif elem.type == "math":
+                    # 公式同样不翻译，且自带定界符，原样放回
+                    return elem.text
                 else:
                     return translated_elem_text
 

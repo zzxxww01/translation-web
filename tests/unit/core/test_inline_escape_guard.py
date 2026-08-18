@@ -83,25 +83,37 @@ def test_display_math_subscripts_survive():
     )
     plain, elements = _extract(formula)
     assert plain == formula
-    assert elements == []
+    # 关键仍是「没有凭空造出假强调」；公式本身会登记为 math 元素（翻译时用
+    # [[[MATH_n|...]]] 挡住模型，见 format_tokens）。
+    assert [item.type for item in elements] == ["math"]
+    assert elements[0].text == formula
 
 
 def test_inline_math_subscripts_survive():
     plain, elements = _extract(r"其中 $\alpha_{i} + \beta_{j}$ 与 $x_1 + y_2$ 成立")
     assert plain == r"其中 $\alpha_{i} + \beta_{j}$ 与 $x_1 + y_2$ 成立"
-    assert elements == []
+    assert [(item.type, item.text) for item in elements] == [
+        ("math", r"$\alpha_{i} + \beta_{j}$"),
+        ("math", r"$x_1 + y_2$"),
+    ]
 
 
 def test_paren_math_subscripts_survive():
     plain, elements = _extract(r"满足 \(P_{max} = V_{dd} \times I\) 的条件")
     assert plain == r"满足 \(P_{max} = V_{dd} \times I\) 的条件"
-    assert elements == []
+    assert [(item.type, item.text) for item in elements] == [
+        ("math", r"\(P_{max} = V_{dd} \times I\)")
+    ]
 
 
 def test_emphasis_outside_math_still_parsed():
     plain, elements = _extract(r"公式 $a_i$ 之外的 _真斜体_ 仍要解析")
     assert plain == r"公式 $a_i$ 之外的 真斜体 仍要解析"
-    assert [(item.type, item.text) for item in elements] == [("em", "真斜体")]
+    # 按出现顺序：公式在前，真斜体在后
+    assert [(item.type, item.text) for item in elements] == [
+        ("math", r"$a_i$"),
+        ("em", "真斜体"),
+    ]
 
 
 def test_currency_pair_is_not_math_and_does_not_swallow_emphasis():

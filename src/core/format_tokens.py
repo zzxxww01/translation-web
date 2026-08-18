@@ -21,14 +21,16 @@ TOKEN_TYPE_MAP = {
     "em": "EM",
     "italic": "EM",
     "code": "CODE",
+    # 公式：和 code 同属"不可翻译"，还原时无条件用原文覆盖 LLM 的输出
+    "math": "MATH",
 }
 TOKEN_PATTERN = re.compile(
-    r"\[\[\[(?P<token>(?:LINK|STRONG|EM|CODE)_\d+)\|(?P<text>.*?)\]\]\]",
+    r"\[\[\[(?P<token>(?:LINK|STRONG|EM|CODE|MATH)_\d+)\|(?P<text>.*?)\]\]\]",
     re.DOTALL,
 )
 # Re-assign using ASCII + Unicode escapes so source encoding issues do not break these patterns.
 LOOSE_TOKEN_PATTERN = re.compile(
-    r"\[{2,}\s*(?P<token>(?:LINK|STRONG|EM|CODE)_\d+)\s*(?:\||\uFF5C)(?P<text>.*?)\]{2,}",
+    r"\[{2,}\s*(?P<token>(?:LINK|STRONG|EM|CODE|MATH)_\d+)\s*(?:\||\uFF5C)(?P<text>.*?)\]{2,}",
     re.DOTALL,
 )
 LINK_SEPARATOR_PATTERN = re.compile(
@@ -37,7 +39,7 @@ LINK_SEPARATOR_PATTERN = re.compile(
 # Malformed model output where the token id is written as a markdown URL,
 # e.g. `[\u8BD1\u6587](LINK_1)` (2026-07 audit: Nvidia \u7A3F `](LINK_1)` residue).
 MALFORMED_MD_TOKEN_PATTERN = re.compile(
-    r"\[(?P<text>[^\[\]]*)\]\(\s*(?P<token>(?:LINK|STRONG|EM|CODE)_\d+)\s*\)"
+    r"\[(?P<text>[^\[\]]*)\]\(\s*(?P<token>(?:LINK|STRONG|EM|CODE|MATH)_\d+)\s*\)"
 )
 FULLWIDTH_TOKEN_TRANSLATION = str.maketrans(
     {
@@ -234,6 +236,8 @@ def validate_tokenized_text(
             continue
         if element.type == "code" and token_text != element.text:
             issues.append(f"Code token {token_id} must keep its original text.")
+        if element.type == "math" and token_text != element.text:
+            issues.append(f"Math token {token_id} must keep its original text.")
         if not token_text.strip():
             issues.append(f"Token {token_id} cannot be empty.")
 
@@ -270,6 +274,11 @@ def restore_markdown_from_tokenized(
             return f"*{translated_text}*"
         if element.type == "code":
             return f"`{element.text}`"
+        if element.type == "math":
+            # 公式自带定界符（`$...$` / `$$...$$`），原样放回。用 element.text 而非
+            # translated_text 是刻意的：LLM 改写公式是真实发生过的事故，不能指望
+            # 它守规矩，这里无条件覆盖。
+            return element.text
         return translated_text
 
     restored = TOKEN_PATTERN.sub(replace, tokenized_text)
@@ -312,6 +321,8 @@ def restore_html_from_tokenized(
             return f"<em>{translated_text}</em>"
         if element.type == "code":
             return f"<code>{html.escape(element.text)}</code>"
+        if element.type == "math":
+            return html.escape(element.text)
         return translated_text
 
     parts: List[str] = []

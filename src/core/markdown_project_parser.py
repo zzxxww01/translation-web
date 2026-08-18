@@ -792,7 +792,48 @@ class MarkdownProjectParser:
         if index < len(text):
             result.append(text[index:])
 
-        return "".join(result), elements
+        plain_text = "".join(result)
+        self._collect_math_elements(plain_text, elements)
+        return plain_text, elements
+
+    @staticmethod
+    def _collect_math_elements(
+        plain_text: str, elements: list[InlineElement]
+    ) -> None:
+        """把公式登记为 ``math`` 内联元素，原地追加进 ``elements``。
+
+        公式在 ``plain_text`` 里是**原样保留**的（强调解析已整段跳过数学区），
+        所以可以直接在成品文本上定位，偏移无需换算。
+
+        登记的意义在翻译阶段：math 元素会被 ``[[[MATH_n|...]]]`` 包住送给模型，
+        还原时无条件用原文覆盖，模型再也碰不到公式内容。此前公式是当普通文本
+        送进 prompt 的，被改写过——`\\mathbf{q}_l` 变成
+        `\\backslash mathbf{q}\\backslash _l`，渲染出来是字面的 `\\mathbfq\\_l`。
+        """
+        if "$" not in plain_text and "\\[" not in plain_text and "\\(" not in plain_text:
+            return
+
+        # inline code 的内容在 plain 里是裸文本（反引号已脱掉），里面的 `$`
+        # 不该参与公式配对，先等长掩掉。
+        masked = list(plain_text)
+        for element in elements:
+            if element.type != "code":
+                continue
+            for offset in range(element.start, min(element.end, len(masked))):
+                masked[offset] = " "
+
+        for match in MarkdownProjectParser._MATH_SPAN.finditer("".join(masked)):
+            elements.append(
+                InlineElement(
+                    type="math",
+                    text=plain_text[match.start() : match.end()],
+                    start=match.start(),
+                    end=match.end(),
+                )
+            )
+        # 按文本顺序排好，让 MATH_n 的编号与出现次序一致；同类型元素的相对
+        # 顺序不变，因此其他 token 的编号不受影响。
+        elements.sort(key=lambda element: element.start)
 
     def _escape_html_attr(self, value: str) -> str:
         return (
