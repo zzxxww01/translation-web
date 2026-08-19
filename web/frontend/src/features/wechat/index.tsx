@@ -198,14 +198,12 @@ export function WechatFeature() {
 
       const { default: juice } = await import('juice');
       const styledHtml = `<style>${css}</style>${htmlToCopy}`;
-      const inlinedHtml = juice(styledHtml, {
+      // CSS 变量由后端在 get_theme 出口就解析成了字面值（公众号会连 <style> 带
+      // :root 一起剥掉，var() 到那边无从查起），这里不必再逐个 replace。
+      const processedHtml = juice(styledHtml, {
         inlinePseudoElements: true,
         preserveImportant: true,
       });
-      const processedHtml = inlinedHtml
-        .replace(/hsl\(var\(--foreground\)\)/g, '#3f3f3f')
-        .replace(/var\(--blockquote-background\)/g, '#f7f7f7')
-        .replace(/var\(--md-primary-color\)/g, '#3b82f6');
 
       const tempDiv = document.createElement('div');
       tempDiv.innerHTML = processedHtml;

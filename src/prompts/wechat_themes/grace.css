@@ -10,25 +10,7 @@ h1 {
   color: var(--text-color);
   letter-spacing: 0.05em;
   text-align: center;
-  position: relative;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.03);
-}
-
-h1::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 3px;
-  background: linear-gradient(90deg,
-    transparent 0%,
-    var(--md-primary-color) 20%,
-    var(--md-primary-color) 80%,
-    transparent 100%
-  );
-  border-radius: 2px;
+  border-bottom: 3px solid var(--md-primary-color);
 }
 
 /* ==================== 二级标题 - 渐变卡片 + 装饰点 ==================== */
@@ -47,31 +29,7 @@ h2 {
     0 4px 12px color-mix(in srgb, var(--md-primary-color) 25%, transparent),
     0 2px 4px rgba(0, 0, 0, 0.08);
   letter-spacing: 0.03em;
-  position: relative;
-  overflow: hidden;
-}
-
-h2::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 0.8em;
-  transform: translateY(-50%);
-  width: 4px;
-  height: 60%;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 2px;
-}
-
-h2::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 100%;
-  height: 200%;
-  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%);
-  transform: rotate(15deg);
+  border-left: 4px solid rgba(255, 255, 255, 0.45);
 }
 
 /* ==================== 三级标题 - 渐变背景 + 左装饰 ==================== */
@@ -89,22 +47,6 @@ h3 {
     transparent 100%
   );
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-  position: relative;
-}
-
-h3::before {
-  content: '';
-  position: absolute;
-  left: -5px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 5px;
-  height: 40%;
-  background: linear-gradient(180deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.6) 50%,
-    transparent 100%
-  );
 }
 
 /* ==================== 四级标题 - 简约装饰 ==================== */
@@ -114,22 +56,13 @@ h4 {
   font-size: calc(var(--md-font-size) * 1.15);
   font-weight: 600;
   color: var(--md-primary-color);
-  position: relative;
-}
-
-h4::before {
-  content: '◆';
-  position: absolute;
-  left: 0;
-  color: var(--md-primary-color);
-  font-size: 0.7em;
-  opacity: 0.6;
+  border-left: 3px solid var(--md-primary-color);
 }
 
 /* ==================== 引用块 - 优雅卡片 + 大引号 ==================== */
 blockquote {
   margin: 2em 8px;
-  padding: 1.5em 1.8em 1.5em 3em;
+  padding: 1.5em 1.8em;
   border-left: 5px solid var(--md-primary-color);
   border-radius: 0 12px 12px 0;
   background: linear-gradient(135deg,
@@ -141,33 +74,6 @@ blockquote {
   box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.06),
     inset 0 1px 0 rgba(255, 255, 255, 0.8);
-  position: relative;
-}
-
-blockquote::before {
-  content: '"';
-  position: absolute;
-  left: 0.5em;
-  top: 0.2em;
-  font-size: 3.5em;
-  color: color-mix(in srgb, var(--md-primary-color) 15%, transparent);
-  font-family: Georgia, serif;
-  line-height: 1;
-  font-style: normal;
-}
-
-blockquote::after {
-  content: '';
-  position: absolute;
-  right: 1em;
-  bottom: 1em;
-  width: 30px;
-  height: 30px;
-  background: radial-gradient(circle,
-    color-mix(in srgb, var(--md-primary-color) 8%, transparent) 0%,
-    transparent 70%
-  );
-  border-radius: 50%;
 }
 
 /* ==================== 代码块 - 现代卡片 ==================== */
@@ -176,21 +82,7 @@ pre {
   border-radius: 12px;
   border: 1px solid #eaecef;
   background: #fafbfc;
-  position: relative;
-  overflow: hidden;
-}
-
-pre::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg,
-    var(--md-primary-color) 0%,
-    color-mix(in srgb, var(--md-primary-color) 60%, transparent) 100%
-  );
+  border-top: 3px solid var(--md-primary-color);
 }
 
 /* ==================== 图片 - 优雅展示 ==================== */
@@ -201,7 +93,6 @@ img {
     0 8px 24px rgba(0, 0, 0, 0.12),
     0 2px 6px rgba(0, 0, 0, 0.08);
   border: 1px solid rgba(0, 0, 0, 0.04);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* ==================== 表格 - 现代设计 ==================== */
@@ -225,28 +116,12 @@ th {
   font-weight: 600;
   padding: 1em 1.3em;
   letter-spacing: 0.02em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  position: relative;
-}
-
-th::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg,
-    rgba(255, 255, 255, 0.3) 0%,
-    rgba(255, 255, 255, 0.1) 100%
-  );
 }
 
 td {
   border: 1px solid color-mix(in srgb, var(--md-primary-color) 10%, #e8eaed);
   padding: 0.9em 1.3em;
   color: rgba(0, 0, 0, 0.85);
-  transition: background 0.2s ease;
 }
 
 tbody tr:nth-child(even) {
@@ -256,21 +131,10 @@ tbody tr:nth-child(even) {
   );
 }
 
-tbody tr:hover {
-  background: color-mix(in srgb, var(--md-primary-color) 6%, transparent);
-}
-
 /* ==================== 强调文本 - 渐变色 ==================== */
 strong {
-  background: linear-gradient(135deg,
-    var(--md-primary-color) 0%,
-    color-mix(in srgb, var(--md-primary-color) 80%, #000) 100%
-  );
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: color-mix(in srgb, var(--md-primary-color) 80%, #000);
   font-weight: 700;
-  position: relative;
 }
 
 /* ==================== 链接 - 优雅下划线 ==================== */
@@ -278,20 +142,7 @@ a {
   color: #333;
   text-decoration: none;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-  transition: border-color 0.3s ease, color 0.3s ease;
   padding-bottom: 2px;
-  position: relative;
-}
-
-a::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #333;
-  transition: width 0.3s ease;
 }
 
 /* ==================== 分隔线 - 三色渐变 ==================== */
@@ -309,30 +160,11 @@ hr {
     transparent 100%
   );
   border-radius: 2px;
-  position: relative;
-}
-
-hr::before {
-  content: '✦';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--md-primary-color);
-  background: #fff;
-  padding: 0 0.5em;
-  font-size: 0.8em;
-  opacity: 0.6;
 }
 
 /* ==================== 列表装饰 ==================== */
 ul li {
-  position: relative;
   padding-left: 0.3em;
-}
-
-ol li {
-  position: relative;
 }
 
 /* ==================== 行内代码 - 柔和背景 ==================== */

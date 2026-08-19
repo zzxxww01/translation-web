@@ -9,6 +9,10 @@
    居中标签的标题会退回块级，铺满整行变成一条大色块（用户实拍到）。
 """
 
+import re
+
+import pytest
+
 from src.services.wechat_formatter import WechatFormatter
 from src.services.wechat_themes import get_theme, resolve_css_variables
 
@@ -84,7 +88,40 @@ def test_heading_inner_markup_preserved():
     assert "<strong>" in html
 
 
-def test_no_display_table_in_shipped_css():
-    """公众号不支持 display:table——它一失效标题就变成满宽色块。"""
-    for theme in ("default", "grace", "simple"):
-        assert "display: table" not in get_theme(theme), theme
+# --- 公众号 CSS 能力边界 -------------------------------------------------
+# 每一条都对应一种"预览好看、成品垮掉"的真实故障。主题里出现即视为缺陷：
+# 公众号只保留内联 style，且属性走白名单，下面这些要么被剥、要么不受支持。
+FORBIDDEN_CSS = [
+    (
+        r"position:\s*(absolute|fixed|sticky)",
+        "绝对定位失效后，装饰会掉进文档流——大引号跑到文章顶部、菱形符号贴到页面左边缘",
+    ),
+    (r"::(before|after)", "伪元素装饰无一例外依赖绝对定位，且公众号会剥掉"),
+    (r"display:\s*(table|flex|grid)", "这些显示类型不受支持，失效后收缩布局会摊成满宽色块"),
+    (r"\bvar\(", "`:root` 跟着 <style> 一起被剥掉，var() 无从查起，整条声明作废"),
+    (r"\bcalc\(", "同上，且 calc 里通常套着 var"),
+    (r"color-mix\(", "2023 年才铺开的语法，公众号不认，含它的整条声明作废"),
+    (r"background-clip|text-fill-color", "渐变文字：clip 被剥而 text-fill-color 留下时，文字会全透明"),
+    (r"transition:|animation:", "公众号正文没有动效"),
+    (r":hover|:focus|:active", "公众号正文没有交互态"),
+    (r"transform:", "变换不受支持，靠它做的细线/位移会跳变"),
+]
+
+
+@pytest.mark.parametrize("theme", ["default", "grace", "simple"])
+@pytest.mark.parametrize("pattern,reason", FORBIDDEN_CSS)
+def test_theme_avoids_unsupported_css(theme: str, pattern: str, reason: str) -> None:
+    hits = re.findall(pattern, get_theme(theme))
+    assert not hits, f"{theme} 主题用了公众号不支持的写法（{len(hits)} 处）：{reason}"
+
+
+def test_headings_survive_losing_layout_properties():
+    """把公众号会剥的属性全部拿掉后，标题仍然是收缩的，不该摊成满宽。
+
+    这是 display:table 那次故障的本质：它一失效就退回块级。inline-block 退化成
+    inline 仍然收缩，所以现在的写法扛得住。
+    """
+    css = get_theme("default")
+    # 标题的视觉样式必须挂在内层 span 上，而不是标题元素本身
+    assert ".wx-heading-label" in css
+    assert "display: inline-block" in css
