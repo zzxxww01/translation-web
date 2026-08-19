@@ -156,3 +156,27 @@ def test_legitimate_backslash_command_survives_formatting():
     src = r"集合差记作 $A \backslash B$。"
     html = WechatFormatter().format(src, theme="default")["html"]
     assert r"A \backslash B" in html
+
+
+def test_backend_sanitizer_strips_svg_but_keeps_formula_nodes():
+    """后端消毒会删掉 <svg>——公式渲染必须留在前端，这是个隐性前提。
+
+    `_sanitize_html` 的 DANGEROUS_TAGS 里含 `svg`（防的是 XSS：SVG 能带
+    <script>、能引用外部资源）。当前公式链路正好绕开它——后端只输出带
+    `data-latex` 的降级节点，SVG 由前端 formulaRenderer 在消毒之后生成。
+
+    但这层依赖只存在于执行顺序里，代码上看不出来。哪天有人把公式渲染挪到后端，
+    公式会被**静默删光**、不报错也没测试失败。这条测试把前提钉在这里。
+    """
+    formatter = WechatFormatter()
+    result = formatter.format(
+        '公式 $x^2$ 与内嵌 <svg width="10"><path d="M0 0"/></svg> 图形。',
+        theme="default",
+    )
+    html = result["html"]
+
+    # 消毒确实会吃掉 SVG（这是安全设计，不是缺陷）
+    assert "<svg" not in html
+    # 而公式以 data-latex 节点的形式活着，等前端渲染
+    assert "data-latex" in html
+    assert result["formula_count"] == 1
