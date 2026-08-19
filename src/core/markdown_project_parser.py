@@ -443,9 +443,17 @@ class MarkdownProjectParser:
                 if paragraph.is_metadata:
                     continue
 
+                # 文章副标题：位于 H1 主标题与第一个 H2 章节之间，因此一定落在
+                # **合成的** intro 章里（synthetic=True 表示这段内容出现在任何 H2
+                # 之前）。少了 synthetic 这个前提，「第 0 章第 0 段是 H3/H4」会把
+                # 正文小标题误判成副标题——而被打上 metadata 标记的段落会被排除出
+                # 正文翻译，永远保持英文；有副标题时更会被整段替换成文章副标题。
+                # 三种语料外形态实测都会中招：无副标题且首章以 H3 小标题开头、
+                # 首章以 H4 开头、以及没有 H1 直接从 H2 起头的短快评。
                 if (
                     section_index == 0
                     and paragraph_index == 0
+                    and section.synthetic
                     and paragraph.element_type in {ElementType.H3, ElementType.H4}
                 ):
                     paragraph.is_metadata = True
