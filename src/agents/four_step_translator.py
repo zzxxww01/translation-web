@@ -34,7 +34,11 @@ from ..core.longform_context import (
     build_section_context_payload,
     build_translation_guidelines,
 )
-from ..core.glossary_prompt import select_prompt_terms_for_text, _count_term_occurrences
+from ..core.glossary_prompt import (
+    select_prompt_terms_for_text,
+    select_review_terms_for_text,
+    _count_term_occurrences,
+)
 from ..core.constants import MAX_REVIEW_TERMS_IN_PROMPT
 from ..core.format_tokens import (
     TranslationPayload,
@@ -1049,9 +1053,10 @@ class FourStepTranslator:
             # 否则润色阶段拿到的是无关术语，可自由改写本章真正的术语（审计 LC4）。
             # select_prompt_terms_for_text 默认取 30 条，必须显式回收到 MAX_REVIEW_TERMS_IN_PROMPT。
             terminology = build_review_term_entries(
-                select_prompt_terms_for_text(
+                select_review_terms_for_text(
                     self.context_manager.article_analysis.terminology,
                     self._build_section_source_text(section),
+                    max_terms=MAX_REVIEW_TERMS_IN_PROMPT,
                 ),
                 max_terms=MAX_REVIEW_TERMS_IN_PROMPT,
             )
@@ -1168,9 +1173,10 @@ class FourStepTranslator:
             )
             # 同 _build_review_context：按本章原文命中筛术语，再截断到评审用上限
             terminology = build_review_term_entries(
-                select_prompt_terms_for_text(
+                select_review_terms_for_text(
                     self.context_manager.article_analysis.terminology,
                     self._build_section_source_text(section),
+                    max_terms=MAX_REVIEW_TERMS_IN_PROMPT,
                 ),
                 max_terms=MAX_REVIEW_TERMS_IN_PROMPT,
             )

@@ -173,6 +173,50 @@ def select_prompt_terms_for_text(
     return [term for _, _, _, term in candidates[:max_terms]]
 
 
+def select_review_terms_for_text(
+    terms: Optional[Iterable[Any]],
+    source_text: Optional[str],
+    max_terms: int,
+) -> List[Any]:
+    """为反思/精修阶段挑术语：先按命中筛，再按**出错风险**排序，最后截断。
+
+    直接复用 :func:`select_prompt_terms_for_text` 的话，排序是按出现次数降序，
+    截断留下的是 AI／GPU／NVIDIA 这类高频词——而它们恰恰是模型绝不会译错的。
+    真正需要审校盯住的是低频难词：多义词有没有选对义项、preserve 词条有没有被
+    硬译、首现括注纪律有没有守住。实测 306 个章节里 51.3% 命中数超过上限 10，
+    最多的一章命中 51 条，按词频截断等于把该章最难的那批词全部丢掉。
+
+    风险分档（高到低）：
+      0 多义词  —— 必须逐处判义，选错义项是硬错
+      1 preserve —— 禁译，被硬译一眼可见
+      2 带括注策略 —— 首现括注纪律
+      3 其余单义词 —— 模型通常不会错
+    同档内保持原有的词频顺序。
+    """
+    selected = select_prompt_terms_for_text(terms, source_text, max_terms=999)
+    if not selected:
+        return []
+
+    def risk_rank(term: Any) -> int:
+        payload = _normalize_prompt_term(term)
+        if not payload:
+            return 3
+        strategy = payload["strategy"]
+        if _is_polysemous_translation(payload["translation"], payload["note"]):
+            return 0
+        if strategy == "preserve":
+            return 1
+        if strategy in ("first_annotate", "preserve_annotate"):
+            return 2
+        return 3
+
+    ordered = sorted(
+        enumerate(selected),
+        key=lambda pair: (risk_rank(pair[1]), pair[0]),
+    )
+    return [term for _, term in ordered[: max(max_terms, 0)]]
+
+
 def _normalize_prompt_term(term: Any) -> Optional[Dict[str, Any]]:
     if isinstance(term, dict):
         strategy = term.get("strategy", "")

@@ -23,7 +23,10 @@ BATCH_PARAGRAPH_SIZE = 8  # 批量翻译时每批段落数
 
 # ============ 术语表配置 ============
 MAX_GLOSSARY_TERMS_IN_PROMPT = 30  # Prompt 中最大术语数量
-MAX_REVIEW_TERMS_IN_PROMPT = 10  # 反思/润色阶段的关键术语数量
+# 反思/润色阶段的关键术语数量。10 是早期定的，实测 306 个章节里 51.3% 命中数
+# 超过 10（最多一章 51 条），截断掉的正是该章最难的词。提到 24 的代价约 +220
+# token/次，且 24 之后基本饱和（多数章节命中数不足 24）。
+MAX_REVIEW_TERMS_IN_PROMPT = 24
 MAX_LEARNED_RULES_IN_PROMPT = 20  # Prompt 中最大已学习规则条数
 MAX_LEARNED_RULES_CHARS = 600  # Prompt 中已学习规则的总字符上限
 

@@ -37,6 +37,117 @@ _CALC_MUL_RE = re.compile(
 )
 
 
+_HEX_COLOR_RE = re.compile(r"#([0-9a-fA-F]{3,8})$")
+_RGB_FN_RE = re.compile(r"rgba?\(([^)]*)\)$", re.IGNORECASE)
+_NAMED_COLORS = {
+    "transparent": (0.0, 0.0, 0.0, 0.0),
+    "white": (255.0, 255.0, 255.0, 1.0),
+    "black": (0.0, 0.0, 0.0, 1.0),
+}
+# color-mix() 是 2023 年才铺开的语法，公众号不认——整条声明会作废。grace 主题
+# 把它用在 h2 的渐变背景里，失效就是白字白底、标题整条看不见。
+_COLOR_MIX_RE = re.compile(
+    r"color-mix\(\s*in\s+srgb\s*,\s*"
+    r"([^,]+?)(?:\s+([\d.]+)%)?\s*,\s*"
+    r"([^,()]+?)(?:\s+([\d.]+)%)?\s*\)",
+    re.IGNORECASE,
+)
+
+
+def _parse_color(text: str):
+    """解析成 (r, g, b, a)；认不出返回 None（调用方保持原样，不硬猜）。"""
+    value = text.strip().lower()
+    if value in _NAMED_COLORS:
+        return _NAMED_COLORS[value]
+
+    match = _HEX_COLOR_RE.match(value)
+    if match:
+        digits = match.group(1)
+        if len(digits) == 3:
+            r, g, b = (int(ch * 2, 16) for ch in digits)
+            return (float(r), float(g), float(b), 1.0)
+        if len(digits) == 6:
+            return (
+                float(int(digits[0:2], 16)),
+                float(int(digits[2:4], 16)),
+                float(int(digits[4:6], 16)),
+                1.0,
+            )
+        if len(digits) == 8:
+            return (
+                float(int(digits[0:2], 16)),
+                float(int(digits[2:4], 16)),
+                float(int(digits[4:6], 16)),
+                int(digits[6:8], 16) / 255,
+            )
+        return None
+
+    match = _RGB_FN_RE.match(value)
+    if match:
+        parts = [p.strip() for p in match.group(1).replace("/", ",").split(",") if p.strip()]
+        if len(parts) < 3:
+            return None
+        try:
+            channels = [float(p.rstrip("%")) for p in parts[:3]]
+            alpha = float(parts[3].rstrip("%")) if len(parts) > 3 else 1.0
+        except ValueError:
+            return None
+        if len(parts) > 3 and parts[3].endswith("%"):
+            alpha /= 100
+        return (channels[0], channels[1], channels[2], alpha)
+
+    return None
+
+
+def _format_color(red: float, green: float, blue: float, alpha: float) -> str:
+    r, g, b = (max(0, min(255, int(round(channel)))) for channel in (red, green, blue))
+    if alpha >= 0.999:
+        return f"#{r:02x}{g:02x}{b:02x}"
+    return f"rgba({r}, {g}, {b}, {round(alpha, 4)})"
+
+
+def _fold_color_mix(css: str) -> str:
+    """把 ``color-mix(in srgb, A p%, B)`` 算成静态色值。"""
+
+    def replace(match: "re.Match[str]") -> str:
+        first_text, first_pct, second_text, second_pct = match.groups()
+        first = _parse_color(first_text)
+        second = _parse_color(second_text)
+        if first is None or second is None:
+            return match.group(0)
+
+        p1 = float(first_pct) / 100 if first_pct else None
+        p2 = float(second_pct) / 100 if second_pct else None
+        if p1 is None and p2 is None:
+            p1 = p2 = 0.5
+        elif p1 is None:
+            p1 = 1.0 - p2
+        elif p2 is None:
+            p2 = 1.0 - p1
+
+        total = p1 + p2
+        if total <= 0:
+            return match.group(0)
+        p1, p2 = p1 / total, p2 / total
+
+        # 按 alpha 加权（CSS 规范的 premultiplied 混合）
+        alpha = first[3] * p1 + second[3] * p2
+        if alpha <= 0:
+            return "rgba(0, 0, 0, 0)"
+        channels = [
+            (first[i] * first[3] * p1 + second[i] * second[3] * p2) / alpha
+            for i in range(3)
+        ]
+        return _format_color(channels[0], channels[1], channels[2], alpha)
+
+    for _ in range(4):  # 允许嵌套，迭代到收敛
+        folded = _COLOR_MIX_RE.sub(replace, css)
+        if folded == css:
+            break
+        css = folded
+    return css
+
+
 def resolve_css_variables(css: str) -> str:
     """把 ``var()`` 与简单 ``calc()`` 解析成字面值。
 
@@ -53,9 +164,6 @@ def resolve_css_variables(css: str) -> str:
         for name, value in _VAR_DECL_RE.findall(block):
             variables[name] = value.strip()
 
-    if not variables:
-        return css
-
     def substitute(text: str) -> str:
         def replace(match: "re.Match[str]") -> str:
             name, fallback = match.group(1), match.group(2)
@@ -65,14 +173,16 @@ def resolve_css_variables(css: str) -> str:
 
         return _VAR_USE_RE.sub(replace, text)
 
-    # 变量值本身可能引用别的变量，迭代到收敛（次数设上限，防循环引用）
-    for _ in range(5):
-        resolved = {key: substitute(value) for key, value in variables.items()}
-        if resolved == variables:
-            break
-        variables = resolved
-
-    css = substitute(css)
+    if variables:
+        # 变量值本身可能引用别的变量，迭代到收敛（次数设上限，防循环引用）
+        for _ in range(5):
+            resolved = {key: substitute(value) for key, value in variables.items()}
+            if resolved == variables:
+                break
+            variables = resolved
+        css = substitute(css)
+    # color-mix 的参数常常是变量，必须等 var 展开后再算
+    css = _fold_color_mix(css)
 
     def fold_calc(match: "re.Match[str]") -> str:
         left, unit, operator, right = match.groups()
