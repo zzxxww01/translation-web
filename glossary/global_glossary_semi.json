@@ -607,17 +607,17 @@
     },
     {
       "original": "transformer",
-      "translation": "Transformer",
-      "strategy": "preserve",
-      "note": "一种深度学习模型架构",
+      "translation": "Transformer(AI)/变压器(电力)",
+      "strategy": "translate",
+      "note": "**判据：它是模型还是设备**。神经网络架构、注意力、attention block、LLM 语境→保留英文 Transformer，不译；变电站、配电、中压/高压、kV、MVA、绕组、油浸、transformer bank 语境→变压器。数据中心供电类文章两义都可能出现，逐处判义。",
       "tags": [
         "ai"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-03-12T12:47:53.570505"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "parameter",
@@ -803,17 +803,17 @@
     },
     {
       "original": "benchmark",
-      "translation": "基准测试",
+      "translation": "基准测试(评测)/基准利率(金融)/基准(对照)",
       "strategy": "translate",
-      "note": "只有表示大模型等的评测方式时翻译成基准测试",
+      "note": "**判据：它在测什么**。模型或硬件评测、MLPerf、benchmark suite→基准测试；利率、债券、指数、benchmark rate/yield、spread over the benchmark→基准利率/基准指数；一般对照基线→基准。禁一律作\"基准测试\"。",
       "tags": [
         "performance"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "FLOPS",
@@ -1555,17 +1555,17 @@
     },
     {
       "original": "rollout",
-      "translation": null,
-      "strategy": "preserve",
-      "note": "RL 语境保留英文，不意译为「部署」",
+      "translation": "rollout(RL，保留英文)/铺开(产品)/上量(产能)",
+      "strategy": "translate",
+      "note": "**判据：它是采样轨迹还是投放**。强化学习采样轨迹、policy rollout→保留英文 rollout，不译\"部署\"；产品发布、区域投放、功能上线→铺开/推出；产能与出货爬坡→上量/放量。",
       "tags": [
         "ai"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "Day 0",
@@ -1583,17 +1583,17 @@
     },
     {
       "original": "harness",
-      "translation": null,
-      "strategy": "preserve",
-      "note": "保留英文，首次出现可括注（运行/测试框架）",
+      "translation": "harness(测试框架，保留英文)/线束(线缆)",
+      "strategy": "translate",
+      "note": "**判据：它是软件还是实物**。评测/运行/测试框架、eval harness、agent harness→保留英文 harness；机架布线、cable harness、铜缆、背板、整机柜→线束。机架级系统与 cableless 类文章必现线束义。",
       "tags": [
         "ai"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "manual",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "financial engineering",
@@ -1891,17 +1891,17 @@
     },
     {
       "original": "Alignment",
-      "translation": "对齐",
+      "translation": "对齐(AI)/对准(光学)/套刻(光刻)",
       "strategy": "translate",
-      "note": "AI 安全语境",
+      "note": "**判据：在对齐什么**。AI 安全、价值观、RLHF、模型行为→对齐；光纤耦合、透镜、passive/active alignment、连接器、共封装光学→对准/对位；光刻套刻误差、overlay、掩模版对位→套刻。机械装配语境→找正/对中。禁一律作\"对齐\"。",
       "tags": [
         "ai"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "skill-glossary-merge",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "Agentic",
@@ -1919,31 +1919,31 @@
     },
     {
       "original": "Grounding",
-      "translation": "基础化/落地",
+      "translation": "事实接地(AI)/接地(电气)/依据(一般)",
       "strategy": "translate",
-      "note": "依语境选择",
+      "note": "**判据：它接的是事实还是大地**。RAG、检索增强、把模型输出锚定到证据→事实接地/落地依据；配电、机柜、母线、bonding、NEC、防雷→接地（电气义，供电类文章必现）；论证依据→依据/立论基础。",
       "tags": [
         "ai"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "skill-glossary-merge",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "Embedding",
-      "translation": "嵌入/向量化",
+      "translation": "嵌入向量(ML)/嵌入式(封装)",
       "strategy": "translate",
-      "note": "依语境选择",
+      "note": "**判据：它是向量还是结构**。词向量、向量检索、embedding model→嵌入向量/向量化；先进封装里的 embedded bridge、EMIB、嵌入式硅桥、RDL 内嵌→嵌入式（形容词义）。",
       "tags": [
         "ai"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "skill-glossary-merge",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "Moat",
@@ -2059,17 +2059,17 @@
     },
     {
       "original": "Breakdown",
-      "translation": "拆解",
+      "translation": "拆解(标题)/击穿(器件)/明细(数据)",
       "strategy": "translate",
-      "note": "标题语境=拆解/详解，禁望文生义“崩溃”",
+      "note": "**判据：它是动作、物理现象还是数据**。标题或\"逐项分析\"语境→拆解/详解；GaN/SiC/介质/雪崩、breakdown voltage、dielectric breakdown→击穿；成本/收入/份额 breakdown→明细/构成/拆分。禁一律作\"拆解\"。",
       "tags": [
         "editorial"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "skill-glossary-merge",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "performance hurdle",
@@ -2115,17 +2115,17 @@
     },
     {
       "original": "the street",
-      "translation": "华尔街",
+      "translation": "华尔街/市场预期(金融)/街对面(字面)",
       "strategy": "translate",
-      "note": null,
+      "note": "**判据：它是机构还是道路**。分析师预期、beat the street、street estimates→华尔街/市场预期；厂区、园区、选址描述里的 across the street→街对面。字面义在数据中心选址类文章里常见。",
       "tags": [
         "finance"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "skill-glossary-merge",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "TTM",
@@ -2157,17 +2157,17 @@
     },
     {
       "original": "unwind",
-      "translation": "解约/拆解",
+      "translation": "平仓/解杠杆(金融)/拆解(一般)",
       "strategy": "translate",
-      "note": "依语境选择",
+      "note": "**判据：它解的是头寸还是结构**。持仓、套利、carry trade、杠杆→平仓/解杠杆/了结；协议、合资、交易结构→解约/拆解。金融义在财报与产业分析类文章里最常见。",
       "tags": [
         "finance"
       ],
       "first_occurrence": null,
       "scope": "global",
-      "source": "skill-glossary-merge",
+      "source": "generalization-2026-08",
       "status": "active",
-      "updated_at": "2026-07-26T00:00:00"
+      "updated_at": "2026-08-19T09:53:51.591647"
     },
     {
       "original": "burnout",

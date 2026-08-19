@@ -17,7 +17,12 @@ DEFAULT_GLOSSARY_PROMPT_TITLE = "## 术语约束（仅列出当前文本命中�
 SHORT_FORM_GLOSSARY_PROMPT_TITLE = (
     "## 术语约束（仅统一用词写法，不改变下文的注释与篇幅规则）"
 )
-MAX_GLOSSARY_NOTE_CHARS_IN_PROMPT = 48
+# 词义栏的注入上限。48 是照着早期那批短 note 定的，而 2026-08 沉淀的「判据型」条目
+# （memory/tile/node/yield/transformer/Alignment…）普遍 100-240 字，被从中间截断后
+# 模型看到的是半句映射表加省略号，等价于没有判据。实测 245 条里 50 条超 48 字。
+# 提到 160 的代价很小：一批只注入 30 条且长 note 条目本就少，真实语料上注入块平均
+# 仅从 930 字符涨到 1053（约 +60 token），160 以上已完全饱和。
+MAX_GLOSSARY_NOTE_CHARS_IN_PROMPT = 160
 
 # 词义栏里的括注部分（多为英文全称），取中文全称时先掐掉。
 _CJK_ANNOTATION_PARENS = re.compile(r"[（(][^）)]*[)）]")
