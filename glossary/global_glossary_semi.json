@@ -3435,6 +3435,1329 @@
       "source": "manual",
       "status": "active",
       "updated_at": "2026-08-10T00:00:00.000000"
+    },
+    {
+      "original": "co-packaged optics",
+      "translation": "共封装光学",
+      "strategy": "first_annotate",
+      "note": "与可插拔光模块相对：光引擎与交换芯片同封装。缩写 CPO 同条目。",
+      "tags": [
+        "optics",
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "CPO",
+      "translation": "CPO",
+      "strategy": "preserve",
+      "note": "co-packaged optics 的缩写，业界一律写 CPO。首现可写「共封装光学（CPO）」。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "SerDes",
+      "translation": "SerDes",
+      "strategy": "preserve",
+      "note": "串行器/解串器，业界一律保留英文。",
+      "tags": [
+        "optics",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "retimer",
+      "translation": "重定时器",
+      "strategy": "first_annotate",
+      "note": "恢复并重发信号时序的器件；与 redriver（转发器）不同，后者只放大不重定时。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "silicon photonics",
+      "translation": "硅光",
+      "strategy": "first_annotate",
+      "note": "硅基光电子集成。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "NVLink",
+      "translation": "NVLink",
+      "strategy": "preserve",
+      "note": "英伟达自有互连协议，禁译。",
+      "tags": [
+        "optics",
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "InfiniBand",
+      "translation": "InfiniBand",
+      "strategy": "preserve",
+      "note": "禁译，禁写「无限带宽」。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "RoCE",
+      "translation": "RoCE",
+      "strategy": "preserve",
+      "note": "RDMA over Converged Ethernet，业界写缩写。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "OCS",
+      "translation": "OCS",
+      "strategy": "preserve",
+      "note": "光路交换（Optical Circuit Switch），首现可括注。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "PAM4",
+      "translation": "PAM4",
+      "strategy": "preserve",
+      "note": "四电平脉冲幅度调制，禁译。",
+      "tags": [
+        "optics",
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "OSFP",
+      "translation": "OSFP",
+      "strategy": "preserve",
+      "note": "光模块封装形态，禁译。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "AEC",
+      "translation": "AEC",
+      "strategy": "preserve",
+      "note": "有源电缆（Active Electrical Cable），首现可括注。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "transceiver",
+      "translation": "光模块",
+      "strategy": "translate",
+      "note": "**判据：它是器件还是功能**。数据中心光互连语境→光模块；泛指收发电路→收发器。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "linear drive",
+      "translation": "线性驱动",
+      "strategy": "first_annotate",
+      "note": "去 DSP 的低功耗光链路方案；LPO 是其常见实现。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "LPO",
+      "translation": "LPO",
+      "strategy": "preserve",
+      "note": "Linear Pluggable Optics，业界写缩写。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "VCSEL",
+      "translation": "VCSEL",
+      "strategy": "preserve",
+      "note": "垂直腔面发射激光器，禁译。",
+      "tags": [
+        "optics"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "hybrid bonding",
+      "translation": "混合键合",
+      "strategy": "first_annotate",
+      "note": "铜-铜直接键合，间距远小于微凸块。",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "TSV",
+      "translation": "TSV",
+      "strategy": "preserve",
+      "note": "硅通孔（Through-Silicon Via），首现可括注。",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "RDL",
+      "translation": "RDL",
+      "strategy": "preserve",
+      "note": "重布线层（Redistribution Layer），首现可括注。",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "SoIC",
+      "translation": "SoIC",
+      "strategy": "preserve",
+      "note": "台积电 3D 堆叠封装品牌名，禁译。",
+      "tags": [
+        "packaging",
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "EMIB",
+      "translation": "EMIB",
+      "strategy": "preserve",
+      "note": "英特尔嵌入式桥接封装，禁译。",
+      "tags": [
+        "packaging",
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "Foveros",
+      "translation": "Foveros",
+      "strategy": "preserve",
+      "note": "英特尔 3D 封装品牌名，禁译。",
+      "tags": [
+        "packaging",
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "UCIe",
+      "translation": "UCIe",
+      "strategy": "preserve",
+      "note": "裸片间互连标准，禁译。",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "OSAT",
+      "translation": "OSAT",
+      "strategy": "preserve",
+      "note": "委外封测厂，业界写 OSAT；首现可写「封测代工（OSAT）」。",
+      "tags": [
+        "packaging",
+        "company"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "substrate",
+      "translation": "基板",
+      "strategy": "translate",
+      "note": "封装语境=基板（ABF/载板）；化学语境才是「衬底/基底」。",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "underfill",
+      "translation": "底部填充",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "warpage",
+      "translation": "翘曲",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "backside power delivery",
+      "translation": "背面供电",
+      "strategy": "first_annotate",
+      "note": "把供电网络移到晶圆背面；英特尔叫 PowerVia。",
+      "tags": [
+        "packaging",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "panel-level packaging",
+      "translation": "面板级封装",
+      "strategy": "first_annotate",
+      "note": "相对晶圆级封装，用方形面板做载体。",
+      "tags": [
+        "packaging"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "High-NA",
+      "translation": "High-NA",
+      "strategy": "preserve",
+      "note": "高数值孔径 EUV，业界一律写 High-NA，禁译「高数值孔径」单用。",
+      "tags": [
+        "litho"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "pellicle",
+      "translation": "光罩保护膜",
+      "strategy": "first_annotate",
+      "note": "贴在掩模版上的防尘薄膜。",
+      "tags": [
+        "litho"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "reticle",
+      "translation": "掩模版",
+      "strategy": "translate",
+      "note": "也叫光罩。注意 reticle limit=掩模版尺寸上限（曝光场尺寸）。",
+      "tags": [
+        "litho"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "overlay",
+      "translation": "套刻",
+      "strategy": "translate",
+      "note": "**判据：光刻语境才是套刻**。层间对准误差→套刻/套刻精度；软件语境的 overlay→叠加层。",
+      "tags": [
+        "litho"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "GAA",
+      "translation": "GAA",
+      "strategy": "preserve",
+      "note": "环绕栅极（Gate-All-Around），业界写缩写。",
+      "tags": [
+        "litho",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "nanosheet",
+      "translation": "纳米片",
+      "strategy": "translate",
+      "note": "GAA 的具体形态。",
+      "tags": [
+        "litho",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "FinFET",
+      "translation": "FinFET",
+      "strategy": "preserve",
+      "note": "鳍式场效应晶体管，业界一律写英文。",
+      "tags": [
+        "litho",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "WFE",
+      "translation": "WFE",
+      "strategy": "preserve",
+      "note": "晶圆制造设备（Wafer Fab Equipment），业界写缩写。",
+      "tags": [
+        "litho",
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "multi-patterning",
+      "translation": "多重图形化",
+      "strategy": "first_annotate",
+      "note": "含 SADP/SAQP 等；也译多重曝光。",
+      "tags": [
+        "litho"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "metrology",
+      "translation": "量测",
+      "strategy": "translate",
+      "note": "半导体语境=量测（检测尺寸/套刻）；禁写「计量学」。",
+      "tags": [
+        "litho"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "photoresist",
+      "translation": "光刻胶",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "litho",
+        "material"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "ion implantation",
+      "translation": "离子注入",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "litho"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "anneal",
+      "translation": "退火",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "litho"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "HBM4",
+      "translation": "HBM4",
+      "strategy": "preserve",
+      "note": "禁译，禁展开成中文全称。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "HBM3E",
+      "translation": "HBM3E",
+      "strategy": "preserve",
+      "note": "禁译。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "DDR5",
+      "translation": "DDR5",
+      "strategy": "preserve",
+      "note": "禁译。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "LPDDR6",
+      "translation": "LPDDR6",
+      "strategy": "preserve",
+      "note": "禁译。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "3D NAND",
+      "translation": "3D NAND",
+      "strategy": "preserve",
+      "note": "禁译，禁写「三维闪存」。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "layer count",
+      "translation": "堆叠层数",
+      "strategy": "translate",
+      "note": "3D NAND 的层数。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "TLC",
+      "translation": "TLC",
+      "strategy": "preserve",
+      "note": "三层单元闪存，业界写缩写。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "QLC",
+      "translation": "QLC",
+      "strategy": "preserve",
+      "note": "四层单元闪存，业界写缩写。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "CXL",
+      "translation": "CXL",
+      "strategy": "preserve",
+      "note": "Compute Express Link，禁译。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "bit growth",
+      "translation": "位元增长",
+      "strategy": "first_annotate",
+      "note": "存储行业的需求口径：按比特总量而非颗数计。",
+      "tags": [
+        "memory",
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "wafer starts",
+      "translation": "晶圆投片量",
+      "strategy": "translate",
+      "note": "注意与产出（output）区分。",
+      "tags": [
+        "memory",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "JEDEC",
+      "translation": "JEDEC",
+      "strategy": "preserve",
+      "note": "存储标准组织，禁译。",
+      "tags": [
+        "memory"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "busbar",
+      "translation": "母线",
+      "strategy": "translate",
+      "note": "配电母线；机柜内也叫母线槽。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "switchgear",
+      "translation": "开关柜",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "UPS",
+      "translation": "UPS",
+      "strategy": "preserve",
+      "note": "不间断电源，业界写 UPS。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "BBU",
+      "translation": "BBU",
+      "strategy": "preserve",
+      "note": "电池备份单元（Battery Backup Unit），首现可括注。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "genset",
+      "translation": "柴油发电机组",
+      "strategy": "first_annotate",
+      "note": "也简称柴发。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "BESS",
+      "translation": "BESS",
+      "strategy": "preserve",
+      "note": "电池储能系统，业界写缩写。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "PUE",
+      "translation": "PUE",
+      "strategy": "preserve",
+      "note": "电能使用效率，业界一律写 PUE。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "cold plate",
+      "translation": "冷板",
+      "strategy": "translate",
+      "note": "液冷散热的核心部件。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "CDU",
+      "translation": "CDU",
+      "strategy": "preserve",
+      "note": "冷量分配单元（Coolant Distribution Unit），首现可括注。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "liquid cooling",
+      "translation": "液冷",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "PPA",
+      "translation": "PPA",
+      "strategy": "preserve",
+      "note": "购电协议（Power Purchase Agreement）；注意与芯片语境的 PPA（性能/功耗/面积）区分，按题材判义。",
+      "tags": [
+        "power",
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "interconnection queue",
+      "translation": "并网排队",
+      "strategy": "first_annotate",
+      "note": "新增电源接入电网的审批队列，美国电力市场的关键瓶颈。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "substation",
+      "translation": "变电站",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "capacity auction",
+      "translation": "容量拍卖",
+      "strategy": "translate",
+      "note": "电力市场机制，禁译成「产能拍卖」。",
+      "tags": [
+        "power",
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "curtailment",
+      "translation": "弃电",
+      "strategy": "translate",
+      "note": "可再生能源被迫减出力；也译限电/削减。",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "guidance",
+      "translation": "业绩指引",
+      "strategy": "translate",
+      "note": "公司对下季/全年的预期。禁写「指导」。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "RPO",
+      "translation": "RPO",
+      "strategy": "preserve",
+      "note": "剩余履约义务（Remaining Performance Obligations），首现可括注。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "book-to-bill",
+      "translation": "订单出货比",
+      "strategy": "first_annotate",
+      "note": "大于 1 表示需求强于出货。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "DSO",
+      "translation": "DSO",
+      "strategy": "preserve",
+      "note": "应收账款周转天数，业界写缩写。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "EBITDA",
+      "translation": "EBITDA",
+      "strategy": "preserve",
+      "note": "禁译，禁展开成中文全称。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "FCF",
+      "translation": "FCF",
+      "strategy": "preserve",
+      "note": "自由现金流，首现可写「自由现金流（FCF）」。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "GAAP",
+      "translation": "GAAP",
+      "strategy": "preserve",
+      "note": "禁译；non-GAAP 同理。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "SBC",
+      "translation": "SBC",
+      "strategy": "preserve",
+      "note": "股权激励费用（Stock-Based Compensation），首现可括注。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "CAGR",
+      "translation": "CAGR",
+      "strategy": "preserve",
+      "note": "复合年增长率，业界写缩写。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "operating leverage",
+      "translation": "经营杠杆",
+      "strategy": "translate",
+      "note": "收入增长带动利润率扩张的效应。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "basis points",
+      "translation": "基点",
+      "strategy": "translate",
+      "note": "1 基点=0.01 个百分点。缩写 bps 在金融语境同样译基点，不要按物理单位保留英文。",
+      "tags": [
+        "finance",
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "deferred revenue",
+      "translation": "递延收入",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "MoE",
+      "translation": "MoE",
+      "strategy": "preserve",
+      "note": "混合专家（Mixture of Experts），业界一律写 MoE。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "KV cache",
+      "translation": "KV 缓存",
+      "strategy": "first_annotate",
+      "note": "注意力的键值缓存。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "TTFT",
+      "translation": "TTFT",
+      "strategy": "preserve",
+      "note": "首 token 时延（Time To First Token），首现可括注。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "TPOT",
+      "translation": "TPOT",
+      "strategy": "preserve",
+      "note": "每个输出 token 耗时（Time Per Output Token），首现可括注。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "FP8",
+      "translation": "FP8",
+      "strategy": "preserve",
+      "note": "禁译。FP4/NVFP4/BF16 同理。",
+      "tags": [
+        "ai",
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "FP4",
+      "translation": "FP4",
+      "strategy": "preserve",
+      "note": "禁译。",
+      "tags": [
+        "ai",
+        "unit"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "speculative decoding",
+      "translation": "投机解码",
+      "strategy": "first_annotate",
+      "note": "用小模型草稿加大模型校验来提速。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "tensor parallel",
+      "translation": "张量并行",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "pipeline parallel",
+      "translation": "流水线并行",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "expert parallel",
+      "translation": "专家并行",
+      "strategy": "translate",
+      "note": "MoE 特有的并行维度。",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "batch size",
+      "translation": "批大小",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "context length",
+      "translation": "上下文长度",
+      "strategy": "translate",
+      "note": "",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "domain-coverage-2026-08",
+      "status": "active",
+      "updated_at": "2026-08-19T10:04:31.464697"
     }
   ]
 }
