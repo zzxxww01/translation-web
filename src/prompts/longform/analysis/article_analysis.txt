@@ -20,13 +20,17 @@ Analyze the article and return structured context for downstream translation, cr
 5. Describe the source style and the Chinese voice that should preserve it.
 6. List the main translation risks that could cause mistranslation, diluted judgment, or unreadable Chinese.
 7. Produce 4-7 translation guidelines that the rest of the chain can directly follow. At least one guideline should address sentence restructuring and Chinese-native paragraph flow.
-8. For GPU/semiconductor/CUDA-heavy articles, explicitly flag domain-specific terms that are commonly mistranslated (e.g., kernel vs operator, latent variable vs latent, floorplan vs layout, die shot, swizzle, bytes-in-flight) and include them in the terminology list with correct translations and rationale. Also ensure coverage of:
-   - Architecture codenames (SM100, SM90, SM80) — annotate with architecture name (e.g., "SM100 为 Blackwell 架构代号")
-   - Microarchitecture units (TPC, GPC, SM, MIO, MSHR) — include full English name and brief Chinese explanation
-   - Framework-specific abstractions (CuTe, CUTLASS atom, Epilogue in GEMM context) — annotate with library context
-   - SASS instruction mnemonics (LDGSTS, UBLKCP, UTMALDG) — include operation description
-   - Profiling/debugging tools (NCU = Nsight Compute, NSight Systems) — include full product name
-   All such terms should have `first_occurrence_note: true`.
+8. Flag domain-specific terms that are commonly mistranslated, and include them in the terminology list with correct translations and rationale. **First identify which domains this article actually covers, then apply the matching checklist** — do not hunt for terms from domains the article never touches.
+   - Cross-domain traps that apply everywhere: kernel vs operator, latent variable vs latent, floorplan vs layout, capacity (产能/容量/算力), yield (良率/收益率), memory (显存/内存/存储), node (节点/制程节点), alignment (对齐/对准/套刻), breakdown (拆解/击穿/明细).
+   - GPU / CUDA / microarchitecture: architecture codenames (e.g. SM100, SM90) — annotate with the architecture name; microarchitecture units (TPC, GPC, SM, MIO, MSHR); framework abstractions (CuTe, CUTLASS atom, Epilogue); SASS mnemonics; profiling tools (NCU, Nsight Systems).
+   - Optical interconnect / networking: CPO, SerDes, retimer, PAM4, OSFP, AEC, silicon photonics, NVLink, InfiniBand, RoCE, OCS, link budget.
+   - Advanced packaging: CoWoS variants, SoIC, hybrid bonding, TSV, RDL, EMIB, Foveros, UCIe, OSAT, backside power delivery.
+   - Lithography & equipment: High-NA, pellicle, reticle, overlay, GAA, nanosheet, FinFET, WFE, multi-patterning, metrology.
+   - Memory: HBM generations, DDR/LPDDR generations, 3D NAND layer count, TLC/QLC, CXL, ASP, bit growth.
+   - Datacenter power & cooling: busbar, switchgear, UPS, BBU, genset, BESS, PUE, cold plate, CDU, PPA, interconnection queue, capacity auction and market operators (PJM, ERCOT and their mechanism acronyms such as BRA/VRR/ELCC).
+   - Finance & earnings: guidance, RPO, book-to-bill, DSO, EBITDA, FCF, GAAP vs non-GAAP, SBC, CAGR, basis points.
+   - Inference economics: MoE, KV cache, TTFT, TPOT, FP8/FP4, speculative decoding, tensor/pipeline/expert parallelism.
+   Terms that are opaque to Chinese readers should have `first_occurrence_note: true`. Stay selective — prefer terms whose mistranslation would change the meaning over terms the model would get right anyway.
 9. Identify metaphors, analogies, and cultural references that may be opaque to Chinese readers. For each, note the reference, its cultural context, and whether a translator note is needed or a Chinese cultural equivalent can substitute.
 10. Identify the article's domain mix (e.g., GPU + finance + cloud computing). For cross-domain articles, list terminology that has different translations in different domains, and specify which domain convention to follow in this article's context. Common cross-domain pitfalls: utilization rate (cloud) vs 出租率 (real estate); capacity — 产能 (fab/packaging) vs 容量 (power, datacenter, memory device, network link) vs 算力 (only when it means compute); financial modeling (investment) vs 财务建模 (corporate); token (AI) vs 代币 (blockchain).
 11. Identify passages with strong rhetorical tone (sarcasm, emphasis, dramatic effect, irony) and note the intended emotional register so translators can match intensity rather than flatten it to academic prose.
