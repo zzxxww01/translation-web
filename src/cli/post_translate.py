@@ -60,7 +60,7 @@ def _read_content(args: argparse.Namespace) -> str:
     if args.file is not None:
         try:
             content = args.file.read_text(encoding="utf-8")
-        except OSError as exc:
+        except (OSError, UnicodeDecodeError) as exc:
             raise CliError(f"无法读取文件 {args.file}: {exc}") from exc
     elif args.text is not None:
         content = args.text

@@ -78,7 +78,7 @@ def _read_content(args: argparse.Namespace) -> str:
     if args.file is not None:
         try:
             content = args.file.read_text(encoding="utf-8")
-        except OSError as exc:
+        except (OSError, UnicodeDecodeError) as exc:
             raise CliError(f"无法读取文件 {args.file}: {exc}") from exc
     elif args.text is not None:
         content = args.text
@@ -101,7 +101,7 @@ def _read_history(path: Path | None) -> list[dict[str, str]]:
         return []
     try:
         raw = path.read_text(encoding="utf-8")
-    except OSError as exc:
+    except (OSError, UnicodeDecodeError) as exc:
         raise CliError(f"无法读取对话历史文件 {path}: {exc}") from exc
     try:
         data = json.loads(raw)
@@ -119,7 +119,7 @@ def _read_history(path: Path | None) -> list[dict[str, str]]:
             raise CliError(f"对话历史第 {index} 项必须是对象")
         role = item.get("role")
         content = item.get("content")
-        if role not in VALID_ROLES:
+        if not isinstance(role, str) or role not in VALID_ROLES:
             raise CliError(f"对话历史第 {index} 项的 role 必须是 me 或 them")
         if not isinstance(content, str) or not content.strip():
             raise CliError(f"对话历史第 {index} 项的 content 不能为空")
@@ -214,7 +214,7 @@ def generate_slack_reply(
         else result.get("suggested_replies")
     )
     if not isinstance(variants, list) or not any(
-        isinstance(item, dict) and str(item.get("english", "")).strip()
+        isinstance(item, dict) and str(item.get("english") or "").strip()
         for item in variants
     ):
         raise CliError("Slack 回复服务未返回有效的英文回复")
@@ -234,7 +234,7 @@ def _pick_variant(mode: str, result: dict[str, Any], version: str) -> str:
     wanted = version.upper()
     for item in _variants(mode, result):
         if str(item.get("version", "")).upper() == wanted:
-            english = str(item.get("english", "")).strip()
+            english = str(item.get("english") or "").strip()
             if english:
                 return english
     raise CliError(f"Slack 回复服务未返回有效的 {wanted} 版本")
@@ -245,7 +245,7 @@ def _format_plain(mode: str, result: dict[str, Any]) -> str:
     if mode == "incoming":
         blocks.extend(["中文理解：", str(result["translation"]).strip()])
     for item in _variants(mode, result):
-        english = str(item.get("english", "")).strip()
+        english = str(item.get("english") or "").strip()
         if not english:
             continue
         version = str(item.get("version", "")).strip() or "?"
