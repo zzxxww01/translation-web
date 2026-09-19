@@ -14,8 +14,12 @@ class SemiAnalysisMarkdownConverter(MarkdownConverter):
         href = collapse_ws(el.get("href"))
         if not href:
             return text
-        if el.find("img") and not collapse_ws(el.get_text(" ", strip=True)):
-            return text
+        if el.find("img"):
+            if not collapse_ws(el.get_text(" ", strip=True)):
+                return text
+            # Embedded social cards contain multiple blocks and images. A single
+            # Markdown link cannot wrap those blocks without breaking parsing.
+            return f"{text.strip()}\n\n[{href}]({href})\n\n"
         return super().convert_a(el, text, parent_tags)
 
     def convert_figure(self, el, text, parent_tags):
@@ -166,7 +170,10 @@ def _linkify_bare_urls(markdown: str) -> str:
         return f"[{trimmed}]({prefix}{trimmed}){trailing}"
 
     markdown = _BARE_URL_RE.sub(replace, markdown)
-    for index, value in enumerate(protected):
+    # Later protected spans can contain earlier tokens (image inside link,
+    # link inside code). Restore outer spans first, then their dependencies.
+    for index in range(len(protected) - 1, -1, -1):
+        value = protected[index]
         markdown = markdown.replace(
             f"{_PROTECTED_TOKEN}{index}{_PROTECTED_TOKEN}", value
         )
