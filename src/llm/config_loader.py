@@ -33,6 +33,71 @@ _ENV_FALLBACKS = {
 }
 
 
+# Map compatibility names to stable YAML aliases, not versioned real models.
+_CONFIG_MODEL_ALIASES = {
+    "flash": "gemini-flash",
+    "pro": "gemini-pro",
+    "preview": "gemini-preview",
+    "gemini": "gemini-pro",
+    "default": "gemini-pro",
+    "reasoning": "gemini-pro",
+    "deepseek-v3.2": "deepseek-v3",
+    "grok-4": "grok-4-1-fast-non-reasoning",
+    "grok-4-20-non-reasoning": "grok-4-1-fast-non-reasoning",
+}
+
+
+def resolve_config_model_alias(config: LLMConfig, alias: str) -> Optional[str]:
+    """Resolve config aliases consistently for lookups and fallback plans."""
+    normalized = (alias or "").strip()
+    if not normalized:
+        return None
+
+    configured = [
+        (provider, model)
+        for provider in config.providers.values()
+        for model in provider.models
+    ]
+    # Explicit configured aliases always take precedence over compatibility names.
+    for _, model in configured:
+        if model.alias == normalized:
+            return model.alias
+
+    lowered = normalized.lower()
+    if lowered.endswith("-official"):
+        stem = lowered.removesuffix("-official").removeprefix("gemini-")
+        if stem in ("flash", "pro", "preview"):
+            # Never route an explicit official request to a relay. Support both
+            # current fallback names and older official-only configurations.
+            for target in (f"gemini-{stem}-fallback", f"gemini-{stem}"):
+                for provider, model in configured:
+                    if provider.type == "gemini" and model.alias == target:
+                        return model.alias
+    else:
+        target = _CONFIG_MODEL_ALIASES.get(lowered)
+        for _, model in configured:
+            if model.alias == target:
+                return model.alias
+
+    # Preserve real-model lookup for custom configs and direct model names.
+    try:
+        legacy_provider, legacy_real_model, _ = resolve_model_alias(normalized)
+    except Exception:
+        return None
+
+    candidates = [
+        model.alias
+        for provider, model in configured
+        if provider.type == legacy_provider and model.real_model == legacy_real_model
+    ]
+    stem = lowered.removesuffix("-official")
+    for candidate in candidates:
+        candidate_stem = candidate.lower().removesuffix("-fallback")
+        if candidate_stem == stem or candidate_stem.endswith(f"-{stem}"):
+            return candidate
+    return candidates[0] if candidates else None
+
+
 class ConfigLoader:
     """配置加载器"""
 
@@ -146,47 +211,9 @@ class ConfigLoader:
 
     def resolve_config_model_alias(self, alias: str) -> Optional[str]:
         """Resolve legacy/public aliases to the canonical alias used in YAML config."""
-        if not alias:
+        if not alias or not alias.strip():
             return None
-
-        if not self._config:
-            self._config = self.load()
-
-        normalized = alias.strip()
-        if not normalized:
-            return None
-
-        for provider in self._config.providers.values():
-            for model in provider.models:
-                if model.alias == normalized:
-                    return model.alias
-
-        try:
-            legacy_provider, legacy_real_model, _ = resolve_model_alias(normalized)
-        except Exception:
-            return None
-
-        candidates = [
-            model.alias
-            for provider in self._config.providers.values()
-            for model in provider.models
-            if provider.type == legacy_provider and model.real_model == legacy_real_model
-        ]
-        if not candidates:
-            return None
-        if len(candidates) == 1:
-            return candidates[0]
-
-        # 多个 canonical alias 共用同一个 real_model 时（例如把 gemini-pro 和
-        # gemini-preview 都指向同一个模型），按 real_model 反查会退化成"取第一个"，
-        # preview-official 于是解析成 gemini-pro。用请求别名的词干消歧。
-        stem = normalized.rsplit("-official", 1)[0].strip().lower()
-        for candidate in candidates:
-            lowered = candidate.lower()
-            if lowered == stem or lowered.endswith(f"-{stem}"):
-                return candidate
-
-        return candidates[0]
+        return resolve_config_model_alias(self.load(), alias)
 
     def get_model_config(self, alias: str) -> Optional[ModelConfig]:
         """根据别名获取模型配置"""

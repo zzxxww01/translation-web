@@ -11,7 +11,7 @@ from typing import List, Optional
 import logging
 
 from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, LLMConfig
-from .models import resolve_model_alias
+from .config_loader import resolve_config_model_alias
 
 logger = logging.getLogger(__name__)
 
@@ -71,29 +71,7 @@ class FallbackStrategy:
 
     def _resolve_config_model_alias(self, alias: str) -> Optional[str]:
         """Resolve public/legacy aliases to a canonical YAML config alias."""
-        if not alias:
-            return None
-
-        normalized = alias.strip()
-        if not normalized:
-            return None
-
-        for provider in self.config.providers.values():
-            for model in provider.models:
-                if model.alias == normalized:
-                    return model.alias
-
-        try:
-            legacy_provider, legacy_real_model, _ = resolve_model_alias(normalized)
-        except Exception:
-            return None
-
-        for provider in self.config.providers.values():
-            for model in provider.models:
-                if provider.type == legacy_provider and model.real_model == legacy_real_model:
-                    return model.alias
-
-        return None
+        return resolve_config_model_alias(self.config, alias)
 
     def _build_within_provider_attempts(
         self, provider: ProviderConfig, initial_model: ModelConfig
