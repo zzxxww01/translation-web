@@ -4,7 +4,7 @@
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BarChart3, BookOpen, ChevronDown, Download, Layers, Zap } from 'lucide-react';
+import { BarChart3, BookOpen, ChevronDown, Layers, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button-extended';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -15,7 +15,7 @@ import {
   TranslationMethod,
 } from '@/shared/constants';
 import type { Project, Section } from '@/shared/types';
-import { useExportProject } from '../hooks';
+import { ProjectExport } from './ProjectExport';
 import { ProjectSelector } from './ProjectSelector';
 import { SectionList } from './SectionList';
 import { ModelSelector } from '@/components/ModelSelector';
@@ -72,15 +72,12 @@ export function DocumentSidebar({
   className,
   onNavigate,
 }: DocumentSidebarProps) {
-  const [exportFormat, setExportFormat] = useState<'en' | 'zh'>('zh');
   const [selectedMethod, setSelectedMethod] = useState<TranslationMethod>(
     DEFAULT_TRANSLATION_METHOD
   );
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
-  const [exportOpen, setExportOpen] = useState(false);
   const [prepareElapsedSec, setPrepareElapsedSec] = useState(0);
-  const exportMutation = useExportProject();
   const navigate = useNavigate();
 
   // 术语预检最长可挂 30 分钟（TIMEOUTS.TERM_REVIEW_PREPARE），
@@ -108,11 +105,6 @@ export function DocumentSidebar({
     fullTranslateProgress && fullTranslateProgress.total > 0
       ? (fullTranslateProgress.current / fullTranslateProgress.total) * 100
       : 0;
-
-  const handleExport = () => {
-    if (!projectId) return;
-    exportMutation.mutate({ projectId, format: exportFormat });
-  };
 
   const isTranslateBusy = Boolean(isFullTranslating || isPreparingFullTranslate || isCancelling);
   const isOtherProjectTranslating =
@@ -337,42 +329,7 @@ export function DocumentSidebar({
             </Button>
           )}
 
-          {projectId && (
-            <Collapsible open={exportOpen} onOpenChange={setExportOpen}>
-              <CollapsibleTrigger asChild>
-                <button type="button" className="flex w-full items-center gap-1 rounded px-2 py-1 text-xs text-text-muted hover:bg-bg-tertiary">
-                  <ChevronDown className={`h-3 w-3 transition-transform ${exportOpen ? 'rotate-180' : ''}`} />
-                  导出文章
-                </button>
-              </CollapsibleTrigger>
-              <CollapsibleContent>
-                <div className="mt-1 flex items-center gap-2">
-                  <Select
-                    value={exportFormat}
-                    onValueChange={(value) => setExportFormat(value as 'en' | 'zh')}
-                    disabled={exportMutation.isPending}
-                  >
-                    <SelectTrigger className="h-8 flex-1 text-xs">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="zh">中文 Markdown</SelectItem>
-                      <SelectItem value="en">英文 Markdown</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleExport}
-                    disabled={exportMutation.isPending}
-                    leftIcon={<Download className="h-4 w-4" />}
-                  >
-                    {exportMutation.isPending ? '导出中...' : '导出'}
-                  </Button>
-                </div>
-              </CollapsibleContent>
-            </Collapsible>
-          )}
+          {projectId && <ProjectExport key={projectId} projectId={projectId} />}
         </div>
       )}
     </aside>

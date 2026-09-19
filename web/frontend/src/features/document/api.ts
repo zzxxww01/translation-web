@@ -198,11 +198,11 @@ export const documentApi = {
   /**
    * 导出项目
    */
-  exportProject: (projectId: string, format: 'en' | 'zh' = 'zh') =>
+  exportProject: (projectId: string, format: 'en' | 'zh' = 'zh', allowQaOverride = false) =>
     apiClient.post<{ content: string; path: string; filename: string; format: string }>(
       `/projects/${projectId}/export`,
       undefined,
-      { params: { format } }
+      { params: { format, allow_qa_override: allowQaOverride } }
     ),
 
   getLatestConsistencyReport: (projectId: string) =>

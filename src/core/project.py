@@ -1368,11 +1368,12 @@ class ProjectManager:
             model="manual"
         )
 
-    def export(self, project_id: str, include_source: bool = False, format: str = 'zh') -> str:
+    def export(self, project_id: str, include_source: bool = False, format: str = 'zh', *, allow_qa_override: bool = False) -> str:
         return self.project_export_service.export(
             project_id,
             include_source=include_source,
             format=format,
+            allow_qa_override=allow_qa_override,
         )
 
     def export_source_markdown(self, project_id: str) -> str:

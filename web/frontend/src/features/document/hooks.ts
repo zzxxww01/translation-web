@@ -289,8 +289,11 @@ export function useExportProject() {
   const { handleError } = useErrorHandler();
 
   return useMutation({
-    mutationFn: ({ projectId, format }: { projectId: string; format?: 'en' | 'zh' }) =>
-      documentApi.exportProject(projectId, format),
+    mutationFn: ({ projectId, format, allowQaOverride = false }: {
+      projectId: string;
+      format?: 'en' | 'zh';
+      allowQaOverride?: boolean;
+    }) => documentApi.exportProject(projectId, format, allowQaOverride),
     onSuccess: (result) => {
       // 创建下载链接
       const blob = new Blob([result.content], { type: 'text/markdown;charset=utf-8' });

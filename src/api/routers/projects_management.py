@@ -314,6 +314,7 @@ async def export_project(
     pm: ProjectManagerDep,
     include_source: bool = False,
     format: str = "zh",
+    allow_qa_override: bool = False,
 ):
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
@@ -324,6 +325,7 @@ async def export_project(
                     project_id,
                     include_source=include_source,
                     format=format,
+                    allow_qa_override=allow_qa_override,
                 ),
                 pm.get_export_filename(project_id, format=format),
             )

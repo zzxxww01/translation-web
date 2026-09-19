@@ -262,11 +262,11 @@ class ProjectExportService:
         artifact_path = self._project_dir(project_id) / "artifacts" / "export-lint" / "latest.json"
         self._write_json(artifact_path, payload)
 
-    def export(self, project_id: str, include_source: bool = False, format: str = "zh") -> str:
+    def export(self, project_id: str, include_source: bool = False, format: str = "zh", *, allow_qa_override: bool = False) -> str:
         normalized = self.normalize_export_format(format)
         if normalized == "en":
             return self.export_source_markdown(project_id)
-        return self.export_markdown(project_id, include_source)
+        return self.export_markdown(project_id, include_source, allow_qa_override=allow_qa_override)
 
     def export_source_markdown(self, project_id: str) -> str:
         project_dir = self._project_dir(project_id)
@@ -295,7 +295,7 @@ class ProjectExportService:
                     return None
         return None
 
-    def export_markdown(self, project_id: str, include_source: bool = False) -> str:
+    def export_markdown(self, project_id: str, include_source: bool = False, *, allow_qa_override: bool = False) -> str:
         meta = self._get_project(project_id)
         sections = self._get_sections(project_id)
         lines = [f"# {self.preferred_export_title(meta)}", ""]
@@ -332,6 +332,7 @@ class ProjectExportService:
                 project_id,
                 len(fallback_block_ids),
             )
+        payload["qa_override_requested"] = bool(allow_qa_override)
         self.write_export_lint_artifact(project_id, payload)
 
         # A-5：确定性 QA 的 critical 问题阻断导出（lint 工件已写盘供排查）。
@@ -342,7 +343,7 @@ class ProjectExportService:
             and str(issue.get("type", "")).startswith("qa_")
         ]
         export_name = self.build_export_filename(meta, format="zh")
-        if critical_qa:
+        if critical_qa and not allow_qa_override:
             # 先落盘再抛：翻译已经花掉全部成本，一条 QA 命中不该等于零产出。
             blocked_name = f"{export_name[: -len('_zh.md')]}_zh.blocked.md"
             blocked_path = self._project_dir(project_id) / blocked_name

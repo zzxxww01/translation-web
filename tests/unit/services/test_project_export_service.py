@@ -237,6 +237,23 @@ def test_export_blocked_on_critical_qa_issue(tmp_path: Path) -> None:
     assert "演示项目_zh.blocked.md" in str(excinfo.value)
 
 
+def test_export_override_is_explicit_and_keeps_qa_report(tmp_path: Path) -> None:
+    paragraph = Paragraph(id="p1", index=0, source="Test", element_type=ElementType.P,
+                          confirmed="译文\ufff07\ufff0")
+    section = Section(section_id="s1", title="Intro", paragraphs=[paragraph])
+    service = _build_service(tmp_path, [section], _demo_meta())
+    with pytest.raises(ExportBlockedError):
+        service.export("demo")
+    report = {}
+    service._write_json = lambda _path, payload: report.update(payload)
+    content = service.export("demo", allow_qa_override=True)
+    assert "\ufff07\ufff0" in content  # override does not pretend to fix the text
+    assert report["qa_override_requested"] is True
+    assert any(i["type"] == "qa_placeholder_residue" for i in report["issues"])
+    with pytest.raises(ExportBlockedError):
+        service.export("demo")  # not a persistent global switch
+
+
 def test_power_unit_no_longer_blocks_export(tmp_path: Path) -> None:
     # 功率单位汉化降为 warning 后，正常译文必须能导出。
     paragraph = Paragraph(
