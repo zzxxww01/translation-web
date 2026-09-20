@@ -70,7 +70,10 @@ async def process_slack_message(
         )
         data = parse_llm_json_response(response_text)
 
-        translation = str(data.get("translation", "")).strip()
+        translation = data.get("translation")
+        if not isinstance(translation, str) or not translation.strip():
+            raise ValueError("Missing incoming message translation")
+        translation = translation.strip()
         suggested_replies = normalize_variants(data.get("suggested_replies", []))
 
         return SlackProcessResponse(

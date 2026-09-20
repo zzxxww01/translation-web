@@ -72,12 +72,15 @@ _TITLE_INSTRUCTION_MAX_LENGTH = 1000
 # BE-07：前端对三个快捷优化按钮只记录 `[readable]` 这类内部 id，原样注入历史等于没有信息。
 # 这里在服务端单点还原成一行摘要（完整正文见 translate_models.POST_OPTIMIZE_OPTIONS，
 # 只注入摘要而非全文，避免 3 轮历史把 prompt 撑爆）。
-_POST_OPTIMIZE_OPTION_SUMMARIES = {
-    "readable": "上一轮要求：降低阅读负荷，一句一事、主语明确、先结论后解释",
-    "idiomatic": "上一轮要求：让中文更自然地道，去连接词与套话，修辞不字面直译",
-    "professional": "上一轮要求：提高信息密度与精准度，删口水话、不增不减",
-}
+from src.prompts.editing_options import OPTION_SUMMARIES as _POST_OPTIMIZE_OPTION_SUMMARIES
+from src.prompts.editing_options import history_option_summary
 _OPTION_ID_RE = re.compile(r"\[(\w+)\]")
+
+
+def _without_hashtags(text: str) -> str:
+    """Explicit publishing option; never changes words inside URLs/code."""
+    from src.core.post_hashtags import is_hashtag_only_line
+    return "\n".join(line for line in text.splitlines() if not is_hashtag_only_line(line)).rstrip()
 
 
 def _resolve_timeouts(task_type: str) -> tuple[int, int]:
@@ -152,13 +155,14 @@ async def translate_post(request: Request, body: PostTranslateRequest):
     glossary_context = await run_blocking(build_glossary_context, body.content)
 
     if body.custom_prompt:
-        prompt = body.custom_prompt.replace("{content}", body.content)
-        prompt = prompt.replace("{glossary}", glossary_context)
+        # Substitute template slots once: source text containing {glossary} is data.
+        values = {"content": body.content, "glossary": glossary_context}
+        prompt = re.sub(r"\{(content|glossary)\}", lambda match: values[match[1]], body.custom_prompt)
     else:
         prompt = prompt_manager.get(
             "post_translation",
             text=body.content,
-            dynamic_sections=glossary_context.strip(),
+            dynamic_sections=glossary_context.strip() + ("\n本次发布规则：不输出任何话题标签。" if not body.include_hashtags else "") + ("\n采用中性转述文风，保留原文观点归属、程度和不确定性。" if not body.preserve_tone else ""),
         )
 
     attempt_timeout_s, total_timeout_s = _resolve_timeouts("post")
@@ -190,7 +194,10 @@ async def translate_post(request: Request, body: PostTranslateRequest):
     # 不丢弃已经生成（且已付费）的译文。
     try:
         translation = preserve_protected_terms(body.content, translation)
-        translation = append_xiaohongshu_hashtags(translation, body.content)
+        if body.include_hashtags:
+            translation = append_xiaohongshu_hashtags(translation, body.content)
+        else:
+            translation = _without_hashtags(translation)
     except Exception:
         logger.exception("Post-processing failed for /translate/post; returning raw model output")
     return PostTranslateResponse(
@@ -240,7 +247,7 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
             # BE-07：把 `[readable]` 这类快捷选项 id 还原成一行可读摘要。
             _matched = _OPTION_ID_RE.fullmatch(_content)
             if _matched and _matched.group(1) in POST_OPTIMIZE_OPTIONS:
-                _content = _POST_OPTIMIZE_OPTION_SUMMARIES.get(_matched.group(1), _content)
+                _content = history_option_summary(_matched.group(1), _item.get("option_version") if isinstance(_item, dict) else None)
             _role = " ".join(str(_role).split())[:_HISTORY_ROLE_MAX_LENGTH] or "user"
             _hist_lines.append(f"- [{_role}] {_content}")
         if len(_hist_lines) > 1:
@@ -252,7 +259,7 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
         conversation_history_section=history_section,
         original_text=body.original_text,
         current_translation=body.current_translation,
-        instruction=resolved_instruction,
+        instruction=resolved_instruction + ("\n删除全部话题标签。" if body.include_hashtags is False else ""),
     )
 
     attempt_timeout_s, total_timeout_s = _resolve_timeouts("post_optimize")
@@ -284,9 +291,12 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
         optimized = preserve_protected_terms(body.original_text, optimized)
         # 优化路径不再自动补推荐标签：用户可能正是要求「去掉话题标签」，
         # 但已有标签的去重/去违禁词/截断仍需保留。
-        optimized = append_xiaohongshu_hashtags(
-            optimized, body.original_text, allow_recommend=False
-        )
+        if body.include_hashtags is False:
+            optimized = _without_hashtags(optimized)
+        else:
+            optimized = append_xiaohongshu_hashtags(
+                optimized, body.original_text, allow_recommend=body.include_hashtags is True
+            )
     except Exception:
         logger.exception(
             "Post-processing failed for /translate/post/optimize; returning raw model output"

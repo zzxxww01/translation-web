@@ -1,0 +1,8 @@
+[[include:shared/fidelity]]
+
+从提供的文档采样中提取重要术语，先根据原文识别领域，不预设全是半导体。不凑数量、不猜缩写，不确定译名保留英文。
+## 标题
+{title}
+## 文档采样
+{text}
+只返回 JSON 对象 {{"terms":[]}}。每项：original、translation、context（原文片段）、confidence。仅返回原文真实出现的候选，频率由程序计算。

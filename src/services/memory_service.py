@@ -109,9 +109,8 @@ class TranslationMemoryService:
                 user_translation=user_translation,
             )
             if new_rules:
-                self._append_rules(new_rules)
-                logger.info("Extracted %d rules from correction", len(new_rules))
-                self._maybe_consolidate()
+                self._queue_candidates(new_rules, "human_correction", {"source":source, "before":ai_translation, "after":user_translation})
+                logger.info("Queued %d correction rule candidates", len(new_rules))
             return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from correction: %s", e)
@@ -138,9 +137,8 @@ class TranslationMemoryService:
                 after=after,
             )
             if new_rules:
-                self._append_rules(new_rules)
-                logger.info("Extracted %d rules from retranslation", len(new_rules))
-                self._maybe_consolidate()
+                self._queue_candidates(new_rules, "model_retranslation", {"instruction":instruction, "source":source, "before":before, "after":after})
+                logger.info("Queued %d retranslation rule candidates", len(new_rules))
             return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from retranslation: %s", e)
@@ -175,13 +173,26 @@ class TranslationMemoryService:
                 translations_text=translations_text,
             )
             if new_rules:
-                self._append_rules(new_rules)
-                logger.info("Extracted %d rules from reflection", len(new_rules))
-                self._maybe_consolidate()
+                self._queue_candidates(new_rules, "model_reflection", {"issues":issues_text, "translations":translations_text})
+                logger.info("Queued %d reflection rule candidates", len(new_rules))
             return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from reflection: %s", e)
             return []
+
+    def _candidate_store(self):
+        from .memory_candidates import RuleCandidates
+        return RuleCandidates(GLOBAL_MEMORY_PATH)
+
+    def _queue_candidates(self, rules, source_kind, evidence):
+        filtered = [r for r in rules if isinstance(r, str) and r.strip() and not self._is_term_rule(r)]
+        return self._candidate_store().add(filtered, source_kind, evidence)
+
+    def get_rule_candidates(self):
+        return self._candidate_store().list()
+
+    def decide_rule_candidate(self, candidate_id: str, action: str):
+        return self._candidate_store().decide(candidate_id, action, self._append_rules)
 
     # ============ 规则读取 ============
 
@@ -353,50 +364,18 @@ class TranslationMemoryService:
         coro.close()
 
     async def _consolidate_rules(self) -> None:
-        """使用 LLM 梳理规则库：合并重复、解决矛盾、删除模糊规则。
-
-        梳理期间（LLM 调用耗时数秒）可能有其它学习任务追加新规则。完成保存前
-        会把这些窗口期新增规则并入 consolidated，避免被整表覆盖而丢失。
-        """
+        """Consolidation proposes candidates only; it cannot erase approved rules."""
+        rules = self.get_all_rules()
+        if not rules:
+            return
         try:
-            with self._lock:
-                rules = self._load_rules()
-                if not rules:
-                    return
-                snapshot = list(rules)
-                rules_text = "\n".join(f"- {r}" for r in snapshot)
-
             from src.prompts import get_prompt_manager
-            pm = get_prompt_manager()
-            prompt = pm.get(
-                "longform/learning/rules_consolidation",
-                rules_text=rules_text,
-            )
-
+            prompt = get_prompt_manager().render("longform/learning/rules_consolidation", rules_text="\n".join("- " + r for r in rules))
             response = await asyncio.to_thread(self._generate, prompt)
-            consolidated = self._parse_bullet_list(response)
-
-            if not consolidated:
-                logger.warning("Consolidation returned empty, skipping")
-                return
-
-            with self._file_lock(), self._lock:
-                current = self._load_rules()
-                old_count = len(current)
-                # 并入窗口期新增（在 current 中但不在送去梳理的 snapshot 里）的规则
-                snapshot_set = set(snapshot)
-                merged = list(consolidated)
-                merged_set = set(consolidated)
-                for rule in current:
-                    if rule not in snapshot_set and rule not in merged_set:
-                        merged.append(rule)
-                        merged_set.add(rule)
-                self._save_rules(merged)
-
-            logger.info("Consolidation complete: %d → %d rules", old_count, len(merged))
-
-        except Exception as e:
-            logger.warning("Rule consolidation failed: %s", e)
+            candidates = self._parse_bullet_list(response)
+            self._queue_candidates(candidates, "consolidation", {"rules": "\n".join(rules)})
+        except Exception as exc:
+            logger.warning("Rule consolidation proposal failed: %s", exc)
 
     # ============ 存储 ============
 

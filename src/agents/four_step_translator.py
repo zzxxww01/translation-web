@@ -173,7 +173,9 @@ class FourStepTranslator:
                 term=term_data.get("term", ""),
                 suggested_translation=term_data.get("suggested_translation", ""),
                 context=term_data.get("context", ""),
-                confidence=term_data.get("confidence", 0.8)
+                confidence=term_data.get("confidence", 0.8),
+                source_quote=term_data.get("source_quote", ""),
+                requires_review=bool(term_data.get("requires_review", False))
             ))
 
         return SectionPrescanResult(
@@ -192,7 +194,7 @@ class FourStepTranslator:
 
         # 检测术语冲突
         conflicts = self.context_manager.add_terms_from_prescan(
-            result.new_terms,
+            [term for term in result.new_terms if not term.requires_review],
             result.section_id,
         )
 
@@ -332,332 +334,108 @@ class FourStepTranslator:
                     exc,
                 )
 
-    def translate_section(
-        self,
-        section: Section,
-        all_sections: List[Section],
-        on_progress: Optional[Callable[[str, int, int], None]] = None,
-        retry_count: int = 0,
-        project_id: Optional[str] = None,
-    ) -> SectionTranslationResult:
-        """
-        翻译整个章节（四步法）
-
-        混合模式：
-        - 短章节（≤ threshold）：整体翻译
-        - 长章节（> threshold）：分批翻译，每批 threshold 段
-
-        Args:
-            section: 要翻译的章节
-            all_sections: 所有章节列表
-            on_progress: 进度回调 (step_name, current, total)
-            retry_count: 当前重试次数
-            project_id: 项目ID（用于会话管理）
-
-        Returns:
-            SectionTranslationResult: 翻译结果
-        """
-        # 创建翻译会话（如果启用）
+    def translate_section(self, section: Section, all_sections: List[Section],
+                          on_progress: Optional[Callable[[str, int, int], None]] = None,
+                          retry_count: int = 0, project_id: Optional[str] = None) -> SectionTranslationResult:
+        """Draft, evidence-based targeted revision and fresh review; never chase a score."""
+        from copy import deepcopy
+        from ..prompts import BUNDLE_VERSION
+        from ..prompts.contracts import text_version
+        from ..core.models import ReflectionResult
         session_id = None
         if self.session_service and project_id:
-            # U3:对齐 TranslationSessionService.create_session 的真实签名
-            # (project_id/section_id/create_snapshot);此前传的 source_text/target_language/
-            # include_snapshot 不存在,注入 session_service 后会 TypeError。
-            session = self.session_service.create_session(
-                project_id=project_id,
-                section_id=section.section_id,
-                create_snapshot=True,
-            )
-            session_id = session.id
-            logger.info(f"Created translation session: {session_id}")
-
-        # 降级哨兵：若初译已完成、后续步骤（反思/润色）出错，则保留 draft 而非整章丢弃。
-        draft_translations = None
-        understanding = None
-        translation_outputs = None
-
+            session_id = self.session_service.create_session(project_id=project_id, section_id=section.section_id, create_snapshot=True).id
+        outputs, drafts, reflection, understanding = None, [], None, None
+        history, revised, attempted = [], [], False
+        degraded, reason = False, ""
+        sources = [p.source for p in section.paragraphs]
+        def progress(label, step):
+            if on_progress:
+                on_progress(label, step, 4)
+        def bind(review, texts, phase):
+            review = review.model_copy(deep=True)
+            expected = text_version(sources, texts)
+            if review.reviewed_version and review.reviewed_version != expected:
+                raise ValueError("Reviewer returned evidence for a different translation version")
+            review.reviewed_version = expected
+            history.append({"phase": phase, "version": review.reviewed_version, "review": review.model_dump(mode="json")})
+            return review
         try:
-            import time
-
-            if on_progress:
-                on_progress("理解章节", 0, 4)
-
-            # Step 1: 理解章节
+            progress("理解章节", 0)
             understanding = self._step_understand(section, all_sections)
-            self.context_manager.set_section_understanding(
-                section.section_id, understanding
-            )
-
-            if on_progress:
-                on_progress("初译", 1, 4)
-
-            # Step 2: 初译（混合模式）- 使用 Phase 1 provider
-            phase1_provider = (
-                self.get_provider_for_phase("phase1_draft")
-                if self.get_provider_for_phase
-                else self.llm
-            )
-            phase1_start = time.time()
-            if len(section.paragraphs) <= self.paragraph_threshold:
-                # 短章节：整体翻译
-                translation_outputs = self._translate_batch(
-                    section, section.paragraphs, understanding, all_sections,
-                    provider=phase1_provider
-                )
-            else:
-                # 长章节：分批翻译
-                translation_outputs = []
-                batches = self._split_into_batches(section.paragraphs)
-                for batch_idx, batch in enumerate(batches):
-                    batch_outputs = self._translate_batch(
-                        section, batch, understanding, all_sections,
-                        batch_index=batch_idx,
-                        provider=phase1_provider
-                    )
-                    translation_outputs.extend(batch_outputs)
-            phase1_duration = time.time() - phase1_start
-            logger.info(f"[Phase 1] Draft translation completed in {phase1_duration:.2f}s")
-
-            translations = [item.text for item in translation_outputs]
-
-            draft_translations = list(translations)
-
-            # 方案 C：取消快速预检，直接执行 Step 3（100% 覆盖）
-            # 原因：快速预检只采样部分段落，可能遗漏问题；Step 3 是批量操作，成本可控
-
-            if on_progress:
-                on_progress("反思", 2, 4)
-
-            # Step 3: 批量反思 - 使用 Phase 2 provider
-            phase2_provider = (
-                self.get_provider_for_phase("phase2_refine")
-                if self.get_provider_for_phase
-                else self.llm
-            )
-            step3_start = time.time()
-            reflection = self._step_reflect(
-                section,
-                translations,
-                understanding,
-                provider=phase2_provider
-            )
-            step3_duration = time.time() - step3_start
-            logger.info(
-                f"[Phase 2 - Step 3] Reflection completed in {step3_duration:.2f}s, "
-                f"score={reflection.overall_score:.1f}, issues={len(reflection.issues)}"
-            )
-
-            if on_progress:
-                on_progress("润色", 3, 4)
-
-            # Step 4+5: 批量润色（合并问题修复和风格优化）
-            # 触发条件：overall < 9.0 或存在 P0/P1 问题 或 fluency/conciseness < 8.5
-            step45_api_calls = 0
-
-            # 检查是否需要执行润色
-            has_critical_issues = any(
-                getattr(issue, "priority", "P2") in ["P0", "P1"]
-                for issue in reflection.issues
-            )
-
-            should_refine = (
-                reflection.overall_score < 9.0 or
-                has_critical_issues
-            )
-
-            # style_polish_threshold 控制润色触发阈值（默认 8.0，设为 0 关闭润色）。
-            # 此前此处硬编码 8.5，导致构造参数（含关闭润色的 0）完全失效。
-            polish_threshold = self.style_polish_threshold
-            should_polish = polish_threshold > 0 and (
-                (reflection.fluency_score > 0 and reflection.fluency_score < polish_threshold) or
-                (reflection.conciseness_score > 0 and reflection.conciseness_score < polish_threshold)
-            )
-            revision_attempted = should_refine or should_polish
-
-            # 评分标准里 8.0-8.4 是「可读但明显非母语」，而翻译腔类问题在 critique 里
-            # 几乎全被标为 P2。只看 overall >= 8.5 就过滤掉 P2，会让「有明显翻译腔但
-            # 无硬错误」的章节一个字都不改（审计 TR3）。这里补一个流畅/简洁维度的判定，
-            # 命中即把 P2 一并纳入修复范围（仍只改被点名的段落，不做全章重写）。
-            translationese_suspected = (
-                (0 < reflection.fluency_score < 8.5) or
-                (0 < reflection.conciseness_score < 8.5)
-            )
-
-            if revision_attempted:
-                # 根据 overall_score 决定修复哪些问题
-                if reflection.overall_score >= 8.5 and not translationese_suspected:
-                    # 良好：只修 P0/P1
-                    issues_to_fix = [
-                        issue for issue in reflection.issues
-                        if getattr(issue, "priority", "P2") in ["P0", "P1"]
-                    ]
-                    fix_level = "P0/P1"
-                else:
-                    # 合格或以下：修 P0/P1/P2
-                    issues_to_fix = [
-                        issue for issue in reflection.issues
-                        if getattr(issue, "priority", "P2") in ["P0", "P1", "P2"]
-                    ]
-                    fix_level = "P0/P1/P2"
-
-                step45_start = time.time()
-                translation_outputs = self._step_refine_and_polish(
-                    section,
-                    translation_outputs,
-                    reflection,
-                    understanding,
-                    provider=phase2_provider,
-                    issues_filter=issues_to_fix,
-                    # 仅当确需风格润色时才处理全章每段；纯修订（仅 refine）只处理有问题的段落，
-                    # 避免对无问题段落做不必要的 LLM 改写（省 token、降低改写引入错误的风险）。
-                    polish_all=should_polish,
-                )
-                translations = [item.text for item in translation_outputs]
-                step45_duration = time.time() - step45_start
-                step45_api_calls = 1  # 批量调用，只有 1 次 API 调用
-
-                # 统计实际处理的段落数
-                issues_by_paragraph = {}
-                for issue in issues_to_fix:
-                    issues_by_paragraph[issue.paragraph_index] = True
-                paragraphs_with_issues = len(issues_by_paragraph)
-
-                logger.info(
-                    f"[Phase 2 - Step 4+5] Refine and polish completed in {step45_duration:.2f}s, "
-                    f"processed {len(section.paragraphs)} paragraphs in {step45_api_calls} API call "
-                    f"({paragraphs_with_issues} with {fix_level} issues, "
-                    f"overall={reflection.overall_score:.1f}, "
-                    f"fluency={reflection.fluency_score:.1f}, "
-                    f"conciseness={reflection.conciseness_score:.1f})"
-                )
-            else:
-                logger.info(
-                    f"[Phase 2 - Step 4+5] Skipped refine and polish "
-                    f"(overall={reflection.overall_score:.1f} >= 9.0, no P0/P1 issues, "
-                    f"fluency={reflection.fluency_score:.1f}, conciseness={reflection.conciseness_score:.1f})"
-                )
-
-            # 记录 Phase 2 总体统计
-            phase2_total_api_calls = 1 + step45_api_calls  # 1 for reflection
-            logger.info(
-                f"[Phase 2 Summary] Total API calls: {phase2_total_api_calls} "
-                f"(reflect=1, refine_and_polish={step45_api_calls})"
-            )
-
-            revised_translations = list(translations)
-
-            # 术语验证（如果启用）
-            validation_report = None
-            if self.term_validation_service and self.session_service and session_id:
-                try:
-                    # U3:服务方法是 load_session(非 get_session);快照术语经 term_ids 反查
-                    # 得到 List[Term](TranslationSession 无 terminology_snapshot 字段)。
-                    session = self.session_service.load_session(session_id)
-                    snapshot_terms = self.session_service.get_session_terms(session)
-                    if session and snapshot_terms:
-                        source_text = "\n\n".join([p.source for p in section.paragraphs])
-                        translated_text = "\n\n".join(translations)
-                        validation_report = self.term_validation_service.validate_translation(
-                            source_text=source_text,
-                            translated_text=translated_text,
-                            terms=snapshot_terms,
-                            strict=False
-                        )
-                        if validation_report.violations:
-                            logger.warning(
-                                f"Term validation found {len(validation_report.violations)} violations"
-                            )
-                except Exception as e:
-                    logger.error(f"Term validation failed: {e}")
-
-            # 质量门禁检查
+            self.context_manager.set_section_understanding(section.section_id, understanding)
+            progress("初译", 1)
+            draft_provider = self.get_provider_for_phase("phase1_draft") if self.get_provider_for_phase else self.llm
+            outputs = []
+            for index, batch in enumerate(self._split_into_batches(section.paragraphs)):
+                outputs.extend(self._translate_batch(section, batch, understanding, all_sections, batch_index=index, provider=draft_provider))
+            drafts = [item.text for item in outputs]
+            draft_outputs = deepcopy(outputs)
+            if len(drafts) != len(section.paragraphs) or any(not t.strip() for t in drafts):
+                raise ValueError("Draft has missing or empty paragraphs")
+            review_provider = self.get_provider_for_phase("phase2_refine") if self.get_provider_for_phase else self.llm
+            progress("反思", 2)
+            reflection = bind(self._step_reflect(section, drafts, understanding, provider=review_provider), drafts, "draft")
+            # A low score without an actionable finding is not permission to rewrite.
+            targets = [issue for issue in reflection.issues
+                       if 0 <= issue.paragraph_index < len(drafts) and issue.suggestion.strip()
+                       and (issue.severity in {"critical", "high"} or self.style_polish_threshold > 0)]
+            attempted = bool(targets) and retry_count < self.max_retries
+            progress("定点修订" if attempted else "保留当前译文", 3)
+            if attempted:
+                candidate = self._step_refine_and_polish(section, outputs, reflection, understanding,
+                    provider=review_provider, issues_filter=targets, polish_all=False)
+                revised = [item.text for item in candidate]
+                if revised != drafts:
+                    # Reject damaged formatting before another model call.
+                    if any(item.format_issues for item in candidate):
+                        degraded, reason = True, "Revision rejected: invalid format tokens"
+                    else:
+                        progress("复核修改后的译文", 3)
+                        verification = bind(self._step_reflect(section, revised, understanding, provider=review_provider), revised, "revision")
+                        severe = lambda r: sum(i.severity in {"critical", "high"} for i in r.issues)
+                        if severe(verification) > severe(reflection):
+                            degraded, reason = True, "Revision introduced additional serious issues; retained draft"
+                        else:
+                            outputs, reflection = candidate, verification
+                # If no text changed, review(v1) still applies. No fake new review score.
+            translations = [item.text for item in outputs]
             assessment = self.quality_gate.assess(section, translations, reflection)
-
-            # 如果未通过且需要重译
-            if not assessment.passed and assessment.action == "retranslate":
-                if retry_count < self.max_retries:
-                    # 标记会话失败
-                    if self.session_service and session_id:
-                        self.session_service.fail_session(
-                            session_id,
-                            error="Quality gate failed, retrying"
-                        )
-                    # 重置章节上下文
-                    self.context_manager.reset_section(section.section_id)
-                    # 递归重试
-                    return self.translate_section(
-                        section,
-                        all_sections,
-                        on_progress,
-                        retry_count + 1,
-                        project_id=project_id,
-                    )
-
-            # 标记会话完成
+            if any(item.format_issues for item in outputs):
+                assessment.passed = False
+                assessment.failed_criteria.append("format_tokens_invalid")
+                assessment.action = "manual_review"
+            if not assessment.passed:
+                degraded = True
+                reason = reason or "Unresolved issues after the bounded revision budget"
             if self.session_service and session_id:
-                translated_text = "\n\n".join(translations)
-                self.session_service.complete_session(session_id, translated_text)
-                logger.info(f"Completed translation session: {session_id}")
-
-            if on_progress:
-                on_progress("完成", 4, 4)
-
-            return SectionTranslationResult(
-                section_id=section.section_id,
-                translations=translations,
-                draft_translations=draft_translations,
-                revised_translations=revised_translations,
-                translation_outputs=[
-                    {
-                        "text": item.text,
-                        "tokenized_text": item.tokenized_text,
-                        "format_issues": list(item.format_issues),
-                    }
-                    for item in translation_outputs
-                ],
-                understanding=understanding,
-                reflection=reflection,
-                assessment=assessment,
-                revision_attempted=revision_attempted,
-            )
-
-        except Exception as e:
-            # 若初译已完成、仅后续步骤（反思/润色）出错，则降级返回 draft，
-            # 避免丢弃已花一次完整 LLM 调用得到的译文、并在重试时从头重译浪费 token。
-            if draft_translations is not None and translation_outputs is not None:
-                logger.warning(
-                    "四步法后续步骤失败，降级返回初译结果（section=%s）: %s",
-                    section.section_id, e,
-                )
-                if self.session_service and session_id:
-                    translated_text = "\n\n".join(draft_translations)
-                    try:
-                        self.session_service.complete_session(session_id, translated_text)
-                    except Exception:
-                        pass
-                return SectionTranslationResult(
-                    section_id=section.section_id,
-                    translations=list(draft_translations),
-                    draft_translations=list(draft_translations),
-                    revised_translations=[],
-                    translation_outputs=[
-                        {
-                            "text": item.text,
-                            "tokenized_text": item.tokenized_text,
-                            "format_issues": list(item.format_issues),
-                        }
-                        for item in translation_outputs
-                    ],
-                    understanding=understanding,
-                    reflection=None,
-                    assessment=None,
-                    degraded=True,
-                    degraded_reason=f"{type(e).__name__}: {e}",
-                )
-            # 初译尚未完成（Step 1/2 失败）：无可用降级，标记失败并上抛
+                if degraded:
+                    self.session_service.fail_session(session_id, error=reason)
+                else:
+                    self.session_service.complete_session(session_id, "\n\n".join(translations))
+            progress("完成（待处理问题已记录）" if degraded else "完成", 4)
+            return SectionTranslationResult(section_id=section.section_id, translations=translations,
+                draft_translations=drafts, revised_translations=revised,
+                translation_outputs=[{"text":p.text,"tokenized_text":p.tokenized_text,"format_issues":list(p.format_issues)} for p in outputs],
+                understanding=understanding, reflection=reflection, assessment=assessment,
+                revision_attempted=attempted, review_history=history, prompt_bundle_version=BUNDLE_VERSION,
+                degraded=degraded, degraded_reason=reason)
+        except Exception as exc:
             if self.session_service and session_id:
-                self.session_service.fail_session(session_id, error=str(e))
-            raise
+                try:
+                    self.session_service.fail_session(session_id, error=str(exc))
+                except Exception:
+                    logger.exception("Could not persist failed translation session")
+            if not drafts:
+                raise
+            # Text and tokenized payload both come from the same saved draft version.
+            # A verification failure is not a clean review or an approved translation.
+            return SectionTranslationResult(section_id=section.section_id, translations=drafts,
+                draft_translations=drafts, revised_translations=revised,
+                translation_outputs=[{"text":p.text,"tokenized_text":p.tokenized_text,"format_issues":list(p.format_issues)} for p in draft_outputs],
+                understanding=understanding, reflection=reflection, assessment=None,
+                revision_attempted=attempted, review_history=history, prompt_bundle_version=BUNDLE_VERSION,
+                degraded=True, degraded_reason=f"{type(exc).__name__}: {exc}")
 
     def translate_paragraph(
         self,
@@ -796,6 +574,9 @@ class FourStepTranslator:
             token_count,
         )
 
+        from ..core.glossary_prompt import build_annotation_plan
+        context["annotation_plan"] = build_annotation_plan(all_sections, (self.context_manager.article_analysis.terminology if self.context_manager.article_analysis else []), section.section_id, paragraph_ids)
+
         # 单次 API 调用翻译整批段落
         section_text = "\n\n".join(section_lines)
         translated = llm_provider.translate_section(
@@ -903,6 +684,9 @@ class FourStepTranslator:
             # 一次构建 section 上下文 payload，复用 role / translation_notes，避免重复计算
             "section_role": _section_payload.get("role", ""),
             "translation_notes": _section_payload.get("translation_notes", []),
+            "relation_to_previous": understanding.relation_to_previous,
+            "relation_to_next": understanding.relation_to_next,
+            "paragraph_structure": understanding.paragraph_structure,
             "article_challenges": (
                 build_article_challenge_payload(article_analysis.challenges)
                 if article_analysis
@@ -1008,6 +792,9 @@ class FourStepTranslator:
                     article_analysis.challenges
                 )
 
+        if context.annotation_plan:
+            llm_context.setdefault("section_context", {})["annotation_plan"] = context.annotation_plan
+
         # 前文上下文
         if context.previous_paragraphs:
             llm_context["previous_paragraphs"] = context.previous_paragraphs
@@ -1110,18 +897,8 @@ class FourStepTranslator:
         sample_text = "\n\n".join(sample_translations)
 
         # 快速评估 prompt（简化版，不需要详细分析）
-        quick_prompt = f"""你是一位资深中英双语编辑。请快速评估以下中文译文的质量（0-10分）。
-
-译文：
-{sample_text[:1000]}
-
-评分标准：
-- 9-10分：优秀，信息准确、表达自然、简洁有力，无明显问题
-- 7-8分：良好，整体质量不错，有少量可优化之处
-- 5-6分：及格，能理解但有明显问题
-- <5分：不及格，存在严重问题
-
-只返回一个数字评分（0-10），不要解释。"""
+        from ..prompts import get_prompt_manager
+        quick_prompt = get_prompt_manager().render("longform/review/quick_check", translations="\n\n".join(sample_translations))
 
         try:
             response = provider.generate(quick_prompt, temperature=0.3)
@@ -1131,9 +908,10 @@ class FourStepTranslator:
 
             logger.info(f"[Phase 2 Pre-check] Quick quality score: {score:.1f}")
 
-            # 如果预估 score >= 9.0，跳过 Phase 2
+            # A source-free readability score cannot establish fidelity.
+            # This compatibility method is diagnostic only; never skip source review.
             if score >= 9.0:
-                return True
+                return False
 
         except (ValueError, IndexError) as e:
             logger.warning(f"[Phase 2 Pre-check] Failed to parse quick score: {e}, proceeding with Phase 2")
@@ -1190,6 +968,9 @@ class FourStepTranslator:
             context=self._build_review_context(section, understanding),
         )
 
+        from ..prompts.contracts import validate_review, text_version
+        result = validate_review(result, source_paragraphs, translations)
+
         # 解析问题列表
         issues = []
         for issue_data in result.get("issues", []):
@@ -1199,6 +980,7 @@ class FourStepTranslator:
                 issue_type=issue_data.get("issue_type", "readability"),
                 severity=issue_data.get("severity", "medium"),
                 original_text=issue_data.get("original_text", ""),
+                translation_text=issue_data.get("translation_text", ""),
                 description=issue_data.get("description", ""),
                 why_it_matters=issue_data.get("why_it_matters", ""),
                 suggestion=issue_data.get("suggestion", "")
@@ -1216,7 +998,9 @@ class FourStepTranslator:
             conciseness_score=float(result.get("conciseness_score", 0)),
             consistency_score=float(result.get("consistency_score", 0)),
             logic_score=float(result.get("logic_score", 0)),
-            is_excellent=result.get("is_excellent", False),
+            is_excellent=not issues,
+            reviewed_version=text_version(source_paragraphs, translations),
+            review_status="complete",
             issues=issues
         )
 
@@ -1353,7 +1137,7 @@ class FourStepTranslator:
                         candidate = build_translation_payload(
                             para,
                             stripped,
-                            token_repairer=self._repair_format_tokens,
+                            token_repairer=functools.partial(self._repair_format_tokens, provider=llm_provider),
                         )
                         if candidate.format_valid:
                             refined[idx] = candidate

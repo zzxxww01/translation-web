@@ -95,29 +95,14 @@ SECTION_LINE_SEPARATOR = chr(10) * 2
 # src/prompts/longform/translation/section_batch_translate.txt 第 7-14 行保持一致。
 # 标题走的是独立的提示词链路，若不显式带上这段铁律，标题会出现「吉瓦」「词元」
 # 一类正文里被明令禁止的写法，与正文形成两套术语。
-SECTION_TITLE_WHITELIST_RULES = """## 白名单铁律——永不翻译（最高优先级，压过下方一切"尽量译成中文"的要求）
-即便下文要求"白名单外复杂名词尽量译成中文"，**本清单中的词也绝不适用**，永远保持英文半角原形：
-1. **token**：一律小写英文 token，绝不写成 词元／令牌／代币／词块。✅"更快的 token"、"40 token/秒"；❌"更快的词元"、"40 词元/秒"。复合专名 Tokenomics 也保留英文（❌代币经济学）。
-2. **功率／能量单位**：GW／TW／MW／kW／W／GWh／MWh／kWh，以及任何含单位的复合／派生单位（W/cm²、W/m²、LPM、$/kW 等）永远保留半角原形、整体保留不拆译。✅"10GW"、"25 kW"、"50 W/cm²"；❌"10 吉瓦"、"25 千瓦"、"50 瓦/平方厘米"。原文用拼写形（gigawatts／kilowatts）时改写成符号（GW／kW），但绝不译成"吉瓦／千瓦"。GW/MW 显眼易留、kW/W 像中文而最易被误译——**kW≠千瓦、W≠瓦、W/cm²≠瓦/平方厘米**。其余计量/物理量符号（A/V/Hz/℃/bar/bps/GB·s⁻¹ 等）一律同理保留半角原形，禁译安培/伏特/赫兹/摄氏度。
-3. **代码标识符／函数名／文件名／命令／环境变量／行内代码**、**软件库与产品名**（vLLM、CUDA、Bedrock、Copilot 等）、**硬件型号与工艺节点**（GB300、H100、N2、18A 等）、**基准测试名**：保持英文原名，禁意译（❌ Bedrock→基石）。
-4. **URL／slug／被引用的英文文章·论文·报告标题／作者署名行**：保持英文。
-5. **无通行中文译名的公司/机构专名（含术语表未登记者）**：一律保留英文原形；拿不准即保留，禁臆造中文名（如 CoreWeave 类术语表未登记的新公司不得译成中文）。
-判定顺序：先看词是否落在本铁律或下方白名单；命中则永不翻译，不再走"尽量译成中文"。"""
+from src.prompts import get_prompt_manager
+SECTION_TITLE_WHITELIST_RULES = get_prompt_manager().get("shared/longform_policy")
 
 
-def _repair_title_sinicization(translated_title: Optional[str]) -> tuple[str, str]:
-    """修复标题里的白名单违规写法，返回 ``(修复后的标题, 未能修复的命中项)``。
-
-    token 汉化有确定性 fixer（``desinicize_token``），就地改回英文即可，不必丢弃
-    整个译名。功率单位没有 fixer——但它在正文里只是 warning，标题却把整条译名
-    丢掉、回退成英文原标题，反而让成品更糟；所以只记 warning、保留译名，与正文
-    口径一致（见 translation_qa 里 power_unit_sinicized 的降级说明）。
-    """
+def _repair_title_sinicization(translated_title: Optional[str], source_title: str = "") -> tuple[str, str]:
+    from src.core.protected_terms import preserve_protected_terms
     text = (translated_title or "").strip()
-    if not text:
-        return "", ""
-
-    repaired = desinicize_token(text)
+    repaired = preserve_protected_terms(source_title, text)
     match = _POWER_UNIT_SINICIZED.search(repaired)
     return repaired, (match.group(0) if match else "")
 
@@ -978,7 +963,24 @@ class BatchTranslationService:
             project.status = status
             self._save_meta(project_id, project)
 
-    async def translate_project(
+    async def translate_project(self, project_id: str, on_progress=None, on_term_conflict=None) -> Dict:
+        """Freeze the effective bundle through thread/async work for one run."""
+        from src.prompts import prompt_bundle_scope
+        snapshot = None
+        previous_dir = self._artifact_service.get_latest_run_dir(project_id)
+        if previous_dir is not None and self._retranslate_scope == "resume":
+            project = self._load_project_with_sections(project_id)
+            total = sum(len(s.paragraphs) for s in project.sections)
+            done = self._count_project_translated_paragraphs(project.sections)
+            if 0 < done < total:
+                path = previous_dir / "prompt-bundle.json"
+                if not path.exists():
+                    raise ValueError("Previous run has no prompt version. Preserve existing text and explicitly select a new full retranslation; legacy checkpoints cannot silently use v2.")
+                snapshot = json.loads(path.read_text(encoding="utf-8"))
+        with prompt_bundle_scope(snapshot):
+            return await self._translate_project_impl(project_id, on_progress, on_term_conflict)
+
+    async def _translate_project_impl(
         self,
         project_id: str,
         on_progress: Optional[Callable[[str, int, int], None]] = None,
@@ -2728,7 +2730,7 @@ class BatchTranslationService:
             expected_title_translation = section.title_translation
             candidate = translated_map.get(section.section_id)
             raw_title = candidate.strip() if isinstance(candidate, str) else ""
-            translated_title, violation = _repair_title_sinicization(raw_title)
+            translated_title, violation = _repair_title_sinicization(raw_title, section.title)
             if translated_title != raw_title:
                 logger.info(
                     "Repaired sinicized token in section title: %s -> %s",
@@ -2790,7 +2792,7 @@ class BatchTranslationService:
                 )
                 if not is_valid_title_translation(section.title, translated_title):
                     raise ValueError("Section title translation is empty, malformed, or untranslated")
-                translated_title, violation = _repair_title_sinicization(translated_title)
+                translated_title, violation = _repair_title_sinicization(translated_title, section.title)
                 if violation:
                     # 同上：保留译名只记 warning，丢弃反而让标题退回英文。
                     logger.warning(

@@ -122,6 +122,9 @@ async def test_run_summary_cannot_hide_title_failures(monkeypatch, tmp_path, tra
     service._count_project_translated_paragraphs = Mock(return_value=1)
     service._count_translated_paragraphs = Mock(return_value=1)
     service._create_run_artifact_dir = Mock(return_value=("title-test-run", tmp_path))
+    service._artifact_service = Mock()
+    service._artifact_service.get_latest_run_dir.return_value = None
+    service._retranslate_scope = "resume"
     service._load_latest_analysis_snapshot = Mock(return_value=analysis)
     service._merge_analysis_with_project_glossary = Mock(return_value=analysis)
     service._is_cancelled = Mock(return_value=False)

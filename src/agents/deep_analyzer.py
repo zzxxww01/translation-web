@@ -466,12 +466,12 @@ class DeepAnalyzer:
                 # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
                 # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
                 logger.warning(
-                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "未知术语策略 %r（术语=%r），保守保留原文（preserve）。请检查 prompt 与 "
                     "TranslationStrategy 枚举是否一致。",
                     strategy_str,
                     term_data.get("term", ""),
                 )
-                strategy = TranslationStrategy.TRANSLATE
+                strategy = TranslationStrategy.PRESERVE
 
             term = EnhancedTerm(
                 term=term_data.get("term", ""),
@@ -479,7 +479,10 @@ class DeepAnalyzer:
                 translation=term_data.get("translation"),
                 strategy=strategy,
                 first_occurrence_note=term_data.get("first_occurrence_note", False),
-                rationale=term_data.get("rationale")
+                rationale=term_data.get("rationale"),
+                alternatives=term_data.get("alternatives", []),
+                avoid=term_data.get("avoid", []),
+                source_quote=term_data.get("source_quote", "")
             )
             terminology.append(term)
 
@@ -547,12 +550,12 @@ class DeepAnalyzer:
                 # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
                 # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
                 logger.warning(
-                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "未知术语策略 %r（术语=%r），保守保留原文（preserve）。请检查 prompt 与 "
                     "TranslationStrategy 枚举是否一致。",
                     strategy_str,
                     term_data.get("term", ""),
                 )
-                strategy = TranslationStrategy.TRANSLATE
+                strategy = TranslationStrategy.PRESERVE
 
             term = EnhancedTerm(
                 term=term_data.get("term", ""),
@@ -560,7 +563,10 @@ class DeepAnalyzer:
                 translation=term_data.get("translation"),
                 strategy=strategy,
                 first_occurrence_note=term_data.get("first_occurrence_note", False),
-                rationale=term_data.get("rationale")
+                rationale=term_data.get("rationale"),
+                alternatives=term_data.get("alternatives", []),
+                avoid=term_data.get("avoid", []),
+                source_quote=term_data.get("source_quote", "")
             )
             sampled_terms.append(term)
 
@@ -577,12 +583,12 @@ class DeepAnalyzer:
                 # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
                 # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
                 logger.warning(
-                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "未知术语策略 %r（术语=%r），保守保留原文（preserve）。请检查 prompt 与 "
                     "TranslationStrategy 枚举是否一致。",
                     strategy_str,
                     term_data.get("term", ""),
                 )
-                strategy = TranslationStrategy.TRANSLATE
+                strategy = TranslationStrategy.PRESERVE
 
             term = EnhancedTerm(
                 term=term_data.get("term", ""),
@@ -590,7 +596,10 @@ class DeepAnalyzer:
                 translation=term_data.get("translation"),
                 strategy=strategy,
                 first_occurrence_note=term_data.get("first_occurrence_note", False),
-                rationale=term_data.get("rationale")
+                rationale=term_data.get("rationale"),
+                alternatives=term_data.get("alternatives", []),
+                avoid=term_data.get("avoid", []),
+                source_quote=term_data.get("source_quote", "")
             )
             verified_terms.append(term)
 
@@ -708,7 +717,10 @@ class DeepAnalyzer:
                     relation_to_previous=role_data.get("relation_to_previous", ""),
                     relation_to_next=role_data.get("relation_to_next", ""),
                     key_points=role_data.get("key_points", []),
-                    translation_notes=role_data.get("translation_notes", [])
+                    translation_notes=role_data.get("translation_notes", []),
+                    paragraph_structure=[item for item in role_data.get("paragraph_structure", [])
+                        if isinstance(item, dict) and type(item.get("paragraph_index")) is int
+                        and item["paragraph_index"] in {0, len(section.paragraphs)//2, len(section.paragraphs)-1}]
                 )
             else:
                 # 如果 LLM 没有返回该章节的分析，创建一个默认的
@@ -723,28 +735,18 @@ class DeepAnalyzer:
         return section_roles
 
     def _build_sections_summary(self, sections: List[Section]) -> str:
-        """
-        构建章节摘要（方案 C 优化：增强采样）
-
-        每章节采样: 首段 + 中段 + 末段
-
-        Args:
-            sections: 章节列表
-
-        Returns:
-            str: 章节摘要
-        """
-        # 使用智能采样器获取增强摘要
-        section_summaries = self.smart_sampler.sample_for_section_roles(sections)
-
-        lines = []
+        """Cover every section, with explicit sampled paragraph indices and source evidence."""
+        import json
+        rows = []
         for section in sections:
-            lines.append(f"## {section.section_id} - {section.title}")
-            summary = section_summaries.get(section.section_id, "")
-            lines.append(summary)
-            lines.append("")  # 空行分隔
-
-        return "\n".join(lines)
+            indices = sorted({0, len(section.paragraphs) // 2, len(section.paragraphs) - 1})
+            samples = [{"paragraph_index": i, "paragraph_id":section.paragraphs[i].id,
+                        "source":section.paragraphs[i].source[:800],
+                        "truncated":len(section.paragraphs[i].source) > 800}
+                       for i in indices if 0 <= i < len(section.paragraphs)]
+            rows.append({"section_id":section.section_id, "title":section.title,
+                         "paragraph_count":len(section.paragraphs), "sampled_paragraphs":samples})
+        return json.dumps(rows, ensure_ascii=False)
 
     def _build_section_roles_prompt(
         self,
@@ -767,7 +769,7 @@ class DeepAnalyzer:
             "longform/analysis/section_role_map",
             article_theme=article_theme,
             structure_summary=structure_summary,
-            sections_summary=sections_summary[:6000]  # 限制长度，降低长响应失败风险
+            sections_summary=sections_summary
         )
 
     def get_analysis_summary(self, analysis: ArticleAnalysis) -> str:

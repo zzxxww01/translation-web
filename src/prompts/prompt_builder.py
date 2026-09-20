@@ -1,4 +1,4 @@
-﻿"""Translation prompt builder for long-form paragraph translation."""
+"""Translation prompt builder for long-form paragraph translation."""
 
 from __future__ import annotations
 
@@ -25,27 +25,16 @@ _SENTENCE_SPLIT_RE = re.compile(r"(?<=[.!?。！？])\s+")
 
 
 def _truncate_by_sentence(text: str, max_chars: int = 120) -> str:
-    """Truncate text by sentence while keeping the start and end when possible."""
+    """Keep a readable prefix; label a truncated sample and never exceed its budget."""
     if len(text) <= max_chars:
         return text
-
-    sentences = _SENTENCE_SPLIT_RE.split(text.strip())
-    if len(sentences) <= 1:
-        return text[:max_chars] + "……"
-
-    last = sentences[-1]
-    result_parts: List[str] = []
-    used = len(last)
-
-    for sentence in sentences[:-1]:
-        if used + len(sentence) + 2 > max_chars:
-            break
-        result_parts.append(sentence)
-        used += len(sentence) + 1
-
-    if result_parts:
-        return " ".join(result_parts) + " …… " + last
-    return sentences[0][: max_chars - len(last) - 4] + " …… " + last
+    if max_chars <= 1:
+        return "…"[:max(0, max_chars)]
+    prefix = text[:max_chars - 1]
+    boundary = max(prefix.rfind(char) for char in ".!?。！？；;")
+    if boundary >= max_chars // 2:
+        prefix = prefix[:boundary + 1]
+    return prefix + "…"
 
 
 TRANSLATION_TEMPLATE_NAME = "longform/translation/paragraph_translate"
@@ -411,6 +400,10 @@ class TranslationPromptBuilder:
 
         if section_context:
             section_lines = ["## 章节角色"]
+            import json
+            for field in ("annotation_plan", "paragraph_structure", "relation_to_next"):
+                if section_context.get(field):
+                    section_lines.append(field + ": " + json.dumps(section_context[field], ensure_ascii=False))
             role = section_context.get("role")
             if role:
                 section_lines.append(f"在文章中的角色：{role}")
@@ -477,9 +470,9 @@ class TranslationPromptBuilder:
 
         if previous_paragraphs:
             prev_lines = ["## 前文已确认译文"]
-            src, trans = previous_paragraphs[-1]
-            prev_lines.append(f"原文：{_truncate_by_sentence(src, 120)}")
-            prev_lines.append(f"译文：{_truncate_by_sentence(trans, 120)}")
+            for src, trans in previous_paragraphs[-2:]:
+                prev_lines.append(f"原文：{_truncate_by_sentence(src, 600)}")
+                prev_lines.append(f"译文：{_truncate_by_sentence(trans, 600)}")
             sections.append("\n".join(prev_lines))
 
         if next_preview:

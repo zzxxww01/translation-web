@@ -51,7 +51,10 @@ def source_mentions_token(source_text: str) -> bool:
     译文里的「令牌」（如 OAuth 访问令牌）、「代币」（加密货币）都是正确
     译法，不得改写、也不该报错。
     """
-    return bool(_SOURCE_TOKEN_RE.search(source_text or ""))
+    text = source_text or ""
+    if re.search(r"\b(?:oauth|jwt|csrf|cryptocurrency|blockchain|erc-?20|token\s+(?:bucket|ring))\b", text, re.IGNORECASE):
+        return False
+    return bool(_SOURCE_TOKEN_RE.search(text))
 
 
 def desinicize_token(text: str) -> str:

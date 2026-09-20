@@ -1,130 +1,16 @@
-# Longform Prompt Output Contracts
+# Output contracts (v2)
 
-## Article Analysis
+All JSON tasks use a top-level object and local validation. Invalid JSON is an error, not an empty success. Unknown/duplicate paragraph IDs, duplicate object keys and non-finite scores are rejected.
 
-```json
-{
-  "theme": "string",
-  "key_arguments": ["string"],
-  "structure_summary": "string",
-  "terminology": [
-    {
-      "term": "string",
-      "context_meaning": "string",
-      "translation": "string|null",
-      "strategy": "preserve|first_annotate|translate",
-      "first_occurrence_note": true,
-      "rationale": "string"
-    }
-  ],
-  "style": {
-    "tone": "string",
-    "target_audience": "string",
-    "translation_voice": "string"
-  },
-  "challenges": [
-    {
-      "type": "terminology|metaphor|cultural_reference|cross_domain_term|rhetorical_tone|structure|accuracy",
-      "location": "string",
-      "issue": "string",
-      "suggestion": "string"
-    }
-  ],
-  "guidelines": ["string"]
-}
-```
+- Analysis: terms (original, translation, strategy, note), style, summary.
+- Deep analysis: theme, key_arguments, structure_summary, style, sampled_terms (or terminology for article_analysis), challenges, guidelines.
+- Candidate verification: verified_terms includes positive and negative decisions; source evidence is required for interpretation.
+- Prescan: new_terms (term, suggested_translation, context, source_quote, confidence, requires_review), term_usages={}.
+- Batch translation / metadata: translations=[{id, translation}]. Missing IDs explicitly retry; no position-based guessing.
+- Section titles: translations={id: non-empty string}.
+- Review: issues=[{paragraph_index, original_text, translation_text, issue_type, severity, priority, description, why_it_matters, suggestion}]. Scores are optional diagnostics. Program computes counts and binds evidence to reviewed_version.
+- Refine: polished_translations=[{index, translation}]. Indices are batch-local and unique. Missing items preserve the original but do not imply the issue was solved.
+- Rule extraction: bounded bullet list or NONE, stored as pending candidates, never automatically active global rules.
+- Titles: public legacy two-line format is retained; parser removes only the initial label, never internal colons.
 
-## Section Role Map
-
-```json
-{
-  "section_roles": {
-    "section_id": {
-      "role_in_article": "string",
-      "relation_to_previous": "string",
-      "relation_to_next": "string",
-      "key_points": ["string"],
-      "translation_notes": ["string"]
-    }
-  }
-}
-```
-
-## Section Prescan
-
-```json
-{
-  "new_terms": [
-    {
-      "term": "string",
-      "suggested_translation": "string",
-      "context": "string",
-      "confidence": 0.9
-    }
-  ],
-  "term_usages": {
-    "existing_term": "translation used in this section"
-  }
-}
-```
-
-## Paragraph Translation
-
-Plain Chinese text only.
-
-## Paragraph Retranslation
-
-Plain Chinese text only.
-
-## Section Batch Translation
-
-```json
-{
-  "translations": [
-    {
-      "id": "p001",
-      "translation": "string"
-    }
-  ]
-}
-```
-
-## Section Critique
-
-```json
-{
-  "overall_score": 8.6,
-  "readability_score": 8.2,
-  "accuracy_score": 9.1,
-  "conciseness_score": 8.0,
-  "is_excellent": false,
-  "issues": [
-    {
-      "paragraph_index": 2,
-      "issue_type": "accuracy|terminology|tone|readability|annotation|data|structure",
-      "severity": "critical|high|medium|low",
-      "original_text": "string",
-      "description": "string",
-      "why_it_matters": "string",
-      "suggestion": "string"
-    }
-  ]
-}
-```
-
-## Rule Extraction
-
-```json
-{
-  "has_meaningful_change": true,
-  "rules": [
-    {
-      "wrong": "string",
-      "right": "string",
-      "instruction": "string",
-      "rule_type": "hard_rule|soft_preference|strict_prohibition",
-      "category": "terminology|accuracy|fluency|style|locale"
-    }
-  ]
-}
-```
+A changed translation requires fresh review before acceptance. Parse or model failures remain visible as degraded/unresolved states. Grammar/format correctness does not establish semantic fidelity.

@@ -132,6 +132,8 @@ def build_section_context_payload(understanding: Any) -> Dict[str, Any]:
     return {
         "role": role,
         "relation_to_previous": relation_to_previous,
+        "relation_to_next": understanding.get("relation_to_next", "") if isinstance(understanding, dict) else getattr(understanding, "relation_to_next", ""),
+        "paragraph_structure": understanding.get("paragraph_structure", []) if isinstance(understanding, dict) else getattr(understanding, "paragraph_structure", []),
         "key_points": limit_non_empty_strings(
             key_points,
             MAX_SECTION_KEY_POINTS_IN_PROMPT,

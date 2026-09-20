@@ -1,3 +1,4 @@
+import { getEditingInstruction } from '../../../shared/editingOptions';
 import { type FC, useEffect, useState, useCallback, useRef, type MouseEvent as ReactMouseEvent } from 'react';
 import { X, RotateCw, Check, ChevronLeft, ChevronRight, Zap, MessageCircle, Briefcase, Maximize2 } from 'lucide-react';
 import { useDocumentStore } from '@/shared/stores';
@@ -215,21 +216,21 @@ export const EditPanel: FC<EditPanelProps> = ({
       label: '可读性',
       icon: <Zap className="h-3 w-3" />,
       instruction:
-        '请提升可读性：拆分过长句，优化语序，减少冗余连接词，保持信息完整和逻辑清晰。',
+        getEditingInstruction('readable'),
     },
     {
       id: 'professional',
       label: '专业化',
       icon: <Briefcase className="h-3 w-3" />,
       instruction:
-        '请提升专业表达：术语更准确、行业表述更规范，保留技术细节和判断力度。',
+        getEditingInstruction('professional'),
     },
     {
       id: 'idiomatic',
       label: '更地道',
       icon: <MessageCircle className="h-3 w-3" />,
       instruction:
-        '请使中文更地道自然：避免翻译腔，改为符合中文读者习惯的表达，但不改变原意。',
+        getEditingInstruction('idiomatic'),
     },
   ];
 

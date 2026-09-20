@@ -30,6 +30,9 @@ class TranslationArtifactService:
         run_id = datetime.now().strftime("%Y%m%d-%H%M%S-%f")
         run_dir = self.artifacts_root(project_id) / run_id
         run_dir.mkdir(parents=True, exist_ok=True)
+        from src.prompts import get_prompt_manager
+        # This version checkpoint is essential, unlike best-effort report artifacts.
+        write_json_atomic(run_dir / "prompt-bundle.json", get_prompt_manager().snapshot())
         return run_id, run_dir
 
     def normalize_payload(self, payload: Any) -> Any:

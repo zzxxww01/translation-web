@@ -1,20 +1,8 @@
-"""
-Translation Agent - Quality Gate
+"""Version-aware quality gate.
 
-质量门禁机制
-
-评估维度：
-- 可读性 (35%)
-- 准确性 (30%)
-- 术语一致 (15%)
-- 完整性 (15%)
-- 风格 (5%)
-
-严格模式通过条件：
-- 整体评分 >= 8.5/10
-- 可读性评分 >= 8/10
-- 无关键术语翻译错误
-- 无信息遗漏
+Only unresolved serious issues, incomplete coverage and structural errors block.
+Numeric scores/legacy mode thresholds remain diagnostic compatibility fields;
+low model scores alone never authorize a rewrite or prove an error.
 """
 
 from typing import List, Dict, Optional
@@ -79,69 +67,23 @@ class QualityGate:
         else:
             return self.STRICT_THRESHOLDS
 
-    def assess(
-        self,
-        section: Section,
-        translations: List[str],
-        reflection: ReflectionResult
-    ) -> QualityAssessment:
-        """
-        评估翻译质量
-
-        Args:
-            section: 章节
-            translations: 译文列表
-            reflection: 反思结果
-
-        Returns:
-            QualityAssessment: 质量评估结果
-        """
-        # 计算各维度评分
-        scores = {
-            "readability": reflection.readability_score,
-            "accuracy": reflection.accuracy_score,
-            "terminology": self._assess_terminology(section, translations, reflection),
-            "completeness": self._assess_completeness(section, translations),
-            "style": self._assess_style(reflection)
-        }
-
-        # 计算加权总分
+    def assess(self, section: Section, translations: List[str], reflection: ReflectionResult) -> QualityAssessment:
+        from ..prompts.contracts import text_version
+        scores = {"readability":reflection.readability_score, "accuracy":reflection.accuracy_score,
+                  "terminology":self._assess_terminology(section, translations, reflection),
+                  "completeness":self._assess_completeness(section, translations), "style":self._assess_style(reflection)}
         overall = sum(scores[k] * self.WEIGHTS[k] for k in scores)
-
-        # 检查通过条件
-        failed_criteria = []
-
-        # 检查整体评分
-        if overall < self.thresholds["overall"]:
-            failed_criteria.append(
-                f"overall_score ({overall:.1f} < {self.thresholds['overall']})"
-            )
-
-        # 检查可读性评分
-        if scores["readability"] < self.thresholds["readability"]:
-            failed_criteria.append(
-                f"readability ({scores['readability']:.1f} < {self.thresholds['readability']})"
-            )
-
-        # 检查关键错误数量
-        critical_errors = self._count_critical_errors(reflection.issues)
-        if critical_errors > self.thresholds["critical_errors"]:
-            failed_criteria.append(
-                f"critical_errors ({critical_errors} > {self.thresholds['critical_errors']})"
-            )
-
-        passed = len(failed_criteria) == 0
-
-        # 决定建议动作
-        action = self._determine_action(passed, overall, critical_errors)
-
-        return QualityAssessment(
-            passed=passed,
-            overall_score=overall,
-            scores=scores,
-            failed_criteria=failed_criteria,
-            action=action
-        )
+        failed = []
+        if reflection.review_status != "complete" or reflection.coverage < 1.0:
+            failed.append("review_incomplete")
+        if reflection.reviewed_version and reflection.reviewed_version != text_version([p.source for p in section.paragraphs], translations):
+            failed.append("review_version_mismatch")
+        if len(translations) != len(section.paragraphs) or any(not t.strip() for t in translations):
+            failed.append("missing_or_empty_translation")
+        if any(issue.severity in {"critical", "high"} for issue in reflection.issues):
+            failed.append("unresolved_serious_issues")
+        return QualityAssessment(passed=not failed, overall_score=overall, scores=scores,
+                                 failed_criteria=failed, action="manual_review" if failed else "pass")
 
     def _assess_terminology(
         self,
@@ -216,17 +158,7 @@ class QualityGate:
         return max(0.0, 10.0 - deduction)
 
     def _count_critical_errors(self, issues: List[TranslationIssue]) -> int:
-        """
-        统计关键错误数量
-
-        关键错误包括：
-        - 准确性问题（accuracy）
-        - 术语错误（terminology）
-        - 判断力度保真问题（tone）
-        - 数据表达错误（data）
-        """
-        critical_types = {"accuracy", "terminology", "tone", "data"}
-        return sum(1 for issue in issues if issue.issue_type in critical_types)
+        return sum(issue.severity == "critical" for issue in issues)
 
     def _determine_action(
         self,

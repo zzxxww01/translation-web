@@ -1,4 +1,4 @@
-﻿"""Helpers for hidden format-token translation and export reconstruction."""
+"""Helpers for hidden format-token translation and export reconstruction."""
 
 from __future__ import annotations
 
@@ -212,7 +212,7 @@ def validate_tokenized_text(
     assigned = assign_span_ids(elements)
     expected = [element.span_id for element in assigned if element.span_id]
     if not expected:
-        return []
+        return [f"Unexpected token {token_id}." for token_id, _ in TOKEN_PATTERN.findall(tokenized_text)]
 
     issues: List[str] = []
     found = TOKEN_PATTERN.findall(tokenized_text)

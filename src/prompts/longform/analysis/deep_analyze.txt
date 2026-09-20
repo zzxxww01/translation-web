@@ -1,63 +1,12 @@
-你是技术文档分析专家。请深度分析以下文档，理解其主题、风格和结构。
+[[include:shared/fidelity]]
 
-## 采样文本
+分析提供的采样与大纲。采样不是全文，不能为未见段落补造论点、逐段结构或词频。总结应标明仅据样本；角色推断与原文事实分开。不因固定配额提取无关词。
+识别主题、论证线索、中文读者、作者语域和真正可能误译的表达；跨领域词按本处原句判义，不将整篇限定为单一领域。不展开无法确认的缩写。
+术语 strategy 只有四个值：preserve（原文不注释）、preserve_annotate（首现英文加中文说明）、first_annotate（首现中文加英文，后续中文）、translate（直接中文）；代码、型号和无可靠中文名的专名优先 preserve。每项给出原文证据，不以置信分数代替证据。
+## 采样
 {sampled_text}
-
-## 章节大纲
+## 大纲
 {outline}
 
-请分析：
-1. **主题**：文档的核心主题（一句话概括）
-2. **关键论点**：文档的3-5个主要论点
-3. **结构**：文档的组织方式和逻辑流
-4. **风格**：
-   - 语气（informative/persuasive/instructional等）
-   - 目标受众（technical_professionals/general_audience等）
-   - 翻译语气建议
-
-## 输出格式
-
-返回JSON格式：
-
-```json
-{{
-  "theme": "文档的核心主题（一句话概括）",
-  "key_arguments": ["论点1", "论点2", "论点3"],
-  "structure_summary": "文档结构的简要描述",
-  "style": {{
-    "tone": "informative",
-    "target_audience": "technical_professionals",
-    "translation_voice": "保持专业、准确、流畅"
-  }},
-  "sampled_terms": [
-    {{
-      "term": "CPO",
-      "context_meaning": "Co-Packaged Optics，共封装光学技术",
-      "translation": "共封装光学",
-      "strategy": "first_annotate",
-      "first_occurrence_note": true,
-      "rationale": "核心技术术语，首次出现需注释全称"
-    }}
-  ],
-  "challenges": [
-    {{
-      "location": "技术概念密集段落",
-      "issue": "术语密集，需要准确翻译",
-      "suggestion": "保持术语一致性，首次出现时注释"
-    }}
-  ],
-  "guidelines": [
-    "保持技术术语的准确性",
-    "首次出现的缩写需要注释全称",
-    "保持专业、正式的语气"
-  ]
-}}
-```
-
-**重要提示**：
-- `sampled_terms`：从采样文本中提取的专业术语（约20-30个）
-- 术语翻译策略（必须严格取以下四个值之一）：
-  - `preserve`：全文保持英文原文，不加注释（如 API、GPU、AI、CUDA）
-  - `preserve_annotate`：首次出现保留英文原文+括号注中文，后续只保留英文（如 SerDes → SerDes（串行解串器））
-  - `first_annotate`：首次出现译为中文+括号注英文，后续用中文（如 TSMC → 台积电（TSMC））
-  - `translate`：全文直接译为中文（如 bandwidth → 带宽）
+只返回 JSON 对象，字段为 theme（一句话）、key_arguments（有证据的论点数组）、structure_summary、style（tone/target_audience/translation_voice）、sampled_terms、challenges、guidelines。
+sampled_terms 每项：term、context_meaning、translation（字符串或 null）、strategy、first_occurrence_note、rationale、source_quote，可附 alternatives、avoid。challenges 每项：type、location、issue、suggestion。guidelines 只给当前样本确实需要的可执行建议，不强制正式语气或所有缩写加注。

@@ -89,9 +89,13 @@ async def optimize_text(request: SlackOptimizeRequest):
         )
         data = parse_llm_json_response(response_text)
 
-        optimized_text = data.get("optimized_text", request.content)
-        improvements = data.get("improvements", ["Text optimized"])
-        confidence = float(data.get("confidence", 0.8))
+        optimized_text = data.get("optimized_text")
+        improvements = data.get("improvements")
+        if not isinstance(optimized_text, str) or not optimized_text.strip() or not isinstance(improvements, list) or any(not isinstance(x, str) for x in improvements):
+            raise ValueError("Invalid optimization response")
+        if request.context_type == "translation" and not request.original_text:
+            improvements.append("未提供原文，仅作语言润色，未核验忠实性。")
+        confidence = float(data.get("confidence", 0.0))
         confidence = max(0.0, min(1.0, confidence))
 
         return SlackOptimizeResponse(

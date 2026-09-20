@@ -1,4 +1,4 @@
-﻿"""
+"""
 Translation Agent - Gemini LLM Provider
 
 Google Gemini API implementation for translation and analysis.
@@ -1202,68 +1202,10 @@ class GeminiProvider(LLMProvider):
         )
         return self.generate(prompt, temperature=0.4)
 
-    def repair_format_tokens(
-        self,
-        source_text: str,
-        translated_text: str,
-        format_tokens: List[Dict[str, Any]],
-        issues: Optional[List[str]] = None,
-        model: Optional[str] = None,
-    ) -> Optional[str]:
-        """Run a lightweight repair pass to restore hidden token wrappers."""
-        preview_tokens = limit_format_tokens(format_tokens)
-        if not preview_tokens:
-            return None
-
-        token_lines: List[str] = []
-        for token in preview_tokens:
-            if not isinstance(token, dict):
-                continue
-            token_id = str(token.get("id", "")).strip()
-            token_type = str(token.get("type", "")).strip()
-            token_text = str(token.get("text", "")).strip()
-            if token_id:
-                token_lines.append(f"- {token_id} ({token_type}): {token_text}")
-
-        issue_lines = [f"- {item}" for item in (issues or []) if str(item).strip()]
-        issue_block = "\n".join(issue_lines) if issue_lines else "- (not provided)"
-        token_block = "\n".join(token_lines) if token_lines else "- (empty)"
-
-        prompt = "\n".join(
-            [
-                "You are a token repair engine for long-form translation.",
-                "Task: repair hidden backend tokens only.",
-                "",
-                "Rules:",
-                "1. Keep meaning and wording unchanged as much as possible.",
-                "2. Restore missing or malformed `[[[TYPE_N|...]]]` wrappers.",
-                "3. Keep token ids exactly from the token list.",
-                "4. Do not add extra commentary.",
-                "5. Output ONLY the repaired translation text.",
-                "",
-                "Expected tokens:",
-                token_block,
-                "",
-                "Validation issues:",
-                issue_block,
-                "",
-                "Source (tokenized):",
-                source_text,
-                "",
-                "Broken translation:",
-                translated_text,
-            ]
-        )
-
-        repaired = self.generate(prompt, temperature=0.1, model=model).strip()
-        if repaired.startswith("```"):
-            lines = repaired.splitlines()
-            if lines and lines[0].startswith("```"):
-                lines = lines[1:]
-            if lines and lines[-1].strip() == "```":
-                lines = lines[:-1]
-            repaired = "\n".join(lines).strip()
-        return repaired or None
+    def repair_format_tokens(self, source_text: str, translated_text: str,
+                             format_tokens: List[Dict[str, Any]], issues: Optional[List[str]] = None,
+                             model: Optional[str] = None) -> Optional[str]:
+        return super().repair_format_tokens(source_text, translated_text, format_tokens, issues, model)
 
     def deep_analyze_with_term_verification(
         self,
@@ -1404,133 +1346,32 @@ class GeminiProvider(LLMProvider):
             raise ValueError(f"Invalid JSON response from LLM: {e}")
 
     def analyze(self, text: str) -> Dict[str, Any]:
-        """
-        鍒嗘瀽鏂囨湰锛屾彁鍙栨湳璇拰椋庢牸
+        from ..prompts.task_builders import analysis_prompt
+        from ..prompts.contracts import object_response
+        result = object_response(self.generate(analysis_prompt(text), response_format="json", temperature=0.3), ("terms", "style"))
+        if not isinstance(result["terms"], list) or not isinstance(result["style"], dict):
+            raise ValueError("Invalid analysis schema")
+        return result
 
-        Args:
-            text: 瑕佸垎鏋愮殑鏂囨湰锛堥€氬父鏄叏鏂囨垨鎽樿锛?
-
-        Returns:
-            Dict: 鍒嗘瀽缁撴灉
-        """
-        prompt = self._build_analysis_prompt(text)
-
-        try:
-            response = self.generate(prompt, response_format="json")
-            return self._parse_json_response(response)
-        except json.JSONDecodeError:
-            return {
-                "terms": [],
-                "style": {"tone": "professional", "formality": "formal", "notes": []},
-            }
-        except Exception as e:
-            raise RuntimeError(f"Analysis failed: {e}")
-
-    def check_consistency(
-        self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
-    ) -> List[Dict[str, Any]]:
-        """
-        妫€鏌ヨ瘧鏂囦竴鑷存€?
-
-        Args:
-            paragraphs: 娈佃惤鍒楄〃 [{"source": ..., "translation": ...}, ...]
-            glossary: 鏈琛?{term: translation, ...}
-
-        Returns:
-            List[Dict]: 闂鍒楄〃
-        """
-        prompt = self._build_consistency_prompt(paragraphs, glossary)
-
-        try:
-            response = self.generate(prompt, response_format="json")
-            result = self._parse_json_response(response)
-            return result if isinstance(result, list) else []
-        except Exception:
-            return []
+    def check_consistency(self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]) -> List[Dict[str, Any]]:
+        from ..prompts.task_builders import consistency_prompt
+        from ..prompts.contracts import object_response, PromptContractError
+        result = object_response(self.generate(consistency_prompt(paragraphs, glossary), response_format="json", temperature=0.3), ("issues",))
+        if not isinstance(result["issues"], list):
+            raise PromptContractError("issues must be a list")
+        for issue in result["issues"]:
+            index = issue.get("paragraph_index") if isinstance(issue, dict) else None
+            if type(index) is not int or not 0 <= index < len(paragraphs):
+                raise PromptContractError("Invalid consistency issue index")
+        return result["issues"]
 
     def _build_translation_prompt(self, text: str, context: Dict[str, Any]) -> str:
-        """Build the paragraph translation prompt via the shared prompt builder."""
-        from ..prompts.prompt_builder import get_prompt_builder
+        from ..prompts.task_builders import paragraph_prompt
+        return paragraph_prompt(text, context)
 
-        prompt_style = self._resolve_translation_prompt_style()
-        builder = get_prompt_builder(style=prompt_style)
-
-        # Extract runtime context for the paragraph prompt builder.
-        glossary = context.get("glossary", [])
-        previous_paragraphs = context.get("previous_paragraphs", [])
-        next_preview = context.get("next_preview", [])
-        article_title = context.get("article_title")
-        article_theme = context.get("article_theme")
-        article_structure = context.get("article_structure")
-        current_section_title = context.get("current_section_title")
-        heading_chain = context.get("heading_chain")
-        target_audience = context.get("target_audience")
-        translation_voice = context.get("translation_voice")
-        article_challenges = context.get("article_challenges")
-        style_guide = context.get("style_guide")
-        section_context = context.get("section_context")
-        learned_rules = context.get("learned_rules")
-        instruction = context.get("instruction")
-        previous_translation = context.get("previous_translation")
-        format_tokens = context.get("format_tokens", [])
-        term_usage = context.get("term_usage")
-
-        # Delegate prompt assembly to the long-form prompt builder.
-        prompt = builder.build_prompt(
-            source_text=text,
-            glossary=glossary,
-            previous_paragraphs=previous_paragraphs,
-            next_preview=next_preview,
-            article_title=article_title,
-            article_theme=article_theme,
-            article_structure=article_structure,
-            current_section_title=current_section_title,
-            heading_chain=heading_chain,
-            target_audience=target_audience,
-            translation_voice=translation_voice,
-            article_challenges=article_challenges,
-            style_guide=style_guide,
-            section_context=section_context,
-            learned_rules=learned_rules,
-            instruction=instruction,
-            previous_translation=previous_translation,
-            format_tokens=format_tokens,
-            term_usage=term_usage,
-        )
-
-        return prompt
-
-    def _build_retranslation_prompt(
-        self,
-        source_text: str,
-        current_translation: str,
-        context: Dict[str, Any],
-    ) -> str:
-        """Build the paragraph retranslation prompt via the shared prompt builder."""
-        from ..prompts.prompt_builder import get_prompt_builder
-
-        builder = get_prompt_builder(style=self._resolve_translation_prompt_style())
-        return builder.build_retranslation_prompt(
-            source_text=source_text,
-            current_translation=current_translation,
-            glossary=context.get("glossary", []),
-            previous_paragraphs=context.get("previous_paragraphs", []),
-            next_preview=context.get("next_preview", []),
-            article_title=context.get("article_title"),
-            article_theme=context.get("article_theme"),
-            article_structure=context.get("article_structure"),
-            current_section_title=context.get("current_section_title"),
-            heading_chain=context.get("heading_chain"),
-            target_audience=context.get("target_audience"),
-            translation_voice=context.get("translation_voice"),
-            article_challenges=context.get("article_challenges"),
-            style_guide=context.get("style_guide"),
-            section_context=context.get("section_context"),
-            learned_rules=context.get("learned_rules"),
-            instruction=context.get("instruction"),
-            format_tokens=context.get("format_tokens", []),
-            term_usage=context.get("term_usage"),
-        )
+    def _build_retranslation_prompt(self, source_text: str, current_translation: str, context: Dict[str, Any]) -> str:
+        from ..prompts.task_builders import paragraph_prompt
+        return paragraph_prompt(source_text, context, current=current_translation)
 
     def _resolve_translation_prompt_style(self) -> str:
         style = settings.translation_prompt_style.strip().lower()
@@ -1538,82 +1379,23 @@ class GeminiProvider(LLMProvider):
             return "original"
         return style
 
-    def _build_analysis_prompt(self, text: str) -> str:
-        """Build the analysis prompt."""
-        return self.prompt_manager.get("analysis", text=text[:8000])
+    def _build_analysis_prompt(self, text):
+        from ..prompts.task_builders import analysis_prompt
+        return analysis_prompt(text)
 
-    def _build_consistency_prompt(
-        self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
-    ) -> str:
-        """Build the consistency review prompt."""
-        para_text = "\n\n".join(
-            [
-                f"[段落 {i+1}]\n原文：{p['source']}\n译文：{p['translation']}"
-                for i, p in enumerate(paragraphs[:20])
-            ]
-        )
+    def _build_consistency_prompt(self, paragraphs, glossary):
+        from ..prompts.task_builders import consistency_prompt
+        return consistency_prompt(paragraphs, glossary)
 
-        # Handle both list and dict formats
-        if isinstance(glossary, list):
-            glossary_text = "\n".join([
-                f"- {term.get('original', '')} -> {term.get('translation', '')}"
-                for term in glossary if isinstance(term, dict)
-            ])
-        elif isinstance(glossary, dict):
-            glossary_text = "\n".join([f"- {term} -> {trans}" for term, trans in glossary.items()])
-        else:
-            glossary_text = "无"
+    def _build_source_metadata_batch_prompt(self, entries: List[Dict[str, str]], context: Dict[str, Any]) -> str:
+        from ..prompts.task_builders import source_metadata_prompt
+        return source_metadata_prompt(entries, context)
 
-        return self.prompt_manager.get(
-            "consistency", para_text=para_text, glossary_text=glossary_text
-        )
-
-    def _build_source_metadata_batch_prompt(
-        self,
-        entries: List[Dict[str, str]],
-        context: Dict[str, Any],
-    ) -> str:
-        """Build the dedicated batch prompt for source/citation metadata."""
-        glossary_block = str(context.get("glossary_block", "")).strip() or "(无命中术语)"
-        entries_json = json.dumps(entries, ensure_ascii=False, indent=2)
-        return self.prompt_manager.get(
-            "longform/metadata/source_batch_translate",
-            glossary_block=glossary_block,
-            entry_count=len(entries),
-            entries_json=entries_json,
-        )
-
-    def translate_section(
-        self,
-        section_text: str,
-        section_title: str,
-        context: Dict[str, Any],
-        paragraph_ids: List[str],
-    ) -> List[Dict[str, str]]:
-        """Translate one full section in batch mode and return paragraph-aligned results."""
-        prompt = self._build_batch_translation_prompt(
-            section_text, section_title, context, paragraph_ids
-        )
-
-        try:
-            response = self.generate(prompt, response_format="json", temperature=0.3)
-            result = self._parse_json_response(response)
-        except Exception as exc:
-            logger.error("[Gemini] Batch translation failed: %s", exc)
-            raise
-
-        if isinstance(result, dict) and "translations" in result:
-            raw = result["translations"]
-        elif isinstance(result, list):
-            raw = result
-        else:
-            raise ValueError(
-                "Batch translation response does not satisfy the JSON contract."
-            )
-
-        return self._coerce_translation_items(
-            raw, expected_count=len(paragraph_ids), label="section batch"
-        )
+    def translate_section(self, section_text: str, section_title: str, context: Dict[str, Any],
+                          paragraph_ids: List[str]) -> List[Dict[str, str]]:
+        from ..prompts.contracts import parse_json, translation_items
+        prompt = self._build_batch_translation_prompt(section_text, section_title, context, paragraph_ids)
+        return translation_items(parse_json(self.generate(prompt, response_format="json", temperature=0.3)), paragraph_ids)
 
     @staticmethod
     def _coerce_translation_items(
@@ -1647,292 +1429,34 @@ class GeminiProvider(LLMProvider):
             )
         return cleaned
 
-    def translate_source_metadata_batch(
-        self,
-        entries: List[Dict[str, str]],
-        context: Optional[Dict[str, Any]] = None,
-    ) -> List[Dict[str, str]]:
-        """Translate source/citation metadata entries in one JSON batch."""
+    def translate_source_metadata_batch(self, entries: List[Dict[str, str]], context: Optional[Dict[str, Any]] = None) -> List[Dict[str, str]]:
+        from ..prompts.contracts import parse_json, translation_items
         prompt = self._build_source_metadata_batch_prompt(entries, context or {})
+        return translation_items(parse_json(self.generate(prompt, response_format="json", temperature=0.2)), [e["id"] for e in entries])
 
-        try:
-            response = self.generate(prompt, response_format="json", temperature=0.2)
-            result = self._parse_json_response(response)
-        except Exception as exc:
-            logger.error("[Gemini] Source metadata batch translation failed: %s", exc)
-            raise
+    def translate_title(self, title: str, context: Optional[Dict[str, Any]] = None,
+                        subtitle: Optional[str] = None) -> Dict[str, str]:
+        from ..prompts.task_builders import title_prompt
+        from ..prompts.contracts import parse_title_lines
+        return parse_title_lines(self.generate(title_prompt(title, subtitle, context or {}), temperature=0.3))
 
-        if isinstance(result, dict) and "translations" in result:
-            return result["translations"]
-        if isinstance(result, list):
-            return result
+    def translate_section_title(self, title: str, context: Optional[Dict[str, Any]] = None,
+                                *, glossary_block: str = "", whitelist_rules: str = "") -> str:
+        from ..prompts.task_builders import section_title_prompt
+        from ..prompts.contracts import PromptContractError
+        result = self.generate(section_title_prompt(title, context or {}, glossary_block, whitelist_rules), temperature=0.3)
+        if not isinstance(result, str) or not result.strip():
+            raise PromptContractError("Empty section title")
+        return result.strip()
 
-        raise ValueError(
-            "Source metadata translation response does not satisfy the JSON contract."
-        )
+    def translate_all_section_titles(self, sections: List[Dict[str, Any]], *, article_theme: str = "",
+                                     glossary_block: str = "", whitelist_rules: str = "") -> Dict[str, str]:
+        return super().translate_all_section_titles(sections, article_theme, glossary_block=glossary_block, whitelist_rules=whitelist_rules)
 
-    def translate_title(
-        self,
-        title: str,
-        context: Optional[Dict[str, Any]] = None,
-        subtitle: Optional[str] = None,
-    ) -> Dict[str, str]:
-        """Translate article title and optional subtitle in one call.
-
-        Returns:
-            dict with keys "title" and optionally "subtitle".
-        """
-        context_lines: List[str] = []
-        if context:
-            if context.get("article_theme"):
-                context_lines.append(f"- Article theme: {context['article_theme']}")
-            if context.get("structure_summary"):
-                context_lines.append(
-                    f"- Structure summary: {context['structure_summary']}"
-                )
-            if context.get("target_audience"):
-                context_lines.append(f"- Target audience: {context['target_audience']}")
-
-        prompt = self.prompt_manager.get(
-            "longform/auxiliary/title_translate",
-            context_block="\n".join(context_lines) if context_lines else "- None",
-            glossary_block=(context or {}).get("glossary_block", "(无命中术语)"),
-            preservation_block=(
-                (context or {}).get("preservation_block", "- 无额外保留项")
-            ),
-            title=title,
-            subtitle=subtitle or "(无)",
-        )
-        raw = self.generate(prompt, temperature=0.3)
-
-        result: Dict[str, str] = {}
-        for line in raw.strip().splitlines():
-            line = line.strip()
-            if line.startswith("标题:") or line.startswith("标题："):
-                result["title"] = line.split(":", 1)[-1].split("：", 1)[-1].strip()
-            elif line.startswith("副标题:") or line.startswith("副标题："):
-                val = line.split(":", 1)[-1].split("：", 1)[-1].strip()
-                if val:
-                    result["subtitle"] = val
-
-        if not result.get("title"):
-            result["title"] = raw.strip().splitlines()[0].strip()
-
-        return result
-
-    def translate_section_title(
-        self,
-        title: str,
-        context: Optional[Dict[str, Any]] = None,
-        *,
-        glossary_block: str = "",
-        whitelist_rules: str = "",
-    ) -> str:
-        """Translate a section title with section-aware context.
-
-        ``glossary_block`` / ``whitelist_rules`` 为可选约束段（术语表块与「永不翻译」
-        白名单铁律），缺省为空串时行为与此前一致。也兼容通过 ``context`` 字典传入
-        （键名 ``glossary`` / ``glossary_block`` / ``whitelist_rules``）。
-        """
-        if context:
-            glossary_block = glossary_block or str(
-                context.get("glossary") or context.get("glossary_block") or ""
-            )
-            whitelist_rules = whitelist_rules or str(
-                context.get("whitelist_rules") or ""
-            )
-
-        context_lines: List[str] = []
-        if context:
-            if context.get("article_theme"):
-                context_lines.append(f"- Article theme: {context['article_theme']}")
-            if context.get("context"):
-                context_lines.append(f"- Context: {context['context']}")
-            if context.get("previous_section_title"):
-                context_lines.append(
-                    f"- Previous section: {context['previous_section_title']}"
-                )
-            if context.get("next_section_title"):
-                context_lines.append(f"- Next section: {context['next_section_title']}")
-
-        # 模板可能尚未加上 {glossary}/{whitelist_rules} 占位符：str.format 会忽略多余
-        # 关键字，故这里恒传两项，不会因模板未同步而报错。
-        prompt = self.prompt_manager.get(
-            "longform/auxiliary/section_title_translate",
-            context_block="\n".join(context_lines) if context_lines else "- None",
-            title=title,
-            glossary=glossary_block.strip() or "（无）",
-            whitelist_rules=whitelist_rules.strip(),
-        )
-        return self.generate(prompt, temperature=0.3)
-
-    def translate_all_section_titles(
-        self,
-        sections: List[Dict[str, Any]],
-        *,
-        article_theme: str = "",
-        glossary_block: str = "",
-        whitelist_rules: str = "",
-    ) -> Dict[str, str]:
-        """Translate all section titles in a single JSON API call.
-
-        Builds one prompt listing all section titles and their neighbours,
-        requests a JSON response ``{"translations": {"<id>": "<中文标题>"}}``,
-        and returns the mapping.  If parsing fails or a section is missing,
-        callers should fall back to ``translate_section_title`` per-entry.
-
-        ``glossary_block``（术语表块）与 ``whitelist_rules``（「永不翻译」白名单铁律）
-        为可选约束段：此前标题链路完全绕过词表与白名单，导致标题与正文两套术语，
-        且一个「吉瓦/词元」就能让整篇导出被 QA 阻断（审计 LC2）。缺省空串时提示词
-        与改动前完全一致。
-        """
-        if not sections:
-            return {}
-
-        chapter_lines: List[str] = []
-        for i, sec in enumerate(sections, 1):
-            sec_id = sec.get("id", f"s{i:02d}")
-            title = sec.get("title", "")
-            prev_t = sec.get("prev", "")
-            next_t = sec.get("next", "")
-            parts = [f'{i}. id={sec_id}, title="{title}"']
-            if prev_t:
-                parts.append(f'prev="{prev_t}"')
-            if next_t:
-                parts.append(f'next="{next_t}"')
-            chapter_lines.append(", ".join(parts))
-
-        theme_line = f"文章主题：{article_theme}" if article_theme else ""
-        # filter(None, ...) 会吃掉纯空串分隔项，故各约束段自带前后换行保证留白
-        whitelist_section = (
-            "\n" + whitelist_rules.strip() + "\n" if whitelist_rules.strip() else ""
-        )
-        glossary_section = (
-            "\n## 术语表\n" + glossary_block.strip() + "\n"
-            if glossary_block.strip()
-            else ""
-        )
-        prompt = "\n".join(
-            filter(
-                None,
-                [
-                    "你是一位资深中英双语编辑，尤其擅长硬核科技长文领域。"
-                    "请将下面所有章节标题翻译为简洁、自然、契合文章上下文的中文。",
-                    "",
-                    whitelist_section,
-                    theme_line,
-                    "",
-                    glossary_section,
-                    "## 章节列表（id, 原标题, 前后章节供参考）",
-                    "\n".join(chapter_lines),
-                    "",
-                    "## 输出规则",
-                    '以 JSON 返回，格式：{"translations": {"<id>": "<中文标题>", ...}}',
-                    "只输出 JSON，不要解释，不要额外文字。",
-                ],
-            )
-        )
-
-        try:
-            raw = self.generate(prompt, response_format="json", temperature=0.3)
-            result = self._parse_json_response(raw)
-            translations = result.get("translations", {})
-            if isinstance(translations, dict):
-                logger.info(
-                    "[Gemini] Batch section title translation: %d/%d titles returned",
-                    len(translations),
-                    len(sections),
-                )
-                return {str(k): str(v) for k, v in translations.items()}
-        except Exception as exc:
-            logger.warning(
-                "[Gemini] Batch section title translation failed, will use per-title fallback: %s",
-                exc,
-            )
-
-        # Fallback: 逐条翻译。这里不走 super()，因为基类构造的 context 无法带上词表与
-        # 白名单铁律，兜底路径会重新退化成零约束翻译（审计 LC2）。
-        results: Dict[str, str] = {}
-        for sec in sections:
-            sec_id = sec.get("id", "")
-            title = sec.get("title", "")
-            if not title:
-                continue
-            context = {
-                "article_theme": article_theme,
-                "context": "Section heading inside a long-form article",
-                "previous_section_title": sec.get("prev", ""),
-                "next_section_title": sec.get("next", ""),
-            }
-            try:
-                results[sec_id] = self.translate_section_title(
-                    title,
-                    context=context,
-                    glossary_block=glossary_block,
-                    whitelist_rules=whitelist_rules,
-                )
-            except Exception:
-                results[sec_id] = title  # keep original on failure
-        return results
-
-    def _build_batch_translation_prompt(
-        self,
-        section_text: str,
-        section_title: str,
-        context: Dict[str, Any],
-        paragraph_ids: List[str],
-    ) -> str:
-        """Build the batch translation prompt."""
-        format_token_rules = self._format_token_rules_for_prompt(
-            context.get("format_tokens", []),
-            context.get("format_token_count", 0),
-        )
-        enhanced_guidelines = build_section_guideline_lines(
-            context.get("guidelines", []),
-            section_role=context.get("section_role", ""),
-            translation_voice=context.get("translation_voice", ""),
-            target_audience=context.get("target_audience", ""),
-            translation_notes=context.get("translation_notes"),
-            format_token_rules=format_token_rules,
-        )
-
-        # Build previous translations context
-        prev_trans = context.get("previous_translations", [])
-        if prev_trans:
-            prev_lines = []
-            for pair in prev_trans[-5:]:
-                src_preview = pair.get("source", "")[:80]
-                trans_preview = pair.get("translation", "")[:80]
-                prev_lines.append(f"- EN: {src_preview}…\n  ZH: {trans_preview}…")
-            previous_translations_block = "\n".join(prev_lines)
-        else:
-            previous_translations_block = "无"
-
-        # 优化点7: 注入前序章节的反馈
-        feedback_block = context.get("feedback_from_previous_sections", "")
-
-        return self.prompt_manager.get(
-            "longform/translation/section_batch_translate",
-            section_title=section_title,
-            section_text=section_text,
-            paragraph_ids=json.dumps(paragraph_ids),
-            article_theme=context.get("article_theme", ""),
-            section_position=context.get("section_position", ""),
-            previous_section=context.get("previous_section_title", ""),
-            next_section=context.get("next_section_title", ""),
-            target_audience=context.get("target_audience", ""),
-            translation_voice=context.get("translation_voice", ""),
-            article_challenges=self._format_challenges_for_prompt(
-                context.get("article_challenges", [])
-            ),
-            glossary=self._format_glossary_for_prompt(
-                context.get("glossary", []),
-                term_usage=context.get("term_usage"),
-            ),
-            guidelines="\n".join(enhanced_guidelines),
-            previous_translations=previous_translations_block,
-            feedback_from_previous_sections=feedback_block or "无",
-        )
+    def _build_batch_translation_prompt(self, section_text: str, section_title: str,
+                                      context: Dict[str, Any], paragraph_ids: List[str]) -> str:
+        from ..prompts.task_builders import section_prompt
+        return section_prompt(section_text, section_title, context, paragraph_ids)
 
     def _format_glossary_for_prompt(
         self,
