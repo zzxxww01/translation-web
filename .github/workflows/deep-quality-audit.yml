@@ -21,9 +21,11 @@ jobs:
           cache-dependency-path: web/frontend/package-lock.json
       - name: Inspect and repair compatible dependency versions
         run: |
-          set -u
+          set -eu
+          npm install --global npm@11
           npm ci --ignore-scripts > "$RUNNER_TEMP/npm-install.log" 2>&1
           npm audit --json > "$RUNNER_TEMP/audit-before.json" || true
+          npm update --ignore-scripts --no-audit > "$RUNNER_TEMP/dependency-update.log" 2>&1
           npm audit fix --ignore-scripts --json > "$RUNNER_TEMP/audit-fix.json" || true
           npm audit --json > "$RUNNER_TEMP/audit-after.json" || true
           cp package.json package-lock.json "$RUNNER_TEMP/"
