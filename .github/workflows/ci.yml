@@ -5,62 +5,94 @@ on:
     branches: ["main", "master"]
   pull_request:
 
+permissions:
+  contents: read
+
+env:
+  RUN_LLM_TESTS: "0"
+
 jobs:
   backend:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          persist-credentials: false
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
       - name: Install backend deps
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements-dev.txt
-
+          python -m pip install -r requirements-dev.txt
+          python -m pip freeze > "$RUNNER_TEMP/resolved-requirements.txt"
       - name: Setup config
         run: |
           cp config/llm_providers.yaml.example config/llm_providers.yaml
           echo "GEMINI_API_KEY=test" > .env
-
       - name: Compile Python source
         run: python -m compileall src
-
       - name: Import app
-        run: |
-          python -c "from src.api.app import app; print('routes', len(app.routes))"
-
+        run: python -c "from src.api.app import app; print('routes', len(app.routes))"
       - name: Test backend
         run: pytest -q
+      - name: Audit resolved backend dependencies
+        run: |
+          python -m venv "$RUNNER_TEMP/audit-tool"
+          "$RUNNER_TEMP/audit-tool/bin/pip" install pip-audit==2.10.1
+          "$RUNNER_TEMP/audit-tool/bin/pip-audit" -r "$RUNNER_TEMP/resolved-requirements.txt" --no-deps --disable-pip --progress-spinner off --format json --output "$RUNNER_TEMP/python-audit.json"
+          python - <<'PY'
+          import json, os, pathlib
+          data = json.loads((pathlib.Path(os.environ["RUNNER_TEMP"]) / "python-audit.json").read_text())
+          assert data.get("dependencies"), "Empty dependency audit"
+          assert all("skip_reason" not in d and not d.get("vulns") for d in data["dependencies"]), "Incomplete or vulnerable dependency audit"
+          PY
+      - name: Preserve backend audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-dependency-audit
+          path: |
+            ${{ runner.temp }}/python-audit.json
+            ${{ runner.temp }}/resolved-requirements.txt
+          retention-days: 7
 
   frontend:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     defaults:
       run:
         working-directory: web/frontend
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
+        with:
+          persist-credentials: false
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
           cache-dependency-path: web/frontend/package-lock.json
-
       - name: Install frontend deps
         run: npm ci
-
       - name: Lint frontend
         run: npm run lint
-
       - name: Test frontend
         run: npm test
-
       - name: Build frontend
         run: npm run build
+      - name: Audit frontend dependencies
+        run: |
+          npm audit --json > "$RUNNER_TEMP/npm-audit.json"
+          node -e 'const fs=require("node:fs"); const a=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+"/npm-audit.json","utf8")); if(a.error || a.metadata?.vulnerabilities?.total !== 0) process.exit(1)'
+      - name: Preserve frontend audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dependency-audit
+          path: ${{ runner.temp }}/npm-audit.json
+          retention-days: 7
