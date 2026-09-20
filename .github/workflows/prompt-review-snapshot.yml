@@ -1,4 +1,4 @@
-name: Prompt review source snapshot
+name: Prompt review dependencies
 
 on:
   push:
@@ -16,7 +16,8 @@ jobs:
         with:
           python-version: "3.13"
       - name: Download public wheels for offline tests
-        run: python -m pip download --only-binary=:all: --dest wheels openai python-slugify slowapi portalocker premailer google-genai==1.66.0 pytest-asyncio
+        run: |
+          python -m pip download --only-binary=:all: --dest wheels openai python-slugify slowapi portalocker premailer google-genai==1.66.0 pytest-asyncio
       - uses: actions/upload-artifact@v4
         with:
           name: prompt-review-deps
