@@ -2,6 +2,7 @@ import { apiClient } from '../../shared/api/client';
 import type { TranslationStatus } from '../confirmation/types';
 import type {
   Project,
+  TranslationCompleteness,
   Section,
   CreateProjectDto,
   AnalysisResult,
@@ -199,7 +200,12 @@ export const documentApi = {
    * 导出项目
    */
   exportProject: (projectId: string, format: 'en' | 'zh' = 'zh', allowQaOverride = false) =>
-    apiClient.post<{ content: string; path: string; filename: string; format: string }>(
+    apiClient.post<{
+      content: string; path: string; filename: string; format: string;
+      translation_completeness?: TranslationCompleteness | null;
+      is_incomplete?: boolean;
+      qa_override_requested?: boolean;
+    }>(
       `/projects/${projectId}/export`,
       undefined,
       { params: { format, allow_qa_override: allowQaOverride } }

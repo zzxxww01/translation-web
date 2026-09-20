@@ -150,17 +150,25 @@ def create_llm_provider(provider: str | None = None, model: str | None = None, *
         >>> create_llm_provider("pro-official")  # Model alias → routes to gemini
         >>> create_llm_provider("vectorengine", model="deepseek-v3.2")  # Explicit model
     """
-    # Try new config system first
-    if USE_NEW_CONFIG:
-        try:
-            from .provider_adapter import create_provider_from_config
+    # Configured aliases, task defaults and built-in provider names all use the
+    # same generation seam. Do not silently downgrade a broken route to a raw
+    # provider: doing so loses both its fallback policy and its attempt budget.
+    if USE_NEW_CONFIG and not kwargs:
+        from .provider_adapter import get_provider_adapter
+        from .config_loader import get_config_loader
 
-            # If provider looks like a model alias, use new config system
-            if provider and not provider.lower() in _PROVIDER_FACTORIES:
-                logger.info(f"[LLM Factory] Using new config system for model alias: {provider}")
-                return create_provider_from_config(provider)
-        except Exception as e:
-            logger.warning(f"[LLM Factory] New config system failed, falling back to legacy: {e}")
+        if provider and provider.lower() not in _PROVIDER_FACTORIES:
+            return get_provider_adapter(model or provider).as_llm_provider()
+        if provider is None:
+            return get_provider_adapter(model or get_task_model_alias("longform")).as_llm_provider()
+        if provider.lower() in {"gemini", "vectorengine"}:
+            loader = get_config_loader()
+            config = loader.get_primary_provider_by_type(provider.lower())
+            if config is not None:
+                models = sorted((m for m in config.models if m.enabled), key=lambda m: m.priority)
+                alias = loader.resolve_config_model_alias(model) if model else (models[0].alias if models else None)
+                if alias:
+                    return get_provider_adapter(alias).as_llm_provider()
 
     # Legacy system
     # Try to resolve as model alias first
@@ -195,4 +203,11 @@ def create_llm_provider(provider: str | None = None, model: str | None = None, *
         kwargs["model"] = resolved_model
 
     factory = _PROVIDER_FACTORIES[resolved_provider]
-    return factory(**kwargs)
+    raw_provider = factory(**kwargs)
+    from .provider_adapter import ProviderAdapter
+
+    actual_model = (resolved_model or getattr(raw_provider, "default_model", None)
+                    or getattr(raw_provider, "model_name", None) or "default")
+    return ProviderAdapter.from_provider(
+        raw_provider, resolved_provider, actual_model
+    ).as_llm_provider()

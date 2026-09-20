@@ -279,8 +279,10 @@ class LLMProvider(ABC):
             }
             try:
                 results[sec_id] = self.translate_section_title(title, context=context)
-            except Exception:
-                results[sec_id] = title  # keep original on failure
+            except Exception as exc:
+                # Missing IDs explicitly request the caller's per-title retry.
+                # Never disguise provider failure as a successful translation.
+                logger.warning("Section title translation failed (%s): %s", sec_id, exc)
         return results
 
     def deep_analyze(

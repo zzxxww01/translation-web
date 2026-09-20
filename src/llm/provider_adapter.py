@@ -17,7 +17,8 @@ from .config_loader import get_config_loader
 from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, ProviderNetworkConfig
 from .fallback_strategy import FallbackStrategy, AttemptPlan
 from .base import LLMProvider
-from .errors import LLMError, LLMProxyConfigurationError
+from .errors import (LLMError, LLMProxyConfigurationError,
+                     LLMUpstreamUnavailableError, normalize_llm_transport_error)
 from .network_policy import build_network_policy
 from .network_policy import RuntimeNetworkPolicy
 
@@ -189,6 +190,72 @@ class ProviderAdapter:
         cache[cache_key] = provider
         return provider
 
+    @classmethod
+    def from_provider(cls, provider: LLMProvider, provider_type: str, model: str):
+        """Bound legacy/custom-constructor calls without replacing their settings.
+
+        No cross-provider configuration is invented for an explicitly constructed
+        transport. It still gets the same empty/transient retry and timeout rules.
+        """
+        from types import SimpleNamespace
+
+        adapter = cls.__new__(cls)
+        adapter.model_alias = model
+        adapter.attempt_plan = [SimpleNamespace(
+            provider=SimpleNamespace(type=provider_type, provider_id=provider_type),
+            model=SimpleNamespace(alias=model, real_model=model),
+            api_key=SimpleNamespace(name="explicit"),
+        )]
+        adapter.create_provider = lambda attempt: provider
+        return adapter
+
+    def _bounded_attempt_plan(self):
+        """One owner of retries: at most four transport requests per generation.
+
+        Keep a slot for official fallback even with many relay keys/models.
+        Explicit official aliases never leave the official provider.
+        """
+        plans = list(self.attempt_plan)
+        if "official" in self.model_alias.lower() or (plans and plans[0].provider.type == "gemini"):
+            plans = [p for p in plans if p.provider.type == "gemini"]
+        if len(plans) > 4:
+            official = next((p for p in plans if p.provider.type == "gemini"), None)
+            plans = plans[:4]
+            if official is not None and not any(p.provider.type == "gemini" for p in plans):
+                plans[-1] = official
+        if len(plans) == 1:
+            plans *= 2  # isolated route still gets one transient/empty retry
+        return plans
+
+    def as_llm_provider(self) -> LLMProvider:
+        """Keep the concrete prompt/parsing API, but route every self.generate.
+
+        A shallow instance copy avoids modifying the cached transport provider.
+        Both concrete and inherited LLMProvider methods retain their signatures,
+        optional results and parsing semantics; only the generation seam changes.
+        """
+        from copy import copy
+        from types import MethodType
+
+        plans = self._bounded_attempt_plan()
+        if not plans:
+            raise ValueError(f"No valid route for model {self.model_alias}")
+        primary = self.create_provider(plans[0])
+        facade = copy(primary)
+        adapter = self
+
+        def routed_generate(_self, prompt, response_format=None, temperature=None,
+                            model=None, **kwargs):
+            target = adapter
+            if model and model not in (adapter.model_alias, adapter.attempt_plan[0].model.real_model):
+                target = get_provider_adapter(model)
+            return target.generate_with_fallback(
+                prompt, response_format=response_format, temperature=temperature, **kwargs
+            )
+
+        facade.generate = MethodType(routed_generate, facade)
+        return facade
+
     def generate_with_fallback(
         self,
         prompt: str,
@@ -216,18 +283,22 @@ class ProviderAdapter:
         timeout = provider_kwargs.pop("timeout", None)
         request_id = str(provider_kwargs.pop("request_id", "") or uuid.uuid4().hex[:8])
         result_metadata = provider_kwargs.pop("result_metadata", None)
+        # Caller/provider retry settings must not multiply the adapter budget.
+        provider_kwargs.pop("max_retries", None)
+        provider_kwargs.pop("_single_attempt", None)
 
         # 更新统计
         _fallback_stats["total_requests"] += 1
         start_time = time.time()
 
-        for idx, attempt in enumerate(self.attempt_plan, 1):
+        attempt_plan = self._bounded_attempt_plan()
+        for idx, attempt in enumerate(attempt_plan, 1):
             try:
                 _fallback_stats["total_attempts"] += 1
 
                 logger.info(
                     f"[ProviderAdapter] request_id={request_id} "
-                    f"Attempt {idx}/{len(self.attempt_plan)}: "
+                    f"Attempt {idx}/{len(attempt_plan)}: "
                     f"provider={attempt.provider.provider_id}, "
                     f"model={attempt.model.alias}, "
                     f"key={attempt.api_key.name}"
@@ -240,9 +311,12 @@ class ProviderAdapter:
                     temperature=temperature,
                     timeout=timeout,
                     model=attempt.model.real_model,
+                    _single_attempt=True,
                     **provider_kwargs,
                 )
 
+                if not isinstance(result, str) or not result.strip():
+                    raise LLMUpstreamUnavailableError("LLM returned empty content")
                 duration = time.time() - start_time
                 if isinstance(result_metadata, dict):
                     result_metadata.update(
@@ -258,7 +332,7 @@ class ProviderAdapter:
                     _fallback_stats["fallback_triggered"] += 1
                     logger.warning(
                         f"[ProviderAdapter] request_id={request_id} "
-                        f"Fallback succeeded on attempt {idx}/{len(self.attempt_plan)} "
+                        f"Fallback succeeded on attempt {idx}/{len(attempt_plan)} "
                         f"after {duration:.2f}s"
                     )
                 else:
@@ -272,24 +346,28 @@ class ProviderAdapter:
                 last_error = e
                 logger.warning(
                     f"[ProviderAdapter] request_id={request_id} "
-                    f"Attempt {idx}/{len(self.attempt_plan)} failed: {type(e).__name__}: {e}"
+                    f"Attempt {idx}/{len(attempt_plan)} failed: {type(e).__name__}: {e}"
                 )
 
                 # provider 已判定为不可重试（prompt 过长 / 被安全策略拦截 / invalid
                 # argument 等）：后续路由只是用同一份 prompt 重复触发同一个错误，
                 # 直接中止，把秒级失败原样抛给调用方（审计 BE9）。
-                if isinstance(e, LLMNonRetryableError):
+                normalized = normalize_llm_transport_error(e, provider_name=attempt.provider.type)
+                status_code = getattr(e, "status_code", None)
+                permanent_http = isinstance(status_code, int) and 400 <= status_code < 500 and status_code not in {408, 409, 429}
+                if permanent_http or isinstance(e, LLMNonRetryableError) or normalized is None or not normalized.retryable:
                     _fallback_stats["failed_requests"] += 1
                     duration = time.time() - start_time
                     logger.error(
                         f"[ProviderAdapter] request_id={request_id} "
-                        f"Aborted at attempt {idx}/{len(self.attempt_plan)} on non-retryable error "
+                        f"Aborted at attempt {idx}/{len(attempt_plan)} on non-retryable error "
                         f"after {duration:.2f}s: {e}"
                     )
                     raise
 
                 # 如果还有更多尝试，继续
-                if idx < len(self.attempt_plan):
+                if idx < len(attempt_plan):
+                    time.sleep(min(0.5 * (2 ** (idx - 1)), 2.0))
                     continue
                 else:
                     # 所有尝试都失败了
@@ -297,7 +375,7 @@ class ProviderAdapter:
                     duration = time.time() - start_time
                     logger.error(
                         f"[ProviderAdapter] request_id={request_id} "
-                        f"All {len(self.attempt_plan)} attempts failed for model {self.model_alias} "
+                        f"All {len(attempt_plan)} attempts failed for model {self.model_alias} "
                         f"after {duration:.2f}s. Stats: {_fallback_stats}"
                     )
                     raise last_error

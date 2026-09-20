@@ -119,6 +119,11 @@ def normalize_llm_transport_error(exc: Exception, *, provider_name: str) -> Norm
     status_code = _status_code(exc)
     is_genai_error = _is_genai_api_error(exc)
 
+    # An authoritative client-error status beats words such as "upstream" or
+    # "timeout" in its body. Preserve the original error for the caller.
+    if status_code is not None and 400 <= status_code < 500 and status_code not in {408, 409, 429}:
+        return None
+
     if (
         isinstance(exc, requests.exceptions.ProxyError)
         or (httpx is not None and isinstance(exc, httpx.ProxyError))
@@ -144,7 +149,6 @@ def normalize_llm_transport_error(exc: Exception, *, provider_name: str) -> Norm
             retryable=True,
         )
 
-    status_code = None
     if isinstance(exc, requests.HTTPError) and exc.response is not None:
         status_code = exc.response.status_code
     elif httpx is not None and isinstance(exc, httpx.HTTPStatusError):

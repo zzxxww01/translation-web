@@ -11,7 +11,24 @@ import type {
 
 // ============ 妞ゅ湱娲伴惄绋垮彠缁鐎?============
 
+export interface TranslationCompleteness {
+  is_complete: boolean;
+  missing_count: number;
+  missing_title_count: number;
+  missing_body_count: number;
+  missing_document_title_count: number;
+  items: Array<{
+    kind: 'document_title' | 'section_title' | 'body';
+    section_id?: string;
+    section_title?: string;
+    paragraph_id?: string;
+    paragraph_index?: number;
+    source_preview: string;
+  }>;
+}
+
 export interface Project {
+  translation_completeness?: TranslationCompleteness;
   id: string;
   title: string;
   html_path?: string;
@@ -30,6 +47,7 @@ export interface ProjectProgress {
 }
 
 export interface Section {
+  translation_completeness?: TranslationCompleteness;
   section_id: string;
   title: string;
   title_translation?: string;

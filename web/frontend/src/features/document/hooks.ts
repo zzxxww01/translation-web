@@ -307,7 +307,13 @@ export function useExportProject() {
       URL.revokeObjectURL(url);
 
       const label = result.format === 'en' ? '英文' : '中文';
-      toast.success(`已导出${label} Markdown 文件`);
+      if (result.format !== 'en' && result.is_incomplete) {
+        toast.warning(`已下载中文未完成稿：缺译 ${result.translation_completeness?.missing_count ?? '未知'} 处，请勿作为完整译稿交付`);
+      } else if (result.format !== 'en' && result.qa_override_requested) {
+        toast.warning('已下载待复核中文稿（仅本次忽略 QA），请先检查质量报告');
+      } else {
+        toast.success(`已导出${label} Markdown 文件`);
+      }
     },
     onError: error => {
       handleError(error, '导出失败');

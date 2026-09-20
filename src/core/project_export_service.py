@@ -4,6 +4,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable
 
+from .export_completeness import build_translation_completeness, completeness_summary
 from .inline_recovery_service import InlineRecoveryService
 from .markdown_postprocess import normalize_cjk_ascii_spacing, postprocess_markdown
 from .models import ElementType, ProjectMeta, Section
@@ -18,7 +19,7 @@ class ExportBlockedError(ValueError):
     """Raised when deterministic QA finds critical issues in the export (A-5).
 
     ``blocked_path`` 指向已落盘的 ``*_zh.blocked.md``——译文内容在抛错前就
-    写好了，用户永远拿得到可交付文本，不会因为一条 QA 误报而零产出。
+    写好了，用户永远拿得到待复核草稿，不会因为一条 QA 误报而零产出。
     """
 
     def __init__(self, message: str, blocked_path: Path | None = None) -> None:
@@ -151,6 +152,15 @@ class ProjectExportService:
         fallback_block_ids: list[str] | None = None,
     ) -> dict[str, Any]:
         issues: list[dict[str, Any]] = []
+        completeness = build_translation_completeness(sections, meta)
+        if not completeness["is_complete"]:
+            issues.append({
+                "type": "qa_missing_translation",
+                "severity": "error",
+                "message": completeness_summary(completeness),
+                "missing_count": completeness["missing_count"],
+                "locations": completeness["items"],
+            })
         if content:
             issues.extend(
                 issue.to_dict()
@@ -209,36 +219,6 @@ class ProjectExportService:
                     continue
 
                 translated = paragraph.best_translation_text(fallback_to_source=False).strip()
-                if not translated:
-                    issues.append(
-                        {
-                            "type": "missing_translation",
-                            "severity": "error",
-                            "section_id": section.section_id,
-                            "paragraph_id": paragraph.id,
-                            "message": "段落没有译文。",
-                            "source_preview": paragraph.source[:160],
-                        }
-                    )
-                    continue
-
-                # 纯数字表格的「译文」与原表逐字相同是正常的，不算漏译。
-                if (
-                    translated == paragraph.source.strip()
-                    and paragraph.element_type != ElementType.TABLE
-                ):
-                    issues.append(
-                        {
-                            "type": "untranslated_paragraph",
-                            "severity": "error",
-                            "section_id": section.section_id,
-                            "paragraph_id": paragraph.id,
-                            "message": "段落译文与原文完全相同。",
-                            "source_preview": paragraph.source[:160],
-                        }
-                    )
-                    continue
-
                 if self.looks_like_untranslated_residue(translated):
                     issues.append(
                         {
@@ -254,6 +234,7 @@ class ProjectExportService:
         return {
             "project_id": meta.id,
             "generated_at": datetime.now().isoformat(),
+            "translation_completeness": completeness,
             "issue_count": len(issues),
             "issues": issues,
         }
@@ -354,7 +335,7 @@ class ProjectExportService:
             )
             raise ExportBlockedError(
                 f"导出被 QA 阻断（{len(critical_qa)} 个 critical 问题）：{summary}"
-                f"；译文已保存到 {blocked_path.name}，修正后重新导出即可",
+                f"；待复核草稿已保存到 {blocked_path.name}，修正后重新导出即可",
                 blocked_path=blocked_path,
             )
 

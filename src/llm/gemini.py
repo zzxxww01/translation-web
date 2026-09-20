@@ -889,6 +889,7 @@ class GeminiProvider(LLMProvider):
             config = {
                 "temperature": temperature,
                 "max_output_tokens": self._resolve_max_output_tokens(),
+                "http_options": {"retry_options": {"attempts": 1}},
             }
             if response_mime_type:
                 config["response_mime_type"] = response_mime_type
@@ -899,9 +900,7 @@ class GeminiProvider(LLMProvider):
                 # 可变而 client 按 api_key 缓存，因此只能放在 per-request config 里。
                 # HttpOptions.timeout 单位是毫秒；取 90% 让传输层先于 future 门限醒来，
                 # 否则 worker 必然仍在跑，泄漏计数会次次误报而失去信噪比。
-                config["http_options"] = {
-                    "timeout": int(timeout * _TRANSPORT_TIMEOUT_RATIO * 1000)
-                }
+                config["http_options"]["timeout"] = int(timeout * _TRANSPORT_TIMEOUT_RATIO * 1000)
             with self._temporary_proxy_env():
                 try:
                     resp = client.models.generate_content(
@@ -984,6 +983,10 @@ class GeminiProvider(LLMProvider):
         primary_model = self.resolve_model_name(model) if model else self.model_name
         attempt_plan = self._build_attempt_plan(primary_model)
         max_attempts = max(max_retries or self.max_attempts, len(attempt_plan))
+        if _kwargs.get("_single_attempt"):
+            # ProviderAdapter owns key/model rotation and the total attempt budget.
+            attempt_plan = attempt_plan[:1]
+            max_attempts = 1
         start_time = time.monotonic()
         effective_timeout = timeout if timeout is not None else self.request_timeout
 
@@ -1006,6 +1009,7 @@ class GeminiProvider(LLMProvider):
         for attempt_index in range(max_attempts):
             plan_index = min(attempt_index, len(attempt_plan) - 1)
             attempt = attempt_plan[plan_index]
+            input_tokens = output_tokens = total_tokens = None
             try:
                 generation = self._generate_once(
                     prompt=prompt,
@@ -1016,17 +1020,19 @@ class GeminiProvider(LLMProvider):
                 )
                 duration = time.monotonic() - start_time
                 if isinstance(generation, GeminiGenerationResult):
-                    stripped_text = generation.text.strip()
+                    stripped_text = (generation.text or "").strip()
                     input_tokens = generation.input_tokens
                     output_tokens = generation.output_tokens
                     total_tokens = generation.total_tokens
                 else:
                     # Keep compatibility with provider subclasses and tests
                     # written against the former private string return type.
-                    stripped_text = str(generation).strip()
+                    stripped_text = str(generation or "").strip()
                     input_tokens = None
                     output_tokens = None
                     total_tokens = None
+                if not stripped_text:
+                    raise LLMUpstreamUnavailableError("Gemini returned empty content")
                 call_number = llm_usage_metrics.record_call(
                     provider="gemini",
                     model=attempt.model_name,
@@ -1146,6 +1152,9 @@ class GeminiProvider(LLMProvider):
                     input_chars=len(prompt),
                     attempts=attempt_index + 1,
                     error_type=type(exc).__name__,
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    total_tokens=total_tokens,
                 )
                 logger.error(
                     "[Gemini] generate failed in %.2fs after %s attempts (model=%s key=%s). err=%s",

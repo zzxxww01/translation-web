@@ -5,9 +5,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { documentApi } from '../api';
 import { ProjectExport } from './ProjectExport';
+import { toast } from 'sonner';
 
 vi.mock('@/shared/hooks/useErrorHandler', () => ({ useErrorHandler: () => ({ handleError: vi.fn() }) }));
-vi.mock('sonner', () => ({ toast: { success: vi.fn() } }));
+vi.mock('sonner', () => ({ toast: { success: vi.fn(), warning: vi.fn() } }));
 
 const overrideLabel = '仍然导出（忽略本次QA）';
 let root: Root;
@@ -34,6 +35,7 @@ async function render(projectId = 'project-a') {
 
 beforeEach(() => {
   vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true);
+  vi.spyOn(documentApi, 'getProject').mockResolvedValue({ id: 'project-a', title: 'Demo' });
   vi.spyOn(window, 'confirm').mockReturnValue(true);
   vi.stubGlobal('URL', Object.assign(URL, {
     createObjectURL: vi.fn(() => 'blob:export'), revokeObjectURL: vi.fn(),
@@ -53,6 +55,31 @@ afterEach(async () => {
 });
 
 describe('ProjectExport QA override', () => {
+  it('shows missing counts before export and keeps the incomplete warning after override download', async () => {
+    const report = {
+      is_complete: false, missing_count: 3, missing_title_count: 1,
+      missing_body_count: 2, missing_document_title_count: 0,
+      items: [{ kind: 'section_title' as const, section_id: 's1', section_title: 'Market', source_preview: 'Market' }],
+    };
+    vi.mocked(documentApi.getProject).mockResolvedValue({ id: 'project-a', title: 'Demo', translation_completeness: report });
+    vi.spyOn(documentApi, 'exportProject')
+      .mockRejectedValueOnce(new Error('导出被 QA 阻断：中文稿未完成，章节标题 1，正文 2'))
+      .mockResolvedValueOnce({ content: '# Market', path: 'out.md', filename: 'out.md', format: 'zh', translation_completeness: report, is_incomplete: true });
+    await render();
+    await settle();
+    expect(host.textContent).toContain('中文稿未完成');
+    expect(host.textContent).toContain('章节标题 1');
+    expect(host.textContent).toContain('正文 2');
+    await click('导出');
+    await settle();
+    await click(overrideLabel);
+    await settle();
+    expect(window.confirm).toHaveBeenCalledWith(expect.stringContaining('未完成稿'));
+    expect(download).toHaveBeenCalledTimes(1);
+    expect(host.textContent).toContain('已下载未完成稿');
+    expect(host.textContent).toContain('缺译 3 处');
+    expect(toast.warning).toHaveBeenCalledWith(expect.stringContaining('未完成稿'));
+  });
   it('requires QA blocking and confirmation, downloads once, and restores normal QA for the next export', async () => {
     const api = vi.spyOn(documentApi, 'exportProject')
       .mockRejectedValueOnce(new Error('导出被 QA 阻断：术语不一致'))

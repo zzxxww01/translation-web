@@ -155,7 +155,7 @@ class VectorEngineProvider(LLMProvider):
             api_key=self.api_key,
             base_url=self.base_url,
             timeout=self.timeout,
-            max_retries=self.max_retries,
+            max_retries=0,  # retries belong to ProviderAdapter, not hidden SDK requests
             http_client=http_client,
         )
 
@@ -187,6 +187,7 @@ class VectorEngineProvider(LLMProvider):
         """
         model_name = model or self.default_model
         started_at = time.monotonic()
+        usage = None
 
         def record_failure(error: Exception) -> None:
             llm_usage_metrics.record_call(
@@ -196,6 +197,9 @@ class VectorEngineProvider(LLMProvider):
                 success=False,
                 input_chars=len(prompt),
                 error_type=type(error).__name__,
+                input_tokens=getattr(usage, "prompt_tokens", None),
+                output_tokens=getattr(usage, "completion_tokens", None),
+                total_tokens=getattr(usage, "total_tokens", None),
             )
 
         temp = temperature if temperature is not None else self.temperature
@@ -222,12 +226,17 @@ class VectorEngineProvider(LLMProvider):
             if hasattr(self.client, "with_options"):
                 client = self.client.with_options(
                     timeout=request_timeout,
-                    max_retries=(0 if timeout is not None else self.max_retries),
+                    max_retries=0,
                 )
             response = client.chat.completions.create(**request_params)
 
-            content = response.choices[0].message.content
             usage = getattr(response, "usage", None)
+            choices = getattr(response, "choices", None)
+            content = choices[0].message.content if choices else None
+            if not isinstance(content, str) or not content.strip():
+                raise LLMUpstreamUnavailableError(
+                    f"VectorEngine returned empty content (model={model_name})"
+                )
             input_tokens = getattr(usage, "prompt_tokens", None)
             output_tokens = getattr(usage, "completion_tokens", None)
             total_tokens = getattr(usage, "total_tokens", None)
@@ -249,22 +258,8 @@ class VectorEngineProvider(LLMProvider):
                 f"(in={input_tokens}, out={output_tokens})"
             )
 
-            if not (content or "").strip():
-                # 空响应当成上游不可用抛出，才能触发 key/model 轮换。直接返回
-                # 空串会让上层拿到"成功但没内容"的结果，一路传到接口 200 返回
-                # 空译文。usage 已按 success=True 记过——那次调用确实发生了。
-                empty_error = LLMUpstreamUnavailableError(
-                    f"VectorEngine returned empty content (model={model_name})"
-                )
-                logger.warning("[VectorEngine] Empty content from model=%s", model_name)
-                raise empty_error
-
             return content
 
-        except LLMUpstreamUnavailableError:
-            # 空响应是我们自己抛的，usage 已按 success=True 记过（调用确实发生），
-            # 直接向上抛，不要再走下面的 record_failure 记第二条。
-            raise
         except RateLimitError as e:
             record_failure(e)
             logger.error(f"[VectorEngine] Rate limit exceeded: {e}")
@@ -901,6 +896,7 @@ class VectorEngineProvider(LLMProvider):
 
         prompt = self.prompt_manager.get(
             "longform/auxiliary/section_title_translate",
+            glossary=(context or {}).get("glossary_block") or "(无命中术语)",
             context_block="\n".join(context_lines) if context_lines else "- None",
             title=title,
         )

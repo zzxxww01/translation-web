@@ -57,6 +57,7 @@ from src.core.project import ProjectManager
 from src.core.project_export_service import ExportBlockedError
 from src.core.protected_terms import desinicize_token
 from src.core.translation_qa import _POWER_UNIT_SINICIZED
+from src.core.title_validation import is_valid_title_translation
 from src.core.title_guard import (
     enforce_translated_title,
     extract_title_requirements,
@@ -1492,7 +1493,8 @@ class BatchTranslationService:
             except Exception as export_exc:
                 export_report["markdown"]["error"] = str(export_exc)
 
-            is_complete = translation_complete and (
+            titles_complete = self._titles_complete(project, progress)
+            is_complete = translation_complete and titles_complete and (
                 export_report["markdown"]["generated"]
                 or export_report["markdown"].get("blocked", False)
             )
@@ -2515,6 +2517,42 @@ class BatchTranslationService:
             nested_fields=nested_fields,
         )
 
+    def _record_title_error(
+        self, project_id: str, error: str, section_id: Optional[str] = None,
+        *, progress: Optional[TranslationProgress] = None,
+    ) -> None:
+        """Persist terminal title failures in the same errors used by run-summary."""
+        logger.error("[%s] Title translation failed (%s): %s", project_id, section_id or "article", error)
+        if progress is None:
+            progress = self._progress_cache().get(project_id)
+        if progress is None:
+            return
+        # Preserve the first (usually provider-specific) cause per title.
+        if any(item.get("stage") == "title_translation" and item.get("section") == section_id
+               for item in progress.errors):
+            return
+        item = {
+            "stage": "title_translation", "error": error,
+            "timestamp": datetime.now().isoformat(),
+        }
+        if section_id is not None:
+            item["section"] = section_id
+        progress.errors.append(item)
+
+    def _titles_complete(self, project: ProjectMeta, progress: TranslationProgress) -> bool:
+        """Final run gate, including legacy originals and stale CAS results."""
+        titles = [(None, project.title, project.title_translation)] + [
+            (section.section_id, section.title, section.title_translation)
+            for section in project.sections
+        ]
+        for section_id, source, translated in titles:
+            if source and not is_valid_title_translation(source, translated):
+                self._record_title_error(
+                    project.id, "Title has no usable Chinese translation",
+                    section_id, progress=progress,
+                )
+        return not any(item.get("stage") == "title_translation" for item in progress.errors)
+
     async def _translate_title_and_metadata(
         self,
         project: ProjectMeta,
@@ -2527,7 +2565,7 @@ class BatchTranslationService:
             project: 项目元信息
             analysis: 文章分析结果
         """
-        if not project.title or project.title_translation:
+        if not project.title or is_valid_title_translation(project.title, project.title_translation):
             return
 
         try:
@@ -2549,7 +2587,8 @@ class BatchTranslationService:
                 project.title,
                 subtitle,
             )
-            result = self.llm.translate_title(
+            result = await asyncio.to_thread(
+                self.llm.translate_title,
                 project.title,
                 context={
                     "article_theme": analysis.theme,
@@ -2562,6 +2601,8 @@ class BatchTranslationService:
                 },
                 subtitle=subtitle,
             )
+            if not is_valid_title_translation(project.title, result.get("title")):
+                raise ValueError("Article title translation is empty, malformed, or untranslated")
             translated_title = enforce_translated_title(
                 project.title,
                 result.get("title", ""),
@@ -2618,7 +2659,7 @@ class BatchTranslationService:
                     project.id,
                 )
         except Exception as e:
-            logger.error(f"Failed to translate title/subtitle: {e}")
+            self._record_title_error(project.id, str(e))
 
     async def _translate_section_titles(
         self, project_id: str, project: ProjectMeta, analysis: ArticleAnalysis
@@ -2632,7 +2673,7 @@ class BatchTranslationService:
         """
         pending: List[Dict[str, Any]] = []
         for section_index, section in enumerate(project.sections):
-            if section.title and not section.title_translation:
+            if section.title and not is_valid_title_translation(section.title, section.title_translation):
                 pending.append(
                     {
                         "id": section.section_id,
@@ -2668,21 +2709,25 @@ class BatchTranslationService:
             # 基类默认实现已接受这两个关键字参数，无需再靠捕获 TypeError 兼容——
             # 那种写法会把方法体内部抛出的 TypeError 一并吞掉，静默触发第二次
             # 完整 LLM 调用，且第二次丢掉词表与白名单，成本翻倍还让约束失效。
-            translated_map = self.llm.translate_all_section_titles(
+            translated_map = await asyncio.to_thread(
+                self.llm.translate_all_section_titles,
                 pending,
                 article_theme=analysis.theme,
                 glossary_block=title_glossary_block,
                 whitelist_rules=SECTION_TITLE_WHITELIST_RULES,
             )
+            if not isinstance(translated_map, dict):
+                raise ValueError("Section title batch response must be a mapping")
         except Exception as exc:
             logger.error("Failed to batch translate section titles: %s", exc)
             translated_map = {}
 
         for section_index, section in enumerate(project.sections):
-            if not section.title or section.title_translation:
+            if not section.title or is_valid_title_translation(section.title, section.title_translation):
                 continue
             expected_title_translation = section.title_translation
-            raw_title = str(translated_map.get(section.section_id, "")).strip()
+            candidate = translated_map.get(section.section_id)
+            raw_title = candidate.strip() if isinstance(candidate, str) else ""
             translated_title, violation = _repair_title_sinicization(raw_title)
             if translated_title != raw_title:
                 logger.info(
@@ -2699,7 +2744,7 @@ class BatchTranslationService:
                     violation,
                     translated_title,
                 )
-            if translated_title:
+            if is_valid_title_translation(section.title, translated_title):
                 persisted_section, applied = (
                     self.project_manager.update_section_title_translation_locked(
                         project_id,
@@ -2723,7 +2768,8 @@ class BatchTranslationService:
                 continue
 
             try:
-                translated_title = self.llm.translate_section_title(
+                translated_title = await asyncio.to_thread(
+                    self.llm.translate_section_title,
                     section.title,
                     context={
                         "article_theme": analysis.theme,
@@ -2742,6 +2788,8 @@ class BatchTranslationService:
                         "whitelist_rules": SECTION_TITLE_WHITELIST_RULES,
                     },
                 )
+                if not is_valid_title_translation(section.title, translated_title):
+                    raise ValueError("Section title translation is empty, malformed, or untranslated")
                 translated_title, violation = _repair_title_sinicization(translated_title)
                 if violation:
                     # 同上：保留译名只记 warning，丢弃反而让标题退回英文。
@@ -2772,7 +2820,7 @@ class BatchTranslationService:
                     section.title_translation,
                 )
             except Exception as exc:
-                logger.error("Failed to fallback translate section title: %s", exc)
+                self._record_title_error(project_id, str(exc), section.section_id)
 
     async def _translate_section_batch(
         self,

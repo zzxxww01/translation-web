@@ -13,6 +13,7 @@ from urllib.parse import quote, unquote, urlsplit
 from fastapi import APIRouter, Depends, File, Form, Request, UploadFile
 from fastapi.responses import FileResponse
 
+from src.core.export_completeness import build_translation_completeness
 from src.core.models import ElementType
 from src.core.image_assets import (
     BROWSER_IMAGE_EXTENSIONS,
@@ -90,6 +91,19 @@ def _rewrite_project_image_html(project_id: str, html: Optional[str]) -> Optiona
         return f"{match.group('prefix')}{quote_char}{normalized}{quote_char}"
 
     return _IMAGE_SRC_PATTERN.sub(replace, html)
+
+
+def _build_section_response(section) -> dict:
+    completeness = build_translation_completeness([section])
+    return {
+        "section_id": section.section_id,
+        "title": section.title,
+        "title_translation": section.title_translation,
+        "total_paragraphs": section.total_paragraphs,
+        "approved_count": section.approved_count,
+        "is_complete": section.is_complete and completeness["is_complete"],
+        "translation_completeness": completeness,
+    }
 
 
 def _build_project_response(meta) -> ProjectResponse:
@@ -233,17 +247,8 @@ async def get_project(project_id: str, pm: ProjectManagerDep):
                 "percent": meta.progress.progress_percent,
             },
             "created_at": meta.created_at.isoformat(),
-            "sections": [
-                {
-                    "section_id": s.section_id,
-                    "title": s.title,
-                    "title_translation": s.title_translation,
-                    "total_paragraphs": s.total_paragraphs,
-                    "approved_count": s.approved_count,
-                    "is_complete": s.is_complete,
-                }
-                for s in sections
-            ],
+            "translation_completeness": build_translation_completeness(sections, meta),
+            "sections": [_build_section_response(s) for s in sections],
         }
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
@@ -319,7 +324,7 @@ async def export_project(
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
     try:
-        content, filename = await run_blocking(
+        content, filename, completeness = await run_blocking(
             lambda: (
                 pm.export(
                     project_id,
@@ -328,6 +333,8 @@ async def export_project(
                     allow_qa_override=allow_qa_override,
                 ),
                 pm.get_export_filename(project_id, format=format),
+                build_translation_completeness(pm.get_sections(project_id), pm.get(project_id))
+                if (format or "zh").strip().lower() == "zh" else None,
             )
         )
         return {
@@ -335,6 +342,9 @@ async def export_project(
             "path": f"projects/{project_id}/{filename}",
             "filename": filename,
             "format": format,
+            "translation_completeness": completeness,
+            "qa_override_requested": allow_qa_override,
+            "is_incomplete": bool(completeness and not completeness["is_complete"]),
         }
     except ValueError as error:
         raise BadRequestException(detail=str(error))
@@ -348,17 +358,7 @@ async def get_sections(project_id: str, pm: ProjectManagerDep):
         raise NotFoundException(detail="Project not found")
     try:
         sections = await run_blocking(pm.get_sections, project_id)
-        return [
-            {
-                "section_id": s.section_id,
-                "title": s.title,
-                "title_translation": s.title_translation,
-                "total_paragraphs": s.total_paragraphs,
-                "approved_count": s.approved_count,
-                "is_complete": s.is_complete,
-            }
-            for s in sections
-        ]
+        return [_build_section_response(s) for s in sections]
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
