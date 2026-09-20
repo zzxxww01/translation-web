@@ -1,0 +1,148 @@
+name: Verify and publish Chinese prompt quality v2
+
+on:
+  push:
+    branches: ["fix/chinese-prompt-quality-v2"]
+    paths: [".github/workflows/apply-chinese-quality-v2.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: chinese-prompt-quality-v2-publish
+  cancel-in-progress: false
+
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GEMINI_API_KEY: test
+      VECTORENGINE_API_KEY: test
+      RUN_LLM_TESTS: "0"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/chinese-prompt-quality-v2
+          fetch-depth: 0
+      - name: Apply hash-verified source changes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, json, lzma, os, pathlib, subprocess
+          repo = "zzxxww01/translation-web"
+          shas = [
+              "8357712b1bef0710f78fce8229202c2ee19ac1fd",
+              "f8ca9bfca8742a92c52f84869b94a43cbbf5819e",
+              "bbc1adf310ef6a5dc40183f1eaf9e1b603e2f0b8",
+              "64bf915e8a5135c52428e8fa91f52161d4dcf2c8",
+              "c3e8fec2a9b9b1d4ee4454a9035456f09ee723d9",
+              "72be9993298dfe4b80bd235ccee982329273867c",
+              "221b17d04dcb536bdd132121f779c0e2823e69ea",
+          ]
+          def blob(data):
+              return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
+          chunks = []
+          for sha in shas:
+              item = json.loads(subprocess.check_output(["gh", "api", f"repos/{repo}/git/blobs/{sha}"]))
+              data = base64.b64decode(item["content"])
+              assert blob(data) == sha, "Transport chunk mismatch"
+              chunks.append(data)
+          compressed = b"".join(chunks)
+          assert hashlib.sha256(compressed).hexdigest() == "3e43292ea278109b3959b68ee0f0ce1cbf830e8a06c9b24994151958563d86b8"
+          package = json.loads(lzma.decompress(compressed))
+          assert package["schema"] == 1 and len(package["files"]) == 112
+          subprocess.run(["git", "merge-base", "--is-ancestor", package["expected_branch_head"], "HEAD"], check=True)
+          root = pathlib.Path.cwd().resolve()
+          for name, entry in package["files"].items():
+              rel = pathlib.PurePosixPath(name)
+              assert not rel.is_absolute() and ".." not in rel.parts
+              assert name.startswith(("src/", "tests/", "web/frontend/")) or name in ("config/editing_options.json", "docs/PROMPT_QUALITY_V2.md")
+              path = root / rel
+              assert not any(p.is_symlink() for p in [path, *path.parents])
+              before = path.read_bytes() if path.exists() else b""
+              if entry["before"] is None:
+                  assert not path.exists(), f"New file conflicts: {name}"
+              else:
+                  assert blob(before) == entry["before"], f"Baseline moved: {name}"
+              lines = before.decode("utf-8").splitlines(keepends=True)
+              last_start = len(lines) + 1
+              for start, end, text in reversed(entry["edits"]):
+                  assert 0 <= start <= end <= len(lines) and end <= last_start
+                  lines[start:end] = [text]
+                  last_start = start
+              result = "".join(lines).encode("utf-8")
+              assert blob(result) == entry["after"], f"Result blob mismatch: {name}"
+              assert hashlib.sha256(result).hexdigest() == entry["sha256"]
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_bytes(result)
+          temp = pathlib.Path(os.environ["RUNNER_TEMP"])
+          (temp / "quality-v2-manifest.json").write_text(json.dumps(package["files"], ensure_ascii=False))
+          (temp / "quality-v2-start-sha.txt").write_bytes(subprocess.check_output(["git", "rev-parse", "HEAD"]))
+          print(f"Applied and verified {len(package['files'])} files")
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install backend dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Verify backend
+        run: |
+          set -o pipefail
+          python -m compileall -q src
+          python -c "from src.api.app import app; print('App import OK:', len(app.routes), 'routes')"
+          python -m pytest -q --disable-warnings 2>&1 | tee "$RUNNER_TEMP/backend-tests.log"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/frontend/package-lock.json
+      - name: Install frontend dependencies
+        working-directory: web/frontend
+        run: npm ci
+      - name: Lint frontend
+        working-directory: web/frontend
+        run: |
+          set -o pipefail
+          npm run lint 2>&1 | tee "$RUNNER_TEMP/frontend-lint.log"
+      - name: Test frontend
+        working-directory: web/frontend
+        run: |
+          set -o pipefail
+          npm test 2>&1 | tee "$RUNNER_TEMP/frontend-tests.log"
+      - name: Build frontend
+        working-directory: web/frontend
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee "$RUNNER_TEMP/frontend-build.log"
+      - name: Publish verified business changes only
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          manifest = json.loads((pathlib.Path(os.environ["RUNNER_TEMP"]) / "quality-v2-manifest.json").read_text())
+          for name, entry in manifest.items():
+              assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == entry["sha256"], f"Unexpected source modification: {name}"
+          subprocess.run(["git", "add", "--", *manifest], check=True)
+          staged = subprocess.check_output(["git", "diff", "--cached", "--name-only", "-z"]).decode().strip("\0").split("\0")
+          assert set(staged) == set(manifest), "Unexpected staged paths"
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git diff --cached --check
+          git commit -m "feat: unify prompt contracts and improve natural Chinese revision"
+          git push origin HEAD:fix/chinese-prompt-quality-v2
+          git rev-parse HEAD | tee "$RUNNER_TEMP/published-commit.txt"
+      - name: Upload verification records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chinese-quality-v2-verification
+          path: |
+            ${{ runner.temp }}/*-tests.log
+            ${{ runner.temp }}/frontend-lint.log
+            ${{ runner.temp }}/frontend-build.log
+            ${{ runner.temp }}/quality-v2-manifest.json
+            ${{ runner.temp }}/quality-v2-start-sha.txt
+            ${{ runner.temp }}/published-commit.txt
+          retention-days: 7
