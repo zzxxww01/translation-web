@@ -1,0 +1,47 @@
+name: Deep quality dependency audit
+on:
+  push:
+    branches: ["fix/chinese-prompt-quality-v2"]
+    paths: [".github/workflows/deep-quality-audit.yml"]
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: web/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/frontend/package-lock.json
+      - name: Inspect and repair compatible dependency versions
+        run: |
+          set -u
+          npm ci --ignore-scripts > "$RUNNER_TEMP/npm-install.log" 2>&1
+          npm audit --json > "$RUNNER_TEMP/audit-before.json" || true
+          npm audit fix --ignore-scripts --json > "$RUNNER_TEMP/audit-fix.json" || true
+          npm audit --json > "$RUNNER_TEMP/audit-after.json" || true
+          cp package.json package-lock.json "$RUNNER_TEMP/"
+          git diff -- package.json package-lock.json > "$RUNNER_TEMP/dependency-fix.patch"
+      - name: Validate candidate dependency changes
+        run: |
+          set -o pipefail
+          npm run lint 2>&1 | tee "$RUNNER_TEMP/dependency-lint.log"
+          npm test 2>&1 | tee "$RUNNER_TEMP/dependency-tests.log"
+          npm run build 2>&1 | tee "$RUNNER_TEMP/dependency-build.log"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: deep-quality-dependency-audit
+          path: |
+            ${{ runner.temp }}/audit-*.json
+            ${{ runner.temp }}/package*.json
+            ${{ runner.temp }}/dependency-*.log
+            ${{ runner.temp }}/dependency-fix.patch
+            ${{ runner.temp }}/npm-install.log
+          retention-days: 7
