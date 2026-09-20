@@ -28,7 +28,12 @@ def parse_json(response: str) -> Any:
         return obj
     def invalid_constant(value):
         raise PromptContractError(f"Non-finite JSON number: {value}")
-    decoder = json.JSONDecoder(object_pairs_hook=unique_pairs, parse_constant=invalid_constant)
+    def finite_float(value):
+        parsed = float(value)
+        if not math.isfinite(parsed):
+            raise PromptContractError("Non-finite JSON number")
+        return parsed
+    decoder = json.JSONDecoder(object_pairs_hook=unique_pairs, parse_constant=invalid_constant, parse_float=finite_float)
     try:
         return decoder.decode(text)
     except json.JSONDecodeError:
@@ -78,6 +83,11 @@ def validate_review(value: Any, sources: list[str], translations: list[str]) -> 
         raise PromptContractError("Review source/translation counts differ")
     if not isinstance(value, dict) or not isinstance(value.get("issues"), list):
         raise PromptContractError("Review must contain an explicit issues array")
+    if value.get("review_status", "complete") != "complete":
+        raise PromptContractError("Reviewer did not complete the review")
+    coverage = value.get("coverage", 1.0)
+    if isinstance(coverage, bool) or not isinstance(coverage, (int, float)) or coverage != 1.0:
+        raise PromptContractError("Review coverage is incomplete")
     clean = dict(value)
     issues = []
     severities = {"critical": "P0", "high": "P1", "medium": "P2", "low": "P2"}
@@ -92,7 +102,13 @@ def validate_review(value: Any, sources: list[str], translations: list[str]) -> 
             raise PromptContractError("Review issue requires a description")
         if not isinstance(issue.get("original_text"), str) or not issue["original_text"].strip():
             raise PromptContractError("Review issue requires source evidence")
-        entry = dict(issue, priority=severities[severity])
+        kind = issue.get("issue_type", "readability")
+        if kind not in {"accuracy", "terminology", "tone", "readability", "structure", "formatting", "data", "annotation", "style", "logic", "consistency", "fluency", "completeness"}:
+            raise PromptContractError("Unknown review issue type")
+        for field in ("suggestion", "why_it_matters"):
+            if field in issue and not isinstance(issue[field], str):
+                raise PromptContractError(f"Invalid review {field}")
+        entry = dict(issue, issue_type=kind, priority=severities[severity])
         # Supplied evidence must be literal evidence; an omission may have no translated span.
         for field, source in (("original_text", sources[idx]), ("translation_text", translations[idx])):
             quote = entry.get(field, "")
@@ -133,3 +149,29 @@ def parse_title_lines(response: str) -> dict[str, str]:
             raise PromptContractError("Missing title")
         result["title"] = first
     return result
+
+
+def review_regressed(before, after) -> bool:
+    """Reject new/escalated serious findings, not merely a higher total count.
+
+    Anchor matching is deliberately conservative: an unchanged count can hide a
+    fixed problem in one source span and a newly introduced problem elsewhere.
+    """
+    if after.review_status != "complete" or after.coverage != 1.0:
+        return True
+    rank = {"low": 0, "medium": 1, "high": 2, "critical": 3}
+    old = [i for i in before.issues if i.severity in {"high", "critical"}]
+    for issue in after.issues:
+        if issue.severity not in {"high", "critical"}:
+            continue
+        def same_anchor(previous):
+            a, b = previous.original_text.strip(), issue.original_text.strip()
+            return (previous.paragraph_index == issue.paragraph_index
+                    and previous.issue_type == issue.issue_type
+                    and bool(a and b) and (a in b or b in a))
+        matching = [previous for previous in old if same_anchor(previous)]
+        if not matching or rank[issue.severity] > max(rank[previous.severity] for previous in matching):
+            return True
+        # One old finding cannot justify arbitrarily many new serious findings.
+        old.remove(max(matching, key=lambda previous: rank[previous.severity]))
+    return False

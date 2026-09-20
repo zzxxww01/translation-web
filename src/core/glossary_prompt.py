@@ -488,6 +488,12 @@ def render_glossary_prompt_block(
     return "\n".join(lines)
 
 
+def _consumes_body_annotation(paragraph) -> bool:
+    kind = str(getattr(getattr(paragraph, "element_type", ""), "value", getattr(paragraph, "element_type", ""))).lower()
+    return (not getattr(paragraph, "is_metadata", False)
+            and kind not in {"h1", "h2", "h3", "h4", "h5", "h6", "heading", "image", "code", "source", "byline", "subtitle", "date_access"})
+
+
 def build_term_usage_from_project(
     sections: List[Section],
     glossary: Glossary,
@@ -529,8 +535,7 @@ def build_term_usage_from_project(
                 return usage
 
             # Heading/citation labels do not consume the first body annotation.
-            kind = getattr(para.element_type, "value", para.element_type)
-            if kind in {"h1", "h2", "h3", "h4", "image", "code"}:
+            if not _consumes_body_annotation(para):
                 continue
             # Annotation ownership follows source order, not completion order.
             source = _prose_only(para.source or "")
@@ -560,8 +565,7 @@ def build_annotation_plan(sections, terms, current_section_id: str, paragraph_id
     result = {}
     for section in sections:
         for paragraph in section.paragraphs:
-            element_type = str(getattr(getattr(paragraph, "element_type", ""), "value", getattr(paragraph, "element_type", ""))).lower()
-            if element_type in {"h1", "h2", "h3", "h4", "heading", "image", "code"}:
+            if not _consumes_body_annotation(paragraph):
                 continue
             source = _prose_only(paragraph.source or "")
             for term in candidates:

@@ -76,24 +76,34 @@ def preserve_protected_terms(source_text: str, translated_text: str) -> str:
     if not translated_text or not source_mentions_token(source_text):
         return translated_text
 
-    normalized = _TOKEN_WITH_CHINESE_ANNOTATION_RE.sub("token", translated_text)
-    normalized = _CHINESE_WITH_TOKEN_ANNOTATION_RE.sub("token", normalized)
-    normalized = _TOKEN_SLASH_CHINESE_RE.sub("token", normalized)
-    normalized = _CHINESE_SLASH_TOKEN_RE.sub("token", normalized)
-    normalized = desinicize_token(normalized)
+    def normalize_prose(text: str) -> str:
+        original = text
+        text = _TOKEN_WITH_CHINESE_ANNOTATION_RE.sub("token", text)
+        text = _CHINESE_WITH_TOKEN_ANNOTATION_RE.sub("token", text)
+        text = _TOKEN_SLASH_CHINESE_RE.sub("token", text)
+        text = _CHINESE_SLASH_TOKEN_RE.sub("token", text)
+        normalized = desinicize_token(text)
+        if normalized == original:
+            return text
+        # Only space changed prose; immutable spans never reach this function.
+        from .markdown_postprocess import normalize_cjk_ascii_spacing
+        return normalize_cjk_ascii_spacing(normalized)
+
+    protected = re.compile(
+        r"```[\s\S]*?```|~~~[\s\S]*?~~~|`[^`\n]*`"
+        r"|\[\[\[(?:CODE|MATH)_\d+\|[\s\S]*?\]\]\]"
+        r"|\]\([^)]*\)|https?://[^\s<>]+"
+    )
+    parts, cursor = [], 0
+    for match in protected.finditer(translated_text):
+        parts.extend((normalize_prose(translated_text[cursor:match.start()]), match.group()))
+        cursor = match.end()
+    parts.append(normalize_prose(translated_text[cursor:]))
+    normalized = "".join(parts)
 
     if normalized == translated_text:
         # 什么都没改写，就不要顺手动人家的排版。
         return translated_text
 
-    # 帖子链路不跑 markdown 后处理，替换出的 token 需要就地补 CJK–ASCII 空格，
-    # 否则会得到「token数量」这种没有空格的混排。
-    # 但话题标签行必须整行跳过：`#AI芯片` 被插入空格会断成 `#AI` + 裸文字
-    # 「芯片」，标签行失效，下游还会因此判定"没有标签"而再追加一行。
-    from .markdown_postprocess import normalize_cjk_ascii_spacing
-    from .post_hashtags import is_hashtag_only_line
-
-    return "\n".join(
-        line if is_hashtag_only_line(line) else normalize_cjk_ascii_spacing(line)
-        for line in normalized.split("\n")
-    )
+    # Format normalization belongs to the renderer; never rewrite protected spans.
+    return normalized

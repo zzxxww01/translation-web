@@ -431,11 +431,9 @@ class LLMProvider(ABC):
         pairs_text = "\n\n".join(pairs)
 
         # 构建术语表
-        terms_text = "\n".join(
-            [
-                f"- {t.get('term', t.get('original', ''))} → {t.get('translation', '')}"
-                for t in terminology
-            ]
+        from ..core.glossary_prompt import render_glossary_prompt_block
+        terms_text = render_glossary_prompt_block(
+            terminology, term_usage=(context or {}).get("term_usage")
         )
 
         # 构建指南
@@ -467,7 +465,8 @@ class LLMProvider(ABC):
             trans = pair.get("translation", "")
             issues = pair.get("issues", [])
 
-            pair_text = f"[段落 {i}]\n原文：{src}\n当前译文：{trans}"
+            identity = f" ID={pair['paragraph_id']}" if pair.get("paragraph_id") else ""
+            pair_text = f"[段落 {i}{identity}]\n原文：{src}\n当前译文：{trans}"
 
             if issues:
                 issues_text = "\n".join([
@@ -585,6 +584,11 @@ class LLMProvider(ABC):
             if challenge_lines:
                 blocks.append("## 全文高风险点\n" + "\n".join(challenge_lines))
 
+        if context.get("annotation_plan"):
+            blocks.append("## 原文首现位置（仅指定位置注释）\n" + json.dumps(context["annotation_plan"], ensure_ascii=False))
+        if context.get("paragraph_ids"):
+            blocks.append("## 本章索引与段落 ID\n" + json.dumps(context["paragraph_ids"], ensure_ascii=False))
+
         priorities = build_review_priorities(context.get("review_priorities"))
         if priorities:
             blocks.append(
@@ -614,8 +618,8 @@ class LLMProvider(ABC):
             token_lines = [
                 "## Hidden Format Tokens",
                 "- Source and current translation may contain backend tokens like `[[[LINK_1|...]]]`.",
-                "- Keep the token wrapper, token id, and token order exactly unchanged.",
-                "- Only revise the text after `|`.",
+                "- Keep token ids, types and paragraph ownership; tokens may follow the Chinese word order within their paragraph.",
+                "- Only revise translatable text after `|`; CODE/MATH contents must stay byte-for-byte unchanged.",
                 "- Do not convert these tokens into Markdown syntax.",
             ]
             for token in format_tokens:
@@ -646,14 +650,13 @@ class LLMProvider(ABC):
 
         terminology = build_review_term_entries(context.get("terminology"))
         if terminology:
-            term_lines = []
-            for term in terminology:
-                original = term.get("term") or term.get("original") or ""
-                translation = term.get("translation") or ""
-                if original and translation:
-                    term_lines.append(f"- {original} -> {translation}")
-            if term_lines:
-                blocks.append("## 关键术语\n" + "\n".join(term_lines))
+            from ..core.glossary_prompt import render_glossary_prompt_block
+            blocks.append(render_glossary_prompt_block(terminology, term_usage=context.get("term_usage")))
+        if context.get("annotation_plan"):
+            blocks.append("## 原文首现位置（仅指定位置注释）\n" + json.dumps(context["annotation_plan"], ensure_ascii=False))
+        if context.get("paragraph_ids"):
+            blocks.append("## 本章索引与段落 ID\n" + json.dumps(context["paragraph_ids"], ensure_ascii=False))
+
 
         challenges = build_article_challenge_payload(context.get("article_challenges"))
         if challenges:

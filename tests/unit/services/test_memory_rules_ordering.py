@@ -46,7 +46,7 @@ def test_respects_char_budget_taking_newest_first(service):
 
     selected = service.get_rules_for_prompt()
 
-    assert selected == [rules[-1]]
+    assert selected == [rules[0], rules[-1]]
 
 
 def test_under_limit_returns_all_in_order(service):

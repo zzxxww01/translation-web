@@ -86,7 +86,7 @@ function ImageModeOptions({
 }
 
 export function WechatFeature() {
-  const initialDraft = useMemo(loadWechatDraft, []);
+  const initialDraft = useMemo(() => loadWechatDraft(), []);
   const [markdown, setMarkdown] = useState(initialDraft.markdown);
   const [selectedTheme, setSelectedTheme] = useState(initialDraft.selectedTheme);
   const [imageMode, setImageMode] = useState<WechatImageMode>(initialDraft.imageMode);

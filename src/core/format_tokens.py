@@ -351,7 +351,7 @@ def build_translation_payload(
         return TranslationPayload(
             text=candidate,
             tokenized_text=None,
-            format_issues=[],
+            format_issues=validate_tokenized_text(canonicalize_tokenized_markup(candidate), []),
         )
 
     candidate = canonicalize_tokenized_markup(candidate)

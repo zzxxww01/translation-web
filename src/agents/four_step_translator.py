@@ -346,6 +346,7 @@ class FourStepTranslator:
         if self.session_service and project_id:
             session_id = self.session_service.create_session(project_id=project_id, section_id=section.section_id, create_snapshot=True).id
         outputs, drafts, reflection, understanding = None, [], None, None
+        draft_reflection = None
         history, revised, attempted = [], [], False
         degraded, reason = False, ""
         sources = [p.source for p in section.paragraphs]
@@ -354,6 +355,8 @@ class FourStepTranslator:
                 on_progress(label, step, 4)
         def bind(review, texts, phase):
             review = review.model_copy(deep=True)
+            if review.review_status != "complete" or review.coverage != 1.0:
+                raise ValueError("Reviewer returned an incomplete review")
             expected = text_version(sources, texts)
             if review.reviewed_version and review.reviewed_version != expected:
                 raise ValueError("Reviewer returned evidence for a different translation version")
@@ -375,7 +378,8 @@ class FourStepTranslator:
                 raise ValueError("Draft has missing or empty paragraphs")
             review_provider = self.get_provider_for_phase("phase2_refine") if self.get_provider_for_phase else self.llm
             progress("反思", 2)
-            reflection = bind(self._step_reflect(section, drafts, understanding, provider=review_provider), drafts, "draft")
+            reflection = bind(self._step_reflect(section, drafts, understanding, provider=review_provider, all_sections=all_sections), drafts, "draft")
+            draft_reflection = reflection.model_copy(deep=True)
             # A low score without an actionable finding is not permission to rewrite.
             targets = [issue for issue in reflection.issues
                        if 0 <= issue.paragraph_index < len(drafts) and issue.suggestion.strip()
@@ -384,26 +388,28 @@ class FourStepTranslator:
             progress("定点修订" if attempted else "保留当前译文", 3)
             if attempted:
                 candidate = self._step_refine_and_polish(section, outputs, reflection, understanding,
-                    provider=review_provider, issues_filter=targets, polish_all=False)
+                    provider=review_provider, issues_filter=targets, polish_all=False, all_sections=all_sections)
                 revised = [item.text for item in candidate]
-                if revised != drafts:
-                    # Reject damaged formatting before another model call.
-                    if any(item.format_issues for item in candidate):
-                        degraded, reason = True, "Revision rejected: invalid format tokens"
+                if any(item.format_issues for item in candidate):
+                    degraded, reason = True, "Revision rejected: invalid format tokens"
+                elif revised != drafts:
+                    progress("复核修改后的译文", 3)
+                    verification = bind(self._step_reflect(section, revised, understanding, provider=review_provider, all_sections=all_sections), revised, "revision")
+                    from ..prompts.contracts import review_regressed
+                    if review_regressed(reflection, verification):
+                        degraded, reason = True, "Revision introduced additional serious issues; retained draft"
                     else:
-                        progress("复核修改后的译文", 3)
-                        verification = bind(self._step_reflect(section, revised, understanding, provider=review_provider), revised, "revision")
-                        severe = lambda r: sum(i.severity in {"critical", "high"} for i in r.issues)
-                        if severe(verification) > severe(reflection):
-                            degraded, reason = True, "Revision introduced additional serious issues; retained draft"
-                        else:
-                            outputs, reflection = candidate, verification
+                        outputs, reflection = candidate, verification
                 # If no text changed, review(v1) still applies. No fake new review score.
             translations = [item.text for item in outputs]
             assessment = self.quality_gate.assess(section, translations, reflection)
             if any(item.format_issues for item in outputs):
                 assessment.passed = False
                 assessment.failed_criteria.append("format_tokens_invalid")
+                assessment.action = "manual_review"
+            if degraded:
+                assessment.passed = False
+                assessment.failed_criteria.append("revision_rejected")
                 assessment.action = "manual_review"
             if not assessment.passed:
                 degraded = True
@@ -433,7 +439,7 @@ class FourStepTranslator:
             return SectionTranslationResult(section_id=section.section_id, translations=drafts,
                 draft_translations=drafts, revised_translations=revised,
                 translation_outputs=[{"text":p.text,"tokenized_text":p.tokenized_text,"format_issues":list(p.format_issues)} for p in draft_outputs],
-                understanding=understanding, reflection=reflection, assessment=None,
+                understanding=understanding, reflection=draft_reflection, assessment=None,
                 revision_attempted=attempted, review_history=history, prompt_bundle_version=BUNDLE_VERSION,
                 degraded=True, degraded_reason=f"{type(exc).__name__}: {exc}")
 
@@ -716,6 +722,8 @@ class FourStepTranslator:
         if term_usage_snapshot:
             context["term_usage"] = term_usage_snapshot
 
+        if self.memory_service:
+            context["learned_rules"] = self.memory_service.get_rules_for_prompt()
         return context
 
     def _translate_single_paragraph(
@@ -775,6 +783,9 @@ class FourStepTranslator:
                 context.section_understanding
             )
 
+        if self.memory_service:
+            llm_context["learned_rules"] = self.memory_service.get_rules_for_prompt()
+
         # 全文背景
         if context.article_theme:
             llm_context["article_theme"] = context.article_theme
@@ -811,6 +822,7 @@ class FourStepTranslator:
         self,
         section: Section,
         understanding: SectionUnderstanding,
+        all_sections: Optional[List[Section]] = None,
     ) -> Dict[str, Any]:
         """Build critique-time context so reflection focuses on article-level quality."""
         article_theme = ""
@@ -856,6 +868,8 @@ class FourStepTranslator:
             "标题、图注和数据密集段优先保证信息密度与判断力度。",
         ])
 
+        from ..core.glossary_prompt import build_annotation_plan
+        annotation_plan = build_annotation_plan(all_sections or [section], terminology, section.section_id)
         section_payload = build_section_context_payload(understanding)
 
         return {
@@ -871,6 +885,8 @@ class FourStepTranslator:
             "review_priorities": review_priorities,
             "guidelines": guidelines,
             "terminology": terminology,
+            "annotation_plan": annotation_plan,
+            "paragraph_ids": {str(i): para.id for i, para in enumerate(section.paragraphs)},
             "translation_voice": translation_voice,
         }
 
@@ -924,16 +940,18 @@ class FourStepTranslator:
         self,
         section: Section,
         understanding: SectionUnderstanding,
+        all_sections: Optional[List[Section]] = None,
     ) -> Dict[str, Any]:
         """Build section-level guardrails for targeted revision."""
-        return self._build_review_context(section, understanding)
+        return self._build_review_context(section, understanding, all_sections)
 
     def _step_reflect(
         self,
         section: Section,
         translations: List[str],
         understanding: SectionUnderstanding,
-        provider: Optional[LLMProvider] = None
+        provider: Optional[LLMProvider] = None,
+        all_sections: Optional[List[Section]] = None
     ) -> ReflectionResult:
         """Step 3: 批量反思"""
         # 使用传入的 provider，如果没有则使用默认的 self.llm
@@ -965,7 +983,7 @@ class FourStepTranslator:
             translations=translations,
             guidelines=guidelines,
             terminology=terminology,
-            context=self._build_review_context(section, understanding),
+            context=self._build_review_context(section, understanding, all_sections),
         )
 
         from ..prompts.contracts import validate_review, text_version
@@ -1015,6 +1033,7 @@ class FourStepTranslator:
         provider: Optional[LLMProvider] = None,
         issues_filter: Optional[List[TranslationIssue]] = None,
         polish_all: bool = True,
+        all_sections: Optional[List[Section]] = None,
     ) -> List[TranslationPayload]:
         """Step 4+5: 批量润色 — 合并问题修复和风格优化，每 4 段一批。
 
@@ -1074,7 +1093,7 @@ class FourStepTranslator:
 
         # 分批调用 API（每 4 段一批）
         if pairs:
-            refine_context = self._build_refine_context(section, understanding)
+            refine_context = self._build_refine_context(section, understanding, all_sections)
 
             # 添加评分信息到上下文
             refine_context["reflection_scores"] = {
@@ -1094,8 +1113,9 @@ class FourStepTranslator:
 
                 # 构建批量输入格式
                 batch_pairs = []
-                for source, translation, issues, _ in batch_pairs_data:
+                for source, translation, issues, original_index in batch_pairs_data:
                     pair_dict = {
+                        "paragraph_id": section.paragraphs[original_index].id,
                         "source": source,
                         "translation": translation,
                         "issues": [
@@ -1144,13 +1164,16 @@ class FourStepTranslator:
                         else:
                             # 此前润色结果在这里被静默丢弃，排查时看不出 Step 4+5 对该段没生效
                             logger.warning(
-                                "Polish dropped for paragraph %s: format token validation failed (%s)",
+                                "Polish rejected for paragraph %s: format token validation failed (%s)",
                                 para.id,
                                 candidate.format_issues,
                             )
+                            # Preserve draft content but propagate rejection to the orchestrator,
+                            # including when the visible text has not changed.
+                            refined[idx].format_issues.extend(candidate.format_issues)
                         continue
 
-                    refined[idx] = TranslationPayload(text=stripped)
+                    refined[idx] = build_translation_payload(para, stripped)
 
             logger.info(
                 f"[Phase 2 - Step 4+5] Processed {len(pairs)} paragraphs in {total_api_calls} API calls "

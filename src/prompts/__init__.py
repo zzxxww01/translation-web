@@ -15,6 +15,12 @@ logger = logging.getLogger(__name__)
 BUNDLE_VERSION = "chinese-quality-v2"
 _INCLUDE = re.compile(r"\[\[include:([A-Za-z0-9_/-]+)\]\]")
 _active_manager = ContextVar("translation_prompt_manager", default=None)
+_active_rules = ContextVar("translation_approved_rules", default=None)
+
+
+def active_rule_snapshot():
+    """None outside a run; an immutable tuple (possibly empty) inside one."""
+    return _active_rules.get()
 
 
 class PromptManager:
@@ -31,10 +37,13 @@ class PromptManager:
         for path in self.prompts_dir.rglob("*.txt"):
             name = self._normalize_name(path.relative_to(self.prompts_dir).as_posix())
             templates[name] = path.read_text(encoding="utf-8-sig")
-        # Atomic replacement; no window with an empty template registry.
-        self._templates = templates
+        # A bad include must not poison the live registry during reload.
+        candidate = object.__new__(PromptManager)
+        candidate.prompts_dir = self.prompts_dir
+        candidate._templates = templates
         for name in templates:
-            self._expanded(name)
+            candidate._expanded(name)
+        self._templates = templates
 
     def _normalize_name(self, name: str) -> str:
         normalized = str(name).replace("\\", "/").strip()
@@ -103,13 +112,22 @@ class PromptManager:
         if option_path.exists():
             code_hash.update(option_path.read_bytes())
         digest = hashlib.sha256(raw + code_hash.digest()).hexdigest()
-        return {"schema_version": 1, "bundle_version": BUNDLE_VERSION,
-                "digest": digest, "composer_hash": code_hash.hexdigest(), "templates": templates}
+        result = {"schema_version": 1, "bundle_version": BUNDLE_VERSION,
+                  "digest": digest, "composer_hash": code_hash.hexdigest(), "templates": templates}
+        rules = getattr(self, "_approved_rules", None)
+        if rules is not None:
+            result["approved_rules"] = list(rules)
+            result["approved_rules_sha256"] = hashlib.sha256(
+                json.dumps(list(rules), ensure_ascii=False).encode()
+            ).hexdigest()
+        return result
 
     def frozen_copy(self):
         clone = object.__new__(PromptManager)
         clone.prompts_dir = self.prompts_dir
         clone._templates = dict(self._templates)
+        if hasattr(self, "_approved_rules"):
+            clone._approved_rules = self._approved_rules
         return clone
 
 
@@ -134,8 +152,21 @@ def prompt_bundle_scope(snapshot: Optional[dict] = None):
     current = manager.snapshot()
     if snapshot is not None and snapshot.get("digest") != current["digest"]:
         raise ValueError("Prompt bundle changed or is unversioned; start an explicit new retranslation instead of mixing versions.")
+    from src.services.memory_service import TranslationMemoryService
+    if snapshot is not None and "approved_rules" in snapshot:
+        rules = snapshot["approved_rules"]
+        if not isinstance(rules, list) or any(not isinstance(rule, str) for rule in rules):
+            raise ValueError("Invalid saved rule snapshot")
+        rule_digest = hashlib.sha256(json.dumps(rules, ensure_ascii=False).encode()).hexdigest()
+        if snapshot.get("approved_rules_sha256") != rule_digest:
+            raise ValueError("Saved rule snapshot hash mismatch")
+    else:
+        rules = TranslationMemoryService().get_rules_for_prompt()
+    manager._approved_rules = tuple(rules)
     token = _active_manager.set(manager)
+    rule_token = _active_rules.set(tuple(rules))
     try:
         yield manager
     finally:
+        _active_rules.reset(rule_token)
         _active_manager.reset(token)

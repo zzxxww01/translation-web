@@ -2932,6 +2932,12 @@ class BatchTranslationService:
             "term_usage": self.context_manager.snapshot_term_usage(),
         }
 
+        from ..core.glossary_prompt import build_annotation_plan
+        context["annotation_plan"] = build_annotation_plan(all_sections, analysis.terminology, section.section_id, paragraph_ids)
+        memory = getattr(getattr(self, "translator", None), "memory_service", None)
+        if memory:
+            context["learned_rules"] = memory.get_rules_for_prompt()
+
         # 注入前文译文：section 模式此前从不传这一项，提示词里的「前文译文」恒为
         # 「无」，跨章节首现判定与风格锚点全部失效（审计 LC1）。
         # feedback_from_previous_sections 由四步法 reflection 产出，section 模式下

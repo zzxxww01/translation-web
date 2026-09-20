@@ -8,6 +8,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlparse
 
 from .utils import sanitize_basename
+from ..core.public_resources import safe_urlopen, confined_local_path, atomic_write_resource, MAX_RESOURCE_BYTES
 
 logger = logging.getLogger(__name__)
 
@@ -85,23 +86,31 @@ def _copy_image(src: str, source_html_path: Path, target_path: Path) -> bool:
     if src.startswith(("http://", "https://")):
         try:
             request = urllib.request.Request(src, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(request, timeout=30) as response:
+            with safe_urlopen(request, timeout=30) as response:
                 content = response.read()
-                with target_path.open("wb") as output:
-                    output.write(content)
+                atomic_write_resource(target_path, content)
                 logger.info(f"Downloaded image: {src} -> {target_path.name}")
                 return True
         except Exception as e:
             logger.warning(f"Failed to download image: {src}, reason: {e}")
             return False
 
-    source_path = (source_html_path.parent / src).resolve()
-    if not source_path.exists():
-        logger.warning(f"Local image not found: {src}")
+    source_path = confined_local_path(src, source_html_path.parent)
+    if source_path is None:
+        logger.warning("Local image outside source directory or missing")
         return False
-    shutil.copy2(source_path, target_path)
-    logger.info(f"Copied local image: {src} -> {target_path.name}")
-    return True
+    try:
+        with source_path.open("rb") as file:
+            content = file.read(MAX_RESOURCE_BYTES + 1)
+        if len(content) > MAX_RESOURCE_BYTES:
+            return False
+        atomic_write_resource(target_path, content)
+        logger.info("Copied local image: %s -> %s", src, target_path.name)
+        return True
+    except OSError:
+        logger.warning("Could not copy local image", exc_info=True)
+        return False
+
 
 
 def _detect_suffix(src: str) -> str:

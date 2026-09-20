@@ -339,3 +339,176 @@ def test_final_review_does_not_drop_missing_evidence():
         gen._locate_issues([{'description':'problem'}],{'s':['text']})
     with pytest.raises(ValueError):
         gen._locate_issues([{'section_id':'s','paragraph_index':0,'problematic_sentence':'invented'}],{'s':['text']})
+
+# Deep audit regressions: valid individual helper tests were not sufficient to
+# protect the real orchestration/formatting/persistence paths.
+@pytest.mark.parametrize('coverage', [0.5, float('nan'), 2.0])
+def test_quality_gate_rejects_invalid_review_coverage(coverage):
+    s = _section(); texts = ['译文一', '译文二']
+    review = _review()
+    review.reviewed_version = text_version([p.source for p in s.paragraphs], texts)
+    review.coverage = coverage
+    assert not QualityGate().assess(s, texts, review).passed
+
+
+def test_quality_gate_rejects_an_unbound_review():
+    assert not QualityGate().assess(_section(), ['译文一', '译文二'], _review()).passed
+
+
+@pytest.mark.parametrize('field,value', [('coverage', .5), ('coverage', True), ('review_status', 'partial')])
+def test_model_cannot_claim_partial_review_is_complete(field, value):
+    with pytest.raises(PromptContractError):
+        validate_review({'issues': [], field: value}, ['s'], ['t'])
+
+
+def test_overflowing_json_float_is_not_accepted():
+    with pytest.raises(PromptContractError):
+        parse_json('{"score": 1e9999}')
+
+
+def test_unknown_review_category_rejected():
+    issue = _finding().model_dump(); issue['issue_type'] = 'invented-category'
+    with pytest.raises(PromptContractError):
+        validate_review({'issues': [issue]}, [_section().paragraphs[0].source], ['内存没有变化'])
+
+
+def test_equal_error_count_cannot_hide_severity_escalation():
+    tr = _translator([_review([_finding('high')]), _review([_finding('critical')])]); s = _section()
+    result = tr.translate_section(s, [s])
+    assert result.degraded and not result.assessment.passed
+    assert result.translations == result.draft_translations
+
+
+def test_equal_error_count_cannot_hide_a_new_error_in_another_paragraph():
+    new_issue = _finding().model_copy(update={'paragraph_index': 1, 'original_text': 'Bandwidth'})
+    tr = _translator([_review([_finding()]), _review([new_issue])]); s = _section()
+    result = tr.translate_section(s, [s])
+    assert result.degraded and result.translations == result.draft_translations
+
+
+def test_rejected_revision_never_reports_a_passed_assessment():
+    tr = _translator([_review([_finding('medium')]), _review([_finding('high')])]); s = _section()
+    result = tr.translate_section(s, [s])
+    assert result.degraded and not result.assessment.passed
+
+
+def test_incomplete_verification_retains_the_review_of_the_retained_draft():
+    incomplete = _review(); incomplete.coverage = .5
+    tr = _translator([_review([_finding()]), incomplete]); s = _section()
+    result = tr.translate_section(s, [s])
+    assert result.degraded and result.translations == result.draft_translations
+    assert result.reflection.reviewed_version == text_version([p.source for p in s.paragraphs], result.translations)
+
+
+def test_post_revision_storage_failure_keeps_draft_and_draft_review_together():
+    tr = _translator([_review([_finding()]), _review()]); s = _section()
+    tr.session_service = Mock()
+    tr.session_service.create_session.return_value = SimpleNamespace(id='session')
+    tr.session_service.complete_session.side_effect = OSError('disk full')
+    result = tr.translate_section(s, [s], project_id='project')
+    assert result.degraded
+    assert result.reflection.reviewed_version == text_version([p.source for p in s.paragraphs], result.translations)
+
+
+def test_source_without_spans_rejects_hallucinated_tokens_in_real_payload_builder():
+    from src.core.format_tokens import build_translation_payload
+    payload = build_translation_payload(Paragraph(id='p', index=0, source='hello'), '[[[LINK_1|你好]]]')
+    assert not payload.format_valid
+
+
+def test_protected_term_normalization_does_not_modify_code_math_or_url():
+    from src.core.protected_terms import preserve_protected_terms
+    text = '词元 `词元` [[[CODE_1|令牌]]] [[[MATH_1|词元]]] [链接](https://example.test/词元)'
+    actual = preserve_protected_terms('tokens', text)
+    assert actual.startswith('token ')
+    for span in ['`词元`', '[[[CODE_1|令牌]]]', '[[[MATH_1|词元]]]', '(https://example.test/词元)']:
+        assert span in actual
+
+
+def test_confirmed_text_never_borrows_old_draft_markup():
+    p = Paragraph(id='p', index=0, source='hello', confirmed='新确认版本')
+    p.add_translation('旧草稿', 'model', tokenized_text='[[[LINK_1|旧草稿]]]')
+    assert p.best_tokenized_translation_text() is None
+    assert p.best_translation_text() == '新确认版本'
+
+
+def test_invalid_template_reload_keeps_the_previous_registry(tmp_path):
+    path = tmp_path / 'a.txt'; path.write_text('good {text}')
+    pm = PromptManager(str(tmp_path))
+    path.write_text('[[include:missing]]')
+    with pytest.raises(KeyError):
+        pm._load_all_templates()
+    assert pm.render('a', text='value') == 'good value'
+
+
+def test_source_citation_does_not_consume_first_body_annotation():
+    term = GlossaryTerm(original='ABC', translation='术语', strategy=TranslationStrategy.FIRST_ANNOTATE)
+    source = Paragraph(id='source', index=0, source='Source: ABC', is_metadata=True, metadata_type='source')
+    body = Paragraph(id='body', index=1, source='ABC is useful.')
+    section = Section(section_id='s', title='Title', paragraphs=[source, body])
+    plan = build_annotation_plan([section], [term], 's')
+    assert plan['abc']['paragraph_id'] == 'body'
+    assert not build_term_usage_from_project([section], Glossary(terms=[term]), 's', 'body')
+
+
+def test_review_preserves_term_strategy_and_disambiguation():
+    from src.core.longform_context import build_review_term_entries
+    terms = [{'original': 'KV', 'translation': None, 'strategy': 'preserve', 'note': 'UNIQUE_TERM_NOTE'}]
+    entries = build_review_term_entries(terms)
+    assert entries[0]['strategy'] == 'preserve'
+    provider = GeminiProvider.__new__(GeminiProvider)
+    provider.prompt_manager = get_prompt_manager()
+    prompt = provider._build_reflection_prompt(['KV'], ['KV'], [], entries)
+    assert 'UNIQUE_TERM_NOTE' in prompt and 'KV' in prompt
+    refined = '\n'.join(provider._build_refine_context_blocks({'terminology': entries,
+        'format_tokens': [{'id': 'LINK_1', 'type': 'link', 'text': 'test'}]}))
+    assert 'UNIQUE_TERM_NOTE' in refined
+    assert 'token order exactly unchanged' not in refined
+
+
+def test_active_preferences_reach_batch_and_single_translation_prompts():
+    from src.prompts.task_builders import section_prompt
+    tr = _translator([])
+    tr.memory_service = SimpleNamespace(get_rules_for_prompt=lambda: ['UNIQUE_CONFIRMED_RULE'])
+    from src.core.models import LayeredContext
+    assert 'UNIQUE_CONFIRMED_RULE' in tr._build_translation_context(LayeredContext())['learned_rules']
+    rendered = section_prompt('[p] test', 'test', {'learned_rules': ['UNIQUE_CONFIRMED_RULE']}, ['p'])
+    assert 'UNIQUE_CONFIRMED_RULE' in rendered
+
+
+def test_invalid_format_only_revision_is_not_misclassified_as_a_safe_noop():
+    candidate = [TranslationPayload(text='延迟降低了。内存没有变化。', format_issues=['bad token']),
+                 TranslationPayload(text='带宽不变。')]
+    tr = _translator([_review([_finding('medium')])], candidate); s = _section()
+    result = tr.translate_section(s, [s])
+    assert result.degraded and not result.assessment.passed
+    assert result.translations == result.draft_translations
+    assert tr._step_reflect.call_count == 1
+
+
+def test_active_rules_are_frozen_for_threads_and_restored_runs(tmp_path, monkeypatch):
+    from src.services import memory_service as ms
+    monkeypatch.setattr(ms, 'GLOBAL_MEMORY_PATH', tmp_path / 'memory.md')
+    memory = TranslationMemoryService()
+    memory._append_rules(['规则一'])
+    with prompt_bundle_scope() as pm:
+        saved = pm.snapshot()
+        memory._append_rules(['规则二'])
+        assert memory.get_rules_for_prompt() == ['规则一']
+        ctx = copy_context()
+        with ThreadPoolExecutor(max_workers=1) as pool:
+            assert pool.submit(ctx.run, memory.get_rules_for_prompt).result() == ['规则一']
+    assert memory.get_rules_for_prompt() == ['规则一', '规则二']
+    with prompt_bundle_scope(saved):
+        assert memory.get_rules_for_prompt() == ['规则一']
+
+
+def test_corrupt_saved_rules_are_rejected(tmp_path, monkeypatch):
+    from src.services import memory_service as ms
+    monkeypatch.setattr(ms, 'GLOBAL_MEMORY_PATH', tmp_path / 'memory.md')
+    with prompt_bundle_scope() as pm:
+        saved = pm.snapshot()
+    saved['approved_rules'] = ['tampered']
+    with pytest.raises(ValueError, match='hash'):
+        with prompt_bundle_scope(saved):
+            pytest.fail('must not run')

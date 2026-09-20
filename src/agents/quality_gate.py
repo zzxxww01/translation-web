@@ -74,9 +74,9 @@ class QualityGate:
                   "completeness":self._assess_completeness(section, translations), "style":self._assess_style(reflection)}
         overall = sum(scores[k] * self.WEIGHTS[k] for k in scores)
         failed = []
-        if reflection.review_status != "complete" or reflection.coverage < 1.0:
+        if reflection.review_status != "complete" or reflection.coverage != 1.0:
             failed.append("review_incomplete")
-        if reflection.reviewed_version and reflection.reviewed_version != text_version([p.source for p in section.paragraphs], translations):
+        if not reflection.reviewed_version or reflection.reviewed_version != text_version([p.source for p in section.paragraphs], translations):
             failed.append("review_version_mismatch")
         if len(translations) != len(section.paragraphs) or any(not t.strip() for t in translations):
             failed.append("missing_or_empty_translation")
@@ -244,7 +244,8 @@ class QualityGate:
         mapping = {
             "pass": "通过",
             "refine": "润色优化",
-            "retranslate": "重新翻译"
+            "retranslate": "重新翻译",
+            "manual_review": "待人工审核"
         }
         return mapping.get(action, action)
 

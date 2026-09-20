@@ -17,11 +17,6 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import List
 
-try:
-    from filelock import FileLock, Timeout as FileLockTimeout
-except ImportError:  # pragma: no cover - filelock 应已安装
-    FileLock = None
-    FileLockTimeout = ()
 
 logger = logging.getLogger(__name__)
 
@@ -198,6 +193,10 @@ class TranslationMemoryService:
 
     def get_rules_for_prompt(self) -> List[str]:
         """获取用于注入翻译 prompt 的规则列表（截断到上限）。"""
+        from src.prompts import active_rule_snapshot
+        frozen = active_rule_snapshot()
+        if frozen is not None:
+            return list(frozen)
         with self._lock:
             rules = self._load_rules()
             if not rules:
@@ -210,9 +209,9 @@ class TranslationMemoryService:
             for rule in reversed(rules):
                 if len(selected) >= MAX_RULES_IN_PROMPT:
                     break
+                if total_chars + len(rule) > MAX_RULES_CHARS:
+                    continue
                 total_chars += len(rule)
-                if total_chars > MAX_RULES_CHARS:
-                    break
                 selected.append(rule)
             # 在选中的最新规则内恢复时间顺序（旧→新），读起来更自然
             selected.reverse()
@@ -225,8 +224,8 @@ class TranslationMemoryService:
 
     def delete_rule_by_index(self, index: int) -> bool:
         """按索引删除规则。"""
-        with self._lock:
-            rules = self._load_rules()
+        with self._file_lock(), self._lock:
+            rules = list(self._load_rules())
             if 0 <= index < len(rules):
                 rules.pop(index)
                 self._save_rules(rules)
@@ -265,15 +264,16 @@ class TranslationMemoryService:
     @staticmethod
     def _is_near_duplicate(rule: str, existing: List[str]) -> bool:
         """与已有规则做轻量语义近似判断，避免措辞不同的重复无限累积。"""
-        for other in existing:
-            if difflib.SequenceMatcher(None, rule, other).ratio() >= RULE_SIMILARITY_THRESHOLD:
-                return True
-        return False
+        # A one-character negation can reverse the meaning of otherwise similar
+        # rules. Only ignore whitespace/terminal punctuation, never semantic text.
+        import re
+        canonical = lambda text: re.sub(r"\s+", "", text).rstrip("。.!！?？;；")
+        return any(canonical(rule) == canonical(other) for other in existing)
 
     def _append_rules(self, new_rules: List[str]) -> None:
         """追加规则：过滤术语型规则、跳过精确与近似重复。"""
         with self._file_lock(), self._lock:
-            existing = self._load_rules()
+            existing = list(self._load_rules())
             existing_set = {r.strip() for r in existing}
             added = 0
             for rule in new_rules:
@@ -381,21 +381,10 @@ class TranslationMemoryService:
 
     @contextmanager
     def _file_lock(self):
-        """跨进程文件锁，保护 global_memory.md 的 read-modify-write 不被并发覆盖。
-
-        类级 _lock 只能串行化同进程内的访问；多进程部署时需文件锁防止丢写。
-        filelock 不可用或获取超时时降级为无锁（仍由 _lock 保证同进程安全）。
-        """
-        if FileLock is None:
-            yield
-            return
-        lock_path = str(GLOBAL_MEMORY_PATH) + ".lock"
-        lock = FileLock(lock_path, timeout=10)
-        try:
-            with lock:
-                yield
-        except FileLockTimeout:
-            logger.warning("global_memory 文件锁获取超时，降级为进程内锁继续")
+        """Fail closed on lock timeout; every writer uses the same process lock."""
+        import portalocker
+        GLOBAL_MEMORY_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with portalocker.Lock(str(GLOBAL_MEMORY_PATH) + ".lock", timeout=10):
             yield
 
     @staticmethod
@@ -422,7 +411,8 @@ class TranslationMemoryService:
                 text = GLOBAL_MEMORY_PATH.read_text(encoding="utf-8")
                 rules = self._parse_bullet_list(text)
             except Exception as e:
-                logger.warning("Failed to load rules from %s: %s", GLOBAL_MEMORY_PATH, e)
+                logger.error("Failed to load rules from %s: %s", GLOBAL_MEMORY_PATH, e)
+                raise
 
         self._cache[cache_key] = rules
         self._cache_mtime[cache_key] = mtime
@@ -434,11 +424,9 @@ class TranslationMemoryService:
 
         GLOBAL_MEMORY_PATH.parent.mkdir(parents=True, exist_ok=True)
         content = "\n".join(f"- {r}" for r in rules) + "\n" if rules else ""
-        temp_path = GLOBAL_MEMORY_PATH.with_suffix(".md.tmp")
-        temp_path.write_text(content, encoding="utf-8")
-        temp_path.replace(GLOBAL_MEMORY_PATH)
-
-        self._cache[cache_key] = rules
+        from src.core.file_utils import write_text_atomic
+        write_text_atomic(GLOBAL_MEMORY_PATH, content)
+        self._cache[cache_key] = list(rules)
         self._cache_mtime[cache_key] = self._current_mtime()
 
     # ============ 工具方法 ============

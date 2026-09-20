@@ -202,34 +202,9 @@ def build_review_term_entries(
     terms: Optional[Iterable[Any]],
     max_terms: int = MAX_REVIEW_TERMS_IN_PROMPT,
 ) -> List[Dict[str, str]]:
-    if not terms or max_terms <= 0:
-        return []
-
-    entries: List[Dict[str, str]] = []
-    for term in terms:
-        if isinstance(term, dict):
-            original = term.get("term") or term.get("original", "")
-            translation = term.get("translation", "") or ""
-            context_meaning = term.get("context_meaning") or term.get("note") or ""
-        else:
-            original = getattr(term, "term", None) or getattr(term, "original", "")
-            translation = getattr(term, "translation", None) or ""
-            context_meaning = getattr(term, "context_meaning", None) or getattr(term, "note", None) or ""
-        if not original or not translation:
-            continue
-
-        entries.append(
-            {
-                "term": original,
-                "original": original,
-                "translation": translation,
-                "context_meaning": context_meaning,
-            }
-        )
-        if len(entries) >= max_terms:
-            break
-
-    return entries
+    # Review must see the same strategy and disambiguation note as translation.
+    entries = build_glossary_entries_from_terms(terms, max_terms=max_terms)
+    return [dict(entry, context_meaning=entry.get("note", "")) for entry in entries]
 
 
 def build_section_guideline_lines(

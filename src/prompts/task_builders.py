@@ -33,6 +33,9 @@ def section_prompt(text: str, title: str, context: dict, ids: list[str]) -> str:
     for key in ("relation_to_previous", "relation_to_next", "annotation_plan", "paragraph_structure"):
         if context.get(key):
             guidelines.append(f"{key}: " + json.dumps(context[key], ensure_ascii=False))
+    if context.get("learned_rules"):
+        rules_block = TranslationPromptBuilder()._build_rules_section(context["learned_rules"])
+        guidelines.append(rules_block)
     # Source and approved translation stay together; explicit truncation, never a claimed full history.
     previous = []
     for pair in context.get("previous_translations", [])[-3:]:
