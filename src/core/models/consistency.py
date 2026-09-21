@@ -24,7 +24,11 @@ class ConsistencyReport(BaseModel):
     manual_review: List[ConsistencyIssue] = Field(default_factory=list)
 
     term_stats: Dict[str, Dict] = Field(default_factory=dict)
-    style_score: float = 100.0
+    style_score: float = 100.0  # legacy numeric field; not a measured score
+    style_checked: bool = False
+    terminology_checked: bool = False
+    reviewed_paragraphs: int = 0
+    total_paragraphs: int = 0
     suggestions: List[Dict] = Field(default_factory=list)
 
 

@@ -15,6 +15,7 @@ from openai import APIConnectionError, APIError, APITimeoutError, RateLimitError
 
 from src.settings import settings
 from .base import LLMProvider
+from .output_validation import ensure_complete_generation
 from .config_loader import get_config_loader
 from .errors import (
     LLMConfigurationError,
@@ -232,6 +233,8 @@ class VectorEngineProvider(LLMProvider):
 
             usage = getattr(response, "usage", None)
             choices = getattr(response, "choices", None)
+            if choices:
+                ensure_complete_generation(getattr(choices[0], "finish_reason", None))
             content = choices[0].message.content if choices else None
             if not isinstance(content, str) or not content.strip():
                 raise LLMUpstreamUnavailableError(

@@ -484,6 +484,10 @@ def _run_consistency_review_sync(project_id: str, pm, llm) -> dict:
     return {
         "is_consistent": report.is_consistent,
         "style_score": report.style_score,
+        "style_checked": report.style_checked,
+        "terminology_checked": report.terminology_checked,
+        "reviewed_paragraphs": report.reviewed_paragraphs,
+        "total_paragraphs": report.total_paragraphs,
         "issue_count": len(report.issues),
         "auto_fixable_count": len(report.auto_fixable),
         "manual_review_count": len(report.manual_review),

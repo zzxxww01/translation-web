@@ -26,6 +26,14 @@ class LLMError(RuntimeError):
     """Base class for typed LLM failures."""
 
 
+class LLMCapacityError(LLMError):
+    """Local running/queued request limit reached; do not retry via another model."""
+
+
+class LLMOutputTruncatedError(LLMError):
+    """Upstream generation hit its output limit; partial text is not a result."""
+
+
 class LLMConfigurationError(LLMError, ValueError):
     """Provider configuration is invalid."""
 

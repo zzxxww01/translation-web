@@ -1,4 +1,4 @@
-"""
+﻿"""
 Translation Agent - Gemini LLM Provider
 
 Google Gemini API implementation for translation and analysis.
@@ -28,6 +28,7 @@ from src.core.longform_context import (
 from src.core.glossary_prompt import render_glossary_prompt_block
 
 from .base import LLMProvider
+from .output_validation import ensure_complete_generation, gemini_response_text
 from .errors import (
     LLMConnectionError,
     LLMProxyConfigurationError,
@@ -642,10 +643,7 @@ class GeminiProvider(LLMProvider):
         if response.status_code >= 400:
             self._raise_rest_http_error(response, model)
         data = response.json()
-        try:
-            text = data["candidates"][0]["content"]["parts"][0]["text"]
-        except Exception as exc:
-            raise RuntimeError(f"Unexpected Gemini REST response: {data}") from exc
+        text = gemini_response_text(data)
         usage = data.get("usageMetadata", {})
         return GeminiGenerationResult(
             text=text,
@@ -926,6 +924,9 @@ class GeminiProvider(LLMProvider):
                         contents=prompt,
                         config=config,
                     )
+            candidates = getattr(resp, "candidates", None)
+            if candidates:
+                ensure_complete_generation(getattr(candidates[0], "finish_reason", None))
             text = resp.text
             if text is None:
                 # 候选被安全策略拦截或无有效候选时 resp.text 为 None。抛可重试的

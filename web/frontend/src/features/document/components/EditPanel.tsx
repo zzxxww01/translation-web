@@ -1,8 +1,9 @@
+import { sanitizeSourceHtml } from '@/shared/safeHtml';
 import { getEditingInstruction } from '../../../shared/editingOptions';
-import { type FC, useEffect, useState, useCallback, useRef, type MouseEvent as ReactMouseEvent } from 'react';
+import { type FC, useEffect, useState, useCallback, useRef, useMemo, type MouseEvent as ReactMouseEvent } from 'react';
 import { X, RotateCw, Check, ChevronLeft, ChevronRight, Zap, MessageCircle, Briefcase, Maximize2 } from 'lucide-react';
-import { useDocumentStore } from '@/shared/stores';
-import { useTranslateParagraph, useConfirmParagraph, useQueryWordMeaning } from '../hooks';
+import { useQueryWordMeaning } from '../hooks';
+import { useImmersiveEditor } from '../hooks/useImmersiveEditor';
 import { Button } from '@/components/ui/button-extended';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import {
@@ -13,10 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from '@/components/ui/dropdown-menu';
-import { ParagraphStatus } from '@/shared/constants';
 import type { Paragraph } from '@/shared/types';
-import { documentApi } from '../api';
-import { toast } from 'sonner';
 
 interface EditPanelProps {
   paragraph: Paragraph | null;
@@ -67,7 +65,7 @@ function renderInlineMarkdown(markdown: string): string {
     html = html.replace(`@@INLINE_CODE_${index}@@`, tokenHtml);
   });
 
-  return html;
+  return sanitizeSourceHtml(html);
 }
 
 function markdownToSafeHtml(markdown: string): string {
@@ -167,7 +165,11 @@ function markdownToSafeHtml(markdown: string): string {
   return html;
 }
 
-export const EditPanel: FC<EditPanelProps> = ({
+export const EditPanel: FC<EditPanelProps> = props => (
+  <ScopedEditPanel key={`${props.projectId}:${props.sectionId}:${props.paragraph?.id}`} {...props} />
+);
+
+const ScopedEditPanel: FC<EditPanelProps> = ({
   paragraph,
   projectId,
   sectionId,
@@ -178,12 +180,21 @@ export const EditPanel: FC<EditPanelProps> = ({
   totalCount = 0,
   onEnterImmersive,
 }) => {
-  const { updateParagraph } = useDocumentStore();
-  const translateMutation = useTranslateParagraph();
-  const confirmMutation = useConfirmParagraph();
   const queryWordMeaningMutation = useQueryWordMeaning();
-  const [translation, setTranslation] = useState(paragraph?.translation || '');
-  const [isTranslating, setIsTranslating] = useState(false);
+  const paragraphs = useMemo(() => paragraph ? [paragraph] : [], [paragraph]);
+  const editor = useImmersiveEditor({ projectId: projectId ?? '', sectionId: sectionId ?? '', paragraphs });
+  const paragraphId = paragraph?.id ?? '';
+  const translation = editor.drafts[paragraphId] ?? paragraph?.translation ?? '';
+  const isTranslating = Boolean(editor.retranslatingMap[paragraphId]);
+  const isSaving = Boolean(editor.savingMap[paragraphId]);
+  const isDirty = Boolean(editor.dirtyMap[paragraphId]);
+  const saveError = editor.saveErrorMap[paragraphId] || editor.retranslateErrorMap[paragraphId];
+  const aliveRef = useRef(true);
+  const lookupGeneration = useRef(0);
+  useEffect(() => {
+    aliveRef.current = true;
+    return () => { aliveRef.current = false; lookupGeneration.current += 1; };
+  }, []);
 
   // 重新翻译选项
   const [customRetranslateInstruction, setCustomRetranslateInstruction] = useState('');
@@ -192,12 +203,6 @@ export const EditPanel: FC<EditPanelProps> = ({
   const assistantBottomRef = useRef<HTMLDivElement | null>(null);
   const lastSelectedWordRef = useRef('');
   const lastSelectedAtRef = useRef(0);
-  // 记录上一段及其最新本地译文，用于切段时自动保存未确认的草稿（N6 防数据丢失）
-  const prevParagraphRef = useRef<Paragraph | null>(paragraph);
-  const translationRef = useRef(translation);
-  // projectId/sectionId 的最新快照：卸载兜底 effect 只跑一次，需靠 ref 避免闭包过期
-  const projectIdRef = useRef(projectId);
-  const sectionIdRef = useRef(sectionId);
   const translationTextareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   // 词义助手相关状态
@@ -234,104 +239,14 @@ export const EditPanel: FC<EditPanelProps> = ({
     },
   ];
 
-  // 保持 translationRef 与最新本地译文同步，供切段时读取上一段草稿
-  useEffect(() => {
-    translationRef.current = translation;
-  }, [translation]);
-
-  // 保持 projectId/sectionId 快照同步，供卸载兜底读取
-  useEffect(() => {
-    projectIdRef.current = projectId;
-    sectionIdRef.current = sectionId;
-  }, [projectId, sectionId]);
-
-  // 把草稿落库逻辑抽出来，切段与卸载两条路径共用（N6 防数据丢失）
-  const flushDraft = useCallback(
-    (
-      previousParagraph: Paragraph | null,
-      draft: string,
-      pid: string | null,
-      sid: string | null
-    ) => {
-      if (!previousParagraph || !pid || !sid) return;
-
-      const originalTranslation = previousParagraph.translation ?? '';
-      // 仅当本地译文相对原译文有改动、且已确认值未覆盖该改动时才保存
-      const alreadyConfirmed = previousParagraph.confirmed === draft;
-      if (draft === originalTranslation || alreadyConfirmed) return;
-
-      const previousId = previousParagraph.id;
-      void documentApi
-        .updateParagraph(pid, sid, previousId, {
-          translation: draft,
-          edit_source: 'edit_panel_draft',
-          source_text: previousParagraph.source,
-        })
-        .then(result => {
-          const persistedTranslation = result.translation ?? draft;
-          const persistedStatus = result.status ?? previousParagraph.status;
-          updateParagraph(previousId, {
-            translation: persistedTranslation,
-            status: persistedStatus,
-            confirmed:
-              result.confirmed ??
-              (persistedStatus === ParagraphStatus.APPROVED ? persistedTranslation : undefined),
-          });
-        })
-        .catch(() => {
-          // 草稿保存失败不阻断切段/关闭，仅提示，避免静默丢失
-          toast.error('上一段草稿保存失败，请回到该段重试');
-        });
-    },
-    [updateParagraph]
-  );
-
-  const flushDraftRef = useRef(flushDraft);
-  useEffect(() => {
-    flushDraftRef.current = flushDraft;
-  }, [flushDraft]);
-
-  // 关闭面板 / 最后一段点“下一段” / 切章节都会直接卸载本组件，
-  // 这里只在卸载时兜底落库一次；切段保存仍走下面的 effect 体，二者靠 prevParagraphRef 互斥。
-  useEffect(
-    () => () => {
-      flushDraftRef.current(
-        prevParagraphRef.current,
-        translationRef.current,
-        projectIdRef.current,
-        sectionIdRef.current
-      );
-    },
-    []
-  );
-
-  useEffect(() => {
-    // 切段前，若上一段译文被编辑过但未确认，先静默保存草稿，避免编辑丢失（N6）
-    const previousParagraph = prevParagraphRef.current;
-    if (previousParagraph && previousParagraph.id !== paragraph?.id) {
-      flushDraft(previousParagraph, translationRef.current, projectId, sectionId);
-    }
-    prevParagraphRef.current = paragraph;
-
-    setTranslation(paragraph?.translation || '');
-    setSelectedWord('');
-    setActiveWord('');
-    setIsWordAssistantOpen(false);
-    setAssistantMessages([]);
-    setAssistantInput('');
-    setIsAskingWordMeaning(false);
-    setWordMenuPosition(null);
-    setCustomRetranslateInstruction('');
-    lastSelectedWordRef.current = '';
-    lastSelectedAtRef.current = 0;
-  }, [paragraph, projectId, sectionId, flushDraft]);
-
   // 弹窗挂载时把焦点移到译文输入框，避免焦点仍停留在背后的段落列表
   useEffect(() => {
     translationTextareaRef.current?.focus();
   }, []);
 
   const closeWordAssistant = useCallback(() => {
+    lookupGeneration.current += 1;
+    setIsAskingWordMeaning(false);
     setIsWordAssistantOpen(false);
     setAssistantInput('');
   }, []);
@@ -340,60 +255,22 @@ export const EditPanel: FC<EditPanelProps> = ({
     setWordMenuPosition(null);
   }, []);
 
-  const handleTranslate = useCallback(async (instruction?: string) => {
-    if (!projectId || !sectionId || !paragraph) return;
-
-    setIsTranslating(true);
-    try {
-      const result = await translateMutation.mutateAsync({
-        projectId,
-        sectionId,
-        paragraphId: paragraph.id,
-        instruction,
-      });
-      setTranslation(result.translation);
-      const persistedStatus = result.status ?? ParagraphStatus.TRANSLATED;
-      updateParagraph(paragraph.id, {
-        translation: result.translation,
-        status: persistedStatus,
-        confirmed:
-          result.confirmed ?? (persistedStatus === ParagraphStatus.APPROVED ? result.translation : undefined),
-      });
-    } finally {
-      setIsTranslating(false);
-    }
-  }, [projectId, sectionId, paragraph, translateMutation, updateParagraph]);
+  const { queueRetranslate, confirmParagraph, updateDraft, saveNow } = editor;
+  const handleTranslate = useCallback((instruction?: string) => {
+    queueRetranslate(paragraphId, instruction);
+  }, [paragraphId, queueRetranslate]);
 
   const handleCustomRetranslate = useCallback(() => {
     const instruction = customRetranslateInstruction.trim();
     if (!instruction || isTranslating) return;
     setCustomRetranslateInstruction('');
-    void handleTranslate(instruction);
+    handleTranslate(instruction);
   }, [customRetranslateInstruction, handleTranslate, isTranslating]);
 
   const handleConfirm = useCallback(async () => {
-    if (!translation.trim()) {
-      return;
-    }
-    if (!projectId || !sectionId || !paragraph) return;
-
-    await confirmMutation.mutateAsync({
-      projectId,
-      sectionId,
-      paragraphId: paragraph.id,
-      translation,
-    });
-
-    updateParagraph(paragraph.id, {
-      translation,
-      status: ParagraphStatus.APPROVED,
-      confirmed: translation,
-    });
-
-    if (onNext) {
-      onNext();
-    }
-  }, [translation, projectId, sectionId, paragraph, confirmMutation, updateParagraph, onNext]);
+    const canAdvance = await confirmParagraph(paragraphId);
+    if (canAdvance && aliveRef.current) onNext?.();
+  }, [confirmParagraph, paragraphId, onNext]);
 
   const getSelectedSourceText = useCallback(() => {
     const container = sourceSelectionContainerRef.current;
@@ -457,6 +334,7 @@ export const EditPanel: FC<EditPanelProps> = ({
         ...baseHistory,
         { role: 'user', content: trimmedQuestion },
       ];
+      const generation = ++lookupGeneration.current;
       setAssistantMessages(nextHistory);
       setIsAskingWordMeaning(true);
 
@@ -470,12 +348,15 @@ export const EditPanel: FC<EditPanelProps> = ({
           history: nextHistory,
         });
 
+        if (!aliveRef.current || lookupGeneration.current !== generation) return;
         setAssistantMessages([
           ...nextHistory,
           { role: 'assistant', content: result.answer },
         ]);
+      } catch {
+        // The mutation hook already reports the transport error.
       } finally {
-        setIsAskingWordMeaning(false);
+        if (aliveRef.current && lookupGeneration.current === generation) setIsAskingWordMeaning(false);
       }
     },
     [projectId, sectionId, paragraph, queryWordMeaningMutation]
@@ -603,7 +484,7 @@ export const EditPanel: FC<EditPanelProps> = ({
       return (
         <div
           className="max-h-[28rem] overflow-auto rounded border border-border-subtle bg-bg-tertiary p-3 text-sm"
-          dangerouslySetInnerHTML={{ __html: paragraph.source_html }}
+          dangerouslySetInnerHTML={{ __html: sanitizeSourceHtml(paragraph.source_html) }}
         />
       );
     }
@@ -617,7 +498,7 @@ export const EditPanel: FC<EditPanelProps> = ({
     return <span>{paragraph.source}</span>;
   };
 
-  const isLoading = isTranslating || translateMutation.isPending || confirmMutation.isPending;
+  const isLoading = isTranslating || isSaving;
 
   return (
     <>
@@ -714,11 +595,15 @@ export const EditPanel: FC<EditPanelProps> = ({
               <label className="mb-3 block text-base font-semibold text-text-primary md:text-lg">
                 译文
               </label>
+              <div role="status" className="mb-2 text-xs text-text-muted">
+                {saveError ? <span role="alert" className="text-red-600">{saveError} <button type="button" onClick={() => void saveNow(paragraphId)}>核对后保存</button></span> : isSaving ? '正在保存…' : isDirty ? '有未保存修改' : '已保存'}
+              </div>
               <textarea
+                aria-label="段落译文"
                 ref={translationTextareaRef}
                 value={translation}
                 onChange={(e) => {
-                  setTranslation(e.target.value);
+                  updateDraft(paragraphId, e.target.value);
                 }}
                 placeholder="在此输入或编辑译文..."
                 className="min-h-48 flex-1 w-full resize-none rounded-lg border border-border bg-bg-secondary p-4 text-base leading-7 text-text-primary placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent md:min-h-0 md:text-lg"
@@ -823,7 +708,7 @@ export const EditPanel: FC<EditPanelProps> = ({
                   variant="default"
                   onClick={handleConfirm}
                   disabled={!translation.trim() || isLoading}
-                  isLoading={confirmMutation.isPending}
+                  isLoading={isSaving}
                   leftIcon={<Check className="h-5 w-5" />}
                 >
                   确认并下一段

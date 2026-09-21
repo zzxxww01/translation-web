@@ -4,8 +4,8 @@ import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
 
 /**
  * 用户主动取消时不弹错误提示。
- * client.ts 会把 AbortError/TimeoutError 统一归一化成「请求超时」，
- * 无法从 error 上区分，因此改为回看请求变量里的 signal 是否已被 abort。
+ * 请求变量的 signal 可识别主动取消；传输层还会保留 AbortError，
+ * 与真正超时返回的 408 分开处理。
  */
 function isUserCancelled(variables: unknown): boolean {
   return Boolean((variables as { signal?: AbortSignal } | undefined)?.signal?.aborted);

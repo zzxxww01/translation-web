@@ -31,14 +31,17 @@ async def convert_timezone_api(request: Request, body: TimezoneConvertRequest):
     if not body.input.strip():
         raise BadRequestException(detail="请输入时间")
 
-    dt, detected_tz = parse_datetime_input(body.input)
+    dt, detected_tz = parse_datetime_input(body.input, body.source_timezone)
     if dt is None:
         raise BadRequestException(
             detail="无法解析时间格式。支持的格式示例: 1/26/26 4pm cdt, 1/15/26 2:00 pm cdt, 2025-01-15 14:00 est, 今天下午3点"
         )
 
-    source_tz = resolve_timezone(body.source_timezone, detected_tz)
-    times = convert_all_timezones(dt, source_tz)
+    try:
+        source_tz = resolve_timezone(body.source_timezone, detected_tz)
+        times = convert_all_timezones(dt, source_tz)
+    except ValueError as exc:
+        raise BadRequestException(detail=str(exc)) from exc
     original_formatted = format_time(dt, source_tz)
 
     return TimezoneConvertResponse(

@@ -19,6 +19,7 @@ from ..core.models import (
     TermUsageTracker, ConsistencyIssue, ConsistencyReport
 )
 from ..llm.base import LLMProvider
+from ..core.term_consistency import check_terminology
 
 
 logger = logging.getLogger(__name__)
@@ -94,7 +95,11 @@ class ConsistencyReviewer:
             is_consistent=len(all_issues) == 0,
             issues=all_issues,
             auto_fixable=auto_fixable,
-            manual_review=manual_review
+            manual_review=manual_review,
+            style_checked=False,
+            terminology_checked=bool(article_analysis and article_analysis.terminology),
+            reviewed_paragraphs=sum(bool(text.strip()) for values in translations.values() for text in values),
+            total_paragraphs=sum(len(section.paragraphs) for section in sections),
         )
 
         # 添加增强数据到报告
@@ -119,20 +124,9 @@ class ConsistencyReviewer:
         Returns:
             Dict[str, List[str]]: 修正后的翻译结果
         """
-        fixed = {k: v.copy() for k, v in translations.items()}
-
-        for issue in issues:
-            if issue.auto_fixable and issue.fix_suggestion:
-                section_id = issue.section_id
-                para_index = issue.paragraph_index
-
-                if section_id in fixed and 0 <= para_index < len(fixed[section_id]):
-                    # 应用修正建议
-                    current = fixed[section_id][para_index]
-                    # 简单替换（实际应用中可能需要更复杂的逻辑）
-                    fixed[section_id][para_index] = issue.fix_suggestion
-
-        return fixed
+        # fix_suggestion is advice, never a replacement paragraph. A real auto
+        # fix would require an exact edit span plus a version-checked source.
+        return {key: values.copy() for key, values in translations.items()}
 
     def _check_terminology_consistency_enhanced(
         self,
@@ -146,76 +140,7 @@ class ConsistencyReviewer:
 
         返回问题列表和术语使用统计
         """
-        issues = []
-        term_stats = {}
-
-        # 构建术语到首选翻译的映射
-        term_preferred = {}
-        for term in terminology:
-            if term.translation:
-                term_preferred[term.term.lower()] = term.translation
-
-        # 统计每个术语的使用情况
-        term_usage = defaultdict(lambda: {"count": 0, "translations": Counter(), "locations": []})
-
-        for section in sections:
-            section_id = section.section_id
-            if section_id not in translations:
-                continue
-
-            section_trans = translations[section_id]
-
-            for para_idx, (para, trans) in enumerate(zip(section.paragraphs, section_trans)):
-                source_lower = para.source.lower()
-
-                for term in terminology:
-                    term_lower = term.term.lower()
-                    if term_lower not in source_lower:
-                        continue
-
-                    # 记录术语出现
-                    term_usage[term.term]["count"] += 1
-                    term_usage[term.term]["locations"].append({
-                        "section_id": section_id,
-                        "paragraph_index": para_idx
-                    })
-
-                    # 检测使用的翻译
-                    if term.translation and term.translation in trans:
-                        term_usage[term.term]["translations"][term.translation] += 1
-                    else:
-                        # 尝试检测其他可能的翻译
-                        # used_translations 的键始终是小写 (term.lower())，
-                        # 直接用原始大小写查询对非全小写术语恒为空，故归一化为小写。
-                        used_trans = term_tracker.used_translations.get(term.term.lower(), [])
-                        for ut in used_trans:
-                            if ut in trans:
-                                term_usage[term.term]["translations"][ut] += 1
-                                break
-
-        # 分析术语一致性
-        for term_name, usage in term_usage.items():
-            trans_counts = usage["translations"]
-            term_stats[term_name] = {
-                "total_count": usage["count"],
-                "translations": dict(trans_counts),
-                "is_consistent": len(trans_counts) <= 1,
-                "preferred": term_preferred.get(term_name.lower())
-            }
-
-            # 如果有多种翻译，报告不一致
-            if len(trans_counts) > 1:
-                most_common = trans_counts.most_common()
-                issues.append(ConsistencyIssue(
-                    section_id=usage["locations"][0]["section_id"],
-                    paragraph_index=usage["locations"][0]["paragraph_index"],
-                    issue_type="terminology",
-                    description=f"术语 '{term_name}' 有多种翻译: {', '.join([f'{t}({c}次)' for t, c in most_common])}",
-                    auto_fixable=True,
-                    fix_suggestion=f"建议统一使用 '{most_common[0][0]}'"
-                ))
-
-        return issues, term_stats
+        return check_terminology(sections, translations, terminology)
 
     def _check_terminology_consistency(
         self,
@@ -284,56 +209,7 @@ class ConsistencyReviewer:
         Returns:
             Tuple of (issues, term_stats)
         """
-        issues = []
-        term_stats = {}
-        term_usage = defaultdict(lambda: {"count": 0, "translations": Counter(), "locations": []})
-
-        for section in sections:
-            section_id = section.section_id
-            if section_id not in translations:
-                continue
-
-            section_trans = translations[section_id]
-
-            for para_idx, (para, trans) in enumerate(zip(section.paragraphs, section_trans)):
-                source_lower = para.source.lower()
-
-                for term in terminology:
-                    term_lower = term.term.lower()
-                    if term_lower not in source_lower:
-                        continue
-
-                    term_usage[term.term]["count"] += 1
-                    term_usage[term.term]["locations"].append({
-                        "section_id": section_id,
-                        "paragraph_index": para_idx
-                    })
-
-                    # 检测翻译
-                    if term.translation and term.translation in trans:
-                        term_usage[term.term]["translations"][term.translation] += 1
-
-        # 统计结果
-        for term_name, usage in term_usage.items():
-            trans_counts = usage["translations"]
-            term_stats[term_name] = {
-                "total_count": usage["count"],
-                "translations": dict(trans_counts),
-                "is_consistent": len(trans_counts) <= 1
-            }
-
-            if len(trans_counts) > 1:
-                most_common = trans_counts.most_common()
-                issues.append(ConsistencyIssue(
-                    section_id=usage["locations"][0]["section_id"],
-                    paragraph_index=usage["locations"][0]["paragraph_index"],
-                    issue_type="terminology",
-                    description=f"术语 '{term_name}' 有多种翻译: {', '.join([f'{t}({c}次)' for t, c in most_common])}",
-                    auto_fixable=True,
-                    fix_suggestion=f"建议统一使用 '{most_common[0][0]}'"
-                ))
-
-        return issues, term_stats
+        return check_terminology(sections, translations, terminology)
 
     def _check_style_consistency_enhanced(self, sections, translations):
         """Legacy compatibility only. A style judgment needs source-grounded review.
@@ -556,7 +432,7 @@ class ConsistencyReviewer:
             "=" * 60,
             "",
             f"一致性状态: {'✅ 通过' if report.is_consistent else '❌ 存在问题'}",
-            f"风格评分: {report.style_score:.1f}/100",
+            f"风格评分: {str(report.style_score) + '/100' if report.style_checked else '未评估'}",
             f"问题总数: {len(report.issues)}",
             f"  - 可自动修复: {len(report.auto_fixable)}",
             f"  - 需人工审核: {len(report.manual_review)}",

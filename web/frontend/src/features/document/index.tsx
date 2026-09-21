@@ -663,6 +663,7 @@ export function DocumentFeature() {
       {showEditingPanels && isImmersiveMode && activeProject && displaySection && (
         <Suspense fallback={<LazyPanelFallback />}>
           <ImmersiveEditor
+            key={`${activeProject.id}:${displaySection.section_id}`}
             projectId={activeProject.id}
             section={displaySection}
             initialParagraphId={activeParagraphId ?? undefined}

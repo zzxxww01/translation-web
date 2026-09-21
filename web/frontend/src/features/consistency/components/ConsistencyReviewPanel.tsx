@@ -48,6 +48,10 @@ interface Suggestion {
 interface ConsistencyReviewResult {
   is_consistent: boolean;
   style_score: number;
+  style_checked?: boolean;
+  terminology_checked?: boolean;
+  reviewed_paragraphs?: number;
+  total_paragraphs?: number;
   issue_count: number;
   auto_fixable_count: number;
   manual_review_count: number;
@@ -175,14 +179,14 @@ export function ConsistencyReviewPanel({
                   <AlertTriangle className="h-6 w-6 text-warning" />
                 )}
                 <span className="font-medium text-text-primary">
-                  {result.is_consistent ? '翻译一致性良好' : '发现一致性问题'}
+                  {result.terminology_checked === false ? '未执行术语核验' : result.is_consistent ? '已检查范围内未发现不一致' : '发现一致性问题'}
                 </span>
               </div>
 
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div className={cn('rounded-lg p-3', getScoreBg(result.style_score))}>
                   <div className={cn('text-2xl font-bold', getScoreColor(result.style_score))}>
-                    {result.style_score.toFixed(0)}
+                    {result.style_checked ? result.style_score.toFixed(0) : '未评估'}
                   </div>
                   <div className="text-xs text-text-muted">风格评分</div>
                 </div>
