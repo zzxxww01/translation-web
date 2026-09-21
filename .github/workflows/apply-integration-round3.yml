@@ -1,0 +1,155 @@
+name: Verify and publish integration fixes
+on:
+  push:
+    branches: ["fix/chinese-prompt-quality-v2"]
+    paths: [".github/workflows/apply-integration-round3.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: integration-round3-publish
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GEMINI_API_KEY: test
+      VECTORENGINE_API_KEY: test
+      RUN_LLM_TESTS: "0"
+      PLAYWRIGHT_BASE_URL: http://127.0.0.1:54321
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/chinese-prompt-quality-v2
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Apply hash-verified integration changes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, json, lzma, os, pathlib, subprocess
+          shas = ['a5c63278d505630e80d8c9e4c915e54f4191ff6c', '2f799a69503d48f57067aade50e41db88206032c', '3028d6a6f63231b48825325580f4d6a7e1fdcf1c']
+          def blob(data):
+              return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+          chunks = []
+          for sha in shas:
+              value = json.loads(subprocess.check_output(['gh', 'api', f'repos/zzxxww01/translation-web/git/blobs/{sha}']))
+              data = base64.b64decode(value['content'])
+              assert blob(data) == sha, 'Transport blob mismatch'
+              chunks.append(data)
+          packed = b''.join(chunks)
+          assert hashlib.sha256(packed).hexdigest() == '0b4e89258790d7d93f28732c344df7d2f896c1cc60bda62531a02fae40f8e39c'
+          package = json.loads(lzma.decompress(packed))
+          assert package['schema'] == 1 and len(package['files']) == 54
+          subprocess.run(['git', 'merge-base', '--is-ancestor', package['expected_branch_head'], 'HEAD'], check=True)
+          root = pathlib.Path.cwd().resolve()
+          prepared = {}
+          for name, entry in package['files'].items():
+              rel = pathlib.PurePosixPath(name)
+              assert not rel.is_absolute() and '..' not in rel.parts
+              assert name.startswith(('src/', 'tests/', 'web/frontend/', 'docs/')) or name == '.github/workflows/ci.yml'
+              path = root / rel
+              assert not any(p.is_symlink() for p in [path, *path.parents])
+              before = path.read_bytes() if path.exists() else b''
+              if entry['before'] is None:
+                  assert not path.exists(), f'New file conflict: {name}'
+              else:
+                  assert blob(before) == entry['before'], f'Baseline changed: {name}'
+              lines = before.decode('utf-8').splitlines(keepends=True)
+              last_start = len(lines) + 1
+              for start, end, text in reversed(entry['edits']):
+                  assert 0 <= start <= end <= len(lines) and end <= last_start
+                  lines[start:end] = [text]
+                  last_start = start
+              result = ''.join(lines).encode('utf-8')
+              assert blob(result) == entry['after'] and hashlib.sha256(result).hexdigest() == entry['sha256'], name
+              prepared[path] = result
+          for path, data in prepared.items():
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_bytes(data)
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          (temp / 'integration-manifest.json').write_text(json.dumps(package['files'], ensure_ascii=False))
+          print(f'Applied and hash-verified {len(prepared)} source files')
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Backend verification
+        run: |
+          set -o pipefail
+          python -m pip install -r requirements-dev.txt
+          python -m compileall -q src
+          python -c "from src.api.app import app; print('App import OK:', len(app.routes), 'routes')"
+          python -m pytest -q 2>&1 | tee "$RUNNER_TEMP/integration-backend-tests.log"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/frontend/package-lock.json
+      - name: Frontend verification
+        working-directory: web/frontend
+        run: |
+          set -o pipefail
+          npm ci
+          npm run lint -- --max-warnings 0 2>&1 | tee "$RUNNER_TEMP/integration-frontend-lint.log"
+          npm test 2>&1 | tee "$RUNNER_TEMP/integration-frontend-tests.log"
+          npm run build 2>&1 | tee "$RUNNER_TEMP/integration-frontend-build.log"
+          npm audit --json > "$RUNNER_TEMP/integration-npm-audit.json"
+      - name: Install Chromium
+        working-directory: web/frontend
+        run: npx playwright install --with-deps chromium
+      - name: Browser regressions without real LLM calls
+        run: |
+          set -euo pipefail
+          python -m uvicorn src.api.app:app --host 127.0.0.1 --port 54321 > "$RUNNER_TEMP/integration-browser-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import time, urllib.request
+          for _ in range(60):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:54321/api/health', timeout=1) as response:
+                      if response.status == 200:
+                          break
+              except OSError:
+                  time.sleep(0.5)
+          else:
+              raise SystemExit('Browser test server did not become healthy')
+          PY
+          npm --prefix web/frontend run test:e2e -- --workers=2 2>&1 | tee "$RUNNER_TEMP/integration-browser-tests.log"
+      - name: Publish tested application files (CI published separately)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          manifest = json.loads((temp / 'integration-manifest.json').read_text())
+          audit = json.loads((temp / 'integration-npm-audit.json').read_text())
+          assert not audit.get('error') and audit['metadata']['vulnerabilities']['total'] == 0
+          for name, entry in manifest.items():
+              assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == entry['sha256'], f'Source mutated during tests: {name}'
+          paths = [name for name in manifest if not name.startswith('.github/')]
+          subprocess.run(['git', 'add', '--', *paths], check=True)
+          staged = subprocess.check_output(['git', 'diff', '--cached', '--name-only', '-z']).decode().strip('\0').split('\0')
+          assert set(staged) == set(paths) and len(paths) == 53
+          PY
+          git diff --cached --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix: preserve editor drafts and harden translation integration boundaries'
+          gh auth setup-git
+          git push origin HEAD:fix/chinese-prompt-quality-v2
+          git rev-parse HEAD | tee "$RUNNER_TEMP/integration-published-commit.txt"
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: integration-round3-verification
+          path: |
+            ${{ runner.temp }}/integration-*.log
+            ${{ runner.temp }}/integration-*.json
+            ${{ runner.temp }}/integration-published-commit.txt
+            /tmp/translation-agent-playwright
+          retention-days: 7
