@@ -7,6 +7,10 @@ from .format_tokens import assign_span_ids
 from .models import Paragraph, ProjectMeta, Section
 
 
+class SectionDataError(ValueError):
+    """An existing section is damaged; refusing partial loads protects user text."""
+
+
 class ProjectRepository:
     """Own project metadata/section persistence and progress recomputation."""
 
@@ -74,6 +78,12 @@ class ProjectRepository:
         *,
         grouped_blocks: list[list[Paragraph]],
     ) -> None:
+        # Assignment to existing Pydantic objects is not automatically validated.
+        # Check the complete candidate before touching any of the three files.
+        section = Section.model_validate(section.model_dump(mode="json"))
+        ids = [paragraph.id for paragraph in section.paragraphs]
+        if any(not key.strip() for key in ids) or len(set(ids)) != len(ids):
+            raise SectionDataError("Section paragraph identities are blank or duplicated")
         section_dir = self._resolve_section_dir(project_id, section.section_id)
         if section_dir is None:
             raise ValueError(f"Invalid section_id: {section.section_id}")
@@ -92,13 +102,8 @@ class ProjectRepository:
             trans_lines.append("")
         self._write_text(section_dir / "translation.md", "\n".join(trans_lines))
 
-        payload = {
-            "section_id": section.section_id,
-            "title": section.title,
-            "title_translation": section.title_translation,
-            "paragraphs": [paragraph.model_dump(mode="json") for paragraph in section.paragraphs],
-        }
-        self._write_json(section_dir / "meta.json", payload)
+        # Persist all section-level provenance, including synthetic/title_source.
+        self._write_json(section_dir / "meta.json", section.model_dump(mode="json"))
 
     def load_section(self, project_id: str, section_id: str) -> Optional[Section]:
         section_dir = self._resolve_section_dir(project_id, section_id)
@@ -106,50 +111,46 @@ class ProjectRepository:
             return None
         meta_path = section_dir / "meta.json"
         if not meta_path.exists():
+            if section_dir.exists():
+                raise SectionDataError(f"Section {section_id!r} has no metadata; restore it before editing/exporting")
             return None
 
         try:
             data = self._read_json(meta_path)
-            paragraphs: list[Paragraph] = []
-            for paragraph_data in data.get("paragraphs", []):
-                try:
-                    paragraph = Paragraph(**paragraph_data)
-                    if paragraph.inline_elements and not paragraph.expected_tokens:
-                        paragraph.expected_tokens = [
-                            element.span_id
-                            for element in assign_span_ids(paragraph.inline_elements)
-                            if element.span_id
-                        ]
-                    if paragraph.inline_elements and not paragraph.parent_inline_elements:
-                        paragraph.parent_inline_elements = assign_span_ids(paragraph.inline_elements)
-                    if paragraph.parent_block_id is None:
-                        paragraph.parent_block_id = paragraph.id
-                    if paragraph.parent_block_index is None:
-                        paragraph.parent_block_index = paragraph.index
-                    if paragraph.parent_block_type is None:
-                        paragraph.parent_block_type = paragraph.element_type
-                    if paragraph.parent_block_plain_text is None:
-                        paragraph.parent_block_plain_text = paragraph.source
-                    if paragraph.parent_block_markdown is None:
-                        paragraph.parent_block_markdown = self._render_source_block_markdown([paragraph])
-                    if paragraph.segment_end is None:
-                        paragraph.segment_end = paragraph.segment_start + len(paragraph.source)
-                    paragraphs.append(paragraph)
-                except (TypeError, ValueError):
-                    continue
-
-            if not data.get("section_id") or not data.get("title"):
-                return None
-
-            return Section(
-                section_id=data["section_id"],
-                title=data["title"],
-                title_translation=data.get("title_translation"),
-                paragraphs=paragraphs,
-            )
-        except (json.JSONDecodeError, KeyError, TypeError, IOError) as error:
-            self._logger.warning("Failed to load section %s: %s", section_id, error)
-            return None
+            if not isinstance(data, dict) or not isinstance(data.get("paragraphs"), list):
+                raise ValueError("paragraphs must be an array")
+            if data.get("section_id") != section_id:
+                raise ValueError("stored section identity differs from its directory")
+            section = Section.model_validate(data)
+            ids = [p.id for p in section.paragraphs]
+            if any(not key.strip() for key in ids) or len(set(ids)) != len(ids):
+                raise ValueError("paragraph identities are blank or duplicated")
+            # Enrich legacy fields only after validating the ENTIRE chapter.
+            # A single invalid paragraph must never disappear on the next save.
+            for paragraph in section.paragraphs:
+                if paragraph.inline_elements and not paragraph.expected_tokens:
+                    paragraph.expected_tokens = [
+                        element.span_id for element in assign_span_ids(paragraph.inline_elements)
+                        if element.span_id
+                    ]
+                if paragraph.inline_elements and not paragraph.parent_inline_elements:
+                    paragraph.parent_inline_elements = assign_span_ids(paragraph.inline_elements)
+                if paragraph.parent_block_id is None:
+                    paragraph.parent_block_id = paragraph.id
+                if paragraph.parent_block_index is None:
+                    paragraph.parent_block_index = paragraph.index
+                if paragraph.parent_block_type is None:
+                    paragraph.parent_block_type = paragraph.element_type
+                if paragraph.parent_block_plain_text is None:
+                    paragraph.parent_block_plain_text = paragraph.source
+                if paragraph.parent_block_markdown is None:
+                    paragraph.parent_block_markdown = self._render_source_block_markdown([paragraph])
+                if paragraph.segment_end is None:
+                    paragraph.segment_end = paragraph.segment_start + len(paragraph.source)
+            return section
+        except (ValueError, KeyError, TypeError, OSError) as error:
+            self._logger.warning("Failed to load complete section %s: %s", section_id, error)
+            raise SectionDataError(f"Section {section_id!r} is invalid; no partial content was loaded") from error
 
     def get_sections(self, project_id: str) -> list[Section]:
         sections_dir = self._project_dir(project_id) / "sections"

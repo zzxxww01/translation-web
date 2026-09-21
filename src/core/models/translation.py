@@ -132,7 +132,7 @@ class Paragraph(BaseModel):
             candidates = [item for item in candidates if self._has_text(item.text)]
         if not candidates:
             return None
-        return max(candidates, key=lambda item: item.created_at)
+        return max(candidates, key=lambda item: item.created_at.timestamp())
 
     def latest_translation_text(self, non_empty: bool = False) -> Optional[str]:
         """Return the most recent translation text, if any."""

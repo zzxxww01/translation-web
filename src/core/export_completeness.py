@@ -14,6 +14,32 @@ from .title_validation import is_protected_name
 _CJK = re.compile(r"[\u3400-\u9fff\U00020000-\U0002ffff]")
 
 
+# Conservative fallback for unmarked contributor credits. Structured metadata
+# already uses paragraph.is_metadata below. Do not use MetadataParser's loose
+# name heuristic here: title-cased prose (e.g. "System Failure") also matches it.
+# Keep identities scoped to their affiliation rather than exempting arbitrary
+# "label: English text" or treating any short English phrase as a person's name.
+_ATTRIBUTION_NAMES = {
+    "RedHat/llm-d": frozenset({"Michael Goin", "Robert Shaw", "Tyler Michael Smith"}),
+    "LMCache/TensorMesh": frozenset({"Samuel Shen"}),
+    "Weka": frozenset({"Callan Fox", "Val Bercovici"}),
+}
+_AUTHOR_ACCOUNTS = frozenset({"RyanLee@RyanLeeMiniMax"})
+
+
+def _is_author_attribution(source: str) -> bool:
+    """Recognize only complete, known credits, never a narrative suffix."""
+    text = source.strip()
+    if text in _AUTHOR_ACCOUNTS:
+        return True
+    affiliation, separator, names = text.partition(":")
+    allowed_names = _ATTRIBUTION_NAMES.get(affiliation)
+    return bool(
+        separator and allowed_names
+        and all(name.strip() in allowed_names for name in names.split(","))
+    )
+
+
 def _visible_text(text: str) -> str:
     text = re.sub(r"!\[[^\]]*\]\([^)]*\)", "", text)
     text = re.sub(r"\[([^\]]+)\]\([^)]*\)", r"\1", text)
@@ -61,7 +87,12 @@ def build_translation_completeness(
             items.append({**location, "kind": "section_title", "reason": reason,
                           "source_preview": section.title[:160]})
         for paragraph in section.paragraphs:
-            if paragraph.is_metadata or paragraph.element_type in {ElementType.IMAGE, ElementType.CODE}:
+            # Credits/dates may intentionally stay English, but translated
+            # metadata (subtitles and source captions) is still part of the output.
+            preserve_metadata = paragraph.is_metadata and paragraph.metadata_type not in {"subtitle", "source"}
+            if preserve_metadata or paragraph.element_type in {ElementType.IMAGE, ElementType.CODE}:
+                continue
+            if _is_author_attribution(paragraph.source):
                 continue
             reason = _missing_reason(paragraph.source, paragraph.best_translation_text(fallback_to_source=False))
             if reason:

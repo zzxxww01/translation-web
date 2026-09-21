@@ -180,7 +180,16 @@ class ProjectLifecycleService:
         try:
             if dest_dir.exists():
                 shutil.rmtree(dest_dir)
-            shutil.copytree(assets_dir, dest_dir)
+            source_root = html_source.parent.resolve()
+
+            def ignore_unconfined(directory, names):
+                # copytree follows symlinks by default, bypassing the confined
+                # per-image importer. Never copy links, even inside saved-page assets.
+                return [name for name in names
+                        if (Path(directory) / name).is_symlink()
+                        or not (Path(directory) / name).resolve().is_relative_to(source_root)]
+
+            shutil.copytree(assets_dir, dest_dir, ignore=ignore_unconfined)
         except Exception as error:
             self._logger.warning("Failed to copy assets directory: %s", error)
 
@@ -192,7 +201,8 @@ class ProjectLifecycleService:
             html_source.parent / f"{stem}_images",
         ]
         for candidate in candidates:
-            if candidate.exists() and candidate.is_dir():
+            if (candidate.exists() and candidate.is_dir() and not candidate.is_symlink()
+                    and candidate.resolve().is_relative_to(html_source.parent.resolve())):
                 return candidate
         return None
 

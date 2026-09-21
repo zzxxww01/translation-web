@@ -21,7 +21,7 @@ from ..middleware.rate_limit import limiter
 from ..utils.llm_errors import raise_llm_service_unavailable
 from ..utils.glossary import build_glossary_context
 from ..utils.concurrency import run_blocking, run_llm_blocking
-from ..utils.json_utils import parse_llm_json_response
+from ..utils.json_utils import parse_llm_json_response, parse_title_json_response
 from ..utils.llm_factory import generate_with_fallback
 from .translate_models import (
     POST_OPTIMIZE_OPTIONS,
@@ -309,10 +309,76 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
     )
 
 
+_TITLE_KEYS = (
+    "suspense", "data", "counter_intuitive", "pain_point",
+    "minimal", "contrast", "free_1", "free_2",
+)
+_TITLE_KEY_CONTROLS = re.compile(r"[\x00-\x1f\x7f-\x9f]")
+
+
+def _extract_titles(result: object) -> list[str]:
+    """Keep only known, nonempty string titles; repair control-only key typos."""
+    if not isinstance(result, str):
+        return []
+    data = parse_title_json_response(result)
+    if not isinstance(data, dict):
+        return []
+    normalized: dict[str, str] = {}
+    # Exact keys take precedence over repaired aliases, regardless of JSON order.
+    for repair in (False, True):
+        for key, value in data.items():
+            if not isinstance(key, str) or not isinstance(value, str):
+                continue
+            canonical = _TITLE_KEY_CONTROLS.sub("", key) if repair else key
+            if canonical not in _TITLE_KEYS or canonical in normalized:
+                continue
+            value = re.sub(r"(?<=\d)[\r\n]+(?=\d)", "", value)
+            title = " ".join(value.split())
+            # Relay line wrapping can split Chinese words or decimal numbers.
+            # Remove only those artificial gaps; retain English word separators.
+            title = re.sub(r"(?<=[\u3400-\u9fff]) +(?=[\u3400-\u9fff])", "", title)
+            title = re.sub(r"(?<=\d) +(?=[.,]\d)|(?<=\d[.,]) +(?=\d)", "", title)
+            if title:
+                normalized[canonical] = title
+    return [normalized[key] for key in _TITLE_KEYS if key in normalized]
+
+
+async def _generate_valid_titles(
+    prompt: str, *, model: str | None, attempt_timeout_s: float, deadline: float,
+) -> tuple[list[str], dict[str, object]]:
+    """At most one format correction; transport failures propagate without retry."""
+    for generation in range(2):
+        remaining = deadline - asyncio.get_running_loop().time()
+        if remaining <= 0:
+            raise asyncio.TimeoutError
+        model_metadata: dict[str, object] = {}
+        result = await run_llm_blocking(
+            generate_with_fallback,
+            prompt,
+            task_type="title",
+            timeout=min(attempt_timeout_s, remaining),
+            model=model,
+            result_metadata=model_metadata,
+        )
+        titles = _extract_titles(result)
+        if titles:
+            return titles, model_metadata
+        if generation == 0:
+            # Regenerate from the original task, not untrusted malformed output.
+            prompt += (
+                "\n\n格式纠错：上次输出无法解析为有效标题。请根据以上原文和要求重新生成，"
+                "只输出一个合法 JSON 对象，不要 Markdown 或解释。键名必须为："
+                + ", ".join(_TITLE_KEYS)
+                + "。标题值必须是非空的单行字符串，不要数组、对象、数字或 null；"
+                "键名不要换行，字符串内的特殊字符必须正确 JSON 转义。"
+            )
+    raise ValueError("LLM returned unparseable or empty title JSON after format correction")
+
+
 @router.post("/generate/title", response_model=GenerateTitleResponse)
 @limiter.limit("20/minute")
 async def generate_title(request: Request, body: GenerateTitleRequest):
-    """Generate 6 title options in JSON format."""
+    """Generate up to eight validated title options from JSON."""
     if not body.content.strip():
         raise BadRequestException(detail="Content cannot be empty")
 
@@ -334,35 +400,18 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
     )
 
     attempt_timeout_s, total_timeout_s = _resolve_timeouts("title_generate")
+    # One outer budget covers initial generation, validation and format correction.
+    deadline = asyncio.get_running_loop().time() + total_timeout_s
     try:
-        model_metadata: dict[str, object] = {}
-        result = await asyncio.wait_for(
-            run_llm_blocking(
-                generate_with_fallback,
+        titles, model_metadata = await asyncio.wait_for(
+            _generate_valid_titles(
                 prompt,
-                task_type="title",
-                timeout=attempt_timeout_s,
                 model=body.model,
-                result_metadata=model_metadata,
+                attempt_timeout_s=attempt_timeout_s,
+                deadline=deadline,
             ),
             timeout=total_timeout_s,
         )
-        data = parse_llm_json_response(result)
-        titles = [
-            data.get("suspense", ""),
-            data.get("data", ""),
-            data.get("counter_intuitive", ""),
-            data.get("pain_point", ""),
-            data.get("minimal", ""),
-            data.get("contrast", ""),
-            data.get("free_1", ""),
-            data.get("free_2", ""),
-        ]
-        titles = [title for title in titles if title]
-        if not titles:
-            # LLM 输出被截断或不可解析时 parse_llm_json_response 返回 {}，
-            # 这里显式失败，交给下面的 except 统一转成 503，避免 200 返回空标题。
-            raise ValueError("LLM returned unparseable or empty title JSON")
         return GenerateTitleResponse(
             title="\n".join(titles),
             model_used=model_metadata.get("model_used"),

@@ -10,14 +10,8 @@ from typing import Any
 class PromptContractError(ValueError):
     pass
 
-def parse_json(response: str) -> Any:
-    if not isinstance(response, str) or not response.strip():
-        raise PromptContractError("Empty model response")
-    text = response.strip()
-    if text.startswith("```"):
-        lines = text.splitlines()
-        if lines and lines[-1].strip() == "```":
-            text = "\n".join(lines[1:-1]).strip()
+def json_decoder(*, strict: bool = True) -> json.JSONDecoder:
+    """Shared finite-number and unique-key checks for all JSON entry points."""
     # Duplicate object keys can hide duplicate paragraph IDs; never silently overwrite.
     def unique_pairs(pairs):
         obj = {}
@@ -33,7 +27,18 @@ def parse_json(response: str) -> Any:
         if not math.isfinite(parsed):
             raise PromptContractError("Non-finite JSON number")
         return parsed
-    decoder = json.JSONDecoder(object_pairs_hook=unique_pairs, parse_constant=invalid_constant, parse_float=finite_float)
+    return json.JSONDecoder(strict=strict, object_pairs_hook=unique_pairs, parse_constant=invalid_constant, parse_float=finite_float)
+
+def parse_json(response: str) -> Any:
+    if not isinstance(response, str) or not response.strip():
+        raise PromptContractError("Empty model response")
+    text = response.strip()
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if len(lines) < 3 or lines[0].strip().lower() not in {"```", "```json"} or lines[-1].strip() != "```":
+            raise PromptContractError("Incomplete JSON code fence")
+        text = "\n".join(lines[1:-1]).strip()
+    decoder = json_decoder()
     try:
         return decoder.decode(text)
     except json.JSONDecodeError:
@@ -42,8 +47,21 @@ def parse_json(response: str) -> Any:
         if start:
             try:
                 obj, end = decoder.raw_decode(text, start.start())
-                if not re.search(r"[\[{]", text[end:]):
-                    return obj
+                tail = text[end:].strip()
+                # Never salvage a prefix of malformed/truncated JSON. Benign
+                # explanatory prose remains compatible with legacy providers.
+                if re.search(r"[{}\[\]`]", tail) or tail.startswith((",", ":", '"', "\\")):
+                    raise PromptContractError("Unexpected JSON delimiters after response")
+                if "```" in text[:start.start()]:
+                    raise PromptContractError("Incomplete JSON code fence")
+                if tail:
+                    try:
+                        decoder.raw_decode(tail)
+                    except json.JSONDecodeError:
+                        pass
+                    else:
+                        raise PromptContractError("Multiple JSON values in response")
+                return obj
             except json.JSONDecodeError:
                 pass
         raise PromptContractError("Response does not contain a complete JSON value") from None
