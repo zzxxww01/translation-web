@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import asyncio
-import functools
 import os
 from concurrent.futures import ThreadPoolExecutor
 from contextvars import copy_context
 from threading import BoundedSemaphore, Event
 
 from src.llm.errors import LLMCapacityError
+from src.llm.execution_context import cancellation_scope
 from typing import Any, Callable, TypeVar
 
 from starlette.concurrency import run_in_threadpool
@@ -71,7 +71,10 @@ async def run_llm_blocking(
         try:
             # A cancelled queued call must not incur a paid model request later.
             if not abandoned.is_set():
-                return context.run(functools.partial(func, *args, **kwargs))
+                def execute():
+                    with cancellation_scope(abandoned):
+                        return func(*args, **kwargs)
+                return context.run(execute)
             return None
         finally:
             # Cancellation of the waiter does NOT mean the thread has finished.

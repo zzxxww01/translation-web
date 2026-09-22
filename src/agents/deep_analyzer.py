@@ -261,7 +261,7 @@ class DeepAnalyzer:
                         timeout=timeout
                     )
 
-                    if cached_verified_terms is None:
+                    if cached_verified_terms is None and high_freq_candidates:
                         future_terms = _submit_with_current_context(
                             executor,
                             self.llm.verify_high_frequency_terms,

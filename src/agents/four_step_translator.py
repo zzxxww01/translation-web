@@ -76,6 +76,7 @@ class FourStepTranslator:
         term_injection_service: Optional["TermInjectionService"] = None,
         term_validation_service: Optional["TermValidationService"] = None,
         get_provider_for_phase: Optional[Callable[[str], LLMProvider]] = None,
+        batch_source_char_limit: int = 16000,
     ):
         """
         初始化四步法翻译器
@@ -96,7 +97,11 @@ class FourStepTranslator:
         self.llm = llm_provider
         self.context_manager = context_manager
         self.quality_gate = quality_gate or QualityGate(mode="standard")
+        for name, value in (("paragraph_threshold", paragraph_threshold), ("batch_source_char_limit", batch_source_char_limit)):
+            if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+                raise ValueError(f"{name} must be a positive integer")
         self.paragraph_threshold = paragraph_threshold
+        self.batch_source_char_limit = batch_source_char_limit
         self.max_retries = max_retries
         self.memory_service = memory_service
         self.style_polish_threshold = style_polish_threshold
@@ -625,7 +630,8 @@ class FourStepTranslator:
                     "Batch translation missing/empty paragraph %s, falling back to single",
                     para.id,
                 )
-                global_index = batch_index * self.paragraph_threshold + paragraphs.index(para)
+                # Batches are size-aware; a batch number is no longer a paragraph offset.
+                global_index = next(i for i, item in enumerate(section.paragraphs) if item.id == para.id)
                 ctx = self.context_manager.build_context(section, global_index, all_sections)
                 ctx.section_understanding = understanding
                 # 漏段回退必须沿用本批的 provider，否则会绕开 get_provider_for_phase
@@ -1185,10 +1191,21 @@ class FourStepTranslator:
     # ============ Helper Methods ============
 
     def _split_into_batches(self, paragraphs: List[Paragraph]) -> List[List[Paragraph]]:
-        """将段落列表分批"""
-        batches = []
-        for i in range(0, len(paragraphs), self.paragraph_threshold):
-            batches.append(paragraphs[i:i + self.paragraph_threshold])
+        """Bound batch source size as well as count, without truncating any ID.
+
+        Character count is a packing heuristic, NOT a tokenizer/context-window
+        guarantee. A single oversized paragraph remains intact in its own batch.
+        """
+        batches, current, chars = [], [], 0
+        for paragraph in paragraphs:
+            size = len(paragraph.source)
+            if current and (len(current) >= self.paragraph_threshold or chars + size > self.batch_source_char_limit):
+                batches.append(current)
+                current, chars = [], 0
+            current.append(paragraph)
+            chars += size
+        if current:
+            batches.append(current)
         return batches
 
     def _build_section_source_text(self, section: Section) -> str:

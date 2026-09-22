@@ -444,11 +444,8 @@ class LLMProvider(ABC):
             pairs_text=pairs_text,
             guidelines_text=guidelines_text,
             terms_text=terms_text,
+            context_block="\n\n".join(self._build_reflection_context_blocks(context or {})),
         )
-
-        context_blocks = self._build_reflection_context_blocks(context or {})
-        if context_blocks:
-            return "\n\n".join(context_blocks + [base_prompt])
         return base_prompt
 
     def _build_refine_and_polish_prompt(
@@ -468,12 +465,7 @@ class LLMProvider(ABC):
             identity = f" ID={pair['paragraph_id']}" if pair.get("paragraph_id") else ""
             pair_text = f"[段落 {i}{identity}]\n原文：{src}\n当前译文：{trans}"
 
-            if issues:
-                issues_text = "\n".join([
-                    f"  - [{issue.get('type', 'unknown')}] {issue.get('description', '')}"
-                    for issue in issues
-                ])
-                pair_text += f"\n问题：\n{issues_text}"
+            # Each indexed issue is included once in issues_summary below.
 
             pairs_text_list.append(pair_text)
 
@@ -495,11 +487,8 @@ class LLMProvider(ABC):
             conciseness_score=float(reflection_scores.get("conciseness", 0.0) or 0.0),
             consistency_score=float(reflection_scores.get("consistency", 0.0) or 0.0),
             logic_score=float(reflection_scores.get("logic", 0.0) or 0.0),
+            context_block="\n\n".join(self._build_refine_context_blocks(context or {})),
         )
-
-        context_blocks = self._build_refine_context_blocks(context or {})
-        if context_blocks:
-            return "\n\n".join(context_blocks + [base_prompt])
         return base_prompt
 
     def _build_refine_issue_summary(self, pairs: List[Dict[str, Any]]) -> str:

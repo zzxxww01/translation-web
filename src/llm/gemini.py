@@ -11,7 +11,8 @@ import json
 import time
 import importlib
 import warnings
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
+from contextvars import copy_context
 from dataclasses import dataclass
 import requests
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
@@ -31,6 +32,9 @@ from .base import LLMProvider
 from .output_validation import ensure_complete_generation, gemini_response_text
 from .errors import (
     LLMConnectionError,
+    LLMConfigurationError,
+    LLMDeadlineExceededError,
+    LLMRequestCancelledError,
     LLMProxyConfigurationError,
     LLMTimeoutError,
     LLMUpstreamUnavailableError,
@@ -41,6 +45,9 @@ from .config_loader import get_config_loader
 from .network_policy import build_network_policy
 from .network_policy import RuntimeNetworkPolicy
 from .usage_metrics import llm_usage_metrics
+from .token_usage import gemini_usage, TokenUsage
+from .execution_context import generation_budget, remaining_timeout, bounded_sleep, output_limit, check_active
+from .rate_limiter import transport_slot
 
 
 logger = logging.getLogger(__name__)
@@ -199,6 +206,9 @@ class GeminiGenerationResult:
     input_tokens: Optional[int] = None
     output_tokens: Optional[int] = None
     total_tokens: Optional[int] = None
+    cached_input_tokens: Optional[int] = None
+    reasoning_tokens: Optional[int] = None
+    billable_output_tokens: Optional[int] = None
 
 
 class GeminiProvider(LLMProvider):
@@ -453,8 +463,8 @@ class GeminiProvider(LLMProvider):
             yield
             return
 
-        previous = {key: os.environ.get(key) for key in overrides}
         with self._proxy_env_lock:
+            previous = {key: os.environ.get(key) for key in overrides}
             try:
                 for key, value in overrides.items():
                     os.environ[key] = value
@@ -575,7 +585,8 @@ class GeminiProvider(LLMProvider):
     def _generate_with_timeout_fn(self, fn, timeout: int | None):
         if not timeout or timeout <= 0:
             return fn()
-        future = self._timeout_executor.submit(fn)
+        context = copy_context()
+        future = self._timeout_executor.submit(context.run, fn)
         try:
             return future.result(timeout=timeout)
         except FutureTimeoutError:
@@ -598,6 +609,8 @@ class GeminiProvider(LLMProvider):
         此前 SDK / REST 生成配置都未传 max_output_tokens，输出依赖供应商默认值，
         长 section / 长 JSON 可能被静默截断（再喂给 _parse_json_response 退化为 {}）。
         """
+        if output_limit() is not None:
+            return output_limit()
         config = MODEL_CONFIG.get(self.model_type)
         if config and isinstance(config.get("max_output_tokens"), int):
             return config["max_output_tokens"]
@@ -632,7 +645,10 @@ class GeminiProvider(LLMProvider):
             connect_timeout = min(max(float(timeout) * 0.2, 5.0), 15.0)
             request_timeout = (connect_timeout, float(timeout))
 
-        with self._build_rest_session() as session:
+        with transport_slot(), self._build_rest_session() as session:
+            budget = remaining_timeout(timeout)
+            if budget is not None:
+                request_timeout = (min(budget, 15.0), budget)
             response = session.post(
                 url,
                 json=payload,
@@ -643,26 +659,13 @@ class GeminiProvider(LLMProvider):
         if response.status_code >= 400:
             self._raise_rest_http_error(response, model)
         data = response.json()
-        text = gemini_response_text(data)
-        usage = data.get("usageMetadata", {})
-        return GeminiGenerationResult(
-            text=text,
-            input_tokens=self._usage_value(
-                usage,
-                "prompt_token_count",
-                "promptTokenCount",
-            ),
-            output_tokens=self._usage_value(
-                usage,
-                "candidates_token_count",
-                "candidatesTokenCount",
-            ),
-            total_tokens=self._usage_value(
-                usage,
-                "total_token_count",
-                "totalTokenCount",
-            ),
-        )
+        usage = gemini_usage(data.get("usageMetadata"))
+        try:
+            text = gemini_response_text(data)
+        except Exception as exc:
+            exc._llm_usage = usage
+            raise
+        return GeminiGenerationResult(text=text, **usage.as_metrics())
 
     @staticmethod
     def _usage_value(usage: Any, *names: str) -> Optional[int]:
@@ -863,102 +866,57 @@ class GeminiProvider(LLMProvider):
             return min(self.retry_delay * (2**retry_index), 16.0)
         return max(self.retry_delay, 0.2)
 
-    def _generate_once(
-        self,
-        prompt: str,
-        attempt: GeminiAttempt,
-        temperature: float,
-        response_mime_type: Optional[str],
-        timeout: int | None,
-    ) -> GeminiGenerationResult:
+    def _generate_once(self, prompt, attempt, temperature, response_mime_type, timeout):
         if self._use_rest_transport():
-            return self._generate_with_rest(
-                prompt=prompt,
-                api_key=attempt.api_key,
-                timeout=timeout,
-                temperature=temperature,
-                response_mime_type=response_mime_type,
-                model_override=attempt.model_name,
-            )
+            return self._generate_with_timeout_fn(lambda: self._generate_with_rest(
+                prompt=prompt, api_key=attempt.api_key, timeout=timeout,
+                temperature=temperature, response_mime_type=response_mime_type,
+                model_override=attempt.model_name), timeout)
 
         client = self._get_client(attempt.api_key)
 
         def _call():
-            config = {
-                "temperature": temperature,
-                "max_output_tokens": self._resolve_max_output_tokens(),
-                "http_options": {"retry_options": {"attempts": 1}},
-            }
-            if response_mime_type:
-                config["response_mime_type"] = response_mime_type
-            if timeout and timeout > 0 and not GeminiProvider._http_options_unsupported:
-                # 把超时下推到传输层：google-genai 在 HttpOptions.timeout 为空时会显式
-                # 把 timeout=None 交给 httpx（等于禁用超时），挂死的请求永远不返回，
-                # _timeout_executor 的 worker 也就永久泄漏（审计 BE8）。timeout 逐调用
-                # 可变而 client 按 api_key 缓存，因此只能放在 per-request config 里。
-                # HttpOptions.timeout 单位是毫秒；取 90% 让传输层先于 future 门限醒来，
-                # 否则 worker 必然仍在跑，泄漏计数会次次误报而失去信噪比。
-                config["http_options"]["timeout"] = int(timeout * _TRANSPORT_TIMEOUT_RATIO * 1000)
-            with self._temporary_proxy_env():
-                try:
-                    resp = client.models.generate_content(
-                        model=attempt.model_name,
-                        contents=prompt,
-                        config=config,
-                    )
-                except (TypeError, ValueError) as exc:
-                    # 旧版 SDK 不认 request 级 http_options（pydantic 校验失败会抛
-                    # ValidationError，它是 ValueError 子类）：退回不带传输层超时的调用。
-                    if "http_options" not in config or "http_options" not in str(exc):
+            with transport_slot():
+                budget = remaining_timeout(timeout)
+                config = {
+                    "temperature": temperature,
+                    "max_output_tokens": self._resolve_max_output_tokens(),
+                    "http_options": {"retry_options": {"attempts": 1}},
+                }
+                if response_mime_type:
+                    config["response_mime_type"] = response_mime_type
+                if budget is not None:
+                    config["http_options"]["timeout"] = max(1, int(budget * _TRANSPORT_TIMEOUT_RATIO * 1000))
+                # Configured clients already have explicit per-client proxy and
+                # trust_env settings. Do not serialize network IO under an env lock.
+                proxy_scope = nullcontext() if getattr(self, "network_policy", None) is not None else self._temporary_proxy_env()
+                with proxy_scope:
+                    try:
+                        resp = client.models.generate_content(model=attempt.model_name, contents=prompt, config=config)
+                    except (TypeError, ValueError) as exc:
+                        if "http_options" in str(exc):
+                            raise LLMConfigurationError("Installed Gemini SDK must support request timeout and retry_options") from exc
                         raise
-                    # 记住这套 SDK 不支持，避免后续每个请求都白跑一轮往返。
-                    GeminiProvider._http_options_unsupported = True
-                    logger.warning(
-                        "[Gemini] installed google-genai rejects per-request http_options; "
-                        "falling back without transport timeout for the rest of this process. err=%s",
-                        exc,
-                    )
-                    config.pop("http_options", None)
-                    resp = client.models.generate_content(
-                        model=attempt.model_name,
-                        contents=prompt,
-                        config=config,
-                    )
-            candidates = getattr(resp, "candidates", None)
-            if candidates:
-                ensure_complete_generation(getattr(candidates[0], "finish_reason", None))
-            text = resp.text
-            if text is None:
-                # 候选被安全策略拦截或无有效候选时 resp.text 为 None。抛可重试的
-                # typed 错误以触发 key/model 轮换,避免上层对 None 调用 .strip()
-                # 抛出令人误解的裸 AttributeError(审计 C2)。
-                feedback = getattr(resp, "prompt_feedback", None)
-                block_reason = getattr(feedback, "block_reason", None) if feedback else None
-                raise LLMUpstreamUnavailableError(
-                    f"Gemini returned no text (block_reason={block_reason})"
-                )
-            usage = getattr(resp, "usage_metadata", None)
-            return GeminiGenerationResult(
-                text=text,
-                input_tokens=self._usage_value(
-                    usage,
-                    "prompt_token_count",
-                    "promptTokenCount",
-                ),
-                output_tokens=self._usage_value(
-                    usage,
-                    "candidates_token_count",
-                    "candidatesTokenCount",
-                ),
-                total_tokens=self._usage_value(
-                    usage,
-                    "total_token_count",
-                    "totalTokenCount",
-                ),
-            )
+                usage = gemini_usage(getattr(resp, "usage_metadata", None))
+                try:
+                    candidates = getattr(resp, "candidates", None)
+                    if candidates:
+                        ensure_complete_generation(getattr(candidates[0], "finish_reason", None))
+                    text = resp.text
+                    if text is None:
+                        feedback = getattr(resp, "prompt_feedback", None)
+                        block_reason = getattr(feedback, "block_reason", None) if feedback else None
+                        if block_reason:
+                            raise LLMConfigurationError("Gemini blocked this generation")
+                        raise LLMUpstreamUnavailableError("Gemini returned no text")
+                except Exception as exc:
+                    exc._llm_usage = usage
+                    raise
+                return GeminiGenerationResult(text=text, **usage.as_metrics())
 
         return self._generate_with_timeout_fn(_call, timeout)
 
+    @generation_budget
     def generate(
         self,
         prompt: str,
@@ -985,192 +943,58 @@ class GeminiProvider(LLMProvider):
         attempt_plan = self._build_attempt_plan(primary_model)
         max_attempts = max(max_retries or self.max_attempts, len(attempt_plan))
         if _kwargs.get("_single_attempt"):
-            # ProviderAdapter owns key/model rotation and the total attempt budget.
-            attempt_plan = attempt_plan[:1]
-            max_attempts = 1
-        start_time = time.monotonic()
+            attempt_plan, max_attempts = attempt_plan[:1], 1
         effective_timeout = timeout if timeout is not None else self.request_timeout
-
-        logger.info(
-            "[Gemini] generate start len=%s model=%s backup_model=%s keys=%s timeout=%ss transport=%s",
-            len(prompt),
-            primary_model,
-            self.backup_model or "-",
-            len(self.api_keys),
-            effective_timeout,
-            "rest" if self._use_rest_transport() else "sdk",
-        )
-
-        # 贯穿整个重试循环单调递增的退避计数器，使 2**n 指数退避在 key/model 轮换
-        # 期间也真实增长（此前只在最终路由分支递增，轮换期间恒为 0）。
-        backoff_index = 0
-        last_exception: Exception | None = None
         response_mime_type = "application/json" if response_format == "json" else None
-
+        backoff_index = 0
         for attempt_index in range(max_attempts):
+            check_active()
             plan_index = min(attempt_index, len(attempt_plan) - 1)
             attempt = attempt_plan[plan_index]
-            input_tokens = output_tokens = total_tokens = None
+            started = time.monotonic()
+            usage = TokenUsage()
             try:
-                generation = self._generate_once(
-                    prompt=prompt,
-                    attempt=attempt,
-                    temperature=temperature,
+                generation = self._generate_once(prompt=prompt, attempt=attempt,
+                    temperature=temperature if temperature is not None else 0.7,
                     response_mime_type=response_mime_type,
-                    timeout=effective_timeout,
-                )
-                duration = time.monotonic() - start_time
+                    timeout=remaining_timeout(effective_timeout))
                 if isinstance(generation, GeminiGenerationResult):
-                    stripped_text = (generation.text or "").strip()
-                    input_tokens = generation.input_tokens
-                    output_tokens = generation.output_tokens
-                    total_tokens = generation.total_tokens
+                    text = (generation.text or "").strip()
+                    usage = TokenUsage(**{key: getattr(generation, key) for key in TokenUsage.__dataclass_fields__})
                 else:
-                    # Keep compatibility with provider subclasses and tests
-                    # written against the former private string return type.
-                    stripped_text = str(generation or "").strip()
-                    input_tokens = None
-                    output_tokens = None
-                    total_tokens = None
-                if not stripped_text:
+                    text = str(generation or "").strip()
+                if not text:
                     raise LLMUpstreamUnavailableError("Gemini returned empty content")
-                call_number = llm_usage_metrics.record_call(
-                    provider="gemini",
-                    model=attempt.model_name,
-                    duration_seconds=duration,
-                    success=True,
-                    input_chars=len(prompt),
-                    output_chars=len(stripped_text),
-                    input_tokens=input_tokens,
-                    output_tokens=output_tokens,
-                    total_tokens=total_tokens,
-                    attempts=attempt_index + 1,
-                )
-                logger.info(
-                    "[API #%d] model=%s duration=%.1fs (key=%s attempt=%s/%s)",
-                    call_number,
-                    attempt.model_name,
-                    duration,
-                    attempt.key_role,
-                    attempt_index + 1,
-                    max_attempts,
-                )
-                return stripped_text
+                llm_usage_metrics.record_call(provider="gemini", model=attempt.model_name,
+                    duration_seconds=time.monotonic() - started, success=True,
+                    input_chars=len(prompt), output_chars=len(text), attempts=1,
+                    **usage.as_metrics())
+                return text
             except Exception as exc:
-                exc = self._normalize_generation_exception(
-                    exc, timeout=effective_timeout
-                )
-
-                error_text = self._error_to_text(exc)
-                last_exception = exc
-
+                usage = getattr(exc, "_llm_usage", usage)
+                error = self._normalize_generation_exception(exc, timeout=effective_timeout)
+                # Record EACH failed transport attempt, including known usage on
+                # truncated/refused outputs. Do not hide attempts in success totals.
+                llm_usage_metrics.record_call(provider="gemini", model=attempt.model_name,
+                    duration_seconds=time.monotonic() - started, success=False,
+                    input_chars=len(prompt), attempts=1, error_type=type(error).__name__,
+                    **usage.as_metrics())
+                if isinstance(error, (LLMDeadlineExceededError, LLMRequestCancelledError, LLMConfigurationError)):
+                    raise error
+                error_text = self._error_to_text(error)
                 if self._is_non_retryable_error(error_text):
-                    duration = time.monotonic() - start_time
-                    llm_usage_metrics.record_call(
-                        provider="gemini",
-                        model=attempt.model_name,
-                        duration_seconds=duration,
-                        success=False,
-                        input_chars=len(prompt),
-                        attempts=attempt_index + 1,
-                        error_type=type(exc).__name__,
-                    )
-                    logger.error(
-                        "[Gemini] generate aborted in %.2fs on non-retryable error (model=%s key=%s). err=%s",
-                        duration,
-                        attempt.model_name,
-                        attempt.key_role,
-                        error_text,
-                    )
-                    # 只有 provider 无关的失败才向 fallback 层宣告"整盘别试了"；
-                    # 上下文超长这类换个更大窗口的模型/provider 仍可能成功，
-                    # 抛原异常让适配器继续走它的 attempt plan。
                     if self._is_provider_agnostic_failure(error_text):
-                        raise self._as_non_retryable(exc)
-                    raise
-
-                has_fresh_attempt = plan_index < len(attempt_plan) - 1
-                # auth 错误不进退避循环，但仍允许换一个 key/model 再试一次（另一个 key 可能有效）
-                if has_fresh_attempt and (
-                    self._is_retryable_error(error_text)
-                    or self._is_auth_error(error_text)
-                ):
-                    # 限流时换 key 前也要退避：否则会瞬间把所有 key 逐个撞限流、全部烧光，
-                    # 等真正进入退避路径时已无可用 key。auth/其它暂时性错误仍快速轮换。
-                    if self._is_rate_limited(error_text):
-                        retry_delay = self._retry_delay_for_error(
-                            error_text, backoff_index
-                        )
-                        backoff_index += 1
-                        logger.warning(
-                            "[Gemini] rate limited on model=%s key=%s; backing off %.1fs before switching key (%s/%s). err=%s",
-                            attempt.model_name,
-                            attempt.key_role,
-                            retry_delay,
-                            attempt_index + 1,
-                            max_attempts,
-                            error_text,
-                        )
-                        time.sleep(retry_delay)
-                    next_attempt = attempt_plan[plan_index + 1]
-                    logger.warning(
-                        "[Gemini] attempt failed on model=%s key=%s; switching to model=%s key=%s (%s/%s). err=%s",
-                        attempt.model_name,
-                        attempt.key_role,
-                        next_attempt.model_name,
-                        next_attempt.key_role,
-                        attempt_index + 1,
-                        max_attempts,
-                        error_text,
-                    )
-                    continue
-
-                if attempt_index < max_attempts - 1 and self._is_retryable_error(
-                    error_text
-                ):
-                    retry_delay = self._retry_delay_for_error(
-                        error_text, backoff_index
-                    )
+                        raise self._as_non_retryable(error)
+                    raise error
+                fresh = plan_index < len(attempt_plan) - 1
+                retryable = self._is_retryable_error(error_text) or (fresh and self._is_auth_error(error_text))
+                if attempt_index >= max_attempts - 1 or not retryable:
+                    raise error
+                if self._is_rate_limited(error_text) or not fresh:
+                    delay = self._retry_delay_for_error(error_text, backoff_index)
                     backoff_index += 1
-                    logger.warning(
-                        "[Gemini] request failed on final route model=%s key=%s; retry in %.1fs (%s/%s). err=%s",
-                        attempt.model_name,
-                        attempt.key_role,
-                        retry_delay,
-                        attempt_index + 1,
-                        max_attempts,
-                        error_text,
-                    )
-                    time.sleep(retry_delay)
-                    continue
-
-                duration = time.monotonic() - start_time
-                llm_usage_metrics.record_call(
-                    provider="gemini",
-                    model=attempt.model_name,
-                    duration_seconds=duration,
-                    success=False,
-                    input_chars=len(prompt),
-                    attempts=attempt_index + 1,
-                    error_type=type(exc).__name__,
-                    input_tokens=input_tokens,
-                    output_tokens=output_tokens,
-                    total_tokens=total_tokens,
-                )
-                logger.error(
-                    "[Gemini] generate failed in %.2fs after %s attempts (model=%s key=%s). err=%s",
-                    duration,
-                    attempt_index + 1,
-                    attempt.model_name,
-                    attempt.key_role,
-                    error_text,
-                )
-                raise exc
-
-        if last_exception is not None:
-            raise last_exception
-
-        raise RuntimeError("Gemini generate failed without an exception.")
+                    bounded_sleep(delay)
+        raise RuntimeError("Gemini generation has no usable attempts")
 
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None) -> str:
         """

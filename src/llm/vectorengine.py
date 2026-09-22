@@ -24,6 +24,9 @@ from .errors import (
 )
 from .network_policy import build_network_policy
 from .usage_metrics import llm_usage_metrics
+from .token_usage import openai_usage
+from .execution_context import generation_budget, remaining_timeout, positive_token_limit
+from .rate_limiter import transport_slot
 
 
 logger = logging.getLogger(__name__)
@@ -164,6 +167,7 @@ class VectorEngineProvider(LLMProvider):
             f"[VectorEngine] Initialized with base_url={self.base_url}, default_model={self.default_model}"
         )
 
+    @generation_budget
     def generate(
         self,
         prompt: str,
@@ -198,13 +202,11 @@ class VectorEngineProvider(LLMProvider):
                 success=False,
                 input_chars=len(prompt),
                 error_type=type(error).__name__,
-                input_tokens=getattr(usage, "prompt_tokens", None),
-                output_tokens=getattr(usage, "completion_tokens", None),
-                total_tokens=getattr(usage, "total_tokens", None),
+                **openai_usage(usage).as_metrics(),
             )
 
         temp = temperature if temperature is not None else self.temperature
-        max_tokens = kwargs.get("max_tokens", self.max_tokens)
+        max_tokens = positive_token_limit(kwargs.get("max_tokens", self.max_tokens))
         request_timeout = timeout if timeout is not None else self.timeout
 
         messages = [{"role": "user", "content": prompt}]
@@ -223,13 +225,14 @@ class VectorEngineProvider(LLMProvider):
 
         try:
             logger.info(f"[VectorEngine] Calling model={model_name}, temp={temp}, timeout={request_timeout}")
-            client = self.client
-            if hasattr(self.client, "with_options"):
-                client = self.client.with_options(
-                    timeout=request_timeout,
-                    max_retries=0,
-                )
-            response = client.chat.completions.create(**request_params)
+            with transport_slot():
+                client = self.client
+                if hasattr(self.client, "with_options"):
+                    client = self.client.with_options(
+                        timeout=remaining_timeout(request_timeout),
+                        max_retries=0,
+                    )
+                response = client.chat.completions.create(**request_params)
 
             usage = getattr(response, "usage", None)
             choices = getattr(response, "choices", None)
@@ -250,9 +253,7 @@ class VectorEngineProvider(LLMProvider):
                 success=True,
                 input_chars=len(prompt),
                 output_chars=len(content or ""),
-                input_tokens=input_tokens,
-                output_tokens=output_tokens,
-                total_tokens=total_tokens,
+                **openai_usage(usage).as_metrics(),
             )
 
             logger.info(

@@ -62,6 +62,14 @@ class LLMTimeoutError(LLMTransportError):
     """A request timed out."""
 
 
+class LLMDeadlineExceededError(LLMTimeoutError):
+    """The whole logical generation budget is spent, not another route timeout."""
+
+
+class LLMRequestCancelledError(LLMError):
+    """The request owner abandoned this call; do not send another request."""
+
+
 class LLMUpstreamUnavailableError(LLMTransportError):
     """The upstream service was unavailable."""
 
@@ -117,6 +125,11 @@ def _is_genai_api_error(exc: Exception) -> bool:
 
 def normalize_llm_transport_error(exc: Exception, *, provider_name: str) -> NormalizedLLMError | None:
     """Convert common transport exceptions into typed LLM errors."""
+
+    if isinstance(exc, LLMDeadlineExceededError):
+        return NormalizedLLMError(error=exc, retryable=False)
+    if isinstance(exc, LLMRequestCancelledError):
+        return None
 
     if isinstance(exc, LLMTransportError):
         return NormalizedLLMError(error=exc, retryable=True)
