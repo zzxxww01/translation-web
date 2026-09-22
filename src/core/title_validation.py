@@ -15,6 +15,9 @@ _NAMES = {
     "deepseek", "chatgpt", "github", "hugging face", "semi analysis", "semianalysis",
     "claude", "gemini", "copilot", "bedrock", "azure", "aws", "arm", "rocm", "sglang",
     "tokenomics", "token", "qwen", "kimi", "minimax",
+    # Robotics startups have no established Chinese names; headings keep the
+    # English company name (user-confirmed for the on-device vs datacenter piece).
+    "agility robotics", "verne robotics", "sunday robotics", "weave robotics",
 }
 _IDENTIFIER = re.compile(r"[A-Za-z][A-Za-z0-9._+-]*")
 
