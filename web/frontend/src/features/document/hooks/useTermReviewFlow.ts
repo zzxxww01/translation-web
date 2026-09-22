@@ -7,7 +7,7 @@ import {
 } from '../../confirmation/api/glossaryApi';
 import type { TermReviewDecision, TermReviewPayload } from '../../confirmation/types';
 import { TranslationMethod } from '@/shared/constants';
-import { documentApi, type RetranslateOption } from '../api';
+import { documentApi, type RetranslateOption, type EfficiencyOptions } from '../api';
 
 interface PendingTranslationRequest {
   termReviewJobId: string;
@@ -70,6 +70,7 @@ export function useTermReviewFlow({
       method: TranslationMethod = TranslationMethod.FOUR_STEP,
       model?: string,
       retranslate?: RetranslateOption,
+      efficiency?: EfficiencyOptions,
     ) => {
       if (!currentProjectId) {
         return false;
@@ -92,6 +93,7 @@ export function useTermReviewFlow({
           method,
           model,
           retranslate,
+          efficiency,
         );
         workflowStarted = true;
         if (
@@ -104,7 +106,7 @@ export function useTermReviewFlow({
           const checkpoint = workflow.resume_checkpoint;
           if (checkpoint) {
             toast.success(
-              `已从断点继续：保留 ${checkpoint.translated_paragraphs} 段，只处理剩余 ${checkpoint.remaining_paragraphs} 段`
+              `已从断点继续：保留 ${checkpoint.translated_paragraphs} 段译文，补译 ${checkpoint.remaining_paragraphs} 段，继续 ${checkpoint.pending_quality_paragraphs ?? 0} 段待完成的质量检查`
             );
           } else {
             toast.info('后台已从最近断点继续翻译');

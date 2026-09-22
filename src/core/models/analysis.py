@@ -76,6 +76,7 @@ class ArticleAnalysis(BaseModel):
     """全文深度分析结果（Phase 0 输出）"""
 
     theme: str = ""
+    incomplete_stages: List[str] = Field(default_factory=list)
     key_arguments: List[str] = Field(default_factory=list)
     structure_summary: str = ""
 
@@ -113,6 +114,7 @@ class ReflectionResult(BaseModel):
     """反思结果（四步法 Step 3 输出）"""
 
     overall_score: float = 0.0
+    has_diagnostic_scores: bool = True
 
     # 6 维度评分（方案 C）
     terminology_score: float = 0.0  # 术语一致性
@@ -163,6 +165,8 @@ class SectionTranslationResult(BaseModel):
     # 需要靠这两个字段区分「四步成品」与「未经反思/润色/质量门禁的初译」
     degraded: bool = False
     degraded_reason: str = ""
+    workflow_status: str = "review_pending"
+    budget_exhausted: bool = False
 
 
 class TermUsageTracker(BaseModel):

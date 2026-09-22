@@ -144,6 +144,8 @@ class FourStepTranslator:
     def scan_section_terms(
         self,
         section: Section,
+        existing_terms: Optional[Dict] = None,
+        provider: Optional[LLMProvider] = None,
     ) -> Optional[SectionPrescanResult]:
         """Call the prescan model without mutating shared translation context.
 
@@ -156,17 +158,21 @@ class FourStepTranslator:
         section_content = "\n\n".join([p.source for p in section.paragraphs])
 
         # 获取现有术语表
-        existing_terms = self.context_manager.get_all_terms()
+        if existing_terms is None:
+            existing_terms = self.context_manager.get_all_terms()
 
         # 调用 LLM 预扫描（使用 Flash 模型）
         try:
-            result = self.llm.prescan_section_with_flash(
+            result = (provider or self.llm).prescan_section_with_flash(
                 section_id=section.section_id,
                 section_title=section.title,
                 section_content=section_content,
                 existing_terms=existing_terms
             )
         except Exception as e:
+            from src.llm.business_budget import BusinessBudgetExceeded
+            if isinstance(e, BusinessBudgetExceeded):
+                raise
             # 预扫描失败不阻塞翻译流程
             logger.warning("Section prescan failed: %s", e)
             return None
@@ -323,6 +329,7 @@ class FourStepTranslator:
 
         if (
             self.memory_service
+            and reflection.has_diagnostic_scores
             and reflection.overall_score < 8.0
             and reflection.issues
         ):
@@ -341,12 +348,17 @@ class FourStepTranslator:
 
     def translate_section(self, section: Section, all_sections: List[Section],
                           on_progress: Optional[Callable[[str, int, int], None]] = None,
-                          retry_count: int = 0, project_id: Optional[str] = None) -> SectionTranslationResult:
+                          retry_count: int = 0, project_id: Optional[str] = None,
+                          reuse_existing_drafts: bool = False, reuse_checkpoints: bool = True) -> SectionTranslationResult:
         """Draft, evidence-based targeted revision and fresh review; never chase a score."""
         from copy import deepcopy
         from ..prompts import BUNDLE_VERSION
         from ..prompts.contracts import text_version
         from ..core.models import ReflectionResult
+        from src.llm.business_budget import stage_budget, BusinessBudgetExceeded
+        from src.llm.execution_context import check_active
+        self._reuse_stage_cache = reuse_checkpoints
+        workflow_status = "review_pending"
         session_id = None
         if self.session_service and project_id:
             session_id = self.session_service.create_session(project_id=project_id, section_id=section.section_id, create_snapshot=True).id
@@ -375,15 +387,38 @@ class FourStepTranslator:
             progress("初译", 1)
             draft_provider = self.get_provider_for_phase("phase1_draft") if self.get_provider_for_phase else self.llm
             outputs = []
-            for index, batch in enumerate(self._split_into_batches(section.paragraphs)):
-                outputs.extend(self._translate_batch(section, batch, understanding, all_sections, batch_index=index, provider=draft_provider))
+            with stage_budget("draft"):
+                for index, batch in enumerate(self._split_into_batches(section.paragraphs)):
+                    check_active()
+                    existing = {}
+                    if reuse_existing_drafts:
+                        for para in batch:
+                            if para.has_export_ready_translation():
+                                existing[para.id] = TranslationPayload(
+                                    text=para.best_translation_text(),
+                                    tokenized_text=para.best_tokenized_translation_text(),
+                                    format_issues=list(para.best_format_issues()))
+                    missing = [para for para in batch if para.id not in existing]
+                    generated = self._translate_batch(section, missing, understanding, all_sections,
+                        batch_index=index, provider=draft_provider) if missing else []
+                    if len(generated) != len(missing):
+                        raise ValueError("Draft batch has missing paragraphs")
+                    by_id = {**existing, **dict(zip((p.id for p in missing), generated))}
+                    outputs.extend(by_id[p.id] for p in batch)
+                    for para in batch:
+                        if para.id in existing:
+                            payload = existing[para.id]
+                            self.context_manager.record_translation(section.section_id, para.source,
+                                payload.text, self._extract_terms_used(para.source, payload.text))
             drafts = [item.text for item in outputs]
             draft_outputs = deepcopy(outputs)
             if len(drafts) != len(section.paragraphs) or any(not t.strip() for t in drafts):
                 raise ValueError("Draft has missing or empty paragraphs")
             review_provider = self.get_provider_for_phase("phase2_refine") if self.get_provider_for_phase else self.llm
             progress("反思", 2)
-            reflection = bind(self._step_reflect(section, drafts, understanding, provider=review_provider, all_sections=all_sections), drafts, "draft")
+            with stage_budget("review"):
+                reflection = bind(self._step_reflect(section, drafts, understanding,
+                    provider=review_provider, all_sections=all_sections), drafts, "draft")
             draft_reflection = reflection.model_copy(deep=True)
             # A low score without an actionable finding is not permission to rewrite.
             targets = [issue for issue in reflection.issues
@@ -392,14 +427,19 @@ class FourStepTranslator:
             attempted = bool(targets) and retry_count < self.max_retries
             progress("定点修订" if attempted else "保留当前译文", 3)
             if attempted:
-                candidate = self._step_refine_and_polish(section, outputs, reflection, understanding,
-                    provider=review_provider, issues_filter=targets, polish_all=False, all_sections=all_sections)
+                workflow_status = "revision_pending"
+                with stage_budget("revision"):
+                    candidate = self._step_refine_and_polish(section, outputs, reflection, understanding,
+                        provider=review_provider, issues_filter=targets, polish_all=False, all_sections=all_sections)
                 revised = [item.text for item in candidate]
                 if any(item.format_issues for item in candidate):
                     degraded, reason = True, "Revision rejected: invalid format tokens"
                 elif revised != drafts:
                     progress("复核修改后的译文", 3)
-                    verification = bind(self._step_reflect(section, revised, understanding, provider=review_provider, all_sections=all_sections), revised, "revision")
+                    workflow_status = "verification_pending"
+                    with stage_budget("verification"):
+                        verification = bind(self._step_reflect(section, revised, understanding,
+                            provider=review_provider, all_sections=all_sections), revised, "revision")
                     from ..prompts.contracts import review_regressed
                     if review_regressed(reflection, verification):
                         degraded, reason = True, "Revision introduced additional serious issues; retained draft"
@@ -430,7 +470,8 @@ class FourStepTranslator:
                 translation_outputs=[{"text":p.text,"tokenized_text":p.tokenized_text,"format_issues":list(p.format_issues)} for p in outputs],
                 understanding=understanding, reflection=reflection, assessment=assessment,
                 revision_attempted=attempted, review_history=history, prompt_bundle_version=BUNDLE_VERSION,
-                degraded=degraded, degraded_reason=reason)
+                degraded=degraded, degraded_reason=reason,
+                workflow_status="manual_review" if degraded else "passed")
         except Exception as exc:
             if self.session_service and session_id:
                 try:
@@ -446,7 +487,8 @@ class FourStepTranslator:
                 translation_outputs=[{"text":p.text,"tokenized_text":p.tokenized_text,"format_issues":list(p.format_issues)} for p in draft_outputs],
                 understanding=understanding, reflection=draft_reflection, assessment=None,
                 revision_attempted=attempted, review_history=history, prompt_bundle_version=BUNDLE_VERSION,
-                degraded=True, degraded_reason=f"{type(exc).__name__}: {exc}")
+                degraded=True, degraded_reason=f"{type(exc).__name__}: {exc}",
+                workflow_status=workflow_status, budget_exhausted=isinstance(exc, BusinessBudgetExceeded))
 
     def translate_paragraph(
         self,
@@ -590,9 +632,38 @@ class FourStepTranslator:
 
         # 单次 API 调用翻译整批段落
         section_text = "\n\n".join(section_lines)
-        translated = llm_provider.translate_section(
-            section_text, section.title, context, paragraph_ids
-        )
+        from src.services.stage_checkpoints import cached_stage, provider_identity
+        from src.llm.request_sizing import check_request, RequestTooLargeError
+        render = getattr(llm_provider, "_build_batch_translation_prompt", None)
+        try:
+            if callable(render):
+                check_request(render(section_text, section.title, context, paragraph_ids))
+        except RequestTooLargeError:
+            if len(paragraphs) < 2:
+                raise
+            middle = len(paragraphs) // 2
+            return (self._translate_batch(section, paragraphs[:middle], understanding, all_sections,
+                        batch_index=batch_index, provider=llm_provider)
+                    + self._translate_batch(section, paragraphs[middle:], understanding, all_sections,
+                        batch_index=batch_index + 1, provider=llm_provider))
+
+        def validate_draft(value):
+            from src.prompts.contracts import translation_items
+            return translation_items(value, paragraph_ids)
+
+        def cacheable_draft(value):
+            clean = validate_draft(value)
+            mapped = {item["id"]: item["translation"] for item in clean}
+            return len(clean) == len(paragraph_ids) and all(
+                p.id in dehydrated_results or (p.id in mapped and
+                build_translation_payload(p, mapped[p.id]).format_valid) for p in paragraphs)
+
+        translated = cached_stage("draft-batch", {
+            "source": section_text, "title": section.title, "context": context,
+            "ids": paragraph_ids, "provider": provider_identity(llm_provider)},
+            lambda: llm_provider.translate_section(section_text, section.title, context, paragraph_ids),
+            decode=validate_draft, reuse=getattr(self, "_reuse_stage_cache", True),
+            cache_if=cacheable_draft)
 
         # 将 JSON 结果映射回 TranslationPayload。
         # 防御性取键：即便 provider 侧已清洗，这里也跳过缺键/非字符串条目，
@@ -893,6 +964,9 @@ class FourStepTranslator:
             "terminology": terminology,
             "annotation_plan": annotation_plan,
             "paragraph_ids": {str(i): para.id for i, para in enumerate(section.paragraphs)},
+            "readonly_neighbors": [dict(id=p.id, source=p.source, translation=p.best_translation_text())
+                for full in (all_sections or []) if full.section_id == section.section_id
+                for p in full.paragraphs if p.id not in {q.id for q in section.paragraphs}],
             "translation_voice": translation_voice,
         }
 
@@ -983,17 +1057,22 @@ class FourStepTranslator:
                 max_terms=MAX_REVIEW_TERMS_IN_PROMPT,
             )
 
-        # 调用 LLM 反思
-        result = llm_provider.reflect_on_translation(
-            source_paragraphs=source_paragraphs,
-            translations=translations,
-            guidelines=guidelines,
-            terminology=terminology,
-            context=self._build_review_context(section, understanding, all_sections),
-        )
-
+        from src.services.stage_checkpoints import cached_stage, provider_identity
+        from src.llm.business_budget import active_options
         from ..prompts.contracts import validate_review, text_version
-        result = validate_review(result, source_paragraphs, translations)
+        context = self._build_review_context(section, understanding, all_sections)
+        options = active_options()
+        context["compact_review"] = bool(options and options.compact_review)
+        def validate(value):
+            return validate_review(value, source_paragraphs, translations)
+        result = cached_stage("source-review", {
+            "sources": source_paragraphs, "translations": translations,
+            "guidelines": guidelines, "terms": terminology, "context": context,
+            "provider": provider_identity(llm_provider)},
+            lambda: validate(llm_provider.reflect_on_translation(
+                source_paragraphs=source_paragraphs, translations=translations,
+                guidelines=guidelines, terminology=terminology, context=context)),
+            decode=validate, reuse=getattr(self, "_reuse_stage_cache", True))
 
         # 解析问题列表
         issues = []
@@ -1012,6 +1091,7 @@ class FourStepTranslator:
 
         return ReflectionResult(
             overall_score=float(result.get("overall_score", 0)),
+            has_diagnostic_scores=any(key.endswith("_score") for key in result),
             terminology_score=float(result.get("terminology_score", 0)),
             accuracy_score=float(result.get("accuracy_score", 0)),
             fluency_score=float(result.get("fluency_score", 0)),
@@ -1136,10 +1216,31 @@ class FourStepTranslator:
                     }
                     batch_pairs.append(pair_dict)
 
-                polished_texts = llm_provider.refine_and_polish_batch(
-                    pairs=batch_pairs,
-                    context=refine_context
-                )
+                from src.services.stage_checkpoints import cached_stage, provider_identity
+                from src.llm.request_sizing import check_request, RequestTooLargeError
+                def refine_chunk(chunk):
+                    render = getattr(llm_provider, "_build_refine_and_polish_prompt", None)
+                    try:
+                        if callable(render):
+                            check_request(render(chunk, refine_context["reflection_scores"], refine_context))
+                    except RequestTooLargeError:
+                        if len(chunk) < 2:
+                            raise
+                        middle = len(chunk) // 2
+                        return refine_chunk(chunk[:middle]) + refine_chunk(chunk[middle:])
+                    def validate(value):
+                        if (not isinstance(value, list) or len(value) != len(chunk)
+                                or any(not isinstance(text, str) or not text.strip() for text in value)):
+                            raise ValueError("Refinement checkpoint must contain every indexed result")
+                        return value
+                    by_id = {p.id: p for p in section.paragraphs}
+                    return cached_stage("refine-batch", {"pairs": chunk, "context": refine_context,
+                        "provider": provider_identity(llm_provider)},
+                        lambda: validate(llm_provider.refine_and_polish_batch(pairs=chunk, context=refine_context)),
+                        decode=validate, reuse=getattr(self, "_reuse_stage_cache", True),
+                        cache_if=lambda value: all(build_translation_payload(by_id[pair["paragraph_id"]], text).format_valid
+                            for pair, text in zip(chunk, value)))
+                polished_texts = refine_chunk(batch_pairs)
                 total_api_calls += 1
 
                 # 更新结果

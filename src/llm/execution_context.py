@@ -20,6 +20,7 @@ from .errors import LLMDeadlineExceededError, LLMRequestCancelledError
 _deadline: ContextVar[float | None] = ContextVar("llm_deadline", default=None)
 _cancel: ContextVar[Event | None] = ContextVar("llm_cancel", default=None)
 _route: ContextVar[dict[str, Any]] = ContextVar("llm_route", default={})
+_generation_depth: ContextVar[int] = ContextVar("generation_depth", default=0)
 _output_limit: ContextVar[int | None] = ContextVar("llm_output_limit", default=None)
 
 
@@ -36,6 +37,8 @@ def positive_token_limit(value: Any) -> int:
 
 
 def check_active() -> None:
+    from .business_budget import check_business_budgets
+    check_business_budgets()
     event = _cancel.get()
     if event is not None and event.is_set():
         raise LLMRequestCancelledError("LLM request was abandoned; no further attempts will be sent")
@@ -93,6 +96,17 @@ def output_limit() -> int | None:
     return _output_limit.get()
 
 
+@contextmanager
+def deadline_scope(seconds: float):
+    parent = _deadline.get()
+    deadline = time.monotonic() + positive_timeout(seconds)
+    token = _deadline.set(min(parent, deadline) if parent is not None else deadline)
+    try:
+        yield
+    finally:
+        _deadline.reset(token)
+
+
 def generation_budget(fn):
     """Keep compatible public signatures; also guard direct/legacy providers."""
     signature = inspect.signature(fn)
@@ -113,10 +127,18 @@ def generation_budget(fn):
         deadline = time.monotonic() + seconds
         token = _deadline.set(min(parent, deadline) if parent is not None else deadline)
         limit_token = None
+        depth = _generation_depth.get()
+        depth_token = _generation_depth.set(depth + 1)
         try:
             limit = options.get("max_tokens")
             if limit is not None:
                 limit_token = _output_limit.set(positive_token_limit(limit))
+            from .request_sizing import check_request
+            prompt = bound.get("prompt", "")
+            check_request(prompt, limit or output_limit())
+            if depth == 0:
+                from .business_budget import reserve_generation
+                reserve_generation(prompt, limit or output_limit())
             result = fn(self, *args, **kwargs)
             check_active()
             return result
@@ -124,4 +146,5 @@ def generation_budget(fn):
             if limit_token is not None:
                 _output_limit.reset(limit_token)
             _deadline.reset(token)
+            _generation_depth.reset(depth_token)
     return wrapped

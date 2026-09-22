@@ -114,6 +114,7 @@ def _build_longform_service(
         max_concurrent_sections=10,
         analysis_llm_provider=analysis_llm,
         user_model_override=body.model,
+        efficiency=body.efficiency,
     )
     service.set_retranslate_scope(
         body.retranslate_scope,
@@ -653,11 +654,14 @@ async def start_longform_workflow(
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
-    translation_service = await asyncio.to_thread(
-        _build_longform_service,
-        service,
-        body,
-    )
+    try:
+        translation_service = await asyncio.to_thread(
+            _build_longform_service,
+            service,
+            body,
+        )
+    except ValueError as error:
+        raise BadRequestException(detail=str(error)) from error
     slot_claim = await translation_service.claim_translation_slot(project_id)
     if slot_claim["status"] == "busy":
         raise ConflictException(
@@ -702,12 +706,21 @@ async def start_longform_workflow(
             )
             term_review_job_id = None
         else:
+            term_options = {}
+            term_llm = translation_service.llm
+            term_model = body.model
+            if body.efficiency.model_scope == "draft":
+                term_llm = translation_service._get_provider_for_phase("phase0_prescan")
+                term_model = translation_service.model_config.get_model_for_phase(
+                    "phase0_prescan", profile=body.efficiency.profile)["model"]
+                term_options["provider_configured"] = True
             job = await ensure_term_review_job(
                 project_id=project_id,
                 pm=translation_service.project_manager,
                 gm=translation_service.project_manager.glossary_manager,
-                llm=translation_service.llm,
-                model=body.model,
+                llm=term_llm,
+                model=term_model,
+                **term_options,
             )
             workflow_run_id = job["job_id"]
             term_review_job_id = job["job_id"]
@@ -764,6 +777,7 @@ async def start_longform_workflow(
         "resume_checkpoint": checkpoint.to_dict() if resumed else None,
         "retranslate_scope": body.retranslate_scope,
         "retranslate_section_ids": body.retranslate_section_ids,
+        "efficiency": body.efficiency.model_dump(mode="json"),
     }
 
 

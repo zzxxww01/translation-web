@@ -258,6 +258,10 @@ class ProviderAdapter:
             raise ValueError(f"No valid route for model {self.model_alias}")
         primary = self.create_provider(plans[0])
         facade = copy(primary)
+        facade._checkpoint_route = [dict(provider=p.provider.provider_id,
+            model=p.model.real_model, config=getattr(p.model, "config", {}),
+            endpoint=getattr(p.provider, "base_url", None)) for p in plans]
+        facade.model_alias = self.model_alias
         adapter = self
 
         def routed_generate(_self, prompt, response_format=None, temperature=None,

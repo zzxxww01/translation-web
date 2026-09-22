@@ -4,6 +4,7 @@ Translate router request/response models.
 
 from typing import Literal, Optional
 from pydantic import BaseModel, Field, field_validator, model_validator
+from src.core.efficiency import EfficiencyOptions
 
 
 # 内容长度限制（公网环境防止滥用）
@@ -122,9 +123,11 @@ class PostOptimizeResponse(BaseModel):
 
 class FullTranslateRequest(BaseModel):
     model: Optional[str] = None
+    efficiency: EfficiencyOptions = Field(default_factory=EfficiencyOptions)
 
 
 class LongformWorkflowStartRequest(BaseModel):
+    efficiency: EfficiencyOptions = Field(default_factory=EfficiencyOptions)
     method: Literal["normal", "four-step"] = "four-step"
     model: Optional[str] = Field(None, max_length=100)
     # 覆盖已有译文的范围。默认 resume 是历史行为——只翻没有可用译文的段落。

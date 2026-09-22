@@ -1,5 +1,7 @@
 import json
 import logging
+from collections import OrderedDict
+from threading import RLock
 from pathlib import Path
 from typing import Any, Callable, Optional
 
@@ -36,6 +38,8 @@ class ProjectRepository:
         self._render_markdown_line = render_markdown_line
         self._best_translation_text = best_translation_text
         self._logger = logger_ or logging.getLogger(__name__)
+        self._section_cache = OrderedDict()
+        self._section_cache_lock = RLock()
 
     def _resolve_section_dir(self, project_id: str, section_id: str) -> Optional[Path]:
         """兜底路径边界校验:section_id 含 ../ 或 ..\\ 时不得越出本项目的 sections 目录。
@@ -106,6 +110,36 @@ class ProjectRepository:
         self._write_json(section_dir / "meta.json", section.model_dump(mode="json"))
 
     def load_section(self, project_id: str, section_id: str) -> Optional[Section]:
+        section_dir = self._resolve_section_dir(project_id, section_id)
+        if section_dir is None:
+            return None
+        path = section_dir / "meta.json"
+        if not path.exists():
+            return self._load_section_uncached(project_id, section_id)
+        key = str(path)
+        def signature():
+            st = path.stat()
+            return st.st_dev, st.st_ino, st.st_size, st.st_mtime_ns, st.st_ctime_ns
+        for _ in range(3):
+            before = signature()
+            with self._section_cache_lock:
+                cached = self._section_cache.get(key)
+                if cached is not None and cached[0] == before:
+                    self._section_cache.move_to_end(key)
+                    return cached[1].model_copy(deep=True)
+            result = self._load_section_uncached(project_id, section_id)
+            if signature() != before:
+                continue
+            if result is not None and before[2] <= 2 * 1024 * 1024:
+                with self._section_cache_lock:
+                    self._section_cache[key] = (before, result.model_copy(deep=True))
+                    self._section_cache.move_to_end(key)
+                    while len(self._section_cache) > 64 or sum(v[0][2] for v in self._section_cache.values()) > 32 * 1024 * 1024:
+                        self._section_cache.popitem(last=False)
+            return result
+        raise SectionDataError("Section changed repeatedly while reading; retry without overwriting")
+
+    def _load_section_uncached(self, project_id: str, section_id: str) -> Optional[Section]:
         section_dir = self._resolve_section_dir(project_id, section_id)
         if section_dir is None:
             return None

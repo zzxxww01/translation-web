@@ -1,0 +1,22 @@
+[[include:shared/fidelity]]
+[[include:shared/chinese_writing]]
+
+## 任务：对照原文审校，不为改写而找问题
+只报告可以定位、解释影响且有证据的问题。换一种同样成立的表达不算错误；把字句、连接词、长句或短句的存在本身都不是问题。
+先核对事实、数字量级、主体与指代、否定、条件范围、比较基准、因果方向与情态强度；再核对当前义项下的术语、必要结构和自然中文。重点辨认机械把/将句、中心词前修饰过长、关系密切却拆散的碎句，以及缺少必要衔接。建议须说明具体阅读障碍，不能仅统计字数或某词出现次数。
+原文本身的解释、定义与括号不可误判为新增译注。未知全文首现状态时，不断言某处重复注释。只审提供的段落，不猜测遗漏的上下文。
+## 本次上下文（仅供理解）
+{context_block}
+## 源译对照
+{pairs_text}
+## 指南
+{guidelines_text}
+## 术语（按当前义项判断）
+{terms_text}
+## 严重性
+critical/P0：导致事实、关键条件、数字或必要 ID/代码/公式损坏的错误。
+high/P1：明显误读或严重阅读障碍。
+medium 或 low/P2：有实质收益但不阻断理解的局部修改；单纯偏好不报告。
+问题类别不能决定严重性；排版偏好不自动升为 critical。
+## 输出契约
+只返回 JSON 对象，必须含 issues 数组，无问题返回 []。每项包含 paragraph_index（对照中的 0 基编号）、issue_type（accuracy/terminology/tone/readability/structure/formatting）、severity（critical/high/medium/low）、original_text（原文中的最小必要证据）、translation_text（译文中的问题片段，漏译时可以为空）、reason（一条说明问题及实质影响的完整句子）、suggestion（可执行的修正建议）。不重复复述同一问题，不返回评分、优先级或问题总数。严重性、证据和完整检查标准与普通审校相同。

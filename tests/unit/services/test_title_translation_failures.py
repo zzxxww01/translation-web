@@ -113,8 +113,16 @@ def test_title_completeness_blocks_completed_even_when_body_is_complete():
 async def test_run_summary_cannot_hide_title_failures(monkeypatch, tmp_path, translated, expected):
     service, project, analysis, _ = make_service(fallback=translated)
     project.status = ProjectStatus.CREATED
-    project.sections[0].paragraphs = [SimpleNamespace()]
-    analysis.terminology = []
+    from src.core.models import Section, Paragraph, ArticleAnalysis
+    from src.services.translation_artifact_service import TranslationArtifactService
+    from src.core.efficiency import EfficiencyOptions
+    project.sections = [Section(section_id="s1", title=project.title, paragraphs=[Paragraph(id="p1", index=0, source="Source")])]
+    analysis = ArticleAnalysis()
+    service.project_manager.projects_path = tmp_path
+    service.efficiency = EfficiencyOptions()
+    service.user_model_override = None
+    service.model_config = SimpleNamespace(config={})
+
     service.translation_mode = "section"
     service.context_manager = Mock()
     service.translator = Mock()
@@ -137,12 +145,16 @@ async def test_run_summary_cannot_hide_title_failures(monkeypatch, tmp_path, tra
         "_release_active_run", "_get_quality_report_generator",
     ):
         setattr(service, name, Mock())
+    service._get_provider_for_phase = Mock(return_value=SimpleNamespace(model_alias="test"))
     service._translate_sections_in_document_order = AsyncMock(return_value=[])
     service.project_manager.get_sections = Mock(return_value=project.sections)
     service.project_manager.update_progress = Mock()
     service.project_manager.get_export_path = Mock(return_value=tmp_path / "zh.md")
     service.project_manager.export_markdown = Mock(return_value="正文已经译好")
-    monkeypatch.setattr("src.services.batch_translation_service.DeepAnalyzer", Mock())
+    service._artifact_service = TranslationArtifactService(tmp_path)
+    analyzer = SimpleNamespace(ANALYSIS_SAMPLE_RATIOS=(1.0, 0.75), max_sample_chars=None,
+                              analyze=Mock(return_value=analysis))
+    monkeypatch.setattr("src.services.batch_translation_service.DeepAnalyzer", lambda *a, **k: analyzer)
     monkeypatch.setattr("src.services.batch_translation_service.SourceMetadataTranslationService", Mock())
 
     result = await service.translate_project("demo")
@@ -154,7 +166,8 @@ async def test_run_summary_cannot_hide_title_failures(monkeypatch, tmp_path, tra
     assert service._progress_tracker.get("demo").final_status == expected
     summaries = [call.args[1] for call in service._write_artifact_json.call_args_list
                  if call.args[0].name == "run-summary.json"]
-    assert summaries == [result]
+    assert summaries and summaries[-1] == result
+    assert all(item["status"] == expected for item in summaries)
 
 
 @pytest.mark.asyncio

@@ -188,6 +188,27 @@ class DeepAnalyzer:
         Returns:
             ArticleAnalysis: 深度分析结果
         """
+        self._incomplete_stages = []
+        from src.services.stage_checkpoints import cached_stage, provider_identity
+        def cached_analysis(outline, sampled_text, timeout=None):
+            def validate(value):
+                if not isinstance(value, dict) or not isinstance(value.get("theme"), str):
+                    raise ValueError("Deep analysis must contain a theme")
+                self._parse_combined_analysis_result(value, sections)
+                return value
+            return cached_stage("analysis-core", {"outline": outline, "sample": sampled_text,
+                "provider": provider_identity(self.llm)},
+                lambda: validate(self.llm.deep_analyze_document(outline=outline, sampled_text=sampled_text, timeout=timeout)),
+                decode=validate)
+        def cached_terms(sampled_text, high_freq_candidates, timeout=None):
+            def validate(value):
+                if not isinstance(value, list) or any(not isinstance(item, dict) for item in value):
+                    raise ValueError("Term verification must be a list of objects")
+                return value
+            return cached_stage("analysis-terms", {"sample": sampled_text, "candidates": high_freq_candidates,
+                "provider": provider_identity(self.llm)},
+                lambda: validate(self.llm.verify_high_frequency_terms(sampled_text=sampled_text,
+                    high_freq_candidates=high_freq_candidates, timeout=timeout)), decode=validate)
         # 构建章节大纲
         sections_outline = self._build_sections_outline(sections)
 
@@ -228,7 +249,11 @@ class DeepAnalyzer:
         ]
 
         # 步骤1.1: 深度分析文档（带重试）
+        last_sample_chars = deduped_steps[0]
         for attempt_index, sample_chars in enumerate(deduped_steps):
+            if last_error is not None and self.recovery_action(last_error) == "retry_same_input":
+                sample_chars = last_sample_chars
+            last_sample_chars = sample_chars
             self._raise_if_cancelled(should_cancel)
             timeout = self.ANALYSIS_TIMEOUT_STEPS[min(attempt_index, len(self.ANALYSIS_TIMEOUT_STEPS) - 1)]
 
@@ -255,7 +280,7 @@ class DeepAnalyzer:
                 try:
                     future_deep = _submit_with_current_context(
                         executor,
-                        self.llm.deep_analyze_document,
+                        cached_analysis,
                         outline=sections_outline,
                         sampled_text=full_text,
                         timeout=timeout
@@ -264,7 +289,7 @@ class DeepAnalyzer:
                     if cached_verified_terms is None and high_freq_candidates:
                         future_terms = _submit_with_current_context(
                             executor,
-                            self.llm.verify_high_frequency_terms,
+                            cached_terms,
                             sampled_text=full_text,
                             high_freq_candidates=high_freq_candidates,
                             timeout=timeout
@@ -294,6 +319,10 @@ class DeepAnalyzer:
                                 verified_count = len([t for t in cached_verified_terms if t.get("is_technical_term", False)])
                                 logger.info(f"Phase 0.2b SUCCESS: verified_terms={verified_count}")
                             except Exception as exc:
+                                from src.llm.business_budget import BusinessBudgetExceeded
+                                if isinstance(exc, BusinessBudgetExceeded):
+                                    raise
+                                self._incomplete_stages.append("term_verification")
                                 # 术语验证失败不影响整体流程，标记为已尝试（空），不再重试
                                 logger.warning(f"Phase 0.2b FAILED: {str(exc)[:200]}, continuing without verified terms")
                                 cached_verified_terms = []
@@ -352,7 +381,7 @@ class DeepAnalyzer:
             should_cancel=should_cancel,
         )
         analysis.section_roles = section_roles
-
+        analysis.incomplete_stages = sorted(set(self._incomplete_stages))
         return analysis
 
     def _raise_if_cancelled(
@@ -402,28 +431,32 @@ class DeepAnalyzer:
         )
         return text[:max_length]
 
-    def _should_retry_with_smaller_sample(self, exc: Exception) -> bool:
+    @staticmethod
+    def recovery_action(exc: Exception) -> str:
+        from src.llm.business_budget import BusinessBudgetExceeded
+        from src.llm.errors import (LLMConfigurationError, LLMDeadlineExceededError,
+            LLMRequestCancelledError, LLMOutputTruncatedError, LLMTransportError)
+        from src.llm.request_sizing import RequestTooLargeError
+        if isinstance(exc, (BusinessBudgetExceeded, LLMConfigurationError,
+                            LLMDeadlineExceededError, LLMRequestCancelledError)):
+            return "stop"
+        if isinstance(exc, (RequestTooLargeError, LLMOutputTruncatedError)):
+            return "reduce_input"
+        if isinstance(exc, LLMTransportError):
+            return "retry_same_input"
+        status = getattr(exc, "status_code", None)
+        if isinstance(status, int) and 400 <= status < 500 and status not in {408, 409, 429}:
+            return "stop"
         text = str(exc).lower()
-        retry_signals = [
-            "timed out",
-            "timeout",
-            "deadline exceeded",
-            "connection",
-            "temporarily unavailable",
-            "service unavailable",
-            "bad gateway",
-            "502",
-            "503",
-            "504",
-            "incomplete",
-            # JSON 解析类失败：较大样本更易产出超长/被截断的 JSON，缩小样本恰能
-            # 提升 JSON 完整性——这种最该重试的情况此前被排除在重试之外。
-            "json",
-            "parse",
-            "unterminated",
-            "expecting value",
-        ]
-        return any(signal in text for signal in retry_signals)
+        if any(term in text for term in ("json", "parse", "unterminated", "expecting value", "incomplete")):
+            return "format_retry"
+        if any(term in text for term in ("timed out", "timeout", "deadline exceeded", "connection", "temporarily unavailable", "service unavailable", "502", "503", "504")):
+            return "retry_same_input"
+        return "stop"
+
+    def _should_retry_with_smaller_sample(self, exc: Exception) -> bool:
+        # Compatibility method; the loop now distinguishes retry vs input reduction.
+        return self.recovery_action(exc) != "stop"
 
     def _build_sections_outline(self, sections: List[Section]) -> str:
         """
@@ -696,8 +729,10 @@ class DeepAnalyzer:
             )
             result = self.llm._parse_json_response(response)
         except Exception as exc:
-            if "cancel" in str(exc).lower():
+            from src.llm.business_budget import BusinessBudgetExceeded
+            if "cancel" in str(exc).lower() or isinstance(exc, BusinessBudgetExceeded):
                 raise
+            self._incomplete_stages = getattr(self, "_incomplete_stages", []) + ["section_roles"]
             logger.warning(
                 "Section role map 分析失败，回退为默认章节角色（保留已完成的深度分析）: %s",
                 exc,
@@ -723,6 +758,7 @@ class DeepAnalyzer:
                         and item["paragraph_index"] in {0, len(section.paragraphs)//2, len(section.paragraphs)-1}]
                 )
             else:
+                self._incomplete_stages = getattr(self, "_incomplete_stages", []) + ["section_roles"]
                 # 如果 LLM 没有返回该章节的分析，创建一个默认的
                 section_roles[section_id] = SectionUnderstanding(
                     role_in_article="待分析",

@@ -67,8 +67,12 @@ class SectionTranslationExecutor:
         if self._is_cancelled(project_id):
             return None
 
+        from src.llm.business_budget import active_options
+        options = active_options()
+        # Resume reconstructs the same source-only terminology baseline from
+        # checkpoints, including chapters whose body already has a draft.
         translatable_section = self._build_translatable_section(
-            section, force=self._force_for(section)
+            section, force=(self._force_for(section) or bool(options and options.stage_resume))
         )
         if not translatable_section.paragraphs:
             return None
@@ -137,12 +141,15 @@ class SectionTranslationExecutor:
             )
 
             force_retranslate = self._force_for(section)
+            from src.llm.business_budget import current_quality_policy
+            quality_needed = (translation_mode != translation_mode_section and any(
+                p.needs_quality_review(current_quality_policy()) for p in section.paragraphs if not is_structured_metadata_paragraph(p)))
             section_paragraph_count = len(section.paragraphs)
             translated_in_section = self._count_translated_paragraphs(section)
             # 整章已译完时默认整章跳过；重译模式下这条捷径必须让开，
             # 否则"重译"对已完成的章节等于什么都没做。
             if (
-                not force_retranslate
+                not force_retranslate and not quality_needed
                 and translated_in_section == section_paragraph_count
                 and section_paragraph_count > 0
             ):
@@ -157,7 +164,7 @@ class SectionTranslationExecutor:
                 }
 
             translatable_section = self._build_translatable_section(
-                section, force=force_retranslate
+                section, force=force_retranslate, require_quality=quality_needed
             )
             if not translatable_section.paragraphs:
                 return {
@@ -193,13 +200,15 @@ class SectionTranslationExecutor:
 
             four_step_result = None
             if translation_mode == translation_mode_section:
-                translations = await self._translate_section_batch(
-                    section=translatable_section,
-                    section_index=section_index,
-                    total_sections=total_sections,
-                    all_sections=all_sections,
-                    analysis=analysis,
-                )
+                from src.llm.business_budget import stage_budget
+                with stage_budget("draft"):
+                    translations = await self._translate_section_batch(
+                        section=translatable_section,
+                        section_index=section_index,
+                        total_sections=total_sections,
+                        all_sections=all_sections,
+                        analysis=analysis,
+                    )
                 self._apply_section_batch_translations(
                     translatable_section,
                     translations,
@@ -223,6 +232,8 @@ class SectionTranslationExecutor:
                     section=translatable_section,
                     all_sections=all_sections,
                     project_id=project_id,
+                    reuse_existing_drafts=not force_retranslate,
+                    reuse_checkpoints=not force_retranslate,
                     on_progress=self._create_section_callback(
                         section.title,
                         on_progress,
@@ -327,6 +338,7 @@ class SectionTranslationExecutor:
                 # section 模式没有四步法结果，恒为 False。
                 "degraded": bool(getattr(four_step_result, "degraded", False)),
                 "degraded_reason": getattr(four_step_result, "degraded_reason", "") or "",
+                "budget_exhausted": bool(getattr(four_step_result, "budget_exhausted", False)),
             }
         except Exception as error:
             error_msg = f"Failed to translate section {section.section_id}: {str(error)}"
@@ -342,19 +354,22 @@ class SectionTranslationExecutor:
             }
 
     @staticmethod
-    def _build_translatable_section(section: Section, force: bool = False) -> Section:
+    def _build_translatable_section(section: Section, force: bool = False, require_quality: bool = False) -> Section:
         """Filter out structured metadata paragraphs and already translated paragraphs from automatic body translation.
 
         ``force=True`` 时保留已有译文的段落——这是「重译本章 / 整篇重译」用的路径。
         结构化元数据段（图片等）任何情况下都不送翻。
         """
+        from src.llm.business_budget import current_quality_policy
         return section.model_copy(
             update={
                 "paragraphs": [
                     paragraph
                     for paragraph in section.paragraphs
                     if not is_structured_metadata_paragraph(paragraph)
-                    and (force or not paragraph.has_usable_translation())
+                    and (force or (not paragraph.has_confirmed_translation() and
+                                   (not paragraph.has_usable_translation() or (require_quality and
+                                    paragraph.needs_quality_review(current_quality_policy())))))
                 ]
             }
         )

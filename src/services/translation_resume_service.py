@@ -31,6 +31,7 @@ class TranslationResumeCheckpoint:
     remaining_paragraphs: int
     source_run_id: Optional[str] = None
     source_run_status: Optional[str] = None
+    pending_quality_paragraphs: int = 0
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -82,9 +83,13 @@ def inspect_translation_resume(
             str(latest_summary.get("status") or "").strip().lower() or None
         )
     has_prior_run = bool(source_run_id or latest_summary)
+    from src.core.structured_metadata import is_structured_metadata_paragraph
+    pending_quality = sum(1 for section in sections for paragraph in section.paragraphs
+        if not is_structured_metadata_paragraph(paragraph) and paragraph.has_usable_translation()
+        and paragraph.needs_quality_review())
     resumable = bool(
         has_prior_run
-        and 0 < translated_paragraphs < total_paragraphs
+        and (0 < translated_paragraphs < total_paragraphs or pending_quality > 0)
         and (source_run_status or "processing") in RESUMABLE_RUN_STATUSES
     )
 
@@ -101,4 +106,5 @@ def inspect_translation_resume(
         ),
         source_run_id=source_run_id,
         source_run_status=source_run_status or None,
+        pending_quality_paragraphs=pending_quality,
     )

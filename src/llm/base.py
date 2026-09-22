@@ -308,7 +308,12 @@ class LLMProvider(ABC):
             context=context,
         )
         response = self.generate(prompt, response_format="json")
-        return self._parse_json_response(response)
+        result = self._parse_json_response(response)
+        if (context or {}).get("compact_review") and isinstance(result, dict):
+            for issue in result.get("issues", []):
+                if isinstance(issue, dict) and "reason" in issue:
+                    issue["description"] = issue.pop("reason")
+        return result
 
     def refine_and_polish_batch(self, pairs: List[Dict[str, Any]], context: Optional[Dict[str, Any]] = None) -> List[str]:
         from ..prompts.contracts import object_response
@@ -340,27 +345,37 @@ class LLMProvider(ABC):
                         existing_terms: Dict[str, str], model: Optional[str] = None) -> Dict[str, Any]:
         from ..prompts.contracts import object_response, PromptContractError
         import json
-        existing = json.dumps(existing_terms, ensure_ascii=False, default=str)
+        from src.core.glossary_prompt import _count_term_occurrences, _prose_only
+        from src.services.stage_checkpoints import cached_stage, provider_identity
         chunks = self._split_content_for_prescan(section_content, max_chars=TranslationLimits.PRESCAN_CHUNK_SIZE)
         candidates = {}
-        for index, chunk in enumerate(chunks):
+        for chunk in chunks:
+            prose = _prose_only(chunk)
+            matched = {key: value for key, value in existing_terms.items()
+                       if _count_term_occurrences(prose, str(key)) > 0}
+            existing = json.dumps(matched, ensure_ascii=False, default=str)
             prompt = self._build_prescan_prompt(section_id=section_id, section_title=section_title,
                                                section_content=chunk, existing_terms=existing)
-            result = object_response(self.generate(prompt, response_format="json", temperature=0.3, model=model), ("new_terms",))
-            if not isinstance(result["new_terms"], list):
-                raise PromptContractError("new_terms must be an array")
+            def validate(result):
+                if not isinstance(result, dict) or not isinstance(result.get("new_terms"), list):
+                    raise PromptContractError("new_terms must be an array")
+                cleaned = []
+                for item in result["new_terms"]:
+                    if not isinstance(item, dict):
+                        raise PromptContractError("Invalid prescan candidate")
+                    term = item.get("term", "")
+                    if not isinstance(term, str) or not term.strip() or not _count_term_occurrences(prose, term):
+                        continue
+                    quote = item.get("source_quote", "")
+                    if quote and (not isinstance(quote, str) or quote not in chunk):
+                        continue
+                    cleaned.append(dict(item, requires_review=bool(item.get("requires_review", False) or not quote)))
+                return {"new_terms": cleaned}
+            result = cached_stage("prescan-chunk", {"prompt": prompt, "provider": provider_identity(self), "model": model},
+                lambda: validate(object_response(self.generate(prompt, response_format="json", temperature=0.3, model=model), ("new_terms",))),
+                decode=validate)
             for item in result["new_terms"]:
-                if not isinstance(item, dict):
-                    raise PromptContractError("Invalid prescan candidate")
-                term = item.get("term", "")
-                if not isinstance(term, str) or not term.strip() or term.lower() not in chunk.lower():
-                    continue  # hallucinated candidate, not a source occurrence
-                quote = item.get("source_quote", "")
-                if quote and (not isinstance(quote, str) or quote not in chunk):
-                    continue
-                item = dict(item)
-                item["requires_review"] = bool(item.get("requires_review", False) or not quote)
-                candidates.setdefault(term.lower(), item)
+                candidates.setdefault(item["term"].lower(), item)
         return {"new_terms":list(candidates.values()), "term_usages":{}, "scan_coverage":1.0}
 
     def _split_content_for_prescan(
@@ -440,7 +455,7 @@ class LLMProvider(ABC):
         guidelines_text = "\n".join([f"- {g}" for g in guidelines])
 
         base_prompt = self.prompt_manager.get(
-            "longform/review/section_critique",
+            "longform/review/section_critique_compact" if (context or {}).get("compact_review") else "longform/review/section_critique",
             pairs_text=pairs_text,
             guidelines_text=guidelines_text,
             terms_text=terms_text,
@@ -575,6 +590,9 @@ class LLMProvider(ABC):
 
         if context.get("annotation_plan"):
             blocks.append("## 原文首现位置（仅指定位置注释）\n" + json.dumps(context["annotation_plan"], ensure_ascii=False))
+        if context.get("readonly_neighbors"):
+            blocks.append("## 同章只读上下文（不改写、不报告其问题，供指代理解）\n" +
+                          json.dumps(context["readonly_neighbors"], ensure_ascii=False))
         if context.get("paragraph_ids"):
             blocks.append("## 本章索引与段落 ID\n" + json.dumps(context["paragraph_ids"], ensure_ascii=False))
 

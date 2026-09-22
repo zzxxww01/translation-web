@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Literal
 
 from pydantic import BaseModel, Field
 
@@ -16,6 +16,9 @@ class TranslationRecord(BaseModel):
     text: str
     model: str
     created_at: datetime = Field(default_factory=datetime.now)
+    quality_status: Literal["unreviewed", "review_pending", "revision_pending", "verification_pending", "passed", "manual_review"] = "unreviewed"
+    quality_version: str = ""
+    quality_policy: str = ""
     tokenized_text: Optional[str] = None
     format_issues: List[str] = Field(default_factory=list)
 
@@ -169,6 +172,18 @@ class Paragraph(BaseModel):
     def has_usable_translation(self) -> bool:
         """Return True when paragraph has either confirmed or draft translation text."""
         return self.has_confirmed_translation() or self.has_draft_translation()
+
+    def needs_quality_review(self, policy: str = "") -> bool:
+        """Manual confirmation wins; nonempty draft is not a completed review."""
+        if self.has_confirmed_translation():
+            return False
+        latest = self.latest_translation(non_empty=True)
+        if latest is None:
+            return True
+        from src.prompts.contracts import text_version
+        return (not self.has_export_ready_translation() or latest.quality_status != "passed"
+                or (bool(policy) and latest.quality_policy != policy)
+                or latest.quality_version != text_version([self.source], [latest.text]))
 
     def best_translation_text(self, fallback_to_source: bool = False) -> str:
         """Prefer confirmed text, otherwise fall back to the latest draft translation."""
