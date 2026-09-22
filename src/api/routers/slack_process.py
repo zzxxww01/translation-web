@@ -4,10 +4,10 @@ from fastapi import APIRouter, Request
 
 from src.prompts import get_prompt_manager
 
-from ..middleware import BadRequestException
+from ..middleware import BadRequestException, ServiceUnavailableException
 from ..middleware.rate_limit import limiter
-from ..utils.llm_errors import raise_llm_service_unavailable
-from ..utils.json_utils import parse_llm_json_response
+from ..utils.llm_errors import raise_empty_llm_result, raise_llm_service_unavailable
+from ..utils.json_utils import normalize_control_keys, parse_llm_json_response, unwrap_relay_lines
 from ..utils.llm_factory import generate_with_fallback_budget
 from .slack_models import (
     ConversationMessage,
@@ -30,6 +30,9 @@ def format_conversation_history(history: list[ConversationMessage]) -> str:
 
     return "\n".join(lines)
 
+
+# 中转可能把键名拆行（"english\n"），只对白名单内的键做保守修复。
+_REPLY_KEYS = ("translation", "suggested_replies", "version", "english", "chinese", "style")
 
 router = APIRouter()
 prompt_manager = get_prompt_manager()
@@ -69,13 +72,22 @@ async def process_slack_message(
             task_type="slack",
         )
         data = parse_llm_json_response(response_text)
+        if isinstance(data, dict):
+            data = normalize_control_keys(data, _REPLY_KEYS)
+        if not isinstance(data, dict):
+            raise ValueError("model response was not a JSON object")
 
-        translation = str(data.get("translation", "")).strip()
+        translation = unwrap_relay_lines(str(data.get("translation", "")).strip())
         suggested_replies = normalize_variants(data.get("suggested_replies", []))
+        if not translation or not any(reply.english.strip() for reply in suggested_replies):
+            # 空结果必须显式失败：200 + 空字段会让 CLI/前端把失败当成成功。
+            raise_empty_llm_result(operation="Slack process")
 
         return SlackProcessResponse(
             translation=translation,
             suggested_replies=suggested_replies,
         )
+    except ServiceUnavailableException:
+        raise
     except Exception as exc:
         raise_llm_service_unavailable(operation="Slack process", exc=exc)

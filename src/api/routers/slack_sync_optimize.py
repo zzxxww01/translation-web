@@ -4,9 +4,9 @@ from fastapi import APIRouter
 
 from src.prompts import get_prompt_manager
 
-from ..middleware import BadRequestException
-from ..utils.llm_errors import raise_llm_service_unavailable
-from ..utils.json_utils import parse_llm_json_response
+from ..middleware import BadRequestException, ServiceUnavailableException
+from ..utils.llm_errors import raise_empty_llm_result, raise_llm_service_unavailable
+from ..utils.json_utils import normalize_control_keys, parse_llm_json_response
 
 from ..utils.llm_factory import generate_with_fallback_budget
 from .slack_models import (
@@ -16,6 +16,9 @@ from .slack_models import (
     SlackSyncResponse,
 )
 
+
+# 中转可能把键名拆行，只对白名单内的键做保守修复。
+_OPTIMIZE_KEYS = ("optimized_text", "improvements", "confidence")
 
 router = APIRouter()
 prompt_manager = get_prompt_manager()
@@ -43,7 +46,12 @@ async def sync_reply(request: SlackSyncRequest):
             prompt,
             task_type="slack",
         )
-        return SlackSyncResponse(english_reply=response_text.strip())
+        english_reply = response_text.strip()
+        if not english_reply:
+            raise_empty_llm_result(operation="Slack sync")
+        return SlackSyncResponse(english_reply=english_reply)
+    except ServiceUnavailableException:
+        raise
     except Exception as exc:
         raise_llm_service_unavailable(operation="Slack sync", exc=exc)
 
@@ -88,8 +96,15 @@ async def optimize_text(request: SlackOptimizeRequest):
             task_type="slack",
         )
         data = parse_llm_json_response(response_text)
+        if isinstance(data, dict):
+            data = normalize_control_keys(data, _OPTIMIZE_KEYS)
+        if not isinstance(data, dict):
+            raise ValueError("model response was not a JSON object")
 
-        optimized_text = data.get("optimized_text", request.content)
+        # 解析失败不能拿原文冒充“已优化”的结果。
+        optimized_text = data.get("optimized_text")
+        if not isinstance(optimized_text, str) or not optimized_text.strip():
+            raise_empty_llm_result(operation="Slack optimize")
         improvements = data.get("improvements", ["Text optimized"])
         confidence = float(data.get("confidence", 0.8))
         confidence = max(0.0, min(1.0, confidence))
@@ -99,5 +114,7 @@ async def optimize_text(request: SlackOptimizeRequest):
             improvements=improvements,
             confidence=confidence,
         )
+    except ServiceUnavailableException:
+        raise
     except Exception as exc:
         raise_llm_service_unavailable(operation="Slack optimize", exc=exc)

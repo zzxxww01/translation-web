@@ -89,3 +89,15 @@ def raise_llm_service_unavailable(
         detail=format_llm_exception(exc, operation=operation, timeout_s=timeout_s),
         error_code="LLM_UNAVAILABLE",
     ) from exc
+
+
+def raise_empty_llm_result(*, operation: str) -> NoReturn:
+    """空或不可解析的模型输出必须显式失败。
+
+    这类结果历史上会被当成成功返回给客户端（200 + 空字段），上层只能靠猜，
+    CLI 侧表现为“未返回有效回复”。统一转成 503 + 明确 detail。
+    """
+    raise ServiceUnavailableException(
+        detail=f"{operation} failed: the model returned an empty or unparseable response.",
+        error_code="LLM_EMPTY_RESPONSE",
+    )

@@ -4,6 +4,8 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, Field
 
+from ..utils.json_utils import unwrap_relay_lines
+
 
 class ConversationMessage(BaseModel):
     role: Literal["them", "me"]
@@ -88,8 +90,8 @@ def normalize_variants(raw_variants: object, chinese_fallback: str = "") -> list
             if version not in VERSION_ORDER:
                 continue
 
-            english = str(item.get("english", "")).strip()
-            chinese = str(item.get("chinese", chinese_fallback)).strip() or chinese_fallback
+            english = unwrap_relay_lines(str(item.get("english", "")).strip())
+            chinese = unwrap_relay_lines(str(item.get("chinese", chinese_fallback)).strip()) or chinese_fallback
             style = STYLE_MAP.get(version)
             variant_map[version] = SlackReplyVariant(
                 version=version,
