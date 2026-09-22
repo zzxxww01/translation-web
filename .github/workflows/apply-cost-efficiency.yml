@@ -1,0 +1,155 @@
+name: Verify and publish cost efficiency fixes
+on:
+  push:
+    branches: ["fix/chinese-prompt-quality-v2"]
+    paths: [".github/workflows/apply-cost-efficiency.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: cost-efficiency-publish
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GEMINI_API_KEY: test
+      VECTORENGINE_API_KEY: test
+      RUN_LLM_TESTS: "0"
+      PLAYWRIGHT_BASE_URL: http://127.0.0.1:54321
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/chinese-prompt-quality-v2
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Apply hash-verified reviewed changes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64, hashlib, json, lzma, os, pathlib, subprocess
+          shas = ['64d8856a60461ed7c55a42cc708d000446666fb0', '3dfa34ad20541320959d5bf0db97c4a28d1b78a1', 'c19050e698af7fd68173c4f4d5a8ce9c2959cbc7']
+          def blob(data):
+              return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+          chunks = []
+          for sha in shas:
+              value = json.loads(subprocess.check_output(['gh', 'api', f'repos/zzxxww01/translation-web/git/blobs/{sha}']))
+              data = base64.b64decode(value['content'])
+              assert blob(data) == sha, 'Transport blob mismatch'
+              chunks.append(data)
+          packed = b''.join(chunks)
+          assert hashlib.sha256(packed).hexdigest() == '2987a9b77406c97fd5bbdb8fefa9066a623846c929b94080937aea792cb0c47d'
+          package = json.loads(lzma.decompress(packed))
+          assert package['schema'] == 1 and len(package['files']) == 28
+          subprocess.run(['git', 'merge-base', '--is-ancestor', package['expected_branch_head'], 'HEAD'], check=True)
+          root = pathlib.Path.cwd().resolve()
+          prepared = {}
+          for name, entry in package['files'].items():
+              rel = pathlib.PurePosixPath(name)
+              assert not rel.is_absolute() and '..' not in rel.parts
+              assert name.startswith(('src/', 'tests/', 'web/frontend/', 'docs/')) or name in ('scripts/benchmark_usage_summary.py', 'config/llm_prices.example.json')
+              path = root / rel
+              assert not any(p.is_symlink() for p in [path, *path.parents])
+              before = path.read_bytes() if path.exists() else b''
+              if entry['before'] is None:
+                  assert not path.exists(), f'New file conflict: {name}'
+              else:
+                  assert blob(before) == entry['before'], f'Baseline changed: {name}'
+              lines = before.decode('utf-8').splitlines(keepends=True)
+              last_start = len(lines) + 1
+              for start, end, text in reversed(entry['edits']):
+                  assert 0 <= start <= end <= len(lines) and end <= last_start
+                  lines[start:end] = [text]
+                  last_start = start
+              result = ''.join(lines).encode('utf-8')
+              assert blob(result) == entry['after'] and hashlib.sha256(result).hexdigest() == entry['sha256'], name
+              prepared[path] = result
+          for path, data in prepared.items():
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_bytes(data)
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          (temp / 'efficiency-manifest.json').write_text(json.dumps(package['files'], ensure_ascii=False))
+          print(f'Applied and hash-verified {len(prepared)} reviewed files')
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Backend verification
+        run: |
+          set -o pipefail
+          python -m pip install -r requirements-dev.txt
+          python -m compileall -q src
+          python -c "from src.api.app import app; print('App import OK:', len(app.routes), 'routes')"
+          python -m pytest -q 2>&1 | tee "$RUNNER_TEMP/efficiency-backend-tests.log"
+          python scripts/benchmark_usage_summary.py > "$RUNNER_TEMP/efficiency-summary-benchmark.json"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/frontend/package-lock.json
+      - name: Frontend verification
+        working-directory: web/frontend
+        run: |
+          set -o pipefail
+          npm ci
+          npm run lint -- --max-warnings 0 2>&1 | tee "$RUNNER_TEMP/efficiency-frontend-lint.log"
+          npm test 2>&1 | tee "$RUNNER_TEMP/efficiency-frontend-tests.log"
+          npm run build 2>&1 | tee "$RUNNER_TEMP/efficiency-frontend-build.log"
+          npm audit --json > "$RUNNER_TEMP/efficiency-npm-audit.json"
+      - name: Install Chromium
+        working-directory: web/frontend
+        run: npx playwright install --with-deps chromium
+      - name: Browser regressions without real model calls
+        run: |
+          set -euo pipefail
+          python -m uvicorn src.api.app:app --host 127.0.0.1 --port 54321 > "$RUNNER_TEMP/efficiency-browser-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import time, urllib.request
+          for _ in range(60):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:54321/api/health', timeout=1) as response:
+                      if response.status == 200:
+                          break
+              except OSError:
+                  time.sleep(0.5)
+          else:
+              raise SystemExit('Browser test server did not become healthy')
+          PY
+          npm --prefix web/frontend run test:e2e -- --workers=2 2>&1 | tee "$RUNNER_TEMP/efficiency-browser-tests.log"
+      - name: Publish verified changes to the repair branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          manifest = json.loads((temp / 'efficiency-manifest.json').read_text())
+          audit = json.loads((temp / 'efficiency-npm-audit.json').read_text())
+          assert not audit.get('error') and audit['metadata']['vulnerabilities']['total'] == 0
+          for name, entry in manifest.items():
+              assert hashlib.sha256(pathlib.Path(name).read_bytes()).hexdigest() == entry['sha256'], f'Source changed during tests: {name}'
+          subprocess.run(['git', 'add', '--', *manifest], check=True)
+          staged = subprocess.check_output(['git', 'diff', '--cached', '--name-only', '-z']).decode().strip('\0').split('\0')
+          assert set(staged) == set(manifest)
+          PY
+          git diff --cached --check
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'fix: enforce shared LLM budgets and account for cost and concurrency'
+          gh auth setup-git
+          git push origin HEAD:fix/chinese-prompt-quality-v2
+          git rev-parse HEAD | tee "$RUNNER_TEMP/efficiency-published-commit.txt"
+      - name: Preserve verification records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cost-efficiency-verification
+          path: |
+            ${{ runner.temp }}/efficiency-*.log
+            ${{ runner.temp }}/efficiency-*.json
+            ${{ runner.temp }}/efficiency-published-commit.txt
+            /tmp/translation-agent-playwright
+          retention-days: 7
