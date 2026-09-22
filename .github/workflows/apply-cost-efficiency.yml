@@ -28,17 +28,16 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           python3 - <<'PY'
-          import base64, hashlib, json, lzma, os, pathlib, subprocess
+          import base64, difflib, hashlib, json, lzma, os, pathlib, subprocess
           shas = ['64d8856a60461ed7c55a42cc708d000446666fb0', '3dfa34ad20541320959d5bf0db97c4a28d1b78a1', 'c19050e698af7fd68173c4f4d5a8ce9c2959cbc7']
           def blob(data):
               return hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
-          chunks = []
-          for sha in shas:
+          def read_blob(sha):
               value = json.loads(subprocess.check_output(['gh', 'api', f'repos/zzxxww01/translation-web/git/blobs/{sha}']))
               data = base64.b64decode(value['content'])
               assert blob(data) == sha, 'Transport blob mismatch'
-              chunks.append(data)
-          packed = b''.join(chunks)
+              return data
+          packed = b''.join(read_blob(sha) for sha in shas)
           assert hashlib.sha256(packed).hexdigest() == '2987a9b77406c97fd5bbdb8fefa9066a623846c929b94080937aea792cb0c47d'
           package = json.loads(lzma.decompress(packed))
           assert package['schema'] == 1 and len(package['files']) == 28
@@ -64,6 +63,19 @@ jobs:
                   last_start = start
               result = ''.join(lines).encode('utf-8')
               assert blob(result) == entry['after'] and hashlib.sha256(result).hexdigest() == entry['sha256'], name
+              prepared[path] = result
+          # Exact reviewed correction for Node's JSON-module loading requirement.
+          corrections = {'web/frontend/vite.config.ts': '5107bdea0cccc73e932364efe76fe2d129aca68c'}
+          for name, sha in corrections.items():
+              path = root / name
+              assert path in prepared
+              result = read_blob(sha)
+              original = path.read_text().splitlines(keepends=True)
+              changed = result.decode('utf-8').splitlines(keepends=True)
+              entry = package['files'][name]
+              entry.update(after=sha, sha256=hashlib.sha256(result).hexdigest(), edits=[
+                  [i1, i2, ''.join(changed[j1:j2])]
+                  for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(a=original, b=changed, autojunk=False).get_opcodes() if tag != 'equal'])
               prepared[path] = result
           for path, data in prepared.items():
               path.parent.mkdir(parents=True, exist_ok=True)
