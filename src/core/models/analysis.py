@@ -75,6 +75,7 @@ class SectionUnderstanding(BaseModel):
 class ArticleAnalysis(BaseModel):
     """全文深度分析结果（Phase 0 输出）"""
 
+    checkpoint_eligible: bool = True
     theme: str = ""
     key_arguments: List[str] = Field(default_factory=list)
     structure_summary: str = ""
@@ -113,6 +114,7 @@ class ReflectionResult(BaseModel):
     """反思结果（四步法 Step 3 输出）"""
 
     overall_score: float = 0.0
+    scores_available: bool = True
 
     # 6 维度评分（方案 C）
     terminology_score: float = 0.0  # 术语一致性
@@ -138,6 +140,7 @@ class ReflectionResult(BaseModel):
 class QualityAssessment(BaseModel):
     """质量评估结果"""
 
+    scores_available: bool = True
     passed: bool = False
     overall_score: float = 0.0
     scores: Dict[str, float] = Field(default_factory=dict)
@@ -163,6 +166,7 @@ class SectionTranslationResult(BaseModel):
     # 需要靠这两个字段区分「四步成品」与「未经反思/润色/质量门禁的初译」
     degraded: bool = False
     degraded_reason: str = ""
+    paused: bool = False
 
 
 class TermUsageTracker(BaseModel):

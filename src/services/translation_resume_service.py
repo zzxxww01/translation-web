@@ -13,6 +13,7 @@ RESUMABLE_RUN_STATUSES = {
     "cancelling",
     "failed",
     "incomplete",
+    "partial",
     "processing",
     "starting",
 }
@@ -82,9 +83,19 @@ def inspect_translation_resume(
             str(latest_summary.get("status") or "").strip().lower() or None
         )
     has_prior_run = bool(source_run_id or latest_summary)
+    four_step = (latest_summary or {}).get("translation_mode") == "four_step"
+    pending_quality = four_step and any(
+        not p.has_confirmed_translation() and p.latest_translation(non_empty=True) is not None
+        and p.latest_translation(non_empty=True).quality_review.get("status") != "complete"
+        for section in sections for p in section.paragraphs
+    )
+    # A valid content-addressed checkpoint may exist before the first paragraph
+    # was committed. Translation itself will validate its full input fingerprint.
+    cache_dir = project_manager.projects_path / project_id / "artifacts" / "work-checkpoints-v1"
+    has_stage_work = cache_dir.is_dir() and not cache_dir.is_symlink() and any(cache_dir.glob("*.json"))
     resumable = bool(
         has_prior_run
-        and 0 < translated_paragraphs < total_paragraphs
+        and (0 < translated_paragraphs < total_paragraphs or pending_quality or has_stage_work)
         and (source_run_status or "processing") in RESUMABLE_RUN_STATUSES
     )
 

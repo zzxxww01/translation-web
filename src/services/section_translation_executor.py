@@ -28,6 +28,7 @@ class SectionTranslationExecutor:
         merge_translation_updates: Callable[..., tuple[Section, list[str], list[str]]],
         commit_four_step_result: Optional[Callable[[Any], None]] = None,
         should_force_retranslate: Optional[Callable[[Section], bool]] = None,
+        needs_quality_review: Optional[Callable[[Any], bool]] = None,
     ) -> None:
         self._is_cancelled = is_cancelled
         self._touch_progress = touch_progress
@@ -46,6 +47,7 @@ class SectionTranslationExecutor:
         # 返回 True 表示该章节要**重译**：已有译文的段落也一并送翻，而不是跳过。
         # 缺省（None）保持历史行为——只翻没有可用译文的段落。
         self._should_force_retranslate = should_force_retranslate
+        self._needs_quality_review = needs_quality_review
 
     def _force_for(self, section: Section) -> bool:
         if self._should_force_retranslate is None:
@@ -145,6 +147,7 @@ class SectionTranslationExecutor:
                 not force_retranslate
                 and translated_in_section == section_paragraph_count
                 and section_paragraph_count > 0
+                and not (self._needs_quality_review and any(self._needs_quality_review(p) for p in section.paragraphs))
             ):
                 return {
                     "section_id": section.section_id,
@@ -157,7 +160,7 @@ class SectionTranslationExecutor:
                 }
 
             translatable_section = self._build_translatable_section(
-                section, force=force_retranslate
+                section, force=force_retranslate, needs_quality_review=self._needs_quality_review
             )
             if not translatable_section.paragraphs:
                 return {
@@ -218,8 +221,14 @@ class SectionTranslationExecutor:
                 )
             else:
                 # 四步法内部仍是同步批调用；卸载到线程池以保持事件循环可响应取消和查询。
-                four_step_result = await asyncio.to_thread(
-                    self._four_step_translate_section,
+                from src.services.work_checkpoints import fresh_stage_scope
+                kwargs = {"resume_drafts": not force_retranslate} if self._needs_quality_review is not None else {}
+                def execute_four_step(**arguments):
+                    with fresh_stage_scope(force_retranslate):
+                        return self._four_step_translate_section(**arguments, **kwargs)
+                from src.api.utils.concurrency import run_llm_blocking
+                four_step_result = await run_llm_blocking(
+                    execute_four_step,
                     section=translatable_section,
                     all_sections=all_sections,
                     project_id=project_id,
@@ -327,6 +336,7 @@ class SectionTranslationExecutor:
                 # section 模式没有四步法结果，恒为 False。
                 "degraded": bool(getattr(four_step_result, "degraded", False)),
                 "degraded_reason": getattr(four_step_result, "degraded_reason", "") or "",
+                "paused": bool(getattr(four_step_result, "paused", False)),
             }
         except Exception as error:
             error_msg = f"Failed to translate section {section.section_id}: {str(error)}"
@@ -342,7 +352,7 @@ class SectionTranslationExecutor:
             }
 
     @staticmethod
-    def _build_translatable_section(section: Section, force: bool = False) -> Section:
+    def _build_translatable_section(section: Section, force: bool = False, needs_quality_review=None) -> Section:
         """Filter out structured metadata paragraphs and already translated paragraphs from automatic body translation.
 
         ``force=True`` 时保留已有译文的段落——这是「重译本章 / 整篇重译」用的路径。
@@ -351,10 +361,11 @@ class SectionTranslationExecutor:
         return section.model_copy(
             update={
                 "paragraphs": [
-                    paragraph
+                    paragraph.model_copy(deep=True)
                     for paragraph in section.paragraphs
                     if not is_structured_metadata_paragraph(paragraph)
-                    and (force or not paragraph.has_usable_translation())
+                    and (force or not paragraph.has_usable_translation()
+                         or (needs_quality_review is not None and needs_quality_review(paragraph)))
                 ]
             }
         )

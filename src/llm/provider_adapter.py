@@ -258,10 +258,27 @@ class ProviderAdapter:
             raise ValueError(f"No valid route for model {self.model_alias}")
         primary = self.create_provider(plans[0])
         facade = copy(primary)
+        from src.services.work_checkpoints import fingerprint
+        facade._route_fingerprint = fingerprint([
+            {"provider": p.provider.provider_id, "model": p.model.real_model,
+             "url": getattr(p.provider, "base_url", None),
+             "config": getattr(p.model, "config", {}),
+             "credential_digest": fingerprint(getattr(p.api_key, "key", "explicit"))}
+            for p in plans
+        ])
+        facade.model_alias = self.model_alias
+        facade._request_budget_config = dict(getattr(plans[0].model, "config", {}) or {})
         adapter = self
 
         def routed_generate(_self, prompt, response_format=None, temperature=None,
                             model=None, **kwargs):
+            from .work_budget import current_generation_defaults
+            phase = current_generation_defaults()
+            if "temperature" in phase:
+                temperature = phase["temperature"]
+            for option in ("max_tokens", "timeout"):
+                if option in phase:
+                    kwargs.setdefault(option, phase[option])
             target = adapter
             if model and model not in (adapter.model_alias, adapter.attempt_plan[0].model.real_model):
                 target = get_provider_adapter(model)
@@ -327,6 +344,15 @@ class ProviderAdapter:
                 attempt_kwargs = dict(provider_kwargs)
                 if attempt_kwargs.get("max_tokens") is None and runtime.get("max_tokens") is not None:
                     attempt_kwargs["max_tokens"] = runtime["max_tokens"]
+                from .request_budget import RequestLimits, check_request
+                window_keys = ("input_token_limit", "context_window_tokens", "output_token_limit")
+                if any(runtime.get(k) for k in window_keys):
+                    check_request(prompt, RequestLimits(
+                        input_tokens=runtime.get("input_token_limit"),
+                        context_tokens=runtime.get("context_window_tokens"),
+                        output_tokens=runtime.get("output_token_limit"),
+                        reserve_output_tokens=attempt_kwargs.get("max_tokens", getattr(provider, "max_tokens", None) or 8192),
+                    ), model=attempt.model.real_model)
                 route_timeout = runtime.get("timeout") or timeout
                 with route_scope(attempt.provider.provider_id, getattr(attempt.provider, "rate_limit", None)):
                     result = provider.generate(

@@ -18,6 +18,7 @@ class TranslationRecord(BaseModel):
     created_at: datetime = Field(default_factory=datetime.now)
     tokenized_text: Optional[str] = None
     format_issues: List[str] = Field(default_factory=list)
+    quality_review: Dict[str, Any] = Field(default_factory=dict)
 
 
 class HistoryRecord(BaseModel):

@@ -19,6 +19,8 @@ import functools
 import logging
 
 logger = logging.getLogger(__name__)
+from src.config.efficiency import bounded_stage, stage_scope
+from src.llm.work_budget import WorkBudgetExceeded
 
 if TYPE_CHECKING:
     from ..services.translation_session_service import TranslationSessionService
@@ -144,6 +146,9 @@ class FourStepTranslator:
     def scan_section_terms(
         self,
         section: Section,
+        *,
+        existing_terms: Optional[Dict[str, str]] = None,
+        provider: Optional[LLMProvider] = None,
     ) -> Optional[SectionPrescanResult]:
         """Call the prescan model without mutating shared translation context.
 
@@ -156,17 +161,23 @@ class FourStepTranslator:
         section_content = "\n\n".join([p.source for p in section.paragraphs])
 
         # 获取现有术语表
-        existing_terms = self.context_manager.get_all_terms()
+        existing_terms = (dict(existing_terms) if existing_terms is not None
+                          else self.context_manager.get_all_terms())
+        scan_provider = provider or self.llm
 
         # 调用 LLM 预扫描（使用 Flash 模型）
         try:
-            result = self.llm.prescan_section_with_flash(
+            result = scan_provider.prescan_section_with_flash(
                 section_id=section.section_id,
                 section_title=section.title,
                 section_content=section_content,
                 existing_terms=existing_terms
             )
         except Exception as e:
+            from ..llm.work_budget import WorkBudgetExceeded
+            from ..llm.errors import LLMRequestCancelledError
+            if isinstance(e, (WorkBudgetExceeded, LLMRequestCancelledError)):
+                raise
             # 预扫描失败不阻塞翻译流程
             logger.warning("Section prescan failed: %s", e)
             return None
@@ -323,6 +334,7 @@ class FourStepTranslator:
 
         if (
             self.memory_service
+            and reflection.scores_available
             and reflection.overall_score < 8.0
             and reflection.issues
         ):
@@ -341,7 +353,8 @@ class FourStepTranslator:
 
     def translate_section(self, section: Section, all_sections: List[Section],
                           on_progress: Optional[Callable[[str, int, int], None]] = None,
-                          retry_count: int = 0, project_id: Optional[str] = None) -> SectionTranslationResult:
+                          retry_count: int = 0, project_id: Optional[str] = None,
+                          resume_drafts: bool = False) -> SectionTranslationResult:
         """Draft, evidence-based targeted revision and fresh review; never chase a score."""
         from copy import deepcopy
         from ..prompts import BUNDLE_VERSION
@@ -374,9 +387,26 @@ class FourStepTranslator:
             self.context_manager.set_section_understanding(section.section_id, understanding)
             progress("初译", 1)
             draft_provider = self.get_provider_for_phase("phase1_draft") if self.get_provider_for_phase else self.llm
-            outputs = []
-            for index, batch in enumerate(self._split_into_batches(section.paragraphs)):
-                outputs.extend(self._translate_batch(section, batch, understanding, all_sections, batch_index=index, provider=draft_provider))
+            with stage_scope("draft"):
+                outputs = []
+                pending = []
+                def flush_pending():
+                    for batch in self._split_into_batches(pending):
+                        outputs.extend(self._translate_batch(section, batch, understanding, all_sections, provider=draft_provider))
+                    pending.clear()
+                for paragraph in section.paragraphs:
+                    if resume_drafts and paragraph.has_usable_translation():
+                        flush_pending()
+                        payload = TranslationPayload(
+                            text=paragraph.best_translation_text(),
+                            tokenized_text=paragraph.best_tokenized_translation_text(),
+                            format_issues=paragraph.best_format_issues())
+                        outputs.append(payload)
+                        self.context_manager.record_translation(section.section_id, paragraph.source, payload.text,
+                            self._extract_terms_used(paragraph.source, payload.text))
+                    else:
+                        pending.append(paragraph)
+                flush_pending()
             drafts = [item.text for item in outputs]
             draft_outputs = deepcopy(outputs)
             if len(drafts) != len(section.paragraphs) or any(not t.strip() for t in drafts):
@@ -446,7 +476,8 @@ class FourStepTranslator:
                 translation_outputs=[{"text":p.text,"tokenized_text":p.tokenized_text,"format_issues":list(p.format_issues)} for p in draft_outputs],
                 understanding=understanding, reflection=draft_reflection, assessment=None,
                 revision_attempted=attempted, review_history=history, prompt_bundle_version=BUNDLE_VERSION,
-                degraded=True, degraded_reason=f"{type(exc).__name__}: {exc}")
+                degraded=True, degraded_reason=f"{type(exc).__name__}: {exc}",
+                paused=isinstance(exc, WorkBudgetExceeded))
 
     def translate_paragraph(
         self,
@@ -590,9 +621,26 @@ class FourStepTranslator:
 
         # 单次 API 调用翻译整批段落
         section_text = "\n\n".join(section_lines)
-        translated = llm_provider.translate_section(
-            section_text, section.title, context, paragraph_ids
-        )
+        from ..services.work_checkpoints import checkpoint_call
+        from ..prompts.contracts import translation_items, PromptContractError
+        from ..llm.request_budget import check_provider_request, RequestBudgetExceeded
+        try:
+            builder = getattr(llm_provider, "_build_batch_translation_prompt", None)
+            if callable(builder):
+                check_provider_request(llm_provider, builder(section_text, section.title, context, paragraph_ids))
+        except RequestBudgetExceeded:
+            if len(paragraphs) <= 1:
+                raise
+            middle = len(paragraphs) // 2
+            return (self._translate_batch(section, paragraphs[:middle], understanding, all_sections, provider=llm_provider)
+                    + self._translate_batch(section, paragraphs[middle:], understanding, all_sections, provider=llm_provider))
+        translated = checkpoint_call("draft-batch", llm_provider,
+            {"source": section_text, "title": section.title, "context": context, "ids": paragraph_ids},
+            lambda: llm_provider.translate_section(section_text, section.title, context, paragraph_ids),
+            lambda value: translation_items(value, paragraph_ids),
+            cacheable=lambda items: len(items) == len(paragraph_ids))
+        # Valid partial output still supplies its completed paragraphs. It is not
+        # cached as a complete batch, and only missing IDs use the fallback.
 
         # 将 JSON 结果映射回 TranslationPayload。
         # 防御性取键：即便 provider 侧已清洗，这里也跳过缺键/非字符串条目，
@@ -951,6 +999,7 @@ class FourStepTranslator:
         """Build section-level guardrails for targeted revision."""
         return self._build_review_context(section, understanding, all_sections)
 
+    @bounded_stage("review")
     def _step_reflect(
         self,
         section: Section,
@@ -984,16 +1033,19 @@ class FourStepTranslator:
             )
 
         # 调用 LLM 反思
-        result = llm_provider.reflect_on_translation(
-            source_paragraphs=source_paragraphs,
-            translations=translations,
-            guidelines=guidelines,
-            terminology=terminology,
-            context=self._build_review_context(section, understanding, all_sections),
-        )
-
+        from ..services.work_checkpoints import checkpoint_call
         from ..prompts.contracts import validate_review, text_version
-        result = validate_review(result, source_paragraphs, translations)
+        from ..llm.request_budget import check_provider_request
+        review_context = self._build_review_context(section, understanding, all_sections)
+        review_context["compact_review"] = getattr(self, "compact_review", False)
+        inputs = dict(source_paragraphs=source_paragraphs, translations=translations,
+                      guidelines=guidelines, terminology=terminology, context=review_context)
+        builder = getattr(llm_provider, "_build_reflection_prompt", None)
+        if callable(builder):
+            check_provider_request(llm_provider, builder(**inputs))
+        result = checkpoint_call("review", llm_provider, inputs,
+            lambda: llm_provider.reflect_on_translation(**inputs),
+            lambda value: validate_review(value, source_paragraphs, translations))
 
         # 解析问题列表
         issues = []
@@ -1011,6 +1063,7 @@ class FourStepTranslator:
             ))
 
         return ReflectionResult(
+            scores_available=any(key.endswith("_score") for key in result),
             overall_score=float(result.get("overall_score", 0)),
             terminology_score=float(result.get("terminology_score", 0)),
             accuracy_score=float(result.get("accuracy_score", 0)),
@@ -1030,6 +1083,7 @@ class FourStepTranslator:
 
     # ============ Step 4+5: 批量润色 ============
 
+    @bounded_stage("revision")
     def _step_refine_and_polish(
         self,
         section: Section,
@@ -1112,10 +1166,12 @@ class FourStepTranslator:
             }
 
             total_api_calls = 0
-            # 分批处理
-            for batch_start in range(0, len(pairs), REFINE_BATCH_SIZE):
-                batch_end = min(batch_start + REFINE_BATCH_SIZE, len(pairs))
-                batch_pairs_data = pairs[batch_start:batch_end]
+            # Split on the *rendered* request budget, retaining absolute indexes.
+            from collections import deque
+            pending_batches = deque(pairs[i:i + REFINE_BATCH_SIZE]
+                                    for i in range(0, len(pairs), REFINE_BATCH_SIZE))
+            while pending_batches:
+                batch_pairs_data = pending_batches.popleft()
 
                 # 构建批量输入格式
                 batch_pairs = []
@@ -1136,19 +1192,32 @@ class FourStepTranslator:
                     }
                     batch_pairs.append(pair_dict)
 
-                polished_texts = llm_provider.refine_and_polish_batch(
-                    pairs=batch_pairs,
-                    context=refine_context
-                )
+                from ..services.work_checkpoints import checkpoint_call
+                from ..llm.request_budget import check_provider_request, RequestBudgetExceeded
+                from ..prompts.contracts import PromptContractError
+                builder = getattr(llm_provider, "_build_refine_and_polish_prompt", None)
+                try:
+                    if callable(builder):
+                        check_provider_request(llm_provider, builder(batch_pairs, refine_context.get("reflection_scores", {}), refine_context))
+                except RequestBudgetExceeded:
+                    if len(batch_pairs_data) <= 1:
+                        raise
+                    middle = len(batch_pairs_data) // 2
+                    pending_batches.appendleft(batch_pairs_data[middle:])
+                    pending_batches.appendleft(batch_pairs_data[:middle])
+                    continue
+                def checked_revision(value):
+                    if not isinstance(value, list) or len(value) != len(batch_pairs) or any(not isinstance(t, str) or not t.strip() for t in value):
+                        raise PromptContractError("Invalid revision checkpoint")
+                    return value
+                polished_texts = checkpoint_call("revision-batch", llm_provider,
+                    {"pairs": batch_pairs, "context": refine_context},
+                    lambda: llm_provider.refine_and_polish_batch(pairs=batch_pairs, context=refine_context), checked_revision)
                 total_api_calls += 1
 
                 # 更新结果
                 for i, polished_text in enumerate(polished_texts):
-                    data_idx = batch_start + i
-                    if data_idx >= len(pairs):
-                        break
-
-                    _, _, _, idx = pairs[data_idx]
+                    _, _, _, idx = batch_pairs_data[i]
                     para = section.paragraphs[idx]
 
                     stripped = polished_text.strip()
@@ -1182,7 +1251,7 @@ class FourStepTranslator:
                     refined[idx] = build_translation_payload(para, stripped)
 
             logger.info(
-                f"[Phase 2 - Step 4+5] Processed {len(pairs)} paragraphs in {total_api_calls} API calls "
+                f"[Phase 2 - Step 4+5] Processed {len(pairs)} paragraphs in {total_api_calls} checkpointed batches "
                 f"(batch_size={REFINE_BATCH_SIZE})"
             )
 

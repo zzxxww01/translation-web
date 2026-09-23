@@ -33,6 +33,7 @@ from .smart_sampler import SmartSampler, create_smart_sampler
 
 
 logger = logging.getLogger(__name__)
+from src.config.efficiency import bounded_stage
 
 
 def _submit_with_current_context(executor, func, /, *args, **kwargs):
@@ -169,6 +170,7 @@ class DeepAnalyzer:
 
         return high_freq_terms, dict(term_freq)
 
+    @bounded_stage("analysis")
     def analyze(
         self,
         sections: List[Section],
@@ -208,6 +210,7 @@ class DeepAnalyzer:
         last_error: Exception | None = None
         # 跨重试复用已成功的术语验证结果（None=尚未取得，[]=已尝试但无结果）
         cached_verified_terms: "list | None" = None
+        terms_verified_ok = True
         budget = self._resolve_sample_budget(sections)
         deduped_steps = []
         for ratio in self.ANALYSIS_SAMPLE_RATIOS:
@@ -228,7 +231,11 @@ class DeepAnalyzer:
         ]
 
         # 步骤1.1: 深度分析文档（带重试）
+        retained_sample = None
         for attempt_index, sample_chars in enumerate(deduped_steps):
+            if retained_sample is not None:
+                sample_chars = retained_sample
+                retained_sample = None
             self._raise_if_cancelled(should_cancel)
             timeout = self.ANALYSIS_TIMEOUT_STEPS[min(attempt_index, len(self.ANALYSIS_TIMEOUT_STEPS) - 1)]
 
@@ -255,19 +262,19 @@ class DeepAnalyzer:
                 try:
                     future_deep = _submit_with_current_context(
                         executor,
-                        self.llm.deep_analyze_document,
-                        outline=sections_outline,
-                        sampled_text=full_text,
-                        timeout=timeout
+                        self._checkpoint_analysis_call,
+                        "deep-analysis", self.llm.deep_analyze_document,
+                        {"outline": sections_outline, "sampled_text": full_text, "timeout": timeout},
+                        self._validate_deep_result
                     )
 
                     if cached_verified_terms is None and high_freq_candidates:
                         future_terms = _submit_with_current_context(
                             executor,
-                            self.llm.verify_high_frequency_terms,
-                            sampled_text=full_text,
-                            high_freq_candidates=high_freq_candidates,
-                            timeout=timeout
+                            self._checkpoint_analysis_call,
+                            "term-verification", self.llm.verify_high_frequency_terms,
+                            {"sampled_text": full_text, "high_freq_candidates": high_freq_candidates, "timeout": timeout},
+                            self._validate_terms_result
                         )
 
                     deep_analysis_result = None
@@ -296,7 +303,12 @@ class DeepAnalyzer:
                             except Exception as exc:
                                 # 术语验证失败不影响整体流程，标记为已尝试（空），不再重试
                                 logger.warning(f"Phase 0.2b FAILED: {str(exc)[:200]}, continuing without verified terms")
+                                from src.llm.work_budget import WorkBudgetExceeded
+                                from src.llm.errors import LLMRequestCancelledError
+                                if isinstance(exc, (WorkBudgetExceeded, LLMRequestCancelledError)):
+                                    raise
                                 cached_verified_terms = []
+                                terms_verified_ok = False
 
                     if deep_error is not None:
                         raise deep_error
@@ -312,7 +324,11 @@ class DeepAnalyzer:
             except Exception as exc:
                 elapsed = time.time() - start_time
                 last_error = exc
-                if attempt_index == len(deduped_steps) - 1 or not self._should_retry_with_smaller_sample(exc):
+                from src.llm.work_budget import retry_action
+                action = retry_action(exc)
+                if action in {"retry", "format"}:
+                    retained_sample = sample_chars
+                if attempt_index == len(deduped_steps) - 1 or action not in {"retry", "resize", "format"}:
                     logger.error(
                         "Phase 0.2 FAILED: attempt=%s/%s elapsed=%.1fs error=%s",
                         attempt_index + 1,
@@ -352,8 +368,33 @@ class DeepAnalyzer:
             should_cancel=should_cancel,
         )
         analysis.section_roles = section_roles
+        analysis.checkpoint_eligible = terms_verified_ok and all(
+            role.role_in_article not in {"", "待分析"} for role in section_roles.values())
 
         return analysis
+
+    def _checkpoint_analysis_call(self, task, method, kwargs, validator):
+        from src.services.work_checkpoints import checkpoint_call
+        # Time limits control execution, not meaning; a later larger time budget
+        # can reuse the same already validated response.
+        inputs = {key: value for key, value in kwargs.items() if key != "timeout"}
+        return checkpoint_call(task, self.llm, inputs, lambda: method(**kwargs), validator)
+
+    @staticmethod
+    def _validate_deep_result(value):
+        if not isinstance(value, dict):
+            raise ValueError("Deep analysis must be an object")
+        # Provider parsing owns its detailed schema; reject malformed or empty
+        # envelopes before reusing them as expensive completed work.
+        if not value:
+            raise ValueError("Deep analysis cannot be empty")
+        return value
+
+    @staticmethod
+    def _validate_terms_result(value):
+        if not isinstance(value, list) or any(not isinstance(item, dict) for item in value):
+            raise ValueError("Term verification must be a list of objects")
+        return value
 
     def _raise_if_cancelled(
         self,
@@ -696,7 +737,9 @@ class DeepAnalyzer:
             )
             result = self.llm._parse_json_response(response)
         except Exception as exc:
-            if "cancel" in str(exc).lower():
+            from src.llm.work_budget import WorkBudgetExceeded
+            from src.llm.errors import LLMRequestCancelledError
+            if isinstance(exc, (WorkBudgetExceeded, LLMRequestCancelledError)) or "cancel" in str(exc).lower():
                 raise
             logger.warning(
                 "Section role map 分析失败，回退为默认章节角色（保留已完成的深度分析）: %s",

@@ -120,13 +120,22 @@ class PostOptimizeResponse(BaseModel):
     fallback_used: bool = False
 
 
+from src.config.efficiency import EfficiencyOptions
+
+
 class FullTranslateRequest(BaseModel):
     model: Optional[str] = None
+    model_scope: Literal["all", "draft"] = "all"
+    model_profile: Literal["default", "fast", "premium"] = "default"
+    efficiency: EfficiencyOptions = Field(default_factory=EfficiencyOptions)
 
 
 class LongformWorkflowStartRequest(BaseModel):
     method: Literal["normal", "four-step"] = "four-step"
     model: Optional[str] = Field(None, max_length=100)
+    model_scope: Literal["all", "draft"] = "all"
+    model_profile: Literal["default", "fast", "premium"] = "default"
+    efficiency: EfficiencyOptions = Field(default_factory=EfficiencyOptions)
     # 覆盖已有译文的范围。默认 resume 是历史行为——只翻没有可用译文的段落。
     # section 需要同时给出 retranslate_section_ids。
     retranslate_scope: Literal["resume", "section", "all"] = "resume"
