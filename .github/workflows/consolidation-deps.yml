@@ -1,0 +1,36 @@
+name: Consolidation test dependencies
+on:
+  push:
+    branches: ["integrate/all-pending-prs"]
+    paths: [".github/workflows/consolidation-deps.yml"]
+permissions:
+  contents: read
+jobs:
+  dependencies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 3c65e6833bdbdf29d29fd19885a5e35839c85bb8
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Download backend wheels
+        run: python -m pip download --only-binary=:all: -r requirements-dev.txt -d "$RUNNER_TEMP/integration-wheels"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install the locked frontend dependencies
+        working-directory: web/frontend
+        run: |
+          npm ci
+          tar -czf "$RUNNER_TEMP/integration-node-modules.tar.gz" node_modules
+      - uses: actions/upload-artifact@v4
+        with:
+          name: consolidation-dependencies
+          path: |
+            ${{ runner.temp }}/integration-wheels
+            ${{ runner.temp }}/integration-node-modules.tar.gz
+          retention-days: 1
