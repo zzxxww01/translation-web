@@ -18,7 +18,8 @@ jobs:
         with:
           python-version: '3.13'
       - name: Download backend wheels
-        run: python -m pip download --only-binary=:all: -r requirements-dev.txt -d "$RUNNER_TEMP/integration-wheels"
+        run: |
+          python -m pip download --only-binary=:all: -r requirements-dev.txt -d "$RUNNER_TEMP/integration-wheels"
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
