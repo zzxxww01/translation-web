@@ -1,3 +1,4 @@
+import type { LongformCostOptions } from "./api";
 import { Suspense, lazy, useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 import type { TermReviewDecision } from '../confirmation/types';
@@ -345,8 +346,9 @@ export function DocumentFeature() {
     updateRouteParams,
   ]);
 
+  const [pendingCostOptions, setPendingCostOptions] = useState<LongformCostOptions>();
   const handleFullTranslate = useCallback(
-    async (method?: TranslationMethod, model?: string) => {
+    async (method?: TranslationMethod, model?: string, costOptions?: LongformCostOptions) => {
       if (!activeProject) return;
 
       if (isPreparingFullTranslate) {
@@ -362,6 +364,7 @@ export function DocumentFeature() {
       const selectedMethod = method ?? TranslationMethod.FOUR_STEP;
       setPendingStartMethod(selectedMethod);
       setPendingStartModel(model);
+      setPendingCostOptions(costOptions);
       setShowStartDialog(true);
     },
     [
@@ -843,7 +846,8 @@ export function DocumentFeature() {
                   pendingStartModel,
                   pendingScope === 'section' && activeSectionId
                     ? { scope: 'section', sectionIds: [activeSectionId] }
-                    : { scope: pendingScope === 'section' ? 'resume' : pendingScope }
+                    : { scope: pendingScope === 'section' ? 'resume' : pendingScope },
+                  pendingCostOptions,
                 );
               } catch (error) {
                 console.error('Failed to start full translation:', error);

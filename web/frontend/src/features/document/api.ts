@@ -56,6 +56,20 @@ export type RetranslateOption =
   | { scope: 'all' }
   | { scope: 'section'; sectionIds: string[] };
 
+export interface LongformCostOptions {
+  model_scope?: 'all' | 'draft';
+  model_profile?: 'default' | 'fast' | 'premium';
+  efficiency?: {
+    resume_stages?: boolean;
+    prescan_concurrency?: number;
+    stage_timeout_seconds?: number;
+    max_stage_calls?: number;
+    run_timeout_seconds?: number;
+    max_run_calls?: number;
+    compact_review?: boolean;
+  };
+}
+
 export interface LongformWorkflowStartResponse {
   status: 'started';
   project_id: string;
@@ -238,12 +252,14 @@ export const documentApi = {
     method: 'normal' | 'four-step',
     model?: string,
     retranslate?: RetranslateOption,
+    costOptions?: LongformCostOptions,
   ) =>
     apiClient.post<LongformWorkflowStartResponse>(
       `/projects/${projectId}/translation-workflow`,
       {
         method,
         model,
+        ...costOptions,
         retranslate_scope: retranslate?.scope ?? 'resume',
         // 后端在 scope != 'section' 时带 id 会直接报错，这里保持严格对齐
         retranslate_section_ids:

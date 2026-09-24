@@ -36,6 +36,8 @@ def positive_token_limit(value: Any) -> int:
 
 
 def check_active() -> None:
+    from .work_budget import check_work_active
+    check_work_active()
     event = _cancel.get()
     if event is not None and event.is_set():
         raise LLMRequestCancelledError("LLM request was abandoned; no further attempts will be sent")
@@ -65,6 +67,17 @@ def bounded_sleep(seconds: float) -> None:
     else:
         event.wait(seconds)
     check_active()
+
+
+@contextmanager
+def deadline_scope(seconds: float):
+    parent = _deadline.get()
+    deadline = time.monotonic() + positive_timeout(seconds)
+    token = _deadline.set(min(parent, deadline) if parent is not None else deadline)
+    try:
+        yield
+    finally:
+        _deadline.reset(token)
 
 
 @contextmanager
@@ -108,6 +121,10 @@ def generation_budget(fn):
             config = getattr(plans[0].model, "config", {}) if plans else {}
             timeout = config.get("timeout", 120) if isinstance(config, dict) else 120
         seconds = positive_timeout(timeout)
+        from .request_budget import check_provider_request
+        prompt = bound.get("prompt", options.get("prompt"))
+        if isinstance(prompt, str):
+            check_provider_request(self, prompt)
         check_active()
         parent = _deadline.get()
         deadline = time.monotonic() + seconds

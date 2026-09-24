@@ -36,6 +36,11 @@ class ProjectRepository:
         self._render_markdown_line = render_markdown_line
         self._best_translation_text = best_translation_text
         self._logger = logger_ or logging.getLogger(__name__)
+        from collections import OrderedDict
+        from threading import RLock
+        self._parsed_cache = OrderedDict()
+        self._parsed_cache_lock = RLock()
+        self._parsed_cache_bytes = 0
 
     def _resolve_section_dir(self, project_id: str, section_id: str) -> Optional[Path]:
         """兜底路径边界校验:section_id 含 ../ 或 ..\\ 时不得越出本项目的 sections 目录。
@@ -116,6 +121,14 @@ class ProjectRepository:
             return None
 
         try:
+            stat = meta_path.stat()
+            stamp = (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+            cache_key = (project_id, section_id)
+            with self._parsed_cache_lock:
+                cached = self._parsed_cache.get(cache_key)
+                if cached is not None and cached[0] == stamp:
+                    self._parsed_cache.move_to_end(cache_key)
+                    return cached[1].model_copy(deep=True)
             data = self._read_json(meta_path)
             if not isinstance(data, dict) or not isinstance(data.get("paragraphs"), list):
                 raise ValueError("paragraphs must be an array")
@@ -147,6 +160,18 @@ class ProjectRepository:
                     paragraph.parent_block_markdown = self._render_source_block_markdown([paragraph])
                 if paragraph.segment_end is None:
                     paragraph.segment_end = paragraph.segment_start + len(paragraph.source)
+            after = meta_path.stat()
+            after_stamp = (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns)
+            if after_stamp == stamp and stat.st_size <= 8 * 1024 * 1024:
+                with self._parsed_cache_lock:
+                    previous = self._parsed_cache.pop(cache_key, None)
+                    if previous is not None:
+                        self._parsed_cache_bytes -= previous[2]
+                    self._parsed_cache[cache_key] = (stamp, section.model_copy(deep=True), stat.st_size)
+                    self._parsed_cache_bytes += stat.st_size
+                    while len(self._parsed_cache) > 128 or self._parsed_cache_bytes > 32 * 1024 * 1024:
+                        _, removed = self._parsed_cache.popitem(last=False)
+                        self._parsed_cache_bytes -= removed[2]
             return section
         except (ValueError, KeyError, TypeError, OSError) as error:
             self._logger.warning("Failed to load complete section %s: %s", section_id, error)

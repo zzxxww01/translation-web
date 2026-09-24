@@ -114,6 +114,9 @@ def _build_longform_service(
         max_concurrent_sections=10,
         analysis_llm_provider=analysis_llm,
         user_model_override=body.model,
+        model_scope=body.model_scope,
+        model_profile=body.model_profile,
+        efficiency_options=body.efficiency,
     )
     service.set_retranslate_scope(
         body.retranslate_scope,
@@ -706,8 +709,9 @@ async def start_longform_workflow(
                 project_id=project_id,
                 pm=translation_service.project_manager,
                 gm=translation_service.project_manager.glossary_manager,
-                llm=translation_service.llm,
-                model=body.model,
+                llm=(translation_service._get_provider_for_phase("phase0_prescan")
+                     if body.model_scope == "draft" else translation_service.llm),
+                model=(None if body.model_scope == "draft" else body.model),
             )
             workflow_run_id = job["job_id"]
             term_review_job_id = job["job_id"]

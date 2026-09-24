@@ -22,3 +22,21 @@ describe('document export query parameters', () => {
     }
   });
 });
+
+
+describe('longform cost options', () => {
+  it('sends explicit phase scope and compact review without changing retranslation scope', async () => {
+    const fetchMock = vi.fn().mockImplementation(() => Promise.resolve(new Response(JSON.stringify({
+      status: 'started', project_id: 'project-a',
+    }), { status: 200 })));
+    vi.stubGlobal('fetch', fetchMock);
+    await documentApi.startLongformWorkflow('project-a', 'four-step', 'my-model', undefined, {
+      model_scope: 'draft', efficiency: { compact_review: true, max_stage_calls: 10 },
+    });
+    const request = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(request.model).toBe('my-model');
+    expect(request.model_scope).toBe('draft');
+    expect(request.efficiency).toEqual({ compact_review: true, max_stage_calls: 10 });
+    expect(request.retranslate_scope).not.toBe('all');
+  });
+});

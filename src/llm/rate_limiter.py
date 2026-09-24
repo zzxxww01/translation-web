@@ -55,6 +55,8 @@ def transport_slot():
     config = route.get("rate_limit")
     check_active()
     if config is None:
+        from .work_budget import admit_transport
+        admit_transport()
         yield
         return
     key = route["provider_id"]
@@ -68,4 +70,6 @@ def transport_slot():
             raise ValueError("Provider rate_limit changed; restart workers to apply it")
     with limiter.acquire():
         check_active()
+        from .work_budget import admit_transport
+        admit_transport()
         yield

@@ -810,7 +810,10 @@ async def translate_with_four_steps(
             translation_mode=BatchTranslationService.TRANSLATION_MODE_FOUR_STEP,
             max_concurrent_sections=10,  # 并发翻译10个章节（VectorEngine支持100并发）
             analysis_llm_provider=analysis_llm,
-            user_model_override=_body.model,  # 传递用户指定的模型
+            user_model_override=_body.model,
+            model_scope=_body.model_scope,
+            model_profile=_body.model_profile,
+            efficiency_options=_body.efficiency,
         )
     except Exception:
         BatchTranslationService._release_active_run(

@@ -82,7 +82,9 @@ class QualityGate:
             failed.append("missing_or_empty_translation")
         if any(issue.severity in {"critical", "high"} for issue in reflection.issues):
             failed.append("unresolved_serious_issues")
-        return QualityAssessment(passed=not failed, overall_score=overall, scores=scores,
+        return QualityAssessment(passed=not failed, overall_score=overall if reflection.scores_available else 0,
+                                 scores=scores if reflection.scores_available else {},
+                                 scores_available=reflection.scores_available,
                                  failed_criteria=failed, action="manual_review" if failed else "pass")
 
     def _assess_terminology(
@@ -218,6 +220,8 @@ class QualityGate:
             "style": "风格"
         }
 
+        if not assessment.scores_available:
+            lines.append("未请求数值评分；通过状态依据实际问题与覆盖率。")
         for dim, score in assessment.scores.items():
             weight = self.WEIGHTS.get(dim, 0) * 100
             name = dimension_names.get(dim, dim)
@@ -225,7 +229,7 @@ class QualityGate:
 
         lines.extend([
             "-" * 30,
-            f"综合评分: {assessment.overall_score:.1f}/10",
+            f"综合评分: {assessment.overall_score:.1f}/10" if assessment.scores_available else "综合评分: 未评估",
             "",
         ])
 

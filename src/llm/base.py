@@ -340,10 +340,13 @@ class LLMProvider(ABC):
                         existing_terms: Dict[str, str], model: Optional[str] = None) -> Dict[str, Any]:
         from ..prompts.contracts import object_response, PromptContractError
         import json
-        existing = json.dumps(existing_terms, ensure_ascii=False, default=str)
+        from ..core.glossary_prompt import _count_term_occurrences
         chunks = self._split_content_for_prescan(section_content, max_chars=TranslationLimits.PRESCAN_CHUNK_SIZE)
         candidates = {}
         for index, chunk in enumerate(chunks):
+            matched = {term: value for term, value in existing_terms.items()
+                       if isinstance(term, str) and _count_term_occurrences(chunk, term) > 0}
+            existing = json.dumps(matched, ensure_ascii=False, default=str)
             prompt = self._build_prescan_prompt(section_id=section_id, section_title=section_title,
                                                section_content=chunk, existing_terms=existing)
             result = object_response(self.generate(prompt, response_format="json", temperature=0.3, model=model), ("new_terms",))
@@ -440,7 +443,8 @@ class LLMProvider(ABC):
         guidelines_text = "\n".join([f"- {g}" for g in guidelines])
 
         base_prompt = self.prompt_manager.get(
-            "longform/review/section_critique",
+            ("longform/review/section_critique_compact" if (context or {}).get("compact_review")
+             else "longform/review/section_critique"),
             pairs_text=pairs_text,
             guidelines_text=guidelines_text,
             terms_text=terms_text,

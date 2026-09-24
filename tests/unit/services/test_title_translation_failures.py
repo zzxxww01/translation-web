@@ -113,8 +113,16 @@ def test_title_completeness_blocks_completed_even_when_body_is_complete():
 async def test_run_summary_cannot_hide_title_failures(monkeypatch, tmp_path, translated, expected):
     service, project, analysis, _ = make_service(fallback=translated)
     project.status = ProjectStatus.CREATED
-    project.sections[0].paragraphs = [SimpleNamespace()]
-    analysis.terminology = []
+    from src.core.models import ProjectMeta, Section, Paragraph, ArticleAnalysis
+    paragraph = Paragraph(id="p1", index=0, source="Source")
+    paragraph.add_translation("正文已经译好", "draft")
+    project = ProjectMeta(id="demo", title="Why AI needs more power", source_file="source.md",
+                          sections=[Section(section_id="s1", title="Why AI needs more power", paragraphs=[paragraph])])
+    analysis = ArticleAnalysis(theme="AI")
+    from src.config.efficiency import EfficiencyOptions
+    service.efficiency = EfficiencyOptions()
+    service.project_manager._project_dir = lambda project_id: tmp_path / project_id
+    service.project_manager.projects_path = tmp_path
     service.translation_mode = "section"
     service.context_manager = Mock()
     service.translator = Mock()
@@ -142,7 +150,7 @@ async def test_run_summary_cannot_hide_title_failures(monkeypatch, tmp_path, tra
     service.project_manager.update_progress = Mock()
     service.project_manager.get_export_path = Mock(return_value=tmp_path / "zh.md")
     service.project_manager.export_markdown = Mock(return_value="正文已经译好")
-    monkeypatch.setattr("src.services.batch_translation_service.DeepAnalyzer", Mock())
+    monkeypatch.setattr("src.services.batch_translation_service.DeepAnalyzer", Mock(return_value=SimpleNamespace(analyze=Mock(return_value=analysis))))
     monkeypatch.setattr("src.services.batch_translation_service.SourceMetadataTranslationService", Mock())
 
     result = await service.translate_project("demo")
