@@ -1,83 +1,31 @@
-"""
-JSON 解析工具函数
-
-统一处理 LLM 返回的 JSON 响应。
-"""
-
+"""Parse complete model JSON; malformed responses must not masquerade as success."""
 import json
 import logging
 import re
-from typing import Any, Dict, List, Sequence, Union
-
-
-logger = logging.getLogger(__name__)
+from typing import Any, Dict, List, Sequence
+from src.prompts.contracts import parse_json, PromptContractError, json_decoder
 
 
 def parse_llm_json_response(response: str) -> Dict[str, Any]:
-    """
-    解析 LLM 返回的 JSON 响应
-
-    处理常见问题：
-    - 移除 markdown 代码块标记
-    - 提取 JSON 对象
-
-    Args:
-        response: LLM 返回的原始文本
-
-    Returns:
-        Dict: 解析后的 JSON 对象，解析失败返回空字典
-    """
-    text = response.strip()
-
-    # 移除 markdown 代码块
-    text = text.replace("```json", "").replace("```", "").strip()
-
-    # 尝试提取 JSON 对象
-    start_idx = text.find("{")
-    end_idx = text.rfind("}") + 1
-    if start_idx != -1 and end_idx > start_idx:
-        text = text[start_idx:end_idx]
-
+    """Recover relay control characters, but never accept incomplete JSON."""
     try:
-        return json.loads(text)
-    except json.JSONDecodeError:
-        try:
-            # 中转/relay 常把未转义换行写进 JSON 字符串，有时连键名都被换行拆断。
-            # strict=False 只放宽字符串内 U+0000..U+001F：不补造截断数据、不修改
-            # 正文与合法转义，其他 JSON 语法错误仍然照旧失败。
-            return json.loads(text, strict=False)
-        except json.JSONDecodeError:
-            # 解析失败仍返回 {}（调用方依赖该语义），但记录首段原文以便定位截断/赘述
-            logger.warning("parse_llm_json_response failed, head=%r", text[:200])
-            return {}
+        value = parse_json(response)
+    except PromptContractError:
+        # Only relax literal control characters inside strings; the same
+        # duplicate-key, finite-number, fence and trailing-data checks apply.
+        value = parse_json(response, strict=False)
+    if not isinstance(value, dict):
+        raise PromptContractError("Expected a JSON object")
+    return value
 
 
 def parse_llm_json_array(response: str) -> List[Any]:
-    """
-    解析 LLM 返回的 JSON 数组响应
+    result = parse_json(response)
+    if not isinstance(result, list):
+        raise PromptContractError("Expected a JSON array")
+    return result
 
-    Args:
-        response: LLM 返回的原始文本
-
-    Returns:
-        List: 解析后的 JSON 数组，解析失败返回空列表
-    """
-    text = response.strip()
-
-    # 移除 markdown 代码块
-    text = text.replace("```json", "").replace("```", "").strip()
-
-    # 尝试提取 JSON 数组
-    start_idx = text.find("[")
-    end_idx = text.rfind("]") + 1
-    if start_idx != -1 and end_idx > start_idx:
-        text = text[start_idx:end_idx]
-
-    try:
-        result = json.loads(text)
-        return result if isinstance(result, list) else []
-    except json.JSONDecodeError:
-        return []
+logger = logging.getLogger(__name__)
 
 _CONTROL_CHARS = re.compile(r"[\x00-\x1f\x7f]")
 _RELAY_BREAK = re.compile(r"[ \t]*[\r\n]+[ \t]*")
@@ -122,6 +70,8 @@ def normalize_control_keys(value: Any, known_keys: Sequence[str]) -> Any:
                 if isinstance(key, str) and _CONTROL_CHARS.search(key):
                     cleaned = _CONTROL_CHARS.sub("", key).strip().casefold()
                     key = allowed.get(cleaned, key)
+                if key in repaired:
+                    raise PromptContractError("Relay key normalization collision")
                 repaired[key] = _walk(item)
             return repaired
         if isinstance(node, list):
@@ -146,6 +96,8 @@ def parse_title_json_response(response: str) -> Dict[str, Any]:
     Returns:
         Dict: 解析后的 JSON 对象，解析失败返回空字典
     """
+    if not isinstance(response, str):
+        return {}
     text = response.strip(" \t\r\n")
 
     # 仅剥离完整的外层代码块；全局 replace 会破坏 JSON 字符串里的正文。
@@ -157,13 +109,13 @@ def parse_title_json_response(response: str) -> Dict[str, Any]:
 
     # 不截取首尾花括号：数组内的对象、带截断尾部的数据不能冒充完整对象。
     try:
-        result = json.loads(text)
-    except json.JSONDecodeError:
+        result = json_decoder().decode(text)
+    except (json.JSONDecodeError, PromptContractError, ValueError):
         try:
             # strict=False 仅放宽字符串内 U+0000..U+001F，不补全数据，
             # 不修改空白、合法转义或正文；其他 JSON 语法规则仍然生效。
-            result = json.loads(text, strict=False)
-        except json.JSONDecodeError:
-            logger.warning("parse_llm_json_response failed, head=%r", text[:200])
+            result = json_decoder(strict=False).decode(text)
+        except (json.JSONDecodeError, PromptContractError, ValueError):
+            logger.warning("Title JSON rejected (characters=%d)", len(text))
             return {}
     return result if isinstance(result, dict) else {}

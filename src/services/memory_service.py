@@ -17,11 +17,6 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import List
 
-try:
-    from filelock import FileLock, Timeout as FileLockTimeout
-except ImportError:  # pragma: no cover - filelock 应已安装
-    FileLock = None
-    FileLockTimeout = ()
 
 logger = logging.getLogger(__name__)
 
@@ -109,9 +104,8 @@ class TranslationMemoryService:
                 user_translation=user_translation,
             )
             if new_rules:
-                self._append_rules(new_rules)
-                logger.info("Extracted %d rules from correction", len(new_rules))
-                self._maybe_consolidate()
+                self._queue_candidates(new_rules, "human_correction", {"source":source, "before":ai_translation, "after":user_translation})
+                logger.info("Queued %d correction rule candidates", len(new_rules))
             return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from correction: %s", e)
@@ -138,9 +132,8 @@ class TranslationMemoryService:
                 after=after,
             )
             if new_rules:
-                self._append_rules(new_rules)
-                logger.info("Extracted %d rules from retranslation", len(new_rules))
-                self._maybe_consolidate()
+                self._queue_candidates(new_rules, "model_retranslation", {"instruction":instruction, "source":source, "before":before, "after":after})
+                logger.info("Queued %d retranslation rule candidates", len(new_rules))
             return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from retranslation: %s", e)
@@ -175,18 +168,35 @@ class TranslationMemoryService:
                 translations_text=translations_text,
             )
             if new_rules:
-                self._append_rules(new_rules)
-                logger.info("Extracted %d rules from reflection", len(new_rules))
-                self._maybe_consolidate()
+                self._queue_candidates(new_rules, "model_reflection", {"issues":issues_text, "translations":translations_text})
+                logger.info("Queued %d reflection rule candidates", len(new_rules))
             return new_rules
         except Exception as e:
             logger.warning("Failed to extract rules from reflection: %s", e)
             return []
 
+    def _candidate_store(self):
+        from .memory_candidates import RuleCandidates
+        return RuleCandidates(GLOBAL_MEMORY_PATH)
+
+    def _queue_candidates(self, rules, source_kind, evidence):
+        filtered = [r for r in rules if isinstance(r, str) and r.strip() and not self._is_term_rule(r)]
+        return self._candidate_store().add(filtered, source_kind, evidence)
+
+    def get_rule_candidates(self):
+        return self._candidate_store().list()
+
+    def decide_rule_candidate(self, candidate_id: str, action: str):
+        return self._candidate_store().decide(candidate_id, action, self._append_rules)
+
     # ============ 规则读取 ============
 
     def get_rules_for_prompt(self) -> List[str]:
         """获取用于注入翻译 prompt 的规则列表（截断到上限）。"""
+        from src.prompts import active_rule_snapshot
+        frozen = active_rule_snapshot()
+        if frozen is not None:
+            return list(frozen)
         with self._lock:
             rules = self._load_rules()
             if not rules:
@@ -199,9 +209,9 @@ class TranslationMemoryService:
             for rule in reversed(rules):
                 if len(selected) >= MAX_RULES_IN_PROMPT:
                     break
+                if total_chars + len(rule) > MAX_RULES_CHARS:
+                    continue
                 total_chars += len(rule)
-                if total_chars > MAX_RULES_CHARS:
-                    break
                 selected.append(rule)
             # 在选中的最新规则内恢复时间顺序（旧→新），读起来更自然
             selected.reverse()
@@ -214,8 +224,8 @@ class TranslationMemoryService:
 
     def delete_rule_by_index(self, index: int) -> bool:
         """按索引删除规则。"""
-        with self._lock:
-            rules = self._load_rules()
+        with self._file_lock(), self._lock:
+            rules = list(self._load_rules())
             if 0 <= index < len(rules):
                 rules.pop(index)
                 self._save_rules(rules)
@@ -254,15 +264,16 @@ class TranslationMemoryService:
     @staticmethod
     def _is_near_duplicate(rule: str, existing: List[str]) -> bool:
         """与已有规则做轻量语义近似判断，避免措辞不同的重复无限累积。"""
-        for other in existing:
-            if difflib.SequenceMatcher(None, rule, other).ratio() >= RULE_SIMILARITY_THRESHOLD:
-                return True
-        return False
+        # A one-character negation can reverse the meaning of otherwise similar
+        # rules. Only ignore whitespace/terminal punctuation, never semantic text.
+        import re
+        canonical = lambda text: re.sub(r"\s+", "", text).rstrip("。.!！?？;；")
+        return any(canonical(rule) == canonical(other) for other in existing)
 
     def _append_rules(self, new_rules: List[str]) -> None:
         """追加规则：过滤术语型规则、跳过精确与近似重复。"""
         with self._file_lock(), self._lock:
-            existing = self._load_rules()
+            existing = list(self._load_rules())
             existing_set = {r.strip() for r in existing}
             added = 0
             for rule in new_rules:
@@ -353,70 +364,27 @@ class TranslationMemoryService:
         coro.close()
 
     async def _consolidate_rules(self) -> None:
-        """使用 LLM 梳理规则库：合并重复、解决矛盾、删除模糊规则。
-
-        梳理期间（LLM 调用耗时数秒）可能有其它学习任务追加新规则。完成保存前
-        会把这些窗口期新增规则并入 consolidated，避免被整表覆盖而丢失。
-        """
+        """Consolidation proposes candidates only; it cannot erase approved rules."""
+        rules = self.get_all_rules()
+        if not rules:
+            return
         try:
-            with self._lock:
-                rules = self._load_rules()
-                if not rules:
-                    return
-                snapshot = list(rules)
-                rules_text = "\n".join(f"- {r}" for r in snapshot)
-
             from src.prompts import get_prompt_manager
-            pm = get_prompt_manager()
-            prompt = pm.get(
-                "longform/learning/rules_consolidation",
-                rules_text=rules_text,
-            )
-
+            prompt = get_prompt_manager().render("longform/learning/rules_consolidation", rules_text="\n".join("- " + r for r in rules))
             response = await asyncio.to_thread(self._generate, prompt)
-            consolidated = self._parse_bullet_list(response)
-
-            if not consolidated:
-                logger.warning("Consolidation returned empty, skipping")
-                return
-
-            with self._file_lock(), self._lock:
-                current = self._load_rules()
-                old_count = len(current)
-                # 并入窗口期新增（在 current 中但不在送去梳理的 snapshot 里）的规则
-                snapshot_set = set(snapshot)
-                merged = list(consolidated)
-                merged_set = set(consolidated)
-                for rule in current:
-                    if rule not in snapshot_set and rule not in merged_set:
-                        merged.append(rule)
-                        merged_set.add(rule)
-                self._save_rules(merged)
-
-            logger.info("Consolidation complete: %d → %d rules", old_count, len(merged))
-
-        except Exception as e:
-            logger.warning("Rule consolidation failed: %s", e)
+            candidates = self._parse_bullet_list(response)
+            self._queue_candidates(candidates, "consolidation", {"rules": "\n".join(rules)})
+        except Exception as exc:
+            logger.warning("Rule consolidation proposal failed: %s", exc)
 
     # ============ 存储 ============
 
     @contextmanager
     def _file_lock(self):
-        """跨进程文件锁，保护 global_memory.md 的 read-modify-write 不被并发覆盖。
-
-        类级 _lock 只能串行化同进程内的访问；多进程部署时需文件锁防止丢写。
-        filelock 不可用或获取超时时降级为无锁（仍由 _lock 保证同进程安全）。
-        """
-        if FileLock is None:
-            yield
-            return
-        lock_path = str(GLOBAL_MEMORY_PATH) + ".lock"
-        lock = FileLock(lock_path, timeout=10)
-        try:
-            with lock:
-                yield
-        except FileLockTimeout:
-            logger.warning("global_memory 文件锁获取超时，降级为进程内锁继续")
+        """Fail closed on lock timeout; every writer uses the same process lock."""
+        import portalocker
+        GLOBAL_MEMORY_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with portalocker.Lock(str(GLOBAL_MEMORY_PATH) + ".lock", timeout=10):
             yield
 
     @staticmethod
@@ -443,7 +411,8 @@ class TranslationMemoryService:
                 text = GLOBAL_MEMORY_PATH.read_text(encoding="utf-8")
                 rules = self._parse_bullet_list(text)
             except Exception as e:
-                logger.warning("Failed to load rules from %s: %s", GLOBAL_MEMORY_PATH, e)
+                logger.error("Failed to load rules from %s: %s", GLOBAL_MEMORY_PATH, e)
+                raise
 
         self._cache[cache_key] = rules
         self._cache_mtime[cache_key] = mtime
@@ -455,11 +424,9 @@ class TranslationMemoryService:
 
         GLOBAL_MEMORY_PATH.parent.mkdir(parents=True, exist_ok=True)
         content = "\n".join(f"- {r}" for r in rules) + "\n" if rules else ""
-        temp_path = GLOBAL_MEMORY_PATH.with_suffix(".md.tmp")
-        temp_path.write_text(content, encoding="utf-8")
-        temp_path.replace(GLOBAL_MEMORY_PATH)
-
-        self._cache[cache_key] = rules
+        from src.core.file_utils import write_text_atomic
+        write_text_atomic(GLOBAL_MEMORY_PATH, content)
+        self._cache[cache_key] = list(rules)
         self._cache_mtime[cache_key] = self._current_mtime()
 
     # ============ 工具方法 ============

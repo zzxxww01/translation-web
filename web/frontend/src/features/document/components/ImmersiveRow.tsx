@@ -1,3 +1,4 @@
+import { sanitizeSourceHtml } from '@/shared/safeHtml';
 import { Check, ChevronDown, RotateCw } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button-extended';
@@ -43,7 +44,7 @@ function renderSource(paragraph: Paragraph, isApproved: boolean) {
     return (
       <div
         className={`max-h-72 overflow-auto rounded border border-border-subtle p-3 text-sm ${bgClass}`}
-        dangerouslySetInnerHTML={{ __html: paragraph.source_html }}
+        dangerouslySetInnerHTML={{ __html: sanitizeSourceHtml(paragraph.source_html) }}
       />
     );
   }

@@ -1,12 +1,18 @@
 import path from 'path';
+import { createRequire } from 'node:module';
 // 从 vitest/config 导入：它是 vite defineConfig 的超集，多认一个 `test` 字段。
 // 用 vite 的版本会让下面的 test 块过不了 tsc -b，进而卡死 npm run build。
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 
+const mathjaxPackage = createRequire(import.meta.url)('mathjax-full/package.json') as { version: string };
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  // MathJax 3's official build constant replaces its Node-only version lookup.
+  // Read the installed version; do not hard-code it or suppress eval warnings.
+  define: { PACKAGE_VERSION: JSON.stringify(mathjaxPackage.version) },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import {
   glossaryApi,
@@ -35,19 +35,25 @@ export function useTermReviewFlow({
   const prepareControllerRef = useRef<AbortController | null>(null);
   const submitControllerRef = useRef<AbortController | null>(null);
   const dismissedTermReviewJobRef = useRef<string | null>(null);
-  currentProjectIdRef.current = currentProjectId;
+  const [scope, setScope] = useState({ project: currentProjectId, run: activeRunId });
+  if (scope.project !== currentProjectId || scope.run !== activeRunId) {
+    setScope({ project: currentProjectId, run: activeRunId });
+    if (scope.project !== currentProjectId || (activeRunId && !/^[0-9a-f]{32}$/i.test(activeRunId))) {
+      setPendingTermReview(null);
+      setPendingTranslationRequest(null);
+      setIsSubmittingTermReview(false);
+      setIsPreparingFullTranslate(false);
+    }
+  }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    currentProjectIdRef.current = currentProjectId;
     operationGenerationRef.current += 1;
     prepareControllerRef.current?.abort();
     submitControllerRef.current?.abort();
     prepareControllerRef.current = null;
     submitControllerRef.current = null;
     dismissedTermReviewJobRef.current = null;
-    setPendingTermReview(null);
-    setPendingTranslationRequest(null);
-    setIsSubmittingTermReview(false);
-    setIsPreparingFullTranslate(false);
   }, [currentProjectId]);
 
   useEffect(
@@ -306,10 +312,10 @@ export function useTermReviewFlow({
     if (!activeRunId || /^[0-9a-f]{32}$/i.test(activeRunId)) {
       return;
     }
-    // The placeholder job id changes to the real translation run id when the
-    // server releases the terminology gate (submission or timeout).
-    setPendingTermReview(null);
-    setPendingTranslationRequest(null);
+    // Real run ids indicate that the server released the terminology gate.
+    operationGenerationRef.current += 1;
+    prepareControllerRef.current?.abort();
+    submitControllerRef.current?.abort();
     dismissedTermReviewJobRef.current = null;
     setView(null);
   }, [activeRunId, setView]);

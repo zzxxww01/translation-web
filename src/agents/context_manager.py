@@ -176,7 +176,13 @@ class LayeredContextManager:
         )
 
         # Layer 4: 动态累积上下文
-        context.term_usage = self.term_tracker.used_translations.copy()
+        context.term_usage = self.snapshot_term_usage()
+        from ..core.glossary_prompt import build_annotation_plan
+        if 0 <= current_paragraph_index < len(current_section.paragraphs):
+            context.annotation_plan = build_annotation_plan(
+                all_sections, context.terminology, current_section.section_id,
+                [current_section.paragraphs[current_paragraph_index].id],
+            )
         context.defined_abbreviations = self.defined_abbreviations.copy()
 
         return context

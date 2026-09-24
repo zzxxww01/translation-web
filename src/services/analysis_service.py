@@ -84,38 +84,10 @@ class AnalysisService:
 
     @staticmethod
     def _build_project_prompt(preview_content: str) -> str:
-        return f"""You are a senior technical editor. Analyze the following article content and provide a translation guide.
-
-## Content Preview
-{preview_content}
-
-## Task
-1. **Summary**: A concise abstract of the article (in Chinese).
-2. **Translation Notes**: 3-5 bullet points on tone, audience, or potential translation pitfalls (in Chinese).
-3. **Key Terms**: Extract 5-10 key technical terms that need consistent translation (keep English).
-
-## Output Format (Strict JSON)
-{{
-    "summary": "文章摘要...",
-    "notes": ["注意...", "语气..."],
-    "key_terms": ["Wafer", "Lithography"]
-}}
-"""
+        from src.prompts import get_prompt_manager
+        return get_prompt_manager().render("longform/analysis/project_summary", content=preview_content)
 
     @staticmethod
     def _build_section_prompt(content: str) -> str:
-        return f"""You are a technical translator. Analyze the following section content.
-
-## Section Content
-{content}
-
-## Task
-1. **Summary**: A very concise summary of this section (in Chinese, 2-3 sentences).
-2. **Translation Tips**: 2-3 specific tips for translating this section (e.g., specific terms, complex sentence structure).
-
-## Output Format (Strict JSON)
-{{
-    "summary": "本章主要讨论...",
-    "tips": ["注意...", "处理..."]
-}}
-"""
+        from src.prompts import get_prompt_manager
+        return get_prompt_manager().render("longform/analysis/section_summary", content=content)

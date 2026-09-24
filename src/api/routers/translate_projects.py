@@ -311,6 +311,28 @@ async def translate_full_document(
             await progress_queue.put(payload)
 
     async def run_translation_worker():
+        from src.prompts import prompt_bundle_scope
+        try:
+            artifacts = TranslationArtifactService(pm.projects_path)
+            previous = await asyncio.to_thread(artifacts.get_latest_run_dir, project_id)
+            snapshot = None
+            if previous is not None:
+                existing = await asyncio.to_thread(pm.get_sections, project_id)
+                count = sum(p.has_usable_translation() for s in existing for p in s.paragraphs)
+                total = sum(len(s.paragraphs) for s in existing)
+                if 0 < count < total:
+                    path = previous / "prompt-bundle.json"
+                    if not path.exists():
+                        raise ValueError("Legacy checkpoint has no prompt version; start an explicit full retranslation.")
+                    snapshot = json.loads(path.read_text(encoding="utf-8"))
+            with prompt_bundle_scope(snapshot):
+                await _run_translation_worker_impl()
+        except Exception as exc:
+            await emit({"type":"error", "error":str(exc)})
+        finally:
+            BatchTranslationService._release_active_run(project_id, lease_id=lease_id)
+
+    async def _run_translation_worker_impl():
         artifact_service = TranslationArtifactService(pm.projects_path)
         progress_tracker = BatchTranslationService._shared_progress_tracker
         progress = None

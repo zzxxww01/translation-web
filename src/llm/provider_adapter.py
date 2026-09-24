@@ -12,6 +12,8 @@ import uuid
 import time
 from typing import Optional, Any, Dict
 from functools import lru_cache
+from threading import RLock
+from .execution_context import generation_budget, remaining_timeout, bounded_sleep, route_scope
 
 from .config_loader import get_config_loader
 from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, ProviderNetworkConfig
@@ -23,6 +25,7 @@ from .network_policy import build_network_policy
 from .network_policy import RuntimeNetworkPolicy
 
 logger = logging.getLogger(__name__)
+_provider_construction_lock = RLock()
 
 
 class LLMNonRetryableError(LLMError):
@@ -47,7 +50,8 @@ _fallback_stats = {
 
 def get_fallback_stats() -> dict:
     """获取故障转移统计信息"""
-    return _fallback_stats.copy()
+    with _provider_construction_lock:
+        return _fallback_stats.copy()
 
 
 def _build_runtime_network_policy(
@@ -127,6 +131,10 @@ class ProviderAdapter:
         )
 
     def create_provider(self, attempt: AttemptPlan) -> LLMProvider:
+        with _provider_construction_lock:
+            return self._create_provider_locked(attempt)
+
+    def _create_provider_locked(self, attempt: AttemptPlan) -> LLMProvider:
         """
         根据尝试计划创建 Provider 实例
 
@@ -201,6 +209,7 @@ class ProviderAdapter:
 
         adapter = cls.__new__(cls)
         adapter.model_alias = model
+        adapter.timeout = getattr(provider, "request_timeout", None) or getattr(provider, "timeout", None) or 120
         adapter.attempt_plan = [SimpleNamespace(
             provider=SimpleNamespace(type=provider_type, provider_id=provider_type),
             model=SimpleNamespace(alias=model, real_model=model),
@@ -215,7 +224,14 @@ class ProviderAdapter:
         Keep a slot for official fallback even with many relay keys/models.
         Explicit official aliases never leave the official provider.
         """
-        plans = list(self.attempt_plan)
+        plans = []
+        seen = set()
+        for plan in self.attempt_plan:
+            key = (plan.provider.provider_id, plan.model.real_model,
+                   getattr(plan.api_key, "key", getattr(plan.api_key, "name", "")))
+            if key not in seen:
+                seen.add(key)
+                plans.append(plan)
         if "official" in self.model_alias.lower() or (plans and plans[0].provider.type == "gemini"):
             plans = [p for p in plans if p.provider.type == "gemini"]
         if len(plans) > 4:
@@ -256,6 +272,7 @@ class ProviderAdapter:
         facade.generate = MethodType(routed_generate, facade)
         return facade
 
+    @generation_budget
     def generate_with_fallback(
         self,
         prompt: str,
@@ -305,15 +322,22 @@ class ProviderAdapter:
                 )
 
                 provider = self.create_provider(attempt)
-                result = provider.generate(
-                    prompt=prompt,
-                    response_format=response_format,
-                    temperature=temperature,
-                    timeout=timeout,
-                    model=attempt.model.real_model,
-                    _single_attempt=True,
-                    **provider_kwargs,
-                )
+                runtime = getattr(attempt.model, "config", {})
+                runtime = runtime if isinstance(runtime, dict) else {}
+                attempt_kwargs = dict(provider_kwargs)
+                if attempt_kwargs.get("max_tokens") is None and runtime.get("max_tokens") is not None:
+                    attempt_kwargs["max_tokens"] = runtime["max_tokens"]
+                route_timeout = runtime.get("timeout") or timeout
+                with route_scope(attempt.provider.provider_id, getattr(attempt.provider, "rate_limit", None)):
+                    result = provider.generate(
+                        prompt=prompt,
+                        response_format=response_format,
+                        temperature=temperature if temperature is not None else runtime.get("temperature"),
+                        timeout=remaining_timeout(route_timeout),
+                        model=attempt.model.real_model,
+                        _single_attempt=True,
+                        **attempt_kwargs,
+                    )
 
                 if not isinstance(result, str) or not result.strip():
                     raise LLMUpstreamUnavailableError("LLM returned empty content")
@@ -367,7 +391,11 @@ class ProviderAdapter:
 
                 # 如果还有更多尝试，继续
                 if idx < len(attempt_plan):
-                    time.sleep(min(0.5 * (2 ** (idx - 1)), 2.0))
+                    try:
+                        bounded_sleep(min(0.5 * (2 ** (idx - 1)), 2.0))
+                    except Exception:
+                        _fallback_stats["failed_requests"] += 1
+                        raise
                     continue
                 else:
                     # 所有尝试都失败了

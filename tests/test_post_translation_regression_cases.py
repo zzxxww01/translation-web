@@ -71,7 +71,7 @@ def test_expected_translation_contains_its_must_include():
 
 
 @pytest.mark.skipif(
-    not os.getenv("RUN_LLM_TESTS"),
+    os.getenv("RUN_LLM_TESTS", "").strip().lower() not in {"1", "true", "yes"},
     reason="需要真实 LLM 调用，设置 RUN_LLM_TESTS=1 后运行",
 )
 def test_live_translation_satisfies_case_constraints():
@@ -80,7 +80,8 @@ def test_live_translation_satisfies_case_constraints():
     这是人工验收用的慢测试，不进常规 CI。
     """
     from src.api.utils.llm_factory import create_llm_provider
-    from src.prompts import prompt_manager
+    from src.prompts import get_prompt_manager
+    prompt_manager = get_prompt_manager()
 
     provider = create_llm_provider()
     failures: list[str] = []

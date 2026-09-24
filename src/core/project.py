@@ -668,7 +668,7 @@ class ProjectManager:
                 )
             except Exception:
                 pass
-        return sorted(projects, key=lambda project: project.created_at, reverse=True)
+        return sorted(projects, key=lambda project: project.created_at.timestamp(), reverse=True)
 
     def list_all(self) -> List[ProjectMeta]:
         """
@@ -686,7 +686,7 @@ class ProjectManager:
                         projects.append(self.get(project_dir.name))
                     except Exception:
                         pass
-        return sorted(projects, key=lambda p: p.created_at, reverse=True)
+        return sorted(projects, key=lambda p: p.created_at.timestamp(), reverse=True)
 
     def get_translation_summary(self, project_id: str) -> ProjectTranslationSummary:
         """Return cached translation counts without reparsing every section per poll.

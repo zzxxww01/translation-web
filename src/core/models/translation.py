@@ -132,7 +132,7 @@ class Paragraph(BaseModel):
             candidates = [item for item in candidates if self._has_text(item.text)]
         if not candidates:
             return None
-        return max(candidates, key=lambda item: item.created_at)
+        return max(candidates, key=lambda item: item.created_at.timestamp())
 
     def latest_translation_text(self, non_empty: bool = False) -> Optional[str]:
         """Return the most recent translation text, if any."""
@@ -183,8 +183,9 @@ class Paragraph(BaseModel):
         self, fallback_to_source: bool = False
     ) -> Optional[str]:
         """Return the best tokenized translation for export reconstruction."""
-        if self.has_confirmed_translation() and self.confirmed_tokenized:
-            return self.confirmed_tokenized
+        if self.has_confirmed_translation():
+            # Confirmed text and draft markup are different versions. Never mix them.
+            return self.confirmed_tokenized or None
 
         latest = self.latest_translation(non_empty=True)
         if latest and latest.tokenized_text:

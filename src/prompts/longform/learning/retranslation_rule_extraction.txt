@@ -1,24 +1,15 @@
-You are a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Extract reusable style-preference rules from a user-directed retranslation.
+[[include:shared/fidelity]]
 
-## User Instruction
+## 任务：提出候选表达偏好，不宣布全局规则
+仅从有证据的实际改动中总结可操作的句法、连贯性或语气偏好。一次修改默认只适用于当前场景，不能推成全局禁词、固定句长、禁止把字句、删除连接词或永远加强语气的规则。
+术语具体译法归术语库，不提取。没有足够证据时返回 NONE，不要求凑满条数。候选由程序保存并待人工确认，不能自称已经获批。
+
+## 本轮指令
 {instruction}
-
-## Source
+## 原文
 {source}
-
-## Before
+## 修改前
 {before}
-
-## After
+## 模型重译后（尚不等于用户确认）
 {after}
-
-## Task
-Infer reusable **style / sentence-structure / tone / fluency** preferences from the instruction and the before/after delta. Each rule should be a single, concrete, actionable sentence in Chinese. Only extract rules that generalize beyond this single sentence.
-
-IMPORTANT constraints:
-- Do NOT extract terminology translation rules (e.g. `"X" 翻译为 "Y"`). Terminology belongs to the glossary, not the rule library.
-- Only extract rules that generalize across projects: sentence patterns, voice preferences, tone calibration, formatting habits, etc.
-
-## Output
-Return a plain bullet list. One rule per line, starting with "- ". No numbering, no extra explanation, no JSON.
-Maximum 3 rules. If no generalizable rule can be extracted, return exactly: NONE
+最多 3 条中文候选，每行以“- ”开头；只总结指令明确支持的偏好，不把模型任意改动学成用户偏好。

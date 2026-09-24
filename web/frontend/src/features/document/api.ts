@@ -220,6 +220,10 @@ export const documentApi = {
     apiClient.post<{
       is_consistent: boolean;
       style_score: number;
+  style_checked?: boolean;
+  terminology_checked?: boolean;
+  reviewed_paragraphs?: number;
+  total_paragraphs?: number;
       issue_count: number;
       auto_fixable_count: number;
       manual_review_count: number;

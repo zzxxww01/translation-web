@@ -18,8 +18,8 @@ interface VersionCardProps {
 
 const STYLE_MAP: Record<string, string> = {
   A: '简洁',
-  B: '正式',
-  C: '友好',
+  B: '标准',
+  C: '正式',
 };
 
 export function VersionCard({ version, label, onSelect, onRefine, disabled }: VersionCardProps) {

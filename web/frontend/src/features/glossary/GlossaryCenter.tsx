@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useEffect, useMemo, useState } from 'react';
 import {
   ArrowLeft,
   BookOpen,
@@ -60,13 +61,14 @@ function normalizeScope(
   return requested;
 }
 
-export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global', onBack }: GlossaryCenterProps) {
+export function GlossaryCenter(props: GlossaryCenterProps) {
+  return <GlossaryCenterScope key={`${props.projectId ?? 'global'}:${props.defaultScope ?? 'global'}`} {...props} />;
+}
+
+function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global', onBack }: GlossaryCenterProps) {
   const [activeScope, setActiveScope] = useState<GlossaryScope>(() =>
     normalizeScope(projectId, defaultScope)
   );
-  const [projectTerms, setProjectTerms] = useState<GlossaryTerm[]>([]);
-  const [globalTerms, setGlobalTerms] = useState<GlossaryTerm[]>([]);
-  const [recommendations, setRecommendations] = useState<GlossaryRecommendation[]>([]);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'disabled'>('active');
   const [strategyFilter, setStrategyFilter] = useState<'all' | TranslationStrategy>('all');
@@ -77,104 +79,48 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
   const [focusedOriginal, setFocusedOriginal] = useState<string | null>(null);
   const [editor, setEditor] = useState<EditingTerm>(emptyEditor);
   const [isCreating, setIsCreating] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [tagDraft, setTagDraft] = useState('');
-  const [rules, setRules] = useState<TranslationRule[]>([]);
-  const [rulesLoading, setRulesLoading] = useState(false);
-  const [rulesError, setRulesError] = useState<unknown>(null);
   const [isAddingRule, setIsAddingRule] = useState(false);
   const [deletingRuleIndex, setDeletingRuleIndex] = useState<number | null>(null);
 
+  const termsQuery = useQuery({
+    queryKey: ['glossary-center', projectId ?? 'global'],
+    queryFn: async ({ signal }) => {
+      const [global, project, suggested] = await Promise.all([
+        glossaryApi.getGlobalGlossary({ signal }),
+        projectId ? glossaryApi.getProjectGlossary(projectId, { signal }) : Promise.resolve({ terms: [] }),
+        projectId ? glossaryApi.getProjectRecommendations(projectId, { signal }) : Promise.resolve({ recommendations: [] }),
+      ]);
+      return { globalTerms: global.terms, projectTerms: project.terms, recommendations: suggested.recommendations };
+    },
+  });
+  const rulesQuery = useQuery({
+    queryKey: ['translation-rules'],
+    queryFn: () => translationRulesApi.getAll(),
+    enabled: activeScope === 'rules',
+  });
+  const globalTerms = useMemo(() => termsQuery.data?.globalTerms ?? [], [termsQuery.data]);
+  const projectTerms = useMemo(() => termsQuery.data?.projectTerms ?? [], [termsQuery.data]);
+  const recommendations = useMemo(() => termsQuery.data?.recommendations ?? [], [termsQuery.data]);
+  const isLoading = termsQuery.isFetching;
+  const rules: TranslationRule[] = rulesQuery.data?.rules ?? [];
+  const rulesLoading = rulesQuery.isFetching;
+  const rulesError = rulesQuery.error;
+  const loadData = () => termsQuery.refetch({ throwOnError: true });
+  const loadRules = () => rulesQuery.refetch({ throwOnError: true });
   useEffect(() => {
-    setActiveScope(normalizeScope(projectId, defaultScope));
-  }, [defaultScope, projectId]);
+    if (termsQuery.error) toast.error(describeError(termsQuery.error, '加载术语中心失败'));
+  }, [termsQuery.error]);
 
-  // 单调递增的加载代次：快速切项目时用于丢弃旧项目的迟到响应
-  const loadGenerationRef = useRef(0);
-  const loadAbortRef = useRef<AbortController | null>(null);
-
-  const loadData = useCallback(async () => {
-    const generation = ++loadGenerationRef.current;
-    loadAbortRef.current?.abort();
-    const controller = new AbortController();
-    loadAbortRef.current = controller;
-    const fetchOptions = { signal: controller.signal };
-
-    setIsLoading(true);
-    try {
-      const requests: Promise<unknown>[] = [glossaryApi.getGlobalGlossary(fetchOptions)];
-      if (projectId) {
-        requests.unshift(glossaryApi.getProjectGlossary(projectId, fetchOptions));
-        requests.push(glossaryApi.getProjectRecommendations(projectId, fetchOptions));
-      }
-      const results = await Promise.all(requests);
-      if (generation !== loadGenerationRef.current) {
-        return;
-      }
-      if (projectId) {
-        const [projectGlossary, globalGlossary, recommendationData] = results as [
-          { terms: GlossaryTerm[] },
-          { terms: GlossaryTerm[] },
-          { recommendations: GlossaryRecommendation[] },
-        ];
-        setProjectTerms(projectGlossary.terms);
-        setGlobalTerms(globalGlossary.terms);
-        setRecommendations(recommendationData.recommendations);
-      } else {
-        setProjectTerms([]);
-        setGlobalTerms((results[0] as { terms: GlossaryTerm[] }).terms);
-        setRecommendations([]);
-      }
-    } catch (error) {
-      // 已被新一轮加载取代（含主动 abort）时静默丢弃，不打断新项目的界面
-      if (generation !== loadGenerationRef.current) {
-        return;
-      }
-      console.error('Failed to load glossary center:', error);
-      toast.error('加载术语中心失败');
-    } finally {
-      if (generation === loadGenerationRef.current) {
-        setIsLoading(false);
-      }
-    }
-  }, [projectId]);
-
-  useEffect(() => {
-    void loadData();
-    return () => {
-      // 卸载或切项目时作废本轮加载，避免旧项目术语覆盖新项目
-      loadGenerationRef.current += 1;
-      loadAbortRef.current?.abort();
-      loadAbortRef.current = null;
-    };
-  }, [loadData]);
-
-  const loadRules = useCallback(async () => {
-    setRulesLoading(true);
-    setRulesError(null);
-    try {
-      const response = await translationRulesApi.getAll();
-      setRules(response.rules);
-    } catch (error) {
-      console.error('Failed to load translation rules:', error);
-      setRulesError(error);
-    } finally {
-      setRulesLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (activeScope === 'rules') void loadRules();
-  }, [activeScope, loadRules]);
-
-  useEffect(() => {
+  function changeScope(requested: GlossaryScope) {
+    setActiveScope(normalizeScope(projectId, requested));
     setSelectedOriginals([]);
     setFocusedOriginal(null);
     setIsCreating(false);
     setEditor(emptyEditor);
     setTagDraft('');
-  }, [activeScope]);
+  }
 
   const effectiveTerms = useMemo(
     () => buildEffectiveTerms(globalTerms, projectTerms),
@@ -188,9 +134,6 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
         : globalTerms;
   const focusedTerm = activeTerms.find(term => term.original === focusedOriginal) || null;
 
-  useEffect(() => {
-    if (!isCreating && focusedTerm) setEditor(toEditor(focusedTerm));
-  }, [focusedTerm, isCreating]);
 
   const availableTags = useMemo(
     () =>
@@ -486,7 +429,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
           isAdding={isAddingRule}
           deletingIndex={deletingRuleIndex}
           error={rulesError}
-          onRetry={() => void loadRules()}
+          onRetry={() => void loadRules().catch(() => undefined)}
           onAdd={addTranslationRule}
           onDelete={deleteTranslationRule}
         />
@@ -698,7 +641,7 @@ export function GlossaryCenter({ projectId, projectTitle, defaultScope = 'global
             const requested = validScopes.includes(value as GlossaryScope)
               ? (value as GlossaryScope)
               : 'global';
-            setActiveScope(normalizeScope(projectId, requested));
+            changeScope(requested);
           }}
         >
           <TabsList>

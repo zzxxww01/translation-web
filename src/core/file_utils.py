@@ -6,6 +6,7 @@
 
 import json
 import logging
+import math
 import os
 import time
 from pathlib import Path
@@ -37,6 +38,10 @@ def atomic_write_with_retry(
     Raises:
         OSError: 所有重试失败后抛出
     """
+    if type(max_attempts) is not int or max_attempts < 1:
+        raise ValueError("max_attempts must be a positive integer")
+    if isinstance(retry_delay_base, bool) or not isinstance(retry_delay_base, (int, float)) or not math.isfinite(retry_delay_base) or retry_delay_base < 0:
+        raise ValueError("retry_delay_base must be a finite nonnegative number")
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp_path = path.with_name(f"{path.name}.{uuid4().hex}.tmp")
 

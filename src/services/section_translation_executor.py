@@ -282,6 +282,14 @@ class SectionTranslationExecutor:
                     recompute_progress=False,
                 )
             )
+            if four_step_result is not None and getattr(four_step_result, "review_history", None):
+                from src.core.file_utils import write_json_atomic
+                write_json_atomic(run_dir / "section-verification" / f"{section.section_id}.json", {
+                    "prompt_bundle_version": four_step_result.prompt_bundle_version,
+                    "history": four_step_result.review_history,
+                    "degraded": four_step_result.degraded,
+                    "reason": four_step_result.degraded_reason,
+                })
             applied_id_set = set(applied_ids)
             applied_translations = [
                 paragraph.best_translation_text(fallback_to_source=False)

@@ -1,0 +1,14 @@
+[[include:shared/fidelity]]
+[[include:shared/chinese_writing]]
+[[include:shared/longform_policy]]
+
+批量翻译以下章节标题。保留主体、范围、型号与判断，不为了短而漏信息，不强求固定字数。不要译注。
+## 主题
+{article_theme}
+## 术语
+{glossary_block}
+## 额外书写规则
+{whitelist_rules}
+## 输入标题（前后章仅参考）
+{sections_json}
+只返回 JSON 对象 {{"translations":{{"输入 ID":"对应标题"}}}}，恰好覆盖输入 ID，值均为非空字符串。

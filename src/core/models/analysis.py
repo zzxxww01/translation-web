@@ -39,6 +39,9 @@ class EnhancedTerm(BaseModel):
     strategy: TranslationStrategy = TranslationStrategy.TRANSLATE
     first_occurrence_note: bool = False
     rationale: Optional[str] = None
+    alternatives: List[str] = Field(default_factory=list)
+    avoid: List[str] = Field(default_factory=list)
+    source_quote: str = ""
 
 
 class ArticleStyle(BaseModel):
@@ -66,6 +69,7 @@ class SectionUnderstanding(BaseModel):
     relation_to_next: str = ""
     key_points: List[str] = Field(default_factory=list)
     translation_notes: List[str] = Field(default_factory=list)
+    paragraph_structure: List[Dict[str, Any]] = Field(default_factory=list)
 
 
 class ArticleAnalysis(BaseModel):
@@ -95,6 +99,7 @@ class TranslationIssue(BaseModel):
     issue_type: str
     severity: str = "medium"
     original_text: str = ""
+    translation_text: str = ""
     description: str
     why_it_matters: str = ""
     suggestion: str = ""
@@ -125,6 +130,9 @@ class ReflectionResult(BaseModel):
     is_excellent: bool = False
     issues: List[TranslationIssue] = Field(default_factory=list)
     revised_translations: Optional[Dict[int, str]] = None
+    reviewed_version: str = ""
+    review_status: str = "complete"
+    coverage: float = 1.0
 
 
 class QualityAssessment(BaseModel):
@@ -149,6 +157,8 @@ class SectionTranslationResult(BaseModel):
     reflection: Optional[ReflectionResult] = None
     assessment: Optional[QualityAssessment] = None
     revision_attempted: bool = False
+    review_history: List[Dict[str, Any]] = Field(default_factory=list)
+    prompt_bundle_version: str = ""
     # 降级标记：反思/润色出错时会直接返回初译，此时上层看到的仍是「成功」，
     # 需要靠这两个字段区分「四步成品」与「未经反思/润色/质量门禁的初译」
     degraded: bool = False
@@ -194,6 +204,7 @@ class LayeredContext(BaseModel):
 
     term_usage: Dict[str, List[str]] = Field(default_factory=dict)
     defined_abbreviations: Dict[str, str] = Field(default_factory=dict)
+    annotation_plan: Dict[str, Dict[str, Any]] = Field(default_factory=dict)
 
 
 class SectionQualityScore(BaseModel):
@@ -222,6 +233,7 @@ class QualityReportIssue(BaseModel):
     issue_type: str
     severity: str
     original_text: str = ""
+    translation_text: str = ""
     description: str
     why_it_matters: str = ""
     suggestion: str = ""

@@ -484,6 +484,10 @@ def _run_consistency_review_sync(project_id: str, pm, llm) -> dict:
     return {
         "is_consistent": report.is_consistent,
         "style_score": report.style_score,
+        "style_checked": report.style_checked,
+        "terminology_checked": report.terminology_checked,
+        "reviewed_paragraphs": report.reviewed_paragraphs,
+        "total_paragraphs": report.total_paragraphs,
         "issue_count": len(report.issues),
         "auto_fixable_count": len(report.auto_fixable),
         "manual_review_count": len(report.manual_review),
@@ -1071,3 +1075,21 @@ async def add_translation_rule(
         raise BadRequestException(detail="Rule text cannot be empty")
     await run_blocking(memory_service.add_rule_manually, text)
     return {"added": True, "text": text}
+
+
+@router.get("/translation-rule-candidates")
+async def get_translation_rule_candidates(memory_service: MemoryServiceDep):
+    rows = await run_blocking(memory_service.get_rule_candidates)
+    return {"candidates": rows, "total": len(rows)}
+
+
+@router.post("/translation-rule-candidates/{candidate_id}/{action}")
+async def decide_translation_rule_candidate(candidate_id: str, action: str, memory_service: MemoryServiceDep):
+    if action not in {"approve", "reject"}:
+        raise BadRequestException(detail="action must be approve or reject")
+    try:
+        return await run_blocking(memory_service.decide_rule_candidate, candidate_id, action)
+    except KeyError:
+        raise NotFoundException(detail="Rule candidate not found")
+    except ValueError as exc:
+        raise BadRequestException(detail=str(exc))

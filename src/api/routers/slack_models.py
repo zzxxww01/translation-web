@@ -16,7 +16,7 @@ class SlackReplyVariant(BaseModel):
     version: str
     english: str
     chinese: str = ""
-    style: Optional[str] = None  # '简洁', '正式', '友好'
+    style: Optional[str] = None  # '简洁', '标准', '正式'; legacy labels accepted at edit boundaries
 
 
 class SlackProcessRequest(BaseModel):
@@ -74,36 +74,27 @@ class SlackOptimizeResponse(BaseModel):
 
 
 VERSION_ORDER = ("A", "B", "C")
-STYLE_MAP = {"A": "简洁", "B": "正式", "C": "友好"}
+STYLE_MAP = {"A": "简洁", "B": "标准", "C": "正式"}
 
 
 def normalize_variants(raw_variants: object, chinese_fallback: str = "") -> list[SlackReplyVariant]:
-    """Parse LLM output into a fixed A/B/C list of SlackReplyVariant."""
-    variant_map: dict[str, SlackReplyVariant] = {}
 
-    if isinstance(raw_variants, list):
-        for item in raw_variants:
-            if not isinstance(item, dict):
-                continue
+    from src.prompts.contracts import PromptContractError
+    if not isinstance(raw_variants, list):
+        raise PromptContractError("Reply variants must be an array")
+    mapping = {}
+    for item in raw_variants:
+        if not isinstance(item, dict):
+            raise PromptContractError("Invalid reply variant")
+        version = item.get("version")
+        english = item.get("english")
+        if version not in VERSION_ORDER or version in mapping or not isinstance(english, str) or not english.strip():
+            raise PromptContractError("Missing, duplicate or empty reply variant")
+        chinese = item.get("chinese", chinese_fallback)
+        if not isinstance(chinese, str):
+            raise PromptContractError("Invalid Chinese reply")
+        mapping[version] = SlackReplyVariant(version=version, english=unwrap_relay_lines(english.strip()), chinese=unwrap_relay_lines(chinese.strip()), style=STYLE_MAP[version])
+    if set(mapping) != set(VERSION_ORDER):
+        raise PromptContractError("Expected exactly A/B/C reply variants")
+    return [mapping[key] for key in VERSION_ORDER]
 
-            version = str(item.get("version", "")).strip().upper()
-            if version not in VERSION_ORDER:
-                continue
-
-            english = unwrap_relay_lines(str(item.get("english", "")).strip())
-            chinese = unwrap_relay_lines(str(item.get("chinese", chinese_fallback)).strip()) or chinese_fallback
-            style = STYLE_MAP.get(version)
-            variant_map[version] = SlackReplyVariant(
-                version=version,
-                english=english,
-                chinese=chinese,
-                style=style,
-            )
-
-    return [
-        variant_map.get(
-            version,
-            SlackReplyVariant(version=version, english="", chinese=chinese_fallback, style=STYLE_MAP.get(version)),
-        )
-        for version in VERSION_ORDER
-    ]
