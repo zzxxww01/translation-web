@@ -1,0 +1,178 @@
+name: Verify and publish consolidated PR
+on:
+  push:
+    branches: ["integrate/all-pending-prs"]
+    paths: [".github/workflows/publish-consolidation.yml"]
+permissions:
+  contents: write
+concurrency:
+  group: consolidate-all-pending-prs
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GEMINI_API_KEY: test
+      VECTORENGINE_API_KEY: test
+      RUN_LLM_TESTS: "0"
+      PLAYWRIGHT_BASE_URL: http://127.0.0.1:54321
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Import reviewed merge history and verify all source refs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, hashlib, json, os, pathlib, subprocess
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          shas = [
+            '293a9ab1368472c5aecae309916a73e068575d7d',
+            '85283dbc4261ea91b5b671c32a42f6421e978150',
+            '0c7a00581a8673bba5d8f8837c602fbf14fa19ff',
+            '1abef4aca298b74114fa754812a0d2c933d85dcd',
+            'bb4fb9ad33b2ced76170284b73d7e703e4e1ee39',
+            '2d0290aab84e338200f50d641f805148b509a8e4',
+            'b370a9e39a1666a37015cb36c0266b16e827267a',
+            '96789ea614c6cce12513ff2701e3cff4b607d0b6',
+            'd5e76fb59482d04c47770ef0d97419849dfbcf06',
+            '5a1103db81e1a695ec2af3aa9ef5abcc57bc95a8',
+            'b936768f3539113aa73c0ebcbc0906349b6208bb',
+          ]
+          chunks = []
+          for sha in shas:
+              item = json.loads(subprocess.check_output(['gh', 'api', f'repos/zzxxww01/translation-web/git/blobs/{sha}']))
+              data = base64.b64decode(item['content'])
+              actual = hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()
+              assert actual == sha, 'Invalid transport chunk'
+              chunks.append(data)
+          bundle = b''.join(chunks)
+          assert len(bundle) == 30173
+          assert hashlib.sha256(bundle).hexdigest() == 'be73c6dddb6696b34d36c89508a8b41cc3b7d5b2c88ca3eb517307dcd417a025'
+          path = temp / 'reviewed-consolidation.bundle'
+          path.write_bytes(bundle)
+          subprocess.run(['git', 'bundle', 'verify', str(path)], check=True)
+          subprocess.run(['git', 'fetch', '--no-tags', str(path), 'HEAD'], check=True)
+          merged = subprocess.check_output(['git', 'rev-parse', 'FETCH_HEAD'], text=True).strip()
+          assert merged == 'b566211630483253c0b78e9763671228482dc38b'
+          tree = subprocess.check_output(['git', 'rev-parse', merged + '^{tree}'], text=True).strip()
+          assert tree == '9a12d8a746dd3e1eedeb0cf33cd6b1079f57d953'
+          refs = {
+              'main': 'adfd36ff347ae42cb1149244fd328d89ea215fa6',
+              'fix/chinese-prompt-quality-v2': '516817963d750298812e2d15d43de91c248a8795',
+              'feat/cost-efficiency-v3': 'ed74f96534ad84adce9e3b0caa3a1463a5e3027d',
+              'feat/stage-resume-cost-efficiency': '3c65e6833bdbdf29d29fd19885a5e35839c85bb8',
+          }
+          for ref, sha in refs.items():
+              live = json.loads(subprocess.check_output(['gh', 'api', f'repos/zzxxww01/translation-web/git/ref/heads/{ref}']))
+              assert live['object']['sha'] == sha, f'Source moved: {ref}'
+              subprocess.run(['git', 'merge-base', '--is-ancestor', sha, merged], check=True)
+          assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip() == os.environ['GITHUB_SHA']
+          manifest = {'sources': refs, 'reviewed_commit': merged, 'tree': tree, 'publish_parent': os.environ['GITHUB_SHA']}
+          (temp / 'consolidation-manifest.json').write_text(json.dumps(manifest, indent=2))
+          subprocess.run(['git', 'checkout', '--detach', merged], check=True)
+          for name in ('consolidation-source.yml', 'consolidation-deps.yml', 'publish-consolidation.yml'):
+              assert not pathlib.Path('.github/workflows', name).exists()
+          print('Verified reviewed tree and ancestry of main and all three PRs')
+          PY
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Complete backend verification
+        run: |
+          set -euo pipefail
+          python -m pip install -r requirements-dev.txt
+          cp config/llm_providers.yaml.example config/llm_providers.yaml
+          python -m compileall -q src
+          python -c "from src.api.app import app; print('App import:', len(app.routes), 'routes')"
+          python -m pytest -q 2>&1 | tee "$RUNNER_TEMP/consolidation-backend.log"
+          python -m pip freeze > "$RUNNER_TEMP/consolidation-resolved-requirements.txt"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: web/frontend/package-lock.json
+      - name: Complete frontend verification
+        working-directory: web/frontend
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run lint -- --max-warnings 0 2>&1 | tee "$RUNNER_TEMP/consolidation-lint.log"
+          npm test 2>&1 | tee "$RUNNER_TEMP/consolidation-frontend.log"
+          npm run build 2>&1 | tee "$RUNNER_TEMP/consolidation-build.log"
+          npm audit --json > "$RUNNER_TEMP/consolidation-npm-audit.json"
+          node -e 'const fs=require("node:fs");const d=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+"/consolidation-npm-audit.json","utf8"));if(d.error||d.metadata?.vulnerabilities?.total!==0)process.exit(1)'
+      - name: Install Chromium
+        working-directory: web/frontend
+        run: npx playwright install --with-deps chromium
+      - name: Browser regression tests without paid models
+        run: |
+          set -euo pipefail
+          python -m uvicorn src.api.app:app --host 127.0.0.1 --port 54321 > "$RUNNER_TEMP/consolidation-browser-server.log" 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import time, urllib.request
+          for _ in range(60):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:54321/api/health', timeout=1) as response:
+                      if response.status == 200:
+                          break
+              except OSError:
+                  time.sleep(0.5)
+          else:
+              raise SystemExit('Browser test server did not become healthy')
+          PY
+          npm --prefix web/frontend run test:e2e -- --workers=2 2>&1 | tee "$RUNNER_TEMP/consolidation-browser.log"
+      - name: Audit backend dependencies
+        run: |
+          set -euo pipefail
+          python -m venv "$RUNNER_TEMP/consolidation-audit"
+          "$RUNNER_TEMP/consolidation-audit/bin/pip" install pip-audit==2.10.1
+          "$RUNNER_TEMP/consolidation-audit/bin/pip-audit" -r "$RUNNER_TEMP/consolidation-resolved-requirements.txt" --no-deps --disable-pip --progress-spinner off --format json --output "$RUNNER_TEMP/consolidation-python-audit.json"
+          python - <<'PY'
+          import json, os, pathlib
+          data = json.loads((pathlib.Path(os.environ['RUNNER_TEMP']) / 'consolidation-python-audit.json').read_text())
+          assert data.get('dependencies')
+          assert all('skip_reason' not in item and not item.get('vulns') for item in data['dependencies'])
+          PY
+      - name: Publish verified consolidation without changing main
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os, pathlib, subprocess
+          temp = pathlib.Path(os.environ['RUNNER_TEMP'])
+          data = json.loads((temp / 'consolidation-manifest.json').read_text())
+          refs = {**data['sources'], 'integrate/all-pending-prs': data['publish_parent']}
+          for ref, sha in refs.items():
+              live = json.loads(subprocess.check_output(['gh', 'api', f'repos/zzxxww01/translation-web/git/ref/heads/{ref}']))
+              assert live['object']['sha'] == sha, f'Concurrent branch update: {ref}'
+          subprocess.run(['git', 'diff', '--exit-code'], check=True)
+          subprocess.run(['git', 'diff', '--cached', '--exit-code'], check=True)
+          assert subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip() == data['tree']
+          subprocess.run(['git', 'config', 'user.name', 'github-actions[bot]'], check=True)
+          subprocess.run(['git', 'config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com'], check=True)
+          commit = subprocess.check_output(['git', 'commit-tree', data['tree'], '-p', data['publish_parent'], '-p', data['reviewed_commit'], '-m', 'merge: consolidate PRs 1 2 and 3 against latest main with verified conflict resolutions'], text=True).strip()
+          subprocess.run(['gh', 'auth', 'setup-git'], check=True)
+          subprocess.run(['git', 'push', 'origin', commit + ':refs/heads/integrate/all-pending-prs'], check=True)
+          (temp / 'consolidation-published-commit.txt').write_text(commit + '\n')
+          print('Published verified consolidation:', commit)
+          PY
+      - name: Preserve verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: consolidated-pr-verification
+          path: |
+            ${{ runner.temp }}/consolidation-*.log
+            ${{ runner.temp }}/consolidation-*.json
+            ${{ runner.temp }}/consolidation-*.txt
+            /tmp/translation-agent-playwright
+          retention-days: 7
