@@ -31,6 +31,10 @@ function isApiError(error: unknown): error is ApiErrorLike {
  * 提取错误消息
  */
 function extractErrorMessage(error: unknown): string {
+  // Cancellation is a user action, not a transport timeout.
+  if (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') {
+    return '请求已取消';
+  }
   // API 错误
   if (isApiError(error)) {
     return error.detail || error.message || '请求失败，请稍后重试';
@@ -38,9 +42,6 @@ function extractErrorMessage(error: unknown): string {
 
   // 标准错误对象
   if (error instanceof Error) {
-    if (error.name === 'AbortError' || error.message.toLowerCase().includes('aborted')) {
-      return '请求超时，请稍后重试';
-    }
     return error.message;
   }
 
@@ -82,6 +83,7 @@ export function useErrorHandler() {
    */
   const handleError = useCallback(
     (error: unknown, context?: string) => {
+      if (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') return;
       const errorMessage = extractErrorMessage(error);
 
       // 尝试从状态码获取更友好的消息

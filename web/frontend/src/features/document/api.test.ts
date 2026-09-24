@@ -22,3 +22,47 @@ describe('document export query parameters', () => {
     }
   });
 });
+
+
+describe('longform cost options', () => {
+  it('sends explicit phase scope and compact review without changing retranslation scope', async () => {
+    const fetchMock = vi.fn().mockImplementation(() => Promise.resolve(new Response(JSON.stringify({
+      status: 'started', project_id: 'project-a',
+    }), { status: 200 })));
+    vi.stubGlobal('fetch', fetchMock);
+    await documentApi.startLongformWorkflow('project-a', 'four-step', 'my-model', undefined, {
+      model_scope: 'draft', efficiency: { compact_review: true, max_stage_calls: 10 },
+    });
+    const request = JSON.parse(fetchMock.mock.calls[0][1].body);
+    expect(request.model).toBe('my-model');
+    expect(request.model_scope).toBe('draft');
+    expect(request.efficiency).toEqual({ compact_review: true, max_stage_calls: 10 });
+    expect(request.retranslate_scope).not.toBe('all');
+  });
+});
+
+describe('longform efficiency controls', () => {
+  it('sends explicit controls without changing retranslation scope', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ status: 'started' }), { status: 202 }));
+    vi.stubGlobal('fetch', fetchMock);
+    await documentApi.startLongformWorkflow('project-a', 'four-step', 'chosen',
+      { scope: 'section', sectionIds: ['s1'] },
+      { model_scope: 'draft', compact_review: true, prescan_concurrency: 2, max_run_calls: 50 });
+    const [, options] = fetchMock.mock.calls[0];
+    const body = JSON.parse(options.body);
+    expect(body.efficiency).toEqual({ model_scope: 'draft', compact_review: true, prescan_concurrency: 2, max_run_calls: 50 });
+    expect(body.model).toBe('chosen');
+    expect(body.retranslate_scope).toBe('section');
+    expect(body.retranslate_section_ids).toEqual(['s1']);
+  });
+
+  it('does not reuse controls from a previous request', async () => {
+    const fetchMock = vi.fn().mockImplementation(() => Promise.resolve(new Response(JSON.stringify({ status: 'started' }), { status: 202 })));
+    vi.stubGlobal('fetch', fetchMock);
+    await documentApi.startLongformWorkflow('project-a', 'four-step', undefined, undefined, { compact_review: true });
+    await documentApi.startLongformWorkflow('project-b', 'four-step');
+    const body = JSON.parse(fetchMock.mock.calls[1][1].body);
+    expect(body).not.toHaveProperty('efficiency');
+    expect(body.retranslate_scope).toBe('resume');
+  });
+});

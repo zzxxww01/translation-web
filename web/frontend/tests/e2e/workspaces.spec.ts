@@ -82,10 +82,21 @@ test('background translation tray survives an in-app route change', async ({ pag
   );
 
   await page.goto('/document/demo');
-  const taskTray = page.getByRole('region', { name: '后台任务' });
-  await expect(taskTray).toContainText('正在翻译：Demo project');
+  // The task tray is now a collapsed top-bar button, not the old banner.
+  const taskIndicator = page.getByRole('button', {
+    name: '后台翻译任务，进度 25%，点击查看',
+  });
+  await expect(taskIndicator).toBeVisible();
+  await expect(taskIndicator).toHaveAttribute('title', '正在翻译：Demo project');
+  await taskIndicator.click();
+  await expect(page.getByText('1/4 段 · 25%', { exact: true })).toBeVisible();
+  await page.keyboard.press('Escape');
 
   await page.getByRole('link', { name: '帖子翻译' }).click();
   await expect(page).toHaveURL(/\/post$/);
-  await expect(taskTray).toContainText('正在翻译：Demo project');
+  await expect(taskIndicator).toBeVisible();
+  await expect(taskIndicator).toHaveAttribute('title', '正在翻译：Demo project');
+  await taskIndicator.click();
+  await expect(page.getByText('Demo project', { exact: true })).toBeVisible();
+  await expect(page.getByText('1/4 段 · 25%', { exact: true })).toBeVisible();
 });

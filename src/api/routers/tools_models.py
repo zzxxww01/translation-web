@@ -50,7 +50,7 @@ class EmailReplyResponse(BaseModel):
 
 class TimezoneConvertRequest(BaseModel):
     input: str = Field(..., max_length=MAX_TIMEZONE_INPUT_LENGTH)
-    source_timezone: str = "auto"  # auto, EST5EDT, CST6CDT, MST7MDT, PST8PDT, Asia/Shanghai
+    source_timezone: str = Field("auto", min_length=1, max_length=100)  # auto, EST5EDT, CST6CDT, MST7MDT, PST8PDT, Asia/Shanghai
 
     @field_validator('input')
     @classmethod

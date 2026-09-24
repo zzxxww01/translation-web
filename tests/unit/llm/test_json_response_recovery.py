@@ -1,3 +1,5 @@
+import pytest
+from src.prompts.contracts import PromptContractError
 """回归测试：_parse_json_response 容错恢复。
 
 此前解析失败静默返回 {}，把被 max_output_tokens 截断或含赘述的输出悄悄丢弃。
@@ -53,7 +55,8 @@ def test_recovers_balanced_object_ignoring_trailing_garbage():
     p = _Parser()
     # 末尾被截断的第二个对象应被忽略，首个完整对象被恢复
     text = '{"a": {"b": 1}} {"c": '
-    assert p._parse_json_response(text) == {"a": {"b": 1}}
+    with pytest.raises(PromptContractError):
+        p._parse_json_response(text)
 
 
 def test_brace_inside_string_not_miscounted():
@@ -62,7 +65,8 @@ def test_brace_inside_string_not_miscounted():
     assert p._parse_json_response(text) == {"k": "value with } brace"}
 
 
-def test_unrecoverable_returns_empty_dict():
+def test_unrecoverable_is_not_an_empty_success():
     p = _Parser()
-    assert p._parse_json_response("completely not json at all") == {}
-    assert p._parse_json_response("") == {}
+    for value in ("completely not json at all", ""):
+        with pytest.raises(PromptContractError):
+            p._parse_json_response(value)

@@ -488,18 +488,23 @@ def render_glossary_prompt_block(
     return "\n".join(lines)
 
 
+def _consumes_body_annotation(paragraph) -> bool:
+    kind = str(getattr(getattr(paragraph, "element_type", ""), "value", getattr(paragraph, "element_type", ""))).lower()
+    return (not getattr(paragraph, "is_metadata", False)
+            and kind not in {"h1", "h2", "h3", "h4", "h5", "h6", "heading", "image", "code", "source", "byline", "subtitle", "date_access"})
+
+
 def build_term_usage_from_project(
     sections: List[Section],
     glossary: Glossary,
     current_section_id: str,
     current_paragraph_id: str,
 ) -> Dict[str, List[str]]:
-    """Scan all translated paragraphs before the current one to build term usage.
+    """Allocate annotation ownership by body source order, not translation completion.
 
     Only tracks terms with ``first_annotate`` or ``preserve_annotate`` strategy.
     Iterates sections in order and stops when reaching the current paragraph.
-    For each paragraph that already has a translation, checks whether its
-    source text contains any tracked terms.
+    Headings and non-prose spans never consume a body first mention.
 
     Returns a dict ``{term_original_lower: [translation]}`` compatible with
     :func:`render_glossary_prompt_block`'s *term_usage* parameter.
@@ -529,16 +534,11 @@ def build_term_usage_from_project(
             ):
                 return usage
 
-            # Only consider paragraphs that have a translation
-            translation = para.confirmed or (
-                para.latest_translation_text(non_empty=True)
-                if hasattr(para, "latest_translation_text")
-                else None
-            )
-            if not translation:
+            # Heading/citation labels do not consume the first body annotation.
+            if not _consumes_body_annotation(para):
                 continue
-
-            source = para.source or ""
+            # Annotation ownership follows source order, not completion order.
+            source = _prose_only(para.source or "")
             if not source:
                 continue
 
@@ -554,3 +554,27 @@ def build_term_usage_from_project(
                 return usage
 
     return usage
+
+
+def build_annotation_plan(sections, terms, current_section_id: str, paragraph_ids=None) -> Dict[str, Dict[str, Any]]:
+    """One annotation owner per term in source order (headings do not consume it)."""
+    candidates = [_normalize_prompt_term(t) for t in _iter_prompt_terms(terms)]
+    candidates = [t for t in candidates if t and (t["strategy"] in {"first_annotate", "preserve_annotate"} or t["first_occurrence_note"])]
+    owners = {}
+    selected = set(paragraph_ids or [])
+    result = {}
+    for section in sections:
+        for paragraph in section.paragraphs:
+            if not _consumes_body_annotation(paragraph):
+                continue
+            source = _prose_only(paragraph.source or "")
+            for term in candidates:
+                key = term["original"].lower()
+                if not _count_term_occurrences(source, term["original"]):
+                    continue
+                owners.setdefault(key, (section.section_id, paragraph.id))
+                if section.section_id == current_section_id and (not selected or paragraph.id in selected):
+                    sid, pid = owners[key]
+                    result[key] = {"section_id": sid, "paragraph_id": pid,
+                                   "policy": "仅此原文位置允许首现括注；其余位置不重复。不同义项按术语说明判定。"}
+    return result

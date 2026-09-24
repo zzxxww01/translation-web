@@ -1,4 +1,4 @@
-﻿interface TermConflictData {
+interface TermConflictData {
   term: string;
   existing_translation: string;
   new_translation: string;
@@ -107,6 +107,7 @@ export class FullTranslationService {
         ? `/api/projects/${projectId}/translate-four-step`
         : `/api/projects/${projectId}/translate-stream`;
 
+    let reader: ReadableStreamDefaultReader<Uint8Array> | undefined;
     try {
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -118,13 +119,14 @@ export class FullTranslationService {
       });
 
       if (!this.isCurrentSession(sessionGeneration, projectId)) {
+        await response.body?.cancel();
         return;
       }
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const reader = response.body?.getReader();
+      reader = response.body?.getReader();
       if (!reader) {
         throw new Error('No reader available');
       }
@@ -145,6 +147,7 @@ export class FullTranslationService {
         }
 
         buffer += decoder.decode(value, { stream: true });
+        if (buffer.length > 2 * 1024 * 1024) throw new Error('Translation event exceeded the size limit');
         const frames = this.drainSseFrames(buffer);
         buffer = frames.remainder;
 
@@ -182,7 +185,7 @@ export class FullTranslationService {
       }
 
       if (this.isCurrentSession(sessionGeneration, projectId)) {
-        this.finalizeTranslation(false, sessionGeneration);
+        throw new Error('Translation stream ended before a terminal event; reconnect to check progress');
       }
     } catch (error: unknown) {
       if (
@@ -197,6 +200,13 @@ export class FullTranslationService {
       throw error instanceof Error
         ? error
         : new Error('Translation failed');
+    } finally {
+      // Finalization clears the state controller, but the body can still be open.
+      // Release this run's reader without touching a newer run's controller.
+      if (reader) {
+        try { await reader.cancel(); } catch { /* preserve the original error */ }
+        reader.releaseLock();
+      }
     }
   }
 
@@ -234,11 +244,11 @@ export class FullTranslationService {
       return null;
     }
 
-    try {
-      return JSON.parse(dataText) as TranslationProgressPayload;
-    } catch {
-      return null;
+    const value: unknown = JSON.parse(dataText);
+    if (!value || typeof value !== 'object' || typeof (value as { type?: unknown }).type !== 'string') {
+      throw new Error('Invalid translation event');
     }
+    return value as TranslationProgressPayload;
   }
 
   private async handleEvent(
@@ -258,21 +268,21 @@ export class FullTranslationService {
         translatedParagraphs.add(paragraphKey);
       }
       this.state.progress = {
-        current: data.current || this.state.progress?.current || 0,
-        total: data.total || this.state.progress?.total || 0,
+        current: data.current ?? this.state.progress?.current ?? 0,
+        total: data.total ?? this.state.progress?.total ?? 0,
       };
     } else if (data.type === 'progress') {
       this.state.currentStep = data.step || data.message || null;
       this.state.progress = {
-        current: data.current || this.state.progress?.current || 0,
-        total: data.total || this.state.progress?.total || 0,
+        current: data.current ?? this.state.progress?.current ?? 0,
+        total: data.total ?? this.state.progress?.total ?? 0,
       };
     } else if (data.type === 'error' && !data.paragraph_id) {
       throw new Error(data.error || data.message || 'Translation failed');
     } else if (data.type === 'skip' || data.type === 'error') {
       this.state.progress = {
-        current: data.current || this.state.progress?.current || 0,
-        total: data.total || this.state.progress?.total || 0,
+        current: data.current ?? this.state.progress?.current ?? 0,
+        total: data.total ?? this.state.progress?.total ?? 0,
       };
     } else if (data.type === 'heartbeat') {
       return false;
@@ -432,10 +442,13 @@ export class FullTranslationService {
 
   async stopTranslation(): Promise<void> {
     const projectId = this.state.projectId;
+    const generation = this.sessionGeneration;
     if (projectId) {
       await this.requestServerCancel(projectId);
     }
-    this.detachCurrentStream();
+    if (generation === this.sessionGeneration && this.state.projectId === projectId) {
+      this.detachCurrentStream();
+    }
   }
 
   private isCurrentSession(

@@ -8,13 +8,11 @@
  * 为什么是 MathJax 而不是 KaTeX：KaTeX 至今没有 SVG 输出（KaTeX#375），它产出的是
  * HTML+CSS，而外部样式表进了公众号会被剥掉，公式会散架。
  *
- * ## 为什么用 es5 bundle 而不是 js/ 下的模块
- *
- * `mathjax-full/js/**` 是 CommonJS，内部（components/version.js）有 vite 无法静态
- * 转换的动态 require。它在 Node 下正常，所以单测全绿；但在浏览器里必定抛
- * `ReferenceError: require is not defined`，而 getEngine 的 catch 会把它静默吞掉，
- * 于是公式**整篇降级成 LaTeX 原文**——线上一直是这个状态，测试却一片绿。
- * `es5/tex-svg-full.js` 是官方给浏览器用的预打包 bundle，自包含、无 require。
+ * ## 按需构建
+ * 仅加载 TeX、SVG 和内置数学扩展，不加载完整 startup/menu bundle。
+ * MathJax 3.2.1 的 Node 版本查询由 Vite 的 PACKAGE_VERSION 常量消除；
+ * Chromium 回归同时验证导入成功和 SVG 实际生成，不能只看 Node 单测。
+ * 外部 require/autoload 扩展不允许在导入文档中触发网络加载。
  *
  * ## 公众号对 SVG 的限制（决定了 sanitizeSvg 做哪些事）
  *
@@ -34,37 +32,19 @@
 const EX_IN_PX = 8;
 const EM_IN_PX = 16;
 
-type MathJaxGlobal = {
-  startup: { promise: Promise<unknown> };
+type FormulaEngine = {
   tex2svg: (latex: string, options: Record<string, unknown>) => HTMLElement;
 };
+let enginePromise: Promise<FormulaEngine> | null = null;
 
-let enginePromise: Promise<MathJaxGlobal> | null = null;
-
-/** MathJax 体积较大（约 2.2MB），只在真正遇到公式时才拉起来，且全应用只初始化一次。 */
-async function getEngine(): Promise<MathJaxGlobal> {
+async function getEngine(): Promise<FormulaEngine> {
   if (!enginePromise) {
-    enginePromise = (async () => {
-      const scope = window as unknown as Record<string, unknown>;
-      // 启动配置必须在 bundle 加载**之前**挂上去，加载后 window.MathJax 会被
-      // 替换成 API 对象。
-      scope.MathJax = {
-        startup: { typeset: false },
-        svg: { fontCache: 'none' },
-        options: { enableMenu: false },
-      };
-      await import('mathjax-full/es5/tex-svg-full.js');
-      const mathJax = scope.MathJax as MathJaxGlobal;
-      if (!mathJax?.startup?.promise || typeof mathJax.tex2svg !== 'function') {
-        throw new Error('MathJax bundle loaded but tex2svg is unavailable');
-      }
-      await mathJax.startup.promise;
-      return mathJax;
-    })().catch(error => {
-      // 允许下次重试，不要把失败永久缓存住
-      enginePromise = null;
-      throw error;
-    });
+    enginePromise = import('./mathjaxEngine')
+      .then(module => module.createEngine())
+      .catch(error => {
+        enginePromise = null;
+        throw error;
+      });
   }
   return enginePromise;
 }
@@ -133,7 +113,7 @@ export async function latexToSvg(
   latex: string,
   display: boolean
 ): Promise<string | null> {
-  if (!latex.trim()) return null;
+  if (!latex.trim() || latex.length > 32 * 1024) return null;
   try {
     const mathJax = await getEngine();
     const container = mathJax.tex2svg(latex, {
@@ -142,6 +122,7 @@ export async function latexToSvg(
       ex: EX_IN_PX,
       containerWidth: display ? 800 : 400,
     });
+    if (container.querySelector('[data-mjx-error], [data-mml-node="merror"]')) return null;
     const svg = container.querySelector('svg');
     if (!svg) return null;
     return sanitizeSvg(svg.outerHTML, display);
@@ -213,6 +194,10 @@ export async function renderFormulas(html: string): Promise<FormulaRenderResult>
       node.replaceWith(svgElement);
     }
     rendered += 1;
+    // Large documents must yield so progress, cancellation and user edits paint.
+    if ((rendered + failed) % 20 === 0) {
+      await new Promise<void>(resolve => setTimeout(resolve, 0));
+    }
   }
 
   return { html: container.innerHTML, rendered, failed };

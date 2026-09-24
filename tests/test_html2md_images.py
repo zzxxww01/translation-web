@@ -28,7 +28,7 @@ class TestCopyImage:
         mock_response.__enter__ = Mock(return_value=mock_response)
         mock_response.__exit__ = Mock(return_value=False)
 
-        with patch("urllib.request.urlopen", return_value=mock_response):
+        with patch("src.html2md.images.safe_urlopen", return_value=mock_response):
             result = _copy_image(
                 "https://example.com/image.jpg",
                 Path("/fake/source.html"),
@@ -43,7 +43,7 @@ class TestCopyImage:
         """Test download timeout handling."""
         target_path = tmp_path / "test.jpg"
 
-        with patch("urllib.request.urlopen", side_effect=TimeoutError("timeout")):
+        with patch("src.html2md.images.safe_urlopen", side_effect=TimeoutError("timeout")):
             result = _copy_image(
                 "https://example.com/slow.jpg",
                 Path("/fake/source.html"),
@@ -59,7 +59,7 @@ class TestCopyImage:
 
         from urllib.error import HTTPError
 
-        with patch("urllib.request.urlopen", side_effect=HTTPError(
+        with patch("src.html2md.images.safe_urlopen", side_effect=HTTPError(
             "https://example.com/notfound.jpg", 404, "Not Found", {}, None
         )):
             result = _copy_image(
@@ -93,7 +93,7 @@ class TestCopyAndRewriteImagesStatistics:
         mock_response.__enter__ = Mock(return_value=mock_response)
         mock_response.__exit__ = Mock(return_value=False)
 
-        with patch("urllib.request.urlopen", return_value=mock_response):
+        with patch("src.html2md.images.safe_urlopen", return_value=mock_response):
             copy_and_rewrite_images(markdown, source_html, output_dir, "test", True)
 
         mock_logger.info.assert_any_call("开始处理 3 张图片")
@@ -124,7 +124,7 @@ class TestCopyAndRewriteImagesStatistics:
             mock_response.__exit__ = Mock(return_value=False)
             return mock_response
 
-        with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+        with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
             copy_and_rewrite_images(markdown, source_html, output_dir, "test", True)
 
         mock_logger.info.assert_any_call("开始处理 3 张图片")
@@ -141,7 +141,7 @@ class TestCopyAndRewriteImagesStatistics:
         output_dir = tmp_path / "output"
         output_dir.mkdir()
 
-        with patch("urllib.request.urlopen", side_effect=TimeoutError("timeout")):
+        with patch("src.html2md.images.safe_urlopen", side_effect=TimeoutError("timeout")):
             copy_and_rewrite_images(markdown, source_html, output_dir, "test", True)
 
         mock_logger.info.assert_any_call("开始处理 2 张图片")
@@ -177,7 +177,7 @@ class TestCopyAndRewriteImagesStatistics:
         mock_response.__enter__ = Mock(return_value=mock_response)
         mock_response.__exit__ = Mock(return_value=False)
 
-        with patch("urllib.request.urlopen", return_value=mock_response):
+        with patch("src.html2md.images.safe_urlopen", return_value=mock_response):
             copy_and_rewrite_images(markdown, source_html, output_dir, "test", True)
 
         mock_logger.info.assert_any_call("开始处理 3 张图片")

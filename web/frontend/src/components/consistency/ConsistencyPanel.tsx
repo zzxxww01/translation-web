@@ -29,6 +29,10 @@ export const ConsistencyPanel: React.FC<ConsistencyPanelProps> = ({ projectId })
   const [report, setReport] = useState<{
     is_consistent: boolean;
     style_score: number;
+  style_checked?: boolean;
+  terminology_checked?: boolean;
+  reviewed_paragraphs?: number;
+  total_paragraphs?: number;
     issue_count: number;
     auto_fixable_count: number;
     manual_review_count: number;
@@ -115,7 +119,7 @@ export const ConsistencyPanel: React.FC<ConsistencyPanelProps> = ({ projectId })
           <Card className="p-4">
             <div className="text-sm text-gray-500">风格评分</div>
             <div className="text-3xl font-bold text-blue-600 mt-1">
-              {Math.round(report.style_score)}
+              {report.style_checked ? Math.round(report.style_score) : '未评估'}
             </div>
           </Card>
         </div>

@@ -6,6 +6,7 @@ from enum import Enum
 from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
+from src.models.terminology import Term
 
 
 class SessionStatus(str, Enum):
@@ -53,6 +54,8 @@ class TranslationSession(BaseModel):
     # Terminology snapshot
     snapshot_version: Optional[str] = None  # ISO timestamp
     term_ids: List[str] = Field(default_factory=list)
+    # None distinguishes legacy ID-only records from an explicitly empty snapshot.
+    snapshot_terms: Optional[Dict[str, Term]] = None
 
     # Progress tracking
     progress: Dict = Field(default_factory=dict)
@@ -69,10 +72,11 @@ class TranslationSession(BaseModel):
         if status == SessionStatus.COMPLETED:
             self.completed_at = datetime.now(timezone.utc)
 
-    def create_snapshot(self, term_ids: List[str]) -> None:
+    def create_snapshot(self, term_ids: List[str], terms: Optional[Dict[str, Term]] = None) -> None:
         """Create a terminology snapshot for this session."""
         self.snapshot_version = datetime.now(timezone.utc).isoformat()
-        self.term_ids = term_ids
+        self.term_ids = list(term_ids)
+        self.snapshot_terms = None if terms is None else {key: term.model_copy(deep=True) for key, term in terms.items()}
         self.updated_at = datetime.now(timezone.utc)
 
     def is_active(self) -> bool:

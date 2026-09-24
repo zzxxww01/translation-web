@@ -16,35 +16,32 @@ def is_safe_ip(ip_str: str) -> bool:
         ip = ipaddress.ip_address(ip_str)
     except ValueError:
         return False
-    return not (
-        ip.is_private
-        or ip.is_loopback
-        or ip.is_link_local
-        or ip.is_reserved
-        or ip.is_multicast
-        or ip.is_unspecified
-    )
+    return ip.is_global and not ip.is_multicast and not ip.is_reserved and not ip.is_unspecified
+
 
 
 def is_safe_url(url: str) -> bool:
     """请求前的快速预检:仅放行 http/https,且字面 IP 主机必须安全。"""
     try:
+        if not isinstance(url, str) or any(ord(ch) <= 32 for ch in url) or "\\" in url:
+            return False
         parsed = urlparse(url)
-    except Exception:
+        if parsed.scheme not in ("http", "https") or parsed.username is not None or parsed.password is not None:
+            return False
+        hostname = parsed.hostname
+        port = parsed.port
+        if not hostname or "%" in hostname or (port is not None and not 1 <= port <= 65535):
+            return False
+        if hostname.rstrip(".").lower() == "localhost":
+            return False
+        try:
+            ipaddress.ip_address(hostname)
+        except ValueError:
+            return True
+        return is_safe_ip(hostname)
+    except (ValueError, TypeError, UnicodeError):
         return False
-    if parsed.scheme not in ("http", "https"):
-        return False
-    hostname = parsed.hostname
-    if not hostname:
-        return False
-    if hostname.lower() == "localhost":
-        return False
-    try:
-        ipaddress.ip_address(hostname)
-    except ValueError:
-        # 域名:留待 resolved_ips_are_safe 在连接前解析校验
-        return True
-    return is_safe_ip(hostname)
+
 
 
 def resolved_ips_are_safe(url: str) -> bool:

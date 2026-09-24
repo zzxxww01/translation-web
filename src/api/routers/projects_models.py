@@ -2,9 +2,9 @@
 Shared request/response models for project routers.
 """
 
-from typing import List, Optional
+from typing import List, Optional, Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class CreateProjectRequest(BaseModel):
@@ -24,9 +24,16 @@ class DirectTranslateRequest(BaseModel):
 class ConfirmRequest(BaseModel):
     translation: str = Field(..., min_length=1, max_length=50000)
 
+    @field_validator("translation")
+    @classmethod
+    def reject_blank_translation(cls, value: str) -> str:
+        if not value.strip():
+            raise ValueError("Translation cannot be blank")
+        return value
+
 
 class WordMeaningMessage(BaseModel):
-    role: str = Field(..., max_length=50)
+    role: Literal["user", "assistant"]
     content: str = Field(..., max_length=10000)
 
 
@@ -48,7 +55,17 @@ class UpdateParagraphRequest(BaseModel):
 
 
 class BatchTranslateRequest(BaseModel):
-    paragraph_ids: List[str] = Field(..., max_length=100)
+    paragraph_ids: List[str] = Field(..., min_length=1, max_length=100)
+
+    @field_validator("paragraph_ids")
+    @classmethod
+    def validate_paragraph_ids(cls, values: List[str]) -> List[str]:
+        if any(not value or value != value.strip() or len(value) > 200 for value in values):
+            raise ValueError("Paragraph ids must be non-blank, unpadded and at most 200 characters")
+        if len(values) != len(set(values)):
+            raise ValueError("Paragraph ids must be unique")
+        return values
+
     instruction: Optional[str] = Field(None, max_length=2000)
     option_id: Optional[str] = Field(None, max_length=100)
 

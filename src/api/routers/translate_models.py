@@ -14,6 +14,7 @@ MAX_CUSTOM_PROMPT_LENGTH = 2000
 class PostTranslateRequest(BaseModel):
     content: str = Field(..., max_length=MAX_POST_CONTENT_LENGTH)
     preserve_tone: bool = True
+    include_hashtags: bool = True
     custom_prompt: Optional[str] = Field(None, max_length=MAX_CUSTOM_PROMPT_LENGTH)
     model: Optional[str] = None
 
@@ -88,6 +89,7 @@ class PostOptimizeRequest(BaseModel):
     current_translation: str = Field(..., max_length=MAX_POST_CONTENT_LENGTH)
     instruction: Optional[str] = Field(None, max_length=1000)
     option_id: Optional[str] = None
+    include_hashtags: Optional[bool] = None
     conversation_history: Optional[list[dict]] = Field(None, max_length=10)
     model: Optional[str] = None
 
@@ -118,13 +120,41 @@ class PostOptimizeResponse(BaseModel):
     fallback_used: bool = False
 
 
-class FullTranslateRequest(BaseModel):
+from src.config.efficiency import EfficiencyOptions
+
+
+class WorkflowPolicyRequest(BaseModel):
+    @model_validator(mode="before")
+    @classmethod
+    def reconcile_model_policy(cls, data):
+        if not isinstance(data, dict):
+            return data
+        data = dict(data)
+        nested = data.get("efficiency")
+        if isinstance(nested, EfficiencyOptions):
+            nested = nested.model_dump(exclude_unset=True)
+        if isinstance(nested, dict):
+            for legacy, public in (("model_scope", "model_scope"), ("profile", "model_profile")):
+                if legacy in nested:
+                    if public in data and data[public] != nested[legacy]:
+                        raise ValueError(f"Conflicting {public} values")
+                    data[public] = nested[legacy]
+        return data
+
+
+class FullTranslateRequest(WorkflowPolicyRequest):
     model: Optional[str] = None
+    model_scope: Literal["all", "draft"] = "all"
+    model_profile: Literal["default", "fast", "premium"] = "default"
+    efficiency: EfficiencyOptions = Field(default_factory=EfficiencyOptions)
 
 
-class LongformWorkflowStartRequest(BaseModel):
+class LongformWorkflowStartRequest(WorkflowPolicyRequest):
     method: Literal["normal", "four-step"] = "four-step"
     model: Optional[str] = Field(None, max_length=100)
+    model_scope: Literal["all", "draft"] = "all"
+    model_profile: Literal["default", "fast", "premium"] = "default"
+    efficiency: EfficiencyOptions = Field(default_factory=EfficiencyOptions)
     # 覆盖已有译文的范围。默认 resume 是历史行为——只翻没有可用译文的段落。
     # section 需要同时给出 retranslate_section_ids。
     retranslate_scope: Literal["resume", "section", "all"] = "resume"
@@ -151,32 +181,7 @@ class ResolveConflictRequest(BaseModel):
 
 
 # Pre-defined post optimization instruction templates.
-POST_OPTIMIZE_OPTIONS = {
-    "readable": (
-        "请从读者认知负荷角度优化译文，让信息更容易扫读和理解：\n"
-        "1. 一句一事：每句话只承载一个信息点，信息密集处拆成独立短句。\n"
-        "2. 主语明确：避免连续无主句，让读者立刻知道“谁做了什么”。\n"
-        "3. 先结论后解释：核心数据或结论放句首，条件和背景放后面。\n"
-        "4. 消除“的”堆叠：连续三个“的”必须拆句重组。\n"
-        "5. 对中文读者不够自明的缩写，首次出现补成“中文全称（缩写）”，不要裸写造成理解障碍。"
-    ),
-    "idiomatic": (
-        "请从用词和表达层面优化译文，让中文更自然地道：\n"
-        "1. 删连接词：去掉“此外”“然而”“值得注意的是”，靠语义衔接。\n"
-        "2. 去公式化：不要“尽管……但仍……”“展望未来”“综上所述”等套话。\n"
-        "3. 同一概念前后使用同一个词，避免同义词循环替换。\n"
-        "4. 口语化替换：把“基于”“鉴于”“旨在”改成“根据”“考虑到”“为了”。\n"
-        "5. 对 went viral、rant、slam、blast 这类表达，不要字面直译，要改成中文社交媒体真正会这样说的话。"
-    ),
-    "professional": (
-        "请从信息密度与精准度角度优化译文：\n"
-        "1. 不加不减：不要添加原文没有的修饰，也不要省略原文限定条件。\n"
-        "2. 删口水话：去掉不提供信息的形容词（如“突破性”“开创性”“令人振奋”）和空洞总结。\n"
-        "3. 零冗余：没有信息量的句子直接删除。\n"
-        "4. 数据清晰：一句话超过 3 个数据点时拆成多句。\n"
-        "5. 如果原文存在明显的因果或态度递进关系，中文必须把链条写清楚，不能只留下抽象结论。"
-    ),
-}
+from src.prompts.editing_options import POST_OPTIMIZE_OPTIONS
 
 
 def resolve_post_optimize_instruction(
