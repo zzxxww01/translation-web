@@ -33,6 +33,7 @@ from .smart_sampler import SmartSampler, create_smart_sampler
 
 
 logger = logging.getLogger(__name__)
+from src.config.efficiency import bounded_stage
 
 
 def _submit_with_current_context(executor, func, /, *args, **kwargs):
@@ -169,6 +170,7 @@ class DeepAnalyzer:
 
         return high_freq_terms, dict(term_freq)
 
+    @bounded_stage("analysis")
     def analyze(
         self,
         sections: List[Section],
@@ -208,6 +210,7 @@ class DeepAnalyzer:
         last_error: Exception | None = None
         # 跨重试复用已成功的术语验证结果（None=尚未取得，[]=已尝试但无结果）
         cached_verified_terms: "list | None" = None
+        terms_verified_ok = True
         budget = self._resolve_sample_budget(sections)
         deduped_steps = []
         for ratio in self.ANALYSIS_SAMPLE_RATIOS:
@@ -228,7 +231,11 @@ class DeepAnalyzer:
         ]
 
         # 步骤1.1: 深度分析文档（带重试）
+        retained_sample = None
         for attempt_index, sample_chars in enumerate(deduped_steps):
+            if retained_sample is not None:
+                sample_chars = retained_sample
+                retained_sample = None
             self._raise_if_cancelled(should_cancel)
             timeout = self.ANALYSIS_TIMEOUT_STEPS[min(attempt_index, len(self.ANALYSIS_TIMEOUT_STEPS) - 1)]
 
@@ -255,19 +262,19 @@ class DeepAnalyzer:
                 try:
                     future_deep = _submit_with_current_context(
                         executor,
-                        self.llm.deep_analyze_document,
-                        outline=sections_outline,
-                        sampled_text=full_text,
-                        timeout=timeout
+                        self._checkpoint_analysis_call,
+                        "deep-analysis", self.llm.deep_analyze_document,
+                        {"outline": sections_outline, "sampled_text": full_text, "timeout": timeout},
+                        self._validate_deep_result
                     )
 
-                    if cached_verified_terms is None:
+                    if cached_verified_terms is None and high_freq_candidates:
                         future_terms = _submit_with_current_context(
                             executor,
-                            self.llm.verify_high_frequency_terms,
-                            sampled_text=full_text,
-                            high_freq_candidates=high_freq_candidates,
-                            timeout=timeout
+                            self._checkpoint_analysis_call,
+                            "term-verification", self.llm.verify_high_frequency_terms,
+                            {"sampled_text": full_text, "high_freq_candidates": high_freq_candidates, "timeout": timeout},
+                            self._validate_terms_result
                         )
 
                     deep_analysis_result = None
@@ -296,7 +303,12 @@ class DeepAnalyzer:
                             except Exception as exc:
                                 # 术语验证失败不影响整体流程，标记为已尝试（空），不再重试
                                 logger.warning(f"Phase 0.2b FAILED: {str(exc)[:200]}, continuing without verified terms")
+                                from src.llm.work_budget import WorkBudgetExceeded
+                                from src.llm.errors import LLMRequestCancelledError
+                                if isinstance(exc, (WorkBudgetExceeded, LLMRequestCancelledError)):
+                                    raise
                                 cached_verified_terms = []
+                                terms_verified_ok = False
 
                     if deep_error is not None:
                         raise deep_error
@@ -312,7 +324,11 @@ class DeepAnalyzer:
             except Exception as exc:
                 elapsed = time.time() - start_time
                 last_error = exc
-                if attempt_index == len(deduped_steps) - 1 or not self._should_retry_with_smaller_sample(exc):
+                from src.llm.work_budget import retry_action
+                action = retry_action(exc)
+                if action in {"retry", "format"}:
+                    retained_sample = sample_chars
+                if attempt_index == len(deduped_steps) - 1 or action not in {"retry", "resize", "format"}:
                     logger.error(
                         "Phase 0.2 FAILED: attempt=%s/%s elapsed=%.1fs error=%s",
                         attempt_index + 1,
@@ -352,8 +368,45 @@ class DeepAnalyzer:
             should_cancel=should_cancel,
         )
         analysis.section_roles = section_roles
+        analysis.incomplete_stages = []
+        if not terms_verified_ok:
+            analysis.incomplete_stages.append("term_validation")
+        if set(section_roles) != {section.section_id for section in sections} or any(
+                role.role_in_article in {"", "待分析"} for role in section_roles.values()):
+            analysis.incomplete_stages.append("section_roles")
+        analysis.checkpoint_eligible = not analysis.incomplete_stages
 
         return analysis
+
+    @staticmethod
+    def recovery_action(error: Exception) -> str:
+        from src.llm.work_budget import retry_action
+        # Legacy callers use explicit recovery labels; execution has one classifier.
+        return {"stop": "stop", "retry": "retry_same_input", "resize": "reduce_input",
+                "format": "format_retry"}[retry_action(error)]
+
+    def _checkpoint_analysis_call(self, task, method, kwargs, validator):
+        from src.services.work_checkpoints import checkpoint_call
+        # Time limits control execution, not meaning; a later larger time budget
+        # can reuse the same already validated response.
+        inputs = {key: value for key, value in kwargs.items() if key != "timeout"}
+        return checkpoint_call(task, self.llm, inputs, lambda: method(**kwargs), validator)
+
+    @staticmethod
+    def _validate_deep_result(value):
+        if not isinstance(value, dict):
+            raise ValueError("Deep analysis must be an object")
+        # Provider parsing owns its detailed schema; reject malformed or empty
+        # envelopes before reusing them as expensive completed work.
+        if not value:
+            raise ValueError("Deep analysis cannot be empty")
+        return value
+
+    @staticmethod
+    def _validate_terms_result(value):
+        if not isinstance(value, list) or any(not isinstance(item, dict) for item in value):
+            raise ValueError("Term verification must be a list of objects")
+        return value
 
     def _raise_if_cancelled(
         self,
@@ -466,12 +519,12 @@ class DeepAnalyzer:
                 # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
                 # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
                 logger.warning(
-                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "未知术语策略 %r（术语=%r），保守保留原文（preserve）。请检查 prompt 与 "
                     "TranslationStrategy 枚举是否一致。",
                     strategy_str,
                     term_data.get("term", ""),
                 )
-                strategy = TranslationStrategy.TRANSLATE
+                strategy = TranslationStrategy.PRESERVE
 
             term = EnhancedTerm(
                 term=term_data.get("term", ""),
@@ -479,7 +532,10 @@ class DeepAnalyzer:
                 translation=term_data.get("translation"),
                 strategy=strategy,
                 first_occurrence_note=term_data.get("first_occurrence_note", False),
-                rationale=term_data.get("rationale")
+                rationale=term_data.get("rationale"),
+                alternatives=term_data.get("alternatives", []),
+                avoid=term_data.get("avoid", []),
+                source_quote=term_data.get("source_quote", "")
             )
             terminology.append(term)
 
@@ -547,12 +603,12 @@ class DeepAnalyzer:
                 # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
                 # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
                 logger.warning(
-                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "未知术语策略 %r（术语=%r），保守保留原文（preserve）。请检查 prompt 与 "
                     "TranslationStrategy 枚举是否一致。",
                     strategy_str,
                     term_data.get("term", ""),
                 )
-                strategy = TranslationStrategy.TRANSLATE
+                strategy = TranslationStrategy.PRESERVE
 
             term = EnhancedTerm(
                 term=term_data.get("term", ""),
@@ -560,7 +616,10 @@ class DeepAnalyzer:
                 translation=term_data.get("translation"),
                 strategy=strategy,
                 first_occurrence_note=term_data.get("first_occurrence_note", False),
-                rationale=term_data.get("rationale")
+                rationale=term_data.get("rationale"),
+                alternatives=term_data.get("alternatives", []),
+                avoid=term_data.get("avoid", []),
+                source_quote=term_data.get("source_quote", "")
             )
             sampled_terms.append(term)
 
@@ -577,12 +636,12 @@ class DeepAnalyzer:
                 # 静默回退会把本应“保留英文”的术语（如误标 keep_original 的 GPU/API）
                 # 降级为直接意译，造成系统性术语损伤。记录 warning 以暴露契约漂移。
                 logger.warning(
-                    "未知术语策略 %r（术语=%r），回退为 translate。请检查 prompt 与 "
+                    "未知术语策略 %r（术语=%r），保守保留原文（preserve）。请检查 prompt 与 "
                     "TranslationStrategy 枚举是否一致。",
                     strategy_str,
                     term_data.get("term", ""),
                 )
-                strategy = TranslationStrategy.TRANSLATE
+                strategy = TranslationStrategy.PRESERVE
 
             term = EnhancedTerm(
                 term=term_data.get("term", ""),
@@ -590,7 +649,10 @@ class DeepAnalyzer:
                 translation=term_data.get("translation"),
                 strategy=strategy,
                 first_occurrence_note=term_data.get("first_occurrence_note", False),
-                rationale=term_data.get("rationale")
+                rationale=term_data.get("rationale"),
+                alternatives=term_data.get("alternatives", []),
+                avoid=term_data.get("avoid", []),
+                source_quote=term_data.get("source_quote", "")
             )
             verified_terms.append(term)
 
@@ -687,7 +749,9 @@ class DeepAnalyzer:
             )
             result = self.llm._parse_json_response(response)
         except Exception as exc:
-            if "cancel" in str(exc).lower():
+            from src.llm.work_budget import WorkBudgetExceeded
+            from src.llm.errors import LLMRequestCancelledError
+            if isinstance(exc, (WorkBudgetExceeded, LLMRequestCancelledError)) or "cancel" in str(exc).lower():
                 raise
             logger.warning(
                 "Section role map 分析失败，回退为默认章节角色（保留已完成的深度分析）: %s",
@@ -708,7 +772,10 @@ class DeepAnalyzer:
                     relation_to_previous=role_data.get("relation_to_previous", ""),
                     relation_to_next=role_data.get("relation_to_next", ""),
                     key_points=role_data.get("key_points", []),
-                    translation_notes=role_data.get("translation_notes", [])
+                    translation_notes=role_data.get("translation_notes", []),
+                    paragraph_structure=[item for item in role_data.get("paragraph_structure", [])
+                        if isinstance(item, dict) and type(item.get("paragraph_index")) is int
+                        and item["paragraph_index"] in {0, len(section.paragraphs)//2, len(section.paragraphs)-1}]
                 )
             else:
                 # 如果 LLM 没有返回该章节的分析，创建一个默认的
@@ -723,28 +790,18 @@ class DeepAnalyzer:
         return section_roles
 
     def _build_sections_summary(self, sections: List[Section]) -> str:
-        """
-        构建章节摘要（方案 C 优化：增强采样）
-
-        每章节采样: 首段 + 中段 + 末段
-
-        Args:
-            sections: 章节列表
-
-        Returns:
-            str: 章节摘要
-        """
-        # 使用智能采样器获取增强摘要
-        section_summaries = self.smart_sampler.sample_for_section_roles(sections)
-
-        lines = []
+        """Cover every section, with explicit sampled paragraph indices and source evidence."""
+        import json
+        rows = []
         for section in sections:
-            lines.append(f"## {section.section_id} - {section.title}")
-            summary = section_summaries.get(section.section_id, "")
-            lines.append(summary)
-            lines.append("")  # 空行分隔
-
-        return "\n".join(lines)
+            indices = sorted({0, len(section.paragraphs) // 2, len(section.paragraphs) - 1})
+            samples = [{"paragraph_index": i, "paragraph_id":section.paragraphs[i].id,
+                        "source":section.paragraphs[i].source[:800],
+                        "truncated":len(section.paragraphs[i].source) > 800}
+                       for i in indices if 0 <= i < len(section.paragraphs)]
+            rows.append({"section_id":section.section_id, "title":section.title,
+                         "paragraph_count":len(section.paragraphs), "sampled_paragraphs":samples})
+        return json.dumps(rows, ensure_ascii=False)
 
     def _build_section_roles_prompt(
         self,
@@ -767,7 +824,7 @@ class DeepAnalyzer:
             "longform/analysis/section_role_map",
             article_theme=article_theme,
             structure_summary=structure_summary,
-            sections_summary=sections_summary[:6000]  # 限制长度，降低长响应失败风险
+            sections_summary=sections_summary
         )
 
     def get_analysis_summary(self, analysis: ArticleAnalysis) -> str:

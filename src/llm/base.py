@@ -172,27 +172,19 @@ class LLMProvider(ABC):
         """
         pass
 
-    def retranslate(
-        self,
-        source_text: str,
-        current_translation: str,
-        context: Optional[Dict[str, Any]] = None,
-    ) -> str:
-        """Retranslate one paragraph with the dedicated longform retranslation prompt."""
-        raise NotImplementedError(
-            "This provider does not implement paragraph retranslation."
-        )
+    def retranslate(self, source_text: str, current_translation: str,
+                    context: Optional[Dict[str, Any]] = None) -> str:
+        from ..prompts.task_builders import paragraph_prompt
+        return self.generate(paragraph_prompt(source_text, context or {}, current=current_translation), temperature=0.4)
 
-    def repair_format_tokens(
-        self,
-        source_text: str,
-        translated_text: str,
-        format_tokens: List[Dict[str, Any]],
-        issues: Optional[List[str]] = None,
-        model: Optional[str] = None,
-    ) -> Optional[str]:
-        """Try to repair broken hidden format tokens after validation fails."""
-        return None
+    def repair_format_tokens(self, source_text: str, translated_text: str,
+                             format_tokens: List[Dict[str, Any]], issues: Optional[List[str]] = None,
+                             model: Optional[str] = None) -> Optional[str]:
+        from ..prompts.task_builders import format_repair_prompt
+        if not format_tokens:
+            return None
+        result = self.generate(format_repair_prompt(source_text, translated_text, format_tokens, issues or []), temperature=0.1, model=model)
+        return result.strip() if isinstance(result, str) and result.strip() else None
 
     def translate_section(
         self,
@@ -237,53 +229,35 @@ class LLMProvider(ABC):
             "This provider does not implement section title translation."
         )
 
-    def translate_all_section_titles(
-        self,
-        sections: List[Dict[str, Any]],
-        article_theme: str = "",
-        *,
-        glossary_block: str = "",
-        whitelist_rules: str = "",
-    ) -> Dict[str, str]:
-        """Translate all section titles in a single API call.
-
-        Args:
-            sections: list of dicts with keys:
-                - id (str): section identifier
-                - title (str): original English title
-                - prev (str): previous section title (may be empty)
-                - next (str): next section title (may be empty)
-            article_theme: article theme from deep analysis
-            glossary_block: 命中术语块，保证标题与正文用同一套术语
-            whitelist_rules: 「永不翻译」白名单铁律（token / GW·MW·kW 等）
-
-        Returns:
-            Dict mapping section_id -> translated Chinese title.
-            If a section_id is missing from the result, callers should fall
-            back to the per-title ``translate_section_title`` method.
-        """
-        # Default fallback: call translate_section_title one by one.
-        results: Dict[str, str] = {}
-        for sec in sections:
-            sec_id = sec.get("id", "")
-            title = sec.get("title", "")
-            if not title:
+    def translate_all_section_titles(self, sections: List[Dict[str, Any]], article_theme: str = "",
+                                     *, glossary_block: str = "", whitelist_rules: str = "") -> Dict[str, str]:
+        from ..prompts.task_builders import section_titles_prompt
+        from ..prompts.contracts import object_response, PromptContractError
+        if not sections:
+            return {}
+        expected = {str(s["id"]) for s in sections}
+        results = {}
+        try:
+            data = object_response(self.generate(section_titles_prompt(sections, article_theme, glossary_block, whitelist_rules), response_format="json", temperature=0.3), ("translations",))
+            mapping = data["translations"]
+            if not isinstance(mapping, dict) or any(key not in expected for key in mapping):
+                raise PromptContractError("Invalid title mapping")
+            results = {key: value.strip() for key, value in mapping.items() if isinstance(value, str) and value.strip()}
+        except Exception as exc:
+            logger.warning("Batch title response invalid; retrying per ID: %s", type(exc).__name__)
+        for section in sections:
+            key = str(section["id"])
+            if key in results or not section.get("title"):
                 continue
-            context = {
-                "article_theme": article_theme,
-                "context": "Section heading inside a long-form article",
-                "previous_section_title": sec.get("prev", ""),
-                "next_section_title": sec.get("next", ""),
-                "glossary_block": glossary_block,
-                "whitelist_rules": whitelist_rules,
-            }
             try:
-                results[sec_id] = self.translate_section_title(title, context=context)
+                results[key] = self.translate_section_title(section["title"], context={
+                    "article_theme": article_theme, "previous_section_title": section.get("prev", ""),
+                    "next_section_title": section.get("next", ""), "glossary_block": glossary_block,
+                    "whitelist_rules": whitelist_rules,
+                })
             except Exception as exc:
-                # Missing IDs explicitly request the caller's per-title retry.
-                # Never disguise provider failure as a successful translation.
-                logger.warning("Section title translation failed (%s): %s", sec_id, exc)
-        return results
+                logger.warning("Title still unresolved %s: %s", key, type(exc).__name__)
+        return results  # missing keys remain explicit failures; never return English as success
 
     def deep_analyze(
         self,
@@ -334,214 +308,74 @@ class LLMProvider(ABC):
             context=context,
         )
         response = self.generate(prompt, response_format="json")
-        return self._parse_json_response(response)
+        result = self._parse_json_response(response)
+        if (context or {}).get("compact_review") and isinstance(result, dict):
+            issues = result.get("issues", [])
+            if isinstance(issues, list):
+                for issue in issues:
+                    if isinstance(issue, dict) and "reason" in issue:
+                        reason = issue.pop("reason")
+                        if "description" in issue and issue["description"] != reason:
+                            from src.prompts.contracts import PromptContractError
+                            raise PromptContractError("Conflicting compact review descriptions")
+                        issue["description"] = reason
+        return result
 
-    def refine_and_polish_batch(
-        self,
-        pairs: List[Dict[str, Any]],
-        context: Optional[Dict[str, Any]] = None,
-    ) -> List[str]:
-        """
-        批量润色（合并 Step 4 和 Step 5）
+    def refine_and_polish_batch(self, pairs: List[Dict[str, Any]], context: Optional[Dict[str, Any]] = None) -> List[str]:
+        from ..prompts.contracts import object_response
+        scores = (context or {}).get("reflection_scores", {})
+        prompt = self._build_refine_and_polish_prompt(pairs, scores, context)
+        result = object_response(self.generate(prompt, response_format="json", temperature=0.3), ("polished_translations",))
+        return self._align_polished_batch(result["polished_translations"], pairs)
 
-        一次 API 调用同时处理问题修复和风格优化。
-
-        Args:
-            pairs: 段落列表，每个包含:
-                - source: 原文
-                - translation: 当前译文
-                - issues: 问题列表 (可选)
-            context: 上下文信息（术语表、reflection_scores 等）
-
-        Returns:
-            List[str]: 润色后的译文列表
-        """
-        # 从 context 中提取 reflection_scores
-        reflection_scores = context.get("reflection_scores", {}) if context else {}
-
-        prompt = self._build_refine_and_polish_prompt(pairs, reflection_scores, context)
-        response = self.generate(prompt, temperature=0.3)
-
-        # 解析 JSON 响应
-        import json
-        try:
-            # 提取 JSON 部分
-            if "```json" in response:
-                json_start = response.find("```json") + 7
-                json_end = response.find("```", json_start)
-                json_str = response[json_start:json_end].strip()
-            elif "```" in response:
-                json_start = response.find("```") + 3
-                json_end = response.find("```", json_start)
-                json_str = response[json_start:json_end].strip()
-            else:
-                json_str = response.strip()
-
-            result = json.loads(json_str)
-            polished = result.get("polished_translations", [])
-            return self._align_polished_batch(polished, pairs)
-
-        except (json.JSONDecodeError, KeyError) as e:
-            logger.error(f"Failed to parse batch refine_and_polish response: {e}")
-            logger.debug(f"Response was: {response}")
-            # 降级：返回原译文
-            return [pair["translation"] for pair in pairs]
-
-    def _align_polished_batch(
-        self,
-        polished: Any,
-        pairs: List[Dict[str, Any]],
-    ) -> List[str]:
-        """把批量润色结果对齐回输入段落顺序。
-
-        新契约返回 `[{"index": 0, "translation": "..."}]`，按 index 归位；
-        旧契约返回裸字符串数组，按位置回落（模型不遵守新契约时不至于整批降级）。
-        两种格式下缺失、越界或非字符串的条目一律回退该段原译文，避免"数量凑够但
-        内容错位"静默通过（审计 TR12）。
-        """
+    def _align_polished_batch(self, polished: Any, pairs: List[Dict[str, Any]]) -> List[str]:
+        from ..prompts.contracts import PromptContractError
+        if not isinstance(polished, list):
+            raise PromptContractError("polished_translations must be an array")
         originals = [pair.get("translation", "") for pair in pairs]
+        output, seen = list(originals), set()
+        for item in polished:
+            if not isinstance(item, dict):
+                raise PromptContractError("Refinement items require explicit indices")
+            index = item.get("index")
+            if type(index) is not int or index in seen or not 0 <= index < len(originals):
+                raise PromptContractError("Duplicate, missing or out-of-range refinement index")
+            seen.add(index)
+            text = item.get("translation")
+            if not isinstance(text, str) or not text.strip():
+                raise PromptContractError("Empty refinement item")
+            output[index] = text
+        return output  # omitted IDs retain their exact original; caller verifies whether problems remain
 
-        if not isinstance(polished, list) or not polished:
-            logger.warning(
-                "Batch refine_and_polish returned no usable translations (%s); "
-                "falling back to original translations.",
-                type(polished).__name__,
-            )
-            return originals
-
-        has_indexed_items = any(isinstance(item, dict) for item in polished)
-
-        if has_indexed_items:
-            by_index: Dict[int, str] = {}
-            for position, item in enumerate(polished):
-                if not isinstance(item, dict):
-                    # 混合数组（部分带 index、部分是裸字符串）：裸字符串按它在
-                    # 数组里的位置补位，不然会被静默丢弃、只在 missing 计数里
-                    # 露一下头。带 index 的条目优先，后面统一覆盖。
-                    if (
-                        isinstance(item, str)
-                        and item.strip()
-                        and 0 <= position < len(originals)
-                    ):
-                        by_index.setdefault(position, item)
-                    continue
-                try:
-                    index = int(item.get("index"))
-                except (TypeError, ValueError):
-                    logger.warning(
-                        "Batch refine_and_polish item has invalid index: %r", item.get("index")
-                    )
-                    continue
-                text = item.get("translation")
-                if not isinstance(text, str) or not text.strip():
-                    continue
-                if not 0 <= index < len(originals):
-                    logger.warning(
-                        "Batch refine_and_polish index %s out of range (batch size %s); skipped.",
-                        index, len(originals),
-                    )
-                    continue
-                # 显式带 index 的条目优先于按位置补位的裸字符串。
-                by_index[index] = text
-
-            missing = [i for i in range(len(originals)) if i not in by_index]
-            if missing:
-                logger.warning(
-                    "Batch refine_and_polish missing %s/%s paragraphs (index %s); "
-                    "keeping their original translations.",
-                    len(missing), len(originals), missing,
-                )
-            return [by_index.get(i, originals[i]) for i in range(len(originals))]
-
-        # 旧格式：裸字符串数组，只能按位置对齐，长度不符则整批回退
-        if len(polished) != len(pairs):
-            logger.warning(
-                "Batch refine_and_polish returned %s translations, expected %s. "
-                "Falling back to original translations.",
-                len(polished), len(pairs),
-            )
-            return originals
-
-        return [
-            item if isinstance(item, str) and item.strip() else originals[i]
-            for i, item in enumerate(polished)
-        ]
-
-    def prescan_section(
-        self,
-        section_id: str,
-        section_title: str,
-        section_content: str,
-        existing_terms: Dict[str, str],
-        model: Optional[str] = None,
-    ) -> Dict[str, Any]:
-        """
-        章节预扫描（方案 C - Phase 1 Step 1）
-
-        使用 Flash 模型快速扫描章节，提取新术语。
-        长章节自动分段调用并合并去重。
-
-        Args:
-            section_id: 章节 ID
-            section_title: 章节标题
-            section_content: 章节内容
-            existing_terms: 已有术语表 {term: translation}
-            model: 可选模型覆盖（如 "flash"）
-
-        Returns:
-            Dict: 预扫描结果
-            {
-                "new_terms": [...],
-                "term_usages": {...}
-            }
-        """
-        # 格式化已有术语
-        existing_terms_text = (
-            "\n".join([f"- {term} → {trans}" for term, trans in existing_terms.items()])
-            if existing_terms
-            else "无"
-        )
-
-        if len(section_content) <= TranslationLimits.PRESCAN_SINGLE_CALL_LIMIT:
-            prompt = self._build_prescan_prompt(
-                section_id=section_id,
-                section_title=section_title,
-                section_content=section_content,
-                existing_terms=existing_terms_text,
-            )
-            response = self.generate(
-                prompt, response_format="json", temperature=0.3, model=model
-            )
-            return self._parse_json_response(response)
-
-        # 分段处理
+    def prescan_section(self, section_id: str, section_title: str, section_content: str,
+                        existing_terms: Dict[str, str], model: Optional[str] = None) -> Dict[str, Any]:
+        from ..prompts.contracts import object_response, PromptContractError
+        import json
+        from ..core.glossary_prompt import _count_term_occurrences, _prose_only
         chunks = self._split_content_for_prescan(section_content, max_chars=TranslationLimits.PRESCAN_CHUNK_SIZE)
-        all_new_terms: Dict[str, Dict] = {}
-        all_term_usages: Dict[str, str] = {}
-        for i, chunk in enumerate(chunks):
-            prompt = self._build_prescan_prompt(
-                section_id=f"{section_id}_chunk{i}",
-                section_title=section_title,
-                section_content=chunk,
-                existing_terms=existing_terms_text,
-            )
-            result = self._parse_json_response(
-                self.generate(
-                    prompt, response_format="json", temperature=0.3, model=model
-                )
-            )
-            for t in result.get("new_terms", []):
-                term_key = (t.get("term") or "").lower()
-                if term_key and term_key not in all_new_terms:
-                    all_new_terms[term_key] = t
-            for k, v in result.get("term_usages", {}).items():
-                if k not in all_term_usages:
-                    all_term_usages[k] = v
-
-        return {
-            "new_terms": list(all_new_terms.values()),
-            "term_usages": all_term_usages,
-        }
+        candidates = {}
+        for index, chunk in enumerate(chunks):
+            matched = {term: value for term, value in existing_terms.items()
+                       if isinstance(term, str) and _count_term_occurrences(_prose_only(chunk), term) > 0}
+            existing = json.dumps(matched, ensure_ascii=False, default=str)
+            prompt = self._build_prescan_prompt(section_id=section_id, section_title=section_title,
+                                               section_content=chunk, existing_terms=existing)
+            result = object_response(self.generate(prompt, response_format="json", temperature=0.3, model=model), ("new_terms",))
+            if not isinstance(result["new_terms"], list):
+                raise PromptContractError("new_terms must be an array")
+            for item in result["new_terms"]:
+                if not isinstance(item, dict):
+                    raise PromptContractError("Invalid prescan candidate")
+                term = item.get("term", "")
+                if not isinstance(term, str) or not term.strip() or term.lower() not in chunk.lower():
+                    continue  # hallucinated candidate, not a source occurrence
+                quote = item.get("source_quote", "")
+                if quote and (not isinstance(quote, str) or quote not in chunk):
+                    continue
+                item = dict(item)
+                item["requires_review"] = bool(item.get("requires_review", False) or not quote)
+                candidates.setdefault(term.lower(), item)
+        return {"new_terms":list(candidates.values()), "term_usages":{}, "scan_coverage":1.0}
 
     def _split_content_for_prescan(
         self, content: str, max_chars: int = TranslationLimits.PRESCAN_CHUNK_SIZE
@@ -611,26 +445,22 @@ class LLMProvider(ABC):
         pairs_text = "\n\n".join(pairs)
 
         # 构建术语表
-        terms_text = "\n".join(
-            [
-                f"- {t.get('term', t.get('original', ''))} → {t.get('translation', '')}"
-                for t in terminology
-            ]
+        from ..core.glossary_prompt import render_glossary_prompt_block
+        terms_text = render_glossary_prompt_block(
+            terminology, term_usage=(context or {}).get("term_usage")
         )
 
         # 构建指南
         guidelines_text = "\n".join([f"- {g}" for g in guidelines])
 
         base_prompt = self.prompt_manager.get(
-            "longform/review/section_critique",
+            ("longform/review/section_critique_compact" if (context or {}).get("compact_review")
+             else "longform/review/section_critique"),
             pairs_text=pairs_text,
             guidelines_text=guidelines_text,
             terms_text=terms_text,
+            context_block="\n\n".join(self._build_reflection_context_blocks(context or {})),
         )
-
-        context_blocks = self._build_reflection_context_blocks(context or {})
-        if context_blocks:
-            return "\n\n".join(context_blocks + [base_prompt])
         return base_prompt
 
     def _build_refine_and_polish_prompt(
@@ -647,14 +477,10 @@ class LLMProvider(ABC):
             trans = pair.get("translation", "")
             issues = pair.get("issues", [])
 
-            pair_text = f"[段落 {i}]\n原文：{src}\n当前译文：{trans}"
+            identity = f" ID={pair['paragraph_id']}" if pair.get("paragraph_id") else ""
+            pair_text = f"[段落 {i}{identity}]\n原文：{src}\n当前译文：{trans}"
 
-            if issues:
-                issues_text = "\n".join([
-                    f"  - [{issue.get('type', 'unknown')}] {issue.get('description', '')}"
-                    for issue in issues
-                ])
-                pair_text += f"\n问题：\n{issues_text}"
+            # Each indexed issue is included once in issues_summary below.
 
             pairs_text_list.append(pair_text)
 
@@ -669,7 +495,6 @@ class LLMProvider(ABC):
         base_prompt = self.prompt_manager.get(
             "longform/review/refine_and_polish_batch",
             pairs_text=pairs_text,
-            scores_text=scores_text,
             issues_summary=issues_summary,
             terminology_score=float(reflection_scores.get("terminology", 0.0) or 0.0),
             accuracy_score=float(reflection_scores.get("accuracy", 0.0) or 0.0),
@@ -677,11 +502,8 @@ class LLMProvider(ABC):
             conciseness_score=float(reflection_scores.get("conciseness", 0.0) or 0.0),
             consistency_score=float(reflection_scores.get("consistency", 0.0) or 0.0),
             logic_score=float(reflection_scores.get("logic", 0.0) or 0.0),
+            context_block="\n\n".join(self._build_refine_context_blocks(context or {})),
         )
-
-        context_blocks = self._build_refine_context_blocks(context or {})
-        if context_blocks:
-            return "\n\n".join(context_blocks + [base_prompt])
         return base_prompt
 
     def _build_refine_issue_summary(self, pairs: List[Dict[str, Any]]) -> str:
@@ -766,6 +588,11 @@ class LLMProvider(ABC):
             if challenge_lines:
                 blocks.append("## 全文高风险点\n" + "\n".join(challenge_lines))
 
+        if context.get("annotation_plan"):
+            blocks.append("## 原文首现位置（仅指定位置注释）\n" + json.dumps(context["annotation_plan"], ensure_ascii=False))
+        if context.get("paragraph_ids"):
+            blocks.append("## 本章索引与段落 ID\n" + json.dumps(context["paragraph_ids"], ensure_ascii=False))
+
         priorities = build_review_priorities(context.get("review_priorities"))
         if priorities:
             blocks.append(
@@ -795,8 +622,8 @@ class LLMProvider(ABC):
             token_lines = [
                 "## Hidden Format Tokens",
                 "- Source and current translation may contain backend tokens like `[[[LINK_1|...]]]`.",
-                "- Keep the token wrapper, token id, and token order exactly unchanged.",
-                "- Only revise the text after `|`.",
+                "- Keep token ids, types and paragraph ownership; tokens may follow the Chinese word order within their paragraph.",
+                "- Only revise translatable text after `|`; CODE/MATH contents must stay byte-for-byte unchanged.",
                 "- Do not convert these tokens into Markdown syntax.",
             ]
             for token in format_tokens:
@@ -827,14 +654,13 @@ class LLMProvider(ABC):
 
         terminology = build_review_term_entries(context.get("terminology"))
         if terminology:
-            term_lines = []
-            for term in terminology:
-                original = term.get("term") or term.get("original") or ""
-                translation = term.get("translation") or ""
-                if original and translation:
-                    term_lines.append(f"- {original} -> {translation}")
-            if term_lines:
-                blocks.append("## 关键术语\n" + "\n".join(term_lines))
+            from ..core.glossary_prompt import render_glossary_prompt_block
+            blocks.append(render_glossary_prompt_block(terminology, term_usage=context.get("term_usage")))
+        if context.get("annotation_plan"):
+            blocks.append("## 原文首现位置（仅指定位置注释）\n" + json.dumps(context["annotation_plan"], ensure_ascii=False))
+        if context.get("paragraph_ids"):
+            blocks.append("## 本章索引与段落 ID\n" + json.dumps(context["paragraph_ids"], ensure_ascii=False))
+
 
         challenges = build_article_challenge_payload(context.get("article_challenges"))
         if challenges:
@@ -874,49 +700,8 @@ class LLMProvider(ABC):
         )
 
     def _parse_json_response(self, response: str) -> Dict[str, Any]:
-        """解析 JSON 响应。
-
-        解析失败时不再静默返回 {}：先尝试从可能含截断/前后赘述的文本中提取
-        最大的平衡 {...} / [...] 子串再解析；仍失败才返回 {} 兜底，并记录
-        warning（含截断预览），避免分析/术语数据被静默丢弃而无任何信号。
-        """
-        import json
-
-        text = response.strip()
-
-        # 移除可能的 markdown 代码块标记
-        if text.startswith("```"):
-            lines = text.split("\n")
-            # 移除第一行和最后一行
-            if lines[0].startswith("```"):
-                lines = lines[1:]
-            if lines and lines[-1].strip() == "```":
-                lines = lines[:-1]
-            text = "\n".join(lines)
-
-        try:
-            return json.loads(text)
-        except json.JSONDecodeError:
-            pass
-
-        # 容错恢复：截取首个 { 或 [ 到末个匹配 } 或 ] 的子串再试
-        recovered = self._extract_balanced_json(text)
-        if recovered is not None:
-            try:
-                parsed = json.loads(recovered)
-                logger.warning(
-                    "[LLM] JSON 直接解析失败，已通过平衡括号子串恢复（原长度=%d）。",
-                    len(text),
-                )
-                return parsed
-            except json.JSONDecodeError:
-                pass
-
-        logger.warning(
-            "[LLM] JSON 解析失败，返回空结果。可能是输出被 max_output_tokens 截断或含赘述。预览=%r",
-            text[:200],
-        )
-        return {}
+        from ..prompts.contracts import parse_json
+        return parse_json(response)
 
     @staticmethod
     def _extract_balanced_json(text: str) -> Optional[str]:

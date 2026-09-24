@@ -60,7 +60,7 @@ def test_copy_and_rewrite_images_full_flow(
             return mock_response
         raise Exception(f"URL not mocked: {url}")
 
-    with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+    with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
         result = copy_and_rewrite_images(
             markdown=sample_markdown,
             source_html_path=source_html,
@@ -140,7 +140,7 @@ def test_image_directory_cleanup(tmp_path: Path, mock_image_content: dict):
         mock_response.__exit__ = Mock(return_value=False)
         return mock_response
 
-    with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+    with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
         copy_and_rewrite_images(
             markdown=markdown,
             source_html_path=source_html,
@@ -177,7 +177,7 @@ def test_download_failure_handling(tmp_path: Path, caplog):
             return mock_response
         raise Exception("Network error")
 
-    with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+    with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
         result = copy_and_rewrite_images(
             markdown=markdown,
             source_html_path=source_html,
@@ -251,7 +251,7 @@ def test_image_format_detection(tmp_path: Path, mock_image_content: dict):
         mock_response.__exit__ = Mock(return_value=False)
         return mock_response
 
-    with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+    with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
         copy_and_rewrite_images(
             markdown=markdown,
             source_html_path=source_html,
@@ -293,7 +293,7 @@ def test_duplicate_image_deduplication(tmp_path: Path, mock_image_content: dict)
         mock_response.__exit__ = Mock(return_value=False)
         return mock_response
 
-    with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+    with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
         result = copy_and_rewrite_images(
             markdown=markdown,
             source_html_path=source_html,
@@ -331,7 +331,7 @@ def test_basename_sanitization(tmp_path: Path, mock_image_content: dict):
         mock_response.__exit__ = Mock(return_value=False)
         return mock_response
 
-    with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+    with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
         result = copy_and_rewrite_images(
             markdown=markdown,
             source_html_path=source_html,
@@ -378,7 +378,7 @@ def test_substack_cdn_url_resolution(tmp_path: Path):
         mock_response.__exit__ = Mock(return_value=False)
         return mock_response
 
-    with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+    with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
         result = copy_and_rewrite_images(
             markdown=markdown,
             source_html_path=source_html,
@@ -412,7 +412,7 @@ def test_angle_bracket_wrapped_urls(tmp_path: Path, mock_image_content: dict):
         mock_response.__exit__ = Mock(return_value=False)
         return mock_response
 
-    with patch("urllib.request.urlopen", side_effect=mock_urlopen):
+    with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
         result = copy_and_rewrite_images(
             markdown=markdown,
             source_html_path=source_html,

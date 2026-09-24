@@ -120,3 +120,15 @@ describe('renderFormulas（DOM）', () => {
     expect(result.html).not.toContain('mjx-container');
   });
 });
+
+it('oversized formula degrades without blocking other content', async () => {
+  const result = await renderFormulas(`<p>${inlineNode('x'.repeat(32769))} 和 ${inlineNode('x^2')}</p>`);
+  expect(result.failed).toBe(1);
+  expect(result.rendered).toBe(1);
+});
+
+it('AMSmath and chemical notation still render with the lean engine', async () => {
+  const result = await renderFormulas(blockNode('\\begin{aligned}a&amp;=b+c\\\\d&amp;=e\\end{aligned}') + blockNode('\\ce{H2O}'));
+  expect(result.failed).toBe(0);
+  expect(result.rendered).toBe(2);
+});

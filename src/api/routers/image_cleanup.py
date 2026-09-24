@@ -14,6 +14,11 @@ import json
 import logging
 from pathlib import Path
 from datetime import datetime
+from urllib.parse import urlsplit
+from functools import lru_cache
+from bs4 import BeautifulSoup
+from markdown_it import MarkdownIt
+from src.core.image_assets import BROWSER_IMAGE_EXTENSIONS
 
 from fastapi import APIRouter, Depends, BackgroundTasks
 from pydantic import BaseModel
@@ -55,39 +60,43 @@ class ImageStatsResponse(BaseModel):
     error_translations: int
 
 
+@lru_cache(maxsize=1)
+def _image_markdown_parser():
+    return MarkdownIt("commonmark")
+
+
 def detect_image_content(source_text: str) -> bool:
-    """检测内容是否为图片"""
+    """Recognize standalone images only, never prose mentioning a filename.
+
+    False positives skip translation and mutate paragraph types, so ambiguous
+    input must remain text. Existing IMAGE metadata is handled by the caller.
+    """
     source = source_text.strip()
-
-    # Markdown图片语法
-    if source.startswith("![") and "](" in source:
-        return True
-
-    # HTML img标签
-    if source.startswith("<img") and ">" in source:
-        return True
-
-    # 图片文件路径模式
-    image_patterns = [
-        "_files/",
-        ".png",
-        ".jpg",
-        ".jpeg",
-        ".gif",
-        ".svg",
-        ".webp",
-        "substackcdn.com/image/",
-        "image/fetch/",
-    ]
-
-    if any(pattern in source.lower() for pattern in image_patterns):
-        return True
-
-    # 纯路径或URL（没有文字内容）
-    if len(source.split()) <= 2 and ("/" in source or "http" in source):
-        return True
-
-    return False
+    if not source or len(source) > 10000:
+        return False
+    if source.startswith("!["):
+        tokens = _image_markdown_parser().parse(source)
+        if len(tokens) != 3 or tokens[1].type != "inline":
+            return False
+        children = tokens[1].children or []
+        return any(t.type == "image" for t in children) and all(
+            t.type == "image" or (t.type == "text" and not t.content.strip()) or t.type == "softbreak"
+            for t in children
+        )
+    if source.startswith("<"):
+        soup = BeautifulSoup(source, "html.parser")
+        return bool(soup.find("img")) and not soup.get_text(strip=True) and all(
+            tag.name in {"img", "p", "div"} for tag in soup.find_all(True)
+        )
+    if any(char.isspace() for char in source):
+        return False
+    try:
+        url = urlsplit(source.replace("\\", "/"))
+    except ValueError:
+        return False
+    if url.scheme and url.scheme not in {"http", "https"}:
+        return False
+    return Path(url.path).suffix.lower() in BROWSER_IMAGE_EXTENSIONS
 
 
 def detect_image_translation_error(text: str) -> bool:
@@ -105,6 +114,17 @@ def detect_image_translation_error(text: str) -> bool:
     ]
 
     return any(pattern in text for pattern in error_patterns)
+
+
+def _is_removable_image_error(paragraph, translation) -> bool:
+    """Never remove a human-authored or previously confirmed version by heuristic."""
+    text = translation.text if hasattr(translation, "text") else str(translation)
+    model = str(getattr(translation, "model", "")).lower()
+    if model in {"manual", "human", "user", "immersive", "confirmed"}:
+        return False
+    if text == paragraph.confirmed or any(item.text == text for item in paragraph.history):
+        return False
+    return detect_image_translation_error(text)
 
 
 def _cleanup_image_paragraphs_sync(
@@ -139,17 +159,17 @@ def _cleanup_image_paragraphs_sync(
             section_marked = 0
 
             for paragraph in section.paragraphs:
-                if not detect_image_content(paragraph.source):
+                if paragraph.element_type != ElementType.IMAGE and not detect_image_content(paragraph.source):
                     continue
                 total_image_paragraphs += 1
                 section_image_count += 1
 
                 if (
                     paragraph.element_type != ElementType.IMAGE
-                    and not request.dry_run
                     and request.mark_as_image
                 ):
-                    paragraph.element_type = ElementType.IMAGE
+                    if not request.dry_run:
+                        paragraph.element_type = ElementType.IMAGE
                     section_marked += 1
                     marked_paragraphs += 1
 
@@ -161,16 +181,15 @@ def _cleanup_image_paragraphs_sync(
                             if hasattr(translation, "text")
                             else str(translation)
                         )
-                        if detect_image_translation_error(trans_text):
-                            if not request.dry_run:
-                                section_cleaned += 1
-                                cleaned_translations += 1
+                        if _is_removable_image_error(paragraph, translation):
+                            section_cleaned += 1
+                            cleaned_translations += 1
                             continue
                         retained_translations[trans_id] = translation
 
                     if not request.dry_run:
                         paragraph.translations = retained_translations
-                        if not paragraph.translations:
+                        if not paragraph.translations and not paragraph.confirmed:
                             paragraph.status = ParagraphStatus.PENDING
 
             if not request.dry_run and (
@@ -225,6 +244,8 @@ def _get_image_statistics_sync(project_id: str, pm) -> ImageStatsResponse:
             ):
                 image_paragraphs += 1
                 section_images += 1
+            else:
+                continue
 
             for translation in paragraph.translations.values():
                 trans_text = (
@@ -232,7 +253,7 @@ def _get_image_statistics_sync(project_id: str, pm) -> ImageStatsResponse:
                     if hasattr(translation, "text")
                     else str(translation)
                 )
-                if detect_image_translation_error(trans_text):
+                if _is_removable_image_error(paragraph, translation):
                     error_translations += 1
                     section_errors += 1
 

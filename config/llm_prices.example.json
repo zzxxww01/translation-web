@@ -1,0 +1,15 @@
+{
+  "description": "默认没有价格，不会将未知费用记为 0。按实际中转商/官方账户的同一计价周期填写；以下仅为字段说明，没有虚构报价。",
+  "rates": [],
+  "rate_fields": {
+    "provider_id": "与用量 groups.provider_id 完全匹配",
+    "model": "与用量 groups.model 的真实模型 ID 完全匹配",
+    "currency": "实际计价币种，例如 USD 或 CNY；不能混加",
+    "input_per_million": "每百万非缓存输入 token 的价格",
+    "cached_input_per_million": "每百万缓存读取 token 的实际价格",
+    "output_per_million": "每百万计费输出 token 的实际价格",
+    "source": "你的计价表、账单或合同来源",
+    "effective_date": "本次选择的价格生效日期 YYYY-MM-DD"
+  },
+  "limitations": "仅平价 token 估算；缓存写入溢价、存储、工具、阶梯、税费、中转加价和迟到/缺失用量需另行对账。"
+}

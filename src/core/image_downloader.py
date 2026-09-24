@@ -5,16 +5,12 @@ Extracted from parser.py to follow the Single Responsibility Principle.
 """
 
 import hashlib
-import os
-import re
-import shutil
 from pathlib import Path
 from typing import Optional
-from urllib.parse import urljoin, urlparse, unquote
+from urllib.parse import urljoin, urlparse
 
-import requests
-
-from .url_safety import is_safe_url, resolved_ips_are_safe
+from .url_safety import is_safe_url
+from .public_resources import fetch_public_bytes, confined_local_path, atomic_write_resource, MAX_RESOURCE_BYTES
 
 
 class ImageDownloader:
@@ -61,7 +57,7 @@ class ImageDownloader:
 
             # 安全:SSRF 防护。src 来自被翻译文档(外部可控),阻止指向内网/回环/
             # 云元数据(如 169.254.169.254)等地址。请求前解析并校验所有 IP,线程安全。
-            if not is_safe_url(src) or not resolved_ips_are_safe(src):
+            if not is_safe_url(src):
                 print(f"[ImageDownloader] Blocked unsafe image URL: {src}")
                 return None
 
@@ -74,38 +70,17 @@ class ImageDownloader:
             # 生成文件名（使用 URL hash）
             url_hash = hashlib.md5(src.encode()).hexdigest()[:12]
             parsed = urlparse(src)
-            ext = Path(parsed.path).suffix or ".jpg"
+            ext = Path(parsed.path).suffix.lower()
+            if ext not in {".jpg", ".jpeg", ".png", ".gif", ".webp", ".avif"}:
+                ext = ".jpg"
             filename = f"{url_hash}{ext}"
             local_path = images_dir / filename
 
             if local_path.exists():
                 return self._relative_image_path(filename)
 
-            # 流式下载并限制大小,避免超大响应撑爆内存(原 response.content 无上限)。
-            MAX_IMAGE_BYTES = 20 * 1024 * 1024
-            response = requests.get(
-                src,
-                timeout=30,
-                headers={
-                    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-                },
-                stream=True,
-            )
-            response.raise_for_status()
-
-            downloaded = 0
-            with open(local_path, "wb") as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    if not chunk:
-                        continue
-                    downloaded += len(chunk)
-                    if downloaded > MAX_IMAGE_BYTES:
-                        f.close()
-                        local_path.unlink(missing_ok=True)
-                        raise ValueError(
-                            f"Image too large: > {MAX_IMAGE_BYTES} bytes from {src}"
-                        )
-                    f.write(chunk)
+            content, _ = fetch_public_bytes(src, timeout=30, max_bytes=MAX_RESOURCE_BYTES)
+            atomic_write_resource(local_path, content)
 
             return self._relative_image_path(filename)
 
@@ -124,40 +99,7 @@ class ImageDownloader:
 
     def _resolve_local_image_path(self, src: str) -> Optional[Path]:
         """Resolve local image path from src for file-based HTML."""
-        if not src:
-            return None
-        if src.startswith("data:"):
-            return None
-
-        # Windows absolute paths (e.g. C:\...)
-        if re.match(r"^[A-Za-z]:[\\\/]", src):
-            candidate = Path(src)
-            return candidate if candidate.exists() else None
-
-        parsed = urlparse(src)
-        if parsed.scheme in ("http", "https"):
-            return None
-
-        path_str = src
-        if parsed.scheme == "file":
-            path_str = unquote(parsed.path)
-            if os.name == "nt" and re.match(r"^/[A-Za-z]:", path_str):
-                path_str = path_str.lstrip("/")
-        elif parsed.scheme != "":
-            return None
-        else:
-            path_str = unquote(parsed.path or src)
-
-        path_str = path_str.split("?", 1)[0].split("#", 1)[0]
-        candidate = Path(path_str)
-        if candidate.is_absolute():
-            return candidate if candidate.exists() else None
-
-        if self.source_dir:
-            candidate = (self.source_dir / path_str).resolve()
-            if candidate.exists():
-                return candidate
-        return None
+        return confined_local_path(src, self.source_dir)
 
     def _copy_local_image(self, src_path: Path, src: str) -> Optional[str]:
         """Copy local image into images_dir and return relative path."""
@@ -173,6 +115,10 @@ class ImageDownloader:
         local_path = images_dir / filename
 
         if not local_path.exists():
-            shutil.copy2(src_path, local_path)
+            with src_path.open("rb") as file:
+                content = file.read(MAX_RESOURCE_BYTES + 1)
+            if len(content) > MAX_RESOURCE_BYTES:
+                raise ValueError("Local image exceeds size limit")
+            atomic_write_resource(local_path, content)
 
         return self._relative_image_path(filename)

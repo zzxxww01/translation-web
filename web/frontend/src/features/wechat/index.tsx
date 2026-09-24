@@ -86,9 +86,9 @@ function ImageModeOptions({
 }
 
 export function WechatFeature() {
-  const initialDraft = useMemo(loadWechatDraft, []);
+  const initialDraft = useMemo(() => loadWechatDraft(), []);
   const [markdown, setMarkdown] = useState(initialDraft.markdown);
-  const [selectedTheme, setSelectedTheme] = useState(initialDraft.selectedTheme);
+  const [requestedTheme, setSelectedTheme] = useState(initialDraft.selectedTheme);
   const [imageMode, setImageMode] = useState<WechatImageMode>(initialDraft.imageMode);
   const [workspaceView, setWorkspaceView] = useState<WorkspaceView>('editor');
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -105,29 +105,26 @@ export function WechatFeature() {
   const formulaCount = formatWechat.data?.formula_count ?? 0;
   // 公式渲染是异步的（MathJax 懒加载）。渲染完成前先用后端返回的等宽降级版本，
   // 这样预览不会空一段，也不会因为渲染失败而卡住整篇。
-  const [renderedHtml, setRenderedHtml] = useState('');
-  const [formulaFailed, setFormulaFailed] = useState(0);
-  const html = renderedHtml || rawHtml;
+  const [formulaResult, setFormulaResult] = useState({ source: '', html: '', failed: 0 });
+  const html = formulaResult.source === rawHtml ? formulaResult.html || rawHtml : rawHtml;
+  const formulaFailed = formulaResult.source === rawHtml ? formulaResult.failed : 0;
 
   useEffect(() => {
-    if (!rawHtml || !rawHtml.includes('data-latex')) {
-      setRenderedHtml('');
-      setFormulaFailed(0);
-      return;
-    }
+    if (!rawHtml || !rawHtml.includes('data-latex')) return;
     let cancelled = false;
-    setRenderedHtml('');
-    setFormulaFailed(0);
     void (async () => {
-      const { renderFormulas } = await import('./formulaRenderer');
-      const result = await renderFormulas(rawHtml);
-      if (cancelled) return;
-      setRenderedHtml(result.html);
-      setFormulaFailed(result.failed);
+      try {
+        const { renderFormulas } = await import('./formulaRenderer');
+        const result = await renderFormulas(rawHtml);
+        if (!cancelled) setFormulaResult({ source: rawHtml, html: result.html, failed: result.failed });
+      } catch {
+        if (!cancelled) {
+          setFormulaResult({ source: rawHtml, html: rawHtml, failed: 0 });
+          toast.warning('公式渲染器加载失败，已保留 LaTeX 原文');
+        }
+      }
     })();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, [rawHtml]);
 
   useEffect(() => {
@@ -136,6 +133,7 @@ export function WechatFeature() {
     }
   }, [formulaFailed]);
   const themes = useMemo(() => themesData?.themes || [], [themesData]);
+  const selectedTheme = themes.length && !themes.some(theme => theme.id === requestedTheme) ? themes[0].id : requestedTheme;
   const selectedThemeName =
     themes.find(theme => theme.id === selectedTheme)?.name || selectedTheme;
   const imageModeName = imageModes.find(mode => mode.id === imageMode)?.title || '保留原链接';
@@ -154,10 +152,6 @@ export function WechatFeature() {
     return () => window.clearTimeout(timeoutId);
   }, [imageMode, markdown, selectedTheme]);
 
-  useEffect(() => {
-    if (!themes.length || themes.some(theme => theme.id === selectedTheme)) return;
-    setSelectedTheme(themes[0].id);
-  }, [selectedTheme, themes]);
 
   const handleConvert = () => {
     if (!markdown.trim()) {
@@ -191,7 +185,7 @@ export function WechatFeature() {
       // 复制走的必须是渲染后的 HTML；若异步渲染还没回来，这里同步等一次，
       // 免得用户抢在渲染完成前点复制、把等宽降级版粘进公众号。
       let htmlToCopy = html;
-      if (rawHtml.includes('data-latex') && !renderedHtml) {
+      if (rawHtml.includes('data-latex') && (formulaResult.source !== rawHtml || !formulaResult.html)) {
         const { renderFormulas } = await import('./formulaRenderer');
         htmlToCopy = (await renderFormulas(rawHtml)).html;
       }

@@ -1,3 +1,4 @@
+import { sanitizeSourceHtml } from '@/shared/safeHtml';
 /**
  * 段落列表项组件
  * 显示单个段落的信息和状态
@@ -43,7 +44,7 @@ export const ParagraphItem: FC<ParagraphItemProps> = ({
       return (
         <div
           className="max-h-48 overflow-auto rounded border border-border-subtle bg-bg-tertiary p-2 text-sm"
-          dangerouslySetInnerHTML={{ __html: paragraph.source_html }}
+          dangerouslySetInnerHTML={{ __html: sanitizeSourceHtml(paragraph.source_html) }}
         />
       );
     }
