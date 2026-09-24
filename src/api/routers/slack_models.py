@@ -97,4 +97,3 @@ def normalize_variants(raw_variants: object, chinese_fallback: str = "") -> list
     if set(mapping) != set(VERSION_ORDER):
         raise PromptContractError("Expected exactly A/B/C reply variants")
     return [mapping[key] for key in VERSION_ORDER]
-

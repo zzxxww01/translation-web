@@ -337,6 +337,8 @@ class SectionTranslationExecutor:
                 "degraded": bool(getattr(four_step_result, "degraded", False)),
                 "degraded_reason": getattr(four_step_result, "degraded_reason", "") or "",
                 "paused": bool(getattr(four_step_result, "paused", False)),
+                "workflow_status": getattr(four_step_result, "workflow_status", None),
+                "pause_reason": getattr(four_step_result, "degraded_reason", "") if getattr(four_step_result, "paused", False) else None,
             }
         except Exception as error:
             error_msg = f"Failed to translate section {section.section_id}: {str(error)}"
@@ -352,12 +354,14 @@ class SectionTranslationExecutor:
             }
 
     @staticmethod
-    def _build_translatable_section(section: Section, force: bool = False, needs_quality_review=None) -> Section:
+    def _build_translatable_section(section: Section, force: bool = False, needs_quality_review=None, *, require_quality: bool = False) -> Section:
         """Filter out structured metadata paragraphs and already translated paragraphs from automatic body translation.
 
         ``force=True`` 时保留已有译文的段落——这是「重译本章 / 整篇重译」用的路径。
         结构化元数据段（图片等）任何情况下都不送翻。
         """
+        if require_quality and needs_quality_review is None:
+            needs_quality_review = lambda paragraph: paragraph.needs_quality_review()
         return section.model_copy(
             update={
                 "paragraphs": [

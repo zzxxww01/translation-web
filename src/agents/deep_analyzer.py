@@ -368,10 +368,22 @@ class DeepAnalyzer:
             should_cancel=should_cancel,
         )
         analysis.section_roles = section_roles
-        analysis.checkpoint_eligible = terms_verified_ok and all(
-            role.role_in_article not in {"", "待分析"} for role in section_roles.values())
+        analysis.incomplete_stages = []
+        if not terms_verified_ok:
+            analysis.incomplete_stages.append("term_validation")
+        if set(section_roles) != {section.section_id for section in sections} or any(
+                role.role_in_article in {"", "待分析"} for role in section_roles.values()):
+            analysis.incomplete_stages.append("section_roles")
+        analysis.checkpoint_eligible = not analysis.incomplete_stages
 
         return analysis
+
+    @staticmethod
+    def recovery_action(error: Exception) -> str:
+        from src.llm.work_budget import retry_action
+        # Legacy callers use explicit recovery labels; execution has one classifier.
+        return {"stop": "stop", "retry": "retry_same_input", "resize": "reduce_input",
+                "format": "format_retry"}[retry_action(error)]
 
     def _checkpoint_analysis_call(self, task, method, kwargs, validator):
         from src.services.work_checkpoints import checkpoint_call

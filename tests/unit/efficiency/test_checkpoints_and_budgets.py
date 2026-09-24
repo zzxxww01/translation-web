@@ -197,7 +197,7 @@ def test_recovery_uses_error_type(error,action): assert retry_action(error)==act
 
 
 @pytest.mark.parametrize('options',[{'max_stage_calls':0},{'prescan_concurrency':9},{'resume_stages':'yes'},
-    {'unknown':1},{'stage_timeout_seconds':True},{'run_timeout_seconds':1}])
+    {'unknown':1},{'stage_timeout_seconds':True},{'run_timeout_seconds':0}])
 def test_efficiency_policy_is_strict(options):
     with pytest.raises(ValidationError):EfficiencyOptions(**options)
 

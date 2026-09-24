@@ -354,7 +354,22 @@ class FourStepTranslator:
     def translate_section(self, section: Section, all_sections: List[Section],
                           on_progress: Optional[Callable[[str, int, int], None]] = None,
                           retry_count: int = 0, project_id: Optional[str] = None,
-                          resume_drafts: bool = False) -> SectionTranslationResult:
+                          resume_drafts: bool = False, *,
+                          reuse_existing_drafts: Optional[bool] = None,
+                          reuse_checkpoints: bool = True) -> SectionTranslationResult:
+        """Both public resume APIs delegate to the same verified pipeline."""
+        from src.services.work_checkpoints import fresh_stage_scope
+        if reuse_existing_drafts is not None:
+            if resume_drafts and not reuse_existing_drafts:
+                raise ValueError("Conflicting draft-resume arguments")
+            resume_drafts = reuse_existing_drafts
+        with fresh_stage_scope(not reuse_checkpoints):
+            return self._translate_section(section, all_sections, on_progress,
+                                           retry_count, project_id, resume_drafts)
+
+    def _translate_section(self, section: Section, all_sections: List[Section],
+                           on_progress=None, retry_count: int = 0, project_id=None,
+                           resume_drafts: bool = False) -> SectionTranslationResult:
         """Draft, evidence-based targeted revision and fresh review; never chase a score."""
         from copy import deepcopy
         from ..prompts import BUNDLE_VERSION
@@ -367,6 +382,7 @@ class FourStepTranslator:
         draft_reflection = None
         history, revised, attempted = [], [], False
         degraded, reason = False, ""
+        workflow_status = "review_pending"
         sources = [p.source for p in section.paragraphs]
         def progress(label, step):
             if on_progress:
@@ -422,12 +438,14 @@ class FourStepTranslator:
             attempted = bool(targets) and retry_count < self.max_retries
             progress("定点修订" if attempted else "保留当前译文", 3)
             if attempted:
+                workflow_status = "revision_pending"
                 candidate = self._step_refine_and_polish(section, outputs, reflection, understanding,
                     provider=review_provider, issues_filter=targets, polish_all=False, all_sections=all_sections)
                 revised = [item.text for item in candidate]
                 if any(item.format_issues for item in candidate):
                     degraded, reason = True, "Revision rejected: invalid format tokens"
                 elif revised != drafts:
+                    workflow_status = "verification_pending"
                     progress("复核修改后的译文", 3)
                     verification = bind(self._step_reflect(section, revised, understanding, provider=review_provider, all_sections=all_sections), revised, "revision")
                     from ..prompts.contracts import review_regressed
@@ -460,7 +478,8 @@ class FourStepTranslator:
                 translation_outputs=[{"text":p.text,"tokenized_text":p.tokenized_text,"format_issues":list(p.format_issues)} for p in outputs],
                 understanding=understanding, reflection=reflection, assessment=assessment,
                 revision_attempted=attempted, review_history=history, prompt_bundle_version=BUNDLE_VERSION,
-                degraded=degraded, degraded_reason=reason)
+                degraded=degraded, degraded_reason=reason,
+                workflow_status="manual_review" if degraded else "passed")
         except Exception as exc:
             if self.session_service and session_id:
                 try:
@@ -477,7 +496,8 @@ class FourStepTranslator:
                 understanding=understanding, reflection=draft_reflection, assessment=None,
                 revision_attempted=attempted, review_history=history, prompt_bundle_version=BUNDLE_VERSION,
                 degraded=True, degraded_reason=f"{type(exc).__name__}: {exc}",
-                paused=isinstance(exc, WorkBudgetExceeded))
+                paused=isinstance(exc, WorkBudgetExceeded),
+                budget_exhausted=isinstance(exc, WorkBudgetExceeded), workflow_status=workflow_status)
 
     def translate_paragraph(
         self,

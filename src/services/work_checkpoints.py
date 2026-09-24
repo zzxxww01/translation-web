@@ -143,6 +143,56 @@ class WorkCheckpointStore:
                 for stale in files[:-self.MAX_ENTRIES]:
                     stale.unlink(missing_ok=True)
 
+    @contextmanager
+    def entry_lock(self, task: str, key: str):
+        """Coalesce identical computations across instances without locking the model globally.
+
+        Lock files are retained: unlinking a live inode could let another process
+        acquire a different lock for the same key. Only JSON results are pruned.
+        """
+        import time
+        from src.llm.execution_context import check_active, bounded_sleep, remaining_timeout
+        path = self._path(task, key).with_suffix(".lock")
+        if path.is_symlink():
+            raise ValueError("Checkpoint lock must not be a symlink")
+        lock = portalocker.Lock(str(path), mode="a", timeout=0)
+        acquired = False
+        start = time.monotonic()
+        try:
+            while not acquired:
+                check_active()
+                try:
+                    lock.acquire()
+                    acquired = True
+                except portalocker.exceptions.LockException:
+                    if remaining_timeout() is None and time.monotonic() - start >= 600:
+                        raise TimeoutError("Checkpoint is busy; retry after its owner finishes")
+                    bounded_sleep(0.05)
+            check_active()
+            yield
+        finally:
+            if acquired:
+                lock.release()
+
+    def compute(self, task: str, key: str, call: Callable[[], T], validator: Callable[[Any], T],
+                *, reuse: bool = True, cacheable: Callable[[T], bool] = lambda value: True,
+                encode: Callable[[T], Any] = normalized) -> T:
+        from src.llm.execution_context import check_active
+        check_active()
+        with self.entry_lock(task, key):
+            if reuse:
+                cached = self.load(task, key, validator)
+                if cached is not None and cacheable(cached):
+                    return cached
+            result = validator(call())
+            check_active()
+            try:
+                if cacheable(result):
+                    self.save(task, key, encode(result))
+            except (OSError, ValueError, TypeError, portalocker.exceptions.LockException) as exc:
+                logger.warning("Stage completed without a checkpoint (%s): %s", task, type(exc).__name__)
+            return result
+
     def summary(self) -> dict:
         with self._guard:
             return {"hits": self.hits, "misses": self.misses, "writes": self.writes,
@@ -150,14 +200,15 @@ class WorkCheckpointStore:
 
 
 class CheckpointSession:
-    def __init__(self, store: WorkCheckpointStore, *, read_enabled: bool = True):
+    def __init__(self, store: WorkCheckpointStore, *, read_enabled: bool = True, namespace=None):
         self.store = store
+        self.namespace = namespace
         self.read_enabled = read_enabled
 
 
 @contextmanager
-def checkpoint_scope(store: WorkCheckpointStore, *, read_enabled: bool = True):
-    token = _active.set(CheckpointSession(store, read_enabled=read_enabled))
+def checkpoint_scope(store: WorkCheckpointStore, *, read_enabled: bool = True, namespace=None):
+    token = _active.set(CheckpointSession(store, read_enabled=read_enabled, namespace=namespace))
     try:
         yield
     finally:
@@ -170,7 +221,7 @@ def fresh_stage_scope(fresh: bool):
     if not fresh or session is None:
         yield
         return
-    with checkpoint_scope(session.store, read_enabled=False):
+    with checkpoint_scope(session.store, read_enabled=False, namespace=session.namespace):
         yield
 
 
@@ -183,17 +234,7 @@ def checkpoint_call(task: str, provider: Any, inputs: Any, call: Callable[[], T]
         return validator(call())
     from src.llm.execution_context import check_active
     check_active()
-    key = fingerprint({"inputs": inputs, "provider": provider_fingerprint(provider),
+    key = fingerprint({"inputs": inputs, "namespace": session.namespace, "provider": provider_fingerprint(provider),
                        "policy": prompt_fingerprint(prompts)})
-    if session.read_enabled:
-        cached = session.store.load(task, key, validator)
-        if cached is not None and cacheable(cached):
-            return cached
-    result = validator(call())
-    check_active()  # abandoned workers do not commit late results
-    try:
-        if cacheable(result):
-            session.store.save(task, key, result)
-    except (OSError, ValueError, TypeError, portalocker.exceptions.LockException) as exc:
-        logger.warning("Stage completed without a checkpoint (%s): %s", task, type(exc).__name__)
-    return result
+    return session.store.compute(task, key, call, validator,
+                                 reuse=session.read_enabled, cacheable=cacheable)

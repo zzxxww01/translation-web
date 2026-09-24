@@ -656,11 +656,10 @@ async def start_longform_workflow(
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
-    translation_service = await asyncio.to_thread(
-        _build_longform_service,
-        service,
-        body,
-    )
+    try:
+        translation_service = await asyncio.to_thread(_build_longform_service, service, body)
+    except ValueError as error:
+        raise BadRequestException(detail=str(error)) from error
     slot_claim = await translation_service.claim_translation_slot(project_id)
     if slot_claim["status"] == "busy":
         raise ConflictException(
@@ -705,13 +704,19 @@ async def start_longform_workflow(
             )
             term_review_job_id = None
         else:
+            term_kwargs = {}
+            term_llm = translation_service.llm
+            term_model = body.model
+            if body.model_scope == "draft":
+                term_llm = translation_service._get_provider_for_phase("phase0_prescan")
+                term_model = translation_service.model_config.get_model_for_phase(
+                    "phase0_prescan", profile=body.model_profile)["model"]
+                term_kwargs["provider_configured"] = True
             job = await ensure_term_review_job(
                 project_id=project_id,
                 pm=translation_service.project_manager,
                 gm=translation_service.project_manager.glossary_manager,
-                llm=(translation_service._get_provider_for_phase("phase0_prescan")
-                     if body.model_scope == "draft" else translation_service.llm),
-                model=(None if body.model_scope == "draft" else body.model),
+                llm=term_llm, model=term_model, **term_kwargs,
             )
             workflow_run_id = job["job_id"]
             term_review_job_id = job["job_id"]
@@ -768,6 +773,9 @@ async def start_longform_workflow(
         "resume_checkpoint": checkpoint.to_dict() if resumed else None,
         "retranslate_scope": body.retranslate_scope,
         "retranslate_section_ids": body.retranslate_section_ids,
+        "efficiency": body.efficiency.model_dump(mode="json"),
+        "model_scope": body.model_scope,
+        "model_profile": body.model_profile,
     }
 
 

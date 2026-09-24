@@ -40,3 +40,29 @@ describe('longform cost options', () => {
     expect(request.retranslate_scope).not.toBe('all');
   });
 });
+
+describe('longform efficiency controls', () => {
+  it('sends explicit controls without changing retranslation scope', async () => {
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ status: 'started' }), { status: 202 }));
+    vi.stubGlobal('fetch', fetchMock);
+    await documentApi.startLongformWorkflow('project-a', 'four-step', 'chosen',
+      { scope: 'section', sectionIds: ['s1'] },
+      { model_scope: 'draft', compact_review: true, prescan_concurrency: 2, max_run_calls: 50 });
+    const [, options] = fetchMock.mock.calls[0];
+    const body = JSON.parse(options.body);
+    expect(body.efficiency).toEqual({ model_scope: 'draft', compact_review: true, prescan_concurrency: 2, max_run_calls: 50 });
+    expect(body.model).toBe('chosen');
+    expect(body.retranslate_scope).toBe('section');
+    expect(body.retranslate_section_ids).toEqual(['s1']);
+  });
+
+  it('does not reuse controls from a previous request', async () => {
+    const fetchMock = vi.fn().mockImplementation(() => Promise.resolve(new Response(JSON.stringify({ status: 'started' }), { status: 202 })));
+    vi.stubGlobal('fetch', fetchMock);
+    await documentApi.startLongformWorkflow('project-a', 'four-step', undefined, undefined, { compact_review: true });
+    await documentApi.startLongformWorkflow('project-b', 'four-step');
+    const body = JSON.parse(fetchMock.mock.calls[1][1].body);
+    expect(body).not.toHaveProperty('efficiency');
+    expect(body.retranslate_scope).toBe('resume');
+  });
+});

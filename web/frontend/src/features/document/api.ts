@@ -56,18 +56,43 @@ export type RetranslateOption =
   | { scope: 'all' }
   | { scope: 'section'; sectionIds: string[] };
 
+export interface LegacyEfficiencyOptions {
+  stage_resume?: boolean;
+  resume_stages?: boolean;
+  prescan_concurrency?: number;
+  compact_review?: boolean;
+  model_scope?: 'all' | 'draft';
+  profile?: 'default' | 'fast' | 'premium';
+  max_stage_seconds?: number;
+  stage_timeout_seconds?: number;
+  max_stage_calls?: number;
+  max_run_seconds?: number;
+  run_timeout_seconds?: number;
+  max_run_calls?: number;
+  max_run_estimated_tokens?: number;
+  max_request_input_tokens?: number;
+  reserved_output_tokens?: number;
+  max_context_tokens?: number;
+}
+
 export interface LongformCostOptions {
   model_scope?: 'all' | 'draft';
   model_profile?: 'default' | 'fast' | 'premium';
-  efficiency?: {
-    resume_stages?: boolean;
-    prescan_concurrency?: number;
-    stage_timeout_seconds?: number;
-    max_stage_calls?: number;
-    run_timeout_seconds?: number;
-    max_run_calls?: number;
-    compact_review?: boolean;
-  };
+  efficiency?: LegacyEfficiencyOptions;
+}
+
+function normalizeCostOptions(options?: LongformCostOptions | LegacyEfficiencyOptions): LongformCostOptions {
+  if (!options) return {};
+  // Scope by itself belongs to the new public API. Any legacy-only field means
+  // the complete object is the old nested efficiency policy, not stray root keys.
+  const legacyKeys = Object.keys(options).filter(key => !['model_scope', 'model_profile', 'efficiency'].includes(key));
+  if (legacyKeys.length) {
+    if ('efficiency' in options || 'model_profile' in options) {
+      throw new Error('Do not mix flat and nested efficiency options');
+    }
+    return { efficiency: { ...options } as LegacyEfficiencyOptions };
+  }
+  return { ...options } as LongformCostOptions;
 }
 
 export interface LongformWorkflowStartResponse {
@@ -252,14 +277,14 @@ export const documentApi = {
     method: 'normal' | 'four-step',
     model?: string,
     retranslate?: RetranslateOption,
-    costOptions?: LongformCostOptions,
+    costOptions?: LongformCostOptions | LegacyEfficiencyOptions,
   ) =>
     apiClient.post<LongformWorkflowStartResponse>(
       `/projects/${projectId}/translation-workflow`,
       {
         method,
         model,
-        ...costOptions,
+        ...normalizeCostOptions(costOptions),
         retranslate_scope: retranslate?.scope ?? 'resume',
         // 后端在 scope != 'section' 时带 id 会直接报错，这里保持严格对齐
         retranslate_section_ids:

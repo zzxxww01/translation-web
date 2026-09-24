@@ -145,9 +145,10 @@ class BatchTranslationService:
         max_concurrent_sections: int = 10,  # 保留兼容；跨章节按文档顺序提交
         analysis_llm_provider: Optional[LLMProvider] = None,
         user_model_override: Optional[str] = None,  # 默认仍覆盖全流程
-        model_scope: str = "all",
-        model_profile: str = "default",
+        model_scope: Optional[str] = None,
+        model_profile: Optional[str] = None,
         efficiency_options=None,
+        efficiency=None,
     ):
         """
         初始化批量翻译服务
@@ -167,11 +168,18 @@ class BatchTranslationService:
         self.analysis_llm = analysis_llm_provider or llm_provider
         self.user_model_override = user_model_override
         from src.config.efficiency import EfficiencyOptions
-        if model_scope not in {"all", "draft"}:
+        if efficiency_options is not None and efficiency is not None:
+            raise ValueError("Supply efficiency_options or its legacy efficiency alias, not both")
+        selected = efficiency_options if efficiency_options is not None else efficiency
+        self.efficiency = EfficiencyOptions.model_validate(selected or {})
+        if model_scope is not None and "model_scope" in self.efficiency.model_fields_set and model_scope != self.efficiency.model_scope:
+            raise ValueError("Conflicting model_scope values")
+        if model_profile is not None and "profile" in self.efficiency.model_fields_set and model_profile != self.efficiency.profile:
+            raise ValueError("Conflicting model_profile values")
+        self.model_scope = model_scope if model_scope is not None else self.efficiency.model_scope
+        self.model_profile = model_profile if model_profile is not None else self.efficiency.profile
+        if self.model_scope not in {"all", "draft"}:
             raise ValueError("model_scope must be all or draft")
-        self.model_scope = model_scope
-        self.model_profile = model_profile
-        self.efficiency = efficiency_options or EfficiencyOptions()
         self._work_cache = None
         self._quality_policy = ""
         self._term_match_cache = {}
@@ -274,17 +282,30 @@ class BatchTranslationService:
             )
         return False
 
+    def _effective_model_scope(self) -> str:
+        return getattr(self, "model_scope", getattr(getattr(self, "efficiency", None), "model_scope", "all"))
+
+    def _auxiliary_provider(self) -> LLMProvider:
+        return self._get_provider_for_phase("phase0_prescan")
+
     def _get_provider_for_phase(self, phase: str) -> LLMProvider:
         from src.llm.phase_provider import phase_provider
         raw = self._get_raw_provider_for_phase(phase)
-        override = self.user_model_override if (getattr(self, "model_scope", "all") == "all" or phase == "phase1_draft") else None
+        override = self.user_model_override if (self._effective_model_scope() == "all" or phase == "phase1_draft") else None
         config_kwargs = {}
         if override:
             config_kwargs["model_override"] = override
         if getattr(self, "model_profile", "default") != "default":
             config_kwargs["profile"] = self.model_profile
         config = self.model_config.get_model_for_phase(phase, **config_kwargs)
-        return phase_provider(raw, config)
+        from src.services.work_checkpoints import fingerprint
+        cache = getattr(self, "_phase_facade_cache", None)
+        if cache is None:
+            cache = self._phase_facade_cache = {}
+        key = (id(raw), fingerprint(config))
+        if key not in cache:
+            cache[key] = phase_provider(raw, config)
+        return cache[key]
 
     def _get_raw_provider_for_phase(self, phase: str) -> LLMProvider:
         """
@@ -299,7 +320,7 @@ class BatchTranslationService:
         llm_usage_metrics.set_phase(phase)
 
         # 如果用户指定了模型，全流程使用该模型
-        if self.user_model_override and (getattr(self, "model_scope", "all") == "all" or phase == "phase1_draft"):
+        if self.user_model_override and (self._effective_model_scope() == "all" or phase == "phase1_draft"):
             model_config = self.model_config.get_model_for_phase(phase, model_override=self.user_model_override)
             logger.info(f"Using user-specified model for {phase}: {model_config['model']}")
             return self.llm  # 用户已经通过API传入了对应的provider
@@ -334,7 +355,10 @@ class BatchTranslationService:
         except Exception:
             # Alias comparison still works for adapters and test providers.
             pass
-        if provider_selectors & expected_selectors and not (self.user_model_override and getattr(self, "model_scope", "all") == "draft"):
+        current_alias = getattr(self.llm, "model_alias", None)
+        route_matches = (str(current_alias).strip().lower() == str(model_name).strip().lower()
+                         if current_alias else bool(provider_selectors & expected_selectors))
+        if route_matches and not (self.user_model_override and self._effective_model_scope() == "draft"):
             self._phase_provider_cache[model_name] = self.llm
             return self.llm
 
@@ -1014,9 +1038,12 @@ class BatchTranslationService:
         options = self.efficiency = getattr(self, "efficiency", EfficiencyOptions())
         self._work_cache = WorkCheckpointStore(self.project_manager._project_dir(project_id) / "artifacts" / "work-checkpoints-v1")
         cache_scope = checkpoint_scope(self._work_cache, read_enabled=self._retranslate_scope != "all") if options.resume_stages else nullcontext()
-        with prompt_bundle_scope(snapshot), cache_scope, efficiency_scope(options), work_budget_scope(
+        from src.llm.request_sizing import RequestBudget, request_size_scope
+        size_scope = request_size_scope(RequestBudget(options.max_request_input_tokens,
+            options.reserved_output_tokens, options.max_context_tokens))
+        with prompt_bundle_scope(snapshot), cache_scope, efficiency_scope(options), size_scope, work_budget_scope(
             "article", options.run_timeout_seconds, options.max_run_calls,
-            should_cancel=lambda: self._is_cancelled(project_id)):
+            should_cancel=lambda: self._is_cancelled(project_id), max_tokens=options.max_run_estimated_tokens):
             result = await self._translate_project_impl(project_id, on_progress, on_term_conflict)
             return result
 
@@ -1288,7 +1315,7 @@ class BatchTranslationService:
             )
             SourceMetadataTranslationService(
                 self.project_manager,
-                self._get_provider_for_phase("phase0_prescan") if getattr(self, "model_scope", "all") == "draft" else self.llm,
+                self._get_provider_for_phase("phase0_prescan") if self._effective_model_scope() == "draft" else self.llm,
             ).translate_project_sources(
                 project_id,
                 sections=project.sections,
@@ -1585,6 +1612,8 @@ class BatchTranslationService:
             # 构建返回结果（包含一致性报告）
             result = {
                 "paused": paused, "resume_available": paused or not is_complete,
+                "pause_reason": next((item.get("pause_reason") or str(item.get("exception") or "Work budget exhausted")
+                    for item in results if isinstance(item, dict) and (item.get("paused") or isinstance(item.get("exception"), WorkBudgetExceeded))), None),
                 "quality_review_complete": pending_quality == 0,
                 "pending_quality_paragraphs": pending_quality,
                 "project_id": project_id,
@@ -1988,11 +2017,8 @@ class BatchTranslationService:
 
     @staticmethod
     def _analysis_inputs(project) -> dict:
-        return {"title": project.title, "sections": [
-            {"id": s.section_id, "title": s.title, "synthetic": getattr(s, "synthetic", False),
-             "paragraphs": [{"id": p.id, "source": p.source, "type": p.element_type.value,
-                             "heading_chain": p.heading_chain, "tokens": p.expected_tokens}
-                            for p in s.paragraphs]} for s in project.sections]}
+        from src.services.stage_checkpoints import source_identity
+        return {"title": project.title, "sections": source_identity(project.sections)}
 
     def _needs_quality_review(self, paragraph) -> bool:
         if self.translation_mode != self.TRANSLATION_MODE_FOUR_STEP or paragraph.has_confirmed_translation():
@@ -2002,12 +2028,7 @@ class BatchTranslationService:
         record = paragraph.latest_translation(non_empty=True)
         if record is None:
             return False
-        from src.services.work_checkpoints import fingerprint
-        proof = record.quality_review
-        return not (proof.get("status") == "complete"
-                    and proof.get("source") == fingerprint(paragraph.source)
-                    and proof.get("text") == fingerprint(record.text)
-                    and bool(self._quality_policy) and proof.get("policy") == self._quality_policy)
+        return paragraph.needs_quality_review(getattr(self, "_quality_policy", ""))
 
     def _count_translated_paragraphs(self, section: Section) -> int:
         """Count paragraphs that already have a usable translation."""
@@ -2215,6 +2236,10 @@ class BatchTranslationService:
                     "source": fingerprint(paragraph.source), "text": fingerprint(record.text),
                     "policy": getattr(self, "_quality_policy", ""),
                 }
+                from src.prompts.contracts import text_version
+                record.quality_status = "passed" if record.quality_review["status"] == "complete" else getattr(result, "workflow_status", "review_pending")
+                record.quality_policy = getattr(self, "_quality_policy", "")
+                record.quality_version = text_version([paragraph.source], [record.text])
 
             if paragraph.ai_insight is None:
                 paragraph.ai_insight = self._build_ai_insight(result, paragraph, index)
@@ -2748,7 +2773,7 @@ class BatchTranslationService:
                 subtitle,
             )
             result = await asyncio.to_thread(
-                (self._get_provider_for_phase("phase0_prescan") if getattr(self, "model_scope", "all") == "draft" else self.llm).translate_title,
+                (self._get_provider_for_phase("phase0_prescan") if self._effective_model_scope() == "draft" else self.llm).translate_title,
                 project.title,
                 context={
                     "article_theme": analysis.theme,
@@ -2870,7 +2895,7 @@ class BatchTranslationService:
             # 那种写法会把方法体内部抛出的 TypeError 一并吞掉，静默触发第二次
             # 完整 LLM 调用，且第二次丢掉词表与白名单，成本翻倍还让约束失效。
             translated_map = await asyncio.to_thread(
-                (self._get_provider_for_phase("phase0_prescan") if getattr(self, "model_scope", "all") == "draft" else self.llm).translate_all_section_titles,
+                (self._get_provider_for_phase("phase0_prescan") if self._effective_model_scope() == "draft" else self.llm).translate_all_section_titles,
                 pending,
                 article_theme=analysis.theme,
                 glossary_block=title_glossary_block,
@@ -2929,7 +2954,7 @@ class BatchTranslationService:
 
             try:
                 translated_title = await asyncio.to_thread(
-                    (self._get_provider_for_phase("phase0_prescan") if getattr(self, "model_scope", "all") == "draft" else self.llm).translate_section_title,
+                    (self._get_provider_for_phase("phase0_prescan") if self._effective_model_scope() == "draft" else self.llm).translate_section_title,
                     section.title,
                     context={
                         "article_theme": analysis.theme,
@@ -2982,7 +3007,13 @@ class BatchTranslationService:
             except Exception as exc:
                 self._record_title_error(project_id, str(exc), section.section_id)
 
-    async def _translate_section_batch(
+    async def _translate_section_batch(self, section, section_index, total_sections, all_sections, analysis, phase1_provider=None):
+        from src.config.efficiency import stage_scope
+        with stage_scope("section-draft"):
+            return await self._translate_section_batch_impl(section, section_index, total_sections,
+                                                            all_sections, analysis, phase1_provider)
+
+    async def _translate_section_batch_impl(
         self,
         section: Section,
         section_index: int,
@@ -3197,14 +3228,38 @@ class BatchTranslationService:
             "format_tokens": batch_tokens,
             "format_token_count": len(batch_tokens),
         }
-        result = await asyncio.to_thread(
-            provider.translate_section,
-            section_text=SECTION_LINE_SEPARATOR.join(batch_lines),
-            section_title=section.title,
-            context=batch_context,
-            paragraph_ids=batch_ids,
-        )
-        return list(result or [])
+        from src.llm.request_budget import check_provider_request, RequestBudgetExceeded
+        from src.services.work_checkpoints import checkpoint_call, fresh_stage_scope
+        from src.prompts.contracts import translation_items
+        section_text = SECTION_LINE_SEPARATOR.join(batch_lines)
+        render = getattr(provider, "_build_batch_translation_prompt", None)
+        paragraphs = {paragraph.id: paragraph for paragraph in section.paragraphs}
+        def cacheable(items):
+            return len(items) == len(batch_ids) and all(
+                build_translation_payload(paragraphs[item["id"]], item["translation"]).format_valid
+                for item in items)
+        def generate():
+            with fresh_stage_scope(self._should_force_retranslate(section)):
+                return checkpoint_call("section-draft-batch", provider,
+                    {"source": section_text, "title": section.title, "context": batch_context, "ids": batch_ids},
+                    lambda: provider.translate_section(section_text=section_text,
+                        section_title=section.title, context=batch_context, paragraph_ids=batch_ids),
+                    lambda value: translation_items(value, batch_ids), cacheable=cacheable)
+        try:
+            if callable(render):
+                check_provider_request(provider, render(section_text, section.title, batch_context, batch_ids))
+            return list(await run_llm_blocking(generate) or [])
+        except RequestBudgetExceeded:
+            if len(batch_ids) < 2:
+                raise
+            middle = len(batch_ids) // 2
+            output = []
+            for low, high in ((0, middle), (middle, len(batch_ids))):
+                output.extend(await self._call_section_batch(provider=provider, section=section,
+                    context=context, format_tokens=format_tokens,
+                    batch_lines=batch_lines[low:high], batch_ids=batch_ids[low:high]))
+            return output
+
 
     async def _retry_missing_paragraphs(
         self,

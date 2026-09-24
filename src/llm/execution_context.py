@@ -21,6 +21,7 @@ _deadline: ContextVar[float | None] = ContextVar("llm_deadline", default=None)
 _cancel: ContextVar[Event | None] = ContextVar("llm_cancel", default=None)
 _route: ContextVar[dict[str, Any]] = ContextVar("llm_route", default={})
 _output_limit: ContextVar[int | None] = ContextVar("llm_output_limit", default=None)
+_generation_depth: ContextVar[int] = ContextVar("logical_generation_depth", default=0)
 
 
 def positive_timeout(value: Any) -> float:
@@ -123,21 +124,31 @@ def generation_budget(fn):
         seconds = positive_timeout(timeout)
         from .request_budget import check_provider_request
         prompt = bound.get("prompt", options.get("prompt"))
+        limit = bound.get("max_tokens", options.get("max_tokens"))
+        if limit is not None:
+            positive_token_limit(limit)
         if isinstance(prompt, str):
-            check_provider_request(self, prompt)
+            check_provider_request(self, prompt, output_limit=limit)
         check_active()
         parent = _deadline.get()
         deadline = time.monotonic() + seconds
         token = _deadline.set(min(parent, deadline) if parent is not None else deadline)
         limit_token = None
+        depth = _generation_depth.get()
+        depth_token = _generation_depth.set(depth + 1)
         try:
-            limit = options.get("max_tokens")
             if limit is not None:
                 limit_token = _output_limit.set(positive_token_limit(limit))
-            result = fn(self, *args, **kwargs)
-            check_active()
-            return result
+            from .work_budget import request_reservation, admit_logical_generation
+            reserve = limit if limit is not None else (_output_limit.get() or getattr(self, "max_tokens", None) or 8192)
+            with request_reservation(prompt if isinstance(prompt, str) else "", reserve):
+                if depth == 0:
+                    admit_logical_generation()
+                result = fn(self, *args, **kwargs)
+                check_active()
+                return result
         finally:
+            _generation_depth.reset(depth_token)
             if limit_token is not None:
                 _output_limit.reset(limit_token)
             _deadline.reset(token)

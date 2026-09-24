@@ -76,6 +76,7 @@ class ArticleAnalysis(BaseModel):
     """全文深度分析结果（Phase 0 输出）"""
 
     checkpoint_eligible: bool = True
+    incomplete_stages: List[str] = Field(default_factory=list)
     theme: str = ""
     key_arguments: List[str] = Field(default_factory=list)
     structure_summary: str = ""
@@ -167,6 +168,8 @@ class SectionTranslationResult(BaseModel):
     degraded: bool = False
     degraded_reason: str = ""
     paused: bool = False
+    budget_exhausted: bool = False
+    workflow_status: str = "review_pending"
 
 
 class TermUsageTracker(BaseModel):

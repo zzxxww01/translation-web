@@ -76,8 +76,15 @@ def limits_for_provider(provider) -> RequestLimits | None:
                          reserve_output_tokens=config.get("max_tokens", getattr(provider, "max_tokens", None) or 8192))
 
 
-def check_provider_request(provider, prompt: str):
+def check_provider_request(provider, prompt: str, *, output_limit: int | None = None):
+    from dataclasses import replace
+    from .execution_context import output_limit as scoped_output_limit
+    from .request_sizing import check_request as check_operator_budget
+    effective_output = output_limit if output_limit is not None else scoped_output_limit()
+    check_operator_budget(prompt, effective_output)
     limits = limits_for_provider(provider)
+    if limits is not None and effective_output is not None:
+        limits = replace(limits, reserve_output_tokens=effective_output)
     if limits is None:
         return None
     return check_request(prompt, limits, model=str(getattr(provider, "model_name", "")),

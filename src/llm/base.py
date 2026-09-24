@@ -308,7 +308,18 @@ class LLMProvider(ABC):
             context=context,
         )
         response = self.generate(prompt, response_format="json")
-        return self._parse_json_response(response)
+        result = self._parse_json_response(response)
+        if (context or {}).get("compact_review") and isinstance(result, dict):
+            issues = result.get("issues", [])
+            if isinstance(issues, list):
+                for issue in issues:
+                    if isinstance(issue, dict) and "reason" in issue:
+                        reason = issue.pop("reason")
+                        if "description" in issue and issue["description"] != reason:
+                            from src.prompts.contracts import PromptContractError
+                            raise PromptContractError("Conflicting compact review descriptions")
+                        issue["description"] = reason
+        return result
 
     def refine_and_polish_batch(self, pairs: List[Dict[str, Any]], context: Optional[Dict[str, Any]] = None) -> List[str]:
         from ..prompts.contracts import object_response
@@ -340,12 +351,12 @@ class LLMProvider(ABC):
                         existing_terms: Dict[str, str], model: Optional[str] = None) -> Dict[str, Any]:
         from ..prompts.contracts import object_response, PromptContractError
         import json
-        from ..core.glossary_prompt import _count_term_occurrences
+        from ..core.glossary_prompt import _count_term_occurrences, _prose_only
         chunks = self._split_content_for_prescan(section_content, max_chars=TranslationLimits.PRESCAN_CHUNK_SIZE)
         candidates = {}
         for index, chunk in enumerate(chunks):
             matched = {term: value for term, value in existing_terms.items()
-                       if isinstance(term, str) and _count_term_occurrences(chunk, term) > 0}
+                       if isinstance(term, str) and _count_term_occurrences(_prose_only(chunk), term) > 0}
             existing = json.dumps(matched, ensure_ascii=False, default=str)
             prompt = self._build_prescan_prompt(section_id=section_id, section_title=section_title,
                                                section_content=chunk, existing_terms=existing)

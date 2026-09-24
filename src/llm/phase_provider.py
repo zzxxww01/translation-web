@@ -27,12 +27,16 @@ def phase_provider(provider, config: dict):
     def generate(_self, prompt, response_format=None, temperature=None, **kwargs):
         from .request_budget import check_provider_request
         from .work_budget import generation_defaults
-        check_provider_request(_self, prompt)
+        check_provider_request(_self, prompt, output_limit=kwargs.get("max_tokens", options.get("max_tokens")))
         effective = options.get("temperature", temperature)
         for key in ("max_tokens", "timeout"):
-            if key in options:
-                kwargs.setdefault(key, options[key])
+            if key in options and kwargs.get(key) is None:
+                kwargs[key] = options[key]
         with generation_defaults(options):
             return original(prompt, response_format=response_format, temperature=effective, **kwargs)
     facade.generate = MethodType(generate, facade)
     return facade
+
+
+# Both public names use the same isolated facade.
+configure_phase_provider = phase_provider

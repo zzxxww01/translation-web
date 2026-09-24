@@ -110,7 +110,7 @@ class ProjectRepository:
         # Persist all section-level provenance, including synthetic/title_source.
         self._write_json(section_dir / "meta.json", section.model_dump(mode="json"))
 
-    def load_section(self, project_id: str, section_id: str) -> Optional[Section]:
+    def load_section(self, project_id: str, section_id: str, *, _read_attempt: int = 0) -> Optional[Section]:
         section_dir = self._resolve_section_dir(project_id, section_id)
         if section_dir is None:
             return None
@@ -162,7 +162,11 @@ class ProjectRepository:
                     paragraph.segment_end = paragraph.segment_start + len(paragraph.source)
             after = meta_path.stat()
             after_stamp = (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns)
-            if after_stamp == stamp and stat.st_size <= 8 * 1024 * 1024:
+            if after_stamp != stamp:
+                if _read_attempt >= 2:
+                    raise SectionDataError("Section changed repeatedly while reading; retry without overwriting")
+                return self.load_section(project_id, section_id, _read_attempt=_read_attempt + 1)
+            if stat.st_size <= 8 * 1024 * 1024:
                 with self._parsed_cache_lock:
                     previous = self._parsed_cache.pop(cache_key, None)
                     if previous is not None:

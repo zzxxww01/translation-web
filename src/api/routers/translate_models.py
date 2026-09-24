@@ -123,14 +123,33 @@ class PostOptimizeResponse(BaseModel):
 from src.config.efficiency import EfficiencyOptions
 
 
-class FullTranslateRequest(BaseModel):
+class WorkflowPolicyRequest(BaseModel):
+    @model_validator(mode="before")
+    @classmethod
+    def reconcile_model_policy(cls, data):
+        if not isinstance(data, dict):
+            return data
+        data = dict(data)
+        nested = data.get("efficiency")
+        if isinstance(nested, EfficiencyOptions):
+            nested = nested.model_dump(exclude_unset=True)
+        if isinstance(nested, dict):
+            for legacy, public in (("model_scope", "model_scope"), ("profile", "model_profile")):
+                if legacy in nested:
+                    if public in data and data[public] != nested[legacy]:
+                        raise ValueError(f"Conflicting {public} values")
+                    data[public] = nested[legacy]
+        return data
+
+
+class FullTranslateRequest(WorkflowPolicyRequest):
     model: Optional[str] = None
     model_scope: Literal["all", "draft"] = "all"
     model_profile: Literal["default", "fast", "premium"] = "default"
     efficiency: EfficiencyOptions = Field(default_factory=EfficiencyOptions)
 
 
-class LongformWorkflowStartRequest(BaseModel):
+class LongformWorkflowStartRequest(WorkflowPolicyRequest):
     method: Literal["normal", "four-step"] = "four-step"
     model: Optional[str] = Field(None, max_length=100)
     model_scope: Literal["all", "draft"] = "all"
