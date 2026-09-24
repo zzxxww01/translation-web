@@ -1,0 +1,37 @@
+name: Consolidation source snapshot
+on:
+  push:
+    branches: ["integrate/all-pending-prs"]
+    paths: [".github/workflows/consolidation-source.yml"]
+permissions:
+  contents: read
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Freeze the reviewed source histories
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse origin/main)" = adfd36ff347ae42cb1149244fd328d89ea215fa6
+          test "$(git rev-parse origin/fix/chinese-prompt-quality-v2)" = 516817963d750298812e2d15d43de91c248a8795
+          test "$(git rev-parse origin/feat/cost-efficiency-v3)" = ed74f96534ad84adce9e3b0caa3a1463a5e3027d
+          test "$(git rev-parse origin/feat/stage-resume-cost-efficiency)" = 3c65e6833bdbdf29d29fd19885a5e35839c85bb8
+          git update-ref refs/heads/snapshot-main adfd36ff347ae42cb1149244fd328d89ea215fa6
+          git update-ref refs/heads/snapshot-pr1 516817963d750298812e2d15d43de91c248a8795
+          git update-ref refs/heads/snapshot-pr2 ed74f96534ad84adce9e3b0caa3a1463a5e3027d
+          git update-ref refs/heads/snapshot-pr3 3c65e6833bdbdf29d29fd19885a5e35839c85bb8
+          git bundle create "$RUNNER_TEMP/consolidation.bundle" refs/heads/snapshot-main refs/heads/snapshot-pr1 refs/heads/snapshot-pr2 refs/heads/snapshot-pr3
+          git bundle verify "$RUNNER_TEMP/consolidation.bundle"
+          git show-ref | grep refs/heads/snapshot- > "$RUNNER_TEMP/source-refs.txt"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: consolidation-source
+          path: |
+            ${{ runner.temp }}/consolidation.bundle
+            ${{ runner.temp }}/source-refs.txt
+          retention-days: 1
