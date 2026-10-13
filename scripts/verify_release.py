@@ -47,6 +47,14 @@ def check_release(release, public_url, service, nginx_site):
     for asset in assets:
         if hashlib.sha256(get(asset)).digest() != hashlib.sha256((expected_dist / asset.lstrip('/')).read_bytes()).digest():
             raise ValueError('Public asset mismatch: ' + asset)
+    public_identity = json.loads(get('/api/release'))
+    request = Request('http://127.0.0.1:54321/api/release')
+    with urlopen(request, timeout=10) as response:
+        local_identity = json.load(response)
+    if (public_identity.get('revision') != revision
+            or not public_identity.get('instance_id')
+            or public_identity != local_identity):
+        raise ValueError('Public/local backend process identity does not match release')
     health = json.loads(get('/api/health'))
     if health.get('status') != 'healthy':
         raise ValueError('Backend health check failed')
