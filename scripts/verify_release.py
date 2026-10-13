@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import re
 import subprocess
-from urllib.request import urlopen
+from urllib.request import Request, urlopen
 
 
 def check_release(release, public_url, service, nginx_site):
@@ -25,14 +25,21 @@ def check_release(release, public_url, service, nginx_site):
     if len(roots) < 2 or any(Path(root).resolve() != expected_dist for root in roots[:2]):
         raise ValueError('Primary Nginx frontend roots do not match backend release')
     def get(path):
-        with urlopen(public_url.rstrip('/') + path, timeout=30) as response:
+        request = Request(public_url.rstrip('/') + path, headers={'User-Agent': 'Mozilla/5.0 TranslationReleaseCheck/1.0'})
+        with urlopen(request, timeout=30) as response:
             return response.read()
     manifest = json.loads(get('/release.json'))
     if manifest['revision'] != revision:
         raise ValueError('Public release manifest does not match git revision')
     index = get('/')
     local_index = (expected_dist / 'index.html').read_bytes()
-    if index != local_index:
+    # Cloudflare may inject its analytics beacon for browser-like user agents.
+    # Remove only that known external tag; preserve all app markup and references.
+    def normalized_html(value):
+        text = value.decode()
+        text = re.sub(r'<script\b[^>]*\bsrc="https://static\.cloudflareinsights\.com/beacon\.min\.js[^"\s]*"[^>]*>\s*</script>', '', text)
+        return re.sub(r'>\s+<', '><', text).strip()
+    if normalized_html(index) != normalized_html(local_index):
         raise ValueError('Public entry HTML does not match release build')
     assets = re.findall(r'(?:src|href)="(/assets/[^\"]+)"', index.decode())
     if not assets:
