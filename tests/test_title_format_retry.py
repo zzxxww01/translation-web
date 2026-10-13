@@ -117,6 +117,65 @@ class TitleFormatRetryTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(error.exception.status_code, 503)
         self.assertEqual(generate.call_count, 2)
 
+    async def test_unicode_20_boundary_and_21_semantic_rewrite(self):
+        for title in ["中" * 20, "A" * 20, "😀" * 20, "中A1 !😀" + "文" * 14]:
+            self.assertEqual(len(title), 20)
+            with patch.object(translate_posts, "generate_with_fallback", return_value=json.dumps({"minimal": title})) as generate:
+                self.assertEqual((await self.call()).title, title)
+                generate.assert_called_once()
+            with patch.object(translate_posts, "generate_with_fallback", side_effect=[json.dumps({"minimal": title + "!"}), '{"minimal":"品牌良率超过80%"}']) as generate:
+                self.assertEqual((await self.call()).title, "品牌良率超过80%")
+                self.assertEqual(generate.call_count, 2)
+                self.assertIn("语义改写", generate.call_args.args[0])
+                self.assertIn("不能直接截断", generate.call_args.args[0])
+                self.assertIn("品牌名", generate.call_args.args[0])
+
+    async def test_overlong_is_not_filtered_or_truncated(self):
+        response = json.dumps({"minimal": "合规", "data": "长" * 21})
+        with patch.object(translate_posts, "generate_with_fallback", return_value=response) as generate:
+            with self.assertRaises(ServiceUnavailableException) as error:
+                await self.call()
+        self.assertIn("20", error.exception.detail)
+        self.assertEqual(generate.call_count, 2)
+
+    async def test_rewrite_cannot_omit_overlong_key(self):
+        responses = [json.dumps({"minimal": "合规", "data": "长" * 21}), '{"minimal":"合规"}', '{"minimal":"合规"}']
+        with patch.object(translate_posts, "generate_with_fallback", side_effect=responses) as generate:
+            with self.assertRaises(ServiceUnavailableException) as error:
+                await self.call()
+        self.assertIn("缺少", error.exception.detail)
+        self.assertEqual(generate.call_count, 3)
+
+    async def test_format_repair_and_length_rewrite_share_three_call_cap(self):
+        long_json = json.dumps({"minimal": "长" * 21})
+        # Both orders work, including raw controls in the successful JSON.
+        for responses in [["invalid", long_json, '{"mini\nmal":"品牌\n良率超过80%"}'],
+                          [long_json, "invalid", '{"minimal":"品牌良率超过80%"}']]:
+            with patch.object(translate_posts, "generate_with_fallback", side_effect=responses) as generate:
+                self.assertEqual((await self.call()).title, "品牌良率超过80%")
+                self.assertEqual(generate.call_count, 3)
+
+    async def test_length_and_format_repairs_share_remaining_deadline(self):
+        timeouts = []
+        async def fake_run(func, prompt, **kwargs):
+            timeouts.append(kwargs["timeout"])
+            await asyncio.sleep(0.02)
+            if len(timeouts) == 1:
+                return json.dumps({"minimal": "长" * 21})
+            if len(timeouts) == 2:
+                return "invalid"
+            await asyncio.Event().wait()
+
+        with patch.object(translate_posts, "_resolve_timeouts", return_value=(0.12, 0.12)), patch.object(
+            translate_posts, "run_llm_blocking", side_effect=fake_run
+        ):
+            with self.assertRaises(ServiceUnavailableException) as error:
+                await self.call()
+        self.assertIn("timed out", error.exception.detail)
+        self.assertEqual(len(timeouts), 3)
+        self.assertGreater(timeouts[0], timeouts[1])
+        self.assertGreater(timeouts[1], timeouts[2])
+
     async def test_transport_errors_are_not_format_retried(self):
         for exc in [RuntimeError("transport down"), TimeoutError("upstream timeout")]:
             with self.subTest(exc=exc), patch.object(translate_posts, "generate_with_fallback", side_effect=exc) as generate:

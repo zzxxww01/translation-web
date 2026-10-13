@@ -103,9 +103,13 @@ export function TitleGenerator({
                 type="button"
                 className={`group relative min-h-12 rounded-lg border bg-white/70 p-3 pr-9 text-left text-sm leading-relaxed transition-colors hover:border-primary/50 active:border-primary active:bg-primary/5 ${selectedTitle === title ? 'border-primary bg-primary/5 ring-1 ring-primary/20' : ''}`}
                 onClick={() => handleCopy(title)}
-                title="复制标题"
+                disabled={Array.from(title).length > 20}
+                title={Array.from(title).length > 20 ? "标题超过20字，请重新生成" : "复制标题"}
               >
                 {title}
+                <span className={`block text-xs ${Array.from(title).length > 20 ? 'text-destructive' : 'text-muted-foreground'}`}>
+                  {Array.from(title).length}/20 字{Array.from(title).length > 20 ? ' · 超限，请重新生成' : ''}
+                </span>
                 <Copy className="absolute right-3 top-3 h-4 w-4 opacity-60 transition-opacity group-hover:opacity-90" />
               </button>
             ))}

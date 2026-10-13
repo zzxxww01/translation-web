@@ -316,13 +316,13 @@ _TITLE_KEYS = (
 _TITLE_KEY_CONTROLS = re.compile(r"[\x00-\x1f\x7f-\x9f]")
 
 
-def _extract_titles(result: object) -> list[str]:
+def _extract_title_map(result: object) -> dict[str, str]:
     """Keep only known, nonempty string titles; repair control-only key typos."""
     if not isinstance(result, str):
-        return []
+        return {}
     data = parse_title_json_response(result)
     if not isinstance(data, dict):
-        return []
+        return {}
     normalized: dict[str, str] = {}
     # Exact keys take precedence over repaired aliases, regardless of JSON order.
     for repair in (False, True):
@@ -340,39 +340,63 @@ def _extract_titles(result: object) -> list[str]:
             title = re.sub(r"(?<=\d) +(?=[.,]\d)|(?<=\d[.,]) +(?=\d)", "", title)
             if title:
                 normalized[canonical] = title
-    return [normalized[key] for key in _TITLE_KEYS if key in normalized]
+    return {key: normalized[key] for key in _TITLE_KEYS if key in normalized}
+
+
+_TITLE_MAX_LENGTH = 20
+
+
+class TitleValidationError(ValueError):
+    """Safe title contract failure; never contains provider output."""
+
+
+def _extract_titles(result: object) -> list[str]:
+    return list(_extract_title_map(result).values())
 
 
 async def _generate_valid_titles(
     prompt: str, *, model: str | None, attempt_timeout_s: float, deadline: float,
 ) -> tuple[list[str], dict[str, object]]:
-    """At most one format correction; transport failures propagate without retry."""
-    for generation in range(2):
+    """One format repair plus one semantic rewrite, sharing a single deadline."""
+    original_prompt = prompt
+    format_repairs = length_repairs = 0
+    required_keys: set[str] = set()
+    for generation in range(3):
         remaining = deadline - asyncio.get_running_loop().time()
         if remaining <= 0:
             raise asyncio.TimeoutError
         model_metadata: dict[str, object] = {}
         result = await run_llm_blocking(
-            generate_with_fallback,
-            prompt,
-            task_type="title",
-            timeout=min(attempt_timeout_s, remaining),
-            model=model,
+            generate_with_fallback, prompt, task_type="title",
+            timeout=min(attempt_timeout_s, remaining), model=model,
             result_metadata=model_metadata,
         )
-        titles = _extract_titles(result)
-        if titles:
-            return titles, model_metadata
-        if generation == 0:
-            # Regenerate from the original task, not untrusted malformed output.
-            prompt += (
-                "\n\n格式纠错：上次输出无法解析为有效标题。请根据以上原文和要求重新生成，"
-                "只输出一个合法 JSON 对象，不要 Markdown 或解释。键名必须为："
-                + ", ".join(_TITLE_KEYS)
-                + "。标题值必须是非空的单行字符串，不要数组、对象、数字或 null；"
-                "键名不要换行，字符串内的特殊字符必须正确 JSON 转义。"
-            )
-    raise ValueError("LLM returned unparseable or empty title JSON after format correction")
+        titles = _extract_title_map(result)
+        too_long = {key: len(value) for key, value in titles.items() if len(value) > _TITLE_MAX_LENGTH}
+        missing = required_keys - titles.keys()
+        if titles and not too_long and not missing:
+            return list(titles.values()), model_metadata
+        required_keys.update(titles)
+        if too_long:
+            if length_repairs:
+                raise TitleValidationError("标题语义改写后仍超过20个Unicode字符；未返回不合规或截断的标题，请重试。")
+            length_repairs += 1
+        else:
+            if format_repairs:
+                raise TitleValidationError("标题JSON格式无效、为空或缺少待改写标题；格式纠错失败，请重试。")
+            format_repairs += 1
+        # Rebuild from source; malformed provider text is never an instruction.
+        prompt = original_prompt + (
+            "\n\n格式纠错及长度校验：只输出合法JSON对象，标题值必须是非空单行字符串。"
+            "键名必须为：" + ", ".join(_TITLE_KEYS) + "。不得遗漏待改写的标题字段："
+            + ", ".join(sorted(required_keys)) + "。字符串内特殊字符必须正确JSON转义。"
+            "每个标题不得超过20个Unicode码点，中英文、数字、标点、空格、emoji均计数。"
+            "根据以上原文进行语义改写，不能直接截断、删掉超长选项或捏造事实；"
+            "保留品牌名、数字的小于/超过/约等限定、时间、对象和比较范围。"
+            "可选取原文支持的较小事实角度，不得为缩短标题歪曲含义。"
+            + ("上次超限字段及字数：" + str(too_long) if too_long else "上次格式无效或缺少字段。")
+        )
+    raise TitleValidationError("标题在有限纠错预算内仍未满足JSON完整性及20字符限制，请重试。")
 
 
 @router.post("/generate/title", response_model=GenerateTitleResponse)
@@ -418,6 +442,9 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
             provider_used=model_metadata.get("provider_used"),
             fallback_used=bool(model_metadata.get("fallback_used", False)),
         )
+    except TitleValidationError as e:
+        from ..middleware import ServiceUnavailableException
+        raise ServiceUnavailableException(detail=str(e), error_code="TITLE_VALIDATION_FAILED") from e
     except asyncio.TimeoutError as e:
         raise_llm_service_unavailable(operation="Title generation", exc=e, timeout_s=total_timeout_s)
     except Exception as e:

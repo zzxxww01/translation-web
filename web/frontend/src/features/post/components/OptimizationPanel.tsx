@@ -10,11 +10,10 @@ import {
   type Instruction,
 } from '../types';
 
+import { EDITING_OPTIONS } from '@/shared/editingOptions';
+
 const quickInstructions: Instruction[] = [
-  { id: 'readable', label: '可读性', icon: '✨', instruction: '' },
-  { id: 'idiomatic', label: '更地道', icon: '💬', instruction: '' },
-  { id: 'professional', label: '专业化', icon: '👔', instruction: '' },
-  { id: 'coherence', label: '更连贯', icon: '🔗', instruction: '' },
+  ...EDITING_OPTIONS.map(option => ({ ...option, icon: option.id === 'coherence' ? '🔗' : '✨' })),
   { id: 'custom', label: '自定义', icon: '🔧', instruction: '' },
 ];
 
