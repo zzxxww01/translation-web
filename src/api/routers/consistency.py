@@ -55,10 +55,10 @@ def _report_path(projects_root: Path, project_id: str) -> Path:
     return projects_root / project_id / "consistency_report.json"
 
 
-def _review_consistency_sync(project_id: str, pm, gm) -> tuple[dict, str]:
+def _review_consistency_sync(project_id: str, pm, gm, include_terminology: bool = True) -> tuple[dict, str]:
     pm.get(project_id)
     sections = pm.get_sections(project_id)
-    glossary = gm.load_project(project_id)
+    glossary = gm.load_merged(project_id) if include_terminology else None
     reviewer = ConsistencyReviewer()
     report = reviewer.review(sections, glossary)
     report_data = report.model_dump(mode="json")
@@ -104,6 +104,7 @@ async def review_consistency(
             request.project_id,
             pm,
             gm,
+            request.include_terminology,
         )
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")

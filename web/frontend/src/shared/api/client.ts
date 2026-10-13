@@ -1,462 +1,204 @@
-/**
- * API 客户端
- * 提供统一的 API 请求接口，支持超时、重试、错误处理
- */
-
-import type { ApiError } from '../types';
+/** JSON API transport. A deadline covers headers AND consumption of the body. */
 import { API_BASE, API_TIMEOUT, API_RETRY_COUNT, API_RETRY_DELAY } from '../constants';
 
-/**
- * API 请求选项
- */
 interface RequestOptions extends RequestInit {
   params?: Record<string, string | number | boolean>;
   timeout?: number;
   retry?: boolean;
 }
 
-/**
- * API 错误类
- */
 export class ApiErrorWrapper extends Error {
-  public status?: number;
-  public data?: unknown;
-
-  constructor(message: string, status?: number, data?: unknown) {
+  constructor(message: string, public status?: number, public data?: unknown) {
     super(message);
     this.name = 'ApiError';
-    this.status = status;
-    this.data = data;
   }
 }
 
-/**
- * 延迟函数
- */
+function abortError(): DOMException {
+  return new DOMException('Request cancelled', 'AbortError');
+}
+
+function errorMessage(data: unknown, fallback: string): string {
+  if (typeof data === 'string' && data.trim()) return data;
+  if (Array.isArray(data)) {
+    const messages = data.map(item => errorMessage(item, '')).filter(Boolean);
+    return messages.join('; ') || fallback;
+  }
+  if (data && typeof data === 'object') {
+    const obj = data as Record<string, unknown>;
+    return errorMessage(obj.detail ?? obj.message ?? obj.msg, fallback);
+  }
+  return fallback;
+}
+
 function delay(ms: number, signal?: AbortSignal | null): Promise<void> {
   return new Promise((resolve, reject) => {
-    if (signal?.aborted) {
-      reject(signal.reason ?? new DOMException('Request cancelled', 'AbortError'));
-      return;
-    }
-
-    const timeoutId = setTimeout(() => {
-      signal?.removeEventListener('abort', handleAbort);
+    if (signal?.aborted) { reject(abortError()); return; }
+    const timer = setTimeout(() => {
+      signal?.removeEventListener('abort', cancel);
       resolve();
     }, ms);
-    const handleAbort = () => {
-      clearTimeout(timeoutId);
-      reject(signal?.reason ?? new DOMException('Request cancelled', 'AbortError'));
-    };
-    signal?.addEventListener('abort', handleAbort, { once: true });
+    const cancel = () => { clearTimeout(timer); reject(abortError()); };
+    signal?.addEventListener('abort', cancel, { once: true });
   });
 }
 
-/**
- * 判断是否应该重试请求
- */
-function shouldRetry(status: number | undefined): boolean {
-  if (!status) return false;
-  // 5xx 错误和 408 请求超时可以重试
-  return status >= 500 || status === 408;
-}
-
-/**
- * API 客户端类
- */
 export class ApiClient {
-  private baseUrl: string;
   private defaultTimeout: number;
   private retryCount: number;
   private retryDelay: number;
 
   constructor(
-    baseUrl: string = API_BASE,
+    private baseUrl: string = API_BASE,
     options?: { timeout?: number; retryCount?: number; retryDelay?: number }
   ) {
-    this.baseUrl = baseUrl;
     this.defaultTimeout = options?.timeout ?? API_TIMEOUT;
     this.retryCount = options?.retryCount ?? API_RETRY_COUNT;
     this.retryDelay = options?.retryDelay ?? API_RETRY_DELAY;
   }
 
-  /**
-   * 构建 URL，支持查询参数
-   */
-  private buildUrl(endpoint: string, params?: Record<string, string | number | boolean>): string {
+  private buildUrl(endpoint: string, params?: RequestOptions['params']): string {
     const url = `${this.baseUrl}${endpoint}`;
-    if (params) {
-      const searchParams = new URLSearchParams();
-      Object.entries(params).forEach(([key, value]) => {
-        searchParams.append(key, String(value));
-      });
-      const queryString = searchParams.toString();
-      if (queryString) {
-        return `${url}?${queryString}`;
-      }
-    }
-    return url;
+    if (!params || Object.keys(params).length === 0) return url;
+    const hashAt = url.indexOf('#');
+    const hash = hashAt >= 0 ? url.slice(hashAt) : '';
+    const beforeHash = hashAt >= 0 ? url.slice(0, hashAt) : url;
+    const queryAt = beforeHash.indexOf('?');
+    const path = queryAt >= 0 ? beforeHash.slice(0, queryAt) : beforeHash;
+    const search = new URLSearchParams(queryAt >= 0 ? beforeHash.slice(queryAt + 1) : '');
+    for (const [key, value] of Object.entries(params)) search.set(key, String(value));
+    return `${path}?${search.toString()}${hash}`;
   }
 
-  /**
-   * 创建带超时的 fetch
-   */
-  private fetchWithTimeout(
-    url: string,
-    options: RequestInit,
-    timeout: number
-  ): Promise<Response> {
-    if (!Number.isFinite(timeout) || timeout <= 0) {
-      return fetch(url, options);
-    }
-
-    const controller = new AbortController();
-    const externalSignal = options.signal;
-    const handleExternalAbort = () => {
-      controller.abort(
-        externalSignal?.reason ?? new DOMException('Request cancelled', 'AbortError')
-      );
-    };
-    if (externalSignal?.aborted) {
-      handleExternalAbort();
-    } else {
-      externalSignal?.addEventListener('abort', handleExternalAbort, { once: true });
-    }
-    const timeoutId = setTimeout(
-      () => controller.abort(new DOMException('Request timeout', 'TimeoutError')),
-      timeout
-    );
-
-    return fetch(url, {
-      ...options,
-      signal: controller.signal,
-    })
-      .finally(() => {
-        clearTimeout(timeoutId);
-        externalSignal?.removeEventListener('abort', handleExternalAbort);
-      });
-  }
-
-  /**
-   * 处理响应
-   */
   private async handleResponse<T>(response: Response): Promise<T> {
     if (!response.ok) {
-      let errorData: ApiError = { detail: 'Unknown error', status: response.status };
-
-      try {
-        const data = await response.json();
-        errorData = { ...data, status: response.status };
-      } catch {
-        // JSON 解析失败，使用默认错误消息
-        errorData.detail = response.statusText || 'API Error';
-      }
-
-      throw new ApiErrorWrapper(
-        errorData.detail || 'API Error',
-        response.status,
-        errorData
-      );
+      let data: unknown;
+      try { data = await response.json(); } catch { /* fall back to status */ }
+      throw new ApiErrorWrapper(errorMessage(data, response.statusText || 'API Error'), response.status, data);
     }
-
-    // 处理 204 No Content
-    if (response.status === 204) {
-      return undefined as T;
-    }
-
+    if (response.status === 204) return undefined as T;
     const text = await response.text();
-    let data: T;
-    try {
-      data = JSON.parse(text) as T;
-    } catch {
-      throw new Error('服务器返回的数据格式无效，请稍后重试');
-    }
-
-    return data;
+    try { return JSON.parse(text) as T; }
+    catch { throw new ApiErrorWrapper('服务器返回的数据格式无效，请稍后重试', response.status); }
   }
 
-  /**
-   * 执行请求（带重试）
-   */
-  private async executeRequest<T>(
-    fn: () => Promise<Response>,
-    options?: RequestOptions,
-    retryByDefault: boolean = true
-  ): Promise<T> {
-    const retry = options?.retry ?? retryByDefault;
-    let lastError: Error | null = null;
+  private async fetchWithTimeout<T>(url: string, init: RequestInit, timeout: number): Promise<T> {
+    const controller = new AbortController();
+    const external = init.signal;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let rejectAbort: (reason: unknown) => void = () => {};
+    const aborted = new Promise<never>((_, reject) => { rejectAbort = reject; });
+    const cancel = () => controller.abort(abortError());
+    const onAbort = () => rejectAbort(controller.signal.reason);
+    controller.signal.addEventListener('abort', onAbort, { once: true });
+    external?.addEventListener('abort', cancel, { once: true });
+    try {
+      if (external?.aborted) throw abortError();
+      if (Number.isFinite(timeout) && timeout > 0) {
+        timer = setTimeout(() => controller.abort(new DOMException('Request timeout', 'TimeoutError')), timeout);
+      }
+      const request = fetch(url, { ...init, signal: controller.signal }).then(response => this.handleResponse<T>(response));
+      return await Promise.race([request, aborted]);
+    } finally {
+      clearTimeout(timer);
+      external?.removeEventListener('abort', cancel);
+      controller.signal.removeEventListener('abort', onAbort);
+    }
+  }
 
-    for (let attempt = 0; attempt <= (retry ? this.retryCount : 0); attempt++) {
-      try {
-        const response = await fn();
-        return await this.handleResponse<T>(response);
-      } catch (error) {
-        const rawError = error as Error;
-        const errorName = (rawError as { name?: string } | null)?.name ?? '';
-        const isAbort =
-          errorName === 'AbortError' ||
-          errorName === 'TimeoutError' ||
-          rawError.message.toLowerCase().includes('aborted');
-
-        const normalizedError = isAbort
-          ? new ApiErrorWrapper('请求超时，请稍后重试', 408)
-          : rawError;
-
-        lastError = normalizedError as Error;
-
-        // 判断是否需要重试
-        if (
-          retry &&
-          attempt < this.retryCount &&
-          normalizedError instanceof ApiErrorWrapper &&
-          shouldRetry(normalizedError.status) &&
-          !isAbort
-        ) {
-          // 等待后重试
-          await delay(this.retryDelay * Math.pow(2, attempt), options?.signal);
+  private async executeRequest<T>(fn: () => Promise<T>, options: RequestOptions | undefined, retryDefault: boolean): Promise<T> {
+    const attempts = (options?.retry ?? retryDefault) ? this.retryCount : 0;
+    for (let attempt = 0; ; attempt++) {
+      if (options?.signal?.aborted) throw abortError();
+      try { return await fn(); }
+      catch (error: unknown) {
+        const raw = error instanceof Error ? error : new Error(typeof error === 'string' ? error : '请求失败');
+        if (raw.name === 'AbortError' || options?.signal?.aborted) throw abortError();
+        if (raw.name === 'TimeoutError') throw new ApiErrorWrapper('请求超时，请稍后重试', 408);
+        const status = raw instanceof ApiErrorWrapper ? raw.status : undefined;
+        if (attempt < attempts && status !== undefined && (status === 408 || (status >= 500 && status < 600))) {
+          await delay(this.retryDelay * 2 ** attempt, options?.signal);
           continue;
         }
-
-        throw normalizedError;
+        throw raw;
       }
     }
-
-    throw lastError;
   }
 
-  /**
-   * GET 请求
-   */
-  async get<T>(endpoint: string, options?: RequestOptions): Promise<T> {
+  private request<T>(method: string, endpoint: string, body: BodyInit | undefined, options?: RequestOptions, json = true): Promise<T> {
+    const init: RequestOptions = { ...options };
+    delete init.params; delete init.timeout; delete init.retry;
+    const headers = new Headers(init.headers);
+    if (json && body !== undefined && !headers.has('Content-Type')) headers.set('Content-Type', 'application/json');
+    if (!json) headers.delete('Content-Type'); // the browser generates the multipart boundary
     const url = this.buildUrl(endpoint, options?.params);
-
-    return this.executeRequest<T>(
-      () =>
-        this.fetchWithTimeout(
-          url,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              ...options?.headers,
-            },
-            signal: options?.signal,
-          },
-          options?.timeout ?? this.defaultTimeout
-        ),
-      options
+    return this.executeRequest(
+      () => this.fetchWithTimeout<T>(url, { ...init, method, headers, body }, options?.timeout ?? this.defaultTimeout),
+      options, method === 'GET'
     );
   }
 
-  /**
-   * POST 请求
-   */
-  async post<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
-    const url = this.buildUrl(endpoint, options?.params);
-    const hasBody = data !== undefined && data !== null;
-    return this.executeRequest<T>(
-      () =>
-        this.fetchWithTimeout(
-          url,
-          {
-            method: 'POST',
-            headers: {
-              ...(hasBody ? { 'Content-Type': 'application/json' } : {}),
-              ...options?.headers,
-            },
-            body: hasBody ? JSON.stringify(data) : undefined,
-            signal: options?.signal,
-          },
-          options?.timeout ?? this.defaultTimeout
-        ),
-      options,
-      false
-    );
+  get<T>(endpoint: string, options?: RequestOptions): Promise<T> {
+    return this.request<T>('GET', endpoint, undefined, options);
+  }
+  post<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
+    return this.request<T>('POST', endpoint, data == null ? undefined : JSON.stringify(data), options);
+  }
+  postForm<T>(endpoint: string, formData: FormData, options?: Omit<RequestOptions, 'body'>): Promise<T> {
+    return this.request<T>('POST', endpoint, formData, options, false);
+  }
+  put<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
+    return this.request<T>('PUT', endpoint, data == null ? undefined : JSON.stringify(data), options);
+  }
+  patch<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
+    return this.request<T>('PATCH', endpoint, data == null ? undefined : JSON.stringify(data), options);
+  }
+  delete<T>(endpoint: string, options?: RequestOptions): Promise<T> {
+    return this.request<T>('DELETE', endpoint, undefined, options);
   }
 
-  /**
-   * POST form-data request.
-   */
-  async postForm<T>(
-    endpoint: string,
-    formData: FormData,
-    options?: Omit<RequestOptions, 'body'>
-  ): Promise<T> {
-    const url = this.buildUrl(endpoint, options?.params);
-    return this.executeRequest<T>(
-      () =>
-        this.fetchWithTimeout(
-          url,
-          {
-            method: 'POST',
-            headers: {
-              ...options?.headers,
-            },
-            body: formData,
-            signal: options?.signal,
-          },
-          options?.timeout ?? this.defaultTimeout
-        ),
-      options,
-      false
-    );
-  }
-
-  /**
-   * PUT 请求
-   */
-  async put<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
-    const url = this.buildUrl(endpoint, options?.params);
-    const hasBody = data !== undefined && data !== null;
-    return this.executeRequest<T>(
-      () =>
-        this.fetchWithTimeout(
-          url,
-          {
-            method: 'PUT',
-            headers: {
-              ...(hasBody ? { 'Content-Type': 'application/json' } : {}),
-              ...options?.headers,
-            },
-            body: hasBody ? JSON.stringify(data) : undefined,
-            signal: options?.signal,
-          },
-          options?.timeout ?? this.defaultTimeout
-        ),
-      options,
-      false
-    );
-  }
-
-  /**
-   * PATCH 请求
-   */
-  async patch<T>(endpoint: string, data?: unknown, options?: RequestOptions): Promise<T> {
-    const url = this.buildUrl(endpoint, options?.params);
-    const hasBody = data !== undefined && data !== null;
-    return this.executeRequest<T>(
-      () =>
-        this.fetchWithTimeout(
-          url,
-          {
-            method: 'PATCH',
-            headers: {
-              ...(hasBody ? { 'Content-Type': 'application/json' } : {}),
-              ...options?.headers,
-            },
-            body: hasBody ? JSON.stringify(data) : undefined,
-            signal: options?.signal,
-          },
-          options?.timeout ?? this.defaultTimeout
-        ),
-      options,
-      false
-    );
-  }
-
-  /**
-   * DELETE 请求
-   */
-  async delete<T>(endpoint: string, options?: RequestOptions): Promise<T> {
-    const url = this.buildUrl(endpoint, options?.params);
-    return this.executeRequest<T>(
-      () =>
-        this.fetchWithTimeout(
-          url,
-          {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-              ...options?.headers,
-            },
-            signal: options?.signal,
-          },
-          options?.timeout ?? this.defaultTimeout
-        ),
-      options,
-      false
-    );
-  }
-
-  /**
-   * 上传文件
-   */
-  async upload<T>(
-    endpoint: string,
-    file: File,
-    options?: RequestOptions & { fieldName?: string; onProgress?: (progress: number) => void }
-  ): Promise<T> {
-    const url = this.buildUrl(endpoint, options?.params);
-    const formData = new FormData();
-    formData.append(options?.fieldName || 'file', file);
-
-    // 使用 XMLHttpRequest 以支持进度回调
+  upload<T>(endpoint: string, file: File, options?: RequestOptions & { fieldName?: string; onProgress?: (progress: number) => void }): Promise<T> {
+    const form = new FormData();
+    form.append(options?.fieldName || 'file', file);
     return new Promise<T>((resolve, reject) => {
+      if (options?.signal?.aborted) { reject(abortError()); return; }
       const xhr = new XMLHttpRequest();
-
-      // 监听上传进度
-      if (options?.onProgress) {
-        xhr.upload.addEventListener('progress', e => {
-          if (e.lengthComputable) {
-            options.onProgress?.(Math.round((e.loaded / e.total) * 100));
-          }
-        });
-      }
-
-      // 监听响应
+      const cancel = () => { xhr.abort(); finish(abortError()); };
+      let settled = false;
+      const finish = (error?: Error, value?: T) => {
+        if (settled) return;
+        settled = true;
+        options?.signal?.removeEventListener('abort', cancel);
+        if (error) reject(error); else resolve(value as T);
+      };
+      xhr.upload.addEventListener('progress', event => {
+        if (event.lengthComputable && event.total > 0) options?.onProgress?.(Math.round(event.loaded / event.total * 100));
+      });
       xhr.addEventListener('load', () => {
-        if (xhr.status >= 200 && xhr.status < 300) {
-          try {
-            const response = JSON.parse(xhr.responseText);
-            resolve(response as T);
-          } catch {
-            resolve(undefined as T);
-          }
-        } else {
-          let errorData: ApiError = { detail: 'Upload failed', status: xhr.status };
-          try {
-            errorData = { ...JSON.parse(xhr.responseText), status: xhr.status };
-          } catch {
-            // 使用默认错误
-          }
-          reject(new ApiErrorWrapper(errorData.detail || 'Upload failed', xhr.status));
-        }
+        if (xhr.status === 204) { finish(); return; }
+        let value: unknown;
+        try { value = JSON.parse(xhr.responseText); }
+        catch { finish(new ApiErrorWrapper('服务器返回的数据格式无效', xhr.status)); return; }
+        if (xhr.status >= 200 && xhr.status < 300) finish(undefined, value as T);
+        else finish(new ApiErrorWrapper(errorMessage(value, 'Upload failed'), xhr.status, value));
       });
-
-      // 监听错误
-      xhr.addEventListener('error', () => {
-        reject(new ApiErrorWrapper('上传过程中发生网络错误，请重试'));
-      });
-
-      // 监听超时
-      xhr.addEventListener('timeout', () => {
-        reject(new ApiErrorWrapper('Upload timeout'));
-      });
-
-      // 发送请求
-      xhr.open('POST', url);
-      xhr.timeout = options?.timeout ?? this.defaultTimeout;
-
-      // 添加自定义 headers
-      if (options?.headers) {
-        Object.entries(options.headers).forEach(([key, value]) => {
-          if (key.toLowerCase() !== 'content-type') {
-            xhr.setRequestHeader(key, value as string);
-          }
+      xhr.addEventListener('error', () => finish(new ApiErrorWrapper('上传过程中发生网络错误，请重试')));
+      xhr.addEventListener('abort', () => finish(abortError()));
+      xhr.addEventListener('timeout', () => finish(new ApiErrorWrapper('上传超时，请稍后重试', 408)));
+      try {
+        xhr.open('POST', this.buildUrl(endpoint, options?.params));
+        const timeout = options?.timeout ?? this.defaultTimeout;
+        xhr.timeout = Number.isFinite(timeout) && timeout > 0 ? timeout : 0;
+        xhr.withCredentials = options?.credentials === 'include';
+        new Headers(options?.headers).forEach((value, key) => {
+          if (key !== 'content-type') xhr.setRequestHeader(key, value);
         });
-      }
-
-      xhr.send(formData);
+        options?.signal?.addEventListener('abort', cancel, { once: true });
+        xhr.send(form);
+      } catch (error) { finish(error instanceof Error ? error : new Error('Upload failed')); }
     });
   }
 }
 
-/**
- * 导出单例实例
- */
 export const apiClient = new ApiClient();
-
-/**
- * 导出类型
- */
 export type { RequestOptions };

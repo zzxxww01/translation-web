@@ -3,6 +3,7 @@
 from fastapi import APIRouter, Request
 
 from src.prompts import get_prompt_manager
+from src.prompts.contracts import PromptContractError
 
 from ..middleware import BadRequestException, ServiceUnavailableException
 from ..middleware.rate_limit import limiter
@@ -79,6 +80,8 @@ async def compose_slack_message(
             raise_empty_llm_result(operation="Slack compose")
 
         return SlackComposeResponse(versions=versions)
+    except PromptContractError:
+        raise_empty_llm_result(operation="Slack compose")
     except ServiceUnavailableException:
         raise
     except Exception as exc:

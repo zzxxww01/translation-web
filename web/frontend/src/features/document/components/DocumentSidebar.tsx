@@ -1,3 +1,4 @@
+import type { LongformCostOptions } from "../api";
 /**
  * Document sidebar with project picker, section list, translation controls, and export actions.
  */
@@ -36,7 +37,7 @@ interface DocumentSidebarProps {
   onProjectSelect: (project: Project) => void;
   onProjectDeleted?: () => void;
   onNewProject: () => void;
-  onFullTranslate?: (method?: TranslationMethod, model?: string) => void;
+  onFullTranslate?: (method?: TranslationMethod, model?: string, costOptions?: LongformCostOptions) => void;
   onStopTranslate?: () => void;
   /** 术语预检进行中的取消回调；未传入时不渲染「取消预检」按钮 */
   onCancelTermReview?: () => void;
@@ -77,6 +78,8 @@ export function DocumentSidebar({
   );
   const [selectedModel, setSelectedModel] = useState<string | null>(null);
   const [advancedOpen, setAdvancedOpen] = useState(false);
+  const [modelScope, setModelScope] = useState<'all' | 'draft'>('all');
+  const [compactReview, setCompactReview] = useState(false);
   const [prepareElapsedSec, setPrepareElapsedSec] = useState(0);
   const navigate = useNavigate();
 
@@ -257,7 +260,10 @@ export function DocumentSidebar({
                 <Button
                   variant="default"
                   size="default"
-                  onClick={() => onFullTranslate(selectedMethod, selectedModel || undefined)}
+                  onClick={() => onFullTranslate(selectedMethod, selectedModel || undefined, {
+                    model_scope: selectedMethod === 'four-step' ? modelScope : 'all',
+                    efficiency: { compact_review: selectedMethod === 'four-step' && compactReview },
+                  })}
                   disabled={isTranslateBusy}
                   leftIcon={<Zap className="h-5 w-5" />}
                   className="w-full"
@@ -306,6 +312,20 @@ export function DocumentSidebar({
                         disabled={isTranslateBusy}
                       />
                     </div>
+                    <div>
+                      <label htmlFor="model-scope" className="text-xs text-text-muted mb-1.5 block">所选模型的适用范围</label>
+                      <select id="model-scope" value={modelScope} disabled={isTranslateBusy || selectedMethod !== 'four-step'}
+                        onChange={(event) => setModelScope(event.target.value as 'all' | 'draft')}
+                        className="w-full rounded border bg-background p-1.5 text-xs">
+                        <option value="all">所有阶段使用所选模型</option>
+                        <option value="draft">仅正文初译，其余按阶段配置</option>
+                      </select>
+                    </div>
+                    <label className="flex items-start gap-2 text-xs text-text-muted">
+                      <input type="checkbox" checked={compactReview} disabled={isTranslateBusy || selectedMethod !== 'four-step'}
+                        onChange={(event) => setCompactReview(event.target.checked)} />
+                      <span>紧凑审校报告（实验）：保留完整检查，只减少重复说明和评分输出。</span>
+                    </label>
                   </div>
                 </CollapsibleContent>
               </Collapsible>

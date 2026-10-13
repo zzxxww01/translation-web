@@ -98,12 +98,25 @@ class OptimizedStaticFiles(StaticFiles):
 
     def lookup_path(self, path: str):
         if path.endswith(".map"):
-            return None, None
+            return "", None
         return super().lookup_path(path)
 
 
 class SafeStaticFiles(StaticFiles):
     """StaticFiles that gracefully ignore invalid paths on Windows."""
+
+    async def get_response(self, path, scope):
+        response = await super().get_response(path, scope)
+        # This mount contains uploaded documents, not trusted SPA assets.
+        # A direct source.html or SVG navigation must never gain app-origin JS.
+        response.headers.update({
+            "Content-Security-Policy": "sandbox; default-src 'none'; img-src 'self' data:; style-src 'unsafe-inline'; frame-ancestors 'self'",
+            "X-Content-Type-Options": "nosniff",
+            "Cross-Origin-Resource-Policy": "same-origin",
+            "Referrer-Policy": "no-referrer",
+            "Cache-Control": "no-store",
+        })
+        return response
 
     def lookup_path(self, path: str):
         try:

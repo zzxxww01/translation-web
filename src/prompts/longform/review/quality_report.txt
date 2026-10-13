@@ -1,0 +1,9 @@
+[[include:shared/fidelity]]
+[[include:shared/chinese_writing]]
+
+根据提供的原文与译文审阅术语、逻辑和中文阅读障碍；若原文缺失，只做中文编辑检查，不声称核验忠实性。每项必须能在输入定位，不报告纯措辞偏好，不按禁词或字数打分。
+## 文章背景
+{article_context}
+## 逐段对照
+{pairs}
+仅返回 JSON 对象，含 summary 与 issues。summary 含 overall_quality（优秀/良好/合格/需改进，仅就本次检查）、overall_score（0–10 诊断值）。issues 项含 type（terminology/logic/fluency）、severity（high/medium/low）、description、problematic_sentence（译文完整问题句）、context（原文证据及影响）、suggestion、section_id、paragraph_index（0 基）。无问题返回 []；统计数量由程序计算。

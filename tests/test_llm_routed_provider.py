@@ -29,7 +29,8 @@ def test_empty_response_retries_with_backoff(monkeypatch):
     assert obj.generate_with_fallback('prompt', timeout=7) == 'ok'
     assert transport.generate.call_count == 2
     assert pa.time.sleep.call_count == 1
-    assert all(c.kwargs['timeout'] == 7 for c in transport.generate.call_args_list)
+    timeouts = [c.kwargs['timeout'] for c in transport.generate.call_args_list]
+    assert 0 < timeouts[1] <= timeouts[0] <= 7
 
 
 def test_global_budget_and_official_reserved(monkeypatch):
@@ -110,7 +111,7 @@ def test_gemini_adapter_attempt_does_not_expand_internal_plan(monkeypatch):
     with pytest.raises(LLMUpstreamUnavailableError):
         obj.generate('prompt', _single_attempt=True, timeout=6, max_retries=90)
     assert obj._generate_once.call_count == 1
-    assert obj._generate_once.call_args.kwargs['timeout'] == 6
+    assert 0 < obj._generate_once.call_args.kwargs['timeout'] <= 6
     gm.llm_usage_metrics.record_call.assert_called_once()
 
 

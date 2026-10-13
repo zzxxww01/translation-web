@@ -110,7 +110,7 @@ export function useSection(projectId: string, sectionId: string) {
  */
 export function useTranslateParagraph() {
   const queryClient = useQueryClient();
-  const updateParagraphInSection = useDocumentStore(state => state.updateParagraphInSection);
+  const updateParagraphInProject = useDocumentStore(state => state.updateParagraphInProject);
   const { handleError } = useErrorHandler();
 
   return useMutation({
@@ -134,7 +134,7 @@ export function useTranslateParagraph() {
           (result.status === ParagraphStatus.APPROVED ? result.translation : undefined),
       };
 
-      updateParagraphInSection(variables.sectionId, variables.paragraphId, updates);
+      updateParagraphInProject(variables.projectId, variables.sectionId, variables.paragraphId, updates);
       queryClient.setQueryData<Section | undefined>(
         ['section', variables.projectId, variables.sectionId],
         previous => {

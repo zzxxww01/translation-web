@@ -19,6 +19,7 @@ from ..core.models import (
     TermUsageTracker, ConsistencyIssue, ConsistencyReport
 )
 from ..llm.base import LLMProvider
+from ..core.term_consistency import check_terminology
 
 
 logger = logging.getLogger(__name__)
@@ -94,7 +95,11 @@ class ConsistencyReviewer:
             is_consistent=len(all_issues) == 0,
             issues=all_issues,
             auto_fixable=auto_fixable,
-            manual_review=manual_review
+            manual_review=manual_review,
+            style_checked=False,
+            terminology_checked=bool(article_analysis and article_analysis.terminology),
+            reviewed_paragraphs=sum(bool(text.strip()) for values in translations.values() for text in values),
+            total_paragraphs=sum(len(section.paragraphs) for section in sections),
         )
 
         # 添加增强数据到报告
@@ -119,20 +124,9 @@ class ConsistencyReviewer:
         Returns:
             Dict[str, List[str]]: 修正后的翻译结果
         """
-        fixed = {k: v.copy() for k, v in translations.items()}
-
-        for issue in issues:
-            if issue.auto_fixable and issue.fix_suggestion:
-                section_id = issue.section_id
-                para_index = issue.paragraph_index
-
-                if section_id in fixed and 0 <= para_index < len(fixed[section_id]):
-                    # 应用修正建议
-                    current = fixed[section_id][para_index]
-                    # 简单替换（实际应用中可能需要更复杂的逻辑）
-                    fixed[section_id][para_index] = issue.fix_suggestion
-
-        return fixed
+        # fix_suggestion is advice, never a replacement paragraph. A real auto
+        # fix would require an exact edit span plus a version-checked source.
+        return {key: values.copy() for key, values in translations.items()}
 
     def _check_terminology_consistency_enhanced(
         self,
@@ -146,76 +140,7 @@ class ConsistencyReviewer:
 
         返回问题列表和术语使用统计
         """
-        issues = []
-        term_stats = {}
-
-        # 构建术语到首选翻译的映射
-        term_preferred = {}
-        for term in terminology:
-            if term.translation:
-                term_preferred[term.term.lower()] = term.translation
-
-        # 统计每个术语的使用情况
-        term_usage = defaultdict(lambda: {"count": 0, "translations": Counter(), "locations": []})
-
-        for section in sections:
-            section_id = section.section_id
-            if section_id not in translations:
-                continue
-
-            section_trans = translations[section_id]
-
-            for para_idx, (para, trans) in enumerate(zip(section.paragraphs, section_trans)):
-                source_lower = para.source.lower()
-
-                for term in terminology:
-                    term_lower = term.term.lower()
-                    if term_lower not in source_lower:
-                        continue
-
-                    # 记录术语出现
-                    term_usage[term.term]["count"] += 1
-                    term_usage[term.term]["locations"].append({
-                        "section_id": section_id,
-                        "paragraph_index": para_idx
-                    })
-
-                    # 检测使用的翻译
-                    if term.translation and term.translation in trans:
-                        term_usage[term.term]["translations"][term.translation] += 1
-                    else:
-                        # 尝试检测其他可能的翻译
-                        # used_translations 的键始终是小写 (term.lower())，
-                        # 直接用原始大小写查询对非全小写术语恒为空，故归一化为小写。
-                        used_trans = term_tracker.used_translations.get(term.term.lower(), [])
-                        for ut in used_trans:
-                            if ut in trans:
-                                term_usage[term.term]["translations"][ut] += 1
-                                break
-
-        # 分析术语一致性
-        for term_name, usage in term_usage.items():
-            trans_counts = usage["translations"]
-            term_stats[term_name] = {
-                "total_count": usage["count"],
-                "translations": dict(trans_counts),
-                "is_consistent": len(trans_counts) <= 1,
-                "preferred": term_preferred.get(term_name.lower())
-            }
-
-            # 如果有多种翻译，报告不一致
-            if len(trans_counts) > 1:
-                most_common = trans_counts.most_common()
-                issues.append(ConsistencyIssue(
-                    section_id=usage["locations"][0]["section_id"],
-                    paragraph_index=usage["locations"][0]["paragraph_index"],
-                    issue_type="terminology",
-                    description=f"术语 '{term_name}' 有多种翻译: {', '.join([f'{t}({c}次)' for t, c in most_common])}",
-                    auto_fixable=True,
-                    fix_suggestion=f"建议统一使用 '{most_common[0][0]}'"
-                ))
-
-        return issues, term_stats
+        return check_terminology(sections, translations, terminology)
 
     def _check_terminology_consistency(
         self,
@@ -284,212 +209,19 @@ class ConsistencyReviewer:
         Returns:
             Tuple of (issues, term_stats)
         """
-        issues = []
-        term_stats = {}
-        term_usage = defaultdict(lambda: {"count": 0, "translations": Counter(), "locations": []})
+        return check_terminology(sections, translations, terminology)
 
-        for section in sections:
-            section_id = section.section_id
-            if section_id not in translations:
-                continue
+    def _check_style_consistency_enhanced(self, sections, translations):
+        """Legacy compatibility only. A style judgment needs source-grounded review.
 
-            section_trans = translations[section_id]
-
-            for para_idx, (para, trans) in enumerate(zip(section.paragraphs, section_trans)):
-                source_lower = para.source.lower()
-
-                for term in terminology:
-                    term_lower = term.term.lower()
-                    if term_lower not in source_lower:
-                        continue
-
-                    term_usage[term.term]["count"] += 1
-                    term_usage[term.term]["locations"].append({
-                        "section_id": section_id,
-                        "paragraph_index": para_idx
-                    })
-
-                    # 检测翻译
-                    if term.translation and term.translation in trans:
-                        term_usage[term.term]["translations"][term.translation] += 1
-
-        # 统计结果
-        for term_name, usage in term_usage.items():
-            trans_counts = usage["translations"]
-            term_stats[term_name] = {
-                "total_count": usage["count"],
-                "translations": dict(trans_counts),
-                "is_consistent": len(trans_counts) <= 1
-            }
-
-            if len(trans_counts) > 1:
-                most_common = trans_counts.most_common()
-                issues.append(ConsistencyIssue(
-                    section_id=usage["locations"][0]["section_id"],
-                    paragraph_index=usage["locations"][0]["paragraph_index"],
-                    issue_type="terminology",
-                    description=f"术语 '{term_name}' 有多种翻译: {', '.join([f'{t}({c}次)' for t, c in most_common])}",
-                    auto_fixable=True,
-                    fix_suggestion=f"建议统一使用 '{most_common[0][0]}'"
-                ))
-
-        return issues, term_stats
-
-    def _check_style_consistency_enhanced(
-        self,
-        sections: List[Section],
-        translations: Dict[str, List[str]]
-    ) -> Tuple[List[ConsistencyIssue], float]:
+        The returned score is a neutral compatibility value, not a quality assessment.
+        Do not infer errors from pronoun mixtures, connectives or sentence length.
         """
-        增强版风格一致性检查
+        return [], 100.0
 
-        Returns:
-            Tuple of (issues, style_score)
-        """
-        issues = []
-        style_score = 100.0
-        deductions = []
-
-        # 人称检查
-        first_person_patterns = [r'我们', r'我', r'本文']
-        third_person_patterns = [r'该', r'其', r'此']
-
-        first_person_count = 0
-        third_person_count = 0
-        total_paragraphs = 0
-
-        # 正式程度检查
-        formal_patterns = [r'因此', r'故', r'亦', r'予以', r'进行']
-        informal_patterns = [r'嘛', r'啊', r'呢', r'吧', r'挺', r'蛮']
-
-        formal_count = 0
-        informal_count = 0
-
-        # 句式检查
-        long_sentences = 0  # 超长句子
-        short_sentences = 0  # 过短句子
-
-        for section in sections:
-            section_id = section.section_id
-            if section_id not in translations:
-                continue
-
-            for para_idx, trans in enumerate(translations[section_id]):
-                total_paragraphs += 1
-
-                # 人称检查
-                for p in first_person_patterns:
-                    first_person_count += len(re.findall(p, trans))
-                for p in third_person_patterns:
-                    third_person_count += len(re.findall(p, trans))
-
-                # 正式程度检查
-                for p in formal_patterns:
-                    formal_count += len(re.findall(p, trans))
-                for p in informal_patterns:
-                    if re.search(p, trans):
-                        informal_count += 1
-                        issues.append(ConsistencyIssue(
-                            section_id=section_id,
-                            paragraph_index=para_idx,
-                            issue_type="style",
-                            description=f"发现口语化表达，可能影响专业性",
-                            auto_fixable=False,
-                            fix_suggestion=None
-                        ))
-
-                # 句子长度检查
-                sentences = re.split(r'[。！？]', trans)
-                for sent in sentences:
-                    if len(sent) > 150:
-                        long_sentences += 1
-                    elif 0 < len(sent) < 10:
-                        short_sentences += 1
-
-        # 计算风格分数
-        if first_person_count > 0 and third_person_count > 0:
-            ratio = min(first_person_count, third_person_count) / max(first_person_count, third_person_count)
-            if ratio > 0.3:  # 混用比例较高
-                deductions.append(("人称混用", 10))
-                issues.append(ConsistencyIssue(
-                    section_id=sections[0].section_id if sections else "",
-                    paragraph_index=0,
-                    issue_type="style",
-                    description=f"人称使用不统一: 第一人称{first_person_count}次, 第三人称{third_person_count}次",
-                    auto_fixable=False,
-                    fix_suggestion="建议统一使用一种人称表述"
-                ))
-
-        if formal_count > 0 and informal_count > 0:
-            deductions.append(("正式/口语混用", 5 * informal_count))
-
-        if long_sentences > total_paragraphs * 0.2:
-            deductions.append(("过长句子较多", 5))
-            issues.append(ConsistencyIssue(
-                section_id=sections[0].section_id if sections else "",
-                paragraph_index=0,
-                issue_type="style",
-                description=f"发现{long_sentences}个超长句子（超过150字），建议拆分",
-                auto_fixable=False,
-                fix_suggestion=None
-            ))
-
-        # 计算最终分数
-        for reason, points in deductions:
-            style_score -= points
-            logger.debug(f"Style deduction: {reason} (-{points})")
-
-        style_score = max(0, min(100, style_score))
-
-        return issues, style_score
-
-    def _check_style_consistency(
-        self,
-        sections: List[Section],
-        translations: Dict[str, List[str]]
-    ) -> List[ConsistencyIssue]:
-        """
-        检查风格一致性
-
-        检查各章节的语气、正式程度是否统一
-        """
-        issues = []
-
-        # 简单的风格检查：检查是否混用了不同的人称
-        first_person_patterns = [r'\b我们\b', r'\b我\b', r'\b本文\b']
-        third_person_patterns = [r'\b该\b', r'\b其\b', r'\b此\b']
-
-        first_person_sections = []
-        third_person_sections = []
-
-        for section in sections:
-            section_id = section.section_id
-            if section_id not in translations:
-                continue
-
-            section_text = " ".join(translations[section_id])
-
-            has_first = any(re.search(p, section_text) for p in first_person_patterns)
-            has_third = any(re.search(p, section_text) for p in third_person_patterns)
-
-            if has_first:
-                first_person_sections.append(section_id)
-            if has_third:
-                third_person_sections.append(section_id)
-
-        # 如果同时存在第一人称和第三人称，可能存在风格不一致
-        if first_person_sections and third_person_sections:
-            # 只报告一次
-            issues.append(ConsistencyIssue(
-                section_id=first_person_sections[0],
-                paragraph_index=0,
-                issue_type="style",
-                description="文章中混用了第一人称（我们/本文）和第三人称表述，建议统一风格",
-                auto_fixable=False,
-                fix_suggestion=None
-            ))
-
-        return issues
+    def _check_style_consistency(self, sections, translations):
+        """Style is handled by source-grounded critique, never a word-count heuristic."""
+        return []
 
     def _check_cross_references(
         self,
@@ -700,7 +432,7 @@ class ConsistencyReviewer:
             "=" * 60,
             "",
             f"一致性状态: {'✅ 通过' if report.is_consistent else '❌ 存在问题'}",
-            f"风格评分: {report.style_score:.1f}/100",
+            f"风格评分: {str(report.style_score) + '/100' if report.style_checked else '未评估'}",
             f"问题总数: {len(report.issues)}",
             f"  - 可自动修复: {len(report.auto_fixable)}",
             f"  - 需人工审核: {len(report.manual_review)}",

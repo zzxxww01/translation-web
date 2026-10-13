@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
 import { usePostStore } from '@/shared/stores';
 import type { PostNetworkAction } from '@/shared/stores/postStore';
@@ -61,7 +61,8 @@ export function PostFeature() {
   const generateTitleMutation = useGenerateTitle();
   const [customInstruction, setCustomInstruction] = useState('');
   const [pendingEditAction, setPendingEditAction] = useState<PendingEditAction | null>(null);
-  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const [clock, setClock] = useState({ startedAt: 0, elapsed: 0 });
+  const elapsedSeconds = pendingAction && pendingStartedAt === clock.startedAt ? clock.elapsed : 0;
   /** 每次「清空」自增，用作 TitleGenerator 的 key，重置它内部的输入框 */
   const [clearToken, setClearToken] = useState(0);
 
@@ -184,7 +185,7 @@ export function PostFeature() {
     translateMutation,
   ]);
 
-  const handleOptimize = useCallback(async (
+  const handleOptimize = async (
     options: { instruction?: string; optionId?: string }
   ): Promise<boolean> => {
     const activeVersion = versions.find(v => v.id === currentVersionId);
@@ -281,18 +282,7 @@ export function PostFeature() {
     } finally {
       finishAction(request.controller);
     }
-  }, [
-    addVersion,
-    beginAction,
-    currentContent,
-    currentVersionId,
-    finishAction,
-    optimizeMutation,
-    preserveCurrentEdit,
-    requestVersionSwitch,
-    selectedModel,
-    versions,
-  ]);
+  };
 
   const handleGenerateTitle = useCallback(async (instruction?: string): Promise<string[]> => {
     const content = titleContent;
@@ -380,9 +370,13 @@ export function PostFeature() {
     setPendingEditAction(null);
   };
 
+  const shortcutHandlers = useRef({ handleOptimize, handleTranslate, customInstruction });
+  useLayoutEffect(() => { shortcutHandlers.current = { handleOptimize, handleTranslate, customInstruction }; });
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.repeat) return;
+      const { handleTranslate, handleOptimize, customInstruction } = shortcutHandlers.current;
       const hasCommandModifier = e.ctrlKey || e.metaKey;
       if (hasCommandModifier && e.key === 'Enter') {
         const active = document.activeElement as HTMLElement;
@@ -414,7 +408,7 @@ export function PostFeature() {
     };
     window.addEventListener('keydown', handler);
     return () => window.removeEventListener('keydown', handler);
-  }, [customInstruction, handleOptimize, handleTranslate]);
+  }, []);
 
   useEffect(() => {
     if (!isEdited) return;
@@ -428,13 +422,9 @@ export function PostFeature() {
 
   // 等待期间展示已耗时，避免只有一个小转圈、用户无法判断是否卡死
   useEffect(() => {
-    if (!pendingAction || !pendingStartedAt) {
-      setElapsedSeconds(0);
-      return;
-    }
+    if (!pendingAction || !pendingStartedAt) return;
     const tick = () =>
-      setElapsedSeconds(Math.max(0, Math.floor((Date.now() - pendingStartedAt) / 1000)));
-    tick();
+      setClock({ startedAt: pendingStartedAt, elapsed: Math.max(0, Math.floor((Date.now() - pendingStartedAt) / 1000)) });
     const timer = window.setInterval(tick, 1000);
     return () => window.clearInterval(timer);
   }, [pendingAction, pendingStartedAt]);

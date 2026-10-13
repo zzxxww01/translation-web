@@ -26,6 +26,14 @@ class LLMError(RuntimeError):
     """Base class for typed LLM failures."""
 
 
+class LLMCapacityError(LLMError):
+    """Local running/queued request limit reached; do not retry via another model."""
+
+
+class LLMOutputTruncatedError(LLMError):
+    """Upstream generation hit its output limit; partial text is not a result."""
+
+
 class LLMConfigurationError(LLMError, ValueError):
     """Provider configuration is invalid."""
 
@@ -52,6 +60,14 @@ class LLMTLSError(LLMTransportError):
 
 class LLMTimeoutError(LLMTransportError):
     """A request timed out."""
+
+
+class LLMDeadlineExceededError(LLMTimeoutError):
+    """The whole logical generation budget is spent, not another route timeout."""
+
+
+class LLMRequestCancelledError(LLMError):
+    """The request owner abandoned this call; do not send another request."""
 
 
 class LLMUpstreamUnavailableError(LLMTransportError):
@@ -109,6 +125,11 @@ def _is_genai_api_error(exc: Exception) -> bool:
 
 def normalize_llm_transport_error(exc: Exception, *, provider_name: str) -> NormalizedLLMError | None:
     """Convert common transport exceptions into typed LLM errors."""
+
+    if isinstance(exc, LLMDeadlineExceededError):
+        return NormalizedLLMError(error=exc, retryable=False)
+    if isinstance(exc, LLMRequestCancelledError):
+        return None
 
     if isinstance(exc, LLMTransportError):
         return NormalizedLLMError(error=exc, retryable=True)

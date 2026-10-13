@@ -168,6 +168,7 @@ async def ensure_term_review_job(
     gm,
     llm,
     model: Optional[str],
+    provider_configured: bool = False,
 ) -> Dict:
     """Create one browser-independent preparation job, or reuse its live task."""
     job_store = TerminologyReviewJobStore(pm.projects_path)
@@ -194,7 +195,7 @@ async def ensure_term_review_job(
         if not created:
             return job
 
-    if model:
+    if model and not provider_configured:
         llm = await run_blocking(create_llm_provider, provider=model)
     service = TerminologyReviewService(
         llm_provider=llm,

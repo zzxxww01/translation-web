@@ -114,6 +114,9 @@ def _build_longform_service(
         max_concurrent_sections=10,
         analysis_llm_provider=analysis_llm,
         user_model_override=body.model,
+        model_scope=body.model_scope,
+        model_profile=body.model_profile,
+        efficiency_options=body.efficiency,
     )
     service.set_retranslate_scope(
         body.retranslate_scope,
@@ -484,6 +487,10 @@ def _run_consistency_review_sync(project_id: str, pm, llm) -> dict:
     return {
         "is_consistent": report.is_consistent,
         "style_score": report.style_score,
+        "style_checked": report.style_checked,
+        "terminology_checked": report.terminology_checked,
+        "reviewed_paragraphs": report.reviewed_paragraphs,
+        "total_paragraphs": report.total_paragraphs,
         "issue_count": len(report.issues),
         "auto_fixable_count": len(report.auto_fixable),
         "manual_review_count": len(report.manual_review),
@@ -649,11 +656,10 @@ async def start_longform_workflow(
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
-    translation_service = await asyncio.to_thread(
-        _build_longform_service,
-        service,
-        body,
-    )
+    try:
+        translation_service = await asyncio.to_thread(_build_longform_service, service, body)
+    except ValueError as error:
+        raise BadRequestException(detail=str(error)) from error
     slot_claim = await translation_service.claim_translation_slot(project_id)
     if slot_claim["status"] == "busy":
         raise ConflictException(
@@ -698,12 +704,19 @@ async def start_longform_workflow(
             )
             term_review_job_id = None
         else:
+            term_kwargs = {}
+            term_llm = translation_service.llm
+            term_model = body.model
+            if body.model_scope == "draft":
+                term_llm = translation_service._get_provider_for_phase("phase0_prescan")
+                term_model = translation_service.model_config.get_model_for_phase(
+                    "phase0_prescan", profile=body.model_profile)["model"]
+                term_kwargs["provider_configured"] = True
             job = await ensure_term_review_job(
                 project_id=project_id,
                 pm=translation_service.project_manager,
                 gm=translation_service.project_manager.glossary_manager,
-                llm=translation_service.llm,
-                model=body.model,
+                llm=term_llm, model=term_model, **term_kwargs,
             )
             workflow_run_id = job["job_id"]
             term_review_job_id = job["job_id"]
@@ -760,6 +773,9 @@ async def start_longform_workflow(
         "resume_checkpoint": checkpoint.to_dict() if resumed else None,
         "retranslate_scope": body.retranslate_scope,
         "retranslate_section_ids": body.retranslate_section_ids,
+        "efficiency": body.efficiency.model_dump(mode="json"),
+        "model_scope": body.model_scope,
+        "model_profile": body.model_profile,
     }
 
 
@@ -1071,3 +1087,21 @@ async def add_translation_rule(
         raise BadRequestException(detail="Rule text cannot be empty")
     await run_blocking(memory_service.add_rule_manually, text)
     return {"added": True, "text": text}
+
+
+@router.get("/translation-rule-candidates")
+async def get_translation_rule_candidates(memory_service: MemoryServiceDep):
+    rows = await run_blocking(memory_service.get_rule_candidates)
+    return {"candidates": rows, "total": len(rows)}
+
+
+@router.post("/translation-rule-candidates/{candidate_id}/{action}")
+async def decide_translation_rule_candidate(candidate_id: str, action: str, memory_service: MemoryServiceDep):
+    if action not in {"approve", "reject"}:
+        raise BadRequestException(detail="action must be approve or reject")
+    try:
+        return await run_blocking(memory_service.decide_rule_candidate, candidate_id, action)
+    except KeyError:
+        raise NotFoundException(detail="Rule candidate not found")
+    except ValueError as exc:
+        raise BadRequestException(detail=str(exc))

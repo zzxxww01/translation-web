@@ -1,0 +1,12 @@
+[[include:shared/formatting_contract]]
+
+只修隐藏 token 包装与缺失/重复标记，不顺带润色中文。CODE/MATH 从给定原文恢复，LINK/STRONG/EM 的内容保持既有中文语义；若不能安全修复则保持原文交给验证器。
+## 预期标记
+{tokens}
+## 校验问题
+{issues}
+## 标记化原文
+{source}
+## 待修译文
+{translation}
+只输出修复后的标记化译文。

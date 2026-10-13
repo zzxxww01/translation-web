@@ -31,7 +31,7 @@ export function ReplyWorkspace({
     ? '重新生成'
     : '生成回复';
 
-  const versionLabels = ['简洁', '正式', '友好'];
+  const versionLabels = ['简洁', '标准', '正式'];
 
   return (
     <div className="space-y-6 w-full">

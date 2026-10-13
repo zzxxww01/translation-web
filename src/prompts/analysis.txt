@@ -1,33 +1,8 @@
-分析以下semiAnalysis技术文章，提取关键术语并给出翻译建议。
+[[include:shared/fidelity]]
 
-## 文章内容
+分析给定原文，提取真正影响翻译的术语、领域、语气和理解障碍。只用提供的内容，不补写未看到的结论。
+## 原文
 {text}
-
-## 要求
-1. 提取真正关键的术语（公司名、产品名、技术概念、金融术语、关键缩写）
-2. 为每个术语建议翻译策略：
-   - preserve: 保持英文原文（产品/技术代号如 CoWoS、HBM、EUV、GAA；公司名如 TSMC、ASML、NVIDIA）
-   - first_annotate: 首次出现时使用 `中文（English）`，后续直接用中文或常用写法
-   - translate: 直接翻译成中文（行业术语如 wafer -> 晶圆、yield -> 良率、fab -> 晶圆厂、node -> 制程节点；金融术语如 capex -> 资本支出、gross margin -> 毛利率、revenue -> 营收、YoY -> 同比）
-3. 分析文章的写作风格，特别注意：
-   - 是否有强观点和判断需要保留
-   - 默认目标读者大概懂什么、不懂什么
-   - 哪些术语可能需要首次轻注释
-
-请返回 JSON 格式（不要添加 markdown 代码块标记）：
-{{
-  "terms": [
-    {{
-      "original": "术语原文",
-      "translation": "建议翻译（preserve策略可为null）",
-      "strategy": "preserve|first_annotate|translate",
-      "note": "上下文含义或首现策略说明（可选）"
-    }}
-  ],
-  "style": {{
-    "tone": "professional|casual|academic",
-    "formality": "formal|informal",
-    "notes": ["风格建议，至少指出如何保留判断力度、避免翻译腔、控制注释密度"]
-  }},
-  "summary": "文章主题简述（一句话）"
-}}
+## 输出
+仅返回 JSON：{{"terms":[],"style":{{"tone":"professional","formality":"formal","notes":[]}},"summary":"有原文依据的主题"}}。
+terms 每项包含 original、translation（需保留英文时可为 null）、strategy（preserve/preserve_annotate/first_annotate/translate）、note（原文依据和适用义项）。不要按公司类别统一保留或统一中文化；不确定译名保留英文。无需术语时返回空数组，不凑数。

@@ -11,7 +11,8 @@ import json
 import time
 import importlib
 import warnings
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
+from contextvars import copy_context
 from dataclasses import dataclass
 import requests
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
@@ -28,8 +29,12 @@ from src.core.longform_context import (
 from src.core.glossary_prompt import render_glossary_prompt_block
 
 from .base import LLMProvider
+from .output_validation import ensure_complete_generation, gemini_response_text
 from .errors import (
     LLMConnectionError,
+    LLMConfigurationError,
+    LLMDeadlineExceededError,
+    LLMRequestCancelledError,
     LLMProxyConfigurationError,
     LLMTimeoutError,
     LLMUpstreamUnavailableError,
@@ -40,6 +45,9 @@ from .config_loader import get_config_loader
 from .network_policy import build_network_policy
 from .network_policy import RuntimeNetworkPolicy
 from .usage_metrics import llm_usage_metrics
+from .token_usage import gemini_usage, TokenUsage
+from .execution_context import generation_budget, remaining_timeout, bounded_sleep, output_limit, check_active
+from .rate_limiter import transport_slot
 
 
 logger = logging.getLogger(__name__)
@@ -198,6 +206,9 @@ class GeminiGenerationResult:
     input_tokens: Optional[int] = None
     output_tokens: Optional[int] = None
     total_tokens: Optional[int] = None
+    cached_input_tokens: Optional[int] = None
+    reasoning_tokens: Optional[int] = None
+    billable_output_tokens: Optional[int] = None
 
 
 class GeminiProvider(LLMProvider):
@@ -452,8 +463,8 @@ class GeminiProvider(LLMProvider):
             yield
             return
 
-        previous = {key: os.environ.get(key) for key in overrides}
         with self._proxy_env_lock:
+            previous = {key: os.environ.get(key) for key in overrides}
             try:
                 for key, value in overrides.items():
                     os.environ[key] = value
@@ -574,7 +585,8 @@ class GeminiProvider(LLMProvider):
     def _generate_with_timeout_fn(self, fn, timeout: int | None):
         if not timeout or timeout <= 0:
             return fn()
-        future = self._timeout_executor.submit(fn)
+        context = copy_context()
+        future = self._timeout_executor.submit(context.run, fn)
         try:
             return future.result(timeout=timeout)
         except FutureTimeoutError:
@@ -597,6 +609,8 @@ class GeminiProvider(LLMProvider):
         此前 SDK / REST 生成配置都未传 max_output_tokens，输出依赖供应商默认值，
         长 section / 长 JSON 可能被静默截断（再喂给 _parse_json_response 退化为 {}）。
         """
+        if output_limit() is not None:
+            return output_limit()
         config = MODEL_CONFIG.get(self.model_type)
         if config and isinstance(config.get("max_output_tokens"), int):
             return config["max_output_tokens"]
@@ -631,7 +645,10 @@ class GeminiProvider(LLMProvider):
             connect_timeout = min(max(float(timeout) * 0.2, 5.0), 15.0)
             request_timeout = (connect_timeout, float(timeout))
 
-        with self._build_rest_session() as session:
+        with transport_slot(), self._build_rest_session() as session:
+            budget = remaining_timeout(timeout)
+            if budget is not None:
+                request_timeout = (min(budget, 15.0), budget)
             response = session.post(
                 url,
                 json=payload,
@@ -642,29 +659,13 @@ class GeminiProvider(LLMProvider):
         if response.status_code >= 400:
             self._raise_rest_http_error(response, model)
         data = response.json()
+        usage = gemini_usage(data.get("usageMetadata"))
         try:
-            text = data["candidates"][0]["content"]["parts"][0]["text"]
+            text = gemini_response_text(data)
         except Exception as exc:
-            raise RuntimeError(f"Unexpected Gemini REST response: {data}") from exc
-        usage = data.get("usageMetadata", {})
-        return GeminiGenerationResult(
-            text=text,
-            input_tokens=self._usage_value(
-                usage,
-                "prompt_token_count",
-                "promptTokenCount",
-            ),
-            output_tokens=self._usage_value(
-                usage,
-                "candidates_token_count",
-                "candidatesTokenCount",
-            ),
-            total_tokens=self._usage_value(
-                usage,
-                "total_token_count",
-                "totalTokenCount",
-            ),
-        )
+            exc._llm_usage = usage
+            raise
+        return GeminiGenerationResult(text=text, **usage.as_metrics())
 
     @staticmethod
     def _usage_value(usage: Any, *names: str) -> Optional[int]:
@@ -865,99 +866,57 @@ class GeminiProvider(LLMProvider):
             return min(self.retry_delay * (2**retry_index), 16.0)
         return max(self.retry_delay, 0.2)
 
-    def _generate_once(
-        self,
-        prompt: str,
-        attempt: GeminiAttempt,
-        temperature: float,
-        response_mime_type: Optional[str],
-        timeout: int | None,
-    ) -> GeminiGenerationResult:
+    def _generate_once(self, prompt, attempt, temperature, response_mime_type, timeout):
         if self._use_rest_transport():
-            return self._generate_with_rest(
-                prompt=prompt,
-                api_key=attempt.api_key,
-                timeout=timeout,
-                temperature=temperature,
-                response_mime_type=response_mime_type,
-                model_override=attempt.model_name,
-            )
+            return self._generate_with_timeout_fn(lambda: self._generate_with_rest(
+                prompt=prompt, api_key=attempt.api_key, timeout=timeout,
+                temperature=temperature, response_mime_type=response_mime_type,
+                model_override=attempt.model_name), timeout)
 
         client = self._get_client(attempt.api_key)
 
         def _call():
-            config = {
-                "temperature": temperature,
-                "max_output_tokens": self._resolve_max_output_tokens(),
-                "http_options": {"retry_options": {"attempts": 1}},
-            }
-            if response_mime_type:
-                config["response_mime_type"] = response_mime_type
-            if timeout and timeout > 0 and not GeminiProvider._http_options_unsupported:
-                # 把超时下推到传输层：google-genai 在 HttpOptions.timeout 为空时会显式
-                # 把 timeout=None 交给 httpx（等于禁用超时），挂死的请求永远不返回，
-                # _timeout_executor 的 worker 也就永久泄漏（审计 BE8）。timeout 逐调用
-                # 可变而 client 按 api_key 缓存，因此只能放在 per-request config 里。
-                # HttpOptions.timeout 单位是毫秒；取 90% 让传输层先于 future 门限醒来，
-                # 否则 worker 必然仍在跑，泄漏计数会次次误报而失去信噪比。
-                config["http_options"]["timeout"] = int(timeout * _TRANSPORT_TIMEOUT_RATIO * 1000)
-            with self._temporary_proxy_env():
-                try:
-                    resp = client.models.generate_content(
-                        model=attempt.model_name,
-                        contents=prompt,
-                        config=config,
-                    )
-                except (TypeError, ValueError) as exc:
-                    # 旧版 SDK 不认 request 级 http_options（pydantic 校验失败会抛
-                    # ValidationError，它是 ValueError 子类）：退回不带传输层超时的调用。
-                    if "http_options" not in config or "http_options" not in str(exc):
+            with transport_slot():
+                budget = remaining_timeout(timeout)
+                config = {
+                    "temperature": temperature,
+                    "max_output_tokens": self._resolve_max_output_tokens(),
+                    "http_options": {"retry_options": {"attempts": 1}},
+                }
+                if response_mime_type:
+                    config["response_mime_type"] = response_mime_type
+                if budget is not None:
+                    config["http_options"]["timeout"] = max(1, int(budget * _TRANSPORT_TIMEOUT_RATIO * 1000))
+                # Configured clients already have explicit per-client proxy and
+                # trust_env settings. Do not serialize network IO under an env lock.
+                proxy_scope = nullcontext() if getattr(self, "network_policy", None) is not None else self._temporary_proxy_env()
+                with proxy_scope:
+                    try:
+                        resp = client.models.generate_content(model=attempt.model_name, contents=prompt, config=config)
+                    except (TypeError, ValueError) as exc:
+                        if "http_options" in str(exc):
+                            raise LLMConfigurationError("Installed Gemini SDK must support request timeout and retry_options") from exc
                         raise
-                    # 记住这套 SDK 不支持，避免后续每个请求都白跑一轮往返。
-                    GeminiProvider._http_options_unsupported = True
-                    logger.warning(
-                        "[Gemini] installed google-genai rejects per-request http_options; "
-                        "falling back without transport timeout for the rest of this process. err=%s",
-                        exc,
-                    )
-                    config.pop("http_options", None)
-                    resp = client.models.generate_content(
-                        model=attempt.model_name,
-                        contents=prompt,
-                        config=config,
-                    )
-            text = resp.text
-            if text is None:
-                # 候选被安全策略拦截或无有效候选时 resp.text 为 None。抛可重试的
-                # typed 错误以触发 key/model 轮换,避免上层对 None 调用 .strip()
-                # 抛出令人误解的裸 AttributeError(审计 C2)。
-                feedback = getattr(resp, "prompt_feedback", None)
-                block_reason = getattr(feedback, "block_reason", None) if feedback else None
-                raise LLMUpstreamUnavailableError(
-                    f"Gemini returned no text (block_reason={block_reason})"
-                )
-            usage = getattr(resp, "usage_metadata", None)
-            return GeminiGenerationResult(
-                text=text,
-                input_tokens=self._usage_value(
-                    usage,
-                    "prompt_token_count",
-                    "promptTokenCount",
-                ),
-                output_tokens=self._usage_value(
-                    usage,
-                    "candidates_token_count",
-                    "candidatesTokenCount",
-                ),
-                total_tokens=self._usage_value(
-                    usage,
-                    "total_token_count",
-                    "totalTokenCount",
-                ),
-            )
+                usage = gemini_usage(getattr(resp, "usage_metadata", None))
+                try:
+                    candidates = getattr(resp, "candidates", None)
+                    if candidates:
+                        ensure_complete_generation(getattr(candidates[0], "finish_reason", None))
+                    text = resp.text
+                    if text is None:
+                        feedback = getattr(resp, "prompt_feedback", None)
+                        block_reason = getattr(feedback, "block_reason", None) if feedback else None
+                        if block_reason:
+                            raise LLMConfigurationError("Gemini blocked this generation")
+                        raise LLMUpstreamUnavailableError("Gemini returned no text")
+                except Exception as exc:
+                    exc._llm_usage = usage
+                    raise
+                return GeminiGenerationResult(text=text, **usage.as_metrics())
 
         return self._generate_with_timeout_fn(_call, timeout)
 
+    @generation_budget
     def generate(
         self,
         prompt: str,
@@ -984,192 +943,58 @@ class GeminiProvider(LLMProvider):
         attempt_plan = self._build_attempt_plan(primary_model)
         max_attempts = max(max_retries or self.max_attempts, len(attempt_plan))
         if _kwargs.get("_single_attempt"):
-            # ProviderAdapter owns key/model rotation and the total attempt budget.
-            attempt_plan = attempt_plan[:1]
-            max_attempts = 1
-        start_time = time.monotonic()
+            attempt_plan, max_attempts = attempt_plan[:1], 1
         effective_timeout = timeout if timeout is not None else self.request_timeout
-
-        logger.info(
-            "[Gemini] generate start len=%s model=%s backup_model=%s keys=%s timeout=%ss transport=%s",
-            len(prompt),
-            primary_model,
-            self.backup_model or "-",
-            len(self.api_keys),
-            effective_timeout,
-            "rest" if self._use_rest_transport() else "sdk",
-        )
-
-        # 贯穿整个重试循环单调递增的退避计数器，使 2**n 指数退避在 key/model 轮换
-        # 期间也真实增长（此前只在最终路由分支递增，轮换期间恒为 0）。
-        backoff_index = 0
-        last_exception: Exception | None = None
         response_mime_type = "application/json" if response_format == "json" else None
-
+        backoff_index = 0
         for attempt_index in range(max_attempts):
+            check_active()
             plan_index = min(attempt_index, len(attempt_plan) - 1)
             attempt = attempt_plan[plan_index]
-            input_tokens = output_tokens = total_tokens = None
+            started = time.monotonic()
+            usage = TokenUsage()
             try:
-                generation = self._generate_once(
-                    prompt=prompt,
-                    attempt=attempt,
-                    temperature=temperature,
+                generation = self._generate_once(prompt=prompt, attempt=attempt,
+                    temperature=temperature if temperature is not None else 0.7,
                     response_mime_type=response_mime_type,
-                    timeout=effective_timeout,
-                )
-                duration = time.monotonic() - start_time
+                    timeout=remaining_timeout(effective_timeout))
                 if isinstance(generation, GeminiGenerationResult):
-                    stripped_text = (generation.text or "").strip()
-                    input_tokens = generation.input_tokens
-                    output_tokens = generation.output_tokens
-                    total_tokens = generation.total_tokens
+                    text = (generation.text or "").strip()
+                    usage = TokenUsage(**{key: getattr(generation, key) for key in TokenUsage.__dataclass_fields__})
                 else:
-                    # Keep compatibility with provider subclasses and tests
-                    # written against the former private string return type.
-                    stripped_text = str(generation or "").strip()
-                    input_tokens = None
-                    output_tokens = None
-                    total_tokens = None
-                if not stripped_text:
+                    text = str(generation or "").strip()
+                if not text:
                     raise LLMUpstreamUnavailableError("Gemini returned empty content")
-                call_number = llm_usage_metrics.record_call(
-                    provider="gemini",
-                    model=attempt.model_name,
-                    duration_seconds=duration,
-                    success=True,
-                    input_chars=len(prompt),
-                    output_chars=len(stripped_text),
-                    input_tokens=input_tokens,
-                    output_tokens=output_tokens,
-                    total_tokens=total_tokens,
-                    attempts=attempt_index + 1,
-                )
-                logger.info(
-                    "[API #%d] model=%s duration=%.1fs (key=%s attempt=%s/%s)",
-                    call_number,
-                    attempt.model_name,
-                    duration,
-                    attempt.key_role,
-                    attempt_index + 1,
-                    max_attempts,
-                )
-                return stripped_text
+                llm_usage_metrics.record_call(provider="gemini", model=attempt.model_name,
+                    duration_seconds=time.monotonic() - started, success=True,
+                    input_chars=len(prompt), output_chars=len(text), attempts=1,
+                    **usage.as_metrics())
+                return text
             except Exception as exc:
-                exc = self._normalize_generation_exception(
-                    exc, timeout=effective_timeout
-                )
-
-                error_text = self._error_to_text(exc)
-                last_exception = exc
-
+                usage = getattr(exc, "_llm_usage", usage)
+                error = self._normalize_generation_exception(exc, timeout=effective_timeout)
+                # Record EACH failed transport attempt, including known usage on
+                # truncated/refused outputs. Do not hide attempts in success totals.
+                llm_usage_metrics.record_call(provider="gemini", model=attempt.model_name,
+                    duration_seconds=time.monotonic() - started, success=False,
+                    input_chars=len(prompt), attempts=1, error_type=type(error).__name__,
+                    **usage.as_metrics())
+                if isinstance(error, (LLMDeadlineExceededError, LLMRequestCancelledError, LLMConfigurationError)):
+                    raise error
+                error_text = self._error_to_text(error)
                 if self._is_non_retryable_error(error_text):
-                    duration = time.monotonic() - start_time
-                    llm_usage_metrics.record_call(
-                        provider="gemini",
-                        model=attempt.model_name,
-                        duration_seconds=duration,
-                        success=False,
-                        input_chars=len(prompt),
-                        attempts=attempt_index + 1,
-                        error_type=type(exc).__name__,
-                    )
-                    logger.error(
-                        "[Gemini] generate aborted in %.2fs on non-retryable error (model=%s key=%s). err=%s",
-                        duration,
-                        attempt.model_name,
-                        attempt.key_role,
-                        error_text,
-                    )
-                    # 只有 provider 无关的失败才向 fallback 层宣告"整盘别试了"；
-                    # 上下文超长这类换个更大窗口的模型/provider 仍可能成功，
-                    # 抛原异常让适配器继续走它的 attempt plan。
                     if self._is_provider_agnostic_failure(error_text):
-                        raise self._as_non_retryable(exc)
-                    raise
-
-                has_fresh_attempt = plan_index < len(attempt_plan) - 1
-                # auth 错误不进退避循环，但仍允许换一个 key/model 再试一次（另一个 key 可能有效）
-                if has_fresh_attempt and (
-                    self._is_retryable_error(error_text)
-                    or self._is_auth_error(error_text)
-                ):
-                    # 限流时换 key 前也要退避：否则会瞬间把所有 key 逐个撞限流、全部烧光，
-                    # 等真正进入退避路径时已无可用 key。auth/其它暂时性错误仍快速轮换。
-                    if self._is_rate_limited(error_text):
-                        retry_delay = self._retry_delay_for_error(
-                            error_text, backoff_index
-                        )
-                        backoff_index += 1
-                        logger.warning(
-                            "[Gemini] rate limited on model=%s key=%s; backing off %.1fs before switching key (%s/%s). err=%s",
-                            attempt.model_name,
-                            attempt.key_role,
-                            retry_delay,
-                            attempt_index + 1,
-                            max_attempts,
-                            error_text,
-                        )
-                        time.sleep(retry_delay)
-                    next_attempt = attempt_plan[plan_index + 1]
-                    logger.warning(
-                        "[Gemini] attempt failed on model=%s key=%s; switching to model=%s key=%s (%s/%s). err=%s",
-                        attempt.model_name,
-                        attempt.key_role,
-                        next_attempt.model_name,
-                        next_attempt.key_role,
-                        attempt_index + 1,
-                        max_attempts,
-                        error_text,
-                    )
-                    continue
-
-                if attempt_index < max_attempts - 1 and self._is_retryable_error(
-                    error_text
-                ):
-                    retry_delay = self._retry_delay_for_error(
-                        error_text, backoff_index
-                    )
+                        raise self._as_non_retryable(error)
+                    raise error
+                fresh = plan_index < len(attempt_plan) - 1
+                retryable = self._is_retryable_error(error_text) or (fresh and self._is_auth_error(error_text))
+                if attempt_index >= max_attempts - 1 or not retryable:
+                    raise error
+                if self._is_rate_limited(error_text) or not fresh:
+                    delay = self._retry_delay_for_error(error_text, backoff_index)
                     backoff_index += 1
-                    logger.warning(
-                        "[Gemini] request failed on final route model=%s key=%s; retry in %.1fs (%s/%s). err=%s",
-                        attempt.model_name,
-                        attempt.key_role,
-                        retry_delay,
-                        attempt_index + 1,
-                        max_attempts,
-                        error_text,
-                    )
-                    time.sleep(retry_delay)
-                    continue
-
-                duration = time.monotonic() - start_time
-                llm_usage_metrics.record_call(
-                    provider="gemini",
-                    model=attempt.model_name,
-                    duration_seconds=duration,
-                    success=False,
-                    input_chars=len(prompt),
-                    attempts=attempt_index + 1,
-                    error_type=type(exc).__name__,
-                    input_tokens=input_tokens,
-                    output_tokens=output_tokens,
-                    total_tokens=total_tokens,
-                )
-                logger.error(
-                    "[Gemini] generate failed in %.2fs after %s attempts (model=%s key=%s). err=%s",
-                    duration,
-                    attempt_index + 1,
-                    attempt.model_name,
-                    attempt.key_role,
-                    error_text,
-                )
-                raise exc
-
-        if last_exception is not None:
-            raise last_exception
-
-        raise RuntimeError("Gemini generate failed without an exception.")
+                    bounded_sleep(delay)
+        raise RuntimeError("Gemini generation has no usable attempts")
 
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[int] = None) -> str:
         """
@@ -1202,68 +1027,10 @@ class GeminiProvider(LLMProvider):
         )
         return self.generate(prompt, temperature=0.4)
 
-    def repair_format_tokens(
-        self,
-        source_text: str,
-        translated_text: str,
-        format_tokens: List[Dict[str, Any]],
-        issues: Optional[List[str]] = None,
-        model: Optional[str] = None,
-    ) -> Optional[str]:
-        """Run a lightweight repair pass to restore hidden token wrappers."""
-        preview_tokens = limit_format_tokens(format_tokens)
-        if not preview_tokens:
-            return None
-
-        token_lines: List[str] = []
-        for token in preview_tokens:
-            if not isinstance(token, dict):
-                continue
-            token_id = str(token.get("id", "")).strip()
-            token_type = str(token.get("type", "")).strip()
-            token_text = str(token.get("text", "")).strip()
-            if token_id:
-                token_lines.append(f"- {token_id} ({token_type}): {token_text}")
-
-        issue_lines = [f"- {item}" for item in (issues or []) if str(item).strip()]
-        issue_block = "\n".join(issue_lines) if issue_lines else "- (not provided)"
-        token_block = "\n".join(token_lines) if token_lines else "- (empty)"
-
-        prompt = "\n".join(
-            [
-                "You are a token repair engine for long-form translation.",
-                "Task: repair hidden backend tokens only.",
-                "",
-                "Rules:",
-                "1. Keep meaning and wording unchanged as much as possible.",
-                "2. Restore missing or malformed `[[[TYPE_N|...]]]` wrappers.",
-                "3. Keep token ids exactly from the token list.",
-                "4. Do not add extra commentary.",
-                "5. Output ONLY the repaired translation text.",
-                "",
-                "Expected tokens:",
-                token_block,
-                "",
-                "Validation issues:",
-                issue_block,
-                "",
-                "Source (tokenized):",
-                source_text,
-                "",
-                "Broken translation:",
-                translated_text,
-            ]
-        )
-
-        repaired = self.generate(prompt, temperature=0.1, model=model).strip()
-        if repaired.startswith("```"):
-            lines = repaired.splitlines()
-            if lines and lines[0].startswith("```"):
-                lines = lines[1:]
-            if lines and lines[-1].strip() == "```":
-                lines = lines[:-1]
-            repaired = "\n".join(lines).strip()
-        return repaired or None
+    def repair_format_tokens(self, source_text: str, translated_text: str,
+                             format_tokens: List[Dict[str, Any]], issues: Optional[List[str]] = None,
+                             model: Optional[str] = None) -> Optional[str]:
+        return super().repair_format_tokens(source_text, translated_text, format_tokens, issues, model)
 
     def deep_analyze_with_term_verification(
         self,
@@ -1404,133 +1171,32 @@ class GeminiProvider(LLMProvider):
             raise ValueError(f"Invalid JSON response from LLM: {e}")
 
     def analyze(self, text: str) -> Dict[str, Any]:
-        """
-        鍒嗘瀽鏂囨湰锛屾彁鍙栨湳璇拰椋庢牸
+        from ..prompts.task_builders import analysis_prompt
+        from ..prompts.contracts import object_response
+        result = object_response(self.generate(analysis_prompt(text), response_format="json", temperature=0.3), ("terms", "style"))
+        if not isinstance(result["terms"], list) or not isinstance(result["style"], dict):
+            raise ValueError("Invalid analysis schema")
+        return result
 
-        Args:
-            text: 瑕佸垎鏋愮殑鏂囨湰锛堥€氬父鏄叏鏂囨垨鎽樿锛?
-
-        Returns:
-            Dict: 鍒嗘瀽缁撴灉
-        """
-        prompt = self._build_analysis_prompt(text)
-
-        try:
-            response = self.generate(prompt, response_format="json")
-            return self._parse_json_response(response)
-        except json.JSONDecodeError:
-            return {
-                "terms": [],
-                "style": {"tone": "professional", "formality": "formal", "notes": []},
-            }
-        except Exception as e:
-            raise RuntimeError(f"Analysis failed: {e}")
-
-    def check_consistency(
-        self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
-    ) -> List[Dict[str, Any]]:
-        """
-        妫€鏌ヨ瘧鏂囦竴鑷存€?
-
-        Args:
-            paragraphs: 娈佃惤鍒楄〃 [{"source": ..., "translation": ...}, ...]
-            glossary: 鏈琛?{term: translation, ...}
-
-        Returns:
-            List[Dict]: 闂鍒楄〃
-        """
-        prompt = self._build_consistency_prompt(paragraphs, glossary)
-
-        try:
-            response = self.generate(prompt, response_format="json")
-            result = self._parse_json_response(response)
-            return result if isinstance(result, list) else []
-        except Exception:
-            return []
+    def check_consistency(self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]) -> List[Dict[str, Any]]:
+        from ..prompts.task_builders import consistency_prompt
+        from ..prompts.contracts import object_response, PromptContractError
+        result = object_response(self.generate(consistency_prompt(paragraphs, glossary), response_format="json", temperature=0.3), ("issues",))
+        if not isinstance(result["issues"], list):
+            raise PromptContractError("issues must be a list")
+        for issue in result["issues"]:
+            index = issue.get("paragraph_index") if isinstance(issue, dict) else None
+            if type(index) is not int or not 0 <= index < len(paragraphs):
+                raise PromptContractError("Invalid consistency issue index")
+        return result["issues"]
 
     def _build_translation_prompt(self, text: str, context: Dict[str, Any]) -> str:
-        """Build the paragraph translation prompt via the shared prompt builder."""
-        from ..prompts.prompt_builder import get_prompt_builder
+        from ..prompts.task_builders import paragraph_prompt
+        return paragraph_prompt(text, context)
 
-        prompt_style = self._resolve_translation_prompt_style()
-        builder = get_prompt_builder(style=prompt_style)
-
-        # Extract runtime context for the paragraph prompt builder.
-        glossary = context.get("glossary", [])
-        previous_paragraphs = context.get("previous_paragraphs", [])
-        next_preview = context.get("next_preview", [])
-        article_title = context.get("article_title")
-        article_theme = context.get("article_theme")
-        article_structure = context.get("article_structure")
-        current_section_title = context.get("current_section_title")
-        heading_chain = context.get("heading_chain")
-        target_audience = context.get("target_audience")
-        translation_voice = context.get("translation_voice")
-        article_challenges = context.get("article_challenges")
-        style_guide = context.get("style_guide")
-        section_context = context.get("section_context")
-        learned_rules = context.get("learned_rules")
-        instruction = context.get("instruction")
-        previous_translation = context.get("previous_translation")
-        format_tokens = context.get("format_tokens", [])
-        term_usage = context.get("term_usage")
-
-        # Delegate prompt assembly to the long-form prompt builder.
-        prompt = builder.build_prompt(
-            source_text=text,
-            glossary=glossary,
-            previous_paragraphs=previous_paragraphs,
-            next_preview=next_preview,
-            article_title=article_title,
-            article_theme=article_theme,
-            article_structure=article_structure,
-            current_section_title=current_section_title,
-            heading_chain=heading_chain,
-            target_audience=target_audience,
-            translation_voice=translation_voice,
-            article_challenges=article_challenges,
-            style_guide=style_guide,
-            section_context=section_context,
-            learned_rules=learned_rules,
-            instruction=instruction,
-            previous_translation=previous_translation,
-            format_tokens=format_tokens,
-            term_usage=term_usage,
-        )
-
-        return prompt
-
-    def _build_retranslation_prompt(
-        self,
-        source_text: str,
-        current_translation: str,
-        context: Dict[str, Any],
-    ) -> str:
-        """Build the paragraph retranslation prompt via the shared prompt builder."""
-        from ..prompts.prompt_builder import get_prompt_builder
-
-        builder = get_prompt_builder(style=self._resolve_translation_prompt_style())
-        return builder.build_retranslation_prompt(
-            source_text=source_text,
-            current_translation=current_translation,
-            glossary=context.get("glossary", []),
-            previous_paragraphs=context.get("previous_paragraphs", []),
-            next_preview=context.get("next_preview", []),
-            article_title=context.get("article_title"),
-            article_theme=context.get("article_theme"),
-            article_structure=context.get("article_structure"),
-            current_section_title=context.get("current_section_title"),
-            heading_chain=context.get("heading_chain"),
-            target_audience=context.get("target_audience"),
-            translation_voice=context.get("translation_voice"),
-            article_challenges=context.get("article_challenges"),
-            style_guide=context.get("style_guide"),
-            section_context=context.get("section_context"),
-            learned_rules=context.get("learned_rules"),
-            instruction=context.get("instruction"),
-            format_tokens=context.get("format_tokens", []),
-            term_usage=context.get("term_usage"),
-        )
+    def _build_retranslation_prompt(self, source_text: str, current_translation: str, context: Dict[str, Any]) -> str:
+        from ..prompts.task_builders import paragraph_prompt
+        return paragraph_prompt(source_text, context, current=current_translation)
 
     def _resolve_translation_prompt_style(self) -> str:
         style = settings.translation_prompt_style.strip().lower()
@@ -1538,82 +1204,23 @@ class GeminiProvider(LLMProvider):
             return "original"
         return style
 
-    def _build_analysis_prompt(self, text: str) -> str:
-        """Build the analysis prompt."""
-        return self.prompt_manager.get("analysis", text=text[:8000])
+    def _build_analysis_prompt(self, text):
+        from ..prompts.task_builders import analysis_prompt
+        return analysis_prompt(text)
 
-    def _build_consistency_prompt(
-        self, paragraphs: List[Dict[str, str]], glossary: Dict[str, str]
-    ) -> str:
-        """Build the consistency review prompt."""
-        para_text = "\n\n".join(
-            [
-                f"[段落 {i+1}]\n原文：{p['source']}\n译文：{p['translation']}"
-                for i, p in enumerate(paragraphs[:20])
-            ]
-        )
+    def _build_consistency_prompt(self, paragraphs, glossary):
+        from ..prompts.task_builders import consistency_prompt
+        return consistency_prompt(paragraphs, glossary)
 
-        # Handle both list and dict formats
-        if isinstance(glossary, list):
-            glossary_text = "\n".join([
-                f"- {term.get('original', '')} -> {term.get('translation', '')}"
-                for term in glossary if isinstance(term, dict)
-            ])
-        elif isinstance(glossary, dict):
-            glossary_text = "\n".join([f"- {term} -> {trans}" for term, trans in glossary.items()])
-        else:
-            glossary_text = "无"
+    def _build_source_metadata_batch_prompt(self, entries: List[Dict[str, str]], context: Dict[str, Any]) -> str:
+        from ..prompts.task_builders import source_metadata_prompt
+        return source_metadata_prompt(entries, context)
 
-        return self.prompt_manager.get(
-            "consistency", para_text=para_text, glossary_text=glossary_text
-        )
-
-    def _build_source_metadata_batch_prompt(
-        self,
-        entries: List[Dict[str, str]],
-        context: Dict[str, Any],
-    ) -> str:
-        """Build the dedicated batch prompt for source/citation metadata."""
-        glossary_block = str(context.get("glossary_block", "")).strip() or "(无命中术语)"
-        entries_json = json.dumps(entries, ensure_ascii=False, indent=2)
-        return self.prompt_manager.get(
-            "longform/metadata/source_batch_translate",
-            glossary_block=glossary_block,
-            entry_count=len(entries),
-            entries_json=entries_json,
-        )
-
-    def translate_section(
-        self,
-        section_text: str,
-        section_title: str,
-        context: Dict[str, Any],
-        paragraph_ids: List[str],
-    ) -> List[Dict[str, str]]:
-        """Translate one full section in batch mode and return paragraph-aligned results."""
-        prompt = self._build_batch_translation_prompt(
-            section_text, section_title, context, paragraph_ids
-        )
-
-        try:
-            response = self.generate(prompt, response_format="json", temperature=0.3)
-            result = self._parse_json_response(response)
-        except Exception as exc:
-            logger.error("[Gemini] Batch translation failed: %s", exc)
-            raise
-
-        if isinstance(result, dict) and "translations" in result:
-            raw = result["translations"]
-        elif isinstance(result, list):
-            raw = result
-        else:
-            raise ValueError(
-                "Batch translation response does not satisfy the JSON contract."
-            )
-
-        return self._coerce_translation_items(
-            raw, expected_count=len(paragraph_ids), label="section batch"
-        )
+    def translate_section(self, section_text: str, section_title: str, context: Dict[str, Any],
+                          paragraph_ids: List[str]) -> List[Dict[str, str]]:
+        from ..prompts.contracts import parse_json, translation_items
+        prompt = self._build_batch_translation_prompt(section_text, section_title, context, paragraph_ids)
+        return translation_items(parse_json(self.generate(prompt, response_format="json", temperature=0.3)), paragraph_ids)
 
     @staticmethod
     def _coerce_translation_items(
@@ -1647,292 +1254,34 @@ class GeminiProvider(LLMProvider):
             )
         return cleaned
 
-    def translate_source_metadata_batch(
-        self,
-        entries: List[Dict[str, str]],
-        context: Optional[Dict[str, Any]] = None,
-    ) -> List[Dict[str, str]]:
-        """Translate source/citation metadata entries in one JSON batch."""
+    def translate_source_metadata_batch(self, entries: List[Dict[str, str]], context: Optional[Dict[str, Any]] = None) -> List[Dict[str, str]]:
+        from ..prompts.contracts import parse_json, translation_items
         prompt = self._build_source_metadata_batch_prompt(entries, context or {})
+        return translation_items(parse_json(self.generate(prompt, response_format="json", temperature=0.2)), [e["id"] for e in entries])
 
-        try:
-            response = self.generate(prompt, response_format="json", temperature=0.2)
-            result = self._parse_json_response(response)
-        except Exception as exc:
-            logger.error("[Gemini] Source metadata batch translation failed: %s", exc)
-            raise
+    def translate_title(self, title: str, context: Optional[Dict[str, Any]] = None,
+                        subtitle: Optional[str] = None) -> Dict[str, str]:
+        from ..prompts.task_builders import title_prompt
+        from ..prompts.contracts import parse_title_lines
+        return parse_title_lines(self.generate(title_prompt(title, subtitle, context or {}), temperature=0.3))
 
-        if isinstance(result, dict) and "translations" in result:
-            return result["translations"]
-        if isinstance(result, list):
-            return result
+    def translate_section_title(self, title: str, context: Optional[Dict[str, Any]] = None,
+                                *, glossary_block: str = "", whitelist_rules: str = "") -> str:
+        from ..prompts.task_builders import section_title_prompt
+        from ..prompts.contracts import PromptContractError
+        result = self.generate(section_title_prompt(title, context or {}, glossary_block, whitelist_rules), temperature=0.3)
+        if not isinstance(result, str) or not result.strip():
+            raise PromptContractError("Empty section title")
+        return result.strip()
 
-        raise ValueError(
-            "Source metadata translation response does not satisfy the JSON contract."
-        )
+    def translate_all_section_titles(self, sections: List[Dict[str, Any]], *, article_theme: str = "",
+                                     glossary_block: str = "", whitelist_rules: str = "") -> Dict[str, str]:
+        return super().translate_all_section_titles(sections, article_theme, glossary_block=glossary_block, whitelist_rules=whitelist_rules)
 
-    def translate_title(
-        self,
-        title: str,
-        context: Optional[Dict[str, Any]] = None,
-        subtitle: Optional[str] = None,
-    ) -> Dict[str, str]:
-        """Translate article title and optional subtitle in one call.
-
-        Returns:
-            dict with keys "title" and optionally "subtitle".
-        """
-        context_lines: List[str] = []
-        if context:
-            if context.get("article_theme"):
-                context_lines.append(f"- Article theme: {context['article_theme']}")
-            if context.get("structure_summary"):
-                context_lines.append(
-                    f"- Structure summary: {context['structure_summary']}"
-                )
-            if context.get("target_audience"):
-                context_lines.append(f"- Target audience: {context['target_audience']}")
-
-        prompt = self.prompt_manager.get(
-            "longform/auxiliary/title_translate",
-            context_block="\n".join(context_lines) if context_lines else "- None",
-            glossary_block=(context or {}).get("glossary_block", "(无命中术语)"),
-            preservation_block=(
-                (context or {}).get("preservation_block", "- 无额外保留项")
-            ),
-            title=title,
-            subtitle=subtitle or "(无)",
-        )
-        raw = self.generate(prompt, temperature=0.3)
-
-        result: Dict[str, str] = {}
-        for line in raw.strip().splitlines():
-            line = line.strip()
-            if line.startswith("标题:") or line.startswith("标题："):
-                result["title"] = line.split(":", 1)[-1].split("：", 1)[-1].strip()
-            elif line.startswith("副标题:") or line.startswith("副标题："):
-                val = line.split(":", 1)[-1].split("：", 1)[-1].strip()
-                if val:
-                    result["subtitle"] = val
-
-        if not result.get("title"):
-            result["title"] = raw.strip().splitlines()[0].strip()
-
-        return result
-
-    def translate_section_title(
-        self,
-        title: str,
-        context: Optional[Dict[str, Any]] = None,
-        *,
-        glossary_block: str = "",
-        whitelist_rules: str = "",
-    ) -> str:
-        """Translate a section title with section-aware context.
-
-        ``glossary_block`` / ``whitelist_rules`` 为可选约束段（术语表块与「永不翻译」
-        白名单铁律），缺省为空串时行为与此前一致。也兼容通过 ``context`` 字典传入
-        （键名 ``glossary`` / ``glossary_block`` / ``whitelist_rules``）。
-        """
-        if context:
-            glossary_block = glossary_block or str(
-                context.get("glossary") or context.get("glossary_block") or ""
-            )
-            whitelist_rules = whitelist_rules or str(
-                context.get("whitelist_rules") or ""
-            )
-
-        context_lines: List[str] = []
-        if context:
-            if context.get("article_theme"):
-                context_lines.append(f"- Article theme: {context['article_theme']}")
-            if context.get("context"):
-                context_lines.append(f"- Context: {context['context']}")
-            if context.get("previous_section_title"):
-                context_lines.append(
-                    f"- Previous section: {context['previous_section_title']}"
-                )
-            if context.get("next_section_title"):
-                context_lines.append(f"- Next section: {context['next_section_title']}")
-
-        # 模板可能尚未加上 {glossary}/{whitelist_rules} 占位符：str.format 会忽略多余
-        # 关键字，故这里恒传两项，不会因模板未同步而报错。
-        prompt = self.prompt_manager.get(
-            "longform/auxiliary/section_title_translate",
-            context_block="\n".join(context_lines) if context_lines else "- None",
-            title=title,
-            glossary=glossary_block.strip() or "（无）",
-            whitelist_rules=whitelist_rules.strip(),
-        )
-        return self.generate(prompt, temperature=0.3)
-
-    def translate_all_section_titles(
-        self,
-        sections: List[Dict[str, Any]],
-        *,
-        article_theme: str = "",
-        glossary_block: str = "",
-        whitelist_rules: str = "",
-    ) -> Dict[str, str]:
-        """Translate all section titles in a single JSON API call.
-
-        Builds one prompt listing all section titles and their neighbours,
-        requests a JSON response ``{"translations": {"<id>": "<中文标题>"}}``,
-        and returns the mapping.  If parsing fails or a section is missing,
-        callers should fall back to ``translate_section_title`` per-entry.
-
-        ``glossary_block``（术语表块）与 ``whitelist_rules``（「永不翻译」白名单铁律）
-        为可选约束段：此前标题链路完全绕过词表与白名单，导致标题与正文两套术语，
-        且一个「吉瓦/词元」就能让整篇导出被 QA 阻断（审计 LC2）。缺省空串时提示词
-        与改动前完全一致。
-        """
-        if not sections:
-            return {}
-
-        chapter_lines: List[str] = []
-        for i, sec in enumerate(sections, 1):
-            sec_id = sec.get("id", f"s{i:02d}")
-            title = sec.get("title", "")
-            prev_t = sec.get("prev", "")
-            next_t = sec.get("next", "")
-            parts = [f'{i}. id={sec_id}, title="{title}"']
-            if prev_t:
-                parts.append(f'prev="{prev_t}"')
-            if next_t:
-                parts.append(f'next="{next_t}"')
-            chapter_lines.append(", ".join(parts))
-
-        theme_line = f"文章主题：{article_theme}" if article_theme else ""
-        # filter(None, ...) 会吃掉纯空串分隔项，故各约束段自带前后换行保证留白
-        whitelist_section = (
-            "\n" + whitelist_rules.strip() + "\n" if whitelist_rules.strip() else ""
-        )
-        glossary_section = (
-            "\n## 术语表\n" + glossary_block.strip() + "\n"
-            if glossary_block.strip()
-            else ""
-        )
-        prompt = "\n".join(
-            filter(
-                None,
-                [
-                    "你是一位资深中英双语编辑，尤其擅长硬核科技长文领域。"
-                    "请将下面所有章节标题翻译为简洁、自然、契合文章上下文的中文。",
-                    "",
-                    whitelist_section,
-                    theme_line,
-                    "",
-                    glossary_section,
-                    "## 章节列表（id, 原标题, 前后章节供参考）",
-                    "\n".join(chapter_lines),
-                    "",
-                    "## 输出规则",
-                    '以 JSON 返回，格式：{"translations": {"<id>": "<中文标题>", ...}}',
-                    "只输出 JSON，不要解释，不要额外文字。",
-                ],
-            )
-        )
-
-        try:
-            raw = self.generate(prompt, response_format="json", temperature=0.3)
-            result = self._parse_json_response(raw)
-            translations = result.get("translations", {})
-            if isinstance(translations, dict):
-                logger.info(
-                    "[Gemini] Batch section title translation: %d/%d titles returned",
-                    len(translations),
-                    len(sections),
-                )
-                return {str(k): str(v) for k, v in translations.items()}
-        except Exception as exc:
-            logger.warning(
-                "[Gemini] Batch section title translation failed, will use per-title fallback: %s",
-                exc,
-            )
-
-        # Fallback: 逐条翻译。这里不走 super()，因为基类构造的 context 无法带上词表与
-        # 白名单铁律，兜底路径会重新退化成零约束翻译（审计 LC2）。
-        results: Dict[str, str] = {}
-        for sec in sections:
-            sec_id = sec.get("id", "")
-            title = sec.get("title", "")
-            if not title:
-                continue
-            context = {
-                "article_theme": article_theme,
-                "context": "Section heading inside a long-form article",
-                "previous_section_title": sec.get("prev", ""),
-                "next_section_title": sec.get("next", ""),
-            }
-            try:
-                results[sec_id] = self.translate_section_title(
-                    title,
-                    context=context,
-                    glossary_block=glossary_block,
-                    whitelist_rules=whitelist_rules,
-                )
-            except Exception:
-                results[sec_id] = title  # keep original on failure
-        return results
-
-    def _build_batch_translation_prompt(
-        self,
-        section_text: str,
-        section_title: str,
-        context: Dict[str, Any],
-        paragraph_ids: List[str],
-    ) -> str:
-        """Build the batch translation prompt."""
-        format_token_rules = self._format_token_rules_for_prompt(
-            context.get("format_tokens", []),
-            context.get("format_token_count", 0),
-        )
-        enhanced_guidelines = build_section_guideline_lines(
-            context.get("guidelines", []),
-            section_role=context.get("section_role", ""),
-            translation_voice=context.get("translation_voice", ""),
-            target_audience=context.get("target_audience", ""),
-            translation_notes=context.get("translation_notes"),
-            format_token_rules=format_token_rules,
-        )
-
-        # Build previous translations context
-        prev_trans = context.get("previous_translations", [])
-        if prev_trans:
-            prev_lines = []
-            for pair in prev_trans[-5:]:
-                src_preview = pair.get("source", "")[:80]
-                trans_preview = pair.get("translation", "")[:80]
-                prev_lines.append(f"- EN: {src_preview}…\n  ZH: {trans_preview}…")
-            previous_translations_block = "\n".join(prev_lines)
-        else:
-            previous_translations_block = "无"
-
-        # 优化点7: 注入前序章节的反馈
-        feedback_block = context.get("feedback_from_previous_sections", "")
-
-        return self.prompt_manager.get(
-            "longform/translation/section_batch_translate",
-            section_title=section_title,
-            section_text=section_text,
-            paragraph_ids=json.dumps(paragraph_ids),
-            article_theme=context.get("article_theme", ""),
-            section_position=context.get("section_position", ""),
-            previous_section=context.get("previous_section_title", ""),
-            next_section=context.get("next_section_title", ""),
-            target_audience=context.get("target_audience", ""),
-            translation_voice=context.get("translation_voice", ""),
-            article_challenges=self._format_challenges_for_prompt(
-                context.get("article_challenges", [])
-            ),
-            glossary=self._format_glossary_for_prompt(
-                context.get("glossary", []),
-                term_usage=context.get("term_usage"),
-            ),
-            guidelines="\n".join(enhanced_guidelines),
-            previous_translations=previous_translations_block,
-            feedback_from_previous_sections=feedback_block or "无",
-        )
+    def _build_batch_translation_prompt(self, section_text: str, section_title: str,
+                                      context: Dict[str, Any], paragraph_ids: List[str]) -> str:
+        from ..prompts.task_builders import section_prompt
+        return section_prompt(section_text, section_title, context, paragraph_ids)
 
     def _format_glossary_for_prompt(
         self,

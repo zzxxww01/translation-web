@@ -6,6 +6,10 @@ change detection, and resume capabilities.
 
 from datetime import datetime, timezone
 from pathlib import Path
+import logging
+import re
+import portalocker
+from src.core.file_utils import write_text_atomic
 from typing import Dict, List, Optional, Tuple
 
 from src.models.session import SessionStatus, TermChange, TranslationSession
@@ -50,192 +54,88 @@ class TranslationSessionService:
         )
 
         if create_snapshot:
-            term_ids = self._get_active_term_ids(project_id)
-            session.create_snapshot(term_ids)
+            terms = self._get_active_terms(project_id)
+            session.create_snapshot(list(terms), terms)
 
         self._save_session(session)
         return session
 
     def start_session(self, session_id: str) -> TranslationSession:
-        """Start a translation session.
-
-        Args:
-            session_id: Session identifier
-
-        Returns:
-            Updated session
-        """
-        session = self.load_session(session_id)
-        session.update_status(SessionStatus.IN_PROGRESS)
-        self._save_session(session)
-        return session
+        return self._mutate_session(session_id, lambda session: session.update_status(SessionStatus.IN_PROGRESS))
 
     def pause_session(self, session_id: str) -> TranslationSession:
-        """Pause a translation session.
-
-        Args:
-            session_id: Session identifier
-
-        Returns:
-            Updated session
-        """
-        session = self.load_session(session_id)
-        session.update_status(SessionStatus.PAUSED)
-        self._save_session(session)
-        return session
+        return self._mutate_session(session_id, lambda session: session.update_status(SessionStatus.PAUSED))
 
     def complete_session(self, session_id: str, result: Optional[str] = None) -> TranslationSession:
-        """Mark a session as completed.
-
-        Args:
-            session_id: Session identifier
-            result: Optional translated-text preview to persist on the session
-
-        Returns:
-            Updated session
-        """
-        session = self.load_session(session_id)
-        session.update_status(SessionStatus.COMPLETED)
-        if result is not None:
-            session.progress["result_preview"] = result[:500]
-        self._save_session(session)
-        return session
+        def complete(session):
+            session.update_status(SessionStatus.COMPLETED)
+            if result is not None:
+                session.progress["result_preview"] = result[:500]
+        return self._mutate_session(session_id, complete)
 
     def fail_session(self, session_id: str, error: Optional[str] = None) -> TranslationSession:
-        """Mark a session as failed.
-
-        Args:
-            session_id: Session identifier
-            error: Optional error message to persist on the session
-
-        Returns:
-            Updated session
-        """
-        session = self.load_session(session_id)
-        session.update_status(SessionStatus.FAILED)
-        if error is not None:
-            session.progress["error"] = str(error)
-        self._save_session(session)
-        return session
+        def fail(session):
+            session.update_status(SessionStatus.FAILED)
+            if error is not None:
+                session.progress["error"] = str(error)
+        return self._mutate_session(session_id, fail)
 
     def get_session_terms(self, session: TranslationSession) -> List[Term]:
-        """Resolve a session's snapshot term_ids into Term objects (for validation).
+        """New sessions validate against saved definitions, not today's glossary."""
+        if session.snapshot_terms is not None:
+            if set(session.snapshot_terms) != set(session.term_ids):
+                raise ValueError("Session snapshot identities are inconsistent")
+            return [session.snapshot_terms[key].model_copy(deep=True) for key in session.term_ids]
+        # Legacy records did not store definitions. Preserve read compatibility,
+        # but do not pretend a current lookup is a historical content snapshot.
+        logging.getLogger(__name__).warning("Session %s has an ID-only legacy terminology snapshot", session.id)
+        current = self._get_active_terms(session.project_id)
+        return [current[key].model_copy(deep=True) for key in session.term_ids if key in current]
 
-        TranslationSession stores only term ids in its snapshot; callers that need
-        the actual Term objects (e.g. terminology validation) use this helper.
-        """
-        terms: List[Term] = []
-        for term_id in session.term_ids:
-            term = self._load_term_by_id(term_id, session.project_id)
-            if term:
-                terms.append(term)
-        return terms
-
-    def detect_term_changes(
-        self,
-        session_id: str
-    ) -> Tuple[List[TermChange], bool]:
-        """Detect terminology changes since session snapshot.
-
-        Args:
-            session_id: Session identifier
-
-        Returns:
-            Tuple of (list of changes, has_changes flag)
-        """
+    def detect_term_changes(self, session_id: str) -> Tuple[List[TermChange], bool]:
         session = self.load_session(session_id)
-
         if not session.snapshot_version:
             return [], False
-
-        # Get current active terms
-        current_term_ids = self._get_active_term_ids(session.project_id)
-        snapshot_term_ids = set(session.term_ids)
-        current_term_ids_set = set(current_term_ids)
-
+        current = self._get_active_terms(session.project_id)
+        previous_ids = set(session.term_ids)
         changes = []
-
-        # Detect added terms
-        for term_id in current_term_ids_set - snapshot_term_ids:
-            term = self._load_term_by_id(term_id, session.project_id)
-            if term:
-                changes.append(TermChange(
-                    term_id=term_id,
-                    change_type="added",
-                    new_value={"original": term.original, "translation": term.translation}
-                ))
-
-        # Detect deleted terms
-        for term_id in snapshot_term_ids - current_term_ids_set:
-            changes.append(TermChange(
-                term_id=term_id,
-                change_type="deleted"
-            ))
-
-        # Detect modified terms
-        for term_id in snapshot_term_ids & current_term_ids_set:
-            current_term = self._load_term_by_id(term_id, session.project_id)
-            if current_term:
-                # For simplicity, we consider any term in both sets as potentially modified
-                # A more sophisticated implementation would compare actual content
-                pass
-
-        return changes, len(changes) > 0
+        for key in sorted(set(current) - previous_ids):
+            changes.append(TermChange(term_id=key, change_type="added", new_value=current[key].model_dump(mode="json")))
+        for key in sorted(previous_ids - set(current)):
+            previous = (session.snapshot_terms or {}).get(key)
+            changes.append(TermChange(term_id=key, change_type="deleted", old_value=previous.model_dump(mode="json") if previous else None))
+        if session.snapshot_terms is not None:
+            for key in sorted(previous_ids & set(current)):
+                previous = session.snapshot_terms.get(key)
+                if previous is None:
+                    raise ValueError("Session snapshot is incomplete")
+                old, new = previous.model_dump(mode="json"), current[key].model_dump(mode="json")
+                if old != new:
+                    changes.append(TermChange(term_id=key, change_type="modified", old_value=old, new_value=new))
+        else:
+            logging.getLogger(__name__).warning("Legacy session %s cannot detect same-ID definition changes", session.id)
+        return changes, bool(changes)
 
     def refresh_snapshot(self, session_id: str) -> TranslationSession:
-        """Refresh the terminology snapshot for a session.
+        def refresh(session):
+            terms = self._get_active_terms(session.project_id)
+            session.create_snapshot(list(terms), terms)
+        return self._mutate_session(session_id, refresh)
 
-        Args:
-            session_id: Session identifier
-
-        Returns:
-            Updated session
-        """
-        session = self.load_session(session_id)
-        term_ids = self._get_active_term_ids(session.project_id)
-        session.create_snapshot(term_ids)
-        self._save_session(session)
-        return session
-
-    def update_progress(
-        self,
-        session_id: str,
-        progress_data: Dict
-    ) -> TranslationSession:
-        """Update session progress metadata.
-
-        Args:
-            session_id: Session identifier
-            progress_data: Progress information to merge
-
-        Returns:
-            Updated session
-        """
-        session = self.load_session(session_id)
-        session.progress.update(progress_data)
-        session.updated_at = datetime.now(timezone.utc)
-        self._save_session(session)
-        return session
+    def update_progress(self, session_id: str, progress_data: Dict) -> TranslationSession:
+        def update(session):
+            session.progress.update(progress_data)
+            session.updated_at = datetime.now(timezone.utc)
+        return self._mutate_session(session_id, update)
 
     def load_session(self, session_id: str) -> TranslationSession:
-        """Load a session from disk.
-
-        Args:
-            session_id: Session identifier
-
-        Returns:
-            TranslationSession instance
-
-        Raises:
-            FileNotFoundError: If session file doesn't exist
-        """
-        session_file = self.sessions_dir / f"{session_id}.json"
-        if not session_file.exists():
+        path = self._session_path(session_id)
+        if not path.exists():
             raise FileNotFoundError(f"Session {session_id} not found")
-
-        data = session_file.read_text(encoding='utf-8')
-        import json
-        return TranslationSession.model_validate_json(data)
+        session = TranslationSession.model_validate_json(path.read_text(encoding="utf-8"))
+        if session.id != session_id:
+            raise ValueError("Stored session identity does not match its file")
+        return session
 
     def list_sessions(
         self,
@@ -254,9 +154,7 @@ class TranslationSessionService:
         sessions = []
         for session_file in self.sessions_dir.glob("*.json"):
             try:
-                data = session_file.read_text(encoding='utf-8')
-                import json
-                session = TranslationSession.model_validate_json(data)
+                session = self.load_session(session_file.stem)
 
                 if project_id and session.project_id != project_id:
                     continue
@@ -267,39 +165,40 @@ class TranslationSessionService:
             except Exception:
                 continue
 
-        return sorted(sessions, key=lambda s: s.created_at, reverse=True)
+        return sorted(sessions, key=lambda s: s.created_at.timestamp(), reverse=True)
 
     def _save_session(self, session: TranslationSession) -> None:
-        """Save session to disk."""
-        session_file = self.sessions_dir / f"{session.id}.json"
-        session_file.write_text(session.model_dump_json(indent=2), encoding='utf-8')
+        write_text_atomic(self._session_path(session.id), session.model_dump_json(indent=2))
+
+    def _session_path(self, session_id: str) -> Path:
+        if not isinstance(session_id, str) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_.-]{0,127}", session_id):
+            raise ValueError("Invalid session ID")
+        root = self.sessions_dir.resolve()
+        path = root / f"{session_id}.json"
+        if path.is_symlink() or not path.resolve().is_relative_to(root):
+            raise ValueError("Session file is outside its storage root")
+        return path
+
+    def _mutate_session(self, session_id: str, mutate) -> TranslationSession:
+        path = self._session_path(session_id)
+        lock_path = path.with_suffix(".json.lock")
+        if lock_path.is_symlink():
+            raise ValueError("Invalid session lock")
+        # A lock around only the final write is not enough: the read must be
+        # protected too, including across independently created service objects.
+        with portalocker.Lock(str(lock_path), timeout=10):
+            session = self.load_session(session_id)
+            mutate(session)
+            self._save_session(session)
+            return session
+
+    def _get_active_terms(self, project_id: str) -> Dict[str, Term]:
+        terms = [*self.storage.load_terms(scope="global"),
+                 *self.storage.load_terms(scope="project", project_id=project_id)]
+        return {term.id: term.model_copy(deep=True) for term in terms if term.is_active()}
 
     def _get_active_term_ids(self, project_id: str) -> List[str]:
-        """Get all active term IDs for a project (global + project terms)."""
-        term_ids = []
-
-        # Load global terms
-        global_terms = self.storage.load_terms(scope="global")
-        term_ids.extend([t.id for t in global_terms if t.is_active()])
-
-        # Load project terms
-        project_terms = self.storage.load_terms(scope="project", project_id=project_id)
-        term_ids.extend([t.id for t in project_terms if t.is_active()])
-
-        return term_ids
+        return list(self._get_active_terms(project_id))
 
     def _load_term_by_id(self, term_id: str, project_id: str) -> Optional[Term]:
-        """Load a term by ID from global or project scope."""
-        # Try global first
-        global_terms = self.storage.load_terms(scope="global")
-        for term in global_terms:
-            if term.id == term_id:
-                return term
-
-        # Try project
-        project_terms = self.storage.load_terms(scope="project", project_id=project_id)
-        for term in project_terms:
-            if term.id == term_id:
-                return term
-
-        return None
+        return self._get_active_terms(project_id).get(term_id)

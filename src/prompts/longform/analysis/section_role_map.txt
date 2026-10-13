@@ -1,68 +1,13 @@
-You are a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Map each section to its role in the article's overall argument.
+[[include:shared/fidelity]]
 
-## Article Theme
+## 任务：章节角色图
+仅对给定 section id 解释其在全文论证中的作用。没有原文支持的关系标为未知，不必强行判断为因果或递进。
+输入是采样摘要而非全章：只能为明确提供 paragraph_index/id 和原句的段落分析 paragraph_structure；没有完整段落证据时返回空数组。不要生成缺失段落的角色。
+## 主题
 {article_theme}
-
-## Structure Summary
+## 结构摘要
 {structure_summary}
-
-## Section Summaries
+## 章节采样（可能不完整）
 {sections_summary}
-
-## Task
-For every section, explain:
-- what job it does in the article,
-- how it connects to the previous section,
-- how it sets up the next section,
-- which points a translator must not weaken,
-- and which translation risks are specific to that section.
-
-Additionally, for each section, analyze the paragraph-level structure:
-- **Paragraph roles**: Identify the role of each paragraph (引入论点/展开论证/举例说明/对比分析/总结收束/过渡段落)
-- **Key transitions**: Mark important transition words or phrases (However/Therefore/Moreover/In contrast/As a result)
-- **Paragraph relations**: Describe how paragraphs connect (并列/递进/转折/因果/总分)
-
-This paragraph-level analysis helps translators maintain logical flow and choose appropriate Chinese connectors.
-
-## Output Contract
-Return JSON only:
-{{
-  "section_roles": {{
-    "section_id": {{
-      "role_in_article": "string",
-      "relation_to_previous": "string",
-      "relation_to_next": "string",
-      "key_points": ["string"],
-      "translation_notes": ["string"],
-      "paragraph_structure": [
-        {{
-          "paragraph_index": 0,
-          "role": "引入论点|展开论证|举例说明|对比分析|总结收束|过渡段落",
-          "key_transitions": ["However", "Therefore"],
-          "relation_to_next": "并列|递进|转折|因果|总分"
-        }}
-      ]
-    }}
-  }}
-}}
-
-## Paragraph Role Definitions
-- **引入论点**: Introduces a new argument or claim
-- **展开论证**: Develops and elaborates on an argument
-- **举例说明**: Provides examples or evidence
-- **对比分析**: Compares or contrasts different approaches/ideas
-- **总结收束**: Summarizes or concludes a section
-- **过渡段落**: Transitions between topics or sections
-
-## Paragraph Relation Types
-- **并列**: Parallel points at the same level
-- **递进**: Progressive development (building on previous point)
-- **转折**: Contrast or opposition
-- **因果**: Cause-and-effect relationship
-- **总分**: Summary-to-detail or detail-to-summary
-
-## Rules
-- Cover every section id that appears in the summaries.
-- Keep `key_points` focused on the section's argument payload, not generic topic labels.
-- Keep `translation_notes` operational: terminology, tone preservation, annotation strategy, or likely translationese risks.
-- Do not wrap the JSON in Markdown.
+仅返回 JSON：{{"section_roles":{{"输入的 section_id":{{"role_in_article":"依据样本的作用","relation_to_previous":"有依据的关系或未知","relation_to_next":"有依据的关系或未知","key_points":[],"translation_notes":[],"paragraph_structure":[]}}}}}}。
+覆盖输入出现的每个 section id，不添加新 id。段落结构项含 paragraph_index、role、key_transitions、relation_to_next，不能凭摘要复原全文。

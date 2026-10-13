@@ -1,82 +1,12 @@
-You are a senior bilingual (English-Chinese) editor specializing in hardcore technology long-form content. Build the shared article-level translation context for a long-form translation run.
+[[include:shared/fidelity]]
 
-## Article Outline
+分析提供的采样与大纲。采样不是全文，不能为未见段落补造论点、逐段结构或词频。总结应标明仅据样本；角色推断与原文事实分开。不因固定配额提取无关词。
+识别主题、论证线索、中文读者、作者语域和真正可能误译的表达；跨领域词按本处原句判义，不将整篇限定为单一领域。不展开无法确认的缩写。
+术语 strategy 只有四个值：preserve（原文不注释）、preserve_annotate（首现英文加中文说明）、first_annotate（首现中文加英文，后续中文）、translate（直接中文）；代码、型号和无可靠中文名的专名优先 preserve。每项给出原文证据，不以置信分数代替证据。
+## 采样
+{text}
+## 大纲
 {sections_outline}
 
-## Sampled Source
-{text}
-
-## Task
-Analyze the article and return structured context for downstream translation, critique, and revision.
-
-1. Identify the single-sentence core theme.
-2. Summarize the main argument flow in 3-6 key arguments.
-3. Explain the article structure in a way that helps translators keep the logic intact.
-4. Extract only the terminology that truly matters for consistency, reader comprehension, or analyst tone. Do not dump generic words. For each term, provide:
-   - **translation**: The recommended Chinese translation (or null if should stay in English)
-   - **alternatives**: Other acceptable translations that could be used in different contexts (optional)
-   - **avoid**: Common mistranslations or inappropriate translations to avoid (optional)
-   - **frequency_estimate**: How often this term appears (high/medium/low) to help prioritize consistency checks
-5. Describe the source style and the Chinese voice that should preserve it.
-6. List the main translation risks that could cause mistranslation, diluted judgment, or unreadable Chinese.
-7. Produce 4-7 translation guidelines that the rest of the chain can directly follow. At least one guideline should address sentence restructuring and Chinese-native paragraph flow.
-8. Flag domain-specific terms that are commonly mistranslated, and include them in the terminology list with correct translations and rationale. **First identify which domains this article actually covers, then apply the matching checklist** — do not hunt for terms from domains the article never touches.
-   - Cross-domain traps that apply everywhere: kernel vs operator, latent variable vs latent, floorplan vs layout, capacity (产能/容量/算力), yield (良率/收益率), memory (显存/内存/存储), node (节点/制程节点), alignment (对齐/对准/套刻), breakdown (拆解/击穿/明细).
-   - GPU / CUDA / microarchitecture: architecture codenames (e.g. SM100, SM90) — annotate with the architecture name; microarchitecture units (TPC, GPC, SM, MIO, MSHR); framework abstractions (CuTe, CUTLASS atom, Epilogue); SASS mnemonics; profiling tools (NCU, Nsight Systems).
-   - Optical interconnect / networking: CPO, SerDes, retimer, PAM4, OSFP, AEC, silicon photonics, NVLink, InfiniBand, RoCE, OCS, link budget.
-   - Advanced packaging: CoWoS variants, SoIC, hybrid bonding, TSV, RDL, EMIB, Foveros, UCIe, OSAT, backside power delivery.
-   - Lithography & equipment: High-NA, pellicle, reticle, overlay, GAA, nanosheet, FinFET, WFE, multi-patterning, metrology.
-   - Memory: HBM generations, DDR/LPDDR generations, 3D NAND layer count, TLC/QLC, CXL, ASP, bit growth.
-   - Datacenter power & cooling: busbar, switchgear, UPS, BBU, genset, BESS, PUE, cold plate, CDU, PPA, interconnection queue, capacity auction and market operators (PJM, ERCOT and their mechanism acronyms such as BRA/VRR/ELCC).
-   - Finance & earnings: guidance, RPO, book-to-bill, DSO, EBITDA, FCF, GAAP vs non-GAAP, SBC, CAGR, basis points.
-   - Inference economics: MoE, KV cache, TTFT, TPOT, FP8/FP4, speculative decoding, tensor/pipeline/expert parallelism.
-   Terms that are opaque to Chinese readers should have `first_occurrence_note: true`. Stay selective — prefer terms whose mistranslation would change the meaning over terms the model would get right anyway.
-9. Identify metaphors, analogies, and cultural references that may be opaque to Chinese readers. For each, note the reference, its cultural context, and whether a translator note is needed or a Chinese cultural equivalent can substitute.
-10. Identify the article's domain mix (e.g., GPU + finance + cloud computing). For cross-domain articles, list terminology that has different translations in different domains, and specify which domain convention to follow in this article's context. Common cross-domain pitfalls: utilization rate (cloud) vs 出租率 (real estate); capacity — 产能 (fab/packaging) vs 容量 (power, datacenter, memory device, network link) vs 算力 (only when it means compute); financial modeling (investment) vs 财务建模 (corporate); token (AI) vs 代币 (blockchain).
-11. Identify passages with strong rhetorical tone (sarcasm, emphasis, dramatic effect, irony) and note the intended emotional register so translators can match intensity rather than flatten it to academic prose.
-
-## Output Contract
-Return JSON only, do not wrap in Markdown:
-{{
-  "theme": "string",
-  "key_arguments": ["string"],
-  "structure_summary": "string",
-  "terminology": [
-    {{
-      "term": "string",
-      "context_meaning": "string",
-      "translation": "string or null",
-      "alternatives": ["string"],
-      "avoid": ["string"],
-      "strategy": "preserve|first_annotate|translate",
-      "first_occurrence_note": true,
-      "rationale": "string",
-      "frequency_estimate": "high|medium|low"
-    }}
-  ],
-  "style": {{
-    "tone": "string",
-    "target_audience": "string",
-    "translation_voice": "string"
-  }},
-  "challenges": [
-    {{
-      "type": "terminology|metaphor|cultural_reference|cross_domain_term|rhetorical_tone|structure|accuracy",
-      "location": "string",
-      "issue": "string",
-      "suggestion": "string"
-    }}
-  ],
-  "guidelines": ["string"]
-}}
-
-## Rules
-- Keep terminology selective. Do not dump generic words.
-- Use `translation: null` only when the term should stay in English.
-- `alternatives`: List other acceptable translations that might be used in different contexts or by different translators. This helps reviewers understand the translation choice. Example: "edge case" → translation: "边缘情况", alternatives: ["边界情况", "特殊情况"]
-- `avoid`: List common mistranslations or inappropriate translations that should be avoided. Example: "edge case" → avoid: ["边缘案例", "边缘用例"]
-- `frequency_estimate`: Estimate how often this term appears in the article (high: 10+ times, medium: 3-9 times, low: 1-2 times). This helps prioritize consistency checks.
-- `first_occurrence_note` should be true only when a short first-mention annotation materially helps Chinese readers.
-- `guidelines` must be concrete enough to drive translation, critique, and revision.
-- The article title translation must preserve all semantic components of the original title. Do not drop subject phrases (e.g., "Dissecting Nvidia Blackwell") even if the subtitle seems more keyword-rich.
-- Do not wrap the JSON in Markdown.
+只返回 JSON 对象，字段为 theme（一句话）、key_arguments（有证据的论点数组）、structure_summary、style（tone/target_audience/translation_voice）、terminology、challenges、guidelines。
+terminology 每项：term、context_meaning、translation（字符串或 null）、strategy、first_occurrence_note、rationale、source_quote，可附 alternatives、avoid。challenges 每项：type、location、issue、suggestion。guidelines 只给当前样本确实需要的可执行建议，不强制正式语气或所有缩写加注。

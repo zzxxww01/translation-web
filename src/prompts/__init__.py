@@ -1,14 +1,30 @@
-"""Prompt loading for exact template names."""
-
+"""Named prompt templates, explicit includes, strict rendering and run snapshots."""
 from __future__ import annotations
 
+from contextlib import contextmanager
+from contextvars import ContextVar
+import hashlib
+import json
+import logging
 from pathlib import Path
+import re
+from string import Formatter
 from typing import Dict, List, Optional
+
+logger = logging.getLogger(__name__)
+BUNDLE_VERSION = "chinese-quality-v2"
+_INCLUDE = re.compile(r"\[\[include:([A-Za-z0-9_/-]+)\]\]")
+_active_manager = ContextVar("translation_prompt_manager", default=None)
+_active_rules = ContextVar("translation_approved_rules", default=None)
+
+
+def active_rule_snapshot():
+    """None outside a run; an immutable tuple (possibly empty) inside one."""
+    return _active_rules.get()
 
 
 class PromptManager:
-    """Load prompt templates by their exact logical names."""
-
+    """Load exact template names. Source data is formatted only once."""
     def __init__(self, prompts_dir: Optional[str] = None):
         self.prompts_dir = Path(prompts_dir) if prompts_dir else Path(__file__).parent
         self._templates: Dict[str, str] = {}
@@ -17,70 +33,140 @@ class PromptManager:
     def _load_all_templates(self) -> None:
         if not self.prompts_dir.exists():
             raise FileNotFoundError(f"Prompts directory not found: {self.prompts_dir}")
-
-        for prompt_file in self.prompts_dir.rglob("*.txt"):
-            name = self._normalize_name(
-                prompt_file.relative_to(self.prompts_dir).as_posix()
-            )
-            try:
-                with open(prompt_file, "r", encoding="utf-8") as handle:
-                    self._templates[name] = handle.read()
-            except Exception as exc:
-                print(f"Warning: Failed to load prompt template '{name}': {exc}")
+        templates = {}
+        for path in self.prompts_dir.rglob("*.txt"):
+            name = self._normalize_name(path.relative_to(self.prompts_dir).as_posix())
+            templates[name] = path.read_text(encoding="utf-8-sig")
+        # A bad include must not poison the live registry during reload.
+        candidate = object.__new__(PromptManager)
+        candidate.prompts_dir = self.prompts_dir
+        candidate._templates = templates
+        for name in templates:
+            candidate._expanded(name)
+        self._templates = templates
 
     def _normalize_name(self, name: str) -> str:
         normalized = str(name).replace("\\", "/").strip()
         if normalized.startswith("./"):
             normalized = normalized[2:]
-        if normalized.endswith(".txt"):
-            normalized = normalized[:-4]
-        return normalized
+        return normalized[:-4] if normalized.endswith(".txt") else normalized
 
     def resolve_name(self, name: str) -> str:
         return self._normalize_name(name)
 
+    def _expanded(self, name: str, stack: tuple = ()) -> str:
+        name = self.resolve_name(name)
+        if name in stack:
+            raise ValueError("Prompt include cycle: " + " -> ".join((*stack, name)))
+        if name not in self._templates:
+            raise KeyError(f"Prompt template '{name}' not found")
+        return _INCLUDE.sub(lambda m: self._expanded(m[1], (*stack, name)), self._templates[name])
+
+    def variables(self, name: str) -> set[str]:
+        return {key for _, key, _, _ in Formatter().parse(self._expanded(name)) if key is not None}
+
     def get(self, name: str, **kwargs) -> str:
-        resolved = self.resolve_name(name)
-        if resolved not in self._templates:
-            available = ", ".join(sorted(self.list_templates()))
-            raise KeyError(
-                f"Prompt template '{name}' not found. Available templates: {available}"
-            )
-
-        template = self._templates[resolved]
+        active = _active_manager.get()
+        if active is not None and active is not self:
+            return active.get(name, **kwargs)
+        template = self._expanded(name)
         if not kwargs:
-            return template
-
+            return template  # compatibility: callers may inspect unrendered templates
         try:
-            return template.format(**kwargs)
+            rendered = template.format(**kwargs)
         except KeyError as exc:
-            missing_var = str(exc).strip("'")
-            raise ValueError(
-                f"Missing required variable '{missing_var}' for template '{name}'"
-            ) from exc
+            raise ValueError(f"Missing required variable {exc} for template '{name}'") from exc
+        logger.debug("prompt task=%s bundle=%s rendered_sha256=%s chars=%d",
+                     name, BUNDLE_VERSION, hashlib.sha256(rendered.encode()).hexdigest(), len(rendered))
+        return rendered
+
+    def render(self, name: str, **kwargs) -> str:
+        active = _active_manager.get()
+        if active is not None and active is not self:
+            return active.render(name, **kwargs)
+        fields = self.variables(name)
+        missing, unused = fields - kwargs.keys(), kwargs.keys() - fields
+        if missing or unused:
+            raise ValueError(f"Prompt '{name}': missing={sorted(missing)}, unused={sorted(unused)}")
+        return self.get(name, **kwargs)
 
     def reload(self) -> None:
-        self._templates.clear()
         self._load_all_templates()
 
     def list_templates(self) -> List[str]:
-        return sorted(self._templates.keys())
+        return sorted(self._templates)
 
     def has_template(self, name: str) -> bool:
         return self.resolve_name(name) in self._templates
 
+    def snapshot(self) -> dict:
+        templates = dict(self._templates)
+        raw = json.dumps(templates, sort_keys=True, ensure_ascii=False).encode()
+        # Changes in composition code are significant, not just text changes.
+        code_hash = hashlib.sha256()
+        for relative in ("__init__.py", "prompt_builder.py", "task_builders.py", "contracts.py", "editing_options.py"):
+            path = Path(__file__).parent / relative
+            if path.exists():
+                code_hash.update(relative.encode() + b"\0" + path.read_bytes())
+        option_path = Path(__file__).resolve().parents[2] / "config" / "editing_options.json"
+        if option_path.exists():
+            code_hash.update(option_path.read_bytes())
+        digest = hashlib.sha256(raw + code_hash.digest()).hexdigest()
+        result = {"schema_version": 1, "bundle_version": BUNDLE_VERSION,
+                  "digest": digest, "composer_hash": code_hash.hexdigest(), "templates": templates}
+        rules = getattr(self, "_approved_rules", None)
+        if rules is not None:
+            result["approved_rules"] = list(rules)
+            result["approved_rules_sha256"] = hashlib.sha256(
+                json.dumps(list(rules), ensure_ascii=False).encode()
+            ).hexdigest()
+        return result
+
+    def frozen_copy(self):
+        clone = object.__new__(PromptManager)
+        clone.prompts_dir = self.prompts_dir
+        clone._templates = dict(self._templates)
+        if hasattr(self, "_approved_rules"):
+            clone._approved_rules = self._approved_rules
+        return clone
+
 
 _global_manager: Optional[PromptManager] = None
 
-
 def get_prompt_manager() -> PromptManager:
-    """Return the shared prompt manager."""
+    active = _active_manager.get()
+    if active is not None:
+        return active
     global _global_manager
     if _global_manager is None:
         _global_manager = PromptManager()
     return _global_manager
 
-
 def get_prompt(name: str, **kwargs) -> str:
-    """Convenience wrapper around the global prompt manager."""
     return get_prompt_manager().get(name, **kwargs)
+
+@contextmanager
+def prompt_bundle_scope(snapshot: Optional[dict] = None):
+    """Freeze a bundle for a run. Incompatible old runs require explicit retranslation."""
+    manager = get_prompt_manager().frozen_copy()
+    current = manager.snapshot()
+    if snapshot is not None and snapshot.get("digest") != current["digest"]:
+        raise ValueError("Prompt bundle changed or is unversioned; start an explicit new retranslation instead of mixing versions.")
+    from src.services.memory_service import TranslationMemoryService
+    if snapshot is not None and "approved_rules" in snapshot:
+        rules = snapshot["approved_rules"]
+        if not isinstance(rules, list) or any(not isinstance(rule, str) for rule in rules):
+            raise ValueError("Invalid saved rule snapshot")
+        rule_digest = hashlib.sha256(json.dumps(rules, ensure_ascii=False).encode()).hexdigest()
+        if snapshot.get("approved_rules_sha256") != rule_digest:
+            raise ValueError("Saved rule snapshot hash mismatch")
+    else:
+        rules = TranslationMemoryService().get_rules_for_prompt()
+    manager._approved_rules = tuple(rules)
+    token = _active_manager.set(manager)
+    rule_token = _active_rules.set(tuple(rules))
+    try:
+        yield manager
+    finally:
+        _active_rules.reset(rule_token)
+        _active_manager.reset(token)

@@ -9,6 +9,8 @@ from typing import NoReturn
 
 from src.llm.errors import (
     LLMConfigurationError,
+    LLMCapacityError,
+    LLMOutputTruncatedError,
     LLMConnectionError,
     LLMProxyConfigurationError,
     LLMProxyError,
@@ -24,6 +26,12 @@ logger = logging.getLogger(__name__)
 
 
 def format_llm_exception(exc: Exception, *, operation: str, timeout_s: int | None = None) -> str:
+    if isinstance(exc, LLMCapacityError):
+        return f"{operation} failed: translation workers are busy. Please retry later."
+
+    if isinstance(exc, LLMOutputTruncatedError):
+        return f"{operation} failed: model output was truncated. Use a smaller selection or a larger output budget."
+
     if isinstance(exc, asyncio.TimeoutError):
         if timeout_s is not None:
             return f"{operation} failed: request timed out after {timeout_s}s."

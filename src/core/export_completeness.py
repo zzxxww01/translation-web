@@ -13,6 +13,7 @@ from .title_validation import is_protected_name
 
 _CJK = re.compile(r"[\u3400-\u9fff\U00020000-\U0002ffff]")
 
+
 # Conservative fallback for unmarked contributor credits. Structured metadata
 # already uses paragraph.is_metadata below. Do not use MetadataParser's loose
 # name heuristic here: title-cased prose (e.g. "System Failure") also matches it.
@@ -86,7 +87,10 @@ def build_translation_completeness(
             items.append({**location, "kind": "section_title", "reason": reason,
                           "source_preview": section.title[:160]})
         for paragraph in section.paragraphs:
-            if paragraph.is_metadata or paragraph.element_type in {ElementType.IMAGE, ElementType.CODE}:
+            # Credits/dates may intentionally stay English, but translated
+            # metadata (subtitles and source captions) is still part of the output.
+            preserve_metadata = paragraph.is_metadata and paragraph.metadata_type not in {"subtitle", "source"}
+            if preserve_metadata or paragraph.element_type in {ElementType.IMAGE, ElementType.CODE}:
                 continue
             if _is_author_attribution(paragraph.source):
                 continue

@@ -3,6 +3,7 @@
 from fastapi import APIRouter
 
 from src.prompts import get_prompt_manager
+from src.prompts.contracts import PromptContractError
 
 from ..middleware import BadRequestException, ServiceUnavailableException
 from ..utils.llm_errors import raise_empty_llm_result, raise_llm_service_unavailable
@@ -50,6 +51,8 @@ async def sync_reply(request: SlackSyncRequest):
         if not english_reply:
             raise_empty_llm_result(operation="Slack sync")
         return SlackSyncResponse(english_reply=english_reply)
+    except PromptContractError:
+        raise_empty_llm_result(operation="Slack optimize")
     except ServiceUnavailableException:
         raise
     except Exception as exc:
@@ -101,12 +104,18 @@ async def optimize_text(request: SlackOptimizeRequest):
         if not isinstance(data, dict):
             raise ValueError("model response was not a JSON object")
 
-        # 解析失败不能拿原文冒充“已优化”的结果。
+
         optimized_text = data.get("optimized_text")
-        if not isinstance(optimized_text, str) or not optimized_text.strip():
-            raise_empty_llm_result(operation="Slack optimize")
-        improvements = data.get("improvements", ["Text optimized"])
-        confidence = float(data.get("confidence", 0.8))
+        improvements = data.get("improvements")
+        if not isinstance(optimized_text, str) or not optimized_text.strip() or not isinstance(improvements, list) or any(not isinstance(x, str) for x in improvements):
+            raise ValueError("Invalid optimization response")
+        if request.context_type == "translation" and not request.original_text:
+            improvements.append("未提供原文，仅作语言润色，未核验忠实性。")
+        confidence = float(data.get("confidence", 0.0))
+
+        import math
+        if not math.isfinite(confidence):
+            raise ValueError("Invalid confidence")
         confidence = max(0.0, min(1.0, confidence))
 
         return SlackOptimizeResponse(
@@ -114,6 +123,8 @@ async def optimize_text(request: SlackOptimizeRequest):
             improvements=improvements,
             confidence=confidence,
         )
+    except PromptContractError:
+        raise_empty_llm_result(operation="Slack optimize")
     except ServiceUnavailableException:
         raise
     except Exception as exc:

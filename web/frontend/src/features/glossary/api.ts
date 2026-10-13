@@ -22,3 +22,22 @@ export const translationRulesApi = {
       `/projects/translation-rules/${index}`
     ),
 };
+
+export interface TranslationRuleCandidate {
+  id: string;
+  rule: string;
+  source_kind: string;
+  status: 'pending' | 'approved' | 'rejected';
+  scope: string;
+  evidence: Record<string, string>;
+}
+
+export const translationRuleCandidatesApi = {
+  list: () => apiClient.get<{ candidates: TranslationRuleCandidate[]; total: number }>(
+    '/projects/translation-rule-candidates'
+  ),
+  decide: (id: string, action: 'approve' | 'reject') =>
+    apiClient.post<TranslationRuleCandidate>(
+      `/projects/translation-rule-candidates/${encodeURIComponent(id)}/${action}`, {}
+    ),
+};

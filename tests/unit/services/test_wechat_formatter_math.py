@@ -136,7 +136,7 @@ def test_strip_math_delimiters(raw: str, expected: str) -> None:
 
 
 def test_backslash_artifact_repaired_before_rendering():
-    """排版链路必须自己修 `\backslash ` 污染。
+    r"""排版链路必须自己修 `\backslash ` 污染。
 
     导出走 postprocess_markdown 时会修，但公众号排版是另一条链路：用户往往直接
     把**早就生成好的**译文粘进来。不在这里修，`\mathbf{q}_l=\mathbf{w}_l` 就会

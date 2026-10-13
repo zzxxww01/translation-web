@@ -16,6 +16,8 @@ class PrescanTerm(BaseModel):
     suggested_translation: str
     context: str = ""
     confidence: float = 0.8
+    source_quote: str = ""
+    requires_review: bool = False
 
 
 class SectionPrescanResult(BaseModel):

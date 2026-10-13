@@ -3,6 +3,7 @@
 from fastapi import APIRouter, Request
 
 from src.prompts import get_prompt_manager
+from src.prompts.contracts import PromptContractError
 
 from ..middleware import BadRequestException, ServiceUnavailableException
 from ..middleware.rate_limit import limiter
@@ -77,7 +78,12 @@ async def process_slack_message(
         if not isinstance(data, dict):
             raise ValueError("model response was not a JSON object")
 
-        translation = unwrap_relay_lines(str(data.get("translation", "")).strip())
+
+        translation = data.get("translation")
+        if not isinstance(translation, str) or not translation.strip():
+            raise ValueError("Missing incoming message translation")
+        translation = unwrap_relay_lines(translation.strip())
+
         suggested_replies = normalize_variants(data.get("suggested_replies", []))
         if not translation or not any(reply.english.strip() for reply in suggested_replies):
             # 空结果必须显式失败：200 + 空字段会让 CLI/前端把失败当成成功。
@@ -87,6 +93,8 @@ async def process_slack_message(
             translation=translation,
             suggested_replies=suggested_replies,
         )
+    except PromptContractError:
+        raise_empty_llm_result(operation="Slack process")
     except ServiceUnavailableException:
         raise
     except Exception as exc:

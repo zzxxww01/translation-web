@@ -64,3 +64,42 @@ def test_diff_ratio_handles_long_text_quickly(service):
 def test_is_term_rule_detection():
     assert TranslationMemoryService._is_term_rule("API 翻译为 接口") is True
     assert TranslationMemoryService._is_term_rule("长句应拆分") is False
+
+
+def test_opposite_instruction_is_not_dropped_as_a_near_duplicate(service):
+    service._append_rules(['必要的转折连接词应该保留'])
+    service._append_rules(['必要的转折连接词不应该保留'])
+    assert len(service.get_all_rules()) == 2
+
+
+def test_failed_atomic_write_does_not_leak_new_rule_into_cache(service, monkeypatch):
+    service._append_rules(['原有规则'])
+    from src.core import file_utils
+    def fail(*args, **kwargs):
+        raise OSError('disk full')
+    monkeypatch.setattr(file_utils, 'write_text_atomic', fail)
+    with pytest.raises(OSError):
+        service._append_rules(['没有落盘的规则'])
+    assert service.get_all_rules() == ['原有规则']
+
+
+def test_corrupt_rule_file_is_not_overwritten_with_an_empty_library(service):
+    ms.GLOBAL_MEMORY_PATH.write_bytes(b'\xff\xfe invalid UTF8')
+    with pytest.raises(UnicodeDecodeError):
+        service._append_rules(['新规则'])
+    assert ms.GLOBAL_MEMORY_PATH.read_bytes() == b'\xff\xfe invalid UTF8'
+
+
+def test_lock_failure_never_falls_through_to_unlocked_write(service, monkeypatch):
+    import portalocker
+    def fail(*args, **kwargs):
+        raise portalocker.exceptions.LockException('busy')
+    monkeypatch.setattr(portalocker, 'Lock', fail)
+    with pytest.raises(portalocker.exceptions.LockException):
+        service._append_rules(['不应写入'])
+    assert not ms.GLOBAL_MEMORY_PATH.exists()
+
+
+def test_overlong_newest_rule_does_not_hide_all_other_rules(service):
+    service._append_rules(['仍应生效的规则', 'x' * 1000])
+    assert service.get_rules_for_prompt() == ['仍应生效的规则']

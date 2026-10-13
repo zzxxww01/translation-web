@@ -3,6 +3,7 @@ import { Loader2, Plus, RefreshCw, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { Textarea } from '@/components/ui/textarea';
 import type { TranslationRule } from '../api';
+import { TranslationRuleCandidates } from './TranslationRuleCandidates';
 
 interface TranslationRulesPanelProps {
   rules: TranslationRule[];
@@ -59,13 +60,13 @@ export function TranslationRulesPanel({
         <div>
           <h2 id="new-rule-heading" className="font-semibold">添加翻译规则</h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            规则会应用到所有翻译工作流。每条规则只表达一个明确约束。
+            确认跨项目适用后再添加。局部文风偏好不宜写成全局禁令。
           </p>
         </div>
         <Textarea
           value={draft}
           onChange={event => setDraft(event.target.value)}
-          placeholder="例如：产品名 token 始终保留英文，不翻译为“词元”。"
+          placeholder="例如：保留必要的转折和条件关系，不为追求简短删掉限定。"
           rows={5}
           aria-label="新翻译规则"
         />
@@ -81,6 +82,7 @@ export function TranslationRulesPanel({
       </section>
 
       <section aria-labelledby="rule-list-heading">
+        <div className="mb-6"><TranslationRuleCandidates onApproved={onRetry} /></div>
         <div className="mb-3 flex items-center justify-between">
           <h2 id="rule-list-heading" className="font-semibold">当前规则</h2>
           <span className="text-sm text-muted-foreground">{rules.length} 条</span>

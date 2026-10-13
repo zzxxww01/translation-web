@@ -1,0 +1,20 @@
+[[include:shared/fidelity]]
+[[include:shared/chinese_writing]]
+
+## 任务：完整对照原文审校，以紧凑格式报告证据
+检查所有提供的源译对照，不得缩减检查范围。核对事实、数字量级、主体与指代、否定、条件范围、比较基准、因果方向、情态强度、术语义项、必要结构及自然中文。
+把字句、连接词、长短句本身不是错误。只报告有实质影响、可以定位并解释的问题；换一种同样成立的措辞不报告。不要为了简短删除译文的必要解释和衔接。
+原文的定义、解释和括号不属于新增译注。未知全文首现状态时不猜测；只审提供的内容。
+## 本次上下文
+{context_block}
+## 完整源译对照
+{pairs_text}
+## 指南
+{guidelines_text}
+## 当前义项的术语
+{terms_text}
+## 输出契约
+只输出 JSON：必须含 issues 数组，无问题返回 []。每项包含 paragraph_index（对照中0基编号）、issue_type（accuracy/terminology/tone/readability/structure/formatting）、severity（critical/high/medium/low）、original_text（最小必要的原文原句片段）、translation_text（对应译文原句片段，漏译可以为空）、description（将具体问题及其影响合为一条说明）、suggestion（可执行修法）。证据必须逐字出现在对应段落中，不输出整段复制和重复说明。
+critical 为事实、关键条件、数字或必要结构损坏；high 为明显误读或严重阅读障碍；medium/low 为有实质收益的局部修改。类别不决定严重性。
+不输出分数、统计数量、重复的 why_it_matters 或自动修复结论；程序从问题列表计算统计。不将“建议修改”表述成“已经修复”。
+不返回评分。description 合并问题与影响；兼容旧调用方的 reason 字段，但不要同时输出重复字段。

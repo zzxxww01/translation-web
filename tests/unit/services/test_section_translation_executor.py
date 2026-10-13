@@ -283,6 +283,10 @@ async def test_four_step_resume_translates_only_missing_paragraphs_and_keeps_pro
         total_paragraphs=2,
         original_status=ProjectStatus.IN_PROGRESS,
     )
+    from src.prompts.contracts import text_version
+    reviewed = section.paragraphs[0].latest_translation(non_empty=True)
+    reviewed.quality_status = "passed"
+    reviewed.quality_version = text_version([section.paragraphs[0].source], [reviewed.text])
     captured = {}
     result_model = SimpleNamespace(
         translations=["补写译文"],

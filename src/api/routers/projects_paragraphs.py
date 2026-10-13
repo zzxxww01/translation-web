@@ -210,15 +210,10 @@ def _query_word_meaning_sync(
         if content:
             history_lines.append(f"{role}: {content}")
 
-    if not history_lines:
-        prompt = query
-    else:
-        history_text = "\n".join(history_lines)
-        prompt = (
-            "你是词义助手，请根据历史对话继续回答用户问题。\n\n"
-            f"历史对话：\n{history_text}\n\n"
-            f"用户最新问题：\n{query}"
-        )
+    from src.prompts import get_prompt_manager
+    prompt = get_prompt_manager().render("longform/auxiliary/word_meaning", word=word,
+        source=paragraph.source, translation=paragraph.best_translation_text(),
+        history="\n".join(history_lines), query=query)
 
     answer = llm.generate(
         prompt,

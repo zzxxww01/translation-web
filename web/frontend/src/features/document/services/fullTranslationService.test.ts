@@ -235,3 +235,51 @@ describe('FullTranslationService project switching', () => {
     await run;
   });
 });
+
+describe('FullTranslationService race and stream cleanup', () => {
+  afterEach(() => { vi.unstubAllGlobals(); });
+  it('a delayed cancel response for A does not detach a newly started B', async () => {
+    const service = new FullTranslationService();
+    let cancelDone!: (response: Response) => void;
+    vi.stubGlobal('fetch', vi.fn(async (input: string, init?: RequestInit) => {
+      if (input.endsWith('/translation-cancel')) return new Promise<Response>(resolve => { cancelDone = resolve; });
+      return streamResponse(init!.signal!, [JSON.stringify({ type: 'start', total: 2 })], true);
+    }));
+    const first = service.startTranslation('A', vi.fn(), vi.fn());
+    await vi.waitFor(() => expect(service.getProgress()?.total).toBe(2));
+    const cancellation = service.stopTranslation();
+    const second = service.startTranslation('B', vi.fn(), vi.fn());
+    await vi.waitFor(() => expect(service.getProjectId()).toBe('B'));
+    cancelDone(Response.json({ status: 'cancelling' }));
+    await cancellation;
+    expect(service.isTranslating()).toBe(true);
+    expect(service.getProjectId()).toBe('B');
+    service.detachTranslation('B');
+    await Promise.all([first, second]);
+  });
+  it('rejects EOF without a terminal event', async () => {
+    vi.stubGlobal('fetch', vi.fn(async (_: string, init?: RequestInit) => streamResponse(init!.signal!, ['{"type":"start","total":1}'], false)));
+    const done = vi.fn();
+    await expect(new FullTranslationService().startTranslation('A', vi.fn(), done)).rejects.toThrow('before a terminal event');
+    expect(done).toHaveBeenCalledOnce();
+  });
+  it('cancels a still-open stream after the terminal event', async () => {
+    const cancel = vi.fn();
+    const stream = new ReadableStream<Uint8Array>({
+      start(controller) { controller.enqueue(new TextEncoder().encode('data: {"type":"complete"}\n\n')); }, cancel,
+    });
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(stream)));
+    await new FullTranslationService().startTranslation('A', vi.fn(), vi.fn());
+    expect(cancel).toHaveBeenCalledOnce();
+    expect(stream.locked).toBe(false);
+  });
+  it('accepts zero progress and fails malformed data instead of silently discarding it', async () => {
+    const service = new FullTranslationService();
+    const progress: number[] = [];
+    vi.stubGlobal('fetch', vi.fn(async (_: string, init?: RequestInit) => streamResponse(init!.signal!, [
+      '{"type":"progress","current":9,"total":10}', '{"type":"progress","current":0,"total":10}', 'not-json',
+    ], false)));
+    await expect(service.startTranslation('A', () => progress.push(service.getProgress()!.current), vi.fn())).rejects.toThrow();
+    expect(progress).toEqual([9, 0]);
+  });
+});

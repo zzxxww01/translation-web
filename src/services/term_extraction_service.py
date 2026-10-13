@@ -59,7 +59,8 @@ class TermExtractionService:
 
         # 3. 调用 LLM 提取术语
         prompt = self._build_extraction_prompt(all_text, project)
-        response = await self.llm.generate(prompt)
+        import asyncio
+        response = await asyncio.to_thread(self.llm.generate, prompt, response_format="json")
         raw_candidates = self._parse_extraction_response(response)
 
         # 4. 使用 TermMatcher 统计出现次数
@@ -139,63 +140,15 @@ class TermExtractionService:
         return "\n\n".join(texts)
 
     def _build_extraction_prompt(self, text: str, project: dict) -> str:
-        """
-        构建提取 prompt
-
-        Args:
-            text: 文档文本
-            project: 项目元数据
-
-        Returns:
-            提取 prompt
-        """
-        return f"""
-你是一个专业的术语提取专家。请从以下技术文档中提取所有重要的专业术语。
-
-文档主题：{project['title']}
-文档领域：半导体、芯片、存储技术
-
-要求：
-1. 提取所有专业术语（技术名词、产品名、公司名、缩写）
-2. 为每个术语提供准确的中文翻译
-3. 提供术语首次出现的上下文（前后各 20 字符）
-4. 评估翻译置信度（0.0-1.0）
-
-输出格式（JSON）：
-[
-  {{
-    "original": "HBM",
-    "translation": "高带宽内存",
-    "confidence": 0.95,
-    "context": "...using HBM memory for..."
-  }},
-  ...
-]
-
-文档内容：
-{text[:10000]}
-"""
+        from src.prompts import get_prompt_manager
+        return get_prompt_manager().render("longform/terminology/extract", title=project['title'], text=text[:10000])
 
     def _parse_extraction_response(self, response: str) -> List[dict]:
-        """
-        解析 LLM 响应
-
-        Args:
-            response: LLM 响应文本
-
-        Returns:
-            术语字典列表
-        """
-        try:
-            # 尝试直接解析 JSON
-            return json.loads(response)
-        except json.JSONDecodeError:
-            # 如果失败，尝试提取 JSON 块
-            import re
-            json_match = re.search(r'\[.*\]', response, re.DOTALL)
-            if json_match:
-                return json.loads(json_match.group())
-            return []
+        from src.prompts.contracts import object_response, PromptContractError
+        result = object_response(response, ("terms",))
+        if not isinstance(result["terms"], list):
+            raise PromptContractError("terms must be an array")
+        return result["terms"]
 
     def _count_occurrences(self, term: str, text: str) -> int:
         """

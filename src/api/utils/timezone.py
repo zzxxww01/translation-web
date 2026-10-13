@@ -6,9 +6,9 @@ Timezone Utils - 时区转换工具模块
 """
 
 import re
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from typing import Optional, Tuple
-from zoneinfo import ZoneInfo
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 
 # ============ 时区配置 ============
@@ -24,6 +24,15 @@ US_TIMEZONE_NAMES = {
     "PST": "America/Los_Angeles", # 美西
     "PDT": "America/Los_Angeles",
 }
+
+# Legacy UI aliases represent geographic zones with automatic DST, not fixed offsets.
+US_TIMEZONE_NAMES.update({
+    "ET": "America/New_York", "CT": "America/Chicago",
+    "MT": "America/Denver", "PT": "America/Los_Angeles",
+    "EST5EDT": "America/New_York", "CST6CDT": "America/Chicago",
+    "MST7MDT": "America/Denver", "PST8PDT": "America/Los_Angeles",
+    "UTC": "UTC", "GMT": "UTC", "BEIJING": "Asia/Shanghai",
+})
 
 # 时区 ZoneInfo 对象缓存
 ZONE_INFO_CACHE = {
@@ -55,202 +64,94 @@ TZ_ABBREVS = {
 
 # ============ 时间解析 ============
 
-def parse_datetime_input(input_str: str) -> Tuple[Optional[datetime], Optional[str]]:
+def _clock(hour: int, minute: int, period: Optional[str]) -> tuple[int, int]:
+    if period:
+        if not 1 <= hour <= 12:
+            raise ValueError("12 小时制的小时必须在 1–12 之间")
+        hour = hour % 12 + (12 if period.lower() in {"pm", "下午"} else 0)
+    if not 0 <= hour <= 23 or not 0 <= minute <= 59:
+        raise ValueError("时间超出有效范围")
+    return hour, minute
+
+
+def _split_zone(value: str) -> tuple[str, Optional[str]]:
+    # Only consume a complete suffix. Unknown abbreviations are not silently
+    # accepted as the default zone or as trailing prose.
+    match = re.search(r"\s+([A-Za-z][A-Za-z0-9_+./-]*)$", value)
+    if match and match.group(1).lower() not in {"am", "pm"}:
+        suffix = match.group(1)
+        if suffix.upper() in US_TIMEZONE_NAMES or "/" in suffix:
+            return value[:match.start()].strip(), suffix
+    return value, None
+
+
+def parse_datetime_input(
+    input_str: str, source_timezone: str = "auto", *, now: Optional[datetime] = None,
+) -> Tuple[Optional[datetime], Optional[str]]:
+    """Parse a complete supported input; never accept a truncated valid prefix.
+
+    Relative dates use the source zone, not the server's local calendar date.
+    Explicit ISO offsets are accepted to disambiguate fall-back DST hours.
     """
-    解析多种时间格式
-
-    支持格式:
-    - M/D/YY at h:mm am/pm tz (如: 1/19/26 at 4:00 pm cdt)
-    - M/D/YY h:mm am/pm tz (如: 1/15/26 2:00 pm cdt)
-    - M/D/YY h am/pm tz (如: 1/26/26 4pm cdt) - 新支持的格式
-    - M/D/YYYY h:mm am/pm tz (如: 1/15/2026 2:00 pm cst)
-    - YYYY-MM-DD HH:mm tz (如: 2025-01-15 14:00 est)
-    - MM/DD/YYYY h:mm am/pm (如: 01/15/2026 2:00 pm)
-    - January 15, 2026 2:00 pm est
-    - 今天下午3点
-    - 明天上午9点
-
-    默认时区: CDT (美中时间)
-
-    Args:
-        input_str: 时间字符串
-
-    Returns:
-        Tuple[datetime, str]: (解析后的日期时间, 检测到的时区缩写)
-    """
-    input_str = input_str.strip()
-
-    # 处理中文相对时间表达
-    if "今天" in input_str or "明天" in input_str:
-        return parse_relative_chinese_time(input_str)
-
-    input_lower = input_str.lower()
-
-    # 尝试解析格式: 1/15/26 at 2:00 pm cdt 或 1/15/2026 2:00 pm cst
-    # 添加了对 "at" 关键字的支持
-    pattern1 = r'(\d{1,2})/(\d{1,2})/(\d{2,4})\s+(?:at\s+)?(\d{1,2}):(\d{2})\s*(am|pm)?\s*(est|edt|cst|cdt|mst|mdt|pst|pdt)?'
-    match = re.search(pattern1, input_lower)
-    if match:
-        month = int(match.group(1))
-        day = int(match.group(2))
-        year = int(match.group(3))
-        if year < 100:
-            # 两位数年份按相对当前年份的滑动窗口扩展,避免写死阈值导致 '25'->2125(审计 C3)
-            _cy = datetime.now().year
-            year = (_cy // 100) * 100 + year
-            if year > _cy + 20:
-                year -= 100
-        hour = int(match.group(4))
-        minute = int(match.group(5))
-        ampm = match.group(6)
-        tz_abbr = match.group(7)
-
-        if ampm == "pm" and hour != 12:
-            hour += 12
-        elif ampm == "am" and hour == 12:
-            hour = 0
-
-        try:
-            return datetime(year, month, day, hour, minute), tz_abbr
-        except ValueError:
-            return None, None
-
-    # 尝试解析格式: M/D/YY h am/pm tz（不带分钟，支持4pm格式）
-    pattern_no_minutes = r'(\d{1,2})/(\d{1,2})/(\d{2,4})\s+(?:at\s+)?(\d{1,2})\s*(am|pm)\s*(est|edt|cst|cdt|mst|mdt|pst|pdt)?'
-    match = re.search(pattern_no_minutes, input_lower)
-    if match:
-        month = int(match.group(1))
-        day = int(match.group(2))
-        year = int(match.group(3))
-        if year < 100:
-            # 两位数年份按相对当前年份的滑动窗口扩展,避免写死阈值导致 '25'->2125(审计 C3)
-            _cy = datetime.now().year
-            year = (_cy // 100) * 100 + year
-            if year > _cy + 20:
-                year -= 100
-        hour = int(match.group(4))
-        minute = 0  # 分钟设为0
-        ampm = match.group(5)
-        tz_abbr = match.group(6)
-
-        if ampm == "pm" and hour != 12:
-            hour += 12
-        elif ampm == "am" and hour == 12:
-            hour = 0
-
-        try:
-            return datetime(year, month, day, hour, minute), tz_abbr
-        except ValueError:
-            return None, None
-
-    # 尝试解析格式: 2025-01-15 14:00 cst
-    pattern2 = r'(\d{4})-(\d{1,2})-(\d{1,2})\s+(?:at\s+)?(\d{1,2}):(\d{2})\s*(est|edt|cst|cdt|mst|mdt|pst|pdt)?'
-    match = re.search(pattern2, input_lower)
-    if match:
-        year = int(match.group(1))
-        month = int(match.group(2))
-        day = int(match.group(3))
-        hour = int(match.group(4))
-        minute = int(match.group(5))
-        tz_abbr = match.group(6)
-
-        try:
-            return datetime(year, month, day, hour, minute), tz_abbr
-        except ValueError:
-            return None, None
-
-    # 尝试解析格式: January 15, 2026 2:00 pm est
-    pattern3 = r'([a-zA-Z]+)\s+(\d{1,2}),?\s*(\d{4})\s+(?:at\s+)?(\d{1,2}):(\d{2})\s*(am|pm)?\s*(est|edt|cst|cdt|mst|mdt|pst|pdt)?'
-    match = re.search(pattern3, input_lower)
-    if match:
-        months = {
-            "january": 1, "february": 2, "march": 3, "april": 4, "may": 5, "june": 6,
-            "july": 7, "august": 8, "september": 9, "october": 10, "november": 11, "december": 12,
-            "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
-            "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12
-        }
-        month_name = match.group(1)
-        month = months.get(month_name.lower())
-        if month:
-            day = int(match.group(2))
-            year = int(match.group(3))
-            hour = int(match.group(4))
-            minute = int(match.group(5))
-            ampm = match.group(6)
-            tz_abbr = match.group(7)
-
-            if ampm == "pm" and hour != 12:
-                hour += 12
-            elif ampm == "am" and hour == 12:
-                hour = 0
-
-            try:
-                return datetime(year, month, day, hour, minute), tz_abbr
-            except ValueError:
-                return None, None
-
+    value, detected = _split_zone(input_str.strip())
+    if "今天" in value or "明天" in value:
+        return parse_relative_chinese_time(input_str, source_timezone, now=now)
+    try:
+        reference_zone = get_zone_info(resolve_timezone(source_timezone, detected))
+        reference = now.astimezone(reference_zone) if now is not None else datetime.now(reference_zone)
+        # datetime.fromisoformat accepts explicit numeric offsets and ISO dates.
+        if re.fullmatch(r"\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:\d{2})", value):
+            return datetime.fromisoformat(value.replace("Z", "+00:00")), detected
+        patterns = (
+            (r"(?P<month>\d{1,2})/(?P<day>\d{1,2})(?:/(?P<year>\d{2}|\d{4}))?\s+(?:at\s+)?(?P<hour>\d{1,2})(?::(?P<minute>\d{2}))?\s*(?P<period>am|pm)?", "numeric"),
+            (r"(?P<year>\d{4})-(?P<month>\d{1,2})-(?P<day>\d{1,2})[T ](?:at\s+)?(?P<hour>\d{1,2}):(?P<minute>\d{2})\s*(?P<period>am|pm)?", "numeric"),
+            (r"(?P<month>[a-z]+)\s+(?P<day>\d{1,2}),?\s+(?P<year>\d{4})\s+(?:at\s+)?(?P<hour>\d{1,2})(?::(?P<minute>\d{2}))?\s*(?P<period>am|pm)?", "month_name"),
+        )
+        months = {name.lower(): i for i, name in enumerate(("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"), 1)}
+        months.update({name[:3]: i for name, i in list(months.items())})
+        for pattern, kind in patterns:
+            match = re.fullmatch(pattern, value, re.I)
+            if not match:
+                continue
+            data = match.groupdict()
+            year_text = data.get("year")
+            year = int(year_text) if year_text else reference.year
+            if year_text and len(year_text) == 2:
+                year += reference.year // 100 * 100
+                if year > reference.year + 20:
+                    year -= 100
+            month = months[data["month"].lower()] if kind == "month_name" else int(data["month"])
+            hour, minute = _clock(int(data["hour"]), int(data.get("minute") or 0), data.get("period"))
+            return datetime(year, month, int(data["day"]), hour, minute), detected
+    except (ValueError, KeyError, ZoneInfoNotFoundError):
+        return None, None
     return None, None
 
 
-def parse_relative_chinese_time(input_str: str) -> Tuple[Optional[datetime], Optional[str]]:
-    """
-    解析中文相对时间表达
-
-    支持格式:
-    - 今天下午3点
-    - 今天上午9点
-    - 明天下午3点
-    - 明天上午9:30
-    """
-    import datetime as dt
-
-    now = dt.datetime.now()
-    input_lower = input_str.lower().strip()
-
-    # 解析上午/下午
-    period_match = re.search(r'(上午|下午|am|pm)', input_lower)
-    if period_match:
-        period = period_match.group(1)
-        is_pm = period in ['下午', 'pm']
-    else:
-        # 默认为24小时制
-        is_pm = False
-
-    # 解析时间
-    time_match = re.search(r'(\d{1,2}):?(\d{0,2})\s*(点)?', input_str)
-    if not time_match:
+def parse_relative_chinese_time(
+    input_str: str, source_timezone: str = "auto", *, now: Optional[datetime] = None,
+) -> Tuple[Optional[datetime], Optional[str]]:
+    value, detected = _split_zone(input_str.strip())
+    match = re.fullmatch(
+        r"(今天|明天)\s*(上午|下午|am|pm)?\s*(\d{1,2})(?:[:：](\d{1,2})|点(?:(\d{1,2})分?|半)?)\s*", value, re.I,
+    )
+    if not match:
         return None, None
-
-    hour = int(time_match.group(1))
-    minute = int(time_match.group(2)) if time_match.group(2) else 0
-
-    if is_pm and hour != 12:
-        hour += 12
-    elif not is_pm and hour == 12:
-        hour = 0
-
-    # 解析日期
-    if '明天' in input_lower:
-        target_date = now + dt.timedelta(days=1)
-    elif '今天' in input_lower:
-        target_date = now
-    else:
-        target_date = now
-
-    result = datetime(target_date.year, target_date.month, target_date.day, hour, minute)
-
-    # 尝试检测时区
-    tz_match = re.search(r'(est|edt|cst|cdt|mst|mdt|pst|pdt)', input_lower)
-    tz_abbr = tz_match.group(1) if tz_match else None
-
-    return result, tz_abbr
+    try:
+        hour, minute = _clock(int(match.group(3)), 30 if value.endswith("半") else int(match.group(4) or match.group(5) or 0), match.group(2))
+        zone = get_zone_info(resolve_timezone(source_timezone, detected))
+        reference = now.astimezone(zone) if now is not None else datetime.now(zone)
+        day = reference.date() + timedelta(days=int(match.group(1) == "明天"))
+        return datetime(day.year, day.month, day.day, hour, minute), detected
+    except (ValueError, ZoneInfoNotFoundError):
+        return None, None
 
 
 # ============ 时区转换 ============
 
 def get_zone_info(tz_name: str) -> ZoneInfo:
     """获取 ZoneInfo 对象，使用缓存"""
-    return ZONE_INFO_CACHE.get(tz_name, ZoneInfo(tz_name))
+    return ZONE_INFO_CACHE[tz_name] if tz_name in ZONE_INFO_CACHE else ZoneInfo(tz_name)
 
 
 def convert_timezone(dt: datetime, source_tz: str, target_tz: str) -> datetime:
@@ -269,7 +170,15 @@ def convert_timezone(dt: datetime, source_tz: str, target_tz: str) -> datetime:
     target_zone = get_zone_info(target_tz)
 
     # 将 naive datetime 视为源时区的时间
-    dt_with_tz = dt.replace(tzinfo=source_zone)
+    if dt.tzinfo is not None:
+        dt_with_tz = dt.astimezone(source_zone)
+    else:
+        dt_with_tz = dt.replace(tzinfo=source_zone)
+        round_trip = dt_with_tz.astimezone(timezone.utc).astimezone(source_zone).replace(tzinfo=None)
+        if round_trip != dt:
+            raise ValueError("该本地时间因夏令时切换不存在，请选择有效时间")
+        if dt.replace(tzinfo=source_zone, fold=0).utcoffset() != dt.replace(tzinfo=source_zone, fold=1).utcoffset():
+            raise ValueError("该本地时间在夏令时切换时出现两次，请用带 UTC 偏移的 ISO 时间明确时刻")
 
     # 转换为目标时区
     return dt_with_tz.astimezone(target_zone).replace(tzinfo=None)
@@ -307,6 +216,8 @@ def format_time(dt: datetime, tz_name: str) -> str:
     Returns:
         str: 格式化后的时间字符串，包含时区缩写
     """
+    if dt.tzinfo is not None:
+        dt = dt.astimezone(get_zone_info(tz_name))
     abbrev = TZ_ABBREVS.get(tz_name, tz_name.split("/")[-1])
     return f"{dt.strftime('%Y-%m-%d %H:%M')} ({abbrev})"
 
@@ -322,19 +233,14 @@ def resolve_timezone(source_timezone: str, detected_tz: Optional[str]) -> str:
     Returns:
         str: 最终的时区 IANA 标识符 (如 America/New_York)
     """
-    # 如果用户指定了时区
-    if source_timezone != "auto":
-        # 如果是 IANA 标识符，直接返回
-        if "/" in source_timezone:
-            return source_timezone
-        # 如果是缩写，转换为 IANA 标识符
-        return US_TIMEZONE_NAMES.get(source_timezone.upper(), "America/Chicago")
-
-    # 自动检测
-    if detected_tz:
-        return US_TIMEZONE_NAMES.get(detected_tz.upper(), "America/Chicago")
-
-    return "America/Chicago"
+    supplied = source_timezone.strip()
+    name = (detected_tz or "America/Chicago") if supplied.lower() == "auto" else supplied
+    resolved = US_TIMEZONE_NAMES.get(name.upper(), name)
+    try:
+        get_zone_info(resolved)
+    except (ValueError, ZoneInfoNotFoundError) as exc:
+        raise ValueError("未知时区，请使用有效的 IANA 时区或受支持的缩写") from exc
+    return resolved
 
 
 def get_timezone_offset_display(dt: datetime, tz_name: str) -> str:
@@ -349,18 +255,16 @@ def get_timezone_offset_display(dt: datetime, tz_name: str) -> str:
         str: UTC 偏移量
     """
     zone = get_zone_info(tz_name)
-    dt_with_tz = dt.replace(tzinfo=zone)
+    dt_with_tz = dt.astimezone(zone) if dt.tzinfo is not None else dt.replace(tzinfo=zone)
     offset = dt_with_tz.utcoffset()
 
     if offset is None:
         return "UTC"
 
     offset_seconds = int(offset.total_seconds())
-    offset_hours = offset_seconds // 3600
-    offset_minutes = (offset_seconds % 3600) // 60
-
-    sign = "+" if offset_hours >= 0 else "-"
-    return f"UTC{sign}{abs(offset_hours)}{f':{offset_minutes:02d}' if offset_minutes else ''}"
+    hours, minutes = divmod(abs(offset_seconds) // 60, 60)
+    sign = "+" if offset_seconds >= 0 else "-"
+    return f"UTC{sign}{hours}{f':{minutes:02d}' if minutes else ''}"
 
 
 def is_dst(dt: datetime, tz_name: str) -> bool:
@@ -375,7 +279,7 @@ def is_dst(dt: datetime, tz_name: str) -> bool:
         bool: 是否为夏令时
     """
     zone = get_zone_info(tz_name)
-    dt_with_tz = dt.replace(tzinfo=zone)
+    dt_with_tz = dt.astimezone(zone) if dt.tzinfo is not None else dt.replace(tzinfo=zone)
     return bool(dt_with_tz.dst())
 
 
@@ -407,7 +311,7 @@ def convert_us_to_beijing(
             "all_timezones": dict
         }
     """
-    dt, detected_tz = parse_datetime_input(input_str)
+    dt, detected_tz = parse_datetime_input(input_str, source_timezone)
 
     if dt is None:
         return {
@@ -464,7 +368,7 @@ def convert_beijing_to_us(
     Returns:
         dict: 转换结果
     """
-    dt, detected_tz = parse_datetime_input(input_str)
+    dt, detected_tz = parse_datetime_input(input_str, "Asia/Shanghai")
 
     if dt is None:
         return {
@@ -524,7 +428,9 @@ def quick_convert(
     Returns:
         dict: 转换结果
     """
-    dt, detected_tz = parse_datetime_input(input_str)
+    _, suffix = _split_zone(input_str.strip())
+    parse_zone = (suffix or "Asia/Shanghai") if from_tz.lower() == "auto" else from_tz
+    dt, detected_tz = parse_datetime_input(input_str, parse_zone)
 
     if dt is None:
         return {
@@ -534,16 +440,16 @@ def quick_convert(
         }
 
     # 确定源时区
-    if from_tz == "auto":
+    if from_tz.lower() == "auto":
         # 检测输入中是否包含时区信息
         if detected_tz:
-            source_tz = US_TIMEZONE_NAMES.get(detected_tz.upper(), "Asia/Shanghai")
+            source_tz = resolve_timezone("auto", detected_tz)
         else:
             source_tz = "Asia/Shanghai"  # 默认为北京时间
     elif from_tz.lower() == "beijing":
         source_tz = "Asia/Shanghai"
     else:
-        source_tz = US_TIMEZONE_NAMES.get(from_tz.upper(), "Asia/Shanghai")
+        source_tz = resolve_timezone(from_tz, None)
 
     # 确定目标时区
     if to_tz.lower() == "beijing":
@@ -575,7 +481,7 @@ def quick_convert(
             "mst": "America/Denver",
             "pst": "America/Los_Angeles",
         }
-        target_tz = target_tz_map.get(to_tz.lower(), "Asia/Shanghai")
+        target_tz = resolve_timezone(to_tz, None)
         target_dt = convert_timezone(dt, source_tz, target_tz)
         return {
             "success": True,

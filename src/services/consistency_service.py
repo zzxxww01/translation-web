@@ -5,7 +5,8 @@ This module provides a lightweight, file-based consistency check implementation
 for terminology signals plus a reserved style score field.
 """
 
-from collections import Counter, defaultdict
+from collections import Counter
+from ..core.term_consistency import check_terminology
 from typing import Dict, List, Optional, Tuple
 
 from ..core.models import (
@@ -24,52 +25,8 @@ class TermConsistencyChecker:
         sections: List[Section],
         glossary: Optional[Glossary] = None,
     ) -> Tuple[List[ConsistencyIssue], Dict[str, Dict]]:
-        issues: List[ConsistencyIssue] = []
-        term_stats: Dict[str, Dict] = {}
-
-        if not glossary or not glossary.terms:
-            return issues, term_stats
-
-        # term -> translation -> [(section_id, paragraph_index), ...]
-        usage: Dict[str, Dict[str, List[Tuple[str, int]]]] = defaultdict(lambda: defaultdict(list))
-
-        for section in sections:
-            for para in section.paragraphs:
-                if not para.confirmed:
-                    continue
-                for term in glossary.terms:
-                    source_term = term.original
-                    expected = term.translation or ""
-                    if not expected:
-                        continue
-                    if source_term.lower() in para.source.lower():
-                        used_expected = expected in para.confirmed
-                        key = expected if used_expected else "__other__"
-                        usage[source_term][key].append((section.section_id, para.index))
-
-        for term, translations in usage.items():
-            expected_count = len(translations.get(next((k for k in translations if k != "__other__"), ""), []))
-            other_count = len(translations.get("__other__", []))
-            term_stats[term] = {
-                "expected_hits": expected_count,
-                "other_hits": other_count,
-                "total_hits": expected_count + other_count,
-            }
-
-            if other_count > 0:
-                location = translations["__other__"][0]
-                issues.append(
-                    ConsistencyIssue(
-                        section_id=location[0],
-                        paragraph_index=location[1],
-                        issue_type="terminology",
-                        description=f'术语 "{term}" 可能存在不一致译法',
-                        auto_fixable=False,
-                        fix_suggestion="请统一为术语表推荐译法",
-                    )
-                )
-
-        return issues, term_stats
+        translations = {section.section_id: [para.best_translation_text() or '' for para in section.paragraphs] for section in sections}
+        return check_terminology(sections, translations, glossary.terms if glossary else [])
 
 
 class StyleConsistencyChecker:
@@ -117,6 +74,10 @@ class ConsistencyReviewer:
             manual_review=manual_review,
             term_stats=term_stats,
             style_score=style_score,
+            style_checked=False,
+            terminology_checked=bool(glossary and glossary.terms),
+            reviewed_paragraphs=sum(bool(p.best_translation_text()) for section in sections for p in section.paragraphs),
+            total_paragraphs=sum(len(section.paragraphs) for section in sections),
             suggestions=suggestions,
         )
 
@@ -134,7 +95,8 @@ def generate_consistency_report_markdown(report: ConsistencyReport) -> str:
         "",
         f"- 是否一致: {'是' if report.is_consistent else '否'}",
         f"- 问题总数: {len(report.issues)}",
-        f"- 风格分数: {report.style_score}",
+        f"- 风格评估: {report.style_score if report.style_checked else '未执行'}",
+        f"- 已检查译文: {report.reviewed_paragraphs}/{report.total_paragraphs} 段",
         "",
         "## 问题列表",
         "",

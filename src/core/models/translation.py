@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Literal
 
 from pydantic import BaseModel, Field
 
@@ -16,8 +16,12 @@ class TranslationRecord(BaseModel):
     text: str
     model: str
     created_at: datetime = Field(default_factory=datetime.now)
+    quality_status: Literal["unreviewed", "review_pending", "revision_pending", "verification_pending", "passed", "manual_review"] = "unreviewed"
+    quality_version: str = ""
+    quality_policy: str = ""
     tokenized_text: Optional[str] = None
     format_issues: List[str] = Field(default_factory=list)
+    quality_review: Dict[str, Any] = Field(default_factory=dict)
 
 
 class HistoryRecord(BaseModel):
@@ -132,7 +136,7 @@ class Paragraph(BaseModel):
             candidates = [item for item in candidates if self._has_text(item.text)]
         if not candidates:
             return None
-        return max(candidates, key=lambda item: item.created_at)
+        return max(candidates, key=lambda item: item.created_at.timestamp())
 
     def latest_translation_text(self, non_empty: bool = False) -> Optional[str]:
         """Return the most recent translation text, if any."""
@@ -170,6 +174,25 @@ class Paragraph(BaseModel):
         """Return True when paragraph has either confirmed or draft translation text."""
         return self.has_confirmed_translation() or self.has_draft_translation()
 
+    def needs_quality_review(self, policy: str = "") -> bool:
+        """Accept either legacy proof representation, never a stale/unsafe draft."""
+        if self.has_confirmed_translation() or self.status == ParagraphStatus.MODIFIED:
+            return False
+        latest = self.latest_translation(non_empty=True)
+        if latest is None or not self.has_export_ready_translation():
+            return True
+        from src.prompts.contracts import text_version
+        from src.services.work_checkpoints import fingerprint
+        proof = latest.quality_review
+        if proof:
+            return not (proof.get("status") == "complete"
+                        and proof.get("source") == fingerprint(self.source)
+                        and proof.get("text") == fingerprint(latest.text)
+                        and (not policy or proof.get("policy") == policy))
+        return not (latest.quality_status == "passed"
+                    and latest.quality_version == text_version([self.source], [latest.text])
+                    and (not policy or latest.quality_policy == policy))
+
     def best_translation_text(self, fallback_to_source: bool = False) -> str:
         """Prefer confirmed text, otherwise fall back to the latest draft translation."""
         if self.has_confirmed_translation():
@@ -183,8 +206,9 @@ class Paragraph(BaseModel):
         self, fallback_to_source: bool = False
     ) -> Optional[str]:
         """Return the best tokenized translation for export reconstruction."""
-        if self.has_confirmed_translation() and self.confirmed_tokenized:
-            return self.confirmed_tokenized
+        if self.has_confirmed_translation():
+            # Confirmed text and draft markup are different versions. Never mix them.
+            return self.confirmed_tokenized or None
 
         latest = self.latest_translation(non_empty=True)
         if latest and latest.tokenized_text:

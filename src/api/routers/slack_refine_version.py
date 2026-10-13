@@ -34,8 +34,8 @@ async def refine_version(
     if version not in ("A", "B", "C"):
         raise BadRequestException(detail="version must be A, B, or C")
 
-    if style not in ("简洁", "正式", "友好"):
-        raise BadRequestException(detail="style must be 简洁, 正式, or 友好")
+    if style not in ("简洁", "标准", "正式", "友好"):
+        raise BadRequestException(detail="style must be 简洁, 标准, 正式, or 友好")
 
     prompt = prompt_manager.get(
         "slack_refine_version",

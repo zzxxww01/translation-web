@@ -1,27 +1,12 @@
-你是一位专业的商务沟通顾问。请为以下邮件生成 3 个不同角度的回复建议。
+[[include:shared/fidelity]]
+[[include:shared/workplace]]
 
-## 邮件信息
+根据邮件与用户明确意图生成三个回复建议。意图未提供时，给出明确类型的非承诺性确认或澄清，不伪装成用户已经同意、拒绝或完成某件事。不得补造收件人、附件、时间或后续动作；问候与署名仅用已知信息。
+## 邮件背景
 {context_info}
-
 ## 邮件内容
 {content}
-
-## 回复风格要求
+## 风格
 {style_desc}
-
-## 输出要求
-请生成 3 个回复建议，每个建议包含：
-1. type: 回复类型（如：同意请求、婉拒、询问详情、确认收到等）
-2. content_en: 英文回复内容（可直接发送的正式商务英文邮件）
-3. content_zh: 中文翻译（对应的中文版本，供参考理解）
-
-## 输出格式（严格JSON）
-{{
-  "replies": [
-    {{"type": "确认收到", "content_en": "Dear [Name],\n\nThank you for your email...", "content_zh": "您好，\n\n感谢您的邮件..."}},
-    {{"type": "同意请求", "content_en": "Dear [Name],\n\nI would be happy to...", "content_zh": "您好，\n\n我很乐意..."}},
-    {{"type": "询问详情", "content_en": "Dear [Name],\n\nRegarding your inquiry...", "content_zh": "您好，\n\n关于您提到的..."}}
-  ]
-}}
-
-请开始生成：
+英文与中文必须一一等义，包含相同的条件与承诺。
+仅输出 JSON：{{"replies":[{{"type":"建议的回复类型","content_en":"英文草稿","content_zh":"对应中文"}}]}}。replies 恰好三项；内容不足时允许相近，不为差异补造事实。

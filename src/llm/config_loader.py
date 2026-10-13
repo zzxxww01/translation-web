@@ -21,6 +21,7 @@ from .config_models import (
     APIKeyConfig,
     ModelConfig,
     RetryConfig,
+    RateLimitConfig,
 )
 from .models import resolve_model_alias
 
@@ -204,6 +205,7 @@ class ConfigLoader:
             models=models,
             retry_config=retry_config,
             network=network_config,
+            rate_limit=RateLimitConfig(**data["rate_limit"]) if data.get("rate_limit") is not None else None,
             group_priority=data.get('group_priority', 999),
             base_url=data.get('base_url'),
             enabled=data.get('enabled', True)

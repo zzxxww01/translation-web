@@ -1,0 +1,6 @@
+[[include:shared/fidelity]]
+
+据采样内容概括主题并给出翻译提示，不声称读取全文。缺少结论时明确样本不足。
+## 内容采样
+{content}
+只返回 JSON：{{"summary":"据样本的概括","notes":[],"key_terms":[]}}。notes 是具体提示，key_terms 保留原文词，不要求固定数量。

@@ -65,8 +65,11 @@ class LimitUploadSize:
                     detail="Invalid Content-Length header",
                 )
                 return
-            declared_size = int(content_lengths[0])
-            if declared_size > self.max_request_size:
+            # Compare decimal strings before integer conversion: even a legal
+            # digit-only header may exceed Python's integer parsing limit.
+            declared = content_lengths[0].lstrip(b"0") or b"0"
+            limit = str(self.max_request_size).encode("ascii")
+            if len(declared) > len(limit) or (len(declared) == len(limit) and declared > limit):
                 await self._respond(
                     scope,
                     receive,

@@ -7,6 +7,7 @@
 from unittest.mock import AsyncMock
 
 import pytest
+from src.prompts.contracts import PromptContractError
 
 from src.api.routers import slack_compose, slack_process, slack_sync_optimize
 from src.api.routers.slack_models import (
@@ -73,8 +74,9 @@ def test_relay_line_breaks_are_joined_without_inventing_spaces():
 
 
 def test_broken_json_is_still_rejected():
-    assert parse_llm_json_response('{"translation": "x", "suggested_replies": [') == {}
-    assert parse_llm_json_response("this is not json") == {}
+    for raw in ('{"translation": "x", "suggested_replies": [', "this is not json"):
+        with pytest.raises(PromptContractError):
+            parse_llm_json_response(raw)
 
 
 @pytest.mark.asyncio

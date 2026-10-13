@@ -54,6 +54,19 @@ class ProviderNetworkConfig:
     no_proxy: Optional[str] = None
 
 
+@dataclass(frozen=True)
+class RateLimitConfig:
+    """Provider-local quotas shared by model aliases in one server process."""
+    max_concurrent: int
+    requests_per_minute: int
+
+    def __post_init__(self):
+        for name in ("max_concurrent", "requests_per_minute"):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+                raise ValueError(f"rate_limit.{name} must be a positive integer")
+
+
 @dataclass
 class ProviderConfig:
     """Provider 配置"""
@@ -65,6 +78,7 @@ class ProviderConfig:
     models: List[ModelConfig]
     retry_config: RetryConfig
     network: Optional[ProviderNetworkConfig] = None
+    rate_limit: Optional[RateLimitConfig] = None
     group_priority: int = 999  # 组优先级，数字越小越优先
     base_url: Optional[str] = None
     enabled: bool = True

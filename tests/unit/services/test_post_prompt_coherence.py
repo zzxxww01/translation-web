@@ -15,10 +15,9 @@ def test_post_prompt_renders_source_and_glossary():
 def test_post_prompt_prioritizes_discourse_without_inventing_relations():
     prompt = PromptManager().get("post_translation")
     for requirement in (
-        "全文主线", "段间：点明推进关系", "句内：交代措施与效果",
-        "精简但不压缩逻辑", "不把时间先后擅自改成因果",
-        "短评不强行扩成多段说明", "教学用虚构方案",
-        "不补造原文没有的技术机制",
+        "不规定每句字数", "不强制一句一事", "连接词就删", "普通动作或变化",
+        "不能把并列或时间先后写成因果", "不是为短而短", "不能补造机制",
+        "真正表达处置", "同一复句", "按完整语义单位决定拆合",
     ):
         assert requirement in prompt
     assert "译文不要比原文更长" not in prompt

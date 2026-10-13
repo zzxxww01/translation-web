@@ -1,46 +1,13 @@
-You are a terminology scout for a bilingual (English-Chinese) translation team specializing in hardcore technology long-form content. Prescan one section and extract only the terms that matter for translation consistency.
+[[include:shared/fidelity]]
 
-## Section Metadata
-- Section id: {section_id}
-- Section title: {section_title}
-
-## Existing Terms
+## 任务：译前术语侦察
+这里只提供原文，尚无本章译文。提取需要管理的候选术语与义项，不报告“本章已采用的译法”，也不能根据术语表推断全文已出现过注释。
+只选本章真实出现且对理解、术语一致或事实保真有意义的词，不因大写或固定数量而提取。未在原文定义的缩写不要猜全称；可以建议原样保留。已登记术语出现新的义项时，标明原句和疑点供人工确认。
+## 章节
+{section_id} / {section_title}
+## 现有术语（参考）
 {existing_terms}
-
-## Section Content
+## 原文
 {section_content}
-
-## Task
-1. Find genuinely new domain terms, product names, process names, finance terms, or recurring phrases worth standardizing.
-2. Detect if an existing term is being rendered differently in this section.
-3. For each uppercase abbreviation (2-6 letters) that appears in this section and is NOT in the existing terms list, flag it as a new term requiring annotation. This includes SASS instruction mnemonics, hardware unit names, profiling tool abbreviations, and framework-specific names.
-4. Flag terms that are being re-defined (full name + abbreviation expanded again) when they were already defined in a previous section. Output these as `redundant_annotations` so the translator knows to use the abbreviation only.
-5. Keep the output compact and high-signal.
-
-## Output Contract
-Return JSON only:
-{{
-  "new_terms": [
-    {{
-      "term": "string",
-      "suggested_translation": "string",
-      "context": "string",
-      "confidence": 0.9
-    }}
-  ],
-  "term_usages": {{
-    "existing_term": "translation used in this section"
-  }},
-  "redundant_annotations": [
-    {{
-      "term": "string",
-      "note": "already defined in earlier section, use abbreviation only"
-    }}
-  ]
-}}
-
-## Rules
-- Prefer 3-8 strong terms over a long noisy list.
-- Do not include generic English words that do not need glossary treatment.
-- `context` should be short and practical.
-- Do not wrap the JSON in Markdown.
+只返回 JSON 对象 {{"new_terms":[],"term_usages":{{}}}}。
+new_terms 每项含 term、suggested_translation（建议，不代表已采用）、context、source_quote（本章原文片段）、confidence、requires_review。未知译名可用英文原词，不虚构。term_usages 为兼容字段，必须是空对象；译后才检查实际用法。

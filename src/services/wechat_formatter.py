@@ -80,63 +80,13 @@ def _sanitize_project_id(project_id: str) -> str:
 
 
 def _is_safe_url(url: str) -> bool:
-    """
-    检查 URL 是否安全（防止 SSRF 攻击）
-
-    阻止访问：
-    - 内网地址（192.168.x.x, 10.x.x.x, 172.16-31.x.x）
-    - 本地地址（localhost, 127.0.0.1, ::1）
-    - 非 HTTP/HTTPS 协议
-    """
-    from urllib.parse import urlparse
-    import ipaddress
-
-    try:
-        parsed = urlparse(url)
-
-        # 只允许 http/https
-        if parsed.scheme not in ('http', 'https'):
-            return False
-
-        hostname = parsed.hostname
-        if not hostname:
-            return False
-
-        # 禁止 localhost
-        if hostname.lower() in ('localhost', '127.0.0.1', '::1'):
-            return False
-
-        # 尝试解析为 IP 地址
-        try:
-            ip = ipaddress.ip_address(hostname)
-            # 禁止私有 IP 和保留 IP
-            if ip.is_private or ip.is_loopback or ip.is_link_local:
-                return False
-        except ValueError:
-            # 不是 IP 地址，是域名，允许通过
-            pass
-
-        return True
-    except Exception:
-        return False
+    from ..core.url_safety import is_safe_url
+    return is_safe_url(url)
 
 
 def _is_safe_ip(ip_str: str) -> bool:
-    """
-    检查 IP 地址是否安全（防止 DNS Rebinding）
-
-    在实际连接时调用，防止 DNS 在检查后被修改
-    """
-    import ipaddress
-
-    try:
-        ip = ipaddress.ip_address(ip_str)
-        # 禁止私有 IP、回环地址、链路本地地址
-        if ip.is_private or ip.is_loopback or ip.is_link_local:
-            return False
-        return True
-    except ValueError:
-        return False
+    from ..core.url_safety import is_safe_ip
+    return is_safe_ip(ip_str)
 
 
 
@@ -508,7 +458,7 @@ class WechatFormatter:
             # 使用 resolve() 确保路径在预期目录内（防止路径遍历）
             target_path_resolved = target_path.resolve()
             target_dir_resolved = target_dir.resolve()
-            if not str(target_path_resolved).startswith(str(target_dir_resolved)):
+            if not target_path_resolved.is_relative_to(target_dir_resolved):
                 raise ValueError("Invalid target path")
 
             # 复制文件
@@ -535,117 +485,40 @@ class WechatFormatter:
         """同步下载图片（用于base64转换和图床上传）"""
         import logging
         import tempfile
-        import requests
-        from pathlib import Path
-        from urllib.parse import unquote, urlparse
-        import socket
+        from ..core.public_resources import fetch_public_bytes, confined_local_path
 
         logger = logging.getLogger(__name__)
-
+        temp_path = None
         try:
-            # 如果是本地文件，直接返回路径
-            if not url.startswith(("http://", "https://")):
-                decoded_path = unquote(url)
-                if Path(decoded_path).exists():
-                    logger.debug(f"Using local file: {decoded_path}")
-                    return decoded_path
-                logger.warning(f"Local file not found: {decoded_path}")
-                return None
-
-            # 安全检查：防止 SSRF 攻击
-            if not _is_safe_url(url):
-                logger.error(f"Unsafe URL blocked: {_sanitize_url_for_log(url)}")
-                return None
-
-            # 安全:线程安全的 SSRF / DNS-rebinding 校验。
-            # 旧实现 monkeypatch 进程全局 create_connection,在并发下载下存在竞态
-            # （一个线程的 finally 提前还原,其它线程绕过 IP 校验,见审计 U6）。
-            # 改为请求前解析并校验该主机所有 IP,无任何全局可变状态,线程安全。
-            hostname = urlparse(url).hostname
-            if not hostname:
-                logger.error(f"No hostname in URL: {_sanitize_url_for_log(url)}")
-                return None
-            try:
-                addr_infos = socket.getaddrinfo(hostname, None)
-            except socket.gaierror as e:
-                logger.error(f"DNS resolution failed for {_sanitize_url_for_log(url)}: {e}")
-                return None
-            for info in addr_infos:
-                resolved_ip = info[4][0]
-                if not _is_safe_ip(resolved_ip):
-                    logger.error(
-                        f"Unsafe IP {resolved_ip} resolved for {_sanitize_url_for_log(url)}, blocked"
-                    )
-                    return None
-
-            # 下载远程图片
-            logger.debug(f"Downloading image: {_sanitize_url_for_log(url)}")
-            headers = {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-            }
-
-            # 使用 certifi 提供的可信证书，防止环境变量绕过
-            import certifi
-
-            # 使用更短的超时时间，启用 SSL 验证，流式下载
-            response = requests.get(
-                url,
-                headers=headers,
-                timeout=(5, 15),
-                verify=certifi.where(),  # 使用固定的证书包
-                stream=True
-            )
-            response.raise_for_status()
-
-            # 检测文件扩展名
-            content_type = response.headers.get("content-type", "")
-            if "jpeg" in content_type or "jpg" in content_type:
-                ext = ".jpg"
-            elif "png" in content_type:
-                ext = ".png"
-            elif "gif" in content_type:
-                ext = ".gif"
-            elif "webp" in content_type:
-                ext = ".webp"
+            limit = 10 * 1024 * 1024
+            if url.startswith(("http://", "https://")):
+                content, headers = fetch_public_bytes(url, timeout=20, max_bytes=limit)
+                content_type = headers.get("content-type", "")
             else:
-                ext = ".jpg"
-
-            # 保存到临时文件（使用 delete=False，但在调用方的 finally 中手动清理）
-            temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=ext)
-            temp_path = temp_file.name
-
-            try:
-                # 流式下载并限制大小（10MB）
-                MAX_IMAGE_SIZE = 10 * 1024 * 1024
-                downloaded = 0
-
-                for chunk in response.iter_content(chunk_size=8192):
-                    if chunk:
-                        downloaded += len(chunk)
-                        if downloaded > MAX_IMAGE_SIZE:
-                            temp_file.close()
-                            try:
-                                import os
-                                os.unlink(temp_path)
-                            except:
-                                pass
-                            raise ValueError(f"Image too large: {downloaded} bytes (max {MAX_IMAGE_SIZE})")
-                        temp_file.write(chunk)
-
-                temp_file.close()
-                logger.debug(f"Downloaded to: {temp_path}, size: {downloaded} bytes")
-                return temp_path
-            except Exception as e:
-                # 如果写入失败，立即清理
-                try:
-                    import os
-                    os.unlink(temp_path)
-                except:
-                    pass
-                raise e
-
-        except Exception as e:
-            logger.warning(f"Failed to download image: {e}")
+                root = Path("projects") / self.project_id
+                # API asset URLs and relative project paths are accepted, never arbitrary host files.
+                prefix = f"/api/projects/{self.project_id}/assets/"
+                src = url[len(prefix):] if url.startswith(prefix) else url
+                path = confined_local_path(src, root)
+                if path is None or path.suffix.lower() not in {".png", ".jpg", ".jpeg", ".gif", ".webp", ".avif"}:
+                    return None
+                with path.open("rb") as file:
+                    content = file.read(limit + 1)
+                if len(content) > limit:
+                    raise ValueError("Local image exceeds size limit")
+                import mimetypes
+                content_type = mimetypes.guess_type(path.name)[0] or "image/jpeg"
+            ext = next((suffix for mime, suffix in (("png", ".png"), ("gif", ".gif"), ("webp", ".webp"))
+                        if mime in content_type), ".jpg")
+            # Always return an owned temporary copy: callers unlink this path in finally.
+            with tempfile.NamedTemporaryFile(delete=False, suffix=ext) as file:
+                temp_path = file.name
+                file.write(content)
+            return temp_path
+        except Exception:
+            if temp_path:
+                Path(temp_path).unlink(missing_ok=True)
+            logger.warning("Failed to read public/project image", exc_info=True)
             return None
 
     def _image_to_base64(self, url: str) -> Optional[str]:

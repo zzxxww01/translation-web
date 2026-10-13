@@ -156,22 +156,21 @@ class QualityReportGenerator:
         logger.info("Starting quality report generation...")
 
         # 1. 构建 prompt
-        prompt = self._build_prompt(translations)
+        prompt = self._build_prompt(translations, sections, article_analysis)
 
         # 2. 调用 LLM 生成报告
         logger.info("Calling LLM to generate quality report...")
         try:
-            response = self.llm.generate(prompt)
+            response = self.llm.generate(prompt, response_format="json")
         except Exception as e:
             logger.error(f"LLM call failed: {e}")
-            return self._create_empty_report(sections, translations)
+            raise RuntimeError("Quality review failed; not a clean report") from e
 
         # 3. 解析 LLM 响应
         report_data = self._parse_llm_response(response)
 
-        if not report_data or not report_data.get("issues"):
-            logger.warning("LLM returned empty or invalid report")
-            return self._create_empty_report(sections, translations)
+        if report_data is None:
+            raise ValueError("Quality review response is invalid; no clean report was produced")
 
         # 4. 规则匹配定位问题
         logger.info(f"Locating {len(report_data['issues'])} issues in document...")
@@ -181,9 +180,9 @@ class QualityReportGenerator:
         summary_data = report_data.get("summary", {})
         summary = QualityReportSummary(
             total_issues=len(located_issues),
-            terminology_issues=summary_data.get("terminology_issues", 0),
-            logic_issues=summary_data.get("logic_issues", 0),
-            fluency_issues=summary_data.get("fluency_issues", 0),
+            terminology_issues=sum(i.type == "terminology" for i in located_issues),
+            logic_issues=sum(i.type == "logic" for i in located_issues),
+            fluency_issues=sum(i.type == "fluency" for i in located_issues),
             overall_quality=summary_data.get("overall_quality", "未知"),
             overall_score=summary_data.get("overall_score", 0.0),
             high_severity_count=len([i for i in located_issues if i.severity == "high"]),
@@ -206,128 +205,25 @@ class QualityReportGenerator:
 
         return report
 
-    def _build_prompt(self, translations: Dict[str, List[str]]) -> str:
-        """构建 LLM prompt"""
-
-        # 拼接全文译文
-        full_text = []
-
-        for section_id, paragraphs in translations.items():
-            for para_idx, para_text in enumerate(paragraphs):
-                full_text.append(f"[{section_id}:{para_idx}] {para_text}")
-
-        full_text_str = "\n\n".join(full_text)
-
-        prompt = f"""你是一位资深的中文编辑，负责审阅翻译质量。
-
-## 待审阅译文
-
-{full_text_str}
-
-## 审阅任务
-
-请从以下三个维度检查译文质量，找出所有问题：
-
-### 1. 术语一致性
-- 检查同一概念是否使用了不同的翻译
-- 例如："GPU" 有时翻译为"图形处理器"，有时保留"GPU"
-- 例如："machine learning" 有时翻译为"机器学习"，有时翻译为"机器学习技术"
-
-### 2. 逻辑连贯性
-- 检查段落之间、句子之间的逻辑是否连贯
-- 检查代词指代是否清晰（"它"、"这"、"该"指代不明）
-- 检查转折、因果关系是否合理
-- 检查前后文是否矛盾
-
-### 3. 表达流畅性
-- 检查是否有翻译腔（"对...进行..."、"以便在..."）
-- 检查是否有语句不通顺、表达别扭的地方
-- 检查是否有冗余表达
-- 检查标点符号使用是否恰当
-
-## 输出格式
-
-返回 JSON 格式：
-
-```json
-{{
-  "summary": {{
-    "total_issues": 15,
-    "terminology_issues": 5,
-    "logic_issues": 4,
-    "fluency_issues": 6,
-    "overall_quality": "良好",
-    "overall_score": 8.2
-  }},
-  "issues": [
-    {{
-      "type": "terminology",
-      "severity": "medium",
-      "description": "术语 'GPU' 翻译不一致",
-      "problematic_sentence": "这些图形处理器在训练过程中发挥了关键作用",
-      "context": "前文使用 'GPU'，此处使用 '图形处理器'",
-      "suggestion": "建议统一使用 'GPU'"
-    }},
-    {{
-      "type": "logic",
-      "severity": "high",
-      "description": "代词指代不清",
-      "problematic_sentence": "它在这个过程中起到了关键作用",
-      "context": "前文提到了多个主体，'它' 指代不明确",
-      "suggestion": "明确指出是哪个主体"
-    }},
-    {{
-      "type": "fluency",
-      "severity": "low",
-      "description": "存在翻译腔",
-      "problematic_sentence": "为了对模型进行优化，研究人员采取了多种措施",
-      "context": "'对...进行...' 是典型的翻译腔",
-      "suggestion": "改为 '为了优化模型，研究人员采取了多种措施'"
-    }}
-  ]
-}}
-```
-
-## 注意事项
-
-1. **必须提供完整的问题句子**：`problematic_sentence` 字段必须是完整的句子，便于后续定位
-2. **severity 分级**：
-   - `high`: 严重影响理解或准确性
-   - `medium`: 影响阅读体验或专业性
-   - `low`: 轻微瑕疵，不影响理解
-3. **只报告真实问题**：不要为了凑数而报告不存在的问题
-4. **提供可操作的建议**：`suggestion` 应该具体、可执行
-
-请开始审阅。
-"""
-
-        return prompt
+    def _build_prompt(self, translations: Dict[str, List[str]], sections: Optional[List[Section]] = None,
+                      article_analysis: Optional[ArticleAnalysis] = None) -> str:
+        from src.prompts import get_prompt_manager
+        sources = {s.section_id: s.paragraphs for s in (sections or [])}
+        pairs = []
+        for sid, paragraphs in translations.items():
+            for index, text in enumerate(paragraphs):
+                originals = sources.get(sid, [])
+                source = originals[index].source if index < len(originals) else "（未提供原文，仅作中文编辑检查）"
+                pairs.append({"section_id":sid,"paragraph_index":index,"source":source,"translation":text})
+        context = article_analysis.model_dump(mode="json") if article_analysis else {}
+        return get_prompt_manager().render("longform/review/quality_report", pairs=json.dumps(pairs, ensure_ascii=False), article_context=json.dumps(context, ensure_ascii=False))
 
     def _parse_llm_response(self, response: str) -> Optional[dict]:
-        """解析 LLM 返回的 JSON"""
-
-        try:
-            # 提取 JSON（可能包含在 markdown 代码块中）
-            json_match = re.search(r'```json\s*(\{.*?\})\s*```', response, re.DOTALL)
-            if json_match:
-                json_str = json_match.group(1)
-            else:
-                # 尝试直接解析
-                json_str = response
-
-            data = json.loads(json_str)
-
-            # 验证必需字段
-            if "summary" not in data or "issues" not in data:
-                logger.error("LLM response missing required fields")
-                return None
-
-            return data
-
-        except json.JSONDecodeError as e:
-            logger.error(f"Failed to parse LLM response as JSON: {e}")
-            logger.debug(f"Response content: {response[:500]}...")
-            return None
+        from src.prompts.contracts import object_response
+        result = object_response(response, ("summary", "issues"))
+        if not isinstance(result["summary"], dict) or not isinstance(result["issues"], list):
+            raise ValueError("Invalid quality report schema")
+        return result
 
     def _locate_issues(
         self,
@@ -341,12 +237,22 @@ class QualityReportGenerator:
         for issue_data in issues:
             problematic_sentence = issue_data.get("problematic_sentence", "")
 
-            if not problematic_sentence:
-                logger.warning(f"Issue missing problematic_sentence: {issue_data.get('description')}")
-                continue
+            if not isinstance(problematic_sentence, str) or not problematic_sentence.strip():
+                raise ValueError("Review finding has no translated evidence; cannot produce a clean report")
 
-            # 查找句子位置
-            location = self._find_sentence_location(problematic_sentence, translations)
+            # Prefer the explicit location in v2, never silently map a duplicate sentence elsewhere.
+            sid, idx = issue_data.get("section_id"), issue_data.get("paragraph_index")
+            if sid is not None or idx is not None:
+                if sid not in translations or type(idx) is not int or not 0 <= idx < len(translations[sid]):
+                    raise ValueError("Invalid quality finding location")
+                paragraph = translations[sid][idx]
+                if problematic_sentence not in paragraph:
+                    raise ValueError("Quality finding evidence is not present at its supplied location")
+                sentence_index = sum(len(part) > 0 for part in re.split(r"[。！？]", paragraph[:paragraph.index(problematic_sentence)]))
+                location = {"section_id": sid, "paragraph_index": idx, "sentence_index": sentence_index, "confidence": 1.0}
+            else:
+                # Historical reports can still be displayed with their match confidence.
+                location = self._find_sentence_location(problematic_sentence, translations)
 
             if location:
                 issue = QualityIssue(
