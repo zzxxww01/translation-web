@@ -24,9 +24,10 @@ from pathlib import Path
 from fastapi import FastAPI
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, HTMLResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from .release_identity import release_identity
 from .middleware import LimitUploadSize, LoggingMiddleware, register_error_handlers
 from .middleware.rate_limit import limiter, RateLimitExceeded, _rate_limit_exceeded_handler
 from .routers import (
@@ -138,6 +139,12 @@ if frontend_dist_path.exists():
 projects_path = Path(__file__).parent.parent.parent / "projects"
 projects_path.mkdir(parents=True, exist_ok=True)  # 确保目录存在
 app.mount("/projects", SafeStaticFiles(directory=str(projects_path)), name="projects")
+
+
+@app.get("/api/release", tags=["system"])
+async def release_info():
+    """Identity captured by this backend process at import time."""
+    return JSONResponse(release_identity(), headers={"Cache-Control": "no-store"})
 
 
 @app.get(

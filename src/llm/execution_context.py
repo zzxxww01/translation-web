@@ -122,6 +122,10 @@ def generation_budget(fn):
             config = getattr(plans[0].model, "config", {}) if plans else {}
             timeout = config.get("timeout", 120) if isinstance(config, dict) else 120
         seconds = positive_timeout(timeout)
+        # Only explicitly declared adapter parameters opt into a split budget;
+        # total_timeout is consumed there, never forwarded to a provider SDK.
+        if bound.get("total_timeout") is not None:
+            seconds = positive_timeout(bound["total_timeout"])
         from .request_budget import check_provider_request
         prompt = bound.get("prompt", options.get("prompt"))
         limit = bound.get("max_tokens", options.get("max_tokens"))

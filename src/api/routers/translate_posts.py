@@ -57,7 +57,10 @@ _TIMEOUT_BUDGETS: dict[str, tuple[int, int]] = {
     # 且严格早于前端 180s 超时。
     "post": (60, 170),
     "post_optimize": (60, 170),
-    "title_generate": (45, 120),
+    # Reasoning models can need more than 45s for eight constrained titles.
+    # Keep enough total budget for a semantic rewrite, below the browser's 180s.
+    "title_generate": (80, 170),
+    "hashtag_generate": (45, 120),
 }
 
 # BE-02：历史记录内容/角色未做任何长度与内容约束就拼进 prompt，这里压平空白并截断，
@@ -99,7 +102,7 @@ async def generate_hashtags(request: Request, body: PostHashtagRequest):
         content=body.content,
         translation=body.translation,
     )
-    attempt_timeout_s, total_timeout_s = _resolve_timeouts("title_generate")
+    attempt_timeout_s, total_timeout_s = _resolve_timeouts("hashtag_generate")
     model_metadata: dict[str, object] = {}
     try:
         result = await asyncio.wait_for(
@@ -368,7 +371,7 @@ async def _generate_valid_titles(
         model_metadata: dict[str, object] = {}
         result = await run_llm_blocking(
             generate_with_fallback, prompt, task_type="title",
-            timeout=min(attempt_timeout_s, remaining), model=model,
+            timeout=min(attempt_timeout_s, remaining), total_timeout=remaining, model=model,
             result_metadata=model_metadata,
         )
         titles = _extract_title_map(result)
@@ -445,7 +448,11 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
     except TitleValidationError as e:
         from ..middleware import ServiceUnavailableException
         raise ServiceUnavailableException(detail=str(e), error_code="TITLE_VALIDATION_FAILED") from e
-    except asyncio.TimeoutError as e:
-        raise_llm_service_unavailable(operation="Title generation", exc=e, timeout_s=total_timeout_s)
     except Exception as e:
-        raise_llm_service_unavailable(operation="Title generation", exc=e, timeout_s=total_timeout_s)
+        # A provider may fail before the request deadline. Do not claim that
+        # the whole configured budget elapsed for an early upstream timeout.
+        exhausted = asyncio.get_running_loop().time() >= deadline
+        raise_llm_service_unavailable(
+            operation="Title generation", exc=e,
+            timeout_s=total_timeout_s if exhausted else None,
+        )

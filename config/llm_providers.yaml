@@ -154,6 +154,9 @@ task_defaults:
   longform: deepseek-v3
   post: deepseek-v3
   analysis: deepseek-v3
-  title: deepseek-v3
+  # Title generation verified against the real structured-output contract.
+  # DeepSeek relay currently times out / reports no available channel for titles.
+  # Keep other task defaults unchanged; explicit user model overrides still apply.
+  title: gemini-pro
   metadata: deepseek-v3
   slack: gemini-pro
