@@ -295,6 +295,8 @@ class ProviderAdapter:
         prompt: str,
         response_format: Optional[str] = None,
         temperature: Optional[float] = None,
+        *,
+        total_timeout: Optional[float] = None,
         **kwargs,
     ) -> str:
         """
@@ -304,6 +306,8 @@ class ProviderAdapter:
             prompt: 输入提示
             response_format: 响应格式（如 "json"）
             temperature: 温度参数
+            total_timeout: Optional whole-generation budget across routes; when set,
+                kwargs["timeout"] remains a per-attempt cap. Omitted keeps legacy behavior.
             **kwargs: 其他参数
 
         Returns:
@@ -354,6 +358,10 @@ class ProviderAdapter:
                         reserve_output_tokens=attempt_kwargs.get("max_tokens", getattr(provider, "max_tokens", None) or 8192),
                     ), model=attempt.model.real_model)
                 route_timeout = runtime.get("timeout") or timeout
+                # Opt-in split budget: a route default must not erase the caller's
+                # per-attempt cap. Legacy callers retain their existing behavior.
+                if total_timeout is not None and timeout is not None:
+                    route_timeout = min(runtime.get("timeout") or timeout, timeout)
                 with route_scope(attempt.provider.provider_id, getattr(attempt.provider, "rate_limit", None)):
                     result = provider.generate(
                         prompt=prompt,
