@@ -1,3 +1,4 @@
+import hashlib
 import json
 import logging
 from pathlib import Path
@@ -5,6 +6,9 @@ from typing import Any, Callable, Optional
 
 from .format_tokens import assign_span_ids
 from .models import Paragraph, ProjectMeta, Section
+
+
+_MAX_SECTION_CACHE_FILE_BYTES = 8 * 1024 * 1024
 
 
 class SectionDataError(ValueError):
@@ -41,6 +45,26 @@ class ProjectRepository:
         self._parsed_cache = OrderedDict()
         self._parsed_cache_lock = RLock()
         self._parsed_cache_bytes = 0
+
+    @staticmethod
+    def _section_stamp(meta_path: Path):
+        """Fingerprint cacheable metadata even on coarse-timestamp filesystems."""
+        stat = meta_path.stat()
+        digest = None
+        if stat.st_size <= _MAX_SECTION_CACHE_FILE_BYTES:
+            hasher = hashlib.blake2b(digest_size=16)
+            with meta_path.open("rb") as handle:
+                for chunk in iter(lambda: handle.read(128 * 1024), b""):
+                    hasher.update(chunk)
+            digest = hasher.digest()
+        return stat, (
+            stat.st_dev,
+            stat.st_ino,
+            stat.st_size,
+            stat.st_mtime_ns,
+            stat.st_ctime_ns,
+            digest,
+        )
 
     def _resolve_section_dir(self, project_id: str, section_id: str) -> Optional[Path]:
         """兜底路径边界校验:section_id 含 ../ 或 ..\\ 时不得越出本项目的 sections 目录。
@@ -121,8 +145,7 @@ class ProjectRepository:
             return None
 
         try:
-            stat = meta_path.stat()
-            stamp = (stat.st_dev, stat.st_ino, stat.st_size, stat.st_mtime_ns, stat.st_ctime_ns)
+            stat, stamp = self._section_stamp(meta_path)
             cache_key = (project_id, section_id)
             with self._parsed_cache_lock:
                 cached = self._parsed_cache.get(cache_key)
@@ -160,13 +183,12 @@ class ProjectRepository:
                     paragraph.parent_block_markdown = self._render_source_block_markdown([paragraph])
                 if paragraph.segment_end is None:
                     paragraph.segment_end = paragraph.segment_start + len(paragraph.source)
-            after = meta_path.stat()
-            after_stamp = (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns)
+            _after, after_stamp = self._section_stamp(meta_path)
             if after_stamp != stamp:
                 if _read_attempt >= 2:
                     raise SectionDataError("Section changed repeatedly while reading; retry without overwriting")
                 return self.load_section(project_id, section_id, _read_attempt=_read_attempt + 1)
-            if stat.st_size <= 8 * 1024 * 1024:
+            if stat.st_size <= _MAX_SECTION_CACHE_FILE_BYTES:
                 with self._parsed_cache_lock:
                     previous = self._parsed_cache.pop(cache_key, None)
                     if previous is not None:
