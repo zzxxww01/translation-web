@@ -3,7 +3,7 @@ import { EDITING_OPTIONS, EDITING_OPTION_VERSION, getEditingInstruction } from '
 import { describeOptimizeOption } from '../features/post/types';
 
 describe('shared edit policy', () => {
-  it.each(['readable', 'idiomatic', 'professional'])('uses one versioned instruction for %s', id => {
+  it.each(['readable', 'idiomatic', 'professional', 'coherence'])('uses one versioned instruction for %s', id => {
     const item = EDITING_OPTIONS.find(option => option.id === id);
     expect(item).toBeDefined();
     expect(getEditingInstruction(id)).toBe(item?.instruction);

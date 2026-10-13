@@ -3,6 +3,7 @@ import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { OptimizationPanel } from './OptimizationPanel';
+import { EDITING_OPTIONS } from '@/shared/editingOptions';
 
 let host: HTMLDivElement;
 let root: Root;
@@ -43,5 +44,11 @@ describe('OptimizationPanel', () => {
     expect(coherence).toBeDefined();
     await act(async () => coherence!.click());
     expect(onOptimize).toHaveBeenCalledWith({ optionId: 'coherence' });
+    for (const option of EDITING_OPTIONS) {
+      const button = Array.from(host.querySelectorAll('button')).find(item => item.textContent?.includes(option.label));
+      expect(button).toBeDefined();
+      await act(async () => button!.click());
+      expect(onOptimize).toHaveBeenLastCalledWith({ optionId: option.id });
+    }
   });
 });
