@@ -106,7 +106,6 @@ export function SlackFeature() {
   return (
     <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-10 px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
       <PageHeader
-        eyebrow="Slack 回复 · Replies"
         title="Slack 回复助手"
         description="粘贴对方的英文消息，或直接写下你想说的中文，生成几种语气的专业回复。"
         actions={

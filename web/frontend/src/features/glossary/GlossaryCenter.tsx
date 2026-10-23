@@ -608,7 +608,6 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
           </div>
         ) : null}
         <PageHeader
-          eyebrow="术语库 · Glossary"
           title="统一术语管理"
           description={
             <>

@@ -237,9 +237,6 @@ export function WechatFeature() {
     <div className="flex h-full min-h-0 flex-col bg-background">
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border-subtle px-5 py-4 sm:px-8">
         <div className="min-w-0">
-          <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-500">
-            微信排版 · WeChat
-          </p>
           <h1 className="truncate text-xl text-text-primary sm:text-2xl">微信公众号排版</h1>
           <p className="mt-1 truncate text-xs text-text-muted">
             当前样式：{selectedThemeName} · {imageModeName}
