@@ -5,9 +5,7 @@ import type { ProviderInfo } from '../shared/types';
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
@@ -67,6 +65,16 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
     );
   }
 
+  // 只列模型名，不分来源分组；多个别名指向同一个真实模型时只显示第一个。
+  // 当前选中的若是被折叠的别名，仍保留它，否则选择框会显示成空白。
+  const seenModels = new Set<string>();
+  const models = providers.flatMap(provider => provider.models).filter(model => {
+    const key = model.real_model || model.alias;
+    if (seenModels.has(key) && model.alias !== value) return false;
+    seenModels.add(key);
+    return true;
+  });
+
   return (
     <Select value={value || 'default'} onValueChange={(val) => onChange(val === 'default' ? '' : val)} disabled={disabled}>
       <SelectTrigger className={className}>
@@ -77,26 +85,11 @@ export const ModelSelector: React.FC<ModelSelectorProps> = ({
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="default">默认模型</SelectItem>
-        {providers.map((provider) => (
-          <SelectGroup key={provider.id}>
-            <SelectLabel>{provider.name}</SelectLabel>
-            {provider.models.map((model) => (
-              <SelectItem
-                key={model.alias}
-                value={model.alias}
-                disabled={!model.available}
-              >
-                <div className="flex flex-col">
-                  <span className="font-medium">{model.name}</span>
-                  <span className="text-xs text-text-muted">
-                    {model.description}
-                    {model.supports_thinking && ' • 支持思考'}
-                    {!model.available && ' • 不可用'}
-                  </span>
-                </div>
-              </SelectItem>
-            ))}
-          </SelectGroup>
+        {models.map((model) => (
+          <SelectItem key={model.alias} value={model.alias} disabled={!model.available}>
+            {model.name}
+            {!model.available && <span className="text-text-muted"> · 不可用</span>}
+          </SelectItem>
         ))}
       </SelectContent>
     </Select>
