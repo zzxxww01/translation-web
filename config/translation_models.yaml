@@ -44,6 +44,11 @@ model_overrides:
       model: "gemini-pro"
       temperature: 0.3
 
+  gemini-flash-fallback:
+    all_phases:
+      model: "gemini-flash-fallback"
+      temperature: 0.3
+
 # 快速模式（牺牲质量换速度）
 fast:
   all_phases:

@@ -18,9 +18,9 @@ providers:
       requests_per_minute: 60
     models:
     - alias: gemini-flash-fallback
-      real_model: gemini-3.6-flash
-      name: Gemini Flash（官方兜底）
-      description: 快速低成本
+      real_model: gemini-2.5-flash
+      name: Gemini 2.5 Flash（官方兜底）
+      description: 官方直连兜底，已真实验证
       priority: 2
       supports_thinking: false
       config:
@@ -54,7 +54,7 @@ providers:
       exponential_backoff: true
   vectorengine-relay:
     type: vectorengine
-    name: VectorEngine 中转
+    name: RelayRouter 中转
     description: 高性价比中转服务
     group_priority: 1
     network:
@@ -72,8 +72,8 @@ providers:
       requests_per_minute: 1000
     models:
     - alias: deepseek-v3
-      real_model: deepseek-v4-pro-0813
-      name: DeepSeek v4 Pro
+      real_model: deepseek-v4.1-flash
+      name: DeepSeek v4.1 Flash
       description: 高性价比推理模型
       priority: 1
       supports_thinking: true
@@ -92,9 +92,9 @@ providers:
         max_tokens: 8192
         timeout: 120
     - alias: grok-4-1-fast-non-reasoning
-      real_model: grok-4.3
-      name: Grok 4.3
-      description: 实测可调用的 Grok 4.3；alias 保留以兼容历史选择
+      real_model: grok-4.7
+      name: Grok 4.7
+      description: Grok 4.7；alias 保留以兼容历史选择
       priority: 3
       supports_thinking: false
       config:
@@ -102,8 +102,8 @@ providers:
         max_tokens: 8192
         timeout: 120
     - alias: gemini-flash
-      real_model: gemini-3.6-flash
-      name: Gemini Flash（VectorEngine）
+      real_model: gemini-3.8-flash
+      name: Gemini 3.8 Flash（RelayRouter, Flash）
       description: 快速低成本
       priority: 2
       supports_thinking: false
@@ -112,8 +112,8 @@ providers:
         max_tokens: 8192
         timeout: 60
     - alias: gemini-pro
-      real_model: gemini-3.1-pro-preview
-      name: Gemini Pro（VectorEngine）
+      real_model: gemini-3.8-flash
+      name: Gemini 3.8 Flash（RelayRouter, Pro）
       description: 平衡质量与成本
       priority: 2
       supports_thinking: true
@@ -122,8 +122,8 @@ providers:
         max_tokens: 8192
         timeout: 120
     - alias: gemini-preview
-      real_model: gemini-3.1-pro-preview
-      name: Gemini Preview（VectorEngine）
+      real_model: gemini-3.8-flash
+      name: Gemini 3.8 Flash（RelayRouter, Preview）
       description: 预览版更强能力
       priority: 2
       supports_thinking: true
