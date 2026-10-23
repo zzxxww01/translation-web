@@ -1,5 +1,5 @@
 {
-  "version": 41,
+  "version": 43,
   "terms": [
     {
       "original": "TSMC",
@@ -1627,7 +1627,7 @@
       "original": "backlog",
       "translation": "在手订单",
       "strategy": "translate",
-      "note": null,
+      "note": "**判据：看积压的是什么。** 公司订单 / 合同语境→在手订单（非积压）；申请 / 队列语境（backlog of interconnection requests）→积压（的申请），此时不是订单。",
       "tags": [
         "business"
       ],
@@ -1635,7 +1635,7 @@
       "scope": "global",
       "source": "manual",
       "status": "active",
-      "updated_at": "2026-07-19T00:00:00"
+      "updated_at": "2026-09-22T02:07:18.156272"
     },
     {
       "original": "Bedrock",
@@ -2213,9 +2213,9 @@
     },
     {
       "original": "fleet",
-      "translation": "机群/星座/机台(按被计数对象)",
+      "translation": "机群/星座/机台/车队(按被计数对象)",
       "strategy": "translate",
-      "note": "**按被计数的对象选词**：卫星→星座；光刻机等设备→机台；服务器/GPU→机群；车队→车队。只有 fleet management 固定作「机群管理」。禁一律译「机群」",
+      "note": "**按被计数的对象选词**：卫星→星座；光刻机等设备→机台；服务器/GPU/机器人→机群；车辆→车队。fleet management 同样按对象判：服务器/机器人机群→机群管理；自动驾驶等车辆语境→车队管理（2026-09-21 机器人端侧推理篇确认）。禁一律译「机群」",
       "tags": [
         "datacenter"
       ],
@@ -2223,7 +2223,7 @@
       "scope": "global",
       "source": "corpus-audit-2026-08-09",
       "status": "active",
-      "updated_at": "2026-08-09T13:52:07.089830"
+      "updated_at": "2026-09-21T21:41:57.196094"
     },
     {
       "original": "time-to-power",
@@ -4266,9 +4266,9 @@
     },
     {
       "original": "genset",
-      "translation": "柴油发电机组",
-      "strategy": "first_annotate",
-      "note": "也简称柴发。",
+      "translation": "发电机组（看燃料与用途）",
+      "strategy": "translate",
+      "note": "**判据：看燃料与用途，禁一律写「柴油」。** 数据中心备用电源语境（backup/standby gensets）→柴油发电机组（可简称柴发）；与燃气轮机、燃料电池并列、作表后 / 现场主电源时多为燃气机组→发电机组（或燃气发电机组）。（2026-09 暂停令篇用户确认「发电机组」）",
       "tags": [
         "power"
       ],
@@ -4276,7 +4276,7 @@
       "scope": "global",
       "source": "domain-coverage-2026-08",
       "status": "active",
-      "updated_at": "2026-08-19T10:04:31.464697"
+      "updated_at": "2026-09-22T02:07:18.156272"
     },
     {
       "original": "BESS",
@@ -4621,7 +4621,7 @@
       "original": "TTFT",
       "translation": "TTFT",
       "strategy": "preserve",
-      "note": "首 token 时延（Time To First Token），首现可括注。",
+      "note": "首 token 延迟（Time To First Token），首现可括注；正文展开一律写「首 token 延迟」，与 latency=延迟 对齐，禁「首 token 时间/时延」",
       "tags": [
         "ai"
       ],
@@ -4629,7 +4629,7 @@
       "scope": "global",
       "source": "domain-coverage-2026-08",
       "status": "active",
-      "updated_at": "2026-08-19T10:04:31.464697"
+      "updated_at": "2026-10-08T08:57:50.001139"
     },
     {
       "original": "TPOT",
@@ -4758,6 +4758,195 @@
       "source": "domain-coverage-2026-08",
       "status": "active",
       "updated_at": "2026-08-19T10:04:31.464697"
+    },
+    {
+      "original": "FUD",
+      "translation": "看语境（恐惧、不确定性与怀疑 / 唱衰论调）",
+      "strategy": "first_annotate",
+      "note": "**「判据：看原文是否拼出了全称」**，不钦定中文名：原文写 fear, uncertainty (and/or) doubt (FUD) → 译出全称（恐惧、不确定性与怀疑）并括注 FUD；原文直接拿 FUD 当名词用（major FUD / spread FUD）→ 按语境落成具体的中文说法（唱衰论调 / 恐慌情绪 / 带节奏），首现括注一次 FUD，禁把缩写强行展开成十一字长名。",
+      "tags": [
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "are-open-models-catching-up-2026-09",
+      "status": "active",
+      "updated_at": "2026-09-20T01:33:45.297101"
+    },
+    {
+      "original": "moratorium",
+      "translation": "暂停令",
+      "strategy": "translate",
+      "note": "**判据：看是临时冻结还是永久禁止。** 临时冻结审批、到期即失效的措施（datacenter moratorium，常与 permanent ban 并提）→暂停令；永久禁止（ban）→禁令，二者同篇出现时必须区分；金融语境 debt/payment moratorium→暂停偿债 / 延期偿付。（2026-09-22 用户确认统一为「暂停令」；《Stop Saying》篇原作「禁建令」，已同步改为「暂停令」。禁建令只强调禁止、体现不出临时性，不用）",
+      "tags": [
+        "policy"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "datacenter-moratoriums-2026-09",
+      "status": "active",
+      "updated_at": "2026-09-22T02:25:32.164072"
+    },
+    {
+      "original": "DSP",
+      "translation": "看语境（数字信号处理器 / 配电服务商）",
+      "strategy": "first_annotate",
+      "note": "**判据：看领域。** 芯片 / 光模块 / SerDes 语境→数字信号处理器（DSP）；电力语境（ERCOT，常与 TDSP 并提）→配电服务商（DSP，Distribution Service Provider）。",
+      "tags": [
+        "acronym"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "datacenter-moratoriums-2026-09",
+      "status": "active",
+      "updated_at": "2026-09-22T02:07:18.156272"
+    },
+    {
+      "original": "CDR",
+      "translation": "看语境（时钟数据恢复 / 容量、需求与备用报告）",
+      "strategy": "first_annotate",
+      "note": "**判据：看领域。** SerDes / 光模块语境→时钟数据恢复（CDR）；ERCOT 电力报告语境（Capacity, Demand and Reserves）→容量、需求与备用（CDR）报告。",
+      "tags": [
+        "acronym"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "datacenter-moratoriums-2026-09",
+      "status": "active",
+      "updated_at": "2026-09-22T02:07:18.156272"
+    },
+    {
+      "original": "MEP",
+      "translation": "机电管线",
+      "strategy": "first_annotate",
+      "note": "**判据：看缩写本身。** MEP（Mechanical, Electrical & Plumbing）含给排水管线→机电管线（MEP）；原文写 M&E（Mechanical & Electrical）→机电（M&E）、M&E 层/M&E 阶段=机电层/机电安装阶段。两者不混写。",
+      "tags": [
+        "datacenter",
+        "acronym"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "china-datacenter-model-2026-10",
+      "status": "active",
+      "updated_at": "2026-10-08T00:02:02.451854"
+    },
+    {
+      "original": "Eastern Data, Western Compute",
+      "translation": "东数西算",
+      "strategy": "first_annotate",
+      "note": "中国国家工程官方名称；缩写 EDWC 在中文正文中一律写「东数西算」，不保留 EDWC。",
+      "tags": [
+        "policy",
+        "datacenter"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "china-datacenter-model-2026-10",
+      "status": "active",
+      "updated_at": "2026-10-08T00:02:02.451854"
+    },
+    {
+      "original": "wholesale / retail (colocation)",
+      "translation": "批发型 / 零售型",
+      "strategy": "translate",
+      "note": "**判据：看是否数据中心租赁语境。** IDC/托管语境→批发型/零售型（批发型托管、零售型机柜）；电力/能源市场语境的 wholesale→批发（电价、批发市场）；裸金属云语境沿用「批发裸金属」。",
+      "tags": [
+        "datacenter"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "china-datacenter-model-2026-10",
+      "status": "active",
+      "updated_at": "2026-10-08T00:02:02.451854"
+    },
+    {
+      "original": "ZDATA",
+      "translation": "中联数据",
+      "strategy": "first_annotate",
+      "note": "中国第三方数据中心服务商，字节跳动主要供应商；2026-10 查证（2024 年曾传赴港上市）",
+      "tags": [
+        "company",
+        "datacenter"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "china-datacenter-model-2026-10",
+      "status": "active",
+      "updated_at": "2026-10-08T08:49:25.262532"
+    },
+    {
+      "original": "Hoyinn",
+      "translation": "合盈数据",
+      "strategy": "first_annotate",
+      "note": "中国第三方数据中心服务商（怀来/郑州，官网 hoyinn.com）；禁音译",
+      "tags": [
+        "company",
+        "datacenter"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "china-datacenter-model-2026-10",
+      "status": "active",
+      "updated_at": "2026-10-08T08:49:25.262532"
+    },
+    {
+      "original": "Yunlian",
+      "translation": "云联数据",
+      "strategy": "first_annotate",
+      "note": "阿里张北云联数据中心的运营方；仅在张北/阿里语境下适用，别处同名需另查",
+      "tags": [
+        "company",
+        "datacenter"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "china-datacenter-model-2026-10",
+      "status": "active",
+      "updated_at": "2026-10-08T08:49:25.262532"
+    },
+    {
+      "original": "approved small, built big",
+      "translation": "批小建大",
+      "strategy": "first_annotate",
+      "note": "广东省能源局 2023 年对腾讯清远项目的官方定性用语；禁写「小批大建」",
+      "tags": [
+        "policy",
+        "datacenter"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "china-datacenter-model-2026-10",
+      "status": "active",
+      "updated_at": "2026-10-08T08:49:25.262532"
+    },
+    {
+      "original": "all-to-all",
+      "translation": "全对全/全互联",
+      "strategy": "translate",
+      "note": "**判据：说的是通信模式还是拓扑。** MoE 专家路由的 all-to-all 通信/流量/集合操作→全对全（全对全通信）；网络拓扑、物理连接方式（all-to-all topology/connected）→全互联。二者不得混用",
+      "tags": [
+        "ai",
+        "network"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "four-step-2026-10-08",
+      "status": "active",
+      "updated_at": "2026-10-08T08:57:50.001139"
+    },
+    {
+      "original": "midfill",
+      "translation": "续填充",
+      "strategy": "first_annotate",
+      "note": "SemiAnalysis 自造词：在已缓存上下文后追加新输入的填充阶段，与 prefill=预填充 成对；input fill=输入填充（预填充+续填充统称）",
+      "tags": [
+        "ai"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "four-step-2026-10-08",
+      "status": "active",
+      "updated_at": "2026-10-08T08:57:50.001139"
     }
   ]
 }
