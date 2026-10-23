@@ -7,28 +7,29 @@
 @layer base {
   :root {
     /* 字体系统 */
-    --font-display: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-    --font-body: Inter, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-    --font-chinese: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+    /* 标题用自托管思源宋体（按 unicode-range 分片，只下载用到的字），正文无衬线 */
+    --font-display: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    --font-body: "Inter Variable", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+    --font-chinese: var(--font-body);
     --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
     /* 主色渐变 */
-    --color-primary-start: #1a365d;
-    --color-primary-mid: #3730a3;
-    --color-primary-end: #5b21b6;
+    --color-primary-start: #a33d70;
+    --color-primary-mid: #983867;
+    --color-primary-end: #8e3461;
 
     /* 辅助色渐变 */
-    --color-secondary-start: #0891b2;
-    --color-secondary-end: #3b82f6;
+    --color-secondary-start: #6b5a66;
+    --color-secondary-end: #574e57;
 
     /* 强调色渐变 */
-    --color-accent-start: #f59e0b;
-    --color-accent-end: #f97316;
+    --color-accent-start: #c56f98;
+    --color-accent-end: #a33d70;
 
     /* 背景层次 */
-    --color-bg-base: #f8fafc;
+    --color-bg-base: #fbf8f6;
     --color-bg-elevated: #ffffff;
-    --color-bg-subtle: #f1f5f9;
+    --color-bg-subtle: #f7f2f3;
 
     /* 文本层次 */
     --color-text-primary: #0f172a;
@@ -74,15 +75,19 @@
     color: var(--color-text-primary);
   }
 
-  /* 中文字体优化 */
-  :lang(zh), :lang(zh-CN), :lang(zh-TW) {
-    font-family: var(--font-chinese);
-  }
+  /* 不再用 :lang(zh) 给每个元素强设字体：html[lang=zh-CN] 下它会命中所有元素，
+     优先级压过 h1/h2 的宋体规则，也打断字体继承。中文字体已在 --font-body 里。 */
 
   /* 标题字体 */
-  h1, h2, h3, h4, h5, h6 {
+  /* 只有 h1/h2 用宋体做"刊头"，h3 以下保持无衬线，避免小字号宋体发虚 */
+  h1, h2 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  h3, h4, h5, h6 {
+    font-weight: 600;
     letter-spacing: 0;
   }
 
@@ -108,10 +113,8 @@
 
   .gradient-mesh-fluid {
     background:
-      radial-gradient(at 0% 0%, rgba(26, 54, 93, 0.08) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(91, 33, 182, 0.08) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(8, 145, 178, 0.08) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(59, 130, 246, 0.08) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(163, 61, 112, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(183, 121, 31, 0.04) 0px, transparent 50%);
     animation: meshFlow 20s ease-in-out infinite;
   }
 
@@ -193,10 +196,10 @@
   /* 呼吸发光 */
   @keyframes breathingGlow {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(91, 33, 182, 0.3);
+      box-shadow: 0 0 20px rgba(163, 61, 112, 0.2);
     }
     50% {
-      box-shadow: 0 0 40px rgba(91, 33, 182, 0.6);
+      box-shadow: 0 0 40px rgba(163, 61, 112, 0.4);
     }
   }
 
@@ -236,16 +239,15 @@
 /* ============ 玻璃态组件 ============ */
 @layer components {
   .card-glass {
-    background: rgba(255, 255, 255, 0.96);
-    border: 1px solid #e2e8f0;
-    border-radius: var(--radius-md);
-    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+    background: #ffffff;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 1px 2px rgba(67, 26, 48, 0.04), 0 8px 24px -12px rgba(67, 26, 48, 0.08);
     transition: border-color 0.2s var(--ease-smooth), box-shadow 0.2s var(--ease-smooth);
   }
 
   .card-glass:hover {
-    border-color: #cbd5e1;
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.1);
+    border-color: var(--color-border);
   }
 
   .card-glass-dark {
@@ -258,48 +260,26 @@
 
 /* ============ 流动按钮 ============ */
 @layer components {
+  /* 主按钮：实色梅子色，不做渐变、涟漪、位移，靠颜色深浅表达状态 */
   .button-fluid {
     position: relative;
-    padding: 12px 32px;
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1rem;
+    font-family: var(--font-body);
+    font-weight: 500;
     color: white;
-    background: linear-gradient(135deg, var(--color-primary-start), var(--color-primary-end));
-    background-size: 200% 200%;
-    border: none;
+    background: var(--color-primary-500);
+    border: 1px solid var(--color-primary-600);
     border-radius: var(--radius-md);
-    overflow: hidden;
     cursor: pointer;
-    transition: all 0.4s var(--ease-fluid);
-    animation: gradientFlow 8s ease infinite;
-  }
-
-  .button-fluid::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-  }
-
-  .button-fluid:hover::before {
-    width: 300px;
-    height: 300px;
+    box-shadow: 0 1px 2px rgba(67, 26, 48, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transition: background-color 0.15s var(--ease-smooth), box-shadow 0.15s var(--ease-smooth);
   }
 
   .button-fluid:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(91, 33, 182, 0.3);
+    background: var(--color-primary-600);
   }
 
   .button-fluid:active {
-    transform: translateY(0);
+    background: var(--color-primary-700);
   }
 
   /* 次要按钮 */
@@ -308,7 +288,7 @@
   }
 
   .button-fluid-secondary:hover {
-    box-shadow: 0 12px 24px rgba(8, 145, 178, 0.3);
+    background: var(--color-secondary-end);
   }
 
   /* 强调按钮 */
@@ -317,31 +297,28 @@
   }
 
   .button-fluid-accent:hover {
-    box-shadow: 0 12px 24px rgba(245, 158, 11, 0.3);
+    background: var(--color-accent-end);
   }
 }
 
 /* ============ 流动输入框 ============ */
 @layer components {
   .input-fluid {
-    padding: 14px 20px;
+    padding: 12px 16px;
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.9375rem;
     color: var(--color-text-primary);
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid transparent;
-    border-radius: var(--radius-md);
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     outline: none;
     transition: all 0.3s var(--ease-smooth);
   }
 
   .input-fluid:focus {
     background: white;
-    border-color: var(--color-primary-end);
-    box-shadow:
-      0 0 0 4px rgba(91, 33, 182, 0.1),
-      0 8px 16px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
+    border-color: var(--color-primary-400);
+    box-shadow: 0 0 0 3px rgba(163, 61, 112, 0.12);
   }
 
   .input-fluid::placeholder {
@@ -354,14 +331,14 @@
        在宽容器里就缩成窄窄一条、右侧全是空白——微信排版页的左栏即如此。
        放在 components 层，调用处仍可用 utilities 的 w-* 覆盖。 */
     width: 100%;
-    padding: 14px 20px;
+    padding: 12px 16px;
     font-family: var(--font-body);
-    font-size: 1rem;
+    font-size: 0.9375rem;
     line-height: 1.6;
     color: var(--color-text-primary);
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid transparent;
-    border-radius: var(--radius-md);
+    background: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
     outline: none;
     resize: vertical;
     min-height: 120px;
@@ -370,11 +347,8 @@
 
   .textarea-fluid:focus {
     background: white;
-    border-color: var(--color-primary-end);
-    box-shadow:
-      0 0 0 4px rgba(91, 33, 182, 0.1),
-      0 8px 16px rgba(0, 0, 0, 0.08);
-    transform: translateY(-2px);
+    border-color: var(--color-primary-400);
+    box-shadow: 0 0 0 3px rgba(163, 61, 112, 0.12);
   }
 }
 
@@ -387,36 +361,21 @@
     gap: var(--spacing-md);
   }
 
-  .grid-fluid > *:nth-child(3n+1) {
-    transform: rotate(-0.5deg);
-  }
 
-  .grid-fluid > *:nth-child(3n+2) {
-    transform: rotate(0.5deg);
-  }
-
-  .grid-fluid > *:nth-child(3n+3) {
-    transform: rotate(-0.3deg);
-  }
-
-  .grid-fluid > *:hover {
-    transform: rotate(0deg) scale(1.02);
-    z-index: 10;
-  }
 }
 
 /* ============ 发光效果 ============ */
 @layer utilities {
   .glow-primary {
-    box-shadow: 0 0 20px rgba(91, 33, 182, 0.4);
+    box-shadow: 0 0 20px rgba(163, 61, 112, 0.3);
   }
 
   .glow-secondary {
-    box-shadow: 0 0 20px rgba(8, 145, 178, 0.4);
+    box-shadow: 0 0 20px rgba(87, 78, 87, 0.3);
   }
 
   .glow-accent {
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+    box-shadow: 0 0 20px rgba(197, 111, 152, 0.3);
   }
 
   .glow-success {
