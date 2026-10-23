@@ -1,5 +1,8 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+// 字体自托管：宋体按 unicode-range 切成约百个分片，页面只下载实际用到的字
+import '@fontsource/noto-serif-sc/600.css'
+import '@fontsource-variable/inter/wght.css'
 import './index.css'
 import App from './App.tsx'
 

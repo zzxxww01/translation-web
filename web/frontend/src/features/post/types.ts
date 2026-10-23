@@ -1,3 +1,4 @@
+import type { LucideIcon } from 'lucide-react';
 import { EDITING_OPTIONS, EDITING_OPTION_VERSION } from '../../shared/editingOptions';
 /**
  * 帖子翻译相关的类型定义
@@ -6,7 +7,7 @@ import { EDITING_OPTIONS, EDITING_OPTION_VERSION } from '../../shared/editingOpt
 export interface Instruction {
   id: string;
   label: string;
-  icon: string;
+  icon?: LucideIcon;
   instruction: string;
 }
 

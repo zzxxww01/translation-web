@@ -1,25 +1,24 @@
 import { cva, type VariantProps } from "class-variance-authority"
 
 export const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-45 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default:
-          "button-fluid shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]",
+        default: "button-fluid",
         destructive:
-          "bg-gradient-to-br from-red-500 to-red-600 text-white shadow-md hover:shadow-lg hover:from-red-600 hover:to-red-700 hover:scale-[1.02] active:scale-[0.98]",
+          "border border-error bg-error text-white shadow-sm hover:bg-[#9c2f32]",
         outline:
-          "border-2 border-primary/20 bg-white/80 backdrop-blur-sm shadow-sm hover:border-primary/40 hover:bg-white hover:shadow-md hover:scale-[1.02] active:scale-[0.98]",
+          "border border-border bg-white text-text-primary shadow-[0_1px_2px_rgba(67,26,48,0.05)] hover:border-primary-300 hover:bg-primary-50 hover:text-primary-700",
         secondary:
-          "bg-gradient-to-br from-slate-100 to-slate-200 text-slate-700 shadow-sm hover:from-slate-200 hover:to-slate-300 hover:shadow-md hover:scale-[1.02] active:scale-[0.98]",
-        ghost: "hover:bg-primary/10 hover:text-primary transition-colors",
+          "border border-transparent bg-bg-tertiary text-text-secondary hover:bg-primary-50 hover:text-primary-700",
+        ghost: "text-text-secondary hover:bg-primary-50 hover:text-primary-700",
         link: "text-primary underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-10 px-5 py-2",
-        sm: "h-8 rounded-lg px-3 text-xs",
-        lg: "h-12 rounded-xl px-8 text-base",
+        default: "h-10 px-4 py-2",
+        sm: "h-8 rounded-md px-3 text-xs",
+        lg: "h-11 rounded-lg px-6 text-[15px]",
         icon: "h-10 w-10",
       },
     },

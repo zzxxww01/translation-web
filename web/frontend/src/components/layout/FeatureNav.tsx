@@ -27,8 +27,8 @@ export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNa
 
   return (
     <nav aria-label="主要功能" className={cn(
-      'flex gap-1',
-      isVertical ? 'flex-col' : 'items-center'
+      'flex',
+      isVertical ? 'flex-col gap-1' : 'h-full items-stretch gap-1'
     )}>
       {navItems.map((item) => (
         <NavLink
@@ -38,15 +38,25 @@ export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNa
           aria-label={item.label}
           className={({ isActive }) =>
             cn(
-              'flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors',
-              isVertical && 'w-full',
-              isActive
-                ? 'bg-primary text-primary-foreground shadow-sm'
-                : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+              'text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+              isVertical
+                ? cn(
+                    'flex w-full items-center gap-3 rounded-md px-3 py-2.5',
+                    isActive
+                      ? 'bg-primary-50 font-medium text-primary-700'
+                      : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'
+                  )
+                : cn(
+                    // 横向导航用底部 2px 梅子色下划线标出当前页，压在顶栏底边上
+                    'relative flex items-center px-3 after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:rounded-full after:transition-colors',
+                    isActive
+                      ? 'font-medium text-text-primary after:bg-primary-500'
+                      : 'text-text-muted after:bg-transparent hover:text-text-primary hover:after:bg-border'
+                  )
             )
           }
         >
-          {item.icon}
+          {isVertical && item.icon}
           <span>{item.label}</span>
         </NavLink>
       ))}

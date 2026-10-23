@@ -50,7 +50,7 @@ export function ReplyWorkspace({
         <Button
           onClick={onGenerate}
           disabled={!currentInput.trim() || isGenerating}
-          className="w-full h-9"
+          className="h-10 w-full"
         >
           {isGenerating ? (
             <>
@@ -67,22 +67,13 @@ export function ReplyWorkspace({
       </div>
 
       {hasVersions && (
-        <Card className="workspace-container relative p-6">
-          {/* Noise texture overlay */}
-          <div
-            className="absolute inset-0 pointer-events-none opacity-[0.03]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-            }}
-          />
-
-          <div className="relative z-10 space-y-2">
-            <div className="text-xs font-semibold" style={{ color: 'var(--color-muted)' }}>💡 生成的版本</div>
+        <Card className="relative bg-bg-tertiary p-5 sm:p-6">
+          <div className="relative space-y-3">
+            <div className="text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-500">生成的版本</div>
             {currentVersions.map((version, index) => (
               <div
                 key={version.version}
                 className="version-card-animate"
-                style={{ marginLeft: index === 1 ? '16px' : '0' }}
               >
                 <VersionCard
                   version={version}

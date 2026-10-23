@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/layout/PageHeader';
 import { CheckSquare, Languages, Mail, Clock } from 'lucide-react';
 import { useToolsStore } from '@/shared/stores';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -18,13 +19,13 @@ export function ToolsFeature() {
 
   return (
     <div className="flex h-full min-w-0 overflow-auto">
-      <div className="mx-auto w-full min-w-0 max-w-4xl px-4 py-5 sm:p-6 animate-liquid-rise">
-        <div className="mb-5 sm:mb-8">
-          <h1 className="text-2xl font-bold text-foreground sm:text-3xl" style={{ fontFamily: 'var(--font-display)' }}>
-            工具箱
-          </h1>
-          <p className="mt-1 text-sm text-muted-foreground">实用翻译辅助工具</p>
-        </div>
+      <div className="mx-auto w-full min-w-0 max-w-4xl px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
+        <PageHeader
+          className="mb-7"
+          eyebrow="工具箱 · Toolkit"
+          title="工具箱"
+          description="时区换算、随手翻译、邮件回复和待办，跨时区协作时的小工具。"
+        />
 
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
           <div className="-mx-4 mb-5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:mb-6 sm:px-0">
@@ -33,7 +34,7 @@ export function ToolsFeature() {
                 <TabsTrigger
                   key={tab.id}
                   value={tab.id}
-                  className="h-9 shrink-0 gap-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  className="h-8 shrink-0 gap-2"
                 >
                   {tab.icon}
                   {tab.label}

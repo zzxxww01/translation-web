@@ -57,12 +57,12 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
           onClick={onTranslate}
           disabled={!value.trim() || isLoading}
           size="sm"
-          className="h-11 min-w-28 rounded-full px-5 shadow-md hover:shadow-lg sm:h-10 sm:min-w-10 sm:p-0"
+          className="h-11 min-w-28 px-5 sm:h-10"
           title="翻译 (Ctrl+Enter)"
           aria-label={isTranslating ? '正在翻译帖子' : '翻译帖子'}
         >
           {isTranslating ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
-          <span className="sm:hidden">{isTranslating ? '翻译中' : '翻译'}</span>
+          <span>{isTranslating ? '翻译中' : '翻译'}</span>
         </Button>
       </div>
     </div>

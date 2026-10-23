@@ -4,7 +4,10 @@ import { Input } from '@/components/ui/input';
 import {
   Dialog, DialogContent, DialogHeader, DialogTitle,
 } from '@/components/ui/dialog';
-import { Loader2, Wand2, Send } from 'lucide-react';
+import {
+  AlignLeft, BookOpenText, FileText, HelpCircle, Link2, Loader2, MessageCircle, Scissors,
+  ScrollText, Send, Sparkles, Wand2,
+} from 'lucide-react';
 import {
   OPTIMIZATION_INSTRUCTION_MAX_LENGTH,
   type Instruction,
@@ -13,17 +16,17 @@ import {
 import { EDITING_OPTIONS } from '@/shared/editingOptions';
 
 const quickInstructions: Instruction[] = [
-  ...EDITING_OPTIONS.map(option => ({ ...option, icon: option.id === 'coherence' ? '🔗' : '✨' })),
-  { id: 'custom', label: '自定义', icon: '🔧', instruction: '' },
+  ...EDITING_OPTIONS.map(option => ({ ...option, icon: option.id === 'coherence' ? Link2 : Sparkles })),
+  { id: 'custom', label: '自定义', icon: AlignLeft, instruction: '' },
 ];
 
 const moreInstructions: Instruction[] = [
-  { id: 'shorten', label: '精简内容', icon: '✂️', instruction: '请精简译文内容，删除冗余表达，只保留核心信息和关键观点。' },
-  { id: 'expand', label: '展开说明', icon: '📖', instruction: '请对译文中的关键点添加更多解释和背景信息，使内容更丰富。' },
-  { id: 'formal', label: '正式公文', icon: '📜', instruction: '请将译文重写为正式公文风格，使用规范、严谨的官方表达。' },
-  { id: 'story', label: '故事化', icon: '📖', instruction: '请用叙事方式重新组织译文内容，使其更具故事性和可读性。' },
-  { id: 'qa', label: 'Q&A格式', icon: '❓', instruction: '请将译文转换为问答形式，先列出问题，然后给出答案。' },
-  { id: 'social', label: '社交媒体', icon: '💬', instruction: '请将译文改写为适合社交媒体传播的风格，使用轻松活泼的表达，添加emoji。' },
+  { id: 'shorten', label: '精简内容', icon: Scissors, instruction: '请精简译文内容，删除冗余表达，只保留核心信息和关键观点。' },
+  { id: 'expand', label: '展开说明', icon: BookOpenText, instruction: '请对译文中的关键点添加更多解释和背景信息，使内容更丰富。' },
+  { id: 'formal', label: '正式公文', icon: ScrollText, instruction: '请将译文重写为正式公文风格，使用规范、严谨的官方表达。' },
+  { id: 'story', label: '故事化', icon: FileText, instruction: '请用叙事方式重新组织译文内容，使其更具故事性和可读性。' },
+  { id: 'qa', label: 'Q&A格式', icon: HelpCircle, instruction: '请将译文转换为问答形式，先列出问题，然后给出答案。' },
+  { id: 'social', label: '社交媒体', icon: MessageCircle, instruction: '请将译文改写为适合社交媒体传播的风格，使用轻松活泼的表达，添加emoji。' },
 ];
 
 interface OptimizationPanelProps {
@@ -65,11 +68,11 @@ export function OptimizationPanel({
 
   return (
     <>
-      <div className="rounded-xl border border-white/60 bg-white/85 p-4 shadow-sm backdrop-blur-sm">
+      <div className="card-glass p-5">
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <Wand2 className="h-4 w-4 text-primary" />
-            <h4 className="text-sm font-semibold">优化指令</h4>
+            <Wand2 className="h-4 w-4 text-primary-500" />
+            <h4 className="text-sm font-semibold text-text-primary">优化指令</h4>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -81,9 +84,10 @@ export function OptimizationPanel({
                 type="button"
                 onClick={() => handleQuick(inst.id)}
                 disabled={disabled}
-                className="min-h-10 px-3 text-sm sm:min-h-9 sm:text-xs"
+                className="min-h-10 rounded-full px-3.5 text-sm sm:min-h-8 sm:text-xs"
               >
-                {inst.icon} {inst.label}
+                {inst.icon && <inst.icon className="text-primary-400" />}
+                {inst.label}
               </Button>
             ))}
             <Button
@@ -92,7 +96,7 @@ export function OptimizationPanel({
               type="button"
               onClick={() => setShowMore(true)}
               disabled={disabled}
-              className="min-h-10 border-dashed px-3 text-sm sm:min-h-9 sm:text-xs"
+              className="min-h-10 rounded-full border-dashed px-3.5 text-sm sm:min-h-8 sm:text-xs"
             >
               更多...
             </Button>
@@ -148,7 +152,7 @@ export function OptimizationPanel({
                 disabled={isLoading}
                 className="h-auto min-h-16 flex-row justify-start gap-3 py-3 text-left sm:min-h-20 sm:flex-col sm:justify-center sm:gap-2 sm:py-4"
               >
-                <span className="text-xl sm:text-2xl">{inst.icon}</span>
+                {inst.icon && <inst.icon className="!size-5 text-primary-500" />}
                 <span className="text-sm">{inst.label}</span>
               </Button>
             ))}

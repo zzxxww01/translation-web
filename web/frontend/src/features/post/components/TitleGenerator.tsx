@@ -51,7 +51,7 @@ export function TitleGenerator({
   };
 
   return (
-    <div className="rounded-xl border border-white/60 bg-white/85 p-4 shadow-sm backdrop-blur-sm">
+    <div className="card-glass p-5">
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
