@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { BookOpen, MessageSquare, MessageCircle, Wrench, FileText } from 'lucide-react';
+import { BookOpen, MessageSquare, MessageCircle, Wrench, FileText, SquareTerminal } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NavItem {
@@ -14,6 +14,7 @@ const navItems: NavItem[] = [
   { path: '/wechat', label: '微信排版', icon: <FileText className="h-4 w-4" /> },
   { path: '/slack', label: 'Slack 回复', icon: <MessageCircle className="h-4 w-4" /> },
   { path: '/tools', label: '工具箱', icon: <Wrench className="h-4 w-4" /> },
+  { path: '/terminal', label: '终端', icon: <SquareTerminal className="h-4 w-4" /> },
 ];
 
 interface FeatureNavProps {
@@ -53,4 +54,4 @@ export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNa
   );
 }
 
-export type FeatureTab = 'document' | 'post' | 'wechat' | 'slack' | 'tools';
+export type FeatureTab = 'document' | 'post' | 'wechat' | 'slack' | 'tools' | 'terminal';

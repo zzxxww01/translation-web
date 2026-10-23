@@ -63,7 +63,7 @@ class Settings(BaseSettings):
 
     # VectorEngine (OpenAI-compatible relay)
     vectorengine_api_key: str = ""
-    vectorengine_base_url: str = "https://api.vectorengine.ai/v1"
+    vectorengine_base_url: str = "https://api.relayrouter.app/v1"
     vectorengine_default_model: str = "deepseek-v3.2"
     vectorengine_temperature: float = 0.7
     vectorengine_max_tokens: int = 8192
