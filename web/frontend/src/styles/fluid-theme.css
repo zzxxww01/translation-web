@@ -304,6 +304,8 @@
 /* ============ 流动输入框 ============ */
 @layer components {
   .input-fluid {
+    /* 同 textarea：不写 width 时 input 只有浏览器默认宽度，放进 space-y 布局会缩成一小截 */
+    width: 100%;
     padding: 12px 16px;
     font-family: var(--font-body);
     font-size: 0.9375rem;

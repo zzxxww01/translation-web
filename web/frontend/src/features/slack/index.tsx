@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/layout/PageHeader';
 import { toast } from 'sonner';
 import { ModelSelector } from '@/components/ModelSelector';
 import type { SlackReplyVariant } from '@/shared/types';
@@ -103,29 +104,23 @@ export function SlackFeature() {
   };
 
   return (
-    <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-12 p-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-2xl font-semibold" style={{ fontFamily: 'var(--font-display)' }}>
-            Slack 回复助手
-          </h2>
-          <p className="text-sm mt-1" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-muted)' }}>
-            粘贴对方英文或输入中文，生成专业回复
-          </p>
-        </div>
-        <div className="w-64">
-          <label className="block text-xs text-muted-foreground mb-1.5">
-            选择模型
-          </label>
-          <ModelSelector
-            value={selectedModel}
-            onChange={setSelectedModel}
-            className="h-9 text-sm"
-            disabled={isGenerating}
-          />
-        </div>
-      </div>
+    <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-10 px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
+      <PageHeader
+        eyebrow="Slack 回复 · Replies"
+        title="Slack 回复助手"
+        description="粘贴对方的英文消息，或直接写下你想说的中文，生成几种语气的专业回复。"
+        actions={
+          <div className="w-full sm:w-64">
+            <label className="mb-1.5 block text-xs text-text-muted">选择模型</label>
+            <ModelSelector
+              value={selectedModel}
+              onChange={setSelectedModel}
+              className="h-9 text-sm"
+              disabled={isGenerating}
+            />
+          </div>
+        }
+      />
 
       {/* 对话历史 */}
       <ConversationBubbles

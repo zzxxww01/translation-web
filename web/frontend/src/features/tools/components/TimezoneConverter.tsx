@@ -66,10 +66,12 @@ function LiveTimeCard({ title, timeZone }: { title: string; timeZone: string }) 
 
   return (
     <Card>
-      <CardContent className="pt-4 text-center">
-        <div className="mb-1 text-sm text-muted-foreground">{title}</div>
-        <div className="text-2xl font-bold tabular-nums">{time || <Skeleton className="h-8 w-24 mx-auto" />}</div>
-        <div className="text-sm text-muted-foreground">{date}</div>
+      <CardContent className="py-5 text-center">
+        <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-500">{title}</div>
+        <div className="text-[30px] font-semibold leading-none tabular-nums text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>
+          {time || <Skeleton className="h-8 w-24 mx-auto" />}
+        </div>
+        <div className="mt-2 text-xs text-text-muted">{date}</div>
       </CardContent>
     </Card>
   );

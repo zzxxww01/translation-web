@@ -235,11 +235,14 @@ export function WechatFeature() {
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-background">
-      <header className="flex shrink-0 items-center justify-between gap-3 border-b px-4 py-3 sm:px-6">
+      <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border-subtle px-5 py-4 sm:px-8">
         <div className="min-w-0">
-          <h1 className="truncate text-lg font-semibold sm:text-xl">微信公众号排版</h1>
-          <p className="mt-0.5 truncate text-xs text-muted-foreground">
-            {selectedThemeName} · {imageModeName}
+          <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-500">
+            微信排版 · WeChat
+          </p>
+          <h1 className="truncate text-xl text-text-primary sm:text-2xl">微信公众号排版</h1>
+          <p className="mt-1 truncate text-xs text-text-muted">
+            当前样式：{selectedThemeName} · {imageModeName}
           </p>
         </div>
         <Button
@@ -262,7 +265,7 @@ export function WechatFeature() {
           onClick={() => setWorkspaceView('editor')}
           className={cn(
             'flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm font-medium',
-            workspaceView === 'editor' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
+            workspaceView === 'editor' ? 'bg-primary-50 text-primary-700' : 'text-text-muted'
           )}
         >
           <FileText className="h-4 w-4" />
@@ -275,7 +278,7 @@ export function WechatFeature() {
           onClick={() => setWorkspaceView('preview')}
           className={cn(
             'flex h-9 flex-1 items-center justify-center gap-2 rounded-md text-sm font-medium',
-            workspaceView === 'preview' ? 'bg-primary text-primary-foreground' : 'text-muted-foreground'
+            workspaceView === 'preview' ? 'bg-primary-50 text-primary-700' : 'text-text-muted'
           )}
         >
           <Eye className="h-4 w-4" />
@@ -286,7 +289,7 @@ export function WechatFeature() {
       <main className="grid min-h-0 flex-1 lg:grid-cols-2">
         <section
           className={cn(
-            'min-h-0 border-r bg-background p-3 sm:p-4',
+            'min-h-0 border-r border-border-subtle bg-white p-3 sm:p-5',
             workspaceView !== 'editor' && 'hidden lg:block'
           )}
           role="tabpanel"
@@ -303,7 +306,7 @@ export function WechatFeature() {
 
         <section
           className={cn(
-            'min-h-0 bg-white',
+            'min-h-0 bg-bg-tertiary',
             workspaceView !== 'preview' && 'hidden lg:block'
           )}
           role="tabpanel"
@@ -317,9 +320,12 @@ export function WechatFeature() {
               srcDoc={previewDocument}
             />
           ) : (
-            <div className="flex h-full min-h-[420px] flex-col items-center justify-center gap-3 px-6 text-center text-sm text-muted-foreground">
-              <Image className="h-8 w-8" aria-hidden="true" />
-              <p>转换后的内容将在这里显示</p>
+            <div className="flex h-full min-h-[420px] flex-col items-center justify-center gap-3 px-6 text-center">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full border border-primary-200 bg-white text-primary-400">
+                <Image className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <p className="text-lg text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>公众号预览</p>
+              <p className="max-w-xs text-sm text-text-muted">左侧写好 Markdown，点「转换」后在这里看到排版效果，再一键复制到微信编辑器。</p>
             </div>
           )}
         </section>

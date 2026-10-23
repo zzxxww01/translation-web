@@ -1,3 +1,4 @@
+import { PageHeader } from '@/components/layout/PageHeader';
 import { useState, useEffect, useCallback, useRef, useLayoutEffect } from 'react';
 import { toast } from 'sonner';
 import { usePostStore } from '@/shared/stores';
@@ -431,12 +432,15 @@ export function PostFeature() {
 
   return (
     <div className="min-h-full overflow-auto">
-      <div className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 sm:py-6">
-        <div className="mb-5 flex flex-col gap-4 sm:mb-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="min-w-0">
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <h2 className="text-xl font-semibold">帖子翻译</h2>
-              {/* 进行中的状态跟在标题后面，不再占一整条通栏横幅。
+      <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
+        <PageHeader
+          className="mb-7"
+          eyebrow="帖子翻译 · Posts"
+          title="帖子翻译"
+          description={
+            <span className="flex flex-wrap items-center gap-x-3 gap-y-2">
+              <span>翻译、优化并生成标题。</span>
+              {/* 进行中的状态跟在说明后面，不再占一整条通栏横幅。
                   各个按钮本身已有加载态，这里只补它们给不了的两件事：已用时和取消。 */}
               {pendingAction && (
                 <span
@@ -459,19 +463,20 @@ export function PostFeature() {
                   </button>
                 </span>
               )}
+            </span>
+          }
+          actions={
+            <div className="w-full sm:w-64">
+              <label className="mb-1.5 block text-xs text-text-muted">选择模型</label>
+              <ModelSelector
+                value={selectedModel}
+                onChange={setSelectedModel}
+                className="h-9 text-sm"
+                disabled={isLoading}
+              />
             </div>
-            <p className="text-sm text-muted-foreground">翻译、优化并生成标题</p>
-          </div>
-          <div className="w-full sm:w-64">
-            <label className="block text-xs text-text-muted mb-1.5">选择模型</label>
-            <ModelSelector
-              value={selectedModel}
-              onChange={setSelectedModel}
-              className="h-9 text-sm"
-              disabled={isLoading}
-            />
-          </div>
-        </div>
+          }
+        />
 
         <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
           <SourceInput
