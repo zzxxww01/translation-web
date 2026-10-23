@@ -62,7 +62,6 @@ export function WelcomeScreen({
   return (
     <div className="mx-auto w-full max-w-5xl px-5 pb-16 pt-10 sm:px-8 sm:pt-14">
       <PageHeader
-        eyebrow="长文翻译 · Longform"
         title="文档工作台"
         description="把英文长文逐段译成可发布的中文稿。继续未完成的文档，或开始一个新项目。"
         actions={

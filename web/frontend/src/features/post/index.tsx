@@ -435,7 +435,6 @@ export function PostFeature() {
       <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
         <PageHeader
           className="mb-7"
-          eyebrow="帖子翻译 · Posts"
           title="帖子翻译"
           description={
             <span className="flex flex-wrap items-center gap-x-3 gap-y-2">
