@@ -60,10 +60,9 @@ export function WelcomeScreen({
   ];
 
   return (
-    <div className="mx-auto w-full max-w-5xl px-5 pb-16 pt-10 sm:px-8 sm:pt-14">
+    <div className="mx-auto w-full max-w-5xl px-5 pb-16 pt-4 sm:px-8 sm:pt-5">
       <PageHeader
         title="文档工作台"
-        description="把英文长文逐段译成可发布的中文稿。继续未完成的文档，或开始一个新项目。"
         actions={
           <Button
             type="button"
@@ -77,7 +76,7 @@ export function WelcomeScreen({
       />
 
       {projects.length > 0 && (
-        <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border-subtle bg-border-subtle sm:grid-cols-4">
+        <dl className="mt-5 grid grid-cols-2 gap-px overflow-hidden rounded-xl border border-border-subtle bg-border-subtle sm:grid-cols-4">
           {stats.map(stat => (
             <div key={stat.label} className="bg-white px-5 py-4">
               <dt className="text-xs text-text-muted">{stat.label}</dt>

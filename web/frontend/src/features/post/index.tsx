@@ -432,14 +432,13 @@ export function PostFeature() {
 
   return (
     <div className="min-h-full overflow-auto">
-      <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
+      <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
         <PageHeader
-          className="mb-7"
+          className="mb-5"
           title="帖子翻译"
-          description={
-            <span className="flex flex-wrap items-center gap-x-3 gap-y-2">
-              <span>翻译、优化并生成标题。</span>
-              {/* 进行中的状态跟在说明后面，不再占一整条通栏横幅。
+          actions={
+            <>
+              {/* 进行中的状态放在顶栏右侧，不再占一整条通栏横幅。
                   各个按钮本身已有加载态，这里只补它们给不了的两件事：已用时和取消。 */}
               {pendingAction && (
                 <span
@@ -462,18 +461,15 @@ export function PostFeature() {
                   </button>
                 </span>
               )}
-            </span>
-          }
-          actions={
-            <div className="w-full sm:w-64">
-              <label className="mb-1.5 block text-xs text-text-muted">选择模型</label>
-              <ModelSelector
-                value={selectedModel}
-                onChange={setSelectedModel}
-                className="h-9 text-sm"
-                disabled={isLoading}
-              />
-            </div>
+              <div className="w-56" title="翻译用的模型">
+                <ModelSelector
+                  value={selectedModel}
+                  onChange={setSelectedModel}
+                  className="h-9 text-sm"
+                  disabled={isLoading}
+                />
+              </div>
+            </>
           }
         />
 

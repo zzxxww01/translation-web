@@ -3,28 +3,25 @@ import { cn } from '@/lib/utils';
 
 interface PageHeaderProps {
   title: ReactNode;
-  description?: ReactNode;
-  /** 右侧操作区（按钮、模型选择器等） */
+  /** 右侧操作区（按钮、模型选择器、进行中的状态等） */
   actions?: ReactNode;
   className?: string;
 }
 
-/** 各功能页统一的刊头：宋体大标题 + 说明 + 右侧操作。 */
-export function PageHeader({ title, description, actions, className }: PageHeaderProps) {
+/**
+ * 各功能页统一的顶栏：标题和右侧操作压在一行。顶部导航已经标出当前页面，
+ * 这里只需一个小标题定位，把纵向空间留给正文，不再放说明文字。
+ */
+export function PageHeader({ title, actions, className }: PageHeaderProps) {
   return (
     <header
       className={cn(
-        'flex flex-col gap-5 border-b border-border-subtle pb-7 sm:flex-row sm:items-end sm:justify-between',
+        'flex min-h-10 flex-wrap items-center justify-between gap-x-4 gap-y-2 border-b border-border-subtle pb-3',
         className
       )}
     >
-      <div className="min-w-0">
-        <h1 className="text-[28px] leading-tight text-text-primary sm:text-[34px]">{title}</h1>
-        {description && (
-          <p className="mt-2.5 max-w-2xl text-sm leading-relaxed text-text-muted">{description}</p>
-        )}
-      </div>
-      {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
+      <h1 className="min-w-0 text-lg leading-tight text-text-primary sm:text-xl">{title}</h1>
+      {actions && <div className="flex min-w-0 flex-wrap items-center gap-2">{actions}</div>}
     </header>
   );
 }

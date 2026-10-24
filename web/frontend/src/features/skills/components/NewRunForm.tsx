@@ -43,12 +43,8 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
-      <PageHeader
-        className="mb-7"
-        title="Skill 运行"
-        description="选一个 skill，写清要做什么、附上文件或贴链接。运行在服务器上进行，关掉页面也不会中断；需要你确认时会停下来等你。"
-      />
+    <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
+      <PageHeader className="mb-5" title="Skill 运行" />
 
       <section className="space-y-6">
         <div>

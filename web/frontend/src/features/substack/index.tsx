@@ -251,11 +251,10 @@ export function SubstackFeature() {
 
   return (
     <div className="flex h-full min-w-0 overflow-auto">
-      <div className="mx-auto w-full min-w-0 max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
+      <div className="mx-auto w-full min-w-0 max-w-3xl px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
         <PageHeader
-          className="mb-6"
+          className="mb-5"
           title="SemiAnalysis 文章"
-          description="按发布时间列出全部文章。点「导入」下载全文建成项目；点「导入并翻译」会直接进入项目，先确认术语再开始翻译。"
           actions={
             <div className="flex flex-wrap gap-2">
               <Button
