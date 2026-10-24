@@ -1,0 +1,82 @@
+# skill-runner
+
+在服务器上用**本人的 Claude 订阅**跑 skill（four-step-translate、video-bilingual-subber、podcast-cn-dubber），
+momo 的「Skill」页（`/skills`）负责触发和交互：选 skill、传文件或贴链接、在 skill 的关卡上作答、下载产出。
+设计见 `docs/superpowers/specs/2026-10-24-skill-runner-design.md`。
+
+```
+浏览器 momo.beauty/skills
+nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录，独立的 systemd 用户服务）
+      └─ 其他 /api/*    ──► momo 后端（不变）
+```
+
+每次运行是一个 Claude Agent SDK 会话，工作目录 `$SKILL_RUNNER_HOME/runs/<run_id>/`。事件先落盘再推给页面，
+所以关掉网页、断网、服务重启都不会丢记录；服务重启打断的任务，在页面上发一条「继续」就会按会话 ID 续跑。
+
+**只能本人使用。** 订阅凭证按 Anthropic 条款只允许本人用官方 Claude Code 程序（SDK 驱动的就是它），
+不要把口令给别人。服务启动时会删掉 `ANTHROPIC_API_KEY` / `ANTHROPIC_BASE_URL`，保证只走订阅额度。
+
+## 首次部署
+
+以下在服务器上以 zxw 执行。skill-runner 的代码用本仓库的一个独立 clone（`~/skill-runner/src`），
+不放进 momo 的发布目录，两边各自更新、互不打断。
+
+1. **系统依赖**：`sudo apt-get install -y bubblewrap socat`（沙箱必需；Ubuntu 24.04 还要给 bwrap 加 AppArmor 配置，见 PORTING.md）。
+2. **代码和两个 venv**：
+   ```bash
+   mkdir -p ~/skill-runner && cd ~/skill-runner
+   git clone https://github.com/zzxxww01/translation-web.git src
+   python3 -m venv venv && venv/bin/pip install -r src/skill_runner/requirements.txt
+   # skill 脚本用的 python（服务把它排在 PATH 最前面），各 skill 的依赖装在这里，见 PORTING.md
+   python3 -m venv tools
+   ```
+3. **订阅凭证**：服务用户已经用自己的 Pro/Max 账号登录过 Claude Code 就直接复用；否则在自己电脑上运行
+   `claude setup-token`，把 token 填进下一步的 env。
+4. **配置**：
+   ```bash
+   mkdir -p ~/.config/skill-runner
+   cp src/skill_runner/deploy/env.example ~/.config/skill-runner/env
+   chmod 600 ~/.config/skill-runner/env   # 然后填口令、密钥、白名单路径
+   ```
+5. **自检**（真实起一个 Claude 会话，走提问→作答→沙箱内 Bash→写文件，消耗少量额度）：
+   ```bash
+   cd ~/skill-runner && set -a && . ~/.config/skill-runner/env && set +a
+   PATH=~/skill-runner/tools/bin:$PATH PYTHONPATH=src venv/bin/python -m skill_runner.smoke
+   ```
+   输出「自检通过」才继续。沙箱起不来时这里会直接失败（`failIfUnavailable`），不会在沙箱外偷偷跑。
+6. **常驻**：按 `deploy/skill-runner.service` 顶部的注释安装用户服务。
+7. **nginx**：把 `deploy/nginx-skill-runner.conf` 加进 momo.beauty 的 443 server 块，`sudo nginx -t && sudo systemctl reload nginx`。
+8. **前端**：Skill 页随 momo 正常发版上线（替换了原来的「终端」页，旧的 `/terminal` 链接会跳到 `/skills`）。
+9. **迁 skill**：见 `PORTING.md`。
+
+## 日常运维
+
+| 要做的事 | 怎么做 |
+| --- | --- |
+| 看日志 | `journalctl --user -u skill-runner -f`（Claude 进程的 stderr 也在里面） |
+| 更新 skill_runner 代码 | `git -C ~/skill-runner/src pull` 后 `systemctl --user restart skill-runner`。正在跑的任务会被打断，页面上发「继续」即可续跑 |
+| 升级 SDK | 改 `requirements.txt` 的版本 → 本机跑 smoke → 服务器 `venv/bin/pip install -r src/skill_runner/requirements.txt` → 再跑 smoke → 重启 |
+| 上传上限 | 公网入口是 Cloudflare Tunnel，免费版单个请求最大 100 MB，所以配置成 95 MB；更大的素材贴链接 |
+| 清理空间 | 页面上删除不要的运行；或直接删 `$SKILL_RUNNER_HOME/runs/<run_id>/` |
+| 改口令 | 改 env 文件后重启，所有旧登录立即失效 |
+| 加 skill | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
+
+## 安全边界
+
+- 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（30 天），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。
+- 权限：命令和改文件不逐条确认（这是选定的工作方式），由两层兜底：
+  - Bash 及其子进程在沙箱里：只能写运行目录和 `SKILL_RUNNER_EXTRA_WRITE`，网络只放行白名单域名，不允许绕出沙箱；
+  - Edit/Write 等文件工具不受沙箱约束，由 `policy.py` 按同一份白名单拦截，拦截会显示在页面上。
+- 下载接口只给运行目录里的文件，`meta.json`、`events.jsonl` 和隐藏文件不可下载，符号链接越界会被拒绝。
+
+## 本地开发
+
+```bash
+pip install -r skill_runner/requirements.txt
+# Windows 没有沙箱，开发时关掉；cookie 走 http 要关 Secure
+SKILL_RUNNER_PASSWORD=dev SKILL_RUNNER_SANDBOX=0 SKILL_RUNNER_COOKIE_SECURE=0 python -m skill_runner
+cd web/frontend && npm run dev   # vite 已把 /api/skills 代理到 18090
+```
+
+测试：`pytest tests/unit/skill_runner`（不需要 SDK；装了 SDK 时会多跑消息映射那组），前端 `npx vitest run src/features/skills`。
+在 Claude Code 里开发时，启动前先清掉 `CLAUDECODE` 环境变量（`env -u CLAUDECODE ...`），否则会被当成嵌套会话。

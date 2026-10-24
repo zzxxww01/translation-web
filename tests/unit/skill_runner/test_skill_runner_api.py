@@ -1,0 +1,164 @@
+import json
+import os
+
+import pytest
+from fastapi.testclient import TestClient
+
+from skill_runner.app import PREFIX, create_app
+from skill_runner.auth import COOKIE_NAME
+
+from skill_runner_fakes import FakeFactory, make_config
+
+
+@pytest.fixture
+def setup(tmp_path):
+    config = make_config(tmp_path)
+    factory = FakeFactory()
+    app = create_app(config, session_factory=factory)
+    with TestClient(app) as client:
+        yield client, factory, app.state.runner
+
+
+def login(client, password="s3cret"):
+    return client.post(f"{PREFIX}/login", json={"password": password})
+
+
+def test_everything_but_login_requires_cookie(setup):
+    client, _, _ = setup
+    for method, path in [("get", "/me"), ("get", "/runs"), ("get", "/catalog"), ("post", "/runs"),
+                         ("get", "/runs/20260101-000000-abcdef/events"), ("delete", "/runs/20260101-000000-abcdef")]:
+        assert getattr(client, method)(PREFIX + path).status_code == 401, path
+    client.cookies.set(COOKIE_NAME, "123.forged", path=PREFIX)
+    assert client.get(f"{PREFIX}/me").status_code == 401
+
+
+def test_login_sets_strict_httponly_cookie_and_logout_clears_it(setup):
+    client, _, _ = setup
+    assert login(client, "wrong").status_code == 401
+    response = login(client)
+    assert response.status_code == 200
+    cookie = response.headers["set-cookie"]
+    assert "HttpOnly" in cookie and "SameSite=strict" in cookie and f"Path={PREFIX}" in cookie
+    assert client.get(f"{PREFIX}/me").json()["ok"] is True
+    client.post(f"{PREFIX}/logout")
+    assert client.get(f"{PREFIX}/me").status_code == 401
+
+
+def test_login_locks_after_repeated_failures(setup):
+    client, _, _ = setup
+    for _ in range(5):
+        assert login(client, "nope").status_code == 401
+    locked = login(client)
+    assert locked.status_code == 429
+
+
+def test_login_refused_when_password_unconfigured(tmp_path):
+    app = create_app(make_config(tmp_path, password=""), session_factory=FakeFactory())
+    with TestClient(app) as client:
+        assert login(client, "").status_code == 503
+
+
+def test_billing_override_env_is_stripped_on_startup(tmp_path, monkeypatch):
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test")
+    monkeypatch.setenv("ANTHROPIC_BASE_URL", "https://gateway.example")
+    app = create_app(make_config(tmp_path), session_factory=FakeFactory())
+    with TestClient(app):
+        assert "ANTHROPIC_API_KEY" not in os.environ
+        assert "ANTHROPIC_BASE_URL" not in os.environ
+
+
+def test_create_run_saves_upload_and_dispatches_skill(setup):
+    client, factory, runner = setup
+    login(client)
+    response = client.post(
+        f"{PREFIX}/runs",
+        data={"skill": "four-step-translate", "message": "精翻这篇"},
+        files=[("files", ("../article.html", b"<html>x</html>", "text/html"))],
+    )
+    assert response.status_code == 200, response.text
+    run = response.json()
+    assert run["status"] == "running" and run["title"] == "精翻这篇"
+    assert factory.last.sent[0].startswith("/four-step-translate 精翻这篇")
+    assert "- input/article.html" in factory.last.sent[0]
+    saved = runner.store.run_dir(run["id"]) / "input" / "article.html"
+    assert saved.read_bytes() == b"<html>x</html>"
+    listed = client.get(f"{PREFIX}/runs").json()
+    assert [r["id"] for r in listed] == [run["id"]]
+
+
+def test_create_run_validation(setup):
+    client, _, _ = setup
+    login(client)
+    assert client.post(f"{PREFIX}/runs", data={"skill": "four-step-translate"}).status_code == 400
+    unknown = client.post(f"{PREFIX}/runs", data={"skill": "evil", "message": "x"})
+    assert unknown.status_code == 400 and "未启用" in unknown.json()["detail"]
+
+
+def test_oversized_upload_is_rejected_and_run_discarded(tmp_path):
+    config = make_config(tmp_path, max_upload_bytes=4)
+    app = create_app(config, session_factory=FakeFactory())
+    with TestClient(app) as client:
+        login(client)
+        response = client.post(
+            f"{PREFIX}/runs",
+            data={"skill": "four-step-translate", "message": "x"},
+            files=[("files", ("a.mp4", b"12345", "video/mp4"))],
+        )
+        assert response.status_code == 413
+        assert client.get(f"{PREFIX}/runs").json() == []
+
+
+def test_message_answer_interrupt_and_delete_endpoints(setup):
+    client, factory, runner = setup
+    login(client)
+    run_id = client.post(f"{PREFIX}/runs", data={"skill": "four-step-translate", "message": "go"}).json()["id"]
+    reply = client.post(f"{PREFIX}/runs/{run_id}/messages", data={"message": "顺便译标题"})
+    assert reply.status_code == 200
+    assert factory.last.sent[-1] == "顺便译标题"
+    assert client.post(f"{PREFIX}/runs/{run_id}/answer", json={"qid": "nope", "answers": {"q": "a"}}).status_code == 409
+    assert client.post(f"{PREFIX}/runs/{run_id}/interrupt").status_code == 200
+    assert factory.last.interrupted
+    assert client.delete(f"{PREFIX}/runs/{run_id}").status_code == 409  # 还在运行
+    assert client.get(f"{PREFIX}/runs/20260101-000000-abcdef").status_code == 404
+
+
+def test_file_listing_and_download_guard_paths(setup):
+    client, _, runner = setup
+    login(client)
+    run_id = client.post(
+        f"{PREFIX}/runs",
+        data={"skill": "four-step-translate", "message": "go"},
+        files=[("files", ("a.html", b"<p>", "text/html"))],
+    ).json()["id"]
+    out = runner.store.run_dir(run_id) / "zh.md"
+    out.write_text("译文", encoding="utf-8")
+    files = client.get(f"{PREFIX}/runs/{run_id}/files").json()
+    assert [f["path"] for f in files] == ["input/a.html", "zh.md"]
+    download = client.get(f"{PREFIX}/runs/{run_id}/files/zh.md")
+    assert download.status_code == 200 and download.content.decode("utf-8") == "译文"
+    assert "attachment" in download.headers["content-disposition"]
+    for bad in ("meta.json", "events.jsonl", "..%2F..%2Fsecret", "input/../../x"):
+        assert client.get(f"{PREFIX}/runs/{run_id}/files/{bad}").status_code == 404, bad
+
+
+def test_event_stream_replays_after_last_event_id(setup):
+    client, _, runner = setup
+    login(client)
+    run_id = client.post(f"{PREFIX}/runs", data={"skill": "four-step-translate", "message": "go"}).json()["id"]
+
+    # 真实的流不会自己结束；这里在订阅后立刻塞一个结束信号，让 TestClient 能读完整个响应
+    original = runner.subscribe
+
+    def subscribe_then_end(rid, after_seq=0):
+        backlog, queue = original(rid, after_seq)
+        queue.put_nowait(None)
+        return backlog, queue
+
+    runner.subscribe = subscribe_then_end
+    response = client.get(f"{PREFIX}/runs/{run_id}/events", headers={"Last-Event-ID": "1"})
+    assert response.headers["content-type"].startswith("text/event-stream")
+    assert response.headers["x-accel-buffering"] == "no"
+    frames = [f for f in response.text.split("\n\n") if f.startswith("id: ")]
+    events = [json.loads(f.split("data: ", 1)[1]) for f in frames]
+    assert [e["seq"] for e in events] == [2]
+    assert events[0]["type"] == "status" and events[0]["status"] == "running"

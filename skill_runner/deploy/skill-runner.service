@@ -1,0 +1,32 @@
+# systemd 用户服务。安装：
+#   cp ~/skill-runner/src/skill_runner/deploy/skill-runner.service ~/.config/systemd/user/
+#   systemctl --user daemon-reload && systemctl --user enable --now skill-runner
+#
+# 代码在 ~/skill-runner/src（本仓库的独立 clone），和 momo 的发布目录互不影响：
+# momo 发版不会重启本服务；更新 skill_runner 时 git pull 后 systemctl --user restart skill-runner。
+
+[Unit]
+Description=skill-runner：用 Claude 订阅跑 skill，供 momo 的 Skill 页调用
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=%h/skill-runner
+Environment=PYTHONPATH=%h/skill-runner/src
+Environment=PYTHONUNBUFFERED=1
+# skill 脚本用 tools 这个 venv 里的 python（装着各 skill 的依赖），排在系统 python 前面
+Environment=PATH=%h/skill-runner/tools/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=%h/.config/skill-runner/env
+ExecStart=%h/skill-runner/venv/bin/python -m skill_runner
+Restart=on-failure
+RestartSec=5
+# 停服务时先给 Python 进程时间关掉各个 Claude 会话，再一起结束
+KillMode=mixed
+TimeoutStopSec=30
+# 服务器只有 2 GB 内存，和 momo、hermes 共用：超过 MemoryHigh 先被限速回收，到 MemoryMax 只杀本服务里的进程
+MemoryHigh=900M
+MemoryMax=1300M
+
+[Install]
+WantedBy=default.target

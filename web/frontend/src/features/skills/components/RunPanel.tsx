@@ -1,0 +1,171 @@
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import { ListChecks, Trash2, WifiOff } from 'lucide-react';
+import { toast } from 'sonner';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
+import { Button } from '@/components/ui/Button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { skillsApi } from '../api';
+import { skillKeys, useRunEvents } from '../hooks';
+import { foldEvents } from '../state';
+import type { RunMeta } from '../types';
+import { AssistantText, NoticeLine, ToolGroup, TurnDivider, UserBubble } from './ChatItems';
+import { Composer } from './Composer';
+import { QuestionCard } from './QuestionCard';
+import { SidePanel } from './SidePanel';
+import { StatusPill } from './StatusPill';
+
+interface RunPanelProps {
+  run: RunMeta;
+  maxUploadMb: number;
+  onDeleted: () => void;
+}
+
+/** 一次运行的对话页。父组件按 run.id 加 key，换运行时整体重建。 */
+export function RunPanel({ run, maxUploadMb, onDeleted }: RunPanelProps) {
+  const queryClient = useQueryClient();
+  const { events, connected } = useRunEvents(run.id);
+  const view = useMemo(() => foldEvents(events), [events]);
+  const status = view.status ?? run.status;
+  const active = status === 'running' || status === 'waiting';
+  const pending = new Set(view.pendingQids);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const stickToBottom = useRef(true);
+  const [deleting, setDeleting] = useState(false);
+
+  // 状态变化时让列表上的状态也跟着刷新，不用等轮询
+  useEffect(() => {
+    queryClient.invalidateQueries({ queryKey: skillKeys.runs });
+  }, [status, queryClient]);
+
+  useLayoutEffect(() => {
+    const el = scrollRef.current;
+    if (el && stickToBottom.current) el.scrollTop = el.scrollHeight;
+  }, [view.items.length, events.length]);
+
+  const remove = async () => {
+    setDeleting(true);
+    try {
+      await skillsApi.remove(run.id);
+      await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
+      onDeleted();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '删除失败');
+      setDeleting(false);
+    }
+  };
+
+  return (
+    <div className="flex h-full min-h-0 flex-col">
+      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border-subtle px-5 py-3">
+        <div className="min-w-0">
+          <div className="flex items-center gap-2">
+            <h1 className="truncate text-lg text-text-primary">{run.title}</h1>
+            <StatusPill status={status} />
+            {!connected && (
+              <span className="inline-flex items-center gap-1 text-xs text-text-muted" title="实时连接断开，正在重连">
+                <WifiOff className="h-3.5 w-3.5" /> 重连中
+              </span>
+            )}
+          </div>
+          <div className="mt-0.5 text-xs text-text-muted">{run.skill}</div>
+        </div>
+        <div className="flex items-center gap-1">
+        {/* 窄屏没有右栏，进度和产出文件放进抽屉 */}
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="sm" className="lg:hidden">
+              <ListChecks /> 进度与文件
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="w-80 overflow-y-auto">
+            <SheetHeader>
+              <SheetTitle>进度与文件</SheetTitle>
+            </SheetHeader>
+            <div className="mt-4">
+              <SidePanel runId={run.id} status={status} todos={view.todos} />
+            </div>
+          </SheetContent>
+        </Sheet>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="ghost" size="sm" disabled={active || deleting} title={active ? '先中断再删除' : '删除这次运行和它的所有文件'}>
+              <Trash2 /> 删除
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>删除这次运行？</AlertDialogTitle>
+              <AlertDialogDescription>对话记录、上传的文件和所有产出都会从服务器上删掉，无法恢复。</AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>取消</AlertDialogCancel>
+              <AlertDialogAction onClick={remove}>删除</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+        </div>
+      </header>
+
+      <div className="flex min-h-0 flex-1">
+        <div className="flex min-w-0 flex-1 flex-col">
+          <div
+            ref={scrollRef}
+            onScroll={event => {
+              const el = event.currentTarget;
+              stickToBottom.current = el.scrollHeight - el.scrollTop - el.clientHeight < 80;
+            }}
+            className="min-h-0 flex-1 overflow-y-auto px-5 py-5"
+          >
+            <div className="mx-auto max-w-3xl space-y-4">
+              {view.items.map(item => {
+                switch (item.kind) {
+                  case 'user':
+                    return <UserBubble key={item.key} text={item.text} files={item.files} />;
+                  case 'text':
+                    return <AssistantText key={item.key} text={item.text} />;
+                  case 'tools':
+                    return <ToolGroup key={item.key} tools={item.tools} active={active} />;
+                  case 'question':
+                    return (
+                      <QuestionCard
+                        key={item.key}
+                        runId={run.id}
+                        qid={item.qid}
+                        questions={item.questions}
+                        answer={item.answer}
+                        pending={pending.has(item.qid)}
+                      />
+                    );
+                  case 'notice':
+                    return <NoticeLine key={item.key} level={item.level} text={item.text} />;
+                  case 'turn':
+                    return <TurnDivider key={item.key} durationMs={item.durationMs} isError={item.isError} errors={item.errors} />;
+                }
+              })}
+              {status === 'running' && (
+                <div className="flex items-center gap-2 text-xs text-text-muted">
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary-500" /> Claude 正在工作
+                </div>
+              )}
+            </div>
+          </div>
+          <Composer runId={run.id} status={status} hasPendingQuestion={pending.size > 0} maxUploadMb={maxUploadMb} />
+        </div>
+        <div className="hidden w-72 shrink-0 overflow-y-auto border-l border-border-subtle px-4 py-5 lg:block">
+          <SidePanel runId={run.id} status={status} todos={view.todos} />
+        </div>
+      </div>
+    </div>
+  );
+}

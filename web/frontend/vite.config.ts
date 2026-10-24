@@ -26,6 +26,11 @@ export default defineConfig({
   server: {
     port: 8888,
     proxy: {
+      // 必须排在 /api 前面：先匹配到的规则生效。与生产 nginx 的分流一致
+      '/api/skills': {
+        target: 'http://localhost:18090',
+        changeOrigin: true,
+      },
       '/api': {
         target: 'http://localhost:8000',
         changeOrigin: true,

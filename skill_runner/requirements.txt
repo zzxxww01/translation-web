@@ -1,0 +1,7 @@
+# skill-runner 自己的依赖，装在独立的 venv 里（不进 momo 后端的环境）。
+# claude-agent-sdk 的平台 wheel 自带 Claude Code 程序，服务器上不用另装 CLI。
+# SDK 钉住版本：升级前先在本机跑 `python -m skill_runner.smoke`。
+claude-agent-sdk==0.2.174
+fastapi>=0.115
+uvicorn>=0.30
+python-multipart>=0.0.22

@@ -21,8 +21,8 @@ const SlackFeature = lazy(() =>
 const ToolsFeature = lazy(() =>
   import('./features/tools/index.tsx').then(module => ({ default: module.ToolsFeature }))
 );
-const TerminalFeature = lazy(() =>
-  import('./features/terminal/index.tsx').then(module => ({ default: module.TerminalFeature }))
+const SkillsFeature = lazy(() =>
+  import('./features/skills/index.tsx').then(module => ({ default: module.SkillsFeature }))
 );
 // 78bcf2c 把确认工作台换成沉浸式模式时，连带删掉了质量报告页的路由，但侧栏的
 // 「查看质量报告」按钮（DocumentSidebar）和 DocumentQualityPanel 的入口链接都还
@@ -123,12 +123,17 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'terminal',
+        path: 'skills',
         element: (
           <LazyPage>
-            <TerminalFeature />
+            <SkillsFeature />
           </LazyPage>
         ),
+      },
+      // 远程终端页已由 Skill 页取代，旧书签直接跳过去
+      {
+        path: 'terminal',
+        element: <Navigate to="/skills" replace />,
       },
       // Legacy route — redirect to new nested route
       {

@@ -1,0 +1,79 @@
+/* Claude 回复的 Markdown 排版。只作用于 .skill-md 内部，不影响其他页面。 */
+.skill-md {
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.skill-md > * + * {
+  margin-top: 0.75em;
+}
+.skill-md h1,
+.skill-md h2,
+.skill-md h3,
+.skill-md h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 1.25em;
+}
+.skill-md h1 { font-size: 1.25rem; }
+.skill-md h2 { font-size: 1.125rem; }
+.skill-md h3,
+.skill-md h4 { font-size: 1rem; }
+.skill-md ul,
+.skill-md ol {
+  padding-left: 1.4em;
+}
+.skill-md ul { list-style: disc; }
+.skill-md ol { list-style: decimal; }
+.skill-md li + li { margin-top: 0.25em; }
+.skill-md a {
+  color: var(--color-primary-600);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.skill-md blockquote {
+  border-left: 3px solid var(--color-primary-200);
+  padding-left: 0.9em;
+  color: var(--color-text-secondary);
+}
+.skill-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+.skill-md pre {
+  background: var(--color-bg-secondary);
+  border-radius: 8px;
+  padding: 0.8em 1em;
+  overflow-x: auto;
+}
+.skill-md pre code {
+  background: none;
+  padding: 0;
+}
+/* 术语表之类的宽表格在窄屏上横向滚动，而不是把页面撑宽 */
+.skill-md table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.8125rem;
+}
+.skill-md th,
+.skill-md td {
+  border: 1px solid var(--color-border-subtle);
+  padding: 0.4em 0.7em;
+  text-align: left;
+  vertical-align: top;
+}
+.skill-md th {
+  background: var(--color-bg-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.skill-md hr {
+  border: 0;
+  border-top: 1px solid var(--color-border-subtle);
+}
