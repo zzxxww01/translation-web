@@ -16,7 +16,7 @@ from threading import RLock
 from .execution_context import generation_budget, remaining_timeout, bounded_sleep, route_scope
 
 from .config_loader import get_config_loader
-from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, ProviderNetworkConfig
+from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, ProviderNetworkConfig, is_relay_provider
 from .fallback_strategy import FallbackStrategy, AttemptPlan
 from .base import LLMProvider
 from .errors import (LLMError, LLMProxyConfigurationError,
@@ -232,12 +232,12 @@ class ProviderAdapter:
             if key not in seen:
                 seen.add(key)
                 plans.append(plan)
-        if "official" in self.model_alias.lower() or (plans and plans[0].provider.type == "gemini"):
-            plans = [p for p in plans if p.provider.type == "gemini"]
+        if "official" in self.model_alias.lower() or (plans and not is_relay_provider(plans[0].provider)):
+            plans = [p for p in plans if not is_relay_provider(p.provider)]
         if len(plans) > 4:
-            official = next((p for p in plans if p.provider.type == "gemini"), None)
+            official = next((p for p in plans if not is_relay_provider(p.provider)), None)
             plans = plans[:4]
-            if official is not None and not any(p.provider.type == "gemini" for p in plans):
+            if official is not None and not any(not is_relay_provider(p.provider) for p in plans):
                 plans[-1] = official
         if len(plans) == 1:
             plans *= 2  # isolated route still gets one transient/empty retry
@@ -330,7 +330,10 @@ class ProviderAdapter:
         start_time = time.time()
 
         attempt_plan = self._bounded_attempt_plan()
+        relay_rejected = False
         for idx, attempt in enumerate(attempt_plan, 1):
+            if relay_rejected and is_relay_provider(attempt.provider):
+                continue
             try:
                 _fallback_stats["total_attempts"] += 1
 
@@ -413,6 +416,13 @@ class ProviderAdapter:
                 normalized = normalize_llm_transport_error(e, provider_name=attempt.provider.type)
                 status_code = getattr(e, "status_code", None)
                 permanent_http = isinstance(status_code, int) and 400 <= status_code < 500 and status_code not in {408, 409, 429}
+                # 中转自身故障也会回 4xx（如对任何请求都回 400「input json is empty」），
+                # 同一 prompt 在官方通道照常可用：跳过其余中转路由，只用预留的官方路由再试一次；
+                # 官方也拒绝时照常中止。
+                if (permanent_http and is_relay_provider(attempt.provider)
+                        and any(not is_relay_provider(p.provider) for p in attempt_plan[idx:])):
+                    relay_rejected = True
+                    continue
                 if permanent_http or isinstance(e, LLMNonRetryableError) or normalized is None or not normalized.retryable:
                     _fallback_stats["failed_requests"] += 1
                     duration = time.time() - start_time

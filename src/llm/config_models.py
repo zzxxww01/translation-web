@@ -34,6 +34,7 @@ class ModelConfig:
     supports_thinking: bool
     config: Dict[str, Any]
     enabled: bool = True
+    fallback: bool = True  # False：只在被直接指定时使用，不作为其他模型的兜底
 
 
 @dataclass
@@ -82,6 +83,13 @@ class ProviderConfig:
     group_priority: int = 999  # 组优先级，数字越小越优先
     base_url: Optional[str] = None
     enabled: bool = True
+    relay: Optional[bool] = None  # 第三方中转为 True；未配置时只有 gemini 类型算官方
+
+
+def is_relay_provider(provider: Any) -> bool:
+    """中转失败要降级到官方；YAML 可显式声明，旧配置沿用「非 gemini 即中转」。"""
+    relay = getattr(provider, "relay", None)
+    return relay if relay is not None else getattr(provider, "type", "") != "gemini"
 
 
 @dataclass
