@@ -4,6 +4,7 @@ import { ArrowLeft, LogOut } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { findAgent, normalizeCatalog } from './agents';
 import { skillsApi } from './api';
 import { isUnauthorized, skillKeys, useCatalog, useRuns, useSkillsAuth } from './hooks';
 import { LoginPanel } from './components/LoginPanel';
@@ -42,7 +43,8 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
   const creating = !selectedId && searchParams.get('new') === '1';
   const showDetail = Boolean(selectedId) || creating;
   const runs = useRuns(true);
-  const catalog = useCatalog(true);
+  const catalogQuery = useCatalog(true);
+  const catalog = normalizeCatalog(catalogQuery.data);
   const selected = runs.data?.find(run => run.id === selectedId) ?? null;
 
   const select = (id: string) => setSearchParams({ run: id });
@@ -70,7 +72,7 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
           showDetail ? 'hidden' : 'flex'
         )}
       >
-        <RunList runs={runs.data ?? []} selectedId={selectedId} onSelect={select} onNew={openNew} />
+        <RunList runs={runs.data ?? []} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} />
         <div className="border-t border-border-subtle px-4 py-2">
           <Button variant="ghost" size="sm" onClick={logout}>
             <LogOut /> 退出登录
@@ -81,22 +83,28 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
         {showDetail && (
           <div className="border-b border-border-subtle px-3 py-2 md:hidden">
             <Button variant="ghost" size="sm" onClick={backToList}>
-              <ArrowLeft /> 运行记录
+              <ArrowLeft /> 任务
             </Button>
           </div>
         )}
         <div className="min-h-0 flex-1 overflow-auto">
           {selectedId ? (
             selected ? (
-              <RunPanel key={selected.id} run={selected} maxUploadMb={maxUploadMb} onDeleted={backToList} />
+              <RunPanel
+                key={selected.id}
+                run={selected}
+                agent={findAgent(catalog, selected.skill)}
+                maxUploadMb={maxUploadMb}
+                onDeleted={backToList}
+              />
             ) : runs.isPending ? (
               <Spinner />
             ) : (
-              <div className="p-8 text-sm text-text-muted">这次运行不存在或已被删除。</div>
+              <div className="p-8 text-sm text-text-muted">这个任务不存在或已被删除。</div>
             )
           ) : (
             <NewRunForm
-              catalog={catalog.data ?? []}
+              catalog={catalog}
               maxUploadMb={maxUploadMb}
               onStarted={run => select(run.id)}
             />

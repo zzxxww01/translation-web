@@ -1,5 +1,5 @@
 import { apiClient, ApiErrorWrapper } from '../../shared/api/client';
-import type { Answers, CatalogSkill, RunFile, RunMeta } from './types';
+import type { Agent, Answers, RunFile, RunMeta } from './types';
 
 export const SKILLS_BASE = '/api/skills';
 
@@ -7,7 +7,8 @@ export const skillsApi = {
   me: () => apiClient.get<{ ok: boolean; max_active: number; max_upload_mb: number }>('/skills/me', { retry: false }),
   login: (password: string) => apiClient.post<{ ok: boolean }>('/skills/login', { password }, { retry: false }),
   logout: () => apiClient.post('/skills/logout'),
-  catalog: () => apiClient.get<CatalogSkill[]>('/skills/catalog'),
+  // 旧版服务端只给 name/description/available，用 normalizeCatalog 补齐
+  catalog: () => apiClient.get<Partial<Agent>[]>('/skills/catalog'),
   runs: () => apiClient.get<RunMeta[]>('/skills/runs'),
   files: (runId: string) => apiClient.get<RunFile[]>(`/skills/runs/${runId}/files`),
   answer: (runId: string, qid: string, payload: { answers?: Answers; response?: string }) =>

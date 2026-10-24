@@ -172,6 +172,8 @@ def test_settings_enable_strict_sandbox_with_run_dir_and_whitelist(tmp_path):
 def test_system_prompt_describes_whether_commands_are_sandboxed(tmp_path):
     assert "沙箱里运行" in build_system_prompt(make_config(tmp_path))
     assert "没有沙箱" in build_system_prompt(make_config(tmp_path, sandbox=False))
+    note = "- 任务说明\n"
+    assert build_system_prompt(make_config(tmp_path), note).endswith(note)
 
 
 async def test_options_load_user_skills_and_route_permissions(tmp_path):

@@ -21,7 +21,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, AsyncIterator, Awaitable, Callable, Protocol
 
-from . import policy
+from . import agents, policy
 from .config import Config
 from .store import RunMeta, RunStore
 
@@ -48,6 +48,8 @@ class SessionSpec:
     cwd: Path
     resume: str | None
     on_permission: PermissionHandler
+    # 按任务追加到系统提示词的说明（见 agents.prompt_note）
+    prompt_note: str = ""
 
 
 class AgentSession(Protocol):
@@ -236,6 +238,7 @@ class Runner:
             on_permission=lambda name, data, tool_use_id, reason=None: self._on_permission(
                 run, name, data, tool_use_id, reason
             ),
+            prompt_note=agents.prompt_note(agents.build_catalog(self.config), run.meta.skill),
         )
         try:
             session = await self.session_factory(spec)

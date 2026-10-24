@@ -13,9 +13,14 @@ export interface RunMeta {
   error: string | null;
 }
 
-export interface CatalogSkill {
+/** 页面上的一个 agent（名片来自 skill_runner/agents.json）。name 是 skill 名，空串表示直接和 Claude 聊天。 */
+export interface Agent {
   name: string;
+  title: string;
+  icon: string;
   description: string;
+  hint: string;
+  examples: string[];
   available: boolean;
 }
 

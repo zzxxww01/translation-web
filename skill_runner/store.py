@@ -206,7 +206,7 @@ class RunStore:
 
 
 def iter_skill_catalog(skills_dir: Path, names: Iterable[str]) -> list[dict[str, Any]]:
-    """读 SKILL.md 的 frontmatter，给新建运行的下拉框用。"""
+    """读 SKILL.md 的 frontmatter：是否装了、简介。agent 名片缺项时拿它兜底。"""
     catalog = []
     for name in names:
         skill_md = skills_dir / name / "SKILL.md"

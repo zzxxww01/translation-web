@@ -35,7 +35,6 @@ SUMMARY_LIMIT = 200
 
 APPEND_SYSTEM_PROMPT = """\
 你运行在 momo 的 Claude 页里。用户只能在网页上看到你的文字回复、工具调用摘要和当前目录里的文件，看不到终端。
-- 用户可能指定了 skill，也可能只是直接找你对话。直接对话时正常回答；任务明显对得上某个已安装的 skill 时再用它。
 - 当前工作目录就是本次运行的目录，用户上传的文件在 input/ 下。所有产出都写在当前目录内，用户可以在网页上下载。
 - 需要用户做选择或确认时，优先用 AskUserQuestion 工具（会变成网页上的按钮）。要用户审阅的内容（术语表、稿件、字幕）必须先在回复正文里用 Markdown 完整展示，再提问或结束本轮等用户回复；不要只把内容写进文件或塞进提问里。
 - 多步骤的任务用任务清单工具列出步骤并随进度更新，网页侧栏会显示进度。
@@ -48,8 +47,8 @@ NO_SANDBOX_NOTE = """- 命令直接在服务器上执行，没有沙箱。这台
 """
 
 
-def build_system_prompt(config: Config) -> str:
-    return APPEND_SYSTEM_PROMPT + (SANDBOX_NOTE if config.sandbox else NO_SANDBOX_NOTE)
+def build_system_prompt(config: Config, note: str = "") -> str:
+    return APPEND_SYSTEM_PROMPT + (SANDBOX_NOTE if config.sandbox else NO_SANDBOX_NOTE) + note
 
 
 def build_settings(config: Config, spec: SessionSpec) -> dict[str, Any]:
@@ -92,7 +91,7 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
         setting_sources=["user"],
         permission_mode="default",
         can_use_tool=can_use_tool,
-        system_prompt={"type": "preset", "preset": "claude_code", "append": build_system_prompt(config)},
+        system_prompt={"type": "preset", "preset": "claude_code", "append": build_system_prompt(config, spec.prompt_note)},
         settings=json.dumps(settings, ensure_ascii=False) if settings else None,
         model=config.model,
         # 新模型默认不带任务清单工具，要显式打开，网页侧栏的进度才有数据（Python 的 env 是叠加在继承环境上的）

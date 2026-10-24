@@ -17,8 +17,9 @@ import { Button } from '@/components/ui/Button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { skillsApi } from '../api';
 import { skillKeys, useRunEvents } from '../hooks';
-import { foldEvents, runKindLabel } from '../state';
-import type { RunMeta } from '../types';
+import { foldEvents } from '../state';
+import type { Agent, RunMeta } from '../types';
+import { AgentIcon } from './AgentIcon';
 import { AssistantText, NoticeLine, ToolGroup, TurnDivider, UserBubble } from './ChatItems';
 import { Composer } from './Composer';
 import { QuestionCard } from './QuestionCard';
@@ -27,12 +28,13 @@ import { StatusPill } from './StatusPill';
 
 interface RunPanelProps {
   run: RunMeta;
+  agent: Agent;
   maxUploadMb: number;
   onDeleted: () => void;
 }
 
-/** 一次运行的对话页。父组件按 run.id 加 key，换运行时整体重建。 */
-export function RunPanel({ run, maxUploadMb, onDeleted }: RunPanelProps) {
+/** 一个任务的对话页。父组件按 run.id 加 key，换任务时整体重建。 */
+export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) {
   const queryClient = useQueryClient();
   const { events, connected } = useRunEvents(run.id);
   const view = useMemo(() => foldEvents(events), [events]);
@@ -78,7 +80,10 @@ export function RunPanel({ run, maxUploadMb, onDeleted }: RunPanelProps) {
               </span>
             )}
           </div>
-          <div className="mt-0.5 text-xs text-text-muted">{runKindLabel(run.skill)}</div>
+          <div className="mt-0.5 flex items-center gap-1 text-xs text-text-muted">
+            <AgentIcon icon={agent.icon} className="h-3.5 w-3.5" />
+            {agent.title}
+          </div>
         </div>
         <div className="flex items-center gap-1">
         {/* 窄屏没有右栏，进度和产出文件放进抽屉 */}
@@ -99,13 +104,13 @@ export function RunPanel({ run, maxUploadMb, onDeleted }: RunPanelProps) {
         </Sheet>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="ghost" size="sm" disabled={active || deleting} title={active ? '先中断再删除' : '删除这次运行和它的所有文件'}>
+            <Button variant="ghost" size="sm" disabled={active || deleting} title={active ? '先中断再删除' : '删除这个任务和它的所有文件'}>
               <Trash2 /> 删除
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>删除这次运行？</AlertDialogTitle>
+              <AlertDialogTitle>删除这个任务？</AlertDialogTitle>
               <AlertDialogDescription>对话记录、上传的文件和所有产出都会从服务器上删掉，无法恢复。</AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>

@@ -87,6 +87,15 @@ def test_create_run_saves_upload_and_dispatches_skill(setup):
     assert [r["id"] for r in listed] == [run["id"]]
 
 
+def test_catalog_lists_chat_first_with_agent_cards(setup):
+    client, _, _ = setup
+    login(client)
+    catalog = client.get(f"{PREFIX}/catalog").json()
+    assert catalog[0]["name"] == "" and catalog[0]["title"] == "Claude"
+    assert [a["name"] for a in catalog[1:]] == ["four-step-translate", "podcast-cn-dubber"]
+    assert all({"title", "icon", "hint", "examples", "available"} <= a.keys() for a in catalog)
+
+
 def test_create_run_without_skill_is_plain_chat(setup):
     client, factory, _ = setup
     login(client)
