@@ -74,6 +74,12 @@ class Settings(BaseSettings):
     projects_path: str = "projects"
     glossary_path: str = "glossary"
 
+    # Substack 导入：订阅 cookie 只发给这个域名；网页上更新的 cookie 存在这个文件
+    substack_cookie_domain: str = "newsletter.semianalysis.com"
+    substack_cookie_file: str = "data/substack_cookie.txt"
+    # 文章库的文章清单（含自动生成的中文标题和摘要）
+    substack_library_file: str = "data/substack_library.json"
+
     # Translation
     default_context_window: int = 5
     default_translation_style: str = "natural_professional"

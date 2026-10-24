@@ -104,13 +104,11 @@ export function SlackFeature() {
   };
 
   return (
-    <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-10 px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
+    <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-6 px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
       <PageHeader
         title="Slack 回复助手"
-        description="粘贴对方的英文消息，或直接写下你想说的中文，生成几种语气的专业回复。"
         actions={
-          <div className="w-full sm:w-64">
-            <label className="mb-1.5 block text-xs text-text-muted">选择模型</label>
+          <div className="w-56" title="生成回复用的模型">
             <ModelSelector
               value={selectedModel}
               onChange={setSelectedModel}

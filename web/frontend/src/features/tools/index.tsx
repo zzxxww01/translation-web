@@ -19,12 +19,8 @@ export function ToolsFeature() {
 
   return (
     <div className="flex h-full min-w-0 overflow-auto">
-      <div className="mx-auto w-full min-w-0 max-w-4xl px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
-        <PageHeader
-          className="mb-7"
-          title="工具箱"
-          description="时区换算、随手翻译、邮件回复和待办，跨时区协作时的小工具。"
-        />
+      <div className="mx-auto w-full min-w-0 max-w-4xl px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
+        <PageHeader className="mb-5" title="工具箱" />
 
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
           <div className="-mx-4 mb-5 overflow-x-auto px-4 pb-1 sm:mx-0 sm:mb-6 sm:px-0">

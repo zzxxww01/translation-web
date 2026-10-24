@@ -68,6 +68,8 @@ class ProjectListSummary:
     status: ProjectStatus
     progress: ProjectListProgress
     created_at: datetime
+    # 原文链接（metadata.original_url），用来判断某篇 Substack 文章是否已导入
+    original_url: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -605,6 +607,10 @@ class ProjectManager:
         # Reuse ProjectMeta's validation/default semantics without constructing
         # legacy sections, versions, confirmations, or other large fields.
         validated = ProjectMeta.model_validate(summary_payload)
+        # metadata 紧跟在 config 后面，通常落在前缀里；被截断时局部解析会丢掉
+        # 不完整的字符串，这里只会得到 None，不会拿到半截链接。
+        metadata = data.get("metadata")
+        original_url = metadata.get("original_url") if isinstance(metadata, dict) else None
         return ProjectListSummary(
             id=validated.id,
             title=validated.title,
@@ -614,6 +620,7 @@ class ProjectManager:
                 approved=validated.progress.approved,
             ),
             created_at=validated.created_at,
+            original_url=original_url if isinstance(original_url, str) else None,
         )
 
     def _get_project_summary(

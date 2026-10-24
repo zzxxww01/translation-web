@@ -49,12 +49,8 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
   };
 
   return (
-    <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
-      <PageHeader
-        className="mb-7"
-        title="Claude"
-        description="直接和 Claude 对话，或选一个 skill 跑完整流程。都在服务器上用你的 Claude 订阅运行，关掉页面也不会中断；需要你确认时会停下来等你。"
-      />
+    <div className="mx-auto w-full max-w-3xl px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
+      <PageHeader className="mb-5" title="Claude" />
 
       <section className="space-y-6">
         <div>

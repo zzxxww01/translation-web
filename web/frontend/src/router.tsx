@@ -24,6 +24,9 @@ const ToolsFeature = lazy(() =>
 const SkillsFeature = lazy(() =>
   import('./features/skills/index.tsx').then(module => ({ default: module.SkillsFeature }))
 );
+const SubstackFeature = lazy(() =>
+  import('./features/substack/index.tsx').then(module => ({ default: module.SubstackFeature }))
+);
 // 78bcf2c 把确认工作台换成沉浸式模式时，连带删掉了质量报告页的路由，但侧栏的
 // 「查看质量报告」按钮（DocumentSidebar）和 DocumentQualityPanel 的入口链接都还
 // 指向这个路径——于是点了之后被静默重定向进沉浸式编辑器，整条质量报告链路
@@ -79,6 +82,14 @@ const router = createBrowserRouter([
         element: (
           <LazyPage>
             <DocumentFeature />
+          </LazyPage>
+        ),
+      },
+      {
+        path: 'substack',
+        element: (
+          <LazyPage>
+            <SubstackFeature />
           </LazyPage>
         ),
       },

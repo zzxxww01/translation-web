@@ -598,8 +598,8 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
   }
 
   return (
-    <div className="min-h-full px-5 pb-12 pt-8 sm:px-8 sm:pt-10">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-7">
+    <div className="min-h-full px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
+      <div className="mx-auto flex w-full max-w-7xl flex-col gap-5">
         {onBack ? (
           <div>
             <Button size="sm" variant="ghost" leftIcon={<ArrowLeft className="h-4 w-4" />} onClick={onBack}>
@@ -607,22 +607,22 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
             </Button>
           </div>
         ) : null}
-        <PageHeader
-          title="统一术语管理"
-          description={
-            <>
-              这里统一管理有效术语、项目术语、全局术语和翻译规则。<strong className="font-medium text-text-secondary">全局术语优先</strong>——
-              项目术语只补充全局没有的词，同名时不生效；有效术语展示的就是翻译时真正会用的那一份。
-              帖子、Slack 和工具箱当前只使用全局术语。
-            </>
-          }
-          actions={
-            <div className="flex flex-wrap gap-2">
-              <Badge variant="outline">当前视图：{scopeLabel(activeScope)}</Badge>
-              {projectId ? <Badge variant="secondary">项目：{projectLabel}</Badge> : null}
-            </div>
-          }
-        />
+        <div>
+          <PageHeader
+            title="统一术语管理"
+            actions={
+              <div className="flex flex-wrap gap-2">
+                <Badge variant="outline">当前视图：{scopeLabel(activeScope)}</Badge>
+                {projectId ? <Badge variant="secondary">项目：{projectLabel}</Badge> : null}
+              </div>
+            }
+          />
+          {/* 这条规则影响翻译结果、页面上又看不出来，所以保留成一行小字 */}
+          <p className="mt-2 text-xs leading-relaxed text-text-muted">
+            <strong className="font-medium text-text-secondary">全局术语优先</strong>
+            ：项目术语只补充全局没有的词，同名时不生效；「有效术语」就是翻译时真正会用的那一份。帖子、Slack 和工具箱只用全局术语。
+          </p>
+        </div>
 
         <Tabs
           value={activeScope}

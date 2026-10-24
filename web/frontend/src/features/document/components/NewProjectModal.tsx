@@ -1,10 +1,13 @@
 import { type FC, useCallback, useEffect, useRef, useState } from 'react';
-import { FileText, Sparkles, Upload } from 'lucide-react';
+import { useQueryClient } from '@tanstack/react-query';
+import { FileText, Link2, Sparkles, Upload } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button-extended';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { errorText, isCookieError, substackApi } from '../../substack/api';
+import { CookieForm } from '../../substack/components/CookieForm';
 import { useCreateProject } from '../hooks';
 
 interface NewProjectModalProps {
@@ -30,6 +33,9 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
   onProjectCreated,
 }) => {
   const [name, setName] = useState('');
+  const [url, setUrl] = useState('');
+  const [isImporting, setIsImporting] = useState(false);
+  const [cookieReason, setCookieReason] = useState<string | null>(null);
   const [path, setPath] = useState('');
   const [file, setFile] = useState<File | null>(null);
   const [assets, setAssets] = useState<File[]>([]);
@@ -42,6 +48,9 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
   const windowDragDepthRef = useRef(0);
 
   const createMutation = useCreateProject();
+  const queryClient = useQueryClient();
+  const isBusy = createMutation.isPending || isImporting;
+  const usingUrl = url.trim().length > 0;
 
   const currentFileIsHtml = !!file && isHtmlFile(file.name);
   const dropActive = isDragging || isWindowDragging;
@@ -198,8 +207,35 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
     };
   }, [handleDroppedFiles, isOpen]);
 
+  const importFromUrl = async () => {
+    setIsImporting(true);
+    try {
+      const { project, already_imported } = await substackApi.importArticle(
+        url.trim(),
+        name.trim() || undefined,
+      );
+      void queryClient.invalidateQueries({ queryKey: ['projects'] });
+      toast.success(already_imported ? '这篇之前已经导入过了，直接打开' : '项目创建成功！');
+      setIsImporting(false);
+      handleClose();
+      onProjectCreated?.(project.id);
+    } catch (error) {
+      setIsImporting(false);
+      if (isCookieError(error)) {
+        setCookieReason(errorText(error, '需要订阅 cookie'));
+      } else {
+        toast.error(errorText(error, '导入失败'));
+      }
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (usingUrl) {
+      await importFromUrl();
+      return;
+    }
 
     if (!name.trim()) {
       toast.error('请输入项目名称');
@@ -245,8 +281,10 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
   };
 
   const handleClose = () => {
-    if (!createMutation.isPending) {
+    if (!isBusy) {
       setName('');
+      setUrl('');
+      setCookieReason(null);
       setPath('');
       setFile(null);
       setIsDragging(false);
@@ -282,173 +320,221 @@ export const NewProjectModal: FC<NewProjectModalProps> = ({
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
-            <Label htmlFor="project-name">项目名称</Label>
+            <Label htmlFor="project-url">Substack 文章链接</Label>
+            <div className="relative">
+              <Link2 className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
+              <Input
+                id="project-url"
+                type="url"
+                inputMode="url"
+                placeholder="https://newsletter.semianalysis.com/p/..."
+                value={url}
+                onChange={(e) => {
+                  setUrl(e.target.value);
+                  setCookieReason(null);
+                }}
+                className="pl-9"
+              />
+            </div>
+            <p className="text-xs text-text-muted">
+              粘贴链接即可自动下载全文并建好项目；也可以在「文章库」里直接点选。
+            </p>
+          </div>
+
+          {cookieReason && (
+            <CookieForm
+              reason={cookieReason}
+              onSaved={() => {
+                setCookieReason(null);
+                void importFromUrl();
+              }}
+              onCancel={() => setCookieReason(null)}
+            />
+          )}
+
+          <div className="space-y-2">
+            <Label htmlFor="project-name">
+              项目名称{usingUrl && <span className="ml-1 font-normal text-text-muted">（可不填，默认用文章标题）</span>}
+            </Label>
             <Input
               id="project-name"
               placeholder="例如: apple-tsmc-analysis"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              required
+              required={!usingUrl}
             />
           </div>
 
-          <div>
-            <Label className="mb-2 block">
-              选择 HTML 或 Markdown 文件
-            </Label>
-
-            <div
-              onDragOver={handleDragOver}
-              onDragLeave={handleDragLeave}
-              onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
-              className={`
-                relative flex cursor-pointer flex-col items-center justify-center
-                rounded-lg border-2 border-dashed p-8 transition-all
-                ${
-                  dropActive
-                    ? 'border-primary bg-primary/5'
-                    : 'border-border hover:border-primary/50 hover:bg-bg-secondary'
-                }
-                ${file ? 'border-success bg-success/5' : ''}
-              `}
-            >
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept=".html,.htm,.md,.markdown,text/html,text/markdown,text/plain"
-                onChange={handleFileInputChange}
-                className="hidden"
-              />
-
-              {file ? (
-                <>
-                  <FileText className="mb-3 h-12 w-12 text-success" />
-                  <p className="font-medium text-text-primary">{file.name}</p>
-                  <p className="text-sm text-text-muted">{(file.size / 1024).toFixed(1)} KB</p>
-                  <button
-                    type="button"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setFile(null);
-                      resetAssets();
-                      if (fileInputRef.current) {
-                        fileInputRef.current.value = '';
-                      }
-                    }}
-                    className="mt-3 text-sm text-primary hover:text-primary/80"
-                  >
-                    重新选择
-                  </button>
-                </>
-              ) : (
-                <>
-                  <Upload className="mb-3 h-12 w-12 text-text-muted" />
-                  <p className="font-medium text-text-primary">
-                    {dropActive ? '释放文件' : '点击或拖拽 HTML/Markdown 文件到此处'}
-                  </p>
-                  <p className="mt-1 text-sm text-text-muted">支持 HTML 与 Markdown 格式</p>
-                </>
-              )}
-            </div>
-          </div>
-
-          {currentFileIsHtml && (
-            <div>
-              <Label className="mb-2 block">
-                选择对应资源目录（*_files、.files 或 *_images，可选）
-              </Label>
-              <div
-                onClick={() => assetsInputRef.current?.click()}
-                className={`
-                  relative flex cursor-pointer flex-col items-center justify-center
-                  rounded-lg border-2 border-dashed p-6 transition-all
-                  ${
-                    assets.length > 0
-                      ? 'border-success bg-success/5'
-                      : 'border-border hover:border-primary/50 hover:bg-bg-secondary'
-                  }
-                `}
-              >
-                <input
-                  ref={assetsInputRef}
-                  type="file"
-                  multiple
-                  // @ts-expect-error - webkitdirectory is supported by Chromium browsers
-                  webkitdirectory=""
-                  onChange={handleAssetsInputChange}
-                  className="hidden"
-                />
-
-                {assets.length > 0 ? (
-                  <>
-                    <FileText className="mb-2 h-8 w-8 text-success" />
-                    <p className="font-medium text-text-primary">
-                      {assetsFolderName || '已选择资源目录'}
-                    </p>
-                    <p className="text-sm text-text-muted">{assets.length} 个文件</p>
-                    <button
-                      type="button"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        resetAssets();
-                      }}
-                      className="mt-2 text-sm text-primary hover:text-primary/80"
-                    >
-                      重新选择
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <Upload className="mb-2 h-8 w-8 text-text-muted" />
-                    <p className="font-medium text-text-primary">选择 *_files 目录</p>
-                    <p className="mt-1 text-sm text-text-muted">用于 HTML 关联图片等资源</p>
-                  </>
-                )}
+          {!usingUrl && (
+            <>
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-border" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="bg-bg-primary px-2 text-text-muted">或者上传文件</span>
+                </div>
               </div>
-            </div>
+
+              <div>
+                <Label className="mb-2 block">
+                  选择 HTML 或 Markdown 文件
+                </Label>
+
+                <div
+                  onDragOver={handleDragOver}
+                  onDragLeave={handleDragLeave}
+                  onDrop={handleDrop}
+                  onClick={() => fileInputRef.current?.click()}
+                  className={`
+                    relative flex cursor-pointer flex-col items-center justify-center
+                    rounded-lg border-2 border-dashed p-8 transition-all
+                    ${
+                      dropActive
+                        ? 'border-primary bg-primary/5'
+                        : 'border-border hover:border-primary/50 hover:bg-bg-secondary'
+                    }
+                    ${file ? 'border-success bg-success/5' : ''}
+                  `}
+                >
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".html,.htm,.md,.markdown,text/html,text/markdown,text/plain"
+                    onChange={handleFileInputChange}
+                    className="hidden"
+                  />
+
+                  {file ? (
+                    <>
+                      <FileText className="mb-3 h-12 w-12 text-success" />
+                      <p className="font-medium text-text-primary">{file.name}</p>
+                      <p className="text-sm text-text-muted">{(file.size / 1024).toFixed(1)} KB</p>
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setFile(null);
+                          resetAssets();
+                          if (fileInputRef.current) {
+                            fileInputRef.current.value = '';
+                          }
+                        }}
+                        className="mt-3 text-sm text-primary hover:text-primary/80"
+                      >
+                        重新选择
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <Upload className="mb-3 h-12 w-12 text-text-muted" />
+                      <p className="font-medium text-text-primary">
+                        {dropActive ? '释放文件' : '点击或拖拽 HTML/Markdown 文件到此处'}
+                      </p>
+                      <p className="mt-1 text-sm text-text-muted">支持 HTML 与 Markdown 格式</p>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {currentFileIsHtml && (
+                <div>
+                  <Label className="mb-2 block">
+                    选择对应资源目录（*_files、.files 或 *_images，可选）
+                  </Label>
+                  <div
+                    onClick={() => assetsInputRef.current?.click()}
+                    className={`
+                      relative flex cursor-pointer flex-col items-center justify-center
+                      rounded-lg border-2 border-dashed p-6 transition-all
+                      ${
+                        assets.length > 0
+                          ? 'border-success bg-success/5'
+                          : 'border-border hover:border-primary/50 hover:bg-bg-secondary'
+                      }
+                    `}
+                  >
+                    <input
+                      ref={assetsInputRef}
+                      type="file"
+                      multiple
+                      // @ts-expect-error - webkitdirectory is supported by Chromium browsers
+                      webkitdirectory=""
+                      onChange={handleAssetsInputChange}
+                      className="hidden"
+                    />
+
+                    {assets.length > 0 ? (
+                      <>
+                        <FileText className="mb-2 h-8 w-8 text-success" />
+                        <p className="font-medium text-text-primary">
+                          {assetsFolderName || '已选择资源目录'}
+                        </p>
+                        <p className="text-sm text-text-muted">{assets.length} 个文件</p>
+                        <button
+                          type="button"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            resetAssets();
+                          }}
+                          className="mt-2 text-sm text-primary hover:text-primary/80"
+                        >
+                          重新选择
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="mb-2 h-8 w-8 text-text-muted" />
+                        <p className="font-medium text-text-primary">选择 *_files 目录</p>
+                        <p className="mt-1 text-sm text-text-muted">用于 HTML 关联图片等资源</p>
+                      </>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {file && isMarkdownFile(file.name) && (
+                <p className="text-sm text-text-muted">Markdown 文件无需选择 *_files 资源目录。</p>
+              )}
+
+              <div className="relative">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-border" />
+                </div>
+                <div className="relative flex justify-center text-sm">
+                  <span className="bg-bg-primary px-2 text-text-muted">或者使用路径</span>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="project-path">HTML/Markdown 文件路径</Label>
+                <Input
+                  id="project-path"
+                  placeholder="例如: ./articles/article.html 或 ./articles/article.md"
+                  value={path}
+                  onChange={(e) => {
+                    setPath(e.target.value);
+                    setFile(null);
+                    resetAssets();
+                  }}
+                  disabled={!!file}
+                />
+              </div>
+            </>
           )}
-
-          {file && isMarkdownFile(file.name) && (
-            <p className="text-sm text-text-muted">Markdown 文件无需选择 *_files 资源目录。</p>
-          )}
-
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border" />
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="bg-bg-primary px-2 text-text-muted">或者使用路径</span>
-            </div>
-          </div>
-
-          <div className="space-y-2">
-            <Label htmlFor="project-path">HTML/Markdown 文件路径</Label>
-            <Input
-              id="project-path"
-              placeholder="例如: ./articles/article.html 或 ./articles/article.md"
-              value={path}
-              onChange={(e) => {
-                setPath(e.target.value);
-                setFile(null);
-                resetAssets();
-              }}
-              disabled={!!file}
-            />
-          </div>
 
           <div className="flex justify-end gap-2 pt-2">
             <Button
               type="button"
               variant="outline"
               onClick={handleClose}
-              disabled={createMutation.isPending}
+              disabled={isBusy}
             >
               取消
             </Button>
-            <Button type="submit" variant="default" isLoading={createMutation.isPending}>
+            <Button type="submit" variant="default" isLoading={isBusy}>
               <Sparkles className="h-4 w-4" />
-              创建项目
+              {usingUrl ? (isImporting ? '正在下载并导入…' : '导入文章') : '创建项目'}
             </Button>
           </div>
         </form>
