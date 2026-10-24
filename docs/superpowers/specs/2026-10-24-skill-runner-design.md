@@ -89,6 +89,8 @@ skill-runner = FastAPI + claude-agent-sdk（pip 包自带 Claude Code 程序）
   网络 `allowedDomains` 默认放行 Gemini、DashScope/OSS、YouTube 相关域名（可配置）；
   `excludedCommands` 可配置（给不认代理环境变量的程序，如 websocket TTS 脚本）。
 - 服务器需装 `bubblewrap`、`socat`；Ubuntu 24.04 需按官方文档放开 AppArmor 的 userns 限制。
+- 2026-10-24 补充：用户选择在服务器上完全放开权限（`SKILL_RUNNER_SANDBOX=0`）。此时 `policy.py` 全部放行，
+  系统提示词改为提醒「没有沙箱、不要动运行目录以外的东西」；页面交互（提问、关卡、中断）不变。
 
 ## 登录
 

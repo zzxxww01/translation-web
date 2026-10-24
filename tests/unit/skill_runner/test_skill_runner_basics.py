@@ -176,6 +176,12 @@ def test_policy_blocks_unsandboxed_bash_only_when_sandbox_on(tmp_path):
     assert policy.decide("WebFetch", {"url": "https://x"}, sandbox=True, **common).allow
 
 
+def test_policy_allows_everything_without_sandbox(tmp_path):
+    common = {"run_dir": tmp_path / "run", "extra_write": (), "sandbox": False}
+    assert policy.decide("Write", {"file_path": str(tmp_path / "elsewhere.txt")}, **common).allow
+    assert policy.decide("Edit", {"file_path": "/etc/hosts"}, **common).allow
+
+
 def test_policy_rejects_write_through_symlinked_dir(tmp_path):
     run_dir = tmp_path / "run"
     run_dir.mkdir()

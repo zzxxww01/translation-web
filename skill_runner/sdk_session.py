@@ -39,8 +39,17 @@ APPEND_SYSTEM_PROMPT = """\
 - 当前工作目录就是本次运行的目录，用户上传的文件在 input/ 下。所有产出都写在当前目录内，用户可以在网页上下载。
 - 需要用户做选择或确认时，优先用 AskUserQuestion 工具（会变成网页上的按钮）。要用户审阅的内容（术语表、稿件、字幕）必须先在回复正文里用 Markdown 完整展示，再提问或结束本轮等用户回复；不要只把内容写进文件或塞进提问里。
 - 多步骤的任务用任务清单工具列出步骤并随进度更新，网页侧栏会显示进度。
-- Bash 在沙箱里运行：只能写当前目录和少数白名单路径，网络只放行必要的域名。被拦截时如实告诉用户原因，不要尝试绕过沙箱。
 """
+
+SANDBOX_NOTE = """- Bash 在沙箱里运行：只能写当前目录和少数白名单路径，网络只放行必要的域名。被拦截时如实告诉用户原因，不要尝试绕过沙箱。
+"""
+
+NO_SANDBOX_NOTE = """- 命令直接在服务器上执行，没有沙箱。这台服务器还跑着线上服务：除非用户要求或 skill 的说明需要，不要改动当前目录以外的文件，不要装系统级软件或重启服务。
+"""
+
+
+def build_system_prompt(config: Config) -> str:
+    return APPEND_SYSTEM_PROMPT + (SANDBOX_NOTE if config.sandbox else NO_SANDBOX_NOTE)
 
 
 def build_settings(config: Config, spec: SessionSpec) -> dict[str, Any]:
@@ -83,7 +92,7 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
         setting_sources=["user"],
         permission_mode="default",
         can_use_tool=can_use_tool,
-        system_prompt={"type": "preset", "preset": "claude_code", "append": APPEND_SYSTEM_PROMPT},
+        system_prompt={"type": "preset", "preset": "claude_code", "append": build_system_prompt(config)},
         settings=json.dumps(settings, ensure_ascii=False) if settings else None,
         model=config.model,
         # 新模型默认不带任务清单工具，要显式打开，网页侧栏的进度才有数据（Python 的 env 是叠加在继承环境上的）

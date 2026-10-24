@@ -2,6 +2,8 @@
 
 沙箱只管 Bash 及其子进程；Edit/Write 这类文件工具走权限规则，不受沙箱约束，所以写路径要在这里
 再卡一次。能走到这里的 Bash 调用，说明它要求在沙箱外执行（沙箱内的命令已被自动放行）。
+
+关掉沙箱就全部放行：Bash 已经能写任何地方，再单独限制文件工具只是摆设。
 """
 
 from __future__ import annotations
@@ -52,6 +54,8 @@ def decide(
     extra_write: tuple[Path, ...],
     sandbox: bool,
 ) -> Decision:
+    if not sandbox:
+        return Decision(True)
     if tool_name in WRITE_TOOLS:
         target = _target_path(tool_name, tool_input)
         if target is None:
@@ -62,7 +66,7 @@ def decide(
             False,
             f"不允许写 {target}：只能写当前运行目录和白名单路径。请把产出写到当前目录下。",
         )
-    if tool_name == "Bash" and sandbox:
+    if tool_name == "Bash":
         # 走到这里的 Bash 要么要求在沙箱外执行，要么要访问白名单以外的域名（沙箱会就此发权限请求）
         return Decision(
             False,
