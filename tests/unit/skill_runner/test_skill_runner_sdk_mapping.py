@@ -151,8 +151,8 @@ def test_result_init_and_rate_limit_events():
 
 
 def _spec(tmp_path, outcome):
-    async def on_permission(name, data, tool_use_id):
-        on_permission.calls.append((name, data, tool_use_id))
+    async def on_permission(name, data, tool_use_id, reason=None):
+        on_permission.calls.append((name, data, tool_use_id, reason))
         return outcome
 
     on_permission.calls = []
@@ -182,7 +182,11 @@ async def test_options_load_user_skills_and_route_permissions(tmp_path):
     context = ToolPermissionContext(tool_use_id="tu-1")
     allowed = await options.can_use_tool("AskUserQuestion", {"questions": []}, context)
     assert isinstance(allowed, PermissionResultAllow) and allowed.updated_input == {"answers": {"q": "a"}}
-    assert spec.on_permission.calls == [("AskUserQuestion", {"questions": []}, "tu-1")]
+    assert spec.on_permission.calls == [("AskUserQuestion", {"questions": []}, "tu-1", None)]
+
+    # Claude Code 给的请求原因（如要访问哪个域名）原样传给 runner
+    await options.can_use_tool("Bash", {"command": "curl x"}, ToolPermissionContext(tool_use_id="tu-2", title="Claude wants to access pypi.org"))
+    assert spec.on_permission.calls[-1][3] == "Claude wants to access pypi.org"
 
     passthrough = build_options(make_config(tmp_path), _spec(tmp_path, PermissionOutcome(True)))
     same = await passthrough.can_use_tool("Read", {"file_path": "a"}, context)

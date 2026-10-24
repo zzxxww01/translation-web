@@ -92,6 +92,10 @@ async def test_policy_denial_is_reported_to_page(runner, store, factory):
     assert notice["type"] == "notice" and "已拦截 Write" in notice["text"]
     allowed = await factory.last.spec.on_permission("Write", {"file_path": "out/zh.md"}, "tu-3")
     assert allowed.allow
+    # 沙箱为白名单外的域名发来的权限请求：拒绝，页面上能看到具体原因
+    network = await factory.last.spec.on_permission("Bash", {"command": "curl https://pypi.org"}, "tu-4", "Claude wants to access pypi.org")
+    assert not network.allow
+    assert "pypi.org" in store.read_events(run_id)[-1]["text"]
 
 
 async def test_interrupt_rejects_pending_question_and_signals_session(runner, factory):

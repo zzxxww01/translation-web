@@ -38,7 +38,8 @@ class PermissionOutcome:
     interrupt: bool = False
 
 
-PermissionHandler = Callable[[str, dict[str, Any], "str | None"], Awaitable[PermissionOutcome]]
+# 参数：工具名、工具参数、tool_use_id、Claude Code 给出的请求原因（如「要访问某域名」，可能为空）
+PermissionHandler = Callable[[str, dict[str, Any], "str | None", "str | None"], Awaitable[PermissionOutcome]]
 
 
 @dataclass
@@ -231,7 +232,9 @@ class Runner:
             run_id=run.meta.id,
             cwd=self.store.run_dir(run.meta.id),
             resume=run.meta.session_id,
-            on_permission=lambda name, data, tool_use_id: self._on_permission(run, name, data, tool_use_id),
+            on_permission=lambda name, data, tool_use_id, reason=None: self._on_permission(
+                run, name, data, tool_use_id, reason
+            ),
         )
         try:
             session = await self.session_factory(spec)
@@ -285,7 +288,12 @@ class Runner:
         self._emit(run, event)
 
     async def _on_permission(
-        self, run: _Run, tool_name: str, tool_input: dict[str, Any], tool_use_id: str | None
+        self,
+        run: _Run,
+        tool_name: str,
+        tool_input: dict[str, Any],
+        tool_use_id: str | None,
+        reason: str | None = None,
     ) -> PermissionOutcome:
         if tool_name == "AskUserQuestion":
             qid = tool_use_id or uuid.uuid4().hex
@@ -308,7 +316,9 @@ class Runner:
             sandbox=self.config.sandbox,
         )
         if not decision.allow:
-            self._emit(run, {"type": "notice", "level": "warn", "text": f"已拦截 {tool_name}：{decision.message}"})
+            # 带上 Claude Code 给的原因（比如具体要访问哪个域名），否则页面上看不出到底拦了什么
+            detail = f"（{reason}）" if reason else ""
+            self._emit(run, {"type": "notice", "level": "warn", "text": f"已拦截 {tool_name}{detail}：{decision.message}"})
             return PermissionOutcome(allow=False, message=decision.message)
         return PermissionOutcome(allow=True)
 

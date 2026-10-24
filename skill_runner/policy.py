@@ -63,9 +63,11 @@ def decide(
             f"不允许写 {target}：只能写当前运行目录和白名单路径。请把产出写到当前目录下。",
         )
     if tool_name == "Bash" and sandbox:
+        # 走到这里的 Bash 要么要求在沙箱外执行，要么要访问白名单以外的域名（沙箱会就此发权限请求）
         return Decision(
             False,
-            "这条命令要求在沙箱外执行，skill-runner 不允许。请改用能在沙箱内运行的方式；"
-            "确实需要时告诉用户由管理员把它加进 SKILL_RUNNER_UNSANDBOXED_COMMANDS。",
+            "这条命令需要沙箱放行范围以外的权限（沙箱外执行，或访问白名单以外的域名），skill-runner 不允许。"
+            "请改用沙箱内能完成的方式；确实需要时告诉用户由管理员调整 SKILL_RUNNER_ALLOWED_DOMAINS 或 "
+            "SKILL_RUNNER_UNSANDBOXED_COMMANDS。",
         )
     return Decision(True)

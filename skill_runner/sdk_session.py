@@ -67,7 +67,8 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
     async def can_use_tool(
         tool_name: str, tool_input: dict[str, Any], context: ToolPermissionContext
     ) -> PermissionResultAllow | PermissionResultDeny:
-        outcome = await spec.on_permission(tool_name, tool_input, context.tool_use_id)
+        reason = context.title or context.decision_reason or context.blocked_path
+        outcome = await spec.on_permission(tool_name, tool_input, context.tool_use_id, reason)
         if outcome.allow:
             updated = outcome.updated_input if outcome.updated_input is not None else tool_input
             return PermissionResultAllow(updated_input=updated)
