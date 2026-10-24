@@ -1,3 +1,4 @@
+import asyncio
 import json
 import os
 
@@ -162,3 +163,22 @@ def test_event_stream_replays_after_last_event_id(setup):
     events = [json.loads(f.split("data: ", 1)[1]) for f in frames]
     assert [e["seq"] for e in events] == [2]
     assert events[0]["type"] == "status" and events[0]["status"] == "running"
+
+
+def test_event_stream_sends_named_ping_when_idle(setup, monkeypatch):
+    client, _, runner = setup
+    login(client)
+    run_id = client.post(f"{PREFIX}/runs", data={"skill": "four-step-translate", "message": "go"}).json()["id"]
+    monkeypatch.setattr("skill_runner.app.SSE_PING_S", 0.05)
+    original = runner.subscribe
+
+    def subscribe_then_end_later(rid, after_seq=0):
+        backlog, queue = original(rid, after_seq)
+        asyncio.get_running_loop().call_later(0.3, queue.put_nowait, None)
+        return backlog, queue
+
+    runner.subscribe = subscribe_then_end_later
+    body = client.get(f"{PREFIX}/runs/{run_id}/events?after=99").text
+    # 心跳是具名事件（页面脚本收得到），不是 SSE 注释
+    assert "event: ping\ndata: {}\n\n" in body
+    assert not any(line.startswith(":") for line in body.splitlines())

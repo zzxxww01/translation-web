@@ -194,7 +194,9 @@ def create_app(
                     try:
                         event = await asyncio.wait_for(queue.get(), timeout=SSE_PING_S)
                     except asyncio.TimeoutError:
-                        yield ": ping\n\n"
+                        # 用具名事件而不是注释：注释到不了页面脚本，页面靠它判断连接是否还活着。
+                        # 经代理/隧道的长连接偶尔会卡住却不断开，页面收不到心跳就会自己重连。
+                        yield "event: ping\ndata: {}\n\n"
                         continue
                     if event is None:  # 运行被删除或服务关闭
                         return

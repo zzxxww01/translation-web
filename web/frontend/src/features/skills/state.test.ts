@@ -2,6 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import { foldEvents, formatBytes, formatDuration, mergeEvents } from './state';
 import { renderMarkdown } from './markdown';
+import { isStalled, STALL_MS } from './hooks';
 import type { SkillEvent } from './types';
 
 let seq = 0;
@@ -89,6 +90,16 @@ describe('formatting', () => {
     expect(formatDuration(42_000)).toBe('42 秒');
     expect(formatDuration(125_000)).toBe('2 分 5 秒');
     expect(formatDuration(3_725_000)).toBe('1 小时 2 分');
+  });
+});
+
+describe('isStalled', () => {
+  it('treats a stream as stuck only after two missed server pings and then some', () => {
+    // 服务端每 15 秒一次心跳，阈值要留出余量，又不能让卡住的页面等太久
+    expect(STALL_MS).toBeGreaterThan(2 * 15_000);
+    expect(STALL_MS).toBeLessThanOrEqual(60_000);
+    expect(isStalled(0, STALL_MS)).toBe(false);
+    expect(isStalled(0, STALL_MS + 1)).toBe(true);
   });
 });
 
