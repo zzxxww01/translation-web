@@ -58,7 +58,8 @@ skill-runner = FastAPI + claude-agent-sdk（pip 包自带 Claude Code 程序）
 `error`（出错或服务重启中断；发消息即从会话断点续跑）。
 
 1. 新建：`POST /api/skills/runs`（multipart：skill、message、files）→ 建目录、存文件到 `input/`，
-   首条消息为 `/<skill> <message>` 加附件清单，起会话。
+   首条消息为 `/<skill> <message>` 加附件清单，起会话。`skill` 留空即直接对话：消息原样发出，
+   不派发 skill（2026-10-24 补充；导航改名「Claude」）。
 2. 事件：SDK 消息 → 页面事件（`user`、`text`、`tool`、`tool_result`、`question`、`answer`、
    `todos`、`status`、`result`、`error`、`notice`），带递增 `seq`，追加写 `events.jsonl`，
    推给 SSE 订阅者。工具结果截断到 2000 字；子代理的工具调用带 `parent` 字段，页面折叠显示。
@@ -99,7 +100,7 @@ skill-runner = FastAPI + claude-agent-sdk（pip 包自带 Claude Code 程序）
 
 - 未登录 → 口令框。
 - 左栏：运行列表（skill、首条消息摘要、状态、时间）+「新建」。
-- 新建：选 skill（目录接口返回名称和简介）、写说明、附文件 → 开始。
+- 新建：选「直接对话」（默认）或某个 skill（目录接口返回名称和简介）、写说明、附文件 → 开始。
 - 主区：对话流（Markdown 用 `marked` 渲染 + DOMPurify 消毒）、工具调用折叠、提问卡片（单选/多选/
   「其他」自由输入）、底部输入框（发送、附件、中断）。
 - 右栏：进度（Claude 的 todo 清单）、产出文件（可下载，运行中定时刷新）。

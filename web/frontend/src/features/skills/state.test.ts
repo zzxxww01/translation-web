@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { foldEvents, formatBytes, formatDuration, mergeEvents } from './state';
+import { foldEvents, formatBytes, formatDuration, mergeEvents, runKindLabel } from './state';
 import { renderMarkdown } from './markdown';
 import { isStalled, STALL_MS } from './hooks';
 import type { SkillEvent } from './types';
@@ -90,6 +90,11 @@ describe('formatting', () => {
     expect(formatDuration(42_000)).toBe('42 秒');
     expect(formatDuration(125_000)).toBe('2 分 5 秒');
     expect(formatDuration(3_725_000)).toBe('1 小时 2 分');
+  });
+
+  it('labels runs without a skill as direct chat', () => {
+    expect(runKindLabel('four-step-translate')).toBe('four-step-translate');
+    expect(runKindLabel('')).toBe('直接对话');
   });
 });
 

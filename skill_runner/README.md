@@ -1,7 +1,8 @@
 # skill-runner
 
 在服务器上用**本人的 Claude 订阅**跑 skill（four-step-translate、video-bilingual-subber、podcast-cn-dubber），
-momo 的「Skill」页（`/skills`）负责触发和交互：选 skill、传文件或贴链接、在 skill 的关卡上作答、下载产出。
+momo 的「Claude」页（`/skills`）负责触发和交互：选 skill、传文件或贴链接、在 skill 的关卡上作答、下载产出。
+也可以不选 skill 直接对话（`skill` 留空，消息原样发给 Claude，它仍能按需调用已装的 skill）。
 设计见 `docs/superpowers/specs/2026-10-24-skill-runner-design.md`。
 
 ```

@@ -14,7 +14,7 @@ const navItems: NavItem[] = [
   { path: '/wechat', label: '微信排版', icon: <FileText className="h-4 w-4" /> },
   { path: '/slack', label: 'Slack 回复', icon: <MessageCircle className="h-4 w-4" /> },
   { path: '/tools', label: '工具箱', icon: <Wrench className="h-4 w-4" /> },
-  { path: '/skills', label: 'Skill', icon: <Sparkles className="h-4 w-4" /> },
+  { path: '/skills', label: 'Claude', icon: <Sparkles className="h-4 w-4" /> },
 ];
 
 interface FeatureNavProps {

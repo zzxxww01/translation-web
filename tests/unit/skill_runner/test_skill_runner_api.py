@@ -87,6 +87,15 @@ def test_create_run_saves_upload_and_dispatches_skill(setup):
     assert [r["id"] for r in listed] == [run["id"]]
 
 
+def test_create_run_without_skill_is_plain_chat(setup):
+    client, factory, _ = setup
+    login(client)
+    response = client.post(f"{PREFIX}/runs", data={"message": "解释一下 HBM"})
+    assert response.status_code == 200, response.text
+    assert response.json()["skill"] == ""
+    assert factory.last.sent == ["解释一下 HBM"]
+
+
 def test_create_run_validation(setup):
     client, _, _ = setup
     login(client)

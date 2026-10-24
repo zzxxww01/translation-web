@@ -34,10 +34,10 @@ export function LoginPanel() {
       <form onSubmit={submit} className="w-full max-w-sm rounded-xl border border-border-subtle bg-white p-7 shadow-sm">
         <div className="mb-5 flex items-center gap-2.5 text-text-primary">
           <LockKeyhole className="h-5 w-5 text-primary-600" />
-          <h1 className="text-xl">Skill 运行</h1>
+          <h1 className="text-xl">Claude</h1>
         </div>
         <p className="mb-5 text-sm leading-relaxed text-text-muted">
-          这里会用你的 Claude 订阅在服务器上执行 skill，需要先输入口令。
+          这里会用你的 Claude 订阅在服务器上对话、跑 skill，需要先输入口令。
         </p>
         <Input
           type="password"

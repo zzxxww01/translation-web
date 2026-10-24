@@ -133,7 +133,7 @@ def create_app(
 
     @api.post("/runs")
     async def create_run(
-        skill: str = Form(...),
+        skill: str = Form(""),  # 留空即直接对话
         message: str = Form(""),
         files: list[UploadFile] = File(default=[]),
     ):

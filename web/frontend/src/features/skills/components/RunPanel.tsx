@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/Button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { skillsApi } from '../api';
 import { skillKeys, useRunEvents } from '../hooks';
-import { foldEvents } from '../state';
+import { foldEvents, runKindLabel } from '../state';
 import type { RunMeta } from '../types';
 import { AssistantText, NoticeLine, ToolGroup, TurnDivider, UserBubble } from './ChatItems';
 import { Composer } from './Composer';
@@ -78,7 +78,7 @@ export function RunPanel({ run, maxUploadMb, onDeleted }: RunPanelProps) {
               </span>
             )}
           </div>
-          <div className="mt-0.5 text-xs text-text-muted">{run.skill}</div>
+          <div className="mt-0.5 text-xs text-text-muted">{runKindLabel(run.skill)}</div>
         </div>
         <div className="flex items-center gap-1">
         {/* 窄屏没有右栏，进度和产出文件放进抽屉 */}

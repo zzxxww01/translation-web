@@ -31,7 +31,7 @@ TIMEOUT_S = 300
 async def run_smoke(config: Config) -> bool:
     store = RunStore(config.runs_dir)
     runner = Runner(config, store, make_factory(config))
-    meta = runner.create(config.skills[0], "自检")
+    meta = runner.create("", "自检")
     _, queue = runner.subscribe(meta.id)
     answered = None
     try:

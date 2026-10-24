@@ -24,6 +24,7 @@ def test_prompt_dispatches_skill_and_lists_attachments():
         "/four-step-translate 精翻\n\n附件（已保存在当前运行目录）：\n- input/a.html"
     )
     assert build_prompt(None, "  继续 ", []) == "继续"
+    assert build_prompt("", "你好", []) == "你好"
     assert make_title("", ["input/a.html"]) == "a.html"
     assert make_title("第一行\n第二行", []) == "第一行"
 

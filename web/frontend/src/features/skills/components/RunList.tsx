@@ -1,6 +1,7 @@
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
+import { runKindLabel } from '../state';
 import type { RunMeta } from '../types';
 import { StatusPill } from './StatusPill';
 
@@ -45,7 +46,7 @@ export function RunList({ runs, selectedId, onSelect, onNew }: RunListProps) {
                 <span className="shrink-0 text-xs text-text-muted">{formatTime(run.created_at)}</span>
               </div>
               <div className="mt-1 flex items-center justify-between gap-2">
-                <span className="truncate text-xs text-text-muted">{run.skill}</span>
+                <span className="truncate text-xs text-text-muted">{runKindLabel(run.skill)}</span>
                 <StatusPill status={run.status} />
               </div>
             </button>

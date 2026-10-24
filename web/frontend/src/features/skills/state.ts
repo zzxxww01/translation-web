@@ -120,6 +120,11 @@ export const STATUS_LABEL: Record<RunStatus, string> = {
   error: '已中断',
 };
 
+/** 运行的类别：用的 skill 名；没选 skill 就是直接对话 */
+export function runKindLabel(skill: string): string {
+  return skill || '直接对话';
+}
+
 export function formatBytes(size: number): string {
   if (size < 1024) return `${size} B`;
   if (size < 1024 ** 2) return `${(size / 1024).toFixed(1)} KB`;

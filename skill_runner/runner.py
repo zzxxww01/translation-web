@@ -182,7 +182,8 @@ class Runner:
     # ---- 生命周期 ----
 
     def create(self, skill: str, title: str) -> RunMeta:
-        if skill not in self.config.skills:
+        # skill 为空就是直接对话：消息原样发给 Claude，不派发 skill
+        if skill and skill not in self.config.skills:
             raise RunnerError(f"未启用的 skill：{skill}")
         if self.active_count() >= self.config.max_active:
             raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
