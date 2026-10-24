@@ -11,15 +11,15 @@ default:
 
   # Phase 1: 初稿翻译
   phase1_draft:
-    model: "deepseek-v3"
+    model: "gemini-flash"
     temperature: 0.3
-    description: "初稿翻译，DeepSeek术语准确+表达自然"
+    description: "初稿翻译，Gemini 3.8 Flash（2026-10-24 盲评 4.35，远好于兜底的 2.5 Flash）"
 
   # Phase 2: 精修和润色
   phase2_refine:
-    model: "deepseek-v3"
+    model: "gemini-flash"
     temperature: 0.3
-    description: "精修润色，DeepSeek术语准确+表达自然"
+    description: "审校与定点修订，与初稿同用 Gemini 3.8 Flash"
 
   # Phase 3: 质量报告生成
   phase3_review:

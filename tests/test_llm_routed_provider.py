@@ -190,6 +190,46 @@ def test_http_client_errors_not_retried_even_with_transient_words(monkeypatch, s
     assert transport.generate.call_count == 1
 
 
+@pytest.mark.parametrize('status', [400, 401])
+def test_relay_client_error_skips_to_reserved_official_route(monkeypatch, status):
+    import httpx
+    from openai import APIStatusError
+    error = APIStatusError('input json is empty', response=httpx.Response(
+        status, request=httpx.Request('POST', 'https://offline.invalid')), body=None)
+    plans = [plan(name='relay-a'), plan(name='relay-b'), plan('gemini', 'official')]
+    obj, transport = adapter(monkeypatch, [error, 'ok'], plans)
+    assert obj.generate_with_fallback('prompt') == 'ok'
+    routes = [c.args[0].provider.type for c in obj.create_provider.call_args_list]
+    assert routes == ['vectorengine', 'gemini']
+
+
+def test_openai_compatible_official_provider_counts_as_official(monkeypatch):
+    import httpx
+    from openai import APIStatusError
+    error = APIStatusError('input json is empty', response=httpx.Response(
+        400, request=httpx.Request('POST', 'https://offline.invalid')), body=None)
+    official = NS(provider=NS(type='vectorengine', provider_id='deepseek-official', relay=False),
+                  model=NS(alias='deepseek-flash-official', real_model='deepseek-flash'),
+                  api_key=NS(name='test', key='fake'))
+    obj, transport = adapter(monkeypatch, [error, 'ok'], [plan(), plan(name='relay-b'), official])
+    assert obj.generate_with_fallback('prompt') == 'ok'
+    assert obj.create_provider.call_args.args[0].provider.provider_id == 'deepseek-official'
+    assert transport.generate.call_count == 2
+
+
+def test_official_client_error_after_relay_rejection_still_stops(monkeypatch):
+    import httpx
+    from openai import APIStatusError
+    def rejected():
+        return APIStatusError('bad request', response=httpx.Response(
+            400, request=httpx.Request('POST', 'https://offline.invalid')), body=None)
+    plans = [plan(), plan('gemini', 'official'), plan('gemini', 'official-2')]
+    obj, transport = adapter(monkeypatch, [rejected(), rejected(), 'should not happen'], plans)
+    with pytest.raises(APIStatusError):
+        obj.generate_with_fallback('prompt')
+    assert transport.generate.call_count == 2
+
+
 def test_real_openai_sdk_has_no_hidden_requests(monkeypatch):
     import httpx
     from openai import OpenAI

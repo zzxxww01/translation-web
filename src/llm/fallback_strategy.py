@@ -10,7 +10,7 @@
 from typing import List, Optional
 import logging
 
-from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, LLMConfig
+from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, LLMConfig, is_relay_provider
 from .config_loader import resolve_config_model_alias
 
 logger = logging.getLogger(__name__)
@@ -42,6 +42,8 @@ class FallbackStrategy:
         1. 同组内：主模型 + 所有 Key（按 priority 排序）
         2. 同组内：其他模型 + 所有 Key（按模型 priority 排序）
         3. 跨组：映射的其他组模型 + 所有 Key
+
+        主模型在中转上时，第 1 步之后先降级到官方组（同家族优先），再试中转上的其他模型。
         """
         attempts = []
         resolved_alias = self._resolve_config_model_alias(initial_model_alias)
@@ -55,12 +57,22 @@ class FallbackStrategy:
 
         # 第一阶段：同组内故障转移
         within_attempts = self._build_within_provider_attempts(initial_provider, initial_model)
-        attempts.extend(within_attempts)
 
         # 第二阶段：跨组故障转移
+        cross_attempts = []
         if self.config.fallback_rules.get('cross_provider', {}).get('enabled', False):
             cross_attempts = self._build_cross_provider_attempts(resolved_alias)
-            attempts.extend(cross_attempts)
+
+        if is_relay_provider(initial_provider):
+            same_model = [a for a in within_attempts if a.model.alias == initial_model.alias]
+            attempts = (
+                same_model
+                + [a for a in cross_attempts if not is_relay_provider(a.provider)]
+                + [a for a in within_attempts if a.model.alias != initial_model.alias]
+                + [a for a in cross_attempts if is_relay_provider(a.provider)]
+            )
+        else:
+            attempts = within_attempts + cross_attempts
 
         logger.info(
             f"Built attempt plan with {len(attempts)} attempts for model {resolved_alias} "
@@ -105,7 +117,7 @@ class FallbackStrategy:
 
             # 其他模型 + 所有 Key
             for model in sorted_models:
-                if model.alias != initial_model.alias:
+                if model.alias != initial_model.alias and model.fallback:
                     for key in sorted_keys:
                         attempts.append(AttemptPlan(provider, model, key))
 
@@ -129,6 +141,15 @@ class FallbackStrategy:
         if not initial_provider:
             return attempts
 
+        def family(name: str) -> int:
+            """模型名命中的第一个关键词序号；都不命中时排在最后。"""
+            name = name.lower()
+            return next((idx for idx, keyword in enumerate(model_priority_keywords) if keyword in name),
+                        len(model_priority_keywords))
+
+        initial_model = self._get_model_config(initial_model_alias)
+        initial_family = min(family(initial_model.alias), family(initial_model.real_model))
+
         # 收集所有其他组的模型（排除当前组）
         other_models = []
         for provider in self.config.providers.values():
@@ -136,25 +157,15 @@ class FallbackStrategy:
                 continue
 
             for model in provider.models:
-                if model.enabled:
+                if model.enabled and model.fallback:
                     other_models.append((provider, model))
 
-        # 排序：先按组优先级，再按模型名称匹配优先级
+        # 排序：同家族优先（如中转 DeepSeek → 官方 DeepSeek），再按组优先级、模型名称匹配优先级、模型 priority
         def get_sort_key(item):
             provider, model = item
-            group_priority = provider.group_priority
-
-            # 计算模型名称匹配优先级
-            model_name_lower = model.alias.lower()
-            model_priority = len(model_priority_keywords)  # 默认最低优先级
-
-            for idx, keyword in enumerate(model_priority_keywords):
-                if keyword in model_name_lower:
-                    model_priority = idx
-                    break
-
-            # 如果多个模型匹配同一关键词，按字典序排序
-            return (group_priority, model_priority, model.alias)
+            model_family = min(family(model.alias), family(model.real_model))
+            same_family = model_family == initial_family < len(model_priority_keywords)
+            return (not same_family, provider.group_priority, model_family, model.priority, model.alias)
 
         sorted_models = sorted(other_models, key=get_sort_key)
 

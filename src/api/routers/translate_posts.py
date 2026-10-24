@@ -273,7 +273,7 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
             run_llm_blocking(
                 generate_with_fallback,
                 prompt,
-                task_type="post",
+                task_type="post_optimize",
                 timeout=attempt_timeout_s,
                 model=body.model,
                 result_metadata=model_metadata,

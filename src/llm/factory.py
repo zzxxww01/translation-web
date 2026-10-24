@@ -89,6 +89,7 @@ def get_task_model_alias(task_type: str) -> str:
     task_model_map = {
         "longform": settings.llm_model_longform,
         "post": settings.llm_model_post,
+        "post_optimize": settings.llm_model_post,
         "analysis": settings.llm_model_analysis,
         "title": settings.llm_model_title,
         "metadata": settings.llm_model_metadata,
