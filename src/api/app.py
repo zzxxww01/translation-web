@@ -41,6 +41,7 @@ from .routers import (
     quality_report,
     segmentation,
     slack,
+    substack,
     tasks,
     tools,
     translate,
@@ -89,6 +90,7 @@ app.include_router(tasks.router, prefix="/api", tags=["tasks"])
 app.include_router(consistency.router, prefix="/api", tags=["consistency"])
 app.include_router(segmentation.router, prefix="/api", tags=["segmentation"])
 app.include_router(wechat_format.router, prefix="/api", tags=["wechat"])
+app.include_router(substack.router, prefix="/api", tags=["substack"])
 
 
 frontend_dist_path = Path(__file__).parent.parent.parent / "web" / "frontend" / "dist"
