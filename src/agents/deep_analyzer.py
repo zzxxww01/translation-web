@@ -59,6 +59,10 @@ class DeepAnalyzer:
     # 方案6合并调用需要更长的超时时间（深度分析+术语验证）
     ANALYSIS_TIMEOUT_STEPS = (300, 420, 600)
     SECTION_ROLE_TIMEOUT = 180
+    # The model-based section role map timed out (180 s) on every full-article run and
+    # fell back to placeholders, which also kept the whole analysis out of the cache.
+    # Roles now come from document structure; set True to use the model again.
+    USE_SECTION_ROLE_MODEL = False
     # 高频术语候选数量限制
     MAX_HIGH_FREQ_TERMS = 30
 
@@ -361,12 +365,14 @@ class DeepAnalyzer:
         # 解析基础分析结果（修改：处理新的响应格式）
         analysis = self._parse_combined_analysis_result(result, sections)
 
-        # 优化：一次性分析所有章节角色（保持不变）
-        section_roles = self._analyze_all_section_roles(
-            sections,
-            analysis,
-            should_cancel=should_cancel,
-        )
+        if self.USE_SECTION_ROLE_MODEL:
+            section_roles = self._analyze_all_section_roles(
+                sections,
+                analysis,
+                should_cancel=should_cancel,
+            )
+        else:
+            section_roles = self._section_roles_from_structure(sections)
         analysis.section_roles = section_roles
         analysis.incomplete_stages = []
         if not terms_verified_ok:
@@ -788,6 +794,23 @@ class DeepAnalyzer:
                 )
 
         return section_roles
+
+    @staticmethod
+    def _section_roles_from_structure(sections: List[Section]) -> Dict[str, SectionUnderstanding]:
+        """Position and neighbouring titles, without a model call."""
+        roles = {}
+        total = len(sections)
+        for index, section in enumerate(sections):
+            previous = sections[index - 1].title if index > 0 else ""
+            following = sections[index + 1].title if index + 1 < total else ""
+            roles[section.section_id] = SectionUnderstanding(
+                role_in_article=f"全文第 {index + 1}/{total} 章《{section.title or section.section_id}》",
+                relation_to_previous=f"承接上一章《{previous}》" if previous else "",
+                relation_to_next=f"下一章是《{following}》" if following else "",
+                key_points=[],
+                translation_notes=[],
+            )
+        return roles
 
     def _build_sections_summary(self, sections: List[Section]) -> str:
         """Cover every section, with explicit sampled paragraph indices and source evidence."""

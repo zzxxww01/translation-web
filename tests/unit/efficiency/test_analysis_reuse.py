@@ -28,7 +28,17 @@ class AnalyzerProvider(LLMProvider):
         return json.dumps({'section_roles':{'s1':{'role_in_article':'body'}}})
 
 
-def test_completed_core_survives_failed_roles_without_caching_incomplete_analysis(tmp_path):
+def test_default_roles_need_no_model_call_and_make_the_analysis_cacheable():
+    p=AnalyzerProvider()
+    sections=[Section(section_id=f's{i}', title=f'T{i}', paragraphs=[Paragraph(id='p',index=0,source='Text')]) for i in range(3)]
+    analysis=DeepAnalyzer(p).analyze(sections)
+    assert p.role_calls==0 and analysis.checkpoint_eligible and 'section_roles' not in analysis.incomplete_stages
+    assert analysis.section_roles['s1'].relation_to_previous=='承接上一章《T0》'
+    assert analysis.section_roles['s1'].relation_to_next=='下一章是《T2》'
+
+
+def test_completed_core_survives_failed_roles_without_caching_incomplete_analysis(tmp_path, monkeypatch):
+    monkeypatch.setattr(DeepAnalyzer, 'USE_SECTION_ROLE_MODEL', True)
     p=AnalyzerProvider(); section=Section(section_id='s1', title='Title', paragraphs=[Paragraph(id='p',index=0,source='Text')])
     store=StageCheckpoints(tmp_path,'v3')
     def analyze():
