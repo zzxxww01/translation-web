@@ -8,7 +8,7 @@ import { EditableText } from './components/EditableText';
 import { Workbench } from './components/Workbench';
 import { SAVE_DELAY_MS, unsavedEdits } from './lib/edits';
 import { importAndTranslate } from './lib/importFlow';
-import { SECOND_MODELS } from './lib/tracks';
+import type { RunMeta } from '@/features/skills/types';
 import type { Workbench as WorkbenchData } from './types';
 
 const api = vi.hoisted(() => ({
@@ -19,10 +19,17 @@ const api = vi.hoisted(() => ({
   exportMarkdown: vi.fn(),
   setClaudeRun: vi.fn(),
   sourceHtml: vi.fn(),
+  finalize: vi.fn(),
+  changes: vi.fn(),
 }));
 const substack = vi.hoisted(() => ({ importArticle: vi.fn() }));
 const claude = vi.hoisted(() => ({ startClaudeTrack: vi.fn(), importClaudeTrack: vi.fn() }));
-vi.mock('./api', () => ({ articlesApi: api, downloadText: vi.fn() }));
+const agentRun = vi.hoisted(() => ({ current: undefined as RunMeta | undefined }));
+vi.mock('./api', () => ({ articlesApi: api, downloadText: vi.fn(), HUMAN_EDITS_URL: '/api/workbench/human-edits.jsonl' }));
+vi.mock('./hooks', async importOriginal => ({
+  ...(await importOriginal<object>()),
+  useClaudeRun: () => ({ data: agentRun.current, error: null, refetch: vi.fn() }),
+}));
 vi.mock('@/features/substack/api', () => ({ substackApi: substack, isCookieError: () => false }));
 vi.mock('./lib/claude', async importOriginal => ({ ...(await importOriginal<object>()), ...claude }));
 vi.mock('sonner', () => ({ toast: { success: vi.fn(), error: vi.fn(), warning: vi.fn() } }));
@@ -47,6 +54,9 @@ beforeEach(() => {
   Object.values(api).forEach(fn => fn.mockReset());
   substack.importArticle.mockReset();
   claude.startClaudeTrack.mockReset();
+  claude.importClaudeTrack.mockReset();
+  agentRun.current = undefined;
+  localStorage.clear(); // 收起的栏会记在 localStorage 里
   host = document.createElement('div');
   document.body.appendChild(host);
   root = createRoot(host);
@@ -76,8 +86,10 @@ describe('EditableText', () => {
     const retry = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.includes('重试'))!;
     await act(async () => { retry.click(); });
     expect(onSave).toHaveBeenCalledTimes(2);
-    expect(host.textContent).toContain('已保存');
+    // 段落里不再显示「已保存」，状态汇总到栏头
+    expect(host.textContent).not.toContain('已保存');
     expect(unsavedEdits.any()).toBe(false);
+    expect(unsavedEdits.snapshot('t1')).toMatch(/^0\|0\|[1-9]/);
   });
 });
 
@@ -93,37 +105,36 @@ describe('EditableText display', () => {
 });
 
 describe('importAndTranslate', () => {
-  it('imports, starts the web track, then a model second version with terms auto-accepted', async () => {
-    substack.importArticle.mockResolvedValue({ project: { id: 'p1' }, already_imported: false });
-    api.createModelVariant.mockResolvedValue({ variant_id: 'p1--argon' });
-    api.startWorkflow.mockResolvedValue({ run_id: 'r' });
-
-    await expect(importAndTranslate({ url: 'u' }, 'model', SECOND_MODELS[0], vi.fn())).resolves.toBe('p1');
-
-    expect(api.startWorkflow.mock.calls).toEqual([
-      ['p1'],
-      ['p1--argon', { model: 'gemini-official-argon', autoAcceptTerms: true }],
-    ]);
-  });
-
-  it('hands the article to Codex when Codex is the second version', async () => {
+  beforeEach(() => {
     substack.importArticle.mockResolvedValue({ project: { id: 'p1' }, already_imported: false });
     api.startWorkflow.mockResolvedValue({ run_id: 'r' });
     claude.startClaudeTrack.mockResolvedValue({ id: 'run-1' });
-
-    await importAndTranslate({ url: 'u' }, 'codex', SECOND_MODELS[0], vi.fn());
-
-    expect(claude.startClaudeTrack).toHaveBeenCalledWith('p1', 'codex');
   });
 
-  it('still opens the article when the second version cannot start', async () => {
+  it.each([
+    ['both', true, true],
+    ['web', true, false],
+    ['agent', false, true],
+    ['import', false, false],
+  ] as const)('plan %s: web %s, agent %s', async (plan, web, agent) => {
+    await expect(importAndTranslate({ url: 'u' }, plan, 'codex', vi.fn())).resolves.toBe('p1');
+    expect(api.startWorkflow.mock.calls).toEqual(web ? [['p1']] : []);
+    expect(claude.startClaudeTrack.mock.calls).toEqual(agent ? [['p1', 'codex']] : []);
+  });
+
+  it('does not start anything again for an article imported before', async () => {
     substack.importArticle.mockResolvedValue({ project: { id: 'p1' }, already_imported: true });
+    await importAndTranslate({ url: 'u' }, 'both', 'claude', vi.fn());
+    expect(api.startWorkflow).not.toHaveBeenCalled();
+    expect(claude.startClaudeTrack).not.toHaveBeenCalled();
+  });
+
+  it('still opens the article when the agent cannot start', async () => {
     claude.startClaudeTrack.mockRejectedValue(new Error('skill-runner 挂了'));
     const notify = vi.fn();
 
-    await expect(importAndTranslate({ url: 'u' }, 'claude', SECOND_MODELS[0], notify)).resolves.toBe('p1');
+    await expect(importAndTranslate({ url: 'u' }, 'agent', 'claude', notify)).resolves.toBe('p1');
 
-    expect(api.startWorkflow).not.toHaveBeenCalled(); // 已导入过的不重复开翻
     expect(notify).toHaveBeenCalledWith(expect.stringContaining('skill-runner 挂了'));
   });
 });
@@ -133,14 +144,16 @@ const DATA: WorkbenchData = {
     id: 'p1', title: 'Datacenters 2027', title_translation: '2027 数据中心', original_url: null, created_at: '', claude_run_id: null,
     progress: { total: 2, approved: 0 },
     status: { active: false, run_id: null, status: null, current_step: null, translated: 2, total: 2, error: null },
+    finalized: null,
   },
   variants: [{
-    id: 'p1--argon', kind: 'model', label: 'argon', title_translation: null, progress: { total: 2, approved: 0 }, import: null,
+    id: 'p1--argon', kind: 'model', label: 'argon', title_translation: null, progress: { total: 2, approved: 0 }, import: null, finalized: null,
     status: { active: false, run_id: null, status: null, current_step: null, translated: 1, total: 2, error: null },
   }],
   rows: [
     { key: 'section:s1', kind: 'section', section_id: 's1', paragraph_id: null, source: 'Introduction', web: '引言', alt: { 'p1--argon': '前言' } },
     { key: 's1/p000', kind: 'p', section_id: 's1', paragraph_id: 'p000', source: 'Datacenters are booming.', web: '数据中心正在爆发。', alt: { 'p1--argon': null } },
+    { key: 's1/p001', kind: 'image', section_id: 's1', paragraph_id: 'p001', source: 'https://cdn/x.png', image: 'https://cdn/x.png', web: null, alt: { 'p1--argon': null } },
   ],
 };
 
@@ -165,5 +178,53 @@ describe('Workbench', () => {
     await act(async () => { adopt.click(); });
     await flush();
     expect(api.saveText).toHaveBeenCalledWith('p1', { target: 'p1', section_id: 's1', paragraph_id: null, text: '前言' });
+  });
+
+  it('shows images in every column, not just the English one', async () => {
+    api.workbench.mockResolvedValue(DATA);
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    expect(Array.from(host.querySelectorAll('img')).map(img => img.getAttribute('src'))).toEqual(['https://cdn/x.png', 'https://cdn/x.png', 'https://cdn/x.png']);
+    expect(host.textContent).not.toContain('（图片）');
+  });
+
+  it('saves the whole version in one go and shows what was changed', async () => {
+    api.workbench.mockResolvedValue(DATA);
+    api.finalize.mockResolvedValue({ saved_at: '2026-10-26T14:02:00', total: 2, changed: 1, confirmed: 2 });
+    api.changes.mockResolvedValue({
+      total: 2, changed: 1, finalized: null,
+      changes: [{
+        key: 's1/p000', section_id: 's1', section_title: 'Introduction', paragraph_id: 'p000', kind: 'p',
+        source: 'Datacenters are booming.', before: '数据中心正在繁荣。', after: '数据中心正在爆发。',
+        segments: [{ op: 'equal', text: '数据中心正在' }, { op: 'delete', text: '繁荣' }, { op: 'insert', text: '爆发' }, { op: 'equal', text: '。' }],
+      }],
+    });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+
+    const saveAll = Array.from(host.querySelectorAll('button')).filter(b => b.textContent === '保存全文');
+    expect(saveAll).toHaveLength(2);
+    await act(async () => { saveAll[0].click(); });
+    await flush();
+    expect(api.finalize).toHaveBeenCalledWith('p1', 'p1');
+
+    await act(async () => { (host.querySelector('button[aria-label="看你改了什么"]') as HTMLButtonElement).click(); });
+    await flush();
+    expect(api.changes).toHaveBeenCalledWith('p1', 'p1');
+    expect(document.body.querySelector('del')?.textContent).toBe('繁荣');
+    expect(document.body.querySelector('ins')?.textContent).toBe('爆发');
+  });
+
+  it('treats an agent that ended its turn asking for confirmation as waiting, not as finished', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'run-1' }, variants: [] });
+    agentRun.current = {
+      id: 'run-1', skill: 'four-step-translate', title: 't', status: 'idle', created_at: 0, updated_at: 0,
+      session_id: 's', error: null, harness: 'codex', awaiting_reply: true, auto_reply_at: Date.UTC(2026, 9, 26, 6, 30) / 1000,
+    };
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    expect(host.textContent).toContain('Codex 在等你确认');
+    expect(host.textContent).toContain('不回复就自动按它的建议继续');
+    expect(claude.importClaudeTrack).not.toHaveBeenCalled();
   });
 });

@@ -20,7 +20,8 @@ const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
 
 /**
  * 平时显示排好版的文字（链接、加粗渲染出来），点一下变成编辑框（显示原始 Markdown），
- * 停顿约 1 秒或离开时自动保存——类似 Obsidian 的实时预览。
+ * 停顿约 1 秒或离开时自动保存——类似 Obsidian 的实时预览。保存状态汇总到栏头（见 lib/edits），
+ * 这里只在保存失败时标红、给重试。
  */
 export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt, className }: EditableTextProps) {
   const [text, setText] = useState(value ?? '');
@@ -55,17 +56,20 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
   const save = useCallback(async (next: string) => {
     clearTimeout(timer.current);
     if (!next.trim()) {
+      unsavedEdits.set(id, 'error');
       setState('error');
       return;
     }
     setState('saving');
+    unsavedEdits.set(id, 'saving');
     try {
       await onSave(next.trim());
       if (latest.current === next) {
-        unsavedEdits.remove(id);
+        unsavedEdits.saved(id);
         setState('saved');
       }
     } catch {
+      unsavedEdits.set(id, 'error');
       setState('error');
     }
   }, [id, onSave]);
@@ -78,14 +82,12 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
   const change = (next: string, immediately = false) => {
     setText(next);
     latest.current = next;
-    unsavedEdits.add(id);
+    unsavedEdits.set(id, 'dirty');
     setState('dirty');
     clearTimeout(timer.current);
     if (immediately) void save(next);
     else timer.current = setTimeout(() => void save(next), SAVE_DELAY_MS);
   };
-
-  const label = state === 'saving' ? '保存中…' : state === 'saved' ? '已保存' : '';
 
   return (
     <div className={cn('group/edit relative', className)}>
@@ -132,8 +134,8 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
           {text ? <InlineMarkdown text={text} /> : <span className="text-text-disabled">{placeholder}</span>}
         </div>
       )}
-      <div className="pointer-events-none absolute -bottom-1 right-0 flex items-center gap-2 text-[11px]">
-        {state === 'error' ? (
+      {state === 'error' && (
+        <div className="pointer-events-none absolute -bottom-1 right-0 flex items-center gap-2 text-[11px]">
           <button
             type="button"
             onClick={() => void save(text)}
@@ -141,10 +143,8 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
           >
             {text.trim() ? '保存失败，点此重试' : '译文不能为空'}
           </button>
-        ) : (
-          label && <span className="rounded bg-white/80 px-1 text-text-muted">{label}</span>
-        )}
-      </div>
+        </div>
+      )}
       {adopt && adopt.text !== text && (
         <button
           type="button"

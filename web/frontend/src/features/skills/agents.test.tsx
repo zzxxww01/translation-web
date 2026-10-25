@@ -8,7 +8,7 @@ import { NewRunForm } from './components/NewRunForm';
 import type { Agent } from './types';
 
 const startRun = vi.hoisted(() => vi.fn());
-vi.mock('./api', () => ({ startRun }));
+vi.mock('./api', () => ({ startRun, AUTO_REPLY_MINUTES: 10 }));
 vi.mock('sonner', () => ({ toast: { error: vi.fn() } }));
 
 const SERVER: Partial<Agent>[] = [
@@ -99,7 +99,7 @@ describe('NewRunForm', () => {
 
     await click('开始');
     expect(startRun).toHaveBeenCalledWith(
-      { skill: 'video-bilingual-subber', message: '这个视频加中英双语字幕：', files: [], harness: 'claude' },
+      { skill: 'video-bilingual-subber', message: '这个视频加中英双语字幕：', files: [], harness: 'claude', autoReplyMinutes: 10 },
       expect.any(Function)
     );
   });

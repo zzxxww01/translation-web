@@ -5,6 +5,10 @@
     running  一轮正在进行
     waiting  有提问等用户在页面上回答（AskUserQuestion 挂起在 can_use_tool 回调里）
     idle     本轮结束，等用户发下一条消息；空闲久了会断开 Claude 进程，下次发消息时按会话 ID 续接
+             （回复末尾带 AWAIT_MARK 时 awaiting_reply=True：是在等用户确认，不是做完了）
+
+任务设了 auto_reply_s 时，等确认（提问挂着，或带等待标记的一轮结束）超过这么久没人回复，
+就自动按推荐方案继续：提问选推荐选项，其余发一条「按你的建议确认、继续」，每个任务最多自动 AUTO_REPLY_LIMIT 次。
     error    出错或服务重启导致中断；用户发消息即从会话断点续跑
 
 所有页面事件带递增 seq，先落盘到 events.jsonl 再推给 SSE 订阅者，所以页面断线、刷新、
@@ -28,6 +32,24 @@ from .store import RunMeta, RunStore
 logger = logging.getLogger(__name__)
 
 ACTIVE_STATUSES = {"running", "waiting"}
+
+AWAIT_MARK = "【等待确认】"
+AUTO_REPLY_LIMIT = 3
+AUTO_REPLY_TEXT = (
+    "（自动确认）{wait}没有收到回复。请按你推荐的方案确认（比如术语表全部采用建议译法），"
+    "接下来不要再停下来等确认，直接完成剩下的全部步骤。"
+)
+
+
+def wait_text(seconds: float) -> str:
+    return f"{round(seconds / 60)} 分钟" if seconds >= 60 else f"{int(seconds)} 秒"
+
+
+def recommended_answer(question: dict[str, Any]) -> str | list[str]:
+    """提问的推荐选项：标了 Recommended / 推荐的那个，没有就第一个。"""
+    labels = [str(o.get("label")) for o in question.get("options") or [] if isinstance(o, dict) and o.get("label")]
+    pick = next((label for label in labels if "recommended" in label.lower() or "推荐" in label), labels[0] if labels else "按你的建议")
+    return [pick] if question.get("multiSelect") else pick
 
 
 @dataclass
@@ -96,6 +118,9 @@ class _Run:
     session: AgentSession | None = None
     pump: asyncio.Task | None = None
     idle_task: asyncio.Task | None = None
+    auto_task: asyncio.Task | None = None
+    # 这一轮最后一段文字（判断是不是以等待标记结尾）
+    last_text: str = ""
     closing: bool = False
     pending: dict[str, _Pending] = field(default_factory=dict)
     subscribers: set[asyncio.Queue] = field(default_factory=set)
@@ -194,7 +219,7 @@ class Runner:
 
     # ---- 生命周期 ----
 
-    def create(self, skill: str, title: str, harness: str = "claude") -> RunMeta:
+    def create(self, skill: str, title: str, harness: str = "claude", auto_reply_s: int = 0) -> RunMeta:
         # skill 为空就是直接对话：消息原样发给 Claude / Codex，不派发 skill
         if skill and skill not in self.config.skills:
             raise RunnerError(f"未启用的 skill：{skill}")
@@ -202,7 +227,7 @@ class Runner:
             raise RunnerError(f"不支持的 harness：{harness}")
         if self.active_count() >= self.config.max_active:
             raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
-        meta = self.store.create(skill, title, harness)
+        meta = self.store.create(skill, title, harness, auto_reply_s)
         self._runs[meta.id] = _Run(meta=meta, seq=0)
         return meta
 
@@ -230,6 +255,8 @@ class Runner:
                 raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
             # 先记下用户的话再起会话：起不来时页面上也能看到发了什么、为什么失败
             self._emit(run, {"type": "user", "text": message, "files": attachments})
+            self._clear_awaiting(run)
+            run.last_text = ""
             if need_open:
                 await self._open(run)
             self._cancel_idle(run)
@@ -297,9 +324,15 @@ class Runner:
                 run.meta.session_id = event["session_id"]
             self._emit(run, event)
             if not run.pending:
+                run.meta.awaiting_reply = not event.get("is_error") and AWAIT_MARK in run.last_text
                 self._set_status(run, "idle")
+                self.store.save_meta(run.meta)
                 self._schedule_idle(run)
+                if run.meta.awaiting_reply:
+                    self._schedule_auto_reply(run)
             return
+        if kind == "text" and not event.get("parent"):
+            run.last_text = str(event.get("text") or "")
         if run.meta.status == "idle":
             # 运行中插的话会在上一轮结束后接着跑，此时又有新内容进来
             self._cancel_idle(run)
@@ -321,10 +354,14 @@ class Runner:
             run.pending[qid] = _Pending(questions=questions, future=future)
             self._emit(run, {"type": "question", "qid": qid, "questions": questions})
             self._set_status(run, "waiting")
+            if len(run.pending) == 1:
+                self._schedule_auto_reply(run)
             try:
                 return await future
             finally:
                 run.pending.pop(qid, None)
+                if not run.pending:
+                    self._cancel_auto_reply(run)
                 if not run.pending and run.meta.status == "waiting":
                     self._set_status(run, "running")
         decision = policy.decide(
@@ -371,6 +408,7 @@ class Runner:
 
     async def interrupt(self, run_id: str) -> RunMeta:
         run = self._get(run_id)
+        self._clear_awaiting(run)
         for pending in list(run.pending.values()):
             if not pending.future.done():
                 pending.future.set_result(PermissionOutcome(allow=False, message="用户中断了任务", interrupt=True))
@@ -387,11 +425,73 @@ class Runner:
         run = self._get(run_id)
         if run.meta.status in ACTIVE_STATUSES:
             raise Conflict("任务还在运行，先中断再删除")
+        self._cancel_auto_reply(run)
         await self._close_session(run)
         for queue in list(run.subscribers):
             queue.put_nowait(None)
         self._runs.pop(run_id, None)
         self.store.delete(run_id)
+
+    # ---- 等确认超时自动继续 ----
+
+    def _schedule_auto_reply(self, run: _Run, delay: float | None = None) -> None:
+        self._cancel_auto_reply(run)
+        if run.meta.auto_reply_s <= 0 or run.meta.auto_replies >= AUTO_REPLY_LIMIT:
+            return
+        delay = run.meta.auto_reply_s if delay is None else delay
+        run.meta.auto_reply_at = time.time() + delay
+        self.store.save_meta(run.meta)
+        self._emit(run, {
+            "type": "notice", "level": "info",
+            "text": f"{wait_text(run.meta.auto_reply_s)}内没有回复，会自动按推荐方案继续",
+        })
+        run.auto_task = asyncio.create_task(self._auto_reply_later(run, delay))
+
+    def _cancel_auto_reply(self, run: _Run) -> None:
+        if run.auto_task is not None and run.auto_task is not asyncio.current_task():
+            run.auto_task.cancel()
+        run.auto_task = None
+        if run.meta.auto_reply_at is not None:
+            run.meta.auto_reply_at = None
+            self.store.save_meta(run.meta)
+
+    def _clear_awaiting(self, run: _Run) -> None:
+        self._cancel_auto_reply(run)
+        if run.meta.awaiting_reply:
+            run.meta.awaiting_reply = False
+            self.store.save_meta(run.meta)
+
+    async def _auto_reply_later(self, run: _Run, delay: float) -> None:
+        await asyncio.sleep(max(0.0, delay))
+        run.auto_task = None
+        run.meta.auto_reply_at = None
+        run.meta.auto_replies += 1
+        self.store.save_meta(run.meta)
+        waited = wait_text(run.meta.auto_reply_s)
+        if run.pending:
+            for qid, pending in list(run.pending.items()):
+                answers = {str(q.get("question", "")): recommended_answer(q) for q in pending.questions}
+                self._emit(run, {"type": "notice", "level": "info", "text": f"{waited}没有回答，已自动选推荐选项"})
+                self._resolve_question(run, qid, {"answers": answers})
+            return
+        if run.meta.status != "idle" or not run.meta.awaiting_reply:
+            return
+        self._emit(run, {"type": "notice", "level": "info", "text": f"{waited}没有回复，自动按推荐方案继续"})
+        text = AUTO_REPLY_TEXT.format(wait=waited)
+        try:
+            await self._deliver(run, text, [], text)
+        except RunnerError:
+            logger.exception("auto reply failed for run %s", run.meta.id)
+
+    def resume_auto_replies(self) -> int:
+        """服务启动时调用（在事件循环里）：重启前排着的自动回复接着排，时间照旧。"""
+        resumed = 0
+        for meta in self.store.list_meta():
+            if meta.status == "idle" and meta.awaiting_reply and meta.auto_reply_at is not None:
+                run = self._get(meta.id)
+                self._schedule_auto_reply(run, delay=max(5.0, meta.auto_reply_at - time.time()))
+                resumed += 1
+        return resumed
 
     # ---- 回收与故障 ----
 
@@ -425,6 +525,7 @@ class Runner:
         run.pump = None
 
     async def _fail(self, run: _Run, message: str) -> None:
+        self._clear_awaiting(run)
         for pending in list(run.pending.values()):
             if not pending.future.done():
                 pending.future.set_result(PermissionOutcome(allow=False, message=message, interrupt=True))
@@ -446,6 +547,8 @@ class Runner:
 
     async def shutdown(self) -> None:
         for run in list(self._runs.values()):
+            if run.auto_task is not None:
+                run.auto_task.cancel()  # 不清 auto_reply_at：重启后 resume_auto_replies 接着排
             if run.session is not None:
                 await self._close_session(run)
             for queue in list(run.subscribers):

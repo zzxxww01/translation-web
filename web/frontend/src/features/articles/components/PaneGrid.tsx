@@ -98,17 +98,17 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane }: Pan
 
 function Cell({ row, column }: { row: WorkbenchRow; column: PaneColumn }) {
   const textClass = rowTextClass(row);
+  // 图片三栏都显示（译文里的图就是原文的图），也让三栏在图片处对齐
+  if (row.kind === 'image') {
+    return row.image ? <img src={row.image} alt="" loading="lazy" className="my-2 max-h-72 w-auto max-w-full rounded border border-border-subtle" /> : null;
+  }
   if (!column.text) {
-    if (row.kind === 'image') {
-      return row.image ? <img src={row.image} alt="" loading="lazy" className="my-2 max-h-72 w-auto max-w-full rounded border border-border-subtle" /> : null;
-    }
     return (
       <div className={cn(textClass, row.kind === 'li' && 'pl-4 -indent-4 before:mr-2 before:content-["•"]')}>
         <InlineMarkdown text={row.source} />
       </div>
     );
   }
-  if (row.kind === 'image') return <div className="py-2 text-xs text-text-disabled">（图片）</div>;
   const value = column.text(row);
   const other = column.adopt?.text(row);
   return (

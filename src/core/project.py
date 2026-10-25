@@ -72,6 +72,8 @@ class ProjectListSummary:
     original_url: Optional[str] = None
     # 孪生项目（译本 2）指向的主项目
     variant_of: Optional[str] = None
+    # 在工作台「保存全文」过（定稿）
+    finalized_at: Optional[datetime] = None
 
 
 @dataclass(frozen=True)
@@ -604,7 +606,7 @@ class ProjectManager:
 
         summary_payload = {
             field_name: data[field_name]
-            for field_name in self._PROJECT_SUMMARY_FIELDS
+            for field_name in (*self._PROJECT_SUMMARY_FIELDS, "finalized_at")
             if field_name in data
         }
         # Reuse ProjectMeta's validation/default semantics without constructing
@@ -625,6 +627,7 @@ class ProjectManager:
             created_at=validated.created_at,
             original_url=original_url if isinstance(original_url, str) else None,
             variant_of=data.get("variant_of") if isinstance(data.get("variant_of"), str) else None,
+            finalized_at=validated.finalized_at if "finalized_at" in data else None,
         )
 
     def _get_project_summary(
@@ -1383,6 +1386,37 @@ class ProjectManager:
             status=ParagraphStatus.APPROVED,
             model="manual"
         )
+
+    def confirm_all_paragraphs(self, project_id: str) -> int:
+        """工作台「保存全文」：每段现有的最佳译文一次确认，不用逐段确认。返回新确认的段数。"""
+        confirmed = 0
+        for section_id in [section.section_id for section in self.get_sections(project_id)]:
+            with self._get_section_lock(project_id, section_id):
+                section = self._load_section(project_id, section_id)
+                if section is None:
+                    continue
+                changed = False
+                for paragraph in section.paragraphs:
+                    if paragraph.status == ParagraphStatus.APPROVED or paragraph.element_type == ElementType.IMAGE:
+                        continue
+                    text = paragraph.best_translation_text()
+                    if not text:
+                        continue
+                    latest = paragraph.latest_translation(non_empty=True)
+                    same = latest is not None and latest.text.strip() == text
+                    paragraph.confirm(
+                        text,
+                        "manual",
+                        tokenized_text=latest.tokenized_text if same else None,
+                        format_issues=list(latest.format_issues) if same else None,
+                    )
+                    changed = True
+                    confirmed += 1
+                if changed:
+                    self._save_section(project_id, section)
+        if confirmed:
+            self._update_progress(project_id)
+        return confirmed
 
     def export(self, project_id: str, include_source: bool = False, format: str = 'zh', *, allow_qa_override: bool = False) -> str:
         return self.project_export_service.export(

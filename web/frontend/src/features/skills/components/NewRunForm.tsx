@@ -5,7 +5,7 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
-import { startRun } from '../api';
+import { AUTO_REPLY_MINUTES, startRun } from '../api';
 import { skillKeys } from '../hooks';
 import type { Agent, RunMeta } from '../types';
 import { AgentIcon } from './AgentIcon';
@@ -27,6 +27,7 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
   const [harness, setHarness] = useState<Harness>(loadHarness);
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState<File[]>([]);
+  const [autoReply, setAutoReply] = useState(true);
   const [progress, setProgress] = useState<number | null>(null);
 
   const chat = catalog[0];
@@ -40,7 +41,7 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
     if (!canStart) return;
     setProgress(files.length ? 0 : 100);
     try {
-      const run = await startRun({ skill, message, files, harness }, setProgress);
+      const run = await startRun({ skill, message, files, harness, autoReplyMinutes: autoReply ? AUTO_REPLY_MINUTES : 0 }, setProgress);
       await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
       onStarted(run);
     } catch (error) {
@@ -124,6 +125,16 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
           </Button>
         </div>
       </div>
+      <label className="mt-2 flex items-center justify-center gap-1.5 text-xs text-text-muted">
+        <input
+          type="checkbox"
+          checked={autoReply}
+          disabled={busy}
+          onChange={event => setAutoReply(event.target.checked)}
+          className="accent-[var(--color-primary-500)]"
+        />
+        需要你确认时（比如术语表），{AUTO_REPLY_MINUTES} 分钟没回复就按它的建议自动继续
+      </label>
       {tooLarge && (
         <p className="mt-2 text-sm text-error">
           {tooLarge.name} 超过 {maxUploadMb} MB 上限，大文件请改用链接

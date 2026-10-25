@@ -49,14 +49,17 @@ export function canFillMissing(status: TrackStatus, filled: { done: number; tota
   return !status.active && filled.done > 0 && filled.done < filled.total;
 }
 
-/** 文章库列表里一篇文章的状态文字；没导入时为空。 */
-export function statusText(status: ArticleStatus, progress: number): string {
+export type StatusTone = 'muted' | 'busy' | 'wait' | 'review' | 'done';
+
+/** 文章列表里一篇文章的状态（网页版的进度 + 有没有保存全文）；没导入时为 null。 */
+export function articleStatus(status: ArticleStatus, progress: number): { text: string; tone: StatusTone } | null {
   switch (status) {
-    case 'imported': return '已导入';
-    case 'awaiting_terms': return '等你确认术语';
-    case 'translating': return `翻译中 ${Math.round(progress)}%`;
-    case 'partial': return `已译 ${Math.round(progress)}%`;
-    case 'translated': return '已译完';
-    default: return '';
+    case 'imported': return { text: '还没翻', tone: 'muted' };
+    case 'awaiting_terms': return { text: '等你确认术语', tone: 'wait' };
+    case 'translating': return { text: `翻译中 ${Math.round(progress)}%`, tone: 'busy' };
+    case 'partial': return { text: `缺译 · 已译 ${Math.round(progress)}%`, tone: 'wait' };
+    case 'translated': return { text: '待校对', tone: 'review' };
+    case 'finalized': return { text: '已定稿', tone: 'done' };
+    default: return null;
   }
 }

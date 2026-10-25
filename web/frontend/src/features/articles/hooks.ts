@@ -11,6 +11,7 @@ export const articleKeys = {
   projects: ['articles', 'projects'] as const,
   workbench: (projectId: string) => ['articles', 'workbench', projectId] as const,
   claudeRun: (runId: string) => ['articles', 'claude-run', runId] as const,
+  changes: (target: string) => ['articles', 'changes', target] as const,
 };
 
 /** 有任何一路在跑就每 4 秒刷新一次；都停了就不再轮询。 */
@@ -54,8 +55,9 @@ export function useClaudeRun(runId: string | null) {
     queryFn: () => apiClient.get<RunMeta>(`/skills/runs/${runId}`, { retry: false }),
     enabled: Boolean(runId),
     refetchInterval: query => {
-      const status = query.state.data?.status;
-      return status === 'running' || status === 'waiting' ? 5_000 : false;
+      const run = query.state.data;
+      // 在等确认时也要轮询：超时后会自动继续
+      return run && (run.status === 'running' || run.status === 'waiting' || run.awaiting_reply) ? 5_000 : false;
     },
     retry: false,
   });

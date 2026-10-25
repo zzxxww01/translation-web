@@ -63,6 +63,7 @@ def create_app(
         recovered = runner.recover()
         if recovered:
             logger.warning("标记了 %d 个因重启中断的运行", recovered)
+        runner.resume_auto_replies()
         if not config.password:
             logger.error("未设置 SKILL_RUNNER_PASSWORD，所有登录都会被拒绝")
         yield
@@ -146,12 +147,14 @@ def create_app(
         skill: str = Form(""),  # 留空即直接对话
         harness: str = Form("claude"),  # claude / codex
         message: str = Form(""),
+        # 等确认时多少分钟没回复就自动按推荐方案继续；0 = 一直等
+        auto_reply_minutes: int = Form(0, ge=0, le=1440),
         files: list[UploadFile] = File(default=[]),
     ):
         names = [f.filename for f in files if f.filename]
         if not message.strip() and not names:
             raise HTTPException(status_code=400, detail="写点说明或者附个文件")
-        meta = runner.create(skill, make_title(message, names), harness)
+        meta = runner.create(skill, make_title(message, names), harness, auto_reply_minutes * 60)
         try:
             saved = await asyncio.to_thread(_save_uploads, meta.id, files)
         except HTTPException:

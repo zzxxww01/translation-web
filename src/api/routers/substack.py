@@ -61,8 +61,10 @@ def get_substack_library() -> SubstackLibrary:
 SubstackLibraryDep = Annotated[SubstackLibrary, Depends(get_substack_library)]
 
 # not_imported 没导入；imported 已导入还没翻；awaiting_terms 翻译在等你确认术语；
-# translating 翻译中；partial 翻了一部分停下了；translated 已译完
-ArticleStatus = Literal["not_imported", "imported", "awaiting_terms", "translating", "partial", "translated"]
+# translating 翻译中；partial 翻了一部分停下了；translated 已译完、待校对；finalized 在工作台保存过全文（定稿）
+ArticleStatus = Literal["not_imported", "imported", "awaiting_terms", "translating", "partial", "translated", "finalized"]
+# 列表筛选：in_progress = 导入了还没定稿；imported = 导入过的全部（旧前端用）
+ArticleFilter = Literal["all", "not_imported", "in_progress", "finalized", "imported"]
 
 
 class SubstackArticle(BaseModel):
@@ -86,6 +88,7 @@ class SubstackArticlePage(BaseModel):
     next_offset: Optional[int] = None  # 没有更多时为 None
     total: int = 0  # 符合当前搜索和筛选的总篇数
     pending_digests: int = 0  # 还没有中文标题和摘要的篇数
+    counts: Dict[str, int] = Field(default_factory=dict)  # 当前搜索下各筛选的篇数：all / not_imported / in_progress / finalized
     digesting: bool = False  # 后台正在生成；前端据此决定要不要定时刷新
 
 
@@ -142,16 +145,18 @@ def _awaiting_terms(pm: ProjectManager, project_id: str, run_id: Optional[str]) 
     return job.get("confirmation_status") == "waiting"
 
 
-def _translation_state(pm: ProjectManager, project_id: str) -> Tuple[ArticleStatus, int]:
+def _translation_state(pm: ProjectManager, project: ProjectListSummary) -> Tuple[ArticleStatus, int]:
     try:
-        summary = pm.get_translation_summary(project_id)
+        summary = pm.get_translation_summary(project.id)
     except FileNotFoundError:
         return "not_imported", 0  # 列清单和这里之间项目被删了
     total, done = summary.total_paragraphs, summary.translated_paragraphs
     percent = done * 100 // total if total else 0
-    active = translation_run_registry.get_active_run(project_id)
+    active = translation_run_registry.get_active_run(project.id)
     if active is not None:
-        return ("awaiting_terms" if _awaiting_terms(pm, project_id, active.run_id) else "translating"), percent
+        return ("awaiting_terms" if _awaiting_terms(pm, project.id, active.run_id) else "translating"), percent
+    if project.finalized_at is not None:
+        return "finalized", percent
     if total and done >= total:
         return "translated", 100
     if done:
@@ -173,7 +178,7 @@ def _to_article(pm: ProjectManager, post: LibraryPost, project: Optional[Project
         zh_summary=post.zh_summary,
     )
     if project is not None:
-        status, progress = _translation_state(pm, project.id)
+        status, progress = _translation_state(pm, project)
         if status != "not_imported":
             article.project_id, article.status, article.progress = project.id, status, progress
     return article
@@ -186,7 +191,7 @@ async def list_articles(
     offset: int = Query(0, ge=0),
     limit: int = Query(24, ge=1, le=50),
     search: str = Query("", max_length=200),
-    imported_filter: Literal["all", "not_imported", "imported"] = Query("all", alias="filter"),
+    imported_filter: ArticleFilter = Query("all", alias="filter"),
 ):
     # 读服务器上存的清单；只有第一次（清单还是空的）才会当场把全部文章拉一遍
     try:
@@ -201,9 +206,20 @@ async def list_articles(
     def project_of(post: LibraryPost) -> Optional[ProjectListSummary]:
         return imported.get(article_key(post.url) or "")
 
-    if imported_filter != "all":
-        want_imported = imported_filter == "imported"
-        posts = [post for post in posts if (project_of(post) is not None) == want_imported]
+    def bucket(post: LibraryPost) -> str:
+        project = project_of(post)
+        if project is None:
+            return "not_imported"
+        return "finalized" if project.finalized_at is not None else "in_progress"
+
+    buckets = [bucket(post) for post in posts]
+    counts = {"all": len(posts), "not_imported": 0, "in_progress": 0, "finalized": 0}
+    for name in buckets:
+        counts[name] += 1
+    if imported_filter == "imported":
+        posts = [post for post, name in zip(posts, buckets) if name != "not_imported"]
+    elif imported_filter != "all":
+        posts = [post for post, name in zip(posts, buckets) if name == imported_filter]
 
     page = posts[offset:offset + limit]
     articles = await asyncio.to_thread(lambda: [_to_article(pm, post, project_of(post)) for post in page])
@@ -213,6 +229,7 @@ async def list_articles(
         total=len(posts),
         pending_digests=library.pending_digests(),
         digesting=library.digest_running(),
+        counts=counts,
     )
 
 

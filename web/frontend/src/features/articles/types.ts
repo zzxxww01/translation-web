@@ -9,6 +9,13 @@ export interface TrackStatus {
   error: string | null;
 }
 
+/** 上次「保存全文」的概况 */
+export interface FinalizedSummary {
+  saved_at: string;
+  total: number;
+  changed: number;
+}
+
 export interface WorkbenchProject {
   id: string;
   title: string;
@@ -18,6 +25,7 @@ export interface WorkbenchProject {
   claude_run_id: string | null;
   progress: { total: number; approved: number };
   status: TrackStatus;
+  finalized: FinalizedSummary | null;
 }
 
 export interface ClaudeImportRecord {
@@ -37,6 +45,7 @@ export interface WorkbenchVariant {
   progress: { total: number; approved: number };
   status: TrackStatus;
   import: ClaudeImportRecord | null;
+  finalized: FinalizedSummary | null;
 }
 
 export interface WorkbenchRow {
@@ -63,3 +72,25 @@ export interface Workbench {
 }
 
 export type PaneId = 'source' | 'web' | 'alt';
+
+export type DiffSegment = { op: 'equal' | 'insert' | 'delete'; text: string };
+
+/** 人工改过的一段：机翻初稿（没有就是 null，人写的）→ 现在的译文 */
+export interface HumanChange {
+  key: string;
+  section_id: string;
+  section_title: string;
+  paragraph_id: string;
+  kind: string;
+  source: string;
+  before: string | null;
+  after: string;
+  segments: DiffSegment[];
+}
+
+export interface ChangesReport {
+  total: number;
+  changed: number;
+  changes: HumanChange[];
+  finalized: FinalizedSummary | null;
+}

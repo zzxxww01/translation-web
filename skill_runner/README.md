@@ -75,6 +75,16 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 - **skill 目录**：真实文件在 `~/.agents/skills/`（Codex 原生读），`~/.claude/skills/<skill>` 是指向它的软链接。
   新加 skill：放进 `~/.agents/skills/`，再 `ln -s ~/.agents/skills/<名字> ~/.claude/skills/<名字>`。
 
+## 等确认超时自动继续
+
+系统提示词要求：一轮结束时如果在等用户确认，回复最后单独一行写 `【等待确认】`（`runner.AWAIT_MARK`）。
+带这个标记结束的一轮记为 `awaiting_reply=True`（是在等你，不是做完了）；文章工作台据此不去导入译文，而是提示去确认。
+
+建任务时可以带 `auto_reply_minutes`（新任务页默认勾选 10 分钟，文章工作台交出去的任务固定 10 分钟，
+和网页版术语确认一致）。等确认超过这么久没人回复：AskUserQuestion 自动选推荐选项（标了 Recommended / 推荐的，
+没有就第一个）；带标记结束的一轮则自动发一条「按你推荐的方案确认、继续」。每个任务最多自动 3 次，
+到时间点记在 `auto_reply_at`，服务重启后照旧接着排。
+
 ## 安全边界
 
 - 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（记一年，每天第一次用时自动续期，一直在用就不用再输口令），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。

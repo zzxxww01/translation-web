@@ -43,6 +43,13 @@ class RunMeta:
     session_id: str | None = None
     error: str | None = None
     harness: str = "claude"  # claude / codex；旧任务没有这个字段，按 Claude 处理
+    # 等用户确认时多久没回复就自动按推荐方案继续（秒，0 = 一直等）
+    auto_reply_s: int = 0
+    # 上一轮结束时在等用户确认（回复末尾带了等待标记），用户或自动回复后清掉
+    awaiting_reply: bool = False
+    # 到这个时间（epoch 秒）还没回复就自动继续；没有排上自动回复时为 None
+    auto_reply_at: float | None = None
+    auto_replies: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -75,7 +82,7 @@ class RunStore:
         except KeyError:
             return False
 
-    def create(self, skill: str, title: str, harness: str = "claude") -> RunMeta:
+    def create(self, skill: str, title: str, harness: str = "claude", auto_reply_s: int = 0) -> RunMeta:
         now = time.time()
         while True:
             run_id = time.strftime("%Y%m%d-%H%M%S", time.localtime(now)) + "-" + secrets.token_hex(3)
@@ -86,7 +93,10 @@ class RunStore:
             except FileExistsError:
                 continue
         (path / INPUT_DIR).mkdir()
-        meta = RunMeta(id=run_id, skill=skill, title=title, status="idle", created_at=now, updated_at=now, harness=harness)
+        meta = RunMeta(
+            id=run_id, skill=skill, title=title, status="idle", created_at=now, updated_at=now,
+            harness=harness, auto_reply_s=auto_reply_s,
+        )
         self.save_meta(meta)
         return meta
 

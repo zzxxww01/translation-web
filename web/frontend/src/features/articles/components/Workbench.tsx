@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { AlertCircle, ArrowLeft, Bot, Download, ExternalLink, MoreHorizontal, PanelLeft, Sparkles } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Bot, Download, ExternalLink, FileDiff, MoreHorizontal, PanelLeft, Play } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import {
@@ -15,13 +15,15 @@ import {
 import { cn } from '@/lib/utils';
 import { harnessLabel, type Harness } from '@/features/skills/harness';
 import { isUnauthorized } from '@/features/skills/hooks';
-import { articlesApi, downloadText } from '../api';
+import { articlesApi, downloadText, HUMAN_EDITS_URL } from '../api';
 import { articleKeys, useClaudeRun, useWorkbench } from '../hooks';
+import { savedAtText } from '../lib/changes';
 import { importClaudeTrack, NoClaudeOutput, startClaudeTrack } from '../lib/claude';
-import { unsavedEdits } from '../lib/edits';
+import { flushPane, unsavedEdits, usePaneSaveState } from '../lib/edits';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { canFillMissing, countFilled, SECOND_MODELS, sectionsWithMissing, TERMS_STEP, trackSummary } from '../lib/tracks';
-import type { PaneId, Workbench as WorkbenchData, WorkbenchRow, WorkbenchVariant } from '../types';
+import type { FinalizedSummary, PaneId, Workbench as WorkbenchData, WorkbenchRow, WorkbenchVariant } from '../types';
+import { ChangesDrawer, type ChangesTarget } from './ChangesDrawer';
 import { PaneGrid, type PaneColumn } from './PaneGrid';
 import { TrackDrawer, type DrawerState } from './TrackDrawer';
 
@@ -45,6 +47,8 @@ const TONE: Record<string, string> = {
   error: 'bg-error-light text-error',
   idle: 'bg-bg-tertiary text-text-muted',
 };
+
+const clock = new Intl.DateTimeFormat('zh-CN', { hour: '2-digit', minute: '2-digit' });
 
 function StatusChip({ label, text, tone }: { label: string; text: string; tone: string }) {
   return (
@@ -89,8 +93,10 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const [mobilePane, setMobilePane] = useState<PaneId>('web');
   const [variantId, setVariantId] = useState<string | null>(null);
   const [drawer, setDrawer] = useState<DrawerState>(null);
+  const [changes, setChanges] = useState<ChangesTarget | null>(null);
   const [claudeNote, setClaudeNote] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [finalizing, setFinalizing] = useState<string | null>(null);
   const importTried = useRef<string | null>(null);
 
   const variant: WorkbenchVariant | null = variants.find(v => v.id === variantId) ?? variants[0] ?? null;
@@ -111,10 +117,10 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     return () => window.removeEventListener('beforeunload', warn);
   }, []);
 
-  // Claude 任务结束了还没导入：自动取回 zh.md 导入（每个任务只自动试一次）
+  // Agent 任务做完了还没导入：自动取回 zh.md 导入（每个任务只自动试一次）。在等你确认时不算做完
   const run = claudeRun.data;
   useEffect(() => {
-    if (!run || run.status !== 'idle' || importTried.current === run.id) return;
+    if (!run || run.status !== 'idle' || run.awaiting_reply || importTried.current === run.id) return;
     if (variants.some(v => v.import?.run_id === run.id)) return;
     importTried.current = run.id;
     importClaudeTrack(project.id, run.id, run.harness ?? 'claude')
@@ -158,13 +164,33 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     }
   };
 
-  const startModelVariant = async (model: string, label: string) => {
+  /** 保存全文：先等这一栏的自动保存落定，再整篇确认，定稿和人工改动存到服务器 */
+  const finalize = async (target: string, pane: 'web' | 'alt', label: string) => {
+    setFinalizing(target);
+    try {
+      if (!(await flushPane(pane))) {
+        toast.error('还有段落没保存上（标红的那几段），处理好再保存全文');
+        return;
+      }
+      const result = await articlesApi.finalize(project.id, target);
+      toast.success(result.changed ? `已保存全文：${label}，你改了 ${result.changed} 段` : `已保存全文：${label}（没有改动）`);
+      await Promise.all([
+        refresh(),
+        queryClient.invalidateQueries({ queryKey: ['articles', 'library'] }),
+        queryClient.invalidateQueries({ queryKey: articleKeys.changes(target) }),
+      ]);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '保存全文失败');
+    } finally {
+      setFinalizing(null);
+    }
+  };
+
+  const startWeb = async () => {
     setBusy(true);
     try {
-      const { variant_id } = await articlesApi.createModelVariant(project.id, model, label);
-      await articlesApi.startWorkflow(variant_id, { model, autoAcceptTerms: true });
-      setVariantId(variant_id);
-      toast.success(`译本 2 开始用 ${label} 翻译`);
+      await articlesApi.startWorkflow(project.id);
+      toast.success('网页版开始翻译');
       await refresh();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : '没能开始');
@@ -189,13 +215,13 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     }
   };
 
-  const startClaude = async (harness: Harness = 'claude') => {
+  const startClaude = async (harness: Harness = 'codex') => {
     setBusy(true);
     try {
       await startClaudeTrack(project.id, harness);
       setClaudeNote(null);
       importTried.current = null;
-      toast.success(`已交给 ${harnessLabel(harness)}；它需要你回复时这里会提示`);
+      toast.success(`已交给 ${harnessLabel(harness)}；它需要你确认时这里会提示`);
       await refresh();
     } catch (error) {
       toast.error(isUnauthorized(error) ? '先去 Agent 页登录一次（只需一次）' : error instanceof Error ? error.message : '没能交出去');
@@ -210,6 +236,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const altSummary = variant && altFilled ? trackSummary(variant.status, altFilled) : null;
   const title = project.title_translation || variant?.title_translation || project.title;
   const webWaitingTerms = project.status.active && project.status.current_step === TERMS_STEP && project.status.run_id;
+  const webNotStarted = !project.status.active && webFilled.done === 0;
 
   const columns = useMemo<Record<PaneId, PaneColumn>>(() => {
     const altLabel = variant ? `译本 2 · ${variant.label}` : '译本 2';
@@ -220,9 +247,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
         header: (
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-text-secondary">英文</span>
-            <button type="button" title="导出英文原文" onClick={() => void exportVersion(project.id, 'en')} className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary">
-              <Download className="h-3.5 w-3.5" />
-            </button>
+            <IconButton title="导出英文原文" onClick={() => void exportVersion(project.id, 'en')}><Download className="h-3.5 w-3.5" /></IconButton>
           </div>
         ),
       },
@@ -230,16 +255,19 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
         id: 'web',
         title: '译本 1',
         header: (
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-medium text-text-secondary">译本 1 · 网页版</span>
-            <span className="text-xs text-text-muted" title={project.status.current_step ?? undefined}>{webSummary.text}</span>
-            {canFillMissing(project.status, webFilled) && (
-              <button type="button" onClick={() => void fillMissing(project.id, row => row.web)} className="rounded-md px-1.5 text-xs text-primary-700 hover:bg-primary-50">补译</button>
-            )}
-            <button type="button" title="导出译本 1" onClick={() => void exportVersion(project.id, 'zh')} className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary">
-              <Download className="h-3.5 w-3.5" />
-            </button>
-          </div>
+          <VersionHeader
+            pane="web"
+            label={<span className="text-sm font-medium text-text-secondary">译本 1 · 网页版</span>}
+            summary={webSummary.text}
+            summaryTitle={project.status.current_step ?? undefined}
+            start={webNotStarted ? { label: '开始翻译', onClick: () => void startWeb(), disabled: busy } : null}
+            onFill={canFillMissing(project.status, webFilled) ? () => void fillMissing(project.id, row => row.web) : undefined}
+            finalized={project.finalized}
+            finalizing={finalizing === project.id}
+            onExport={() => void exportVersion(project.id, 'zh')}
+            onChanges={() => setChanges({ projectId: project.id, target: project.id, label: '译本 1 · 网页版', title })}
+            onFinalize={() => void finalize(project.id, 'web', '译本 1 · 网页版')}
+          />
         ),
         text: row => row.web,
         save: (row, text) => save(project.id, row, text),
@@ -249,12 +277,13 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       alt: {
         id: 'alt',
         title: '译本 2',
-        header: (
-          <div className="flex flex-wrap items-center gap-2">
-            {variants.length > 1 ? (
+        header: variant ? (
+          <VersionHeader
+            pane="alt"
+            label={variants.length > 1 ? (
               <select
                 aria-label="选择译本 2"
-                value={variant?.id}
+                value={variant.id}
                 onChange={event => setVariantId(event.target.value)}
                 className="rounded-md border border-border-subtle bg-white px-1.5 py-0.5 text-sm text-text-secondary"
               >
@@ -263,22 +292,19 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             ) : (
               <span className="text-sm font-medium text-text-secondary">{altLabel}</span>
             )}
-            {altSummary && <span className="text-xs text-text-muted" title={variant?.status.current_step ?? undefined}>{altSummary.text}</span>}
-            {variant && variant.kind === 'model' && altFilled && canFillMissing(variant.status, altFilled) && (
-              <button
-                type="button"
-                onClick={() => void fillMissing(variant.id, row => row.alt[variant.id] ?? null, SECOND_MODELS.find(option => option.label === variant.label)?.model)}
-                className="rounded-md px-1.5 text-xs text-primary-700 hover:bg-primary-50"
-              >
-                补译
-              </button>
-            )}
-            {variant && (
-              <button type="button" title="导出译本 2" onClick={() => void exportVersion(variant.id, 'zh')} className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary">
-                <Download className="h-3.5 w-3.5" />
-              </button>
-            )}
-          </div>
+            summary={altSummary?.text}
+            summaryTitle={variant.status.current_step ?? undefined}
+            onFill={variant.kind === 'model' && altFilled && canFillMissing(variant.status, altFilled)
+              ? () => void fillMissing(variant.id, row => row.alt[variant.id] ?? null, SECOND_MODELS.find(option => option.label === variant.label)?.model)
+              : undefined}
+            finalized={variant.finalized}
+            finalizing={finalizing === variant.id}
+            onExport={() => void exportVersion(variant.id, 'zh')}
+            onChanges={() => setChanges({ projectId: project.id, target: variant.id, label: altLabel, title })}
+            onFinalize={() => void finalize(variant.id, 'alt', altLabel)}
+          />
+        ) : (
+          <span className="text-sm font-medium text-text-secondary">{altLabel}</span>
         ),
         ...(variant
           ? {
@@ -290,16 +316,18 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
           : { text: () => null, save: async () => undefined, placeholder: '' }),
       },
     };
-    // exportVersion 只依赖 project/variant，跟着它们变
+    // exportVersion / finalize / startWeb 只依赖下面这些，跟着它们变
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project.id, project.status.active, variant, variants, webSummary.text, altSummary?.text, save]);
+  }, [project, variant, variants, webSummary.text, altSummary?.text, save, busy, finalizing, webNotStarted, title]);
 
-  const claudeWaiting = run?.status === 'waiting';
+  const claudeRunning = run?.status === 'running';
+  // 提问挂着（waiting），或者一轮结束时说了在等确认（Codex 都是这种）
+  const claudeWaiting = run?.status === 'waiting' || Boolean(run?.status === 'idle' && run.awaiting_reply);
   const agentLabel = harnessLabel(run?.harness);
   const runImported = Boolean(run && variants.some(v => v.import?.run_id === run.id));
-  // 这篇有 Claude 任务，但浏览器还没登录 Claude：说一声，不然这一路像不存在
+  // 这篇有 Agent 任务，但浏览器还没登录 Agent 页：说一声，不然这一路像不存在
   const claudeNeedsLogin = Boolean(project.claude_run_id) && isUnauthorized(claudeRun.error);
-  const claudeRunning = run?.status === 'running';
+  const autoReplyAt = run?.auto_reply_at ? clock.format(run.auto_reply_at * 1000) : null;
 
   return (
     <div className="flex h-full min-h-0 flex-col">
@@ -322,7 +350,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             <StatusChip label="网页版" text={webSummary.text} tone={webSummary.tone} />
             {variant && altSummary && <StatusChip label={variant.label} text={altSummary.text} tone={altSummary.tone} />}
             {(claudeRunning || claudeWaiting) && !runImported && (
-              <StatusChip label={agentLabel} text={claudeWaiting ? '在等你回答' : '翻译中'} tone={claudeWaiting ? 'wait' : 'busy'} />
+              <StatusChip label={agentLabel} text={claudeWaiting ? '在等你确认' : '翻译中'} tone={claudeWaiting ? 'wait' : 'busy'} />
             )}
           </div>
           <div className="flex items-center gap-1">
@@ -343,12 +371,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
                 <Button size="sm" variant="ghost" aria-label="更多"><MoreHorizontal /></Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-60">
-                <DropdownMenuLabel>译本 2</DropdownMenuLabel>
-                {SECOND_MODELS.map(option => (
-                  <DropdownMenuItem key={option.model} disabled={busy || variants.some(v => v.label === option.label)} onSelect={() => void startModelVariant(option.model, option.label)}>
-                    <Sparkles className="h-4 w-4" /> 用 {option.label} 再翻一版
-                  </DropdownMenuItem>
-                ))}
+                <DropdownMenuLabel>译本 2（Agent）</DropdownMenuLabel>
                 <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('codex')}>
                   <Bot className="h-4 w-4" /> 交给 Codex（four-step-translate）
                 </DropdownMenuItem>
@@ -361,6 +384,9 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <a href={HUMAN_EDITS_URL}><FileDiff className="h-4 w-4" /> 下载全部文章的人工改动</a>
+                </DropdownMenuItem>
                 <DropdownMenuItem asChild>
                   <Link to={`/document/${project.id}`}>旧版编辑器（单段重译、质量报告）</Link>
                 </DropdownMenuItem>
@@ -378,17 +404,19 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
           <div className="mt-2 flex flex-col gap-1.5">
             {webWaitingTerms && (
               <Banner tone="wait" action="去确认" onAction={() => setDrawer({ kind: 'terms', projectId: project.id, jobId: project.status.run_id! })}>
-                网页版在等你确认术语，过一会儿会自动采用建议。
+                网页版在等你确认术语，10 分钟内不确认会自动采用建议。
               </Banner>
             )}
             {claudeWaiting && run && (
-              <Banner tone="wait" action="去回答" onAction={() => setDrawer({ kind: 'claude', run })}>{agentLabel} 在等你回复。</Banner>
+              <Banner tone="wait" action="去确认" onAction={() => setDrawer({ kind: 'claude', run })}>
+                {agentLabel} 在等你确认（比如术语表）{autoReplyAt ? `，${autoReplyAt} 前不回复就自动按它的建议继续` : ''}。
+              </Banner>
             )}
             {claudeNote && (
               <Banner
                 tone="info"
-                action={variants.some(v => v.label === 'argon') ? undefined : '改用 argon 再翻一版'}
-                onAction={() => void startModelVariant('gemini-official-argon', 'argon')}
+                action={run?.harness !== 'codex' ? '改用 Codex 翻' : undefined}
+                onAction={() => void startClaude('codex')}
                 secondary={run ? { label: `看 ${agentLabel} 说了什么`, onClick: () => setDrawer({ kind: 'claude', run }) } : undefined}
               >
                 {claudeNote}
@@ -396,7 +424,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             )}
             {claudeNeedsLogin && (
               <Banner tone="info" action="去登录" onAction={() => navigate('/skills')}>
-                这篇交给过 Claude / Codex，要先登录 Agent 页（一次即可）才能看进度和回复。
+                这篇交给过 Codex / Claude，要先登录 Agent 页（一次即可）才能看进度和回复。
               </Banner>
             )}
             {project.status.error && <Banner tone="error">网页版出错了：{project.status.error}</Banner>}
@@ -422,19 +450,80 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       </header>
 
       {!variant && (!isMobile || mobilePane === 'alt') && !collapsed.alt && (
-        <SecondVersionPrompt busy={busy} claudeActive={Boolean(claudeRunning || claudeWaiting)} onModel={startModelVariant} onClaude={startClaude} />
+        <SecondVersionPrompt busy={busy} agentActive={Boolean(claudeRunning || claudeWaiting)} onStart={startClaude} />
       )}
 
       <PaneGrid rows={rows} columns={columns} collapsed={collapsed} onToggle={toggle} mobilePane={isMobile ? mobilePane : null} />
 
       <TrackDrawer state={drawer} mainId={project.id} onClose={() => { setDrawer(null); void refresh(); void claudeRun.refetch(); }} />
+      <ChangesDrawer state={changes} onClose={() => setChanges(null)} />
     </div>
   );
 }
 
+function IconButton({ title, onClick, children }: { title: string; onClick: () => void; children: ReactNode }) {
+  return (
+    <button type="button" title={title} aria-label={title} onClick={onClick} className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary">
+      {children}
+    </button>
+  );
+}
+
+/** 中文栏的栏头：栏名、进度、（开始翻译 / 补译）、自动保存状态、改动、导出、保存全文 */
+function VersionHeader({ pane, label, summary, summaryTitle, start, onFill, finalized, finalizing, onExport, onChanges, onFinalize }: {
+  pane: 'web' | 'alt';
+  label: ReactNode;
+  summary?: string;
+  summaryTitle?: string;
+  start?: { label: string; onClick: () => void; disabled?: boolean } | null;
+  onFill?: () => void;
+  finalized: FinalizedSummary | null;
+  finalizing: boolean;
+  onExport: () => void;
+  onChanges: () => void;
+  onFinalize: () => void;
+}) {
+  return (
+    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+      {label}
+      {summary && <span className="text-xs text-text-muted" title={summaryTitle}>{summary}</span>}
+      {start && (
+        <button type="button" disabled={start.disabled} onClick={start.onClick} className="inline-flex items-center gap-1 rounded-md px-1.5 text-xs text-primary-700 hover:bg-primary-50 disabled:opacity-50">
+          <Play className="h-3 w-3" /> {start.label}
+        </button>
+      )}
+      {onFill && <button type="button" onClick={onFill} className="rounded-md px-1.5 text-xs text-primary-700 hover:bg-primary-50">补译</button>}
+      <span className="flex-1" />
+      <SaveState pane={pane} finalized={finalized} />
+      <IconButton title="看你改了什么" onClick={onChanges}><FileDiff className="h-3.5 w-3.5" /></IconButton>
+      <IconButton title="导出这一版" onClick={onExport}><Download className="h-3.5 w-3.5" /></IconButton>
+      <Button size="sm" variant="outline" className="h-7 px-2" disabled={finalizing} onClick={onFinalize} title="整篇定稿：一次确认全文，并把你改了什么存下来">
+        {finalizing ? '保存中…' : '保存全文'}
+      </Button>
+    </div>
+  );
+}
+
+/** 这一栏的自动保存状态；保存过全文且之后没再改，就显示保存全文的时间 */
+function SaveState({ pane, finalized }: { pane: 'web' | 'alt'; finalized: FinalizedSummary | null }) {
+  const state = usePaneSaveState(pane);
+  if (state.failed) return <span className="text-xs text-error">{state.failed} 段没保存上</span>;
+  if (state.busy) return <span className="text-xs text-text-muted">保存中…</span>;
+  const finalizedAt = finalized ? Date.parse(finalized.saved_at) : 0;
+  if (state.savedAt && state.savedAt > finalizedAt) return <span className="text-xs text-text-muted">已自动保存</span>;
+  if (finalized) {
+    return (
+      <span className="text-xs text-success" title={`共 ${finalized.total} 段，你改了 ${finalized.changed} 段`}>
+        已保存全文 {savedAtText(finalized.saved_at)}
+      </span>
+    );
+  }
+  return null;
+}
+
 function Banner({ tone, children, action, onAction, secondary }: {
   tone: 'wait' | 'info' | 'error';
-  children: React.ReactNode;
+  children: ReactNode;
   action?: string;
   onAction?: () => void;
   secondary?: { label: string; onClick: () => void };
@@ -450,24 +539,18 @@ function Banner({ tone, children, action, onAction, secondary }: {
   );
 }
 
-function SecondVersionPrompt({ busy, claudeActive, onModel, onClaude }: {
+function SecondVersionPrompt({ busy, agentActive, onStart }: {
   busy: boolean;
-  claudeActive: boolean;
-  onModel: (model: string, label: string) => void;
-  onClaude: (harness: Harness) => void;
+  agentActive: boolean;
+  onStart: (harness: Harness) => void;
 }) {
-  if (claudeActive) return null;
+  if (agentActive) return null;
   return (
     <div className="flex flex-wrap items-center gap-2 border-b border-border-subtle bg-bg-tertiary/60 px-4 py-2 text-sm md:px-6">
       <span className="text-text-secondary">还没有译本 2：</span>
-      {SECOND_MODELS.slice(0, 1).map(option => (
-        <Button key={option.model} size="sm" variant="outline" disabled={busy} onClick={() => onModel(option.model, option.label)}>
-          <Sparkles /> 用 {option.label} 再翻一版
-        </Button>
-      ))}
-      <Button size="sm" variant="ghost" disabled={busy} onClick={() => onClaude('codex')}><Bot /> 交给 Codex</Button>
-      <Button size="sm" variant="ghost" disabled={busy} onClick={() => onClaude('claude')}><Bot /> 交给 Claude</Button>
-      <span className="text-xs text-text-muted">付费文章 Claude 通常不肯全文翻译</span>
+      <Button size="sm" variant="outline" disabled={busy} onClick={() => onStart('codex')}><Bot /> 交给 Codex</Button>
+      <Button size="sm" variant="ghost" disabled={busy} onClick={() => onStart('claude')}><Bot /> 交给 Claude</Button>
+      <span className="text-xs text-text-muted">都跑 four-step-translate；付费文章 Claude 通常不肯全文翻译</span>
     </div>
   );
 }

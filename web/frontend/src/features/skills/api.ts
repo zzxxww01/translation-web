@@ -53,14 +53,18 @@ function postMultipart<T>(path: string, form: FormData, onProgress?: (percent: n
   });
 }
 
+/** 需要你确认（比如术语表）时，多少分钟没回复就让它按自己的建议继续；和网页版术语确认的 10 分钟一致 */
+export const AUTO_REPLY_MINUTES = 10;
+
 export function startRun(
-  input: { skill: string; message: string; files: File[]; harness?: 'claude' | 'codex' },
+  input: { skill: string; message: string; files: File[]; harness?: 'claude' | 'codex'; autoReplyMinutes?: number },
   onProgress?: (percent: number) => void
 ): Promise<RunMeta> {
   const form = new FormData();
   form.append('skill', input.skill);
   form.append('harness', input.harness ?? 'claude');
   form.append('message', input.message);
+  if (input.autoReplyMinutes) form.append('auto_reply_minutes', String(input.autoReplyMinutes));
   input.files.forEach(file => form.append('files', file));
   return postMultipart<RunMeta>('/runs', form, onProgress);
 }

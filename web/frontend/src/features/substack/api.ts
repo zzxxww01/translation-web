@@ -3,7 +3,7 @@ import type { Project } from '@/shared/types';
 
 /**
  * not_imported 没导入；imported 已导入还没翻；awaiting_terms 翻译在等你确认术语；
- * translating 翻译中；partial 翻了一部分停下了；translated 已译完
+ * translating 翻译中；partial 翻了一部分停下了；translated 已译完、待校对；finalized 保存过全文（定稿）
  */
 export type ArticleStatus =
   | 'not_imported'
@@ -11,9 +11,11 @@ export type ArticleStatus =
   | 'awaiting_terms'
   | 'translating'
   | 'partial'
-  | 'translated';
+  | 'translated'
+  | 'finalized';
 
-export type ArticleFilter = 'all' | 'not_imported' | 'imported';
+/** in_progress = 导入了还没定稿；imported = 导入过的全部 */
+export type ArticleFilter = 'all' | 'not_imported' | 'in_progress' | 'finalized' | 'imported';
 
 export interface SubstackArticle {
   title: string;
@@ -42,6 +44,8 @@ export interface SubstackArticlePage {
   pending_digests: number;
   /** 后台正在生成中文标题和摘要 */
   digesting: boolean;
+  /** 当前搜索下各筛选的篇数（旧后端没有） */
+  counts?: Partial<Record<'all' | 'not_imported' | 'in_progress' | 'finalized', number>>;
 }
 
 export interface SubstackSyncResult {

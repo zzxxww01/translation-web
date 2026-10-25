@@ -6,8 +6,15 @@ import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { isCookieError, type SubstackArticle } from '@/features/substack/api';
 import { CookieForm } from '@/features/substack/components/CookieForm';
-import { importAndTranslate, type SecondChoice } from '../lib/importFlow';
-import { SECOND_MODELS } from '../lib/tracks';
+import type { Harness } from '@/features/skills/harness';
+import { importAndTranslate, runsAgent, type ImportPlan } from '../lib/importFlow';
+
+const PLANS: { id: ImportPlan; label: string; note: string }[] = [
+  { id: 'both', label: '两个都翻', note: '网页版出译本 1，Agent 出译本 2，翻完三栏对照' },
+  { id: 'web', label: '只翻网页版', note: '网站自己的翻译流程，出译本 1' },
+  { id: 'agent', label: '只用 Agent 翻', note: 'Codex 或 Claude 跑 four-step-translate，出译本 2' },
+  { id: 'import', label: '只导入', note: '先不翻，之后在工作台里再开始' },
+];
 
 const longDate = new Intl.DateTimeFormat('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
 
@@ -18,8 +25,8 @@ interface ArticlePreviewProps {
 
 export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
   const queryClient = useQueryClient();
-  const [second, setSecond] = useState<SecondChoice>(article.is_paid ? 'model' : 'claude');
-  const [modelIndex, setModelIndex] = useState(0);
+  const [plan, setPlan] = useState<ImportPlan>('both');
+  const [harness, setHarness] = useState<Harness>('codex');
   const [busy, setBusy] = useState(false);
   const [needCookie, setNeedCookie] = useState(false);
   const date = Date.parse(article.post_date);
@@ -27,7 +34,7 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
   const start = async () => {
     setBusy(true);
     try {
-      const projectId = await importAndTranslate(article, second, SECOND_MODELS[modelIndex]);
+      const projectId = await importAndTranslate(article, plan, harness);
       await queryClient.invalidateQueries({ queryKey: ['articles'] });
       onImported(projectId);
     } catch (error) {
@@ -38,14 +45,15 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
     }
   };
 
-  const choice = (value: SecondChoice, label: string, note?: string) => (
-    <label className={cn('flex cursor-pointer items-start gap-2 rounded-md px-2 py-1.5', second === value && 'bg-white')}>
-      <input type="radio" name="second" checked={second === value} onChange={() => setSecond(value)} className="mt-1 accent-[var(--color-primary-500)]" />
-      <span className="text-sm text-text-primary">
-        {label}
-        {note && <span className="block text-xs text-text-muted">{note}</span>}
-      </span>
-    </label>
+  const agentChoice = (value: Harness, label: string) => (
+    <button
+      type="button"
+      onClick={() => setHarness(value)}
+      aria-pressed={harness === value}
+      className={cn('rounded-full border px-2.5 py-0.5 text-xs', harness === value ? 'border-primary-300 bg-primary-50 text-primary-700' : 'border-border-subtle bg-white text-text-secondary')}
+    >
+      {label}
+    </button>
   );
 
   return (
@@ -69,32 +77,31 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
           <CookieForm reason="这是付费文章，要先填订阅 cookie" onSaved={() => { setNeedCookie(false); void start(); }} onCancel={() => setNeedCookie(false)} />
         ) : (
           <>
-            <p className="text-sm font-medium text-text-primary">导入后同时翻两版，在三栏里对照</p>
-            <p className="mt-1 text-xs text-text-muted">译本 1 是网页版（默认模型）。两路都在服务器上跑，关掉页面也不会停。</p>
-            <div className="mt-3 space-y-0.5">
-              <p className="px-2 text-xs text-text-muted">译本 2</p>
-              {choice('model', '换个模型再翻一版', '付费文章也能用')}
-              {second === 'model' && (
-                <div className="flex flex-wrap gap-1.5 pb-1 pl-8">
-                  {SECOND_MODELS.map((option, index) => (
-                    <button
-                      key={option.model}
-                      type="button"
-                      onClick={() => setModelIndex(index)}
-                      aria-pressed={modelIndex === index}
-                      className={cn('rounded-full border px-2.5 py-0.5 text-xs', modelIndex === index ? 'border-primary-300 bg-primary-50 text-primary-700' : 'border-border-subtle bg-white text-text-secondary')}
-                    >
-                      {option.label}{option.note && ` · ${option.note}`}
-                    </button>
-                  ))}
-                </div>
-              )}
-              {choice('codex', '交给 Codex（four-step-translate）', '用服务器上的 Codex 和你的 ChatGPT 订阅')}
-              {choice('claude', '交给 Claude（four-step-translate）', article.is_paid ? '付费文章 Claude 通常不肯全文翻译，只给导读' : undefined)}
-              {choice('none', '先不要')}
+            <p className="text-sm font-medium text-text-primary">导入后怎么翻</p>
+            <p className="mt-1 text-xs leading-relaxed text-text-muted">
+              译本 1 是网页版，译本 2 是 Agent（Codex 或 Claude）。都在服务器上跑，关掉页面也不会停。
+            </p>
+            <div className="mt-3 space-y-0.5" role="radiogroup" aria-label="导入后怎么翻">
+              {PLANS.map(item => (
+                <label key={item.id} className={cn('flex cursor-pointer items-start gap-2 rounded-md px-2 py-1.5', plan === item.id && 'bg-white')}>
+                  <input type="radio" name="plan" checked={plan === item.id} onChange={() => setPlan(item.id)} className="mt-1 accent-[var(--color-primary-500)]" />
+                  <span className="text-sm text-text-primary">
+                    {item.label}
+                    <span className="block text-xs text-text-muted">{item.note}</span>
+                  </span>
+                </label>
+              ))}
             </div>
+            {runsAgent(plan) && (
+              <div className="mt-2 flex flex-wrap items-center gap-1.5 px-2">
+                <span className="text-xs text-text-muted">Agent 用</span>
+                {agentChoice('codex', 'Codex')}
+                {agentChoice('claude', 'Claude')}
+                {harness === 'claude' && article.is_paid && <span className="text-xs text-warning">付费文章 Claude 通常不肯全文翻译，只给导读</span>}
+              </div>
+            )}
             <Button className="mt-4 w-full" onClick={start} disabled={busy}>
-              {busy ? <><Loader2 className="animate-spin" /> 导入中…</> : '导入并翻译'}
+              {busy ? <><Loader2 className="animate-spin" /> 导入中…</> : plan === 'import' ? '导入' : '导入并翻译'}
             </Button>
           </>
         )}

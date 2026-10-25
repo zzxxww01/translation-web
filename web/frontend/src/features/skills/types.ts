@@ -13,6 +13,12 @@ export interface RunMeta {
   error: string | null;
   /** 旧任务没有这个字段，按 Claude 处理 */
   harness?: 'claude' | 'codex';
+  /** 等确认时多少秒没回复就自动按推荐方案继续，0 = 一直等 */
+  auto_reply_s?: number;
+  /** 上一轮结束时在等你确认（不是做完了） */
+  awaiting_reply?: boolean;
+  /** 到这个时间（epoch 秒）还没回复就自动继续 */
+  auto_reply_at?: number | null;
 }
 
 /** 页面上的一个 agent（名片来自 skill_runner/agents.json）。name 是 skill 名，空串表示直接和 Claude 聊天。 */

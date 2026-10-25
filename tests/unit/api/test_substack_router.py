@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import pytest
 from starlette.requests import Request
 
@@ -219,6 +221,25 @@ async def test_list_articles_filters_by_imported(tmp_path, pm):
     assert [a.slug for a in imported.articles] == ["demo-post"] and imported.total == 1
     not_imported = await _list(pm, library, imported_filter="not_imported")
     assert [a.slug for a in not_imported.articles] == ["other"]
+
+
+@pytest.mark.asyncio
+async def test_list_articles_counts_and_filters_by_progress_bucket(tmp_path, pm):
+    project_id = await _import(tmp_path, pm)
+    library = _library(tmp_path)
+    page = await _list(pm, library)
+    assert page.counts == {"all": 2, "not_imported": 1, "in_progress": 1, "finalized": 0}
+    assert [a.slug for a in (await _list(pm, library, imported_filter="in_progress")).articles] == ["demo-post"]
+    assert (await _list(pm, library, imported_filter="finalized")).articles == []
+
+    # 在工作台保存过全文 → 已定稿
+    pm.merge_meta_fields(project_id, fields={"finalized_at": datetime(2026, 10, 26, 14, 2)})
+    page = await _list(pm, library)
+    assert page.articles[0].status == "finalized"
+    assert page.counts == {"all": 2, "not_imported": 1, "in_progress": 0, "finalized": 1}
+    finalized = await _list(pm, library, imported_filter="finalized")
+    assert [a.slug for a in finalized.articles] == ["demo-post"] and finalized.counts["finalized"] == 1
+    assert [a.slug for a in (await _list(pm, library, imported_filter="imported")).articles] == ["demo-post"]
 
 
 @pytest.mark.asyncio

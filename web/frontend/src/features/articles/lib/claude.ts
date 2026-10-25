@@ -1,4 +1,4 @@
-import { fileUrl, skillsApi, startRun } from '@/features/skills/api';
+import { AUTO_REPLY_MINUTES, fileUrl, skillsApi, startRun } from '@/features/skills/api';
 import type { Harness } from '@/features/skills/harness';
 import type { RunFile, RunMeta } from '@/features/skills/types';
 import { articlesApi } from '../api';
@@ -9,7 +9,7 @@ const CLAUDE_MESSAGE =
 
 export class NoClaudeOutput extends Error {
   constructor() {
-    super('这次没有产出 zh.md（Claude 对付费文章通常不肯全文翻译，会改写成导读；可以改用 Codex 或 argon）');
+    super('这次没有产出 zh.md（Claude 对付费文章通常不肯全文翻译，会改写成导读；可以改用 Codex）');
     this.name = 'NoClaudeOutput';
   }
 }
@@ -29,7 +29,7 @@ export function findClaudeOutputs(files: RunFile[]): { zh: string; en: string } 
 /** 把原文交给 Claude Code 或 Codex 跑 four-step-translate，并记下这篇文章对应的任务。 */
 export async function startClaudeTrack(projectId: string, harness: Harness = 'claude'): Promise<RunMeta> {
   const html = await articlesApi.sourceHtml(projectId);
-  const run = await startRun({ skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html], harness });
+  const run = await startRun({ skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html], harness, autoReplyMinutes: AUTO_REPLY_MINUTES });
   await articlesApi.setClaudeRun(projectId, run.id);
   return run;
 }
