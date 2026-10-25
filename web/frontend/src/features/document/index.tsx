@@ -654,7 +654,7 @@ export function DocumentFeature() {
           paragraph={currentParagraph}
           projectId={activeProject.id}
           sectionId={activeSectionId}
-          onClose={() => setCurrentParagraph(null)}
+          onClose={handleCloseEditPanel}
           onNext={handleNextParagraph}
           onPrev={handlePrevParagraph}
           currentIndex={currentIndex}
