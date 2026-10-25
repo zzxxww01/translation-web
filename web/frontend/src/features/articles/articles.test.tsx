@@ -63,6 +63,7 @@ describe('EditableText', () => {
     vi.useFakeTimers();
     const onSave = vi.fn().mockRejectedValueOnce(new Error('down')).mockResolvedValue(undefined);
     await render(<EditableText id="t1" value="旧" placeholder="" ariaLabel="格子" onSave={onSave} />);
+    await act(async () => { (host.querySelector('[aria-label="编辑：格子"]') as HTMLElement).click(); });
     const textarea = host.querySelector('textarea')!;
     await act(async () => {
       const setter = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!;
@@ -77,6 +78,17 @@ describe('EditableText', () => {
     expect(onSave).toHaveBeenCalledTimes(2);
     expect(host.textContent).toContain('已保存');
     expect(unsavedEdits.any()).toBe(false);
+  });
+});
+
+describe('EditableText display', () => {
+  it('shows links as links until clicked, then edits the raw Markdown', async () => {
+    await render(<EditableText id="t2" value="见[行业模型](https://x.com/m)。" placeholder="" ariaLabel="格子" onSave={vi.fn()} />);
+    const link = host.querySelector('a')!;
+    expect(link.textContent).toBe('行业模型');
+    expect(host.textContent).not.toContain('https://x.com/m');
+    await act(async () => { (host.querySelector('[aria-label="编辑：格子"]') as HTMLElement).click(); });
+    expect(host.querySelector('textarea')!.value).toBe('见[行业模型](https://x.com/m)。');
   });
 });
 
@@ -141,8 +153,8 @@ describe('Workbench', () => {
 
     expect(host.textContent).toContain('2027 数据中心');
     expect(host.textContent).toContain('Datacenters are booming.');
-    const areas = Array.from(host.querySelectorAll('textarea'));
-    expect(areas.map(area => area.value)).toEqual(['引言', '前言', '数据中心正在爆发。', '']);
+    const cells = Array.from(host.querySelectorAll('[aria-label^="编辑："]'));
+    expect(cells.map(cell => cell.textContent)).toEqual(['引言', '前言', '数据中心正在爆发。', '还没有译文，可以直接写']);
 
     const collapse = host.querySelector('button[aria-label="收起英文"]') as HTMLButtonElement;
     await act(async () => { collapse.click(); });

@@ -5,26 +5,7 @@ import { gridTemplate, PANES, type Collapsed } from '../lib/panes';
 import { rowTextClass } from '../lib/rows';
 import type { PaneId, WorkbenchRow } from '../types';
 import { EditableText } from './EditableText';
-
-const LINK = /\[([^\]]+)\]\(([^)\s]+)\)/g;
-
-/** 原文里的 Markdown 链接渲染成链接，其余原样。 */
-export function SourceText({ text }: { text: string }) {
-  const parts: ReactNode[] = [];
-  let last = 0;
-  for (const match of text.matchAll(LINK)) {
-    const index = match.index ?? 0;
-    if (index > last) parts.push(text.slice(last, index));
-    parts.push(
-      <a key={index} href={match[2]} target="_blank" rel="noreferrer" className="text-primary-700 underline decoration-primary-200 underline-offset-2">
-        {match[1]}
-      </a>
-    );
-    last = index + match[0].length;
-  }
-  if (last < text.length) parts.push(text.slice(last));
-  return <>{parts}</>;
-}
+import { InlineMarkdown } from './InlineMarkdown';
 
 export interface PaneColumn {
   id: PaneId;
@@ -123,7 +104,7 @@ function Cell({ row, column }: { row: WorkbenchRow; column: PaneColumn }) {
     }
     return (
       <div className={cn(textClass, row.kind === 'li' && 'pl-4 -indent-4 before:mr-2 before:content-["•"]')}>
-        <SourceText text={row.source} />
+        <InlineMarkdown text={row.source} />
       </div>
     );
   }

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { SAVE_DELAY_MS, unsavedEdits } from '../lib/edits';
+import { InlineMarkdown } from './InlineMarkdown';
 
 type SaveState = 'idle' | 'dirty' | 'saving' | 'saved' | 'error';
 
@@ -15,11 +16,16 @@ interface EditableTextProps {
   className?: string;
 }
 
-/** 看起来就是一段文字，点进去直接改；停顿约 1 秒或离开格子时自动保存。 */
+const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
+
+/**
+ * 平时显示排好版的文字（链接、加粗渲染出来），点一下变成编辑框（显示原始 Markdown），
+ * 停顿约 1 秒或离开时自动保存——类似 Obsidian 的实时预览。
+ */
 export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt, className }: EditableTextProps) {
   const [text, setText] = useState(value ?? '');
   const [state, setState] = useState<SaveState>('idle');
-  const [focused, setFocused] = useState(false);
+  const [editing, setEditing] = useState(false);
   const [prevValue, setPrevValue] = useState(value);
   const ref = useRef<HTMLTextAreaElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -29,7 +35,7 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
   // 后台轮询带回新译文时同步进来；正在改或还没存下时不覆盖（编辑优先）
   if (value !== prevValue) {
     setPrevValue(value);
-    if (!focused && (state === 'idle' || state === 'saved')) setText(value ?? '');
+    if (!editing && (state === 'idle' || state === 'saved')) setText(value ?? '');
   }
 
   useLayoutEffect(() => {
@@ -37,7 +43,14 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
     if (!el) return;
     el.style.height = '0px';
     el.style.height = `${el.scrollHeight}px`;
-  }, [text]);
+  }, [text, editing]);
+
+  useEffect(() => {
+    if (!editing) return;
+    const el = ref.current;
+    el?.focus();
+    el?.setSelectionRange(el.value.length, el.value.length);
+  }, [editing]);
 
   const save = useCallback(async (next: string) => {
     clearTimeout(timer.current);
@@ -76,26 +89,49 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
 
   return (
     <div className={cn('group/edit relative', className)}>
-      <textarea
-        ref={ref}
-        rows={1}
-        value={text}
-        aria-label={ariaLabel}
-        placeholder={placeholder}
-        spellCheck={false}
-        onChange={event => change(event.target.value)}
-        onFocus={() => setFocused(true)}
-        onBlur={() => {
-          setFocused(false);
-          if (state === 'dirty') void save(latest.current);
-        }}
-        className={cn(
-          '-mx-2 block w-[calc(100%+1rem)] resize-none overflow-hidden rounded-md border border-transparent bg-transparent px-2 py-1',
-          'text-inherit leading-[inherit] placeholder:text-text-disabled',
-          'transition-colors hover:bg-bg-hover/60 focus:border-primary-200 focus:bg-white focus:outline-none',
-          state === 'error' && 'border-error/40 bg-error/5'
-        )}
-      />
+      {editing ? (
+        <textarea
+          ref={ref}
+          rows={1}
+          value={text}
+          aria-label={ariaLabel}
+          placeholder={placeholder}
+          spellCheck={false}
+          onChange={event => change(event.target.value)}
+          onBlur={() => {
+            setEditing(false);
+            if (state === 'dirty') void save(latest.current);
+          }}
+          onKeyDown={event => {
+            if (event.key === 'Escape') event.currentTarget.blur();
+          }}
+          className={cn(
+            BOX,
+            'resize-none overflow-hidden border-primary-200 bg-white text-inherit leading-[inherit] placeholder:text-text-disabled focus:outline-none',
+            state === 'error' && 'border-error/40 bg-error/5'
+          )}
+        />
+      ) : (
+        <div
+          role="button"
+          tabIndex={0}
+          aria-label={`编辑：${ariaLabel}`}
+          onClick={() => setEditing(true)}
+          onKeyDown={event => {
+            if (event.key === 'Enter') {
+              event.preventDefault();
+              setEditing(true);
+            }
+          }}
+          className={cn(
+            BOX,
+            'cursor-text whitespace-pre-wrap border-transparent transition-colors hover:bg-bg-hover/60',
+            state === 'error' && 'border-error/40 bg-error/5'
+          )}
+        >
+          {text ? <InlineMarkdown text={text} /> : <span className="text-text-disabled">{placeholder}</span>}
+        </div>
+      )}
       <div className="pointer-events-none absolute -bottom-1 right-0 flex items-center gap-2 text-[11px]">
         {state === 'error' ? (
           <button
@@ -112,6 +148,7 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
       {adopt && adopt.text !== text && (
         <button
           type="button"
+          onMouseDown={event => event.preventDefault()}
           onClick={() => change(adopt.text, true)}
           className="absolute -top-2 right-0 hidden rounded-md border border-border-subtle bg-white px-2 py-0.5 text-[11px] text-text-secondary shadow-sm hover:border-primary-200 hover:text-primary-700 group-hover/edit:block"
         >
