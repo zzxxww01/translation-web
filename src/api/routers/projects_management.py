@@ -296,9 +296,8 @@ async def get_project_asset(
 async def delete_project(request: Request, project_id: str, pm: ProjectManagerDep):
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
-    # 主项目连同它的孪生项目（译本 2）一起删；任何一个还在翻译都不删
-    variants = await run_blocking(list_variants, pm, project_id)
-    for candidate in [project_id, *(variant.id for variant in variants)]:
+    # 主项目连同它的孪生项目（译本 2）一起删；任何一个还在翻译都不删。先查主项目，再列孪生项目
+    def check_active(candidate: str) -> None:
         active_run = translation_run_registry.get_active_run(candidate)
         if active_run is not None:
             raise ConflictException(
@@ -308,6 +307,10 @@ async def delete_project(request: Request, project_id: str, pm: ProjectManagerDe
                 ),
                 error_code="PROJECT_TRANSLATION_ACTIVE",
             )
+
+    check_active(project_id)
+    for variant in await run_blocking(list_variants, pm, project_id):
+        check_active(variant.id)
     try:
         await run_blocking(delete_with_variants, pm, project_id)
         return {"message": "Project deleted"}
