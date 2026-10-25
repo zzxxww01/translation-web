@@ -44,7 +44,9 @@ class LibraryPost:
     excerpt: str = ""
     zh_title: str = ""
     zh_summary: str = ""
-    digest_attempts: int = 0
+    # 模型回复里漏掉这篇的次数。2026-10-25 从 digest_attempts 改名：旧格式的提示词让 JSON 模式只回一篇，
+    # 343 篇全被记满放弃；改名后读旧文件时丢弃旧计数，这些文章会按新提示词重试
+    digest_misses: int = 0
 
     @classmethod
     def from_archive(cls, post: ArchivePost, previous: Optional["LibraryPost"] = None) -> "LibraryPost":
@@ -53,7 +55,7 @@ class LibraryPost:
         if previous and (previous.title, previous.subtitle) == (post.title, post.subtitle):
             merged.zh_title = previous.zh_title
             merged.zh_summary = previous.zh_summary
-            merged.digest_attempts = previous.digest_attempts
+            merged.digest_misses = previous.digest_misses
         return merged
 
     @classmethod
@@ -63,7 +65,7 @@ class LibraryPost:
 
     @property
     def needs_digest(self) -> bool:
-        return not self.zh_title and self.digest_attempts < MAX_DIGEST_ATTEMPTS
+        return not self.zh_title and self.digest_misses < MAX_DIGEST_ATTEMPTS
 
     def matches(self, words: Sequence[str]) -> bool:
         haystack = " ".join((self.title, self.subtitle, self.zh_title, self.zh_summary, self.excerpt)).lower()
@@ -243,7 +245,7 @@ class SubstackLibrary:
                         post.zh_summary = result.get("zh_summary", "")
                         done += 1
                     else:
-                        post.digest_attempts += 1
+                        post.digest_misses += 1
                 self._save()
 
 
@@ -259,7 +261,13 @@ def parse_digest_response(raw: str) -> Dict[str, Dict[str, str]]:
     except ValueError:
         return {}
     if isinstance(data, dict):
-        data = data.get("articles", [])
+        # JSON 模式只能回对象：约定 {"articles": [...]}；模型偶尔只回单篇对象或换了键名，也照收
+        if isinstance(data.get("articles"), list):
+            data = data["articles"]
+        elif "slug" in data:
+            data = [data]
+        else:
+            data = next((value for value in data.values() if isinstance(value, list)), [])
     results: Dict[str, Dict[str, str]] = {}
     for item in data if isinstance(data, list) else []:
         if not isinstance(item, dict):

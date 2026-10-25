@@ -190,7 +190,7 @@ def test_missing_items_in_a_reply_count_as_one_failed_attempt(tmp_path):
     library.generate_digests()
     posts = {p.slug: p for p in library.posts()}
     assert posts["post-2"].zh_title == "有结果"
-    assert posts["post-1"].digest_attempts == MAX_DIGEST_ATTEMPTS  # 每轮都缺它，直到放弃
+    assert posts["post-1"].digest_misses == MAX_DIGEST_ATTEMPTS  # 每轮都缺它，直到放弃
 
 
 def test_background_worker_fills_digests(tmp_path):
@@ -233,7 +233,20 @@ def test_old_store_entries_without_new_fields_still_load(tmp_path):
         ('[{"slug": "a", "zh_title": ""}, {"zh_title": "无 slug"}, "x", {"slug": "b", "zh_title": 3}]', {}),
         ("not json", {}),
         ("", {}),
+        # 2026-10-25 线上真实回复：JSON 模式下只回了单篇对象
+        ('{"slug": "a", "zh_title": "标题", "zh_summary": "s"}', {"a": {"zh_title": "标题", "zh_summary": "s"}}),
+        ('{"results": [{"slug": "a", "zh_title": "标题"}]}', {"a": {"zh_title": "标题", "zh_summary": ""}}),
     ],
 )
 def test_parse_digest_response(raw, expected):
     assert parse_digest_response(raw) == expected
+
+
+def test_posts_given_up_under_the_old_counter_are_retried(tmp_path):
+    (tmp_path / "library.json").write_text(json.dumps({"posts": [{
+        "title": "T", "subtitle": "", "slug": "t", "url": "https://x.substack.com/p/t",
+        "post_date": "2026-01-01", "is_paid": False, "cover_image": None, "wordcount": None,
+        "zh_title": "", "digest_attempts": 3,
+    }]}), encoding="utf-8")
+    library = _library(tmp_path, FakeArchive([]))
+    assert library.posts()[0].needs_digest
