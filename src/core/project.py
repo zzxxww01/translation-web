@@ -70,6 +70,8 @@ class ProjectListSummary:
     created_at: datetime
     # 原文链接（metadata.original_url），用来判断某篇 Substack 文章是否已导入
     original_url: Optional[str] = None
+    # 孪生项目（译本 2）指向的主项目
+    variant_of: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -622,6 +624,7 @@ class ProjectManager:
             ),
             created_at=validated.created_at,
             original_url=original_url if isinstance(original_url, str) else None,
+            variant_of=data.get("variant_of") if isinstance(data.get("variant_of"), str) else None,
         )
 
     def _get_project_summary(
@@ -658,8 +661,11 @@ class ProjectManager:
                     self._project_summary_cache.popitem(last=False)
             return summary
 
-    def list_summaries(self) -> List[ProjectListSummary]:
-        """List projects without loading sections or full ProjectMeta models."""
+    def list_summaries(self, *, include_variants: bool = False) -> List[ProjectListSummary]:
+        """List projects without loading sections or full ProjectMeta models.
+
+        孪生项目（译本 2）默认不列：它们跟着主项目走，在工作台里显示。
+        """
         projects: List[ProjectListSummary] = []
         for project_dir in self.projects_path.iterdir():
             if not project_dir.is_dir():
@@ -676,6 +682,8 @@ class ProjectManager:
                 )
             except Exception:
                 pass
+        if not include_variants:
+            projects = [project for project in projects if not project.variant_of]
         return sorted(projects, key=lambda project: project.created_at.timestamp(), reverse=True)
 
     def list_all(self) -> List[ProjectMeta]:

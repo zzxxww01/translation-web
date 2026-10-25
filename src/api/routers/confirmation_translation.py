@@ -733,7 +733,8 @@ async def start_longform_workflow(
                     term_review_job_id=term_review_job_id,
                     translation_service=translation_service,
                     confirmation_timeout_seconds=(
-                        settings.term_review_confirmation_timeout_seconds
+                        0 if body.auto_accept_terms
+                        else settings.term_review_confirmation_timeout_seconds
                     ),
                 ),
                 name=f"longform-workflow:{project_id}",
@@ -765,7 +766,8 @@ async def start_longform_workflow(
         "run_id": workflow_run_id,
         "term_review_job_id": term_review_job_id,
         "term_review_timeout_seconds": (
-            0 if resumed else settings.term_review_confirmation_timeout_seconds
+            0 if resumed or body.auto_accept_terms
+            else settings.term_review_confirmation_timeout_seconds
         ),
         "method": body.method,
         "model": body.model,

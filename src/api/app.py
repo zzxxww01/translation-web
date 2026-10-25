@@ -46,6 +46,7 @@ from .routers import (
     tools,
     translate,
     wechat_format,
+    workbench,
 )
 
 
@@ -91,6 +92,7 @@ app.include_router(consistency.router, prefix="/api", tags=["consistency"])
 app.include_router(segmentation.router, prefix="/api", tags=["segmentation"])
 app.include_router(wechat_format.router, prefix="/api", tags=["wechat"])
 app.include_router(substack.router, prefix="/api", tags=["substack"])
+app.include_router(workbench.router, prefix="/api", tags=["workbench"])
 
 
 frontend_dist_path = Path(__file__).parent.parent.parent / "web" / "frontend" / "dist"

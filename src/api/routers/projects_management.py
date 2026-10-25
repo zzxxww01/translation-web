@@ -27,6 +27,7 @@ from ..middleware import BadRequestException, ConflictException, NotFoundExcepti
 from ..middleware.rate_limit import limiter
 from .projects_models import CreateProjectRequest, ProjectResponse
 from .translate_utils import validate_path_component
+from src.services.article_variants import delete_with_variants, list_variants
 from src.services.translation_run_registry import translation_run_registry
 
 
@@ -295,17 +296,20 @@ async def get_project_asset(
 async def delete_project(request: Request, project_id: str, pm: ProjectManagerDep):
     if not validate_path_component(project_id):
         raise NotFoundException(detail="Project not found")
-    active_run = translation_run_registry.get_active_run(project_id)
-    if active_run is not None:
-        raise ConflictException(
-            detail=(
-                "Project has an active translation; cancel it before deleting "
-                f"(run_id={active_run.run_id or 'starting'})"
-            ),
-            error_code="PROJECT_TRANSLATION_ACTIVE",
-        )
+    # 主项目连同它的孪生项目（译本 2）一起删；任何一个还在翻译都不删
+    variants = await run_blocking(list_variants, pm, project_id)
+    for candidate in [project_id, *(variant.id for variant in variants)]:
+        active_run = translation_run_registry.get_active_run(candidate)
+        if active_run is not None:
+            raise ConflictException(
+                detail=(
+                    "Project has an active translation; cancel it before deleting "
+                    f"(project={candidate}, run_id={active_run.run_id or 'starting'})"
+                ),
+                error_code="PROJECT_TRANSLATION_ACTIVE",
+            )
     try:
-        await run_blocking(pm.delete, project_id)
+        await run_blocking(delete_with_variants, pm, project_id)
         return {"message": "Project deleted"}
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")

@@ -159,6 +159,8 @@ class LongformWorkflowStartRequest(WorkflowPolicyRequest):
     # section 需要同时给出 retranslate_section_ids。
     retranslate_scope: Literal["resume", "section", "all"] = "resume"
     retranslate_section_ids: list[str] = Field(default_factory=list, max_length=500)
+    # 译本 2（孪生项目）用：术语预检的建议直接采用，不等人确认
+    auto_accept_terms: bool = False
 
     @model_validator(mode="after")
     def _check_section_ids(self) -> "LongformWorkflowStartRequest":

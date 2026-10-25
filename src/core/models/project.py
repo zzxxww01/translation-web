@@ -58,6 +58,13 @@ class ProjectMeta(BaseModel):
     title: str
     title_translation: Optional[str] = None
     source_file: str
+    # 「译本 2」是用同一份原文建的孪生项目，段落 id 与主项目一一对应（见 services/article_variants.py）。
+    # 放在前面：项目列表只解析 meta.json 开头的一段。
+    variant_of: Optional[str] = None
+    variant_kind: Optional[str] = None  # "model" | "claude"
+    variant_label: Optional[str] = None
+    # 主项目：这篇文章交给 Claude（four-step-translate）的任务 id
+    claude_run_id: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     status: ProjectStatus = ProjectStatus.CREATED
