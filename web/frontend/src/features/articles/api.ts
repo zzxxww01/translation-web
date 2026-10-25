@@ -17,7 +17,7 @@ export const articlesApi = {
   createModelVariant: (projectId: string, model: string, label: string) =>
     apiClient.post<{ variant_id: string }>(`/projects/${projectId}/variants`, { kind: 'model', model, label }, { retry: false }),
 
-  importClaude: (projectId: string, body: { run_id: string; zh_markdown: string; en_markdown: string }) =>
+  importClaude: (projectId: string, body: { run_id: string; zh_markdown: string; en_markdown: string; agent: 'claude' | 'codex' }) =>
     apiClient.post<{ variant_id: string; aligned: number; unaligned: number }>(
       `/projects/${projectId}/variants/claude`, body, { retry: false, timeout: 120_000 }),
 

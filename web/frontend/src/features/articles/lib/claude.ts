@@ -1,4 +1,5 @@
 import { fileUrl, skillsApi, startRun } from '@/features/skills/api';
+import type { Harness } from '@/features/skills/harness';
 import type { RunFile, RunMeta } from '@/features/skills/types';
 import { articlesApi } from '../api';
 
@@ -8,7 +9,7 @@ const CLAUDE_MESSAGE =
 
 export class NoClaudeOutput extends Error {
   constructor() {
-    super('Claude 这次没有产出 zh.md（付费文章它通常不肯全文翻译，会改写成导读）');
+    super('这次没有产出 zh.md（Claude 对付费文章通常不肯全文翻译，会改写成导读；可以改用 Codex 或 argon）');
     this.name = 'NoClaudeOutput';
   }
 }
@@ -25,10 +26,10 @@ export function findClaudeOutputs(files: RunFile[]): { zh: string; en: string } 
   return null;
 }
 
-/** 把原文交给 Claude，并记下这篇文章对应的任务。 */
-export async function startClaudeTrack(projectId: string): Promise<RunMeta> {
+/** 把原文交给 Claude Code 或 Codex 跑 four-step-translate，并记下这篇文章对应的任务。 */
+export async function startClaudeTrack(projectId: string, harness: Harness = 'claude'): Promise<RunMeta> {
   const html = await articlesApi.sourceHtml(projectId);
-  const run = await startRun({ skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html] });
+  const run = await startRun({ skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html], harness });
   await articlesApi.setClaudeRun(projectId, run.id);
   return run;
 }
@@ -39,10 +40,10 @@ async function readText(runId: string, path: string): Promise<string> {
   return response.text();
 }
 
-/** 从 Claude 任务取回 zh.md / en.md，对齐后存成 `--claude` 译本。 */
-export async function importClaudeTrack(projectId: string, runId: string) {
+/** 从任务取回 zh.md / en.md，对齐后存成 `--claude` 或 `--codex` 译本。 */
+export async function importClaudeTrack(projectId: string, runId: string, harness: Harness = 'claude') {
   const outputs = findClaudeOutputs(await skillsApi.files(runId));
   if (!outputs) throw new NoClaudeOutput();
   const [zh, en] = await Promise.all([readText(runId, outputs.zh), readText(runId, outputs.en)]);
-  return articlesApi.importClaude(projectId, { run_id: runId, zh_markdown: zh, en_markdown: en });
+  return articlesApi.importClaude(projectId, { run_id: runId, zh_markdown: zh, en_markdown: en, agent: harness });
 }

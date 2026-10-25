@@ -81,6 +81,17 @@ describe('NewRunForm', () => {
     expect(textarea().placeholder).toBe('想问什么都可以');
   });
 
+  it('starts the task on Codex once Codex is picked, and remembers the choice', async () => {
+    await click('Codex');
+    expect(button('Codex')!.getAttribute('aria-checked')).toBe('true');
+    expect(localStorage.getItem('momo.agent.harness')).toBe('codex');
+    await click('视频字幕');
+    await click('这个视频加中英双语字幕：');
+    await click('开始');
+    expect(startRun).toHaveBeenCalledWith(expect.objectContaining({ skill: 'video-bilingual-subber', harness: 'codex' }), expect.any(Function));
+    localStorage.removeItem('momo.agent.harness');
+  });
+
   it('fills an example and starts the task with the picked agent', async () => {
     await click('视频字幕');
     await click('这个视频加中英双语字幕：');
@@ -88,7 +99,7 @@ describe('NewRunForm', () => {
 
     await click('开始');
     expect(startRun).toHaveBeenCalledWith(
-      { skill: 'video-bilingual-subber', message: '这个视频加中英双语字幕：', files: [] },
+      { skill: 'video-bilingual-subber', message: '这个视频加中英双语字幕：', files: [], harness: 'claude' },
       expect.any(Function)
     );
   });

@@ -54,11 +54,12 @@ function postMultipart<T>(path: string, form: FormData, onProgress?: (percent: n
 }
 
 export function startRun(
-  input: { skill: string; message: string; files: File[] },
+  input: { skill: string; message: string; files: File[]; harness?: 'claude' | 'codex' },
   onProgress?: (percent: number) => void
 ): Promise<RunMeta> {
   const form = new FormData();
   form.append('skill', input.skill);
+  form.append('harness', input.harness ?? 'claude');
   form.append('message', input.message);
   input.files.forEach(file => form.append('files', file));
   return postMultipart<RunMeta>('/runs', form, onProgress);

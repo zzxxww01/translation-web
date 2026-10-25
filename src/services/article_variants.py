@@ -117,13 +117,15 @@ def alignment_targets(sections: List[Section]) -> List[Target]:
 
 
 def import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown: str, en_markdown: str,
-                              run_id: Optional[str] = None) -> Dict:
-    """把 Claude 的 zh.md 对齐后写进 `--claude` 孪生项目（已有就整篇替换），返回对齐统计。"""
+                              run_id: Optional[str] = None, agent: str = "claude") -> Dict:
+    """把 four-step-translate（Claude 或 Codex 跑的）产出的 zh.md 对齐后写进 `--claude`/`--codex` 孪生项目
+    （已有就整篇替换），返回对齐统计。"""
     sections = pm.get_sections(main_id)
     alignment: Alignment = align_claude_translation(en_markdown, zh_markdown, alignment_targets(sections))
     if not alignment.texts:
         raise ValueError("Claude 的译文和这篇文章对不上，可能不是同一篇")
-    new_id = create_variant(pm, main_id, kind="claude", label="Claude", suffix="claude", replace=True)
+    label = "Codex" if agent == "codex" else "Claude"
+    new_id = create_variant(pm, main_id, kind="claude", label=label, suffix=label, replace=True)
 
     for section in pm.get_sections(new_id):
         title = alignment.texts.get(f"section:{section.section_id}")

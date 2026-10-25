@@ -47,9 +47,13 @@ def create_app(
 ) -> FastAPI:
     store = store or RunStore(config.runs_dir)
     if session_factory is None:
+        from .codex_session import make_codex_factory
         from .sdk_session import make_factory
 
-        session_factory = make_factory(config)
+        claude_factory, codex_factory = make_factory(config), make_codex_factory(config)
+
+        async def session_factory(spec):  # 按任务选的 harness 建会话
+            return await (codex_factory if spec.harness == "codex" else claude_factory)(spec)
     runner = Runner(config, store, session_factory)
     limiter = auth.LoginLimiter()
 
@@ -140,13 +144,14 @@ def create_app(
     @api.post("/runs")
     async def create_run(
         skill: str = Form(""),  # 留空即直接对话
+        harness: str = Form("claude"),  # claude / codex
         message: str = Form(""),
         files: list[UploadFile] = File(default=[]),
     ):
         names = [f.filename for f in files if f.filename]
         if not message.strip() and not names:
             raise HTTPException(status_code=400, detail="写点说明或者附个文件")
-        meta = runner.create(skill, make_title(message, names))
+        meta = runner.create(skill, make_title(message, names), harness)
         try:
             saved = await asyncio.to_thread(_save_uploads, meta.id, files)
         except HTTPException:

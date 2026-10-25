@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
+import { harnessLabel, type Harness } from '@/features/skills/harness';
 import { isUnauthorized } from '@/features/skills/hooks';
 import { articlesApi, downloadText } from '../api';
 import { articleKeys, useClaudeRun, useWorkbench } from '../hooks';
@@ -94,7 +95,6 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
 
   const variant: WorkbenchVariant | null = variants.find(v => v.id === variantId) ?? variants[0] ?? null;
   const claudeRun = useClaudeRun(project.claude_run_id);
-  const claudeVariant = variants.find(v => v.kind === 'claude');
   const refresh = useCallback(
     () => queryClient.invalidateQueries({ queryKey: articleKeys.workbench(project.id) }),
     [queryClient, project.id]
@@ -115,16 +115,16 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const run = claudeRun.data;
   useEffect(() => {
     if (!run || run.status !== 'idle' || importTried.current === run.id) return;
-    if (claudeVariant?.import?.run_id === run.id) return;
+    if (variants.some(v => v.import?.run_id === run.id)) return;
     importTried.current = run.id;
-    importClaudeTrack(project.id, run.id)
+    importClaudeTrack(project.id, run.id, run.harness ?? 'claude')
       .then(result => {
-        toast.success(`Claude 译文已导入：对上 ${result.aligned} 段`);
+        toast.success(`${harnessLabel(run.harness)} 译文已导入：对上 ${result.aligned} 段`);
         setClaudeNote(null);
         return refresh();
       })
-      .catch(error => setClaudeNote(error instanceof NoClaudeOutput ? error.message : `Claude 译文导入失败：${error.message}`));
-  }, [run, claudeVariant, project.id, refresh]);
+      .catch(error => setClaudeNote(error instanceof NoClaudeOutput ? `${harnessLabel(run.harness)} ${error.message}` : `译文导入失败：${error.message}`));
+  }, [run, variants, project.id, refresh]);
 
   const toggle = (pane: PaneId) => {
     setCollapsed(current => {
@@ -189,16 +189,16 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     }
   };
 
-  const startClaude = async () => {
+  const startClaude = async (harness: Harness = 'claude') => {
     setBusy(true);
     try {
-      await startClaudeTrack(project.id);
+      await startClaudeTrack(project.id, harness);
       setClaudeNote(null);
       importTried.current = null;
-      toast.success('已交给 Claude；它提问时这里会提示你');
+      toast.success(`已交给 ${harnessLabel(harness)}；它需要你回复时这里会提示`);
       await refresh();
     } catch (error) {
-      toast.error(isUnauthorized(error) ? '先去 Claude 页登录一次（只需一次）' : error instanceof Error ? error.message : '没能交给 Claude');
+      toast.error(isUnauthorized(error) ? '先去 Agent 页登录一次（只需一次）' : error instanceof Error ? error.message : '没能交出去');
     } finally {
       setBusy(false);
     }
@@ -295,6 +295,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   }, [project.id, project.status.active, variant, variants, webSummary.text, altSummary?.text, save]);
 
   const claudeWaiting = run?.status === 'waiting';
+  const agentLabel = harnessLabel(run?.harness);
+  const runImported = Boolean(run && variants.some(v => v.import?.run_id === run.id));
   // 这篇有 Claude 任务，但浏览器还没登录 Claude：说一声，不然这一路像不存在
   const claudeNeedsLogin = Boolean(project.claude_run_id) && isUnauthorized(claudeRun.error);
   const claudeRunning = run?.status === 'running';
@@ -319,8 +321,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
           <div className="flex flex-wrap items-center gap-1.5">
             <StatusChip label="网页版" text={webSummary.text} tone={webSummary.tone} />
             {variant && altSummary && <StatusChip label={variant.label} text={altSummary.text} tone={altSummary.tone} />}
-            {(claudeRunning || claudeWaiting) && !claudeVariant && (
-              <StatusChip label="Claude" text={claudeWaiting ? '在等你回答' : '翻译中'} tone={claudeWaiting ? 'wait' : 'busy'} />
+            {(claudeRunning || claudeWaiting) && !runImported && (
+              <StatusChip label={agentLabel} text={claudeWaiting ? '在等你回答' : '翻译中'} tone={claudeWaiting ? 'wait' : 'busy'} />
             )}
           </div>
           <div className="flex items-center gap-1">
@@ -347,12 +349,15 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
                     <Sparkles className="h-4 w-4" /> 用 {option.label} 再翻一版
                   </DropdownMenuItem>
                 ))}
-                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude()}>
-                  <Bot className="h-4 w-4" /> {project.claude_run_id ? '重新交给 Claude' : '交给 Claude（four-step-translate）'}
+                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('codex')}>
+                  <Bot className="h-4 w-4" /> 交给 Codex（four-step-translate）
+                </DropdownMenuItem>
+                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('claude')}>
+                  <Bot className="h-4 w-4" /> 交给 Claude（four-step-translate）
                 </DropdownMenuItem>
                 {run && (
                   <DropdownMenuItem onSelect={() => setDrawer({ kind: 'claude', run })}>
-                    <Bot className="h-4 w-4" /> 看 Claude 的对话
+                    <Bot className="h-4 w-4" /> 看 {agentLabel} 的对话
                   </DropdownMenuItem>
                 )}
                 <DropdownMenuSeparator />
@@ -377,21 +382,21 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
               </Banner>
             )}
             {claudeWaiting && run && (
-              <Banner tone="wait" action="去回答" onAction={() => setDrawer({ kind: 'claude', run })}>Claude 在问你问题。</Banner>
+              <Banner tone="wait" action="去回答" onAction={() => setDrawer({ kind: 'claude', run })}>{agentLabel} 在等你回复。</Banner>
             )}
             {claudeNote && (
               <Banner
                 tone="info"
                 action={variants.some(v => v.label === 'argon') ? undefined : '改用 argon 再翻一版'}
                 onAction={() => void startModelVariant('gemini-official-argon', 'argon')}
-                secondary={run ? { label: '看 Claude 说了什么', onClick: () => setDrawer({ kind: 'claude', run }) } : undefined}
+                secondary={run ? { label: `看 ${agentLabel} 说了什么`, onClick: () => setDrawer({ kind: 'claude', run }) } : undefined}
               >
                 {claudeNote}
               </Banner>
             )}
             {claudeNeedsLogin && (
               <Banner tone="info" action="去登录" onAction={() => navigate('/skills')}>
-                这篇交给过 Claude，要先登录 Claude 页（一次即可）才能看它的进度和回复。
+                这篇交给过 Claude / Codex，要先登录 Agent 页（一次即可）才能看进度和回复。
               </Banner>
             )}
             {project.status.error && <Banner tone="error">网页版出错了：{project.status.error}</Banner>}
@@ -449,7 +454,7 @@ function SecondVersionPrompt({ busy, claudeActive, onModel, onClaude }: {
   busy: boolean;
   claudeActive: boolean;
   onModel: (model: string, label: string) => void;
-  onClaude: () => void;
+  onClaude: (harness: Harness) => void;
 }) {
   if (claudeActive) return null;
   return (
@@ -460,7 +465,8 @@ function SecondVersionPrompt({ busy, claudeActive, onModel, onClaude }: {
           <Sparkles /> 用 {option.label} 再翻一版
         </Button>
       ))}
-      <Button size="sm" variant="ghost" disabled={busy} onClick={onClaude}><Bot /> 交给 Claude</Button>
+      <Button size="sm" variant="ghost" disabled={busy} onClick={() => onClaude('codex')}><Bot /> 交给 Codex</Button>
+      <Button size="sm" variant="ghost" disabled={busy} onClick={() => onClaude('claude')}><Bot /> 交给 Claude</Button>
       <span className="text-xs text-text-muted">付费文章 Claude 通常不肯全文翻译</span>
     </div>
   );

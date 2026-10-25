@@ -89,6 +89,7 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
                   ))}
                 </div>
               )}
+              {choice('codex', '交给 Codex（four-step-translate）', '用服务器上的 Codex 和你的 ChatGPT 订阅')}
               {choice('claude', '交给 Claude（four-step-translate）', article.is_paid ? '付费文章 Claude 通常不肯全文翻译，只给导读' : undefined)}
               {choice('none', '先不要')}
             </div>

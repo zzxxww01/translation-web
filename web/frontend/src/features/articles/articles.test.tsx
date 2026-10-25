@@ -94,6 +94,16 @@ describe('importAndTranslate', () => {
     ]);
   });
 
+  it('hands the article to Codex when Codex is the second version', async () => {
+    substack.importArticle.mockResolvedValue({ project: { id: 'p1' }, already_imported: false });
+    api.startWorkflow.mockResolvedValue({ run_id: 'r' });
+    claude.startClaudeTrack.mockResolvedValue({ id: 'run-1' });
+
+    await importAndTranslate({ url: 'u' }, 'codex', SECOND_MODELS[0], vi.fn());
+
+    expect(claude.startClaudeTrack).toHaveBeenCalledWith('p1', 'codex');
+  });
+
   it('still opens the article when the second version cannot start', async () => {
     substack.importArticle.mockResolvedValue({ project: { id: 'p1' }, already_imported: true });
     claude.startClaudeTrack.mockRejectedValue(new Error('skill-runner 挂了'));

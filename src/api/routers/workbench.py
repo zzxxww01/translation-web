@@ -41,6 +41,7 @@ class CreateVariantRequest(BaseModel):
 
 class ImportClaudeRequest(BaseModel):
     run_id: Optional[str] = Field(None, max_length=100)
+    agent: Literal["claude", "codex"] = "claude"  # 跑 four-step-translate 的 harness
     zh_markdown: str = Field(..., min_length=1, max_length=MAX_MARKDOWN_CHARS)
     en_markdown: str = Field(..., min_length=1, max_length=MAX_MARKDOWN_CHARS)
 
@@ -216,7 +217,7 @@ async def import_claude_variant(request: Request, project_id: str, body: ImportC
     try:
         result = await run_blocking(
             article_variants.import_claude_translation, pm, project_id,
-            zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, run_id=body.run_id)
+            zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, run_id=body.run_id, agent=body.agent)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
     except ValueError as error:

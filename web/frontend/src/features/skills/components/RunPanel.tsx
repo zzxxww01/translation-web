@@ -20,6 +20,7 @@ import { skillKeys, useRunEvents } from '../hooks';
 import { foldEvents } from '../state';
 import type { Agent, RunMeta } from '../types';
 import { AgentIcon } from './AgentIcon';
+import { harnessLabel } from '../harness';
 import { AssistantText, NoticeLine, ToolGroup, TurnDivider, UserBubble } from './ChatItems';
 import { Composer } from './Composer';
 import { QuestionCard } from './QuestionCard';
@@ -82,7 +83,7 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
           </div>
           <div className="mt-0.5 flex items-center gap-1 text-xs text-text-muted">
             <AgentIcon icon={agent.icon} className="h-3.5 w-3.5" />
-            {agent.title}
+            {agent.title} · {harnessLabel(run.harness)}
           </div>
         </div>
         <div className="flex items-center gap-1">

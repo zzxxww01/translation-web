@@ -6,6 +6,7 @@ import { findAgent } from '../agents';
 import type { Agent, RunMeta } from '../types';
 import { AgentIcon } from './AgentIcon';
 import { StatusPill } from './StatusPill';
+import { harnessLabel } from '../harness';
 
 function formatTime(seconds: number): string {
   const date = new Date(seconds * 1000);
@@ -99,7 +100,10 @@ export function RunList({ runs, catalog, selectedId, onSelect, onNew }: RunListP
                     <span className="shrink-0 text-xs text-text-muted">{formatTime(run.created_at)}</span>
                   </span>
                   <span className="mt-1 flex items-center justify-between gap-2">
-                    <span className="truncate text-xs text-text-muted">{agent.title}</span>
+                    <span className="truncate text-xs text-text-muted">
+                      {agent.title}
+                      {run.harness === 'codex' && <span className="ml-1.5 rounded bg-bg-tertiary px-1 text-[10px]">{harnessLabel(run.harness)}</span>}
+                    </span>
                     <StatusPill status={run.status} />
                   </span>
                 </span>

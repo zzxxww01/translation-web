@@ -6,6 +6,7 @@ import type { TermReviewDecision } from '@/features/confirmation/types';
 import { TerminologyReviewPage } from '@/features/document/components/TerminologyReviewPage';
 import { findAgent, normalizeCatalog } from '@/features/skills/agents';
 import { LoginPanel } from '@/features/skills/components/LoginPanel';
+import { harnessLabel } from '@/features/skills/harness';
 import { RunPanel } from '@/features/skills/components/RunPanel';
 import { isUnauthorized, useCatalog, useSkillsAuth } from '@/features/skills/hooks';
 import type { RunMeta } from '@/features/skills/types';
@@ -23,9 +24,9 @@ export function TrackDrawer({ state, mainId, onClose }: { state: DrawerState; ma
     <Sheet open={state !== null} onOpenChange={open => !open && onClose()}>
       <SheetContent side="right" className="flex w-full flex-col gap-0 p-0 sm:max-w-3xl">
         <SheetHeader className="border-b border-border-subtle px-5 py-3 text-left">
-          <SheetTitle className="text-base">{state?.kind === 'terms' ? '网页版：确认术语' : 'Claude'}</SheetTitle>
+          <SheetTitle className="text-base">{state?.kind === 'terms' ? '网页版：确认术语' : harnessLabel(state?.run.harness)}</SheetTitle>
           <SheetDescription className="text-xs">
-            {state?.kind === 'terms' ? '确认后网页版接着翻；不确认的话到时间会自动采用建议。' : '和 Claude 页里是同一个任务。'}
+            {state?.kind === 'terms' ? '确认后网页版接着翻；不确认的话到时间会自动采用建议。' : '和 Agent 页里是同一个任务。'}
           </SheetDescription>
         </SheetHeader>
         <div className="min-h-0 flex-1 overflow-auto">

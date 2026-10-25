@@ -63,6 +63,18 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 | 加 skill（= 页面上多一个 agent） | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，在 `skill_runner/agents.json` 写名片（中文名、图标、说明、输入提示、示例），开沙箱时按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
 | 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `chat`、`article`、`video`、`podcast` |
 
+## Harness：Claude Code / Codex
+
+新任务页可以选用哪个 harness，任务元数据记在 `harness` 字段里（旧任务没有这个字段，按 Claude 处理）。
+
+- **Claude Code**：`sdk_session.py`，claude-agent-sdk，会话常驻；skill 用 `/<skill>` 派发，提问走 AskUserQuestion。
+- **Codex**：`codex_session.py`，每一轮起一个 `codex exec --json`，之后的轮次 `codex exec resume <thread_id>`；
+  关掉沙箱时带 `--dangerously-bypass-approvals-and-sandbox`（不需要确认）。提示词从 stdin 传，必须读完就关，
+  否则 Codex 会停在「Reading additional input from stdin」。没有提问工具：要确认时它把内容写在回复里结束这一轮。
+  skill 的派发是让它先读 `~/.agents/skills/<skill>/SKILL.md`。模型默认取 `~/.codex/models_cache.json` 里排第一的。
+- **skill 目录**：真实文件在 `~/.agents/skills/`（Codex 原生读），`~/.claude/skills/<skill>` 是指向它的软链接。
+  新加 skill：放进 `~/.agents/skills/`，再 `ln -s ~/.agents/skills/<名字> ~/.claude/skills/<名字>`。
+
 ## 安全边界
 
 - 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（记一年，每天第一次用时自动续期，一直在用就不用再输口令），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。

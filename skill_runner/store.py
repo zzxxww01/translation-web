@@ -42,6 +42,7 @@ class RunMeta:
     updated_at: float
     session_id: str | None = None
     error: str | None = None
+    harness: str = "claude"  # claude / codex；旧任务没有这个字段，按 Claude 处理
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -74,7 +75,7 @@ class RunStore:
         except KeyError:
             return False
 
-    def create(self, skill: str, title: str) -> RunMeta:
+    def create(self, skill: str, title: str, harness: str = "claude") -> RunMeta:
         now = time.time()
         while True:
             run_id = time.strftime("%Y%m%d-%H%M%S", time.localtime(now)) + "-" + secrets.token_hex(3)
@@ -85,7 +86,7 @@ class RunStore:
             except FileExistsError:
                 continue
         (path / INPUT_DIR).mkdir()
-        meta = RunMeta(id=run_id, skill=skill, title=title, status="idle", created_at=now, updated_at=now)
+        meta = RunMeta(id=run_id, skill=skill, title=title, status="idle", created_at=now, updated_at=now, harness=harness)
         self.save_meta(meta)
         return meta
 

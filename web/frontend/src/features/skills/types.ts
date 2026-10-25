@@ -11,6 +11,8 @@ export interface RunMeta {
   updated_at: number;
   session_id: string | null;
   error: string | null;
+  /** 旧任务没有这个字段，按 Claude 处理 */
+  harness?: 'claude' | 'codex';
 }
 
 /** 页面上的一个 agent（名片来自 skill_runner/agents.json）。name 是 skill 名，空串表示直接和 Claude 聊天。 */

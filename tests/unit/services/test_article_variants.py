@@ -122,3 +122,11 @@ async def test_saving_into_a_project_that_is_not_this_articles_variant_is_refuse
     with pytest.raises(APIException):
         await workbench.save_text(_request(), main_id, workbench.SaveTextRequest(
             target=main_id, section_id=section_id, paragraph_id=first.id, text="   "), pm)
+
+
+def test_codex_import_gets_its_own_variant(pm, main_id):
+    en = "First paragraph about wafer supply and the 2027 buildout of datacenters.\n"
+    zh = "关于晶圆供给和 2027 年数据中心建设的第一段。\n"
+    result = article_variants.import_claude_translation(pm, main_id, zh_markdown=zh, en_markdown=en, agent="codex")
+    assert result["variant_id"] == f"{main_id}--codex"
+    assert pm.get(result["variant_id"]).variant_label == "Codex"

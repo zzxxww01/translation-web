@@ -8,6 +8,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 DEFAULT_SKILLS = ("four-step-translate", "video-bilingual-subber", "podcast-cn-dubber")
+# 跑任务用的 harness：Claude Code（claude-agent-sdk）或 Codex（codex exec）
+HARNESSES = ("claude", "codex")
 
 # 沙箱里的 Bash 只能连这些域名：Gemini（字幕转写/翻译）、DashScope 与 OSS（播客 ASR/TTS）、
 # YouTube（yt-dlp 下载）。新 skill 要连别的域名时，用 SKILL_RUNNER_ALLOWED_DOMAINS 整体覆盖。
@@ -54,6 +56,12 @@ class Config:
     allowed_domains: tuple[str, ...] = DEFAULT_ALLOWED_DOMAINS
     unsandboxed_commands: tuple[str, ...] = ()
     model: str | None = None
+    # Codex：服务器上的 codex CLI；模型不填就用它自己清单里最新的那个
+    codex_bin: str = "codex"
+    codex_model: str | None = None
+    codex_home: Path = field(default_factory=lambda: Path.home() / ".codex")
+    # 两个 harness 共用的 skill 目录；~/.claude/skills 里是指向这里的软链接
+    shared_skills_dir: Path = field(default_factory=lambda: Path.home() / ".agents" / "skills")
     cookie_secure: bool = True
     host: str = "127.0.0.1"
     port: int = 18090
@@ -87,6 +95,10 @@ class Config:
             # Bash 规则里本身带空格和逗号，所以用分号分隔
             unsandboxed_commands=_split(env.get("SKILL_RUNNER_UNSANDBOXED_COMMANDS"), ";"),
             model=env.get("SKILL_RUNNER_MODEL") or None,
+            codex_bin=env.get("SKILL_RUNNER_CODEX_BIN") or "codex",
+            codex_model=env.get("SKILL_RUNNER_CODEX_MODEL") or None,
+            codex_home=Path(env.get("CODEX_HOME") or Path.home() / ".codex").expanduser(),
+            shared_skills_dir=Path(env.get("SKILL_RUNNER_SHARED_SKILLS_DIR") or Path.home() / ".agents" / "skills").expanduser(),
             cookie_secure=_flag(env.get("SKILL_RUNNER_COOKIE_SECURE"), True),
             host=env.get("SKILL_RUNNER_HOST") or "127.0.0.1",
             port=int(env.get("SKILL_RUNNER_PORT") or 18090),

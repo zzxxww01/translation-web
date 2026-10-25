@@ -22,7 +22,7 @@ from pathlib import Path
 from typing import Any, AsyncIterator, Awaitable, Callable, Protocol
 
 from . import agents, policy
-from .config import Config
+from .config import HARNESSES, Config
 from .store import RunMeta, RunStore
 
 logger = logging.getLogger(__name__)
@@ -50,6 +50,7 @@ class SessionSpec:
     on_permission: PermissionHandler
     # 按任务追加到系统提示词的说明（见 agents.prompt_note）
     prompt_note: str = ""
+    harness: str = "claude"
 
 
 class AgentSession(Protocol):
@@ -101,9 +102,19 @@ class _Run:
     lock: asyncio.Lock = field(default_factory=asyncio.Lock)
 
 
-def build_prompt(skill: str | None, message: str, attachments: list[str]) -> str:
+def harness_label(harness: str) -> str:
+    return "Codex" if harness == "codex" else "Claude"
+
+
+def build_prompt(
+    skill: str | None, message: str, attachments: list[str], harness: str = "claude", skills_dir: Path | None = None
+) -> str:
     text = message.strip()
-    if skill:
+    if skill and harness == "codex":
+        # Codex 没有 /<skill> 派发：让它先读共用目录里的 SKILL.md 再照做
+        skill_md = (skills_dir or Path.home() / ".agents" / "skills") / skill / "SKILL.md"
+        text = f"使用 skill「{skill}」：先完整阅读 {skill_md}，严格按其中的流程完成下面的任务。\n\n{text}".rstrip()
+    elif skill:
         # /<skill> 直接派发 skill，正文作为参数跟在后面
         text = f"/{skill} {text}".rstrip()
     if attachments:
@@ -183,19 +194,21 @@ class Runner:
 
     # ---- 生命周期 ----
 
-    def create(self, skill: str, title: str) -> RunMeta:
-        # skill 为空就是直接对话：消息原样发给 Claude，不派发 skill
+    def create(self, skill: str, title: str, harness: str = "claude") -> RunMeta:
+        # skill 为空就是直接对话：消息原样发给 Claude / Codex，不派发 skill
         if skill and skill not in self.config.skills:
             raise RunnerError(f"未启用的 skill：{skill}")
+        if harness not in HARNESSES:
+            raise RunnerError(f"不支持的 harness：{harness}")
         if self.active_count() >= self.config.max_active:
             raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
-        meta = self.store.create(skill, title)
+        meta = self.store.create(skill, title, harness)
         self._runs[meta.id] = _Run(meta=meta, seq=0)
         return meta
 
     async def begin(self, run_id: str, message: str, attachments: list[str]) -> RunMeta:
         run = self._get(run_id)
-        prompt = build_prompt(run.meta.skill, message, attachments)
+        prompt = build_prompt(run.meta.skill, message, attachments, run.meta.harness, self.config.shared_skills_dir)
         return await self._deliver(run, message, attachments, prompt)
 
     async def send_message(self, run_id: str, message: str, attachments: list[str]) -> RunMeta:
@@ -226,7 +239,7 @@ class Runner:
                 await run.session.send(prompt)
             except Exception as exc:  # noqa: BLE001 - 任何发送失败都要反映到页面上
                 logger.exception("send failed for run %s", run.meta.id)
-                await self._fail(run, f"消息没能发给 Claude：{exc}")
+                await self._fail(run, f"消息没能发给 {harness_label(run.meta.harness)}：{exc}")
                 raise SessionFailed(str(exc)) from exc
         return run.meta
 
@@ -239,13 +252,15 @@ class Runner:
                 run, name, data, tool_use_id, reason
             ),
             prompt_note=agents.prompt_note(agents.build_catalog(self.config), run.meta.skill),
+            harness=run.meta.harness,
         )
         try:
             session = await self.session_factory(spec)
         except Exception as exc:  # noqa: BLE001
             logger.exception("failed to open session for run %s", run.meta.id)
-            self._emit(run, {"type": "error", "text": f"启动 Claude 失败：{exc}"})
-            self._set_status(run, "error", f"启动 Claude 失败：{exc}")
+            label = harness_label(run.meta.harness)
+            self._emit(run, {"type": "error", "text": f"启动 {label} 失败：{exc}"})
+            self._set_status(run, "error", f"启动 {label} 失败：{exc}")
             raise SessionFailed(str(exc)) from exc
         run.session = session
         run.closing = False
@@ -260,12 +275,12 @@ class Runner:
         except Exception as exc:  # noqa: BLE001
             if not run.closing:
                 logger.exception("session stream failed for run %s", run.meta.id)
-                await self._fail(run, f"Claude 进程出错：{exc}")
+                await self._fail(run, f"{harness_label(run.meta.harness)} 进程出错：{exc}")
             return
         if run.session is session and not run.closing:
             # 流在没有被我们关闭的情况下结束了：进程退出
             if run.meta.status in ACTIVE_STATUSES:
-                await self._fail(run, "Claude 进程意外退出")
+                await self._fail(run, f"{harness_label(run.meta.harness)} 进程意外退出")
             else:
                 run.session = None
 

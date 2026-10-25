@@ -10,6 +10,7 @@ import { skillKeys } from '../hooks';
 import type { Agent, RunMeta } from '../types';
 import { AgentIcon } from './AgentIcon';
 import { AttachmentPicker } from './AttachmentChips';
+import { HARNESSES, loadHarness, saveHarness, type Harness } from '../harness';
 
 interface NewRunFormProps {
   /** 第一个是 Claude 聊天，其余是专职 agent（见 normalizeCatalog） */
@@ -23,6 +24,7 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
   const queryClient = useQueryClient();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [skill, setSkill] = useState('');
+  const [harness, setHarness] = useState<Harness>(loadHarness);
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [progress, setProgress] = useState<number | null>(null);
@@ -38,7 +40,7 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
     if (!canStart) return;
     setProgress(files.length ? 0 : 100);
     try {
-      const run = await startRun({ skill, message, files }, setProgress);
+      const run = await startRun({ skill, message, files, harness }, setProgress);
       await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
       onStarted(run);
     } catch (error) {
@@ -60,7 +62,30 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-2xl flex-col justify-center px-5 py-10 sm:px-8">
-      <h1 className="mb-6 text-center text-2xl text-text-primary">今天要做什么？</h1>
+      <h1 className="mb-4 text-center text-2xl text-text-primary">今天要做什么？</h1>
+      <div className="mb-4 flex justify-center">
+        <div className="inline-flex rounded-lg bg-bg-tertiary p-0.5 text-sm" role="radiogroup" aria-label="用哪个 harness">
+          {HARNESSES.map(item => (
+            <button
+              key={item.id}
+              type="button"
+              role="radio"
+              aria-checked={harness === item.id}
+              disabled={busy}
+              onClick={() => {
+                setHarness(item.id);
+                saveHarness(item.id);
+              }}
+              className={cn(
+                'rounded-md px-3 py-1 transition-colors',
+                harness === item.id ? 'bg-white text-text-primary shadow-sm' : 'text-text-muted hover:text-text-primary'
+              )}
+            >
+              {item.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       <div className="rounded-xl border border-border bg-white shadow-sm transition-colors focus-within:border-primary-300">
         {agent.name && (
