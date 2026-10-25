@@ -2,11 +2,45 @@
 
 from __future__ import annotations
 
-from typing import Any, Optional, Dict, List
-from pydantic import BaseModel, Field, field_validator
+from typing import Annotated, Any, Optional, Dict, List
+from pydantic import BaseModel, BeforeValidator, Field, field_validator
 
 from .enums import TranslationStrategy
 from .glossary import GlossaryTerm
+
+
+def _as_text(value: Any) -> str:
+    """模型输出里的文字字段：写成对象或数组时拼成一句（如 {"argument": …, "evidence": …}）。
+
+    提示词只列字段名、不给类型，模型常按字段名自由发挥；一个字段类型不对不能让整篇翻译中止。
+    """
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value
+    if isinstance(value, dict):
+        return "；".join(part for part in (_as_text(item) for item in value.values()) if part)
+    if isinstance(value, (list, tuple)):
+        return "；".join(part for part in (_as_text(item) for item in value) if part)
+    return str(value)
+
+
+def _as_optional_text(value: Any) -> Any:
+    return None if value is None else _as_text(value)
+
+
+def _as_text_list(value: Any) -> Any:
+    if value is None:
+        return []
+    if isinstance(value, (str, dict)):
+        return [value] if _as_text(value).strip() else []
+    return value
+
+
+# 模型输出模型的文字字段统一用这几个类型
+LooseText = Annotated[str, BeforeValidator(_as_text)]
+OptionalLooseText = Annotated[Optional[str], BeforeValidator(_as_optional_text)]
+LooseTextList = Annotated[List[LooseText], BeforeValidator(_as_text_list)]
 
 
 class StyleGuide(BaseModel):
@@ -33,15 +67,15 @@ class AnalysisResult(BaseModel):
 class EnhancedTerm(BaseModel):
     """增强版术语条目"""
 
-    term: str
-    context_meaning: str = ""
-    translation: Optional[str] = None
+    term: LooseText
+    context_meaning: LooseText = ""
+    translation: OptionalLooseText = None
     strategy: TranslationStrategy = TranslationStrategy.TRANSLATE
     first_occurrence_note: bool = False
-    rationale: Optional[str] = None
-    alternatives: List[str] = Field(default_factory=list)
-    avoid: List[str] = Field(default_factory=list)
-    source_quote: str = ""
+    rationale: OptionalLooseText = None
+    alternatives: LooseTextList = Field(default_factory=list)
+    avoid: LooseTextList = Field(default_factory=list)
+    source_quote: LooseText = ""
 
     # 这些字段来自模型输出。一个术语的字段类型写错，不能让整篇翻译中止。
     @field_validator("first_occurrence_note", mode="before")
@@ -58,41 +92,32 @@ class EnhancedTerm(BaseModel):
             return True
         return value
 
-    @field_validator("alternatives", "avoid", mode="before")
-    @classmethod
-    def _coerce_str_list(cls, value: Any) -> Any:
-        if value is None:
-            return []
-        if isinstance(value, str):
-            return [value] if value.strip() else []
-        return value
-
 
 class ArticleStyle(BaseModel):
     """文章风格分析"""
 
-    tone: str = "professional"
-    target_audience: str = ""
-    translation_voice: str = ""
+    tone: LooseText = "professional"
+    target_audience: LooseText = ""
+    translation_voice: LooseText = ""
 
 
 class TranslationChallenge(BaseModel):
     """翻译难点"""
 
-    type: str = "accuracy"  # terminology|metaphor|cultural_reference|cross_domain_term|rhetorical_tone|structure|accuracy
-    location: str
-    issue: str
-    suggestion: Optional[str] = None
+    type: LooseText = "accuracy"  # terminology|metaphor|cultural_reference|cross_domain_term|rhetorical_tone|structure|accuracy
+    location: LooseText
+    issue: LooseText
+    suggestion: OptionalLooseText = None
 
 
 class SectionUnderstanding(BaseModel):
     """章节理解结果（四步法 Step 1 输出）"""
 
-    role_in_article: str = ""
-    relation_to_previous: str = ""
-    relation_to_next: str = ""
-    key_points: List[str] = Field(default_factory=list)
-    translation_notes: List[str] = Field(default_factory=list)
+    role_in_article: LooseText = ""
+    relation_to_previous: LooseText = ""
+    relation_to_next: LooseText = ""
+    key_points: LooseTextList = Field(default_factory=list)
+    translation_notes: LooseTextList = Field(default_factory=list)
     paragraph_structure: List[Dict[str, Any]] = Field(default_factory=list)
 
 
@@ -101,14 +126,14 @@ class ArticleAnalysis(BaseModel):
 
     checkpoint_eligible: bool = True
     incomplete_stages: List[str] = Field(default_factory=list)
-    theme: str = ""
-    key_arguments: List[str] = Field(default_factory=list)
-    structure_summary: str = ""
+    theme: LooseText = ""
+    key_arguments: LooseTextList = Field(default_factory=list)
+    structure_summary: LooseText = ""
 
     terminology: List[EnhancedTerm] = Field(default_factory=list)
     style: ArticleStyle = Field(default_factory=ArticleStyle)
     challenges: List[TranslationChallenge] = Field(default_factory=list)
-    guidelines: List[str] = Field(default_factory=list)
+    guidelines: LooseTextList = Field(default_factory=list)
 
     section_roles: Dict[str, SectionUnderstanding] = Field(default_factory=dict)
 

@@ -99,3 +99,22 @@ def test_term_note_flag_written_as_prose_does_not_abort_analysis(value, expected
     term = analysis.terminology[0]
     assert term.first_occurrence_note is expected
     assert term.alternatives == ["晶圆级封装"] and term.avoid == []
+
+
+def test_analysis_text_fields_written_as_objects_do_not_abort_translation():
+    # 2026-10-25 线上真实输出：key_arguments 每项写成 {"argument": …, "evidence": …}，ArticleAnalysis 校验失败，整篇补译中止
+    from src.core.models.analysis import SectionUnderstanding, TranslationChallenge
+
+    analysis = ArticleAnalysis(
+        theme={"zh": "数据中心加速"},
+        key_arguments=[{"argument": "美国超大规模云厂商开工量创新高", "evidence": "季度开工 MW 呈抛物线"}, "租约是领先指标"],
+        guidelines="数字单位保留 GW",
+        challenges=[TranslationChallenge(location={"section": "intro"}, issue=["FUD", "需要意译"])],
+        style=ArticleStyle(tone=None, target_audience=["投资者", "行业研究员"]),
+    )
+    assert analysis.theme == "数据中心加速"
+    assert analysis.key_arguments == ["美国超大规模云厂商开工量创新高；季度开工 MW 呈抛物线", "租约是领先指标"]
+    assert analysis.guidelines == ["数字单位保留 GW"]
+    assert analysis.challenges[0].issue == "FUD；需要意译" and analysis.challenges[0].suggestion is None
+    assert analysis.style.target_audience == "投资者；行业研究员"
+    assert SectionUnderstanding(key_points="只有一条").key_points == ["只有一条"]

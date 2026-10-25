@@ -8,5 +8,5 @@
 ## 大纲
 {sections_outline}
 
-只返回 JSON 对象，字段为 theme（一句话）、key_arguments（有证据的论点数组）、structure_summary、style（tone/target_audience/translation_voice）、terminology、challenges、guidelines。
+只返回 JSON 对象，字段为 theme（一句话）、key_arguments（字符串数组，每项一句：论点及其依据）、structure_summary、style（tone/target_audience/translation_voice）、terminology、challenges、guidelines。
 terminology 每项：term、context_meaning、translation（字符串或 null）、strategy、first_occurrence_note（true 或 false：首次出现是否括注原文，不要写成说明文字）、rationale、source_quote，可附 alternatives、avoid。challenges 每项：type、location、issue、suggestion。guidelines 只给当前样本确实需要的可执行建议，不强制正式语气或所有缩写加注。
