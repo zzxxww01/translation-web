@@ -28,7 +28,7 @@ export function SkillsFeature() {
     if (isUnauthorized(auth.error)) return <LoginPanel />;
     return (
       <div className="flex h-full items-center justify-center px-6 text-center text-sm text-text-muted">
-        skill-runner 服务连不上：{auth.error.message}
+        Agent 服务连不上：{auth.error.message}
       </div>
     );
   }
@@ -39,7 +39,7 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
   const queryClient = useQueryClient();
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedId = searchParams.get('run');
-  // 宽屏上「没选运行」就显示新建表单；窄屏列表和内容二选一，所以新建要单独的 URL 状态
+  // 宽屏上没选对话就显示「新对话」；窄屏列表和内容二选一，所以新对话要单独的 URL 状态
   const creating = !selectedId && searchParams.get('new') === '1';
   const showDetail = Boolean(selectedId) || creating;
   const runs = useRuns(true);
@@ -83,7 +83,7 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
         {showDetail && (
           <div className="border-b border-border-subtle px-3 py-2 md:hidden">
             <Button variant="ghost" size="sm" onClick={backToList}>
-              <ArrowLeft /> 任务
+              <ArrowLeft /> 对话记录
             </Button>
           </div>
         )}
@@ -100,7 +100,7 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
             ) : runs.isPending ? (
               <Spinner />
             ) : (
-              <div className="p-8 text-sm text-text-muted">这个任务不存在或已被删除。</div>
+              <div className="p-8 text-sm text-text-muted">这个对话不存在或已被删除。</div>
             )
           ) : (
             <NewRunForm

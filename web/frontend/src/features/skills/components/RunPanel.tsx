@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { ListChecks, Trash2, WifiOff } from 'lucide-react';
+import { FolderDown, Hand, WifiOff } from 'lucide-react';
 import { toast } from 'sonner';
 import {
   AlertDialog,
@@ -15,17 +15,19 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/Button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { skillsApi } from '../api';
+import { sendMessage, skillsApi } from '../api';
 import { skillKeys, useRunEvents } from '../hooks';
-import { foldEvents } from '../state';
-import type { Agent, RunMeta } from '../types';
-import { AgentIcon } from './AgentIcon';
 import { harnessLabel } from '../harness';
+import { CONTINUE_TEXT, displayStatus, foldEvents, runTitle } from '../state';
+import type { Agent, RunMeta } from '../types';
+import { AgentAvatar } from './AgentIcon';
 import { AssistantText, NoticeLine, ToolGroup, TurnDivider, UserBubble } from './ChatItems';
 import { Composer } from './Composer';
 import { QuestionCard } from './QuestionCard';
 import { SidePanel } from './SidePanel';
 import { StatusPill } from './StatusPill';
+
+const clock = new Intl.DateTimeFormat('zh-CN', { hour: '2-digit', minute: '2-digit' });
 
 interface RunPanelProps {
   run: RunMeta;
@@ -34,22 +36,24 @@ interface RunPanelProps {
   onDeleted: () => void;
 }
 
-/** 一个任务的对话页。父组件按 run.id 加 key，换任务时整体重建。 */
+/** 和一个 Agent 的一次对话。父组件按 run.id 加 key，换对话时整体重建。 */
 export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) {
   const queryClient = useQueryClient();
   const { events, connected } = useRunEvents(run.id);
   const view = useMemo(() => foldEvents(events), [events]);
   const status = view.status ?? run.status;
+  const shown = displayStatus(status, view.awaiting || (status === 'idle' && run.awaiting_reply));
   const active = status === 'running' || status === 'waiting';
   const pending = new Set(view.pendingQids);
   const scrollRef = useRef<HTMLDivElement>(null);
   const stickToBottom = useRef(true);
   const [deleting, setDeleting] = useState(false);
+  const [continuing, setContinuing] = useState(false);
 
   // 状态变化时让列表上的状态也跟着刷新，不用等轮询
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: skillKeys.runs });
-  }, [status, queryClient]);
+  }, [status, view.awaiting, queryClient]);
 
   useLayoutEffect(() => {
     const el = scrollRef.current;
@@ -68,35 +72,47 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
     }
   };
 
+  const continueAsSuggested = async () => {
+    setContinuing(true);
+    try {
+      await sendMessage(run.id, { message: CONTINUE_TEXT, files: [] });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '没发出去');
+    } finally {
+      setContinuing(false);
+    }
+  };
+
+  // 说完在等你确认（提问挂着时由提问卡片处理）
+  const awaitingText = shown === 'waiting' && pending.size === 0;
+  const autoAt = run.auto_reply_at ? clock.format(run.auto_reply_at * 1000) : null;
+
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-border-subtle px-5 py-3">
-        <div className="min-w-0">
-          <div className="flex items-center gap-2">
-            <h1 className="truncate text-lg text-text-primary">{run.title}</h1>
-            <StatusPill status={status} />
+      <header className="flex items-center gap-3 border-b border-border-subtle px-5 py-3">
+        <AgentAvatar icon={agent.icon} />
+        <div className="min-w-0 flex-1">
+          <h1 className="truncate text-base text-text-primary" title={run.title}>{runTitle(run.title)}</h1>
+          <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-text-muted">
+            <span>{agent.title} · {harnessLabel(run.harness)}</span>
+            <StatusPill status={shown} />
             {!connected && (
-              <span className="inline-flex items-center gap-1 text-xs text-text-muted" title="实时连接断开，正在重连">
+              <span className="inline-flex items-center gap-1" title="实时连接断开，正在重连">
                 <WifiOff className="h-3.5 w-3.5" /> 重连中
               </span>
             )}
           </div>
-          <div className="mt-0.5 flex items-center gap-1 text-xs text-text-muted">
-            <AgentIcon icon={agent.icon} className="h-3.5 w-3.5" />
-            {agent.title} · {harnessLabel(run.harness)}
-          </div>
         </div>
-        <div className="flex items-center gap-1">
-        {/* 窄屏没有右栏，进度和产出文件放进抽屉 */}
+        {/* 窄屏没有右栏，结果文件放进抽屉 */}
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="sm" className="lg:hidden">
-              <ListChecks /> 进度与文件
+              <FolderDown /> 结果文件
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="w-80 overflow-y-auto">
             <SheetHeader>
-              <SheetTitle>进度与文件</SheetTitle>
+              <SheetTitle>结果文件</SheetTitle>
             </SheetHeader>
             <div className="mt-4">
               <SidePanel runId={run.id} status={status} todos={view.todos} />
@@ -105,14 +121,14 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
         </Sheet>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant="ghost" size="sm" disabled={active || deleting} title={active ? '先中断再删除' : '删除这个任务和它的所有文件'}>
-              <Trash2 /> 删除
+            <Button variant="ghost" size="sm" disabled={active || deleting} title={active ? '先停止再删除' : '删除这个对话和它的所有文件'}>
+              删除
             </Button>
           </AlertDialogTrigger>
           <AlertDialogContent>
             <AlertDialogHeader>
-              <AlertDialogTitle>删除这个任务？</AlertDialogTitle>
-              <AlertDialogDescription>对话记录、上传的文件和所有产出都会从服务器上删掉，无法恢复。</AlertDialogDescription>
+              <AlertDialogTitle>删除这个对话？</AlertDialogTitle>
+              <AlertDialogDescription>对话记录、上传的文件和结果文件都会从服务器上删掉，无法恢复。</AlertDialogDescription>
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>取消</AlertDialogCancel>
@@ -120,7 +136,6 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
-        </div>
       </header>
 
       <div className="flex min-h-0 flex-1">
@@ -161,12 +176,26 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
               })}
               {status === 'running' && (
                 <div className="flex items-center gap-2 text-xs text-text-muted">
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary-500" /> Claude 正在工作
+                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-info" /> {agent.title}正在干活…
                 </div>
               )}
             </div>
           </div>
-          <Composer runId={run.id} status={status} hasPendingQuestion={pending.size > 0} maxUploadMb={maxUploadMb} />
+          {awaitingText && (
+            <div className="border-t border-warning/30 bg-warning-light px-4 py-2.5">
+              <div className="mx-auto flex max-w-3xl flex-wrap items-center gap-2 text-sm text-text-primary">
+                <Hand className="h-4 w-4 shrink-0 text-warning" />
+                <span className="min-w-0 flex-1">
+                  {agent.title}在等你确认上面的内容。可以直接回复要改什么
+                  {autoAt ? `；${autoAt} 前不回复，就按它的建议继续` : ''}。
+                </span>
+                <Button size="sm" onClick={() => void continueAsSuggested()} disabled={continuing}>
+                  {continuing ? '发送中…' : '按建议继续'}
+                </Button>
+              </div>
+            </div>
+          )}
+          <Composer runId={run.id} agent={agent} status={status} hasPendingQuestion={pending.size > 0} maxUploadMb={maxUploadMb} />
         </div>
         <div className="hidden w-72 shrink-0 overflow-y-auto border-l border-border-subtle px-4 py-5 lg:block">
           <SidePanel runId={run.id} status={status} todos={view.todos} />

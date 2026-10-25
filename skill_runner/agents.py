@@ -1,7 +1,7 @@
-"""agent 目录：页面上的「Claude 聊天 + 各专职 agent」。
+"""agent 目录：页面上的「通用 Agent + 各专职 Agent（翻译、字幕、播客……）」。
 
-一个 skill 就是一个 agent。名片（中文名、图标、说明、输入提示、示例）写在 agents.json，
-`skill` 为空串的那条是直接和 Claude 聊天。哪些 skill 启用仍由 SKILL_RUNNER_SKILLS 决定，
+一个 skill 就是一个 agent。名片（中文名、图标、说明、输入提示、示例、默认模型）写在 agents.json，
+`skill` 为空串的那条是通用 Agent（直接对话、不派发 skill）。哪些 skill 启用仍由 SKILL_RUNNER_SKILLS 决定，
 没写名片的 skill 回退到 skill 名和 SKILL.md 里的简介。
 """
 
@@ -12,15 +12,15 @@ import logging
 from pathlib import Path
 from typing import Any
 
-from .config import Config
+from .config import HARNESSES, Config
 from .store import iter_skill_catalog
 
 logger = logging.getLogger(__name__)
 
 CHAT_DEFAULT: dict[str, Any] = {
-    "title": "Claude",
-    "icon": "chat",
-    "description": "什么都能聊，也能在服务器上动手干活",
+    "title": "通用 Agent",
+    "icon": "general",
+    "description": "什么都能问，也能在服务器上动手干活",
     "hint": "想问什么、要做什么都可以，也可以附文件或贴链接",
     "examples": [],
 }
@@ -49,12 +49,14 @@ def _card(name: str, card: dict[str, Any], fallback: dict[str, Any], available: 
         "description": str(card.get("description") or fallback.get("description", "")),
         "hint": str(card.get("hint") or fallback.get("hint", "")),
         "examples": [str(e) for e in examples if isinstance(e, str)] if isinstance(examples, list) else [],
+        # 新对话默认用哪个模型跑（比如翻译默认 Codex：Claude 不肯全文翻付费文章）；页面上可以改
+        "harness": card.get("harness") if card.get("harness") in HARNESSES else "claude",
         "available": available,
     }
 
 
 def build_catalog(config: Config) -> list[dict[str, Any]]:
-    """Claude 聊天在第一位，后面按 SKILL_RUNNER_SKILLS 的顺序列出各 skill。"""
+    """通用 Agent 在第一位，后面按 SKILL_RUNNER_SKILLS 的顺序列出各 skill。"""
     cards = load_cards(config.agents_file)
     catalog = [_card("", cards.get("", {}), CHAT_DEFAULT, True)]
     for skill in iter_skill_catalog(config.skills_dir, config.skills):
@@ -64,7 +66,7 @@ def build_catalog(config: Config) -> list[dict[str, Any]]:
 
 
 def prompt_note(catalog: list[dict[str, Any]], skill: str) -> str:
-    """按任务追加给 Claude 的说明。聊天任务要知道还有哪些专职 agent，碰到它们的活就转介。"""
+    """按对话追加给 Claude / Codex 的说明。通用 Agent 要知道还有哪些专职 Agent，碰到它们的活就转介。"""
     if skill:
         return ""
     others = [a for a in catalog if a["name"] and a["available"]]
@@ -72,6 +74,6 @@ def prompt_note(catalog: list[dict[str, Any]], skill: str) -> str:
         return ""
     listing = "、".join(f"{a['title']}（{a['name']}）" for a in others)
     return (
-        f"- 这是直接聊天的任务。页面上另有专职 agent，各管一件事：{listing}。"
-        "用户要做的正好是其中某个的活时，请用户点「＋新任务」选对应的 agent 来做，不要自己调用这些 skill。\n"
+        f"- 这是和通用 Agent 的对话。页面上另有专职 Agent，各管一件事：{listing}。"
+        "用户要做的正好是其中某个的活时，请用户点「新对话」选对应的 Agent 来做，不要自己调用这些 skill。\n"
     )

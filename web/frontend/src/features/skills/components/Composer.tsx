@@ -4,17 +4,18 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import { Textarea } from '@/components/ui/textarea';
 import { sendMessage, skillsApi } from '../api';
-import type { RunStatus } from '../types';
+import type { Agent, RunStatus } from '../types';
 import { AttachmentPicker } from './AttachmentChips';
 
 interface ComposerProps {
   runId: string;
+  agent: Agent;
   status: RunStatus | null;
   hasPendingQuestion: boolean;
   maxUploadMb: number;
 }
 
-export function Composer({ runId, status, hasPendingQuestion, maxUploadMb }: ComposerProps) {
+export function Composer({ runId, agent, status, hasPendingQuestion, maxUploadMb }: ComposerProps) {
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [progress, setProgress] = useState<number | null>(null);
@@ -42,7 +43,7 @@ export function Composer({ runId, status, hasPendingQuestion, maxUploadMb }: Com
     try {
       await skillsApi.interrupt(runId);
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : '中断失败');
+      toast.error(error instanceof Error ? error.message : '停止失败');
     } finally {
       setStopping(false);
     }
@@ -51,35 +52,38 @@ export function Composer({ runId, status, hasPendingQuestion, maxUploadMb }: Com
   const placeholder = hasPendingQuestion
     ? '也可以直接在这里写字回答上面的问题'
     : active
-      ? '运行中也可以补充说明，Claude 会在合适的时候看到'
+      ? `${agent.title}在干活，也可以随时补充说明`
       : status === 'error'
-        ? '发一条消息（比如「继续」）从断点接着跑'
-        : '回复 Claude，或者交代下一步';
+        ? '发一条消息（比如「继续」）从断点接着做'
+        : `回复${agent.title}，或者交代下一步`;
 
   return (
     <div className="border-t border-border-subtle bg-white px-4 py-3">
-      <Textarea
-        rows={2}
-        value={message}
-        onChange={event => setMessage(event.target.value)}
-        onKeyDown={event => {
-          if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) send();
-        }}
-        placeholder={placeholder}
-        className="min-h-[3.5rem] resize-y"
-      />
-      <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
-        <AttachmentPicker files={files} onChange={setFiles} disabled={progress !== null} compact />
-        <div className="flex items-center gap-2">
-          {tooLarge && <span className="text-xs text-error">{tooLarge.name} 超过 {maxUploadMb} MB</span>}
-          {active && (
-            <Button variant="outline" size="sm" onClick={stop} disabled={stopping}>
-              <Square /> {stopping ? '中断中…' : '中断'}
+      <div className="mx-auto max-w-3xl">
+        <Textarea
+          rows={2}
+          value={message}
+          onChange={event => setMessage(event.target.value)}
+          onKeyDown={event => {
+            if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) void send();
+          }}
+          placeholder={placeholder}
+          aria-label="回复"
+          className="min-h-[3.5rem] resize-y"
+        />
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-2">
+          <AttachmentPicker files={files} onChange={setFiles} disabled={progress !== null} compact />
+          <div className="flex items-center gap-2">
+            {tooLarge && <span className="text-xs text-error">{tooLarge.name} 超过 {maxUploadMb} MB</span>}
+            {active && (
+              <Button variant="outline" size="sm" onClick={stop} disabled={stopping} title="让它停下来，之后发消息可以接着做">
+                <Square /> {stopping ? '停止中…' : '停止'}
+              </Button>
+            )}
+            <Button size="sm" onClick={() => void send()} disabled={!canSend} title="Ctrl/⌘ + Enter">
+              <Send /> {progress === null ? '发送' : progress < 100 ? `上传 ${progress}%` : '发送中…'}
             </Button>
-          )}
-          <Button size="sm" onClick={send} disabled={!canSend} title="Ctrl/⌘ + Enter">
-            <Send /> {progress === null ? '发送' : progress < 100 ? `上传 ${progress}%` : '发送中…'}
-          </Button>
+          </div>
         </div>
       </div>
     </div>

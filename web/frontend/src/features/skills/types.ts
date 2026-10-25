@@ -21,14 +21,17 @@ export interface RunMeta {
   auto_reply_at?: number | null;
 }
 
-/** 页面上的一个 agent（名片来自 skill_runner/agents.json）。name 是 skill 名，空串表示直接和 Claude 聊天。 */
+/** 页面上的一个 Agent（名片来自 skill_runner/agents.json）。name 是 skill 名，空串是通用 Agent（直接对话）。 */
 export interface Agent {
   name: string;
   title: string;
   icon: string;
   description: string;
+  /** 要给它什么（输入框的提示） */
   hint: string;
   examples: string[];
+  /** 新对话默认用哪个模型跑 */
+  harness: 'claude' | 'codex';
   available: boolean;
 }
 
@@ -66,7 +69,7 @@ export type SkillEvent = Base &
     | { type: 'question'; qid: string; questions: Question[] }
     | { type: 'answer'; qid: string; answers?: Answers; response?: string }
     | { type: 'todos'; items: TodoItem[] }
-    | { type: 'status'; status: RunStatus; error: string | null }
+    | { type: 'status'; status: RunStatus; error: string | null; awaiting?: boolean }
     | { type: 'result'; is_error: boolean; subtype: string; duration_ms: number; num_turns: number; errors: string[] }
     | { type: 'notice'; level: 'info' | 'warn' | 'error'; text: string }
     | { type: 'error'; text: string }

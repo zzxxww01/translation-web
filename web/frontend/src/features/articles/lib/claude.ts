@@ -26,10 +26,10 @@ export function findClaudeOutputs(files: RunFile[]): { zh: string; en: string } 
   return null;
 }
 
-/** 把原文交给 Claude Code 或 Codex 跑 four-step-translate，并记下这篇文章对应的任务。 */
-export async function startClaudeTrack(projectId: string, harness: Harness = 'claude'): Promise<RunMeta> {
+/** 把原文交给翻译 Agent（Claude Code 或 Codex 跑 four-step-translate），并记下这篇文章对应的对话。title 是对话标题（文章标题）。 */
+export async function startClaudeTrack(projectId: string, harness: Harness = 'claude', title?: string): Promise<RunMeta> {
   const html = await articlesApi.sourceHtml(projectId);
-  const run = await startRun({ skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html], harness, autoReplyMinutes: AUTO_REPLY_MINUTES });
+  const run = await startRun({ skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html], harness, autoReplyMinutes: AUTO_REPLY_MINUTES, title });
   await articlesApi.setClaudeRun(projectId, run.id);
   return run;
 }

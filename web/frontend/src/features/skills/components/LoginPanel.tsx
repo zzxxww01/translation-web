@@ -37,7 +37,7 @@ export function LoginPanel() {
           <h1 className="text-xl">Agent</h1>
         </div>
         <p className="mb-5 text-sm leading-relaxed text-text-muted">
-          这里会用你的 Claude / ChatGPT 订阅在服务器上对话、跑 skill，需要先输入口令。
+          Agent 会在服务器上帮你干活（翻译、字幕、播客……）。先输入口令，这台设备会记住一年。
         </p>
         <Input
           type="password"

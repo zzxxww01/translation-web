@@ -217,7 +217,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const startClaude = async (harness: Harness = 'codex') => {
     setBusy(true);
     try {
-      await startClaudeTrack(project.id, harness);
+      await startClaudeTrack(project.id, harness, title);
       setClaudeNote(null);
       importTried.current = null;
       toast.success(`已交给 ${harnessLabel(harness)}；它需要你确认时这里会提示`);

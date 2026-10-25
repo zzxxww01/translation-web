@@ -1,20 +1,20 @@
 import { cn } from '@/lib/utils';
-import { STATUS_LABEL } from '../state';
-import type { RunStatus } from '../types';
+import { STATUS_LABEL, type DisplayStatus } from '../state';
 
-const STYLE: Record<RunStatus, string> = {
-  running: 'bg-primary-50 text-primary-700',
-  waiting: 'bg-amber-50 text-amber-700',
-  idle: 'bg-bg-tertiary text-text-secondary',
-  error: 'bg-red-50 text-red-700',
+const STYLE: Record<DisplayStatus, { text: string; dot?: string }> = {
+  running: { text: 'text-info', dot: 'animate-pulse bg-info' },
+  waiting: { text: 'text-warning', dot: 'bg-warning' },
+  done: { text: 'text-text-muted' },
+  error: { text: 'text-error' },
 };
 
-export function StatusPill({ status, className }: { status: RunStatus; className?: string }) {
+/** 对话状态，用字说清楚：进行中 / 等你确认 / 完成 / 已中断 */
+export function StatusPill({ status, className }: { status: DisplayStatus | null; className?: string }) {
+  if (!status) return null;
+  const style = STYLE[status];
   return (
-    <span className={cn('inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-xs font-medium', STYLE[status], className)}>
-      {(status === 'running' || status === 'waiting') && (
-        <span className={cn('h-1.5 w-1.5 rounded-full', status === 'running' ? 'animate-pulse bg-primary-500' : 'bg-amber-500')} />
-      )}
+    <span className={cn('inline-flex shrink-0 items-center gap-1.5 text-xs font-medium', style.text, className)}>
+      {style.dot && <span className={cn('h-1.5 w-1.5 rounded-full', style.dot)} />}
       {STATUS_LABEL[status]}
     </span>
   );

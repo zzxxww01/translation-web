@@ -12,23 +12,24 @@ vi.mock('./api', () => ({ startRun, AUTO_REPLY_MINUTES: 10 }));
 vi.mock('sonner', () => ({ toast: { error: vi.fn() } }));
 
 const SERVER: Partial<Agent>[] = [
-  { name: '', title: 'Claude', icon: 'chat', description: '什么都能聊', hint: '想问什么都可以', examples: ['查一下 HBM4'], available: true },
-  { name: 'video-bilingual-subber', title: '视频字幕', icon: 'video', description: '加字幕', hint: '贴视频链接', examples: ['这个视频加中英双语字幕：'], available: true },
-  { name: 'podcast-cn-dubber', title: '播客配音', icon: 'podcast', description: '', hint: '', examples: [], available: false },
+  { name: '', title: '通用 Agent', icon: 'general', description: '什么都能问', hint: '想问什么都可以', examples: ['查一下 HBM4'], harness: 'claude', available: true },
+  { name: 'four-step-translate', title: '翻译 Agent', icon: 'translate', description: '精翻英文长文', hint: '传文章 HTML', examples: [], harness: 'codex', available: true },
+  { name: 'video-bilingual-subber', title: '字幕 Agent', icon: 'subtitle', description: '加字幕', hint: '贴视频链接', examples: ['这个视频加中英双语字幕：'], harness: 'claude', available: true },
+  { name: 'podcast-cn-dubber', title: '播客 Agent', icon: 'podcast', description: '', hint: '', examples: [], available: false },
 ];
 
 describe('normalizeCatalog', () => {
-  it('keeps chat first and fills fields an older server does not send', () => {
+  it('keeps the general agent first and fills fields an older server does not send', () => {
     const catalog = normalizeCatalog([{ name: 'x', description: 'X 的简介', available: true }]);
     expect(catalog[0]).toEqual(CHAT_AGENT);
-    expect(catalog[1]).toMatchObject({ name: 'x', title: 'x', icon: 'skill', hint: '', examples: [] });
-    expect(normalizeCatalog(SERVER).map(a => a.name)).toEqual(['', 'video-bilingual-subber', 'podcast-cn-dubber']);
+    expect(catalog[1]).toMatchObject({ name: 'x', title: 'x', icon: 'skill', hint: '', examples: [], harness: 'claude' });
+    expect(normalizeCatalog(SERVER).map(a => a.name)).toEqual(['', 'four-step-translate', 'video-bilingual-subber', 'podcast-cn-dubber']);
   });
 
-  it('finds the agent of a run, falling back for skills no longer listed', () => {
+  it('finds the agent of a conversation, falling back for skills no longer listed', () => {
     const catalog = normalizeCatalog(SERVER);
-    expect(findAgent(catalog, '').title).toBe('Claude');
-    expect(findAgent(catalog, 'video-bilingual-subber').title).toBe('视频字幕');
+    expect(findAgent(catalog, '').title).toBe('通用 Agent');
+    expect(findAgent(catalog, 'video-bilingual-subber').title).toBe('字幕 Agent');
     expect(findAgent(catalog, 'gone')).toMatchObject({ title: 'gone', icon: 'skill' });
   });
 });
@@ -37,19 +38,23 @@ describe('NewRunForm', () => {
   let root: Root;
   let host: HTMLDivElement;
 
-  const button = (label: string) =>
-    Array.from(host.querySelectorAll('button')).find(el => el.textContent?.trim() === label || el.getAttribute('aria-label') === label);
+  const radio = (group: string, name: string) =>
+    Array.from(host.querySelectorAll(`[role="radiogroup"][aria-label="${group}"] [role="radio"]`)).find(el =>
+      el.textContent?.startsWith(name)
+    ) as HTMLButtonElement | undefined;
+  const button = (label: string) => Array.from(host.querySelectorAll('button')).find(el => el.textContent?.trim() === label);
   const textarea = () => host.querySelector('textarea')!;
-  const click = async (label: string) => {
-    expect(button(label), `button「${label}」`).toBeDefined();
+  const click = async (el: HTMLElement | undefined, what: string) => {
+    expect(el, what).toBeDefined();
     await act(async () => {
-      button(label)!.click();
+      el!.click();
       await new Promise(resolve => setTimeout(resolve, 20));
     });
   };
 
   beforeEach(async () => {
     vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true);
+    localStorage.clear();
     startRun.mockReset().mockResolvedValue({ id: 'r1' });
     host = document.createElement('div');
     document.body.appendChild(host);
@@ -68,39 +73,46 @@ describe('NewRunForm', () => {
     host.remove();
   });
 
-  it('chats with Claude until an agent is picked, then hints what that agent needs', async () => {
+  it('starts on the general agent; picking a card says what to give that agent', async () => {
+    expect(radio('选 Agent', '通用 Agent')!.getAttribute('aria-checked')).toBe('true');
     expect(textarea().placeholder).toBe('想问什么都可以');
-    expect(button('播客配音')!.disabled).toBe(true); // 服务器上没装
+    expect(radio('选 Agent', '播客 Agent')!.disabled).toBe(true); // 服务器上没装
+    expect(host.textContent).toContain('服务器上还没装这个 Agent');
 
-    await click('视频字幕');
-    expect(button('视频字幕')!.getAttribute('aria-pressed')).toBe('true');
+    await click(radio('选 Agent', '字幕 Agent'), '字幕卡片');
+    expect(radio('选 Agent', '字幕 Agent')!.getAttribute('aria-checked')).toBe('true');
     expect(textarea().placeholder).toBe('贴视频链接');
-    expect(host.textContent).toContain('加字幕');
-
-    await click('不用视频字幕，改为和 Claude 聊');
-    expect(textarea().placeholder).toBe('想问什么都可以');
+    expect(host.textContent).toContain('交给 字幕 Agent');
   });
 
-  it('starts the task on Codex once Codex is picked, and remembers the choice', async () => {
-    await click('Codex');
-    expect(button('Codex')!.getAttribute('aria-checked')).toBe('true');
-    expect(localStorage.getItem('momo.agent.harness')).toBe('codex');
-    await click('视频字幕');
-    await click('这个视频加中英双语字幕：');
-    await click('开始');
-    expect(startRun).toHaveBeenCalledWith(expect.objectContaining({ skill: 'video-bilingual-subber', harness: 'codex' }), expect.any(Function));
-    localStorage.removeItem('momo.agent.harness');
+  it('uses each agent\'s default model and remembers a change per agent', async () => {
+    expect(radio('模型', 'Claude')!.getAttribute('aria-checked')).toBe('true');
+    await click(radio('选 Agent', '翻译 Agent'), '翻译卡片');
+    expect(radio('模型', 'Codex')!.getAttribute('aria-checked')).toBe('true'); // 翻译默认 Codex
+
+    await click(radio('模型', 'Claude'), 'Claude');
+    expect(JSON.parse(localStorage.getItem('momo.agent.model')!)).toEqual({ 'four-step-translate': 'claude' });
+    await click(radio('选 Agent', '通用 Agent'), '通用卡片');
+    await click(radio('选 Agent', '翻译 Agent'), '翻译卡片');
+    expect(radio('模型', 'Claude')!.getAttribute('aria-checked')).toBe('true');
   });
 
-  it('fills an example and starts the task with the picked agent', async () => {
-    await click('视频字幕');
-    await click('这个视频加中英双语字幕：');
+  it('fills an example and starts the conversation with the picked agent', async () => {
+    await click(radio('选 Agent', '字幕 Agent'), '字幕卡片');
+    await click(button('这个视频加中英双语字幕：'), '示例');
     expect(textarea().value).toBe('这个视频加中英双语字幕：');
 
-    await click('开始');
+    await click(button('开始'), '开始');
     expect(startRun).toHaveBeenCalledWith(
       { skill: 'video-bilingual-subber', message: '这个视频加中英双语字幕：', files: [], harness: 'claude', autoReplyMinutes: 10 },
       expect.any(Function)
     );
+  });
+
+  it('can turn off auto-continue', async () => {
+    await click(button('查一下 HBM4'), '示例');
+    await click(host.querySelector('input[type="checkbox"]') as HTMLInputElement, '自动继续');
+    await click(button('开始'), '开始');
+    expect(startRun).toHaveBeenCalledWith(expect.objectContaining({ skill: '', autoReplyMinutes: 0 }), expect.any(Function));
   });
 });

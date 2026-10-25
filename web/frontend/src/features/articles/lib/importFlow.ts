@@ -13,7 +13,7 @@ export const runsAgent = (plan: ImportPlan) => plan === 'agent' || plan === 'bot
 
 /** 导入 → 按计划启动网页版和 Agent。某一路没能开始不挡住进工作台，只提示。返回主项目 id。 */
 export async function importAndTranslate(
-  article: Pick<SubstackArticle, 'url'>,
+  article: Pick<SubstackArticle, 'url'> & Partial<Pick<SubstackArticle, 'title' | 'zh_title'>>,
   plan: ImportPlan,
   harness: Harness,
   notify: (message: string) => void = message => toast.warning(message),
@@ -30,7 +30,7 @@ export async function importAndTranslate(
   }
   if (runsAgent(plan)) {
     try {
-      await startClaudeTrack(projectId, harness);
+      await startClaudeTrack(projectId, harness, article.zh_title || article.title);
     } catch (error) {
       notify(isUnauthorized(error)
         ? '要先在 Agent 页登录一次：登录后在工作台里重新交给 Codex / Claude'

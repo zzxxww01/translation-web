@@ -57,7 +57,7 @@ function postMultipart<T>(path: string, form: FormData, onProgress?: (percent: n
 export const AUTO_REPLY_MINUTES = 10;
 
 export function startRun(
-  input: { skill: string; message: string; files: File[]; harness?: 'claude' | 'codex'; autoReplyMinutes?: number },
+  input: { skill: string; message: string; files: File[]; harness?: 'claude' | 'codex'; autoReplyMinutes?: number; title?: string },
   onProgress?: (percent: number) => void
 ): Promise<RunMeta> {
   const form = new FormData();
@@ -65,6 +65,7 @@ export function startRun(
   form.append('harness', input.harness ?? 'claude');
   form.append('message', input.message);
   if (input.autoReplyMinutes) form.append('auto_reply_minutes', String(input.autoReplyMinutes));
+  if (input.title) form.append('title', input.title);
   input.files.forEach(file => form.append('files', file));
   return postMultipart<RunMeta>('/runs', form, onProgress);
 }

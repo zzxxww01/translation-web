@@ -79,20 +79,19 @@ export function ToolGroup({ tools, active }: { tools: ToolCall[]; active: boolea
   const [open, setOpen] = useState(false);
   const failed = tools.filter(t => t.result && !t.result.ok).length;
   const running = active && tools.some(t => !t.result);
-  const last = tools[tools.length - 1];
 
   return (
-    <div className="rounded-lg border border-border-subtle bg-white">
+    <div className="rounded-lg border border-border-subtle bg-white/70">
       <button
         type="button"
         onClick={() => setOpen(v => !v)}
         className="flex w-full items-center gap-2 px-3 py-2 text-left text-xs text-text-secondary"
       >
         <ChevronRight className={cn('h-3.5 w-3.5 shrink-0 transition-transform', open && 'rotate-90')} />
-        {running ? <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-primary-500" /> : null}
-        <span className="shrink-0">运行了 {tools.length} 个工具</span>
-        {failed > 0 && <span className="shrink-0 text-error">· {failed} 个失败</span>}
-        {!open && <span className="truncate text-text-muted">· {last.name} {last.summary}</span>}
+        {running ? <Loader2 className="h-3.5 w-3.5 shrink-0 animate-spin text-info" /> : null}
+        <span className="shrink-0">{running ? `正在做第 ${tools.length} 步操作` : `做了 ${tools.length} 步操作`}</span>
+        {failed > 0 && <span className="shrink-0 text-text-muted">（{failed} 步没成功，它会自己处理）</span>}
+        {!open && <span className="ml-auto shrink-0 text-text-muted">点开看细节</span>}
       </button>
       {open && (
         <ul className="border-t border-border-subtle px-3 py-1.5">
@@ -126,7 +125,7 @@ export function TurnDivider({ durationMs, isError, errors }: { durationMs: numbe
     <div className="flex items-center gap-3 text-[11px] text-text-muted">
       <span className="h-px flex-1 bg-border-subtle" />
       <span className={cn(isError && 'text-error')}>
-        {isError ? `本轮出错${errors.length ? `：${errors.join('；')}` : ''}` : '本轮结束'} · 用时 {formatDuration(durationMs)}
+        {isError ? `这一轮出错了${errors.length ? `：${errors.join('；')}` : ''}` : `用时 ${formatDuration(durationMs)}`}
       </span>
       <span className="h-px flex-1 bg-border-subtle" />
     </div>

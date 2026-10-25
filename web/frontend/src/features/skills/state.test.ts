@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, it } from 'vitest';
-import { foldEvents, formatBytes, formatDuration, mergeEvents } from './state';
+import { displayStatus, foldEvents, formatBytes, formatDuration, mergeEvents, runTitle } from './state';
 import { renderMarkdown } from './markdown';
 import { isStalled, STALL_MS } from './hooks';
 import type { SkillEvent } from './types';
@@ -67,6 +67,33 @@ describe('foldEvents', () => {
       'notice:error',
       'turn',
     ]);
+  });
+});
+
+describe('waiting for confirmation', () => {
+  it('shows an agent that stopped to ask as waiting, and hides the marker line', () => {
+    seq = 0;
+    const view = foldEvents([
+      ev({ type: 'text', text: '术语表如下……\n【等待确认】', parent: null }),
+      ev({ type: 'status', status: 'idle', error: null, awaiting: true }),
+    ]);
+    expect(view.items).toEqual([{ kind: 'text', key: '1', text: '术语表如下……' }]);
+    expect(view.awaiting).toBe(true);
+    expect(displayStatus(view.status, view.awaiting)).toBe('waiting');
+  });
+
+  it('says plainly whether it is working, waiting, done or interrupted', () => {
+    expect(displayStatus('running')).toBe('running');
+    expect(displayStatus('waiting')).toBe('waiting');
+    expect(displayStatus('idle')).toBe('done');
+    expect(displayStatus('idle', true)).toBe('waiting');
+    expect(displayStatus('error')).toBe('error');
+    expect(displayStatus(null)).toBeNull();
+  });
+
+  it('keeps only the first sentence of a long instruction-style title', () => {
+    expect(runTitle('精翻附件里的这篇文章。输出目录放在当前目录下的 output/ 里（不用 SKILL.md 配置里的 output_root）。')).toBe('精翻附件里的这篇文章');
+    expect(runTitle('数据中心 2027：加速之年')).toBe('数据中心 2027：加速之年');
   });
 });
 

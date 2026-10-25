@@ -150,9 +150,10 @@ describe('importAndTranslate', () => {
     ['agent', false, true],
     ['import', false, false],
   ] as const)('plan %s: web %s, agent %s', async (plan, web, agent) => {
-    await expect(importAndTranslate({ url: 'u' }, plan, 'codex', vi.fn())).resolves.toBe('p1');
+    await expect(importAndTranslate({ url: 'u', title: 'Demo', zh_title: '演示' }, plan, 'codex', vi.fn())).resolves.toBe('p1');
     expect(api.startWorkflow.mock.calls).toEqual(web ? [['p1']] : []);
-    expect(claude.startClaudeTrack.mock.calls).toEqual(agent ? [['p1', 'codex']] : []);
+    // 对话标题用文章的中文标题
+    expect(claude.startClaudeTrack.mock.calls).toEqual(agent ? [['p1', 'codex', '演示']] : []);
   });
 
   it('does not start anything again for an article imported before', async () => {

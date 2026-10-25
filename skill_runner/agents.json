@@ -1,10 +1,10 @@
 [
   {
     "skill": "",
-    "title": "Claude",
-    "icon": "chat",
-    "description": "什么都能聊，也能在服务器上动手干活：查资料、处理文件、看 momo 的情况",
-    "hint": "想问什么、要做什么都可以，也可以附文件或贴链接",
+    "title": "通用 Agent",
+    "icon": "general",
+    "description": "什么都能问，也能在服务器上动手：查资料、处理文件、看 momo 的情况",
+    "hint": "想问什么、要做什么直接说，也可以附文件或贴链接",
     "examples": [
       "看看 momo 最近一小时有没有报错",
       "把附件里的表格整理成 Markdown",
@@ -13,9 +13,10 @@
   },
   {
     "skill": "four-step-translate",
-    "title": "文章精翻",
-    "icon": "article",
-    "description": "SemiAnalysis 这类英文长文，四步精翻成可发布的中文稿；中途会请你确认术语",
+    "title": "翻译 Agent",
+    "icon": "translate",
+    "harness": "codex",
+    "description": "把 SemiAnalysis 这类英文长文精翻成能发布的中文稿，中途会请你确认术语",
     "hint": "传文章的 HTML 文件，或贴文章链接",
     "examples": [
       "精翻附件里的这篇文章",
@@ -24,9 +25,9 @@
   },
   {
     "skill": "video-bilingual-subber",
-    "title": "视频字幕",
-    "icon": "video",
-    "description": "给视频加中文或中英双语硬字幕，也能只出双语文稿；长视频分段转写",
+    "title": "字幕 Agent",
+    "icon": "subtitle",
+    "description": "给视频加中文或中英双语字幕，也能只出双语文稿；长视频分段转写",
     "hint": "贴视频链接或传视频文件，说要中文字幕还是中英双语",
     "examples": [
       "这个视频加中英双语字幕：",
@@ -35,7 +36,7 @@
   },
   {
     "skill": "podcast-cn-dubber",
-    "title": "播客配音",
+    "title": "播客 Agent",
     "icon": "podcast",
     "description": "把英文播客或访谈做成自然的中文播客 mp3，带章节和节目简介",
     "hint": "贴播客或视频链接，或传音频文件",

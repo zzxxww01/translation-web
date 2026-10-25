@@ -91,7 +91,7 @@ def test_catalog_lists_chat_first_with_agent_cards(setup):
     client, _, _ = setup
     login(client)
     catalog = client.get(f"{PREFIX}/catalog").json()
-    assert catalog[0]["name"] == "" and catalog[0]["title"] == "Claude"
+    assert catalog[0]["name"] == "" and catalog[0]["title"] == "通用 Agent"
     assert [a["name"] for a in catalog[1:]] == ["four-step-translate", "podcast-cn-dubber"]
     assert all({"title", "icon", "hint", "examples", "available"} <= a.keys() for a in catalog)
 

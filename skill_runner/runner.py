@@ -148,9 +148,11 @@ def build_prompt(
     return text
 
 
-def make_title(message: str, attachments: list[str]) -> str:
+def make_title(message: str, attachments: list[str], title: str = "") -> str:
+    """对话标题：调用方给了（比如文章工作台给文章标题）就用它，否则用消息第一句，再不然用附件名。"""
     first_line = message.strip().splitlines()[0] if message.strip() else ""
-    title = first_line or (Path(attachments[0]).name if attachments else "新运行")
+    first_sentence = first_line.split("。")[0] if len(first_line) > 30 else first_line
+    title = title.strip() or first_sentence or (Path(attachments[0]).name if attachments else "新对话")
     return title[:60]
 
 
@@ -202,7 +204,8 @@ class Runner:
         run.meta.error = error
         run.meta.updated_at = time.time()
         self.store.save_meta(run.meta)
-        self._emit(run, {"type": "status", "status": status, "error": error})
+        # awaiting：这一轮结束时是在等用户确认（不是做完了），页面据此显示「等你确认」
+        self._emit(run, {"type": "status", "status": status, "error": error, "awaiting": run.meta.awaiting_reply})
 
     def subscribe(self, run_id: str, after_seq: int = 0) -> tuple[list[dict[str, Any]], asyncio.Queue]:
         run = self._get(run_id)
