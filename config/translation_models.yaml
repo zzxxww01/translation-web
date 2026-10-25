@@ -17,9 +17,9 @@ default:
 
   # Phase 2: 精修和润色
   phase2_refine:
-    model: "gemini-flash"
+    model: "gemini-official-argon"
     temperature: 0.3
-    description: "审校与定点修订，与初稿同用 Gemini 3.8 Flash"
+    description: "审校、定点修订与复查用官方 argon：3.8 Flash 审校几乎不报问题，argon 能抓术语/程度问题且不产生思考 token，成本相当"
 
   # Phase 3: 质量报告生成
   phase3_review:

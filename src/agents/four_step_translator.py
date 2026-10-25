@@ -332,8 +332,10 @@ class FourStepTranslator:
         )
         self.feedback_history.append(feedback)
 
+        from src.settings import settings
         if (
             self.memory_service
+            and settings.learn_rules_from_reviews
             and reflection.scores_available
             and reflection.overall_score < 8.0
             and reflection.issues

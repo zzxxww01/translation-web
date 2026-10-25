@@ -97,6 +97,11 @@ class Settings(BaseSettings):
     # Obsidian-oriented LaTeX delimiter rewrite (\( \) → $ $) in markdown
     # postprocess. Off by default: exports keep the source delimiters (A-15).
     latex_obsidian_normalize: bool = False
+    # Extract candidate rules from the model's own review comments after every
+    # reviewed section. Off by default: it costs one call per section and the
+    # candidates are model opinions awaiting approval. Rules learned from the
+    # user's own edits and retranslation instructions are unaffected.
+    learn_rules_from_reviews: bool = False
 
     # Logging
     log_level: str = "INFO"
