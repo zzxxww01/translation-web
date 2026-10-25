@@ -28,7 +28,7 @@ providers:
       supports_thinking: false
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     - alias: gemini-pro-fallback
       real_model: gemini-3.1-pro-preview
@@ -38,7 +38,7 @@ providers:
       supports_thinking: true
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     - alias: gemini-preview-fallback
       real_model: gemini-3.1-pro-preview
@@ -48,7 +48,7 @@ providers:
       supports_thinking: true
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     - alias: gemini-official-argon
       real_model: gemini-4-argon
@@ -59,7 +59,7 @@ providers:
       fallback: false
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     retry_config:
       max_retries: 5
@@ -125,7 +125,7 @@ providers:
       supports_thinking: false
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     - alias: gemini-pro
       real_model: gemini-3.8-flash
@@ -135,7 +135,7 @@ providers:
       supports_thinking: true
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     - alias: gemini-preview
       real_model: gemini-3.8-flash
@@ -145,7 +145,7 @@ providers:
       supports_thinking: true
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     retry_config:
       max_retries: 3
