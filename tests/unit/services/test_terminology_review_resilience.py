@@ -139,3 +139,18 @@ def test_whole_article_goes_in_one_call_and_unseen_or_known_terms_are_dropped(tm
     terms = [c["term"] for section in payload["sections"] for c in section["candidates"]]
     assert terms == ["interposer"]
     assert payload["sections"][0]["candidates"][0]["occurrence_count"] == 3
+
+
+def test_alternative_suggestions_keep_one_rendering_for_auto_accept(tmp_path):
+    class AlternativesLLM:
+        def generate(self, prompt, **_kwargs):
+            return json.dumps({"terms": [{"term": "rack scale", "suggested_translation": "机架级 / 整机柜级",
+                                          "reason": "两种常见说法"}]}, ensure_ascii=False)
+
+    service = _build_service(tmp_path, AlternativesLLM(), [
+        Section(section_id="s1", title="Rack scale inference",
+                paragraphs=[Paragraph(id="p1", index=0, source="Rack scale systems beat rack scale rivals.")])])
+
+    candidate = service.prepare_review("demo")["sections"][0]["candidates"][0]
+    assert candidate["suggested_translation"] == "机架级"
+    assert "机架级 / 整机柜级" in candidate["contexts"][0]

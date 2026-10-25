@@ -12,4 +12,4 @@
 {existing_terms}
 ## 正文
 {article_text}
-只返回 JSON 对象 {{"terms":[]}}。每项含 term（原文写法）、suggested_translation（建议译法；建议保留原文就写原文）、reason（为什么需要拍板，一句话）、section_id（首次出现的章节 ID）、source_quote（原文中包含该词的一个短片段）。
+只返回 JSON 对象 {{"terms":[]}}。每项含 term（原文写法）、suggested_translation（只写一个最推荐的译法；建议保留原文就写原文）、reason（为什么需要拍板，一句话，其他候选译法写在这里）、section_id（首次出现的章节 ID）、source_quote（原文中包含该词的一个短片段）。

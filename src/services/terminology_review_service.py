@@ -151,10 +151,15 @@ class TerminologyReviewService:
                 continue  # not a source occurrence
             candidate = aggregated.setdefault(normalized, AggregatedCandidate(term=term))
             candidate.model_selected = True
-            suggestion = str(term_data.get("suggested_translation") or "").strip()
+            raw_suggestion = str(term_data.get("suggested_translation") or "").strip()
+            # Auto-accept writes the suggestion into the glossary verbatim, so keep one
+            # rendering; "A / B" alternatives stay visible in the reason for the reviewer.
+            suggestion = raw_suggestion.split(" / ")[0].strip()
             if suggestion:
                 candidate.suggested_translations[suggestion] += 1
             reason = str(term_data.get("reason") or term_data.get("context") or "").strip()
+            if suggestion != raw_suggestion:
+                reason = f"{reason}（候选：{raw_suggestion}）" if reason else f"候选：{raw_suggestion}"
             if reason and reason not in candidate.contexts:
                 candidate.contexts.append(reason)
             for section, count in hits:
