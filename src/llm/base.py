@@ -16,6 +16,13 @@ logger = logging.getLogger(__name__)
 
 logger = logging.getLogger(__name__)
 
+SECTION_TITLE_MAX_LENGTH = 20
+
+
+def section_title_length(title: str) -> int:
+    """空格不计：导出时会在中英文之间自动补空格，计入空格只会逼模型删空格。"""
+    return len("".join(title.split()))
+
 
 class LLMProvider(ABC):
     """LLM Provider 基类"""
@@ -257,7 +264,37 @@ class LLMProvider(ABC):
                 })
             except Exception as exc:
                 logger.warning("Title still unresolved %s: %s", key, type(exc).__name__)
+        too_long = [s for s in sections if section_title_length(results.get(str(s["id"]), "")) > SECTION_TITLE_MAX_LENGTH]
+        if too_long:
+            results.update(self._shorten_section_titles(too_long, results, article_theme, glossary_block, whitelist_rules))
         return results  # missing keys remain explicit failures; never return English as success
+
+    def _shorten_section_titles(self, sections: List[Dict[str, Any]], current: Dict[str, str], article_theme: str,
+                                glossary_block: str, whitelist_rules: str) -> Dict[str, str]:
+        """One rewrite for titles over the hard length limit; a rewrite that is not shorter is ignored."""
+        from ..prompts.task_builders import section_titles_prompt
+        from ..prompts.contracts import object_response
+        overlong = "\n".join(
+            f"- {s['id']}：{current[str(s['id'])]}（{section_title_length(current[str(s['id'])])} 个字符）" for s in sections)
+        prompt = section_titles_prompt(sections, article_theme, glossary_block, whitelist_rules) + (
+            f"\n\n长度纠错：以下译名超过 {SECTION_TITLE_MAX_LENGTH} 个字符（空格不计），必须按上面的压缩规则重写到 "
+            f"{SECTION_TITLE_MAX_LENGTH} 个字符以内，不得截断：\n{overlong}"
+        )
+        try:
+            mapping = object_response(self.generate(prompt, response_format="json", temperature=0.3), ("translations",))["translations"]
+        except Exception as exc:
+            logger.warning("Section title length rewrite failed: %s", type(exc).__name__)
+            mapping = {}
+        shortened = {}
+        for section in sections:
+            key = str(section["id"])
+            value = mapping.get(key) if isinstance(mapping, dict) else None
+            if isinstance(value, str) and value.strip() and section_title_length(value) < section_title_length(current[key]):
+                shortened[key] = value.strip()
+            final = shortened.get(key, current[key])
+            if section_title_length(final) > SECTION_TITLE_MAX_LENGTH:
+                logger.warning("Section title still over %d chars after rewrite: %s", SECTION_TITLE_MAX_LENGTH, final)
+        return shortened
 
     def deep_analyze(
         self,
