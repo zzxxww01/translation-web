@@ -4,9 +4,9 @@ Translation Agent - LLM Provider Base
 Abstract base class for LLM providers.
 """
 
+import json
 import logging
 from abc import ABC, abstractmethod
-import logging
 from typing import Optional, List, Dict, Any
 
 from ..core.limits import TranslationLimits

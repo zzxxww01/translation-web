@@ -35,6 +35,12 @@ jobs:
           echo "GEMINI_API_KEY=test" > .env
       - name: Compile Python source
         run: python -m compileall src
+      # 用了没导入的名字只在运行到那一行才报错，而且常被 except 吞成「降级」（base.py 缺 import json 就让审校静默失效了一个月）
+      - name: Check undefined names
+        run: |
+          python -m venv "$RUNNER_TEMP/ruff"
+          "$RUNNER_TEMP/ruff/bin/pip" install -q ruff==0.14.10
+          "$RUNNER_TEMP/ruff/bin/ruff" check --select F821 src skill_runner scripts tests
       - name: Import app
         run: python -c "from src.api.app import app; print('routes', len(app.routes))"
       - name: Test backend

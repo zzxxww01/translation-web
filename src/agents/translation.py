@@ -16,6 +16,7 @@ from ..core.format_tokens import (
 from ..core.constants import MAX_GLOSSARY_TERMS_IN_PROMPT
 from ..core.glossary_prompt import build_glossary_prompt_entries
 from ..core.models import (
+    Glossary,
     Paragraph,
     ParagraphStatus,
     Section,

@@ -10,4 +10,4 @@
 ## 原文
 {section_content}
 只返回 JSON 对象 {{"new_terms":[],"term_usages":{{}}}}。
-new_terms 每项含 term、suggested_translation（建议，不代表已采用）、context、source_quote（本章原文片段）、confidence、requires_review。未知译名可用英文原词，不虚构。term_usages 为兼容字段，必须是空对象；译后才检查实际用法。
+new_terms 每项含 term、suggested_translation（建议，不代表已采用）、context、source_quote（本章原文片段）、confidence（0 到 1 之间的数字，不要写 high/low）、requires_review（true 或 false）。未知译名可用英文原词，不虚构。term_usages 为兼容字段，必须是空对象；译后才检查实际用法。

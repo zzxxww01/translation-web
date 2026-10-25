@@ -35,3 +35,23 @@ def test_prescan_network_phase_has_no_context_side_effect_until_committed() -> N
     translator.apply_section_prescan(result)
 
     assert context.get_all_terms() == {"inference cluster": "推理集群"}
+
+
+class _LooseTypedPrescanLLM:
+    # 2026-10-25 线上真实输出：confidence 写成 "high"，曾让每一章的预扫描都作废
+    def prescan_section_with_flash(self, **_kwargs):
+        return {"new_terms": [
+            {"term": "CoWoS", "suggested_translation": "CoWoS", "confidence": "high", "requires_review": False},
+            {"term": "HBM", "suggested_translation": None, "confidence": "85%"},
+        ], "term_usages": {}}
+
+
+def test_prescan_tolerates_loosely_typed_model_fields() -> None:
+    translator = FourStepTranslator(_LooseTypedPrescanLLM(), LayeredContextManager())
+    section = Section(section_id="s1", title="Intro",
+                      paragraphs=[Paragraph(id="p1", index=0, source="CoWoS and HBM")])
+
+    result = translator.scan_section_terms(section)
+
+    assert result is not None
+    assert [(t.term, t.suggested_translation, t.confidence) for t in result.new_terms] == [("CoWoS", "CoWoS", 0.9), ("HBM", "", 0.85)]

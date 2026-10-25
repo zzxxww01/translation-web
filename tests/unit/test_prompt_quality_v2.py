@@ -512,3 +512,13 @@ def test_corrupt_saved_rules_are_rejected(tmp_path, monkeypatch):
     with pytest.raises(ValueError, match='hash'):
         with prompt_bundle_scope(saved):
             pytest.fail('must not run')
+
+
+def test_review_context_with_annotation_plan_and_paragraph_ids_renders():
+    # 9-20 起 base.py 少了 import json，四步法每章都带这两项上下文，审校/润色因 NameError 全部退回初稿
+    provider = GeminiProvider.__new__(GeminiProvider)
+    provider.prompt_manager = get_prompt_manager()
+    context = {'annotation_plan': {'CoWoS': {'paragraph_id': 'p1'}}, 'paragraph_ids': ['p1', 'p2']}
+    for blocks in (provider._build_reflection_context_blocks(context), provider._build_refine_context_blocks(context)):
+        text = '\n'.join(blocks)
+        assert 'CoWoS' in text and '"p2"' in text

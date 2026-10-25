@@ -3,8 +3,8 @@
 from __future__ import annotations
 
 from datetime import datetime
-from typing import Optional, Dict, List
-from pydantic import BaseModel, Field
+from typing import Any, Optional, Dict, List
+from pydantic import BaseModel, Field, field_validator
 
 from .analysis import EnhancedTerm
 
@@ -18,6 +18,30 @@ class PrescanTerm(BaseModel):
     confidence: float = 0.8
     source_quote: str = ""
     requires_review: bool = False
+
+    # 字段来自模型输出：类型写错不能让整章预扫描作废（模型常把 confidence 写成 "high"）
+    @field_validator("suggested_translation", "context", "source_quote", mode="before")
+    @classmethod
+    def _coerce_text(cls, value: Any) -> Any:
+        return "" if value is None else value
+
+    @field_validator("confidence", mode="before")
+    @classmethod
+    def _coerce_confidence(cls, value: Any) -> Any:
+        if value is None:
+            return 0.8
+        if isinstance(value, str):
+            text = value.strip().lower()
+            words = {"very high": 0.95, "high": 0.9, "medium": 0.7, "mid": 0.7, "moderate": 0.7, "low": 0.4,
+                     "高": 0.9, "中": 0.7, "低": 0.4}
+            if text in words:
+                return words[text]
+            try:
+                number = float(text.rstrip("%"))
+            except ValueError:
+                return 0.8
+            return number / 100 if text.endswith("%") or number > 1 else number
+        return value
 
 
 class SectionPrescanResult(BaseModel):

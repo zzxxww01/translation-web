@@ -382,6 +382,7 @@ class ProjectManager:
 
         # 3. Semantic features score
         semantic_score = 0.0
+        context_score = 0.0
 
         if candidate and reference:
             if candidate[0] == reference[0]:
