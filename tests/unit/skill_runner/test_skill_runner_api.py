@@ -200,3 +200,18 @@ def test_event_stream_sends_named_ping_when_idle(setup, monkeypatch):
     # 心跳是具名事件（页面脚本收得到），不是 SSE 注释
     assert "event: ping\ndata: {}\n\n" in body
     assert not any(line.startswith(":") for line in body.splitlines())
+
+
+def test_session_renews_once_a_day_so_regular_use_never_asks_again(tmp_path):
+    import time
+
+    from skill_runner import auth
+
+    config = make_config(tmp_path)
+    app = create_app(config, session_factory=FakeFactory())
+    with TestClient(app) as client:
+        client.cookies.set(COOKIE_NAME, auth.issue_token(config.session_secret, now=time.time() - 2 * 24 * 3600), path=PREFIX)
+        renewed = client.get(f"{PREFIX}/me")
+        assert renewed.status_code == 200
+        assert f"Max-Age={auth.SESSION_TTL_S}" in renewed.headers["set-cookie"]
+        assert "set-cookie" not in client.get(f"{PREFIX}/me").headers  # 刚续过，不再下发

@@ -11,7 +11,9 @@ import hmac
 import time
 
 COOKIE_NAME = "skill_runner_session"
-SESSION_TTL_S = 30 * 24 * 3600
+# 登录一次记一年（浏览器最多认 400 天），每天第一次用时自动续期：一直在用就一直不用再输口令
+SESSION_TTL_S = 365 * 24 * 3600
+REFRESH_AFTER_S = 24 * 3600
 
 
 def check_password(expected: str, given: str) -> bool:
@@ -40,6 +42,12 @@ def verify_token(secret: bytes, token: str | None, now: float | None = None) -> 
     if issued > current + 60 or current - issued > SESSION_TTL_S:
         return False
     return hmac.compare_digest(signature, _sign(secret, issued))
+
+
+def should_refresh(token: str, now: float | None = None) -> bool:
+    """已验证过的 token 签发超过 REFRESH_AFTER_S 就该换新。"""
+    current = time.time() if now is None else now
+    return current - int(token.split(".", 1)[0]) > REFRESH_AFTER_S
 
 
 class LoginLimiter:

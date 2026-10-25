@@ -95,7 +95,7 @@ skill-runner = FastAPI + claude-agent-sdk（pip 包自带 Claude Code 程序）
 ## 登录
 
 - 单口令（env `SKILL_RUNNER_PASSWORD`），常量时间比较；成功后发 `HttpOnly; Secure; SameSite=Strict;
-  Path=/api/skills` 的签名 cookie（HMAC，30 天）。
+  Path=/api/skills` 的签名 cookie（HMAC，记一年，每天首次使用自动续期）。
 - 连续 5 次失败锁 1 分钟。所有 `/api/skills/*`（除 `login`）都校验 cookie，SSE 也是。
 
 ## 页面（`/skills`）

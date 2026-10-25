@@ -65,7 +65,7 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 
 ## 安全边界
 
-- 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（30 天），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。
+- 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（记一年，每天第一次用时自动续期，一直在用就不用再输口令），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。
 - 权限：命令和改文件不逐条确认（这是选定的工作方式），默认由两层兜底：
   - Bash 及其子进程在沙箱里：只能写运行目录和 `SKILL_RUNNER_EXTRA_WRITE`，网络只放行白名单域名，不允许绕出沙箱；
   - Edit/Write 等文件工具不受沙箱约束，由 `policy.py` 按同一份白名单拦截，拦截会显示在页面上。

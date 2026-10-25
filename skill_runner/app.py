@@ -71,9 +71,23 @@ def create_app(
     async def _runner_error(_request: Request, exc: RunnerError):
         return JSONResponse({"detail": str(exc)}, status_code=exc.status_code)
 
-    def require_auth(request: Request) -> None:
-        if not auth.verify_token(config.session_secret, request.cookies.get(auth.COOKIE_NAME)):
+    def set_session(response: Response) -> None:
+        response.set_cookie(
+            auth.COOKIE_NAME,
+            auth.issue_token(config.session_secret),
+            max_age=auth.SESSION_TTL_S,
+            httponly=True,
+            secure=config.cookie_secure,
+            samesite="strict",
+            path=PREFIX,
+        )
+
+    def require_auth(request: Request, response: Response) -> None:
+        token = request.cookies.get(auth.COOKIE_NAME)
+        if not auth.verify_token(config.session_secret, token):
             raise HTTPException(status_code=401, detail="请先登录")
+        if auth.should_refresh(token):
+            set_session(response)
 
     public = APIRouter(prefix=PREFIX)
     api = APIRouter(prefix=PREFIX, dependencies=[Depends(require_auth)])
@@ -89,15 +103,7 @@ def create_app(
         limiter.record(ok)
         if not ok:
             raise HTTPException(status_code=401, detail="口令不对")
-        response.set_cookie(
-            auth.COOKIE_NAME,
-            auth.issue_token(config.session_secret),
-            max_age=auth.SESSION_TTL_S,
-            httponly=True,
-            secure=config.cookie_secure,
-            samesite="strict",
-            path=PREFIX,
-        )
+        set_session(response)
         return {"ok": True}
 
     @public.post("/logout")
