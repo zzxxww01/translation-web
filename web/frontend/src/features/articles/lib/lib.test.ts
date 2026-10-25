@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { findClaudeOutputs } from './claude';
 import { gridTemplate, NONE_COLLAPSED, togglePane } from './panes';
-import { countFilled, trackSummary } from './tracks';
+import { countFilled, sectionsWithMissing, trackSummary } from './tracks';
 import type { TrackStatus, WorkbenchRow } from '../types';
 
 const idle: TrackStatus = { active: false, run_id: null, status: null, current_step: null, translated: null, total: null, error: null };
@@ -41,5 +41,18 @@ describe('track summary', () => {
     expect(trackSummary({ ...idle, active: true, current_step: '处理中: The shape of the buildout' }, filled).text).toBe('处理中 1/2');
     expect(trackSummary(idle, filled)).toEqual({ text: '缺 1 段', tone: 'wait' });
     expect(trackSummary(idle, { done: 2, total: 2 }).text).toBe('已完成');
+  });
+});
+
+describe('sectionsWithMissing', () => {
+  it('lists each section that still has untranslated paragraphs once, in order, ignoring images and headings', () => {
+    const rows: WorkbenchRow[] = [
+      { ...row('section:s1', 'section', '一'), section_id: 's1', source: 'Intro' },
+      { ...row('s1/p1', 'p', null), section_id: 's1' },
+      { ...row('s1/p2', 'p', null), section_id: 's1' },
+      { ...row('s2/p1', 'image', null), section_id: 's2' },
+      { ...row('s3/p1', 'p', '有'), section_id: 's3' },
+    ];
+    expect(sectionsWithMissing(rows, item => item.web)).toEqual([{ id: 's1', title: 'Intro' }]);
   });
 });

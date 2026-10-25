@@ -33,7 +33,18 @@ export function trackSummary(status: TrackStatus, filled: { done: number; total:
   return { text: '还没开始', tone: 'idle' };
 }
 
-/** 停下来了但还缺段：可以只补译缺的（后台续译，不重翻已有的） */
+/** 缺译的段落所在章节（按文中顺序），补译时重译这些章节 */
+export function sectionsWithMissing(rows: WorkbenchRow[], text: (row: WorkbenchRow) => string | null): { id: string; title: string }[] {
+  const titles = new Map(rows.filter(row => row.kind === 'section').map(row => [row.section_id, row.source]));
+  const ids: string[] = [];
+  for (const row of rows) {
+    if (row.kind === 'image' || row.kind === 'section' || text(row) || ids.includes(row.section_id)) continue;
+    ids.push(row.section_id);
+  }
+  return ids.map(id => ({ id, title: titles.get(id) ?? id }));
+}
+
+/** 停下来了但还缺段：可以补译（重译缺段所在的章节） */
 export function canFillMissing(status: TrackStatus, filled: { done: number; total: number }): boolean {
   return !status.active && filled.done > 0 && filled.done < filled.total;
 }
