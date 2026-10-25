@@ -94,7 +94,7 @@ providers:
       supports_thinking: true
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     - alias: qwen-plus
       real_model: qwen3.6-plus
@@ -115,7 +115,7 @@ providers:
       supports_thinking: false
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     - alias: gemini-flash
       real_model: gemini-3.8-flash
@@ -177,7 +177,7 @@ providers:
       supports_thinking: false
       config:
         temperature: 0.7
-        max_tokens: 8192
+        max_tokens: 32768
         timeout: 120
     # deepseek-v4-pro 盲评 3.74 且慢一倍，不配置。
     retry_config:

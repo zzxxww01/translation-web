@@ -72,6 +72,7 @@ class AggregatedCandidate:
     contexts: List[str] = field(default_factory=list)
     hit_title: bool = False
     total_occurrences: int = 0
+    model_selected: bool = False
 
 
 class TerminologyReviewService:
@@ -82,6 +83,13 @@ class TerminologyReviewService:
     MAX_SIMILAR_TERMS = 3
     PRESCAN_MAX_ATTEMPTS = 3
     PRESCAN_RETRY_BASE_DELAY_SECONDS = 0.5
+    # One article-level pass instead of a free-form scan of every section: the
+    # per-section scan listed ~350 "terms" for a mid-size article (common words,
+    # names, sentence fragments) and took ~9 minutes serially.
+    ARTICLE_CHUNK_CHARS = 80000
+    MAX_TERMS_PER_CHUNK = 20
+    MAX_REVIEW_CANDIDATES = 30
+    MAX_PARALLEL_CHUNKS = 4
     _artifact_locks: Dict[str, threading.RLock] = {}
     _artifact_locks_guard = threading.Lock()
 
@@ -110,73 +118,59 @@ class TerminologyReviewService:
         )
         aggregated: Dict[str, AggregatedCandidate] = {}
         scan_errors: List[Dict[str, str]] = []
-        scanned_sections = 0
+        texts = {section.section_id: "\n".join(p.source for p in section.paragraphs) for section in sections}
+        title_spaces = {
+            section.section_id: "\n".join([section.title] + [
+                p.source for p in section.paragraphs if p.element_type in (ElementType.H3, ElementType.H4)
+            ]).lower()
+            for section in sections
+        }
 
-        for section in sections:
-            try:
-                prescan_result = self._prescan_section(section, existing_terms)
-                scanned_sections += 1
-            except LLMTransportError as exc:
-                # A single transient upstream failure must not discard results
-                # already collected for every other section. The UI can surface
-                # this as a partial review and still continue translation.
-                logger.warning(
-                    "Term-review prescan skipped section %s after %d attempts: %s",
-                    section.section_id,
-                    self.PRESCAN_MAX_ATTEMPTS,
-                    exc,
-                )
-                scan_errors.append(
-                    {
-                        "section_id": section.section_id,
-                        "section_title": section.title,
-                        "error_type": type(exc).__name__,
-                        "error": str(exc)[:500],
-                    }
-                )
+        found, failed_chunks = self._extract_article_terms(sections, existing_terms)
+        failed_ids = {section.section_id for chunk, _exc in failed_chunks for section in chunk}
+        for chunk, exc in failed_chunks:
+            # A transient upstream failure loses only its own chunk; the UI shows a
+            # partial review and translation can still continue.
+            for section in chunk:
+                scan_errors.append({
+                    "section_id": section.section_id,
+                    "section_title": section.title,
+                    "error_type": type(exc).__name__,
+                    "error": str(exc)[:500],
+                })
+        scanned_sections = len(sections) - len(failed_ids)
+
+        for term_data in found:
+            term = (term_data.get("term") or "").strip()
+            normalized = _normalize_term(term)
+            if not term or not normalized or merged_glossary.get_term(term):
                 continue
-            if not prescan_result:
-                continue
-
-            section_text = "\n".join(paragraph.source for paragraph in section.paragraphs)
-            heading_text = "\n".join(
-                paragraph.source
-                for paragraph in section.paragraphs
-                if paragraph.element_type in (ElementType.H3, ElementType.H4)
-            )
-            title_space = f"{section.title}\n{heading_text}".lower()
-
-            for term_data in prescan_result.get("new_terms", []):
-                term = (term_data.get("term") or "").strip()
-                suggested_translation = (
-                    term_data.get("suggested_translation") or ""
-                ).strip()
-                context = (term_data.get("context") or "").strip()
-                normalized = _normalize_term(term)
-                if not term or not normalized:
-                    continue
-                if merged_glossary.get_term(term):
-                    continue
-
-                candidate = aggregated.setdefault(
-                    normalized,
-                    AggregatedCandidate(term=term),
-                )
-                candidate.term = candidate.term or term
-                if suggested_translation:
-                    candidate.suggested_translations[suggested_translation] += 1
+            hits = [(section, _safe_count_occurrences(texts[section.section_id], term)) for section in sections]
+            hits = [(section, count) for section, count in hits if count]
+            if not hits:
+                continue  # not a source occurrence
+            candidate = aggregated.setdefault(normalized, AggregatedCandidate(term=term))
+            candidate.model_selected = True
+            raw_suggestion = str(term_data.get("suggested_translation") or "").strip()
+            # Auto-accept writes the suggestion into the glossary verbatim, so keep one
+            # rendering; "A / B" alternatives stay visible in the reason for the reviewer.
+            suggestion = raw_suggestion.split(" / ")[0].strip()
+            if suggestion:
+                candidate.suggested_translations[suggestion] += 1
+            reason = str(term_data.get("reason") or term_data.get("context") or "").strip()
+            if suggestion != raw_suggestion:
+                reason = f"{reason}（候选：{raw_suggestion}）" if reason else f"候选：{raw_suggestion}"
+            if reason and reason not in candidate.contexts:
+                candidate.contexts.append(reason)
+            for section, count in hits:
                 if section.section_id not in candidate.section_ids:
                     candidate.section_ids.append(section.section_id)
+                    candidate.total_occurrences += count
                 candidate.section_titles[section.section_id] = section.title
-                if context and context not in candidate.contexts:
-                    candidate.contexts.append(context)
-                candidate.hit_title = candidate.hit_title or (
-                    normalized in title_space
-                )
-                candidate.total_occurrences += max(
-                    _safe_count_occurrences(section_text, term),
-                    1,
-                )
+                candidate.hit_title = candidate.hit_title or normalized in title_spaces[section.section_id]
+        if len(aggregated) > self.MAX_REVIEW_CANDIDATES:
+            keep = sorted(aggregated, key=lambda key: (-aggregated[key].total_occurrences, key))[: self.MAX_REVIEW_CANDIDATES]
+            aggregated = {key: aggregated[key] for key in keep}
 
         payload = self._build_review_payload(
             project=project,
@@ -362,28 +356,75 @@ class TerminologyReviewService:
             "term": promoted.model_dump(mode="json"),
         }
 
-    def _prescan_section(
-        self,
-        section: Section,
-        existing_terms: Dict[str, str],
-    ) -> Dict[str, Any]:
+    def _article_chunks(self, sections: List[Section]) -> List[List[Section]]:
+        """Consecutive sections, split only at section boundaries."""
+        chunks: List[List[Section]] = []
+        current: List[Section] = []
+        size = 0
+        for section in sections:
+            length = sum(len(p.source) for p in section.paragraphs) + len(section.title or "")
+            if current and size + length > self.ARTICLE_CHUNK_CHARS:
+                chunks.append(current)
+                current, size = [], 0
+            current.append(section)
+            size += length
+        if current:
+            chunks.append(current)
+        return chunks
+
+    def _extract_article_terms(self, sections: List[Section], existing_terms: Dict[str, str]):
+        """Return (candidates, [(failed_chunk_sections, exception)])."""
+        from concurrent.futures import ThreadPoolExecutor
         if self.llm is None:
             raise RuntimeError("LLM provider is required for term-review prepare flow.")
-        section_content = "\n\n".join(paragraph.source for paragraph in section.paragraphs)
+        chunks = [chunk for chunk in self._article_chunks(sections) if any(s.paragraphs for s in chunk)]
+        if not chunks:
+            return [], []
+        with ThreadPoolExecutor(max_workers=min(self.MAX_PARALLEL_CHUNKS, len(chunks))) as pool:
+            outcomes = list(pool.map(lambda chunk: self._scan_chunk(chunk, existing_terms), chunks))
+        found: Dict[str, Dict[str, Any]] = {}
+        failed = []
+        for chunk, (items, exc) in zip(chunks, outcomes):
+            if exc is not None:
+                failed.append((chunk, exc))
+                continue
+            for item in items:
+                found.setdefault(_normalize_term(item["term"]), item)
+        return list(found.values()), failed
+
+    def _scan_chunk(self, chunk: List[Section], existing_terms: Dict[str, str]):
+        import json
+        from src.prompts import get_prompt_manager
+        from src.prompts.contracts import PromptContractError, object_response
+        text = "\n\n".join(
+            f"## [{section.section_id}] {section.title}\n" + "\n\n".join(p.source for p in section.paragraphs)
+            for section in chunk
+        )
+        matched = {term: value for term, value in existing_terms.items()
+                   if isinstance(term, str) and _safe_count_occurrences(text, term)}
+        prompt = get_prompt_manager().get(
+            "longform/terminology/article_term_review",
+            max_terms=self.MAX_TERMS_PER_CHUNK,
+            existing_terms=json.dumps(matched, ensure_ascii=False, default=str) if matched else "（无）",
+            article_text=text,
+        )
+        last: Optional[Exception] = None
         for attempt in range(1, self.PRESCAN_MAX_ATTEMPTS + 1):
             try:
-                return self.llm.prescan_section_with_flash(
-                    section_id=section.section_id,
-                    section_title=section.title,
-                    section_content=section_content,
-                    existing_terms=existing_terms,
-                )
-            except LLMTransportError:
-                if attempt >= self.PRESCAN_MAX_ATTEMPTS:
-                    raise
-                time.sleep(self.PRESCAN_RETRY_BASE_DELAY_SECONDS * attempt)
-
-        raise RuntimeError("Term-review prescan exhausted without a result")
+                result = object_response(self.llm.generate(prompt, response_format="json", temperature=0.3), ("terms",))
+                if not isinstance(result["terms"], list):
+                    raise PromptContractError("terms must be an array")
+                items = [dict(item) for item in result["terms"]
+                         if isinstance(item, dict) and isinstance(item.get("term"), str) and item["term"].strip()
+                         and item["term"].strip().lower() in text.lower()]
+                return items[: self.MAX_TERMS_PER_CHUNK], None
+            except (LLMTransportError, PromptContractError) as exc:
+                last = exc
+                if attempt < self.PRESCAN_MAX_ATTEMPTS:
+                    time.sleep(self.PRESCAN_RETRY_BASE_DELAY_SECONDS * attempt)
+        logger.warning("Term-review scan skipped %d sections after %d attempts: %s",
+                       len(chunk), self.PRESCAN_MAX_ATTEMPTS, last)
+        return [], last
 
     def _build_review_payload(
         self,
@@ -454,6 +495,8 @@ class TerminologyReviewService:
 
     def _build_candidate_reasons(self, candidate: AggregatedCandidate) -> List[str]:
         reasons: List[str] = []
+        if candidate.model_selected:
+            reasons.append("needs_decision")
         if candidate.hit_title:
             reasons.append("title")
         if candidate.total_occurrences >= self.HIGH_FREQUENCY_THRESHOLD:

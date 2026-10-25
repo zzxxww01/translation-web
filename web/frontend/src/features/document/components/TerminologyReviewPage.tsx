@@ -22,6 +22,7 @@ interface DecisionState {
 }
 
 const reasonLabels: Record<string, string> = {
+  needs_decision: '译法需要确认',
   title: '标题/小标题命中',
   high_frequency: '全文高频',
   ambiguous: '存在歧义或多种译法',

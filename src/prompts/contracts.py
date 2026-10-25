@@ -96,6 +96,27 @@ def translation_items(value: Any, expected_ids: list[str]) -> list[dict[str, str
     by_id = {item["id"]: item for item in items}
     return [by_id[key] for key in expected_ids if key in by_id]
 
+_QUOTE_FOLD = str.maketrans({"“": '"', "”": '"', "‘": "'", "’": "'", "「": '"', "」": '"', "『": '"', "』": '"'})
+
+
+def _evidence_in(quote: str, text: str) -> bool:
+    """Literal evidence check that ignores whitespace and quote style, and accepts an
+    excerpt whose elided middle is marked with an ellipsis (fragments kept in order)."""
+    if quote in text:
+        return True
+    fold = lambda s: re.sub(r"\s+", "", s.translate(_QUOTE_FOLD))
+    haystack, position = fold(text), 0
+    fragments = [fold(part) for part in re.split(r"\.{3,}|…+|⋯+", quote)]
+    if not any(fragments):
+        return False
+    for fragment in filter(None, fragments):
+        position = haystack.find(fragment, position)
+        if position < 0:
+            return False
+        position += len(fragment)
+    return True
+
+
 def validate_review(value: Any, sources: list[str], translations: list[str]) -> dict:
     if len(sources) != len(translations):
         raise PromptContractError("Review source/translation counts differ")
@@ -128,13 +149,20 @@ def validate_review(value: Any, sources: list[str], translations: list[str]) -> 
                 raise PromptContractError(f"Invalid review {field}")
         entry = dict(issue, issue_type=kind, priority=severities[severity])
         # Supplied evidence must be literal evidence; an omission may have no translated span.
+        verified = True
         for field, source in (("original_text", sources[idx]), ("translation_text", translations[idx])):
             quote = entry.get(field, "")
             if not isinstance(quote, str):
                 raise PromptContractError(f"Invalid {field}")
-            if quote and quote not in source:
-                raise PromptContractError(f"Unverifiable review evidence at paragraph {idx}: {field}")
-        issues.append(entry)
+            if quote and not _evidence_in(quote, source):
+                # A serious claim backed by a quote that is not in the text makes the whole
+                # review untrustworthy. A minor one is dropped on its own instead of
+                # discarding every verified finding of the section.
+                if severity in ("critical", "high"):
+                    raise PromptContractError(f"Unverifiable review evidence at paragraph {idx}: {field}")
+                verified = False
+        if verified:
+            issues.append(entry)
     clean["issues"] = issues
     for key, value in list(clean.items()):
         if key.endswith("_score"):

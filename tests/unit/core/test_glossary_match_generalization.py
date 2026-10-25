@@ -22,6 +22,16 @@ def _terms(*pairs):
 # --- 全大写术语大小写敏感 ---------------------------------------------------
 
 
+def test_long_caps_brand_also_matches_its_press_spelling():
+    # Articles mix "NVIDIA" and "Nvidia"; only the caps form used to inject 英伟达, so one
+    # piece came out with 英伟达 / Nvidia / NVIDIA. Short caps names stay strict.
+    brands = [{"original": "NVIDIA", "translation": "英伟达", "strategy": "translate", "tags": ["company"]},
+              {"original": "BEST", "translation": "屹唐股份", "strategy": "translate", "tags": ["company"]},
+              {"original": "FLOPS", "translation": "FLOPS", "strategy": "preserve", "tags": ["performance"]}]
+    picked = select_prompt_terms_for_text(brands, "Nvidia has submitted runs. Best results came first. Flops matter.")
+    assert [t["original"] for t in picked] == ["NVIDIA"]
+
+
 def test_all_caps_term_does_not_match_lowercase_common_word():
     # BEST 是一家公司；小写 best 是普通英文词。大小写不敏感会让每篇文章都误命中。
     assert _count_term_occurrences("which cloud gives the best value", "BEST") == 0

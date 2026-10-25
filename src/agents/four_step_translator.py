@@ -332,8 +332,10 @@ class FourStepTranslator:
         )
         self.feedback_history.append(feedback)
 
+        from src.settings import settings
         if (
             self.memory_service
+            and settings.learn_rules_from_reviews
             and reflection.scores_available
             and reflection.overall_score < 8.0
             and reflection.issues
@@ -654,11 +656,23 @@ class FourStepTranslator:
             middle = len(paragraphs) // 2
             return (self._translate_batch(section, paragraphs[:middle], understanding, all_sections, provider=llm_provider)
                     + self._translate_batch(section, paragraphs[middle:], understanding, all_sections, provider=llm_provider))
-        translated = checkpoint_call("draft-batch", llm_provider,
-            {"source": section_text, "title": section.title, "context": context, "ids": paragraph_ids},
-            lambda: llm_provider.translate_section(section_text, section.title, context, paragraph_ids),
-            lambda value: translation_items(value, paragraph_ids),
-            cacheable=lambda items: len(items) == len(paragraph_ids))
+        try:
+            translated = checkpoint_call("draft-batch", llm_provider,
+                {"source": section_text, "title": section.title, "context": context, "ids": paragraph_ids},
+                lambda: llm_provider.translate_section(section_text, section.title, context, paragraph_ids),
+                lambda value: translation_items(value, paragraph_ids),
+                cacheable=lambda items: len(items) == len(paragraph_ids))
+        except PromptContractError as exc:
+            # A truncated or malformed reply (relays report a cut-off reply as a normal
+            # stop) used to fail the whole section. Halve the batch; a single paragraph
+            # falls through to the per-paragraph fallback below.
+            if len(paragraphs) > 1:
+                logger.warning("Draft batch reply unusable (%s); retrying %d paragraphs as two halves", exc, len(paragraphs))
+                middle = len(paragraphs) // 2
+                return (self._translate_batch(section, paragraphs[:middle], understanding, all_sections, provider=llm_provider)
+                        + self._translate_batch(section, paragraphs[middle:], understanding, all_sections, provider=llm_provider))
+            logger.warning("Draft reply for paragraph %s unusable (%s); using single-paragraph fallback", paragraphs[0].id, exc)
+            translated = []
         # Valid partial output still supplies its completed paragraphs. It is not
         # cached as a complete batch, and only missing IDs use the fallback.
 

@@ -310,16 +310,9 @@ def test_term_review_pending_artifact_does_not_seed_until_submission(
 
     class FakeLLM:
         @staticmethod
-        def prescan_section_with_flash(**kwargs):
-            return {
-                "new_terms": [
-                    {
-                        "term": "chiplet",
-                        "suggested_translation": "系统建议",
-                        "context": "packaging architecture",
-                    }
-                ]
-            }
+        def generate(prompt, **kwargs):
+            import json
+            return json.dumps({"terms": [{"term": "chiplet", "suggested_translation": "系统建议", "reason": "packaging architecture"}]}, ensure_ascii=False)
 
     review_service = TerminologyReviewService(
         project_manager=manager,
@@ -383,16 +376,9 @@ def test_term_review_rejects_submission_for_replaced_artifact(tmp_path) -> None:
 
     class FakeLLM:
         @staticmethod
-        def prescan_section_with_flash(**kwargs):
-            return {
-                "new_terms": [
-                    {
-                        "term": "chiplet",
-                        "suggested_translation": "芯粒",
-                        "context": "packaging architecture",
-                    }
-                ]
-            }
+        def generate(prompt, **kwargs):
+            import json
+            return json.dumps({"terms": [{"term": "chiplet", "suggested_translation": "芯粒", "reason": "packaging architecture"}]}, ensure_ascii=False)
 
     service = TerminologyReviewService(
         project_manager=manager,

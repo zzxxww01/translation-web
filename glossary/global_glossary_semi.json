@@ -1,5 +1,5 @@
 {
-  "version": 44,
+  "version": 45,
   "terms": [
     {
       "original": "TSMC",
@@ -3130,9 +3130,9 @@
     },
     {
       "original": "tile",
-      "translation": "单元块/芯块(按语境)",
+      "translation": "单元块/芯块/分块(按语境)",
       "strategy": "translate",
-      "note": "**不可全局统一，按它指什么**：芯片内重复排布的计算/存储单元阵列（mesh tile、DNN accelerator tile、DRAM sub-array）→单元块；晶圆上重复曝光的光罩单元（defective tile）→单元块；封装内独立的一小片硅（SerDes tile）→芯块。2026-08-09 实测三篇三语境，各自都对",
+      "note": "**不可全局统一，按它指什么**：芯片内重复排布的计算/存储单元阵列（mesh tile、DRAM sub-array）→单元块；封装内独立的一小片硅（SerDes tile）→芯块；GPU 编程/矩阵乘切分数据（SMEM tile、tile size、tiling）→分块",
       "tags": [
         "chip",
         "packaging"
@@ -3141,7 +3141,7 @@
       "scope": "global",
       "source": "user-verdict-2026-08-09",
       "status": "active",
-      "updated_at": "2026-08-09T14:15:26.159591"
+      "updated_at": "2026-10-25T21:54:11.474949"
     },
     {
       "original": "target market",
@@ -4947,6 +4947,110 @@
       "source": "four-step-2026-10-08",
       "status": "active",
       "updated_at": "2026-10-08T08:57:50.001139"
+    },
+    {
+      "original": "Foundry Model",
+      "translation": "晶圆代工模型",
+      "strategy": "translate",
+      "note": "SemiAnalysis 订阅产品（semianalysis.com/foundry-model），与 Memory Model、Accelerator Model 同系列。首字母大写的 Foundry Model 指这款产品，不是普通的“代工模式”，也不要加“分析”二字",
+      "tags": [
+        "product",
+        "semianalysis"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "pipeline-audit-2026-10-25",
+      "status": "active",
+      "updated_at": "2026-10-25T21:54:11.474949"
+    },
+    {
+      "original": "hash rate",
+      "translation": "哈希算力",
+      "strategy": "translate",
+      "note": "加密货币挖矿语境：矿机每秒完成的哈希运算次数（按 hash rate 排名的矿企）。AI/数据中心文章里不要只写“算力”，否则会和 AI 算力（compute）混为一谈",
+      "tags": [
+        "datacenter",
+        "finance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "pipeline-audit-2026-10-25",
+      "status": "active",
+      "updated_at": "2026-10-25T21:54:11.474949"
+    },
+    {
+      "original": "VR",
+      "translation": "看语境（Vera Rubin / 虚拟现实）",
+      "strategy": "first_annotate",
+      "note": "**判据：看领域。** 英伟达/数据中心语境→Vera Rubin 平台（VR 机架=Vera Rubin 机架，首现写 Vera Rubin（VR））；消费电子/头显语境→虚拟现实（VR）",
+      "tags": [
+        "acronym",
+        "product"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "pipeline-audit-2026-10-25",
+      "status": "active",
+      "updated_at": "2026-10-25T21:54:11.474949"
+    },
+    {
+      "original": "power",
+      "translation": "电力/功耗/供电容量（按语境）",
+      "strategy": "translate",
+      "note": "**判据：看说的是电还是性能。** 数据中心/电网（add power、GW of power、power constrained）→电力、供电容量，不是算力；芯片/机柜→功耗；power efficiency→能效；pricing power→定价权",
+      "tags": [
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "pipeline-audit-2026-10-25",
+      "status": "active",
+      "updated_at": "2026-10-25T21:54:11.474949"
+    },
+    {
+      "original": "capacity",
+      "translation": "产能/容量（按语境）",
+      "strategy": "translate",
+      "note": "**判据：看是什么的 capacity。** 晶圆厂、封装、内存（CoWoS capacity、wafer capacity）→产能；电力市场（capacity auction、capacity price、PJM）→容量；数据中心 MW capacity→供电容量；存储设备→容量",
+      "tags": [
+        "power",
+        "manufacturing"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "pipeline-audit-2026-10-25",
+      "status": "active",
+      "updated_at": "2026-10-25T21:54:11.474949"
+    },
+    {
+      "original": "utilization",
+      "translation": "利用率",
+      "strategy": "translate",
+      "note": "产能利用率（fab/wafer utilization）、GPU 利用率等。不用台湾、日本习惯的“稼动率”",
+      "tags": [
+        "manufacturing",
+        "performance"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "pipeline-audit-2026-10-25",
+      "status": "active",
+      "updated_at": "2026-10-25T21:54:11.474949"
+    },
+    {
+      "original": "MW-day",
+      "translation": "MW-天",
+      "strategy": "translate",
+      "note": "电力容量市场的计价单位（美元/MW-天），保持“MW-天”写法，不要写成“兆瓦日”",
+      "tags": [
+        "unit",
+        "power"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "pipeline-audit-2026-10-25",
+      "status": "active",
+      "updated_at": "2026-10-25T21:54:11.474949"
     }
   ]
 }

@@ -1477,44 +1477,11 @@ class BatchTranslationService:
             if self._is_cancelled(project_id):
                 return finalize_cancelled_result()
 
-            # Phase 3: 质量报告生成
-            logger.info(f"[{project_id}] Starting Phase 3: Quality Report Generation")
-            self._touch_progress(progress, step="质量报告生成")
-            self._notify_progress(
-                on_progress, "质量报告生成", translated_count, total_paragraphs
-            )
-
-            quality_report = None
-            try:
-                llm_usage_metrics.set_phase("phase3_review")
-                quality_report = self._get_quality_report_generator().generate_report(
-                    sections=project.sections,
-                    translations=all_translations,
-                    article_analysis=analysis,
-                )
-
-                # 记录质量报告结果
-                logger.info(
-                    f"[{project_id}] Quality report generated: "
-                    f"{quality_report.summary.total_issues} issues found "
-                    f"(H:{quality_report.summary.high_severity_count}, "
-                    f"M:{quality_report.summary.medium_severity_count}, "
-                    f"L:{quality_report.summary.low_severity_count}), "
-                    f"overall score: {quality_report.summary.overall_score}"
-                )
-
-                self._write_artifact_json(
-                    run_dir / "quality_report.json",
-                    quality_report.to_dict(),
-                )
-
-            except Exception as e:
-                logger.error(f"[{project_id}] Quality report generation failed: {str(e)}")
-                self._write_artifact_json(
-                    run_dir / "quality_report.json",
-                    {"error": str(e)},
-                )
-                # 质量报告生成失败不影响翻译完成状态
+            # No whole-article model "quality report" here: it re-sent the entire article
+            # (~94k input tokens on a mid-size piece), its quality_report.json was never
+            # read, and the quality panel (QualityReportService) is built from the
+            # per-section review artifacts that already exist. The generator remains for
+            # explicit, on-demand use.
 
             if self._is_cancelled(project_id):
                 return finalize_cancelled_result()
@@ -1718,12 +1685,16 @@ class BatchTranslationService:
             for section in project.sections
         ]
 
-        logger.info(
-            "[%s] Prescanning %d sections before translation",
-            project_id,
-            len(planned_section_ids),
-        )
-        await self._prescan_all_sections(project_id, project, run_dir, progress, on_term_conflict)
+        if getattr(getattr(self, "efficiency", None), "translation_prescan", False):
+            logger.info(
+                "[%s] Prescanning %d sections before translation",
+                project_id,
+                len(planned_section_ids),
+            )
+            await self._prescan_all_sections(project_id, project, run_dir, progress, on_term_conflict)
+        else:
+            logger.info("[%s] Per-section prescan skipped: terms come from the glossary, "
+                        "the article analysis and the confirmed terminology review", project_id)
         if getattr(self, "_quality_policy", ""):
             from src.services.work_checkpoints import fingerprint
             self._quality_policy = fingerprint([self._quality_policy, self.context_manager.get_all_terms()])

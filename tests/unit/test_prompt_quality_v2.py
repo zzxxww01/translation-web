@@ -279,6 +279,23 @@ def test_review_counts_derived_and_quote_verified():
             validate_review({'issues':[dict(issue,**changes)]},['X but Y'],['内存'])
 
 
+def test_review_evidence_tolerates_spacing_quote_style_and_ellipsis():
+    issue={'paragraph_index':0,'severity':'high','description':'d','suggestion':'s'}
+    src=['He said "this is fine" and left the room quickly.']
+    zh=['他说“没问题”，然后很快离开了房间。']
+    for original,translated in (('said “this is fine”','他说"没问题"'), ('He said ... the room','他说…房间'), ('left  the room','很快 离开')):
+        assert validate_review({'issues':[dict(issue,original_text=original,translation_text=translated)]},src,zh)['issues']
+
+
+def test_unverifiable_minor_finding_is_dropped_but_a_serious_one_still_rejects():
+    ok={'paragraph_index':0,'severity':'medium','original_text':'but','translation_text':'内存','description':'d','suggestion':'s'}
+    invented=dict(ok,original_text='invented quote')
+    result=validate_review({'issues':[ok,invented]},['X but Y'],['内存'])
+    assert len(result['issues'])==1 and result['medium_issues_count']==1
+    with pytest.raises(PromptContractError):
+        validate_review({'issues':[ok,dict(invented,severity='high')]},['X but Y'],['内存'])
+
+
 def test_format_tokens_may_move_but_code_cannot_change():
     elements=[InlineElement(type='link',text='A',start=0,end=1,href='https://example.org/a'),InlineElement(type='strong',text='B',start=2,end=3)]
     assert validate_tokenized_text('[[[STRONG_1|乙]]] 和 [[[LINK_1|甲]]]',elements)==[]

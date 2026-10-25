@@ -36,8 +36,9 @@ class _PrescanRecorder:
 
 
 @pytest.mark.asyncio
+@pytest.mark.parametrize("translation_prescan", [True, False])
 async def test_sections_prescan_before_ordered_translation_and_rebuild_conflict_context(
-    tmp_path,
+    tmp_path, translation_prescan,
 ) -> None:
     first = Section(
         section_id="s1",
@@ -81,6 +82,8 @@ async def test_sections_prescan_before_ordered_translation_and_rebuild_conflict_
     service.context_manager = context_manager
     service.project_manager = project_manager
     service._section_executor = _PrescanRecorder(events)
+    from src.config.efficiency import EfficiencyOptions
+    service.efficiency = EfficiencyOptions(translation_prescan=translation_prescan)
     service._is_cancelled = lambda _project_id: False
 
     async def translate_single_section(**kwargs):
@@ -143,10 +146,8 @@ async def test_sections_prescan_before_ordered_translation_and_rebuild_conflict_
         total_paragraphs=3,
     )
 
-    assert events == [
-        ("prescan", "s1"),
-        ("prescan", "s2"),
-        ("prescan", "s3"),
+    prescans = [("prescan", "s1"), ("prescan", "s2"), ("prescan", "s3")] if translation_prescan else []
+    assert events == prescans + [
         ("translate", "s1"),
         ("translate", "s2"),
         ("translate", "s3"),

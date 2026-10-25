@@ -13,6 +13,10 @@ from pydantic import BaseModel, Field, ConfigDict, model_validator
 class EfficiencyOptions(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
     resume_stages: bool = True
+    # Per-section term prescan inside the translation run. Off by default: the web
+    # workflow already ran the terminology review, the second pass took ~26 of 38
+    # minutes on a mid-size article and its suggestions were mostly common words.
+    translation_prescan: bool = False
     prescan_concurrency: int = Field(1, ge=1, le=8)
     stage_timeout_seconds: float = Field(1800.0, gt=0, le=86400, allow_inf_nan=False)
     max_stage_calls: int = Field(64, ge=1, le=10000)
