@@ -38,6 +38,8 @@ describe('track summary', () => {
     expect(filled).toEqual({ done: 1, total: 2 });
     expect(trackSummary({ ...idle, active: true, current_step: '等待术语确认' }, filled)).toEqual({ text: '等你确认术语', tone: 'wait' });
     expect(trackSummary({ ...idle, active: true, current_step: '翻译章节' }, filled).text).toBe('翻译章节 1/2');
+    expect(trackSummary({ ...idle, active: true, current_step: '处理中: The shape of the buildout' }, filled).text).toBe('处理中 1/2');
+    expect(trackSummary(idle, filled)).toEqual({ text: '缺 1 段', tone: 'wait' });
     expect(trackSummary(idle, { done: 2, total: 2 }).text).toBe('已完成');
   });
 });

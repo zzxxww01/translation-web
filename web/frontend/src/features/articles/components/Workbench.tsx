@@ -19,7 +19,7 @@ import { articleKeys, useClaudeRun, useWorkbench } from '../hooks';
 import { importClaudeTrack, NoClaudeOutput, startClaudeTrack } from '../lib/claude';
 import { unsavedEdits } from '../lib/edits';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
-import { countFilled, SECOND_MODELS, TERMS_STEP, trackSummary } from '../lib/tracks';
+import { canFillMissing, countFilled, SECOND_MODELS, TERMS_STEP, trackSummary } from '../lib/tracks';
 import type { PaneId, Workbench as WorkbenchData, WorkbenchRow, WorkbenchVariant } from '../types';
 import { PaneGrid, type PaneColumn } from './PaneGrid';
 import { TrackDrawer, type DrawerState } from './TrackDrawer';
@@ -173,6 +173,16 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     }
   };
 
+  const fillMissing = async (target: string, model?: string) => {
+    try {
+      await articlesApi.startWorkflow(target, { model, autoAcceptTerms: true });
+      toast.success('开始补译缺的段，已有的不动');
+      await refresh();
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '没能开始补译');
+    }
+  };
+
   const startClaude = async () => {
     setBusy(true);
     try {
@@ -216,7 +226,10 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
         header: (
           <div className="flex items-center gap-2">
             <span className="text-sm font-medium text-text-secondary">译本 1 · 网页版</span>
-            <span className="text-xs text-text-muted">{webSummary.text}</span>
+            <span className="text-xs text-text-muted" title={project.status.current_step ?? undefined}>{webSummary.text}</span>
+            {canFillMissing(project.status, webFilled) && (
+              <button type="button" onClick={() => void fillMissing(project.id)} className="rounded-md px-1.5 text-xs text-primary-700 hover:bg-primary-50">补译</button>
+            )}
             <button type="button" title="导出译本 1" onClick={() => void exportVersion(project.id, 'zh')} className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary">
               <Download className="h-3.5 w-3.5" />
             </button>
@@ -244,7 +257,16 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             ) : (
               <span className="text-sm font-medium text-text-secondary">{altLabel}</span>
             )}
-            {altSummary && <span className="text-xs text-text-muted">{altSummary.text}</span>}
+            {altSummary && <span className="text-xs text-text-muted" title={variant?.status.current_step ?? undefined}>{altSummary.text}</span>}
+            {variant && variant.kind === 'model' && altFilled && canFillMissing(variant.status, altFilled) && (
+              <button
+                type="button"
+                onClick={() => void fillMissing(variant.id, SECOND_MODELS.find(option => option.label === variant.label)?.model)}
+                className="rounded-md px-1.5 text-xs text-primary-700 hover:bg-primary-50"
+              >
+                补译
+              </button>
+            )}
             {variant && (
               <button type="button" title="导出译本 2" onClick={() => void exportVersion(variant.id, 'zh')} className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary">
                 <Download className="h-3.5 w-3.5" />
