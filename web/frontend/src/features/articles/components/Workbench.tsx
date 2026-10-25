@@ -295,6 +295,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   }, [project.id, project.status.active, variant, variants, webSummary.text, altSummary?.text, save]);
 
   const claudeWaiting = run?.status === 'waiting';
+  // 这篇有 Claude 任务，但浏览器还没登录 Claude：说一声，不然这一路像不存在
+  const claudeNeedsLogin = Boolean(project.claude_run_id) && isUnauthorized(claudeRun.error);
   const claudeRunning = run?.status === 'running';
 
   return (
@@ -367,7 +369,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
           </div>
         </div>
 
-        {(webWaitingTerms || claudeWaiting || claudeNote || project.status.error) && (
+        {(webWaitingTerms || claudeWaiting || claudeNote || claudeNeedsLogin || project.status.error) && (
           <div className="mt-2 flex flex-col gap-1.5">
             {webWaitingTerms && (
               <Banner tone="wait" action="去确认" onAction={() => setDrawer({ kind: 'terms', projectId: project.id, jobId: project.status.run_id! })}>
@@ -385,6 +387,11 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
                 secondary={run ? { label: '看 Claude 说了什么', onClick: () => setDrawer({ kind: 'claude', run }) } : undefined}
               >
                 {claudeNote}
+              </Banner>
+            )}
+            {claudeNeedsLogin && (
+              <Banner tone="info" action="去登录" onAction={() => navigate('/skills')}>
+                这篇交给过 Claude，要先登录 Claude 页（一次即可）才能看它的进度和回复。
               </Banner>
             )}
             {project.status.error && <Banner tone="error">网页版出错了：{project.status.error}</Banner>}
