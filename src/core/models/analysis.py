@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from typing import Any, Optional, Dict, List
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 from .enums import TranslationStrategy
 from .glossary import GlossaryTerm
@@ -42,6 +42,30 @@ class EnhancedTerm(BaseModel):
     alternatives: List[str] = Field(default_factory=list)
     avoid: List[str] = Field(default_factory=list)
     source_quote: str = ""
+
+    # 这些字段来自模型输出。一个术语的字段类型写错，不能让整篇翻译中止。
+    @field_validator("first_occurrence_note", mode="before")
+    @classmethod
+    def _coerce_note_flag(cls, value: Any) -> Any:
+        # 模型有时把它写成一句加注说明（「首现作“CoWoS（…）”，其后保留」）：写了说明就是要首现加注，
+        # 只有明确说不需要才算否。
+        if value is None:
+            return False
+        if isinstance(value, str):
+            text = value.strip().lower()
+            if not text or text in {"false", "no", "none", "null", "0", "n/a"} or text.startswith(("不", "无", "否", "没")):
+                return False
+            return True
+        return value
+
+    @field_validator("alternatives", "avoid", mode="before")
+    @classmethod
+    def _coerce_str_list(cls, value: Any) -> Any:
+        if value is None:
+            return []
+        if isinstance(value, str):
+            return [value] if value.strip() else []
+        return value
 
 
 class ArticleStyle(BaseModel):

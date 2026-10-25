@@ -83,3 +83,19 @@ def test_json_errors_are_retryable():
     assert analyzer._should_retry_with_smaller_sample(
         RuntimeError("invalid argument: bad request")
     ) is False
+
+
+@pytest.mark.parametrize("value,expected", [
+    (True, True), (False, False), (None, False), ("true", True), ("false", False),
+    ("首现作“CoWoS（台积电晶圆级封装）”，其后保留CoWoS。", True),  # 2026-10-25 线上真实输出
+    ("不需要，直接用 CoWoS", False), ("无需加注", False), ("", False),
+])
+def test_term_note_flag_written_as_prose_does_not_abort_analysis(value, expected):
+    # 模型把 first_occurrence_note 写成说明文字时，曾因校验失败让整篇长文翻译中止
+    result = {"sampled_terms": [{"term": "CoWoS", "translation": "CoWoS", "strategy": "preserve",
+                                 "first_occurrence_note": value, "alternatives": "晶圆级封装", "avoid": None}]}
+    analysis = DeepAnalyzer(llm_provider=_RaisingLLM(RuntimeError("unused")))._parse_combined_analysis_result(
+        result, [_section("s1")])
+    term = analysis.terminology[0]
+    assert term.first_occurrence_note is expected
+    assert term.alternatives == ["晶圆级封装"] and term.avoid == []
