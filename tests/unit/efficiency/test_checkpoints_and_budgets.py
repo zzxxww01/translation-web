@@ -70,6 +70,18 @@ def test_checkpoint_rejects_symlinks(store,tmp_path):
     assert external.read_text()=='untouched'
 
 
+def test_checkpoint_symlink_check_stops_at_project_dir(tmp_path):
+    real=tmp_path/'volume'/'p1';real.mkdir(parents=True)
+    projects=tmp_path/'projects';projects.symlink_to(real.parent, target_is_directory=True)
+    store=WorkCheckpointStore(projects/'p1'/'cache', project_dir=projects/'p1')
+    store.save('draft',fingerprint(1),{'x':1})
+    assert store.load('draft',fingerprint(1),dict)=={'x':1}
+    outside=tmp_path/'outside';outside.mkdir()
+    (real/'linked').symlink_to(outside, target_is_directory=True)
+    with pytest.raises(ValueError): WorkCheckpointStore(projects/'p1'/'linked'/'cache', project_dir=projects/'p1')
+    with pytest.raises(ValueError): WorkCheckpointStore(tmp_path/'elsewhere', project_dir=projects/'p1')
+
+
 def test_count_and_size_bounds_do_not_evict_canonical_work(store):
     store.MAX_ENTRIES=2
     for i in range(5): store.save('draft',fingerprint(i),{'i':i})

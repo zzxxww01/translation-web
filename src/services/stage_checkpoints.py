@@ -46,7 +46,7 @@ class StageCheckpoints:
         self.namespace = fingerprint(namespace)
         self.enabled = enabled
         self.reuse_enabled = reuse_enabled
-        self.store = WorkCheckpointStore(self.root)
+        self.store = WorkCheckpointStore(self.root, project_dir=self.project_dir)
 
     @property
     def hits(self):

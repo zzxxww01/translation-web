@@ -127,6 +127,19 @@ def test_waiting_for_checkpoint_observes_cancellation(tmp_path):
         assert a.result(timeout=1) == "result"
 
 
+def test_symlinked_deployment_above_project_is_allowed(tmp_path):
+    # 生产发布目录里 projects 是指向数据盘的软链接：项目目录以上的链接属于部署布局，不能挡住翻译
+    data = tmp_path / "volume" / "projects" / "p1"
+    data.mkdir(parents=True)
+    release = tmp_path / "release"
+    release.mkdir()
+    (release / "projects").symlink_to(data.parent, target_is_directory=True)
+    store = StageCheckpoints(release / "projects" / "p1", "v1")
+    assert store.compute("draft", {}, lambda: "ok") == "ok"
+    assert store.compute("draft", {}, lambda: "wrong") == "ok"
+    assert list((data / "artifacts" / "work-checkpoints-v1").glob("draft-*.json"))
+
+
 def test_rejects_symlink_cache_and_does_not_store_credentials(tmp_path):
     (tmp_path / "artifacts").symlink_to(tmp_path.parent, target_is_directory=True)
     with pytest.raises(ValueError):

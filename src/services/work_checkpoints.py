@@ -77,8 +77,15 @@ class WorkCheckpointStore:
     MAX_BYTES = 8 * 1024 * 1024
     MAX_ENTRIES = 1024
 
-    def __init__(self, root: Path):
+    def __init__(self, root: Path, *, project_dir: Path | None = None):
+        """project_dir bounds the symlink check. Links above it belong to the
+        deployment (a release whose `projects` points at the data volume) and are
+        allowed; links from the project directory down are rejected. Without it,
+        every parent is checked."""
         self.root = Path(root).absolute()
+        self.project_dir = Path(project_dir).absolute() if project_dir is not None else None
+        if self.project_dir is not None and self.project_dir not in (self.root, *self.root.parents):
+            raise ValueError("Checkpoint path must stay inside its project")
         self._guard = Lock()
         self.hits = 0
         self.misses = 0
@@ -86,7 +93,10 @@ class WorkCheckpointStore:
         self._safe_root()
 
     def _safe_root(self):
-        if any(p.is_symlink() for p in (self.root, *self.root.parents)):
+        owned = [self.root, *self.root.parents]
+        if self.project_dir is not None:
+            owned = owned[:owned.index(self.project_dir) + 1]
+        if any(p.is_symlink() for p in owned):
             raise ValueError("Checkpoint path must not contain symlinks")
         self.root.mkdir(parents=True, exist_ok=True)
 

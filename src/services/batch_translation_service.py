@@ -1036,7 +1036,8 @@ class BatchTranslationService:
         from contextlib import nullcontext
         from src.config.efficiency import EfficiencyOptions
         options = self.efficiency = getattr(self, "efficiency", EfficiencyOptions())
-        self._work_cache = WorkCheckpointStore(self.project_manager._project_dir(project_id) / "artifacts" / "work-checkpoints-v1")
+        project_dir = self.project_manager._project_dir(project_id)
+        self._work_cache = WorkCheckpointStore(project_dir / "artifacts" / "work-checkpoints-v1", project_dir=project_dir)
         cache_scope = checkpoint_scope(self._work_cache, read_enabled=self._retranslate_scope != "all") if options.resume_stages else nullcontext()
         from src.llm.request_sizing import RequestBudget, request_size_scope
         size_scope = request_size_scope(RequestBudget(options.max_request_input_tokens,
