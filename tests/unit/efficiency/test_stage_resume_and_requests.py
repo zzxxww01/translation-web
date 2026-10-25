@@ -136,6 +136,32 @@ def test_rendered_draft_budget_splits_without_losing_ids():
     assert len(p.draft_calls)==4 # no request sent for impossible single paragraph
 
 
+def test_truncated_draft_reply_is_retried_in_halves_instead_of_failing_the_section(tmp_path):
+    from src.prompts.contracts import PromptContractError
+    class Truncating(Provider):
+        def translate_section(self,text,title,context,ids):
+            self.draft_calls.append(list(ids))
+            if len(ids)>2: raise PromptContractError('Response does not contain a complete JSON value')
+            return [{'id':key,'translation':f'译文{key}'} for key in ids]
+    p=Truncating();s=section(4);t=translator(p,s)
+    with checkpoint_scope(WorkCheckpointStore(tmp_path/'cache')):
+        result=t._translate_batch(s,s.paragraphs,SectionUnderstanding(),[s])
+    assert [v.text for v in result]==['译文p0','译文p1','译文p2','译文p3']
+    assert p.draft_calls==[['p0','p1','p2','p3'],['p0','p1'],['p2','p3']]
+
+
+def test_unusable_single_paragraph_reply_uses_single_paragraph_fallback(tmp_path):
+    from src.prompts.contracts import PromptContractError
+    class Broken(Provider):
+        def translate_section(self,text,title,context,ids):raise PromptContractError('Response does not contain a complete JSON value')
+    s=section(1);t=translator(Broken(),s);fallback=[]
+    def single(para,*a,**k):fallback.append(para.id);return TranslationPayload(text='补译')
+    t._translate_single_paragraph=single
+    with checkpoint_scope(WorkCheckpointStore(tmp_path/'cache')):
+        result=t._translate_batch(s,s.paragraphs,SectionUnderstanding(),[s])
+    assert [v.text for v in result]==['补译'] and fallback==['p0']
+
+
 def test_rendered_revision_split_keeps_noncontiguous_paragraph_mapping():
     p=Provider();p._request_budget_config={'input_token_limit':12,'max_tokens':5}
     p.local_token_counter=len;p._build_refine_and_polish_prompt=lambda pairs,scores,ctx:'rules'+('x'*5*len(pairs))

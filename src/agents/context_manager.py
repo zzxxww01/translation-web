@@ -24,6 +24,15 @@ from ..core.models import (
 )
 
 
+def _same_rendering(existing: Optional[str], suggested: Optional[str], term: str) -> bool:
+    """A term kept in English is stored with an empty translation; a suggestion of the
+    term itself (or the same text with ™/®, case or spacing differences) is no conflict."""
+    def fold(value: Optional[str]) -> str:
+        text = (value or "").strip() or term
+        return "".join(text.replace("™", "").replace("®", "").split()).casefold()
+    return fold(existing) == fold(suggested)
+
+
 class LayeredContextManager:
     """分层上下文管理器"""
 
@@ -426,7 +435,7 @@ class LayeredContextManager:
 
             # 检查是否存在冲突
             existing = self.terminology_version.get_term(prescan_term.term)
-            if existing and existing.translation != prescan_term.suggested_translation:
+            if existing and not _same_rendering(existing.translation, prescan_term.suggested_translation, prescan_term.term):
                 conflict = TermConflict(
                     term=prescan_term.term,
                     existing_translation=existing.translation or "",
