@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { BookOpen, MessageSquare, MessageCircle, Wrench, FileText, Sparkles, Newspaper } from 'lucide-react';
+import { MessageSquare, MessageCircle, Wrench, FileText, Sparkles, Newspaper } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface NavItem {
@@ -9,8 +9,8 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { path: '/document', label: '长文翻译', icon: <BookOpen className="h-4 w-4" /> },
-  { path: '/substack', label: '文章库', icon: <Newspaper className="h-4 w-4" /> },
+  // 文章库、长文翻译、Claude 精翻合成一个「文章」工作台；旧长文编辑器从工作台「更多」进入
+  { path: '/articles', label: '文章', icon: <Newspaper className="h-4 w-4" /> },
   { path: '/post', label: '帖子翻译', icon: <MessageSquare className="h-4 w-4" /> },
   { path: '/wechat', label: '微信排版', icon: <FileText className="h-4 w-4" /> },
   { path: '/slack', label: 'Slack 回复', icon: <MessageCircle className="h-4 w-4" /> },

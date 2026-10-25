@@ -1,0 +1,62 @@
+import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { apiClient } from '@/shared/api/client';
+import type { Project } from '@/shared/types';
+import { substackApi, type ArticleFilter } from '@/features/substack/api';
+import type { RunMeta } from '@/features/skills/types';
+import { articlesApi } from './api';
+import type { Workbench } from './types';
+
+export const articleKeys = {
+  library: (filter: ArticleFilter, search: string) => ['articles', 'library', filter, search] as const,
+  projects: ['articles', 'projects'] as const,
+  workbench: (projectId: string) => ['articles', 'workbench', projectId] as const,
+  claudeRun: (runId: string) => ['articles', 'claude-run', runId] as const,
+};
+
+/** 有任何一路在跑就每 4 秒刷新一次；都停了就不再轮询。 */
+export function workbenchBusy(data: Workbench | undefined): boolean {
+  if (!data) return false;
+  return data.project.status.active || data.variants.some(variant => variant.status.active);
+}
+
+export function useWorkbench(projectId: string) {
+  return useQuery({
+    queryKey: articleKeys.workbench(projectId),
+    queryFn: () => articlesApi.workbench(projectId),
+    refetchInterval: query => (workbenchBusy(query.state.data) ? 4_000 : false),
+  });
+}
+
+export function useLibrary(filter: ArticleFilter, search: string) {
+  return useInfiniteQuery({
+    queryKey: articleKeys.library(filter, search),
+    queryFn: ({ pageParam }) => substackApi.listArticles(pageParam, search, filter),
+    initialPageParam: 0,
+    getNextPageParam: page => page.next_offset ?? undefined,
+    // 后台还在生成中文标题和摘要时，隔一会儿刷新一次
+    refetchInterval: query => (query.state.data?.pages[0]?.digesting ? 15_000 : false),
+  });
+}
+
+/** 所有主项目（孪生项目后端已经滤掉），用来列出不在文章库里的项目。 */
+export function useProjects(enabled: boolean) {
+  return useQuery({
+    queryKey: articleKeys.projects,
+    queryFn: () => apiClient.get<Project[]>('/projects'),
+    enabled,
+    staleTime: 30_000,
+  });
+}
+
+export function useClaudeRun(runId: string | null) {
+  return useQuery({
+    queryKey: articleKeys.claudeRun(runId ?? ''),
+    queryFn: () => apiClient.get<RunMeta>(`/skills/runs/${runId}`, { retry: false }),
+    enabled: Boolean(runId),
+    refetchInterval: query => {
+      const status = query.state.data?.status;
+      return status === 'running' || status === 'waiting' ? 5_000 : false;
+    },
+    retry: false,
+  });
+}

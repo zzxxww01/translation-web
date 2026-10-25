@@ -24,8 +24,8 @@ const ToolsFeature = lazy(() =>
 const SkillsFeature = lazy(() =>
   import('./features/skills/index.tsx').then(module => ({ default: module.SkillsFeature }))
 );
-const SubstackFeature = lazy(() =>
-  import('./features/substack/index.tsx').then(module => ({ default: module.SubstackFeature }))
+const ArticlesFeature = lazy(() =>
+  import('./features/articles/index.tsx').then(module => ({ default: module.ArticlesFeature }))
 );
 // 78bcf2c 把确认工作台换成沉浸式模式时，连带删掉了质量报告页的路由，但侧栏的
 // 「查看质量报告」按钮（DocumentSidebar）和 DocumentQualityPanel 的入口链接都还
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Navigate to="/document" replace />,
+        element: <Navigate to="/articles" replace />,
       },
       {
         path: 'document/:projectId/confirmation',
@@ -86,12 +86,17 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'substack',
+        path: 'articles/:projectId?',
         element: (
           <LazyPage>
-            <SubstackFeature />
+            <ArticlesFeature />
           </LazyPage>
         ),
+      },
+      {
+        // 文章库并进了「文章」
+        path: 'substack',
+        element: <Navigate to="/articles" replace />,
       },
       {
         path: 'post',

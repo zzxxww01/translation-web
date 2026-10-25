@@ -1,0 +1,65 @@
+import { API_BASE } from '@/shared/constants';
+import { apiClient, ApiErrorWrapper } from '@/shared/api/client';
+import type { Workbench } from './types';
+
+export interface ExportResult {
+  content: string;
+  filename: string;
+  is_incomplete?: boolean;
+}
+
+export const articlesApi = {
+  workbench: (projectId: string) => apiClient.get<Workbench>(`/projects/${projectId}/workbench`),
+
+  saveText: (projectId: string, body: { target: string; section_id: string; paragraph_id: string | null; text: string }) =>
+    apiClient.put<{ ok: boolean }>(`/projects/${projectId}/workbench/text`, body, { retry: false }),
+
+  createModelVariant: (projectId: string, model: string, label: string) =>
+    apiClient.post<{ variant_id: string }>(`/projects/${projectId}/variants`, { kind: 'model', model, label }, { retry: false }),
+
+  importClaude: (projectId: string, body: { run_id: string; zh_markdown: string; en_markdown: string }) =>
+    apiClient.post<{ variant_id: string; aligned: number; unaligned: number }>(
+      `/projects/${projectId}/variants/claude`, body, { retry: false, timeout: 120_000 }),
+
+  setClaudeRun: (projectId: string, runId: string | null) =>
+    apiClient.put<{ ok: boolean }>(`/projects/${projectId}/claude-run`, { run_id: runId }, { retry: false }),
+
+  /** 后台四步法；译本 2 传 model 并自动采用术语建议，不打断用户 */
+  startWorkflow: (projectId: string, options: { model?: string; autoAcceptTerms?: boolean } = {}) =>
+    apiClient.post<{ run_id: string }>(
+      `/projects/${projectId}/translation-workflow`,
+      {
+        method: 'four-step',
+        ...(options.model ? { model: options.model } : {}),
+        ...(options.autoAcceptTerms ? { auto_accept_terms: true } : {}),
+      },
+      { retry: false },
+    ),
+
+  exportMarkdown: (projectId: string, format: 'zh' | 'en', allowQaOverride = false) =>
+    apiClient.post<ExportResult>(`/projects/${projectId}/export`, undefined, {
+      params: { format, ...(allowQaOverride ? { allow_qa_override: true } : {}) },
+      retry: false,
+      timeout: 120_000,
+    }),
+
+  deleteProject: (projectId: string) => apiClient.delete<{ message: string }>(`/projects/${projectId}`),
+
+  /** 原文 HTML（交给 Claude 的 four-step-translate） */
+  async sourceHtml(projectId: string): Promise<File> {
+    const response = await fetch(`${API_BASE}/projects/${projectId}/source-html`);
+    if (!response.ok) throw new ApiErrorWrapper('取不到原文 HTML', response.status);
+    return new File([await response.blob()], `${projectId}.html`, { type: 'text/html' });
+  },
+};
+
+export function downloadText(filename: string, content: string): void {
+  const url = URL.createObjectURL(new Blob([content], { type: 'text/markdown;charset=utf-8' }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}

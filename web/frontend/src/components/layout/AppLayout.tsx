@@ -105,7 +105,7 @@ export function AppLayout() {
               </SheetContent>
             </Sheet>
 
-            <Link to="/document" aria-label="momo 翻译工作台首页" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            <Link to="/articles" aria-label="momo 翻译工作台首页" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               <BrandMark />
             </Link>
           </div>
