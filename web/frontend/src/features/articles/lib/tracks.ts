@@ -49,17 +49,17 @@ export function canFillMissing(status: TrackStatus, filled: { done: number; tota
   return !status.active && filled.done > 0 && filled.done < filled.total;
 }
 
-export type StatusTone = 'muted' | 'busy' | 'wait' | 'review' | 'done';
+export type StatusTone = 'muted' | 'busy' | 'wait' | 'done';
 
-/** 文章列表里一篇文章的状态（网页版的进度 + 有没有保存全文）；没导入时为 null。 */
-export function articleStatus(status: ArticleStatus, progress: number): { text: string; tone: StatusTone } | null {
+/** 已导入文章的翻译进度（网页版和译本 2 取进度高的）；没导入时为 null。 */
+export function articleStatus(status: ArticleStatus, progress: number): { text: string; tone: StatusTone; percent: number } | null {
+  const percent = Math.round(progress);
   switch (status) {
-    case 'imported': return { text: '还没翻', tone: 'muted' };
-    case 'awaiting_terms': return { text: '等你确认术语', tone: 'wait' };
-    case 'translating': return { text: `翻译中 ${Math.round(progress)}%`, tone: 'busy' };
-    case 'partial': return { text: `缺译 · 已译 ${Math.round(progress)}%`, tone: 'wait' };
-    case 'translated': return { text: '待校对', tone: 'review' };
-    case 'finalized': return { text: '已定稿', tone: 'done' };
+    case 'imported': return { text: '还没翻', tone: 'muted', percent: 0 };
+    case 'awaiting_terms': return { text: '等你确认术语', tone: 'wait', percent };
+    case 'translating': return { text: `翻译中 ${percent}%`, tone: 'busy', percent };
+    case 'partial': return { text: `已译 ${percent}%`, tone: 'wait', percent };
+    case 'translated': return { text: '已翻译', tone: 'done', percent: 100 };
     default: return null;
   }
 }

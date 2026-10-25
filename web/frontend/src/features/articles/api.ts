@@ -1,6 +1,6 @@
 import { API_BASE } from '@/shared/constants';
 import { apiClient, ApiErrorWrapper } from '@/shared/api/client';
-import type { ChangesReport, FinalizedSummary, Workbench } from './types';
+import type { ChangesReport, Workbench } from './types';
 
 export interface ExportResult {
   content: string;
@@ -13,10 +13,6 @@ export const articlesApi = {
 
   saveText: (projectId: string, body: { target: string; section_id: string; paragraph_id: string | null; text: string }) =>
     apiClient.put<{ ok: boolean }>(`/projects/${projectId}/workbench/text`, body, { retry: false }),
-
-  /** 保存全文：这个版本全篇一次确认，定稿和人工改动存到服务器 */
-  finalize: (projectId: string, target: string) =>
-    apiClient.post<FinalizedSummary & { confirmed: number }>(`/projects/${projectId}/workbench/finalize`, { target }, { retry: false, timeout: 120_000 }),
 
   changes: (projectId: string, target: string) =>
     apiClient.get<ChangesReport>(`/projects/${projectId}/workbench/changes`, { params: { target } }),
@@ -64,7 +60,7 @@ export const articlesApi = {
   },
 };
 
-/** 所有保存过全文的文章的人工改动（JSONL），给以后分析用 */
+/** 所有文章、所有版本的人工改动（机翻初稿 → 现在，JSONL），给以后优化用 */
 export const HUMAN_EDITS_URL = `${API_BASE}/workbench/human-edits.jsonl`;
 
 export function downloadText(filename: string, content: string): void {

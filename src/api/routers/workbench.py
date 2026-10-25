@@ -1,4 +1,4 @@
-"""文章工作台：三栏对照（英文 / 译本 1 / 译本 2）所需的数据、自动保存、保存全文与人工改动、译本 2 的创建与导入。
+"""文章工作台：三栏对照（英文 / 译本 1 / 译本 2）所需的数据、自动保存、人工改动、译本 2 的创建与导入。
 
 译本 2 是同源孪生项目（见 src/services/article_variants.py），段落 id 与主项目一致。
 """
@@ -50,9 +50,6 @@ class ImportClaudeRequest(BaseModel):
 class ClaudeRunRequest(BaseModel):
     run_id: Optional[str] = Field(None, max_length=100)
 
-
-class FinalizeRequest(BaseModel):
-    target: str = Field(..., min_length=1, max_length=200)  # 主项目或孪生项目 id
 
 
 def _check_id(project_id: str) -> None:
@@ -135,11 +132,10 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
         variant_metas = [pm.get(v.id) for v in article_variants.list_variants(pm, project_id)]
         variant_sections = {v.id: pm.get_sections(v.id) for v in variant_metas}
         imports = {v.id: article_variants.read_import_record(pm, v.id) for v in variant_metas if v.variant_kind == "claude"}
-        finalized = {pid: article_edits.read_summary(pm, pid) for pid in [project_id, *(v.id for v in variant_metas)]}
-        return meta, sections, variant_metas, variant_sections, imports, finalized
+        return meta, sections, variant_metas, variant_sections, imports
 
     try:
-        meta, sections, variant_metas, variant_sections, imports, finalized = await run_blocking(load)
+        meta, sections, variant_metas, variant_sections, imports = await run_blocking(load)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -154,7 +150,6 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "progress": {"total": variant.progress.total_paragraphs, "approved": variant.progress.approved},
             "status": _status_summary(await status_service.get_translation_progress(variant.id)),
             "import": imports.get(variant.id),
-            "finalized": finalized.get(variant.id),
         })
     original_url = meta.metadata.original_url if meta.metadata else None
     return {
@@ -167,7 +162,6 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "claude_run_id": meta.claude_run_id,
             "progress": {"total": meta.progress.total_paragraphs, "approved": meta.progress.approved},
             "status": main_status,
-            "finalized": finalized.get(project_id),
         },
         "variants": variants,
         "rows": _build_rows(project_id, sections, variant_sections),
@@ -212,8 +206,7 @@ async def get_changes(project_id: str, target: str, pm: ProjectManagerDep):
 
     def load():
         _check_target(pm, project_id, target)
-        report = article_edits.with_segments(article_edits.collect_changes(pm.get_sections(target)))
-        return {**report, "finalized": article_edits.read_summary(pm, target)}
+        return article_edits.with_segments(article_edits.collect_changes(pm.get_sections(target)))
 
     try:
         return await run_blocking(load)
@@ -221,25 +214,9 @@ async def get_changes(project_id: str, target: str, pm: ProjectManagerDep):
         raise NotFoundException(detail="Project not found")
 
 
-@router.post("/projects/{project_id}/workbench/finalize")
-@limiter.limit("20/minute")
-async def finalize_version(request: Request, project_id: str, body: FinalizeRequest, pm: ProjectManagerDep):
-    """保存全文：这个版本全篇一次确认，定稿和人工改动（对比机翻初稿）存进项目目录 finalized/。"""
-    _check_id(project_id)
-
-    def run():
-        _check_target(pm, project_id, body.target)
-        return article_edits.finalize(pm, project_id, body.target)
-
-    try:
-        return await run_blocking(run)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
-
-
 @router.get("/workbench/human-edits.jsonl")
 async def export_human_edits(pm: ProjectManagerDep):
-    """所有保存过全文的版本的人工改动，一行一段，用来批量分析人工改了什么。"""
+    """所有文章、所有版本的人工改动（机翻初稿 → 现在），一行一段，用来批量分析人工改了什么。"""
     content = await run_blocking(lambda: "".join(article_edits.export_all(pm)))
     stamp = datetime.now().strftime("%Y%m%d")
     return Response(

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { AlertCircle, ArrowLeft, Bot, Download, ExternalLink, FileDiff, MoreHorizontal, PanelLeft, Play } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Bot, Download, ExternalLink, FileDiff, MoreHorizontal, PanelLeft, Play, Save } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import {
@@ -17,12 +17,11 @@ import { harnessLabel, type Harness } from '@/features/skills/harness';
 import { isUnauthorized } from '@/features/skills/hooks';
 import { articlesApi, downloadText, HUMAN_EDITS_URL } from '../api';
 import { articleKeys, useClaudeRun, useWorkbench } from '../hooks';
-import { savedAtText } from '../lib/changes';
 import { importClaudeTrack, NoClaudeOutput, startClaudeTrack } from '../lib/claude';
-import { flushPane, unsavedEdits, usePaneSaveState } from '../lib/edits';
+import { flushEdits, unsavedEdits, usePaneSaveState } from '../lib/edits';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { canFillMissing, countFilled, SECOND_MODELS, sectionsWithMissing, TERMS_STEP, trackSummary } from '../lib/tracks';
-import type { FinalizedSummary, PaneId, Workbench as WorkbenchData, WorkbenchRow, WorkbenchVariant } from '../types';
+import type { PaneId, Workbench as WorkbenchData, WorkbenchRow, WorkbenchVariant } from '../types';
 import { ChangesDrawer, type ChangesTarget } from './ChangesDrawer';
 import { PaneGrid, type PaneColumn } from './PaneGrid';
 import { TrackDrawer, type DrawerState } from './TrackDrawer';
@@ -96,7 +95,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const [changes, setChanges] = useState<ChangesTarget | null>(null);
   const [claudeNote, setClaudeNote] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
-  const [finalizing, setFinalizing] = useState<string | null>(null);
+  const [saving, setSaving] = useState(false);
   const importTried = useRef<string | null>(null);
 
   const variant: WorkbenchVariant | null = variants.find(v => v.id === variantId) ?? variants[0] ?? null;
@@ -164,27 +163,27 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     }
   };
 
-  /** 保存全文：先等这一栏的自动保存落定，再整篇确认，定稿和人工改动存到服务器 */
-  const finalize = async (target: string, pane: 'web' | 'alt', label: string) => {
-    setFinalizing(target);
+  /** 手动保存：改动本来就自动保存，这里只是让正在改的那段立刻存下，并确认都存好了 */
+  const saveNow = useCallback(async () => {
+    setSaving(true);
     try {
-      if (!(await flushPane(pane))) {
-        toast.error('还有段落没保存上（标红的那几段），处理好再保存全文');
-        return;
-      }
-      const result = await articlesApi.finalize(project.id, target);
-      toast.success(result.changed ? `已保存全文：${label}，你改了 ${result.changed} 段` : `已保存全文：${label}（没有改动）`);
-      await Promise.all([
-        refresh(),
-        queryClient.invalidateQueries({ queryKey: ['articles', 'library'] }),
-        queryClient.invalidateQueries({ queryKey: articleKeys.changes(target) }),
-      ]);
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : '保存全文失败');
+      if (await flushEdits()) toast.success('已保存');
+      else toast.error('有段落没保存上（标红的那几段），点它旁边的「重试」');
     } finally {
-      setFinalizing(null);
+      setSaving(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') {
+        event.preventDefault();
+        void saveNow();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [saveNow]);
 
   const startWeb = async () => {
     setBusy(true);
@@ -262,11 +261,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             summaryTitle={project.status.current_step ?? undefined}
             start={webNotStarted ? { label: '开始翻译', onClick: () => void startWeb(), disabled: busy } : null}
             onFill={canFillMissing(project.status, webFilled) ? () => void fillMissing(project.id, row => row.web) : undefined}
-            finalized={project.finalized}
-            finalizing={finalizing === project.id}
             onExport={() => void exportVersion(project.id, 'zh')}
             onChanges={() => setChanges({ projectId: project.id, target: project.id, label: '译本 1 · 网页版', title })}
-            onFinalize={() => void finalize(project.id, 'web', '译本 1 · 网页版')}
           />
         ),
         text: row => row.web,
@@ -297,11 +293,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             onFill={variant.kind === 'model' && altFilled && canFillMissing(variant.status, altFilled)
               ? () => void fillMissing(variant.id, row => row.alt[variant.id] ?? null, SECOND_MODELS.find(option => option.label === variant.label)?.model)
               : undefined}
-            finalized={variant.finalized}
-            finalizing={finalizing === variant.id}
             onExport={() => void exportVersion(variant.id, 'zh')}
             onChanges={() => setChanges({ projectId: project.id, target: variant.id, label: altLabel, title })}
-            onFinalize={() => void finalize(variant.id, 'alt', altLabel)}
           />
         ) : (
           <span className="text-sm font-medium text-text-secondary">{altLabel}</span>
@@ -316,9 +309,9 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
           : { text: () => null, save: async () => undefined, placeholder: '' }),
       },
     };
-    // exportVersion / finalize / startWeb 只依赖下面这些，跟着它们变
+    // exportVersion / startWeb 只依赖下面这些，跟着它们变
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [project, variant, variants, webSummary.text, altSummary?.text, save, busy, finalizing, webNotStarted, title]);
+  }, [project, variant, variants, webSummary.text, altSummary?.text, save, busy, webNotStarted, title]);
 
   const claudeRunning = run?.status === 'running';
   // 提问挂着（waiting），或者一轮结束时说了在等确认（Codex 都是这种）
@@ -354,6 +347,9 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             )}
           </div>
           <div className="flex items-center gap-1">
+            <Button size="sm" variant="outline" disabled={saving} onClick={() => void saveNow()} title="Ctrl/⌘ + S。改动本来就会自动保存，这里是立刻存下">
+              <Save /> {saving ? '保存中…' : '保存'}
+            </Button>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button size="sm" variant="outline"><Download /> 导出</Button>
@@ -469,19 +465,16 @@ function IconButton({ title, onClick, children }: { title: string; onClick: () =
   );
 }
 
-/** 中文栏的栏头：栏名、进度、（开始翻译 / 补译）、自动保存状态、改动、导出、保存全文 */
-function VersionHeader({ pane, label, summary, summaryTitle, start, onFill, finalized, finalizing, onExport, onChanges, onFinalize }: {
+/** 中文栏的栏头：栏名、进度、（开始翻译 / 补译）、保存状态、改动、导出 */
+function VersionHeader({ pane, label, summary, summaryTitle, start, onFill, onExport, onChanges }: {
   pane: 'web' | 'alt';
   label: ReactNode;
   summary?: string;
   summaryTitle?: string;
   start?: { label: string; onClick: () => void; disabled?: boolean } | null;
   onFill?: () => void;
-  finalized: FinalizedSummary | null;
-  finalizing: boolean;
   onExport: () => void;
   onChanges: () => void;
-  onFinalize: () => void;
 }) {
   return (
     <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -494,30 +487,19 @@ function VersionHeader({ pane, label, summary, summaryTitle, start, onFill, fina
       )}
       {onFill && <button type="button" onClick={onFill} className="rounded-md px-1.5 text-xs text-primary-700 hover:bg-primary-50">补译</button>}
       <span className="flex-1" />
-      <SaveState pane={pane} finalized={finalized} />
+      <SaveState pane={pane} />
       <IconButton title="看你改了什么" onClick={onChanges}><FileDiff className="h-3.5 w-3.5" /></IconButton>
       <IconButton title="导出这一版" onClick={onExport}><Download className="h-3.5 w-3.5" /></IconButton>
-      <Button size="sm" variant="outline" className="h-7 px-2" disabled={finalizing} onClick={onFinalize} title="整篇定稿：一次确认全文，并把你改了什么存下来">
-        {finalizing ? '保存中…' : '保存全文'}
-      </Button>
     </div>
   );
 }
 
-/** 这一栏的自动保存状态；保存过全文且之后没再改，就显示保存全文的时间 */
-function SaveState({ pane, finalized }: { pane: 'web' | 'alt'; finalized: FinalizedSummary | null }) {
+/** 这一栏的保存状态（自动保存和手动保存一样，只说明存没存下） */
+function SaveState({ pane }: { pane: 'web' | 'alt' }) {
   const state = usePaneSaveState(pane);
   if (state.failed) return <span className="text-xs text-error">{state.failed} 段没保存上</span>;
   if (state.busy) return <span className="text-xs text-text-muted">保存中…</span>;
-  const finalizedAt = finalized ? Date.parse(finalized.saved_at) : 0;
-  if (state.savedAt && state.savedAt > finalizedAt) return <span className="text-xs text-text-muted">已自动保存</span>;
-  if (finalized) {
-    return (
-      <span className="text-xs text-success" title={`共 ${finalized.total} 段，你改了 ${finalized.changed} 段`}>
-        已保存全文 {savedAtText(finalized.saved_at)}
-      </span>
-    );
-  }
+  if (state.savedAt) return <span className="text-xs text-text-muted">已保存 {clock.format(state.savedAt)}</span>;
   return null;
 }
 

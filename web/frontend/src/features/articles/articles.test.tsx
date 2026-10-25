@@ -3,6 +3,7 @@ import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { MemoryRouter } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { EditableText } from './components/EditableText';
 import { Workbench } from './components/Workbench';
@@ -19,7 +20,6 @@ const api = vi.hoisted(() => ({
   exportMarkdown: vi.fn(),
   setClaudeRun: vi.fn(),
   sourceHtml: vi.fn(),
-  finalize: vi.fn(),
   changes: vi.fn(),
 }));
 const substack = vi.hoisted(() => ({ importArticle: vi.fn() }));
@@ -56,6 +56,7 @@ beforeEach(() => {
   claude.startClaudeTrack.mockReset();
   claude.importClaudeTrack.mockReset();
   agentRun.current = undefined;
+  vi.mocked(toast.success).mockReset();
   localStorage.clear(); // 收起的栏会记在 localStorage 里
   host = document.createElement('div');
   document.body.appendChild(host);
@@ -144,10 +145,9 @@ const DATA: WorkbenchData = {
     id: 'p1', title: 'Datacenters 2027', title_translation: '2027 数据中心', original_url: null, created_at: '', claude_run_id: null,
     progress: { total: 2, approved: 0 },
     status: { active: false, run_id: null, status: null, current_step: null, translated: 2, total: 2, error: null },
-    finalized: null,
   },
   variants: [{
-    id: 'p1--argon', kind: 'model', label: 'argon', title_translation: null, progress: { total: 2, approved: 0 }, import: null, finalized: null,
+    id: 'p1--argon', kind: 'model', label: 'argon', title_translation: null, progress: { total: 2, approved: 0 }, import: null,
     status: { active: false, run_id: null, status: null, current_step: null, translated: 1, total: 2, error: null },
   }],
   rows: [
@@ -188,11 +188,10 @@ describe('Workbench', () => {
     expect(host.textContent).not.toContain('（图片）');
   });
 
-  it('saves the whole version in one go and shows what was changed', async () => {
+  it('saves on demand (button or Ctrl+S) without any "final version" step, and shows what was changed', async () => {
     api.workbench.mockResolvedValue(DATA);
-    api.finalize.mockResolvedValue({ saved_at: '2026-10-26T14:02:00', total: 2, changed: 1, confirmed: 2 });
     api.changes.mockResolvedValue({
-      total: 2, changed: 1, finalized: null,
+      total: 2, changed: 1,
       changes: [{
         key: 's1/p000', section_id: 's1', section_title: 'Introduction', paragraph_id: 'p000', kind: 'p',
         source: 'Datacenters are booming.', before: '数据中心正在繁荣。', after: '数据中心正在爆发。',
@@ -202,11 +201,15 @@ describe('Workbench', () => {
     await render(<Workbench projectId="p1" />);
     await flush();
 
-    const saveAll = Array.from(host.querySelectorAll('button')).filter(b => b.textContent === '保存全文');
-    expect(saveAll).toHaveLength(2);
-    await act(async () => { saveAll[0].click(); });
+    expect(host.textContent).not.toContain('保存全文');
+    expect(host.textContent).not.toContain('定稿');
+    const saveButton = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.trim() === '保存')!;
+    await act(async () => { saveButton.click(); });
     await flush();
-    expect(api.finalize).toHaveBeenCalledWith('p1', 'p1');
+    expect(toast.success).toHaveBeenCalledWith('已保存');
+    await act(async () => { window.dispatchEvent(new KeyboardEvent('keydown', { key: 's', ctrlKey: true })); });
+    await flush();
+    expect(toast.success).toHaveBeenCalledTimes(2);
 
     await act(async () => { (host.querySelector('button[aria-label="看你改了什么"]') as HTMLButtonElement).click(); });
     await flush();

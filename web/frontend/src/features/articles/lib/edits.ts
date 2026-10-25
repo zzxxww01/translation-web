@@ -56,15 +56,15 @@ export function usePaneSaveState(pane: string): PaneSaveState {
   return { busy, failed, savedAt: saved || null };
 }
 
-/** 让正在编辑的格子失焦（会立刻保存），再等这一栏没有在存的修改；超时或有失败返回 false。 */
-export async function flushPane(pane: string, timeoutMs = 8000): Promise<boolean> {
+/** 手动保存：让正在编辑的格子失焦（会立刻保存），再等所有修改存好；超时或有失败返回 false。 */
+export async function flushEdits(timeoutMs = 8000): Promise<boolean> {
   const active = document.activeElement;
   if (active instanceof HTMLElement && active.tagName === 'TEXTAREA') active.blur();
   const deadline = Date.now() + timeoutMs;
   for (;;) {
-    const [busy, failed] = unsavedEdits.snapshot(pane).split('|').map(Number);
-    if (failed) return false;
-    if (!busy) return true;
+    const states = [...cells.values()];
+    if (states.includes('error')) return false;
+    if (!states.length) return true;
     if (Date.now() > deadline) return false;
     await new Promise(resolve => setTimeout(resolve, 150));
   }

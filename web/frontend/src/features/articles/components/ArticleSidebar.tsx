@@ -7,21 +7,17 @@ import { substackApi, type ArticleFilter, type SubstackArticle } from '@/feature
 import { useLibrary, useProjects } from '../hooks';
 import { articleStatus, type StatusTone } from '../lib/tracks';
 
-type ListFilter = Exclude<ArticleFilter, 'imported'>;
-
-const FILTERS: { id: ListFilter; label: string; hint: string }[] = [
-  { id: 'all', label: '全部', hint: '文章库里的全部文章' },
-  { id: 'not_imported', label: '未导入', hint: '还没导入的文章' },
-  { id: 'in_progress', label: '进行中', hint: '导入了、还没在工作台「保存全文」的：翻译中、等确认、待校对' },
-  { id: 'finalized', label: '已定稿', hint: '在工作台点过「保存全文」的' },
+const FILTERS: { id: ArticleFilter; label: string }[] = [
+  { id: 'all', label: '全部' },
+  { id: 'not_imported', label: '未导入' },
+  { id: 'imported', label: '已导入' },
 ];
 
-const TONE: Record<StatusTone, string> = {
-  muted: 'text-text-muted before:bg-text-disabled',
-  busy: 'text-info before:bg-info',
-  wait: 'text-warning before:bg-warning',
-  review: 'text-primary-700 before:bg-primary-500',
-  done: 'text-success before:bg-success',
+const TONE: Record<StatusTone, { text: string; bar: string }> = {
+  muted: { text: 'text-text-muted', bar: 'bg-text-disabled' },
+  busy: { text: 'text-info', bar: 'bg-info' },
+  wait: { text: 'text-warning', bar: 'bg-warning' },
+  done: { text: 'text-success', bar: 'bg-success' },
 };
 
 const shortDate = new Intl.DateTimeFormat('zh-CN', { month: 'numeric', day: 'numeric' });
@@ -45,20 +41,20 @@ interface ArticleSidebarProps {
 /** 文章库的文章和自己的项目放在一个列表里，用筛选切换。 */
 export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticle, onSelectProject }: ArticleSidebarProps) {
   const queryClient = useQueryClient();
-  const [filter, setFilter] = useState<ListFilter>('all');
+  const [filter, setFilter] = useState<ArticleFilter>('all');
   const [input, setInput] = useState('');
   const search = useDebounced(input.trim(), 300);
   const library = useLibrary(filter, search);
-  const projects = useProjects(filter === 'in_progress');
+  const projects = useProjects(filter === 'imported');
   const [syncing, setSyncing] = useState(false);
   const sentinel = useRef<HTMLLIElement>(null);
 
   const articles = useMemo(() => library.data?.pages.flatMap(page => page.articles) ?? [], [library.data]);
   const total = library.data?.pages[0]?.total ?? 0;
   const counts = library.data?.pages[0]?.counts;
-  // 「进行中」里补上不在文章库里的项目（手动上传的）
+  // 「已导入」里补上不在文章库里的项目（手动上传的）
   const otherProjects = useMemo(() => {
-    if (filter !== 'in_progress' || !projects.data || library.hasNextPage) return [];
+    if (filter !== 'imported' || !projects.data || library.hasNextPage) return [];
     const linked = new Set(articles.map(article => article.project_id).filter(Boolean));
     const keyword = search.toLowerCase();
     return projects.data.filter(project => !linked.has(project.id) && (!keyword || project.title.toLowerCase().includes(keyword)));
@@ -106,7 +102,6 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
               key={item.id}
               type="button"
               aria-pressed={filter === item.id}
-              title={item.hint}
               onClick={() => setFilter(item.id)}
               className={cn('rounded-md px-2 py-1 text-xs transition-colors', filter === item.id ? 'bg-primary-50 font-medium text-primary-700' : 'text-text-muted hover:bg-bg-hover hover:text-text-primary')}
             >
@@ -138,10 +133,13 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
                 <span className="mt-1 flex items-center gap-2 text-[11px] text-text-muted">
                   <span>{Number.isFinite(Date.parse(article.post_date)) ? shortDate.format(Date.parse(article.post_date)) : ''}</span>
                   {article.is_paid && <span className="rounded bg-bg-tertiary px-1">付费</span>}
-                  {status && (
-                    <span className={cn('ml-auto flex items-center gap-1 before:h-1.5 before:w-1.5 before:rounded-full', TONE[status.tone])}>{status.text}</span>
-                  )}
+                  {status && <span className={cn('ml-auto', TONE[status.tone].text)}>{status.text}</span>}
                 </span>
+                {status && (
+                  <span className="mt-1.5 block h-0.5 overflow-hidden rounded-full bg-bg-tertiary" aria-hidden>
+                    <span className={cn('block h-full rounded-full', TONE[status.tone].bar)} style={{ width: `${status.percent}%` }} />
+                  </span>
+                )}
               </button>
             </li>
           );

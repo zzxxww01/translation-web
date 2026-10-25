@@ -65,8 +65,6 @@ class ProjectMeta(BaseModel):
     variant_label: Optional[str] = None
     # 主项目：这篇文章交给 Claude（four-step-translate）的任务 id
     claude_run_id: Optional[str] = None
-    # 最近一次在工作台「保存全文」的时间（主项目记任一版本的，孪生项目记自己的）
-    finalized_at: Optional[datetime] = None
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     status: ProjectStatus = ProjectStatus.CREATED

@@ -1,5 +1,3 @@
-from datetime import datetime
-
 import pytest
 from starlette.requests import Request
 
@@ -7,6 +5,7 @@ from src.api.middleware import APIException
 from src.api.routers import substack
 from src.core.models import ProjectStatus
 from src.core.project import ProjectManager, ProjectTranslationSummary
+from src.services import article_variants
 from src.services.substack_library import SubstackLibrary
 from src.services.substack_service import (
     ArchivePost,
@@ -224,22 +223,27 @@ async def test_list_articles_filters_by_imported(tmp_path, pm):
 
 
 @pytest.mark.asyncio
-async def test_list_articles_counts_and_filters_by_progress_bucket(tmp_path, pm):
-    project_id = await _import(tmp_path, pm)
+async def test_list_articles_counts_imported_and_not_imported(tmp_path, pm):
+    await _import(tmp_path, pm)
     library = _library(tmp_path)
     page = await _list(pm, library)
-    assert page.counts == {"all": 2, "not_imported": 1, "in_progress": 1, "finalized": 0}
-    assert [a.slug for a in (await _list(pm, library, imported_filter="in_progress")).articles] == ["demo-post"]
-    assert (await _list(pm, library, imported_filter="finalized")).articles == []
+    assert page.counts == {"all": 2, "not_imported": 1, "imported": 1}
+    assert (await _list(pm, library, imported_filter="imported")).counts == page.counts
 
-    # 在工作台保存过全文 → 已定稿
-    pm.merge_meta_fields(project_id, fields={"finalized_at": datetime(2026, 10, 26, 14, 2)})
-    page = await _list(pm, library)
-    assert page.articles[0].status == "finalized"
-    assert page.counts == {"all": 2, "not_imported": 1, "in_progress": 0, "finalized": 1}
-    finalized = await _list(pm, library, imported_filter="finalized")
-    assert [a.slug for a in finalized.articles] == ["demo-post"] and finalized.counts["finalized"] == 1
-    assert [a.slug for a in (await _list(pm, library, imported_filter="imported")).articles] == ["demo-post"]
+
+@pytest.mark.asyncio
+async def test_list_articles_progress_takes_the_further_version(tmp_path, pm, monkeypatch):
+    project_id = await _import(tmp_path, pm)
+    variant = article_variants.create_variant(pm, project_id, kind="claude", label="Codex", suffix="Codex")
+    done = {project_id: 0, variant: 4}
+    monkeypatch.setattr(pm, "get_translation_summary", lambda pid: ProjectTranslationSummary(
+        status=ProjectStatus.IN_PROGRESS, total_sections=1, total_paragraphs=4,
+        translated_sections=0, translated_paragraphs=done[pid],
+    ))
+    library = _library(tmp_path)
+    article = (await _list(pm, library)).articles[0]
+    assert (article.project_id, article.status, article.progress) == (project_id, "translated", 100)
+    assert (await _list(pm, library)).counts["imported"] == 1  # 孪生项目不算一篇
 
 
 @pytest.mark.asyncio
