@@ -83,6 +83,26 @@ def _count_term_occurrences(text: str, term: str) -> int:
     return text.lower().count(normalized_term.lower())
 
 
+def _term_tags(term: Any) -> List[str]:
+    tags = term.get("tags") if isinstance(term, dict) else getattr(term, "tags", None)
+    return list(tags) if isinstance(tags, (list, tuple)) else []
+
+
+def _count_glossary_occurrences(text: str, original: str, tags: Iterable[str] = ()) -> int:
+    """Occurrences of a glossary entry, also counting the press spelling of long caps brands.
+
+    A company that styles its name in capitals is usually title-cased in articles
+    (NVIDIA → Nvidia); without this the entry was not injected for those sections and
+    one article ended up with 英伟达 / Nvidia / NVIDIA side by side. Short caps names
+    (BEST, AMD) stay case-sensitive because they collide with ordinary words.
+    """
+    count = _count_term_occurrences(text, original)
+    stripped = original.strip()
+    if "company" in tags and len(stripped) >= 5 and stripped.isalpha() and stripped.isupper():
+        count = max(count, _count_term_occurrences(text, stripped.capitalize()))
+    return count
+
+
 def _normalize_whitespace(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value or "")).strip()
 
@@ -160,7 +180,7 @@ def select_prompt_terms_for_text(
         if not normalized_source:
             continue
 
-        occurrences = _count_term_occurrences(normalized_source, payload["original"])
+        occurrences = _count_glossary_occurrences(normalized_source, payload["original"], _term_tags(term))
         if occurrences <= 0:
             continue
 
@@ -408,7 +428,7 @@ def select_glossary_terms_for_text(
     # 使用 _count_term_occurrences（带边界匹配）作为统一标准筛选命中术语
     candidates: List[tuple[int, int, int, GlossaryTerm]] = []
     for index, term in enumerate(active_terms):
-        occurrences = _count_term_occurrences(source_text, term.original)
+        occurrences = _count_glossary_occurrences(source_text, term.original, _term_tags(term))
         if occurrences > 0:
             candidates.append((occurrences, len(term.original), index, term))
 

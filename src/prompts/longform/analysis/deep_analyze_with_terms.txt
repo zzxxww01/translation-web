@@ -2,7 +2,7 @@
 
 分析提供的采样与大纲。采样不是全文，不能为未见段落补造论点、逐段结构或词频。总结应标明仅据样本；角色推断与原文事实分开。不因固定配额提取无关词。
 识别主题、论证线索、中文读者、作者语域和真正可能误译的表达；跨领域词按本处原句判义，不将整篇限定为单一领域。不展开无法确认的缩写。
-术语 strategy 只有四个值：preserve（原文不注释）、preserve_annotate（首现英文加中文说明）、first_annotate（首现中文加英文，后续中文）、translate（直接中文）；代码、型号和无可靠中文名的专名优先 preserve。每项给出原文证据，不以置信分数代替证据。
+术语 strategy 只有四个值：preserve（原文不注释）、preserve_annotate（首现英文加中文说明）、first_annotate（首现中文加英文，后续中文）、translate（直接中文）；代码、型号和无可靠中文名的专名优先 preserve；preserve_annotate 只用于必须保留英文的产品、项目等专名，有通行中文说法的技术概念（如 sparse MoE 写作稀疏 MoE）用 first_annotate 或 translate。每项给出原文证据，不以置信分数代替证据。guidelines 只写本文特有、会影响译法的提醒，不要求保留能翻译的普通英文短语（如 nightly run）。
 ## 采样
 {sampled_text}
 ## 大纲
