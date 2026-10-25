@@ -62,3 +62,13 @@ def test_quick_convert_uses_detected_zone_for_relative_parser(monkeypatch):
     monkeypatch.setattr(tz,'parse_datetime_input',parse)
     assert tz.quick_convert('今天12点 PST')['success']
     assert seen==['PST']
+
+# 工具箱时区页（TimezoneConverter.tsx）输入框下方写给用户看的写法，必须和解析规则一致
+@pytest.mark.parametrize('text', ['今天下午3点','明天上午9点半','明天 15:30','1/26 4pm','1/26/26 4:30 pm','1/26 16:00',
+                                  '2026-01-26 14:00','Jan 26, 2026 4pm','1/26 4pm PT','2026-01-26 14:00 EST','今天下午3点 BEIJING','1/26 4pm UTC'])
+def test_formats_documented_on_the_page_parse(text):
+    assert parse_datetime_input(text)[0] is not None
+
+@pytest.mark.parametrize('text', ['3pm EST','Thursday 3pm','今天晚上8点'])
+def test_formats_the_page_says_are_unsupported_are_rejected(text):
+    assert parse_datetime_input(text)==(None,None)
