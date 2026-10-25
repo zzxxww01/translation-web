@@ -118,3 +118,19 @@ def test_analysis_text_fields_written_as_objects_do_not_abort_translation():
     assert analysis.challenges[0].issue == "FUD；需要意译" and analysis.challenges[0].suggestion is None
     assert analysis.style.target_audience == "投资者；行业研究员"
     assert SectionUnderstanding(key_points="只有一条").key_points == ["只有一条"]
+
+
+def test_analysis_objects_written_as_strings_are_parsed_not_crashed_on():
+    # 2026-10-25 线上真实输出：style 写成一句话，解析时 style_data.get() 抛 AttributeError，补译整篇失败
+    result = {
+        "theme": "数据中心加速",
+        "style": "专业、数据密集，面向投资者",
+        "challenges": ["FUD 一词需要意译", {"location": "intro", "issue": "数字口径"}],
+        "sampled_terms": ["CoWoS", {"term": "HBM", "translation": "HBM", "strategy": "preserve"}],
+        "verified_high_freq_terms": "none",
+    }
+    analysis = DeepAnalyzer(llm_provider=_RaisingLLM(RuntimeError("unused")))._parse_combined_analysis_result(
+        result, [_section("s1")])
+    assert analysis.style.translation_voice == "专业、数据密集，面向投资者"
+    assert [c.issue for c in analysis.challenges] == ["FUD 一词需要意译", "数字口径"]
+    assert [t.term for t in analysis.terminology] == ["HBM"]

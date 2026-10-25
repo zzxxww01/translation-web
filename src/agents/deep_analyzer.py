@@ -41,6 +41,37 @@ def _submit_with_current_context(executor, func, /, *args, **kwargs):
     return executor.submit(context.run, func, *args, **kwargs)
 
 
+_TERM_LISTS = ("terminology", "sampled_terms", "verified_high_freq_terms")
+
+
+def _normalize_analysis_shapes(result) -> dict:
+    """把分析模型的输出整理成解析代码期望的形状。
+
+    提示词只列字段名，模型常把对象写成一句话（如 style 写成字符串），解析时 .get() 就会抛错、整篇翻译中止
+    （2026-10-25 线上实测）。列表里类型不对的项丢掉，能看懂的字符串转成对应字段。
+    """
+    if not isinstance(result, dict):
+        return {}
+    data = dict(result)
+    for key in _TERM_LISTS:
+        items = data.get(key)
+        data[key] = [item for item in items if isinstance(item, dict)] if isinstance(items, list) else []
+    challenges = data.get("challenges")
+    if isinstance(challenges, (dict, str)):
+        challenges = [challenges]
+    data["challenges"] = [
+        item if isinstance(item, dict) else {"location": "", "issue": item}
+        for item in (challenges if isinstance(challenges, list) else [])
+        if isinstance(item, dict) or (isinstance(item, str) and item.strip())
+    ]
+    style = data.get("style")
+    if isinstance(style, str):
+        data["style"] = {"translation_voice": style}
+    elif not isinstance(style, dict):
+        data["style"] = {}
+    return data
+
+
 class DeepAnalyzer:
     """全文深度分析器"""
 
@@ -515,6 +546,7 @@ class DeepAnalyzer:
         Returns:
             ArticleAnalysis: 解析后的分析结果
         """
+        result = _normalize_analysis_shapes(result)
         # 解析术语表
         terminology = []
         for term_data in result.get("terminology", []):
@@ -599,6 +631,7 @@ class DeepAnalyzer:
         Returns:
             ArticleAnalysis: 解析后的分析结果
         """
+        result = _normalize_analysis_shapes(result)
         # 1. 解析采样文本提取的术语
         sampled_terms = []
         for term_data in result.get("sampled_terms", []):
