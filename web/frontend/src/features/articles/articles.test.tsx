@@ -8,6 +8,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { EditableText } from './components/EditableText';
 import { Workbench } from './components/Workbench';
 import { SAVE_DELAY_MS, unsavedEdits } from './lib/edits';
+import { AUTO_SYNC_GAP_MS, useAutoSyncArticles } from './hooks';
 import { importAndTranslate } from './lib/importFlow';
 import type { RunMeta } from '@/features/skills/types';
 import type { Workbench as WorkbenchData } from './types';
@@ -22,7 +23,7 @@ const api = vi.hoisted(() => ({
   sourceHtml: vi.fn(),
   changes: vi.fn(),
 }));
-const substack = vi.hoisted(() => ({ importArticle: vi.fn() }));
+const substack = vi.hoisted(() => ({ importArticle: vi.fn(), syncArticles: vi.fn() }));
 const claude = vi.hoisted(() => ({ startClaudeTrack: vi.fn(), importClaudeTrack: vi.fn() }));
 const agentRun = vi.hoisted(() => ({ current: undefined as RunMeta | undefined }));
 vi.mock('./api', () => ({ articlesApi: api, downloadText: vi.fn(), HUMAN_EDITS_URL: '/api/workbench/human-edits.jsonl' }));
@@ -102,6 +103,37 @@ describe('EditableText display', () => {
     expect(host.textContent).not.toContain('https://x.com/m');
     await act(async () => { (host.querySelector('[aria-label="编辑：格子"]') as HTMLElement).click(); });
     expect(host.querySelector('textarea')!.value).toBe('见[行业模型](https://x.com/m)。');
+  });
+
+  it('renders italic captions with a link inside', async () => {
+    await render(<EditableText id="t3" value="*来源：[行业模型](https://x.com/m)*" placeholder="" ariaLabel="格子" onSave={vi.fn()} />);
+    expect(host.querySelector('em a')?.textContent).toBe('行业模型');
+    expect(host.textContent).toBe('来源：行业模型');
+  });
+});
+
+describe('useAutoSyncArticles', () => {
+  function Probe({ at }: { at: string }) {
+    useAutoSyncArticles(at);
+    return null;
+  }
+
+  it('checks Substack on entry and whenever another article or workbench opens, at most once per gap', async () => {
+    vi.useFakeTimers({ toFake: ['Date'] });
+    vi.setSystemTime(10_000_000);
+    substack.syncArticles.mockReset().mockResolvedValue({ added: 0, total: 1 });
+    await render(<Probe at="|" />);
+    expect(substack.syncArticles).toHaveBeenCalledTimes(1);
+
+    await render(<Probe at="|some-article" />); // 刚查过，连着点不重复查
+    expect(substack.syncArticles).toHaveBeenCalledTimes(1);
+
+    vi.setSystemTime(10_000_000 + AUTO_SYNC_GAP_MS + 1);
+    substack.syncArticles.mockResolvedValue({ added: 2, total: 3 });
+    await render(<Probe at="project-1|" />);
+    await flush();
+    expect(substack.syncArticles).toHaveBeenCalledTimes(2);
+    expect(toast.success).toHaveBeenCalledWith('文章库新增 2 篇');
   });
 });
 

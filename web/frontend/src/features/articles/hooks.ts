@@ -1,4 +1,6 @@
-import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
+import { useEffect } from 'react';
+import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { apiClient } from '@/shared/api/client';
 import type { Project } from '@/shared/types';
 import { substackApi, type ArticleFilter } from '@/features/substack/api';
@@ -37,6 +39,30 @@ export function useLibrary(filter: ArticleFilter, search: string) {
     // 后台还在生成中文标题和摘要时，隔一会儿刷新一次
     refetchInterval: query => (query.state.data?.pages[0]?.digesting ? 15_000 : false),
   });
+}
+
+// 连续点几篇文章时不用每次都去问 Substack：两次自动检查至少隔这么久
+export const AUTO_SYNC_GAP_MS = 15_000;
+let lastAutoSync = 0;
+
+/**
+ * 进入文章页、刷新页面、点一篇文章、打开工作台时，都去 Substack 看一眼有没有新文章（只看最新一页，很快）。
+ * key 变一次检查一次；有新文章才提示并刷新列表，失败不打扰（列表顶上的刷新按钮会报错）。
+ */
+export function useAutoSyncArticles(key: string) {
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    const now = Date.now();
+    if (now - lastAutoSync < AUTO_SYNC_GAP_MS) return;
+    lastAutoSync = now;
+    substackApi.syncArticles()
+      .then(result => {
+        if (!result.added) return;
+        toast.success(`文章库新增 ${result.added} 篇`);
+        return queryClient.invalidateQueries({ queryKey: ['articles', 'library'] });
+      })
+      .catch(() => undefined);
+  }, [key, queryClient]);
 }
 
 /** 所有主项目（孪生项目后端已经滤掉），用来列出不在文章库里的项目。 */

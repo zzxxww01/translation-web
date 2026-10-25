@@ -6,6 +6,7 @@ import type { SubstackArticle } from '@/features/substack/api';
 import { ArticlePreview } from './components/ArticlePreview';
 import { ArticleSidebar } from './components/ArticleSidebar';
 import { Workbench } from './components/Workbench';
+import { useAutoSyncArticles } from './hooks';
 
 /**
  * 「文章」：文章库 + 项目 + 两路翻译 + 三栏对照，一个页面走完。
@@ -19,6 +20,7 @@ export function ArticlesFeature() {
   const [listOpen, setListOpen] = useState(false);
   const slug = searchParams.get('a');
   const article = selected && selected.slug === slug ? selected : null;
+  useAutoSyncArticles(`${projectId ?? ''}|${slug ?? ''}`);
 
   const openProject = (id: string) => {
     setListOpen(false);
