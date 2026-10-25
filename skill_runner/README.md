@@ -60,14 +60,17 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 | 上传上限 | 公网入口是 Cloudflare Tunnel，免费版单个请求最大 100 MB，所以配置成 95 MB；更大的素材贴链接 |
 | 清理空间 | 页面上删除不要的运行；或直接删 `$SKILL_RUNNER_HOME/runs/<run_id>/` |
 | 改口令 | 改 env 文件后重启，所有旧登录立即失效 |
-| 加 skill | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
+| 加 skill（= 页面上多一个 agent） | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，在 `skill_runner/agents.json` 写名片（中文名、图标、说明、输入提示、示例），开沙箱时按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
+| 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `chat`、`article`、`video`、`podcast` |
 
 ## 安全边界
 
 - 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（30 天），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。
-- 权限：命令和改文件不逐条确认（这是选定的工作方式），由两层兜底：
+- 权限：命令和改文件不逐条确认（这是选定的工作方式），默认由两层兜底：
   - Bash 及其子进程在沙箱里：只能写运行目录和 `SKILL_RUNNER_EXTRA_WRITE`，网络只放行白名单域名，不允许绕出沙箱；
   - Edit/Write 等文件工具不受沙箱约束，由 `policy.py` 按同一份白名单拦截，拦截会显示在页面上。
+- `SKILL_RUNNER_SANDBOX=0` 是完全放开：没有沙箱，`policy.py` 也全部放行（Bash 已能写任何地方，单独拦文件工具没有意义）。
+  只剩系统提示词里「不要动运行目录以外的东西」的约定。用户 2026-10-24 选定服务器用这个模式。
 - 下载接口只给运行目录里的文件，`meta.json`、`events.jsonl` 和隐藏文件不可下载，符号链接越界会被拒绝。
 
 ## 本地开发

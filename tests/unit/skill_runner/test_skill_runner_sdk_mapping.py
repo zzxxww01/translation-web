@@ -25,7 +25,7 @@ from claude_agent_sdk.types import (  # noqa: E402
 )
 
 from skill_runner.runner import PermissionOutcome, SessionSpec  # noqa: E402
-from skill_runner.sdk_session import MessageMapper, build_options, build_settings  # noqa: E402
+from skill_runner.sdk_session import MessageMapper, build_options, build_settings, build_system_prompt  # noqa: E402
 
 from skill_runner_fakes import make_config  # noqa: E402
 
@@ -167,6 +167,13 @@ def test_settings_enable_strict_sandbox_with_run_dir_and_whitelist(tmp_path):
     assert sandbox["excludedCommands"] == ["python tts.py *"]
     assert "generativelanguage.googleapis.com" in sandbox["network"]["allowedDomains"]
     assert build_settings(make_config(tmp_path, sandbox=False), _spec(tmp_path, PermissionOutcome(True))) == {}
+
+
+def test_system_prompt_describes_whether_commands_are_sandboxed(tmp_path):
+    assert "沙箱里运行" in build_system_prompt(make_config(tmp_path))
+    assert "没有沙箱" in build_system_prompt(make_config(tmp_path, sandbox=False))
+    note = "- 任务说明\n"
+    assert build_system_prompt(make_config(tmp_path), note).endswith(note)
 
 
 async def test_options_load_user_skills_and_route_permissions(tmp_path):

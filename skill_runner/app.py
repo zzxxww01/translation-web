@@ -13,10 +13,10 @@ from fastapi import APIRouter, Depends, FastAPI, File, Form, HTTPException, Requ
 from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 from pydantic import BaseModel
 
-from . import auth
+from . import agents, auth
 from .config import BILLING_OVERRIDE_ENV, Config
 from .runner import Runner, RunnerError, SessionFactory, make_title
-from .store import RunStore, UploadTooLarge, iter_skill_catalog
+from .store import RunStore, UploadTooLarge
 
 logger = logging.getLogger(__name__)
 
@@ -111,7 +111,7 @@ def create_app(
 
     @api.get("/catalog")
     async def catalog():
-        return iter_skill_catalog(config.skills_dir, config.skills)
+        return agents.build_catalog(config)
 
     @api.get("/runs")
     async def list_runs():

@@ -45,6 +45,7 @@ class Config:
     session_secret: bytes
     skills: tuple[str, ...] = DEFAULT_SKILLS
     skills_dir: Path = field(default_factory=lambda: Path.home() / ".claude" / "skills")
+    agents_file: Path = field(default_factory=lambda: Path(__file__).with_name("agents.json"))
     max_active: int = 2
     idle_timeout_s: float = 600.0
     max_upload_bytes: int = 1024 * 1024 * 1024
@@ -69,12 +70,14 @@ class Config:
         # 默认从口令派生签名密钥：改口令即让所有旧 cookie 失效，不用另外维护一个密钥。
         secret_seed = env.get("SKILL_RUNNER_SECRET") or f"skill-runner-session:{password}"
         skills_dir = env.get("SKILL_RUNNER_SKILLS_DIR")
+        agents_file = env.get("SKILL_RUNNER_AGENTS_FILE")
         return cls(
             home=home,
             password=password,
             session_secret=hashlib.sha256(secret_seed.encode("utf-8")).digest(),
             skills=_split(env.get("SKILL_RUNNER_SKILLS"), ",") or DEFAULT_SKILLS,
             skills_dir=Path(skills_dir).expanduser() if skills_dir else Path.home() / ".claude" / "skills",
+            agents_file=Path(agents_file).expanduser() if agents_file else Path(__file__).with_name("agents.json"),
             max_active=int(env.get("SKILL_RUNNER_MAX_ACTIVE") or 2),
             idle_timeout_s=float(env.get("SKILL_RUNNER_IDLE_TIMEOUT_S") or 600),
             max_upload_bytes=int(env.get("SKILL_RUNNER_MAX_UPLOAD_MB") or 1024) * 1024 * 1024,
