@@ -9,6 +9,7 @@ import { CookieForm } from '@/features/substack/components/CookieForm';
 import type { Harness } from '@/features/skills/harness';
 import { ARTICLE_HARNESSES } from '../lib/agentOptions';
 import { importAndTranslate, runsAgent, type ImportPlan } from '../lib/importFlow';
+import { ArticleAgentChoice } from './ArticleAgentChoice';
 
 const PLANS: { id: ImportPlan; label: string; note: string }[] = [
   { id: 'both', label: '两个都翻', note: '网页版出译本 1，Agent 出译本 2，翻完三栏对照' },
@@ -45,18 +46,6 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
       setBusy(false);
     }
   };
-
-  const agentChoice = (value: Harness, label: string) => (
-    <button
-      key={value}
-      type="button"
-      onClick={() => setHarness(value)}
-      aria-pressed={harness === value}
-      className={cn('rounded-full border px-2.5 py-0.5 text-xs', harness === value ? 'border-primary-300 bg-primary-50 text-primary-700' : 'border-border-subtle bg-white text-text-secondary')}
-    >
-      {label}
-    </button>
-  );
 
   return (
     <div className="mx-auto w-full max-w-2xl px-5 py-8 sm:px-8 sm:py-12">
@@ -97,7 +86,7 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
             {runsAgent(plan) && (
               <div className="mt-2 flex flex-wrap items-center gap-1.5 px-2">
                 <span className="text-xs text-text-muted">Agent 用</span>
-                {ARTICLE_HARNESSES.map(item => agentChoice(item.id, item.label))}
+                <ArticleAgentChoice value={harness} onChange={setHarness} disabled={busy} />
                 {harness === 'claude' && article.is_paid && <span className="text-xs text-warning">付费文章 Claude 通常不肯全文翻译，只给导读</span>}
               </div>
             )}

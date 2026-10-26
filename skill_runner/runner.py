@@ -487,6 +487,23 @@ class Runner:
                 await self._fail(run, f"中断失败：{exc}")
         return run.meta
 
+    async def stop(self, run_id: str) -> RunMeta:
+        """Close all accepted work before replacing a run; retain its history and resume ID."""
+        run = self._get(run_id)
+        async with run.lock:
+            self._clear_awaiting(run)
+            for pending in list(run.pending.values()):
+                if not pending.future.done():
+                    pending.future.set_result(PermissionOutcome(allow=False, message="用户停止了任务", interrupt=True))
+            try:
+                await self._close_session(run, strict=True)
+            except Exception as exc:
+                # A replacement must not start while the previous process may still be live.
+                raise SessionFailed(f"旧任务未能停止：{exc}") from exc
+            self._clear_awaiting(run)
+            self._set_status(run, "error", "任务已停止；对话和文件已保留，发送消息可以继续原会话")
+        return run.meta
+
     async def delete(self, run_id: str) -> None:
         run = self._get(run_id)
         if run.meta.status in ACTIVE_STATUSES or self._session_busy(run):

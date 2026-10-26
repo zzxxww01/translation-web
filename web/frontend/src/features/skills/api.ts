@@ -21,6 +21,7 @@ export const skillsApi = {
   answer: (runId: string, qid: string, payload: { answers?: Answers; response?: string }) =>
     apiClient.post<RunMeta>(`/skills/runs/${runId}/answer`, { qid, ...payload }, { retry: false }),
   interrupt: (runId: string) => apiClient.post<RunMeta>(`/skills/runs/${runId}/interrupt`, undefined, { retry: false }),
+  stop: (runId: string) => apiClient.post<RunMeta>(`/skills/runs/${runId}/stop`, undefined, { retry: false, timeout: 90_000 }),
   remove: (runId: string) => apiClient.delete<{ ok: boolean }>(`/skills/runs/${runId}`),
 };
 

@@ -28,7 +28,8 @@ def test_everything_but_login_requires_cookie(setup):
     client, _, _ = setup
     for method, path in [("get", "/me"), ("get", "/runs"), ("get", "/catalog"), ("post", "/runs"),
                          ("get", "/runtime"), ("post", "/runtime/check"), ("post", "/runtime/codex/update"),
-                         ("get", "/runs/20260101-000000-abcdef/events"), ("delete", "/runs/20260101-000000-abcdef")]:
+                         ("get", "/runs/20260101-000000-abcdef/events"), ("post", "/runs/20260101-000000-abcdef/stop"),
+                         ("delete", "/runs/20260101-000000-abcdef")]:
         assert getattr(client, method)(PREFIX + path).status_code == 401, path
     client.cookies.set(COOKIE_NAME, "123.forged", path=PREFIX)
     assert client.get(f"{PREFIX}/me").status_code == 401
@@ -44,6 +45,17 @@ def test_login_sets_strict_httponly_cookie_and_logout_clears_it(setup):
     assert client.get(f"{PREFIX}/me").json()["ok"] is True
     client.post(f"{PREFIX}/logout")
     assert client.get(f"{PREFIX}/me").status_code == 401
+
+
+def test_stop_closes_run_without_deleting_history(setup):
+    client, factory, _ = setup
+    login(client)
+    meta = client.post(f"{PREFIX}/runs", data={"message": "translate"}).json()
+    response = client.post(f"{PREFIX}/runs/{meta['id']}/stop")
+    assert response.status_code == 200
+    assert response.json()['status'] == 'error'
+    assert factory.last.closed
+    assert client.get(f"{PREFIX}/runs/{meta['id']}").status_code == 200
 
 
 def test_runtime_routes_check_versions_and_reject_updates_during_work(setup, monkeypatch):
