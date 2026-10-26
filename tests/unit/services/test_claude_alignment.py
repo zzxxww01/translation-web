@@ -1,4 +1,6 @@
-from src.services.claude_alignment import Target, align_claude_translation, pair_blocks, parse_blocks
+import pytest
+
+from src.services.claude_alignment import Target, align_claude_translation, pair_blocks, parse_blocks, split_like
 
 EN = """# Datacenters 2027: The Year of Acceleration
 
@@ -71,14 +73,92 @@ def test_one_to_one_alignment_fills_every_target_and_extracts_title():
     assert result.stats["unaligned"] == 0
 
 
-def test_block_split_across_two_paragraphs_keeps_all_chinese_on_the_first():
+def test_long_paragraph_split_on_import_gets_its_chinese_cut_at_sentence_ends():
     en = "## Intro\n\nAlpha beta gamma delta. Epsilon zeta eta theta.\n"
     zh = "## 引言\n\n甲乙丙丁。戊己庚辛。\n"
     split = [Target("section:s", "s", "Intro", "section"),
              Target("p1", "s", "Alpha beta gamma delta."), Target("p2", "s", "Epsilon zeta eta theta.")]
     result = align_claude_translation(en, zh, split)
-    assert result.texts["p1"] == "甲乙丙丁。戊己庚辛。" and "p2" not in result.texts
+    assert result.texts["p1"] == "甲乙丙丁。" and result.texts["p2"] == "戊己庚辛。"
+    assert result.stats["split_by_sentence"] == 1 and result.stats["split_failures"] == 0
+
+
+def test_chinese_that_cannot_be_cut_stays_whole_on_the_first_paragraph():
+    en = "Alpha beta gamma delta. Epsilon zeta eta theta.\n"
+    zh = "甲乙丙丁戊己庚辛\n"
+    split = [Target("p1", "s", "Alpha beta gamma delta."), Target("p2", "s", "Epsilon zeta eta theta.")]
+    result = align_claude_translation(en, zh, split)
+    assert result.texts["p1"] == "甲乙丙丁戊己庚辛" and "p2" not in result.texts
     assert result.stats["split_failures"] == 1
+
+
+def test_split_like_follows_english_sentence_counts_when_they_match():
+    sources = ["One. Two. Three.", "Four."]
+    assert split_like("一。二。三。四。", sources) == ["一。二。三。", "四。"]
+
+
+def test_split_like_falls_back_to_length_ratio_and_never_leaves_a_part_empty():
+    sources = ["A long first part that carries most of the words here.", "Short tail."]
+    parts = split_like("很长的第一部分，几乎占了全部字数，而且一句话说完。第二句也属于前面。尾巴。", sources)
+    assert parts == ["很长的第一部分，几乎占了全部字数，而且一句话说完。第二句也属于前面。", "尾巴。"]
+    assert split_like("只有一句。", ["One.", "Two.", "Three."]) is None
+
+
+@pytest.mark.parametrize("text", [
+    "**加粗。还在加粗。**后面一句。",
+    "[链接。里面](https://x.com)。外面。",
+    "[链接](https://x.com/search?q=1,2)。外面。",
+    "__加粗。还在加粗。__后面一句。",
+    "`代码。还是代码。`后面一句。",
+    "<span>里面。还是里面。</span>外面。",
+    "甲 &amp; 乙，丙和丁",
+    "第一句。\\*这是字面星号。",
+    "访问 https://example.com/?q=1,2 后继续。下一句。",
+])
+def test_markdown_is_kept_whole_instead_of_risking_broken_formatting(text):
+    sources = ["First sentence.", "Second sentence."]
+    assert split_like(text, sources) is None
+    targets = [Target("p1", "s", sources[0]), Target("p2", "s", sources[1])]
+    aligned = align_claude_translation(" ".join(sources), text, targets)
+    assert aligned.texts == {"p1": text}
+
+
+def test_split_preserves_whitespace_and_quoted_sentence_endings():
+    text = "第一句。  第二句说：‘结束！’ 下一句。  "
+    parts = split_like(text, ["One.", "Two.", "Three."])
+    assert parts == ["第一句。", "  第二句说：‘结束！’", " 下一句。  "]
+    assert "".join(parts) == text
+
+
+def test_clause_fallback_does_not_split_thousands_separators():
+    assert split_like("投入 12,000 美元，随后扩大规模", ["One.", "Two."]) == ["投入 12,000 美元，", "随后扩大规模"]
+
+
+def test_split_requires_targets_and_nonempty_text():
+    assert split_like("一句。", []) is None
+    assert split_like("   ", ["One."]) is None
+    assert split_like("**一句。**", ["One."]) == ["**一句。**"]
+
+
+def test_multiline_markdown_is_not_split_at_soft_line_break():
+    sources = ["First sentence.", "Second sentence."]
+    text = "**第一行\n第二行**"
+    result = align_claude_translation(" ".join(sources), text, [Target("p1", "s", sources[0]), Target("p2", "s", sources[1])])
+    assert result.texts == {"p1": text}
+
+
+def test_sentence_splitting_does_not_distribute_accidental_target_matches():
+    result = align_claude_translation("First alpha.", "第一句。第二句。", [
+        Target("p1", "s", "First alpha."), Target("p2", "s", "First alpha."),
+    ])
+    assert result.texts == {"p1": "第一句。第二句。"}
+
+
+def test_sentence_splitting_only_applies_to_body_paragraphs():
+    result = align_claude_translation("## First alpha. Second beta.", "## 甲。乙。", [
+        Target("section:s", "s", "First alpha.", "section"), Target("p1", "s", "Second beta."),
+    ])
+    assert result.texts == {"section:s": "甲。乙。"}
 
 
 def test_block_missing_from_project_is_merged_into_previous_paragraph():

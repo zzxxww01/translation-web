@@ -14,6 +14,7 @@ interface EditableTextProps {
   /** 另一版这一段的译文，有就显示「用另一版这段」 */
   adopt?: { label: string; text: string } | null;
   className?: string;
+  inline?: boolean;
 }
 
 const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
@@ -23,7 +24,7 @@ const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
  * 停顿约 1 秒或离开时自动保存——类似 Obsidian 的实时预览。保存状态汇总到栏头（见 lib/edits），
  * 这里只在保存失败时标红、给重试。
  */
-export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt, className }: EditableTextProps) {
+export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt, className, inline = false }: EditableTextProps) {
   const [text, setText] = useState(value ?? '');
   const [state, setState] = useState<SaveState>('idle');
   const [editing, setEditing] = useState(false);
@@ -89,8 +90,9 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
     else timer.current = setTimeout(() => void save(next), SAVE_DELAY_MS);
   };
 
+  const Container = inline ? 'span' : 'div';
   return (
-    <div className={cn('group/edit relative', className)}>
+    <Container className={cn('group/edit relative', className)}>
       {editing ? (
         <textarea
           ref={ref}
@@ -114,7 +116,7 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
           )}
         />
       ) : (
-        <div
+        <Container
           role="button"
           tabIndex={0}
           aria-label={`编辑：${ariaLabel}`}
@@ -126,16 +128,16 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
             }
           }}
           className={cn(
-            BOX,
+            inline ? 'rounded border border-transparent' : BOX,
             'cursor-text whitespace-pre-wrap border-transparent transition-colors hover:bg-bg-hover/60',
             state === 'error' && 'border-error/40 bg-error/5'
           )}
         >
           {text ? <InlineMarkdown text={text} /> : <span className="text-text-disabled">{placeholder}</span>}
-        </div>
+        </Container>
       )}
       {state === 'error' && (
-        <div className="pointer-events-none absolute -bottom-1 right-0 flex items-center gap-2 text-[11px]">
+        <span className="pointer-events-none absolute -bottom-1 right-0 flex items-center gap-2 text-[11px]">
           <button
             type="button"
             onClick={() => void save(text)}
@@ -143,7 +145,7 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
           >
             {text.trim() ? '保存失败，点此重试' : '译文不能为空'}
           </button>
-        </div>
+        </span>
       )}
       {adopt && adopt.text !== text && (
         <button
@@ -155,6 +157,6 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
           用{adopt.label}这段
         </button>
       )}
-    </div>
+    </Container>
   );
 }

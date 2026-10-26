@@ -46,6 +46,8 @@ export interface WorkbenchRow {
   kind: string;
   section_id: string;
   paragraph_id: string | null;
+  /** 同一个自然段被导入器拆开后的共同标识。 */
+  block?: string | null;
   heading_level?: number | null;
   is_metadata?: boolean;
   source: string;
@@ -60,6 +62,7 @@ export interface Workbench {
   project: WorkbenchProject;
   variants: WorkbenchVariant[];
   rows: WorkbenchRow[];
+  reading_mark?: { key: string; at: string } | null;
 }
 
 export type PaneId = 'source' | 'web' | 'alt';
