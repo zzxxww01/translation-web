@@ -2,7 +2,8 @@
 
 skill 自己从 HTML 转出 en.md，再逐块翻成 zh.md，两者块结构一致（它的 QA 门禁核对标题、链接、
 图片数量）。所以分两步：zh 块按结构配对到 en 块；en 块再与项目原文（章节标题 + 段落）做单调对齐。
-一个 en 块可以对多段（列表、被拆开的长段）；没对上任何段的块并进前一段，中文一个字都不丢。
+一个 en 块可以对多段（列表、被拆开的长段）；被拆开的长段按句末把中文切给各段（见 split_like）；
+没对上任何段的块并进前一段，中文一个字都不丢。
 """
 
 from __future__ import annotations
@@ -10,6 +11,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 from difflib import SequenceMatcher
+from itertools import accumulate
 from typing import Dict, List, Optional, Sequence, Tuple
 
 # 覆盖率低于这个值不算对上：短段落（"Introduction"）也要大部分词都在块里出现
@@ -22,6 +24,11 @@ _LIST_ITEM = re.compile(r"^\s*(?:[-*+]|\d+[.)])\s+(.*)$")
 _IMAGE_ONLY = re.compile(r"^!\[[^\]]*\]\([^)]*\)\s*$")
 _TOKEN = re.compile(r"[a-z0-9]+")
 _NUMBER = re.compile(r"\d+")
+# 仅对纯文本做启发式切分；格式化文本整段保留，避免切断 Markdown 或链接。
+_MARKDOWN = re.compile(r"[\[\]*_`<>\\~|&]|https?://|www\.", re.IGNORECASE)
+_ZH_SENTENCE = re.compile(r".+?(?:[。！？!?]+[”’」』）)\"']*|$)", re.DOTALL)
+_ZH_CLAUSE = re.compile(r".+?(?:[，；：;]+|(?<!\d),(?!\d)|$)", re.DOTALL)
+_EN_SENTENCE = re.compile(r".+?(?:[.!?。！？]+(?=\s|$)|$)", re.DOTALL)
 
 
 @dataclass
@@ -188,6 +195,56 @@ def align_targets(blocks: Sequence[str], targets: Sequence[str]) -> List[Optiona
     return result
 
 
+def _pieces(pattern: re.Pattern, text: str) -> List[str]:
+    return [m.group(0) for m in pattern.finditer(text) if m.group(0).strip()]
+
+
+def _units(text: str, pattern: re.Pattern) -> List[str]:
+    units = [match.group(0) for match in pattern.finditer(text)]
+    if len(units) > 1 and not units[-1].strip():
+        trailing = units.pop()
+        units[-1] += trailing
+    return units
+
+
+def split_like(zh: str, sources: Sequence[str]) -> Optional[List[str]]:
+    """一段中文切成 len(sources) 份，对应导入时按句拆开的几段原文。只在句末切（句子不够才退到逗号）：
+    中文句数和英文相同就按每段的句数切，否则按英文各段的长度比例找最近的句末。
+    含 Markdown、链接或换行，或切不出这么多份时返回 None，由调用方整段保留。"""
+    count = len(sources)
+    if not count or not zh.strip():
+        return None
+    if count == 1:
+        return [zh]
+    if _MARKDOWN.search(zh) or "\n" in zh or "\r" in zh:
+        return None
+    units = _units(zh, _ZH_SENTENCE)
+    if len(units) < count:
+        units = _units(zh, _ZH_CLAUSE)
+    if len(units) < count:
+        return None
+    sentences = [len(_pieces(_EN_SENTENCE, source)) or 1 for source in sources]
+    if sum(sentences) == len(units):
+        sizes = sentences
+    else:
+        ends = list(accumulate(len(unit) for unit in units))
+        source_ends = list(accumulate(len(source) for source in sources))
+        total_en = source_ends[-1] or 1
+        cuts: List[int] = []
+        for i in range(1, count):
+            want = ends[-1] * source_ends[i - 1] / total_en
+            # 第 i 刀切在第 j 句之后：前面每份至少一句，后面也要留够句子
+            options = range((cuts[-1] if cuts else 0) + 1, len(units) - (count - i) + 1)
+            cuts.append(min(options, key=lambda j: abs(ends[j - 1] - want)))
+        sizes = [b - a for a, b in zip([0, *cuts], [*cuts, len(units)])]
+    parts: List[str] = []
+    start = 0
+    for size in sizes:
+        parts.append("".join(units[start:start + size]))
+        start += size
+    return parts if all(part.strip() for part in parts) else None
+
+
 def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequence[Target]) -> Alignment:
     en_blocks, zh_blocks = parse_blocks(en_markdown), parse_blocks(zh_markdown)
     alignment = Alignment()
@@ -208,6 +265,7 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
 
     texts: Dict[int, List[str]] = {}
     split_failures = 0
+    split_by_sentence = 0
     for block_index, members in groups.items():
         zh_text = "\n".join(zh_for_en.get(block_index, []))
         if not zh_text:
@@ -216,9 +274,22 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
             texts.setdefault(members[0], []).append(zh_text)
             continue
         lines = [line for line in zh_text.split("\n") if line.strip()]
-        if len(lines) == len(members):
+        sources = [targets[m].source for m in members]
+        # 单调匹配也可能把重复词的无关段落对到同一块；只有原文确实拼回整段时才分句。
+        is_split_paragraph = (
+            en_blocks[block_index].kind in {"p", "quote"}
+            and all(targets[m].kind in {"p", "blockquote", "quote"} for m in members)
+            and " ".join(" ".join(sources).split()) == " ".join(en_blocks[block_index].text.split())
+        )
+        parts = split_like(lines[0], sources) if len(lines) == 1 and is_split_paragraph else None
+        if len(lines) == len(members) and not _MARKDOWN.search(zh_text):
             for member, line in zip(members, lines):
                 texts.setdefault(member, []).append(line)
+        elif parts:
+            # 导入时被拆开的长段：一段中文按句末分给各段
+            split_by_sentence += 1
+            for member, part in zip(members, parts):
+                texts.setdefault(member, []).append(part)
         else:
             split_failures += 1
             texts.setdefault(members[0], []).append(zh_text)
@@ -247,6 +318,7 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
         "en_blocks": len(en_blocks),
         "zh_blocks": len(zh_blocks),
         "merged_blocks": orphan_blocks,
+        "split_by_sentence": split_by_sentence,
         "split_failures": split_failures,
     }
     return alignment

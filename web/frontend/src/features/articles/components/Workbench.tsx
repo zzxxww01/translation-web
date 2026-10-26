@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { AlertCircle, ArrowLeft, Bot, Download, ExternalLink, FileDiff, MoreHorizontal, PanelLeft, Play, Save } from 'lucide-react';
+import { AlertCircle, ArrowLeft, Bookmark, Bot, Download, ExternalLink, FileDiff, MoreHorizontal, PanelLeft, Play, Save, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/Button';
 import {
@@ -80,7 +80,7 @@ export function Workbench({ projectId, onShowList }: WorkbenchProps) {
       </div>
     );
   }
-  return <WorkbenchView data={query.data} onShowList={onShowList} />;
+  return <WorkbenchView key={projectId} data={query.data} onShowList={onShowList} />;
 }
 
 function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?: () => void }) {
@@ -96,6 +96,9 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const [claudeNote, setClaudeNote] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [markBusy, setMarkBusy] = useState(false);
+  const [readingJump, setReadingJump] = useState(0);
+  const markLock = useRef(false);
   const importTried = useRef<string | null>(null);
 
   const variant: WorkbenchVariant | null = variants.find(v => v.id === variantId) ?? variants[0] ?? null;
@@ -148,6 +151,25 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
         : { ...item, alt: { ...item.alt, [target]: text } }),
     });
   }, [project.id, queryClient]);
+
+  const markReading = async (key: string | null) => {
+    if (markLock.current) return;
+    markLock.current = true;
+    setMarkBusy(true);
+    try {
+      await queryClient.cancelQueries({ queryKey: articleKeys.workbench(project.id) });
+      const result = await articlesApi.setReadingMark(project.id, key);
+      queryClient.setQueryData<WorkbenchData>(articleKeys.workbench(project.id), current => current && {
+        ...current, reading_mark: result.reading_mark,
+      });
+      toast.success(key ? '已标记：看到这里' : '已清除阅读标记');
+    } catch (error) {
+      toast.error(`阅读标记没保存上：${error instanceof Error ? error.message : '请重试'}`);
+    } finally {
+      markLock.current = false;
+      setMarkBusy(false);
+    }
+  };
 
   const exportVersion = async (target: string, format: 'zh' | 'en') => {
     try {
@@ -427,6 +449,15 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
           </div>
         )}
 
+        <div className="mt-2 flex items-center gap-2 text-xs text-text-muted">
+          <Bookmark className="h-3.5 w-3.5 shrink-0" />
+          {data.reading_mark ? <>
+            <span className="min-w-0 flex-1 truncate">看到这里：{rows.find(row => row.key === data.reading_mark?.key)?.web || rows.find(row => row.key === data.reading_mark?.key)?.source || '已标记的位置'}</span>
+            <button type="button" onClick={() => setReadingJump(n => n + 1)} className="shrink-0 rounded px-2 py-1 text-primary-700 hover:bg-primary-50">继续阅读</button>
+            <button type="button" aria-label="清除阅读标记" disabled={markBusy} onClick={() => void markReading(null)} className="rounded p-1 hover:bg-bg-hover disabled:opacity-40"><X className="h-3.5 w-3.5" /></button>
+          </> : <span>点正文左侧的书签，记下看到哪里</span>}
+          {markBusy && <span role="status">保存标记中…</span>}
+        </div>
         {isMobile && (
           <div className="mt-2 grid grid-cols-3 rounded-lg bg-bg-tertiary p-0.5 text-sm" role="tablist" aria-label="切换栏">
             {PANES.map(id => (
@@ -449,7 +480,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
         <SecondVersionPrompt busy={busy} agentActive={Boolean(claudeRunning || claudeWaiting)} onStart={startClaude} />
       )}
 
-      <PaneGrid rows={rows} columns={columns} collapsed={collapsed} onToggle={toggle} mobilePane={isMobile ? mobilePane : null} />
+      <PaneGrid rows={rows} columns={columns} collapsed={collapsed} onToggle={toggle} mobilePane={isMobile ? mobilePane : null}
+        readingKey={data.reading_mark?.key} markBusy={markBusy} onMark={key => void markReading(key)} jump={readingJump} />
 
       <TrackDrawer state={drawer} mainId={project.id} onClose={() => { setDrawer(null); void refresh(); void claudeRun.refetch(); }} />
       <ChangesDrawer state={changes} onClose={() => setChanges(null)} />

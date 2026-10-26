@@ -1,7 +1,9 @@
+import json
+
 import pytest
 from starlette.requests import Request
 
-from src.api.middleware import APIException
+from src.api.middleware import APIException, BadRequestException, ServiceUnavailableException
 from src.api.routers import workbench
 from src.core.models import ParagraphStatus
 from src.core.project import ProjectManager
@@ -108,6 +110,88 @@ async def test_workbench_rows_line_up_both_versions_and_save_to_either(pm, main_
     heading = next(r for r in data["rows"] if r["key"] == f"section:{second_section}")
     assert heading["source"] == "Second Section" and heading["alt"][variant] == "第二节"
     assert [v["label"] for v in data["variants"]] == ["argon"]
+
+
+@pytest.mark.asyncio
+async def test_reading_mark_is_kept_on_the_server_and_can_be_removed(pm, main_id):
+    section_id, first = _body_paragraphs(pm, main_id)[0]
+    stale_meta = pm.get(main_id)
+    key = f"{section_id}/{first.id}"
+    assert (await workbench.get_workbench(main_id, pm, FakeStatus()))["reading_mark"] is None
+
+    saved = await workbench.set_reading_mark(main_id, workbench.ReadingMarkRequest(key=key), pm)
+    assert saved["reading_mark"]["key"] == key
+    pm.save_meta(stale_meta)
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert data["reading_mark"]["key"] == key
+    assert all("block" in row for row in data["rows"] if row["paragraph_id"])
+    # 书签不进 meta.json，后台翻译存 meta 时不会冲掉它
+    assert "reading" not in (pm._project_dir(main_id) / "meta.json").read_text(encoding="utf-8")
+
+    await workbench.set_reading_mark(main_id, workbench.ReadingMarkRequest(key=None), pm)
+    assert (await workbench.get_workbench(main_id, pm, FakeStatus()))["reading_mark"] is None
+    with pytest.raises(APIException):
+        await workbench.set_reading_mark("no-such-article", workbench.ReadingMarkRequest(key=key), pm)
+
+
+@pytest.mark.asyncio
+async def test_reading_mark_rejects_unknown_rows_without_replacing_existing_mark(pm, main_id):
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    key = next(row["key"] for row in data["rows"] if row["kind"] == "section")
+    saved = await workbench.set_reading_mark(main_id, workbench.ReadingMarkRequest(key=key), pm)
+    for invalid in ("no-such-row", "section:no-such-section", "../meta.json"):
+        with pytest.raises(BadRequestException):
+            await workbench.set_reading_mark(main_id, workbench.ReadingMarkRequest(key=invalid), pm)
+    assert (await workbench.get_workbench(main_id, pm, FakeStatus()))["reading_mark"] == saved["reading_mark"]
+
+
+@pytest.mark.asyncio
+async def test_reading_mark_cannot_be_saved_to_hidden_variant(pm, main_id):
+    variant = article_variants.create_variant(pm, main_id, kind="model", label="argon", suffix="argon")
+    section_id, first = _body_paragraphs(pm, variant)[0]
+    for key in (f"{section_id}/{first.id}", None):
+        with pytest.raises(BadRequestException):
+            await workbench.set_reading_mark(variant, workbench.ReadingMarkRequest(key=key), pm)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("record", [
+    [], "invalid", 17, {}, {"key": []},
+    {"key": "stale/paragraph", "at": "2026-10-27T12:00:00"},
+    {"key": "$valid", "at": {}}, {"key": "$valid", "at": "invalid"},
+])
+async def test_invalid_or_stale_reading_marks_do_not_break_workbench(pm, main_id, record):
+    if isinstance(record, dict) and record.get("key") == "$valid":
+        record = {**record, "key": (await workbench.get_workbench(main_id, pm, FakeStatus()))["rows"][0]["key"]}
+    path = pm._project_dir(main_id) / "artifacts" / "reading-mark.json"
+    pm._write_json(path, record)
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert data["rows"]
+    assert data["reading_mark"] is None
+    assert json.loads(path.read_text(encoding="utf-8")) == record
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("contents", [b"{broken", b"\xff\xfe"])
+async def test_unreadable_reading_mark_does_not_break_workbench(pm, main_id, contents):
+    path = pm._project_dir(main_id) / "artifacts" / "reading-mark.json"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(contents)
+    assert (await workbench.get_workbench(main_id, pm, FakeStatus()))["reading_mark"] is None
+
+
+@pytest.mark.asyncio
+async def test_reading_mark_write_failure_reports_failure_and_preserves_previous_mark(pm, main_id, monkeypatch):
+    rows = (await workbench.get_workbench(main_id, pm, FakeStatus()))["rows"]
+    saved = await workbench.set_reading_mark(main_id, workbench.ReadingMarkRequest(key=rows[0]["key"]), pm)
+
+    def fail_write(*args):
+        raise PermissionError("read-only storage")
+
+    monkeypatch.setattr(pm, "_write_json", fail_write)
+    with pytest.raises(ServiceUnavailableException):
+        await workbench.set_reading_mark(main_id, workbench.ReadingMarkRequest(key=rows[-1]["key"]), pm)
+    assert (await workbench.get_workbench(main_id, pm, FakeStatus()))["reading_mark"] == saved["reading_mark"]
 
 
 @pytest.mark.asyncio

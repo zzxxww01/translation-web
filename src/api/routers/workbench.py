@@ -5,7 +5,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Literal, Optional
 
 from fastapi import APIRouter, Request
@@ -17,7 +17,7 @@ from src.core.models import ElementType, Section
 from src.services import article_edits, article_variants
 
 from ..dependencies import ProjectManagerDep, TranslationStatusServiceDep
-from ..middleware import BadRequestException, ConflictException, NotFoundException
+from ..middleware import BadRequestException, ConflictException, NotFoundException, ServiceUnavailableException
 from ..middleware.rate_limit import limiter
 from .projects_management import _project_asset_url
 from .translate_utils import validate_path_component
@@ -51,6 +51,9 @@ class ClaudeRunRequest(BaseModel):
     run_id: Optional[str] = Field(None, max_length=100)
 
 
+class ReadingMarkRequest(BaseModel):
+    key: Optional[str] = Field(None, min_length=1, max_length=400)  # 行的 key；不填 = 拿掉书签
+
 
 def _check_id(project_id: str) -> None:
     if not validate_path_component(project_id):
@@ -74,6 +77,26 @@ def _status_summary(progress: Dict[str, Any]) -> Dict[str, Any]:
         "total": progress.get("total_paragraphs"),
         "error": progress.get("error") or progress.get("last_error"),
     }
+
+
+def _mark_path(pm, project_id: str):
+    # 不放 meta.json：后台翻译拿着旧快照存 meta 时会把它冲掉
+    return pm._project_dir(project_id) / "artifacts" / "reading-mark.json"
+
+
+def _read_mark(pm, project_id: str, row_keys: set[str]) -> Optional[Dict[str, str]]:
+    try:
+        record = pm._read_json(_mark_path(pm, project_id))
+        if not isinstance(record, dict):
+            return None
+        key, at = record.get("key"), record.get("at")
+        if not isinstance(key, str) or key not in row_keys or not isinstance(at, str):
+            return None
+        datetime.fromisoformat(at)
+        return {"key": key, "at": at}
+    except (OSError, ValueError):
+        # 书签是可选状态，损坏、不可读或失效时仍然允许打开文章；不改动原文件。
+        return None
 
 
 def _paragraph_text(paragraph) -> Optional[str]:
@@ -112,6 +135,7 @@ def _build_rows(project_id: str, sections: List[Section], variants: Dict[str, Li
                 "paragraph_id": paragraph.id,
                 "heading_level": paragraph.heading_level,
                 "is_metadata": paragraph.is_metadata,
+                "block": paragraph.parent_block_id,  # 导入时拆开的长段，几行同属原文一段
                 "source": paragraph.source,
                 "image": _project_asset_url(project_id, paragraph.source) if is_image else None,
                 "web": _paragraph_text(paragraph),
@@ -132,10 +156,12 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
         variant_metas = [pm.get(v.id) for v in article_variants.list_variants(pm, project_id)]
         variant_sections = {v.id: pm.get_sections(v.id) for v in variant_metas}
         imports = {v.id: article_variants.read_import_record(pm, v.id) for v in variant_metas if v.variant_kind == "claude"}
-        return meta, sections, variant_metas, variant_sections, imports
+        rows = _build_rows(project_id, sections, variant_sections)
+        mark = _read_mark(pm, project_id, {row["key"] for row in rows})
+        return meta, variant_metas, imports, rows, mark
 
     try:
-        meta, sections, variant_metas, variant_sections, imports = await run_blocking(load)
+        meta, variant_metas, imports, rows, mark = await run_blocking(load)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -164,8 +190,39 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "status": main_status,
         },
         "variants": variants,
-        "rows": _build_rows(project_id, sections, variant_sections),
+        "rows": rows,
+        "reading_mark": mark,
     }
+
+
+@router.put("/projects/{project_id}/workbench/reading-mark")
+async def set_reading_mark(project_id: str, body: ReadingMarkRequest, pm: ProjectManagerDep):
+    """「看到这里」书签（一篇一个，存在服务器上，换设备也在）。"""
+    _check_id(project_id)
+
+    def save():
+        meta = pm.get(project_id)  # 文章不存在时抛 FileNotFoundError
+        if meta.variant_of:
+            raise BadRequestException(detail="请在主项目上设置阅读标记", error_code="IS_VARIANT")
+        path = _mark_path(pm, project_id)
+        if body.key is None:
+            path.unlink(missing_ok=True)
+            return None
+        rows = _build_rows(project_id, pm.get_sections(project_id), {})
+        if body.key not in {row["key"] for row in rows}:
+            raise BadRequestException(detail="阅读标记对应的段落不存在，请刷新文章后重试")
+        record = {"key": body.key, "at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
+        # ProjectManager 原子写入，失败时保留已有书签。
+        pm._write_json(path, record)
+        return record
+
+    try:
+        mark = await run_blocking(save)
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
+    except OSError as error:
+        raise ServiceUnavailableException(detail="阅读标记保存失败，请重试") from error
+    return {"ok": True, "reading_mark": mark}
 
 
 @router.put("/projects/{project_id}/workbench/text")

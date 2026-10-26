@@ -16,6 +16,7 @@ import type { Workbench as WorkbenchData } from './types';
 const api = vi.hoisted(() => ({
   workbench: vi.fn(),
   saveText: vi.fn(),
+  setReadingMark: vi.fn(),
   startWorkflow: vi.fn(),
   createModelVariant: vi.fn(),
   exportMarkdown: vi.fn(),
@@ -191,7 +192,7 @@ const DATA: WorkbenchData = {
 };
 
 describe('Workbench', () => {
-  it('lines up English and both translations, collapses a pane and saves into the right project', async () => {
+  it('shows continuous English and both translations, collapses a pane and saves into the right project', async () => {
     api.workbench.mockResolvedValue(DATA);
     api.saveText.mockResolvedValue({ ok: true });
     await render(<Workbench projectId="p1" />);
@@ -200,7 +201,7 @@ describe('Workbench', () => {
     expect(host.textContent).toContain('2027 数据中心');
     expect(host.textContent).toContain('Datacenters are booming.');
     const cells = Array.from(host.querySelectorAll('[aria-label^="编辑："]'));
-    expect(cells.map(cell => cell.textContent)).toEqual(['引言', '前言', '数据中心正在爆发。', '还没有译文，可以直接写']);
+    expect(cells.map(cell => cell.textContent)).toEqual(['引言', '数据中心正在爆发。', '前言', '还没有译文，可以直接写']);
 
     const collapse = host.querySelector('button[aria-label="收起英文"]') as HTMLButtonElement;
     await act(async () => { collapse.click(); });
@@ -211,6 +212,112 @@ describe('Workbench', () => {
     await act(async () => { adopt.click(); });
     await flush();
     expect(api.saveText).toHaveBeenCalledWith('p1', { target: 'p1', section_id: 's1', paragraph_id: null, text: '前言' });
+  });
+
+  it('joins imported fragments into a natural paragraph and saves edits to the original fragment', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, rows: [
+      { ...DATA.rows[1], block: 'b1', source: 'First sentence.', web: '第一句。' },
+      { ...DATA.rows[1], key: 's1/p002', paragraph_id: 'p002', block: 'b1', source: 'Second sentence.', web: '第二句。' },
+      { ...DATA.rows[1], key: 's1/p003', paragraph_id: 'p003', block: 'b2', source: 'Next paragraph.', web: '下一段。' },
+    ] });
+    api.saveText.mockResolvedValue({ ok: true });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const article = host.querySelector('[aria-label="译本 1正文"]')!;
+    const blocks = article.querySelectorAll('[data-reading-block]');
+    expect(blocks).toHaveLength(2);
+    expect(blocks[0].textContent).toContain('第一句。第二句。');
+    await act(async () => { (article.querySelector('[aria-label="编辑：译本 1：Second sentence."]') as HTMLElement).click(); });
+    const textarea = host.querySelector('textarea')!;
+    await act(async () => {
+      Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(textarea, '第二句改了。');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await act(async () => { window.dispatchEvent(new KeyboardEvent('keydown', { key: 's', ctrlKey: true })); });
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 180)); });
+    expect(api.saveText).toHaveBeenCalledWith('p1', { target: 'p1', section_id: 's1', paragraph_id: 'p002', text: '第二句改了。' });
+    expect(unsavedEdits.any()).toBe(false);
+  });
+
+  it('persists a reading mark, restores it on reload, jumps to it and clears it', async () => {
+    let mark: { key: string; at: string } | null = null;
+    api.workbench.mockImplementation(async () => ({ ...DATA, reading_mark: mark }));
+    api.setReadingMark.mockImplementation(async (_id: string, key: string | null) => {
+      mark = key ? { key, at: '2026-10-27T01:00:00' } : null;
+      return { ok: true, reading_mark: mark };
+    });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const button = host.querySelector('[aria-label="译本 1：从这里继续阅读 — Datacenters are booming."]') as HTMLButtonElement;
+    await act(async () => { button.click(); });
+    await flush();
+    expect(api.setReadingMark).toHaveBeenCalledWith('p1', 's1/p000');
+    await render(<Workbench key="reloaded" projectId="p1" />);
+    await flush();
+    expect(host.querySelectorAll('[data-reading-mark="true"]')).toHaveLength(3);
+    const scroll = vi.fn();
+    host.querySelectorAll('[data-reading-mark="true"]').forEach(el => { el.scrollIntoView = scroll; });
+    await act(async () => { Array.from(host.querySelectorAll('button')).find(b => b.textContent?.trim() === '继续阅读')!.click(); });
+    expect(scroll).toHaveBeenCalledTimes(3);
+    await act(async () => { (host.querySelector('[aria-label="清除阅读标记"]') as HTMLButtonElement).click(); });
+    await flush();
+    expect(api.setReadingMark).toHaveBeenLastCalledWith('p1', null);
+    expect(host.querySelectorAll('[data-reading-mark="true"]')).toHaveLength(0);
+  });
+
+  it('keeps missing fragments editable and can adopt their translation from the other version', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, rows: [
+      { ...DATA.rows[1], block: 'b1', web: '已有的译文。' },
+      { ...DATA.rows[1], key: 's1/p002', paragraph_id: 'p002', block: 'b1', source: 'Missing part.', web: null, alt: { 'p1--argon': '另一版的后半段。' } },
+    ] });
+    api.saveText.mockResolvedValue({ ok: true });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const article = host.querySelector('[aria-label="译本 1正文"]')!;
+    expect(article.querySelector('[aria-label="编辑：译本 1：Missing part."]')?.textContent).toBe('待补译');
+    await act(async () => { Array.from(article.querySelectorAll('button')).find(b => b.textContent === '用argon这段')!.click(); });
+    await flush();
+    expect(api.saveText).toHaveBeenCalledWith('p1', { target: 'p1', section_id: 's1', paragraph_id: 'p002', text: '另一版的后半段。' });
+  });
+
+  it('retains a second fragment draft while the first fragment finishes saving', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, rows: [
+      { ...DATA.rows[1], block: 'b1', source: 'First.', web: null },
+      { ...DATA.rows[1], key: 's1/p002', paragraph_id: 'p002', block: 'b1', source: 'Second.', web: null },
+    ] });
+    let saved!: (value: { ok: boolean }) => void;
+    api.saveText.mockImplementationOnce(() => new Promise(resolve => { saved = resolve; })).mockResolvedValue({ ok: true });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const edit = async (source: string, text: string) => {
+      await act(async () => { (host.querySelector(`[aria-label="编辑：译本 1：${source}"]`) as HTMLElement).click(); });
+      await act(async () => {
+        const textarea = host.querySelector('textarea')!;
+        Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(textarea, text);
+        textarea.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+    };
+    await edit('First.', '第一段已保存。');
+    await act(async () => { host.querySelector('textarea')!.blur(); });
+    await edit('Second.', '第二段草稿。');
+    await act(async () => { saved({ ok: true }); });
+    expect(host.querySelector('textarea')?.value).toBe('第二段草稿。');
+    expect(unsavedEdits.any()).toBe(true);
+    await act(async () => { window.dispatchEvent(new KeyboardEvent('keydown', { key: 's', ctrlKey: true })); });
+    await act(async () => { await new Promise(resolve => setTimeout(resolve, 180)); });
+    expect(api.saveText).toHaveBeenLastCalledWith('p1', { target: 'p1', section_id: 's1', paragraph_id: 'p002', text: '第二段草稿。' });
+    expect(unsavedEdits.any()).toBe(false);
+  });
+
+  it('keeps the previous reading mark when saving fails', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, reading_mark: { key: 's1/p000', at: '2026-10-27' } });
+    api.setReadingMark.mockRejectedValue(new Error('离线了'));
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    await act(async () => { (host.querySelector('[aria-label="清除阅读标记"]') as HTMLButtonElement).click(); });
+    await flush();
+    expect(host.querySelectorAll('[data-reading-mark="true"]')).toHaveLength(3);
+    expect(toast.error).toHaveBeenCalledWith('阅读标记没保存上：离线了');
   });
 
   it('shows images in every column, not just the English one', async () => {

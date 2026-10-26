@@ -11,6 +11,10 @@ export interface ExportResult {
 export const articlesApi = {
   workbench: (projectId: string) => apiClient.get<Workbench>(`/projects/${projectId}/workbench`),
 
+  setReadingMark: (projectId: string, key: string | null) =>
+    apiClient.put<{ ok: boolean; reading_mark: Workbench['reading_mark'] }>(
+      `/projects/${projectId}/workbench/reading-mark`, { key }, { retry: false }),
+
   saveText: (projectId: string, body: { target: string; section_id: string; paragraph_id: string | null; text: string }) =>
     apiClient.put<{ ok: boolean }>(`/projects/${projectId}/workbench/text`, body, { retry: false }),
 
