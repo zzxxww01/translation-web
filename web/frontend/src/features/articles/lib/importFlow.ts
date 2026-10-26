@@ -33,7 +33,7 @@ export async function importAndTranslate(
       await startClaudeTrack(projectId, harness, article.zh_title || article.title);
     } catch (error) {
       notify(isUnauthorized(error)
-        ? '要先在 Agent 页登录一次：登录后在工作台里重新交给 Codex / Claude'
+        ? '要先在 Agent 页登录一次：登录后在工作台里重新选择 Agent 翻译'
         : `Agent 没能开始：${error instanceof Error ? error.message : error}`);
     }
   }

@@ -18,6 +18,7 @@ import { isUnauthorized } from '@/features/skills/hooks';
 import { articlesApi, downloadText, HUMAN_EDITS_URL } from '../api';
 import { articleKeys, useClaudeRun, useWorkbench } from '../hooks';
 import { importClaudeTrack, NoClaudeOutput, startClaudeTrack } from '../lib/claude';
+import { ARTICLE_HARNESSES } from '../lib/agentOptions';
 import { flushEdits, unsavedEdits, usePaneSaveState } from '../lib/edits';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { canFillMissing, countFilled, SECOND_MODELS, sectionsWithMissing, TERMS_STEP, trackSummary } from '../lib/tracks';
@@ -390,15 +391,11 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-60">
                 <DropdownMenuLabel>译本 2（Agent）</DropdownMenuLabel>
-                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('codex')}>
-                  <Bot className="h-4 w-4" /> 交给 Codex（four-step-translate）
-                </DropdownMenuItem>
-                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('claude')}>
-                  <Bot className="h-4 w-4" /> 交给 Claude（four-step-translate）
-                </DropdownMenuItem>
-                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('antigravity')}>
-                  <Bot className="h-4 w-4" /> 交给 Antigravity（four-step-translate）
-                </DropdownMenuItem>
+                {ARTICLE_HARNESSES.map(item => (
+                  <DropdownMenuItem key={item.id} disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude(item.id)}>
+                    <Bot className="h-4 w-4" /> 交给 {item.label}（four-step-translate）
+                  </DropdownMenuItem>
+                ))}
                 {run && (
                   <DropdownMenuItem onSelect={() => setDrawer({ kind: 'claude', run })}>
                     <Bot className="h-4 w-4" /> 看 {agentLabel} 的对话
@@ -445,7 +442,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             )}
             {claudeNeedsLogin && (
               <Banner tone="info" action="去登录" onAction={() => navigate('/skills')}>
-                这篇交给过 Codex / Claude，要先登录 Agent 页（一次即可）才能看进度和回复。
+                这篇交给过 Agent，要先登录 Agent 页（一次即可）才能看进度和回复。
               </Banner>
             )}
             {project.status.error && <Banner tone="error">网页版出错了：{project.status.error}</Banner>}
@@ -565,8 +562,11 @@ function SecondVersionPrompt({ busy, agentActive, onStart }: {
   return (
     <div className="flex flex-wrap items-center gap-2 border-b border-border-subtle bg-bg-tertiary/60 px-4 py-2 text-sm md:px-6">
       <span className="text-text-secondary">还没有译本 2：</span>
-      <Button size="sm" variant="outline" disabled={busy} onClick={() => onStart('codex')}><Bot /> 交给 Codex</Button>
-      <Button size="sm" variant="ghost" disabled={busy} onClick={() => onStart('claude')}><Bot /> 交给 Claude</Button>
+      {ARTICLE_HARNESSES.map(item => (
+        <Button key={item.id} size="sm" variant={item.id === 'codex' ? 'outline' : 'ghost'} disabled={busy} onClick={() => onStart(item.id)}>
+          <Bot /> 交给 {item.label}
+        </Button>
+      ))}
       <span className="text-xs text-text-muted">都跑 four-step-translate；付费文章 Claude 通常不肯全文翻译</span>
     </div>
   );

@@ -76,9 +76,9 @@ function TermsPanel({ projectId, jobId, mainId, onDone }: { projectId: string; j
 function ClaudePanel({ run, onDone }: { run: RunMeta; onDone: () => void }) {
   const auth = useSkillsAuth();
   const catalog = useCatalog(Boolean(auth.data));
-  if (auth.isPending) return <p className="p-6 text-sm text-text-muted">连接 Claude…</p>;
+  if (auth.isPending) return <p className="p-6 text-sm text-text-muted">连接 Agent…</p>;
   if (auth.error) {
-    return isUnauthorized(auth.error) ? <LoginPanel /> : <p className="p-6 text-sm text-text-muted">Claude 服务连不上：{auth.error.message}</p>;
+    return isUnauthorized(auth.error) ? <LoginPanel /> : <p className="p-6 text-sm text-text-muted">Agent 服务连不上：{auth.error.message}</p>;
   }
   return (
     <div className="h-full">
