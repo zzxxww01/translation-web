@@ -396,6 +396,9 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
                 <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('claude')}>
                   <Bot className="h-4 w-4" /> 交给 Claude（four-step-translate）
                 </DropdownMenuItem>
+                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('antigravity')}>
+                  <Bot className="h-4 w-4" /> 交给 Antigravity（four-step-translate）
+                </DropdownMenuItem>
                 {run && (
                   <DropdownMenuItem onSelect={() => setDrawer({ kind: 'claude', run })}>
                     <Bot className="h-4 w-4" /> 看 {agentLabel} 的对话
@@ -455,7 +458,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             <span className="min-w-0 flex-1 truncate">看到这里：{rows.find(row => row.key === data.reading_mark?.key)?.web || rows.find(row => row.key === data.reading_mark?.key)?.source || '已标记的位置'}</span>
             <button type="button" onClick={() => setReadingJump(n => n + 1)} className="shrink-0 rounded px-2 py-1 text-primary-700 hover:bg-primary-50">继续阅读</button>
             <button type="button" aria-label="清除阅读标记" disabled={markBusy} onClick={() => void markReading(null)} className="rounded p-1 hover:bg-bg-hover disabled:opacity-40"><X className="h-3.5 w-3.5" /></button>
-          </> : <span>点正文左侧的书签，记下看到哪里</span>}
+          </> : <span>在段落上边缘点“看到这里”，再点一次可取消</span>}
           {markBusy && <span role="status">保存标记中…</span>}
         </div>
         {isMobile && (

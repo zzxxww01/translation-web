@@ -113,6 +113,8 @@ async def test_claude_discovery_is_cached_and_failure_keeps_honest_aliases(tmp_p
     assert (await catalog.get("claude"))["models"][0]["id"] == "claude-test"
     assert (await catalog.get("claude"))["source"] == "runtime"
     assert len(calls) == 1
+    await catalog.get("claude", refresh=True)
+    assert len(calls) == 2
 
     async def unavailable(_config):
         raise OSError("offline")
@@ -129,3 +131,42 @@ def test_corrupt_codex_cache_keeps_default_and_does_not_break_picker(tmp_path, r
 
     (tmp_path / "models_cache.json").write_text(raw, encoding="utf-8")
     assert codex_models(tmp_path) == []
+
+
+def test_model_refresh_route_bypasses_cached_runtime_catalog(tmp_path, monkeypatch):
+    from skill_runner import models
+
+    calls = []
+
+    async def discover(_config):
+        calls.append(True)
+        return [{"id": f"model-{len(calls)}", "label": "Test", "description": ""}]
+
+    monkeypatch.setattr(models, "discover_claude_models", discover)
+    with TestClient(create_app(make_config(tmp_path), session_factory=FakeFactory())) as client:
+        client.post(f"{PREFIX}/login", json={"password": "s3cret"})
+        assert client.get(f"{PREFIX}/models/claude").json()["models"][0]["id"] == "model-1"
+        assert client.get(f"{PREFIX}/models/claude").json()["models"][0]["id"] == "model-1"
+        assert client.get(f"{PREFIX}/models/claude?refresh=true").json()["models"][0]["id"] == "model-2"
+
+
+def test_antigravity_model_route_keeps_selected_model_in_run(tmp_path, monkeypatch):
+    from skill_runner import models
+
+    async def discover(_config):
+        return [{"id": "gemini-test", "label": "Gemini Test", "description": ""}]
+
+    monkeypatch.setattr(models, "discover_antigravity_models", discover)
+    factory = FakeFactory()
+    with TestClient(create_app(make_config(tmp_path), session_factory=factory)) as client:
+        assert client.get(f"{PREFIX}/models/antigravity").status_code == 401
+        client.post(f"{PREFIX}/login", json={"password": "s3cret"})
+        catalog = client.get(f"{PREFIX}/models/antigravity?refresh=true").json()
+        assert catalog["source"] == "runtime"
+        response = client.post(f"{PREFIX}/runs", data={
+            "message": "hello", "harness": "antigravity", "model": catalog["models"][0]["id"],
+        })
+        assert response.status_code == 200
+        assert response.json()["harness"] == "antigravity"
+        assert factory.last.spec.harness == "antigravity"
+        assert factory.last.spec.model == "gemini-test"

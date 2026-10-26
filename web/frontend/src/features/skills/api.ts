@@ -1,5 +1,6 @@
 import { apiClient, ApiErrorWrapper } from '../../shared/api/client';
 import type { Agent, Answers, ModelCatalog, RunFile, RunMeta, RuntimeUpdateSnapshot } from './types';
+import type { Harness } from './harness';
 
 export const SKILLS_BASE = '/api/skills';
 
@@ -9,10 +10,12 @@ export const skillsApi = {
   logout: () => apiClient.post('/skills/logout'),
   // 旧版服务端只给 name/description/available，用 normalizeCatalog 补齐
   catalog: () => apiClient.get<Partial<Agent>[]>('/skills/catalog'),
-  models: (harness: 'claude' | 'codex') => apiClient.get<ModelCatalog>(`/skills/models/${harness}`, { retry: false }),
+  models: (harness: Harness, refresh = false) => apiClient.get<ModelCatalog>(`/skills/models/${harness}`, {
+    retry: false, ...(refresh ? { params: { refresh: true } } : {}),
+  }),
   runtimeStatus: () => apiClient.get<RuntimeUpdateSnapshot>('/skills/runtime', { retry: false }),
   checkUpdates: () => apiClient.post<RuntimeUpdateSnapshot>('/skills/runtime/check', undefined, { retry: false, timeout: 90_000 }),
-  updateRuntime: (harness: 'claude' | 'codex') => apiClient.post<RuntimeUpdateSnapshot>(`/skills/runtime/${harness}/update`, undefined, { retry: false }),
+  updateRuntime: (harness: Harness) => apiClient.post<RuntimeUpdateSnapshot>(`/skills/runtime/${harness}/update`, undefined, { retry: false }),
   runs: () => apiClient.get<RunMeta[]>('/skills/runs'),
   files: (runId: string) => apiClient.get<RunFile[]>(`/skills/runs/${runId}/files`),
   answer: (runId: string, qid: string, payload: { answers?: Answers; response?: string }) =>
@@ -61,7 +64,7 @@ function postMultipart<T>(path: string, form: FormData, onProgress?: (percent: n
 export const AUTO_REPLY_MINUTES = 10;
 
 export function startRun(
-  input: { skill: string; message: string; files: File[]; harness?: 'claude' | 'codex'; model?: string; autoReplyMinutes?: number; title?: string },
+  input: { skill: string; message: string; files: File[]; harness?: Harness; model?: string; autoReplyMinutes?: number; title?: string },
   onProgress?: (percent: number) => void
 ): Promise<RunMeta> {
   const form = new FormData();

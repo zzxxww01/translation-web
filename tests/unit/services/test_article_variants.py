@@ -208,9 +208,11 @@ async def test_saving_into_a_project_that_is_not_this_articles_variant_is_refuse
             target=main_id, section_id=section_id, paragraph_id=first.id, text="   "), pm)
 
 
-def test_codex_import_gets_its_own_variant(pm, main_id):
+@pytest.mark.parametrize(('agent', 'label'), [('codex', 'Codex'), ('antigravity', 'Antigravity')])
+def test_agent_import_gets_its_own_variant(pm, main_id, agent, label):
     en = "First paragraph about wafer supply and the 2027 buildout of datacenters.\n"
     zh = "关于晶圆供给和 2027 年数据中心建设的第一段。\n"
-    result = article_variants.import_claude_translation(pm, main_id, zh_markdown=zh, en_markdown=en, agent="codex")
-    assert result["variant_id"] == f"{main_id}--codex"
-    assert pm.get(result["variant_id"]).variant_label == "Codex"
+    body = workbench.ImportClaudeRequest(run_id='r1', zh_markdown=zh, en_markdown=en, agent=agent)
+    result = article_variants.import_claude_translation(pm, main_id, zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, agent=body.agent)
+    assert result["variant_id"] == f"{main_id}--{agent}"
+    assert pm.get(result["variant_id"]).variant_label == label

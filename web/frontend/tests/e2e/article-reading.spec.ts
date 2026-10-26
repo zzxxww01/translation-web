@@ -39,6 +39,6 @@ test('mobile article reading preserves a bookmark across refresh and saves a fra
   await expect(page.getByRole('article', { name: '英文正文' })).toContainText('First sentence. Second sentence.');
   await expect(page.locator('[data-reading-mark="true"]')).toHaveCount(1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
-  await page.getByRole('button', { name: '清除阅读标记', exact: true }).click();
+  await page.getByRole('button', { name: '英文：从这里继续阅读 — First sentence.', exact: true }).click();
   await expect(page.locator('[data-reading-mark="true"]')).toHaveCount(0);
 });

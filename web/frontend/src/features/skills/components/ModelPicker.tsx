@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { skillsApi } from '../api';
 import type { Harness } from '../harness';
 
@@ -9,10 +9,17 @@ export function ModelPicker({ harness, value, onChange, disabled }: {
   onChange: (model: string) => void;
   disabled: boolean;
 }) {
+  const client = useQueryClient();
+  const key = ['skills', 'models', harness];
   const query = useQuery({
-    queryKey: ['skills', 'models', harness], queryFn: () => skillsApi.models(harness),
+    queryKey: key, queryFn: () => skillsApi.models(harness),
     staleTime: 60_000, retry: false,
   });
+  const refresh = useMutation({
+    mutationFn: () => skillsApi.models(harness, true),
+    onSuccess: data => client.setQueryData(key, data),
+  });
+  const fetching = query.isFetching || refresh.isPending;
   const models = query.data?.models ?? [];
   const [custom, setCustom] = useState(false);
   const unknown = Boolean(value && !models.some(model => model.id === value));
@@ -42,17 +49,24 @@ export function ModelPicker({ harness, value, onChange, disabled }: {
         <input
           aria-label="模型 ID" value={value} maxLength={128} disabled={disabled}
           onChange={event => onChange(event.target.value)}
-          placeholder={harness === 'codex' ? '例如 gpt-6-astra' : '例如 opus 或完整模型 ID'}
+          placeholder={harness === 'claude' ? '例如 opus 或完整模型 ID' : '填写完整模型 ID'}
           className="w-56 rounded-md border border-border bg-white px-2 py-1 text-xs text-text-primary"
         />
       )}
-      <button type="button" disabled={disabled || query.isFetching} onClick={() => void query.refetch()}
+      <button type="button" disabled={disabled || fetching} onClick={() => refresh.mutate()}
         className="text-xs text-primary-700 disabled:opacity-50">
-        {query.isFetching ? '读取模型…' : '刷新模型'}
+        {fetching ? '读取模型…' : '刷新模型'}
       </button>
-      {(query.error || query.data?.warning) && (
+      <p className="w-full text-xs leading-relaxed text-text-muted">
+        {harness === 'codex'
+          ? '来源：Codex CLI 本地缓存；刷新会重读缓存。实际可用模型取决于账号权限。'
+          : query.data?.source === 'aliases'
+            ? '来源：Claude 通用模型别名。'
+            : `来源：服务器上的 ${harness === 'claude' ? 'Claude Code' : 'Antigravity'} CLI；刷新会重新读取模型清单。清单不代表账号已登录或拥有使用权限。`}
+      </p>
+      {(query.error || refresh.error || query.data?.warning) && (
         <p role="status" className="w-full text-xs text-text-muted">
-          {query.error ? '模型清单读取失败，仍可使用默认模型或填写模型 ID。' : query.data?.warning}
+          {query.error || refresh.error ? '模型清单读取失败，仍可使用默认模型或填写模型 ID。' : query.data?.warning}
         </p>
       )}
     </div>

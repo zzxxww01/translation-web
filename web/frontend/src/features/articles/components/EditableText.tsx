@@ -1,18 +1,23 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useImperativeHandle, useLayoutEffect, useRef, useState, type Ref } from 'react';
 import { cn } from '@/lib/utils';
 import { SAVE_DELAY_MS, unsavedEdits } from '../lib/edits';
 import { InlineMarkdown } from './InlineMarkdown';
 
 type SaveState = 'idle' | 'dirty' | 'saving' | 'saved' | 'error';
 
+export interface EditableTextHandle {
+  isProtected: () => boolean;
+  adopt: (text: string) => Promise<void>;
+}
+
 interface EditableTextProps {
+  ref?: Ref<EditableTextHandle>;
   id: string;
   value: string | null;
   placeholder: string;
   ariaLabel: string;
   onSave: (text: string) => Promise<void>;
-  /** 另一版这一段的译文，有就显示「用另一版这段」 */
-  adopt?: { label: string; text: string } | null;
+  onProtectionChange?: (id: string, protectedDraft: boolean) => void;
   className?: string;
   inline?: boolean;
 }
@@ -24,7 +29,7 @@ const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
  * 停顿约 1 秒或离开时自动保存——类似 Obsidian 的实时预览。保存状态汇总到栏头（见 lib/edits），
  * 这里只在保存失败时标红、给重试。
  */
-export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt, className, inline = false }: EditableTextProps) {
+export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel, onSave, onProtectionChange, className, inline = false }: EditableTextProps) {
   const [text, setText] = useState(value ?? '');
   const [state, setState] = useState<SaveState>('idle');
   const [editing, setEditing] = useState(false);
@@ -75,19 +80,34 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
     }
   }, [id, onSave]);
 
+  const protectedDraft = editing || state === 'dirty' || state === 'saving' || state === 'error';
+  useEffect(() => {
+    onProtectionChange?.(id, protectedDraft);
+  }, [id, protectedDraft, onProtectionChange]);
+
+  // 整段采用仍通过各片段自己的保存流程，保留失败重试和栏头保存状态。
+  useImperativeHandle(editorRef, () => ({
+    isProtected: () => protectedDraft,
+    adopt: async next => {
+      if (protectedDraft) return;
+      setText(next);
+      latest.current = next;
+      await save(next);
+    },
+  }), [protectedDraft, save]);
+
   useEffect(() => () => {
     clearTimeout(timer.current);
     unsavedEdits.remove(id);
   }, [id]);
 
-  const change = (next: string, immediately = false) => {
+  const change = (next: string) => {
     setText(next);
     latest.current = next;
     unsavedEdits.set(id, 'dirty');
     setState('dirty');
     clearTimeout(timer.current);
-    if (immediately) void save(next);
-    else timer.current = setTimeout(() => void save(next), SAVE_DELAY_MS);
+    timer.current = setTimeout(() => void save(next), SAVE_DELAY_MS);
   };
 
   const Container = inline ? 'span' : 'div';
@@ -146,16 +166,6 @@ export function EditableText({ id, value, placeholder, ariaLabel, onSave, adopt,
             {text.trim() ? '保存失败，点此重试' : '译文不能为空'}
           </button>
         </span>
-      )}
-      {adopt && adopt.text !== text && (
-        <button
-          type="button"
-          onMouseDown={event => event.preventDefault()}
-          onClick={() => change(adopt.text, true)}
-          className="absolute -top-2 right-0 hidden rounded-md border border-border-subtle bg-white px-2 py-0.5 text-[11px] text-text-secondary shadow-sm hover:border-primary-200 hover:text-primary-700 group-hover/edit:block"
-        >
-          用{adopt.label}这段
-        </button>
       )}
     </Container>
   );

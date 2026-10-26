@@ -9,7 +9,7 @@ const CLAUDE_MESSAGE =
 
 export class NoClaudeOutput extends Error {
   constructor() {
-    super('这次没有产出 zh.md（Claude 对付费文章通常不肯全文翻译，会改写成导读；可以改用 Codex）');
+    super('这次没有找到同一目录下的 zh.md 和 en.md，请在 Agent 对话中确认翻译已完成并按这两个文件名保存。');
     this.name = 'NoClaudeOutput';
   }
 }
@@ -26,7 +26,7 @@ export function findClaudeOutputs(files: RunFile[]): { zh: string; en: string } 
   return null;
 }
 
-/** 把原文交给翻译 Agent（Claude Code 或 Codex 跑 four-step-translate），并记下这篇文章对应的对话。title 是对话标题（文章标题）。 */
+/** 把原文交给翻译 Agent 跑 four-step-translate，并记下这篇文章对应的对话。title 是对话标题（文章标题）。 */
 export async function startClaudeTrack(projectId: string, harness: Harness = 'claude', title?: string): Promise<RunMeta> {
   const html = await articlesApi.sourceHtml(projectId);
   const run = await startRun({ skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html], harness, autoReplyMinutes: AUTO_REPLY_MINUTES, title });
@@ -40,7 +40,7 @@ async function readText(runId: string, path: string): Promise<string> {
   return response.text();
 }
 
-/** 从任务取回 zh.md / en.md，对齐后存成 `--claude` 或 `--codex` 译本。 */
+/** 从任务取回 zh.md / en.md，对齐后存成该 Agent 对应的译本。 */
 export async function importClaudeTrack(projectId: string, runId: string, harness: Harness = 'claude') {
   const outputs = findClaudeOutputs(await skillsApi.files(runId));
   if (!outputs) throw new NoClaudeOutput();

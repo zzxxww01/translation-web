@@ -208,7 +208,7 @@ describe('Workbench', () => {
     expect(host.querySelector('button[aria-label="展开英文"]')).not.toBeNull();
     expect(host.textContent).not.toContain('Datacenters are booming.');
 
-    const adopt = Array.from(host.querySelectorAll('button')).find(b => b.textContent === '用argon这段')!;
+    const adopt = Array.from(host.querySelectorAll('button')).find(b => b.textContent === '采用 argon 整段')!;
     await act(async () => { adopt.click(); });
     await flush();
     expect(api.saveText).toHaveBeenCalledWith('p1', { target: 'p1', section_id: 's1', paragraph_id: null, text: '前言' });
@@ -259,7 +259,11 @@ describe('Workbench', () => {
     host.querySelectorAll('[data-reading-mark="true"]').forEach(el => { el.scrollIntoView = scroll; });
     await act(async () => { Array.from(host.querySelectorAll('button')).find(b => b.textContent?.trim() === '继续阅读')!.click(); });
     expect(scroll).toHaveBeenCalledTimes(3);
-    await act(async () => { (host.querySelector('[aria-label="清除阅读标记"]') as HTMLButtonElement).click(); });
+    const markedButton = host.querySelector('[aria-label="译本 1：从这里继续阅读 — Datacenters are booming."]') as HTMLButtonElement;
+    expect(markedButton.getAttribute('aria-pressed')).toBe('true');
+    expect(markedButton.title).toBe('取消“看到这里”');
+    expect(markedButton.closest('[data-reading-actions]')).not.toBeNull();
+    await act(async () => { markedButton.click(); });
     await flush();
     expect(api.setReadingMark).toHaveBeenLastCalledWith('p1', null);
     expect(host.querySelectorAll('[data-reading-mark="true"]')).toHaveLength(0);
@@ -275,9 +279,86 @@ describe('Workbench', () => {
     await flush();
     const article = host.querySelector('[aria-label="译本 1正文"]')!;
     expect(article.querySelector('[aria-label="编辑：译本 1：Missing part."]')?.textContent).toBe('待补译');
-    await act(async () => { Array.from(article.querySelectorAll('button')).find(b => b.textContent === '用argon这段')!.click(); });
+    await act(async () => { Array.from(article.querySelectorAll('button')).find(b => b.textContent === '用 argon 补齐本段')!.click(); });
     await flush();
+    expect(api.saveText).toHaveBeenCalledTimes(1);
     expect(api.saveText).toHaveBeenCalledWith('p1', { target: 'p1', section_id: 's1', paragraph_id: 'p002', text: '另一版的后半段。' });
+  });
+
+  it('adopts one whole original paragraph with a single edge control', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, rows: [
+      { ...DATA.rows[1], block: 'b1', source: 'First.', web: '原来的第一句。', alt: { 'p1--argon': '新版第一句。' } },
+      { ...DATA.rows[1], key: 's1/p002', paragraph_id: 'p002', block: 'b1', source: 'Second.', web: '原来的第二句。', alt: { 'p1--argon': '新版第二句。' } },
+    ] });
+    api.saveText.mockResolvedValue({ ok: true });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const article = host.querySelector('[aria-label="译本 1正文"]')!;
+    const actions = article.querySelector('[data-reading-actions]')!;
+    expect(actions).not.toBeNull();
+    const adopts = Array.from(article.querySelectorAll('button')).filter(button => button.textContent?.includes('采用 argon'));
+    expect(adopts).toHaveLength(1);
+    expect(actions.contains(adopts[0])).toBe(true);
+    expect(article.textContent).not.toContain('这段');
+    await act(async () => { adopts[0].click(); });
+    await flush();
+    expect(api.saveText.mock.calls.map(call => call[1])).toEqual([
+      { target: 'p1', section_id: 's1', paragraph_id: 'p000', text: '新版第一句。' },
+      { target: 'p1', section_id: 's1', paragraph_id: 'p002', text: '新版第二句。' },
+    ]);
+    expect(article.textContent).toContain('新版第一句。新版第二句。');
+  });
+
+  it('explains why an incomplete comparison cannot replace a whole paragraph', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, rows: [
+      { ...DATA.rows[1], block: 'b1', web: '已有的第一句。', alt: { 'p1--argon': '另一版的第一句。' } },
+      { ...DATA.rows[1], key: 's1/p002', paragraph_id: 'p002', block: 'b1', source: 'Second.', web: '已有的第二句。' },
+    ] });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const article = host.querySelector('[aria-label="译本 1正文"]')!;
+    const adopt = Array.from(article.querySelectorAll('button')).find(button => button.textContent === '采用 argon 整段')!;
+    expect(adopt.disabled).toBe(true);
+    expect(adopt.title).toContain('对照译文尚未完整');
+    await act(async () => { adopt.click(); });
+    expect(api.saveText).not.toHaveBeenCalled();
+  });
+
+  it('protects an active fragment draft from whole paragraph adoption', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, rows: [
+      { ...DATA.rows[1], block: 'b1', source: 'First.', web: '第一句。', alt: { 'p1--argon': '对照第一句。' } },
+      { ...DATA.rows[1], key: 's1/p002', paragraph_id: 'p002', block: 'b1', source: 'Second.', web: '第二句。', alt: { 'p1--argon': '对照第二句。' } },
+    ] });
+    api.saveText.mockResolvedValue({ ok: true });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const article = host.querySelector('[aria-label="译本 1正文"]')!;
+    await act(async () => { (article.querySelector('[aria-label="编辑：译本 1：Second."]') as HTMLElement).click(); });
+    await act(async () => {
+      const textarea = host.querySelector('textarea')!;
+      Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(textarea, '还在编辑的草稿。');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    const adopt = Array.from(article.querySelectorAll('button')).find(button => button.textContent === '采用 argon 整段')!;
+    expect(adopt.disabled).toBe(true);
+    expect(adopt.title).toContain('请先完成本段编辑');
+    await act(async () => { adopt.click(); });
+    expect(host.querySelector('textarea')!.value).toBe('还在编辑的草稿。');
+    expect(api.saveText).not.toHaveBeenCalled();
+  });
+
+  it('clears a legacy fragment bookmark by clicking its paragraph bookmark', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, reading_mark: { key: 's1/p002', at: '2026-10-27' }, rows: [
+      { ...DATA.rows[1], block: 'b1', source: 'First.' },
+      { ...DATA.rows[1], key: 's1/p002', paragraph_id: 'p002', block: 'b1', source: 'Second.' },
+    ] });
+    api.setReadingMark.mockResolvedValue({ ok: true, reading_mark: null });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const button = host.querySelector('[aria-label="译本 1：从这里继续阅读 — First."]') as HTMLButtonElement;
+    expect(button.getAttribute('aria-pressed')).toBe('true');
+    await act(async () => { button.click(); });
+    expect(api.setReadingMark).toHaveBeenCalledWith('p1', null);
   });
 
   it('retains a second fragment draft while the first fragment finishes saving', async () => {

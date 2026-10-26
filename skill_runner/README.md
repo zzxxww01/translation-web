@@ -63,7 +63,7 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 | 加 skill（= 页面上多一个 agent） | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，在 `skill_runner/agents.json` 写名片（中文名、图标、说明、输入提示、示例），开沙箱时按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
 | 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `chat`、`article`、`video`、`podcast` |
 
-## Harness：Claude Code / Codex
+## Harness：Claude Code / Codex / Antigravity
 
 新任务页可以选用哪个 harness，任务元数据记在 `harness` 字段里（旧任务没有这个字段，按 Claude 处理）。
 
@@ -75,13 +75,21 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 - **skill 目录**：真实文件在 `~/.agents/skills/`（Codex 原生读），`~/.claude/skills/<skill>` 是指向它的软链接。
   新加 skill：放进 `~/.agents/skills/`，再 `ln -s ~/.agents/skills/<名字> ~/.claude/skills/<名字>`。
 
+- **Antigravity**：使用 Google 官方 `agy` CLI，每轮通过 stdin 传入 stream-json，输出映射到同一聊天界面。
+  后续消息用已保存的 `--conversation <id>` 续聊，避免恢复到其他对话。使用 `--model` 指定型号。
+  请按 [官方安装与登录文档](https://antigravity.google/docs/install?tab=cli) 在服务用户下登录；SSH 登录采用官方浏览器授权流程。
+  设置 `SKILL_RUNNER_ANTIGRAVITY_BIN` 指向已安装的程序。不会自动切换到 Gemini API Key 计费。
+  由于原生 `--sandbox` 在系统不支持时可能无效，此接入在沙箱配置开启时拒绝启动，生产现有明确关闭沙箱的模式可用。
+  读取技能文件后按任务要求执行，产物仍放在本次运行目录。
+
 ## 选择具体模型与更新工具
 
-在「新对话」里先选 Claude 或 Codex，再用「具体模型」选择型号，也可以填写完整模型 ID。
+在「新对话」里先选 Claude、Codex 或 Antigravity，再用「具体模型」选择型号，也可以填写完整模型 ID。
 浏览器分别记住每个 Agent、每种工具的选择；对话会保存所选模型，刷新或服务重启后续聊仍沿用它。
 选择「默认模型」时使用服务器配置；对话标题下优先显示运行工具实际返回的模型。
 
-Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单来自 SDK 初始化握手，不提交推理请求。
+Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单来自 SDK 初始化握手，Antigravity 清单来自 `agy models`，均不提交推理请求。
+「刷新模型」会绕过应用层缓存；Codex 仍依赖其 CLI 更新本地清单，其他工具返回的目录也不等于账号额度或权限验证。
 清单不可用时页面说明原因，仍可使用默认模型或手填 ID。可用型号及权限由该账号决定，手填 ID 不保证账号有权使用。
 
 登录后打开侧栏「工具与更新」，点击「检查更新」查看实际运行版本与官方稳定版本，再单独更新 Codex 或 Claude Code。
@@ -93,6 +101,7 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
 - Claude 使用原生命令 `claude install <已检查的版本>` 更新。SDK 与模型发现统一优先使用 `~/.local/bin/claude`，
   其次 PATH 中的 Claude，最后回退到 SDK 自带程序。`SKILL_RUNNER_CLAUDE_BIN` 可显式指定路径；自定义路径不支持网页自动更新。
 - 更新程序不会修改登录凭证、运行记录或 Python SDK 包。SDK 升级继续按上面的部署流程操作。
+- Antigravity 版本与官方原生 manifest 比较；它使用官方 CLI 自带的自动更新，此处仅显示版本状态，不通过 npm 安装同名第三方包。
 
 ## 等确认超时自动继续
 

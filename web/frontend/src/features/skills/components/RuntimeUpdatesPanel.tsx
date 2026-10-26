@@ -36,7 +36,7 @@ export function RuntimeUpdatesPanel() {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm leading-relaxed text-text-muted">检查服务器上的 Codex 和 Claude Code 版本。有对话正在运行或等待确认时，请先结束任务再更新。</p>
+      <p className="text-sm leading-relaxed text-text-muted">检查服务器上的 Codex、Claude Code 和 Antigravity 版本。有对话正在运行或等待确认时，请先结束任务再更新。</p>
       <Button variant="outline" size="sm" disabled={Boolean(busy)} onClick={() => void perform()}>
         {pending && !query.data?.active ? '处理中…' : '检查更新'}
       </Button>
