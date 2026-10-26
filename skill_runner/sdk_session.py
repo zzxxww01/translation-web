@@ -27,6 +27,7 @@ from claude_agent_sdk.types import PermissionResultAllow, PermissionResultDeny, 
 
 from .config import Config
 from .runner import SessionSpec
+from .runtime_paths import claude_cli_path
 
 logger = logging.getLogger(__name__)
 
@@ -86,6 +87,7 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
 
     settings = build_settings(config, spec)
     return ClaudeAgentOptions(
+        cli_path=claude_cli_path(config),
         cwd=str(spec.cwd),
         resume=spec.resume,
         # 只加载服务用户的 ~/.claude（skills、settings）；运行目录里不会有项目级配置
@@ -94,7 +96,7 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
         can_use_tool=can_use_tool,
         system_prompt={"type": "preset", "preset": "claude_code", "append": build_system_prompt(config, spec.prompt_note)},
         settings=json.dumps(settings, ensure_ascii=False) if settings else None,
-        model=config.model,
+        model=spec.model or config.model,
         # 新模型默认不带任务清单工具，要显式打开，网页侧栏的进度才有数据（Python 的 env 是叠加在继承环境上的）
         env={"CLAUDE_CODE_ENABLE_TODO_TOOLS": "1"},
         stderr=lambda line: logger.info("[claude %s] %s", spec.run_id, line.rstrip()),

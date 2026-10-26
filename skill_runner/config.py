@@ -56,6 +56,7 @@ class Config:
     allowed_domains: tuple[str, ...] = DEFAULT_ALLOWED_DOMAINS
     unsandboxed_commands: tuple[str, ...] = ()
     model: str | None = None
+    claude_bin: str | None = None
     # Codex：服务器上的 codex CLI；模型不填就用它自己清单里最新的那个
     codex_bin: str = "codex"
     codex_model: str | None = None
@@ -95,6 +96,7 @@ class Config:
             # Bash 规则里本身带空格和逗号，所以用分号分隔
             unsandboxed_commands=_split(env.get("SKILL_RUNNER_UNSANDBOXED_COMMANDS"), ";"),
             model=env.get("SKILL_RUNNER_MODEL") or None,
+            claude_bin=env.get("SKILL_RUNNER_CLAUDE_BIN") or None,
             codex_bin=env.get("SKILL_RUNNER_CODEX_BIN") or "codex",
             codex_model=env.get("SKILL_RUNNER_CODEX_MODEL") or None,
             codex_home=Path(env.get("CODEX_HOME") or Path.home() / ".codex").expanduser(),

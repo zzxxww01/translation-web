@@ -17,6 +17,7 @@ from pathlib import Path
 from typing import Any, AsyncIterator
 
 from .config import Config
+from .models import codex_models
 from .runner import SessionSpec
 
 logger = logging.getLogger(__name__)
@@ -54,13 +55,8 @@ def _command_summary(command: str) -> str:
 
 def latest_model(codex_home: Path) -> str | None:
     """Codex 自己的模型清单里排在最前、可选的那个（用户要「用最新的模型」，不写死名字）。"""
-    try:
-        data = json.loads((codex_home / "models_cache.json").read_text(encoding="utf-8"))
-    except (OSError, ValueError):
-        return None
-    listed = [m for m in data.get("models", []) if isinstance(m, dict) and m.get("visibility") == "list" and m.get("slug")]
-    listed.sort(key=lambda m: m.get("priority", 1_000_000))
-    return listed[0]["slug"] if listed else None
+    listed = codex_models(codex_home)
+    return listed[0]["id"] if listed else None
 
 
 class CodexMapper:
@@ -147,7 +143,7 @@ class CodexMapper:
         }
 
 
-def build_command(config: Config, thread_id: str | None) -> list[str]:
+def build_command(config: Config, thread_id: str | None, model: str | None = None) -> list[str]:
     command = shlex.split(config.codex_bin) + ["exec"]
     if thread_id:
         command += ["resume"]
@@ -156,7 +152,7 @@ def build_command(config: Config, thread_id: str | None) -> list[str]:
         command += ["--sandbox", "workspace-write", "-c", 'approval_policy="never"']
     else:
         command += ["--dangerously-bypass-approvals-and-sandbox"]
-    model = config.codex_model or latest_model(config.codex_home)
+    model = model or config.codex_model or latest_model(config.codex_home)
     if model:
         command += ["-m", model]
     if thread_id:
@@ -173,6 +169,7 @@ class CodexSession:
         self._queue: asyncio.Queue[dict[str, Any] | None] = asyncio.Queue()
         self._inbox: asyncio.Queue[str] = asyncio.Queue()
         self._proc: asyncio.subprocess.Process | None = None
+        self._working = False
         self._closed = False
         self._first = spec.resume is None
         self._worker = asyncio.create_task(self._work())
@@ -182,6 +179,8 @@ class CodexSession:
         return cls(config, spec)
 
     async def send(self, text: str) -> None:
+        if self._closed:
+            raise RuntimeError("Codex 会话已关闭")
         if self._first:
             # 第一轮把运行环境说明和这类任务的补充说明放在前面；resume 的轮次 Codex 自己记得
             text = PREFACE + self._spec.prompt_note + "\n" + text
@@ -189,27 +188,47 @@ class CodexSession:
         # 上一轮还在跑时排队，等它结束再接着跑（和 Claude 那边插话的效果一样）
         await self._inbox.put(text)
 
+    @property
+    def busy(self) -> bool:
+        """Results can precede process exit and the next accepted turn."""
+        return (self._working or not self._inbox.empty()
+                or (not self._closed and not self._queue.empty())
+                or (self._proc is not None and self._proc.returncode is None))
+
     async def _work(self) -> None:
         while not self._closed:
             prompt = await self._inbox.get()
+            self._working = True
             try:
                 await self._turn(prompt)
             except Exception as exc:  # noqa: BLE001 - 这一轮的任何失败都要反映到页面上
                 logger.exception("codex turn failed for run %s", self._spec.run_id)
                 await self._queue.put({"type": "notice", "level": "error", "text": f"Codex 进程出错：{exc}"})
                 await self._queue.put(self._mapper.result(is_error=True, errors=[str(exc)]))
+            finally:
+                try:
+                    # Parsing/startup failures must not leave a child behind for the next turn.
+                    await self.interrupt()
+                finally:
+                    self._working = False
 
     async def _turn(self, prompt: str) -> None:
-        command = build_command(self._config, self._mapper.thread_id)
+        command = build_command(self._config, self._mapper.thread_id, self._spec.model)
         logger.info("[codex %s] %s", self._spec.run_id, " ".join(command[:-1]))
-        self._proc = await asyncio.create_subprocess_exec(
+        startup = asyncio.create_task(asyncio.create_subprocess_exec(
             *command,
             cwd=str(self._spec.cwd),
             stdin=asyncio.subprocess.PIPE,
             stdout=asyncio.subprocess.PIPE,
             stderr=asyncio.subprocess.PIPE,
             limit=16 * 1024 * 1024,  # 一行 JSON 里可能带很长的命令输出
-        )
+        ))
+        try:
+            self._proc = await asyncio.shield(startup)
+        except asyncio.CancelledError:
+            # Capture the child even if closing starts while subprocess creation awaits.
+            self._proc = await startup
+            raise
         proc = self._proc
         assert proc.stdin and proc.stdout and proc.stderr
         proc.stdin.write(prompt.encode("utf-8"))
@@ -250,11 +269,16 @@ class CodexSession:
             await asyncio.wait_for(proc.wait(), INTERRUPT_GRACE_S)
         except asyncio.TimeoutError:
             proc.kill()
+            await proc.wait()
 
     async def close(self) -> None:
         self._closed = True
         await self.interrupt()
         self._worker.cancel()
+        await asyncio.gather(self._worker, return_exceptions=True)
+        await self.interrupt()
+        while not self._inbox.empty():
+            self._inbox.get_nowait()
         await self._queue.put(None)
 
     async def events(self) -> AsyncIterator[dict[str, Any]]:

@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { ArrowLeft, LogOut } from 'lucide-react';
+import { ArrowLeft, LogOut, Settings } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
 import { findAgent, normalizeCatalog } from './agents';
 import { skillsApi } from './api';
@@ -11,6 +12,7 @@ import { LoginPanel } from './components/LoginPanel';
 import { NewRunForm } from './components/NewRunForm';
 import { RunList } from './components/RunList';
 import { RunPanel } from './components/RunPanel';
+import { RuntimeUpdatesPanel } from './components/RuntimeUpdatesPanel';
 import './styles.css';
 
 function Spinner() {
@@ -37,6 +39,7 @@ export function SkillsFeature() {
 
 function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
   const queryClient = useQueryClient();
+  const [updatesOpen, setUpdatesOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedId = searchParams.get('run');
   // 宽屏上没选对话就显示「新对话」；窄屏列表和内容二选一，所以新对话要单独的 URL 状态
@@ -74,6 +77,9 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
       >
         <RunList runs={runs.data ?? []} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} />
         <div className="border-t border-border-subtle px-4 py-2">
+          <Button variant="ghost" size="sm" onClick={() => setUpdatesOpen(true)}>
+            <Settings /> 工具与更新
+          </Button>
           <Button variant="ghost" size="sm" onClick={logout}>
             <LogOut /> 退出登录
           </Button>
@@ -111,6 +117,15 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
           )}
         </div>
       </div>
+      <Dialog open={updatesOpen} onOpenChange={setUpdatesOpen}>
+        <DialogContent className="max-h-[85vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle>工具与更新</DialogTitle>
+            <DialogDescription>查看和更新 Agent 使用的服务器程序。</DialogDescription>
+          </DialogHeader>
+          {updatesOpen && <RuntimeUpdatesPanel />}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

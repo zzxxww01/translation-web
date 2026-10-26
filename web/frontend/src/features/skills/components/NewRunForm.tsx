@@ -8,9 +8,11 @@ import { cn } from '@/lib/utils';
 import { AUTO_REPLY_MINUTES, startRun } from '../api';
 import { skillKeys } from '../hooks';
 import { HARNESSES, loadHarness, saveHarness, type Harness } from '../harness';
+import { loadModel, saveModel } from '../models';
 import type { Agent, RunMeta } from '../types';
 import { AgentAvatar } from './AgentIcon';
 import { AttachmentPicker } from './AttachmentChips';
+import { ModelPicker } from './ModelPicker';
 
 interface NewRunFormProps {
   /** 第一个是通用 Agent，其余是专职 Agent（见 normalizeCatalog） */
@@ -26,6 +28,7 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
   const [agentName, setAgentName] = useState('');
   const agent = catalog.find(item => item.name === agentName) ?? catalog[0];
   const [harness, setHarness] = useState<Harness>(() => loadHarness(agent.name, agent.harness));
+  const [model, setModel] = useState(() => loadModel(agent.name, harness));
   const [message, setMessage] = useState('');
   const [files, setFiles] = useState<File[]>([]);
   const [autoReply, setAutoReply] = useState(true);
@@ -37,13 +40,21 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
 
   const pickAgent = (next: Agent) => {
     setAgentName(next.name);
-    setHarness(loadHarness(next.name, next.harness));
+    const nextHarness = loadHarness(next.name, next.harness);
+    setHarness(nextHarness);
+    setModel(loadModel(next.name, nextHarness));
     textareaRef.current?.focus();
   };
 
   const pickHarness = (next: Harness) => {
     setHarness(next);
     saveHarness(agent.name, next);
+    setModel(loadModel(agent.name, next));
+  };
+
+  const pickModel = (next: string) => {
+    setModel(next);
+    saveModel(agent.name, harness, next);
   };
 
   const start = async () => {
@@ -51,7 +62,7 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
     setProgress(files.length ? 0 : 100);
     try {
       const run = await startRun(
-        { skill: agent.name, message, files, harness, autoReplyMinutes: autoReply ? AUTO_REPLY_MINUTES : 0 },
+        { skill: agent.name, message, files, harness, ...(model.trim() ? { model: model.trim() } : {}), autoReplyMinutes: autoReply ? AUTO_REPLY_MINUTES : 0 },
         setProgress
       );
       await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
@@ -159,6 +170,9 @@ export function NewRunForm({ catalog, maxUploadMb, onStarted }: NewRunFormProps)
           {tooLarge.name} 超过 {maxUploadMb} MB 上限，大文件请改用链接
         </p>
       )}
+      <div className="mt-3">
+        <ModelPicker key={`${agent.name}:${harness}`} harness={harness} value={model} onChange={pickModel} disabled={busy} />
+      </div>
       <label className="mt-3 flex items-center gap-1.5 text-xs text-text-muted">
         <input
           type="checkbox"

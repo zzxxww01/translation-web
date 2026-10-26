@@ -13,6 +13,8 @@ export interface RunMeta {
   error: string | null;
   /** 旧任务没有这个字段，按 Claude 处理 */
   harness?: 'claude' | 'codex';
+  model?: string | null;
+  actual_model?: string | null;
   /** 等确认时多少秒没回复就自动按推荐方案继续，0 = 一直等 */
   auto_reply_s?: number;
   /** 上一轮结束时在等你确认（不是做完了） */
@@ -39,6 +41,32 @@ export interface RunFile {
   path: string;
   size: number;
   mtime: number;
+}
+
+export interface ModelCatalog {
+  models: { id: string; label: string; description: string }[];
+  default_model: string | null;
+  source: 'cache' | 'runtime' | 'aliases';
+  warning: string | null;
+}
+
+export interface RuntimeUpdateSnapshot {
+  active: boolean;
+  checking: boolean;
+  checked_at: number | null;
+  runtimes: {
+    harness: 'claude' | 'codex';
+    label: string;
+    current: string | null;
+    latest: string | null;
+    update_available: boolean;
+    can_update: boolean;
+    reason: string | null;
+    error: string | null;
+    status: 'unchecked' | 'ready' | 'updating' | 'succeeded' | 'failed';
+    message: string | null;
+    updated_at: number | null;
+  }[];
 }
 
 export interface QuestionOption {

@@ -7,8 +7,8 @@ import { CHAT_AGENT, findAgent, normalizeCatalog } from './agents';
 import { NewRunForm } from './components/NewRunForm';
 import type { Agent } from './types';
 
-const startRun = vi.hoisted(() => vi.fn());
-vi.mock('./api', () => ({ startRun, AUTO_REPLY_MINUTES: 10 }));
+const { startRun, models } = vi.hoisted(() => ({ startRun: vi.fn(), models: vi.fn() }));
+vi.mock('./api', () => ({ startRun, AUTO_REPLY_MINUTES: 10, skillsApi: { models } }));
 vi.mock('sonner', () => ({ toast: { error: vi.fn() } }));
 
 const SERVER: Partial<Agent>[] = [
@@ -56,6 +56,12 @@ describe('NewRunForm', () => {
     vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true);
     localStorage.clear();
     startRun.mockReset().mockResolvedValue({ id: 'r1' });
+    models.mockReset().mockImplementation(async (harness: string) => ({
+      models: harness === 'codex'
+        ? [{ id: 'gpt-6-astra', label: 'GPT-6 Astra', description: '' }]
+        : [{ id: 'opus', label: 'Claude Opus', description: '' }],
+      default_model: null, source: 'runtime', warning: null,
+    }));
     host = document.createElement('div');
     document.body.appendChild(host);
     root = createRoot(host);
@@ -114,5 +120,42 @@ describe('NewRunForm', () => {
     await click(host.querySelector('input[type="checkbox"]') as HTMLInputElement, '自动继续');
     await click(button('开始'), '开始');
     expect(startRun).toHaveBeenCalledWith(expect.objectContaining({ skill: '', autoReplyMinutes: 0 }), expect.any(Function));
+  });
+
+  it('submits the concrete model and remembers it separately for each provider', async () => {
+    await click(radio('模型', 'Codex'), 'Codex');
+    const picker = host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement;
+    expect(picker).not.toBeNull();
+    await act(async () => {
+      picker.value = 'gpt-6-astra';
+      picker.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await click(radio('模型', 'Claude'), 'Claude');
+    expect((host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement).value).toBe('');
+    await click(radio('模型', 'Codex'), 'Codex');
+    expect((host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement).value).toBe('gpt-6-astra');
+    await click(button('查一下 HBM4'), '示例');
+    await click(button('开始'), '开始');
+    expect(startRun).toHaveBeenCalledWith(expect.objectContaining({ harness: 'codex', model: 'gpt-6-astra' }), expect.any(Function));
+  });
+
+  it('allows a custom model ID without passing it to another agent', async () => {
+    await click(radio('模型', 'Codex'), 'Codex');
+    const picker = host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement;
+    expect(picker).not.toBeNull();
+    await act(async () => {
+      picker.value = '__custom__';
+      picker.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    const input = host.querySelector('input[aria-label="模型 ID"]') as HTMLInputElement;
+    expect(input).not.toBeNull();
+    await act(async () => {
+      Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(input, 'gpt-future');
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await click(radio('选 Agent', '翻译 Agent'), '翻译卡片');
+    expect((host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement).value).toBe('');
+    await click(radio('选 Agent', '通用 Agent'), '通用卡片');
+    expect((host.querySelector('input[aria-label="模型 ID"]') as HTMLInputElement).value).toBe('gpt-future');
   });
 });
