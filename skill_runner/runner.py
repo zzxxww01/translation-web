@@ -548,26 +548,31 @@ class Runner:
             self.store.save_meta(run.meta)
 
     async def _auto_reply_later(self, run: _Run, delay: float) -> None:
-        await asyncio.sleep(max(0.0, delay))
-        run.auto_task = None
-        run.meta.auto_reply_at = None
-        run.meta.auto_replies += 1
-        self.store.save_meta(run.meta)
-        waited = wait_text(run.meta.auto_reply_s)
-        if run.pending:
-            for qid, pending in list(run.pending.items()):
-                answers = {str(q.get("question", "")): recommended_answer(q) for q in pending.questions}
-                self._emit(run, {"type": "notice", "level": "info", "text": f"{waited}没有回答，已自动选推荐选项"})
-                self._resolve_question(run, qid, {"answers": answers})
-            return
-        if run.meta.status != "idle" or not run.meta.awaiting_reply:
-            return
-        self._emit(run, {"type": "notice", "level": "info", "text": f"{waited}没有回复，自动按推荐方案继续"})
-        text = AUTO_REPLY_TEXT.format(wait=waited)
+        task = asyncio.current_task()
         try:
-            await self._deliver(run, text, [], text)
-        except RunnerError:
-            logger.exception("auto reply failed for run %s", run.meta.id)
+            await asyncio.sleep(max(0.0, delay))
+            # Keep the task cancellable while delivery is queued behind stop/user input.
+            run.meta.auto_reply_at = None
+            run.meta.auto_replies += 1
+            self.store.save_meta(run.meta)
+            waited = wait_text(run.meta.auto_reply_s)
+            if run.pending:
+                for qid, pending in list(run.pending.items()):
+                    answers = {str(q.get("question", "")): recommended_answer(q) for q in pending.questions}
+                    self._emit(run, {"type": "notice", "level": "info", "text": f"{waited}没有回答，已自动选推荐选项"})
+                    self._resolve_question(run, qid, {"answers": answers})
+                return
+            if run.meta.status != "idle" or not run.meta.awaiting_reply:
+                return
+            self._emit(run, {"type": "notice", "level": "info", "text": f"{waited}没有回复，自动按推荐方案继续"})
+            text = AUTO_REPLY_TEXT.format(wait=waited)
+            try:
+                await self._deliver(run, text, [], text)
+            except RunnerError:
+                logger.exception("auto reply failed for run %s", run.meta.id)
+        finally:
+            if run.auto_task is task:
+                run.auto_task = None
 
     def resume_auto_replies(self) -> int:
         """服务启动时调用（在事件循环里）：重启前排着的自动回复接着排，时间照旧。"""

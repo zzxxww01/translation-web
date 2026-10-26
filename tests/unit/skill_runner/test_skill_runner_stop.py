@@ -2,7 +2,7 @@ import asyncio
 
 import pytest
 
-from skill_runner.runner import SessionFailed
+from skill_runner.runner import AWAIT_MARK, SessionFailed
 from skill_runner_fakes import settle
 
 
@@ -65,4 +65,29 @@ async def test_stop_failure_is_not_reported_as_success(runner, factory):
         await runner.stop(meta.id)
     assert not session.closed
     session.close = original_close
+    await runner.shutdown()
+
+
+async def test_expired_auto_reply_queued_behind_stop_cannot_reopen_session(runner, factory):
+    meta = runner.create('four-step-translate', 'waiting', auto_reply_s=600)
+    await runner.begin(meta.id, 'translate', [])
+    session = factory.last
+    session.push({'type': 'text', 'text': AWAIT_MARK})
+    session.push({'type': 'result', 'session_id': 'old-thread', 'is_error': False})
+    await settle()
+    run = runner._get(meta.id)
+    await run.lock.acquire()
+    try:
+        stopped = asyncio.create_task(runner.stop(meta.id))
+        await settle()  # stop is first in the lock queue
+        runner._schedule_auto_reply(run, delay=0)
+        await settle()  # the expired timer is now waiting behind stop
+        assert run.meta.auto_replies == 1
+    finally:
+        run.lock.release()
+    await stopped
+    await settle()
+    assert runner.meta(meta.id).status == 'error'
+    assert len(factory.sessions) == 1
+    assert session.sent == ['/four-step-translate translate']
     await runner.shutdown()
