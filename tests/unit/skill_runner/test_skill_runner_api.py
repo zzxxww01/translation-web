@@ -27,6 +27,7 @@ def login(client, password="s3cret"):
 def test_everything_but_login_requires_cookie(setup):
     client, _, _ = setup
     for method, path in [("get", "/me"), ("get", "/runs"), ("get", "/catalog"), ("post", "/runs"),
+                         ("get", "/runtime"), ("post", "/runtime/check"), ("post", "/runtime/codex/update"),
                          ("get", "/runs/20260101-000000-abcdef/events"), ("delete", "/runs/20260101-000000-abcdef")]:
         assert getattr(client, method)(PREFIX + path).status_code == 401, path
     client.cookies.set(COOKIE_NAME, "123.forged", path=PREFIX)
@@ -43,6 +44,35 @@ def test_login_sets_strict_httponly_cookie_and_logout_clears_it(setup):
     assert client.get(f"{PREFIX}/me").json()["ok"] is True
     client.post(f"{PREFIX}/logout")
     assert client.get(f"{PREFIX}/me").status_code == 401
+
+
+def test_runtime_routes_check_versions_and_reject_updates_during_work(setup, monkeypatch):
+    client, _, runner = setup
+    login(client)
+    service = client.app.state.runtime_updates
+
+    async def current(_harness):
+        return "1.0.0"
+
+    async def install_command(_harness, _target):
+        return ["unused-test-installer"]
+
+    monkeypatch.setattr(service, "_current", current)
+    monkeypatch.setattr(service, "_install_command", install_command)
+    monkeypatch.setattr("skill_runner.runtime_updates._latest_version", lambda _: "1.1.0")
+    assert client.post(f"{PREFIX}/runtime/unknown/update").status_code == 400
+    assert client.post(f"{PREFIX}/runtime/codex/update").status_code == 400
+    checked = client.post(f"{PREFIX}/runtime/check")
+    assert checked.status_code == 200
+    assert all(item["current"] == "1.0.0" and item["latest"] == "1.1.0"
+               and item["can_update"] for item in checked.json()["runtimes"])
+    assert client.get(f"{PREFIX}/runtime").json() == checked.json()
+    assert client.post(f"{PREFIX}/runs", data={"message": "working"}).status_code == 200
+    blocked = client.post(f"{PREFIX}/runtime/codex/update")
+    assert blocked.status_code == 409
+    assert "正在运行" in blocked.json()["detail"]
+    assert not service.active
+    assert not runner._runtime_maintenance
 
 
 def test_login_locks_after_repeated_failures(setup):

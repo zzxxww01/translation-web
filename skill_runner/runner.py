@@ -22,11 +22,13 @@ import logging
 import time
 import uuid
 from dataclasses import dataclass, field
+from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, AsyncIterator, Awaitable, Callable, Protocol
 
 from . import agents, policy
 from .config import HARNESSES, Config
+from .models import validate_model
 from .store import RunMeta, RunStore
 
 logger = logging.getLogger(__name__)
@@ -73,6 +75,7 @@ class SessionSpec:
     # 按任务追加到系统提示词的说明（见 agents.prompt_note）
     prompt_note: str = ""
     harness: str = "claude"
+    model: str | None = None
 
 
 class AgentSession(Protocol):
@@ -125,6 +128,7 @@ class _Run:
     pending: dict[str, _Pending] = field(default_factory=dict)
     subscribers: set[asyncio.Queue] = field(default_factory=set)
     lock: asyncio.Lock = field(default_factory=asyncio.Lock)
+    close_lock: asyncio.Lock = field(default_factory=asyncio.Lock)
 
 
 def harness_label(harness: str) -> str:
@@ -162,6 +166,39 @@ class Runner:
         self.store = store
         self.session_factory = session_factory
         self._runs: dict[str, _Run] = {}
+        self._runtime_maintenance = False
+        self._runtime_users = 0
+
+    @contextmanager
+    def runtime_use(self):
+        """Reserve runtime use before the first await, including CLI startup/discovery."""
+        if self._runtime_maintenance:
+            raise Conflict("正在更新运行工具，请完成后再开始或继续对话")
+        self._runtime_users += 1
+        try:
+            yield
+        finally:
+            self._runtime_users -= 1
+
+    def reserve_runtime_update(self) -> None:
+        if self._runtime_maintenance:
+            raise Conflict("已有更新正在进行")
+        if (self._runtime_users
+                or any(meta.status in ACTIVE_STATUSES or meta.awaiting_reply for meta in self.list_runs())
+                or any(self._session_busy(run) for run in self._runs.values())):
+            raise Conflict("还有对话正在运行或等待确认，请结束后再更新")
+        self._runtime_maintenance = True
+
+    async def close_idle_for_runtime_update(self) -> None:
+        if not self._runtime_maintenance:
+            raise Conflict("尚未进入更新状态")
+        for run in list(self._runs.values()):
+            if self._session_busy(run):
+                raise Conflict("还有已接收的对话正在处理，请完成后再更新")
+            await self._close_session(run, strict=True)
+
+    def release_runtime_update(self) -> None:
+        self._runtime_maintenance = False
 
     # ---- 查询 ----
 
@@ -185,7 +222,12 @@ class Runner:
         return [self._runs[m.id].meta if m.id in self._runs else m for m in metas]
 
     def active_count(self) -> int:
-        return sum(1 for run in self._runs.values() if run.meta.status in ACTIVE_STATUSES)
+        return sum(1 for run in self._runs.values() if run.meta.status in ACTIVE_STATUSES or self._session_busy(run))
+
+    @staticmethod
+    def _session_busy(run: _Run) -> bool:
+        # Queued harnesses may emit a result before all accepted work/processes finish.
+        return bool(getattr(run.session, "busy", False))
 
     # ---- 事件 ----
 
@@ -222,15 +264,22 @@ class Runner:
 
     # ---- 生命周期 ----
 
-    def create(self, skill: str, title: str, harness: str = "claude", auto_reply_s: int = 0) -> RunMeta:
+    def create(self, skill: str, title: str, harness: str = "claude", auto_reply_s: int = 0,
+               model: str | None = None) -> RunMeta:
+        if self._runtime_maintenance:
+            raise Conflict("正在更新运行工具，请完成后再开始对话")
         # skill 为空就是直接对话：消息原样发给 Claude / Codex，不派发 skill
         if skill and skill not in self.config.skills:
             raise RunnerError(f"未启用的 skill：{skill}")
         if harness not in HARNESSES:
             raise RunnerError(f"不支持的 harness：{harness}")
+        try:
+            model = validate_model(model)
+        except ValueError as exc:
+            raise RunnerError(str(exc)) from exc
         if self.active_count() >= self.config.max_active:
             raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
-        meta = self.store.create(skill, title, harness, auto_reply_s)
+        meta = self.store.create(skill, title, harness, auto_reply_s, model=model)
         self._runs[meta.id] = _Run(meta=meta, seq=0)
         return meta
 
@@ -252,7 +301,16 @@ class Runner:
         return await self._deliver(run, message, attachments, build_prompt(None, message, attachments))
 
     async def _deliver(self, run: _Run, message: str, attachments: list[str], prompt: str) -> RunMeta:
+        with self.runtime_use():
+            return await self._deliver_to_session(run, message, attachments, prompt)
+
+    async def _deliver_to_session(self, run: _Run, message: str, attachments: list[str], prompt: str) -> RunMeta:
         async with run.lock:
+            if run.closing:
+                try:
+                    await self._close_session(run, strict=True)
+                except Exception as exc:
+                    raise SessionFailed(f"上次会话未能关闭，请稍后重试：{exc}") from exc
             need_open = run.session is None
             if need_open and run.meta.status not in ACTIVE_STATUSES and self.active_count() >= self.config.max_active:
                 raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
@@ -283,6 +341,7 @@ class Runner:
             ),
             prompt_note=agents.prompt_note(agents.build_catalog(self.config), run.meta.skill),
             harness=run.meta.harness,
+            model=run.meta.model,
         )
         try:
             session = await self.session_factory(spec)
@@ -299,11 +358,12 @@ class Runner:
     async def _pump(self, run: _Run, session: AgentSession) -> None:
         try:
             async for event in session.events():
-                self._on_event(run, event)
+                if run.session is session and not run.closing:
+                    self._on_event(run, event)
         except asyncio.CancelledError:
             raise
         except Exception as exc:  # noqa: BLE001
-            if not run.closing:
+            if run.session is session and not run.closing:
                 logger.exception("session stream failed for run %s", run.meta.id)
                 await self._fail(run, f"{harness_label(run.meta.harness)} 进程出错：{exc}")
             return
@@ -317,6 +377,9 @@ class Runner:
     def _on_event(self, run: _Run, event: dict[str, Any]) -> None:
         kind = event.get("type")
         if kind == "session":
+            if event.get("model") and event["model"] != run.meta.actual_model:
+                run.meta.actual_model = event["model"]
+                self.store.save_meta(run.meta)
             session_id = event.get("session_id")
             if session_id and session_id != run.meta.session_id:
                 run.meta.session_id = session_id
@@ -415,7 +478,7 @@ class Runner:
         for pending in list(run.pending.values()):
             if not pending.future.done():
                 pending.future.set_result(PermissionOutcome(allow=False, message="用户中断了任务", interrupt=True))
-        if run.session is not None and run.meta.status in ACTIVE_STATUSES:
+        if run.session is not None and (run.meta.status in ACTIVE_STATUSES or self._session_busy(run)):
             self._emit(run, {"type": "notice", "level": "info", "text": "已发送中断"})
             try:
                 await run.session.interrupt()
@@ -426,10 +489,13 @@ class Runner:
 
     async def delete(self, run_id: str) -> None:
         run = self._get(run_id)
-        if run.meta.status in ACTIVE_STATUSES:
+        if run.meta.status in ACTIVE_STATUSES or self._session_busy(run):
             raise Conflict("任务还在运行，先中断再删除")
         self._cancel_auto_reply(run)
-        await self._close_session(run)
+        try:
+            await self._close_session(run, strict=True)
+        except Exception as exc:
+            raise SessionFailed(f"会话未能关闭，暂时无法删除：{exc}") from exc
         for queue in list(run.subscribers):
             queue.put_nowait(None)
         self._runs.pop(run_id, None)
@@ -511,21 +577,32 @@ class Runner:
         await asyncio.sleep(self.config.idle_timeout_s)
         if run.meta.status == "idle" and not run.pending:
             run.idle_task = None
-            await self._close_session(run)
+            if self._session_busy(run):
+                self._schedule_idle(run)
+            else:
+                await self._close_session(run)
 
-    async def _close_session(self, run: _Run) -> None:
+    async def _close_session(self, run: _Run, *, strict: bool = False) -> None:
         self._cancel_idle(run)
-        session, run.session = run.session, None
-        if session is None:
-            return
-        run.closing = True
-        try:
-            await session.close()
-        except Exception:  # noqa: BLE001
-            logger.exception("closing session for run %s failed", run.meta.id)
-        if run.pump is not None and run.pump is not asyncio.current_task():
-            run.pump.cancel()
-        run.pump = None
+        async with run.close_lock:
+            session = run.session
+            if session is None:
+                return
+            # Keep uncertain/live sessions tracked, including on failure or cancellation.
+            run.closing = True
+            try:
+                await session.close()
+            except Exception:  # noqa: BLE001
+                logger.exception("closing session for run %s failed", run.meta.id)
+                if strict:
+                    raise
+            else:
+                run.session = None
+                run.closing = False
+            finally:
+                if run.pump is not None and run.pump is not asyncio.current_task():
+                    run.pump.cancel()
+                run.pump = None
 
     async def _fail(self, run: _Run, message: str) -> None:
         self._clear_awaiting(run)

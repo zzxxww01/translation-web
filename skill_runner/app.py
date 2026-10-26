@@ -15,6 +15,8 @@ from pydantic import BaseModel
 
 from . import agents, auth
 from .config import BILLING_OVERRIDE_ENV, Config
+from .models import ModelCatalog
+from .runtime_updates import RuntimeUpdates
 from .runner import Runner, RunnerError, SessionFactory, make_title
 from .store import RunStore, UploadTooLarge
 
@@ -55,6 +57,8 @@ def create_app(
         async def session_factory(spec):  # 按任务选的 harness 建会话
             return await (codex_factory if spec.harness == "codex" else claude_factory)(spec)
     runner = Runner(config, store, session_factory)
+    model_catalog = ModelCatalog(config)
+    runtime_updates = RuntimeUpdates(config, runner)
     limiter = auth.LoginLimiter()
 
     @asynccontextmanager
@@ -67,10 +71,12 @@ def create_app(
         if not config.password:
             logger.error("未设置 SKILL_RUNNER_PASSWORD，所有登录都会被拒绝")
         yield
+        await runtime_updates.shutdown()
         await runner.shutdown()
 
     app = FastAPI(title="skill-runner", lifespan=lifespan, docs_url=None, redoc_url=None, openapi_url=None)
     app.state.runner = runner
+    app.state.runtime_updates = runtime_updates
 
     @app.exception_handler(RunnerError)
     async def _runner_error(_request: Request, exc: RunnerError):
@@ -128,6 +134,29 @@ def create_app(
     async def list_runs():
         return [meta.to_dict() for meta in runner.list_runs()]
 
+    @api.get("/models/{harness}")
+    async def list_models(harness: str):
+        try:
+            with runner.runtime_use():
+                return await model_catalog.get(harness)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    @api.get("/runtime")
+    async def runtime_status():
+        return runtime_updates.snapshot()
+
+    @api.post("/runtime/check")
+    async def check_runtime_updates():
+        return await runtime_updates.check()
+
+    @api.post("/runtime/{harness}/update")
+    async def update_runtime(harness: str):
+        try:
+            return await runtime_updates.start(harness)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
     def _save_uploads(run_id: str, files: list[UploadFile]) -> list[str]:
         saved = []
         for upload in files:
@@ -146,6 +175,7 @@ def create_app(
     async def create_run(
         skill: str = Form(""),  # 留空即直接对话
         harness: str = Form("claude"),  # claude / codex
+        model: str = Form("", max_length=128),
         message: str = Form(""),
         # 等确认时多少分钟没回复就自动按推荐方案继续；0 = 一直等
         auto_reply_minutes: int = Form(0, ge=0, le=1440),
@@ -155,7 +185,7 @@ def create_app(
         names = [f.filename for f in files if f.filename]
         if not message.strip() and not names:
             raise HTTPException(status_code=400, detail="写点说明或者附个文件")
-        meta = runner.create(skill, make_title(message, names, title), harness, auto_reply_minutes * 60)
+        meta = runner.create(skill, make_title(message, names, title), harness, auto_reply_minutes * 60, model=model)
         try:
             saved = await asyncio.to_thread(_save_uploads, meta.id, files)
         except HTTPException:

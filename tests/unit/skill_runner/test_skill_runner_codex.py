@@ -130,3 +130,127 @@ async def test_runner_records_harness_and_rejects_unknown_ones(tmp_path):
     with pytest.raises(RunnerError):
         runner.create("", "x", "gemini")
     await runner.shutdown()
+
+
+async def test_close_waits_for_worker_cleanup(tmp_path, monkeypatch):
+    started, stopping, release = asyncio.Event(), asyncio.Event(), asyncio.Event()
+    async def worker(self):
+        started.set()
+        try:
+            await asyncio.Event().wait()
+        finally:
+            stopping.set()
+            await release.wait()
+    monkeypatch.setattr(CodexSession, "_work", worker)
+    spec = SessionSpec(run_id="r1", cwd=tmp_path, resume=None, on_permission=None, harness="codex")
+    session = await CodexSession.open(make_config(tmp_path), spec)
+    await started.wait()
+    closing = asyncio.create_task(session.close())
+    try:
+        await stopping.wait()
+        assert not closing.done()
+    finally:
+        release.set()
+        await closing
+        await asyncio.gather(session._worker, return_exceptions=True)
+    assert session._worker.done()
+
+
+async def test_interrupt_waits_for_forced_kill(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    import skill_runner.codex_session as module
+    monkeypatch.setattr(module, "INTERRUPT_GRACE_S", 0.001)
+    killed, reaped = asyncio.Event(), asyncio.Event()
+    process = SimpleNamespace(returncode=None)
+    process.send_signal = lambda value: None
+    process.terminate = lambda: None
+    process.kill = killed.set
+    async def wait():
+        if not killed.is_set():
+            await asyncio.Event().wait()
+        process.returncode = -9
+        reaped.set()
+        return -9
+    process.wait = wait
+    spec = SessionSpec(run_id="r1", cwd=tmp_path, resume=None, on_permission=None, harness="codex")
+    session = await CodexSession.open(make_config(tmp_path), spec)
+    session._proc = process
+    try:
+        await session.interrupt()
+        assert killed.is_set() and reaped.is_set() and process.returncode == -9
+    finally:
+        session._proc = None
+        await session.close()
+
+
+async def test_codex_busy_tracks_accepted_queue_and_rejects_after_close(tmp_path, monkeypatch):
+    started, release = asyncio.Event(), asyncio.Event()
+    async def turn(self, prompt):
+        started.set()
+        await release.wait()
+    monkeypatch.setattr(CodexSession, "_turn", turn)
+    spec = SessionSpec(run_id="r1", cwd=tmp_path, resume=None, on_permission=None, harness="codex")
+    session = await CodexSession.open(make_config(tmp_path), spec)
+    try:
+        await session.send("first")
+        assert session.busy  # Before the worker has received the accepted prompt.
+        await started.wait()
+        assert session.busy
+        release.set()
+        await session.close()
+        assert not session.busy
+        with pytest.raises(RuntimeError, match="closed|关闭"):
+            await session.send("too late")
+    finally:
+        release.set()
+        await session.close()
+
+
+async def test_close_during_process_startup_waits_until_child_is_reaped(tmp_path, monkeypatch):
+    from types import SimpleNamespace
+    import skill_runner.codex_session as module
+    started, release, killed = asyncio.Event(), asyncio.Event(), asyncio.Event()
+    proc = SimpleNamespace(returncode=None)
+    proc.send_signal = lambda value: killed.set()
+    async def wait():
+        await killed.wait()
+        proc.returncode = 0
+        return 0
+    proc.wait = wait
+    async def create(*args, **kwargs):
+        started.set()
+        await release.wait()
+        return proc
+    monkeypatch.setattr(module.asyncio, "create_subprocess_exec", create)
+    spec = SessionSpec(run_id="r1", cwd=tmp_path, resume=None, on_permission=None, harness="codex")
+    session = await CodexSession.open(make_config(tmp_path), spec)
+    await session.send("start")
+    await started.wait()
+    closing = asyncio.create_task(session.close())
+    try:
+        from skill_runner_fakes import settle
+        await settle()
+        assert not closing.done()
+    finally:
+        release.set()
+        await closing
+    assert killed.is_set() and proc.returncode == 0 and session._worker.done()
+
+
+async def test_busy_preserves_completed_output_until_runner_consumes_it(tmp_path, monkeypatch):
+    from skill_runner_fakes import settle
+    async def turn(self, prompt):
+        await self._queue.put(self._mapper.result(is_error=False))
+    monkeypatch.setattr(CodexSession, "_turn", turn)
+    spec = SessionSpec(run_id="r1", cwd=tmp_path, resume=None, on_permission=None, harness="codex")
+    session = await CodexSession.open(make_config(tmp_path), spec)
+    try:
+        await session.send("finish")
+        await settle()
+        assert session.busy  # Closing now would discard an accepted turn's final output.
+        events = session.events()
+        assert (await anext(events))["type"] == "result"
+        assert not session.busy
+        await events.aclose()
+    finally:
+        await session.close()

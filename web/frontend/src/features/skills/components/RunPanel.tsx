@@ -94,7 +94,7 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
         <div className="min-w-0 flex-1">
           <h1 className="truncate text-base text-text-primary" title={run.title}>{runTitle(run.title)}</h1>
           <div className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-xs text-text-muted">
-            <span>{agent.title} · {harnessLabel(run.harness)}</span>
+            <span>{agent.title} · {harnessLabel(run.harness)} · {run.actual_model || run.model || '默认模型'}</span>
             <StatusPill status={shown} />
             {!connected && (
               <span className="inline-flex items-center gap-1" title="实时连接断开，正在重连">

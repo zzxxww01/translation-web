@@ -30,6 +30,14 @@ from skill_runner.sdk_session import MessageMapper, build_options, build_setting
 from skill_runner_fakes import make_config  # noqa: E402
 
 
+def test_session_model_and_cli_override_are_forwarded(tmp_path):
+    config = make_config(tmp_path, model="sonnet", claude_bin=str(tmp_path / "claude"))
+    spec = SessionSpec(run_id="r", cwd=tmp_path, resume="existing", on_permission=None, model="opus")
+    options = build_options(config, spec)
+    assert options.model == "opus" and options.resume == "existing"
+    assert options.cli_path == str(tmp_path / "claude")
+
+
 def map_message(message):
     return MessageMapper().map(message)
 

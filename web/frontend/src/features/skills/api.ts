@@ -1,5 +1,5 @@
 import { apiClient, ApiErrorWrapper } from '../../shared/api/client';
-import type { Agent, Answers, RunFile, RunMeta } from './types';
+import type { Agent, Answers, ModelCatalog, RunFile, RunMeta, RuntimeUpdateSnapshot } from './types';
 
 export const SKILLS_BASE = '/api/skills';
 
@@ -9,6 +9,10 @@ export const skillsApi = {
   logout: () => apiClient.post('/skills/logout'),
   // 旧版服务端只给 name/description/available，用 normalizeCatalog 补齐
   catalog: () => apiClient.get<Partial<Agent>[]>('/skills/catalog'),
+  models: (harness: 'claude' | 'codex') => apiClient.get<ModelCatalog>(`/skills/models/${harness}`, { retry: false }),
+  runtimeStatus: () => apiClient.get<RuntimeUpdateSnapshot>('/skills/runtime', { retry: false }),
+  checkUpdates: () => apiClient.post<RuntimeUpdateSnapshot>('/skills/runtime/check', undefined, { retry: false, timeout: 90_000 }),
+  updateRuntime: (harness: 'claude' | 'codex') => apiClient.post<RuntimeUpdateSnapshot>(`/skills/runtime/${harness}/update`, undefined, { retry: false }),
   runs: () => apiClient.get<RunMeta[]>('/skills/runs'),
   files: (runId: string) => apiClient.get<RunFile[]>(`/skills/runs/${runId}/files`),
   answer: (runId: string, qid: string, payload: { answers?: Answers; response?: string }) =>
@@ -57,12 +61,13 @@ function postMultipart<T>(path: string, form: FormData, onProgress?: (percent: n
 export const AUTO_REPLY_MINUTES = 10;
 
 export function startRun(
-  input: { skill: string; message: string; files: File[]; harness?: 'claude' | 'codex'; autoReplyMinutes?: number; title?: string },
+  input: { skill: string; message: string; files: File[]; harness?: 'claude' | 'codex'; model?: string; autoReplyMinutes?: number; title?: string },
   onProgress?: (percent: number) => void
 ): Promise<RunMeta> {
   const form = new FormData();
   form.append('skill', input.skill);
   form.append('harness', input.harness ?? 'claude');
+  if (input.model) form.append('model', input.model);
   form.append('message', input.message);
   if (input.autoReplyMinutes) form.append('auto_reply_minutes', String(input.autoReplyMinutes));
   if (input.title) form.append('title', input.title);
