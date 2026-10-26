@@ -11,6 +11,7 @@ import copy
 import json
 import os
 from pathlib import Path
+import platform
 import re
 import shlex
 import shutil
@@ -23,6 +24,8 @@ from .runner import Busy
 from .runtime_paths import claude_cli_path, native_claude_path
 
 PACKAGES = {"claude": "@anthropic-ai%2fclaude-code", "codex": "@openai%2fcodex"}
+# Official native manifest endpoint from https://antigravity.google/cli/install.sh.
+ANTIGRAVITY_RELEASES = "https://antigravity-cli-auto-updater-974169037036.us-central1.run.app"
 VERSION = re.compile(r"[0-9]+\.[0-9]+\.[0-9]+")
 
 
@@ -33,7 +36,15 @@ def _valid_version(value: str) -> str:
 
 
 def _latest_version(harness: str) -> str:
-    url = f"https://registry.npmjs.org/{PACKAGES[harness]}/latest"
+    if harness == "antigravity":
+        system = {"Linux": "linux", "Darwin": "darwin", "Windows": "windows"}.get(platform.system())
+        arch = {"x86_64": "amd64", "amd64": "amd64", "arm64": "arm64", "aarch64": "arm64"}.get(platform.machine().lower())
+        if not system or not arch:
+            raise ValueError("当前平台无法查询 Antigravity 官方版本")
+        suffix = "_musl" if system == "linux" and platform.libc_ver()[0] == "musl" else ""
+        url = f"{ANTIGRAVITY_RELEASES}/manifests/{system}_{arch}{suffix}.json"
+    else:
+        url = f"https://registry.npmjs.org/{PACKAGES[harness]}/latest"
     with urlopen(url, timeout=10) as response:
         data = response.read(262145)
     if len(data) > 262144:
@@ -82,7 +93,7 @@ class RuntimeUpdates:
                 "update_available": False, "can_update": False, "reason": None,
                 "error": None, "status": "unchecked", "message": None, "updated_at": None,
             }
-            for harness, label in (("claude", "Claude Code"), ("codex", "Codex"))
+            for harness, label in (("claude", "Claude Code"), ("codex", "Codex"), ("antigravity", "Antigravity"))
         }
 
     @property
@@ -96,6 +107,11 @@ class RuntimeUpdates:
         })
 
     def _executable(self, harness: str) -> list[str]:
+        if harness == "antigravity":
+            binary = getattr(self.config, "antigravity_bin", "agy")
+            if not binary:
+                raise ValueError("未配置 Antigravity 可执行程序")
+            return [str(Path(binary).expanduser())]
         if harness == "codex":
             argv = shlex.split(self.config.codex_bin)
             if not argv:
@@ -115,6 +131,8 @@ class RuntimeUpdates:
 
     async def _install_command(self, harness: str, target: str) -> list[str]:
         _valid_version(target)
+        if harness == "antigravity":
+            raise ValueError("Antigravity 使用官方 CLI 的自动更新；此处仅检查版本。")
         argv = self._executable(harness)
         if harness == "claude":
             explicit = getattr(self.config, "claude_bin", None)
@@ -140,7 +158,7 @@ class RuntimeUpdates:
             raise Busy("正在更新或检查版本，请稍后再试")
         self._checking = True
         try:
-            await asyncio.gather(*(self._check_one(harness) for harness in PACKAGES))
+            await asyncio.gather(*(self._check_one(harness) for harness in self._runtimes))
             self._checked_at = time.time()
         finally:
             self._checking = False
@@ -163,7 +181,7 @@ class RuntimeUpdates:
             state.update(error=str(exc), status="failed")
 
     async def start(self, harness: str) -> dict:
-        if not isinstance(harness, str) or harness not in PACKAGES:
+        if not isinstance(harness, str) or harness not in self._runtimes:
             raise ValueError("不支持的运行工具")
         if self.active or self._checking:
             raise Busy("正在更新或检查版本，请稍后再试")

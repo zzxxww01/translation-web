@@ -49,13 +49,20 @@ def create_app(
 ) -> FastAPI:
     store = store or RunStore(config.runs_dir)
     if session_factory is None:
+        from .antigravity_session import make_antigravity_factory
         from .codex_session import make_codex_factory
         from .sdk_session import make_factory
 
-        claude_factory, codex_factory = make_factory(config), make_codex_factory(config)
+        factories = {
+            "claude": make_factory(config),
+            "codex": make_codex_factory(config),
+            "antigravity": make_antigravity_factory(config),
+        }
 
         async def session_factory(spec):  # 按任务选的 harness 建会话
-            return await (codex_factory if spec.harness == "codex" else claude_factory)(spec)
+            if spec.harness not in factories:
+                raise RunnerError(f"不支持的 harness：{spec.harness}")
+            return await factories[spec.harness](spec)
     runner = Runner(config, store, session_factory)
     model_catalog = ModelCatalog(config)
     runtime_updates = RuntimeUpdates(config, runner)
@@ -135,10 +142,10 @@ def create_app(
         return [meta.to_dict() for meta in runner.list_runs()]
 
     @api.get("/models/{harness}")
-    async def list_models(harness: str):
+    async def list_models(harness: str, refresh: bool = False):
         try:
             with runner.runtime_use():
-                return await model_catalog.get(harness)
+                return await model_catalog.get(harness, refresh=refresh)
         except ValueError as exc:
             raise HTTPException(status_code=400, detail=str(exc)) from exc
 
@@ -174,7 +181,7 @@ def create_app(
     @api.post("/runs")
     async def create_run(
         skill: str = Form(""),  # 留空即直接对话
-        harness: str = Form("claude"),  # claude / codex
+        harness: str = Form("claude"),  # claude / codex / antigravity
         model: str = Form("", max_length=128),
         message: str = Form(""),
         # 等确认时多少分钟没回复就自动按推荐方案继续；0 = 一直等

@@ -132,15 +132,15 @@ class _Run:
 
 
 def harness_label(harness: str) -> str:
-    return "Codex" if harness == "codex" else "Claude"
+    return {"claude": "Claude", "codex": "Codex", "antigravity": "Antigravity"}.get(harness, harness)
 
 
 def build_prompt(
     skill: str | None, message: str, attachments: list[str], harness: str = "claude", skills_dir: Path | None = None
 ) -> str:
     text = message.strip()
-    if skill and harness == "codex":
-        # Codex 没有 /<skill> 派发：让它先读共用目录里的 SKILL.md 再照做
+    if skill and harness in {"codex", "antigravity"}:
+        # CLI 后端显式读取共用 SKILL.md，不依赖各自的 slash command 派发
         skill_md = (skills_dir or Path.home() / ".agents" / "skills") / skill / "SKILL.md"
         text = f"使用 skill「{skill}」：先完整阅读 {skill_md}，严格按其中的流程完成下面的任务。\n\n{text}".rstrip()
     elif skill:

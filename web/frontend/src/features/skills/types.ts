@@ -1,4 +1,5 @@
 /** skill-runner（/api/skills）的数据结构，与 skill_runner/ 后端一一对应。 */
+import type { Harness } from './harness';
 
 export type RunStatus = 'running' | 'waiting' | 'idle' | 'error';
 
@@ -12,7 +13,7 @@ export interface RunMeta {
   session_id: string | null;
   error: string | null;
   /** 旧任务没有这个字段，按 Claude 处理 */
-  harness?: 'claude' | 'codex';
+  harness?: Harness;
   model?: string | null;
   actual_model?: string | null;
   /** 等确认时多少秒没回复就自动按推荐方案继续，0 = 一直等 */
@@ -33,7 +34,7 @@ export interface Agent {
   hint: string;
   examples: string[];
   /** 新对话默认用哪个模型跑 */
-  harness: 'claude' | 'codex';
+  harness: Harness;
   available: boolean;
 }
 
@@ -46,7 +47,7 @@ export interface RunFile {
 export interface ModelCatalog {
   models: { id: string; label: string; description: string }[];
   default_model: string | null;
-  source: 'cache' | 'runtime' | 'aliases';
+  source: 'cache' | 'runtime' | 'aliases' | 'unavailable';
   warning: string | null;
 }
 
@@ -55,7 +56,7 @@ export interface RuntimeUpdateSnapshot {
   checking: boolean;
   checked_at: number | null;
   runtimes: {
-    harness: 'claude' | 'codex';
+    harness: Harness;
     label: string;
     current: string | null;
     latest: string | null;

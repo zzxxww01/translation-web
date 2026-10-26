@@ -14,7 +14,7 @@ export const CHAT_AGENT: Agent = {
 
 function fill(item: Partial<Agent>): Agent {
   const name = item.name ?? '';
-  const harness = item.harness === 'codex' ? 'codex' : 'claude';
+  const harness = item.harness === 'codex' || item.harness === 'antigravity' ? item.harness : 'claude';
   if (!name) return { ...CHAT_AGENT, ...item, name, harness, title: item.title || CHAT_AGENT.title, icon: item.icon || CHAT_AGENT.icon };
   return {
     name,

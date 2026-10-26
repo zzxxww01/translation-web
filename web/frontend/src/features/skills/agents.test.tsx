@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { notifyManager, QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { CHAT_AGENT, findAgent, normalizeCatalog } from './agents';
 import { NewRunForm } from './components/NewRunForm';
 import type { Agent } from './types';
+import { harnessLabel } from './harness';
 
 const { startRun, models } = vi.hoisted(() => ({ startRun: vi.fn(), models: vi.fn() }));
 vi.mock('./api', () => ({ startRun, AUTO_REPLY_MINUTES: 10, skillsApi: { models } }));
@@ -19,6 +20,10 @@ const SERVER: Partial<Agent>[] = [
 ];
 
 describe('normalizeCatalog', () => {
+  it('preserves an Antigravity default and labels saved runs correctly', () => {
+    expect(normalizeCatalog([{ name: 'x', harness: 'antigravity' }])[1].harness).toBe('antigravity');
+    expect(harnessLabel('antigravity')).toBe('Antigravity');
+  });
   it('keeps the general agent first and fills fields an older server does not send', () => {
     const catalog = normalizeCatalog([{ name: 'x', description: 'X 的简介', available: true }]);
     expect(catalog[0]).toEqual(CHAT_AGENT);
@@ -37,6 +42,7 @@ describe('normalizeCatalog', () => {
 describe('NewRunForm', () => {
   let root: Root;
   let host: HTMLDivElement;
+  let client: QueryClient;
 
   const radio = (group: string, name: string) =>
     Array.from(host.querySelectorAll(`[role="radiogroup"][aria-label="${group}"] [role="radio"]`)).find(el =>
@@ -44,38 +50,47 @@ describe('NewRunForm', () => {
     ) as HTMLButtonElement | undefined;
   const button = (label: string) => Array.from(host.querySelectorAll('button')).find(el => el.textContent?.trim() === label);
   const textarea = () => host.querySelector('textarea')!;
+  const waitForModels = () => vi.waitFor(() => {
+    expect(button('刷新模型'), '模型清单请求已完成并渲染').toBeDefined();
+  }, { timeout: 2000 });
   const click = async (el: HTMLElement | undefined, what: string) => {
     expect(el, what).toBeDefined();
-    await act(async () => {
-      el!.click();
-      await new Promise(resolve => setTimeout(resolve, 20));
-    });
+    await act(async () => { el!.click(); });
+    await waitForModels();
   };
 
   beforeEach(async () => {
     vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true);
+    // React Query schedules observer updates separately from the click's act().
+    notifyManager.setNotifyFunction(callback => { act(callback); });
     localStorage.clear();
     startRun.mockReset().mockResolvedValue({ id: 'r1' });
     models.mockReset().mockImplementation(async (harness: string) => ({
       models: harness === 'codex'
         ? [{ id: 'gpt-6-astra', label: 'GPT-6 Astra', description: '' }]
-        : [{ id: 'opus', label: 'Claude Opus', description: '' }],
+        : harness === 'antigravity'
+          ? [{ id: 'gemini-test', label: 'Gemini Test', description: '' }]
+          : [{ id: 'opus', label: 'Claude Opus', description: '' }],
       default_model: null, source: 'runtime', warning: null,
     }));
     host = document.createElement('div');
     document.body.appendChild(host);
     root = createRoot(host);
+    client = new QueryClient();
     await act(async () => {
       root.render(
-        <QueryClientProvider client={new QueryClient()}>
+        <QueryClientProvider client={client}>
           <NewRunForm catalog={normalizeCatalog(SERVER)} maxUploadMb={95} onStarted={() => {}} />
         </QueryClientProvider>
       );
     });
+    await waitForModels();
   });
 
   afterEach(() => {
     act(() => root.unmount());
+    client.clear();
+    notifyManager.setNotifyFunction(callback => { callback(); });
     host.remove();
   });
 
@@ -157,5 +172,50 @@ describe('NewRunForm', () => {
     expect((host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement).value).toBe('');
     await click(radio('选 Agent', '通用 Agent'), '通用卡片');
     expect((host.querySelector('input[aria-label="模型 ID"]') as HTMLInputElement).value).toBe('gpt-future');
+  });
+
+  it('starts with Antigravity and restores its choice separately for each agent and harness', async () => {
+    await click(radio('模型', 'Antigravity'), 'Antigravity');
+    const picker = host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement;
+    await act(async () => {
+      picker.value = 'gemini-test';
+      picker.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+    await click(radio('模型', 'Claude'), 'Claude');
+    expect((host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement).value).toBe('');
+    await click(radio('模型', 'Antigravity'), 'Antigravity');
+    expect((host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement).value).toBe('gemini-test');
+    await click(radio('选 Agent', '翻译 Agent'), '翻译 Agent');
+    await click(radio('模型', 'Antigravity'), 'Antigravity');
+    expect((host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement).value).toBe('');
+    await click(radio('选 Agent', '通用 Agent'), '通用 Agent');
+    expect(radio('模型', 'Antigravity')!.getAttribute('aria-checked')).toBe('true');
+    expect((host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement).value).toBe('gemini-test');
+    await click(button('查一下 HBM4'), '示例');
+    await click(button('开始'), '开始');
+    expect(startRun).toHaveBeenCalledWith(expect.objectContaining({ harness: 'antigravity', model: 'gemini-test' }), expect.any(Function));
+  });
+
+  it('forces runtime discovery when refreshing and explains the Codex cache source', async () => {
+    await click(button('刷新模型'), '刷新模型');
+    expect(models).toHaveBeenLastCalledWith('claude', true);
+    await click(radio('模型', 'Codex'), 'Codex');
+    expect(host.textContent).toContain('Codex CLI 本地缓存');
+    expect(host.textContent).toContain('刷新会重读缓存');
+  });
+
+  it('keeps default and custom choices available when Antigravity discovery is unavailable', async () => {
+    models.mockImplementationOnce(async () => ({
+      models: [], default_model: null, source: 'unavailable', warning: '请检查服务器 CLI 的安装和登录状态。',
+    }));
+    await click(radio('模型', 'Antigravity'), 'Antigravity');
+    const picker = host.querySelector('select[aria-label="具体模型"]') as HTMLSelectElement;
+    expect(picker.disabled).toBe(false);
+    expect(Array.from(picker.options).map(option => option.value)).toEqual(['', '__custom__']);
+    expect(host.textContent).toContain('请检查服务器 CLI 的安装和登录状态');
+    await click(button('查一下 HBM4'), '示例');
+    await click(button('开始'), '开始');
+    expect(startRun).toHaveBeenCalledWith(expect.objectContaining({ harness: 'antigravity' }), expect.any(Function));
+    expect(startRun.mock.calls[0][0]).not.toHaveProperty('model');
   });
 });

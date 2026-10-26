@@ -42,7 +42,7 @@ class CreateVariantRequest(BaseModel):
 
 class ImportClaudeRequest(BaseModel):
     run_id: Optional[str] = Field(None, max_length=100)
-    agent: Literal["claude", "codex"] = "claude"  # 跑 four-step-translate 的 harness
+    agent: Literal["claude", "codex", "antigravity"] = "claude"  # 跑 four-step-translate 的 harness
     zh_markdown: str = Field(..., min_length=1, max_length=MAX_MARKDOWN_CHARS)
     en_markdown: str = Field(..., min_length=1, max_length=MAX_MARKDOWN_CHARS)
 

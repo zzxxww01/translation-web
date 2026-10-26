@@ -1,13 +1,14 @@
-/** 用哪个模型跑：服务器上的 Claude Code 或 Codex（都不需要逐条确认）。页面上只叫「模型」。 */
-export type Harness = 'claude' | 'codex';
+/** 服务器上执行任务的运行工具；具体模型单独选择。 */
+export type Harness = 'claude' | 'codex' | 'antigravity';
 
 export const HARNESSES: { id: Harness; label: string; note: string }[] = [
   { id: 'claude', label: 'Claude', note: '用你的 Claude 订阅（Claude Code）' },
   { id: 'codex', label: 'Codex', note: '用你的 ChatGPT 订阅（Codex）；付费文章也肯全文翻' },
+  { id: 'antigravity', label: 'Antigravity', note: '使用服务器上已登录的 Antigravity CLI' },
 ];
 
 export function harnessLabel(harness: string | undefined): string {
-  return harness === 'codex' ? 'Codex' : 'Claude';
+  return HARNESSES.find(item => item.id === harness)?.label ?? 'Claude';
 }
 
 const STORAGE_KEY = 'momo.agent.model';
@@ -16,7 +17,7 @@ const STORAGE_KEY = 'momo.agent.model';
 export function loadHarness(agent: string, fallback: Harness): Harness {
   try {
     const saved = (JSON.parse(localStorage.getItem(STORAGE_KEY) ?? '{}') as Record<string, string>)[agent];
-    return saved === 'codex' || saved === 'claude' ? saved : fallback;
+    return saved === 'codex' || saved === 'claude' || saved === 'antigravity' ? saved : fallback;
   } catch {
     return fallback;
   }

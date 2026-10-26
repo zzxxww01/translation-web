@@ -8,8 +8,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 DEFAULT_SKILLS = ("four-step-translate", "video-bilingual-subber", "podcast-cn-dubber")
-# 跑任务用的 harness：Claude Code（claude-agent-sdk）或 Codex（codex exec）
-HARNESSES = ("claude", "codex")
+# 跑任务用的 harness：Claude Code、Codex 和官方 Antigravity CLI
+HARNESSES = ("claude", "codex", "antigravity")
 
 # 沙箱里的 Bash 只能连这些域名：Gemini（字幕转写/翻译）、DashScope 与 OSS（播客 ASR/TTS）、
 # YouTube（yt-dlp 下载）。新 skill 要连别的域名时，用 SKILL_RUNNER_ALLOWED_DOMAINS 整体覆盖。
@@ -61,7 +61,10 @@ class Config:
     codex_bin: str = "codex"
     codex_model: str | None = None
     codex_home: Path = field(default_factory=lambda: Path.home() / ".codex")
-    # 两个 harness 共用的 skill 目录；~/.claude/skills 里是指向这里的软链接
+    # Antigravity：官方 agy CLI；不指定模型时保留其账号默认值
+    antigravity_bin: str = "agy"
+    antigravity_model: str | None = None
+    # 各 harness 共用的 skill 目录；~/.claude/skills 里是指向这里的软链接
     shared_skills_dir: Path = field(default_factory=lambda: Path.home() / ".agents" / "skills")
     cookie_secure: bool = True
     host: str = "127.0.0.1"
@@ -100,6 +103,8 @@ class Config:
             codex_bin=env.get("SKILL_RUNNER_CODEX_BIN") or "codex",
             codex_model=env.get("SKILL_RUNNER_CODEX_MODEL") or None,
             codex_home=Path(env.get("CODEX_HOME") or Path.home() / ".codex").expanduser(),
+            antigravity_bin=env.get("SKILL_RUNNER_ANTIGRAVITY_BIN") or "agy",
+            antigravity_model=env.get("SKILL_RUNNER_ANTIGRAVITY_MODEL") or None,
             shared_skills_dir=Path(env.get("SKILL_RUNNER_SHARED_SKILLS_DIR") or Path.home() / ".agents" / "skills").expanduser(),
             cookie_secure=_flag(env.get("SKILL_RUNNER_COOKIE_SECURE"), True),
             host=env.get("SKILL_RUNNER_HOST") or "127.0.0.1",

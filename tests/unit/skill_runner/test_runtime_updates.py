@@ -72,6 +72,47 @@ def item(snapshot, harness):
     return next(runtime for runtime in snapshot["runtimes"] if runtime["harness"] == harness)
 
 
+async def test_antigravity_version_check_does_not_run_installer(monkeypatch, config, tmp_path):
+    module, service, _, calls, _ = setup_service(monkeypatch, config, tmp_path)
+    monkeypatch.setattr(module, "_latest_version", lambda harness: "1.4.8")
+
+    async def command(argv, timeout=15):
+        calls.append(argv)
+        assert argv[-1] == "--version"
+        return "agy version 1.4.7"
+
+    monkeypatch.setattr(module, "_command", command)
+    await service._check_one("antigravity")
+    runtime = item(service.snapshot(), "antigravity")
+    assert (runtime["current"], runtime["latest"]) == ("1.4.7", "1.4.8")
+    assert runtime["update_available"] and not runtime["can_update"]
+    assert "自动更新" in runtime["reason"]
+    with pytest.raises(ValueError, match="自动更新"):
+        await service.start("antigravity")
+    assert len(calls) == 1
+
+
+def test_antigravity_manifest_is_selected_for_fixed_supported_platform(monkeypatch):
+    module = importlib.import_module("skill_runner.runtime_updates")
+    urls = []
+    class Response:
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            return False
+        def read(self, size):
+            return b'{"version":"1.4.7"}'
+    monkeypatch.setattr(module.platform, "system", lambda: "Linux")
+    monkeypatch.setattr(module.platform, "machine", lambda: "x86_64")
+    monkeypatch.setattr(module.platform, "libc_ver", lambda: ("glibc", "2.35"))
+    monkeypatch.setattr(module, "urlopen", lambda url, timeout: urls.append(url) or Response())
+    assert module._latest_version("antigravity") == "1.4.7"
+    assert urls == [module.ANTIGRAVITY_RELEASES + "/manifests/linux_amd64.json"]
+    monkeypatch.setattr(module.platform, "machine", lambda: "unknown/../../bad")
+    with pytest.raises(ValueError):
+        module._latest_version("antigravity")
+
+
 async def test_check_reports_installed_and_registry_versions_without_installing(monkeypatch, config, tmp_path):
     _, service, _, calls, _ = setup_service(monkeypatch, config, tmp_path)
     result = await service.check()
