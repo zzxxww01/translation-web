@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/lib/utils';
 import { harnessLabel, type Harness } from '@/features/skills/harness';
+import { skillsApi } from '@/features/skills/api';
 import { isUnauthorized } from '@/features/skills/hooks';
 import { articlesApi, downloadText, HUMAN_EDITS_URL } from '../api';
 import { articleKeys, useClaudeRun, useWorkbench } from '../hooks';
@@ -23,6 +24,7 @@ import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from 
 import { canFillMissing, countFilled, SECOND_MODELS, sectionsWithMissing, TERMS_STEP, trackSummary } from '../lib/tracks';
 import type { PaneId, Workbench as WorkbenchData, WorkbenchRow, WorkbenchVariant } from '../types';
 import { ChangesDrawer, type ChangesTarget } from './ChangesDrawer';
+import { ArticleAgentChoice } from './ArticleAgentChoice';
 import { PaneGrid, type PaneColumn } from './PaneGrid';
 import { TrackDrawer, type DrawerState } from './TrackDrawer';
 
@@ -95,6 +97,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const [changes, setChanges] = useState<ChangesTarget | null>(null);
   const [claudeNote, setClaudeNote] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  const [selectedAgent, setSelectedAgent] = useState<Harness | null>(null);
+  const agentStartLock = useRef(false);
   const [saving, setSaving] = useState(false);
   const [markBusy, setMarkBusy] = useState(false);
   const [readingJump, setReadingJump] = useState(0);
@@ -237,9 +241,21 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   };
 
   const startClaude = async (harness: Harness = 'codex') => {
+    if (agentStartLock.current || busy) return;
+    agentStartLock.current = true;
     setBusy(true);
     try {
-      await startClaudeTrack(project.id, harness, title);
+      if (project.claude_run_id) {
+        // Prevent a stopped, partial result from being imported while switching tools.
+        importTried.current = project.claude_run_id;
+        const stopped = await skillsApi.stop(project.claude_run_id);
+        queryClient.setQueryData(articleKeys.claudeRun(stopped.id), stopped);
+      }
+      const nextRun = await startClaudeTrack(project.id, harness, title);
+      queryClient.setQueryData(articleKeys.claudeRun(nextRun.id), nextRun);
+      queryClient.setQueryData<WorkbenchData>(articleKeys.workbench(project.id), current => current && {
+        ...current, project: { ...current.project, claude_run_id: nextRun.id },
+      });
       setClaudeNote(null);
       importTried.current = null;
       toast.success(`已交给 ${harnessLabel(harness)}；它需要你确认时这里会提示`);
@@ -247,8 +263,19 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     } catch (error) {
       toast.error(isUnauthorized(error) ? '先去 Agent 页登录一次（只需一次）' : error instanceof Error ? error.message : '没能交出去');
     } finally {
+      agentStartLock.current = false;
       setBusy(false);
     }
+  };
+
+  const chooseAgent = (harness: Harness) => {
+    setSelectedAgent(harness);
+    setMobilePane('alt');
+    setCollapsed(current => {
+      const next = { ...current, alt: false };
+      saveCollapsed(next);
+      return next;
+    });
   };
 
   const webFilled = countFilled(rows, row => row.web);
@@ -390,14 +417,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-60">
                 <DropdownMenuLabel>译本 2（Agent）</DropdownMenuLabel>
-                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('codex')}>
-                  <Bot className="h-4 w-4" /> 交给 Codex（four-step-translate）
-                </DropdownMenuItem>
-                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('claude')}>
-                  <Bot className="h-4 w-4" /> 交给 Claude（four-step-translate）
-                </DropdownMenuItem>
-                <DropdownMenuItem disabled={busy || claudeRunning || claudeWaiting} onSelect={() => void startClaude('antigravity')}>
-                  <Bot className="h-4 w-4" /> 交给 Antigravity（four-step-translate）
+                <DropdownMenuItem onSelect={() => chooseAgent(selectedAgent ?? run?.harness ?? 'codex')}>
+                  <Bot className="h-4 w-4" /> 选择 / 更换 Agent
                 </DropdownMenuItem>
                 {run && (
                   <DropdownMenuItem onSelect={() => setDrawer({ kind: 'claude', run })}>
@@ -436,8 +457,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             {claudeNote && (
               <Banner
                 tone="info"
-                action={run?.harness !== 'codex' ? '改用 Codex 翻' : undefined}
-                onAction={() => void startClaude('codex')}
+                action={run?.harness !== 'codex' ? '选择 Codex' : undefined}
+                onAction={() => chooseAgent('codex')}
                 secondary={run ? { label: `看 ${agentLabel} 说了什么`, onClick: () => setDrawer({ kind: 'claude', run }) } : undefined}
               >
                 {claudeNote}
@@ -445,7 +466,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
             )}
             {claudeNeedsLogin && (
               <Banner tone="info" action="去登录" onAction={() => navigate('/skills')}>
-                这篇交给过 Codex / Claude，要先登录 Agent 页（一次即可）才能看进度和回复。
+                这篇交给过 Agent，要先登录 Agent 页（一次即可）才能看进度和回复。
               </Banner>
             )}
             {project.status.error && <Banner tone="error">网页版出错了：{project.status.error}</Banner>}
@@ -479,8 +500,10 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
         )}
       </header>
 
-      {!variant && (!isMobile || mobilePane === 'alt') && !collapsed.alt && (
-        <SecondVersionPrompt busy={busy} agentActive={Boolean(claudeRunning || claudeWaiting)} onStart={startClaude} />
+      {(!isMobile || mobilePane === 'alt') && !collapsed.alt && (
+        <SecondVersionPrompt busy={busy || Boolean(project.claude_run_id && claudeRun.isPending)}
+          agentActive={Boolean(claudeRunning || claudeWaiting)} hasPrevious={Boolean(project.claude_run_id || variant)}
+          value={selectedAgent ?? run?.harness ?? 'codex'} onChange={setSelectedAgent} onStart={startClaude} />
       )}
 
       <PaneGrid rows={rows} columns={columns} collapsed={collapsed} onToggle={toggle} mobilePane={isMobile ? mobilePane : null}
@@ -556,18 +579,24 @@ function Banner({ tone, children, action, onAction, secondary }: {
   );
 }
 
-function SecondVersionPrompt({ busy, agentActive, onStart }: {
+function SecondVersionPrompt({ busy, agentActive, hasPrevious, value, onChange, onStart }: {
   busy: boolean;
   agentActive: boolean;
+  hasPrevious: boolean;
+  value: Harness;
+  onChange: (harness: Harness) => void;
   onStart: (harness: Harness) => void;
 }) {
-  if (agentActive) return null;
   return (
     <div className="flex flex-wrap items-center gap-2 border-b border-border-subtle bg-bg-tertiary/60 px-4 py-2 text-sm md:px-6">
-      <span className="text-text-secondary">还没有译本 2：</span>
-      <Button size="sm" variant="outline" disabled={busy} onClick={() => onStart('codex')}><Bot /> 交给 Codex</Button>
-      <Button size="sm" variant="ghost" disabled={busy} onClick={() => onStart('claude')}><Bot /> 交给 Claude</Button>
-      <span className="text-xs text-text-muted">都跑 four-step-translate；付费文章 Claude 通常不肯全文翻译</span>
+      <span className="text-text-secondary">译本 2 Agent：</span>
+      <ArticleAgentChoice value={value} onChange={onChange} disabled={busy} />
+      <Button size="sm" variant="outline" disabled={busy} onClick={() => onStart(value)}>
+        <Bot /> {busy ? '处理中…' : agentActive ? '停止当前并重新翻译' : hasPrevious ? '重新翻译' : '开始翻译'}
+      </Button>
+      <span className="text-xs text-text-muted">
+        {hasPrevious ? '从头重新翻译；完成后更新所选 Agent 的译本，其他译本保留。' : '选择一个 Agent，运行 four-step-translate。'}
+      </span>
     </div>
   );
 }

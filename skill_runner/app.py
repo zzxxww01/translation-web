@@ -224,6 +224,10 @@ def create_app(
     async def interrupt(run_id: str):
         return (await runner.interrupt(run_id)).to_dict()
 
+    @api.post("/runs/{run_id}/stop")
+    async def stop(run_id: str):
+        return (await runner.stop(run_id)).to_dict()
+
     @api.delete("/runs/{run_id}")
     async def delete_run(run_id: str):
         await runner.delete(run_id)

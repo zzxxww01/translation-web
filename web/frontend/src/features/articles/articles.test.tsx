@@ -10,6 +10,7 @@ import { Workbench } from './components/Workbench';
 import { SAVE_DELAY_MS, unsavedEdits } from './lib/edits';
 import { AUTO_SYNC_GAP_MS, useAutoSyncArticles } from './hooks';
 import { importAndTranslate } from './lib/importFlow';
+import { skillsApi } from '@/features/skills/api';
 import type { RunMeta } from '@/features/skills/types';
 import type { Workbench as WorkbenchData } from './types';
 
@@ -27,6 +28,11 @@ const api = vi.hoisted(() => ({
 const substack = vi.hoisted(() => ({ importArticle: vi.fn(), syncArticles: vi.fn() }));
 const claude = vi.hoisted(() => ({ startClaudeTrack: vi.fn(), importClaudeTrack: vi.fn() }));
 const agentRun = vi.hoisted(() => ({ current: undefined as RunMeta | undefined }));
+const stopAgent = vi.hoisted(() => vi.fn());
+vi.mock('@/features/skills/api', async importOriginal => {
+  const actual = await importOriginal<typeof import('@/features/skills/api')>();
+  return { ...actual, skillsApi: { ...actual.skillsApi, stop: stopAgent } };
+});
 vi.mock('./api', () => ({ articlesApi: api, downloadText: vi.fn(), HUMAN_EDITS_URL: '/api/workbench/human-edits.jsonl' }));
 vi.mock('./hooks', async importOriginal => ({
   ...(await importOriginal<object>()),
@@ -58,6 +64,7 @@ beforeEach(() => {
   claude.startClaudeTrack.mockReset();
   claude.importClaudeTrack.mockReset();
   agentRun.current = undefined;
+  stopAgent.mockReset();
   vi.mocked(toast.success).mockReset();
   localStorage.clear(); // 收起的栏会记在 localStorage 里
   host = document.createElement('div');
@@ -192,6 +199,52 @@ const DATA: WorkbenchData = {
 };
 
 describe('Workbench', () => {
+  const runningAgent: RunMeta = {
+    id: 'old-run', skill: 'four-step-translate', title: 't', status: 'running', created_at: 0, updated_at: 0,
+    session_id: 'old-thread', error: null, harness: 'codex',
+  };
+
+  it('selects one agent without starting, then waits for the old run to stop before restarting', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'old-run' } });
+    agentRun.current = runningAgent;
+    let finishStop!: () => void;
+    stopAgent.mockImplementation(() => new Promise<RunMeta>(resolve => {
+      finishStop = () => resolve({ ...runningAgent, status: 'error', error: '任务已停止' });
+    }));
+    claude.startClaudeTrack.mockResolvedValue({ ...runningAgent, id: 'new-run', harness: 'antigravity' });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const choice = host.querySelector('input[type="radio"][value="antigravity"]') as HTMLInputElement;
+    expect(choice).not.toBeNull();
+    await act(async () => { choice.click(); });
+    expect(host.querySelectorAll('input[type="radio"]:checked')).toHaveLength(1);
+    expect(claude.startClaudeTrack).not.toHaveBeenCalled();
+    expect(stopAgent).not.toHaveBeenCalled();
+    const button = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.trim() === '停止当前并重新翻译')!;
+    await act(async () => { button.click(); button.click(); });
+    expect(skillsApi.stop).toHaveBeenCalledTimes(1);
+    expect(skillsApi.stop).toHaveBeenCalledWith('old-run');
+    expect(claude.startClaudeTrack).not.toHaveBeenCalled();
+    await act(async () => { finishStop(); });
+    expect(claude.startClaudeTrack).toHaveBeenCalledExactlyOnceWith('p1', 'antigravity', '2027 数据中心');
+    expect(claude.importClaudeTrack).not.toHaveBeenCalled();
+  });
+
+  it('does not launch a replacement when stopping the old run fails', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'old-run' } });
+    agentRun.current = runningAgent;
+    stopAgent.mockRejectedValue(new Error('旧任务未停止'));
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const choice = host.querySelector('input[type="radio"][value="claude"]') as HTMLInputElement;
+    expect(choice).not.toBeNull();
+    await act(async () => { choice.click(); });
+    const button = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.trim() === '停止当前并重新翻译')!;
+    await act(async () => { button.click(); });
+    expect(claude.startClaudeTrack).not.toHaveBeenCalled();
+    expect(toast.error).toHaveBeenCalledWith('旧任务未停止');
+  });
+
   it('shows continuous English and both translations, collapses a pane and saves into the right project', async () => {
     api.workbench.mockResolvedValue(DATA);
     api.saveText.mockResolvedValue({ ok: true });

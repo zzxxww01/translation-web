@@ -7,12 +7,14 @@ import { cn } from '@/lib/utils';
 import { isCookieError, type SubstackArticle } from '@/features/substack/api';
 import { CookieForm } from '@/features/substack/components/CookieForm';
 import type { Harness } from '@/features/skills/harness';
+import { ARTICLE_HARNESSES } from '../lib/agentOptions';
 import { importAndTranslate, runsAgent, type ImportPlan } from '../lib/importFlow';
+import { ArticleAgentChoice } from './ArticleAgentChoice';
 
 const PLANS: { id: ImportPlan; label: string; note: string }[] = [
   { id: 'both', label: '两个都翻', note: '网页版出译本 1，Agent 出译本 2，翻完三栏对照' },
   { id: 'web', label: '只翻网页版', note: '网站自己的翻译流程，出译本 1' },
-  { id: 'agent', label: '只用 Agent 翻', note: 'Codex 或 Claude 跑 four-step-translate，出译本 2' },
+  { id: 'agent', label: '只用 Agent 翻', note: '所选 Agent 跑 four-step-translate，出译本 2' },
   { id: 'import', label: '只导入', note: '先不翻，之后在工作台里再开始' },
 ];
 
@@ -45,17 +47,6 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
     }
   };
 
-  const agentChoice = (value: Harness, label: string) => (
-    <button
-      type="button"
-      onClick={() => setHarness(value)}
-      aria-pressed={harness === value}
-      className={cn('rounded-full border px-2.5 py-0.5 text-xs', harness === value ? 'border-primary-300 bg-primary-50 text-primary-700' : 'border-border-subtle bg-white text-text-secondary')}
-    >
-      {label}
-    </button>
-  );
-
   return (
     <div className="mx-auto w-full max-w-2xl px-5 py-8 sm:px-8 sm:py-12">
       <p className="text-xs text-text-muted">
@@ -79,7 +70,7 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
           <>
             <p className="text-sm font-medium text-text-primary">导入后怎么翻</p>
             <p className="mt-1 text-xs leading-relaxed text-text-muted">
-              译本 1 是网页版，译本 2 是 Agent（Codex 或 Claude）。都在服务器上跑，关掉页面也不会停。
+              译本 1 是网页版，译本 2 可选 {ARTICLE_HARNESSES.map(item => item.label).join('、')}。都在服务器上跑，关掉页面也不会停。
             </p>
             <div className="mt-3 space-y-0.5" role="radiogroup" aria-label="导入后怎么翻">
               {PLANS.map(item => (
@@ -95,8 +86,7 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
             {runsAgent(plan) && (
               <div className="mt-2 flex flex-wrap items-center gap-1.5 px-2">
                 <span className="text-xs text-text-muted">Agent 用</span>
-                {agentChoice('codex', 'Codex')}
-                {agentChoice('claude', 'Claude')}
+                <ArticleAgentChoice value={harness} onChange={setHarness} disabled={busy} />
                 {harness === 'claude' && article.is_paid && <span className="text-xs text-warning">付费文章 Claude 通常不肯全文翻译，只给导读</span>}
               </div>
             )}
