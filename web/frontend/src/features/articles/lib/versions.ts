@@ -74,19 +74,20 @@ type TrackState = Pick<VersionView, 'tone' | 'line' | 'actions' | 'translate'>;
 
 /** 网页版和模型版：后台四步法的状态 */
 function trackState(status: TrackStatus, filled: { done: number; total: number }, canStart: boolean): TrackState {
-  if (status.active) {
+  const finished = filled.total > 0 && filled.done >= filled.total;
+  if (status.active && !finished) {
     if (status.current_step === TERMS_STEP && status.run_id) {
       return { tone: 'wait', line: ['等你确认术语', '10 分钟内不确认会自动采用建议'],
         actions: [{ kind: 'confirm-terms', label: '去确认', jobId: status.run_id }], translate: 'none' };
     }
     return { tone: 'busy', line: [`${shortStep(status.current_step)} ${filled.done}/${filled.total}`], actions: [], translate: 'none' };
   }
-  const partial = filled.done > 0 && filled.done < filled.total;
+  if (finished) return { tone: 'done', line: ['已完成'], actions: [], translate: 'none' };
+  // 模型版没法「开始」，0 段也按缺段处理；出错停下和缺段同一行（设计 6.3）
+  const partial = filled.total > 0 && filled.done < filled.total && (filled.done > 0 || !canStart || Boolean(status.error));
   const resume: VersionAction[] = partial ? [{ kind: 'continue', label: '继续翻译' }]
     : filled.done === 0 && canStart ? [{ kind: 'continue', label: '开始翻译' }] : [];
   const translate: TranslateButton = resume.length ? 'continue' : 'none';
-  if (status.error) return { tone: 'error', line: [`出错了：${status.error}`], actions: resume, translate };
-  if (filled.total && filled.done >= filled.total) return { tone: 'done', line: ['已完成'], actions: [], translate: 'none' };
   if (partial) return { tone: 'wait', line: [`缺 ${filled.total - filled.done} 段`], actions: resume, translate };
   return { tone: 'idle', line: [canStart ? '还没开始' : '还没有译文'], actions: resume, translate };
 }
@@ -109,7 +110,7 @@ function modelVersion(variant: WorkbenchVariant, rows: WorkbenchRow[]): VersionV
 }
 
 function agentVersion(input: VersionsInput, harness: Harness, variant: WorkbenchVariant | null): VersionView {
-  const { data, run, needsLogin, importProblem } = input;
+  const { data, run, importProblem } = input;
   const text = (row: WorkbenchRow) => (variant ? row.alt[variant.id] ?? null : null);
   const base = {
     id: variant?.id ?? `${data.project.id}--${harness}`, source: 'agent' as const, harness, name: harnessLabel(harness),
@@ -117,14 +118,16 @@ function agentVersion(input: VersionsInput, harness: Harness, variant: Workbench
   };
   const own = run && runHarness(run) === harness && variant?.import?.run_id !== run.id ? run : undefined;
   if (own) {
-    const model = own.actual_model ?? own.model ?? null;
+    // 屏幕上的译文还是已导入那一版做的：model 取导入记录，新 run 的模型只写进状态行
+    const runModel = own.actual_model ?? own.model ?? null;
+    const model = variant ? variant.import?.model ?? null : runModel;
     const withModel = (...parts: (string | null)[]) => parts.filter((part): part is string => Boolean(part));
     if (isWaiting(own)) {
       const at = own.auto_reply_at ? `${clock.format(own.auto_reply_at * 1000)} 前不回复就按它的建议继续` : null;
-      return { ...base, model, tone: 'wait', line: withModel('等你确认', at), actions: [{ kind: 'open-run', label: '去确认' }], readOnly: Boolean(variant) };
+      return { ...base, model, tone: 'wait', line: withModel('等你确认', at, variant ? '翻完前只读' : null), actions: [{ kind: 'open-run', label: '去确认' }], readOnly: Boolean(variant) };
     }
     if (own.status === 'running') {
-      return { ...base, model, tone: 'busy', line: withModel(variant ? '重翻中' : '翻译中', model, variant ? '翻完前只读' : null),
+      return { ...base, model, tone: 'busy', line: withModel(variant ? '重翻中' : '翻译中', runModel, variant ? '翻完前只读' : null),
         actions: [{ kind: 'open-run', label: '看对话' }], readOnly: Boolean(variant) };
     }
     if (own.status === 'error') {
@@ -138,9 +141,6 @@ function agentVersion(input: VersionsInput, harness: Harness, variant: Workbench
     return { ...base, model, tone: 'busy', line: ['正在导入'], actions: [], readOnly: Boolean(variant) };
   }
   const model = variant?.import?.model ?? null;
-  if (needsLogin) {
-    return { ...base, model, tone: 'wait', line: ['要先登录一次 Agent 页才能看进度'], actions: [{ kind: 'login', label: '去登录' }], readOnly: false };
-  }
   const filled = countFilled(data.rows, text);
   const status = filled.total && filled.done < filled.total ? `已导入 ${filled.done}/${filled.total} 段` : '已完成';
   return { ...base, model, tone: 'done', line: model ? [status, model] : [status], actions: [], readOnly: false };
@@ -157,12 +157,15 @@ function loginPlaceholder(projectId: string): VersionView {
 
 export function buildVersions(input: VersionsInput): { versions: VersionView[]; addable: Harness[] } {
   const { data, run, needsLogin } = input;
+  // 这条 Agent 对话已经导入过：不用再查它的进度，登录提示也就没意义
+  const imported = data.variants.some(item => item.import?.run_id && item.import.run_id === data.project.claude_run_id);
   const versions: VersionView[] = [webVersion(data)];
   for (const harness of AGENT_ORDER) {
     const variant = data.variants.find(item => variantHarness(item) === harness) ?? null;
     if (variant || (run && runHarness(run) === harness)) versions.push(agentVersion(input, harness, variant));
   }
-  if (needsLogin && !versions.some(version => version.source === 'agent')) versions.push(loginPlaceholder(data.project.id));
+  // 读不到对话、不知道是哪个 Agent：已有的版本照常显示，另放一个占位版本带登录提示
+  if (needsLogin && !imported) versions.push(loginPlaceholder(data.project.id));
   for (const variant of data.variants.filter(item => item.kind === 'model')) versions.push(modelVersion(variant, data.rows));
   const addable = AGENT_ORDER.filter(harness => !versions.some(version => version.harness === harness));
   return { versions, addable };

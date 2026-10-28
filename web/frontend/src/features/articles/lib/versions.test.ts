@@ -50,7 +50,11 @@ describe('buildVersions', () => {
       actions: [{ kind: 'confirm-terms', label: '去确认', jobId: 'job' }] });
     const failed = data({}, ['一', null]);
     failed.project.status = { ...idle, error: '额度用完' };
-    expect(build(failed).versions[0]).toMatchObject({ tone: 'error', line: ['出错了：额度用完'], translate: 'continue' });
+    expect(build(failed).versions[0]).toMatchObject({ tone: 'wait', line: ['缺 1 段'], translate: 'continue',
+      actions: [{ kind: 'continue', label: '继续翻译' }] });
+    const stale = data();
+    stale.project.status = { ...idle, error: '旧错误' };
+    expect(build(stale).versions[0]).toMatchObject({ tone: 'done', line: ['已完成'], translate: 'none', actions: [] });
   });
 
   it('shows a first-time agent as pending and a re-translated one as read only', () => {
@@ -98,6 +102,65 @@ describe('buildVersions', () => {
   });
 });
 
+describe('review fixes', () => {
+  const codex = () => variant('p--codex', { import: imported('codex', 'gpt-5.5', 'x', 'r1') });
+
+  it('keeps finished agent versions normal when the login prompt is needed for an unknown run', () => {
+    const d = data({ variants: [codex()], project: { ...data().project, claude_run_id: 'r9' } });
+    const { versions } = build(d, undefined, { needsLogin: true });
+    expect(versions.find(v => v.id === 'p--codex')).toMatchObject({ tone: 'done', line: ['已完成', 'gpt-5.5'], actions: [] });
+    expect(versions.find(v => v.harness === null && v.source === 'agent')?.actions).toEqual([{ kind: 'login', label: '去登录' }]);
+  });
+
+  it('ignores the login prompt when the run is already imported', () => {
+    const d = data({ variants: [codex()], project: { ...data().project, claude_run_id: 'r1' } });
+    const { versions } = build(d, undefined, { needsLogin: true });
+    expect(versions.map(v => v.id)).toEqual(['p', 'p--codex']);
+    expect(versions[1].line).toEqual(['已完成', 'gpt-5.5']);
+  });
+
+  it('keeps the imported model on a failed re-translation, which stays editable', () => {
+    const d = data({ variants: [codex()] });
+    const failed = build(d, run({ id: 'r2', status: 'error', error: '模型 ID 不存在', model: 'bad-id' })).versions[1];
+    expect(failed).toMatchObject({ model: 'gpt-5.5', readOnly: false, tone: 'error', line: ['出错了：模型 ID 不存在'] });
+    const again = build(d, run({ id: 'r2', model: 'bad-id' })).versions[1];
+    expect(again).toMatchObject({ model: 'gpt-5.5', line: ['重翻中', 'bad-id', '翻完前只读'] });
+  });
+
+  it('says read only while a re-translation waits for confirmation', () => {
+    const d = data({ variants: [codex()] });
+    const waiting = build(d, run({ id: 'r2', status: 'idle', awaiting_reply: true })).versions[1];
+    expect(waiting.line).toContain('翻完前只读');
+    expect(waiting.readOnly).toBe(true);
+  });
+
+  it('offers continue for an empty model version and none for a complete one', () => {
+    const empty = data({ variants: [variant('p--argon', { kind: 'model', label: 'argon' })] }, [null, null]);
+    empty.rows.forEach(r => { r.alt['p--argon'] = null; });
+    expect(build(empty).versions[1]).toMatchObject({ translate: 'continue', line: ['缺 2 段'], actions: [{ kind: 'continue', label: '继续翻译' }] });
+    const full = data({ variants: [variant('p--argon', { kind: 'model', label: 'argon' })] });
+    full.rows.forEach(r => { r.alt['p--argon'] = 'x'; });
+    expect(build(full).versions[1]).toMatchObject({ translate: 'none', tone: 'done' });
+  });
+
+  it('has no translate button on a running web version', () => {
+    const d = data({}, ['一', null]);
+    d.project.status = { ...idle, active: true, current_step: '翻译中', run_id: 'job' };
+    expect(build(d).versions[0]).toMatchObject({ tone: 'busy', translate: 'none', actions: [] });
+  });
+
+  it('offers retranslate for a first run that never produced a version, with nothing to replace', () => {
+    const v = build(data(), run({ status: 'error', error: 'x' })).versions[1];
+    expect(v).toMatchObject({ pending: true, variant: null, translate: 'retranslate' });
+  });
+
+  it('does not offer force-import when the problem is not an alignment mismatch', () => {
+    const v = build(data(), run({ status: 'idle' }),
+      { importProblem: { runId: 'r1', message: '没找到 zh.md', alignment: false } }).versions[1];
+    expect(v).toMatchObject({ tone: 'error', line: ['没导入：没找到 zh.md'], actions: [{ kind: 'open-run', label: '看对话' }] });
+  });
+});
+
 describe('primary and compare', () => {
   const d = data({ variants: [
     variant('p--claude', { label: 'Claude', import: imported('claude', 'opus', '2026-10-28T09:00:00') }),
@@ -119,5 +182,9 @@ describe('primary and compare', () => {
     const live = build(d, run({ harness: 'antigravity' }));
     expect(defaultCompare(live.versions, live.versions[0], run({ harness: 'antigravity' }))?.id).toBe('p--antigravity');
     expect(defaultCompare(build(data()).versions, build(data()).versions[0])).toBeNull();
+    // 正在跑的 Agent 就是主译本：对照别的版本
+    const agentPrimary = build(d, run({ harness: 'codex', id: 'r2' }));
+    expect(defaultCompare(agentPrimary.versions, agentPrimary.versions.find(v => v.id === 'p--codex')!, run({ harness: 'codex', id: 'r2' }))?.id)
+      .toBe('p--claude');
   });
 });

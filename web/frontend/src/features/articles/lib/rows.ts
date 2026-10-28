@@ -9,6 +9,6 @@ export function rowTextClass(row: WorkbenchRow, lang: 'en' | 'zh' = 'zh'): strin
   if (row.kind === 'blockquote') return `border-l-2 border-border pl-3 text-[15px] leading-[1.85] text-text-secondary ${face}`;
   if (row.kind === 'code' || row.kind === 'table') return 'whitespace-pre-wrap font-mono text-[12.5px] leading-relaxed text-text-secondary';
   return lang === 'en'
-    ? `text-[14.5px] leading-[1.78] text-[#5d5560] ${face}`
+    ? `text-[14.5px] leading-[1.78] text-text-secondary ${face}`
     : `text-[15.5px] leading-[1.95] text-text-primary ${face}`;
 }
