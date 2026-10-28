@@ -2,17 +2,6 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { FolderDown, Hand, WifiOff } from 'lucide-react';
 import { toast } from 'sonner';
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/Button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { sendMessage, skillsApi } from '../api';
@@ -23,6 +12,7 @@ import type { Agent, RunMeta } from '../types';
 import { AgentAvatar } from './AgentIcon';
 import { AssistantText, NoticeLine, ToolGroup, TurnDivider, UserBubble } from './ChatItems';
 import { Composer } from './Composer';
+import { DeleteRunDialog } from './DeleteRunDialog';
 import { QuestionCard } from './QuestionCard';
 import { SidePanel } from './SidePanel';
 import { StatusPill } from './StatusPill';
@@ -47,7 +37,6 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
   const pending = new Set(view.pendingQids);
   const scrollRef = useRef<HTMLDivElement>(null);
   const stickToBottom = useRef(true);
-  const [deleting, setDeleting] = useState(false);
   const [continuing, setContinuing] = useState(false);
 
   // 状态变化时让列表上的状态也跟着刷新，不用等轮询
@@ -61,15 +50,9 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
   }, [view.items.length, events.length]);
 
   const remove = async () => {
-    setDeleting(true);
-    try {
-      await skillsApi.remove(run.id);
-      await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
-      onDeleted();
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : '删除失败');
-      setDeleting(false);
-    }
+    await skillsApi.remove(run.id);
+    await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
+    onDeleted();
   };
 
   const continueAsSuggested = async () => {
@@ -119,23 +102,11 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
             </div>
           </SheetContent>
         </Sheet>
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="ghost" size="sm" disabled={active || deleting} title={active ? '先停止再删除' : '删除这个对话和它的所有文件'}>
-              删除
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>删除这个对话？</AlertDialogTitle>
-              <AlertDialogDescription>对话记录、上传的文件和结果文件都会从服务器上删掉，无法恢复。</AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>取消</AlertDialogCancel>
-              <AlertDialogAction onClick={remove}>删除</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        <DeleteRunDialog onConfirm={remove}>
+          <Button variant="ghost" size="sm" disabled={active} title={active ? '先停止再删除' : '从列表里删掉这个对话'}>
+            删除
+          </Button>
+        </DeleteRunDialog>
       </header>
 
       <div className="flex min-h-0 flex-1">
