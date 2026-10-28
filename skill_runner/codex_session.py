@@ -65,6 +65,7 @@ class CodexMapper:
     def __init__(self) -> None:
         self.thread_id: str | None = None
         self.turn_done = False
+        self.model: str | None = None  # 这次运行定下的模型，随 session 事件上报
         self._started_tools: set[str] = set()
         self._turn_started_at = time.monotonic()
 
@@ -87,7 +88,10 @@ class CodexMapper:
         kind = event.get("type")
         if kind == "thread.started":
             self.thread_id = event.get("thread_id") or self.thread_id
-            return [{"type": "session", "session_id": self.thread_id}]
+            session = {"type": "session", "session_id": self.thread_id}
+            if self.model:
+                session["model"] = self.model  # runner 据此写 actual_model
+            return [session]
         if kind == "turn.started":
             self.turn_done = False
             self._turn_started_at = time.monotonic()
@@ -166,6 +170,9 @@ class CodexSession:
         self._spec = spec
         self._mapper = CodexMapper()
         self._mapper.thread_id = spec.resume
+        # 没指定模型时开局就定下清单里排第一的那个，之后每一轮都用它：中途清单更新也不换模型
+        self._model = spec.model or config.codex_model or latest_model(config.codex_home)
+        self._mapper.model = self._model
         self._queue: asyncio.Queue[dict[str, Any] | None] = asyncio.Queue()
         self._inbox: asyncio.Queue[str] = asyncio.Queue()
         self._proc: asyncio.subprocess.Process | None = None
@@ -213,7 +220,7 @@ class CodexSession:
                     self._working = False
 
     async def _turn(self, prompt: str) -> None:
-        command = build_command(self._config, self._mapper.thread_id, self._spec.model)
+        command = build_command(self._config, self._mapper.thread_id, self._model)
         logger.info("[codex %s] %s", self._spec.run_id, " ".join(command[:-1]))
         startup = asyncio.create_task(asyncio.create_subprocess_exec(
             *command,
