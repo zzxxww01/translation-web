@@ -42,13 +42,17 @@ function Shell({ title, sub, children, confirmLabel, busy, onCancel, onConfirm }
 }
 
 /** Agent 版的「↻ 重新翻译」：Agent 固定，只换模型。onConfirm 成功返回 true 才关框。 */
-export function RetranslatePopover({ projectId, version, stopping, busy, onConfirm, children }: {
+export function RetranslatePopover({ projectId, version, stopping, busy, error, onConfirm, onOpen, children }: {
   projectId: string;
   version: VersionView;
   /** 正在跑、会被先停掉的 Agent 名 */
   stopping: string | null;
   busy: boolean;
+  /** 上一次没能开始的原因，写在弹框里 */
+  error?: string | null;
   onConfirm: (model: string) => Promise<boolean>;
+  /** 打开时（清掉上一次的错误） */
+  onOpen?: () => void;
   children: ReactNode;
 }) {
   const harness = version.harness as Harness;
@@ -65,7 +69,7 @@ export function RetranslatePopover({ projectId, version, stopping, busy, onConfi
     if (await onConfirm(model)) setOpen(false);
   };
   return (
-    <Popover open={open} onOpenChange={next => { setOpen(next); if (next) setModel(rememberedModel(harness)); }}>
+    <Popover open={open} onOpenChange={next => { setOpen(next); if (next) { setModel(rememberedModel(harness)); onOpen?.(); } }}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent align="end" className={CONTENT}>
         <Shell title={`重新翻译 ${version.name} 版`} sub="在服务器上跑，关掉页面也不会停" confirmLabel="重新翻译"
@@ -80,6 +84,7 @@ export function RetranslatePopover({ projectId, version, stopping, busy, onConfi
             </Warning>
           )}
           {stopping && <Warning>{`会先停掉正在跑的 ${stopping}。`}</Warning>}
+          {error && <p role="alert" className="mt-3 text-[12px] text-error">{error}</p>}
         </Shell>
       </PopoverContent>
     </Popover>
@@ -87,11 +92,13 @@ export function RetranslatePopover({ projectId, version, stopping, busy, onConfi
 }
 
 /** 对照栏标签末尾的「＋」：只列还没有译本的 Agent */
-export function AddAgentPopover({ options, stopping, busy, onConfirm, children }: {
+export function AddAgentPopover({ options, stopping, busy, error, onConfirm, onOpen, children }: {
   options: Harness[];
   stopping: string | null;
   busy: boolean;
+  error?: string | null;
   onConfirm: (choice: AgentChoice) => Promise<boolean>;
+  onOpen?: () => void;
   children: ReactNode;
 }) {
   const [open, setOpen] = useState(false);
@@ -100,13 +107,14 @@ export function AddAgentPopover({ options, stopping, busy, onConfirm, children }
     if (await onConfirm(choice)) setOpen(false);
   };
   return (
-    <Popover open={open} onOpenChange={next => { setOpen(next); if (next) setChoice(loadAgentChoice(undefined, options)); }}>
+    <Popover open={open} onOpenChange={next => { setOpen(next); if (next) { setChoice(loadAgentChoice(undefined, options)); onOpen?.(); } }}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent align="start" className={CONTENT}>
         <Shell title="用 Agent 再翻一版" sub="只列出还没有译本的 Agent" confirmLabel="开始翻译"
           busy={busy} onCancel={() => setOpen(false)} onConfirm={() => void confirm()}>
           <AgentChoiceFields options={options} value={choice} onChange={setChoice} disabled={busy} />
           {stopping && <Warning>{`会先停掉正在跑的 ${stopping}。`}</Warning>}
+          {error && <p role="alert" className="mt-3 text-[12px] text-error">{error}</p>}
         </Shell>
       </PopoverContent>
     </Popover>

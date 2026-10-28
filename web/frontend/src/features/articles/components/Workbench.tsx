@@ -56,7 +56,8 @@ export function Workbench({ projectId, onShowList }: WorkbenchProps) {
   if (query.isPending) {
     return <div className="flex h-full items-center justify-center text-sm text-text-muted">读取文章…</div>;
   }
-  if (query.error || !query.data) {
+  // 只有一次都没读到才显示错误页；后台刷新失败时留着现有内容（编辑框和草稿不能丢）
+  if (!query.data) {
     return (
       <div className="flex h-full flex-col items-center justify-center gap-3 text-sm text-text-muted">
         <p>打不开这篇文章：{query.error?.message ?? '未知错误'}</p>
@@ -85,6 +86,10 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const [readingJump, setReadingJump] = useState(0);
   const markLock = useRef(false);
   const importTried = useRef<string | null>(null);
+  /** 这个任务又跑过一轮：再次空闲时要重新导入（即使上次导入的就是它） */
+  const reimport = useRef<string | null>(null);
+  const forceLock = useRef(false);
+  const [startError, setStartError] = useState<string | null>(null);
 
   const claudeRun = useClaudeRun(project.claude_run_id);
   const run = claudeRun.data;
@@ -116,8 +121,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
 
   const importRun = useCallback(async (target: RunMeta, force: boolean) => {
     try {
-      const result = await importClaudeTrack(project.id, target, force);
-      toast.success(`${harnessLabel(target.harness)} 译文已导入：对上 ${result.aligned} 段`);
+      await importClaudeTrack(project.id, target, force);
       setImportProblem(null);
       await refresh();
     } catch (error) {
@@ -129,10 +133,21 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   // Agent 一轮结束、不是在等你确认、还没导入：自动取回 zh.md 导入（每个任务只自动试一次）
   useEffect(() => {
     if (!run || run.status !== 'idle' || run.awaiting_reply || importTried.current === run.id) return;
-    if (data.variants.some(variant => variant.import?.run_id === run.id)) return;
+    if (reimport.current !== run.id && data.variants.some(variant => variant.import?.run_id === run.id)) return;
     importTried.current = run.id;
+    reimport.current = null;
     void Promise.resolve().then(() => importRun(run, false)); // 异步调用，effect 里不直接 setState
   }, [run, data.variants, importRun]);
+
+  // 同一个任务又开始干活（继续对话）：上一次的导入结果作废，空闲后重新导入
+  const runWorking = Boolean(run && (run.status === 'running' || run.status === 'waiting' || run.awaiting_reply));
+  const workingId = runWorking ? run?.id : undefined;
+  useEffect(() => {
+    if (!workingId) return;
+    importTried.current = null;
+    reimport.current = workingId;
+    void Promise.resolve().then(() => setImportProblem(current => (current?.runId === workingId ? null : current)));
+  }, [workingId]);
 
   const toggle = (pane: PaneId) => {
     setCollapsed(current => {
@@ -162,7 +177,6 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       queryClient.setQueryData<WorkbenchData>(articleKeys.workbench(project.id), current => current && {
         ...current, reading_mark: result.reading_mark,
       });
-      toast.success(key ? '已标记：看到这里' : '已清除阅读标记');
     } catch (error) {
       toast.error(`阅读标记没保存上：${error instanceof Error ? error.message : '请重试'}`);
     } finally {
@@ -177,8 +191,12 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       downloadText(result.filename, result.content);
     } catch (error) {
       if (format === 'zh' && isQaBlocked(error) && window.confirm(`${(error as Error).message}\n\n仍然导出？`)) {
-        const result = await articlesApi.exportMarkdown(target, format, true);
-        downloadText(result.filename, result.content);
+        try {
+          const result = await articlesApi.exportMarkdown(target, format, true);
+          downloadText(result.filename, result.content);
+        } catch (forced) {
+          toast.error(forced instanceof Error ? forced.message : '导出失败');
+        }
         return;
       }
       toast.error(error instanceof Error ? error.message : '导出失败');
@@ -189,8 +207,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const saveNow = useCallback(async () => {
     setSaving(true);
     try {
-      if (await flushEdits()) toast.success('已保存');
-      else toast.error('有段落没保存上（标红的那几段），点它旁边的「重试」');
+      await flushEdits(); // 结果（已保存 / N 段没保存上）由顶栏 SaveStatus 显示
     } finally {
       setSaving(false);
     }
@@ -211,14 +228,12 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     try {
       if (version.source === 'web' && !rows.some(row => row.web)) {
         await articlesApi.startWorkflow(project.id);
-        toast.success('网页版开始翻译');
       } else {
         const sections = sectionsWithMissing(rows, version.text);
         if (!sections.length) return;
         const names = sections.map(section => `「${section.title}」`).join('、');
         if (!window.confirm(`重译缺译段落所在的 ${sections.length} 章：${names}\n\n这几章里已有的译文（包括你改过的）会被新译文替换，其他章节不动。继续？`)) return;
         await articlesApi.startWorkflow(version.id, { model: version.fillModel, autoAcceptTerms: true, sectionIds: sections.map(section => section.id) });
-        toast.success(`开始重译 ${sections.length} 章`);
       }
       await refresh();
     } catch (error) {
@@ -231,6 +246,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     if (agentStartLock.current) return false;
     agentStartLock.current = true;
     setBusy(true);
+    setStartError(null);
     try {
       if (project.claude_run_id) {
         // 防止停下来的半成品被当成结果导入
@@ -248,11 +264,11 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       importTried.current = null;
       const versionId = `${project.id}--${choice.harness}`;
       if (versionId !== primary.id) setCompareId(versionId);
-      toast.success(`已交给 ${harnessLabel(choice.harness)}；它需要你确认时这里会提示`);
       await refresh();
       return true;
     } catch (error) {
-      toast.error(isUnauthorized(error) ? '先去 Agent 页登录一次（只需一次）' : error instanceof Error ? error.message : '没能交出去');
+      // 弹框还开着，错误写在里面
+      setStartError(isUnauthorized(error) ? '先去 Agent 页登录一次（只需一次）' : error instanceof Error ? error.message : '没能交出去');
       return false;
     } finally {
       agentStartLock.current = false;
@@ -267,12 +283,15 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     }
     const previous = primary.id;
     try {
+      // 先停掉进行中的刷新，免得旧数据盖掉新选的主译本；服务器没存上就什么都不改
+      await queryClient.cancelQueries({ queryKey: articleKeys.workbench(project.id) });
       await articlesApi.setPrimary(project.id, version.id);
       queryClient.setQueryData<WorkbenchData>(articleKeys.workbench(project.id), current => current && {
         ...current, project: { ...current.project, primary_target: version.id, primary: version.id },
       });
       setCompareId(previous);
-      toast.success(`主译本改为 ${version.name}`);
+      // 文章列表里的进度跟着主译本走
+      void queryClient.invalidateQueries({ queryKey: ['articles', 'library'] });
     } catch (error) {
       toast.error(error instanceof Error ? error.message : '没能设为主译本');
     }
@@ -292,7 +311,12 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     else if (action.kind === 'open-run' && run) setDrawer({ kind: 'claude', run });
     else if (action.kind === 'continue') void continueTranslation(version);
     else if (action.kind === 'login') navigate('/skills');
-    else if (action.kind === 'force-import' && run) void importRun(run, true);
+    else if (action.kind === 'force-import' && run) {
+      if (forceLock.current) return;
+      forceLock.current = true;
+      setImportProblem(null); // 状态行变成「正在导入」；失败时 importRun 会把问题写回来
+      void importRun(run, true).finally(() => { forceLock.current = false; });
+    }
   };
 
   const menuFor = (version: VersionView): MenuItem[] => [
@@ -303,13 +327,15 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
 
   const retranslate = (version: VersionView) => version.translate === 'retranslate' && version.harness ? (
     <RetranslatePopover projectId={project.id} version={version} stopping={stopping} busy={busy}
-      onConfirm={model => startAgent({ harness: version.harness!, model })}>
+      error={startError} onOpen={() => setStartError(null)} onConfirm={model => startAgent({ harness: version.harness!, model })}>
       <IconAction label="重新翻译"><RefreshCw className="h-4 w-4" /></IconAction>
     </RetranslatePopover>
   ) : null;
 
-  const placeholder = (version: VersionView) =>
-    version.pending ? '译文还没出来' : version.tone === 'busy' ? '翻译中…' : '还没有译文，可以直接写';
+  const placeholder = (version: VersionView) => version.tone === 'busy' ? '翻译中…' : '还没有译文，可以直接写';
+  /** 还没有译文的版本：整栏只说一句，不在每段重复 */
+  const pendingNote = (version: VersionView) => version.pending
+    ? <p className="py-10 text-center text-[13px] text-text-muted">译文还没出来</p> : undefined;
 
   const columns: Record<PaneId, PaneColumn> = {
     source: {
@@ -331,6 +357,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       text: primary.text,
       save: (row, text) => save(primary.id, row, text),
       placeholder: placeholder(primary),
+      empty: pendingNote(primary),
       adopt: compare && !compare.pending ? { label: compare.name, text: compare.text } : undefined,
     },
     compare: compare ? {
@@ -342,7 +369,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       header: <VersionHeader eyebrow="对照"
         title={<VersionTabs versions={others} value={compare.id} onChange={id => void switchCompare(id)} forceMenu={isMobile}
           add={addable.length ? (
-            <AddAgentPopover options={addable} stopping={stopping} busy={busy} onConfirm={startAgent}>
+            <AddAgentPopover options={addable} stopping={stopping} busy={busy} error={startError} onOpen={() => setStartError(null)} onConfirm={startAgent}>
               <button type="button" aria-label="用 Agent 再翻一版" title="用 Agent 再翻一版"
                 className="inline-flex items-center rounded-full px-2.5 py-1 text-primary-700 hover:bg-white/70"><Plus className="h-3.5 w-3.5" /></button>
             </AddAgentPopover>
@@ -361,6 +388,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       text: compare.text,
       save: (row, text) => save(compare.id, row, text),
       placeholder: placeholder(compare),
+      empty: pendingNote(compare),
       adopt: { label: primary.name, text: primary.text },
     } : {
       id: 'compare',
@@ -370,12 +398,13 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       text: () => null,
       save: async () => undefined,
       readOnly: true,
-      empty: <CompareEmpty options={addable} stopping={stopping} busy={busy} onStart={startAgent} />,
+      empty: <CompareEmpty options={addable} stopping={stopping} busy={busy} error={startError} onStart={startAgent} />,
     },
   };
 
   const markRow = data.reading_mark ? rows.find(row => row.key === data.reading_mark?.key) : undefined;
-  const markText = data.reading_mark ? (primary.text(markRow ?? rows[0]) || markRow?.source || '已标记的位置') : null;
+  // 标记的那一段已经不在了（文章重新导入过）：不显示标记，不拿别的段落顶替
+  const markText = markRow ? (primary.text(markRow) || markRow.source) : null;
   const exportItems = [
     { label: '英文原文', onSelect: () => void exportVersion(project.id, 'en') },
     ...versions.filter(version => !version.pending).map(version => ({

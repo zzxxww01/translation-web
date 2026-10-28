@@ -76,6 +76,7 @@ beforeEach(() => {
   models.mockResolvedValue({ models: [{ id: 'gpt-5.5-codex', label: 'gpt-5.5-codex', description: '' }], default_model: 'gpt-5.5', source: 'cache', warning: null });
   api.setPrimary.mockResolvedValue({ ok: true });
   vi.mocked(toast.success).mockReset();
+  vi.mocked(toast.error).mockReset();
   localStorage.clear(); // 收起的栏会记在 localStorage 里
   host = document.createElement('div');
   document.body.appendChild(host);
@@ -138,6 +139,28 @@ describe('EditableText display', () => {
     await act(async () => { await ref.current!.adopt('新的'); });
     expect(onSave).not.toHaveBeenCalled();
     expect(host.textContent).toBe('旧译文');
+  });
+});
+
+describe('EditableText read-only switch', () => {
+  it('flushes a pending edit and leaves edit mode when the version becomes read-only', async () => {
+    const onSave = vi.fn().mockResolvedValue(undefined);
+    const node = (readOnly: boolean, value: string) =>
+      <EditableText id="ro1" value={value} placeholder="" ariaLabel="格子" onSave={onSave} readOnly={readOnly} />;
+    await render(node(false, '旧'));
+    await act(async () => { (host.querySelector('[aria-label="编辑：格子"]') as HTMLElement).click(); });
+    const textarea = host.querySelector('textarea')!;
+    await act(async () => {
+      Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(textarea, '我改的');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await render(node(true, '旧'));
+    await flush();
+    expect(onSave).toHaveBeenCalledExactlyOnceWith('我改的');
+    expect(host.querySelector('textarea')).toBeNull();
+    expect(unsavedEdits.any()).toBe(false);
+    await render(node(true, '重翻后的新译文'));
+    expect(host.textContent).toBe('重翻后的新译文');
   });
 });
 
@@ -272,7 +295,9 @@ describe('Workbench', () => {
     await flush();
     await act(async () => { buttonIn(inPopover(), '开始翻译').click(); });
     expect(claude.startClaudeTrack).not.toHaveBeenCalled();
-    expect(toast.error).toHaveBeenCalledWith('旧任务未停止');
+    // 失败写在还开着的弹框里，不弹 toast
+    expect(inPopover().textContent).toContain('旧任务未停止');
+    expect(toast.error).not.toHaveBeenCalled();
   });
 
   it('shows continuous English and both translations, collapses a pane and saves into the right project', async () => {
@@ -512,10 +537,10 @@ describe('Workbench', () => {
     const saveButton = host.querySelector('button[aria-label="保存"]') as HTMLButtonElement;
     await act(async () => { saveButton.click(); });
     await flush();
-    expect(toast.success).toHaveBeenCalledWith('已保存');
     await act(async () => { window.dispatchEvent(new KeyboardEvent('keydown', { key: 's', ctrlKey: true })); });
     await flush();
-    expect(toast.success).toHaveBeenCalledTimes(2);
+    // 保存状态只写在顶栏，不弹 toast
+    expect(toast.success).not.toHaveBeenCalled();
 
     await act(async () => { (host.querySelector('button[aria-label="主译本的更多操作"]') as HTMLButtonElement).click(); });
     await act(async () => { buttonIn(inPopover(), '看我改了什么').click(); });
@@ -619,5 +644,118 @@ describe('Workbench', () => {
     const compare = host.querySelector('[aria-label="对照正文"]')!;
     expect(compare.textContent).toContain('选一个 Agent 翻这篇');
     expect(buttonIn(compare, '开始翻译')).toBeDefined();
+  });
+
+  it('rolls back and reports when saving the primary fails, and exports the new primary after a swap', async () => {
+    api.workbench.mockResolvedValue(WITH_CODEX);
+    api.setPrimary.mockRejectedValueOnce(new Error('存不上'));
+    api.exportMarkdown.mockResolvedValue({ filename: 'x.md', content: 'c' });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const main = () => host.querySelector('[aria-label="主译本正文"]')!;
+    await act(async () => { buttonIn(host, '设为主译本').click(); });
+    await flush();
+    expect(toast.error).toHaveBeenCalledWith('存不上');
+    expect(main().textContent).toContain('数据中心正在爆发。');
+    await act(async () => { buttonIn(host, '设为主译本').click(); });
+    await flush();
+    expect(main().textContent).toContain('码·Datacenters are booming.');
+    await act(async () => { buttonIn(host, '导出主译本').click(); });
+    await flush();
+    expect(api.exportMarkdown).toHaveBeenCalledWith('p1--codex', 'zh');
+  });
+
+  it('hides ＋ once all three agents have a version', async () => {
+    const mk = (id: string, label: string, agent: 'claude' | 'codex' | 'antigravity') => ({
+      id, kind: 'claude' as const, label, title_translation: null, progress: { total: 2, approved: 0 },
+      status: { active: false, run_id: null, status: null, current_step: null, translated: 2, total: 2, error: null },
+      import: { run_id: `r-${agent}`, agent, model: null, aligned: 2, unaligned: 0, merged_blocks: 0, imported_at: '2026-10-28T10:00:00' },
+    });
+    api.workbench.mockResolvedValue({ ...DATA, variants: [mk('p1--claude', 'Claude', 'claude'), mk('p1--codex', 'Codex', 'codex'), mk('p1--antigravity', 'Gemini', 'antigravity')] });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    expect(host.querySelector('button[aria-label="用 Agent 再翻一版"]')).toBeNull();
+  });
+
+  it('auto-imports an idle agent run exactly once, without force, across refetches', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'run-5' } });
+    agentRun.current = { ...runningAgent, id: 'run-5', status: 'idle' };
+    claude.importClaudeTrack.mockResolvedValue({ variant_id: 'p1--codex', aligned: 3, unaligned: 0 });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    await flush();
+    expect(claude.importClaudeTrack).toHaveBeenCalledExactlyOnceWith('p1', agentRun.current, false);
+    expect(toast.success).not.toHaveBeenCalled();
+  });
+
+  it('imports again when the same run works some more and goes idle again', async () => {
+    const withImport = { ...WITH_CODEX, project: { ...WITH_CODEX.project, claude_run_id: 'run-6' },
+      variants: WITH_CODEX.variants.map(v => v.id === 'p1--codex' ? { ...v, import: { ...v.import!, run_id: 'run-6' } } : v) };
+    api.workbench.mockResolvedValue(withImport);
+    claude.importClaudeTrack.mockResolvedValue({ variant_id: 'p1--codex', aligned: 3, unaligned: 0 });
+    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+    const again = () => act(async () => {
+      root.render(<QueryClientProvider client={client}><MemoryRouter><Workbench projectId="p1" /></MemoryRouter></QueryClientProvider>);
+    });
+    agentRun.current = { ...runningAgent, id: 'run-6', status: 'idle' };
+    await again(); await flush();
+    expect(claude.importClaudeTrack).not.toHaveBeenCalled(); // 这一轮已经导入过
+    agentRun.current = { ...runningAgent, id: 'run-6', status: 'running' };
+    await again(); await flush();
+    agentRun.current = { ...runningAgent, id: 'run-6', status: 'idle' };
+    await again(); await flush();
+    await again(); await flush();
+    expect(claude.importClaudeTrack).toHaveBeenCalledExactlyOnceWith('p1', agentRun.current, false);
+  });
+
+  it('clears a stale import problem once the agent runs again', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'run-7' } });
+    claude.importClaudeTrack.mockRejectedValueOnce(new Error('没找到同一目录下的 zh.md 和 en.md')).mockResolvedValue({ variant_id: 'p1--codex', aligned: 3, unaligned: 0 });
+    const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+    const again = () => act(async () => {
+      root.render(<QueryClientProvider client={client}><MemoryRouter><Workbench projectId="p1" /></MemoryRouter></QueryClientProvider>);
+    });
+    agentRun.current = { ...runningAgent, id: 'run-7', status: 'idle' };
+    await again(); await flush();
+    expect(host.textContent).toContain('没导入：没找到同一目录下的 zh.md');
+    agentRun.current = { ...runningAgent, id: 'run-7', status: 'running' };
+    await again(); await flush();
+    expect(host.textContent).not.toContain('没导入');
+    agentRun.current = { ...runningAgent, id: 'run-7', status: 'idle' };
+    await again(); await flush();
+    expect(claude.importClaudeTrack).toHaveBeenCalledTimes(2);
+  });
+
+  it('forces the import only once on a double click', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'run-8' } });
+    agentRun.current = { ...runningAgent, id: 'run-8', status: 'idle' };
+    let finish!: () => void;
+    claude.importClaudeTrack
+      .mockRejectedValueOnce(new AlignmentTooLow('只对上 1/3 段'))
+      .mockImplementationOnce(() => new Promise(resolve => { finish = () => resolve({ variant_id: 'p1--codex', aligned: 3, unaligned: 0 }); }));
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const force = buttonIn(host, '仍然导入');
+    await act(async () => { force.click(); force.click(); });
+    expect(claude.importClaudeTrack).toHaveBeenCalledTimes(2);
+    expect(host.textContent).toContain('正在导入');
+    await act(async () => { finish(); });
+  });
+
+  it('shows one message for a column whose agent version has no text yet', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'run-9' }, variants: [] });
+    agentRun.current = { ...runningAgent, id: 'run-9', status: 'running' };
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const compare = host.querySelector('[aria-label="对照正文"]')!;
+    expect(compare.querySelectorAll('[aria-label^="编辑："]')).toHaveLength(0);
+    expect(compare.textContent).toContain('译文还没出来');
+  });
+
+  it('shows no mark text for a stale reading-mark key', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, reading_mark: { key: 'gone/p9', at: '2026-10-27' } });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    expect(host.querySelector('button[aria-label="阅读标记"]')).toBeNull();
   });
 });
