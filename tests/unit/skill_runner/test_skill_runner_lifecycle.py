@@ -232,8 +232,23 @@ async def test_second_concurrent_delete_gets_not_found_and_writes_one_record(run
     run_id = await start(runner)
     factory.last.push({"type": "result", "session_id": "s"})
     await settle()
+    gate = asyncio.Event()
+    entered = 0
+    real_close = factory.last.close
 
-    results = await asyncio.gather(runner.delete(run_id), runner.delete(run_id), return_exceptions=True)
+    async def slow_close():
+        nonlocal entered
+        entered += 1
+        await gate.wait()  # 两个删除都过了 _get，才放行
+        await real_close()
+
+    factory.last.close = slow_close
+
+    first = asyncio.create_task(runner.delete(run_id))
+    second = asyncio.create_task(runner.delete(run_id))
+    await settle()
+    gate.set()
+    results = await asyncio.gather(first, second, return_exceptions=True)
 
     assert sum(r is None for r in results) == 1
     assert sum(isinstance(r, NotFound) for r in results) == 1

@@ -14,6 +14,7 @@ import logging
 import os
 import re
 import secrets
+import stat
 import time
 from dataclasses import asdict, dataclass
 from datetime import datetime
@@ -24,6 +25,7 @@ RUN_ID_RE = re.compile(r"^\d{8}-\d{6}-[0-9a-f]{6}$")
 META_FILE = "meta.json"
 EVENTS_FILE = "events.jsonl"
 INPUT_DIR = "input"
+OUTPUT_DIR = "output"
 # 页面文件列表里不展示的根目录条目
 INTERNAL_FILES = {META_FILE, EVENTS_FILE}
 MAX_LISTED_FILES = 2000
@@ -163,16 +165,16 @@ class RunStore:
             "moved_to": str(target),
             "client_ip": client_ip,
         }
-        # 先把记录序列化好再挪目录：非 UTF-8 文件名（lone surrogate）靠 ASCII 转义也能写下来，
+        # 先把记录序列化好再挪目录：非 UTF-8 文件名（lone surrogate）写文件时按 \uXXXX 转义，仍是合法 JSON，
         # 序列化出错就在挪目录之前暴露，不会出现「目录已挪走、记录却丢了」
-        line = json.dumps(record, ensure_ascii=True)
+        line = json.dumps(record, ensure_ascii=False)
         os.rename(source, target)
         try:
-            with open(self.deleted_dir / DELETED_LOG, "a", encoding="utf-8") as fh:
+            with open(self.deleted_dir / DELETED_LOG, "a", encoding="utf-8", errors="backslashreplace") as fh:
                 fh.write(line + "\n")
         except (OSError, ValueError):
             # 目录已经挪走了，删除本身算成功；这时服务日志是唯一的备份，整条记录写进去
-            logger.exception("deleted run %s but could not append %s; full record: %s", run_id, DELETED_LOG, line)
+            logger.exception("deleted run %s but could not append %s; full record: %s", run_id, DELETED_LOG, line.encode("utf-8", "backslashreplace").decode("utf-8"))
         logger.info(
             "deleted run %s (%s) title=%r files=%s bytes=%s -> %s ip=%s",
             run_id, reason, record["title"], manifest["file_count"], manifest["total_bytes"], target, client_ip,
@@ -182,50 +184,54 @@ class RunStore:
     def _file_manifest(self, root: Path) -> dict[str, Any]:
         """删除记录里的文件清单：input/ 下是上传的，其余是产出；meta/events 不列。
 
-        input/ 先列，隐藏目录（.venv、.git、.cache 之类）和隐藏文件跳过，和 list_files 一致；
-        列满 MAX_LOGGED_FILES 就停止遍历并标 truncated。
-        file_count / total_bytes 只统计实际走过并记下的条目，不含被跳过的隐藏目录和截断之后的部分。
+        遍历顺序：input/，output/，再是其余非隐藏目录，所以记录名额不够时先丢的是杂项。
+        隐藏目录（.venv、.git、.cache 之类）和隐藏文件跳过，和 list_files 一致；只记普通文件，
+        符号链接和读不了的文件跳过。
+        file_count / total_bytes 是挪走的全部普通文件的真实总数（不含被跳过的隐藏目录、meta/events）；
+        条目最多记 MAX_LOGGED_FILES 个，超出的只计数不记录，并标 truncated。
         """
         inputs: list[dict[str, Any]] = []
         outputs: list[dict[str, Any]] = []
-        total = 0
-        truncated = False
+        count = total = 0
 
-        def walk(top: Path, skip_input_dir: bool) -> Iterable[tuple[str, int]]:
+        def walk(top: Path, skip: tuple[str, ...] = ()) -> Iterable[tuple[str, int]]:
+            if os.path.islink(top):  # os.walk 会跟进符号链接的顶层目录
+                return
             for dirpath, dirnames, filenames in os.walk(top):
-                dirnames[:] = sorted(
-                    d for d in dirnames
-                    if not d.startswith(".") and not (skip_input_dir and Path(dirpath) == top and d == INPUT_DIR)
-                )
                 at_root = Path(dirpath) == root
+                dirnames[:] = sorted(
+                    d for d in dirnames if not d.startswith(".") and not (at_root and d in skip)
+                )
                 for name in sorted(filenames):
                     if name.startswith(".") or (at_root and name in INTERNAL_FILES):
                         continue
                     full = Path(dirpath) / name
-                    if full.is_symlink():
-                        continue
                     try:
-                        size = full.stat().st_size
+                        st = os.lstat(full)
                     except OSError:
                         continue
-                    yield full.relative_to(root).as_posix(), size
+                    if not stat.S_ISREG(st.st_mode):
+                        continue
+                    yield full.relative_to(root).as_posix(), st.st_size
 
-        for skip, bucket in ((False, inputs), (True, outputs)):
-            for rel, size in walk(root / INPUT_DIR if not skip else root, skip):
-                if len(inputs) + len(outputs) >= MAX_LOGGED_FILES:
-                    truncated = True
-                    break
-                bucket.append({"path": rel, "bytes": size})
+        passes = (
+            (root / INPUT_DIR, (), inputs),
+            (root / OUTPUT_DIR, (), outputs),
+            (root, (INPUT_DIR, OUTPUT_DIR), outputs),
+        )
+        for top, skip, bucket in passes:
+            for rel, size in walk(top, skip):
+                count += 1
                 total += size
-            if truncated:
-                break
+                if len(inputs) + len(outputs) < MAX_LOGGED_FILES:
+                    bucket.append({"path": rel, "bytes": size})
         manifest: dict[str, Any] = {
             "inputs": inputs,
             "outputs": outputs,
-            "file_count": len(inputs) + len(outputs),
+            "file_count": count,
             "total_bytes": total,
         }
-        if truncated:
+        if count > len(inputs) + len(outputs):
             manifest["truncated"] = True
         return manifest
 

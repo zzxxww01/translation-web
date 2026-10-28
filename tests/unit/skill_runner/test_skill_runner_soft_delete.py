@@ -1,4 +1,5 @@
 import json
+import os
 
 import pytest
 
@@ -69,42 +70,64 @@ def test_archive_still_moves_the_run_when_the_log_cannot_be_written(tmp_path):
     assert (store.deleted_dir / run_id / "meta.json").is_file()
 
 
-def test_long_file_lists_are_truncated_but_keep_the_input(tmp_path, monkeypatch):
+def test_long_file_lists_are_truncated_but_keep_input_and_output(tmp_path, monkeypatch):
     monkeypatch.setattr(store_module, "MAX_LOGGED_FILES", 3)
     store = RunStore(tmp_path / "runs")
     run_id = _run_with_files(store)
     run_dir = store.run_dir(run_id)
     (run_dir / ".venv").mkdir()
+    (run_dir / "node_modules").mkdir()
     for i in range(10):
         (run_dir / ".venv" / f"lib{i}.py").write_text("x", encoding="utf-8")
-    for i in range(10):
-        (run_dir / "output" / f"p{i}.md").write_text("x", encoding="utf-8")
+        (run_dir / "node_modules" / f"m{i}.js").write_text("x", encoding="utf-8")
 
     record = store.archive(run_id, reason="user")
 
     assert record["inputs"] == [{"path": "input/a.html", "bytes": 9}]
-    assert len(record["inputs"]) + len(record["outputs"]) == 3
-    assert all(not e["path"].startswith(".venv") for e in record["outputs"])
+    assert [e["path"] for e in record["outputs"]] == ["output/zh.md", "node_modules/m0.js"]
     assert record["truncated"] is True
-    assert record["file_count"] == 3
+    # 真实总数：a.html + zh.md + 10 个 node_modules 文件（隐藏的 .venv 和 meta/events 不算）
+    assert record["file_count"] == 12
+    assert record["total_bytes"] == 9 + len("译文".encode("utf-8")) + 10
 
 
 def test_manifest_has_totals_and_skips_unstatable_files(tmp_path, monkeypatch):
     store = RunStore(tmp_path / "runs")
     run_id = _run_with_files(store)
-    real_stat = store_module.Path.stat
+    real_lstat = os.lstat
 
-    def flaky(self, *a, **kw):
-        if self.name == "zh.md":
+    def flaky(path, *a, **kw):
+        if os.path.basename(path) == "zh.md":
             raise OSError("gone")
-        return real_stat(self, *a, **kw)
+        return real_lstat(path, *a, **kw)
 
-    monkeypatch.setattr(store_module.Path, "stat", flaky)
+    monkeypatch.setattr(store_module.os, "lstat", flaky)
     record = store.archive(run_id, reason="user")
     monkeypatch.undo()
 
     assert record["outputs"] == []
     assert (record["file_count"], record["total_bytes"]) == (1, 9)
+
+
+def test_symlinked_input_dir_is_not_followed(tmp_path):
+    store = RunStore(tmp_path / "runs")
+    run_id = _run_with_files(store)
+    outside = tmp_path / "outside"
+    outside.mkdir()
+    (outside / "secret.txt").write_text("s", encoding="utf-8")
+    input_dir = store.run_dir(run_id) / "input"
+    for child in input_dir.iterdir():
+        child.unlink()
+    input_dir.rmdir()
+    try:
+        os.symlink(outside, input_dir, target_is_directory=True)
+    except OSError:
+        pytest.skip("cannot create symlinks here")
+
+    record = store.archive(run_id, reason="user")
+
+    assert record["inputs"] == []
+    assert all("secret" not in e["path"] for e in record["outputs"])
 
 
 def test_non_utf8_filename_does_not_lose_the_record(tmp_path, monkeypatch):
