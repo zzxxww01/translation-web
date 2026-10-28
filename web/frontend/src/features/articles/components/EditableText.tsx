@@ -20,6 +20,7 @@ interface EditableTextProps {
   onProtectionChange?: (id: string, protectedDraft: boolean) => void;
   className?: string;
   inline?: boolean;
+  readOnly?: boolean;
 }
 
 const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
@@ -29,7 +30,7 @@ const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
  * 停顿约 1 秒或离开时自动保存——类似 Obsidian 的实时预览。保存状态汇总到栏头（见 lib/edits），
  * 这里只在保存失败时标红、给重试。
  */
-export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel, onSave, onProtectionChange, className, inline = false }: EditableTextProps) {
+export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel, onSave, onProtectionChange, className, inline = false, readOnly = false }: EditableTextProps) {
   const [text, setText] = useState(value ?? '');
   const [state, setState] = useState<SaveState>('idle');
   const [editing, setEditing] = useState(false);
@@ -89,12 +90,12 @@ export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel
   useImperativeHandle(editorRef, () => ({
     isProtected: () => protectedDraft,
     adopt: async next => {
-      if (protectedDraft) return;
+      if (protectedDraft || readOnly) return;
       setText(next);
       latest.current = next;
       await save(next);
     },
-  }), [protectedDraft, save]);
+  }), [protectedDraft, readOnly, save]);
 
   useEffect(() => () => {
     clearTimeout(timer.current);
@@ -111,6 +112,16 @@ export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel
   };
 
   const Container = inline ? 'span' : 'div';
+  // 重翻期间这一版只读：翻完会整篇替换，期间改了也留不住
+  if (readOnly) {
+    return (
+      <Container className={cn('group/edit relative', className)}>
+        <Container className={cn(inline ? 'rounded' : BOX, 'whitespace-pre-wrap border-transparent text-text-secondary/80')}>
+          {text ? <InlineMarkdown text={text} /> : <span className="text-text-disabled">{placeholder}</span>}
+        </Container>
+      </Container>
+    );
+  }
   return (
     <Container className={cn('group/edit relative', className)}>
       {editing ? (

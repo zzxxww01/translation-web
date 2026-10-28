@@ -118,6 +118,17 @@ describe('EditableText display', () => {
     expect(host.querySelector('em a')?.textContent).toBe('行业模型');
     expect(host.textContent).toBe('来源：行业模型');
   });
+
+  it('shows read-only text without an edit affordance and ignores adoption', async () => {
+    const onSave = vi.fn();
+    const ref = { current: null as import('./components/EditableText').EditableTextHandle | null };
+    await render(<EditableText ref={ref} id="main:s/p" value="旧译文" placeholder="" ariaLabel="主译本：S" onSave={onSave} readOnly />);
+    expect(host.textContent).toBe('旧译文');
+    expect(host.querySelector('[role="button"]')).toBeNull();
+    await act(async () => { await ref.current!.adopt('新的'); });
+    expect(onSave).not.toHaveBeenCalled();
+    expect(host.textContent).toBe('旧译文');
+  });
 });
 
 describe('useAutoSyncArticles', () => {
