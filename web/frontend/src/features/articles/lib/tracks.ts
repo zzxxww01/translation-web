@@ -1,7 +1,7 @@
 import type { ArticleStatus } from '@/features/substack/api';
 import type { TrackStatus, WorkbenchRow } from '../types';
 
-/** 译本 2 换模型时可选的模型（llm_providers.yaml 里的别名）。label 也用作孪生项目 id 后缀。 */
+/** 以前「换个模型再翻一版」的模型（llm_providers.yaml 里的别名），只用来给模型版继续翻译。label 也是孪生项目 id 后缀。 */
 export const SECOND_MODELS = [
   { model: 'gemini-official-argon', label: 'argon', note: '盲评最好' },
   { model: 'deepseek-flash-official', label: 'DeepSeek', note: '便宜、快' },
@@ -51,7 +51,7 @@ export function canFillMissing(status: TrackStatus, filled: { done: number; tota
 
 export type StatusTone = 'muted' | 'busy' | 'wait' | 'done';
 
-/** 已导入文章的翻译进度（网页版和译本 2 取进度高的）；没导入时为 null。 */
+/** 已导入文章的翻译进度（只看主译本，后端算好）；没导入时为 null。 */
 export function articleStatus(status: ArticleStatus, progress: number): { text: string; tone: StatusTone; percent: number } | null {
   const percent = Math.round(progress);
   switch (status) {

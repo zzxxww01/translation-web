@@ -37,7 +37,7 @@ export interface ClaudeImportRecord {
   imported_at: string;
 }
 
-/** 译本 2：同源孪生项目。kind=model 是换模型再翻，kind=claude 是从 Claude 任务导入。 */
+/** 网页版以外的一版：同源孪生项目。kind=model 是以前换模型再翻的，kind=claude 是从 Agent 任务导入的。 */
 export interface WorkbenchVariant {
   id: string;
   kind: 'model' | 'claude';
@@ -61,9 +61,9 @@ export interface WorkbenchRow {
   is_metadata?: boolean;
   source: string;
   image?: string | null;
-  /** 译本 1（网页版主项目） */
+  /** 网页版（主项目）的译文 */
   web: string | null;
-  /** 各个译本 2，键是孪生项目 id */
+  /** 其余各版的译文，键是孪生项目 id */
   alt: Record<string, string | null>;
 }
 

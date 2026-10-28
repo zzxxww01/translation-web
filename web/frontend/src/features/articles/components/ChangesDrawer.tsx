@@ -11,7 +11,7 @@ import type { DiffSegment } from '../types';
 export interface ChangesTarget {
   projectId: string;
   target: string;
-  /** 「译本 1 · 网页版」这类栏名 */
+  /** 版本名，例如「网页版」「Codex」 */
   label: string;
   title: string;
 }
