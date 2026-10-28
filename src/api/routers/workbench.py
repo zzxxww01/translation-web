@@ -45,6 +45,8 @@ class ImportClaudeRequest(BaseModel):
     agent: Literal["claude", "codex", "antigravity"] = "claude"  # 跑 four-step-translate 的 harness
     zh_markdown: str = Field(..., min_length=1, max_length=MAX_MARKDOWN_CHARS)
     en_markdown: str = Field(..., min_length=1, max_length=MAX_MARKDOWN_CHARS)
+    model: Optional[str] = Field(None, max_length=128)  # 实际跑的模型（run 的 actual_model / model），只用来显示
+    force: bool = False  # 英文稿和下载的原文对不上时也导入
 
 
 class ClaudeRunRequest(BaseModel):

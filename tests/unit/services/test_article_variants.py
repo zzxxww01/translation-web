@@ -208,14 +208,29 @@ async def test_saving_into_a_project_that_is_not_this_articles_variant_is_refuse
             target=main_id, section_id=section_id, paragraph_id=first.id, text="   "), pm)
 
 
-@pytest.mark.parametrize(('agent', 'label'), [('codex', 'Codex'), ('antigravity', 'Antigravity')])
+@pytest.mark.parametrize(("agent", "label"), [("claude", "Claude"), ("codex", "Codex"), ("antigravity", "Gemini")])
 def test_agent_import_gets_its_own_variant(pm, main_id, agent, label):
-    en = "First paragraph about wafer supply and the 2027 buildout of datacenters.\n"
-    zh = "关于晶圆供给和 2027 年数据中心建设的第一段。\n"
-    body = workbench.ImportClaudeRequest(run_id='r1', zh_markdown=zh, en_markdown=en, agent=agent)
-    result = article_variants.import_claude_translation(pm, main_id, zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, agent=body.agent)
+    body = workbench.ImportClaudeRequest(run_id="r1", zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent=agent, model="m-1")
+    result = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, agent=body.agent, model=body.model)
     assert result["variant_id"] == f"{main_id}--{agent}"
     assert pm.get(result["variant_id"]).variant_label == label
+    record = article_variants.read_import_record(pm, result["variant_id"])
+    assert (record["agent"], record["model"], record["run_id"]) == (agent, "m-1", None)
+
+
+def test_import_refuses_an_english_draft_that_does_not_match_the_download(pm, main_id):
+    half_en = "First paragraph about wafer supply and the 2027 buildout of datacenters.\n"
+    half_zh = "关于晶圆供给和 2027 年数据中心建设的第一段。\n"
+    with pytest.raises(article_variants.AlignmentTooLow) as caught:
+        article_variants.import_claude_translation(pm, main_id, zh_markdown=half_zh, en_markdown=half_en, agent="codex")
+    assert (caught.value.aligned, caught.value.total) == (1, 3)  # 两段正文 + 一个章节标题
+    assert "1/3" in str(caught.value)
+    assert article_variants.list_variants(pm, main_id) == []  # 没建孪生项目
+
+    result = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=half_zh, en_markdown=half_en, agent="codex", force=True)
+    assert result["aligned"] >= 1
 
 
 def test_primary_target_is_stored_in_meta_and_list_summary(pm, main_id):
