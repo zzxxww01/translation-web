@@ -12,6 +12,7 @@ import { AUTO_SYNC_GAP_MS, useAutoSyncArticles } from './hooks';
 import { AlignmentTooLow } from './lib/claude';
 import { importAndTranslate } from './lib/importFlow';
 import { skillsApi } from '@/features/skills/api';
+import { ApiErrorWrapper } from '@/shared/api/client';
 import type { RunMeta } from '@/features/skills/types';
 import type { Workbench as WorkbenchData } from './types';
 
@@ -283,6 +284,20 @@ describe('Workbench', () => {
     await act(async () => { finishStop(); });
     expect(claude.startClaudeTrack).toHaveBeenCalledExactlyOnceWith('p1', { harness: 'antigravity', model: '' }, '2027 数据中心');
     expect(claude.importClaudeTrack).not.toHaveBeenCalled();
+  });
+
+  it('treats a deleted old agent conversation (stop 404) as already stopped and still starts the new run', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'old-run' } });
+    agentRun.current = runningAgent;
+    stopAgent.mockRejectedValue(new ApiErrorWrapper('运行不存在', 404));
+    claude.startClaudeTrack.mockResolvedValue({ ...runningAgent, id: 'new-run', harness: 'antigravity' });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    await act(async () => { (host.querySelector('button[aria-label="用 Agent 再翻一版"]') as HTMLButtonElement).click(); });
+    await flush();
+    await act(async () => { buttonIn(inPopover(), '开始翻译').click(); });
+    expect(claude.startClaudeTrack).toHaveBeenCalledTimes(1);
+    expect(inPopover()?.textContent ?? '').not.toContain('运行不存在');
   });
 
   it('does not launch a replacement when stopping the old run fails', async () => {

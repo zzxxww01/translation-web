@@ -6,6 +6,7 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { harnessLabel } from '@/features/skills/harness';
 import { skillsApi } from '@/features/skills/api';
+import { ApiErrorWrapper } from '@/shared/api/client';
 import { isUnauthorized } from '@/features/skills/hooks';
 import type { RunMeta } from '@/features/skills/types';
 import { articlesApi, downloadText } from '../api';
@@ -93,7 +94,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const [startError, setStartError] = useState<string | null>(null);
 
   const claudeRun = useClaudeRun(project.claude_run_id);
-  const run = claudeRun.data;
+  const run = claudeRun.data ?? undefined;
   const needsLogin = Boolean(project.claude_run_id) && isUnauthorized(claudeRun.error);
   const { versions, addable } = useMemo(
     () => buildVersions({ data, run, needsLogin, importProblem }), [data, run, needsLogin, importProblem]);
@@ -252,8 +253,13 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       if (project.claude_run_id) {
         // 防止停下来的半成品被当成结果导入
         importTried.current = project.claude_run_id;
-        const stopped = await skillsApi.stop(project.claude_run_id);
-        queryClient.setQueryData(articleKeys.claudeRun(stopped.id), stopped);
+        try {
+          const stopped = await skillsApi.stop(project.claude_run_id);
+          queryClient.setQueryData(articleKeys.claudeRun(stopped.id), stopped);
+        } catch (error) {
+          // 那段 Agent 对话已被删掉：没有东西可停，直接开新的
+          if (!(error instanceof ApiErrorWrapper && error.status === 404)) throw error;
+        }
       }
       const nextRun = await startClaudeTrack(project.id, choice, title);
       saveAgentChoice(choice);
@@ -338,7 +344,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const placeholder = (version: VersionView) => version.tone === 'busy' ? '翻译中…' : '还没有译文，可以直接写';
   /** 还没有译文的版本：整栏只说一句，不在每段重复 */
   const pendingNote = (version: VersionView) => version.pending
-    ? <p className={cn(MEASURE, 'pt-1 text-[15px] text-text-disabled [font-family:var(--font-display)]')}>译文还没出来</p> : undefined;
+    ? <p className={cn(MEASURE, 'pt-1 text-[15px] text-text-muted [font-family:var(--font-display)]')}>译文还没出来</p> : undefined;
   /** 同一版整篇换过（重翻导入）时变：PaneGrid 只在这时淡入 */
   const contentKey = (version: VersionView) => version.pending ? 'pending' : version.variant?.import?.imported_at ?? '';
 

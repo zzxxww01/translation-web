@@ -53,6 +53,12 @@ async function readText(runId: string, path: string): Promise<string> {
   return response.text();
 }
 
+function isAlignmentLow(error: unknown): error is ApiErrorWrapper {
+  if (!(error instanceof ApiErrorWrapper) || error.status !== 409) return false;
+  const data = error.data;
+  return Boolean(data && typeof data === 'object' && (data as { error_code?: unknown }).error_code === 'ALIGNMENT_LOW');
+}
+
 /** 从任务取回 zh.md / en.md，对齐后存成该 Agent 对应的那一版；记下 Agent 和实际模型。 */
 export async function importClaudeTrack(projectId: string, run: RunMeta, force = false) {
   const outputs = findClaudeOutputs(await skillsApi.files(run.id));
@@ -64,7 +70,7 @@ export async function importClaudeTrack(projectId: string, run: RunMeta, force =
       model: run.actual_model ?? run.model ?? null, force,
     });
   } catch (error) {
-    if (error instanceof ApiErrorWrapper && error.status === 409) throw new AlignmentTooLow(error.message);
+    if (isAlignmentLow(error)) throw new AlignmentTooLow(error.message);
     throw error;
   }
 }

@@ -2,10 +2,9 @@
 import { describe, expect, it } from 'vitest';
 import { findClaudeOutputs } from './claude';
 import { gridTemplate, loadCollapsed, NONE_COLLAPSED, togglePane } from './panes';
-import { countFilled, sectionsWithMissing, trackSummary } from './tracks';
-import type { TrackStatus, WorkbenchRow } from '../types';
+import { countFilled, sectionsWithMissing } from './tracks';
+import type { WorkbenchRow } from '../types';
 
-const idle: TrackStatus = { active: false, run_id: null, status: null, current_step: null, translated: null, total: null, error: null };
 const row = (key: string, kind: string, web: string | null): WorkbenchRow => ({ key, kind, section_id: 's', paragraph_id: key, source: key, web, alt: {} });
 
 describe('panes', () => {
@@ -38,16 +37,11 @@ describe('findClaudeOutputs', () => {
   });
 });
 
-describe('track summary', () => {
-  it('counts filled paragraphs without images and names the waiting step', () => {
+describe('countFilled', () => {
+  it('counts filled paragraphs without images', () => {
     const rows = [row('a', 'p', '一'), row('b', 'image', null), row('c', 'p', null)];
     const filled = countFilled(rows, item => item.web);
     expect(filled).toEqual({ done: 1, total: 2 });
-    expect(trackSummary({ ...idle, active: true, current_step: '等待术语确认' }, filled)).toEqual({ text: '等你确认术语', tone: 'wait' });
-    expect(trackSummary({ ...idle, active: true, current_step: '翻译章节' }, filled).text).toBe('翻译章节 1/2');
-    expect(trackSummary({ ...idle, active: true, current_step: '处理中: The shape of the buildout' }, filled).text).toBe('处理中 1/2');
-    expect(trackSummary(idle, filled)).toEqual({ text: '缺 1 段', tone: 'wait' });
-    expect(trackSummary(idle, { done: 2, total: 2 }).text).toBe('已完成');
   });
 });
 

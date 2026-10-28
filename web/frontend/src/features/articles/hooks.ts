@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useInfiniteQuery, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'sonner';
-import { apiClient } from '@/shared/api/client';
+import { ApiErrorWrapper, apiClient } from '@/shared/api/client';
 import type { Project } from '@/shared/types';
 import { substackApi, type ArticleFilter } from '@/features/substack/api';
 import type { RunMeta } from '@/features/skills/types';
@@ -78,7 +78,15 @@ export function useProjects(enabled: boolean) {
 export function useClaudeRun(runId: string | null) {
   return useQuery({
     queryKey: articleKeys.claudeRun(runId ?? ''),
-    queryFn: () => apiClient.get<RunMeta>(`/skills/runs/${runId}`, { retry: false }),
+    // 对话被删（404）等于没有这个任务，不是错误
+    queryFn: async () => {
+      try {
+        return await apiClient.get<RunMeta>(`/skills/runs/${runId}`, { retry: false });
+      } catch (error) {
+        if (error instanceof ApiErrorWrapper && error.status === 404) return null;
+        throw error;
+      }
+    },
     enabled: Boolean(runId),
     refetchInterval: query => {
       const run = query.state.data;

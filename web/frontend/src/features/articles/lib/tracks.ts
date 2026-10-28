@@ -1,5 +1,5 @@
 import type { ArticleStatus } from '@/features/substack/api';
-import type { TrackStatus, WorkbenchRow } from '../types';
+import type { WorkbenchRow } from '../types';
 
 /** 以前「换个模型再翻一版」的模型（llm_providers.yaml 里的别名），只用来给模型版继续翻译。label 也是孪生项目 id 后缀。 */
 export const SECOND_MODELS = [
@@ -22,17 +22,6 @@ export function shortStep(step: string | null): string {
   return head && head.length <= 8 ? head : '翻译中';
 }
 
-export function trackSummary(status: TrackStatus, filled: { done: number; total: number }): { text: string; tone: 'busy' | 'wait' | 'done' | 'idle' | 'error' } {
-  if (status.active) {
-    if (status.current_step === TERMS_STEP) return { text: '等你确认术语', tone: 'wait' };
-    return { text: `${shortStep(status.current_step)} ${filled.done}/${filled.total}`, tone: 'busy' };
-  }
-  if (status.error) return { text: '出错了', tone: 'error' };
-  if (filled.total && filled.done >= filled.total) return { text: '已完成', tone: 'done' };
-  if (filled.done) return { text: `缺 ${filled.total - filled.done} 段`, tone: 'wait' };
-  return { text: '还没开始', tone: 'idle' };
-}
-
 /** 缺译的段落所在章节（按文中顺序），补译时重译这些章节 */
 export function sectionsWithMissing(rows: WorkbenchRow[], text: (row: WorkbenchRow) => string | null): { id: string; title: string }[] {
   const titles = new Map(rows.filter(row => row.kind === 'section').map(row => [row.section_id, row.source]));
@@ -42,11 +31,6 @@ export function sectionsWithMissing(rows: WorkbenchRow[], text: (row: WorkbenchR
     ids.push(row.section_id);
   }
   return ids.map(id => ({ id, title: titles.get(id) ?? id }));
-}
-
-/** 停下来了但还缺段：可以补译（重译缺段所在的章节） */
-export function canFillMissing(status: TrackStatus, filled: { done: number; total: number }): boolean {
-  return !status.active && filled.done > 0 && filled.done < filled.total;
 }
 
 export type StatusTone = 'muted' | 'busy' | 'wait' | 'done';
