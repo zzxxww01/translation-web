@@ -38,7 +38,7 @@ async function open(page: Page, name: keyof typeof CASES, readingMark: { key: st
   ] }));
   await page.route('**/api/skills/runs/*/files/**', route => route.fulfill({ body: '# t\n\ntext\n' }));
   await page.route('**/api/projects/v/variants/claude', route => route.fulfill({
-    status: 409, json: { detail: 'Agent 的英文稿只对上 40/57 段，可能不是这篇下载的原文' } }));
+    status: 409, json: { detail: 'Agent 的英文稿只对上 40/57 段，可能不是这篇下载的原文', error_code: 'ALIGNMENT_LOW' } }));
   await page.route('**/api/skills/models/*', route => route.fulfill({ json: {
     models: [{ id: 'gpt-5.5-codex', label: 'gpt-5.5-codex' }, { id: 'gpt-5.4-mini', label: 'gpt-5.4-mini' }],
     default_model: 'gpt-5.5', source: 'cache', warning: null } }));
