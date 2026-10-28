@@ -59,7 +59,7 @@ class AntigravityMapper:
 
     def map(self, event: dict[str, Any]) -> list[dict[str, Any]]:
         if not isinstance(event, dict):
-            raise ValueError("Antigravity 输出的事件不是 JSON 对象")
+            raise ValueError("Gemini 输出的事件不是 JSON 对象")
         kind = event.get("event")
         if kind == "init":
             self.conversation_id = event.get("conversation_id") or self.conversation_id
@@ -82,7 +82,7 @@ class AntigravityMapper:
                 events.append({"type": "text", "text": response, "parent": None})
             status = data.get("status")
             is_error = status != "SUCCESS" or bool(data.get("error"))
-            errors = [_clip(data.get("error") or f"Antigravity 状态：{status or 'UNKNOWN'}", TOOL_RESULT_LIMIT)] if is_error else []
+            errors = [_clip(data.get("error") or f"Gemini 状态：{status or 'UNKNOWN'}", TOOL_RESULT_LIMIT)] if is_error else []
             mapped = self.result(is_error=is_error,
                                  subtype="interrupted" if status in {"CANCELED", "INTERRUPTED"} else None,
                                  errors=errors)
@@ -96,7 +96,7 @@ class AntigravityMapper:
                 events.append({"type": "notice", "level": "error", "text": errors[0]})
             return events + [mapped]
         if kind == "error":
-            raise ValueError(_clip(event.get("error") or event.get("message") or "Antigravity 输出错误事件", TOOL_RESULT_LIMIT))
+            raise ValueError(_clip(event.get("error") or event.get("message") or "Gemini 输出错误事件", TOOL_RESULT_LIMIT))
         return []
 
     def _step(self, step: dict[str, Any]) -> list[dict[str, Any]]:
@@ -122,7 +122,7 @@ class AntigravityMapper:
         if step.get("step_type") != "tool":
             return []
         info = step.get("tool_info") or {}
-        name = step.get("tool_name") or info.get("name") or "AntigravityTool"
+        name = step.get("tool_name") or info.get("name") or "GeminiTool"
         parameters = info.get("parameters") or {}
         names = {"run_command": "Bash", "write_to_file": "Write", "replace_file_content": "Edit",
                  "multi_replace_file_content": "Edit", "view_file": "Read", "list_dir": "LS",
@@ -154,7 +154,7 @@ class AntigravityMapper:
 def build_command(config: Config, conversation_id: str | None, model: str | None = None) -> list[str]:
     if config.sandbox:
         # agy --sandbox can silently do nothing on unsupported hosts. Do not claim isolation.
-        raise ValueError("Antigravity CLI 无法保证服务器沙箱隔离；当前 SKILL_RUNNER_SANDBOX 要求沙箱，拒绝启动")
+        raise ValueError("Gemini（agy CLI）无法保证服务器沙箱隔离；当前 SKILL_RUNNER_SANDBOX 要求沙箱，拒绝启动")
     command = [str(Path(config.antigravity_bin).expanduser()), "--input-format", "stream-json", "--output-format", "stream-json",
                "--dangerously-skip-permissions", "--print-timeout", "0s"]
     if conversation_id:
@@ -186,7 +186,7 @@ class AntigravitySession:
 
     async def send(self, text: str) -> None:
         if self._closed:
-            raise RuntimeError("Antigravity 会话已关闭")
+            raise RuntimeError("Gemini 会话已关闭")
         await self._inbox.put(text)
 
     @property
@@ -207,7 +207,7 @@ class AntigravitySession:
                 # Neither raw CLI output nor prompt-bearing exceptions go into service logs.
                 logger.warning("antigravity turn failed for run %s (%s)", self._spec.run_id, type(exc).__name__)
                 message = _clip(str(exc), TOOL_RESULT_LIMIT)
-                await self._queue.put({"type": "notice", "level": "error", "text": f"Antigravity 进程出错：{message}"})
+                await self._queue.put({"type": "notice", "level": "error", "text": f"Gemini 进程出错：{message}"})
                 await self._queue.put(self._mapper.result(is_error=True, errors=[message]))
             finally:
                 try:
@@ -265,7 +265,7 @@ class AntigravitySession:
                 try:
                     event = json.loads(line)
                 except ValueError as exc:
-                    raise ValueError("Antigravity 输出了无效的 JSON 事件") from exc
+                    raise ValueError("Gemini 输出了无效的 JSON 事件") from exc
                 for mapped in self._mapper.map(event):
                     if mapped["type"] == "result":
                         terminal = mapped  # Wait for exit before reporting success.
@@ -276,7 +276,7 @@ class AntigravitySession:
             if self._interrupted or code in (-signal.SIGINT, -signal.SIGTERM, 130):
                 terminal = self._mapper.result(is_error=True, subtype="interrupted", errors=["已中断"])
             elif code != 0 or terminal is None:
-                reason = f"Antigravity 退出码 {code}：{stderr[-300:] or '未收到完整的 result 事件'}"
+                reason = f"Gemini 退出码 {code}：{stderr[-300:] or '未收到完整的 result 事件'}"
                 if terminal is None or not terminal["is_error"]:
                     terminal = self._mapper.result(is_error=True, errors=[reason])
             await self._queue.put(terminal)

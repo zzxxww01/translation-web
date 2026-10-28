@@ -57,7 +57,7 @@ def test_config_and_runner_support_antigravity(tmp_path):
     runner = Runner(config, RunStore(config.runs_dir), FakeFactory())
     meta = runner.create("", "问题", "antigravity")
     assert meta.harness == "antigravity"
-    assert harness_label("antigravity") == "Antigravity"
+    assert harness_label("antigravity") == "Gemini"
     with pytest.raises(RunnerError):
         runner.create("", "问题", "unknown")
 
@@ -510,3 +510,18 @@ async def test_app_dispatches_all_harnesses_explicitly(agy, tmp_path, monkeypatc
         assert await runner.session_factory(spec) is factories[harness].last
     with pytest.raises(RunnerError):
         await runner.session_factory(SessionSpec(run_id="x", cwd=tmp_path, resume=None, on_permission=None, harness="unknown"))
+
+
+def test_user_facing_text_calls_it_gemini():
+    import inspect
+    from skill_runner import antigravity_session, models, runner, runtime_updates
+    for module in (antigravity_session, models, runner, runtime_updates):
+        for line in inspect.getsource(module).splitlines():
+            stripped = line.strip()
+            if stripped.startswith("#") or "Antigravity" not in stripped:
+                continue
+            # 只允许类名、文档字符串、英文日志/异常，以及写给模型看的运行环境说明里出现 Antigravity
+            assert any(token in stripped for token in (
+                "class Antigravity", "Antigravity CLI backend", "AntigravityMapper", "AntigravitySession",
+                "Antigravity model output", "Antigravity model discovery", "Antigravity 的审阅界面",
+            )), f"{module.__name__}: {stripped}"

@@ -132,7 +132,8 @@ class _Run:
 
 
 def harness_label(harness: str) -> str:
-    return {"claude": "Claude", "codex": "Codex", "antigravity": "Antigravity"}.get(harness, harness)
+    # 界面上第三个 Agent 叫 Gemini；内部 id 仍是 antigravity（官方 agy CLI）
+    return {"claude": "Claude", "codex": "Codex", "antigravity": "Gemini"}.get(harness, harness)
 
 
 def build_prompt(

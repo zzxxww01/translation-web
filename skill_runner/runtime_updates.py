@@ -40,7 +40,7 @@ def _latest_version(harness: str) -> str:
         system = {"Linux": "linux", "Darwin": "darwin", "Windows": "windows"}.get(platform.system())
         arch = {"x86_64": "amd64", "amd64": "amd64", "arm64": "arm64", "aarch64": "arm64"}.get(platform.machine().lower())
         if not system or not arch:
-            raise ValueError("当前平台无法查询 Antigravity 官方版本")
+            raise ValueError("当前平台无法查询 Gemini（agy CLI）官方版本")
         suffix = "_musl" if system == "linux" and platform.libc_ver()[0] == "musl" else ""
         url = f"{ANTIGRAVITY_RELEASES}/manifests/{system}_{arch}{suffix}.json"
     else:
@@ -93,7 +93,7 @@ class RuntimeUpdates:
                 "update_available": False, "can_update": False, "reason": None,
                 "error": None, "status": "unchecked", "message": None, "updated_at": None,
             }
-            for harness, label in (("claude", "Claude Code"), ("codex", "Codex"), ("antigravity", "Antigravity"))
+            for harness, label in (("claude", "Claude Code"), ("codex", "Codex"), ("antigravity", "Gemini"))
         }
 
     @property
@@ -110,7 +110,7 @@ class RuntimeUpdates:
         if harness == "antigravity":
             binary = getattr(self.config, "antigravity_bin", "agy")
             if not binary:
-                raise ValueError("未配置 Antigravity 可执行程序")
+                raise ValueError("未配置 Gemini（agy CLI）可执行程序")
             return [str(Path(binary).expanduser())]
         if harness == "codex":
             argv = shlex.split(self.config.codex_bin)
@@ -132,7 +132,7 @@ class RuntimeUpdates:
     async def _install_command(self, harness: str, target: str) -> list[str]:
         _valid_version(target)
         if harness == "antigravity":
-            raise ValueError("Antigravity 使用官方 CLI 的自动更新；此处仅检查版本。")
+            raise ValueError("Gemini（agy CLI）使用官方自动更新；此处仅检查版本。")
         argv = self._executable(harness)
         if harness == "claude":
             explicit = getattr(self.config, "claude_bin", None)
