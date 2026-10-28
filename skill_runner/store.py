@@ -4,17 +4,19 @@
     runs/<run_id>/events.jsonl   页面事件，一行一个，只追加；页面重连时从这里回放
     runs/<run_id>/input/         用户上传的文件
     runs/<run_id>/...            其余都是 Claude 的工作目录内容，页面上可下载
+    deleted/<run_id>/            删除的对话原样挪到这里（假删除），deleted/deleted.jsonl 记着删了什么
 """
 
 from __future__ import annotations
 
 import json
+import logging
 import os
 import re
 import secrets
-import shutil
 import time
 from dataclasses import asdict, dataclass
+from datetime import datetime
 from pathlib import Path
 from typing import Any, BinaryIO, Iterable
 
@@ -26,6 +28,11 @@ INPUT_DIR = "input"
 INTERNAL_FILES = {META_FILE, EVENTS_FILE}
 MAX_LISTED_FILES = 2000
 CHUNK = 1024 * 1024
+DELETED_LOG = "deleted.jsonl"
+# 删除记录里最多列这么多个文件；运行目录里装过虚拟环境时文件会很多
+MAX_LOGGED_FILES = 500
+
+logger = logging.getLogger(__name__)
 
 
 class UploadTooLarge(Exception):
@@ -67,8 +74,10 @@ def safe_filename(name: str) -> str:
 
 
 class RunStore:
-    def __init__(self, runs_dir: Path):
+    def __init__(self, runs_dir: Path, deleted_dir: Path | None = None):
         self.runs_dir = runs_dir
+        # 和 runs/ 平级，list_meta / run_dir 都找不到这里，删掉的对话自然从页面上消失
+        self.deleted_dir = deleted_dir or runs_dir.parent / "deleted"
         self.runs_dir.mkdir(parents=True, exist_ok=True)
 
     # ---- 目录与元数据 ----
@@ -126,8 +135,62 @@ class RunStore:
                     metas.append(meta)
         return sorted(metas, key=lambda m: m.created_at, reverse=True)
 
-    def delete(self, run_id: str) -> None:
-        shutil.rmtree(self.run_dir(run_id))
+    def archive(self, run_id: str, *, reason: str, client_ip: str | None = None) -> dict[str, Any]:
+        """假删除：整个运行目录原样挪到 deleted/，再追加一条删除记录。返回这条记录。
+
+        只是同一文件系统上的改名，不复制、不删除任何文件；要找回就挪回 runs/ 再重启服务。
+        """
+        source = self.run_dir(run_id)
+        meta = self.load_meta(run_id)
+        manifest = self._file_manifest(source)
+        self.deleted_dir.mkdir(parents=True, exist_ok=True)
+        target, n = self.deleted_dir / run_id, 0
+        while target.exists():
+            n += 1
+            target = self.deleted_dir / f"{run_id}-{n}"
+        os.rename(source, target)
+        record: dict[str, Any] = {
+            "deleted_at": datetime.now().astimezone().isoformat(timespec="seconds"),
+            "reason": reason,
+            "run_id": run_id,
+            "title": meta.title if meta else None,
+            "skill": meta.skill if meta else None,
+            "harness": meta.harness if meta else None,
+            "model": meta.model if meta else None,
+            "actual_model": meta.actual_model if meta else None,
+            "created_at": meta.created_at if meta else None,
+            "status": meta.status if meta else None,
+            **manifest,
+            "moved_to": str(target),
+            "client_ip": client_ip,
+        }
+        try:
+            with open(self.deleted_dir / DELETED_LOG, "a", encoding="utf-8") as fh:
+                fh.write(json.dumps(record, ensure_ascii=False) + "\n")
+        except OSError:
+            # 目录已经挪走了，删除本身算成功；日志写不进去要在服务日志里留痕
+            logger.exception("deleted run %s but could not append %s", run_id, DELETED_LOG)
+        logger.info("deleted run %s (%s) -> %s: %s", run_id, reason, target, json.dumps(record, ensure_ascii=False))
+        return record
+
+    def _file_manifest(self, root: Path) -> dict[str, Any]:
+        """删除记录里的文件清单：input/ 下是上传的，其余是产出；meta/events 不列。"""
+        inputs: list[dict[str, Any]] = []
+        outputs: list[dict[str, Any]] = []
+        truncated = False
+        for path in sorted(p for p in root.rglob("*") if p.is_file() and not p.is_symlink()):
+            rel = path.relative_to(root).as_posix()
+            if rel in INTERNAL_FILES:
+                continue
+            if len(inputs) + len(outputs) >= MAX_LOGGED_FILES:
+                truncated = True
+                break
+            entry = {"path": rel, "bytes": path.stat().st_size}
+            (inputs if rel.startswith(f"{INPUT_DIR}/") else outputs).append(entry)
+        manifest: dict[str, Any] = {"inputs": inputs, "outputs": outputs}
+        if truncated:
+            manifest["truncated"] = True
+        return manifest
 
     # ---- 事件记录 ----
 
