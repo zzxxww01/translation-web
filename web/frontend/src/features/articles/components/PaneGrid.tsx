@@ -6,6 +6,8 @@ import { rowTextClass } from '../lib/rows';
 import type { PaneId, WorkbenchRow } from '../types';
 import { EditableText, type EditableTextHandle } from './EditableText';
 import { InlineMarkdown } from './InlineMarkdown';
+import type { Tone } from '../lib/versions';
+import { TONE_DOT } from '../lib/tones';
 
 export interface PaneColumn {
   id: PaneId;
@@ -18,6 +20,16 @@ export interface PaneColumn {
   placeholder?: string;
   /** 整段采用或补齐缺译时的来源 */
   adopt?: { label: string; text: (row: WorkbenchRow) => string | null };
+  /** 主译本栏：极浅暖底 + 栏头顶部梅红细线 */
+  primary?: boolean;
+  /** 这一版只读（重翻中、还没出译文） */
+  readOnly?: boolean;
+  /** 收起竖条上的状态圆点 */
+  tone?: Tone;
+  /** 换了版本时整栏重新挂载，编辑框不会带着上一版的草稿 */
+  versionKey?: string;
+  /** 有它就显示它，不显示段落（对照栏没有别的版本时） */
+  empty?: ReactNode;
 }
 
 interface PaneGridProps {
@@ -63,50 +75,47 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readi
   const blocks = readingBlocks(rows);
 
   return (
-    <div ref={container} className="flex min-h-0 flex-1 flex-col overflow-hidden" data-testid="pane-grid">
-      <div className="z-20 grid shrink-0 border-b border-border-subtle bg-bg-primary/95 backdrop-blur" style={{ gridTemplateColumns: template }}>
-        {visible.map(id => (
-          <div key={id} className={cn('min-w-0 border-r border-border-subtle last:border-r-0', isCollapsed(id) && 'bg-bg-tertiary')}>
-            {isCollapsed(id) ? (
-              <button
-                type="button"
-                onClick={() => onToggle(id)}
-                aria-label={`展开${columns[id].title}`}
-                className="flex h-full min-h-[44px] w-full items-start justify-center py-3 text-text-muted hover:text-primary-700"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            ) : (
-              <div className="flex min-h-[44px] items-center gap-1 px-4 py-2">
-                <div className="min-w-0 flex-1">{columns[id].header}</div>
-                {!mobilePane && (
-                  <button
-                    type="button"
-                    onClick={() => onToggle(id)}
-                    aria-label={`收起${columns[id].title}`}
-                    title="收起这一栏"
-                    className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+    <div ref={container} className="flex min-h-0 flex-1 flex-col overflow-hidden md:px-[22px] md:pb-[22px]" data-testid="pane-grid">
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-white md:rounded-[14px] md:shadow-[0_1px_2px_rgba(43,39,48,0.05),0_10px_30px_rgba(43,39,48,0.06)]">
+        <div className="z-20 grid shrink-0 border-b border-border-subtle bg-white" style={{ gridTemplateColumns: template }}>
+          {visible.map(id => (
+            <div key={id} className={cn('relative min-w-0 border-r border-border-subtle last:border-r-0',
+              isCollapsed(id) ? 'bg-bg-tertiary' : columns[id].primary && 'bg-[#fdfaf9] before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-gradient-to-r before:from-primary-300 before:to-primary-500')}>
+              {isCollapsed(id) ? (
+                <button type="button" onClick={() => onToggle(id)} aria-label={`展开${columns[id].title}`}
+                  className="flex h-full min-h-[44px] w-full flex-col items-center gap-2 py-3 text-text-muted hover:text-primary-700">
+                  <ChevronRight className="h-4 w-4" />
+                  {columns[id].tone && <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full', TONE_DOT[columns[id].tone!])} />}
+                </button>
+              ) : (
+                <div className="flex items-start gap-1 px-[22px] pb-4 pt-5 md:px-[26px]">
+                  <div className="min-w-0 flex-1">{columns[id].header}</div>
+                  {!mobilePane && (
+                    <button type="button" onClick={() => onToggle(id)} aria-label={`收起${columns[id].title}`} title="收起这一栏"
+                      className="-mr-2 -mt-1 rounded-lg p-2 text-text-muted hover:bg-[rgba(43,39,48,0.05)] hover:text-text-primary">
+                      <ChevronLeft className="h-4 w-4" />
+                    </button>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
 
-      <div className="grid min-h-0 flex-1" style={{ gridTemplateColumns: template }}>
-        {visible.map(id => isCollapsed(id) ? (
-          <div key={id} className="border-r border-border-subtle bg-bg-tertiary last:border-r-0">
-            <span className="block py-3 text-center text-xs tracking-[0.3em] text-text-muted [writing-mode:vertical-rl]">{columns[id].title}</span>
-          </div>
-        ) : (
-          <article key={id} aria-label={`${columns[id].title}正文`} className="min-w-0 overflow-y-auto overscroll-contain border-r border-border-subtle px-7 pb-24 pt-6 last:border-r-0 md:px-8">
-            {blocks.map(block => <ReadingBlock key={block[0].key} block={block} column={columns[id]}
-              marked={block.some(row => row.key === readingKey)} markBusy={markBusy} onMark={onMark} />)}
-          </article>
-        ))}
+        <div className="grid min-h-0 flex-1" style={{ gridTemplateColumns: template }}>
+          {visible.map(id => isCollapsed(id) ? (
+            <div key={id} className="border-r border-border-subtle bg-bg-tertiary last:border-r-0">
+              <span className="block py-3 text-center text-xs tracking-[0.3em] text-text-muted [writing-mode:vertical-rl]">{columns[id].title}</span>
+            </div>
+          ) : (
+            <article key={`${id}:${columns[id].versionKey ?? ''}`} aria-label={`${columns[id].title}正文`} data-version-fade=""
+              className={cn('min-w-0 overflow-y-auto overscroll-contain border-r border-border-subtle px-[22px] pb-24 pt-6 last:border-r-0 md:px-[30px]',
+                columns[id].primary && 'bg-[#fdfaf9]')}>
+              {columns[id].empty ?? blocks.map(block => <ReadingBlock key={block[0].key} block={block} column={columns[id]}
+                marked={block.some(row => row.key === readingKey)} markBusy={markBusy} onMark={onMark} />)}
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -148,7 +157,7 @@ function ReadingBlock({ block, column, marked, markBusy, onMark }: {
   const canFill = !complete && candidates.length > 0;
   const protectedDraft = protectedIds.size > 0;
   const unavailable = adopting || protectedDraft || candidates.length === 0;
-  const showAdopt = comparison && first.kind !== 'image' && (!complete || candidates.length > 0);
+  const showAdopt = comparison && !column.readOnly && first.kind !== 'image' && (!complete || candidates.length > 0);
   const adoptTitle = protectedDraft ? '请先完成本段编辑并保存，再采用另一版译文'
     : !complete && !canFill ? '对照译文尚未完整，暂时不能采用整段'
     : canFill ? '只补齐本段尚无译文的位置，保留已有译文'
@@ -167,7 +176,8 @@ function ReadingBlock({ block, column, marked, markBusy, onMark }: {
 
   return (
     <div data-reading-block={first.key} data-reading-mark={marked ? 'true' : undefined}
-      className={cn('group/reading relative mx-auto mb-5 max-w-[70ch] scroll-mt-8', marked && 'rounded-sm bg-primary-50/50 ring-1 ring-primary-200/60')}>
+      className={cn('group/reading relative mx-auto mb-5 max-w-[70ch] scroll-mt-8 rounded-md transition-colors [@media(hover:hover)]:hover:bg-[#fcf7f8]',
+        marked && 'before:absolute before:-left-3 before:bottom-1 before:top-1 before:w-0.5 before:rounded-full before:bg-primary-500')}>
       <div data-reading-actions className="pointer-events-none absolute -top-3 right-0 z-10 flex max-w-full -translate-y-1/2 items-center gap-1 text-[11px] leading-5">
         <button type="button" title={marked ? '取消“看到这里”' : '标记：看到这里'}
           aria-label={`${column.title}：从这里继续阅读 — ${first.source.slice(0, 40)}`}
@@ -181,7 +191,7 @@ function ReadingBlock({ block, column, marked, markBusy, onMark }: {
           {adopting ? '正在采用…' : canFill ? `用 ${comparison.label} 补齐本段` : `采用 ${comparison.label} 整段`}
         </button>}
       </div>
-      {inline ? <div className={rowTextClass(first)}>{block.map((row, index) => (
+      {inline ? <div className={rowTextClass(first, column.id === 'source' ? 'en' : 'zh')}>{block.map((row, index) => (
         <Fragment key={row.key}>{column.id === 'source' && index > 0 ? ' ' : null}{cell(row)}</Fragment>
       ))}</div> : cell(first)}
     </div>
@@ -195,7 +205,7 @@ function Cell({ row, column, inline = false, editorRef, onProtectionChange }: {
   editorRef?: Ref<EditableTextHandle>;
   onProtectionChange?: (id: string, protectedDraft: boolean) => void;
 }) {
-  const textClass = rowTextClass(row);
+  const textClass = rowTextClass(row, column.id === 'source' ? 'en' : 'zh');
   // 图片三栏都显示（译文里的图就是原文的图），也让三栏在图片处对齐
   if (row.kind === 'image') {
     return row.image ? <img src={row.image} alt="" loading="lazy" className="my-2 max-h-72 w-auto max-w-full rounded border border-border-subtle" /> : null;
@@ -219,6 +229,7 @@ function Cell({ row, column, inline = false, editorRef, onProtectionChange }: {
         onProtectionChange={onProtectionChange}
         className={inline ? (!value?.trim() ? 'mx-1 text-xs' : undefined) : 'min-w-0 flex-1'}
         inline={inline}
+        readOnly={column.readOnly}
       />;
   if (inline) return editable;
   return (

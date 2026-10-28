@@ -457,3 +457,12 @@
     background: linear-gradient(135deg, var(--color-primary-mid), var(--color-primary-end));
   }
 }
+
+@keyframes workbench-version-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-version-fade] { animation: workbench-version-fade 200ms ease-out; }
+}
