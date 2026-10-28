@@ -646,6 +646,30 @@ describe('Workbench', () => {
     expect(buttonIn(compare, '开始翻译')).toBeDefined();
   });
 
+  it('cross-fades the two columns when the primary is swapped, but not when switching compare tabs', async () => {
+    const animate = vi.fn();
+    // jsdom 没有 Web Animations
+    Object.defineProperty(HTMLElement.prototype, 'animate', { value: animate, configurable: true });
+    try {
+      api.workbench.mockResolvedValue(WITH_CODEX);
+      await render(<Workbench projectId="p1" />);
+      await flush();
+      expect(animate).not.toHaveBeenCalled();
+      const tabs = Array.from(host.querySelectorAll('[role="tablist"][aria-label="对照版本"] [role="tab"]'));
+      expect(tabs.map(tab => tab.textContent)).toEqual(['Codex', 'argon']);
+      expect(host.querySelector('[role="tablist"] button[aria-label="用 Agent 再翻一版"]')).toBeNull(); // ＋ 不是标签
+      await act(async () => { (tabs[1] as HTMLElement).click(); });
+      await flush();
+      expect(host.querySelector('[aria-label="对照正文"]')!.textContent).toContain('前言');
+      expect(animate).not.toHaveBeenCalled();
+      await act(async () => { buttonIn(host, '设为主译本').click(); });
+      await flush();
+      expect(animate).toHaveBeenCalledTimes(2);
+    } finally {
+      delete (HTMLElement.prototype as { animate?: unknown }).animate;
+    }
+  });
+
   it('rolls back and reports when saving the primary fails, and exports the new primary after a swap', async () => {
     api.workbench.mockResolvedValue(WITH_CODEX);
     api.setPrimary.mockRejectedValueOnce(new Error('存不上'));

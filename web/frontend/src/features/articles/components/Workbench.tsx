@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { Plus, RefreshCw, Star } from 'lucide-react';
+import { RefreshCw, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { harnessLabel } from '@/features/skills/harness';
@@ -15,6 +15,7 @@ import { AlignmentTooLow, importClaudeTrack, startClaudeTrack } from '../lib/cla
 import { flushEdits, unsavedEdits } from '../lib/edits';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { sectionsWithMissing } from '../lib/tracks';
+import { FOCUS_RING, MEASURE, STROKE } from '../lib/ui';
 import { buildVersions, defaultCompare, pickPrimary, runActive, type ImportProblem, type VersionAction, type VersionView } from '../lib/versions';
 import type { PaneId, Workbench as WorkbenchData, WorkbenchRow } from '../types';
 import { ChangesDrawer, type ChangesTarget } from './ChangesDrawer';
@@ -25,8 +26,8 @@ import { SaveStatus } from './SaveStatus';
 import { StatusLine } from './StatusLine';
 import { TrackDrawer, type DrawerState } from './TrackDrawer';
 import { AddAgentPopover, RetranslatePopover } from './TranslatePopovers';
-import { IconAction, VersionHeader, VersionName } from './VersionHeader';
-import { VersionTabs } from './VersionTabs';
+import { IconAction, PlainLine, VersionName } from './VersionHeader';
+import { AddVersionButton, VersionTabs } from './VersionTabs';
 import { WorkbenchTopBar } from './WorkbenchTopBar';
 
 function useIsMobile(): boolean {
@@ -328,32 +329,37 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const retranslate = (version: VersionView) => version.translate === 'retranslate' && version.harness ? (
     <RetranslatePopover projectId={project.id} version={version} stopping={stopping} busy={busy}
       error={startError} onOpen={() => setStartError(null)} onConfirm={model => startAgent({ harness: version.harness!, model })}>
-      <IconAction label="重新翻译"><RefreshCw className="h-4 w-4" /></IconAction>
+      <IconAction label="重新翻译" className="data-[state=open]:bg-ink-wash data-[state=open]:text-text-primary">
+        <RefreshCw aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+      </IconAction>
     </RetranslatePopover>
   ) : null;
 
   const placeholder = (version: VersionView) => version.tone === 'busy' ? '翻译中…' : '还没有译文，可以直接写';
   /** 还没有译文的版本：整栏只说一句，不在每段重复 */
   const pendingNote = (version: VersionView) => version.pending
-    ? <p className="py-10 text-center text-[13px] text-text-muted">译文还没出来</p> : undefined;
+    ? <p className={cn(MEASURE, 'pt-1 text-[15px] text-text-disabled [font-family:var(--font-display)]')}>译文还没出来</p> : undefined;
+  /** 同一版整篇换过（重翻导入）时变：PaneGrid 只在这时淡入 */
+  const contentKey = (version: VersionView) => version.pending ? 'pending' : version.variant?.import?.imported_at ?? '';
 
   const columns: Record<PaneId, PaneColumn> = {
     source: {
       id: 'source',
       title: '英文',
-      header: <VersionHeader eyebrow="原文" title={<VersionName english>English</VersionName>}
-        line={<p className="mt-1.5 text-[12px] text-text-muted">{words.toLocaleString('en-US')} 词</p>} />,
+      header: { eyebrow: '原文', title: <VersionName english>English</VersionName>,
+        line: <PlainLine>{words.toLocaleString('en-US')} 词</PlainLine> },
     },
     main: {
       id: 'main',
       title: '主译本',
       primary: true,
       versionKey: primary.id,
+      contentKey: contentKey(primary),
       tone: primary.tone,
       readOnly: primary.readOnly,
-      header: <VersionHeader primary eyebrow="主译本" title={<VersionName>{primary.name}</VersionName>}
-        line={<StatusLine version={primary} onAction={action => onAction(primary, action)} />}
-        actions={<>{retranslate(primary)}<ColumnMenu label="主译本的更多操作" items={menuFor(primary)} /></>} />,
+      header: { primary: true, eyebrow: '主译本', title: <VersionName>{primary.name}</VersionName>,
+        line: <StatusLine version={primary} onAction={action => onAction(primary, action)} />,
+        actions: <>{retranslate(primary)}<ColumnMenu label="主译本的更多操作" items={menuFor(primary)} /></> },
       text: primary.text,
       save: (row, text) => save(primary.id, row, text),
       placeholder: placeholder(primary),
@@ -364,27 +370,27 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       id: 'compare',
       title: '对照',
       versionKey: compare.id,
+      contentKey: contentKey(compare),
       tone: compare.tone,
       readOnly: compare.readOnly || compare.pending,
-      header: <VersionHeader eyebrow="对照"
-        title={<VersionTabs versions={others} value={compare.id} onChange={id => void switchCompare(id)} forceMenu={isMobile}
+      header: { eyebrow: '对照',
+        title: <VersionTabs versions={others} value={compare.id} onChange={id => void switchCompare(id)} forceMenu={isMobile}
           add={addable.length ? (
             <AddAgentPopover options={addable} stopping={stopping} busy={busy} error={startError} onOpen={() => setStartError(null)} onConfirm={startAgent}>
-              <button type="button" aria-label="用 Agent 再翻一版" title="用 Agent 再翻一版"
-                className="inline-flex items-center rounded-full px-2.5 py-1 text-primary-700 hover:bg-white/70"><Plus className="h-3.5 w-3.5" /></button>
+              <AddVersionButton />
             </AddAgentPopover>
-          ) : null} />}
-        line={<StatusLine version={compare} onAction={action => onAction(compare, action)} />}
-        actions={<>
+          ) : null} />,
+        line: <StatusLine version={compare} onAction={action => onAction(compare, action)} />,
+        actions: <>
           {retranslate(compare)}
           {!compare.pending && (
             <button type="button" onClick={() => void makePrimary(compare)}
-              className="inline-flex h-8 items-center gap-1.5 whitespace-nowrap rounded-full px-2.5 text-[12.5px] text-primary-700 hover:bg-primary-50">
-              <Star className="h-3.5 w-3.5" />设为主译本
+              className={cn('mr-0.5 inline-flex h-8 items-center gap-1.5 whitespace-nowrap rounded-lg px-2.5 text-[12.5px] font-medium text-primary-700 transition-colors hover:bg-primary-50', FOCUS_RING)}>
+              <Star aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} />设为主译本
             </button>
           )}
           <ColumnMenu label="对照的更多操作" items={menuFor(compare)} />
-        </>} />,
+        </> },
       text: compare.text,
       save: (row, text) => save(compare.id, row, text),
       placeholder: placeholder(compare),
@@ -393,8 +399,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     } : {
       id: 'compare',
       title: '对照',
-      header: <VersionHeader eyebrow="对照" title={<VersionName>还没有别的版本</VersionName>}
-        line={<p className="mt-1.5 text-[12px] text-text-muted">用 Agent 翻一版，就能左右对照</p>} />,
+      header: { eyebrow: '对照', title: <VersionName>还没有别的版本</VersionName>,
+        line: <PlainLine>用 Agent 翻一版，就能左右对照</PlainLine> },
       text: () => null,
       save: async () => undefined,
       readOnly: true,
@@ -417,16 +423,16 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     <div className="flex h-full min-h-0 flex-col bg-bg-primary">
       <WorkbenchTopBar title={title} original={title !== project.title ? project.title : null}
         onShowList={onShowList} onBack={() => navigate('/articles')}
-        save={<SaveStatus saving={saving} onSave={() => void saveNow()} />}
+        save={<SaveStatus saving={saving} onSave={() => void saveNow()} compact={isMobile} />} compact={isMobile}
         mark={markText} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
         onExportPrimary={() => void exportVersion(primary.id, 'zh')} exportItems={exportItems}
         legacyHref={`/document/${project.id}`} originalUrl={project.original_url} />
 
       {isMobile && (
-        <div className="mx-4 mb-2 grid grid-cols-3 rounded-full bg-[#f5eff1] p-[3px] text-[13px]" role="tablist" aria-label="切换栏">
+        <div className="mx-4 mb-3 grid grid-cols-3 gap-0.5 rounded-full bg-bg-inset p-[3px] text-[13px]" role="tablist" aria-label="切换栏">
           {PANES.map(id => (
             <button key={id} type="button" role="tab" aria-selected={mobilePane === id} onClick={() => setMobilePane(id)}
-              className={cn('rounded-full py-1', mobilePane === id ? 'bg-white text-text-primary shadow-sm' : 'text-text-muted')}>
+              className={cn('h-8 rounded-full', FOCUS_RING, mobilePane === id ? 'bg-bg-secondary font-medium text-text-primary shadow-thumb' : 'text-text-muted')}>
               {columns[id].title}
             </button>
           ))}
