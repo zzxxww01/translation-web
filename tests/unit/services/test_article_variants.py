@@ -280,7 +280,8 @@ async def test_workbench_reports_and_changes_the_primary_version(pm, main_id):
         pm, main_id, zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent="codex", model="gpt-5.5")["variant_id"]
 
     data = await workbench.get_workbench(main_id, pm, FakeStatus())
-    assert data["project"]["primary_target"] is None
+    # 旧数据（有 Agent 版却没存过主译本）：第一次打开就把当时显示的那一版记下来
+    assert data["project"]["primary_target"] == variant
     assert data["project"]["primary"] == variant  # 网页版没开始，默认是刚导入的 Agent 版
     assert data["variants"][0]["import"]["model"] == "gpt-5.5"
 
@@ -314,3 +315,68 @@ async def test_import_endpoint_reports_mismatched_draft_as_conflict(pm, main_id)
     assert caught.value.error_code == "ALIGNMENT_LOW" and "可能不是这篇下载的原文" in caught.value.detail
     forced = await workbench.import_claude_variant(_request("POST"), main_id, body.model_copy(update={"force": True}), pm)
     assert forced["variant_id"] == f"{main_id}--codex"
+
+
+def _start_web(pm, main_id):
+    section_id, first = _body_paragraphs(pm, main_id)[0]
+    pm.confirm_paragraph(main_id, section_id, first.id, "网页版里手写的一段")
+
+
+def _import_body(agent):
+    return workbench.ImportClaudeRequest(zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent=agent)
+
+
+@pytest.mark.asyncio
+async def test_first_agent_import_is_pinned_and_later_changes_do_not_move_the_primary(pm, main_id):
+    codex = (await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm))["variant_id"]
+    assert pm.get(main_id).primary_target == codex  # 网页版还没开始：主译本就是这一版，并且记下来
+
+    await workbench.import_claude_variant(_request("POST"), main_id, _import_body("claude"), pm)
+    _start_web(pm, main_id)  # 再加一个 Agent 版、在网页版里写一段，都不该让主译本自己换
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert (data["project"]["primary_target"], data["project"]["primary"]) == (codex, codex)
+
+
+@pytest.mark.asyncio
+async def test_agent_import_keeps_a_started_web_version_as_primary(pm, main_id):
+    _start_web(pm, main_id)
+    await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm)
+    assert pm.get(main_id).primary_target == main_id
+
+
+@pytest.mark.asyncio
+async def test_agent_import_never_overrides_an_explicit_primary(pm, main_id):
+    codex = (await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm))["variant_id"]
+    await workbench.set_primary(main_id, workbench.PrimaryRequest(target=main_id), pm)
+    await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm)  # 重新翻译
+    assert pm.get(main_id).primary_target == main_id
+    assert codex in [v.id for v in article_variants.list_variants(pm, main_id)]
+
+
+@pytest.mark.asyncio
+async def test_workbench_without_agent_versions_does_not_pin_anything(pm, main_id):
+    _start_web(pm, main_id)
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert (data["project"]["primary_target"], data["project"]["primary"]) == (None, main_id)
+
+
+def test_new_variant_does_not_inherit_the_primary_pointer(pm, main_id):
+    pm.merge_meta_fields(main_id, fields={"primary_target": main_id})
+    variant = article_variants.create_variant(pm, main_id, kind="claude", label="Codex", suffix="codex")
+    assert pm.get(variant).primary_target is None
+
+
+@pytest.mark.asyncio
+async def test_workbench_skips_a_variant_that_vanishes_while_loading(pm, main_id, monkeypatch):
+    # 重新翻译导入时孪生项目目录会先删后建；这时打开工作台不该整页 404
+    variant = article_variants.create_variant(pm, main_id, kind="claude", label="Codex", suffix="codex")
+    real_get = pm.get
+
+    def flaky_get(project_id):
+        if project_id == variant:
+            raise FileNotFoundError(project_id)
+        return real_get(project_id)
+
+    monkeypatch.setattr(pm, "get", flaky_get)
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert data["variants"] == []

@@ -158,16 +158,26 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
         meta = pm.get(project_id)
         if meta.variant_of:
             raise BadRequestException(detail="这是译本 2 的孪生项目，请打开它的主项目", error_code="IS_VARIANT")
+        summaries = article_variants.list_variants(pm, project_id)
+        if meta.primary_target is None and summaries:
+            article_primary.pin_existing_default(pm, project_id)
+            meta = pm.get(project_id)
         sections = pm.get_sections(project_id)
-        variant_metas = [pm.get(v.id) for v in article_variants.list_variants(pm, project_id)]
-        variant_sections = {v.id: pm.get_sections(v.id) for v in variant_metas}
+        variant_metas, variant_sections = [], {}
+        for summary in summaries:
+            try:  # 重新翻译导入时孪生项目目录先删后建，正好赶上就当它暂时不在
+                variant_meta, variant_sections[summary.id] = pm.get(summary.id), pm.get_sections(summary.id)
+            except FileNotFoundError:
+                continue
+            variant_metas.append(variant_meta)
         imports = {v.id: article_variants.read_import_record(pm, v.id) for v in variant_metas if v.variant_kind == "claude"}
         rows = _build_rows(project_id, sections, variant_sections)
         mark = _read_mark(pm, project_id, {row["key"] for row in rows})
-        return meta, variant_metas, imports, rows, mark
+        started = article_primary.main_started(pm, project_id)
+        return meta, variant_metas, imports, rows, mark, started
 
     try:
-        meta, variant_metas, imports, rows, mark = await run_blocking(load)
+        meta, variant_metas, imports, rows, mark, main_started = await run_blocking(load)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
 
@@ -184,7 +194,6 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "import": imports.get(variant.id),
         })
     original_url = meta.metadata.original_url if meta.metadata else None
-    main_started = main_status["active"] or any(row["web"] for row in rows)
     primary = await run_blocking(
         article_primary.resolve_primary, pm, project_id, [v.id for v in variant_metas],
         primary_target=meta.primary_target, main_started=main_started)
@@ -335,7 +344,7 @@ async def import_claude_variant(request: Request, project_id: str, body: ImportC
     _check_id(project_id)
     try:
         result = await run_blocking(
-            article_variants.import_claude_translation, pm, project_id,
+            article_primary.import_agent_version, pm, project_id,
             zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, run_id=body.run_id, agent=body.agent,
             model=body.model, force=body.force)
     except FileNotFoundError:

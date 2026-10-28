@@ -165,10 +165,8 @@ def _translation_state(pm: ProjectManager, project_id: str, variant_ids: List[st
     if main is None:
         return "not_imported", 0  # 列清单和这里之间项目被删了
     main_done, main_percent = main
-    # 和工作台一样：网页版翻过一段（不到 1% 也算）或正在翻，就算开始了
-    main_started = main_done > 0 or translation_run_registry.get_active_run(project_id) is not None
     primary = article_primary.resolve_primary(pm, project_id, variant_ids, primary_target=primary_target,
-                                              main_started=main_started)
+                                              main_started=article_primary.started(project_id, main_done))
     percent = main_percent if primary == project_id else (_progress(pm, primary) or (0, 0))[1]
     active = translation_run_registry.get_active_run(primary)
     if active is not None:

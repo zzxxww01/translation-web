@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import re
 import shutil
+import threading
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -31,6 +32,16 @@ _EXPORT_SUFFIXES = ("_zh.md", "_zh.blocked.md", "_en.md", "_bilingual.md")
 # 多半不是这篇下载的原文（设计文档 8.2）。10-25 Codex 那次是 61/61 全对上。
 MIN_ALIGNED_RATIO = 0.8
 AGENT_LABELS = {"claude": "Claude", "codex": "Codex", "antigravity": "Gemini"}
+
+
+# 同一篇文章的导入排队做：孪生项目是先删后建的，两个标签页同时自动导入会互相删掉对方刚建的目录
+_variant_locks: Dict[str, threading.RLock] = {}
+_variant_locks_guard = threading.Lock()
+
+
+def variant_lock(main_id: str) -> threading.RLock:
+    with _variant_locks_guard:
+        return _variant_locks.setdefault(main_id, threading.RLock())
 
 
 class AlignmentTooLow(ValueError):
@@ -100,6 +111,7 @@ def create_variant(pm: ProjectManager, main_id: str, *, kind: str, label: str, s
             "variant_kind": kind,
             "variant_label": label,
             "claude_run_id": None,
+            "primary_target": None,
             "status": ProjectStatus.CREATED,
             "versions": [],
             "confirmation_map": {},
@@ -131,6 +143,13 @@ def import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown: 
                               model: Optional[str] = None, force: bool = False) -> Dict:
     """把 four-step-translate 产出的 zh.md 对齐后写进该 Agent 对应的孪生项目
     （已有就整篇替换），返回对齐统计。英文稿对不上下载的原文时抛 AlignmentTooLow，force=True 时照样导入。"""
+    with variant_lock(main_id):
+        return _import_claude_translation(pm, main_id, zh_markdown=zh_markdown, en_markdown=en_markdown,
+                                          run_id=run_id, agent=agent, model=model, force=force)
+
+
+def _import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown: str, en_markdown: str,
+                               run_id: Optional[str], agent: str, model: Optional[str], force: bool) -> Dict:
     sections = pm.get_sections(main_id)
     targets = alignment_targets(sections)
     alignment: Alignment = align_claude_translation(en_markdown, zh_markdown, targets)
