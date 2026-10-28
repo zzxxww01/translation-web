@@ -118,6 +118,15 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
 没有就第一个）；带标记结束的一轮则自动发一条「按你推荐的方案确认、继续」。每个任务最多自动 3 次，
 到时间点记在 `auto_reply_at`，服务重启后照旧接着排。
 
+## 删除与找回
+
+页面上「删除」对话是假删除：整个运行目录从 `~/skill-runner/runs/<id>` 原样挪到 `~/skill-runner/deleted/<id>`
+（同名已存在时加 `-1`、`-2`），文件一个不少。每次删除往 `~/skill-runner/deleted/deleted.jsonl` 追加一行，
+记着删除时间、原因（`user` 页面删除 / `upload_failed` 创建时上传失败）、标题、Agent、模型、上传和产出的文件清单、
+存档路径和来源 IP；同一条也在服务日志里：`journalctl --user -u skill-runner | grep "deleted run"`。
+
+找回：`mv ~/skill-runner/deleted/<id> ~/skill-runner/runs/` 后 `systemctl --user restart skill-runner`。
+
 ## 安全边界
 
 - 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（记一年，每天第一次用时自动续期，一直在用就不用再输口令），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。
