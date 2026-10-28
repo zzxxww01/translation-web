@@ -9,6 +9,7 @@
     /* 字体系统 */
     /* 标题用自托管思源宋体（按 unicode-range 分片，只下载用到的字），正文无衬线 */
     --font-display: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    --font-source: "Source Serif 4 Variable", "Source Serif 4", Georgia, "Times New Roman", serif;
     --font-body: "Inter Variable", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
     --font-chinese: var(--font-body);
     --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
