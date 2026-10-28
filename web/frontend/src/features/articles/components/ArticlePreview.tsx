@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 import { isCookieError, type SubstackArticle } from '@/features/substack/api';
 import { CookieForm } from '@/features/substack/components/CookieForm';
 import type { Harness } from '@/features/skills/harness';
-import { ARTICLE_HARNESSES } from '../lib/agentOptions';
+import { ARTICLE_HARNESSES } from '../lib/agentChoice';
 import { importAndTranslate, runsAgent, type ImportPlan } from '../lib/importFlow';
 import { ArticleAgentChoice } from './ArticleAgentChoice';
 

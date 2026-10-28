@@ -1,3 +1,5 @@
+import type { Harness } from '@/features/skills/harness';
+
 /** 一路翻译（主项目或孪生项目）在后台的运行状态，来自 translation-status。 */
 export interface TrackStatus {
   active: boolean;
@@ -16,12 +18,19 @@ export interface WorkbenchProject {
   original_url: string | null;
   created_at: string;
   claude_run_id: string | null;
+  /** 用户选的主译本（主项目或孪生项目 id）；null = 没选过 */
+  primary_target?: string | null;
+  /** 实际的主译本：选过的那个，或后端按默认规则算出的（services/article_primary.py） */
+  primary?: string;
   progress: { total: number; approved: number };
   status: TrackStatus;
 }
 
 export interface ClaudeImportRecord {
   run_id: string | null;
+  /** 跑这一版的 Agent；旧记录没有，用 label 反推 */
+  agent?: Harness;
+  model?: string | null;
   aligned: number;
   unaligned: number;
   merged_blocks: number;
@@ -65,7 +74,7 @@ export interface Workbench {
   reading_mark?: { key: string; at: string } | null;
 }
 
-export type PaneId = 'source' | 'web' | 'alt';
+export type PaneId = 'source' | 'main' | 'compare';
 
 export type DiffSegment = { op: 'equal' | 'insert' | 'delete'; text: string };
 

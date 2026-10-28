@@ -1,7 +1,7 @@
 import { useId } from 'react';
 import { cn } from '@/lib/utils';
 import type { Harness } from '@/features/skills/harness';
-import { ARTICLE_HARNESSES } from '../lib/agentOptions';
+import { ARTICLE_HARNESSES } from '../lib/agentChoice';
 
 export function ArticleAgentChoice({ value, onChange, disabled = false }: {
   value: Harness;

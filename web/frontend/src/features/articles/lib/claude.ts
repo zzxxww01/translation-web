@@ -1,7 +1,8 @@
 import { AUTO_REPLY_MINUTES, fileUrl, skillsApi, startRun } from '@/features/skills/api';
-import type { Harness } from '@/features/skills/harness';
 import type { RunFile, RunMeta } from '@/features/skills/types';
+import { ApiErrorWrapper } from '@/shared/api/client';
 import { articlesApi } from '../api';
+import type { AgentChoice } from './agentChoice';
 
 export const CLAUDE_SKILL = 'four-step-translate';
 const CLAUDE_MESSAGE =
@@ -9,7 +10,7 @@ const CLAUDE_MESSAGE =
 
 export class NoClaudeOutput extends Error {
   constructor() {
-    super('这次没有找到同一目录下的 zh.md 和 en.md，请在 Agent 对话中确认翻译已完成并按这两个文件名保存。');
+    super('没找到同一目录下的 zh.md 和 en.md');
     this.name = 'NoClaudeOutput';
   }
 }
@@ -26,12 +27,24 @@ export function findClaudeOutputs(files: RunFile[]): { zh: string; en: string } 
   return null;
 }
 
-/** 把原文交给翻译 Agent 跑 four-step-translate，并记下这篇文章对应的对话。title 是对话标题（文章标题）。 */
-export async function startClaudeTrack(projectId: string, harness: Harness = 'claude', title?: string): Promise<RunMeta> {
+/** 把下载好的原文 HTML 交给所选 Agent 跑 four-step-translate，并记下这篇文章对应的对话。 */
+export async function startClaudeTrack(projectId: string, choice: AgentChoice, title?: string): Promise<RunMeta> {
   const html = await articlesApi.sourceHtml(projectId);
-  const run = await startRun({ skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html], harness, autoReplyMinutes: AUTO_REPLY_MINUTES, title });
+  const model = choice.model.trim();
+  const run = await startRun({
+    skill: CLAUDE_SKILL, message: CLAUDE_MESSAGE, files: [html], harness: choice.harness,
+    ...(model ? { model } : {}), autoReplyMinutes: AUTO_REPLY_MINUTES, title,
+  });
   await articlesApi.setClaudeRun(projectId, run.id);
   return run;
+}
+
+/** 后端 409：Agent 的英文稿和下载的原文对不上（多半不是这篇），可以「仍然导入」。 */
+export class AlignmentTooLow extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'AlignmentTooLow';
+  }
 }
 
 async function readText(runId: string, path: string): Promise<string> {
@@ -40,10 +53,18 @@ async function readText(runId: string, path: string): Promise<string> {
   return response.text();
 }
 
-/** 从任务取回 zh.md / en.md，对齐后存成该 Agent 对应的译本。 */
-export async function importClaudeTrack(projectId: string, runId: string, harness: Harness = 'claude') {
-  const outputs = findClaudeOutputs(await skillsApi.files(runId));
+/** 从任务取回 zh.md / en.md，对齐后存成该 Agent 对应的那一版；记下 Agent 和实际模型。 */
+export async function importClaudeTrack(projectId: string, run: RunMeta, force = false) {
+  const outputs = findClaudeOutputs(await skillsApi.files(run.id));
   if (!outputs) throw new NoClaudeOutput();
-  const [zh, en] = await Promise.all([readText(runId, outputs.zh), readText(runId, outputs.en)]);
-  return articlesApi.importClaude(projectId, { run_id: runId, zh_markdown: zh, en_markdown: en, agent: harness });
+  const [zh, en] = await Promise.all([readText(run.id, outputs.zh), readText(run.id, outputs.en)]);
+  try {
+    return await articlesApi.importClaude(projectId, {
+      run_id: run.id, zh_markdown: zh, en_markdown: en, agent: run.harness ?? 'claude',
+      model: run.actual_model ?? run.model ?? null, force,
+    });
+  } catch (error) {
+    if (error instanceof ApiErrorWrapper && error.status === 409) throw new AlignmentTooLow(error.message);
+    throw error;
+  }
 }
