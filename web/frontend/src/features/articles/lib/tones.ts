@@ -6,5 +6,5 @@ export const TONE_DOT: Record<Tone, string> = {
   busy: 'bg-info shadow-[0_0_0_3px_var(--color-info-light)]',
   wait: 'bg-warning',
   error: 'bg-error',
-  idle: 'bg-border',
+  idle: 'bg-text-disabled',
 };

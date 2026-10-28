@@ -3,7 +3,11 @@
  */
 
 import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { extendTailwindMerge } from 'tailwind-merge';
+
+// fluid-theme.css @theme 里自定义的阴影（shadow-paper 等）。不登记的话 tailwind-merge 会把它们当成阴影颜色，
+// 和组件默认的 shadow-md 同时留下，最后谁生效看 CSS 顺序。
+const twMerge = extendTailwindMerge({ extend: { theme: { shadow: ['paper', 'pop', 'plum', 'thumb'] } } });
 
 /**
  * 合并className的工具函数

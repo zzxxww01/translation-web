@@ -5,6 +5,7 @@ import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '
 import { articlesApi, downloadText, HUMAN_EDITS_URL } from '../api';
 import { articleKeys } from '../hooks';
 import { changesMarkdown } from '../lib/changes';
+import { STROKE } from '../lib/ui';
 import type { DiffSegment } from '../types';
 
 export interface ChangesTarget {
@@ -50,7 +51,7 @@ function ChangesList({ state }: { state: ChangesTarget }) {
           disabled={!report.changed}
           onClick={() => downloadText(`${state.target}-人工改动.md`, changesMarkdown(`${state.title}（${state.label}）`, report))}
         >
-          <Download /> 下载这篇
+          <Download strokeWidth={STROKE} /> 下载这篇
         </Button>
         <a href={HUMAN_EDITS_URL} className="text-xs text-primary-700 hover:underline" title="所有文章、所有版本，一行一段（JSONL）">
           全部文章的改动

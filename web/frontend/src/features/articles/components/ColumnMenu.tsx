@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { MoreHorizontal } from 'lucide-react';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { FOCUS_RING, STROKE } from '../lib/ui';
 import { IconAction } from './VersionHeader';
 
 export interface MenuItem {
@@ -15,12 +17,14 @@ export function ColumnMenu({ label, items }: { label: string; items: MenuItem[] 
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
-        <IconAction label={label}><MoreHorizontal className="h-4 w-4" /></IconAction>
+        <IconAction label={label} className="data-[state=open]:bg-ink-wash data-[state=open]:text-text-primary">
+          <MoreHorizontal aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+        </IconAction>
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-48 rounded-xl border-border-subtle p-1.5 shadow-[0_12px_32px_rgba(43,39,48,0.14)]">
+      <PopoverContent align="end" sideOffset={6} className="wb-pop w-52 rounded-xl border-0 p-1.5 shadow-pop">
         {items.map(item => (
           <button key={item.label} type="button" onClick={() => { setOpen(false); item.onSelect(); }}
-            className="block w-full rounded-md px-2.5 py-1.5 text-left text-[13px] text-text-secondary hover:bg-bg-hover hover:text-text-primary">
+            className={cn('block w-full rounded-lg px-2.5 py-2 text-left text-[13px] text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary', FOCUS_RING, 'focus-visible:-outline-offset-2')}>
             {item.label}
           </button>
         ))}

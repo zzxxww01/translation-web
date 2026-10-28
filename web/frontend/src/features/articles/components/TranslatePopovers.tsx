@@ -7,17 +7,23 @@ import { articlesApi } from '../api';
 import { articleKeys } from '../hooks';
 import { loadAgentChoice, rememberedModel, type AgentChoice } from '../lib/agentChoice';
 import type { VersionView } from '../lib/versions';
-import { AgentChoiceFields } from './AgentCards';
+import { cn } from '@/lib/utils';
+import { FOCUS_RING, PRIMARY_BUTTON, STROKE } from '../lib/ui';
+import { AgentChoiceFields, FieldLabel } from './AgentCards';
 import { ModelList } from './ModelList';
 
-const CONTENT = 'w-[320px] rounded-[14px] border-0 p-[18px] shadow-[0_0_0_1px_rgba(43,39,48,0.06),0_18px_48px_rgba(43,39,48,0.16)]';
+/** 宽 320、圆角 14、阴影比纸张深一级（设计文档 6.5）；超出屏幕高度时内部滚动 */
+const CONTENT = 'wb-pop w-[320px] max-w-[calc(100vw-24px)] max-h-[var(--radix-popover-content-available-height)] overflow-y-auto rounded-[14px] border-0 p-[18px] shadow-pop';
 
-function Warning({ children }: { children: ReactNode }) {
+/** 有几条警告写几句，但只用一个框：两个黄框叠在一起太重 */
+function Warnings({ items }: { items: (string | false | null | undefined)[] }) {
+  const lines = items.filter((item): item is string => Boolean(item));
+  if (!lines.length) return null;
   return (
-    <p className="mt-3.5 flex gap-2 rounded-[10px] bg-warning-light px-3 py-2.5 text-[12px] leading-relaxed text-[#7a520f]">
-      <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
-      <span>{children}</span>
-    </p>
+    <div className="mt-3.5 flex gap-2 rounded-[10px] bg-warning-light px-3 py-2.5 text-[12px] leading-relaxed text-warning-text">
+      <AlertCircle aria-hidden className="mt-[3px] h-3.5 w-3.5 shrink-0" strokeWidth={STROKE} />
+      <div className="space-y-1">{lines.map(line => <p key={line}>{line}</p>)}</div>
+    </div>
   );
 }
 
@@ -26,14 +32,14 @@ function Shell({ title, sub, children, confirmLabel, busy, onCancel, onConfirm }
 }) {
   return (
     <>
-      <h4 className="text-[15.5px] font-semibold text-text-primary [font-family:var(--font-display)]">{title}</h4>
-      <p className="mb-3.5 mt-0.5 text-[12px] text-text-muted">{sub}</p>
+      <h4 className="text-[15.5px] font-semibold leading-snug text-text-primary [font-family:var(--font-display)]">{title}</h4>
+      <p className="mb-4 mt-1 text-[12px] leading-5 text-text-muted">{sub}</p>
       {children}
-      <div className="mt-4 flex justify-end gap-2">
-        <button type="button" onClick={onCancel} className="h-[34px] rounded-full px-3.5 text-[13px] text-text-secondary hover:bg-bg-hover">取消</button>
-        <button type="button" disabled={busy} onClick={onConfirm}
-          className="inline-flex h-[34px] items-center gap-1.5 rounded-full bg-primary-500 px-4 text-[13px] font-medium text-white shadow-[0_1px_2px_rgba(116,42,79,0.25),0_4px_12px_rgba(163,61,112,0.18)] hover:bg-primary-600 disabled:opacity-60">
-          {busy && <Loader2 className="h-3.5 w-3.5 animate-spin" />}
+      <div className="mt-[18px] flex justify-end gap-1.5">
+        <button type="button" onClick={onCancel}
+          className={cn('h-[34px] rounded-full px-3.5 text-[13px] text-text-secondary transition-colors hover:bg-ink-wash hover:text-text-primary', FOCUS_RING)}>取消</button>
+        <button type="button" disabled={busy} onClick={onConfirm} className={cn(PRIMARY_BUTTON, 'h-[34px] px-[18px] text-[13px]')}>
+          {busy && <Loader2 aria-hidden className="h-3.5 w-3.5 animate-spin" strokeWidth={STROKE} />}
           {busy ? '开始中…' : confirmLabel}
         </button>
       </div>
@@ -71,20 +77,16 @@ export function RetranslatePopover({ projectId, version, stopping, busy, error, 
   return (
     <Popover open={open} onOpenChange={next => { setOpen(next); if (next) { setModel(rememberedModel(harness)); onOpen?.(); } }}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent align="end" className={CONTENT}>
+      <PopoverContent align="end" sideOffset={6} collisionPadding={12} className={CONTENT}>
         <Shell title={`重新翻译 ${version.name} 版`} sub="在服务器上跑，关掉页面也不会停" confirmLabel="重新翻译"
           busy={busy} onCancel={() => setOpen(false)} onConfirm={() => void confirm()}>
-          <div className="mb-1.5 text-[11px] tracking-[0.12em] text-text-muted">模型</div>
+          <FieldLabel>模型</FieldLabel>
           <ModelList harness={harness} value={model} onChange={setModel} lastUsed={rememberedModel(harness)} disabled={busy} />
-          {version.variant && (
-            <Warning>
-              {`翻完会整篇替换现在的 ${version.name} 版`}
-              {edited > 0 ? `，你改过的 ${edited} 段也会被替换` : ''}
-              ；翻完前这一版只读。
-            </Warning>
-          )}
-          {stopping && <Warning>{`会先停掉正在跑的 ${stopping}。`}</Warning>}
-          {error && <p role="alert" className="mt-3 text-[12px] text-error">{error}</p>}
+          <Warnings items={[
+            version.variant && `翻完会整篇替换现在的 ${version.name} 版${edited > 0 ? `，你改过的 ${edited} 段也会被替换` : ''}；翻完前这一版只读。`,
+            stopping && `会先停掉正在跑的 ${stopping}。`,
+          ]} />
+          {error && <p role="alert" className="mt-3 text-[12px] leading-5 text-error">{error}</p>}
         </Shell>
       </PopoverContent>
     </Popover>
@@ -109,12 +111,12 @@ export function AddAgentPopover({ options, stopping, busy, error, onConfirm, onO
   return (
     <Popover open={open} onOpenChange={next => { setOpen(next); if (next) { setChoice(loadAgentChoice(undefined, options)); onOpen?.(); } }}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
-      <PopoverContent align="start" className={CONTENT}>
+      <PopoverContent align="start" sideOffset={6} collisionPadding={12} className={CONTENT}>
         <Shell title="用 Agent 再翻一版" sub="只列出还没有译本的 Agent" confirmLabel="开始翻译"
           busy={busy} onCancel={() => setOpen(false)} onConfirm={() => void confirm()}>
           <AgentChoiceFields options={options} value={choice} onChange={setChoice} disabled={busy} />
-          {stopping && <Warning>{`会先停掉正在跑的 ${stopping}。`}</Warning>}
-          {error && <p role="alert" className="mt-3 text-[12px] text-error">{error}</p>}
+          <Warnings items={[stopping && `会先停掉正在跑的 ${stopping}。`]} />
+          {error && <p role="alert" className="mt-3 text-[12px] leading-5 text-error">{error}</p>}
         </Shell>
       </PopoverContent>
     </Popover>
