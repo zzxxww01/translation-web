@@ -274,3 +274,20 @@ def test_delete_endpoint_archives_and_records_the_caller(setup):
     assert run_id not in [r["id"] for r in client.get(f"{PREFIX}/runs").json()]
     record = json.loads((runner.store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()[-1])
     assert (record["run_id"], record["client_ip"]) == (run_id, "203.0.113.9")
+
+
+@pytest.mark.parametrize("headers, expected", [
+    ({"CF-Connecting-IP": "198.51.100.5", "X-Forwarded-For": "203.0.113.9"}, "198.51.100.5"),
+    ({"X-Forwarded-For": "203.0.113.9, 10.0.0.1"}, "203.0.113.9"),
+    ({}, "testclient"),
+])
+def test_delete_records_caller_ip_by_header_precedence(setup, headers, expected):
+    client, factory, runner = setup
+    login(client)
+    run_id = client.post(f"{PREFIX}/runs", data={"skill": "four-step-translate", "message": "go"}).json()["id"]
+    client.post(f"{PREFIX}/runs/{run_id}/stop")
+
+    assert client.delete(f"{PREFIX}/runs/{run_id}", headers=headers).status_code == 200
+
+    record = json.loads((runner.store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+    assert record["client_ip"] == expected

@@ -125,7 +125,7 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
 记着删除时间、原因（`user` 页面删除 / `upload_failed` 创建时上传失败）、标题、Agent、模型、上传和产出的文件清单、
 存档路径和来源 IP；同一条也在服务日志里：`journalctl --user -u skill-runner | grep "deleted run"`。
 
-找回：`mv ~/skill-runner/deleted/<id> ~/skill-runner/runs/` 后 `systemctl --user restart skill-runner`。
+找回：`mv ~/skill-runner/deleted/<存档目录名> ~/skill-runner/runs/<原 id>`（原 id 就是记录里的 `run_id`；存档目录名带 `-1`、`-2` 后缀时必须改回原 id）后 `systemctl --user restart skill-runner`。
 
 ## 安全边界
 

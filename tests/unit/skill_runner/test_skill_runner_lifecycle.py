@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from skill_runner.runner import Busy, Conflict, Runner, SessionFailed, build_prompt, make_title
+from skill_runner.runner import Busy, Conflict, NotFound, Runner, SessionFailed, build_prompt, make_title
 from skill_runner.store import RunStore
 
 from skill_runner_fakes import make_config, settle
@@ -226,6 +226,18 @@ async def test_delete_requires_inactive_run_and_archives_directory(runner, store
     assert (record["run_id"], record["reason"], record["client_ip"]) == (run_id, "user", "198.51.100.2")
     assert factory.last.closed
     assert queue.get_nowait() is None  # SSE 订阅者收到结束信号
+
+
+async def test_second_concurrent_delete_gets_not_found_and_writes_one_record(runner, store, factory):
+    run_id = await start(runner)
+    factory.last.push({"type": "result", "session_id": "s"})
+    await settle()
+
+    results = await asyncio.gather(runner.delete(run_id), runner.delete(run_id), return_exceptions=True)
+
+    assert sum(r is None for r in results) == 1
+    assert sum(isinstance(r, NotFound) for r in results) == 1
+    assert len((store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()) == 1
 
 
 async def test_subscribe_replays_backlog_then_streams_live(runner, factory):

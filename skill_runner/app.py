@@ -286,7 +286,10 @@ def create_app(
 
 
 def _client_ip(request: Request) -> str | None:
-    """经 Cloudflare / nginx 转发时真实来源在 X-Forwarded-For 第一个。"""
+    """来源 IP：优先 CF-Connecting-IP（Cloudflare 会覆盖成真实地址），其次 X-Forwarded-For 第一个，最后是直连地址。"""
+    cf = request.headers.get("cf-connecting-ip", "").strip()
+    if cf:
+        return cf
     first = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
     return first or (request.client.host if request.client else None)
 

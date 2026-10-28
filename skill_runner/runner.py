@@ -514,6 +514,8 @@ class Runner:
             await self._close_session(run, strict=True)
         except Exception as exc:
             raise SessionFailed(f"会话未能关闭，暂时无法删除：{exc}") from exc
+        if self._runs.get(run_id) is not run:  # 等关会话的时候，另一个删除请求已经删完了
+            raise NotFound("运行不存在")
         for queue in list(run.subscribers):
             queue.put_nowait(None)
         self._runs.pop(run_id, None)

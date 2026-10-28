@@ -69,15 +69,94 @@ def test_archive_still_moves_the_run_when_the_log_cannot_be_written(tmp_path):
     assert (store.deleted_dir / run_id / "meta.json").is_file()
 
 
-def test_long_file_lists_are_truncated_in_the_log(tmp_path, monkeypatch):
-    monkeypatch.setattr(store_module, "MAX_LOGGED_FILES", 1)
+def test_long_file_lists_are_truncated_but_keep_the_input(tmp_path, monkeypatch):
+    monkeypatch.setattr(store_module, "MAX_LOGGED_FILES", 3)
     store = RunStore(tmp_path / "runs")
     run_id = _run_with_files(store)
+    run_dir = store.run_dir(run_id)
+    (run_dir / ".venv").mkdir()
+    for i in range(10):
+        (run_dir / ".venv" / f"lib{i}.py").write_text("x", encoding="utf-8")
+    for i in range(10):
+        (run_dir / "output" / f"p{i}.md").write_text("x", encoding="utf-8")
 
     record = store.archive(run_id, reason="user")
 
-    assert len(record["inputs"]) + len(record["outputs"]) == 1
+    assert record["inputs"] == [{"path": "input/a.html", "bytes": 9}]
+    assert len(record["inputs"]) + len(record["outputs"]) == 3
+    assert all(not e["path"].startswith(".venv") for e in record["outputs"])
     assert record["truncated"] is True
+    assert record["file_count"] == 3
+
+
+def test_manifest_has_totals_and_skips_unstatable_files(tmp_path, monkeypatch):
+    store = RunStore(tmp_path / "runs")
+    run_id = _run_with_files(store)
+    real_stat = store_module.Path.stat
+
+    def flaky(self, *a, **kw):
+        if self.name == "zh.md":
+            raise OSError("gone")
+        return real_stat(self, *a, **kw)
+
+    monkeypatch.setattr(store_module.Path, "stat", flaky)
+    record = store.archive(run_id, reason="user")
+    monkeypatch.undo()
+
+    assert record["outputs"] == []
+    assert (record["file_count"], record["total_bytes"]) == (1, 9)
+
+
+def test_non_utf8_filename_does_not_lose_the_record(tmp_path, monkeypatch):
+    store = RunStore(tmp_path / "runs")
+    run_id = _run_with_files(store)
+    bad = "output/\udcb2.md"
+    monkeypatch.setattr(
+        store, "_file_manifest",
+        lambda root: {"inputs": [], "outputs": [{"path": bad, "bytes": 1}], "file_count": 1, "total_bytes": 1},
+    )
+
+    record = store.archive(run_id, reason="user")
+
+    assert not store.exists(run_id)
+    [logged] = _log(store)
+    assert logged["run_id"] == run_id and logged["outputs"][0]["path"] == bad
+    assert record["run_id"] == run_id
+
+
+def test_failed_log_append_logs_the_full_record_at_error_level(tmp_path, caplog):
+    store = RunStore(tmp_path / "runs")
+    run_id = _run_with_files(store)
+    (store.deleted_dir / "deleted.jsonl").mkdir(parents=True)
+
+    with caplog.at_level("INFO", logger="skill_runner.store"):
+        store.archive(run_id, reason="user")
+
+    errors = [r for r in caplog.records if r.levelname == "ERROR"]
+    assert errors and run_id in errors[0].getMessage() and "output/zh.md" in errors[0].getMessage()
+
+
+def test_info_log_is_only_a_summary(tmp_path, caplog):
+    store = RunStore(tmp_path / "runs")
+    run_id = _run_with_files(store)
+
+    with caplog.at_level("INFO", logger="skill_runner.store"):
+        store.archive(run_id, reason="user", client_ip="203.0.113.7")
+
+    [info] = [r for r in caplog.records if r.levelname == "INFO"]
+    message = info.getMessage()
+    assert run_id in message and "203.0.113.7" in message and "output/zh.md" not in message
+
+
+def test_archive_works_when_meta_is_corrupt(tmp_path):
+    store = RunStore(tmp_path / "runs")
+    run_id = _run_with_files(store)
+    (store.run_dir(run_id) / "meta.json").write_text("{not json", encoding="utf-8")
+
+    record = store.archive(run_id, reason="user")
+
+    assert record["title"] is None and record["status"] is None
+    assert (store.deleted_dir / run_id / "output" / "zh.md").is_file()
 
 
 def test_hard_delete_is_gone(tmp_path):

@@ -148,7 +148,6 @@ class RunStore:
         while target.exists():
             n += 1
             target = self.deleted_dir / f"{run_id}-{n}"
-        os.rename(source, target)
         record: dict[str, Any] = {
             "deleted_at": datetime.now().astimezone().isoformat(timespec="seconds"),
             "reason": reason,
@@ -164,30 +163,68 @@ class RunStore:
             "moved_to": str(target),
             "client_ip": client_ip,
         }
+        # 先把记录序列化好再挪目录：非 UTF-8 文件名（lone surrogate）靠 ASCII 转义也能写下来，
+        # 序列化出错就在挪目录之前暴露，不会出现「目录已挪走、记录却丢了」
+        line = json.dumps(record, ensure_ascii=True)
+        os.rename(source, target)
         try:
             with open(self.deleted_dir / DELETED_LOG, "a", encoding="utf-8") as fh:
-                fh.write(json.dumps(record, ensure_ascii=False) + "\n")
-        except OSError:
-            # 目录已经挪走了，删除本身算成功；日志写不进去要在服务日志里留痕
-            logger.exception("deleted run %s but could not append %s", run_id, DELETED_LOG)
-        logger.info("deleted run %s (%s) -> %s: %s", run_id, reason, target, json.dumps(record, ensure_ascii=False))
+                fh.write(line + "\n")
+        except (OSError, ValueError):
+            # 目录已经挪走了，删除本身算成功；这时服务日志是唯一的备份，整条记录写进去
+            logger.exception("deleted run %s but could not append %s; full record: %s", run_id, DELETED_LOG, line)
+        logger.info(
+            "deleted run %s (%s) title=%r files=%s bytes=%s -> %s ip=%s",
+            run_id, reason, record["title"], manifest["file_count"], manifest["total_bytes"], target, client_ip,
+        )
         return record
 
     def _file_manifest(self, root: Path) -> dict[str, Any]:
-        """删除记录里的文件清单：input/ 下是上传的，其余是产出；meta/events 不列。"""
+        """删除记录里的文件清单：input/ 下是上传的，其余是产出；meta/events 不列。
+
+        input/ 先列，隐藏目录（.venv、.git、.cache 之类）和隐藏文件跳过，和 list_files 一致；
+        列满 MAX_LOGGED_FILES 就停止遍历并标 truncated。
+        file_count / total_bytes 只统计实际走过并记下的条目，不含被跳过的隐藏目录和截断之后的部分。
+        """
         inputs: list[dict[str, Any]] = []
         outputs: list[dict[str, Any]] = []
+        total = 0
         truncated = False
-        for path in sorted(p for p in root.rglob("*") if p.is_file() and not p.is_symlink()):
-            rel = path.relative_to(root).as_posix()
-            if rel in INTERNAL_FILES:
-                continue
-            if len(inputs) + len(outputs) >= MAX_LOGGED_FILES:
-                truncated = True
+
+        def walk(top: Path, skip_input_dir: bool) -> Iterable[tuple[str, int]]:
+            for dirpath, dirnames, filenames in os.walk(top):
+                dirnames[:] = sorted(
+                    d for d in dirnames
+                    if not d.startswith(".") and not (skip_input_dir and Path(dirpath) == top and d == INPUT_DIR)
+                )
+                at_root = Path(dirpath) == root
+                for name in sorted(filenames):
+                    if name.startswith(".") or (at_root and name in INTERNAL_FILES):
+                        continue
+                    full = Path(dirpath) / name
+                    if full.is_symlink():
+                        continue
+                    try:
+                        size = full.stat().st_size
+                    except OSError:
+                        continue
+                    yield full.relative_to(root).as_posix(), size
+
+        for skip, bucket in ((False, inputs), (True, outputs)):
+            for rel, size in walk(root / INPUT_DIR if not skip else root, skip):
+                if len(inputs) + len(outputs) >= MAX_LOGGED_FILES:
+                    truncated = True
+                    break
+                bucket.append({"path": rel, "bytes": size})
+                total += size
+            if truncated:
                 break
-            entry = {"path": rel, "bytes": path.stat().st_size}
-            (inputs if rel.startswith(f"{INPUT_DIR}/") else outputs).append(entry)
-        manifest: dict[str, Any] = {"inputs": inputs, "outputs": outputs}
+        manifest: dict[str, Any] = {
+            "inputs": inputs,
+            "outputs": outputs,
+            "file_count": len(inputs) + len(outputs),
+            "total_bytes": total,
+        }
         if truncated:
             manifest["truncated"] = True
         return manifest
