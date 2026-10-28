@@ -7,7 +7,7 @@ from src.api.middleware import APIException, BadRequestException, ServiceUnavail
 from src.api.routers import workbench
 from src.core.models import ParagraphStatus
 from src.core.project import ProjectManager
-from src.services import article_variants
+from src.services import article_primary, article_variants
 
 HTML = """<html><head><title>Demo Post</title></head><body>
 <article class="newsletter-post post">
@@ -224,3 +224,30 @@ def test_primary_target_is_stored_in_meta_and_list_summary(pm, main_id):
     assert pm.get(main_id).primary_target == variant
     [summary] = pm.list_summaries()
     assert summary.primary_target == variant
+
+
+EN_FULL = ("# Demo Post\n\nFirst paragraph about wafer supply and the 2027 buildout of datacenters.\n\n"
+           "## Second Section\n\nAnother paragraph explaining why HBM demand keeps outrunning supply.\n")
+ZH_FULL = "# 演示文章\n\n关于晶圆供给和 2027 年数据中心建设的第一段。\n\n## 第二节\n\n解释 HBM 需求为何持续超过供给的一段。\n"
+
+
+def test_primary_defaults_to_web_once_it_has_started(pm, main_id):
+    variant = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent="codex")["variant_id"]
+    resolve = article_primary.resolve_primary
+    assert resolve(pm, main_id, [variant], primary_target=None, main_started=True) == main_id
+    assert resolve(pm, main_id, [variant], primary_target=None, main_started=False) == variant
+    assert resolve(pm, main_id, [], primary_target=None, main_started=False) == main_id
+
+
+def test_primary_default_picks_latest_import_and_honours_explicit_choice(pm, main_id, monkeypatch):
+    records = {f"{main_id}--codex": "2026-10-28T10:00:00", f"{main_id}--claude": "2026-10-28T11:00:00"}
+    monkeypatch.setattr(article_variants, "read_import_record",
+                        lambda _pm, vid: {"imported_at": records[vid]} if vid in records else None)
+    ids = list(records) + [f"{main_id}--argon"]
+    resolve = article_primary.resolve_primary
+    assert resolve(pm, main_id, ids, primary_target=None, main_started=False) == f"{main_id}--claude"
+    assert resolve(pm, main_id, ids, primary_target=f"{main_id}--argon", main_started=True) == f"{main_id}--argon"
+    assert resolve(pm, main_id, ids, primary_target=main_id, main_started=False) == main_id
+    # 指向已经不存在的版本：退回默认规则
+    assert resolve(pm, main_id, ids, primary_target=f"{main_id}--gone", main_started=True) == main_id
