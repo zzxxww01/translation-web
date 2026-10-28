@@ -148,25 +148,28 @@ def _awaiting_terms(pm: ProjectManager, project_id: str, run_id: Optional[str]) 
     return job.get("confirmation_status") == "waiting"
 
 
-def _percent(pm: ProjectManager, project_id: str) -> Optional[int]:
+def _progress(pm: ProjectManager, project_id: str) -> Optional[Tuple[int, int]]:
+    """(已翻段数, 百分比)；项目不在了返回 None。"""
     try:
         summary = pm.get_translation_summary(project_id)
     except FileNotFoundError:
         return None
     total, done = summary.total_paragraphs, summary.translated_paragraphs
-    return min(100, done * 100 // total) if total else 0
+    return done, (min(100, done * 100 // total) if total else 0)
 
 
 def _translation_state(pm: ProjectManager, project_id: str, variant_ids: List[str],
                        primary_target: Optional[str] = None) -> Tuple[ArticleStatus, int]:
     """只看主译本（services/article_primary.py）；主译本在跑或在等术语确认时照旧显示。"""
-    main = _percent(pm, project_id)
+    main = _progress(pm, project_id)
     if main is None:
         return "not_imported", 0  # 列清单和这里之间项目被删了
-    main_active = translation_run_registry.get_active_run(project_id) is not None
+    main_done, main_percent = main
+    # 和工作台一样：网页版翻过一段（不到 1% 也算）或正在翻，就算开始了
+    main_started = main_done > 0 or translation_run_registry.get_active_run(project_id) is not None
     primary = article_primary.resolve_primary(pm, project_id, variant_ids, primary_target=primary_target,
-                                              main_started=bool(main) or main_active)
-    percent = main if primary == project_id else (_percent(pm, primary) or 0)
+                                              main_started=main_started)
+    percent = main_percent if primary == project_id else (_progress(pm, primary) or (0, 0))[1]
     active = translation_run_registry.get_active_run(primary)
     if active is not None:
         return ("awaiting_terms" if _awaiting_terms(pm, primary, active.run_id) else "translating"), percent
