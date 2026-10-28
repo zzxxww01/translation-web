@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { ArrowLeft, LogOut, Settings } from 'lucide-react';
 import { useQueryClient } from '@tanstack/react-query';
@@ -42,6 +42,11 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
   const [updatesOpen, setUpdatesOpen] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const selectedId = searchParams.get('run');
+  // 删除是异步的，完成时要看「现在」选中的是谁
+  const selectedIdRef = useRef(selectedId);
+  useEffect(() => {
+    selectedIdRef.current = selectedId;
+  }, [selectedId]);
   // 宽屏上没选对话就显示「新对话」；窄屏列表和内容二选一，所以新对话要单独的 URL 状态
   const creating = !selectedId && searchParams.get('new') === '1';
   const showDetail = Boolean(selectedId) || creating;
@@ -56,7 +61,7 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
   const removeRun = async (id: string) => {
     await skillsApi.remove(id);
     await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
-    if (id === selectedId) backToList();
+    if (id === selectedIdRef.current) backToList();
   };
 
   const logout = async () => {

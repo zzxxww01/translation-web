@@ -48,7 +48,7 @@ export function RunList({ runs, catalog, selectedId, onSelect, onNew, onDelete }
                 aria-current={run.id === selectedId ? 'true' : undefined}
                 className={cn(
                   'flex w-full items-start gap-2.5 rounded-lg py-2.5 pl-2.5 pr-9 text-left transition-colors',
-                  run.id === selectedId ? 'bg-primary-50' : 'hover:bg-bg-hover'
+                  run.id === selectedId ? 'bg-primary-50' : 'hover:bg-bg-hover group-hover:bg-bg-hover'
                 )}
               >
                 <AgentAvatar icon={agent.icon} size="sm" className="mt-0.5" />
@@ -66,7 +66,7 @@ export function RunList({ runs, catalog, selectedId, onSelect, onNew, onDelete }
                   aria-label={`删除对话：${runTitle(run.title)}`}
                   title={active ? '先停止再删除' : '删除这个对话'}
                   disabled={active}
-                  className="absolute right-1.5 top-2 rounded-md p-1.5 text-text-muted opacity-100 transition-opacity hover:bg-bg-hover hover:text-text-primary focus-visible:opacity-100 disabled:cursor-not-allowed disabled:opacity-30 md:opacity-0 md:group-hover:opacity-100"
+                  className="absolute right-1.5 top-2 rounded-md p-1.5 text-text-muted transition-opacity enabled:hover:bg-bg-hover enabled:hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-30 [@media(hover:hover)]:opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 focus-visible:opacity-100"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
                 </button>

@@ -2,6 +2,7 @@
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { toast } from 'sonner';
 import { RunList } from './components/RunList';
 import { normalizeCatalog } from './agents';
 import type { RunMeta } from './types';
@@ -50,5 +51,34 @@ describe('RunList delete', () => {
     const [, running] = deleteButtons();
     expect(running.disabled).toBe(true);
     expect(running.title).toBe('先停止再删除');
+  });
+
+  const open = async () => { await act(async () => { deleteButtons()[0].click(); }); };
+  const button = (label: string) => Array.from(document.querySelectorAll('button')).find(b => b.textContent === label)!;
+
+  it('does not delete just by opening the dialog', async () => {
+    const onDelete = vi.fn(async () => undefined);
+    render(onDelete);
+    await open();
+    expect(document.body.textContent).toContain('服务器上会保留存档');
+    expect(onDelete).not.toHaveBeenCalled();
+  });
+
+  it('cancel closes without deleting', async () => {
+    const onDelete = vi.fn(async () => undefined);
+    render(onDelete);
+    await open();
+    await act(async () => { button('取消').click(); });
+    expect(onDelete).not.toHaveBeenCalled();
+    expect(document.body.textContent).not.toContain('服务器上会保留存档');
+  });
+
+  it('keeps the dialog open and shows the error when deleting fails', async () => {
+    const onDelete = vi.fn(async () => { throw new Error('服务器拒绝'); });
+    render(onDelete);
+    await open();
+    await act(async () => { button('删除').click(); });
+    expect(toast.error).toHaveBeenCalledWith('服务器拒绝');
+    expect(document.body.textContent).toContain('服务器上会保留存档');
   });
 });

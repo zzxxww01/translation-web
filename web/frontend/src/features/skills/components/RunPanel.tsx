@@ -103,7 +103,7 @@ export function RunPanel({ run, agent, maxUploadMb, onDeleted }: RunPanelProps) 
           </SheetContent>
         </Sheet>
         <DeleteRunDialog onConfirm={remove}>
-          <Button variant="ghost" size="sm" disabled={active} title={active ? '先停止再删除' : '从列表里删掉这个对话'}>
+          <Button variant="ghost" size="sm" disabled={active} title={active ? '先停止再删除' : '删除这个对话'}>
             删除
           </Button>
         </DeleteRunDialog>
