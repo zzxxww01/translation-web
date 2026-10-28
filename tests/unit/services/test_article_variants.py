@@ -216,3 +216,11 @@ def test_agent_import_gets_its_own_variant(pm, main_id, agent, label):
     result = article_variants.import_claude_translation(pm, main_id, zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, agent=body.agent)
     assert result["variant_id"] == f"{main_id}--{agent}"
     assert pm.get(result["variant_id"]).variant_label == label
+
+
+def test_primary_target_is_stored_in_meta_and_list_summary(pm, main_id):
+    variant = article_variants.create_variant(pm, main_id, kind="claude", label="Codex", suffix="codex")
+    pm.merge_meta_fields(main_id, fields={"primary_target": variant})
+    assert pm.get(main_id).primary_target == variant
+    [summary] = pm.list_summaries()
+    assert summary.primary_target == variant

@@ -72,6 +72,8 @@ class ProjectListSummary:
     original_url: Optional[str] = None
     # 孪生项目（译本 2）指向的主项目
     variant_of: Optional[str] = None
+    # 主项目选定的主译本（ProjectMeta.primary_target）
+    primary_target: Optional[str] = None
 
 
 @dataclass(frozen=True)
@@ -625,6 +627,7 @@ class ProjectManager:
             created_at=validated.created_at,
             original_url=original_url if isinstance(original_url, str) else None,
             variant_of=data.get("variant_of") if isinstance(data.get("variant_of"), str) else None,
+            primary_target=data.get("primary_target") if isinstance(data.get("primary_target"), str) else None,
         )
 
     def _get_project_summary(
