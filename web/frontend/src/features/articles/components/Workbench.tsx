@@ -15,7 +15,7 @@ import { AlignmentTooLow, importClaudeTrack, startClaudeTrack } from '../lib/cla
 import { flushEdits, unsavedEdits } from '../lib/edits';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { sectionsWithMissing } from '../lib/tracks';
-import { FOCUS_RING, MEASURE, STROKE } from '../lib/ui';
+import { FOCUS_RING, MEASURE, onTabKeys, STROKE } from '../lib/ui';
 import { buildVersions, defaultCompare, pickPrimary, runActive, type ImportProblem, type VersionAction, type VersionView } from '../lib/versions';
 import type { PaneId, Workbench as WorkbenchData, WorkbenchRow } from '../types';
 import { ChangesDrawer, type ChangesTarget } from './ChangesDrawer';
@@ -374,7 +374,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       tone: compare.tone,
       readOnly: compare.readOnly || compare.pending,
       header: { eyebrow: '对照',
-        title: <VersionTabs versions={others} value={compare.id} onChange={id => void switchCompare(id)} forceMenu={isMobile}
+        title: <VersionTabs versions={others} value={compare.id} onChange={id => void switchCompare(id)} forceMenu={isMobile} controls="pane-compare"
           add={addable.length ? (
             <AddAgentPopover options={addable} stopping={stopping} busy={busy} error={startError} onOpen={() => setStartError(null)} onConfirm={startAgent}>
               <AddVersionButton />
@@ -431,7 +431,9 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       {isMobile && (
         <div className="mx-4 mb-3 grid grid-cols-3 gap-0.5 rounded-full bg-bg-inset p-[3px] text-[13px]" role="tablist" aria-label="切换栏">
           {PANES.map(id => (
-            <button key={id} type="button" role="tab" aria-selected={mobilePane === id} onClick={() => setMobilePane(id)}
+            <button key={id} type="button" role="tab" data-tab-id={id} aria-selected={mobilePane === id} aria-controls={`pane-${id}`}
+              tabIndex={mobilePane === id ? 0 : -1} onClick={() => setMobilePane(id)}
+              onKeyDown={event => onTabKeys(event, PANES, mobilePane, id => setMobilePane(id as PaneId))}
               className={cn('h-8 rounded-full', FOCUS_RING, mobilePane === id ? 'bg-bg-secondary font-medium text-text-primary shadow-thumb' : 'text-text-muted')}>
               {columns[id].title}
             </button>

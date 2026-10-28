@@ -5,7 +5,7 @@ import { Check, ChevronDown, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { VersionView } from '../lib/versions';
 import { TONE_DOT } from '../lib/tones';
-import { FOCUS_RING, STROKE } from '../lib/ui';
+import { FOCUS_RING, onTabKeys, STROKE } from '../lib/ui';
 
 /** 对照栏宽度不足这么多时，分段标签收成下拉（设计文档 6.2） */
 const NARROW_COLUMN = 420;
@@ -45,12 +45,14 @@ export function AddVersionButton({ className, ...props }: ComponentProps<'button
 }
 
 /** 对照栏：分段胶囊标签（宽）或下拉（窄、手机）。add 是末尾的「＋」（AddVersionButton 套上弹框）。 */
-export function VersionTabs({ versions, value, onChange, add, forceMenu = false }: {
+export function VersionTabs({ versions, value, onChange, add, forceMenu = false, controls }: {
   versions: VersionView[];
   value: string;
   onChange: (id: string) => void;
   add?: ReactNode;
   forceMenu?: boolean;
+  /** 标签控制的那一栏正文的 id */
+  controls?: string;
 }) {
   const [ref, narrow] = useNarrowColumn();
   const current = versions.find(version => version.id === value) ?? versions[0];
@@ -89,14 +91,16 @@ export function VersionTabs({ versions, value, onChange, add, forceMenu = false 
       </div>
     );
   }
+  const ids = versions.map(version => version.id);
   return (
     <div ref={ref} className="inline-flex max-w-full min-w-0 items-center gap-0.5 rounded-full bg-bg-inset p-[3px]">
       <div role="tablist" aria-label="对照版本" className="flex min-w-0 items-center gap-0.5">
         {versions.map(version => {
           const selected = version.id === current.id;
           return (
-            <button key={version.id} type="button" role="tab" aria-selected={selected}
-              onClick={() => onChange(version.id)}
+            <button key={version.id} type="button" role="tab" data-tab-id={version.id} aria-selected={selected}
+              aria-controls={controls} tabIndex={selected ? 0 : -1}
+              onClick={() => onChange(version.id)} onKeyDown={event => onTabKeys(event, ids, current.id, onChange)}
               className={cn('inline-flex h-[26px] items-center gap-1.5 whitespace-nowrap rounded-full px-3 text-[12.5px]', FOCUS_RING,
                 selected ? 'bg-bg-secondary font-medium text-text-primary shadow-thumb' : 'text-text-muted hover:text-text-primary')}>
               {dot(version)}{version.name}

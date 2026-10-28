@@ -499,6 +499,26 @@ describe('Workbench', () => {
     expect(unsavedEdits.any()).toBe(false);
   });
 
+  it('reads the save status to screen readers, and announces paragraphs that did not save', async () => {
+    api.workbench.mockResolvedValue(DATA);
+    api.saveText.mockRejectedValue(new Error('离线了'));
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const saveButton = host.querySelector('button[aria-label="保存"]') as HTMLButtonElement;
+    expect(host.querySelector('[role="status"]')?.textContent).toBe(''); // 没有失败时不播报
+    await act(async () => { (host.querySelector('[aria-label="编辑：主译本：Datacenters are booming."]') as HTMLElement).click(); });
+    await act(async () => {
+      const textarea = host.querySelector('textarea')!;
+      Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(textarea, '数据中心在爆发。');
+      textarea.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+    await act(async () => { host.querySelector('textarea')!.blur(); });
+    await flush();
+    const description = document.getElementById(saveButton.getAttribute('aria-describedby')!);
+    expect(description?.textContent).toBe('1 段没保存上');
+    expect(host.querySelector('[role="status"]')?.textContent).toBe('1 段没保存上');
+  });
+
   it('keeps the previous reading mark when saving fails', async () => {
     api.workbench.mockResolvedValue({ ...DATA, reading_mark: { key: 's1/p000', at: '2026-10-27' } });
     api.setReadingMark.mockRejectedValue(new Error('离线了'));
