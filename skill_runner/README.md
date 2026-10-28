@@ -58,7 +58,7 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 | 更新 skill_runner 代码 | `git -C ~/skill-runner/src pull` 后 `systemctl --user restart skill-runner`。正在跑的任务会被打断，页面上发「继续」即可续跑 |
 | 升级 SDK | 改 `requirements.txt` 的版本 → 本机跑 smoke → 服务器 `venv/bin/pip install -r src/skill_runner/requirements.txt` → 再跑 smoke → 重启 |
 | 上传上限 | 公网入口是 Cloudflare Tunnel，免费版单个请求最大 100 MB，所以配置成 95 MB；更大的素材贴链接 |
-| 清理空间 | 页面上删除不要的运行；或直接删 `$SKILL_RUNNER_HOME/runs/<run_id>/` |
+| 清理空间 | 页面上删除只是把运行挪到 `~/skill-runner/deleted/`，仍占磁盘；要真正腾空间，先核对 `deleted/deleted.jsonl`，再手动删 `~/skill-runner/deleted/` 下的旧目录 |
 | 改口令 | 改 env 文件后重启，所有旧登录立即失效 |
 | 加 skill（= 页面上多一个 agent） | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，在 `skill_runner/agents.json` 写名片（中文名、图标、说明、输入提示、示例），开沙箱时按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
 | 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `chat`、`article`、`video`、`podcast` |
