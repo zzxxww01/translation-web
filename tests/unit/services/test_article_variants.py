@@ -3,7 +3,13 @@ import json
 import pytest
 from starlette.requests import Request
 
-from src.api.middleware import APIException, BadRequestException, ServiceUnavailableException
+from src.api.middleware import (
+    APIException,
+    BadRequestException,
+    ConflictException,
+    NotFoundException,
+    ServiceUnavailableException,
+)
 from src.api.routers import workbench
 from src.core.models import ParagraphStatus
 from src.core.project import ProjectManager
@@ -266,3 +272,45 @@ def test_primary_default_picks_latest_import_and_honours_explicit_choice(pm, mai
     assert resolve(pm, main_id, ids, primary_target=main_id, main_started=False) == main_id
     # 指向已经不存在的版本：退回默认规则
     assert resolve(pm, main_id, ids, primary_target=f"{main_id}--gone", main_started=True) == main_id
+
+
+@pytest.mark.asyncio
+async def test_workbench_reports_and_changes_the_primary_version(pm, main_id):
+    variant = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent="codex", model="gpt-5.5")["variant_id"]
+
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert data["project"]["primary_target"] is None
+    assert data["project"]["primary"] == variant  # 网页版没开始，默认是刚导入的 Agent 版
+    assert data["variants"][0]["import"]["model"] == "gpt-5.5"
+
+    saved = await workbench.set_primary(main_id, workbench.PrimaryRequest(target=main_id), pm)
+    assert saved == {"ok": True, "primary_target": main_id}
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert (data["project"]["primary_target"], data["project"]["primary"]) == (main_id, main_id)
+
+
+@pytest.mark.asyncio
+async def test_primary_must_be_this_article_or_its_variant(pm, main_id, tmp_path):
+    other_source = tmp_path / "other.html"
+    other_source.write_text(HTML.replace("Demo Post", "Other Post"), encoding="utf-8")
+    other = pm.create("other", str(other_source)).id
+    with pytest.raises(BadRequestException):
+        await workbench.set_primary(main_id, workbench.PrimaryRequest(target=other), pm)
+    with pytest.raises(NotFoundException):
+        await workbench.set_primary(main_id, workbench.PrimaryRequest(target=f"{main_id}--nope"), pm)
+    variant = article_variants.create_variant(pm, main_id, kind="model", label="argon", suffix="argon")
+    with pytest.raises(BadRequestException):
+        await workbench.set_primary(variant, workbench.PrimaryRequest(target=variant), pm)
+
+
+@pytest.mark.asyncio
+async def test_import_endpoint_reports_mismatched_draft_as_conflict(pm, main_id):
+    body = workbench.ImportClaudeRequest(
+        zh_markdown="关于晶圆供给和 2027 年数据中心建设的第一段。\n",
+        en_markdown="First paragraph about wafer supply and the 2027 buildout of datacenters.\n", agent="codex")
+    with pytest.raises(ConflictException) as caught:
+        await workbench.import_claude_variant(_request("POST"), main_id, body, pm)
+    assert caught.value.error_code == "ALIGNMENT_LOW" and "可能不是这篇下载的原文" in caught.value.detail
+    forced = await workbench.import_claude_variant(_request("POST"), main_id, body.model_copy(update={"force": True}), pm)
+    assert forced["variant_id"] == f"{main_id}--codex"

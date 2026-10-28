@@ -14,7 +14,7 @@ from pydantic import BaseModel, Field
 
 from src.api.utils.concurrency import run_blocking
 from src.core.models import ElementType, Section
-from src.services import article_edits, article_variants
+from src.services import article_edits, article_primary, article_variants
 
 from ..dependencies import ProjectManagerDep, TranslationStatusServiceDep
 from ..middleware import BadRequestException, ConflictException, NotFoundException, ServiceUnavailableException
@@ -51,6 +51,10 @@ class ImportClaudeRequest(BaseModel):
 
 class ClaudeRunRequest(BaseModel):
     run_id: Optional[str] = Field(None, max_length=100)
+
+
+class PrimaryRequest(BaseModel):
+    target: str = Field(..., min_length=1, max_length=200)  # 主项目或孪生项目 id
 
 
 class ReadingMarkRequest(BaseModel):
@@ -180,6 +184,10 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "import": imports.get(variant.id),
         })
     original_url = meta.metadata.original_url if meta.metadata else None
+    main_started = main_status["active"] or any(row["web"] for row in rows)
+    primary = await run_blocking(
+        article_primary.resolve_primary, pm, project_id, [v.id for v in variant_metas],
+        primary_target=meta.primary_target, main_started=main_started)
     return {
         "project": {
             "id": meta.id,
@@ -188,6 +196,8 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "original_url": original_url,
             "created_at": meta.created_at.isoformat(),
             "claude_run_id": meta.claude_run_id,
+            "primary_target": meta.primary_target,
+            "primary": primary,
             "progress": {"total": meta.progress.total_paragraphs, "approved": meta.progress.approved},
             "status": main_status,
         },
@@ -195,6 +205,24 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
         "rows": rows,
         "reading_mark": mark,
     }
+
+
+@router.put("/projects/{project_id}/workbench/primary")
+async def set_primary(project_id: str, body: PrimaryRequest, pm: ProjectManagerDep):
+    """「设为主译本」：存进主项目 meta，换设备也一样。"""
+    _check_id(project_id)
+
+    def save():
+        if pm.get(project_id).variant_of:
+            raise BadRequestException(detail="主译本只能设在文章的主项目上", error_code="IS_VARIANT")
+        _check_target(pm, project_id, body.target)
+        pm.merge_meta_fields(project_id, fields={"primary_target": body.target})
+
+    try:
+        await run_blocking(save)
+    except FileNotFoundError:
+        raise NotFoundException(detail="Project not found")
+    return {"ok": True, "primary_target": body.target}
 
 
 @router.put("/projects/{project_id}/workbench/reading-mark")
@@ -308,9 +336,12 @@ async def import_claude_variant(request: Request, project_id: str, body: ImportC
     try:
         result = await run_blocking(
             article_variants.import_claude_translation, pm, project_id,
-            zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, run_id=body.run_id, agent=body.agent)
+            zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, run_id=body.run_id, agent=body.agent,
+            model=body.model, force=body.force)
     except FileNotFoundError:
         raise NotFoundException(detail="Project not found")
+    except article_variants.AlignmentTooLow as error:  # ValueError 的子类，要排在前面
+        raise ConflictException(detail=str(error), error_code="ALIGNMENT_LOW")
     except ValueError as error:
         raise BadRequestException(detail=str(error))
     return result
