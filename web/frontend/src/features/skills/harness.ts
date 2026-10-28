@@ -3,8 +3,9 @@ export type Harness = 'claude' | 'codex' | 'antigravity';
 
 export const HARNESSES: { id: Harness; label: string; note: string }[] = [
   { id: 'claude', label: 'Claude', note: '用你的 Claude 订阅（Claude Code）' },
-  { id: 'codex', label: 'Codex', note: '用你的 ChatGPT 订阅（Codex）；付费文章也肯全文翻' },
-  { id: 'antigravity', label: 'Antigravity', note: '使用服务器上已登录的 Antigravity CLI' },
+  { id: 'codex', label: 'Codex', note: '用你的 ChatGPT 订阅（Codex）' },
+  // 内部 id 仍是 antigravity（服务器上的 agy CLI），界面上叫 Gemini
+  { id: 'antigravity', label: 'Gemini', note: '用服务器上登录的 Google 账号（Gemini）' },
 ];
 
 export function harnessLabel(harness: string | undefined): string {

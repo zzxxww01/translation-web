@@ -62,7 +62,7 @@ export function ModelPicker({ harness, value, onChange, disabled }: {
           ? '来源：Codex CLI 本地缓存；刷新会重读缓存。实际可用模型取决于账号权限。'
           : query.data?.source === 'aliases'
             ? '来源：Claude 通用模型别名。'
-            : `来源：服务器上的 ${harness === 'claude' ? 'Claude Code' : 'Antigravity'} CLI；刷新会重新读取模型清单。清单不代表账号已登录或拥有使用权限。`}
+            : `来源：服务器上的 ${harness === 'claude' ? 'Claude Code' : 'Gemini（agy）'} CLI；刷新会重新读取模型清单。清单不代表账号已登录或拥有使用权限。`}
       </p>
       {(query.error || refresh.error || query.data?.warning) && (
         <p role="status" className="w-full text-xs text-text-muted">
