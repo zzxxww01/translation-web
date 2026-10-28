@@ -1,15 +1,8 @@
 import { Fragment } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { TONE_DOT } from '../lib/tones';
 import type { Tone, VersionAction, VersionView } from '../lib/versions';
-
-export const TONE_DOT: Record<Tone, string> = {
-  done: 'bg-success',
-  busy: 'bg-info shadow-[0_0_0_3px_var(--color-info-light)]',
-  wait: 'bg-warning',
-  error: 'bg-error',
-  idle: 'bg-border',
-};
 
 const TONE_TEXT: Record<Tone, string> = {
   done: 'text-text-muted', busy: 'text-text-muted', idle: 'text-text-muted', wait: 'text-[#94600f]', error: 'text-error',
