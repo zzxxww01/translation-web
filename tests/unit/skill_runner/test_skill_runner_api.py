@@ -167,6 +167,8 @@ def test_oversized_upload_is_rejected_and_run_discarded(tmp_path):
         )
         assert response.status_code == 413
         assert client.get(f"{PREFIX}/runs").json() == []
+        log = (config.home / "deleted" / "deleted.jsonl").read_text(encoding="utf-8").splitlines()
+        assert json.loads(log[-1])["reason"] == "upload_failed"
 
 
 def test_message_answer_interrupt_and_delete_endpoints(setup):
@@ -257,3 +259,18 @@ def test_session_renews_once_a_day_so_regular_use_never_asks_again(tmp_path):
         assert renewed.status_code == 200
         assert f"Max-Age={auth.SESSION_TTL_S}" in renewed.headers["set-cookie"]
         assert "set-cookie" not in client.get(f"{PREFIX}/me").headers  # 刚续过，不再下发
+
+
+def test_delete_endpoint_archives_and_records_the_caller(setup):
+    client, factory, runner = setup
+    login(client)
+    run_id = client.post(f"{PREFIX}/runs", data={"skill": "four-step-translate", "message": "go"}).json()["id"]
+    assert client.post(f"{PREFIX}/runs/{run_id}/stop").json()["status"] == "error"  # 停下来才能删
+
+    response = client.delete(f"{PREFIX}/runs/{run_id}", headers={"X-Forwarded-For": "203.0.113.9, 10.0.0.1"})
+
+    assert response.status_code == 200
+    assert client.get(f"{PREFIX}/runs/{run_id}").status_code == 404
+    assert run_id not in [r["id"] for r in client.get(f"{PREFIX}/runs").json()]
+    record = json.loads((runner.store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+    assert (record["run_id"], record["client_ip"]) == (run_id, "203.0.113.9")

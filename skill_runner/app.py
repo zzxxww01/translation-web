@@ -180,6 +180,7 @@ def create_app(
 
     @api.post("/runs")
     async def create_run(
+        request: Request,
         skill: str = Form(""),  # 留空即直接对话
         harness: str = Form("claude"),  # claude / codex / antigravity
         model: str = Form("", max_length=128),
@@ -196,7 +197,7 @@ def create_app(
         try:
             saved = await asyncio.to_thread(_save_uploads, meta.id, files)
         except HTTPException:
-            await runner.delete(meta.id)
+            await runner.delete(meta.id, reason="upload_failed", client_ip=_client_ip(request))
             raise
         meta = await runner.begin(meta.id, message, saved)
         return meta.to_dict()
@@ -229,8 +230,8 @@ def create_app(
         return (await runner.stop(run_id)).to_dict()
 
     @api.delete("/runs/{run_id}")
-    async def delete_run(run_id: str):
-        await runner.delete(run_id)
+    async def delete_run(run_id: str, request: Request):
+        await runner.delete(run_id, client_ip=_client_ip(request))
         return {"ok": True}
 
     @api.get("/runs/{run_id}/events")
@@ -282,6 +283,12 @@ def create_app(
     app.include_router(public)
     app.include_router(api)
     return app
+
+
+def _client_ip(request: Request) -> str | None:
+    """经 Cloudflare / nginx 转发时真实来源在 X-Forwarded-For 第一个。"""
+    first = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
+    return first or (request.client.host if request.client else None)
 
 
 def _sse(event: dict[str, Any]) -> str:

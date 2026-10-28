@@ -504,7 +504,8 @@ class Runner:
             self._set_status(run, "error", "任务已停止；对话和文件已保留，发送消息可以继续原会话")
         return run.meta
 
-    async def delete(self, run_id: str) -> None:
+    async def delete(self, run_id: str, *, reason: str = "user", client_ip: str | None = None) -> None:
+        """从页面上删掉对话：会话先关干净，目录挪进 deleted/ 存档（见 RunStore.archive）。"""
         run = self._get(run_id)
         if run.meta.status in ACTIVE_STATUSES or self._session_busy(run):
             raise Conflict("任务还在运行，先中断再删除")
@@ -516,7 +517,7 @@ class Runner:
         for queue in list(run.subscribers):
             queue.put_nowait(None)
         self._runs.pop(run_id, None)
-        self.store.delete(run_id)
+        self.store.archive(run_id, reason=reason, client_ip=client_ip)
 
     # ---- 等确认超时自动继续 ----
 

@@ -1,4 +1,5 @@
 import asyncio
+import json
 
 import pytest
 
@@ -211,15 +212,18 @@ async def test_recover_marks_interrupted_runs_after_restart(config, store, facto
     assert factory.last.spec.resume == "sess-r"
 
 
-async def test_delete_requires_inactive_run_and_removes_directory(runner, store, factory):
+async def test_delete_requires_inactive_run_and_archives_directory(runner, store, factory):
     run_id = await start(runner)
     with pytest.raises(Conflict):
         await runner.delete(run_id)
     factory.last.push({"type": "result", "session_id": "s"})
     await settle()
     backlog, queue = runner.subscribe(run_id)
-    await runner.delete(run_id)
+    await runner.delete(run_id, client_ip="198.51.100.2")
     assert not store.exists(run_id)
+    assert (store.deleted_dir / run_id / "meta.json").is_file()
+    record = json.loads((store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+    assert (record["run_id"], record["reason"], record["client_ip"]) == (run_id, "user", "198.51.100.2")
     assert factory.last.closed
     assert queue.get_nowait() is None  # SSE 订阅者收到结束信号
 
