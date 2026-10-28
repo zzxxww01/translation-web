@@ -343,7 +343,17 @@ Agent 页对话的假删除另见 `2026-10-28-agent-run-soft-delete-design.md`�
 2026-10-28 用金丝雀 HTML 实测三个 Agent：复制一篇已下载的文章，在正文第一段后插一句网上不存在的话
 （「Canary check 7Q4Z: in our fictional Aurora-9 scenario…」），三个 Agent 依次用默认模型跑 four-step-translate。
 检查三点：en.md 和 zh.md 里有没有这句、过程中有没有联网抓原文、实际用了哪个模型。
-结果记录在服务器 `~/backups/agent-canary-20261028/report.json`，结论补在本节末尾。
+结果记录在服务器 `~/backups/agent-canary-20261028/report.json`。
+
+**结论（2026-10-29）**：用的是付费文章 `intel-should-raise-capital`（`audience: only_paid`）。三个 Agent 都只用了上传的 HTML。
+
+| Agent | 范围 | 用时 | 金丝雀 | 联网抓原文 | actual_model |
+|---|---|---|---|---|---|
+| Gemini | 全文，QA 通过 | 16 分钟 | en.md、zh.md 都有 | 无 | 空（默认模型不上报） |
+| Codex | 全文，QA 通过 | 12 分钟 | en.md、zh.md 都有 | 无 | 空（10.1 节修） |
+| Claude | 只翻第一章（用户额度不够，只验链路） | 2 分钟 | en.md、zh-part1.md 都有 | 无 | claude-opus-5-5 |
+
+Gemini、Codex 的 `html2md.py` 都是对 `input/intel-should-raise-capital.html` 跑的。Claude 的工具摘要只写用途、不写命令，但它的 en.md 含金丝雀句，只可能来自上传的文件。三个都没有拒绝翻译这篇付费文章。
 
 ## 9. Gemini 改名
 
