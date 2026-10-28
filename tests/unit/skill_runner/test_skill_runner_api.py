@@ -273,21 +273,19 @@ def test_delete_endpoint_archives_and_records_the_caller(setup):
     assert client.get(f"{PREFIX}/runs/{run_id}").status_code == 404
     assert run_id not in [r["id"] for r in client.get(f"{PREFIX}/runs").json()]
     record = json.loads((runner.store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()[-1])
-    assert (record["run_id"], record["client_ip"]) == (run_id, "203.0.113.9")
+    # 直连方不是本机：伪造的转发头不被采信
+    assert (record["run_id"], record["client_ip"]) == (run_id, "testclient")
 
 
-@pytest.mark.parametrize("headers, expected", [
-    ({"CF-Connecting-IP": "198.51.100.5", "X-Forwarded-For": "203.0.113.9"}, "198.51.100.5"),
-    ({"X-Forwarded-For": "203.0.113.9, 10.0.0.1"}, "203.0.113.9"),
-    ({}, "testclient"),
+@pytest.mark.parametrize("peer, headers, expected", [
+    ("127.0.0.1", {"cf-connecting-ip": "198.51.100.5", "x-forwarded-for": "203.0.113.9"}, "198.51.100.5"),
+    ("::1", {"x-forwarded-for": "203.0.113.9, 10.0.0.1"}, "203.0.113.9"),
+    ("127.0.0.1", {}, "127.0.0.1"),
+    ("192.0.2.77", {"cf-connecting-ip": "198.51.100.5", "x-forwarded-for": "203.0.113.9"}, "192.0.2.77"),
+    ("10.0.0.8", {"x-forwarded-for": "203.0.113.9"}, "10.0.0.8"),
 ])
-def test_delete_records_caller_ip_by_header_precedence(setup, headers, expected):
-    client, factory, runner = setup
-    login(client)
-    run_id = client.post(f"{PREFIX}/runs", data={"skill": "four-step-translate", "message": "go"}).json()["id"]
-    client.post(f"{PREFIX}/runs/{run_id}/stop")
-
-    assert client.delete(f"{PREFIX}/runs/{run_id}", headers=headers).status_code == 200
-
-    record = json.loads((runner.store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()[-1])
-    assert record["client_ip"] == expected
+def test_client_ip_trusts_proxy_headers_only_from_loopback(peer, headers, expected):
+    from starlette.requests import Request
+    from skill_runner.app import _client_ip
+    scope = {"type": "http", "client": (peer, 5000), "headers": [(k.encode(), v.encode()) for k, v in headers.items()]}
+    assert _client_ip(Request(scope)) == expected

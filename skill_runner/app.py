@@ -285,13 +285,20 @@ def create_app(
     return app
 
 
+_LOOPBACK = {"127.0.0.1", "::1"}
+
+
 def _client_ip(request: Request) -> str | None:
-    """来源 IP：优先 CF-Connecting-IP（Cloudflare 会覆盖成真实地址），其次 X-Forwarded-For 第一个，最后是直连地址。"""
-    cf = request.headers.get("cf-connecting-ip", "").strip()
-    if cf:
-        return cf
-    first = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
-    return first or (request.client.host if request.client else None)
+    """来源 IP。只有直连方是本机（cloudflared 在本机转发）时才信 CF-Connecting-IP / X-Forwarded-For，否则用直连地址，防伪造。"""
+    peer = request.client.host if request.client else None
+    if peer in _LOOPBACK:
+        cf = request.headers.get("cf-connecting-ip", "").strip()
+        if cf:
+            return cf
+        first = request.headers.get("x-forwarded-for", "").split(",")[0].strip()
+        if first:
+            return first
+    return peer
 
 
 def _sse(event: dict[str, Any]) -> str:

@@ -307,6 +307,8 @@ class Runner:
 
     async def _deliver_to_session(self, run: _Run, message: str, attachments: list[str], prompt: str) -> RunMeta:
         async with run.lock:
+            if self._runs.get(run.meta.id) is not run:  # 排队时这个对话已被删除
+                raise NotFound("运行不存在")
             if run.closing:
                 try:
                     await self._close_session(run, strict=True)
@@ -509,19 +511,21 @@ class Runner:
     async def delete(self, run_id: str, *, reason: str = "user", client_ip: str | None = None) -> None:
         """从页面上删掉对话：会话先关干净，目录挪进 deleted/ 存档（见 RunStore.archive）。"""
         run = self._get(run_id)
-        if run.meta.status in ACTIVE_STATUSES or self._session_busy(run):
-            raise Conflict("任务还在运行，先中断再删除")
-        self._cancel_auto_reply(run)
-        try:
-            await self._close_session(run, strict=True)
-        except Exception as exc:
-            raise SessionFailed(f"会话未能关闭，暂时无法删除：{exc}") from exc
-        if self._runs.get(run_id) is not run:  # 等关会话的时候，另一个删除请求已经删完了
-            raise NotFound("运行不存在")
-        for queue in list(run.subscribers):
-            queue.put_nowait(None)
-        self._runs.pop(run_id, None)
-        self.store.archive(run_id, reason=reason, client_ip=client_ip)
+        # 关会话到归档整段持有 run.lock：期间到的消息排在后面，不会把会话重新打开
+        async with run.lock:
+            if self._runs.get(run_id) is not run:  # 排队时另一个删除请求已经删完了
+                raise NotFound("运行不存在")
+            if run.meta.status in ACTIVE_STATUSES or self._session_busy(run):
+                raise Conflict("任务还在运行，先中断再删除")
+            self._cancel_auto_reply(run)
+            try:
+                await self._close_session(run, strict=True)
+            except Exception as exc:
+                raise SessionFailed(f"会话未能关闭，暂时无法删除：{exc}") from exc
+            for queue in list(run.subscribers):
+                queue.put_nowait(None)
+            self._runs.pop(run_id, None)
+            await asyncio.to_thread(self.store.archive, run_id, reason=reason, client_ip=client_ip)
 
     # ---- 等确认超时自动继续 ----
 
