@@ -53,6 +53,11 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
   const select = (id: string) => setSearchParams({ run: id });
   const openNew = () => setSearchParams({ new: '1' });
   const backToList = () => setSearchParams({});
+  const removeRun = async (id: string) => {
+    await skillsApi.remove(id);
+    await queryClient.invalidateQueries({ queryKey: skillKeys.runs });
+    if (id === selectedId) backToList();
+  };
 
   const logout = async () => {
     await skillsApi.logout();
@@ -75,7 +80,7 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
           showDetail ? 'hidden' : 'flex'
         )}
       >
-        <RunList runs={runs.data ?? []} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} />
+        <RunList runs={runs.data ?? []} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} onDelete={removeRun} />
         <div className="border-t border-border-subtle px-4 py-2">
           <Button variant="ghost" size="sm" onClick={() => setUpdatesOpen(true)}>
             <Settings /> 工具与更新
