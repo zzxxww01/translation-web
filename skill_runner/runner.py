@@ -341,7 +341,8 @@ class Runner:
             ),
             prompt_note=agents.prompt_note(agents.build_catalog(self.config), run.meta.skill),
             harness=run.meta.harness,
-            model=run.meta.model,
+            # Codex 续接时沿用这次运行已经定下的模型（中途清单更新也不换）
+            model=run.meta.model or (run.meta.actual_model if run.meta.harness == "codex" and run.meta.session_id else None),
         )
         try:
             session = await self.session_factory(spec)
