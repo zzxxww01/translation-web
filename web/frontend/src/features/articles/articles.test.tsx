@@ -173,21 +173,23 @@ describe('importAndTranslate', () => {
     claude.startClaudeTrack.mockResolvedValue({ id: 'run-1' });
   });
 
+  const codex = { harness: 'codex' as const, model: 'gpt-5.5-codex' };
+
   it.each([
-    ['both', true, true],
-    ['web', true, false],
-    ['agent', false, true],
-    ['import', false, false],
-  ] as const)('plan %s: web %s, agent %s', async (plan, web, agent) => {
-    await expect(importAndTranslate({ url: 'u', title: 'Demo', zh_title: '演示' }, plan, 'codex', vi.fn())).resolves.toBe('p1');
+    [true, codex],
+    [true, null],
+    [false, codex],
+    [false, null],
+  ] as const)('web %s, agent %o', async (web, agent) => {
+    await expect(importAndTranslate({ url: 'u', title: 'Demo', zh_title: '演示' }, { web, agent }, vi.fn())).resolves.toBe('p1');
     expect(api.startWorkflow.mock.calls).toEqual(web ? [['p1']] : []);
     // 对话标题用文章的中文标题
-    expect(claude.startClaudeTrack.mock.calls).toEqual(agent ? [['p1', 'codex', '演示']] : []);
+    expect(claude.startClaudeTrack.mock.calls).toEqual(agent ? [['p1', agent, '演示']] : []);
   });
 
   it('does not start anything again for an article imported before', async () => {
     substack.importArticle.mockResolvedValue({ project: { id: 'p1' }, already_imported: true });
-    await importAndTranslate({ url: 'u' }, 'both', 'claude', vi.fn());
+    await importAndTranslate({ url: 'u' }, { web: true, agent: codex }, vi.fn());
     expect(api.startWorkflow).not.toHaveBeenCalled();
     expect(claude.startClaudeTrack).not.toHaveBeenCalled();
   });
@@ -195,9 +197,7 @@ describe('importAndTranslate', () => {
   it('still opens the article when the agent cannot start', async () => {
     claude.startClaudeTrack.mockRejectedValue(new Error('skill-runner 挂了'));
     const notify = vi.fn();
-
-    await expect(importAndTranslate({ url: 'u' }, 'agent', 'claude', notify)).resolves.toBe('p1');
-
+    await expect(importAndTranslate({ url: 'u' }, { web: false, agent: { harness: 'claude', model: '' } }, notify)).resolves.toBe('p1');
     expect(notify).toHaveBeenCalledWith(expect.stringContaining('skill-runner 挂了'));
   });
 });
