@@ -1,5 +1,5 @@
 {
-  "version": 45,
+  "version": 46,
   "terms": [
     {
       "original": "TSMC",
@@ -5051,6 +5051,35 @@
       "source": "pipeline-audit-2026-10-25",
       "status": "active",
       "updated_at": "2026-10-25T21:54:11.474949"
+    },
+    {
+      "original": "kernel",
+      "translation": "算子",
+      "strategy": "first_annotate",
+      "note": "**GPU/NPU 上跑的计算函数一律「算子」，首现括注一次「算子（kernel）」**：CUDA kernel、GEMM kernel、昇腾 / CANN 算子、fused kernel=融合算子、kernel-authoring language=算子编写语言、kernel engineering=算子工程，禁「内核」；只有操作系统内核（Linux kernel）才译「内核」。代码里的 kernel 名（aclnnMatmul…）逐字保留。用户 2026-10-29 改定",
+      "tags": [
+        "ai",
+        "chip"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-10-29",
+      "status": "active",
+      "updated_at": "2026-10-29T22:24:14.659120"
+    },
+    {
+      "original": "Liang Wenfeng",
+      "translation": "梁文锋",
+      "strategy": "translate",
+      "note": "DeepSeek 创始人，通行译名；是「锋」不是「峰」（2026-10-29 网页版写成「梁文峰」）",
+      "tags": [
+        "people"
+      ],
+      "first_occurrence": null,
+      "scope": "global",
+      "source": "user-verdict-2026-10-29",
+      "status": "active",
+      "updated_at": "2026-10-29T22:24:14.659120"
     }
   ]
 }
