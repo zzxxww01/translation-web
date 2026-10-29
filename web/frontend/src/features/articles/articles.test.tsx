@@ -205,6 +205,85 @@ describe('EditableText direct editing', () => {
   });
 });
 
+describe('EditableText editing straight from a selection', () => {
+  const clipboard = (type: 'paste' | 'cut', data = '') => {
+    const event = new Event(type, { bubbles: true, cancelable: true });
+    const setData = vi.fn();
+    Object.defineProperty(event, 'clipboardData', { value: { getData: () => data, setData } });
+    return { event, setData };
+  };
+  const two = async (onSave = vi.fn().mockResolvedValue(undefined)) => {
+    await render(<>
+      <EditableText id="s1" value="见[行业模型](https://x.com/m)。后文很长" placeholder="" ariaLabel="带链接" onSave={onSave} />
+      <EditableText id="s2" value="第二段的文字。" placeholder="" ariaLabel="第二段" onSave={onSave} />
+    </>);
+    return {
+      linked: host.querySelector('[aria-label="编辑：带链接"]') as HTMLElement,
+      second: host.querySelector('[aria-label="编辑：第二段"]') as HTMLElement,
+    };
+  };
+
+  it('pastes over a selection without clicking into the paragraph first', async () => {
+    vi.useFakeTimers();
+    const onSave = vi.fn().mockResolvedValue(undefined);
+    const { linked } = await two(onSave);
+    // 选中「模型」（在链接里）
+    window.getSelection()!.setBaseAndExtent(linked.querySelector('a')!.firstChild!, 2, linked.querySelector('a')!.firstChild!, 4);
+    const { event } = clipboard('paste', '大模型');
+    await act(async () => { linked.dispatchEvent(event); });
+    expect(event.defaultPrevented).toBe(true);
+    const textarea = host.querySelector('textarea')!;
+    expect(textarea.value).toBe('见[行业大模型](https://x.com/m)。后文很长');
+    expect(document.activeElement).toBe(textarea);
+    expect(textarea.selectionStart).toBe('见[行业大模型'.length);
+    await act(async () => { vi.advanceTimersByTime(SAVE_DELAY_MS + 10); });
+    expect(onSave).toHaveBeenLastCalledWith('见[行业大模型](https://x.com/m)。后文很长');
+    await press(textarea, { key: 'z', ctrlKey: true });
+    expect(textarea.value).toBe('见[行业模型](https://x.com/m)。后文很长');
+  });
+
+  it('counts a drag that spills into the next paragraph\'s start as this paragraph only', async () => {
+    const { linked, second } = await two();
+    window.getSelection()!.setBaseAndExtent(linked.lastChild!, 1, second.firstChild!, 0); // 「后文很长」到下一段开头
+    const { event } = clipboard('paste', '。');
+    await act(async () => { document.body.dispatchEvent(event); });
+    expect(host.querySelector('textarea')!.value).toBe('见[行业模型](https://x.com/m)。。');
+  });
+
+  it('leaves a selection across two paragraphs alone', async () => {
+    const { linked, second } = await two();
+    window.getSelection()!.setBaseAndExtent(linked.lastChild!, 1, second.firstChild!, 3);
+    const { event } = clipboard('paste', 'X');
+    await act(async () => { document.body.dispatchEvent(event); });
+    expect(event.defaultPrevented).toBe(false);
+    expect(host.querySelector('textarea')).toBeNull();
+  });
+
+  it('cuts and deletes a selection, and starts editing when you type over it', async () => {
+    const { second } = await two();
+    window.getSelection()!.setBaseAndExtent(second.firstChild!, 0, second.firstChild!, 3);
+    const { event, setData } = clipboard('cut');
+    await act(async () => { second.dispatchEvent(event); });
+    expect(setData).toHaveBeenCalledWith('text/plain', '第二段');
+    expect(host.querySelector('textarea')!.value).toBe('的文字。');
+    await act(async () => { host.querySelector('textarea')!.blur(); });
+
+    const again = host.querySelector('[aria-label="编辑：第二段"]') as HTMLElement;
+    window.getSelection()!.setBaseAndExtent(again.firstChild!, 0, again.firstChild!, 1);
+    await press(again, { key: 'Backspace' });
+    expect(host.querySelector('textarea')!.value).toBe('文字。');
+    await act(async () => { host.querySelector('textarea')!.blur(); });
+
+    const third = host.querySelector('[aria-label="编辑：第二段"]') as HTMLElement;
+    window.getSelection()!.setBaseAndExtent(third.firstChild!, 0, third.firstChild!, 2);
+    await press(third, { key: '新' });
+    // 按键本身由浏览器落进编辑框（jsdom 没有这一步）：这里只看已经进入编辑、选中了同一段
+    const textarea = host.querySelector('textarea')!;
+    expect(document.activeElement).toBe(textarea);
+    expect(textarea.value.slice(textarea.selectionStart, textarea.selectionEnd)).toBe('文字');
+  });
+});
+
 describe('EditableText undo with an input method', () => {
   it('undoes one committed IME phrase at a time, never back to half-typed pinyin', async () => {
     await render(<EditableText id="ime" value="原文" placeholder="" ariaLabel="格子" onSave={vi.fn().mockResolvedValue(undefined)} />);

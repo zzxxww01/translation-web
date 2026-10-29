@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useImperativeHandle, useLayoutEffect, useRef, useState, type MouseEvent, type Ref } from 'react';
+import { flushSync } from 'react-dom';
 import { cn } from '@/lib/utils';
 import { SAVE_DELAY_MS, unsavedEdits } from '../lib/edits';
 import { editHistory, undoShortcut, type EditKind, type Snapshot } from '../lib/history';
-import { hasInlineMarkup, renderedToRaw } from '../lib/inline';
+import { hasInlineMarkup, rawSelection, renderedToRaw } from '../lib/inline';
 import { InlineMarkdown } from './InlineMarkdown';
 
 type SaveState = 'idle' | 'dirty' | 'saving' | 'saved' | 'error';
@@ -60,14 +61,17 @@ function afterPointerRelease(callback: () => void) {
   window.addEventListener('pointercancel', done, true);
 }
 
+/** box 里排版后的第几个字 */
+function offsetIn(box: Node, node: Node, offset: number): number {
+  const range = document.createRange();
+  range.setStart(box, 0);
+  range.setEnd(node, offset);
+  return range.toString().length;
+}
+
 /** 点在排版好的文字上：取浏览器放下的光标或选区，换算成第几个字（null = 不在这一段里） */
 function renderedSelection(box: HTMLElement, event: MouseEvent): { start: number; end: number } | 'outside' | null {
-  const offsetOf = (node: Node, offset: number) => {
-    const range = document.createRange();
-    range.setStart(box, 0);
-    range.setEnd(node, offset);
-    return range.toString().length;
-  };
+  const offsetOf = (node: Node, offset: number) => offsetIn(box, node, offset);
   const selection = window.getSelection();
   if (selection && selection.rangeCount > 0) {
     const range = selection.getRangeAt(0);
@@ -95,6 +99,77 @@ function renderedSelection(box: HTMLElement, event: MouseEvent): { start: number
   return null;
 }
 
+/** 还没进编辑框时，在排版视图里选中文字后直接粘贴 / 剪切 / 打字 / 删除：交给选区所在的那一段 */
+interface SelectionEditor {
+  /** 把排版后的 [start, end) 换成 insert，进入编辑，光标放在插入的字后面 */
+  replace: (start: number, end: number, insert: string) => void;
+  /** 立刻进入编辑并选中同一段；这一下按键随后直接落进编辑框，替换掉选中的字 */
+  select: (start: number, end: number) => void;
+}
+const selectionEditors = new WeakMap<Element, { current: SelectionEditor | null }>();
+
+/**
+ * 当前选区落在哪一段可编辑的文字里。只算真正选中了字的段落：拖选时多拖进段落之间的空白、
+ * 下一段的开头，都还算这一段；真的选了两段的字，或者伸进了别的栏，返回 null。
+ */
+function selectionTarget(): { editor: SelectionEditor; start: number; end: number; selected: string } | null {
+  const selection = window.getSelection();
+  if (!selection || selection.rangeCount === 0) return null;
+  const range = selection.getRangeAt(0);
+  const owner = range.startContainer instanceof Element ? range.startContainer : range.startContainer.parentElement;
+  const root = owner?.closest('[data-pane-body]') ?? document.body;
+  if (!root.contains(range.endContainer)) return null;
+  const hits: { box: Element; start: number; end: number }[] = [];
+  root.querySelectorAll('[data-edit-box]').forEach(box => {
+    if (!range.intersectsNode(box)) return;
+    const length = box.textContent?.length ?? 0;
+    const start = box.contains(range.startContainer) ? offsetIn(box, range.startContainer, range.startOffset) : 0;
+    const end = box.contains(range.endContainer) ? offsetIn(box, range.endContainer, range.endOffset) : length;
+    if (range.collapsed ? box.contains(range.startContainer) : end > start) hits.push({ box, start, end });
+  });
+  if (hits.length !== 1) return null;
+  const [{ box, start, end }] = hits;
+  const editor = selectionEditors.get(box)?.current;
+  return editor ? { editor, start, end, selected: (box.textContent ?? '').slice(start, end) } : null;
+}
+
+let selectionEditingInstalled = false;
+function installSelectionEditing() {
+  if (selectionEditingInstalled || typeof document === 'undefined') return;
+  selectionEditingInstalled = true;
+  // 焦点在输入框、弹框、菜单里时不管：它们自己处理
+  const free = (event: Event) => !(event.target instanceof HTMLElement
+    && (event.target.isContentEditable || event.target.closest('input, textarea, select, [role="dialog"], [role="menu"]')));
+  document.addEventListener('paste', event => {
+    if (event.defaultPrevented || !free(event)) return;
+    const pasted = event.clipboardData?.getData('text/plain');
+    const hit = pasted ? selectionTarget() : null;
+    if (!hit || !pasted) return;
+    event.preventDefault();
+    hit.editor.replace(hit.start, hit.end, pasted.replace(/\r\n?/g, '\n'));
+  });
+  document.addEventListener('cut', event => {
+    if (event.defaultPrevented || !free(event) || !event.clipboardData) return;
+    const hit = selectionTarget();
+    if (!hit || hit.start === hit.end) return;
+    event.preventDefault();
+    event.clipboardData.setData('text/plain', hit.selected);
+    hit.editor.replace(hit.start, hit.end, '');
+  });
+  document.addEventListener('keydown', event => {
+    if (event.defaultPrevented || event.ctrlKey || event.metaKey || event.altKey || !free(event)) return;
+    const erase = event.key === 'Backspace' || event.key === 'Delete';
+    const typing = event.key.length === 1 || event.key === 'Process' || event.isComposing;
+    if (!erase && !typing) return;
+    const hit = selectionTarget();
+    if (!hit || hit.start === hit.end) return;
+    if (erase) {
+      event.preventDefault();
+      hit.editor.replace(hit.start, hit.end, '');
+    } else hit.editor.select(hit.start, hit.end); // 不拦这一下：字落进刚获得焦点的编辑框
+  });
+}
+
 function editKind(inputType: string | undefined): EditKind {
   if (inputType === 'insertText' || inputType === 'insertCompositionText') return 'type';
   if (inputType?.startsWith('delete') && inputType !== 'deleteByCut' && inputType !== 'deleteByDrag') return 'delete';
@@ -102,7 +177,8 @@ function editKind(inputType: string | undefined): EditKind {
 }
 
 /**
- * 平时显示排好版的文字（链接、加粗渲染出来），点哪里就在哪里出现光标、直接改（显示原始 Markdown），
+ * 平时显示排好版的文字（链接、加粗渲染出来），点哪里就在哪里出现光标、直接改（显示原始 Markdown）；
+ * 选中一段字后直接粘贴、打字、删除也行，不用先点进去。
  * 停顿约 1 秒或离开时自动保存——类似 Obsidian 的实时预览。保存状态汇总到栏头（见 lib/edits），
  * 这里只在保存失败时标红、给重试。撤销记录见 lib/history。
  */
@@ -128,7 +204,10 @@ export function EditableText({ ref: editorRef, id, historyKey = id, value, place
     if (!editing && (state === 'idle' || state === 'saved')) setText(value ?? '');
   }
 
-  useEffect(() => trackPointer(), []);
+  useEffect(() => {
+    trackPointer();
+    installSelectionEditing();
+  }, []);
 
   // 别处来的新译文（不是自己刚存的）：撤销记录作废，免得撤回到别的版本上
   useEffect(() => {
@@ -248,8 +327,9 @@ export function EditableText({ ref: editorRef, id, historyKey = id, value, place
     unsavedEdits.remove(id);
   }, [id]);
 
-  // 浏览器菜单里的「撤销」也走这里；记下每次输入前的选区，撤销时光标放回去
-  useEffect(() => {
+  // 浏览器菜单里的「撤销」也走这里；记下每次输入前的选区，撤销时光标放回去。
+  // 用 layout effect：选中后直接打字时，进入编辑和那一下按键之间没有空档
+  useLayoutEffect(() => {
     const el = ref.current;
     if (!editing || !el) return;
     const onBeforeInput = (event: InputEvent) => {
@@ -275,6 +355,37 @@ export function EditableText({ ref: editorRef, id, historyKey = id, value, place
     }
     change(next);
   };
+
+  // 排版视图里选中后直接粘贴 / 打字（见 installSelectionEditing）
+  const selectionEditor = useRef<SelectionEditor | null>(null);
+  useLayoutEffect(() => {
+    selectionEditor.current = readOnly ? null : {
+      replace: (start, end, insert) => {
+        const target = rawSelection(text, start, end);
+        const next = target.text.slice(0, target.start) + insert + target.text.slice(target.end);
+        editHistory.record(historyKey, { text: latest.current, start: target.start, end: target.end }, 'other');
+        const caret = target.start + insert.length;
+        pendingSelection.current = { text: next, start: caret, end: caret };
+        setEditing(true);
+        change(next);
+      },
+      select: (start, end) => {
+        const target = rawSelection(text, start, end);
+        pendingSelection.current = target;
+        flushSync(() => {
+          setEditing(true);
+          // 选区只盖住链接的一部分：这个链接先去掉格式（字都留着），算一步修改
+          if (target.text !== text) {
+            editHistory.record(historyKey, { text: latest.current, start: target.start, end: target.end }, 'other');
+            change(target.text);
+          }
+        });
+      },
+    };
+  });
+  const registerBox = useCallback((element: HTMLElement | null) => {
+    if (element) selectionEditors.set(element, selectionEditor);
+  }, []);
 
   const enter = (event: MouseEvent<HTMLElement>) => {
     const picked = renderedSelection(event.currentTarget, event);
@@ -346,6 +457,8 @@ export function EditableText({ ref: editorRef, id, historyKey = id, value, place
         </Container>
       ) : (
         <Container
+          ref={registerBox}
+          data-edit-box=""
           role="button"
           tabIndex={0}
           aria-label={`编辑：${ariaLabel}`}

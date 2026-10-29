@@ -126,6 +126,55 @@ test('selecting to copy keeps the selection: inside a paragraph, across paragrap
   expect(await page.evaluate(() => window.getSelection()?.toString() ?? '')).toContain('行业模型');
 });
 
+/** 在第 n 段的第一行上从 from 拖到 to（像素，相对段落左边），松开后返回选中的字 */
+async function dragSelect(page: Page, n: number, from: number, to: number, end?: (box: { x: number; y: number; width: number; height: number }) => [number, number]) {
+  await cell(page, n).evaluate(element => element.scrollIntoView({ block: 'center' }));
+  const box = (await cell(page, n).boundingBox())!;
+  await page.mouse.move(box.x + from, box.y + 16);
+  await page.mouse.down();
+  const [x, y] = end ? end(box) : [box.x + to, box.y + 16];
+  await page.mouse.move(x, y, { steps: 8 });
+  await page.mouse.up();
+  return page.evaluate(() => window.getSelection()?.toString() ?? '');
+}
+
+test('select, then paste, type or delete straight away; no click into the paragraph first', async ({ page, context }) => {
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+  const saved = await open(page);
+  const original = (n: number) => rows[n].web;
+
+  // 带链接的一段：选中链接后面的一截字，直接 Ctrl+V
+  let picked = await dragSelect(page, 4, 160, 360);
+  expect(picked.length).toBeGreaterThan(5);
+  await page.evaluate(text => navigator.clipboard.writeText(text), '粘贴的字');
+  await page.keyboard.press('Control+V');
+  await expect(editor(page)).toHaveValue(original(4).replace(picked, '粘贴的字'));
+  expect(await editor(page).inputValue()).toContain('[行业模型](https://example.com/');
+  await page.keyboard.press('Escape');
+  await expect.poll(() => saved.at(-1)?.text).toBe(original(4).replace(picked, '粘贴的字'));
+
+  // 选中后直接打字
+  picked = await dragSelect(page, 6, 60, 220);
+  await page.keyboard.type('新');
+  await expect(editor(page)).toHaveValue(original(6).replace(picked, '新'));
+  await page.keyboard.press('Escape');
+
+  // 选中后按退格
+  picked = await dragSelect(page, 7, 60, 220);
+  await page.keyboard.press('Backspace');
+  await expect(editor(page)).toHaveValue(original(7).replace(picked, ''));
+  await page.keyboard.press('Escape');
+
+  // 拖过最后一行的末尾、松手在段落右边的空白里（不在段落上，不会触发点击）：照样算这一段
+  picked = await dragSelect(page, 10, 200, 0, box => [box.x + box.width + 24, box.y + box.height - 16]);
+  await expect(editor(page)).toHaveCount(0);
+  expect(picked.length).toBeGreaterThan(20);
+  await page.keyboard.press('Control+V');
+  const value = await editor(page).inputValue();
+  expect(value.endsWith('粘贴的字')).toBe(true);
+  expect(original(10).startsWith(value.slice(0, -'粘贴的字'.length))).toBe(true);
+});
+
 test('clicking the next paragraph while editing a linked one opens the paragraph you clicked', async ({ page }) => {
   await open(page);
   await cell(page, 8).evaluate(element => element.scrollIntoView({ block: 'start' }));
