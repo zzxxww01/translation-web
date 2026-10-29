@@ -523,9 +523,17 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     },
   };
 
-  const markRow = data.reading_mark ? rows.find(row => row.key === data.reading_mark?.key) : undefined;
   // 标记的那一段已经不在了（文章重新导入过）：不显示标记，不拿别的段落顶替
-  const markText = markRow ? (primary.text(markRow) || markRow.source) : null;
+  const markIndex = data.reading_mark ? rows.findIndex(row => row.key === data.reading_mark?.key) : -1;
+  const readingProgress = useMemo(() => {
+    if (markIndex < 0) return null;
+    // 读到百分之几：按原文字数算到标记那一段开头
+    const length = (row: WorkbenchRow) => (row.kind === 'image' ? 0 : row.source.length);
+    const total = rows.reduce((sum, row) => sum + length(row), 0) || 1;
+    const before = rows.slice(0, markIndex).reduce((sum, row) => sum + length(row), 0);
+    const row = rows[markIndex];
+    return { percent: Math.min(99, Math.round((before / total) * 100)), text: primary.text(row) || row.source };
+  }, [rows, markIndex, primary]);
   const primaryActions = [
     { label: '下载 Markdown', icon: Download, onSelect: () => void exportVersion(primary.id, 'zh') },
     { label: '导出 PDF', icon: FileText, onSelect: () => void printPrimary() },
@@ -545,16 +553,16 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     <div className="flex h-full min-h-0 flex-col bg-bg-primary">
       {!immersive && (
         <WorkbenchTopBar title={title} original={title !== project.title ? project.title : null}
-          onShowList={onShowList} onBack={() => navigate('/articles')}
+          onShowList={onShowList}
           save={<SaveStatus saving={saving} onSave={() => void saveNow()} compact={isMobile} />} compact={isMobile}
-          mark={markText} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
+          mark={readingProgress} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
           onExportPrimary={() => void exportVersion(primary.id, 'zh')} primaryActions={primaryActions} exportItems={exportItems}
           exportNotice={exportNotice}
           onImmersive={enterImmersive} legacyHref={`/document/${project.id}`} originalUrl={project.original_url} />
       )}
 
       {isMobile && (
-        <div className={cn('mx-4 mb-3 grid grid-cols-3 gap-0.5 rounded-full bg-bg-inset p-[3px] text-[13px]', immersive && 'mt-3')} role="tablist" aria-label="切换栏">
+        <div className="mx-4 my-2.5 grid shrink-0 grid-cols-3 gap-0.5 rounded-full bg-bg-inset p-[3px] text-[13px]" role="tablist" aria-label="切换栏">
           {PANES.map(id => (
             <button key={id} type="button" role="tab" data-tab-id={id} aria-selected={mobilePane === id} aria-controls={`pane-${id}`}
               tabIndex={mobilePane === id ? 0 : -1} onClick={() => setMobilePane(id)}
@@ -567,8 +575,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       )}
 
       <PaneGrid rows={rows} columns={columns} collapsed={collapsed} onToggle={toggle} mobilePane={isMobile ? mobilePane : null}
-        readingKey={data.reading_mark?.key} markBusy={markBusy} onMark={key => void markReading(key)} jump={readingJump}
-        immersive={immersive} corner={immersive ? (
+        readingMark={data.reading_mark} markBusy={markBusy} onMark={key => void markReading(key)} jump={readingJump}
+        corner={immersive ? (
           <IconAction label="退出沉浸模式" title="退出沉浸模式（Esc）" onClick={exitImmersive}>
             <Minimize2 aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
           </IconAction>

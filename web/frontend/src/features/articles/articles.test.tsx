@@ -65,6 +65,14 @@ const flush = () => act(async () => { await new Promise(resolve => setTimeout(re
 const inPopover = () => document.body.querySelector('[role="dialog"]') as HTMLElement;
 const buttonIn = (root: ParentNode, text: string) =>
   Array.from(root.querySelectorAll('button')).find(b => b.textContent?.trim() === text) as HTMLButtonElement;
+/** 顶栏的阅读进度胶囊「读到 N%」 */
+const progressChip = () => Array.from(host.querySelectorAll('button')).find(b => /^读到 \d+%$/.test(b.textContent?.trim() ?? '')) as HTMLButtonElement | undefined;
+/** 打开 Radix 下拉菜单（它认 pointerdown，不认 click） */
+const openMenu = (trigger: Element) => act(async () => {
+  trigger.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0 }));
+});
+const menuItemIn = (text: string) => Array.from(document.body.querySelectorAll('[role="menuitem"]'))
+  .find(item => item.textContent?.includes(text)) as HTMLElement;
 
 beforeEach(() => {
   vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true);
@@ -531,21 +539,28 @@ describe('Workbench', () => {
     });
     await render(<Workbench projectId="p1" />);
     await flush();
-    const button = host.querySelector('[aria-label="主译本：从这里继续阅读 — Datacenters are booming."]') as HTMLButtonElement;
+    const button = host.querySelector('[aria-label="主译本：标记读到这里 — Datacenters are booming."]') as HTMLButtonElement;
     await act(async () => { button.click(); });
     await flush();
     expect(api.setReadingMark).toHaveBeenCalledWith('p1', 's1/p000');
     await render(<Workbench key="reloaded" projectId="p1" />);
     await flush();
     expect(host.querySelectorAll('[data-reading-mark="true"]')).toHaveLength(3);
+    // 每一栏自己滚到标记处（jsdom 的元素没有 scrollTo，这里补上并记下来）
     const scroll = vi.fn();
-    host.querySelectorAll('[data-reading-mark="true"]').forEach(el => { el.scrollIntoView = scroll; });
-    await act(async () => { (host.querySelector('button[aria-label="阅读标记"]') as HTMLButtonElement).click(); });
-    await act(async () => { buttonIn(inPopover(), '继续阅读').click(); });
-    expect(scroll).toHaveBeenCalledTimes(3);
-    const markedButton = host.querySelector('[aria-label="主译本：从这里继续阅读 — Datacenters are booming."]') as HTMLButtonElement;
+    host.querySelectorAll<HTMLElement>('[data-pane-body]').forEach(pane => {
+      pane.scrollTo = ((options: ScrollToOptions) => scroll(pane.dataset.paneBody, options.behavior)) as typeof pane.scrollTo;
+    });
+    // 顶栏写读到百分之几（标题行之后第一段，按原文字数算），点一下就回去
+    expect(progressChip()?.textContent?.trim()).toBe('读到 33%'); // 前面只有标题「Introduction」：12 / 36 个字符
+    await act(async () => { progressChip()!.click(); });
+    expect(scroll.mock.calls.map(call => call[0]).sort()).toEqual(['compare', 'main', 'source']);
+    expect(scroll.mock.calls.every(call => call[1] === 'smooth')).toBe(true);
+    // 标记处左边一道细线，上面一行小字写什么时候标的
+    expect(host.querySelector('[data-reading-mark="true"]')!.textContent).toContain('上次读到这里 · 10-27 01:00');
+    const markedButton = host.querySelector('[aria-label="主译本：取消标记 — Datacenters are booming."]') as HTMLButtonElement;
     expect(markedButton.getAttribute('aria-pressed')).toBe('true');
-    expect(markedButton.title).toBe('取消“看到这里”');
+    expect(markedButton.title).toBe('取消阅读标记');
     expect(markedButton.closest('[data-reading-actions]')).not.toBeNull();
     await act(async () => { markedButton.click(); });
     await flush();
@@ -666,7 +681,7 @@ describe('Workbench', () => {
     api.setReadingMark.mockResolvedValue({ ok: true, reading_mark: null });
     await render(<Workbench projectId="p1" />);
     await flush();
-    const button = host.querySelector('[aria-label="主译本：从这里继续阅读 — First."]') as HTMLButtonElement;
+    const button = host.querySelector('[aria-label="主译本：取消标记 — First."]') as HTMLButtonElement;
     expect(button.getAttribute('aria-pressed')).toBe('true');
     await act(async () => { button.click(); });
     expect(api.setReadingMark).toHaveBeenCalledWith('p1', null);
@@ -787,8 +802,8 @@ describe('Workbench', () => {
     api.setReadingMark.mockRejectedValue(new Error('离线了'));
     await render(<Workbench projectId="p1" />);
     await flush();
-    await act(async () => { (host.querySelector('button[aria-label="阅读标记"]') as HTMLButtonElement).click(); });
-    await act(async () => { (inPopover().querySelector('[aria-label="清除阅读标记"]') as HTMLButtonElement).click(); });
+    await openMenu(host.querySelector('button[aria-label="更多"]')!);
+    await act(async () => { menuItemIn('清除阅读标记').click(); });
     await flush();
     expect(host.querySelectorAll('[data-reading-mark="true"]')).toHaveLength(3);
     expect(toast.error).toHaveBeenCalledWith('阅读标记没保存上：离线了');
@@ -1063,6 +1078,6 @@ describe('Workbench', () => {
     api.workbench.mockResolvedValue({ ...DATA, reading_mark: { key: 'gone/p9', at: '2026-10-27' } });
     await render(<Workbench projectId="p1" />);
     await flush();
-    expect(host.querySelector('button[aria-label="阅读标记"]')).toBeNull();
+    expect(progressChip()).toBeUndefined();
   });
 });

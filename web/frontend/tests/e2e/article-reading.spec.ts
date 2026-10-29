@@ -28,12 +28,11 @@ test('mobile article reading preserves a bookmark across refresh and saves a fra
   await expect(page.getByRole('article', { name: '主译本正文' })).toContainText('第一句。第二句。');
   // 段落工具条要先把鼠标移到段落上才出现、才点得到
   await page.getByRole('button', { name: '编辑：主译本：First sentence.', exact: true }).hover();
-  await page.getByRole('button', { name: '主译本：从这里继续阅读 — First sentence.', exact: true }).click();
-  await expect(page.getByRole('button', { name: '阅读标记', exact: true })).toBeVisible();
+  await page.getByRole('button', { name: '主译本：标记读到这里 — First sentence.', exact: true }).click();
+  await expect(page.getByRole('button', { name: /^读到 \d+%/ })).toBeVisible();
   await page.reload();
   await expect(page.locator('[data-reading-mark="true"]')).toHaveCount(1);
-  await page.getByRole('button', { name: '阅读标记', exact: true }).click();
-  await page.getByRole('button', { name: '继续阅读', exact: true }).click();
+  await page.getByRole('button', { name: /^读到 \d+%/ }).click();
   await page.getByRole('button', { name: '编辑：主译本：Second sentence.', exact: true }).click();
   await page.getByRole('textbox', { name: '主译本：Second sentence.', exact: true }).fill('第二句改好了。');
   await page.getByRole('button', { name: '保存', exact: true }).click();
@@ -42,6 +41,6 @@ test('mobile article reading preserves a bookmark across refresh and saves a fra
   await expect(page.getByRole('article', { name: '英文正文' })).toContainText('First sentence. Second sentence.');
   await expect(page.locator('[data-reading-mark="true"]')).toHaveCount(1);
   expect(await page.evaluate(() => document.documentElement.scrollWidth > window.innerWidth)).toBe(false);
-  await page.getByRole('button', { name: '英文：从这里继续阅读 — First sentence.', exact: true }).click();
+  await page.getByRole('button', { name: '英文：取消标记 — First sentence.', exact: true }).click();
   await expect(page.locator('[data-reading-mark="true"]')).toHaveCount(0);
 });

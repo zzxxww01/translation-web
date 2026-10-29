@@ -47,6 +47,8 @@ export function AppLayout() {
   const isImmersiveMode =
     searchParams.get('immersive') === '1' || searchParams.get('mode') === 'immersive';
   const isDocumentRoute = location.pathname.startsWith('/document');
+  // 文章工作台自己的顶栏就是整页顶栏，功能导航收在它左上角的菜单里（设计文档 6.1，方案 A）
+  const isWorkbenchRoute = /^\/articles\/[^/]+/.test(location.pathname);
   const isGlossaryRoute = location.pathname.startsWith('/glossary');
   const currentProjectId = useDocumentStore(state => state.currentProject?.id);
   const confirmationProjectId =
@@ -74,7 +76,7 @@ export function AppLayout() {
   return (
     <div className="relative flex h-screen flex-col overflow-hidden bg-background">
       {/* Header */}
-      {!isImmersiveMode && (
+      {!isImmersiveMode && !isWorkbenchRoute && (
         <header className="relative sticky top-0 z-40 border-b border-border-subtle bg-[#fbf8f6]/90 backdrop-blur-md">
           <div className="flex h-16 items-center justify-between px-4 md:px-8">
           {/* Logo + Mobile menu */}

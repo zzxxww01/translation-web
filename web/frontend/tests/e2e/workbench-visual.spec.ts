@@ -134,7 +134,7 @@ test('a collapsed column keeps header and text on one left edge; hover tint and 
     expect(Math.abs(header!.x - text!.x)).toBeLessThan(1);
     expect(Math.abs(header!.width - text!.width)).toBeLessThan(1);
   }
-  await expect(page.getByRole('button', { name: '阅读标记', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: /^读到 \d+%/ })).toBeVisible();
   await page.locator('[data-pane-body="compare"] > [data-reading-block]').nth(1).hover();
   await shoot(page, 'workbench-collapsed-source-1440');
 });

@@ -1,11 +1,14 @@
-import { useState, type ReactNode } from 'react';
-import { ArrowLeft, Bookmark, Check, ChevronDown, Download, ExternalLink, FileDiff, History, Maximize2, MoreHorizontal, PanelLeft, X, type LucideIcon } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import type { ReactNode } from 'react';
+import {
+  BookOpen, Check, ChevronDown, Download, ExternalLink, FileDiff, FileText, Flag, History, Maximize2, Menu,
+  MessageCircle, MessageSquare, MoreHorizontal, Newspaper, Sparkles, Wrench, type LucideIcon,
+} from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
+import { GlobalTaskIndicator } from '@/components/layout/GlobalTaskIndicator';
 import {
   DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { HUMAN_EDITS_URL } from '../api';
 import { FOCUS_RING, STROKE } from '../lib/ui';
 import { IconAction } from './VersionHeader';
@@ -16,24 +19,41 @@ export interface ExportItem {
   onSelect: () => void;
 }
 
+/** 阅读标记：读到全文的百分之几，标记处的文字（悬停看） */
+export interface ReadingProgress {
+  percent: number;
+  text: string;
+}
+
 const MENU = 'wb-pop rounded-xl border-0 bg-bg-secondary p-1.5 shadow-pop';
 const MENU_ITEM = 'rounded-lg px-2.5 py-2 text-[13px] text-text-secondary focus:bg-bg-hover focus:text-text-primary [&>svg]:text-text-muted';
 const MENU_LABEL = 'px-2.5 pb-1 pt-1.5 text-[11px] font-normal tracking-[0.12em] text-text-muted';
 
+// 和 AppLayout 顶部导航同一组功能：工作台里顶部导航收进左上角这个菜单（设计文档 6.1，方案 A）
+const FEATURES: { path: string; label: string; icon: LucideIcon }[] = [
+  { path: '/articles', label: '文章', icon: Newspaper },
+  { path: '/post', label: '帖子翻译', icon: MessageSquare },
+  { path: '/wechat', label: '微信排版', icon: FileText },
+  { path: '/slack', label: 'Slack 回复', icon: MessageCircle },
+  { path: '/tools', label: '工具箱', icon: Wrench },
+  { path: '/skills', label: 'Agent', icon: Sparkles },
+];
+
 /**
- * 顶栏：标题、保存状态、阅读标记、导出主译本、沉浸模式、更多。和页面底色融为一体，不画边框。
+ * 工作台的顶栏，也是整页唯一的一条顶栏（方案 A）：左边功能菜单、品牌、「文章 ›」、标题和英文原标题，
+ * 右边保存状态、阅读进度、导出主译本、沉浸模式、更多。
  * 导出：左半边直接下载主译本的 Markdown；▾ 里是主译本的其他去处（PDF、复制全文、公众号格式）和其余各版。
- * compact（手机）：导出收进「⋯」，把宽度留给标题。
+ * compact（手机）：只留功能菜单和标题，导出收进「⋯」。
  */
-export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mark, onJump, onClearMark, markBusy,
+export function WorkbenchTopBar({ title, original, onShowList, save, mark, onJump, onClearMark, markBusy,
   onExportPrimary, primaryActions, exportItems, exportNotice = null, onImmersive, legacyHref, originalUrl, compact = false }: {
   title: string;
   original: string | null;
+  /** 「文章」打开文章列表抽屉；没有就跳回文章页 */
   onShowList?: () => void;
-  onBack: () => void;
   save: ReactNode;
-  /** 标记处的文字；null = 没有标记 */
-  mark: string | null;
+  /** null = 没有阅读标记 */
+  mark: ReadingProgress | null;
   onJump: () => void;
   onClearMark: () => void;
   markBusy: boolean;
@@ -50,46 +70,61 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
   originalUrl: string | null;
   compact?: boolean;
 }) {
-  const [markOpen, setMarkOpen] = useState(false);
+  const location = useLocation();
   return (
-    <header className="flex items-center gap-2 px-4 pb-3 pt-3.5 md:px-[22px] md:pb-3.5 md:pt-4">
-      {onShowList
-        ? <IconAction label="显示文章列表" className="-ml-1.5" onClick={onShowList}><PanelLeft aria-hidden className="h-4 w-4" strokeWidth={STROKE} /></IconAction>
-        : <IconAction label="回到文章列表" className="-ml-1.5" onClick={onBack}><ArrowLeft aria-hidden className="h-4 w-4" strokeWidth={STROKE} /></IconAction>}
-      {/* 桌面上标题的左边缘正好对齐第一栏正文 */}
-      <div className="-ml-1 mr-2 min-w-0 flex-1">
-        <h1 className="truncate text-[17px] font-semibold leading-snug tracking-[0.01em] text-text-primary [font-family:var(--font-display)] md:text-[19px]"
-          title={original ?? title}>{title}</h1>
-        {original && <p className="truncate text-[12.5px] italic leading-snug text-text-muted [font-family:var(--font-source)] md:text-[13px]">{original}</p>}
-      </div>
+    <header className="flex h-14 shrink-0 items-center gap-2 border-b border-border-subtle px-3 md:gap-2.5 md:pl-3 md:pr-4">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <IconAction label="功能导航"><Menu aria-hidden className="h-4 w-4" strokeWidth={STROKE} /></IconAction>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="start" sideOffset={6} className={cn(MENU, 'w-52')}>
+          {FEATURES.map(item => (
+            <DropdownMenuItem key={item.path} className={cn(MENU_ITEM, item.path === '/articles' && 'font-medium text-primary-700 [&>svg]:text-primary-500')} asChild>
+              <Link to={item.path}><item.icon strokeWidth={STROKE} /> {item.label}</Link>
+            </DropdownMenuItem>
+          ))}
+          <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
+          <DropdownMenuItem className={MENU_ITEM} asChild>
+            <Link to={`/glossary?from=${encodeURIComponent(location.pathname + location.search)}`}><BookOpen strokeWidth={STROKE} /> 术语库</Link>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      {!compact && (
+        <>
+          <Link to="/articles" aria-label="momo 翻译工作台首页"
+            className={cn('flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md bg-primary-500 text-[14px] leading-none text-white [font-family:var(--font-display)]', FOCUS_RING)}>
+            <span aria-hidden>译</span>
+          </Link>
+          {onShowList
+            ? <button type="button" onClick={onShowList} title="文章列表"
+                className={cn('shrink-0 rounded-md px-1 text-[13px] text-text-muted transition-colors hover:text-text-primary', FOCUS_RING)}>文章</button>
+            : <Link to="/articles" className={cn('shrink-0 rounded-md px-1 text-[13px] text-text-muted hover:text-text-primary', FOCUS_RING)}>文章</Link>}
+          <span aria-hidden className="-mx-1 shrink-0 text-[13px] text-text-disabled">›</span>
+        </>
+      )}
+      <h1 className="min-w-0 shrink truncate text-[15.5px] font-semibold leading-snug text-text-primary [font-family:var(--font-display)] md:text-[16px]"
+        title={original ?? title}>{title}</h1>
+      {original && !compact && (
+        <span className="min-w-0 flex-[1_1_0%] truncate text-[13px] italic text-text-muted [font-family:var(--font-source)]">{original}</span>
+      )}
+      <span className="min-w-0 flex-1" />
+      <GlobalTaskIndicator />
       {save}
-      {mark !== null && (
-        <Popover open={markOpen} onOpenChange={setMarkOpen}>
-          <PopoverTrigger asChild>
-            <IconAction label="阅读标记" className="text-primary-500 hover:text-primary-600">
-              <Bookmark aria-hidden className="h-4 w-4 fill-current" strokeWidth={STROKE} />
-            </IconAction>
-          </PopoverTrigger>
-          <PopoverContent align="end" sideOffset={6} className="wb-pop w-72 rounded-[14px] border-0 p-4 shadow-pop">
-            <p className="text-[11px] tracking-[0.12em] text-text-muted">看到这里</p>
-            <p className="mt-1.5 line-clamp-3 text-[13.5px] leading-relaxed text-text-primary [font-family:var(--font-display)]">{mark}</p>
-            <div className="mt-3.5 flex items-center justify-between">
-              <button type="button" aria-label="清除阅读标记" disabled={markBusy} onClick={() => { setMarkOpen(false); onClearMark(); }}
-                className={cn('-ml-1.5 inline-flex h-7 items-center gap-1 rounded-full px-2 text-[12px] text-text-muted hover:bg-ink-wash hover:text-text-primary disabled:opacity-40', FOCUS_RING)}>
-                <X aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} />清除
-              </button>
-              <button type="button" onClick={() => { setMarkOpen(false); onJump(); }}
-                className={cn('h-7 rounded-full bg-primary-50 px-3.5 text-[12.5px] font-medium text-primary-700 hover:bg-primary-100', FOCUS_RING)}>继续阅读</button>
-            </div>
-          </PopoverContent>
-        </Popover>
+      {mark && (
+        <button type="button" onClick={onJump} disabled={markBusy} title={`回到上次读到的地方：${mark.text.slice(0, 60)}`}
+          className={cn('inline-flex h-8 shrink-0 items-center gap-2 rounded-full bg-primary-50 px-3 text-[12.5px] font-medium text-primary-700 transition-colors hover:bg-primary-100 disabled:opacity-60', FOCUS_RING)}>
+          <span aria-hidden className="h-1 w-10 overflow-hidden rounded-full bg-primary-200">
+            <span className="block h-full rounded-full bg-primary-500" style={{ width: `${mark.percent}%` }} />
+          </span>
+          读到 {mark.percent}%
+        </button>
       )}
       {!compact && (<>
         <span role="status" className="sr-only">{exportNotice ?? ''}</span>
         {/* 不用 overflow-hidden 裁圆角：会把键盘焦点的描边裁掉。两半各自带圆角。 */}
-        <div className="ml-1 inline-flex items-stretch rounded-full bg-primary-500 text-[13px] font-medium text-white shadow-plum">
+        <div className="inline-flex shrink-0 items-stretch rounded-full bg-primary-500 text-[12.5px] font-medium text-white shadow-plum">
           <button type="button" onClick={onExportPrimary}
-            className={cn('inline-flex h-9 items-center gap-1.5 rounded-l-full pl-4 pr-3.5 transition-colors hover:bg-primary-600', FOCUS_RING)}>
+            className={cn('inline-flex h-8 items-center gap-1.5 rounded-l-full pl-3.5 pr-3 transition-colors hover:bg-primary-600', FOCUS_RING)}>
             {exportNotice
               ? <><Check aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} /><span>{exportNotice}</span></>
               : <><Download aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} /><span>导出主译本</span></>}
@@ -108,7 +143,7 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
           </DropdownMenu>
         </div>
       </>)}
-      <IconAction label="沉浸模式" title="沉浸模式：整屏只留三栏（Esc 退出）" className={compact ? undefined : 'ml-1'} onClick={onImmersive}>
+      <IconAction label="沉浸模式" title="沉浸模式：整屏只留三栏（Esc 退出）" onClick={onImmersive}>
         <Maximize2 aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
       </IconAction>
       <DropdownMenu>
@@ -119,6 +154,14 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
           {compact && (
             <>
               <ExportMenuItems primaryActions={primaryActions} exportItems={exportItems} />
+              <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
+            </>
+          )}
+          {mark && (
+            <>
+              <DropdownMenuItem className={MENU_ITEM} disabled={markBusy} onSelect={onClearMark}>
+                <Flag strokeWidth={STROKE} /> 清除阅读标记
+              </DropdownMenuItem>
               <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
             </>
           )}
