@@ -186,7 +186,8 @@ test('immersive mode fills the screen with the three panes', async ({ page }) =>
   expect(Math.round(grid.width)).toBe(viewport.width);
   expect(Math.round(grid.height)).toBe(viewport.height);
   await page.screenshot({ path: 'test-results/workbench-immersive.png', animations: 'disabled' });
-  // 刷新后还在沉浸模式（只是浏览器不再全屏）
+  // 刷新后还在沉浸模式；不请求浏览器全屏
+  expect(await page.evaluate(() => document.fullscreenElement)).toBeNull();
   await page.reload();
   await expect(page.getByRole('button', { name: '退出沉浸模式' })).toBeVisible();
   await page.getByRole('button', { name: '退出沉浸模式' }).click();
