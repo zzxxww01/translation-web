@@ -104,11 +104,11 @@ test('compare tabs move with the arrow keys and show the focus ring; ＋ is not 
   await expect(tabs.getByRole('tab', { name: 'Codex' })).toBeFocused();
   await expect(tabs.getByRole('tab', { name: 'Codex' })).toHaveAttribute('aria-selected', 'true');
   await shoot(page, 'workbench-focus-tabs-1440');
-  // 用键盘走到「导出其他版本」，看焦点描边没有被圆角胶囊裁掉
-  await page.getByRole('button', { name: '导出其他版本' }).focus();
+  // 用键盘走到「更多导出方式」，看焦点描边没有被圆角胶囊裁掉
+  await page.getByRole('button', { name: '更多导出方式' }).focus();
   await page.keyboard.press('Shift+Tab');
   await page.keyboard.press('Tab');
-  await expect(page.getByRole('button', { name: '导出其他版本' })).toBeFocused();
+  await expect(page.getByRole('button', { name: '更多导出方式' })).toBeFocused();
   await page.screenshot({ path: 'test-results/workbench-focus-export-1440.png', clip: { x: 1100, y: 70, width: 340, height: 64 }, animations: 'disabled' });
 });
 
@@ -134,7 +134,7 @@ test('a collapsed column keeps header and text on one left edge; hover tint and 
     expect(Math.abs(header!.x - text!.x)).toBeLessThan(1);
     expect(Math.abs(header!.width - text!.width)).toBeLessThan(1);
   }
-  await expect(page.getByRole('button', { name: '阅读标记', exact: true })).toBeVisible();
+  await expect(page.getByRole('button', { name: /^读到 \d+%/ })).toBeVisible();
   await page.locator('[data-pane-body="compare"] > [data-reading-block]').nth(1).hover();
   await shoot(page, 'workbench-collapsed-source-1440');
 });

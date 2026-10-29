@@ -12,24 +12,33 @@ export interface VersionHeaderProps {
 }
 
 /**
- * 栏头的三行排版块（设计文档 6.2）：小标题和右上角操作同一行，版本名（或对照栏的标签）、状态行各占整行宽。
+ * 栏头（设计文档 6.2，10-29 起方案 A）：一行写完——小标题、版本名（或对照栏的标签）、状态行，操作靠右。
+ * 状态行放不下时只截断说明文字。stacked（手机，一栏占满屏宽）：状态行单独第二行。
  * 和正文共用版心，栏变宽时左边缘仍和正文对齐。collapse 是 PaneGrid 给的「收起」按钮，放在操作最后。
  */
-export function VersionHeader({ eyebrow, primary = false, title, line, actions, collapse }: VersionHeaderProps & { collapse?: ReactNode }) {
-  return (
-    <div className={MEASURE}>
-      <div className="flex h-6 items-center gap-2">
-        <span className={cn('flex min-w-0 items-center gap-1 text-[11px] font-medium leading-none tracking-[0.14em]',
-          primary ? 'text-primary-500' : 'text-text-muted')}>
-          {primary && <Star aria-hidden className="h-3 w-3 shrink-0 fill-current" strokeWidth={1.75} />}
-          {eyebrow}
-        </span>
-        {(actions || collapse) && (
-          <div className="-my-1 -mr-2 ml-auto flex shrink-0 items-center gap-0.5">{actions}{collapse}</div>
-        )}
+export function VersionHeader({ eyebrow, primary = false, title, line, actions, collapse, stacked = false }: VersionHeaderProps & { collapse?: ReactNode; stacked?: boolean }) {
+  const label = (
+    <span className={cn('flex shrink-0 items-center gap-1 whitespace-nowrap text-[11px] font-medium leading-none tracking-[0.14em]',
+      primary ? 'text-primary-500' : 'text-text-muted')}>
+      {primary && <Star aria-hidden className="h-3 w-3 shrink-0 fill-current" strokeWidth={1.75} />}
+      {eyebrow}
+    </span>
+  );
+  const tools = (actions || collapse) && <div className="-mr-2 ml-auto flex shrink-0 items-center gap-0.5">{actions}{collapse}</div>;
+  if (stacked) {
+    return (
+      <div className={MEASURE}>
+        <div className="flex min-h-8 min-w-0 items-center gap-2.5">{label}<div className="flex min-w-0 items-center">{title}</div>{tools}</div>
+        <div className="mt-0.5 min-w-0">{line}</div>
       </div>
-      <div className="mt-1.5 flex min-h-8 min-w-0 items-center">{title}</div>
-      <div className="mt-1 min-w-0">{line}</div>
+    );
+  }
+  return (
+    <div className={cn(MEASURE, 'flex min-w-0 items-center gap-2.5')}>
+      {label}
+      <div className="flex min-w-0 shrink-0 items-center">{title}</div>
+      <div className="min-w-0 flex-1">{line}</div>
+      {tools}
     </div>
   );
 }

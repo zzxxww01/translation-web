@@ -15,7 +15,9 @@ export type VersionAction =
   | { kind: 'open-run'; label: string }
   | { kind: 'continue'; label: string }
   | { kind: 'login'; label: string }
-  | { kind: 'force-import'; label: string };
+  | { kind: 'force-import'; label: string }
+  /** Agent 版导入后仍有空着的段落：滚到第一处 */
+  | { kind: 'locate-missing'; label: string };
 
 /** 栏头的翻译按钮：没有 / 继续翻译（写在状态行里）/ 重新翻译（只换模型） */
 export type TranslateButton = 'none' | 'continue' | 'retranslate';
@@ -141,9 +143,14 @@ function agentVersion(input: VersionsInput, harness: Harness, variant: Workbench
     return { ...base, model, tone: 'busy', line: ['正在导入'], actions: [], readOnly: Boolean(variant) };
   }
   const model = variant?.import?.model ?? null;
+  // 导入时有段落没对上（或后来被清空）：和网页版一样说「缺 N 段」，可以点过去补
   const filled = countFilled(data.rows, text);
-  const status = filled.total && filled.done < filled.total ? `已导入 ${filled.done}/${filled.total} 段` : '已完成';
-  return { ...base, model, tone: 'done', line: model ? [status, model] : [status], actions: [], readOnly: false };
+  const missing = filled.total - filled.done;
+  if (missing > 0) {
+    return { ...base, model, tone: 'wait', line: model ? [`缺 ${missing} 段`, model] : [`缺 ${missing} 段`],
+      actions: [{ kind: 'locate-missing', label: '定位' }], readOnly: false };
+  }
+  return { ...base, model, tone: 'done', line: model ? ['已完成', model] : ['已完成'], actions: [], readOnly: false };
 }
 
 /** 没登录 Agent 页时不知道是哪个 Agent 在跑：放一个占位版本，状态行提示去登录 */

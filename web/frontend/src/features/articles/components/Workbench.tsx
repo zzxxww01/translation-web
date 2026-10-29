@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { Minimize2, RefreshCw, Star } from 'lucide-react';
+import { ClipboardCopy, Download, ExternalLink, FileText, Minimize2, Newspaper, RefreshCw, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { harnessLabel } from '@/features/skills/harness';
@@ -9,11 +9,12 @@ import { skillsApi } from '@/features/skills/api';
 import { ApiErrorWrapper } from '@/shared/api/client';
 import { isUnauthorized } from '@/features/skills/hooks';
 import type { RunMeta } from '@/features/skills/types';
-import { articlesApi, downloadText } from '../api';
+import { articlesApi, downloadText, type ExportResult } from '../api';
 import { articleKeys, useClaudeRun, useWorkbench } from '../hooks';
 import { saveAgentChoice, type AgentChoice } from '../lib/agentChoice';
 import { AlignmentTooLow, importClaudeTrack, startClaudeTrack } from '../lib/claude';
 import { flushEdits, unsavedEdits } from '../lib/edits';
+import { copyForWechat, copyFullText, printAsPdf, sendToWechatEditor } from '../lib/exporting';
 import { editHistory, undoShortcut } from '../lib/history';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { sectionsWithMissing } from '../lib/tracks';
@@ -225,20 +226,70 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     }
   };
 
-  const exportVersion = async (target: string, format: 'zh' | 'en') => {
+  /** 取导出的 Markdown；QA 没过时问一句「仍然导出？」，不导就把原来的错误抛出去 */
+  const loadExport = async (target: string, format: 'zh' | 'en'): Promise<ExportResult> => {
     try {
-      const result = await articlesApi.exportMarkdown(target, format);
-      downloadText(result.filename, result.content);
+      return await articlesApi.exportMarkdown(target, format);
     } catch (error) {
       if (format === 'zh' && isQaBlocked(error) && window.confirm(`${(error as Error).message}\n\n仍然导出？`)) {
-        try {
-          const result = await articlesApi.exportMarkdown(target, format, true);
-          downloadText(result.filename, result.content);
-        } catch (forced) {
-          toast.error(forced instanceof Error ? forced.message : '导出失败');
-        }
-        return;
+        return articlesApi.exportMarkdown(target, format, true);
       }
+      throw error;
+    }
+  };
+
+  const exportVersion = async (target: string, format: 'zh' | 'en') => {
+    try {
+      const result = await loadExport(target, format);
+      downloadText(result.filename, result.content);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '导出失败');
+    }
+  };
+
+  // 复制成功没有别处能显示：桌面上写在「导出」按钮上两秒半，手机上（按钮收进了「⋯」）用 toast
+  const [exportNotice, setExportNotice] = useState<string | null>(null);
+  const noticeTimer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
+  const notify = (text: string | null, linger = true) => {
+    clearTimeout(noticeTimer.current);
+    if (text && isMobile && linger) {
+      setExportNotice(null);
+      toast.success(text);
+      return;
+    }
+    setExportNotice(text);
+    if (text && linger) noticeTimer.current = setTimeout(() => setExportNotice(null), 2500);
+  };
+  useEffect(() => () => clearTimeout(noticeTimer.current), []);
+
+  const copyPrimary = (how: 'text' | 'wechat') => {
+    // 剪贴板要在点击这一下就开始写，内容（导出、排版）随后再到
+    const markdown = loadExport(primary.id, 'zh').then(result => result.content);
+    if (how === 'wechat') notify('正在排版…', false);
+    (how === 'wechat' ? copyForWechat(markdown) : copyFullText(markdown)).then(
+      () => notify(how === 'wechat' ? '已复制，可粘到公众号' : '已复制全文'),
+      error => {
+        notify(null);
+        toast.error(`没复制上：${error instanceof Error ? error.message : '请重试'}`);
+      },
+    );
+  };
+
+  const printPrimary = async () => {
+    try {
+      const result = await loadExport(primary.id, 'zh');
+      await printAsPdf(result.content, title);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : '没能导出 PDF');
+    }
+  };
+
+  const openInWechat = async () => {
+    try {
+      const result = await loadExport(primary.id, 'zh');
+      sendToWechatEditor(result.content);
+      navigate('/wechat');
+    } catch (error) {
       toast.error(error instanceof Error ? error.message : '导出失败');
     }
   };
@@ -367,6 +418,15 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     else if (action.kind === 'open-run' && run) setDrawer({ kind: 'claude', run });
     else if (action.kind === 'continue') void continueTranslation(version);
     else if (action.kind === 'login') navigate('/skills');
+    else if (action.kind === 'locate-missing') {
+      const row = rows.find(item => item.kind !== 'image' && !version.text(item)?.trim());
+      const pane = version.id === primary.id ? 'main' : 'compare';
+      if (isMobile) setMobilePane(pane);
+      if (row) {
+        requestAnimationFrame(() => document.querySelector(`[data-pane-body="${pane}"] [data-rows~="${row.key}"]`)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'center' }));
+      }
+    }
     else if (action.kind === 'force-import' && run) {
       if (forceLock.current) return;
       forceLock.current = true;
@@ -463,13 +523,28 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     },
   };
 
-  const markRow = data.reading_mark ? rows.find(row => row.key === data.reading_mark?.key) : undefined;
   // 标记的那一段已经不在了（文章重新导入过）：不显示标记，不拿别的段落顶替
-  const markText = markRow ? (primary.text(markRow) || markRow.source) : null;
+  const markIndex = data.reading_mark ? rows.findIndex(row => row.key === data.reading_mark?.key) : -1;
+  const readingProgress = useMemo(() => {
+    if (markIndex < 0) return null;
+    // 读到百分之几：按原文字数算到标记那一段开头
+    const length = (row: WorkbenchRow) => (row.kind === 'image' ? 0 : row.source.length);
+    const total = rows.reduce((sum, row) => sum + length(row), 0) || 1;
+    const before = rows.slice(0, markIndex).reduce((sum, row) => sum + length(row), 0);
+    const row = rows[markIndex];
+    return { percent: Math.min(99, Math.round((before / total) * 100)), text: primary.text(row) || row.source };
+  }, [rows, markIndex, primary]);
+  const primaryActions = [
+    { label: '下载 Markdown', icon: Download, onSelect: () => void exportVersion(primary.id, 'zh') },
+    { label: '导出 PDF', icon: FileText, onSelect: () => void printPrimary() },
+    { label: '复制全文', icon: ClipboardCopy, onSelect: () => copyPrimary('text') },
+    { label: '复制为公众号格式', icon: Newspaper, onSelect: () => copyPrimary('wechat') },
+    { label: '在微信排版中打开', icon: ExternalLink, onSelect: () => void openInWechat() },
+  ];
   const exportItems = [
     { label: '英文原文', onSelect: () => void exportVersion(project.id, 'en') },
-    ...versions.filter(version => !version.pending).map(version => ({
-      label: `${version.name}${version.model ? `（${version.model}）` : ''}${version.id === primary.id ? ' · 主译本' : ''}`,
+    ...versions.filter(version => !version.pending && version.id !== primary.id).map(version => ({
+      label: `${version.name}${version.model ? `（${version.model}）` : ''}`,
       onSelect: () => void exportVersion(version.id, 'zh'),
     })),
   ];
@@ -478,15 +553,16 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     <div className="flex h-full min-h-0 flex-col bg-bg-primary">
       {!immersive && (
         <WorkbenchTopBar title={title} original={title !== project.title ? project.title : null}
-          onShowList={onShowList} onBack={() => navigate('/articles')}
+          onShowList={onShowList}
           save={<SaveStatus saving={saving} onSave={() => void saveNow()} compact={isMobile} />} compact={isMobile}
-          mark={markText} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
-          onExportPrimary={() => void exportVersion(primary.id, 'zh')} exportItems={exportItems}
+          mark={readingProgress} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
+          onExportPrimary={() => void exportVersion(primary.id, 'zh')} primaryActions={primaryActions} exportItems={exportItems}
+          exportNotice={exportNotice}
           onImmersive={enterImmersive} legacyHref={`/document/${project.id}`} originalUrl={project.original_url} />
       )}
 
       {isMobile && (
-        <div className={cn('mx-4 mb-3 grid grid-cols-3 gap-0.5 rounded-full bg-bg-inset p-[3px] text-[13px]', immersive && 'mt-3')} role="tablist" aria-label="切换栏">
+        <div className="mx-4 my-2.5 grid shrink-0 grid-cols-3 gap-0.5 rounded-full bg-bg-inset p-[3px] text-[13px]" role="tablist" aria-label="切换栏">
           {PANES.map(id => (
             <button key={id} type="button" role="tab" data-tab-id={id} aria-selected={mobilePane === id} aria-controls={`pane-${id}`}
               tabIndex={mobilePane === id ? 0 : -1} onClick={() => setMobilePane(id)}
@@ -499,8 +575,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       )}
 
       <PaneGrid rows={rows} columns={columns} collapsed={collapsed} onToggle={toggle} mobilePane={isMobile ? mobilePane : null}
-        readingKey={data.reading_mark?.key} markBusy={markBusy} onMark={key => void markReading(key)} jump={readingJump}
-        immersive={immersive} corner={immersive ? (
+        readingMark={data.reading_mark} markBusy={markBusy} onMark={key => void markReading(key)} jump={readingJump}
+        corner={immersive ? (
           <IconAction label="退出沉浸模式" title="退出沉浸模式（Esc）" onClick={exitImmersive}>
             <Minimize2 aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
           </IconAction>
