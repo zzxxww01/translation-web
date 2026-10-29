@@ -18,6 +18,10 @@ from typing import Dict, List, Optional, Sequence, Tuple
 MIN_SCORE = 0.5
 # 出现在超过这个比例的块里的词当作虚词，不参与打分
 COMMON_TOKEN_RATIO = 0.3
+# 标题对正文块（或正文对标题块）打八折。短标题的词往往全出现在紧跟着的那段正文里
+# （"DeepSeek Open Source" 与「…DeepSeek's open source week…」），只看词会和标题块打平，
+# 结果正文进了标题行、标题被并到上一段末尾、这一段空着（2026-10-29 华为与 DeepSeek 一文 3 处）。
+KIND_MISMATCH = 0.8
 
 _HEADING = re.compile(r"^(#{1,6})\s+(.*)$")
 _LIST_ITEM = re.compile(r"^\s*(?:[-*+]|\d+[.)])\s+(.*)$")
@@ -148,8 +152,16 @@ def _tokens(text: str) -> List[str]:
     return _TOKEN.findall(text.lower())
 
 
-def align_targets(blocks: Sequence[str], targets: Sequence[str]) -> List[Optional[int]]:
-    """单调对齐：每个目标对到一个块或不对（None），块序号随目标序号不减。O(块数 × 目标数)。"""
+def _is_heading(kind: str) -> bool:
+    """章节标题，或者 h1–h6（块和段落用同一套写法）"""
+    return kind == "section" or bool(re.fullmatch(r"h[1-6]", kind))
+
+
+def align_targets(blocks: Sequence[str], targets: Sequence[str],
+                  block_kinds: Optional[Sequence[str]] = None,
+                  target_kinds: Optional[Sequence[str]] = None) -> List[Optional[int]]:
+    """单调对齐：每个目标对到一个块或不对（None），块序号随目标序号不减。O(块数 × 目标数)。
+    给了块和目标的类型时，标题和正文互相对打八折（见 KIND_MISMATCH）。"""
     n, m = len(blocks), len(targets)
     if not n or not m:
         return [None] * m
@@ -164,11 +176,16 @@ def align_targets(blocks: Sequence[str], targets: Sequence[str]) -> List[Optiona
         words = set(_tokens(target))
         target_words.append([t for t in words if doc_freq.get(t, 0) <= limit] or list(words))
 
+    kinds_known = block_kinds is not None and target_kinds is not None
+
     def score(j: int, i: int) -> float:
         words = target_words[j]
         if not words:
             return 0.0
-        return sum(1 for t in words if t in block_sets[i]) / len(words)
+        covered = sum(1 for t in words if t in block_sets[i]) / len(words)
+        if kinds_known and _is_heading(target_kinds[j]) != _is_heading(block_kinds[i]):
+            covered *= KIND_MISMATCH
+        return covered
 
     neg = float("-inf")
     # best[j][i]：前 j 个目标、所用块都 ≤ i 时的最高分；choice 记回溯
@@ -257,7 +274,8 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
     for en_index, zh_indexes in pair_blocks(en_blocks, zh_blocks):
         zh_for_en[en_index] = [zh_blocks[k].text for k in zh_indexes]
 
-    mapping = align_targets([b.text for b in en_blocks], [t.source for t in targets])
+    mapping = align_targets([b.text for b in en_blocks], [t.source for t in targets],
+                            [b.kind for b in en_blocks], [t.kind for t in targets])
     groups: Dict[int, List[int]] = {}
     for target_index, block_index in enumerate(mapping):
         if block_index is not None:
@@ -292,7 +310,10 @@ def align_claude_translation(en_markdown: str, zh_markdown: str, targets: Sequen
                 texts.setdefault(member, []).append(part)
         else:
             split_failures += 1
-            texts.setdefault(members[0], []).append(zh_text)
+            # 整块交给类型相同的那一个（正文块不给标题行）
+            heading_block = _is_heading(en_blocks[block_index].kind)
+            same_kind = [m for m in members if _is_heading(targets[m].kind) == heading_block]
+            texts.setdefault((same_kind or members)[0], []).append(zh_text)
 
     # 没对上任何目标的块：并进前一个已对齐的目标（开头的并进后一个）
     orphan_blocks = 0

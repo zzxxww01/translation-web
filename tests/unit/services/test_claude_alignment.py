@@ -161,6 +161,47 @@ def test_sentence_splitting_only_applies_to_body_paragraphs():
     assert result.texts == {"section:s": "甲。乙。"}
 
 
+def test_short_heading_whose_words_all_reappear_in_the_next_paragraph_stays_a_heading():
+    # 2026-10-29「华为与 DeepSeek 的共生关系」：标题的每个词都在下一段里，以前标题行拿到了整段正文
+    en = (
+        "Hardware raises the ceiling, but software lets you reach it.\n\n"
+        "## DeepSeek Open Source\n\n"
+        "For the 6 repos that received Ascend support, only TileLang is usable; this comes after DeepSeek's open source week.\n\n"
+        "## Ascend 950\n\n"
+        "We deep-dived into CANN and the Ascend 950 architecture in our earlier article.\n"
+    )
+    zh = (
+        "硬件抬高了上限，软件决定能不能达到。\n\n"
+        "## DeepSeek 的开源仓库\n\n"
+        "在获得昇腾支持的 6 个仓库中，只有 TileLang 可用；这批支持是在 DeepSeek 开源周之后补上的。\n\n"
+        "## 昇腾 950\n\n"
+        "我们曾深入剖析过 CANN 与昇腾 950 架构。\n"
+    )
+    targets = [
+        Target("s0/p000", "s0", "Hardware raises the ceiling, but software lets you reach it."),
+        Target("section:s1", "s1", "DeepSeek Open Source", "section"),
+        Target("s1/p000", "s1", "For the 6 repos that received Ascend support, only TileLang is usable; this comes after DeepSeek's open source week."),
+        Target("section:s2", "s2", "Ascend 950", "section"),
+        Target("s2/p000", "s2", "We deep-dived into CANN and the Ascend 950 architecture in our earlier article."),
+    ]
+    result = align_claude_translation(en, zh, targets)
+    assert result.texts == {
+        "s0/p000": "硬件抬高了上限，软件决定能不能达到。",
+        "section:s1": "DeepSeek 的开源仓库",
+        "s1/p000": "在获得昇腾支持的 6 个仓库中，只有 TileLang 可用；这批支持是在 DeepSeek 开源周之后补上的。",
+        "section:s2": "昇腾 950",
+        "s2/p000": "我们曾深入剖析过 CANN 与昇腾 950 架构。",
+    }
+    assert result.stats["split_failures"] == 0 and result.stats["merged_blocks"] == 0
+
+
+def test_heading_kept_as_plain_paragraph_in_the_agent_draft_still_aligns():
+    # Agent 的英文稿偶尔把标题写成普通段落：打折后仍然够分，照样对上
+    result = align_claude_translation("Intro\n\nBody about wafers.\n", "引言\n\n关于晶圆的正文。\n",
+                                      [Target("section:s", "s", "Intro", "section"), Target("s/p0", "s", "Body about wafers.")])
+    assert result.texts == {"section:s": "引言", "s/p0": "关于晶圆的正文。"}
+
+
 def test_block_missing_from_project_is_merged_into_previous_paragraph():
     en = "First paragraph about wafer supply.\n\nSubscribe for the full model.\n\nSecond paragraph about HBM demand.\n"
     zh = "关于晶圆供给的第一段。\n\n订阅即可获取完整模型。\n\n关于 HBM 需求的第二段。\n"
