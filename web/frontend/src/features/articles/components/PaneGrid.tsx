@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useRef, useState, type ReactNode, type Ref } from 'react';
+import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode, type Ref, type RefObject } from 'react';
 import { Bookmark, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { gridTemplate, PANES, type Collapsed } from '../lib/panes';
@@ -6,18 +6,35 @@ import { rowTextClass } from '../lib/rows';
 import type { PaneId, WorkbenchRow } from '../types';
 import { EditableText, type EditableTextHandle } from './EditableText';
 import { InlineMarkdown } from './InlineMarkdown';
+import type { Tone } from '../lib/versions';
+import { TONE_DOT } from '../lib/tones';
+import { FOCUS_RING, MEASURE, STROKE } from '../lib/ui';
+import { IconAction, VersionHeader, type VersionHeaderProps } from './VersionHeader';
 
 export interface PaneColumn {
   id: PaneId;
   /** 竖条上的栏名 */
   title: string;
-  header: ReactNode;
+  /** 栏头三行；「收起」按钮由这里加在操作最后 */
+  header: VersionHeaderProps;
   /** 中文栏：取这一行的译文、保存；英文栏不填 */
   text?: (row: WorkbenchRow) => string | null;
   save?: (row: WorkbenchRow, text: string) => Promise<void>;
   placeholder?: string;
   /** 整段采用或补齐缺译时的来源 */
   adopt?: { label: string; text: (row: WorkbenchRow) => string | null };
+  /** 主译本栏：极浅暖底 + 栏头顶部梅红细线 */
+  primary?: boolean;
+  /** 这一版只读（重翻中、还没出译文） */
+  readOnly?: boolean;
+  /** 收起竖条上的状态圆点 */
+  tone?: Tone;
+  /** 换了版本时整栏重新挂载，编辑框不会带着上一版的草稿 */
+  versionKey?: string;
+  /** 同一版的内容整篇换过（重新翻译导入后）就变；变了才淡入，切标签不淡入 */
+  contentKey?: string;
+  /** 有它就显示它，不显示段落（对照栏没有别的版本时） */
+  empty?: ReactNode;
 }
 
 interface PaneGridProps {
@@ -31,6 +48,38 @@ interface PaneGridProps {
   markBusy: boolean;
   onMark: (key: string | null) => void;
   jump: number;
+}
+
+/** 收起竖条、栏头、正文三处共用的分隔线 */
+const DIVIDER = 'border-r border-border-subtle last:border-r-0';
+
+function fadeIn(element: Element | null | undefined) {
+  if (!(element instanceof HTMLElement) || typeof element.animate !== 'function') return;
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+  element.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
+}
+
+type FadeKeys = Record<'main' | 'compare', [version: string | undefined, content: string | undefined]>;
+
+/**
+ * 动效只有两处（设计文档 5.4）：对调主译本时两栏交叉淡入；同一版内容整篇换过（重翻导入）时这一栏淡入。
+ * 切对照标签、切手机上的栏、第一次打开都不动。在绘制前开始动画，新内容不会先整块闪一下。
+ */
+function useVersionFade(container: RefObject<HTMLDivElement | null>, keys: FadeKeys) {
+  const seen = useRef<FadeKeys | null>(null);
+  const [mainVersion, mainContent] = keys.main;
+  const [compareVersion, compareContent] = keys.compare;
+  useLayoutEffect(() => {
+    const now: FadeKeys = { main: [mainVersion, mainContent], compare: [compareVersion, compareContent] };
+    const before = seen.current;
+    seen.current = now;
+    if (!before) return;
+    const swapped = before.main[0] !== now.main[0];
+    for (const pane of ['main', 'compare'] as const) {
+      const replaced = before[pane][0] === now[pane][0] && before[pane][1] !== now[pane][1];
+      if (swapped || replaced) fadeIn(container.current?.querySelector(`[data-pane-body="${pane}"]`));
+    }
+  }, [container, mainVersion, mainContent, compareVersion, compareContent]);
 }
 
 /** Only reunite adjacent pieces from the same source paragraph, never headings or list items. */
@@ -61,56 +110,61 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readi
     });
   }, [jump]);
   const blocks = readingBlocks(rows);
+  useVersionFade(container, {
+    main: [columns.main.versionKey, columns.main.contentKey],
+    compare: [columns.compare.versionKey, columns.compare.contentKey],
+  });
 
+  // 栏头格子和正文都留出滚动条的位置（scrollbar-gutter），两边内容宽度一样，版心才上下对齐
   return (
-    <div ref={container} className="flex min-h-0 flex-1 flex-col overflow-hidden" data-testid="pane-grid">
-      <div className="z-20 grid shrink-0 border-b border-border-subtle bg-bg-primary/95 backdrop-blur" style={{ gridTemplateColumns: template }}>
-        {visible.map(id => (
-          <div key={id} className={cn('min-w-0 border-r border-border-subtle last:border-r-0', isCollapsed(id) && 'bg-bg-tertiary')}>
-            {isCollapsed(id) ? (
-              <button
-                type="button"
-                onClick={() => onToggle(id)}
-                aria-label={`展开${columns[id].title}`}
-                className="flex h-full min-h-[44px] w-full items-start justify-center py-3 text-text-muted hover:text-primary-700"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            ) : (
-              <div className="flex min-h-[44px] items-center gap-1 px-4 py-2">
-                <div className="min-w-0 flex-1">{columns[id].header}</div>
-                {!mobilePane && (
-                  <button
-                    type="button"
-                    onClick={() => onToggle(id)}
-                    aria-label={`收起${columns[id].title}`}
-                    title="收起这一栏"
-                    className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary"
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
+    <div ref={container} className="flex min-h-0 flex-1 flex-col overflow-hidden md:px-[22px] md:pb-[22px]" data-testid="pane-grid">
+      <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-bg-secondary md:rounded-[14px] md:shadow-paper">
+        <div className="z-20 grid shrink-0 border-b border-border-subtle bg-bg-secondary" style={{ gridTemplateColumns: template }}>
+          {visible.map(id => (
+            <div key={id} data-pane={id} className={cn('relative min-w-0', DIVIDER,
+              isCollapsed(id) ? 'bg-bg-tertiary' : columns[id].primary && 'bg-paper-primary before:absolute before:inset-x-0 before:top-0 before:h-0.5 before:bg-gradient-to-r before:from-primary-300 before:to-primary-500')}>
+              {isCollapsed(id) ? (
+                <button type="button" onClick={() => onToggle(id)} aria-label={`展开${columns[id].title}`} title="展开这一栏"
+                  className={cn('flex h-full min-h-[44px] w-full flex-col items-center gap-2.5 pt-[22px] text-text-muted transition-colors hover:text-primary-700', FOCUS_RING, 'focus-visible:-outline-offset-2')}>
+                  <ChevronRight aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+                  {columns[id].tone && <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full', TONE_DOT[columns[id].tone!])} />}
+                </button>
+              ) : (
+                <div className="overflow-hidden px-4 pb-4 pt-[18px] [scrollbar-gutter:stable] md:px-[30px]">
+                  <VersionHeader {...columns[id].header} collapse={mobilePane ? null : (
+                    <IconAction label={`收起${columns[id].title}`} title="收起这一栏" onClick={() => onToggle(id)}>
+                      <ChevronLeft aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+                    </IconAction>
+                  )} />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
 
-      <div className="grid min-h-0 flex-1" style={{ gridTemplateColumns: template }}>
-        {visible.map(id => isCollapsed(id) ? (
-          <div key={id} className="border-r border-border-subtle bg-bg-tertiary last:border-r-0">
-            <span className="block py-3 text-center text-xs tracking-[0.3em] text-text-muted [writing-mode:vertical-rl]">{columns[id].title}</span>
-          </div>
-        ) : (
-          <article key={id} aria-label={`${columns[id].title}正文`} className="min-w-0 overflow-y-auto overscroll-contain border-r border-border-subtle px-7 pb-24 pt-6 last:border-r-0 md:px-8">
-            {blocks.map(block => <ReadingBlock key={block[0].key} block={block} column={columns[id]}
-              marked={block.some(row => row.key === readingKey)} markBusy={markBusy} onMark={onMark} />)}
-          </article>
-        ))}
+        <div className="grid min-h-0 flex-1" style={{ gridTemplateColumns: template }}>
+          {visible.map(id => isCollapsed(id) ? (
+            <div key={id} className={cn('bg-bg-tertiary', DIVIDER)}>
+              <span className="block pt-1 text-center text-[12px] tracking-[0.3em] text-text-muted [writing-mode:vertical-rl]">{columns[id].title}</span>
+            </div>
+          ) : (
+            <article key={`${id}:${columns[id].versionKey ?? ''}`} id={`pane-${id}`} data-pane-body={id} aria-label={`${columns[id].title}正文`}
+              className={cn('min-w-0 overflow-y-auto overscroll-contain px-4 pb-24 pt-5 [scrollbar-gutter:stable] md:px-[30px]', DIVIDER,
+                // 第一段若是章节标题，不再叠它自己的上边距：和栏头的距离与栏头内边距一致
+                '[&>[data-reading-block]:first-child>:last-child]:pt-0',
+                columns[id].primary && 'bg-paper-primary')}>
+              {columns[id].empty ?? blocks.map(block => <ReadingBlock key={block[0].key} block={block} column={columns[id]}
+                marked={block.some(row => row.key === readingKey)} markBusy={markBusy} onMark={onMark} />)}
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
+
+/** 段落上边缘的小工具条按钮：悬停或聚焦这一段时才出现 */
+const TOOL = `pointer-events-auto rounded-md border border-border-subtle bg-bg-secondary px-2 py-0.5 shadow-thumb transition-opacity hover:border-primary-200 hover:text-primary-700 disabled:opacity-40 [@media(hover:hover)]:opacity-0 group-hover/reading:opacity-100 group-focus-within/reading:opacity-100 ${FOCUS_RING}`;
 
 function ReadingBlock({ block, column, marked, markBusy, onMark }: {
   block: WorkbenchRow[];
@@ -148,7 +202,7 @@ function ReadingBlock({ block, column, marked, markBusy, onMark }: {
   const canFill = !complete && candidates.length > 0;
   const protectedDraft = protectedIds.size > 0;
   const unavailable = adopting || protectedDraft || candidates.length === 0;
-  const showAdopt = comparison && first.kind !== 'image' && (!complete || candidates.length > 0);
+  const showAdopt = comparison && !column.readOnly && first.kind !== 'image' && (!complete || candidates.length > 0);
   const adoptTitle = protectedDraft ? '请先完成本段编辑并保存，再采用另一版译文'
     : !complete && !canFill ? '对照译文尚未完整，暂时不能采用整段'
     : canFill ? '只补齐本段尚无译文的位置，保留已有译文'
@@ -167,21 +221,25 @@ function ReadingBlock({ block, column, marked, markBusy, onMark }: {
 
   return (
     <div data-reading-block={first.key} data-reading-mark={marked ? 'true' : undefined}
-      className={cn('group/reading relative mx-auto mb-5 max-w-[70ch] scroll-mt-8', marked && 'rounded-sm bg-primary-50/50 ring-1 ring-primary-200/60')}>
+      className={cn(MEASURE, 'group/reading relative isolate mb-5 scroll-mt-8',
+        // 悬停底纹比文字四周各宽一点，不贴着字的边
+        'after:pointer-events-none after:absolute after:-inset-x-2.5 after:-inset-y-1 after:-z-10 after:rounded-lg after:bg-paper-hover after:opacity-0 after:transition-opacity [@media(hover:hover)]:hover:after:opacity-100',
+        // 阅读标记：页边一道梅红细线，和悬停底纹之间留出空隙
+        marked && 'before:absolute before:-left-3 before:bottom-1 before:top-1 before:w-0.5 before:rounded-full before:bg-primary-500 md:before:-left-4')}>
       <div data-reading-actions className="pointer-events-none absolute -top-3 right-0 z-10 flex max-w-full -translate-y-1/2 items-center gap-1 text-[11px] leading-5">
         <button type="button" title={marked ? '取消“看到这里”' : '标记：看到这里'}
           aria-label={`${column.title}：从这里继续阅读 — ${first.source.slice(0, 40)}`}
           aria-pressed={marked} disabled={markBusy} onClick={() => onMark(marked ? null : first.key)}
-          className={cn('pointer-events-auto flex shrink-0 items-center gap-1 rounded-md border border-border-subtle bg-white px-2 py-0.5 text-text-muted shadow-sm transition-opacity hover:border-primary-200 hover:text-primary-700 disabled:opacity-40 [@media(hover:hover)]:opacity-0 group-hover/reading:opacity-100 group-focus-within/reading:opacity-100', marked && 'border-primary-200 text-primary-700 [@media(hover:hover)]:opacity-100')}>
-          <Bookmark className={cn('h-3 w-3', marked && 'fill-current')} />看到这里
+          className={cn(TOOL, 'flex shrink-0 items-center gap-1 text-text-muted', marked && 'border-primary-200 text-primary-700 [@media(hover:hover)]:opacity-100')}>
+          <Bookmark aria-hidden className={cn('h-3 w-3', marked && 'fill-current')} strokeWidth={STROKE} />看到这里
         </button>
         {showAdopt && <button type="button" title={adoptTitle} disabled={unavailable}
           onMouseDown={event => event.preventDefault()} onClick={() => void adoptBlock()}
-          className="pointer-events-auto min-w-0 truncate rounded-md border border-border-subtle bg-white px-2 py-0.5 text-text-secondary shadow-sm transition-opacity hover:border-primary-200 hover:text-primary-700 disabled:cursor-default disabled:text-text-disabled [@media(hover:hover)]:opacity-0 group-hover/reading:opacity-100 group-focus-within/reading:opacity-100">
+          className={cn(TOOL, 'min-w-0 truncate text-text-secondary disabled:cursor-default disabled:text-text-disabled')}>
           {adopting ? '正在采用…' : canFill ? `用 ${comparison.label} 补齐本段` : `采用 ${comparison.label} 整段`}
         </button>}
       </div>
-      {inline ? <div className={rowTextClass(first)}>{block.map((row, index) => (
+      {inline ? <div className={rowTextClass(first, column.id === 'source' ? 'en' : 'zh')}>{block.map((row, index) => (
         <Fragment key={row.key}>{column.id === 'source' && index > 0 ? ' ' : null}{cell(row)}</Fragment>
       ))}</div> : cell(first)}
     </div>
@@ -195,10 +253,10 @@ function Cell({ row, column, inline = false, editorRef, onProtectionChange }: {
   editorRef?: Ref<EditableTextHandle>;
   onProtectionChange?: (id: string, protectedDraft: boolean) => void;
 }) {
-  const textClass = rowTextClass(row);
+  const textClass = rowTextClass(row, column.id === 'source' ? 'en' : 'zh');
   // 图片三栏都显示（译文里的图就是原文的图），也让三栏在图片处对齐
   if (row.kind === 'image') {
-    return row.image ? <img src={row.image} alt="" loading="lazy" className="my-2 max-h-72 w-auto max-w-full rounded border border-border-subtle" /> : null;
+    return row.image ? <img src={row.image} alt="" loading="lazy" className="my-2 max-h-72 w-auto max-w-full rounded-md border border-border-subtle" /> : null;
   }
   if (!column.text) {
     if (inline) return <InlineMarkdown text={row.source} />;
@@ -219,6 +277,7 @@ function Cell({ row, column, inline = false, editorRef, onProtectionChange }: {
         onProtectionChange={onProtectionChange}
         className={inline ? (!value?.trim() ? 'mx-1 text-xs' : undefined) : 'min-w-0 flex-1'}
         inline={inline}
+        readOnly={column.readOnly}
       />;
   if (inline) return editable;
   return (

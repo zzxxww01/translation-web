@@ -20,6 +20,7 @@ interface EditableTextProps {
   onProtectionChange?: (id: string, protectedDraft: boolean) => void;
   className?: string;
   inline?: boolean;
+  readOnly?: boolean;
 }
 
 const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
@@ -29,7 +30,7 @@ const BOX = '-mx-2 block w-[calc(100%+1rem)] rounded-md border px-2 py-1';
  * 停顿约 1 秒或离开时自动保存——类似 Obsidian 的实时预览。保存状态汇总到栏头（见 lib/edits），
  * 这里只在保存失败时标红、给重试。
  */
-export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel, onSave, onProtectionChange, className, inline = false }: EditableTextProps) {
+export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel, onSave, onProtectionChange, className, inline = false, readOnly = false }: EditableTextProps) {
   const [text, setText] = useState(value ?? '');
   const [state, setState] = useState<SaveState>('idle');
   const [editing, setEditing] = useState(false);
@@ -80,6 +81,19 @@ export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel
     }
   }, [id, onSave]);
 
+  // 这一版变成只读（重翻开始）：离开编辑状态，没存下的修改立刻存掉，不留定时器
+  const [prevReadOnly, setPrevReadOnly] = useState(readOnly);
+  if (readOnly !== prevReadOnly) {
+    setPrevReadOnly(readOnly);
+    if (readOnly) setEditing(false);
+  }
+  useEffect(() => {
+    if (!readOnly) return;
+    clearTimeout(timer.current);
+    if (state === 'dirty') void Promise.resolve().then(() => save(latest.current));
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- 只在刚变只读时存一次
+  }, [readOnly]);
+
   const protectedDraft = editing || state === 'dirty' || state === 'saving' || state === 'error';
   useEffect(() => {
     onProtectionChange?.(id, protectedDraft);
@@ -89,12 +103,12 @@ export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel
   useImperativeHandle(editorRef, () => ({
     isProtected: () => protectedDraft,
     adopt: async next => {
-      if (protectedDraft) return;
+      if (protectedDraft || readOnly) return;
       setText(next);
       latest.current = next;
       await save(next);
     },
-  }), [protectedDraft, save]);
+  }), [protectedDraft, readOnly, save]);
 
   useEffect(() => () => {
     clearTimeout(timer.current);
@@ -111,6 +125,18 @@ export function EditableText({ ref: editorRef, id, value, placeholder, ariaLabel
   };
 
   const Container = inline ? 'span' : 'div';
+  // 重翻期间这一版只读：翻完会整篇替换，期间改了也留不住
+  if (readOnly) {
+    // 没有待存的修改时显示最新的译文（重翻完成后换成新版）
+    const shown = state === 'idle' || state === 'saved' ? value ?? '' : text;
+    return (
+      <Container className={cn('group/edit relative', className)}>
+        <Container className={cn(inline ? 'rounded' : BOX, 'whitespace-pre-wrap border-transparent text-text-secondary/80')}>
+          {shown ? <InlineMarkdown text={shown} /> : <span className="text-text-disabled">{placeholder}</span>}
+        </Container>
+      </Container>
+    );
+  }
   return (
     <Container className={cn('group/edit relative', className)}>
       {editing ? (

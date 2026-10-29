@@ -11,7 +11,7 @@ test('mobile article reading preserves a bookmark across refresh and saves a fra
   await page.route('**/api/substack/**', route => route.fulfill({ json: { articles: [], total: 0, added: 0, next_offset: null } }));
   await page.route('**/api/projects/reading/workbench', route => route.fulfill({ json: {
     project: { id: 'reading', title: 'Continuous reading', title_translation: '连续阅读', original_url: null,
-      created_at: '', claude_run_id: null, progress: { total: 2, approved: 0 }, status },
+      created_at: '', claude_run_id: null, progress: { total: 2, approved: 0 }, status, primary: 'reading', primary_target: null },
     variants: [], rows, reading_mark: mark,
   } }));
   await page.route('**/api/projects/reading/workbench/reading-mark', async route => {
@@ -25,14 +25,15 @@ test('mobile article reading preserves a bookmark across refresh and saves a fra
     await route.fulfill({ json: { ok: true } });
   });
   await page.goto('/articles/reading');
-  await expect(page.getByRole('article', { name: '译本 1正文' })).toContainText('第一句。第二句。');
-  await page.getByRole('button', { name: '译本 1：从这里继续阅读 — First sentence.', exact: true }).click();
-  await expect(page.getByRole('button', { name: '继续阅读', exact: true })).toBeVisible();
+  await expect(page.getByRole('article', { name: '主译本正文' })).toContainText('第一句。第二句。');
+  await page.getByRole('button', { name: '主译本：从这里继续阅读 — First sentence.', exact: true }).click();
+  await expect(page.getByRole('button', { name: '阅读标记', exact: true })).toBeVisible();
   await page.reload();
   await expect(page.locator('[data-reading-mark="true"]')).toHaveCount(1);
+  await page.getByRole('button', { name: '阅读标记', exact: true }).click();
   await page.getByRole('button', { name: '继续阅读', exact: true }).click();
-  await page.getByRole('button', { name: '编辑：译本 1：Second sentence.', exact: true }).click();
-  await page.getByRole('textbox', { name: '译本 1：Second sentence.', exact: true }).fill('第二句改好了。');
+  await page.getByRole('button', { name: '编辑：主译本：Second sentence.', exact: true }).click();
+  await page.getByRole('textbox', { name: '主译本：Second sentence.', exact: true }).fill('第二句改好了。');
   await page.getByRole('button', { name: '保存', exact: true }).click();
   await expect.poll(() => rows[1].web).toBe('第二句改好了。');
   await page.getByRole('tab', { name: '英文', exact: true }).click();

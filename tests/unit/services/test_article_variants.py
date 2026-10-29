@@ -3,11 +3,17 @@ import json
 import pytest
 from starlette.requests import Request
 
-from src.api.middleware import APIException, BadRequestException, ServiceUnavailableException
+from src.api.middleware import (
+    APIException,
+    BadRequestException,
+    ConflictException,
+    NotFoundException,
+    ServiceUnavailableException,
+)
 from src.api.routers import workbench
 from src.core.models import ParagraphStatus
 from src.core.project import ProjectManager
-from src.services import article_variants
+from src.services import article_primary, article_variants
 
 HTML = """<html><head><title>Demo Post</title></head><body>
 <article class="newsletter-post post">
@@ -208,11 +214,169 @@ async def test_saving_into_a_project_that_is_not_this_articles_variant_is_refuse
             target=main_id, section_id=section_id, paragraph_id=first.id, text="   "), pm)
 
 
-@pytest.mark.parametrize(('agent', 'label'), [('codex', 'Codex'), ('antigravity', 'Antigravity')])
+@pytest.mark.parametrize(("agent", "label"), [("claude", "Claude"), ("codex", "Codex"), ("antigravity", "Gemini")])
 def test_agent_import_gets_its_own_variant(pm, main_id, agent, label):
-    en = "First paragraph about wafer supply and the 2027 buildout of datacenters.\n"
-    zh = "关于晶圆供给和 2027 年数据中心建设的第一段。\n"
-    body = workbench.ImportClaudeRequest(run_id='r1', zh_markdown=zh, en_markdown=en, agent=agent)
-    result = article_variants.import_claude_translation(pm, main_id, zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, agent=body.agent)
+    body = workbench.ImportClaudeRequest(run_id="r1", zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent=agent, model="m-1")
+    result = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, agent=body.agent, model=body.model)
     assert result["variant_id"] == f"{main_id}--{agent}"
     assert pm.get(result["variant_id"]).variant_label == label
+    record = article_variants.read_import_record(pm, result["variant_id"])
+    assert (record["agent"], record["model"], record["run_id"]) == (agent, "m-1", None)
+
+
+def test_import_refuses_an_english_draft_that_does_not_match_the_download(pm, main_id):
+    half_en = "First paragraph about wafer supply and the 2027 buildout of datacenters.\n"
+    half_zh = "关于晶圆供给和 2027 年数据中心建设的第一段。\n"
+    with pytest.raises(article_variants.AlignmentTooLow) as caught:
+        article_variants.import_claude_translation(pm, main_id, zh_markdown=half_zh, en_markdown=half_en, agent="codex")
+    assert (caught.value.aligned, caught.value.total) == (1, 3)  # 两段正文 + 一个章节标题
+    assert "1/3" in str(caught.value)
+    assert article_variants.list_variants(pm, main_id) == []  # 没建孪生项目
+
+    result = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=half_zh, en_markdown=half_en, agent="codex", force=True)
+    assert result["aligned"] >= 1
+
+
+def test_primary_target_is_stored_in_meta_and_list_summary(pm, main_id):
+    variant = article_variants.create_variant(pm, main_id, kind="claude", label="Codex", suffix="codex")
+    pm.merge_meta_fields(main_id, fields={"primary_target": variant})
+    assert pm.get(main_id).primary_target == variant
+    [summary] = pm.list_summaries()
+    assert summary.primary_target == variant
+
+
+EN_FULL = ("# Demo Post\n\nFirst paragraph about wafer supply and the 2027 buildout of datacenters.\n\n"
+           "## Second Section\n\nAnother paragraph explaining why HBM demand keeps outrunning supply.\n")
+ZH_FULL = "# 演示文章\n\n关于晶圆供给和 2027 年数据中心建设的第一段。\n\n## 第二节\n\n解释 HBM 需求为何持续超过供给的一段。\n"
+
+
+def test_primary_defaults_to_web_once_it_has_started(pm, main_id):
+    variant = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent="codex")["variant_id"]
+    resolve = article_primary.resolve_primary
+    assert resolve(pm, main_id, [variant], primary_target=None, main_started=True) == main_id
+    assert resolve(pm, main_id, [variant], primary_target=None, main_started=False) == variant
+    assert resolve(pm, main_id, [], primary_target=None, main_started=False) == main_id
+
+
+def test_primary_default_picks_latest_import_and_honours_explicit_choice(pm, main_id, monkeypatch):
+    records = {f"{main_id}--codex": "2026-10-28T10:00:00", f"{main_id}--claude": "2026-10-28T11:00:00"}
+    monkeypatch.setattr(article_variants, "read_import_record",
+                        lambda _pm, vid: {"imported_at": records[vid]} if vid in records else None)
+    ids = list(records) + [f"{main_id}--argon"]
+    resolve = article_primary.resolve_primary
+    assert resolve(pm, main_id, ids, primary_target=None, main_started=False) == f"{main_id}--claude"
+    assert resolve(pm, main_id, ids, primary_target=f"{main_id}--argon", main_started=True) == f"{main_id}--argon"
+    assert resolve(pm, main_id, ids, primary_target=main_id, main_started=False) == main_id
+    # 指向已经不存在的版本：退回默认规则
+    assert resolve(pm, main_id, ids, primary_target=f"{main_id}--gone", main_started=True) == main_id
+
+
+@pytest.mark.asyncio
+async def test_workbench_reports_and_changes_the_primary_version(pm, main_id):
+    variant = article_variants.import_claude_translation(
+        pm, main_id, zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent="codex", model="gpt-5.5")["variant_id"]
+
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    # 旧数据（有 Agent 版却没存过主译本）：第一次打开就把当时显示的那一版记下来
+    assert data["project"]["primary_target"] == variant
+    assert data["project"]["primary"] == variant  # 网页版没开始，默认是刚导入的 Agent 版
+    assert data["variants"][0]["import"]["model"] == "gpt-5.5"
+
+    saved = await workbench.set_primary(main_id, workbench.PrimaryRequest(target=main_id), pm)
+    assert saved == {"ok": True, "primary_target": main_id}
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert (data["project"]["primary_target"], data["project"]["primary"]) == (main_id, main_id)
+
+
+@pytest.mark.asyncio
+async def test_primary_must_be_this_article_or_its_variant(pm, main_id, tmp_path):
+    other_source = tmp_path / "other.html"
+    other_source.write_text(HTML.replace("Demo Post", "Other Post"), encoding="utf-8")
+    other = pm.create("other", str(other_source)).id
+    with pytest.raises(BadRequestException):
+        await workbench.set_primary(main_id, workbench.PrimaryRequest(target=other), pm)
+    with pytest.raises(NotFoundException):
+        await workbench.set_primary(main_id, workbench.PrimaryRequest(target=f"{main_id}--nope"), pm)
+    variant = article_variants.create_variant(pm, main_id, kind="model", label="argon", suffix="argon")
+    with pytest.raises(BadRequestException):
+        await workbench.set_primary(variant, workbench.PrimaryRequest(target=variant), pm)
+
+
+@pytest.mark.asyncio
+async def test_import_endpoint_reports_mismatched_draft_as_conflict(pm, main_id):
+    body = workbench.ImportClaudeRequest(
+        zh_markdown="关于晶圆供给和 2027 年数据中心建设的第一段。\n",
+        en_markdown="First paragraph about wafer supply and the 2027 buildout of datacenters.\n", agent="codex")
+    with pytest.raises(ConflictException) as caught:
+        await workbench.import_claude_variant(_request("POST"), main_id, body, pm)
+    assert caught.value.error_code == "ALIGNMENT_LOW" and "可能不是这篇下载的原文" in caught.value.detail
+    forced = await workbench.import_claude_variant(_request("POST"), main_id, body.model_copy(update={"force": True}), pm)
+    assert forced["variant_id"] == f"{main_id}--codex"
+
+
+def _start_web(pm, main_id):
+    section_id, first = _body_paragraphs(pm, main_id)[0]
+    pm.confirm_paragraph(main_id, section_id, first.id, "网页版里手写的一段")
+
+
+def _import_body(agent):
+    return workbench.ImportClaudeRequest(zh_markdown=ZH_FULL, en_markdown=EN_FULL, agent=agent)
+
+
+@pytest.mark.asyncio
+async def test_first_agent_import_is_pinned_and_later_changes_do_not_move_the_primary(pm, main_id):
+    codex = (await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm))["variant_id"]
+    assert pm.get(main_id).primary_target == codex  # 网页版还没开始：主译本就是这一版，并且记下来
+
+    await workbench.import_claude_variant(_request("POST"), main_id, _import_body("claude"), pm)
+    _start_web(pm, main_id)  # 再加一个 Agent 版、在网页版里写一段，都不该让主译本自己换
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert (data["project"]["primary_target"], data["project"]["primary"]) == (codex, codex)
+
+
+@pytest.mark.asyncio
+async def test_agent_import_keeps_a_started_web_version_as_primary(pm, main_id):
+    _start_web(pm, main_id)
+    await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm)
+    assert pm.get(main_id).primary_target == main_id
+
+
+@pytest.mark.asyncio
+async def test_agent_import_never_overrides_an_explicit_primary(pm, main_id):
+    codex = (await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm))["variant_id"]
+    await workbench.set_primary(main_id, workbench.PrimaryRequest(target=main_id), pm)
+    await workbench.import_claude_variant(_request("POST"), main_id, _import_body("codex"), pm)  # 重新翻译
+    assert pm.get(main_id).primary_target == main_id
+    assert codex in [v.id for v in article_variants.list_variants(pm, main_id)]
+
+
+@pytest.mark.asyncio
+async def test_workbench_without_agent_versions_does_not_pin_anything(pm, main_id):
+    _start_web(pm, main_id)
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert (data["project"]["primary_target"], data["project"]["primary"]) == (None, main_id)
+
+
+def test_new_variant_does_not_inherit_the_primary_pointer(pm, main_id):
+    pm.merge_meta_fields(main_id, fields={"primary_target": main_id})
+    variant = article_variants.create_variant(pm, main_id, kind="claude", label="Codex", suffix="codex")
+    assert pm.get(variant).primary_target is None
+
+
+@pytest.mark.asyncio
+async def test_workbench_skips_a_variant_that_vanishes_while_loading(pm, main_id, monkeypatch):
+    # 重新翻译导入时孪生项目目录会先删后建；这时打开工作台不该整页 404
+    variant = article_variants.create_variant(pm, main_id, kind="claude", label="Codex", suffix="codex")
+    real_get = pm.get
+
+    def flaky_get(project_id):
+        if project_id == variant:
+            raise FileNotFoundError(project_id)
+        return real_get(project_id)
+
+    monkeypatch.setattr(pm, "get", flaky_get)
+    data = await workbench.get_workbench(main_id, pm, FakeStatus())
+    assert data["variants"] == []

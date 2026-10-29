@@ -46,6 +46,25 @@ async def test_model_is_retained_when_resuming_and_actual_model_is_reported(tmp_
     await resumed.shutdown()
 
 
+@pytest.mark.asyncio
+@pytest.mark.parametrize("harness,expected", [("codex", "gpt-6.1-sol"), ("claude", None)])
+async def test_resume_keeps_pinned_default_model_for_codex_only(tmp_path, harness, expected):
+    config = make_config(tmp_path, idle_timeout_s=0.01)
+    factory = FakeFactory()
+    runner = Runner(config, RunStore(config.runs_dir), factory)
+    meta = runner.create("", "test", harness)  # 没选模型
+    await runner.begin(meta.id, "hello", [])
+    factory.last.push({"type": "session", "session_id": "session-1", "model": "gpt-6.1-sol"})
+    factory.last.push({"type": "result", "session_id": "session-1", "is_error": False})
+    await settle()
+    await runner.shutdown()
+    resumed = Runner(config, RunStore(config.runs_dir), factory)
+    await resumed.send_message(meta.id, "continue", [])
+    assert factory.last.spec.resume == "session-1"
+    assert factory.last.spec.model == expected
+    await resumed.shutdown()
+
+
 def test_model_catalog_requires_login_and_reads_codex_catalog(tmp_path):
     config = make_config(tmp_path, codex_home=tmp_path / "codex")
     config.codex_home.mkdir()

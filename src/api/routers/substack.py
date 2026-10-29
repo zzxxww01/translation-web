@@ -13,6 +13,7 @@ from fastapi import APIRouter, Depends, Query, Request
 from pydantic import BaseModel, Field
 
 from src.core.project import ProjectListSummary, ProjectManager
+from src.services import article_primary
 from src.services.substack_library import LibraryPost, SubstackLibrary, make_llm_digest_fn
 from src.services.substack_service import (
     SubstackClient,
@@ -147,28 +148,31 @@ def _awaiting_terms(pm: ProjectManager, project_id: str, run_id: Optional[str]) 
     return job.get("confirmation_status") == "waiting"
 
 
-def _percent(pm: ProjectManager, project_id: str) -> Optional[int]:
+def _progress(pm: ProjectManager, project_id: str) -> Optional[Tuple[int, int]]:
+    """(已翻段数, 百分比)；项目不在了返回 None。"""
     try:
         summary = pm.get_translation_summary(project_id)
     except FileNotFoundError:
         return None
     total, done = summary.total_paragraphs, summary.translated_paragraphs
-    return min(100, done * 100 // total) if total else 0
+    return done, (min(100, done * 100 // total) if total else 0)
 
 
-def _translation_state(pm: ProjectManager, project_id: str, variant_ids: List[str]) -> Tuple[ArticleStatus, int]:
-    """网页版和各个译本 2 里进度最高的那一版；网页版在跑或在等术语确认时以它为准。"""
-    main = _percent(pm, project_id)
+def _translation_state(pm: ProjectManager, project_id: str, variant_ids: List[str],
+                       primary_target: Optional[str] = None) -> Tuple[ArticleStatus, int]:
+    """只看主译本（services/article_primary.py）；主译本在跑或在等术语确认时照旧显示。"""
+    main = _progress(pm, project_id)
     if main is None:
         return "not_imported", 0  # 列清单和这里之间项目被删了
-    percent = max([main, *(p for p in (_percent(pm, vid) for vid in variant_ids) if p is not None)])
-    active = translation_run_registry.get_active_run(project_id)
+    main_done, main_percent = main
+    primary = article_primary.resolve_primary(pm, project_id, variant_ids, primary_target=primary_target,
+                                              main_started=article_primary.started(project_id, main_done))
+    percent = main_percent if primary == project_id else (_progress(pm, primary) or (0, 0))[1]
+    active = translation_run_registry.get_active_run(primary)
     if active is not None:
-        return ("awaiting_terms" if _awaiting_terms(pm, project_id, active.run_id) else "translating"), percent
+        return ("awaiting_terms" if _awaiting_terms(pm, primary, active.run_id) else "translating"), percent
     if percent >= 100:
         return "translated", 100
-    if any(translation_run_registry.get_active_run(vid) is not None for vid in variant_ids):
-        return "translating", percent
     if percent:
         return "partial", percent
     return "imported", 0
@@ -190,7 +194,7 @@ def _to_article(
         zh_summary=post.zh_summary,
     )
     if project is not None:
-        status, progress = _translation_state(pm, project.id, variant_ids)
+        status, progress = _translation_state(pm, project.id, variant_ids, project.primary_target)
         if status != "not_imported":
             article.project_id, article.status, article.progress = project.id, status, progress
     return article

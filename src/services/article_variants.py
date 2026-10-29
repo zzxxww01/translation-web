@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import re
 import shutil
+import threading
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -27,6 +28,26 @@ _TRANSLATION_FIELDS = {
 # 主项目里不复制到孪生项目的东西：中间产物、导出文件
 _SKIP_NAMES = {"artifacts", "sections", "meta.json"}
 _EXPORT_SUFFIXES = ("_zh.md", "_zh.blocked.md", "_en.md", "_bilingual.md")
+# Agent 的 en.md 和项目从同一份 source.html 解析出的正文段落，对上不到这个比例就不自动导入：
+# 多半不是这篇下载的原文（设计文档 8.2）。10-25 Codex 那次是 61/61 全对上。
+MIN_ALIGNED_RATIO = 0.8
+AGENT_LABELS = {"claude": "Claude", "codex": "Codex", "antigravity": "Gemini"}
+
+
+# 同一篇文章的导入排队做：孪生项目是先删后建的，两个标签页同时自动导入会互相删掉对方刚建的目录
+_variant_locks: Dict[str, threading.RLock] = {}
+_variant_locks_guard = threading.Lock()
+
+
+def variant_lock(main_id: str) -> threading.RLock:
+    with _variant_locks_guard:
+        return _variant_locks.setdefault(main_id, threading.RLock())
+
+
+class AlignmentTooLow(ValueError):
+    def __init__(self, aligned: int, total: int):
+        self.aligned, self.total = aligned, total
+        super().__init__(f"Agent 的英文稿只对上 {aligned}/{total} 段，可能不是这篇下载的原文")
 
 
 def variant_id(main_id: str, suffix: str) -> str:
@@ -90,6 +111,7 @@ def create_variant(pm: ProjectManager, main_id: str, *, kind: str, label: str, s
             "variant_kind": kind,
             "variant_label": label,
             "claude_run_id": None,
+            "primary_target": None,
             "status": ProjectStatus.CREATED,
             "versions": [],
             "confirmation_map": {},
@@ -117,15 +139,28 @@ def alignment_targets(sections: List[Section]) -> List[Target]:
 
 
 def import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown: str, en_markdown: str,
-                              run_id: Optional[str] = None, agent: str = "claude") -> Dict:
+                              run_id: Optional[str] = None, agent: str = "claude",
+                              model: Optional[str] = None, force: bool = False) -> Dict:
     """把 four-step-translate 产出的 zh.md 对齐后写进该 Agent 对应的孪生项目
-    （已有就整篇替换），返回对齐统计。"""
+    （已有就整篇替换），返回对齐统计。英文稿对不上下载的原文时抛 AlignmentTooLow，force=True 时照样导入。"""
+    with variant_lock(main_id):
+        return _import_claude_translation(pm, main_id, zh_markdown=zh_markdown, en_markdown=en_markdown,
+                                          run_id=run_id, agent=agent, model=model, force=force)
+
+
+def _import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown: str, en_markdown: str,
+                               run_id: Optional[str], agent: str, model: Optional[str], force: bool) -> Dict:
     sections = pm.get_sections(main_id)
-    alignment: Alignment = align_claude_translation(en_markdown, zh_markdown, alignment_targets(sections))
+    targets = alignment_targets(sections)
+    alignment: Alignment = align_claude_translation(en_markdown, zh_markdown, targets)
     if not alignment.texts:
         raise ValueError("Agent 的译文和这篇文章对不上，可能不是同一篇")
-    label = {"claude": "Claude", "codex": "Codex", "antigravity": "Antigravity"}[agent]
-    new_id = create_variant(pm, main_id, kind="claude", label=label, suffix=label, replace=True)
+    total = sum(1 for target in targets if target.kind != "image")
+    aligned = total - alignment.stats["unaligned"]
+    if not force and total and aligned < MIN_ALIGNED_RATIO * total:
+        raise AlignmentTooLow(aligned, total)
+    # id 后缀用 Agent id：claude / codex 和以前一样，Gemini 版是 {主id}--antigravity
+    new_id = create_variant(pm, main_id, kind="claude", label=AGENT_LABELS[agent], suffix=agent, replace=True)
 
     for section in pm.get_sections(new_id):
         title = alignment.texts.get(f"section:{section.section_id}")
@@ -144,7 +179,7 @@ def import_claude_translation(pm: ProjectManager, main_id: str, *, zh_markdown: 
     meta.update_progress(pm.get_sections(new_id))
     meta.status = ProjectStatus.REVIEWING
     pm.save_meta(meta)
-    _write_import_record(pm, new_id, {"run_id": run_id, **alignment.stats})
+    _write_import_record(pm, new_id, {"run_id": run_id, "agent": agent, "model": model, **alignment.stats})
     return {"variant_id": new_id, "title": alignment.title, **alignment.stats}
 
 

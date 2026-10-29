@@ -132,7 +132,8 @@ class _Run:
 
 
 def harness_label(harness: str) -> str:
-    return {"claude": "Claude", "codex": "Codex", "antigravity": "Antigravity"}.get(harness, harness)
+    # 界面上第三个 Agent 叫 Gemini；内部 id 仍是 antigravity（官方 agy CLI）
+    return {"claude": "Claude", "codex": "Codex", "antigravity": "Gemini"}.get(harness, harness)
 
 
 def build_prompt(
@@ -306,6 +307,8 @@ class Runner:
 
     async def _deliver_to_session(self, run: _Run, message: str, attachments: list[str], prompt: str) -> RunMeta:
         async with run.lock:
+            if self._runs.get(run.meta.id) is not run:  # 排队时这个对话已被删除
+                raise NotFound("运行不存在")
             if run.closing:
                 try:
                     await self._close_session(run, strict=True)
@@ -341,7 +344,8 @@ class Runner:
             ),
             prompt_note=agents.prompt_note(agents.build_catalog(self.config), run.meta.skill),
             harness=run.meta.harness,
-            model=run.meta.model,
+            # Codex 续接时沿用这次运行已经定下的模型（中途清单更新也不换）
+            model=run.meta.model or (run.meta.actual_model if run.meta.harness == "codex" and run.meta.session_id else None),
         )
         try:
             session = await self.session_factory(spec)
@@ -504,19 +508,24 @@ class Runner:
             self._set_status(run, "error", "任务已停止；对话和文件已保留，发送消息可以继续原会话")
         return run.meta
 
-    async def delete(self, run_id: str) -> None:
+    async def delete(self, run_id: str, *, reason: str = "user", client_ip: str | None = None) -> None:
+        """从页面上删掉对话：会话先关干净，目录挪进 deleted/ 存档（见 RunStore.archive）。"""
         run = self._get(run_id)
-        if run.meta.status in ACTIVE_STATUSES or self._session_busy(run):
-            raise Conflict("任务还在运行，先中断再删除")
-        self._cancel_auto_reply(run)
-        try:
-            await self._close_session(run, strict=True)
-        except Exception as exc:
-            raise SessionFailed(f"会话未能关闭，暂时无法删除：{exc}") from exc
-        for queue in list(run.subscribers):
-            queue.put_nowait(None)
-        self._runs.pop(run_id, None)
-        self.store.delete(run_id)
+        # 关会话到归档整段持有 run.lock：期间到的消息排在后面，不会把会话重新打开
+        async with run.lock:
+            if self._runs.get(run_id) is not run:  # 排队时另一个删除请求已经删完了
+                raise NotFound("运行不存在")
+            if run.meta.status in ACTIVE_STATUSES or self._session_busy(run):
+                raise Conflict("任务还在运行，先中断再删除")
+            self._cancel_auto_reply(run)
+            try:
+                await self._close_session(run, strict=True)
+            except Exception as exc:
+                raise SessionFailed(f"会话未能关闭，暂时无法删除：{exc}") from exc
+            for queue in list(run.subscribers):
+                queue.put_nowait(None)
+            self._runs.pop(run_id, None)
+            await asyncio.to_thread(self.store.archive, run_id, reason=reason, client_ip=client_ip)
 
     # ---- 等确认超时自动继续 ----
 

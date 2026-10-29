@@ -1,11 +1,11 @@
 import type { PaneId } from '../types';
 
-export const PANES: PaneId[] = ['source', 'web', 'alt'];
+export const PANES: PaneId[] = ['source', 'main', 'compare'];
 const STORAGE_KEY = 'momo.workbench.collapsed';
 
 export type Collapsed = Record<PaneId, boolean>;
 
-export const NONE_COLLAPSED: Collapsed = { source: false, web: false, alt: false };
+export const NONE_COLLAPSED: Collapsed = { source: false, main: false, compare: false };
 
 /** 收起或展开一栏；至少留一栏展开，最后一栏不让收。 */
 export function togglePane(collapsed: Collapsed, pane: PaneId): Collapsed {
@@ -20,9 +20,10 @@ export function gridTemplate(collapsed: Collapsed): string {
 
 export function loadCollapsed(): Collapsed {
   try {
-    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null') as Partial<Collapsed> | null;
+    const raw = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null') as Record<string, boolean> | null;
     if (!raw) return NONE_COLLAPSED;
-    const value = { ...NONE_COLLAPSED, ...raw };
+    // 10-28 之前存的是 web / alt
+    const value: Collapsed = { source: Boolean(raw.source), main: Boolean(raw.main ?? raw.web), compare: Boolean(raw.compare ?? raw.alt) };
     return PANES.every(id => value[id]) ? NONE_COLLAPSED : value;
   } catch {
     return NONE_COLLAPSED;

@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Playwright：截图和失败记录只给人看，不进仓库
+test-results
+playwright-report

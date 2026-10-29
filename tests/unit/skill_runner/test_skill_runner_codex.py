@@ -254,3 +254,54 @@ async def test_busy_preserves_completed_output_until_runner_consumes_it(tmp_path
         await events.aclose()
     finally:
         await session.close()
+
+
+FAKE_CODEX_ECHO_MODEL = textwrap.dedent('''
+    import json, sys
+    args = sys.argv[1:]
+    sys.stdin.buffer.read()
+    model = args[args.index("-m") + 1] if "-m" in args else "none"
+    thread = args[-2] if "resume" in args else "thread-1"
+    def emit(event): print(json.dumps(event), flush=True)
+    emit({"type": "thread.started", "thread_id": thread})
+    emit({"type": "turn.started"})
+    emit({"type": "item.completed", "item": {"id": "m", "type": "agent_message", "text": "model=" + model}})
+    emit({"type": "turn.completed", "usage": {}})
+''')
+
+
+@pytest.mark.asyncio
+async def test_default_model_is_fixed_for_the_whole_run_and_reported(tmp_path):
+    script = tmp_path / "fake_codex.py"
+    script.write_text(FAKE_CODEX_ECHO_MODEL, encoding="utf-8")
+
+    def top(slug):
+        (tmp_path / "models_cache.json").write_text(json.dumps(
+            {"models": [{"slug": slug, "visibility": "list", "priority": 1}]}), encoding="utf-8")
+
+    top("gpt-6.1-sol")
+    config = make_config(tmp_path, sandbox=False, codex_bin=f'"{sys.executable}" "{script}"'.replace("\\", "/"),
+                         codex_home=tmp_path)
+
+    async def deny(*_args):
+        raise AssertionError("Codex 不走权限回调")
+
+    spec = SessionSpec(run_id="r1", cwd=tmp_path, resume=None, on_permission=deny, harness="codex")
+    session = await CodexSession.open(config, spec)
+    seen = []
+
+    async def collect(until: int):
+        async for event in session.events():
+            seen.append(event)
+            if sum(e["type"] == "result" for e in seen) == until:
+                return
+
+    await session.send("第一轮")
+    await asyncio.wait_for(collect(1), 30)
+    top("gpt-7-new")  # 任务中途 Codex 更新了清单
+    await session.send("第二轮")
+    await asyncio.wait_for(collect(2), 30)
+    await session.close()
+
+    assert [e["text"] for e in seen if e["type"] == "text"] == ["model=gpt-6.1-sol", "model=gpt-6.1-sol"]
+    assert [e.get("model") for e in seen if e["type"] == "session"] == ["gpt-6.1-sol", "gpt-6.1-sol"]

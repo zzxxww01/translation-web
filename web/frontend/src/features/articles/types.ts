@@ -1,3 +1,5 @@
+import type { Harness } from '@/features/skills/harness';
+
 /** 一路翻译（主项目或孪生项目）在后台的运行状态，来自 translation-status。 */
 export interface TrackStatus {
   active: boolean;
@@ -16,19 +18,26 @@ export interface WorkbenchProject {
   original_url: string | null;
   created_at: string;
   claude_run_id: string | null;
+  /** 用户选的主译本（主项目或孪生项目 id）；null = 没选过 */
+  primary_target?: string | null;
+  /** 实际的主译本：选过的那个，或后端按默认规则算出的（services/article_primary.py） */
+  primary?: string;
   progress: { total: number; approved: number };
   status: TrackStatus;
 }
 
 export interface ClaudeImportRecord {
   run_id: string | null;
+  /** 跑这一版的 Agent；旧记录没有，用 label 反推 */
+  agent?: Harness;
+  model?: string | null;
   aligned: number;
   unaligned: number;
   merged_blocks: number;
   imported_at: string;
 }
 
-/** 译本 2：同源孪生项目。kind=model 是换模型再翻，kind=claude 是从 Claude 任务导入。 */
+/** 网页版以外的一版：同源孪生项目。kind=model 是以前换模型再翻的，kind=claude 是从 Agent 任务导入的。 */
 export interface WorkbenchVariant {
   id: string;
   kind: 'model' | 'claude';
@@ -52,9 +61,9 @@ export interface WorkbenchRow {
   is_metadata?: boolean;
   source: string;
   image?: string | null;
-  /** 译本 1（网页版主项目） */
+  /** 网页版（主项目）的译文 */
   web: string | null;
-  /** 各个译本 2，键是孪生项目 id */
+  /** 其余各版的译文，键是孪生项目 id */
   alt: Record<string, string | null>;
 }
 
@@ -65,7 +74,7 @@ export interface Workbench {
   reading_mark?: { key: string; at: string } | null;
 }
 
-export type PaneId = 'source' | 'web' | 'alt';
+export type PaneId = 'source' | 'main' | 'compare';
 
 export type DiffSegment = { op: 'equal' | 'insert' | 'delete'; text: string };
 

@@ -199,7 +199,7 @@ class ModelCatalog:
                 catalog = {
                     "models": models, "default_model": self.config.antigravity_model,
                     "source": "runtime" if models else "unavailable",
-                    "warning": None if models else "暂时读不到 Antigravity 模型清单；请检查服务器 CLI 的安装和登录状态。仍可使用默认模型或填写模型 ID。",
+                    "warning": None if models else "暂时读不到 Gemini 模型清单；请检查服务器 agy CLI 的安装和登录状态。仍可使用默认模型或填写模型 ID。",
                 }
             self._catalogs[harness] = catalog
             self._expires[harness] = time.monotonic() + (300 if models else 30)

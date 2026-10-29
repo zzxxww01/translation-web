@@ -80,6 +80,12 @@ def _no_env_cookie(monkeypatch):
     monkeypatch.delenv("SUBSTACK_COOKIE", raising=False)
 
 
+@pytest.fixture(autouse=True)
+def _no_rate_limit(monkeypatch):
+    # 这里一分钟内要导入二十多次，超过 /import 的 20/minute
+    monkeypatch.setattr(substack.limiter, "enabled", False)
+
+
 @pytest.fixture
 def pm(tmp_path):
     return ProjectManager(projects_path=str(tmp_path / "projects"))
@@ -232,18 +238,38 @@ async def test_list_articles_counts_imported_and_not_imported(tmp_path, pm):
 
 
 @pytest.mark.asyncio
-async def test_list_articles_progress_takes_the_further_version(tmp_path, pm, monkeypatch):
+async def test_list_articles_progress_follows_the_primary_version(tmp_path, pm, monkeypatch):
     project_id = await _import(tmp_path, pm)
-    variant = article_variants.create_variant(pm, project_id, kind="claude", label="Codex", suffix="Codex")
-    done = {project_id: 0, variant: 4}
+    variant = article_variants.create_variant(pm, project_id, kind="claude", label="Codex", suffix="codex")
+    done = {project_id: 1, variant: 4}
     monkeypatch.setattr(pm, "get_translation_summary", lambda pid: ProjectTranslationSummary(
         status=ProjectStatus.IN_PROGRESS, total_sections=1, total_paragraphs=4,
         translated_sections=0, translated_paragraphs=done[pid],
     ))
     library = _library(tmp_path)
+    # 没选过主译本、网页版已经开始 → 看网页版
+    article = (await _list(pm, library)).articles[0]
+    assert (article.status, article.progress) == ("partial", 25)
+    # 选了 Codex 版作主译本 → 看它
+    pm.merge_meta_fields(project_id, fields={"primary_target": variant})
     article = (await _list(pm, library)).articles[0]
     assert (article.project_id, article.status, article.progress) == (project_id, "translated", 100)
     assert (await _list(pm, library)).counts["imported"] == 1  # 孪生项目不算一篇
+
+
+@pytest.mark.asyncio
+async def test_list_articles_counts_a_barely_started_web_version_as_started(tmp_path, pm, monkeypatch):
+    # 网页版只翻了 1/400 段（不到 1%）也算开始了，和工作台一样以它为主译本，不跳去看刚导入的 Agent 版
+    project_id = await _import(tmp_path, pm)
+    variant = article_variants.create_variant(pm, project_id, kind="claude", label="Codex", suffix="codex")
+    article_variants._write_import_record(pm, variant, {"run_id": None})
+    done = {project_id: 1, variant: 400}
+    monkeypatch.setattr(pm, "get_translation_summary", lambda pid: ProjectTranslationSummary(
+        status=ProjectStatus.IN_PROGRESS, total_sections=1, total_paragraphs=400,
+        translated_sections=0, translated_paragraphs=done[pid],
+    ))
+    article = (await _list(pm, _library(tmp_path))).articles[0]
+    assert article.progress != 100
 
 
 @pytest.mark.asyncio

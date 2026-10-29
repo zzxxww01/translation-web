@@ -49,7 +49,7 @@ def _card(name: str, card: dict[str, Any], fallback: dict[str, Any], available: 
         "description": str(card.get("description") or fallback.get("description", "")),
         "hint": str(card.get("hint") or fallback.get("hint", "")),
         "examples": [str(e) for e in examples if isinstance(e, str)] if isinstance(examples, list) else [],
-        # 新对话默认用哪个模型跑（比如翻译默认 Codex：Claude 不肯全文翻付费文章）；页面上可以改
+        # 新对话默认用哪个运行工具跑（翻译 Agent 默认 Codex，只是默认值）；页面上可以改
         "harness": card.get("harness") if card.get("harness") in HARNESSES else "claude",
         "available": available,
     }

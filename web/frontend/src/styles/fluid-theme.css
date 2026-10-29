@@ -9,6 +9,7 @@
     /* 字体系统 */
     /* 标题用自托管思源宋体（按 unicode-range 分片，只下载用到的字），正文无衬线 */
     --font-display: "Noto Serif SC", "Songti SC", "STSong", "SimSun", serif;
+    --font-source: "Source Serif 4 Variable", "Source Serif 4", Georgia, "Times New Roman", serif;
     --font-body: "Inter Variable", "PingFang SC", "HarmonyOS Sans SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
     --font-chinese: var(--font-body);
     --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
@@ -31,19 +32,9 @@
     --color-bg-elevated: #ffffff;
     --color-bg-subtle: #f7f2f3;
 
-    /* 文本层次 */
-    --color-text-primary: #0f172a;
-    --color-text-secondary: #475569;
-    /* 与 index.css @theme 保持同值：muted 需满足正文对比度要求 */
-    --color-text-muted: #64748b;
-    /* disabled 仅供 placeholder/分隔符等装饰性文本使用 */
-    --color-text-disabled: #94a3b8;
-
-    /* 语义色 */
-    --color-success: #10b981;
-    --color-warning: #f59e0b;
-    --color-error: #ef4444;
-    --color-info: #3b82f6;
+    /* 文本色和语义色只在 index.css 的 @theme 里定义（墨色正文、低饱和状态色）。
+       这里曾经留着旧的蓝灰值：@layer base 排在 @layer theme 后面，会把 @theme 的值整个盖掉，
+       全站的 text-text-* / bg-success 等实际一直是冷蓝灰和高饱和色。 */
 
     /* 过渡曲线 */
     --ease-fluid: cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -455,4 +446,38 @@
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, var(--color-primary-mid), var(--color-primary-end));
   }
+}
+
+/* ============ 文章工作台「书页」（设计文档 5 节）============ */
+/* 只补 index.css @theme 里没有的几个值；其余一律用已有变量 */
+@theme {
+  /* 分段标签、手机切换条的浅灰胶囊底 */
+  --color-bg-inset: #f4eff1;
+  /* 主译本栏：比白纸略暖的极浅底 */
+  --color-paper-primary: #fdfaf9;
+  /* 悬停段落：极浅的梅红底纹 */
+  --color-paper-hover: #fcf6f8;
+  /* 图标按钮悬停的浅底：白纸、主译本暖底、页面底色上看起来都一样 */
+  --color-ink-wash: rgba(43, 39, 48, 0.055);
+  /* 黄色状态的文字（白底 5.9:1，warning-light 底 5.2:1） */
+  --color-warning-text: #8a5a12;
+
+  /* 纸张、弹框（比纸张深一级）、梅红实心按钮、分段标签选中项 */
+  --shadow-paper: 0 1px 2px rgba(43, 39, 48, 0.05), 0 10px 30px rgba(43, 39, 48, 0.06);
+  --shadow-pop: 0 0 0 1px rgba(43, 39, 48, 0.06), 0 18px 48px rgba(43, 39, 48, 0.16);
+  --shadow-plum: 0 1px 2px rgba(116, 42, 79, 0.25), 0 4px 12px rgba(163, 61, 112, 0.18);
+  --shadow-thumb: 0 1px 2px rgba(43, 39, 48, 0.08), 0 1px 6px rgba(43, 39, 48, 0.05);
+}
+
+/* 弹框淡入并微微上移（150ms）；关掉时不做动画。减少动态效果时全部关掉。 */
+@keyframes wb-pop {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+
+.wb-pop[data-state='open'] { animation: wb-pop 150ms cubic-bezier(0.2, 0, 0, 1); }
+.wb-pop[data-state='closed'] { animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .wb-pop[data-state] { animation: none; }
 }

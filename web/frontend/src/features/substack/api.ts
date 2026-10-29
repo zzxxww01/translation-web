@@ -3,7 +3,7 @@ import type { Project } from '@/shared/types';
 
 /**
  * not_imported 没导入；imported 已导入还没翻；awaiting_terms 翻译在等你确认术语；
- * translating 翻译中；partial 翻了一部分停下了；translated 已译完。网页版和译本 2 取进度高的那一版
+ * translating 翻译中；partial 翻了一部分停下了；translated 已译完。只看主译本那一版
  */
 export type ArticleStatus =
   | 'not_imported'

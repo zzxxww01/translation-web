@@ -1,8 +1,9 @@
 import asyncio
+import json
 
 import pytest
 
-from skill_runner.runner import Busy, Conflict, Runner, SessionFailed, build_prompt, make_title
+from skill_runner.runner import Busy, Conflict, NotFound, Runner, SessionFailed, build_prompt, make_title
 from skill_runner.store import RunStore
 
 from skill_runner_fakes import make_config, settle
@@ -211,17 +212,76 @@ async def test_recover_marks_interrupted_runs_after_restart(config, store, facto
     assert factory.last.spec.resume == "sess-r"
 
 
-async def test_delete_requires_inactive_run_and_removes_directory(runner, store, factory):
+async def test_delete_requires_inactive_run_and_archives_directory(runner, store, factory):
     run_id = await start(runner)
     with pytest.raises(Conflict):
         await runner.delete(run_id)
     factory.last.push({"type": "result", "session_id": "s"})
     await settle()
     backlog, queue = runner.subscribe(run_id)
-    await runner.delete(run_id)
+    await runner.delete(run_id, client_ip="198.51.100.2")
     assert not store.exists(run_id)
+    assert (store.deleted_dir / run_id / "meta.json").is_file()
+    record = json.loads((store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()[-1])
+    assert (record["run_id"], record["reason"], record["client_ip"]) == (run_id, "user", "198.51.100.2")
     assert factory.last.closed
     assert queue.get_nowait() is None  # SSE 订阅者收到结束信号
+
+
+async def test_second_concurrent_delete_gets_not_found_and_writes_one_record(runner, store, factory):
+    run_id = await start(runner)
+    factory.last.push({"type": "result", "session_id": "s"})
+    await settle()
+    gate = asyncio.Event()
+    entered = 0
+    real_close = factory.last.close
+
+    async def slow_close():
+        nonlocal entered
+        entered += 1
+        await gate.wait()  # 两个删除都过了 _get，才放行
+        await real_close()
+
+    factory.last.close = slow_close
+
+    first = asyncio.create_task(runner.delete(run_id))
+    second = asyncio.create_task(runner.delete(run_id))
+    await settle()
+    gate.set()
+    results = await asyncio.gather(first, second, return_exceptions=True)
+
+    assert sum(r is None for r in results) == 1
+    assert sum(isinstance(r, NotFound) for r in results) == 1
+    assert len((store.deleted_dir / "deleted.jsonl").read_text(encoding="utf-8").splitlines()) == 1
+
+
+async def test_message_sent_while_delete_closes_the_session_cannot_reopen_it(runner, store, factory):
+    run_id = await start(runner)
+    factory.last.push({"type": "result", "session_id": "s"})
+    await settle()
+    session = factory.last
+    gate = asyncio.Event()
+    real_close = session.close
+    opened = len(factory.sessions) if hasattr(factory, "sessions") else None
+
+    async def slow_close():
+        await gate.wait()
+        await real_close()
+
+    session.close = slow_close
+    deleting = asyncio.create_task(runner.delete(run_id))
+    await settle()
+    sending = asyncio.create_task(runner.send_message(run_id, "还在吗", []))
+    await settle()
+    gate.set()
+    results = await asyncio.gather(deleting, sending, return_exceptions=True)
+
+    assert results[0] is None
+    assert isinstance(results[1], NotFound)  # 排在删除后面的消息不会重开会话
+    assert factory.last is session
+    if opened is not None:
+        assert len(factory.sessions) == opened
+    assert (store.deleted_dir / run_id / "meta.json").is_file()
 
 
 async def test_subscribe_replays_backlog_then_streams_live(runner, factory):

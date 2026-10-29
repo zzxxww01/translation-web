@@ -58,12 +58,14 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 | 更新 skill_runner 代码 | `git -C ~/skill-runner/src pull` 后 `systemctl --user restart skill-runner`。正在跑的任务会被打断，页面上发「继续」即可续跑 |
 | 升级 SDK | 改 `requirements.txt` 的版本 → 本机跑 smoke → 服务器 `venv/bin/pip install -r src/skill_runner/requirements.txt` → 再跑 smoke → 重启 |
 | 上传上限 | 公网入口是 Cloudflare Tunnel，免费版单个请求最大 100 MB，所以配置成 95 MB；更大的素材贴链接 |
-| 清理空间 | 页面上删除不要的运行；或直接删 `$SKILL_RUNNER_HOME/runs/<run_id>/` |
+| 清理空间 | 页面上删除只是把运行挪到 `~/skill-runner/deleted/`，仍占磁盘；要真正腾空间，先核对 `deleted/deleted.jsonl`，再手动删 `~/skill-runner/deleted/` 下的旧目录 |
 | 改口令 | 改 env 文件后重启，所有旧登录立即失效 |
 | 加 skill（= 页面上多一个 agent） | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，在 `skill_runner/agents.json` 写名片（中文名、图标、说明、输入提示、示例），开沙箱时按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
 | 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `chat`、`article`、`video`、`podcast` |
 
-## Harness：Claude Code / Codex / Antigravity
+## Harness：Claude Code / Codex / Gemini（Antigravity CLI）
+
+界面上叫 Gemini，内部 id、环境变量和 CLI 仍是 antigravity / `SKILL_RUNNER_ANTIGRAVITY_*` / `agy`。
 
 新任务页可以选用哪个 harness，任务元数据记在 `harness` 字段里（旧任务没有这个字段，按 Claude 处理）。
 
@@ -75,7 +77,7 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 - **skill 目录**：真实文件在 `~/.agents/skills/`（Codex 原生读），`~/.claude/skills/<skill>` 是指向它的软链接。
   新加 skill：放进 `~/.agents/skills/`，再 `ln -s ~/.agents/skills/<名字> ~/.claude/skills/<名字>`。
 
-- **Antigravity**：使用 Google 官方 `agy` CLI，每轮通过 stdin 传入 stream-json，输出映射到同一聊天界面。
+- **Gemini**（内部 id antigravity）：使用 Google 官方 `agy` CLI，每轮通过 stdin 传入 stream-json，输出映射到同一聊天界面。
   后续消息用已保存的 `--conversation <id>` 续聊，避免恢复到其他对话。使用 `--model` 指定型号。
   请按 [官方安装与登录文档](https://antigravity.google/docs/install?tab=cli) 在服务用户下登录；SSH 登录采用官方浏览器授权流程。
   设置 `SKILL_RUNNER_ANTIGRAVITY_BIN` 指向已安装的程序。不会自动切换到 Gemini API Key 计费。
@@ -84,16 +86,16 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 
 ## 选择具体模型与更新工具
 
-长文的「译本 2 Agent」提供 Codex、Claude、Antigravity 三个单选项，选择本身不会启动任务。
+长文的「译本 2 Agent」提供 Codex、Claude、Gemini 三个单选项，选择本身不会启动任务。
 点击开始或重新翻译后使用所选工具新建翻译会话；原来有会话时先调用 `/runs/{id}/stop`，
 等待旧进程关闭、取消待确认问题和自动回复后再启动。停止失败不会启动替代任务。
 旧会话及文件保留，并记为已中断，避免把未完成产物当成完成译文自动导入；新译文完成后更新所选工具的译本。
 
-在「新对话」里先选 Claude、Codex 或 Antigravity，再用「具体模型」选择型号，也可以填写完整模型 ID。
+在「新对话」里先选 Claude、Codex 或 Gemini，再用「具体模型」选择型号，也可以填写完整模型 ID。
 浏览器分别记住每个 Agent、每种工具的选择；对话会保存所选模型，刷新或服务重启后续聊仍沿用它。
 选择「默认模型」时使用服务器配置；对话标题下优先显示运行工具实际返回的模型。
 
-Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单来自 SDK 初始化握手，Antigravity 清单来自 `agy models`，均不提交推理请求。
+Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单来自 SDK 初始化握手，Gemini 清单来自 `agy models`，均不提交推理请求。
 「刷新模型」会绕过应用层缓存；Codex 仍依赖其 CLI 更新本地清单，其他工具返回的目录也不等于账号额度或权限验证。
 清单不可用时页面说明原因，仍可使用默认模型或手填 ID。可用型号及权限由该账号决定，手填 ID 不保证账号有权使用。
 
@@ -106,7 +108,7 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
 - Claude 使用原生命令 `claude install <已检查的版本>` 更新。SDK 与模型发现统一优先使用 `~/.local/bin/claude`，
   其次 PATH 中的 Claude，最后回退到 SDK 自带程序。`SKILL_RUNNER_CLAUDE_BIN` 可显式指定路径；自定义路径不支持网页自动更新。
 - 更新程序不会修改登录凭证、运行记录或 Python SDK 包。SDK 升级继续按上面的部署流程操作。
-- Antigravity 版本与官方原生 manifest 比较；它使用官方 CLI 自带的自动更新，此处仅显示版本状态，不通过 npm 安装同名第三方包。
+- Gemini（agy CLI）版本与官方原生 manifest 比较；它使用官方 CLI 自带的自动更新，此处仅显示版本状态，不通过 npm 安装同名第三方包。
 
 ## 等确认超时自动继续
 
@@ -117,6 +119,15 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
 和网页版术语确认一致）。等确认超过这么久没人回复：AskUserQuestion 自动选推荐选项（标了 Recommended / 推荐的，
 没有就第一个）；带标记结束的一轮则自动发一条「按你推荐的方案确认、继续」。每个任务最多自动 3 次，
 到时间点记在 `auto_reply_at`，服务重启后照旧接着排。
+
+## 删除与找回
+
+页面上「删除」对话是假删除：整个运行目录从 `~/skill-runner/runs/<id>` 原样挪到 `~/skill-runner/deleted/<id>`
+（同名已存在时加 `-1`、`-2`），文件一个不少。每次删除往 `~/skill-runner/deleted/deleted.jsonl` 追加一行，
+记着删除时间、原因（`user` 页面删除 / `upload_failed` 创建时上传失败）、标题、Agent、模型、上传和产出的文件清单、
+存档路径和来源 IP；同一条也在服务日志里：`journalctl --user -u skill-runner | grep "deleted run"`。
+
+找回：`mv ~/skill-runner/deleted/<存档目录名> ~/skill-runner/runs/<原 id>`（原 id 就是记录里的 `run_id`；存档目录名带 `-1`、`-2` 后缀时必须改回原 id）后 `systemctl --user restart skill-runner`。
 
 ## 安全边界
 
