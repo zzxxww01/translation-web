@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { ArrowLeft, Bookmark, ChevronDown, Download, ExternalLink, FileDiff, History, Maximize2, MoreHorizontal, PanelLeft, X } from 'lucide-react';
+import { ArrowLeft, Bookmark, Check, ChevronDown, Download, ExternalLink, FileDiff, History, Maximize2, MoreHorizontal, PanelLeft, X, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
@@ -12,6 +12,7 @@ import { IconAction } from './VersionHeader';
 
 export interface ExportItem {
   label: string;
+  icon?: LucideIcon;
   onSelect: () => void;
 }
 
@@ -21,10 +22,11 @@ const MENU_LABEL = 'px-2.5 pb-1 pt-1.5 text-[11px] font-normal tracking-[0.12em]
 
 /**
  * 顶栏：标题、保存状态、阅读标记、导出主译本、沉浸模式、更多。和页面底色融为一体，不画边框。
+ * 导出：左半边直接下载主译本的 Markdown；▾ 里是主译本的其他去处（PDF、复制全文、公众号格式）和其余各版。
  * compact（手机）：导出收进「⋯」，把宽度留给标题。
  */
 export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mark, onJump, onClearMark, markBusy,
-  onExportPrimary, exportItems, onImmersive, legacyHref, originalUrl, compact = false }: {
+  onExportPrimary, primaryActions, exportItems, exportNotice = null, onImmersive, legacyHref, originalUrl, compact = false }: {
   title: string;
   original: string | null;
   onShowList?: () => void;
@@ -36,7 +38,12 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
   onClearMark: () => void;
   markBusy: boolean;
   onExportPrimary: () => void;
+  /** 主译本的导出方式（Markdown / PDF / 复制全文 / 公众号） */
+  primaryActions: ExportItem[];
+  /** 其余各版（英文原文、对照版本），下载 Markdown */
   exportItems: ExportItem[];
+  /** 复制成功等提示：暂时写在导出按钮上 */
+  exportNotice?: string | null;
   /** 进入沉浸模式（整屏只留三栏） */
   onImmersive: () => void;
   legacyHref: string;
@@ -77,28 +84,30 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
           </PopoverContent>
         </Popover>
       )}
-      {!compact && (
-        // 不用 overflow-hidden 裁圆角：会把键盘焦点的描边裁掉。两半各自带圆角。
+      {!compact && (<>
+        <span role="status" className="sr-only">{exportNotice ?? ''}</span>
+        {/* 不用 overflow-hidden 裁圆角：会把键盘焦点的描边裁掉。两半各自带圆角。 */}
         <div className="ml-1 inline-flex items-stretch rounded-full bg-primary-500 text-[13px] font-medium text-white shadow-plum">
           <button type="button" onClick={onExportPrimary}
             className={cn('inline-flex h-9 items-center gap-1.5 rounded-l-full pl-4 pr-3.5 transition-colors hover:bg-primary-600', FOCUS_RING)}>
-            <Download aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} /><span>导出主译本</span>
+            {exportNotice
+              ? <><Check aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} /><span>{exportNotice}</span></>
+              : <><Download aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} /><span>导出主译本</span></>}
           </button>
           <span aria-hidden className="my-2 w-px bg-white/30" />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button type="button" aria-label="导出其他版本" title="导出其他版本"
+              <button type="button" aria-label="更多导出方式" title="PDF、复制全文、公众号格式、其他版本"
                 className={cn('inline-flex items-center rounded-r-full pl-2 pr-2.5 transition-colors hover:bg-primary-600 data-[state=open]:bg-primary-600', FOCUS_RING)}>
                 <ChevronDown aria-hidden className="h-3.5 w-3.5" strokeWidth={STROKE} />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" sideOffset={6} className={cn(MENU, 'w-64')}>
-              <DropdownMenuLabel className={MENU_LABEL}>导出 Markdown</DropdownMenuLabel>
-              {exportItems.map(item => <DropdownMenuItem key={item.label} className={MENU_ITEM} onSelect={item.onSelect}>{item.label}</DropdownMenuItem>)}
+              <ExportMenuItems primaryActions={primaryActions} exportItems={exportItems} />
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
-      )}
+      </>)}
       <IconAction label="沉浸模式" title="沉浸模式：整屏只留三栏（Esc 退出）" className={compact ? undefined : 'ml-1'} onClick={onImmersive}>
         <Maximize2 aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
       </IconAction>
@@ -109,11 +118,7 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
         <DropdownMenuContent align="end" sideOffset={6} className={cn(MENU, 'w-72')}>
           {compact && (
             <>
-              <DropdownMenuItem className={cn(MENU_ITEM, 'font-medium text-primary-700 focus:text-primary-700 [&>svg]:text-primary-500')} onSelect={onExportPrimary}>
-                <Download strokeWidth={STROKE} /> 导出主译本
-              </DropdownMenuItem>
-              <DropdownMenuLabel className={MENU_LABEL}>导出 Markdown</DropdownMenuLabel>
-              {exportItems.map(item => <DropdownMenuItem key={item.label} className={cn(MENU_ITEM, 'pl-[34px]')} onSelect={item.onSelect}>{item.label}</DropdownMenuItem>)}
+              <ExportMenuItems primaryActions={primaryActions} exportItems={exportItems} />
               <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
             </>
           )}
@@ -132,5 +137,22 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
+  );
+}
+
+/** 导出菜单：主译本的几种去处在上，其余各版的 Markdown 在下 */
+function ExportMenuItems({ primaryActions, exportItems }: { primaryActions: ExportItem[]; exportItems: ExportItem[] }) {
+  return (
+    <>
+      <DropdownMenuLabel className={MENU_LABEL}>主译本</DropdownMenuLabel>
+      {primaryActions.map(item => (
+        <DropdownMenuItem key={item.label} className={MENU_ITEM} onSelect={item.onSelect}>
+          {item.icon && <item.icon strokeWidth={STROKE} />} {item.label}
+        </DropdownMenuItem>
+      ))}
+      <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
+      <DropdownMenuLabel className={MENU_LABEL}>其他版本 · Markdown</DropdownMenuLabel>
+      {exportItems.map(item => <DropdownMenuItem key={item.label} className={cn(MENU_ITEM, 'pl-[34px]')} onSelect={item.onSelect}>{item.label}</DropdownMenuItem>)}
+    </>
   );
 }

@@ -232,7 +232,7 @@ function ReadingBlock({ block, column, marked, markBusy, onMark }: {
     editorRef={editor => registerEditor(row.key, editor)} onProtectionChange={onProtectionChange} />;
 
   return (
-    <div data-reading-block={first.key} data-reading-mark={marked ? 'true' : undefined}
+    <div data-reading-block={first.key} data-rows={block.map(row => row.key).join(' ')} data-reading-mark={marked ? 'true' : undefined}
       className={cn(MEASURE, 'group/reading relative isolate mb-5 scroll-mt-8',
         // 悬停底纹比文字四周各宽一点，不贴着字的边
         'after:pointer-events-none after:absolute after:-inset-x-2.5 after:-inset-y-1 after:-z-10 after:rounded-lg after:bg-paper-hover after:opacity-0 after:transition-opacity [@media(hover:hover)]:hover:after:opacity-100',

@@ -14,6 +14,7 @@ import { Button } from '@/components/ui/Button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
 import { cn } from '@/lib/utils';
+import { writeRichClipboard, wechatPasteHtml } from './copy';
 import { loadWechatDraft, saveWechatDraft } from './draft';
 import { useFormatWechat, useWechatThemes } from './hooks';
 import { useErrorHandler } from '@/shared/hooks/useErrorHandler';
@@ -182,51 +183,10 @@ export function WechatFeature() {
     }
 
     try {
-      // 复制走的必须是渲染后的 HTML；若异步渲染还没回来，这里同步等一次，
+      // 复制走的必须是渲染后的 HTML；若异步渲染还没回来，就在这里渲染一次，
       // 免得用户抢在渲染完成前点复制、把等宽降级版粘进公众号。
-      let htmlToCopy = html;
-      if (rawHtml.includes('data-latex') && (formulaResult.source !== rawHtml || !formulaResult.html)) {
-        const { renderFormulas } = await import('./formulaRenderer');
-        htmlToCopy = (await renderFormulas(rawHtml)).html;
-      }
-
-      const { default: juice } = await import('juice');
-      const styledHtml = `<style>${css}</style>${htmlToCopy}`;
-      // CSS 变量由后端在 get_theme 出口就解析成了字面值（公众号会连 <style> 带
-      // :root 一起剥掉，var() 到那边无从查起），这里不必再逐个 replace。
-      const processedHtml = juice(styledHtml, {
-        inlinePseudoElements: true,
-        preserveImportant: true,
-      });
-
-      const tempDiv = document.createElement('div');
-      tempDiv.innerHTML = processedHtml;
-      const plainText = tempDiv.textContent || '';
-
-      if (typeof ClipboardItem !== 'undefined' && navigator.clipboard?.write) {
-        await navigator.clipboard.write([
-          new ClipboardItem({
-            'text/html': new Blob([processedHtml], { type: 'text/html' }),
-            'text/plain': new Blob([plainText], { type: 'text/plain' }),
-          }),
-        ]);
-      } else {
-        const container = document.createElement('div');
-        container.innerHTML = processedHtml;
-        container.style.position = 'fixed';
-        container.style.left = '-9999px';
-        document.body.appendChild(container);
-        const range = document.createRange();
-        range.selectNodeContents(container);
-        const selection = window.getSelection();
-        selection?.removeAllRanges();
-        selection?.addRange(range);
-        const success = document.execCommand('copy');
-        selection?.removeAllRanges();
-        document.body.removeChild(container);
-        if (!success) throw new Error('Copy command failed');
-      }
-
+      const rendered = formulaResult.source === rawHtml && formulaResult.html ? formulaResult.html : undefined;
+      await writeRichClipboard(wechatPasteHtml(rawHtml, css, rendered));
       toast.success('已复制，可直接粘贴到微信编辑器');
     } catch {
       toast.error('复制失败，请手动复制预览内容');

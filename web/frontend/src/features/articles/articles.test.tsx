@@ -747,6 +747,41 @@ describe('Workbench', () => {
     expect(host.querySelector('h1')).not.toBeNull();
   });
 
+  it('says how many paragraphs an Agent version is missing instead of an import count', async () => {
+    api.workbench.mockResolvedValue({ ...WITH_CODEX, rows: WITH_CODEX.rows.map(row => row.key === 's1/p000' ? { ...row, alt: { ...row.alt, 'p1--codex': null } } : row) });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    expect(host.textContent).toContain('缺 1 段');
+    expect(host.textContent).not.toContain('已导入');
+    expect(buttonIn(host, '定位')).toBeTruthy();
+  });
+
+  it('copies the whole primary translation and says so on the export button', async () => {
+    api.workbench.mockResolvedValue(DATA);
+    api.exportMarkdown.mockResolvedValue({ filename: 'x.md', content: '# 2027 数据中心\n\n数据中心正在爆发。' });
+    const write = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal('ClipboardItem', class { constructor(public items: Record<string, Promise<Blob>>) {} });
+    Object.defineProperty(navigator, 'clipboard', { value: { write }, configurable: true });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const trigger = host.querySelector('button[aria-label="更多导出方式"]') as HTMLButtonElement;
+    await act(async () => {
+      trigger.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true, button: 0 }));
+    });
+    const menu = document.body.querySelector('[role="menu"]') as HTMLElement;
+    expect(menu.textContent).toContain('导出 PDF');
+    expect(menu.textContent).toContain('复制为公众号格式');
+    const copy = Array.from(menu.querySelectorAll('[role="menuitem"]')).find(item => item.textContent?.includes('复制全文')) as HTMLElement;
+    await act(async () => { copy.click(); });
+    await flush();
+    expect(api.exportMarkdown).toHaveBeenCalledWith('p1', 'zh');
+    const item = write.mock.calls[0][0][0] as { items: Record<string, Promise<Blob>> };
+    expect(await (await item.items['text/plain']).text()).toBe('# 2027 数据中心\n\n数据中心正在爆发。');
+    expect(await (await item.items['text/html']).text()).toContain('<h1>2027 数据中心</h1>');
+    expect(host.textContent).toContain('已复制全文');
+    vi.unstubAllGlobals();
+  });
+
   it('keeps the previous reading mark when saving fails', async () => {
     api.workbench.mockResolvedValue({ ...DATA, reading_mark: { key: 's1/p000', at: '2026-10-27' } });
     api.setReadingMark.mockRejectedValue(new Error('离线了'));
