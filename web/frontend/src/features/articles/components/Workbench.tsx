@@ -52,8 +52,8 @@ function typingOrDialog(target: EventTarget | null): boolean {
 }
 
 /**
- * 沉浸模式：整屏只留三栏（顶部导航和顶栏都收起，导航靠 AppLayout 认 ?immersive=1）。
- * 进入时顺便请浏览器全屏；按 Esc 先退出浏览器全屏，再按一次（不在编辑时）退出沉浸模式。
+ * 沉浸模式：窗口里只留三栏（顶部导航和顶栏都收起，导航靠 AppLayout 认 ?immersive=1）。
+ * 不请求浏览器全屏：用户要保留浏览器标签页。不在编辑、没有弹出层时按 Esc 退出。
  */
 function useImmersive() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -64,15 +64,8 @@ function useImmersive() {
     else next.delete('immersive');
     return next;
   }, { replace: true }), [setSearchParams]);
-  const enter = useCallback(() => {
-    setParam(true);
-    // 不支持或被浏览器拒绝时，只是在窗口里铺满
-    void document.documentElement.requestFullscreen?.()?.catch(() => undefined);
-  }, [setParam]);
-  const exit = useCallback(() => {
-    setParam(false);
-    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
-  }, [setParam]);
+  const enter = useCallback(() => setParam(true), [setParam]);
+  const exit = useCallback(() => setParam(false), [setParam]);
 
   useEffect(() => {
     if (!immersive) return;
@@ -84,11 +77,6 @@ function useImmersive() {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [immersive, exit]);
-
-  // 离开工作台时把浏览器全屏也退掉
-  useEffect(() => () => {
-    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
-  }, []);
 
   return { immersive, enter, exit };
 }
