@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { ArrowLeft, Bookmark, ChevronDown, Download, ExternalLink, FileDiff, History, MoreHorizontal, PanelLeft, X } from 'lucide-react';
+import { ArrowLeft, Bookmark, ChevronDown, Download, ExternalLink, FileDiff, History, Maximize2, MoreHorizontal, PanelLeft, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import {
@@ -20,11 +20,11 @@ const MENU_ITEM = 'rounded-lg px-2.5 py-2 text-[13px] text-text-secondary focus:
 const MENU_LABEL = 'px-2.5 pb-1 pt-1.5 text-[11px] font-normal tracking-[0.12em] text-text-muted';
 
 /**
- * 顶栏：标题、保存状态、阅读标记、导出主译本、更多。和页面底色融为一体，不画边框。
+ * 顶栏：标题、保存状态、阅读标记、导出主译本、沉浸模式、更多。和页面底色融为一体，不画边框。
  * compact（手机）：导出收进「⋯」，把宽度留给标题。
  */
 export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mark, onJump, onClearMark, markBusy,
-  onExportPrimary, exportItems, legacyHref, originalUrl, compact = false }: {
+  onExportPrimary, exportItems, onImmersive, legacyHref, originalUrl, compact = false }: {
   title: string;
   original: string | null;
   onShowList?: () => void;
@@ -37,6 +37,8 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
   markBusy: boolean;
   onExportPrimary: () => void;
   exportItems: ExportItem[];
+  /** 进入沉浸模式（整屏只留三栏） */
+  onImmersive: () => void;
   legacyHref: string;
   originalUrl: string | null;
   compact?: boolean;
@@ -97,6 +99,9 @@ export function WorkbenchTopBar({ title, original, onShowList, onBack, save, mar
           </DropdownMenu>
         </div>
       )}
+      <IconAction label="沉浸模式" title="沉浸模式：整屏只留三栏（Esc 退出）" className={compact ? undefined : 'ml-1'} onClick={onImmersive}>
+        <Maximize2 aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+      </IconAction>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <IconAction label="更多" className="-mr-1.5"><MoreHorizontal aria-hidden className="h-4 w-4" strokeWidth={STROKE} /></IconAction>

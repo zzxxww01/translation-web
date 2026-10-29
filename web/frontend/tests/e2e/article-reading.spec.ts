@@ -26,6 +26,8 @@ test('mobile article reading preserves a bookmark across refresh and saves a fra
   });
   await page.goto('/articles/reading');
   await expect(page.getByRole('article', { name: '主译本正文' })).toContainText('第一句。第二句。');
+  // 段落工具条要先把鼠标移到段落上才出现、才点得到
+  await page.getByRole('button', { name: '编辑：主译本：First sentence.', exact: true }).hover();
   await page.getByRole('button', { name: '主译本：从这里继续阅读 — First sentence.', exact: true }).click();
   await expect(page.getByRole('button', { name: '阅读标记', exact: true })).toBeVisible();
   await page.reload();

@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryClient } from '@tanstack/react-query';
-import { RefreshCw, Star } from 'lucide-react';
+import { Minimize2, RefreshCw, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { harnessLabel } from '@/features/skills/harness';
@@ -14,6 +14,7 @@ import { articleKeys, useClaudeRun, useWorkbench } from '../hooks';
 import { saveAgentChoice, type AgentChoice } from '../lib/agentChoice';
 import { AlignmentTooLow, importClaudeTrack, startClaudeTrack } from '../lib/claude';
 import { flushEdits, unsavedEdits } from '../lib/edits';
+import { editHistory, undoShortcut } from '../lib/history';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { sectionsWithMissing } from '../lib/tracks';
 import { FOCUS_RING, MEASURE, onTabKeys, STROKE } from '../lib/ui';
@@ -42,6 +43,54 @@ function useIsMobile(): boolean {
     return () => list.removeEventListener('change', update);
   }, []);
   return Boolean(mobile);
+}
+
+/** 焦点在输入框或弹框里：快捷键交给它们自己 */
+function typingOrDialog(target: EventTarget | null): boolean {
+  return target instanceof HTMLElement
+    && (target.isContentEditable || Boolean(target.closest('input, textarea, select, [role="dialog"], [role="menu"]')));
+}
+
+/**
+ * 沉浸模式：整屏只留三栏（顶部导航和顶栏都收起，导航靠 AppLayout 认 ?immersive=1）。
+ * 进入时顺便请浏览器全屏；按 Esc 先退出浏览器全屏，再按一次（不在编辑时）退出沉浸模式。
+ */
+function useImmersive() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const immersive = searchParams.get('immersive') === '1';
+  const setParam = useCallback((on: boolean) => setSearchParams(current => {
+    const next = new URLSearchParams(current);
+    if (on) next.set('immersive', '1');
+    else next.delete('immersive');
+    return next;
+  }, { replace: true }), [setSearchParams]);
+  const enter = useCallback(() => {
+    setParam(true);
+    // 不支持或被浏览器拒绝时，只是在窗口里铺满
+    void document.documentElement.requestFullscreen?.()?.catch(() => undefined);
+  }, [setParam]);
+  const exit = useCallback(() => {
+    setParam(false);
+    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
+  }, [setParam]);
+
+  useEffect(() => {
+    if (!immersive) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape' || event.defaultPrevented || typingOrDialog(event.target)) return;
+      if (document.body.querySelector('[data-radix-popper-content-wrapper], [role="dialog"]')) return; // 先关弹出层
+      exit();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [immersive, exit]);
+
+  // 离开工作台时把浏览器全屏也退掉
+  useEffect(() => () => {
+    if (document.fullscreenElement) void document.exitFullscreen().catch(() => undefined);
+  }, []);
+
+  return { immersive, enter, exit };
 }
 
 function isQaBlocked(error: unknown): boolean {
@@ -75,6 +124,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   const isMobile = useIsMobile();
+  const { immersive, enter: enterImmersive, exit: exitImmersive } = useImmersive();
   const [collapsed, setCollapsed] = useState<Collapsed>(loadCollapsed);
   const [mobilePane, setMobilePane] = useState<PaneId>('main');
   const [compareId, setCompareId] = useState<string | null>(null);
@@ -225,6 +275,17 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [saveNow]);
+
+  // 不在编辑框里按撤销/重做：改回页面上最近改过的那一段（在编辑框里由编辑框自己处理）
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      const shortcut = undoShortcut(event);
+      if (!shortcut || event.defaultPrevented || typingOrDialog(event.target)) return;
+      if (shortcut === 'undo' ? editHistory.undoLatest() : editHistory.redoLatest()) event.preventDefault();
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const continueTranslation = async (version: VersionView) => {
     try {
@@ -427,15 +488,17 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-bg-primary">
-      <WorkbenchTopBar title={title} original={title !== project.title ? project.title : null}
-        onShowList={onShowList} onBack={() => navigate('/articles')}
-        save={<SaveStatus saving={saving} onSave={() => void saveNow()} compact={isMobile} />} compact={isMobile}
-        mark={markText} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
-        onExportPrimary={() => void exportVersion(primary.id, 'zh')} exportItems={exportItems}
-        legacyHref={`/document/${project.id}`} originalUrl={project.original_url} />
+      {!immersive && (
+        <WorkbenchTopBar title={title} original={title !== project.title ? project.title : null}
+          onShowList={onShowList} onBack={() => navigate('/articles')}
+          save={<SaveStatus saving={saving} onSave={() => void saveNow()} compact={isMobile} />} compact={isMobile}
+          mark={markText} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
+          onExportPrimary={() => void exportVersion(primary.id, 'zh')} exportItems={exportItems}
+          onImmersive={enterImmersive} legacyHref={`/document/${project.id}`} originalUrl={project.original_url} />
+      )}
 
       {isMobile && (
-        <div className="mx-4 mb-3 grid grid-cols-3 gap-0.5 rounded-full bg-bg-inset p-[3px] text-[13px]" role="tablist" aria-label="切换栏">
+        <div className={cn('mx-4 mb-3 grid grid-cols-3 gap-0.5 rounded-full bg-bg-inset p-[3px] text-[13px]', immersive && 'mt-3')} role="tablist" aria-label="切换栏">
           {PANES.map(id => (
             <button key={id} type="button" role="tab" data-tab-id={id} aria-selected={mobilePane === id} aria-controls={`pane-${id}`}
               tabIndex={mobilePane === id ? 0 : -1} onClick={() => setMobilePane(id)}
@@ -448,7 +511,12 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
       )}
 
       <PaneGrid rows={rows} columns={columns} collapsed={collapsed} onToggle={toggle} mobilePane={isMobile ? mobilePane : null}
-        readingKey={data.reading_mark?.key} markBusy={markBusy} onMark={key => void markReading(key)} jump={readingJump} />
+        readingKey={data.reading_mark?.key} markBusy={markBusy} onMark={key => void markReading(key)} jump={readingJump}
+        immersive={immersive} corner={immersive ? (
+          <IconAction label="退出沉浸模式" title="退出沉浸模式（Esc）" onClick={exitImmersive}>
+            <Minimize2 aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+          </IconAction>
+        ) : null} />
 
       <TrackDrawer state={drawer} mainId={project.id} onClose={() => { setDrawer(null); void refresh(); void claudeRun.refetch(); }} />
       <ChangesDrawer state={changes} onClose={() => setChanges(null)} />

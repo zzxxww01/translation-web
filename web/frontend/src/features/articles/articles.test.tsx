@@ -8,6 +8,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { EditableText } from './components/EditableText';
 import { Workbench } from './components/Workbench';
 import { SAVE_DELAY_MS, unsavedEdits } from './lib/edits';
+import { editHistory } from './lib/history';
 import { AUTO_SYNC_GAP_MS, useAutoSyncArticles } from './hooks';
 import { AlignmentTooLow } from './lib/claude';
 import { importAndTranslate } from './lib/importFlow';
@@ -79,6 +80,7 @@ beforeEach(() => {
   vi.mocked(toast.success).mockReset();
   vi.mocked(toast.error).mockReset();
   localStorage.clear(); // 收起的栏会记在 localStorage 里
+  editHistory.clear();
   host = document.createElement('div');
   document.body.appendChild(host);
   root = createRoot(host);
@@ -140,6 +142,85 @@ describe('EditableText display', () => {
     await act(async () => { await ref.current!.adopt('新的'); });
     expect(onSave).not.toHaveBeenCalled();
     expect(host.textContent).toBe('旧译文');
+  });
+});
+
+const typeInto = (textarea: HTMLTextAreaElement, text: string) => act(async () => {
+  Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!.set!.call(textarea, text);
+  textarea.dispatchEvent(new Event('input', { bubbles: true }));
+});
+const press = (target: EventTarget, init: KeyboardEventInit) =>
+  act(async () => { target.dispatchEvent(new KeyboardEvent('keydown', { bubbles: true, cancelable: true, ...init })); });
+
+describe('EditableText direct editing', () => {
+  it('puts the caret where the click landed, counting through the hidden link syntax', async () => {
+    const raw = '见[行业模型](https://x.com/m)。后文';
+    await render(<EditableText id="c1" value={raw} placeholder="" ariaLabel="格子" onSave={vi.fn()} />);
+    const box = host.querySelector('[aria-label="编辑：格子"]') as HTMLElement;
+    window.getSelection()!.collapse(box.lastChild!, 1); // 「。」后面
+    await act(async () => { box.click(); });
+    const textarea = host.querySelector('textarea')!;
+    expect(document.activeElement).toBe(textarea);
+    expect(textarea.selectionStart).toBe(raw.indexOf('。') + 1);
+    expect(textarea.selectionEnd).toBe(raw.indexOf('。') + 1);
+  });
+
+  it('keeps a selected phrase selected in plain text, and leaves a linked paragraph alone so it can be copied', async () => {
+    await render(<>
+      <EditableText id="c2" value="数据中心正在爆发。" placeholder="" ariaLabel="普通" onSave={vi.fn()} />
+      <EditableText id="c3" value="见[行业模型](https://x.com/m)。" placeholder="" ariaLabel="带链接" onSave={vi.fn()} />
+    </>);
+    const plain = host.querySelector('[aria-label="编辑：普通"]') as HTMLElement;
+    window.getSelection()!.setBaseAndExtent(plain.firstChild!, 2, plain.firstChild!, 4);
+    await act(async () => { plain.click(); });
+    const textarea = host.querySelector('textarea')!;
+    expect(textarea.value.slice(textarea.selectionStart, textarea.selectionEnd)).toBe('中心');
+    await act(async () => { textarea.blur(); });
+
+    const linked = host.querySelector('[aria-label="编辑：带链接"]') as HTMLElement;
+    const link = linked.querySelector('a')!;
+    window.getSelection()!.setBaseAndExtent(linked.firstChild!, 0, link.firstChild!, 2);
+    await act(async () => { linked.click(); });
+    expect(host.querySelector('textarea')).toBeNull();
+    expect(window.getSelection()!.toString()).toBe('见行业');
+  });
+
+  it('can still undo a mistake after leaving the paragraph and coming back', async () => {
+    vi.useFakeTimers();
+    const onSave = vi.fn().mockResolvedValue(undefined);
+    await render(<EditableText id="u1" value="原来的译文" placeholder="" ariaLabel="格子" onSave={onSave} />);
+    await act(async () => { (host.querySelector('[aria-label="编辑：格子"]') as HTMLElement).click(); });
+    await typeInto(host.querySelector('textarea')!, '改错了');
+    await act(async () => { host.querySelector('textarea')!.blur(); });
+    expect(onSave).toHaveBeenLastCalledWith('改错了');
+    expect(host.querySelector('textarea')).toBeNull();
+
+    await act(async () => { (host.querySelector('[aria-label="编辑：格子"]') as HTMLElement).click(); });
+    await press(host.querySelector('textarea')!, { key: 'z', ctrlKey: true });
+    expect(host.querySelector('textarea')!.value).toBe('原来的译文');
+    await act(async () => { vi.advanceTimersByTime(SAVE_DELAY_MS + 10); });
+    expect(onSave).toHaveBeenLastCalledWith('原来的译文');
+    await press(host.querySelector('textarea')!, { key: 'y', ctrlKey: true });
+    expect(host.querySelector('textarea')!.value).toBe('改错了');
+  });
+});
+
+describe('EditableText undo with an input method', () => {
+  it('undoes one committed IME phrase at a time, never back to half-typed pinyin', async () => {
+    await render(<EditableText id="ime" value="原文" placeholder="" ariaLabel="格子" onSave={vi.fn().mockResolvedValue(undefined)} />);
+    await act(async () => { (host.querySelector('[aria-label="编辑：格子"]') as HTMLElement).click(); });
+    const textarea = host.querySelector('textarea')!;
+    const compose = async (steps: string[]) => {
+      await act(async () => { textarea.dispatchEvent(new CompositionEvent('compositionstart', { bubbles: true })); });
+      for (const value of steps) await typeInto(textarea, value);
+      await act(async () => { textarea.dispatchEvent(new CompositionEvent('compositionend', { bubbles: true })); });
+    };
+    await compose(['原文z', '原文zh', '原文中']);
+    await compose(['原文中w', '原文中wen', '原文中文']);
+    await press(textarea, { key: 'z', ctrlKey: true });
+    expect(textarea.value).toBe('原文中');
+    await press(textarea, { key: 'z', ctrlKey: true });
+    expect(textarea.value).toBe('原文');
   });
 });
 
@@ -448,6 +529,33 @@ describe('Workbench', () => {
     expect(api.saveText).not.toHaveBeenCalled();
   });
 
+  it('undoes a whole-paragraph adoption with Ctrl+Z even after clicking away', async () => {
+    api.workbench.mockResolvedValue({ ...DATA, rows: [
+      { ...DATA.rows[1], block: 'b1', source: 'First.', web: '原来的第一句。', alt: { 'p1--argon': '新版第一句。' } },
+      { ...DATA.rows[1], key: 's1/p002', paragraph_id: 'p002', block: 'b1', source: 'Second.', web: '原来的第二句。', alt: { 'p1--argon': '新版第二句。' } },
+    ] });
+    api.saveText.mockResolvedValue({ ok: true });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    const article = host.querySelector('[aria-label="主译本正文"]')!;
+    await act(async () => { buttonIn(article, '采用 argon 整段').click(); });
+    await flush();
+    expect(article.textContent).toContain('新版第一句。新版第二句。');
+    api.saveText.mockClear();
+
+    await press(document.body, { key: 'z', ctrlKey: true });
+    await act(async () => { (document.activeElement as HTMLElement | null)?.blur(); });
+    await flush();
+    expect(article.textContent).toContain('原来的第一句。原来的第二句。');
+    expect(api.saveText.mock.calls.map(call => call[1].text).sort()).toEqual(['原来的第一句。', '原来的第二句。'].sort());
+
+    // 再按一次重做回来
+    await press(document.body, { key: 'y', ctrlKey: true });
+    await act(async () => { (document.activeElement as HTMLElement | null)?.blur(); });
+    await flush();
+    expect(article.textContent).toContain('新版第一句。新版第二句。');
+  });
+
   it('protects an active fragment draft from whole paragraph adoption', async () => {
     api.workbench.mockResolvedValue({ ...DATA, rows: [
       { ...DATA.rows[1], block: 'b1', source: 'First.', web: '第一句。', alt: { 'p1--argon': '对照第一句。' } },
@@ -532,6 +640,32 @@ describe('Workbench', () => {
     const description = document.getElementById(saveButton.getAttribute('aria-describedby')!);
     expect(description?.textContent).toBe('1 段没保存上');
     expect(host.querySelector('[role="status"]')?.textContent).toBe('1 段没保存上');
+  });
+
+  it('enters an immersive mode with only the three panes, and leaves it with the corner button or Esc', async () => {
+    api.workbench.mockResolvedValue(DATA);
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    expect(host.querySelector('h1')?.textContent).toBe('2027 数据中心');
+    await act(async () => { (host.querySelector('button[aria-label="沉浸模式"]') as HTMLButtonElement).click(); });
+    expect(host.querySelector('h1')).toBeNull();
+    expect(host.querySelector('button[aria-label="保存"]')).toBeNull();
+    expect(host.querySelectorAll('[data-pane-body]')).toHaveLength(3);
+    // 退出按钮只在最右边那一栏
+    const exit = host.querySelectorAll('button[aria-label="退出沉浸模式"]');
+    expect(exit).toHaveLength(1);
+    expect(host.querySelector('[data-pane="compare"]')!.contains(exit[0])).toBe(true);
+    await act(async () => { (exit[0] as HTMLButtonElement).click(); });
+    expect(host.querySelector('h1')).not.toBeNull();
+
+    await act(async () => { (host.querySelector('button[aria-label="沉浸模式"]') as HTMLButtonElement).click(); });
+    // 正在编辑时 Esc 只是退出编辑
+    await act(async () => { (host.querySelector('[aria-label="编辑：主译本：Datacenters are booming."]') as HTMLElement).click(); });
+    await press(host.querySelector('textarea')!, { key: 'Escape' });
+    expect(host.querySelector('textarea')).toBeNull();
+    expect(host.querySelector('h1')).toBeNull();
+    await press(document.body, { key: 'Escape' });
+    expect(host.querySelector('h1')).not.toBeNull();
   });
 
   it('keeps the previous reading mark when saving fails', async () => {

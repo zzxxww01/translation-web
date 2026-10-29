@@ -48,6 +48,10 @@ interface PaneGridProps {
   markBusy: boolean;
   onMark: (key: string | null) => void;
   jump: number;
+  /** 沉浸模式：去掉四周留白和纸张阴影，三栏铺满整屏 */
+  immersive?: boolean;
+  /** 放在最右边那一栏栏头最后的按钮（沉浸模式的退出） */
+  corner?: ReactNode;
 }
 
 /** 收起竖条、栏头、正文三处共用的分隔线 */
@@ -96,10 +100,11 @@ function readingBlocks(rows: WorkbenchRow[]): WorkbenchRow[][] {
   return blocks;
 }
 
-export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readingKey, markBusy, onMark, jump }: PaneGridProps) {
+export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readingKey, markBusy, onMark, jump, immersive = false, corner }: PaneGridProps) {
   const visible = mobilePane ? [mobilePane] : PANES;
   const template = mobilePane ? 'minmax(0, 1fr)' : gridTemplate(collapsed);
   const isCollapsed = (id: PaneId) => !mobilePane && collapsed[id];
+  const lastOpen = visible.filter(id => !isCollapsed(id)).at(-1);
   const container = useRef<HTMLDivElement>(null);
   const lastJump = useRef(0);
   useEffect(() => {
@@ -117,8 +122,8 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readi
 
   // 栏头格子和正文都留出滚动条的位置（scrollbar-gutter），两边内容宽度一样，版心才上下对齐
   return (
-    <div ref={container} className="flex min-h-0 flex-1 flex-col overflow-hidden md:px-[22px] md:pb-[22px]" data-testid="pane-grid">
-      <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-bg-secondary md:rounded-[14px] md:shadow-paper">
+    <div ref={container} className={cn('flex min-h-0 flex-1 flex-col overflow-hidden', !immersive && 'md:px-[22px] md:pb-[22px]')} data-testid="pane-grid">
+      <div className={cn('flex min-h-0 flex-1 flex-col overflow-hidden bg-bg-secondary', !immersive && 'md:rounded-[14px] md:shadow-paper')}>
         <div className="z-20 grid shrink-0 border-b border-border-subtle bg-bg-secondary" style={{ gridTemplateColumns: template }}>
           {visible.map(id => (
             <div key={id} data-pane={id} className={cn('relative min-w-0', DIVIDER,
@@ -131,11 +136,14 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readi
                 </button>
               ) : (
                 <div className="overflow-hidden px-4 pb-4 pt-[18px] [scrollbar-gutter:stable] md:px-[30px]">
-                  <VersionHeader {...columns[id].header} collapse={mobilePane ? null : (
-                    <IconAction label={`收起${columns[id].title}`} title="收起这一栏" onClick={() => onToggle(id)}>
-                      <ChevronLeft aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
-                    </IconAction>
-                  )} />
+                  <VersionHeader {...columns[id].header} collapse={<>
+                    {!mobilePane && (
+                      <IconAction label={`收起${columns[id].title}`} title="收起这一栏" onClick={() => onToggle(id)}>
+                        <ChevronLeft aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
+                      </IconAction>
+                    )}
+                    {id === lastOpen && corner}
+                  </>} />
                 </div>
               )}
             </div>
@@ -163,8 +171,11 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readi
   );
 }
 
-/** 段落上边缘的小工具条按钮：悬停或聚焦这一段时才出现 */
-const TOOL = `pointer-events-auto rounded-md border border-border-subtle bg-bg-secondary px-2 py-0.5 shadow-thumb transition-opacity hover:border-primary-200 hover:text-primary-700 disabled:opacity-40 [@media(hover:hover)]:opacity-0 group-hover/reading:opacity-100 group-focus-within/reading:opacity-100 ${FOCUS_RING}`;
+/**
+ * 段落上边缘的小工具条按钮：悬停或聚焦这一段时才出现。没出现时也点不到——
+ * 以前透明的「采用整段」就压在两段之间，点空白处会把整段换掉。
+ */
+const TOOL = `rounded-md border border-border-subtle bg-bg-secondary px-2 py-0.5 shadow-thumb transition-opacity hover:border-primary-200 hover:text-primary-700 disabled:opacity-40 [@media(hover:hover)]:opacity-0 group-hover/reading:opacity-100 group-focus-within/reading:opacity-100 ${FOCUS_RING}`;
 
 function ReadingBlock({ block, column, marked, markBusy, onMark }: {
   block: WorkbenchRow[];
@@ -211,7 +222,8 @@ function ReadingBlock({ block, column, marked, markBusy, onMark }: {
     if (unavailable || [...editors.current.values()].some(editor => editor.isProtected())) return;
     setAdopting(true);
     try {
-      await Promise.all(candidates.map(row => editors.current.get(row.key)?.adopt(comparison!.text(row)!)));
+      const group = `adopt:${first.key}:${Date.now()}`; // 一次采用改的几个片段，撤销时一起撤回
+      await Promise.all(candidates.map(row => editors.current.get(row.key)?.adopt(comparison!.text(row)!, group)));
     } finally {
       setAdopting(false);
     }
@@ -226,11 +238,12 @@ function ReadingBlock({ block, column, marked, markBusy, onMark }: {
         'after:pointer-events-none after:absolute after:-inset-x-2.5 after:-inset-y-1 after:-z-10 after:rounded-lg after:bg-paper-hover after:opacity-0 after:transition-opacity [@media(hover:hover)]:hover:after:opacity-100',
         // 阅读标记：页边一道梅红细线，和悬停底纹之间留出空隙
         marked && 'before:absolute before:-left-3 before:bottom-1 before:top-1 before:w-0.5 before:rounded-full before:bg-primary-500 md:before:-left-4')}>
-      <div data-reading-actions className="pointer-events-none absolute -top-3 right-0 z-10 flex max-w-full -translate-y-1/2 items-center gap-1 text-[11px] leading-5">
+      {/* 工具条下沿压住段落顶边 1px：鼠标从段落往上移到按钮，悬停不会中途断掉 */}
+      <div data-reading-actions className="absolute -top-3 right-0 z-10 flex max-w-full -translate-y-1/2 items-center gap-1 text-[11px] leading-5 [@media(hover:hover)]:pointer-events-none group-hover/reading:pointer-events-auto group-focus-within/reading:pointer-events-auto">
         <button type="button" title={marked ? '取消“看到这里”' : '标记：看到这里'}
           aria-label={`${column.title}：从这里继续阅读 — ${first.source.slice(0, 40)}`}
           aria-pressed={marked} disabled={markBusy} onClick={() => onMark(marked ? null : first.key)}
-          className={cn(TOOL, 'flex shrink-0 items-center gap-1 text-text-muted', marked && 'border-primary-200 text-primary-700 [@media(hover:hover)]:opacity-100')}>
+          className={cn(TOOL, 'flex shrink-0 items-center gap-1 text-text-muted', marked && 'pointer-events-auto border-primary-200 text-primary-700 [@media(hover:hover)]:opacity-100')}>
           <Bookmark aria-hidden className={cn('h-3 w-3', marked && 'fill-current')} strokeWidth={STROKE} />看到这里
         </button>
         {showAdopt && <button type="button" title={adoptTitle} disabled={unavailable}
@@ -270,6 +283,7 @@ function Cell({ row, column, inline = false, editorRef, onProtectionChange }: {
   const editable = <EditableText
         ref={editorRef}
         id={`${column.id}:${row.key}`}
+        historyKey={`${column.versionKey ?? column.id}@${column.contentKey ?? ''}:${row.key}`}
         value={value}
         placeholder={inline ? '待补译' : column.placeholder ?? ''}
         ariaLabel={`${column.title}：${row.source.slice(0, 40)}`}
