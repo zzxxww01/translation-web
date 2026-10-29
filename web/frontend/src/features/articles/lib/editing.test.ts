@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { COALESCE_MS, editHistory, undoShortcut } from './history';
-import { hasInlineMarkup, renderedToRaw } from './inline';
+import { hasInlineMarkup, rawSelection, renderedToRaw } from './inline';
 
 describe('renderedToRaw', () => {
   it('maps a rendered offset back into the raw Markdown', () => {
@@ -24,6 +24,36 @@ describe('renderedToRaw', () => {
   it('knows when the rendered text equals the raw text', () => {
     expect(hasInlineMarkup('只是普通的一句话 * 不是斜体')).toBe(false);
     expect(hasInlineMarkup('有**加粗**')).toBe(true);
+  });
+});
+
+describe('rawSelection', () => {
+  const raw = '见[行业模型](https://x.com/m)。后文';
+  // 排版后是「见行业模型。后文」
+  const replace = (text: string, start: number, end: number, insert: string) => {
+    const target = rawSelection(text, start, end);
+    return target.text.slice(0, target.start) + insert + target.text.slice(target.end);
+  };
+
+  it('keeps the link when only its words are replaced', () => {
+    expect(replace(raw, 1, 5, '模型')).toBe('见[模型](https://x.com/m)。后文');
+    expect(replace(raw, 2, 4, 'X')).toBe('见[行X型](https://x.com/m)。后文');
+  });
+
+  it('replaces the whole link when the selection covers it and more', () => {
+    expect(replace(raw, 0, 6, 'X')).toBe('X后文');
+    expect(replace(raw, 1, 6, 'X')).toBe('见X后文');
+  });
+
+  it('turns a half-selected link into plain words instead of breaking the Markdown', () => {
+    expect(replace(raw, 3, 7, 'X')).toBe('见行业X文');
+    expect(replace(raw, 0, 3, 'X')).toBe('X模型。后文');
+  });
+
+  it('works inside italics that hold a link, and for a bare caret', () => {
+    const caption = '*来源：[行业模型](https://x.com/m)*';
+    expect(replace(caption, 0, 3, '出处：')).toBe('*出处：[行业模型](https://x.com/m)*');
+    expect(rawSelection(raw, 6, 6)).toEqual({ text: raw, start: raw.indexOf('。') + 1, end: raw.indexOf('。') + 1 });
   });
 });
 
