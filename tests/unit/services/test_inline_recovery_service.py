@@ -74,7 +74,7 @@ def test_meta_compute_source_line_double_links_stay_independent() -> None:
 
 
 def test_restore_single_link_never_wraps_existing_link() -> None:
-    # 已生成的链接区段不可再被包裹：只能降级为段末追加来源链接。
+    # 新契约：可拆分已有锚范围，不增字、不丢 URL、不嵌套。
     service = InlineRecoveryService()
     link = InlineElement(type="link", text="Meta", start=0, end=4, href="https://meta.com")
 
@@ -85,12 +85,12 @@ def test_restore_single_link_never_wraps_existing_link() -> None:
     )
 
     assert _NESTED_LINK.search(restored) is None
-    assert restored.endswith("（[来源](https://meta.com)）")
-    assert restored.startswith("[Meta 与 SemiAnalysis 估算](https://semianalysis.com)")
+    assert restored == "[Meta](https://meta.com)[ 与 SemiAnalysis 估算](https://semianalysis.com)"
+    assert "来源" not in restored
 
 
 def test_restore_single_link_skips_segment_overlapping_generated_link() -> None:
-    # 句读切段命中的区段若与既有链接重叠，同样降级为段末追加。
+    # 既有链接保持独立，缺失 URL 使用未挂链正文，不能新增来源标签。
     service = InlineRecoveryService()
     link = InlineElement(
         type="link", text="quarterly report", start=20, end=36, href="https://a.com/q"

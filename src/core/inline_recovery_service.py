@@ -13,6 +13,7 @@ from .format_tokens import (
 from .block_format import render_blockquote, render_list_item, restore_ordered_number
 from .models import ElementType, Paragraph, Section
 from .table_render import render_table_markdown
+from .link_recovery import recover_links, inspect_links, normalized_url, wrap
 
 # 已闭合的 markdown 链接区段：兜底恢复时不可再被包裹（A-3 嵌套坏链防护）。
 _MD_LINK_SPAN = re.compile(r"\[[^\]]*\]\([^)]*\)")
@@ -140,6 +141,17 @@ class InlineRecoveryService:
                 fallback_to_source=fallback_to_source,
             ).text
 
+            if first.is_metadata and first.metadata_type == "byline":
+                # Only expand an explicit omitted-author summary, using source
+                # metadata, and only when its count matches the missing authors.
+                _, present = inspect_links(plain_text)
+                missing = [e for e in first.parent_inline_elements
+                           if e.type == "link" and normalized_url(e.href or "") not in present]
+                summary = re.search(r"(?:及|和)?另外\s*(\d+)\s*位作者", plain_text)
+                if summary and int(summary[1]) == len(missing) and missing:
+                    names = "、".join(wrap(e.text, e.href) for e in missing)
+                    plain_text = plain_text[:summary.start()] + names + plain_text[summary.end():]
+
             if first.parent_inline_elements and first.source:
                 text = self.smart_fallback_restore_inline_elements(
                     source_text=first.source,
@@ -188,39 +200,7 @@ class InlineRecoveryService:
         elements: list[Any],
         block_id: str,
     ) -> str:
-        result = translated_text
-        link_elements = [e for e in elements if e.type == "link"]
-
-        for element in reversed(link_elements):
-            try:
-                result = self.restore_single_link(
-                    source_text=source_text,
-                    translated_text=result,
-                    link_element=element,
-                )
-            except Exception as error:  # pragma: no cover - defensive logging path
-                self._logger.warning(
-                    "Failed to restore link %s in block %s: %s",
-                    getattr(element, "href", "unknown"),
-                    block_id,
-                    error,
-                )
-        return result
-
-    @staticmethod
-    def _link_protected_spans(text: str) -> list[tuple[int, int]]:
-        """Spans of already-closed markdown links; never wrap into these again."""
-        return [match.span() for match in _MD_LINK_SPAN.finditer(text)]
-
-    @staticmethod
-    def _overlaps_protected_span(
-        spans: list[tuple[int, int]], start: int, end: int
-    ) -> bool:
-        return any(span_start < end and start < span_end for span_start, span_end in spans)
-
-    def _append_link_fallback(self, translated_text: str, href: str) -> str:
-        """降级策略（A-3）：绝不包裹含链接的文本，改为段末追加来源链接。"""
-        return f"{translated_text}（[来源]({href})）"
+        return recover_links(translated_text, [e for e in elements if e.type == "link"])
 
     def restore_single_link(
         self,
@@ -228,72 +208,7 @@ class InlineRecoveryService:
         translated_text: str,
         link_element: Any,
     ) -> str:
-        protected_spans = self._link_protected_spans(translated_text)
-
-        def _wrap_or_append(candidate: str) -> str:
-            # 硬约束（A-3）：候选锚文本含 `](` 即禁止包裹，防嵌套坏链
-            # `[[A](url), B](url)`；降级为段末追加。
-            if "](" in candidate:
-                return self._append_link_fallback(translated_text, link_element.href)
-            return f"[{candidate}]({link_element.href})"
-
-        link_start = source_text.find(link_element.text)
-        if link_start == -1:
-            self._logger.debug(
-                "Cannot locate link text '%s' in source, wrapping entire translation",
-                link_element.text[:50],
-            )
-            return _wrap_or_append(translated_text)
-
-        relative_pos = link_start / len(source_text) if len(source_text) > 0 else 0.5
-
-        if link_element.text in translated_text:
-            match_start = translated_text.find(link_element.text)
-            while match_start != -1:
-                match_end = match_start + len(link_element.text)
-                if not self._overlaps_protected_span(
-                    protected_spans, match_start, match_end
-                ):
-                    return (
-                        translated_text[:match_start]
-                        + f"[{link_element.text}]({link_element.href})"
-                        + translated_text[match_end:]
-                    )
-                match_start = translated_text.find(link_element.text, match_end)
-            # 所有精确命中都落在既有链接区段内：只能追加，不能再包裹。
-            return self._append_link_fallback(translated_text, link_element.href)
-
-        expected_pos = int(len(translated_text) * relative_pos)
-        sentence_breaks = [0]
-        for index, char in enumerate(translated_text):
-            if char in "，。！？；：、":
-                sentence_breaks.append(index + 1)
-        sentence_breaks.append(len(translated_text))
-
-        for index in range(len(sentence_breaks) - 1):
-            start = sentence_breaks[index]
-            end = sentence_breaks[index + 1]
-            if start <= expected_pos < end:
-                segment = translated_text[start:end].strip("，。！？；：、 ")
-                if segment:
-                    if "](" in segment or self._overlaps_protected_span(
-                        protected_spans, start, end
-                    ):
-                        return self._append_link_fallback(
-                            translated_text, link_element.href
-                        )
-                    return (
-                        translated_text[:start]
-                        + f"[{segment}]({link_element.href})"
-                        + translated_text[end:]
-                    )
-                break
-
-        self._logger.debug(
-            "No good sentence boundary found for link text '%s', wrapping entire translation",
-            link_element.text[:50],
-        )
-        return _wrap_or_append(translated_text)
+        return recover_links(translated_text, [link_element])
 
     def extract_chinese_word_candidates(
         self,
