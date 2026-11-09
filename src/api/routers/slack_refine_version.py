@@ -25,6 +25,7 @@ async def refine_version(
     version: str,
     chinese: str,
     style: str,
+    model: str | None = None,
 ):
     """Refine a single reply version based on updated Chinese text."""
     chinese = chinese.strip()
@@ -43,12 +44,14 @@ async def refine_version(
         style=style,
     )
 
+    model_metadata = {}
     try:
         english = (
-            await generate_with_fallback_budget(prompt, task_type="slack")
+            await generate_with_fallback_budget(prompt, task_type="slack", model=model, result_metadata=model_metadata)
         ).strip()
 
         return SlackReplyVariant(
+            **model_metadata,
             version=version,
             english=english,
             chinese=chinese,

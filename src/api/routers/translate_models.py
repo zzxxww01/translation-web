@@ -30,6 +30,7 @@ class PostTranslateResponse(BaseModel):
     translation: str
     model_used: Optional[str] = None
     provider_used: Optional[str] = None
+    real_model_used: Optional[str] = None
     fallback_used: bool = False
 
 
@@ -50,6 +51,7 @@ class GenerateTitleResponse(BaseModel):
     title: str
     model_used: Optional[str] = None
     provider_used: Optional[str] = None
+    real_model_used: Optional[str] = None
     fallback_used: bool = False
 
 
@@ -70,6 +72,7 @@ class PostHashtagResponse(BaseModel):
     tags: list[str]
     model_used: Optional[str] = None
     provider_used: Optional[str] = None
+    real_model_used: Optional[str] = None
     fallback_used: bool = False
 
 
@@ -117,6 +120,7 @@ class PostOptimizeResponse(BaseModel):
     optimized_translation: str
     model_used: Optional[str] = None
     provider_used: Optional[str] = None
+    real_model_used: Optional[str] = None
     fallback_used: bool = False
 
 

@@ -185,6 +185,39 @@ providers:
       base_delay: 1.0
       max_delay: 10.0
       exponential_backoff: true
+  openai-official:
+    type: openai
+    relay: false
+    allow_cross_provider_fallback: false
+    name: OpenAI 官方 API
+    description: OpenAI 官方直连；显式选择不跨品牌降级
+    group_priority: 3
+    base_url: https://api.openai.com/v1
+    network:
+      proxy_mode: disabled
+    api_keys:
+    - key: ${OPENAI_API_KEY}
+      priority: 1
+      name: 主 Key
+    rate_limit:
+      max_concurrent: 4
+      requests_per_minute: 60
+    models:
+    - alias: gpt-6.1-sol
+      real_model: gpt-6.1-sol
+      name: GPT-6.1 Sol（OpenAI 官方）
+      description: 官方 OpenAI；仅显式选择使用，不改变默认模型
+      priority: 1
+      supports_thinking: true
+      fallback: false
+      config:
+        max_tokens: 32768
+        timeout: 120
+    retry_config:
+      max_retries: 1
+      base_delay: 0.5
+      max_delay: 2.0
+      exponential_backoff: true
 fallback_rules:
   within_provider:
     enabled: true

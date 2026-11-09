@@ -127,6 +127,7 @@ async def generate_hashtags(request: Request, body: PostHashtagRequest):
             tags=tags,
             model_used=model_metadata.get("model_used"),
             provider_used=model_metadata.get("provider_used"),
+            real_model_used=model_metadata.get("real_model_used"),
             fallback_used=bool(model_metadata.get("fallback_used", False)),
         )
     except asyncio.TimeoutError as error:
@@ -207,6 +208,7 @@ async def translate_post(request: Request, body: PostTranslateRequest):
         translation=translation,
         model_used=model_metadata.get("model_used"),
         provider_used=model_metadata.get("provider_used"),
+        real_model_used=model_metadata.get("real_model_used"),
         fallback_used=bool(model_metadata.get("fallback_used", False)),
     )
 
@@ -308,6 +310,7 @@ async def optimize_post_translation(request: Request, body: PostOptimizeRequest)
         optimized_translation=optimized,
         model_used=model_metadata.get("model_used"),
         provider_used=model_metadata.get("provider_used"),
+        real_model_used=model_metadata.get("real_model_used"),
         fallback_used=bool(model_metadata.get("fallback_used", False)),
     )
 
@@ -443,6 +446,7 @@ async def generate_title(request: Request, body: GenerateTitleRequest):
             title="\n".join(titles),
             model_used=model_metadata.get("model_used"),
             provider_used=model_metadata.get("provider_used"),
+            real_model_used=model_metadata.get("real_model_used"),
             fallback_used=bool(model_metadata.get("fallback_used", False)),
         )
     except TitleValidationError as e:

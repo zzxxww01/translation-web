@@ -46,13 +46,16 @@ async def refine_result(request: Request, body: SlackRefineRequest) -> SlackRefi
         context_type=body.context_type,
     )
 
+    model_metadata = {}
     try:
         # 同步 LLM 调用放入线程池,避免阻塞事件循环
         refined_result = await generate_with_fallback_budget(
             prompt,
             task_type="slack",
+            model=body.model,
+            result_metadata=model_metadata,
         )
-        return SlackRefineResponse(refined_result=refined_result.strip())
+        return SlackRefineResponse(refined_result=refined_result.strip(), **model_metadata)
     except Exception as exc:
         logger.error(f"Error refining result: {exc}", exc_info=True)
         raise_llm_service_unavailable(operation="Slack refine", exc=exc)

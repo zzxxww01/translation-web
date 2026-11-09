@@ -7,47 +7,58 @@ from pydantic import BaseModel, Field
 from ..utils.json_utils import unwrap_relay_lines
 
 
+class SlackModelRequest(BaseModel):
+    model: Optional[str] = None
+
+
+class SlackModelResponse(BaseModel):
+    model_used: Optional[str] = None
+    provider_used: Optional[str] = None
+    real_model_used: Optional[str] = None
+    fallback_used: bool = False
+
+
 class ConversationMessage(BaseModel):
     role: Literal["them", "me"]
     content: str = Field(..., max_length=50000)
 
 
-class SlackReplyVariant(BaseModel):
+class SlackReplyVariant(SlackModelResponse):
     version: str
     english: str
     chinese: str = ""
     style: Optional[str] = None  # '简洁', '标准', '正式'; legacy labels accepted at edit boundaries
 
 
-class SlackProcessRequest(BaseModel):
+class SlackProcessRequest(SlackModelRequest):
     message: str = Field(..., max_length=50000)
     custom_prompt: Optional[str] = Field(None, max_length=10000)
     conversation_history: list[ConversationMessage] = Field(default_factory=list, max_length=100)
 
 
-class SlackProcessResponse(BaseModel):
+class SlackProcessResponse(SlackModelResponse):
     translation: str
     suggested_replies: list[SlackReplyVariant] = Field(default_factory=list)
 
 
-class SlackSyncRequest(BaseModel):
+class SlackSyncRequest(SlackModelRequest):
     chinese_reply: str = Field(..., max_length=50000)
 
 
-class SlackSyncResponse(BaseModel):
+class SlackSyncResponse(SlackModelResponse):
     english_reply: str
 
 
-class SlackComposeRequest(BaseModel):
+class SlackComposeRequest(SlackModelRequest):
     content: str = Field(..., max_length=50000)
     conversation_history: list[ConversationMessage] = Field(default_factory=list, max_length=100)
 
 
-class SlackComposeResponse(BaseModel):
+class SlackComposeResponse(SlackModelResponse):
     versions: list[SlackReplyVariant] = Field(default_factory=list)
 
 
-class SlackRefineRequest(BaseModel):
+class SlackRefineRequest(SlackModelRequest):
     """Request to refine a previous result"""
     context_type: Literal["incoming", "draft"]
     original_result: str = Field(..., max_length=50000)
@@ -55,19 +66,19 @@ class SlackRefineRequest(BaseModel):
     conversation_history: list[dict[str, str]] = Field(default_factory=list, max_length=100)
 
 
-class SlackRefineResponse(BaseModel):
+class SlackRefineResponse(SlackModelResponse):
     """Response from refine endpoint"""
     refined_result: str
 
 
-class SlackOptimizeRequest(BaseModel):
+class SlackOptimizeRequest(SlackModelRequest):
     content: str = Field(..., max_length=50000)
     target_language: str = Field(..., pattern="^(en|cn)$")
     context_type: str = Field(..., pattern="^(translation|grammar|tone|formality)$")
     original_text: Optional[str] = Field(None, max_length=50000)
 
 
-class SlackOptimizeResponse(BaseModel):
+class SlackOptimizeResponse(SlackModelResponse):
     optimized_text: str
     improvements: list[str]
     confidence: float

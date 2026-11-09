@@ -7,6 +7,7 @@ import { copyToClipboard } from '@/shared/utils';
 import type { SlackReplyVariant } from '@/shared/types';
 import { useRefineVersion } from '../hooks/useRefineVersion';
 import { cn } from '@/lib/utils';
+import { useSlackWorkspaceStore } from '../store';
 
 interface VersionCardProps {
   version: SlackReplyVariant;
@@ -27,6 +28,7 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
   const [editedChinese, setEditedChinese] = useState(version.chinese || '');
   const [showSuccess, setShowSuccess] = useState(false);
   const refineMutation = useRefineVersion();
+  const selectedModel = useSlackWorkspaceStore(state => state.selectedModel);
 
   const handleStartEditing = () => {
     setEditedChinese(version.chinese || '');
@@ -54,6 +56,7 @@ export function VersionCard({ version, label, onSelect, onRefine, disabled }: Ve
       const updated = await refineMutation.mutateAsync({
         version: version.version,
         chinese: editedChinese,
+        model: selectedModel || undefined,
         style,
       });
 

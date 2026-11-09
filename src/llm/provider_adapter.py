@@ -93,7 +93,7 @@ def _build_provider_runtime_kwargs(
             "retry_delay": provider_config.retry_config.base_delay,
         }
 
-    if provider_config.type == "vectorengine":
+    if provider_config.type in {"vectorengine", "openai"}:
         return {
             "timeout": model_timeout,
             "max_retries": provider_config.retry_config.max_retries,
@@ -178,6 +178,15 @@ class ProviderAdapter:
                 api_key=api_key,
                 model=model_config.real_model,
                 network_policy=network_policy,
+                **provider_runtime_kwargs,
+            )
+
+        elif provider_config.type == "openai":
+            from .openai_official import OpenAIOfficialProvider
+
+            provider = OpenAIOfficialProvider(
+                api_key=api_key, base_url=provider_config.base_url,
+                model=model_config.real_model, network_policy=network_policy,
                 **provider_runtime_kwargs,
             )
 

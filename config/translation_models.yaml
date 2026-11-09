@@ -29,6 +29,11 @@ default:
 
 # 用户可选的模型覆盖（全流程使用同一模型）
 model_overrides:
+  gpt-6.1-sol:
+    all_phases:
+      model: "gpt-6.1-sol"
+      description: "OpenAI 官方；保留官方采样设置"
+
   deepseek-v3:
     all_phases:
       model: "deepseek-v3"
