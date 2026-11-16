@@ -50,7 +50,7 @@ class AnalysisAgent:
         # 调用 LLM 分析
         try:
             analysis_data = self.llm.analyze(full_text)
-        except Exception as e:
+        except Exception:
             # 如果分析失败，返回基本结果
             return AnalysisResult(
                 title=sections[0].title if sections else "Untitled",

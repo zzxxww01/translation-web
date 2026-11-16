@@ -239,8 +239,6 @@ class ConsistencyReviewer:
         forward_refs = [r'后文', r'下文', r'稍后', r'接下来']
         backward_refs = [r'如前所述', r'前文', r'上文', r'之前提到']
 
-        section_ids = [s.section_id for s in sections]
-
         for i, section in enumerate(sections):
             section_id = section.section_id
             if section_id not in translations:

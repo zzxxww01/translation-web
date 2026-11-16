@@ -475,12 +475,6 @@ def quick_convert(
             }
         }
     else:
-        target_tz_map = {
-            "est": "America/New_York",
-            "cst": "America/Chicago",
-            "mst": "America/Denver",
-            "pst": "America/Los_Angeles",
-        }
         target_tz = resolve_timezone(to_tz, None)
         target_dt = convert_timezone(dt, source_tz, target_tz)
         return {

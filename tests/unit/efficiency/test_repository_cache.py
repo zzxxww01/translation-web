@@ -1,6 +1,4 @@
 import json
-from pathlib import Path
-from types import SimpleNamespace
 from unittest.mock import Mock
 import pytest
 from src.core.project_repository import ProjectRepository, SectionDataError

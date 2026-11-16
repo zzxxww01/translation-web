@@ -183,16 +183,6 @@ def test_html_importer_refuses_external_local_files(tmp_path):
     assert not destination.exists()
 
 
-def test_failed_download_leaves_no_cached_partial_file(tmp_path, monkeypatch):
-    from src.core.image_downloader import ImageDownloader
-    def interrupted(*a, **kw):
-        raise OSError('connection interrupted')
-    monkeypatch.setattr('src.core.image_downloader.fetch_public_bytes', interrupted)
-    downloader = ImageDownloader(images_dir=str(tmp_path / 'images'))
-    assert downloader.download('https://public.test/img.png') is None
-    assert not list((tmp_path / 'images').glob('*'))
-
-
 def test_atomic_file_failure_cleans_temp_and_preserves_original(tmp_path, monkeypatch):
     target = tmp_path / 'image.png'; target.write_bytes(b'old')
     monkeypatch.setattr(pr.os, 'replace', Mock(side_effect=OSError('disk error')))

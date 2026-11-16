@@ -512,7 +512,6 @@ class LLMProvider(ABC):
         for i, pair in enumerate(pairs):
             src = pair.get("source", "")
             trans = pair.get("translation", "")
-            issues = pair.get("issues", [])
 
             identity = f" ID={pair['paragraph_id']}" if pair.get("paragraph_id") else ""
             pair_text = f"[段落 {i}{identity}]\n原文：{src}\n当前译文：{trans}"
@@ -523,10 +522,7 @@ class LLMProvider(ABC):
 
         pairs_text = "\n\n".join(pairs_text_list)
 
-        # 构建评分信息
-        scores_text = ", ".join([
-            f"{k}={v:.1f}" for k, v in reflection_scores.items()
-        ])
+        # 评分逐项作为模板变量传入（见下方 *_score），不再拼成一行文本
         issues_summary = self._build_refine_issue_summary(pairs)
 
         base_prompt = self.prompt_manager.get(

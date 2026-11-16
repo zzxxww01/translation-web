@@ -1,6 +1,6 @@
 from types import SimpleNamespace
 from src.agents.consistency_reviewer import ConsistencyReviewer
-from src.core.models import Paragraph, Section, EnhancedTerm, TranslationStrategy, ConsistencyIssue, Glossary, GlossaryTerm
+from src.core.models import Paragraph, Section, EnhancedTerm, TranslationStrategy, ConsistencyIssue
 from src.core.term_consistency import check_terminology
 from src.services.consistency_service import ConsistencyReviewer as LightweightReviewer, generate_consistency_report_markdown
 

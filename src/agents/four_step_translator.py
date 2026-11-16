@@ -13,18 +13,13 @@ Step 0: 预扫描 (Prescan) - 使用 Flash 模型快速扫描章节，提取术�
 """
 
 from collections import defaultdict
-from typing import List, Optional, Callable, Dict, Any, TYPE_CHECKING
+from typing import List, Optional, Callable, Dict, Any
 import functools
 import logging
 
 logger = logging.getLogger(__name__)
 from src.config.efficiency import bounded_stage, stage_scope
 from src.llm.work_budget import WorkBudgetExceeded
-
-if TYPE_CHECKING:
-    from ..services.translation_session_service import TranslationSessionService
-    from ..services.term_injection_service import TermInjectionService
-    from ..services.term_validation_service import TermValidationService
 
 from ..core.longform_context import (
     build_article_challenge_payload,
@@ -73,9 +68,6 @@ class FourStepTranslator:
         max_retries: int = 1,
         memory_service=None,
         style_polish_threshold: float = 8.0,
-        session_service: Optional["TranslationSessionService"] = None,
-        term_injection_service: Optional["TermInjectionService"] = None,
-        term_validation_service: Optional["TermValidationService"] = None,
         get_provider_for_phase: Optional[Callable[[str], LLMProvider]] = None,
         batch_source_char_limit: int = 16000,
     ):
@@ -90,9 +82,6 @@ class FourStepTranslator:
             max_retries: 最大重试次数
             memory_service: 翻译记忆服务（可选，用于反思评分学习）
             style_polish_threshold: 简洁性评分低于此阈值时触发 Style Polish（设为 0 关闭，默认 8.0）
-            session_service: 翻译会话服务（可选）
-            term_injection_service: 术语注入服务（可选）
-            term_validation_service: 术语验证服务（可选）
             get_provider_for_phase: 阶段化模型获取函数（可选，用于 Phase 1/2 使用不同模型）
         """
         self.llm = llm_provider
@@ -106,11 +95,6 @@ class FourStepTranslator:
         self.max_retries = max_retries
         self.memory_service = memory_service
         self.style_polish_threshold = style_polish_threshold
-
-        # 术语系统服务
-        self.session_service = session_service
-        self.term_injection_service = term_injection_service
-        self.term_validation_service = term_validation_service
 
         # 阶段化模型支持
         self.get_provider_for_phase = get_provider_for_phase
@@ -375,9 +359,6 @@ class FourStepTranslator:
         from copy import deepcopy
         from ..prompts import BUNDLE_VERSION
         from ..prompts.contracts import text_version
-        session_id = None
-        if self.session_service and project_id:
-            session_id = self.session_service.create_session(project_id=project_id, section_id=section.section_id, create_snapshot=True).id
         outputs, drafts, reflection, understanding = None, [], None, None
         draft_reflection = None
         history, revised, attempted = [], [], False
@@ -467,11 +448,6 @@ class FourStepTranslator:
             if not assessment.passed:
                 degraded = True
                 reason = reason or "Unresolved issues after the bounded revision budget"
-            if self.session_service and session_id:
-                if degraded:
-                    self.session_service.fail_session(session_id, error=reason)
-                else:
-                    self.session_service.complete_session(session_id, "\n\n".join(translations))
             progress("完成（待处理问题已记录）" if degraded else "完成", 4)
             return SectionTranslationResult(section_id=section.section_id, translations=translations,
                 draft_translations=drafts, revised_translations=revised,
@@ -481,11 +457,6 @@ class FourStepTranslator:
                 degraded=degraded, degraded_reason=reason,
                 workflow_status="manual_review" if degraded else "passed")
         except Exception as exc:
-            if self.session_service and session_id:
-                try:
-                    self.session_service.fail_session(session_id, error=str(exc))
-                except Exception:
-                    logger.exception("Could not persist failed translation session")
             if not drafts:
                 raise
             # Text and tokenized payload both come from the same saved draft version.
@@ -996,7 +967,6 @@ class FourStepTranslator:
         """
         # 采样前 2 个段落进行快速评估（避免评估整个章节）
         sample_translations = translations[:2]
-        sample_text = "\n\n".join(sample_translations)
 
         # 快速评估 prompt（简化版，不需要详细分析）
         from ..prompts import get_prompt_manager
@@ -1317,7 +1287,7 @@ class FourStepTranslator:
         self, article_analysis, batch_source_text: str
     ) -> List[Dict[str, Any]]:
         """
-        构建术语表上下文，优先使用新的术语注入服务
+        构建术语表上下文：按本批原文命中情况筛选文章术语
 
         Args:
             article_analysis: 文章分析结果
@@ -1326,25 +1296,6 @@ class FourStepTranslator:
         Returns:
             术语表条目列表
         """
-        # 如果启用了术语注入服务，使用新系统
-        if self.term_injection_service and article_analysis:
-            try:
-                # 从 article_analysis.terminology 转换为 Term 对象
-                # 注意：这里假设 EnhancedTerm 可以转换为 Term
-                # 实际使用时可能需要从 GlossaryStorage 加载
-                terms = self._apply_term_tracker_corrections(
-                    article_analysis.terminology
-                )
-
-                # 使用术语注入服务构建约束
-                # 注意：这里返回的是字符串，需要解析为列表
-                # 为了兼容性，我们仍然使用旧的格式
-                selected_terms = select_prompt_terms_for_text(terms, batch_source_text)
-                return build_glossary_entries_from_terms(selected_terms)
-            except Exception as e:
-                logger.warning(f"Failed to use term injection service: {e}")
-
-        # 回退到旧系统
         if article_analysis:
             return build_glossary_entries_from_terms(
                 select_prompt_terms_for_text(

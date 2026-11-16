@@ -1,5 +1,4 @@
 from concurrent.futures import ThreadPoolExecutor
-from contextvars import copy_context
 from threading import Event, Lock
 import json
 import time

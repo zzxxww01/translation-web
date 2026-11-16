@@ -459,7 +459,7 @@ class ProviderAdapter:
                         f"All {len(attempt_plan)} attempts failed for model {self.model_alias} "
                         f"after {duration:.2f}s. Stats: {_fallback_stats}"
                     )
-                    raise last_error
+                    raise last_error from e
 
         # 理论上不会到达这里
         raise last_error or Exception("All attempts failed")

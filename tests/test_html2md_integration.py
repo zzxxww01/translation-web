@@ -332,7 +332,7 @@ def test_basename_sanitization(tmp_path: Path, mock_image_content: dict):
         return mock_response
 
     with patch("src.html2md.images.safe_urlopen", side_effect=mock_urlopen):
-        result = copy_and_rewrite_images(
+        copy_and_rewrite_images(
             markdown=markdown,
             source_html_path=source_html,
             output_dir=output_dir,

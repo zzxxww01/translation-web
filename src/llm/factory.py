@@ -185,7 +185,7 @@ def create_llm_provider(provider: str | None = None, model: str | None = None, *
                 # Get the real model name from the alias
                 from .models import get_real_model_name
                 resolved_model = get_real_model_name(provider)
-        except:
+        except Exception:
             pass
 
     # Fall back to direct provider name resolution

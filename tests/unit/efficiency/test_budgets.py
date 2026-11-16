@@ -1,10 +1,10 @@
-from types import SimpleNamespace
 import pytest
 from pydantic import ValidationError
-from src.core.efficiency import EfficiencyOptions
-from src.llm.business_budget import run_budget, stage_budget, BusinessBudgetExceeded
+from src.config.efficiency import EfficiencyOptions
+from src.llm.work_budget import WorkBudgetExceeded
 from src.llm.execution_context import generation_budget, remaining_timeout
-from src.llm.request_sizing import RequestBudget, RequestTooLargeError, estimate_tokens, sized_batches, request_size_scope
+from tests.helpers.budgets import run_budget, stage_budget
+from src.llm.request_sizing import RequestBudget, RequestTooLargeError, sized_batches, request_size_scope
 from src.services.stage_checkpoints import StageCheckpoints, checkpoint_scope, cached_stage
 from src.agents.deep_analyzer import DeepAnalyzer
 from src.llm.errors import LLMDeadlineExceededError, LLMConfigurationError, LLMOutputTruncatedError, LLMTimeoutError
@@ -33,7 +33,7 @@ def test_nested_transport_wrappers_reserve_one_generation():
     with run_budget(options) as run:
         with stage_budget("draft") as stage:
             assert Adapter(concrete).generate("hello") > 0
-            with pytest.raises(BusinessBudgetExceeded): Adapter(concrete).generate("again")
+            with pytest.raises(WorkBudgetExceeded): Adapter(concrete).generate("again")
             assert stage.calls == run.calls == concrete.sent == 1
         with stage_budget("review"):
             Adapter(concrete).generate("review")
@@ -46,7 +46,7 @@ def test_rejected_reservation_changes_no_parent_counters():
     with run_budget(options) as run:
         p.generate("one")
         with stage_budget("two") as stage:
-            with pytest.raises(BusinessBudgetExceeded): p.generate("no")
+            with pytest.raises(WorkBudgetExceeded): p.generate("no")
             assert run.calls == 1 and stage.calls == 0
             assert stage.estimated_tokens == 0
 
@@ -62,7 +62,7 @@ def test_remaining_transport_timeout_cannot_outlive_stage_or_run():
 def test_estimated_token_limit_is_not_billed_and_blocks_before_call():
     p = Concrete()
     with run_budget(EfficiencyOptions(max_run_estimated_tokens=1)) as run:
-        with pytest.raises(BusinessBudgetExceeded): p.generate("hello")
+        with pytest.raises(WorkBudgetExceeded): p.generate("hello")
         assert p.sent == run.calls == run.estimated_tokens == 0
 
 
@@ -111,7 +111,7 @@ def test_efficiency_options_fail_closed(values):
 @pytest.mark.parametrize("error,action", [
     (LLMDeadlineExceededError("timeout"), "stop"),
     (LLMConfigurationError("invalid"), "stop"),
-    (BusinessBudgetExceeded("limit"), "stop"),
+    (WorkBudgetExceeded("limit"), "stop"),
     (LLMTimeoutError("network"), "retry_same_input"),
     (RuntimeError("deadline exceeded"), "retry_same_input"),
     (RequestTooLargeError("window"), "reduce_input"),

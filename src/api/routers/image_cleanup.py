@@ -175,11 +175,6 @@ def _cleanup_image_paragraphs_sync(
                 if paragraph.translations and request.clean_translations:
                     retained_translations = {}
                     for trans_id, translation in paragraph.translations.items():
-                        trans_text = (
-                            translation.text
-                            if hasattr(translation, "text")
-                            else str(translation)
-                        )
                         if _is_removable_image_error(paragraph, translation):
                             section_cleaned += 1
                             cleaned_translations += 1
@@ -247,11 +242,6 @@ def _get_image_statistics_sync(project_id: str, pm) -> ImageStatsResponse:
                 continue
 
             for translation in paragraph.translations.values():
-                trans_text = (
-                    translation.text
-                    if hasattr(translation, "text")
-                    else str(translation)
-                )
                 if _is_removable_image_error(paragraph, translation):
                     error_translations += 1
                     section_errors += 1
@@ -368,8 +358,7 @@ async def cleanup_image_paragraphs(
 
     except Exception as e:
         logger.error(f"[Image Cleanup] 处理失败: {e}")
-        raise BadRequestException(detail=f"图片清理失败: {str(e)}")
-
+        raise BadRequestException(detail=f"图片清理失败: {str(e)}") from e
 
 @router.get("/{project_id}/image-stats", response_model=ImageStatsResponse)
 async def get_image_statistics(
@@ -390,8 +379,7 @@ async def get_image_statistics(
 
     except Exception as e:
         logger.error(f"[Image Stats] 获取统计失败: {e}")
-        raise BadRequestException(detail=f"获取图片统计失败: {str(e)}")
-
+        raise BadRequestException(detail=f"获取图片统计失败: {str(e)}") from e
 
 @router.post("/{project_id}/prevent-image-translation")
 async def prevent_image_translation(
@@ -422,8 +410,7 @@ async def prevent_image_translation(
 
     except Exception as e:
         logger.error(f"[Image Prevention] 设置失败: {e}")
-        raise BadRequestException(detail=f"设置图片翻译预防失败: {str(e)}")
-
+        raise BadRequestException(detail=f"设置图片翻译预防失败: {str(e)}") from e
 
 async def update_project_after_cleanup(
     project_id: str,

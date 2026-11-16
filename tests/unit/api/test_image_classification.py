@@ -1,4 +1,3 @@
-from types import SimpleNamespace
 from unittest.mock import Mock
 import pytest
 from src.api.routers.image_cleanup import detect_image_content, ImageCleanupRequest, _cleanup_image_paragraphs_sync, _get_image_statistics_sync

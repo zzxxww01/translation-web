@@ -1340,7 +1340,6 @@ class BatchTranslationService:
 
             # 收集所有翻译结果用于一致性审查
             all_translations = {}
-            consistency_report = None
 
             results = await self._translate_sections_in_document_order(
                 project_id=project_id,
@@ -3048,7 +3047,6 @@ class BatchTranslationService:
                 )
                 token_count += len(para.inline_elements)
 
-        section_text = "\n\n".join(section_lines)
         batch_source_text = "\n\n".join(batch_source_text_parts)
 
         understanding = analysis.section_roles.get(section.section_id)

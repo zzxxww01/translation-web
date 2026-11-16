@@ -1,5 +1,4 @@
 """No paid calls. Regressions for budgets, quotas, cache usage and aggregation."""
-import asyncio
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor

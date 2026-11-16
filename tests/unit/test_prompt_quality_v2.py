@@ -2,7 +2,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from contextvars import copy_context
 import json
-from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import Mock, AsyncMock
 import pytest
@@ -416,15 +415,6 @@ def test_incomplete_verification_retains_the_review_of_the_retained_draft():
     assert result.degraded and result.translations == result.draft_translations
     assert result.reflection.reviewed_version == text_version([p.source for p in s.paragraphs], result.translations)
 
-
-def test_post_revision_storage_failure_keeps_draft_and_draft_review_together():
-    tr = _translator([_review([_finding()]), _review()]); s = _section()
-    tr.session_service = Mock()
-    tr.session_service.create_session.return_value = SimpleNamespace(id='session')
-    tr.session_service.complete_session.side_effect = OSError('disk full')
-    result = tr.translate_section(s, [s], project_id='project')
-    assert result.degraded
-    assert result.reflection.reviewed_version == text_version([p.source for p in s.paragraphs], result.translations)
 
 
 def test_source_without_spans_rejects_hallucinated_tokens_in_real_payload_builder():

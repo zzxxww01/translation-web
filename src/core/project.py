@@ -540,7 +540,7 @@ class ProjectManager:
         try:
             data = self._read_json(meta_path)
         except (json.JSONDecodeError, IOError) as e:
-            raise FileNotFoundError(f"Failed to load project meta: {e}")
+            raise FileNotFoundError(f"Failed to load project meta: {e}") from e
 
         try:
             # Sections are persisted under sections/<id>/meta.json. Older project
@@ -552,7 +552,7 @@ class ProjectManager:
         except (TypeError, ValueError) as e:
             # meta.json 损坏，返回默认项目元信息
             logger.warning("Project %s meta.json is corrupted: %s", project_id, e)
-            raise FileNotFoundError(f"Project meta is corrupted: {e}")
+            raise FileNotFoundError(f"Project meta is corrupted: {e}") from e
 
         # 修复进度显示问题：如果 total_paragraphs 为 0，尝试从 sections 重新计算
         if meta.progress.total_paragraphs == 0:

@@ -1,5 +1,4 @@
 """Malformed input must fail visibly rather than look like successful work."""
-import json
 from unittest.mock import Mock
 
 import pytest

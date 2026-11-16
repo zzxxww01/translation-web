@@ -178,8 +178,8 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
 
     try:
         meta, variant_metas, imports, rows, mark, main_started = await run_blocking(load)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
     main_status = _status_summary(await status_service.get_translation_progress(project_id))
     variants = []
@@ -229,8 +229,8 @@ async def set_primary(project_id: str, body: PrimaryRequest, pm: ProjectManagerD
 
     try:
         await run_blocking(save)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     return {"ok": True, "primary_target": body.target}
 
 
@@ -257,8 +257,8 @@ async def set_reading_mark(project_id: str, body: ReadingMarkRequest, pm: Projec
 
     try:
         mark = await run_blocking(save)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except OSError as error:
         raise ServiceUnavailableException(detail="阅读标记保存失败，请重试") from error
     return {"ok": True, "reading_mark": mark}
@@ -290,8 +290,8 @@ async def save_text(request: Request, project_id: str, body: SaveTextRequest, pm
 
     try:
         await run_blocking(save)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Paragraph not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Paragraph not found") from exc
     return {"ok": True}
 
 
@@ -306,8 +306,8 @@ async def get_changes(project_id: str, target: str, pm: ProjectManagerDep):
 
     try:
         return await run_blocking(load)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.get("/workbench/human-edits.jsonl")
@@ -331,10 +331,10 @@ async def create_model_variant(request: Request, project_id: str, body: CreateVa
         variant_id = await run_blocking(
             article_variants.create_variant, pm, project_id,
             kind="model", label=body.label, suffix=body.label, replace=False)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except ValueError as error:
-        raise BadRequestException(detail=str(error))
+        raise BadRequestException(detail=str(error)) from error
     return {"variant_id": variant_id}
 
 
@@ -347,12 +347,12 @@ async def import_claude_variant(request: Request, project_id: str, body: ImportC
             article_primary.import_agent_version, pm, project_id,
             zh_markdown=body.zh_markdown, en_markdown=body.en_markdown, run_id=body.run_id, agent=body.agent,
             model=body.model, force=body.force)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except article_variants.AlignmentTooLow as error:  # ValueError 的子类，要排在前面
-        raise ConflictException(detail=str(error), error_code="ALIGNMENT_LOW")
+        raise ConflictException(detail=str(error), error_code="ALIGNMENT_LOW") from error
     except ValueError as error:
-        raise BadRequestException(detail=str(error))
+        raise BadRequestException(detail=str(error)) from error
     return result
 
 
@@ -361,8 +361,8 @@ async def set_claude_run(project_id: str, body: ClaudeRunRequest, pm: ProjectMan
     _check_id(project_id)
     try:
         await run_blocking(lambda: pm.merge_meta_fields(project_id, fields={"claude_run_id": body.run_id}))
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     return {"ok": True, "claude_run_id": body.run_id}
 
 

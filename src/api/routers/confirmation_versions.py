@@ -41,12 +41,12 @@ async def import_reference_version(
             "unaligned_items": version.metadata.get("unaligned_items", []),
         }
 
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except ValueError as e:
-        raise BadRequestException(detail=str(e))
+        raise BadRequestException(detail=str(e)) from e
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to import: {str(e)}")
+        raise BadRequestException(detail=f"Failed to import: {str(e)}") from e
 
 
 @router.post("/{project_id}/versions/{version_id}/align")
@@ -67,12 +67,12 @@ async def manual_align(
         # 对齐变更后清确认缓存,避免确认页脏读(审计 C26)
         await confirm_service.invalidate_project_cache(project_id)
         return result
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except ValueError as e:
-        raise BadRequestException(detail=str(e))
+        raise BadRequestException(detail=str(e)) from e
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to align: {str(e)}")
+        raise BadRequestException(detail=f"Failed to align: {str(e)}") from e
 
 
 @router.post("/{project_id}/versions/{version_id}/skip")
@@ -91,12 +91,12 @@ async def skip_unaligned(
         )
         await confirm_service.invalidate_project_cache(project_id)
         return result
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except ValueError as e:
-        raise BadRequestException(detail=str(e))
+        raise BadRequestException(detail=str(e)) from e
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to skip: {str(e)}")
+        raise BadRequestException(detail=f"Failed to skip: {str(e)}") from e
 
 
 @router.get("/{project_id}/versions")
@@ -118,5 +118,5 @@ async def list_versions(
                 for v in project.versions
             ]
         }
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc

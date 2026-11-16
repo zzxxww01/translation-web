@@ -268,27 +268,27 @@ class VectorEngineProvider(LLMProvider):
             record_failure(e)
             logger.error(f"[VectorEngine] Rate limit exceeded: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
-            raise normalized.error if normalized is not None else e
+            raise normalized.error if normalized is not None else e from e
         except APITimeoutError as e:
             record_failure(e)
             logger.error(f"[VectorEngine] Request timeout: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
-            raise normalized.error if normalized is not None else e
+            raise normalized.error if normalized is not None else e from e
         except APIConnectionError as e:
             record_failure(e)
             logger.error(f"[VectorEngine] Connection error: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
-            raise normalized.error if normalized is not None else e
+            raise normalized.error if normalized is not None else e from e
         except APIError as e:
             record_failure(e)
             logger.error(f"[VectorEngine] API error: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
-            raise normalized.error if normalized is not None else e
+            raise normalized.error if normalized is not None else e from e
         except Exception as e:
             record_failure(e)
             logger.error(f"[VectorEngine] Unexpected error: {e}")
             normalized = normalize_llm_transport_error(e, provider_name="VectorEngine")
-            raise normalized.error if normalized is not None else e
+            raise normalized.error if normalized is not None else e from e
 
     def translate(self, text: str, context: Optional[Dict[str, Any]] = None, timeout: Optional[float] = None) -> str:
         """Translate text using the shared prompt builder"""

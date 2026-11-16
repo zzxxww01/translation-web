@@ -174,9 +174,9 @@ class WorkCheckpointStore:
                 try:
                     lock.acquire()
                     acquired = True
-                except portalocker.exceptions.LockException:
+                except portalocker.exceptions.LockException as exc:
                     if remaining_timeout() is None and time.monotonic() - start >= 600:
-                        raise TimeoutError("Checkpoint is busy; retry after its owner finishes")
+                        raise TimeoutError("Checkpoint is busy; retry after its owner finishes") from exc
                     bounded_sleep(0.05)
             check_active()
             yield

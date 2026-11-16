@@ -140,9 +140,9 @@ async def create_project(
         meta = await asyncio.to_thread(pm.create, body.name, body.html_path)
         return _build_project_response(meta)
     except ValueError as e:
-        raise BadRequestException(detail=str(e))
+        raise BadRequestException(detail=str(e)) from e
     except FileNotFoundError as e:
-        raise NotFoundException(detail=str(e))
+        raise NotFoundException(detail=str(e)) from e
 
 
 @router.post("/projects/upload", response_model=ProjectResponse)
@@ -210,7 +210,7 @@ async def upload_project(
 
         return _build_project_response(meta)
     except ValueError as e:
-        raise BadRequestException(detail=str(e))
+        raise BadRequestException(detail=str(e)) from e
     except BadRequestException:
         raise
     except Exception as e:
@@ -222,7 +222,7 @@ async def upload_project(
             if os.getenv("DEBUG") == "true"
             else "Upload failed. Please try again or contact support."
         )
-        raise BadRequestException(detail=detail)
+        raise BadRequestException(detail=detail) from e
     finally:
         await file.close()
         if assets:
@@ -251,8 +251,8 @@ async def get_project(project_id: str, pm: ProjectManagerDep):
             "translation_completeness": build_translation_completeness(sections, meta),
             "sections": [_build_section_response(s) for s in sections],
         }
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.get(
@@ -276,8 +276,8 @@ async def get_project_asset(
             project_id,
             asset_path,
         )
-    except (FileNotFoundError, ValueError, OSError):
-        raise NotFoundException(detail="Project asset not found")
+    except (FileNotFoundError, ValueError, OSError) as exc:
+        raise NotFoundException(detail="Project asset not found") from exc
 
     headers = {
         "Cache-Control": "public, max-age=3600",
@@ -314,8 +314,8 @@ async def delete_project(request: Request, project_id: str, pm: ProjectManagerDe
     try:
         await run_blocking(delete_with_variants, pm, project_id)
         return {"message": "Project deleted"}
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.post("/projects/{project_id}/export")
@@ -354,9 +354,9 @@ async def export_project(
             "is_incomplete": bool(completeness and not completeness["is_complete"]),
         }
     except ValueError as error:
-        raise BadRequestException(detail=str(error))
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+        raise BadRequestException(detail=str(error)) from error
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.get("/projects/{project_id}/sections")
@@ -366,8 +366,8 @@ async def get_sections(project_id: str, pm: ProjectManagerDep):
     try:
         sections = await run_blocking(pm.get_sections, project_id)
         return [_build_section_response(s) for s in sections]
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.get("/projects/{project_id}/sections/{section_id}")
@@ -421,5 +421,5 @@ async def get_section(project_id: str, section_id: str, pm: ProjectManagerDep):
         }
     except NotFoundException:
         raise
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc

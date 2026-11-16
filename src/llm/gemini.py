@@ -1078,7 +1078,7 @@ class GeminiProvider(LLMProvider):
         except json.JSONDecodeError as e:
             logger.error(f"[Gemini] Failed to parse JSON response: {e}")
             logger.error(f"[Gemini] Response: {response[:500]}")
-            raise ValueError(f"Invalid JSON response from LLM: {e}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}") from e
 
     def deep_analyze_document(
         self,
@@ -1119,7 +1119,7 @@ class GeminiProvider(LLMProvider):
         except json.JSONDecodeError as e:
             logger.error(f"[Gemini] Failed to parse JSON response: {e}")
             logger.error(f"[Gemini] Response: {response[:500]}")
-            raise ValueError(f"Invalid JSON response from LLM: {e}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}") from e
 
     def verify_high_frequency_terms(
         self,
@@ -1166,7 +1166,7 @@ class GeminiProvider(LLMProvider):
         except json.JSONDecodeError as e:
             logger.error(f"[Gemini] Failed to parse JSON response: {e}")
             logger.error(f"[Gemini] Response: {response[:500]}")
-            raise ValueError(f"Invalid JSON response from LLM: {e}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}") from e
 
     def analyze(self, text: str) -> Dict[str, Any]:
         from ..prompts.task_builders import analysis_prompt

@@ -249,13 +249,12 @@ class CaptionTranslator:
 
         return False
 
-    def translate_caption(self, caption: str, preserve_links: bool = True) -> str:
+    def translate_caption(self, caption: str) -> str:
         """
         翻译图注
 
         Args:
             caption: 图注原文
-            preserve_links: 是否保留链接
 
         Returns:
             翻译后的图注

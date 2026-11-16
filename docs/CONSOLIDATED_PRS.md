@@ -17,7 +17,7 @@
 
 - **Slack 与 main**：保留中转拆行键名/字符串恢复，同时继续拒绝重复键、非有限数字、截断和多重 JSON。规范化后键名冲突报错，空内容不伪装成功。原 main 的正常恢复用例保留；损坏 JSON 的单测从返回空对象调整为显式抛错，业务接口仍报告明确失败。
 - **模型策略**：顶层 `model_scope/model_profile` 与旧 `efficiency.model_scope/profile` 均可用。同一请求出现相互矛盾的值直接拒绝。物理模型相同但通道别名不同，不复用错误路由。术语预检保留实际阶段模型身份，并复用已经配置的 facade。
-- **参数统一**：`src.config.efficiency.EfficiencyOptions` 为唯一模型；`src.core.efficiency` 仅兼容导入。`stage_resume/max_stage_seconds/max_run_seconds` 兼容映射到 `resume_stages/stage_timeout_seconds/run_timeout_seconds`；两种拼法冲突报错。时间支持有限的正数，含旧接口的小数秒；非法布尔值和非有限数仍拒绝。
+- **参数统一**：`src.config.efficiency.EfficiencyOptions` 为唯一模型（原 `src.core.efficiency` 兼容导入已于 2026-11 移除）。`stage_resume/max_stage_seconds/max_run_seconds` 兼容映射到 `resume_stages/stage_timeout_seconds/run_timeout_seconds`；两种拼法冲突报错。时间支持有限的正数，含旧接口的小数秒；非法布尔值和非有限数仍拒绝。
 - **检查点统一**：运行链路使用 `WorkCheckpointStore`。旧 `StageCheckpoints` 委托同一存储，保留命名空间、编解码和显式重译行为。相同键的计算通过跨实例/进程文件锁去重；等待遵守取消/截止时间。成功结果才写入，故障和未完成审校不缓存为通过。
 - **预算单位明确**：生产链路按实际传输 admission 计数，重试计入；兼容调用明确采用逻辑生成单位。共享同一父子原子预留和截止时间实现，不把两种单位混计。可选估算 token 预算按调用预留，不是账单金额或精确计费 token。最后一次允许的响应仍能保存。
 - **请求窗口**：保留 #3 的物理模型输入/输出/共享上下文检查和 #2 的可选操作方请求上限。显式输出上限必须参与检查。四步法及普通章节模式均能按完整 prompt 拆批、保留有效部分和阶段结果；单段/整章审校无法容纳时明确保留待处理，不截断原文。
