@@ -61,7 +61,7 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 | 清理空间 | 页面上删除只是把运行挪到 `~/skill-runner/deleted/`，仍占磁盘；要真正腾空间，先核对 `deleted/deleted.jsonl`，再手动删 `~/skill-runner/deleted/` 下的旧目录 |
 | 改口令 | 改 env 文件后重启，所有旧登录立即失效 |
 | 加 skill（= 页面上多一个 agent） | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，在 `skill_runner/agents.json` 写名片（中文名、图标、说明、输入提示、示例），开沙箱时按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
-| 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `general`、`translate`、`subtitle`、`podcast`（旧名 `chat`、`article`、`video` 仍可用，见前端 `AgentIcon.tsx`） |
+| 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `general`、`translate`、`subtitle`、`podcast`、`dev`（旧名 `chat`、`article`、`video` 仍可用，见前端 `AgentIcon.tsx`） |
 
 ## Harness：Claude Code / Codex / Gemini（Antigravity CLI）
 

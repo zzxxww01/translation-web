@@ -1,4 +1,4 @@
-import { Captions, Languages, Podcast, Sparkles, Wand2, type LucideIcon } from 'lucide-react';
+import { Captions, Code2, Languages, Podcast, Sparkles, Wand2, type LucideIcon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 // agents.json 里 icon 字段的取值（旧名也认）；没登记的用 Wand2
@@ -7,6 +7,7 @@ const ICONS: Record<string, { icon: LucideIcon; color: string }> = {
   translate: { icon: Languages, color: 'bg-info-light text-info' },
   subtitle: { icon: Captions, color: 'bg-warning-light text-warning' },
   podcast: { icon: Podcast, color: 'bg-success-light text-success' },
+  dev: { icon: Code2, color: 'bg-bg-tertiary text-text-primary' },
 };
 const ALIASES: Record<string, string> = { chat: 'general', article: 'translate', video: 'subtitle' };
 
