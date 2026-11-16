@@ -60,7 +60,8 @@ class FallbackStrategy:
 
         # 第二阶段：跨组故障转移
         cross_attempts = []
-        if self.config.fallback_rules.get('cross_provider', {}).get('enabled', False):
+        if (initial_provider.allow_cross_provider_fallback
+                and self.config.fallback_rules.get('cross_provider', {}).get('enabled', False)):
             cross_attempts = self._build_cross_provider_attempts(resolved_alias)
 
         if is_relay_provider(initial_provider):

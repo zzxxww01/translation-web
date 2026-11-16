@@ -84,4 +84,4 @@ async def test_refine_version_accepts_frontend_query_contract(monkeypatch) -> No
     assert result.chinese == "更新后的中文"
     assert result.english == "Refined English"
     assert result.style == "正式"
-    generate.assert_awaited_once_with("rendered", task_type="slack")
+    generate.assert_awaited_once_with("rendered", task_type="slack", model=None, result_metadata={})

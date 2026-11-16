@@ -7,6 +7,7 @@ interface RefineVersionParams {
   version: string;
   chinese: string;
   style: string;
+  model?: string;
 }
 
 export function useRefineVersion() {
@@ -20,6 +21,7 @@ export function useRefineVersion() {
             version: params.version,
             chinese: params.chinese,
             style: params.style,
+            ...(params.model ? { model: params.model } : {}),
           },
           timeout: REQUEST_TIMEOUTS.SHORT_FORM_LLM,
           retry: false,

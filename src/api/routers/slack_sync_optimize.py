@@ -42,15 +42,18 @@ async def sync_reply(request: SlackSyncRequest):
         chinese_reply=request.chinese_reply,
     )
 
+    model_metadata = {}
     try:
         response_text = await generate_with_fallback_budget(
             prompt,
             task_type="slack",
+            model=request.model,
+            result_metadata=model_metadata,
         )
         english_reply = response_text.strip()
         if not english_reply:
             raise_empty_llm_result(operation="Slack sync")
-        return SlackSyncResponse(english_reply=english_reply)
+        return SlackSyncResponse(english_reply=english_reply, **model_metadata)
     except PromptContractError:
         raise_empty_llm_result(operation="Slack optimize")
     except ServiceUnavailableException:
@@ -93,10 +96,13 @@ async def optimize_text(request: SlackOptimizeRequest):
         original_text=request.original_text if request.original_text else "N/A",
     )
 
+    model_metadata = {}
     try:
         response_text = await generate_with_fallback_budget(
             prompt,
             task_type="slack",
+            model=request.model,
+            result_metadata=model_metadata,
         )
         data = parse_llm_json_response(response_text)
         if isinstance(data, dict):
@@ -119,6 +125,7 @@ async def optimize_text(request: SlackOptimizeRequest):
         confidence = max(0.0, min(1.0, confidence))
 
         return SlackOptimizeResponse(
+            **model_metadata,
             optimized_text=optimized_text,
             improvements=improvements,
             confidence=confidence,

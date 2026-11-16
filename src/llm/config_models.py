@@ -83,6 +83,7 @@ class ProviderConfig:
     group_priority: int = 999  # 组优先级，数字越小越优先
     base_url: Optional[str] = None
     enabled: bool = True
+    allow_cross_provider_fallback: bool = True
     relay: Optional[bool] = None  # 第三方中转为 True；未配置时只有 gemini 类型算官方
 
 

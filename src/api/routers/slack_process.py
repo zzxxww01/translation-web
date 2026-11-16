@@ -67,10 +67,13 @@ async def process_slack_message(
             message=message,
         )
 
+    model_metadata = {}
     try:
         response_text = await generate_with_fallback_budget(
             prompt,
             task_type="slack",
+            model=body.model,
+            result_metadata=model_metadata,
         )
         data = parse_llm_json_response(response_text)
         if isinstance(data, dict):
@@ -90,6 +93,7 @@ async def process_slack_message(
             raise_empty_llm_result(operation="Slack process")
 
         return SlackProcessResponse(
+            **model_metadata,
             translation=translation,
             suggested_replies=suggested_replies,
         )

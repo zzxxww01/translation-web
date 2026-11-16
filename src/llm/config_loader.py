@@ -210,6 +210,7 @@ class ConfigLoader:
             base_url=data.get('base_url'),
             enabled=data.get('enabled', True),
             relay=data.get('relay'),
+            allow_cross_provider_fallback=data.get('allow_cross_provider_fallback', True),
         )
 
     def resolve_config_model_alias(self, alias: str) -> Optional[str]:

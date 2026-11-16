@@ -64,10 +64,13 @@ async def compose_slack_message(
         content=content,
     )
 
+    model_metadata = {}
     try:
         response_text = await generate_with_fallback_budget(
             prompt,
             task_type="slack",
+            model=body.model,
+            result_metadata=model_metadata,
         )
         data = parse_llm_json_response(response_text)
         if isinstance(data, dict):
@@ -79,7 +82,7 @@ async def compose_slack_message(
         if not any(version.english.strip() for version in versions):
             raise_empty_llm_result(operation="Slack compose")
 
-        return SlackComposeResponse(versions=versions)
+        return SlackComposeResponse(versions=versions, **model_metadata)
     except PromptContractError:
         raise_empty_llm_result(operation="Slack compose")
     except ServiceUnavailableException:
