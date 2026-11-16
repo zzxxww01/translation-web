@@ -23,7 +23,6 @@ from types import ModuleType
 from src.settings import settings
 from src.core.longform_context import (
     build_article_challenge_payload,
-    build_section_guideline_lines,
     limit_format_tokens,
 )
 from src.core.glossary_prompt import render_glossary_prompt_block
@@ -38,7 +37,6 @@ from .errors import (
     LLMProxyConfigurationError,
     LLMTimeoutError,
     LLMUpstreamUnavailableError,
-    NormalizedLLMError,
     normalize_llm_transport_error,
 )
 from .config_loader import get_config_loader

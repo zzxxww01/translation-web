@@ -8,9 +8,8 @@
 4. 获取图片段落统计信息
 """
 
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 from contextlib import nullcontext
-import json
 import logging
 from pathlib import Path
 from datetime import datetime
@@ -20,13 +19,13 @@ from bs4 import BeautifulSoup
 from markdown_it import MarkdownIt
 from src.core.image_assets import BROWSER_IMAGE_EXTENSIONS
 
-from fastapi import APIRouter, Depends, BackgroundTasks
+from fastapi import APIRouter, BackgroundTasks
 from pydantic import BaseModel
 
 from src.core.models import ElementType, ParagraphStatus
 from src.api.utils.concurrency import run_blocking
-from ..dependencies import ProjectManagerDep, get_project_manager
-from ..middleware import NotFoundException, BadRequestException
+from ..dependencies import ProjectManagerDep
+from ..middleware import BadRequestException
 
 router = APIRouter(prefix="/projects", tags=["image-cleanup"])
 logger = logging.getLogger(__name__)

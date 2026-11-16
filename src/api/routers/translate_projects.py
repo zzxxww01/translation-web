@@ -28,7 +28,6 @@ from src.services.translation_run_registry import translation_run_registry
 
 from ..dependencies import (
     AnalysisLLMProviderDep,
-    BatchServiceDep,
     GlossaryManagerDep,
     LongformLLMProviderDep,
     ProjectManagerDep,
@@ -43,7 +42,6 @@ from ..middleware import (
     NotFoundException,
     ServiceUnavailableException,
 )
-from ..utils.json_utils import parse_llm_json_response
 from .translate_models import (
     FullTranslateRequest,
     ProjectAnalysisResponse,

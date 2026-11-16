@@ -7,7 +7,7 @@ from contextvars import ContextVar
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from threading import Lock
-from typing import Any, Optional
+from typing import Optional
 
 from .execution_context import current_route
 

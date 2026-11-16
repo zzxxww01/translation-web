@@ -56,7 +56,7 @@ class ValidationReport:
     def __str__(self) -> str:
         """Format report for display."""
         lines = [
-            f"Validation Report:",
+            "Validation Report:",
             f"  Total Terms: {self.total_terms}",
             f"  Validated: {self.validated_terms}",
             f"  Violations: {self.violation_count}",

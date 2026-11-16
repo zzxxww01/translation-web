@@ -12,7 +12,7 @@ Term Matcher - 术语匹配器
 
 from dataclasses import dataclass
 
-from typing import List, Dict, Optional, Set
+from typing import List, Dict, Set
 
 import re
 

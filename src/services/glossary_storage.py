@@ -477,9 +477,6 @@ class GlossaryStorage:
                 logger.critical(f"ROLLBACK FAILED for term {term.id}: {rollback_error}")
             raise
 
-        logger.info(f"Updated term: {term.original} ({term.id})")
-        return term
-
     def delete_term(self, term_id: str, scope: str, project_id: Optional[str] = None, reason: str = "") -> None:
         """Soft delete a term.
 

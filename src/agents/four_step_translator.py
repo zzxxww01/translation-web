@@ -14,7 +14,6 @@ Step 0: 预扫描 (Prescan) - 使用 Flash 模型快速扫描章节，提取术�
 
 from collections import defaultdict
 from typing import List, Optional, Callable, Dict, Any, TYPE_CHECKING
-import asyncio
 import functools
 import logging
 
@@ -51,9 +50,9 @@ from ..core.format_tokens import (
 )
 from ..core.models import (
     Section, Paragraph,
-    ArticleAnalysis, SectionUnderstanding,
+    SectionUnderstanding,
     ReflectionResult, TranslationIssue,
-    QualityAssessment, SectionTranslationResult,
+    SectionTranslationResult,
     LayeredContext, EnhancedTerm, PrescanTerm,
     SectionPrescanResult, TermConflict
 )
@@ -376,7 +375,6 @@ class FourStepTranslator:
         from copy import deepcopy
         from ..prompts import BUNDLE_VERSION
         from ..prompts.contracts import text_version
-        from ..core.models import ReflectionResult
         session_id = None
         if self.session_service and project_id:
             session_id = self.session_service.create_session(project_id=project_id, section_id=section.section_id, create_snapshot=True).id

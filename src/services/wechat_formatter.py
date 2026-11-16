@@ -418,7 +418,6 @@ class WechatFormatter:
 
     def _upload_to_local(self, url: str) -> Optional[str]:
         """上传到自建图床（保存到本地projects目录）"""
-        import hashlib
         import uuid
         from datetime import datetime
         import logging

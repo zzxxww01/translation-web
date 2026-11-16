@@ -16,7 +16,7 @@ from threading import RLock
 from .execution_context import generation_budget, remaining_timeout, bounded_sleep, route_scope
 
 from .config_loader import get_config_loader
-from .config_models import ProviderConfig, ModelConfig, APIKeyConfig, ProviderNetworkConfig, is_relay_provider
+from .config_models import ProviderConfig, ModelConfig, ProviderNetworkConfig, is_relay_provider
 from .fallback_strategy import FallbackStrategy, AttemptPlan
 from .base import LLMProvider
 from .errors import (LLMError, LLMProxyConfigurationError,

@@ -55,7 +55,6 @@ from src.core.glossary_prompt import (
 )
 from src.core.project import ProjectManager
 from src.core.project_export_service import ExportBlockedError
-from src.core.protected_terms import desinicize_token
 from src.core.translation_qa import _POWER_UNIT_SINICIZED
 from src.core.title_validation import is_valid_title_translation
 from src.core.title_guard import (

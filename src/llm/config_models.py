@@ -10,7 +10,7 @@ LLM 配置数据模型
 - LLMConfig: 完整的 LLM 配置
 """
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import List, Dict, Any, Optional
 
 

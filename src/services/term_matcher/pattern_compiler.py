@@ -5,7 +5,6 @@
 """
 
 import re
-from functools import lru_cache
 from typing import Optional, List, Dict, Any
 
 from .classifier import TermType

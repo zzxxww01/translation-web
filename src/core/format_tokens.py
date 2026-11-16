@@ -6,7 +6,7 @@ import html
 import logging
 import re
 from dataclasses import dataclass, field
-from typing import Callable, Iterable, List, Optional, Sequence
+from typing import Callable, List, Optional, Sequence
 
 from .models import InlineElement, Paragraph
 from .protected_terms import preserve_protected_terms

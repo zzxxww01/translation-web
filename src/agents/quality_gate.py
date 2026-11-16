@@ -5,7 +5,7 @@ Numeric scores/legacy mode thresholds remain diagnostic compatibility fields;
 low model scores alone never authorize a rewrite or prove an error.
 """
 
-from typing import List, Dict, Optional
+from typing import List, Dict
 
 from ..core.models import (
     Section, ReflectionResult, TranslationIssue,

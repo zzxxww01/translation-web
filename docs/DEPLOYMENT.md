@@ -1,5 +1,11 @@
 # Translation Agent 部署指南
 
+> **注意**：本文是通用部署模板（`/opt/translation-agent`、`www-data`、gunicorn、系统级 systemd 单元）。
+> momo.beauty 线上环境**不是**按这里部署的：它以用户级单元 `translation-agent-live.service` 运行
+> `/home/zxw/releases/translation-agent-current`（不可变发布目录 + uvicorn 单进程），数据目录以软链接指向
+> `/home/zxw/translation-agent/`。线上发布、校验与回滚的权威流程见 [production-release.md](./production-release.md)；
+> momo「Agent」页的 skill-runner 服务见 [../skill_runner/README.md](../skill_runner/README.md)。
+
 本文档提供 Translation Agent 在 Windows 本地环境和 Linux 云服务器的完整部署指南。
 
 ---

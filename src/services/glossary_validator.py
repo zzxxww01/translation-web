@@ -7,7 +7,6 @@ including file structure, JSON format, data consistency, and reference integrity
 import json
 import logging
 from dataclasses import dataclass
-from pathlib import Path
 from typing import List, Optional
 
 from src.services.glossary_storage import GlossaryStorage
@@ -292,7 +291,7 @@ class GlossaryValidator:
                 issues.append(ValidationIssue(
                     severity="error",
                     category="data_integrity",
-                    message=f"Found duplicate term IDs",
+                    message="Found duplicate term IDs",
                     details={"duplicates": list(set(duplicates))}
                 ))
 
@@ -333,7 +332,7 @@ class GlossaryValidator:
                     issues.append(ValidationIssue(
                         severity="warning",
                         category="reference",
-                        message=f"Invalid overrides_term_id reference",
+                        message="Invalid overrides_term_id reference",
                         details={"term_id": m.term_id, "overrides": m.overrides_term_id}
                     ))
 
@@ -342,7 +341,7 @@ class GlossaryValidator:
                     issues.append(ValidationIssue(
                         severity="warning",
                         category="reference",
-                        message=f"Invalid promoted_from_term_id reference",
+                        message="Invalid promoted_from_term_id reference",
                         details={"term_id": m.term_id, "promoted_from": m.promoted_from_term_id}
                     ))
 
@@ -388,7 +387,7 @@ class GlossaryValidator:
                         issues.append(ValidationIssue(
                             severity="error",
                             category="data_integrity",
-                            message=f"Soft delete inconsistency",
+                            message="Soft delete inconsistency",
                             details={
                                 "term_id": term_id,
                                 "term_status": term_status[term_id],

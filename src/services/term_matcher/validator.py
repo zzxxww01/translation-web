@@ -4,7 +4,6 @@
 回溯验证短缩写匹配，过滤误报。
 """
 
-import re
 from typing import Match
 
 from .classifier import TermType

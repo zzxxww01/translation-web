@@ -16,8 +16,7 @@ from ..core.constants import MAX_GLOSSARY_TERMS_IN_PROMPT
 from ..core.longform_context import build_translation_guidelines
 from ..core.glossary_prompt import select_prompt_terms_for_text
 from ..core.models import (
-    Section, Paragraph,
-    ArticleAnalysis, EnhancedTerm,
+    Section, ArticleAnalysis, EnhancedTerm,
     SectionUnderstanding, TermUsageTracker,
     LayeredContext, TermConflict, TermConflictResolution,
     TerminologyVersion, PrescanTerm

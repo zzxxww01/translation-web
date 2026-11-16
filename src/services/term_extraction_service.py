@@ -7,10 +7,8 @@
 import json
 from dataclasses import dataclass, asdict
 from pathlib import Path
-from typing import List, Optional
-from datetime import datetime
+from typing import List
 
-from src.models.terminology import Term
 from src.services.glossary_storage import GlossaryStorage
 from src.services.term_matcher.matcher import TermMatcher
 

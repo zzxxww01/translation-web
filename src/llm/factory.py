@@ -10,14 +10,14 @@ Supports both legacy (env-based) and new (YAML config-based) configuration.
 from __future__ import annotations
 
 import logging
-from typing import Callable, Optional, Tuple
+from typing import Callable
 
 from src.settings import settings
 
 from .base import LLMProvider
 from .gemini import create_gemini_provider
 from .vectorengine import create_vectorengine_provider
-from .models import resolve_model_alias, get_model_provider
+from .models import get_model_provider
 
 
 logger = logging.getLogger(__name__)

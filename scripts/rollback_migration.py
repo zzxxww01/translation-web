@@ -37,7 +37,7 @@ class MigrationRollback:
     def rollback(self, dry_run: bool = True) -> Dict:
         """Execute rollback process."""
         print(f"\n{'='*60}")
-        print(f"Terminology Migration Rollback")
+        print("Terminology Migration Rollback")
         print(f"Mode: {'DRY RUN' if dry_run else 'LIVE'}")
         print(f"{'='*60}\n")
 
