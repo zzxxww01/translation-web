@@ -19,7 +19,6 @@ from functools import partial
 from src.core.models import (
     Paragraph,
     ParagraphConfirmation,
-    ParagraphStatus,
     ProjectMeta,
 )
 from src.core.project import ProjectManager

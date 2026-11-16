@@ -1,6 +1,5 @@
 """Tests for HTML to Markdown image processing."""
 
-import tempfile
 from pathlib import Path
 from unittest.mock import Mock, patch
 import pytest

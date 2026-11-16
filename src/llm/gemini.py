@@ -23,7 +23,6 @@ from types import ModuleType
 from src.settings import settings
 from src.core.longform_context import (
     build_article_challenge_payload,
-    build_section_guideline_lines,
     limit_format_tokens,
 )
 from src.core.glossary_prompt import render_glossary_prompt_block
@@ -38,7 +37,6 @@ from .errors import (
     LLMProxyConfigurationError,
     LLMTimeoutError,
     LLMUpstreamUnavailableError,
-    NormalizedLLMError,
     normalize_llm_transport_error,
 )
 from .config_loader import get_config_loader
@@ -1080,7 +1078,7 @@ class GeminiProvider(LLMProvider):
         except json.JSONDecodeError as e:
             logger.error(f"[Gemini] Failed to parse JSON response: {e}")
             logger.error(f"[Gemini] Response: {response[:500]}")
-            raise ValueError(f"Invalid JSON response from LLM: {e}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}") from e
 
     def deep_analyze_document(
         self,
@@ -1121,7 +1119,7 @@ class GeminiProvider(LLMProvider):
         except json.JSONDecodeError as e:
             logger.error(f"[Gemini] Failed to parse JSON response: {e}")
             logger.error(f"[Gemini] Response: {response[:500]}")
-            raise ValueError(f"Invalid JSON response from LLM: {e}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}") from e
 
     def verify_high_frequency_terms(
         self,
@@ -1168,7 +1166,7 @@ class GeminiProvider(LLMProvider):
         except json.JSONDecodeError as e:
             logger.error(f"[Gemini] Failed to parse JSON response: {e}")
             logger.error(f"[Gemini] Response: {response[:500]}")
-            raise ValueError(f"Invalid JSON response from LLM: {e}")
+            raise ValueError(f"Invalid JSON response from LLM: {e}") from e
 
     def analyze(self, text: str) -> Dict[str, Any]:
         from ..prompts.task_builders import analysis_prompt

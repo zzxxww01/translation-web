@@ -1,1 +1,0 @@
-As multi-die designs become the norm, die-to-die interconnects are a critical bottleneck. Major foundries and chip designers presented approaches to pushing bandwidth density and energy efficiency on both organic substrates and with advanced packaging.

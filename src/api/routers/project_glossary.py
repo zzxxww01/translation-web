@@ -384,8 +384,8 @@ async def get_project_glossary(project_id: str, gm: GlossaryManagerDep):
             }
 
         return await run_blocking(load_glossary)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.put("/projects/{project_id}/glossary")
@@ -417,8 +417,8 @@ async def update_project_glossary(
             }
 
         return await run_blocking(add_term)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 async def _update_project_term(
@@ -450,8 +450,8 @@ async def _update_project_term(
         return await run_blocking(update_term)
     except NotFoundException:
         raise
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 async def _delete_project_term(
@@ -482,8 +482,8 @@ async def _delete_project_term(
         return await run_blocking(delete_term)
     except NotFoundException:
         raise
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 # 术语原文放在 query 参数里:含 `/` 的术语(如 W/cm²、$/kW)拼进路径段会被
@@ -556,9 +556,9 @@ async def batch_update_project_glossary(
 
         return await run_blocking(update_batch)
     except ValueError as exc:
-        raise BadRequestException(detail=str(exc))
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+        raise BadRequestException(detail=str(exc)) from exc
+    except FileNotFoundError as exc_:
+        raise NotFoundException(detail="Project not found") from exc_
 
 
 @router.post("/projects/{project_id}/glossary/check-conflict")
@@ -595,8 +595,8 @@ async def check_term_conflict(
             }
 
         return await run_blocking(check_conflicts)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.post("/projects/{project_id}/glossary/match")
@@ -637,8 +637,8 @@ async def match_paragraph_terms(
             }
 
         return await run_blocking(match_terms)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.post("/projects/{project_id}/term-review/prepare")
@@ -662,8 +662,8 @@ async def prepare_term_review(
         return await run_blocking(service.prepare_review, project_id)
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc_:
+        raise NotFoundException(detail="Project not found") from exc_
 
 
 @router.post("/projects/{project_id}/term-review/jobs", status_code=202)
@@ -710,8 +710,8 @@ async def start_term_review_job(
         ) from exc
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc_:
+        raise NotFoundException(detail="Project not found") from exc_
 
 
 @router.get("/projects/{project_id}/term-review/jobs/{job_id}")
@@ -725,8 +725,8 @@ async def get_term_review_job(
     try:
         job_store = TerminologyReviewJobStore(pm.projects_path)
         return await run_blocking(job_store.get, project_id, job_id.hex)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Terminology review job not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Terminology review job not found") from exc
 
 
 @router.post("/projects/{project_id}/term-review/submit")
@@ -773,8 +773,8 @@ async def submit_term_review(
         ) from exc
     except ValueError as exc:
         raise BadRequestException(detail=str(exc)) from exc
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc_:
+        raise NotFoundException(detail="Project not found") from exc_
 
 
 @router.get("/projects/{project_id}/glossary/recommendations")
@@ -793,8 +793,8 @@ async def get_project_glossary_recommendations(
             service.get_project_recommendations,
             project_id,
         )
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 async def _promote_project_term(
@@ -814,8 +814,8 @@ async def _promote_project_term(
             project_id,
             original,
         )
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project or term not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project or term not found") from exc
 
 
 @router.post("/projects/{project_id}/glossary/term/promote")

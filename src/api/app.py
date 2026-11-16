@@ -132,7 +132,10 @@ class SafeStaticFiles(StaticFiles):
             return "", None
 
 
-if frontend_dist_path.exists():
+# 只看 dist/ 是否存在不够：构建中途失败（例如 2 GB 机器上 vite 爆内存）会留下只有 vite.svg 的 dist/，
+# StaticFiles 在 import 时就会因为 assets/ 不存在而抛错，后端整个起不来。按 assets/ 判断，
+# 半成品 dist 和没有 dist 一样：只提供 API，不挂前端。
+if (frontend_dist_path / "assets").is_dir():
     app.mount(
         "/assets",
         OptimizedStaticFiles(directory=str(frontend_dist_path / "assets")),

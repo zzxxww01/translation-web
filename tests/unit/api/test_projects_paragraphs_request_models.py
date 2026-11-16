@@ -1,6 +1,5 @@
 from types import SimpleNamespace
 
-import pytest
 
 from src.api.routers import projects_paragraphs
 from src.api.routers.projects_models import (

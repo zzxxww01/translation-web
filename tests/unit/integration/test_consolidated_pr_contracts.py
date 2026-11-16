@@ -2,7 +2,6 @@
 from concurrent.futures import ThreadPoolExecutor
 from threading import Lock
 from types import SimpleNamespace
-import json
 import time
 
 import pytest
@@ -32,9 +31,7 @@ def test_conflicting_legacy_and_current_options_are_not_silently_dropped(payload
         LongformWorkflowStartRequest.model_validate(payload)
 
 
-def test_nested_scope_reaches_public_route_and_aliases_share_canonical_policy():
-    from src.core.efficiency import EfficiencyOptions as OldOptions
-    assert OldOptions is EfficiencyOptions
+def test_nested_scope_reaches_public_route():
     value = LongformWorkflowStartRequest.model_validate({'efficiency': {
         'model_scope': 'draft', 'profile': 'premium', 'stage_resume': False,
         'max_stage_seconds': 120, 'max_run_seconds': 900}})
@@ -46,7 +43,7 @@ def test_nested_scope_reaches_public_route_and_aliases_share_canonical_policy():
 
 
 def test_logical_and_real_transport_budgets_use_explicit_units():
-    from src.llm.business_budget import run_budget
+    from tests.helpers.budgets import run_budget
     class Provider:
         timeout = 10
         @generation_budget

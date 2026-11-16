@@ -4,7 +4,6 @@ import pytest
 
 from src.services import memory_service as ms
 from src.services.memory_service import (
-    MAX_RULES_HARD_CAP,
     TranslationMemoryService,
 )
 

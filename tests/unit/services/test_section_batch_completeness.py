@@ -9,7 +9,6 @@
 import asyncio
 from types import SimpleNamespace
 
-import pytest
 
 from src.services.batch_translation_service import BatchTranslationService
 

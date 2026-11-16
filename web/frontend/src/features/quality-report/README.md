@@ -11,9 +11,7 @@ web/frontend/src/features/quality-report/
 ├── api.ts                              # API 客户端和 React Query hooks
 ├── types.ts                            # TypeScript 类型定义
 ├── index.ts                            # 功能入口导出
-├── QualityReportPage.tsx               # 独立质量报告页面
-├── ConfirmationWithQuality.tsx         # 带质量面板的确认工作流包装器
-├── INTEGRATION.ts                      # 集成说明
+├── QualityReportPage.tsx               # 独立质量报告页面（路由 /document/:projectId/quality-report）
 └── components/
     ├── index.ts                        # 组件导出
     ├── QualityStatsCard.tsx            # 统计卡片组件

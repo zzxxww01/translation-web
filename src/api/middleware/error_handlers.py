@@ -4,7 +4,7 @@ Error Handlers - 统一异常处理
 提供全局异常处理中间件和自定义异常类。
 """
 
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError

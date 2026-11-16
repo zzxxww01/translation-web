@@ -3,19 +3,17 @@ from unittest.mock import Mock
 from threading import Lock, Event
 import json
 import time
-from pathlib import Path
 
 import pytest
 from src.config.efficiency import EfficiencyOptions
 from src.services.batch_translation_service import BatchTranslationService
 from src.agents.four_step_translator import FourStepTranslator
 from src.agents.context_manager import LayeredContextManager
-from src.core.models import Section, Paragraph, SectionPrescanResult, EnhancedTerm, ProjectMeta
+from src.core.models import Section, Paragraph, SectionPrescanResult, EnhancedTerm
 from src.core.project_repository import ProjectRepository, SectionDataError
 from src.services.work_checkpoints import WorkCheckpointStore, checkpoint_scope
 from src.llm.base import LLMProvider
 from src.llm.work_budget import WorkBudgetExceeded
-from src.core.model_config import ModelConfig
 
 
 def make_service(n=6):

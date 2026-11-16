@@ -25,8 +25,8 @@
 
 1. **克隆仓库**
 ```bash
-git clone https://github.com/your-org/translation-agent.git
-cd translation-agent
+git clone https://github.com/zzxxww01/translation-web.git
+cd translation-web
 ```
 
 2. **安装 Python 依赖**
@@ -67,66 +67,43 @@ start.bat
 
 ### 云服务器部署（Linux）
 
-详细的生产环境部署指南（包括 systemd、Nginx、SSL 配置）请参考：[部署指南](docs/DEPLOYMENT.md)
+- **momo.beauty 线上环境**：按 [生产发布流程](docs/production-release.md) 操作（用户级 systemd 单元
+  `translation-agent-live.service`，不可变发布目录 `/home/zxw/releases/translation-agent-<revision>`，
+  `scripts/verify_release.py` 做发布门禁）。不要用下面的通用步骤直接改线上。
+- **通用部署模板**（systemd、Nginx、SSL）：[部署指南](docs/DEPLOYMENT.md)。
 
-快速部署：
+通用环境的最小步骤：
 ```bash
-# 安装依赖
-sudo apt update
-sudo apt install -y python3.10 python3.10-venv nodejs npm nginx
-
-# 克隆项目
-cd /opt
-sudo git clone https://github.com/your-org/translation-agent.git
-cd translation-agent
-
-# 配置环境
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-pip install gunicorn
-
-# 前端构建
-cd web/frontend && npm install && npm run build && cd ../..
-
-# 配置环境变量
-cp .env.example .env
-nano .env  # 填入 API 密钥
-
-# 启动服务
-./start.sh
+git clone https://github.com/zzxxww01/translation-web.git && cd translation-web
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt -c requirements-lock.txt
+cd web/frontend && npm ci && npm run build && cd ../..
+cp .env.example .env   # 填入 API 密钥
+./start.sh             # 单 worker；需要 --dev 时自动热重载
 ```
 
 ## 项目结构
 
 ```
-translation_agent/
-├── src/                    # 后端源码
-│   ├── api/               # FastAPI 路由和 API 端点
-│   │   ├── routers/       # 路由模块（翻译、项目、术语库等）
-│   │   └── app.py         # FastAPI 应用入口
-│   ├── core/              # 核心业务逻辑
-│   │   ├── project.py     # 项目管理
-│   │   ├── glossary.py    # 术语库管理
-│   │   ├── rules.py       # 规则库管理
-│   │   └── file_utils.py  # 文件操作工具
-│   ├── llm/               # LLM 集成层
-│   │   ├── base.py        # LLM 基类
-│   │   ├── gemini.py      # Gemini 实现
-│   │   ├── openai.py      # OpenAI 实现
-│   │   └── factory.py     # LLM 工厂
-│   └── services/          # 服务层
-│       ├── batch_translation.py  # 批量翻译服务
-│       └── post_translation.py   # 帖子翻译服务
-├── web/                   # 前端代码
-│   └── frontend/          # React 应用
-│       ├── src/           # React 源码
-│       └── public/        # 静态资源
-├── config/                # 配置文件
-│   └── llm_providers.yaml # LLM 提供商配置
-├── projects/              # 翻译项目数据（运行时生成）
-├── docs/                  # 技术文档
-└── scripts/               # 工具脚本
+translation-web/
+├── src/                    # 后端源码（FastAPI）
+│   ├── api/               # 路由、中间件、流式接口；app.py 是应用入口
+│   ├── agents/            # 四步翻译、深度分析、一致性审校、质量报告等 Agent
+│   ├── core/              # 项目、术语库、解析、导出、格式保护等核心逻辑
+│   ├── llm/               # LLM 适配层：Gemini、OpenAI 兼容中转、官方 OpenAI、故障转移与预算
+│   ├── services/          # 服务层：批量翻译、术语确认、Substack、微信排版、检查点等
+│   ├── prompts/           # 提示词模板与微信主题 CSS
+│   ├── html2md/           # HTML → Markdown 转换
+│   ├── cli/               # 命令行入口（translate-post、slack-reply、cost_report）
+│   └── settings.py        # 环境变量配置
+├── skill_runner/          # momo「Agent」页后端（独立 systemd 服务，见 skill_runner/README.md）
+├── web/frontend/          # React 前端（Vite + TypeScript + Tailwind）
+├── config/                # llm_providers.yaml、translation_models.yaml、editing_options.json
+├── glossary/              # 全局术语库 global_glossary_semi.json（单一术语源）
+├── projects/              # 翻译项目数据（运行时生成，不入库）
+├── docs/                  # 技术文档；线上发布流程见 docs/production-release.md
+├── scripts/               # 工具脚本
+└── tests/                 # pytest 测试（tests/unit/skill_runner 为 skill-runner 测试）
 ```
 
 ## 核心功能
@@ -216,10 +193,15 @@ printf '%s' 'Could you review this?' | ./slack-reply
 `config/translation_models.yaml`。常规模型选择优先使用 VectorEngine，
 同组候选失败后才尝试 Google 官方兜底；带 `-official` 的显式选择仍表示官方通道。
 
-- DeepSeek 默认实际模型：`deepseek-v4-pro-0813`。
-- Grok 预扫描实际模型：`grok-4.3`。
-- Gemini 快速／审阅实际模型：`gemini-3.6-flash`／`gemini-3.1-pro-preview`。
-- `deepseek-v3`、`grok-4-1-fast-non-reasoning` 是为兼容历史选择保留的配置别名，实际版本以 `real_model` 为准。
+- 默认任务模型（`task_defaults`）：长文与帖子翻译 `gemini-flash`（中转，实际 `gemini-3.8-flash`）；
+  帖子优化与标题 `gemini-official-argon`（官方，实际 `gemini-4-argon`）；分析与元数据 `deepseek-v3`
+  （中转，实际 `deepseek-v4.1-flash`）；Slack `gemini-pro`（中转，当前同样指向 `gemini-3.8-flash`）。
+- 长文分阶段（`translation_models.yaml` 的 `default`）：Phase 0 预扫描 `grok-4-1-fast-non-reasoning`
+  （实际 `grok-4.7`）、Phase 1 初译 `gemini-flash`、Phase 2 精修 `gemini-official-argon`、Phase 3 质量报告
+  `gemini-preview`（当前指向 `gemini-3.8-flash`）。
+- `deepseek-v3`、`grok-4-1-fast-non-reasoning`、`gemini-pro`、`gemini-preview` 是为兼容历史选择保留的配置别名，
+  实际版本以各条目的 `real_model` 为准。
+- `gpt-6.1-sol` 走 OpenAI 官方直连，只在显式选择时使用、不参与兜底，见 [docs/openai-official.md](docs/openai-official.md)。
 
 配置只提交环境变量引用，不提交 `.env` 或 API Key。模型目录可见不代表当前通道可用，
 更换版本前应实测；短句成功也不代表长文稳定。运行中的服务会缓存配置，修改后应先安全暂停任务，
@@ -258,7 +240,8 @@ printf '%s' 'Could you review this?' | ./slack-reply
 - [规则库系统手册](docs/规则库系统手册.md) - 规则库配置和应用
 
 ### 部署和配置
-- [部署指南](docs/DEPLOYMENT.md) - Windows 和 Linux 完整部署指南
+- [生产发布流程](docs/production-release.md) - momo.beauty 线上发布、校验与回滚的权威流程
+- [部署指南](docs/DEPLOYMENT.md) - Windows 本地与通用 Linux 部署模板
 - [代理配置说明](docs/PROXY_CONFIG.md) - 网络代理配置
 - [模型配置说明](docs/模型配置说明.md) - LLM 模型参数配置
 
@@ -274,32 +257,26 @@ printf '%s' 'Could you review this?' | ./slack-reply
 source .venv/bin/activate  # Linux/Mac
 .venv\Scripts\activate     # Windows
 
-# 运行所有测试
+# 运行所有测试（需要 requirements-dev.txt）
 pytest
 
-# 运行特定测试
-pytest tests/test_project.py
+# 只跑某一组，例如 skill-runner
+pytest tests/unit/skill_runner
 
 # 查看覆盖率
 pytest --cov=src tests/
 ```
 
-### 代码风格
+### 代码检查
 
-项目使用以下工具保证代码质量：
-- **Black**: 代码格式化
-- **Flake8**: 代码检查
-- **MyPy**: 类型检查
+与 `.github/workflows/ci.yml` 一致：
 
 ```bash
-# 格式化代码
-black src/
+# 未定义名字（CI 阻断项）
+ruff check --select F821 src skill_runner scripts tests
 
-# 检查代码
-flake8 src/
-
-# 类型检查
-mypy src/
+# 前端：lint 零警告、类型检查与单元测试
+cd web/frontend && npm run lint -- --max-warnings 0 && npx tsc -b && npm test
 ```
 
 ## 常见问题
@@ -354,7 +331,7 @@ MIT License
 ## 技术支持
 
 - 📖 查看 [技术文档](docs/)
-- 🐛 提交 [Issue](https://github.com/your-org/translation-agent/issues)
+- 🐛 提交 [Issue](https://github.com/zzxxww01/translation-web/issues)
 - 💬 加入讨论组
 
 ---

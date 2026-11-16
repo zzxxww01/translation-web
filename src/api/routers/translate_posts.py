@@ -74,8 +74,7 @@ _TITLE_INSTRUCTION_MAX_LENGTH = 1000
 
 # BE-07：前端对三个快捷优化按钮只记录 `[readable]` 这类内部 id，原样注入历史等于没有信息。
 # 这里在服务端单点还原成一行摘要（完整正文见 translate_models.POST_OPTIMIZE_OPTIONS，
-# 只注入摘要而非全文，避免 3 轮历史把 prompt 撑爆）。
-from src.prompts.editing_options import OPTION_SUMMARIES as _POST_OPTIMIZE_OPTION_SUMMARIES
+# 只注入摘要而非全文，避免 3 轮历史把 prompt 撑爆；摘要表本身在 src.prompts.editing_options）。
 from src.prompts.editing_options import history_option_summary
 _OPTION_ID_RE = re.compile(r"\[(\w+)\]")
 

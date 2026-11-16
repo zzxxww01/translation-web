@@ -4,14 +4,12 @@ from pathlib import Path
 
 import httpx
 import pytest
-import yaml
 from openai import OpenAI
 
 from src.llm.config_loader import ConfigLoader
 from src.llm.fallback_strategy import FallbackStrategy
 from src.llm.provider_adapter import ProviderAdapter
 from src.llm.errors import LLMConfigurationError, LLMUpstreamUnavailableError
-from src.llm.openai_official import OpenAIOfficialProvider
 
 MODEL = 'gpt-6.1-sol'
 ROOT = Path(__file__).resolve().parents[3]

@@ -486,13 +486,13 @@ async def translate_paragraph(
                 "was running. Reload it before retrying."
             ),
             error_code="PARAGRAPH_CHANGED",
-        )
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+        ) from error
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except RuntimeError as error:
-        raise _to_bad_request(error, "Translation")
+        raise _to_bad_request(error, "Translation") from error
     except Exception as error:
-        raise _to_bad_request(error, "Translation")
+        raise _to_bad_request(error, "Translation") from error
 
 
 @router.post(
@@ -532,13 +532,13 @@ async def direct_translate_paragraph(
                 "was running. Reload it before retrying."
             ),
             error_code="PARAGRAPH_CHANGED",
-        )
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+        ) from error
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except RuntimeError as error:
-        raise _to_bad_request(error, "Translation")
+        raise _to_bad_request(error, "Translation") from error
     except Exception as error:
-        raise _to_bad_request(error, "Translation")
+        raise _to_bad_request(error, "Translation") from error
 
 
 @router.post(
@@ -569,12 +569,12 @@ async def query_word_meaning(
         )
     except NotFoundException:
         raise
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except RuntimeError as error:
-        raise _to_bad_request(error, "Word meaning query")
+        raise _to_bad_request(error, "Word meaning query") from error
     except Exception as error:
-        raise _to_bad_request(error, "Word meaning query")
+        raise _to_bad_request(error, "Word meaning query") from error
 
 
 @router.put("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}/confirm")
@@ -602,7 +602,7 @@ async def confirm_paragraph(
         await service.invalidate_project_cache(project_id)
         return result
     except FileNotFoundError as error:
-        raise NotFoundException(detail=str(error))
+        raise NotFoundException(detail=str(error)) from error
 
 
 @router.put("/projects/{project_id}/sections/{section_id}/paragraphs/{paragraph_id}")
@@ -642,9 +642,9 @@ async def update_paragraph(
 
         return result
     except FileNotFoundError as error:
-        raise NotFoundException(detail=str(error))
+        raise NotFoundException(detail=str(error)) from error
     except ValueError as error:
-        raise BadRequestException(detail=str(error))
+        raise BadRequestException(detail=str(error)) from error
 
 
 @router.post(
@@ -680,12 +680,12 @@ async def batch_translate_paragraphs(
         return result
     except NotFoundException:
         raise
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except BadRequestException:
         raise
     except Exception as error:
-        raise _to_bad_request(error, "Batch translation")
+        raise _to_bad_request(error, "Batch translation") from error
 
 
 def _to_error_message(error: Exception) -> str:

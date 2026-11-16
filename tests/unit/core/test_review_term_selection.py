@@ -7,7 +7,6 @@ AI／GPU／NVIDIA 这类高频词——恰恰是模型绝不会译错的。真�
 实测 306 个章节里 51.3% 命中数超过上限，最多一章命中 51 条。
 """
 
-import pytest
 
 from src.core.glossary_prompt import (
     select_prompt_terms_for_text,

@@ -17,7 +17,7 @@ import re
 from typing import List, Dict, Tuple, Optional
 from dataclasses import dataclass
 
-from ..core.models import Section, Paragraph
+from ..core.models import Section
 
 
 @dataclass

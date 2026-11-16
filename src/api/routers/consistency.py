@@ -106,10 +106,10 @@ async def review_consistency(
             gm,
             request.include_terminology,
         )
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except Exception as e:
-        raise BadRequestException(detail=f"加载项目失败: {e}")
+        raise BadRequestException(detail=f"加载项目失败: {e}") from e
 
     return ReviewResponse(report=report_data, markdown_report=markdown)
 
@@ -126,8 +126,8 @@ async def auto_fix_issue(
         raise NotFoundException(detail="Project not found")
     try:
         await run_blocking(pm.get, request.project_id)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
     return AutoFixResponse(
         fixed_count=0,
@@ -147,8 +147,8 @@ async def get_consistency_report(
         raise NotFoundException(detail="Project not found")
     try:
         return await run_blocking(_load_consistency_report_sync, project_id, pm)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 @router.get("/settings")

@@ -28,7 +28,6 @@ from src.services.translation_run_registry import translation_run_registry
 
 from ..dependencies import (
     AnalysisLLMProviderDep,
-    BatchServiceDep,
     GlossaryManagerDep,
     LongformLLMProviderDep,
     ProjectManagerDep,
@@ -43,7 +42,6 @@ from ..middleware import (
     NotFoundException,
     ServiceUnavailableException,
 )
-from ..utils.json_utils import parse_llm_json_response
 from .translate_models import (
     FullTranslateRequest,
     ProjectAnalysisResponse,
@@ -94,13 +92,13 @@ async def analyze_project(request: Request, project_id: str):
             notes=data.get("notes", []),
             key_terms=data.get("key_terms", []),
         )
-    except FileNotFoundError:
-        raise NotFoundException(detail="Source file not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Source file not found") from exc
     except Exception as e:
         logger.error(f"Project analysis failed: {str(e)}")
         if os.getenv("DEBUG") == "true":
-            raise ServiceUnavailableException(detail=f"分析失败: {str(e)}")
-        raise ServiceUnavailableException(detail="分析失败，请稍后重试或联系支持")
+            raise ServiceUnavailableException(detail=f"分析失败: {str(e)}") from e
+        raise ServiceUnavailableException(detail="分析失败，请稍后重试或联系支持") from e
 
 
 @router.post(
@@ -123,13 +121,13 @@ async def analyze_section(request: Request, project_id: str, section_id: str):
             summary=data.get("summary", ""),
             tips=data.get("tips", []),
         )
-    except FileNotFoundError:
-        raise NotFoundException(detail="Section source file not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Section source file not found") from exc
     except Exception as e:
         logger.error(f"Section analysis failed: {str(e)}")
         if os.getenv("DEBUG") == "true":
-            raise ServiceUnavailableException(detail=f"章节分析失败: {str(e)}")
-        raise ServiceUnavailableException(detail="章节分析失败，请稍后重试或联系支持")
+            raise ServiceUnavailableException(detail=f"章节分析失败: {str(e)}") from e
+        raise ServiceUnavailableException(detail="章节分析失败，请稍后重试或联系支持") from e
 
 
 @router.post("/projects/{project_id}/sections/{section_id}/translate_all")
@@ -248,8 +246,8 @@ async def batch_translate_section(
     except Exception as e:
         logger.error(f"Batch translation failed: {str(e)}")
         if os.getenv("DEBUG") == "true":
-            raise ServiceUnavailableException(detail=f"批量翻译失败: {str(e)}")
-        raise ServiceUnavailableException(detail="批量翻译失败，请稍后重试或联系支持")
+            raise ServiceUnavailableException(detail=f"批量翻译失败: {str(e)}") from e
+        raise ServiceUnavailableException(detail="批量翻译失败，请稍后重试或联系支持") from e
 
 
 @router.post("/projects/{project_id}/translate-stream")

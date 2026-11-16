@@ -29,7 +29,7 @@ from ..core.models import (
 )
 from ..core.constants import MAX_DEEP_ANALYSIS_LENGTH
 from ..llm.base import LLMProvider
-from .smart_sampler import SmartSampler, create_smart_sampler
+from .smart_sampler import create_smart_sampler
 
 
 logger = logging.getLogger(__name__)
@@ -898,10 +898,10 @@ class DeepAnalyzer:
             "全文深度分析报告",
             "=" * 60,
             "",
-            f"## 主题",
+            "## 主题",
             f"{analysis.theme}",
             "",
-            f"## 主要论点",
+            "## 主要论点",
         ]
 
         for i, arg in enumerate(analysis.key_arguments, 1):
@@ -909,10 +909,10 @@ class DeepAnalyzer:
 
         lines.extend([
             "",
-            f"## 结构概述",
+            "## 结构概述",
             f"{analysis.structure_summary}",
             "",
-            f"## 风格分析",
+            "## 风格分析",
             f"  - 语气: {analysis.style.tone}",
             f"  - 目标读者: {analysis.style.target_audience}",
             f"  - 翻译语气: {analysis.style.translation_voice}",
@@ -943,7 +943,7 @@ class DeepAnalyzer:
 
         lines.extend([
             "",
-            f"## 翻译指南",
+            "## 翻译指南",
         ])
         for i, guideline in enumerate(analysis.guidelines, 1):
             lines.append(f"  {i}. {guideline}")

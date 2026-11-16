@@ -6,11 +6,9 @@ import json
 import logging
 from pathlib import Path
 from typing import Optional, List, Dict, Any, Tuple
-from datetime import datetime
 
 from src.core.models.analysis import (
     TranslationIssue,
-    ReflectionResult,
     SectionQualityScore,
     QualityReportIssue,
     QualityReportSummary,

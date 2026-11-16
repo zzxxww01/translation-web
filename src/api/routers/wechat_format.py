@@ -118,10 +118,10 @@ async def format_for_wechat(request: Request, body: WechatFormatRequest):
         logger.error(f"Missing dependency: {e}", exc_info=True)
         raise ServiceUnavailableException(
             detail="Service temporarily unavailable"
-        )
+        ) from e
     except Exception as e:
         logger.error(f"Format failed: {e}", exc_info=True)
-        raise ServiceUnavailableException(detail="Failed to format markdown")
+        raise ServiceUnavailableException(detail="Failed to format markdown") from e
 
 
 @router.get("/wechat/themes", response_model=WechatThemesResponse)

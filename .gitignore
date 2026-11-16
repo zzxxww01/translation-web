@@ -30,6 +30,9 @@ projects/*
 !projects/.gitkeep
 conversations/
 data/
+# scripts/backup.sh 的输出，以及手工跑任务留下的 SSE/jsonl 日志
+backups/
+artifacts/
 *.db
 *.sqlite
 *.sqlite3

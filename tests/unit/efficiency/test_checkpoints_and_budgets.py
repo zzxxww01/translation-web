@@ -4,7 +4,6 @@ from contextvars import copy_context
 from types import SimpleNamespace
 from threading import Event
 import json
-import time
 
 import pytest
 from pydantic import ValidationError

@@ -42,10 +42,9 @@ def test_unknown_task_type_still_gets_a_larger_total():
 def test_option_summaries_cover_every_optimize_option():
     """摘要表漏掉新选项时，历史里会静默退回裸 `[newid]`——正是它要修的 bug。"""
     from src.api.routers.translate_models import POST_OPTIMIZE_OPTIONS
+    from src.prompts.editing_options import OPTION_SUMMARIES
 
-    assert set(POST_OPTIMIZE_OPTIONS) == set(
-        translate_posts._POST_OPTIMIZE_OPTION_SUMMARIES
-    )
+    assert set(POST_OPTIMIZE_OPTIONS) == set(OPTION_SUMMARIES)
 
 
 def test_option_id_pattern_only_matches_bare_ids():

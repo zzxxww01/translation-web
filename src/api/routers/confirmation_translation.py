@@ -589,8 +589,8 @@ async def start_translation(
 ):
     try:
         await asyncio.to_thread(service.project_manager.get, project_id)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
     slot_claim = await service.claim_translation_slot(project_id)
     if slot_claim["status"] == "busy":
@@ -653,8 +653,8 @@ async def start_longform_workflow(
     """Start a server-owned terminology-review and translation workflow."""
     try:
         await asyncio.to_thread(service.project_manager.get, project_id)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc_:
+        raise NotFoundException(detail="Project not found") from exc_
 
     try:
         translation_service = await asyncio.to_thread(_build_longform_service, service, body)
@@ -788,12 +788,12 @@ async def get_translation_status(
 ):
     try:
         return await service.get_translation_progress(project_id)
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
     except NotFoundException:
         raise
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to get status: {str(e)}")
+        raise BadRequestException(detail=f"Failed to get status: {str(e)}") from e
 
 
 @router.post("/{project_id}/translation-cancel")
@@ -806,7 +806,7 @@ async def cancel_translation(
     try:
         return await service.cancel_translation(project_id)
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to cancel: {str(e)}")
+        raise BadRequestException(detail=f"Failed to cancel: {str(e)}") from e
 
 
 @router.get("/{project_id}/paragraph/{paragraph_index}/confirmation")
@@ -818,9 +818,9 @@ async def get_paragraph_confirmation(
     try:
         return await service.get_paragraph_confirmation(project_id, paragraph_index)
     except IndexError as e:
-        raise NotFoundException(detail=str(e))
+        raise NotFoundException(detail=str(e)) from e
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to get confirmation: {str(e)}")
+        raise BadRequestException(detail=f"Failed to get confirmation: {str(e)}") from e
 
 
 @router.put("/{project_id}/paragraph/{paragraph_id}/confirm")
@@ -841,9 +841,9 @@ async def confirm_paragraph(
             body.custom_edit,
         )
     except ValueError as e:
-        raise BadRequestException(detail=str(e))
+        raise BadRequestException(detail=str(e)) from e
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to confirm: {str(e)}")
+        raise BadRequestException(detail=f"Failed to confirm: {str(e)}") from e
 
 
 @router.post("/{project_id}/term-update")
@@ -857,7 +857,7 @@ async def update_terms(
     try:
         return await service.update_terms(project_id, body.changes)
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to update terms: {str(e)}")
+        raise BadRequestException(detail=f"Failed to update terms: {str(e)}") from e
 
 
 @router.post("/{project_id}/paragraph/{paragraph_id}/retranslate")
@@ -954,9 +954,9 @@ async def retranslate_paragraph(
                 "was running. Reload it before retrying."
             ),
             error_code="PARAGRAPH_CHANGED",
-        )
+        ) from error
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to retranslate: {str(e)}")
+        raise BadRequestException(detail=f"Failed to retranslate: {str(e)}") from e
 
 
 @router.post("/{project_id}/export-translation")
@@ -973,7 +973,7 @@ async def export_translation(
             include_source=include_source,
         )
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to export: {str(e)}")
+        raise BadRequestException(detail=f"Failed to export: {str(e)}") from e
 
 
 @router.get("/{project_id}/confirmation-progress")
@@ -984,7 +984,7 @@ async def get_confirmation_progress(
     try:
         return await service.get_translation_progress(project_id)
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to get progress: {str(e)}")
+        raise BadRequestException(detail=f"Failed to get progress: {str(e)}") from e
 
 
 @router.get("/{project_id}/retranslate-options")
@@ -1006,7 +1006,7 @@ async def export_bilingual(
             export_format="bilingual",
         )
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to export: {str(e)}")
+        raise BadRequestException(detail=f"Failed to export: {str(e)}") from e
 
 
 @router.post("/{project_id}/consistency-review")
@@ -1023,7 +1023,7 @@ async def run_consistency_review(
             llm,
         )
     except Exception as e:
-        raise BadRequestException(detail=f"Failed to run review: {str(e)}")
+        raise BadRequestException(detail=f"Failed to run review: {str(e)}") from e
 
 
 @router.get("/{project_id}/consistency-report")
@@ -1037,8 +1037,8 @@ async def get_latest_consistency_report(
             project_id,
             pm,
         )
-    except FileNotFoundError:
-        raise NotFoundException(detail="Project not found")
+    except FileNotFoundError as exc:
+        raise NotFoundException(detail="Project not found") from exc
 
 
 # ============ 翻译规则管理 API（全局） ============
@@ -1103,7 +1103,7 @@ async def decide_translation_rule_candidate(candidate_id: str, action: str, memo
         raise BadRequestException(detail="action must be approve or reject")
     try:
         return await run_blocking(memory_service.decide_rule_candidate, candidate_id, action)
-    except KeyError:
-        raise NotFoundException(detail="Rule candidate not found")
+    except KeyError as exc_:
+        raise NotFoundException(detail="Rule candidate not found") from exc_
     except ValueError as exc:
-        raise BadRequestException(detail=str(exc))
+        raise BadRequestException(detail=str(exc)) from exc

@@ -4,7 +4,7 @@ from datetime import datetime, timedelta, timezone
 
 import pytest
 
-from src.core.models import Paragraph, ParagraphStatus, Section, TranslationRecord, ProjectMeta
+from src.core.models import Paragraph, Section, TranslationRecord
 from src.core.project import ProjectManager
 from src.core.export_completeness import build_translation_completeness
 

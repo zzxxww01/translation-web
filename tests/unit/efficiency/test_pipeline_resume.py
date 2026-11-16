@@ -6,7 +6,7 @@ from src.core.models import ArticleAnalysis, SectionUnderstanding, Paragraph, Se
 from src.services.stage_checkpoints import StageCheckpoints, checkpoint_scope
 from src.services.section_translation_executor import SectionTranslationExecutor
 from src.prompts.contracts import text_version
-from src.llm.business_budget import BusinessBudgetExceeded
+from src.llm.work_budget import WorkBudgetExceeded
 
 
 class PipelineLLM:
@@ -145,7 +145,7 @@ def test_quality_filter_includes_pending_drafts_but_not_confirmed_or_passed():
 def test_budget_exhaustion_preserves_draft_and_explicit_pending_status(tmp_path):
     class Limited(PipelineLLM):
         def reflect_on_translation(self, *args, **kwargs):
-            raise BusinessBudgetExceeded('stage limit')
+            raise WorkBudgetExceeded('stage limit')
     result = run_new(Limited(), StageCheckpoints(tmp_path, 'bundle'))
     assert result.budget_exhausted and result.degraded
     assert result.workflow_status == 'review_pending'

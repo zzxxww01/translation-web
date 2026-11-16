@@ -1,58 +1,13 @@
-import asyncio
 import json
 from types import SimpleNamespace
 from unittest.mock import Mock
 
 import pytest
-from src.services.ordered_prescan import ordered_map
 from src.llm.base import LLMProvider
 from src.llm.phase_provider import configure_phase_provider
-from src.core.efficiency import EfficiencyOptions
+from src.config.efficiency import EfficiencyOptions
 from src.services.batch_translation_service import BatchTranslationService
 from src.prompts.contracts import validate_review
-
-
-@pytest.mark.asyncio
-async def test_parallel_scans_commit_in_source_order_and_bound_work():
-    running = peak = 0
-    completions, commits = [], []
-    async def scan(i):
-        nonlocal running, peak
-        running += 1; peak = max(peak, running)
-        try:
-            await asyncio.sleep(0.02 if i % 2 == 0 else 0.001)
-            completions.append(i)
-            return i * 10
-        finally: running -= 1
-    async def commit(i, value): commits.append((i, value))
-    assert await ordered_map(range(6), scan, commit, concurrency=2) == [0,10,20,30,40,50]
-    assert completions.index(1) < completions.index(0)
-    assert commits == [(i,i*10) for i in range(6)]
-    assert peak == 2 and running == 0
-
-
-@pytest.mark.asyncio
-async def test_cancellation_and_failure_never_commit_late_results():
-    cancelled = False
-    committed, finished = [], []
-    async def scan(i):
-        try:
-            await asyncio.sleep(0.01 if i == 0 else 0.1)
-            return i
-        finally: finished.append(i)
-    async def commit(i, result):
-        nonlocal cancelled
-        committed.append(result)
-        cancelled = True
-    await ordered_map(range(20), scan, commit, concurrency=3, should_cancel=lambda:cancelled)
-    assert committed == [0]
-    assert len(finished) <= 4
-    committed.clear()
-    async def fails(i):
-        if i == 0: raise RuntimeError('scan failed')
-        return i
-    with pytest.raises(RuntimeError): await ordered_map(range(3), fails, commit, concurrency=3)
-    assert not committed
 
 
 class TextProvider(LLMProvider):
@@ -110,7 +65,6 @@ def test_phase_facades_do_not_mutate_shared_client_and_preserve_zero():
 
 @pytest.mark.parametrize('scope',['draft','all'])
 def test_explicit_override_scope_routes_actual_stages(monkeypatch,scope):
-    from src.core.model_config import ModelConfig
     class Provider:
         def __init__(self, alias): self.model_alias=alias; self.model_name='physical-'+alias
         def generate(self, *args, **kwargs): return 'ok'
