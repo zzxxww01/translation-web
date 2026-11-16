@@ -167,16 +167,15 @@ class SubstackLibrary:
     def _fetch(self, stop_at_known: Optional[set]) -> Dict[str, ArchivePost]:
         client = self._client_factory()
         fetched: Dict[str, ArchivePost] = {}
-        offset = 0
+        cursor: Optional[str] = None
         for _ in range(MAX_SYNC_PAGES):
-            page = client.list_archive(offset=offset, limit=ARCHIVE_PAGE_SIZE)
+            page, cursor = client.list_archive(cursor=cursor, limit=ARCHIVE_PAGE_SIZE)
             new = [post for post in page if post.slug not in fetched]
             for post in new:
                 fetched[post.slug] = post
-            # 部分文章对当前登录身份不可见时，一页的实收条数会少于请求条数；按实收
-            # 条数推进可能与下一页重叠，靠 slug 去重，但不会漏掉文章
-            offset += len(page)
-            if not new:
+            # 整页文章都对当前登录身份不可见时 page 为空，但 cursor 仍有效，要接着翻；
+            # 一页全是已收到的文章说明 cursor 在原地打转，停下
+            if not cursor or (page and not new):
                 break
             if stop_at_known is not None and any(post.slug in stop_at_known for post in page):
                 break

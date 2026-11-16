@@ -34,10 +34,13 @@ class FakeArchive:
         self.hidden = set(hidden)
         self.offsets = []
 
-    def list_archive(self, *, offset=0, limit=24, search=""):
+    def list_archive(self, *, cursor=None, limit=24, search=""):
+        offset = int(cursor) if cursor else 0
         self.offsets.append(offset)
-        window = self.posts[offset:offset + min(limit, self.page_size)]
-        return [post for post in window if post.slug not in self.hidden]
+        end = offset + min(limit, self.page_size)
+        window = self.posts[offset:end]
+        next_cursor = str(end) if end < len(self.posts) else None
+        return [post for post in window if post.slug not in self.hidden], next_cursor
 
 
 def _newest_first(count):
@@ -89,6 +92,14 @@ def test_hidden_articles_shrink_pages_without_skipping_any(tmp_path):
     library = _library(tmp_path, archive)
     library.ensure_synced()
     assert library.count() == 77
+
+
+def test_a_fully_hidden_page_does_not_stop_paging(tmp_path):
+    archive = FakeArchive(_newest_first(30), page_size=10, hidden={f"post-{n}" for n in range(11, 21)})
+    library = _library(tmp_path, archive)
+    library.ensure_synced()
+    assert library.count() == 20
+    assert archive.offsets == [0, 10, 20]
 
 
 def test_full_sync_drops_deleted_articles_and_regenerates_changed_titles(tmp_path):

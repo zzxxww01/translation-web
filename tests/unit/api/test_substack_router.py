@@ -59,9 +59,7 @@ class FakeClient:
             raise self.error
         return FetchedArticle(url=self.final_url, slug="demo-post", title="Demo Post", html=ARTICLE_HTML)
 
-    def list_archive(self, *, offset=0, limit=24, search=""):
-        if offset > 0:
-            return []
+    def list_archive(self, *, cursor=None, limit=24, search=""):
         return [
             ArchivePost(
                 title="Demo Post", subtitle="", slug="demo-post", url=ARTICLE_URL,
@@ -71,7 +69,7 @@ class FakeClient:
                 title="Other", subtitle="s", slug="other", url="https://newsletter.semianalysis.com/p/other",
                 post_date="2026-10-22T00:00:00Z", is_paid=False, cover_image=None, wordcount=None,
             ),
-        ]
+        ], None
 
 
 @pytest.fixture(autouse=True)

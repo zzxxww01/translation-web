@@ -251,8 +251,17 @@ class SubstackClient:
         title = _extract_title(BeautifulSoup(html, "lxml")) or slug
         return FetchedArticle(url=final_url, slug=slug, title=title, html=html)
 
-    def list_archive(self, *, offset: int = 0, limit: int = 24, search: str = "") -> List[ArchivePost]:
-        params = {"sort": "new", "offset": offset, "limit": limit}
+    def list_archive(
+        self, *, cursor: Optional[str] = None, limit: int = 24, search: str = ""
+    ) -> Tuple[List[ArchivePost], Optional[str]]:
+        """返回 (这一页的文章, 下一页的 cursor)；没有下一页时 cursor 为 None。
+
+        2026-11 起 Substack 归档接口不再接受 offset（传了就 400），改为返回
+        {"posts": [...], "nextCursor": "..."}，下一页用 cursor= 参数取。
+        """
+        params = {"sort": "new", "limit": limit}
+        if cursor:
+            params["cursor"] = cursor
         if search.strip():
             params["search"] = search.strip()
         _, body = self._get_text(
@@ -260,12 +269,21 @@ class SubstackClient:
             accept="application/json",
         )
         try:
-            items = json.loads(body)
+            payload = json.loads(body)
         except ValueError as exc:
             raise SubstackError("UPSTREAM_ERROR", "文章列表返回的数据格式异常") from exc
-        if not isinstance(items, list):
+        next_cursor = None
+        if isinstance(payload, dict) and isinstance(payload.get("posts"), list):
+            items = payload["posts"]
+            next_cursor = payload.get("nextCursor") or None
+            if not isinstance(next_cursor, str):
+                next_cursor = None
+        elif isinstance(payload, list):
+            items = payload  # 旧格式：没有 cursor，只能拿到这一页
+        else:
             raise SubstackError("UPSTREAM_ERROR", "文章列表返回的数据格式异常")
-        return [self._to_archive_post(item) for item in items if isinstance(item, dict) and item.get("slug")]
+        posts = [self._to_archive_post(item) for item in items if isinstance(item, dict) and item.get("slug")]
+        return posts, next_cursor
 
     def _to_archive_post(self, item: dict) -> ArchivePost:
         slug = str(item["slug"])

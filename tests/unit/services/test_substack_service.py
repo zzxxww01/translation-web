@@ -312,17 +312,36 @@ def test_list_archive_maps_posts_and_passes_search(tmp_path):
 
     def handler(request):
         captured.update(dict(request.url.params))
-        return httpx.Response(200, json=items)
+        return httpx.Response(200, json={"posts": items, "nextCursor": "abc=="})
 
     client = _client(tmp_path, handler)
-    posts = client.list_archive(offset=24, limit=12, search=" TSMC ")
-    assert captured == {"sort": "new", "offset": "24", "limit": "12", "search": "TSMC"}
+    posts, next_cursor = client.list_archive(cursor="xyz==", limit=12, search=" TSMC ")
+    assert captured == {"sort": "new", "cursor": "xyz==", "limit": "12", "search": "TSMC"}
+    assert next_cursor == "abc=="
     assert [p.slug for p in posts] == ["paid-post", "free-post"]
     assert posts[0].is_paid is True and posts[0].wordcount == 3308
     assert posts[1].is_paid is False
     assert posts[1].url == "https://newsletter.semianalysis.com/p/free-post"
     assert posts[1].subtitle == "Desc"
     assert posts[1].cover_image is None
+
+
+def test_list_archive_first_page_sends_no_offset_or_cursor(tmp_path):
+    captured = {}
+
+    def handler(request):
+        captured.update(dict(request.url.params))
+        return httpx.Response(200, json={"posts": [{"slug": "a"}], "nextCursor": None})
+
+    posts, next_cursor = _client(tmp_path, handler).list_archive(limit=25)
+    assert captured == {"sort": "new", "limit": "25"}
+    assert [p.slug for p in posts] == ["a"] and next_cursor is None
+
+
+def test_list_archive_still_reads_legacy_list_payload(tmp_path):
+    client = _client(tmp_path, lambda request: httpx.Response(200, json=[{"slug": "a"}]))
+    posts, next_cursor = client.list_archive()
+    assert [p.slug for p in posts] == ["a"] and next_cursor is None
 
 
 def test_list_archive_rejects_malformed_payload(tmp_path):
