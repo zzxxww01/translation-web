@@ -18,8 +18,13 @@ interface ThreadPanelProps {
 
 /** 右栏 thread：根消息 + 全部回复；看到就记为已读（只记在 momo 本地）。 */
 export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel }: ThreadPanelProps) {
-  // 每个 thread 背后是一个 AI（帖子翻译助手），默认先看它的结果
-  const [tab, setTab] = useState<'ai' | 'messages'>('ai');
+  // 默认先看消息；切到「AI 翻译」才加载 AI（点「开始」才真正启动）
+  const [tab, setTab] = useState<'ai' | 'messages'>('messages');
+  const [aiOpened, setAiOpened] = useState(false);
+  const openTab = (id: 'ai' | 'messages') => {
+    setTab(id);
+    if (id === 'ai') setAiOpened(true);
+  };
   const replies = useSlackReplies(channelId, threadTs);
   const markThread = useMarkThreadRead();
   const pageVisible = usePageVisible();
@@ -36,7 +41,9 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
   const newest = newestTs(data?.messages ?? []);
   const showZh = useShowZh(state => state.showZh);
   const zh = useMessageZh(data?.messages ?? [], showZh && tab === 'messages');
-  const summary = useThreadSummary(channelId, threadTs, newest, tab === 'messages');
+  // 摘要也是点了才生成（后端有缓存，同一版本的 thread 只花一次）
+  const [wantSummary, setWantSummary] = useState(false);
+  const summary = useThreadSummary(channelId, threadTs, newest, wantSummary);
   const { mutate: mark } = markThread;
   const markedTs = useRef<string | null>(null);
   useEffect(() => {
@@ -73,13 +80,13 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
         </button>
       </div>
       <div className="flex shrink-0 gap-1 border-b border-border-subtle px-3" role="tablist" aria-label="thread 视图">
-        {([['ai', 'AI 翻译'], ['messages', `消息${rest.length ? ` · ${rest.length + 1}` : ''}`]] as const).map(([id, label]) => (
+        {([['messages', `消息${rest.length ? ` · ${rest.length + 1}` : ''}`], ['ai', 'AI 翻译']] as const).map(([id, label]) => (
           <button
             key={id}
             type="button"
             role="tab"
             aria-selected={tab === id}
-            onClick={() => setTab(id)}
+            onClick={() => openTab(id)}
             className={cn(
               'relative inline-flex items-center gap-1 px-2.5 py-2 text-[13px] after:absolute after:inset-x-2 after:-bottom-px after:h-0.5 after:rounded-full',
               tab === id ? 'font-medium text-text-primary after:bg-primary-500' : 'text-text-muted hover:text-text-primary'
@@ -91,8 +98,8 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
         ))}
         {tab === 'messages' && <div className="ml-auto flex items-center"><ZhToggle loading={zh.loading} failed={zh.failed} /></div>}
       </div>
-      {/* AI 一直挂着（切到消息页也在后台跑），只是隐藏 */}
-      <div className={cn('min-h-0 flex-1', tab === 'ai' ? 'flex flex-col' : 'hidden')}>
+      {/* 打开过 AI 页之后一直挂着（切回消息页也在后台跑），只是隐藏 */}
+      {aiOpened && <div className={cn('min-h-0 flex-1', tab === 'ai' ? 'flex flex-col' : 'hidden')}>
         <SlackAgentPanel
           key={`${channelId}-${threadTs}`}
           channelId={channelId}
@@ -100,10 +107,27 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
           latestTs={newest}
           slackLink={root?.permalink ?? null}
         />
-      </div>
+      </div>}
       <div className={cn('min-h-0 flex-1 overflow-auto pb-4 pt-2', tab !== 'messages' && 'hidden')}>
         {replies.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
-        {replies.isError && <div className="p-4 text-sm text-error">加载 thread 失败：{replies.error.message}</div>}
+        {replies.isError && (
+          <div className="p-4 text-sm text-error">
+            thread 没加载出来：{replies.error.message}
+            <button type="button" onClick={() => void replies.refetch()} className="ml-2 text-primary-700 hover:underline">重试</button>
+          </div>
+        )}
+        {!wantSummary && rest.length >= 3 && (
+          <div className="mx-4 mb-2">
+            <button
+              type="button"
+              onClick={() => setWantSummary(true)}
+              className="inline-flex items-center gap-1 rounded-md border border-primary-100 bg-primary-50/50 px-2 py-1 text-xs text-primary-700 hover:bg-primary-50"
+            >
+              <Sparkles className="h-3.5 w-3.5" /> 用中文总结这个 thread
+            </button>
+          </div>
+        )}
+        {summary.isError && <div className="mx-4 mb-2 text-xs text-error">总结失败：{summary.error.message}</div>}
         {(summary.data || summary.isLoading) && (
           <div className="mx-4 mb-2 rounded-lg border border-primary-100 bg-primary-50/50 px-3 py-2 text-[13px] leading-relaxed text-text-primary">
             <div className="mb-0.5 flex items-center gap-1 text-xs font-semibold text-primary-700">

@@ -25,10 +25,23 @@ export function chunk<T>(items: T[], size = BATCH): T[][] {
   return out;
 }
 
-/** 「显示中文」开关：频道、thread、私信共用一个，记在本机；默认开。 */
+/** 「全部显示中文」开关：频道、thread、私信共用一个，记在本机；默认关（单条消息可以点「译」）。 */
 export const useShowZh = create<{ showZh: boolean; toggleZh: () => void }>()(
-  persist(set => ({ showZh: true, toggleZh: () => set(state => ({ showZh: !state.showZh })) }), { name: 'slack-show-zh' })
+  // 换了名字：之前默认开，存过的偏好不再沿用
+  persist(set => ({ showZh: false, toggleZh: () => set(state => ({ showZh: !state.showZh })) }), { name: 'slack-show-zh-v2' })
 );
+
+/** 单条消息按需翻译（悬停工具条上的「译」）。和批量翻译共用后端缓存。 */
+export function useOneZh(text: string, enabled: boolean) {
+  return useQuery({
+    queryKey: ['slack-zh-one', hashTexts([text])],
+    queryFn: () => slackInboxApi.translate([text]),
+    enabled: enabled && !!text.trim(),
+    staleTime: Infinity,
+    retry: 1,
+    select: data => data.translations[0] ?? null,
+  });
+}
 
 /** 一组消息的中文：按 40 条一批请求，后端按内容缓存。返回 ts -> 中文（不需要翻的没有）。 */
 export function useMessageZh(messages: SlackMessage[], enabled: boolean) {

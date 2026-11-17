@@ -117,7 +117,7 @@ interface SlackAgentPanelProps {
   slackLink: string | null;
 }
 
-/** 右栏的 AI：一个 thread / 私信对应一个 skill agent，打开就自动启动，结果以卡片显示。父组件按 source 加 key。 */
+/** 右栏的 AI：一个 thread / 私信对应一个 skill agent，点「开始」才启动，结果以卡片显示。父组件按 source 加 key。 */
 export function SlackAgentPanel({ channelId, threadTs, latestTs, slackLink }: SlackAgentPanelProps) {
   const agent = useSlackAgent(channelId, threadTs);
 
@@ -148,11 +148,26 @@ export function SlackAgentPanel({ channelId, threadTs, latestTs, slackLink }: Sl
           <div className="text-error">AI 没能启动：{agent.error ?? agent.lookupError}</div>
           <Button size="sm" onClick={() => void agent.start()}>重试</Button>
         </>
-      ) : (
+      ) : agent.authLoading || agent.phase === 'starting' ? (
         <>
           <Loader2 className="h-5 w-5 animate-spin" />
           <div>{agent.authLoading ? '连接 AI…' : '正在把对话交给 AI…'}</div>
         </>
+      ) : (
+        // 还没有 agent：说清楚它会做什么，用户点了才启动
+        <div className="max-w-xs space-y-3">
+          <Sparkles className="mx-auto h-6 w-6 text-primary-500" />
+          <div className="text-sm text-text-primary">{threadTs ? '让 AI 翻译这个 thread 里要发的帖子' : '让 AI 帮你回这条私信'}</div>
+          <div className="text-xs leading-relaxed">
+            {threadTs
+              ? 'AI 会读整个 thread，找出要发出去的内容（根帖、引用的 X 帖、1/N 分段），走帖子翻译，给出译文和标题候选。'
+              : 'AI 会读最近 30 条私信，用中文说清对方要什么，给三版英文回复；你复制后自己去 Slack 发送。'}
+            大约需要 1 分钟，同一时间只跑一个。
+          </div>
+          <Button size="sm" onClick={() => void agent.start()}>
+            <Sparkles className="h-3.5 w-3.5" /> 开始
+          </Button>
+        </div>
       )}
     </div>
   );

@@ -8,6 +8,8 @@ import type { SlackConversationList } from './types';
 // 后端对 client.counts 缓存 30 秒；会话和消息接口限额约 50 次/分钟，thread 列表轮询放慢一些
 const POLL_MS = 30_000;
 const THREAD_POLL_MS = 60_000;
+// 读接口失败时自动再试两次（经隧道偶尔会断一下），还不行再在页面上报错
+const READ_RETRY = 2;
 
 export const slackInboxKeys = {
   status: ['slack-inbox', 'status'] as const,
@@ -33,6 +35,7 @@ export function useSlackConversations(enabled: boolean) {
     enabled,
     refetchInterval: POLL_MS,
     staleTime: 20_000,
+    retry: READ_RETRY,
   });
 }
 
@@ -45,6 +48,7 @@ export function useSlackMessages(channelId: string | null) {
     enabled: !!channelId,
     refetchInterval: POLL_MS,
     staleTime: 20_000,
+    retry: READ_RETRY,
   });
 }
 
@@ -55,6 +59,7 @@ export function useSlackReplies(channelId: string, threadTs: string, enabled = t
     enabled,
     refetchInterval: POLL_MS,
     staleTime: 20_000,
+    retry: READ_RETRY,
   });
 }
 
@@ -65,6 +70,7 @@ export function useSlackThreads(enabled: boolean) {
     enabled,
     refetchInterval: THREAD_POLL_MS,
     staleTime: 20_000,
+    retry: READ_RETRY,
     select: data => data.threads,
   });
 }
@@ -76,6 +82,7 @@ export function useChannelThreads(channelId: string, enabled: boolean) {
     enabled,
     refetchInterval: THREAD_POLL_MS,
     staleTime: 20_000,
+    retry: READ_RETRY,
     select: data => data.threads,
   });
 }

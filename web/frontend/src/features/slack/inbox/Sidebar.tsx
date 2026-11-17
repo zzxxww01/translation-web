@@ -87,12 +87,22 @@ function ChannelThreads({ channelId, openThread, onOpenThread, agents }: {
   const titles = useThreadTitles(threads.data);
   const [showAll, setShowAll] = useState(false);
   if (threads.isLoading) return <div className="py-1 pl-8"><Loader2 className="h-3.5 w-3.5 animate-spin text-text-muted" /></div>;
-  if (threads.isError) return <div className="py-1 pl-8 text-xs text-error">thread 加载失败</div>;
+  if (threads.isError) {
+    return (
+      <div className="py-1 pl-8 text-xs text-error">
+        thread 列表没加载出来：{threads.error.message}
+        <button type="button" onClick={() => void threads.refetch()} className="ml-1 text-primary-700 hover:underline">重试</button>
+      </div>
+    );
+  }
   const list = threads.data ?? [];
   if (list.length === 0) return <div className="py-1 pl-8 text-xs text-text-muted">最近 7 天没有 thread</div>;
   const shown = showAll ? list : list.slice(0, THREADS_SHOWN);
   return (
     <div className="space-y-px">
+      <div className="pl-8 pt-0.5 text-[11px] text-text-muted" title="thread = 某条消息下面的回复串。这里列出这个频道最近 7 天有回复的，标题是 AI 起的中文名">
+        最近有回复的 thread（回复串）
+      </div>
       {shown.map(t => {
         const active = openThread?.channelId === channelId && openThread.threadTs === t.thread_ts;
         return (
@@ -183,14 +193,14 @@ export function Sidebar(props: SidebarProps) {
           unread={false}
           onClick={() => props.onSelectView('digest')}
           icon={<Sparkles className="h-4 w-4 shrink-0 text-primary-500" />}
-          label="AI 速览"
+          label="AI 速览（未读汇总）"
         />
         <NavRow
           active={view === 'threads'}
           unread={!!threadBadge?.has_unreads}
           onClick={() => props.onSelectView('threads')}
           icon={<MessagesSquare className="h-4 w-4 shrink-0 opacity-70" />}
-          label="Threads"
+          label="我参与的 thread"
           badge={threadBadge?.mention_count ? <MentionBadge count={threadBadge.mention_count} /> : undefined}
         />
 
@@ -198,7 +208,7 @@ export function Sidebar(props: SidebarProps) {
         {props.error && <div className="p-2 text-sm text-error">加载会话失败：{props.error}</div>}
 
         {channels.length > 0 && (
-          <Section title="频道">
+          <Section title="频道（你加入的）">
             {channels.map(c => {
               const expanded = !collapsed.has(c.id);
               const mentions = c.mention_count + c.thread_mentions;
@@ -233,7 +243,7 @@ export function Sidebar(props: SidebarProps) {
         )}
 
         {dms.length > 0 && (
-          <Section title="私信">
+          <Section title="私信（一对一和小群）">
             {dms.map(c => (
               <NavRow
                 key={c.id}

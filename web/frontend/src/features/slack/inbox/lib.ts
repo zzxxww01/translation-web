@@ -1,4 +1,4 @@
-import type { SlackConversation, SlackMessage, SlackThread } from './types';
+import type { ConversationKind, SlackConversation, SlackMessage, SlackThread } from './types';
 
 // 常见的 Slack 表情简码；没收录的原样显示 :name:
 const EMOJI: Record<string, string> = {
@@ -102,4 +102,14 @@ export function newestTs(messages: { ts: string }[]): string | null {
   let best: string | null = null;
   for (const m of messages) if (!best || parseFloat(m.ts) > parseFloat(best)) best = m.ts;
   return best;
+}
+
+/** 会话类型的中文说明，放在会话标题下面。 */
+export function kindLabel(kind: ConversationKind): string {
+  switch (kind) {
+    case 'channel': return '频道 · 公开，所有成员都能看到';
+    case 'private': return '私有频道 · 只有被邀请的人能看到';
+    case 'im': return '私信 · 你和对方一对一';
+    case 'mpim': return '群聊私信 · 几个人的小群';
+  }
 }

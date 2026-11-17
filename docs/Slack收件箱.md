@@ -5,7 +5,8 @@ momo 顶部「Slack」页，布局照原生 Slack 三栏：
 - **左栏**：Threads（我参与的 thread）、频道（可展开，列出最近 7 天有回复的 thread）、私信（含群聊私信）；
   未读加粗，@我 显示红色角标。底部「自由翻译」是原来的 Slack 回复助手。
 - **中栏**：消息流。日期分隔、同一人 5 分钟内连发合并、打开时在 Slack 的已读位置画「新消息」线，@我 的消息黄底。
-- **右栏**：thread 面板，根消息 + 全部回复，「新回复」线。
+- **右栏**：thread 面板，默认「消息」标签页（根消息 + 全部回复，「新回复」线），另有「AI 翻译」标签页。
+- 没选会话时中栏显示一段说明：频道 / thread / 私信各是什么，AI 怎么用。会话标题下写明类型（频道、私有频道、私信、群聊私信）。
 
 URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`（右栏 thread）。
 
@@ -15,7 +16,8 @@ URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`�
   内容（根帖、链接卡片里的 X 帖、`1/N…N/N` 分段取最新版），走 `translate-post`（术语库），再出标题候选。
 - **私信 → 回复助手**（skill `slack-dm-reply`）：打开私信时右栏是「AI 回复」。agent 用中文说清对方要什么，
   用 `slack-reply` 给 A/B/C 三版英文；选一版「复制并打开 Slack」，到 Slack 里粘贴发送（momo 从不发送）。
-- 第一次打开 thread / 私信时自动启动；同一时间只跑一个 Slack agent（2 GB 内存），其余在页面上排队、每 15 秒重试。
+- **点「开始」才启动**（2026-11-17 用户反馈：自动启动太吵、容易排队报错）：thread 面板的「AI 翻译」标签页、私信右栏各有一个说明卡片和「开始」按钮。
+  同一时间只跑一个 Slack agent（2 GB 内存），其余在页面上排队、每 15 秒重试。
 - 绑定：skill-runner 的 run 带 `source = slack:<会话>[:<thread_ts>]`，同一个 source 只建一个对话；Claude 页的对话列表不显示这些。
 - 上下文：`GET /api/slack-inbox/conversations/{id}/agent-context?thread_ts=` 导出 Markdown（作者标「（我）」、链接卡片全文）
   和 `history`（me/them）。前端把它们作为附件交给 agent。之后有新消息，右栏提示「让 AI 重新看」，把最新上下文发给同一个对话。
@@ -27,10 +29,10 @@ URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`�
 
 不走 agent，直接调短文本模型（`task_type="slack"`），`src/services/slack_ai.py`：
 
-- **消息中文**：会话顶栏和 thread「消息」页的「中文」开关（全局，默认开）。前端 20 条一批 `POST /ai/translate`，
+- **消息中文**：默认显示英文原文（2026-11-17 用户反馈不要全部自动翻译）。悬停工具条上的「译」翻单条；顶栏「全部中文」开关（全局，默认关）打开后逐条翻。前端 20 条一批 `POST /ai/translate`，
   只翻英文为主的消息（中文、只有链接 / 表情的跳过），带术语库，链接不抄进译文。
 - **thread 中文短标题**：侧栏展开频道、Threads 页，`POST /ai/titles`（thread_ts → 根消息原文）。
-- **thread 摘要**：thread「消息」页顶部卡片，`GET /conversations/{id}/threads/{ts}/summary`，含「要你做」一句。
+- **thread 摘要**：thread「消息」页顶部点「用中文总结这个 thread」才生成，`GET /conversations/{id}/threads/{ts}/summary`，含「要你做」一句。
 - 缓存：`data/slack_cache/ai/{zh,titles,summaries}.json`，按内容 hash（摘要按最新回复 ts）。改翻译提示词时把
   `ZH_PROMPT_VERSION` 加一，旧缓存自然失效。
 - 侧栏 thread / 私信行尾显示 agent 状态：转圈 = 在跑，橙点 = 等你确认，红 ! = 出错，✨ = 已处理（需登录 Claude 页）。
