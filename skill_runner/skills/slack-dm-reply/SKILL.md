@@ -37,7 +37,7 @@ PY
 $MOMO/slack-reply --mode incoming --json --history history-before.json -f pending.txt > reply.json
 ```
 
-返回 JSON：`translation` 是对方消息的中文理解，`suggested_replies` 是 A/B/C 三版（`english`、`chinese`）。
+（`slack-reply` 走 Slack 任务，默认就是官方 GPT Sol `gpt-6.1-sol`。）返回 JSON：`translation` 是对方消息的中文理解，`suggested_replies` 是 A/B/C 三版（`english`、`chinese`）。
 失败就把错误原样告诉用户，不要自己凭空编。
 
 ## 3. 写 result.json（momo 页面读这个文件显示结果卡片，每次修改后都要重写）

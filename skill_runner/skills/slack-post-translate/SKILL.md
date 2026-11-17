@@ -28,7 +28,8 @@ export MOMO=/home/zxw/releases/translation-agent-current NO_PROXY=127.0.0.1,loca
    （「let me reedit it」「done, i re-edited it」之后又贴了一遍）时，每个编号取**最新**的那一版。
 4. 其余回复（「will post, thanks」「lol」、改动意见）只用来判断上面几条，不翻。
 
-清理：去掉 Slack 的 @提及、@用户组、转发请求用语、链接里的跟踪参数（`?s=46`、`&t=…`），保留数字、单位、专有名词原样。
+清理：去掉 Slack 的 @提及、@用户组、转发请求用语、链接里的跟踪参数（`?s=46`、`&t=…`）；Slack 表情码（`:alert:`、`:fire:`）
+能对应常见 emoji 的换成 emoji（🚨、🔥），自定义表情直接去掉；保留数字、单位、专有名词原样。
 
 拿不准时（同时有两段都像要发的、链接卡片被截断只剩半句等）用 AskUserQuestion 让用户选，推荐项放第一个，
 每个选项的说明里放候选内容的前 80 个字符。
@@ -42,10 +43,10 @@ export MOMO=/home/zxw/releases/translation-agent-current NO_PROXY=127.0.0.1,loca
 cat > source.txt <<'EOF'
 <要翻译的英文>
 EOF
-$MOMO/translate-post -f source.txt --json > translation.json
+$MOMO/translate-post -f source.txt --json --model gpt-6.1-sol > translation.json
 ```
 
-用返回 JSON 的 `translation`（已带术语库和话题标签处理）。失败就把错误原样告诉用户，不要自己凭空翻。
+用返回 JSON 的 `translation`（已带术语库和话题标签处理）。Slack 这边的模型调用一律用官方 GPT Sol（`--model gpt-6.1-sol`），不要换。失败就把错误原样告诉用户，不要自己凭空翻。
 
 ## 3. 标题候选
 
@@ -54,7 +55,7 @@ python3 - <<'PY'
 import json, urllib.request
 zh = json.load(open("translation.json"))["translation"]
 req = urllib.request.Request("http://127.0.0.1:54321/api/generate/title",
-    data=json.dumps({"content": zh}).encode(), headers={"Content-Type": "application/json"})
+    data=json.dumps({"content": zh, "model": "gpt-6.1-sol"}).encode(), headers={"Content-Type": "application/json"})
 titles = [t.strip() for t in json.load(urllib.request.urlopen(req, timeout=190))["title"].splitlines() if t.strip()]
 json.dump(titles, open("titles.json", "w"), ensure_ascii=False)
 PY
