@@ -98,3 +98,36 @@ def test_parse_items_and_helpers(tmp_path):
     cache.put_many({"a": 1, "b": 2})
     cache.put_many({"c": 3})
     assert cache.get("a") is None and cache.get("c") == 3
+
+
+
+def test_search_query_rewrites_chinese_only(tmp_path):
+    calls = []
+
+    async def llm(prompt):
+        calls.append(prompt)
+        return json.dumps({"query": '"Nvidia" HBM4 yield in:#general'})
+
+    ai = SlackAI(tmp_path, llm, json.loads, no_glossary)
+    assert run(ai.search_query("HBM4 yield")) == "HBM4 yield"
+    assert calls == []
+    assert run(ai.search_query("英伟达 HBM4 良率")) == "Nvidia HBM4 yield"
+    run(ai.search_query("英伟达 HBM4 良率"))
+    assert len(calls) == 1
+
+
+def test_digest_maps_item_ids_to_ts_and_caches(tmp_path):
+    calls = []
+
+    async def llm(prompt):
+        calls.append(prompt)
+        return json.dumps({"summary": "两人在聊良率", "items": [{"id": 1, "text": "Ray 周五给数据"}, {"id": 9, "text": "越界"}, "bad"],
+                           "todo_for_me": "回复 Dylan"})
+
+    ai = SlackAI(tmp_path, llm, json.loads, no_glossary)
+    msgs = [{"ts": "1.1", "user_name": "Dylan", "text": "yields?"}, {"ts": "2.2", "user_name": "Ray", "text": "Friday"}]
+    out = run(ai.digest("k1", "#memory", msgs))
+    assert out["items"] == [{"text": "Ray 周五给数据", "ts": "2.2"}, {"text": "越界", "ts": None}]
+    assert out["todo_for_me"] == "回复 Dylan" and "#memory" in calls[0]
+    run(ai.digest("k1", "#memory", msgs))
+    assert len(calls) == 1

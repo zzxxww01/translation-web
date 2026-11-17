@@ -116,3 +116,37 @@ export interface SlackThreadSummary {
   /** 有人要我做事或在等我回复时的一句话，否则为空 */
   todo_for_me: string;
 }
+
+/** AI 速览里的一段：一个有未读的会话，或一个有新回复的 thread。 */
+export interface SlackDigestSection {
+  conversation_id: string;
+  name: string;
+  kind: 'thread' | ConversationKind;
+  thread_ts: string | null;
+  unread_count: number;
+  mentions_me: boolean;
+  latest_ts: string;
+  summary?: string;
+  items?: { text: string; ts: string | null }[];
+  todo_for_me?: string;
+  /** 这一段没能总结（模型失败），其余段不受影响 */
+  error?: string;
+}
+
+export interface SlackSearchResult {
+  channel_id: string;
+  channel_name: string;
+  kind: ConversationKind;
+  /** 在 momo 的会话列表里（能直接打开）；否则只能去 Slack 看 */
+  visible: boolean;
+  thread_ts: string | null;
+  message: SlackMessage;
+}
+
+export interface SlackSearchResponse {
+  input: string;
+  /** 实际拿去搜的英文关键词 */
+  query: string;
+  total: number;
+  results: SlackSearchResult[];
+}

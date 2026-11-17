@@ -28,11 +28,13 @@ export function splitSidebar(conversations: SlackConversation[]) {
   };
 }
 
-/** 中栏除了会话之外的页面：Threads 汇总、自由翻译（原回复工作台）。 */
-export type SlackView = 'threads' | 'reply';
+/** 中栏除了会话之外的页面：Threads 汇总、AI 速览、搜索结果、自由翻译（原回复工作台）。 */
+export type SlackView = 'threads' | 'digest' | 'search' | 'reply';
+
+const VIEWS: SlackView[] = ['threads', 'digest', 'search', 'reply'];
 
 export function parseSlackView(value: string | null): SlackView | null {
-  return value === 'threads' || value === 'reply' ? value : null;
+  return VIEWS.includes(value as SlackView) ? (value as SlackView) : null;
 }
 
 const WEEKDAYS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];

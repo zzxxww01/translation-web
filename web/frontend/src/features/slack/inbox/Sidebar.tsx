@@ -1,5 +1,5 @@
 import { useState, type ReactNode } from 'react';
-import { ChevronDown, ChevronRight, Hash, Languages, Loader2, Lock, MessagesSquare, RefreshCw, Users } from 'lucide-react';
+import { ChevronDown, ChevronRight, Hash, Languages, Loader2, Lock, MessagesSquare, RefreshCw, Search, Sparkles, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { RunMeta } from '@/features/skills/types';
 import { AgentBadge } from '../agent/AgentBadge';
@@ -27,6 +27,7 @@ interface SidebarProps {
   onSelectConversation: (id: string) => void;
   onSelectView: (view: SlackView) => void;
   onOpenThread: (thread: OpenThread) => void;
+  onSearch: (q: string) => void;
 }
 
 function MentionBadge({ count }: { count: number }) {
@@ -161,7 +162,25 @@ export function Sidebar(props: SidebarProps) {
           <RefreshCw className={cn('h-4 w-4', refresh.isPending && 'animate-spin')} />
         </button>
       </div>
+      <form
+        className="mx-2 mt-2 flex items-center gap-1.5 rounded-md border border-border-subtle bg-white px-2"
+        onSubmit={e => {
+          e.preventDefault();
+          const q = new FormData(e.currentTarget).get('q');
+          if (typeof q === 'string' && q.trim()) props.onSearch(q.trim());
+        }}
+      >
+        <Search className="h-3.5 w-3.5 shrink-0 text-text-muted" />
+        <input name="q" placeholder="搜索（中文也行）" aria-label="搜索 Slack" className="min-w-0 flex-1 bg-transparent py-1.5 text-sm outline-none placeholder:text-text-muted" />
+      </form>
       <nav className="min-h-0 flex-1 overflow-auto px-2 py-2" aria-label="Slack 会话">
+        <NavRow
+          active={view === 'digest'}
+          unread={false}
+          onClick={() => props.onSelectView('digest')}
+          icon={<Sparkles className="h-4 w-4 shrink-0 text-primary-500" />}
+          label="AI 速览"
+        />
         <NavRow
           active={view === 'threads'}
           unread={!!threadBadge?.has_unreads}

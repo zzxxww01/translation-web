@@ -21,7 +21,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
-from urllib.parse import urlparse
+from urllib.parse import parse_qs, urlparse
 
 import httpx
 
@@ -41,6 +41,7 @@ ALLOWED_METHODS = frozenset({
     "conversations.info",
     "conversations.history",
     "conversations.replies",
+    "search.messages",
     "subscriptions.thread.getView",
     "users.info",
 })
@@ -63,6 +64,9 @@ HISTORY_TTL_S = 30
 THREAD_RECENT_DAYS = 7
 # 私信交给回复 agent 时带最近多少条
 AGENT_DM_MESSAGES = 30
+# AI 速览：每个会话 / thread 最多带多少条未读
+DIGEST_MAX_MESSAGES = 40
+SEARCH_COUNT = 30
 AUTH_TTL_S = 600
 MAX_FILE_BYTES = 25 * 1024 * 1024
 
@@ -234,7 +238,10 @@ def parse_slack_text(text: str, user_name: Callable[[str], str]) -> List[Dict[st
         body = match.group(1)
         target, _, label = body.partition("|")
         label = _unescape(label)
-        if target.startswith("@"):
+        if target.startswith("@S"):
+            # 搜索结果里用户组提及是 <@S…> 这种写法，S 开头的不是用户 ID
+            segments.append({"type": "mention", "text": "@" + (label.lstrip("@") or "用户组")})
+        elif target.startswith("@"):
             segments.append({"type": "mention", "text": "@" + (label.lstrip("@") or user_name(target[1:]))})
         elif target.startswith("#"):
             segments.append({"type": "mention", "text": "#" + (label or target[1:])})
@@ -817,6 +824,68 @@ class SlackInbox:
             if msg["reply_count"] and msg["thread_ts"] == msg["ts"]:
                 msg["replies"] = self.replies(channel_id, msg["ts"])["messages"][1:]
         return {"conversation": info, "exported_at": format_ts(str(self._now())), "messages": history}
+
+    # -- AI 速览：收集未读（只读，不标已读）
+
+    def unread_material(self) -> List[Dict[str, Any]]:
+        """每个有未读的会话、每个有新回复的 thread：我之外的人在已读位置之后发的消息（时间正序）。"""
+        sections: List[Dict[str, Any]] = []
+        for conv in self.conversations():
+            if not conv["has_unreads"] or not conv["last_read"]:
+                continue
+            msgs = [
+                m for m in reversed(self._history_messages(conv["id"]))
+                if float(m["ts"]) > float(conv["last_read"]) and not m["is_me"]
+            ][-DIGEST_MAX_MESSAGES:]
+            if msgs:
+                sections.append({"kind": conv["kind"], "conversation": conv, "thread_ts": None,
+                                 "last_read": conv["last_read"], "messages": msgs})
+        names = {c["id"]: c for c in self.conversations()}
+        for t in self.threads()["threads"]:
+            if not t["has_unreads"] or t["channel_id"] not in names:
+                continue
+            msgs = [
+                m for m in self.replies(t["channel_id"], t["thread_ts"])["messages"][1:]
+                if float(m["ts"]) > float(t["last_read"] or 0) and not m["is_me"]
+            ][-DIGEST_MAX_MESSAGES:]
+            if msgs:
+                sections.append({"kind": "thread", "conversation": names[t["channel_id"]], "thread_ts": t["thread_ts"],
+                                 "root": t["root"], "last_read": t["last_read"], "messages": msgs})
+        return sections
+
+    def _history_messages(self, channel_id: str) -> List[Dict[str, Any]]:
+        return [self.normalize_message(channel_id, m) for m in self._history(channel_id, 100).get("messages", [])]
+
+    # -- 搜索（search.messages，只读）
+
+    def search(self, query: str, count: int = SEARCH_COUNT) -> Dict[str, Any]:
+        query = (query or "").strip()
+        if not query:
+            raise SlackInboxError("BAD_QUERY", "搜索词不能为空", 400)
+        data = self.client().call("search.messages", query=query[:200], count=max(1, min(count, 50)), sort="timestamp")
+        found = data.get("messages") or {}
+        visible = {c["id"]: c for c in self.conversations()}
+        results = []
+        for match in found.get("matches") or []:
+            ch = match.get("channel") or {}
+            cid = ch.get("id") or ""
+            if not CONVERSATION_ID_RE.match(cid):
+                continue
+            permalink = match.get("permalink") or ""
+            thread_ts = (parse_qs(urlparse(permalink).query).get("thread_ts") or [None])[0]
+            msg = self.normalize_message(cid, {**match, "thread_ts": thread_ts or match.get("thread_ts")})
+            if permalink.startswith("https://"):
+                msg["permalink"] = permalink
+            conv = visible.get(cid)
+            results.append({
+                "channel_id": cid,
+                "channel_name": conv["name"] if conv else (ch.get("name") or cid),
+                "kind": conv["kind"] if conv else ("im" if ch.get("is_im") else "mpim" if ch.get("is_mpim") else "channel"),
+                "visible": bool(conv),
+                "thread_ts": thread_ts if thread_ts and thread_ts != msg["ts"] else None,
+                "message": msg,
+            })
+        return {"query": query, "total": int(found.get("total") or 0), "results": results}
 
     # -- 交给 AI agent 的上下文
 

@@ -118,6 +118,13 @@ class FakeClient:
             return _thread_view()
         if method in MARK_METHODS:
             return {"ok": True}
+        if method == "search.messages":
+            return {"ok": True, "messages": {"total": 2, "matches": [
+                {"channel": {"id": "C000000001", "name": "social"}, "ts": f"{NOW - 10:.6f}", "user": "UBBBBBBBB2",
+                 "text": "HBM yields", "permalink": f"https://team.slack.com/archives/C000000001/p1?thread_ts={THREAD_TS}&cid=C000000001"},
+                {"channel": {"id": "C777777777", "name": "secret-other", "is_channel": True}, "ts": f"{NOW:.6f}",
+                 "user": "UAAAAAAAA1", "text": "HBM elsewhere", "permalink": "https://team.slack.com/archives/C777777777/p2"},
+            ]}}
         if method == "auth.test":
             return {"ok": True, "user": "me", "user_id": ME, "team": "T", "url": "https://team.slack.com/"}
         if method == "client.counts":
@@ -177,7 +184,7 @@ def inbox(tmp_path):
 def test_whitelist_is_read_only():
     for method in ALLOWED_METHODS:
         verb = method.rsplit(".", 1)[1]
-        assert verb in {"test", "counts", "userBoot", "info", "history", "replies", "getView"}, method
+        assert verb in {"test", "counts", "userBoot", "info", "history", "replies", "getView", "messages"}, method
     # 唯一的写操作：推进我自己的已读位置
     assert MARK_METHODS == {"conversations.mark", "subscriptions.thread.mark"}
 
@@ -421,3 +428,63 @@ def test_agent_context_marks_my_messages():
     md = agent_context_markdown(conv, [msg], "me", is_thread=False)
     assert "# Slack 会话 · 私信 · Alice" in md and "## 1. me（我）" in md
     assert "[链接卡片 · X] Post https://x.com/a" in md and "> line2" in md
+
+
+
+def test_search_marks_visibility_and_threads(inbox):
+    out = inbox.search("HBM yields")
+    assert out["total"] == 2
+    first, second = out["results"]
+    assert (first["channel_id"], first["visible"], first["thread_ts"], first["channel_name"]) == (
+        "C000000001", True, THREAD_TS, "social")
+    assert first["message"]["user_name"] == "Bob B" and first["message"]["permalink"].endswith("cid=C000000001")
+    assert (second["visible"], second["channel_name"], second["thread_ts"]) == (False, "secret-other", None)
+    with pytest.raises(SlackInboxError):
+        inbox.search("  ")
+
+
+def test_unread_material_collects_others_messages_after_last_read(inbox):
+    sections = inbox.unread_material()
+    kinds = [(s["kind"], s["conversation"]["id"], s["thread_ts"]) for s in sections]
+    # 频道有未读（last_read 3 天前，最新消息在 NOW）；我参与的 thread 有新回复
+    assert ("channel", "C000000001", None) in kinds
+    thread = next(s for s in sections if s["kind"] == "thread")
+    assert thread["thread_ts"] == THREAD_TS and thread["messages"]
+    assert all(float(m["ts"]) > float(thread["last_read"]) and not m["is_me"] for m in thread["messages"])
+    # 只读：没调任何标记已读
+    assert not any(method in MARK_METHODS for method, _ in inbox.fake.calls)
+
+
+def test_digest_and_search_routes(inbox, monkeypatch):
+    class FakeAI:
+        async def digest(self, key, where, messages):
+            if "thread" in where:
+                raise RuntimeError("model down")
+            return {"summary": f"{where} 有 {len(messages)} 条", "items": [], "todo_for_me": ""}
+
+        async def search_query(self, q):
+            return "HBM yields"
+
+    monkeypatch.setattr(slack_inbox_router, "get_slack_inbox", lambda: inbox)
+    monkeypatch.setattr(slack_inbox_router, "get_slack_ai", lambda: FakeAI())
+    app = FastAPI()
+    register_error_handlers(app)
+    app.include_router(slack_inbox_router.router, prefix="/api")
+    with TestClient(app) as client:
+        sections = client.get("/api/slack-inbox/digest").json()["sections"]
+        channel = next(s for s in sections if s["kind"] == "channel")
+        assert channel["summary"].startswith("#social") and channel["unread_count"] >= 1
+        thread = next(s for s in sections if s["kind"] == "thread")
+        assert "error" in thread and thread["thread_ts"] == THREAD_TS
+        # @我 / 有待办的排前面，其余按最新消息倒序
+        order = [(not (x["mentions_me"] or x.get("todo_for_me")), -float(x["latest_ts"])) for x in sections]
+        assert order == sorted(order)
+        found = client.get("/api/slack-inbox/search", params={"q": "HBM 良率"}).json()
+        assert found["input"] == "HBM 良率" and found["query"] == "HBM yields" and len(found["results"]) == 2
+        assert client.get("/api/slack-inbox/search").status_code == 422
+
+
+
+def test_usergroup_mention_in_search_format():
+    assert parse_slack_text("<@S096243SP9T> hi", lambda uid: "WRONG") == [
+        {"type": "mention", "text": "@用户组"}, {"type": "text", "text": " hi"}]
