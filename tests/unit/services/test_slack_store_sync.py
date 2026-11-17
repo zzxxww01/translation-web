@@ -4,7 +4,6 @@ import pytest
 
 from src.services.slack_inbox import (
     ALLOWED_METHODS,
-    MARK_METHODS,
     REFRESH_EVERY_S,
     THREAD_FETCH_TTL_S,
     THREAD_FULL_EVERY_S,
@@ -47,7 +46,7 @@ class FakeSlack:
         return msg
 
     def call(self, method, **params):
-        assert method in ALLOWED_METHODS or method in MARK_METHODS
+        assert method in ALLOWED_METHODS
         self.calls.append((method, params))
         if method == "auth.test":
             return {"ok": True, "user": "me", "user_id": ME, "team": "T", "url": "https://team.slack.com"}
@@ -224,3 +223,15 @@ def test_store_survives_restart(tmp_path):
     db.upsert(CID, [{"ts": ts(2), "text": "b2", "thread_ts": ts(2)}], in_history=False)
     assert [m["text"] for m in db.history(CID)] == ["b2", "a"]
     assert db.stats()["messages"] == 3
+
+
+
+def test_local_read_state_survives_restart(tmp_path):
+    db = SlackStore(tmp_path / "s.db")
+    assert db.mark_read(CID, ts(5)) is True
+    assert db.mark_read(CID, ts(3)) is False
+    assert db.mark_read(CID, ts(9), thread_ts=ts(1)) is True
+    db.close()
+    db = SlackStore(tmp_path / "s.db")
+    assert db.read_position(CID) == ts(5) and db.read_position(CID, ts(1)) == ts(9)
+    assert db.read_positions() == {(CID, ""): ts(5), (CID, ts(1)): ts(9)}

@@ -75,16 +75,18 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 
 用户组名拿不到，`<!subteam^…>` 显示为「@用户组」。群聊私信名从「Group messaging with: @a @b @me」整理成「a, b」。
 
-## 只读保证和唯一的写操作
+## 完全只读（2026-11-17 用户要求：对 Slack 及其状态都只读）
 
 `src/services/slack_inbox.py`：
 
 - `ALLOWED_METHODS` 只读白名单：`auth.test`、`client.counts`、`client.userBoot`、`conversations.info/history/replies`、
-  `search.messages`、`subscriptions.thread.getView`、`users.info`。
-- `MARK_METHODS`：`conversations.mark`、`subscriptions.thread.mark`——在 momo 里看过的会话/thread 同步标成 Slack 已读
-  （2026-11-17 用户确认要同步）。只推进「我」自己的已读位置，后端拒绝往回退；不发送、不修改任何消息，别人不可见。
-- 白名单外的方法直接抛错（有单测锁定，发送类方法永远不加）。附件只从 `*.slack.com` 下载。
-- 前端只在页面可见时标已读，同一条消息只发一次请求。
+  `search.messages`、`subscriptions.thread.getView`、`users.info`。客户端只发 GET。
+- 白名单外的方法直接抛错，单测锁定：发送、改消息、加表情、加入频道，以及 `conversations.mark`、`subscriptions.thread.mark`
+  （改 Slack 已读状态）都会被拒。附件只从 `*.slack.com` 下载。
+- **已读只记在 momo 本地**（`slack.db` 的 `read_state`，只往前推）。显示时已读位置取「Slack 记的」和「momo 本地记的」里更新的那个：
+  在 Slack 里读过的 momo 也算读过；在 momo 里读过的只影响 momo，Slack 里的未读保持原样。
+  thread 未读和 @我 角标按我参与的 thread 结合本地已读重新计算；在 momo 里看过的非参与 thread 也会记已读。
+- 前端只在页面可见时记已读，同一条消息只发一次请求。
 
 ## 展示范围
 
@@ -109,8 +111,8 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/conversations/{id}/threads/{ts}/summary` | thread 中文摘要 |
 | GET | `/digest` | AI 速览（未读按会话 / thread 中文总结） |
 | GET | `/search?q=` | 搜索（中文先改写成英文关键词） |
-| POST | `/conversations/{id}/mark` | `{"ts"}` 标记会话已读（只前进） |
-| POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 标记 thread 已读（只对我参与的 thread） |
+| POST | `/conversations/{id}/mark` | `{"ts"}` 在 momo 本地记会话已读（只前进，不碰 Slack） |
+| POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 在 momo 本地记 thread 已读（不碰 Slack） |
 | GET | `/conversations/{id}/export?format=md\|json` | 导出最近 200 条（含 thread） |
 | GET | `/files/{id}` | 附件代理；只内联 png/jpeg/gif/webp，其余一律下载 |
 

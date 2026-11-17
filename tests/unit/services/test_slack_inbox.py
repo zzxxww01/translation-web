@@ -10,7 +10,6 @@ from src.api.middleware import register_error_handlers
 from src.api.routers import slack_inbox as slack_inbox_router
 from src.services.slack_inbox import (
     ALLOWED_METHODS,
-    MARK_METHODS,
     SlackCredentialStore,
     SlackInbox,
     SlackInboxError,
@@ -110,14 +109,12 @@ class FakeClient:
         self.downloads = []
 
     def call(self, method, **params):
-        assert method in ALLOWED_METHODS or method in MARK_METHODS
+        assert method in ALLOWED_METHODS
         self.calls.append((method, params))
         if method == "client.userBoot":
             return _boot()
         if method == "subscriptions.thread.getView":
             return _thread_view()
-        if method in MARK_METHODS:
-            return {"ok": True}
         if method == "search.messages":
             return {"ok": True, "messages": {"total": 2, "matches": [
                 {"channel": {"id": "C000000001", "name": "social"}, "ts": f"{NOW - 10:.6f}", "user": "UBBBBBBBB2",
@@ -185,12 +182,12 @@ def test_whitelist_is_read_only():
     for method in ALLOWED_METHODS:
         verb = method.rsplit(".", 1)[1]
         assert verb in {"test", "counts", "userBoot", "info", "history", "replies", "getView", "messages"}, method
-    # 唯一的写操作：推进我自己的已读位置
-    assert MARK_METHODS == {"conversations.mark", "subscriptions.thread.mark"}
 
 
+# Slack 及其状态完全只读：发送、改消息、改已读状态的方法一个都不能调
 @pytest.mark.parametrize("method", ["chat.postMessage", "chat.update", "chat.delete", "reactions.add", "files.upload",
-                                    "conversations.join", "subscriptions.thread.add"])
+                                    "conversations.join", "subscriptions.thread.add",
+                                    "conversations.mark", "subscriptions.thread.mark"])
 def test_client_rejects_methods_outside_whitelist(method):
     def handler(request):  # pragma: no cover - must never be reached
         raise AssertionError("no network call expected")
@@ -304,13 +301,29 @@ def test_channel_threads_merge_history_and_followed(inbox):
     assert threads[0]["has_unreads"] is False  # 没参与的 thread Slack 不记已读
 
 
-def test_mark_read_only_moves_forward(inbox):
-    assert inbox.mark_conversation("C000000001", f"{NOW - 4 * DAY:.6f}")["marked"] is False
+def test_mark_read_is_local_only_and_moves_forward(inbox):
+    # 频道：Slack 记的已读在 3 天前，有未读
+    assert inbox.mark_conversation("C000000001", f"{NOW - 4 * DAY:.6f}")["marked"] is True  # 本地第一次记
+    assert inbox.mark_conversation("C000000001", f"{NOW - 5 * DAY:.6f}")["marked"] is False  # 不往回退
+    social = next(c for c in inbox.conversations() if c["id"] == "C000000001")
+    assert social["has_unreads"] is True and social["last_read"] == f"{NOW - 3 * DAY:.6f}"  # Slack 的更新，用 Slack 的
     assert inbox.mark_conversation("C000000001", f"{NOW:.6f}")["marked"] is True
-    assert ("conversations.mark", {"channel": "C000000001", "ts": f"{NOW:.6f}"}) in inbox.fake.calls
-    assert inbox.mark_thread("C000000001", THREAD_TS, f"{NOW - 200:.6f}")["marked"] is False
+    inbox._cache.pop("counts")
+    social = next(c for c in inbox.conversations() if c["id"] == "C000000001")
+    assert social["has_unreads"] is False and social["last_read"] == f"{NOW:.6f}"
+
+    # thread：本地看过最新回复后不再算未读，也不再 @我
+    assert inbox.thread_badge() == {"has_unreads": True, "mention_count": 1}
     assert inbox.mark_thread("C000000001", THREAD_TS, f"{NOW - 10:.6f}")["marked"] is True
-    assert inbox.mark_thread("C000000001", f"{NOW:.6f}", f"{NOW:.6f}")["marked"] is False  # 没参与
+    assert inbox.thread_badge() == {"has_unreads": False, "mention_count": 0}
+    assert inbox.threads()["threads"][0]["has_unreads"] is False
+    assert inbox.replies("C000000001", THREAD_TS)["last_read"] == f"{NOW - 10:.6f}"
+    # 没参与的 thread 也能在本地记
+    assert inbox.mark_thread("C000000001", f"{NOW:.6f}", f"{NOW:.6f}")["marked"] is True
+
+    # 全程没有任何写 Slack 的调用
+    assert all(method in ALLOWED_METHODS for method, _ in inbox.fake.calls)
+    assert not any(method.endswith(".mark") for method, _ in inbox.fake.calls)
     with pytest.raises(SlackInboxError) as exc:
         inbox.mark_conversation("D000000005", f"{NOW:.6f}")  # bot 私信不在展示范围
     assert exc.value.code == "CONVERSATION_NOT_VISIBLE"
@@ -318,7 +331,7 @@ def test_mark_read_only_moves_forward(inbox):
         inbox.mark_conversation("C000000001", "1; drop")
 
 
-def test_client_posts_mark_methods():
+def test_client_only_uses_get():
     seen = []
 
     def handler(request):
@@ -326,9 +339,9 @@ def test_client_posts_mark_methods():
         return httpx.Response(200, json={"ok": True})
 
     client = SlackReadOnlyClient(normalize_credentials("xoxc-a", "xoxd-b"), http=httpx.Client(transport=httpx.MockTransport(handler)))
-    client.call("conversations.mark", channel="C000000001", ts="1.2")
     client.call("auth.test")
-    assert [r.method for r in seen] == ["POST", "GET"]
+    client.call("conversations.history", channel="C000000001")
+    assert [r.method for r in seen] == ["GET", "GET"]
 
 
 def test_messages_resolve_names_files_and_permalink(inbox):
@@ -452,7 +465,7 @@ def test_unread_material_collects_others_messages_after_last_read(inbox):
     assert thread["thread_ts"] == THREAD_TS and thread["messages"]
     assert all(float(m["ts"]) > float(thread["last_read"]) and not m["is_me"] for m in thread["messages"])
     # 只读：没调任何标记已读
-    assert not any(method in MARK_METHODS for method, _ in inbox.fake.calls)
+    assert all(method in ALLOWED_METHODS for method, _ in inbox.fake.calls)
 
 
 def test_digest_and_search_routes(inbox, monkeypatch):

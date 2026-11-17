@@ -16,7 +16,7 @@ interface ThreadPanelProps {
   onOpenChannel: () => void;
 }
 
-/** 右栏 thread：根消息 + 全部回复；看到就在 Slack 里把这个 thread 标为已读。 */
+/** 右栏 thread：根消息 + 全部回复；看到就记为已读（只记在 momo 本地）。 */
 export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel }: ThreadPanelProps) {
   // 每个 thread 背后是一个 AI（帖子翻译助手），默认先看它的结果
   const [tab, setTab] = useState<'ai' | 'messages'>('ai');
@@ -40,11 +40,12 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
   const { mutate: mark } = markThread;
   const markedTs = useRef<string | null>(null);
   useEffect(() => {
-    if (!pageVisible || !newest || !data?.last_read) return; // 没参与的 thread Slack 不记已读
-    if (markedTs.current === newest || parseFloat(newest) <= parseFloat(data.last_read)) return;
+    // momo 本地记已读，没参与的 thread 也记，下次打开才有「新回复」线
+    if (!pageVisible || !newest || !data) return;
+    if (markedTs.current === newest || (data.last_read && parseFloat(newest) <= parseFloat(data.last_read))) return;
     markedTs.current = newest;
     mark({ channelId, threadTs, ts: newest });
-  }, [pageVisible, newest, data?.last_read, channelId, threadTs, mark]);
+  }, [pageVisible, newest, data, channelId, threadTs, mark]);
 
   return (
     <>

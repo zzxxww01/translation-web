@@ -73,10 +73,10 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
     if (atBottom.current) el.scrollTop = el.scrollHeight;
   }, [messages]);
 
-  // 看到了就在 Slack 里标已读
+  // 看到了就记为已读（只记在 momo 本地，Slack 里的未读不变）
   const newest = newestTs(messages);
   const { mutate: mark } = markRead;
-  // 同一条消息只发一次：Slack 那边已读位置更新有延迟，不能靠会话列表刷新来判断
+  // 同一条消息只发一次：会话列表刷新有延迟，不能靠它来判断
   const markedTs = useRef<string | null>(null);
   useEffect(() => {
     if (!pageVisible || !newest || markedTs.current === newest) return;

@@ -5,9 +5,9 @@ Slack 收件箱。
 给前端 Slack 页展示。企业版工作区禁用了 conversations.list / users.conversations，
 会话清单从网页端自己用的 client.userBoot（侧栏）+ client.counts（未读数）拿。
 
-只读是硬约束：所有 API 调用都过白名单，白名单外的方法直接抛错。唯一的例外是
-MARK_METHODS——把「我」的已读位置往前推，别人看不到，不发送、不修改任何消息。
-凭证只发给 slack.com。
+完全只读：所有 API 调用都过白名单，白名单里只有查询方法，其余一律抛错；不发送、不改消息，
+也不改 Slack 里的已读状态。在 momo 里看过的位置只记在本地（slack.db 的 read_state），
+显示未读时取「Slack 的已读位置」和「momo 本地已读位置」里更新的那个。凭证只发给 slack.com。
 """
 
 from __future__ import annotations
@@ -36,7 +36,7 @@ USER_AGENT = (
     "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
 )
 
-# 只读白名单：新增方法前先确认它不会写入、发送或改变已读状态
+# 只读白名单：新增方法前先确认它不会写入、发送或改变已读状态（用户要求 Slack 及其状态完全只读）
 ALLOWED_METHODS = frozenset({
     "auth.test",
     "client.counts",
@@ -49,11 +49,6 @@ ALLOWED_METHODS = frozenset({
     "users.info",
 })
 
-# 只改「我」自己的已读位置（和在 Slack 里看过一样）；不发送、不改消息，别人不可见
-MARK_METHODS = frozenset({
-    "conversations.mark",
-    "subscriptions.thread.mark",
-})
 
 # 私信只展示最近有往来的（天数可由 settings.slack_dm_recent_days 覆盖）
 DM_RECENT_DAYS = 30
@@ -181,13 +176,10 @@ class SlackReadOnlyClient:
         }
 
     def call(self, method: str, **params: Any) -> Dict[str, Any]:
-        if method not in ALLOWED_METHODS and method not in MARK_METHODS:
+        if method not in ALLOWED_METHODS:
             raise SlackInboxError("METHOD_NOT_ALLOWED", f"Slack 方法 {method} 不在只读白名单里", 500)
         try:
-            if method in MARK_METHODS:
-                resp = self._http.post(f"{API_BASE}/{method}", data=params, headers=self._headers)
-            else:
-                resp = self._http.get(f"{API_BASE}/{method}", params=params, headers=self._headers)
+            resp = self._http.get(f"{API_BASE}/{method}", params=params, headers=self._headers)
         except httpx.HTTPError as exc:
             raise SlackInboxError("SLACK_UNREACHABLE", f"连不上 Slack：{exc.__class__.__name__}") from exc
         if resp.status_code == 429:
@@ -298,6 +290,15 @@ def mpim_label(name: str, me: str) -> str:
         return name
     others = [m for m in members if m and m != me]
     return ", ".join(others or members) or name
+
+
+def _later(a: Optional[str], b: Optional[str]) -> Optional[str]:
+    """两个 ts 取更新的那个（都可能为空）。"""
+    if not a:
+        return b or None
+    if not b:
+        return a
+    return a if float(a) >= float(b) else b
 
 
 def format_ts(ts: str) -> str:
@@ -507,9 +508,32 @@ class SlackInbox:
         self._cache.put("boot", boot)
         return boot
 
+    def _thread_read(self, channel_id: str, thread_ts: str, followed: Optional[Dict[str, Any]],
+                     local: Optional[Dict[tuple, str]] = None) -> Optional[str]:
+        """thread 的已读位置：Slack 记的（只有我参与的 thread 才有）和 momo 本地记的，取更新的。"""
+        local_ts = (local or {}).get((channel_id, thread_ts)) if local is not None else self.db.read_position(channel_id, thread_ts)
+        return _later((followed or {}).get("last_read"), local_ts)
+
+    def _thread_unread_counts(self) -> Tuple[Dict[str, int], Dict[str, int]]:
+        """按频道数我参与的 thread 里有几个有新回复、几个新回复里 @了我（已结合本地已读）。"""
+        local = self.db.read_positions()
+        me = self.auth().get("user_id", "")
+        unreads: Dict[str, int] = {}
+        mentions: Dict[str, int] = {}
+        for (cid, ts), f in self._followed_threads().items():
+            read = self._thread_read(cid, ts, f, local)
+            latest = str(f["root"].get("latest_reply") or "")
+            if not latest or float(latest) <= float(read or 0):
+                continue
+            unreads[cid] = unreads.get(cid, 0) + 1
+            if me and any(f"<@{me}" in (r.get("text") or "") for r in f["latest_replies"]
+                          if float(r.get("ts") or 0) > float(read or 0)):
+                mentions[cid] = mentions.get(cid, 0) + 1
+        return unreads, mentions
+
     def thread_badge(self) -> Dict[str, Any]:
-        threads = self._counts().get("threads") or {}
-        return {"has_unreads": bool(threads.get("has_unreads")), "mention_count": int(threads.get("mention_count") or 0)}
+        unreads, mentions = self._thread_unread_counts()
+        return {"has_unreads": bool(unreads), "mention_count": sum(mentions.values())}
 
     def conversations(self, refresh: bool = False) -> List[Dict[str, Any]]:
         counts = self._counts(refresh)
@@ -536,9 +560,8 @@ class SlackInbox:
                     counts_by_id[cid] = item
                     candidates.setdefault(cid, False)
 
-        thread_counts = counts.get("threads") or {}
-        thread_unreads = thread_counts.get("unread_count_by_channel") or {}
-        thread_mentions = thread_counts.get("mention_count_by_channel") or {}
+        thread_unreads, thread_mentions = self._thread_unread_counts()
+        local_reads = self.db.read_positions()
         result = []
         for cid, is_open in candidates.items():
             item = counts_by_id.get(cid, {})
@@ -551,16 +574,19 @@ class SlackInbox:
             # 私信：Slack 侧栏里打开着的都显示；没打开的只显示最近有往来的
             if info["kind"] in {"im", "mpim"} and not is_open and latest_f < cutoff:
                 continue
-            last_read = str(item.get("last_read") or "")
+            slack_read = str(item.get("last_read") or "")
+            # Slack 只读：已读位置取 Slack 的和 momo 本地的里更新的那个；本地看到最新了就不算未读
+            last_read = _later(slack_read if TS_RE.match(slack_read) else None, local_reads.get((cid, "")))
+            read_all = bool(last_read) and latest_f > 0 and latest_f <= float(last_read)
             entry = {
                 "id": cid,
                 "kind": info["kind"],
                 "name": info["name"],
                 "latest_ts": latest if latest_f else None,
                 "latest_time": format_ts(latest) if latest_f else "",
-                "last_read": last_read if TS_RE.match(last_read) else None,
-                "has_unreads": bool(item.get("has_unreads")),
-                "mention_count": int(item.get("mention_count") or 0),
+                "last_read": last_read,
+                "has_unreads": bool(item.get("has_unreads")) and not read_all,
+                "mention_count": 0 if read_all else int(item.get("mention_count") or 0),
                 "thread_unreads": int(thread_unreads.get(cid) or 0),
                 "thread_mentions": int(thread_mentions.get(cid) or 0),
             }
@@ -804,7 +830,7 @@ class SlackInbox:
         followed = self._followed_threads().get((channel_id, thread_ts))
         return {
             "messages": [self.normalize_message(channel_id, m) for m in collected],
-            "last_read": (followed or {}).get("last_read") or None,
+            "last_read": self._thread_read(channel_id, thread_ts, followed),
         }
 
     def _recent_raw(self, channel_id: str, limit: int) -> List[Dict[str, Any]]:
@@ -840,8 +866,9 @@ class SlackInbox:
     def _thread_entry(self, channel_id: str, root: Dict[str, Any], followed: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         msg = self.normalize_message(channel_id, root)
         latest = str(root.get("latest_reply") or "")
-        last_read = (followed or {}).get("last_read")
-        unread = bool(followed) and bool(latest) and float(latest) > float(last_read or 0)
+        last_read = self._thread_read(channel_id, msg["ts"], followed)
+        # 只有我参与的、或在 momo 里看过的 thread 才知道读到哪了
+        unread = bool(last_read) and bool(latest) and float(latest) > float(last_read)
         new_replies = [
             self.normalize_message(channel_id, r)
             for r in (followed or {}).get("latest_replies", [])
@@ -893,32 +920,19 @@ class SlackInbox:
         items.sort(key=lambda t: -float(t["latest_reply"] or t["thread_ts"]))
         return {"threads": items[:30]}
 
-    # -- 已读（只改我自己的已读位置）
+    # -- 已读：只记在 momo 本地，从不改 Slack
 
     def mark_conversation(self, channel_id: str, ts: str) -> Dict[str, Any]:
         self._require_conversation(channel_id)
         if not TS_RE.match(ts or ""):
             raise SlackInboxError("BAD_TS", "ts 格式不对", 400)
-        current = next((c for c in self.conversations() if c["id"] == channel_id), {})
-        if current.get("last_read") and float(ts) <= float(current["last_read"]):
-            return {"ok": True, "marked": False}  # 不往回退已读位置
-        self.client().call("conversations.mark", channel=channel_id, ts=ts)
-        self._cache.pop("counts")
-        return {"ok": True, "marked": True}
+        return {"ok": True, "marked": self.db.mark_read(channel_id, ts)}
 
     def mark_thread(self, channel_id: str, thread_ts: str, ts: str) -> Dict[str, Any]:
         self._require_conversation(channel_id)
         if not TS_RE.match(thread_ts or "") or not TS_RE.match(ts or ""):
             raise SlackInboxError("BAD_TS", "ts 格式不对", 400)
-        followed = self._followed_threads().get((channel_id, thread_ts))
-        if not followed:
-            return {"ok": True, "marked": False}  # 没参与的 thread Slack 不记已读
-        if followed["last_read"] and float(ts) <= float(followed["last_read"]):
-            return {"ok": True, "marked": False}
-        self.client().call("subscriptions.thread.mark", channel=channel_id, thread_ts=thread_ts, ts=ts, read="1")
-        self._cache.pop("thread_view")
-        self._cache.pop("counts")
-        return {"ok": True, "marked": True}
+        return {"ok": True, "marked": self.db.mark_read(channel_id, ts, thread_ts)}
 
     # -- 附件
 
