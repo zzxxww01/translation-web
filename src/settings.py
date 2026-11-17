@@ -80,6 +80,11 @@ class Settings(BaseSettings):
     # 文章库的文章清单（含自动生成的中文标题和摘要）
     substack_library_file: str = "data/substack_library.json"
 
+    # Slack 收件箱（只读）：个人网页会话凭证（xoxc token + d cookie）和用户名/附件缓存
+    slack_credentials_file: str = "data/slack_credentials.json"
+    slack_cache_dir: str = "data/slack_cache"
+    slack_dm_recent_days: int = 30
+
     # Translation
     default_context_window: int = 5
     default_translation_style: str = "natural_professional"

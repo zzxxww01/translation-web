@@ -41,6 +41,7 @@ from .routers import (
     quality_report,
     segmentation,
     slack,
+    slack_inbox,
     substack,
     tasks,
     tools,
@@ -86,6 +87,7 @@ app.include_router(projects.router, prefix="/api", tags=["projects"])
 app.include_router(image_cleanup.router, prefix="/api", tags=["image-cleanup"])
 app.include_router(quality_report.router, tags=["quality-report"])
 app.include_router(slack.router, prefix="/api", tags=["slack"])
+app.include_router(slack_inbox.router, prefix="/api", tags=["slack-inbox"])
 app.include_router(tools.router, prefix="/api", tags=["tools"])
 app.include_router(tasks.router, prefix="/api", tags=["tasks"])
 app.include_router(consistency.router, prefix="/api", tags=["consistency"])
