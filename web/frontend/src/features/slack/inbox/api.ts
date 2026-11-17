@@ -2,7 +2,7 @@ import { apiClient } from '@/shared/api/client';
 import { API_BASE } from '@/shared/constants';
 import type {
   SlackAgentContext, SlackConversationList, SlackMessagePage, SlackReplies, SlackStatus, SlackThread,
-  SlackThreadSummary,
+  SlackDigestSection, SlackSearchResponse, SlackThreadSummary,
 } from './types';
 
 // 后端只读：查询、导出、保存凭证，加上推进我自己的已读位置；没有任何往 Slack 发送的接口
@@ -54,6 +54,12 @@ export const slackInboxApi = {
     apiClient.get<SlackThreadSummary>(`/slack-inbox/conversations/${channelId}/threads/${threadTs}/summary`, {
       retry: false, timeout: 180_000,
     }),
+
+  digest: () =>
+    apiClient.get<{ sections: SlackDigestSection[] }>('/slack-inbox/digest', { retry: false, timeout: 300_000 }),
+
+  search: (q: string) =>
+    apiClient.get<SlackSearchResponse>('/slack-inbox/search', { params: { q }, retry: false, timeout: 180_000 }),
 
   exportUrl: (channelId: string, format: 'md' | 'json') =>
     `${API_BASE}/slack-inbox/conversations/${channelId}/export?format=${format}`,

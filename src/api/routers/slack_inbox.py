@@ -7,6 +7,7 @@ Slack 收件箱：展示「我」所在的频道、私信和 thread，支持附�
 
 from __future__ import annotations
 
+import asyncio
 import json
 from functools import lru_cache
 from pathlib import Path
@@ -227,3 +228,51 @@ async def thread_summary(request: Request, channel_id: str, thread_ts: str):
     ctx = await _run(get_slack_inbox().agent_context, channel_id, thread_ts)
     key = f"{channel_id}:{thread_ts}:{ctx['latest_ts']}"
     return await _run_ai(get_slack_ai().summary(key, ctx["markdown"]), "Slack thread 摘要")
+
+
+DIGEST_CONCURRENCY = 3
+
+
+@router.get("/digest")
+@limiter.limit("10/minute")
+async def unread_digest(request: Request):
+    """AI 速览：每个有未读的会话 / thread 一段中文摘要。只读，不标已读。单段失败不影响其他段。"""
+    sections = await _run(get_slack_inbox().unread_material)
+    ai = get_slack_ai()
+    gate = asyncio.Semaphore(DIGEST_CONCURRENCY)
+
+    async def one(section):
+        conv = section["conversation"]
+        where = ("#" if conv["kind"] in {"channel", "private"} else "私信 · ") + conv["name"]
+        if section["thread_ts"]:
+            where += " 里的一个 thread（根消息：" + (section["root"]["text"] or "")[:80].replace("\n", " ") + "）"
+        key = f"{conv['id']}:{section['thread_ts'] or ''}:{section['last_read']}:{section['messages'][-1]['ts']}"
+        out = {
+            "conversation_id": conv["id"],
+            "name": conv["name"],
+            "kind": section["kind"],
+            "thread_ts": section["thread_ts"],
+            "unread_count": len(section["messages"]),
+            "mentions_me": any(m["mentions_me"] for m in section["messages"]),
+            "latest_ts": section["messages"][-1]["ts"],
+        }
+        async with gate:
+            try:
+                out.update(await ai.digest(key, where, section["messages"]))
+            except Exception as exc:  # noqa: BLE001 - 一段失败只在这一段显示
+                out["error"] = f"这段没能总结：{exc.__class__.__name__}"
+        return out
+
+    results = await asyncio.gather(*(one(sec) for sec in sections))
+    # @我的、有待办的排前面，其余按最新消息
+    results.sort(key=lambda r: (not (r["mentions_me"] or r.get("todo_for_me")), -float(r["latest_ts"])))
+    return {"sections": results}
+
+
+@router.get("/search")
+@limiter.limit("30/minute")
+async def search_messages(request: Request, q: str = Query(..., min_length=1, max_length=200)):
+    """中文搜索词先由 AI 改写成英文关键词，再用 Slack 自己的搜索（只读）。"""
+    english = await _run_ai(get_slack_ai().search_query(q), "Slack 搜索词改写")
+    result = await _run(get_slack_inbox().search, english)
+    return {**result, "input": q}

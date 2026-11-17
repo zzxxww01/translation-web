@@ -8,6 +8,8 @@ import { useSlackConversations, useSlackStatus } from './inbox/hooks';
 import { parseSlackView, type SlackView } from './inbox/lib';
 import { Sidebar, type OpenThread } from './inbox/Sidebar';
 import { ThreadPanel } from './inbox/ThreadPanel';
+import { DigestView } from './inbox/DigestView';
+import { SearchView } from './inbox/SearchView';
 import { ThreadsView } from './inbox/ThreadsView';
 import { ReplyWorkbench } from './ReplyWorkbench';
 
@@ -41,7 +43,12 @@ export function SlackFeature() {
     setParams(p, { replace: true });
   };
   const selectConversation = (id: string) => update({ c: id, view: null, tc: null, t: null, ai: null });
-  const selectView = (v: SlackView) => update({ view: v, c: null, tc: null, t: null });
+  const selectView = (v: SlackView) => update({ view: v, c: null, tc: null, t: null, q: null });
+  const search = (q: string) => update({ view: 'search', q, c: null, tc: null, t: null });
+  const searchQuery = params.get('q') ?? '';
+  // 速览 / 搜索结果里点一条：去对应会话，thread 的话右栏同时打开
+  const openFrom = (channelId: string, threadTs: string | null) =>
+    update({ c: channelId, view: null, q: null, ai: null, tc: threadTs ? channelId : null, t: threadTs });
   const showThread = (thread: OpenThread) => {
     // 从侧栏或 Threads 页点 thread：中栏切到它所在的频道（Threads 页保持不动），右栏打开 thread
     const keepThreadsView = view === 'threads';
@@ -49,7 +56,7 @@ export function SlackFeature() {
   };
   const closeThread = () => update({ tc: null, t: null });
   const aiOpen = params.get('ai') === '1';
-  const back = () => update({ c: null, view: null, tc: null, t: null });
+  const back = () => update({ c: null, view: null, tc: null, t: null, q: null });
 
   if (status.isLoading) {
     return <div className="flex h-full items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-text-muted" /></div>;
@@ -85,6 +92,7 @@ export function SlackFeature() {
           onSelectConversation={selectConversation}
           onSelectView={selectView}
           onOpenThread={showThread}
+          onSearch={search}
         />
       </aside>
 
@@ -94,6 +102,10 @@ export function SlackFeature() {
       )}>
         {view === 'reply' ? (
           <div className="min-h-0 flex-1 overflow-auto"><ReplyWorkbench /></div>
+        ) : view === 'digest' ? (
+          <DigestView onOpen={openFrom} onBack={back} />
+        ) : view === 'search' ? (
+          <SearchView key={searchQuery} query={searchQuery} onSearch={search} onOpen={openFrom} onBack={back} />
         ) : view === 'threads' ? (
           <ThreadsView conversations={conversations} openThread={openThread} onOpenThread={showThread} onBack={back} />
         ) : selected ? (

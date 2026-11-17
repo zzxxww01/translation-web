@@ -53,6 +53,8 @@ it('splits the sidebar into channels and DMs', () => {
 it('only accepts known middle-pane views', () => {
   expect(parseSlackView('threads')).toBe('threads');
   expect(parseSlackView('reply')).toBe('reply');
+  expect(parseSlackView('digest')).toBe('digest');
+  expect(parseSlackView('search')).toBe('search');
   expect(parseSlackView('channels')).toBeNull();
   expect(parseSlackView(null)).toBeNull();
 });

@@ -35,7 +35,14 @@ URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`�
   `ZH_PROMPT_VERSION` 加一，旧缓存自然失效。
 - 侧栏 thread / 私信行尾显示 agent 状态：转圈 = 在跑，橙点 = 等你确认，红 ! = 出错，✨ = 已处理（需登录 Claude 页）。
 
-后续：AI 速览、搜索。
+## AI 速览和搜索
+
+- **AI 速览**（侧栏「AI 速览」，`GET /api/slack-inbox/digest`）：每个有未读的会话、每个有新回复的 thread 一段——一句话总结、
+  最多 5 条要点、「要你做」。@我 / 有待办的排前面。只读，不标已读；按（会话、thread、已读位置、最新消息）缓存，
+  3 段并行，单段失败只在那一段显示。
+- **搜索**（侧栏搜索框，`GET /api/slack-inbox/search?q=`）：带中文时 AI 先改写成 2–5 个英文关键词（缓存），再调
+  Slack 的 `search.messages`（只读白名单），按时间倒序 30 条。能在 momo 打开的会话直接跳过去（thread 回复同时开右栏），
+  其余在 Slack 里打开。
 
 ## 接入方式
 
@@ -59,7 +66,7 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 `src/services/slack_inbox.py`：
 
 - `ALLOWED_METHODS` 只读白名单：`auth.test`、`client.counts`、`client.userBoot`、`conversations.info/history/replies`、
-  `subscriptions.thread.getView`、`users.info`。
+  `search.messages`、`subscriptions.thread.getView`、`users.info`。
 - `MARK_METHODS`：`conversations.mark`、`subscriptions.thread.mark`——在 momo 里看过的会话/thread 同步标成 Slack 已读
   （2026-11-17 用户确认要同步）。只推进「我」自己的已读位置，后端拒绝往回退；不发送、不修改任何消息，别人不可见。
 - 白名单外的方法直接抛错（有单测锁定，发送类方法永远不加）。附件只从 `*.slack.com` 下载。
@@ -86,6 +93,8 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | POST | `/ai/translate` | `{"texts": [...]}` 逐条中文（不需要翻的为 null） |
 | POST | `/ai/titles` | `{"items": {thread_ts: 根消息}}` 中文短标题 |
 | GET | `/conversations/{id}/threads/{ts}/summary` | thread 中文摘要 |
+| GET | `/digest` | AI 速览（未读按会话 / thread 中文总结） |
+| GET | `/search?q=` | 搜索（中文先改写成英文关键词） |
 | POST | `/conversations/{id}/mark` | `{"ts"}` 标记会话已读（只前进） |
 | POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 标记 thread 已读（只对我参与的 thread） |
 | GET | `/conversations/{id}/export?format=md\|json` | 导出最近 200 条（含 thread） |
