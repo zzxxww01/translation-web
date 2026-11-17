@@ -1,7 +1,8 @@
 """
-Slack 收件箱（只读）：展示「我」所在的频道和最近有往来的私信，支持附件下载和导出。
+Slack 收件箱：展示「我」所在的频道、私信和 thread，支持附件下载和导出。
 
-只读：后端只调白名单里的查询接口，不发送、不标记已读。见 src/services/slack_inbox.py。
+只读：后端只调白名单里的查询接口，从不发送。唯一的写操作是把我自己的已读位置往前推
+（和在 Slack 里看过一样）。见 src/services/slack_inbox.py。
 """
 
 from __future__ import annotations
@@ -74,7 +75,35 @@ async def save_credentials(request: Request, body: SlackCredentialsRequest):
 
 @router.get("/conversations")
 async def list_conversations(refresh: bool = False):
-    return {"conversations": await _run(get_slack_inbox().conversations, refresh)}
+    inbox = get_slack_inbox()
+    conversations = await _run(inbox.conversations, refresh)
+    return {"conversations": conversations, "threads": await _run(inbox.thread_badge)}
+
+
+@router.get("/threads")
+async def list_followed_threads():
+    return await _run(get_slack_inbox().threads)
+
+
+@router.get("/conversations/{channel_id}/threads")
+async def list_channel_threads(channel_id: str):
+    return await _run(get_slack_inbox().channel_threads, channel_id)
+
+
+class SlackMarkRequest(BaseModel):
+    ts: str = Field(..., min_length=1, max_length=32)
+
+
+@router.post("/conversations/{channel_id}/mark")
+@limiter.limit("60/minute")
+async def mark_conversation(request: Request, channel_id: str, body: SlackMarkRequest):
+    return await _run(get_slack_inbox().mark_conversation, channel_id, body.ts)
+
+
+@router.post("/conversations/{channel_id}/threads/{thread_ts}/mark")
+@limiter.limit("60/minute")
+async def mark_thread(request: Request, channel_id: str, thread_ts: str, body: SlackMarkRequest):
+    return await _run(get_slack_inbox().mark_thread, channel_id, thread_ts, body.ts)
 
 
 @router.get("/conversations/{channel_id}/messages")
