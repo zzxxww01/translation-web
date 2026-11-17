@@ -15,6 +15,7 @@ def load_config(monkeypatch):
     monkeypatch.setenv("VECTORENGINE_API_KEY", "test-relay-key")
     monkeypatch.setenv("GEMINI_API_KEY", "test-official-key")
     monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setenv("OPENAI_API_KEY", "test-openai-key")
     return ConfigLoader(str(ROOT / "config/llm_providers.yaml")).load()
 
 
