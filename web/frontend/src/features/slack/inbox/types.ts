@@ -17,8 +17,37 @@ export interface SlackConversation {
   name: string;
   latest_ts: string | null;
   latest_time: string;
+  /** Slack 记录的我在这个会话里读到的位置；画「新消息」线用 */
+  last_read: string | null;
   has_unreads: boolean;
   mention_count: number;
+  thread_unreads: number;
+  thread_mentions: number;
+}
+
+export interface SlackThreadBadge {
+  has_unreads: boolean;
+  mention_count: number;
+}
+
+export interface SlackConversationList {
+  conversations: SlackConversation[];
+  threads: SlackThreadBadge;
+}
+
+export interface SlackThread {
+  channel_id: string;
+  thread_ts: string;
+  root: SlackMessage;
+  reply_count: number;
+  latest_reply: string | null;
+  latest_time: string;
+  last_read: string | null;
+  /** 我参与（订阅）了这个 thread；只有参与的 thread Slack 才记已读 */
+  following: boolean;
+  has_unreads: boolean;
+  mentions_me: boolean;
+  latest_replies: SlackMessage[];
 }
 
 export type SlackSegment =
@@ -46,6 +75,8 @@ export interface SlackMessage {
   time: string;
   user_id: string;
   user_name: string;
+  is_me: boolean;
+  mentions_me: boolean;
   subtype: string | null;
   segments: SlackSegment[];
   text: string;
@@ -62,4 +93,9 @@ export interface SlackMessage {
 export interface SlackMessagePage {
   messages: SlackMessage[];
   next_cursor: string | null;
+}
+
+export interface SlackReplies {
+  messages: SlackMessage[];
+  last_read: string | null;
 }

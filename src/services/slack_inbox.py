@@ -1,12 +1,13 @@
 """
-Slack 收件箱（只读）。
+Slack 收件箱。
 
 用个人网页会话凭证（xoxc token + d cookie）读取「我」所在的频道和私信，
 给前端 Slack 页展示。企业版工作区禁用了 conversations.list / users.conversations，
-会话清单只能从 client.counts（网页端自己用的接口）拿。
+会话清单从网页端自己用的 client.userBoot（侧栏）+ client.counts（未读数）拿。
 
-只读是硬约束：所有 API 调用都过 ALLOWED_METHODS 白名单，白名单外的方法直接抛错；
-不调 conversations.mark，所以不会改变 Slack 里的已读状态。凭证只发给 slack.com。
+只读是硬约束：所有 API 调用都过白名单，白名单外的方法直接抛错。唯一的例外是
+MARK_METHODS——把「我」的已读位置往前推，别人看不到，不发送、不修改任何消息。
+凭证只发给 slack.com。
 """
 
 from __future__ import annotations
@@ -36,10 +37,18 @@ USER_AGENT = (
 ALLOWED_METHODS = frozenset({
     "auth.test",
     "client.counts",
+    "client.userBoot",
     "conversations.info",
     "conversations.history",
     "conversations.replies",
+    "subscriptions.thread.getView",
     "users.info",
+})
+
+# 只改「我」自己的已读位置（和在 Slack 里看过一样）；不发送、不改消息，别人不可见
+MARK_METHODS = frozenset({
+    "conversations.mark",
+    "subscriptions.thread.mark",
 })
 
 # 私信只展示最近有往来的（天数可由 settings.slack_dm_recent_days 覆盖）
@@ -48,7 +57,10 @@ DM_RECENT_DAYS = 30
 HIDDEN_DM_USERS = frozenset({"USLACKBOT", "USLACK"})
 
 COUNTS_TTL_S = 30
+BOOT_TTL_S = 300
 HISTORY_TTL_S = 30
+# 侧栏展开频道时列出最近多少天有动静的 thread
+THREAD_RECENT_DAYS = 7
 AUTH_TTL_S = 600
 MAX_FILE_BYTES = 25 * 1024 * 1024
 
@@ -57,6 +69,8 @@ FILE_ID_RE = re.compile(r"^F[A-Z0-9]{6,20}$")
 TS_RE = re.compile(r"^\d{9,11}\.\d{1,6}$")
 
 _TOKEN_RE = re.compile(r"<([^<>]+)>")
+# 这些全员提醒也算「@我」
+BROADCAST_MENTIONS = ("<!here", "<!channel", "<!everyone")
 
 
 class SlackInboxError(Exception):
@@ -145,10 +159,13 @@ class SlackReadOnlyClient:
         }
 
     def call(self, method: str, **params: Any) -> Dict[str, Any]:
-        if method not in ALLOWED_METHODS:
+        if method not in ALLOWED_METHODS and method not in MARK_METHODS:
             raise SlackInboxError("METHOD_NOT_ALLOWED", f"Slack 方法 {method} 不在只读白名单里", 500)
         try:
-            resp = self._http.get(f"{API_BASE}/{method}", params=params, headers=self._headers)
+            if method in MARK_METHODS:
+                resp = self._http.post(f"{API_BASE}/{method}", data=params, headers=self._headers)
+            else:
+                resp = self._http.get(f"{API_BASE}/{method}", params=params, headers=self._headers)
         except httpx.HTTPError as exc:
             raise SlackInboxError("SLACK_UNREACHABLE", f"连不上 Slack：{exc.__class__.__name__}") from exc
         if resp.status_code == 429:
@@ -246,6 +263,18 @@ def segments_to_plain(segments: List[Dict[str, str]]) -> str:
     return "".join(parts)
 
 
+def mpim_label(name: str, me: str) -> str:
+    """群聊私信名：「Group messaging with: @a @b @me」或「mpdm-a--b--me-1」→「a, b」（去掉自己）。"""
+    if name.lower().startswith("group messaging with:"):
+        members = [m.lstrip("@") for m in name.split(":", 1)[1].split()]
+    elif name.startswith("mpdm-"):
+        members = re.sub(r"-\d+$", "", name[len("mpdm-"):]).split("--")
+    else:
+        return name
+    others = [m for m in members if m and m != me]
+    return ", ".join(others or members) or name
+
+
 def format_ts(ts: str) -> str:
     try:
         return time.strftime("%Y-%m-%d %H:%M", time.localtime(float(ts)))
@@ -275,6 +304,10 @@ class _TTLCache:
                 oldest = sorted(self._data.items(), key=lambda kv: kv[1][0])[:100]
                 for k, _ in oldest:
                     self._data.pop(k, None)
+
+    def pop(self, key: Any) -> None:
+        with self._lock:
+            self._data.pop(key, None)
 
     def clear(self) -> None:
         with self._lock:
@@ -395,11 +428,8 @@ class SlackInbox:
 
     # -- 会话
 
-    def _conversation_info(self, channel_id: str) -> Dict[str, Any]:
-        cached = self._conv_info.get(channel_id)
-        if cached:
-            return cached
-        ch = self.client().call("conversations.info", channel=channel_id).get("channel", {})
+    def _remember_conversation(self, ch: Dict[str, Any]) -> Dict[str, Any]:
+        channel_id = ch.get("id", "")
         if ch.get("is_im"):
             kind = "im"
         elif ch.get("is_mpim"):
@@ -414,46 +444,107 @@ class SlackInbox:
             self._conv_info[channel_id] = info
         return info
 
-    def conversations(self, refresh: bool = False) -> List[Dict[str, Any]]:
+    def _conversation_info(self, channel_id: str) -> Dict[str, Any]:
+        cached = self._conv_info.get(channel_id)
+        if cached:
+            return cached
+        ch = self.client().call("conversations.info", channel=channel_id).get("channel", {})
+        return self._remember_conversation({**ch, "id": channel_id})
+
+    def _counts(self, refresh: bool = False) -> Dict[str, Any]:
         counts = None if refresh else self._cache.get("counts", COUNTS_TTL_S)
         if counts is None:
-            counts = self.client().call("client.counts")
+            counts = self.client().call("client.counts", thread_counts_by_channel="true")
             self._cache.put("counts", counts)
+        return counts
+
+    def _boot(self, refresh: bool = False) -> Dict[str, Any]:
+        """网页端加载侧栏用的数据（完整频道列表、打开的私信）。拿不到就返回 {}，只靠 client.counts。"""
+        cached = None if refresh else self._cache.get("boot", BOOT_TTL_S)
+        if cached is not None:
+            return cached
+        try:
+            data = self.client().call("client.userBoot")
+        except SlackInboxError as exc:
+            if exc.code in {"CREDENTIALS_EXPIRED", "CREDENTIALS_MISSING", "RATE_LIMITED"}:
+                raise
+            logger.warning("client.userBoot 不可用，会话列表只用 client.counts：%s", exc.message)
+            data = {}
+        boot = {"channels": data.get("channels") or [], "ims": data.get("ims") or [], "is_open": data.get("is_open")}
+        self._cache.put("boot", boot)
+        return boot
+
+    def thread_badge(self) -> Dict[str, Any]:
+        threads = self._counts().get("threads") or {}
+        return {"has_unreads": bool(threads.get("has_unreads")), "mention_count": int(threads.get("mention_count") or 0)}
+
+    def conversations(self, refresh: bool = False) -> List[Dict[str, Any]]:
+        counts = self._counts(refresh)
+        boot = self._boot(refresh)
         me = self.auth().get("user_id", "")
         cutoff = self._now() - self.dm_recent_days * 86400
-        result = []
+        open_ids = set(boot["is_open"] or [])
+
+        # 候选会话：侧栏里的频道 + 打开着的私信，再补上 client.counts 里有动静的
+        candidates: Dict[str, bool] = {}  # id -> 是否在 Slack 侧栏里打开着
+        for ch in boot["channels"] + boot["ims"]:
+            cid = ch.get("id", "")
+            if not CONVERSATION_ID_RE.match(cid) or ch.get("is_archived"):
+                continue
+            info = self._remember_conversation(ch)
+            is_open = info["kind"] in {"channel", "private"} or ch.get("is_open") or cid in open_ids
+            if is_open:
+                candidates[cid] = True
+        counts_by_id: Dict[str, Dict[str, Any]] = {}
         for group in ("channels", "mpims", "ims"):
             for item in counts.get(group, []) or []:
                 cid = item.get("id", "")
-                if not CONVERSATION_ID_RE.match(cid):
+                if CONVERSATION_ID_RE.match(cid):
+                    counts_by_id[cid] = item
+                    candidates.setdefault(cid, False)
+
+        thread_counts = counts.get("threads") or {}
+        thread_unreads = thread_counts.get("unread_count_by_channel") or {}
+        thread_mentions = thread_counts.get("mention_count_by_channel") or {}
+        result = []
+        for cid, is_open in candidates.items():
+            item = counts_by_id.get(cid, {})
+            latest = str(item.get("latest") or "0")
+            try:
+                latest_f = float(latest)
+            except ValueError:
+                latest_f = 0.0
+            info = self._conversation_info(cid)
+            # 私信：Slack 侧栏里打开着的都显示；没打开的只显示最近有往来的
+            if info["kind"] in {"im", "mpim"} and not is_open and latest_f < cutoff:
+                continue
+            last_read = str(item.get("last_read") or "")
+            entry = {
+                "id": cid,
+                "kind": info["kind"],
+                "name": info["name"],
+                "latest_ts": latest if latest_f else None,
+                "latest_time": format_ts(latest) if latest_f else "",
+                "last_read": last_read if TS_RE.match(last_read) else None,
+                "has_unreads": bool(item.get("has_unreads")),
+                "mention_count": int(item.get("mention_count") or 0),
+                "thread_unreads": int(thread_unreads.get(cid) or 0),
+                "thread_mentions": int(thread_mentions.get(cid) or 0),
+            }
+            if info["kind"] == "mpim":
+                entry["name"] = mpim_label(info["name"], self.auth().get("user", ""))
+            if info["kind"] == "im":
+                peer = info["user"]
+                if peer in HIDDEN_DM_USERS or peer == me:
                     continue
-                latest = str(item.get("latest") or "0")
-                try:
-                    latest_f = float(latest)
-                except ValueError:
-                    latest_f = 0.0
-                info = self._conversation_info(cid)
-                if info["kind"] in {"im", "mpim"} and latest_f < cutoff:
+                user = self.user(peer)
+                if user.get("is_bot"):
                     continue
-                entry = {
-                    "id": cid,
-                    "kind": info["kind"],
-                    "name": info["name"],
-                    "latest_ts": latest if latest_f else None,
-                    "latest_time": format_ts(latest) if latest_f else "",
-                    "has_unreads": bool(item.get("has_unreads")),
-                    "mention_count": int(item.get("mention_count") or 0),
-                }
-                if info["kind"] == "im":
-                    peer = info["user"]
-                    if peer in HIDDEN_DM_USERS or peer == me:
-                        continue
-                    user = self.user(peer)
-                    if user.get("is_bot"):
-                        continue
-                    entry["name"] = user.get("real_name") or user.get("name") or peer
-                result.append(entry)
-        result.sort(key=lambda e: (e["kind"] not in {"channel", "private"}, -float(e["latest_ts"] or 0)))
+                entry["name"] = user.get("real_name") or user.get("name") or peer
+            result.append(entry)
+        # 和 Slack 侧栏一样：频道按名字排，私信按最近消息排
+        result.sort(key=lambda e: (0, e["name"].lower(), 0.0) if e["kind"] in {"channel", "private"}
+                    else (1, "", -float(e["latest_ts"] or 0)))
         return result
 
     def _require_conversation(self, channel_id: str) -> None:
@@ -505,11 +596,15 @@ class SlackInbox:
                 "text": _unescape(a.get("text") or ""),
             })
         thread_ts = msg.get("thread_ts")
+        me = self.auth().get("user_id", "")
+        raw_text = msg.get("text") or ""
         return {
             "ts": ts,
             "time": format_ts(ts),
             "user_id": user_id,
             "user_name": sender,
+            "is_me": bool(me) and user_id == me,
+            "mentions_me": bool(me) and (f"<@{me}" in raw_text or any(t in raw_text for t in BROADCAST_MENTIONS)),
             "subtype": msg.get("subtype"),
             "segments": segments,
             "text": segments_to_plain(segments),
@@ -523,9 +618,7 @@ class SlackInbox:
             "permalink": self._permalink(channel_id, ts, thread_ts),
         }
 
-    def messages(self, channel_id: str, limit: int = 50, cursor: Optional[str] = None) -> Dict[str, Any]:
-        self._require_conversation(channel_id)
-        limit = max(1, min(int(limit), 200))
+    def _history(self, channel_id: str, limit: int, cursor: Optional[str] = None) -> Dict[str, Any]:
         key = ("history", channel_id, limit, cursor or "")
         data = self._cache.get(key, HISTORY_TTL_S)
         if data is None:
@@ -534,6 +627,12 @@ class SlackInbox:
                 params["cursor"] = cursor
             data = self.client().call("conversations.history", **params)
             self._cache.put(key, data)
+        return data
+
+    def messages(self, channel_id: str, limit: int = 50, cursor: Optional[str] = None) -> Dict[str, Any]:
+        self._require_conversation(channel_id)
+        limit = max(1, min(int(limit), 200))
+        data = self._history(channel_id, limit, cursor)
         msgs = [self.normalize_message(channel_id, m) for m in data.get("messages", [])]
         next_cursor = (data.get("response_metadata") or {}).get("next_cursor") or None
         return {"messages": msgs, "next_cursor": next_cursor if data.get("has_more") else None}
@@ -557,7 +656,120 @@ class SlackInbox:
                 if not data.get("has_more") or not cursor:
                     break
             self._cache.put(key, collected)
-        return {"messages": [self.normalize_message(channel_id, m) for m in collected]}
+        followed = self._followed_threads().get((channel_id, thread_ts))
+        return {
+            "messages": [self.normalize_message(channel_id, m) for m in collected],
+            "last_read": (followed or {}).get("last_read") or None,
+        }
+
+    # -- thread
+
+    def _followed_threads(self) -> Dict[Tuple[str, str], Dict[str, Any]]:
+        """我参与（订阅）的 thread：(频道, thread_ts) -> 原始条目，带 Slack 记录的 thread 已读位置。"""
+        cached = self._cache.get("thread_view", COUNTS_TTL_S)
+        if cached is None:
+            try:
+                data = self.client().call("subscriptions.thread.getView", limit=50, org_wide_aware="true")
+            except SlackInboxError as exc:
+                if exc.code in {"CREDENTIALS_EXPIRED", "CREDENTIALS_MISSING", "RATE_LIMITED"}:
+                    raise
+                logger.warning("subscriptions.thread.getView 不可用：%s", exc.message)
+                data = {}
+            cached = {}
+            for item in data.get("threads") or []:
+                root = item.get("root_msg") or {}
+                cid, ts = root.get("channel") or "", str(root.get("thread_ts") or root.get("ts") or "")
+                if CONVERSATION_ID_RE.match(cid) and TS_RE.match(ts):
+                    cached[(cid, ts)] = {
+                        "root": root,
+                        "last_read": str(root.get("last_read") or "") or None,
+                        "latest_replies": item.get("latest_replies") or [],
+                    }
+            self._cache.put("thread_view", cached)
+        return cached
+
+    def _thread_entry(self, channel_id: str, root: Dict[str, Any], followed: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        msg = self.normalize_message(channel_id, root)
+        latest = str(root.get("latest_reply") or "")
+        last_read = (followed or {}).get("last_read")
+        unread = bool(followed) and bool(latest) and float(latest) > float(last_read or 0)
+        new_replies = [
+            self.normalize_message(channel_id, r)
+            for r in (followed or {}).get("latest_replies", [])
+            if float(r.get("ts") or 0) > float(last_read or 0)
+        ]
+        return {
+            "channel_id": channel_id,
+            "thread_ts": msg["ts"],
+            "root": msg,
+            "reply_count": msg["reply_count"],
+            "latest_reply": latest or None,
+            "latest_time": format_ts(latest) if latest else "",
+            "last_read": last_read,
+            "following": bool(followed),
+            "has_unreads": unread,
+            "mentions_me": (unread and msg["mentions_me"]) or any(r["mentions_me"] for r in new_replies),
+            "latest_replies": [self.normalize_message(channel_id, r) for r in (followed or {}).get("latest_replies", [])],
+        }
+
+    def threads(self) -> Dict[str, Any]:
+        """侧栏「Threads」：我参与的 thread，有新回复的排前面。"""
+        visible = {c["id"] for c in self.conversations()}
+        items = [
+            self._thread_entry(cid, f["root"], f)
+            for (cid, _), f in self._followed_threads().items()
+            if cid in visible
+        ]
+        items.sort(key=lambda t: (not t["has_unreads"], -float(t["latest_reply"] or t["thread_ts"])))
+        return {"threads": items}
+
+    def channel_threads(self, channel_id: str) -> Dict[str, Any]:
+        """侧栏展开频道：最近 THREAD_RECENT_DAYS 天有回复的 thread（最新一页消息里找 + 我参与的）。"""
+        self._require_conversation(channel_id)
+        followed = self._followed_threads()
+        cutoff = self._now() - THREAD_RECENT_DAYS * 86400
+        roots: Dict[str, Dict[str, Any]] = {}
+        for m in self._history(channel_id, 100).get("messages", []):
+            ts = str(m.get("ts") or "")
+            if m.get("reply_count") and m.get("thread_ts") == ts:
+                roots[ts] = m
+        for (cid, ts), f in followed.items():
+            if cid == channel_id:
+                roots.setdefault(ts, f["root"])
+        items = []
+        for ts, root in roots.items():
+            if float(root.get("latest_reply") or ts) < cutoff:
+                continue
+            items.append(self._thread_entry(channel_id, root, followed.get((channel_id, ts))))
+        items.sort(key=lambda t: -float(t["latest_reply"] or t["thread_ts"]))
+        return {"threads": items[:30]}
+
+    # -- 已读（只改我自己的已读位置）
+
+    def mark_conversation(self, channel_id: str, ts: str) -> Dict[str, Any]:
+        self._require_conversation(channel_id)
+        if not TS_RE.match(ts or ""):
+            raise SlackInboxError("BAD_TS", "ts 格式不对", 400)
+        current = next((c for c in self.conversations() if c["id"] == channel_id), {})
+        if current.get("last_read") and float(ts) <= float(current["last_read"]):
+            return {"ok": True, "marked": False}  # 不往回退已读位置
+        self.client().call("conversations.mark", channel=channel_id, ts=ts)
+        self._cache.pop("counts")
+        return {"ok": True, "marked": True}
+
+    def mark_thread(self, channel_id: str, thread_ts: str, ts: str) -> Dict[str, Any]:
+        self._require_conversation(channel_id)
+        if not TS_RE.match(thread_ts or "") or not TS_RE.match(ts or ""):
+            raise SlackInboxError("BAD_TS", "ts 格式不对", 400)
+        followed = self._followed_threads().get((channel_id, thread_ts))
+        if not followed:
+            return {"ok": True, "marked": False}  # 没参与的 thread Slack 不记已读
+        if followed["last_read"] and float(ts) <= float(followed["last_read"]):
+            return {"ok": True, "marked": False}
+        self.client().call("subscriptions.thread.mark", channel=channel_id, thread_ts=thread_ts, ts=ts, read="1")
+        self._cache.pop("thread_view")
+        self._cache.pop("counts")
+        return {"ok": True, "marked": True}
 
     # -- 附件
 

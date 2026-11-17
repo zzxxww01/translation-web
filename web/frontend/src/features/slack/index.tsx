@@ -1,54 +1,123 @@
 import { useSearchParams } from 'react-router-dom';
+import { Loader2, MessagesSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { InboxView } from './inbox/InboxView';
-import { SLACK_VIEWS as VIEWS, parseSlackView, type SlackView } from './inbox/lib';
+import { ConversationView } from './inbox/ConversationView';
+import { CredentialsPanel } from './inbox/CredentialsPanel';
+import { useSlackConversations, useSlackStatus } from './inbox/hooks';
+import { parseSlackView, type SlackView } from './inbox/lib';
+import { Sidebar, type OpenThread } from './inbox/Sidebar';
+import { ThreadPanel } from './inbox/ThreadPanel';
+import { ThreadsView } from './inbox/ThreadsView';
 import { ReplyWorkbench } from './ReplyWorkbench';
 
-/** Slack 页：频道、私信（只读展示 Slack 消息）和原来的回复工作台。 */
+const TS_RE = /^\d{9,11}\.\d{1,6}$/;
+
+/**
+ * Slack 页，布局照原生 Slack：左栏会话（频道可展开看 thread）、中栏消息流、右栏 thread。
+ * URL：c=会话，view=threads|reply，tc+t=右栏打开的 thread（所在会话 + thread_ts）。
+ */
 export function SlackFeature() {
   const [params, setParams] = useSearchParams();
   const view = parseSlackView(params.get('view'));
-  const selectedId = params.get('c');
+  const selectedId = view ? null : params.get('c');
+  const tc = params.get('tc');
+  const t = params.get('t');
+  const openThread: OpenThread | null = tc && t && TS_RE.test(t) ? { channelId: tc, threadTs: t } : null;
 
-  const update = (next: { view?: SlackView; c?: string | null }) => {
+  const status = useSlackStatus();
+  const ready = !!status.data?.ok;
+  const list = useSlackConversations(ready);
+  const conversations = list.data?.conversations ?? [];
+  const selected = conversations.find(c => c.id === selectedId) ?? null;
+
+  const update = (next: Record<string, string | null>) => {
     const p = new URLSearchParams(params);
-    if (next.view) {
-      p.set('view', next.view);
-      p.delete('c');
-    }
-    if (next.c !== undefined) {
-      if (next.c) p.set('c', next.c);
-      else p.delete('c');
+    for (const [k, v] of Object.entries(next)) {
+      if (v) p.set(k, v);
+      else p.delete(k);
     }
     setParams(p, { replace: true });
   };
+  const selectConversation = (id: string) => update({ c: id, view: null, tc: null, t: null });
+  const selectView = (v: SlackView) => update({ view: v, c: null, tc: null, t: null });
+  const showThread = (thread: OpenThread) => {
+    // 从侧栏或 Threads 页点 thread：中栏切到它所在的频道（Threads 页保持不动），右栏打开 thread
+    const keepThreadsView = view === 'threads';
+    update({ tc: thread.channelId, t: thread.threadTs, ...(keepThreadsView ? {} : { c: thread.channelId, view: null }) });
+  };
+  const closeThread = () => update({ tc: null, t: null });
+  const back = () => update({ c: null, view: null, tc: null, t: null });
+
+  if (status.isLoading) {
+    return <div className="flex h-full items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-text-muted" /></div>;
+  }
+  if (status.isError) {
+    return <div className="p-6 text-sm text-error">读取 Slack 状态失败：{status.error.message}</div>;
+  }
+  if (!ready || !status.data) {
+    return <div className="h-full overflow-auto"><CredentialsPanel status={status.data} /></div>;
+  }
+
+  const hasMain = !!selected || !!view;
+  const threadChannel = openThread ? conversations.find(c => c.id === openThread.channelId) : null;
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <div className="flex shrink-0 items-center gap-1 border-b border-border-subtle px-4 sm:px-8" role="tablist" aria-label="Slack 子页面">
-        {VIEWS.map(v => (
-          <button
-            key={v.id}
-            type="button"
-            role="tab"
-            aria-selected={view === v.id}
-            onClick={() => update({ view: v.id })}
-            className={cn(
-              'relative px-3 py-2.5 text-sm transition-colors after:absolute after:inset-x-3 after:-bottom-px after:h-0.5 after:rounded-full',
-              view === v.id ? 'font-medium text-text-primary after:bg-primary-500' : 'text-text-muted hover:text-text-primary'
-            )}
-          >
-            {v.label}
-          </button>
-        ))}
-      </div>
-      <div className={cn('min-h-0 flex-1', view === 'reply' ? 'overflow-auto' : 'overflow-hidden')}>
+    <div className="flex h-full min-h-0">
+      <aside className={cn(
+        'w-full shrink-0 flex-col border-r border-border-subtle bg-bg-tertiary/50 md:flex md:w-64',
+        hasMain || openThread ? 'hidden' : 'flex'
+      )}>
+        <Sidebar
+          status={status.data}
+          conversations={conversations}
+          loading={list.isLoading}
+          error={list.isError ? list.error.message : null}
+          threadBadge={list.data?.threads}
+          selectedId={selectedId}
+          view={view}
+          openThread={openThread}
+          onSelectConversation={selectConversation}
+          onSelectView={selectView}
+          onOpenThread={showThread}
+        />
+      </aside>
+
+      <section className={cn(
+        'min-w-0 flex-1 flex-col',
+        openThread ? 'hidden lg:flex' : hasMain ? 'flex' : 'hidden md:flex'
+      )}>
         {view === 'reply' ? (
-          <ReplyWorkbench />
+          <div className="min-h-0 flex-1 overflow-auto"><ReplyWorkbench /></div>
+        ) : view === 'threads' ? (
+          <ThreadsView conversations={conversations} openThread={openThread} onOpenThread={showThread} onBack={back} />
+        ) : selected ? (
+          <ConversationView
+            key={selected.id}
+            conversation={selected}
+            activeThreadTs={openThread?.channelId === selected.id ? openThread.threadTs : null}
+            onOpenThread={ts => showThread({ channelId: selected.id, threadTs: ts })}
+            onBack={back}
+          />
         ) : (
-          <InboxView scope={view} selectedId={selectedId} onSelect={c => update({ c })} />
+          <div className="flex h-full flex-col items-center justify-center gap-2 text-sm text-text-muted">
+            <MessagesSquare className="h-8 w-8 opacity-40" />
+            从左侧选择一个频道、私信或 thread
+          </div>
         )}
-      </div>
+      </section>
+
+      {openThread && (
+        <aside className="flex min-w-0 flex-1 flex-col border-l border-border-subtle lg:w-[420px] lg:flex-none">
+          <ThreadPanel
+            key={`${openThread.channelId}-${openThread.threadTs}`}
+            channelId={openThread.channelId}
+            channelName={threadChannel ? `# ${threadChannel.name}` : openThread.channelId}
+            threadTs={openThread.threadTs}
+            onClose={closeThread}
+            onOpenChannel={() => selectConversation(openThread.channelId)}
+          />
+        </aside>
+      )}
     </div>
   );
 }
