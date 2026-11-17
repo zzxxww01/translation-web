@@ -80,7 +80,7 @@ export function useChannelThreads(channelId: string, enabled: boolean) {
   });
 }
 
-/** 看过就在 Slack 里标为已读（只推进我自己的已读位置，后端不会往回退）。先本地清掉未读标记，界面立即生效。 */
+/** 看过就记为已读——只记在 momo 本地，不改 Slack（只往前推，后端不会往回退）。先本地清掉未读标记，界面立即生效。 */
 export function useMarkRead() {
   const queryClient = useQueryClient();
   return useMutation({

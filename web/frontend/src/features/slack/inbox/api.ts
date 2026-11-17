@@ -5,7 +5,7 @@ import type {
   SlackDigestSection, SlackSearchResponse, SlackThreadSummary,
 } from './types';
 
-// 后端只读：查询、导出、保存凭证，加上推进我自己的已读位置；没有任何往 Slack 发送的接口
+// Slack 完全只读：查询、导出、保存凭证；「标记已读」只写 momo 本地，不碰 Slack
 export const slackInboxApi = {
   status: () => apiClient.get<SlackStatus>('/slack-inbox/status', { retry: false }),
 

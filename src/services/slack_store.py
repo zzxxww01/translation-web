@@ -41,6 +41,15 @@ CREATE TABLE IF NOT EXISTS conv_state (
     refreshed_at REAL NOT NULL DEFAULT 0  -- 上次重拉最近几天（补编辑、删除、回复数）的时间
 );
 
+-- momo 自己的已读位置（Slack 是只读的，不往回写）。thread_ts 为空串表示整个会话
+CREATE TABLE IF NOT EXISTS read_state (
+    channel_id TEXT NOT NULL,
+    thread_ts TEXT NOT NULL DEFAULT '',
+    ts TEXT NOT NULL,
+    updated_at REAL NOT NULL,
+    PRIMARY KEY (channel_id, thread_ts)
+);
+
 CREATE TABLE IF NOT EXISTS thread_state (
     channel_id TEXT NOT NULL,
     thread_ts TEXT NOT NULL,
@@ -189,6 +198,32 @@ class SlackStore:
                      fetched_at = excluded.fetched_at, full_at = excluded.full_at""",
                 (channel_id, thread_ts, state["newest_ts"], state["fetched_at"], state["full_at"]),
             )
+
+    # -- momo 本地已读
+
+    def read_position(self, channel_id: str, thread_ts: str = "") -> Optional[str]:
+        with self._lock:
+            row = self._db.execute("SELECT ts FROM read_state WHERE channel_id = ? AND thread_ts = ?",
+                                   (channel_id, thread_ts)).fetchone()
+        return row["ts"] if row else None
+
+    def read_positions(self) -> Dict[tuple, str]:
+        with self._lock:
+            rows = self._db.execute("SELECT channel_id, thread_ts, ts FROM read_state").fetchall()
+        return {(r["channel_id"], r["thread_ts"]): r["ts"] for r in rows}
+
+    def mark_read(self, channel_id: str, ts: str, thread_ts: str = "") -> bool:
+        """只往前推；返回是否真的推进了。"""
+        current = self.read_position(channel_id, thread_ts)
+        if current and _num(ts) <= _num(current):
+            return False
+        with self._lock:
+            self._db.execute(
+                """INSERT INTO read_state (channel_id, thread_ts, ts, updated_at) VALUES (?, ?, ?, ?)
+                   ON CONFLICT (channel_id, thread_ts) DO UPDATE SET ts = excluded.ts, updated_at = excluded.updated_at""",
+                (channel_id, thread_ts, ts, self._now()),
+            )
+        return True
 
     def stats(self) -> Dict[str, Any]:
         with self._lock:

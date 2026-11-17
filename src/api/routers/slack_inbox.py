@@ -1,8 +1,8 @@
 """
 Slack 收件箱：展示「我」所在的频道、私信和 thread，支持附件下载和导出。
 
-只读：后端只调白名单里的查询接口，从不发送。唯一的写操作是把我自己的已读位置往前推
-（和在 Slack 里看过一样）。见 src/services/slack_inbox.py。
+完全只读：后端只调白名单里的查询接口，不发送、不改 Slack 里的已读状态。「已读」只记在 momo 本地。
+见 src/services/slack_inbox.py。
 """
 
 from __future__ import annotations
@@ -112,6 +112,7 @@ class SlackMarkRequest(BaseModel):
     ts: str = Field(..., min_length=1, max_length=32)
 
 
+# 标记已读：只写 momo 本地的已读位置，不调 Slack
 @router.post("/conversations/{channel_id}/mark")
 @limiter.limit("60/minute")
 async def mark_conversation(request: Request, channel_id: str, body: SlackMarkRequest):
