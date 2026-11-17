@@ -2,7 +2,10 @@
 
 `gpt-6.1-sol` is an opt-in model on `openai-official`, direct to
 `https://api.openai.com/v1`. Set server-only `OPENAI_API_KEY` in the shared `.env`.
-No task, profile or phase default changes. Missing credentials fail closed.
+Default only for the `slack` task (2026-11-17, user request: everything on the
+Slack page uses official GPT Sol); every other task, profile and phase keeps its
+previous default. Missing credentials fail closed — Slack AI then errors instead
+of falling back to Gemini.
 
 The official transport uses Chat Completions, `max_completion_tokens`, and
 `store: false`. Task/phase temperature inputs are deliberately not forwarded.

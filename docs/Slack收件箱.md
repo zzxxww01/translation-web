@@ -25,6 +25,15 @@ URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`�
 - skill 源文件在仓库 `skill_runner/skills/`；`~/.agents/skills/<名字>` 软链接到 `~/skill-runner/src/skill_runner/skills/<名字>`，
   随 skill-runner 一起 `git pull` 更新。
 
+## 模型：全部走官方 GPT Sol（2026-11-17 用户要求）
+
+- 轻量 AI（消息中文、thread 标题和摘要、速览、搜索词改写）、回复工作台、私信回复（`slack-reply`）：都是 `slack` 任务，
+  默认模型 `gpt-6.1-sol`（`config/llm_providers.yaml` 的 `task_defaults.slack`，OpenAI 官方直连）。官方路由是隔离的：
+  失败只重试同一模型，不降级到 Gemini / DeepSeek；`OPENAI_API_KEY` 失效时 Slack AI 直接报错。
+- 帖子翻译助手里的 `translate-post` 和标题接口显式带 `--model gpt-6.1-sol` / `"model": "gpt-6.1-sol"`（「帖子翻译」页本身不变）。
+- 两个 agent 本身用 Codex（OpenAI 官方）跑 `gpt-6.1-sol`：前端启动时传 `harness=codex, model=gpt-6.1-sol`，`agents.json` 里也默认 codex。
+- AI 缓存键带 `CACHE_TAG`（`src/services/slack_ai.py`），换模型时改它，旧模型的结果不再复用。
+
 ## 轻量 AI：消息中文、thread 中文标题和摘要
 
 不走 agent，直接调短文本模型（`task_type="slack"`），`src/services/slack_ai.py`：

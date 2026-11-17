@@ -25,8 +25,9 @@ MAX_TEXT_CHARS = 4000
 # 每类缓存最多保留多少条，超出删最旧的一批
 CACHE_LIMIT = 20000
 TITLE_MAX_CHARS = 24
-# 改了提示词就把版本号加一，旧缓存自然失效
-ZH_PROMPT_VERSION = "zh2"
+# 改了提示词或换了模型就改这个标记，旧缓存自然失效（2026-11-17 起 Slack 全部走官方 GPT Sol）
+CACHE_TAG = "sol1"
+ZH_PROMPT_VERSION = f"zh2-{CACHE_TAG}"
 
 _URL_RE = re.compile(r"https?://\S+")
 _MENTION_RE = re.compile(r"[@#][\w.\-()（）一-鿿]+")
@@ -222,7 +223,7 @@ class SlackAI:
         for tid, text in list(items.items())[:MAX_BATCH]:
             if not (text or "").strip():
                 continue
-            key = text_key(text)
+            key = text_key(CACHE_TAG, text)
             cached = self.titles.get(key)
             if cached:
                 out[tid] = cached
@@ -234,12 +235,13 @@ class SlackAI:
             made = {k: clean_title(t) for k, t in zip(keys, parse_items(data, "title", len(sources))) if t}
             self.titles.put_many(made)
             for tid, text in items.items():
-                if tid not in out and (text or "").strip() and self.titles.get(text_key(text)):
-                    out[tid] = self.titles.get(text_key(text))
+                if tid not in out and (text or "").strip() and self.titles.get(text_key(CACHE_TAG, text)):
+                    out[tid] = self.titles.get(text_key(CACHE_TAG, text))
         return out
 
     async def summary(self, cache_key: str, thread_markdown: str) -> Dict[str, str]:
         """thread 摘要；cache_key 里带上最新回复的 ts，有新回复就重算。"""
+        cache_key = f"{CACHE_TAG}:{cache_key}"
         cached = self.summaries.get(cache_key)
         if cached:
             return cached
@@ -259,7 +261,7 @@ class SlackAI:
         query = query.strip()
         if not _CJK_RE.search(query):
             return query
-        key = text_key("q1", query)
+        key = text_key("q1", CACHE_TAG, query)
         cached = self.queries.get(key)
         if cached:
             return cached
@@ -273,6 +275,7 @@ class SlackAI:
 
     async def digest(self, cache_key: str, where: str, messages: Sequence[Dict[str, Any]]) -> Dict[str, Any]:
         """一段未读的中文速览；cache_key 里带已读位置和最新消息 ts，有变化就重算。items 的 id 换成消息 ts。"""
+        cache_key = f"{CACHE_TAG}:{cache_key}"
         cached = self.digests.get(cache_key)
         if cached:
             return cached

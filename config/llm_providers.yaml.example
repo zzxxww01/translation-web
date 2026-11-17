@@ -206,7 +206,7 @@ providers:
     - alias: gpt-6.1-sol
       real_model: gpt-6.1-sol
       name: GPT-6.1 Sol（OpenAI 官方）
-      description: 官方 OpenAI；仅显式选择使用，不改变默认模型
+      description: 官方 OpenAI；Slack 任务的默认模型，其余任务仅显式选择时使用
       priority: 1
       supports_thinking: true
       fallback: false
@@ -243,4 +243,5 @@ task_defaults:
   # argon 更快，且全部守住 20 字。Explicit user model overrides still apply.
   title: gemini-official-argon
   metadata: deepseek-v3
-  slack: gemini-pro
+  # Slack 页的所有模型调用走官方 GPT Sol（与 llm_providers.yaml 保持一致）
+  slack: gpt-6.1-sol

@@ -10,6 +10,9 @@ import type { SlackAgentContext } from '../inbox/types';
 /** thread 交给帖子翻译助手，私信交给回复助手（skill 在 skill_runner/skills/ 下）。 */
 export const SLACK_SKILLS = { thread: 'slack-post-translate', dm: 'slack-dm-reply' } as const;
 
+/** Slack 页的模型调用一律走官方 GPT Sol：agent 用 Codex（OpenAI 官方）跑 gpt-6.1-sol。 */
+export const SLACK_AGENT_RUNTIME = { harness: 'codex', model: 'gpt-6.1-sol' } as const;
+
 // 排队时隔多久再试一次（服务端同一时间只跑一个 Slack agent）
 const QUEUE_RETRY_MS = 15_000;
 
@@ -82,6 +85,7 @@ export function useSlackAgent(channelId: string, threadTs: string | null) {
         autoReplyMinutes: AUTO_REPLY_MINUTES,
         title: `Slack · ${ctx.title}`,
         source,
+        ...SLACK_AGENT_RUNTIME,
       });
       writeSeen(source, ctx.latest_ts);
       queryClient.setQueryData<RunMeta | null>(['slack-agent', source], run);

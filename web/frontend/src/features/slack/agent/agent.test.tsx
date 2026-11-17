@@ -6,12 +6,13 @@ import { chunk, hashTexts } from '../inbox/ai';
 import { agentState } from './agentRuns';
 import { ResultCards } from './ResultCards';
 import { parseResult } from './result';
-import { agentSource, SLACK_SKILLS } from './useSlackAgent';
+import { agentSource, SLACK_AGENT_RUNTIME, SLACK_SKILLS } from './useSlackAgent';
 
 it('binds one agent per thread or DM', () => {
   expect(agentSource('C123', '1794871046.243619')).toBe('slack:C123:1794871046.243619');
   expect(agentSource('D123', null)).toBe('slack:D123');
   expect(SLACK_SKILLS).toEqual({ thread: 'slack-post-translate', dm: 'slack-dm-reply' });
+  expect(SLACK_AGENT_RUNTIME).toEqual({ harness: 'codex', model: 'gpt-6.1-sol' });
 });
 
 it('only accepts known result.json shapes', () => {

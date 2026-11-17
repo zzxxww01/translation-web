@@ -15,6 +15,7 @@ def load_config(monkeypatch):
     monkeypatch.setenv("VECTORENGINE_API_KEY", "test-relay-key")
     monkeypatch.setenv("GEMINI_API_KEY", "test-official-key")
     monkeypatch.setenv("DEEPSEEK_API_KEY", "test-deepseek-key")
+    monkeypatch.setenv("OPENAI_API_KEY", "test-openai-key")
     return ConfigLoader(str(ROOT / "config/llm_providers.yaml")).load()
 
 
@@ -27,7 +28,13 @@ def task_route(monkeypatch, task):
     return [(a.provider.provider_id, a.model.real_model) for a in adapter._bounded_attempt_plan()]
 
 
-@pytest.mark.parametrize("task", ["longform", "post", "slack"])
+def test_slack_uses_only_official_gpt_sol(monkeypatch):
+    # 用户要求 Slack 页全部走官方 GPT Sol：失败时只重试同一个模型，不降级到 Gemini / DeepSeek
+    route = task_route(monkeypatch, "slack")
+    assert route and set(route) == {("openai-official", "gpt-6.1-sol")}
+
+
+@pytest.mark.parametrize("task", ["longform", "post"])
 def test_relay_flash_tasks_fall_back_to_official_flash(monkeypatch, task):
     route = task_route(monkeypatch, task)
     assert route[:2] == [("vectorengine-relay", "gemini-3.8-flash"), ("gemini-official", "gemini-3.8-flash")]

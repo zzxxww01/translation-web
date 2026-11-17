@@ -34,7 +34,7 @@ def test_catalog_and_defaults(loader):
     config = loader.load()
     assert config.task_defaults == {'longform':'gemini-flash','post':'gemini-flash',
         'post_optimize':'gemini-official-argon','analysis':'deepseek-v3','title':'gemini-official-argon',
-        'metadata':'deepseek-v3','slack':'gemini-pro'}
+        'metadata':'deepseek-v3','slack':'gpt-6.1-sol'}
     official = config.providers['openai-official']
     assert official.type == 'openai' and official.relay is False
     assert official.api_keys[0].key == 'test-not-a-secret'
