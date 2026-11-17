@@ -13,7 +13,7 @@ const navItems: NavItem[] = [
   { path: '/articles', label: '文章', icon: <Newspaper className="h-4 w-4" /> },
   { path: '/post', label: '帖子翻译', icon: <MessageSquare className="h-4 w-4" /> },
   { path: '/wechat', label: '微信排版', icon: <FileText className="h-4 w-4" /> },
-  { path: '/slack', label: 'Slack 回复', icon: <MessageCircle className="h-4 w-4" /> },
+  { path: '/slack', label: 'Slack', icon: <MessageCircle className="h-4 w-4" /> },
   { path: '/tools', label: '工具箱', icon: <Wrench className="h-4 w-4" /> },
   { path: '/skills', label: 'Agent', icon: <Sparkles className="h-4 w-4" /> },
 ];

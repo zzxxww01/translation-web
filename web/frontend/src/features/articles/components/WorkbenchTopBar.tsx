@@ -34,7 +34,7 @@ const FEATURES: { path: string; label: string; icon: LucideIcon }[] = [
   { path: '/articles', label: '文章', icon: Newspaper },
   { path: '/post', label: '帖子翻译', icon: MessageSquare },
   { path: '/wechat', label: '微信排版', icon: FileText },
-  { path: '/slack', label: 'Slack 回复', icon: MessageCircle },
+  { path: '/slack', label: 'Slack', icon: MessageCircle },
   { path: '/tools', label: '工具箱', icon: Wrench },
   { path: '/skills', label: 'Agent', icon: Sparkles },
 ];
