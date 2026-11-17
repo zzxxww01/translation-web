@@ -90,6 +90,12 @@ async def list_channel_threads(channel_id: str):
     return await _run(get_slack_inbox().channel_threads, channel_id)
 
 
+@router.get("/conversations/{channel_id}/agent-context")
+async def get_agent_context(channel_id: str, thread_ts: Optional[str] = Query(None, max_length=32)):
+    """交给 skill agent 的上下文：thread 全部消息或私信最近 30 条（Markdown + 对话历史）。"""
+    return await _run(get_slack_inbox().agent_context, channel_id, thread_ts)
+
+
 class SlackMarkRequest(BaseModel):
     ts: str = Field(..., min_length=1, max_length=32)
 

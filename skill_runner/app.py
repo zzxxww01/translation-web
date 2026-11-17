@@ -138,7 +138,11 @@ def create_app(
         return agents.build_catalog(config)
 
     @api.get("/runs")
-    async def list_runs():
+    async def list_runs(source: str = ""):
+        # 带 source 时只查这个 Slack 会话 / thread 配的 agent（最多一个）
+        if source:
+            meta = runner.find_by_source(source)
+            return [meta.to_dict()] if meta else []
         return [meta.to_dict() for meta in runner.list_runs()]
 
     @api.get("/models/{harness}")
@@ -188,12 +192,17 @@ def create_app(
         # 等确认时多少分钟没回复就自动按推荐方案继续；0 = 一直等
         auto_reply_minutes: int = Form(0, ge=0, le=1440),
         title: str = Form("", max_length=200),  # 对话标题，不给就从消息里取
+        # momo Slack 页给会话 / thread 配 agent 时传 slack:<会话>[:<thread_ts>]；同一个 source 只建一个
+        source: str = Form("", max_length=64),
         files: list[UploadFile] = File(default=[]),
     ):
         names = [f.filename for f in files if f.filename]
         if not message.strip() and not names:
             raise HTTPException(status_code=400, detail="写点说明或者附个文件")
-        meta = runner.create(skill, make_title(message, names, title), harness, auto_reply_minutes * 60, model=model)
+        if source and (existing := runner.find_by_source(source)) is not None:
+            return existing.to_dict()
+        meta = runner.create(skill, make_title(message, names, title), harness, auto_reply_minutes * 60,
+                             model=model, source=source)
         try:
             saved = await asyncio.to_thread(_save_uploads, meta.id, files)
         except HTTPException:

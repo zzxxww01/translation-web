@@ -17,6 +17,10 @@ export const skillsApi = {
   checkUpdates: () => apiClient.post<RuntimeUpdateSnapshot>('/skills/runtime/check', undefined, { retry: false, timeout: 90_000 }),
   updateRuntime: (harness: Harness) => apiClient.post<RuntimeUpdateSnapshot>(`/skills/runtime/${harness}/update`, undefined, { retry: false }),
   runs: () => apiClient.get<RunMeta[]>('/skills/runs'),
+  runBySource: (source: string) =>
+    // 旧版服务端不认 source 参数会返回全部对话，所以这里再按 source 筛一遍
+    apiClient.get<RunMeta[]>('/skills/runs', { params: { source }, retry: false })
+      .then(list => list.find(run => run.source === source) ?? null),
   files: (runId: string) => apiClient.get<RunFile[]>(`/skills/runs/${runId}/files`),
   answer: (runId: string, qid: string, payload: { answers?: Answers; response?: string }) =>
     apiClient.post<RunMeta>(`/skills/runs/${runId}/answer`, { qid, ...payload }, { retry: false }),
@@ -65,7 +69,11 @@ function postMultipart<T>(path: string, form: FormData, onProgress?: (percent: n
 export const AUTO_REPLY_MINUTES = 10;
 
 export function startRun(
-  input: { skill: string; message: string; files: File[]; harness?: Harness; model?: string; autoReplyMinutes?: number; title?: string },
+  input: {
+    skill: string; message: string; files: File[]; harness?: Harness; model?: string; autoReplyMinutes?: number; title?: string;
+    /** momo Slack 页给会话 / thread 配 agent 时传；同一个 source 服务端只建一个对话 */
+    source?: string;
+  },
   onProgress?: (percent: number) => void
 ): Promise<RunMeta> {
   const form = new FormData();
@@ -75,6 +83,7 @@ export function startRun(
   form.append('message', input.message);
   if (input.autoReplyMinutes) form.append('auto_reply_minutes', String(input.autoReplyMinutes));
   if (input.title) form.append('title', input.title);
+  if (input.source) form.append('source', input.source);
   input.files.forEach(file => form.append('files', file));
   return postMultipart<RunMeta>('/runs', form, onProgress);
 }

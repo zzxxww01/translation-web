@@ -16,6 +16,7 @@ from src.services.slack_inbox import (
     SlackInboxError,
     SlackReadOnlyClient,
     export_to_markdown,
+    agent_context_markdown,
     mpim_label,
     normalize_credentials,
     parse_slack_text,
@@ -391,3 +392,32 @@ def test_mpim_label_drops_me():
     assert mpim_label("Group messaging with: @michelle @linrui @felix", "felix") == "michelle, linrui"
     assert mpim_label("mpdm-a--b--felix-1", "felix") == "a, b"
     assert mpim_label("custom name", "felix") == "custom name"
+
+
+def test_agent_context_for_thread_and_dm(inbox):
+    ctx = inbox.agent_context("C000000001", THREAD_TS)
+    assert ctx["source"] == f"slack:C000000001:{THREAD_TS}" and ctx["kind"] == "thread"
+    assert ctx["title"] == "root"
+    assert ctx["history"] == [{"role": "them", "content": "root"}, {"role": "them", "content": "*1/* draft (1/1)"}]
+    md = ctx["markdown"]
+    assert "# Slack thread · #social" in md and "第一条是 thread 根消息" in md
+    assert "## 2. Bob B" in md and "原文链接：https://team.slack.com/archives/C000000001/" in md
+
+    dm = inbox.agent_context("C000000001")
+    assert dm["source"] == "slack:C000000001" and dm["kind"] == "channel"
+    assert "[图片] a.png" in dm["markdown"]
+    with pytest.raises(SlackInboxError):
+        inbox.agent_context("C000000001", "bad")
+    with pytest.raises(SlackInboxError) as exc:
+        inbox.agent_context("D000000005")
+    assert exc.value.code == "CONVERSATION_NOT_VISIBLE"
+
+
+def test_agent_context_marks_my_messages():
+    conv = {"kind": "im", "name": "Alice"}
+    msg = {"user_name": "me", "is_me": True, "time": "t", "edited": False, "permalink": "p", "text": "hi",
+           "attachments": [{"service_name": "X", "title": "Post", "title_link": "https://x.com/a", "text": "line1\nline2"}],
+           "files": []}
+    md = agent_context_markdown(conv, [msg], "me", is_thread=False)
+    assert "# Slack 会话 · 私信 · Alice" in md and "## 1. me（我）" in md
+    assert "[链接卡片 · X] Post https://x.com/a" in md and "> line2" in md

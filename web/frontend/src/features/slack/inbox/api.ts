@@ -1,6 +1,8 @@
 import { apiClient } from '@/shared/api/client';
 import { API_BASE } from '@/shared/constants';
-import type { SlackConversationList, SlackMessagePage, SlackReplies, SlackStatus, SlackThread } from './types';
+import type {
+  SlackAgentContext, SlackConversationList, SlackMessagePage, SlackReplies, SlackStatus, SlackThread,
+} from './types';
 
 // 后端只读：查询、导出、保存凭证，加上推进我自己的已读位置；没有任何往 Slack 发送的接口
 export const slackInboxApi = {
@@ -34,6 +36,11 @@ export const slackInboxApi = {
     apiClient.post<{ ok: boolean; marked: boolean }>(
       `/slack-inbox/conversations/${channelId}/threads/${threadTs}/mark`, { ts }, { retry: false }
     ),
+
+  agentContext: (channelId: string, threadTs?: string) =>
+    apiClient.get<SlackAgentContext>(`/slack-inbox/conversations/${channelId}/agent-context`, {
+      params: threadTs ? { thread_ts: threadTs } : undefined,
+    }),
 
   exportUrl: (channelId: string, format: 'md' | 'json') =>
     `${API_BASE}/slack-inbox/conversations/${channelId}/export?format=${format}`,

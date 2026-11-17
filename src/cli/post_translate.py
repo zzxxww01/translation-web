@@ -10,7 +10,9 @@ import sys
 from pathlib import Path
 from typing import Any, Sequence
 from urllib.error import HTTPError, URLError
-from urllib.request import Request, urlopen
+from urllib.request import Request
+
+from ._http import urlopen
 
 DEFAULT_BASE_URL = "http://127.0.0.1:54321"
 DEFAULT_TIMEOUT_SECONDS = 190.0

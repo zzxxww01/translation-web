@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ExternalLink, Loader2, X } from 'lucide-react';
+import { ExternalLink, Loader2, Sparkles, X } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { SlackAgentPanel } from '../agent/SlackAgentPanel';
 import { MessageItem } from './MessageItem';
 import { useMarkThreadRead, usePageVisible, useSlackReplies } from './hooks';
 import { buildStream, newestTs } from './lib';
@@ -14,6 +16,8 @@ interface ThreadPanelProps {
 
 /** 右栏 thread：根消息 + 全部回复；看到就在 Slack 里把这个 thread 标为已读。 */
 export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel }: ThreadPanelProps) {
+  // 每个 thread 背后是一个 AI（帖子翻译助手），默认先看它的结果
+  const [tab, setTab] = useState<'ai' | 'messages'>('ai');
   const replies = useSlackReplies(channelId, threadTs);
   const markThread = useMarkThreadRead();
   const pageVisible = usePageVisible();
@@ -62,7 +66,35 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
           <X className="h-4 w-4" />
         </button>
       </div>
-      <div className="min-h-0 flex-1 overflow-auto pb-4 pt-2">
+      <div className="flex shrink-0 gap-1 border-b border-border-subtle px-3" role="tablist" aria-label="thread 视图">
+        {([['ai', 'AI 翻译'], ['messages', `消息${rest.length ? ` · ${rest.length + 1}` : ''}`]] as const).map(([id, label]) => (
+          <button
+            key={id}
+            type="button"
+            role="tab"
+            aria-selected={tab === id}
+            onClick={() => setTab(id)}
+            className={cn(
+              'relative inline-flex items-center gap-1 px-2.5 py-2 text-[13px] after:absolute after:inset-x-2 after:-bottom-px after:h-0.5 after:rounded-full',
+              tab === id ? 'font-medium text-text-primary after:bg-primary-500' : 'text-text-muted hover:text-text-primary'
+            )}
+          >
+            {id === 'ai' && <Sparkles className="h-3.5 w-3.5 text-primary-500" />}
+            {label}
+          </button>
+        ))}
+      </div>
+      {/* AI 一直挂着（切到消息页也在后台跑），只是隐藏 */}
+      <div className={cn('min-h-0 flex-1', tab === 'ai' ? 'flex flex-col' : 'hidden')}>
+        <SlackAgentPanel
+          key={`${channelId}-${threadTs}`}
+          channelId={channelId}
+          threadTs={threadTs}
+          latestTs={newest}
+          slackLink={root?.permalink ?? null}
+        />
+      </div>
+      <div className={cn('min-h-0 flex-1 overflow-auto pb-4 pt-2', tab !== 'messages' && 'hidden')}>
         {replies.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
         {replies.isError && <div className="p-4 text-sm text-error">加载 thread 失败：{replies.error.message}</div>}
         {root && (

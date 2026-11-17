@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 import time
 import uuid
 from dataclasses import dataclass, field
@@ -134,6 +135,10 @@ class _Run:
 def harness_label(harness: str) -> str:
     # 界面上第三个 Agent 叫 Gemini；内部 id 仍是 antigravity（官方 agy CLI）
     return {"claude": "Claude", "codex": "Codex", "antigravity": "Gemini"}.get(harness, harness)
+
+
+# momo Slack 页：slack:<会话 ID>，thread 再加 :<thread_ts>
+SOURCE_RE = re.compile(r"^slack:[CDG][A-Z0-9]{6,20}(:\d{9,11}\.\d{1,6})?$")
 
 
 def build_prompt(
@@ -265,8 +270,19 @@ class Runner:
 
     # ---- 生命周期 ----
 
+    def find_by_source(self, source: str) -> RunMeta | None:
+        """同一个 Slack 会话 / thread 只配一个 agent：返回最新的那个。"""
+        matches = [meta for meta in self.list_runs() if meta.source == source]
+        return max(matches, key=lambda meta: meta.created_at) if matches else None
+
+    def _slack_busy(self) -> bool:
+        return any(
+            run.meta.source.startswith("slack:") and (run.meta.status in ACTIVE_STATUSES or self._session_busy(run))
+            for run in self._runs.values()
+        )
+
     def create(self, skill: str, title: str, harness: str = "claude", auto_reply_s: int = 0,
-               model: str | None = None) -> RunMeta:
+               model: str | None = None, source: str = "") -> RunMeta:
         if self._runtime_maintenance:
             raise Conflict("正在更新运行工具，请完成后再开始对话")
         # skill 为空就是直接对话：消息原样发给 Claude / Codex，不派发 skill
@@ -278,9 +294,14 @@ class Runner:
             model = validate_model(model)
         except ValueError as exc:
             raise RunnerError(str(exc)) from exc
+        if source and not SOURCE_RE.match(source):
+            raise RunnerError("source 格式不对")
         if self.active_count() >= self.config.max_active:
             raise Busy(f"已有 {self.config.max_active} 个任务在运行，请等其中一个结束")
-        meta = self.store.create(skill, title, harness, auto_reply_s, model=model)
+        # 服务器内存小：Slack 页自动启动的 agent 一次只跑一个，其余在页面上排队
+        if source.startswith("slack:") and self._slack_busy():
+            raise Busy("已有一个 Slack AI 在处理，排队中")
+        meta = self.store.create(skill, title, harness, auto_reply_s, model=model, source=source)
         self._runs[meta.id] = _Run(meta=meta, seq=0)
         return meta
 

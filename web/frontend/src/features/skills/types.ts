@@ -22,6 +22,8 @@ export interface RunMeta {
   awaiting_reply?: boolean;
   /** 到这个时间（epoch 秒）还没回复就自动继续 */
   auto_reply_at?: number | null;
+  /** 谁开的：空 = Claude 页；slack:<会话>[:<thread_ts>] = momo Slack 页给会话 / thread 配的 agent */
+  source?: string;
 }
 
 /** 页面上的一个 Agent（名片来自 skill_runner/agents.json）。name 是 skill 名，空串是通用 Agent（直接对话）。 */

@@ -61,6 +61,8 @@ BOOT_TTL_S = 300
 HISTORY_TTL_S = 30
 # 侧栏展开频道时列出最近多少天有动静的 thread
 THREAD_RECENT_DAYS = 7
+# 私信交给回复 agent 时带最近多少条
+AGENT_DM_MESSAGES = 30
 AUTH_TTL_S = 600
 MAX_FILE_BYTES = 25 * 1024 * 1024
 
@@ -815,6 +817,66 @@ class SlackInbox:
             if msg["reply_count"] and msg["thread_ts"] == msg["ts"]:
                 msg["replies"] = self.replies(channel_id, msg["ts"])["messages"][1:]
         return {"conversation": info, "exported_at": format_ts(str(self._now())), "messages": history}
+
+    # -- 交给 AI agent 的上下文
+
+    def agent_context(self, channel_id: str, thread_ts: Optional[str] = None, limit: int = AGENT_DM_MESSAGES) -> Dict[str, Any]:
+        """thread 给全部消息，会话（私信）给最近 limit 条；带上「谁是我」，供 skill agent 读取。"""
+        self._require_conversation(channel_id)
+        info = next(c for c in self.conversations() if c["id"] == channel_id)
+        if thread_ts:
+            if not TS_RE.match(thread_ts):
+                raise SlackInboxError("BAD_TS", "thread ts 格式不对", 400)
+            messages = self.replies(channel_id, thread_ts)["messages"]
+            source = f"slack:{channel_id}:{thread_ts}"
+        else:
+            messages = list(reversed(self.messages(channel_id, limit=limit)["messages"]))
+            source = f"slack:{channel_id}"
+        history = [
+            {"role": "me" if m["is_me"] else "them", "content": m["text"]}
+            for m in messages if m["text"].strip()
+        ]
+        title_msg = messages[0] if thread_ts and messages else None
+        if title_msg:
+            title = title_msg["text"].strip().splitlines()[0][:50] if title_msg["text"].strip() else "thread"
+        else:
+            title = info["name"]
+        return {
+            "source": source,
+            "kind": "thread" if thread_ts else info["kind"],
+            "title": title,
+            "conversation": info,
+            "latest_ts": messages[-1]["ts"] if messages else None,
+            "markdown": agent_context_markdown(info, messages, self.auth().get("user", ""), is_thread=bool(thread_ts)),
+            "history": history,
+        }
+
+
+def agent_context_markdown(conv: Dict[str, Any], messages: List[Dict[str, Any]], me: str, is_thread: bool) -> str:
+    """给 agent 读的 Markdown：每条消息标作者（我的标「我」）、时间、原文链接；链接卡片和附件完整列出。"""
+    where = ("#" if conv["kind"] in {"channel", "private"} else "私信 · ") + conv["name"]
+    lines = [
+        f"# Slack {'thread' if is_thread else '会话'} · {where}",
+        "",
+        f"- 我是：{me or '（未知）'}，下面作者标「（我）」的是我发的",
+        f"- 消息数：{len(messages)}，按时间正序" + ("；第一条是 thread 根消息" if is_thread else ""),
+        "",
+    ]
+    for i, msg in enumerate(messages, 1):
+        who = msg["user_name"] + ("（我）" if msg["is_me"] else "")
+        lines.append(f"## {i}. {who} · {msg['time']}" + (" · 已编辑" if msg["edited"] else ""))
+        lines.append(f"原文链接：{msg['permalink']}")
+        lines.append("")
+        lines.extend((msg["text"] or "").splitlines() or ["（无文字）"])
+        for a in msg["attachments"]:
+            if a["title"] or a["text"]:
+                lines.append("")
+                lines.append(f"[链接卡片{' · ' + a['service_name'] if a['service_name'] else ''}] {a['title']} {a['title_link']}".rstrip())
+                lines.extend(f"> {line}" for line in (a["text"] or "").splitlines())
+        for f in msg["files"]:
+            lines.append(f"[{'图片' if f['is_image'] else '附件'}] {f['name']}")
+        lines.append("")
+    return "\n".join(lines)
 
 
 def export_to_markdown(data: Dict[str, Any]) -> str:

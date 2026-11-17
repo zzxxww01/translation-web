@@ -60,6 +60,7 @@ nginx ── /api/skills/* ──► skill-runner（127.0.0.1:18090，本目录�
 | 上传上限 | 公网入口是 Cloudflare Tunnel，免费版单个请求最大 100 MB，所以配置成 95 MB；更大的素材贴链接 |
 | 清理空间 | 页面上删除只是把运行挪到 `~/skill-runner/deleted/`，仍占磁盘；要真正腾空间，先核对 `deleted/deleted.jsonl`，再手动删 `~/skill-runner/deleted/` 下的旧目录 |
 | 改口令 | 改 env 文件后重启，所有旧登录立即失效 |
+| Slack 页的两个 agent | skill 源文件在 `skill_runner/skills/`（`slack-post-translate`、`slack-dm-reply`），`~/.agents/skills/<名字>` 软链接到 `~/skill-runner/src/skill_runner/skills/<名字>`，`git pull` 即更新；run 带 `source=slack:…`，见 `docs/Slack收件箱.md` |
 | 加 skill（= 页面上多一个 agent） | 装到 `~/.claude/skills/`，加进 `SKILL_RUNNER_SKILLS`，在 `skill_runner/agents.json` 写名片（中文名、图标、说明、输入提示、示例），开沙箱时按需补 `SKILL_RUNNER_EXTRA_WRITE` / `SKILL_RUNNER_ALLOWED_DOMAINS`，重启 |
 | 改 agent 名片 | 编辑 `skill_runner/agents.json`（或 `SKILL_RUNNER_AGENTS_FILE` 指向的文件）后重启；图标可选 `general`、`translate`、`subtitle`、`podcast`、`dev`（旧名 `chat`、`article`、`video` 仍可用，见前端 `AgentIcon.tsx`） |
 
