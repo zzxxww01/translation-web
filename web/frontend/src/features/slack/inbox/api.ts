@@ -2,6 +2,7 @@ import { apiClient } from '@/shared/api/client';
 import { API_BASE } from '@/shared/constants';
 import type {
   SlackAgentContext, SlackConversationList, SlackMessagePage, SlackReplies, SlackStatus, SlackThread,
+  SlackThreadSummary,
 } from './types';
 
 // 后端只读：查询、导出、保存凭证，加上推进我自己的已读位置；没有任何往 Slack 发送的接口
@@ -40,6 +41,18 @@ export const slackInboxApi = {
   agentContext: (channelId: string, threadTs?: string) =>
     apiClient.get<SlackAgentContext>(`/slack-inbox/conversations/${channelId}/agent-context`, {
       params: threadTs ? { thread_ts: threadTs } : undefined,
+    }),
+
+  // 轻量 AI（后端按内容缓存）：逐条中文、thread 中文短标题、thread 摘要
+  translate: (texts: string[]) =>
+    apiClient.post<{ translations: (string | null)[] }>('/slack-inbox/ai/translate', { texts }, { retry: false, timeout: 180_000 }),
+
+  threadTitles: (items: Record<string, string>) =>
+    apiClient.post<{ titles: Record<string, string> }>('/slack-inbox/ai/titles', { items }, { retry: false, timeout: 180_000 }),
+
+  threadSummary: (channelId: string, threadTs: string) =>
+    apiClient.get<SlackThreadSummary>(`/slack-inbox/conversations/${channelId}/threads/${threadTs}/summary`, {
+      retry: false, timeout: 180_000,
     }),
 
   exportUrl: (channelId: string, format: 'md' | 'json') =>

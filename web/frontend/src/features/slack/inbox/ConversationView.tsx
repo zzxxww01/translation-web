@@ -3,7 +3,9 @@ import { ArrowLeft, Download, Hash, Loader2, Lock, Sparkles, Users } from 'lucid
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { slackInboxApi } from './api';
+import { useMessageZh, useShowZh } from './ai';
 import { MessageItem } from './MessageItem';
+import { ZhToggle } from './ZhToggle';
 import { useMarkRead, usePageVisible, useSlackMessages } from './hooks';
 import { buildStream, newestTs } from './lib';
 import type { SlackConversation } from './types';
@@ -48,6 +50,8 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
     [query.data]
   );
   const stream = useMemo(() => buildStream(messages, lastReadAtOpen), [messages, lastReadAtOpen]);
+  const showZh = useShowZh(state => state.showZh);
+  const zh = useMessageZh(messages, showZh);
 
   // 打开时：有未读就停在「新消息」线，否则停在最底部；之后新消息到来时，只有本来就在底部才跟着滚
   const scrolled = useRef(false);
@@ -92,6 +96,7 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
         </Button>
         {(isChannel || conversation.kind === 'mpim') && <KindIcon className="h-4 w-4 shrink-0 text-text-muted" />}
         <h2 className="min-w-0 flex-1 truncate text-[15px] font-bold text-text-primary">{conversation.name}</h2>
+        <ZhToggle loading={zh.loading} failed={zh.failed} />
         {onOpenAgent && (
           <Button variant="outline" size="sm" className="h-7 lg:hidden" onClick={onOpenAgent}>
             <Sparkles className="h-3.5 w-3.5" /> AI 回复
@@ -136,6 +141,7 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
                   compact={item.compact}
                   onOpenThread={onOpenThread}
                   active={item.message.ts === activeThreadTs}
+                  zh={showZh ? zh.zh.get(item.message.ts) : null}
                 />
               </div>
             ))}

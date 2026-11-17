@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 from functools import lru_cache
 from pathlib import Path
-from typing import Literal, Optional
+from typing import Dict, List, Literal, Optional
 from urllib.parse import quote
 
 from fastapi import APIRouter, Query, Request
@@ -18,6 +18,12 @@ from fastapi.responses import FileResponse, Response
 from pydantic import BaseModel, Field
 
 from src.api.utils.concurrency import run_blocking
+from src.api.utils.glossary import build_glossary_context
+from src.api.utils.json_utils import parse_llm_json_response
+from src.api.utils.llm_errors import raise_empty_llm_result, raise_llm_service_unavailable
+from src.api.utils.llm_factory import generate_with_fallback_budget
+from src.prompts.contracts import PromptContractError
+from src.services.slack_ai import MAX_BATCH, MAX_TEXT_CHARS, SlackAI
 from src.services.slack_inbox import (
     SlackCredentialStore,
     SlackInbox,
@@ -26,7 +32,7 @@ from src.services.slack_inbox import (
 )
 from src.settings import settings
 
-from ..middleware import APIException
+from ..middleware import APIException, ServiceUnavailableException
 from ..middleware.rate_limit import limiter
 
 
@@ -162,3 +168,62 @@ async def get_file(file_id: str, download: bool = False):
             "Cache-Control": "private, max-age=86400",
         },
     )
+
+
+# ---------------------------------------------------------------- 轻量 AI：消息中文、thread 中文标题和摘要
+
+
+@lru_cache(maxsize=1)
+def get_slack_ai() -> SlackAI:
+    async def llm(prompt: str) -> str:
+        return await generate_with_fallback_budget(prompt, task_type="slack")
+
+    async def glossary(text: str) -> str:
+        return await run_blocking(build_glossary_context, text)
+
+    return SlackAI(Path(settings.slack_cache_dir) / "ai", llm, parse_llm_json_response, glossary)
+
+
+async def _run_ai(coro, operation: str):
+    try:
+        return await coro
+    except SlackInboxError as error:
+        raise _to_api_error(error) from error
+    except ServiceUnavailableException:
+        raise
+    except (PromptContractError, ValueError):
+        raise_empty_llm_result(operation=operation)
+    except Exception as exc:  # noqa: BLE001 - 模型调用的任何失败都按服务不可用返回
+        raise_llm_service_unavailable(operation=operation, exc=exc)
+
+
+class SlackTranslateRequest(BaseModel):
+    texts: List[str] = Field(..., max_length=MAX_BATCH)
+
+
+class SlackTitlesRequest(BaseModel):
+    # thread_ts -> 根消息原文
+    items: Dict[str, str] = Field(..., max_length=MAX_BATCH)
+
+
+@router.post("/ai/translate")
+@limiter.limit("60/minute")
+async def translate_messages(request: Request, body: SlackTranslateRequest):
+    """逐条翻成中文；不需要翻的（中文、只有链接）返回 null。按内容缓存。"""
+    texts = [t[:MAX_TEXT_CHARS] for t in body.texts]
+    return {"translations": await _run_ai(get_slack_ai().translate(texts), "Slack 消息翻译")}
+
+
+@router.post("/ai/titles")
+@limiter.limit("30/minute")
+async def thread_titles(request: Request, body: SlackTitlesRequest):
+    items = {k[:32]: v[:MAX_TEXT_CHARS] for k, v in body.items.items()}
+    return {"titles": await _run_ai(get_slack_ai().titles_for(items), "Slack thread 标题")}
+
+
+@router.get("/conversations/{channel_id}/threads/{thread_ts}/summary")
+@limiter.limit("30/minute")
+async def thread_summary(request: Request, channel_id: str, thread_ts: str):
+    ctx = await _run(get_slack_inbox().agent_context, channel_id, thread_ts)
+    key = f"{channel_id}:{thread_ts}:{ctx['latest_ts']}"
+    return await _run_ai(get_slack_ai().summary(key, ctx["markdown"]), "Slack thread 摘要")

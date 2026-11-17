@@ -109,3 +109,10 @@ export interface SlackAgentContext {
   markdown: string;
   history: { role: 'me' | 'them'; content: string }[];
 }
+
+export interface SlackThreadSummary {
+  title: string;
+  summary: string;
+  /** 有人要我做事或在等我回复时的一句话，否则为空 */
+  todo_for_me: string;
+}

@@ -1,7 +1,11 @@
 import { useState, type ReactNode } from 'react';
 import { ChevronDown, ChevronRight, Hash, Languages, Loader2, Lock, MessagesSquare, RefreshCw, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import type { RunMeta } from '@/features/skills/types';
+import { AgentBadge } from '../agent/AgentBadge';
+import { useSlackAgentRuns } from '../agent/agentRuns';
 import { Avatar } from './MessageItem';
+import { useThreadTitles } from './ai';
 import { useChannelThreads, useRefreshSlack } from './hooks';
 import { splitSidebar, threadTitle, type SlackView } from './lib';
 import type { SlackConversation, SlackStatus, SlackThreadBadge } from './types';
@@ -75,10 +79,11 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 const THREADS_SHOWN = 8;
 
 /** 频道展开后的 thread 列表：最近 7 天有回复的，未读加粗，@我 标红。 */
-function ChannelThreads({ channelId, openThread, onOpenThread }: {
-  channelId: string; openThread: OpenThread | null; onOpenThread: (t: OpenThread) => void;
+function ChannelThreads({ channelId, openThread, onOpenThread, agents }: {
+  channelId: string; openThread: OpenThread | null; onOpenThread: (t: OpenThread) => void; agents: Map<string, RunMeta>;
 }) {
   const threads = useChannelThreads(channelId, true);
+  const titles = useThreadTitles(threads.data);
   const [showAll, setShowAll] = useState(false);
   if (threads.isLoading) return <div className="py-1 pl-8"><Loader2 className="h-3.5 w-3.5 animate-spin text-text-muted" /></div>;
   if (threads.isError) return <div className="py-1 pl-8 text-xs text-error">thread 加载失败</div>;
@@ -100,9 +105,10 @@ function ChannelThreads({ channelId, openThread, onOpenThread }: {
               active ? 'bg-primary-500 text-white' : t.has_unreads ? 'font-semibold text-text-primary hover:bg-bg-hover' : 'text-text-muted hover:bg-bg-hover'
             )}
           >
-            <span className="min-w-0 flex-1 truncate">{threadTitle(t)}</span>
+            <span className="min-w-0 flex-1 truncate">{titles[t.thread_ts] || threadTitle(t)}</span>
             {t.mentions_me && <span className={cn('text-[11px] font-bold', active ? 'text-white' : 'text-error')}>@</span>}
             {t.has_unreads && !t.mentions_me && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" aria-label="有新回复" />}
+            <AgentBadge run={agents.get(`slack:${channelId}:${t.thread_ts}`)} active={active} />
             <span className={cn('shrink-0 text-[11px]', active ? 'text-white/80' : 'text-text-muted')}>{t.reply_count}</span>
           </button>
         );
@@ -126,6 +132,7 @@ function ChannelIcon({ kind }: { kind: SlackConversation['kind'] }) {
 export function Sidebar(props: SidebarProps) {
   const { status, conversations, selectedId, view, openThread, threadBadge } = props;
   const refresh = useRefreshSlack();
+  const agents = useSlackAgentRuns();
   const { channels, dms } = splitSidebar(conversations);
   // 频道默认展开，直接看到它的 thread；折叠状态只在当前页面里有效
   const [collapsed, setCollapsed] = useState<Set<string>>(new Set());
@@ -195,7 +202,7 @@ export function Sidebar(props: SidebarProps) {
                       />
                     </div>
                   </div>
-                  {expanded && <ChannelThreads channelId={c.id} openThread={openThread} onOpenThread={props.onOpenThread} />}
+                  {expanded && <ChannelThreads channelId={c.id} openThread={openThread} onOpenThread={props.onOpenThread} agents={agents} />}
                 </div>
               );
             })}
@@ -212,7 +219,12 @@ export function Sidebar(props: SidebarProps) {
                 onClick={() => props.onSelectConversation(c.id)}
                 icon={c.kind === 'mpim' ? <ChannelIcon kind="mpim" /> : <Avatar name={c.name} size="sm" />}
                 label={c.name}
-                badge={c.mention_count > 0 ? <MentionBadge count={c.mention_count} /> : undefined}
+                badge={
+                  <>
+                    <AgentBadge run={agents.get(`slack:${c.id}`)} active={c.id === selectedId && !view} />
+                    {c.mention_count > 0 && <MentionBadge count={c.mention_count} />}
+                  </>
+                }
               />
             ))}
           </Section>

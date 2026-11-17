@@ -2,6 +2,8 @@
 import { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import { expect, it, vi } from 'vitest';
+import { chunk, hashTexts } from '../inbox/ai';
+import { agentState } from './agentRuns';
 import { ResultCards } from './ResultCards';
 import { parseResult } from './result';
 import { agentSource, SLACK_SKILLS } from './useSlackAgent';
@@ -53,4 +55,21 @@ it('renders translation and reply cards with copy actions', async () => {
     await act(async () => root.unmount());
     vi.unstubAllGlobals();
   }
+});
+
+it('maps run status to the sidebar badge state', () => {
+  const base = { id: 'r', skill: 's', title: 't', created_at: 0, updated_at: 0, session_id: null, error: null };
+  expect(agentState({ ...base, status: 'running' })).toBe('running');
+  expect(agentState({ ...base, status: 'waiting' })).toBe('running');
+  expect(agentState({ ...base, status: 'error' })).toBe('error');
+  expect(agentState({ ...base, status: 'idle', awaiting_reply: true })).toBe('awaiting');
+  expect(agentState({ ...base, status: 'idle' })).toBe('done');
+});
+
+it('batches texts and hashes them stably for query keys', () => {
+  expect(chunk([1, 2, 3, 4, 5], 2)).toEqual([[1, 2], [3, 4], [5]]);
+  expect(chunk(Array.from({ length: 81 }, (_, i) => i)).map(b => b.length)).toEqual([40, 40, 1]);
+  expect(hashTexts(['a', 'b'])).toBe(hashTexts(['a', 'b']));
+  expect(hashTexts(['a', 'b'])).not.toBe(hashTexts(['ab']));
+  expect(hashTexts(['a', 'b'])).not.toBe(hashTexts(['b', 'a']));
 });
