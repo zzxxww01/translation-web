@@ -16,10 +16,16 @@ export function Avatar({ name, size = 'md' }: { name: string; size?: 'sm' | 'md'
   );
 }
 
-function MessageBody({ message }: { message: SlackMessage }) {
+function MessageBody({ message, zh }: { message: SlackMessage; zh?: string | null }) {
   return (
     <>
       {message.segments.length > 0 && <SlackText segments={message.segments} />}
+      {zh && (
+        // AI 中文：紧跟在原文下面，灰色小一号，和原文一眼区分开
+        <div className="mt-0.5 whitespace-pre-wrap break-words border-l-2 border-primary-100 pl-2 text-[13px] leading-relaxed text-text-secondary" lang="zh">
+          {emojify(zh)}
+        </div>
+      )}
       {message.files.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {message.files.map(file =>
@@ -76,9 +82,11 @@ interface MessageItemProps {
   onOpenThread?: (threadTs: string) => void;
   /** 当前在右栏打开的 thread，高亮它的根消息 */
   active?: boolean;
+  /** AI 翻的中文（开了「显示中文」且需要翻时才有） */
+  zh?: string | null;
 }
 
-export function MessageItem({ message, compact = false, onOpenThread, active = false }: MessageItemProps) {
+export function MessageItem({ message, compact = false, onOpenThread, active = false, zh }: MessageItemProps) {
   const isThreadRoot = message.reply_count > 0 && message.thread_ts === message.ts;
   return (
     <div
@@ -104,7 +112,7 @@ export function MessageItem({ message, compact = false, onOpenThread, active = f
             <span className="text-xs text-text-muted" title={message.time}>{clockTime(message.ts)}{message.edited ? ' · 已编辑' : ''}</span>
           </div>
         )}
-        <MessageBody message={message} />
+        <MessageBody message={message} zh={zh} />
         {isThreadRoot && onOpenThread && (
           <button
             type="button"

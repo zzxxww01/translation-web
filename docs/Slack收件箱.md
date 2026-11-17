@@ -23,7 +23,19 @@ URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`�
 - skill 源文件在仓库 `skill_runner/skills/`；`~/.agents/skills/<名字>` 软链接到 `~/skill-runner/src/skill_runner/skills/<名字>`，
   随 skill-runner 一起 `git pull` 更新。
 
-后续：每条消息配中文、thread 中文标题和摘要、AI 速览、搜索。
+## 轻量 AI：消息中文、thread 中文标题和摘要
+
+不走 agent，直接调短文本模型（`task_type="slack"`），`src/services/slack_ai.py`：
+
+- **消息中文**：会话顶栏和 thread「消息」页的「中文」开关（全局，默认开）。前端 20 条一批 `POST /ai/translate`，
+  只翻英文为主的消息（中文、只有链接 / 表情的跳过），带术语库，链接不抄进译文。
+- **thread 中文短标题**：侧栏展开频道、Threads 页，`POST /ai/titles`（thread_ts → 根消息原文）。
+- **thread 摘要**：thread「消息」页顶部卡片，`GET /conversations/{id}/threads/{ts}/summary`，含「要你做」一句。
+- 缓存：`data/slack_cache/ai/{zh,titles,summaries}.json`，按内容 hash（摘要按最新回复 ts）。改翻译提示词时把
+  `ZH_PROMPT_VERSION` 加一，旧缓存自然失效。
+- 侧栏 thread / 私信行尾显示 agent 状态：转圈 = 在跑，橙点 = 等你确认，红 ! = 出错，✨ = 已处理（需登录 Claude 页）。
+
+后续：AI 速览、搜索。
 
 ## 接入方式
 
@@ -71,6 +83,9 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/conversations/{id}/threads` | 频道最近 7 天有回复的 thread（侧栏展开用） |
 | GET | `/threads` | 我参与的 thread，有新回复的在前 |
 | GET | `/conversations/{id}/agent-context?thread_ts=` | 交给 agent 的上下文（Markdown + me/them 历史） |
+| POST | `/ai/translate` | `{"texts": [...]}` 逐条中文（不需要翻的为 null） |
+| POST | `/ai/titles` | `{"items": {thread_ts: 根消息}}` 中文短标题 |
+| GET | `/conversations/{id}/threads/{ts}/summary` | thread 中文摘要 |
 | POST | `/conversations/{id}/mark` | `{"ts"}` 标记会话已读（只前进） |
 | POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 标记 thread 已读（只对我参与的 thread） |
 | GET | `/conversations/{id}/export?format=md\|json` | 导出最近 200 条（含 thread） |

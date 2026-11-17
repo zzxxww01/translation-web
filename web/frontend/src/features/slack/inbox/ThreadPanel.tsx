@@ -2,7 +2,9 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { ExternalLink, Loader2, Sparkles, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SlackAgentPanel } from '../agent/SlackAgentPanel';
+import { useMessageZh, useShowZh, useThreadSummary } from './ai';
 import { MessageItem } from './MessageItem';
+import { ZhToggle } from './ZhToggle';
 import { useMarkThreadRead, usePageVisible, useSlackReplies } from './hooks';
 import { buildStream, newestTs } from './lib';
 
@@ -32,6 +34,9 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
   const stream = useMemo(() => buildStream(rest, lastReadAtOpen ?? null), [rest, lastReadAtOpen]);
 
   const newest = newestTs(data?.messages ?? []);
+  const showZh = useShowZh(state => state.showZh);
+  const zh = useMessageZh(data?.messages ?? [], showZh && tab === 'messages');
+  const summary = useThreadSummary(channelId, threadTs, newest, tab === 'messages');
   const { mutate: mark } = markThread;
   const markedTs = useRef<string | null>(null);
   useEffect(() => {
@@ -83,6 +88,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
             {label}
           </button>
         ))}
+        {tab === 'messages' && <div className="ml-auto flex items-center"><ZhToggle loading={zh.loading} failed={zh.failed} /></div>}
       </div>
       {/* AI 一直挂着（切到消息页也在后台跑），只是隐藏 */}
       <div className={cn('min-h-0 flex-1', tab === 'ai' ? 'flex flex-col' : 'hidden')}>
@@ -97,9 +103,21 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
       <div className={cn('min-h-0 flex-1 overflow-auto pb-4 pt-2', tab !== 'messages' && 'hidden')}>
         {replies.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
         {replies.isError && <div className="p-4 text-sm text-error">加载 thread 失败：{replies.error.message}</div>}
+        {(summary.data || summary.isLoading) && (
+          <div className="mx-4 mb-2 rounded-lg border border-primary-100 bg-primary-50/50 px-3 py-2 text-[13px] leading-relaxed text-text-primary">
+            <div className="mb-0.5 flex items-center gap-1 text-xs font-semibold text-primary-700">
+              <Sparkles className="h-3.5 w-3.5" /> {summary.data?.title || 'AI 摘要'}
+              {summary.isLoading && <Loader2 className="h-3 w-3 animate-spin" />}
+            </div>
+            {summary.data?.summary}
+            {summary.data?.todo_for_me && (
+              <div className="mt-1 rounded bg-amber-50 px-2 py-1 text-amber-900">要你做：{summary.data.todo_for_me}</div>
+            )}
+          </div>
+        )}
         {root && (
           <>
-            <MessageItem message={root} />
+            <MessageItem message={root} zh={showZh ? zh.zh.get(root.ts) : null} />
             <div className="my-2 flex items-center gap-2 px-5 text-xs text-text-muted">
               <span>{rest.length} 条回复</span>
               <div className="h-px flex-1 bg-border-subtle" />
@@ -111,7 +129,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
                     <div className="h-px flex-1 bg-error/60" />新回复<div className="h-px flex-1 bg-error/60" />
                   </div>
                 )}
-                <MessageItem message={item.message} compact={item.compact} />
+                <MessageItem message={item.message} compact={item.compact} zh={showZh ? zh.zh.get(item.message.ts) : null} />
               </div>
             ))}
           </>

@@ -2,6 +2,7 @@ import { ArrowLeft, Hash, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { Avatar } from './MessageItem';
+import { useThreadTitles } from './ai';
 import { useSlackThreads } from './hooks';
 import { clockTime, dayLabel, emojify, threadTitle } from './lib';
 import type { SlackConversation } from './types';
@@ -17,6 +18,7 @@ interface ThreadsViewProps {
 /** 「Threads」汇总页：我参与的 thread，有新回复的在前面，每个 thread 显示根消息和最新的回复。 */
 export function ThreadsView({ conversations, openThread, onOpenThread, onBack }: ThreadsViewProps) {
   const threads = useSlackThreads(true);
+  const titles = useThreadTitles(threads.data);
   const names = new Map(conversations.map(c => [c.id, c.name]));
 
   return (
@@ -49,7 +51,7 @@ export function ThreadsView({ conversations, openThread, onOpenThread, onBack }:
                 <Hash className="h-3.5 w-3.5" />
                 <span className="font-medium text-text-secondary">{names.get(t.channel_id) ?? t.channel_id}</span>
                 <span>·</span>
-                <span className={cn('min-w-0 flex-1 truncate', t.has_unreads && 'font-semibold text-text-primary')}>{threadTitle(t, 60)}</span>
+                <span className={cn('min-w-0 flex-1 truncate', t.has_unreads && 'font-semibold text-text-primary')}>{titles[t.thread_ts] || threadTitle(t, 60)}</span>
                 {t.mentions_me && <span className="rounded-full bg-error px-1.5 text-[11px] font-semibold text-white">@我</span>}
                 {t.has_unreads && <span className="rounded-full bg-primary-500 px-1.5 text-[11px] font-semibold text-white">新回复</span>}
               </div>
