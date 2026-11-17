@@ -99,3 +99,13 @@ export interface SlackReplies {
   messages: SlackMessage[];
   last_read: string | null;
 }
+
+/** 交给 skill agent 的上下文（后端 agent_context）。 */
+export interface SlackAgentContext {
+  source: string;
+  kind: 'thread' | ConversationKind;
+  title: string;
+  latest_ts: string | null;
+  markdown: string;
+  history: { role: 'me' | 'them'; content: string }[];
+}

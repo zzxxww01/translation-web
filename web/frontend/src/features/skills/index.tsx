@@ -85,7 +85,7 @@ function SkillsWorkspace({ maxUploadMb }: { maxUploadMb: number }) {
           showDetail ? 'hidden' : 'flex'
         )}
       >
-        <RunList runs={runs.data ?? []} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} onDelete={removeRun} />
+        <RunList runs={(runs.data ?? []).filter(run => !run.source?.startsWith('slack:'))} catalog={catalog} selectedId={selectedId} onSelect={select} onNew={openNew} onDelete={removeRun} />
         <div className="border-t border-border-subtle px-4 py-2">
           <Button variant="ghost" size="sm" onClick={() => setUpdatesOpen(true)}>
             <Settings /> 工具与更新

@@ -9,7 +9,21 @@ momo 顶部「Slack」页，布局照原生 Slack 三栏：
 
 URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`（右栏 thread）。
 
-后续分期（中文翻译、AI 回复框、thread 中文标题和摘要、AI 速览、帖子一键翻译、搜索）见 PR 说明。
+## AI：每个 thread / 私信背后一个 skill agent
+
+- **频道 thread → 帖子翻译助手**（skill `slack-post-translate`）：thread 面板默认是「AI 翻译」标签页。agent 找出要发的
+  内容（根帖、链接卡片里的 X 帖、`1/N…N/N` 分段取最新版），走 `translate-post`（术语库），再出标题候选。
+- **私信 → 回复助手**（skill `slack-dm-reply`）：打开私信时右栏是「AI 回复」。agent 用中文说清对方要什么，
+  用 `slack-reply` 给 A/B/C 三版英文；选一版「复制并打开 Slack」，到 Slack 里粘贴发送（momo 从不发送）。
+- 第一次打开 thread / 私信时自动启动；同一时间只跑一个 Slack agent（2 GB 内存），其余在页面上排队、每 15 秒重试。
+- 绑定：skill-runner 的 run 带 `source = slack:<会话>[:<thread_ts>]`，同一个 source 只建一个对话；Claude 页的对话列表不显示这些。
+- 上下文：`GET /api/slack-inbox/conversations/{id}/agent-context?thread_ts=` 导出 Markdown（作者标「（我）」、链接卡片全文）
+  和 `history`（me/them）。前端把它们作为附件交给 agent。之后有新消息，右栏提示「让 AI 重新看」，把最新上下文发给同一个对话。
+- 结果：skill 每次都重写运行目录里的 `result.json`，页面据此显示带「复制」按钮的结果卡片；格式见两个 SKILL.md。
+- skill 源文件在仓库 `skill_runner/skills/`；`~/.agents/skills/<名字>` 软链接到 `~/skill-runner/src/skill_runner/skills/<名字>`，
+  随 skill-runner 一起 `git pull` 更新。
+
+后续：每条消息配中文、thread 中文标题和摘要、AI 速览、搜索。
 
 ## 接入方式
 
@@ -56,6 +70,7 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/conversations/{id}/replies/{ts}` | thread 全部消息 + 我的 thread 已读位置 |
 | GET | `/conversations/{id}/threads` | 频道最近 7 天有回复的 thread（侧栏展开用） |
 | GET | `/threads` | 我参与的 thread，有新回复的在前 |
+| GET | `/conversations/{id}/agent-context?thread_ts=` | 交给 agent 的上下文（Markdown + me/them 历史） |
 | POST | `/conversations/{id}/mark` | `{"ts"}` 标记会话已读（只前进） |
 | POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 标记 thread 已读（只对我参与的 thread） |
 | GET | `/conversations/{id}/export?format=md\|json` | 导出最近 200 条（含 thread） |

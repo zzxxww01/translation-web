@@ -56,5 +56,25 @@
       "给 Claude 页的对话列表加一个按 Agent 筛选",
       "列一下服务器上现在跑着哪些服务"
     ]
+  },
+  {
+    "skill": "slack-post-translate",
+    "title": "Slack 帖子翻译",
+    "icon": "translate",
+    "description": "在 Slack 页打开频道 thread 时自动启动：找出要发的帖子（含引用的 X 帖、1/N 分段），走帖子翻译，给标题候选",
+    "hint": "一般在 Slack 页打开 thread 时自动启动；这里也可以贴 thread 文本",
+    "examples": [
+      "翻译这个 thread 里要发的帖子："
+    ]
+  },
+  {
+    "skill": "slack-dm-reply",
+    "title": "Slack 回复助手",
+    "icon": "general",
+    "description": "在 Slack 页打开私信时自动启动：用中文说清对方要什么，推荐三版英文回复，按你的中文意思改",
+    "hint": "一般在 Slack 页打开私信时自动启动；这里也可以贴对话",
+    "examples": [
+      "帮我回这条私信："
+    ]
   }
 ]

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, Download, Hash, Loader2, Lock, Users } from 'lucide-react';
+import { ArrowLeft, Download, Hash, Loader2, Lock, Sparkles, Users } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { slackInboxApi } from './api';
@@ -28,9 +28,11 @@ interface ConversationViewProps {
   activeThreadTs: string | null;
   onOpenThread: (threadTs: string) => void;
   onBack: () => void;
+  /** 私信：窄屏上切到右栏的 AI 回复 */
+  onOpenAgent?: () => void;
 }
 
-export function ConversationView({ conversation, activeThreadTs, onOpenThread, onBack }: ConversationViewProps) {
+export function ConversationView({ conversation, activeThreadTs, onOpenThread, onBack, onOpenAgent }: ConversationViewProps) {
   const query = useSlackMessages(conversation.id);
   const markRead = useMarkRead();
   const pageVisible = usePageVisible();
@@ -90,6 +92,11 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
         </Button>
         {(isChannel || conversation.kind === 'mpim') && <KindIcon className="h-4 w-4 shrink-0 text-text-muted" />}
         <h2 className="min-w-0 flex-1 truncate text-[15px] font-bold text-text-primary">{conversation.name}</h2>
+        {onOpenAgent && (
+          <Button variant="outline" size="sm" className="h-7 lg:hidden" onClick={onOpenAgent}>
+            <Sparkles className="h-3.5 w-3.5" /> AI 回复
+          </Button>
+        )}
         <a
           href={slackInboxApi.exportUrl(conversation.id, 'md')}
           className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-text-secondary hover:bg-bg-hover"

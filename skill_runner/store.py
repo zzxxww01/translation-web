@@ -61,6 +61,8 @@ class RunMeta:
     # 到这个时间（epoch 秒）还没回复就自动继续；没有排上自动回复时为 None
     auto_reply_at: float | None = None
     auto_replies: int = 0
+    # 谁替用户开的这个对话：空 = Claude 页；"slack:<会话>[:<thread_ts>]" = momo Slack 页给这个会话 / thread 配的 agent
+    source: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -96,7 +98,7 @@ class RunStore:
             return False
 
     def create(self, skill: str, title: str, harness: str = "claude", auto_reply_s: int = 0,
-               model: str | None = None) -> RunMeta:
+               model: str | None = None, source: str = "") -> RunMeta:
         now = time.time()
         while True:
             run_id = time.strftime("%Y%m%d-%H%M%S", time.localtime(now)) + "-" + secrets.token_hex(3)
@@ -109,7 +111,7 @@ class RunStore:
         (path / INPUT_DIR).mkdir()
         meta = RunMeta(
             id=run_id, skill=skill, title=title, status="idle", created_at=now, updated_at=now,
-            harness=harness, auto_reply_s=auto_reply_s, model=model,
+            harness=harness, auto_reply_s=auto_reply_s, model=model, source=source,
         )
         self.save_meta(meta)
         return meta

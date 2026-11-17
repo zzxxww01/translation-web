@@ -289,3 +289,22 @@ def test_client_ip_trusts_proxy_headers_only_from_loopback(peer, headers, expect
     from skill_runner.app import _client_ip
     scope = {"type": "http", "client": (peer, 5000), "headers": [(k.encode(), v.encode()) for k, v in headers.items()]}
     assert _client_ip(Request(scope)) == expected
+
+
+def test_slack_source_binds_one_run_per_thread_and_queues_slack_agents(setup):
+    client, factory, _ = setup
+    login(client)
+    thread = "slack:C000000001:1794871046.243619"
+    first = client.post(f"{PREFIX}/runs", data={"message": "thread", "source": thread}).json()
+    assert first["source"] == thread
+    # 同一个 thread 再建一次（另一个标签页、重复点击）拿到的是同一个对话
+    again = client.post(f"{PREFIX}/runs", data={"message": "thread", "source": thread}).json()
+    assert again["id"] == first["id"] and len(factory.sessions) == 1
+    assert [r["id"] for r in client.get(f"{PREFIX}/runs", params={"source": thread}).json()] == [first["id"]]
+    assert client.get(f"{PREFIX}/runs", params={"source": "slack:D000000001"}).json() == []
+    # 第一个还在跑：另一个 Slack agent 排队（429），Claude 页自己的对话不受影响
+    busy = client.post(f"{PREFIX}/runs", data={"message": "dm", "source": "slack:D000000001"})
+    assert busy.status_code == 429 and "排队" in busy.json()["detail"]
+    assert client.post(f"{PREFIX}/runs", data={"message": "hello"}).status_code == 200
+    bad = client.post(f"{PREFIX}/runs", data={"message": "x", "source": "slack:../../etc"})
+    assert bad.status_code == 400
