@@ -7,7 +7,7 @@ import { useSlackAgentRuns } from '../agent/agentRuns';
 import { Avatar } from './MessageItem';
 import { useThreadTitles } from './ai';
 import { useChannelThreads, useRefreshSlack } from './hooks';
-import { splitSidebar, threadTitle, type SlackView } from './lib';
+import { clockTime, splitSidebar, threadTitle, type SlackView } from './lib';
 import type { SlackConversation, SlackStatus, SlackThreadBadge } from './types';
 
 export interface OpenThread {
@@ -149,7 +149,11 @@ export function Sidebar(props: SidebarProps) {
       <div className="flex items-center justify-between border-b border-border-subtle px-4 py-3">
         <div className="min-w-0">
           <div className="truncate text-[15px] font-bold text-text-primary">{status.team}</div>
-          <div className="truncate text-xs text-text-muted">{status.user}</div>
+          <div className="truncate text-xs text-text-muted" title="消息存在服务器上，后台每分钟只拉新的">
+            {status.user}
+            {status.local ? ` · 本地 ${status.local.messages} 条` : ''}
+            {status.local?.last_sync ? ` · 同步于 ${clockTime(String(status.local.last_sync))}` : ''}
+          </div>
         </div>
         <button
           type="button"

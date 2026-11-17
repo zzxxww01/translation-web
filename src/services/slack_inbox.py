@@ -15,12 +15,15 @@ from __future__ import annotations
 import json
 import logging
 import os
+import queue
 import re
 import threading
 import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
+
+from src.services.slack_store import SlackStore
 from urllib.parse import parse_qs, urlparse
 
 import httpx
@@ -59,7 +62,20 @@ HIDDEN_DM_USERS = frozenset({"USLACKBOT", "USLACK"})
 
 COUNTS_TTL_S = 30
 BOOT_TTL_S = 300
-HISTORY_TTL_S = 30
+# 本地副本：同一个会话 15 秒内不重复去 Slack 问有没有新消息
+FRESH_TTL_S = 15
+# 第一次打开一个会话先拉多少条；往前翻时一次补多少条
+FIRST_PAGE = 100
+BACKFILL_PAGE = 200
+# 每隔多久重拉最近几天的消息，补上编辑、删除、表情、回复数这些「旧消息上的变化」
+REFRESH_EVERY_S = 300
+REFRESH_WINDOW_DAYS = 7
+# thread：多久增量拉一次新回复、多久整个重拉一次（补编辑和删除）
+THREAD_FETCH_TTL_S = 30
+THREAD_FULL_EVERY_S = 600
+# 后台同步间隔；图片目录超过这个大小就删最旧的
+SYNC_INTERVAL_S = 60
+FILES_MAX_BYTES = 2 * 1024 * 1024 * 1024
 # 侧栏展开频道时列出最近多少天有动静的 thread
 THREAD_RECENT_DAYS = 7
 # 私信交给回复 agent 时带最近多少条
@@ -347,6 +363,14 @@ class SlackInbox:
         self._conv_info: Dict[str, Dict[str, Any]] = {}
         self._files: Dict[str, Dict[str, str]] = {}
         self._load_user_cache()
+        # 消息的本地副本；同步时只向 Slack 要本地没有的
+        self.db = SlackStore(self.cache_dir / "slack.db", now=now)
+        self._conv_locks: Dict[str, threading.Lock] = {}
+        self._sync_thread: Optional[threading.Thread] = None
+        self._prefetch_queue: "queue.Queue[str]" = queue.Queue()
+        self._prefetch_thread: Optional[threading.Thread] = None
+        self._last_prune = 0.0
+        self._last_sync: Optional[float] = None
 
     # -- 基础
 
@@ -383,7 +407,7 @@ class SlackInbox:
         if self.store.load() is None:
             return {"configured": False, "ok": False, "error_code": "CREDENTIALS_MISSING", "error": "还没有配置 Slack 凭证"}
         try:
-            return {"configured": True, "ok": True, **self.auth()}
+            return {"configured": True, "ok": True, **self.auth(), "local": {**self.db.stats(), "last_sync": self._last_sync}}
         except SlackInboxError as exc:
             return {"configured": True, "ok": False, "error_code": exc.code, "error": exc.message}
 
@@ -581,19 +605,15 @@ class SlackInbox:
         segments = parse_slack_text(msg.get("text", ""), self.user_name)
         files = []
         for f in msg.get("files", []) or []:
-            fid = f.get("id", "")
-            url = f.get("url_private") or ""
-            if not FILE_ID_RE.match(fid) or not _is_slack_file_url(url):
+            fid = self._register_file(f)
+            if not fid:
                 continue
-            mimetype = f.get("mimetype") or "application/octet-stream"
-            name = f.get("name") or f.get("title") or fid
-            with self._lock:
-                self._files[fid] = {"url": url, "mimetype": mimetype, "name": name}
+            meta = self._files[fid]
             files.append({
                 "id": fid,
-                "name": name,
-                "mimetype": mimetype,
-                "is_image": mimetype.startswith("image/"),
+                "name": meta["name"],
+                "mimetype": meta["mimetype"],
+                "is_image": meta["mimetype"].startswith("image/"),
                 "url": f"/api/slack-inbox/files/{fid}",
             })
         attachments = []
@@ -627,49 +647,169 @@ class SlackInbox:
             "permalink": self._permalink(channel_id, ts, thread_ts),
         }
 
-    def _history(self, channel_id: str, limit: int, cursor: Optional[str] = None) -> Dict[str, Any]:
-        key = ("history", channel_id, limit, cursor or "")
-        data = self._cache.get(key, HISTORY_TTL_S)
-        if data is None:
-            params: Dict[str, Any] = {"channel": channel_id, "limit": limit}
+    # -- 本地副本与增量同步
+
+    def _conv_lock(self, channel_id: str) -> threading.Lock:
+        with self._lock:
+            return self._conv_locks.setdefault(channel_id, threading.Lock())
+
+    def _fetch_history(self, channel_id: str, max_pages: int, **params: Any) -> Tuple[List[Dict[str, Any]], bool]:
+        """按游标翻页拉 conversations.history，返回（消息，是否还有更多没拉）。"""
+        collected: List[Dict[str, Any]] = []
+        cursor = None
+        for _ in range(max_pages):
+            args = {"channel": channel_id, **params}
             if cursor:
-                params["cursor"] = cursor
-            data = self.client().call("conversations.history", **params)
-            self._cache.put(key, data)
-        return data
+                args["cursor"] = cursor
+            data = self.client().call("conversations.history", **args)
+            collected.extend(data.get("messages") or [])
+            cursor = (data.get("response_metadata") or {}).get("next_cursor")
+            if not data.get("has_more"):
+                return collected, False
+            if not cursor:
+                return collected, True  # 还有更多但翻不了页：当作没拉全
+        return collected, True
+
+    def sync_conversation(self, channel_id: str, latest_hint: Optional[str] = None, force: bool = False) -> int:
+        """把会话的新消息拉进本地，返回新拉到的条数。latest_hint 是 client.counts 里的最新 ts：
+        本地已经有了就一次都不问 Slack。隔一段时间重拉最近几天，补编辑、删除和回复数。"""
+        if not force and self._cache.get(("fresh", channel_id), FRESH_TTL_S):
+            return 0
+        with self._conv_lock(channel_id):
+            if not force and self._cache.get(("fresh", channel_id), FRESH_TTL_S):
+                return 0
+            state = self.db.conv_state(channel_id)
+            now = self._now()
+            new: List[Dict[str, Any]] = []
+            if state["newest_ts"] is None:
+                # 第一次：只拉最近一页，更早的等往上翻时再补
+                new, more = self._fetch_history(channel_id, 1, limit=FIRST_PAGE)
+                self.db.upsert(channel_id, new, in_history=True)
+                tss = [str(m.get("ts")) for m in new if m.get("ts")]
+                self.db.set_conv_state(
+                    channel_id,
+                    newest_ts=max(tss, key=float) if tss else "0",
+                    oldest_ts=min(tss, key=float) if tss else None,
+                    complete=not more,
+                    refreshed_at=now,
+                )
+            else:
+                if latest_hint is None or float(latest_hint) > float(state["newest_ts"] or 0):
+                    new, _ = self._fetch_history(channel_id, 25, oldest=state["newest_ts"], limit=200)
+                    if new:
+                        self.db.upsert(channel_id, new, in_history=True)
+                        newest = max([str(m["ts"]) for m in new if m.get("ts")] + [state["newest_ts"]], key=float)
+                        self.db.set_conv_state(channel_id, newest_ts=newest)
+                if now - state["refreshed_at"] > REFRESH_EVERY_S:
+                    self._refresh_window(channel_id, now)
+            self._cache.put(("fresh", channel_id), True)
+        self._prefetch_images(new)
+        return len(new)
+
+    def _refresh_window(self, channel_id: str, now: float) -> None:
+        since = now - REFRESH_WINDOW_DAYS * 86400
+        recent, more = self._fetch_history(channel_id, 3, oldest=f"{since:.6f}", limit=200)
+        self.db.upsert(channel_id, recent, in_history=True)
+        if not more:
+            # 拉全了这段时间：本地有、Slack 没有的就是被删了
+            seen = {str(m.get("ts")) for m in recent}
+            gone = [r["ts"] for r in self.db.history_since(channel_id, since) if r["ts"] not in seen]
+            self.db.mark_deleted(channel_id, gone)
+        self.db.set_conv_state(channel_id, refreshed_at=now)
+
+    def _backfill(self, channel_id: str) -> None:
+        """本地往前没有了：从本地最早那条再往前拉一页。"""
+        with self._conv_lock(channel_id):
+            state = self.db.conv_state(channel_id)
+            if state["complete"]:
+                return
+            params: Dict[str, Any] = {"limit": BACKFILL_PAGE}
+            if state["oldest_ts"]:
+                params["latest"] = state["oldest_ts"]
+            older, more = self._fetch_history(channel_id, 1, **params)
+            self.db.upsert(channel_id, older, in_history=True)
+            tss = [str(m.get("ts")) for m in older if m.get("ts")]
+            oldest = min(tss + ([state["oldest_ts"]] if state["oldest_ts"] else []), key=float) if tss or state["oldest_ts"] else None
+            self.db.set_conv_state(channel_id, oldest_ts=oldest, complete=not more or not older)
+
+    def _latest_hint(self, channel_id: str) -> Optional[str]:
+        conv = next((c for c in self.conversations() if c["id"] == channel_id), None)
+        return (conv or {}).get("latest_ts")
 
     def messages(self, channel_id: str, limit: int = 50, cursor: Optional[str] = None) -> Dict[str, Any]:
+        """从本地副本读，新→旧；cursor 是上一页最早那条的 ts。本地不够时才去 Slack 往前补。"""
         self._require_conversation(channel_id)
         limit = max(1, min(int(limit), 200))
-        data = self._history(channel_id, limit, cursor)
-        msgs = [self.normalize_message(channel_id, m) for m in data.get("messages", [])]
-        next_cursor = (data.get("response_metadata") or {}).get("next_cursor") or None
-        return {"messages": msgs, "next_cursor": next_cursor if data.get("has_more") else None}
+        if cursor and not TS_RE.match(cursor):
+            raise SlackInboxError("BAD_CURSOR", "分页游标格式不对", 400)
+        self.sync_conversation(channel_id, self._latest_hint(channel_id))
+        rows = self.db.history(channel_id, before=cursor, limit=limit)
+        if len(rows) < limit and not self.db.conv_state(channel_id)["complete"]:
+            self._backfill(channel_id)
+            rows = self.db.history(channel_id, before=cursor, limit=limit)
+        complete = self.db.conv_state(channel_id)["complete"]
+        # 还能往前翻：Slack 那边没拉全，或者本地还有更早的
+        has_more = bool(rows) and (not complete or bool(self.db.history(channel_id, before=rows[-1]["ts"], limit=1)))
+        msgs = [self.normalize_message(channel_id, m) for m in rows]
+        return {"messages": msgs, "next_cursor": rows[-1]["ts"] if has_more else None}
+
+    def sync_thread(self, channel_id: str, thread_ts: str, force: bool = False) -> None:
+        """thread 进本地：隔 30 秒只要新回复，隔 10 分钟整个重拉一次（补编辑和删除）。"""
+        key = f"{channel_id}:{thread_ts}"
+        fetched: List[Dict[str, Any]] = []
+        with self._conv_lock(key):
+            state = self.db.thread_state(channel_id, thread_ts)
+            now = self._now()
+            if force or now - state["full_at"] > THREAD_FULL_EVERY_S:
+                collected: List[Dict[str, Any]] = []
+                cursor = None
+                for _ in range(5):  # 最多 1000 条，够任何一个帖子 thread
+                    params: Dict[str, Any] = {"channel": channel_id, "ts": thread_ts, "limit": 200}
+                    if cursor:
+                        params["cursor"] = cursor
+                    data = self.client().call("conversations.replies", **params)
+                    collected.extend(data.get("messages") or [])
+                    cursor = (data.get("response_metadata") or {}).get("next_cursor")
+                    if not data.get("has_more") or not cursor:
+                        break
+                self._store_thread(channel_id, thread_ts, collected)
+                fetched = collected
+                seen = {str(m.get("ts")) for m in collected}
+                self.db.mark_deleted(channel_id, [m["ts"] for m in self.db.thread(channel_id, thread_ts)
+                                                  if m["ts"] not in seen and m["ts"] != thread_ts])
+                self.db.set_thread_state(channel_id, thread_ts, full_at=now, fetched_at=now,
+                                         newest_ts=max(seen, key=float) if seen else thread_ts)
+            elif now - state["fetched_at"] > THREAD_FETCH_TTL_S:
+                data = self.client().call("conversations.replies", channel=channel_id, ts=thread_ts,
+                                          oldest=state["newest_ts"] or thread_ts, limit=200)
+                newer = data.get("messages") or []
+                self._store_thread(channel_id, thread_ts, newer)
+                fetched = newer
+                tss = [str(m.get("ts")) for m in newer if m.get("ts")] + [state["newest_ts"] or thread_ts]
+                self.db.set_thread_state(channel_id, thread_ts, fetched_at=now, newest_ts=max(tss, key=float))
+        self._prefetch_images(fetched)
+
+    def _store_thread(self, channel_id: str, thread_ts: str, messages: List[Dict[str, Any]]) -> None:
+        # 根消息和「同时发到频道」的回复也在主消息流里；根消息带着最新的回复数，顺便把频道里那条更新掉
+        in_stream = [m for m in messages if str(m.get("ts")) == thread_ts or m.get("subtype") == "thread_broadcast"]
+        self.db.upsert(channel_id, in_stream, in_history=True)
+        self.db.upsert(channel_id, [m for m in messages if m not in in_stream], in_history=False)
 
     def replies(self, channel_id: str, thread_ts: str) -> Dict[str, Any]:
         self._require_conversation(channel_id)
         if not TS_RE.match(thread_ts or ""):
             raise SlackInboxError("BAD_TS", "thread ts 格式不对", 400)
-        key = ("replies", channel_id, thread_ts)
-        collected = self._cache.get(key, HISTORY_TTL_S)
-        if collected is None:
-            collected = []
-            cursor = None
-            for _ in range(5):  # 最多 1000 条，够任何一个帖子 thread
-                params: Dict[str, Any] = {"channel": channel_id, "ts": thread_ts, "limit": 200}
-                if cursor:
-                    params["cursor"] = cursor
-                data = self.client().call("conversations.replies", **params)
-                collected.extend(data.get("messages", []))
-                cursor = (data.get("response_metadata") or {}).get("next_cursor")
-                if not data.get("has_more") or not cursor:
-                    break
-            self._cache.put(key, collected)
+        self.sync_thread(channel_id, thread_ts)
+        collected = self.db.thread(channel_id, thread_ts)
         followed = self._followed_threads().get((channel_id, thread_ts))
         return {
             "messages": [self.normalize_message(channel_id, m) for m in collected],
             "last_read": (followed or {}).get("last_read") or None,
         }
+
+    def _recent_raw(self, channel_id: str, limit: int) -> List[Dict[str, Any]]:
+        self.sync_conversation(channel_id, self._latest_hint(channel_id))
+        return self.db.history(channel_id, limit=limit)
 
     # -- thread
 
@@ -738,7 +878,7 @@ class SlackInbox:
         followed = self._followed_threads()
         cutoff = self._now() - THREAD_RECENT_DAYS * 86400
         roots: Dict[str, Dict[str, Any]] = {}
-        for m in self._history(channel_id, 100).get("messages", []):
+        for m in self._recent_raw(channel_id, 200):
             ts = str(m.get("ts") or "")
             if m.get("reply_count") and m.get("thread_ts") == ts:
                 roots[ts] = m
@@ -781,6 +921,108 @@ class SlackInbox:
         return {"ok": True, "marked": True}
 
     # -- 附件
+
+    def _register_file(self, f: Dict[str, Any]) -> Optional[str]:
+        """记下文件的下载地址（只认 slack.com 的），返回文件 ID。"""
+        fid = f.get("id", "")
+        url = f.get("url_private") or ""
+        if not FILE_ID_RE.match(fid) or not _is_slack_file_url(url):
+            return None
+        with self._lock:
+            self._files[fid] = {
+                "url": url,
+                "mimetype": f.get("mimetype") or "application/octet-stream",
+                "name": f.get("name") or f.get("title") or fid,
+            }
+        return fid
+
+    def _prefetch_images(self, messages: List[Dict[str, Any]]) -> None:
+        """新消息里的图片放进后台下载队列：打开时直接从本地出，Slack 那边过期了也还在。"""
+        for m in messages:
+            for f in m.get("files") or []:
+                if not str(f.get("mimetype") or "").startswith("image/") or int(f.get("size") or 0) > MAX_FILE_BYTES:
+                    continue
+                fid = self._register_file(f)
+                if fid and not (self.cache_dir / "files" / fid).is_file():
+                    self._prefetch_queue.put(fid)
+        if not self._prefetch_queue.empty():
+            with self._lock:
+                if self._prefetch_thread is None or not self._prefetch_thread.is_alive():
+                    self._prefetch_thread = threading.Thread(target=self._prefetch_loop, name="slack-prefetch", daemon=True)
+                    self._prefetch_thread.start()
+
+    def _prefetch_loop(self) -> None:
+        while True:
+            try:
+                fid = self._prefetch_queue.get(timeout=30)
+            except queue.Empty:
+                return  # 空闲就退出，下次有图片再起
+            try:
+                self.file(fid)
+            except SlackInboxError as exc:
+                logger.info("预取 Slack 图片 %s 失败：%s", fid, exc.message)
+            except Exception:  # noqa: BLE001 - 预取失败不影响页面，打开时会再试
+                logger.warning("预取 Slack 图片 %s 出错", fid, exc_info=True)
+
+    def prune_files(self, max_bytes: int = FILES_MAX_BYTES) -> int:
+        """图片目录超过上限：按最后修改时间删最旧的，删到上限的 80%。返回删掉的个数。"""
+        files_dir = self.cache_dir / "files"
+        if not files_dir.is_dir():
+            return 0
+        entries = [(p.stat().st_mtime, p.stat().st_size, p) for p in files_dir.iterdir()
+                   if p.is_file() and not p.name.endswith((".json", ".tmp"))]
+        total = sum(size for _, size, _ in entries)
+        if total <= max_bytes:
+            return 0
+        removed = 0
+        for _, size, path in sorted(entries):
+            if total <= max_bytes * 0.8:
+                break
+            path.unlink(missing_ok=True)
+            path.with_name(path.name + ".json").unlink(missing_ok=True)
+            total -= size
+            removed += 1
+        return removed
+
+    # -- 后台同步
+
+    def start_background_sync(self, interval: float = SYNC_INTERVAL_S) -> None:
+        """进程里起一个后台线程，定时把所有会话的新消息拉进本地（只拉新的）。重复调用无副作用。"""
+        with self._lock:
+            if self._sync_thread is not None and self._sync_thread.is_alive():
+                return
+            self._sync_thread = threading.Thread(target=self._sync_loop, args=(interval,), name="slack-sync", daemon=True)
+            self._sync_thread.start()
+
+    def _sync_loop(self, interval: float) -> None:
+        while True:
+            delay = interval
+            try:
+                self.sync_all()
+            except SlackInboxError as exc:
+                # 凭证失效或被限流就放慢，等页面上重新填凭证
+                delay = interval * (10 if exc.code in {"CREDENTIALS_EXPIRED", "CREDENTIALS_MISSING"} else 3)
+                logger.info("Slack 后台同步暂停：%s", exc.message)
+            except Exception:  # noqa: BLE001 - 后台线程不能死
+                logger.warning("Slack 后台同步出错", exc_info=True)
+            time.sleep(delay)
+
+    def sync_all(self) -> Dict[str, int]:
+        """一轮同步：每个会话按 client.counts 的最新 ts 判断，有新的才拉；有新回复的 thread 拉新回复。"""
+        if self.store.load() is None:
+            return {"conversations": 0, "new": 0}
+        new = 0
+        convs = self.conversations()
+        for conv in convs:
+            new += self.sync_conversation(conv["id"], conv["latest_ts"])
+        for t in self.threads()["threads"]:
+            if t["has_unreads"]:
+                self.sync_thread(t["channel_id"], t["thread_ts"])
+        self._last_sync = self._now()
+        if self._now() - self._last_prune > 3600:
+            self._last_prune = self._now()
+            self.prune_files()
+        return {"conversations": len(convs), "new": new}
 
     def file(self, file_id: str) -> Tuple[Path, str, str]:
         if not FILE_ID_RE.match(file_id or ""):
@@ -854,7 +1096,7 @@ class SlackInbox:
         return sections
 
     def _history_messages(self, channel_id: str) -> List[Dict[str, Any]]:
-        return [self.normalize_message(channel_id, m) for m in self._history(channel_id, 100).get("messages", [])]
+        return [self.normalize_message(channel_id, m) for m in self._recent_raw(channel_id, 100)]
 
     # -- 搜索（search.messages，只读）
 

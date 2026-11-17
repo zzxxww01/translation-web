@@ -48,7 +48,21 @@ URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`�
 
 - 用个人网页会话凭证：`xoxc-` token + `d` cookie（`xoxd-`），不需要装 Slack App。
 - 凭证存 `data/slack_credentials.json`（600，格式 `{"token": "...", "cookie_d": "..."}`）；失效时页面会弹出表单重新填写，只写不回显。
-- 缓存：`data/slack_cache/`（用户名、已下载的附件）；会话/消息/thread 列表在内存里缓存 30 秒，`client.userBoot` 5 分钟。
+- 缓存：`data/slack_cache/`（用户名、附件、AI 结果、消息库）；会话列表在内存里缓存 30 秒，`client.userBoot` 5 分钟。
+
+## 本地副本（`data/slack_cache/slack.db`，`src/services/slack_store.py`）
+
+消息存在服务器上，页面一律从本地读；向 Slack 只要本地没有的：
+
+- **第一次打开会话**：拉最近 100 条。之后按 `client.counts` 里的最新 ts 判断，本地已经有了就一次都不问 Slack，
+  有新的才用 `oldest=本地最新` 只拉新的。
+- **往前翻**：本地有就直接给；翻到本地最早那条之前，才用 `latest=本地最早` 向 Slack 补一页，补全后记 `complete`。
+- **旧消息上的变化**（编辑、删除、表情、回复数）：每个会话每 5 分钟重拉最近 7 天一次；这段时间里本地有、Slack 没有的标为删除。
+- **thread**：每 30 秒用 `oldest=本地最新回复` 只拉新回复，每 10 分钟整个重拉一次补编辑和删除；根消息的回复数顺带更新到频道消息流。
+- **后台同步**：服务启动时（有凭证）起一个线程，每 60 秒把所有会话的新消息、有新回复的 thread 拉进本地。
+  第二轮起没有新消息时只调 `client.counts` 等几个元数据接口，不调 history。
+- **图片**：新消息里 slack.com 上的图片（≤25 MB）后台预取到 `files/`，打开时直接从本地出；`files/` 超过 2 GB 时按时间删最旧的，删到 80%。
+- 只是缓存：删掉 `slack.db` 不丢任何东西，下次会重新从 Slack 拉。侧栏顶部显示本地已存条数和上次同步时间。
 
 ## 企业版工作区的限制（2026-11 实测）
 
