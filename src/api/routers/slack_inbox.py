@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 from functools import lru_cache
 from pathlib import Path
 from typing import Dict, List, Literal, Optional
@@ -45,11 +46,15 @@ _INLINE_IMAGE_TYPES = {"image/png", "image/jpeg", "image/gif", "image/webp"}
 
 @lru_cache(maxsize=1)
 def get_slack_inbox() -> SlackInbox:
-    return SlackInbox(
+    inbox = SlackInbox(
         SlackCredentialStore(Path(settings.slack_credentials_file)),
         cache_dir=Path(settings.slack_cache_dir),
         dm_recent_days=settings.slack_dm_recent_days,
     )
+    # 第一次有人用 Slack 页就起后台同步，之后一直把新消息拉进本地（测试里不起）
+    if not os.environ.get("PYTEST_CURRENT_TEST"):
+        inbox.start_background_sync()
+    return inbox
 
 
 def _to_api_error(error: SlackInboxError) -> APIException:

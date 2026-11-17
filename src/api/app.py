@@ -2,6 +2,7 @@
 
 import asyncio
 import os
+from contextlib import asynccontextmanager
 import logging
 from dotenv import load_dotenv
 from src.settings import settings
@@ -51,10 +52,19 @@ from .routers import (
 )
 
 
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    # Slack 页的本地副本：服务一起来就开始后台同步（只拉新的）；没配凭证或在跑测试就不起
+    if not os.environ.get("PYTEST_CURRENT_TEST") and Path(settings.slack_credentials_file).is_file():
+        slack_inbox.get_slack_inbox()
+    yield
+
+
 app = FastAPI(
     title="Translation Agent API",
     description="High-quality translation platform API",
     version="2.0.0",
+    lifespan=lifespan,
 )
 
 # 增加请求体大小限制（支持大文档）

@@ -9,6 +9,8 @@ export interface SlackStatus {
   url?: string;
   error_code?: string;
   error?: string;
+  /** 服务器上的本地副本：已存消息数、库大小、上次后台同步时间（epoch 秒） */
+  local?: { messages: number; conversations: number; db_bytes: number; last_sync: number | null };
 }
 
 export interface SlackConversation {
