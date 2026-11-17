@@ -7,7 +7,7 @@ import { useMessageZh, useShowZh } from './ai';
 import { MessageItem } from './MessageItem';
 import { ZhToggle } from './ZhToggle';
 import { useMarkRead, usePageVisible, useSlackMessages } from './hooks';
-import { buildStream, newestTs } from './lib';
+import { buildStream, kindLabel, newestTs } from './lib';
 import type { SlackConversation } from './types';
 
 function Divider({ label, tone }: { label: string; tone: 'day' | 'new' }) {
@@ -95,7 +95,12 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
           <ArrowLeft className="h-4 w-4" />
         </Button>
         {(isChannel || conversation.kind === 'mpim') && <KindIcon className="h-4 w-4 shrink-0 text-text-muted" />}
-        <h2 className="min-w-0 flex-1 truncate text-[15px] font-bold text-text-primary">{conversation.name}</h2>
+        <div className="min-w-0 flex-1">
+          <h2 className="truncate text-[15px] font-bold text-text-primary">{conversation.name}</h2>
+          <div className="truncate text-[11px] text-text-muted">
+            {kindLabel(conversation.kind)}{isChannel ? ' · 有回复的消息点「N 条回复」在右边看 thread' : ''}
+          </div>
+        </div>
         <ZhToggle loading={zh.loading} failed={zh.failed} />
         {onOpenAgent && (
           <Button variant="outline" size="sm" className="h-7 lg:hidden" onClick={onOpenAgent}>
@@ -121,7 +126,10 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
         {query.isLoading ? (
           <div className="flex h-full items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-text-muted" /></div>
         ) : query.isError ? (
-          <div className="p-6 text-sm text-error">加载消息失败：{query.error.message}</div>
+          <div className="p-6 text-sm text-error">
+            消息没加载出来：{query.error.message}
+            <Button variant="outline" size="sm" className="ml-2 h-7" onClick={() => void query.refetch()}>重试</Button>
+          </div>
         ) : (
           <>
             {query.hasNextPage && (

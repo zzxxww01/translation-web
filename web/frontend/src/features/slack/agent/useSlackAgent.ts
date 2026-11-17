@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ApiErrorWrapper } from '@/shared/api/client';
 import { AUTO_REPLY_MINUTES, sendMessage, skillsApi, startRun } from '@/features/skills/api';
@@ -51,7 +51,8 @@ const REFRESH_MESSAGE = '对话有新消息，附件是最新的完整内容，�
 export type AgentPhase = 'idle' | 'starting' | 'queued' | 'error';
 
 /**
- * 一个 Slack 会话 / thread 对应的 agent：先按 source 找已有的对话；没有就自动导出上下文、启动 skill。
+ * 一个 Slack 会话 / thread 对应的 agent：先按 source 找已有的对话；没有的话等用户点「开始」才导出上下文、启动 skill
+ * （不自动启动：点开每个 thread 都起一个 agent 太吵，也容易排队报错）。
  * 服务端忙（另一个 Slack agent 在跑）时返回 429，这里每 15 秒重试一次，页面上显示「排队中」。
  */
 export function useSlackAgent(channelId: string, threadTs: string | null) {
@@ -68,7 +69,6 @@ export function useSlackAgent(channelId: string, threadTs: string | null) {
   });
   const [phase, setPhase] = useState<AgentPhase>('idle');
   const [error, setError] = useState<string | null>(null);
-  const attempted = useRef(false);
 
   const start = useCallback(async () => {
     setPhase('starting');
@@ -92,18 +92,11 @@ export function useSlackAgent(channelId: string, threadTs: string | null) {
         return;
       }
       setPhase('error');
-      setError(err instanceof Error ? err.message : '启动失败');
+      const message = err instanceof Error ? err.message : '启动失败';
+      // XHR 连不上时只有一句「网络错误」，说清楚是哪一段
+      setError(message.includes('网络错误') ? '连不上 AI 服务（Claude 页的 skill-runner），检查网络后重试' : message);
     }
   }, [channelId, threadTs, isThread, source, queryClient]);
-
-  // 打开就自动启动（每个 thread / 私信只自动试一次；失败了让用户手动重试）
-  const needsStart = lookup.isSuccess && lookup.data === null;
-  useEffect(() => {
-    if (!needsStart || attempted.current) return;
-    attempted.current = true;
-    const timer = setTimeout(() => void start(), 0);
-    return () => clearTimeout(timer);
-  }, [needsStart, start]);
 
   useEffect(() => {
     if (phase !== 'queued') return;

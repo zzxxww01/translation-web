@@ -118,9 +118,20 @@ export function SlackFeature() {
             onOpenAgent={dmAgent ? () => update({ ai: '1' }) : undefined}
           />
         ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-2 text-sm text-text-muted">
-            <MessagesSquare className="h-8 w-8 opacity-40" />
-            从左侧选择一个频道、私信或 thread
+          <div className="flex h-full items-center justify-center p-6">
+            <div className="max-w-md space-y-3 text-sm text-text-secondary">
+              <div className="flex items-center gap-2 text-text-primary">
+                <MessagesSquare className="h-5 w-5 text-primary-500" />
+                <span className="font-semibold">这里是你的 Slack（只读）</span>
+              </div>
+              <ul className="list-disc space-y-1.5 pl-5">
+                <li><b>频道</b>：你加入的公开 / 私有频道。点频道名看消息；下面缩进的是这个频道最近有回复的 <b>thread</b>（某条消息下面的回复串），标题是 AI 起的中文名。</li>
+                <li><b>私信</b>：一对一的对话，和几个人的小群（群聊私信）。</li>
+                <li><b>AI 速览</b>：把所有未读整理成中文要点。<b>我参与的 thread</b>：你回复过或被 @ 过的回复串。</li>
+                <li>默认显示英文原文。鼠标移到消息上点「译」翻这一条，或在顶栏打开「全部中文」。</li>
+                <li>右栏的 AI（翻译帖子、建议回复）要点「开始」才会跑；momo 不会往 Slack 发任何东西，也不改 Slack 的已读。</li>
+              </ul>
+            </div>
           </div>
         )}
       </section>

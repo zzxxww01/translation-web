@@ -1,5 +1,7 @@
-import { ExternalLink, FileDown, MessageSquareText } from 'lucide-react';
+import { useState } from 'react';
+import { ExternalLink, FileDown, Languages, Loader2, MessageSquareText } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useOneZh } from './ai';
 import { clockTime, emojiFor, emojify } from './lib';
 import { SlackText } from './SlackText';
 import type { SlackMessage } from './types';
@@ -16,10 +18,29 @@ export function Avatar({ name, size = 'md' }: { name: string; size?: 'sm' | 'md'
   );
 }
 
-function MessageBody({ message, zh }: { message: SlackMessage; zh?: string | null }) {
+/** 点了「译」的单条消息：现翻这一条（后端有缓存）。 */
+function OnDemandZh({ text }: { text: string }) {
+  const zh = useOneZh(text, true);
+  if (zh.isLoading) return <div className="mt-0.5 flex items-center gap-1 pl-2 text-xs text-text-muted"><Loader2 className="h-3 w-3 animate-spin" /> 翻译中…</div>;
+  if (zh.isError) return <div className="mt-0.5 pl-2 text-xs text-error">翻译失败：{zh.error.message}</div>;
+  if (!zh.data) return <div className="mt-0.5 pl-2 text-xs text-text-muted">这条不需要翻译</div>;
+  return <ZhLine zh={zh.data} />;
+}
+
+function ZhLine({ zh }: { zh: string }) {
+  return (
+    // AI 中文：紧跟在原文下面，灰色小一号，和原文一眼区分开
+    <div className="mt-0.5 whitespace-pre-wrap break-words border-l-2 border-primary-100 pl-2 text-[13px] leading-relaxed text-text-secondary" lang="zh">
+      {emojify(zh)}
+    </div>
+  );
+}
+
+function MessageBody({ message, zh, askedZh }: { message: SlackMessage; zh?: string | null; askedZh: boolean }) {
   return (
     <>
       {message.segments.length > 0 && <SlackText segments={message.segments} />}
+      {!zh && askedZh && <OnDemandZh text={message.text} />}
       {zh && (
         // AI 中文：紧跟在原文下面，灰色小一号，和原文一眼区分开
         <div className="mt-0.5 whitespace-pre-wrap break-words border-l-2 border-primary-100 pl-2 text-[13px] leading-relaxed text-text-secondary" lang="zh">
@@ -88,6 +109,8 @@ interface MessageItemProps {
 
 export function MessageItem({ message, compact = false, onOpenThread, active = false, zh }: MessageItemProps) {
   const isThreadRoot = message.reply_count > 0 && message.thread_ts === message.ts;
+  // 没开「全部中文」时，单条点「译」才翻
+  const [askedZh, setAskedZh] = useState(false);
   return (
     <div
       className={cn(
@@ -112,7 +135,7 @@ export function MessageItem({ message, compact = false, onOpenThread, active = f
             <span className="text-xs text-text-muted" title={message.time}>{clockTime(message.ts)}{message.edited ? ' · 已编辑' : ''}</span>
           </div>
         )}
-        <MessageBody message={message} zh={zh} />
+        <MessageBody message={message} zh={zh} askedZh={askedZh} />
         {isThreadRoot && onOpenThread && (
           <button
             type="button"
@@ -126,6 +149,17 @@ export function MessageItem({ message, compact = false, onOpenThread, active = f
       </div>
       {/* 悬停工具条，和 Slack 一样浮在消息右上角 */}
       <div className="absolute -top-3 right-4 hidden items-center gap-0.5 rounded-md border border-border-subtle bg-white p-0.5 shadow-sm group-hover:flex">
+        {!zh && message.text.trim() && (
+          <button
+            type="button"
+            onClick={() => setAskedZh(v => !v)}
+            className={cn('rounded p-1 hover:bg-bg-hover hover:text-text-primary', askedZh ? 'text-primary-700' : 'text-text-muted')}
+            title={askedZh ? '收起中文' : '翻译这条'}
+            aria-label={askedZh ? '收起中文' : '翻译这条'}
+          >
+            <Languages className="h-4 w-4" />
+          </button>
+        )}
         {onOpenThread && (
           <button
             type="button"
