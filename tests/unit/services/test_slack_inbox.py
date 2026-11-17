@@ -139,6 +139,12 @@ def test_client_rejects_methods_outside_whitelist(method):
     assert exc.value.code == "METHOD_NOT_ALLOWED"
 
 
+def test_default_client_ignores_env_proxies(monkeypatch):
+    monkeypatch.setenv("HTTPS_PROXY", "http://127.0.0.1:9")
+    client = SlackReadOnlyClient(normalize_credentials("xoxc-a", "xoxd-b"))
+    assert client._http.trust_env is False
+
+
 def test_client_sends_credentials_only_to_slack():
     seen = []
 

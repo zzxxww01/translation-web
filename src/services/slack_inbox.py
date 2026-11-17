@@ -136,7 +136,8 @@ def _is_slack_file_url(url: str) -> bool:
 
 class SlackReadOnlyClient:
     def __init__(self, creds: SlackCredentials, http: Optional[httpx.Client] = None):
-        self._http = http or httpx.Client(timeout=20.0, follow_redirects=False)
+        # 不走 .env 里给 LLM 配的 HTTP(S)_PROXY：那个代理连不到 Slack，而服务器直连 slack.com 是通的
+        self._http = http or httpx.Client(timeout=20.0, follow_redirects=False, trust_env=False)
         self._headers = {
             "Authorization": f"Bearer {creds.token}",
             "Cookie": f"d={creds.cookie_d}",
