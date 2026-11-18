@@ -32,7 +32,8 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 
 - **watermark = 这次调用开始同步那一刻**（UTC ISO），不是数据里的最大时间：同步期间新到的下次还会出现，不漏；
   极少数会重复一次，Muse 按 `slug`、`conversation_id + message_ts` 去重。Slack 同步失败时 watermark 不前进（= since）。
-- **mention_type**：`direct`（`<@U0A8T7U5D7A>`）> `group`（`<!subteam^ID>` 且 ID 在 `AUTOMATION_SLACK_GROUP_IDS` 里）>
+- **私信**（`dm`）：私信和群聊私信里别人发的每一条都返回（不管有没有 @，含 thread 回复；不含自己发的、Slackbot / bot、入群改名这类系统消息）。
+- **其余会话的 mention_type**：`direct`（`<@U0A8T7U5D7A>`）> `group`（`<!subteam^ID>` 且 ID 在 `AUTOMATION_SLACK_GROUP_IDS` 里）>
   `channel`（`<!channel>` / `<!here>` / `<!everyone>`）；一条只返回一次，取最强的一类；自己发的不算；只在链接卡片里出现的不算。
   企业版工作区查不了 `usergroups.*`：「我所在的组」先从 `client.userBoot` 的 `subteams.self` 自动识别，再并上
   `AUTOMATION_SLACK_GROUP_IDS`（逗号分隔，`.env` 里设）。`health` 的 `slack_groups` 能看到两边各几个，都是 0 时 group 为空。
