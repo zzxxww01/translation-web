@@ -85,6 +85,12 @@ class Settings(BaseSettings):
     slack_cache_dir: str = "data/slack_cache"
     slack_dm_recent_days: int = 30
 
+    # Muse 自动化（routers/automation.py）：我所在的 Slack 用户组 ID，逗号分隔（S 开头）。
+    # 企业版工作区查不了 usergroups.*，只能手填；空着时 group 类 @ 永远为空
+    automation_slack_group_ids: str = ""
+    # 交付给 Muse 的译文链接前缀
+    automation_public_url: str = "https://momo.beauty"
+
     # Translation
     default_context_window: int = 5
     default_translation_style: str = "natural_professional"

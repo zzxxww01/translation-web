@@ -32,6 +32,7 @@ from .release_identity import release_identity
 from .middleware import LimitUploadSize, LoggingMiddleware, register_error_handlers
 from .middleware.rate_limit import limiter, RateLimitExceeded, _rate_limit_exceeded_handler
 from .routers import (
+    automation,
     confirmation,
     consistency,
     glossary,
@@ -105,6 +106,8 @@ app.include_router(segmentation.router, prefix="/api", tags=["segmentation"])
 app.include_router(wechat_format.router, prefix="/api", tags=["wechat"])
 app.include_router(substack.router, prefix="/api", tags=["substack"])
 app.include_router(workbench.router, prefix="/api", tags=["workbench"])
+# Muse 自动化：不在 /api 下，nginx 不转发，只给本机 CLI 用
+app.include_router(automation.router, tags=["automation"])
 
 
 frontend_dist_path = Path(__file__).parent.parent.parent / "web" / "frontend" / "dist"

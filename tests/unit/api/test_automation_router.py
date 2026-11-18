@@ -1,0 +1,279 @@
+"""Muse 自动化接口（/internal/automation）：只许本机、updates 水位线、translate-article 幂等、status 映射。"""
+
+import asyncio
+from datetime import datetime, timezone
+from types import SimpleNamespace
+
+import pytest
+from starlette.requests import Request
+
+from src.api.middleware import APIException, ConflictException
+from src.api.routers import automation
+from src.core.project import ProjectManager
+from src.services.substack_library import SubstackLibrary
+from src.services.substack_service import ArchivePost, FetchedArticle, SubstackCookieStore, SubstackError
+
+URL_NEW = "https://newsletter.semianalysis.com/p/new-post"
+URL_OLD = "https://newsletter.semianalysis.com/p/old-post"
+HTML = f"""<html><head><title>New Post</title><meta property="og:url" content="{URL_NEW}"></head><body>
+<article class="newsletter-post post"><div class="post-header"><h1 class="post-title">New Post</h1></div>
+<div class="available-content"><div class="body markup">
+<p>First paragraph of the article body with enough words to be kept.</p>
+<p>Another paragraph in the article with enough words as well.</p>
+</div></div></article></body></html>"""
+
+
+def _request(headers=(), host="127.0.0.1") -> Request:
+    return Request({"type": "http", "method": "POST", "path": "/internal/automation/x",
+                    "headers": [(k.encode(), v.encode()) for k, v in headers], "client": (host, 50000)})
+
+
+def _epoch(iso: str) -> float:
+    return datetime.fromisoformat(iso.replace("Z", "+00:00")).timestamp()
+
+
+class FakeClient:
+    def __init__(self, tmp_path):
+        self.cookie_store = SubstackCookieStore(cookie_file=tmp_path / "cookie.txt",
+                                                domain="newsletter.semianalysis.com")
+        self.fetched = []
+        self.archive_error = None
+
+    def fetch_article(self, url):
+        self.fetched.append(url)
+        return FetchedArticle(url=URL_NEW, slug="new-post", title="New Post", html=HTML)
+
+    def list_archive(self, *, cursor=None, limit=24, search=""):
+        if self.archive_error:
+            raise self.archive_error
+        return [
+            ArchivePost(title="New Post", subtitle="", slug="new-post", url=URL_NEW,
+                        post_date="2026-11-17T10:00:00.000Z", is_paid=True, cover_image=None, wordcount=4894),
+            ArchivePost(title="Old Post", subtitle="", slug="old-post", url=URL_OLD,
+                        post_date="2026-10-01T10:00:00.000Z", is_paid=False, cover_image=None, wordcount=900),
+        ], None
+
+
+class FakeInbox:
+    def __init__(self, configured=True, error=None):
+        self.store = SimpleNamespace(load=lambda: object() if configured else None)
+        self.error = error
+        self.synced = 0
+        self.since = None
+
+    def sync_all(self):
+        if self.error:
+            raise self.error
+        self.synced += 1
+
+    def mentions_since(self, since, group_ids):
+        self.since = since
+        return [{"conversation_id": "C1", "message_ts": "1.0", "mention_type": "direct"}] if since < 100 else []
+
+
+@pytest.fixture
+def env(tmp_path, monkeypatch):
+    pm = ProjectManager(projects_path=str(tmp_path / "projects"))
+    client = FakeClient(tmp_path)
+    library = SubstackLibrary(tmp_path / "library.json", client_factory=lambda: client)
+    inbox = FakeInbox()
+    monkeypatch.setattr(automation, "get_project_manager", lambda: pm)
+    monkeypatch.setattr(automation, "get_substack_client", lambda: client)
+    monkeypatch.setattr(automation, "get_substack_library", lambda: library)
+    monkeypatch.setattr(automation, "get_slack_inbox", lambda: inbox)
+    return SimpleNamespace(pm=pm, client=client, library=library, inbox=inbox, monkeypatch=monkeypatch)
+
+
+# ---------------------------------------------------------------- 只许本机
+
+
+@pytest.mark.parametrize("headers,host", [
+    ((("x-forwarded-for", "1.2.3.4"),), "127.0.0.1"),
+    ((("cf-connecting-ip", "1.2.3.4"),), "127.0.0.1"),
+    ((("x-real-ip", "1.2.3.4"),), "127.0.0.1"),
+    ((), "10.0.0.5"),
+])
+def test_require_local_rejects_proxied_or_remote(headers, host):
+    with pytest.raises(APIException) as exc:
+        automation.require_local(_request(headers, host))
+    assert exc.value.status_code == 403
+
+
+def test_require_local_allows_loopback():
+    automation.require_local(_request())
+    automation.require_local(_request(host="::1"))
+
+
+def test_router_is_outside_api_prefix():
+    from src.api.app import app
+    paths = {route.path for route in app.routes}
+    assert "/internal/automation/updates" in paths
+    assert not any(p.startswith("/api/internal") for p in paths)
+
+
+# ---------------------------------------------------------------- updates
+
+
+@pytest.mark.asyncio
+async def test_updates_returns_new_since_and_watermark_empties_next_call(env):
+    since = _epoch("2026-11-01T00:00:00Z")
+    first = await automation.updates(since=since)
+    assert [a["slug"] for a in first["new_articles"]] == ["new-post"]
+    article = first["new_articles"][0]
+    assert article["status"] == "not_imported" and article["paid"] is True and article["word_count"] == 4894
+    assert first["mentions"] == []  # FakeInbox 只在 since < 100 时返回
+    assert "warnings" not in first
+    assert env.inbox.synced == 1
+
+    again = await automation.updates(since=_epoch(first["watermark"]))
+    assert again["new_articles"] == [] and again["mentions"] == []
+    assert _epoch(again["watermark"]) >= _epoch(first["watermark"])
+
+
+@pytest.mark.asyncio
+async def test_updates_never_imports_or_translates(env):
+    await automation.updates(since=0)
+    assert env.pm.list_summaries(include_variants=True) == []
+    assert env.client.fetched == []
+
+
+@pytest.mark.asyncio
+async def test_updates_slack_failure_keeps_watermark(env):
+    env.inbox.error = RuntimeError("boom")
+    result = await automation.updates(since=50)
+    assert result["watermark"] == datetime.fromtimestamp(50, timezone.utc).isoformat().replace("+00:00", "Z")
+    assert "slack" in result["warnings"]
+    assert len(result["new_articles"]) == 2  # 文章照常返回
+
+
+@pytest.mark.asyncio
+async def test_updates_substack_failure_still_answers_from_cache(env):
+    await automation.updates(since=0)  # 先把清单存下来
+    env.client.archive_error = SubstackError("UPSTREAM_ERROR", "Substack 暂时打不开")
+    result = await automation.updates(since=0)
+    assert result["warnings"]["substack"] == "Substack 暂时打不开"
+    assert len(result["new_articles"]) == 2
+
+
+# ---------------------------------------------------------------- translate-article
+
+
+def _fake_workflow(env, *, conflict=False):
+    calls = []
+
+    async def wrapped(*, request, project_id, service, body):
+        calls.append((project_id, body))
+        if conflict:
+            raise ConflictException(detail="busy")
+        await asyncio.sleep(0)
+        return {"status": "started", "run_id": "r1", "resumed": False}
+
+    env.monkeypatch.setattr(automation, "start_longform_workflow", SimpleNamespace(__wrapped__=wrapped))
+    env.monkeypatch.setattr(automation, "get_batch_service", lambda: None)
+    return calls
+
+
+@pytest.mark.asyncio
+async def test_translate_article_imports_and_starts_four_step_with_auto_terms(env):
+    calls = _fake_workflow(env)
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(article="new-post"))
+    assert result["status"] == "started"
+    assert result["url"].endswith(f"/articles/{result['project_id']}")
+    (project_id, body), = calls
+    assert project_id == result["project_id"]
+    assert body.method == "four-step" and body.auto_accept_terms is True
+
+
+@pytest.mark.asyncio
+async def test_translate_article_is_idempotent_and_serialised(env):
+    calls = _fake_workflow(env)
+    states = iter([("imported", 0), ("translating", 0)])
+    env.monkeypatch.setattr(automation, "_translation_state", lambda *a, **k: next(states))
+    req = automation.TranslateArticleRequest(article="new-post")
+    first, second = await asyncio.gather(automation.translate_article(_request(), req),
+                                         automation.translate_article(_request(), req))
+    assert {first["status"], second["status"]} == {"started", "already_exists"}
+    assert first["project_id"] == second["project_id"]
+    assert len(env.pm.list_summaries(include_variants=True)) == 1
+    assert len(calls) == 1
+    assert env.client.fetched == [URL_NEW]  # 第二次没有重新下载
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("state", ["translating", "awaiting_terms", "translated"])
+async def test_translate_article_returns_existing_project(env, state):
+    calls = _fake_workflow(env)
+    env.monkeypatch.setattr(automation, "_translation_state", lambda *a, **k: (state, 40))
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(article=URL_NEW))
+    assert result["status"] == "already_exists" and result["translation_status"] == state
+    assert calls == []
+
+
+@pytest.mark.asyncio
+async def test_translate_article_slot_conflict_counts_as_existing(env):
+    _fake_workflow(env, conflict=True)
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(article="new-post"))
+    assert result["status"] == "already_exists"
+
+
+@pytest.mark.asyncio
+async def test_translate_article_unknown_slug_and_language(env):
+    _fake_workflow(env)
+    with pytest.raises(APIException) as exc:
+        await automation.translate_article(_request(), automation.TranslateArticleRequest(article="nope"))
+    assert exc.value.status_code == 404
+    with pytest.raises(APIException):
+        await automation.translate_article(
+            _request(), automation.TranslateArticleRequest(article="new-post", target_lang="ja"))
+
+
+# ---------------------------------------------------------------- status
+
+
+class FakeStatusService:
+    def __init__(self, payload):
+        self.payload = payload
+
+    async def get_translation_progress(self, project_id):
+        return self.payload
+
+
+async def _imported_project(env):
+    _fake_workflow(env)
+    env.monkeypatch.setattr(automation, "_translation_state", lambda *a, **k: ("imported", 0))
+    result = await automation.translate_article(_request(), automation.TranslateArticleRequest(article="new-post"))
+    return result["project_id"]
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("state,payload,expected", [
+    (("translating", 30), {"status": "processing", "current_step": "第 2 章"}, "running"),
+    (("awaiting_terms", 0), {"status": "starting"}, "running"),
+    (("translated", 100), {"status": "completed"}, "done"),
+    (("partial", 60), {"status": "failed", "errors": [{"error": "model timeout"}]}, "failed"),
+    (("partial", 60), {"status": "idle"}, "failed"),
+    (("imported", 0), {"status": "idle"}, "not_started"),
+])
+async def test_status_mapping(env, state, payload, expected):
+    project_id = await _imported_project(env)
+    env.monkeypatch.setattr(automation, "_translation_state", lambda *a, **k: state)
+    env.monkeypatch.setattr(automation, "get_translation_status_service", lambda: FakeStatusService(payload))
+    result = await automation.project_status(project_id)
+    assert result["status"] == expected
+    assert result["progress"] == state[1]
+    if expected == "done":
+        assert result["result"].endswith(f"/articles/{project_id}")
+    else:
+        assert result["result"] is None
+    if expected == "failed":
+        assert result["error"]
+    if expected == "running":
+        assert result["stage"] == payload.get("current_step")
+
+
+@pytest.mark.asyncio
+async def test_status_unknown_project(env):
+    env.monkeypatch.setattr(automation, "get_translation_status_service", lambda: FakeStatusService({}))
+    with pytest.raises(APIException) as exc:
+        await automation.project_status("missing-project")
+    assert exc.value.status_code == 404
