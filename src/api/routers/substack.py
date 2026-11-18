@@ -268,16 +268,25 @@ async def import_article(
     pm: ProjectManagerDep,
     client: SubstackClientDep,
 ):
+    project, already_imported = await import_substack_article(pm, client, body.url, body.name)
+    return SubstackImportResponse(project=_build_project_response(project), already_imported=already_imported)
+
+
+async def import_substack_article(pm: ProjectManager, client: SubstackClient, url: str,
+                                  name: Optional[str] = None):
+    """导入一篇文章，返回（项目，是否早就导入过）。已导入过的直接返回原项目，不重复下载。
+
+    Muse 自动化（routers/automation.py）也走这里。
+    """
     try:
-        requested_url = normalize_article_url(body.url)
+        requested_url = normalize_article_url(url)
     except SubstackError as error:
         raise _to_api_error(error) from error
 
-    # 已导入过的直接返回原项目，不重复下载
     imported, _variants = await asyncio.to_thread(_imported_projects, pm)
     existing = imported.get(article_key(requested_url) or "")
     if existing is not None:
-        return SubstackImportResponse(project=_build_project_response(existing), already_imported=True)
+        return existing, True
 
     try:
         article = await run_blocking(client.fetch_article, requested_url)
@@ -287,13 +296,13 @@ async def import_article(
     # 分享链接（open.substack.com 等）跳转后才知道真正的原文地址，再查一次
     existing = imported.get(article_key(article.url) or "")
     if existing is not None:
-        return SubstackImportResponse(project=_build_project_response(existing), already_imported=True)
+        return existing, True
 
     def stage_and_create():
         with tempfile.TemporaryDirectory() as temp_dir:
             source_path = Path(temp_dir) / f"{article.slug}.html"
             source_path.write_text(article.html, encoding="utf-8")
-            return pm.create((body.name or "").strip() or article.title, str(source_path))
+            return pm.create((name or "").strip() or article.title, str(source_path))
 
     try:
         meta = await run_blocking(stage_and_create)
@@ -305,7 +314,7 @@ async def import_article(
                 error_code="PROJECT_EXISTS",
             ) from error
         raise APIException(status_code=400, detail=str(error), error_code="BAD_REQUEST") from error
-    return SubstackImportResponse(project=_build_project_response(meta))
+    return meta, False
 
 
 @router.get("/cookie", response_model=SubstackCookieStatus)

@@ -20,8 +20,9 @@ import re
 import threading
 import time
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
 from src.services.slack_store import SlackStore
 from urllib.parse import parse_qs, urlparse
@@ -1175,6 +1176,60 @@ class SlackInbox:
             "markdown": agent_context_markdown(info, messages, self.auth().get("user", ""), is_thread=bool(thread_ts)),
             "history": history,
         }
+
+    # -- Muse 自动化：since 之后谁 @ 了我（只读本地副本，不标已读）
+
+    def mentions_since(self, since: float, group_ids: Iterable[str] = (), limit: int = 200) -> List[Dict[str, Any]]:
+        me = self.auth().get("user_id", "")
+        groups = [g for g in group_ids if g]
+        needles = [f"<@{me}"] if me else []
+        needles += [f"<!subteam^{g}" for g in groups] + list(BROADCAST_MENTIONS)
+        result = []
+        for raw in self.db.messages_containing(since, needles, limit=limit):
+            if me and raw.get("user") == me:
+                continue
+            kind = mention_type(raw.get("text") or "", me, groups)
+            if kind is None:  # 只在附件 / 卡片里出现，不算
+                continue
+            cid = raw["channel_id"]
+            ts = str(raw.get("ts") or "")
+            thread_ts = raw.get("thread_ts")
+            user_id = raw.get("user") or ""
+            result.append({
+                "conversation_id": cid,
+                "conversation_name": self._mention_conversation_name(cid),
+                "message_ts": ts,
+                "thread_ts": thread_ts if thread_ts and thread_ts != ts else None,
+                "time": datetime.fromtimestamp(float(ts), timezone.utc).isoformat().replace("+00:00", "Z"),
+                "from_user": self.user_name(user_id) if user_id
+                else (raw.get("bot_profile") or {}).get("name") or raw.get("username") or "Bot",
+                "text": segments_to_plain(parse_slack_text(raw.get("text") or "", self.user_name)),
+                "mention_type": kind,
+                "permalink": self._permalink(cid, ts, thread_ts),
+            })
+        return result
+
+    def _mention_conversation_name(self, channel_id: str) -> str:
+        try:
+            info = self._conversation_info(channel_id)
+        except SlackInboxError:
+            return channel_id
+        if info["kind"] == "im":
+            return self.user_name(info["user"])
+        if info["kind"] == "mpim":
+            return mpim_label(info["name"], self.auth().get("user", ""))
+        return info["name"] or channel_id
+
+
+def mention_type(text: str, me: str, group_ids: Iterable[str] = ()) -> Optional[str]:
+    """一条消息对我来说算哪类 @：direct（点名我）> group（我所在的用户组）> channel（@channel/@here）。"""
+    if me and f"<@{me}" in text:
+        return "direct"
+    if any(f"<!subteam^{g}" in text for g in group_ids if g):
+        return "group"
+    if any(t in text for t in BROADCAST_MENTIONS):
+        return "channel"
+    return None
 
 
 def agent_context_markdown(conv: Dict[str, Any], messages: List[Dict[str, Any]], me: str, is_thread: bool) -> str:

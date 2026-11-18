@@ -238,6 +238,7 @@ printf '%s' 'Could you review this?' | ./slack-reply
 - [帖子翻译链路](docs/帖子翻译链路.md) - 帖子翻译数据流
 - [术语库系统手册](docs/术语库系统手册.md) - 术语库管理和使用
 - [规则库系统手册](docs/规则库系统手册.md) - 规则库配置和应用
+- [Muse 自动化](docs/Muse自动化.md) - 给 Muse 经 SSH 调用的 `translation-agent` CLI（查新文章 / @我、翻译、查状态）
 
 ### 部署和配置
 - [生产发布流程](docs/production-release.md) - momo.beauty 线上发布、校验与回滚的权威流程
