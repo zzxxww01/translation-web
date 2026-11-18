@@ -20,7 +20,7 @@ import re
 import threading
 import time
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterable, List, Optional, Tuple
 
@@ -79,6 +79,9 @@ AGENT_DM_MESSAGES = 30
 # AI 速览：每个会话 / thread 最多带多少条未读
 DIGEST_MAX_MESSAGES = 40
 SEARCH_COUNT = 30
+# Muse 的 @我 兜底搜索：Slack 搜索索引会晚一点，每次往回多看这么久；最多翻几页（每页 50）
+MENTION_SEARCH_LOOKBACK_S = 1800
+MENTION_SEARCH_PAGES = 3
 AUTH_TTL_S = 600
 MAX_FILE_BYTES = 25 * 1024 * 1024
 
@@ -1201,15 +1204,58 @@ class SlackInbox:
         for raw in self.db.messages_in(dm_ids, since, limit=limit):
             if _is_from_someone(raw, me):
                 found[(raw["channel_id"], str(raw.get("ts") or ""))] = self._mention_record(raw, "dm")
-        for raw in self.db.messages_containing(since, needles, limit=limit):
+        searched = self._search_mentions(since, me) if me else []
+        for raw in self.db.messages_containing(since, needles, limit=limit) + searched:
             key = (raw["channel_id"], str(raw.get("ts") or ""))
-            if key in found or raw["channel_id"] in dm_ids or not _is_from_someone(raw, me):
+            if key in found or not _is_from_someone(raw, me):
+                continue
+            if raw["channel_id"] in dm_ids:
+                found[key] = self._mention_record(raw, "dm")
                 continue
             kind = mention_type(raw.get("text") or "", me, groups)
             if kind is None:  # 只在附件 / 卡片里出现，不算
                 continue
             found[key] = self._mention_record(raw, kind)
         return sorted(found.values(), key=lambda m: float(m["message_ts"]))[-limit:]
+
+    def _search_mentions(self, since: float, me: str) -> List[Dict[str, Any]]:
+        """兜底：本地副本只同步我参与的 thread，没参与、Slack 也没自动订阅的 thread 里 @我 的回复会漏。
+        用 search.messages（只读）搜 <@我>，本地还没有的存进本地副本并返回；已经在本地的说明报过或会从本地查到，跳过。
+
+        搜索索引有延迟，往回多看 MENTION_SEARCH_LOOKBACK_S；靠「本地有没有」去重，所以同一条只报一次。失败只记日志。
+        """
+        start = max(0.0, since - MENTION_SEARCH_LOOKBACK_S)
+        # after: 按天、不含当天，再往前一天兜住时区差；精确过滤在下面按 ts 做
+        after = datetime.fromtimestamp(start, timezone.utc).date().isoformat()
+        query = f"<@{me}> after:{(datetime.fromisoformat(after) - timedelta(days=1)).date().isoformat()}"
+        fresh: List[Dict[str, Any]] = []
+        try:
+            for page in range(1, MENTION_SEARCH_PAGES + 1):
+                data = self.client().call("search.messages", query=query, count=50, sort="timestamp",
+                                          sort_dir="desc", page=page)
+                matches = (data.get("messages") or {}).get("matches") or []
+                for match in matches:
+                    cid = (match.get("channel") or {}).get("id") or ""
+                    ts = str(match.get("ts") or "")
+                    if not CONVERSATION_ID_RE.match(cid) or not TS_RE.match(ts) or float(ts) <= start:
+                        continue
+                    if self.db.message(cid, ts) is not None:
+                        continue
+                    permalink = match.get("permalink") or ""
+                    thread_ts = (parse_qs(urlparse(permalink).query).get("thread_ts") or [None])[0]
+                    raw = {k: match[k] for k in ("ts", "user", "username", "text", "attachments", "files", "bot_profile")
+                           if k in match}
+                    if thread_ts and thread_ts != ts:
+                        raw["thread_ts"] = thread_ts
+                    self.db.upsert(cid, [raw], in_history=not raw.get("thread_ts"))
+                    fresh.append({**raw, "channel_id": cid})
+                oldest = min((float(m.get("ts") or 0) for m in matches), default=0.0)
+                paging = (data.get("messages") or {}).get("paging") or {}
+                if not matches or oldest <= start or page >= int(paging.get("pages") or 1):
+                    break
+        except SlackInboxError as exc:
+            logger.warning("@我 兜底搜索失败，只用本地副本：%s", exc.message)
+        return fresh
 
     def _dm_ids(self) -> set:
         """展示范围内的私信和群聊私信（已去掉 Slackbot、bot 和自己）。"""

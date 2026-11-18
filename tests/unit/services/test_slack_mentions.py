@@ -17,6 +17,8 @@ def ts(n: float) -> str:
 class FakeSlack:
     def __init__(self):
         self.calls = []
+        self.search_matches = []  # search.messages 的结果，新→旧
+        self.search_error = None
 
     def call(self, method, **params):
         assert method in ALLOWED_METHODS
@@ -36,6 +38,11 @@ class FakeSlack:
             return {"ok": True, "channels": [{"id": CID, "latest": ts(50)}], "ims": [{"id": DM, "latest": ts(50)}]}
         if method == "subscriptions.thread.getView":
             return {"ok": True, "threads": []}
+        if method == "search.messages":
+            self.searches = getattr(self, "searches", []) + [params]
+            if self.search_error:
+                raise self.search_error
+            return {"ok": True, "messages": {"matches": self.search_matches, "paging": {"pages": 1}}}
         raise AssertionError(method)
 
 
@@ -144,3 +151,47 @@ def test_translation_source_single_message_and_thread(inbox, monkeypatch):
     with pytest.raises(SlackInboxError):
         inbox.translation_source("bad", ts(30))
     assert not any("mark" in method for method in inbox._fake.calls)
+
+
+def _match(n, text, thread=None, channel=CID, user="UAAAAAAAA1"):
+    link = f"https://team.slack.com/archives/{channel}/p{ts(n).replace('.', '')}"
+    if thread is not None:
+        link += f"?thread_ts={ts(thread)}&cid={channel}"
+    return {"ts": ts(n), "user": user, "text": text, "channel": {"id": channel, "name": "general"},
+            "permalink": link, "iid": "x", "team": "T"}
+
+
+def test_search_fills_mentions_from_threads_not_synced_locally(inbox):
+    # 我没参与的 thread 里的 @我：本地副本没有，靠搜索补上
+    inbox._fake.search_matches = [
+        _match(42, f"Thanks <@{ME}>", thread=40),
+        _match(41, f"<@{ME}> local one"),          # 本地已经有了：不从搜索重复返回
+        _match(-5000, f"<@{ME}> too old"),         # 早于 since - 回看窗口
+        _match(43, f"<@{ME}> by me", user=ME),     # 自己发的
+    ]
+    inbox.db.upsert(CID, [{"ts": ts(41), "user": "UAAAAAAAA1", "text": f"<@{ME}> local one"}], in_history=True)
+
+    got = inbox.mentions_since(T0 + 30)
+    assert [(m["message_ts"], m["mention_type"], m["thread_ts"]) for m in got] == [
+        (ts(41), "direct", None), (ts(42), "direct", ts(40)),
+    ]
+    query = inbox._fake.searches[-1]["query"]
+    assert query.startswith(f"<@{ME}> after:")
+    # 搜到的存进了本地副本（translate-slack 能直接找到），下次不再从搜索重复报
+    assert inbox.db.message(CID, ts(42))["thread_ts"] == ts(40)
+    assert inbox.mentions_since(T0 + 42) == []
+
+
+def test_search_catches_late_indexed_mentions_once(inbox):
+    # 上次查询时搜索还没索引到的消息（ts 早于这次的 since，但在回看窗口里）：补报一次
+    inbox._fake.search_matches = [_match(100, f"<@{ME}> late", thread=90)]
+    got = inbox.mentions_since(T0 + 200)
+    assert [m["message_ts"] for m in got] == [ts(100)]
+    assert inbox.mentions_since(T0 + 200) == []
+
+
+def test_search_failure_falls_back_to_local(inbox):
+    from src.services.slack_inbox import SlackInboxError
+    inbox._fake.search_error = SlackInboxError("RATE_LIMITED", "too many", 429)
+    inbox.db.upsert(CID, [{"ts": ts(60), "user": "UAAAAAAAA1", "text": f"<@{ME}> hi"}], in_history=True)
+    assert [m["message_ts"] for m in inbox.mentions_since(T0 + 50)] == [ts(60)]
