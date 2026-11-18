@@ -161,6 +161,20 @@ class SlackStore:
                                    (channel_id, ts)).fetchone()
         return json.loads(row["raw"]) if row else None
 
+    def messages_in(self, channel_ids: Iterable[str], since: float, limit: int = 500) -> List[Dict[str, Any]]:
+        """这些会话里 since 之后（不含）的消息（含 thread 回复），旧→新；每条带 channel_id。"""
+        channel_ids = sorted(set(channel_ids))
+        if not channel_ids:
+            return []
+        marks = ",".join("?" for _ in channel_ids)
+        with self._lock:
+            rows = self._db.execute(
+                f"""SELECT channel_id, raw FROM messages WHERE deleted = 0 AND ts_num > ? AND channel_id IN ({marks})
+                    ORDER BY ts_num DESC LIMIT ?""",
+                (since, *channel_ids, limit),
+            ).fetchall()
+        return [{**json.loads(r["raw"]), "channel_id": r["channel_id"]} for r in reversed(rows)]
+
     def messages_containing(self, since: float, needles: Iterable[str], limit: int = 500) -> List[Dict[str, Any]]:
         """所有会话里 since 之后（不含）、原始 JSON 里含任一 needle 的消息，旧→新；每条带 channel_id。"""
         needles = [n for n in needles if n]

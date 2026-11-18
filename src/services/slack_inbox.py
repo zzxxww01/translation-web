@@ -1188,35 +1188,53 @@ class SlackInbox:
             return []
 
     def mentions_since(self, since: float, group_ids: Iterable[str] = (), limit: int = 200) -> List[Dict[str, Any]]:
-        """group_ids：手配的用户组；再加上 client.userBoot 里自动识别到的我所在的组。"""
+        """since 之后需要我看的消息：私信里别人发的每一条记 dm；其余会话按 @ 分 direct / group / channel。
+
+        group_ids：手配的用户组；再加上 client.userBoot 里自动识别到的我所在的组。旧→新，每条只出现一次。
+        """
         me = self.auth().get("user_id", "")
         groups = sorted({g for g in group_ids if g} | set(self.my_groups()))
         needles = [f"<@{me}"] if me else []
         needles += [f"<!subteam^{g}" for g in groups] + list(BROADCAST_MENTIONS)
-        result = []
+        dm_ids = self._dm_ids()
+        found: Dict[Tuple[str, str], Dict[str, Any]] = {}
+        for raw in self.db.messages_in(dm_ids, since, limit=limit):
+            if _is_from_someone(raw, me):
+                found[(raw["channel_id"], str(raw.get("ts") or ""))] = self._mention_record(raw, "dm")
         for raw in self.db.messages_containing(since, needles, limit=limit):
-            if me and raw.get("user") == me:
+            key = (raw["channel_id"], str(raw.get("ts") or ""))
+            if key in found or raw["channel_id"] in dm_ids or not _is_from_someone(raw, me):
                 continue
             kind = mention_type(raw.get("text") or "", me, groups)
             if kind is None:  # 只在附件 / 卡片里出现，不算
                 continue
-            cid = raw["channel_id"]
-            ts = str(raw.get("ts") or "")
-            thread_ts = raw.get("thread_ts")
-            user_id = raw.get("user") or ""
-            result.append({
-                "conversation_id": cid,
-                "conversation_name": self._mention_conversation_name(cid),
-                "message_ts": ts,
-                "thread_ts": thread_ts if thread_ts and thread_ts != ts else None,
-                "time": datetime.fromtimestamp(float(ts), timezone.utc).isoformat().replace("+00:00", "Z"),
-                "from_user": self.user_name(user_id) if user_id
-                else (raw.get("bot_profile") or {}).get("name") or raw.get("username") or "Bot",
-                "text": segments_to_plain(parse_slack_text(raw.get("text") or "", self.user_name)),
-                "mention_type": kind,
-                "permalink": self._permalink(cid, ts, thread_ts),
-            })
-        return result
+            found[key] = self._mention_record(raw, kind)
+        return sorted(found.values(), key=lambda m: float(m["message_ts"]))[-limit:]
+
+    def _dm_ids(self) -> set:
+        """展示范围内的私信和群聊私信（已去掉 Slackbot、bot 和自己）。"""
+        try:
+            return {c["id"] for c in self.conversations() if c["kind"] in {"im", "mpim"}}
+        except SlackInboxError:
+            return set()
+
+    def _mention_record(self, raw: Dict[str, Any], kind: str) -> Dict[str, Any]:
+        cid = raw["channel_id"]
+        ts = str(raw.get("ts") or "")
+        thread_ts = raw.get("thread_ts")
+        user_id = raw.get("user") or ""
+        return {
+            "conversation_id": cid,
+            "conversation_name": self._mention_conversation_name(cid),
+            "message_ts": ts,
+            "thread_ts": thread_ts if thread_ts and thread_ts != ts else None,
+            "time": datetime.fromtimestamp(float(ts), timezone.utc).isoformat().replace("+00:00", "Z"),
+            "from_user": self.user_name(user_id) if user_id
+            else (raw.get("bot_profile") or {}).get("name") or raw.get("username") or "Bot",
+            "text": segments_to_plain(parse_slack_text(raw.get("text") or "", self.user_name)),
+            "mention_type": kind,
+            "permalink": self._permalink(cid, ts, thread_ts),
+        }
 
     def _mention_conversation_name(self, channel_id: str) -> str:
         try:
@@ -1276,6 +1294,18 @@ def _my_subteams(boot: Dict[str, Any]) -> List[str]:
     mine = subteams.get("self") if isinstance(subteams, dict) else None
     ids = [(item.get("id") if isinstance(item, dict) else item) for item in (mine or [])]
     return [i for i in ids if isinstance(i, str) and re.fullmatch(r"S[A-Z0-9]{6,20}", i)]
+
+
+# 系统消息（入群、改名、置顶……）不算别人发给我的
+_SILENT_SUBTYPES = {"channel_join", "channel_leave", "group_join", "group_leave", "channel_topic", "channel_purpose",
+                    "channel_name", "group_topic", "group_purpose", "group_name", "pinned_item", "unpinned_item",
+                    "bot_add", "bot_remove", "tombstone"}
+
+
+def _is_from_someone(raw: Dict[str, Any], me: str) -> bool:
+    if raw.get("subtype") in _SILENT_SUBTYPES:
+        return False
+    return not (me and raw.get("user") == me)
 
 
 def mention_type(text: str, me: str, group_ids: Iterable[str] = ()) -> Optional[str]:

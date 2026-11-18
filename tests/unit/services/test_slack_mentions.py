@@ -29,8 +29,13 @@ class FakeSlack:
             return {"ok": True, "channel": {"id": CID, "name": "general"}}
         if method == "users.info":
             return {"ok": True, "user": {"name": "alice", "profile": {"display_name": "Alice"}}}
-        if method == "client.userBoot":
-            return {"ok": True, "channels": [], "ims": []}  # 没有 subteams：只靠手配的用户组
+        if method == "client.userBoot":  # 没有 subteams：只靠手配的用户组
+            return {"ok": True, "channels": [{"id": CID, "name": "general", "is_channel": True}],
+                    "ims": [{"id": DM, "is_im": True, "user": "UAAAAAAAA1", "is_open": True}]}
+        if method == "client.counts":
+            return {"ok": True, "channels": [{"id": CID, "latest": ts(50)}], "ims": [{"id": DM, "latest": ts(50)}]}
+        if method == "subscriptions.thread.getView":
+            return {"ok": True, "threads": []}
         raise AssertionError(method)
 
 
@@ -64,12 +69,19 @@ def test_mentions_since_filters_classifies_and_stays_read_only(inbox):
         {"ts": ts(14), "user": "UAAAAAAAA1", "text": "<!subteam^S0GROUP1|@infra> deploy"},
         {"ts": ts(15), "user": "UAAAAAAAA1", "text": f"reply <@{ME}>", "thread_ts": ts(10)},
     ], in_history=True)
-    inbox.db.upsert(DM, [{"ts": ts(16), "user": "UAAAAAAAA1", "text": f"<@{ME}> dm"}], in_history=True)
+    inbox.db.upsert(DM, [
+        {"ts": ts(16), "user": "UAAAAAAAA1", "text": f"<@{ME}> dm"},
+        {"ts": ts(17), "user": "UAAAAAAAA1", "text": "can you check this article?"},  # 私信里没 @ 也要报
+        {"ts": ts(18), "user": ME, "text": "sure <!here>"},                           # 我自己发的不算
+        {"ts": ts(19), "user": "UAAAAAAAA1", "subtype": "channel_join", "text": "joined"},
+        {"ts": ts(21), "user": "UAAAAAAAA1", "text": "thread reply in dm", "thread_ts": ts(17)},
+    ], in_history=True)
     inbox.db.mark_deleted(CID, [ts(11)])
 
     got = inbox.mentions_since(T0 + 5, group_ids=["S0GROUP1"])
     assert [(m["message_ts"], m["mention_type"]) for m in got] == [
-        (ts(10), "direct"), (ts(14), "group"), (ts(15), "direct"), (ts(16), "direct"),
+        (ts(10), "direct"), (ts(14), "group"), (ts(15), "direct"),
+        (ts(16), "dm"), (ts(17), "dm"), (ts(21), "dm"),
     ]
     first = got[0]
     assert first["conversation_name"] == "general"
@@ -78,11 +90,12 @@ def test_mentions_since_filters_classifies_and_stays_read_only(inbox):
     assert first["time"].endswith("Z") and first["thread_ts"] is None
     assert got[2]["thread_ts"] == ts(10)
     assert got[3]["conversation_name"] == "Alice"
+    assert got[5]["thread_ts"] == ts(17)
 
     # 没配用户组时 group 消息不返回
-    assert [m["message_ts"] for m in inbox.mentions_since(T0 + 13)] == [ts(15), ts(16)]
+    assert [m["message_ts"] for m in inbox.mentions_since(T0 + 13)] == [ts(15), ts(16), ts(17), ts(21)]
     # 水位线之后没有新消息
-    assert inbox.mentions_since(T0 + 16) == []
+    assert inbox.mentions_since(T0 + 21) == []
     # 只读：没改 Slack 已读，也没动 momo 本地已读
     assert not any("mark" in method for method in inbox._fake.calls)
     assert inbox.db.read_positions() == {}
