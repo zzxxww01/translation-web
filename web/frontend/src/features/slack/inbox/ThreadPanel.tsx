@@ -6,7 +6,7 @@ import { useMessageZh, useShowZh, useThreadSummary } from './ai';
 import { MessageItem } from './MessageItem';
 import { ZhToggle } from './ZhToggle';
 import { useMarkThreadRead, usePageVisible, useSlackReplies } from './hooks';
-import { buildStream, emojify, newestTs } from './lib';
+import { buildStream, emojify, newestTs, stripLeadingMentions } from './lib';
 
 interface ThreadPanelProps {
   channelId: string;
@@ -61,7 +61,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
       <div className="flex items-center gap-2 border-b border-border-subtle px-4 py-2.5">
         <div className="min-w-0 flex-1">
           <div className="truncate text-[15px] font-bold text-text-primary" title={root?.text}>
-            {root ? emojify((root.text || '').split('\n').map(line => line.trim()).find(Boolean) || 'Thread') : 'Thread'}
+            {root ? emojify(stripLeadingMentions((root.text || '').split('\n').map(line => line.trim()).find(Boolean) || 'Thread')) : 'Thread'}
           </div>
           <div className="truncate text-xs text-text-muted">
             {root ? `${root.user_name} 发起 · ` : ''}

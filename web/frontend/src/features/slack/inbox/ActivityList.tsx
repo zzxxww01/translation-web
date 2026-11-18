@@ -5,7 +5,7 @@ import { AgentBadge } from '../agent/AgentBadge';
 import { useSlackAgentRuns } from '../agent/agentRuns';
 import { Avatar } from './MessageItem';
 import { useRefreshSlack, useSlackActivity } from './hooks';
-import { clockTime, emojify, type SlackView } from './lib';
+import { clockTime, emojify, stripLeadingMentions, type SlackView } from './lib';
 import type { SlackActivityItem, SlackMessage, SlackStatus } from './types';
 
 type Filter = 'all' | 'mentions' | 'dm';
@@ -27,10 +27,11 @@ interface ActivityListProps {
 }
 
 /** 消息第一行（去掉 Slack 的 *加粗*，表情码换成 emoji）；没有文字时用附件名 */
-function firstLine(message: SlackMessage | null | undefined, max = 80): string {
+function firstLine(message: SlackMessage | null | undefined, max = 80, asTitle = false): string {
   if (!message) return '';
-  const line = (message.text || '').split('\n').map(s => s.trim()).find(Boolean)
+  const raw = (message.text || '').split('\n').map(s => s.trim()).find(Boolean)
     || message.attachments[0]?.title || message.files[0]?.name || '（无文字）';
+  const line = asTitle ? stripLeadingMentions(raw) : raw;
   const text = emojify(line.replace(/\*([^*\n]+)\*/g, '$1'));
   return text.length > max ? `${text.slice(0, max)}…` : text;
 }
@@ -56,6 +57,8 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
   const items = (activity.data ?? []).filter(item =>
     filter === 'all' ? true : filter === 'dm' ? item.type === 'dm' : item.mentions_me);
   const mentionCount = (activity.data ?? []).filter(item => item.mentions_me).length;
+  // 只有一个频道时每行都写同一个频道名没意义，省下位置给「谁发起、几条回复」
+  const manyChannels = new Set((activity.data ?? []).filter(item => item.type === 'thread').map(item => item.channel_id)).size > 1;
 
   return (
     <>
@@ -169,7 +172,7 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
                   <div className="flex items-center gap-1.5">
                     {item.has_unreads && <span className="h-2 w-2 shrink-0 rounded-full bg-primary-500" aria-label="有新消息" />}
                     <span className={cn('min-w-0 flex-1 truncate text-[14px]', item.has_unreads ? 'font-semibold text-text-primary' : 'text-text-primary')}>
-                      {item.type === 'thread' ? firstLine(item.root) : item.channel_name}
+                      {item.type === 'thread' ? firstLine(item.root, 80, true) : item.channel_name}
                     </span>
                     {item.mentions_me && <span className="shrink-0 rounded-full bg-error px-1.5 text-[11px] font-semibold text-white">@我</span>}
                     <AgentBadge run={agents.get(agentKey)} active={false} />
@@ -178,9 +181,9 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
                   <div className="mt-0.5 flex items-center gap-1 truncate text-xs text-text-muted">
                     {item.type === 'thread' ? (
                       <>
-                        <Hash className="h-3 w-3 shrink-0" />
+                        {manyChannels && <Hash className="h-3 w-3 shrink-0" />}
                         <span className="truncate">
-                          {item.channel_name} · {item.root?.user_name} 发起 · {item.reply_count} 条回复
+                          {manyChannels ? `${item.channel_name} · ` : ''}{item.root?.user_name} 发起 · {item.reply_count} 条回复
                           {item.participants && item.participants.length > 1 ? ` · ${item.participants.length} 人参与` : ''}
                         </span>
                       </>

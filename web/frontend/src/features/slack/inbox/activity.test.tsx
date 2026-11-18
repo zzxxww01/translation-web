@@ -30,7 +30,7 @@ beforeEach(() => {
   items.splice(0, items.length,
     {
       type: 'thread', channel_id: 'C1', channel_name: 'social-media-posts-and-media', thread_ts: '1794610284.466519',
-      root: message({ text: '*Elon post* :fire:\nsecond line', user_name: 'Reyk Knuhtsen' }), reply_count: 17,
+      root: message({ text: '@用户组 *Elon post* :fire:\nsecond line', user_name: 'Reyk Knuhtsen' }), reply_count: 17,
       participants: ['Reyk Knuhtsen', 'Daksh Malik', 'Computer'], last: message({ text: '@Felix Zhou' }),
       latest_ts: '1794963980.687079', latest_time: '', has_unreads: true, mentions_me: true,
     },
@@ -54,6 +54,8 @@ it('shows one row per thread / DM with the original first line and who is talkin
     <ActivityList status={status} selection={null} view={null} onOpen={onOpen} onSelectView={vi.fn()} onSearch={vi.fn()} />));
   const [thread, dm] = rows();
   expect(thread.textContent).toContain('Elon post 🔥');           // 根消息第一行原文，不翻译
+  expect(thread.textContent).not.toContain('@用户组');             // 开头的提及不进标题
+  expect(thread.textContent).not.toContain('social-media-posts');  // 只有一个频道时不重复写频道名
   expect(thread.textContent).not.toContain('second line');
   expect(thread.textContent).toContain('Reyk Knuhtsen 发起 · 17 条回复 · 3 人参与');
   expect(thread.textContent).toContain('Daksh Malik：@Felix Zhou');
