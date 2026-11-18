@@ -142,7 +142,11 @@ def cmd_health(args: argparse.Namespace) -> Dict[str, Any]:
 def cmd_translate_slack(args: argparse.Namespace) -> Dict[str, Any]:
     if not _CONVERSATION_RE.match(args.conversation_id) or not _TS_RE.match(args.message_ts):
         raise CliError("conversation_id 或 message_ts 格式不对")
-    raise CliError("translate-slack 是二期功能，还没有上线", code="NOT_IMPLEMENTED", exit_code=EXIT_SERVICE)
+    if args.thread_ts and not _TS_RE.match(args.thread_ts):
+        raise CliError("--thread-ts 格式不对")
+    body = {"conversation_id": args.conversation_id, "message_ts": args.message_ts,
+            "thread_ts": args.thread_ts, "with_thread": args.with_thread}
+    return _call(args.base_url, "POST", "/translate-slack", body=body, timeout=args.timeout or 240)
 
 
 COMMANDS = {
@@ -175,10 +179,11 @@ def build_parser() -> _Parser:
 
     sub.add_parser("health", help="自检")
 
-    p = sub.add_parser("translate-slack", help="翻译一条 Slack 消息 / 线程（二期）")
+    p = sub.add_parser("translate-slack", help="翻译一条 Slack 消息 / 整个 thread（会花模型费，须经 Felix 确认）")
     p.add_argument("conversation_id")
     p.add_argument("message_ts")
-    p.add_argument("--with-thread", action="store_true")
+    p.add_argument("--thread-ts", help="消息是 thread 里的回复时带上（updates 返回的 thread_ts）")
+    p.add_argument("--with-thread", action="store_true", help="翻译这条消息所在的整个 thread")
     return parser
 
 

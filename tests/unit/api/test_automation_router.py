@@ -282,3 +282,84 @@ async def test_status_unknown_project(env):
     with pytest.raises(APIException) as exc:
         await automation.project_status("missing-project")
     assert exc.value.status_code == 404
+
+
+# ---------------------------------------------------------------- translate-slack
+
+
+class SlackSourceInbox(FakeInbox):
+    def __init__(self, text="Hello world"):
+        super().__init__()
+        self.text = text
+
+    def translation_source(self, cid, ts, thread_ts, with_thread):
+        return {"source_text": self.text, "messages": 2 if with_thread else 1,
+                "permalink": f"https://team.slack.com/archives/{cid}/p{ts.replace('.', '')}"}
+
+
+def _fake_post(env):
+    calls = []
+
+    async def wrapped(*, request, body):
+        calls.append(body)
+        await asyncio.sleep(0)
+        return SimpleNamespace(translation=f"译文：{body.content}", model_used=body.model)
+
+    env.monkeypatch.setattr(automation, "translate_post", SimpleNamespace(__wrapped__=wrapped))
+    return calls
+
+
+@pytest.fixture
+def slack_env(env, tmp_path):
+    env.monkeypatch.setattr(automation.settings, "slack_cache_dir", str(tmp_path / "slack_cache"))
+    env.inbox = SlackSourceInbox()
+    env.monkeypatch.setattr(automation, "get_slack_inbox", lambda: env.inbox)
+    return env
+
+
+@pytest.mark.asyncio
+async def test_translate_slack_translates_once_and_caches(slack_env):
+    calls = _fake_post(slack_env)
+    req = automation.TranslateSlackRequest(conversation_id="C0123456789", message_ts="1763424000.000100")
+    first, second = await asyncio.gather(automation.translate_slack(_request(), req),
+                                         automation.translate_slack(_request(), req))
+    assert {first["status"], second["status"]} == {"done", "already_exists"}
+    assert first["project_id"] == second["project_id"] == "slack-C0123456789-1763424000.000100"
+    assert first["translation"] == "译文：Hello world"
+    (body,) = calls
+    assert body.model == "gpt-6.1-sol" and body.include_hashtags is False
+
+    status = await automation.project_status(first["project_id"])
+    assert status["status"] == "done" and status["result"] == "译文：Hello world"
+
+    # 消息被编辑过（内容变了）才重新翻
+    slack_env.inbox.text = "Hello world, edited"
+    third = await automation.translate_slack(_request(), req)
+    assert third["status"] == "done" and len(calls) == 2
+
+
+@pytest.mark.asyncio
+async def test_translate_slack_thread_has_its_own_id(slack_env):
+    _fake_post(slack_env)
+    result = await automation.translate_slack(_request(), automation.TranslateSlackRequest(
+        conversation_id="C0123456789", message_ts="1763424000.000100", with_thread=True))
+    assert result["project_id"].endswith("-thread") and result["messages"] == 2
+
+
+@pytest.mark.asyncio
+async def test_translate_slack_rejects_empty_and_too_long(slack_env):
+    calls = _fake_post(slack_env)
+    req = automation.TranslateSlackRequest(conversation_id="C0123456789", message_ts="1763424000.000100")
+    for text, code in (("   ", "EMPTY_MESSAGE"), ("x" * 10001, "TOO_LONG")):
+        slack_env.inbox.text = text
+        with pytest.raises(APIException) as exc:
+            await automation.translate_slack(_request(), req)
+        assert exc.value.error_code == code
+    assert calls == []
+
+
+@pytest.mark.asyncio
+async def test_slack_status_unknown(slack_env):
+    with pytest.raises(APIException) as exc:
+        await automation.project_status("slack-C0123456789-1.0")
+    assert exc.value.status_code == 404
