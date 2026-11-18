@@ -225,6 +225,8 @@ def test_event_stream_replays_after_last_event_id(setup):
     events = [json.loads(f.split("data: ", 1)[1]) for f in frames]
     assert [e["seq"] for e in events] == [2]
     assert events[0]["type"] == "status" and events[0]["status"] == "running"
+    # 回放完紧跟一个 ready，页面据此一次性渲染历史
+    assert response.text.index("event: ready\ndata: {}\n\n") > response.text.index("id: 2\n")
 
 
 def test_event_stream_sends_named_ping_when_idle(setup, monkeypatch):
