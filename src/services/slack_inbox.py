@@ -266,7 +266,8 @@ def parse_slack_text(text: str, user_name: Callable[[str], str]) -> List[Dict[st
             if url.startswith(("http://", "https://", "mailto:")):
                 segments.append({"type": "link", "url": url, "text": label or url})
             else:
-                push_text(_unescape(match.group(0)))
+                # slack://user?…|名字 这类应用内链接：有显示名就只留名字，不把标记原样露出来
+                push_text(label or _unescape(match.group(0)))
     push_text(_unescape((text or "")[pos:]))
     return segments
 
@@ -1251,10 +1252,12 @@ class SlackInbox:
             raws = [raw]
         messages = [self.normalize_message(channel_id, m) for m in raws]
         parts = []
-        for msg in messages:
+        for raw_msg, msg in zip(raws, messages):
             body = msg["text"].strip()
-            for card in msg["attachments"]:
-                card_text = "\n".join(t for t in (card["title"].strip(), card["text"].strip()) if t)
+            # 卡片正文用 Slack 原始文本解析（normalize_message 里的已经反转义过，再解析会把字面的 < > 当标记）
+            for card, raw_card in zip(msg["attachments"], raw_msg.get("attachments") or []):
+                text = segments_to_plain(parse_slack_text(raw_card.get("text") or "", self.user_name)).strip()
+                card_text = "\n".join(t for t in (card["title"].strip(), text) if t)
                 if card_text:
                     body += ("\n\n" if body else "") + f"[{card['service_name'] or '链接卡片'}] {card_text}"
             if body:
