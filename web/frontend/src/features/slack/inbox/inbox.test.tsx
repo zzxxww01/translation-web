@@ -2,7 +2,7 @@
 import { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import { expect, it, vi } from 'vitest';
-import { buildStream, dayLabel, emojiFor, emojify, newestTs, parseSlackView, splitSidebar, threadTitle } from './lib';
+import { buildStream, dayLabel, emojiFor, emojify, newestTs, parseSlackView, splitSidebar, stripLeadingMentions, threadTitle } from './lib';
 import { SlackText } from './SlackText';
 import type { SlackConversation, SlackMessage, SlackThread } from './types';
 
@@ -99,4 +99,12 @@ it('titles threads from the first non-empty line', () => {
   const thread = { root: msg(1, 'A', { text: '\n *HBM4* yields :fire: update\nsecond line' }) } as SlackThread;
   expect(threadTitle(thread)).toBe('HBM4 yields 🔥 update');
   expect(threadTitle(thread, 5)).toBe('HBM4 …');
+});
+
+it('drops leading @用户组 from titles, keeps named mentions and mention-only text', () => {
+  expect(stripLeadingMentions('@用户组 Elon post')).toBe('Elon post');
+  expect(stripLeadingMentions('@用户组 @用户组 hi')).toBe('hi');
+  expect(stripLeadingMentions('@Daksh Malik can u RT')).toBe('@Daksh Malik can u RT');
+  expect(stripLeadingMentions('Thanks @Felix Zhou')).toBe('Thanks @Felix Zhou');
+  expect(stripLeadingMentions('@Felix')).toBe('@Felix');
 });

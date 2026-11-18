@@ -20,6 +20,12 @@ export function emojiFor(name: string): string {
   return EMOJI[name.split('::')[0]] ?? `:${name}:`;
 }
 
+/** 当标题用的文字：去掉开头的「@用户组」（帖子常这样开头，标题里没信息量）；点名某人的提及保留 */
+export function stripLeadingMentions(text: string): string {
+  const stripped = text.replace(/^(\s*@用户组\s*)+/, '').trim();
+  return stripped || text.trim();
+}
+
 /** 侧栏分区：和 Slack 一样，频道一组，私信（含群聊私信）一组。 */
 export function splitSidebar(conversations: SlackConversation[]) {
   return {
