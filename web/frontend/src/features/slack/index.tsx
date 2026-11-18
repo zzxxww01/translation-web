@@ -6,19 +6,22 @@ import { ConversationView } from './inbox/ConversationView';
 import { CredentialsPanel } from './inbox/CredentialsPanel';
 import { useSlackConversations, useSlackStatus } from './inbox/hooks';
 import { parseSlackView, type SlackView } from './inbox/lib';
-import { Sidebar, type OpenThread } from './inbox/Sidebar';
+import { type OpenThread } from './inbox/Sidebar';
+import { ActivityList } from './inbox/ActivityList';
 import { ThreadPanel } from './inbox/ThreadPanel';
 import { DigestView } from './inbox/DigestView';
 import { SearchView } from './inbox/SearchView';
 import { ThreadsView } from './inbox/ThreadsView';
+import type { SlackActivityItem } from './inbox/types';
 import { ReplyWorkbench } from './ReplyWorkbench';
 
 const TS_RE = /^\d{9,11}\.\d{1,6}$/;
 
 /**
- * Slack 页，布局照原生 Slack：左栏会话（频道可展开看 thread）、中栏消息流、右栏 thread。
- * URL：c=会话，view=threads|reply，tc+t=右栏打开的 thread（所在会话 + thread_ts），ai=1 窄屏上显示私信的 AI。
- * 每个 thread 背后是帖子翻译助手（在 thread 面板里），每个私信背后是回复助手（私信打开时的右栏）。
+ * Slack 页：左栏「动态」（每行一个 thread 或私信，按最近活动排序），点开在中栏只看那一个 thread / 私信。
+ * 2026-11-18 用户反馈频道视图太乱，改成活动列；整个频道的消息流仍可从 thread 标题下的频道名进入。
+ * URL：c=会话（私信或整个频道），view=digest|search|reply|threads，tc+t=打开的 thread，ai=1 窄屏上显示私信的 AI。
+ * 每个 thread 背后是帖子翻译助手（thread 的「AI 翻译」页），每个私信背后是回复助手（私信打开时的右栏）。
  */
 export function SlackFeature() {
   const [params, setParams] = useSearchParams();
@@ -48,11 +51,12 @@ export function SlackFeature() {
   const searchQuery = params.get('q') ?? '';
   // 速览 / 搜索结果里点一条：去对应会话，thread 的话右栏同时打开
   const openFrom = (channelId: string, threadTs: string | null) =>
-    update({ c: channelId, view: null, q: null, ai: null, tc: threadTs ? channelId : null, t: threadTs });
-  const showThread = (thread: OpenThread) => {
-    // 从侧栏或 Threads 页点 thread：中栏切到它所在的频道（Threads 页保持不动），右栏打开 thread
-    const keepThreadsView = view === 'threads';
-    update({ tc: thread.channelId, t: thread.threadTs, ...(keepThreadsView ? {} : { c: thread.channelId, view: null }) });
+    threadTs ? showThread({ channelId, threadTs }) : update({ c: channelId, view: null, q: null, ai: null, tc: null, t: null });
+  // thread 一律在中栏单独打开（不带整个频道）
+  const showThread = (thread: OpenThread) => update({ tc: thread.channelId, t: thread.threadTs, c: null, view: null, q: null, ai: null });
+  const openActivity = (item: SlackActivityItem) => {
+    if (item.type === 'thread' && item.thread_ts) showThread({ channelId: item.channel_id, threadTs: item.thread_ts });
+    else selectConversation(item.channel_id);
   };
   const closeThread = () => update({ tc: null, t: null });
   const aiOpen = params.get('ai') === '1';
@@ -68,39 +72,46 @@ export function SlackFeature() {
     return <div className="h-full overflow-auto"><CredentialsPanel status={status.data} /></div>;
   }
 
-  const hasMain = !!selected || !!view;
+  const hasMain = !!selected || !!view || !!openThread;
   const threadChannel = openThread ? conversations.find(c => c.id === openThread.channelId) : null;
-  // 私信（含群聊私信）打开、没开 thread 时，右栏是回复助手；宽屏一直显示，窄屏点「AI 回复」才切过去
+  // 私信（含群聊私信）打开时，右栏是回复助手；宽屏一直显示，窄屏点「AI 回复」才切过去
   const dmAgent = !openThread && selected && (selected.kind === 'im' || selected.kind === 'mpim') ? selected : null;
   const teamUrl = status.data.url || 'https://app.slack.com';
+  const selection = openThread
+    ? { channelId: openThread.channelId, threadTs: openThread.threadTs }
+    : selected ? { channelId: selected.id, threadTs: null } : null;
 
   return (
     <div className="flex h-full min-h-0">
       <aside className={cn(
-        'w-full shrink-0 flex-col border-r border-border-subtle bg-bg-tertiary/50 md:flex md:w-64',
-        hasMain || openThread ? 'hidden' : 'flex'
+        'w-full shrink-0 flex-col border-r border-border-subtle bg-bg-tertiary/40 md:flex md:w-[380px]',
+        hasMain ? 'hidden' : 'flex'
       )}>
-        <Sidebar
+        <ActivityList
           status={status.data}
-          conversations={conversations}
-          loading={list.isLoading}
-          error={list.isError ? list.error.message : null}
-          threadBadge={list.data?.threads}
-          selectedId={selectedId}
+          selection={selection}
           view={view}
-          openThread={openThread}
-          onSelectConversation={selectConversation}
+          onOpen={openActivity}
           onSelectView={selectView}
-          onOpenThread={showThread}
           onSearch={search}
         />
       </aside>
 
       <section className={cn(
         'min-w-0 flex-1 flex-col',
-        openThread || (dmAgent && aiOpen) ? 'hidden lg:flex' : hasMain ? 'flex' : 'hidden md:flex'
+        dmAgent && aiOpen ? 'hidden lg:flex' : hasMain ? 'flex' : 'hidden md:flex'
       )}>
-        {view === 'reply' ? (
+        {openThread ? (
+          <ThreadPanel
+            key={`${openThread.channelId}-${openThread.threadTs}`}
+            channelId={openThread.channelId}
+            channelName={threadChannel ? `# ${threadChannel.name}` : openThread.channelId}
+            threadTs={openThread.threadTs}
+            onClose={closeThread}
+            onOpenChannel={() => selectConversation(openThread.channelId)}
+            autoSummary
+          />
+        ) : view === 'reply' ? (
           <div className="min-h-0 flex-1 overflow-auto"><ReplyWorkbench /></div>
         ) : view === 'digest' ? (
           <DigestView onOpen={openFrom} onBack={back} />
@@ -112,7 +123,7 @@ export function SlackFeature() {
           <ConversationView
             key={selected.id}
             conversation={selected}
-            activeThreadTs={openThread?.channelId === selected.id ? openThread.threadTs : null}
+            activeThreadTs={null}
             onOpenThread={ts => showThread({ channelId: selected.id, threadTs: ts })}
             onBack={back}
             onOpenAgent={dmAgent ? () => update({ ai: '1' }) : undefined}
@@ -122,14 +133,14 @@ export function SlackFeature() {
             <div className="max-w-md space-y-3 text-sm text-text-secondary">
               <div className="flex items-center gap-2 text-text-primary">
                 <MessagesSquare className="h-5 w-5 text-primary-500" />
-                <span className="font-semibold">这里是你的 Slack（只读）</span>
+                <span className="font-semibold">这里是你的 Slack 动态（只读）</span>
               </div>
               <ul className="list-disc space-y-1.5 pl-5">
-                <li><b>频道</b>：你加入的公开 / 私有频道。点频道名看消息；下面缩进的是这个频道最近有回复的 <b>thread</b>（某条消息下面的回复串），标题是根消息的第一行原文。</li>
-                <li><b>私信</b>：一对一的对话，和几个人的小群（群聊私信）。</li>
-                <li><b>AI 速览</b>：把所有未读整理成中文要点。<b>我参与的 thread</b>：你回复过或被 @ 过的回复串。</li>
-                <li>默认显示英文原文。鼠标移到消息上点「译」翻这一条，或在顶栏打开「全部中文」。</li>
-                <li>右栏的 AI（翻译帖子、建议回复）要点「开始」才会跑；momo 不会往 Slack 发任何东西，也不改 Slack 的已读。</li>
+                <li>左边每一行是一个 <b>thread</b>（频道里某条消息下面的回复串，最近 7 天有人回复的）或一个 <b>私信</b>，最近有人说话的排最上面。</li>
+                <li>点一行只看这一个 thread：顶部自动用中文总结「大家在聊什么、要你做什么」，下面是完整对话。</li>
+                <li>「@我」只看提到你的，「私信」只看私信。英文默认显示原文，消息上点「译」翻一条，或打开「全部中文」。</li>
+                <li>thread 的「AI 翻译」页可以把要发的帖子翻成中文；私信右栏可以让 AI 建议回复。都要点「开始」才会跑。</li>
+                <li>momo 不会往 Slack 发任何东西，也不改 Slack 的已读。</li>
               </ul>
             </div>
           </div>
@@ -157,18 +168,6 @@ export function SlackFeature() {
         </aside>
       )}
 
-      {openThread && (
-        <aside className="flex min-w-0 flex-1 flex-col border-l border-border-subtle lg:w-[420px] lg:flex-none">
-          <ThreadPanel
-            key={`${openThread.channelId}-${openThread.threadTs}`}
-            channelId={openThread.channelId}
-            channelName={threadChannel ? `# ${threadChannel.name}` : openThread.channelId}
-            threadTs={openThread.threadTs}
-            onClose={closeThread}
-            onOpenChannel={() => selectConversation(openThread.channelId)}
-          />
-        </aside>
-      )}
     </div>
   );
 }

@@ -78,6 +78,12 @@ async def get_status():
     return await _run(get_slack_inbox().status)
 
 
+@router.get("/activity")
+async def get_activity():
+    """「动态」：频道 thread 和私信各一行，按最近活动排序。"""
+    return await _run(get_slack_inbox().activity)
+
+
 @router.put("/credentials")
 @limiter.limit("10/minute")
 async def save_credentials(request: Request, body: SlackCredentialsRequest):

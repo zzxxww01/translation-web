@@ -112,6 +112,27 @@ export interface SlackAgentContext {
   history: { role: 'me' | 'them'; content: string }[];
 }
 
+/** 「动态」列表的一行：一个频道 thread，或一个私信对话。 */
+export interface SlackActivityItem {
+  type: 'thread' | 'dm';
+  channel_id: string;
+  channel_name: string;
+  /** 私信才有：im 一对一 / mpim 小群 */
+  kind?: ConversationKind;
+  thread_ts: string | null;
+  /** thread 才有：根消息 */
+  root?: SlackMessage;
+  reply_count?: number;
+  /** thread 里说过话的人（根消息作者在前） */
+  participants?: string[];
+  /** 最后一条回复 / 私信最后一条消息 */
+  last: SlackMessage | null;
+  latest_ts: string;
+  latest_time: string;
+  has_unreads: boolean;
+  mentions_me: boolean;
+}
+
 export interface SlackThreadSummary {
   title: string;
   summary: string;

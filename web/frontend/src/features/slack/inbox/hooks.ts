@@ -17,6 +17,7 @@ export const slackInboxKeys = {
   messages: (channelId: string) => ['slack-inbox', 'messages', channelId] as const,
   replies: (channelId: string, threadTs: string) => ['slack-inbox', 'replies', channelId, threadTs] as const,
   threads: ['slack-inbox', 'threads'] as const,
+  activity: ['slack-inbox', 'activity'] as const,
   channelThreads: (channelId: string) => ['slack-inbox', 'channel-threads', channelId] as const,
 };
 
@@ -72,6 +73,19 @@ export function useSlackThreads(enabled: boolean) {
     staleTime: 20_000,
     retry: READ_RETRY,
     select: data => data.threads,
+  });
+}
+
+/** 「动态」列表：频道 thread 和私信，按最近活动排序。 */
+export function useSlackActivity(enabled: boolean) {
+  return useQuery({
+    queryKey: slackInboxKeys.activity,
+    queryFn: slackInboxApi.activity,
+    enabled,
+    refetchInterval: POLL_MS,
+    staleTime: 20_000,
+    retry: READ_RETRY,
+    select: data => data.items,
   });
 }
 
