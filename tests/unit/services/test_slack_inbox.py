@@ -251,7 +251,10 @@ def test_parse_slack_text():
         {"type": "mention", "text": "#general"},
         {"type": "text", "text": " <b>"},
     ]
-    assert parse_slack_text("<javascript:alert(1)|x>", str) == [{"type": "text", "text": "<javascript:alert(1)|x>"}]
+    # 非 http 链接从不变成可点的 link：有显示名只留名字，没有就原样当文字
+    assert parse_slack_text("<javascript:alert(1)|x>", str) == [{"type": "text", "text": "x"}]
+    assert parse_slack_text("<javascript:alert(1)>", str) == [{"type": "text", "text": "<javascript:alert(1)>"}]
+    assert parse_slack_text("by <slack://user?team=T1&amp;id=U2|Reyk>", str) == [{"type": "text", "text": "by Reyk"}]
 
 
 def test_conversations_show_sidebar_channels_and_human_dms(inbox):

@@ -109,13 +109,14 @@ def test_translation_source_single_message_and_thread(inbox, monkeypatch):
     monkeypatch.setattr(inbox, "_latest_hint", lambda cid: None)
     inbox.db.upsert(CID, [
         {"ts": ts(30), "user": "UAAAAAAAA1", "text": "plz RT <@U0A8T7U5D7A>", "thread_ts": ts(30),
-         "attachments": [{"service_name": "X (formerly Twitter)", "title": "vLLM", "text": "We shipped 1.0"}]},
+         "attachments": [{"service_name": "X (formerly Twitter)", "title": "vLLM",
+                          "text": "We shipped 1.0 &lt;3 by <slack://user?team=T1&id=U2|Reyk>"}]},
     ], in_history=True)
     inbox.db.upsert(CID, [{"ts": ts(31), "user": "UAAAAAAAA1", "text": "will post", "thread_ts": ts(30)}],
                     in_history=False)
 
     one = inbox.translation_source(CID, ts(30))
-    assert one["source_text"] == "plz RT @Alice\n\n[X (formerly Twitter)] vLLM\nWe shipped 1.0"
+    assert one["source_text"] == "plz RT @Alice\n\n[X (formerly Twitter)] vLLM\nWe shipped 1.0 <3 by Reyk"
     assert one["messages"] == 1
 
     whole = inbox.translation_source(CID, ts(31), with_thread=True)
