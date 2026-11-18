@@ -5,7 +5,6 @@ import type { RunMeta } from '@/features/skills/types';
 import { AgentBadge } from '../agent/AgentBadge';
 import { useSlackAgentRuns } from '../agent/agentRuns';
 import { Avatar } from './MessageItem';
-import { useThreadTitles } from './ai';
 import { useChannelThreads, useRefreshSlack } from './hooks';
 import { clockTime, splitSidebar, threadTitle, type SlackView } from './lib';
 import type { SlackConversation, SlackStatus, SlackThreadBadge } from './types';
@@ -84,7 +83,6 @@ function ChannelThreads({ channelId, openThread, onOpenThread, agents }: {
   channelId: string; openThread: OpenThread | null; onOpenThread: (t: OpenThread) => void; agents: Map<string, RunMeta>;
 }) {
   const threads = useChannelThreads(channelId, true);
-  const titles = useThreadTitles(threads.data);
   const [showAll, setShowAll] = useState(false);
   if (threads.isLoading) return <div className="py-1 pl-8"><Loader2 className="h-3.5 w-3.5 animate-spin text-text-muted" /></div>;
   if (threads.isError) {
@@ -100,7 +98,7 @@ function ChannelThreads({ channelId, openThread, onOpenThread, agents }: {
   const shown = showAll ? list : list.slice(0, THREADS_SHOWN);
   return (
     <div className="space-y-px">
-      <div className="pl-8 pt-0.5 text-[11px] text-text-muted" title="thread = 某条消息下面的回复串。这里列出这个频道最近 7 天有回复的，标题是 AI 起的中文名">
+      <div className="pl-8 pt-0.5 text-[11px] text-text-muted" title="thread = 某条消息下面的回复串。这里列出这个频道最近 7 天有回复的，标题是根消息的第一行原文">
         最近有回复的 thread（回复串）
       </div>
       {shown.map(t => {
@@ -116,7 +114,7 @@ function ChannelThreads({ channelId, openThread, onOpenThread, agents }: {
               active ? 'bg-primary-500 text-white' : t.has_unreads ? 'font-semibold text-text-primary hover:bg-bg-hover' : 'text-text-muted hover:bg-bg-hover'
             )}
           >
-            <span className="min-w-0 flex-1 truncate">{titles[t.thread_ts] || threadTitle(t)}</span>
+            <span className="min-w-0 flex-1 truncate">{threadTitle(t)}</span>
             {t.mentions_me && <span className={cn('text-[11px] font-bold', active ? 'text-white' : 'text-error')}>@</span>}
             {t.has_unreads && !t.mentions_me && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" aria-label="有新回复" />}
             <AgentBadge run={agents.get(`slack:${channelId}:${t.thread_ts}`)} active={active} />

@@ -47,8 +47,6 @@ export const slackInboxApi = {
   translate: (texts: string[]) =>
     apiClient.post<{ translations: (string | null)[] }>('/slack-inbox/ai/translate', { texts }, { retry: false, timeout: 180_000 }),
 
-  threadTitles: (items: Record<string, string>) =>
-    apiClient.post<{ titles: Record<string, string> }>('/slack-inbox/ai/titles', { items }, { retry: false, timeout: 180_000 }),
 
   threadSummary: (channelId: string, threadTs: string) =>
     apiClient.get<SlackThreadSummary>(`/slack-inbox/conversations/${channelId}/threads/${threadTs}/summary`, {
