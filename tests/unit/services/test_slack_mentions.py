@@ -29,6 +29,8 @@ class FakeSlack:
             return {"ok": True, "channel": {"id": CID, "name": "general"}}
         if method == "users.info":
             return {"ok": True, "user": {"name": "alice", "profile": {"display_name": "Alice"}}}
+        if method == "client.userBoot":
+            return {"ok": True, "channels": [], "ims": []}  # 没有 subteams：只靠手配的用户组
         raise AssertionError(method)
 
 
@@ -84,3 +86,47 @@ def test_mentions_since_filters_classifies_and_stays_read_only(inbox):
     # 只读：没改 Slack 已读，也没动 momo 本地已读
     assert not any("mark" in method for method in inbox._fake.calls)
     assert inbox.db.read_positions() == {}
+
+
+def test_my_subteams_from_user_boot():
+    from src.services.slack_inbox import _my_subteams
+    assert _my_subteams({"subteams": {"self": ["S0GROUP1", {"id": "S0GROUP2"}, "bad", None], "all": ["S0OTHER1"]}}) \
+        == ["S0GROUP1", "S0GROUP2"]
+    assert _my_subteams({}) == []
+    assert _my_subteams({"subteams": []}) == []
+
+
+def test_auto_detected_groups_count_as_group_mentions(inbox, monkeypatch):
+    monkeypatch.setattr(inbox, "my_groups", lambda: ["S0GROUP1"])
+    inbox.db.upsert(CID, [{"ts": ts(20), "user": "UAAAAAAAA1", "text": "<!subteam^S0GROUP1|@infra> deploy"}],
+                    in_history=True)
+    assert [m["mention_type"] for m in inbox.mentions_since(T0 + 19)] == ["group"]
+
+
+def test_translation_source_single_message_and_thread(inbox, monkeypatch):
+    monkeypatch.setattr(inbox, "sync_thread", lambda *a, **k: None)
+    monkeypatch.setattr(inbox, "sync_conversation", lambda *a, **k: 0)
+    monkeypatch.setattr(inbox, "_latest_hint", lambda cid: None)
+    inbox.db.upsert(CID, [
+        {"ts": ts(30), "user": "UAAAAAAAA1", "text": "plz RT <@U0A8T7U5D7A>", "thread_ts": ts(30),
+         "attachments": [{"service_name": "X (formerly Twitter)", "title": "vLLM", "text": "We shipped 1.0"}]},
+    ], in_history=True)
+    inbox.db.upsert(CID, [{"ts": ts(31), "user": "UAAAAAAAA1", "text": "will post", "thread_ts": ts(30)}],
+                    in_history=False)
+
+    one = inbox.translation_source(CID, ts(30))
+    assert one["source_text"] == "plz RT @Alice\n\n[X (formerly Twitter)] vLLM\nWe shipped 1.0"
+    assert one["messages"] == 1
+
+    whole = inbox.translation_source(CID, ts(31), with_thread=True)
+    assert whole["messages"] == 2
+    assert whole["source_text"].startswith("Alice: plz RT") and whole["source_text"].endswith("Alice: will post")
+    assert f"p{ts(30).replace('.', '')}" in whole["permalink"]
+
+    from src.services.slack_inbox import SlackInboxError
+    with pytest.raises(SlackInboxError) as exc:
+        inbox.translation_source(CID, ts(99))
+    assert exc.value.status_code == 404
+    with pytest.raises(SlackInboxError):
+        inbox.translation_source("bad", ts(30))
+    assert not any("mark" in method for method in inbox._fake.calls)

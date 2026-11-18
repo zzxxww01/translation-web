@@ -24,9 +24,9 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 | --- | --- |
 | `updates --since <ISO 或 Unix 秒/毫秒>` | 先同步（Substack 最新一页、Slack 只读同步），返回 `new_articles`（`published_at > since`）、`mentions`（`ts > since`）、`watermark`。可能带 `warnings`（某一边同步失败） |
 | `translate-article <slug 或 Substack 链接> [--target-lang zh]` | 导入（已导入复用）→ 四步法翻译，自动采用术语建议。`status`：`started` / `resumed`（上次停在一半，续译）/ `already_exists`（在跑、等术语或已译完，附 `translation_status`） |
-| `status <project_id> [--with-markdown]` | `status`：`running`（附 `stage`）/ `done`（`result` 是 momo 链接）/ `failed`（`error`）/ `not_started`；带 `zh_title`、`zh_summary`；`--with-markdown` 完成时附中文 Markdown 全文 |
-| `health` | `substack` / `slack` / `models` 各自 `ok` 或 `error: …`；`models` 只检查配置，不发请求 |
-| `translate-slack`（二期） | 目前返回 `NOT_IMPLEMENTED` |
+| `translate-slack <conversation_id> <message_ts> [--thread-ts T] [--with-thread]` | 翻译一条 Slack 消息（含链接卡片里的帖子）或它所在的整个 thread，**同步**返回 `translation`，`status` 为 `done`（新翻）或 `already_exists`（同样内容翻过，直接给缓存）；`project_id` 形如 `slack-<会话>-<ts>[-thread]` |
+| `status <project_id> [--with-markdown]` | 文章：`running`（附 `stage`）/ `done`（`result` 是 momo 链接）/ `failed`（`error`）/ `not_started`，带 `zh_title`、`zh_summary`，`--with-markdown` 完成时附中文 Markdown 全文。`slack-…`：`done`，`result` 是译文 |
+| `health` | `substack` / `slack` / `models` 各自 `ok` 或 `error: …`（`models` 只检查配置，不发请求）；`slack_groups` 是自动识别 / 手配的用户组个数 |
 
 ### updates 细节
 
@@ -34,7 +34,9 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
   极少数会重复一次，Muse 按 `slug`、`conversation_id + message_ts` 去重。Slack 同步失败时 watermark 不前进（= since）。
 - **mention_type**：`direct`（`<@U0A8T7U5D7A>`）> `group`（`<!subteam^ID>` 且 ID 在 `AUTOMATION_SLACK_GROUP_IDS` 里）>
   `channel`（`<!channel>` / `<!here>` / `<!everyone>`）；一条只返回一次，取最强的一类；自己发的不算；只在链接卡片里出现的不算。
-  企业版工作区查不了 `usergroups.*`，用户组 ID 只能手填（逗号分隔，在 `.env` 里设），没填时 group 永远为空。
+  企业版工作区查不了 `usergroups.*`：「我所在的组」先从 `client.userBoot` 的 `subteams.self` 自动识别，再并上
+  `AUTOMATION_SLACK_GROUP_IDS`（逗号分隔，`.env` 里设）。`health` 的 `slack_groups` 能看到两边各几个，都是 0 时 group 为空。
+- 每条 mention 带 `thread_ts`（thread 里的回复才有）和 `permalink`，翻译时把 `thread_ts` 原样传给 `translate-slack --thread-ts`。
 - 从本地副本 `slack.db` 查，所以 Felix 没参与、Slack 也没自动订阅的 thread 里的回复查不到（被 @ 时 Slack 一般会自动订阅）。
 - **只读**：Slack 走现有只读白名单；不碰 momo 本地已读（`read_state`）；不导入、不翻译。
 
@@ -43,6 +45,13 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 - 后端一把锁串行处理，同一篇并发调用只会导入一个项目、起一次翻译；翻译槽被网页那边占了（409）也当 `already_exists`。
 - 直接调 `start_longform_workflow`（绕过网页用的 3 次/分钟限流），参数等于网页「一键翻译」+ `auto_accept_terms`。
 - Muse 起的翻译在跑时，momo 发版的 precheck 会拦住，和网页起的一样。
+
+### translate-slack 细节
+
+- 原文：消息正文 + 链接卡片（X 帖等）的标题和正文；`--with-thread` 时是整个 thread，每条前面标作者。Slack 用户提及换成名字。
+- 走帖子翻译链路（术语库），模型固定 `gpt-6.1-sol`（和 Slack 页一致），不加话题标签；超过 10000 字符拒绝。
+- 结果存 `data/slack_cache/automation_translations.json`，按原文 hash 判断：内容没变直接返回缓存，消息被编辑过才重新翻。
+- 一把锁串行；Slack 端照旧只读（只读本地副本，缺了才用白名单里的 history / replies 补拉）。
 
 ## SSH 受限密钥
 

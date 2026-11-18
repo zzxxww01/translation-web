@@ -40,27 +40,46 @@ for (const delay of [0, 1200]) {
   test(`继续阅读 lands every pane on the mark (images load after ${delay} ms)`, async ({ page }) => {
     await open(page, delay);
     await page.getByRole('button', { name: /^读到 \d+%/ }).click();
-    // 平滑滚动结束、晚到的图片也加载完以后
-    await page.waitForTimeout(delay + 1500);
-    const settled = await offsets(page);
-    for (const offset of settled) {
-      expect(offset).toBeGreaterThanOrEqual(8);
-      expect(offset).toBeLessThanOrEqual(48);
-    }
-    // 三栏都在可视区里看得到标记那一段
-    expect(settled).toHaveLength(3);
+    // 平滑滚动结束、晚到的图片也加载完以后：轮询到落位为止（CI 机器慢，固定等待会偶发失败）
+    await expect.poll(async () => {
+      const settled = await offsets(page);
+      // 三栏都在可视区里看得到标记那一段
+      return settled.length === 3 && settled.every(offset => offset >= 8 && offset <= 48);
+    }, { timeout: delay + 5000, intervals: [250] }).toBe(true);
   });
 }
 
+/** 等这一栏不再滚动（平滑滚动、滚轮动画都结束），返回停下来的 scrollTop */
+async function settle(page: Page, name: string) {
+  const pane = page.getByRole('article', { name });
+  let last = -1;
+  await expect.poll(async () => {
+    const now = await pane.evaluate(element => element.scrollTop);
+    const still = now === last;
+    last = now;
+    return still;
+  }, { timeout: 5000, intervals: [250] }).toBe(true);
+  return last;
+}
+
+/** 主译本栏里标记那一段离栏顶多远（看位置而不是 scrollTop：浏览器的滚动锚定会在图片加载时改 scrollTop 但不挪内容） */
+const mainOffset = (page: Page) => page.evaluate(() => {
+  const pane = document.querySelector<HTMLElement>('[data-pane-body="main"]')!;
+  const block = pane.querySelector<HTMLElement>('[data-reading-mark="true"]')!;
+  return Math.round(block.getBoundingClientRect().top - pane.getBoundingClientRect().top);
+});
+
 test('继续阅读 stops correcting once you scroll yourself', async ({ page }) => {
-  await open(page, 1500);
+  await open(page, 3000); // 图片在你自己滚完之后才加载完
   await page.getByRole('button', { name: /^读到 \d+%/ }).click();
-  await page.waitForTimeout(800);
+  await settle(page, '主译本正文');
   const main = page.getByRole('article', { name: '主译本正文' });
   await main.hover();
   await page.mouse.wheel(0, 600);
-  await page.waitForTimeout(400);
-  const mine = await main.evaluate(element => element.scrollTop);
-  await page.waitForTimeout(2000); // 图片这时才加载完
-  expect(Math.abs((await main.evaluate(element => element.scrollTop)) - mine)).toBeLessThan(320);
+  await settle(page, '主译本正文');
+  const mine = await mainOffset(page);
+  expect(mine).toBeLessThan(-200); // 确实滚走了，标记在可视区上方
+  await page.waitForTimeout(3500); // 图片这时才加载完
+  // 没有被拉回标记处（拉回的话会回到 24px 左右，差 600 多）
+  expect(Math.abs((await mainOffset(page)) - mine)).toBeLessThan(320);
 });

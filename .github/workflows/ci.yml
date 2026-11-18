@@ -134,8 +134,9 @@ jobs:
           retention-days: 7
       - name: Audit frontend dependencies
         run: |
-          npm audit --json > "$RUNNER_TEMP/npm-audit.json"
-          node -e 'const fs=require("node:fs"); const a=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+"/npm-audit.json","utf8")); if(a.error || a.metadata?.vulnerabilities?.total !== 0) process.exit(1)'
+          # 有漏洞时 npm audit 退出码非 0；是否放行由脚本判断（只放行列出的无修复版公告）
+          npm audit --json > "$RUNNER_TEMP/npm-audit.json" || true
+          node scripts/check-npm-audit.mjs "$RUNNER_TEMP/npm-audit.json"
       - name: Preserve frontend audit
         if: always()
         uses: actions/upload-artifact@v4

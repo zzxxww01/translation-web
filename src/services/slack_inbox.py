@@ -505,7 +505,8 @@ class SlackInbox:
                 raise
             logger.warning("client.userBoot 不可用，会话列表只用 client.counts：%s", exc.message)
             data = {}
-        boot = {"channels": data.get("channels") or [], "ims": data.get("ims") or [], "is_open": data.get("is_open")}
+        boot = {"channels": data.get("channels") or [], "ims": data.get("ims") or [], "is_open": data.get("is_open"),
+                "my_groups": _my_subteams(data)}
         self._cache.put("boot", boot)
         return boot
 
@@ -1179,9 +1180,16 @@ class SlackInbox:
 
     # -- Muse 自动化：since 之后谁 @ 了我（只读本地副本，不标已读）
 
+    def my_groups(self) -> List[str]:
+        try:
+            return list(self._boot().get("my_groups") or [])
+        except SlackInboxError:
+            return []
+
     def mentions_since(self, since: float, group_ids: Iterable[str] = (), limit: int = 200) -> List[Dict[str, Any]]:
+        """group_ids：手配的用户组；再加上 client.userBoot 里自动识别到的我所在的组。"""
         me = self.auth().get("user_id", "")
-        groups = [g for g in group_ids if g]
+        groups = sorted({g for g in group_ids if g} | set(self.my_groups()))
         needles = [f"<@{me}"] if me else []
         needles += [f"<!subteam^{g}" for g in groups] + list(BROADCAST_MENTIONS)
         result = []
@@ -1219,6 +1227,52 @@ class SlackInbox:
         if info["kind"] == "mpim":
             return mpim_label(info["name"], self.auth().get("user", ""))
         return info["name"] or channel_id
+
+    def translation_source(self, channel_id: str, ts: str, thread_ts: Optional[str] = None,
+                           with_thread: bool = False) -> Dict[str, Any]:
+        """Muse 的 translate-slack：一条消息（或它所在的整个 thread）的原文，带链接卡片里的帖子。只读。"""
+        if not CONVERSATION_ID_RE.match(channel_id or ""):
+            raise SlackInboxError("BAD_CONVERSATION", "会话 ID 格式不对", 400)
+        if not TS_RE.match(ts or "") or (thread_ts and not TS_RE.match(thread_ts)):
+            raise SlackInboxError("BAD_TS", "消息 ts 格式不对", 400)
+        raw = self.db.message(channel_id, ts)
+        if raw is None:
+            self.sync_conversation(channel_id, self._latest_hint(channel_id))
+            if thread_ts:
+                self.sync_thread(channel_id, thread_ts)
+            raw = self.db.message(channel_id, ts)
+        if raw is None:
+            raise SlackInboxError("MESSAGE_NOT_FOUND", "本地副本里找不到这条消息（thread 里的回复要带 thread_ts）", 404)
+        root = thread_ts or raw.get("thread_ts") or ts
+        if with_thread:
+            self.sync_thread(channel_id, root)
+            raws = self.db.thread(channel_id, root)
+        else:
+            raws = [raw]
+        messages = [self.normalize_message(channel_id, m) for m in raws]
+        parts = []
+        for msg in messages:
+            body = msg["text"].strip()
+            for card in msg["attachments"]:
+                card_text = "\n".join(t for t in (card["title"].strip(), card["text"].strip()) if t)
+                if card_text:
+                    body += ("\n\n" if body else "") + f"[{card['service_name'] or '链接卡片'}] {card_text}"
+            if body:
+                parts.append(f"{msg['user_name']}: {body}" if with_thread else body)
+        return {
+            "source_text": "\n\n".join(parts),
+            "messages": len(messages),
+            "permalink": self._permalink(channel_id, root if with_thread else ts,
+                                         None if with_thread else raw.get("thread_ts")),
+        }
+
+
+def _my_subteams(boot: Dict[str, Any]) -> List[str]:
+    """client.userBoot 里「我所在的用户组」：subteams.self（企业版 usergroups.* 被禁用，只能从这里拿）。没有就是空。"""
+    subteams = boot.get("subteams")
+    mine = subteams.get("self") if isinstance(subteams, dict) else None
+    ids = [(item.get("id") if isinstance(item, dict) else item) for item in (mine or [])]
+    return [i for i in ids if isinstance(i, str) and re.fullmatch(r"S[A-Z0-9]{6,20}", i)]
 
 
 def mention_type(text: str, me: str, group_ids: Iterable[str] = ()) -> Optional[str]:

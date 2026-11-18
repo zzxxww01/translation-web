@@ -7,15 +7,19 @@ Muse 自动化接口：给本机 CLI（src/cli/automation.py，命令名 transla
 - updates：先同步（Substack 最新一页 + Slack 只读同步），再查 since 之后的新文章和 @我。
   不导入、不翻译、不改 Slack 和 momo 本地的已读。
 - translate-article：导入（已导入复用）→ 起四步法翻译（自动采用术语建议）；在跑 / 已译完就返回已有项目。
+- translate-slack：一条 Slack 消息（或整个 thread）走帖子翻译链路（GPT Sol），同步返回译文；
+  结果按内容缓存，同样的内容再调直接返回，不重复花钱。Slack 端照旧只读。
 - status / health：只读。
 """
 
 from __future__ import annotations
 
 import asyncio
+import hashlib
 import ipaddress
 import logging
 import time
+from pathlib import Path
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
@@ -23,6 +27,8 @@ from fastapi import APIRouter, Depends, Query, Request
 from pydantic import BaseModel, Field
 
 from src.api.utils.concurrency import run_blocking
+from src.core.file_utils import read_json, write_json_atomic
+from src.services.slack_inbox import SlackInboxError
 from src.services.substack_service import SubstackError, article_key
 from src.settings import settings
 
@@ -30,6 +36,7 @@ from ..dependencies import get_batch_service, get_longform_llm_provider, get_pro
     get_translation_status_service
 from ..middleware import APIException, NotFoundException
 from .confirmation_translation import start_longform_workflow
+from .slack_inbox import _to_api_error as _slack_api_error
 from .slack_inbox import get_slack_inbox
 from .substack import (
     _imported_projects,
@@ -39,7 +46,8 @@ from .substack import (
     get_substack_library,
     import_substack_article,
 )
-from .translate_models import LongformWorkflowStartRequest
+from .translate_models import MAX_POST_CONTENT_LENGTH, LongformWorkflowStartRequest, PostTranslateRequest
+from .translate_posts import translate_post
 
 logger = logging.getLogger(__name__)
 
@@ -61,6 +69,10 @@ router = APIRouter(prefix="/internal/automation", dependencies=[Depends(require_
 
 # 同一篇文章同时只处理一次 translate-article，避免并发调用导入出两个项目
 _translate_lock = asyncio.Lock()
+_slack_lock = asyncio.Lock()
+# Slack 这边的模型调用一律走官方 GPT Sol（docs/Slack收件箱.md「模型」）
+SLACK_MODEL = "gpt-6.1-sol"
+SLACK_PREFIX = "slack-"
 
 
 def _iso(ts: float) -> str:
@@ -218,6 +230,8 @@ def _last_error(payload: Dict[str, Any]) -> Optional[str]:
 
 @router.get("/projects/{project_id}/status")
 async def project_status(project_id: str, with_markdown: bool = False):
+    if project_id.startswith(SLACK_PREFIX):
+        return await slack_status(project_id)
     pm = get_project_manager()
     summaries = await asyncio.to_thread(pm.list_summaries, include_variants=True)
     summary = next((s for s in summaries if s.id == project_id), None)
@@ -279,7 +293,8 @@ async def health():
         except SubstackError as error:
             checks["substack"] = f"error: {error.code}"
 
-    status = await run_blocking(get_slack_inbox().status)
+    inbox = get_slack_inbox()
+    status = await run_blocking(inbox.status)
     checks["slack"] = "ok" if status.get("ok") else f"error: {status.get('error_code')}"
 
     try:
@@ -289,4 +304,86 @@ async def health():
         checks["models"] = f"error: {type(error).__name__}"
 
     healthy = all(v == "ok" for v in checks.values())
-    return {"status": "healthy" if healthy else "degraded", **checks}
+    groups = await run_blocking(inbox.my_groups) if status.get("ok") else []
+    # 用户组：自动识别到几个、手配了几个（group 类 @ 靠它们）
+    return {"status": "healthy" if healthy else "degraded", **checks,
+            "slack_groups": {"detected": len(groups), "configured": len(_group_ids())}}
+
+
+# ---------------------------------------------------------------- translate-slack
+
+
+class TranslateSlackRequest(BaseModel):
+    conversation_id: str = Field(..., min_length=1, max_length=30)
+    message_ts: str = Field(..., min_length=1, max_length=30)
+    thread_ts: Optional[str] = Field(None, max_length=30)  # thread 里的回复：本地没有时靠它去拉
+    with_thread: bool = False
+
+
+def _slack_store_path() -> Path:
+    return Path(settings.slack_cache_dir) / "automation_translations.json"
+
+
+def _slack_results() -> Dict[str, Any]:
+    path = _slack_store_path()
+    try:
+        return read_json(path) if path.exists() else {}
+    except (OSError, ValueError):
+        return {}
+
+
+@router.post("/translate-slack")
+async def translate_slack(request: Request, body: TranslateSlackRequest):
+    inbox = get_slack_inbox()
+    try:
+        source = await run_blocking(inbox.translation_source, body.conversation_id, body.message_ts,
+                                    body.thread_ts, body.with_thread)
+    except SlackInboxError as error:
+        raise _slack_api_error(error) from error
+    text = source["source_text"].strip()
+    if not text:
+        raise APIException(status_code=400, detail="这条消息没有可翻译的文字", error_code="EMPTY_MESSAGE")
+    if len(text) > MAX_POST_CONTENT_LENGTH:
+        raise APIException(status_code=400, detail=f"原文超过 {MAX_POST_CONTENT_LENGTH} 字符，太长了",
+                           error_code="TOO_LONG")
+    key = f"{SLACK_PREFIX}{body.conversation_id}-{body.message_ts}" + ("-thread" if body.with_thread else "")
+    digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    async with _slack_lock:
+        cached = (await asyncio.to_thread(_slack_results)).get(key)
+        if cached and cached.get("source_hash") == digest:
+            return {"project_id": key, "status": "already_exists", **_slack_view(cached)}
+        result = await translate_post.__wrapped__(  # 绕过网页用的限流，并发由锁管
+            request=request,
+            body=PostTranslateRequest(content=text, model=SLACK_MODEL, include_hashtags=False),
+        )
+        record = {
+            "source_hash": digest,
+            "source_text": text,
+            "translation": result.translation,
+            "messages": source["messages"],
+            "permalink": source["permalink"],
+            "model": result.model_used,
+            "translated_at": _iso(time.time()),
+        }
+
+        def save():
+            results = _slack_results()
+            results[key] = record
+            _slack_store_path().parent.mkdir(parents=True, exist_ok=True)
+            write_json_atomic(_slack_store_path(), results)
+
+        await asyncio.to_thread(save)
+    # 帖子翻译几十秒就完，直接同步返回结果；status 也能查到
+    return {"project_id": key, "status": "done", **_slack_view(record)}
+
+
+def _slack_view(record: Dict[str, Any]) -> Dict[str, Any]:
+    return {key: record.get(key) for key in ("translation", "source_text", "messages", "permalink", "translated_at")}
+
+
+async def slack_status(project_id: str) -> Dict[str, Any]:
+    record = (await asyncio.to_thread(_slack_results)).get(project_id)
+    if record is None:
+        raise NotFoundException(detail="没有这条 Slack 翻译")
+    return {"project_id": project_id, "status": "done", "progress": 100, "stage": None,
+            "result": record.get("translation"), "error": None, **_slack_view(record)}

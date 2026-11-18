@@ -129,9 +129,25 @@ def test_usage_error_is_json(std):
     assert code == 1 and "error" in out
 
 
-def test_translate_slack_not_implemented(std):
-    code, out = _run(std, ["translate-slack", "C0123456789", "1763424000.000100"])
-    assert code == 3 and out["code"] == "NOT_IMPLEMENTED"
+def test_translate_slack_posts_body(std, monkeypatch):
+    seen = _capture(monkeypatch, {"project_id": "slack-C0123456789-1763424000.000200", "status": "done"})
+    code, out = _run(std, ["translate-slack", "C0123456789", "1763424000.000200",
+                           "--thread-ts", "1763424000.000100", "--with-thread"])
+    assert code == 0 and out["status"] == "done"
+    assert seen[0].full_url.endswith("/internal/automation/translate-slack")
+    assert json.loads(seen[0].data) == {"conversation_id": "C0123456789", "message_ts": "1763424000.000200",
+                                        "thread_ts": "1763424000.000100", "with_thread": True}
+
+
+@pytest.mark.parametrize("argv", [
+    ["translate-slack", "bad", "1763424000.000100"],
+    ["translate-slack", "C0123456789", "nope"],
+    ["translate-slack", "C0123456789", "1763424000.000100", "--thread-ts", "x"],
+])
+def test_translate_slack_rejects_bad_ids(std, monkeypatch, argv):
+    seen = _capture(monkeypatch)
+    code, out = _run(std, argv)
+    assert code == 1 and seen == []
 
 
 def test_unexpected_exception_still_json(std, monkeypatch):
