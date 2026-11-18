@@ -38,7 +38,9 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
   企业版工作区查不了 `usergroups.*`：「我所在的组」先从 `client.userBoot` 的 `subteams.self` 自动识别，再并上
   `AUTOMATION_SLACK_GROUP_IDS`（逗号分隔，`.env` 里设）。`health` 的 `slack_groups` 能看到两边各几个，都是 0 时 group 为空。
 - 每条 mention 带 `thread_ts`（thread 里的回复才有）和 `permalink`，翻译时把 `thread_ts` 原样传给 `translate-slack --thread-ts`。
-- 从本地副本 `slack.db` 查，所以 Felix 没参与、Slack 也没自动订阅的 thread 里的回复查不到（被 @ 时 Slack 一般会自动订阅）。
+- 先从本地副本 `slack.db` 查；本地只同步 Felix 参与的 thread，所以再用 `search.messages`（只读）搜 `<@U0A8T7U5D7A>` 兜底，
+  补上没参与、Slack 也没自动订阅的 thread 里的 @。搜索索引有延迟，每次往回多看 30 分钟；搜到的存进本地副本，
+  靠「本地有没有」去重，同一条只报一次（`translate-slack` 也能直接找到）。搜索失败只记日志，照常返回本地结果。
 - **只读**：Slack 走现有只读白名单；不碰 momo 本地已读（`read_state`）；不导入、不翻译。
 
 ### translate-article 细节
