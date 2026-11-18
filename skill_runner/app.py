@@ -256,6 +256,8 @@ def create_app(
                 yield "retry: 3000\n\n"
                 for event in backlog:
                     yield _sse(event)
+                # 回放到此为止：页面在这之前只攒着不渲染，收到再一次画出来（长对话逐批重画会卡好几秒）
+                yield "event: ready\ndata: {}\n\n"
                 while True:
                     try:
                         event = await asyncio.wait_for(queue.get(), timeout=SSE_PING_S)

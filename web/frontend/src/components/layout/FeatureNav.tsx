@@ -1,4 +1,5 @@
-import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import { MessageSquare, MessageCircle, Wrench, FileText, Sparkles, Newspaper } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -6,16 +7,21 @@ interface NavItem {
   path: string;
   label: string;
   icon: React.ReactNode;
+  /** 切走再切回来时回到上次看的那个会话 / 对话，不用重新点、重新加载 */
+  remember?: boolean;
 }
+
+// 各 tab 上次停留的地址（含查询参数）；只在本页会话内有效
+const lastLocation = new Map<string, string>();
 
 const navItems: NavItem[] = [
   // 文章库、长文翻译、Claude 精翻合成一个「文章」工作台；旧长文编辑器从工作台「更多」进入
   { path: '/articles', label: '文章', icon: <Newspaper className="h-4 w-4" /> },
   { path: '/post', label: '帖子翻译', icon: <MessageSquare className="h-4 w-4" /> },
   { path: '/wechat', label: '微信排版', icon: <FileText className="h-4 w-4" /> },
-  { path: '/slack', label: 'Slack', icon: <MessageCircle className="h-4 w-4" /> },
+  { path: '/slack', label: 'Slack', icon: <MessageCircle className="h-4 w-4" />, remember: true },
   { path: '/tools', label: '工具箱', icon: <Wrench className="h-4 w-4" /> },
-  { path: '/skills', label: 'Agent', icon: <Sparkles className="h-4 w-4" /> },
+  { path: '/skills', label: 'Agent', icon: <Sparkles className="h-4 w-4" />, remember: true },
 ];
 
 interface FeatureNavProps {
@@ -25,6 +31,13 @@ interface FeatureNavProps {
 
 export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNavProps) {
   const isVertical = orientation === 'vertical';
+  const { pathname, search } = useLocation();
+  const current = navItems.find(item => item.remember && pathname === item.path);
+  useEffect(() => {
+    if (current) lastLocation.set(current.path, `${pathname}${search}`);
+  }, [current, pathname, search]);
+  // 当前所在的 tab 再点一次回到它的首页
+  const target = (item: NavItem) => (item === current ? item.path : lastLocation.get(item.path) ?? item.path);
 
   return (
     <nav aria-label="主要功能" className={cn(
@@ -34,7 +47,7 @@ export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNa
       {navItems.map((item) => (
         <NavLink
           key={item.path}
-          to={item.path}
+          to={target(item)}
           onClick={onNavigate}
           aria-label={item.label}
           className={({ isActive }) =>
