@@ -125,7 +125,7 @@ export function SlackFeature() {
                 <span className="font-semibold">这里是你的 Slack（只读）</span>
               </div>
               <ul className="list-disc space-y-1.5 pl-5">
-                <li><b>频道</b>：你加入的公开 / 私有频道。点频道名看消息；下面缩进的是这个频道最近有回复的 <b>thread</b>（某条消息下面的回复串），标题是 AI 起的中文名。</li>
+                <li><b>频道</b>：你加入的公开 / 私有频道。点频道名看消息；下面缩进的是这个频道最近有回复的 <b>thread</b>（某条消息下面的回复串），标题是根消息的第一行原文。</li>
                 <li><b>私信</b>：一对一的对话，和几个人的小群（群聊私信）。</li>
                 <li><b>AI 速览</b>：把所有未读整理成中文要点。<b>我参与的 thread</b>：你回复过或被 @ 过的回复串。</li>
                 <li>默认显示英文原文。鼠标移到消息上点「译」翻这一条，或在顶栏打开「全部中文」。</li>

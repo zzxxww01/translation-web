@@ -34,13 +34,13 @@ URL：`/slack?c=<会话>`、`view=threads|reply`、`tc=<会话>&t=<thread_ts>`�
 - 两个 agent 本身用 Codex（OpenAI 官方）跑 `gpt-6.1-sol`：前端启动时传 `harness=codex, model=gpt-6.1-sol`，`agents.json` 里也默认 codex。
 - AI 缓存键带 `CACHE_TAG`（`src/services/slack_ai.py`），换模型时改它，旧模型的结果不再复用。
 
-## 轻量 AI：消息中文、thread 中文标题和摘要
+## 轻量 AI：消息中文、thread 摘要
 
 不走 agent，直接调短文本模型（`task_type="slack"`），`src/services/slack_ai.py`：
 
 - **消息中文**：默认显示英文原文（2026-11-17 用户反馈不要全部自动翻译）。悬停工具条上的「译」翻单条；顶栏「全部中文」开关（全局，默认关）打开后逐条翻。前端 20 条一批 `POST /ai/translate`，
   只翻英文为主的消息（中文、只有链接 / 表情的跳过），带术语库，链接不抄进译文。
-- **thread 中文短标题**：侧栏展开频道、Threads 页，`POST /ai/titles`（thread_ts → 根消息原文）。
+- **thread 标题不翻译**（2026-11-18 用户要求）：侧栏展开频道、Threads 页直接显示根消息第一行原文。`POST /ai/titles` 只为已打开的旧页面保留，前端不再调用。
 - **thread 摘要**：thread「消息」页顶部点「用中文总结这个 thread」才生成，`GET /conversations/{id}/threads/{ts}/summary`，含「要你做」一句。
 - 缓存：`data/slack_cache/ai/{zh,titles,summaries}.json`，按内容 hash（摘要按最新回复 ts）。改翻译提示词时把
   `ZH_PROMPT_VERSION` 加一，旧缓存自然失效。
@@ -118,7 +118,7 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/threads` | 我参与的 thread，有新回复的在前 |
 | GET | `/conversations/{id}/agent-context?thread_ts=` | 交给 agent 的上下文（Markdown + me/them 历史） |
 | POST | `/ai/translate` | `{"texts": [...]}` 逐条中文（不需要翻的为 null） |
-| POST | `/ai/titles` | `{"items": {thread_ts: 根消息}}` 中文短标题 |
+| POST | `/ai/titles` | `{"items": {thread_ts: 根消息}}` 中文短标题（前端已不用，只为旧页面保留） |
 | GET | `/conversations/{id}/threads/{ts}/summary` | thread 中文摘要 |
 | GET | `/digest` | AI 速览（未读按会话 / thread 中文总结） |
 | GET | `/search?q=` | 搜索（中文先改写成英文关键词） |

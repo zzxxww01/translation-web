@@ -3,7 +3,7 @@ import { useQueries, useQuery } from '@tanstack/react-query';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { slackInboxApi } from './api';
-import type { SlackMessage, SlackThread } from './types';
+import type { SlackMessage } from './types';
 
 // 后端一次最多 40 条；消息翻译按 20 条一批，单次模型调用更快、不容易超时，中文也出得早
 const BATCH = 40;
@@ -67,29 +67,6 @@ export function useMessageZh(messages: SlackMessage[], enabled: boolean) {
     });
   });
   return { zh: map, loading: enabled && results.some(r => r.isLoading), failed: results.some(r => r.isError) };
-}
-
-/** 侧栏 thread 的中文短标题：thread_ts -> 标题。 */
-export function useThreadTitles(threads: SlackThread[] | undefined, enabled = true) {
-  const items = useMemo(() => {
-    const out: Record<string, string> = {};
-    for (const t of (threads ?? []).slice(0, BATCH)) {
-      const text = [t.root.text, ...t.root.attachments.map(a => a.title)].filter(Boolean).join('\n');
-      if (text.trim()) out[t.thread_ts] = text;
-    }
-    return out;
-  }, [threads]);
-  const keys = Object.keys(items);
-  const query = useQuery({
-    queryKey: ['slack-titles', hashTexts(keys.map(k => k + items[k]))],
-    queryFn: () => slackInboxApi.threadTitles(items),
-    enabled: enabled && keys.length > 0,
-    staleTime: Infinity,
-    gcTime: 30 * 60_000,
-    retry: 1,
-    select: data => data.titles,
-  });
-  return query.data ?? {};
 }
 
 /** thread 摘要；latestTs 变了（有新回复）就重新取，后端也按它缓存。 */
