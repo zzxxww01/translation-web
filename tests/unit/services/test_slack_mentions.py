@@ -195,3 +195,28 @@ def test_search_failure_falls_back_to_local(inbox):
     inbox._fake.search_error = SlackInboxError("RATE_LIMITED", "too many", 429)
     inbox.db.upsert(CID, [{"ts": ts(60), "user": "UAAAAAAAA1", "text": f"<@{ME}> hi"}], in_history=True)
     assert [m["message_ts"] for m in inbox.mentions_since(T0 + 50)] == [ts(60)]
+
+
+def test_activity_lists_threads_and_dms_by_latest_activity(inbox, monkeypatch):
+    monkeypatch.setattr(inbox, "sync_conversation", lambda *a, **k: 0)
+    inbox.db.upsert(CID, [
+        {"ts": ts(100), "user": "UAAAAAAAA1", "text": "Elon post", "thread_ts": ts(100),
+         "reply_count": 2, "latest_reply": ts(102)},
+        {"ts": ts(40), "user": "UAAAAAAAA1", "text": "no replies here"},  # 没回复的单条消息不算 thread
+    ], in_history=True)
+    inbox.db.upsert(CID, [
+        {"ts": ts(101), "user": "UBBBBBBBB2", "text": f"<@{ME}> pls check", "thread_ts": ts(100)},
+        {"ts": ts(102), "user": "UCCCCCCCC3", "text": "ok will post", "thread_ts": ts(100)},
+    ], in_history=False)
+    inbox.db.upsert(DM, [{"ts": ts(50), "user": "UAAAAAAAA1", "text": "hey Felix"}], in_history=True)
+
+    items = inbox.activity()["items"]
+    assert [(i["type"], i["channel_id"]) for i in items] == [("thread", CID), ("dm", DM)]
+    thread, dm = items
+    assert thread["thread_ts"] == ts(100) and thread["reply_count"] == 2
+    assert thread["root"]["text"] == "Elon post"
+    assert thread["last"]["text"] == "ok will post"
+    assert thread["participants"] == ["Alice"]  # 假 Slack 里所有人都叫 Alice，去重后一个
+    assert thread["mentions_me"] is True and thread["channel_name"] == "general"
+    assert dm["last"]["text"] == "hey Felix" and dm["channel_name"] == "Alice" and dm["thread_ts"] is None
+    assert not any("mark" in method for method in inbox._fake.calls)

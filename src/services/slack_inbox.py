@@ -926,6 +926,55 @@ class SlackInbox:
         items.sort(key=lambda t: -float(t["latest_reply"] or t["thread_ts"]))
         return {"threads": items[:30]}
 
+    def activity(self) -> Dict[str, Any]:
+        """「动态」列表：频道里最近 THREAD_RECENT_DAYS 天有回复的 thread 和私信，各占一行，按最近活动从新到旧。
+
+        thread 行带根消息、最后一条回复和参与的人（来自本地副本；没参与的 thread 打开时才整个拉下来）。
+        """
+        me = self.auth().get("user_id", "")
+        items: List[Dict[str, Any]] = []
+        for conv in self.conversations():
+            cid = conv["id"]
+            if conv["kind"] in {"channel", "private"}:
+                for t in self.channel_threads(cid)["threads"]:
+                    local = self.db.thread(cid, t["thread_ts"])
+                    replies = [m for m in local if str(m.get("ts")) != t["thread_ts"]]
+                    people: List[str] = []
+                    for m in [t["root"]] + [self.normalize_message(cid, r) for r in replies[-20:]]:
+                        if m["user_name"] and m["user_name"] not in people:
+                            people.append(m["user_name"])
+                    mentioned = bool(me) and any(f"<@{me}" in (m.get("text") or "") for m in local)
+                    items.append({
+                        "type": "thread",
+                        "channel_id": cid,
+                        "channel_name": conv["name"],
+                        "thread_ts": t["thread_ts"],
+                        "root": t["root"],
+                        "reply_count": t["reply_count"],
+                        "participants": people[:6],
+                        "last": self.normalize_message(cid, replies[-1]) if replies else None,
+                        "latest_ts": t["latest_reply"] or t["thread_ts"],
+                        "latest_time": t["latest_time"] or t["root"]["time"],
+                        "has_unreads": t["has_unreads"],
+                        "mentions_me": mentioned or t["mentions_me"] or t["root"]["mentions_me"],
+                    })
+            elif conv["latest_ts"]:
+                last = self.db.history(cid, limit=1)
+                items.append({
+                    "type": "dm",
+                    "channel_id": cid,
+                    "channel_name": conv["name"],
+                    "kind": conv["kind"],
+                    "thread_ts": None,
+                    "last": self.normalize_message(cid, last[0]) if last else None,
+                    "latest_ts": conv["latest_ts"],
+                    "latest_time": conv["latest_time"],
+                    "has_unreads": conv["has_unreads"],
+                    "mentions_me": conv["mention_count"] > 0,
+                })
+        items.sort(key=lambda item: -float(item["latest_ts"]))
+        return {"items": items}
+
     # -- 已读：只记在 momo 本地，从不改 Slack
 
     def mark_conversation(self, channel_id: str, ts: str) -> Dict[str, Any]:
