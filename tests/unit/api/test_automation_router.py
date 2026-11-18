@@ -104,11 +104,16 @@ def test_require_local_allows_loopback():
     automation.require_local(_request(host="::1"))
 
 
-def test_router_is_outside_api_prefix():
+def test_router_is_outside_api_prefix_and_guarded():
+    from fastapi.testclient import TestClient
     from src.api.app import app
-    paths = {route.path for route in app.routes}
-    assert "/internal/automation/updates" in paths
-    assert not any(p.startswith("/api/internal") for p in paths)
+    with TestClient(app) as client:
+        # 挂在 /internal 下（nginx 只转发 /api/）；经过代理的请求在进到接口前就被拒
+        proxied = client.get("/internal/automation/health", headers={"X-Forwarded-For": "1.2.3.4"})
+        assert proxied.status_code == 403 and proxied.json()["error_code"] == "FORBIDDEN"
+        # TestClient 的来源不是回环地址，同样拒绝
+        assert client.get("/internal/automation/health").status_code == 403
+        assert client.get("/api/internal/automation/health").status_code == 404
 
 
 # ---------------------------------------------------------------- updates

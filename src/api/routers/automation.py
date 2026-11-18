@@ -52,7 +52,7 @@ def require_local(request: Request) -> None:
     try:
         local = ipaddress.ip_address(host).is_loopback
     except ValueError:
-        local = host in {"localhost", "testclient"}  # TestClient 的 client.host 是 testclient
+        local = False
     if not local or any(h in request.headers for h in _FORWARD_HEADERS):
         raise APIException(status_code=403, detail="只允许本机调用", error_code="FORBIDDEN")
 
