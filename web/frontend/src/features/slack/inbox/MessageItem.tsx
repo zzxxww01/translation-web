@@ -72,7 +72,9 @@ function MessageBody({ message, zh, askedZh }: { message: SlackMessage; zh?: str
           {a.title && (a.title_link ? (
             <a href={a.title_link} target="_blank" rel="noreferrer noopener" className="font-medium text-primary-700 hover:underline">{a.title}</a>
           ) : <div className="font-medium">{a.title}</div>)}
-          {a.text && <SlackMarkdown text={a.text} className="mt-0.5 line-clamp-4" />}
+          {a.segments?.length
+            ? <SlackText segments={a.segments} className="mt-0.5 line-clamp-4 text-[13px] text-text-secondary" />
+            : a.text && <SlackMarkdown text={a.text} className="mt-0.5 line-clamp-4" />}
         </div>
       ))}
       {message.reactions.length > 0 && (

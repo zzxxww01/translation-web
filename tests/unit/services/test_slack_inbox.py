@@ -446,6 +446,17 @@ def test_agent_context_marks_my_messages():
     assert "[链接卡片 · X] Post https://x.com/a" in md and "> line2" in md
 
 
+def test_link_card_text_is_parsed_like_message_text(inbox):
+    msg = inbox.normalize_message("C000000001", {
+        "ts": f"{NOW:.6f}", "user": "UAAAAAAAA1", "text": "",
+        "attachments": [{"service_name": "X", "title": "Post", "text": "via <https://x.com/a|the post> by <@UAAAAAAAA1> &amp; co"}],
+    })
+    card = msg["attachments"][0]
+    assert "<" not in card["text"] and "the post (https://x.com/a)" in card["text"] and "& co" in card["text"]
+    assert {"type": "link", "url": "https://x.com/a", "text": "the post"} in card["segments"]
+    assert any(seg["type"] == "mention" for seg in card["segments"])
+
+
 
 def test_search_marks_visibility_and_threads(inbox):
     out = inbox.search("HBM yields")

@@ -650,11 +650,14 @@ class SlackInbox:
             })
         attachments = []
         for a in msg.get("attachments", []) or []:
+            # 卡片正文和消息正文一样是 mrkdwn：<网址|文字>、<@U…> 拆成片段，纯文本里不留标记
+            card_segments = parse_slack_text(a.get("text") or "", self.user_name)
             attachments.append({
                 "service_name": a.get("service_name") or "",
                 "title": a.get("title") or a.get("fallback") or "",
                 "title_link": a.get("title_link") or a.get("from_url") or "",
-                "text": _unescape(a.get("text") or ""),
+                "text": segments_to_plain(card_segments),
+                "segments": card_segments,
             })
         thread_ts = msg.get("thread_ts")
         me = self.auth().get("user_id", "")
