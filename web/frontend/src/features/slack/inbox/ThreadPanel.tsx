@@ -18,10 +18,12 @@ interface ThreadPanelProps {
   onOpenChannel: () => void;
   /** 打开就生成中文摘要（「动态」页）；否则点按钮才生成 */
   autoSummary?: boolean;
+  /** 宽屏：帖子翻译助手放在页面右栏，这里不再有「AI 翻译」标签页 */
+  aiInSidebar?: boolean;
 }
 
 /** 右栏 thread：根消息 + 全部回复；看到就记为已读（只记在 momo 本地）。 */
-export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel, autoSummary = false }: ThreadPanelProps) {
+export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel, autoSummary = false, aiInSidebar = false }: ThreadPanelProps) {
   // 默认先看消息；切到「AI 翻译」才加载 AI（点「开始」才真正启动）
   const [tab, setTab] = useState<'ai' | 'messages'>('messages');
   const [aiOpened, setAiOpened] = useState(false);
@@ -46,8 +48,9 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
   const showZh = useShowZh(state => state.showZh);
   const zh = useMessageZh(data?.messages ?? [], showZh && tab === 'messages');
   // 摘要：「动态」页打开就生成，其余点了才生成（后端按最新回复缓存，同一版本的 thread 只花一次）
+  // 还没人回复的新帖不自动总结：只有一条消息，要看懂直接点「全部中文」或用 AI 翻译
   const [wantSummary, setWantSummary] = useState(autoSummary);
-  const summary = useThreadSummary(channelId, threadTs, newest, wantSummary);
+  const summary = useThreadSummary(channelId, threadTs, newest, wantSummary && rest.length > 0);
   const { mutate: mark } = markThread;
   const markedTs = useRef<string | null>(null);
   useEffect(() => {
@@ -89,7 +92,10 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
         </button>
       </div>
       <div className="flex shrink-0 gap-1 border-b border-border-subtle px-3" role="tablist" aria-label="thread 视图">
-        {([['messages', `消息${rest.length ? ` · ${rest.length + 1}` : ''}`], ['ai', 'AI 翻译']] as const).map(([id, label]) => (
+        {(aiInSidebar
+          ? [['messages', `消息${rest.length ? ` · ${rest.length + 1}` : ''}`]] as const
+          : [['messages', `消息${rest.length ? ` · ${rest.length + 1}` : ''}`], ['ai', 'AI 翻译']] as const
+        ).map(([id, label]) => (
           <button
             key={id}
             type="button"
@@ -108,7 +114,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
         {tab === 'messages' && <div className="ml-auto flex items-center"><ZhToggle loading={zh.loading} failed={zh.failed} /></div>}
       </div>
       {/* 打开过 AI 页之后一直挂着（切回消息页也在后台跑），只是隐藏 */}
-      {aiOpened && <div className={cn('min-h-0 flex-1', tab === 'ai' ? 'flex flex-col' : 'hidden')}>
+      {aiOpened && !aiInSidebar && <div className={cn('min-h-0 flex-1', tab === 'ai' ? 'flex flex-col' : 'hidden')}>
         <SlackAgentPanel
           key={`${channelId}-${threadTs}`}
           channelId={channelId}
@@ -117,7 +123,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
           slackLink={root?.permalink ?? null}
         />
       </div>}
-      <div className={cn('min-h-0 flex-1 overflow-auto pb-4 pt-2', tab !== 'messages' && 'hidden')}>
+      <div className={cn('min-h-0 flex-1 overflow-auto pb-4 pt-2', tab !== 'messages' && !aiInSidebar && 'hidden')}>
         {replies.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
         {replies.isError && (
           <div className="p-4 text-sm text-error">

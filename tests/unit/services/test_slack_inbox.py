@@ -285,6 +285,34 @@ def test_conversations_fall_back_to_counts_without_user_boot(inbox):
     assert [c["id"] for c in inbox.conversations()] == ["C000000001", "G000000001", "D000000001"]
 
 
+def test_activity_lists_new_posts_without_replies(inbox):
+    original = inbox.fake.call
+
+    def call(method, **params):
+        out = original(method, **params)
+        if method == "conversations.history" and params.get("channel") == "C000000001":
+            out = dict(out, messages=[
+                {"ts": f"{NOW - 30:.6f}", "user": "UBBBBBBBB2", "text": "also in thread", "subtype": "thread_broadcast",
+                 "thread_ts": THREAD_TS},
+                {"ts": f"{NOW - 40:.6f}", "user": "UBBBBBBBB2", "text": "joined", "subtype": "channel_join"},
+                {"ts": f"{NOW - 50:.6f}", "user": "UBBBBBBBB2", "text": "*New post* to translate"},
+                {"ts": f"{NOW - 8 * DAY:.6f}", "user": "UBBBBBBBB2", "text": "too old"},
+            ] + out["messages"])
+        return out
+
+    inbox.fake.call = call
+    items = [i for i in inbox.activity()["items"] if i["channel_id"] == "C000000001"]
+    posts = [i for i in items if i["reply_count"] == 0]
+    assert [p["thread_ts"] for p in posts] == [f"{NOW - 50:.6f}"]
+    post = posts[0]
+    assert post["type"] == "thread" and post["root"]["user_name"] == "Bob B" and post["last"] is None
+    assert post["has_unreads"] is True  # 比频道已读位置新
+    # 在 momo 里打开过（按 thread 记了已读）就不再算未读
+    inbox.mark_thread("C000000001", post["thread_ts"], post["thread_ts"])
+    again = next(i for i in inbox.activity()["items"] if i["thread_ts"] == post["thread_ts"])
+    assert again["has_unreads"] is False
+
+
 def test_followed_threads_track_unread_and_mentions(inbox):
     threads = inbox.threads()["threads"]
     assert len(threads) == 1  # 看不到的会话被过滤
@@ -444,6 +472,17 @@ def test_agent_context_marks_my_messages():
     md = agent_context_markdown(conv, [msg], "me", is_thread=False)
     assert "# Slack 会话 · 私信 · Alice" in md and "## 1. me（我）" in md
     assert "[链接卡片 · X] Post https://x.com/a" in md and "> line2" in md
+
+
+def test_link_card_text_is_parsed_like_message_text(inbox):
+    msg = inbox.normalize_message("C000000001", {
+        "ts": f"{NOW:.6f}", "user": "UAAAAAAAA1", "text": "",
+        "attachments": [{"service_name": "X", "title": "Post", "text": "via <https://x.com/a|the post> by <@UAAAAAAAA1> &amp; co"}],
+    })
+    card = msg["attachments"][0]
+    assert "<" not in card["text"] and "the post (https://x.com/a)" in card["text"] and "& co" in card["text"]
+    assert {"type": "link", "url": "https://x.com/a", "text": "the post"} in card["segments"]
+    assert any(seg["type"] == "mention" for seg in card["segments"])
 
 
 

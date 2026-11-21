@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Hash, Languages, Loader2, MessagesSquare, RefreshCw, Search, Sparkles, Users } from 'lucide-react';
+import { FileText, Hash, Languages, Loader2, MessageSquareText, MessagesSquare, RefreshCw, Search, Sparkles, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AgentBadge } from '../agent/AgentBadge';
 import { useSlackAgentRuns } from '../agent/agentRuns';
@@ -9,8 +9,22 @@ import { clockTime, emojify, stripLeadingMentions, type SlackView } from './lib'
 import { stripMrkdwn } from './mrkdwn';
 import type { SlackActivityItem, SlackMessage, SlackStatus } from './types';
 
-type Filter = 'all' | 'mentions' | 'dm';
-const FILTERS: [Filter, string][] = [['all', '全部'], ['mentions', '@我'], ['dm', '私信']];
+type Filter = 'all' | 'unread' | 'mentions' | 'dm';
+const FILTERS: [Filter, string][] = [['all', '全部'], ['unread', '未读'], ['mentions', '@我'], ['dm', '私信']];
+
+function matches(item: SlackActivityItem, filter: Filter): boolean {
+  if (filter === 'unread') return item.has_unreads;
+  if (filter === 'mentions') return item.mentions_me;
+  if (filter === 'dm') return item.type === 'dm';
+  return true;
+}
+
+// 列表顶部的其他页面入口（带文字，之前是两个不好找的小图标）
+const VIEW_LINKS: [SlackView, string, typeof Sparkles, string][] = [
+  ['digest', 'AI 速览', Sparkles, '所有未读整理成中文要点'],
+  ['threads', '我参与的', MessageSquareText, '我参与过的 thread，有新回复的在前'],
+  ['reply', '回复工作台', Languages, '老工作台：贴一段英文或写中文草稿，生成三版英文回复'],
+];
 
 /** 正在看的那一行：thread 用（会话, thread_ts），私信用会话 id */
 export interface ActivitySelection {
@@ -47,7 +61,7 @@ function shortTime(ts: string, now = new Date()): string {
 }
 
 /**
- * 「动态」：每一行是一个 thread（频道里最近 7 天有回复的）或一个私信对话，按最近有人说话的时间排序。
+ * 「动态」：每一行是一个 thread（频道里最近 7 天的，含还没人回复的新帖）或一个私信对话，按最近有人说话的时间排序。
  * 点一行只看那一个 thread / 私信，不用进整个频道。
  */
 export function ActivityList({ status, selection, view, onOpen, onSelectView, onSearch }: ActivityListProps) {
@@ -55,9 +69,15 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
   const activity = useSlackActivity(true);
   const refresh = useRefreshSlack();
   const agents = useSlackAgentRuns();
-  const items = (activity.data ?? []).filter(item =>
-    filter === 'all' ? true : filter === 'dm' ? item.type === 'dm' : item.mentions_me);
-  const mentionCount = (activity.data ?? []).filter(item => item.mentions_me).length;
+  const all = activity.data ?? [];
+  const items = all.filter(item => matches(item, filter));
+  // 筛选旁的数字：全部 / 私信显示其中未读的，未读 / @我 显示总数
+  const counts: Record<Filter, number> = {
+    all: all.filter(item => item.has_unreads).length,
+    unread: all.filter(item => item.has_unreads).length,
+    mentions: all.filter(item => item.mentions_me).length,
+    dm: all.filter(item => item.type === 'dm' && item.has_unreads).length,
+  };
   // 只有一个频道时每行都写同一个频道名没意义，省下位置给「谁发起、几条回复」
   const manyChannels = new Set((activity.data ?? []).filter(item => item.type === 'thread').map(item => item.channel_id)).size > 1;
 
@@ -108,29 +128,25 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
                 filter === id ? 'bg-primary-500 text-white' : 'bg-bg-hover text-text-secondary hover:text-text-primary'
               )}
             >
-              {label}{id === 'mentions' && mentionCount > 0 ? ` ${mentionCount}` : ''}
+              {label}{id !== 'all' && counts[id] > 0 ? ` ${counts[id]}` : ''}
             </button>
           ))}
-          <div className="ml-auto flex items-center gap-0.5">
+        </div>
+        <div className="flex items-center gap-1 text-xs">
+          {VIEW_LINKS.map(([id, label, Icon, title]) => (
             <button
+              key={id}
               type="button"
-              onClick={() => onSelectView('digest')}
-              className={cn('rounded-md p-1 hover:bg-bg-hover', view === 'digest' ? 'text-primary-700' : 'text-text-muted')}
-              title="AI 速览：所有未读整理成中文要点"
-              aria-label="AI 速览"
+              onClick={() => onSelectView(id)}
+              title={title}
+              className={cn(
+                'inline-flex items-center gap-1 rounded-md px-2 py-1 transition-colors hover:bg-bg-hover',
+                view === id ? 'bg-primary-50 font-medium text-primary-700' : 'text-text-secondary'
+              )}
             >
-              <Sparkles className="h-4 w-4" />
+              <Icon className="h-3.5 w-3.5" /> {label}
             </button>
-            <button
-              type="button"
-              onClick={() => onSelectView('reply')}
-              className={cn('rounded-md p-1 hover:bg-bg-hover', view === 'reply' ? 'text-primary-700' : 'text-text-muted')}
-              title="自由翻译（回复工作台）"
-              aria-label="自由翻译"
-            >
-              <Languages className="h-4 w-4" />
-            </button>
-          </div>
+          ))}
         </div>
       </div>
 
@@ -144,7 +160,7 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
         )}
         {activity.data && items.length === 0 && (
           <div className="p-6 text-center text-sm text-text-muted">
-            {filter === 'mentions' ? '最近 7 天没人 @ 你' : filter === 'dm' ? '没有私信' : '最近 7 天没有动态'}
+            {filter === 'unread' ? '都看完了' : filter === 'mentions' ? '最近 7 天没人 @ 你' : filter === 'dm' ? '没有私信' : '最近 7 天没有动态'}
           </div>
         )}
         {items.map(item => {
@@ -164,7 +180,9 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
               <div className="flex items-start gap-2.5">
                 <div className="pt-0.5">
                   {item.type === 'thread'
-                    ? <div className="flex h-8 w-8 items-center justify-center rounded-md bg-bg-hover text-text-muted"><MessagesSquare className="h-4 w-4" /></div>
+                    ? <div className="flex h-8 w-8 items-center justify-center rounded-md bg-bg-hover text-text-muted">
+                        {item.reply_count ? <MessagesSquare className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
+                      </div>
                     : item.kind === 'mpim'
                       ? <div className="flex h-8 w-8 items-center justify-center rounded-md bg-bg-hover text-text-muted"><Users className="h-4 w-4" /></div>
                       : <Avatar name={item.channel_name} />}
@@ -184,7 +202,8 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
                       <>
                         {manyChannels && <Hash className="h-3 w-3 shrink-0" />}
                         <span className="truncate">
-                          {manyChannels ? `${item.channel_name} · ` : ''}{item.root?.user_name} 发起 · {item.reply_count} 条回复
+                          {manyChannels ? `${item.channel_name} · ` : ''}{item.root?.user_name}
+                          {item.reply_count ? ` 发起 · ${item.reply_count} 条回复` : ' 发帖 · 还没人回复'}
                           {item.participants && item.participants.length > 1 ? ` · ${item.participants.length} 人参与` : ''}
                         </span>
                       </>

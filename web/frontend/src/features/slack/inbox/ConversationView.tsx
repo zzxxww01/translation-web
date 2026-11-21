@@ -98,7 +98,7 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
         <div className="min-w-0 flex-1">
           <h2 className="truncate text-[15px] font-bold text-text-primary">{conversation.name}</h2>
           <div className="truncate text-[11px] text-text-muted">
-            {kindLabel(conversation.kind)}{isChannel ? ' · 有回复的消息点「N 条回复」在右边看 thread' : ''}
+            {kindLabel(conversation.kind)}{isChannel ? ' · 点「N 条回复」单独打开那个 thread' : ''}
           </div>
         </div>
         <ZhToggle loading={zh.loading} failed={zh.failed} />

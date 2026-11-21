@@ -4,18 +4,39 @@ import { cn } from '@/lib/utils';
 import { SlackAgentPanel } from './agent/SlackAgentPanel';
 import { ConversationView } from './inbox/ConversationView';
 import { CredentialsPanel } from './inbox/CredentialsPanel';
-import { useSlackConversations, useSlackStatus } from './inbox/hooks';
-import { parseSlackView, type SlackView } from './inbox/lib';
-import { type OpenThread } from './inbox/Sidebar';
+import { useMediaQuery, useSlackConversations, useSlackReplies, useSlackStatus } from './inbox/hooks';
+import { newestTs, parseSlackView, type SlackView } from './inbox/lib';
 import { ActivityList } from './inbox/ActivityList';
 import { ThreadPanel } from './inbox/ThreadPanel';
 import { DigestView } from './inbox/DigestView';
 import { SearchView } from './inbox/SearchView';
 import { ThreadsView } from './inbox/ThreadsView';
-import type { SlackActivityItem } from './inbox/types';
+import type { OpenThread, SlackActivityItem } from './inbox/types';
 import { ReplyWorkbench } from './ReplyWorkbench';
 
 const TS_RE = /^\d{9,11}\.\d{1,6}$/;
+
+/** 宽屏右栏：thread 背后的帖子翻译助手（和私信的回复助手同一个位置） */
+function ThreadAgentAside({ thread }: { thread: OpenThread }) {
+  const replies = useSlackReplies(thread.channelId, thread.threadTs);
+  const messages = replies.data?.messages ?? [];
+  const latestTs = newestTs(messages);
+  const root = messages[0];
+  return (
+    <aside className="flex w-[420px] min-w-0 flex-none flex-col border-l border-border-subtle">
+      <div className="flex items-center gap-2 border-b border-border-subtle px-4 py-2.5">
+        <h2 className="min-w-0 flex-1 truncate text-[15px] font-bold text-text-primary">AI 翻译 · 帖子翻译助手</h2>
+      </div>
+      <SlackAgentPanel
+        key={`${thread.channelId}-${thread.threadTs}`}
+        channelId={thread.channelId}
+        threadTs={thread.threadTs}
+        latestTs={latestTs}
+        slackLink={root?.permalink ?? null}
+      />
+    </aside>
+  );
+}
 
 /**
  * Slack 页：左栏「动态」（每行一个 thread 或私信，按最近活动排序），点开在中栏只看那一个 thread / 私信。
@@ -32,6 +53,8 @@ export function SlackFeature() {
   const openThread: OpenThread | null = tc && t && TS_RE.test(t) ? { channelId: tc, threadTs: t } : null;
 
   const status = useSlackStatus();
+  // 够宽（≥1280px）时 thread 也三栏：动态 | thread | AI；再窄中栏会被挤得太窄，AI 留在 thread 的标签页里
+  const wide = useMediaQuery('(min-width: 1280px)');
   const ready = !!status.data?.ok;
   const list = useSlackConversations(ready);
   const conversations = list.data?.conversations ?? [];
@@ -110,6 +133,7 @@ export function SlackFeature() {
             onClose={closeThread}
             onOpenChannel={() => selectConversation(openThread.channelId)}
             autoSummary
+            aiInSidebar={wide}
           />
         ) : view === 'reply' ? (
           <div className="min-h-0 flex-1 overflow-auto"><ReplyWorkbench /></div>
@@ -146,6 +170,8 @@ export function SlackFeature() {
           </div>
         )}
       </section>
+
+      {openThread && wide && <ThreadAgentAside thread={openThread} />}
 
       {dmAgent && (
         <aside className={cn(

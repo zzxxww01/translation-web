@@ -70,6 +70,8 @@ export interface SlackAttachment {
   title: string;
   title_link: string;
   text: string;
+  /** 卡片正文拆好的片段（旧缓存里可能没有） */
+  segments?: SlackSegment[];
 }
 
 export interface SlackMessage {
@@ -172,4 +174,10 @@ export interface SlackSearchResponse {
   query: string;
   total: number;
   results: SlackSearchResult[];
+}
+
+/** 中栏单独打开的 thread（频道 + 根消息 ts） */
+export interface OpenThread {
+  channelId: string;
+  threadTs: string;
 }
