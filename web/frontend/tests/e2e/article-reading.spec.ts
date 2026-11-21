@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 test('mobile article reading preserves a bookmark across refresh and saves a fragment', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 812 });

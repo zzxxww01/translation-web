@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 // 「继续阅读」（顶栏的「读到 N%」）必须真的把三栏都带到标记那一段：同时滚三栏、标记上方的图片晚加载也不能漂走
 const status = { active: false, run_id: null, status: null, current_step: null, translated: 40, total: 40, error: null };

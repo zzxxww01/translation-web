@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 // 真浏览器里才看得出来的编辑手感：点哪改哪、不乱跳、复制粘贴、撤销、沉浸模式
 const status = { active: false, run_id: null, status: null, current_step: null, translated: 30, total: 30, error: null };

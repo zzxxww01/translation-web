@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 // 导出主译本的几种去处：Markdown、PDF（浏览器打印）、复制全文、复制成公众号格式、在微信排版中打开
 const status = { active: false, run_id: null, status: null, current_step: null, translated: 2, total: 2, error: null };
