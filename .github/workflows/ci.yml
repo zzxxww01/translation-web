@@ -91,6 +91,16 @@ jobs:
         run: npm test
       - name: Build frontend
         run: npm run build
+      # 生产发版（~/release-scripts/stage_a_build.sh）直接下载这份产物，2 GB 的服务器上不再跑 vite build。
+      # 发版脚本只认整次 CI 成功、且 head_sha 与发布提交一致的运行。
+      - name: Preserve production frontend build
+        if: github.event_name == 'push'
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-dist
+          path: web/frontend/dist
+          if-no-files-found: error
+          retention-days: 30
       - name: Setup browser-test backend
         uses: actions/setup-python@v5
         with:
