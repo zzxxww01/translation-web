@@ -97,15 +97,20 @@ def create_app(
             httponly=True,
             secure=config.cookie_secure,
             samesite="strict",
-            path=PREFIX,
+            path="/",
         )
+        response.delete_cookie(auth.LEGACY_COOKIE_NAME, path=auth.LEGACY_COOKIE_PATH)
 
     def require_auth(request: Request, response: Response) -> None:
         token = request.cookies.get(auth.COOKIE_NAME)
-        if not auth.verify_token(config.session_secret, token):
-            raise HTTPException(status_code=401, detail="请先登录")
-        if auth.should_refresh(token):
-            set_session(response)
+        if auth.verify_token(config.session_secret, token):
+            if auth.should_refresh(token):
+                set_session(response)
+            return
+        if auth.verify_token(config.session_secret, request.cookies.get(auth.LEGACY_COOKIE_NAME)):
+            set_session(response)  # 旧 cookie 换成全站 cookie
+            return
+        raise HTTPException(status_code=401, detail="请先登录")
 
     public = APIRouter(prefix=PREFIX)
     api = APIRouter(prefix=PREFIX, dependencies=[Depends(require_auth)])
@@ -126,8 +131,16 @@ def create_app(
 
     @public.post("/logout")
     async def logout(response: Response):
-        response.delete_cookie(auth.COOKIE_NAME, path=PREFIX)
+        response.delete_cookie(auth.COOKIE_NAME, path="/")
+        response.delete_cookie(auth.LEGACY_COOKIE_NAME, path=auth.LEGACY_COOKIE_PATH)
         return {"ok": True}
+
+    @public.get("/auth/check")
+    async def auth_check(request: Request):
+        """nginx auth_request 用：momo 其余 /api 请求先问这里，204 放行、401 拒绝。只认全站 cookie。"""
+        if not auth.verify_token(config.session_secret, request.cookies.get(auth.COOKIE_NAME)):
+            raise HTTPException(status_code=401, detail="请先登录")
+        return Response(status_code=204)
 
     @api.get("/me")
     async def me():

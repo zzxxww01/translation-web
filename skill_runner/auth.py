@@ -10,7 +10,11 @@ import hashlib
 import hmac
 import time
 
-COOKIE_NAME = "skill_runner_session"
+# 全站共用这一个登录（2026-11-21）：cookie 挂在 / 下，nginx 用 /api/skills/auth/check 给 momo 其余 /api 把关。
+COOKIE_NAME = "momo_session"
+# 旧 cookie 只挂在 /api/skills 下；仍然认，带着它来的请求顺手换发新 cookie，已登录的人不用重输口令
+LEGACY_COOKIE_NAME = "skill_runner_session"
+LEGACY_COOKIE_PATH = "/api/skills"
 # 登录一次记一年（浏览器最多认 400 天），每天第一次用时自动续期：一直在用就一直不用再输口令
 SESSION_TTL_S = 365 * 24 * 3600
 REFRESH_AFTER_S = 24 * 3600

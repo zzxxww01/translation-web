@@ -34,10 +34,10 @@ export function LoginPanel() {
       <form onSubmit={submit} className="w-full max-w-sm rounded-xl border border-border-subtle bg-white p-7 shadow-sm">
         <div className="mb-5 flex items-center gap-2.5 text-text-primary">
           <LockKeyhole className="h-5 w-5 text-primary-600" />
-          <h1 className="text-xl">Agent</h1>
+          <h1 className="text-xl">momo</h1>
         </div>
         <p className="mb-5 text-sm leading-relaxed text-text-muted">
-          Agent 会在服务器上帮你干活（翻译、字幕、播客……）。先输入口令，这台设备会记住一年。
+          先输入口令。整个网站（翻译、Slack、Agent……）共用这一次登录，这台设备会记住一年。
         </p>
         <Input
           type="password"

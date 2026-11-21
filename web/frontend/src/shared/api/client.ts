@@ -14,6 +14,13 @@ export class ApiErrorWrapper extends Error {
   }
 }
 
+/** 任何接口返回 401（没登录或登录过期）时在 window 上发这个事件，AuthGate 据此切回口令框。 */
+export const UNAUTHORIZED_EVENT = 'momo:unauthorized';
+
+function notifyIfUnauthorized(status: number): void {
+  if (status === 401 && typeof window !== 'undefined') window.dispatchEvent(new Event(UNAUTHORIZED_EVENT));
+}
+
 function abortError(): DOMException {
   return new DOMException('Request cancelled', 'AbortError');
 }
@@ -72,6 +79,7 @@ export class ApiClient {
 
   private async handleResponse<T>(response: Response): Promise<T> {
     if (!response.ok) {
+      notifyIfUnauthorized(response.status);
       let data: unknown;
       try { data = await response.json(); } catch { /* fall back to status */ }
       throw new ApiErrorWrapper(errorMessage(data, response.statusText || 'API Error'), response.status, data);
@@ -175,6 +183,7 @@ export class ApiClient {
         if (event.lengthComputable && event.total > 0) options?.onProgress?.(Math.round(event.loaded / event.total * 100));
       });
       xhr.addEventListener('load', () => {
+        notifyIfUnauthorized(xhr.status);
         if (xhr.status === 204) { finish(); return; }
         let value: unknown;
         try { value = JSON.parse(xhr.responseText); }

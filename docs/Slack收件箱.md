@@ -43,7 +43,7 @@ URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread）、`c=<会话>`（
 - **消息中文**：默认显示英文原文（2026-11-17 用户反馈不要全部自动翻译）。悬停工具条上的「译」翻单条；顶栏「全部中文」开关（全局，默认关）打开后逐条翻。前端 20 条一批 `POST /ai/translate`，
   只翻英文为主的消息（中文、只有链接 / 表情的跳过），带术语库，链接不抄进译文。
 - **thread 标题不翻译**（2026-11-18 用户要求）：侧栏展开频道、Threads 页直接显示根消息第一行原文。`POST /ai/titles` 只为已打开的旧页面保留，前端不再调用。
-- **thread 摘要**：thread「消息」页顶部点「用中文总结这个 thread」才生成，`GET /conversations/{id}/threads/{ts}/summary`，含「要你做」一句。
+- **thread 摘要**：打开 thread 即自动生成，`GET /conversations/{id}/threads/{ts}/summary`，含「要你做」一句。
 - 缓存：`data/slack_cache/ai/{zh,titles,summaries}.json`，按内容 hash（摘要按最新回复 ts）。改翻译提示词时把
   `ZH_PROMPT_VERSION` 加一，旧缓存自然失效。
 - 侧栏 thread / 私信行尾显示 agent 状态：转圈 = 在跑，橙点 = 等你确认，红 ! = 出错，✨ = 已处理（需登录 Claude 页）。
@@ -129,4 +129,4 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/conversations/{id}/export?format=md\|json` | 导出最近 200 条（含 thread） |
 | GET | `/files/{id}` | 附件代理；只内联 png/jpeg/gif/webp，其余一律下载 |
 
-⚠️ momo 目前没有登录，这些接口和页面对公网可见（2026-11-17 用户确认暂不加）；正式使用前要加鉴权。
+鉴权：2026-11-21 起整个 momo 共用 Agent 页的口令登录（nginx `auth_request`，见 `skill_runner/README.md`），没登录访问这些接口返回 401。
