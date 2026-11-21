@@ -41,10 +41,35 @@ def test_login_sets_strict_httponly_cookie_and_logout_clears_it(setup):
     response = login(client)
     assert response.status_code == 200
     cookie = response.headers["set-cookie"]
-    assert "HttpOnly" in cookie and "SameSite=strict" in cookie and f"Path={PREFIX}" in cookie
+    assert "HttpOnly" in cookie and "SameSite=strict" in cookie and f"{COOKIE_NAME}=" in cookie and "Path=/;" in cookie
     assert client.get(f"{PREFIX}/me").json()["ok"] is True
+    assert client.get(f"{PREFIX}/auth/check").status_code == 204
     client.post(f"{PREFIX}/logout")
     assert client.get(f"{PREFIX}/me").status_code == 401
+    assert client.get(f"{PREFIX}/auth/check").status_code == 401
+
+
+def test_auth_check_rejects_missing_and_forged_cookie(setup):
+    client, _, _ = setup
+    assert client.get(f"{PREFIX}/auth/check").status_code == 401
+    client.cookies.set(COOKIE_NAME, "123.forged", path="/")
+    assert client.get(f"{PREFIX}/auth/check").status_code == 401
+
+
+def test_legacy_skills_cookie_is_upgraded_to_site_wide_cookie(tmp_path):
+    from skill_runner import auth
+
+    config = make_config(tmp_path)
+    app = create_app(config, session_factory=FakeFactory())
+    with TestClient(app) as client:
+        client.cookies.set(auth.LEGACY_COOKIE_NAME, auth.issue_token(config.session_secret), path=PREFIX)
+        assert client.get(f"{PREFIX}/auth/check").status_code == 401  # 旧 cookie 本来就到不了 momo 其余路径
+        upgraded = client.get(f"{PREFIX}/me")
+        assert upgraded.status_code == 200
+        set_cookies = upgraded.headers.get_list("set-cookie")
+        assert any(c.startswith(f"{COOKIE_NAME}=") and "Path=/;" in c for c in set_cookies)
+        assert any(c.startswith(f"{auth.LEGACY_COOKIE_NAME}=") and "Max-Age=0" in c for c in set_cookies)
+        assert client.get(f"{PREFIX}/auth/check").status_code == 204
 
 
 def test_stop_closes_run_without_deleting_history(setup):
@@ -256,7 +281,7 @@ def test_session_renews_once_a_day_so_regular_use_never_asks_again(tmp_path):
     config = make_config(tmp_path)
     app = create_app(config, session_factory=FakeFactory())
     with TestClient(app) as client:
-        client.cookies.set(COOKIE_NAME, auth.issue_token(config.session_secret, now=time.time() - 2 * 24 * 3600), path=PREFIX)
+        client.cookies.set(COOKIE_NAME, auth.issue_token(config.session_secret, now=time.time() - 2 * 24 * 3600), path="/")
         renewed = client.get(f"{PREFIX}/me")
         assert renewed.status_code == 200
         assert f"Max-Age={auth.SESSION_TTL_S}" in renewed.headers["set-cookie"]

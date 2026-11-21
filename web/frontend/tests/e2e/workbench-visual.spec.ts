@@ -1,4 +1,4 @@
-import { expect, test, type Page } from '@playwright/test';
+import { expect, test, type Page } from './fixtures';
 
 const status = { active: false, run_id: null, status: null, current_step: null, translated: 2, total: 2, error: null };
 const rows = [

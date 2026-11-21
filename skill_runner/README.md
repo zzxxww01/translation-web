@@ -133,6 +133,7 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
 ## 安全边界
 
 - 登录：单口令，`HttpOnly; Secure; SameSite=Strict` 的签名 cookie（记一年，每天第一次用时自动续期，一直在用就不用再输口令），连续 5 次输错锁 1 分钟；除登录外所有接口和事件流都校验。
+  2026-11-21 起这是**整个 momo 的登录**：cookie `momo_session` 挂在 `/` 下，nginx 用 `auth_request` 问 `/api/skills/auth/check` 给 momo 其余 `/api`、`/ws` 把关（`deploy/nginx-momo-auth.conf`），前端 `AuthGate` 没登录时整页只显示口令框。旧的 `skill_runner_session`（只挂在 `/api/skills`）仍认，下次请求时自动换成新 cookie。
 - 权限：命令和改文件不逐条确认（这是选定的工作方式），默认由两层兜底：
   - Bash 及其子进程在沙箱里：只能写运行目录和 `SKILL_RUNNER_EXTRA_WRITE`，网络只放行白名单域名，不允许绕出沙箱；
   - Edit/Write 等文件工具不受沙箱约束，由 `policy.py` 按同一份白名单拦截，拦截会显示在页面上。

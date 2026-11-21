@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider, useParams } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
+import { AuthGate } from './components/layout/AuthGate';
 import { NotFoundPage } from './components/layout/NotFoundPage';
 
 const DocumentFeature = lazy(() =>
@@ -59,7 +60,11 @@ function LegacyDocumentWorkflowRedirect() {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <AppLayout />,
+    element: (
+      <AuthGate>
+        <AppLayout />
+      </AuthGate>
+    ),
     children: [
       {
         index: true,

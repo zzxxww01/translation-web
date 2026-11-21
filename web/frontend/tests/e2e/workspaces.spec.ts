@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from './fixtures';
 
 
 test('post workspace keeps actions inside a mobile viewport', async ({ page }) => {
