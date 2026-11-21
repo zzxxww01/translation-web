@@ -136,7 +136,7 @@ def test_translation_source_single_message_and_thread(inbox, monkeypatch):
                     in_history=False)
 
     one = inbox.translation_source(CID, ts(30))
-    assert one["source_text"] == "plz RT @Alice\n\n[X (formerly Twitter)] vLLM\nWe shipped 1.0 <3 by Reyk"
+    assert one["source_text"] == "plz RT @Alice"  # 链接卡片不读
     assert one["messages"] == 1
 
     whole = inbox.translation_source(CID, ts(31), with_thread=True)

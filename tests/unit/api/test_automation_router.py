@@ -327,7 +327,7 @@ async def test_translate_slack_translates_once_and_caches(slack_env):
     assert first["project_id"] == second["project_id"] == "slack-C0123456789-1763424000.000100"
     assert first["translation"] == "译文：Hello world"
     (body,) = calls
-    assert body.model == "gpt-6.1-sol" and body.include_hashtags is False
+    assert body.model == "gpt-6.2-sol" and body.include_hashtags is False
 
     status = await automation.project_status(first["project_id"])
     assert status["status"] == "done" and status["result"] == "译文：Hello world"
@@ -363,3 +363,125 @@ async def test_slack_status_unknown(slack_env):
     with pytest.raises(APIException) as exc:
         await automation.project_status("slack-C0123456789-1.0")
     assert exc.value.status_code == 404
+
+
+# ---------------------------------------------------------------- slack-todos / drafts / draft / translate-slack-post
+
+DRAFT_ID = "s_C0123456789_1763424000_000100"
+
+
+class ImageInbox:
+    def __init__(self, files):
+        self.files = files  # id -> (path, mimetype, name)
+        self.replies_calls = []
+
+    def replies(self, channel_id, thread_ts):
+        self.replies_calls.append((channel_id, thread_ts))
+
+    def file(self, file_id):
+        from src.services.slack_inbox import SlackInboxError
+        if file_id not in self.files:
+            raise SlackInboxError("FILE_UNKNOWN", "先打开包含这个文件的消息再下载", 404)
+        return self.files[file_id]
+
+
+@pytest.fixture
+def drafts_env(env, tmp_path):
+    from src.services.post_drafts import PostDraftStore
+    store = PostDraftStore(tmp_path / "drafts")
+    env.monkeypatch.setattr(automation, "get_draft_store", lambda: store)
+    img = tmp_path / "a.png"
+    img.write_bytes(b"\x89PNG fake image bytes")
+    env.inbox = ImageInbox({"FAAAAAAA1": (img, "image/png", "chart.png")})
+    env.monkeypatch.setattr(automation, "get_slack_inbox", lambda: env.inbox)
+    state = {"originalText": "AI racks are here", "versions": [
+        {"id": "v1", "content": "旧译文"}, {"id": "v2", "content": "AI 机柜来了"}], "currentVersionId": "v2",
+        "generatedTitles": ["标题一", "标题二"], "selectedTitle": ""}
+    store.put_system({"id": DRAFT_ID, "source": "slack", "status": "draft", "auto": True, "seen": False,
+                      "slack": {"channel_id": "C0123456789", "thread_ts": "1763424000.000100",
+                                "channel_name": "social", "title": "AI racks", "permalink": "https://x/p1"},
+                      "extraction": {"has_post": True, "note": ""},
+                      "images": [{"id": "FAAAAAAA1", "name": "chart.png"}, {"id": "FBBBBBBB2", "name": "gone.png"}],
+                      "state": state})
+    store.save("m_0123456789ab", {"state": {"originalText": "done one", "versions": []}, "status": "done"},
+               rev=None, source="manual")
+    env.store = store
+    return env
+
+
+@pytest.mark.asyncio
+async def test_drafts_lists_unconfirmed_by_default(drafts_env):
+    result = await automation.drafts(status="draft", source="", q="", limit=50)
+    assert result["total"] == 1
+    (item,) = result["items"]
+    assert item["draft_id"] == DRAFT_ID and item["title"] == "标题一" and item["image_count"] == 2
+    assert item["slack"]["conversation_id"] == "C0123456789" and item["auto"] is True
+    everything = await automation.drafts(status="all", source="", q="", limit=50)
+    assert {i["draft_id"] for i in everything["items"]} == {DRAFT_ID, "m_0123456789ab"}
+
+
+@pytest.mark.asyncio
+async def test_draft_returns_translation_titles_and_original_images(drafts_env):
+    import base64
+    result = await automation.draft(DRAFT_ID, images=True)
+    assert result["translation"] == "AI 机柜来了" and result["source_text"] == "AI racks are here"
+    assert result["titles"] == ["标题一", "标题二"] and result["slack"]["permalink"] == "https://x/p1"
+    assert result["link"].endswith("/slack?mode=translate&tc=C0123456789&t=1763424000.000100")
+    first, missing = result["images"]
+    assert base64.b64decode(first["data_base64"]) == b"\x89PNG fake image bytes"
+    assert first["n"] == 1 and first["mimetype"] == "image/png" and first["size"] == 21 and len(first["sha256"]) == 64
+    assert missing["n"] == 2 and "error" in missing and "data_base64" not in missing
+    assert drafts_env.inbox.replies_calls == [("C0123456789", "1763424000.000100")]
+
+    light = await automation.draft(DRAFT_ID, images=False)
+    assert "data_base64" not in light["images"][0] and light["images"][0]["size"] == 21
+
+
+@pytest.mark.asyncio
+async def test_draft_oversized_image_gives_metadata_only(drafts_env):
+    drafts_env.monkeypatch.setattr(automation, "MAX_IMAGE_BYTES", 5)
+    result = await automation.draft(DRAFT_ID, images=True)
+    assert "data_base64" not in result["images"][0] and result["images"][0]["error"]
+
+
+@pytest.mark.asyncio
+async def test_draft_unknown_and_bad_id(drafts_env):
+    with pytest.raises(APIException) as exc:
+        await automation.draft("m_000000000000", images=True)
+    assert exc.value.status_code == 404
+    with pytest.raises(APIException) as exc:
+        await automation.draft("../x", images=True)
+    assert exc.value.status_code == 400
+
+
+@pytest.mark.asyncio
+async def test_translate_slack_post_runs_the_web_pipeline(drafts_env):
+    calls = []
+
+    async def fake_pipeline(channel_id, thread_ts, *, instruction=None, auto=False):
+        calls.append((channel_id, thread_ts, instruction, auto))
+        return drafts_env.store.get(DRAFT_ID)
+
+    drafts_env.monkeypatch.setattr(automation, "run_slack_pipeline", fake_pipeline)
+    result = await automation.translate_slack_post(automation.TranslateSlackPostRequest(
+        conversation_id="C0123456789", thread_ts="1763424000.000100", instruction="翻第二版", with_images=False))
+    assert calls == [("C0123456789", "1763424000.000100", "翻第二版", True)]
+    assert result["draft_id"] == DRAFT_ID and "data_base64" not in result["images"][0]
+
+
+@pytest.mark.asyncio
+async def test_slack_todos_uses_the_web_todos(env):
+    item = {"kind": "mention", "action": "do", "task": "Daksh 让你翻这篇", "title": "AI racks", "channel_name": "social",
+            "from": ["Daksh"], "count": 2, "channel_id": "C0123456789", "thread_ts": "1763424000.000100",
+            "latest_ts": "1763424000.000300", "conversation_kind": "channel", "mark": {},
+            "draft": {"id": DRAFT_ID, "status": "draft", "auto": True, "seen": False, "versions": 1, "no_post": False}}
+
+    async def fake_todos():
+        return {"items": [item], "fyi": []}
+
+    env.monkeypatch.setattr(automation, "build_todos", fake_todos)
+    result = await automation.slack_todos()
+    (todo,) = result["items"]
+    assert todo["where"] == "#social" and todo["conversation_id"] == "C0123456789"
+    assert todo["draft"] == {"draft_id": DRAFT_ID, "status": "draft", "versions": 1, "no_post": False}
+    assert todo["latest_at"].endswith("Z") and result["fyi"] == []

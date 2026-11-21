@@ -10,11 +10,15 @@ Muse 自动化接口：给本机 CLI（src/cli/automation.py，命令名 transla
 - translate-slack：一条 Slack 消息（或整个 thread）走帖子翻译链路（GPT Sol），同步返回译文；
   结果按内容缓存，同样的内容再调直接返回，不重复花钱。Slack 端照旧只读。
 - status / health：只读。
+- slack-todos：和网页「我的待办」同一份（会调一次轻量模型概括每件事，Slack 端只读）。
+- drafts / draft：翻译记录（网页「我翻译的」/「全部翻译记录」）。draft 带原始配图（base64），只读。
+- translate-slack-post：一个 thread 走网页「翻译这个帖子」同一条流程（提取 → 翻译 → 标题），存成翻译稿。
 """
 
 from __future__ import annotations
 
 import asyncio
+import base64
 import hashlib
 import ipaddress
 import logging
@@ -28,6 +32,7 @@ from pydantic import BaseModel, Field
 
 from src.api.utils.concurrency import run_blocking
 from src.core.file_utils import read_json, write_json_atomic
+from src.services.post_drafts import DraftError, current_translation
 from src.services.slack_inbox import SlackInboxError
 from src.services.substack_service import SubstackError, article_key
 from src.settings import settings
@@ -36,6 +41,8 @@ from ..dependencies import get_batch_service, get_longform_llm_provider, get_pro
     get_translation_status_service
 from ..middleware import APIException, NotFoundException
 from .confirmation_translation import start_longform_workflow
+from .post_drafts import _draft_error, get_draft_store, run_slack_pipeline
+from .slack_inbox import _run_ai, build_todos
 from .slack_inbox import _to_api_error as _slack_api_error
 from .slack_inbox import get_slack_inbox
 from .substack import (
@@ -71,7 +78,7 @@ router = APIRouter(prefix="/internal/automation", dependencies=[Depends(require_
 _translate_lock = asyncio.Lock()
 _slack_lock = asyncio.Lock()
 # Slack 这边的模型调用一律走官方 GPT Sol（docs/Slack收件箱.md「模型」）
-SLACK_MODEL = "gpt-6.1-sol"
+SLACK_MODEL = "gpt-6.2-sol"
 SLACK_PREFIX = "slack-"
 
 
@@ -387,3 +394,171 @@ async def slack_status(project_id: str) -> Dict[str, Any]:
         raise NotFoundException(detail="没有这条 Slack 翻译")
     return {"project_id": project_id, "status": "done", "progress": 100, "stage": None,
             "result": record.get("translation"), "error": None, **_slack_view(record)}
+
+
+# ---------------------------------------------------------------- slack-todos / drafts / draft / translate-slack-post
+
+# 配图按原图返回（base64）。单张、合计都设上限，超了只给元数据，Muse 可以去网页下载
+MAX_IMAGE_BYTES = 10_000_000
+MAX_IMAGES_TOTAL_BYTES = 40_000_000
+
+
+def _draft_link(doc: Dict[str, Any]) -> str:
+    base = settings.automation_public_url.rstrip("/")
+    slack = doc.get("slack")
+    if doc.get("source") == "slack" and slack:
+        return f"{base}/slack?mode=translate&tc={slack['channel_id']}&t={slack['thread_ts']}"
+    return f"{base}/post?draft={doc['id']}"
+
+
+def _todo_view(item: Dict[str, Any]) -> Dict[str, Any]:
+    draft = item.get("draft")
+    return {
+        "kind": item["kind"],  # dm 私信 / mention thread 里 @我
+        "action": item["action"],  # reply 要回复 / do 要做事（多半是翻译）/ read 看看就行
+        "task": item["task"],
+        "title": item["title"],
+        "where": ("私信 · " if item["kind"] == "dm" else "#") + item["channel_name"],
+        "from": item["from"],
+        "count": item["count"],
+        "conversation_id": item["channel_id"],
+        "thread_ts": item["thread_ts"],
+        "latest_at": _iso(float(item["latest_ts"])),
+        "draft": {"draft_id": draft["id"], "status": draft["status"], "versions": draft["versions"],
+                  "no_post": draft["no_post"]} if draft else None,
+    }
+
+
+@router.get("/slack-todos")
+async def slack_todos():
+    try:
+        todos = await build_todos()
+    except SlackInboxError as error:
+        raise _slack_api_error(error) from error
+    return {"items": [_todo_view(i) for i in todos["items"]],
+            "fyi": [_todo_view(i) for i in todos["fyi"]]}
+
+
+def _summary_view(item: Dict[str, Any]) -> Dict[str, Any]:
+    slack = item.get("slack")
+    return {
+        "draft_id": item["id"],
+        "status": item["status"],  # draft 还没点「标记完成」/ done 已完成
+        "source": item["source"],  # slack / manual（帖子翻译页手动粘贴的）
+        "auto": item["auto"],  # 后台或 Muse 自动翻的
+        "title": item["title"],
+        "preview": item["preview"],
+        "versions": item["versions"],
+        "image_count": item["image_count"],
+        "slack": {"conversation_id": slack["channel_id"], "thread_ts": slack["thread_ts"],
+                  "channel_name": slack["channel_name"]} if slack else None,
+        "updated_at": _iso(item["updated_at"] or 0),
+    }
+
+
+@router.get("/drafts")
+async def drafts(status: str = Query("draft", pattern="^(draft|done|all)$"),
+                 source: str = Query("", pattern="^(|slack|manual)$"),
+                 q: str = Query("", max_length=200), limit: int = Query(50, ge=1, le=300)):
+    try:
+        items = await run_blocking(get_draft_store().list, q, source)
+    except DraftError as error:
+        raise _draft_error(error) from error
+    if status != "all":
+        items = [i for i in items if i["status"] == status]
+    return {"total": len(items), "items": [_summary_view(i) for i in items[:limit]]}
+
+
+def _load_images(doc: Dict[str, Any], with_data: bool) -> List[Dict[str, Any]]:
+    """按发帖顺序给配图；with_data 时带原图 base64。拿不到的给 error，不影响别的。"""
+    images = doc.get("images") or []
+    if not images:
+        return []
+    inbox = get_slack_inbox()
+    slack = doc.get("slack") or {}
+    if slack:
+        try:
+            inbox.replies(slack["channel_id"], slack["thread_ts"])  # 登记文件下载地址（重启后内存里没有）
+        except SlackInboxError as error:
+            logger.warning("automation draft: 登记配图失败：%s", error.message)
+    out, total = [], 0
+    for n, img in enumerate(images, start=1):
+        entry: Dict[str, Any] = {"n": n, "id": img["id"], "name": img.get("name") or img["id"]}
+        try:
+            path, mimetype, name = inbox.file(img["id"])
+        except SlackInboxError as error:
+            out.append({**entry, "error": error.message})
+            continue
+        data = path.read_bytes()
+        entry.update({"name": name, "mimetype": mimetype, "size": len(data),
+                      "sha256": hashlib.sha256(data).hexdigest()})
+        if with_data:
+            if len(data) > MAX_IMAGE_BYTES or total + len(data) > MAX_IMAGES_TOTAL_BYTES:
+                entry["error"] = "图太大，没放进返回结果，去网页下载"
+            else:
+                entry["data_base64"] = base64.b64encode(data).decode("ascii")
+                total += len(data)
+        out.append(entry)
+    return out
+
+
+def _draft_view(doc: Dict[str, Any], images: List[Dict[str, Any]]) -> Dict[str, Any]:
+    state = doc.get("state") or {}
+    titles = [t for t in state.get("generatedTitles") or [] if isinstance(t, str)]
+    extraction = doc.get("extraction") or {}
+    slack = doc.get("slack")
+    no_post = extraction.get("has_post") is False
+    return {
+        "draft_id": doc["id"],
+        "status": doc.get("status", "draft"),
+        "source": doc.get("source"),
+        "auto": bool(doc.get("auto")),
+        "selected_title": state.get("selectedTitle") or "",
+        "titles": titles,
+        "source_text": state.get("originalText") or "",
+        "translation": current_translation(state),
+        "versions": len(state.get("versions") or []),
+        "no_post": no_post,
+        "note": (extraction.get("note") or "") if no_post else "",
+        "images": images,
+        "slack": {"conversation_id": slack["channel_id"], "thread_ts": slack["thread_ts"],
+                  "channel_name": slack.get("channel_name"), "title": slack.get("title"),
+                  "permalink": slack.get("permalink")} if slack else None,
+        "link": _draft_link(doc),
+        "updated_at": _iso(doc.get("updated_at") or 0),
+    }
+
+
+async def _draft_result(doc: Dict[str, Any], with_images: bool) -> Dict[str, Any]:
+    images = await run_blocking(_load_images, doc, with_images)
+    return _draft_view(doc, images)
+
+
+@router.get("/drafts/{draft_id}")
+async def draft(draft_id: str, images: bool = True):
+    try:
+        doc = await run_blocking(get_draft_store().get, draft_id)
+    except DraftError as error:
+        raise _draft_error(error) from error
+    if not doc:
+        raise NotFoundException(detail="找不到这份翻译稿")
+    return await _draft_result(doc, images)
+
+
+class TranslateSlackPostRequest(BaseModel):
+    conversation_id: str = Field(..., min_length=1, max_length=30)
+    thread_ts: str = Field(..., min_length=1, max_length=30)
+    instruction: Optional[str] = Field(None, max_length=500)  # 挑错了时告诉 AI 要翻哪条
+    with_images: bool = True
+
+
+@router.post("/translate-slack-post")
+async def translate_slack_post(body: TranslateSlackPostRequest):
+    try:
+        doc = await _run_ai(run_slack_pipeline(body.conversation_id, body.thread_ts,
+                                               instruction=body.instruction, auto=True), "帖子提取")
+    except SlackInboxError as error:
+        raise _slack_api_error(error) from error
+    except DraftError as error:
+        raise _draft_error(error) from error
+    return await _draft_result(doc, body.with_images)

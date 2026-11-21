@@ -1608,7 +1608,7 @@ class SlackInbox:
 
     def translation_source(self, channel_id: str, ts: str, thread_ts: Optional[str] = None,
                            with_thread: bool = False) -> Dict[str, Any]:
-        """Muse 的 translate-slack：一条消息（或它所在的整个 thread）的原文，带链接卡片里的帖子。只读。"""
+        """Muse 的 translate-slack：一条消息（或它所在的整个 thread）的正文。只读。"""
         if not CONVERSATION_ID_RE.match(channel_id or ""):
             raise SlackInboxError("BAD_CONVERSATION", "会话 ID 格式不对", 400)
         if not TS_RE.match(ts or "") or (thread_ts and not TS_RE.match(thread_ts)):
@@ -1629,14 +1629,8 @@ class SlackInbox:
             raws = [raw]
         messages = [self.normalize_message(channel_id, m) for m in raws]
         parts = []
-        for raw_msg, msg in zip(raws, messages):
-            body = msg["text"].strip()
-            # 卡片正文用 Slack 原始文本解析（normalize_message 里的已经反转义过，再解析会把字面的 < > 当标记）
-            for card, raw_card in zip(msg["attachments"], raw_msg.get("attachments") or []):
-                text = segments_to_plain(parse_slack_text(raw_card.get("text") or "", self.user_name)).strip()
-                card_text = "\n".join(t for t in (card["title"].strip(), text) if t)
-                if card_text:
-                    body += ("\n\n" if body else "") + f"[{card['service_name'] or '链接卡片'}] {card_text}"
+        for msg in messages:
+            body = msg["text"].strip()  # 只读正文，不读链接卡片（和帖子提取一致）
             if body:
                 parts.append(f"{msg['user_name']}: {body}" if with_thread else body)
         return {
