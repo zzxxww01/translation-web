@@ -135,9 +135,9 @@ export function useMarkThreadRead() {
 export function useMarkAllRead() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: slackInboxApi.markAllRead,
-    onSuccess: () => {
-      toast.success('已全部标为已读（只在 momo 里，Slack 的未读不变）');
+    mutationFn: (items?: Parameters<typeof slackInboxApi.markAllRead>[0]) => slackInboxApi.markAllRead(items),
+    onSuccess: (_data, items) => {
+      toast.success(`${items ? '这一组' : '全部'}已标为已读（只在 momo 里，Slack 的未读不变）`);
       void queryClient.invalidateQueries({ queryKey: ['slack-inbox'] });
     },
     onError: error => toast.error(error instanceof Error ? error.message : '没标成功'),

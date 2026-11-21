@@ -232,3 +232,22 @@ def test_mark_all_read_clears_activity_locally(inbox, monkeypatch):
     assert inbox.mark_all_read()["marked"] >= 1
     assert not any(i["has_unreads"] for i in inbox.activity()["items"])
     assert not any("mark" in method for method in inbox._fake.calls)  # 不碰 Slack 的已读
+
+
+def test_activity_marks_my_threads_and_marks_chosen_items_only(inbox, monkeypatch):
+    from src.services.slack_inbox import SlackInboxError
+    monkeypatch.setattr(inbox, "sync_conversation", lambda *a, **k: 0)
+    inbox.db.upsert(CID, [
+        {"ts": ts(40), "user": "UAAAAAAAA1", "text": "post a"},
+        {"ts": ts(41), "user": "UAAAAAAAA1", "text": "post b"},
+    ], in_history=True)
+    items = {i["thread_ts"]: i for i in inbox.activity()["items"] if i["type"] == "thread"}
+    assert items[ts(40)]["following"] is False  # 别人的新帖
+    assert items[ts(40)]["has_unreads"] and items[ts(41)]["has_unreads"]
+
+    inbox.mark_items_read([{"channel_id": CID, "ts": ts(40), "thread_ts": ts(40)}])
+    items = {i["thread_ts"]: i for i in inbox.activity()["items"] if i["type"] == "thread"}
+    assert items[ts(40)]["has_unreads"] is False and items[ts(41)]["has_unreads"] is True
+    with pytest.raises(SlackInboxError):
+        inbox.mark_items_read([{"channel_id": "C999999999", "ts": ts(40)}])
+    assert not any("mark" in method for method in inbox._fake.calls)

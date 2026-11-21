@@ -133,6 +133,8 @@ export interface SlackActivityItem {
   latest_time: string;
   has_unreads: boolean;
   mentions_me: boolean;
+  /** thread：我发起 / 回复过（订阅了）的，进「我参与的 thread」分组 */
+  following?: boolean;
 }
 
 export interface SlackThreadSummary {

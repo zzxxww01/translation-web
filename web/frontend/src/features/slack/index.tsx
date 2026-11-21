@@ -9,7 +9,6 @@ import { newestTs, parseSlackView, type SlackView } from './inbox/lib';
 import { ActivityList } from './inbox/ActivityList';
 import { ThreadPanel } from './inbox/ThreadPanel';
 import { DigestView } from './inbox/DigestView';
-import { ThreadsView } from './inbox/ThreadsView';
 import { Overview } from './inbox/Overview';
 import type { OpenThread, SlackActivityItem } from './inbox/types';
 import { ReplyWorkbench } from './ReplyWorkbench';
@@ -41,7 +40,7 @@ function ThreadAgentAside({ thread }: { thread: OpenThread }) {
 /**
  * Slack 页：左栏「动态」（每行一个 thread 或私信，按最近活动排序），点开在中栏只看那一个 thread / 私信。
  * 2026-11-18 用户反馈频道视图太乱，改成活动列；整个频道的消息流仍可从 thread 标题下的频道名进入。
- * URL：c=会话（私信或整个频道），view=digest|reply|threads，tc+t=打开的 thread，ai=1 窄屏上显示私信的 AI。
+ * URL：c=会话（私信或整个频道），view=digest|reply，tc+t=打开的 thread，ai=1 窄屏上显示私信的 AI。
  * 每个 thread 背后是帖子翻译助手（thread 的「AI 翻译」页），每个私信背后是回复助手（私信打开时的右栏）。
  */
 export function SlackFeature() {
@@ -105,7 +104,7 @@ export function SlackFeature() {
   return (
     <div className="flex h-full min-h-0">
       <aside className={cn(
-        'w-full shrink-0 flex-col border-r border-border-subtle bg-bg-tertiary/40 md:flex md:w-[380px]',
+        'w-full shrink-0 flex-col border-r border-border-subtle bg-[#faf6f5] md:flex md:w-[380px]',
         hasMain ? 'hidden' : 'flex'
       )}>
         <ActivityList
@@ -136,8 +135,6 @@ export function SlackFeature() {
           <div className="min-h-0 flex-1 overflow-auto"><ReplyWorkbench /></div>
         ) : view === 'digest' ? (
           <DigestView onOpen={openFrom} onBack={back} />
-        ) : view === 'threads' ? (
-          <ThreadsView conversations={conversations} openThread={openThread} onOpenThread={showThread} onBack={back} />
         ) : selected ? (
           <ConversationView
             key={selected.id}

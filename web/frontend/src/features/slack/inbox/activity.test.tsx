@@ -7,7 +7,6 @@ import type { SlackActivityItem, SlackMessage } from './types';
 const items: SlackActivityItem[] = [];
 vi.mock('./hooks', () => ({
   useSlackActivity: () => ({ data: items, isLoading: false, isError: false }),
-  useRefreshSlack: () => ({ mutate: vi.fn(), isPending: false }),
   useMarkAllRead: () => ({ mutate: markAll, isPending: false }),
 }));
 const markAll = vi.fn();
@@ -48,91 +47,97 @@ afterEach(async () => {
   vi.unstubAllGlobals();
 });
 
-const rows = () => Array.from(host.querySelectorAll<HTMLButtonElement>('[aria-label="Slack 动态"] > button'));
+const section = (title: string) => host.querySelector<HTMLElement>(`section[aria-label="${title}"]`);
+const thread = (over: Partial<SlackActivityItem>, i: number): SlackActivityItem => ({
+  type: 'thread', channel_id: 'C1', channel_name: 'social-media-posts-and-media', thread_ts: `17946000${i}.000001`,
+  root: message({ text: `Topic ${i}`, user_name: 'Sam H' }), reply_count: 3, participants: ['Sam H'], last: null,
+  latest_ts: `17946000${i}.000001`, latest_time: '', has_unreads: false, mentions_me: false, ...over,
+});
+const render = (props: Partial<Parameters<typeof ActivityList>[0]> = {}) => act(async () => root.render(
+  <ActivityList selection={null} view={null} onOpen={vi.fn()} onSelectView={vi.fn()} {...props} />));
 
-it('shows one row per thread / DM with the original first line and who is talking', async () => {
+it('groups rows into @me / DMs / new posts / my threads / others, each item once', async () => {
+  localStorage.clear();
+  items.push(
+    thread({ root: message({ text: 'Fresh post to translate', user_name: 'Doug O' }), reply_count: 0, has_unreads: true }, 10),
+    thread({ root: message({ text: 'My own thread', user_name: 'felix' }), following: true }, 11),
+  );
   const onOpen = vi.fn();
-  await act(async () => root.render(
-    <ActivityList selection={null} view={null} onOpen={onOpen} onSelectView={vi.fn()} />));
-  const [thread, dm] = rows();
-  expect(thread.textContent).toContain('Elon post 🔥');           // 根消息第一行原文，不翻译
-  expect(thread.textContent).not.toContain('@用户组');             // 开头的提及不进标题
-  expect(thread.textContent).not.toContain('social-media-posts');  // 只有一个频道时不重复写频道名
-  expect(thread.textContent).not.toContain('second line');
-  expect(thread.textContent).toContain('Reyk Knuhtsen 发起 · 17 条回复 · 3 人参与');
-  expect(thread.textContent).toContain('Daksh Malik：@Felix Zhou');
-  expect(thread.textContent).toContain('@我');
-  expect(dm.textContent).toContain('Michelle Shen');
-  expect(dm.textContent).toContain('私信');
+  await render({ onOpen });
+  expect(Array.from(host.querySelectorAll('section')).map(s => s.getAttribute('aria-label')))
+    .toEqual(['@我', '私信', '新帖 · 待翻译', '我参与的 thread']);  // 空的组不显示
 
-  await act(async () => thread.click());
+  const mention = section('@我')!;
+  expect(mention.textContent).toContain('Elon post 🔥');            // 根消息第一行原文
+  expect(mention.textContent).not.toContain('@用户组');
+  expect(mention.textContent).not.toContain('second line');
+  expect(mention.textContent).toContain('Reyk Knuhtsen 发起 · 17 条回复 · 3 人参与');
+  expect(mention.textContent).toContain('Daksh Malik：@Felix Zhou');
+  expect(mention.textContent).toContain('thread');                  // @我 组里写明类型
+  expect(mention.textContent).toContain('1 未读');
+  expect(section('私信')!.textContent).toContain('Michelle Shen');
+  expect(section('新帖 · 待翻译')!.textContent).toContain('Doug O 发帖 · 还没人回复');
+  expect(section('我参与的 thread')!.textContent).toContain('My own thread');
+
+  await act(async () => Array.from(mention.querySelectorAll('button')).find(b => b.textContent?.includes('Elon post'))!.click());
   expect(onOpen).toHaveBeenCalledWith(items[0]);
 });
 
-it('filters to @me and to DMs', async () => {
-  await act(async () => root.render(
-    <ActivityList selection={null} view={null} onOpen={vi.fn()} onSelectView={vi.fn()} />));
-  const tab = (label: RegExp) => Array.from(host.querySelectorAll<HTMLButtonElement>('[role="tab"]')).find(b => label.test(b.textContent ?? ''))!;
-  await act(async () => tab(/^@我/).click());
-  expect(rows()).toHaveLength(1);
-  expect(rows()[0].textContent).toContain('Elon post');
-  await act(async () => tab(/^私信/).click());
-  expect(rows()).toHaveLength(1);
-  expect(rows()[0].textContent).toContain('Michelle Shen');
+it('shows 5 other threads until expanded, remembers collapsed groups, marks one group read', async () => {
+  localStorage.clear();
+  for (let i = 0; i < 7; i++) items.push(thread({ has_unreads: i < 2 }, 20 + i));
+  await render();
+  const others = () => section('其他 thread')!;
+  const otherRows = () => Array.from(others().querySelectorAll('button')).filter(b => b.textContent?.includes('Topic'));
+  expect(otherRows()).toHaveLength(5);
+  const more = Array.from(others().querySelectorAll('button')).find(b => b.textContent === '展开其余 2 条')!;
+  await act(async () => more.click());
+  expect(otherRows()).toHaveLength(7);
+
+  await act(async () => Array.from(others().querySelectorAll('button')).find(b => b.textContent === '全部已读')!.click());
+  expect(markAll).toHaveBeenLastCalledWith([
+    { channel_id: 'C1', ts: '1794600020.000001', thread_ts: '1794600020.000001' },
+    { channel_id: 'C1', ts: '1794600021.000001', thread_ts: '1794600021.000001' },
+  ]);
+
+  await act(async () => others().querySelector<HTMLButtonElement>('button[aria-expanded]')!.click());
+  expect(otherRows()).toHaveLength(0);
+  expect(JSON.parse(localStorage.getItem('slack-sidebar-collapsed')!)).toEqual(['others']);
 });
 
-it('lists new posts without replies, filters unread and links the other views', async () => {
-  items.push({
-    type: 'thread', channel_id: 'C1', channel_name: 'social-media-posts-and-media', thread_ts: '1794600000.000001',
-    root: message({ text: 'Fresh post to translate', user_name: 'Doug O' }), reply_count: 0,
-    participants: ['Doug O'], last: null, latest_ts: '1794600000.000001', latest_time: '', has_unreads: true, mentions_me: false,
-  });
+it('tool rows open the digest and the reply workbench', async () => {
   const onSelectView = vi.fn();
-  await act(async () => root.render(
-    <ActivityList selection={null} view={null} onOpen={vi.fn()} onSelectView={onSelectView} />));
-  const post = rows().find(r => r.textContent?.includes('Fresh post'))!;
-  expect(post.textContent).toContain('Doug O 发帖 · 还没人回复');
-
-  const tab = (label: RegExp) => Array.from(host.querySelectorAll<HTMLButtonElement>('[role="tab"]')).find(b => label.test(b.textContent ?? ''))!;
-  expect(tab(/^未读/).textContent).toBe('未读 2');
-  await act(async () => tab(/^未读/).click());
-  expect(rows()).toHaveLength(2);
-  expect(rows().some(r => r.textContent?.includes('Michelle Shen'))).toBe(false);
-
-  const link = (label: string) => Array.from(host.querySelectorAll('button')).find(b => b.textContent?.trim() === label)!;
-  for (const [label, view] of [['AI 速览', 'digest'], ['我参与的', 'threads'], ['回复工作台', 'reply']] as const) {
-    await act(async () => link(label).click());
-    expect(onSelectView).toHaveBeenLastCalledWith(view);
-  }
+  await render({ onSelectView });
+  const tool = (label: string) => Array.from(host.querySelectorAll('button')).find(b => b.textContent?.startsWith(label))!;
+  expect(tool('AI 速览').textContent).toContain('1 条未读整理成中文');
+  await act(async () => tool('AI 速览').click());
+  expect(onSelectView).toHaveBeenLastCalledWith('digest');
+  await act(async () => tool('回复工作台').click());
+  expect(onSelectView).toHaveBeenLastCalledWith('reply');
 });
 
-it('j / k open the next and previous row, Esc goes back, and mark-all is one click', async () => {
+it('j / k walk the groups top to bottom, Esc goes back, typing is ignored', async () => {
+  localStorage.clear();
   const onOpen = vi.fn();
   const onBack = vi.fn();
-  const render = (selection: { channelId: string; threadTs: string | null } | null) => root.render(
-    <ActivityList selection={selection} view={null} onOpen={onOpen} onSelectView={vi.fn()} onBack={onBack} />);
-  await act(async () => render(null));
   const press = (key: string) => window.dispatchEvent(new KeyboardEvent('keydown', { key }));
+  await render({ onOpen, onBack });
   await act(async () => press('j'));
   expect(onOpen).toHaveBeenLastCalledWith(items[0]);
-  await act(async () => render({ channelId: 'C1', threadTs: '1794610284.466519' }));
+  await render({ onOpen, onBack, selection: { channelId: 'C1', threadTs: '1794610284.466519' } });
   await act(async () => press('j'));
   expect(onOpen).toHaveBeenLastCalledWith(items[1]);
-  await act(async () => render({ channelId: 'D1', threadTs: null }));
+  await render({ onOpen, onBack, selection: { channelId: 'D1', threadTs: null } });
   await act(async () => press('k'));
   expect(onOpen).toHaveBeenLastCalledWith(items[0]);
   await act(async () => press('Escape'));
   expect(onBack).toHaveBeenCalled();
 
-  // 在输入框里打字时不触发（比如 AI 面板的输入框）
   const input = document.createElement('input');
   host.appendChild(input);
   const calls = onOpen.mock.calls.length;
   await act(async () => input.dispatchEvent(new KeyboardEvent('keydown', { key: 'j', bubbles: true })));
   expect(onOpen.mock.calls.length).toBe(calls);
-
-  await act(async () => host.querySelector<HTMLButtonElement>('[aria-label="全部标为已读"]')!.click());
-  expect(markAll).toHaveBeenCalled();
 });
 
 it('overview counts unread / @me and lists what to read first', async () => {

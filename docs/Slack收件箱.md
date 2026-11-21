@@ -2,20 +2,25 @@
 
 momo 顶部「Slack」页，按「动态」组织（2026-11-18 用户反馈原生 Slack 式的频道三栏太乱，改成活动列）：
 
-- **左栏「动态」**（`GET /api/slack-inbox/activity`）：每行一个 thread（频道里最近 7 天有回复的，以及 2026-11-21 起最近 7 天还没人回复的新帖，`reply_count=0`，显示「发帖 · 还没人回复」）或一个私信对话，
-  按最近有人说话的时间排序。thread 行：根消息第一行原文（不翻译，去掉开头的「@用户组」）、谁发起 · 几条回复 · 几人参与（有多个频道时前面加频道名）、最后一条回复；
-  私信行：对方名字、最后一条消息。未读加粗带蓝点，提到我的带「@我」。顶部筛选「全部 / 未读 / @我 / 私信」（带数量，右边是「全部标为已读」和刷新），下面一行文字入口「AI 速览 · 我参与的 · 回复工作台」（老工作台）。
+- **左栏**（2026-11-22 重做，`inbox/ActivityList.tsx`；用户觉得筛选按钮 + 小图标看不懂）：
+  - 最上面两个整行入口：「AI 速览」（带未读数）、「回复工作台」（老工作台）。
+  - 下面是分组，数据来自 `GET /api/slack-inbox/activity`（最近 7 天的 thread、没人回复的新帖、私信）。每条只进一个组，顺序是：
+    **@我 → 私信 → 新帖 · 待翻译 → 我参与的 thread → 其他 thread**（`groupOf`，`inbox/lib.ts`）。
+    「我参与的」是 Slack 记的已订阅 thread（我发起、回复过、被 @、手动关注），后端给每行带 `following`。
+  - 分组标题显示总数和「N 未读」，点标题折叠或展开（记在浏览器里），右边「全部已读」只清这一组（`POST /mark-all`，带 `items`）。「其他 thread」默认只显示 5 条。
+  - 每行左边是发起人的首字母；「@我」组里用小字写明 thread / 新帖 / 私信；AI 状态直接写字（AI 处理中 / AI 等你确认 / AI 出错 / AI 已处理）。
+  - 原来的筛选、刷新按钮、搜索框和「我参与的」单独页面都去掉了：后台每分钟自动同步，打开会话时也会立即拉新消息。
+  - AI 速览页最下面有「看完了，全部标为已读」。
 - **中栏**：点 thread 只看这一个 thread——标题是根消息第一行，顶部**打开即自动生成**中文「在聊什么」（摘要 + 要你做，
   按最新回复缓存），下面是完整对话，另有「AI 翻译」标签页。点私信是私信消息流，右栏是回复助手。
   thread 标题下的频道名可以进整个频道的消息流（旧视图保留）。新帖（没人回复）不自动生成摘要。
 - **右栏 AI**：私信是回复助手；窗口 ≥1280px 时 thread 的帖子翻译助手也在右栏（三栏），更窄时在 thread 的「AI 翻译」标签页。
 - 触屏没有悬停：点一下消息显示 / 收起「译 / thread / 在 Slack 打开」工具条。
 - 没选任何东西时中栏是「概览」（`inbox/Overview.tsx`）：未读、@我、未读私信、7 天内新帖的数量，加上「先看这些」（@我 > 私信 > 新帖 > 其他未读，最多 8 条）和 AI 速览入口。
-- 左栏顶部「全部标为已读」（`POST /api/slack-inbox/mark-all`）：动态里所有未读和有未读的频道推到最新，只记在 momo 本地。
 - 快捷键：`j` / `k` 下一条 / 上一条（在当前筛选里切换并打开），`t` 全部中文，`Esc` 关闭；在输入框里不生效。
 - 消息工具条有「复制原文」；帖子翻译结果的每个标题旁有「连译文」，复制「标题 + 空行 + 译文」。
 
-URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread）、`c=<会话>`（私信或整个频道）、`view=digest|reply|threads`。
+URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread）、`c=<会话>`（私信或整个频道）、`view=digest|reply`。
 
 2026-11-21 按用户要求去掉了左栏的搜索框和「动态 · 工作区 / 用户 · 同步于」标题（太占地方）；后端 `/search` 接口还在，页面不再用。
 
@@ -142,7 +147,7 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/digest` | AI 速览（未读按会话 / thread 中文总结） |
 | GET | `/search?q=` | 搜索（中文先改写成英文关键词） |
 | POST | `/conversations/{id}/mark` | `{"ts"}` 在 momo 本地记会话已读（只前进，不碰 Slack） |
-| POST | `/mark-all` | 全部标为已读（只记在 momo 本地，不碰 Slack） |
+| POST | `/mark-all` | 标已读，只记在 momo 本地、不碰 Slack：不带参数时清空全部动态；带 `{"items": [{channel_id, ts, thread_ts}]}` 时只标这些（左栏分组的「全部已读」） |
 | POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 在 momo 本地记 thread 已读（不碰 Slack） |
 | GET | `/conversations/{id}/export?format=md\|json` | 导出最近 200 条（含 thread） |
 | GET | `/files/{id}` | 附件代理；只内联 png/jpeg/gif/webp，其余一律下载 |

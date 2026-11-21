@@ -1131,6 +1131,7 @@ class SlackInbox:
                         "latest_time": msg["time"],
                         "has_unreads": not msg["is_me"] and (not read or float(ts) > float(read)),
                         "mentions_me": msg["mentions_me"],
+                        "following": msg["is_me"],
                     })
                 for t in threads:
                     local = self.db.thread(cid, t["thread_ts"])
@@ -1153,6 +1154,8 @@ class SlackInbox:
                         "latest_time": t["latest_time"] or t["root"]["time"],
                         "has_unreads": t["has_unreads"],
                         "mentions_me": mentioned or t["mentions_me"] or t["root"]["mentions_me"],
+                        # 我参与（订阅）的 thread：左栏「我参与的 thread」分组
+                        "following": t["following"] or t["root"]["is_me"],
                     })
             elif conv["latest_ts"]:
                 last = self.db.history(cid, limit=1)
@@ -1184,6 +1187,17 @@ class SlackInbox:
         if not TS_RE.match(thread_ts or "") or not TS_RE.match(ts or ""):
             raise SlackInboxError("BAD_TS", "ts 格式不对", 400)
         return {"ok": True, "marked": self.db.mark_read(channel_id, ts, thread_ts)}
+
+    def mark_items_read(self, items: List[Dict[str, str]]) -> Dict[str, Any]:
+        """左栏某个分组的「全部已读」：逐条推到给定的最新位置（thread 带 thread_ts）。只记在 momo 本地。"""
+        visible = {c["id"] for c in self.conversations()}
+        marked = 0
+        for item in items:
+            cid, ts, thread_ts = item.get("channel_id", ""), item.get("ts", ""), item.get("thread_ts") or ""
+            if cid not in visible or not TS_RE.match(ts) or (thread_ts and not TS_RE.match(thread_ts)):
+                raise SlackInboxError("BAD_ITEM", "要标已读的条目不对", 400)
+            marked += self.db.mark_read(cid, ts, thread_ts)
+        return {"ok": True, "marked": marked}
 
     def mark_all_read(self) -> Dict[str, Any]:
         """「全部标为已读」：动态里所有未读的 thread / 新帖 / 私信，以及有未读的频道，都推到最新。只记在 momo 本地。"""
