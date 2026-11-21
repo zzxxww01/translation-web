@@ -1,33 +1,34 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, Circle } from 'lucide-react';
-import { toast } from 'sonner';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { History } from 'lucide-react';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { ModelSelector } from '@/components/ModelSelector';
-import { ResizablePanes } from '@/components/layout/ResizablePanes';
-import { PageActions } from '@/components/layout/HeaderSlot';
 import { Button } from '@/components/ui/Button';
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { usePostStore } from '@/shared/stores';
 import { SourceInput } from './components/SourceInput';
 import { TranslationOutput } from './components/TranslationOutput';
 import { OptimizationPanel } from './components/OptimizationPanel';
 import { TitleGenerator } from './components/TitleGenerator';
 import { DraftHistory } from './components/DraftHistory';
-import { DiscardEditDialog, PendingChip, SaveState } from './components/WorkspaceChrome';
+import { DiscardEditDialog, PendingChip } from './components/WorkspaceChrome';
 import { draftsApi, useDraftSync, type DraftSummary } from './drafts';
 import { usePostWorkspace } from './usePostWorkspace';
 
 /**
- * 帖子翻译页：粘贴原文 → 翻译 → 优化 → 标题（老用法不变）。左边多了「翻译记录」栏：
- * 这里手动翻的和 Slack 里翻的都在，内容自动存到服务器。三栏都能收起、能拖宽。
+ * 帖子翻译页（旧功能，以后逐步迁到 Slack 里）：布局和用法保持原样——粘贴原文 → 翻译 → 优化 → 标题。
+ * 2026-11-22 只加了一样：右上角「历史记录」，点开才展开（Slack 里翻的和这里翻的都在）。
+ * 这里出过译文的内容会自动存进历史记录。
  */
 export function PostFeature() {
   const ws = usePostWorkspace(usePostStore);
   const draftId = usePostStore(state => state.draftId);
   const navigate = useNavigate();
-  const [status, setStatus] = useState<'draft' | 'done'>('draft');
-  const sync = useDraftSync(usePostStore, { extra: () => ({ status }) });
+  const [params, setParams] = useSearchParams();
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const sync = useDraftSync(usePostStore);
 
-  const openDraft = async (item: DraftSummary) => {
+  const openDraft = async (item: Pick<DraftSummary, 'id' | 'source' | 'slack'>) => {
     if (item.source === 'slack' && item.slack) {
       navigate(`/slack?mode=translate&tc=${item.slack.channel_id}&t=${item.slack.thread_ts}`);
       return;
@@ -35,92 +36,89 @@ export function PostFeature() {
     await sync.flush();
     const doc = await draftsApi.get(item.id);
     usePostStore.getState().loadSnapshot(doc.state, doc.id, doc.rev);
-    setStatus(doc.status);
     sync.markLoaded();
+    setHistoryOpen(false);
   };
+
+  // 从 Slack 的「全部翻译记录」点过来：/post?draft=<id>
+  const opened = useRef<string | null>(null);
+  const linked = params.get('draft');
+  useEffect(() => {
+    if (!linked || opened.current === linked) return;
+    opened.current = linked;
+    const timer = window.setTimeout(() => {
+      void openDraft({ id: linked, source: 'manual', slack: null });
+      setParams({}, { replace: true });
+    }, 0);
+    return () => window.clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [linked]);
 
   const newDraft = async () => {
     await sync.flush();
     ws.handleClear();
-    setStatus('draft');
-  };
-
-  const toggleDone = () => {
-    const next = status === 'done' ? 'draft' : 'done';
-    setStatus(next);
-    // status 不在 store 里：下一轮自动存档会带上
-    window.setTimeout(() => void sync.flush(), 0);
-    toast.success(next === 'done' ? '已标记完成' : '已改回草稿');
+    setHistoryOpen(false);
   };
 
   return (
-    <div className="flex h-full min-h-0 flex-col">
-      <h1 className="sr-only">帖子翻译</h1>
-      <PageActions>
-        <SaveState saving={sync.saving} savedAt={sync.savedAt} hasDraft={!!draftId} />
-        <PendingChip ws={ws} />
-        {draftId && (
-          <Button variant={status === 'done' ? 'secondary' : 'ghost'} size="sm" className="h-8" onClick={toggleDone}>
-            {status === 'done' ? <CheckCircle2 className="h-4 w-4 text-success" /> : <Circle className="h-4 w-4" />}
-            {status === 'done' ? '已完成' : '标记完成'}
-          </Button>
-        )}
-        <div className="w-44" title="翻译用的模型">
-          <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-8 text-sm" disabled={ws.isLoading} />
-        </div>
-      </PageActions>
-
-      <ResizablePanes
-        storageKey="post-panes-v1"
-        mobileDefault="source"
-        panes={[
-          {
-            id: 'history',
-            title: '翻译记录',
-            width: 300,
-            minWidth: 240,
-            content: <DraftHistory activeId={draftId} onOpen={item => void openDraft(item)} onNew={() => void newDraft()} />,
-          },
-          {
-            id: 'source',
-            title: '原文',
-            width: 460,
-            minWidth: 300,
-            content: (
-              <div className="flex h-full flex-col p-4">
-                <SourceInput
-                  hideTitle
-                  value={ws.originalText}
-                  onChange={ws.setOriginalText}
-                  onTranslate={() => void ws.handleTranslate()}
-                  onClear={() => void newDraft()}
-                  isLoading={ws.isLoading}
-                  isTranslating={ws.pendingAction === 'translate'}
-                  canClear={!!(ws.originalText.trim() || ws.versions.length > 0 || ws.currentContent)}
-                  className="min-h-[320px] flex-1 resize-none"
-                />
+    <div className="min-h-full overflow-auto">
+      <div className="mx-auto w-full max-w-7xl px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
+        <PageHeader
+          className="mb-5"
+          title="帖子翻译"
+          actions={
+            <>
+              <PendingChip ws={ws} />
+              <Button variant="ghost" size="sm" className="h-9" onClick={() => setHistoryOpen(true)} title="Slack 里翻的和这里翻的都在">
+                <History className="h-4 w-4" /> 历史记录
+              </Button>
+              <div className="w-56" title="翻译用的模型">
+                <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-9 text-sm" disabled={ws.isLoading} />
               </div>
-            ),
-          },
-          {
-            id: 'work',
-            title: '译文 · 优化 · 标题',
-            minWidth: 380,
-            content: <WorkColumn ws={ws} />,
-          },
-        ]}
-      />
+            </>
+          }
+        />
+
+        <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
+          <SourceInput
+            value={ws.originalText}
+            onChange={ws.setOriginalText}
+            onTranslate={() => void ws.handleTranslate()}
+            onClear={() => void newDraft()}
+            isLoading={ws.isLoading}
+            isTranslating={ws.pendingAction === 'translate'}
+            canClear={!!(ws.originalText.trim() || ws.versions.length > 0 || ws.currentContent)}
+          />
+          <WorkColumn ws={ws} showTitle />
+        </div>
+      </div>
+
+      <Sheet open={historyOpen} onOpenChange={setHistoryOpen}>
+        <SheetContent side="right" className="flex w-[380px] flex-col p-0 sm:max-w-[380px]">
+          <SheetHeader className="border-b border-border-subtle px-4 py-3">
+            <SheetTitle className="text-base">历史记录</SheetTitle>
+          </SheetHeader>
+          <div className="min-h-0 flex-1">
+            <DraftHistory activeId={draftId} onOpen={item => void openDraft(item)} onNew={() => void newDraft()} />
+          </div>
+        </SheetContent>
+      </Sheet>
       <DiscardEditDialog ws={ws} />
     </div>
   );
 }
 
 /** 译文、优化指令、标题三块：帖子翻译页和 Slack 翻译模式共用 */
-export function WorkColumn({ ws, extraActions }: { ws: ReturnType<typeof usePostWorkspace>; extraActions?: React.ReactNode }) {
+export function WorkColumn({ ws, extraActions, showTitle = false }: {
+  ws: ReturnType<typeof usePostWorkspace>;
+  extraActions?: React.ReactNode;
+  /** 帖子翻译页保留原来的「译文」小标题；Slack 分栏里栏头已经写了 */
+  showTitle?: boolean;
+}) {
   return (
-    <div className="flex flex-col gap-5 p-4">
+    <div className={showTitle ? 'flex min-w-0 flex-col gap-5' : 'flex flex-col gap-5 p-4'}>
       <TranslationOutput
-        hideTitle
+        hideTitle={!showTitle}
         versions={ws.versions}
         currentVersionId={ws.currentVersionId}
         originalText={ws.originalText}

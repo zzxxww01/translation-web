@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Loader2, Sparkles, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ConversationView } from './inbox/ConversationView';
@@ -7,6 +7,8 @@ import { useSlackConversations, useSlackStatus } from './inbox/hooks';
 import { ActivityList } from './inbox/ActivityList';
 import { ThreadPanel } from './inbox/ThreadPanel';
 import { TodoView } from './inbox/TodoView';
+import { DraftHistory } from '@/features/post/components/DraftHistory';
+import type { DraftSummary } from '@/features/post/drafts';
 import type { OpenThread, SlackActivityItem } from './inbox/types';
 import { DmReplyPanel } from './reply/DmReplyPanel';
 import { SlackTranslateMode } from './translate/SlackTranslateMode';
@@ -23,6 +25,8 @@ const TS_RE = /^\d{9,11}\.\d{1,6}$/;
  */
 export function SlackFeature() {
   const [params, setParams] = useSearchParams();
+  const navigate = useNavigate();
+  const showHistory = params.get('view') === 'history';
   const selectedId = params.get('c');
   const tc = params.get('tc');
   const t = params.get('t');
@@ -43,9 +47,9 @@ export function SlackFeature() {
     }
     setParams(p, { replace: true });
   };
-  const selectConversation = (id: string) => update({ c: id, tc: null, t: null, ai: null, mode: null });
+  const selectConversation = (id: string) => update({ c: id, tc: null, t: null, ai: null, mode: null, view: null });
   // thread 一律在中栏单独打开（不带整个频道）
-  const showThread = (thread: OpenThread) => update({ tc: thread.channelId, t: thread.threadTs, c: null, ai: null, mode: null });
+  const showThread = (thread: OpenThread) => update({ tc: thread.channelId, t: thread.threadTs, c: null, ai: null, mode: null, view: null });
   const openFrom = (channelId: string, threadTs: string | null) =>
     threadTs ? showThread({ channelId, threadTs }) : selectConversation(channelId);
   const openActivity = (item: SlackActivityItem) => {
@@ -53,10 +57,15 @@ export function SlackFeature() {
     else selectConversation(item.channel_id);
   };
   const translate = (channelId: string, threadTs: string) =>
-    update({ tc: channelId, t: threadTs, c: null, ai: null, mode: 'translate' });
+    update({ tc: channelId, t: threadTs, c: null, ai: null, mode: 'translate', view: null });
+  // 全部翻译记录里点一条：Slack 的进翻译模式，帖子翻译页手动翻的去帖子翻译页打开
+  const openDraft = (item: DraftSummary) => {
+    if (item.source === 'slack' && item.slack) translate(item.slack.channel_id, item.slack.thread_ts);
+    else navigate(`/post?draft=${item.id}`);
+  };
   const closeThread = () => update({ tc: null, t: null, mode: null });
   const aiOpen = params.get('ai') === '1';
-  const back = () => update({ c: null, tc: null, t: null, mode: null });
+  const back = () => update({ c: null, tc: null, t: null, mode: null, view: null });
 
   if (status.isLoading) {
     return <div className="flex h-full items-center justify-center"><Loader2 className="h-6 w-6 animate-spin text-text-muted" /></div>;
@@ -81,7 +90,7 @@ export function SlackFeature() {
     );
   }
 
-  const hasMain = !!selected || !!openThread;
+  const hasMain = !!selected || !!openThread || showHistory;
   // 私信（含群聊私信）打开时，右栏是回复面板；宽屏一直显示，窄屏点「AI 回复」才切过去
   const dm = !openThread && selected && (selected.kind === 'im' || selected.kind === 'mpim') ? selected : null;
   const teamUrl = status.data.url || 'https://app.slack.com';
@@ -92,13 +101,14 @@ export function SlackFeature() {
   return (
     <div className="flex h-full min-h-0">
       <aside className={cn(
-        'w-full shrink-0 flex-col border-r border-border-subtle bg-[#faf6f5] md:flex md:w-[380px]',
+        'w-full shrink-0 flex-col border-r border-border-subtle bg-[#faf6f5] md:flex md:w-[400px]',
         hasMain ? 'hidden' : 'flex'
       )}>
         <ActivityList
           selection={selection}
           onOpen={openActivity}
           onShowTodos={back}
+          onShowHistory={() => update({ view: 'history', c: null, tc: null, t: null, mode: null, ai: null })}
           todosActive={!hasMain}
           onBack={hasMain ? back : undefined}
         />
@@ -108,7 +118,18 @@ export function SlackFeature() {
         'min-w-0 flex-1 flex-col',
         dm && aiOpen ? 'hidden lg:flex' : hasMain ? 'flex' : 'hidden md:flex'
       )}>
-        {openThread ? (
+        {showHistory ? (
+          <div className="mx-auto flex h-full w-full max-w-3xl flex-col">
+            <div className="flex items-center gap-2 px-5 pb-2 pt-5">
+              <h2 className="flex-1 text-lg font-semibold text-text-primary">全部翻译记录</h2>
+              <button type="button" onClick={back} className="text-xs text-text-muted hover:text-text-primary">关闭</button>
+            </div>
+            <p className="px-5 pb-3 text-xs text-text-muted">Slack 里翻的和帖子翻译页翻的都在这里，按最近修改排。</p>
+            <div className="min-h-0 flex-1 border-t border-border-subtle">
+              <DraftHistory activeId={null} onOpen={openDraft} />
+            </div>
+          </div>
+        ) : openThread ? (
           <ThreadPanel
             key={`${openThread.channelId}-${openThread.threadTs}`}
             channelId={openThread.channelId}

@@ -33,7 +33,7 @@ export function PendingChip({ ws }: { ws: PostWorkspace }) {
 export function SaveState({ saving, savedAt, hasDraft }: { saving: boolean; savedAt: number | null; hasDraft: boolean }) {
   if (!hasDraft && !saving) return null;
   return (
-    <span className="inline-flex items-center gap-1 text-xs text-text-muted" title="内容会自动存进「翻译记录」">
+    <span className="inline-flex items-center gap-1 whitespace-nowrap text-xs text-text-muted" title="内容会自动存进「翻译记录」">
       {saving ? <CloudUpload className="h-3.5 w-3.5 animate-pulse" /> : <Check className="h-3.5 w-3.5 text-success" />}
       {saving ? '存档中' : savedAt ? '已存档' : '已存档'}
     </span>

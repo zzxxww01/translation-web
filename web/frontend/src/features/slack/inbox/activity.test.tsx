@@ -61,7 +61,7 @@ const thread = (over: Partial<SlackActivityItem>, i: number): SlackActivityItem 
   latest_ts: `17946000${i}.000001`, latest_time: '', has_unreads: false, mentions_me: false, ...over,
 });
 const render = (props: Partial<Parameters<typeof ActivityList>[0]> = {}) => act(async () => root.render(
-  <ActivityList selection={null} onOpen={vi.fn()} onShowTodos={vi.fn()} todosActive={false} {...props} />));
+  <ActivityList selection={null} onOpen={vi.fn()} onShowTodos={vi.fn()} onShowHistory={vi.fn()} todosActive={false} {...props} />));
 
 it('lists everything by time with the original first line, who is talking and the draft state', async () => {
   const onOpen = vi.fn();
@@ -71,8 +71,7 @@ it('lists everything by time with the original first line, who is talking and th
   expect(first.textContent).not.toContain('@用户组');
   expect(first.textContent).not.toContain('social-media-posts');  // 只有一个频道时不重复写频道名
   expect(first.textContent).not.toContain('second line');
-  expect(first.textContent).toContain('Reyk Knuhtsen 发起 · 17 条回复 · 3 人参与');
-  expect(first.textContent).toContain('Daksh Malik：@Felix Zhou');
+  expect(first.textContent).toContain('Reyk Knuhtsen 发起 · 17 条回复');
   expect(first.textContent).toContain('@我');
   expect(first.getAttribute('title')).toContain('自动翻好');      // 后台自动翻好的帖子：只是底色变一点，没有彩色标签
   expect(first.textContent).toContain('翻译草稿');
@@ -89,17 +88,22 @@ it('one row of filters with unread counts, remembered; unread view has mark-all'
   );
   await render();
   expect(Array.from(host.querySelectorAll('[role="tab"]')).map(t => t.textContent))
-    .toEqual(['全部', '未读2', '@我1', '私信', '新帖1', '我参与的']);
+    .toEqual(['全部', '未读2', '@我1', '私信', '新帖1', '我参与的', '我翻译的1']);
   await act(async () => tab(/^未读/).click());
   expect(rows().map(r => r.textContent?.includes('Elon') || r.textContent?.includes('Fresh'))).toEqual([true, true]);
   const markButton = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.includes('全部标为已读'))!;
   await act(async () => markButton.click());
   expect(markAll).toHaveBeenCalled();
   await act(async () => tab(/^新帖/).click());
-  expect(rows()[0].textContent).toContain('Doug O 发帖 · 还没人回复');
+  expect(rows()[0].textContent).toContain('Doug O 发帖');
   await act(async () => tab(/^我参与的/).click());
   expect(rows().map(r => r.textContent?.includes('My own thread'))).toEqual([true]);
   expect(localStorage.getItem('slack-activity-filter')).toBe('following');
+  // 我翻译的：有翻译稿的帖子，顶上有入口进全部翻译记录
+  await act(async () => tab(/^我翻译的/).click());
+  const postRows = rows().filter(r => !r.textContent?.includes('全部翻译记录'));
+  expect(postRows.map(r => r.textContent?.includes('Elon'))).toEqual([true]);
+  expect(host.textContent).toContain('全部翻译记录 ›');
 });
 
 it('the todo button shows the same count as my todos and goes back to them', async () => {

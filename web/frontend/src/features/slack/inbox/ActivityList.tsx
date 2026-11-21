@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { CheckCheck, ClipboardList, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { Avatar } from './MessageItem';
 import { useMarkAllRead, useSlackActivity, useTodos } from './hooks';
 import { clockTime, emojify, stripLeadingMentions } from './lib';
 import { stripMrkdwn } from './mrkdwn';
@@ -17,7 +16,7 @@ export interface ActivitySelection {
  * 筛选（2026-11-22 用户要求：一行筛选自己选，「全部」按时间排）。各筛选可以重叠，比如 @我 的私信两边都有。
  * 数字是这一类里的未读条数。
  */
-type Filter = 'all' | 'unread' | 'mentions' | 'dm' | 'posts' | 'following';
+type Filter = 'all' | 'unread' | 'mentions' | 'dm' | 'posts' | 'following' | 'translated';
 
 const isPost = (i: SlackActivityItem) => i.type === 'thread' && !i.reply_count && !i.root?.is_me;
 
@@ -28,6 +27,7 @@ const FILTERS: { id: Filter; label: string; hint: string; match: (i: SlackActivi
   { id: 'dm', label: '私信', hint: '私信和群聊私信', match: i => i.type === 'dm' },
   { id: 'posts', label: '新帖', hint: '最近 7 天还没人回复的帖子（待翻译）', match: isPost },
   { id: 'following', label: '我参与的', hint: '你发起、回复过或被 @ 的 thread', match: i => i.type === 'thread' && !!i.following },
+  { id: 'translated', label: '我翻译的', hint: '最近 7 天翻过的帖子；更早的和帖子翻译页的在「全部翻译记录」', match: i => !!i.draft && !i.draft.no_post },
 ];
 
 const FILTER_KEY = 'slack-activity-filter';
@@ -41,6 +41,8 @@ interface ActivityListProps {
   onOpen: (item: SlackActivityItem) => void;
   /** 回到中间的「我的待办」 */
   onShowTodos: () => void;
+  /** 中间显示全部翻译记录（不限 7 天，含帖子翻译页的） */
+  onShowHistory: () => void;
   todosActive: boolean;
   /** Esc：关掉正在看的 thread / 会话 */
   onBack?: () => void;
@@ -74,7 +76,7 @@ function shortTime(ts: string, now = new Date()): string {
 /**
  * 左栏：最上面「AI 速览」入口，下面一行筛选（右边「⋯」里是旧版工作台和全部标为已读），再下面是列表。
  */
-export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBack }: ActivityListProps) {
+export function ActivityList({ selection, onOpen, onShowTodos, onShowHistory, todosActive, onBack }: ActivityListProps) {
   const activity = useSlackActivity(true);
   const markAll = useMarkAllRead();
   const todos = useTodos(true);
@@ -120,23 +122,26 @@ export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBa
   return (
     <>
       <div className="flex items-center gap-1 border-b border-border-subtle px-2 py-2">
-        <div className="flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto" role="tablist" aria-label="筛选">
+        {/* 分段选择：浅灰底，选中项白底 + 深色字；不用和顶部导航同一个梅红色，免得抢眼（2026-11-22 用户反馈） */}
+        <div className="flex min-w-0 flex-1 items-center gap-px overflow-x-auto rounded-lg bg-bg-tertiary p-0.5" role="tablist" aria-label="筛选">
           {FILTERS.map(f => {
             const n = f.id === 'all' ? 0 : unreadIn(f);
+            const on = filter === f.id;
             return (
               <button
                 key={f.id}
                 type="button"
                 role="tab"
-                aria-selected={filter === f.id}
+                aria-selected={on}
                 title={f.hint}
                 onClick={() => setFilter(f.id)}
                 className={cn(
-                  'shrink-0 whitespace-nowrap rounded-full px-2 py-1 text-xs transition-colors',
-                  filter === f.id ? 'bg-primary-500 font-medium text-white shadow-sm' : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'
+                  'flex shrink-0 items-baseline gap-1 whitespace-nowrap rounded-md px-1.5 py-[3px] text-[12.5px] leading-5 transition-all',
+                  on ? 'bg-white font-medium text-text-primary shadow-sm' : 'text-text-secondary hover:text-text-primary'
                 )}
               >
-                {f.label}{n > 0 ? <span className={cn('ml-1 tabular-nums', filter === f.id ? 'text-white/80' : 'text-primary-600')}>{n}</span> : null}
+                {f.label}
+                {n > 0 && <span className="text-[11px] tabular-nums text-text-muted">{n}</span>}
               </button>
             );
           })}
@@ -145,8 +150,8 @@ export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBa
           type="button"
           onClick={onShowTodos}
           className={cn(
-            'inline-flex shrink-0 items-center gap-1 rounded-lg px-2 py-1 text-xs transition-colors',
-            todosActive ? 'bg-primary-50 font-medium text-primary-700' : 'text-text-secondary hover:bg-bg-hover'
+            'inline-flex h-8 shrink-0 items-center gap-1 rounded-lg px-2 transition-colors',
+            todosActive ? 'bg-bg-tertiary text-text-primary' : 'text-text-muted hover:bg-bg-hover hover:text-text-primary'
           )}
           title="我的待办：还没读的 @我 和私信"
           aria-label="我的待办"
@@ -167,6 +172,16 @@ export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBa
           <div className="p-6 text-center text-sm text-text-muted">
             {filter === 'unread' ? '都看完了' : filter === 'all' ? '最近 7 天没有动态' : `最近 7 天没有「${current.label}」`}
           </div>
+        )}
+        {filter === 'translated' && (
+          <button
+            type="button"
+            onClick={onShowHistory}
+            className="flex w-full items-center justify-between border-b border-border-subtle bg-bg-tertiary/50 px-4 py-2 text-left text-xs text-text-secondary hover:bg-bg-hover"
+          >
+            <span>这里是最近 7 天的。更早的、帖子翻译页翻的，都在全部翻译记录里</span>
+            <span className="shrink-0 font-medium text-primary-700">全部翻译记录 ›</span>
+          </button>
         )}
         {filter === 'unread' && items.length > 0 && (
           <div className="flex items-center justify-between border-b border-border-subtle bg-bg-tertiary/50 px-3 py-1.5 text-xs text-text-muted">
@@ -210,50 +225,39 @@ function Row({ item, active, manyChannels, onOpen }: {
 }) {
   const isThread = item.type === 'thread';
   const who = isThread ? item.root?.user_name ?? '' : item.channel_name;
-  // 列表里各种类型混在一起：私信 / 新帖用小字写明，普通 thread 不写（第二行已经说明了）
-  const tag = !isThread ? (item.kind === 'mpim' ? '群聊' : '私信') : isPost(item) ? '新帖' : null;
   const autoNew = !!item.draft && item.draft.auto && !item.draft.seen && !item.draft.no_post;
-  const channel = isThread && manyChannels ? `#${item.channel_name} · ` : '';
+  // 列表只看标题（2026-11-22 用户：不要头像方块、不要第三行预览）；第二行一行小字说明是什么
+  const meta = isThread
+    ? [
+        manyChannels ? `#${item.channel_name}` : '',
+        isPost(item) ? `${who} 发帖` : `${who} 发起 · ${item.reply_count} 条回复`,
+        draftNote(item.draft).replace(' · ', ''),
+      ]
+    : [
+        item.kind === 'mpim' ? '群聊' : '私信',
+        item.last ? `${item.last.is_me ? '我' : item.last.user_name}：${firstLine(item.last, 60)}` : '',
+      ];
   return (
     <button
       type="button"
       onClick={() => onOpen(item)}
       aria-current={active || undefined}
       className={cn(
-        'block w-full border-b border-border-subtle px-3 py-2 text-left transition-colors',
+        'block w-full border-b border-border-subtle/70 px-4 py-2.5 text-left transition-colors',
         active ? 'bg-primary-50' : autoNew ? 'bg-primary-50/40 hover:bg-primary-50/70' : 'hover:bg-bg-hover'
       )}
       title={autoNew ? '这个帖子已经在后台自动翻好了' : undefined}
     >
-      <div className="flex items-start gap-2.5">
-        <Avatar name={who || '?'} />
-        <div className="min-w-0 flex-1">
-          <div className="flex items-center gap-1.5">
-            {item.has_unreads && <span className="h-2 w-2 shrink-0 rounded-full bg-primary-500" aria-label="有新消息" />}
-            <span className={cn('min-w-0 flex-1 truncate text-[14px] text-text-primary', item.has_unreads && 'font-semibold')}>
-              {isThread ? firstLine(item.root, 80, true) : item.channel_name}
-            </span>
-            {item.mentions_me && <span className="shrink-0 text-[11px] font-semibold text-error">@我</span>}
-            {tag && <span className="shrink-0 text-[11px] text-text-muted">{tag}</span>}
-            <span className="shrink-0 text-[11px] text-text-muted">{shortTime(item.latest_ts)}</span>
-          </div>
-          {isThread && (
-            <div className="mt-0.5 flex items-center gap-1.5">
-              <span className="min-w-0 flex-1 truncate text-xs text-text-muted">
-                {`${channel}${who}${item.reply_count ? ` 发起 · ${item.reply_count} 条回复` : ' 发帖 · 还没人回复'}`
-                  + (item.participants && item.participants.length > 1 ? ` · ${item.participants.length} 人参与` : '')
-                  + draftNote(item.draft)}
-              </span>
-            </div>
-          )}
-          {(item.last || !isThread) && (
-            <div className="mt-0.5 flex items-center gap-1.5">
-              <span className="min-w-0 flex-1 truncate text-[13px] text-text-secondary">
-                {item.last && <><span className="font-medium">{item.last.is_me ? '我' : item.last.user_name}：</span>{firstLine(item.last, 120)}</>}
-              </span>
-            </div>
-          )}
-        </div>
+      <div className="flex items-center gap-2">
+        {item.has_unreads && <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-primary-500" aria-label="有新消息" />}
+        <span className={cn('min-w-0 flex-1 truncate text-[14px] leading-5', item.has_unreads ? 'font-semibold text-text-primary' : 'text-text-primary')}>
+          {isThread ? firstLine(item.root, 80, true) : item.channel_name}
+        </span>
+        {item.mentions_me && <span className="shrink-0 text-[11px] font-medium text-error">@我</span>}
+        <span className="shrink-0 text-[11px] tabular-nums text-text-muted">{shortTime(item.latest_ts)}</span>
+      </div>
+      <div className={cn('mt-0.5 truncate text-xs leading-4 text-text-muted', item.has_unreads && 'pl-3.5')}>
+        {meta.filter(Boolean).join(' · ')}
       </div>
     </button>
   );

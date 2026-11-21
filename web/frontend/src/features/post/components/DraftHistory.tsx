@@ -25,7 +25,8 @@ function statusText(item: Pick<DraftSummary, 'status' | 'auto' | 'seen'>): strin
 export function DraftHistory({ activeId, onOpen, onNew }: {
   activeId: string | null;
   onOpen: (item: DraftSummary) => void;
-  onNew: () => void;
+  /** 不传就不显示「新建」（Slack 里的全部翻译记录） */
+  onNew?: () => void;
 }) {
   const [q, setQ] = useState('');
   const list = useDraftList(q.trim());
@@ -41,13 +42,13 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
   return (
     <div className="flex h-full flex-col">
       <div className="space-y-2 border-b border-border-subtle p-3">
-        <button
+        {onNew && <button
           type="button"
           onClick={onNew}
           className="flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-primary-200 bg-primary-50/50 py-2 text-sm text-primary-700 transition-colors hover:bg-primary-50"
         >
           <Plus className="h-4 w-4" /> 新建（粘贴原文）
-        </button>
+        </button>}
         <label className="flex items-center gap-1.5 rounded-lg border border-border-subtle bg-white px-2.5">
           <Search className="h-3.5 w-3.5 shrink-0 text-text-muted" />
           <input
