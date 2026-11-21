@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+import { create, type StoreApi, type UseBoundStore } from 'zustand';
 import { createJSONStorage, devtools, persist } from 'zustand/middleware';
 import type { TranslationVersion } from '../types';
 import { TranslationVersionType } from '../constants';
@@ -64,6 +64,35 @@ interface PostState {
   // 当前或刚结束的长请求，供页面和全局任务条共享
   activeTask: PostActiveTask | null;
   cancelActiveTask: (() => void) | null;
+  // 服务器上的翻译稿（翻译记录）：还没出过译文时为空
+  draftId: string | null;
+  draftRev: number | null;
+}
+
+/** 存到服务器翻译稿里的那部分（和后端 state 字段同构） */
+export type PostSnapshot = Pick<
+  PostState,
+  | 'originalText'
+  | 'sourceRevision'
+  | 'versions'
+  | 'currentVersionId'
+  | 'versionMetadata'
+  | 'generatedTitles'
+  | 'selectedTitle'
+  | 'titleContentIdentity'
+>;
+
+export function postSnapshot(state: PostState): PostSnapshot {
+  return {
+    originalText: state.originalText,
+    sourceRevision: state.sourceRevision,
+    versions: state.versions,
+    currentVersionId: state.currentVersionId,
+    versionMetadata: state.versionMetadata,
+    generatedTitles: state.generatedTitles,
+    selectedTitle: state.selectedTitle,
+    titleContentIdentity: state.titleContentIdentity,
+  };
 }
 
 interface PostActions {
@@ -113,6 +142,9 @@ interface PostActions {
     message?: string
   ) => void;
   clearTask: () => void;
+  setDraft: (draftId: string | null, draftRev: number | null) => void;
+  /** 打开一份翻译稿：整份换掉当前内容 */
+  loadSnapshot: (snapshot: Partial<PostSnapshot>, draftId: string | null, draftRev: number | null) => void;
 }
 
 type PostStore = PostState & PostActions;
@@ -136,6 +168,8 @@ const initialState: PostState = {
   customInstruction: '',
   activeTask: null,
   cancelActiveTask: null,
+  draftId: null,
+  draftRev: null,
 };
 
 function createVersionId(): string {
@@ -147,10 +181,15 @@ function createVersionId(): string {
 
 const MAX_PERSISTED_VERSIONS = 20;
 
-export const usePostStore = create<PostStore>()(
-  devtools(
-    persist(
-      (set, get) => ({
+/**
+ * 帖子翻译工作区的全部逻辑（版本、编辑、标题……）。帖子翻译页用持久化在浏览器里的那一份（usePostStore），
+ * Slack 翻译模式每篇帖子另建一份不持久化的（createPostStore），两边行为完全一致。
+ */
+function postStoreCreator(
+  set: StoreApi<PostStore>['setState'],
+  get: StoreApi<PostStore>['getState']
+): PostStore {
+  return {
         ...initialState,
 
         setOriginalText: text =>
@@ -337,6 +376,8 @@ export const usePostStore = create<PostStore>()(
             customInstruction: '',
             activeTask: null,
             cancelActiveTask: null,
+            draftId: null,
+            draftRev: null,
           }),
 
         setLoading: isLoading => set({ isLoading }),
@@ -446,7 +487,34 @@ export const usePostStore = create<PostStore>()(
           })),
 
         clearTask: () => set({ activeTask: null, cancelActiveTask: null }),
-      }),
+
+        setDraft: (draftId, draftRev) => set({ draftId, draftRev }),
+
+        loadSnapshot: (snapshot, draftId, draftRev) =>
+          set({
+            ...initialState,
+            ...snapshot,
+            versions: (snapshot.versions ?? []).map(version => ({
+              ...version,
+              createdAt: new Date(version.createdAt),
+            })),
+            draftId,
+            draftRev,
+          }),
+  };
+}
+
+export type PostStoreHook = UseBoundStore<StoreApi<PostStore>>;
+
+/** Slack 翻译模式用：每篇帖子一份，不写浏览器存储（内容存在服务器的翻译稿里） */
+export function createPostStore(): PostStoreHook {
+  return create<PostStore>()((set, get) => postStoreCreator(set, get));
+}
+
+export const usePostStore: PostStoreHook = create<PostStore>()(
+  devtools(
+    persist(
+      (set, get) => postStoreCreator(set, get),
       {
         name: 'translation-post-workspace',
         version: 1,
@@ -465,6 +533,8 @@ export const usePostStore = create<PostStore>()(
           titleContentIdentity: state.titleContentIdentity,
           hashtags: state.hashtags,
           customInstruction: state.customInstruction,
+          draftId: state.draftId,
+          draftRev: state.draftRev,
         }),
         merge: (persisted, current) => {
           const saved = persisted as Partial<PostState>;

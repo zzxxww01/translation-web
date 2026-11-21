@@ -1,11 +1,9 @@
 import { useMemo } from 'react';
 import { useQueries, useQuery } from '@tanstack/react-query';
-import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
 import { slackInboxApi } from './api';
 import type { SlackMessage } from './types';
 
-// 后端一次最多 40 条；消息翻译按 20 条一批，单次模型调用更快、不容易超时，中文也出得早
+// 后端一次最多 40 条；按 20 条一批，单次模型调用更快、不容易超时，中文也出得早
 const BATCH = 40;
 const ZH_BATCH = 20;
 
@@ -25,34 +23,38 @@ export function chunk<T>(items: T[], size = BATCH): T[][] {
   return out;
 }
 
-/** 「全部显示中文」开关：频道、thread、私信共用一个，记在本机；默认关（单条消息可以点「译」）。 */
-export const useShowZh = create<{ showZh: boolean; toggleZh: () => void }>()(
-  // 换了名字：之前默认开，存过的偏好不再沿用
-  persist(set => ({ showZh: false, toggleZh: () => set(state => ({ showZh: !state.showZh })) }), { name: 'slack-show-zh-v2' })
-);
-
-/** 单条消息按需翻译（悬停工具条上的「译」）。和批量翻译共用后端缓存。 */
-export function useOneZh(text: string, enabled: boolean) {
-  return useQuery({
-    queryKey: ['slack-zh-one', hashTexts([text])],
-    queryFn: () => slackInboxApi.translate([text]),
-    enabled: enabled && !!text.trim(),
-    staleTime: Infinity,
-    retry: 1,
-    select: data => data.translations[0] ?? null,
-  });
+/** 一条消息里要翻的文字：正文 + 每张链接卡片的正文。key 用来把译文对回去。 */
+interface Piece {
+  key: string;
+  text: string;
 }
 
-/** 一组消息的中文：按 40 条一批请求，后端按内容缓存。返回 ts -> 中文（不需要翻的没有）。 */
-export function useMessageZh(messages: SlackMessage[], enabled: boolean) {
-  const withText = useMemo(() => messages.filter(m => m.text.trim()), [messages]);
-  const batches = useMemo(() => chunk(withText, ZH_BATCH), [withText]);
+export function cardKey(ts: string, index: number) {
+  return `${ts}#card${index}`;
+}
+
+/** 自己发的消息不翻；正文和链接卡片各算一段 */
+export function piecesOf(message: SlackMessage): Piece[] {
+  if (message.is_me) return [];
+  const pieces: Piece[] = [];
+  if (message.text.trim()) pieces.push({ key: message.ts, text: message.text });
+  message.attachments.forEach((a, i) => {
+    if (a.text?.trim()) pieces.push({ key: cardKey(message.ts, i), text: a.text });
+  });
+  return pieces;
+}
+
+/** 中文结果：消息 ts -> 正文中文；cardKey(ts, i) -> 第 i 张卡片的中文 */
+export type ZhMap = Map<string, string>;
+
+function useZh(pieces: Piece[], enabled: boolean, context: string | null | undefined) {
+  const batches = useMemo(() => chunk(pieces, ZH_BATCH), [pieces]);
   const results = useQueries({
     queries: batches.map(batch => {
-      const texts = batch.map(m => m.text);
+      const texts = batch.map(p => p.text);
       return {
-        queryKey: ['slack-zh', hashTexts(texts)],
-        queryFn: () => slackInboxApi.translate(texts),
+        queryKey: ['slack-zh', hashTexts(texts), hashTexts([context ?? ''])],
+        queryFn: () => slackInboxApi.translate(texts, context),
         enabled,
         staleTime: Infinity,
         gcTime: 30 * 60_000,
@@ -60,16 +62,33 @@ export function useMessageZh(messages: SlackMessage[], enabled: boolean) {
       };
     }),
   });
-  const map = new Map<string, string>();
+  const map: ZhMap = new Map();
   results.forEach((r, i) => {
     r.data?.translations.forEach((zh, j) => {
-      if (zh) map.set(batches[i][j].ts, zh);
+      if (zh) map.set(batches[i][j].key, zh);
     });
   });
-  return { zh: map, loading: enabled && results.some(r => r.isLoading), failed: results.some(r => r.isError) };
+  return {
+    zh: map,
+    loading: enabled && results.some(r => r.isLoading),
+    failed: results.some(r => r.isError),
+    done: enabled && results.length > 0 && results.every(r => r.isSuccess),
+  };
 }
 
-/** thread 摘要；latestTs 变了（有新回复）就重新取，后端也按它缓存。 */
+/** 单条消息点「译」：正文和链接卡片一起翻（和整段翻译共用后端缓存） */
+export function useOneZh(message: SlackMessage, enabled: boolean, context?: string | null) {
+  const pieces = useMemo(() => piecesOf(message), [message]);
+  return useZh(pieces, enabled && pieces.length > 0, context);
+}
+
+/** thread「翻译全部」：整个 thread 的消息（不含我自己的），根帖作为背景 */
+export function useThreadZh(messages: SlackMessage[], enabled: boolean, context?: string | null) {
+  const pieces = useMemo(() => messages.flatMap(piecesOf), [messages]);
+  return useZh(pieces, enabled, context);
+}
+
+/** thread 摘要；latestTs 变了（有新回复）就是另一条缓存，后端也按它缓存。 */
 export function useThreadSummary(channelId: string, threadTs: string, latestTs: string | null, enabled: boolean) {
   return useQuery({
     queryKey: ['slack-summary', channelId, threadTs, latestTs],

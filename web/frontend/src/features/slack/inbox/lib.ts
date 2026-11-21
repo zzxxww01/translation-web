@@ -1,4 +1,4 @@
-import type { ConversationKind, SlackConversation, SlackMessage, SlackThread } from './types';
+import type { ConversationKind, SlackMessage } from './types';
 
 // 常见的 Slack 表情简码；没收录的原样显示 :name:
 const EMOJI: Record<string, string> = {
@@ -24,23 +24,6 @@ export function emojiFor(name: string): string {
 export function stripLeadingMentions(text: string): string {
   const stripped = text.replace(/^(\s*@用户组\s*)+/, '').trim();
   return stripped || text.trim();
-}
-
-/** 侧栏分区：和 Slack 一样，频道一组，私信（含群聊私信）一组。 */
-export function splitSidebar(conversations: SlackConversation[]) {
-  return {
-    channels: conversations.filter(c => c.kind === 'channel' || c.kind === 'private'),
-    dms: conversations.filter(c => c.kind === 'im' || c.kind === 'mpim'),
-  };
-}
-
-/** 中栏除了会话之外的页面：AI 速览、旧版工作台（reply）。搜索、「我参与的」单独页面已去掉（后者是左栏的一个筛选）。 */
-export type SlackView = 'digest' | 'reply';
-
-const VIEWS: SlackView[] = ['digest', 'reply'];
-
-export function parseSlackView(value: string | null): SlackView | null {
-  return VIEWS.includes(value as SlackView) ? (value as SlackView) : null;
 }
 
 const WEEKDAYS = ['周日', '周一', '周二', '周三', '周四', '周五', '周六'];
@@ -93,14 +76,6 @@ export function buildStream(messages: SlackMessage[], lastRead: string | null, n
     prevDay = day;
     return { message, day: newDay ? day : null, firstUnread, compact };
   });
-}
-
-/** 侧栏里 thread 的一行标题：根消息第一行，太长截断。（下一期换成 AI 中文标题） */
-export function threadTitle(thread: SlackThread, max = 48): string {
-  const firstLine = (thread.root.text || '').split('\n').map(s => s.trim()).find(Boolean)
-    || (thread.root.files[0]?.name ?? '（无文字）');
-  const text = emojify(firstLine.replace(/\*([^*\n]+)\*/g, '$1'));
-  return text.length > max ? `${text.slice(0, max)}…` : text;
 }
 
 /** 消息流里最新一条的 ts（用来推进已读位置）。 */

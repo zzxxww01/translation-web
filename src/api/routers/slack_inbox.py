@@ -7,9 +7,9 @@ Slack 收件箱：展示「我」所在的频道、私信和 thread，支持附�
 
 from __future__ import annotations
 
-import asyncio
 import json
 import os
+import re
 from functools import lru_cache
 from pathlib import Path
 from typing import Dict, List, Literal, Optional
@@ -80,8 +80,13 @@ async def get_status():
 
 @router.get("/activity")
 async def get_activity():
-    """「动态」：频道 thread 和私信各一行，按最近活动排序。"""
-    return await _run(get_slack_inbox().activity)
+    """「动态」：频道 thread 和私信各一行，按最近活动排序。thread 行带上翻译稿状态（草稿 / 已完成）。"""
+    data = await _run(get_slack_inbox().activity)
+    index = await run_blocking(_draft_index)
+    for item in data["items"]:
+        if item.get("thread_ts"):
+            item["draft"] = index.get(f"{item['channel_id']}:{item['thread_ts']}")
+    return data
 
 
 @router.put("/credentials")
@@ -232,11 +237,8 @@ async def _run_ai(coro, operation: str):
 
 class SlackTranslateRequest(BaseModel):
     texts: List[str] = Field(..., max_length=MAX_BATCH)
-
-
-class SlackTitlesRequest(BaseModel):
-    # thread_ts -> 根消息原文
-    items: Dict[str, str] = Field(..., max_length=MAX_BATCH)
+    # thread 根帖：只帮模型理解回复里的指代，不翻译
+    context: Optional[str] = Field(None, max_length=MAX_TEXT_CHARS)
 
 
 @router.post("/ai/translate")
@@ -244,14 +246,7 @@ class SlackTitlesRequest(BaseModel):
 async def translate_messages(request: Request, body: SlackTranslateRequest):
     """逐条翻成中文；不需要翻的（中文、只有链接）返回 null。按内容缓存。"""
     texts = [t[:MAX_TEXT_CHARS] for t in body.texts]
-    return {"translations": await _run_ai(get_slack_ai().translate(texts), "Slack 消息翻译")}
-
-
-@router.post("/ai/titles")
-@limiter.limit("30/minute")
-async def thread_titles(request: Request, body: SlackTitlesRequest):
-    items = {k[:32]: v[:MAX_TEXT_CHARS] for k, v in body.items.items()}
-    return {"titles": await _run_ai(get_slack_ai().titles_for(items), "Slack thread 标题")}
+    return {"translations": await _run_ai(get_slack_ai().translate(texts, body.context), "Slack 消息翻译")}
 
 
 @router.get("/conversations/{channel_id}/threads/{thread_ts}/summary")
@@ -262,49 +257,146 @@ async def thread_summary(request: Request, channel_id: str, thread_ts: str):
     return await _run_ai(get_slack_ai().summary(key, ctx["markdown"]), "Slack thread 摘要")
 
 
-DIGEST_CONCURRENCY = 3
 
 
-@router.get("/digest")
-@limiter.limit("10/minute")
-async def unread_digest(request: Request):
-    """AI 速览：每个有未读的会话 / thread 一段中文摘要。只读，不标已读。单段失败不影响其他段。"""
-    sections = await _run(get_slack_inbox().unread_material)
-    ai = get_slack_ai()
-    gate = asyncio.Semaphore(DIGEST_CONCURRENCY)
+# ---------------------------------------------------------------- 设置（只存在 momo 本地）
 
-    async def one(section):
-        conv = section["conversation"]
-        where = ("#" if conv["kind"] in {"channel", "private"} else "私信 · ") + conv["name"]
-        if section["thread_ts"]:
-            where += " 里的一个 thread（根消息：" + (section["root"]["text"] or "")[:80].replace("\n", " ") + "）"
-        key = f"{conv['id']}:{section['thread_ts'] or ''}:{section['last_read']}:{section['messages'][-1]['ts']}"
-        out = {
-            "conversation_id": conv["id"],
-            "name": conv["name"],
-            "kind": section["kind"],
-            "thread_ts": section["thread_ts"],
-            "unread_count": len(section["messages"]),
-            "mentions_me": any(m["mentions_me"] for m in section["messages"]),
-            "latest_ts": section["messages"][-1]["ts"],
+SETTINGS_DEFAULTS = {"auto_translate_mentions": True}
+
+
+def _settings_path() -> Path:
+    return Path(settings.slack_cache_dir) / "settings.json"
+
+
+def read_slack_settings() -> Dict[str, object]:
+    try:
+        saved = json.loads(_settings_path().read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        saved = {}
+    return {k: saved.get(k, v) if isinstance(saved.get(k, v), type(v)) else v for k, v in SETTINGS_DEFAULTS.items()}
+
+
+class SlackSettingsRequest(BaseModel):
+    auto_translate_mentions: Optional[bool] = None
+
+
+@router.get("/settings")
+async def get_settings():
+    return await run_blocking(read_slack_settings)
+
+
+@router.put("/settings")
+@limiter.limit("20/minute")
+async def put_settings(request: Request, body: SlackSettingsRequest):
+    def save():
+        current = read_slack_settings()
+        current.update({k: v for k, v in body.model_dump().items() if v is not None})
+        path = _settings_path()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(json.dumps(current, ensure_ascii=False), encoding="utf-8")
+        os.replace(tmp, path)
+        return current
+
+    return await run_blocking(save)
+
+
+# ---------------------------------------------------------------- 我的待办：未读的 @我 和私信，一次调用
+
+
+def _draft_index() -> Dict[str, Dict[str, object]]:
+    from .post_drafts import get_draft_store  # 避免循环导入
+
+    return get_draft_store().slack_index()
+
+
+@router.get("/todos")
+@limiter.limit("20/minute")
+async def my_todos(request: Request):
+    """每件找我的事一行「谁要我干什么」；只被群发 @ 到的放进 fyi（不用处理），不送模型。"""
+    material = await _run(get_slack_inbox().todo_material)
+    direct = [m for m in material if m["direct"]]
+    llm_items = [
+        {
+            "id": i,
+            "kind": m["kind"],
+            "where": ("私信 · " if m["kind"] == "dm" else "#") + m["channel_name"],
+            **({"root": m["root_text"][:800]} if m["kind"] == "mention" else {}),
+            "messages": m["messages"],
         }
-        async with gate:
-            try:
-                out.update(await ai.digest(key, where, section["messages"]))
-            except Exception as exc:  # noqa: BLE001 - 一段失败只在这一段显示
-                out["error"] = f"这段没能总结：{exc.__class__.__name__}"
-        return out
+        for i, m in enumerate(direct)
+    ]
+    tasks = await _run_ai(get_slack_ai().todo_tasks(llm_items), "我的待办") if llm_items else []
+    index = await run_blocking(_draft_index)
 
-    results = await asyncio.gather(*(one(sec) for sec in sections))
-    # @我的、有待办的排前面，其余按最新消息
-    results.sort(key=lambda r: (not (r["mentions_me"] or r.get("todo_for_me")), -float(r["latest_ts"])))
-    return {"sections": results}
+    def view(m, task=None):
+        mark = {"channel_id": m["channel_id"], "ts": m["latest_ts"]}
+        if m["kind"] == "mention":
+            mark["thread_ts"] = m["thread_ts"]
+        return {
+            "kind": m["kind"],
+            "channel_id": m["channel_id"],
+            "channel_name": m["channel_name"],
+            "conversation_kind": m["conversation_kind"],
+            "thread_ts": m["thread_ts"],
+            "title": m["title"],
+            "from": sorted({msg["from"] for msg in m["messages"]}),
+            "count": len(m["messages"]),
+            "latest_ts": m["latest_ts"],
+            "task": (task or {}).get("task") or "",
+            "action": (task or {}).get("action") or "read",
+            "mark": mark,
+            "draft": index.get(f"{m['channel_id']}:{m['thread_ts']}") if m["thread_ts"] else None,
+        }
+
+    items = [view(m, tasks[i] if i < len(tasks) else None) for i, m in enumerate(direct)]
+    rank = {"reply": 0, "do": 0, "read": 1}
+    items.sort(key=lambda it: (rank.get(it["action"], 1), -float(it["latest_ts"])))
+    fyi = [view(m) for m in material if not m["direct"]]
+    return {"items": items, "fyi": fyi}
 
 
-@router.get("/search")
-@limiter.limit("30/minute")
-async def search_messages(request: Request, q: str = Query(..., min_length=1, max_length=200)):
-    """中文搜索词先由 AI 改写成英文关键词，再用 Slack 自己的搜索（只读）。"""
-    english = await _run_ai(get_slack_ai().search_query(q), "Slack 搜索词改写")
-    result = await _run(get_slack_inbox().search, english)
-    return {**result, "input": q}
+# ---------------------------------------------------------------- 私信回复面板的历史（每个私信一个文件）
+
+MAX_REPLY_STATE_BYTES = 300_000
+
+
+def _reply_state_path(channel_id: str) -> Path:
+    if not re.fullmatch(r"[A-Z0-9]{8,12}", channel_id or ""):
+        raise APIException(status_code=400, detail="会话 ID 不对", error_code="BAD_CHANNEL")
+    return Path(settings.slack_cache_dir) / "dm_replies" / f"{channel_id}.json"
+
+
+class SlackReplyStateRequest(BaseModel):
+    state: Dict[str, object]
+
+
+@router.get("/conversations/{channel_id}/reply-state")
+async def get_reply_state(channel_id: str):
+    path = _reply_state_path(channel_id)
+
+    def load():
+        try:
+            return {"state": json.loads(path.read_text(encoding="utf-8"))}
+        except (OSError, ValueError):
+            return {"state": None}
+
+    return await run_blocking(load)
+
+
+@router.put("/conversations/{channel_id}/reply-state")
+@limiter.limit("60/minute")
+async def put_reply_state(request: Request, channel_id: str, body: SlackReplyStateRequest):
+    path = _reply_state_path(channel_id)
+    data = json.dumps(body.state, ensure_ascii=False)
+    if len(data) > MAX_REPLY_STATE_BYTES:
+        raise APIException(status_code=400, detail="回复历史太长了", error_code="REPLY_STATE_TOO_LARGE")
+
+    def save():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp = path.with_suffix(".tmp")
+        tmp.write_text(data, encoding="utf-8")
+        os.replace(tmp, path)
+        return {"ok": True}
+
+    return await run_blocking(save)

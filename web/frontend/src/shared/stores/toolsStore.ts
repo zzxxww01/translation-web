@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import type { Task } from '../types';
 
-type CurrentTool = 'tasks' | 'translator' | 'email' | 'timezone';
+type CurrentTool = 'tasks' | 'translator' | 'email' | 'timezone' | 'slack-reply';
 
 /**
  * 工具箱状态

@@ -38,6 +38,7 @@ from .routers import (
     glossary,
     image_cleanup,
     models,
+    post_drafts,
     project_glossary,
     projects,
     quality_report,
@@ -56,9 +57,14 @@ from .routers import (
 @asynccontextmanager
 async def lifespan(_app: FastAPI):
     # Slack 页的本地副本：服务一起来就开始后台同步（只拉新的）；没配凭证或在跑测试就不起
+    auto_task = None
     if not os.environ.get("PYTEST_CURRENT_TEST") and Path(settings.slack_credentials_file).is_file():
         slack_inbox.get_slack_inbox()
+        # 有人在 thread 里直接 @我 时自动把那个帖子翻好（设置里可关）
+        auto_task = asyncio.create_task(post_drafts.auto_translate_loop())
     yield
+    if auto_task:
+        auto_task.cancel()
 
 
 app = FastAPI(
@@ -99,6 +105,7 @@ app.include_router(image_cleanup.router, prefix="/api", tags=["image-cleanup"])
 app.include_router(quality_report.router, tags=["quality-report"])
 app.include_router(slack.router, prefix="/api", tags=["slack"])
 app.include_router(slack_inbox.router, prefix="/api", tags=["slack-inbox"])
+app.include_router(post_drafts.router, prefix="/api", tags=["post-drafts"])
 app.include_router(tools.router, prefix="/api", tags=["tools"])
 app.include_router(tasks.router, prefix="/api", tags=["tasks"])
 app.include_router(consistency.router, prefix="/api", tags=["consistency"])

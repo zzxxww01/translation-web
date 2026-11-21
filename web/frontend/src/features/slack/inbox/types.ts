@@ -133,31 +133,78 @@ export interface SlackActivityItem {
   latest_time: string;
   has_unreads: boolean;
   mentions_me: boolean;
-  /** thread：我发起 / 回复过（订阅了）的，进「我参与的 thread」分组 */
+  /** thread：我发起 / 回复过（订阅了）的，进「我参与的」筛选 */
   following?: boolean;
+  /** thread 的翻译稿状态 */
+  draft?: SlackDraftBadge | null;
 }
 
 export interface SlackThreadSummary {
-  title: string;
   summary: string;
   /** 有人要我做事或在等我回复时的一句话，否则为空 */
   todo_for_me: string;
 }
 
-/** AI 速览里的一段：一个有未读的会话，或一个有新回复的 thread。 */
-export interface SlackDigestSection {
-  conversation_id: string;
-  name: string;
-  kind: 'thread' | ConversationKind;
+/** thread 的翻译稿状态（后端 slack_index），列表行和 thread 顶部显示「草稿 / 已完成」 */
+export interface SlackDraftBadge {
+  id: string;
+  status: 'draft' | 'done';
+  auto: boolean;
+  seen: boolean;
+  versions: number;
+  no_post: boolean;
+}
+
+/** 我的待办里的一件事 */
+export interface SlackTodo {
+  kind: 'mention' | 'dm';
+  channel_id: string;
+  channel_name: string;
+  conversation_kind: ConversationKind;
   thread_ts: string | null;
-  unread_count: number;
-  mentions_me: boolean;
+  title: string;
+  from: string[];
+  count: number;
   latest_ts: string;
-  summary?: string;
-  items?: { text: string; ts: string | null }[];
-  todo_for_me?: string;
-  /** 这一段没能总结（模型失败），其余段不受影响 */
-  error?: string;
+  task: string;
+  action: 'reply' | 'do' | 'read';
+  mark: { channel_id: string; ts: string; thread_ts?: string };
+  draft: SlackDraftBadge | null;
+}
+
+export interface SlackTodos {
+  items: SlackTodo[];
+  /** 只被 @用户组 / @here 群发提到的：不用处理 */
+  fyi: SlackTodo[];
+}
+
+export interface SlackSettings {
+  /** 有人在 thread 里直接 @我 时自动把帖子翻好 */
+  auto_translate_mentions: boolean;
+}
+
+/** 私信回复面板：每次生成 / 调整记一组 */
+export interface DmReplyVariant {
+  version: string;
+  english: string;
+  chinese: string;
+}
+
+export interface DmReplyGroup {
+  created_at: number;
+  /** generate：按对方消息生成；compose：按「我想说」；adjust：一键调整；edit：改了某一版的意思 */
+  kind: 'generate' | 'compose' | 'adjust' | 'edit';
+  instruction?: string;
+  understanding?: string;
+  pending: boolean;
+  replies: DmReplyVariant[];
+  /** 生成时对方最新一条消息的 ts，用来判断有没有新消息 */
+  based_on_ts: string | null;
+}
+
+export interface DmReplyState {
+  groups: DmReplyGroup[];
+  current: number;
 }
 
 /** 中栏单独打开的 thread（频道 + 根消息 ts） */

@@ -20,6 +20,10 @@ interface TranslationOutputProps {
   onSetEditedContent: (content: string) => void;
   onSaveEdit: () => void;
   onDiscardEdit: () => void;
+  /** 放在有栏头的分栏里时不再显示「译文」小标题 */
+  hideTitle?: boolean;
+  /** 译文框之后、复制按钮旁边的额外按钮 */
+  extraActions?: React.ReactNode;
 }
 
 /**
@@ -33,7 +37,7 @@ function isStaleVersion(version: TranslationVersion, originalText: string): bool
 
 export function TranslationOutput({
   versions, currentVersionId, originalText, currentContent, isEdited, editedContent,
-  onSetCurrentVersion, onSetEditedContent, onSaveEdit, onDiscardEdit,
+  onSetCurrentVersion, onSetEditedContent, onSaveEdit, onDiscardEdit, hideTitle, extraActions,
 }: TranslationOutputProps) {
   // 计数与上限同源，都用 length（与后端校验口径一致）
   const charCount = currentContent.length;
@@ -66,7 +70,7 @@ export function TranslationOutput({
     <div className="flex min-w-0 flex-1 flex-col">
       <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex min-w-0 flex-wrap items-center gap-3">
-          <h3 className="text-sm font-semibold">译文</h3>
+          {!hideTitle && <h3 className="text-sm font-semibold">译文</h3>}
           {versions.length > 0 && (
             <Select value={currentVersionId || ''} onValueChange={onSetCurrentVersion}>
               <SelectTrigger className="h-9 w-full min-w-0 sm:w-48" aria-label="选择译文版本">
@@ -118,6 +122,7 @@ export function TranslationOutput({
       />
 
       <div className="mt-3 flex flex-wrap justify-end gap-2">
+        {extraActions}
         <Button type="button" variant="outline" size="sm" className="h-10 min-w-28 sm:h-9" onClick={handleCopy} disabled={!currentContent} title="复制译文">
           <Copy className="h-4 w-4" />
           复制译文

@@ -83,6 +83,8 @@ class Settings(BaseSettings):
     # Slack 收件箱（只读）：个人网页会话凭证（xoxc token + d cookie）和用户名/附件缓存
     slack_credentials_file: str = "data/slack_credentials.json"
     slack_cache_dir: str = "data/slack_cache"
+    # 翻译稿（帖子翻译页和 Slack 翻译模式共用的「翻译记录」）
+    post_drafts_dir: str = "data/post_drafts"
     slack_dm_recent_days: int = 30
 
     # Muse 自动化（routers/automation.py）：我所在的 Slack 用户组 ID，逗号分隔（S 开头）。

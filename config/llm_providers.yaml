@@ -254,8 +254,9 @@ task_defaults:
   # argon 更快，且全部守住 20 字。Explicit user model overrides still apply.
   title: gemini-official-argon
   metadata: deepseek-v3
-  # 2026-11-17 用户要求：Slack 页的所有模型调用（回复工作台、消息中文、thread 标题/摘要、速览、搜索、私信回复）走官方 GPT Sol
-  slack: gpt-6.1-sol
+  # Slack 页的所有模型调用（消息中文、thread 摘要、我的待办、帖子提取、私信回复、旧版工作台）走官方 GPT Sol；
+  # 2026-11-22 用户要求从 6.1 升到 6.2，与帖子翻译默认一致
+  slack: gpt-6.2-sol
 # 任务用默认模型时的整体兜底：主模型（含它自己的故障转移）全部失败后，再用这里的模型重来一次。
 # 用户显式选择模型时不生效。OpenAI 官方组不跨品牌降级，帖子翻译靠这里退回 Gemini。
 task_fallbacks:

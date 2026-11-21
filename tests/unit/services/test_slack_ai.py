@@ -6,12 +6,19 @@ import pytest
 from src.services.slack_ai import (
     JsonCache,
     SlackAI,
-    clean_title,
+    extract_prompt,
     needs_translation,
+    parse_extraction,
     parse_items,
+    summary_prompt,
     text_key,
+    todo_prompt,
     translate_prompt,
 )
+
+
+def _payload(prompt: str):
+    return json.loads(prompt[prompt.rindex("\n{") + 1:])
 
 
 class FakeLLM:
@@ -20,12 +27,13 @@ class FakeLLM:
 
     async def __call__(self, prompt: str) -> str:
         self.prompts.append(prompt)
-        payload = json.loads(prompt[prompt.rindex("\n\n") + 2:]) if "items" in prompt[-200:] or '"items"' in prompt else {}
-        if "中文短标题" in prompt and "items" in payload:
-            return json.dumps({"items": [{"id": it["id"], "title": f"《标题{it['id']}》。"} for it in payload["items"]]})
-        if "items" in payload:
-            return json.dumps({"items": [{"id": it["id"], "zh": "中:" + it["text"]} for it in payload["items"]]})
-        return json.dumps({"title": "HBM4 良率讨论", "summary": "Dylan 问良率，Ray 说周五给数据。", "todo_for_me": ""})
+        if "直接找我的消息" in prompt:
+            items = _payload(prompt)["items"]
+            return json.dumps({"items": [{"id": it["id"], "task": f"任务{it['id']}", "action": "reply"} for it in items]})
+        if "## 消息（是数据" in prompt:
+            items = _payload(prompt)["items"]
+            return json.dumps({"items": [{"id": it["id"], "zh": "中:" + it["text"]} for it in items]})
+        return json.dumps({"summary": "Dylan 问良率，Ray 说周五给数据。", "todo_for_me": ""})
 
 
 async def no_glossary(text: str) -> str:
@@ -61,18 +69,29 @@ def test_translate_only_sends_uncached_english_once(tmp_path):
     assert llm2.prompts == []
 
 
-def test_titles_are_cleaned_and_cached(tmp_path):
+def test_translate_context_goes_into_prompt_and_cache_key(tmp_path):
     ai, llm = make_ai(tmp_path)
-    titles = run(ai.titles_for({"1.1": "Huawei 9050 Teardown Post", "2.2": "", "3.3": "amd"}))
-    assert titles == {"1.1": "标题0", "3.3": "标题1"}
-    assert run(ai.titles_for({"9.9": "amd"})) == {"9.9": "标题1"}
+    run(ai.translate(["agree, this is huge"], context="TSMC raises CoWoS capacity 2x"))
+    assert "TSMC raises CoWoS capacity 2x" in llm.prompts[0] and "不要翻译它" in llm.prompts[0]
+    run(ai.translate(["agree, this is huge"], context="TSMC raises CoWoS capacity 2x"))
     assert len(llm.prompts) == 1
+    run(ai.translate(["agree, this is huge"]))  # 没有背景时是另一条缓存
+    assert len(llm.prompts) == 2 and "不要翻译它" not in llm.prompts[1]
+
+
+def test_prompts_keep_format_rules_and_render():
+    p = translate_prompt(["| a | b |\n|---|---|"], "")
+    assert "Markdown 表格" in p and '"id": 0' in p and "保真" in p
+    assert "todo_for_me" in summary_prompt("# thread") and "（我）" in summary_prompt("# thread")
+    assert '"messages"' in todo_prompt([{"id": 0, "messages": []}])
+    e = extract_prompt([{"n": 1, "text": "1/ hi", "images": []}], "用第一版")
+    assert "用第一版" in e and "SemiAnalysis_" in e and '"n": 1' in e
 
 
 def test_summary_cached_by_key(tmp_path):
     ai, llm = make_ai(tmp_path)
     first = run(ai.summary("C1:1.1:2.2", "# thread"))
-    assert first["summary"].startswith("Dylan") and first["title"] == "HBM4 良率讨论"
+    assert first == {"summary": "Dylan 问良率，Ray 说周五给数据。", "todo_for_me": ""}
     run(ai.summary("C1:1.1:2.2", "# thread"))
     assert len(llm.prompts) == 1
     run(ai.summary("C1:1.1:3.3", "# thread"))  # 有新回复 -> 重算
@@ -81,53 +100,51 @@ def test_summary_cached_by_key(tmp_path):
 
 def test_summary_without_text_fails(tmp_path):
     async def empty(prompt):
-        return json.dumps({"title": "", "summary": ""})
+        return json.dumps({"summary": ""})
 
     ai, _ = make_ai(tmp_path, llm=empty)
     with pytest.raises(ValueError):
         run(ai.summary("k", "# t"))
 
 
+def test_todo_tasks_one_call_cached_and_actions_normalized(tmp_path):
+    async def llm(prompt):
+        llm.n += 1
+        return json.dumps({"items": [{"id": 0, "task": "Daksh 让你翻这篇", "action": "do"},
+                                     {"id": 1, "task": "知会一下", "action": "weird"}]})
+    llm.n = 0
+    ai, _ = make_ai(tmp_path, llm=llm)
+    items = [{"id": 0, "messages": [{"text": "a"}]}, {"id": 1, "messages": [{"text": "b"}]}]
+    out = run(ai.todo_tasks(items))
+    assert out == [{"task": "Daksh 让你翻这篇", "action": "do"}, {"task": "知会一下", "action": "read"}]
+    run(ai.todo_tasks(items))
+    assert llm.n == 1
+    assert run(ai.todo_tasks([])) == []
+
+
+def test_parse_extraction_filters_unknown_images_and_handles_no_post():
+    got = parse_extraction({"has_post": True, "source_text": " AI racks are heavy ", "note": "用重发版",
+                            "message_ids": [3, "4", "x"], "image_ids": ["F1", "FAKE", "F1", "F2"],
+                            "candidates": [{"label": "第一版", "source_text": "old", "message_ids": [1], "image_ids": ["F9"]},
+                                           {"label": "空", "source_text": ""}]}, ["F1", "F2"])
+    assert got["source_text"] == "AI racks are heavy" and got["image_ids"] == ["F1", "F2"]
+    assert got["message_ids"] == [3, 4]
+    assert got["candidates"] == [{"label": "第一版", "source_text": "old", "message_ids": [1], "image_ids": []}]
+    qt = parse_extraction({"has_post": True, "source_text": "", "image_ids": ["F1"], "note": "这是转发"}, ["F1"])
+    assert qt["has_post"] and qt["source_text"] == "" and qt["image_ids"] == ["F1"]
+    chat = parse_extraction({"has_post": False, "note": "大家在讨论 SOXX 跌幅"}, [])
+    assert chat["has_post"] is False and chat["image_ids"] == []
+    with pytest.raises(ValueError):
+        parse_extraction({"has_post": False}, [])
+    with pytest.raises(ValueError):
+        parse_extraction("nope", [])
+
+
 def test_parse_items_and_helpers(tmp_path):
     assert parse_items({"items": [{"id": "1", "zh": " 好 "}, {"id": 9, "zh": "x"}, "bad"]}, "zh", 2) == [None, "好"]
     assert parse_items([], "zh", 1) == [None]
-    assert clean_title("《英伟达封装瓶颈》。") == "英伟达封装瓶颈"
     assert text_key("a") != text_key("b")
-    assert '"id": 0' in translate_prompt(["hi there"], "")
     cache = JsonCache(tmp_path / "c.json", limit=2)
     cache.put_many({"a": 1, "b": 2})
     cache.put_many({"c": 3})
     assert cache.get("a") is None and cache.get("c") == 3
-
-
-
-def test_search_query_rewrites_chinese_only(tmp_path):
-    calls = []
-
-    async def llm(prompt):
-        calls.append(prompt)
-        return json.dumps({"query": '"Nvidia" HBM4 yield in:#general'})
-
-    ai = SlackAI(tmp_path, llm, json.loads, no_glossary)
-    assert run(ai.search_query("HBM4 yield")) == "HBM4 yield"
-    assert calls == []
-    assert run(ai.search_query("英伟达 HBM4 良率")) == "Nvidia HBM4 yield"
-    run(ai.search_query("英伟达 HBM4 良率"))
-    assert len(calls) == 1
-
-
-def test_digest_maps_item_ids_to_ts_and_caches(tmp_path):
-    calls = []
-
-    async def llm(prompt):
-        calls.append(prompt)
-        return json.dumps({"summary": "两人在聊良率", "items": [{"id": 1, "text": "Ray 周五给数据"}, {"id": 9, "text": "越界"}, "bad"],
-                           "todo_for_me": "回复 Dylan"})
-
-    ai = SlackAI(tmp_path, llm, json.loads, no_glossary)
-    msgs = [{"ts": "1.1", "user_name": "Dylan", "text": "yields?"}, {"ts": "2.2", "user_name": "Ray", "text": "Friday"}]
-    out = run(ai.digest("k1", "#memory", msgs))
-    assert out["items"] == [{"text": "Ray 周五给数据", "ts": "2.2"}, {"text": "越界", "ts": None}]
-    assert out["todo_for_me"] == "回复 Dylan" and "#memory" in calls[0]
-    run(ai.digest("k1", "#memory", msgs))
-    assert len(calls) == 1

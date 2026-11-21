@@ -41,14 +41,6 @@ class SlackProcessResponse(SlackModelResponse):
     suggested_replies: list[SlackReplyVariant] = Field(default_factory=list)
 
 
-class SlackSyncRequest(SlackModelRequest):
-    chinese_reply: str = Field(..., max_length=50000)
-
-
-class SlackSyncResponse(SlackModelResponse):
-    english_reply: str
-
-
 class SlackComposeRequest(SlackModelRequest):
     content: str = Field(..., max_length=50000)
     conversation_history: list[ConversationMessage] = Field(default_factory=list, max_length=100)
@@ -69,19 +61,6 @@ class SlackRefineRequest(SlackModelRequest):
 class SlackRefineResponse(SlackModelResponse):
     """Response from refine endpoint"""
     refined_result: str
-
-
-class SlackOptimizeRequest(SlackModelRequest):
-    content: str = Field(..., max_length=50000)
-    target_language: str = Field(..., pattern="^(en|cn)$")
-    context_type: str = Field(..., pattern="^(translation|grammar|tone|formality)$")
-    original_text: Optional[str] = Field(None, max_length=50000)
-
-
-class SlackOptimizeResponse(SlackModelResponse):
-    optimized_text: str
-    improvements: list[str]
-    confidence: float
 
 
 VERSION_ORDER = ("A", "B", "C")

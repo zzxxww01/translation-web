@@ -1,17 +1,20 @@
 import { PageHeader } from '@/components/layout/PageHeader';
-import { CheckSquare, Languages, Mail, Clock } from 'lucide-react';
+import { CheckSquare, Languages, Mail, Clock, MessagesSquare } from 'lucide-react';
 import { useToolsStore } from '@/shared/stores';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { TimezoneConverter } from './components/TimezoneConverter';
 import { TextTranslator } from './components/TextTranslator';
 import { EmailReplyGenerator } from './components/EmailReplyGenerator';
 import { TaskManager } from './components/TaskManager';
+import { ReplyWorkbench } from '@/features/slack/ReplyWorkbench';
 
 const tabs = [
   { id: 'timezone', label: '时区转换', icon: <Clock className="h-4 w-4" /> },
   { id: 'translator', label: '文本翻译', icon: <Languages className="h-4 w-4" /> },
   { id: 'email', label: '邮件回复', icon: <Mail className="h-4 w-4" /> },
   { id: 'tasks', label: '任务管理', icon: <CheckSquare className="h-4 w-4" /> },
+  // 原来在 Slack 页里的「回复工作台」，2026-11-22 搬到这里
+  { id: 'slack-reply', label: '旧版工作台', icon: <MessagesSquare className="h-4 w-4" /> },
 ] as const;
 
 export function ToolsFeature() {
@@ -49,6 +52,9 @@ export function ToolsFeature() {
           </TabsContent>
           <TabsContent value="tasks">
             <TaskManager />
+          </TabsContent>
+          <TabsContent value="slack-reply">
+            <ReplyWorkbench embedded />
           </TabsContent>
         </Tabs>
       </div>

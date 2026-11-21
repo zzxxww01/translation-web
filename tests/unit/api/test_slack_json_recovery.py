@@ -9,10 +9,9 @@ from unittest.mock import AsyncMock
 import pytest
 from src.prompts.contracts import PromptContractError
 
-from src.api.routers import slack_compose, slack_process, slack_sync_optimize
+from src.api.routers import slack_compose, slack_process
 from src.api.routers.slack_models import (
     SlackComposeRequest,
-    SlackOptimizeRequest,
     SlackProcessRequest,
 )
 from src.api.utils.json_utils import (
@@ -119,21 +118,3 @@ async def test_slack_compose_fails_loudly_on_unusable_response(monkeypatch):
         await slack_compose.compose_slack_message.__wrapped__(None, SlackComposeRequest(content="今晚发给你"))  # type: ignore[attr-defined]
 
     assert getattr(excinfo.value, "error_code", None) == "LLM_EMPTY_RESPONSE"
-
-
-@pytest.mark.asyncio
-async def test_slack_optimize_does_not_pass_original_text_as_result(monkeypatch):
-    monkeypatch.setattr(slack_sync_optimize.prompt_manager, "get", lambda *_a, **_k: "rendered")
-    monkeypatch.setattr(
-        slack_sync_optimize, "generate_with_fallback_budget", AsyncMock(return_value="not json")
-    )
-
-    with pytest.raises(Exception) as excinfo:
-        await slack_sync_optimize.optimize_text(
-            SlackOptimizeRequest(
-                content="Original text", target_language="en", context_type="tone"
-            )
-        )
-
-    assert getattr(excinfo.value, "error_code", None) == "LLM_EMPTY_RESPONSE"
-    assert "Original text" not in str(excinfo.value)

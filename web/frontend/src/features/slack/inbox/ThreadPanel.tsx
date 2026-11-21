@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ExternalLink, Loader2, Sparkles, X } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { CheckCircle2, ExternalLink, FileText, Languages, Loader2, RefreshCw, Sparkles, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { SlackAgentPanel } from '../agent/SlackAgentPanel';
-import { useMessageZh, useShowZh, useThreadSummary } from './ai';
+import { draftKeys, draftsApi } from '@/features/post/drafts';
+import { useThreadSummary, useThreadZh } from './ai';
 import { MessageItem } from './MessageItem';
-import { ZhToggle } from './ZhToggle';
 import { useMarkThreadRead, usePageVisible, useSlackReplies } from './hooks';
 import { buildStream, emojify, newestTs, stripLeadingMentions } from './lib';
 import { stripMrkdwn } from './mrkdwn';
@@ -16,41 +16,47 @@ interface ThreadPanelProps {
   threadTs: string;
   onClose: () => void;
   onOpenChannel: () => void;
-  /** 打开就生成中文摘要（「动态」页）；否则点按钮才生成 */
-  autoSummary?: boolean;
-  /** 宽屏：帖子翻译助手放在页面右栏，这里不再有「AI 翻译」标签页 */
-  aiInSidebar?: boolean;
+  /** 进入翻译模式（三栏：原文 + 配图 | 译文 / 优化 / 标题 | 原 thread） */
+  onTranslatePost: () => void;
 }
 
-/** 右栏 thread：根消息 + 全部回复；看到就记为已读（只记在 momo 本地）。 */
-export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel, autoSummary = false, aiInSidebar = false }: ThreadPanelProps) {
-  // 默认先看消息；切到「AI 翻译」才加载 AI（点「开始」才真正启动）
-  const [tab, setTab] = useState<'ai' | 'messages'>('messages');
-  const [aiOpened, setAiOpened] = useState(false);
-  const openTab = (id: 'ai' | 'messages') => {
-    setTab(id);
-    if (id === 'ai') setAiOpened(true);
-  };
+// 回复数达到这个才在打开时自动总结；少于它的点按钮才总结（2026-11-22 用户定）
+const AUTO_SUMMARY_MIN_REPLIES = 3;
+
+/** 中栏的 thread：顶部一排操作（翻译这个帖子 / 翻译全部 / 总结），下面是「在聊什么」和完整对话。 */
+export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel, onTranslatePost }: ThreadPanelProps) {
   const replies = useSlackReplies(channelId, threadTs);
   const markThread = useMarkThreadRead();
   const pageVisible = usePageVisible();
+  const draft = useQuery({
+    queryKey: draftKeys.slack(channelId, threadTs),
+    queryFn: () => draftsApi.slack(channelId, threadTs),
+    select: data => data.draft,
+    staleTime: 15_000,
+  });
 
   // 「新回复」线停在第一次加载时的已读位置
   const [lastReadAtOpen, setLastReadAtOpen] = useState<string | null | undefined>(undefined);
   const data = replies.data;
   if (data && lastReadAtOpen === undefined) setLastReadAtOpen(data.last_read);
 
-  const root = data?.messages[0];
-  const rest = useMemo(() => data?.messages.slice(1) ?? [], [data]);
+  const messages = useMemo(() => data?.messages ?? [], [data]);
+  const root = messages[0];
+  const rest = useMemo(() => messages.slice(1), [messages]);
   const stream = useMemo(() => buildStream(rest, lastReadAtOpen ?? null), [rest, lastReadAtOpen]);
+  const newest = newestTs(messages);
+  const rootText = root?.text ?? '';
 
-  const newest = newestTs(data?.messages ?? []);
-  const showZh = useShowZh(state => state.showZh);
-  const zh = useMessageZh(data?.messages ?? [], showZh && tab === 'messages');
-  // 摘要：「动态」页打开就生成，其余点了才生成（后端按最新回复缓存，同一版本的 thread 只花一次）
-  // 还没人回复的新帖不自动总结：只有一条消息，要看懂直接点「全部中文」或用 AI 翻译
-  const [wantSummary, setWantSummary] = useState(autoSummary);
-  const summary = useThreadSummary(channelId, threadTs, newest, wantSummary && rest.length > 0);
+  // 翻译全部：只对这个 thread、不记住；根帖作为背景
+  const [translateAll, setTranslateAll] = useState(false);
+  const zh = useThreadZh(messages, translateAll, rootText);
+
+  // 摘要：回复 ≥ 3 条打开就总结一次；之后来了新回复只提示，点了才按最新内容重算
+  const [summaryTs, setSummaryTs] = useState<string | null>(null);
+  if (data && summaryTs === null && rest.length >= AUTO_SUMMARY_MIN_REPLIES && newest) setSummaryTs(newest);
+  const summary = useThreadSummary(channelId, threadTs, summaryTs, !!summaryTs);
+  const newSinceSummary = summaryTs ? messages.filter(m => parseFloat(m.ts) > parseFloat(summaryTs)).length : 0;
+
   const { mutate: mark } = markThread;
   const markedTs = useRef<string | null>(null);
   useEffect(() => {
@@ -61,29 +67,37 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
     mark({ channelId, threadTs, ts: newest });
   }, [pageVisible, newest, data, channelId, threadTs, mark]);
 
+  const title = root
+    ? emojify(stripMrkdwn(stripLeadingMentions((root.text || '').split('\n').map(line => line.trim()).find(Boolean) || 'Thread')))
+    : 'Thread';
+  const d = draft.data;
+  const noPost = d?.extraction?.has_post === false;
+  const draftLabel = !d
+    ? '翻译这个帖子'
+    : noPost
+      ? '没有要翻的帖子 · 查看'
+      : d.status === 'done'
+        ? `已完成 · v${d.state.versions.length}`
+        : d.auto && !d.seen
+          ? '自动翻好了 · 去看看'
+          : `继续翻译 · v${d.state.versions.length}`;
+
   return (
     <>
-      <div className="flex items-center gap-2 border-b border-border-subtle px-4 py-2.5">
+      <div className="flex items-start gap-2 border-b border-border-subtle bg-white/70 px-5 pb-3 pt-3">
         <div className="min-w-0 flex-1">
-          <div className="truncate text-[15px] font-bold text-text-primary" title={root?.text}>
-            {root ? emojify(stripMrkdwn(stripLeadingMentions((root.text || '').split('\n').map(line => line.trim()).find(Boolean) || 'Thread'))) : 'Thread'}
-          </div>
-          <div className="truncate text-xs text-text-muted">
+          <h2 className="truncate text-[16px] font-semibold text-text-primary" title={root?.text}>{title}</h2>
+          <div className="mt-0.5 truncate text-xs text-text-muted">
             {root ? `${root.user_name} 发起 · ` : ''}
             <button type="button" onClick={onOpenChannel} className="hover:text-primary-700 hover:underline" title="在整个频道里看">
               {channelName}
             </button>
+            {rest.length ? ` · ${rest.length} 条回复` : ' · 还没人回复'}
           </div>
         </div>
         {root && (
-          <a
-            href={root.permalink}
-            target="_blank"
-            rel="noreferrer noopener"
-            className="rounded-md p-1.5 text-text-muted hover:bg-bg-hover hover:text-text-primary"
-            title="在 Slack 里打开"
-            aria-label="在 Slack 里打开"
-          >
+          <a href={root.permalink} target="_blank" rel="noreferrer noopener"
+            className="rounded-md p-1.5 text-text-muted hover:bg-bg-hover hover:text-text-primary" title="在 Slack 里打开" aria-label="在 Slack 里打开">
             <ExternalLink className="h-4 w-4" />
           </a>
         )}
@@ -91,39 +105,49 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
           <X className="h-4 w-4" />
         </button>
       </div>
-      <div className="flex shrink-0 gap-1 border-b border-border-subtle px-3" role="tablist" aria-label="thread 视图">
-        {(aiInSidebar
-          ? [['messages', `消息${rest.length ? ` · ${rest.length + 1}` : ''}`]] as const
-          : [['messages', `消息${rest.length ? ` · ${rest.length + 1}` : ''}`], ['ai', 'AI 翻译']] as const
-        ).map(([id, label]) => (
-          <button
-            key={id}
-            type="button"
-            role="tab"
-            aria-selected={tab === id}
-            onClick={() => openTab(id)}
-            className={cn(
-              'relative inline-flex items-center gap-1 px-2.5 py-2 text-[13px] after:absolute after:inset-x-2 after:-bottom-px after:h-0.5 after:rounded-full',
-              tab === id ? 'font-medium text-text-primary after:bg-primary-500' : 'text-text-muted hover:text-text-primary'
-            )}
-          >
-            {id === 'ai' && <Sparkles className="h-3.5 w-3.5 text-primary-500" />}
-            {label}
-          </button>
-        ))}
-        {tab === 'messages' && <div className="ml-auto flex items-center"><ZhToggle loading={zh.loading} failed={zh.failed} /></div>}
+
+      {/* 操作条：主操作「翻译这个帖子」最醒目，另外两个是读懂 thread 用的 */}
+      <div className="flex flex-wrap items-center gap-2 border-b border-border-subtle px-5 py-2.5">
+        <button
+          type="button"
+          onClick={onTranslatePost}
+          className={cn(
+            'inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm font-medium shadow-sm transition-colors',
+            d?.status === 'done'
+              ? 'border border-success/30 bg-success/10 text-success hover:bg-success/15'
+              : 'bg-primary-500 text-white hover:bg-primary-600'
+          )}
+        >
+          {d?.status === 'done' ? <CheckCircle2 className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
+          {draftLabel}
+        </button>
+        <button
+          type="button"
+          onClick={() => setTranslateAll(v => !v)}
+          disabled={!messages.length}
+          className={cn(
+            'inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-sm transition-colors',
+            translateAll ? 'border-primary-200 bg-primary-50 text-primary-700' : 'border-border-subtle bg-white text-text-secondary hover:bg-bg-hover'
+          )}
+          title={translateAll ? '收起中文，只看原文' : '把这个 thread 的所有消息翻成中文（只对这个 thread 有效）'}
+        >
+          {zh.loading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Languages className="h-4 w-4" />}
+          {translateAll ? (zh.loading ? '翻译中…' : '收起中文') : '翻译全部'}
+        </button>
+        <button
+          type="button"
+          onClick={() => setSummaryTs(newest)}
+          disabled={!newest || summary.isFetching}
+          className="inline-flex items-center gap-1.5 rounded-lg border border-border-subtle bg-white px-3 py-1.5 text-sm text-text-secondary transition-colors hover:bg-bg-hover disabled:opacity-60"
+          title="用中文总结这个 thread 在聊什么"
+        >
+          {summary.isFetching ? <Loader2 className="h-4 w-4 animate-spin" /> : summaryTs ? <RefreshCw className="h-4 w-4" /> : <Sparkles className="h-4 w-4" />}
+          {summaryTs ? '重新总结' : '总结一下'}
+        </button>
+        {zh.failed && <span className="text-xs text-error">有一部分没翻出来，稍后再点一次</span>}
       </div>
-      {/* 打开过 AI 页之后一直挂着（切回消息页也在后台跑），只是隐藏 */}
-      {aiOpened && !aiInSidebar && <div className={cn('min-h-0 flex-1', tab === 'ai' ? 'flex flex-col' : 'hidden')}>
-        <SlackAgentPanel
-          key={`${channelId}-${threadTs}`}
-          channelId={channelId}
-          threadTs={threadTs}
-          latestTs={newest}
-          slackLink={root?.permalink ?? null}
-        />
-      </div>}
-      <div className={cn('min-h-0 flex-1 overflow-auto pb-4 pt-2', tab !== 'messages' && !aiInSidebar && 'hidden')}>
+
+      <div className="min-h-0 flex-1 overflow-auto pb-6 pt-3">
         {replies.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
         {replies.isError && (
           <div className="p-4 text-sm text-error">
@@ -131,35 +155,29 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
             <button type="button" onClick={() => void replies.refetch()} className="ml-2 text-primary-700 hover:underline">重试</button>
           </div>
         )}
-        {!wantSummary && rest.length >= 3 && (
-          <div className="mx-4 mb-2">
-            <button
-              type="button"
-              onClick={() => setWantSummary(true)}
-              className="inline-flex items-center gap-1 rounded-md border border-primary-100 bg-primary-50/50 px-2 py-1 text-xs text-primary-700 hover:bg-primary-50"
-            >
-              <Sparkles className="h-3.5 w-3.5" /> 用中文总结这个 thread
-            </button>
-          </div>
-        )}
-        {summary.isError && <div className="mx-4 mb-2 text-xs text-error">总结失败：{summary.error.message}</div>}
-        {(summary.data || summary.isLoading) && (
-          <div className="mx-4 mb-2 rounded-lg border border-primary-100 bg-primary-50/50 px-3 py-2 text-[13px] leading-relaxed text-text-primary">
-            <div className="mb-0.5 flex items-center gap-1 text-xs font-semibold text-primary-700">
-              <Sparkles className="h-3.5 w-3.5" /> {summary.data?.title || '在聊什么'}
-              {summary.isLoading && <Loader2 className="h-3 w-3 animate-spin" />}
+        {summaryTs && (
+          <div className="mx-5 mb-3 rounded-xl border border-primary-100 bg-gradient-to-br from-primary-50/80 to-white px-4 py-3 text-[13px] leading-relaxed text-text-primary shadow-sm">
+            <div className="mb-1 flex items-center gap-1.5 text-xs font-semibold text-primary-700">
+              <Sparkles className="h-3.5 w-3.5" /> 在聊什么
+              {summary.isFetching && <Loader2 className="h-3 w-3 animate-spin" />}
+              {newSinceSummary > 0 && !summary.isFetching && (
+                <button type="button" onClick={() => setSummaryTs(newest)} className="ml-auto font-normal text-primary-700 hover:underline">
+                  有 {newSinceSummary} 条新回复 · 点这里更新
+                </button>
+              )}
             </div>
+            {summary.isError && <div className="text-xs text-error">总结失败：{summary.error.message}</div>}
             {summary.data?.summary && <SlackMarkdown text={summary.data.summary} />}
             {summary.data?.todo_for_me && (
-              <div className="mt-1 rounded bg-amber-50 px-2 py-1 text-amber-900">要你做：{summary.data.todo_for_me}</div>
+              <div className="mt-2 rounded-md bg-amber-50 px-2.5 py-1.5 text-amber-900">要你做：{summary.data.todo_for_me}</div>
             )}
           </div>
         )}
         {root && (
           <>
-            <MessageItem message={root} zh={showZh ? zh.zh.get(root.ts) : null} />
+            <MessageItem message={root} zh={translateAll ? zh.zh : null} />
             <div className="my-2 flex items-center gap-2 px-5 text-xs text-text-muted">
-              <span>{rest.length} 条回复</span>
+              <span>{rest.length ? `${rest.length} 条回复` : '还没人回复'}</span>
               <div className="h-px flex-1 bg-border-subtle" />
             </div>
             {stream.map(item => (
@@ -169,7 +187,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
                     <div className="h-px flex-1 bg-error/60" />新回复<div className="h-px flex-1 bg-error/60" />
                   </div>
                 )}
-                <MessageItem message={item.message} compact={item.compact} zh={showZh ? zh.zh.get(item.message.ts) : null} />
+                <MessageItem message={item.message} compact={item.compact} zh={translateAll ? zh.zh : null} context={rootText} />
               </div>
             ))}
           </>
