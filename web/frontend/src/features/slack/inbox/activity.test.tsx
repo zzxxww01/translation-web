@@ -47,7 +47,8 @@ afterEach(async () => {
   vi.unstubAllGlobals();
 });
 
-const section = (title: string) => host.querySelector<HTMLElement>(`section[aria-label="${title}"]`);
+const rows = () => Array.from(host.querySelectorAll<HTMLButtonElement>('[aria-label="Slack 动态"] > button'));
+const tab = (label: RegExp) => Array.from(host.querySelectorAll<HTMLButtonElement>('[role="tab"]')).find(b => label.test(b.textContent ?? ''))!;
 const thread = (over: Partial<SlackActivityItem>, i: number): SlackActivityItem => ({
   type: 'thread', channel_id: 'C1', channel_name: 'social-media-posts-and-media', thread_ts: `17946000${i}.000001`,
   root: message({ text: `Topic ${i}`, user_name: 'Sam H' }), reply_count: 3, participants: ['Sam H'], last: null,
@@ -56,67 +57,57 @@ const thread = (over: Partial<SlackActivityItem>, i: number): SlackActivityItem 
 const render = (props: Partial<Parameters<typeof ActivityList>[0]> = {}) => act(async () => root.render(
   <ActivityList selection={null} view={null} onOpen={vi.fn()} onSelectView={vi.fn()} {...props} />));
 
-it('groups rows into @me / DMs / new posts / my threads / others, each item once', async () => {
+it('lists everything by time with the original first line and who is talking', async () => {
+  localStorage.clear();
+  const onOpen = vi.fn();
+  await render({ onOpen });
+  const [first, dm] = rows();
+  expect(first.textContent).toContain('Elon post 🔥');           // 根消息第一行原文，不翻译
+  expect(first.textContent).not.toContain('@用户组');
+  expect(first.textContent).not.toContain('social-media-posts');  // 只有一个频道时不重复写频道名
+  expect(first.textContent).not.toContain('second line');
+  expect(first.textContent).toContain('Reyk Knuhtsen 发起 · 17 条回复 · 3 人参与');
+  expect(first.textContent).toContain('Daksh Malik：@Felix Zhou');
+  expect(first.textContent).toContain('@我');
+  expect(dm.textContent).toContain('Michelle Shen');
+  expect(dm.textContent).toContain('私信');
+  await act(async () => first.click());
+  expect(onOpen).toHaveBeenCalledWith(items[0]);
+});
+
+it('one row of filters: unread / @me / DMs / new posts / my threads, remembered', async () => {
   localStorage.clear();
   items.push(
     thread({ root: message({ text: 'Fresh post to translate', user_name: 'Doug O' }), reply_count: 0, has_unreads: true }, 10),
     thread({ root: message({ text: 'My own thread', user_name: 'felix' }), following: true }, 11),
   );
-  const onOpen = vi.fn();
-  await render({ onOpen });
-  expect(Array.from(host.querySelectorAll('section')).map(s => s.getAttribute('aria-label')))
-    .toEqual(['@我', '私信', '新帖 · 待翻译', '我参与的 thread']);  // 空的组不显示
-
-  const mention = section('@我')!;
-  expect(mention.textContent).toContain('Elon post 🔥');            // 根消息第一行原文
-  expect(mention.textContent).not.toContain('@用户组');
-  expect(mention.textContent).not.toContain('second line');
-  expect(mention.textContent).toContain('Reyk Knuhtsen 发起 · 17 条回复 · 3 人参与');
-  expect(mention.textContent).toContain('Daksh Malik：@Felix Zhou');
-  expect(mention.textContent).toContain('thread');                  // @我 组里写明类型
-  expect(mention.textContent).toContain('1 未读');
-  expect(section('私信')!.textContent).toContain('Michelle Shen');
-  expect(section('新帖 · 待翻译')!.textContent).toContain('Doug O 发帖 · 还没人回复');
-  expect(section('我参与的 thread')!.textContent).toContain('My own thread');
-
-  await act(async () => Array.from(mention.querySelectorAll('button')).find(b => b.textContent?.includes('Elon post'))!.click());
-  expect(onOpen).toHaveBeenCalledWith(items[0]);
-});
-
-it('shows 5 other threads until expanded, remembers collapsed groups, marks one group read', async () => {
-  localStorage.clear();
-  for (let i = 0; i < 7; i++) items.push(thread({ has_unreads: i < 2 }, 20 + i));
   await render();
-  const others = () => section('其他 thread')!;
-  const otherRows = () => Array.from(others().querySelectorAll('button')).filter(b => b.textContent?.includes('Topic'));
-  expect(otherRows()).toHaveLength(5);
-  const more = Array.from(others().querySelectorAll('button')).find(b => b.textContent === '展开其余 2 条')!;
-  await act(async () => more.click());
-  expect(otherRows()).toHaveLength(7);
-
-  await act(async () => Array.from(others().querySelectorAll('button')).find(b => b.textContent === '全部已读')!.click());
-  expect(markAll).toHaveBeenLastCalledWith([
-    { channel_id: 'C1', ts: '1794600020.000001', thread_ts: '1794600020.000001' },
-    { channel_id: 'C1', ts: '1794600021.000001', thread_ts: '1794600021.000001' },
-  ]);
-
-  await act(async () => others().querySelector<HTMLButtonElement>('button[aria-expanded]')!.click());
-  expect(otherRows()).toHaveLength(0);
-  expect(JSON.parse(localStorage.getItem('slack-sidebar-collapsed')!)).toEqual(['others']);
+  expect(Array.from(host.querySelectorAll('[role="tab"]')).map(t => t.textContent))
+    .toEqual(['全部', '未读 2', '@我 1', '私信', '新帖 1', '我参与的']);
+  await act(async () => tab(/^未读/).click());
+  expect(rows().map(r => r.textContent?.includes('Elon') || r.textContent?.includes('Fresh'))).toEqual([true, true]);
+  await act(async () => tab(/^私信/).click());
+  expect(rows()).toHaveLength(1);
+  await act(async () => tab(/^新帖/).click());
+  expect(rows()[0].textContent).toContain('Doug O 发帖 · 还没人回复');
+  await act(async () => tab(/^我参与的/).click());
+  expect(rows()).toHaveLength(1);
+  expect(rows()[0].textContent).toContain('My own thread');
+  expect(localStorage.getItem('slack-activity-filter')).toBe('following');
 });
 
-it('tool rows open the digest and the reply workbench', async () => {
+it('AI digest row opens the digest', async () => {
   const onSelectView = vi.fn();
   await render({ onSelectView });
-  const tool = (label: string) => Array.from(host.querySelectorAll('button')).find(b => b.textContent?.startsWith(label))!;
-  expect(tool('AI 速览').textContent).toContain('1 条未读整理成中文');
-  await act(async () => tool('AI 速览').click());
+  const digest = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.startsWith('AI 速览'))!;
+  expect(digest.textContent).toContain('把 1 处未读整理成中文要点');
+  await act(async () => digest.click());
   expect(onSelectView).toHaveBeenLastCalledWith('digest');
-  await act(async () => tool('回复工作台').click());
-  expect(onSelectView).toHaveBeenLastCalledWith('reply');
+  expect(host.textContent).not.toContain('回复工作台');  // 旧版工作台收在「⋯」里
+  expect(host.querySelector('[aria-label="更多"]')).not.toBeNull();
 });
 
-it('j / k walk the groups top to bottom, Esc goes back, typing is ignored', async () => {
+it('j / k walk the current list, Esc goes back, typing is ignored', async () => {
   localStorage.clear();
   const onOpen = vi.fn();
   const onBack = vi.fn();

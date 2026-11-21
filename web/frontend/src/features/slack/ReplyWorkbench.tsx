@@ -106,7 +106,7 @@ export function ReplyWorkbench() {
   return (
     <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-6 px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
       <PageHeader
-        title="Slack 回复助手"
+        title="旧版工作台 · Slack 回复"
         actions={
           <div className="w-56" title="生成回复用的模型">
             <ModelSelector
