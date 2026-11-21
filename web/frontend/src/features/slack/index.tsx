@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { Loader2, MessagesSquare, X } from 'lucide-react';
+import { Loader2, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { SlackAgentPanel } from './agent/SlackAgentPanel';
 import { ConversationView } from './inbox/ConversationView';
@@ -11,6 +11,7 @@ import { ThreadPanel } from './inbox/ThreadPanel';
 import { DigestView } from './inbox/DigestView';
 import { SearchView } from './inbox/SearchView';
 import { ThreadsView } from './inbox/ThreadsView';
+import { Overview } from './inbox/Overview';
 import type { OpenThread, SlackActivityItem } from './inbox/types';
 import { ReplyWorkbench } from './ReplyWorkbench';
 
@@ -117,6 +118,7 @@ export function SlackFeature() {
           onOpen={openActivity}
           onSelectView={selectView}
           onSearch={search}
+          onBack={hasMain ? back : undefined}
         />
       </aside>
 
@@ -153,21 +155,7 @@ export function SlackFeature() {
             onOpenAgent={dmAgent ? () => update({ ai: '1' }) : undefined}
           />
         ) : (
-          <div className="flex h-full items-center justify-center p-6">
-            <div className="max-w-md space-y-3 text-sm text-text-secondary">
-              <div className="flex items-center gap-2 text-text-primary">
-                <MessagesSquare className="h-5 w-5 text-primary-500" />
-                <span className="font-semibold">这里是你的 Slack 动态（只读）</span>
-              </div>
-              <ul className="list-disc space-y-1.5 pl-5">
-                <li>左边每一行是一个 <b>thread</b>（频道里某条消息下面的回复串，最近 7 天有人回复的）或一个 <b>私信</b>，最近有人说话的排最上面。</li>
-                <li>点一行只看这一个 thread：顶部自动用中文总结「大家在聊什么、要你做什么」，下面是完整对话。</li>
-                <li>「@我」只看提到你的，「私信」只看私信。英文默认显示原文，消息上点「译」翻一条，或打开「全部中文」。</li>
-                <li>thread 的「AI 翻译」页可以把要发的帖子翻成中文；私信右栏可以让 AI 建议回复。都要点「开始」才会跑。</li>
-                <li>momo 不会往 Slack 发任何东西，也不改 Slack 的已读。</li>
-              </ul>
-            </div>
-          </div>
+          <Overview onOpen={openActivity} onDigest={() => selectView('digest')} />
         )}
       </section>
 

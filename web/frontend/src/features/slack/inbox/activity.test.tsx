@@ -8,10 +8,13 @@ const items: SlackActivityItem[] = [];
 vi.mock('./hooks', () => ({
   useSlackActivity: () => ({ data: items, isLoading: false, isError: false }),
   useRefreshSlack: () => ({ mutate: vi.fn(), isPending: false }),
+  useMarkAllRead: () => ({ mutate: markAll, isPending: false }),
 }));
+const markAll = vi.fn();
 vi.mock('../agent/agentRuns', () => ({ useSlackAgentRuns: () => new Map() }));
 
 const { ActivityList } = await import('./ActivityList');
+const { Overview } = await import('./Overview');
 
 const message = (over: Partial<SlackMessage>): SlackMessage => ({
   ts: '1794963980.687079', time: '', user_id: 'U1', user_name: 'Daksh Malik', is_me: false, mentions_me: false,
@@ -102,4 +105,43 @@ it('lists new posts without replies, filters unread and links the other views', 
     await act(async () => link(label).click());
     expect(onSelectView).toHaveBeenLastCalledWith(view);
   }
+});
+
+it('j / k open the next and previous row, Esc goes back, and mark-all is one click', async () => {
+  const onOpen = vi.fn();
+  const onBack = vi.fn();
+  const render = (selection: { channelId: string; threadTs: string | null } | null) => root.render(
+    <ActivityList status={status} selection={selection} view={null} onOpen={onOpen} onSelectView={vi.fn()} onSearch={vi.fn()} onBack={onBack} />);
+  await act(async () => render(null));
+  const press = (key: string) => window.dispatchEvent(new KeyboardEvent('keydown', { key }));
+  await act(async () => press('j'));
+  expect(onOpen).toHaveBeenLastCalledWith(items[0]);
+  await act(async () => render({ channelId: 'C1', threadTs: '1794610284.466519' }));
+  await act(async () => press('j'));
+  expect(onOpen).toHaveBeenLastCalledWith(items[1]);
+  await act(async () => render({ channelId: 'D1', threadTs: null }));
+  await act(async () => press('k'));
+  expect(onOpen).toHaveBeenLastCalledWith(items[0]);
+  await act(async () => press('Escape'));
+  expect(onBack).toHaveBeenCalled();
+
+  // 在搜索框里打字时不触发
+  const input = host.querySelector<HTMLInputElement>('input[name="q"]')!;
+  const calls = onOpen.mock.calls.length;
+  await act(async () => input.dispatchEvent(new KeyboardEvent('keydown', { key: 'j', bubbles: true })));
+  expect(onOpen.mock.calls.length).toBe(calls);
+
+  await act(async () => host.querySelector<HTMLButtonElement>('[aria-label="全部标为已读"]')!.click());
+  expect(markAll).toHaveBeenCalled();
+});
+
+it('overview counts unread / @me and lists what to read first', async () => {
+  const onOpen = vi.fn();
+  await act(async () => root.render(<Overview onOpen={onOpen} onDigest={vi.fn()} />));
+  expect(host.textContent).toContain('未读1');
+  expect(host.textContent).toContain('@我1');
+  const first = host.querySelector<HTMLButtonElement>('ul button')!;
+  expect(first.textContent).toContain('Elon post');
+  await act(async () => first.click());
+  expect(onOpen).toHaveBeenCalledWith(items[0]);
 });
