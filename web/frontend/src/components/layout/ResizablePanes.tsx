@@ -165,8 +165,8 @@ export function ResizablePanes({ panes, storageKey, className, mobileDefault }: 
               className="flex min-w-0 flex-col bg-white/40"
               style={isFlex ? { flex: '1 1 0%', minWidth: p.minWidth ?? DEFAULT_MIN } : { width: width ?? 360, flex: 'none' }}
             >
-              <header className="flex h-11 shrink-0 items-center gap-2 border-b border-border-subtle bg-white/80 px-4">
-                <h2 className="truncate text-[13px] font-semibold text-text-primary">{p.title}</h2>
+              <header className="flex h-9 shrink-0 items-center gap-2 border-b border-border-subtle bg-white/60 px-3">
+                <h2 className="truncate text-xs font-medium tracking-wide text-text-secondary" style={{ fontFamily: 'var(--font-sans, inherit)' }}>{p.title}</h2>
                 {p.meta && <span className="truncate text-xs text-text-muted">{p.meta}</span>}
                 <div className="ml-auto flex shrink-0 items-center gap-1">
                   {p.actions}

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { CheckCheck, ClipboardList, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Avatar } from './MessageItem';
-import { useMarkAllRead, useSlackActivity } from './hooks';
+import { useMarkAllRead, useSlackActivity, useTodos } from './hooks';
 import { clockTime, emojify, stripLeadingMentions } from './lib';
 import { stripMrkdwn } from './mrkdwn';
 import type { SlackActivityItem, SlackMessage } from './types';
@@ -77,6 +77,7 @@ function shortTime(ts: string, now = new Date()): string {
 export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBack }: ActivityListProps) {
   const activity = useSlackActivity(true);
   const markAll = useMarkAllRead();
+  const todos = useTodos(true);
   const [filter, setFilterState] = useState<Filter>(loadFilter);
   const setFilter = (f: Filter) => {
     setFilterState(f);
@@ -88,8 +89,8 @@ export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBa
   const items = all.filter(current.match);
   const unreadIn = (f: (typeof FILTERS)[number]) => all.filter(i => f.match(i) && i.has_unreads).length;
   const unreadTotal = all.filter(i => i.has_unreads).length;
-  // 待办数：未读的 @我 和私信（和中间「我的待办」同一口径）
-  const todoCount = all.filter(i => i.has_unreads && (i.mentions_me || i.type === 'dm')).length;
+  // 待办数直接用「我的待办」的结果，两边口径一致
+  const todoCount = todos.data?.items.length ?? 0;
   // 只有一个频道时每行都写同一个频道名没意义
   const manyChannels = new Set(all.filter(i => i.type === 'thread').map(i => i.channel_id)).size > 1;
 
@@ -119,7 +120,7 @@ export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBa
   return (
     <>
       <div className="flex items-center gap-1 border-b border-border-subtle px-2 py-2">
-        <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto" role="tablist" aria-label="筛选">
+        <div className="flex min-w-0 flex-1 items-center gap-0.5 overflow-x-auto" role="tablist" aria-label="筛选">
           {FILTERS.map(f => {
             const n = f.id === 'all' ? 0 : unreadIn(f);
             return (
@@ -131,7 +132,7 @@ export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBa
                 title={f.hint}
                 onClick={() => setFilter(f.id)}
                 className={cn(
-                  'shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-xs transition-colors',
+                  'shrink-0 whitespace-nowrap rounded-full px-2 py-1 text-xs transition-colors',
                   filter === f.id ? 'bg-primary-500 font-medium text-white shadow-sm' : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'
                 )}
               >
@@ -148,8 +149,9 @@ export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBa
             todosActive ? 'bg-primary-50 font-medium text-primary-700' : 'text-text-secondary hover:bg-bg-hover'
           )}
           title="我的待办：还没读的 @我 和私信"
+          aria-label="我的待办"
         >
-          <ClipboardList className="h-3.5 w-3.5" /> 待办{todoCount > 0 && <span className="rounded-full bg-error px-1.5 text-[10px] font-semibold leading-4 text-white">{todoCount}</span>}
+          <ClipboardList className="h-4 w-4" />{todoCount > 0 && <span className="rounded-full bg-error px-1.5 text-[10px] font-semibold leading-4 text-white">{todoCount}</span>}
         </button>
       </div>
 
@@ -194,12 +196,10 @@ export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBa
   );
 }
 
-/** 翻译稿状态：草稿 / 已完成 / 自动翻好（没要翻的帖子不显示） */
-function DraftBadge({ draft }: { draft: SlackActivityItem['draft'] }) {
-  if (!draft || draft.no_post) return null;
-  if (draft.status === 'done') return <span className="shrink-0 rounded bg-success/10 px-1 text-[10px] font-medium leading-4 text-success">✓ 已翻</span>;
-  if (draft.auto && !draft.seen) return <span className="shrink-0 rounded bg-primary-500 px-1 text-[10px] font-medium leading-4 text-white">自动翻好</span>;
-  return <span className="shrink-0 rounded bg-amber-100 px-1 text-[10px] font-medium leading-4 text-amber-800">草稿 v{draft.versions}</span>;
+/** 翻译稿状态写在第二行末尾的小字里；后台自动翻好、还没看过的整行底色稍深一点（2026-11-22 用户：不要彩色标签） */
+function draftNote(draft: SlackActivityItem['draft']): string {
+  if (!draft || draft.no_post) return '';
+  return draft.status === 'done' ? ' · 已翻译' : ' · 翻译草稿';
 }
 
 function Row({ item, active, manyChannels, onOpen }: {
@@ -212,13 +212,18 @@ function Row({ item, active, manyChannels, onOpen }: {
   const who = isThread ? item.root?.user_name ?? '' : item.channel_name;
   // 列表里各种类型混在一起：私信 / 新帖用小字写明，普通 thread 不写（第二行已经说明了）
   const tag = !isThread ? (item.kind === 'mpim' ? '群聊' : '私信') : isPost(item) ? '新帖' : null;
+  const autoNew = !!item.draft && item.draft.auto && !item.draft.seen && !item.draft.no_post;
   const channel = isThread && manyChannels ? `#${item.channel_name} · ` : '';
   return (
     <button
       type="button"
       onClick={() => onOpen(item)}
       aria-current={active || undefined}
-      className={cn('block w-full border-b border-border-subtle px-3 py-2 text-left transition-colors', active ? 'bg-primary-50' : 'hover:bg-bg-hover')}
+      className={cn(
+        'block w-full border-b border-border-subtle px-3 py-2 text-left transition-colors',
+        active ? 'bg-primary-50' : autoNew ? 'bg-primary-50/40 hover:bg-primary-50/70' : 'hover:bg-bg-hover'
+      )}
+      title={autoNew ? '这个帖子已经在后台自动翻好了' : undefined}
     >
       <div className="flex items-start gap-2.5">
         <Avatar name={who || '?'} />
@@ -228,17 +233,17 @@ function Row({ item, active, manyChannels, onOpen }: {
             <span className={cn('min-w-0 flex-1 truncate text-[14px] text-text-primary', item.has_unreads && 'font-semibold')}>
               {isThread ? firstLine(item.root, 80, true) : item.channel_name}
             </span>
-            {item.mentions_me && <span className="shrink-0 rounded-full bg-error px-1.5 text-[10px] font-semibold leading-4 text-white">@我</span>}
-            {tag && <span className="shrink-0 rounded bg-bg-hover px-1 text-[10px] leading-4 text-text-secondary">{tag}</span>}
+            {item.mentions_me && <span className="shrink-0 text-[11px] font-semibold text-error">@我</span>}
+            {tag && <span className="shrink-0 text-[11px] text-text-muted">{tag}</span>}
             <span className="shrink-0 text-[11px] text-text-muted">{shortTime(item.latest_ts)}</span>
           </div>
           {isThread && (
             <div className="mt-0.5 flex items-center gap-1.5">
               <span className="min-w-0 flex-1 truncate text-xs text-text-muted">
                 {`${channel}${who}${item.reply_count ? ` 发起 · ${item.reply_count} 条回复` : ' 发帖 · 还没人回复'}`
-                  + (item.participants && item.participants.length > 1 ? ` · ${item.participants.length} 人参与` : '')}
+                  + (item.participants && item.participants.length > 1 ? ` · ${item.participants.length} 人参与` : '')
+                  + draftNote(item.draft)}
               </span>
-              <DraftBadge draft={item.draft} />
             </div>
           )}
           {(item.last || !isThread) && (

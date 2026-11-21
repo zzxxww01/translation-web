@@ -78,9 +78,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
       ? '没有要翻的帖子 · 查看'
       : d.status === 'done'
         ? `已完成 · v${d.state.versions.length}`
-        : d.auto && !d.seen
-          ? '自动翻好了 · 去看看'
-          : `继续翻译 · v${d.state.versions.length}`;
+        : `查看翻译 · v${d.state.versions.length}`;
 
   return (
     <>
