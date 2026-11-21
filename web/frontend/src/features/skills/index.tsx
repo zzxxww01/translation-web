@@ -13,7 +13,6 @@ import { NewRunForm } from './components/NewRunForm';
 import { RunList } from './components/RunList';
 import { RunPanel } from './components/RunPanel';
 import { RuntimeUpdatesPanel } from './components/RuntimeUpdatesPanel';
-import './styles.css';
 
 function Spinner() {
   return (

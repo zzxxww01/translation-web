@@ -7,6 +7,8 @@ import { MessageItem } from './MessageItem';
 import { ZhToggle } from './ZhToggle';
 import { useMarkThreadRead, usePageVisible, useSlackReplies } from './hooks';
 import { buildStream, emojify, newestTs, stripLeadingMentions } from './lib';
+import { stripMrkdwn } from './mrkdwn';
+import { SlackMarkdown } from './SlackText';
 
 interface ThreadPanelProps {
   channelId: string;
@@ -61,7 +63,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
       <div className="flex items-center gap-2 border-b border-border-subtle px-4 py-2.5">
         <div className="min-w-0 flex-1">
           <div className="truncate text-[15px] font-bold text-text-primary" title={root?.text}>
-            {root ? emojify(stripLeadingMentions((root.text || '').split('\n').map(line => line.trim()).find(Boolean) || 'Thread')) : 'Thread'}
+            {root ? emojify(stripMrkdwn(stripLeadingMentions((root.text || '').split('\n').map(line => line.trim()).find(Boolean) || 'Thread'))) : 'Thread'}
           </div>
           <div className="truncate text-xs text-text-muted">
             {root ? `${root.user_name} 发起 · ` : ''}
@@ -141,7 +143,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
               <Sparkles className="h-3.5 w-3.5" /> {summary.data?.title || '在聊什么'}
               {summary.isLoading && <Loader2 className="h-3 w-3 animate-spin" />}
             </div>
-            {summary.data?.summary}
+            {summary.data?.summary && <SlackMarkdown text={summary.data.summary} />}
             {summary.data?.todo_for_me && (
               <div className="mt-1 rounded bg-amber-50 px-2 py-1 text-amber-900">要你做：{summary.data.todo_for_me}</div>
             )}

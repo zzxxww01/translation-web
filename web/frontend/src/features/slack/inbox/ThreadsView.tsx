@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { Avatar } from './MessageItem';
 import { useSlackThreads } from './hooks';
 import { clockTime, dayLabel, emojify, threadTitle } from './lib';
+import { stripMrkdwn } from './mrkdwn';
 import type { SlackConversation } from './types';
 import type { OpenThread } from './Sidebar';
 
@@ -58,7 +59,7 @@ export function ThreadsView({ conversations, openThread, onOpenThread, onBack }:
                 <div className="min-w-0 flex-1">
                   <div className="text-sm font-bold text-text-primary">{t.root.user_name}</div>
                   {/* 卡片整体是按钮，里面不能再放链接，所以用纯文本 */}
-                  <div className="line-clamp-3 whitespace-pre-wrap text-sm text-text-primary">{emojify(t.root.text)}</div>
+                  <div className="line-clamp-3 whitespace-pre-wrap text-sm text-text-primary">{emojify(stripMrkdwn(t.root.text))}</div>
                 </div>
               </div>
               {shownReplies.length > 0 && (
@@ -67,7 +68,7 @@ export function ThreadsView({ conversations, openThread, onOpenThread, onBack }:
                     <div key={r.ts} className={cn('text-[13px]', r.mentions_me && 'rounded bg-amber-50')}>
                       <span className="font-semibold text-text-primary">{r.user_name}</span>
                       <span className="ml-1.5 text-text-muted">{clockTime(r.ts)}</span>
-                      <div className="line-clamp-2 text-text-secondary">{emojify(r.text)}</div>
+                      <div className="line-clamp-2 text-text-secondary">{emojify(stripMrkdwn(r.text))}</div>
                     </div>
                   ))}
                 </div>

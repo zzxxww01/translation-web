@@ -2,6 +2,7 @@ import { useState, type ReactNode } from 'react';
 import { Check, Copy, ExternalLink } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
+import { SlackMarkdown } from '../inbox/SlackText';
 import type { SlackAgentResult } from './result';
 
 function CopyButton({ text, label = '复制', onCopied, className }: {
@@ -84,7 +85,7 @@ export function ResultCards({ result, slackLink }: { result: SlackAgentResult; s
     <div className="space-y-2">
       {result.understanding && (
         <Card title={result.pending === false ? '最近在聊' : '对方要什么'}>
-          <div className="whitespace-pre-wrap text-sm leading-relaxed text-text-primary">{result.understanding}</div>
+          <SlackMarkdown text={result.understanding} className="text-sm leading-relaxed text-text-primary" />
         </Card>
       )}
       {result.pending === false && (!result.replies || result.replies.length === 0) && (

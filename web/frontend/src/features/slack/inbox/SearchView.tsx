@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Hash, Loader2, Lock, MessageCircle, Search, Us
 import { Button } from '@/components/ui/Button';
 import { slackInboxApi } from './api';
 import { clockTime, dayLabel, emojify } from './lib';
+import { stripMrkdwn } from './mrkdwn';
 import type { SlackSearchResult } from './types';
 
 interface SearchViewProps {
@@ -89,7 +90,7 @@ export function SearchView({ query, onSearch, onOpen, onBack }: SearchViewProps)
               <span className="ml-auto shrink-0">{dayLabel(r.message.ts)} {clockTime(r.message.ts)}</span>
               {!r.visible && <ExternalLink className="h-3.5 w-3.5 shrink-0" aria-label="在 Slack 里打开" />}
             </div>
-            <div className="mt-0.5 line-clamp-3 whitespace-pre-wrap text-sm text-text-primary">{emojify(r.message.text)}</div>
+            <div className="mt-0.5 line-clamp-3 whitespace-pre-wrap text-sm text-text-primary">{emojify(stripMrkdwn(r.message.text))}</div>
           </button>
         ))}
       </div>
