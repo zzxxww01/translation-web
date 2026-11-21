@@ -136,7 +136,8 @@ class ConfigLoader:
         self._config = LLMConfig(
             providers=providers,
             fallback_rules=raw_config['fallback_rules'],
-            task_defaults=raw_config['task_defaults']
+            task_defaults=raw_config['task_defaults'],
+            task_fallbacks=raw_config.get('task_fallbacks') or {}
         )
 
         logger.info(f"成功加载 {len(providers)} 个 Provider 配置")

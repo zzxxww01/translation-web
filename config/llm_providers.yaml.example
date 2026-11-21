@@ -213,6 +213,16 @@ providers:
       config:
         max_tokens: 32768
         timeout: 120
+    - alias: gpt-6.2-sol
+      real_model: gpt-6.2-sol
+      name: GPT-6.2 Sol（OpenAI 官方）
+      description: 官方 OpenAI；帖子翻译的默认模型（失败时退回 gemini-flash，见 task_fallbacks）
+      priority: 1
+      supports_thinking: true
+      fallback: false
+      config:
+        max_tokens: 32768
+        timeout: 120
     retry_config:
       max_retries: 1
       base_delay: 0.5
@@ -236,7 +246,8 @@ task_defaults:
   # 2026-10-24 盲评：3.8-flash 4.35 分，argon 4.65，2.5-flash 3.26。长文与帖子翻译用 3.8-flash
   # （中转优先，中转不可用时落到官方 gemini-flash-fallback，同为 3.8-flash）。
   longform: gemini-flash
-  post: gemini-flash
+  # 2026-11-21 用户要求：帖子翻译默认走官方 GPT-6.2 Sol（试翻 3~4 秒/条，质量与 6.1 Sol 相当）
+  post: gpt-6.2-sol
   post_optimize: gemini-official-argon
   analysis: deepseek-v3
   # 标题与话题标签：经生产路径盲评，argon 与 3.1 Pro 打平（标题 3.81 vs 3.85，话题标签 3.92 vs 3.75），
@@ -245,3 +256,7 @@ task_defaults:
   metadata: deepseek-v3
   # Slack 页的所有模型调用走官方 GPT Sol（与 llm_providers.yaml 保持一致）
   slack: gpt-6.1-sol
+# 任务用默认模型时的整体兜底：主模型（含它自己的故障转移）全部失败后，再用这里的模型重来一次。
+# 用户显式选择模型时不生效。OpenAI 官方组不跨品牌降级，帖子翻译靠这里退回 Gemini。
+task_fallbacks:
+  post: gemini-flash

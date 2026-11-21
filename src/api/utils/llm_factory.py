@@ -12,7 +12,7 @@ import logging
 from functools import lru_cache
 
 from ...llm.base import LLMProvider
-from ...llm.factory import create_llm_provider, get_task_model_alias
+from ...llm.factory import create_llm_provider, get_task_fallback_alias, get_task_model_alias
 from ...llm.provider_adapter import get_provider_adapter
 from .concurrency import run_llm_blocking
 
@@ -61,6 +61,8 @@ def generate_with_fallback(
     target_model = model or get_task_model_alias(task_type)
     if not target_model:
         raise ValueError(f"No model alias could be resolved for task_type={task_type!r}")
+    # 只有走任务默认模型时才整体兜底；用户显式选的模型失败就如实报错。
+    fallback_model = None if model else get_task_fallback_alias(task_type)
 
     try:
         adapter = get_provider_adapter(target_model)
@@ -71,7 +73,21 @@ def generate_with_fallback(
         )
     except Exception as e:
         logger.warning(f"[LLM Factory] Adapter routing failed for model={target_model}: {e}")
-        raise
+        if not fallback_model or fallback_model == target_model:
+            raise
+
+    logger.warning(
+        f"[LLM Factory] task={task_type} falling back from {target_model} to {fallback_model}"
+    )
+    result = get_provider_adapter(fallback_model).generate_with_fallback(
+        prompt=prompt,
+        timeout=timeout,
+        **kwargs,
+    )
+    result_metadata = kwargs.get("result_metadata")
+    if isinstance(result_metadata, dict):
+        result_metadata["fallback_used"] = True
+    return result
 
 
 async def generate_with_fallback_budget(

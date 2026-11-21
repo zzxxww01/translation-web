@@ -534,6 +534,10 @@ task_defaults:
   analysis: "gemini-pro"      # 全文分析
 ```
 
+可选的 `task_fallbacks`（`任务: 模型别名`）给「用任务默认模型」的调用加一层整体兜底：默认模型连同自己的
+故障转移全部失败后，`generate_with_fallback` 用兜底模型再完整跑一次；调用方显式传了 `model` 时不生效。
+目前只有 `post: gemini-flash`（帖子默认用不跨品牌降级的 OpenAI 官方 `gpt-6.2-sol`）。
+
 ## 7.3 在代码中使用
 
 ### 方式 1: 使用 ProviderAdapter（推荐）
