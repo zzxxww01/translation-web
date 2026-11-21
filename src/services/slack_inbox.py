@@ -1434,7 +1434,7 @@ class SlackInbox:
     # -- 帖子提取：把整个 thread 整理成给模型看的材料
 
     def post_material(self, channel_id: str, thread_ts: str) -> Dict[str, Any]:
-        """thread 的每条消息（编号、作者、时间、正文、链接卡片、图片 ID），以及可选的图片清单。"""
+        """thread 的每条消息（编号、作者、时间、正文、图片 ID），以及可选的图片清单。只给正文：链接卡片不给模型看（用户要求）。"""
         self._require_conversation(channel_id)
         if not TS_RE.match(thread_ts or ""):
             raise SlackInboxError("BAD_TS", "thread ts 格式不对", 400)
@@ -1451,10 +1451,6 @@ class SlackInbox:
                 "from": m["user_name"] + ("（我）" if m["is_me"] else ""),
                 "time": m["time"],
                 "text": (m["text"] or "")[:4000],
-                "cards": [
-                    {"service": a["service_name"], "title": a["title"], "text": (a["text"] or "")[:2000], "url": a["title_link"]}
-                    for a in m["attachments"] if a["title"] or a["text"]
-                ],
                 "images": [f["id"] for f in imgs],
             })
         root = messages[0]

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, CheckCircle2, Circle, Copy, Download, ImageOff, Loader2, RotateCcw, Sparkles, X } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Circle, Copy, Download, ImageOff, Loader2, RotateCcw, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { ModelSelector } from '@/components/ModelSelector';
 import { ResizablePanes } from '@/components/layout/ResizablePanes';
@@ -142,10 +142,6 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
 
   const extraction = doc?.extraction;
   const usedTs = new Set(extraction?.message_ts ?? []);
-  // 原文来自哪几条消息：程序直接列「谁 几点」，不靠 AI 描述
-  const sources = (replies.data?.messages ?? [])
-    .filter(m => usedTs.has(m.ts))
-    .map(m => `${m.user_name} ${new Date(parseFloat(m.ts) * 1000).toLocaleString('zh-CN', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}`);
   const messages = replies.data?.messages ?? [];
   const title = doc?.slack?.title || (messages[0]?.text ?? '').split('\n')[0] || 'Slack 帖子';
   const hasNew = !!extraction?.latest_ts && messages.length > 0
@@ -173,21 +169,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
 
       {/* 1. 要翻译的英文：AI 从原帖里挑出来的，可以直接改 */}
       <section>
-        <h3 className="text-sm font-semibold text-text-primary">要翻译的英文</h3>
-        <p className="mt-0.5 text-xs leading-relaxed text-text-muted">
-          AI 从这个 thread 里找出了最后要发的帖子，放在下面框里。不对可以直接改，或者点下面的「挑错了？」让它重挑。
-        </p>
-        {extraction?.has_post && (extraction.note || sources.length > 0) && (
-          <div className="mt-2 rounded-lg bg-bg-tertiary/60 px-3 py-2 text-[13px] leading-relaxed text-text-secondary">
-            {extraction.note && (
-              <p><Sparkles className="mr-1 inline h-3.5 w-3.5 -translate-y-px text-primary-500" />{extraction.note}</p>
-            )}
-            {sources.length > 0 && (
-              <p className="mt-0.5 text-xs text-text-muted">来自：{sources.join('、')}（右边 Slack 原帖里标了竖线）</p>
-            )}
-          </div>
-        )}
-        <div className="mb-2" />
+        <h3 className="mb-2 text-sm font-semibold text-text-primary">要翻译的英文</h3>
         <textarea
           id="postSourceInput"
           value={ws.originalText}
