@@ -1,4 +1,4 @@
-import type { ConversationKind, SlackConversation, SlackMessage, SlackThread } from './types';
+import type { ConversationKind, SlackActivityItem, SlackConversation, SlackMessage, SlackThread } from './types';
 
 // 常见的 Slack 表情简码；没收录的原样显示 :name:
 const EMOJI: Record<string, string> = {
@@ -34,10 +34,10 @@ export function splitSidebar(conversations: SlackConversation[]) {
   };
 }
 
-/** 中栏除了会话之外的页面：Threads 汇总、AI 速览、回复工作台。搜索 2026-11-21 按用户要求去掉。 */
-export type SlackView = 'threads' | 'digest' | 'reply';
+/** 中栏除了会话之外的页面：AI 速览、回复工作台。搜索、「我参与的」页面已去掉（后者变成左栏的一个分组）。 */
+export type SlackView = 'digest' | 'reply';
 
-const VIEWS: SlackView[] = ['threads', 'digest', 'reply'];
+const VIEWS: SlackView[] = ['digest', 'reply'];
 
 export function parseSlackView(value: string | null): SlackView | null {
   return VIEWS.includes(value as SlackView) ? (value as SlackView) : null;
@@ -118,4 +118,15 @@ export function kindLabel(kind: ConversationKind): string {
     case 'im': return '私信 · 你和对方一对一';
     case 'mpim': return '群聊私信 · 几个人的小群';
   }
+}
+
+/** 左栏分组（顺序见 ActivityList 的 GROUPS）；每条只进一个组，按 @我 > 私信 > 新帖 > 我参与的 > 其他 先到先得。 */
+export type GroupId = 'mentions' | 'dms' | 'posts' | 'following' | 'others';
+
+export function groupOf(item: SlackActivityItem): GroupId {
+  if (item.mentions_me) return 'mentions';
+  if (item.type === 'dm') return 'dms';
+  if (!item.reply_count && !item.root?.is_me) return 'posts';
+  if (item.following) return 'following';
+  return 'others';
 }

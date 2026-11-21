@@ -3,6 +3,7 @@ import { ArrowLeft, Hash, Loader2, MessageCircle, MessagesSquare, RefreshCw, Spa
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { slackInboxApi } from './api';
+import { useMarkAllRead } from './hooks';
 import { clockTime, dayLabel } from './lib';
 import { stripMrkdwn } from './mrkdwn';
 import { SlackMarkdown } from './SlackText';
@@ -28,6 +29,7 @@ export function DigestView({ onOpen, onBack }: DigestViewProps) {
     staleTime: 5 * 60_000,
     select: data => data.sections,
   });
+  const markAll = useMarkAllRead();
 
   return (
     <>
@@ -102,6 +104,14 @@ export function DigestView({ onOpen, onBack }: DigestViewProps) {
             )}
           </div>
         ))}
+        {/* 读完速览是标已读最自然的时机 */}
+        {digest.data && digest.data.length > 0 && (
+          <div className="flex justify-center pt-2">
+            <Button variant="outline" size="sm" onClick={() => markAll.mutate(undefined)} disabled={markAll.isPending || markAll.isSuccess}>
+              {markAll.isSuccess ? '已全部标为已读' : '看完了，全部标为已读'}
+            </Button>
+          </div>
+        )}
       </div>
     </>
   );

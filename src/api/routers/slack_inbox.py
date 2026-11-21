@@ -125,10 +125,24 @@ async def mark_conversation(request: Request, channel_id: str, body: SlackMarkRe
     return await _run(get_slack_inbox().mark_conversation, channel_id, body.ts)
 
 
+class SlackMarkItem(BaseModel):
+    channel_id: str = Field(..., min_length=1, max_length=32)
+    ts: str = Field(..., min_length=1, max_length=32)
+    thread_ts: Optional[str] = Field(None, max_length=32)
+
+
+class SlackMarkAllRequest(BaseModel):
+    # 不传 items：动态里全部标已读；传了：只标这些（左栏某个分组的「全部已读」）
+    items: Optional[List[SlackMarkItem]] = Field(None, max_length=500)
+
+
 @router.post("/mark-all")
-@limiter.limit("10/minute")
-async def mark_all_read(request: Request):
-    return await _run(get_slack_inbox().mark_all_read)
+@limiter.limit("20/minute")
+async def mark_all_read(request: Request, body: Optional[SlackMarkAllRequest] = None):
+    inbox = get_slack_inbox()
+    if body and body.items is not None:
+        return await _run(inbox.mark_items_read, [i.model_dump() for i in body.items])
+    return await _run(inbox.mark_all_read)
 
 
 @router.post("/conversations/{channel_id}/threads/{thread_ts}/mark")

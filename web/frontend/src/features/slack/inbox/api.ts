@@ -36,7 +36,8 @@ export const slackInboxApi = {
     apiClient.post<{ ok: boolean; marked: boolean }>(`/slack-inbox/conversations/${channelId}/mark`, { ts }, { retry: false }),
 
   /** 全部标为已读：只记在 momo 本地 */
-  markAllRead: () => apiClient.post<{ ok: boolean; marked: number }>('/slack-inbox/mark-all', {}, { retry: false }),
+  markAllRead: (items?: { channel_id: string; ts: string; thread_ts: string | null }[]) =>
+    apiClient.post<{ ok: boolean; marked: number }>('/slack-inbox/mark-all', items ? { items } : {}, { retry: false }),
 
   markThreadRead: (channelId: string, threadTs: string, ts: string) =>
     apiClient.post<{ ok: boolean; marked: boolean }>(

@@ -51,7 +51,7 @@ it('splits the sidebar into channels and DMs', () => {
 });
 
 it('only accepts known middle-pane views', () => {
-  expect(parseSlackView('threads')).toBe('threads');
+  expect(parseSlackView('threads')).toBeNull();  // 「我参与的」变成左栏分组
   expect(parseSlackView('reply')).toBe('reply');
   expect(parseSlackView('digest')).toBe('digest');
   expect(parseSlackView('search')).toBeNull();  // 搜索已去掉

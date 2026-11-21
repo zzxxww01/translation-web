@@ -1,37 +1,36 @@
 import { useEffect, useRef, useState } from 'react';
-import { CheckCheck, FileText, Hash, Languages, Loader2, MessageSquareText, MessagesSquare, RefreshCw, Sparkles, Users } from 'lucide-react';
+import { ChevronDown, ChevronRight, Languages, Loader2, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AgentBadge } from '../agent/AgentBadge';
 import { useSlackAgentRuns } from '../agent/agentRuns';
-import { Avatar } from './MessageItem';
 import { useShowZh } from './ai';
-import { useMarkAllRead, useRefreshSlack, useSlackActivity } from './hooks';
-import { clockTime, emojify, stripLeadingMentions, type SlackView } from './lib';
+import { Avatar } from './MessageItem';
+import { useMarkAllRead, useSlackActivity } from './hooks';
+import { clockTime, emojify, groupOf, stripLeadingMentions, type GroupId, type SlackView } from './lib';
 import { stripMrkdwn } from './mrkdwn';
 import type { SlackActivityItem, SlackMessage } from './types';
-
-type Filter = 'all' | 'unread' | 'mentions' | 'dm';
-const FILTERS: [Filter, string][] = [['all', '全部'], ['unread', '未读'], ['mentions', '@我'], ['dm', '私信']];
-
-function matches(item: SlackActivityItem, filter: Filter): boolean {
-  if (filter === 'unread') return item.has_unreads;
-  if (filter === 'mentions') return item.mentions_me;
-  if (filter === 'dm') return item.type === 'dm';
-  return true;
-}
-
-// 列表顶部的其他页面入口（带文字，之前是两个不好找的小图标）
-const VIEW_LINKS: [SlackView, string, typeof Sparkles, string][] = [
-  ['digest', 'AI 速览', Sparkles, '所有未读整理成中文要点'],
-  ['threads', '我参与的', MessageSquareText, '我参与过的 thread，有新回复的在前'],
-  ['reply', '回复工作台', Languages, '老工作台：贴一段英文或写中文草稿，生成三版英文回复'],
-];
 
 /** 正在看的那一行：thread 用（会话, thread_ts），私信用会话 id */
 export interface ActivitySelection {
   channelId: string;
   threadTs: string | null;
 }
+
+/**
+ * 左栏分组（2026-11-22 用户定的顺序）：别人等你的在前，然后是要翻译的新帖，再是自己参与的讨论，最后是其他。
+ * 每条只进一个组，按这个顺序先到先得。
+ */
+
+const GROUPS: { id: GroupId; title: string; hint: string }[] = [
+  { id: 'mentions', title: '@我', hint: '有人 @ 了你' },
+  { id: 'dms', title: '私信', hint: '私信和群聊私信' },
+  { id: 'posts', title: '新帖 · 待翻译', hint: '最近 7 天还没人回复的帖子' },
+  { id: 'following', title: '我参与的 thread', hint: '你发起或回复过的 thread' },
+  { id: 'others', title: '其他 thread', hint: '频道里最近 7 天的其他讨论' },
+];
+
+const OTHERS_PREVIEW = 5;
+
 
 interface ActivityListProps {
   selection: ActivitySelection | null;
@@ -47,7 +46,6 @@ function isTyping(target: EventTarget | null): boolean {
   const el = target as HTMLElement | null;
   return !!el && (el.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName));
 }
-
 
 /** 消息第一行（去掉 *加粗*、`代码` 等格式记号，表情码换成 emoji）；没有文字时用附件名 */
 function firstLine(message: SlackMessage | null | undefined, max = 80, asTitle = false): string {
@@ -68,36 +66,61 @@ function shortTime(ts: string, now = new Date()): string {
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
+const keyOf = (item: SlackActivityItem) => `${item.channel_id}-${item.thread_ts ?? 'dm'}`;
+
+// 折叠了哪些组：记在浏览器里，下次打开还是这样
+const COLLAPSED_KEY = 'slack-sidebar-collapsed';
+function loadCollapsed(): Set<GroupId> {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(COLLAPSED_KEY) || '[]'));
+  } catch {
+    return new Set();
+  }
+}
+
 /**
- * 「动态」：每一行是一个 thread（频道里最近 7 天的，含还没人回复的新帖）或一个私信对话，按最近有人说话的时间排序。
- * 点一行只看那一个 thread / 私信，不用进整个频道。
+ * 左栏：最上面两个工具入口（AI 速览、回复工作台），下面按「@我 / 私信 / 新帖 / 我参与的 / 其他」分组列出
+ * 最近 7 天的 thread、新帖和私信。2026-11-22 用户觉得筛选按钮 + 小图标看不懂，改成直接摆出来的分组。
  */
 export function ActivityList({ selection, view, onOpen, onSelectView, onBack }: ActivityListProps) {
-  const [filter, setFilter] = useState<Filter>('all');
   const activity = useSlackActivity(true);
-  const refresh = useRefreshSlack();
   const markAll = useMarkAllRead();
-  const toggleZh = useShowZh(state => state.toggleZh);
   const agents = useSlackAgentRuns();
-  const all = activity.data ?? [];
-  const items = all.filter(item => matches(item, filter));
-  // 筛选旁的数字：全部 / 私信显示其中未读的，未读 / @我 显示总数
-  const counts: Record<Filter, number> = {
-    all: all.filter(item => item.has_unreads).length,
-    unread: all.filter(item => item.has_unreads).length,
-    mentions: all.filter(item => item.mentions_me).length,
-    dm: all.filter(item => item.type === 'dm' && item.has_unreads).length,
-  };
+  const toggleZh = useShowZh(state => state.toggleZh);
+  const [collapsed, setCollapsed] = useState<Set<GroupId>>(loadCollapsed);
+  const [othersAll, setOthersAll] = useState(false);
 
-  // 键盘：j / k 在当前筛选的列表里切换并打开，t 全部中文，Esc 关闭
-  const keys = useRef({ items, selection, onOpen, onBack, toggleZh });
+  const all = activity.data ?? [];
+  const unreadTotal = all.filter(i => i.has_unreads).length;
+  const groups = GROUPS.map(g => {
+    const items = all.filter(i => groupOf(i) === g.id);
+    const shown = collapsed.has(g.id) ? [] : g.id === 'others' && !othersAll ? items.slice(0, OTHERS_PREVIEW) : items;
+    return { ...g, items, shown, unread: items.filter(i => i.has_unreads) };
+  }).filter(g => g.items.length > 0);
+  const visible = groups.flatMap(g => g.shown);
+  // 只有一个频道时每行都写同一个频道名没意义
+  const manyChannels = new Set(all.filter(i => i.type === 'thread').map(i => i.channel_id)).size > 1;
+
+  const toggleGroup = (id: GroupId) => setCollapsed(prev => {
+    const next = new Set(prev);
+    if (next.has(id)) next.delete(id);
+    else next.add(id);
+    localStorage.setItem(COLLAPSED_KEY, JSON.stringify([...next]));
+    return next;
+  });
+  const markGroup = (items: SlackActivityItem[]) => markAll.mutate(items.map(i => ({
+    channel_id: i.channel_id, ts: i.latest_ts, thread_ts: i.thread_ts,
+  })));
+
+  // 键盘：j / k 按分组从上往下切换并打开，t 全部中文，Esc 关闭
+  const keys = useRef({ visible, selection, onOpen, onBack, toggleZh });
   useEffect(() => {
-    keys.current = { items, selection, onOpen, onBack, toggleZh };
+    keys.current = { visible, selection, onOpen, onBack, toggleZh };
   });
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey || isTyping(e.target)) return;
-      const { items: list, selection: sel, onOpen: open, onBack: back, toggleZh: zh } = keys.current;
+      const { visible: list, selection: sel, onOpen: open, onBack: back, toggleZh: zh } = keys.current;
       if (e.key === 'j' || e.key === 'k') {
         if (list.length === 0) return;
         const at = sel ? list.findIndex(i => i.channel_id === sel.channelId && i.thread_ts === sel.threadTs) : -1;
@@ -113,143 +136,160 @@ export function ActivityList({ selection, view, onOpen, onSelectView, onBack }: 
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, []);
-  // 只有一个频道时每行都写同一个频道名没意义，省下位置给「谁发起、几条回复」
-  const manyChannels = new Set((activity.data ?? []).filter(item => item.type === 'thread').map(item => item.channel_id)).size > 1;
 
   return (
-    <>
-      <div className="space-y-1.5 border-b border-border-subtle px-3 py-2">
-        <div className="flex items-center gap-1">
-          <div className="flex items-center gap-1" role="tablist" aria-label="筛选动态">
-            {FILTERS.map(([id, label]) => (
-              <button
-                key={id}
-                type="button"
-                role="tab"
-                aria-selected={filter === id}
-                onClick={() => setFilter(id)}
-                className={cn(
-                  'rounded-full px-2.5 py-0.5 text-xs transition-colors',
-                  filter === id ? 'bg-primary-500 text-white' : 'bg-bg-hover text-text-secondary hover:text-text-primary'
-                )}
-              >
-                {label}{id !== 'all' && counts[id] > 0 ? ` ${counts[id]}` : ''}
-              </button>
-            ))}
-          </div>
-          <div className="ml-auto flex items-center">
-            <button
-              type="button"
-              onClick={() => markAll.mutate()}
-              disabled={markAll.isPending || counts.unread === 0}
-              className="rounded-md p-1.5 text-text-muted hover:bg-bg-hover hover:text-text-primary disabled:opacity-40"
-              title="全部标为已读（只记在 momo 里，Slack 的未读不变）"
-              aria-label="全部标为已读"
-            >
-              <CheckCheck className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => refresh.mutate()}
-              disabled={refresh.isPending}
-              className="rounded-md p-1.5 text-text-muted hover:bg-bg-hover hover:text-text-primary"
-              title="立即从 Slack 刷新"
-              aria-label="刷新"
-            >
-              <RefreshCw className={cn('h-4 w-4', refresh.isPending && 'animate-spin')} />
-            </button>
-          </div>
-        </div>
-        <div className="flex items-center gap-1 text-xs">
-          {VIEW_LINKS.map(([id, label, Icon, title]) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => onSelectView(id)}
-              title={title}
-              className={cn(
-                'inline-flex items-center gap-1 rounded-md px-2 py-1 transition-colors hover:bg-bg-hover',
-                view === id ? 'bg-primary-50 font-medium text-primary-700' : 'text-text-secondary'
-              )}
-            >
-              <Icon className="h-3.5 w-3.5" /> {label}
-            </button>
-          ))}
-        </div>
+    <div className="min-h-0 flex-1 overflow-auto" aria-label="Slack 动态">
+      {/* 工具入口：整行带说明，和 Slack 侧栏最上面的 Threads / Activity 一样 */}
+      <div className="border-b border-border-subtle py-1.5">
+        <ToolRow
+          icon={Sparkles}
+          label="AI 速览"
+          hint={unreadTotal ? `${unreadTotal} 条未读整理成中文` : '未读整理成中文要点'}
+          active={view === 'digest'}
+          onClick={() => onSelectView('digest')}
+        />
+        <ToolRow
+          icon={Languages}
+          label="回复工作台"
+          hint="贴英文 / 写中文草稿，出三版回复"
+          active={view === 'reply'}
+          onClick={() => onSelectView('reply')}
+        />
       </div>
 
-      <div className="min-h-0 flex-1 overflow-auto" aria-label="Slack 动态">
-        {activity.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
-        {activity.isError && (
-          <div className="p-4 text-sm text-error">
-            动态没加载出来：{activity.error.message}
-            <button type="button" onClick={() => void activity.refetch()} className="ml-2 text-primary-700 hover:underline">重试</button>
-          </div>
-        )}
-        {activity.data && items.length === 0 && (
-          <div className="p-6 text-center text-sm text-text-muted">
-            {filter === 'unread' ? '都看完了' : filter === 'mentions' ? '最近 7 天没人 @ 你' : filter === 'dm' ? '没有私信' : '最近 7 天没有动态'}
-          </div>
-        )}
-        {items.map(item => {
-          const active = !!selection && selection.channelId === item.channel_id && selection.threadTs === item.thread_ts;
-          const agentKey = item.type === 'thread' ? `slack:${item.channel_id}:${item.thread_ts}` : `slack:${item.channel_id}`;
-          return (
+      {activity.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
+      {activity.isError && (
+        <div className="p-4 text-sm text-error">
+          动态没加载出来：{activity.error.message}
+          <button type="button" onClick={() => void activity.refetch()} className="ml-2 text-primary-700 hover:underline">重试</button>
+        </div>
+      )}
+      {activity.data && all.length === 0 && <div className="p-6 text-center text-sm text-text-muted">最近 7 天没有动态</div>}
+
+      {groups.map(g => (
+        <section key={g.id} aria-label={g.title}>
+          <div className="group/head sticky top-0 z-10 flex items-center gap-1 bg-[#faf6f5] px-2 pb-1 pt-3">
             <button
-              key={`${item.channel_id}-${item.thread_ts ?? 'dm'}`}
               type="button"
-              onClick={() => onOpen(item)}
-              aria-current={active || undefined}
-              className={cn(
-                'block w-full border-b border-border-subtle px-3 py-2.5 text-left transition-colors',
-                active ? 'bg-primary-50' : 'hover:bg-bg-hover'
-              )}
+              onClick={() => toggleGroup(g.id)}
+              aria-expanded={!collapsed.has(g.id)}
+              title={g.hint}
+              className="flex min-w-0 flex-1 items-center gap-1 rounded px-1 text-left text-[13px] font-semibold text-text-secondary hover:text-text-primary"
             >
-              <div className="flex items-start gap-2.5">
-                <div className="pt-0.5">
-                  {item.type === 'thread'
-                    ? <div className="flex h-8 w-8 items-center justify-center rounded-md bg-bg-hover text-text-muted">
-                        {item.reply_count ? <MessagesSquare className="h-4 w-4" /> : <FileText className="h-4 w-4" />}
-                      </div>
-                    : item.kind === 'mpim'
-                      ? <div className="flex h-8 w-8 items-center justify-center rounded-md bg-bg-hover text-text-muted"><Users className="h-4 w-4" /></div>
-                      : <Avatar name={item.channel_name} />}
-                </div>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center gap-1.5">
-                    {item.has_unreads && <span className="h-2 w-2 shrink-0 rounded-full bg-primary-500" aria-label="有新消息" />}
-                    <span className={cn('min-w-0 flex-1 truncate text-[14px]', item.has_unreads ? 'font-semibold text-text-primary' : 'text-text-primary')}>
-                      {item.type === 'thread' ? firstLine(item.root, 80, true) : item.channel_name}
-                    </span>
-                    {item.mentions_me && <span className="shrink-0 rounded-full bg-error px-1.5 text-[11px] font-semibold text-white">@我</span>}
-                    <AgentBadge run={agents.get(agentKey)} active={false} />
-                    <span className="shrink-0 text-[11px] text-text-muted">{shortTime(item.latest_ts)}</span>
-                  </div>
-                  <div className="mt-0.5 flex items-center gap-1 truncate text-xs text-text-muted">
-                    {item.type === 'thread' ? (
-                      <>
-                        {manyChannels && <Hash className="h-3 w-3 shrink-0" />}
-                        <span className="truncate">
-                          {manyChannels ? `${item.channel_name} · ` : ''}{item.root?.user_name}
-                          {item.reply_count ? ` 发起 · ${item.reply_count} 条回复` : ' 发帖 · 还没人回复'}
-                          {item.participants && item.participants.length > 1 ? ` · ${item.participants.length} 人参与` : ''}
-                        </span>
-                      </>
-                    ) : (
-                      <span>{item.kind === 'mpim' ? '群聊私信' : '私信'}</span>
-                    )}
-                  </div>
-                  {item.last && (
-                    <div className="mt-0.5 truncate text-[13px] text-text-secondary">
-                      <span className="font-medium">{item.last.is_me ? '我' : item.last.user_name}：</span>{firstLine(item.last, 120)}
-                    </div>
-                  )}
-                </div>
-              </div>
+              {collapsed.has(g.id) ? <ChevronRight className="h-3.5 w-3.5 shrink-0" /> : <ChevronDown className="h-3.5 w-3.5 shrink-0" />}
+              <span className="truncate">{g.title}</span>
+              <span className="font-normal text-text-muted">{g.items.length}</span>
+              {g.unread.length > 0 && (
+                <span className="rounded-full bg-primary-500 px-1.5 text-[10px] font-semibold leading-4 text-white">{g.unread.length} 未读</span>
+              )}
             </button>
-          );
-        })}
+            {g.unread.length > 0 && (
+              <button
+                type="button"
+                onClick={() => markGroup(g.unread)}
+                disabled={markAll.isPending}
+                className="shrink-0 rounded px-1.5 py-0.5 text-[11px] text-text-muted hover:bg-bg-hover hover:text-text-primary"
+                title="这一组标为已读（只记在 momo 里，Slack 的未读不变）"
+              >
+                全部已读
+              </button>
+            )}
+          </div>
+          {g.shown.map(item => (
+            <Row
+              key={keyOf(item)}
+              item={item}
+              group={g.id}
+              active={!!selection && selection.channelId === item.channel_id && selection.threadTs === item.thread_ts}
+              manyChannels={manyChannels}
+              agent={agents.get(item.type === 'thread' ? `slack:${item.channel_id}:${item.thread_ts}` : `slack:${item.channel_id}`)}
+              onOpen={onOpen}
+            />
+          ))}
+          {g.id === 'others' && !collapsed.has('others') && g.items.length > OTHERS_PREVIEW && (
+            <button
+              type="button"
+              onClick={() => setOthersAll(v => !v)}
+              className="w-full px-4 py-2 text-left text-xs text-primary-700 hover:bg-bg-hover"
+            >
+              {othersAll ? '收起' : `展开其余 ${g.items.length - OTHERS_PREVIEW} 条`}
+            </button>
+          )}
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function ToolRow({ icon: Icon, label, hint, active, onClick }: {
+  icon: typeof Sparkles; label: string; hint: string; active: boolean; onClick: () => void;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-current={active || undefined}
+      className={cn('flex w-full items-center gap-2.5 px-4 py-1.5 text-left', active ? 'bg-primary-50' : 'hover:bg-bg-hover')}
+    >
+      <Icon className={cn('h-4 w-4 shrink-0', active ? 'text-primary-700' : 'text-primary-500')} />
+      <span className={cn('text-[14px]', active ? 'font-semibold text-primary-700' : 'font-medium text-text-primary')}>{label}</span>
+      <span className="min-w-0 flex-1 truncate text-right text-xs text-text-muted">{hint}</span>
+    </button>
+  );
+}
+
+function Row({ item, group, active, manyChannels, agent, onOpen }: {
+  item: SlackActivityItem;
+  group: GroupId;
+  active: boolean;
+  manyChannels: boolean;
+  agent: Parameters<typeof AgentBadge>[0]['run'];
+  onOpen: (item: SlackActivityItem) => void;
+}) {
+  const isThread = item.type === 'thread';
+  const who = isThread ? item.root?.user_name ?? '' : item.channel_name;
+  // 「@我」组里各种类型混在一起，用小字说明是什么；其他组的标题已经说明了
+  const tag = group === 'mentions' ? (isThread ? (item.reply_count ? 'thread' : '新帖') : '私信') : null;
+  const channel = isThread && manyChannels ? `#${item.channel_name} · ` : '';
+  return (
+    <button
+      type="button"
+      onClick={() => onOpen(item)}
+      aria-current={active || undefined}
+      className={cn('block w-full px-3 py-2 text-left transition-colors', active ? 'bg-primary-50' : 'hover:bg-bg-hover')}
+    >
+      <div className="flex items-start gap-2.5">
+        <Avatar name={who || '?'} />
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center gap-1.5">
+            {item.has_unreads && <span className="h-2 w-2 shrink-0 rounded-full bg-primary-500" aria-label="有新消息" />}
+            <span className={cn('min-w-0 flex-1 truncate text-[14px] text-text-primary', item.has_unreads && 'font-semibold')}>
+              {isThread ? firstLine(item.root, 80, true) : item.channel_name}
+            </span>
+            {tag && <span className="shrink-0 rounded bg-bg-hover px-1 text-[10px] leading-4 text-text-secondary">{tag}</span>}
+            <span className="shrink-0 text-[11px] text-text-muted">{shortTime(item.latest_ts)}</span>
+          </div>
+          {isThread ? (
+            <div className="mt-0.5 flex items-center gap-1.5">
+              <span className="min-w-0 flex-1 truncate text-xs text-text-muted">
+                {`${channel}${who}${item.reply_count ? ` 发起 · ${item.reply_count} 条回复` : ' 发帖 · 还没人回复'}`
+                  + (item.participants && item.participants.length > 1 ? ` · ${item.participants.length} 人参与` : '')}
+              </span>
+              <AgentBadge run={agent} />
+            </div>
+          ) : null}
+          {(item.last || !isThread) && (
+            // 私信：第二行直接是最后一条消息（组标题已经说明是私信，不再重复写）
+            <div className="mt-0.5 flex items-center gap-1.5">
+              <span className="min-w-0 flex-1 truncate text-[13px] text-text-secondary">
+                {!isThread && item.kind === 'mpim' && <span className="text-text-muted">群聊 · </span>}
+                {item.last && <><span className="font-medium">{item.last.is_me ? '我' : item.last.user_name}：</span>{firstLine(item.last, 120)}</>}
+              </span>
+              {!isThread && <AgentBadge run={agent} />}
+            </div>
+          )}
+        </div>
       </div>
-    </>
+    </button>
   );
 }
