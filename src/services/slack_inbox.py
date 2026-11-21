@@ -930,16 +930,44 @@ class SlackInbox:
         return {"threads": items[:30]}
 
     def activity(self) -> Dict[str, Any]:
-        """「动态」列表：频道里最近 THREAD_RECENT_DAYS 天有回复的 thread 和私信，各占一行，按最近活动从新到旧。
+        """「动态」列表：频道里最近 THREAD_RECENT_DAYS 天的 thread（含还没人回复的新帖）和私信，各占一行，按最近活动从新到旧。
 
         thread 行带根消息、最后一条回复和参与的人（来自本地副本；没参与的 thread 打开时才整个拉下来）。
+        新帖（2026-11-21 起）也是一行 thread，reply_count 为 0：帖子翻译最常处理的就是刚发、还没人回的帖子。
         """
         me = self.auth().get("user_id", "")
+        cutoff = self._now() - THREAD_RECENT_DAYS * 86400
+        local_reads = self.db.read_positions()
         items: List[Dict[str, Any]] = []
         for conv in self.conversations():
             cid = conv["id"]
             if conv["kind"] in {"channel", "private"}:
-                for t in self.channel_threads(cid)["threads"]:
+                threads = self.channel_threads(cid)["threads"]
+                listed = {t["thread_ts"] for t in threads}
+                # channel_threads 已经同步过这个频道，这里直接读本地副本
+                for m in self.db.history(cid, limit=200):
+                    ts = str(m.get("ts") or "")
+                    if not TS_RE.match(ts) or ts in listed or float(ts) < cutoff or m.get("reply_count"):
+                        continue
+                    if m.get("subtype") in _SILENT_SUBTYPES or (m.get("thread_ts") and m.get("thread_ts") != ts):
+                        continue  # 系统消息、「同时发到频道」的 thread 回复
+                    msg = self.normalize_message(cid, m)
+                    read = _later(conv["last_read"], local_reads.get((cid, ts)))
+                    items.append({
+                        "type": "thread",
+                        "channel_id": cid,
+                        "channel_name": conv["name"],
+                        "thread_ts": ts,
+                        "root": msg,
+                        "reply_count": 0,
+                        "participants": [msg["user_name"]] if msg["user_name"] else [],
+                        "last": None,
+                        "latest_ts": ts,
+                        "latest_time": msg["time"],
+                        "has_unreads": not msg["is_me"] and (not read or float(ts) > float(read)),
+                        "mentions_me": msg["mentions_me"],
+                    })
+                for t in threads:
                     local = self.db.thread(cid, t["thread_ts"])
                     replies = [m for m in local if str(m.get("ts")) != t["thread_ts"]]
                     people: List[str] = []

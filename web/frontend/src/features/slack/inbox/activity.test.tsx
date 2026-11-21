@@ -78,3 +78,28 @@ it('filters to @me and to DMs', async () => {
   expect(rows()).toHaveLength(1);
   expect(rows()[0].textContent).toContain('Michelle Shen');
 });
+
+it('lists new posts without replies, filters unread and links the other views', async () => {
+  items.push({
+    type: 'thread', channel_id: 'C1', channel_name: 'social-media-posts-and-media', thread_ts: '1794600000.000001',
+    root: message({ text: 'Fresh post to translate', user_name: 'Doug O' }), reply_count: 0,
+    participants: ['Doug O'], last: null, latest_ts: '1794600000.000001', latest_time: '', has_unreads: true, mentions_me: false,
+  });
+  const onSelectView = vi.fn();
+  await act(async () => root.render(
+    <ActivityList status={status} selection={null} view={null} onOpen={vi.fn()} onSelectView={onSelectView} onSearch={vi.fn()} />));
+  const post = rows().find(r => r.textContent?.includes('Fresh post'))!;
+  expect(post.textContent).toContain('Doug O 发帖 · 还没人回复');
+
+  const tab = (label: RegExp) => Array.from(host.querySelectorAll<HTMLButtonElement>('[role="tab"]')).find(b => label.test(b.textContent ?? ''))!;
+  expect(tab(/^未读/).textContent).toBe('未读 2');
+  await act(async () => tab(/^未读/).click());
+  expect(rows()).toHaveLength(2);
+  expect(rows().some(r => r.textContent?.includes('Michelle Shen'))).toBe(false);
+
+  const link = (label: string) => Array.from(host.querySelectorAll('button')).find(b => b.textContent?.trim() === label)!;
+  for (const [label, view] of [['AI 速览', 'digest'], ['我参与的', 'threads'], ['回复工作台', 'reply']] as const) {
+    await act(async () => link(label).click());
+    expect(onSelectView).toHaveBeenLastCalledWith(view);
+  }
+});

@@ -175,3 +175,9 @@ export interface SlackSearchResponse {
   total: number;
   results: SlackSearchResult[];
 }
+
+/** 中栏单独打开的 thread（频道 + 根消息 ts） */
+export interface OpenThread {
+  channelId: string;
+  threadTs: string;
+}

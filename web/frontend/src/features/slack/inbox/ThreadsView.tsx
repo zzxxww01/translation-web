@@ -6,7 +6,7 @@ import { useSlackThreads } from './hooks';
 import { clockTime, dayLabel, emojify, threadTitle } from './lib';
 import { stripMrkdwn } from './mrkdwn';
 import type { SlackConversation } from './types';
-import type { OpenThread } from './Sidebar';
+import type { OpenThread } from './types';
 
 interface ThreadsViewProps {
   conversations: SlackConversation[];

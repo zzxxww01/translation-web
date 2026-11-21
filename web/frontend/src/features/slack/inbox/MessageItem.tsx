@@ -106,8 +106,16 @@ export function MessageItem({ message, compact = false, onOpenThread, active = f
   const isThreadRoot = message.reply_count > 0 && message.thread_ts === message.ts;
   // 没开「全部中文」时，单条点「译」才翻
   const [askedZh, setAskedZh] = useState(false);
+  // 触屏没有悬停：点一下消息（不是点链接 / 按钮）切换工具条
+  const [toolsOpen, setToolsOpen] = useState(false);
+  const onTap = (e: React.MouseEvent) => {
+    if (!window.matchMedia?.('(hover: none)').matches) return;
+    if ((e.target as HTMLElement).closest('a, button')) return;
+    setToolsOpen(v => !v);
+  };
   return (
     <div
+      onClick={onTap}
       className={cn(
         'group relative flex gap-2.5 px-5 transition-colors',
         compact ? 'py-0.5' : 'pt-2 pb-1',
@@ -143,7 +151,10 @@ export function MessageItem({ message, compact = false, onOpenThread, active = f
         )}
       </div>
       {/* 悬停工具条，和 Slack 一样浮在消息右上角 */}
-      <div className="absolute -top-3 right-4 hidden items-center gap-0.5 rounded-md border border-border-subtle bg-white p-0.5 shadow-sm group-hover:flex">
+      <div className={cn(
+        'absolute -top-3 right-4 items-center gap-0.5 rounded-md border border-border-subtle bg-white p-0.5 shadow-sm group-hover:flex',
+        toolsOpen ? 'flex' : 'hidden'
+      )}>
         {!zh && message.text.trim() && (
           <button
             type="button"

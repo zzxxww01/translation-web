@@ -285,6 +285,34 @@ def test_conversations_fall_back_to_counts_without_user_boot(inbox):
     assert [c["id"] for c in inbox.conversations()] == ["C000000001", "G000000001", "D000000001"]
 
 
+def test_activity_lists_new_posts_without_replies(inbox):
+    original = inbox.fake.call
+
+    def call(method, **params):
+        out = original(method, **params)
+        if method == "conversations.history" and params.get("channel") == "C000000001":
+            out = dict(out, messages=[
+                {"ts": f"{NOW - 30:.6f}", "user": "UBBBBBBBB2", "text": "also in thread", "subtype": "thread_broadcast",
+                 "thread_ts": THREAD_TS},
+                {"ts": f"{NOW - 40:.6f}", "user": "UBBBBBBBB2", "text": "joined", "subtype": "channel_join"},
+                {"ts": f"{NOW - 50:.6f}", "user": "UBBBBBBBB2", "text": "*New post* to translate"},
+                {"ts": f"{NOW - 8 * DAY:.6f}", "user": "UBBBBBBBB2", "text": "too old"},
+            ] + out["messages"])
+        return out
+
+    inbox.fake.call = call
+    items = [i for i in inbox.activity()["items"] if i["channel_id"] == "C000000001"]
+    posts = [i for i in items if i["reply_count"] == 0]
+    assert [p["thread_ts"] for p in posts] == [f"{NOW - 50:.6f}"]
+    post = posts[0]
+    assert post["type"] == "thread" and post["root"]["user_name"] == "Bob B" and post["last"] is None
+    assert post["has_unreads"] is True  # 比频道已读位置新
+    # 在 momo 里打开过（按 thread 记了已读）就不再算未读
+    inbox.mark_thread("C000000001", post["thread_ts"], post["thread_ts"])
+    again = next(i for i in inbox.activity()["items"] if i["thread_ts"] == post["thread_ts"])
+    assert again["has_unreads"] is False
+
+
 def test_followed_threads_track_unread_and_mentions(inbox):
     threads = inbox.threads()["threads"]
     assert len(threads) == 1  # 看不到的会话被过滤

@@ -202,7 +202,7 @@ def test_activity_lists_threads_and_dms_by_latest_activity(inbox, monkeypatch):
     inbox.db.upsert(CID, [
         {"ts": ts(100), "user": "UAAAAAAAA1", "text": "Elon post", "thread_ts": ts(100),
          "reply_count": 2, "latest_reply": ts(102)},
-        {"ts": ts(40), "user": "UAAAAAAAA1", "text": "no replies here"},  # 没回复的单条消息不算 thread
+        {"ts": ts(40), "user": "UAAAAAAAA1", "text": "no replies here"},  # 没人回复的新帖也列出（2026-11-21）
     ], in_history=True)
     inbox.db.upsert(CID, [
         {"ts": ts(101), "user": "UBBBBBBBB2", "text": f"<@{ME}> pls check", "thread_ts": ts(100)},
@@ -211,8 +211,10 @@ def test_activity_lists_threads_and_dms_by_latest_activity(inbox, monkeypatch):
     inbox.db.upsert(DM, [{"ts": ts(50), "user": "UAAAAAAAA1", "text": "hey Felix"}], in_history=True)
 
     items = inbox.activity()["items"]
-    assert [(i["type"], i["channel_id"]) for i in items] == [("thread", CID), ("dm", DM)]
-    thread, dm = items
+    assert [(i["type"], i["channel_id"], i.get("reply_count")) for i in items] == [
+        ("thread", CID, 2), ("dm", DM, None), ("thread", CID, 0)]
+    thread, dm, post = items
+    assert post["thread_ts"] == ts(40) and post["root"]["text"] == "no replies here" and post["last"] is None
     assert thread["thread_ts"] == ts(100) and thread["reply_count"] == 2
     assert thread["root"]["text"] == "Elon post"
     assert thread["last"]["text"] == "ok will post"
