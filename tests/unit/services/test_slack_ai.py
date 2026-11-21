@@ -85,7 +85,7 @@ def test_prompts_keep_format_rules_and_render():
     assert "todo_for_me" in summary_prompt("# thread") and "（我）" in summary_prompt("# thread")
     assert '"messages"' in todo_prompt([{"id": 0, "messages": []}])
     e = extract_prompt([{"n": 1, "text": "1/ hi", "images": []}], "用第一版")
-    assert "用第一版" in e and "SemiAnalysis_" in e and '"n": 1' in e
+    assert "用第一版" in e and "只读消息正文" in e and '"n": 1' in e
 
 
 def test_summary_cached_by_key(tmp_path):

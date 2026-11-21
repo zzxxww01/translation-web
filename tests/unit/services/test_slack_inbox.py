@@ -505,7 +505,7 @@ def test_post_material_numbers_messages_and_lists_images(inbox):
     material = inbox.post_material("C000000001", THREAD_TS)
     assert [m["n"] for m in material["thread"]] == [1, 2]
     assert material["thread"][1]["images"] == ["F000000009"]
-    assert material["thread"][1]["cards"][0]["text"] == "card text"
+    assert "cards" not in material["thread"][1]  # 链接卡片不给模型看
     assert material["images"] == [{"id": "F000000009", "name": "chart.png", "message_ts": material["message_ts"][1], "n": 2}]
     assert material["title"] == "root" and material["channel_name"] == "social"
     with pytest.raises(SlackInboxError):

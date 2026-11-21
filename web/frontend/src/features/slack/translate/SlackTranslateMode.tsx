@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, CheckCircle2, Circle, Copy, Download, ImageOff, Loader2, RotateCcw, Sparkles, X } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Circle, Copy, Download, ImageOff, Loader2, RotateCcw, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { ModelSelector } from '@/components/ModelSelector';
 import { ResizablePanes } from '@/components/layout/ResizablePanes';
@@ -169,16 +169,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
 
       {/* 1. 要翻译的英文：AI 从原帖里挑出来的，可以直接改 */}
       <section>
-        <div className="mb-1.5 flex items-baseline gap-2">
-          <h3 className="text-sm font-semibold text-text-primary">要翻译的英文</h3>
-          <span className="text-xs text-text-muted">AI 从原帖里挑的，可以直接改</span>
-        </div>
-        {extraction?.has_post && extraction.note && (
-          <p className="mb-2 text-[13px] leading-relaxed text-text-secondary">
-            <Sparkles className="mr-1 inline h-3.5 w-3.5 -translate-y-px text-primary-500" />
-            {extraction.note}
-          </p>
-        )}
+        <h3 className="mb-2 text-sm font-semibold text-text-primary">要翻译的英文</h3>
         <textarea
           id="postSourceInput"
           value={ws.originalText}
