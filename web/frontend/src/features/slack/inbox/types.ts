@@ -158,24 +158,6 @@ export interface SlackDigestSection {
   error?: string;
 }
 
-export interface SlackSearchResult {
-  channel_id: string;
-  channel_name: string;
-  kind: ConversationKind;
-  /** 在 momo 的会话列表里（能直接打开）；否则只能去 Slack 看 */
-  visible: boolean;
-  thread_ts: string | null;
-  message: SlackMessage;
-}
-
-export interface SlackSearchResponse {
-  input: string;
-  /** 实际拿去搜的英文关键词 */
-  query: string;
-  total: number;
-  results: SlackSearchResult[];
-}
-
 /** 中栏单独打开的 thread（频道 + 根消息 ts） */
 export interface OpenThread {
   channelId: string;

@@ -2,7 +2,7 @@
 import { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import { afterEach, beforeEach, expect, it, vi } from 'vitest';
-import type { SlackActivityItem, SlackMessage, SlackStatus } from './types';
+import type { SlackActivityItem, SlackMessage } from './types';
 
 const items: SlackActivityItem[] = [];
 vi.mock('./hooks', () => ({
@@ -22,7 +22,6 @@ const message = (over: Partial<SlackMessage>): SlackMessage => ({
   files: [], attachments: [], reactions: [], permalink: '', ...over,
 } as SlackMessage);
 
-const status = { ok: true, configured: true, user: 'felix', team: 'SemiAnalysis' } as SlackStatus;
 
 let host: HTMLDivElement;
 let root: ReturnType<typeof createRoot>;
@@ -54,7 +53,7 @@ const rows = () => Array.from(host.querySelectorAll<HTMLButtonElement>('[aria-la
 it('shows one row per thread / DM with the original first line and who is talking', async () => {
   const onOpen = vi.fn();
   await act(async () => root.render(
-    <ActivityList status={status} selection={null} view={null} onOpen={onOpen} onSelectView={vi.fn()} onSearch={vi.fn()} />));
+    <ActivityList selection={null} view={null} onOpen={onOpen} onSelectView={vi.fn()} />));
   const [thread, dm] = rows();
   expect(thread.textContent).toContain('Elon post 🔥');           // 根消息第一行原文，不翻译
   expect(thread.textContent).not.toContain('@用户组');             // 开头的提及不进标题
@@ -72,7 +71,7 @@ it('shows one row per thread / DM with the original first line and who is talkin
 
 it('filters to @me and to DMs', async () => {
   await act(async () => root.render(
-    <ActivityList status={status} selection={null} view={null} onOpen={vi.fn()} onSelectView={vi.fn()} onSearch={vi.fn()} />));
+    <ActivityList selection={null} view={null} onOpen={vi.fn()} onSelectView={vi.fn()} />));
   const tab = (label: RegExp) => Array.from(host.querySelectorAll<HTMLButtonElement>('[role="tab"]')).find(b => label.test(b.textContent ?? ''))!;
   await act(async () => tab(/^@我/).click());
   expect(rows()).toHaveLength(1);
@@ -90,7 +89,7 @@ it('lists new posts without replies, filters unread and links the other views', 
   });
   const onSelectView = vi.fn();
   await act(async () => root.render(
-    <ActivityList status={status} selection={null} view={null} onOpen={vi.fn()} onSelectView={onSelectView} onSearch={vi.fn()} />));
+    <ActivityList selection={null} view={null} onOpen={vi.fn()} onSelectView={onSelectView} />));
   const post = rows().find(r => r.textContent?.includes('Fresh post'))!;
   expect(post.textContent).toContain('Doug O 发帖 · 还没人回复');
 
@@ -111,7 +110,7 @@ it('j / k open the next and previous row, Esc goes back, and mark-all is one cli
   const onOpen = vi.fn();
   const onBack = vi.fn();
   const render = (selection: { channelId: string; threadTs: string | null } | null) => root.render(
-    <ActivityList status={status} selection={selection} view={null} onOpen={onOpen} onSelectView={vi.fn()} onSearch={vi.fn()} onBack={onBack} />);
+    <ActivityList selection={selection} view={null} onOpen={onOpen} onSelectView={vi.fn()} onBack={onBack} />);
   await act(async () => render(null));
   const press = (key: string) => window.dispatchEvent(new KeyboardEvent('keydown', { key }));
   await act(async () => press('j'));
@@ -125,8 +124,9 @@ it('j / k open the next and previous row, Esc goes back, and mark-all is one cli
   await act(async () => press('Escape'));
   expect(onBack).toHaveBeenCalled();
 
-  // 在搜索框里打字时不触发
-  const input = host.querySelector<HTMLInputElement>('input[name="q"]')!;
+  // 在输入框里打字时不触发（比如 AI 面板的输入框）
+  const input = document.createElement('input');
+  host.appendChild(input);
   const calls = onOpen.mock.calls.length;
   await act(async () => input.dispatchEvent(new KeyboardEvent('keydown', { key: 'j', bubbles: true })));
   expect(onOpen.mock.calls.length).toBe(calls);

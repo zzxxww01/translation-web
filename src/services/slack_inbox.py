@@ -275,6 +275,171 @@ def parse_slack_text(text: str, user_name: Callable[[str], str]) -> List[Dict[st
     return segments
 
 
+# ---------------------------------------------------------------- blocks → mrkdwn
+#
+# 消息的 text 只是给通知用的简化版：表格被压成一行，列表 / 引用 / 换行有时也不全。
+# Slack 自己显示用的是 blocks，这里把 blocks 还原成 mrkdwn（表格写成 Markdown 表格），
+# 再走 parse_slack_text，前端按 mrkdwn 渲染。没有 blocks 或认不出来时退回 text。
+
+
+def _esc(text: str) -> str:
+    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+
+def _wrap(text: str, marker: str) -> str:
+    """给一段文字加 *粗* 之类的记号；首尾空白挪到记号外面，否则 Slack 记号不成立。"""
+    core = text.strip()
+    if not core:
+        return text
+    lead = text[: len(text) - len(text.lstrip())]
+    trail = text[len(text.rstrip()):]
+    return f"{lead}{marker}{core}{marker}{trail}"
+
+
+def _styled(text: str, style: Optional[Dict[str, Any]]) -> str:
+    style = style or {}
+    if style.get("code"):
+        text = _wrap(text, "`")
+    if style.get("bold"):
+        text = _wrap(text, "*")
+    if style.get("italic"):
+        text = _wrap(text, "_")
+    if style.get("strike"):
+        text = _wrap(text, "~")
+    return text
+
+
+def _emoji(el: Dict[str, Any]) -> str:
+    code = el.get("unicode") or ""
+    try:
+        return "".join(chr(int(part, 16)) for part in code.split("-")) if code else f":{el.get('name', '')}:"
+    except ValueError:
+        return f":{el.get('name', '')}:"
+
+
+def _inline(elements: Iterable[Dict[str, Any]]) -> str:
+    out = []
+    for el in elements or []:
+        kind = el.get("type")
+        if kind == "text":
+            out.append(_styled(_esc(el.get("text") or ""), el.get("style")))
+        elif kind == "link":
+            url = el.get("url") or ""
+            label = el.get("text") or ""
+            out.append(_styled(f"<{url}|{_esc(label)}>" if label else f"<{url}>", el.get("style")))
+        elif kind == "user":
+            out.append(f"<@{el.get('user_id', '')}>")
+        elif kind == "usergroup":
+            out.append(f"<!subteam^{el.get('usergroup_id', '')}>")
+        elif kind == "channel":
+            out.append(f"<#{el.get('channel_id', '')}>")
+        elif kind == "broadcast":
+            out.append(f"<!{el.get('range', 'here')}>")
+        elif kind == "emoji":
+            out.append(_emoji(el))
+        elif kind == "date":
+            out.append(_esc(el.get("fallback") or ""))
+        elif kind == "color":
+            out.append(_esc(el.get("value") or ""))
+        elif el.get("url"):
+            # message_mention（引用另一条消息）等带链接的元素；以后出现的新类型也按链接显示，不丢内容
+            url = str(el["url"])
+            label = str(el.get("text") or "")
+            out.append(f"<{url}|{_esc(label)}>" if label and label != url else f"<{url}>")
+        elif el.get("text"):
+            out.append(_esc(str(el["text"])))
+    return "".join(out)
+
+
+def _rich_text(block: Dict[str, Any]) -> str:
+    parts: List[Tuple[str, str]] = []
+    for el in block.get("elements") or []:
+        kind = el.get("type")
+        if kind == "rich_text_section":
+            parts.append(("inline", _inline(el.get("elements"))))
+        elif kind == "rich_text_list":
+            indent = "    " * int(el.get("indent") or 0)
+            start = int(el.get("offset") or 0) + 1
+            lines = []
+            for i, item in enumerate(el.get("elements") or []):
+                mark = f"{start + i}." if el.get("style") == "ordered" else "•"
+                lines.append(f"{indent}{mark} {_inline(item.get('elements')).strip()}")
+            parts.append(("list", "\n".join(lines)))
+        elif kind == "rich_text_quote":
+            body = _inline(el.get("elements")).rstrip("\n")
+            parts.append(("block", "\n".join(f"&gt; {line}" for line in body.split("\n"))))
+        elif kind == "rich_text_preformatted":
+            body = "".join(_esc(e.get("text") or "") if e.get("type") == "text" else _inline([e]) for e in el.get("elements") or [])
+            parts.append(("block", f"```\n{body.strip(chr(10))}\n```"))
+    # 列表、引用、代码块前后各空一行：不然会粘在上一段后面，或把下一段并进最后一个列表项
+    # 连续的列表块（缩进不同的嵌套列表）之间只换一行，保持是同一个列表
+    text = ""
+    prev = ""
+    for kind, part in parts:
+        if kind == "list" and prev == "list":
+            text = text.rstrip("\n") + "\n" + part + "\n\n"
+        elif kind in {"list", "block"}:
+            text = text.rstrip("\n") + "\n\n" if text.strip() else ""
+            text += part.strip("\n") + "\n\n"
+        else:
+            text += part
+        prev = kind
+    return re.sub(r"\n{3,}", "\n\n", text).strip("\n")
+
+
+def _cell(cell: Dict[str, Any]) -> str:
+    if cell.get("type") == "rich_text":
+        text = _rich_text(cell)
+    else:
+        text = _esc(str(cell.get("text") or ""))
+    return text.replace("|", "\\|").replace("\n", " ").strip()
+
+
+def _table(block: Dict[str, Any]) -> str:
+    rows = [[_cell(c) for c in row] for row in block.get("rows") or [] if row]
+    if not rows:
+        return ""
+    width = max(len(r) for r in rows)
+    lines = ["| " + " | ".join(r + [""] * (width - len(r))) + " |" for r in rows]
+    lines.insert(1, "|" + "---|" * width)
+    return "\n".join(lines)
+
+
+def _text_obj(obj: Optional[Dict[str, Any]]) -> str:
+    if not obj:
+        return ""
+    text = obj.get("text") or ""
+    return text if obj.get("type") == "mrkdwn" else _esc(text)
+
+
+def blocks_to_mrkdwn(blocks: Optional[List[Dict[str, Any]]]) -> Optional[str]:
+    """把消息的 blocks 还原成 mrkdwn；没有可显示的内容时返回 None（调用方退回 text）。"""
+    parts: List[str] = []
+    for block in blocks or []:
+        kind = block.get("type")
+        if kind == "rich_text":
+            parts.append(_rich_text(block))
+        elif kind == "section":
+            texts = [_text_obj(block.get("text"))] + [_text_obj(f) for f in block.get("fields") or []]
+            parts.append("\n".join(t for t in texts if t))
+        elif kind == "header":
+            parts.append(_wrap(_text_obj(block.get("text")), "*"))
+        elif kind == "context":
+            parts.append(" · ".join(t for t in (_text_obj(e) for e in block.get("elements") or [] if e.get("type") != "image") if t))
+        elif kind == "table":
+            table = _table(block)
+            parts.append(table)
+        elif kind == "divider":
+            parts.append("---")
+        elif kind == "image" and block.get("alt_text"):
+            parts.append(_esc(f"[图片] {block['alt_text']}"))
+    parts = [p for p in parts if p.strip()]
+    if not parts:
+        return None
+    # 块之间空一行：表格、分隔线前后必须有空行才能被识别
+    return "\n\n".join(parts)
+
+
 def segments_to_plain(segments: List[Dict[str, str]]) -> str:
     parts = []
     for seg in segments:
@@ -634,7 +799,7 @@ class SlackInbox:
             sender = self.user_name(user_id)
         else:
             sender = (msg.get("bot_profile") or {}).get("name") or msg.get("username") or "Bot"
-        segments = parse_slack_text(msg.get("text", ""), self.user_name)
+        segments = parse_slack_text(blocks_to_mrkdwn(msg.get("blocks")) or msg.get("text", ""), self.user_name)
         files = []
         for f in msg.get("files", []) or []:
             fid = self._register_file(f)

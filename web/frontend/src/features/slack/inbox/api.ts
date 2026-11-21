@@ -2,7 +2,7 @@ import { apiClient } from '@/shared/api/client';
 import { API_BASE } from '@/shared/constants';
 import type {
   SlackAgentContext, SlackConversationList, SlackMessagePage, SlackReplies, SlackStatus, SlackThread,
-  SlackDigestSection, SlackSearchResponse, SlackThreadSummary, SlackActivityItem,
+  SlackDigestSection, SlackThreadSummary, SlackActivityItem,
 } from './types';
 
 // Slack 完全只读：查询、导出、保存凭证；「标记已读」只写 momo 本地，不碰 Slack
@@ -61,8 +61,6 @@ export const slackInboxApi = {
   digest: () =>
     apiClient.get<{ sections: SlackDigestSection[] }>('/slack-inbox/digest', { retry: false, timeout: 300_000 }),
 
-  search: (q: string) =>
-    apiClient.get<SlackSearchResponse>('/slack-inbox/search', { params: { q }, retry: false, timeout: 180_000 }),
 
   exportUrl: (channelId: string, format: 'md' | 'json') =>
     `${API_BASE}/slack-inbox/conversations/${channelId}/export?format=${format}`,

@@ -56,3 +56,16 @@ it('strips markers for one-line previews', () => {
   expect(stripMrkdwn('> quote\n- item\n# Title')).toBe('quote\n• item\nTitle');
   expect(stripMrkdwn('2 * 3 and some_var')).toBe('2 * 3 and some_var');
 });
+
+it('renders what the backend builds from Slack blocks: tables, nested lists, line breaks', () => {
+  const text = 'Plan *today*:\n\n• one\n    • child\n\nafter <list> & more\nline2\n\n'
+    + '| Date | a\\|b |\n|---|---|\n| Nov 1 | *+1%* |\n\n---';
+  const host = dom(renderSlackText(text));
+  expect([...host.querySelectorAll('th')].map(n => n.textContent)).toEqual(['Date', 'a|b']);
+  expect(host.querySelector('td strong')?.textContent).toBe('+1%');
+  expect(host.querySelector('ul ul li')?.textContent).toBe('child');
+  const para = [...host.querySelectorAll('p')].find(p => p.textContent?.includes('after'));
+  expect(para?.querySelector('br')).not.toBeNull();
+  expect(para?.textContent).toContain('after <list> & more');
+  expect(host.querySelector('hr')).not.toBeNull();
+});
