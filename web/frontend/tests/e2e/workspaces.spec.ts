@@ -94,6 +94,8 @@ test('background translation tray survives an in-app route change', async ({ pag
 
   await page.getByRole('link', { name: '帖子翻译' }).click();
   await expect(page).toHaveURL(/\/post$/);
+  // 路由切换时旧页面会留到新页面的代码加载完；等帖子翻译页真正出来再看任务托盘
+  await expect(page.getByLabel('帖子原文')).toBeVisible();
   await expect(taskIndicator).toBeVisible();
   await expect(taskIndicator).toHaveAttribute('title', '正在翻译：Demo project');
   await taskIndicator.click();
