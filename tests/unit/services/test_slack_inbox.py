@@ -14,6 +14,7 @@ from src.services.slack_inbox import (
     SlackInbox,
     SlackInboxError,
     SlackReadOnlyClient,
+    blocks_to_mrkdwn,
     export_to_markdown,
     agent_context_markdown,
     mpim_label,
@@ -543,3 +544,53 @@ def test_digest_and_search_routes(inbox, monkeypatch):
 def test_usergroup_mention_in_search_format():
     assert parse_slack_text("<@S096243SP9T> hi", lambda uid: "WRONG") == [
         {"type": "mention", "text": "@用户组"}, {"type": "text", "text": " hi"}]
+
+
+def _rt(*elements):
+    return {"type": "rich_text", "elements": list(elements)}
+
+
+def _section(*inline):
+    return {"type": "rich_text_section", "elements": list(inline)}
+
+
+def test_blocks_keep_tables_lists_quotes_and_line_breaks():
+    blocks = [
+        _rt(
+            _section({"type": "text", "text": "Plan "}, {"type": "text", "text": "today ", "style": {"bold": True}},
+                     {"type": "link", "url": "https://a.com", "text": "doc"}, {"type": "text", "text": " <b> & co\nline2\n"}),
+            {"type": "rich_text_list", "style": "bullet", "indent": 0, "elements": [_section({"type": "text", "text": "one"})]},
+            {"type": "rich_text_list", "style": "bullet", "indent": 1, "elements": [_section({"type": "text", "text": "child"})]},
+            {"type": "rich_text_list", "style": "ordered", "indent": 0, "offset": 2, "elements": [_section({"type": "text", "text": "third"})]},
+            _section({"type": "text", "text": "after"}, {"type": "emoji", "name": "fire", "unicode": "1f525"},
+                     {"type": "user", "user_id": "U1"},
+                     {"type": "message_mention", "url": "https://x.slack.com/archives/C1/p1", "channel_id": "C1"}),
+            {"type": "rich_text_quote", "elements": [{"type": "text", "text": "q1\nq2"}]},
+            {"type": "rich_text_preformatted", "elements": [{"type": "text", "text": "x = <1>"}]},
+        ),
+        {"type": "table", "rows": [
+            [{"type": "raw_text", "text": "Date"}, {"type": "raw_text", "text": "a|b"}],
+            [{"type": "raw_text", "text": "Nov 1"}, _rt(_section({"type": "text", "text": "+1%", "style": {"bold": True}}))],
+        ]},
+        {"type": "divider"},
+    ]
+    out = blocks_to_mrkdwn(blocks)
+    # 相邻的列表块只换一行（嵌套 / 换成有序列表在 Markdown 里都自然成立），列表前后空一行
+    assert out.startswith("Plan *today* <https://a.com|doc> &lt;b&gt; &amp; co\nline2\n\n• one\n    • child\n3. third\n\nafter")
+    assert "after🔥<@U1><https://x.slack.com/archives/C1/p1>" in out
+    assert "&gt; q1\n&gt; q2" in out and "```\nx = &lt;1&gt;\n```" in out
+    assert "| Date | a\\|b |\n|---|---|\n| Nov 1 | *+1%* |" in out
+    assert out.endswith("\n\n---")
+    assert blocks_to_mrkdwn([]) is None and blocks_to_mrkdwn([{"type": "unknown"}]) is None
+
+
+def test_message_text_comes_from_blocks_when_present(inbox):
+    msg = inbox.normalize_message("C000000001", {
+        "ts": f"{NOW:.6f}", "user": "UAAAAAAAA1",
+        "text": "flattened | Date | 1d | |---|---| | Nov 1 | +1% |",  # 通知用的简化版：表格挤成一行
+        "blocks": [{"type": "table", "rows": [[{"type": "raw_text", "text": "Date"}, {"type": "raw_text", "text": "1d"}],
+                                              [{"type": "raw_text", "text": "Nov 1"}, {"type": "raw_text", "text": "+1%"}]]}],
+    })
+    assert msg["text"] == "| Date | 1d |\n|---|---|\n| Nov 1 | +1% |"
+    fallback = inbox.normalize_message("C000000001", {"ts": f"{NOW:.6f}", "user": "UAAAAAAAA1", "text": "plain *text*"})
+    assert fallback["text"] == "plain *text*"

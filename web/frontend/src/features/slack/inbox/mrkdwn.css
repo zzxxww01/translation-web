@@ -75,6 +75,12 @@
   border: 1px solid var(--color-border-subtle);
   padding: 0.3em 0.6em;
   text-align: left;
+  /* 数字表格不折行（「+8.8%」不能拆成两行）；太宽时整个表格横向滚动 */
+  white-space: nowrap;
+}
+.slack-md th {
+  background: var(--color-bg-tertiary);
+  font-weight: 600;
 }
 .slack-md hr {
   border: 0;

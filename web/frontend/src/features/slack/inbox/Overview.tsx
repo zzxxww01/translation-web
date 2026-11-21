@@ -96,7 +96,7 @@ export function Overview({ onOpen, onDigest }: { onOpen: (item: SlackActivityIte
 
             <ul className="list-disc space-y-1 pl-5 text-xs leading-relaxed text-text-muted">
               <li>点一行只看那一个 thread / 私信；thread 的 AI 翻译、私信的 AI 回复都要点「开始」才会跑。</li>
-              <li>快捷键：j / k 下一条 / 上一条，/ 搜索，t 全部中文，Esc 关闭。</li>
+              <li>快捷键：j / k 下一条 / 上一条，t 全部中文，Esc 关闭。</li>
               <li>momo 只读：不会往 Slack 发任何东西，已读只记在 momo 里。</li>
             </ul>
           </>

@@ -9,7 +9,6 @@ import { newestTs, parseSlackView, type SlackView } from './inbox/lib';
 import { ActivityList } from './inbox/ActivityList';
 import { ThreadPanel } from './inbox/ThreadPanel';
 import { DigestView } from './inbox/DigestView';
-import { SearchView } from './inbox/SearchView';
 import { ThreadsView } from './inbox/ThreadsView';
 import { Overview } from './inbox/Overview';
 import type { OpenThread, SlackActivityItem } from './inbox/types';
@@ -42,7 +41,7 @@ function ThreadAgentAside({ thread }: { thread: OpenThread }) {
 /**
  * Slack 页：左栏「动态」（每行一个 thread 或私信，按最近活动排序），点开在中栏只看那一个 thread / 私信。
  * 2026-11-18 用户反馈频道视图太乱，改成活动列；整个频道的消息流仍可从 thread 标题下的频道名进入。
- * URL：c=会话（私信或整个频道），view=digest|search|reply|threads，tc+t=打开的 thread，ai=1 窄屏上显示私信的 AI。
+ * URL：c=会话（私信或整个频道），view=digest|reply|threads，tc+t=打开的 thread，ai=1 窄屏上显示私信的 AI。
  * 每个 thread 背后是帖子翻译助手（thread 的「AI 翻译」页），每个私信背后是回复助手（私信打开时的右栏）。
  */
 export function SlackFeature() {
@@ -71,8 +70,6 @@ export function SlackFeature() {
   };
   const selectConversation = (id: string) => update({ c: id, view: null, tc: null, t: null, ai: null });
   const selectView = (v: SlackView) => update({ view: v, c: null, tc: null, t: null, q: null });
-  const search = (q: string) => update({ view: 'search', q, c: null, tc: null, t: null });
-  const searchQuery = params.get('q') ?? '';
   // 速览 / 搜索结果里点一条：去对应会话，thread 的话右栏同时打开
   const openFrom = (channelId: string, threadTs: string | null) =>
     threadTs ? showThread({ channelId, threadTs }) : update({ c: channelId, view: null, q: null, ai: null, tc: null, t: null });
@@ -112,12 +109,10 @@ export function SlackFeature() {
         hasMain ? 'hidden' : 'flex'
       )}>
         <ActivityList
-          status={status.data}
           selection={selection}
           view={view}
           onOpen={openActivity}
           onSelectView={selectView}
-          onSearch={search}
           onBack={hasMain ? back : undefined}
         />
       </aside>
@@ -141,8 +136,6 @@ export function SlackFeature() {
           <div className="min-h-0 flex-1 overflow-auto"><ReplyWorkbench /></div>
         ) : view === 'digest' ? (
           <DigestView onOpen={openFrom} onBack={back} />
-        ) : view === 'search' ? (
-          <SearchView key={searchQuery} query={searchQuery} onSearch={search} onOpen={openFrom} onBack={back} />
         ) : view === 'threads' ? (
           <ThreadsView conversations={conversations} openThread={openThread} onOpenThread={showThread} onBack={back} />
         ) : selected ? (

@@ -34,10 +34,10 @@ export function splitSidebar(conversations: SlackConversation[]) {
   };
 }
 
-/** 中栏除了会话之外的页面：Threads 汇总、AI 速览、搜索结果、自由翻译（原回复工作台）。 */
-export type SlackView = 'threads' | 'digest' | 'search' | 'reply';
+/** 中栏除了会话之外的页面：Threads 汇总、AI 速览、回复工作台。搜索 2026-11-21 按用户要求去掉。 */
+export type SlackView = 'threads' | 'digest' | 'reply';
 
-const VIEWS: SlackView[] = ['threads', 'digest', 'search', 'reply'];
+const VIEWS: SlackView[] = ['threads', 'digest', 'reply'];
 
 export function parseSlackView(value: string | null): SlackView | null {
   return VIEWS.includes(value as SlackView) ? (value as SlackView) : null;
