@@ -399,8 +399,8 @@ async def slack_status(project_id: str) -> Dict[str, Any]:
 # ---------------------------------------------------------------- slack-todos / drafts / draft / translate-slack-post
 
 # 配图按原图返回（base64）。单张、合计都设上限，超了只给元数据，Muse 可以去网页下载
-MAX_IMAGE_BYTES = 10_000_000
-MAX_IMAGES_TOTAL_BYTES = 40_000_000
+MAX_IMAGE_BYTES = 30_000_000
+MAX_IMAGES_TOTAL_BYTES = 100_000_000
 
 
 def _draft_link(doc: Dict[str, Any]) -> str:
