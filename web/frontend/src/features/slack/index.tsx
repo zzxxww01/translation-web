@@ -92,7 +92,7 @@ export function SlackFeature() {
   return (
     <div className="flex h-full min-h-0">
       <aside className={cn(
-        'w-full shrink-0 flex-col border-r border-border-subtle bg-[#faf6f5] md:flex md:w-[360px]',
+        'w-full shrink-0 flex-col border-r border-border-subtle bg-[#faf6f5] md:flex md:w-[380px]',
         hasMain ? 'hidden' : 'flex'
       )}>
         <ActivityList

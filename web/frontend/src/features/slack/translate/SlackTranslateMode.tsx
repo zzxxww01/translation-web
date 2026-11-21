@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { ModelSelector } from '@/components/ModelSelector';
 import { ResizablePanes } from '@/components/layout/ResizablePanes';
+import { PageActions } from '@/components/layout/HeaderSlot';
 import { Button } from '@/components/ui/Button';
 import { copyToClipboard } from '@/shared/utils';
 import { createPostStore, type PostStoreHook } from '@/shared/stores/postStore';
@@ -284,26 +285,25 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-background">
-      <div className="flex shrink-0 flex-wrap items-center gap-3 border-b border-border-subtle bg-white/80 px-4 py-2.5">
-        <Button variant="ghost" size="sm" className="h-8 px-2" onClick={onExit}>
+      <PageActions>
+        <Button variant="ghost" size="sm" className="h-8 shrink-0 px-2" onClick={onExit}>
           <ArrowLeft className="h-4 w-4" /> 退出翻译
         </Button>
-        <div className="min-w-0 flex-1">
-          <div className="truncate text-[15px] font-semibold text-text-primary" title={title}>{title}</div>
-          <div className="text-xs text-text-muted">#{doc?.slack?.channel_name || channelName} · 帖子翻译</div>
+        <div className="hidden min-w-0 max-w-[22rem] truncate text-sm text-text-secondary 2xl:block" title={title}>
+          <span className="text-text-muted">#{doc?.slack?.channel_name || channelName} · </span>{title}
         </div>
         <SaveState saving={sync.saving} savedAt={sync.savedAt} hasDraft={!!draftId} />
         <PendingChip ws={ws} />
         {draftId && (
-          <Button variant={status === 'done' ? 'secondary' : 'outline'} size="sm" className="h-8" onClick={toggleDone}>
+          <Button variant={status === 'done' ? 'secondary' : 'ghost'} size="sm" className="h-8 shrink-0" onClick={toggleDone}>
             {status === 'done' ? <CheckCircle2 className="h-4 w-4 text-success" /> : <Circle className="h-4 w-4" />}
             {status === 'done' ? '已完成' : '标记完成'}
           </Button>
         )}
-        <div className="w-48" title="翻译和优化用的模型">
+        <div className="w-40 shrink-0" title="翻译和优化用的模型">
           <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-8 text-sm" disabled={ws.isLoading} />
         </div>
-      </div>
+      </PageActions>
       <ResizablePanes
         storageKey="slack-translate-panes-v1"
         mobileDefault="work"

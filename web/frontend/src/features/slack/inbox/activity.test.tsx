@@ -74,7 +74,8 @@ it('lists everything by time with the original first line, who is talking and th
   expect(first.textContent).toContain('Reyk Knuhtsen 发起 · 17 条回复 · 3 人参与');
   expect(first.textContent).toContain('Daksh Malik：@Felix Zhou');
   expect(first.textContent).toContain('@我');
-  expect(first.textContent).toContain('自动翻好');                 // 后台自动翻好的帖子
+  expect(first.getAttribute('title')).toContain('自动翻好');      // 后台自动翻好的帖子：只是底色变一点，没有彩色标签
+  expect(first.textContent).toContain('翻译草稿');
   expect(dm.textContent).toContain('Michelle Shen');
   expect(dm.textContent).toContain('私信');
   await act(async () => first.click());
@@ -101,11 +102,14 @@ it('one row of filters with unread counts, remembered; unread view has mark-all'
   expect(localStorage.getItem('slack-activity-filter')).toBe('following');
 });
 
-it('the todo button shows unread @me / DM count and goes back to my todos', async () => {
+it('the todo button shows the same count as my todos and goes back to them', async () => {
+  todos.data = { items: [{ kind: 'dm', channel_id: 'D1', channel_name: 'Michelle', conversation_kind: 'im', thread_ts: null,
+    title: 'Michelle', from: ['Michelle'], count: 1, latest_ts: '1.1', task: 'x', action: 'reply',
+    mark: { channel_id: 'D1', ts: '1.1' }, draft: null }], fyi: [] };
   const onShowTodos = vi.fn();
   await render({ onShowTodos });
-  const button = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.trim().startsWith('待办'))!;
-  expect(button.textContent?.trim()).toBe('待办1');
+  const button = host.querySelector<HTMLButtonElement>('[aria-label="我的待办"]')!;
+  expect(button.textContent?.trim()).toBe('1');
   await act(async () => button.click());
   expect(onShowTodos).toHaveBeenCalled();
   expect(host.textContent).not.toContain('AI 速览');
@@ -155,7 +159,7 @@ it('my todos: one line per task, translate button, broadcasts folded, done marks
   await act(async () => root.render(<TodoView onOpen={onOpen} onTranslate={onTranslate} />));
   expect(host.textContent).toContain('Michelle 在等你回复');
   expect(host.textContent).toContain('要回复');
-  const translate = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.includes('已自动翻好'))!;
+  const translate = Array.from(host.querySelectorAll('button')).find(b => b.textContent?.includes('查看翻译'))!;
   await act(async () => translate.click());
   expect(onTranslate).toHaveBeenCalledWith('C1', '2.2');
   expect(host.textContent).toContain('不用处理（群发 @）· 1');

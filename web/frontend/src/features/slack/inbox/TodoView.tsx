@@ -62,7 +62,7 @@ function TodoCard({ item, onOpen, onTranslate }: {
               )}
             >
               {draft ? <Sparkles className="h-3.5 w-3.5" /> : <FileText className="h-3.5 w-3.5" />}
-              {draft ? (draft.auto && !draft.seen ? '已自动翻好 · 查看' : `查看翻译 · v${draft.versions}`) : '翻译这个帖子'}
+              {draft ? `查看翻译 · v${draft.versions}` : '翻译这个帖子'}
             </button>
           )}
         </div>

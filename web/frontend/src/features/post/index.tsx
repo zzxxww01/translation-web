@@ -4,6 +4,7 @@ import { CheckCircle2, Circle } from 'lucide-react';
 import { toast } from 'sonner';
 import { ModelSelector } from '@/components/ModelSelector';
 import { ResizablePanes } from '@/components/layout/ResizablePanes';
+import { PageActions } from '@/components/layout/HeaderSlot';
 import { Button } from '@/components/ui/Button';
 import { usePostStore } from '@/shared/stores';
 import { SourceInput } from './components/SourceInput';
@@ -54,22 +55,20 @@ export function PostFeature() {
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="flex shrink-0 flex-wrap items-center gap-3 border-b border-border-subtle bg-white/60 px-5 py-2.5">
-        <h1 className="text-lg font-semibold text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>帖子翻译</h1>
+      <h1 className="sr-only">帖子翻译</h1>
+      <PageActions>
         <SaveState saving={sync.saving} savedAt={sync.savedAt} hasDraft={!!draftId} />
-        <div className="ml-auto flex items-center gap-2">
-          <PendingChip ws={ws} />
-          {draftId && (
-            <Button variant={status === 'done' ? 'secondary' : 'outline'} size="sm" className="h-9" onClick={toggleDone}>
-              {status === 'done' ? <CheckCircle2 className="h-4 w-4 text-success" /> : <Circle className="h-4 w-4" />}
-              {status === 'done' ? '已完成' : '标记完成'}
-            </Button>
-          )}
-          <div className="w-52" title="翻译用的模型">
-            <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-9 text-sm" disabled={ws.isLoading} />
-          </div>
+        <PendingChip ws={ws} />
+        {draftId && (
+          <Button variant={status === 'done' ? 'secondary' : 'ghost'} size="sm" className="h-8" onClick={toggleDone}>
+            {status === 'done' ? <CheckCircle2 className="h-4 w-4 text-success" /> : <Circle className="h-4 w-4" />}
+            {status === 'done' ? '已完成' : '标记完成'}
+          </Button>
+        )}
+        <div className="w-44" title="翻译用的模型">
+          <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-8 text-sm" disabled={ws.isLoading} />
         </div>
-      </div>
+      </PageActions>
 
       <ResizablePanes
         storageKey="post-panes-v1"

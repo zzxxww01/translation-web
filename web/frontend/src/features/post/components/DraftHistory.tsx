@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
-import { FileText, Hash, Loader2, Plus, Search, Sparkles, Trash2 } from 'lucide-react';
+import { FileText, Hash, Loader2, Plus, Search, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { draftsApi, useDraftList, type DraftSummary } from '../drafts';
@@ -14,14 +14,9 @@ function when(ts: number): string {
   return `${d.getMonth() + 1}/${d.getDate()}`;
 }
 
-export function StatusBadge({ item }: { item: Pick<DraftSummary, 'status' | 'auto' | 'seen'> }) {
-  if (item.status === 'done') {
-    return <span className="shrink-0 rounded-full bg-success/10 px-1.5 text-[10px] font-medium leading-4 text-success">✓ 已完成</span>;
-  }
-  if (item.auto && !item.seen) {
-    return <span className="shrink-0 rounded-full bg-primary-500 px-1.5 text-[10px] font-medium leading-4 text-white">自动翻好 · 待查看</span>;
-  }
-  return <span className="shrink-0 rounded-full bg-amber-100 px-1.5 text-[10px] font-medium leading-4 text-amber-800">草稿</span>;
+function statusText(item: Pick<DraftSummary, 'status' | 'auto' | 'seen'>): string {
+  if (item.status === 'done') return '已完成';
+  return item.auto && !item.seen ? '自动翻好' : '草稿';
 }
 
 /**
@@ -76,7 +71,7 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
             key={item.id}
             className={cn(
               'group relative border-b border-border-subtle transition-colors',
-              item.id === activeId ? 'bg-primary-50' : 'hover:bg-bg-hover'
+              item.id === activeId ? 'bg-primary-50' : item.auto && !item.seen ? 'bg-primary-50/40 hover:bg-primary-50/70' : 'hover:bg-bg-hover'
             )}
           >
             <button type="button" onClick={() => onOpen(item)} className="flex w-full gap-3 px-3 py-2.5 text-left">
@@ -95,18 +90,18 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-1.5">
                   <span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-text-primary">{item.title || '（无标题）'}</span>
-                  <StatusBadge item={item} />
+                  <span className="shrink-0 text-[11px] text-text-muted">{when(item.updated_at)}</span>
                 </div>
                 <div className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-text-secondary">
                   {item.preview || item.source_preview || '还没有译文'}
                 </div>
-                <div className="mt-1 flex items-center gap-1.5 text-[11px] text-text-muted">
-                  {item.source === 'slack'
-                    ? <span className="inline-flex items-center gap-0.5"><Sparkles className="h-3 w-3" />Slack{item.slack?.channel_name ? ` · #${item.slack.channel_name}` : ''}</span>
-                    : <span>手动</span>}
-                  <span>· v{item.versions}</span>
-                  {item.image_count > 0 && <span>· {item.image_count} 张图</span>}
-                  <span className="ml-auto">{when(item.updated_at)}</span>
+                <div className="mt-1 truncate text-[11px] text-text-muted">
+                  {[
+                    item.source === 'slack' ? 'Slack' : '手动',
+                    statusText(item),
+                    `v${item.versions}`,
+                    item.image_count > 0 ? `${item.image_count} 张图` : '',
+                  ].filter(Boolean).join(' · ')}
                 </div>
               </div>
             </button>

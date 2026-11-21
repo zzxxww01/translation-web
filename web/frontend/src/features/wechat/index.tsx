@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { PageActions } from '@/components/layout/HeaderSlot';
 import {
   Check,
   Clipboard,
@@ -195,24 +196,20 @@ export function WechatFeature() {
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-background">
-      <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border-subtle px-5 py-4 sm:px-8">
-        <div className="min-w-0">
-          <h1 className="truncate text-xl text-text-primary sm:text-2xl">微信公众号排版</h1>
-          <p className="mt-1 truncate text-xs text-text-muted">
-            当前样式：{selectedThemeName} · {imageModeName}
-          </p>
-        </div>
-        <Button
+      <h1 className="sr-only">微信公众号排版</h1>
+      {/* 页面操作放进全站顶栏，不再另占一行（2026-11-22） */}
+      <PageActions>
+        <button
           type="button"
-          variant="outline"
-          size="icon"
           onClick={() => setSettingsOpen(true)}
+          className="inline-flex h-8 min-w-0 items-center gap-1.5 rounded-md px-2 text-xs text-text-secondary hover:bg-bg-hover"
           aria-label="打开排版设置"
           title="排版设置"
         >
-          <Settings2 className="h-4 w-4" />
-        </Button>
-      </header>
+          <Settings2 className="h-4 w-4 shrink-0" />
+          <span className="truncate">样式：{selectedThemeName} · {imageModeName}</span>
+        </button>
+      </PageActions>
 
       <div className="flex shrink-0 border-b p-2 lg:hidden" role="tablist" aria-label="排版工作区">
         <button
