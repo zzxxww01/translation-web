@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { ExternalLink, FileDown, Languages, Loader2, MessageSquareText } from 'lucide-react';
+import { Copy, ExternalLink, FileDown, Languages, Loader2, MessageSquareText } from 'lucide-react';
+import { toast } from 'sonner';
 import { cn } from '@/lib/utils';
 import { useOneZh } from './ai';
 import { clockTime, emojiFor } from './lib';
@@ -164,6 +165,22 @@ export function MessageItem({ message, compact = false, onOpenThread, active = f
             aria-label={askedZh ? '收起中文' : '翻译这条'}
           >
             <Languages className="h-4 w-4" />
+          </button>
+        )}
+        {message.text.trim() && (
+          <button
+            type="button"
+            onClick={() => {
+              navigator.clipboard.writeText(message.text).then(
+                () => toast.success('已复制原文'),
+                () => toast.error('复制失败，浏览器没给剪贴板权限'),
+              );
+            }}
+            className="rounded p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary"
+            title="复制原文"
+            aria-label="复制原文"
+          >
+            <Copy className="h-4 w-4" />
           </button>
         )}
         {onOpenThread && (

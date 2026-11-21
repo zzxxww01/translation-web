@@ -1,10 +1,11 @@
-import { useState } from 'react';
-import { FileText, Hash, Languages, Loader2, MessageSquareText, MessagesSquare, RefreshCw, Search, Sparkles, Users } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { CheckCheck, FileText, Hash, Languages, Loader2, MessageSquareText, MessagesSquare, RefreshCw, Search, Sparkles, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { AgentBadge } from '../agent/AgentBadge';
 import { useSlackAgentRuns } from '../agent/agentRuns';
 import { Avatar } from './MessageItem';
-import { useRefreshSlack, useSlackActivity } from './hooks';
+import { useShowZh } from './ai';
+import { useMarkAllRead, useRefreshSlack, useSlackActivity } from './hooks';
 import { clockTime, emojify, stripLeadingMentions, type SlackView } from './lib';
 import { stripMrkdwn } from './mrkdwn';
 import type { SlackActivityItem, SlackMessage, SlackStatus } from './types';
@@ -39,7 +40,17 @@ interface ActivityListProps {
   onOpen: (item: SlackActivityItem) => void;
   onSelectView: (view: SlackView) => void;
   onSearch: (q: string) => void;
+  /** Esc：关掉正在看的 thread / 会话 */
+  onBack?: () => void;
 }
+
+/** 在输入框里打字时不响应快捷键 */
+function isTyping(target: EventTarget | null): boolean {
+  const el = target as HTMLElement | null;
+  return !!el && (el.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(el.tagName));
+}
+
+const SHORTCUTS = '快捷键：j / k 下一条 / 上一条，/ 搜索，t 全部中文，Esc 关闭';
 
 /** 消息第一行（去掉 *加粗*、`代码` 等格式记号，表情码换成 emoji）；没有文字时用附件名 */
 function firstLine(message: SlackMessage | null | undefined, max = 80, asTitle = false): string {
@@ -64,10 +75,13 @@ function shortTime(ts: string, now = new Date()): string {
  * 「动态」：每一行是一个 thread（频道里最近 7 天的，含还没人回复的新帖）或一个私信对话，按最近有人说话的时间排序。
  * 点一行只看那一个 thread / 私信，不用进整个频道。
  */
-export function ActivityList({ status, selection, view, onOpen, onSelectView, onSearch }: ActivityListProps) {
+export function ActivityList({ status, selection, view, onOpen, onSelectView, onSearch, onBack }: ActivityListProps) {
   const [filter, setFilter] = useState<Filter>('all');
   const activity = useSlackActivity(true);
   const refresh = useRefreshSlack();
+  const markAll = useMarkAllRead();
+  const toggleZh = useShowZh(state => state.toggleZh);
+  const searchRef = useRef<HTMLInputElement>(null);
   const agents = useSlackAgentRuns();
   const all = activity.data ?? [];
   const items = all.filter(item => matches(item, filter));
@@ -78,19 +92,57 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
     mentions: all.filter(item => item.mentions_me).length,
     dm: all.filter(item => item.type === 'dm' && item.has_unreads).length,
   };
+
+  // 键盘：j / k 在当前筛选的列表里切换并打开，/ 搜索，t 全部中文，Esc 关闭
+  const keys = useRef({ items, selection, onOpen, onBack, toggleZh });
+  useEffect(() => {
+    keys.current = { items, selection, onOpen, onBack, toggleZh };
+  });
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey || isTyping(e.target)) return;
+      const { items: list, selection: sel, onOpen: open, onBack: back, toggleZh: zh } = keys.current;
+      if (e.key === 'j' || e.key === 'k') {
+        if (list.length === 0) return;
+        const at = sel ? list.findIndex(i => i.channel_id === sel.channelId && i.thread_ts === sel.threadTs) : -1;
+        const next = at < 0 ? 0 : Math.min(list.length - 1, Math.max(0, at + (e.key === 'j' ? 1 : -1)));
+        if (next !== at) open(list[next]);
+        e.preventDefault();
+      } else if (e.key === '/') {
+        searchRef.current?.focus();
+        e.preventDefault();
+      } else if (e.key === 't') {
+        zh();
+      } else if (e.key === 'Escape' && back) {
+        back();
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
   // 只有一个频道时每行都写同一个频道名没意义，省下位置给「谁发起、几条回复」
   const manyChannels = new Set((activity.data ?? []).filter(item => item.type === 'thread').map(item => item.channel_id)).size > 1;
 
   return (
     <>
-      <div className="flex items-center justify-between border-b border-border-subtle px-4 py-3">
-        <div className="min-w-0">
+      <div className="flex items-center gap-0.5 border-b border-border-subtle px-4 py-3">
+        <div className="min-w-0 flex-1">
           <div className="truncate text-[15px] font-bold text-text-primary">动态 · {status.team}</div>
           <div className="truncate text-xs text-text-muted" title="消息存在服务器上，后台每分钟只拉新的；momo 不往 Slack 发任何东西">
             {status.user}
             {status.local?.last_sync ? ` · 同步于 ${clockTime(String(status.local.last_sync))}` : ''}
           </div>
         </div>
+        <button
+          type="button"
+          onClick={() => markAll.mutate()}
+          disabled={markAll.isPending || counts.unread === 0}
+          className="rounded-md p-1.5 text-text-muted hover:bg-bg-hover hover:text-text-primary disabled:opacity-40"
+          title="全部标为已读（只记在 momo 里，Slack 的未读不变）"
+          aria-label="全部标为已读"
+        >
+          <CheckCheck className="h-4 w-4" />
+        </button>
         <button
           type="button"
           onClick={() => refresh.mutate()}
@@ -113,7 +165,7 @@ export function ActivityList({ status, selection, view, onOpen, onSelectView, on
           }}
         >
           <Search className="h-3.5 w-3.5 shrink-0 text-text-muted" />
-          <input name="q" placeholder="搜索（中文也行）" aria-label="搜索 Slack" className="min-w-0 flex-1 bg-transparent py-1.5 text-sm outline-none placeholder:text-text-muted" />
+          <input ref={searchRef} name="q" placeholder="搜索（中文也行）  /" aria-label="搜索 Slack" title={SHORTCUTS} className="min-w-0 flex-1 bg-transparent py-1.5 text-sm outline-none placeholder:text-text-muted" />
         </form>
         <div className="flex items-center gap-1" role="tablist" aria-label="筛选动态">
           {FILTERS.map(([id, label]) => (

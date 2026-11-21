@@ -132,6 +132,18 @@ export function useMarkThreadRead() {
   });
 }
 
+export function useMarkAllRead() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: slackInboxApi.markAllRead,
+    onSuccess: () => {
+      toast.success('已全部标为已读（只在 momo 里，Slack 的未读不变）');
+      void queryClient.invalidateQueries({ queryKey: ['slack-inbox'] });
+    },
+    onError: error => toast.error(error instanceof Error ? error.message : '没标成功'),
+  });
+}
+
 export function useRefreshSlack() {
   const queryClient = useQueryClient();
   const { handleError } = useErrorHandler();

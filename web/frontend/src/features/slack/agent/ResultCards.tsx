@@ -63,6 +63,10 @@ export function ResultCards({ result, slackLink }: { result: SlackAgentResult; s
                   <span className="min-w-0 flex-1">{t}</span>
                   <span className="text-[11px] text-text-muted">{[...t].length} 字</span>
                   <CopyButton text={t} className="px-1.5" label="" />
+                  {result.translation && (
+                    // 发帖时标题和正文一起贴：标题一行，空一行，译文
+                    <CopyButton text={`${t}\n\n${result.translation}`} className="px-1.5" label="连译文" />
+                  )}
                 </li>
               ))}
             </ul>

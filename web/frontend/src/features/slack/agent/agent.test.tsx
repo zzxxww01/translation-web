@@ -38,6 +38,7 @@ it('renders translation and reply cards with copy actions', async () => {
     expect(host.textContent).toContain('中文译文');
     expect(host.textContent).toContain('标题二');
     expect(host.textContent).toContain('3 字');
+    expect(host.textContent).toContain('连译文');  // 标题 + 译文一起复制
 
     await act(async () => root.render(
       <ResultCards

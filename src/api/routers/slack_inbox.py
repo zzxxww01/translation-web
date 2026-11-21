@@ -125,6 +125,12 @@ async def mark_conversation(request: Request, channel_id: str, body: SlackMarkRe
     return await _run(get_slack_inbox().mark_conversation, channel_id, body.ts)
 
 
+@router.post("/mark-all")
+@limiter.limit("10/minute")
+async def mark_all_read(request: Request):
+    return await _run(get_slack_inbox().mark_all_read)
+
+
 @router.post("/conversations/{channel_id}/threads/{thread_ts}/mark")
 @limiter.limit("60/minute")
 async def mark_thread(request: Request, channel_id: str, thread_ts: str, body: SlackMarkRequest):

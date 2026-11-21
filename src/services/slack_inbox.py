@@ -1020,6 +1020,21 @@ class SlackInbox:
             raise SlackInboxError("BAD_TS", "ts 格式不对", 400)
         return {"ok": True, "marked": self.db.mark_read(channel_id, ts, thread_ts)}
 
+    def mark_all_read(self) -> Dict[str, Any]:
+        """「全部标为已读」：动态里所有未读的 thread / 新帖 / 私信，以及有未读的频道，都推到最新。只记在 momo 本地。"""
+        marked = 0
+        for item in self.activity()["items"]:
+            if not item["has_unreads"]:
+                continue
+            if item["type"] == "thread":
+                marked += self.db.mark_read(item["channel_id"], item["latest_ts"], item["thread_ts"])
+            else:
+                marked += self.db.mark_read(item["channel_id"], item["latest_ts"])
+        for conv in self.conversations():
+            if conv["has_unreads"] and conv["latest_ts"]:
+                marked += self.db.mark_read(conv["id"], conv["latest_ts"])
+        return {"ok": True, "marked": marked}
+
     # -- 附件
 
     def _register_file(self, f: Dict[str, Any]) -> Optional[str]:

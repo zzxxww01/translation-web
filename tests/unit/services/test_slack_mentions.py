@@ -222,3 +222,13 @@ def test_activity_lists_threads_and_dms_by_latest_activity(inbox, monkeypatch):
     assert thread["mentions_me"] is True and thread["channel_name"] == "general"
     assert dm["last"]["text"] == "hey Felix" and dm["channel_name"] == "Alice" and dm["thread_ts"] is None
     assert not any("mark" in method for method in inbox._fake.calls)
+
+
+def test_mark_all_read_clears_activity_locally(inbox, monkeypatch):
+    monkeypatch.setattr(inbox, "sync_conversation", lambda *a, **k: 0)
+    inbox.db.upsert(CID, [{"ts": ts(40), "user": "UAAAAAAAA1", "text": "new post"}], in_history=True)
+    inbox.db.upsert(DM, [{"ts": ts(50), "user": "UAAAAAAAA1", "text": "hey Felix"}], in_history=True)
+    assert any(i["has_unreads"] for i in inbox.activity()["items"])
+    assert inbox.mark_all_read()["marked"] >= 1
+    assert not any(i["has_unreads"] for i in inbox.activity()["items"])
+    assert not any("mark" in method for method in inbox._fake.calls)  # 不碰 Slack 的已读
