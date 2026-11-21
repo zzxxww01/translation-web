@@ -110,6 +110,20 @@ def get_task_model_alias(task_type: str) -> str:
     return alias.strip().lower()
 
 
+def get_task_fallback_alias(task_type: str) -> str | None:
+    """Return the whole-request fallback alias for a task default, if configured."""
+    try:
+        from .config_loader import get_config_loader
+
+        config_loader = get_config_loader()
+        alias = config_loader.load().task_fallbacks.get(task_type)
+        if alias:
+            return config_loader.resolve_config_model_alias(alias)
+    except Exception as e:
+        logger.warning(f"[LLM Factory] Failed to resolve task fallback for {task_type}: {e}")
+    return None
+
+
 def get_llm_provider_for_task(task_type: str) -> LLMProvider:
     """Get LLM provider configured for a specific task type.
 

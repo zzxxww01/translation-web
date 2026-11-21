@@ -34,9 +34,16 @@ def test_slack_uses_only_official_gpt_sol(monkeypatch):
     assert route and set(route) == {("openai-official", "gpt-6.1-sol")}
 
 
-@pytest.mark.parametrize("task", ["longform", "post"])
-def test_relay_flash_tasks_fall_back_to_official_flash(monkeypatch, task):
-    route = task_route(monkeypatch, task)
+def test_post_uses_only_official_gpt_6_2_sol_then_task_fallback(monkeypatch):
+    # 2026-11-21 用户要求帖子翻译默认走官方 GPT-6.2 Sol；整条失败后才由 task_fallbacks 退回 gemini-flash
+    route = task_route(monkeypatch, "post")
+    assert route and set(route) == {("openai-official", "gpt-6.2-sol")}
+    assert load_config(monkeypatch).task_fallbacks["post"] == "gemini-flash"
+
+
+def test_relay_flash_tasks_fall_back_to_official_flash(monkeypatch):
+    # longform 默认与 post 的 task_fallbacks 都是 gemini-flash，共用这条路由
+    route = task_route(monkeypatch, "longform")
     assert route[:2] == [("vectorengine-relay", "gemini-3.8-flash"), ("gemini-official", "gemini-3.8-flash")]
     assert not {"gemini-4-argon", "gemini-2.5-flash", "qwen3.6-plus"} & {model for _, model in route}
 

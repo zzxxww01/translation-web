@@ -10,7 +10,7 @@ LLM 配置数据模型
 - LLMConfig: 完整的 LLM 配置
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional
 
 
@@ -114,3 +114,5 @@ class LLMConfig:
     providers: Dict[str, ProviderConfig]
     fallback_rules: Dict[str, Any]
     task_defaults: Dict[str, str]
+    # 任务用默认模型且整条故障转移都失败时，再整体重试一次的模型（用户显式选模型时不用）
+    task_fallbacks: Dict[str, str] = field(default_factory=dict)
