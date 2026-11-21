@@ -2,7 +2,7 @@ import { apiClient } from '@/shared/api/client';
 import { API_BASE } from '@/shared/constants';
 import type {
   SlackAgentContext, SlackConversationList, SlackMessagePage, SlackReplies, SlackStatus, SlackThread,
-  SlackDigestSection, SlackThreadSummary, SlackActivityItem,
+  SlackThreadSummary, SlackActivityItem, SlackTodos, SlackSettings, DmReplyState,
 } from './types';
 
 // Slack 完全只读：查询、导出、保存凭证；「标记已读」只写 momo 本地，不碰 Slack
@@ -49,9 +49,11 @@ export const slackInboxApi = {
       params: threadTs ? { thread_ts: threadTs } : undefined,
     }),
 
-  // 轻量 AI（后端按内容缓存）：逐条中文、thread 中文短标题、thread 摘要
-  translate: (texts: string[]) =>
-    apiClient.post<{ translations: (string | null)[] }>('/slack-inbox/ai/translate', { texts }, { retry: false, timeout: 180_000 }),
+  // 轻量 AI（后端按内容缓存）：逐条中文（context 是 thread 根帖，只帮理解）、thread 摘要、我的待办
+  translate: (texts: string[], context?: string | null) =>
+    apiClient.post<{ translations: (string | null)[] }>(
+      '/slack-inbox/ai/translate', { texts, context: context || null }, { retry: false, timeout: 180_000 }
+    ),
 
 
   threadSummary: (channelId: string, threadTs: string) =>
@@ -59,8 +61,15 @@ export const slackInboxApi = {
       retry: false, timeout: 180_000,
     }),
 
-  digest: () =>
-    apiClient.get<{ sections: SlackDigestSection[] }>('/slack-inbox/digest', { retry: false, timeout: 300_000 }),
+  todos: () => apiClient.get<SlackTodos>('/slack-inbox/todos', { retry: false, timeout: 180_000 }),
+
+  settings: () => apiClient.get<SlackSettings>('/slack-inbox/settings'),
+  saveSettings: (data: Partial<SlackSettings>) => apiClient.put<SlackSettings>('/slack-inbox/settings', data, { retry: false }),
+
+  replyState: (channelId: string) =>
+    apiClient.get<{ state: DmReplyState | null }>(`/slack-inbox/conversations/${channelId}/reply-state`),
+  saveReplyState: (channelId: string, state: DmReplyState) =>
+    apiClient.put<{ ok: boolean }>(`/slack-inbox/conversations/${channelId}/reply-state`, { state }, { retry: false }),
 
 
   exportUrl: (channelId: string, format: 'md' | 'json') =>

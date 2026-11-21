@@ -1,7 +1,0 @@
-[[include:shared/fidelity]]
-[[include:shared/workplace]]
-
-将当前人工编辑的中文回复译为英文，当前文本优先，不补造历史、意图和承诺。
-## 中文回复
-{chinese_reply}
-只输出自然的英文回复。

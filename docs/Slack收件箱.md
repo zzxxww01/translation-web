@@ -2,70 +2,70 @@
 
 momo 顶部「Slack」页，按「动态」组织（2026-11-18 用户反馈原生 Slack 式的频道三栏太乱，改成活动列）：
 
-- **左栏**（2026-11-22 按用户要求定稿，`inbox/ActivityList.tsx`）：
-  - 最上面一行「AI 速览」入口（写着有几处未读）。
-  - 下面一行筛选，自己选：**全部 · 未读 · @我 · 私信 · 新帖 · 我参与的**；选择记在浏览器里，数字是这一类里的未读数。各筛选可以重叠。
-    「全部」按最近活动时间排。「新帖」= 最近 7 天还没人回复、不是我发的帖子；「我参与的」= Slack 记的我订阅的 thread（发起、回复过、被 @、手动关注），后端每行带 `following`。
-  - 筛选行最右边「⋯」里有：**旧版工作台**（原「回复工作台」，`view=reply`），以及「全部标为已读」（`POST /mark-all`，只记在 momo 本地）。
-  - 每行：左边是发起人首字母；私信 / 群聊 / 新帖写小字标签，@我 用红标签；AI 状态直接写字（AI 处理中 / 等你确认 / 出错 / 已处理）。
-  - AI 速览页最下面有「看完了，全部标为已读」。
-- **中栏**：点 thread 只看这一个 thread——标题是根消息第一行，顶部**打开即自动生成**中文「在聊什么」（摘要 + 要你做，
-  按最新回复缓存），下面是完整对话，另有「AI 翻译」标签页。点私信是私信消息流，右栏是回复助手。
-  thread 标题下的频道名可以进整个频道的消息流（旧视图保留）。新帖（没人回复）不自动生成摘要。
-- **右栏 AI**：私信是回复助手；窗口 ≥1280px 时 thread 的帖子翻译助手也在右栏（三栏），更窄时在 thread 的「AI 翻译」标签页。
-- 触屏没有悬停：点一下消息显示 / 收起「译 / thread / 在 Slack 打开」工具条。
-- 没选任何东西时中栏是「概览」（`inbox/Overview.tsx`）：未读、@我、未读私信、7 天内新帖的数量，加上「先看这些」（@我 > 私信 > 新帖 > 其他未读，最多 8 条）和 AI 速览入口。
-- 快捷键：`j` / `k` 下一条 / 上一条（在当前筛选里切换并打开），`t` 全部中文，`Esc` 关闭；在输入框里不生效。
-- 消息工具条有「复制原文」；帖子翻译结果的每个标题旁有「连译文」，复制「标题 + 空行 + 译文」。
+- **左栏**（`inbox/ActivityList.tsx`）：一行筛选 **全部 · 未读 · @我 · 私信 · 新帖 · 我参与的**（记在浏览器里，数字是这一类的未读数，
+  可以重叠；「全部」按最近活动排；「新帖」= 最近 7 天没人回复、不是我发的；「我参与的」= Slack 记的我订阅的 thread，后端带 `following`）。
+  右边「待办 N」回到中间的我的待办。选「未读」时列表顶部有「全部标为已读」（只记在 momo）。
+  每行：发起人首字母；私信 / 群聊 / 新帖小字标签，@我 红标签；翻过的 thread 带「草稿 vN / ✓ 已翻 / 自动翻好」。
+- **中栏**：没选会话时是「我的待办」；点 thread 只看这一个 thread（顶部操作条：翻译这个帖子 / 翻译全部 / 总结一下），
+  thread 标题下的频道名可以进整个频道的消息流；点私信是私信消息流。
+- **右栏**：私信时是回复面板。
+- **翻译模式**（`mode=translate`）：整页三栏，见下面「帖子翻译」。
+- 触屏没有悬停：点一下消息显示 / 收起「译 / 复制 / thread / 在 Slack 打开」工具条。
+- 快捷键：`j` / `k` 下一条 / 上一条（在当前筛选里切换并打开），`Esc` 关闭；在输入框里不生效。
 
-URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread）、`c=<会话>`（私信或整个频道）、`view=digest|reply`。
+URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread，加 `mode=translate` 是翻译模式）、`c=<会话>`（私信或整个频道）、`ai=1`（窄屏显示回复面板）。
 
-2026-11-21 按用户要求去掉了左栏的搜索框和「动态 · 工作区 / 用户 · 同步于」标题（太占地方）；后端 `/search` 接口还在，页面不再用。
+左栏的搜索框、「动态 · 工作区」标题、AI 速览、「⋯」菜单都已去掉（2026-11-21/22 用户要求，太占地方 / 太乱）。
 
-## AI：每个 thread / 私信背后一个 skill agent
+## AI 功能（2026-11-22 重做：全部直接调接口，不再用 skill agent）
 
-- **频道 thread → 帖子翻译助手**（skill `slack-post-translate`）：thread 面板默认是「AI 翻译」标签页。agent 找出要发的
-  内容（根帖、链接卡片里的 X 帖、`1/N…N/N` 分段取最新版），走 `translate-post`（术语库），再出标题候选。
-- **私信 → 回复助手**（skill `slack-dm-reply`）：打开私信时右栏是「AI 回复」。agent 用中文说清对方要什么，
-  用 `slack-reply` 给 A/B/C 三版英文；选一版「复制并打开 Slack」，到 Slack 里粘贴发送（momo 从不发送）。
-- **点「开始」才启动**（2026-11-17 用户反馈：自动启动太吵、容易排队报错）：thread 面板的「AI 翻译」标签页、私信右栏各有一个说明卡片和「开始」按钮。
-  同一时间只跑一个 Slack agent（2 GB 内存），其余在页面上排队、每 15 秒重试。
-- 绑定：skill-runner 的 run 带 `source = slack:<会话>[:<thread_ts>]`，同一个 source 只建一个对话；Claude 页的对话列表不显示这些。
-- 上下文：`GET /api/slack-inbox/conversations/{id}/agent-context?thread_ts=` 导出 Markdown（作者标「（我）」、链接卡片全文）
-  和 `history`（me/them）。前端把它们作为附件交给 agent。之后有新消息，右栏提示「让 AI 重新看」，把最新上下文发给同一个对话。
-- 结果：skill 每次都重写运行目录里的 `result.json`，页面据此显示带「复制」按钮的结果卡片；格式见两个 SKILL.md。
-- skill 源文件在仓库 `skill_runner/skills/`；`~/.agents/skills/<名字>` 软链接到 `~/skill-runner/src/skill_runner/skills/<名字>`，
-  随 skill-runner 一起 `git pull` 更新。
+模型：Slack 的所有调用都是 `slack` 任务，默认 `gpt-6.2-sol`（`config/llm_providers.yaml` 的 `task_defaults.slack`，OpenAI 官方直连，
+失败只重试同一模型、不降级）。帖子翻译用帖子翻译页同一条链路（`post` 任务，同样是 `gpt-6.2-sol`）。
+提示词在 `src/prompts/slack_zh.txt`、`slack_summary.txt`、`slack_todo.txt`、`slack_post_extract.txt`；缓存在
+`data/slack_cache/ai/`，换模型或改提示词时改 `src/services/slack_ai.py` 的 `CACHE_TAG`。
 
-## 模型：全部走官方 GPT Sol（2026-11-17 用户要求）
+### 1. 消息翻成中文（`POST /ai/translate`）
+- 单条：消息工具条「译」，正文和链接卡片一起翻；自己发的消息不翻。私信、频道、thread 里都有。
+- thread 顶部「翻译全部」：整个 thread 翻成中文，只对这个 thread 有效、不记住；按钮变「收起中文」。
+- thread 回复带上根帖作为背景（`context`，只帮理解不翻）；译文保留换行、列表、表格、粗体。
+- 原来的全局「全部中文」开关去掉了。
 
-- 轻量 AI（消息中文、thread 标题和摘要、速览、搜索词改写）、回复工作台、私信回复（`slack-reply`）：都是 `slack` 任务，
-  默认模型 `gpt-6.1-sol`（`config/llm_providers.yaml` 的 `task_defaults.slack`，OpenAI 官方直连）。官方路由是隔离的：
-  失败只重试同一模型，不降级到 Gemini / DeepSeek；`OPENAI_API_KEY` 失效时 Slack AI 直接报错。
-- 帖子翻译助手里的 `translate-post` 和标题接口显式带 `--model gpt-6.1-sol` / `"model": "gpt-6.1-sol"`（「帖子翻译」页本身不变）。
-- 两个 agent 本身用 Codex（OpenAI 官方）跑 `gpt-6.1-sol`：前端启动时传 `harness=codex, model=gpt-6.1-sol`，`agents.json` 里也默认 codex。
-- AI 缓存键带 `CACHE_TAG`（`src/services/slack_ai.py`），换模型时改它，旧模型的结果不再复用。
+### 2. thread 摘要（`GET /conversations/{id}/threads/{ts}/summary`）
+- 打开回复 ≥ 3 条的 thread 自动总结一次；更少的、没人回复的新帖默认不总结。
+- 顶部「总结一下 / 重新总结」按钮一直都在。thread 开着时来了新回复只提示「有 N 条新回复 · 点这里更新」，不自动重算。
+- 卡片标题固定「在聊什么」，内容是摘要 + 「要你做」。
 
-## 轻量 AI：消息中文、thread 摘要
+### 3. 我的待办（`GET /todos`，替代原来的 AI 速览）
+- 没选会话时中栏显示。只看**未读的 @我 和未读私信**，一次调用告诉我每件事「谁、要我干什么」（要回复 / 要处理 / 看一下）。
+- 只被 @用户组 / @here 群发提到的不送模型，放在底部「不用处理」。底部「都处理完了」把这些标为已读（只记在 momo）。
+- 左栏筛选行右边的「待办 N」回到这里（N = 未读的 @我 + 私信）。
+- 「@我 的 thread 自动翻译」开关也在这里（`GET/PUT /settings`，存在 `data/slack_cache/settings.json`）。
 
-不走 agent，直接调短文本模型（`task_type="slack"`），`src/services/slack_ai.py`：
+### 4. 帖子翻译（翻译模式 + 翻译稿）
+- thread 顶部主按钮「翻译这个帖子」（翻过的显示「继续翻译 · vN」「已完成」「自动翻好了」）→ `?mode=translate` 进入翻译模式：
+  **① 原文 + 配图 | ② 译文 · 优化 · 标题 | ③ 原 thread** 三栏（`components/layout/ResizablePanes.tsx`），每栏可收起、可拖宽，记在浏览器里。
+- 第一次进入自动跑 `POST /api/post-drafts/slack/{频道}/{thread_ts}/run`：提取（`slack_post_extract`，一个 thread 只出一篇，
+  去掉编号 / @ / 请求 / 讨论，取最新版；有「posted <x.com/SemiAnalysis_…>」时以已发布的 X 帖为准；挑配图）→ 翻译 → 标题，存成翻译稿。
+  「重新提取」带上要求（「用第一版」）再跑一次，旧版本保留、追加新版本。
+- ② 栏和帖子翻译页是同一套代码（`features/post/usePostWorkspace.ts` + 每篇一份 `createPostStore()`）：版本切换、手改保存、
+  预设优化 + 自定义、标题生成；另有「连标题复制」。
+- ③ 栏：用来提取的消息左侧竖线；点图片加入 / 去掉配图；配图可调顺序、单张下载、`GET /api/post-drafts/{id}/images.zip` 打包。
+- 翻译稿存在 `data/post_drafts/<id>.json`（`src/services/post_drafts.py`），帖子翻译页手动翻的也存这里，两边合成「翻译记录」
+  （帖子翻译页左栏）。Slack 列表行和 thread 顶部显示「草稿 vN / ✓ 已翻 / 自动翻好」。
+- **@我 的 thread 自动翻译**：后台每分钟（`post_drafts.auto_translate_loop`，随 momo 后端启动）找最近 7 天有人直接 @我、还没有翻译稿的
+  thread，自动跑一遍，生成「自动翻好 · 待查看」的草稿；失败一小时后再试（`data/slack_cache/auto_translate.json`）。
+  提取发现没有要发的内容时只记一句说明，不进翻译记录。
 
-- **消息中文**：默认显示英文原文（2026-11-17 用户反馈不要全部自动翻译）。悬停工具条上的「译」翻单条；顶栏「全部中文」开关（全局，默认关）打开后逐条翻。前端 20 条一批 `POST /ai/translate`，
-  只翻英文为主的消息（中文、只有链接 / 表情的跳过），带术语库，链接不抄进译文。
-- **thread 标题不翻译**（2026-11-18 用户要求）：侧栏展开频道、Threads 页直接显示根消息第一行原文。`POST /ai/titles` 只为已打开的旧页面保留，前端不再调用。
-- **thread 摘要**：打开 thread 即自动生成，`GET /conversations/{id}/threads/{ts}/summary`，含「要你做」一句。
-- 缓存：`data/slack_cache/ai/{zh,titles,summaries}.json`，按内容 hash（摘要按最新回复 ts）。改翻译提示词时把
-  `ZH_PROMPT_VERSION` 加一，旧缓存自然失效。
-- 侧栏 thread / 私信行尾显示 agent 状态：转圈 = 在跑，橙点 = 等你确认，红 ! = 出错，✨ = 已处理（需登录 Claude 页）。
+### 5. 私信回复面板（私信右栏，`features/slack/reply/DmReplyPanel.tsx`）
+- 对方要什么 + A 简洁 / B 标准 / C 正式三版（`/api/slack/process`）；「✎」改某一版的中文意思只重写这一版（`/slack/refine-version`）；
+  一键调整（更短 / 更随意 / 更正式 / 更礼貌 / 加一句感谢，`/slack/refine` 三版并行）；「我想说」按中文意思出三版（`/slack/compose`）。
+- 每次结果记一组，可翻回上一组，存在 `data/slack_cache/dm_replies/<会话>.json`（`GET/PUT /conversations/{id}/reply-state`）。
+- 对方有未读新消息时打开自动生成一次；最后一条是我发的就显示「目前不需要回复」。momo 从不发送。
 
-## AI 速览和搜索
+### 旧版工作台
+原来 Slack 页里的「回复工作台」搬到「工具箱 → 旧版工作台」，功能不变。
 
-- **AI 速览**（侧栏「AI 速览」，`GET /api/slack-inbox/digest`）：每个有未读的会话、每个有新回复的 thread 一段——一句话总结、
-  最多 5 条要点、「要你做」。@我 / 有待办的排前面。只读，不标已读；按（会话、thread、已读位置、最新消息）缓存，
-  3 段并行，单段失败只在那一段显示。
-- **搜索**（2026-11-21 起页面不再提供入口，接口保留；`GET /api/slack-inbox/search?q=`）：带中文时 AI 先改写成 2–5 个英文关键词（缓存），再调
-  Slack 的 `search.messages`（只读白名单），按时间倒序 30 条。能在 momo 打开的会话直接跳过去（thread 回复同时开右栏），
-  其余在 Slack 里打开。
+skill-runner 里的 `slack-post-translate`、`slack-dm-reply` 两个 skill 页面不再调用（文件还在）。
 
 ## 接入方式
 
@@ -136,18 +136,28 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/conversations?refresh=` | 会话列表（含 `last_read`、未读、@我、thread 未读）+ 全局 thread 角标 |
 | GET | `/conversations/{id}/messages?limit=&cursor=` | 消息，新→旧，分页 |
 | GET | `/conversations/{id}/replies/{ts}` | thread 全部消息 + 我的 thread 已读位置 |
-| GET | `/conversations/{id}/threads` | 频道最近 7 天有回复的 thread（侧栏展开用） |
 | GET | `/threads` | 我参与的 thread，有新回复的在前 |
-| GET | `/conversations/{id}/agent-context?thread_ts=` | 交给 agent 的上下文（Markdown + me/them 历史） |
-| POST | `/ai/translate` | `{"texts": [...]}` 逐条中文（不需要翻的为 null） |
-| POST | `/ai/titles` | `{"items": {thread_ts: 根消息}}` 中文短标题（前端已不用，只为旧页面保留） |
+| GET | `/conversations/{id}/agent-context?thread_ts=` | Markdown + me/them 历史（thread 摘要、私信回复面板用） |
+| POST | `/ai/translate` | `{"texts": [...], "context": 根帖}` 逐条中文（不需要翻的为 null） |
 | GET | `/conversations/{id}/threads/{ts}/summary` | thread 中文摘要 |
-| GET | `/digest` | AI 速览（未读按会话 / thread 中文总结） |
-| GET | `/search?q=` | 搜索（中文先改写成英文关键词） |
+| GET | `/todos` | 我的待办（未读的 @我 和私信；群发 @ 在 `fyi`） |
+| GET/PUT | `/settings` | `auto_translate_mentions` |
+| GET/PUT | `/conversations/{id}/reply-state` | 私信回复面板的历史 |
 | POST | `/conversations/{id}/mark` | `{"ts"}` 在 momo 本地记会话已读（只前进，不碰 Slack） |
-| POST | `/mark-all` | 标已读，只记在 momo 本地、不碰 Slack：不带参数时清空全部动态；带 `{"items": [{channel_id, ts, thread_ts}]}` 时只标这些（左栏分组的「全部已读」） |
+| POST | `/mark-all` | 标已读，只记在 momo 本地、不碰 Slack：不带参数时清空全部动态；带 `{"items": [{channel_id, ts, thread_ts}]}` 时只标这些（待办页「都处理完了」） |
 | POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 在 momo 本地记 thread 已读（不碰 Slack） |
 | GET | `/conversations/{id}/export?format=md\|json` | 导出最近 200 条（含 thread） |
 | GET | `/files/{id}` | 附件代理；只内联 png/jpeg/gif/webp，其余一律下载 |
 
 鉴权：2026-11-21 起整个 momo 共用 Agent 页的口令登录（nginx `auth_request`，见 `skill_runner/README.md`），没登录访问这些接口返回 401。
+
+## 翻译稿接口（`/api/post-drafts`）
+
+| 方法 | 路径 | 说明 |
+| --- | --- | --- |
+| GET | `?q=&source=` | 翻译记录（手动 + Slack，按最近修改；`q` 搜标题、原文、译文） |
+| POST | `` | 帖子翻译页第一次出译文时建稿（`m_…`） |
+| GET/PUT/DELETE | `/{id}` | 读 / 存（带 `rev`，对不上返回 409）/ 删 |
+| GET | `/slack/{频道}/{thread_ts}` | 这个 thread 的翻译稿（没有为 null） |
+| POST | `/slack/{频道}/{thread_ts}/run` | `{"instruction"}` 提取 → 翻译 → 标题 |
+| GET | `/{id}/images.zip` | 配图按顺序打包 |

@@ -8,7 +8,8 @@ import { useComposeReply, useGenerateReply } from './hooks';
 import { useSlackWorkspaceStore } from './store';
 import './styles.css';
 
-export function ReplyWorkbench() {
+/** 旧版工作台（Slack 回复）：贴英文或写中文草稿，出三版英文。2026-11-22 起放在工具箱里（embedded）。 */
+export function ReplyWorkbench({ embedded = false }: { embedded?: boolean }) {
   const processMutation = useGenerateReply();
   const composeMutation = useComposeReply();
 
@@ -104,9 +105,11 @@ export function ReplyWorkbench() {
   };
 
   return (
-    <div className="slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-6 px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
+    <div className={embedded
+      ? 'slack-editorial-theme flex w-full flex-col gap-6'
+      : 'slack-editorial-theme mx-auto flex h-full w-full max-w-5xl flex-col gap-6 px-5 pb-12 pt-4 sm:px-8 sm:pt-5'}>
       <PageHeader
-        title="旧版工作台 · Slack 回复"
+        title={embedded ? '' : '旧版工作台 · Slack 回复'}
         actions={
           <div className="w-56" title="生成回复用的模型">
             <ModelSelector

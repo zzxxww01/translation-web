@@ -29,9 +29,9 @@ def task_route(monkeypatch, task):
 
 
 def test_slack_uses_only_official_gpt_sol(monkeypatch):
-    # 用户要求 Slack 页全部走官方 GPT Sol：失败时只重试同一个模型，不降级到 Gemini / DeepSeek
+    # 用户要求 Slack 页全部走官方 GPT Sol（2026-11-22 起 6.2）：失败时只重试同一个模型，不降级到 Gemini / DeepSeek
     route = task_route(monkeypatch, "slack")
-    assert route and set(route) == {("openai-official", "gpt-6.1-sol")}
+    assert route and set(route) == {("openai-official", "gpt-6.2-sol")}
 
 
 def test_post_uses_only_official_gpt_6_2_sol_then_task_fallback(monkeypatch):

@@ -1,15 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { CheckCheck, Languages, Loader2, MoreHorizontal, Sparkles } from 'lucide-react';
+import { CheckCheck, ClipboardList, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { AgentBadge } from '../agent/AgentBadge';
-import { useSlackAgentRuns } from '../agent/agentRuns';
-import { useShowZh } from './ai';
 import { Avatar } from './MessageItem';
 import { useMarkAllRead, useSlackActivity } from './hooks';
-import { clockTime, emojify, stripLeadingMentions, type SlackView } from './lib';
+import { clockTime, emojify, stripLeadingMentions } from './lib';
 import { stripMrkdwn } from './mrkdwn';
 import type { SlackActivityItem, SlackMessage } from './types';
 
@@ -44,9 +38,10 @@ function loadFilter(): Filter {
 
 interface ActivityListProps {
   selection: ActivitySelection | null;
-  view: SlackView | null;
   onOpen: (item: SlackActivityItem) => void;
-  onSelectView: (view: SlackView) => void;
+  /** 回到中间的「我的待办」 */
+  onShowTodos: () => void;
+  todosActive: boolean;
   /** Esc：关掉正在看的 thread / 会话 */
   onBack?: () => void;
 }
@@ -79,11 +74,9 @@ function shortTime(ts: string, now = new Date()): string {
 /**
  * 左栏：最上面「AI 速览」入口，下面一行筛选（右边「⋯」里是旧版工作台和全部标为已读），再下面是列表。
  */
-export function ActivityList({ selection, view, onOpen, onSelectView, onBack }: ActivityListProps) {
+export function ActivityList({ selection, onOpen, onShowTodos, todosActive, onBack }: ActivityListProps) {
   const activity = useSlackActivity(true);
   const markAll = useMarkAllRead();
-  const agents = useSlackAgentRuns();
-  const toggleZh = useShowZh(state => state.toggleZh);
   const [filter, setFilterState] = useState<Filter>(loadFilter);
   const setFilter = (f: Filter) => {
     setFilterState(f);
@@ -95,26 +88,26 @@ export function ActivityList({ selection, view, onOpen, onSelectView, onBack }: 
   const items = all.filter(current.match);
   const unreadIn = (f: (typeof FILTERS)[number]) => all.filter(i => f.match(i) && i.has_unreads).length;
   const unreadTotal = all.filter(i => i.has_unreads).length;
+  // 待办数：未读的 @我 和私信（和中间「我的待办」同一口径）
+  const todoCount = all.filter(i => i.has_unreads && (i.mentions_me || i.type === 'dm')).length;
   // 只有一个频道时每行都写同一个频道名没意义
   const manyChannels = new Set(all.filter(i => i.type === 'thread').map(i => i.channel_id)).size > 1;
 
-  // 键盘：j / k 在当前筛选里切换并打开，t 全部中文，Esc 关闭
-  const keys = useRef({ items, selection, onOpen, onBack, toggleZh });
+  // 键盘：j / k 在当前筛选里切换并打开，Esc 关闭
+  const keys = useRef({ items, selection, onOpen, onBack });
   useEffect(() => {
-    keys.current = { items, selection, onOpen, onBack, toggleZh };
+    keys.current = { items, selection, onOpen, onBack };
   });
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.altKey || isTyping(e.target)) return;
-      const { items: list, selection: sel, onOpen: open, onBack: back, toggleZh: zh } = keys.current;
+      const { items: list, selection: sel, onOpen: open, onBack: back } = keys.current;
       if (e.key === 'j' || e.key === 'k') {
         if (list.length === 0) return;
         const at = sel ? list.findIndex(i => i.channel_id === sel.channelId && i.thread_ts === sel.threadTs) : -1;
         const next = at < 0 ? 0 : Math.min(list.length - 1, Math.max(0, at + (e.key === 'j' ? 1 : -1)));
         if (next !== at) open(list[next]);
         e.preventDefault();
-      } else if (e.key === 't') {
-        zh();
       } else if (e.key === 'Escape' && back) {
         back();
       }
@@ -125,60 +118,39 @@ export function ActivityList({ selection, view, onOpen, onSelectView, onBack }: 
 
   return (
     <>
-      <div className="border-b border-border-subtle">
+      <div className="flex items-center gap-1 border-b border-border-subtle px-2 py-2">
+        <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto" role="tablist" aria-label="筛选">
+          {FILTERS.map(f => {
+            const n = f.id === 'all' ? 0 : unreadIn(f);
+            return (
+              <button
+                key={f.id}
+                type="button"
+                role="tab"
+                aria-selected={filter === f.id}
+                title={f.hint}
+                onClick={() => setFilter(f.id)}
+                className={cn(
+                  'shrink-0 whitespace-nowrap rounded-full px-2.5 py-1 text-xs transition-colors',
+                  filter === f.id ? 'bg-primary-500 font-medium text-white shadow-sm' : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'
+                )}
+              >
+                {f.label}{n > 0 ? <span className={cn('ml-1 tabular-nums', filter === f.id ? 'text-white/80' : 'text-primary-600')}>{n}</span> : null}
+              </button>
+            );
+          })}
+        </div>
         <button
           type="button"
-          onClick={() => onSelectView('digest')}
-          aria-current={view === 'digest' || undefined}
-          className={cn('flex w-full items-center gap-2.5 px-4 py-2 text-left', view === 'digest' ? 'bg-primary-50' : 'hover:bg-bg-hover')}
+          onClick={onShowTodos}
+          className={cn(
+            'inline-flex shrink-0 items-center gap-1 rounded-lg px-2 py-1 text-xs transition-colors',
+            todosActive ? 'bg-primary-50 font-medium text-primary-700' : 'text-text-secondary hover:bg-bg-hover'
+          )}
+          title="我的待办：还没读的 @我 和私信"
         >
-          <Sparkles className="h-4 w-4 shrink-0 text-primary-500" />
-          <span className={cn('text-[14px]', view === 'digest' ? 'font-semibold text-primary-700' : 'font-medium text-text-primary')}>AI 速览</span>
-          <span className="min-w-0 flex-1 truncate text-right text-xs text-text-muted">
-            {unreadTotal ? `把 ${unreadTotal} 处未读整理成中文要点` : '未读整理成中文要点'}
-          </span>
+          <ClipboardList className="h-3.5 w-3.5" /> 待办{todoCount > 0 && <span className="rounded-full bg-error px-1.5 text-[10px] font-semibold leading-4 text-white">{todoCount}</span>}
         </button>
-        <div className="flex items-center gap-1 px-2 pb-2 pt-1">
-          <div className="flex min-w-0 flex-1 items-center gap-1 overflow-x-auto" role="tablist" aria-label="筛选">
-            {FILTERS.map(f => {
-              const n = f.id === 'all' ? 0 : unreadIn(f);
-              return (
-                <button
-                  key={f.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={filter === f.id}
-                  title={f.hint}
-                  onClick={() => setFilter(f.id)}
-                  className={cn(
-                    'shrink-0 whitespace-nowrap rounded-full px-2 py-0.5 text-xs transition-colors',
-                    filter === f.id ? 'bg-primary-500 text-white' : 'bg-bg-hover text-text-secondary hover:text-text-primary'
-                  )}
-                >
-                  {f.label}{n > 0 ? ` ${n}` : ''}
-                </button>
-              );
-            })}
-          </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <button type="button" aria-label="更多" title="旧版工作台、全部标为已读"
-                className="shrink-0 rounded-md p-1 text-text-muted hover:bg-bg-hover hover:text-text-primary data-[state=open]:bg-bg-hover">
-                <MoreHorizontal className="h-4 w-4" />
-              </button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" sideOffset={4} className="w-56">
-              <DropdownMenuItem onSelect={() => onSelectView('reply')}>
-                <Languages className="h-4 w-4" /> 旧版工作台
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onSelect={() => markAll.mutate(undefined)} disabled={unreadTotal === 0 || markAll.isPending}>
-                <CheckCheck className="h-4 w-4" /> 全部标为已读
-                <span className="ml-auto text-[10px] text-text-muted">只在 momo 里</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
       </div>
 
       <div className="min-h-0 flex-1 overflow-auto" aria-label="Slack 动态">
@@ -194,13 +166,26 @@ export function ActivityList({ selection, view, onOpen, onSelectView, onBack }: 
             {filter === 'unread' ? '都看完了' : filter === 'all' ? '最近 7 天没有动态' : `最近 7 天没有「${current.label}」`}
           </div>
         )}
+        {filter === 'unread' && items.length > 0 && (
+          <div className="flex items-center justify-between border-b border-border-subtle bg-bg-tertiary/50 px-3 py-1.5 text-xs text-text-muted">
+            <span>{items.length} 条未读</span>
+            <button
+              type="button"
+              onClick={() => markAll.mutate(undefined)}
+              disabled={markAll.isPending || unreadTotal === 0}
+              className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-primary-700 hover:bg-primary-50"
+              title="只记在 momo 里，Slack 的未读不变"
+            >
+              <CheckCheck className="h-3.5 w-3.5" /> 全部标为已读
+            </button>
+          </div>
+        )}
         {items.map(item => (
           <Row
             key={`${item.channel_id}-${item.thread_ts ?? 'dm'}`}
             item={item}
             active={!!selection && selection.channelId === item.channel_id && selection.threadTs === item.thread_ts}
             manyChannels={manyChannels}
-            agent={agents.get(item.type === 'thread' ? `slack:${item.channel_id}:${item.thread_ts}` : `slack:${item.channel_id}`)}
             onOpen={onOpen}
           />
         ))}
@@ -209,11 +194,18 @@ export function ActivityList({ selection, view, onOpen, onSelectView, onBack }: 
   );
 }
 
-function Row({ item, active, manyChannels, agent, onOpen }: {
+/** 翻译稿状态：草稿 / 已完成 / 自动翻好（没要翻的帖子不显示） */
+function DraftBadge({ draft }: { draft: SlackActivityItem['draft'] }) {
+  if (!draft || draft.no_post) return null;
+  if (draft.status === 'done') return <span className="shrink-0 rounded bg-success/10 px-1 text-[10px] font-medium leading-4 text-success">✓ 已翻</span>;
+  if (draft.auto && !draft.seen) return <span className="shrink-0 rounded bg-primary-500 px-1 text-[10px] font-medium leading-4 text-white">自动翻好</span>;
+  return <span className="shrink-0 rounded bg-amber-100 px-1 text-[10px] font-medium leading-4 text-amber-800">草稿 v{draft.versions}</span>;
+}
+
+function Row({ item, active, manyChannels, onOpen }: {
   item: SlackActivityItem;
   active: boolean;
   manyChannels: boolean;
-  agent: Parameters<typeof AgentBadge>[0]['run'];
   onOpen: (item: SlackActivityItem) => void;
 }) {
   const isThread = item.type === 'thread';
@@ -246,7 +238,7 @@ function Row({ item, active, manyChannels, agent, onOpen }: {
                 {`${channel}${who}${item.reply_count ? ` 发起 · ${item.reply_count} 条回复` : ' 发帖 · 还没人回复'}`
                   + (item.participants && item.participants.length > 1 ? ` · ${item.participants.length} 人参与` : '')}
               </span>
-              <AgentBadge run={agent} />
+              <DraftBadge draft={item.draft} />
             </div>
           )}
           {(item.last || !isThread) && (
@@ -254,7 +246,6 @@ function Row({ item, active, manyChannels, agent, onOpen }: {
               <span className="min-w-0 flex-1 truncate text-[13px] text-text-secondary">
                 {item.last && <><span className="font-medium">{item.last.is_me ? '我' : item.last.user_name}：</span>{firstLine(item.last, 120)}</>}
               </span>
-              {!isThread && <AgentBadge run={agent} />}
             </div>
           )}
         </div>

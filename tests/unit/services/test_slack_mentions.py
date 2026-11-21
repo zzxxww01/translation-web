@@ -251,3 +251,37 @@ def test_activity_marks_my_threads_and_marks_chosen_items_only(inbox, monkeypatc
     with pytest.raises(SlackInboxError):
         inbox.mark_items_read([{"channel_id": "C999999999", "ts": ts(40)}])
     assert not any("mark" in method for method in inbox._fake.calls)
+
+
+def test_todo_material_splits_direct_mentions_broadcasts_and_dms(inbox, monkeypatch):
+    monkeypatch.setattr(inbox, "sync_conversation", lambda *a, **k: 0)
+    inbox.db.upsert(CID, [
+        {"ts": ts(10), "user": "UAAAAAAAA1", "text": "Big post", "thread_ts": ts(10), "reply_count": 1, "latest_reply": ts(15)},
+        {"ts": ts(20), "user": "UAAAAAAAA1", "text": "<!here> standup"},
+    ], in_history=True)
+    inbox.db.upsert(CID, [{"ts": ts(15), "user": "UAAAAAAAA1", "text": f"<@{ME}> please translate", "thread_ts": ts(10)}],
+                    in_history=False)
+    inbox.db.upsert(DM, [{"ts": ts(30), "user": "UAAAAAAAA1", "text": "can you send the numbers?"},
+                         {"ts": ts(3), "user": "UAAAAAAAA1", "text": "old, already read"}], in_history=True)
+    convs = [
+        {"id": CID, "kind": "channel", "name": "general", "last_read": None},
+        {"id": DM, "kind": "im", "name": "Alice", "last_read": ts(5)},
+    ]
+    post_root = inbox.normalize_message(CID, {"ts": ts(20), "user": "UAAAAAAAA1", "text": "<!here> standup"})
+    items = [
+        {"type": "thread", "channel_id": CID, "thread_ts": ts(10), "reply_count": 1, "has_unreads": True,
+         "mentions_me": True, "latest_ts": ts(15)},
+        {"type": "thread", "channel_id": CID, "thread_ts": ts(20), "reply_count": 0, "has_unreads": True,
+         "mentions_me": True, "latest_ts": ts(20), "root": post_root},
+        {"type": "dm", "channel_id": DM, "thread_ts": None, "has_unreads": True, "mentions_me": False, "latest_ts": ts(30)},
+    ]
+    monkeypatch.setattr(inbox, "conversations", lambda *a, **k: convs)
+    monkeypatch.setattr(inbox, "activity", lambda: {"items": items})
+    got = inbox.todo_material()
+    assert [(g["kind"], g["direct"], g["thread_ts"]) for g in got] == [
+        ("mention", True, ts(10)), ("mention", False, ts(20)), ("dm", True, None)]
+    assert [m["text"] for m in got[0]["messages"]] == ["@Alice please translate"]
+    assert got[0]["root_text"] == "Big post" and got[0]["title"] == "Big post"
+    assert [m["text"] for m in got[2]["messages"]] == ["can you send the numbers?"]  # 读过的不算
+    assert inbox.direct_mention_threads() == [(CID, ts(10))]
+    assert not any("mark" in method for method in inbox._fake.calls)

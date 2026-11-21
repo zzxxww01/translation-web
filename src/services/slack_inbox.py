@@ -77,8 +77,7 @@ THREAD_RECENT_DAYS = 7
 # 私信交给回复 agent 时带最近多少条
 AGENT_DM_MESSAGES = 30
 # AI 速览：每个会话 / thread 最多带多少条未读
-DIGEST_MAX_MESSAGES = 40
-SEARCH_COUNT = 30
+TODO_MAX_MESSAGES = 10
 # Muse 的 @我 兜底搜索：Slack 搜索索引会晚一点，每次往回多看这么久；最多翻几页（每页 50）
 MENTION_SEARCH_LOOKBACK_S = 1800
 MENTION_SEARCH_PAGES = 3
@@ -438,6 +437,13 @@ def blocks_to_mrkdwn(blocks: Optional[List[Dict[str, Any]]]) -> Optional[str]:
         return None
     # 块之间空一行：表格、分隔线前后必须有空行才能被识别
     return "\n\n".join(parts)
+
+
+def stripped_first_line(text: str, limit: int = 120) -> str:
+    """当标题用：第一行非空文字，去掉开头的 @用户组 和 *粗体* 记号。"""
+    line = next((ln.strip() for ln in (text or "").splitlines() if ln.strip()), "")
+    line = re.sub(r"^(@用户组\s*)+", "", line).replace("*", "").strip()
+    return line[:limit]
 
 
 def segments_to_plain(segments: List[Dict[str, str]]) -> str:
@@ -834,6 +840,8 @@ class SlackInbox:
             "user_name": sender,
             "is_me": bool(me) and user_id == me,
             "mentions_me": bool(me) and (f"<@{me}" in raw_text or any(t in raw_text for t in BROADCAST_MENTIONS)),
+            # 有人直接 @我（不算 @here / @用户组 这类群发）
+            "mentions_me_direct": bool(me) and f"<@{me}" in raw_text,
             "subtype": msg.get("subtype"),
             "segments": segments,
             "text": segments_to_plain(segments),
@@ -1361,69 +1369,104 @@ class SlackInbox:
                 msg["replies"] = self.replies(channel_id, msg["ts"])["messages"][1:]
         return {"conversation": info, "exported_at": format_ts(str(self._now())), "messages": history}
 
-    # -- AI 速览：收集未读（只读，不标已读）
+    # -- 我的待办：未读的 @我 和私信（只读，不标已读）
 
-    def unread_material(self) -> List[Dict[str, Any]]:
-        """每个有未读的会话、每个有新回复的 thread：我之外的人在已读位置之后发的消息（时间正序）。"""
-        sections: List[Dict[str, Any]] = []
-        for conv in self.conversations():
-            if not conv["has_unreads"] or not conv["last_read"]:
+    def todo_material(self) -> List[Dict[str, Any]]:
+        """每个有未读 @我 的 thread / 新帖、每个有未读的私信一项：未读的那几条消息（时间正序，不含我自己的）。
+
+        direct：有人直接 @我；只被 @用户组 / @here 之类群发提到的为 False（前端放进「不用处理」）。
+        """
+        convs = {c["id"]: c for c in self.conversations()}
+        followed = self._followed_threads()
+        out: List[Dict[str, Any]] = []
+        for item in self.activity()["items"]:
+            conv = convs.get(item["channel_id"])
+            if not item["has_unreads"] or not conv:
                 continue
-            msgs = [
-                m for m in reversed(self._history_messages(conv["id"]))
-                if float(m["ts"]) > float(conv["last_read"]) and not m["is_me"]
-            ][-DIGEST_MAX_MESSAGES:]
-            if msgs:
-                sections.append({"kind": conv["kind"], "conversation": conv, "thread_ts": None,
-                                 "last_read": conv["last_read"], "messages": msgs})
-        names = {c["id"]: c for c in self.conversations()}
-        for t in self.threads()["threads"]:
-            if not t["has_unreads"] or t["channel_id"] not in names:
+            cid = item["channel_id"]
+            if item["type"] == "dm":
+                read = conv["last_read"]
+                msgs = [self.normalize_message(cid, m) for m in reversed(self.db.history(cid, limit=50))]
+                msgs = [m for m in msgs if not m["is_me"] and (not read or float(m["ts"]) > float(read))]
+                root = None
+            elif item["mentions_me"]:
+                ts = item["thread_ts"]
+                raws = self.db.thread(cid, ts) or []
+                msgs = [self.normalize_message(cid, m) for m in raws] or ([item["root"]] if item.get("root") else [])
+                read = self._thread_read(cid, ts, followed.get((cid, ts)))
+                if not item.get("reply_count"):
+                    read = _later(read, conv["last_read"])  # 新帖：频道的已读位置也算
+                root = msgs[0] if msgs else item.get("root")
+                msgs = [m for m in msgs if not m["is_me"] and m["mentions_me"] and (not read or float(m["ts"]) > float(read))]
+            else:
                 continue
-            msgs = [
-                m for m in self.replies(t["channel_id"], t["thread_ts"])["messages"][1:]
-                if float(m["ts"]) > float(t["last_read"] or 0) and not m["is_me"]
-            ][-DIGEST_MAX_MESSAGES:]
-            if msgs:
-                sections.append({"kind": "thread", "conversation": names[t["channel_id"]], "thread_ts": t["thread_ts"],
-                                 "root": t["root"], "last_read": t["last_read"], "messages": msgs})
-        return sections
-
-    def _history_messages(self, channel_id: str) -> List[Dict[str, Any]]:
-        return [self.normalize_message(channel_id, m) for m in self._recent_raw(channel_id, 100)]
-
-    # -- 搜索（search.messages，只读）
-
-    def search(self, query: str, count: int = SEARCH_COUNT) -> Dict[str, Any]:
-        query = (query or "").strip()
-        if not query:
-            raise SlackInboxError("BAD_QUERY", "搜索词不能为空", 400)
-        data = self.client().call("search.messages", query=query[:200], count=max(1, min(count, 50)), sort="timestamp")
-        found = data.get("messages") or {}
-        visible = {c["id"]: c for c in self.conversations()}
-        results = []
-        for match in found.get("matches") or []:
-            ch = match.get("channel") or {}
-            cid = ch.get("id") or ""
-            if not CONVERSATION_ID_RE.match(cid):
+            msgs = msgs[-TODO_MAX_MESSAGES:]
+            if not msgs:
                 continue
-            permalink = match.get("permalink") or ""
-            thread_ts = (parse_qs(urlparse(permalink).query).get("thread_ts") or [None])[0]
-            msg = self.normalize_message(cid, {**match, "thread_ts": thread_ts or match.get("thread_ts")})
-            if permalink.startswith("https://"):
-                msg["permalink"] = permalink
-            conv = visible.get(cid)
-            results.append({
+            out.append({
+                "kind": "dm" if item["type"] == "dm" else "mention",
                 "channel_id": cid,
-                "channel_name": conv["name"] if conv else (ch.get("name") or cid),
-                "kind": conv["kind"] if conv else ("im" if ch.get("is_im") else "mpim" if ch.get("is_mpim") else "channel"),
-                "visible": bool(conv),
-                "thread_ts": thread_ts if thread_ts and thread_ts != msg["ts"] else None,
-                "message": msg,
+                "channel_name": conv["name"],
+                "conversation_kind": conv["kind"],
+                "thread_ts": item["thread_ts"],
+                "title": (root["text"] if root else conv["name"]).strip().split("\n")[0][:120],
+                "root_text": (root["text"] if root else "")[:1500],
+                "direct": item["type"] == "dm" or any(m.get("mentions_me_direct") for m in msgs),
+                "messages": [{"from": m["user_name"], "time": m["time"], "text": (m["text"] or "")[:1500]} for m in msgs],
+                "latest_ts": item["latest_ts"],
             })
-        return {"query": query, "total": int(found.get("total") or 0), "results": results}
+        return out
 
-    # -- 交给 AI agent 的上下文
+    def direct_mention_threads(self) -> List[Tuple[str, str]]:
+        """最近 7 天里有别人直接 @我 的 thread（含新帖），给「@我 的 thread 自动翻译」用。"""
+        out: List[Tuple[str, str]] = []
+        for item in self.activity()["items"]:
+            if item["type"] != "thread" or not item["mentions_me"]:
+                continue
+            cid, ts = item["channel_id"], item["thread_ts"]
+            msgs = [self.normalize_message(cid, m) for m in self.db.thread(cid, ts) or []]
+            if not msgs and item.get("root"):
+                msgs = [item["root"]]
+            if any(m.get("mentions_me_direct") and not m["is_me"] for m in msgs):
+                out.append((cid, ts))
+        return out
+
+    # -- 帖子提取：把整个 thread 整理成给模型看的材料
+
+    def post_material(self, channel_id: str, thread_ts: str) -> Dict[str, Any]:
+        """thread 的每条消息（编号、作者、时间、正文、链接卡片、图片 ID），以及可选的图片清单。"""
+        self._require_conversation(channel_id)
+        if not TS_RE.match(thread_ts or ""):
+            raise SlackInboxError("BAD_TS", "thread ts 格式不对", 400)
+        messages = self.replies(channel_id, thread_ts)["messages"]
+        if not messages:
+            raise SlackInboxError("THREAD_EMPTY", "这个 thread 里没有消息", 404)
+        conv = next(c for c in self.conversations() if c["id"] == channel_id)
+        thread, images = [], []
+        for n, m in enumerate(messages, start=1):
+            imgs = [f for f in m["files"] if f["is_image"]]
+            images.extend({"id": f["id"], "name": f["name"], "message_ts": m["ts"], "n": n} for f in imgs)
+            thread.append({
+                "n": n,
+                "from": m["user_name"] + ("（我）" if m["is_me"] else ""),
+                "time": m["time"],
+                "text": (m["text"] or "")[:4000],
+                "cards": [
+                    {"service": a["service_name"], "title": a["title"], "text": (a["text"] or "")[:2000], "url": a["title_link"]}
+                    for a in m["attachments"] if a["title"] or a["text"]
+                ],
+                "images": [f["id"] for f in imgs],
+            })
+        root = messages[0]
+        return {
+            "thread": thread,
+            "images": images,
+            "message_ts": [m["ts"] for m in messages],
+            "title": stripped_first_line(root["text"]) or conv["name"],
+            "channel_name": conv["name"],
+            "permalink": root["permalink"],
+            "latest_ts": messages[-1]["ts"],
+        }
 
     def agent_context(self, channel_id: str, thread_ts: Optional[str] = None, limit: int = AGENT_DM_MESSAGES) -> Dict[str, Any]:
         """thread 给全部消息，会话（私信）给最近 limit 条；带上「谁是我」，供 skill agent 读取。"""

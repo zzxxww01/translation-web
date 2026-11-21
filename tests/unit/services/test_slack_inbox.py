@@ -487,58 +487,29 @@ def test_link_card_text_is_parsed_like_message_text(inbox):
 
 
 
-def test_search_marks_visibility_and_threads(inbox):
-    out = inbox.search("HBM yields")
-    assert out["total"] == 2
-    first, second = out["results"]
-    assert (first["channel_id"], first["visible"], first["thread_ts"], first["channel_name"]) == (
-        "C000000001", True, THREAD_TS, "social")
-    assert first["message"]["user_name"] == "Bob B" and first["message"]["permalink"].endswith("cid=C000000001")
-    assert (second["visible"], second["channel_name"], second["thread_ts"]) == (False, "secret-other", None)
+def test_post_material_numbers_messages_and_lists_images(inbox):
+    original = inbox.fake.call
+
+    def call(method, **params):
+        out = original(method, **params)
+        if method == "conversations.replies":
+            out = dict(out)
+            msgs = [dict(m) for m in out["messages"]]
+            msgs[1]["files"] = [{"id": "F000000009", "mimetype": "image/png", "name": "chart.png",
+                                 "url_private": "https://files.slack.com/files-pri/T-F9/chart.png"}]
+            msgs[1]["attachments"] = [{"service_name": "X", "title": "Post", "text": "card text"}]
+            out["messages"] = msgs
+        return out
+
+    inbox.fake.call = call
+    material = inbox.post_material("C000000001", THREAD_TS)
+    assert [m["n"] for m in material["thread"]] == [1, 2]
+    assert material["thread"][1]["images"] == ["F000000009"]
+    assert material["thread"][1]["cards"][0]["text"] == "card text"
+    assert material["images"] == [{"id": "F000000009", "name": "chart.png", "message_ts": material["message_ts"][1], "n": 2}]
+    assert material["title"] == "root" and material["channel_name"] == "social"
     with pytest.raises(SlackInboxError):
-        inbox.search("  ")
-
-
-def test_unread_material_collects_others_messages_after_last_read(inbox):
-    sections = inbox.unread_material()
-    kinds = [(s["kind"], s["conversation"]["id"], s["thread_ts"]) for s in sections]
-    # 频道有未读（last_read 3 天前，最新消息在 NOW）；我参与的 thread 有新回复
-    assert ("channel", "C000000001", None) in kinds
-    thread = next(s for s in sections if s["kind"] == "thread")
-    assert thread["thread_ts"] == THREAD_TS and thread["messages"]
-    assert all(float(m["ts"]) > float(thread["last_read"]) and not m["is_me"] for m in thread["messages"])
-    # 只读：没调任何标记已读
-    assert all(method in ALLOWED_METHODS for method, _ in inbox.fake.calls)
-
-
-def test_digest_and_search_routes(inbox, monkeypatch):
-    class FakeAI:
-        async def digest(self, key, where, messages):
-            if "thread" in where:
-                raise RuntimeError("model down")
-            return {"summary": f"{where} 有 {len(messages)} 条", "items": [], "todo_for_me": ""}
-
-        async def search_query(self, q):
-            return "HBM yields"
-
-    monkeypatch.setattr(slack_inbox_router, "get_slack_inbox", lambda: inbox)
-    monkeypatch.setattr(slack_inbox_router, "get_slack_ai", lambda: FakeAI())
-    app = FastAPI()
-    register_error_handlers(app)
-    app.include_router(slack_inbox_router.router, prefix="/api")
-    with TestClient(app) as client:
-        sections = client.get("/api/slack-inbox/digest").json()["sections"]
-        channel = next(s for s in sections if s["kind"] == "channel")
-        assert channel["summary"].startswith("#social") and channel["unread_count"] >= 1
-        thread = next(s for s in sections if s["kind"] == "thread")
-        assert "error" in thread and thread["thread_ts"] == THREAD_TS
-        # @我 / 有待办的排前面，其余按最新消息倒序
-        order = [(not (x["mentions_me"] or x.get("todo_for_me")), -float(x["latest_ts"])) for x in sections]
-        assert order == sorted(order)
-        found = client.get("/api/slack-inbox/search", params={"q": "HBM 良率"}).json()
-        assert found["input"] == "HBM 良率" and found["query"] == "HBM yields" and len(found["results"]) == 2
-        assert client.get("/api/slack-inbox/search").status_code == 422
-
+        inbox.post_material("C000000001", "bad")
 
 
 def test_usergroup_mention_in_search_format():

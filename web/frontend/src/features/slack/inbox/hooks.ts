@@ -7,7 +7,6 @@ import type { SlackConversationList } from './types';
 
 // 后端对 client.counts 缓存 30 秒；会话和消息接口限额约 50 次/分钟，thread 列表轮询放慢一些
 const POLL_MS = 30_000;
-const THREAD_POLL_MS = 60_000;
 // 读接口失败时自动再试两次（经隧道偶尔会断一下），还不行再在页面上报错
 const READ_RETRY = 2;
 
@@ -64,18 +63,6 @@ export function useSlackReplies(channelId: string, threadTs: string, enabled = t
   });
 }
 
-export function useSlackThreads(enabled: boolean) {
-  return useQuery({
-    queryKey: slackInboxKeys.threads,
-    queryFn: slackInboxApi.threads,
-    enabled,
-    refetchInterval: THREAD_POLL_MS,
-    staleTime: 20_000,
-    retry: READ_RETRY,
-    select: data => data.threads,
-  });
-}
-
 /** 「动态」列表：频道 thread 和私信，按最近活动排序。 */
 export function useSlackActivity(enabled: boolean) {
   return useQuery({
@@ -86,18 +73,6 @@ export function useSlackActivity(enabled: boolean) {
     staleTime: 20_000,
     retry: READ_RETRY,
     select: data => data.items,
-  });
-}
-
-export function useChannelThreads(channelId: string, enabled: boolean) {
-  return useQuery({
-    queryKey: slackInboxKeys.channelThreads(channelId),
-    queryFn: () => slackInboxApi.channelThreads(channelId),
-    enabled,
-    refetchInterval: THREAD_POLL_MS,
-    staleTime: 20_000,
-    retry: READ_RETRY,
-    select: data => data.threads,
   });
 }
 
@@ -125,8 +100,8 @@ export function useMarkThreadRead() {
       slackInboxApi.markThreadRead(channelId, threadTs, ts),
     onSuccess: result => {
       if (!result.marked) return;
-      void queryClient.invalidateQueries({ queryKey: slackInboxKeys.threads });
-      void queryClient.invalidateQueries({ queryKey: ['slack-inbox', 'channel-threads'] });
+      void queryClient.invalidateQueries({ queryKey: slackInboxKeys.activity });
+      void queryClient.invalidateQueries({ queryKey: ['slack-inbox', 'todos'] });
       void queryClient.invalidateQueries({ queryKey: slackInboxKeys.conversations });
     },
   });
@@ -137,25 +112,10 @@ export function useMarkAllRead() {
   return useMutation({
     mutationFn: (items?: Parameters<typeof slackInboxApi.markAllRead>[0]) => slackInboxApi.markAllRead(items),
     onSuccess: (_data, items) => {
-      toast.success(`${items ? '这一组' : '全部'}已标为已读（只在 momo 里，Slack 的未读不变）`);
+      toast.success(`${items ? '' : '全部'}已标为已读（只在 momo 里，Slack 的未读不变）`);
       void queryClient.invalidateQueries({ queryKey: ['slack-inbox'] });
     },
     onError: error => toast.error(error instanceof Error ? error.message : '没标成功'),
-  });
-}
-
-export function useRefreshSlack() {
-  const queryClient = useQueryClient();
-  const { handleError } = useErrorHandler();
-  return useMutation({
-    mutationFn: () => slackInboxApi.conversations(true),
-    onSuccess: data => {
-      queryClient.setQueryData(slackInboxKeys.conversations, data);
-      void queryClient.invalidateQueries({
-        predicate: q => q.queryKey[0] === 'slack-inbox' && q.queryKey[1] !== 'conversations' && q.queryKey[1] !== 'status',
-      });
-    },
-    onError: error => handleError(error, '刷新 Slack 失败'),
   });
 }
 
@@ -188,16 +148,27 @@ export function usePageVisible() {
   return visible;
 }
 
-/** 媒体查询是否命中（窗口大小变化时跟着变）。 */
-export function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(() => typeof window !== 'undefined' && !!window.matchMedia?.(query).matches);
-  useEffect(() => {
-    const list = window.matchMedia?.(query);
-    if (!list) return;
-    const onChange = () => setMatches(list.matches);
-    onChange();
-    list.addEventListener('change', onChange);
-    return () => list.removeEventListener('change', onChange);
-  }, [query]);
-  return matches;
+/** 我的待办（未读的 @我 和私信，后端一次模型调用，按这批消息缓存） */
+export function useTodos(enabled: boolean) {
+  return useQuery({
+    queryKey: ['slack-inbox', 'todos'],
+    queryFn: slackInboxApi.todos,
+    enabled,
+    staleTime: 60_000,
+    refetchInterval: 120_000,
+    retry: 1,
+  });
+}
+
+export function useSlackSettings() {
+  return useQuery({ queryKey: ['slack-inbox', 'settings'], queryFn: slackInboxApi.settings, staleTime: 5 * 60_000 });
+}
+
+export function useSaveSlackSettings() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: slackInboxApi.saveSettings,
+    onSuccess: data => queryClient.setQueryData(['slack-inbox', 'settings'], data),
+    onError: error => toast.error(error instanceof Error ? error.message : '设置没存上'),
+  });
 }

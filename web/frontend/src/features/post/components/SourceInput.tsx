@@ -12,9 +12,13 @@ interface SourceInputProps {
   isLoading: boolean;
   isTranslating: boolean;
   canClear: boolean;
+  /** 放在有栏头的分栏里时不再显示「原文」小标题 */
+  hideTitle?: boolean;
+  /** 原文框高度（分栏里撑满） */
+  className?: string;
 }
 
-export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, isTranslating, canClear }: SourceInputProps) {
+export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, isTranslating, canClear, hideTitle, className }: SourceInputProps) {
   // 计数与上限必须同源：都用 value.length（与后端校验口径一致）
   const charCount = value.length;
 
@@ -35,7 +39,7 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
   return (
     <div className="flex min-w-0 flex-col">
       <div className="mb-3 flex items-center justify-between">
-        <h3 className="text-sm font-semibold">原文</h3>
+        <h3 className="text-sm font-semibold">{hideTitle ? '' : '原文'}</h3>
         <span className="text-xs text-muted-foreground">
           {charCount.toLocaleString()}/{POST_CONTENT_MAX_LENGTH.toLocaleString()} 字符
         </span>
@@ -46,7 +50,7 @@ export function SourceInput({ value, onChange, onTranslate, onClear, isLoading, 
         onChange={(e) => handleChange(e.target.value)}
         aria-label="帖子原文"
         placeholder="原文..."
-        className="min-h-[42svh] resize-y sm:min-h-[320px] lg:min-h-[560px] lg:max-h-[calc(100svh-240px)]"
+        className={className ?? "min-h-[42svh] resize-y sm:min-h-[320px] lg:min-h-[560px] lg:max-h-[calc(100svh-240px)]"}
       />
       <div className="mt-4 flex items-center justify-between gap-3">
         <Button type="button" variant="outline" size="sm" className="h-10 px-4 sm:h-9" onClick={onClear} disabled={isLoading || !canClear}>

@@ -2,9 +2,9 @@
 import { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import { expect, it, vi } from 'vitest';
-import { buildStream, dayLabel, emojiFor, emojify, newestTs, parseSlackView, splitSidebar, stripLeadingMentions, threadTitle } from './lib';
+import { buildStream, dayLabel, emojiFor, emojify, newestTs, stripLeadingMentions } from './lib';
 import { SlackText } from './SlackText';
-import type { SlackConversation, SlackMessage, SlackThread } from './types';
+import type { SlackMessage } from './types';
 
 it('renders segments as text, mentions and safe links only', async () => {
   vi.stubGlobal('IS_REACT_ACT_ENVIRONMENT', true);
@@ -33,30 +33,6 @@ it('maps known emoji shortcodes and leaves unknown ones', () => {
   expect(emojify(':fire: :bufo-yay:')).toBe('🔥 :bufo-yay:');
   expect(emojiFor('thumbsup::skin-tone-3')).toBe('👍');
   expect(emojiFor('bufo-love')).toBe(':bufo-love:');
-});
-
-it('splits the sidebar into channels and DMs', () => {
-  const base = {
-    latest_ts: null, latest_time: '', last_read: null, has_unreads: false, mention_count: 0, thread_unreads: 0, thread_mentions: 0,
-  };
-  const convs: SlackConversation[] = [
-    { ...base, id: 'C1', kind: 'channel', name: 'social' },
-    { ...base, id: 'G1', kind: 'private', name: 'secret' },
-    { ...base, id: 'D1', kind: 'im', name: 'Alice' },
-    { ...base, id: 'G2', kind: 'mpim', name: 'group' },
-  ];
-  const { channels, dms } = splitSidebar(convs);
-  expect(channels.map(c => c.id)).toEqual(['C1', 'G1']);
-  expect(dms.map(c => c.id)).toEqual(['D1', 'G2']);
-});
-
-it('only accepts known middle-pane views', () => {
-  expect(parseSlackView('threads')).toBeNull();  // 「我参与的」变成左栏分组
-  expect(parseSlackView('reply')).toBe('reply');
-  expect(parseSlackView('digest')).toBe('digest');
-  expect(parseSlackView('search')).toBeNull();  // 搜索已去掉
-  expect(parseSlackView('channels')).toBeNull();
-  expect(parseSlackView(null)).toBeNull();
 });
 
 function msg(ts: number, user: string, extra: Partial<SlackMessage> = {}): SlackMessage {
@@ -93,12 +69,6 @@ it('labels days and picks the newest ts', () => {
   expect(dayLabel((new Date(2025, 0, 2, 9).getTime() / 1000).toFixed(6), now)).toBe('2025年1月2日 周四');
   expect(newestTs([{ ts: '1700000000.000200' }, { ts: '1700000001.000100' }, { ts: '1699999999.9' }])).toBe('1700000001.000100');
   expect(newestTs([])).toBeNull();
-});
-
-it('titles threads from the first non-empty line', () => {
-  const thread = { root: msg(1, 'A', { text: '\n *HBM4* yields :fire: update\nsecond line' }) } as SlackThread;
-  expect(threadTitle(thread)).toBe('HBM4 yields 🔥 update');
-  expect(threadTitle(thread, 5)).toBe('HBM4 …');
 });
 
 it('drops leading @用户组 from titles, keeps named mentions and mention-only text', () => {
