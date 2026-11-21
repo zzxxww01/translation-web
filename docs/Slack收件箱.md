@@ -2,10 +2,11 @@
 
 momo 顶部「Slack」页，按「动态」组织（2026-11-18 用户反馈原生 Slack 式的频道三栏太乱，改成活动列）：
 
-- **左栏**（`inbox/ActivityList.tsx`）：一行筛选 **全部 · 未读 · @我 · 私信 · 新帖 · 我参与的**（记在浏览器里，数字是这一类的未读数，
+- **左栏**（`inbox/ActivityList.tsx`）：一行筛选（浅灰底分段选择，选中白底）**全部 · 未读 · @我 · 私信 · 新帖 · 我参与的 · 我翻译的**（记在浏览器里，数字是这一类的未读数，
   可以重叠；「全部」按最近活动排；「新帖」= 最近 7 天没人回复、不是我发的；「我参与的」= Slack 记的我订阅的 thread，后端带 `following`）。
   右边「待办 N」回到中间的我的待办。选「未读」时列表顶部有「全部标为已读」（只记在 momo）。
-  每行：发起人首字母；私信 / 群聊 / 新帖小字标签，@我 红标签；翻过的 thread 带「草稿 vN / ✓ 已翻 / 自动翻好」。
+  「我翻译的」= 最近 7 天有翻译稿的帖子，顶上有入口进**全部翻译记录**（`view=history`，不限 7 天、含帖子翻译页翻的）。
+  每行只有两行字：标题（未读加粗 + 小圆点，@我 红字）和一行灰色说明（谁发起 · 几条回复 · 翻译草稿 / 已翻译）；后台自动翻好、还没看过的整行底色稍深。
 - **中栏**：没选会话时是「我的待办」；点 thread 只看这一个 thread（顶部操作条：翻译这个帖子 / 翻译全部 / 总结一下），
   thread 标题下的频道名可以进整个频道的消息流；点私信是私信消息流。
 - **右栏**：私信时是回复面板。
@@ -43,15 +44,15 @@ URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread，加 `mode=translat
 
 ### 4. 帖子翻译（翻译模式 + 翻译稿）
 - thread 顶部主按钮「翻译这个帖子」（翻过的显示「继续翻译 · vN」「已完成」「自动翻好了」）→ `?mode=translate` 进入翻译模式：
-  **① 原文 + 配图 | ② 译文 · 优化 · 标题 | ③ 原 thread** 三栏（`components/layout/ResizablePanes.tsx`），每栏可收起、可拖宽，记在浏览器里。
+  **原文和配图 | 译文 | Slack 原帖** 三栏（上面一条细工具条：返回 Slack、标题、存档状态、标记完成、模型）（`components/layout/ResizablePanes.tsx`），每栏可收起、可拖宽，记在浏览器里。
 - 第一次进入自动跑 `POST /api/post-drafts/slack/{频道}/{thread_ts}/run`：提取（`slack_post_extract`，一个 thread 只出一篇，
   去掉编号 / @ / 请求 / 讨论，取最新版；有「posted <x.com/SemiAnalysis_…>」时以已发布的 X 帖为准；挑配图）→ 翻译 → 标题，存成翻译稿。
   「重新提取」带上要求（「用第一版」）再跑一次，旧版本保留、追加新版本。
 - ② 栏和帖子翻译页是同一套代码（`features/post/usePostWorkspace.ts` + 每篇一份 `createPostStore()`）：版本切换、手改保存、
   预设优化 + 自定义、标题生成；另有「连标题复制」。
 - ③ 栏：用来提取的消息左侧竖线；点图片加入 / 去掉配图；配图可调顺序、单张下载、`GET /api/post-drafts/{id}/images.zip` 打包。
-- 翻译稿存在 `data/post_drafts/<id>.json`（`src/services/post_drafts.py`），帖子翻译页手动翻的也存这里，两边合成「翻译记录」
-  （帖子翻译页左栏）。Slack 列表行和 thread 顶部显示「草稿 vN / ✓ 已翻 / 自动翻好」。
+- 翻译稿存在 `data/post_drafts/<id>.json`（`src/services/post_drafts.py`），帖子翻译页手动翻的也存这里，两边合成「翻译记录」：
+  Slack 里在「我翻译的 → 全部翻译记录」，帖子翻译页在右上角「历史记录」（点开才展开；帖子翻译页是旧功能，其余布局不变，以后逐步迁到 Slack）。Slack 列表行和 thread 顶部显示「草稿 vN / ✓ 已翻 / 自动翻好」。
 - **@我 的 thread 自动翻译**：后台每分钟（`post_drafts.auto_translate_loop`，随 momo 后端启动）找最近 7 天有人直接 @我、还没有翻译稿的
   thread，自动跑一遍，生成「自动翻好 · 待查看」的草稿；失败一小时后再试（`data/slack_cache/auto_translate.json`）。
   提取发现没有要发的内容时只记一句说明，不进翻译记录。

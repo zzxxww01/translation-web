@@ -2,15 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { ArrowLeft, CheckCircle2, Circle, Copy, Download, ImageOff, Loader2, RotateCcw, Sparkles, X } from 'lucide-react';
 import { toast } from 'sonner';
-import { cn } from '@/lib/utils';
 import { ModelSelector } from '@/components/ModelSelector';
 import { ResizablePanes } from '@/components/layout/ResizablePanes';
-import { PageActions } from '@/components/layout/HeaderSlot';
 import { Button } from '@/components/ui/Button';
 import { copyToClipboard } from '@/shared/utils';
 import { createPostStore, type PostStoreHook } from '@/shared/stores/postStore';
 import { WorkColumn } from '@/features/post';
-import { SourceInput } from '@/features/post/components/SourceInput';
 import { DiscardEditDialog, PendingChip, SaveState } from '@/features/post/components/WorkspaceChrome';
 import { draftKeys, draftsApi, useDraftSync, type DraftDoc, type DraftImage } from '@/features/post/drafts';
 import { usePostWorkspace } from '@/features/post/usePostWorkspace';
@@ -54,6 +51,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
   const [status, setStatus] = useState<'draft' | 'done'>('draft');
   const [running, setRunning] = useState(false);
   const [instruction, setInstruction] = useState('');
+  const [picking, setPicking] = useState(false);
   const draftId = store(state => state.draftId);
   const sync = useDraftSync(store, { enabled: !!doc, extra: () => ({ images, status, seen: true }) });
 
@@ -149,128 +147,151 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
   const hasNew = !!extraction?.latest_ts && messages.length > 0
     && parseFloat(messages[messages.length - 1].ts) > parseFloat(extraction.latest_ts);
 
+  // 改了原文、还没按新原文翻：提示「按这段原文重新翻译」
+  const sourceChanged = !!ws.currentVersion && ws.originalText.trim() !== ws.currentVersion.sourceText.trim();
+
   const sourcePane = (
-    <div className="flex min-h-full flex-col gap-4 p-4">
+    <div className="flex min-h-full flex-col gap-5 px-4 py-4">
       {running && !doc && (
-        <div className="rounded-xl border border-primary-100 bg-primary-50/60 px-4 py-6 text-center">
+        <div className="rounded-xl bg-primary-50/60 px-4 py-8 text-center">
           <Loader2 className="mx-auto h-6 w-6 animate-spin text-primary-500" />
-          <p className="mt-2 text-sm font-medium text-text-primary">正在从 thread 里找出要发的帖子</p>
-          <p className="mt-1 text-xs text-text-muted">提取原文和配图 → 翻译 → 起标题，大约 15 秒</p>
-        </div>
-      )}
-      {extraction && (
-        <div className={cn(
-          'rounded-xl border px-3.5 py-2.5 text-[13px] leading-relaxed',
-          extraction.has_post ? 'border-primary-100 bg-gradient-to-br from-primary-50/70 to-white' : 'border-amber-200 bg-amber-50'
-        )}>
-          <div className="mb-0.5 flex items-center gap-1 text-xs font-semibold text-primary-700">
-            <Sparkles className="h-3.5 w-3.5" /> {extraction.has_post ? 'AI 选的内容' : '这个 thread 里没有要发的帖子'}
-          </div>
-          <p className="text-text-primary">{extraction.note || '—'}</p>
-          {extraction.has_post && usedTs.size > 0 && (
-            <p className="mt-1 text-xs text-text-muted">来源：右边标了竖线的 {usedTs.size} 条消息</p>
-          )}
-          {extraction.candidates.length > 0 && (
-            <div className="mt-2 space-y-1.5">
-              <div className="text-xs text-text-muted">也可能是：</div>
-              {extraction.candidates.map((c, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => {
-                    store.getState().setOriginalText(c.source_text);
-                    const byId = new Map(messages.flatMap(m => m.files).map(f => [f.id, f.name]));
-                    setImages(c.image_ids.map(id => ({ id, name: byId.get(id) ?? id })));
-                    toast.info('原文已换成这个版本，点「重新翻译」出新译文');
-                  }}
-                  className="block w-full rounded-lg border border-border-subtle bg-white px-2.5 py-1.5 text-left text-xs hover:border-primary-200"
-                >
-                  <span className="font-medium text-text-primary">{c.label || `备选 ${i + 1}`}</span>
-                  <span className="mt-0.5 line-clamp-2 block text-text-muted">{c.source_text}</span>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
-      )}
-      {hasNew && (
-        <div className="flex items-center gap-2 rounded-lg border border-warning/30 bg-warning-light px-3 py-2 text-xs">
-          <span className="flex-1">thread 有更新，可能有新版本</span>
-          <button type="button" onClick={() => void run()} disabled={running} className="font-medium text-primary-700 hover:underline">重新提取</button>
+          <p className="mt-3 text-sm font-medium text-text-primary">正在从 Slack 原帖里找出要发的帖子</p>
+          <p className="mt-1 text-xs text-text-muted">找原文和配图 → 翻译 → 起标题，大约 15 秒</p>
         </div>
       )}
 
-      <div className="flex min-h-[260px] flex-1 flex-col">
-        <SourceInput
-          hideTitle
+      {extraction && !extraction.has_post && (
+        <div className="rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900">
+          <p className="font-medium">这个 thread 里没找到要发的帖子</p>
+          <p className="mt-1 text-[13px] leading-relaxed">{extraction.note}</p>
+        </div>
+      )}
+
+      {/* 1. 要翻译的英文：AI 从原帖里挑出来的，可以直接改 */}
+      <section>
+        <div className="mb-1.5 flex items-baseline gap-2">
+          <h3 className="text-sm font-semibold text-text-primary">要翻译的英文</h3>
+          <span className="text-xs text-text-muted">AI 从原帖里挑的，可以直接改</span>
+        </div>
+        {extraction?.has_post && extraction.note && (
+          <p className="mb-2 text-[13px] leading-relaxed text-text-secondary">
+            <Sparkles className="mr-1 inline h-3.5 w-3.5 -translate-y-px text-primary-500" />
+            {extraction.note}
+          </p>
+        )}
+        <textarea
+          id="postSourceInput"
           value={ws.originalText}
-          onChange={ws.setOriginalText}
-          onTranslate={() => void ws.handleTranslate()}
-          onClear={() => ws.setOriginalText('')}
-          isLoading={ws.isLoading || running}
-          isTranslating={ws.pendingAction === 'translate'}
-          canClear={!!ws.originalText.trim()}
-          className="min-h-[220px] flex-1 resize-none"
+          onChange={e => ws.setOriginalText(e.target.value)}
+          aria-label="帖子原文"
+          placeholder={running ? '正在提取…' : '在这里粘贴或修改英文原文'}
+          className="min-h-[220px] w-full resize-y rounded-lg border border-border-subtle bg-white px-3.5 py-3 text-[14px] leading-relaxed text-text-primary outline-none transition-colors focus:border-primary-200 focus:ring-2 focus:ring-primary-50"
         />
-      </div>
+        <div className="mt-2 flex flex-wrap items-center gap-2">
+          {(sourceChanged || (!ws.versions.length && ws.originalText.trim())) && (
+            <Button size="sm" className="h-8" onClick={() => void ws.handleTranslate()} disabled={ws.isLoading || running}>
+              {ws.pendingAction === 'translate' ? <Loader2 className="h-4 w-4 animate-spin" /> : null}
+              {ws.versions.length ? '按改过的原文重新翻译' : '翻译'}
+            </Button>
+          )}
+          <button
+            type="button"
+            onClick={() => setPicking(v => !v)}
+            className="text-xs text-text-muted underline-offset-2 hover:text-primary-700 hover:underline"
+          >
+            挑错了？让 AI 重新挑
+          </button>
+          <span className="ml-auto text-[11px] tabular-nums text-text-muted">{ws.originalText.length.toLocaleString()} 字符</span>
+        </div>
+        {picking && (
+          <div className="mt-2 space-y-2 rounded-lg bg-bg-tertiary/70 p-3">
+            {extraction?.candidates.map((c, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => {
+                  store.getState().setOriginalText(c.source_text);
+                  const byId = new Map(messages.flatMap(m => m.files).map(f => [f.id, f.name]));
+                  setImages(c.image_ids.map(id => ({ id, name: byId.get(id) ?? id })));
+                  setPicking(false);
+                  toast.info('原文已换成这一版，点「按改过的原文重新翻译」出新译文');
+                }}
+                className="block w-full rounded-md bg-white px-3 py-2 text-left text-xs shadow-sm hover:ring-1 hover:ring-primary-200"
+              >
+                <span className="font-medium text-text-primary">换成：{c.label || `备选 ${i + 1}`}</span>
+                <span className="mt-0.5 line-clamp-2 block text-text-muted">{c.source_text}</span>
+              </button>
+            ))}
+            <div className="flex items-center gap-2">
+              <input
+                value={instruction}
+                onChange={e => setInstruction(e.target.value)}
+                onKeyDown={e => { if (e.key === 'Enter') void run(instruction); }}
+                placeholder="告诉 AI 怎么挑：用第一版 / 把地图那段也加上"
+                aria-label="重新挑选的要求"
+                disabled={running}
+                className="h-8 min-w-0 flex-1 rounded-md border border-border-subtle bg-white px-2.5 text-sm outline-none focus:border-primary-200"
+              />
+              <Button variant="outline" size="sm" className="h-8 shrink-0" onClick={() => void run(instruction)} disabled={running}>
+                {running ? <Loader2 className="h-4 w-4 animate-spin" /> : <RotateCcw className="h-4 w-4" />} 重新挑
+              </Button>
+            </div>
+          </div>
+        )}
+        {hasNew && (
+          <p className="mt-2 text-xs text-amber-800">
+            原帖后来又有更新，可能有新版本。
+            <button type="button" onClick={() => void run()} disabled={running} className="ml-1 font-medium text-primary-700 hover:underline">重新挑</button>
+          </p>
+        )}
+      </section>
 
-      <div className="flex items-center gap-2">
-        <input
-          value={instruction}
-          onChange={e => setInstruction(e.target.value)}
-          onKeyDown={e => { if (e.key === 'Enter') void run(instruction); }}
-          placeholder="选错了？告诉 AI：用第一版 / 把地图那段加上……"
-          aria-label="重新提取的要求"
-          disabled={running}
-          className="h-9 min-w-0 flex-1 rounded-lg border border-border-subtle bg-white px-3 text-sm outline-none focus:border-primary-200 focus:ring-2 focus:ring-primary-50"
-        />
-        <Button variant="outline" size="sm" className="h-9 shrink-0" onClick={() => void run(instruction)} disabled={running}>
-          {running ? <Loader2 className="h-4 w-4 animate-spin" /> : <RotateCcw className="h-4 w-4" />} 重新提取
-        </Button>
-      </div>
-
-      <div className="rounded-xl border border-border-subtle bg-white p-3">
-        <div className="mb-2 flex items-center gap-2">
-          <span className="text-sm font-semibold text-text-primary">配图</span>
-          <span className="text-xs text-text-muted">{images.length ? `${images.length} 张，按发帖顺序` : '在右边原 thread 里点图片添加'}</span>
+      {/* 2. 配图：按发帖顺序；在右边原帖里点图片增减 */}
+      <section>
+        <div className="mb-2 flex items-baseline gap-2">
+          <h3 className="text-sm font-semibold text-text-primary">配图</h3>
+          <span className="text-xs text-text-muted">{images.length ? `${images.length} 张，按发帖顺序` : '没有配图'}</span>
           {images.length > 0 && (
-            <button type="button" onClick={() => void downloadZip()} className="ml-auto inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-primary-700 hover:bg-primary-50">
-              <Download className="h-3.5 w-3.5" /> 打包下载
+            <button type="button" onClick={() => void downloadZip()} className="ml-auto inline-flex items-center gap-1 text-xs text-primary-700 hover:underline">
+              <Download className="h-3.5 w-3.5" /> 全部下载
             </button>
           )}
         </div>
         {images.length === 0 ? (
-          <div className="flex items-center gap-2 rounded-lg bg-bg-tertiary/60 px-3 py-4 text-xs text-text-muted">
-            <ImageOff className="h-4 w-4" /> 没有配图
+          <div className="flex items-center gap-2 rounded-lg border border-dashed border-border px-3 py-4 text-xs text-text-muted">
+            <ImageOff className="h-4 w-4" /> 在右边的 Slack 原帖里点图片，就能加进配图
           </div>
         ) : (
-          <div className="grid grid-cols-3 gap-2">
-            {images.map((img, i) => (
-              <div key={img.id} className="group relative overflow-hidden rounded-lg border border-border-subtle bg-bg-tertiary">
-                <img src={`/api/slack-inbox/files/${img.id}`} alt={img.name} loading="lazy" className="aspect-square w-full object-cover" />
-                <span className="absolute left-1 top-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary-500 text-[11px] font-semibold text-white shadow">{i + 1}</span>
-                <div className="absolute inset-x-0 bottom-0 flex justify-between gap-1 bg-gradient-to-t from-black/50 p-1 opacity-0 transition-opacity group-hover:opacity-100">
-                  <div className="flex gap-1">
-                    <button type="button" onClick={() => moveImage(i, -1)} disabled={i === 0} className="rounded bg-white/90 px-1 text-[11px] disabled:opacity-40" aria-label="往前">←</button>
-                    <button type="button" onClick={() => moveImage(i, 1)} disabled={i === images.length - 1} className="rounded bg-white/90 px-1 text-[11px] disabled:opacity-40" aria-label="往后">→</button>
-                  </div>
-                  <div className="flex gap-1">
-                    <a href={`/api/slack-inbox/files/${img.id}?download=true`} className="rounded bg-white/90 p-0.5" title="下载这张" aria-label="下载这张"><Download className="h-3 w-3" /></a>
-                    <button type="button" onClick={() => toggleImage(img.id, img.name)} className="rounded bg-white/90 p-0.5" title="不配这张" aria-label="不配这张"><X className="h-3 w-3" /></button>
+          <>
+            <div className="grid grid-cols-3 gap-2">
+              {images.map((img, i) => (
+                <div key={img.id} className="group relative overflow-hidden rounded-lg bg-bg-tertiary">
+                  <img src={`/api/slack-inbox/files/${img.id}`} alt={img.name} loading="lazy" className="aspect-square w-full object-cover" />
+                  <span className="absolute left-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/60 text-[11px] font-medium text-white">{i + 1}</span>
+                  <div className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-black/60 to-transparent px-1.5 pb-1.5 pt-4 opacity-0 transition-opacity group-hover:opacity-100">
+                    <div className="flex gap-1">
+                      <button type="button" onClick={() => moveImage(i, -1)} disabled={i === 0} className="rounded bg-white/90 px-1.5 text-[11px] disabled:opacity-40" aria-label="往前挪">←</button>
+                      <button type="button" onClick={() => moveImage(i, 1)} disabled={i === images.length - 1} className="rounded bg-white/90 px-1.5 text-[11px] disabled:opacity-40" aria-label="往后挪">→</button>
+                    </div>
+                    <div className="flex gap-1">
+                      <a href={`/api/slack-inbox/files/${img.id}?download=true`} className="rounded bg-white/90 p-1" title="下载这张" aria-label="下载这张"><Download className="h-3 w-3" /></a>
+                      <button type="button" onClick={() => toggleImage(img.id, img.name)} className="rounded bg-white/90 p-1" title="不要这张" aria-label="不要这张"><X className="h-3 w-3" /></button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+            <p className="mt-2 text-[11px] text-text-muted">鼠标移到图上可以调顺序、下载或去掉；在右边原帖里点图片可以再加。</p>
+          </>
         )}
-      </div>
+      </section>
     </div>
   );
 
   const threadPane = (
     <div className="pb-6 pt-2">
       {replies.isLoading && <div className="flex justify-center py-8"><Loader2 className="h-5 w-5 animate-spin text-text-muted" /></div>}
-      <p className="px-5 pb-2 text-xs text-text-muted">标了竖线的是用来提取原文的消息；点图片可以加入或去掉配图。</p>
+      <p className="px-5 pb-2 text-xs text-text-muted">左边有竖线的消息是 AI 挑原文用的；点图片可以加进配图或去掉。</p>
       {messages.map(m => (
         <MessageItem
           key={m.ts}
@@ -285,33 +306,35 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
 
   return (
     <div className="flex h-full min-h-0 flex-col bg-background">
-      <PageActions>
-        <Button variant="ghost" size="sm" className="h-8 shrink-0 px-2" onClick={onExit}>
-          <ArrowLeft className="h-4 w-4" /> 退出翻译
+      {/* 翻译模式自己的细工具条：返回、标题、状态和模型（顶栏留给全站导航） */}
+      <div className="flex h-10 shrink-0 items-center gap-2 border-b border-border-subtle bg-white/70 px-3">
+        <Button variant="ghost" size="sm" className="h-7 shrink-0 px-2 text-text-secondary" onClick={onExit}>
+          <ArrowLeft className="h-4 w-4" /> 返回 Slack
         </Button>
-        <div className="hidden min-w-0 max-w-[22rem] truncate text-sm text-text-secondary 2xl:block" title={title}>
+        <span className="h-4 w-px shrink-0 bg-border" />
+        <div className="min-w-0 flex-1 truncate text-sm text-text-primary" title={title}>
           <span className="text-text-muted">#{doc?.slack?.channel_name || channelName} · </span>{title}
         </div>
-        <SaveState saving={sync.saving} savedAt={sync.savedAt} hasDraft={!!draftId} />
+        <span className="shrink-0 whitespace-nowrap"><SaveState saving={sync.saving} savedAt={sync.savedAt} hasDraft={!!draftId} /></span>
         <PendingChip ws={ws} />
         {draftId && (
-          <Button variant={status === 'done' ? 'secondary' : 'ghost'} size="sm" className="h-8 shrink-0" onClick={toggleDone}>
+          <Button variant={status === 'done' ? 'secondary' : 'ghost'} size="sm" className="h-7 shrink-0" onClick={toggleDone}>
             {status === 'done' ? <CheckCircle2 className="h-4 w-4 text-success" /> : <Circle className="h-4 w-4" />}
             {status === 'done' ? '已完成' : '标记完成'}
           </Button>
         )}
         <div className="w-40 shrink-0" title="翻译和优化用的模型">
-          <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-8 text-sm" disabled={ws.isLoading} />
+          <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-7 text-xs" disabled={ws.isLoading} />
         </div>
-      </PageActions>
+      </div>
       <ResizablePanes
         storageKey="slack-translate-panes-v1"
         mobileDefault="work"
         panes={[
-          { id: 'source', title: '① 原文 + 配图', width: 420, minWidth: 300, content: sourcePane },
+          { id: 'source', title: '原文和配图', width: 420, minWidth: 300, content: sourcePane },
           {
             id: 'work',
-            title: '② 译文 · 优化 · 标题',
+            title: '译文',
             minWidth: 380,
             content: (
               <WorkColumn
@@ -324,7 +347,7 @@ export function SlackTranslateMode({ channelId, threadTs, channelName, onExit }:
               />
             ),
           },
-          { id: 'thread', title: '③ 原 thread', width: 400, minWidth: 280, content: threadPane },
+          { id: 'thread', title: 'Slack 原帖', width: 400, minWidth: 280, content: threadPane },
         ]}
       />
       <DiscardEditDialog ws={ws} />
