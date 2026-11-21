@@ -25,6 +25,7 @@ from src.api.utils.json_utils import parse_llm_json_response
 from src.api.utils.llm_errors import raise_empty_llm_result, raise_llm_service_unavailable
 from src.api.utils.llm_factory import generate_with_fallback_budget
 from src.prompts.contracts import PromptContractError
+from src.services.post_drafts import DraftError
 from src.services.slack_ai import MAX_BATCH, MAX_TEXT_CHARS, SlackAI
 from src.services.slack_inbox import (
     SlackCredentialStore,
@@ -227,7 +228,7 @@ async def _run_ai(coro, operation: str):
         return await coro
     except SlackInboxError as error:
         raise _to_api_error(error) from error
-    except ServiceUnavailableException:
+    except (ServiceUnavailableException, DraftError):
         raise
     except (PromptContractError, ValueError):
         raise_empty_llm_result(operation=operation)
@@ -313,7 +314,12 @@ def _draft_index() -> Dict[str, Dict[str, object]]:
 @router.get("/todos")
 @limiter.limit("20/minute")
 async def my_todos(request: Request):
-    """每件找我的事一行「谁要我干什么」；只被群发 @ 到的放进 fyi（不用处理），不送模型。"""
+    return await build_todos()
+
+
+async def build_todos() -> Dict[str, object]:
+    """每件找我的事一行「谁要我干什么」；只被群发 @ 到的放进 fyi（不用处理），不送模型。
+    网页的待办和 Muse 的 translation-agent slack-todos 共用。"""
     material = await _run(get_slack_inbox().todo_material)
     direct = [m for m in material if m["direct"]]
     llm_items = [

@@ -207,3 +207,60 @@ def test_ssh_mode_ignores_env_base_url(std, monkeypatch):
     monkeypatch.setenv("TRANSLATION_SERVICE_URL", "http://evil.example")
     _run(std, ["--ssh"])
     assert seen[0].full_url.startswith("http://127.0.0.1:54321/")
+
+
+# ---------------------------------------------------------------- 待办 / 翻译记录 / 帖子流程
+
+DRAFT_ID = "s_C0123456789_1763424000_000100"
+
+
+def test_slack_todos_and_drafts(std, monkeypatch):
+    seen = _capture(monkeypatch, {"items": [], "fyi": []})
+    code, _ = _run(std, ["slack-todos"])
+    assert code == 0 and seen[0].full_url.endswith("/internal/automation/slack-todos")
+    std.out.buffer.seek(0)
+    std.out.buffer.truncate()
+    _run(std, ["drafts", "--source", "slack", "--q", "AI racks"])
+    assert seen[1].full_url.endswith("/internal/automation/drafts?status=draft&limit=50&source=slack&q=AI+racks")
+
+
+def test_draft_keeps_image_data_intact(std, monkeypatch):
+    # 随机字节的 base64 偶尔长得像密钥（/AIza…），不能被脱敏改坏
+    blob = "/AIzaSyA1234567890abcdefghijklmnop+xoxc-not"
+    seen = _capture(monkeypatch, {"draft_id": DRAFT_ID, "note": "AIzaSyA1234567890abcdefghijklmnop",
+                                  "images": [{"n": 1, "data_base64": blob}]})
+    code, out = _run(std, ["draft", DRAFT_ID])
+    assert code == 0 and out["images"][0]["data_base64"] == blob
+    assert out["note"] == "[redacted]"
+    assert seen[0].full_url.endswith(f"/internal/automation/drafts/{DRAFT_ID}")
+    std.out.buffer.seek(0)
+    std.out.buffer.truncate()
+    _run(std, ["draft", DRAFT_ID, "--no-images"])
+    assert seen[1].full_url.endswith("?images=false")
+
+
+def test_translate_slack_post_body(std, monkeypatch):
+    seen = _capture(monkeypatch, {"draft_id": DRAFT_ID})
+    code, _ = _run(std, ["translate-slack-post", "C0123456789", "1763424000.000100", "--instruction", "翻第二版"])
+    assert code == 0 and seen[0].full_url.endswith("/internal/automation/translate-slack-post")
+    assert json.loads(seen[0].data) == {"conversation_id": "C0123456789", "thread_ts": "1763424000.000100",
+                                        "instruction": "翻第二版", "with_images": True}
+
+
+@pytest.mark.parametrize("argv", [
+    ["draft", "../etc/passwd"],
+    ["draft", "s_bad"],
+    ["translate-slack-post", "bad", "1763424000.000100"],
+    ["drafts", "--status", "weird"],
+])
+def test_new_commands_reject_bad_input(std, monkeypatch, argv):
+    seen = _capture(monkeypatch)
+    code, _ = _run(std, argv)
+    assert code == 1 and seen == []
+
+
+def test_ssh_mode_allows_new_commands(std, monkeypatch):
+    seen = _capture(monkeypatch, {"items": []})
+    monkeypatch.setenv("SSH_ORIGINAL_COMMAND", "translation-agent drafts --status all")
+    code, _ = _run(std, ["--ssh"])
+    assert code == 0 and "status=all" in seen[0].full_url

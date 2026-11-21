@@ -24,7 +24,11 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 | --- | --- |
 | `updates --since <ISO 或 Unix 秒/毫秒>` | 先同步（Substack 最新一页、Slack 只读同步），返回 `new_articles`（`published_at > since`）、`mentions`（`ts > since`）、`watermark`。可能带 `warnings`（某一边同步失败） |
 | `translate-article <slug 或 Substack 链接> [--target-lang zh]` | 导入（已导入复用）→ 四步法翻译，自动采用术语建议。`status`：`started` / `resumed`（上次停在一半，续译）/ `already_exists`（在跑、等术语或已译完，附 `translation_status`） |
-| `translate-slack <conversation_id> <message_ts> [--thread-ts T] [--with-thread]` | 翻译一条 Slack 消息（含链接卡片里的帖子）或它所在的整个 thread，**同步**返回 `translation`，`status` 为 `done`（新翻）或 `already_exists`（同样内容翻过，直接给缓存）；`project_id` 形如 `slack-<会话>-<ts>[-thread]` |
+| `slack-todos` | **我要处理什么**：和网页 Slack 页「我的待办」同一份。`items` 是找我的事（私信、thread 里直接 @我），每条有 `task`（谁要我干什么）、`action`（`reply` 要回复 / `do` 要做事，多半是翻译 / `read` 看看就行）、`conversation_id`、`thread_ts`、`draft`（已有翻译稿时给 `draft_id`、`status`）；`fyi` 是只被群发 @ 到的，不用处理 |
+| `drafts [--status draft\|done\|all] [--source slack\|manual] [--q 关键词] [--limit 50]` | **翻译记录**（网页「我翻译的」/「全部翻译记录」）。默认 `--status draft`：还没点「标记完成」的。每条有 `draft_id`、`title`、`preview`（译文开头）、`versions`（0 = 只提取了原文还没出译文）、`image_count`、`auto`（后台或 Muse 自动翻的） |
+| `draft <draft_id> [--no-images]` | **一份翻译结果**：`source_text`（要翻的英文）、`translation`（当前版译文）、`titles` / `selected_title`、`slack.permalink`、`link`（网页打开这份稿子），`images` 按发帖顺序给**原图**：`n`、`name`、`mimetype`、`size`、`sha256`、`data_base64`（单张 >10MB 或合计 >40MB 的只给元数据和 `error`）。`--no-images` 只给元数据 |
+| `translate-slack-post <conversation_id> <thread_ts> [--instruction 说明] [--no-images]` | 把一个 thread 当帖子翻，和网页「翻译这个帖子」同一条流程：提取原文和配图 → 翻译 → 生成标题，存成翻译稿（标成自动翻的），返回和 `draft` 一样的结果。已有稿子时追加新版本。`--instruction` 用在 AI 挑错了时（如「翻第二版文案」）。几十秒到两分钟 |
+| `translate-slack <conversation_id> <message_ts> [--thread-ts T] [--with-thread]` | 翻译任意一条 Slack 消息的正文或它所在的整个 thread（不存翻译稿；翻帖子用上面的 `translate-slack-post`），**同步**返回 `translation`，`status` 为 `done`（新翻）或 `already_exists`（同样内容翻过，直接给缓存）；`project_id` 形如 `slack-<会话>-<ts>[-thread]` |
 | `status <project_id> [--with-markdown]` | 文章：`running`（附 `stage`）/ `done`（`result` 是 momo 链接）/ `failed`（`error`）/ `not_started`，带 `zh_title`、`zh_summary`，`--with-markdown` 完成时附中文 Markdown 全文。`slack-…`：`done`，`result` 是译文 |
 | `health` | `substack` / `slack` / `models` 各自 `ok` 或 `error: …`（`models` 只检查配置，不发请求）；`slack_groups` 是自动识别 / 手配的用户组个数 |
 
@@ -43,16 +47,29 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
   靠「本地有没有」去重，同一条只报一次（`translate-slack` 也能直接找到）。搜索失败只记日志，照常返回本地结果。
 - **只读**：Slack 走现有只读白名单；不碰 momo 本地已读（`read_state`）；不导入、不翻译。
 
+### Muse 的典型用法
+
+1. `slack-todos` → 知道要回谁、要翻哪些（`action: do` 且 `draft` 为空的 thread 还没翻）。
+2. 要翻的：经 Felix 确认后 `translate-slack-post <conversation_id> <thread_ts>`。后台对「直接 @我」的 thread 本来就会自动翻，多数时候 `draft` 已经有了。
+3. `drafts` → 还没点「标记完成」的翻译；`draft <draft_id>` 拿译文、标题和原图交付。Felix 在网页上改过译文，`draft` 拿到的就是改过的当前版。
+
 ### translate-article 细节
 
 - 后端一把锁串行处理，同一篇并发调用只会导入一个项目、起一次翻译；翻译槽被网页那边占了（409）也当 `already_exists`。
 - 直接调 `start_longform_workflow`（绕过网页用的 3 次/分钟限流），参数等于网页「一键翻译」+ `auto_accept_terms`。
 - Muse 起的翻译在跑时，momo 发版的 precheck 会拦住，和网页起的一样。
 
+### slack-todos / drafts / draft / translate-slack-post 细节
+
+- `slack-todos` 直接调网页待办的同一个函数（未读的私信和 @我，最近几天），会调一次轻量模型（`task: slack`）概括每件事，结果有缓存；不改 Slack、不改 momo 已读。
+- `drafts` / `draft` 只读 `data/post_drafts/`；提取后发现没有要发的帖子（纯讨论）的稿子不进 `drafts`，`draft` 直接查时 `no_post: true`、`note` 说明原因。
+- 配图来自 Slack 文件（只读下载、本地有缓存）；某张拿不到时那一张带 `error`，不影响其余。
+- `translate-slack-post` 与网页、后台自动翻译共用每个 thread 一把锁，不会同时跑两遍；模型同网页（提取 `task: slack`，翻译、标题走帖子翻译默认模型）。
+
 ### translate-slack 细节
 
-- 原文：消息正文 + 链接卡片（X 帖等）的标题和正文；`--with-thread` 时是整个 thread，每条前面标作者。Slack 用户提及换成名字。
-- 走帖子翻译链路（术语库），模型固定 `gpt-6.1-sol`（和 Slack 页一致），不加话题标签；超过 10000 字符拒绝。
+- 原文：只读消息正文，不读链接卡片（和帖子提取一致）；`--with-thread` 时是整个 thread，每条前面标作者。Slack 用户提及换成名字。
+- 走帖子翻译链路（术语库），模型固定 `gpt-6.2-sol`（和 Slack 页一致），不加话题标签；超过 10000 字符拒绝。
 - 结果存 `data/slack_cache/automation_translations.json`，按原文 hash 判断：内容没变直接返回缓存，消息被编辑过才重新翻。
 - 一把锁串行；Slack 端照旧只读（只读本地副本，缺了才用白名单里的 history / replies 补拉）。
 
@@ -64,7 +81,7 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 command="/home/zxw/bin/translation-agent --ssh",no-pty,no-port-forwarding,no-agent-forwarding,no-X11-forwarding,no-user-rc ssh-ed25519 AAAA... muse
 ```
 
-`--ssh` 从 `SSH_ORIGINAL_COMMAND` 读子命令（开头的 `translation-agent` 可写可不写），只放行上面 5 个，
+`--ssh` 从 `SSH_ORIGINAL_COMMAND` 读子命令（开头的 `translation-agent` 可写可不写），只放行上面 9 个，
 不允许 `--base-url`，也不认 `TRANSLATION_SERVICE_URL`。Muse 调用：`ssh -p 42022 zxw@<host> translation-agent updates --since ...`。
 
 ## 配置（`src/settings.py`）

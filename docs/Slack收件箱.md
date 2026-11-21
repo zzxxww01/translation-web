@@ -162,3 +162,7 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/slack/{频道}/{thread_ts}` | 这个 thread 的翻译稿（没有为 null） |
 | POST | `/slack/{频道}/{thread_ts}/run` | `{"instruction"}` 提取 → 翻译 → 标题 |
 | GET | `/{id}/images.zip` | 配图按顺序打包 |
+
+## Muse 怎么用
+
+Muse 经 SSH 调 `translation-agent`：`slack-todos`（我的待办）、`drafts`（还没点「标记完成」的翻译）、`draft <id>`（译文、标题和原图）、`translate-slack-post`（跑上面同一条提取 → 翻译 → 标题流程）。见 [Muse自动化.md](Muse自动化.md)。
