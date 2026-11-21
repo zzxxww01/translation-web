@@ -255,7 +255,7 @@ task_defaults:
   title: gemini-official-argon
   metadata: deepseek-v3
   # Slack 页的所有模型调用走官方 GPT Sol（与 llm_providers.yaml 保持一致）
-  slack: gpt-6.1-sol
+  slack: gpt-6.2-sol
 # 任务用默认模型时的整体兜底：主模型（含它自己的故障转移）全部失败后，再用这里的模型重来一次。
 # 用户显式选择模型时不生效。OpenAI 官方组不跨品牌降级，帖子翻译靠这里退回 Gemini。
 task_fallbacks:
