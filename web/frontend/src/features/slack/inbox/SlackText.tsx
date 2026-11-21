@@ -1,36 +1,24 @@
-import { emojify } from './lib';
+import { useMemo } from 'react';
+import { cn } from '@/lib/utils';
+import { renderSlackSegments, renderSlackText } from './mrkdwn';
 import type { SlackSegment } from './types';
 
-/** 按后端拆好的片段渲染，不拼 HTML：链接只认 http(s)/mailto，其余都当纯文本。 */
-export function SlackText({ segments }: { segments: SlackSegment[] }) {
+/**
+ * 按后端拆好的片段渲染 Slack 格式（mrkdwn / Markdown）。
+ * 消息里的 HTML 一律转义，链接只认 http(s)/mailto，渲染结果再经 DOMPurify 消毒（见 mrkdwn.ts）。
+ */
+export function SlackText({ segments, className }: { segments: SlackSegment[]; className?: string }) {
+  const html = useMemo(() => renderSlackSegments(segments), [segments]);
   return (
-    <div className="whitespace-pre-wrap break-words text-[14px] leading-relaxed text-text-primary">
-      {segments.map((seg, i) => {
-        if (seg.type === 'mention') {
-          return (
-            <span key={i} className="rounded bg-primary-50 px-0.5 font-medium text-primary-700">
-              {seg.text}
-            </span>
-          );
-        }
-        if (seg.type === 'link' && /^(https?:|mailto:)/.test(seg.url)) {
-          return (
-            <a key={i} href={seg.url} target="_blank" rel="noreferrer noopener" className="break-all text-primary-700 underline-offset-2 hover:underline">
-              {seg.text}
-            </a>
-          );
-        }
-        // Slack 的 *粗体*：只认同一行内成对的星号
-        return (
-          <span key={i}>
-            {emojify(seg.text).split(/(\*[^*\n]+\*)/).map((part, j) =>
-              part.length > 2 && part.startsWith('*') && part.endsWith('*')
-                ? <strong key={j} className="font-semibold">{part.slice(1, -1)}</strong>
-                : part
-            )}
-          </span>
-        );
-      })}
-    </div>
+    <div
+      className={cn('slack-md break-words text-[14px] leading-relaxed text-text-primary', className)}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
   );
+}
+
+/** 一段纯文本（AI 中文、链接卡片正文、AI 摘要）按同样的格式渲染 */
+export function SlackMarkdown({ text, className, lang }: { text: string; className?: string; lang?: string }) {
+  const html = useMemo(() => renderSlackText(text), [text]);
+  return <div lang={lang} className={cn('slack-md break-words', className)} dangerouslySetInnerHTML={{ __html: html }} />;
 }

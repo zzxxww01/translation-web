@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { slackInboxApi } from './api';
 import { clockTime, dayLabel } from './lib';
+import { stripMrkdwn } from './mrkdwn';
+import { SlackMarkdown } from './SlackText';
 import type { SlackDigestSection } from './types';
 
 interface DigestViewProps {
@@ -76,7 +78,7 @@ export function DigestView({ onOpen, onBack }: DigestViewProps) {
               <div className="mt-1.5 text-xs text-error">{section.error}，点标题直接去看</div>
             ) : (
               <>
-                {section.summary && <div className="mt-1.5 text-sm text-text-primary">{section.summary}</div>}
+                {section.summary && <SlackMarkdown text={section.summary} className="mt-1.5 text-sm text-text-primary" />}
                 {section.todo_for_me && (
                   <div className="mt-1.5 rounded bg-amber-50 px-2 py-1 text-[13px] text-amber-900">要你做：{section.todo_for_me}</div>
                 )}
@@ -90,7 +92,7 @@ export function DigestView({ onOpen, onBack }: DigestViewProps) {
                           onClick={() => onOpen(section.conversation_id, section.thread_ts)}
                           className="text-left hover:text-primary-700 hover:underline"
                         >
-                          {item.text}
+                          {stripMrkdwn(item.text)}
                         </button>
                       </li>
                     ))}

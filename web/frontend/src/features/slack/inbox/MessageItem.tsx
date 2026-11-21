@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { ExternalLink, FileDown, Languages, Loader2, MessageSquareText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useOneZh } from './ai';
-import { clockTime, emojiFor, emojify } from './lib';
-import { SlackText } from './SlackText';
+import { clockTime, emojiFor } from './lib';
+import { SlackMarkdown, SlackText } from './SlackText';
 import type { SlackMessage } from './types';
 
 // 不加载 Slack 头像图：slack-edge.com 在国内常常打不开，直接用名字首字母
@@ -30,9 +30,7 @@ function OnDemandZh({ text }: { text: string }) {
 function ZhLine({ zh }: { zh: string }) {
   return (
     // AI 中文：紧跟在原文下面，灰色小一号，和原文一眼区分开
-    <div className="mt-0.5 whitespace-pre-wrap break-words border-l-2 border-primary-100 pl-2 text-[13px] leading-relaxed text-text-secondary" lang="zh">
-      {emojify(zh)}
-    </div>
+    <SlackMarkdown text={zh} lang="zh" className="mt-0.5 border-l-2 border-primary-100 pl-2 text-[13px] leading-relaxed text-text-secondary" />
   );
 }
 
@@ -41,12 +39,7 @@ function MessageBody({ message, zh, askedZh }: { message: SlackMessage; zh?: str
     <>
       {message.segments.length > 0 && <SlackText segments={message.segments} />}
       {!zh && askedZh && <OnDemandZh text={message.text} />}
-      {zh && (
-        // AI 中文：紧跟在原文下面，灰色小一号，和原文一眼区分开
-        <div className="mt-0.5 whitespace-pre-wrap break-words border-l-2 border-primary-100 pl-2 text-[13px] leading-relaxed text-text-secondary" lang="zh">
-          {emojify(zh)}
-        </div>
-      )}
+      {zh && <ZhLine zh={zh} />}
       {message.files.length > 0 && (
         <div className="mt-2 flex flex-wrap gap-2">
           {message.files.map(file =>
@@ -79,7 +72,7 @@ function MessageBody({ message, zh, askedZh }: { message: SlackMessage; zh?: str
           {a.title && (a.title_link ? (
             <a href={a.title_link} target="_blank" rel="noreferrer noopener" className="font-medium text-primary-700 hover:underline">{a.title}</a>
           ) : <div className="font-medium">{a.title}</div>)}
-          {a.text && <div className="mt-0.5 line-clamp-4 whitespace-pre-wrap">{emojify(a.text)}</div>}
+          {a.text && <SlackMarkdown text={a.text} className="mt-0.5 line-clamp-4" />}
         </div>
       ))}
       {message.reactions.length > 0 && (

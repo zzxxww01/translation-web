@@ -1,0 +1,82 @@
+/* Slack 消息的格式排版（mrkdwn 渲染结果）。只作用于 .slack-md 内部；比 Agent 回复的 .skill-md 更紧凑，像聊天。 */
+.slack-md {
+  overflow-wrap: anywhere;
+}
+.slack-md > * + * {
+  margin-top: 0.4em;
+}
+.slack-md h1,
+.slack-md h2,
+.slack-md h3,
+.slack-md h4,
+.slack-md h5,
+.slack-md h6 {
+  font-weight: 600;
+  font-size: 1em;
+}
+.slack-md ul,
+.slack-md ol {
+  padding-left: 1.4em;
+}
+.slack-md ul { list-style: disc; }
+.slack-md ul ul { list-style: circle; }
+.slack-md ol { list-style: decimal; }
+.slack-md li + li { margin-top: 0.15em; }
+.slack-md a {
+  color: var(--color-primary-700);
+  word-break: break-all;
+  text-underline-offset: 2px;
+}
+.slack-md a:hover { text-decoration: underline; }
+.slack-md .slack-mention {
+  border-radius: 4px;
+  background: var(--color-primary-50);
+  padding: 0 0.15em;
+  font-weight: 500;
+  color: var(--color-primary-700);
+}
+.slack-md blockquote {
+  border-left: 3px solid var(--color-border);
+  padding-left: 0.75em;
+  color: var(--color-text-secondary);
+}
+.slack-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 4px;
+  padding: 0.05em 0.3em;
+  color: #b4235a;
+}
+.slack-md pre {
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 6px;
+  padding: 0.6em 0.8em;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+.slack-md pre code {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+.slack-md table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+.slack-md th,
+.slack-md td {
+  border: 1px solid var(--color-border-subtle);
+  padding: 0.3em 0.6em;
+  text-align: left;
+}
+.slack-md hr {
+  border: 0;
+  border-top: 1px solid var(--color-border-subtle);
+}

@@ -63,6 +63,13 @@ URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread）、`c=<会话>`（
 - 凭证存 `data/slack_credentials.json`（600，格式 `{"token": "...", "cookie_d": "..."}`）；失效时页面会弹出表单重新填写，只写不回显。
 - 缓存：`data/slack_cache/`（用户名、附件、AI 结果、消息库）；会话列表在内存里缓存 30 秒，`client.userBoot` 5 分钟。
 
+## 消息格式（2026-11-21）
+
+- 消息正文按 Slack mrkdwn 渲染（`web/frontend/src/features/slack/inbox/mrkdwn.ts`）：`*粗*`、`_斜_`、`~删~`、`` `码` ``、` ``` ` 代码块、`>` 引用、`•` / `1.` 列表，
+  也兼容直接贴进来的 Markdown（`**粗**`、`- 列表`）。链接 / 提及先换成占位符再交给 marked，原文里的 HTML 一律转义，结果经 DOMPurify 消毒；样式在 `mrkdwn.css`（`.slack-md`）。
+- AI 中文、链接卡片正文、thread 摘要、速览摘要、私信助手的「对方要什么」也按同样方式渲染；列表行、搜索结果、Threads 卡片这类预览去掉记号只留文字（`stripMrkdwn`）。
+- AI 面板里的对话气泡沿用 Agent 页的 `.skill-md` 排版；样式随 `ChatItems` 加载，不依赖先打开过 Agent 页。
+
 ## 本地副本（`data/slack_cache/slack.db`，`src/services/slack_store.py`）
 
 消息存在服务器上，页面一律从本地读；向 Slack 只要本地没有的：

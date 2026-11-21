@@ -4,6 +4,8 @@ import { cn } from '@/lib/utils';
 import { renderMarkdown } from '../markdown';
 import type { ToolCall } from '../state';
 import { formatDuration } from '../state';
+// .skill-md 的排版跟着用它的组件走：Slack 页、文章页也嵌了这些组件，不能只靠 Agent 页加载
+import '../styles.css';
 
 export function UserBubble({ text, files }: { text: string; files: string[] }) {
   return (

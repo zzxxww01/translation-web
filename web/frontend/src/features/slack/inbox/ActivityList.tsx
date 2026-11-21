@@ -6,6 +6,7 @@ import { useSlackAgentRuns } from '../agent/agentRuns';
 import { Avatar } from './MessageItem';
 import { useRefreshSlack, useSlackActivity } from './hooks';
 import { clockTime, emojify, stripLeadingMentions, type SlackView } from './lib';
+import { stripMrkdwn } from './mrkdwn';
 import type { SlackActivityItem, SlackMessage, SlackStatus } from './types';
 
 type Filter = 'all' | 'mentions' | 'dm';
@@ -26,13 +27,13 @@ interface ActivityListProps {
   onSearch: (q: string) => void;
 }
 
-/** 消息第一行（去掉 Slack 的 *加粗*，表情码换成 emoji）；没有文字时用附件名 */
+/** 消息第一行（去掉 *加粗*、`代码` 等格式记号，表情码换成 emoji）；没有文字时用附件名 */
 function firstLine(message: SlackMessage | null | undefined, max = 80, asTitle = false): string {
   if (!message) return '';
   const raw = (message.text || '').split('\n').map(s => s.trim()).find(Boolean)
     || message.attachments[0]?.title || message.files[0]?.name || '（无文字）';
   const line = asTitle ? stripLeadingMentions(raw) : raw;
-  const text = emojify(line.replace(/\*([^*\n]+)\*/g, '$1'));
+  const text = emojify(stripMrkdwn(line));
   return text.length > max ? `${text.slice(0, max)}…` : text;
 }
 
