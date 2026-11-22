@@ -1,6 +1,7 @@
 """名额、排队、不常驻、提问脱离进程。"""
 
 import asyncio
+import json
 
 import pytest
 
@@ -262,3 +263,30 @@ async def test_status_command_is_answered_by_the_runner_not_the_model(tmp_path, 
     await runner.send_message(second, "/状态", [])
     text = "\n".join(runner.store.read_events(second)[-1]["lines"])
     assert "排队：第 1 位" in text and "进程：还没启动" in text
+
+
+async def test_status_as_the_first_message_does_not_start_the_agent_and_keeps_the_skill_prompt(tmp_path, factory):
+    runner = make_runner(tmp_path, factory)
+    run_id = await start(runner, "/status")
+    assert factory.sessions == []  # 没开进程、没发给模型
+    events = runner.store.read_events(run_id)
+    assert [e["type"] for e in events] == ["user", "report"]
+    assert "进程：还没启动" in "\n".join(events[-1]["lines"])
+    assert runner.meta(run_id).begun is False
+
+    # 下一条才是真正的开头：仍带 skill 派发提示
+    await runner.send_message(run_id, "翻译这篇", [])
+    assert factory.last.sent == ["/four-step-translate 翻译这篇"]
+    assert runner.meta(run_id).begun is True
+    assert runner.meta(run_id).title == make_title("翻译这篇", [])
+    # 服务重启后读回来也是已开始
+    assert RunStore(runner.config.runs_dir).load_meta(run_id).begun is True
+
+
+def test_runs_saved_before_the_begun_field_count_as_started(tmp_path):
+    store = RunStore(tmp_path / "runs")
+    meta = store.create("", "旧对话")
+    raw = meta.to_dict()
+    del raw["begun"]
+    (tmp_path / "runs" / meta.id / "meta.json").write_text(json.dumps(raw), encoding="utf-8")
+    assert store.load_meta(meta.id).begun is True
