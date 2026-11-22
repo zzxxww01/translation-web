@@ -290,3 +290,67 @@ def test_runs_saved_before_the_begun_field_count_as_started(tmp_path):
     del raw["begun"]
     (tmp_path / "runs" / meta.id / "meta.json").write_text(json.dumps(raw), encoding="utf-8")
     assert store.load_meta(meta.id).begun is True
+
+
+class FakeNatives:
+    def __init__(self):
+        self.observed, self.local_calls = [], []
+
+    def observe(self, harness, event):
+        self.observed.append((harness, event))
+
+    async def status_lines(self, harness):
+        return [f"{harness} 原生版本", "5 小时额度：已用 28%"]
+
+    def is_local(self, harness, message):
+        return harness == "antigravity" and message.strip().startswith("/usage")
+
+    async def agy_local(self, cwd, message):
+        self.local_calls.append(message)
+        return ["Gemini Models Weekly Limit Remaining 99%"]
+
+
+async def test_status_shows_the_harness_native_info_above_the_page_state(tmp_path, factory):
+    config = make_config(tmp_path)
+    runner = Runner(config, RunStore(config.runs_dir), factory, natives=FakeNatives())
+    run_id = await start(runner)
+    await runner.send_message(run_id, "/status", [])
+    report = runner.store.read_events(run_id)[-1]
+    assert report["title"] == "当前状态 · Claude"
+    assert report["lines"][:2] == ["claude 原生版本", "5 小时额度：已用 28%"]
+    assert any(line.startswith("状态：") for line in report["lines"])
+
+
+async def test_agy_local_commands_run_on_their_own_and_never_reach_the_model(tmp_path, factory):
+    config = make_config(tmp_path)
+    natives = FakeNatives()
+    runner = Runner(config, RunStore(config.runs_dir), factory, natives=natives)
+    meta = runner.create("", "t", harness="antigravity")
+    await runner.begin(meta.id, "/usage", [])
+    assert factory.sessions == [] and natives.local_calls == ["/usage"]
+    report = runner.store.read_events(meta.id)[-1]
+    assert report["type"] == "report" and report["lines"] == ["Gemini Models Weekly Limit Remaining 99%"]
+
+
+async def test_plan_usage_is_recorded_but_not_shown_and_cli_only_output_is_shown(tmp_path, factory):
+    config = make_config(tmp_path)
+    natives = FakeNatives()
+    runner = Runner(config, RunStore(config.runs_dir), factory, natives=natives)
+    run_id = await start(runner, "/context", skill="")
+    session = factory.last
+    session.push({"type": "limits", "windows": {"five_hour": {"utilization": 0.3}}})
+    session.push({"type": "result", "session_id": "s", "is_error": False, "text": "## Context Usage"})
+    await settle()
+    events = runner.store.read_events(run_id)
+    assert natives.observed == [("claude", {"type": "limits", "windows": {"five_hour": {"utilization": 0.3}}})]
+    assert all(e["type"] != "limits" for e in events)
+    assert [e["text"] for e in events if e["type"] == "text"] == ["## Context Usage"]
+    assert "text" not in events[-1]  # 结束事件里不再重复存一份
+
+    # 普通的一轮：回复已经显示过，结束消息里的同一段不重复显示
+    await runner.send_message(run_id, "你好", [])
+    session = factory.last
+    session.push({"type": "text", "text": "你好！"})
+    session.push({"type": "result", "session_id": "s", "is_error": False, "text": "你好！"})
+    await settle()
+    assert [e["text"] for e in runner.store.read_events(run_id) if e["type"] == "text"] == ["## Context Usage", "你好！"]
