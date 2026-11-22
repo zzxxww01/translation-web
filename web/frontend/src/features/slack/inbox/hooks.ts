@@ -112,7 +112,7 @@ export function useMarkAllRead() {
   return useMutation({
     mutationFn: (items?: Parameters<typeof slackInboxApi.markAllRead>[0]) => slackInboxApi.markAllRead(items),
     onSuccess: (_data, items) => {
-      toast.success(`${items ? '' : '全部'}已标为已读（只在 momo 里，Slack 的未读不变）`);
+      toast.success(`${items ? '' : '全部'}已标为已读（只在这里，Slack 里的未读不变）`);
       void queryClient.invalidateQueries({ queryKey: ['slack-inbox'] });
     },
     onError: error => toast.error(error instanceof Error ? error.message : '没标成功'),
