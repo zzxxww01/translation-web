@@ -99,6 +99,8 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
         model=spec.model or config.model,
         # 新模型默认不带任务清单工具，要显式打开，网页侧栏的进度才有数据（Python 的 env 是叠加在继承环境上的）
         env={"CLAUDE_CODE_ENABLE_TODO_TOOLS": "1"},
+        # SDK 默认单条 JSON 消息上限 1MB；Read 一张几百 KB 的截图（base64 后还会出现两份）就会超，整个进程直接报错退出
+        max_buffer_size=32 * 1024 * 1024,
         stderr=lambda line: logger.info("[claude %s] %s", spec.run_id, line.rstrip()),
     )
 

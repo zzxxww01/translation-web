@@ -190,6 +190,7 @@ async def test_options_load_user_skills_and_route_permissions(tmp_path):
     assert options.setting_sources == ["user"]
     assert options.permission_mode == "default"
     assert options.env == {"CLAUDE_CODE_ENABLE_TODO_TOOLS": "1"}
+    assert options.max_buffer_size > 1024 * 1024
     assert options.cwd == str(tmp_path) and options.resume == "sess-1"
     assert json.loads(options.settings)["sandbox"]["enabled"] is True
     assert "momo" in options.system_prompt["append"]
