@@ -96,6 +96,6 @@ command="/home/zxw/bin/translation-agent --ssh",no-pty,no-port-forwarding,no-age
 
 ## 和仓库里其他命令行的关系
 
-机器人（Muse 等）只用 `translation-agent` 这一个入口，有用的能力都在它的子命令里。仓库根目录的 `translate-post`、
-`slack-reply` 是早期给人在终端里用的（输出纯文本），功能和 `translation-agent translate-post` / `slack-reply` 相同，保留不删；
+`translation-agent` 是本仓库唯一给外部调用的命令行入口（机器人、脚本都用它）。早期给人在终端用的
+`translate-post`、`slack-reply` 两个脚本已删除（2026-11-23），功能就是这里的同名子命令。
 `src/cli/cost_report.py`、`scripts/*` 是开发 / 运维工具，不给机器人。

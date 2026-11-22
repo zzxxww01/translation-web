@@ -125,6 +125,12 @@ def _call(base_url: str, method: str, path: str, *, params: Optional[Dict[str, A
         detail = payload.get("detail") if isinstance(payload, dict) else None
         if not isinstance(detail, str):
             detail = json.dumps(detail, ensure_ascii=False) if detail else f"HTTP {error.code}"
+        # 参数校验失败（422）时具体原因在 errors 里，只给 detail 就只剩一句 Request validation failed
+        errors = payload.get("errors") if isinstance(payload, dict) else None
+        if isinstance(errors, list) and errors:
+            reasons = [f"{str(e.get('field', '')).removeprefix('body.')}: {e.get('message', '')}".strip(": ")
+                       for e in errors if isinstance(e, dict)]
+            detail += "：" + "；".join(r for r in reasons if r)
         code = (payload.get("error_code") if isinstance(payload, dict) else None) or f"HTTP_{error.code}"
         raise CliError(detail, code=code, exit_code=EXIT_SERVICE) from error
     except (URLError, TimeoutError, ConnectionError) as error:
@@ -201,7 +207,7 @@ def cmd_translate_slack_post(args: argparse.Namespace) -> Dict[str, Any]:
     return _call(args.base_url, "POST", "/translate-slack-post", body=body, timeout=args.timeout or 360)
 
 
-MAX_POST_CHARS, MAX_REPLY_CHARS = 10_000, 50_000
+MAX_POST_CHARS, MAX_REPLY_CHARS, MAX_HISTORY = 10_000, 50_000, 100
 
 
 def _read_text(value: Optional[str], limit: int) -> str:
@@ -209,7 +215,10 @@ def _read_text(value: Optional[str], limit: int) -> str:
     if value is None or value == "-":
         if sys.stdin is None or sys.stdin.isatty():
             raise CliError("缺少正文：放在参数里，或从标准输入传")
-        value = sys.stdin.buffer.read().decode("utf-8", errors="replace")
+        try:
+            value = sys.stdin.buffer.read().decode("utf-8")
+        except UnicodeDecodeError as exc:  # 不替换成 �：带乱码去翻既花钱又没用
+            raise CliError("标准输入不是 UTF-8 文本") from exc
     if not value.strip():
         raise CliError("正文是空的")
     if len(value) > limit:
@@ -229,10 +238,19 @@ def cmd_slack_reply(args: argparse.Namespace) -> Dict[str, Any]:
             history = json.loads(args.history)
         except ValueError as exc:
             raise CliError("--history 不是合法 JSON") from exc
-        if not isinstance(history, list) or not all(
-                isinstance(m, dict) and m.get("role") in ("me", "them") and isinstance(m.get("content"), str)
-                for m in history):
+        if not isinstance(history, list):
             raise CliError('--history 要是 [{"role":"them|me","content":"..."}] 这样的数组')
+        if len(history) > MAX_HISTORY:
+            raise CliError(f"--history 最多 {MAX_HISTORY} 条")
+        for index, message in enumerate(history, start=1):
+            role = message.get("role") if isinstance(message, dict) else None
+            content = message.get("content") if isinstance(message, dict) else None
+            if not isinstance(role, str) or role not in ("me", "them"):
+                raise CliError(f"--history 第 {index} 条的 role 要是 me 或 them")
+            if not isinstance(content, str) or not content.strip():
+                raise CliError(f"--history 第 {index} 条的 content 不能为空")
+            if len(content) > MAX_REPLY_CHARS:
+                raise CliError(f"--history 第 {index} 条太长，上限 {MAX_REPLY_CHARS} 字符")
     body = {"text": _read_text(args.text, MAX_REPLY_CHARS), "mode": args.mode, "history": history}
     return _call(args.base_url, "POST", "/slack-reply", body=body, timeout=args.timeout or 240)
 
