@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { useQueryClient } from '@tanstack/react-query';
-import { FileText, Hash, Loader2, Plus, Search, Trash2 } from 'lucide-react';
-import { toast } from 'sonner';
+import { FileText, Hash, Loader2, Plus, Search } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { draftsApi, useDraftList, type DraftSummary } from '../drafts';
+import { useDraftList, type DraftSummary } from '../drafts';
 
 function when(ts: number): string {
   const d = new Date(ts * 1000);
@@ -21,6 +19,7 @@ function statusText(item: Pick<DraftSummary, 'status' | 'auto' | 'seen'>): strin
 
 /**
  * 翻译记录：帖子翻译页手动翻的和 Slack 里翻的合在一起，按最近修改排。点一条打开（Slack 的跳到 Slack 翻译模式）。
+ * 不提供删除（2026-11-22 用户要求）。
  */
 export function DraftHistory({ activeId, onOpen, onNew }: {
   activeId: string | null;
@@ -30,14 +29,6 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
 }) {
   const [q, setQ] = useState('');
   const list = useDraftList(q.trim());
-  const queryClient = useQueryClient();
-
-  const remove = async (item: DraftSummary) => {
-    if (!window.confirm(`删除「${item.title || '这篇翻译'}」？删除后找不回来。`)) return;
-    await draftsApi.remove(item.id);
-    void queryClient.invalidateQueries({ queryKey: ['post-drafts'] });
-    toast.success('已删除');
-  };
 
   return (
     <div className="flex h-full flex-col">
@@ -71,7 +62,7 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
           <div
             key={item.id}
             className={cn(
-              'group relative border-b border-border-subtle transition-colors',
+              'border-b border-border-subtle transition-colors',
               item.id === activeId ? 'bg-primary-50' : item.auto && !item.seen ? 'bg-primary-50/40 hover:bg-primary-50/70' : 'hover:bg-bg-hover'
             )}
           >
@@ -105,15 +96,6 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
                   ].filter(Boolean).join(' · ')}
                 </div>
               </div>
-            </button>
-            <button
-              type="button"
-              onClick={() => void remove(item)}
-              className="absolute right-2 top-2 hidden rounded-md bg-white/90 p-1 text-text-muted shadow-sm hover:text-error group-hover:block"
-              title="删除这条记录"
-              aria-label="删除这条记录"
-            >
-              <Trash2 className="h-3.5 w-3.5" />
             </button>
           </div>
         ))}

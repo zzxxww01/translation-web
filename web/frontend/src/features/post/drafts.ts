@@ -65,7 +65,6 @@ export const draftsApi = {
   create: (body: { state: PostSnapshot } & DraftExtra) => apiClient.post<DraftDoc>('/post-drafts', body, { retry: false }),
   save: (id: string, body: { state: PostSnapshot; rev: number | null } & DraftExtra) =>
     apiClient.put<DraftDoc>(`/post-drafts/${id}`, body, { retry: false }),
-  remove: (id: string) => apiClient.delete<{ deleted: boolean }>(`/post-drafts/${id}`),
   slack: (channelId: string, threadTs: string) =>
     apiClient.get<{ draft: DraftDoc | null }>(`/post-drafts/slack/${channelId}/${threadTs}`, { retry: false }),
   runSlack: (channelId: string, threadTs: string, instruction?: string) =>

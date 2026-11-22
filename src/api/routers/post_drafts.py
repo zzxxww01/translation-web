@@ -108,12 +108,6 @@ async def save_draft(request: Request, draft_id: str, body: DraftBody):
     return await _store(get_draft_store().save, draft_id, body.model_dump(exclude={"rev"}), rev=body.rev)
 
 
-@router.delete("/{draft_id}")
-@limiter.limit("30/minute")
-async def delete_draft(request: Request, draft_id: str):
-    return {"deleted": await _store(get_draft_store().delete, draft_id)}
-
-
 @router.get("/{draft_id}/images.zip")
 @limiter.limit("20/minute")
 async def download_images(request: Request, draft_id: str):

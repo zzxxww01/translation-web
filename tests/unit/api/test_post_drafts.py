@@ -171,7 +171,9 @@ def test_draft_routes_round_trip(env):
         listed = client.get("/api/post-drafts", params={"q": "机柜"}).json()["items"]
         assert [i["id"] for i in listed] == [ran["id"]]
         assert client.get("/api/post-drafts/bad-id").status_code == 400
-        assert client.delete(f"/api/post-drafts/{created['id']}").json() == {"deleted": True}
+        # 翻译记录不提供删除（2026-11-22 用户要求）
+        assert client.delete(f"/api/post-drafts/{created['id']}").status_code == 405
+        assert client.get(f"/api/post-drafts/{created['id']}").status_code == 200
 
 
 def test_todos_route_sends_only_direct_items_and_sorts(monkeypatch, tmp_path):
