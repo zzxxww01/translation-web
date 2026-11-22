@@ -183,7 +183,7 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, imageC
             </DropdownMenuItem>
           )}
           <DropdownMenuItem className={MENU_ITEM} asChild>
-            <Link to={legacyHref}><History strokeWidth={STROKE} /> 旧版编辑器（单段重译、质量报告）</Link>
+            <Link to={legacyHref}><History strokeWidth={STROKE} /> 精修编辑器（单段重译、质量报告）</Link>
           </DropdownMenuItem>
           <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
           <DropdownMenuItem className={MENU_ITEM} asChild>

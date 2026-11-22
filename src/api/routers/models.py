@@ -54,6 +54,29 @@ class LegacyModelListResponse(BaseModel):
     models: List[LegacyModelInfo]
 
 
+def _provider_label(provider: ProviderInfo) -> str:
+    """Short supplier label for display, e.g. "Gemini 官方 API" -> "Gemini 官方"."""
+    name = provider.name.strip()
+    return name[:-4].strip() if name.upper().endswith(" API") else name
+
+
+def _label_shared_models(providers: List[ProviderInfo]) -> None:
+    """Show only the model name; add the supplier only when one model is served by several suppliers.
+
+    Users pick models by name. "GPT-6.2 Sol" is enough when only one supplier has it, but when the same
+    real model (e.g. Gemini 3.8 Flash) is reachable through both the official API and a relay, the two
+    entries must be distinguishable.
+    """
+    suppliers: Dict[str, set] = {}
+    for provider in providers:
+        for model in provider.models:
+            suppliers.setdefault(model.real_model or model.alias, set()).add(provider.id)
+    for provider in providers:
+        for model in provider.models:
+            if len(suppliers[model.real_model or model.alias]) > 1:
+                model.name = f"{model.name}（{_provider_label(provider)}）"
+
+
 @router.get("/models", response_model=ModelListResponse)
 async def list_models():
     """List all available LLM models without blocking the request loop."""
@@ -114,6 +137,7 @@ def _list_models_sync() -> ModelListResponse:
 
         # Sort providers by group_priority
         providers.sort(key=lambda p: config.providers[p.id].group_priority)
+        _label_shared_models(providers)
 
         return ModelListResponse(
             providers=providers,

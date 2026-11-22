@@ -1,4 +1,4 @@
-import { BookOpen, FileText, MessageCircle, MessageSquare, Newspaper, Sparkles, Wrench, type LucideIcon } from 'lucide-react';
+import { BookOpen, Bot, FileText, MessageCircle, MessageSquare, Newspaper, Sparkles, Wrench, type LucideIcon } from 'lucide-react';
 
 export interface NavItem {
   path: string;
@@ -19,5 +19,6 @@ export const NAV_ITEMS: NavItem[] = [
   { path: '/slack', label: 'Slack', icon: MessageCircle, remember: true },
   { path: '/glossary', label: '术语库', icon: BookOpen },
   { path: '/tools', label: '工具箱', icon: Wrench },
+  { path: '/chat', label: 'Chatbot', icon: Bot },
   { path: '/skills', label: 'Agent', icon: Sparkles, remember: true },
 ];

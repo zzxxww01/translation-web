@@ -89,7 +89,7 @@ export function AgentDetail({ agent, onBack, onStart }: AgentDetailProps) {
       {agent.name ? (
         <SkillFiles name={agent.name} />
       ) : (
-        <p className="mt-6 text-sm text-text-muted">通用 Agent 不派发 skill，消息原样发给模型；它碰到专职 Agent 的活会请你换过去。</p>
+        <p className="mt-6 text-sm text-text-muted">通用 Agent 什么都能聊；遇到翻译、字幕这类专门的活，它会提醒你换对应的 Agent。</p>
       )}
     </div>
   );

@@ -101,7 +101,6 @@ export function DraftHistory({ activeId, onOpen, onNew }: {
                   {[
                     item.source === 'slack' ? 'Slack' : '手动',
                     statusText(item),
-                    `v${item.versions}`,
                     item.image_count > 0 ? `${item.image_count} 张图` : '',
                   ].filter(Boolean).join(' · ')}
                 </div>

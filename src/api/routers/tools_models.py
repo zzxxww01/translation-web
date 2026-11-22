@@ -2,7 +2,7 @@
 Tools router request/response models.
 """
 
-from typing import List
+from typing import List, Literal, Optional
 from pydantic import BaseModel, Field, field_validator
 
 
@@ -67,3 +67,29 @@ class TimezoneConvertResponse(BaseModel):
     pst: str
     beijing: str
     original: str
+
+
+MAX_CHAT_MESSAGE_LENGTH = 20000
+MAX_CHAT_MESSAGES = 100
+
+
+class ChatMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str = Field(..., max_length=MAX_CHAT_MESSAGE_LENGTH)
+
+
+class ChatRequest(BaseModel):
+    messages: List[ChatMessage] = Field(..., min_length=1, max_length=MAX_CHAT_MESSAGES)
+    # 不传 = 用 task_defaults.chat（GPT-6.2 Sol）
+    model: Optional[str] = Field(default=None, max_length=100)
+
+    @field_validator('messages')
+    @classmethod
+    def validate_messages(cls, v: List[ChatMessage]) -> List[ChatMessage]:
+        if v[-1].role != "user" or not v[-1].content.strip():
+            raise ValueError("The last message must be a non-empty user message")
+        return v
+
+
+class ChatResponse(BaseModel):
+    reply: str

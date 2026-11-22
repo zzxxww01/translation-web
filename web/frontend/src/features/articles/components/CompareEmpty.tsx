@@ -18,7 +18,7 @@ export function CompareEmpty({ options, stopping, busy, error, onStart }: {
   return (
     <div className={cn(MEASURE, 'pb-10 pt-4')}><div className="max-w-[22rem]">
       <h3 className="text-[16px] font-semibold leading-snug text-text-primary [font-family:var(--font-display)]">选一个 Agent 翻这篇</h3>
-      <p className="mb-4 mt-1.5 text-[12.5px] leading-relaxed text-text-muted">在服务器上跑 four-step-translate，关掉页面也不会停。翻好的译文会出现在这一栏。</p>
+      <p className="mb-4 mt-1.5 text-[12.5px] leading-relaxed text-text-muted">交给 Agent 翻，关掉页面也会继续。翻好后显示在这一栏。</p>
       <AgentChoiceFields options={options} value={choice} onChange={setChoice} disabled={busy} />
       {stopping && <p className="mt-3 text-[12px] leading-5 text-warning-text">会先停掉正在跑的 {stopping}。</p>}
       {error && <p role="alert" className="mt-3 text-[12px] leading-5 text-error">{error}</p>}

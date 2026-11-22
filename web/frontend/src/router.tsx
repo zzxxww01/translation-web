@@ -22,6 +22,9 @@ const SlackFeature = lazy(() =>
 const ToolsFeature = lazy(() =>
   import('./features/tools/index.tsx').then(module => ({ default: module.ToolsFeature }))
 );
+const ChatFeature = lazy(() =>
+  import('./features/chat/index.tsx').then(module => ({ default: module.ChatFeature }))
+);
 const SkillsFeature = lazy(() =>
   import('./features/skills/index.tsx').then(module => ({ default: module.SkillsFeature }))
 );
@@ -145,6 +148,14 @@ const router = createBrowserRouter([
             element: (
               <LazyPage>
                 <ToolsFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'chat',
+            element: (
+              <LazyPage>
+                <ChatFeature />
               </LazyPage>
             ),
           },

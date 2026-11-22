@@ -36,6 +36,14 @@ function isStaleVersion(version: TranslationVersion, originalText: string): bool
   return version.sourceText.trim() !== '' && version.sourceText !== originalText;
 }
 
+/** 这一稿的生成时间（HH:mm）；存进草稿后再读出来是字符串 */
+function versionTime(value: Date | string | undefined): string {
+  if (!value) return '';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  return `${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}`;
+}
+
 export function TranslationOutput({
   versions, currentVersionId, originalText, currentContent, isEdited, editedContent,
   onSetCurrentVersion, onSetEditedContent, onSaveEdit, onDiscardEdit, hideTitle, extraActions,
@@ -74,16 +82,18 @@ export function TranslationOutput({
       </SelectTrigger>
       <SelectContent>
         {versions.map(v => {
-          const typeLabel = v.type === TranslationVersionType.TRANSLATION ? '翻译' :
-            v.type === TranslationVersionType.OPTIMIZATION ? '优化' : '编辑';
+          // 不显示 v1 / v2 这类编号：用「怎么来的 + 什么时候」区分各稿
+          const typeLabel = v.type === TranslationVersionType.TRANSLATION ? '初译' :
+            v.type === TranslationVersionType.OPTIMIZATION ? '优化' : '手动修改';
           const instruction = v.instruction?.trim() ?? '';
           const preview = instruction
-            ? ` - ${instruction.length > 12 ? `${instruction.slice(0, 12)}…` : instruction}`
+            ? `：${instruction.length > 12 ? `${instruction.slice(0, 12)}…` : instruction}`
             : '';
-          const staleMark = isStaleVersion(v, originalText) ? ' · 旧底稿' : '';
+          const time = versionTime(v.createdAt);
+          const staleMark = isStaleVersion(v, originalText) ? ' · 原文改过' : '';
           return (
             <SelectItem key={v.id} value={v.id}>
-              v{v.versionNumber} ({typeLabel}){preview}{staleMark}
+              {typeLabel}{preview}{time ? ` · ${time}` : ''}{staleMark}
             </SelectItem>
           );
         })}

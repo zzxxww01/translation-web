@@ -205,7 +205,7 @@ providers:
     models:
     - alias: gpt-6.1-sol
       real_model: gpt-6.1-sol
-      name: GPT-6.1 Sol（OpenAI 官方）
+      name: GPT-6.1 Sol
       description: 官方 OpenAI；Slack 任务的默认模型，其余任务仅显式选择时使用
       priority: 1
       supports_thinking: true
@@ -215,7 +215,7 @@ providers:
         timeout: 120
     - alias: gpt-6.2-sol
       real_model: gpt-6.2-sol
-      name: GPT-6.2 Sol（OpenAI 官方）
+      name: GPT-6.2 Sol
       description: 官方 OpenAI；帖子翻译的默认模型（失败时退回 gemini-flash，见 task_fallbacks）
       priority: 1
       supports_thinking: true
@@ -257,7 +257,10 @@ task_defaults:
   # Slack 页的所有模型调用（消息中文、thread 摘要、我的待办、帖子提取、私信回复、旧版工作台）走官方 GPT Sol；
   # 2026-11-22 用户要求从 6.1 升到 6.2，与帖子翻译默认一致
   slack: gpt-6.2-sol
+  # 工具箱 Chatbot（2026-11-22 用户要求默认 GPT-6.2 Sol）；页面上选了别的模型就用选的
+  chat: gpt-6.2-sol
 # 任务用默认模型时的整体兜底：主模型（含它自己的故障转移）全部失败后，再用这里的模型重来一次。
 # 用户显式选择模型时不生效。OpenAI 官方组不跨品牌降级，帖子翻译靠这里退回 Gemini。
 task_fallbacks:
   post: gemini-flash
+  chat: gemini-flash
