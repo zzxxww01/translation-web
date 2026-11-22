@@ -227,7 +227,7 @@ test('immersive mode fills the screen with the three panes', async ({ page }) =>
   await open(page);
   await page.getByRole('button', { name: '沉浸模式', exact: true }).click();
   await expect(page.getByRole('heading', { name: 'HBM4 的成本结构' })).toHaveCount(0);
-  await expect(page.getByRole('link', { name: 'momo 翻译工作台首页' })).toHaveCount(0);
+  await expect(page.getByRole('link', { name: '返回文章列表' })).toHaveCount(0);
   const grid = (await page.getByTestId('pane-grid').boundingBox())!;
   const viewport = page.viewportSize()!;
   expect(grid.y).toBe(0);
@@ -241,5 +241,5 @@ test('immersive mode fills the screen with the three panes', async ({ page }) =>
   await expect(page.getByRole('button', { name: '退出沉浸模式' })).toBeVisible();
   await page.getByRole('button', { name: '退出沉浸模式' }).click();
   await expect(page.getByRole('heading', { name: 'HBM4 的成本结构' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'momo 翻译工作台首页' })).toBeVisible();
+  await expect(page.getByRole('link', { name: '返回文章列表' })).toBeVisible();
 });
