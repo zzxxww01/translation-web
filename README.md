@@ -96,7 +96,7 @@ translation-web/
 │   ├── html2md/           # HTML → Markdown 转换
 │   ├── cli/               # 命令行入口（automation=translation-agent、cost_report）
 │   └── settings.py        # 环境变量配置
-├── skill_runner/          # momo「Agent」页后端（独立 systemd 服务，见 skill_runner/README.md）
+├── skill_runner/          # 翻译服务「Agent」页后端（独立 systemd 服务，见 skill_runner/README.md）
 ├── web/frontend/          # React 前端（Vite + TypeScript + Tailwind）
 ├── config/                # llm_providers.yaml、translation_models.yaml、editing_options.json
 ├── glossary/              # 全局术语库 global_glossary_semi.json（单一术语源）

@@ -103,7 +103,7 @@ def test_mentions_since_filters_classifies_and_stays_read_only(inbox):
     assert [m["message_ts"] for m in inbox.mentions_since(T0 + 13)] == [ts(15), ts(16), ts(17), ts(21)]
     # 水位线之后没有新消息
     assert inbox.mentions_since(T0 + 21) == []
-    # 只读：没改 Slack 已读，也没动 momo 本地已读
+    # 只读：没改 Slack 已读，也没动翻译服务本地已读
     assert not any("mark" in method for method in inbox._fake.calls)
     assert inbox.db.read_positions() == {}
 

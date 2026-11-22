@@ -7,7 +7,7 @@ import { isUnauthorized, skillKeys, useSkillsAuth } from '@/features/skills/hook
 
 /**
  * 全站登录门（2026-11-21）：和 Agent 页共用同一个口令登录，没登录时整页只显示口令框。
- * 真正的拦截在 nginx：momo 的 /api 先问 skill-runner 的 /api/skills/auth/check。
+ * 真正的拦截在 nginx：翻译服务的 /api 先问 skill-runner 的 /api/skills/auth/check。
  * 用着用着登录过期了，任何接口的 401 都会让这里重新检查，切回口令框。
  */
 export function AuthGate({ children }: { children: ReactNode }) {

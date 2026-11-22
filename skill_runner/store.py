@@ -62,7 +62,7 @@ class RunMeta:
     # 到这个时间（epoch 秒）还没回复就自动继续；没有排上自动回复时为 None
     auto_reply_at: float | None = None
     auto_replies: int = 0
-    # 谁替用户开的这个对话：空 = Claude 页；"slack:<会话>[:<thread_ts>]" = momo Slack 页给这个会话 / thread 配的 agent
+    # 谁替用户开的这个对话：空 = Claude 页；"slack:<会话>[:<thread_ts>]" = 翻译服务 Slack 页给这个会话 / thread 配的 agent
     source: str = ""
     # 排队：名额满了时这条消息先存着，有空位自动发出（服务重启后接着排）
     queued_prompt: str | None = None

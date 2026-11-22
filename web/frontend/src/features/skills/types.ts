@@ -23,7 +23,7 @@ export interface RunMeta {
   awaiting_reply?: boolean;
   /** 到这个时间（epoch 秒）还没回复就自动继续 */
   auto_reply_at?: number | null;
-  /** 谁开的：空 = Claude 页；slack:<会话>[:<thread_ts>] = momo Slack 页给会话 / thread 配的 agent */
+  /** 谁开的：空 = Claude 页；slack:<会话>[:<thread_ts>] = 翻译服务 Slack 页给会话 / thread 配的 agent */
   source?: string;
   /** 排队开始的时间（epoch 秒）；不在排队时为 null */
   queued_at?: number | null;

@@ -63,7 +63,7 @@ def test_legacy_skills_cookie_is_upgraded_to_site_wide_cookie(tmp_path):
     app = create_app(config, session_factory=FakeFactory())
     with TestClient(app) as client:
         client.cookies.set(auth.LEGACY_COOKIE_NAME, auth.issue_token(config.session_secret), path=PREFIX)
-        assert client.get(f"{PREFIX}/auth/check").status_code == 401  # 旧 cookie 本来就到不了 momo 其余路径
+        assert client.get(f"{PREFIX}/auth/check").status_code == 401  # 旧 cookie 本来就到不了翻译服务其余路径
         upgraded = client.get(f"{PREFIX}/me")
         assert upgraded.status_code == 200
         set_cookies = upgraded.headers.get_list("set-cookie")

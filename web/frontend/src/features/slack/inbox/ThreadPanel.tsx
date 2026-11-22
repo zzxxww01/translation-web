@@ -62,7 +62,7 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
   const { mutate: mark } = markThread;
   const markedTs = useRef<string | null>(null);
   useEffect(() => {
-    // momo 本地记已读，没参与的 thread 也记，下次打开才有「新回复」线
+    // 翻译服务本地记已读，没参与的 thread 也记，下次打开才有「新回复」线
     if (!pageVisible || !newest || !data) return;
     if (markedTs.current === newest || (data.last_read && parseFloat(newest) <= parseFloat(data.last_read))) return;
     markedTs.current = newest;

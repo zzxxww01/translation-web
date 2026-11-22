@@ -5,7 +5,7 @@ Muse 自动化接口：给本机 CLI（src/cli/automation.py，命令名 transla
 接口本身再拒绝一切带转发头或不是本机来的请求。凭证只在这个进程里用，响应里从不出现。
 
 - updates：先同步（Substack 最新一页 + Slack 只读同步），再查 since 之后的新文章和 @我。
-  不导入、不翻译、不改 Slack 和 momo 本地的已读。
+  不导入、不翻译、不改 Slack 和翻译服务本地的已读。
 - translate-article：导入（已导入复用）→ 按 engines 起翻译，可多选：web = 网页版四步法（自动采用术语建议）；
   claude / codex / antigravity = 交给 Claude 页的 Agent 跑 four-step-translate，后台轮询，翻完自动导回成该 Agent 的译本
   （services/agent_translate.py）。各引擎在跑 / 已译完就返回已有的，不重复起。

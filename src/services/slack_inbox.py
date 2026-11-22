@@ -6,8 +6,8 @@ Slack 收件箱。
 会话清单从网页端自己用的 client.userBoot（侧栏）+ client.counts（未读数）拿。
 
 完全只读：所有 API 调用都过白名单，白名单里只有查询方法，其余一律抛错；不发送、不改消息，
-也不改 Slack 里的已读状态。在 momo 里看过的位置只记在本地（slack.db 的 read_state），
-显示未读时取「Slack 的已读位置」和「momo 本地已读位置」里更新的那个。凭证只发给 slack.com。
+也不改 Slack 里的已读状态。在翻译服务里看过的位置只记在本地（slack.db 的 read_state），
+显示未读时取「Slack 的已读位置」和「翻译服务本地已读位置」里更新的那个。凭证只发给 slack.com。
 """
 
 from __future__ import annotations
@@ -688,7 +688,7 @@ class SlackInbox:
 
     def _thread_read(self, channel_id: str, thread_ts: str, followed: Optional[Dict[str, Any]],
                      local: Optional[Dict[tuple, str]] = None) -> Optional[str]:
-        """thread 的已读位置：Slack 记的（只有我参与的 thread 才有）和 momo 本地记的，取更新的。"""
+        """thread 的已读位置：Slack 记的（只有我参与的 thread 才有）和翻译服务本地记的，取更新的。"""
         local_ts = (local or {}).get((channel_id, thread_ts)) if local is not None else self.db.read_position(channel_id, thread_ts)
         return _later((followed or {}).get("last_read"), local_ts)
 
@@ -753,7 +753,7 @@ class SlackInbox:
             if info["kind"] in {"im", "mpim"} and not is_open and latest_f < cutoff:
                 continue
             slack_read = str(item.get("last_read") or "")
-            # Slack 只读：已读位置取 Slack 的和 momo 本地的里更新的那个；本地看到最新了就不算未读
+            # Slack 只读：已读位置取 Slack 的和翻译服务本地的里更新的那个；本地看到最新了就不算未读
             last_read = _later(slack_read if TS_RE.match(slack_read) else None, local_reads.get((cid, "")))
             read_all = bool(last_read) and latest_f > 0 and latest_f <= float(last_read)
             entry = {
@@ -1050,7 +1050,7 @@ class SlackInbox:
         msg = self.normalize_message(channel_id, root)
         latest = str(root.get("latest_reply") or "")
         last_read = self._thread_read(channel_id, msg["ts"], followed)
-        # 只有我参与的、或在 momo 里看过的 thread 才知道读到哪了
+        # 只有我参与的、或在翻译服务里看过的 thread 才知道读到哪了
         unread = bool(last_read) and bool(latest) and float(latest) > float(last_read)
         new_replies = [
             self.normalize_message(channel_id, r)
@@ -1183,7 +1183,7 @@ class SlackInbox:
         items.sort(key=lambda item: -float(item["latest_ts"]))
         return {"items": items}
 
-    # -- 已读：只记在 momo 本地，从不改 Slack
+    # -- 已读：只记在翻译服务本地，从不改 Slack
 
     def mark_conversation(self, channel_id: str, ts: str) -> Dict[str, Any]:
         self._require_conversation(channel_id)
@@ -1198,7 +1198,7 @@ class SlackInbox:
         return {"ok": True, "marked": self.db.mark_read(channel_id, ts, thread_ts)}
 
     def mark_items_read(self, items: List[Dict[str, str]]) -> Dict[str, Any]:
-        """左栏某个分组的「全部已读」：逐条推到给定的最新位置（thread 带 thread_ts）。只记在 momo 本地。"""
+        """左栏某个分组的「全部已读」：逐条推到给定的最新位置（thread 带 thread_ts）。只记在翻译服务本地。"""
         visible = {c["id"] for c in self.conversations()}
         marked = 0
         for item in items:
@@ -1209,7 +1209,7 @@ class SlackInbox:
         return {"ok": True, "marked": marked}
 
     def mark_all_read(self) -> Dict[str, Any]:
-        """「全部标为已读」：动态里所有未读的 thread / 新帖 / 私信，以及有未读的频道，都推到最新。只记在 momo 本地。"""
+        """「全部标为已读」：动态里所有未读的 thread / 新帖 / 私信，以及有未读的频道，都推到最新。只记在翻译服务本地。"""
         marked = 0
         for item in self.activity()["items"]:
             if not item["has_unreads"]:

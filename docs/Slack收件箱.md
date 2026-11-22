@@ -1,10 +1,10 @@
 # Slack 收件箱
 
-momo 顶部「Slack」页，按「动态」组织（2026-11-18 用户反馈原生 Slack 式的频道三栏太乱，改成活动列）：
+翻译服务顶部「Slack」页，按「动态」组织（2026-11-18 用户反馈原生 Slack 式的频道三栏太乱，改成活动列）：
 
 - **左栏**（`inbox/ActivityList.tsx`）：一行筛选（浅灰底分段选择，选中白底）**全部 · 未读 · @我 · 私信 · 新帖 · 我参与的 · 我翻译的**（记在浏览器里，数字是这一类的未读数，
   可以重叠；「全部」按最近活动排；「新帖」= 最近 7 天没人回复、不是我发的；「我参与的」= Slack 记的我订阅的 thread，后端带 `following`）。
-  右边「待办 N」回到中间的我的待办。选「未读」时列表顶部有「全部标为已读」（只记在 momo）。
+  右边「待办 N」回到中间的我的待办。选「未读」时列表顶部有「全部标为已读」（只记在翻译服务）。
   「我翻译的」= 最近 7 天有翻译稿的帖子，顶上有入口进**全部翻译记录**（`view=history`，不限 7 天、含帖子翻译页翻的）。
   每行只有两行字：标题（未读加粗 + 小圆点，@我 红字）和一行灰色说明（谁发起 · 几条回复 · 翻译草稿 / 已翻译）；后台自动翻好、还没看过的整行底色稍深。
 - **中栏**：没选会话时是「我的待办」；点 thread 只看这一个 thread（顶部操作条：翻译这个帖子 / 翻译全部 / 总结一下），
@@ -38,7 +38,7 @@ URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread，加 `mode=translat
 
 ### 3. 我的待办（`GET /todos`，替代原来的 AI 速览）
 - 没选会话时中栏显示。只看**未读的 @我 和未读私信**，一次调用告诉我每件事「谁、要我干什么」（要回复 / 要处理 / 看一下）。
-- 只被 @用户组 / @here 群发提到的不送模型，放在底部「不用处理」。底部「都处理完了」把这些标为已读（只记在 momo）。
+- 只被 @用户组 / @here 群发提到的不送模型，放在底部「不用处理」。底部「都处理完了」把这些标为已读（只记在翻译服务）。
 - 左栏筛选行右边的「待办 N」回到这里（N = 未读的 @我 + 私信）。
 - 「@我 的 thread 自动翻译」开关也在这里（`GET/PUT /settings`，存在 `data/slack_cache/settings.json`）。
 
@@ -53,7 +53,7 @@ URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread，加 `mode=translat
 - ③ 栏：用来提取的消息左侧竖线；点图片加入 / 去掉配图；配图可调顺序、单张下载、`GET /api/post-drafts/{id}/images.zip` 打包。
 - 翻译稿存在 `data/post_drafts/<id>.json`（`src/services/post_drafts.py`），帖子翻译页手动翻的也存这里，两边合成「翻译记录」：
   Slack 里在「我翻译的 → 全部翻译记录」，帖子翻译页在右上角「历史记录」（点开才展开；帖子翻译页是旧功能，其余布局不变，以后逐步迁到 Slack）。Slack 列表行和 thread 顶部显示「草稿 vN / ✓ 已翻 / 自动翻好」。
-- **@我 的 thread 自动翻译**：后台每分钟（`post_drafts.auto_translate_loop`，随 momo 后端启动）找最近 7 天有人直接 @我、还没有翻译稿的
+- **@我 的 thread 自动翻译**：后台每分钟（`post_drafts.auto_translate_loop`，随翻译服务后端启动）找最近 7 天有人直接 @我、还没有翻译稿的
   thread，自动跑一遍，生成「自动翻好 · 待查看」的草稿；失败一小时后再试（`data/slack_cache/auto_translate.json`）。
   提取发现没有要发的内容时只记一句说明，不进翻译记录。
 
@@ -61,7 +61,7 @@ URL：`/slack?tc=<会话>&t=<thread_ts>`（打开的 thread，加 `mode=translat
 - 对方要什么 + A 简洁 / B 标准 / C 正式三版（`/api/slack/process`）；「✎」改某一版的中文意思只重写这一版（`/slack/refine-version`）；
   一键调整（更短 / 更随意 / 更正式 / 更礼貌 / 加一句感谢，`/slack/refine` 三版并行）；「我想说」按中文意思出三版（`/slack/compose`）。
 - 每次结果记一组，可翻回上一组，存在 `data/slack_cache/dm_replies/<会话>.json`（`GET/PUT /conversations/{id}/reply-state`）。
-- 对方有未读新消息时打开自动生成一次；最后一条是我发的就显示「目前不需要回复」。momo 从不发送。
+- 对方有未读新消息时打开自动生成一次；最后一条是我发的就显示「目前不需要回复」。翻译服务从不发送。
 
 ### 旧版工作台
 原来 Slack 页里的「回复工作台」搬到「工具箱 → 旧版工作台」，功能不变。
@@ -117,9 +117,9 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
   `search.messages`、`subscriptions.thread.getView`、`users.info`。客户端只发 GET。
 - 白名单外的方法直接抛错，单测锁定：发送、改消息、加表情、加入频道，以及 `conversations.mark`、`subscriptions.thread.mark`
   （改 Slack 已读状态）都会被拒。附件只从 `*.slack.com` 下载。
-- **已读只记在 momo 本地**（`slack.db` 的 `read_state`，只往前推）。显示时已读位置取「Slack 记的」和「momo 本地记的」里更新的那个：
-  在 Slack 里读过的 momo 也算读过；在 momo 里读过的只影响 momo，Slack 里的未读保持原样。
-  thread 未读和 @我 角标按我参与的 thread 结合本地已读重新计算；在 momo 里看过的非参与 thread 也会记已读。
+- **已读只记在翻译服务本地**（`slack.db` 的 `read_state`，只往前推）。显示时已读位置取「Slack 记的」和「翻译服务本地记的」里更新的那个：
+  在 Slack 里读过的翻译服务也算读过；在翻译服务里读过的只影响翻译服务，Slack 里的未读保持原样。
+  thread 未读和 @我 角标按我参与的 thread 结合本地已读重新计算；在翻译服务里看过的非参与 thread 也会记已读。
 - 前端只在页面可见时记已读，同一条消息只发一次请求。
 
 ## 展示范围
@@ -144,13 +144,13 @@ SemiAnalysis 是 Enterprise Grid：`conversations.list`、`users.conversations`�
 | GET | `/todos` | 我的待办（未读的 @我 和私信；群发 @ 在 `fyi`） |
 | GET/PUT | `/settings` | `auto_translate_mentions` |
 | GET/PUT | `/conversations/{id}/reply-state` | 私信回复面板的历史 |
-| POST | `/conversations/{id}/mark` | `{"ts"}` 在 momo 本地记会话已读（只前进，不碰 Slack） |
-| POST | `/mark-all` | 标已读，只记在 momo 本地、不碰 Slack：不带参数时清空全部动态；带 `{"items": [{channel_id, ts, thread_ts}]}` 时只标这些（待办页「都处理完了」） |
-| POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 在 momo 本地记 thread 已读（不碰 Slack） |
+| POST | `/conversations/{id}/mark` | `{"ts"}` 在翻译服务本地记会话已读（只前进，不碰 Slack） |
+| POST | `/mark-all` | 标已读，只记在翻译服务本地、不碰 Slack：不带参数时清空全部动态；带 `{"items": [{channel_id, ts, thread_ts}]}` 时只标这些（待办页「都处理完了」） |
+| POST | `/conversations/{id}/threads/{ts}/mark` | `{"ts"}` 在翻译服务本地记 thread 已读（不碰 Slack） |
 | GET | `/conversations/{id}/export?format=md\|json` | 导出最近 200 条（含 thread） |
 | GET | `/files/{id}` | 附件代理；只内联 png/jpeg/gif/webp，其余一律下载 |
 
-鉴权：2026-11-21 起整个 momo 共用 Agent 页的口令登录（nginx `auth_request`，见 `skill_runner/README.md`），没登录访问这些接口返回 401。
+鉴权：2026-11-21 起整个翻译服务共用 Agent 页的口令登录（nginx `auth_request`，见 `skill_runner/README.md`），没登录访问这些接口返回 401。
 
 ## 翻译稿接口（`/api/post-drafts`）
 

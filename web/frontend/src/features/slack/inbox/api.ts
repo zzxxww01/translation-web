@@ -5,7 +5,7 @@ import type {
   SlackThreadSummary, SlackActivityItem, SlackTodos, SlackSettings, DmReplyState,
 } from './types';
 
-// Slack 完全只读：查询、导出、保存凭证；「标记已读」只写 momo 本地，不碰 Slack
+// Slack 完全只读：查询、导出、保存凭证；「标记已读」只写翻译服务本地，不碰 Slack
 export const slackInboxApi = {
   status: () => apiClient.get<SlackStatus>('/slack-inbox/status', { retry: false }),
 
@@ -35,7 +35,7 @@ export const slackInboxApi = {
   markRead: (channelId: string, ts: string) =>
     apiClient.post<{ ok: boolean; marked: boolean }>(`/slack-inbox/conversations/${channelId}/mark`, { ts }, { retry: false }),
 
-  /** 全部标为已读：只记在 momo 本地 */
+  /** 全部标为已读：只记在翻译服务本地 */
   markAllRead: (items?: { channel_id: string; ts: string; thread_ts: string | null }[]) =>
     apiClient.post<{ ok: boolean; marked: number }>('/slack-inbox/mark-all', items ? { items } : {}, { retry: false }),
 

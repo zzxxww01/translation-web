@@ -1,7 +1,7 @@
 # Muse 自动化 CLI（translation-agent）
 
-Felix 的个人助手 Muse 经 SSH 按需调用 momo：**检测自动，动作确认**。Muse 负责定时检测、通知、征求确认、
-轮询、交付和保存水位线；momo 只提供能力，凭证不出服务器。
+Felix 的个人助手 Muse 经 SSH 按需调用翻译服务：**检测自动，动作确认**。Muse 负责定时检测、通知、征求确认、
+轮询、交付和保存水位线；翻译服务只提供能力，凭证不出服务器。
 
 ```
 Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   （src/cli/automation.py，只用标准库，跑完就退出）
@@ -33,7 +33,7 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 | `translate-slack <conversation_id> <message_ts> [--thread-ts T] [--with-thread]` | 翻译任意一条 Slack 消息的正文或它所在的整个 thread（不存翻译稿；翻帖子用上面的 `translate-slack-post`），**同步**返回 `translation`，`status` 为 `done`（新翻）或 `already_exists`（同样内容翻过，直接给缓存）；`project_id` 形如 `slack-<会话>-<ts>[-thread]` |
 | `translate-post [原文] [--hashtags]` | **直接翻一段帖子原文**（推文、公众号段落……），和网页「帖子翻译」同一条链路（术语库、帖子翻译默认模型），同步返回 `translation`、`model`；不存翻译稿。默认不加话题标签，`--hashtags` 才在末尾加小红书标签。上限 10000 字符 |
 | `slack-reply [内容] [--mode auto\|incoming\|compose] [--history JSON]` | **帮 Felix 回 Slack**，和网页「Slack 回复」同一套。对方的英文消息（`incoming`）→ `translation`（中文理解）+ `replies`（3 版英文回复）；Felix 的中文草稿（`compose`）→ `replies`（3 版英文）。每版有 `version`（A/B/C）、`style`、`english`、`chinese`。`auto` 按中文占比判断，返回的 `mode` 是实际用的。`--history` 给之前的对话：`[{"role":"them\|me","content":"..."}]` |
-| `status <project_id> [--with-markdown] [--engine E]` | 文章：`running`（附 `stage`）/ `done`（`result` 是 momo 链接）/ `failed`（`error`）/ `not_started`，看的是网页上显示的主译本；带 `zh_title`、`zh_summary`。`engines` 给每个引擎各自的进度（`web` 总有；Agent 只列起过的）：`running` / `done`（附 `variant_id`）/ `failed`（附 `error`）。`--with-markdown` 完成时附中文 Markdown 全文，`--engine codex` 就给 Codex 那一版。`slack-…`：`done`，`result` 是译文 |
+| `status <project_id> [--with-markdown] [--engine E]` | 文章：`running`（附 `stage`）/ `done`（`result` 是翻译服务链接）/ `failed`（`error`）/ `not_started`，看的是网页上显示的主译本；带 `zh_title`、`zh_summary`。`engines` 给每个引擎各自的进度（`web` 总有；Agent 只列起过的）：`running` / `done`（附 `variant_id`）/ `failed`（附 `error`）。`--with-markdown` 完成时附中文 Markdown 全文，`--engine codex` 就给 Codex 那一版。`slack-…`：`done`，`result` 是译文 |
 | `health` | `substack` / `slack` / `models` / `agents` 各自 `ok` 或 `error: …`（`models` 只检查配置，不发请求；`agents` 是能不能调通 Claude 页）；`slack_groups` 是自动识别 / 手配的用户组个数 |
 
 ### updates 细节
@@ -49,7 +49,7 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 - 先从本地副本 `slack.db` 查；本地只同步 Felix 参与的 thread，所以再用 `search.messages`（只读）搜 `<@U0A8T7U5D7A>` 兜底，
   补上没参与、Slack 也没自动订阅的 thread 里的 @。搜索索引有延迟，每次往回多看 30 分钟；搜到的存进本地副本，
   靠「本地有没有」去重，同一条只报一次（`translate-slack` 也能直接找到）。搜索失败只记日志，照常返回本地结果。
-- **只读**：Slack 走现有只读白名单；不碰 momo 本地已读（`read_state`）；不导入、不翻译。
+- **只读**：Slack 走现有只读白名单；不碰翻译服务本地已读（`read_state`）；不导入、不翻译。
 
 ### Muse 的典型用法（三个场景，Muse 定时拉，Felix 只核对、选择）
 
@@ -57,7 +57,7 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
    Felix 要时 `draft <id>` 给完整译本（原文、译文、标题、原图）→ Felix 说「更地道」「精简」「第二段别用赋能」→ `optimize-draft`。
 2. **SemiAnalysis 新文章**：`updates` 拿到新文章（带中文标题、摘要）→ Felix 决定翻不翻、用什么翻（可多选）→
    `translate-article <slug> --engine web --engine codex` → 定时 `status <project_id>` 看 `engines`，翻完给链接或 `--with-markdown --engine X` 全文。
-3. **私信**：`dms` → 每条给英文原话、找我干什么、中文理解、3 版回复 → Felix 挑一版自己复制发（momo 对 Slack 只读）。
+3. **私信**：`dms` → 每条给英文原话、找我干什么、中文理解、3 版回复 → Felix 挑一版自己复制发（翻译服务对 Slack 只读）。
 
 ### Agent 翻译（`--engine claude/codex/antigravity`）细节
 
@@ -65,8 +65,8 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
   上传 `source.html` 到 Claude 页跑 four-step-translate（等术语确认 10 分钟没人回自动按推荐继续）→ 这一轮结束、不在等确认 →
   取同一目录的 `zh.md` / `en.md` → 对齐导成该 Agent 的译本。不依赖有人开着网页；网页工作台也能看到这个任务（写了 `claude_run_id`）。
 - **登录**：后端读 Claude 页的 env 文件（`SKILL_RUNNER_ENV_FILE`，默认 `~/.config/skill-runner/env`）里的口令，按 skill-runner 同样的算法签 cookie
-  （2026-11-23 用户选的方案：直接用口令，不另建专用凭证）。口令不落盘、不打日志。改了 Claude 页口令不用改 momo。
-- 任务记录在 `data/automation_agent_runs.json`（`AUTOMATION_AGENT_RUNS_FILE`），后台每 60 秒轮询一次，momo 重启后接着看。
+  （2026-11-23 用户选的方案：直接用口令，不另建专用凭证）。口令不落盘、不打日志。改了 Claude 页口令不用改翻译服务。
+- 任务记录在 `data/automation_agent_runs.json`（`AUTOMATION_AGENT_RUNS_FILE`），后台每 60 秒轮询一次，翻译服务重启后接着看。
 - 失败（`engines.<agent>.status = failed`）：Agent 出错、这一轮结束却没找到 `zh.md`/`en.md`、英文稿和原文对不上（<80% 段落）、
   Claude 页里任务被删。重新 `translate-article --engine <agent>` 会再起一次。
 - Agent 跑一篇要几十分钟，占 Claude 页并发名额（最多 3 个，满了排队）。
@@ -75,11 +75,11 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 
 - 后端一把锁串行处理，同一篇并发调用只会导入一个项目、起一次翻译；翻译槽被网页那边占了（409）也当 `already_exists`。
 - 直接调 `start_longform_workflow`（绕过网页用的 3 次/分钟限流），参数等于网页「一键翻译」+ `auto_accept_terms`。
-- Muse 起的翻译在跑时，momo 发版的 precheck 会拦住，和网页起的一样。
+- Muse 起的翻译在跑时，翻译服务发版的 precheck 会拦住，和网页起的一样。
 
 ### slack-todos / drafts / draft / translate-slack-post 细节
 
-- `slack-todos` 直接调网页待办的同一个函数（未读的私信和 @我，最近几天），会调一次轻量模型（`task: slack`）概括每件事，结果有缓存；不改 Slack、不改 momo 已读。
+- `slack-todos` 直接调网页待办的同一个函数（未读的私信和 @我，最近几天），会调一次轻量模型（`task: slack`）概括每件事，结果有缓存；不改 Slack、不改翻译服务已读。
 - `drafts` / `draft` 只读 `data/post_drafts/`；提取后发现没有要发的帖子（纯讨论）的稿子不进 `drafts`，`draft` 直接查时 `no_post: true`、`note` 说明原因。
 - 配图来自 Slack 文件（只读下载、本地有缓存）；某张拿不到时那一张带 `error`，不影响其余。
 - `translate-slack-post` 与网页、后台自动翻译共用每个 thread 一把锁，不会同时跑两遍；模型同网页（提取 `task: slack`，翻译、标题走帖子翻译默认模型）。

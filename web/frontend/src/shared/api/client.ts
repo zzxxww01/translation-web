@@ -15,7 +15,7 @@ export class ApiErrorWrapper extends Error {
 }
 
 /** 任何接口返回 401（没登录或登录过期）时在 window 上发这个事件，AuthGate 据此切回口令框。 */
-export const UNAUTHORIZED_EVENT = 'momo:unauthorized';
+export const UNAUTHORIZED_EVENT = 'translation-service:unauthorized';
 
 function notifyIfUnauthorized(status: number): void {
   if (status === 401 && typeof window !== 'undefined') window.dispatchEvent(new Event(UNAUTHORIZED_EVENT));
