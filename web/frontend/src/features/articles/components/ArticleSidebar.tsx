@@ -48,6 +48,13 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
   const projects = useProjects(filter === 'imported');
   const [syncing, setSyncing] = useState(false);
   const sentinel = useRef<HTMLLIElement>(null);
+  // 选中的那篇（比如从工作台返回）第一次出现在列表里时滚到看得见的地方；之后你自己滚就不再管
+  const revealed = useRef<string | null>(null);
+  const reveal = (key: string) => (element: HTMLButtonElement | null) => {
+    if (!element || revealed.current === key) return;
+    revealed.current = key;
+    element.scrollIntoView?.({ block: 'nearest' });
+  };
 
   const articles = useMemo(() => library.data?.pages.flatMap(page => page.articles) ?? [], [library.data]);
   const total = library.data?.pages[0]?.total ?? 0;
@@ -125,6 +132,7 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
             <li key={article.url}>
               <button
                 type="button"
+                ref={selected ? reveal(article.url) : undefined}
                 onClick={() => (article.project_id ? onSelectProject(article.project_id) : onSelectArticle(article))}
                 className={cn('w-full rounded-md px-3 py-2.5 text-left transition-colors', selected ? 'bg-primary-50' : 'hover:bg-bg-hover')}
               >
@@ -155,6 +163,7 @@ export function ArticleSidebar({ selectedSlug, selectedProjectId, onSelectArticl
               <li key={project.id}>
                 <button
                   type="button"
+                  ref={project.id === selectedProjectId ? reveal(project.id) : undefined}
                   onClick={() => onSelectProject(project.id)}
                   className={cn('w-full rounded-md px-3 py-2 text-left text-sm transition-colors', project.id === selectedProjectId ? 'bg-primary-50' : 'hover:bg-bg-hover')}
                 >

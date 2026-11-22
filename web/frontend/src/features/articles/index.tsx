@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, Newspaper } from 'lucide-react';
 import { Sheet, SheetContent, SheetTitle } from '@/components/ui/sheet';
 import type { SubstackArticle } from '@/features/substack/api';
@@ -15,6 +15,8 @@ import { useAutoSyncArticles } from './hooks';
 export function ArticlesFeature() {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
+  // 从工作台点「← 文章列表」回来：列表里选中刚才那篇
+  const lastProject = (useLocation().state as { lastProject?: string } | null)?.lastProject ?? null;
   const [searchParams, setSearchParams] = useSearchParams();
   const [selected, setSelected] = useState<SubstackArticle | null>(null);
   const [listOpen, setListOpen] = useState(false);
@@ -29,7 +31,7 @@ export function ArticlesFeature() {
   const sidebar = (
     <ArticleSidebar
       selectedSlug={slug}
-      selectedProjectId={projectId ?? null}
+      selectedProjectId={projectId ?? lastProject}
       onSelectArticle={item => {
         setSelected(item);
         setListOpen(false);

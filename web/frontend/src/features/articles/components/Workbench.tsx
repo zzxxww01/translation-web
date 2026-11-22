@@ -552,7 +552,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   return (
     <div className="flex h-full min-h-0 flex-col bg-bg-primary">
       {!immersive && (
-        <WorkbenchTopBar title={title} original={title !== project.title ? project.title : null}
+        <WorkbenchTopBar projectId={project.id} title={title} original={title !== project.title ? project.title : null}
           onShowList={onShowList}
           save={<SaveStatus saving={saving} onSave={() => void saveNow()} compact={isMobile} />} compact={isMobile}
           mark={readingProgress} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}

@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 import { act } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { toast } from 'sonner';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -426,6 +426,28 @@ describe('Workbench', () => {
     id: 'old-run', skill: 'four-step-translate', title: 't', status: 'running', created_at: 0, updated_at: 0,
     session_id: 'old-thread', error: null, harness: 'codex',
   };
+
+  it('goes back to the article list with this project selected, and keeps the list drawer as a separate icon', async () => {
+    api.workbench.mockResolvedValue(DATA);
+    const onShowList = vi.fn();
+    function ListProbe() {
+      const state = useLocation().state as { lastProject?: string } | null;
+      return <p data-testid="list">列表，选中 {state?.lastProject}</p>;
+    }
+    await render(
+      <Routes>
+        <Route path="/" element={<Workbench projectId="p1" onShowList={onShowList} />} />
+        <Route path="/articles" element={<ListProbe />} />
+      </Routes>,
+    );
+    await flush();
+    await act(async () => { (host.querySelector('button[aria-label="快速切换文章"]') as HTMLButtonElement).click(); });
+    expect(onShowList).toHaveBeenCalledOnce();
+    const back = host.querySelector('a[aria-label="返回文章列表"]') as HTMLAnchorElement;
+    expect(back.textContent).toContain('文章列表');
+    await act(async () => { back.click(); });
+    expect(host.querySelector('[data-testid="list"]')?.textContent).toBe('列表，选中 p1');
+  });
 
   it('adds a new agent from ＋ and waits for the old run to stop before starting it', async () => {
     api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'old-run' } });
