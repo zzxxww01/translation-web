@@ -74,12 +74,12 @@ function LiveTimeCard({ title, timeZone }: { title: string; timeZone: string }) 
 
   return (
     <Card>
-      <CardContent className="py-5 text-center">
-        <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-primary-500">{title}</div>
-        <div className="text-[30px] font-semibold leading-none tabular-nums text-text-primary" style={{ fontFamily: 'var(--font-display)' }}>
+      <CardContent className="px-2 py-3 text-center sm:py-5">
+        <div className="mb-1.5 text-[11px] font-medium text-text-muted sm:mb-2 sm:text-xs">{title}</div>
+        <div className="text-lg font-semibold leading-none tabular-nums text-text-primary sm:text-[30px]" style={{ fontFamily: 'var(--font-display)' }}>
           {time || <Skeleton className="h-8 w-24 mx-auto" />}
         </div>
-        <div className="mt-2 text-xs text-text-muted">{date}</div>
+        <div className="mt-2 text-[11px] text-text-muted sm:text-xs">{date}</div>
       </CardContent>
     </Card>
   );
@@ -105,25 +105,39 @@ export function TimezoneConverter() {
 
   return (
     <div className="space-y-6">
-      <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
+      <div className="grid grid-cols-3 gap-2 sm:gap-4">
         <LiveTimeCard title="北京时间" timeZone="Asia/Shanghai" />
         <LiveTimeCard title="美中时间" timeZone="America/Chicago" />
         <LiveTimeCard title="美西时间" timeZone="America/Los_Angeles" />
       </div>
 
       <div className="space-y-2">
-        <label htmlFor="timezone-input" className="text-sm font-medium">输入时间</label>
-        <Input
-          id="timezone-input"
-          placeholder="例如：今天下午3点、1/26 4pm PT、2026-01-26 14:00 EST"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter') void handleConvert();
-          }}
-          aria-describedby="timezone-input-help"
-        />
-        <div id="timezone-input-help" className="space-y-2 rounded-md bg-bg-tertiary px-3 py-2.5 text-xs leading-relaxed text-text-muted">
+        <label htmlFor="timezone-input" className="text-[13px] font-semibold text-text-secondary">换算一个时间</label>
+        {/* 输入框和按钮同一行，回车也能换算 */}
+        <div className="flex gap-2">
+          <Input
+            id="timezone-input"
+            placeholder="例如：今天下午3点、1/26 4pm PT、2026-01-26 14:00 EST"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') void handleConvert();
+            }}
+            aria-describedby="timezone-input-help"
+            className="h-10 min-w-0 flex-1"
+          />
+          <Button
+            onClick={handleConvert}
+            disabled={!input.trim() || timezoneMutation.isPending}
+            className="h-10 shrink-0"
+          >
+            {timezoneMutation.isPending ? <RotateCw className="animate-spin" /> : <RotateCw />}
+            换算
+          </Button>
+        </div>
+        <details className="text-xs leading-relaxed text-text-muted">
+          <summary className="cursor-pointer select-none py-1 text-text-secondary hover:text-text-primary">支持哪些写法？</summary>
+          <div id="timezone-input-help" className="mt-1 space-y-2 rounded-lg bg-bg-tertiary px-3 py-2.5">
           <p>
             要带日期；结尾可以加时区，不加按<span className="font-medium text-text-secondary">美中时间</span>算。
             「今天」「明天」也按这个时区的日期算。
@@ -141,42 +155,30 @@ export function TimezoneConverter() {
             例如 1/26 4pm PT。夏令时自动处理，EST、EDT 写哪个都按当天实际时间算。
           </p>
           <p>不支持：只写时间不写日期（3pm EST）、星期（Thursday 3pm）、「晚上8点」（请写「下午8点」或 20:00）。</p>
-        </div>
+          </div>
+        </details>
       </div>
 
-      <Button
-        onClick={handleConvert}
-        disabled={!input.trim() || timezoneMutation.isPending}
-        className="w-full"
-      >
-        {timezoneMutation.isPending ? <RotateCw className="h-4 w-4 animate-spin" /> : <RotateCw className="h-4 w-4" />}
-        转换
-      </Button>
-
       {result && (
-        <div className="space-y-3">
-          <h4 className="text-sm font-semibold">转换结果</h4>
-          <div className="grid gap-3 sm:grid-cols-2" aria-live="polite">
+        // 结果：北京时间放最前、最大，其余美国四个时区一行一个
+        <div className="overflow-hidden rounded-xl border border-border-subtle bg-white" aria-live="polite">
+          <div className="flex items-baseline justify-between gap-3 border-b border-border-subtle bg-primary-50/50 px-4 py-3">
+            <span className="text-xs font-medium text-primary-700">北京时间</span>
+            <span className="text-lg font-semibold tabular-nums text-text-primary">{result.beijing || '--'}</span>
+          </div>
+          <dl className="divide-y divide-border-subtle">
             {[
               { label: '美东时间', value: result.est },
               { label: '美中时间', value: result.cst },
               { label: '美山时间', value: result.mst },
               { label: '美西时间', value: result.pst },
             ].map(item => (
-              <Card key={item.label}>
-                <CardContent className="p-3">
-                  <div className="text-xs text-muted-foreground">{item.label}</div>
-                  <div className="font-semibold">{item.value || '--'}</div>
-                </CardContent>
-              </Card>
+              <div key={item.label} className="flex items-baseline justify-between gap-3 px-4 py-2.5 text-sm">
+                <dt className="text-text-muted">{item.label}</dt>
+                <dd className="tabular-nums text-text-primary">{item.value || '--'}</dd>
+              </div>
             ))}
-            <Card className="border-primary/30 bg-primary/5 sm:col-span-2">
-              <CardContent className="p-3">
-                <div className="text-xs text-primary">北京时间</div>
-                <div className="text-lg font-semibold text-primary">{result.beijing || '--'}</div>
-              </CardContent>
-            </Card>
-          </div>
+          </dl>
         </div>
       )}
     </div>

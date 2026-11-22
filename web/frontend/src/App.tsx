@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
 import { TooltipProvider } from './components/ui/tooltip';
 import { AppRouter } from './router';
+import { ConfirmHost } from './shared/ui/ConfirmHost';
 
 // 创建 React Query 客户端
 const queryClient = new QueryClient({
@@ -58,6 +59,7 @@ function App() {
       <TooltipProvider>
         <AppErrorBoundary>
           <AppRouter />
+          <ConfirmHost />
           <Toaster position="top-right" richColors closeButton />
         </AppErrorBoundary>
       </TooltipProvider>

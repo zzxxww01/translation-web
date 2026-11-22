@@ -1,10 +1,11 @@
 import { useState, type ReactNode } from 'react';
-import { ExternalLink, Loader2 } from 'lucide-react';
+import { ExternalLink, Loader2, Settings2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useQueryClient } from '@tanstack/react-query';
 import { Button } from '@/components/ui/Button';
 import { isCookieError, type SubstackArticle } from '@/features/substack/api';
 import { CookieForm } from '@/features/substack/components/CookieForm';
+import { harnessLabel } from '@/features/skills/harness';
 import { ARTICLE_HARNESSES, loadAgentChoice, saveAgentChoice, type AgentChoice } from '../lib/agentChoice';
 import { importAndTranslate } from '../lib/importFlow';
 import { AgentChoiceFields } from './AgentCards';
@@ -23,6 +24,9 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
   const [choice, setChoice] = useState<AgentChoice>(() => loadAgentChoice());
   const [busy, setBusy] = useState(false);
   const [needCookie, setNeedCookie] = useState(false);
+  const [showOptions, setShowOptions] = useState(false);
+  const agentName = `${harnessLabel(choice.harness)}${choice.model ? ` · ${choice.model}` : ''}`;
+  const plan = [web && '网页版', useAgent && `Agent（${agentName}）`].filter(Boolean).join(' + ') || '导入后自己决定怎么翻';
   const date = Date.parse(article.post_date);
 
   const start = async () => {
@@ -56,25 +60,36 @@ export function ArticlePreview({ article, onImported }: ArticlePreviewProps) {
         看原文 <ExternalLink className="h-3.5 w-3.5" />
       </a>
 
-      <div className="mt-8 rounded-xl border border-border-subtle bg-bg-tertiary/60 p-4">
+      {/* 导入：默认直接一个按钮（用上次的选法），想换 Agent / 模型再展开 */}
+      <div className="mt-8 rounded-xl border border-border-subtle bg-white p-4 shadow-paper">
         {needCookie ? (
           <CookieForm reason="这是付费文章，要先填订阅 cookie" onSaved={() => { setNeedCookie(false); void start(); }} onCancel={() => setNeedCookie(false)} />
         ) : (
           <>
-            <p className="text-sm font-medium text-text-primary">导入后怎么翻</p>
-            <div className="mt-2 space-y-1">
-              <Check checked={web} onChange={setWeb} label="网页版" note="网站自己的翻译流程" disabled={busy} />
-              <Check checked={useAgent} onChange={setUseAgent} label="Agent" note="在服务器上跑，关掉页面也不会停" disabled={busy}>
-                {useAgent && (
-                  <div className="mt-2.5">
-                    <AgentChoiceFields options={ARTICLE_HARNESSES.map(item => item.id)} value={choice} onChange={setChoice} disabled={busy} />
-                  </div>
-                )}
-              </Check>
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="min-w-0 flex-1">
+                <p className="text-sm font-medium text-text-primary">{web || useAgent ? '导入并开始翻译' : '只导入，先不翻'}</p>
+                <p className="mt-0.5 text-xs text-text-muted">{plan}</p>
+              </div>
+              <Button variant="ghost" size="sm" onClick={() => setShowOptions(open => !open)} disabled={busy} aria-expanded={showOptions}>
+                <Settings2 />{showOptions ? '收起' : '换一种翻法'}
+              </Button>
+              <Button className="min-w-32" onClick={start} disabled={busy}>
+                {busy ? <><Loader2 className="animate-spin" /> 导入中…</> : web || useAgent ? '导入并翻译' : '导入'}
+              </Button>
             </div>
-            <Button className="mt-4 w-full" onClick={start} disabled={busy}>
-              {busy ? <><Loader2 className="animate-spin" /> 导入中…</> : web || useAgent ? '导入并翻译' : '导入'}
-            </Button>
+            {showOptions && (
+              <div className="mt-3 space-y-1 border-t border-border-subtle pt-3">
+                <Check checked={web} onChange={setWeb} label="网页版" note="网站自己的翻译流程" disabled={busy} />
+                <Check checked={useAgent} onChange={setUseAgent} label="Agent" note="在服务器上跑，关掉页面也不会停" disabled={busy}>
+                  {useAgent && (
+                    <div className="mt-2.5">
+                      <AgentChoiceFields options={ARTICLE_HARNESSES.map(item => item.id)} value={choice} onChange={setChoice} disabled={busy} />
+                    </div>
+                  )}
+                </Check>
+              </div>
+            )}
           </>
         )}
       </div>

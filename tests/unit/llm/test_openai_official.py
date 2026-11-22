@@ -34,15 +34,17 @@ def test_catalog_and_defaults(loader):
     config = loader.load()
     assert config.task_defaults == {'longform':'gemini-flash','post':'gpt-6.2-sol',
         'post_optimize':'gemini-official-argon','analysis':'deepseek-v3','title':'gemini-official-argon',
-        'metadata':'deepseek-v3','slack':'gpt-6.2-sol'}
+        'metadata':'deepseek-v3','slack':'gpt-6.2-sol','chat':'gpt-6.2-sol'}
     official = config.providers['openai-official']
     assert official.type == 'openai' and official.relay is False
     assert official.api_keys[0].key == 'test-not-a-secret'
     assert not official.allow_cross_provider_fallback
     listed = next(p for p in _list_models_sync().providers if p.id == 'openai-official')
-    assert config.task_fallbacks == {'post': 'gemini-flash'}
+    assert config.task_fallbacks == {'post': 'gemini-flash', 'chat': 'gemini-flash'}
     assert [m.real_model for m in listed.models] == [MODEL, 'gpt-6.2-sol']
-    assert all(m.available and 'OpenAI 官方' in m.name for m in listed.models)
+    # 只有 OpenAI 官方一家提供，显示名就是模型名，不带供应商
+    assert all(m.available for m in listed.models)
+    assert [m.name for m in listed.models] == ['GPT-6.1 Sol', 'GPT-6.2 Sol']
     for filename in ('llm_providers.yaml', 'llm_providers.yaml.example'):
         cfg = ConfigLoader(str(ROOT / 'config' / filename)).load()
         plans = FallbackStrategy(cfg).build_attempt_plan(MODEL)

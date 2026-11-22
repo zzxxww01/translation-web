@@ -12,9 +12,9 @@ import {
   Star,
 } from 'lucide-react';
 import { toast } from 'sonner';
-import { Badge } from '@/components/ui/badge';
 import { ButtonExtended as Button } from '@/components/ui/button-extended';
 import { Input } from '@/components/ui/input';
+import { Segmented } from '@/components/ui/segmented';
 import {
   Select,
   SelectContent,
@@ -29,7 +29,6 @@ import type { GlossaryRecommendation, GlossaryTerm, TranslationStrategy } from '
 import {
   emptyEditor,
   normalizeTags,
-  scopeLabel,
   toEditor,
   type EditingTerm,
   type GlossaryCenterProps,
@@ -449,14 +448,15 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
 
     return (
       <div className="space-y-4">
-        <div className="grid gap-3 rounded-2xl border border-border bg-white p-4 shadow-sm lg:grid-cols-[minmax(0,1fr)_160px_160px_180px_160px]">
-          <div className="relative">
-            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        {/* 筛选：搜索一行；手机上三个下拉并排成一行，不再竖着铺满首屏 */}
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-[minmax(0,1fr)_140px_150px_150px_140px]">
+          <div className="relative col-span-2 sm:col-span-4 lg:col-span-1">
+            <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-muted" />
             <Input
               value={search}
               onChange={event => setSearch(event.target.value)}
               placeholder="搜索术语、译法、词义说明、标签"
-              className="pl-10"
+              className="h-9 pl-9"
             />
           </div>
           <Select
@@ -467,9 +467,9 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="active">仅 active</SelectItem>
+              <SelectItem value="active">只看启用</SelectItem>
               <SelectItem value="all">全部状态</SelectItem>
-              <SelectItem value="disabled">仅 disabled</SelectItem>
+              <SelectItem value="disabled">只看停用</SelectItem>
             </SelectContent>
           </Select>
           <Select
@@ -516,31 +516,13 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <Badge variant="secondary">{filteredTerms.length} 条可见术语</Badge>
-            <Badge variant="outline">{scopeLabel(activeScope)}</Badge>
-          </div>
-          <div className="flex flex-wrap items-center gap-2">
-            <Button
-              size="sm"
-              variant={listMode === 'table' ? 'default' : 'outline'}
-              onClick={() => setListMode('table')}
-            >
-              表格视图
-            </Button>
-            <Button
-              size="sm"
-              variant={listMode === 'grouped' ? 'default' : 'outline'}
-              onClick={() => setListMode('grouped')}
-            >
-              按标签分组
-            </Button>
-            {activeScope !== 'effective' ? (
-              <Button size="sm" leftIcon={<Plus className="h-4 w-4" />} onClick={startCreate}>
-                新建术语
-              </Button>
-            ) : null}
-          </div>
+          <p className="text-sm text-text-muted">共 {filteredTerms.length} 条</p>
+          <Segmented
+            label="列表视图"
+            value={listMode}
+            onChange={setListMode}
+            options={[{ value: 'table', label: '列表' }, { value: 'grouped', label: '按标签分组' }]}
+          />
         </div>
 
         {activeScope === 'project' || activeScope === 'global' ? (
@@ -587,7 +569,7 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
     return (
       <div className="flex flex-col gap-6">
         {isLoading ? (
-          <div className="rounded-2xl border border-border bg-white p-10 text-center text-muted-foreground">
+          <div className="rounded-xl border border-border-subtle bg-white p-10 text-center text-sm text-text-muted">
             正在加载术语数据...
           </div>
         ) : (
@@ -598,31 +580,25 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
   }
 
   return (
-    <div className="min-h-full px-5 pb-12 pt-4 sm:px-8 sm:pt-5">
-      <div className="mx-auto flex w-full max-w-7xl flex-col gap-5">
-        {onBack ? (
-          <div>
-            <Button size="sm" variant="ghost" leftIcon={<ArrowLeft className="h-4 w-4" />} onClick={onBack}>
-              返回
-            </Button>
-          </div>
-        ) : null}
-        <div>
-          <PageHeader
-            title="统一术语管理"
-            actions={
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="outline">当前视图：{scopeLabel(activeScope)}</Badge>
-                {projectId ? <Badge variant="secondary">项目：{projectLabel}</Badge> : null}
-              </div>
-            }
-          />
-          {/* 这条规则影响翻译结果、页面上又看不出来，所以保留成一行小字 */}
-          <p className="mt-2 text-xs leading-relaxed text-text-muted">
-            <strong className="font-medium text-text-secondary">全局术语优先</strong>
-            ：项目术语只补充全局没有的词，同名时不生效；「有效术语」就是翻译时真正会用的那一份。帖子、Slack 和工具箱只用全局术语。
-          </p>
-        </div>
+    <div className="min-h-full px-4 pb-12 pt-5 sm:px-8">
+      <div className="mx-auto flex w-full max-w-6xl flex-col gap-4">
+        <PageHeader
+          title="术语库"
+          actions={
+            <>
+              {onBack ? (
+                <Button size="sm" variant="ghost" leftIcon={<ArrowLeft className="h-4 w-4" />} onClick={onBack}>
+                  {projectId ? `回到「${projectLabel}」` : '返回'}
+                </Button>
+              ) : null}
+              {activeScope !== 'effective' && activeScope !== 'rules' && activeScope !== 'recommendations' ? (
+                <Button size="sm" leftIcon={<Plus className="h-4 w-4" />} onClick={startCreate}>
+                  新建术语
+                </Button>
+              ) : null}
+            </>
+          }
+        />
 
         <Tabs
           value={activeScope}
@@ -668,6 +644,10 @@ function GlossaryCenterScope({ projectId, projectTitle, defaultScope = 'global',
               翻译规则
             </TabsTrigger>
           </TabsList>
+          {/* 这条规则影响翻译结果、页面上又看不出来，所以保留成一行小字 */}
+          <p className="mt-3 text-xs leading-relaxed text-text-muted">
+            全局术语优先：项目术语只补充全局没有的词；「有效术语」就是翻译时真正会用的那一份。帖子、Slack 和工具箱只用全局术语。
+          </p>
           {projectId ? <TabsContent value="effective">{renderTabsContent()}</TabsContent> : null}
           {projectId ? <TabsContent value="project">{renderTabsContent()}</TabsContent> : null}
           <TabsContent value="global">{renderTabsContent()}</TabsContent>

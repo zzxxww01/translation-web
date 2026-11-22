@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button-extended';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useExportProject, useProject } from '../hooks';
+import { confirmAction } from '@/shared/ui/confirm';
 
 /** Mount with key={projectId}: a QA exception must never survive a project switch. */
 export function ProjectExport({ projectId }: { projectId: string }) {
@@ -20,11 +21,13 @@ export function ProjectExport({ projectId }: { projectId: string }) {
     && mutation.variables?.projectId === projectId
     && mutation.variables?.format === format;
 
-  const exportOnce = (allowQaOverride = false) => {
+  const exportOnce = async (allowQaOverride = false) => {
     if (mutation.isPending) return;
-    if (allowQaOverride && (!qaBlocked || !window.confirm(
-      `${mutation.error?.message ?? ''}\n仍然导出（忽略本次QA）？下载的可能是含英文原文的未完成稿，不代表翻译完成。仅跳过本次 QA，不会关闭后续检查。`
-    ))) return;
+    if (allowQaOverride && (!qaBlocked || !await confirmAction({
+      title: '仍然导出（跳过这次检查）？',
+      description: `${mutation.error?.message ?? ''}\n\n下载的是还夹着英文的未完成稿。只跳过这一次检查，下次导出照常检查。`,
+      confirmLabel: '仍然导出',
+    }))) return;
     mutation.mutate({ projectId, format, allowQaOverride });
   };
 
@@ -48,7 +51,7 @@ export function ProjectExport({ projectId }: { projectId: string }) {
               <SelectItem value="en">英文 Markdown</SelectItem>
             </SelectContent>
           </Select>
-          <Button variant="outline" size="sm" onClick={() => exportOnce()}
+          <Button variant="outline" size="sm" onClick={() => void exportOnce()}
             disabled={mutation.isPending} leftIcon={<Download className="h-4 w-4" />}>
             {mutation.isPending ? '导出中...' : '导出'}
           </Button>
@@ -57,7 +60,7 @@ export function ProjectExport({ projectId }: { projectId: string }) {
           <div role="status" className="mt-2 space-y-1 rounded-md border-l-2 border-amber-500 bg-amber-50 p-3 text-xs text-amber-900">
             <p className="font-semibold">{exportedIncomplete ? '已下载未完成稿' : '中文稿未完成'} · 缺译 {completeness.missing_count} 处</p>
             <p>章节标题 {completeness.missing_title_count} · 正文 {completeness.missing_body_count} · 文章标题 {completeness.missing_document_title_count}</p>
-            <p>可能保留英文原文，不能作为完整译稿交付。默认导出将进行 QA 检查。</p>
+            <p>里面可能还有英文，不能当完整译稿交出去。导出前会先做质量检查。</p>
             <details>
               <summary className="cursor-pointer py-1 underline underline-offset-2">查看缺译位置</summary>
               <ul className="max-h-40 space-y-1 overflow-y-auto break-words">
@@ -78,8 +81,8 @@ export function ProjectExport({ projectId }: { projectId: string }) {
             <p className="break-words">{mutation.error.message}</p>
             <p>建议先补全翻译并查看质量报告；下载草稿不代表翻译完成，忽略仅对本次导出生效。</p>
             <Button variant="outline" size="sm" className="w-full" disabled={mutation.isPending}
-              onClick={() => exportOnce(true)}>
-              仍然导出（忽略本次QA）
+              onClick={() => void exportOnce(true)}>
+              仍然导出（跳过这次检查）
             </Button>
           </div>
         )}

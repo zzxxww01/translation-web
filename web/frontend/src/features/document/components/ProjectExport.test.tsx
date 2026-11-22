@@ -10,7 +10,7 @@ import { toast } from 'sonner';
 vi.mock('@/shared/hooks/useErrorHandler', () => ({ useErrorHandler: () => ({ handleError: vi.fn() }) }));
 vi.mock('sonner', () => ({ toast: { success: vi.fn(), warning: vi.fn() } }));
 
-const overrideLabel = '仍然导出（忽略本次QA）';
+const overrideLabel = '仍然导出（跳过这次检查）';
 let root: Root;
 let host: HTMLDivElement;
 let client: QueryClient;

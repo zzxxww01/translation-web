@@ -2,7 +2,7 @@ import { Suspense, lazy } from 'react';
 import { createBrowserRouter, Navigate, RouterProvider, useParams } from 'react-router-dom';
 import { AppLayout } from './components/layout/AppLayout';
 import { AuthGate } from './components/layout/AuthGate';
-import { NotFoundPage } from './components/layout/NotFoundPage';
+import { NotFoundPage, RouteErrorPage } from './components/layout/NotFoundPage';
 
 const DocumentFeature = lazy(() =>
   import('./features/document/index.tsx').then(module => ({ default: module.DocumentFeature }))
@@ -21,6 +21,9 @@ const SlackFeature = lazy(() =>
 );
 const ToolsFeature = lazy(() =>
   import('./features/tools/index.tsx').then(module => ({ default: module.ToolsFeature }))
+);
+const ChatFeature = lazy(() =>
+  import('./features/chat/index.tsx').then(module => ({ default: module.ChatFeature }))
 );
 const SkillsFeature = lazy(() =>
   import('./features/skills/index.tsx').then(module => ({ default: module.SkillsFeature }))
@@ -65,105 +68,120 @@ const router = createBrowserRouter([
         <AppLayout />
       </AuthGate>
     ),
+    errorElement: <RouteErrorPage />,
     children: [
       {
-        index: true,
-        element: <Navigate to="/articles" replace />,
-      },
-      {
-        path: 'document/:projectId/confirmation',
-        element: <LegacyDocumentWorkflowRedirect />,
-      },
-      {
-        path: 'document/:projectId/quality-report',
-        element: (
-          <LazyPage>
-            <QualityReportPage />
-          </LazyPage>
-        ),
-      },
-      {
-        path: 'document/:projectId?/:sectionId?',
-        element: (
-          <LazyPage>
-            <DocumentFeature />
-          </LazyPage>
-        ),
-      },
-      {
-        path: 'articles/:projectId?',
-        element: (
-          <LazyPage>
-            <ArticlesFeature />
-          </LazyPage>
-        ),
-      },
-      {
-        // 文章库并进了「文章」
-        path: 'substack',
-        element: <Navigate to="/articles" replace />,
-      },
-      {
-        path: 'post',
-        element: (
-          <LazyPage>
-            <PostFeature />
-          </LazyPage>
-        ),
-      },
-      {
-        path: 'wechat',
-        element: (
-          <LazyPage>
-            <WechatFeature />
-          </LazyPage>
-        ),
-      },
-      {
-        path: 'glossary',
-        element: (
-          <LazyPage>
-            <GlossaryFeature />
-          </LazyPage>
-        ),
-      },
-      {
-        path: 'slack',
-        element: (
-          <LazyPage>
-            <SlackFeature />
-          </LazyPage>
-        ),
-      },
-      {
-        path: 'tools',
-        element: (
-          <LazyPage>
-            <ToolsFeature />
-          </LazyPage>
-        ),
-      },
-      {
-        path: 'skills',
-        element: (
-          <LazyPage>
-            <SkillsFeature />
-          </LazyPage>
-        ),
-      },
-      // 远程终端页已由 Skill 页取代，旧书签直接跳过去
-      {
-        path: 'terminal',
-        element: <Navigate to="/skills" replace />,
-      },
-      // Legacy route — redirect to new nested route
-      {
-        path: 'confirmation/:projectId',
-        element: <LegacyDocumentWorkflowRedirect />,
-      },
-      {
-        path: '*',
-        element: <NotFoundPage />,
+        // 页面出错时只替换内容区，顶栏和导航还在，可以直接点去别处
+        errorElement: <RouteErrorPage />,
+        children: [
+          {
+            index: true,
+            element: <Navigate to="/articles" replace />,
+          },
+          {
+            path: 'document/:projectId/confirmation',
+            element: <LegacyDocumentWorkflowRedirect />,
+          },
+          {
+            path: 'document/:projectId/quality-report',
+            element: (
+              <LazyPage>
+                <QualityReportPage />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'document/:projectId?/:sectionId?',
+            element: (
+              <LazyPage>
+                <DocumentFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'articles/:projectId?',
+            element: (
+              <LazyPage>
+                <ArticlesFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            // 文章库并进了「文章」
+            path: 'substack',
+            element: <Navigate to="/articles" replace />,
+          },
+          {
+            path: 'post',
+            element: (
+              <LazyPage>
+                <PostFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'wechat',
+            element: (
+              <LazyPage>
+                <WechatFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'glossary',
+            element: (
+              <LazyPage>
+                <GlossaryFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'slack',
+            element: (
+              <LazyPage>
+                <SlackFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'tools',
+            element: (
+              <LazyPage>
+                <ToolsFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'chat',
+            element: (
+              <LazyPage>
+                <ChatFeature />
+              </LazyPage>
+            ),
+          },
+          {
+            path: 'skills',
+            element: (
+              <LazyPage>
+                <SkillsFeature />
+              </LazyPage>
+            ),
+          },
+          // 远程终端页已由 Skill 页取代，旧书签直接跳过去
+          {
+            path: 'terminal',
+            element: <Navigate to="/skills" replace />,
+          },
+          // Legacy route — redirect to new nested route
+          {
+            path: 'confirmation/:projectId',
+            element: <LegacyDocumentWorkflowRedirect />,
+          },
+          {
+            path: '*',
+            element: <NotFoundPage />,
+          },
+        ],
       },
     ],
   },

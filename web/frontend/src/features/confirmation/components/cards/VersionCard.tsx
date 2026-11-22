@@ -20,7 +20,7 @@ export function VersionCard({
   return (
     <div
       className={cn(
-        'group relative rounded-2xl border-2 bg-card p-4 transition-all duration-200 shadow-soft',
+        'group relative rounded-2xl border-2 bg-card p-4 transition-all duration-200 shadow-thumb',
         'hover:shadow-hover hover:-translate-y-0.5',
         isAI ? 'border-l-4 border-l-primary' : 'border-l-4 border-l-success',
         isSelected

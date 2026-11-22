@@ -51,12 +51,14 @@ export function TitleGenerator({
   };
 
   return (
-    <div className="card-glass p-5">
+    <div className="rounded-xl border border-border-subtle bg-white p-4">
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-4 w-4 text-primary" />
-            <h4 className="text-sm font-semibold">生成标题</h4>
+            <h4 className="flex items-center gap-2 text-[13px] font-semibold text-text-secondary">
+              <Sparkles className="h-4 w-4 text-primary-500" />
+              生成标题
+            </h4>
             {isStale && titles.length > 0 && (
               <Badge variant="outline">内容已变更</Badge>
             )}
@@ -67,27 +69,22 @@ export function TitleGenerator({
             type="button"
             onClick={handleGenerate}
             disabled={isLoading || !canGenerate}
-            className="h-10 min-w-24 sm:h-9 sm:min-w-0"
+            className="h-8"
           >
-            {isGenerating ? <Loader2 className="h-3 w-3 animate-spin" /> : <Sparkles className="h-3 w-3" />}
+            {isGenerating ? <Loader2 className="animate-spin" /> : <Sparkles />}
             {isGenerating ? '生成中' : '生成'}
           </Button>
         </div>
 
-        <div>
-          <Input
-            value={instruction}
-            onChange={(e) => setInstruction(e.target.value)}
-            maxLength={TITLE_INSTRUCTION_MAX_LENGTH}
-            aria-label="标题生成要求"
-            placeholder="标题要求（可选），例如：突出核心观点，语气克制"
-            disabled={isLoading}
-            className="h-10 w-full"
-          />
-          <p className="mt-1 text-xs text-muted-foreground">
-            写一两个词即可，系统会自动补全为完整 prompt
-          </p>
-        </div>
+        <Input
+          value={instruction}
+          onChange={(e) => setInstruction(e.target.value)}
+          maxLength={TITLE_INSTRUCTION_MAX_LENGTH}
+          aria-label="标题生成要求"
+          placeholder="要求（可选，写一两个词就行）：突出核心观点、语气克制…"
+          disabled={isLoading}
+          className="h-9 w-full"
+        />
 
         {isStale && titles.length > 0 && (
           <p className="text-xs text-muted-foreground">
@@ -101,7 +98,7 @@ export function TitleGenerator({
               <button
                 key={i}
                 type="button"
-                className={`group relative min-h-12 rounded-lg border bg-white/70 p-3 pr-9 text-left text-sm leading-relaxed transition-colors hover:border-primary/50 active:border-primary active:bg-primary/5 ${selectedTitle === title ? 'border-primary bg-primary/5 ring-1 ring-primary/20' : ''}`}
+                className={`group relative min-h-12 rounded-lg border border-border-subtle bg-bg-tertiary/40 p-3 pr-9 text-left text-sm leading-relaxed transition-colors hover:border-primary-200 hover:bg-paper-hover disabled:opacity-60 ${selectedTitle === title ? 'border-primary-300 bg-primary-50' : ''}`}
                 onClick={() => handleCopy(title)}
                 disabled={Array.from(title).length > 20}
                 title={Array.from(title).length > 20 ? "标题超过20字，请重新生成" : "复制标题"}
@@ -115,9 +112,9 @@ export function TitleGenerator({
             ))}
           </div>
         ) : (
-          <div className="flex items-center justify-center rounded-lg border border-dashed py-6 text-sm text-muted-foreground">
-            生成后点击任意标题即可复制
-          </div>
+          <p className="py-2 text-xs text-text-muted">
+            {canGenerate ? '生成后点任意一个标题就能复制。' : '先粘贴原文或翻译出译文。'}
+          </p>
         )}
       </div>
     </div>

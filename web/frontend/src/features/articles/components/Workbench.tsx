@@ -34,6 +34,7 @@ import { AddAgentPopover, RetranslatePopover } from './TranslatePopovers';
 import { IconAction, PlainLine, VersionName } from './VersionHeader';
 import { AddVersionButton, VersionTabs } from './VersionTabs';
 import { WorkbenchTopBar } from './WorkbenchTopBar';
+import { confirmAction } from '@/shared/ui/confirm';
 
 function useIsMobile(): boolean {
   const query = '(max-width: 767px)';
@@ -248,7 +249,8 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     try {
       return await articlesApi.exportMarkdown(target, format);
     } catch (error) {
-      if (format === 'zh' && isQaBlocked(error) && window.confirm(`${(error as Error).message}\n\n仍然导出？`)) {
+      if (format === 'zh' && isQaBlocked(error)
+        && await confirmAction({ title: '质量检查没通过，仍然导出？', description: (error as Error).message, confirmLabel: '仍然导出' })) {
         return articlesApi.exportMarkdown(target, format, true);
       }
       throw error;
@@ -351,7 +353,11 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
         const sections = sectionsWithMissing(rows, version.text);
         if (!sections.length) return;
         const names = sections.map(section => `「${section.title}」`).join('、');
-        if (!window.confirm(`重译缺译段落所在的 ${sections.length} 章：${names}\n\n这几章里已有的译文（包括你改过的）会被新译文替换，其他章节不动。继续？`)) return;
+        if (!await confirmAction({
+          title: `重译缺译段落所在的 ${sections.length} 章？`,
+          description: `${names}\n\n这几章里已有的译文（包括你改过的）会被新译文替换，其他章节不动。`,
+          confirmLabel: '重译这几章',
+        })) return;
         await articlesApi.startWorkflow(version.id, { model: version.fillModel, autoAcceptTerms: true, sectionIds: sections.map(section => section.id) });
       }
       await refresh();

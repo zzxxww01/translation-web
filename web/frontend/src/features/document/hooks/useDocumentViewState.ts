@@ -22,7 +22,8 @@ interface RouteUpdateOptions {
 }
 
 function documentPath(projectId?: string | null, sectionId?: string | null): string {
-  if (!projectId) return '/document';
+  // 没选项目时回「文章」列表：长文编辑器只作为某篇文章的精修编辑器打开，不再有自己的首页
+  if (!projectId) return '/articles';
   if (!sectionId) return `/document/${encodeURIComponent(projectId)}`;
   return `/document/${encodeURIComponent(projectId)}/${encodeURIComponent(sectionId)}`;
 }

@@ -72,6 +72,8 @@ function issueTypeLabel(type: string): string {
     tone: '语气',
     conciseness: '简洁性',
     structure: '结构',
+    formatting: '格式',
+    fluency: '流畅度',
   };
   return labels[type] || type;
 }
@@ -230,7 +232,7 @@ export function QualityReportPage() {
               当前项目没有可读取的完整质量报告，或者报告服务暂时没有响应。已完成的报告会在这里显示为摘要，不需要进入其它页面。
             </p>
             <div className="flex justify-center gap-3">
-              <Button variant="outline" onClick={() => navigate('/document')}>
+              <Button variant="outline" onClick={() => navigate('/articles')}>
                 返回文档
               </Button>
               <Button onClick={() => window.location.reload()}>重新加载</Button>
@@ -247,7 +249,7 @@ export function QualityReportPage() {
         <Card className="max-w-md">
           <CardContent className="p-8 text-center">
             <p className="text-gray-600 mb-4">未找到质量报告</p>
-            <Button onClick={() => navigate('/document')}>返回文档列表</Button>
+            <Button onClick={() => navigate('/articles')}>回到文章列表</Button>
           </CardContent>
         </Card>
       </div>
@@ -304,7 +306,7 @@ export function QualityReportPage() {
     <div className="mx-auto max-w-5xl px-4 py-8">
       <header className="mb-6 flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">质量报告</h1>
+          <h1 className="text-2xl text-text-primary">质量报告</h1>
           <p className="mt-1 text-sm text-gray-600">{displayTitle}</p>
           <p className="mt-2 text-xs text-gray-500">生成时间：{formatDate(report.generated_at)}</p>
         </div>
@@ -315,7 +317,7 @@ export function QualityReportPage() {
           </Button>
           <Button
             variant="outline"
-            onClick={() => navigate('/document')}
+            onClick={() => navigate('/articles')}
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             返回文档
@@ -332,7 +334,7 @@ export function QualityReportPage() {
               <p className="mt-1 text-sm text-gray-700">{level.description}</p>
             </div>
           </div>
-          <div className={`text-5xl font-bold ${level.tone}`}>{report.overall_score}</div>
+          <div className={`font-[family-name:var(--font-display)] text-5xl font-semibold ${level.tone}`}>{report.overall_score}</div>
         </CardContent>
       </Card>
 
@@ -340,19 +342,19 @@ export function QualityReportPage() {
         <Card>
           <CardContent className="p-5">
             <p className="text-sm text-gray-500">问题总数</p>
-            <p className="mt-2 text-3xl font-bold text-gray-900">{report.total_issues}</p>
+            <p className="mt-2 font-[family-name:var(--font-display)] text-[28px] font-semibold leading-none text-text-primary">{report.total_issues}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-5">
             <p className="text-sm text-gray-500">建议复核章节</p>
-            <p className="mt-2 text-3xl font-bold text-gray-900">{needsReviewCount}</p>
+            <p className="mt-2 font-[family-name:var(--font-display)] text-[28px] font-semibold leading-none text-text-primary">{needsReviewCount}</p>
           </CardContent>
         </Card>
         <Card>
           <CardContent className="p-5">
             <p className="text-sm text-gray-500">已尝试修订</p>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
+            <p className="mt-2 font-[family-name:var(--font-display)] text-[28px] font-semibold leading-none text-text-primary">
               {report.issues_by_status.revision_attempted || 0}
             </p>
           </CardContent>
@@ -360,7 +362,7 @@ export function QualityReportPage() {
         <Card>
           <CardContent className="p-5">
             <p className="text-sm text-gray-500">已验证修复</p>
-            <p className="mt-2 text-3xl font-bold text-gray-900">
+            <p className="mt-2 font-[family-name:var(--font-display)] text-[28px] font-semibold leading-none text-text-primary">
               {report.issues_by_status.auto_fixed || 0}
             </p>
           </CardContent>

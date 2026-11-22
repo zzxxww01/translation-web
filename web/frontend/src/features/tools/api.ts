@@ -1,7 +1,6 @@
 import { apiClient } from '../../shared/api/client';
 import { REQUEST_TIMEOUTS } from '../../shared/constants';
 import type {
-  Task,
   TranslateTextDto,
   TranslateTextResult,
   EmailReplyDto,
@@ -14,13 +13,6 @@ import type {
  * 工具箱 API
  */
 export const toolsApi = {
-  // 获取任务列表
-  getTasks: () => apiClient.get<Task[]>('/tasks'),
-
-  // 任务管理
-  saveTasks: (tasks: Task[]) =>
-    apiClient.post('/tasks', tasks),
-
   // 文本翻译
   translateText: (data: TranslateTextDto) =>
     apiClient.post<TranslateTextResult>('/tools/translate', data, {

@@ -47,7 +47,7 @@ export function SectionQualityCard({ section, onViewDetails }: SectionQualityCar
             </div>
           </div>
           <div className="text-right">
-            <div className={cn('text-3xl font-bold', scoreColor)}>
+            <div className={cn('font-[family-name:var(--font-display)] text-[28px] font-semibold leading-none', scoreColor)}>
               {section.overall_score}
             </div>
             <div className="text-xs text-gray-500">总体评分</div>

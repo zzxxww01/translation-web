@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Pencil, Tag, Trash2 } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { ButtonExtended as Button } from '@/components/ui/button-extended';
+import { Button } from '@/components/ui/Button';
+import { buttonVariants } from '@/components/ui/button-variants';
 import {
   Table,
   TableHeader,
@@ -70,10 +71,41 @@ function TermBadges({ term, showSource }: { term: GlossaryTerm; showSource: bool
           项目条目不生效
         </Badge>
       ) : null}
-      <Badge variant={(term.status || 'active') === 'disabled' ? 'secondary' : 'default'}>
-        {(term.status || 'active') === 'disabled' ? '停用' : '启用'}
-      </Badge>
+      {/* 启用是默认状态，不再每行都标一遍；只标出停用的 */}
+      {(term.status || 'active') === 'disabled' ? <Badge variant="warning">已停用</Badge> : null}
     </div>
+  );
+}
+
+/** 更新时间：今年的只写「11/22 18:30」，往年的加年份 */
+function formatUpdatedAt(value?: string | null) {
+  if (!value) return '—';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return '—';
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const day = `${date.getMonth() + 1}/${date.getDate()} ${pad(date.getHours())}:${pad(date.getMinutes())}`;
+  return date.getFullYear() === new Date().getFullYear() ? day : `${date.getFullYear()}/${day}`;
+}
+
+/** 行内操作：两个图标按钮，删除悬停才变红，不再满屏红字按钮 */
+function RowActions({ isEffectiveView, onEdit, onDelete }: {
+  isEffectiveView: boolean;
+  onEdit: () => void;
+  onDelete: () => void;
+}) {
+  return (
+    <>
+      <Button size="icon" variant="ghost" className="h-8 w-8" onClick={onEdit}
+        title={isEffectiveView ? '编辑来源' : '编辑'} aria-label={isEffectiveView ? '编辑来源' : '编辑'}>
+        <Pencil />
+      </Button>
+      {!isEffectiveView ? (
+        <Button size="icon" variant="ghost" className="h-8 w-8 hover:bg-error-light hover:text-error" onClick={onDelete}
+          title="删除" aria-label="删除">
+          <Trash2 />
+        </Button>
+      ) : null}
+    </>
   );
 }
 
@@ -94,7 +126,7 @@ export function TermTable({
 
   if (!terms.length) {
     return (
-      <div className="rounded-md border border-dashed border-border p-10 text-center text-muted-foreground">
+      <div className="rounded-xl border border-dashed border-border p-10 text-center text-sm text-text-muted">
         当前筛选条件下没有术语。
       </div>
     );
@@ -114,7 +146,7 @@ export function TermTable({
   return (
     <div key={tableKey}>
       <div className="space-y-2 md:hidden">
-        <label className="flex items-center gap-2 rounded-md border bg-background px-3 py-2 text-sm">
+        <label className="flex items-center gap-2 px-1 py-1 text-sm text-text-secondary">
           <input
             type="checkbox"
             checked={allSelected}
@@ -131,7 +163,7 @@ export function TermTable({
             <article
               key={term.original}
               className={cn(
-                'rounded-md border bg-background p-4',
+                'rounded-xl border border-border-subtle bg-white p-4',
                 isFocused && 'border-primary ring-1 ring-primary/30'
               )}
             >
@@ -169,36 +201,22 @@ export function TermTable({
                 </p>
               ) : null}
 
-              <div className="mt-4 flex gap-2">
-                <Button
-                  size="sm"
-                  variant="outline"
-                  leftIcon={<Pencil className="h-4 w-4" />}
-                  onClick={() => onFocusTerm(term)}
-                >
-                  {isEffectiveView ? '编辑来源' : '编辑'}
-                </Button>
-                {!isEffectiveView ? (
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="text-destructive hover:text-destructive"
-                    leftIcon={<Trash2 className="h-4 w-4" />}
-                    onClick={() => setPendingDeleteOriginal(term.original)}
-                  >
-                    删除
-                  </Button>
-                ) : null}
+              <div className="mt-3 flex justify-end gap-1">
+                <RowActions
+                  isEffectiveView={isEffectiveView}
+                  onEdit={() => onFocusTerm(term)}
+                  onDelete={() => setPendingDeleteOriginal(term.original)}
+                />
               </div>
             </article>
           );
         })}
       </div>
 
-      <div className="hidden overflow-x-auto rounded-md border border-border bg-background md:block">
+      <div className="hidden overflow-x-auto rounded-xl border border-border-subtle bg-white md:block">
         <Table>
           <TableHeader>
-            <TableRow className="bg-muted/50">
+            <TableRow className="bg-bg-tertiary/60 hover:bg-bg-tertiary/60">
               {!isEffectiveView ? (
                 <TableHead>
                   <input
@@ -211,10 +229,10 @@ export function TermTable({
               ) : null}
               <TableHead>原文</TableHead>
               <TableHead>译法</TableHead>
-              <TableHead>策略与来源</TableHead>
+              <TableHead>策略</TableHead>
               <TableHead>标签</TableHead>
-              <TableHead>更新时间</TableHead>
-              <TableHead>操作</TableHead>
+              <TableHead>更新</TableHead>
+              <TableHead className="w-20"><span className="sr-only">操作</span></TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -223,7 +241,7 @@ export function TermTable({
               const isFocused = focusedOriginal === term.original && !isCreating;
               const details = effectiveDetails(term);
               return (
-                <TableRow key={term.original} className={cn(isFocused && 'bg-primary/5')}>
+                <TableRow key={term.original} className={cn('group', isFocused && 'bg-primary/5')}>
                   {!isEffectiveView ? (
                     <TableCell className="align-top">
                       <input
@@ -255,28 +273,20 @@ export function TermTable({
                           <Badge key={`${term.original}-${tag}`} variant="secondary">{tag}</Badge>
                         ))
                       ) : (
-                        <span className="text-sm text-muted-foreground">未分类</span>
+                        <span className="text-sm text-text-disabled">—</span>
                       )}
                     </div>
                   </TableCell>
                   <TableCell className="whitespace-nowrap align-top text-sm text-muted-foreground">
-                    {term.updated_at ? new Date(term.updated_at).toLocaleString() : '-'}
+                    {formatUpdatedAt(term.updated_at)}
                   </TableCell>
                   <TableCell className="align-top">
-                    <div className="flex items-center gap-2">
-                      <Button size="sm" variant="outline" onClick={() => onFocusTerm(term)}>
-                        {isEffectiveView ? '编辑来源' : '编辑'}
-                      </Button>
-                      {!isEffectiveView ? (
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="text-destructive hover:text-destructive"
-                          onClick={() => setPendingDeleteOriginal(term.original)}
-                        >
-                          删除
-                        </Button>
-                      ) : null}
+                    <div className="flex items-center justify-end gap-0.5">
+                      <RowActions
+                        isEffectiveView={isEffectiveView}
+                        onEdit={() => onFocusTerm(term)}
+                        onDelete={() => setPendingDeleteOriginal(term.original)}
+                      />
                     </div>
                   </TableCell>
                 </TableRow>
@@ -294,7 +304,7 @@ export function TermTable({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>确认删除</AlertDialogTitle>
+            <AlertDialogTitle>删除「{pendingDeleteOriginal}」？</AlertDialogTitle>
             <AlertDialogDescription>
               {activeScope === 'project'
                 ? '删除项目术语后只会移除项目覆盖，全局术语不受影响。'
@@ -303,8 +313,8 @@ export function TermTable({
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>取消</AlertDialogCancel>
-            <AlertDialogAction onClick={() => void handleDeleteConfirm()}>
-              确认删除
+            <AlertDialogAction className={buttonVariants({ variant: 'destructive' })} onClick={() => void handleDeleteConfirm()}>
+              删除
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
@@ -326,7 +336,7 @@ export function GroupedTermView({
 }: Omit<GroupedTermTableProps, 'terms' | 'tableKey'>) {
   if (!groupedTerms.length) {
     return (
-      <div className="rounded-md border border-dashed border-border p-10 text-center text-muted-foreground">
+      <div className="rounded-xl border border-dashed border-border p-10 text-center text-sm text-text-muted">
         当前筛选条件下没有术语。
       </div>
     );
@@ -337,10 +347,10 @@ export function GroupedTermView({
       {groupedTerms.map(group => (
         <section key={group.tag} className="space-y-3">
           <div className="flex items-center gap-3">
-            <Badge variant="secondary" className="px-3 py-1 text-sm">
-              <Tag className="mr-1 h-3.5 w-3.5" />
+            <h3 className="flex items-center gap-1.5 text-sm font-semibold text-text-primary">
+              <Tag className="h-3.5 w-3.5 text-text-muted" />
               {group.tag}
-            </Badge>
+            </h3>
             <span className="text-sm text-muted-foreground">{group.terms.length} 条</span>
           </div>
           <TermTable

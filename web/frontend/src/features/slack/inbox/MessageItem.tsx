@@ -167,6 +167,7 @@ export function MessageItem({ message, compact = false, onOpenThread, active = f
   return (
     <div
       onClick={onTap}
+      title={marked ? '这条用作了翻译原文' : undefined}
       className={cn(
         'group relative flex gap-2.5 px-5 transition-colors',
         compact ? 'py-0.5' : 'pt-2 pb-1',
