@@ -128,7 +128,14 @@ Codex 清单来自服务用户的 `CODEX_HOME/models_cache.json`，Claude 清单
   存在 `<home>/claude-limits.json`）；Codex：Version、Model、Directory、Account、Session、额度窗口和 credits
   （实时问 `codex app-server`）；Antigravity：Version、会话、目录、模型和 `agy -p=/usage`。
   新对话第一句就发也行：只回状态卡、不启动 agent，下一条消息才算开头（仍带 skill 提示，标题也按它起）。
+- **`/effort`、`/model`（Claude、Codex）**：页面自己处理，记进 `meta.effort` / `meta.model`，每次起进程都带上
+  （Claude 走 SDK 的 `effort` / `model`，Codex 走 `-c model_reasoning_effort=…` / `-m`），整个对话一直有效。
+  CLI 自己的 `/effort` 只对当前进程有效，而这里每轮结束几秒就关进程，所以不能原样转发。进程开着时改了设置，
+  下一轮开始前按新设置重起（靠 session_id 续接）；正在干活时这一轮做完后生效。不带参数显示当前值，`auto` / `default` 恢复默认。
+  强度档位：Claude `low|medium|high|xhigh|max`，Codex `minimal|low|medium|high|xhigh`。第一句就发也行，不启动 agent。
 - **其他原生斜杠指令**：Claude 的 `/usage`、`/context`、`/compact` 等原样发给 CLI，输出只在结束消息里的也会显示出来；
+  新对话第一句是 `/usage`、`/context`、`/cost` 时原样发、不套 skill，下一条消息才算开头。`/help`、`/memory`、`/config` 这类
+  在非交互模式里不可用（CLI 回「isn't available in this environment」）；
   Antigravity 的 `/usage`（`/quota`）、`/credits`、`/help`、`/skills`、`/agents`、`/changelog` 不能在对话进程里跑，单独跑一次 `agy -p=…`；
   Codex 的 exec 模式没有斜杠指令。
   接口：`POST /runs/{id}/messages` 带 `mode=queue|now`（默认 now），`PUT|DELETE /runs/{id}/held/{hid}`，`POST /runs/{id}/held/{hid}/send`。

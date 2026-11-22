@@ -147,7 +147,7 @@ class CodexMapper:
         }
 
 
-def build_command(config: Config, thread_id: str | None, model: str | None = None) -> list[str]:
+def build_command(config: Config, thread_id: str | None, model: str | None = None, effort: str | None = None) -> list[str]:
     command = shlex.split(config.codex_bin) + ["exec"]
     if thread_id:
         command += ["resume"]
@@ -159,6 +159,8 @@ def build_command(config: Config, thread_id: str | None, model: str | None = Non
     model = model or config.codex_model or latest_model(config.codex_home)
     if model:
         command += ["-m", model]
+    if effort:
+        command += ["-c", f'model_reasoning_effort="{effort}"']  # 页面上 /effort 设的
     if thread_id:
         command += [thread_id]
     return command + ["-"]  # 提示词从 stdin 读，读完就关，不会卡在「Reading additional input」
@@ -220,7 +222,7 @@ class CodexSession:
                     self._working = False
 
     async def _turn(self, prompt: str) -> None:
-        command = build_command(self._config, self._mapper.thread_id, self._model)
+        command = build_command(self._config, self._mapper.thread_id, self._model, self._spec.effort)
         logger.info("[codex %s] %s", self._spec.run_id, " ".join(command[:-1]))
         startup = asyncio.create_task(asyncio.create_subprocess_exec(
             *command,

@@ -343,7 +343,7 @@ async def test_status_shows_only_the_harness_native_card(tmp_path, factory):
     assert report["title"] == "/status · Claude"
     assert report["lines"] == ["Version: claude 原生版本", "Current session: 28% used"]
     assert natives.status_session == {"session_id": "sess-n", "cwd": str(runner.store.run_dir(run_id)),
-                                      "model": "claude-opus-5-5"}
+                                      "model": "claude-opus-5-5", "effort": None}
 
 
 async def test_agy_local_commands_run_on_their_own_and_never_reach_the_model(tmp_path, factory):

@@ -43,6 +43,9 @@ def test_session_model_and_cli_override_are_forwarded(tmp_path):
     options = build_options(config, spec)
     assert options.model == "opus" and options.resume == "existing"
     assert options.cli_path == str(tmp_path / "claude")
+    assert options.effort is None
+    with_effort = SessionSpec(run_id="r", cwd=tmp_path, resume=None, on_permission=None, effort="xhigh")
+    assert build_options(config, with_effort).effort == "xhigh"
 
 
 def map_message(message):

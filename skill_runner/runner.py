@@ -43,6 +43,16 @@ ACTIVE_STATUSES = {"running", "waiting"}
 QUEUED = "queued"
 # 页面自己处理的命令（不发给模型）
 STATUS_COMMANDS = {"/status", "/状态"}
+# CLI 的 /effort、/model 只对当前进程有效，而这里每轮结束几秒就关进程：页面自己记在 RunMeta 里，每次起进程都带上
+EFFORT_LEVELS = {
+    "claude": ("low", "medium", "high", "xhigh", "max"),
+    "codex": ("minimal", "low", "medium", "high", "xhigh"),
+}
+SETTING_COMMANDS = {"/effort", "/model"}
+RESET_WORDS = {"auto", "default", "默认"}
+# Claude Code 非交互模式下能直接回答、不花额度的查询指令（2026-11-23 实测；/help、/memory 等在这里不可用）。
+# 新对话第一句是它们时原样发、不套 skill
+CLI_INFO_COMMANDS = {"/usage", "/context", "/cost"}
 
 AWAIT_MARK = "【等待确认】"
 # 只认回复末尾的标记（和页面 state.ts 一致）：正文里提到这几个字不算在等确认
@@ -119,6 +129,7 @@ class SessionSpec:
     prompt_note: str = ""
     harness: str = "claude"
     model: str | None = None
+    effort: str | None = None
 
 
 class AgentSession(Protocol):
@@ -173,6 +184,8 @@ class _Run:
     # 这一轮最后一段文字（判断是不是以等待标记结尾）
     last_text: str = ""
     closing: bool = False
+    # /effort、/model 改过，进程还是按旧设置起的：下一轮开始前重起
+    stale_settings: bool = False
     pending: dict[str, _Pending] = field(default_factory=dict)
     subscribers: set[asyncio.Queue] = field(default_factory=set)
     lock: asyncio.Lock = field(default_factory=asyncio.Lock)
@@ -389,6 +402,9 @@ class Runner:
         if await self._page_command(run, message, attachments):
             # 新对话第一句就是 /status：只回状态卡，不启动 agent；下一条消息才是真正的开头（仍走这里，带 skill 提示）
             return run.meta
+        if run.meta.harness == "claude" and not attachments and message.strip().lower() in CLI_INFO_COMMANDS:
+            # /usage、/context 这类 CLI 自己的指令：原样发，下一条消息才是真正的开头（那时再带 skill 提示）
+            return await self._deliver(run, message, attachments, message.strip())
         run.meta.begun = True
         self.store.save_meta(run.meta)
         prompt = build_prompt(run.meta.skill, message, attachments, run.meta.harness, self.config.shared_skills_dir)
@@ -402,8 +418,8 @@ class Runner:
         if await self._page_command(run, message, attachments):
             return run.meta
         if not run.meta.begun:
-            # 开头只发过 /status：这条才是第一条消息，标题也按它重起
-            if run.meta.title.strip().lower() in STATUS_COMMANDS:
+            # 开头只发过 /status、/effort 这类指令：这条才是第一条消息，标题也按它重起
+            if run.meta.title.strip().startswith("/"):
                 run.meta.title = make_title(message, attachments)
             return await self.begin(run_id, message, attachments)
         if run.pending and not attachments:
@@ -432,6 +448,12 @@ class Runner:
                 f"{key}: {value}" for key, value in session.items() if value]
             self._emit(run, {"type": "report", "title": f"/status · {harness_label(harness)}", "lines": lines})
             return True
+        command, _, arg = text.partition(" ")
+        if command.lower() in SETTING_COMMANDS and harness in EFFORT_LEVELS:
+            self._emit(run, {"type": "user", "text": text, "files": []})
+            lines = self._apply_setting(run, command.lower(), arg.strip())
+            self._emit(run, {"type": "report", "title": f"{command.lower()} · {harness_label(harness)}", "lines": lines})
+            return True
         if self.natives and self.natives.is_local(harness, text):
             self._emit(run, {"type": "user", "text": text, "files": []})
             try:
@@ -442,11 +464,46 @@ class Runner:
             return True
         return False
 
+    def _apply_setting(self, run: _Run, command: str, arg: str) -> list[str]:
+        """/effort、/model：记进 RunMeta，进程下次起来时带上。返回给页面看的几行。"""
+        meta = run.meta
+        if command == "/effort":
+            levels = EFFORT_LEVELS[meta.harness]
+            usage = f"用法：/effort <{'|'.join(levels)}>，/effort auto 恢复默认"
+            if not arg:
+                return [f"当前推理强度：{meta.effort or '默认'}", usage]
+            if arg.lower() in RESET_WORDS:
+                meta.effort = None
+            elif arg.lower() in levels:
+                meta.effort = arg.lower()
+            else:
+                return [f"不认识的强度「{arg}」", usage]
+            done = f"推理强度：{meta.effort or '默认'}"
+        else:
+            usage = "用法：/model <模型名>，/model default 恢复默认"
+            if not arg:
+                return [f"当前模型：{meta.model or meta.actual_model or '默认'}", usage]
+            if arg.lower() in RESET_WORDS:
+                meta.model = None
+            else:
+                try:
+                    meta.model = validate_model(arg)
+                except ValueError as exc:
+                    return [str(exc), usage]
+            done = f"模型：{meta.model or '默认'}"
+        self.store.save_meta(meta)
+        if run.session is None:
+            return [done, "下一句起生效，整个对话一直有效"]
+        run.stale_settings = True
+        if run.meta.status in ACTIVE_STATUSES:
+            return [done, "这一轮做完后生效，之后整个对话一直有效"]
+        return [done, "下一句起生效，整个对话一直有效"]
+
     def status_session(self, run: _Run) -> dict[str, Any]:
         """/status 卡片里这个对话自己的部分：会话 ID、目录、模型。"""
         meta = run.meta
         return {"session_id": meta.session_id, "cwd": str(self.store.run_dir(meta.id)),
-                "model": meta.actual_model or meta.model or None}
+                "model": meta.actual_model or meta.model or None, "effort": meta.effort}
 
     def _working(self, run: _Run) -> bool:
         return run.meta.status in ACTIVE_STATUSES or run.meta.status == QUEUED or self._session_busy(run)
@@ -541,6 +598,9 @@ class Runner:
     async def _start_turn(self, run: _Run, prompt: str) -> None:
         """持有 run.lock 时调用：需要就起进程，然后把这一轮发出去。"""
         run.last_text = ""
+        if run.session is not None and run.stale_settings and run.meta.status not in ACTIVE_STATUSES \
+                and not self._session_busy(run):
+            await self._close_session(run)  # /effort、/model 改过：按新设置重起进程，靠 session_id 续接
         if run.session is None:
             await self._open(run)
         self._cancel_idle(run)
@@ -657,7 +717,9 @@ class Runner:
             harness=run.meta.harness,
             # Codex 续接时沿用这次运行已经定下的模型（中途清单更新也不换）
             model=run.meta.model or (run.meta.actual_model if run.meta.harness == "codex" and run.meta.session_id else None),
+            effort=run.meta.effort,
         )
+        run.stale_settings = False
         run.opening = True
         try:
             session = await self.session_factory(spec)
