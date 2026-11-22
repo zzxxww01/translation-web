@@ -5,8 +5,12 @@ import { Button } from '@/components/ui/Button';
 import { PANE, PANE_FOOTER, PANE_HEADER, PANE_TEXTAREA } from '@/shared/ui/pane';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowRightLeft, Copy, Languages, RotateCw } from 'lucide-react';
+import { ArrowRightLeft, Copy, Languages, RotateCw, X } from 'lucide-react';
 import { copyToClipboard } from '@/shared/utils';
+
+// 工具箱里的两栏比帖子翻译更高：吃满一屏，不设 640px 上限。
+// 用 min-h 撑高：textarea 带 flex-1（flex-basis 0），单写 h 不生效
+const TALL_TEXTAREA = `${PANE_TEXTAREA} min-h-[45svh] lg:min-h-[max(480px,calc(100svh-280px))] lg:max-h-none`;
 
 export function TextTranslator() {
   const translateMutation = useTranslateText();
@@ -37,6 +41,11 @@ export function TextTranslator() {
     }
   };
 
+  const handleClear = () => {
+    setSource('');
+    setTarget('');
+  };
+
   const handleCopy = async () => {
     if (target) {
       const ok = await copyToClipboard(target);
@@ -45,33 +54,49 @@ export function TextTranslator() {
   };
 
   return (
-    <div className="grid min-w-0 gap-4 md:grid-cols-2">
+    <div className="grid min-w-0 gap-5 md:grid-cols-2">
       <section className={PANE} aria-labelledby="translator-source-label">
         <header className={PANE_HEADER}>
           <label id="translator-source-label" className="text-[13px] font-semibold text-text-secondary">原文</label>
-          <Select value={sourceLang} onValueChange={setSourceLang}>
-            <SelectTrigger className="h-7 w-auto gap-1 rounded-full border-transparent bg-bg-inset px-3 text-xs hover:border-transparent" aria-label="原文语言">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="auto">自动检测</SelectItem>
-              <SelectItem value="en">英语</SelectItem>
-              <SelectItem value="zh">中文</SelectItem>
-            </SelectContent>
-          </Select>
+          <div className="flex items-center gap-1">
+            {source && (
+              <Button variant="ghost" size="sm" className="h-7 px-2 text-text-tertiary" onClick={handleClear} title="清空原文和译文" aria-label="清空">
+                <X />
+              </Button>
+            )}
+            <Select value={sourceLang} onValueChange={setSourceLang}>
+              <SelectTrigger className="h-7 w-auto gap-1 rounded-full border-transparent bg-bg-inset px-3 text-xs hover:border-transparent" aria-label="原文语言">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="auto">自动检测</SelectItem>
+                <SelectItem value="en">英语</SelectItem>
+                <SelectItem value="zh">中文</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </header>
         <Textarea
           value={source}
           onChange={(e) => setSource(e.target.value)}
-          placeholder="输入要翻译的文本…"
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' && (e.metaKey || e.ctrlKey)) {
+              e.preventDefault();
+              void handleTranslate();
+            }
+          }}
+          placeholder="输入或粘贴要翻译的文本…（Ctrl/⌘ + Enter 翻译）"
           aria-labelledby="translator-source-label"
-          className={PANE_TEXTAREA}
+          className={TALL_TEXTAREA}
         />
         <footer className={PANE_FOOTER}>
-          <Button variant="ghost" size="sm" onClick={handleSwap} title="交换语言和内容">
-            <ArrowRightLeft />
-            交换
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button variant="ghost" size="sm" onClick={handleSwap} title="交换语言和内容">
+              <ArrowRightLeft />
+              交换
+            </Button>
+            <span className="text-xs tabular-nums text-text-tertiary">{source.length} 字</span>
+          </div>
           <Button size="sm" className="h-9 min-w-24" onClick={handleTranslate} disabled={!source.trim() || translateMutation.isPending}>
             {translateMutation.isPending ? <RotateCw className="animate-spin" /> : <Languages />}
             翻译
@@ -91,9 +116,10 @@ export function TextTranslator() {
           placeholder="翻译结果会出现在这里"
           aria-labelledby="translator-target-label"
           aria-live="polite"
-          className={`${PANE_TEXTAREA} bg-paper-primary`}
+          className={`${TALL_TEXTAREA} bg-paper-primary ${translateMutation.isPending ? 'opacity-60' : ''}`}
         />
-        <footer className={`${PANE_FOOTER} justify-end`}>
+        <footer className={PANE_FOOTER}>
+          <span className="px-2 text-xs tabular-nums text-text-tertiary">{target ? `${target.length} 字` : ''}</span>
           <Button variant="outline" size="sm" className="h-9" onClick={handleCopy} disabled={!target}>
             <Copy />
             复制译文
