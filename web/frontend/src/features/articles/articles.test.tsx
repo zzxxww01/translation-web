@@ -449,6 +449,48 @@ describe('Workbench', () => {
     expect(host.querySelector('[data-testid="list"]')?.textContent).toBe('列表，选中 p1');
   });
 
+  it('shows the cover, lists every image, zooms with arrow keys and locates an image in all three panes', async () => {
+    api.workbench.mockResolvedValue({
+      ...DATA,
+      project: { ...DATA.project, cover_image: 'https://cdn/cover.png' },
+      rows: [...DATA.rows,
+        { key: 'section:s2', kind: 'section', section_id: 's2', paragraph_id: null, source: 'Supply', web: '供给', alt: { 'p1--argon': null } },
+        { key: 's2/p000', kind: 'image', section_id: 's2', paragraph_id: 'p000', source: 'https://cdn/y.png', image: 'https://cdn/y.png', web: null, alt: { 'p1--argon': null } }],
+    });
+    await render(<Workbench projectId="p1" />);
+    await flush();
+    // 封面在每一栏最上面，点了放大
+    expect(host.querySelectorAll('button[aria-label="放大封面"]')).toHaveLength(3);
+    const dialogText = () => document.body.querySelector('[role="dialog"]')?.textContent ?? '';
+
+    await act(async () => { (host.querySelectorAll('button[aria-label="放大这张图"]')[0] as HTMLButtonElement).click(); });
+    expect(dialogText()).toContain('2 / 3');
+    expect(dialogText()).toContain('图 1 · 引言');
+    const viewer = document.body.querySelector('[role="dialog"]') as HTMLElement;
+    await act(async () => { viewer.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })); });
+    expect(dialogText()).toContain('图 2 · 供给');
+    await act(async () => { viewer.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true })); });
+    expect(dialogText()).toContain('1 / 3');
+    expect(dialogText()).not.toContain('在文中定位'); // 封面没有文中位置
+    await act(async () => { (document.body.querySelector('button[aria-label="关闭"]') as HTMLButtonElement).click(); });
+    await flush();
+    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
+
+    // 顶栏「图片 3」→ 一览 → 点第二张图：关掉一览，三栏都滚到它
+    const scrolled: string[] = [];
+    host.querySelectorAll<HTMLElement>('[data-pane-body]').forEach(pane => {
+      pane.scrollTo = (() => { scrolled.push(pane.dataset.paneBody ?? ''); }) as typeof pane.scrollTo;
+    });
+    await act(async () => { buttonIn(host, '图片 3').click(); });
+    await flush();
+    const gallery = inPopover();
+    expect(gallery.textContent).toContain('文中图片');
+    await act(async () => { (gallery.querySelector('button[title="跳到文中这张图"]:not([disabled])') as HTMLButtonElement).click(); });
+    await flush();
+    expect(document.body.querySelector('[role="dialog"]')).toBeNull();
+    expect(scrolled.sort()).toEqual(['compare', 'main', 'source']);
+  });
+
   it('adds a new agent from ＋ and waits for the old run to stop before starting it', async () => {
     api.workbench.mockResolvedValue({ ...DATA, project: { ...DATA.project, claude_run_id: 'old-run' } });
     agentRun.current = runningAgent;

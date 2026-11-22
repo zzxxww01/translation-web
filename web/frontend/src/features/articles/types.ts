@@ -16,6 +16,8 @@ export interface WorkbenchProject {
   title: string;
   title_translation: string | null;
   original_url: string | null;
+  /** 封面（og:image）；旧项目可能没有 */
+  cover_image?: string | null;
   created_at: string;
   claude_run_id: string | null;
   /** 用户选的主译本（主项目或孪生项目 id）；null = 没选过 */

@@ -18,12 +18,14 @@ import { copyForWechat, copyFullText, printAsPdf, sendToWechatEditor } from '../
 import { editHistory, undoShortcut } from '../lib/history';
 import { loadCollapsed, PANES, saveCollapsed, togglePane, type Collapsed } from '../lib/panes';
 import { sectionsWithMissing } from '../lib/tracks';
+import { articleImages, COVER_KEY } from '../lib/images';
 import { FOCUS_RING, MEASURE, onTabKeys, STROKE } from '../lib/ui';
 import { buildVersions, defaultCompare, pickPrimary, runActive, type ImportProblem, type VersionAction, type VersionView } from '../lib/versions';
 import type { PaneId, Workbench as WorkbenchData, WorkbenchRow } from '../types';
 import { ChangesDrawer, type ChangesTarget } from './ChangesDrawer';
 import { ColumnMenu, type MenuItem } from './ColumnMenu';
 import { CompareEmpty } from './CompareEmpty';
+import { ImageGallery, ImageViewer } from './ImageViewer';
 import { PaneGrid, type PaneColumn } from './PaneGrid';
 import { SaveStatus } from './SaveStatus';
 import { StatusLine } from './StatusLine';
@@ -125,6 +127,10 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const [saving, setSaving] = useState(false);
   const [markBusy, setMarkBusy] = useState(false);
   const [readingJump, setReadingJump] = useState(0);
+  const [galleryOpen, setGalleryOpen] = useState(false);
+  /** 正在看大图的是第几张；null = 没在看 */
+  const [viewing, setViewing] = useState<number | null>(null);
+  const [focusImage, setFocusImage] = useState<{ key: string; seq: number } | null>(null);
   const markLock = useRef(false);
   const importTried = useRef<string | null>(null);
   /** 这个任务又跑过一轮：再次空闲时要重新导入（即使上次导入的就是它） */
@@ -142,6 +148,17 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
   const compare = others.find(version => version.id === compareId) ?? defaultCompare(versions, primary, run);
   const title = project.title_translation || primary.variant?.title_translation || project.title;
   const stopping = run && runActive(run) ? harnessLabel(run.harness) : null;
+  const images = articleImages(rows, project.cover_image, row => primary.text(row) || row.source);
+  const openImage = (key: string) => {
+    const index = images.findIndex(image => image.key === key);
+    if (index >= 0) setViewing(index);
+  };
+  /** 关掉大图和图片一览，三栏滚到这张图 */
+  const locateImage = (key: string) => {
+    setViewing(null);
+    setGalleryOpen(false);
+    setFocusImage(current => ({ key, seq: (current?.seq ?? 0) + 1 }));
+  };
   const words = useMemo(() => rows.reduce(
     (count, row) => (row.kind === 'image' ? count : count + (row.source.match(/[A-Za-z0-9][A-Za-z0-9'’.-]*/g)?.length ?? 0)), 0), [rows]);
   const refresh = useCallback(
@@ -553,7 +570,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
     <div className="flex h-full min-h-0 flex-col bg-bg-primary">
       {!immersive && (
         <WorkbenchTopBar projectId={project.id} title={title} original={title !== project.title ? project.title : null}
-          onShowList={onShowList}
+          onShowList={onShowList} imageCount={images.length} onShowImages={() => setGalleryOpen(true)}
           save={<SaveStatus saving={saving} onSave={() => void saveNow()} compact={isMobile} />} compact={isMobile}
           mark={readingProgress} onJump={() => setReadingJump(n => n + 1)} onClearMark={() => void markReading(null)} markBusy={markBusy}
           onExportPrimary={() => void exportVersion(primary.id, 'zh')} primaryActions={primaryActions} exportItems={exportItems}
@@ -576,6 +593,7 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
 
       <PaneGrid rows={rows} columns={columns} collapsed={collapsed} onToggle={toggle} mobilePane={isMobile ? mobilePane : null}
         readingMark={data.reading_mark} markBusy={markBusy} onMark={key => void markReading(key)} jump={readingJump}
+        cover={images[0]?.key === COVER_KEY ? images[0].src : null} onOpenImage={openImage} focusImage={focusImage}
         corner={immersive ? (
           <IconAction label="退出沉浸模式" title="退出沉浸模式（Esc）" onClick={exitImmersive}>
             <Minimize2 aria-hidden className="h-4 w-4" strokeWidth={STROKE} />
@@ -584,6 +602,9 @@ function WorkbenchView({ data, onShowList }: { data: WorkbenchData; onShowList?:
 
       <TrackDrawer state={drawer} mainId={project.id} onClose={() => { setDrawer(null); void refresh(); void claudeRun.refetch(); }} />
       <ChangesDrawer state={changes} onClose={() => setChanges(null)} />
+      <ImageGallery images={images} open={galleryOpen} onClose={() => setGalleryOpen(false)} onLocate={locateImage}
+        onZoom={index => { setGalleryOpen(false); setViewing(index); }} />
+      <ImageViewer images={images} index={viewing} onIndex={setViewing} onClose={() => setViewing(null)} onLocate={locateImage} />
     </div>
   );
 }

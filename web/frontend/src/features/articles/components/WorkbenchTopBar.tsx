@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import {
-  ArrowLeft, BookOpen, Check, ChevronDown, Download, ExternalLink, FileDiff, FileText, Flag, History, Maximize2, Menu,
+  ArrowLeft, BookOpen, Check, ChevronDown, Download, ExternalLink, FileDiff, FileText, Flag, History, Images, Maximize2, Menu,
   MessageCircle, MessageSquare, MoreHorizontal, Newspaper, PanelLeft, Sparkles, Wrench, type LucideIcon,
 } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
@@ -41,11 +41,11 @@ const FEATURES: { path: string; label: string; icon: LucideIcon }[] = [
 
 /**
  * 工作台的顶栏，也是整页唯一的一条顶栏（方案 A）：左边「← 文章列表」、快速切换文章、功能菜单，再是标题和英文原标题，
- * 右边保存状态、阅读进度、导出主译本、沉浸模式、更多。
+ * 右边文中图片、保存状态、阅读进度、导出主译本、沉浸模式、更多。
  * 导出：左半边直接下载主译本的 Markdown；▾ 里是主译本的其他去处（PDF、复制全文、公众号格式）和其余各版。
  * compact（手机）：返回只留箭头、不放快速切换，导出收进「⋯」。
  */
-export function WorkbenchTopBar({ projectId, title, original, onShowList, save, mark, onJump, onClearMark, markBusy,
+export function WorkbenchTopBar({ projectId, title, original, onShowList, imageCount = 0, onShowImages, save, mark, onJump, onClearMark, markBusy,
   onExportPrimary, primaryActions, exportItems, exportNotice = null, onImmersive, legacyHref, originalUrl, compact = false }: {
   /** 回文章列表时带上，列表里选中这篇 */
   projectId: string;
@@ -53,6 +53,9 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, save, 
   original: string | null;
   /** 列表图标：不离开工作台，从左边滑出文章列表 */
   onShowList?: () => void;
+  /** 文中图片（含封面）几张；0 就不显示「图片」入口 */
+  imageCount?: number;
+  onShowImages?: () => void;
   save: ReactNode;
   /** null = 没有阅读标记 */
   mark: ReadingProgress | null;
@@ -111,6 +114,12 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, save, 
       )}
       <span className="min-w-0 flex-1" />
       <GlobalTaskIndicator />
+      {imageCount > 0 && onShowImages && !compact && (
+        <button type="button" onClick={onShowImages} title="这篇的全部图片：点一张跳到文中位置，或放大看"
+          className={cn('inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-2.5 text-[12.5px] text-text-secondary transition-colors hover:bg-bg-hover hover:text-text-primary', FOCUS_RING)}>
+          <Images aria-hidden className="h-4 w-4" strokeWidth={STROKE} />图片 {imageCount}
+        </button>
+      )}
       {save}
       {mark && (
         <button type="button" onClick={onJump} disabled={markBusy} title={`回到上次读到的地方：${mark.text.slice(0, 60)}`}
@@ -156,6 +165,14 @@ export function WorkbenchTopBar({ projectId, title, original, onShowList, save, 
           <IconAction label="更多" className="-mr-1.5"><MoreHorizontal aria-hidden className="h-4 w-4" strokeWidth={STROKE} /></IconAction>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" sideOffset={6} className={cn(MENU, 'w-72')}>
+          {compact && imageCount > 0 && onShowImages && (
+            <>
+              <DropdownMenuItem className={MENU_ITEM} onSelect={onShowImages}>
+                <Images strokeWidth={STROKE} /> 文中图片（{imageCount}）
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="mx-1 my-1.5 bg-border-subtle" />
+            </>
+          )}
           {compact && (
             <>
               <ExportMenuItems primaryActions={primaryActions} exportItems={exportItems} />
