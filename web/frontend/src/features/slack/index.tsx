@@ -5,6 +5,7 @@ import { ConversationView } from './inbox/ConversationView';
 import { CredentialsPanel } from './inbox/CredentialsPanel';
 import { useSlackConversations, useSlackStatus } from './inbox/hooks';
 import { ActivityList } from './inbox/ActivityList';
+import { slackAppLink } from './inbox/lib';
 import { ThreadPanel } from './inbox/ThreadPanel';
 import { TodoView } from './inbox/TodoView';
 import { DraftHistory } from '@/features/post/components/DraftHistory';
@@ -138,6 +139,7 @@ export function SlackFeature() {
             onClose={closeThread}
             onOpenChannel={() => selectConversation(openThread.channelId)}
             onTranslatePost={() => translate(openThread.channelId, openThread.threadTs)}
+            appLink={slackAppLink(status.data.team_id, openThread.channelId)}
           />
         ) : selected ? (
           <ConversationView
@@ -147,6 +149,7 @@ export function SlackFeature() {
             onOpenThread={ts => showThread({ channelId: selected.id, threadTs: ts })}
             onBack={back}
             onOpenAgent={dm ? () => update({ ai: '1' }) : undefined}
+            appLink={slackAppLink(status.data.team_id, selected.id)}
           />
         ) : (
           <TodoView onOpen={openFrom} onTranslate={translate} />

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { CheckCircle2, ExternalLink, FileText, Languages, Loader2, RefreshCw, Sparkles, X } from 'lucide-react';
+import { AppWindow, CheckCircle2, ExternalLink, FileText, Languages, Loader2, RefreshCw, Sparkles, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { draftKeys, draftsApi } from '@/features/post/drafts';
 import { useThreadSummary, useThreadZh } from './ai';
@@ -18,13 +18,15 @@ interface ThreadPanelProps {
   onOpenChannel: () => void;
   /** 进入翻译模式（三栏：原文 + 配图 | 译文 / 优化 / 标题 | 原 thread） */
   onTranslatePost: () => void;
+  /** slack:// 链接：在 Slack App 里打开 thread 所在的频道（深链定位不到 thread 本身） */
+  appLink?: string | null;
 }
 
 // 回复数达到这个才在打开时自动总结；少于它的点按钮才总结（2026-11-22 用户定）
 const AUTO_SUMMARY_MIN_REPLIES = 3;
 
 /** 中栏的 thread：顶部一排操作（翻译这个帖子 / 翻译全部 / 总结），下面是「在聊什么」和完整对话。 */
-export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel, onTranslatePost }: ThreadPanelProps) {
+export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenChannel, onTranslatePost, appLink }: ThreadPanelProps) {
   const replies = useSlackReplies(channelId, threadTs);
   const markThread = useMarkThreadRead();
   const pageVisible = usePageVisible();
@@ -93,6 +95,12 @@ export function ThreadPanel({ channelId, channelName, threadTs, onClose, onOpenC
             {rest.length ? ` · ${rest.length} 条回复` : ' · 还没人回复'}
           </div>
         </div>
+        {appLink && (
+          <a href={appLink} className="rounded-md p-1.5 text-text-muted hover:bg-bg-hover hover:text-text-primary"
+            title={`在 Slack App 里打开 ${channelName}（定位不到这个 thread，要精确到 thread 用旁边的网页链接）`} aria-label="在 Slack App 打开频道">
+            <AppWindow className="h-4 w-4" />
+          </a>
+        )}
         {root && (
           <a href={root.permalink} target="_blank" rel="noreferrer noopener"
             className="rounded-md p-1.5 text-text-muted hover:bg-bg-hover hover:text-text-primary" title="在 Slack 里打开" aria-label="在 Slack 里打开">

@@ -568,13 +568,14 @@ class SlackInbox:
 
     def auth(self) -> Dict[str, Any]:
         cached = self._cache.get("auth", AUTH_TTL_S)
-        if cached:
+        if cached and "team_id" in cached:  # 旧缓存没有 team_id（页面的「在 Slack App 打开」要用）：重新取
             return cached
         data = self.client().call("auth.test")
         info = {
             "user": data.get("user", ""),
             "user_id": data.get("user_id", ""),
             "team": data.get("team", ""),
+            "team_id": data.get("team_id", ""),
             "url": (data.get("url") or "").rstrip("/"),
         }
         self._cache.put("auth", info)

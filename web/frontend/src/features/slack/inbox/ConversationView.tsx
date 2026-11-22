@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { ArrowLeft, Download, Hash, Loader2, Lock, Sparkles, Users } from 'lucide-react';
+import { AppWindow, ArrowLeft, Download, Hash, Loader2, Lock, Sparkles, Users } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { cn } from '@/lib/utils';
 import { slackInboxApi } from './api';
@@ -30,9 +30,11 @@ interface ConversationViewProps {
   onBack: () => void;
   /** 私信：窄屏上切到右栏的 AI 回复 */
   onOpenAgent?: () => void;
+  /** slack:// 链接：在 Slack App 里打开这个会话；没有就不显示按钮 */
+  appLink?: string | null;
 }
 
-export function ConversationView({ conversation, activeThreadTs, onOpenThread, onBack, onOpenAgent }: ConversationViewProps) {
+export function ConversationView({ conversation, activeThreadTs, onOpenThread, onBack, onOpenAgent, appLink }: ConversationViewProps) {
   const query = useSlackMessages(conversation.id);
   const markRead = useMarkRead();
   const pageVisible = usePageVisible();
@@ -101,6 +103,15 @@ export function ConversationView({ conversation, activeThreadTs, onOpenThread, o
           <Button variant="outline" size="sm" className="h-7 lg:hidden" onClick={onOpenAgent}>
             <Sparkles className="h-3.5 w-3.5" /> AI 回复
           </Button>
+        )}
+        {appLink && (
+          <a
+            href={appLink}
+            className="inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-text-secondary hover:bg-bg-hover"
+            title="在 Slack App 里打开这个会话"
+          >
+            <AppWindow className="h-3.5 w-3.5" /> 在 Slack App 打开
+          </a>
         )}
         <a
           href={slackInboxApi.exportUrl(conversation.id, 'md')}

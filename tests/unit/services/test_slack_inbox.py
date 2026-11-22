@@ -124,7 +124,7 @@ class FakeClient:
                  "user": "UAAAAAAAA1", "text": "HBM elsewhere", "permalink": "https://team.slack.com/archives/C777777777/p2"},
             ]}}
         if method == "auth.test":
-            return {"ok": True, "user": "me", "user_id": ME, "team": "T", "url": "https://team.slack.com/"}
+            return {"ok": True, "user": "me", "user_id": ME, "team": "T", "team_id": "T0000000001", "url": "https://team.slack.com/"}
         if method == "client.counts":
             return _counts()
         if method == "conversations.info":
@@ -438,6 +438,7 @@ def test_file_route_only_inlines_safe_images(inbox, monkeypatch):
                            json={"ts": f"{NOW:.6f}"}).json()["marked"] is True
         status = client.get("/api/slack-inbox/status").json()
         assert status["ok"] is True and "token" not in status
+        assert status["team_id"] == "T0000000001"  # 页面拼「在 Slack App 打开」的 slack:// 链接要用
 
 
 def test_mpim_label_drops_me():
