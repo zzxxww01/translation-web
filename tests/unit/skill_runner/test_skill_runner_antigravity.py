@@ -465,7 +465,7 @@ async def test_linux_cleanup_kills_descendants_even_after_leader_exit(agy, tmp_p
                 try:
                     # A dead orphan may remain a zombie until the container's init reaps it.
                     state = Path(f"/proc/{descendant}/stat").read_text().split(") ", 1)[1].split()[0]
-                except FileNotFoundError:
+                except (FileNotFoundError, ProcessLookupError):  # 读的瞬间进程退出也算没了
                     return
                 if state == "Z":
                     return
