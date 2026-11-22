@@ -176,7 +176,7 @@ export function TodoView({ onOpen, onTranslate }: {
               onClick={doneAll}
               disabled={markAll.isPending}
               className="inline-flex items-center gap-1.5 rounded-lg border border-border-subtle bg-white px-4 py-2 text-sm text-text-secondary shadow-sm hover:bg-bg-hover"
-              title="把这些 @ 和私信标为已读（只记在 momo 里，Slack 的未读不变）"
+              title="把这些 @ 和私信标为已读（只在这里标记，Slack 里的未读不变）"
             >
               <CheckCheck className="h-4 w-4" /> 都处理完了
             </button>

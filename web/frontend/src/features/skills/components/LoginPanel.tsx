@@ -34,7 +34,7 @@ export function LoginPanel() {
       <form onSubmit={submit} className="w-full max-w-sm rounded-xl border border-border-subtle bg-white p-7 shadow-sm">
         <div className="mb-5 flex items-center gap-2.5 text-text-primary">
           <LockKeyhole className="h-5 w-5 text-primary-600" />
-          <h1 className="text-xl">momo</h1>
+          <h1 className="text-xl">登录</h1>
         </div>
         <p className="mb-5 text-sm leading-relaxed text-text-muted">
           先输入口令。整个网站（翻译、Slack、Agent……）共用这一次登录，这台设备会记住一年。

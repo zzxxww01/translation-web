@@ -1,6 +1,5 @@
 import { Link, Outlet, useLocation, useSearchParams } from 'react-router-dom';
 import { Menu } from 'lucide-react';
-import { cn } from '@/lib/utils';
 import { FeatureNav } from './FeatureNav';
 import { useDocumentStore } from '@/shared/stores';
 import { Button } from '@/components/ui/Button';
@@ -16,23 +15,16 @@ import { useState } from 'react';
 import { HeaderSlotContext } from './headerSlotContext';
 import { GlobalTaskIndicator } from './GlobalTaskIndicator';
 
-function BrandMark({ compact = false }: { compact?: boolean }) {
+/** 左上角只放「译」字标志，不写产品名（2026-11-22 用户：不需要名字） */
+function BrandMark() {
   return (
-    <div className="flex items-center gap-2">
-      <span
-        aria-hidden="true"
-        className="flex h-7 w-7 items-center justify-center rounded-md bg-primary-500 text-[15px] leading-none text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
-        style={{ fontFamily: 'var(--font-display)' }}
-      >
-        译
-      </span>
-      <span
-        className={cn('text-xl font-semibold leading-none tracking-tight text-text-primary', compact && 'hidden sm:inline')}
-        style={{ fontFamily: 'var(--font-display)' }}
-      >
-        momo
-      </span>
-    </div>
+    <span
+      aria-hidden="true"
+      className="flex h-7 w-7 items-center justify-center rounded-md bg-primary-500 text-[15px] leading-none text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.15)]"
+      style={{ fontFamily: 'var(--font-display)' }}
+    >
+      译
+    </span>
   );
 }
 
@@ -90,8 +82,9 @@ export function AppLayout() {
               </SheetTrigger>
               <SheetContent side="left" className="w-72">
                 <SheetHeader>
-                  <SheetTitle>
+                  <SheetTitle className="flex items-center gap-2 text-base">
                     <BrandMark />
+                    功能
                   </SheetTitle>
                 </SheetHeader>
                 <Separator className="my-4" />
@@ -103,8 +96,8 @@ export function AppLayout() {
               </SheetContent>
             </Sheet>
 
-            <Link to="/articles" aria-label="momo 翻译工作台首页" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-              <BrandMark compact />
+            <Link to="/articles" aria-label="回到首页" className="rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <BrandMark />
             </Link>
           </div>
 

@@ -191,7 +191,7 @@ export function ActivityList({ selection, onOpen, onShowTodos, onShowHistory, to
               onClick={() => markAll.mutate(undefined)}
               disabled={markAll.isPending || unreadTotal === 0}
               className="inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 text-primary-700 hover:bg-primary-50"
-              title="只记在 momo 里，Slack 的未读不变"
+              title="只在这里标为已读，Slack 里的未读不变"
             >
               <CheckCheck className="h-3.5 w-3.5" /> 全部标为已读
             </button>
