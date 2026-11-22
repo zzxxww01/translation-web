@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+import time
 from datetime import datetime
 from typing import Any, AsyncIterator
 
@@ -105,16 +106,30 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
     )
 
 
+# 上一轮结果之后 CLI 这么久一条消息都没再发，就不再认为还有排着的轮次（见 SdkSession.busy）
+STALE_AFTER_RESULT_S = 300.0
+
+
 class SdkSession:
-    def __init__(self, client: ClaudeSDKClient, cwd: str | None = None):
+    def __init__(self, client: ClaudeSDKClient, cwd: str | None = None, clock=time.monotonic):
         self._client = client
         self._cwd = cwd
+        self._clock = clock
         # 发出去还没出结果的轮数：运行中插的话会在上一轮结果之后接着跑，期间不能关进程
         self._turns = 0
+        # 最近一条消息是结果时记下时间；之后有新消息、或又发了话就清掉
+        self._result_at: float | None = None
 
     @property
     def busy(self) -> bool:
-        return self._turns > 0
+        if self._turns <= 0:
+            return False
+        # 运行中插的话常被 CLI 并进当前这一轮、只回一个结果，计数就多出来，永远归不了零：
+        # 进程关不掉、名额一直占着，排队的对话再也排不上（2026-11-23）。结果之后久久没动静就清零
+        if self._result_at is not None and self._clock() - self._result_at > STALE_AFTER_RESULT_S:
+            self._turns = 0
+            return False
+        return True
 
     @classmethod
     async def open(cls, config: Config, spec: SessionSpec) -> "SdkSession":
@@ -125,6 +140,7 @@ class SdkSession:
     async def send(self, text: str) -> None:
         await self._client.query(text)
         self._turns += 1
+        self._result_at = None
 
     async def interrupt(self) -> None:
         self._turns = 0  # 中断后排着的话也不再跑
@@ -136,10 +152,20 @@ class SdkSession:
     async def events(self) -> AsyncIterator[dict[str, Any]]:
         mapper = MessageMapper(self._cwd)
         async for message in self._client.receive_messages():
+            if _is_turn_activity(message):
+                self._result_at = None
             for event in mapper.map(message):
                 if event.get("type") == "result":
                     self._turns = max(0, self._turns - 1)
+                    self._result_at = self._clock()
                 yield event
+
+
+def _is_turn_activity(message: Any) -> bool:
+    """真有一轮在跑才会来的消息；结果之后单独推送的额度事件不算。"""
+    if isinstance(message, (AssistantMessage, UserMessage)):
+        return True
+    return isinstance(message, SystemMessage) and message.subtype == "init"
 
 
 def make_factory(config: Config):

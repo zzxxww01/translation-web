@@ -213,6 +213,27 @@ async def test_queue_mode_holds_message_until_turn_ends(tmp_path, factory):
     assert "held" in [e["type"] for e in runner.store.read_events(run_id)]
 
 
+async def test_held_message_waits_for_busy_session_then_goes_out_instead_of_closing(tmp_path, factory):
+    # 结果出来时会话还算忙（运行中插的话被并进这一轮后计数多出来），挂起的话不能就此丢下：空了就接着发
+    runner = make_runner(tmp_path, factory, idle_timeout_s=0.01)
+    run_id = await start(runner)
+    session = factory.last
+    session.busy = True
+    await runner.send_message(run_id, "补一句", [], mode="queue")
+    finish(session)
+    await settle(10)
+    await asyncio.sleep(0.05)
+    assert session.sent == ["/four-step-translate 翻译这篇"]
+    assert not session.closed
+
+    session.busy = False
+    await asyncio.sleep(0.05)
+    await settle(10)
+    assert session.sent[-1] == "补一句"
+    assert not session.closed
+    assert runner.meta(run_id).held == []
+
+
 async def test_held_message_can_be_sent_now_or_deleted(tmp_path, factory):
     runner = make_runner(tmp_path, factory)
     run_id = await start(runner)

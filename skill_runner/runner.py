@@ -1003,6 +1003,9 @@ class Runner:
             run.idle_task = None
             if self._session_busy(run):
                 self._schedule_idle(run)
+            elif run.meta.held and not run.interrupted:
+                # 上一轮结束时还算忙、没发出去的挂起消息：现在空了，接着发
+                await self._send_next_held(run)
             else:
                 await self._close_session(run)
 
