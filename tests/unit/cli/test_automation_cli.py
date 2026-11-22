@@ -264,3 +264,85 @@ def test_ssh_mode_allows_new_commands(std, monkeypatch):
     monkeypatch.setenv("SSH_ORIGINAL_COMMAND", "translation-agent drafts --status all")
     code, _ = _run(std, ["--ssh"])
     assert code == 0 and "status=all" in seen[0].full_url
+
+
+# ---------------------------------------------------------------- translate-post / slack-reply
+
+
+class _Stdin:
+    def __init__(self, text, tty=False):
+        self.buffer = io.BytesIO(text.encode("utf-8"))
+        self.tty = tty
+
+    def isatty(self):
+        return self.tty
+
+
+def test_translate_post_text_from_argument_or_stdin(std, monkeypatch):
+    seen = _capture(monkeypatch, {"translation": "你好"})
+    code, out = _run(std, ["translate-post", "Hello"])
+    assert code == 0 and out["translation"] == "你好"
+    assert seen[0].full_url.endswith("/internal/automation/translate-post")
+    assert json.loads(seen[0].data) == {"content": "Hello", "hashtags": False}
+    std.out.buffer.seek(0)
+    std.out.buffer.truncate()
+    monkeypatch.setattr(cli.sys, "stdin", _Stdin("Long post\nwith 'quotes'"))
+    _run(std, ["translate-post", "--hashtags"])
+    assert json.loads(seen[1].data) == {"content": "Long post\nwith 'quotes'", "hashtags": True}
+
+
+@pytest.mark.parametrize("argv,stdin", [
+    (["translate-post"], _Stdin("", tty=True)),
+    (["translate-post", "   "], None),
+    (["translate-post", "x" * 10001], None),
+    (["slack-reply", "hi", "--history", "not json"], None),
+    (["slack-reply", "hi", "--history", '[{"role":"boss","content":"x"}]'], None),
+    (["slack-reply", "hi", "--mode", "weird"], None),
+    (["slack-reply", "hi", "--history", '[{"role":[],"content":"x"}]'], None),
+    (["slack-reply", "hi", "--history", '[{"role":"them","content":"  "}]'], None),
+    (["slack-reply", "hi", "--history", '[{"role":"them","content":"%s"}]' % ("x" * 50001)], None),
+    (["slack-reply", "hi", "--history", json.dumps([{"role": "me", "content": "x"}] * 101)], None),
+    (["translate-post"], _Stdin("")),
+])
+def test_translate_post_and_slack_reply_reject_bad_input(std, monkeypatch, argv, stdin):
+    seen = _capture(monkeypatch)
+    if stdin is not None:
+        monkeypatch.setattr(cli.sys, "stdin", stdin)
+    code, _ = _run(std, argv)
+    assert code == 1 and seen == []
+
+
+def test_slack_reply_body(std, monkeypatch):
+    seen = _capture(monkeypatch, {"mode": "incoming", "replies": []})
+    history = '[{"role":"them","content":"Can you check?"}]'
+    code, _ = _run(std, ["slack-reply", "Looks good", "--history", history])
+    assert code == 0 and seen[0].full_url.endswith("/internal/automation/slack-reply")
+    assert json.loads(seen[0].data) == {"text": "Looks good", "mode": "auto",
+                                        "history": [{"role": "them", "content": "Can you check?"}]}
+
+
+def test_ssh_mode_allows_translate_post_with_stdin(std, monkeypatch):
+    seen = _capture(monkeypatch, {"translation": "你好"})
+    monkeypatch.setenv("SSH_ORIGINAL_COMMAND", "translation-agent translate-post")
+    monkeypatch.setattr(cli.sys, "stdin", _Stdin("Hello"))
+    code, _ = _run(std, ["--ssh"])
+    assert code == 0 and json.loads(seen[0].data)["content"] == "Hello"
+
+
+def test_invalid_utf8_stdin_is_rejected(std, monkeypatch):
+    seen = _capture(monkeypatch)
+    stdin = _Stdin("")
+    stdin.buffer = io.BytesIO(b"Hello \xff")
+    monkeypatch.setattr(cli.sys, "stdin", stdin)
+    code, out = _run(std, ["translate-post"])
+    assert code == 1 and "UTF-8" in out["error"] and seen == []
+
+
+def test_validation_error_keeps_field_reasons(std, monkeypatch):
+    payload = json.dumps({"detail": "Request validation failed", "errors": [
+        {"field": "body.content", "message": "String should have at most 10000 characters"}]}).encode()
+    error = HTTPError("http://x", 422, "Unprocessable", {}, io.BytesIO(payload))
+    _capture(monkeypatch, error=error)
+    code, out = _run(std, ["translate-post", "Hello"])
+    assert code == 3 and out["code"] == "HTTP_422"
+    assert out["error"] == "Request validation failed：content: String should have at most 10000 characters"

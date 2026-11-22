@@ -29,6 +29,8 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 | `draft <draft_id> [--no-images]` | **一份翻译结果**：`source_text`（要翻的英文）、`translation`（当前版译文）、`titles` / `selected_title`、`slack.permalink`、`link`（网页打开这份稿子），`images` 按发帖顺序给**原图**：`n`、`name`、`mimetype`、`size`、`sha256`、`data_base64`（单张 >30MB 或合计 >100MB 的只给元数据和 `error`）。`--no-images` 只给元数据 |
 | `translate-slack-post <conversation_id> <thread_ts> [--instruction 说明] [--no-images]` | 把一个 thread 当帖子翻，和网页「翻译这个帖子」同一条流程：提取原文和配图 → 翻译 → 生成标题，存成翻译稿（标成自动翻的），返回和 `draft` 一样的结果。已有稿子时追加新版本。`--instruction` 用在 AI 挑错了时（如「翻第二版文案」）。几十秒到两分钟 |
 | `translate-slack <conversation_id> <message_ts> [--thread-ts T] [--with-thread]` | 翻译任意一条 Slack 消息的正文或它所在的整个 thread（不存翻译稿；翻帖子用上面的 `translate-slack-post`），**同步**返回 `translation`，`status` 为 `done`（新翻）或 `already_exists`（同样内容翻过，直接给缓存）；`project_id` 形如 `slack-<会话>-<ts>[-thread]` |
+| `translate-post [原文] [--hashtags]` | **直接翻一段帖子原文**（推文、公众号段落……），和网页「帖子翻译」同一条链路（术语库、帖子翻译默认模型），同步返回 `translation`、`model`；不存翻译稿。默认不加话题标签，`--hashtags` 才在末尾加小红书标签。上限 10000 字符 |
+| `slack-reply [内容] [--mode auto\|incoming\|compose] [--history JSON]` | **帮 Felix 回 Slack**，和网页「Slack 回复」同一套。对方的英文消息（`incoming`）→ `translation`（中文理解）+ `replies`（3 版英文回复）；Felix 的中文草稿（`compose`）→ `replies`（3 版英文）。每版有 `version`（A/B/C）、`style`、`english`、`chinese`。`auto` 按中文占比判断，返回的 `mode` 是实际用的。`--history` 给之前的对话：`[{"role":"them\|me","content":"..."}]` |
 | `status <project_id> [--with-markdown]` | 文章：`running`（附 `stage`）/ `done`（`result` 是 momo 链接）/ `failed`（`error`）/ `not_started`，带 `zh_title`、`zh_summary`，`--with-markdown` 完成时附中文 Markdown 全文。`slack-…`：`done`，`result` 是译文 |
 | `health` | `substack` / `slack` / `models` 各自 `ok` 或 `error: …`（`models` 只检查配置，不发请求）；`slack_groups` 是自动识别 / 手配的用户组个数 |
 
@@ -52,6 +54,9 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 1. `slack-todos` → 知道要回谁、要翻哪些（`action: do` 且 `draft` 为空的 thread 还没翻）。
 2. 要翻的：经 Felix 确认后 `translate-slack-post <conversation_id> <thread_ts>`。后台对「直接 @我」的 thread 本来就会自动翻，多数时候 `draft` 已经有了。
 3. `drafts` → 还没点「标记完成」的翻译；`draft <draft_id>` 拿译文、标题和原图交付。Felix 在网页上改过译文，`draft` 拿到的就是改过的当前版。
+
+**正文怎么传**：`translate-post`、`slack-reply` 的正文可以写在参数里，也可以不写、从标准输入传——长文本、带引号和换行的用 stdin 最省事：
+`printf '%s' "$TEXT" | ssh -p 42022 zxw@<host> translation-agent translate-post`。
 
 ### translate-article 细节
 
@@ -81,10 +86,16 @@ Muse ──SSH（受限密钥）──> ~/bin/translation-agent <子命令>   �
 command="/home/zxw/bin/translation-agent --ssh",no-pty,no-port-forwarding,no-agent-forwarding,no-X11-forwarding,no-user-rc ssh-ed25519 AAAA... muse
 ```
 
-`--ssh` 从 `SSH_ORIGINAL_COMMAND` 读子命令（开头的 `translation-agent` 可写可不写），只放行上面 9 个，
+`--ssh` 从 `SSH_ORIGINAL_COMMAND` 读子命令（开头的 `translation-agent` 可写可不写），只放行上面 11 个，
 不允许 `--base-url`，也不认 `TRANSLATION_SERVICE_URL`。Muse 调用：`ssh -p 42022 zxw@<host> translation-agent updates --since ...`。
 
 ## 配置（`src/settings.py`）
 
 - `AUTOMATION_SLACK_GROUP_IDS`：Felix 所在用户组 ID，逗号分隔。
 - `AUTOMATION_PUBLIC_URL`：交付链接前缀，默认 `https://momo.beauty`。
+
+## 和仓库里其他命令行的关系
+
+`translation-agent` 是本仓库唯一给外部调用的命令行入口（机器人、脚本都用它）。早期给人在终端用的
+`translate-post`、`slack-reply` 两个脚本已删除（2026-11-23），功能就是这里的同名子命令。
+`src/cli/cost_report.py`、`scripts/*` 是开发 / 运维工具，不给机器人。

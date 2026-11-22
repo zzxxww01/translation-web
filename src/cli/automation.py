@@ -5,7 +5,8 @@
 逻辑都在本机后端的 /internal/automation/* 里（src/api/routers/automation.py），这里只做参数校验、
 HTTP 调用和输出整理；本进程不读任何凭证。只用标准库，启动快。
 
---ssh：给 authorized_keys 里 command= 强制命令用。从 SSH_ORIGINAL_COMMAND 读子命令，只放行下面这几个。
+--ssh：给 authorized_keys 里 command= 强制命令用。从 SSH_ORIGINAL_COMMAND 读子命令，只放行 COMMANDS 里的。
+translate-post / slack-reply 的正文可以放参数里，也可以不给、从标准输入传（SSH 时 stdin 照样能用，长文本更省事）。
 """
 
 from __future__ import annotations
@@ -124,6 +125,12 @@ def _call(base_url: str, method: str, path: str, *, params: Optional[Dict[str, A
         detail = payload.get("detail") if isinstance(payload, dict) else None
         if not isinstance(detail, str):
             detail = json.dumps(detail, ensure_ascii=False) if detail else f"HTTP {error.code}"
+        # 参数校验失败（422）时具体原因在 errors 里，只给 detail 就只剩一句 Request validation failed
+        errors = payload.get("errors") if isinstance(payload, dict) else None
+        if isinstance(errors, list) and errors:
+            reasons = [f"{str(e.get('field', '')).removeprefix('body.')}: {e.get('message', '')}".strip(": ")
+                       for e in errors if isinstance(e, dict)]
+            detail += "：" + "；".join(r for r in reasons if r)
         code = (payload.get("error_code") if isinstance(payload, dict) else None) or f"HTTP_{error.code}"
         raise CliError(detail, code=code, exit_code=EXIT_SERVICE) from error
     except (URLError, TimeoutError, ConnectionError) as error:
@@ -200,6 +207,54 @@ def cmd_translate_slack_post(args: argparse.Namespace) -> Dict[str, Any]:
     return _call(args.base_url, "POST", "/translate-slack-post", body=body, timeout=args.timeout or 360)
 
 
+MAX_POST_CHARS, MAX_REPLY_CHARS, MAX_HISTORY = 10_000, 50_000, 100
+
+
+def _read_text(value: Optional[str], limit: int) -> str:
+    """正文：参数里给了就用；没给或给 - 就读标准输入。"""
+    if value is None or value == "-":
+        if sys.stdin is None or sys.stdin.isatty():
+            raise CliError("缺少正文：放在参数里，或从标准输入传")
+        try:
+            value = sys.stdin.buffer.read().decode("utf-8")
+        except UnicodeDecodeError as exc:  # 不替换成 �：带乱码去翻既花钱又没用
+            raise CliError("标准输入不是 UTF-8 文本") from exc
+    if not value.strip():
+        raise CliError("正文是空的")
+    if len(value) > limit:
+        raise CliError(f"正文太长：{len(value)} 字符，上限 {limit}")
+    return value
+
+
+def cmd_translate_post(args: argparse.Namespace) -> Dict[str, Any]:
+    body = {"content": _read_text(args.text, MAX_POST_CHARS), "hashtags": args.hashtags}
+    return _call(args.base_url, "POST", "/translate-post", body=body, timeout=args.timeout or 240)
+
+
+def cmd_slack_reply(args: argparse.Namespace) -> Dict[str, Any]:
+    history: Any = []
+    if args.history:
+        try:
+            history = json.loads(args.history)
+        except ValueError as exc:
+            raise CliError("--history 不是合法 JSON") from exc
+        if not isinstance(history, list):
+            raise CliError('--history 要是 [{"role":"them|me","content":"..."}] 这样的数组')
+        if len(history) > MAX_HISTORY:
+            raise CliError(f"--history 最多 {MAX_HISTORY} 条")
+        for index, message in enumerate(history, start=1):
+            role = message.get("role") if isinstance(message, dict) else None
+            content = message.get("content") if isinstance(message, dict) else None
+            if not isinstance(role, str) or role not in ("me", "them"):
+                raise CliError(f"--history 第 {index} 条的 role 要是 me 或 them")
+            if not isinstance(content, str) or not content.strip():
+                raise CliError(f"--history 第 {index} 条的 content 不能为空")
+            if len(content) > MAX_REPLY_CHARS:
+                raise CliError(f"--history 第 {index} 条太长，上限 {MAX_REPLY_CHARS} 字符")
+    body = {"text": _read_text(args.text, MAX_REPLY_CHARS), "mode": args.mode, "history": history}
+    return _call(args.base_url, "POST", "/slack-reply", body=body, timeout=args.timeout or 240)
+
+
 COMMANDS = {
     "updates": cmd_updates,
     "translate-article": cmd_translate_article,
@@ -210,6 +265,8 @@ COMMANDS = {
     "drafts": cmd_drafts,
     "draft": cmd_draft,
     "translate-slack-post": cmd_translate_slack_post,
+    "translate-post": cmd_translate_post,
+    "slack-reply": cmd_slack_reply,
 }
 
 
@@ -258,6 +315,17 @@ def build_parser() -> _Parser:
     p.add_argument("thread_ts")
     p.add_argument("--instruction", help="AI 挑错了时说明要翻哪条，如「翻第二版文案」")
     p.add_argument("--no-images", action="store_true", help="配图不带图片数据")
+
+    p = sub.add_parser("translate-post", help="翻译一段帖子原文（网页「帖子翻译」同一条链路；会花模型费，须经 Felix 确认）")
+    p.add_argument("text", nargs="?", help="原文；不给就从标准输入读")
+    p.add_argument("--hashtags", action="store_true", help="译文末尾加小红书话题标签（默认不加）")
+
+    p = sub.add_parser("slack-reply",
+                       help="Slack 回复：对方的英文消息 → 中文理解 + 3 版英文回复；中文草稿 → 3 版英文（会花模型费）")
+    p.add_argument("text", nargs="?", help="对方的消息或自己的中文草稿；不给就从标准输入读")
+    p.add_argument("--mode", choices=["auto", "incoming", "compose"], default="auto",
+                   help="incoming=分析对方消息，compose=中文草稿写成英文；默认按中文占比自动判断")
+    p.add_argument("--history", help='之前的对话，JSON 数组：[{"role":"them|me","content":"..."}]')
     return parser
 
 

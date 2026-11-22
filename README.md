@@ -94,7 +94,7 @@ translation-web/
 │   ├── services/          # 服务层：批量翻译、术语确认、Substack、微信排版、检查点等
 │   ├── prompts/           # 提示词模板与微信主题 CSS
 │   ├── html2md/           # HTML → Markdown 转换
-│   ├── cli/               # 命令行入口（translate-post、slack-reply、cost_report）
+│   ├── cli/               # 命令行入口（automation=translation-agent、cost_report）
 │   └── settings.py        # 环境变量配置
 ├── skill_runner/          # momo「Agent」页后端（独立 systemd 服务，见 skill_runner/README.md）
 ├── web/frontend/          # React 前端（Vite + TypeScript + Tailwind）
@@ -125,67 +125,21 @@ translation-web/
 - 保持语气和风格
 - 支持 Slack 和微信集成
 
-服务启动后，也可以通过仓库根目录的 CLI 调用与网页相同的帖子翻译链路（含术语库、默认模型、故障转移与话题标签后处理）：
+命令行（机器人、脚本）用统一入口 `translation-agent translate-post`，和网页同一条链路，输出 JSON：
 
 ```bash
-# 直接传入一条帖子
-./translate-post 'NVIDIA says demand for Blackwell remains extremely strong.'
-
-# 推荐：通过标准输入传入多行帖子
-printf '%s\n' 'First line.' 'Second line.' | ./translate-post
-
-# 从文件读取；输出完整响应和模型元数据
-./translate-post --file post.txt --json
-
-# 可选：指定服务中已配置的模型
-./translate-post --model MODEL_NAME 'Post to translate'
+./translation-agent-cli translate-post 'NVIDIA says demand for Blackwell remains extremely strong.'
+printf '%s\n' 'First line.' 'Second line.' | ./translation-agent-cli translate-post   # 多行走标准输入
 ```
 
-默认连接 `http://127.0.0.1:54321`。如需调用其他实例，可设置
-`TRANSLATION_SERVICE_URL`，或传入 `--base-url URL`。默认仅向标准输出写入译文，
-便于脚本或 AI 助手直接获取结果；调用失败时会向标准错误输出原因并返回非零状态码。
+所有子命令见 [Muse 自动化](docs/Muse自动化.md)。
 
 详见：[帖子翻译技术手册](docs/帖子翻译技术手册.md)
 
 ### 3. Slack 回复
 
-`slack-reply` 复用网页中的 Slack 回复链路。它既能分析对方的英文消息、给出中文理解和 3 个英文回复，也能把中文回复草稿改写成 3 种英文版本：
-
-```bash
-# 自动判断：英文按“对方来信”处理，中文按“我的回复草稿”处理
-./slack-reply 'Could you send me the updated draft today?'
-./slack-reply '可以，我今晚整理好发给你。'
-
-# 多行内容或 Agent 调用推荐走标准输入
-printf '%s' 'Could you review this?' | ./slack-reply
-
-# 明确指定模式
-./slack-reply --mode incoming 'Could you review this?'
-./slack-reply --mode compose '可以，我今天处理。'
-
-# 只输出某个可直接复制的英文版本
-./slack-reply --mode compose --pick B '可以，我今天处理。'
-
-# 携带对话历史；role 只能是 them 或 me
-./slack-reply --history history.json '我会在明天上午更新。'
-
-# 输出完整 API 响应
-./slack-reply --json 'Could you review this?'
-```
-
-`history.json` 示例：
-
-```json
-[
-  {"role": "them", "content": "Can you review the latest draft?"},
-  {"role": "me", "content": "Yes, send it over."}
-]
-```
-
-默认模式与网页一致：去除空白后，中文字符占比超过 30% 时调用
-`/api/slack/compose`，否则调用 `/api/slack/process`。可通过 `--mode` 覆盖自动判断。
-默认输出中文理解（incoming 模式）及 A/B/C 三个英文版本；`--pick` 只输出指定英文，
-`--json` 输出完整响应。错误写入标准错误，并返回非零状态码。
+网页 Slack 页的回复面板：分析对方的英文消息、给出中文理解和 3 个英文回复，或把中文回复草稿改写成 3 种英文版本。
+命令行用 `translation-agent slack-reply`（`--mode auto|incoming|compose`、`--history '<JSON>'`），见 [Muse 自动化](docs/Muse自动化.md)。
 
 ### 模型与通道配置
 
