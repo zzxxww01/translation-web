@@ -12,6 +12,14 @@ const EMOJI: Record<string, string> = {
 
 const EMOJI_RE = /:([a-z0-9_+-]+):/g;
 
+/**
+ * 直接在 Slack App（桌面 / 手机）里打开这个频道或私信。官方深链只能定位到会话，定位不到某条消息或 thread；
+ * 精确到消息用 https 的 permalink。没有团队 ID 时返回 null（不显示按钮）。
+ */
+export function slackAppLink(teamId: string | undefined, channelId: string): string | null {
+  return teamId ? `slack://channel?team=${encodeURIComponent(teamId)}&id=${encodeURIComponent(channelId)}` : null;
+}
+
 export function emojify(text: string): string {
   return text.replace(EMOJI_RE, (match, name: string) => EMOJI[name.replace(/::skin-tone-\d/, '')] ?? match);
 }

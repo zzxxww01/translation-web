@@ -6,6 +6,8 @@ export interface SlackStatus {
   user?: string;
   user_id?: string;
   team?: string;
+  /** 团队 ID（T 开头），拼 slack:// 链接用 */
+  team_id?: string;
   url?: string;
   error_code?: string;
   error?: string;

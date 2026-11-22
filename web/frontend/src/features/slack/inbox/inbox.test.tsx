@@ -2,7 +2,7 @@
 import { act } from 'react';
 import { createRoot } from 'react-dom/client';
 import { expect, it, vi } from 'vitest';
-import { buildStream, dayLabel, emojiFor, emojify, newestTs, stripLeadingMentions } from './lib';
+import { buildStream, dayLabel, emojiFor, emojify, newestTs, slackAppLink, stripLeadingMentions } from './lib';
 import { SlackText } from './SlackText';
 import type { SlackMessage } from './types';
 
@@ -77,4 +77,10 @@ it('drops leading @用户组 from titles, keeps named mentions and mention-only 
   expect(stripLeadingMentions('@Daksh Malik can u RT')).toBe('@Daksh Malik can u RT');
   expect(stripLeadingMentions('Thanks @Felix Zhou')).toBe('Thanks @Felix Zhou');
   expect(stripLeadingMentions('@Felix')).toBe('@Felix');
+});
+
+it('builds a slack:// link that opens the conversation in the Slack app, or none without a team id', () => {
+  expect(slackAppLink('T0000000001', 'C000000001')).toBe('slack://channel?team=T0000000001&id=C000000001');
+  expect(slackAppLink(undefined, 'C000000001')).toBeNull();
+  expect(slackAppLink('', 'D000000005')).toBeNull();
 });
