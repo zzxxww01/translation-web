@@ -117,3 +117,28 @@ def test_missing_key_cannot_fallback(loader, monkeypatch):
     loader._config = None
     with pytest.raises(ValueError,match='No valid attempt plan'):
         ProviderAdapter(MODEL)
+
+
+def test_chatbot_web_search_uses_responses_api_and_returns_cited_sources(loader, monkeypatch):
+    from src.llm.web_search import generate_with_web_search, supports_web_search
+    calls = []
+    def handler(req):
+        calls.append((str(req.url), json.loads(req.content)))
+        cite = {'type': 'url_citation', 'url': 'https://ft.com/a', 'title': 'FT', 'start_index': 0, 'end_index': 2}
+        return httpx.Response(200, json={
+            'id': 'resp_1', 'object': 'response', 'created_at': 0, 'model': 'gpt-6.2-sol', 'status': 'completed',
+            'output': [{'type': 'web_search_call', 'id': 'ws_1', 'status': 'completed', 'action': {'type': 'search', 'query': 'news'}},
+                       {'type': 'message', 'id': 'msg_1', 'role': 'assistant', 'status': 'completed',
+                        'content': [{'type': 'output_text', 'text': '新闻一', 'annotations': [cite, cite]}]}],
+            'usage': {'input_tokens': 3, 'output_tokens': 2, 'total_tokens': 5,
+                      'input_tokens_details': {'cached_tokens': 0}, 'output_tokens_details': {'reasoning_tokens': 0}},
+            'parallel_tool_calls': True, 'tool_choice': 'auto', 'tools': []})
+    install_transport(monkeypatch, handler)
+    assert generate_with_web_search('有什么新闻', 'gpt-6.2-sol', 30) == {
+        'text': '新闻一', 'sources': [{'title': 'FT', 'url': 'https://ft.com/a'}]}
+    url, body = calls[0]
+    assert url == 'https://api.openai.com/v1/responses'
+    assert body['tools'] == [{'type': 'web_search'}] and body['store'] is False and body['model'] == 'gpt-6.2-sol'
+    # 中转模型没有搜索工具，也不为了搜索换成别的模型；不认识的别名不能搜
+    assert supports_web_search('gpt-6.2-sol') and not supports_web_search('no-such-model')
+    assert generate_with_web_search('hi', 'qwen-plus', 30) is None

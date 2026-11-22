@@ -2,41 +2,38 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { ChatTurn } from './api';
 
-export interface ChatMessage extends ChatTurn {
-  id: string;
-  /** 这条回复用的模型（显示名），用户消息为空 */
-  model?: string;
-}
-
 interface ChatState {
-  messages: ChatMessage[];
+  /** 当前打开的会话；会话本身存在服务器上 */
+  currentId: string | null;
   /** 选的模型别名；默认 GPT-6.2 Sol */
   model: string;
+  /** 联网搜索：开着时模型自己决定要不要搜 */
+  webSearch: boolean;
   draft: string;
-  add: (message: ChatMessage) => void;
-  removeFrom: (id: string) => void;
+  /** 旧版存在浏览器里的那段对话；第一次打开新版时导入成一个会话，然后清空 */
+  messages: ChatTurn[];
+  setCurrentId: (id: string | null) => void;
   setModel: (model: string) => void;
+  setWebSearch: (on: boolean) => void;
   setDraft: (draft: string) => void;
-  clear: () => void;
+  clearLegacy: () => void;
 }
 
 export const DEFAULT_CHAT_MODEL = 'gpt-6.2-sol';
 
-/** 对话存在浏览器里：切到别的页面再回来还在；「新对话」清空 */
 export const useChatStore = create<ChatState>()(
   persist(
     set => ({
-      messages: [],
+      currentId: null,
       model: DEFAULT_CHAT_MODEL,
+      webSearch: true,
       draft: '',
-      add: message => set(state => ({ messages: [...state.messages, message] })),
-      removeFrom: id => set(state => {
-        const index = state.messages.findIndex(message => message.id === id);
-        return index < 0 ? state : { messages: state.messages.slice(0, index) };
-      }),
+      messages: [],
+      setCurrentId: currentId => set({ currentId }),
       setModel: model => set({ model }),
+      setWebSearch: webSearch => set({ webSearch }),
       setDraft: draft => set({ draft }),
-      clear: () => set({ messages: [], draft: '' }),
+      clearLegacy: () => set({ messages: [] }),
     }),
     { name: 'momo-tools-chat' }
   )
