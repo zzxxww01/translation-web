@@ -249,6 +249,7 @@ export function TermTable({
                         checked={isSelected}
                         onChange={() => onToggleSelected(term.original)}
                         aria-label={`选择 ${term.original}`}
+                        className="mt-[3px] block"
                       />
                     </TableCell>
                   ) : null}
@@ -281,7 +282,8 @@ export function TermTable({
                     {formatUpdatedAt(term.updated_at)}
                   </TableCell>
                   <TableCell className="align-top">
-                    <div className="flex items-center justify-end gap-0.5">
+                    {/* 图标按钮比一行字高，往上收一点，和第一行文字居中对齐 */}
+                    <div className="-my-1.5 flex items-center justify-end gap-0.5">
                       <RowActions
                         isEffectiveView={isEffectiveView}
                         onEdit={() => onFocusTerm(term)}

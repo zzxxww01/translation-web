@@ -221,11 +221,11 @@ export function WechatFeature() {
           title="排版设置"
         >
           <Settings2 className="shrink-0" />
-          <span className="hidden truncate sm:inline">{selectedThemeName} · {imageModeName}</span>
+          <span className="hidden max-w-[11rem] truncate sm:inline">{selectedThemeName} · {imageModeName}</span>
         </Button>
         <div className="hidden items-center gap-2 lg:flex">
           {autoPreview ? (
-            <span className="text-xs text-text-muted" aria-live="polite">
+            <span className="hidden whitespace-nowrap text-xs text-text-muted xl:inline" aria-live="polite">
               {formatWechat.isPending ? '正在更新预览…' : html ? '预览已是最新' : '边写边预览'}
             </span>
           ) : (

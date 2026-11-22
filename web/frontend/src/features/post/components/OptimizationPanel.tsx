@@ -70,7 +70,7 @@ export function OptimizationPanel({
     <>
       <div className="rounded-xl border border-border-subtle bg-white p-4">
         <div className="space-y-3">
-          <div className="flex items-center justify-between gap-2">
+          <div className="flex min-h-8 items-center justify-between gap-2">
             <h4 className="flex items-center gap-2 text-[13px] font-semibold text-text-secondary">
               <Wand2 className="h-4 w-4 text-primary-500" />
               优化译文
@@ -78,7 +78,8 @@ export function OptimizationPanel({
             {!hasVersions && <span className="text-xs text-text-muted">先翻译出译文才能优化</span>}
           </div>
 
-          <div className="flex flex-wrap gap-2">
+          {/* 一行放得下全部快捷项；「更多…」是文字按钮，万一折行也不会孤零零一个胶囊 */}
+          <div className="flex flex-wrap items-center gap-1.5">
             {quickInstructions.map(inst => (
               <Button
                 key={inst.id}
@@ -87,19 +88,19 @@ export function OptimizationPanel({
                 type="button"
                 onClick={() => handleQuick(inst.id)}
                 disabled={disabled}
-                className="min-h-9 rounded-full px-3 text-[13px] sm:min-h-8 sm:text-xs"
+                className="min-h-9 rounded-full px-2.5 text-[13px] sm:min-h-8 sm:text-xs"
               >
                 {inst.icon && <inst.icon className="text-text-muted" />}
                 {inst.label}
               </Button>
             ))}
             <Button
-              variant="outline"
+              variant="ghost"
               size="sm"
               type="button"
               onClick={() => setShowMore(true)}
               disabled={disabled}
-              className="min-h-9 rounded-full px-3 text-[13px] sm:min-h-8 sm:text-xs"
+              className="min-h-9 rounded-full px-2.5 text-[13px] text-primary-600 hover:text-primary-700 sm:min-h-8 sm:text-xs"
             >
               更多…
             </Button>

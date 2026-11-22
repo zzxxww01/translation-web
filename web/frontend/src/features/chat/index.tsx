@@ -213,16 +213,16 @@ export function ChatFeature() {
             <div className="min-h-0 flex-1 overflow-y-auto p-2">{list}</div>
           </SheetContent>
         </Sheet>
-        <div className="w-36 sm:w-48" title="对话用的模型">
+        <div className="w-36 sm:w-48 lg:w-40 xl:w-48" title="对话用的模型">
           <ModelSelector value={model} onChange={value => setModel(value)} className="h-9 text-sm" disabled={pending} />
         </div>
         <Button variant={webSearch ? 'secondary' : 'ghost'} size="sm" className="h-9" aria-pressed={webSearch}
           onClick={() => setWebSearch(!webSearch)}
           title={webSearch ? '联网搜索已开：需要最新信息时模型会自己去搜' : '联网搜索已关：只用模型自己知道的'}>
-          <Globe /><span className="hidden sm:inline">联网</span>
+          <Globe /><span className="hidden sm:inline lg:hidden xl:inline">联网</span>
         </Button>
         <Button variant="ghost" size="sm" className="h-9" onClick={startNew} disabled={!currentId && !draft}>
-          <MessageSquarePlus /><span className="hidden sm:inline">新对话</span>
+          <MessageSquarePlus /><span className="hidden sm:inline lg:hidden xl:inline">新对话</span>
         </Button>
       </PageActions>
 

@@ -69,11 +69,11 @@ export function PostFeature() {
           actions={
             <>
               <PendingChip ws={ws} />
-              <div className="hidden w-48 sm:block" title="翻译用的模型">
+              <div className="hidden w-48 sm:block lg:w-40 xl:w-48" title="翻译用的模型">
                 <ModelSelector value={ws.selectedModel} onChange={ws.setSelectedModel} className="h-9 text-sm" disabled={ws.isLoading} />
               </div>
               <Button variant="ghost" size="sm" className="h-9" onClick={() => setHistoryOpen(true)} title="Slack 里翻的和这里翻的都在">
-                <History className="h-4 w-4" /> <span className="hidden sm:inline">历史记录</span>
+                <History className="h-4 w-4" /> <span className="hidden sm:inline lg:hidden xl:inline">历史记录</span>
               </Button>
             </>
           }

@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/input';
 import { Skeleton } from '@/components/ui/skeleton';
-import { RotateCw } from 'lucide-react';
+import { ChevronRight, RotateCw } from 'lucide-react';
 import type { TimezoneConvertResult } from '@/shared/types';
 
 // 与后端 src/api/utils/timezone.py 的解析规则一一对应，改那边要同步改这里
@@ -135,8 +135,11 @@ export function TimezoneConverter() {
             换算
           </Button>
         </div>
-        <details className="text-xs leading-relaxed text-text-muted">
-          <summary className="cursor-pointer select-none py-1 text-text-secondary hover:text-text-primary">支持哪些写法？</summary>
+        <details className="group text-xs leading-relaxed text-text-muted">
+          <summary className="inline-flex cursor-pointer select-none list-none items-center gap-1 py-1 text-text-secondary hover:text-text-primary [&::-webkit-details-marker]:hidden">
+            <ChevronRight className="h-3.5 w-3.5 transition-transform group-open:rotate-90" />
+            支持哪些写法？
+          </summary>
           <div id="timezone-input-help" className="mt-1 space-y-2 rounded-lg bg-bg-tertiary px-3 py-2.5">
           <p>
             要带日期；结尾可以加时区，不加按<span className="font-medium text-text-secondary">美中时间</span>算。
