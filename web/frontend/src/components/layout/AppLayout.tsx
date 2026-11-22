@@ -19,7 +19,8 @@ import { GlobalTaskIndicator } from './GlobalTaskIndicator';
 
 /**
  * 左上角的衬线字标「Leaf」（2026-11-23 用户定名：书页的一张，翻页的「翻」）。
- * 不加色块，导航居中（用户要求）。标签页图标仍是「译」字（favicon.svg）。
+ * 不加色块，导航居中（用户要求）。2026-11-23 改成 Fraunces 软衬线斜体（--font-brand，只含这几个字形），
+ * 标签页图标同步换成梅子色方块里的同款斜体「L」（favicon.svg）。
  */
 const BRAND_NAME = 'Leaf';
 
@@ -27,8 +28,8 @@ function BrandMark() {
   return (
     <span
       aria-hidden="true"
-      className="select-none text-xl font-semibold leading-none tracking-[0.01em] text-primary-600"
-      style={{ fontFamily: 'var(--font-display)' }}
+      className="select-none text-[26px] leading-none tracking-[-0.02em] text-primary-600"
+      style={{ fontFamily: 'var(--font-brand)' }}
     >
       {BRAND_NAME}
     </span>
@@ -78,7 +79,7 @@ export function AppLayout() {
 
   return (
     <HeaderSlotContext.Provider value={slot}>
-    <div className="relative flex h-screen flex-col overflow-hidden bg-background">
+    <div className="paper-grain relative flex h-screen flex-col overflow-hidden bg-background">
       {/* Header */}
       {!isImmersiveMode && !isWorkbenchRoute && (
         <header className="sticky top-0 z-40 border-b border-border-subtle bg-bg-primary/90 backdrop-blur-md">

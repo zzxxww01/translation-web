@@ -45,11 +45,11 @@ export function FeatureNav({ orientation = 'horizontal', onNavigate }: FeatureNa
                       : 'text-text-secondary hover:bg-bg-hover hover:text-text-primary'
                   )
                 : cn(
-                    // 横向导航用底部 2px 梅子色下划线标出当前页，压在顶栏底边上
-                    'relative flex items-center px-2 after:absolute after:inset-x-2 after:-bottom-px xl:px-3 xl:after:inset-x-3 after:h-0.5 after:rounded-full after:transition-colors',
+                    // 横向导航：当前页是浅梅子色药丸（2026-11-23 从底部下划线改来）
+                    'flex h-8 items-center self-center rounded-full px-3 transition-colors xl:px-3.5',
                     isActive
-                      ? 'font-medium text-text-primary after:bg-primary-500'
-                      : 'text-text-muted after:bg-transparent hover:text-text-primary hover:after:bg-border'
+                      ? 'bg-primary-50 font-medium text-primary-700'
+                      : 'text-text-muted hover:bg-ink-wash hover:text-text-primary'
                   )
             )
           }
