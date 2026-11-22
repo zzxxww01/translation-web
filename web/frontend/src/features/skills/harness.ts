@@ -1,3 +1,5 @@
+import { renameStorageKey } from '@/shared/storageKeys';
+
 /** 服务器上执行任务的运行工具；具体模型单独选择。 */
 export type Harness = 'claude' | 'codex' | 'antigravity';
 
@@ -12,7 +14,8 @@ export function harnessLabel(harness: string | undefined): string {
   return HARNESSES.find(item => item.id === harness)?.label ?? 'Claude';
 }
 
-const STORAGE_KEY = 'momo.agent.model';
+const STORAGE_KEY = 'translation.agent.model';
+renameStorageKey('momo.agent.model', STORAGE_KEY);
 
 /** 每个 Agent 记住上次选的模型；没选过就用它的默认 */
 export function loadHarness(agent: string, fallback: Harness): Harness {

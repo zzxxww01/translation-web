@@ -116,7 +116,7 @@ describe('NewRunForm', () => {
     expect(radio('模型', 'Codex')!.getAttribute('aria-checked')).toBe('true'); // 翻译默认 Codex
 
     await click(radio('模型', 'Claude'), 'Claude');
-    expect(JSON.parse(localStorage.getItem('momo.agent.model')!)).toEqual({ 'four-step-translate': 'claude' });
+    expect(JSON.parse(localStorage.getItem('translation.agent.model')!)).toEqual({ 'four-step-translate': 'claude' });
     await click(radio('选 Agent', '通用 Agent'), '通用卡片');
     await click(radio('选 Agent', '翻译 Agent'), '翻译卡片');
     expect(radio('模型', 'Claude')!.getAttribute('aria-checked')).toBe('true');

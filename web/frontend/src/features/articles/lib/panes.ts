@@ -1,7 +1,9 @@
 import type { PaneId } from '../types';
+import { renameStorageKey } from '@/shared/storageKeys';
 
 export const PANES: PaneId[] = ['source', 'main', 'compare'];
-const STORAGE_KEY = 'momo.workbench.collapsed';
+const STORAGE_KEY = 'translation.workbench.collapsed';
+renameStorageKey('momo.workbench.collapsed', STORAGE_KEY);
 
 export type Collapsed = Record<PaneId, boolean>;
 

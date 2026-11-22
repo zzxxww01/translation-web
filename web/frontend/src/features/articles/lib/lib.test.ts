@@ -17,9 +17,9 @@ describe('panes', () => {
   });
 
   it('reads collapsed panes saved under the old web / alt keys', () => {
-    localStorage.setItem('momo.workbench.collapsed', JSON.stringify({ source: false, web: false, alt: true }));
+    localStorage.setItem('translation.workbench.collapsed', JSON.stringify({ source: false, web: false, alt: true }));
     expect(loadCollapsed()).toEqual({ source: false, main: false, compare: true });
-    localStorage.removeItem('momo.workbench.collapsed');
+    localStorage.removeItem('translation.workbench.collapsed');
   });
 });
 
