@@ -67,7 +67,7 @@ def _session_lines(session: dict[str, Any]) -> list[str]:
     return [
         f"Session ID: {session.get('session_id') or '(not started yet)'}",
         f"cwd: {session.get('cwd') or ''}",
-        f"Model: {session.get('model') or 'default'}",
+        f"Model: {session.get('model') or 'default'}" + (f" · effort {session['effort']}" if session.get("effort") else ""),
     ]
 
 

@@ -98,6 +98,7 @@ def build_options(config: Config, spec: SessionSpec) -> ClaudeAgentOptions:
         system_prompt={"type": "preset", "preset": "claude_code", "append": build_system_prompt(config, spec.prompt_note)},
         settings=json.dumps(settings, ensure_ascii=False) if settings else None,
         model=spec.model or config.model,
+        effort=spec.effort,  # 页面上 /effort 设的；None 沿用 CLI 默认
         # 新模型默认不带任务清单工具，要显式打开，网页侧栏的进度才有数据（Python 的 env 是叠加在继承环境上的）
         env={"CLAUDE_CODE_ENABLE_TODO_TOOLS": "1"},
         # SDK 默认单条 JSON 消息上限 1MB；Read 一张几百 KB 的截图（base64 后还会出现两份）就会超，整个进程直接报错退出
