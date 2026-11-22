@@ -70,6 +70,8 @@ class RunMeta:
     detached_questions: dict[str, Any] = field(default_factory=dict)
     # 挂起的消息：agent 干活时发的话先存着，这一轮正常结束后按顺序一条条发（{id, text, files, created_at}）
     held: list[dict[str, Any]] = field(default_factory=list)
+    # 第一条真正的消息（带 skill 派发提示）发出去了没有；新建时 False，旧任务没有这个字段按已开始算
+    begun: bool = True
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -118,7 +120,7 @@ class RunStore:
         (path / INPUT_DIR).mkdir()
         meta = RunMeta(
             id=run_id, skill=skill, title=title, status="idle", created_at=now, updated_at=now,
-            harness=harness, auto_reply_s=auto_reply_s, model=model, source=source,
+            harness=harness, auto_reply_s=auto_reply_s, model=model, source=source, begun=False,
         )
         self.save_meta(meta)
         return meta

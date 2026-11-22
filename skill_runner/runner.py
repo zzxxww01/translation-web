@@ -379,6 +379,11 @@ class Runner:
 
     async def begin(self, run_id: str, message: str, attachments: list[str]) -> RunMeta:
         run = self._get(run_id)
+        if self._status_command(run, message, attachments):
+            # 新对话第一句就是 /status：只回状态卡，不启动 agent；下一条消息才是真正的开头（仍走这里，带 skill 提示）
+            return run.meta
+        run.meta.begun = True
+        self.store.save_meta(run.meta)
         prompt = build_prompt(run.meta.skill, message, attachments, run.meta.harness, self.config.shared_skills_dir)
         return await self._deliver(run, message, attachments, prompt)
 
@@ -387,11 +392,13 @@ class Runner:
         run = self._get(run_id)
         if not message.strip() and not attachments:
             raise RunnerError("消息不能为空")
-        if not attachments and message.strip().lower() in STATUS_COMMANDS:
-            # 页面自己的命令：不发给模型、不花额度，什么状态下都能用
-            self._emit(run, {"type": "user", "text": message.strip(), "files": []})
-            self._emit(run, {"type": "report", "title": "当前状态", "lines": self.status_lines(run)})
+        if self._status_command(run, message, attachments):
             return run.meta
+        if not run.meta.begun:
+            # 开头只发过 /status：这条才是第一条消息，标题也按它重起
+            if run.meta.title.strip().lower() in STATUS_COMMANDS:
+                run.meta.title = make_title(message, attachments)
+            return await self.begin(run_id, message, attachments)
         if run.pending and not attachments:
             # 有提问挂着时，输入框里的话就是对提问的自由回答
             qid = next(iter(run.pending))
@@ -402,6 +409,14 @@ class Runner:
             self._hold(run, message, attachments)
             return run.meta
         return await self._send_now(run, message, attachments)
+
+    def _status_command(self, run: _Run, message: str, attachments: list[str]) -> bool:
+        """页面自己的命令（/status）：直接回状态卡，不发给模型、不花额度，什么状态下都能用。处理了返回 True。"""
+        if attachments or message.strip().lower() not in STATUS_COMMANDS:
+            return False
+        self._emit(run, {"type": "user", "text": message.strip(), "files": []})
+        self._emit(run, {"type": "report", "title": "当前状态", "lines": self.status_lines(run)})
+        return True
 
     def status_lines(self, run: _Run) -> list[str]:
         """/status 的内容：这个对话在哪个状态、用什么跑、服务器上名额和内存够不够。"""
