@@ -2,6 +2,7 @@ import { Fragment, useCallback, useEffect, useLayoutEffect, useRef, useState, ty
 import { ChevronLeft, ChevronRight, Flag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { gridTemplate, PANES, type Collapsed } from '../lib/panes';
+import { COVER_KEY } from '../lib/images';
 import { rowTextClass } from '../lib/rows';
 import type { PaneId, WorkbenchRow } from '../types';
 import { EditableText, type EditableTextHandle } from './EditableText';
@@ -50,6 +51,12 @@ interface PaneGridProps {
   jump: number;
   /** 放在最右边那一栏栏头最后的按钮（沉浸模式的退出） */
   corner?: ReactNode;
+  /** 封面：每一栏正文最上面一张（三栏一样，开头才对得齐） */
+  cover?: string | null;
+  /** 点图片（含封面）放大 */
+  onOpenImage?: (key: string) => void;
+  /** 三栏滚到这张图并闪一下；seq 变了才滚 */
+  focusImage?: { key: string; seq: number } | null;
 }
 
 /** 收起竖条、栏头、正文三处共用的分隔线 */
@@ -89,10 +96,17 @@ const MARK_GAP = 24;
 /** 落位后这么久之内，标记上方晚加载的图片把它推走了就再拉回来 */
 const FOLLOW_MS = 6000;
 
-function alignToMark(root: HTMLElement, smooth: boolean) {
+const MARK_SELECTOR = '[data-reading-mark="true"]';
+
+/** 正文里某一行所在的段落块 */
+function blockSelector(key: string): string {
+  return `[data-reading-block="${key.replace(/["\\]/g, '\\$&')}"]`;
+}
+
+function alignTo(root: HTMLElement, selector: string, smooth: boolean) {
   // 每一栏自己滚：不用 scrollIntoView（它会连外层一起滚，几栏同时平滑滚动时还可能只滚动最后一栏）
   root.querySelectorAll<HTMLElement>('[data-pane-body]').forEach(pane => {
-    const block = pane.querySelector<HTMLElement>('[data-reading-mark="true"]');
+    const block = pane.querySelector<HTMLElement>(selector);
     if (!block) return;
     const top = pane.scrollTop + block.getBoundingClientRect().top - pane.getBoundingClientRect().top - MARK_GAP;
     pane.scrollTo({ top: Math.max(0, top), behavior: smooth ? 'smooth' : 'auto' });
@@ -100,14 +114,14 @@ function alignToMark(root: HTMLElement, smooth: boolean) {
 }
 
 /**
- * 三栏都滚到阅读标记处。图片没写尺寸、懒加载，滚到之后标记上方的图才加载出来，会把标记往下推几百像素：
+ * 三栏都滚到 selector 那一段（阅读标记、某张图）。图片没写尺寸、懒加载，滚到之后上方的图才加载出来，会把目标往下推几百像素：
  * 平滑滚动结束时、之后每加载完一张图，再对齐一次；你自己滚动、按键或点击就不再管。返回清理函数。
  */
-function followMark(root: HTMLElement): () => void {
+function follow(root: HTMLElement, selector: string): () => void {
   const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
-  alignToMark(root, !reduce);
+  alignTo(root, selector, !reduce);
   let settled = false;
-  const realign = () => { if (settled) alignToMark(root, false); };
+  const realign = () => { if (settled) alignTo(root, selector, false); };
   const onLoad = (event: Event) => { if (event.target instanceof HTMLImageElement) realign(); };
   const timers = [
     setTimeout(() => { settled = true; realign(); }, reduce ? 0 : 700), // 平滑滚动中途不打断
@@ -140,7 +154,19 @@ function readingBlocks(rows: WorkbenchRow[]): WorkbenchRow[][] {
   return blocks;
 }
 
-export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readingMark, markBusy, onMark, jump, corner }: PaneGridProps) {
+/** 定位到的图闪两下梅红描边，告诉你是哪一张 */
+function flash(root: HTMLElement, selector: string) {
+  if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+  root.querySelectorAll(`[data-pane-body] ${selector} img`).forEach(image => {
+    if (typeof image.animate !== 'function') return;
+    const ring = '0 0 0 4px var(--color-primary-300)';
+    image.animate([{ boxShadow: ring }, { boxShadow: '0 0 0 0 transparent' }, { boxShadow: ring }, { boxShadow: '0 0 0 0 transparent' }],
+      { duration: 1800, easing: 'ease-in-out' });
+  });
+}
+
+export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readingMark, markBusy, onMark, jump, corner,
+  cover, onOpenImage, focusImage }: PaneGridProps) {
   const visible = mobilePane ? [mobilePane] : PANES;
   const template = mobilePane ? 'minmax(0, 1fr)' : gridTemplate(collapsed);
   const isCollapsed = (id: PaneId) => !mobilePane && collapsed[id];
@@ -150,8 +176,18 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readi
   useEffect(() => {
     if (jump === lastJump.current || !container.current) return;
     lastJump.current = jump;
-    return followMark(container.current);
+    return follow(container.current, MARK_SELECTOR);
   }, [jump]);
+  const imageSeq = focusImage?.seq;
+  const imageKey = focusImage?.key;
+  useEffect(() => {
+    if (!imageKey || !container.current) return;
+    const root = container.current;
+    const selector = blockSelector(imageKey);
+    const stop = follow(root, selector);
+    flash(root, selector);
+    return stop;
+  }, [imageKey, imageSeq]);
   const blocks = readingBlocks(rows);
   useVersionFade(container, {
     main: [columns.main.versionKey, columns.main.contentKey],
@@ -200,8 +236,16 @@ export function PaneGrid({ rows, columns, collapsed, onToggle, mobilePane, readi
                 // 第一段若是章节标题，不再叠它自己的上边距：和栏头的距离与栏头内边距一致
                 '[&>[data-reading-block]:first-child>:last-child]:pt-0',
                 columns[id].primary && 'bg-paper-primary')}>
-              {columns[id].empty ?? blocks.map(block => <ReadingBlock key={block[0].key} block={block} column={columns[id]}
-                marked={block.some(row => row.key === readingMark?.key) ? markedAt(readingMark?.at) : null} markBusy={markBusy} onMark={onMark} />)}
+              {columns[id].empty ?? <>
+                {cover && (
+                  <div className={cn(MEASURE, 'mb-5')}>
+                    <ZoomableImage src={cover} label="放大封面" onOpen={onOpenImage && (() => onOpenImage(COVER_KEY))}
+                      className="max-h-56 w-full rounded-lg border border-border-subtle object-cover" />
+                  </div>
+                )}
+                {blocks.map(block => <ReadingBlock key={block[0].key} block={block} column={columns[id]} onOpenImage={onOpenImage}
+                  marked={block.some(row => row.key === readingMark?.key) ? markedAt(readingMark?.at) : null} markBusy={markBusy} onMark={onMark} />)}
+              </>}
             </article>
           ))}
         </div>
@@ -226,9 +270,10 @@ function markedAt(at: string | undefined): string {
   return `上次读到这里 · ${parts.month}-${parts.day} ${parts.hour}:${parts.minute}`;
 }
 
-function ReadingBlock({ block, column, marked: markLabel, markBusy, onMark }: {
+function ReadingBlock({ block, column, marked: markLabel, markBusy, onMark, onOpenImage }: {
   block: WorkbenchRow[];
   column: PaneColumn;
+  onOpenImage?: (key: string) => void;
   /** 标记在这一段时是那行小字（「上次读到这里 · 时间」），否则 null */
   marked: string | null;
   markBusy: boolean;
@@ -279,7 +324,7 @@ function ReadingBlock({ block, column, marked: markLabel, markBusy, onMark }: {
       setAdopting(false);
     }
   };
-  const cell = (row: WorkbenchRow) => <Cell row={row} column={column} inline={inline}
+  const cell = (row: WorkbenchRow) => <Cell row={row} column={column} inline={inline} onOpenImage={onOpenImage}
     editorRef={editor => registerEditor(row.key, editor)} onProtectionChange={onProtectionChange} />;
 
   return (
@@ -311,9 +356,22 @@ function ReadingBlock({ block, column, marked: markLabel, markBusy, onMark }: {
   );
 }
 
-function Cell({ row, column, inline = false, editorRef, onProtectionChange }: {
+/** 点了能放大的图（没传 onOpen 就只是图） */
+function ZoomableImage({ src, label, onOpen, className }: { src: string; label: string; onOpen?: () => void; className: string }) {
+  const image = <img src={src} alt="" loading="lazy" className={className} />;
+  if (!onOpen) return image;
+  return (
+    <button type="button" onClick={onOpen} aria-label={label} title="点击放大"
+      className={cn('block max-w-full cursor-zoom-in rounded-md transition-opacity hover:opacity-90', FOCUS_RING)}>
+      {image}
+    </button>
+  );
+}
+
+function Cell({ row, column, inline = false, editorRef, onProtectionChange, onOpenImage }: {
   row: WorkbenchRow;
   column: PaneColumn;
+  onOpenImage?: (key: string) => void;
   inline?: boolean;
   editorRef?: Ref<EditableTextHandle>;
   onProtectionChange?: (id: string, protectedDraft: boolean) => void;
@@ -321,7 +379,8 @@ function Cell({ row, column, inline = false, editorRef, onProtectionChange }: {
   const textClass = rowTextClass(row, column.id === 'source' ? 'en' : 'zh');
   // 图片三栏都显示（译文里的图就是原文的图），也让三栏在图片处对齐
   if (row.kind === 'image') {
-    return row.image ? <img src={row.image} alt="" loading="lazy" className="my-2 max-h-72 w-auto max-w-full rounded-md border border-border-subtle" /> : null;
+    return row.image ? <ZoomableImage src={row.image} label="放大这张图" onOpen={onOpenImage && (() => onOpenImage(row.key))}
+      className="my-2 max-h-72 w-auto max-w-full rounded-md border border-border-subtle" /> : null;
   }
   if (!column.text) {
     if (inline) return <InlineMarkdown text={row.source} />;

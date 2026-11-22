@@ -15,7 +15,7 @@ from src.core.models import ParagraphStatus
 from src.core.project import ProjectManager
 from src.services import article_primary, article_variants
 
-HTML = """<html><head><title>Demo Post</title></head><body>
+HTML = """<html><head><title>Demo Post</title><meta property="og:image" content="https://cdn.example.com/cover.png"></head><body>
 <article class="newsletter-post post">
 <div class="post-header"><h1 class="post-title">Demo Post</h1></div>
 <div class="available-content"><div class="body markup">
@@ -116,6 +116,7 @@ async def test_workbench_rows_line_up_both_versions_and_save_to_either(pm, main_
     heading = next(r for r in data["rows"] if r["key"] == f"section:{second_section}")
     assert heading["source"] == "Second Section" and heading["alt"][variant] == "第二节"
     assert [v["label"] for v in data["variants"]] == ["argon"]
+    assert data["project"]["cover_image"] == "https://cdn.example.com/cover.png"
 
 
 @pytest.mark.asyncio

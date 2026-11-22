@@ -194,6 +194,8 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "import": imports.get(variant.id),
         })
     original_url = meta.metadata.original_url if meta.metadata else None
+    # 封面（og:image）：工作台标题处显示，和文章卡上的是同一张
+    cover_image = _project_asset_url(project_id, meta.metadata.cover_image) if meta.metadata else None
     primary = await run_blocking(
         article_primary.resolve_primary, pm, project_id, [v.id for v in variant_metas],
         primary_target=meta.primary_target, main_started=main_started)
@@ -203,6 +205,7 @@ async def get_workbench(project_id: str, pm: ProjectManagerDep, status_service: 
             "title": meta.title,
             "title_translation": meta.title_translation,
             "original_url": original_url,
+            "cover_image": cover_image,
             "created_at": meta.created_at.isoformat(),
             "claude_run_id": meta.claude_run_id,
             "primary_target": meta.primary_target,
