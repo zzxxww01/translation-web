@@ -7,10 +7,11 @@ import { TextTranslator } from './components/TextTranslator';
 import { EmailReplyGenerator } from './components/EmailReplyGenerator';
 
 // 2026-11-22：去掉「任务管理」和「Slack 回复（旧版）」；Chatbot 是顶部导航里单独的一页
+// 时区转换放第一个，也是默认打开的工具
 const tabs = [
+  { id: 'timezone', label: '时区转换', icon: <Clock className="h-4 w-4" /> },
   { id: 'translator', label: '文本翻译', icon: <Languages className="h-4 w-4" /> },
   { id: 'email', label: '邮件回复', icon: <Mail className="h-4 w-4" /> },
-  { id: 'timezone', label: '时区转换', icon: <Clock className="h-4 w-4" /> },
 ] as const;
 
 export function ToolsFeature() {
@@ -18,7 +19,8 @@ export function ToolsFeature() {
 
   return (
     <div className="flex h-full min-w-0 overflow-auto">
-      <div className="mx-auto w-full min-w-0 max-w-5xl px-4 pb-12 pt-5 sm:px-8">
+      {/* 文本翻译左右两栏，和帖子翻译一样用宽版面；其他工具保持窄版面 */}
+      <div className={`mx-auto w-full min-w-0 px-4 pb-12 pt-5 sm:px-8 ${currentTool === 'translator' ? 'max-w-7xl' : 'max-w-5xl'}`}>
         <PageHeader className="mb-5" title="工具箱" />
 
         <Tabs value={currentTool} onValueChange={(v) => setCurrentTool(v as typeof currentTool)}>
