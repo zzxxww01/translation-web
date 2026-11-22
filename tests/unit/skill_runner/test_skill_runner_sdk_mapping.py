@@ -25,7 +25,14 @@ from claude_agent_sdk.types import (  # noqa: E402
 )
 
 from skill_runner.runner import PermissionOutcome, SessionSpec  # noqa: E402
-from skill_runner.sdk_session import MessageMapper, build_options, build_settings, build_system_prompt  # noqa: E402
+from skill_runner.sdk_session import (  # noqa: E402
+    STALE_AFTER_RESULT_S,
+    MessageMapper,
+    SdkSession,
+    build_options,
+    build_settings,
+    build_system_prompt,
+)
 
 from skill_runner_fakes import make_config  # noqa: E402
 
@@ -217,3 +224,51 @@ async def test_options_load_user_skills_and_route_permissions(tmp_path):
     denying = build_options(make_config(tmp_path), _spec(tmp_path, PermissionOutcome(False, message="不行", interrupt=True)))
     denied = await denying.can_use_tool("Write", {"file_path": "/etc/x"}, context)
     assert isinstance(denied, PermissionResultDeny) and denied.message == "不行" and denied.interrupt
+
+
+class _ScriptedClient:
+    """假 ClaudeSDKClient：query 只记下来，receive_messages 吐预先排好的消息。"""
+
+    def __init__(self, messages):
+        self.messages = list(messages)
+        self.queries = []
+
+    async def query(self, text):
+        self.queries.append(text)
+
+    async def receive_messages(self):
+        for message in self.messages:
+            yield message
+
+
+def _sdk_result():
+    return ResultMessage(subtype="success", duration_ms=1, duration_api_ms=1, is_error=False,
+                         num_turns=1, session_id="s", total_cost_usd=None, usage=None, result="")
+
+
+async def test_merged_interjection_does_not_keep_session_busy_forever():
+    # 第二句是运行中插的话，被 CLI 并进同一轮，只回一个结果；之后只来了一条额度事件
+    now = [0.0]
+    limits = RateLimitEvent(rate_limit_info=RateLimitInfo(status="allowed"), uuid="u", session_id="s")
+    session = SdkSession(_ScriptedClient([_sdk_result(), limits]), clock=lambda: now[0])
+    await session.send("开始")
+    await session.send("插一句")
+    [event async for event in session.events()]
+    assert session.busy  # 刚结束：可能真有下一轮要接着跑
+    now[0] = STALE_AFTER_RESULT_S + 1
+    assert not session.busy
+    await session.send("下一条")
+    assert session.busy
+
+
+async def test_queued_turn_that_really_starts_keeps_session_busy():
+    now = [0.0]
+    session = SdkSession(_ScriptedClient([
+        _sdk_result(),
+        AssistantMessage(content=[TextBlock("接着做第二句")], model="m"),
+    ]), clock=lambda: now[0])
+    await session.send("开始")
+    await session.send("插一句")
+    [event async for event in session.events()]
+    now[0] = STALE_AFTER_RESULT_S * 10
+    assert session.busy  # 第二轮已经开始出内容，结果没出来之前一直算忙
